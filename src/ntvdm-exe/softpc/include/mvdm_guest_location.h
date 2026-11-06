@@ -43,6 +43,11 @@ int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out);
+/* Synchronous VMM alias access: base is the actual VM's CB_High_Linear,
+ * never a native pointer. Ordinary real-mode access uses base zero. */
+int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
+    uint32_t linear_base, uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out);
 int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
     int commit);
 

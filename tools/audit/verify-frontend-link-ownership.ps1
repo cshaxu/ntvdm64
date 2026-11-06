@@ -303,12 +303,13 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if ($backend -in $service) { throw "Native backend entered presentation-only ntcon.exe: $backend" }
     }
     foreach ($required in @('main.c', 'session_service.c', 'console_channel.c',
-            'console_frontend.c', 'console_video.c', 'frontend_session.c',
+            'console_frontend.c', 'frontend_session.c',
             'window_controller.c', 'window_frame.c',
             'window_keyboard.c', 'window_input_queue.c')) {
         if ($required -notin $service) { throw "ntcon.exe omits $required" }
     }
     if ('kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib-nxvm')) { throw 'ntcon.exe omits shared window implementation' }
+    if ('video.c' -notin @(Get-FrontendSources 'ntcon.exe' 'common/frontend-base')) { throw 'ntcon.exe omits shared frame receiver' }
 }
 
 Assert-FrontendOwnership $graph

@@ -31,8 +31,17 @@ mov dx, previous_b
 call read_previous
 jc write_result
 matched:
-mov eax, [input+12]
-mov edx, [input+16]
+%ifdef RETIRE_COMMAND
+%define ID_OFFSET 4
+%define GENERATION_OFFSET 8
+%define REPORT_SIZE 28
+%else
+%define ID_OFFSET 8
+%define GENERATION_OFFSET 12
+%define REPORT_SIZE 72
+%endif
+mov eax, [input+GENERATION_OFFSET]
+mov edx, [input+GENERATION_OFFSET+4]
 mov [old_generation], eax
 mov [old_generation+4], edx
 cmp eax, [generation]
@@ -61,6 +70,25 @@ mov ax, 2
 call far [api]
 jc write_result
 inc dword [consumed]
+%ifdef RETIRE_COMMAND
+mov ah, 0x19
+int 0x21
+mov [default_drive], al
+mov ax, cs
+add ax, (environment-$$+0x100)/16
+mov es, ax
+push dword -1
+push dword -1
+push dword -1
+mov bp, sp
+mov si, command
+xor eax, eax
+mov al, [default_drive]
+db 0xc4,0xc4,0x54,0x08
+add sp, 12
+cmp al, 37
+jne write_result
+%endif
 mov dword [error], 0
 write_result:
 mov dx, output_name
@@ -86,7 +114,7 @@ int 0x21
 jc .fail
 mov bx, ax
 mov dx, input
-mov cx, 72
+mov cx, REPORT_SIZE
 mov ah, 0x3f
 int 0x21
 pushf
@@ -96,11 +124,15 @@ int 0x21
 pop ax
 popf
 jc .fail
-cmp ax, 72
+cmp ax, REPORT_SIZE
 jne .fail
+%ifdef RETIRE_COMMAND
+cmp dword [input], 'VRET'
+%else
 cmp dword [input], 'VMID'
+%endif
 jne .fail
-mov eax, [input+8]
+mov eax, [input+ID_OFFSET]
 cmp eax, [vm]
 jne .fail
 clc
@@ -121,3 +153,9 @@ previous_a: db 'A.BIN',0
 previous_b: db 'B.BIN',0
 output_name: db 'REUSE.BIN',0
 input: times 72 db 0
+%ifdef RETIRE_COMMAND
+default_drive: db 0
+command: db 'C:\Windows\System32\cmd.exe /c exit 37',0
+align 16, db 0
+environment: db 'PATH=C:\Windows\System32;C:\Windows',0,0
+%endif

@@ -1,6 +1,8 @@
 #include "mvdm_vm_notification.h"
 #include "mvdm_vm_bridge.h"
 #include "mvdm_vm_wake.h"
+#include "mvdm_vm_continuation.h"
+#include "mvdm_vm_ingress.h"
 
 /* Original NT VDD/ICA ABI. Avoid importing historical CPU selection macros
  * into this host-owned component. Register/remove are serialized by ICA. */
@@ -151,11 +153,22 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     case 3: result->status = mvdm_vm_notification_snapshot(&serial); break;
     case 4: result->status = mvdm_vm_notification_acknowledge(serial); break;
     case 5:
+        mvdm_vm_ingress_reset();
+        host_ica_lock();
         result->status = mvdm_vm_notification_close();
-        if (!result->status) mvdm_vm_wake_reset();
+        if (!result->status) {
+            mvdm_vm_continuation_reset();
+            mvdm_vm_wake_reset();
+        }
+        host_ica_unlock();
         break;
     case 7: result->status = mvdm_vm_wake_register(vm, serial); break;
-    case 8: result->status = mvdm_vm_wake_retire(vm, serial); break;
+    case 8:
+        host_ica_lock();
+        result->status = mvdm_vm_wake_retire(vm, serial);
+        if (!result->status) mvdm_vm_continuation_retire(vm, serial);
+        host_ica_unlock();
+        break;
     case 9: result->status = mvdm_vm_wake_publish(vm, serial, &serial); break;
     case 10:
         result->status = mvdm_vm_wake_take(&wake);
@@ -165,6 +178,28 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
             result->serial_high = (uint32_t)(wake.generation >> 32);
         }
         return 1;
+    case 11:
+        result->status = mvdm_vm_command_admit(vm, low, high, &serial);
+        result->value = (uint32_t)serial;
+        result->serial_low = (uint32_t)(serial >> 32);
+        return 1;
+    case 15:
+        result->status = high ? ERROR_INVALID_PARAMETER : mvdm_vm_ingress_register(low);
+        break;
+    case 12: {
+        mvdm_vm_completion completion;
+        result->value = 0;
+        result->status = mvdm_vm_continuation_consume(serial, vm, &completion);
+        if (!result->status) {
+            result->status = completion.error;
+            result->value = completion.exit_code;
+            result->serial_low = completion.reentry;
+        }
+        return 1;
+    }
+    case 13: case 14:
+        result->status = mvdm_vm_application_bop(operation, vm, low, high);
+        break;
     default: result->status = ERROR_INVALID_FUNCTION; break;
     }
     if (!result->status) {

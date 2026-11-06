@@ -57,7 +57,7 @@ boundaries, not an import or a full mirror-diff audit in this S.
 [NTCON frontend session (renamed in S6)](../../../src/ntcon-exe/frontend_session.h),
 [console_channel](../../../src/ntcon-exe/console_channel.h),
 [console_frontend](../../../src/ntcon-exe/console_frontend.h) and
-[console_video](../../../src/ntcon-exe/console_video.h) still expose
+[console_video](../../../src/common/frontend-base/video.h) still expose
 run16_* names although NTCON owns them. window_keyboard's native names mean
 Windows INPUT_RECORD conversion, not an NTVWM-specific renderer.
 Rename owner/format names and all production/test/build callers together;

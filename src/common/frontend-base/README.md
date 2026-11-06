@@ -5,7 +5,7 @@ owns pipe framing, authenticated attachment sequencing, serving-thread lifetime,
 readiness notification and cancellation/drain. The executable supplies explicit
 process-local callbacks for admission binding and operation dispatch.
 
-NTCON owns its native Console, Window, video transaction, input receipt and
+NTCON owns its native Console, Window, input receipt and
 presentation state. NTSRV remains the lifecycle authority. This library does not
 select workers, reconnect, relay service I/O, or depend on executable-private
 code or worker-base. Future NTVDM frontend instances compose this library
@@ -35,3 +35,7 @@ binding. Its service wrapper has no duplicate request/pipe-fault pump. Future
 NTVDM callers can supply VM-specific adapters directly, without worker-base
 including or linking frontend-base. Actual multi-instance RPC addressing is S2,
 not inferred from the two-instance unit fixture.
+
+The video receiver owns frame validation, chunk assembly and staged/committed
+serials. It has no window or Console dependency. Adapters retain presentation
+and acknowledgement policy; accepting a frame is not proof of guest display.

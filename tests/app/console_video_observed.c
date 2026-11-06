@@ -3,7 +3,7 @@
  * Never a product input. */
 #define frontend_video_data production_video_data
 #define frontend_video_text production_video_text
-#include "../../src/ntcon-exe/console_video.c"
+#include "../../src/common/frontend-base/video.c"
 #undef frontend_video_data
 #undef frontend_video_text
 #include <stdio.h>

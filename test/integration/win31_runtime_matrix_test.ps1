@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$OutputRoot,
     [string]$WindowsProbeImage,
+    [string]$RetiredNativeCommandMarker,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
@@ -168,6 +169,18 @@ try {
                 if ($observation -match 'serial-ignore=True') {
                     [IO.File]::AppendAllText((Join-Path $output "$($case.Name).serial-dialogs.txt"),$observation)
                 }
+            }
+            if($RetiredNativeCommandMarker) {
+                # Observe before scope cleanup: cleanup must not manufacture
+                # successful native-command retirement for the guest witness.
+                $commands=@(Get-CimInstance Win32_Process -Filter "Name='cmd.exe'")
+                $remaining=@($commands | Where-Object {
+                    $_.CommandLine -and $_.CommandLine.IndexOf($RetiredNativeCommandMarker,[StringComparison]::OrdinalIgnoreCase) -ge 0
+                })
+                [ordered]@{marker=$RetiredNativeCommandMarker;beforeScopeCleanup=$true;
+                    remaining=@($remaining | Select-Object ProcessId,ParentProcessId,CommandLine)} |
+                    ConvertTo-Json -Depth 5 | Set-Content (Join-Path $output "$($case.Name).native-retirement.json")
+                if($remaining.Count){throw 'Native command remains alive before scope cleanup'}
             }
         } catch { $errorText=$_.ToString() }
         finally {

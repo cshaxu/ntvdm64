@@ -26,7 +26,9 @@ Those guest transitions remain S5 obligations, not part of this host stage.
    directory remain the caller's synchronous preparation duties. In particular
    the raw guest standard-handle numbers are not an asynchronous native handle
    attachment. The view records that distinction explicitly.
-3. `ntvdm_command_launch_prepare` takes converted command/environment, an
+3. S3's delivered ordering below is superseded by the
+   [S5 capture-before-RPC refinement](m0-t479-s5-command-continuation.md).
+   `ntvdm_command_launch_prepare` takes converted command/environment, an
    absolute directory, resolved streams and the authenticated pair produced by
    S2's `ntvdm_vm_host_launch_context`. It copies data and duplicates resources
    without inheritance. Endpoint direction is classified while the originating

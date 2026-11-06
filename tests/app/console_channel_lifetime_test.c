@@ -13,7 +13,7 @@ static const common_frontend_key fixture_frontend={7,11};
 #define frontend_console_dispatch actual_dispatch
 #include "../../src/ntcon-exe/console_frontend.c"
 #undef frontend_console_dispatch
-#include "../../src/ntcon-exe/console_video.c"
+#include "../../src/common/frontend-base/video.c"
 static HANDLE read_entered,peer;
 static FILE *private_report;
 static HANDLE held_dispatch,release_dispatch;

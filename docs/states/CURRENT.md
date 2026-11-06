@@ -4,6 +4,31 @@
 
 **Active: M0 T479 S5** - Win3.1 multitask command continuation.
 S4's Win3.1 checkpoint is delivered; its Win95 continuation remains open.
+[Entry/return audit](../etc/operations/m0-t479-s5-command-continuation.md).
+Local CDS/text application and selected-VM keyboard consumption pass in Win3.1
+diagnostics; NetCDS limited. VIDEO palette passes. Ordinary guest VGA writes
+pass both fonts in Win3.1; BIOS and nested-helper application do not. Failed
+helper candidates were removed with source-hash-verified restoration.
+Frame commit/rollback and off-CPU execution helpers pass focused host tests.
+Run152 passes the isolated real NTSRV/Run16/NTVWM chain through production
+BOP entry, capture and the worker-owned executor: both54:08 forms return37/38
+in two Win3.1 VMs;54:0A returns0 through the approved DOS carrier. A fallback
+to diagnostic entry now fails the test. Input remains a translated-key fixture.
+Five host suites pass. Physical guest input, fonts, complete I/O and final
+returned-key delivery remain unaccepted; full product delivery gates remain.
+Cached complete x86/x64 builds and shared tests pass. Generation-reuse rejection
+was reproduced and fixed in host tests; real combined reuse remains unproved.
+Chain158 and real Win3.1 continuation159 pass. The chained gate runner lost
+USERPROFILE; fresh-process release160 passes focused/Full selected gates.
+Run161 passes real native-command execution followed by forced VM retirement,
+stale-wake rejection and normal Win3.1 exit on the production worker.
+Run163 also passes actual VM handle reuse and a new native command returning37.
+Run164 confirms native CMD absence before fixture scope cleanup.
+Runs166/167 pass both deliberate native exit orders with full callback checks.
+Forced retirement overlap has host-unit proof; full I/O remains S6 work.
+Win95 is deferred.
+[S5 P1 host checkpoint](../etc/evidence/m0-t479-s5-p1-host-checkpoint.md) is
+published at both destinations; commit/push pending. S5 is not closed.
 
 ## Active Packet
 
@@ -140,7 +165,7 @@ The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cl
 
 ## S10 Closure Record
 
-The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
+The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11--S19 handoff.
 
 ## T471 Closure Record
 
@@ -242,46 +267,13 @@ remains retained baseline evidence.
 
 ## Temporary Evidence
 
-T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
-evidence. Their retained results are indexed from the closure; stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
-
-T467 S3/S4 disposable build and acceptance evidence uses `build/t467-s3`
-(60-minute phase, 3-GiB, 10-minute no-progress budget).
-
-T471 S1 package-freeze evidence uses `build/t471-s1` (30-minute phase,
-1-GiB, 10-minute no-progress budget); S2/S3 acceptance evidence uses
-`build/t471-s2` (60-minute phase, 3-GiB, 10-minute no-progress budget).
-
-T473 S1/S9 may use only `build/t473-s9` for disposable closure-ledger and
-WOW-session evidence,
-with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
-
-T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
-with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
-
-T461 S2/S3 disposable evidence uses `build/t461-s2` and `build/t461-s3`;
-each has a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
-
-T462 and T463 disposable evidence remains under their `build/t462-s1` and
-`build/t463-s2`/`s3` roots; the shared caches are not evidence roots.
-
-T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
-
-T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
-and `build/t454-s4` roots for disposable evidence; stable `.ninja` and
-`.ccache` remain reusable caches. Retain durable results before exact-target
-cleanup; never use a task root as a build cache.
-
-`build/M0-T451`, `build/t451-s3`, `build/t451-s4` and `build/t451-s5` remain
-temporary evidence, not reusable caches. Process inventory access was denied
-during closure; deletion requires verified quiescence and the existing
-exact-target ownership checks. Durable results are linked from the closure.
-Stable `.ninja` and `.ccache` caches remain untouched.
-
-T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
+The active packet above owns the current temporary scope and budgets. Earlier
+T451--T473 task directories remain disposable evidence, not reusable caches;
+their stage records retain results and handoffs. This compaction does not
+authorize deletion: verify ownership, process quiescence, retained hashes and
+exact targets through the execution rules before cleanup. Historical process
+inventory failures are not proof of quiescence. Stable build/.ninja and
+build/.ccache remain reusable and untouched.
 
 ## Recent M0 Closures
 

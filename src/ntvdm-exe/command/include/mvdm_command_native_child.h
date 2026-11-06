@@ -46,9 +46,11 @@ typedef struct mvdm_command_capture_input {
     uint16_t standard_segment,standard_offset;
     uint8_t default_drive; /* Original AL, zero based. */
     unsigned int service;
+    uint32_t vm_linear_base; /* actual VMM CB_High_Linear, zero on ordinary path */
+    const char *directory; /* optional independent absolute directory copy */
 } mvdm_command_capture_input;
 typedef struct mvdm_command_capture_view {
-    const char *command,*environment;
+    const char *command,*environment,*directory;
     uint32_t environment_bytes;
     ULONG standard_handles[3]; /* Original tokens; not owned native handles. */
     uint8_t default_drive;

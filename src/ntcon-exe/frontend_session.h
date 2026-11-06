@@ -1,7 +1,7 @@
 #ifndef FRONTEND_SESSION_H
 #define FRONTEND_SESSION_H
 #include <windows.h>
-#include "console_video.h"
+#include "common/frontend-base/video.h"
 #include "common/protocol/console_io.h"
 typedef struct frontend_session frontend_session;
 DWORD frontend_session_create(frontend_session **);

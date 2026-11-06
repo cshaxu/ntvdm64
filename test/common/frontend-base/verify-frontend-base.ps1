@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$LogRoot,
-    [ValidateSet('channel','service')][string[]]$Cases=@('channel','service')
+    [ValidateSet('channel','service','video')][string[]]$Cases=@('channel','service','video')
 )
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..'))

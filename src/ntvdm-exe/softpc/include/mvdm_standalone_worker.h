@@ -16,5 +16,7 @@ int mvdm_standalone_worker_finish(int result);
  * borrow a guest pointer. The owner outlives original worker shutdown. */
 ntvdm_vm_host *mvdm_standalone_worker_frontends(void);
 DWORD mvdm_standalone_worker_close_frontends(void);
+struct mvdm_vm_executor;
+struct mvdm_vm_executor *mvdm_standalone_worker_executor(void);
 
 #endif

@@ -79,3 +79,95 @@ The controller requires the failed driver to expose no successful identity,
 and the normal Windows startup/exit checks still apply. No DOS witnesses are
 launched in this negative case. Marker, matrix and API result are all required;
 absence of a functioning driver alone is not a passing failure test.
+
+`build-interrupt-observer.ps1` builds the test-only `interrupt-observer.asm`.
+Pass the image as `-InterruptObserver` with a continuation diagnostic host and
+`-TraceContinuation -DeferredContinuation`. It chains reflected IRQ0/IRQ1
+without consuming either. Diagnostic trace operations 1032/1033 identify the
+vector, actual VM and observed CB status. Operation 11 marks request admission;
+the first operation 12 bounds the initial waiting interval, not proof of every
+subsequent wait. The test host holds each completion pair for 500ms solely to
+make that interval observable; this delay is absent from the product link.
+No IRQ1 assertion is valid without an actual keyboard stimulus. Observation
+alone proves neither input consumption nor eventual native child delivery.
+
+`-Keyboard` additionally requires this observer and a diagnostic host with
+operation 17. Each DOS witness creates its RDY file immediately before BIOS
+INT16 read; the Win16 controller waits for that checkpoint, restores and
+activates its DOS window, then requests one make/break pair through the probe
+API. The host calls the original scan-code conversion/controller under ICA;
+it does not write the BIOS buffer, fabricate an IRQ or operate host UI. The
+runner requires exact A/B BIOS results and normal shutdown. This is stimulus
+calibration only, not proof of native child input or delivery during a blocked
+command. Historical USER keybd_event attempts failed and are retained as such.
+
+`-BlockedKeyboard` moves A's readiness checkpoint before command admission.
+The observer enumerates live VM handles and waits to observe its blocked bit
+before sending. A diagnostic event holds completion until that stimulus;
+trace18 proves the blocked observation and19 precedes any host application
+wake. Compare target IRQ1 callbacks between17 and19. The runner records that
+count without pretending the flags0 negative control passed early delivery.
+The outer matrix budget still bounds a failed test; no product wait or timer
+is added. B retains the ordinary readiness/BIOS-consumption control.
+
+The observer also chains INT15/AH=4F and records the actual VM, scan byte and
+client flags. `-ConsumeKeyboard` requires `-BlockedKeyboard`: only the selected
+blocked VM's diagnostic receiver accepts its two scan bytes. On acceptance
+the observer clears client CF and reports the interrupt handled; all other
+input chains normally. A must report an empty BIOS keyboard buffer and B must
+still read its calibrated key. This proves the guest interception/consumption
+boundary, not a production native input queue or native command execution.
+The host trace serializes append opens/writes across CPU and completion threads
+so its evidence collection cannot fail with sharing violations.
+
+`-VideoApplication` checks the candidate's palette and both font banks by
+guest BIOS/device readback after each continuation. `-VideoFontControl` adds
+ordinary DOS INT10/1100 loads immediately before the same font assertion. This
+is a diagnostic control only: even if it passes, it does not prove that the
+driver installed those fonts. The default application case retains its strict
+readback without this intervention. Neither case proves production native I/O.
+The control checks the height it actually requested, not a later BIOS report:
+original font loading restores mode tables and can change that report. Optional
+diagnostic links may rename video_io/ega_video_io/mouse_video_io in bios.obj,
+and c_sas_store in ega_vide.obj, to the test host observers. Use each original
+file's exact Ninja flags. These observers call the original functions; font
+store sampling reads only the first byte of each bank after the real write.
+
+`-VideoFontDirectControl` is a separate diagnostic: the DOS witness writes the
+font planes with guest MOV instructions after virtual VGA register selection,
+then runs the full readback. It excludes the BIOS control and does not prove
+that the driver's application worked. `-FullscreenVmControl` only requests the
+original PIF full-screen bit; it is not evidence that VDD actually granted
+foreground/full-screen ownership. Default acceptance enables neither switch.
+
+`-RealCommand` requires `-Continuation`. It uses production BOP entry,
+registration, capture, executor and VM frontend / NTSRV / Run16 / NTVWM
+execution. Falling back to the diagnostic CALLF interposition is a failure.
+The two DOS witnesses request CMD exit codes 37 and 38 through both54:08
+forms; the approved54:0A `run16 command` route receives fixture `exit` input
+and returns0. Returned registers, flags and stacks are checked. Input is a
+translated-key fixture, not a physical guest keyboard. This mode does not
+claim full input/font/caption support and cannot be combined with diagnostic
+video, keyboard or deferred-completion variants. Earlier operation0x355 traces
+belong to the pre-production provider wrapper, which has now been removed.
+The fixed-result three-call diagnostic remains separate; AL=25h is not native
+execution evidence.
+
+`-RetireCommand -RetirementDriver <retire.386>` uses the production worker:
+VM A starts host CMD, which publishes a readiness file before waiting in
+PAUSE. VM B must observe that file before the test VxD destroys blocked A.
+The test rejects a late wake, checks both reports and normal Windows exit.
+With `-Reuse`, the controller starts a new VM after retirement; it must reuse
+an actual old VM handle with a new generation, reject the old generation,
+and execute another native command returning37. This does not establish the
+absence of native processes before the outer fixture's cleanup, or force the
+new command to overlap an old frontend's pending retirement.
+
+`-OrderedCommandImage <ordered-command.exe> -FirstCommand A|B` extends
+`-RealCommand` with two real native processes per54:08 round. The first
+publishes its PID and waits for the second to open that process. The second
+waits on the actual process handle and validates its exit code before exiting
+itself. Per-fixture/per-round named objects prevent cross-run pairing. Both
+orders retain the guest register/flags/stack checks;54:0A still uses the
+translated input fixture. This proves native exit ordering, not a prescribed
+ordering of subsequent guest callback scheduling.

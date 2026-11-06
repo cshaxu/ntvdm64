@@ -23,6 +23,7 @@ typedef struct mvdm_command_native_child_state {
     char command[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
     char command_service_tail[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
     char environment[MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES];
+    char directory[MAX_PATH];
 } mvdm_command_native_child_state;
 
 static int state_current(mvdm_command_native_child_state **state_out)
@@ -81,7 +82,7 @@ static int state_ensure(mvdm_command_native_child_state **state_out)
     return 1;
 }
 
-static int copy_guest_command(const mvdm_guest_location *location,
+static int copy_guest_command(const mvdm_guest_location *location, uint32_t base,
     char destination[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES], uint32_t *bytes_out)
 {
     mvdm_guest_location probe;
@@ -92,7 +93,7 @@ static int copy_guest_command(const mvdm_guest_location *location,
     if (location == NULL || bytes_out == NULL) return 0;
     probe = *location;
     for (index = 0u; index + 1u < MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES; ++index) {
-        if (!mvdm_guest_location_acquire(&probe, 1u,
+        if (!mvdm_guest_location_acquire_vm(&probe, base, 1u,
                 GUEST_MEMORY_ACCESS_WRITE, &lease)) return 0;
         destination[index] = (char)lease.bytes[0];
         if (lease.bytes[0] == 0x0du) {
@@ -116,7 +117,7 @@ static int copy_guest_command(const mvdm_guest_location *location,
     return 0;
 }
 
-static int copy_guest_environment(const mvdm_guest_location *location,
+static int copy_guest_environment(const mvdm_guest_location *location, uint32_t base,
     char destination[MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES], uint32_t *bytes_out)
 {
     mvdm_guest_location probe;
@@ -128,7 +129,7 @@ static int copy_guest_environment(const mvdm_guest_location *location,
     if (location == NULL || bytes_out == NULL) return 0;
     probe = *location;
     for (index = 0u; index < MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES; ++index) {
-        if (!mvdm_guest_location_acquire(&probe, 1u,
+        if (!mvdm_guest_location_acquire_vm(&probe, base, 1u,
                 GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
         destination[index] = (char)lease.bytes[0];
         if (!mvdm_guest_location_release(&lease, 0)) return 0;
@@ -146,14 +147,14 @@ static int copy_guest_environment(const mvdm_guest_location *location,
     return 0;
 }
 
-static int copy_standard_handles(const mvdm_guest_location *location,
+static int copy_standard_handles(const mvdm_guest_location *location, uint32_t base,
     ULONG handles_out[3])
 {
     mvdm_guest_location_lease lease;
     uint32_t index;
 
     if (location == NULL || handles_out == NULL ||
-        !mvdm_guest_location_acquire(location,
+        !mvdm_guest_location_acquire_vm(location, base,
             MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES,
             GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
     for (index = 0u; index < 3u; ++index) {
@@ -169,7 +170,7 @@ static int copy_standard_handles(const mvdm_guest_location *location,
 static int capture_locations(mvdm_command_native_child_state *state,
     const char *host_command, const mvdm_guest_location *command_location,
     const mvdm_guest_location *environment_location,
-    const mvdm_guest_location *standard_location)
+    const mvdm_guest_location *standard_location, uint32_t base)
 {
     size_t bytes;
 
@@ -185,12 +186,12 @@ static int capture_locations(mvdm_command_native_child_state *state,
         if (bytes == MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES) return 0;
         memcpy(state->command, host_command, bytes + 1u);
         state->command_bytes = (uint32_t)bytes + 1u;
-    } else if (!copy_guest_command(command_location, state->command,
+    } else if (!copy_guest_command(command_location, base, state->command,
             &state->command_bytes)) {
         return 0;
     }
-    if (!copy_guest_environment(environment_location, state->environment,
-            &state->environment_bytes) || !copy_standard_handles(standard_location,
+    if (!copy_guest_environment(environment_location, base, state->environment,
+            &state->environment_bytes) || !copy_standard_handles(standard_location, base,
             state->standard_handles)) {
         SecureZeroMemory(state->command, sizeof(state->command));
         SecureZeroMemory(state->environment, sizeof(state->environment));
@@ -221,7 +222,7 @@ int mvdm_command_native_child_capture_guest(uint16_t command_segment,
         !mvdm_guest_location_set_real_mode(&environment, environment_segment,
             environment_offset) || !mvdm_guest_location_set_real_mode(&standard,
             standard_segment, standard_offset) || !capture_locations(state, NULL,
-            &command, &environment, &standard)) return 0;
+            &command, &environment, &standard, 0)) return 0;
 
     return 1;
 }
@@ -239,7 +240,7 @@ int mvdm_command_native_child_capture_host_command(const char *command,
             environment_offset) &&
         mvdm_guest_location_set_real_mode(&standard, standard_segment,
             standard_offset) &&
-        capture_locations(state, command, NULL, &environment, &standard);
+        capture_locations(state, command, NULL, &environment, &standard, 0);
 }
 
 int mvdm_command_native_child_activate(const char *source_command,
@@ -352,17 +353,19 @@ int mvdm_command_capture_create(const mvdm_command_capture_input *input,
     mvdm_command_capture *capture;
     if(out)*out=NULL;
     if(!input || !out || input->default_drive>=26 ||
+        (input->directory && strlen(input->directory)>=MAX_PATH) ||
         input->service>MVDM_COMMAND_SERVICE_EXECUTE ||
         !mvdm_guest_location_set_real_mode(&command,input->command_segment,input->command_offset) ||
         !mvdm_guest_location_set_real_mode(&environment,input->environment_segment,input->environment_offset) ||
         !mvdm_guest_location_set_real_mode(&standard,input->standard_segment,input->standard_offset))return 0;
     capture=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*capture));
     if(!capture)return 0;
-    if(!capture_locations(capture,input->host_command,&command,&environment,&standard)){
+    if(!capture_locations(capture,input->host_command,&command,&environment,&standard,input->vm_linear_base)){
         mvdm_command_capture_destroy(capture);return 0;
     }
     capture->default_drive=input->default_drive;
     capture->command_service=input->service;
+    if(input->directory)memcpy(capture->directory,input->directory,strlen(input->directory)+1);
     *out=capture;return 1;
 }
 
@@ -371,6 +374,7 @@ int mvdm_command_capture_read(const mvdm_command_capture *capture,mvdm_command_c
     if(view)ZeroMemory(view,sizeof(*view));
     if(!capture || !view || capture->active!=1 || capture->owner)return 0;
     view->command=capture->command;view->environment=capture->environment;
+    view->directory=capture->directory[0] ? capture->directory : NULL;
     view->environment_bytes=capture->environment_bytes;
     memcpy(view->standard_handles,capture->standard_handles,sizeof(view->standard_handles));
     view->default_drive=capture->default_drive;view->service=capture->command_service;

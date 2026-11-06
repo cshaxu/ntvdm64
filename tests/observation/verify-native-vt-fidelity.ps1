@@ -27,7 +27,7 @@ function Run([string]$name,[string]$exe,[string]$arguments,[int]$seconds) {
 try {
     $drift=& git -C $repo diff fb7650ce0 -- src/ntcon-exe src/compat/console_grid.c src/common
     if($LASTEXITCODE -or $drift){throw 'Accepted frontend dependencies have changed; rebuild their closure'}
-    $dependency=@('obj/frontend/frontend_session.obj','obj/frontend/console_frontend.obj','obj/frontend/console_video.obj','obj/opennt-abi-host-compat/console_grid.obj','frontend-window.lib')
+    $dependency=@('obj/frontend/frontend_session.obj','obj/frontend/console_frontend.obj','common-frontend-base.lib','obj/opennt-abi-host-compat/console_grid.obj','frontend-window.lib')
     $dependency|ForEach-Object{Get-FileHash (Join-Path $FrontendBuild $_)}|ConvertTo-Json|Set-Content "$root\dependencies.json"
     $source=@('tests/observation/native_vt_fidelity_test.c','src/ntvwm-exe/console_state.c','src/ntvwm-exe/text_frame.c','src/lib-win32/process-observation/console_members.c','src/common/native_process.c','src/lib-win32/process-launch/attributes.c','src/lib-win32/process-launch/process.c','src/common/codec/native_launch.c')
     $source|ForEach-Object{Get-FileHash (Join-Path $repo $_)}|ConvertTo-Json|Set-Content "$root\sources.json"

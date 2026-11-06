@@ -24,6 +24,13 @@ as a candidate with its verified bridge scope in addon-manifest.json. Win95
 or I/O path yet; S5/S6 implement those contracts.
 Historical experimental drivers are comparison evidence, not build inputs.
 
+The unshipped S5 source now registers the VMM callback with the host BOP entry
+and admits independent54:08/0A requests. Win3.1 tests cover two actual native
+commands in both exit orders, exact callback state, command-in-flight VM
+retirement and actual VM handle reuse. The54:0A input is still test stimulus;
+physical guest keyboard, full I/O and nested acceptance remain S6 obligations.
+These source/test results do not update the published S4 candidate by themselves.
+
 The current candidate allocates VMM-owned per-VM control-block storage, assigns
 a 64-bit generation at creation and invalidates execution at
 `VM_Not_Executeable`. API operation zero exposes identity for isolated S4

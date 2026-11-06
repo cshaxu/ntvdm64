@@ -1,4 +1,4 @@
-#include "console_video.h"
+#include "common/frontend-base/video.h"
 #include <limits.h>
 #include <string.h>
 

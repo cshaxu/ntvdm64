@@ -123,12 +123,22 @@ int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out)
 {
+    return mvdm_guest_location_acquire_vm(location, 0, byte_count, access, lease_out);
+}
+
+int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
+    uint32_t linear_base, uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out)
+{
     session *instance = session_thread_current();
     uint32_t address;
 
     if (lease_out != NULL) memset(lease_out, 0, sizeof(*lease_out));
     if (lease_out == NULL || instance == NULL ||
-        !mvdm_guest_location_linear_address(location, &address)) return 0;
+        !mvdm_guest_location_linear_address(location, &address) ||
+        linear_base > UINT32_MAX - address || !byte_count) return 0;
+    address += linear_base;
+    if (byte_count - 1 > UINT32_MAX - address) return 0;
 
     return session_guest_memory_acquire(instance, address, byte_count, access,
         &lease_out->lease, &lease_out->bytes);

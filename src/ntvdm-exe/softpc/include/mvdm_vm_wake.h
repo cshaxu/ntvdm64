@@ -10,6 +10,7 @@ typedef struct {
  * Registration requires an open notification session. Owner stops producers
  * before reset; ICA serializes queue and doorbell. */
 uint32_t mvdm_vm_wake_register(uint32_t vm, uint64_t generation);
+uint32_t mvdm_vm_wake_lookup(uint32_t vm, mvdm_vm_wake_identity *identity);
 uint32_t mvdm_vm_wake_retire(uint32_t vm, uint64_t generation);
 uint32_t mvdm_vm_wake_publish(uint32_t vm, uint64_t generation, uint64_t *serial);
 uint32_t mvdm_vm_wake_take(mvdm_vm_wake_identity *identity);

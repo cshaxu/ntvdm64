@@ -67,6 +67,18 @@ uint32_t mvdm_vm_wake_retire(uint32_t vm, uint64_t generation)
     return error;
 }
 
+uint32_t mvdm_vm_wake_lookup(uint32_t vm, mvdm_vm_wake_identity *identity)
+{
+    vm_entry *entry;
+    if (!identity) return ERROR_INVALID_PARAMETER;
+    ZeroMemory(identity, sizeof(*identity));
+    host_ica_lock();
+    entry = *find_vm(vm);
+    if (entry) *identity = entry->identity;
+    host_ica_unlock();
+    return entry ? ERROR_SUCCESS : ERROR_NOT_FOUND;
+}
+
 uint32_t mvdm_vm_wake_publish(uint32_t vm, uint64_t generation, uint64_t *serial)
 {
     vm_entry **found;

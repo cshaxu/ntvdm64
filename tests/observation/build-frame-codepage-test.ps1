@@ -22,7 +22,7 @@ $linkRule=([regex]::Match($entry[0],': (\w+) ')).Groups[1].Value
 $inputs=@(($entry[0] -replace '^.*: \w+ ','') -split ' ' |
     Where-Object {$_ -ne 'obj/tests/console_frame_failure.obj'} |
     ForEach-Object {(Resolve-Path (Join-Path $cachePath $_)).Path})
-$inputs+=@('obj/frontend/console_frontend.obj','obj/frontend/console_video.obj' |
+$inputs+=@('obj/frontend/console_frontend.obj','common-frontend-base.lib' |
     ForEach-Object {(Resolve-Path (Join-Path $cachePath $_)).Path})
 $rule=[Array]::IndexOf($graph,'rule '+$linkRule)
 if($rule -lt 0){throw 'Fixture link rule missing'}

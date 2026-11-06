@@ -40,8 +40,27 @@ jne failed
 mov ah, 0x3e
 int 0x21
 jc failed
+%ifdef RETIRE_COMMAND
+; Start a real native command. The peer waits for its readiness file, so
+; retirement cannot accidentally precede native process execution.
+mov ah, 0x19
+int 0x21
+mov [default_drive], al
+mov ax, cs
+add ax, (environment-$$+0x100)/16
+mov es, ax
+push dword -1
+push dword -1
+push dword -1
+mov bp, sp
+mov si, command
+xor eax, eax
+mov al, [default_drive]
+db 0xc4,0xc4,0x54,0x08
+%else
 mov ax, 2
 call far [api]
+%endif
 jmp failed
 peer:
 mov dx, pair_ready
@@ -63,6 +82,21 @@ jne failed
 mov ah, 0x3e
 int 0x21
 jc failed
+%ifdef RETIRE_COMMAND
+.native_wait:
+mov dx, native_ready
+mov ax, 0x3d00
+int 0x21
+jnc .native_ready
+mov ax, 0x1680
+int 0x2f
+jmp .native_wait
+.native_ready:
+mov bx, ax
+mov ah, 0x3e
+int 0x21
+jc failed
+%endif
 xor di, di
 xor ax, ax
 mov es, ax
@@ -134,3 +168,13 @@ times 128-($-result_path) db 0
 pair_ready: db '@VM_PAIR_READY@',0
 times 128-($-pair_ready) db 0
 role: db '@VM_ROLE@',0
+%ifdef RETIRE_COMMAND
+default_drive: db 0
+native_ready: db '@VM_NATIVE_READY@',0
+times 128-($-native_ready) db 0
+command: db '@VM_NATIVE_COMMAND@',0
+times 256-($-command) db 0
+align 16, db 0
+environment: db '@VM_ENVIRONMENT@',0
+times 512-($-environment) db 0
+%endif

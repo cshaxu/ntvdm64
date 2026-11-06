@@ -7,6 +7,8 @@
 #include "mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_softpc_termination.h"
+#include "mvdm_vm_executor.h"
+#include "mvdm_vm_ingress.h"
 #include "ntvdm_dos_observer.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
@@ -33,6 +35,12 @@ static wow_user_runtime worker_wow_runtime = WOW_USER_RUNTIME_INITIALIZER;
 static wow_user_session_binding worker_wow_binding;
 static BOOL worker_wow_attached;
 static ntvdm_vm_host *worker_frontends;
+static mvdm_vm_executor *worker_vm_executor;
+
+mvdm_vm_executor *mvdm_standalone_worker_executor(void)
+{
+    return worker_started && worker_character_io ? worker_vm_executor : NULL;
+}
 
 ntvdm_vm_host *mvdm_standalone_worker_frontends(void)
 {
@@ -40,6 +48,10 @@ ntvdm_vm_host *mvdm_standalone_worker_frontends(void)
 }
 DWORD mvdm_standalone_worker_close_frontends(void)
 {
+    mvdm_vm_ingress_reset();
+    /* Cancel and join command producers while their host registry still
+     * accepts authenticated retirement. Only then close frontend callbacks. */
+    mvdm_vm_executor_close(worker_vm_executor);
     return ntvdm_vm_host_close(worker_frontends);
 }
 static DWORD begin_character_io(void *owner,HANDLE stop)
@@ -57,6 +69,8 @@ static int mvdm_standalone_worker_cleanup(int result)
 
     ntvdm_dos_observer_stop(&worker_observer);
     ntvdm_worker_lifecycle_end();
+    mvdm_vm_executor_destroy(worker_vm_executor);
+    worker_vm_executor=NULL;
     /* Authorization already joined VM I/O before original host cleanup.
      * The registry object remained alive for concurrent rejected callers. */
     if (ntvdm_vm_host_destroy(worker_frontends)) return ERROR_BUSY;
@@ -146,6 +160,8 @@ DWORD mvdm_standalone_worker_begin(void)
     if(error)goto fail;
     if(character_io) {
         error=ntvdm_vm_host_create(&worker_frontends);
+        if(error)goto fail;
+        error=mvdm_vm_executor_create(worker_frontends,&worker_vm_executor);
         if(error)goto fail;
     }
     if (!session_select_machine_backend(&worker_session,

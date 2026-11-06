@@ -1,12 +1,36 @@
+#include "mvdm_vm_io.h"
+#include "mvdm_vm_executor.h"
+#include "ntvdm-exe/frontend/vm_text.h"
 #include "mvdm_vm_notification.h"
 #include "mvdm_vm_bridge.h"
 #include "mvdm_vm_wake.h"
+#include "mvdm_vm_continuation.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+static unsigned char guest_memory[256];
+/* Ingress selection/capture has its own tests; these isolate notification. */
+DWORD mvdm_vm_ingress_register(uint32_t callback)
+{ return callback ? ERROR_SUCCESS : ERROR_NOT_READY; }
+void mvdm_vm_ingress_reset(void) {}
+DWORD mvdm_vm_command_admit(uint32_t vm, uint32_t address, uint32_t bytes, uint64_t *token)
+{ (void)vm; (void)address; (void)bytes; *token = 0; return ERROR_INVALID_DATA; }
+int mvdm_softpc_guest_memory_copy_from(uint32_t address, uint8_t *bytes, uint32_t count)
+{
+    if (address > sizeof(guest_memory) || count > sizeof(guest_memory) - address) return 0;
+    memcpy(bytes, guest_memory + address, count); return 1;
+}
+int mvdm_softpc_guest_memory_copy_to(uint32_t address, const uint8_t *bytes, uint32_t count)
+{
+    if (address > sizeof(guest_memory) || count > sizeof(guest_memory) - address) return 0;
+    memcpy(guest_memory + address, bytes, count); return 1;
+}
 
 /* Unit boundary substitutes only: these do not prove real PIC/guest delivery. */
 static void (*eoi)(int, int);
 static HANDLE owner;
+static HANDLE application_published;
 static CRITICAL_SECTION ica;
 static int depth, raises, cancels, busy;
 static LONG assertions;
@@ -44,6 +68,7 @@ void ica_hw_interrupt(ULONG adapter, ULONG line, LONG count)
 {
     CHECK(depth && owner && adapter == 1 && line == 7 && count == 1);
     ++raises;
+    if (application_published) SetEvent(application_published);
 }
 void ica_hw_interrupt_cancel(ULONG adapter, ULONG line)
 {
@@ -68,6 +93,602 @@ static DWORD WINAPI publish_from_host(void *argument)
     p->reused_error = mvdm_vm_wake_publish(3, 31, &serial);
     return ERROR_SUCCESS;
 }
+
+typedef struct {
+    HANDLE resume;
+    mvdm_vm_continuation *request;
+    DWORD error;
+} completion_context;
+static DWORD WINAPI complete_after_retirement(void *argument)
+{
+    completion_context *context = argument;
+    const mvdm_vm_completion result = {0, 37, 0};
+    CHECK(WaitForSingleObject(context->resume, INFINITE) == WAIT_OBJECT_0);
+    context->error = mvdm_vm_continuation_complete(context->request, &result);
+    mvdm_vm_continuation_release(context->request);
+    return 0;
+}
+typedef struct io_wait_context {
+    HANDLE ready;
+    mvdm_vm_continuation *request;
+    uint64_t ticket;
+    DWORD error;
+} io_wait_context;
+static DWORD WINAPI finish_guest_io(void *argument)
+{
+    io_wait_context *context = argument;
+    CHECK(WaitForSingleObject(context->ready, INFINITE) == WAIT_OBJECT_0);
+    context->error = mvdm_vm_continuation_finish_io(context->request,
+        context->ticket, 0);
+    return 0;
+}
+typedef struct application_context {
+    mvdm_vm_continuation *request;
+    HANDLE cancellation[4];
+    ntvdm_vm_text *text;
+    mvdm_vm_io *io;
+    DWORD error;
+    BOOL implicit;
+    console_io_request final_operation;
+} application_context;
+static DWORD WINAPI apply_from_channel(void *argument)
+{
+    application_context *context = argument;
+    console_io_request request = {0};
+    console_io_reply reply = {0};
+    request.operation = context->implicit ? CONSOLE_IO_CURSOR_POSITION : CONSOLE_IO_PUBLICATION_END;
+    if (context->implicit) request.state.x = 1;
+    if (context->final_operation.operation) request = context->final_operation;
+    ntvdm_vm_cancel cancel = {context->cancellation[0], context->cancellation[1],
+        context->cancellation[2], context->cancellation[3]};
+    frontend_base_result result = {0};
+    context->error = mvdm_vm_io_operations.dispatch(context->io, &cancel, &request, &reply, &result);
+    CHECK(result.reply && !result.terminal_error);
+    if (!context->error) context->error = reply.error;
+    CHECK((reply.result != 0) == !context->error && !reply.bytes);
+    return 0;
+}
+static void provider_tests(mvdm_vm_continuation *continuation)
+{
+    struct { ntvdm_vm_text_header h; BYTE cells[4]; } frame = {
+        {2, 1, 0, 0, 0x0607, 3, 0, 437, 16}, {'A', 7, 'B', 7}};
+    ntvdm_vm_text *text;
+    mvdm_vm_io *a, *b;
+    KEY_EVENT_RECORD key = {0};
+    console_io_request q = {0}; console_io_reply r = {0};
+    frontend_base_result result = {0}; ntvdm_vm_cancel cancel = {0};
+    BYTE data[CONSOLE_IO_TILE_BYTES]; BOOL pending;
+    unsigned i; char title[] = "VM A";
+    CHECK(!ntvdm_vm_text_create(&frame, sizeof(frame), &text));
+    CHECK(!mvdm_vm_io_create(text, continuation, title, &a));
+    CHECK(!mvdm_vm_io_create(text, continuation, "VM B", &b));
+    title[3] = 'Z'; r.data = data;
+    q.operation = CONSOLE_IO_GET_HANDOFF_TITLE_A;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(r.result && r.bytes == 5 && !strcmp((char *)data, "VM A"));
+    q.operation = CONSOLE_IO_PUBLISH_TITLE_A; q.data = (BYTE *)title; q.bytes = sizeof(title);
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result) && r.result);
+    title[3] = 'Y';
+    --q.bytes; /* Missing terminator must not replace the copied title. */
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(!r.result && r.error == ERROR_INVALID_PARAMETER);
+    q.operation = CONSOLE_IO_GET_HANDOFF_TITLE_A; q.data = NULL; q.bytes = 0;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(r.result && !strcmp((char *)data, "VM Z"));
+    CHECK(!mvdm_vm_io_operations.dispatch(b, &cancel, &q, &r, &result));
+    CHECK(r.result && !strcmp((char *)data, "VM B"));
+    CHECK(WaitForSingleObject(mvdm_vm_io_ready(a), 0) == WAIT_TIMEOUT);
+    key.bKeyDown = TRUE; key.wRepeatCount = 1; key.wVirtualKeyCode = 'A';
+    key.wVirtualScanCode = 0x1e; key.uChar.UnicodeChar = 'a';
+    CHECK(!mvdm_vm_io_key(a, &key));
+    CHECK(WaitForSingleObject(mvdm_vm_io_ready(a), 0) == WAIT_OBJECT_0);
+    CHECK(!mvdm_vm_io_operations.input_pending(b, &pending) && !pending);
+    q.operation = CONSOLE_IO_PEEK_INPUT; q.state.count = 1;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(r.result && r.bytes == sizeof(console_io_input));
+    CHECK(((console_io_input *)data)->character == 'a');
+    CHECK(!mvdm_vm_io_operations.input_pending(a, &pending) && pending);
+    q.operation = CONSOLE_IO_READ_INPUT; q.state.mode = CONSOLE_IO_INPUT_RETURNABLE + 1;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(!r.result && r.error == ERROR_INVALID_PARAMETER);
+    CHECK(!mvdm_vm_io_operations.input_pending(a, &pending) && pending);
+    q.state.mode = CONSOLE_IO_INPUT_RETURNABLE;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(r.result && r.state.count == 1 && !r.error);
+    CHECK(!((console_io_input *)data)->receipt_low && !((console_io_input *)data)->receipt_high);
+    q.state.mode = 0;
+    CHECK(WaitForSingleObject(mvdm_vm_io_ready(a), 0) == WAIT_TIMEOUT);
+    for (i = 0; i < CONSOLE_IO_INPUT_CAPACITY; ++i) CHECK(!mvdm_vm_io_key(a, &key));
+    CHECK(mvdm_vm_io_key(a, &key) == ERROR_NOT_ENOUGH_MEMORY);
+    mvdm_vm_io_operations.finish(a);
+    CHECK(!mvdm_vm_io_operations.input_pending(a, &pending) && pending);
+    q.state.count = CONSOLE_IO_INPUT_CAPACITY;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(r.result && r.state.count == CONSOLE_IO_INPUT_CAPACITY);
+    CHECK(!mvdm_vm_io_operations.input_pending(a, &pending) && !pending);
+    {
+        console_io_input returned[2] = {0};
+        returned[0].type = returned[1].type = KEY_EVENT;
+        returned[0].repeat = returned[1].repeat = 1;
+        returned[0].character = 'x'; returned[1].character = 'y';
+        CHECK(!mvdm_vm_io_key(a, &key));
+        q.operation = CONSOLE_IO_PREPEND_KEYS; q.state.count = 2;
+        q.data = (BYTE *)returned; q.bytes = sizeof(returned);
+        returned[1].receipt_low = 1;
+        CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+        CHECK(!r.result && r.error == ERROR_INVALID_DATA);
+        returned[1].receipt_low = 0;
+        CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 2);
+        q.operation = CONSOLE_IO_READ_INPUT; q.state.count = 3; q.data = NULL; q.bytes = 0;
+        CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 3);
+        CHECK(((console_io_input *)data)[0].character == 'x' &&
+            ((console_io_input *)data)[1].character == 'y' &&
+            ((console_io_input *)data)[2].character == 'a');
+        CHECK(WaitForSingleObject(mvdm_vm_io_ready(a), 0) == WAIT_TIMEOUT);
+    }
+    q.operation = CONSOLE_IO_SET_MODE; q.state.input = 1;
+    q.state.mode = ENABLE_EXTENDED_FLAGS | ENABLE_MOUSE_INPUT | ENABLE_WINDOW_INPUT;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result) && r.result);
+    q.operation = CONSOLE_IO_GET_MODE;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result) && r.result);
+    CHECK(r.state.mode == q.state.mode);
+    q.operation = CONSOLE_IO_SET_MODE; q.state.mode = ENABLE_LINE_INPUT;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(!r.result && r.error == ERROR_NOT_SUPPORTED);
+    q.operation = CONSOLE_IO_GET_MODE; q.state.input = 0;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result) && r.result && !r.state.mode);
+    q.operation = CONSOLE_IO_SET_MODE; q.state.mode = ENABLE_PROCESSED_OUTPUT;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+    CHECK(!r.result && r.error == ERROR_NOT_SUPPORTED);
+    q.state.mode = 0;
+    CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result) && r.result);
+    mvdm_vm_io_destroy(b); mvdm_vm_io_destroy(a); ntvdm_vm_text_destroy(text);
+}
+
+static void application_tests(uint64_t token, mvdm_vm_continuation *request)
+{
+    unsigned i;
+    HANDLE cancel = CreateEventW(NULL, TRUE, FALSE, NULL);
+    CHECK(cancel != NULL);
+    application_published = CreateEventW(NULL, TRUE, FALSE, NULL);
+    CHECK(application_published != NULL);
+    for (i = 0; i < 18; ++i) {
+        unsigned outcome = i % 6;
+        application_context context = {0};
+        uint64_t serial, ticket = 0;
+        uint32_t size;
+        mvdm_vm_wake_identity wake;
+        HANDLE thread;
+        struct { ntvdm_vm_text_header header; BYTE cells[4]; } frame = {
+            {2, 1, 0, 0, 0x0607, 3, 0, 437, 16}, {'A', 7, 'B', 7}};
+        console_io_request operation = {0};
+        console_io_reply reply = {0};
+        struct { console_text_style style; BYTE cells[4]; } video_frame = {0};
+        console_video_description description = {0};
+        context.request = request;
+        context.implicit = i >= 6;
+        CHECK(!ntvdm_vm_text_create(&frame, sizeof(frame), &context.text));
+        CHECK(!mvdm_vm_io_create(context.text, request, "test", &context.io));
+        if (i >= 12) {
+            HANDLE waits[4] = {0};
+            video_frame.style.font_height = 16; video_frame.style.cursor_column = 1;
+            video_frame.cells[0] = 'C'; video_frame.cells[1] = 7;
+            video_frame.cells[2] = 'D'; video_frame.cells[3] = 7;
+            description.kind = CONSOLE_VIDEO_TEXT_FRAME;
+            description.width = 2; description.height = 1; description.stride = 4;
+            description.bytes = sizeof(video_frame);
+            operation.operation = CONSOLE_IO_VIDEO_BEGIN; operation.state.mode = 1;
+            operation.bytes = sizeof(description); operation.data = (BYTE *)&description;
+            CHECK(!mvdm_vm_application_dispatch(request, context.text, waits, &operation, &reply) && reply.result);
+            operation.operation = CONSOLE_IO_VIDEO_DATA;
+            operation.bytes = CONSOLE_IO_TILE_BYTES; operation.data = (BYTE *)&video_frame;
+            CHECK(!mvdm_vm_application_dispatch(request, context.text, waits, &operation, &reply) && reply.result);
+            operation.operation = CONSOLE_IO_BARRIER; operation.bytes = 0; operation.data = NULL;
+            CHECK(!mvdm_vm_application_dispatch(request, context.text, waits, &operation, &reply));
+            CHECK(reply.error == ERROR_BUSY && ntvdm_vm_text_pending(context.text) == 2);
+            context.final_operation.operation = CONSOLE_IO_VIDEO_DATA;
+            context.final_operation.state.mode = 1;
+            context.final_operation.state.count = CONSOLE_IO_TILE_BYTES;
+            context.final_operation.bytes = sizeof(video_frame) - CONSOLE_IO_TILE_BYTES;
+            context.final_operation.data = (BYTE *)&video_frame + CONSOLE_IO_TILE_BYTES;
+        }
+        if (!context.implicit) {
+            operation.operation = CONSOLE_IO_PUBLICATION_BEGIN;
+            CHECK(!ntvdm_vm_text_dispatch(context.text, &operation, &reply));
+            operation.operation = CONSOLE_IO_CURSOR_POSITION;
+            operation.state.x = 1;
+            CHECK(!ntvdm_vm_text_dispatch(context.text, &operation, &reply));
+        }
+        if (outcome < 4) context.cancellation[outcome] = cancel;
+        if (outcome == 4) context.cancellation[0] = context.cancellation[3] = cancel;
+        CHECK(!mvdm_vm_notification_snapshot(&serial));
+        CHECK(!mvdm_vm_notification_acknowledge(serial));
+        eoi(15, 0); /* emulate the CPU acknowledging the previous IRQ */
+        CHECK(ResetEvent(application_published) && ResetEvent(cancel));
+        thread = CreateThread(NULL, 0, apply_from_channel, &context, 0, NULL);
+        CHECK(thread != NULL);
+        CHECK(WaitForSingleObject(application_published, INFINITE) == WAIT_OBJECT_0);
+        CHECK(!mvdm_vm_wake_take(&wake));
+        CHECK(mvdm_vm_continuation_read_io(token, 1, &ticket, NULL, 0, &size) == ERROR_INSUFFICIENT_BUFFER);
+        CHECK(size == sizeof(frame) + (i >= 12 ? sizeof(ntvdm_vm_video_application) + sizeof(video_frame) : 0) && ticket);
+        if (outcome < 4) CHECK(SetEvent(cancel));
+        else CHECK(!mvdm_vm_continuation_ack_io(token, 1, ticket,
+            outcome == 4 ? ERROR_SUCCESS : ERROR_WRITE_FAULT));
+        CHECK(WaitForSingleObject(thread, INFINITE) == WAIT_OBJECT_0);
+        CHECK(context.error == (DWORD)(outcome < 4 ? ERROR_OPERATION_ABORTED :
+            outcome == 4 ? ERROR_SUCCESS : ERROR_WRITE_FAULT));
+        CHECK(mvdm_vm_continuation_read_io(token, 1, &ticket, NULL, 0, &size) == ERROR_NOT_FOUND);
+        operation.operation = CONSOLE_IO_SCREEN_INFO;
+        CHECK(!ntvdm_vm_text_dispatch(context.text, &operation, &reply));
+        CHECK(reply.state.x == (outcome == 4 ? 1 : 0));
+        CHECK(!ntvdm_vm_text_pending(context.text));
+        /* Every failed publication released its candidate for the next one. */
+        operation.operation = CONSOLE_IO_PUBLICATION_BEGIN;
+        CHECK(!ntvdm_vm_text_dispatch(context.text, &operation, &reply));
+        operation.operation = CONSOLE_IO_PUBLICATION_ABORT;
+        CHECK(!ntvdm_vm_text_dispatch(context.text, &operation, &reply));
+        mvdm_vm_io_operations.finish(context.io);
+        mvdm_vm_io_destroy(context.io);
+        ntvdm_vm_text_destroy(context.text);
+        CloseHandle(thread);
+    }
+    {
+        HANDLE stopped[4] = {cancel, NULL, NULL, NULL};
+        uint64_t ticket = 0;
+        uint32_t size;
+        CHECK(SetEvent(cancel));
+        CHECK(mvdm_vm_application_publish(request, "frame", 6, stopped) == ERROR_OPERATION_ABORTED);
+        CHECK(mvdm_vm_continuation_read_io(token, 1, &ticket, NULL, 0, &size) == ERROR_NOT_FOUND);
+        stopped[0] = INVALID_HANDLE_VALUE;
+        CHECK(mvdm_vm_application_publish(request, "frame", 6, stopped) == ERROR_INVALID_HANDLE);
+    }
+    CloseHandle(application_published); application_published = NULL;
+    CloseHandle(cancel);
+}
+static void io_tests(uint64_t token, mvdm_vm_continuation *request)
+{
+    unsigned char bytes[] = {1, 2, 3}, copy[3] = {0};
+    uint64_t ticket, query = 0, next;
+    uint32_t size;
+    HANDLE ready, unused, thread;
+    mvdm_vm_wake_identity wake;
+    const mvdm_vm_completion terminal = {0, 1, 0};
+    io_wait_context context;
+    mvdm_vm_bridge_result bridge;
+    uint32_t descriptor[7] = {0};
+    CHECK(!mvdm_vm_continuation_post_io(request, bytes, sizeof(bytes), &ticket, &ready));
+    bytes[0] = 9; /* producer storage is not the retained guest job */
+    CHECK(!mvdm_vm_wake_take(&wake) && wake.vm == 1 && wake.generation == 11);
+    CHECK(WaitForSingleObject(ready, 0) == WAIT_TIMEOUT);
+    CHECK(mvdm_vm_continuation_complete(request, &terminal) == ERROR_BUSY);
+    CHECK(mvdm_vm_continuation_post_io(request, bytes, sizeof(bytes), &next, &unused) == ERROR_BUSY);
+    CHECK(!next && !unused);
+    CHECK(mvdm_vm_continuation_read_io(token, 2, &query, NULL, 0, &size) == ERROR_ACCESS_DENIED);
+    CHECK(!query && !size);
+    CHECK(mvdm_vm_continuation_read_io(token, 1, &query, NULL, 0, &size) == ERROR_INSUFFICIENT_BUFFER);
+    CHECK(query == ticket && size == sizeof(bytes));
+    CHECK(!mvdm_vm_continuation_read_io(token, 1, &query, copy, sizeof(copy), &size));
+    CHECK(copy[0] == 1 && copy[1] == 2 && copy[2] == 3);
+    memcpy(descriptor, &token, sizeof(token));
+    memcpy(guest_memory, descriptor, sizeof(descriptor));
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 1, 0, &bridge));
+    CHECK(bridge.status == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 2, 1, &bridge));
+    CHECK(bridge.status == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 1, 1, &bridge));
+    CHECK(bridge.status == ERROR_INSUFFICIENT_BUFFER);
+    memcpy(descriptor, guest_memory, sizeof(descriptor));
+    CHECK(descriptor[2] == (uint32_t)ticket && descriptor[3] == (uint32_t)(ticket >> 32));
+    CHECK(descriptor[5] == sizeof(bytes));
+    descriptor[4] = 255; /* Invalid destination must not acknowledge application. */
+    memcpy(guest_memory, descriptor, sizeof(descriptor));
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 1, 1, &bridge));
+    CHECK(bridge.status == ERROR_INVALID_ADDRESS);
+    descriptor[4] = 128;
+    memcpy(guest_memory, descriptor, sizeof(descriptor));
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 1, 1, &bridge));
+    CHECK(!bridge.status && guest_memory[128] == 1 && guest_memory[130] == 3);
+    CHECK(WaitForSingleObject(ready, 0) == WAIT_TIMEOUT); /* copying is not application */
+    CHECK(mvdm_vm_continuation_finish_io(request, ticket, 0) == ERROR_IO_INCOMPLETE);
+    CHECK(mvdm_vm_continuation_ack_io(token, 2, ticket, 0) == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_continuation_ack_io(token, 1, ticket + 1, 0) == ERROR_NOT_FOUND);
+    descriptor[6] = ERROR_WRITE_FAULT;
+    memcpy(guest_memory, descriptor, sizeof(descriptor));
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 14, 0, sizeof(descriptor), 1, 1, &bridge));
+    CHECK(!bridge.status);
+    CHECK(mvdm_vm_continuation_ack_io(token, 1, ticket, 0) == ERROR_INVALID_STATE);
+    CHECK(mvdm_vm_continuation_finish_io(request, ticket, 0) == ERROR_WRITE_FAULT);
+    CHECK(!mvdm_vm_continuation_post_io(request, bytes, sizeof(bytes), &next, &ready));
+    CHECK(next > ticket);
+    CHECK(mvdm_vm_continuation_ack_io(token, 1, ticket, 0) == ERROR_NOT_FOUND);
+    CHECK(!mvdm_vm_wake_take(&wake));
+    CHECK(mvdm_vm_continuation_finish_io(request, next, ERROR_CANCELLED) == ERROR_CANCELLED);
+    CHECK(mvdm_vm_continuation_ack_io(token, 1, next, 0) == ERROR_NOT_FOUND);
+    CHECK(!mvdm_vm_continuation_post_io(request, bytes, sizeof(bytes), &ticket, &ready));
+    CHECK(!mvdm_vm_wake_take(&wake));
+    context.ready = ready; context.request = request; context.ticket = ticket;
+    context.error = ERROR_IO_INCOMPLETE;
+    thread = CreateThread(NULL, 0, finish_guest_io, &context, 0, NULL);
+    CHECK(thread != NULL);
+    CHECK(!mvdm_vm_continuation_ack_io(token, 1, ticket, 0));
+    CHECK(WaitForSingleObject(thread, INFINITE) == WAIT_OBJECT_0);
+    CHECK(context.error == ERROR_SUCCESS);
+    CloseHandle(thread);
+    provider_tests(request);
+    application_tests(token, request);
+}
+static void continuation_tests(void)
+{
+    const mvdm_vm_completion terminal = {0, 19, 0}, reentry = {0, 0, 1};
+    mvdm_vm_completion result;
+    mvdm_vm_continuation *a, *b;
+    mvdm_vm_bridge_result bridge;
+    mvdm_vm_wake_identity wake;
+    completion_context context = {0};
+    io_wait_context io_context = {0};
+    uint64_t one, two, after_reset;
+    WORD irq;
+    HANDLE thread;
+    CHECK(!mvdm_vm_continuation_invalidated(NULL));
+    CHECK(mvdm_vm_continuation_begin(1, &one, &a) == ERROR_NOT_READY && !one && !a);
+    CHECK(!mvdm_vm_notification_open(&irq));
+    CHECK(!mvdm_vm_notification_ready());
+    CHECK(!mvdm_vm_wake_register(1, 11));
+    CHECK(!mvdm_vm_wake_register(2, 22));
+    CHECK(mvdm_vm_continuation_begin(99, &one, &a) == ERROR_NOT_FOUND && !one && !a);
+    CHECK(!mvdm_vm_continuation_begin(1, &one, &a));
+    CHECK(!mvdm_vm_continuation_begin(2, &two, &b) && two > one);
+    CHECK(WaitForSingleObject(mvdm_vm_continuation_invalidated(a), 0) == WAIT_TIMEOUT);
+    mvdm_vm_continuation_retire(1, 10); /* another generation cannot cancel */
+    CHECK(WaitForSingleObject(mvdm_vm_continuation_invalidated(a), 0) == WAIT_TIMEOUT);
+    io_tests(one, a);
+    CHECK(mvdm_vm_continuation_consume(one, 1, &result) == ERROR_IO_INCOMPLETE);
+    CHECK(mvdm_vm_continuation_consume(one, 2, &result) == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 12,
+        (uint32_t)one, (uint32_t)(one >> 32), 1, 1, &bridge));
+    CHECK(bridge.status == ERROR_IO_INCOMPLETE && !bridge.value && !bridge.serial_low);
+    CHECK(!mvdm_vm_continuation_complete(b, &reentry));
+    CHECK(!mvdm_vm_continuation_complete(a, &terminal));
+    CHECK(WaitForSingleObject(mvdm_vm_continuation_invalidated(a), 0) == WAIT_TIMEOUT);
+    CHECK(mvdm_vm_continuation_complete(a, &terminal) == ERROR_INVALID_STATE);
+    CHECK(!mvdm_vm_wake_take(&wake) && wake.vm == 2 && wake.generation == 22);
+    CHECK(!mvdm_vm_wake_take(&wake) && wake.vm == 1 && wake.generation == 11);
+    mvdm_vm_continuation_release(b); /* executor can leave before consumption */
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 12,
+        (uint32_t)two, (uint32_t)(two >> 32), 2, 1, &bridge));
+    CHECK(!bridge.status && bridge.serial_low == 1);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 12,
+        (uint32_t)one, (uint32_t)(one >> 32), 2, 1, &bridge));
+    CHECK(bridge.status == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 12,
+        (uint32_t)one, (uint32_t)(one >> 32), 1, 0, &bridge));
+    CHECK(bridge.status == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 12,
+        (uint32_t)one, (uint32_t)(one >> 32), 1, 1, &bridge));
+    CHECK(!bridge.status && bridge.value == 19);
+    CHECK(WaitForSingleObject(mvdm_vm_continuation_invalidated(a), 0) == WAIT_OBJECT_0);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 12,
+        (uint32_t)one, (uint32_t)(one >> 32), 1, 1, &bridge));
+    CHECK(bridge.status == ERROR_NOT_FOUND && !bridge.value && !bridge.serial_low);
+    mvdm_vm_continuation_release(a); /* or after consumption */
+
+    CHECK(!mvdm_vm_continuation_begin(1, &one, &context.request));
+    CHECK(DuplicateHandle(GetCurrentProcess(),mvdm_vm_continuation_invalidated(context.request),
+        GetCurrentProcess(),&context.resume,SYNCHRONIZE,FALSE,0));
+    thread = CreateThread(NULL, 0, complete_after_retirement, &context, 0, NULL);
+    CHECK(thread != NULL);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 8, 11, 0, 1, 1, &bridge));
+    CHECK(!bridge.status);
+    CHECK(!mvdm_vm_wake_register(1, 12));
+    CHECK(WaitForSingleObject(thread, INFINITE) == WAIT_OBJECT_0);
+    CHECK(context.error == ERROR_OPERATION_ABORTED);
+    CHECK(mvdm_vm_continuation_consume(one, 1, &result) == ERROR_NOT_FOUND);
+    CHECK(mvdm_vm_wake_take(&wake) == ERROR_NO_MORE_ITEMS);
+    CloseHandle(thread);
+    CloseHandle(context.resume);
+
+    CHECK(!mvdm_vm_continuation_begin(1, &one, &a));
+    CHECK(!mvdm_vm_continuation_begin(2, &two, &b));
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 5, 0, 0, 0, 1, &bridge));
+    CHECK(!bridge.status);
+    CHECK(WaitForSingleObject(mvdm_vm_continuation_invalidated(a), 0) == WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(mvdm_vm_continuation_invalidated(b), 0) == WAIT_OBJECT_0);
+    CHECK(mvdm_vm_continuation_complete(a, &terminal) == ERROR_OPERATION_ABORTED);
+    mvdm_vm_continuation_release(a);
+    CHECK(mvdm_vm_continuation_complete(b, &terminal) == ERROR_OPERATION_ABORTED);
+    mvdm_vm_continuation_release(b);
+    CHECK(mvdm_vm_continuation_consume(two, 2, &result) == ERROR_NOT_FOUND);
+    CHECK(!mvdm_vm_notification_open(&irq));
+    CHECK(!mvdm_vm_wake_register(1, 13));
+    CHECK(!mvdm_vm_continuation_begin(1, &after_reset, &a) && after_reset > two);
+    io_context.request = a;
+    CHECK(!mvdm_vm_continuation_post_io(a, "retirement", 11,
+        &io_context.ticket, &io_context.ready));
+    thread = CreateThread(NULL, 0, finish_guest_io, &io_context, 0, NULL);
+    CHECK(thread != NULL);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 5, 0, 0, 0, 1, &bridge));
+    CHECK(!bridge.status);
+    CHECK(WaitForSingleObject(thread, INFINITE) == WAIT_OBJECT_0);
+    CHECK(io_context.error == ERROR_OPERATION_ABORTED);
+    CHECK(mvdm_vm_continuation_ack_io(after_reset, 1, io_context.ticket, 0) == ERROR_NOT_FOUND);
+    CloseHandle(thread);
+    mvdm_vm_continuation_release(a);
+}
+/* Production executor ownership with real threadpool/continuation/provider.
+ * Only broker/launcher boundaries are substituted here. */
+static HANDLE executor_started, executor_release, executor_retiring, executor_retire_release;
+static LONG executor_freed, executor_retired;
+static BOOL executor_hold_retirement;
+DWORD ntvdm_vm_payload_begin(ntvdm_vm_host *host, uint64_t *payload)
+{ CHECK(host == (ntvdm_vm_host *)1); *payload = 1; return 0; }
+DWORD ntvdm_vm_host_register(ntvdm_vm_host *host, uint64_t payload, uint64_t vm,
+    HANDLE input, const ntvdm_vm_io *io, void *context, common_frontend_location *location)
+{
+    CHECK(host == (ntvdm_vm_host *)1 && payload == 1 && input && context);
+    CHECK(io == &mvdm_vm_io_operations);
+    location->payload = payload; location->vm = vm; location->incarnation = vm;
+    return 0;
+}
+DWORD mvdm_vm_command_execute(mvdm_vm_continuation *request, ntvdm_command_launch *launch,
+    ntvdm_vm_host *host, const common_frontend_location *location, DWORD *code)
+{
+    HANDLE waits[2] = {executor_release, mvdm_vm_continuation_invalidated(request)};
+    DWORD status;
+    CHECK(host == (ntvdm_vm_host *)1 && launch && location->incarnation);
+    CHECK(ReleaseSemaphore(executor_started, 1, NULL));
+    status = WaitForMultipleObjects(2, waits, FALSE, 10000);
+    CHECK(status == WAIT_OBJECT_0 || status == WAIT_OBJECT_0 + 1);
+    *code = (DWORD)location->vm;
+    return status == WAIT_OBJECT_0 ? 0 : ERROR_OPERATION_ABORTED;
+}
+DWORD ntvdm_vm_host_retire(ntvdm_vm_host *host, const common_frontend_location *location)
+{
+    CHECK(host == (ntvdm_vm_host *)1 && location->incarnation);
+    if (executor_hold_retirement) {
+        CHECK(SetEvent(executor_retiring));
+        CHECK(WaitForSingleObject(executor_retire_release, 10000) == WAIT_OBJECT_0);
+    }
+    InterlockedIncrement(&executor_retired);
+    return 0;
+}
+void ntvdm_command_launch_destroy(ntvdm_command_launch *launch)
+{ CHECK(launch == (ntvdm_command_launch *)1); InterlockedIncrement(&executor_freed); }
+static DWORD WINAPI close_executor(void *context)
+{ mvdm_vm_executor_close(context); return 0; }
+static ntvdm_vm_text *executor_text(void)
+{
+    struct { ntvdm_vm_text_header h; BYTE cells[4]; } frame = {
+        {2, 1, 0, 0, 0x0607, 3, 0, 437, 16}, {'A', 7, 'B', 7}};
+    ntvdm_vm_text *text;
+    CHECK(!ntvdm_vm_text_create(&frame, sizeof(frame), &text));
+    return text;
+}
+static void executor_tests(void)
+{
+    mvdm_vm_executor *executor;
+    ntvdm_vm_text *retained;
+    uint64_t first, second, rejected;
+    WORD irq;
+    HANDLE closing;
+    KEY_EVENT_RECORD key = {0};
+    mvdm_vm_completion completion;
+    key.wRepeatCount = 1; key.bKeyDown = TRUE; key.wVirtualKeyCode = 'A';
+    executor_started = CreateSemaphoreW(NULL, 0, 2, NULL);
+    executor_release = CreateEventW(NULL, TRUE, FALSE, NULL);
+    executor_retiring = CreateEventW(NULL, TRUE, FALSE, NULL);
+    executor_retire_release = CreateEventW(NULL, TRUE, FALSE, NULL);
+    CHECK(executor_started && executor_release && executor_retiring && executor_retire_release);
+    CHECK(!mvdm_vm_notification_open(&irq));
+    CHECK(!mvdm_vm_wake_register(1, 100));
+    CHECK(!mvdm_vm_wake_register(2, 101));
+    CHECK(!mvdm_vm_executor_create((ntvdm_vm_host *)1, &executor));
+    retained = executor_text();
+    CHECK(mvdm_vm_executor_submit(executor, 3, (ntvdm_command_launch *)1,
+        retained, &rejected) == ERROR_NOT_FOUND && !rejected);
+    CHECK(!mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+        executor_text(), &first));
+    CHECK(WaitForSingleObject(executor_started, 10000) == WAIT_OBJECT_0);
+    CHECK(mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+        retained, &rejected) == ERROR_BUSY && !rejected);
+    CHECK(!mvdm_vm_executor_submit(executor, 2, (ntvdm_command_launch *)1,
+        executor_text(), &second));
+    CHECK(WaitForSingleObject(executor_started, 10000) == WAIT_OBJECT_0);
+    CHECK(first != second && !mvdm_vm_executor_key(executor, first, &key));
+    CHECK(mvdm_vm_executor_key(executor, UINT64_MAX, &key) == ERROR_NOT_FOUND);
+    /* Close cancels both commands but cannot return before broker retirement
+     * joins their callbacks. No timeout/sleep drives the production protocol. */
+    executor_hold_retirement = TRUE;
+    closing = CreateThread(NULL, 0, close_executor, executor, 0, NULL);
+    CHECK(closing && WaitForSingleObject(executor_retiring, 10000) == WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(closing, 0) == WAIT_TIMEOUT);
+    CHECK(mvdm_vm_executor_key(executor, first, &key) == ERROR_OPERATION_ABORTED);
+    CHECK(mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+        retained, &rejected) == ERROR_OPERATION_ABORTED && !rejected);
+    CHECK(!executor_freed && !executor_retired);
+    CHECK(SetEvent(executor_retire_release));
+    CHECK(WaitForSingleObject(closing, 10000) == WAIT_OBJECT_0);
+    CHECK(executor_freed == 2 && executor_retired == 2);
+    CHECK(mvdm_vm_continuation_consume(first, 1, &completion) == ERROR_NOT_FOUND);
+    CHECK(mvdm_vm_continuation_consume(second, 2, &completion) == ERROR_NOT_FOUND);
+    mvdm_vm_executor_destroy(executor);
+    ntvdm_vm_text_destroy(retained); /* failed submissions did not consume it */
+    CHECK(!mvdm_vm_notification_close());
+    mvdm_vm_wake_reset();
+    executor_hold_retirement = FALSE;
+    CHECK(SetEvent(executor_release));
+    application_published = CreateEventW(NULL, FALSE, FALSE, NULL);
+    CHECK(application_published != NULL);
+    CHECK(!mvdm_vm_notification_open(&irq));
+    CHECK(!mvdm_vm_notification_ready());
+    CHECK(!mvdm_vm_wake_register(1, 102));
+    CHECK(!mvdm_vm_executor_create((ntvdm_vm_host *)1, &executor));
+    CHECK(!mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+        executor_text(), &first));
+    CHECK(WaitForSingleObject(application_published, 10000) == WAIT_OBJECT_0);
+    CHECK(!mvdm_vm_continuation_consume(first, 1, &completion));
+    CHECK(!completion.error && completion.exit_code == 1);
+    mvdm_vm_executor_destroy(executor);
+    CHECK(executor_freed == 3 && executor_retired == 3);
+    CHECK(!mvdm_vm_notification_close());
+    mvdm_vm_wake_reset();
+    CloseHandle(application_published); application_published = NULL;
+    CloseHandle(closing); CloseHandle(executor_started); CloseHandle(executor_release);
+    CloseHandle(executor_retiring); CloseHandle(executor_retire_release);
+}
+
+static void executor_reuse_tests(void)
+{
+    mvdm_vm_executor *executor;
+    uint64_t old_token, new_token;
+    mvdm_vm_completion completion;
+    WORD irq;
+    KEY_EVENT_RECORD key = {0};
+    key.wRepeatCount = 1;
+    executor_freed = executor_retired = 0;
+    executor_started = CreateSemaphoreW(NULL, 0, 2, NULL);
+    executor_release = CreateEventW(NULL, TRUE, FALSE, NULL);
+    executor_retiring = CreateEventW(NULL, TRUE, FALSE, NULL);
+    executor_retire_release = CreateEventW(NULL, TRUE, FALSE, NULL);
+    application_published = CreateEventW(NULL, FALSE, FALSE, NULL);
+    CHECK(executor_started && executor_release && executor_retiring &&
+        executor_retire_release && application_published);
+    CHECK(!mvdm_vm_notification_open(&irq));
+    CHECK(!mvdm_vm_notification_ready());
+    CHECK(!mvdm_vm_wake_register(1, 201));
+    CHECK(!mvdm_vm_executor_create((ntvdm_vm_host *)1, &executor));
+    CHECK(!mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+        executor_text(), &old_token));
+    CHECK(WaitForSingleObject(executor_started, 10000) == WAIT_OBJECT_0);
+    executor_hold_retirement = TRUE;
+    CHECK(!mvdm_vm_wake_retire(1, 201));
+    mvdm_vm_continuation_retire(1, 201);
+    CHECK(WaitForSingleObject(executor_retiring, 10000) == WAIT_OBJECT_0);
+    CHECK(!mvdm_vm_wake_register(1, 202));
+    CHECK(!mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+        executor_text(), &new_token));
+    CHECK(new_token != old_token);
+    CHECK(mvdm_vm_executor_key(executor, old_token, &key) == ERROR_OPERATION_ABORTED);
+    CHECK(WaitForSingleObject(executor_started, 0) == WAIT_TIMEOUT);
+    CHECK(SetEvent(executor_retire_release));
+    CHECK(WaitForSingleObject(executor_started, 10000) == WAIT_OBJECT_0);
+    CHECK(!mvdm_vm_executor_key(executor, new_token, &key));
+    CHECK(SetEvent(executor_release));
+    CHECK(WaitForSingleObject(application_published, 10000) == WAIT_OBJECT_0);
+    CHECK(mvdm_vm_continuation_consume(old_token, 1, &completion) == ERROR_NOT_FOUND);
+    CHECK(!mvdm_vm_continuation_consume(new_token, 1, &completion));
+    CHECK(!completion.error && completion.exit_code == 1);
+    mvdm_vm_executor_destroy(executor);
+    CHECK(executor_freed == 2 && executor_retired == 2);
+    CHECK(!mvdm_vm_notification_close());
+    mvdm_vm_wake_reset();
+    CloseHandle(application_published); application_published = NULL;
+    CloseHandle(executor_started); CloseHandle(executor_release);
+    CloseHandle(executor_retiring); CloseHandle(executor_retire_release);
+    executor_hold_retirement = FALSE;
+}
+
 int main(void)
 {
     WORD irq;
@@ -171,6 +792,9 @@ int main(void)
     CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 5, 0, 0, 0, 1, &result));
     CHECK(!result.status && !owner);
     CHECK(!depth);
+    continuation_tests();
+    executor_tests();
+    executor_reuse_tests();
     DeleteCriticalSection(&ica);
     printf("PASS %ld notification unit assertions; no real PIC claim\n", assertions);
     return 0;

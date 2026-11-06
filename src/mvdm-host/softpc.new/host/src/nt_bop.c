@@ -409,6 +409,13 @@ void MS_bop_4(void)
     IMPORT BOOL CmdDispatch(ULONG);
 
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
+    /* DIVERGENCE MVDM-HOST-DIV-871: admitted software-V86 bridge CALLF
+     * owns its return IP; ordinary COMMAND dispatch remains below. */
+    {
+        extern int mvdm_vm_command_enter(uint32_t service);
+        if (mvdm_vm_command_enter((uint32_t)Command)) return;
+    }
+#line 320
     CmdDispatch((ULONG) Command);
     setIP((USHORT)(getIP() + 1));
 }

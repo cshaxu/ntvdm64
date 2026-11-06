@@ -1,5 +1,5 @@
 #include "ntvwm-exe/text_frame.h"
-#include "ntcon-exe/console_video.h"
+#include "common/frontend-base/video.h"
 #include <stdio.h>
 #include <string.h>
 

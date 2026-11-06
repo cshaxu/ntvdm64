@@ -297,7 +297,7 @@ BOOL opennt_command_create_process_a(
 
 struct ntvdm_command_launch {
     char *command,*environment,*directory;
-    HANDLE streams[3],context[2];
+    HANDLE streams[3];
     unsigned int service;
     DWORD console_mask;
     LONG started;
@@ -308,7 +308,6 @@ void ntvdm_command_launch_destroy(ntvdm_command_launch *request)
     unsigned int i;
     if(!request)return;
     for(i=0;i<3;++i)if(request->streams[i])CloseHandle(request->streams[i]);
-    for(i=0;i<2;++i)if(request->context[i])CloseHandle(request->context[i]);
     if(request->command)HeapFree(GetProcessHeap(),0,request->command);
     if(request->environment)HeapFree(GetProcessHeap(),0,request->environment);
     if(request->directory)HeapFree(GetProcessHeap(),0,request->directory);
@@ -317,16 +316,14 @@ void ntvdm_command_launch_destroy(ntvdm_command_launch *request)
 
 DWORD ntvdm_command_launch_prepare(unsigned int service,const char *command,
     const char *environment,size_t environment_bytes,const char *directory,
-    const HANDLE streams[3],HANDLE frontend,HANDLE execution,ntvdm_command_launch **out)
+    const HANDLE streams[3],ntvdm_command_launch **out)
 {
     ntvdm_command_launch *request;
-    HANDLE context[2]={frontend,execution};
     size_t i;
     DWORD error=ERROR_NOT_ENOUGH_MEMORY,kind;
     if(out)*out=NULL;
     if(!out || !command || !*command || !environment || environment_bytes<2 ||
-        !directory || !*directory || !streams || !frontend || !execution ||
-        frontend==INVALID_HANDLE_VALUE || execution==INVALID_HANDLE_VALUE ||
+        !directory || !*directory || !streams ||
         service>MVDM_COMMAND_SERVICE_EXECUTE)return ERROR_INVALID_PARAMETER;
     if(!((directory[0]=='\\' && directory[1]=='\\') ||
         (strlen(directory)>=3 && directory[1]==':' &&
@@ -355,22 +352,21 @@ DWORD ntvdm_command_launch_prepare(unsigned int service,const char *command,
             error=GetLastError();goto failed;
         }
     }
-    for(i=0;i<2;++i)
-        if(!DuplicateHandle(GetCurrentProcess(),context[i],GetCurrentProcess(),
-            &request->context[i],SYNCHRONIZE,FALSE,0)){
-            error=GetLastError();goto failed;
-        }
     *out=request;return ERROR_SUCCESS;
 failed:
     ntvdm_command_launch_destroy(request);return error;
 }
 
-DWORD ntvdm_command_launch_start(ntvdm_command_launch *request,DWORD flags,
+DWORD ntvdm_command_launch_start(ntvdm_command_launch *request,HANDLE frontend,
+    HANDLE execution,DWORD flags,
     PROCESS_INFORMATION *out)
 {
     STARTUPINFOA startup={sizeof(startup)};
+    HANDLE context[2]={frontend,execution};
     if(out)ZeroMemory(out,sizeof(*out));
-    if(!request || !out || (flags&~(CREATE_SUSPENDED|CREATE_DEFAULT_ERROR_MODE)))
+    if(!request || !out || !frontend || !execution ||
+        frontend==INVALID_HANDLE_VALUE || execution==INVALID_HANDLE_VALUE ||
+        (flags&~(CREATE_SUSPENDED|CREATE_DEFAULT_ERROR_MODE)))
         return ERROR_INVALID_PARAMETER;
     if(InterlockedExchange(&request->started,1))return ERROR_INVALID_STATE;
     startup.dwFlags=STARTF_USESTDHANDLES;
@@ -378,5 +374,5 @@ DWORD ntvdm_command_launch_start(ntvdm_command_launch *request,DWORD flags,
     startup.hStdError=request->streams[2];
     return opennt_command_launch_vdm_child(request->command,NULL,NULL,TRUE,flags,
         request->environment,request->directory,&startup,out,request->service,
-        request->command,request->context,request->console_mask) ? ERROR_SUCCESS : GetLastError();
+        request->command,context,request->console_mask) ? ERROR_SUCCESS : GetLastError();
 }

@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T479 S5 command continuation](operations/m0-t479-s5-command-continuation.md) fixes the checked BOP/VMM return boundary and finite implementation order.
+[Diagnostic evidence](evidence/m0-t479-s5-continuation-diagnostic.json) retains the failed exit and passing traced/untraced Win3.1 controls; real commands are not yet connected.
+
 [T477 S4 VM group evidence](evidence/m0-t477-s4-vm-groups.md) records the approved UI, projection ownership and verification.
 
 [T477 S4 monitor design](operations/m0-t477-s4-monitor-design.md) records typed VM snapshot ownership and acceptance.
@@ -1201,3 +1204,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 [T479 S3 delivery](evidence/m0-t479-s3-command-preparation.md) and [verification](evidence/m0-t479-s3-command-verification.json) record the completed host stage and guest-driver handoff.
 
 [T479 S4 driver load](evidence/m0-t479-s4-driver-load.md) and [results](evidence/m0-t479-s4-driver-load.json) record partial Win3.1 two-VM identity proof and remaining guest-bridge gates.
+
+- [T479 S5 P1 host checkpoint](evidence/m0-t479-s5-p1-host-checkpoint.md): verified host publication and remaining guest I/O boundaries.
