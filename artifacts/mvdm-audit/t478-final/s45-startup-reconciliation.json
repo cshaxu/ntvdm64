@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;12 bounded dispositions and14 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;13 bounded dispositions and13 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -149,9 +149,9 @@
       "id": "DOS16:4c1abcb8b4894efee724",
       "module": "1.2",
       "contract": "DOS launcher template acquisition and session switch production",
-      "disposition": "pending",
+      "disposition": "wired",
       "current_owner": "BaseGetVdmConfigInfo generated verbatim from selected vdm.c; BaseGetVDMKeyword and image-end boundary in common/base_srv/base_config.c",
-      "evidence_and_limits": "Registry template replaced with bound immutable package image; original formatting remains. Next reconcile path-boundary justification and exact generated-carrier identity; not an autonomous duplicate by object name."
+      "evidence_and_limits": "s45-launch-template-reconciliation.json proves generated body identity and pins current owner/binding/caller. T412/T416 original lifecycle fixture covers DOS/WOW, spaces, session ID and rejection historically; S43 Full and real WOW startup cover current normal path. Registry source is intentionally replaced by package configuration; no arbitrary-template or allocation-failure certification."
     },
     {
       "id": "DOS16:86818e62324bec6dccaf",

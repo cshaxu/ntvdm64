@@ -1,0 +1,15 @@
+{
+  "id": "DOS16:4c1abcb8b4894efee724",
+  "generated_function_matches_selected_mirror": true,
+  "normalized_function_sha256": "f2a9460f862cf43fabaec32f8e375d85d80eaaab2d37a438fc78577190bbea8b",
+  "inputs": {
+    "src/non-mvdm/base/win32/client/vdm.c": "5622f66074cb994abdd5d85d0884b837fc17a24d182f00907e6df07db8c7d23f",
+    "build/.ninja/msvc-x64-release/service/generated/base_vdm_config.c": "f85788af98e6d0d406745466b312036d2ad197dfb376426f4c95a156b769dba1",
+    "src/common/base_srv/base_config.c": "5274db2ebb5f2d9401718eba7d9d4cc719bd24cabd4cd28ebb937c7861f97220",
+    "src/ntsrv-exe/opennt/source/worker_registry.c": "5cf4e47eaaff7a4a3ac0f1c65d21abedb3e103e76f851f2a7fc1bfd8bc3122d1",
+    "tests/broker/original_server_lifecycle.c": "ad7590fbbb6a5fade01dbd3e5781a0783323299f44b6d20bb1617cec928df3d5",
+    "tools/build/New-NativeWorkerNinja.ps1": "7bf71ffd35dadc671f3b4b832cc805885fe50e69ecfb220afc2f751d3a71351f"
+  },
+  "interpretation": "Selected mirror function is reused verbatim in service carrier, not byte-exact upstream: registered path-boundary and pointer-difference adaptations remain. Package template replaces installation registry; original argument construction remains.",
+  "runtime_limits": "T412/T416 fixture evidence is historical; existing fixture hardcodes O:/winnt and was not rerun. Current S43 normal DOS/WOW startup is bounded runtime evidence, not fault injection or arbitrary template support."
+}

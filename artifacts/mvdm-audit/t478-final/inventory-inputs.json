@@ -77,10 +77,10 @@
     "scope-excluded-retired-kernel-monitor-profile": 1,
     "scope-excluded-alternate-assembled-executor": 1,
     "selected-original-ccpu40-profile; bounded-runtime-verified": 1,
-    "current-original-owner-wired; bounded-startup-evidence": 10,
+    "current-original-owner-wired; bounded-startup-evidence": 11,
     "scope-excluded-host-boot-file-mutation": 1,
     "existing-pif-correction-retained; historical-focused-evidence": 1,
-    "pending-product-evidence": 1047,
+    "pending-product-evidence": 1046,
     "inactive-edition-evidence-only": 483,
     "current-original-owner-wired; bounded-runtime-verified": 1
   },

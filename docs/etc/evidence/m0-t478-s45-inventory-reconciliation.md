@@ -121,3 +121,38 @@ requiring its existing justification to be reconciled.
 After this checkpoint1047 active identities remain pending, including these
 fourteen. Current product/release bytes are unchanged; no new Full or local
 release is necessary for this evidence-only P. S45 remains active.
+
+## P3 launch-template disposition
+
+The [identity receipt](../../../artifacts/mvdm-audit/t478-final/s45-launch-template-reconciliation.json)
+resolves DOS16:4c1abcb8b4894efee724. The generated service carrier's complete
+BaseGetVdmConfigInfo function equals the selected mirror after newline
+normalization. This is not a claim that the selected mirror is byte-exact
+upstream: OPENNT-HOST-014 supplies the package image boundary and
+OPENNT-HOST-065 retains pointer-difference arithmetic without address narrowing.
+The service map resolves the function to config-command.obj. Current
+worker_registry.c binds trusted sibling image/kernel paths, invokes the original
+function and restores its previous thread-local binding before handling errors.
+Original quoting, -f, hexadecimal -i and WOW -w/-a construction remain there.
+
+[T412 configuration evidence](m0-t412-s2-original-lifecycle.md#original-worker-command-construction)
+explains why NT4's machine WOW registry and hardcoded system32 image search are
+not standalone configuration authorities. base_config.c supplies finite immutable
+values and original 16 MiB reservation, not another argument parser. Its current
+source retains capacity/keyword checks. Restoring the installation registry would
+not remove a duplicate implementation; it would replace the admitted package
+configuration boundary with an unrelated host installation dependency.
+
+[T416 recovery](m0-t416-s2-wow-command-carrier-restoration.md) already removed
+the unpopulated WOW fallback and retained the original missing--a failure path.
+Its lifecycle fixture records DOS/WOW construction, spaces, session ID and
+rejection. Inspection confirms those assertions still exist at lines515-548 of
+tests/broker/original_server_lifecycle.c. That historical fixture explicitly
+references O:/winnt and was not rerun or presented as fresh runtime evidence.
+S43's unchanged Full and real WOW startup cover the current normal path only.
+No claim is made for arbitrary registry templates, allocation failures or all
+worker publication/rollback contracts; the latter retain their separate rows.
+
+This evidence-only checkpoint leaves13 startup rows and1046 active inventory
+identities pending. No product change, rebuild, publication or new tolerance is
+needed for this row. S45 and the full T478 objective remain open.
