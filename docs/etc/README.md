@@ -1209,3 +1209,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 
 - [T479 S5 cmdexec reuse correction](operations/m0-t479-s5-cmdexec-reuse-audit.md): original command-family ownership and consolidation boundary.
 - [T479 S5 shared COMSPEC checkpoint](evidence/m0-t479-s5-comspec-checkpoint.md): corrected interpreter selection, shared preparation and actual nested output.
+
+- [T479 S5 shared text preparation](evidence/m0-t479-s5-text-preparation.md): original conversion reuse, frame-only startup routing and retained controls.

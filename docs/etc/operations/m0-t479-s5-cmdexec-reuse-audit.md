@@ -257,3 +257,102 @@ publication at both configured destinations. The external DOS4GW fixture is
 explicitly skipped, not passed. Package2915fea5-c2ec-4242-8f6a-fbe152c8c4f2.
 See the [checkpoint evidence](../evidence/m0-t479-s5-comspec-checkpoint.md).
 S5 remains active for the shared execution/request and reentry audit.
+
+## Shared execution text preparation198
+
+The next bounded extraction moves OEM command conversion and the call to
+original cmdXformEnvironment into ntvdm_command_prepare_text in the existing
+command implementation. Ordinary cmdCreateProcess and VM launch preparation
+both call it. It does not create, wait, select a worker, change guest state or
+own a scheduler. NULL environment retains the original inherited-environment
+case. Conversion errors retain RTL's DOS status; environment failure remains
+ERROR_NOT_ENOUGH_MEMORY. Failed preparation clears both owned string outputs.
+
+Original cmdCreateProcess no longer modifies its captured OEM command in place.
+It passes an owned ANSI copy to the same CreateProcess binding; service/tail
+identity still comes from the existing snapshot. The copy remains valid until
+child completion and is freed alongside Env_A. Source inspection of original
+cmdenv.c confirms failure paths destroy their private environment, while the
+returned ANSI block is caller-owned. No environment algorithm is replaced.
+
+MVDM-HOST-DIV-196 extends to this shared helper. Local cmdexec delta relative
+to P3 is31 additions/70 deletions; both duplicate CreateProcess branches merge
+without changing arguments or the surrounding standard-handle, count,
+resume/wait/exit sequence. New command_text.h declares only this internal
+preparation boundary. VM directory conversion and strict captured-block
+validation remain VM admission responsibilities.
+
+Cached batch198 builds the real worker and passes the guest-launch composition
+unit with real RTL conversion, unchanged-source checks, NULL-environment
+inheritance and failed-transform cleanup. Existing original cmdexec compiler
+warnings also appear in batch183; they are not newly attributed failures.
+Real two-VM witness199 is running. This is not yet a new publication or S5
+closure. The original queue/reentry route still requires the explicit-VM audit.
+
+Run199 fails the stronger output assertion: A contains MEM results but B only
+contains its command and subsequent prompt. Callback/continuation state and
+normal Windows exit pass, which is insufficient. The dependent release201
+runner stops before fullbuild200 or publication. The P3 package remains deployed.
+
+Control202 compiles cmdexec.c and mvdm_command_launch.c byte-for-byte from P3
+5b7019e6a into explicit diagnostic-link objects without reverting the worktree.
+Its first staging attempt fails because the control directory lacks VDMREDIR;
+this is not a product execution result. After adding the unchanged library,
+control203 executes the same real two-VM probe and fails MEM output in A.
+Thus the symptom is not exclusive to the preparation extraction. This does not
+prove the extraction harmless in every path or identify the output-loss cause.
+No acceptance is granted by a successful rerun. Diagnostic204 records candidate
+text at the actual commit boundary to distinguish missing child publication
+from a later parent overwrite. It is isolated and not a publication input.
+
+## Source-proven missing stream capability and startup correction
+
+Trace205 reproduces B's missing output while recording every committed text
+candidate: no B candidate ever contains MEM output. A normal candidate does.
+This excludes a later committed-parent-frame overwrite for that observation.
+Diagnostic206 shows B's host CMD receives MEMRC=0 despite absent output;
+A's extended diagnostic input is corrupted, so that input extension is not
+an accepted keyboard contract and is not retained as a production test.
+
+Trace207's wrapper fails to compile because it named a nonexistent header;
+208 corrects only the test declaration includes and executes. It reproduces B
+failure and records worker33668, CONSOLE_IO_WRITE(operation1), ERROR_NOT_SUPPORTED
+(50), twice. VM text still has no MEM-bearing candidate. Original
+nt_graph.c::host_stream_io_update calls WriteConsoleA but ignores its return;
+base/video/gfx_updt.c clears the dirty stream count after that call. The VM
+frontend advertises CONSOLE_WINDOW_TEXT_FRAME_REQUIRED but implements cells
+and frames, not native Console stream parsing. Original nt_reset.c enables
+stream I/O at startup; the existing route adapter consults the frontend only
+at a later software tick. Short tasks can write and finish in that gap.
+This is a host capability-selection defect, not a guest defect or a missing
+final render acknowledgement.
+
+The correction belongs to mvdm_standalone_worker.c::begin_character_io. After
+successful authenticated frontend setup, query the existing frame requirement
+before original startup can enable stream I/O. When required, set the original
+StreamIoSwitchOn switch false (the same switch consumed by original startup
+and DOS reentry). Do not independently re-enable an option disabled by another
+owner. Query failure follows existing startup cleanup. Native Console-mode
+frontends retain their original stream optimization. No new renderer,
+command-name test, worker-base policy, transport or guest modification is used.
+The standalone adapter executes before the original runtime starts and after
+session binding; the query does not invoke the readiness-deferring tick helper.
+The added source seam is autonomous, with no new mirror edit for this fix.
+
+Trace209 and a separate run210 without the extra I/O/text recording are the
+required positive controls. Fullbuild211/release212 are sequenced after them;
+failure prevents subsequent gates/publication. The P3 release remains deployed
+until the new complete package passes. S5 remains active.
+
+Run209 passes both actual MEM outputs and320 callback-state checks; its I/O
+record contains no rejected stream-write operation. Run210 removes the extra
+text/I/O wrappers and also passes both outputs and320 checks, normal Windows
+exit and immutable-installation hashes. These are positive witnesses against
+the retained199/203/205/208 failures, not exhaustive full-I/O acceptance.
+[Hash evidence](../evidence/m0-t479-s5-text-preparation.json) records the inputs.
+The sequential release212 runner remains live, first completing cached full
+build211 and then the complete product gates. No new package is published yet.
+
+Build211 and all16 selected Full212 gates pass. The verified normal ten-image
+package6c79f45b-88bd-4359-a9c8-15e3a753457e is published at both targets.
+[P4 delivery](../evidence/m0-t479-s5-text-preparation.md) retains the limits.

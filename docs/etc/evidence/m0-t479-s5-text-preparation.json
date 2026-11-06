@@ -1,0 +1,274 @@
+{
+  "baseline": "5b7019e6a",
+  "role": "T479 S5 shared text preparation and frame-only startup routing",
+  "results": {
+    "shared198": "42 real RTL composition assertions pass",
+    "nested199": "fail: B MEM output missing",
+    "control203": "P3 command sources: A MEM output missing",
+    "trace205": "B never commits a MEM-bearing candidate",
+    "trace208": "B worker33668 stream writes rejected with error50",
+    "fixed209": "both MEM outputs and 320 callback checks pass; no operation1 error",
+    "release212": "PASS all 16 selected Full gates; DOS4GW/Nesticle explicitly skipped",
+    "nested210": "both MEM outputs and 320 callback checks pass without extra I/O/text trace wrappers"
+  },
+  "artifacts": [
+    {
+      "path": "build\\t479-s5-command\\shared198.stdout",
+      "bytes": 6778,
+      "sha256": "FD50100268E46B0E77792AE6D9403ED466269398913976577F2995089363402D"
+    },
+    {
+      "path": "build\\t479-s5-command\\shared198.stderr",
+      "bytes": 11,
+      "sha256": "9FB0B803D46B2EDD81E77AAA615D5721C961271CDD410F5BDA368F36F57B57EB"
+    },
+    {
+      "path": "build\\t479-s5-command\\shared198.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested199.stdout",
+      "bytes": 65317,
+      "sha256": "1AA8A11B9DB68B7C121C08CEF6CE33DB9EDEA9779B566E67106E65EF7956931D"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested199.stderr",
+      "bytes": 51,
+      "sha256": "15B25EA980E560A95BCE61DA0276BF0633792D42C3EC84FB7BA9F848DA66BCB8"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested199.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested203.stdout",
+      "bytes": 533,
+      "sha256": "4B53A7707F856C7FA4095F175597C8A3D8F0026937208CE9AD213445ECFD61B5"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested203.stderr",
+      "bytes": 51,
+      "sha256": "DEE43AFA5C233BB6EC2552480DD9CD313290E9DC247D297DA193EBEB1FA109EA"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested203.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested205.stdout",
+      "bytes": 533,
+      "sha256": "4B53A7707F856C7FA4095F175597C8A3D8F0026937208CE9AD213445ECFD61B5"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested205.stderr",
+      "bytes": 51,
+      "sha256": "15B25EA980E560A95BCE61DA0276BF0633792D42C3EC84FB7BA9F848DA66BCB8"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested205.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested205\\continuation-trace.txt.text",
+      "bytes": 26576,
+      "sha256": "CF2DE19ECB2A8108E44EF09A9A92A513EEFC472E69BA4624B490FD8CB10992FB"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested208.stdout",
+      "bytes": 842,
+      "sha256": "93732BA7F02ADB6CB18084CE47F1C16DCCB3353E09115E9733C90986407E18F9"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested208.stderr",
+      "bytes": 51,
+      "sha256": "15B25EA980E560A95BCE61DA0276BF0633792D42C3EC84FB7BA9F848DA66BCB8"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested208.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested208\\continuation-trace.txt.io",
+      "bytes": 997,
+      "sha256": "FCA535B815F031B6AFDA8BBB0D332651C59B48A0025FEE23E90E148BF7B93512"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested208\\continuation-trace.txt.text",
+      "bytes": 26576,
+      "sha256": "D9F4483CFDECB8991519BEB35E1EAFBD41E514DAEF05E1B9A89B16390EBC0FB7"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested209.stdout",
+      "bytes": 3537,
+      "sha256": "0359F4135DF1CA5CE47DFAED82579B00DCD1081DA2C2AF42B46B86D95E4F1CED"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested209.stderr",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested209.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested209\\continuation-trace.txt.io",
+      "bytes": 948,
+      "sha256": "F44F441DF717E7A5AFAC11DE08C35D9656599CECA5A063CC31453CB38FE2352E"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested209\\runtime\\vm-pair.json",
+      "bytes": 1153,
+      "sha256": "E8E5D6241EFB59CAAF0E20232F010C6041D7FAD5744BE09D3F7C061244FDD139"
+    },
+    {
+      "path": "build\\t479-s5-command\\fullbuild211.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\release212.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\r212-verification\\full\\timings.json",
+      "bytes": 2101,
+      "sha256": "C1CFB36554A0BB2DC48BE4C22C1D6C991675FDA5D3B193B17EF8B74D40DF2632"
+    },
+    {
+      "path": "build\\t479-s5-command\\r212-publication.json",
+      "bytes": 3996,
+      "sha256": "77C72A9877FAC0B782C25E37DDB5C0F9D3DD9254CD58B1B46B5031FC74B4F40F"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "3D1D9DFEC7C52743B499E9564811431C667F0C2726B3B3D648E415CE3B4B31E6"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_launch.c",
+      "sha256": "46B9433D6E734A1B469681BACBCD694975C1EFE80BF99720DA320314A48133B6"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "sha256": "985DAFDEE300D0A4046AE980EB2C05C8BB742170480F2A93F11131A6123F9727"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_guest_launch.c",
+      "sha256": "0C73AD6BD76959D8B0E92F674857B1E22CDDF387A2C0C658644E7FEB8531537E"
+    },
+    {
+      "path": "src/ntvdm-exe/command/include/command_text.h",
+      "sha256": "7A2A655D01033581375BE241E287F3B6C0CB27548D4F5448E96FD0C78FE4DE63"
+    }
+  ],
+  "limitations": [
+    "physical keyboard and full I/O remain unaccepted",
+    "CF=1 same-guest reentry remains open",
+    "unrelated Queue/proposal edits preserved"
+  ],
+  "publication": {
+    "part": "r212",
+    "package": "O:\\repos.hobby\\ntvdm64\\build\\t479-s5-command\\r212-package",
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64\\assets\\release",
+      "O:\\winnt\\system32"
+    ],
+    "hashes": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "B80E1ED901ADE2B7FEBD9479ABF3922642F2987B6B045DF869AC266EB7CED9A9",
+        "Machine": 34404,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "52E8F59FCB7840D91186A3F3FB88DDE24EEC3DF477B43443D6BDD841EF0FAE08"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "64201B643C81EF924C7EDBE4009B02FF6A02FBF9BD9E560511E4B05F63861B34",
+        "Machine": 34404,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "6F6CA5F1D72AAA422497E4890F727B3F7A35CB911364E02484A0A47B17CDDEA6"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "5994492CEFBB43D70964D2DBD8604355B51E9AAFEB36967F0FA1730CE7F41620",
+        "Machine": 34404,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "8C7EE034EDD4B053AE3B399F8A05BDA8F74F67E533B573AEACFB79E629589804"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "A24D4EDAF19E6505E5B119850DEC5796569E537784901205193ECC22F5DCF761",
+        "Machine": 332,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "7CD98586B7C41F04E94DD6DD8DDE942F6DDD8348A3D9E2B07F9007D548D6C1BB"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "0C23C22B369CDF1ED3E02A19094356F03882B953ED6575C9C0A13BCB369D5D9A",
+        "Machine": 34404,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "EAADA6A4837BB62995497D55E383E21B2CCA1BC788CD15DD3E63AAA27F4E3CFA"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "D7AAC789E80733DE4C632F2B4F17204642B293322685A8333F80EF10917FF408",
+        "Machine": 34404,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "21D9EF026578E3106698F5D56C03AF1B740FCD0F4539A54473A1A90A913DBF2C",
+        "Machine": 332,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "A2A4508663869E1B831BA12A36DFF0B4A11F84F6821071083E4FCB433956E591",
+        "Machine": 332,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "72A9DC45C39410A987248F0678B4C643442E0553E18553E9BCB79A0F28AFFD5D",
+        "Machine": 332,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "3827D2A253B1D9F4719E754A7D8A64E953D6919D18B3F64DBB4B0608842C8E63"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "47887564454A60ED4B516A27871E206C3D38A1206CB9A9C7036A5FAB05A5F350",
+        "Machine": 34404,
+        "PackageId": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      },
+      {
+        "Name": "nthook32-LICENSE.txt",
+        "Sha256": "F968C2D86BA2A2F483E47431C7CD8D78878B239A47B34CBB792AC7FE5FCD04BE"
+      }
+    ],
+    "backup": "O:\\repos.hobby\\ntvdm64\\build\\t479-s5-command\\r212-publication-backup",
+    "verifiedUtc": "2026-11-06T18:05:57.4487165Z"
+  }
+}

@@ -13,8 +13,7 @@ Fonts, complete I/O and returned keys remain unaccepted S6 work.
 Five focused host suites and Full16/16 selected product gates pass.
 Cached complete x86/x64 builds and shared tests pass. Generation-reuse rejection
 was reproduced and fixed; subsequent real reuse evidence is recorded below.
-Chain158 and real Win3.1 continuation159 pass. The chained gate runner lost
-USERPROFILE; fresh-process release160 passes focused/Full selected gates.
+Earlier chain proofs and runner recovery are indexed below.
 Run161 passes real native-command execution followed by forced VM retirement,
 stale-wake rejection and normal Win3.1 exit on the production worker.
 Runs163--167 pass actual VM reuse, native child retirement and both exit orders.
@@ -22,7 +21,8 @@ Forced retirement overlap has host-unit proof; full I/O remains S6 work.
 Final reentry audit: CF=1 has transport tests but no production producer.
 Runs180/182 exposed a DOS-incompatible fixture PATH. Run192 passes actual
 MEM output in both VMs after host COMSPEC and fixture-path correction.
-Shared preparation passes107 capture/65 launch checks; build193 and Full194 pass.
+P4 text preparation and startup routing are published; build211/Full212 pass.
+[P4 evidence](../etc/evidence/m0-t479-s5-text-preparation.md); S5 remains active.
 [COMSPEC checkpoint](../etc/evidence/m0-t479-s5-comspec-checkpoint.md) is published; S5 remains active.
 [S5 P1 host checkpoint](../etc/evidence/m0-t479-s5-p1-host-checkpoint.md) is
 published at both destinations and pushed as369cbf712. The tested Win3.1

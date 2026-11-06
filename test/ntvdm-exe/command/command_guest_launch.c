@@ -1,5 +1,6 @@
 #include "compat/include/nt.h"
 #include "ntvdm-exe/command/include/command_launch.h"
+#include "ntvdm-exe/command/include/command_text.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,8 +58,21 @@ int main(void)
     ntvdm_command_launch *result = NULL;
     char command[] = "echo \x82", directory[] = "C:\\\x82";
     unsigned before;
+    ANSI_STRING prepared_command = {0}, prepared_environment = {0};
     CHECK(OemToCharA(command,expected_command));
     CHECK(OemToCharA(directory,expected_directory));
+    before=transforms;
+    CHECK(!ntvdm_command_prepare_text(command,NULL,&prepared_command,&prepared_environment));
+    CHECK(!strcmp(prepared_command.Buffer,expected_command));
+    CHECK(!prepared_environment.Buffer && transforms==before);
+    CHECK(!strcmp(command,"echo \x82"));
+    RtlFreeAnsiString(&prepared_command);
+    fail_transform=TRUE;
+    CHECK(ntvdm_command_prepare_text(command,"A=1\0",&prepared_command,
+        &prepared_environment)==ERROR_NOT_ENOUGH_MEMORY);
+    CHECK(!prepared_command.Buffer && !prepared_environment.Buffer);
+    CHECK(!prepared_command.Length && !prepared_environment.Length);
+    fail_transform=FALSE;
     view.command=command;view.directory=directory;view.environment="A=1\0";
     view.environment_bytes=5;view.service=MVDM_COMMAND_SERVICE_EXECUTE;
     view.standard_handles[0]=UINT32_MAX;

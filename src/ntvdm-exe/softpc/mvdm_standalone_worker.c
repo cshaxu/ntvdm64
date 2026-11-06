@@ -3,6 +3,7 @@
 
 #include "ntvdm-exe/package_layout.h"
 #include "common/base_srv/base_rpc_client.h"
+#include "common/protocol/console_io.h"
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
@@ -21,6 +22,8 @@
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;
+/* Original nt_reset.c switch, also respected by subsequent DOS reentry. */
+extern BOOL StreamIoSwitchOn;
 
 static session worker_session;
 static ntvdm_dos_observer worker_observer;
@@ -56,8 +59,20 @@ DWORD mvdm_standalone_worker_close_frontends(void)
 }
 static DWORD begin_character_io(void *owner,HANDLE stop)
 {
+    LONG presentation[4]={0};
+    DWORD error;
+    int available;
     (void)stop;
-    return ntvdm_console_client_begin(owner);
+    error=ntvdm_console_client_begin(owner);
+    if(error)return error;
+    /* Resolve the authenticated frontend requirement before original startup
+     * can enable stream I/O. A short DOS task can finish before the first
+     * video tick; deferring this choice loses writes on frame-only frontends.
+     * Use the original optimization switch, not a second renderer or policy. */
+    available=ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,presentation);
+    if(available<=0)return available<0 ? ERROR_INVALID_STATE : GetLastError();
+    if(presentation[0])StreamIoSwitchOn=FALSE;
+    return ERROR_SUCCESS;
 }
 static BOOL worker_shadow_registry;
 static BOOL worker_ccpu_wait;

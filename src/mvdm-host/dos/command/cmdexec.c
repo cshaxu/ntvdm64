@@ -27,6 +27,7 @@
  * the worker starts; the original COMMAND worker remains the owner of every
  * conversion, process, wait, exit-code and re-entry decision. */
 #include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "ntvdm-exe/command/include/command_text.h"
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to
@@ -401,10 +402,7 @@ VOID cmdCreateProcess ( VOID )
     BOOL  Status;
     BOOL  StdHandlesValid = TRUE;
 #line 318
-    NTSTATUS NtStatus;
-    UNICODE_STRING Unicode;
-    OEM_STRING	   OemString;
-    LPVOID lpNewEnv=NULL;
+    ANSI_STRING Command_A = {0};
     PSTD_HANDLES pStdHandles;
     ULONG SnapshotStdHandles[3];
 #line 323
@@ -458,69 +456,31 @@ VOID cmdCreateProcess ( VOID )
      *  16-Jan-1993 Jonle
      */
 
-    Env_A.Buffer = NULL;
+    RtlZeroMemory(&Env_A, sizeof(Env_A));
 
-    if (!StdHandlesValid) {
-        SetLastError(ERROR_INVALID_HANDLE);
-#line 371
+    /* DIVERGENCE(MVDM-HOST-DIV-196): share the original command/environment
+     * preparation with saved-VM requests. Only owned text changes here;
+     * original standard-handle, create, resume, wait and reentry order stays. */
+    dwRet = StdHandlesValid ?
+        ntvdm_command_prepare_text(pCommand32, pEnv32, &Command_A, &Env_A) :
+        ERROR_INVALID_HANDLE;
+    if (dwRet != ERROR_SUCCESS) {
+        SetLastError(dwRet);
         Status = FALSE;
     }
     else {
-#line 363
-        RtlInitString((PSTRING)&OemString, pCommand32);
-        NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
-        if (NT_SUCCESS(NtStatus)) {
-            NtStatus = RtlUnicodeStringToAnsiString((PANSI_STRING)&OemString,
-                &Unicode, FALSE);
-#line 367
-            RtlFreeUnicodeString( &Unicode );
-	}
-        if (!NT_SUCCESS(NtStatus)) {
-            SetLastError(RtlNtStatusToDosError(NtStatus));
-#line 371
-	    Status = FALSE;
-	}
-	else if (pEnv32 != NULL) {
-
-#line 374
-            if (!cmdXformEnvironment(pEnv32, &Env_A)) {
-                SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-                Status = FALSE;
-            }
-            else {
-
-
 #line 380
-                Status = CreateProcess (
-                                NULL,
-                                (LPTSTR)pCommand32,
-                                NULL,
-                                NULL,
-                                TRUE,
-                                CREATE_SUSPENDED | CREATE_DEFAULT_ERROR_MODE,
-                               Env_A.Buffer,
-                                (LPTSTR)CurDir,
-                                &StartupInfo,
-                               &ProcessInformation);
-            }
-#line 377
-	}
-	else {
-
-
-#line 380
-	    Status = CreateProcess (
+        Status = CreateProcess (
                             NULL,
-                           (LPTSTR)pCommand32,
-                           NULL,
-                           NULL,
-                           TRUE,
-                           CREATE_SUSPENDED | CREATE_DEFAULT_ERROR_MODE,
-			   Env_A.Buffer,
-                           (LPTSTR)CurDir,
-                           &StartupInfo,
-			   &ProcessInformation);
-	}
+                            Command_A.Buffer,
+                            NULL,
+                            NULL,
+                            TRUE,
+                            CREATE_SUSPENDED | CREATE_DEFAULT_ERROR_MODE,
+                            Env_A.Buffer,
+                            (LPTSTR)CurDir,
+                            &StartupInfo,
+                            &ProcessInformation);
     }
 
     if (Status == FALSE)
@@ -553,6 +513,7 @@ VOID cmdCreateProcess ( VOID )
         CloseHandle (ProcessInformation.hThread);
     }
 
+    RtlFreeAnsiString(&Command_A);
     if (Env_A.Buffer)
 	RtlFreeAnsiString(&Env_A);
 
