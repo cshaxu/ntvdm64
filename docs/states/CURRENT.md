@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S33 is closed with [DPMI buffer/state evidence](../etc/evidence/m0-t478-s33-dpmi-buffer-state.md).
-Next planned S34: finding 21 BIOS integrations. Continuous authorization remains.
+T478 S34 is closed with [BIOS/EMS and slave EOI evidence](../etc/evidence/m0-t478-s34-bios-integration.md).
+Next planned S35: finding 27 BIOS RTC. Continuous authorization remains.
 Temporary CURRENT size exception: accumulated closures retained through T478 final reconciliation.
 
 ## S1 Closure Record
@@ -152,13 +152,13 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-This worktree contains main cd8c8583e, the rebased S2 generic-call/EBX repair,
-S3 ForceDOS integration, S4 original public server enumeration and S7 XMS boundary
-correction. Task-number overlap remains owner-approved. Application 0.0.478 /
-protocol 67, package 25974683-9d30-4f02-a62c-32e8ca3df424, passes all 16 selected
-Full gates; its ten hashes and manifest match worktree assets/release.
-See [S7 evidence](../etc/evidence/m0-t478-s7-xms-boundaries.md). DOS4GW/NESticle
-remain excluded. O:/winnt and original guest inputs remain unchanged.
+This worktree contains main cd8c8583e and the sequential T478 deliveries through
+S34. Application 0.0.478 / protocol 67, package
+03d9792b-753e-4407-8a52-883ad9bc83e3, passes all 16 selected Full gates;
+its ten hashes and manifest match worktree assets/release. See
+[S34 evidence](../etc/evidence/m0-t478-s34-bios-integration.md).
+DOS4GW/NESticle remain excluded. O:/winnt and original guest inputs remain
+unchanged. S35 onward and the final inventory reconciliation are still pending.
 
 ## Temporary Evidence
 
@@ -321,3 +321,7 @@ T478 S32 [reconciles original exports and host consumers](../etc/evidence/m0-t47
 ## S33 Closure Record
 
 T478 S33 [verifies existing DPMI buffer/state wiring](../etc/evidence/m0-t478-s33-dpmi-buffer-state.md): 133 controlled checks, 45 lease boundaries plus session test, four real INT21 cases and eleven current image bindings pass. Original caller-precondition/exhaustion limits retained; no product change. Exact S32 package remains published.
+
+## S34 Closure Record
+
+T478 S34 [repairs original slave EOI port selection](../etc/evidence/m0-t478-s34-bios-integration.md): 74 PIC checks, actual guest vectors, BIOS/EMS and related IRQ controls, 52 image bodies/286 vector entries, and Full 16/16 pass. Exact package 03d9792b-753e-4407-8a52-883ad9bc83e3 published only to worktree assets/release; no added tolerance or guest change.

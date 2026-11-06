@@ -1281,3 +1281,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S32 export reconciliation](evidence/m0-t478-s32-export-disposition.md): exact original template, preserved export ABI, real task-lifecycle checks and final Full/worktree release.
 
 - [T478 S33 DPMI buffer/state](evidence/m0-t478-s33-dpmi-buffer-state.md): original ownership, current lease tests, four real INT21 cases and retained static-pool limits.
+
+- [T478 S34 BIOS investigation](evidence/m0-t478-s34-bios-integration.md): minimal original D11 EOI repair, current BIOS/EMS and IRQ evidence, Full and worktree release.

@@ -6,11 +6,11 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
  [string]$Nasm='nasm.exe',
  [switch]$NegativeOracle,
- [ValidateSet('SignFlags','Control','BitMemory','BiosDispatch','DummyInt','SystemDevices','DiskReset','VideoInvalid')][string]$Workload='SignFlags')
+ [ValidateSet('SignFlags','Control','BitMemory','BiosDispatch','DummyInt','SystemDevices','DiskReset','VideoInvalid','SlaveBios')][string]$Workload='SignFlags')
 # Independent COM exercises selected CPU40 sign-extension and flag instructions; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
 $ErrorActionPreference='Stop'
-if($Workload -eq 'BitMemory' -and $NegativeOracle){throw 'BitMemory uses its direct hardware expectation; NegativeOracle is not supported'}
+if($Workload -in @('BitMemory','SlaveBios') -and $NegativeOracle){throw 'BitMemory uses its direct hardware expectation; NegativeOracle is not supported'}
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
@@ -31,7 +31,7 @@ try{
  if($label -ne 'S-1-16-8192'){throw "Expected desktop-capable medium token, got $label"}
  @{parent_pid=$PID;host_path=(Get-Process -Id $PID).Path;integrity_sid=$label;token_class='medium';script_sha256=(Get-FileHash $PSCommandPath).Hash;private_desktop=$true}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm';BiosDispatch='bios_dispatch_probe.asm';DummyInt='bios_dispatch_probe.asm';SystemDevices='system_capability.asm';DiskReset='disks_capability.asm';VideoInvalid='bios_dispatch_probe.asm'}[$Workload])
+ $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm';BiosDispatch='bios_dispatch_probe.asm';DummyInt='bios_dispatch_probe.asm';SystemDevices='system_capability.asm';DiskReset='disks_capability.asm';VideoInvalid='bios_dispatch_probe.asm';SlaveBios='slave_bios_vector_probe.asm'}[$Workload])
  $line='-f bin "'+$probe+'" -o "'+$root+'/EMSPROBE.COM"'
  if($NegativeOracle){$line+=' -DCPU_PROBE_NEGATIVE_ORACLE=1'}
  if($Workload -eq 'DummyInt'){$line+=' -DCPU_PROBE_DUMMY_INT_ONLY=1'}
@@ -104,6 +104,8 @@ try{
   }
  }elseif($Workload -eq 'BitMemory'){
   if($report -notmatch 'exit=0x00000000' -or $console -notmatch 'BITMEM POSITIVE PASS' -or $console -notmatch 'BITMEM NEGATIVE PASS'){throw 'CPU40 word-memory bit-index expectation differs; inspect captured positions/carry'}
+ }elseif($Workload -eq 'SlaveBios'){
+  if($report -notmatch 'exit=0x00000000' -or $console -notmatch 'SLAVE BIOS ORIGINAL VECTOR BOP IRET PASS 5'){throw 'Original BIOS vector/BOP return failed'}
  }elseif($Workload -eq 'Control'){
   if($NegativeOracle){
    if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'CCPU CONTROL FAIL phase=A' -or $console -match 'CCPU CONTROL PASS'){throw 'Deliberately wrong control oracle was not rejected'}

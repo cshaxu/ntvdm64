@@ -4,7 +4,8 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
- [string]$Nasm='nasm.exe')
+ [string]$Nasm='nasm.exe',
+ [ValidateSet('Mapping','CallReturn')][string]$Case='Mapping')
 # Independent COM exercises original INT67 services; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
 $ErrorActionPreference='Stop'
@@ -23,13 +24,15 @@ function OwnedTool($name,$image,$line,$seconds){
  }finally{$p.Dispose()}
 }
 try{
+ $probeSource=if($Case -eq 'CallReturn'){"$PSScriptRoot/ems_call_return_probe.asm"}else{"$PSScriptRoot/ems_mapping_probe.asm"}
+ $expectedMarker=if($Case -eq 'CallReturn'){'T430_EMS_CALL_RETURN_STACK_MAP_OK'}else{'EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS'}
  $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $line='-f bin "'+$PSScriptRoot+'/ems_mapping_probe.asm" -o "'+$root+'/EMSPROBE.COM"'
+ $line='-f bin "'+$probeSource+'" -o "'+$root+'/EMSPROBE.COM"'
  $p=Start-Process $assembler -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/assemble.stdout.txt" -RedirectStandardError "$root/assemble.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$assembler;command=$line;timeoutSeconds=30}|ConvertTo-Json|Set-Content "$root/assemble.process.json"
  if(!$p.WaitForExit(30000)){taskkill.exe /PID $p.Id /T /F;throw 'Owned assembler deadline'}
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/assemble.exit.txt";if($code){throw 'Independent COM assembly failed'}
- Get-FileHash $PSCommandPath,"$PSScriptRoot/ems_mapping_probe.asm","$root/EMSPROBE.COM",$Observer,$LogonHelper,$assembler|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash $PSCommandPath,$probeSource,"$root/EMSPROBE.COM",$Observer,$LogonHelper,$assembler|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $stage=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path;$scope=New-IsolatedPackageScope $stage
  $tests=Join-Path $stage tests;$null=New-Item -ItemType Directory $tests -Force
  # Reuse the existing test PIF producer: original no-PIF defaults deliberately
@@ -59,9 +62,9 @@ try{
  $observerProcess.WaitForExit();$observerProcess.ExitCode|Set-Content "$root/observer.exit.txt"
  $report=Get-Content "$root/observer.txt" -Raw
  $console=Get-Content "$root/observer.txt.console.txt" -Raw
- if($observerProcess.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000' -or $console -notmatch 'EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS'){throw 'Original EMS workload did not complete; absent EMS is not a pass'}
+ if($observerProcess.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000' -or $console -notmatch [regex]::Escape($expectedMarker)){throw 'Original EMS workload did not complete; absent EMS is not a pass'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Probe inputs changed'}}
- 'PASS independent COM -> original INT67 map/switch/alias/unmap/move/exchange/window/free; normal launcher exit; no original guest or profile edit'|Set-Content "$root/result.txt"
+ "PASS independent COM -> original INT67 $Case; marker=$expectedMarker; normal launcher exit; no original guest or profile edit"|Set-Content "$root/result.txt"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}
 finally{

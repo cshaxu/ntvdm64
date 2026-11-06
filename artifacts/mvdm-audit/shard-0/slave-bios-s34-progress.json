@@ -1,0 +1,56 @@
+{
+  "status": "focused-pass-delivery-pending",
+  "baseline": {
+    "exit": 1,
+    "identities": {
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\slave_bios_eoi_test.c": "82BBD1D17499BB5895565ED711D3FA57FE984391F4149DD8B5660B48F70D5D98",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c": "E737A62549A1C7C3A990B4DE840B791506C8FDF4A245179EFE9CB6304F5EF520",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c": "6B7473B479944EC6ABDA115FCD306B2B0C3C839F728D20E3039A88E7C4917E61",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s34\\slave-before2\\fixture.exe": "9EC45634D321A1AE0828F9BB3393F7CB4320F90E5D65E5CAB7A265766456E6C6",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s34\\slave-before2\\fixture.exe.map": "42E54BD21A0A602D29655F36E07E10446DB5F1912E303351B9AD212D205C4B1F",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib": "54FB8F62BCD86F24C5B06045EBC0612C935ED110853C79F3EA6A16A3122C4924",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-system.lib": "7695DDFF95D3E7ECB7BE7A0A4121F82F73F81B50939FA1F4C195CB2CF830A967"
+    }
+  },
+  "baseline_output": "D11 irq=10 round=0 master=00 slave=04 mask=20 callbacks=0\nFAIL line=73: VirtualIca[0].ica_isr==0 && VirtualIca[1].ica_isr==0\nFAIL line=74: VirtualIca[1].ica_imr==0xff && VirtualIca[0].ica_imr==0xfb\nFAIL line=75: eois[8+line]==before+1\nD11 irq=11 round=0 master=00 slave=08 mask=20 callbacks=0\nFAIL line=73: VirtualIca[0].ica_isr==0 && VirtualIca[1].ica_isr==0\nFAIL line=74: VirtualIca[1].ica_imr==0xff && VirtualIca[0].ica_imr==0xfb\nFAIL line=75: eois[8+line]==before+1\nD11 irq=12 round=0 master=00 slave=10 mask=20 callbacks=0\nFAIL line=73: VirtualIca[0].ica_isr==0 && VirtualIca[1].ica_isr==0\nFAIL line=74: VirtualIca[1].ica_imr==0xff && VirtualIca[0].ica_imr==0xfb\nFAIL line=75: eois[8+line]==before+1\nD11 irq=14 round=0 master=00 slave=40 mask=20 callbacks=0\nFAIL line=73: VirtualIca[0].ica_isr==0 && VirtualIca[1].ica_isr==0\nFAIL line=74: VirtualIca[1].ica_imr==0xff && VirtualIca[0].ica_imr==0xfb\nFAIL line=75: eois[8+line]==before+1\nD11 irq=15 round=0 master=00 slave=80 mask=20 callbacks=0\nFAIL line=73: VirtualIca[0].ica_isr==0 && VirtualIca[1].ica_isr==0\nFAIL line=74: VirtualIca[1].ica_imr==0xff && VirtualIca[0].ica_imr==0xfb\nFAIL line=75: eois[8+line]==before+1\nSLAVE_BIOS_EOI checks=44 failures=15\n",
+  "candidate": {
+    "exit": 0,
+    "identities": {
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\slave_bios_eoi_test.c": "82BBD1D17499BB5895565ED711D3FA57FE984391F4149DD8B5660B48F70D5D98",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c": "4CA609045412255D3E2E12D33261778EA8C0FD422615BA36A3A06BC42DFD7792",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c": "6B7473B479944EC6ABDA115FCD306B2B0C3C839F728D20E3039A88E7C4917E61",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s34\\slave-after\\fixture.exe": "74130D8B8A6F98C317A38F7FDD696C4E3FC1D75D9C45B248745EA96FE92192D0",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s34\\slave-after\\fixture.exe.map": "67CF775783CD069659FC13CE68FDAAB91334CF52F4CB96919C362A6F944961F5",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib": "5854C15CE6D80DEECB70F8F150719B7163369680EB908E8FFE8B187225C40B89",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-system.lib": "7695DDFF95D3E7ECB7BE7A0A4121F82F73F81B50939FA1F4C195CB2CF830A967"
+    }
+  },
+  "candidate_output": "D11 irq=10 round=0 master=00 slave=00 mask=ff callbacks=1\nD11 irq=10 round=1 master=00 slave=00 mask=ff callbacks=1\nD11 irq=11 round=0 master=00 slave=00 mask=ff callbacks=1\nD11 irq=11 round=1 master=00 slave=00 mask=ff callbacks=1\nD11 irq=12 round=0 master=00 slave=00 mask=ff callbacks=1\nD11 irq=12 round=1 master=00 slave=00 mask=ff callbacks=1\nD11 irq=14 round=0 master=00 slave=00 mask=ff callbacks=1\nD11 irq=14 round=1 master=00 slave=00 mask=ff callbacks=1\nD11 irq=15 round=0 master=00 slave=00 mask=ff callbacks=1\nD11 irq=15 round=1 master=00 slave=00 mask=ff callbacks=1\nSLAVE_BIOS_EOI checks=74 failures=0\n",
+  "rejected_setup": {
+    "exit": 3221225477,
+    "identities": {
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\slave_bios_eoi_test.c": "D3FC79D07AD7F9C1FF3EE8D76B80040870C1BD6A27BB6D6E0F005C8AA0710E84",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c": "E737A62549A1C7C3A990B4DE840B791506C8FDF4A245179EFE9CB6304F5EF520",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c": "6B7473B479944EC6ABDA115FCD306B2B0C3C839F728D20E3039A88E7C4917E61",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s34\\slave-before\\fixture.exe": "BD72B7D3F94D31E09A90DD42FF6DCB6298C9236BD23EFEE744F2EA972E119FC3",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s34\\slave-before\\fixture.exe.map": "25AB204CF307A796DD4116AB983E0E22C939A4D2E34E5697BD9287DD17AA3956",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib": "54FB8F62BCD86F24C5B06045EBC0612C935ED110853C79F3EA6A16A3122C4924",
+      "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-system.lib": "7695DDFF95D3E7ECB7BE7A0A4121F82F73F81B50939FA1F4C195CB2CF830A967"
+    }
+  },
+  "build_exit": "0",
+  "pids": {
+    "admission": 34620,
+    "rejected_setup": 21268,
+    "baseline": 6636,
+    "coherent_build": 15000,
+    "candidate": 15796
+  },
+  "remaining": [
+    "selected image/vector binding",
+    "real BIOS/EMS and IRQ checks",
+    "Full gates",
+    "worktree assets/release publication",
+    "local commit"
+  ]
+}
