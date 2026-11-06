@@ -34,8 +34,8 @@ media work; this admission is not permission to patch existing installations.
 | --- | --- |
 | S1 (closed research) | Original call chains and candidate guest bridge, with executable proof explicitly deferred. |
 | S2/host-foundation (delivered) | Independent VM registry lifetime without lock-held RPC/joins; cancellable provider dispatch; paired frontend/execution capabilities. Concurrent two-VM and negative lifecycle tests plus product delivery. |
-| S3/host-command-preparation (active) | Per-request command/environment/CWD/standard handles/results without process-global mutation. Preserve ordinary DOS path; parallel host fixtures and redirection rollback. No guest multitasking entry enabled yet. |
-| S4/guest-driver | Project VxD build/load, actual VM identity and inventory, generation/retirement, callback and counted wait/wake through a claimed emulated notification resource. Prove Win3.1 enhanced and Win95 independently. |
+| S3/host-command-preparation (delivered) | Per-request command/environment/CWD/standard handles/results without process-global mutation. Preserve ordinary DOS path; parallel host fixtures and redirection rollback. No guest multitasking entry enabled yet. |
+| S4/guest-driver (active) | Project VxD build/load, actual VM identity and inventory, generation/retirement, callback and counted wait/wake through a claimed emulated notification resource. Prove Win3.1 enhanced and Win95 independently. |
 | S5/multitask-command | Both 54:08/0A asynchronous execution and original continuation/reentry semantics, including complete client state restoration; two-VM completion in both orders. |
 | S6/guest-io | Complete per-VM text/graphics/input/Console contract, final-output serial, cancellation and nested chains; actual guest acceptance. |
 | S7/integration | Complete failure/lifecycle and product regression, coherent cached full build, publication and final T acceptance. |
@@ -116,3 +116,8 @@ New semantic concessions are not authorized by continuous execution.
 S2 host foundation is [delivered](../evidence/m0-t479-s2-host-foundation.md)
 with the complete tested/published package. Automatic continuation admits S3;
 no guest implementation gate has been claimed satisfied by this host delivery.
+
+S3 host preparation is now [delivered](../evidence/m0-t479-s3-command-preparation.md)
+with complete cached builds, focused units, Full 16/16 and coherent publication.
+Automatic continuation admits S4; source registration is not substituted for
+actual guest callback, wait/wake or resource-lifetime acceptance.

@@ -36,4 +36,28 @@ int mvdm_command_native_child_select_command_service(unsigned int mode);
 unsigned int mvdm_command_native_child_command_service(const char **tail_out);
 void mvdm_command_native_child_finish(void);
 void mvdm_command_native_child_abort(void);
+
+typedef struct mvdm_command_native_child_state mvdm_command_capture;
+typedef struct mvdm_command_capture_input {
+    /* NULL selects the guest command, otherwise copy this host command. */
+    const char *host_command;
+    uint16_t command_segment,command_offset;
+    uint16_t environment_segment,environment_offset;
+    uint16_t standard_segment,standard_offset;
+    uint8_t default_drive; /* Original AL, zero based. */
+    unsigned int service;
+} mvdm_command_capture_input;
+typedef struct mvdm_command_capture_view {
+    const char *command,*environment;
+    uint32_t environment_bytes;
+    ULONG standard_handles[3]; /* Original tokens; not owned native handles. */
+    uint8_t default_drive;
+    unsigned int service;
+} mvdm_command_capture_view;
+/* Synchronous current-VM capture using the same bounded leases as ordinary
+ * COMMAND. Does not read/write the session singleton or retain guest mappings.
+ * Views are borrowed until destroy. No CCPU activity may race this capture. */
+int mvdm_command_capture_create(const mvdm_command_capture_input *,mvdm_command_capture **);
+int mvdm_command_capture_read(const mvdm_command_capture *,mvdm_command_capture_view *);
+void mvdm_command_capture_destroy(mvdm_command_capture *);
 #endif

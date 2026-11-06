@@ -18,6 +18,7 @@ typedef struct mvdm_command_native_child_state {
     uint32_t command_service_tail_bytes;
     uint32_t command_bytes;
     uint32_t environment_bytes;
+    uint8_t default_drive;
     ULONG standard_handles[3];
     char command[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
     char command_service_tail[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
@@ -342,4 +343,42 @@ void mvdm_command_native_child_finish(void)
 void mvdm_command_native_child_abort(void)
 {
     mvdm_command_native_child_finish();
+}
+
+int mvdm_command_capture_create(const mvdm_command_capture_input *input,
+    mvdm_command_capture **out)
+{
+    mvdm_guest_location command,environment,standard;
+    mvdm_command_capture *capture;
+    if(out)*out=NULL;
+    if(!input || !out || input->default_drive>=26 ||
+        input->service>MVDM_COMMAND_SERVICE_EXECUTE ||
+        !mvdm_guest_location_set_real_mode(&command,input->command_segment,input->command_offset) ||
+        !mvdm_guest_location_set_real_mode(&environment,input->environment_segment,input->environment_offset) ||
+        !mvdm_guest_location_set_real_mode(&standard,input->standard_segment,input->standard_offset))return 0;
+    capture=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*capture));
+    if(!capture)return 0;
+    if(!capture_locations(capture,input->host_command,&command,&environment,&standard)){
+        mvdm_command_capture_destroy(capture);return 0;
+    }
+    capture->default_drive=input->default_drive;
+    capture->command_service=input->service;
+    *out=capture;return 1;
+}
+
+int mvdm_command_capture_read(const mvdm_command_capture *capture,mvdm_command_capture_view *view)
+{
+    if(view)ZeroMemory(view,sizeof(*view));
+    if(!capture || !view || capture->active!=1 || capture->owner)return 0;
+    view->command=capture->command;view->environment=capture->environment;
+    view->environment_bytes=capture->environment_bytes;
+    memcpy(view->standard_handles,capture->standard_handles,sizeof(view->standard_handles));
+    view->default_drive=capture->default_drive;view->service=capture->command_service;
+    return 1;
+}
+
+void mvdm_command_capture_destroy(mvdm_command_capture *capture)
+{
+    if(!capture)return;
+    SecureZeroMemory(capture,sizeof(*capture));HeapFree(GetProcessHeap(),0,capture);
 }

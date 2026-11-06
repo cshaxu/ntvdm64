@@ -1,0 +1,274 @@
+{
+  "Stage": "M0 T479 S3 host-command-preparation",
+  "SourceBaseline": "267b7a388",
+  "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+  "BuildX86": {
+    "Start": "2026-11-06T02:18:42.9380008Z",
+    "PID": 25324,
+    "Command": "O:\\repos.hobby\\ntvdm64\\build\\t479-s3-command\\build-x86-r2.cmd"
+  },
+  "BuildX86Exit": 0,
+  "BuildX64": {
+    "PID": 24308,
+    "Start": "2026-11-06T02:21:18.1395008Z",
+    "Command": "O:\\repos.hobby\\ntvdm64\\build\\t479-s3-command\\build-x64.cmd"
+  },
+  "BuildX64Exit": 0,
+  "Units": [
+    {
+      "Case": "ntvdm-command-capture-test",
+      "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-capture-test.exe",
+      "SHA256": "73219FA24948FA4A4961EA5C656B14C6A780DC7C11136BF78C1F0298EC6DCDE7",
+      "PID": 18076,
+      "Started": "2026-11-06T02:35:23.4457159Z",
+      "Exit": 0,
+      "TimedOut": false,
+      "Passed": true
+    },
+    {
+      "Case": "ntvdm-command-launch-test",
+      "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-launch-test.exe",
+      "SHA256": "70FCB9529D7D95C86F71DDFA29DFBA077F882621977003B9CFFEF7AF51B2ED34",
+      "PID": 12492,
+      "Started": "2026-11-06T02:35:24.2835865Z",
+      "Exit": 0,
+      "TimedOut": false,
+      "Passed": true
+    }
+  ],
+  "Full": {
+    "Suite": "Full",
+    "ElapsedMs": 382108,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1713,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1898,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 331,
+        "CleanupMs": 548,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68074,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 50377,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 51407,
+        "CleanupMs": 565,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15836,
+        "CleanupMs": 520,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13519,
+        "CleanupMs": 459,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 58396,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12923,
+        "CleanupMs": 577,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29261,
+        "CleanupMs": 564,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30843,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4903,
+        "CleanupMs": 553,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7859,
+        "CleanupMs": 549,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11029,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5888,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8065,
+        "CleanupMs": 571,
+        "Passed": true
+      }
+    ]
+  },
+  "Publication": {
+    "part": "p2",
+    "package": "O:\\repos.hobby\\ntvdm64\\build\\t479-s3-command\\p2-package",
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64\\assets\\release",
+      "O:\\winnt\\system32"
+    ],
+    "hashes": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "CB27B76319FE2B0D64434281DA3CCEE42FC1C70D754B1C0EB50FE8D5267BD697",
+        "Machine": 34404,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "780928AC62649FE1C2D372A7C04E964E2A59D2C396BCC37D3D81135A51FC4FFE"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "A13E0D90C7C7C65C458737CC8C42D268149859B1390BA927556A187D655C84A0",
+        "Machine": 34404,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "9C29AE739B861B9F906F3C3BD3B67DA18431B6B86D767C8B80E4F73505EBB226"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "F06216666FEC657B80E7A1D93B5C44E7618F443E54926D9355210FB06D710757",
+        "Machine": 34404,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "5B4669BA4FDD79BE8D663B9DD8AE5650A45A6AD3CFD830C44E57DB789BCACFE0"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "335FD29A12F6B4284580D8D0E5BC74568BEFE90906706C4CCFE3330208D3F90B",
+        "Machine": 332,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "2D2ED154E4B90582A3D05FF3B68668FEAFADC9F008DE1E9A3E81DBA0D9FDF4AA"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "2E484110923FD575064858CF4FEC46E3C8433D383D6166B173F509C352AFCD81",
+        "Machine": 34404,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "C3385D0727FABC5DA32CC838BF702036E567F66B181BA246015B630A16F615E8"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "568A005A196728591E224862C56EA1F7C6295E3C3E9E97AE8799436A8F35E6C3",
+        "Machine": 34404,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "7EAD9BEC6A892C5EF1571631AD877F44AD027B74AEA08567CE3BA63B62D06A55",
+        "Machine": 332,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "AAA15B20E060B6BE0BFD2CAC5F4A83BBDA33F1E9E6DD07B40D7EC74C1060E71D",
+        "Machine": 332,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "12F17691FCB641B78956BA4566D9C2B1509080A1DE7A04B2121F3F129A8DBC4B",
+        "Machine": 332,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "DCCFC3CF1762E24ECD1C22C1C33D8199D0879E8877288FA606A58E6260297531"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "A78D1798D57F52B83A84F2275B06BEE98CF1E7E567E48976EE157CE2463EB6F2",
+        "Machine": 34404,
+        "PackageId": "74269114-368c-45ab-b52d-bf103d08b0b9",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      },
+      {
+        "Name": "nthook32-LICENSE.txt",
+        "Sha256": "F968C2D86BA2A2F483E47431C7CD8D78878B239A47B34CBB792AC7FE5FCD04BE"
+      }
+    ],
+    "backup": "O:\\repos.hobby\\ntvdm64\\build\\t479-s3-command\\p2-publication-backup",
+    "verifiedUtc": "2026-11-06T02:45:20.7995381Z"
+  },
+  "Sources": [
+    {
+      "SHA256": "BD55D89164DDD2EF315ED283C7B1CC4470F16774C21C6632AAC32916DE96BF41",
+      "Path": "src/ntvdm-exe/command/include/command_launch.h"
+    },
+    {
+      "SHA256": "C2648BAC8D392DE1D6A0C6543753323F50E26B1CDCC5BD0A26EFD9F8684FBEAA",
+      "Path": "src/ntvdm-exe/command/include/mvdm_command_native_child.h"
+    },
+    {
+      "SHA256": "8AFF826859C1983A20AD541571C490586C2572E278E8F4F691FCED0E3F6D5268",
+      "Path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c"
+    },
+    {
+      "SHA256": "FA3C0197A6D92841E576DCDEBE057D8D20CE4BDD0295DA93250B28FC60EC2DA8",
+      "Path": "src/ntvdm-exe/win32/command_process_compat.c"
+    },
+    {
+      "SHA256": "86053CF723161D520B4D965ADE8FD8090169ED733E2A0A87046C1E6162C2AF9E",
+      "Path": "test/ntvdm-exe/command/command_launch.c"
+    },
+    {
+      "SHA256": "B001DCFD898D9B087FF7B88326F6ED14AA132BA0E12F957C20FFB38AA1B519DD",
+      "Path": "test/ntvdm-exe/command/command_capture.c"
+    },
+    {
+      "SHA256": "AF93C06D739774800064E17A39865B6453063D03D91101D373C8EE7898BC935D",
+      "Path": "test/ntvdm-exe/command/verify-commands.ps1"
+    },
+    {
+      "SHA256": "F291194388F399864A2147B34C20DB9D26251E3CF17F36A21B756F7352BB22CA",
+      "Path": "tools/build/New-T310OriginalSoftpcNinja.ps1"
+    }
+  ]
+}

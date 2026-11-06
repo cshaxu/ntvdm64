@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T479 S3** - per-request host command preparation for guest multitasking.
+**Active: M0 T479 S4** - project guest VxD registration and wait/wake proof.
 The accepted shared-library side stage is closed; this is the resumed guest mainline.
 
 ## Active Packet
@@ -10,22 +10,30 @@ The accepted shared-library side stage is closed; this is the resumed guest main
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
-| Identifier Mode | M0 T479 S3/host-command-preparation, implementation phase; Ordinary Mode, single implementer/reviewer. |
+| Identifier Mode | M0 T479 S4/guest-driver, implementation and executable-proof phase; Ordinary Mode, single implementer/reviewer. |
 | Admission And Approval | Owner approves the host-first S2--S7 roadmap and continuous execution; each S builds, tests, publishes, commits and pushes before advancing. |
-| Objective | Separate per-request command/environment/directory/handle/result ownership, reusing existing TLS handle adaptation and launch services; preserve the ordinary DOS route. No guest multitasking entry is enabled in this stage. |
-| Non-goals | No original guest changes, hardware V86 monitor, periodic polling, timed suspend/resume, new transport, semantic concessions or unrelated features. |
-| Reference Baseline | S2 host foundation delivery; package a0f0dc2c-9f29-4bbe-8dad-8859cabea128, Full 16/16; original call-chain evidence with corrected TLS standard-handle mapping. |
-| Files And ABI Surface | ntvdm-exe/command and win32 command adapter, existing common launch facilities and matching tests/build declarations; minimal registered original hook only if source-proven necessary. Guest remains immutable. |
+| Objective | Build/load the project VxD and prove actual VM identity/inventory, generation/retirement, callback and counted wait/wake through a claimed emulated notification resource on Win3.1 enhanced and Win95. |
+| Non-goals | No original guest changes/rebuild, hardware V86 monitor, new polling/timeouts/transport, or semantic concessions. Full 54:08/0A execution and I/O remain S5/S6. |
+| Reference Baseline | S3 host command preparation delivery; package 74269114-368c-45ab-b52d-bf103d08b0b9, Full 16/16, 31 capture and 59 launch assertions. Actual guest multitasking remains unproved. |
+| Files And ABI Surface | Independently authored project VxD/add-on, NTVDM VM bridge/notification adaptation and matching tests/build/load tools. Any necessary mirror hook requires source proof and difference registration; original guest stays immutable. |
 | Applicable Rules | Execution, architecture/coding/document rules and source policy; immutable original guest and minimum registered mirror differences. |
-| Verification | Source/capture/launch ownership review; independent simultaneous command snapshots, directories, streams and results; failure cleanup and ordinary nested DOS/native regression; cached ten-component build, full gates and publication. |
-| Expected Markers | No retained guest pointers or process-global request mutation; existing TLS handle protection preserved; independent copied inputs and resource ownership with exact results and rollback. |
-| Asset Needs | Existing immutable guest fixtures and complete current ten-image package, stable Ninja/ccache roots; no guest rebuild. |
+| Verification | Original VMM call-chain/ABI review; actual driver load, VM enumeration/retirement, callback return, counted wait/wake, resource claim/reset and cancellation on both guests; cached ten-component build, full gates and coherent publication. |
+| Expected Markers | Actual VMM VM identity, not focus/CR3 inference; callback stack/state preservation; independent notification wake while target VM waits; generation-safe retirement; no host wait inside CCPU callback. |
+| Asset Needs | Existing immutable Win3.1/Win95 fixtures and verified package; recovered project VxD toolchain with recorded provenance; stable Ninja/ccache roots. Original guest is never rebuilt. |
 | Reporting Requirements | Separate confirmed source facts, design decisions and runtime evidence; explain capability consequences rather than repeat next-step slogans. |
 | Stop Conditions | New semantic concession, guest patch, unknown provenance or incompatible architecture requires explicit disposition; missing proof is not a pass. |
-| Exit Criteria | Host command preparation and regression gates pass; complete package published, committed and pushed. S4 then proves actual guest registration/wait/wake; this stage cannot claim guest parallel execution. |
+| Exit Criteria | Actual guest driver registration/wait/wake contracts pass independently on both guests; complete package built/tested/published, committed and pushed. S5 then wires multitask commands; no host-only substitute counts as guest proof. |
 | Original Owner Request | Set a persistent goal and execute approved host-first S2--S7 continuously, delivering each stage before advancing. |
 | Similar-Issue Sweep | Both 54:08/0A; system/ordinary/reused VMs; single-task transitions; nested children; input/output/failure; NIDDB independent owner. |
-| Temporary Evidence | build/t479-s3-command; this S owns 60-minute phases, 2 GiB, 15-minute no-progress review. Prior S2 evidence remains until its reviewed summary and commit are durable. |
+| Temporary Evidence | build/t479-s4-driver; owned 60-minute phases, 2 GiB, 15-minute no-progress review. S3 evidence remains until its reviewed summary and delivery are durable. |
+
+## S3 Host Command Preparation Closure
+
+[Delivery and review](../etc/evidence/m0-t479-s3-command-preparation.md) records
+independent capture and launch ownership, 31/59 assertions, cached full builds
+and Full 16/16. Package 74269114-368c-45ab-b52d-bf103d08b0b9 is published and
+hash-verified at both destinations. No mirror/guest changes. Continuous execution
+now admits S4; guest VM registration and wait/wake remain executable proof gates.
 
 ## S2 Host Foundation Closure
 

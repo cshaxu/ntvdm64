@@ -1195,3 +1195,7 @@ the pinned source intersection, compatibility findings and generic-test plan.
 [T479 S2 host foundation](evidence/m0-t479-s2-host-foundation.md) records independent retirement, provider cancellation, paired launch contexts and their actual verification.
 
 [T479 S2 host verification](evidence/m0-t479-s2-host-verification.json) retains complete gate and publication results.
+
+[T479 S3 command preparation](operations/m0-t479-s3-command-preparation.md) records independent capture and launch ownership, source reuse and pending verification.
+
+[T479 S3 delivery](evidence/m0-t479-s3-command-preparation.md) and [verification](evidence/m0-t479-s3-command-verification.json) record the completed host stage and guest-driver handoff.

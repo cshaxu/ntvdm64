@@ -1565,6 +1565,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/lib-win32/process-launch/command_line.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/command_line.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-process-launch.lib: lib obj/lib-win32/process-launch/attributes.obj obj/lib-win32/process-launch/process.obj obj/lib-win32/process-launch/command_line.obj')
+    $graph.Add('build obj/tests/ntvdm_command_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_launch.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj lib-process-launch.lib')
+    $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj')
     $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
@@ -2218,7 +2224,7 @@ if ($Architecture -eq 'x86') {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
             if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-observation.lib')}else{$graph[$i]+=' lib-process-observation.lib'}
         }
-        if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('broker-transport.lib') -or $graph[$i].Contains('obj/common/native_process.obj'))) {
+        if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('broker-transport.lib') -or $graph[$i].Contains('obj/common/native_process.obj') -or $graph[$i].Contains('softpc-win32-bindings.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
             if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-launch.lib')}else{$graph[$i]+=' lib-process-launch.lib'}
         }
