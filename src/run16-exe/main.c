@@ -141,7 +141,12 @@ static DWORD connect_broker(void)
         if(now>=deadline) { error=ERROR_TIMEOUT; goto done; }
         error=OpenNtBaseClientConnectCurrentTimeout((DWORD)(deadline-now));
         if (!error) { error=ERROR_SUCCESS; goto done; }
-        if (error!=RPC_S_SERVER_UNAVAILABLE && error!=ERROR_ACCESS_DENIED)
+        /* Our newly spawned server can own its endpoint before registering
+         * interfaces. This is readiness only, within the same startup budget;
+         * never reinterpret an established connection's failure or retry a
+         * submitted task. Preserve NO_INTERFACES outside our own bootstrap. */
+        if (error!=RPC_S_SERVER_UNAVAILABLE && error!=ERROR_ACCESS_DENIED &&
+            !(spawned && error==RPC_S_NO_INTERFACES))
             goto done;
         if (!spawned)
         {

@@ -30,6 +30,13 @@ media work; this admission is not permission to patch existing installations.
 
 ## Sequential bounded stages
 
+Owner naming direction during S4: all independently authored `.386` / VxD
+implementation belongs to `src/addon/ntvdm64-386/`. The validated release
+artifacts are `assets/release/ntvdm64.386` (Win3.1 enhanced mode) and
+`assets/release/ntvdm64.vxd` (Win95). Build/probe outputs remain task-owned;
+neither artifact is a host-system32 component. This names the admitted bridge,
+not a completed runtime capability or permission to change original guest.
+
 | Stage | Outcome and decisive evidence |
 | --- | --- |
 | S1 (closed research) | Original call chains and candidate guest bridge, with executable proof explicitly deferred. |
@@ -111,6 +118,12 @@ No repeated stage approval is required within this scope. Original guest bytes
 remain immutable. Earlier S2--S5 references describe the superseded grouping;
 the complete command, guest and I/O obligations now map to S3--S7 above.
 New semantic concessions are not authorized by continuous execution.
+
+Owner's subsequent execution priority is Win3.1 enhanced mode first: implement
+and exercise its actual bridge, wait/wake and multitask command path before
+resuming Win95 work. Preserve the completed Win95 load/callback evidence and
+the remaining obligations; this priority change neither drops Win95 from the
+T objective nor turns its untested paths into acceptance.
 
 
 S2 host foundation is [delivered](../evidence/m0-t479-s2-host-foundation.md)

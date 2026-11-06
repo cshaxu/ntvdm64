@@ -15,7 +15,7 @@ The accepted shared-library side stage is closed; this is the resumed guest main
 | Objective | Build/load the project VxD and prove actual VM identity/inventory, generation/retirement, callback and counted wait/wake through a claimed emulated notification resource on Win3.1 enhanced and Win95. |
 | Non-goals | No original guest changes/rebuild, hardware V86 monitor, new polling/timeouts/transport, or semantic concessions. Full 54:08/0A execution and I/O remain S5/S6. |
 | Reference Baseline | S3 host command preparation delivery; package 74269114-368c-45ab-b52d-bf103d08b0b9, Full 16/16, 31 capture and 59 launch assertions. Actual guest multitasking remains unproved. |
-| Files And ABI Surface | Independently authored project VxD/add-on, NTVDM VM bridge/notification adaptation and matching tests/build/load tools. Any necessary mirror hook requires source proof and difference registration; original guest stays immutable. |
+| Files And ABI Surface | Project driver in src/addon/ntvdm64-386; release assets/release/ntvdm64.386 and ntvdm64.vxd. NTVDM VM bridge/notification and matching tests/build/load tools. Necessary mirror hooks require source proof/difference registration; original guest stays immutable. |
 | Applicable Rules | Execution, architecture/coding/document rules and source policy; immutable original guest and minimum registered mirror differences. |
 | Verification | Original VMM call-chain/ABI review; actual driver load, VM enumeration/retirement, callback return, counted wait/wake, resource claim/reset and cancellation on both guests; cached ten-component build, full gates and coherent publication. |
 | Expected Markers | Actual VMM VM identity, not focus/CR3 inference; callback stack/state preservation; independent notification wake while target VM waits; generation-safe retirement; no host wait inside CCPU callback. |
@@ -26,6 +26,16 @@ The accepted shared-library side stage is closed; this is the resumed guest main
 | Original Owner Request | Set a persistent goal and execute approved host-first S2--S7 continuously, delivering each stage before advancing. |
 | Similar-Issue Sweep | Both 54:08/0A; system/ordinary/reused VMs; single-task transitions; nested children; input/output/failure; NIDDB independent owner. |
 | Temporary Evidence | build/t479-s4-driver; owned 60-minute phases, 2 GiB, 15-minute no-progress review. S3 evidence remains until its reviewed summary and delivery are durable. |
+
+S4 [P1 checkpoint](../etc/evidence/m0-t479-s4-driver-load.md): Win3.1 native-thread
+PIC wake, forced queued retirement and normal exit pass. Full 16/16; normal
+ten-component package ca3b367a-3d54-4d05-a9a8-147594d7450d published to both
+destinations. Driver remains a candidate; initialization rollback, actual VM
+reuse and command integration remain open. S4 is not closed.
+
+Owner priority: finish the Win3.1 enhanced-mode path first. Do not launch new
+Win95 investigations or tests while completing that path. Retain existing
+Win95 evidence; its remaining acceptance obligations are deferred, not passed.
 
 ## S3 Host Command Preparation Closure
 

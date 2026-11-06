@@ -1,0 +1,1672 @@
+{
+  "status": "S4 P1 normal host package delivered; guest driver remains a candidate, S4 open",
+  "tool": {
+    "sha256": "3A14CD186BB7D2AF9215816F77DFEC9A5D1AA6D2A4E8EC71E1BC916F3DF8DD7A",
+    "url": "https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/open-watcom-2_0-c-win-x64.exe",
+    "bytes": 128147558,
+    "release": "2026-11-05T08:55:11Z"
+  },
+  "build": {
+    "source": "DF792664E807EFCA9E0F059263A977657D643EA0D1DA179551AEB7DDB763B108",
+    "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+    "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+    "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+    "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+    "loadMode": "static",
+    "artifacts": [
+      {
+        "name": "ntvdm64.386",
+        "bytes": 4671,
+        "sha256": "E684F9E09CF05E6129ED98CF422D84619D1F3C8A9F6D2A5E8D548FA81C98AA5B"
+      },
+      {
+        "name": "ntvdm64.vxd",
+        "bytes": 4671,
+        "sha256": "E684F9E09CF05E6129ED98CF422D84619D1F3C8A9F6D2A5E8D548FA81C98AA5B"
+      }
+    ]
+  },
+  "run": {
+    "host": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe",
+    "pid": 8228,
+    "arguments": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64/test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "-DriverImage",
+      "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver/candidate-cb-r2/ntvdm64.386",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64/build/t479-s3-command/p2-package",
+      "-InstallSource",
+      "O:/w31",
+      "-InstallRoot",
+      "O:/tmp/vm479d",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64/build/.ninja/console-observers-x64/console-startup-observer.exe",
+      "-OutputRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver/checked-identity"
+    ],
+    "start": "2026-11-06T03:15:00.1163735Z"
+  },
+  "exit": 0,
+  "matrix": {
+    "case": "386-dosonly1",
+    "dosonly": true,
+    "enhanced": true,
+    "probeStarted": true,
+    "progmanAndMode": true,
+    "flags": 2085,
+    "hwnd": 4456,
+    "observedDosOnly": 1,
+    "normalExit": true,
+    "passed": true,
+    "error": null,
+    "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-identity\\runtime\\386-dosonly1.observer.txt"
+  },
+  "vxd": {
+    "api": 3867504,
+    "signature": 1314147670,
+    "vm": 2153648128,
+    "driver": "E684F9E09CF05E6129ED98CF422D84619D1F3C8A9F6D2A5E8D548FA81C98AA5B"
+  },
+  "vms": [
+    {
+      "name": "A",
+      "signature": 1314147670,
+      "vm": 2155499520,
+      "generation": 3,
+      "status": 12870,
+      "negativeStatus": 12871,
+      "negativeResult": 1,
+      "start": 1262069,
+      "finish": 1262123
+    },
+    {
+      "name": "B",
+      "signature": 1314147670,
+      "vm": 2155442176,
+      "generation": 2,
+      "status": 12870,
+      "negativeStatus": 12871,
+      "negativeResult": 1,
+      "start": 1262067,
+      "finish": 1262121
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sha256": "df792664e807efca9e0f059263a977657d643ea0d1da179551aeb7ddb763b108"
+    },
+    {
+      "path": "src/addon/ntvdm64-386/build.ps1",
+      "sha256": "9bd60b115bea1bc9c6e70ac4dba604e57e9b5ff4cb7824be3f8a1bd34b23f2c9"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "sha256": "20a17a13f0cea63b277c014d11dda8df53f606353c66c315155ca3aea1d5cf9e"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/win31-identity.asm",
+      "sha256": "f0025553500103012d639a3be057b25bc4aca0a89e1be05e56bbf5afaa89b4d7"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "sha256": "3cb43e16c2c1b376cba296df46815374c9caccab3152a37fc65bbbe4b2fce093"
+    },
+    {
+      "path": "test/integration/win31_runtime_matrix_test.ps1",
+      "sha256": "84a9571b85039185cf8e6fd815a65c3dbf4919360d989ae397ef84464b73d383"
+    }
+  ],
+  "not_proved": [
+    "Win95 load and VM identity",
+    "host bridge registration/inventory",
+    "callback entry and full client state restoration",
+    "counted wait/wake and claimed emulated notification IRQ",
+    "forced retirement, handle reuse, cancellation, reset and resource release",
+    "S4 full ten-component regression/publication"
+  ],
+  "callbackCheckpoint": {
+    "build": {
+      "source": "1AED847D5B841DF7BCED1D64BF8317AF5FE66F4B813792B449A3ADEC8C8033ED",
+      "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+      "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+      "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+      "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+      "loadMode": "static",
+      "artifacts": [
+        {
+          "name": "ntvdm64.386",
+          "bytes": 4699,
+          "sha256": "27D56C1F30FCA45650FB689140823E3A35FA93FCFC1269359137F764ACD439E9"
+        },
+        {
+          "name": "ntvdm64.vxd",
+          "bytes": 4699,
+          "sha256": "27D56C1F30FCA45650FB689140823E3A35FA93FCFC1269359137F764ACD439E9"
+        }
+      ]
+    },
+    "inventoryLimitation": "Earlier inventory omitted hidden/system files; runner corrected to use Force",
+    "scope": "Actual far-call callback only; post-BOP restoration not proved",
+    "exitCode": 0,
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1268261,
+        "finish": 1268315,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1268259,
+        "finish": 1268313,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0
+      }
+    ]
+  },
+  "win95Checkpoint": {
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 3268542696,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1289521,
+        "finish": 1289579,
+        "callback": 103163520,
+        "callbackCount": 160,
+        "callbackErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 3272737000,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1289523,
+        "finish": 1289579,
+        "callback": 103163520,
+        "callbackCount": 160,
+        "callbackErrors": 0
+      }
+    ],
+    "fixtureControl": "Driver off/on with generic path95 relocation both fail registry startup. Length-preserving REG_SZ replacement with block checksum update passes.",
+    "scripts": [
+      {
+        "sha256": "B2F662CAEE5E6B4FC65A249CE60EE8973AEAE511A12D7617734F4C89CBCD73DC",
+        "path": "build/t479-s4-driver/verify-win95-equal.ps1"
+      },
+      {
+        "sha256": "8FF00C9F1D1DD5C1A56907914004B1911366EB0CC288317A367559A0A68D3C17",
+        "path": "build/t479-s4-driver/relocate-equal.py"
+      }
+    ],
+    "exitCode": 0,
+    "observerExit": 0,
+    "originals": "Force inventory and every original file hash verified unchanged",
+    "run": {
+      "pid": 37016,
+      "start": "2026-11-06T03:39:52.5605239Z",
+      "arguments": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver/verify-win95-equal.ps1",
+        "-DriverImage",
+        "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver/candidate-callback/ntvdm64.vxd",
+        "-PackageRoot",
+        "O:\\repos.hobby\\ntvdm64/build/t479-s3-command/p2-package",
+        "-InstallSource",
+        "O:/WINDOWS",
+        "-InstallRoot",
+        "O:/tmp/v96",
+        "-Observer",
+        "O:\\repos.hobby\\ntvdm64/build/.ninja/console-observers-x64/console-startup-observer.exe",
+        "-OutputRoot",
+        "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver/win95-preserved-hive"
+      ]
+    },
+    "originalInventorySha256": "DFA73ECD09785730A18B32097AC1444D3FAFD5E86016D792ECAFD945875157C5"
+  },
+  "win31SemaphoreCheckpoint": {
+    "exitCode": 0,
+    "scope": "Two precompleted signals consumed by two waits; stale generation rejected; blocked cross-context wake not yet tested",
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1295514,
+        "finish": 1295568,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1295513,
+        "finish": 1295567,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0
+      }
+    ],
+    "build": {
+      "source": "43987A3D99724ECE84183186F83859BB44D65A00597FEE846EC07014E5898BB0",
+      "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+      "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+      "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+      "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+      "loadMode": "static",
+      "artifacts": [
+        {
+          "name": "ntvdm64.386",
+          "bytes": 4719,
+          "sha256": "7F24A70EB774CAD00F891869600CD9A1BE79515017DC51D7F0421F476ABD2E80"
+        },
+        {
+          "name": "ntvdm64.vxd",
+          "bytes": 4719,
+          "sha256": "7F24A70EB774CAD00F891869600CD9A1BE79515017DC51D7F0421F476ABD2E80"
+        }
+      ]
+    }
+  },
+  "win31CrossWakeCheckpoint": {
+    "exitCode": 0,
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1298368,
+        "finish": 1298422,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1298368,
+        "finish": 1298422,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0
+      }
+    ],
+    "scope": "VM B signals VM A while A waiting flag is one; A resumes; no host IRQ proof",
+    "build": {
+      "source": "863698CD4335FD96F3B41277E1293DAC1295011813DA76AF8BF6E104E7351C92",
+      "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+      "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+      "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+      "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+      "loadMode": "static",
+      "artifacts": [
+        {
+          "name": "ntvdm64.386",
+          "bytes": 4719,
+          "sha256": "35DECF153228D1681740033E605615E685EBBE3A7CDB552AFC534C1D45AE3ED6"
+        },
+        {
+          "name": "ntvdm64.vxd",
+          "bytes": 4719,
+          "sha256": "35DECF153228D1681740033E605615E685EBBE3A7CDB552AFC534C1D45AE3ED6"
+        }
+      ]
+    }
+  },
+  "notificationUnit": {
+    "testSha256": "C55AC92270A083527E8BD6C1C1F7F7F8121E16E4442F88EDBD5CBC5293B77993",
+    "sourceSha256": "A423D1D656A684DAC358FD9C6DF52F169E711E7EA206B4E8C9624D9A8754D01F",
+    "assertions": 68,
+    "scope": "Substituted VDD/ICA unit; no product selection or real PIC proof",
+    "exitCode": 0
+  },
+  "blockedRunFailure": {
+    "note": "DOS probe checks pass; normal exit failed; not acceptance",
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": false,
+      "passed": false,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-blocked\\runtime\\386-dosonly1.observer.txt"
+    },
+    "exitCode": 1
+  },
+  "win31RetirementCheckpoint": {
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-retirement\\runtime\\386-dosonly1.observer.txt"
+    },
+    "build": {
+      "source": "E69E0FE259111D09BE80FCA9DE930CD79932079B42546EAD90A5B52AA7BAF892",
+      "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+      "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+      "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+      "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+      "loadMode": "static",
+      "artifacts": [
+        {
+          "name": "ntvdm64.386",
+          "bytes": 4727,
+          "sha256": "9649A6875EB788363BC9DE952445B77527CD591B0CFDBBB58DECC9A768F82DD7"
+        },
+        {
+          "name": "ntvdm64.vxd",
+          "bytes": 4727,
+          "sha256": "9649A6875EB788363BC9DE952445B77527CD591B0CFDBBB58DECC9A768F82DD7"
+        }
+      ]
+    },
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1309044,
+        "finish": 1309100,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1309044,
+        "finish": 1309098,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0
+      }
+    ],
+    "exitCode": 0
+  },
+  "hostBopCheckpoint": {
+    "process": {
+      "pid": 39796,
+      "start": "2026-11-06T04:02:46.4149136Z"
+    },
+    "mirrorAddedLines": 14,
+    "exitCode": 0,
+    "unitAssertions": 89,
+    "mirrorDifference": "MVDM-HOST-DIV-870",
+    "runtime": "Not guest-tested or published",
+    "workerSha256": "DDC7E6237604EB104773E4F914BF324A8A63BF696ED6F41E76785A5F6C6C048F"
+  },
+  "win31PicCheckpoint": {
+    "process": {
+      "start": "2026-11-06T04:08:17.223711Z",
+      "pid": 26092
+    },
+    "build": {
+      "source": "68048A1745CB81E4FEA0D7E7036324CBE7531009F84EF70733DF44D88673C924",
+      "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+      "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+      "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+      "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+      "loadMode": "static",
+      "artifacts": [
+        {
+          "name": "ntvdm64.386",
+          "bytes": 4899,
+          "sha256": "096EF79316AAD4B094997A4C3101A99236701C6AF68DFF79A708DC3C3BF43990"
+        },
+        {
+          "name": "ntvdm64.vxd",
+          "bytes": 4899,
+          "sha256": "096EF79316AAD4B094997A4C3101A99236701C6AF68DFF79A708DC3C3BF43990"
+        }
+      ]
+    },
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-pic\\runtime\\386-dosonly1.observer.txt"
+    },
+    "manifest": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "F2DC4EF8B0BB01A1454F2E595BD034E92784F16A193233A61096A5E354C43E6B",
+        "Machine": 34404,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "BF1AB28E57211B3DB7B7F13A0BBDAD9417E5E650FAD30B5299F5D344A12042BA"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "4538A18635B0823A98998FB38E02F2523D47C39E900B78D1E508A67203610BF6",
+        "Machine": 34404,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "6EE9BD5EEA0AABEF6792A1114EBCAAED6FD6B81317D7F20A61E5FE3155D3C933"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "39EF75E8F838FBE4487AF6F962BADF226EDA20A0123C304C287628A94E487769",
+        "Machine": 34404,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "CEB2DA4A347FD04F039F467B6CD5A09BD9F565A32CD3C49B77F679F3B0A33254"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "E348876743228011090C9AFABE9EB113FAA356FCAE14637618F058AEC4A50858",
+        "Machine": 332,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "DDC7E6237604EB104773E4F914BF324A8A63BF696ED6F41E76785A5F6C6C048F"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "B963C2DEE8177362923F4012B25088E8A276B9077F741DB1AEEFCEB8AC55529F",
+        "Machine": 34404,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "A533B3F2FF28BF8C14BFE26A8F01B20370B5A038B8936CD1854FA8714ACC6D2B"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "5AA0445C12549F9DC5AC215EF55CD650F465D2BE24F4D9A98DC026ED191834B7",
+        "Machine": 34404,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "1B54C30926D1992AA2C96FB94AC268AEEAE2176636A0715DA6D6C1B29581CE95",
+        "Machine": 332,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "85D320479330192F95D15BDF63EF57DABBB7BAE33B1CD90E829B8420558B7967",
+        "Machine": 332,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "DFB2B76229801FE4C6544AC625E67EDC4EC242F86EAAF16DFB09A3E1D627D524",
+        "Machine": 332,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "C04EC605F28746E8A0805492BF8DF7CECD2E04B6F978667F136323C8FF132E68"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "91AD85271D7B8B77B67DE11735607602E6E96F85BEF449211563706C89FAFD63",
+        "Machine": 34404,
+        "PackageId": "5e1fd3ff-a6ed-4d64-b165-8474b64b880c",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1323137,
+        "finish": 1323191,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 2,
+        "notificationSeen": 2,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1323137,
+        "finish": 1323191,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 1,
+        "notificationSeen": 2,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      }
+    ],
+    "exitCode": 0,
+    "scope": "Real PIC/VPICD serial delivery; publisher is guest diagnostic BOP, not off-CPU native completion"
+  },
+  "win31QueuedWake": {
+    "build": {
+      "source": "E7940ED84CD1276C8936D805ADA3DCD0D1F8CA7DF19209196EE097FEB68BD3A2",
+      "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+      "assemblerSha256": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+      "linker": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\watcom\\binnt64\\wlink.exe",
+      "linkerSha256": "572BC968819354FC79577FF1949065779FA79956DF043EF0ACA411ACEF7085BB",
+      "loadMode": "static",
+      "artifacts": [
+        {
+          "name": "ntvdm64.386",
+          "bytes": 4935,
+          "sha256": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F"
+        },
+        {
+          "name": "ntvdm64.vxd",
+          "bytes": 4935,
+          "sha256": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F"
+        }
+      ]
+    },
+    "package": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "BA752592A0A3AA16E8EADA671BA1A6750AE17C78586A70E5A994CDF4C3D7B38F",
+        "Machine": 34404,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "DC2EA15F4A24A4EC80EEB5E06751321B3482074C97E8854FD0AD2ED88B151C09"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "3E5AF655081E890FA85E3428BFB4E14D7376977BFE3ECD8E30BA70A3422AE4AB",
+        "Machine": 34404,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "E7D648C43C5FFA8F4112CB8258F17CAA0AA778D08754BA40374A6B40B302EE4F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "82D5FCA6B6885D9595F0D71D43045B4E16CFDBF7B61770AC7E58E57CEA32A3F7",
+        "Machine": 34404,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "82EFF628CBA8D859BACC2244D3FC380BB0D22232C48D6D855E339677F284A58C"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "38515D75D56E04DFDBA55E9CBA35C44C085870D7567C56A165AC8414555430E3",
+        "Machine": 332,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "389E1D91B69163A05D51CCD1A03EAB492B61660D8F70B3BC1DADBD6045A90982"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "B756C1DFA620457612428539AF6B64BCCEA1FE4C6F2700D385B2D826E9AF7B91",
+        "Machine": 34404,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "BB51DD4E102659CE578E719AA4C2254EEE04C0B439FB8A95F87D80160E4AD1C2"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "635F7E11A0988A415227EAB59B48957F0E8849A243F15A9F11E67469470446B5",
+        "Machine": 34404,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "F4993EA625779D6941BD953D03206A9246B7CB070BFB98EEC2879AB6291F0575",
+        "Machine": 332,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "18F81472CA8ACABB69354C5001FDE96771B8C98E64A8CB7202E8801A03ECB871",
+        "Machine": 332,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "7436C98706048325970D8978526EEDA094C676636561BB1F27C913E5ED8068DF",
+        "Machine": 332,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "7914916C92C84DA08E2B8001C4A4D3DC46567B6FA1599722E2E577C64B11FFC6",
+        "Machine": 34404,
+        "PackageId": "ed488089-dca9-4a50-bc8a-66d3d84a2fc8",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-wake\\runtime\\386-dosonly1.observer.txt"
+    },
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1336747,
+        "finish": 1336801,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 2,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1336747,
+        "finish": 1336802,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 3,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      }
+    ],
+    "exitCode": 0,
+    "scope": "Guest API 8 publishes identity/generation into host wake FIFO; actual PIC/VPICD drains and signals blocked target; normal retirement and exit. Not an off-CPU runtime producer or NTSRV frontend registration."
+  },
+  "hostThreadWakeUnit": {
+    "assertions": 184,
+    "exitCode": 0,
+    "sourceSha256": "A4DEE20BBADEF2C15B0134BA581D5F7D74AE656DF056EEBEEBE6384928FD5E8D",
+    "scope": "Real native producer thread and recursive critical section; retire queued old generation then reuse VM handle; old producer rejected, new generation delivered. PIC boundary remains substituted."
+  },
+  "win31IndependentThreadWake": {
+    "exitCode": 0,
+    "package": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "076AF54E6C36D04FD566E0771D4E0F6499C40FFBD2D934E0F131E7F941A0779D",
+        "Machine": 34404,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "DC2EA15F4A24A4EC80EEB5E06751321B3482074C97E8854FD0AD2ED88B151C09"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "2CBDB958F9A633238E72E5A78AB925C5B54DC02521713CA430859A68C8CB892E",
+        "Machine": 34404,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "E7D648C43C5FFA8F4112CB8258F17CAA0AA778D08754BA40374A6B40B302EE4F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "24EF6A36AF6ABA4CE3247C842688538293191D83464789CFABE9FAD02EF1FD0F",
+        "Machine": 34404,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "82EFF628CBA8D859BACC2244D3FC380BB0D22232C48D6D855E339677F284A58C"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "A6F39CB75011A2936F97CC308CB80BAF31A9E5CE724475FF1FF1582A80886450",
+        "Machine": 332,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "7410592507A58A7E5B2C7FB0AA4A972FA21362112015843D7DE404E4EDA2FFAB"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "92F7AE386C0D294386E6510429580FC7365E4F931557339751BC6520DA03A21B",
+        "Machine": 34404,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "BB51DD4E102659CE578E719AA4C2254EEE04C0B439FB8A95F87D80160E4AD1C2"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "8FDE7A63C6ABAFC16DFD523F2033EE544D41BB1A47E818A218DF43D149C6E970",
+        "Machine": 34404,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "48955AD4713511955B29836244AF67861001D18965F91716286968103C7FAEDA",
+        "Machine": 332,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "3A5585186C5BB5D47FA9072276AB1353A89E121B30C5AA2F484F95B54974214B",
+        "Machine": 332,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "542B91A7C7575B787411C5B67086502C31DBEAB9B647E532404E3957FA97AD8D",
+        "Machine": 332,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "7912A612F7D0DF9DDE972E6F5B263464D8F071AB78BBCCBFA27B36E0ADD2D695",
+        "Machine": 34404,
+        "PackageId": "694a48b1-3aca-4ed5-9bc2-e74d59a76d97",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-thread\\runtime\\386-dosonly1.observer.txt"
+    },
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1347213,
+        "finish": 1347267,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 3,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1347213,
+        "finish": 1347267,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 1,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      }
+    ],
+    "driverSha256": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F",
+    "testSeamSha256": "036599577C5E44728CC8658837839568845DB323ECDCF20955BF61D9FF01FA3A",
+    "linkMapSha256": "A53A4689EF039B61E64A5B54A7195AD6CB94CF78CB47A459CF0DD37D9AD8767B",
+    "buildCommandSha256": "887E42F3DA3335E50C3588C962681E0D8D2EA3A766CCDE70E162695383BF254D",
+    "scope": "Separate test-only BOP link seam dispatches targeted publish on a native thread. Production wake FIFO, ICA/PIC, CCPU and actual guest semaphore wake; normal retirement/exit and original installation hashes pass. No production asynchronous command owner or NTSRV frontend integration claimed."
+  },
+  "notificationSessionAdmission": {
+    "exitCode": 0,
+    "assertions": 196,
+    "workerSha256": "9966EBFA30CB13B5A030C4526FEE3354DACAE39B603B2679DC03A91759A581F2",
+    "sourceSha256": "FC0420B562133002928F8A36F58B28DE12092B43278E9ED3943ABBE0EF0B05AB",
+    "scope": "Reject VM registration before notification open and after close, under the same recursive ICA lock; cached worker build and thread/queue units pass."
+  },
+  "win31CancellationObserved": {
+    "sourceSha256": "C82B99BD8482BA7815BC6BA7893C72185F656A98F3907F8067FD2E08EE459948",
+    "package": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "F084F31AF3F08BCD1F06EE5BE896CA24E07B4E02DB461CFA65FABB69FF415FD7",
+        "Machine": 34404,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "DC2EA15F4A24A4EC80EEB5E06751321B3482074C97E8854FD0AD2ED88B151C09"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "B87D2CE21798C7F08AA994B77C614FFCEDE5D4A06893056E68D683967189294A",
+        "Machine": 34404,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "E7D648C43C5FFA8F4112CB8258F17CAA0AA778D08754BA40374A6B40B302EE4F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "A3C499D0D991A7B2C30FAE6681FC495C6D425C9DC2511F3CB166F20FCE3315DF",
+        "Machine": 34404,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "82EFF628CBA8D859BACC2244D3FC380BB0D22232C48D6D855E339677F284A58C"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "97A0B7402F4AFD85C9FE58FF2C3AECF960B23954B41B6FCAB76942FA4C156A63",
+        "Machine": 332,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "50DD4705B87DECB965C716147EFB83D8A2D99BD3B6AC93DB2D6580F6BE9DC8EC"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "D36427AD2ECDB33BB393E2C1762DC8E82CC2DE874CD5A97BDA04CA4CEBD076EC",
+        "Machine": 34404,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "BB51DD4E102659CE578E719AA4C2254EEE04C0B439FB8A95F87D80160E4AD1C2"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "71A0CE9E260F8E3D279C896A8A3259D48D1F7260E7518A0288E35E04C0CE0DD3",
+        "Machine": 34404,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "2A24F45E62BFAE5CBCA21F5CDE19CA277C3EB0FBFAFFFCB770AFD4BC8A77EB3C",
+        "Machine": 332,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "93EB2C0DF845703A20F9BBB3938AF890AB994EBE93E54B2A3F23182F437C3DA4",
+        "Machine": 332,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "91E86DB31AFC6B02D313309AF91B75970BDD61246E701EC283F51509C7A311F1",
+        "Machine": 332,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "2282210B1159E01B5CFA85E41D564B5E1F3C643FE52A4F12EE0E0325B6870CD0",
+        "Machine": 34404,
+        "PackageId": "065bfbb1-40dd-44ad-8002-ca88f3d0fe90",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "failedFirstRun": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": false,
+      "progmanAndMode": false,
+      "flags": null,
+      "hwnd": null,
+      "observedDosOnly": null,
+      "normalExit": false,
+      "passed": false,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-cancel-observed\\runtime\\386-dosonly1.observer.txt"
+    },
+    "failedObserver": "container=console-owning-nondebug\npid=38180\nresult=exited\nexit=0x00000719\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=23292\nconsole-members-after-wait=1\nconsole-member=23292\ntimeout-ms=90000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\vm479n\nfixed-system-root-chars=13\nfixed-system-root-short-chars=13\nfixed-system-root-short=O:\\tmp\\vm479n\nimage-identity=unavailable\n",
+    "replayExitCode": 0,
+    "replayMatrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-cancel-replay\\runtime\\386-dosonly1.observer.txt"
+    },
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1355181,
+        "finish": 1355237,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 3,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1355181,
+        "finish": 1355235,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 1,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      }
+    ],
+    "scope": "Same compiled package replay passed actual cancellation count=-1 observation, independent-thread wake, normal guest retirement/exit and immutable source hashes. First trial exited 1817 before guest probe; that startup failure remains unlocalized, not reclassified as passed. This is ICA cancellation, not guest ICW1 reinitialization."
+  },
+  "launcherBootstrapCorrection": {
+    "beforeExitCode": 1,
+    "beforeFailure": "line 59: connect_broker()==0\r\n",
+    "afterExitCode": 0,
+    "afterAssertions": 246,
+    "beforeSourceSha256": "C0CC50BD872092AE92F1B1D9095703446606EBD043F59BB305A36BF4FBB657E7",
+    "candidateSourceSha256": "A8CE5CCF313B80EA44A1BA86F33D2DD8565D4E360028D18ACFFE353EE5AA98BA",
+    "package": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "EAD854245864DF07743CA78E0AF1E387B68276007B3D76FB3A981A1B0DF232FC",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "DDDFFDCEC4D02045DAFBE1E5003281301481A693B2190E6594C478B17F52A6FB"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "739383EABFCAE8F0E2C03DDD8E3DB25D20AA7708C4820D7E95814D1389A23F3D",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "747CF01AB07C106B8BB4CC57471B3A15E8FC77BF72ED4E06B4FB0BFF9106304F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "54798B03485F486F3B4A7E6EACF968259EACBA0C1829F89AFA777F034CB8D5F7",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "509CC63E45FC7AFEC9F9ADF703C3240AD5F47BDCA21731CD3F74323CA8BDB933"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "9F0F5CE5DC2FFEE94B43F87F2CD3B9B1D48BF3FEC489B3D82120306CD11A55FA",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "9966EBFA30CB13B5A030C4526FEE3354DACAE39B603B2679DC03A91759A581F2"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "9A3455B3E5149806CA4FE0458651F58A5A7BE40005D795EF65660411264F3BC4",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "2A34E537A1809D305660D8587E1A34B9B56A65C7A3A21565B3A96C1C56AC786B"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "07277CD191DF222FE33B989E3630A7E65E4D925E33E94A305A2831815645F671",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "7DC6E33C366816FF405C4910AACC6C90ACFDF48205FAA3627A0E482834B107ED",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "0E2328509A0DA4A065CED20338B7934F5C5B2C06508347AD848FDDAD116554EF",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "56FCA66AC0E999F642C104BE8644986189F3C67F7E54599BB1C43F2F2581C73E",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "CC09EFE06359E0D7263ED83122FE57203A373C309F89091E4C2B731830B415F4",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-bootstrap\\runtime\\386-dosonly1.observer.txt"
+    },
+    "pairs": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1364648,
+        "finish": 1364703,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 2,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1364648,
+        "finish": 1364702,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 3,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      }
+    ],
+    "scope": "Deterministic actual launcher-function boundary test: unavailable -> spawned -> no interfaces -> ready fails before correction and passes after. Fatal states and unchanged 5s budget retained. Normal product package Win3.1 case passes; original 1817 run had no server phase trace."
+  },
+  "launcherBootstrapFormalTarget": {
+    "target": "run16-broker-bootstrap-test.exe",
+    "architecture": "x86",
+    "exitCode": 0,
+    "assertions": 246,
+    "sourceSha256": "029CDAB8A9B8CE68FEFF96469682CDB502B49558CF00BCE77D8DEEBB5CB6DAB7",
+    "executableSha256": "40F956E2F63FD3F71C1215F8D1057AA6FAACBCC2DDD3945484E3AD739F7B5D70",
+    "scope": "Permanent cached Ninja target passes after adding missing common-root dependency. Earlier failed link retained in task logs."
+  },
+  "win31ForcedRetirement": {
+    "exitCode": 0,
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-retire-forced\\runtime\\386-dosonly1.observer.txt"
+    },
+    "vms": [
+      {
+        "name": "A",
+        "vm": 2155499520,
+        "generation": 3,
+        "error": 0,
+        "blocked": 0,
+        "rejected": 0
+      },
+      {
+        "name": "B",
+        "vm": 2155442176,
+        "generation": 2,
+        "error": 0,
+        "blocked": 1024,
+        "rejected": 1
+      }
+    ],
+    "helperSourceSha256": "DADA8DEFECBFDE78E3C36E1F4C87738AF1C3E00E372E3D62544D7C791DFF0E03",
+    "helperSha256": "952B3E9196229DA967D1EE70D9ED0BDC8E6F002DBF7F04EB14DCFAEFBC9E0C62",
+    "dosSourceSha256": "AE8132BE59280A678771560C78814273C2FEE09B3D83581EBCD54DBC0F23C26C",
+    "driverSha256": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F",
+    "scope": "Test-only auxiliary VxD invokes actual VMM Nuke_VM for another blocked ordinary VM; no wait return, stale guest wake rejected, both ordinary VMs gone before normal Windows exit. Original guest immutable. Does not exercise queued host completion after forced retirement or actual handle reuse."
+  },
+  "win31QueuedRetirement": {
+    "exitCode": 0,
+    "package": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "69B3942C4BE479F08FA652C1D65C8A9CBCF671E9EF268700D98055A5D6FED482",
+        "Machine": 34404,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "DDDFFDCEC4D02045DAFBE1E5003281301481A693B2190E6594C478B17F52A6FB"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "4FB76A929D56FD8CFC3B9B6857F81BAB090DBB60A970DCF09BA9607AE48ECAE1",
+        "Machine": 34404,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "747CF01AB07C106B8BB4CC57471B3A15E8FC77BF72ED4E06B4FB0BFF9106304F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "BFBD5C6C2604A2ABF135F069CB83A54822E1D889B6421435CAEC6F9257597BA9",
+        "Machine": 34404,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "509CC63E45FC7AFEC9F9ADF703C3240AD5F47BDCA21731CD3F74323CA8BDB933"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "31B8F4BBDA96C6F2547B820DF8B75BDDB249A976C399E6890FEB120C08A612E3",
+        "Machine": 332,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "41F09176CF403504367B872436B7AD8852DC5BBF43CC4E011F135042C6964E70"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "A1B019263C8EA57940BA8AF4A1641F7B25E6FBB3ADA6AD8121CA7FBF63A07270",
+        "Machine": 34404,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "2A34E537A1809D305660D8587E1A34B9B56A65C7A3A21565B3A96C1C56AC786B"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "333C591B9B2BC045DBBDBFA5C6BF776A3A3D814D8B97511AD5C02E4889981267",
+        "Machine": 34404,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "23DA1FDD54BFDD3083BE3043DB4F795E1854AEFF7C19D845013F49BA6DF80731",
+        "Machine": 332,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "1E91E8209B1AF4078DA416F6D4E989422E8859B3BE124A32D697864ABA88A9CB",
+        "Machine": 332,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "D4ED423B75D6C81F08EC6DEA3BAE929CD2259BFCE7AA4503194258056EEDB8AB",
+        "Machine": 332,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "3F6F1E814F727165CF8A2ECEF7BD97E575348C01C0FF26EFE8526B14F07EFD1B",
+        "Machine": 34404,
+        "PackageId": "407ff3ce-fd74-488a-8d62-fe48c4bc23ce",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-retire-queued\\runtime\\386-dosonly1.observer.txt"
+    },
+    "vms": [
+      {
+        "name": "A",
+        "vm": 2155499520,
+        "generation": 3,
+        "error": 0,
+        "blocked": 0,
+        "rejected": 0
+      },
+      {
+        "name": "B",
+        "vm": 2155442176,
+        "generation": 2,
+        "error": 0,
+        "blocked": 1024,
+        "rejected": 1
+      }
+    ],
+    "testSourceSha256": "CFFB4F5437C5B6E33BF5E47488F0D21E497570837B2303A952AC38AEF697D4BB",
+    "scope": "At real guest VM retire BOP: queue wake before production retirement, require removal and reject late publication. At successful bridge close: reacquire/release exact IRQ and EOI hook. Forced blocked VM retirement and normal Windows exit pass; test-only link not a release candidate."
+  },
+  "fullRegression": {
+    "Suite": "Full",
+    "ElapsedMs": 489298,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 4708,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 4045,
+        "CleanupMs": 609,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 1504,
+        "CleanupMs": 545,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 69756,
+        "CleanupMs": 659,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 66124,
+        "CleanupMs": 643,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 64848,
+        "CleanupMs": 624,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 19724,
+        "CleanupMs": 681,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 18414,
+        "CleanupMs": 666,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 108623,
+        "CleanupMs": 642,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12420,
+        "CleanupMs": 597,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29483,
+        "CleanupMs": 602,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30821,
+        "CleanupMs": 663,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 9737,
+        "CleanupMs": 666,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8983,
+        "CleanupMs": 675,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11883,
+        "CleanupMs": 638,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 6163,
+        "CleanupMs": 628,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 9037,
+        "CleanupMs": 579,
+        "Passed": true
+      }
+    ],
+    "runnerExit": 0,
+    "dos4gw": "Pre-existing authorized external-fixture exclusion; skipped, not passed"
+  },
+  "publication": {
+    "part": "p1",
+    "package": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\bootstrap-package",
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64\\assets\\release",
+      "O:\\winnt\\system32"
+    ],
+    "hashes": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "EAD854245864DF07743CA78E0AF1E387B68276007B3D76FB3A981A1B0DF232FC",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "DDDFFDCEC4D02045DAFBE1E5003281301481A693B2190E6594C478B17F52A6FB"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "739383EABFCAE8F0E2C03DDD8E3DB25D20AA7708C4820D7E95814D1389A23F3D",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "747CF01AB07C106B8BB4CC57471B3A15E8FC77BF72ED4E06B4FB0BFF9106304F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "54798B03485F486F3B4A7E6EACF968259EACBA0C1829F89AFA777F034CB8D5F7",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "509CC63E45FC7AFEC9F9ADF703C3240AD5F47BDCA21731CD3F74323CA8BDB933"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "9F0F5CE5DC2FFEE94B43F87F2CD3B9B1D48BF3FEC489B3D82120306CD11A55FA",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "9966EBFA30CB13B5A030C4526FEE3354DACAE39B603B2679DC03A91759A581F2"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "9A3455B3E5149806CA4FE0458651F58A5A7BE40005D795EF65660411264F3BC4",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "2A34E537A1809D305660D8587E1A34B9B56A65C7A3A21565B3A96C1C56AC786B"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "07277CD191DF222FE33B989E3630A7E65E4D925E33E94A305A2831815645F671",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "7DC6E33C366816FF405C4910AACC6C90ACFDF48205FAA3627A0E482834B107ED",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "0E2328509A0DA4A065CED20338B7934F5C5B2C06508347AD848FDDAD116554EF",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "56FCA66AC0E999F642C104BE8644986189F3C67F7E54599BB1C43F2F2581C73E",
+        "Machine": 332,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "CC09EFE06359E0D7263ED83122FE57203A373C309F89091E4C2B731830B415F4",
+        "Machine": 34404,
+        "PackageId": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      },
+      {
+        "Name": "nthook32-LICENSE.txt",
+        "Sha256": "F968C2D86BA2A2F483E47431C7CD8D78878B239A47B34CBB792AC7FE5FCD04BE"
+      }
+    ],
+    "backup": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\p1-publication-backup",
+    "verifiedUtc": "2026-11-06T05:13:12.2744976Z"
+  }
+}

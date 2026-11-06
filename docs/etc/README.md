@@ -1199,3 +1199,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 [T479 S3 command preparation](operations/m0-t479-s3-command-preparation.md) records independent capture and launch ownership, source reuse and pending verification.
 
 [T479 S3 delivery](evidence/m0-t479-s3-command-preparation.md) and [verification](evidence/m0-t479-s3-command-verification.json) record the completed host stage and guest-driver handoff.
+
+[T479 S4 driver load](evidence/m0-t479-s4-driver-load.md) and [results](evidence/m0-t479-s4-driver-load.json) record partial Win3.1 two-VM identity proof and remaining guest-bridge gates.

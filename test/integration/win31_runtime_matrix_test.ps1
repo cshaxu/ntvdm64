@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory)][string]$InstallRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$OutputRoot,
+    [string]$WindowsProbeImage,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
@@ -64,8 +65,13 @@ New-Item -ItemType Directory -Path $output | Out-Null
 # The private-desktop inspector only dismisses the identified, test-owned
 # missing serial-port dialogs. Other errors remain visible to the observer.
 . "$repo/tests/observation/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $output
-& $nasm -f bin -o "$output/W31CHECK.EXE" "$repo/tests/observation/win31_startup_contract.asm"
-if ($LASTEXITCODE) { throw 'Failed to assemble Win16 startup witness' }
+if ($WindowsProbeImage) {
+    # An extended witness must retain the boot/ready record contract below.
+    Copy-Item -LiteralPath $WindowsProbeImage -Destination "$output/W31CHECK.EXE"
+} else {
+    & $nasm -f bin -o "$output/W31CHECK.EXE" "$repo/tests/observation/win31_startup_contract.asm"
+    if ($LASTEXITCODE) { throw 'Failed to assemble Win16 startup witness' }
+}
 $probeBytes = [IO.File]::ReadAllBytes("$output/W31CHECK.EXE")
 foreach ($field in @(@('@W31_BOOT_PATH@',$boot),@('@W31_READY_PATH@',$ready))) {
     $image = [Text.Encoding]::ASCII.GetString($probeBytes)

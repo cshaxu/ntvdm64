@@ -40,6 +40,7 @@
 #include "bios.h"
 #include "virtual.h"
 #include "mvdm_softpc_termination.h"
+#include "mvdm_vm_bridge.h" /* MVDM-HOST-DIV-870 */
 #line 36
 #include "error.h"
 #include "debug.h"
@@ -737,6 +738,19 @@ GLOBAL void
 virtual_device_trap IFN0()
    {
    int new_vb;
+   mvdm_vm_bridge_result bridge;
+
+   /* DIVERGENCE MVDM-HOST-DIV-870: independent ring-0 guest bridge.
+    * Original NIDDB operations retain their original dispatch below. */
+   if (mvdm_vm_bridge_bop(getEAX(), getECX(), getEDX(), getESI(), getEBX(),
+           getPE() && !getVM() && getCPL() == 0, &bridge)) {
+       setEAX(bridge.status);
+       setEBX(bridge.value);
+       setEDX(bridge.serial_low);
+       setESI(bridge.serial_high);
+       setCF(bridge.status != 0);
+       return;
+   }
 
    mvdm_softpc_report_virtual_device_control((unsigned long)getEAX(),
        getBX(), getCX(), getDX());

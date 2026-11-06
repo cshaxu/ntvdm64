@@ -288,6 +288,8 @@ $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_softpc_ccpu_wait.c',
+                         'mvdm_vm_notification.c',
+                         'mvdm_vm_wake.c',
                          'mvdm_softpc_fast_bop.c',
                          'mvdm_softpc_wow_page_domain.c',
                          'mvdm_standalone_worker.c',
@@ -1916,7 +1918,11 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-text-producer-test.exe: console_test_link obj/tests/console_text_producer.obj obj/tests/console_text_provider.obj')
     # The frontend EXE is a runtime prerequisite, never a launcher link input.
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib common-base-srv-bindings.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib common-native-hook-context.lib || ntcon.exe')
+    $run16Dependencies = 'obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib common-base-srv-bindings.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib common-native-hook-context.lib'
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj ' + $run16Dependencies + ' || ntcon.exe')
+    $graph.Add('build obj/tests/run16_broker_bootstrap.obj: cc ' + (NinjaPath (Join-Path $root 'test/run16-exe/broker_bootstrap_test.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
+    $graph.Add('build run16-broker-bootstrap-test.exe: frontend_link obj/tests/run16_broker_bootstrap.obj ' + $run16Dependencies + ' common-root.lib')
     $graph.Add('build obj/tests/console_video_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_observed.c')))
     $graph.Add('  cflags = /nologo /c /MT /std:c11 /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build obj/tests/run16_package_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_package_observed.c')) + ' | obj/basesrv/service.h')
