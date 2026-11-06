@@ -233,3 +233,7 @@ T478 S17 [verifies the original allocator and records retained limits](../etc/ev
 ## S18 Closure Record
 
 T478 S18 [verifies existing parameter-map cleanup](../etc/evidence/m0-t478-s18-parameter-map.md): 54 scenarios pass; unproved original cross-task risk retained, no product changes.
+
+## S19 Closure Record
+
+T478 S19 [repairs EDIT tab-stop fallthrough](../etc/evidence/m0-t478-s19-edit-tabstop.md): one break, 30 object cases, 36 construction cases, gated real Win16 and 16 Full gates; worktree release only.

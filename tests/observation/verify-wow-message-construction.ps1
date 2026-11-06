@@ -14,7 +14,7 @@ $null=New-Item -ItemType Directory $root
 $baseline=if($Transaction){'4b8a7c8ae6eaaca3350d640650dd9d57201fd581'}else{'58fa75e55'}
 $steps=[Collections.Generic.List[object]]::new();$selections=@()
 function Read-Source($path,$old){
- if($old){$value=(& git -C $repo show "${baseline}:$path") -join "`n";if($LASTEXITCODE){throw "Baseline source $path"};return $value}
+ if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$value=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw "Baseline source $path"};return $value}
  [IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n")
 }
 function Region($text,$start,$end,$label){

@@ -1,0 +1,593 @@
+{
+  "baseline": "d5ba77899",
+  "finding": 47,
+  "divergence": "MVDM-HOST-DIV-875",
+  "original_comparison": {
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgem.c": {
+      "sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "tabstop_case_falls_through": true
+    },
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wmsgem.c": {
+      "sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "tabstop_case_falls_through": true
+    }
+  },
+  "baseline_cases": [
+    {
+      "exit": 0,
+      "case": "tabstop-0-0-0-0",
+      "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-0-0-0-1",
+      "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-0-0-1-0",
+      "output": "count=0 heap=0 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-0-0-1-1",
+      "output": "count=0 heap=0 result=1 free=0 callbacks=0 ret=305419896 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-0-1-0-0",
+      "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-0-1-0-1",
+      "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-0-1-1-0",
+      "output": "count=0 heap=1 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-0-1-1-1",
+      "output": "count=0 heap=1 result=1 free=0 callbacks=0 ret=305419896 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-1-0-0-0",
+      "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-1-0-0-1",
+      "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-1-0-1-0",
+      "output": "count=1 heap=0 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-1-0-1-1",
+      "output": "count=1 heap=0 result=1 free=0 callbacks=0 ret=305419896 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-1-1-0-0",
+      "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=11112222 word16=00000000"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop-1-1-0-1",
+      "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-1-1-1-0",
+      "output": "count=1 heap=1 result=1 free=1 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop-1-1-1-1",
+      "output": "count=1 heap=1 result=1 free=1 callbacks=0 ret=305419896 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop--1-0-0-0",
+      "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop--1-0-0-1",
+      "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop--1-0-1-0",
+      "output": "count=-1 heap=0 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop--1-0-1-1",
+      "output": "count=-1 heap=0 result=1 free=0 callbacks=0 ret=305419896 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop--1-1-0-0",
+      "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000"
+    },
+    {
+      "exit": 0,
+      "case": "tabstop--1-1-0-1",
+      "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop--1-1-1-0",
+      "output": "count=-1 heap=1 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "exit": 5,
+      "case": "tabstop--1-1-1-1",
+      "output": "count=-1 heap=1 result=1 free=0 callbacks=0 ret=305419896 proc=11112222 word16=12345678"
+    },
+    {
+      "exit": 0,
+      "case": "wordbreak-zero",
+      "output": "zero ret=00000000 word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0"
+    },
+    {
+      "exit": 0,
+      "case": "wordbreak-guest-ldt",
+      "output": "guest-ldt ret=00040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0"
+    },
+    {
+      "exit": 0,
+      "case": "wordbreak-guest-high",
+      "output": "guest-high ret=80040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0"
+    },
+    {
+      "exit": 0,
+      "case": "wordbreak-native-fail",
+      "output": "native-fail ret=00123456 word16=00123456 word32=00123456 callbacks=1 reason=27 ordinal=535"
+    },
+    {
+      "exit": 0,
+      "case": "wordbreak-native-success",
+      "output": "native-success ret=00123456 word16=12345678 word32=00123456 callbacks=1 reason=27 ordinal=535"
+    },
+    {
+      "exit": 0,
+      "case": "wordbreak-native-cached",
+      "output": "native-cached ret=56789abc word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0"
+    }
+  ],
+  "current_cases": [
+    {
+      "case": "tabstop-0-0-0-0",
+      "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-0-0-1",
+      "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-0-1-0",
+      "output": "count=0 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-0-1-1",
+      "output": "count=0 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-1-0-0",
+      "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-1-0-1",
+      "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-1-1-0",
+      "output": "count=0 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-0-1-1-1",
+      "output": "count=0 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-0-0-0",
+      "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-0-0-1",
+      "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-0-1-0",
+      "output": "count=1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-0-1-1",
+      "output": "count=1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-1-0-0",
+      "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-1-0-1",
+      "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-1-1-0",
+      "output": "count=1 heap=1 result=1 free=1 callbacks=0 ret=1 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop-1-1-1-1",
+      "output": "count=1 heap=1 result=1 free=1 callbacks=0 ret=1 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-0-0-0",
+      "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-0-0-1",
+      "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-0-1-0",
+      "output": "count=-1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-0-1-1",
+      "output": "count=-1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-1-0-0",
+      "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-1-0-1",
+      "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-1-1-0",
+      "output": "count=-1 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+      "exit": 0
+    },
+    {
+      "case": "tabstop--1-1-1-1",
+      "output": "count=-1 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+      "exit": 0
+    },
+    {
+      "case": "wordbreak-zero",
+      "output": "zero ret=00000000 word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0",
+      "exit": 0
+    },
+    {
+      "case": "wordbreak-guest-ldt",
+      "output": "guest-ldt ret=00040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0",
+      "exit": 0
+    },
+    {
+      "case": "wordbreak-guest-high",
+      "output": "guest-high ret=80040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0",
+      "exit": 0
+    },
+    {
+      "case": "wordbreak-native-fail",
+      "output": "native-fail ret=00123456 word16=00123456 word32=00123456 callbacks=1 reason=27 ordinal=535",
+      "exit": 0
+    },
+    {
+      "case": "wordbreak-native-success",
+      "output": "native-success ret=00123456 word16=12345678 word32=00123456 callbacks=1 reason=27 ordinal=535",
+      "exit": 0
+    },
+    {
+      "case": "wordbreak-native-cached",
+      "output": "native-cached ret=56789abc word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0",
+      "exit": 0
+    }
+  ],
+  "construction_result": "MESSAGE_CONSTRUCTION failures=0 scenarios=36 abi=72 scratch_offset=56 scratch_slots=4 parm=16\n",
+  "guest_snapshots": [
+    {
+      "stage": 1,
+      "nonAtomic": true,
+      "recordSize": 138,
+      "pid": 28088,
+      "module": "O:\\tmp\\n656\\system32\\WOW32.DLL",
+      "wordBreakProc": 0,
+      "image": "O:\\tmp\\n656\\system32\\ntvdm.exe",
+      "rva": 678620,
+      "moduleBase": 1899298816
+    },
+    {
+      "stage": 2,
+      "nonAtomic": true,
+      "recordSize": 184,
+      "pid": 28088,
+      "module": "O:\\tmp\\n656\\system32\\WOW32.DLL",
+      "wordBreakProc": 0,
+      "image": "O:\\tmp\\n656\\system32\\ntvdm.exe",
+      "rva": 678620,
+      "moduleBase": 1899298816
+    }
+  ],
+  "guest_records": [
+    {
+      "phase": 0,
+      "errors": 0,
+      "tabstop": 0,
+      "reset": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "tabstop": 0,
+      "reset": 0
+    },
+    {
+      "phase": 2,
+      "errors": 0,
+      "tabstop": 0,
+      "reset": 0
+    },
+    {
+      "phase": 48,
+      "errors": 0,
+      "tabstop": 1,
+      "reset": 0
+    },
+    {
+      "phase": 3,
+      "errors": 0,
+      "tabstop": 1,
+      "reset": 1
+    }
+  ],
+  "guest_run": {
+    "probeSha256": "B496F0B899CD5B84B53DB7E4F70B933D7C467FE633337760B42AB122A4D70DDF",
+    "observerExit": 0,
+    "observerLog": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s19\\guest-final\\tabstop-snapshot.observer.txt",
+    "runtime": "O:\\tmp\\n656",
+    "stagedWow32Sha256": "EFE76242E3FA0A2620EAFF5DCCAD53246247469618B3199C7B893569F72D1060"
+  },
+  "guest_identity": {
+    "rva": 678620,
+    "package": {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "1401EA599393633F8D4CB3E86588E25CDA0ECF2ED7D4650CAE4E87FF03243E7F",
+      "Machine": 332,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "FE177EF4DF5EB4425A0A4047F7BCEA102D7410CC6D43B4567489529DECEC3A2A"
+    },
+    "mapSha256": "6BF6C70C066D775E45707AC84B9D61E0FBD40C680C20622769909029950A2BD4",
+    "buildWowSha256": "FE177EF4DF5EB4425A0A4047F7BCEA102D7410CC6D43B4567489529DECEC3A2A"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 396437,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3668,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1510,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 273,
+        "CleanupMs": 468,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66565,
+        "CleanupMs": 552,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48307,
+        "CleanupMs": 687,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 47592,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14546,
+        "CleanupMs": 506,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13107,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 81097,
+        "CleanupMs": 711,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12978,
+        "CleanupMs": 579,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28965,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30605,
+        "CleanupMs": 523,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4799,
+        "CleanupMs": 520,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7757,
+        "CleanupMs": 590,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11240,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5144,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7786,
+        "CleanupMs": 494,
+        "Passed": true
+      }
+    ]
+  },
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "3B7A0CB4300EFEE739815A85BF0A82193CF9E16E2B345D8DBFC65C48B88FB78C",
+      "Machine": 34404,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "A7CA7B410C7C9AAB5D7260EAD03559A02C2B9AF56AD54A5499CB5BEBA2FA8973",
+      "Machine": 34404,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "62B140CE67A162B03A34A8E0CD3DAE5115E4FB2FF6F62F5E8187DAF9F340FB48",
+      "Machine": 34404,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "E882312D2ADCC5D795D0021F28B9D81F3D02E87E02BE6D4060C75164DF3BDA44",
+      "Machine": 332,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "CCF3B4A45E7B0BBAFA13452470DEED9B4AF4ADB94063253DB4E5583A32F57AE1"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "C6C69CEB5F34E9DF46CFFF049C1DCBF8B35A0AA6FE353414A0926E1F84DD49A1",
+      "Machine": 34404,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "2D641CC216C460268A3496719BC9F2BE8E334562C7BD7F56FF78B3CE2228A0A5",
+      "Machine": 34404,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "1401EA599393633F8D4CB3E86588E25CDA0ECF2ED7D4650CAE4E87FF03243E7F",
+      "Machine": 332,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "FE177EF4DF5EB4425A0A4047F7BCEA102D7410CC6D43B4567489529DECEC3A2A"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "485C3EFE819846FDF42B758032EAA3514BB15D3B87A5C0D9EA707DCC922EB178",
+      "Machine": 332,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "B5A98766D2755810F4B97AB2953A245B6AE8C081AB6F96FAA293583B58EFE5A2"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "62F0EE0078196A15DD79FD292E7A025AFDE4F84DDF872506C30ECC09DB0757E6",
+      "Machine": 332,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "9AA9CB5EB8BEE7F05FB97D53F78DBB426FC1945E8F7C5899DF05CF1092BC176A"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "2B49EC0065665FD82CAE5E690FE1299476B47099ED87DD97A213BFE14F53F59B",
+      "Machine": 34404,
+      "PackageId": "e012c0d5-1590-40a6-95a1-d09db981cbed",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "publication": "Worktree assets/release only; no O:/winnt write or push",
+  "hashes": {
+    "src\\mvdm-host\\wow32\\wmsgem.c": "6c61becaecc2e0546384932cdc71685de45f027415aca37143f8da518f82fee4",
+    "test\\integration\\wow_edit_tabstop_test.c": "cb0682893be375f9c9d7cab59bc772e89a66489bcf3dd90bd4563f32e5d20836",
+    "test\\integration\\verify-wow-edit-tabstop.ps1": "8e0e17dc559608cc65e5ad1066708cdb33fe847022b4939da4641d6f798e911a",
+    "test\\integration\\verify-wow-edit-tabstop-guest.ps1": "528f3452c5e16f351f0419fbce0bbdfd75ae556745f991157afde5bac9848a6b",
+    "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmsgem.obj": "7746e5ff3c27c1715abf739f07313ebb8a267cce123d75287d38cdd2a72bb699",
+    "build\\t478-s19\\TABTEST.EXE": "b496f0b899cd5b84b53db7e4f70b933d7c467fe633337760b42ab122a4d70ddf",
+    "build\\t478-s19\\guest-final\\tabstop-snapshot.report.bin": "1312c4e833f643a323f93a0eea6d9481fed383cc3c8c5c0c739e46dd625b8688"
+  }
+}

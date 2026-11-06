@@ -207,6 +207,8 @@ VOID FASTCALL UnThunkEMMsg16(LPMSGPARAMEX lpmpex)
 #line 244
             STACKORHEAPFREE((LPINT)lParamNew, lpmpex->MsgBuffer);
         }
+        /* DIV-875: tab-stop BOOL is not a word-break procedure. */
+        break;
 
     case EM_GETWORDBREAKPROC:
         if (lpmpex->lReturn) {

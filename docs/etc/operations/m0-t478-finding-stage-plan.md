@@ -271,3 +271,10 @@ unreached test boundary is repaired. S16 release is unchanged; S18 follows.
 54-scenario parameter-map suite successfully. DIV-347 remains effective; the
 same-key cross-task forced-owner-death scenario remains an unproved original
 risk, not grounds for a new ownership model. No product changes; S19 follows.
+
+## S19 disposition
+
+[S19](../evidence/m0-t478-s19-edit-tabstop.md) adds the missing original EDIT
+tab-stop break, preserving Boolean return and word-break state. All 30 actual-
+object cases, 36 existing construction cases, gated real Win16 witness and
+16 Full gates pass. Exact worktree release published; S20/finding 49 follows.
