@@ -90,3 +90,34 @@ All819 actual consumers are equivalent; both builds,16 Full gates and WINMINE
 gameplay passed. All11 tested images were published to this worktree
 assets/release; no guest changes, O:/winnt writes or push. The linked S2
 evidence contains complete receipts. S3 remains unadmitted; S2 has no open item.
+
+## S3 admitted connected-difference review
+
+Owner admits S3 after b35effafd. This supersedes the preceding unadmitted
+status without rewriting its historical closure. Admission is documentation-only.
+There is currently no newly proved semantic restoration; S1 reachability and
+S2 whitespace equivalence do not establish that connected edits can be reverted.
+
+| Sequential owner group | Question and prospective reduction | Required retained boundary |
+| --- | --- | --- |
+| DOS/COMMAND/XMS/DPMI | Are edited control/data paths redundant now that original providers are connected? Restore original calls or narrow conditional changes only after proving the same registers, results and lifetime. | Keep CPU40 PmStackInfo publication and completed T478 repairs unless actual counterevidence appears. |
+| SoftPC CPU/devices/video | Can changed CPU40 selectors, writer declarations/table carriers or host seams be narrowed without replacing original algorithms? | egawrtm0.c/egwrtm12.c active carriers are not dead code; preserve selected CPU40 and keyboard sas_loadw semantics. |
+| WOW32/USER and shared headers | Which declaration/call adaptations are necessary for actual consumers, and can any unnecessary scope be removed? | softpc.h has148 object consumers and WOW32 uses /Gz; explicit __cdecl cannot be removed wholesale. Preserve task/callback/resource contracts. |
+| Redirector/network | Separate necessary host I/O and async bindings from redundant changed code, including live content adjacent to exclusions. | Preserve completion ordering, ownership and error semantics; missing trace hits prove nothing. |
+| non-mvdm services/declarations | Determine the minimum imported source-shaped binding for selected service owners and shared declarations. | Recovered apisrv.c is original functionality, not a redundant adapter; no recursive CSR/kernel/USER-server import. |
+| VCDEX | Check whether differences exceed the finite VDD/host boundary. | WINAPI entry ABI is necessary; no renewed guest-driver or physical-device capability campaign. |
+
+Each group uses S1 stable hunk IDs, complete functions/headers and actual
+consumers, rebound to S2 hashes where changed. The review covers2132 substantive
+blocks and connected content within3680 exclusion-bearing blocks; these are
+lexical groups, not counts of defects or promised edits. Existing #error/#line
+policy stays intact. Pure diagnostic blocks and all146 resolved S2 whitespace
+IDs are excluded. Historical deleted-file candidates, SafeLoadLibrary/i386,
+PIG and BIGEND exclusions are not resurrected.
+
+Restore/minimize is allowed only with original-source identity and proof that
+all supported consumers keep the required ABI, outputs, state and lifetime.
+A smaller mirror diff obtained by copying original algorithms into adapters is
+not minimization. No new behavior, additional tolerance or guest work is
+admitted. Exact safe-edit counts will follow the owner-level evidence; do not
+present these investigation questions as already proved corrections.
