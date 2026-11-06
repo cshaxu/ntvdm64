@@ -1221,3 +1221,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S3 ForceDOS host integration](operations/m0-t478-s3-forcedos-plan.md): admitted scope, current flag gates and one-hop ownership design.
 
 - [T478 S3 ForceDOS evidence](evidence/m0-t478-s3-forcedos.md): host flag ownership, actual caller tests and local package identity.
+
+- [T478 S4 remote RAP and server enumeration](evidence/m0-t478-s4-remote-rap.md): original public branch recovery, retained private boundaries and verification.

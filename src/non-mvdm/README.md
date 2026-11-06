@@ -2575,3 +2575,12 @@ OPENNT-HOST-293: restore sampled original source positions for retained declarat
 OPENNT-HOST-294: correct and restore original diagnostic positions in base/win32/client/vdm.c and windows/core/ntuser/client/usercli.h; retained code and approved adapters are preserved. Evidence: artifacts/mvdm-audit/t476-s2-vdm-worker.json and t476-s2-usercli-worker.json. Compiler and complete context validation remain pending.
 
 OPENNT-HOST-295: public/sdk/inc/callconv.inc is imported byte-exact from pinned OpenNT for mvdm-host/wow32/i386/callpr32.asm. It supplies assembly calling-convention macros only, with no runtime dependency or further includes. S2 evidence records provenance and validation.
+
+OPENNT-HOST-296: import ds/netapi/xactsrv/apisrv.c as the original subset
+containing XsNetServerEnum2 and XsConvertServerEnumBuffer plus their descriptor
+declarations. Select the established local-NetAPI declaration facade and the
+explicit private Browser import; initialize entriesFilled and the response converter for failure cleanup.
+The original NULL-transport NetServerEnum and buffer-conversion algorithms are
+retained. DBG body is excluded with #error; unrelated server APIs are omitted.
+Source: pinned OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
+Evidence: docs/etc/evidence/m0-t478-s4-remote-rap.md.

@@ -5,7 +5,7 @@
  * packet construction, status mapping and DOS-register failure paths.  The
  * selected providers here live in the coupled RpcXlate/RxApi remote product
  * and require private Lanman redirector FSCTL/RAP transport that modern
- * public Win32 does not expose.  Returning STATUS_NOT_IMPLEMENTED at that
+ * public Win32 does not expose.  Returning ERROR_CALL_NOT_IMPLEMENTED at that
  * original import boundary is therefore preferable to fabricating an SMB/RAP
  * client or silently treating unrelated NetAPI calls as equivalent.
  */
@@ -17,6 +17,7 @@
 #include <rxuser.h>
 #include <xstypes.h>
 #include <xsprocs.h>
+#include "vdmredir-dll/include/remote_browser.h"
 
 NET_API_STATUS
 RxpTransactSmb(
@@ -73,19 +74,18 @@ GetLanmanSessionKey(
     return ERROR_CALL_NOT_IMPLEMENTED;
 }
 
-static NTSTATUS
-VdmRedirRemoteUnavailable(
-    API_HANDLER_PARAMETERS
-    )
+/* The NULL-transport public branch belongs to original apisrv.c. Only the
+ * private Browser transport import remains unavailable here. */
+WORD I_BrowserServerEnumForXactsrv(LPCWSTR transport,LPCWSTR client,ULONG native_level,
+    USHORT client_level,PVOID buffer,WORD bytes,DWORD preferred,LPDWORD read,
+    LPDWORD total,DWORD type,LPCWSTR domain,LPCWSTR first,PWORD converter)
 {
-    UNREFERENCED_PARAMETER(Header);
-    UNREFERENCED_PARAMETER(Parameters);
-    UNREFERENCED_PARAMETER(StructureDesc);
-    UNREFERENCED_PARAMETER(AuxStructureDesc);
-    return STATUS_NOT_IMPLEMENTED;
+    UNREFERENCED_PARAMETER(transport);UNREFERENCED_PARAMETER(client);
+    UNREFERENCED_PARAMETER(native_level);UNREFERENCED_PARAMETER(client_level);
+    UNREFERENCED_PARAMETER(buffer);UNREFERENCED_PARAMETER(bytes);
+    UNREFERENCED_PARAMETER(preferred);UNREFERENCED_PARAMETER(read);
+    UNREFERENCED_PARAMETER(total);UNREFERENCED_PARAMETER(type);
+    UNREFERENCED_PARAMETER(domain);UNREFERENCED_PARAMETER(first);
+    UNREFERENCED_PARAMETER(converter);
+    return ERROR_CALL_NOT_IMPLEMENTED;
 }
-
-#define VDMREDIR_REMOTE_UNAVAILABLE(name) \
-    NTSTATUS name(API_HANDLER_PARAMETERS) { return VdmRedirRemoteUnavailable(Header, Parameters, StructureDesc, AuxStructureDesc); }
-
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetServerEnum2)

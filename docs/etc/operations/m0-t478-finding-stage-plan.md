@@ -112,3 +112,12 @@ implementation is reused. Independent utilities, guest modifications and
 unproved PIF issues remain outside this bounded repair. S4 is the next proposed
 packet; this record does not admit it. Publication follows the owner's current
 worktree-assets-only, local-commit, no-push instruction.
+
+## S4 disposition
+
+[S4](../evidence/m0-t478-s4-remote-rap.md) corrects finding 26's overbroad
+unavailable classification: original server enumeration has a reachable public
+NetServerEnum branch, now restored with original conversion. Actual private
+RAP transport, password/session-key and private Browser boundaries retain
+explicit unavailable contracts. This per-boundary disposition closes S4;
+S5/finding 09 remains proposed, not admitted.

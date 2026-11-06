@@ -4,13 +4,15 @@
 
 **No active M/T/S packet.**
 
-T478 S3 closes at [ForceDOS host integration](../etc/evidence/m0-t478-s3-forcedos.md):
-Hook-to-Run16 flags now reach original COMMAND. Both caller widths and A/W
-variants pass; the Full gate passes 16/16. The owner-authorized P1 publishes
-only this worktree assets/release and commits locally; no O:/winnt write or push.
-The [ordered T478 plan](../etc/operations/m0-t478-finding-stage-plan.md) remains;
-S4/finding 26 is next proposed and is not admitted. Broader S1 inventory
-qualification remains open; S3 closure does not close T478.
+T478 S4 closes at [RAP and public server enumeration](../etc/evidence/m0-t478-s4-remote-rap.md).
+The original NULL-transport NetServerEnum route and converters are restored;
+the project-owned blanket Xs handler is removed. Genuine private RAP/Browser
+boundaries retain explicit unavailable results. Original-handler tests, actual
+DOS failure/native-status comparison and all 16 Full gates pass. P1 publishes
+only worktree assets/release and commits locally; no O:/winnt write or push.
+The [ordered plan](../etc/operations/m0-t478-finding-stage-plan.md) remains:
+S5/finding 09 is next proposed, not admitted. Broader S1 inventory qualification
+remains open; S4 closure does not close T478.
 
 ## M0 T475 S5 Closure
 
@@ -128,14 +130,14 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-This worktree contains main cd8c8583e (T477 VM frontend work), the rebased
-T478 S2 generic-call/EBX repair, and S3 ForceDOS integration. Task-number
-overlap remains owner-approved. The coherent ten-image package is
-398f8811-ff8a-45dc-8c00-abef023ccf2c, application 0.0.477/protocol 67.
-The combined source builds and passes all 16 selected Full gates, plus the
-18-case ForceDOS matrix and x86/x64 packet tests. Its exact hashes are in the
-[S3 evidence](../etc/evidence/m0-t478-s3-forcedos.md) and match worktree
-assets/release. O:/winnt remains untouched; guest inputs remain immutable.
+This worktree contains main cd8c8583e, the rebased S2 generic-call/EBX repair,
+S3 ForceDOS integration and S4 original public server enumeration recovery.
+Task-number overlap remains owner-approved. Application 0.0.477/protocol 67,
+coherent package 8f9f583a-a682-4175-b82e-1f926c9dbba4, passes all 16 Full gates.
+Its ten hashes match worktree assets/release; see [S4 evidence](../etc/evidence/m0-t478-s4-remote-rap.md).
+The native system currently returns 6118 for server enumeration; actual DOS
+matches it, while controlled original-handler tests cover successful conversion.
+O:/winnt remains untouched and original guest inputs are immutable.
 
 ## Temporary Evidence
 

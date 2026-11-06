@@ -281,7 +281,7 @@ $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
 # rather than duplicating a status table in Redirector or an adapter.
 $openntNetlibNames = @('ntstatus.c', 'copystr.c', 'allocstr.c', 'initoem.c', 'memalloc.c', 'time.c', 'timezone.c', 'xlatesvc.c', 'svcinfo.c', 'packstr.c')
 $openntNetapiNames = @('apibuff.c')
-$openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'xssubs.c', 'strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'xsunicod.c', 'auxdata.c', 'parmnum.c')
+$openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'apisrv.c', 'xssubs.c', 'strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'xsunicod.c', 'auxdata.c', 'parmnum.c')
 $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'auxdata.c', 'parmnum.c')
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c', 'time.c')
