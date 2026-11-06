@@ -77,8 +77,11 @@ VM through VMM Nuke_VM: the production retirement path removes its queued
 wake and rejects a late publication for its old generation. Normal shutdown
 is followed by test-only assertions that the IRQ reservation and EOI hook
 can be acquired again. These assertions are not linked into the product.
-Actual VMM handle reuse, guest initialization rollback, actual command-result
-integration and Win95 wait/wake remain separate obligations. The owner now
+The subsequent normal-package reuse witness creates a third DOS VM after
+the first two retire, observes B's actual handle with generation 4 instead
+of 2, rejects both old-generation wake APIs and consumes a valid new signal.
+Guest initialization rollback, actual command-result integration and Win95
+wait/wake remain separate obligations. The owner now
 prioritizes the complete Win3.1 path; no new Win95 investigation is running.
 
 VPICD descriptor/service ABI is checked against the read-only Microsoft

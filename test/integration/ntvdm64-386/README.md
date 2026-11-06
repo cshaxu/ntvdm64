@@ -58,3 +58,13 @@ Its service ordinal and VM_Not_Executeable control ordering are checked against
 the read-only Microsoft `ms-dos-6/dev/smartdrv/sdvxd/vmm.inc`. These are interface
 research sources only; no source body is imported. Tests exercise Win3.1 itself
 and do not infer its behavior merely from the older guide.
+
+`-Reuse` selects a subsequent `dos-reuse.asm` VM after the two ordinary
+identity witnesses have disappeared from the driver's actual VMM inventory.
+The controller launches its PIF through Win16 WinExec. It requires the new
+VM handle to equal one of the earlier handles, with a newer generation;
+absence of actual reuse is not counted as success. Old-generation direct and
+queued wake API calls must fail, while a new-generation counted completion
+must succeed. The 36-byte `VRUS` report is cross-checked against the original
+two VM reports, and Windows exits only after the new VM has also retired.
+This uses the normal candidate package, not the host-thread test seam.

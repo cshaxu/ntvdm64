@@ -408,3 +408,21 @@ proof includes real guest initialization rollback and actual VMM handle reuse;
 Win95 wait/wake is deferred by the owner's Win3.1-first instruction. Real
 54:08/0A command continuation and complete I/O remain S5/S6, not capabilities
 proved by the current queue/IRQ witnesses.
+
+## Subsequent actual Win3.1 VM handle reuse
+
+After P1 publication, the normal package and unchanged candidate driver passed
+`checked-reuse` (runner exit zero). The Win16 controller waited for both DOS
+VMs to retire, then invoked WinExec for a third DOS VM. Its actual VMM handle
+**2155442176** reused B's handle; the generation changed from **2 to 4**.
+The old-generation direct and queued wake API requests both failed, while a
+new-generation signal followed by wait consumed one valid completion. The
+host verifier cross-checked these values with the original pair's reports.
+The two-VM callback/wait/wake checks and final normal Windows exit also passed;
+the complete original installation inventory and hashes remained unchanged.
+
+This closes actual VMM handle reuse for the tested Win3.1 lifecycle. It does
+not substitute for initialization rollback or Win95 acceptance. The test
+changes only independent fixtures and their runner; production images and
+the published candidate are unchanged, so the existing Full 16/16 evidence
+is reused rather than rerunning unrelated product tests.

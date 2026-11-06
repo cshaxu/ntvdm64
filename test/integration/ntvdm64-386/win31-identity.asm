@@ -154,6 +154,29 @@ call far [vxd_api-data]
 jc fatal
 cmp eax,1
 jne .wait_retirement
+%ifdef REUSE
+cmp byte [reuse_started-data],0
+jne .exit
+inc byte [reuse_started-data]
+push ds
+push word reuse_program-data
+push word 1
+api 1,166                        ; WinExec after both earlier VMs retired
+cmp ax,32
+jb fatal
+.wait_reuse:
+api 1,29
+push ds
+push word reuse_result-data
+push word 0
+api 1,85
+cmp ax,-1
+je .wait_reuse
+push ax
+api 1,81
+jmp .wait_retirement
+.exit:
+%endif
 push word 0                      ; DWORD reserved
 push word 0
 push word 0                      ; UINT return code
@@ -194,5 +217,12 @@ vm_a_name: db '@VM_A_PATH@',0
 times 128-($-vm_a_name) db 0
 vm_b_name: db '@VM_B_PATH@',0
 times 128-($-vm_b_name) db 0
+%ifdef REUSE
+reuse_started: db 0
+reuse_program: db '@VM_REUSE_PROGRAM@',0
+times 128-($-reuse_program) db 0
+reuse_result: db '@VM_REUSE_RESULT@',0
+times 128-($-reuse_result) db 0
+%endif
 data_end:
 image_end:

@@ -30,8 +30,9 @@ The accepted shared-library side stage is closed; this is the resumed guest main
 S4 [P1 checkpoint](../etc/evidence/m0-t479-s4-driver-load.md): Win3.1 native-thread
 PIC wake, forced queued retirement and normal exit pass. Full 16/16; normal
 ten-component package ca3b367a-3d54-4d05-a9a8-147594d7450d published to both
-destinations. Driver remains a candidate; initialization rollback, actual VM
-reuse and command integration remain open. S4 is not closed.
+destinations. Actual Win3.1 VM handle reuse also passes. Driver remains a
+candidate; initialization rollback and command integration remain open.
+S4 is not closed.
 
 Owner priority: finish the Win3.1 enhanced-mode path first. Do not launch new
 Win95 investigations or tests while completing that path. Retain existing

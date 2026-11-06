@@ -6,9 +6,11 @@ param(
  [Parameter(Mandatory)][string]$InstallRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
- [string]$RetirementDriver
+ [string]$RetirementDriver,
+ [switch]$Reuse
 )
 $ErrorActionPreference='Stop'
+if($Reuse -and $RetirementDriver){throw 'Reuse and forced retirement are separate witnesses'}
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $task=[IO.Path]::GetFullPath($OutputRoot)
 $source=(Resolve-Path -LiteralPath $InstallSource).Path.TrimEnd('\')
@@ -81,10 +83,20 @@ $s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
 
-& nasm -f bin "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
+$defines=@()
+if($Reuse){
+ & nasm -f bin "$PSScriptRoot/dos-reuse.asm" -o "$dest/PATCH/REUSE.COM"
+ if($LASTEXITCODE){throw 'Reuse witness assembly failed'}
+ & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
+ if($LASTEXITCODE){throw 'Reuse PIF build failed'}
+ $defines=@('-DREUSE=1')
+}
+& nasm -f bin @defines "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
 if($LASTEXITCODE){throw 'Win16 controller build failed'}
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
-foreach($field in @(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"))){
+$fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"))
+if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}
+foreach($field in $fields){
  $image=[Text.Encoding]::ASCII.GetString($bytes)
  $offset=$image.IndexOf($field[0],[StringComparison]::Ordinal)
  $value=[Text.Encoding]::ASCII.GetBytes($field[1])
@@ -146,6 +158,16 @@ try {
  $rows|ConvertTo-Json|Set-Content "$task/runtime/vm-pair.json"
  if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or [Math]::Max($rows[0].start,$rows[1].start) -ge [Math]::Min($rows[0].finish,$rows[1].finish)){throw 'Distinct concurrent VM identity not proved'}
  'PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks'
+ if($Reuse){
+  $b=[IO.File]::ReadAllBytes("$dest/PATCH/REUSE.BIN")
+  Copy-Item "$dest/PATCH/REUSE.BIN" "$task/runtime/REUSE.BIN"
+  if($b.Length -ne 36 -or [Text.Encoding]::ASCII.GetString($b,0,4) -ne 'VRUS'){throw 'Invalid reuse report'}
+  $reuseResult=[ordered]@{vm=[BitConverter]::ToUInt32($b,4);generation=[BitConverter]::ToUInt64($b,8);oldGeneration=[BitConverter]::ToUInt64($b,16);error=[BitConverter]::ToUInt32($b,24);rejected=[BitConverter]::ToUInt32($b,28);consumed=[BitConverter]::ToUInt32($b,32)}
+  $reuseResult|ConvertTo-Json|Set-Content "$task/runtime/vm-reuse.json"
+  $previous=@($rows|Where-Object{$_.vm -eq $reuseResult.vm -and $_.generation -eq $reuseResult.oldGeneration})
+  if($reuseResult.error -or $previous.Count -ne 1 -or $reuseResult.generation -le $reuseResult.oldGeneration -or $reuseResult.rejected -ne 2 -or $reuseResult.consumed -ne 1){throw 'Actual VMM handle reuse or stale generation rejection not proved'}
+  'PASS actual VMM handle reuse, old direct/queued wake rejection and new counted completion'
+ }
 
 } finally {
  if(@(Get-ChildItem $source -Force -Recurse -File).Count -ne $original.Count){throw 'Original installation file inventory changed'}

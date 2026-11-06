@@ -1668,5 +1668,93 @@
     ],
     "backup": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\p1-publication-backup",
     "verifiedUtc": "2026-11-06T05:13:12.2744976Z"
+  },
+  "win31HandleReuse": {
+    "runnerExit": 0,
+    "package": "ca3b367a-3d54-4d05-a9a8-147594d7450d",
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-reuse\\runtime\\386-dosonly1.observer.txt"
+    },
+    "reuse": {
+      "vm": 2155442176,
+      "generation": 4,
+      "oldGeneration": 2,
+      "error": 0,
+      "rejected": 2,
+      "consumed": 1
+    },
+    "pair": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2155499520,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1395646,
+        "finish": 1395700,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 2,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155442176,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1395646,
+        "finish": 1395700,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 3,
+        "notificationSeen": 3,
+        "notificationIrq": 15,
+        "notificationErrors": 0
+      }
+    ],
+    "driver": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F",
+    "sources": [
+      {
+        "name": "dos-reuse.asm",
+        "sha256": "4298CBCF4C6552C7D84369EBD68AD01B440852C28BA8F729DCA28279D086AA6E"
+      },
+      {
+        "name": "win31-identity.asm",
+        "sha256": "DD2880AB90A4588413E63A27BA9B069B700BBC48683D0C8482E937D44D3C6288"
+      },
+      {
+        "name": "verify-win31-identity.ps1",
+        "sha256": "C36349F30287D3A4AE00E281A97182DDE2C6FB9E9722850BC29CAF30683073EC"
+      }
+    ],
+    "scope": "Actual VMM handle reuse and rejected old-generation APIs; no new product build or Win95 claim"
   }
 }
