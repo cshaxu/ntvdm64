@@ -100,7 +100,11 @@ void process_hook_startup_abort(void)
             /* A partially patched process cannot safely return to application
              * entry. This is solely this freshly staged, uncommitted process. */
             TerminateProcess(GetCurrentProcess(),ERROR_DLL_INIT_FAILED);
+#ifdef _MSC_VER
+            __assume(0);
+#else
             __builtin_unreachable();
+#endif
         }
         memcpy(hook->slot,&hook->target,sizeof(hook->target));
     }

@@ -60,7 +60,7 @@ foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object
     $graph.Add('build '+$object+': cc '+(NP (Join-Path $root $source))+' | obj/basesrv/service.h')
     if($source -in @('src/lib-win32/process-hook/staging.c','src/lib-win32/process-hook/helper.c','src/lib-win32/process-hook/payload.c')) { $graph.Add('  cflags = $cflags /std:c11') }
-    if($source -eq 'src/lib-win32/process-hook/startup_hooks.c') { $graph.Add('  cflags = $cflags /std:c11 /FI"'+(NP (Join-Path $root 'src/compat/include/process_hook_msvc.h'))+'"') }
+    if($source -eq 'src/lib-win32/process-hook/startup_hooks.c') { $graph.Add('  cflags = $cflags /std:c11') }
     if($source -eq 'src/non-mvdm/base/win32/client/vdm.c') {
         $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"')
     }

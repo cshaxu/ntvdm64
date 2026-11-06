@@ -1565,7 +1565,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/lib-win32/process-launch/command_line.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/command_line.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-process-launch.lib: lib obj/lib-win32/process-launch/attributes.obj obj/lib-win32/process-launch/process.obj obj/lib-win32/process-launch/command_line.obj')
-    $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process_launch_test.c')))
+    $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
     $graph.Add('build obj/lib-win32/process-image/image.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-image/image.c')))
@@ -1592,10 +1592,10 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/win32_file_identity.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/file/identity_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-file-identity-test.exe: broker_test_link obj/tests/win32_file_identity.obj lib-file.lib')
-    $graph.Add('build obj/tests/win32_handle.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/handle/duplicate_test.c')))
+    $graph.Add('build obj/tests/win32_handle.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/handle/handle.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-handle-test.exe: broker_test_link obj/tests/win32_handle.obj lib-handle.lib')
-    $graph.Add('build obj/tests/win32_process_attributes.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/attributes_test.c')))
+    $graph.Add('build obj/tests/win32_process_attributes.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/attributes.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-attributes-test.exe: broker_test_link obj/tests/win32_process_attributes.obj')
     $graph.Add('build obj/tests/win32_rpc_peer.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/rpc/peer_test.c')))
@@ -1776,9 +1776,7 @@ if ($Architecture -eq 'x86') {
         $object = 'obj/lib-win32/process-hook/' + $name + '.obj'
         $hookObjects += $object
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/lib-win32/process-hook/' + $name + '.c'))))
-        if($name -eq 'startup_hooks') {
-            $graph.Add('  cflags = ' + $hookCFlags + ' /FI "' + (NinjaPath (Join-Path $root 'src/compat/include/process_hook_msvc.h')) + '"')
-        } else { $graph.Add('  cflags = ' + $hookCFlags) }
+        $graph.Add('  cflags = ' + $hookCFlags)
     }
     $graph.Add('build obj/common/native-hook/packet.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/packet.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)

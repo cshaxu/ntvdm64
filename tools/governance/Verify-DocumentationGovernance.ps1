@@ -75,12 +75,13 @@ function Test-IntermissionContinuation([string]$Baseline,[int]$Task,[int]$Subtas
     $priorTask=[int]$closed.Groups['task'].Value
     $priorS=[int]$closed.Groups['subtask'].Value
     return $Task -eq $priorTask -and $Subtask -eq ($priorS+1) -and
-        $Baseline -match ('(?m)^T'+$priorTask+' remains open\.')
+        $Baseline -match ('\bT'+$priorTask+' remains open\.')
 }
 
 if ($SelfTest) {
     $intermission="**No active M/T/S packet.** T477 S1 is closed.`nT477 remains open."
     if(!(Test-IntermissionContinuation $intermission 477 2) -or
+        !(Test-IntermissionContinuation ($intermission.Replace("`n",' ')) 477 2) -or
         (Test-IntermissionContinuation $intermission 477 1) -or
         (Test-IntermissionContinuation $intermission 477 3) -or
         (Test-IntermissionContinuation $intermission 478 2) -or

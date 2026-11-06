@@ -43,7 +43,7 @@ DWORD process_hook_install_helper(HANDLE child,PCWSTR dll,const void *packet,DWO
     STARTUPINFOW startup={0};PROCESS_INFORMATION helper={0};
     handoff_header *header=NULL;void *remote=NULL;SIZE_T total,written=0;
     ULONGLONG deadline=GetTickCount64()+10000;uint64_t birth;
-    if(!child || !dll || !packet || !create || !bytes || bytes>65536)return ERROR_INVALID_PARAMETER;
+    if(!child || !dll || !packet || !create || !bytes || bytes%sizeof(WCHAR) || bytes>65536)return ERROR_INVALID_PARAMETER;
     SIZE_T dll_chars=wcsnlen_s(dll,PROCESS_HOOK_PATH_CAP)+1;
     if(dll_chars>PROCESS_HOOK_PATH_CAP)return ERROR_FILENAME_EXCED_RANGE;
     pid=GetProcessId(child);if(!pid)return GetLastError();

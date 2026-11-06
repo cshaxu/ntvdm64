@@ -2,6 +2,7 @@
 #define PROCESS_HOOK_LATE_PATCH_H
 #include <windows.h>
 #include "late_guard.h"
+#define PROCESS_HOOK_LATE_PATCH_LIMIT 88u
 /* Experimental, single-owner transaction. The MinHook buffer allocator must
  * already be initialized and must not be shared with another hook backend.
  * Installed trampolines are retained; removal is not implemented. */

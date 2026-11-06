@@ -1,0 +1,286 @@
+{
+  "upstream": "d27956b4e5e62d6a81edbd511f2ba4bbd5290026",
+  "package": "f86fa099-e0ba-4d7f-bbd3-721fbee9b824",
+  "sharedCTest": {
+    "msvcX86": 14,
+    "msvcX64": 14,
+    "gccX86": 14,
+    "gccX64": 14
+  },
+  "crossWidth": {
+    "msvc": 13,
+    "gcc": 13
+  },
+  "runs": [
+    {
+      "name": "build-x86",
+      "process": "pid=32500 start=2026-11-06T01:00:34.3097530Z\r\nexit=0",
+      "stdoutSha256": "B5BA83C0A3A3A66FA70CBF5F6F5925BEB8CF573A3B2623CBD25DD671F8C74D17",
+      "stderrSha256": "9FB0B803D46B2EDD81E77AAA615D5721C961271CDD410F5BDA368F36F57B57EB"
+    },
+    {
+      "name": "build-x64",
+      "process": "pid=10248 start=2026-11-06T01:00:34.8314752Z\r\nexit=0",
+      "stdoutSha256": "6E967D7BC27270E9538850EFF6ACC446A35D1A7F13693F40CC354D4AC6D87B3B",
+      "stderrSha256": "9FB0B803D46B2EDD81E77AAA615D5721C961271CDD410F5BDA368F36F57B57EB"
+    },
+    {
+      "name": "final-x86",
+      "process": "pid=596 start=2026-11-06T01:09:29.7926638Z\r\nexit=0",
+      "stdoutSha256": "F9D719D38C65651E913BBA5C6161F41F6FFE03E31E44D1FE2FBA869E977897F9",
+      "stderrSha256": "9FB0B803D46B2EDD81E77AAA615D5721C961271CDD410F5BDA368F36F57B57EB"
+    },
+    {
+      "name": "final-x64",
+      "process": "pid=39284 start=2026-11-06T01:09:29.8653758Z\r\nexit=0",
+      "stdoutSha256": "05CC918A1FEA5F051AA9A167880C36E9011DA741492C58393CDF335554AEDA1C",
+      "stderrSha256": "9FB0B803D46B2EDD81E77AAA615D5721C961271CDD410F5BDA368F36F57B57EB"
+    },
+    {
+      "name": "gcc",
+      "process": "pid=22768 start=2026-11-06T01:07:30.9243436Z\r\nexit=0",
+      "stdoutSha256": "0EC35C749CEF567035F4A490B782D8DAEAC4D1879315942551E932F755567087",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "name": "matrix",
+      "process": "pid=16956 start=2026-11-06T01:04:03.1279645Z\r\nexit=0",
+      "stdoutSha256": "CABC543FCD3C6046094C1C1EA1301D6D35BB5CB09F22B67060C565696A94F0CF",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "name": "matrix-gcc",
+      "process": "pid=39776 start=2026-11-06T01:10:03.4036982Z\r\nexit=0",
+      "stdoutSha256": "CABC543FCD3C6046094C1C1EA1301D6D35BB5CB09F22B67060C565696A94F0CF",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "name": "release-verification",
+      "process": "pid=6368 start=2026-11-06T01:04:22.6550420Z\r\nexit=0",
+      "stdoutSha256": "F0557A308D6237B21D91D1BF8C1D06E4F25E4ED9113F809A9E3A8753B14063D7",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "name": "publication",
+      "process": "pid=39844 start=2026-11-06T01:14:23.4927221Z\r\nexit=0",
+      "stdoutSha256": "71F24E9F2263C7695E63E5F4A2757F1923867D50593885FD06BF434B50F0983A",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "name": "governance-final",
+      "process": "pid=32364 start=2026-11-06T01:12:41.4681488Z\r\nexit=0",
+      "stdoutSha256": "BB0930C1B5123D219198880F948985F0B09B1856A3A7C24D0AC00B534F5B3B4A",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "name": "governance-check",
+      "process": "pid=5664 start=2026-11-06T01:13:46.5700072Z\r\nexit=0",
+      "stdoutSha256": "CFD597275399951EA25568FAAE268FE21175399CA22C178221C702249AF14D45",
+      "stderrSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 376192,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1638,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1237,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 401,
+        "CleanupMs": 465,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67727,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 50765,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 48448,
+        "CleanupMs": 513,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 18547,
+        "CleanupMs": 558,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 14316,
+        "CleanupMs": 485,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 54336,
+        "CleanupMs": 472,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12838,
+        "CleanupMs": 557,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28950,
+        "CleanupMs": 439,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30662,
+        "CleanupMs": 583,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4398,
+        "CleanupMs": 546,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7896,
+        "CleanupMs": 545,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10397,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4735,
+        "CleanupMs": 535,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 9193,
+        "CleanupMs": 514,
+        "Passed": true
+      }
+    ]
+  },
+  "tests": [
+    {
+      "path": "test/lib-win32/handle/handle.c",
+      "sha256": "42E01105103F803C7F25EA28D0CB86F157BE99EC5912E02BFE7C607973D95F4D"
+    },
+    {
+      "path": "test/lib-win32/process-image/access.c",
+      "sha256": "185D3320D39A2C19203DDB4A717A15B1E14DB7D9A217CC7FB3B7CF5E370C00CA"
+    },
+    {
+      "path": "test/lib-win32/process-image/image_machine_test.c",
+      "sha256": "9B91BE88440594AB92DE138747A76A48E7296CACF1FAFC0D9BE15AB3BD5851B2"
+    },
+    {
+      "path": "test/lib-win32/process-image/image.c",
+      "sha256": "482F3467C82159BB25BEB89AEB2846C0FD09291F52EA2B33E6C9FAFA11BBEA89"
+    },
+    {
+      "path": "test/lib-win32/process-launch/attributes.c",
+      "sha256": "F852C9BA3343FF7639B83BC0EF9F30A8D806EB41C523E64BE76081444F04D936"
+    },
+    {
+      "path": "test/lib-win32/process-launch/command_line.c",
+      "sha256": "49CBE50F9E16F9004173FF73D36A23BC171CDE99F5C1828C8E769D7F529A512F"
+    },
+    {
+      "path": "test/lib-win32/process-launch/process.c",
+      "sha256": "1CB04FFC852C2D97251E111F6852B94715F336E5D448CA0F6EE3EDA22D46A2DC"
+    },
+    {
+      "path": "test/lib-win32/process-hook/cross_helper.c",
+      "sha256": "43BEADBF2BC356101F9D042D5590F17A093813FEED094C025D207AD56CB76F02"
+    },
+    {
+      "path": "test/lib-win32/process-hook/cross_helper.def",
+      "sha256": "A7B4C776B484530694124F41963441E48B374823CB483FDAF2A9CA66F615EA8F"
+    },
+    {
+      "path": "test/lib-win32/process-hook/cross_payload.c",
+      "sha256": "A69D9D6D9E27ED44B39890591F4C63D926950324A702171CE1C204DCD5B072EE"
+    },
+    {
+      "path": "test/lib-win32/process-hook/late_batch.c",
+      "sha256": "EE21FEB9DB2C4D0134901EA7169ED453B7B99B46B75665CF168DA5E163E81C5B"
+    },
+    {
+      "path": "test/lib-win32/process-hook/late_guard_race.c",
+      "sha256": "005B8EEC4D0BDAA25101C8F7AA90A85DEB878C00971B577F1AAAAF310CC26F87"
+    },
+    {
+      "path": "test/lib-win32/process-hook/link.c",
+      "sha256": "01FA54A324E84F5B55F476E9481DFF0933F70FC85A54864EC280D1407A96BC80"
+    },
+    {
+      "path": "test/lib-win32/process-hook/payload_direct.c",
+      "sha256": "AA4C2891813E11379A10C4551FA1394F3BB32236F06206FB312136F5AC313D1B"
+    },
+    {
+      "path": "test/lib-win32/process-hook/payload_test.c",
+      "sha256": "387F397792BDECF28B2FF05E3BDC1B0DA4B6041E70A3ED4881549CF4C7749AF1"
+    },
+    {
+      "path": "test/lib-win32/process-hook/payload.c",
+      "sha256": "A0C40F4B38EDDDA65CC8BC20B3C0A8DD86CCB36528E4C3FDA2FC892F36D320DF"
+    },
+    {
+      "path": "test/lib-win32/process-hook/propagate.c",
+      "sha256": "224011BFDCBE9E9F359CB81B957EA9745D1E6123189352FF8C1AB01449F807F6"
+    },
+    {
+      "path": "test/lib-win32/process-hook/unwind.c",
+      "sha256": "AF559CBBB44C7668BD3B1D544BC59789C7B36E71DA2E278C154A9AE75A5653A1"
+    },
+    {
+      "path": "test/lib-win32/process-hook/upstream-sha256.txt",
+      "sha256": "96496B3C83FA8CAF7873EE69A953FA8D3E0D666BDECE7AB8ED094B681D52CC81"
+    },
+    {
+      "path": "test/lib-win32/process-hook/verify-upstream.py",
+      "sha256": "AF5B808372258BB0D7E063ABFEB81D95211D705F038865DE19D87A5C0E44C3D5"
+    },
+    {
+      "path": "test/lib-win32/process-hook/portable/CMakeLists.txt",
+      "sha256": "F49901774B64379E9276754674F2E5562F2041644EC7C76D0F257330E6AD99CE"
+    },
+    {
+      "path": "test/lib-win32/process-hook/portable/README.md",
+      "sha256": "C96E0009E195B972A2D31E1288615D5BBF1C07F66FF50EA135A9AF412E1D1ABF"
+    },
+    {
+      "path": "test/lib-win32/CMakeLists.txt",
+      "sha256": "35F61A8881BF81B101646E4E6BACADF05A568D3D8A2ECD6233DD1120A55FE6F2"
+    },
+    {
+      "path": "test/lib-win32/verify-matrix.ps1",
+      "sha256": "D982CC3D414B430AF64536456F21611C649404A1A70D3C1A162C882C1A8BE3D9"
+    }
+  ],
+  "limitation": "DOS4GW/NESticle excluded by prior owner instruction; new helper APIs not all selected by product."
+}

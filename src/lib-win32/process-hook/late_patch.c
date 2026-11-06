@@ -54,7 +54,6 @@ DWORD process_hook_late_patch_prepare(process_hook_late_patch *p,void *slot,void
 static DWORD fail_protect_after=MAXDWORD;
 void process_hook_late_patch_test_fail_protect_after(DWORD n){fail_protect_after=n;}
 #endif
-#define PROCESS_HOOK_LATE_PATCH_LIMIT 88u
 DWORD process_hook_late_patch_install_batch(process_hook_late_guard *guard,process_hook_late_patch **items,DWORD count)
 {
     process_hook_late_region regions[PROCESS_HOOK_LATE_PATCH_LIMIT];DWORD protection[PROCESS_HOOK_LATE_PATCH_LIMIT];

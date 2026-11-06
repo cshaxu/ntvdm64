@@ -1184,3 +1184,8 @@ current S1 source findings, ownership decisions and bounded ABI proof tasks.
 
 [T479 S1 research closure](evidence/m0-t479-s1-guest-research-closure.md) records
 owner acceptance of the research and mandatory S2--S5 verification handoff.
+
+[T479 S2 shared import audit](operations/m0-t479-s2-shared-import.md) records
+the pinned source intersection, compatibility findings and generic-test plan.
+
+[T479 S2 shared import evidence](evidence/m0-t479-s2-shared-import.md) records source identity, common tests and delivery verification.

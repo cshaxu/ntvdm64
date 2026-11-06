@@ -158,7 +158,18 @@ static DWORD stage_process(HANDLE child,const char *dll,const void *packet,DWORD
     old=(IMAGE_IMPORT_DESCRIPTOR *)scratch;next=image.nt;
     if(staged){
         if(previous.reserved==(dll?0u:1u) && previous.packet_bytes==bytes && !read_memory(child,(void *)(uintptr_t)previous.allocation_base,scratch,bytes) &&
-           !memcmp(scratch,packet,bytes))goto done;
+           !memcmp(scratch,packet,bytes)){
+            if(!dll)goto done;
+            IMAGE_IMPORT_DESCRIPTOR descriptor;
+            uintptr_t base=(uintptr_t)image.base;
+            DWORD rva=image.nt.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
+            error=read_memory(child,(void *)(base+rva),&descriptor,sizeof(descriptor));
+            if(error)goto done;
+            if(base>UINTPTR_MAX-descriptor.Name || dll_bytes-1>UINTPTR_MAX-base-descriptor.Name){error=ERROR_BAD_EXE_FORMAT;goto done;}
+            error=read_memory(child,(void *)(base+descriptor.Name),scratch,dll_bytes);
+            if(error)goto done;
+            if(!memcmp(scratch,dll,dll_bytes))goto done;
+        }
         next.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT]=previous.imports;
         next.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]=previous.bound;
         next.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IAT]=previous.iat;

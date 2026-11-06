@@ -80,3 +80,11 @@ research results; see the [closure and mandatory handoff](../evidence/m0-t479-s1
 This supersedes the earlier active-S1 wording and moves the unproved executable
 contracts to the named S2--S5 gates, without declaring them passed. T479 remains
 open; no next S is admitted by this closure.
+
+## S2 shared-library side stage
+
+The owner now admits S2/shared-library-import, recorded in its
+[audit](m0-t479-s2-shared-import.md), including generic shared-test consolidation.
+This is the sole active packet. Planned S2/guest-bridge retains its qualified
+identity under the mixed-task rule; no guest implementation or proof gate is
+silently closed or renumbered by this side work.

@@ -1,0 +1,190 @@
+{
+  "upstream": "win16style",
+  "revision": "d27956b4e5e62d6a81edbd511f2ba4bbd5290026",
+  "files": [
+    {
+      "path": "src/lib-win32/handle/duplicate.c",
+      "sha256": "7036b95282ffa11d76305094c8efc076cf0a6a864ea3fd508c993e3ce3090596"
+    },
+    {
+      "path": "src/lib-win32/handle/duplicate.h",
+      "sha256": "f39b055b6678a24d8c69e97496adaf46bc6b16322859e7a88f899a84aefbfd26"
+    },
+    {
+      "path": "src/lib-win32/process-image/file_handle.c",
+      "sha256": "fcd6e29414264e1d06fcada7bed9408a1990912516fc9e2b183accaca5df426a"
+    },
+    {
+      "path": "src/lib-win32/process-image/file_handle.h",
+      "sha256": "c0fb8a4894050c458b17c945344a4e03b4686a1a9fa2513c47cd49d225116d0d"
+    },
+    {
+      "path": "src/lib-win32/process-image/image.c",
+      "sha256": "c9bb55054465aaba97259bc778feef444943022796231ca0b46fa10c0011b210"
+    },
+    {
+      "path": "src/lib-win32/process-image/image.h",
+      "sha256": "1f267696c2e4cca4177a3592779f74284f0ba2f6ea3b2b325cbab295c271c0e7"
+    },
+    {
+      "path": "src/lib-win32/process-image/remote.c",
+      "sha256": "14b13288ae5d2b7be750ce0e59c53cf5505631539096d4c414912c8cd4124eed"
+    },
+    {
+      "path": "src/lib-win32/process-image/remote.h",
+      "sha256": "43668622ccbd9b486b85d88c98679cebb52088e7235b2678a577e336e92ef0e9"
+    },
+    {
+      "path": "src/lib-win32/process-launch/attributes.c",
+      "sha256": "5bb012796b56d581a93b95b012d5a5fc60b86f1ee2a30e97bf911f36ae562cc6"
+    },
+    {
+      "path": "src/lib-win32/process-launch/attributes.h",
+      "sha256": "dc527f1c3fafd49dfe3aac5c9c5f98418f8423bbb742f69e6adb9a2affc1ced8"
+    },
+    {
+      "path": "src/lib-win32/process-launch/command_line.c",
+      "sha256": "2e091f08db0ffaba49f6cb426d4358d13fe74b9765cb549154eadf4e3a35c7cb"
+    },
+    {
+      "path": "src/lib-win32/process-launch/command_line.h",
+      "sha256": "f210c0f3478c6f56c9b51878a9dd3bce9d25937ded30cdd564e0f0ce24a4b7a9"
+    },
+    {
+      "path": "src/lib-win32/process-launch/process.c",
+      "sha256": "42c9800e39b7ca622def80b4274fa54875c3d9361c7333b83955a29261e8524d"
+    },
+    {
+      "path": "src/lib-win32/process-launch/process.h",
+      "sha256": "378677ef568ad2b14992dfa7ca9ce62de12054f79a9b3f3b8fa8e1230ab052da"
+    },
+    {
+      "path": "src/lib-win32/process-hook/LICENSE.win16style",
+      "sha256": "71337277c6c03463ca6d7b56aba20fed81d3e6f1c8a823f7d5ab30760de8a389"
+    },
+    {
+      "path": "src/lib-win32/process-hook/helper.c",
+      "sha256": "7ced9af82c88a4bd9e48b3fdd9d7b25735c2bd8dc12ec6a7bea609fd253ed02a"
+    },
+    {
+      "path": "src/lib-win32/process-hook/helper.h",
+      "sha256": "746ad04512cb83ed4494d4090824ab13fbf68db505beee6c2552159e92a1b64f"
+    },
+    {
+      "path": "src/lib-win32/process-hook/late_batch.c",
+      "sha256": "d7729f780638131d74399458cba18f9ece7956ae70d1086f0dc80c8d5a7541be"
+    },
+    {
+      "path": "src/lib-win32/process-hook/late_batch.h",
+      "sha256": "ca31262acbbd5574500bbb6a13df6009e9258388e3266d9cbe81672448c01c74"
+    },
+    {
+      "path": "src/lib-win32/process-hook/late_guard.c",
+      "sha256": "67b623f41ebd50247d723903134f5b99ffc60053b93fba276758e74d162d2c4c"
+    },
+    {
+      "path": "src/lib-win32/process-hook/late_guard.h",
+      "sha256": "8f6805a2cf238da66fcd4c7039bd96bfd392049d6bfa2e83f81e0faeeb2b773f"
+    },
+    {
+      "path": "src/lib-win32/process-hook/late_patch.c",
+      "sha256": "15b689bf11a42844876ff8d4bd7ffbf8cd1afad1502c4762518300a5514fc89e"
+    },
+    {
+      "path": "src/lib-win32/process-hook/late_patch.h",
+      "sha256": "30a44d505c3ce8b6b64ee9fb36654014c19607d4247e0c62c4315ab05112aa27"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/AUTHORS.txt",
+      "sha256": "073b4e8b0a5a0cd9f4dfa838369f4fc7a4f47151d930b4e1fd891644060a897f"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/LICENSE.txt",
+      "sha256": "d5c2224982b0b95a16b098a561335fa93f3eaf4d0aa964b7843edb986df78dc8"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/buffer.c",
+      "sha256": "53228de3f2a14a390f6d97538d702c20a4388eea42e53b5b999532bab018287b"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/buffer.h",
+      "sha256": "9769702bd625249e59a19ede05c84365fcc7707e1fa0e5df08df42227cee13e3"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/hde32.c",
+      "sha256": "5da4941e9044f7b325c7f952b5840089e365f374740b7fe7318805d08c0d6c32"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/hde32.h",
+      "sha256": "5132de5be8ac7a9d054420f5caef0fb01437faa892f03b3cdc77f795973bf15a"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/hde64.c",
+      "sha256": "824eafa315322e6da105a7ce4ec1fc0e0adeee0106d32152fbb0b59e709bd15c"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/hde64.h",
+      "sha256": "e99aa4997bda14b534c614c3d8cb78a72c4aca91a1212c8b03ec605d1d75e36e"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/pstdint.h",
+      "sha256": "604d1cdf45c5a95bc9cf1bbf39ca05ef83013541101d34971c5cd7577e3d5247"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/table32.h",
+      "sha256": "43bf687a9fff071b5f46070db4d36c846f8e069cdc57485ee897c499aacdde23"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/hde/table64.h",
+      "sha256": "b774446d2f110ce954fb0a710f4693c5562ddbd8d56fe84106f2ee80db8b50a2"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/trampoline.c",
+      "sha256": "f13a169f803ff5a8e45c58ce668b4377a9878c0fc4452369b8a1325065186b2b"
+    },
+    {
+      "path": "src/lib-win32/process-hook/minhook/src/trampoline.h",
+      "sha256": "53ed9934492320617a27bfd952ffe7f5b7a4a1d09963d4512447082fe7b727b4"
+    },
+    {
+      "path": "src/lib-win32/process-hook/payload.c",
+      "sha256": "37360c011349e3e6aed1b276fdfc45f30e579d3e8bbd75460eb2260b541cade4"
+    },
+    {
+      "path": "src/lib-win32/process-hook/payload.h",
+      "sha256": "5dc1e08b15c8b4608307f3588b5ee9466179229026d4edab357b208b85b94a6c"
+    },
+    {
+      "path": "src/lib-win32/process-hook/propagate.c",
+      "sha256": "8d9b5b62d6a8a1e34bd21a7fcd0d0c4fc45d9c357634f450278496e29ce23559"
+    },
+    {
+      "path": "src/lib-win32/process-hook/propagate.h",
+      "sha256": "4a71140917e36f6d1a4cb152f95970a9b293bb98d836fce7f1da59a2491cbbaa"
+    },
+    {
+      "path": "src/lib-win32/process-hook/staging.c",
+      "sha256": "5bb5c83fad1abedc5e9d96573e16d47306654b856eba1b54cbcc3717ae198dcd"
+    },
+    {
+      "path": "src/lib-win32/process-hook/staging.h",
+      "sha256": "910166162612075fc4916b0d4cdcd05dcdc29f191e5b6ffd963681f3c35b8514"
+    },
+    {
+      "path": "src/lib-win32/process-hook/startup_hooks.c",
+      "sha256": "bc1b0cafdf1d2c932ea729bd2588b6570d2e3291d65aba7245794a75c93ef999"
+    },
+    {
+      "path": "src/lib-win32/process-hook/startup_hooks.h",
+      "sha256": "7c7c7b8007199447567895982b9e65805be36165d2e7a4783a573559d4d0a89d"
+    },
+    {
+      "path": "src/lib-win32/process-hook/unwind.c",
+      "sha256": "4faed5146e2dbba2632d6acebe48014ee68e14be5653600e88809194eb9b5361"
+    },
+    {
+      "path": "src/lib-win32/process-hook/unwind.h",
+      "sha256": "03bfd2b444393e1b1e236825013c45e7cad5c36f31b5c74a41ba220f5af94a8a"
+    }
+  ]
+}

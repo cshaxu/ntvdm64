@@ -35,10 +35,13 @@ int main(int argc,char **argv)
     win32_handle_close_remote(child.hProcess,NULL);
 cleanup:
     if(remote && child.hProcess)win32_handle_close_remote(child.hProcess,remote);
-    if(readback)CloseHandle(readback);if(local)CloseHandle(local);if(source)CloseHandle(source);
+    if(readback)CloseHandle(readback);
+    if(local)CloseHandle(local);
+    if(source)CloseHandle(source);
     if(stop)SetEvent(stop);
     if(child.hProcess){if(WaitForSingleObject(child.hProcess,5000)!=WAIT_OBJECT_0){TerminateProcess(child.hProcess,1);WaitForSingleObject(child.hProcess,5000);result=1;}CloseHandle(child.hProcess);}
-    if(child.hThread)CloseHandle(child.hThread);if(stop)CloseHandle(stop);
+    if(child.hThread)CloseHandle(child.hThread);
+    if(stop)CloseHandle(stop);
     if(!result)printf("PASS Win32 handle local/remote lifecycle checks=%d\n",checks);
     return result;
 }

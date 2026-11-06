@@ -2,10 +2,41 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T479 S1 is closed by owner acceptance of the current
-research results. T479 remains open. S2 is planned and awaits admission.
+**Active: M0 T479 S2** - shared-library import verified and published; awaiting owner acceptance.
+This mixed-task side stage does not close or replace the guest mainline.
 
-## S1 Guest Research Closure
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Candidate Proposal | [Guest multitask frontend package](../proposals/proposal-multitask-guest-vdm-frontends-001.md); this approved shared-import side stage retains the same T objective. |
+| Identifier Mode | M0 T479 S2/shared-library-import; Ordinary Mode, single executor/reviewer. |
+| Admission And Approval | Owner admits S2 to audit/import the adjacent win16-style public intersection, removing superseded implementations; subsequent approval permits making imported tests generic for both projects. |
+| Objective | Establish exact shared component intersection and compatibility, then replace eligible implementations with pinned byte-identical upstream copies and consolidate reusable tests. |
+| Non-goals | No styling feature restoration, guest modification, unrelated upstream-only components, or writes to the sibling repository. |
+| Reference Baseline | Local c43cec416; upstream O:/repos.hobby/win16style at d27956b4e5e62d6a81edbd511f2ba4bbd5290026, initially clean. |
+| Files And ABI Surface | Shared lib-win32 source/test intersection, owning consumers, build/test registration and provenance; audit before source replacement. |
+| Applicable Rules | Execution, source policy, architecture/coding/document rules; preserve LF and unrelated edits. |
+| Verification | Whole component source/test comparison, public API and dependency/caller audit, pinned hashes, cached supported builds and relevant/full product gates before coherent publication. |
+| Expected Markers | Per-component unchanged/changed/added/deleted inventory, compatibility decisions and no duplicate local implementation. |
+| Asset Needs | Read-only adjacent committed source/test tree; existing build caches and published baseline. |
+| Reporting Requirements | Audit feasibility first; distinguish exact source import from caller adaptation and upstream evidence from local tests. |
+| Stop Conditions | New semantic concession, unknown provenance, incompatible required behavior or concurrent upstream changes invalidate blind replacement. |
+| Exit Criteria | Reviewed import, byte-identity evidence, build/test/publication, commit/push; unresolved incompatibilities explicitly retained without false completion. |
+| Original Owner Request | Admit S2 to audit and execute unchanged import of the sibling public-intersection src and test, deleting local implementations; first audit whether import is feasible. |
+| Similar-Issue Sweep | API/ABI, GCC/MSVC and x86/x64, transitive dependencies, test helpers, error/lifetime behavior and all product consumers. |
+| Temporary Evidence | build/t479-s2-shared; owner S2; 60-minute phase, 2 GiB, 15-minute no-progress review; stable caches remain untouched. |
+
+## S2 Shared Import Delivery
+
+[Delivery evidence](../etc/evidence/m0-t479-s2-shared-import.md) records 46/46
+exact upstream source files, one generic test suite, MSVC/GCC x86/x64 passes,
+both cross-width matrices and Full 16/16. The coherent ten-image package
+f86fa099-e0ba-4d7f-bbd3-721fbee9b824 is published at both destinations.
+Guest-bridge implementation remains a separate workline; this delivery does
+not imply guest multitasking support.
+
+## S1 Closure Record
 
 [Closure and mandatory handoff](../etc/evidence/m0-t479-s1-guest-research-closure.md)
 records the bounded research outcome and transfers executable proof obligations
@@ -43,7 +74,7 @@ No guest driver or actual guest multitasking capability is claimed.
 [T477 S2 P4 integrated delivery](../etc/evidence/m0-t477-s2-p4-integration.md)
 and [S2 implementation evidence](../etc/evidence/m0-t477-s2-frontend-instances.md).
 
-## S1 Closure Record
+## T477 S1 Closure Record
 
 [T477 S1 closure evidence](../etc/evidence/m0-t477-s1-frontend-base.md).
 
