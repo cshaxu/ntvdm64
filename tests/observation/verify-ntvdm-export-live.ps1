@@ -32,6 +32,7 @@ try {
     $start.EnvironmentVariables['TEMP'] = $runtime; $start.EnvironmentVariables['TMP'] = $runtime
     $start.EnvironmentVariables['PATH'] = "$runtime\system32;$env:SystemRoot\System32"
     $start.EnvironmentVariables['NTVDM_EXPORT_TEST_TRACE'] = "$out\trace.txt"
+    $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP'] = '1'
     foreach ($arg in @("$runtime\system32\run16.exe", $runtime, "$out\observer.txt", '--wait', "$runtime\system32\MEM.EXE", '--observation-timeout-ms', '40000')) { $start.ArgumentList.Add($arg) }
     $process = [Diagnostics.Process]::Start($start)
     if (!$process.WaitForExit(45000)) { throw 'Observer did not complete' }
@@ -39,6 +40,8 @@ try {
     if ((Get-Content "$out\observer.txt" -Raw) -notmatch 'exit=0x00000000') { throw 'MEM did not report a successful target exit' }
     if (!(Test-Path "$out\trace.txt") -or (Get-Content "$out\trace.txt" -Raw) -notmatch 'PASS NTVDM export name/ordinal query/allocate/reallocate/free') { throw 'Live VDD export witness missing' }
     if ((Get-Content "$out\trace.txt" -Raw) -notmatch 'PASS failed reallocation preserves allocation and free space') { throw 'Live VDD failed-reallocation witness missing' }
+    $trace = Get-Content "$out\trace.txt" -Raw
+    if ($trace -match '(?m)^FAIL ' -or $trace -notmatch 'PASS export query at matching task termination') { throw 'Live VDD task-lifecycle witness failed' }
     'PASS live NTVDM VDD export witness and MEM completion' | Set-Content "$out\result.txt"
 } finally {
     if ($scope) { Stop-IsolatedPackageScope $scope }

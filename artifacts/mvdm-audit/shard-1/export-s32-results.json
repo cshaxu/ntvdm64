@@ -1,0 +1,1049 @@
+{
+  "result": "pass",
+  "profile": {
+    "result": "pass",
+    "original_count": 140,
+    "selected_count": 274,
+    "pe_count": 274,
+    "contract_count": 274,
+    "prior_ordinal_count": 271,
+    "prior_commit": "a8a0aef7e",
+    "original_declarations": {
+      "getEAX": {
+        "target": "getEAX",
+        "data": false,
+        "ordinal": null
+      },
+      "getEBX": {
+        "target": "getEBX",
+        "data": false,
+        "ordinal": null
+      },
+      "getECX": {
+        "target": "getECX",
+        "data": false,
+        "ordinal": null
+      },
+      "getEDX": {
+        "target": "getEDX",
+        "data": false,
+        "ordinal": null
+      },
+      "getESP": {
+        "target": "getESP",
+        "data": false,
+        "ordinal": null
+      },
+      "getEBP": {
+        "target": "getEBP",
+        "data": false,
+        "ordinal": null
+      },
+      "getESI": {
+        "target": "getESI",
+        "data": false,
+        "ordinal": null
+      },
+      "getEDI": {
+        "target": "getEDI",
+        "data": false,
+        "ordinal": null
+      },
+      "getFS": {
+        "target": "getFS",
+        "data": false,
+        "ordinal": null
+      },
+      "getGS": {
+        "target": "getGS",
+        "data": false,
+        "ordinal": null
+      },
+      "setEAX": {
+        "target": "setEAX",
+        "data": false,
+        "ordinal": null
+      },
+      "setEBX": {
+        "target": "setEBX",
+        "data": false,
+        "ordinal": null
+      },
+      "setECX": {
+        "target": "setECX",
+        "data": false,
+        "ordinal": null
+      },
+      "setEDX": {
+        "target": "setEDX",
+        "data": false,
+        "ordinal": null
+      },
+      "setESP": {
+        "target": "setESP",
+        "data": false,
+        "ordinal": null
+      },
+      "setEBP": {
+        "target": "setEBP",
+        "data": false,
+        "ordinal": null
+      },
+      "setESI": {
+        "target": "setESI",
+        "data": false,
+        "ordinal": null
+      },
+      "setEDI": {
+        "target": "setEDI",
+        "data": false,
+        "ordinal": null
+      },
+      "setFS": {
+        "target": "setFS",
+        "data": false,
+        "ordinal": null
+      },
+      "setGS": {
+        "target": "setGS",
+        "data": false,
+        "ordinal": null
+      },
+      "MGetVdmPointer": {
+        "target": "ExpSim32GetVDMPointer",
+        "data": false,
+        "ordinal": null
+      },
+      "setMSW": {
+        "target": "setMSW",
+        "data": false,
+        "ordinal": null
+      },
+      "getEIP": {
+        "target": "getEIP",
+        "data": false,
+        "ordinal": null
+      },
+      "CurrentMonitorTeb": {
+        "target": "CurrentMonitorTeb",
+        "data": true,
+        "ordinal": null
+      },
+      "ExpVdmTib": {
+        "target": "VdmTib",
+        "data": true,
+        "ordinal": null
+      },
+      "SelectorLimit": {
+        "target": "ExpSelectorLimit",
+        "data": true,
+        "ordinal": null
+      },
+      "getMSW": {
+        "target": "getMSW",
+        "data": false,
+        "ordinal": null
+      },
+      "getAX": {
+        "target": "getAX",
+        "data": false,
+        "ordinal": null
+      },
+      "getAL": {
+        "target": "getAL",
+        "data": false,
+        "ordinal": null
+      },
+      "getAH": {
+        "target": "getAH",
+        "data": false,
+        "ordinal": null
+      },
+      "getBX": {
+        "target": "getBX",
+        "data": false,
+        "ordinal": null
+      },
+      "getBL": {
+        "target": "getBL",
+        "data": false,
+        "ordinal": null
+      },
+      "getBH": {
+        "target": "getBH",
+        "data": false,
+        "ordinal": null
+      },
+      "getCX": {
+        "target": "getCX",
+        "data": false,
+        "ordinal": null
+      },
+      "getCL": {
+        "target": "getCL",
+        "data": false,
+        "ordinal": null
+      },
+      "getCH": {
+        "target": "getCH",
+        "data": false,
+        "ordinal": null
+      },
+      "getDX": {
+        "target": "getDX",
+        "data": false,
+        "ordinal": null
+      },
+      "getDL": {
+        "target": "getDL",
+        "data": false,
+        "ordinal": null
+      },
+      "getDH": {
+        "target": "getDH",
+        "data": false,
+        "ordinal": null
+      },
+      "getSP": {
+        "target": "getSP",
+        "data": false,
+        "ordinal": null
+      },
+      "getBP": {
+        "target": "getBP",
+        "data": false,
+        "ordinal": null
+      },
+      "getSI": {
+        "target": "getSI",
+        "data": false,
+        "ordinal": null
+      },
+      "getDI": {
+        "target": "getDI",
+        "data": false,
+        "ordinal": null
+      },
+      "getIP": {
+        "target": "getIP",
+        "data": false,
+        "ordinal": null
+      },
+      "getCS": {
+        "target": "getCS",
+        "data": false,
+        "ordinal": null
+      },
+      "getSS": {
+        "target": "getSS",
+        "data": false,
+        "ordinal": null
+      },
+      "getDS": {
+        "target": "getDS",
+        "data": false,
+        "ordinal": null
+      },
+      "getES": {
+        "target": "getES",
+        "data": false,
+        "ordinal": null
+      },
+      "getCF": {
+        "target": "getCF",
+        "data": false,
+        "ordinal": null
+      },
+      "getPF": {
+        "target": "getPF",
+        "data": false,
+        "ordinal": null
+      },
+      "getAF": {
+        "target": "getAF",
+        "data": false,
+        "ordinal": null
+      },
+      "getZF": {
+        "target": "getZF",
+        "data": false,
+        "ordinal": null
+      },
+      "getSF": {
+        "target": "getSF",
+        "data": false,
+        "ordinal": null
+      },
+      "getIF": {
+        "target": "getIF",
+        "data": false,
+        "ordinal": null
+      },
+      "getDF": {
+        "target": "getDF",
+        "data": false,
+        "ordinal": null
+      },
+      "getOF": {
+        "target": "getOF",
+        "data": false,
+        "ordinal": null
+      },
+      "setAX": {
+        "target": "setAX",
+        "data": false,
+        "ordinal": null
+      },
+      "setAH": {
+        "target": "setAH",
+        "data": false,
+        "ordinal": null
+      },
+      "setAL": {
+        "target": "setAL",
+        "data": false,
+        "ordinal": null
+      },
+      "setBX": {
+        "target": "setBX",
+        "data": false,
+        "ordinal": null
+      },
+      "setBH": {
+        "target": "setBH",
+        "data": false,
+        "ordinal": null
+      },
+      "setBL": {
+        "target": "setBL",
+        "data": false,
+        "ordinal": null
+      },
+      "setCX": {
+        "target": "setCX",
+        "data": false,
+        "ordinal": null
+      },
+      "setCH": {
+        "target": "setCH",
+        "data": false,
+        "ordinal": null
+      },
+      "setCL": {
+        "target": "setCL",
+        "data": false,
+        "ordinal": null
+      },
+      "setDX": {
+        "target": "setDX",
+        "data": false,
+        "ordinal": null
+      },
+      "setDH": {
+        "target": "setDH",
+        "data": false,
+        "ordinal": null
+      },
+      "setDL": {
+        "target": "setDL",
+        "data": false,
+        "ordinal": null
+      },
+      "setSP": {
+        "target": "setSP",
+        "data": false,
+        "ordinal": null
+      },
+      "setBP": {
+        "target": "setBP",
+        "data": false,
+        "ordinal": null
+      },
+      "setSI": {
+        "target": "setSI",
+        "data": false,
+        "ordinal": null
+      },
+      "setDI": {
+        "target": "setDI",
+        "data": false,
+        "ordinal": null
+      },
+      "setIP": {
+        "target": "setIP",
+        "data": false,
+        "ordinal": null
+      },
+      "setCS": {
+        "target": "setCS",
+        "data": false,
+        "ordinal": null
+      },
+      "setSS": {
+        "target": "setSS",
+        "data": false,
+        "ordinal": null
+      },
+      "setDS": {
+        "target": "setDS",
+        "data": false,
+        "ordinal": null
+      },
+      "setES": {
+        "target": "setES",
+        "data": false,
+        "ordinal": null
+      },
+      "setCF": {
+        "target": "setCF",
+        "data": false,
+        "ordinal": null
+      },
+      "setPF": {
+        "target": "setPF",
+        "data": false,
+        "ordinal": null
+      },
+      "setAF": {
+        "target": "setAF",
+        "data": false,
+        "ordinal": null
+      },
+      "setZF": {
+        "target": "setZF",
+        "data": false,
+        "ordinal": null
+      },
+      "setSF": {
+        "target": "setSF",
+        "data": false,
+        "ordinal": null
+      },
+      "setIF": {
+        "target": "setIF",
+        "data": false,
+        "ordinal": null
+      },
+      "setDF": {
+        "target": "setDF",
+        "data": false,
+        "ordinal": null
+      },
+      "setOF": {
+        "target": "setOF",
+        "data": false,
+        "ordinal": null
+      },
+      "host_simulate": {
+        "target": "host_simulate",
+        "data": false,
+        "ordinal": null
+      },
+      "host_CreateThread": {
+        "target": "host_CreateThread",
+        "data": false,
+        "ordinal": null
+      },
+      "host_ExitThread": {
+        "target": "host_ExitThread",
+        "data": false,
+        "ordinal": null
+      },
+      "Sim32pGetVDMPointer": {
+        "target": "Sim32pGetVDMPointer",
+        "data": false,
+        "ordinal": null
+      },
+      "getIntelRegistersPointer": {
+        "target": "getIntelRegistersPointer",
+        "data": false,
+        "ordinal": null
+      },
+      "RegisterWOWIdle": {
+        "target": "RegisterWOWIdle",
+        "data": false,
+        "ordinal": null
+      },
+      "BlockWOWIdle": {
+        "target": "BlockWOWIdle",
+        "data": false,
+        "ordinal": null
+      },
+      "SuspendTimerThread": {
+        "target": "SuspendTimerThread",
+        "data": false,
+        "ordinal": null
+      },
+      "ResumeTimerThread": {
+        "target": "ResumeTimerThread",
+        "data": false,
+        "ordinal": null
+      },
+      "call_ica_hw_interrupt": {
+        "target": "ica_hw_interrupt",
+        "data": false,
+        "ordinal": null
+      },
+      "GetWOWShortCutInfo": {
+        "target": "GetWOWShortCutInfo",
+        "data": false,
+        "ordinal": null
+      },
+      "DispatchInterrupts": {
+        "target": "DispatchInterrupts",
+        "data": false,
+        "ordinal": null
+      },
+      "ExpLdt": {
+        "target": "Ldt",
+        "data": true,
+        "ordinal": null
+      },
+      "FlatAddress": {
+        "target": "FlatAddress",
+        "data": true,
+        "ordinal": null
+      },
+      "pDeviceChain": {
+        "target": "pDeviceChain",
+        "data": true,
+        "ordinal": null
+      },
+      "fSeparateWow": {
+        "target": "fSeparateWow",
+        "data": true,
+        "ordinal": null
+      },
+      "host_com_close": {
+        "target": "host_com_close",
+        "data": false,
+        "ordinal": null
+      },
+      "host_direct_access_error": {
+        "target": "host_direct_access_error",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDInstallIOHook": {
+        "target": "VDDInstallIOHook",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDDeInstallIOHook": {
+        "target": "VDDDeInstallIOHook",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDRequestDMA": {
+        "target": "VDDRequestDMA",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDSetDMA": {
+        "target": "VDDSetDMA",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDQueryDMA": {
+        "target": "VDDQueryDMA",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDInstallMemoryHook": {
+        "target": "VDDInstallMemoryHook",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDDeInstallMemoryHook": {
+        "target": "VDDDeInstallMemoryHook",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDAllocMem": {
+        "target": "VDDAllocMem",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDFreeMem": {
+        "target": "VDDFreeMem",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDIncludeMem": {
+        "target": "VDDIncludeMem",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDExcludeMem": {
+        "target": "VDDExcludeMem",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDTerminateVDM": {
+        "target": "VDDTerminateVDM",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDInstallUserHook": {
+        "target": "VDDInstallUserHook",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDDeInstallUserHook": {
+        "target": "VDDDeInstallUserHook",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDSimulate16": {
+        "target": "VDDSimulate16",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDReserveIrqLine": {
+        "target": "VDDReserveIrqLine",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDReleaseIrqLine": {
+        "target": "VDDReleaseIrqLine",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDAllocateDosHandle": {
+        "target": "VDDAllocateDosHandle",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDAssociateNtHandle": {
+        "target": "VDDAssociateNtHandle",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDReleaseDosHandle": {
+        "target": "VDDReleaseDosHandle",
+        "data": false,
+        "ordinal": null
+      },
+      "VDDRetrieveNtHandle": {
+        "target": "VDDRetrieveNtHandle",
+        "data": false,
+        "ordinal": null
+      },
+      "DBGNotifyNewTask": {
+        "target": "DBGNotifyNewTask",
+        "data": false,
+        "ordinal": null
+      },
+      "DBGNotifyRemoteThreadAddress": {
+        "target": "DBGNotifyRemoteThreadAddress",
+        "data": false,
+        "ordinal": null
+      },
+      "DBGNotifyDebugged": {
+        "target": "DBGNotifyDebugged",
+        "data": false,
+        "ordinal": null
+      },
+      "cpu_createthread": {
+        "target": "cpu_createthread",
+        "data": false,
+        "ordinal": null
+      },
+      "WaitIfIdle": {
+        "target": "WaitIfIdle",
+        "data": false,
+        "ordinal": null
+      },
+      "WOWSysErrorBox": {
+        "target": "WOWSysErrorBox",
+        "data": false,
+        "ordinal": null
+      },
+      "SoftPcEoi": {
+        "target": "SoftPcEoi",
+        "data": false,
+        "ordinal": null
+      },
+      "demFileFindFirst": {
+        "target": "demFileFindFirst",
+        "data": false,
+        "ordinal": null
+      },
+      "demFileFindNext": {
+        "target": "demFileFindNext",
+        "data": false,
+        "ordinal": null
+      },
+      "demClientErrorEx": {
+        "target": "demClientErrorEx",
+        "data": false,
+        "ordinal": null
+      },
+      "VdmAllocateVirtualMemory": {
+        "target": "VdmAllocateVirtualMemory",
+        "data": false,
+        "ordinal": null
+      },
+      "VdmFreeVirtualMemory": {
+        "target": "VdmFreeVirtualMemory",
+        "data": false,
+        "ordinal": null
+      },
+      "VdmQueryFreeVirtualMemory": {
+        "target": "VdmQueryFreeVirtualMemory",
+        "data": false,
+        "ordinal": null
+      },
+      "VdmReallocateVirtualMemory": {
+        "target": "VdmReallocateVirtualMemory",
+        "data": false,
+        "ordinal": null
+      },
+      "VdmAddVirtualMemory": {
+        "target": "VdmAddVirtualMemory",
+        "data": false,
+        "ordinal": null
+      },
+      "VdmRemoveVirtualMemory": {
+        "target": "VdmRemoveVirtualMemory",
+        "data": false,
+        "ordinal": null
+      }
+    },
+    "retained_extension": "Sim32FlushVDMPointer",
+    "template_sha256": "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC",
+    "original_files": [
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src",
+        "sha256": "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src",
+        "sha256": "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC"
+      }
+    ],
+    "template_difference": "Restored exact original CRLF bytes; no declaration changes",
+    "supplemental_sha256": "98C00C3C4737108674061779A6C1E06F113C597D76536A49E0723AA617D58A7A",
+    "image_sha256": "ACD25C83FC7885BF8C35612AEA346A41B6214F0EA2B202D7B798B5985863F190",
+    "scope": "Metadata/profile and ordinal continuity; actual providers and live calls are separate evidence"
+  },
+  "owners": "PASS 9 original template alias/DATA export owners\n",
+  "memory": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+  "live_trace": "PASS NTVDM export name/ordinal query/allocate/reallocate/free\nPASS failed reallocation preserves allocation and free space\nPASS export query at matching task termination\n",
+  "live_observer": "container=console-owning-nondebug\npid=39476\nresult=exited\nexit=0x00000000\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=18068\nconsole-members-after-wait=2\nconsole-member=26508\nconsole-member=18068\ndirect-child pid=22568 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\n156\\system32\\ntsrv.exe\ntimeout-ms=40000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\n156\nfixed-system-root-chars=11\nfixed-system-root-short-chars=11\nfixed-system-root-short=O:\\tmp\\n156\nimage-identity=unavailable\n",
+  "live_manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "864EB5B82BE8640F8826D093B4E6EA4F2A2D1BC1676A9C3672E198BD7BD3E93F",
+      "Machine": 34404,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "89937025ECC11EC1F32C5729124DBDBC06296CD09961EFB9EA270FC723E85E18",
+      "Machine": 34404,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "1222AE51549E2D229EA40C189732640AE18592FD82A586C1E5061EFC423761A8",
+      "Machine": 34404,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "EB94F5EC8DC8BD30391968BF1C6554B5883C2D56D49A4609D42A77BF7DDBC089",
+      "Machine": 332,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "0EB95B5315D32838566A27ECE08CA04BF7B0B8748DBCF65D36FD6E6B9F9C14F1"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "85BF1FFDD5B05140A04BDB6582CDBBF5BB852BA71427FBD1F4D52FCF1720572B",
+      "Machine": 34404,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "A1F4602AFC90C8BAF63D7C6790C130A55AFD39078B37BDB8B8119794E08561C4",
+      "Machine": 34404,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "1FE7CBC2C12B9563CA563CB517394C18EA1C9A0EF52994D35D5079916EB2B7E3",
+      "Machine": 332,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "015F327EA32A47497A7A46D9D8EA66F6D68F60E25DA8C621EA9569F4E35A753C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "6E776B6857B9574C1401233AD61F069CE3577B45FD4EEBCC5D9A3B532A5F4763",
+      "Machine": 332,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "A80B681265A26ADFD5A901A55C5A258D4C248B38F82316836334C2B05001D253"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "6640C3C0AA2FC0C79D2D2CEED3521AF2685B57CDF24679D96F30318150E6EBF0",
+      "Machine": 332,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "8FFABBD2E32C85AF76E240ED0BB5EE7D32F86C5E1DC7E85F8AC57DD003046FC9"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "B8D194D3A8F8E4340FF7A68BCCEE125FC16CDCE2412B34F75FA268AA915DAB2E",
+      "Machine": 34404,
+      "PackageId": "2393e064-3df2-4045-b2d7-2ceb46ce7658",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 380184,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3228,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1601,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 313,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68271,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 49242,
+        "CleanupMs": 374,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44869,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16268,
+        "CleanupMs": 333,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10737,
+        "CleanupMs": 346,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 71086,
+        "CleanupMs": 372,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12872,
+        "CleanupMs": 368,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28148,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30251,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 6083,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8713,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10931,
+        "CleanupMs": 358,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3357,
+        "CleanupMs": 303,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6414,
+        "CleanupMs": 356,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": "PASS ten-image worktree release package=3f06f0c6-d34a-4a6d-a862-4c89ed5373b2; backup=build/t478-s32/release-before; no O:/winnt write\n",
+  "package_id": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "494F7E1ABA5FE3BFD0B402A2146C475F4879CA532016172AC717346541C9F991",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "DA08DEE537D42D5E1238521155D5E1B11DFF2945F7F3D60D99F939362D5FCB5A",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "463F6CD406CE3FCD608EEF116834CFBF22EC30C83B8D255D2C6D0E6383C94776",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "ACD25C83FC7885BF8C35612AEA346A41B6214F0EA2B202D7B798B5985863F190",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "0EB95B5315D32838566A27ECE08CA04BF7B0B8748DBCF65D36FD6E6B9F9C14F1"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "F0F82775C6DF0A2480AA6B1702E0BDF9174BD37E7BC03D88F931A67D7F10776F",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "EA4AFCB5208B2AFCBE553D0717C5C9687769538824F1FA9D962526B2EA8EA719",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "BDE32D7F57F5EDB5154694471339D1BCC00BBE82BE4C356A677DD757B8E0A9F9",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "015F327EA32A47497A7A46D9D8EA66F6D68F60E25DA8C621EA9569F4E35A753C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "0633A21F88C48AE23358F351AF8AA7433040A46440718FBA400E768FD7F10F86",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "A80B681265A26ADFD5A901A55C5A258D4C248B38F82316836334C2B05001D253"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "B907DDFDA38C3180A975B1009FF4E2476B545C17D2106819F0CF91F7AF272D57",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "8FFABBD2E32C85AF76E240ED0BB5EE7D32F86C5E1DC7E85F8AC57DD003046FC9"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "536EB8BE9FA1B0D28912D354A0B94A029B7FE7556E927DEC9F7C33C652532568",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/ntvdm_export_live_vdd.c",
+      "sha256": "3265503BE93CE018F26978783C5311BD44AF6429B9B5355CEA6DE32E4FBAC5BE"
+    },
+    {
+      "path": "tests/observation/verify-ntvdm-export-live.ps1",
+      "sha256": "6C4EAAAEF9A39CF60312B5BF065011925805CB43B53005CE145465BFF4815F12"
+    },
+    {
+      "path": "tests/observation/isolated_package_cleanup.ps1",
+      "sha256": "23C81CB616022F110349E1B99C62A6F14B0133190CC815501A027832DB0B6439"
+    },
+    {
+      "path": "build/t478-s32/final.ps1",
+      "sha256": "54E835316584DC9809AC676FBBEEC0C0B0141ED3C7361408DBBEBF31B96C7478"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/ntvdm-export-live-vdd.dll",
+      "sha256": "99F2832EE896E20E14F66DF59DF83A00DB4D42CA3BA4664AB839088158980078"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/original-external-memory-test.exe",
+      "sha256": "F13DD039EA54155435D99452C44DA0065E10798FD2A94C99CF04FFE6CF68BCF2"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "sha256": "5102E5E1A0BAC15ED2CACC4D5E6C276EE33F03E456562A0C0465F55E52E1459F"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "sha256": "8F4CCDD0447F4C9D10D9A7752CA67C3A6A977A791B296289034FF4A30E910A77"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "1D4D731ACA90CC8E4584A9826D895D0D34EA1414EDD1214E5CB7CFC78D8D545E"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "004CD7190FEC181078FCB57FCE491DCDA666EA3DE1207DB833A7F1D064D34DC4"
+    }
+  ],
+  "stage_identity": "Fresh runtime helper copies the selected package, checks every copied image against source manifest Sha256 before restamping identity, then updates Sha256/PackageId. InputSha256 is inherited build-input lineage, not source-package PE hash.",
+  "limitations": "One live MEM/VDD create/terminate sequence and bounded exhaustion; not all third-party VDDs, concurrency, OS commit failure, or original allocator rollback guarantees."
+}

@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S31 is closed with [host DLL lifecycle evidence](../etc/evidence/m0-t478-s31-dll-entry-disposition.md).
-Next planned S32: finding 08 export/profile consumers. Continuous authorization remains.
+T478 S32 is closed with [export/profile evidence](../etc/evidence/m0-t478-s32-export-disposition.md).
+Next planned S33: finding 12 DPMI buffer/save state. Continuous authorization remains.
 Temporary CURRENT size exception: accumulated closures retained through T478 final reconciliation.
 
 ## S1 Closure Record
@@ -313,3 +313,7 @@ T478 S30 [confirms the prior CPU diagnostic repairs](../etc/evidence/m0-t478-s30
 ## S31 Closure Record
 
 T478 S31 [verifies the current host DLL lifecycle](../etc/evidence/m0-t478-s31-dll-entry-disposition.md): BOOLEAN/OS-loader checks and actual attach-failure/early-unload default/wait cases pass. Existing fixes retained; original lifetime limits explicit. Test-only delivery retains exact S29 release; no O:/winnt or push.
+
+## S32 Closure Record
+
+T478 S32 [reconciles original exports and host consumers](../etc/evidence/m0-t478-s32-export-disposition.md), restores exact template bytes and verifies 140 original declarations, 274 current ordinals, live task lifecycle and 16 Full gates. Package 3f06f0c6-d34a-4a6d-a862-4c89ed5373b2 is hash-published in this worktree only. No O:/winnt or push; original limits retained.

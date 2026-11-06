@@ -1277,3 +1277,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S30 diagnostic disposition](evidence/m0-t478-s30-diagnostic-disposition.md): current source/object reconciliation confirms prior fixes; maintained fixtures and retained exact S29 package.
 
 - [T478 S31 DLL entry disposition](evidence/m0-t478-s31-dll-entry-disposition.md): original lifecycle comparison, actual attach failure and early explicit unload; unchanged release.
+
+- [T478 S32 export reconciliation](evidence/m0-t478-s32-export-disposition.md): exact original template, preserved export ABI, real task-lifecycle checks and final Full/worktree release.

@@ -9,6 +9,8 @@ typedef LONG (__cdecl *free_fn)(ULONG);
 
 static HANDLE module;
 static BOOL exercised;
+static BOOL completed;
+static USHORT exercised_pdb;
 
 static void report(const char *message)
 {
@@ -36,6 +38,7 @@ static VOID on_create(USHORT pdb)
     (void)pdb;
     if (exercised) return;
     exercised = TRUE;
+    exercised_pdb = pdb;
     if (!query || !resize || !allocate || !release ||
         (FARPROC)query != GetProcAddress(parent, MAKEINTRESOURCEA(270)) ||
         (FARPROC)resize != GetProcAddress(parent, MAKEINTRESOURCEA(271)) ||
@@ -76,9 +79,22 @@ static VOID on_create(USHORT pdb)
     }
     report("PASS NTVDM export name/ordinal query/allocate/reallocate/free\r\n");
     report("PASS failed reallocation preserves allocation and free space\r\n");
+    completed = TRUE;
 }
 
-static VOID on_terminate(USHORT pdb) { (void)pdb; }
+static VOID on_terminate(USHORT pdb)
+{
+    query_fn query;
+    ULONG free_bytes = 0, largest = 0;
+    if (!exercised || pdb != exercised_pdb) return;
+    query = (query_fn)GetProcAddress(GetModuleHandleW(NULL), "VdmQueryFreeVirtualMemory");
+    if (!completed || !query || query(&free_bytes, &largest) != 0 ||
+        free_bytes < largest) {
+        report("FAIL export query at matching task termination\r\n");
+        return;
+    }
+    report("PASS export query at matching task termination\r\n");
+}
 static VOID on_block(VOID) { }
 static VOID on_resume(VOID) { }
 
