@@ -150,6 +150,35 @@ extern void c_setCR3(IU32 value);
 extern ISM32 c_getCPL(void);
 extern void c_setCPL(ISM32 value);
 extern IU32 c_getEAX(void);
+extern void c_setEAX(IU32 value);
+extern IU32 c_getEIP(void);
+extern void c_setEIP(IU32 value);
+extern void c_setAL(IU8 value);
+extern void c_setAH(IU8 value);
+extern IU32 CCPU_FLAGS[];
+
+static int fixture_register_views(void)
+{
+    IU32 eax = c_getEAX(), ip = c_getEIP(), flags[19];
+    unsigned i;
+    int ok = 1;
+    for (i=0;i<19;++i) flags[i]=CCPU_FLAGS[i];
+    c_setEAX(0xa1b2c3d4u); c_setAX(0x5678);
+    ok &= c_getEAX()==0xa1b25678u;
+    c_setAL(0x9a); ok &= c_getEAX()==0xa1b2569au;
+    c_setAH(0xbc); ok &= c_getEAX()==0xa1b2bc9au;
+    c_setEIP(0x1234ffffu); ok &= c_getIP()==0xffff;
+    c_setIP(0xffff); ok &= c_getEIP()==0xffff;
+    c_setIP((IU16)(c_getIP()+1)); ok &= c_getEIP()==0;
+    c_setEIP(0x89abcdefu); ok &= c_getEIP()==0x89abcdefu;
+    c_setCF(2); ok &= c_getCF()==2 && CCPU_FLAGS[0]==2;
+    for (i=1;i<19;++i) ok &= CCPU_FLAGS[i]==flags[i];
+    c_setEAX(eax); c_setEIP(ip);
+    for (i=0;i<19;++i) CCPU_FLAGS[i]=flags[i];
+    if (!ok) return 0;
+    return fixture_stdout("CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\n");
+}
+
 extern IU32 c_getGDT_BASE(void);
 extern IU16 c_getGDT_LIMIT(void);
 extern void c_setGDT_BASE_LIMIT(IU32 base, IU16 limit);
@@ -671,6 +700,7 @@ int main(void)
     }
     fputs("cpu-init\n", stderr);
     c_cpu_init();
+    if (!fixture_register_views()) { sas_term(); return 1; }
     {
         int observed_default_breakpoint = 0;
 

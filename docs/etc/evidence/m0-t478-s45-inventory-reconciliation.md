@@ -705,3 +705,42 @@ proof of every dispatcher handler or invalid-input path.
 
 1031 active inventory identities remain pending. S45/T478 remain active;
 no product change, fresh Full, publication, O:/winnt write or push.
+
+## P18 selected CCPU register view disposition
+
+The [register receipt](../../../artifacts/mvdm-audit/t478-final/s45-ccpu-register-disposition.json)
+resolves DOS16:261da7db9469c17951ef. Twelve current c_reg.c accessors compare
+identically with pinned OpenNT bodies after newline normalization. Selected
+host_def sets LITTLEND; original c_main binds WORD and BYTE views to actual
+CCPU_GR storage with offsets0/0/1. No independent register model is introduced.
+
+The existing [bounded CCPU fixture](../../../tests/mvdm-host/ccpu_bounded_execution_fixture.c)
+now checks upper EAX preservation through AX/AL/AH writes; IP narrowing, high
+EIP clearing on setIP and16-bit increment wrap; full32-bit EIP assignment; and
+original CF2 assignment with slots1..18 unchanged (the backing array has32
+slots; unused higher slots are not separately asserted). It restores all
+modified EAX/IP/flags before continuing the existing initialization, I/O,
+execution/reentry and high-linear-memory checks. Actual selected original
+accessors and backing state are linked, not test register providers. The
+legacy bridge fixture covers only basic AX/CF and was not reused as upper-bit
+or current-profile proof.
+
+Owned hidden runner build/t478-s45/run-register-p18.ps1 PID11536 uses the
+formal worker Ninja target ccpu-high-linear-page-test.exe with120s build and
+30s case budgets. Ninja refreshed556 dependency targets; this was more than
+the fixture object, but no product source or release changed. Build and test
+exit0. Both CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK and the existing
+CCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK markers appear; existing word-port and
+execution/reentry observations remain successful. Existing compiler warnings
+remain, not a zero-warning claim.
+
+One prior audit statement requires correction: selected cpu4.h's non-GISP
+GetInstructionPointer macro names getEIP, not getIP. Original BOP0/4 explicitly
+use getIP, so their narrow post-handler increment is unaffected. Do not revive
+a historical cpu.h/profile merely to match the old prose. Big-endian, retired
+CPU30/GISP, arbitrary segment setters and every native exported spelling are
+not certified by this run; the separate export/type-profile row remains open.
+
+1030 active inventory identities remain pending. S45/T478 continue. Only the
+focused test and evidence changed; unchanged S43 assets/Full remain product
+evidence. No publication, O:/winnt write or push.

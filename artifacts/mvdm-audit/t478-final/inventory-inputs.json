@@ -90,7 +90,8 @@
     "current-original-owner-wired; bounded-dual-environment-evidence": 1,
     "current-original-owner-wired; bounded-command-frame-evidence": 1,
     "current-original-owner-wired; bounded-dispatch-evidence": 2,
-    "pending-product-evidence": 1031,
+    "current-original-owner-wired; current-ccpu-register-test": 1,
+    "pending-product-evidence": 1030,
     "inactive-edition-evidence-only": 483,
     "current-original-owner-wired; bounded-runtime-verified": 1
   },

@@ -1,0 +1,53 @@
+{
+  "id": "DOS16:261da7db9469c17951ef",
+  "sha256": {
+    "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h": "361aced5ce9afec12a540cca78099bc5858fcaca96e348eb788b2dd59d3b6a84",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": "5a37f9aeae4cb191f20e7ac3e772474cf659b9279a0884e867281adb63963239",
+    "src/mvdm-host/softpc.new/base/inc/cpu4.h": "6c6b5f99d2e19ec21b2987646d6a22c4daed3896597c5cbce7a99442a1342427",
+    "src/mvdm-host/softpc.new/host/inc/host_def.h": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+    "tests/mvdm-host/ccpu_bounded_execution_fixture.c": "2853954f143f6c2b0928cd212e1db6e03003110888bcb072eff003c27a0b6055",
+    "build/.ninja/msvc-x86-release/worker/ccpu-high-linear-page-test.exe": "809feeeea8124ba28174327acc23d8d288e4b536a0ca942ef4df96e99857c976"
+  },
+  "original": {
+    "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
+    "sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
+    "identical_normalized_bodies": {
+      "c_setAX": "2aa087ea61bccd542bfac3167ed5e0a96e9c637c1f8ce352708362aa1dafc9ee",
+      "c_setAL": "b163c39b2a1ff996c3cf9bc5989c5b4257831c72723b67fd46356399ffbff192",
+      "c_setAH": "1aabacc3e248a10a5c9e08cd92906a17553faa535bee5536fd0629eed7e42254",
+      "c_getAX": "4b8510eca8947291c70f2c06c08016d6faccda5705b3a459c48aee3fe2eab8d6",
+      "c_getEAX": "cb558b57ffba71cef4b86f0c12e830c564b95634c8e675b430224a8b2da12bab",
+      "c_setEAX": "00c44a48b9c92148d08d40f86de9ba865f9b27aba8f7bbf0a7f42d8062a3bfab",
+      "c_setIP": "b0358da65f1c722b5e4a9dca681bb73552f2c35d9c8aa6899be2b3ea11b172a2",
+      "c_getIP": "8424e08320772a5ee8a30e31d1bc13ec9dbf685e1f86b76ca89eda7d26fa7bb6",
+      "c_setEIP": "99b4f2cab0577df1cc4ea927b4e92e7f282f519c061d895d9ec3684175df7569",
+      "c_getEIP": "3f45264d2a35d218a093919d63d94577666cd0692a10985ba9ae39ef0af2ea7f",
+      "c_setCF": "3faf7ce97b0af3e33c42f7a8b2077f87fbd0df92d016fe8c0d4e010b79f19513",
+      "c_getCF": "a65f650927656efc7d0e34bbc1064355d4ad9a7c27e72e195ae4d8fa484c103a"
+    }
+  },
+  "profile": "x86 CPU40/CCPU; host_def LITTLEND, c_main low word offset0, low/high byte offsets0/1",
+  "run": {
+    "runner": "build/t478-s45/run-register-p18.ps1",
+    "pid": 11536,
+    "build_budget_ms": 120000,
+    "test_budget_ms": 30000,
+    "build_exit": 0,
+    "test_exit": 0,
+    "stdout": "CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\nCCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\n",
+    "note": "Existing bounded execution fixture; dependency graph refreshed556 targets before testing, no product publication."
+  },
+  "assertions": [
+    "EAX a1b2c3d4 -> AX5678 -> a1b25678; AL9a -> a1b2569a; AHbc -> a1b2bc9a",
+    "EIP1234ffff reads IPffff; setIPffff clears EIP high half; narrowed increment wraps to0; setEIP89abcdef retains32bits",
+    "setCF2 reads back2 in CF slot0; flag slots1..18 unchanged; saved EAX/IP/flags restored before existing test execution"
+  ],
+  "audit_correction": "Current selected cpu4.h non-GISP GetInstructionPointer maps getEIP, contrary to prior inventory prose getIP. MS_bop_0/4 explicitly use getIP and are not changed. Do not infer narrow macro from historical cpu.h.",
+  "limits": [
+    "No big-endian or retired CPU30/GISP runtime qualification.",
+    "Not all exported/native-client register spellings or arbitrary segment setters tested; export/type profile remains separate pending identity.",
+    "Existing legacy bridge fixture lacks upper-half/IP cases and is not substituted for the current run.",
+    "CCPU_FLAGS backing has32 slots; current assertions compare the defined neighboring slots1..18, not unused slots19..31."
+  ]
+}
