@@ -278,3 +278,11 @@ risk, not grounds for a new ownership model. No product changes; S19 follows.
 tab-stop break, preserving Boolean return and word-break state. All 30 actual-
 object cases, 36 existing construction cases, gated real Win16 witness and
 16 Full gates pass. Exact worktree release published; S20/finding 49 follows.
+
+## S20 disposition
+
+[S20](../evidence/m0-t478-s20-dib-registration.md) corrects the original
+CloseHandle-on-HBITMAP error with DeleteObject. Real native resource controls
+pass (82 checks), as do coherent builds and all 16 Full gates; exact worktree
+release published. Original post-selector registration rollback limitations
+remain explicit, without new recovery guarantees. S21 owns normal retirement.

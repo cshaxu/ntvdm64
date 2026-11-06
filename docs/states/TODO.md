@@ -24,6 +24,8 @@ distinguishes these from work already owned by a queued proposal.
 
 | P3 | Original parameter-map same-key borrowers share the first task owner; forced owner purge may remove a referenced node. A valid supported cross-task overlap/termination symptom is unproved. | Preserve existing per-call DIV-347 cleanup; reopen on a concrete valid-call witness, without assuming task-death survival or adding a new ownership model. [S18 evidence](../etc/evidence/m0-t478-s18-parameter-map.md). |
 
+| P3 | Original DIB.DRV registration failure after mapping/selector mutation does not roll back all view/VDM/selector state; normal selector restoration can itself fail. | S20 fixes only the wrong bitmap destructor. Retain the original late-failure rollback limitation; no transactional/retry guarantee or safe forced-OOM claim. [S20 evidence](../etc/evidence/m0-t478-s20-dib-registration.md). |
+
 ## Original guest retained limitations
 
 These entries are grouped by the original guest owner, not declared fixed.

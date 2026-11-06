@@ -373,8 +373,9 @@ hdd_err:;
             if (hsec)
                 CloseHandle (hsec);
 
+            /* DIV-876: a DIB bitmap is a GDI object, not a kernel handle. */
             if (hbm)
-                CloseHandle (hbm);
+                DeleteObject (hbm);
         }
     }
     return hdcMem;

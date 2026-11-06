@@ -1253,3 +1253,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S18 parameter-map disposition](evidence/m0-t478-s18-parameter-map.md): existing 54-scenario cleanup verification and bounded original cross-task risk.
 
 - [T478 S19 EDIT tab-stop return](evidence/m0-t478-s19-edit-tabstop.md): one-break original correction, selected-object matrix and gated real Win16 witness.
+
+- [T478 S20 DIB failure destructor](evidence/m0-t478-s20-dib-registration.md): real GDI ownership correction and explicit original post-selector rollback limit.

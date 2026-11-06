@@ -1,0 +1,215 @@
+{
+  "baseline": "111f4b9b8",
+  "finding": 49,
+  "divergence": "MVDM-HOST-DIV-876",
+  "original_comparison": {
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c": {
+      "sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "failed_bitmap_uses_CloseHandle": true
+    },
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wdib.c": {
+      "sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "failed_bitmap_uses_CloseHandle": true
+    }
+  },
+  "baseline_result": "FAIL line=35 GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS)==before+(success?((dc!=NULL)+(bitmap!=NULL)):0)\nDIB_FAILURE_CLEANUP checks=83 failures=1\n",
+  "current_result": "DIB_FAILURE_CLEANUP checks=82 failures=0\n",
+  "probe_kind": "Exact extracted original finally body, real DC/file/section/bitmap; not full-owner or guest failure injection",
+  "retained_limit": "Original post-selector registration failure rollback not strengthened or declared safe",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 492105,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6285,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 2240,
+        "CleanupMs": 636,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 702,
+        "CleanupMs": 579,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68322,
+        "CleanupMs": 564,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 63680,
+        "CleanupMs": 536,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 59853,
+        "CleanupMs": 652,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 21639,
+        "CleanupMs": 607,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 18096,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 127137,
+        "CleanupMs": 642,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13592,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29214,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30744,
+        "CleanupMs": 551,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5788,
+        "CleanupMs": 468,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7943,
+        "CleanupMs": 540,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10620,
+        "CleanupMs": 534,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5168,
+        "CleanupMs": 680,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 9117,
+        "CleanupMs": 468,
+        "Passed": true
+      }
+    ]
+  },
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "44614B7287DC08B2057E29EF5651A9FD9934404A92F2F544D82E165F38AB8940",
+      "Machine": 34404,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "52447C74AFA8E0B010C457E9C70B32ED310824157424CE05D0398F610A3CF14A",
+      "Machine": 34404,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "3508109D7D01E49090038F7617BB15111E771D404A2E92F042B16EE327EE1D7E",
+      "Machine": 34404,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "3023C2D720825AFCE4EDC23A1A02C42BA9444D4B0849482594E79F60338FA84C",
+      "Machine": 332,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "9967D1483C68DDCACF0309C061E382440E8F6C89DBF5641482570287465CFC32"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "342C94A2CDBC553B4692C95DC60FF81E9EA66F59249C5A2EF35A897245A32F5C",
+      "Machine": 34404,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "85B99BCE9DD555CFBF8DAD85F6762F6129CBACE4B98ADDF280476297E4049248",
+      "Machine": 34404,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "21A1D94B040628F8990335E156033BC5870347B4604E512D045F1BC20933C0CC",
+      "Machine": 332,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "109976CA4E53059FC2A3A41C26CDD53B0EC67812EFB9D1EB96C74A3E6FCE0C90"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "4DCFFD7C3335E5E29B29213C444318D65CD2002E53DB0390135EF500904329FF",
+      "Machine": 332,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "B5A98766D2755810F4B97AB2953A245B6AE8C081AB6F96FAA293583B58EFE5A2"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "6B3BF9CEFBD6AD727966154ADC2FC3A4DDA11467FF948B83A354384274B46910",
+      "Machine": 332,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "F44F37F738DEBE9E91BC6E3247E3DED2C4FB9C67BA4F667B3F780069B1C705C3"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "2C9F3D743F4D15838AA13FEE86158E516E108EC3BFF83A5EAD564D16CB636A76",
+      "Machine": 34404,
+      "PackageId": "e6000fef-d461-4e0f-b17c-decb791bd449",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "publication": "Worktree assets/release only; no O:/winnt write or push",
+  "hashes": {
+    "src\\mvdm-host\\wow32\\wdib.c": "5adbf670425782914a2fdf15dbb9b3519409bc43a105e4f7f73e671b19b76606",
+    "test\\integration\\wow_dib_failure_cleanup_test.c": "bb504ec8f89fa5cb4b6489fe166a864324765e8cdbd2b735bbc1bf654f5a2854",
+    "test\\integration\\verify-wow-dib-failure-cleanup.ps1": "a8fe303da2cb828a2102f956236cb009582bc886707bb5f080fcc48cf098f261",
+    "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wdib.obj": "6af67326da7f2dbd3466057f2472be566b5195f2cf0313e44f75dec41a3833bb",
+    "build\\t478-s20\\current\\dib_failure_cleanup.h": "e08ab7156b8c32ed12715d6dcdb5b0345f7b51f4ee5c9cc5dd2cae44de5e9622",
+    "build\\t478-s20\\current\\dib-test.exe": "f4f8c642ee65de35ae449699535f56978f84a96fbe080f270e9d0520f56d05d4"
+  }
+}

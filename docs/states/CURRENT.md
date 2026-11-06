@@ -237,3 +237,7 @@ T478 S18 [verifies existing parameter-map cleanup](../etc/evidence/m0-t478-s18-p
 ## S19 Closure Record
 
 T478 S19 [repairs EDIT tab-stop fallthrough](../etc/evidence/m0-t478-s19-edit-tabstop.md): one break, 30 object cases, 36 construction cases, gated real Win16 and 16 Full gates; worktree release only.
+
+## S20 Closure Record
+
+T478 S20 [repairs the failed DIB bitmap destructor](../etc/evidence/m0-t478-s20-dib-registration.md): 82 native resource checks and 16 Full gates pass; late selector/mapping rollback remains an explicit original limit. Worktree release only.
