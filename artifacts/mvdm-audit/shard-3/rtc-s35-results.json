@@ -1,0 +1,236 @@
+{
+  "finding": 27,
+  "disposition": "normal original ROM path verified; original guest cancellation and alternate host body limitations retained",
+  "product_changed": false,
+  "package_id": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+  "image": {
+    "result": "pass",
+    "package_id": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+    "bindings": [
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\mem_size.obj",
+        "object_sha256": "49B97C24AFCC8D3BBA86B025679928704B8C07C806C20B0194A544E304CC0FD1",
+        "function": "_memory_size",
+        "bytes": 23,
+        "file_offset": 444016,
+        "relocations": 2
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\rtc_bios.obj",
+        "object_sha256": "82B1517866E2ABC46A34469DC5A48802FF4DCA5158E5C8456618279DD80F59E2",
+        "function": "_rtc_int",
+        "bytes": 394,
+        "file_offset": 434048,
+        "relocations": 28
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\cmos_bis.obj",
+        "object_sha256": "4B1491B0E76EA9253116FA7D6C86E37B4EF9B609F8BB7EFBF0892874BA4266AB",
+        "function": "_cmos_read",
+        "bytes": 58,
+        "file_offset": 1603968,
+        "relocations": 3
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\cmos_bis.obj",
+        "object_sha256": "4B1491B0E76EA9253116FA7D6C86E37B4EF9B609F8BB7EFBF0892874BA4266AB",
+        "function": "_cmos_write",
+        "bytes": 61,
+        "file_offset": 1604032,
+        "relocations": 3
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\cmosnt.obj",
+        "object_sha256": "231FCCE68359D335C9E5A0D2CE915131EF1B5AA8A0D505CBD064D6BB4C5E0783",
+        "function": "_QueueRtcInterrupt",
+        "bytes": 123,
+        "file_offset": 499696,
+        "relocations": 11
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\cmosnt.obj",
+        "object_sha256": "231FCCE68359D335C9E5A0D2CE915131EF1B5AA8A0D505CBD064D6BB4C5E0783",
+        "function": "_RtcIntEoiHook",
+        "bytes": 163,
+        "file_offset": 500064,
+        "relocations": 17
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\cmosnt.obj",
+        "object_sha256": "231FCCE68359D335C9E5A0D2CE915131EF1B5AA8A0D505CBD064D6BB4C5E0783",
+        "function": "_cmos_inb",
+        "bytes": 599,
+        "file_offset": 500880,
+        "relocations": 59
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\cmosnt.obj",
+        "object_sha256": "231FCCE68359D335C9E5A0D2CE915131EF1B5AA8A0D505CBD064D6BB4C5E0783",
+        "function": "_cmos_outb",
+        "bytes": 847,
+        "file_offset": 501824,
+        "relocations": 80
+      }
+    ],
+    "image_sha256": "603AC08F1E9BD89EC0175A197F16F8579DA0C62467FB1819F059D7DCF2CC9E56",
+    "limitations": "Relocation-masked full bodies prove static selection, not arbitrary nested guest execution.",
+    "original_roms": [
+      {
+        "path": "src\\mvdm-guest\\softpc.new\\roms\\bios1.rom",
+        "sha256": "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "bytes": 28420,
+        "image_offset": 1832600
+      },
+      {
+        "path": "src\\mvdm-guest\\softpc.new\\roms\\bios4.rom",
+        "sha256": "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F",
+        "bytes": 8191,
+        "image_offset": 1861020
+      }
+    ]
+  },
+  "runs": {
+    "wait-final": {
+      "context": {
+        "parent_pid": 19860,
+        "private_desktop": true,
+        "token_class": "medium",
+        "integrity_sid": "S-1-16-8192",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "script_sha256": "3B9F4A21486E52CB79DD3BD80C2E0DF94A814465486411B4185AC62BDE4B06A0"
+      },
+      "result": "PASS independent COM -> original CPU40 RtcEntry owners; normal launcher exit; no original guest modification",
+      "console": "# buffer=120,9001 viewport=0,0,119,29\n[0] RTC AUDIT MUTABLE INT12 BDA PASS\n[1] 02F0020D80FC88740A80FC87\n[2] 03690035E8AF013100EB1000\n[3] F0004B1B501EB840008ED8B0\n[4] RTC ASYNC WAIT COMPLETE 976 FLAG PRESERVED\n[5] RTC SYNC WAIT COMPLETE PASS\n[6] RTC ORIGINAL CANCEL RETAINS BUSY LIMIT\n[7] RTC CANCEL NO COMPLETION PASS\n",
+      "files": {
+        "build\\t478-s35\\wait-final\\assemble.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\wait-final\\assemble.process.json": "B247DCEED1477485617C84FE2CF481A07BF25353209E38BE651CC80C75EE0853",
+        "build\\t478-s35\\wait-final\\assemble.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\wait-final\\assemble.stdout.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\wait-final\\EMSPROBE.COM": "416B8017F32C71977C61CBF7B1434C899747C900CD64F8474F6DCABEF88BE477",
+        "build\\t478-s35\\wait-final\\environment-shape.csv": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+        "build\\t478-s35\\wait-final\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\wait-final\\inputs.csv": "9A283F92C2DAF89F702904987C9D08160CFB7A5674C2D101BBD168C5661A3AAC",
+        "build\\t478-s35\\wait-final\\observer.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\wait-final\\observer.process.json": "AC55774EA0FBAF45B0B79D60949CD43B93859BFABA99582A5193AC67B5389714",
+        "build\\t478-s35\\wait-final\\observer.txt": "9FDD48CAD12E50CEE464E1914A168F6862A6E0373AD28EFA3BACB51543436891",
+        "build\\t478-s35\\wait-final\\observer.txt.command-line.txt": "7D6F90AB80009F9C50FA2F46997E27FC3FEA652ADDB5EC5B3F4E5ACE3A763A2F",
+        "build\\t478-s35\\wait-final\\observer.txt.console.txt": "53E991AAC7CA36E5EA9DECE000780EB5775D3EEFAFF3F2CA4A3E76A93C731E74",
+        "build\\t478-s35\\wait-final\\observer.txt.initial-console.txt": "C412D43563E39622029CF24B1F179C9FD0F66E48E3EB069EE51FB27D011E3EE2",
+        "build\\t478-s35\\wait-final\\pif-build.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\wait-final\\pif-build.process.json": "8E8F10FF62B871C54165A6E5A846E69BB1B7B69F63774472CF3F00727A7FF42B",
+        "build\\t478-s35\\wait-final\\pif-build.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\wait-final\\pif-build.stdout.txt": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+        "build\\t478-s35\\wait-final\\pif-profile.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\wait-final\\pif-profile.process.json": "B47E8860B54B523F647E3D19EC45B75F309B09DAFE7C02AFAB6ADB69EC457880",
+        "build\\t478-s35\\wait-final\\pif-profile.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\wait-final\\pif-profile.stdout.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\wait-final\\profile-inputs.csv": "02CBE844F1102EA6A7A72E29590CEB41FEABC3C2EC146B4F929FBFAF394F37EF",
+        "build\\t478-s35\\wait-final\\result.txt": "73C5BF9FD81CB1FE115AADF85630EDE02F574F6DECAE2E7EE8F5CCCB3347B2D4",
+        "build\\t478-s35\\wait-final\\runner-context.json": "A4E976C59988F0FC8F125C0B80AA6A05A4E06974FA736EE81188D7DE35A5F42A",
+        "build\\t478-s35\\wait-final\\runtime-inputs.csv": "096D88FA9107CC3F596496688AC1A50C83B8BDC0C475444C82EA83957C2FED92",
+        "build\\t478-s35\\wait-final\\token-context.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\wait-final\\token-context.process.json": "AAA7771B323E0070D1D10C52F1E9AC7E1D93337F5C89026D86ECCDA46744CB57",
+        "build\\t478-s35\\wait-final\\token-context.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\wait-final\\token-context.stdout.txt": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+      }
+    },
+    "alarm-final": {
+      "context": {
+        "parent_pid": 19860,
+        "private_desktop": true,
+        "token_class": "medium",
+        "integrity_sid": "S-1-16-8192",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "script_sha256": "3B9F4A21486E52CB79DD3BD80C2E0DF94A814465486411B4185AC62BDE4B06A0"
+      },
+      "result": "PASS independent COM -> original CPU40 RtcAlarm owners; normal launcher exit; no original guest modification",
+      "console": "# buffer=120,9001 viewport=0,0,119,29\n[0] RTC ALARM INT4A ONCE RETURN EOI RESTORE PASS\n",
+      "files": {
+        "build\\t478-s35\\alarm-final\\assemble.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\alarm-final\\assemble.process.json": "0F35730B93C7B8F5A6815148F19CB2E40B9F2219F1A6CE6F734C2C69C69D1B1B",
+        "build\\t478-s35\\alarm-final\\assemble.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\alarm-final\\assemble.stdout.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\alarm-final\\EMSPROBE.COM": "A38C0ADE95E33BA27742297A4138C51727DB65435F17222CCCFDF1A7B3CC0655",
+        "build\\t478-s35\\alarm-final\\environment-shape.csv": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+        "build\\t478-s35\\alarm-final\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\alarm-final\\inputs.csv": "29B9FAD4DAFD8B95F5F71143EB6A0F6701D39165EF10D0D05EF8CA67909BEDCE",
+        "build\\t478-s35\\alarm-final\\observer.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\alarm-final\\observer.process.json": "E9D8FF4ACB212EC13F3378B582C4A581FBA0598FFD25519C0B48A3154EA768B3",
+        "build\\t478-s35\\alarm-final\\observer.txt": "83E1DCE17D57846DF9571F215B24791F6F9A134CB91AC7B0DABD3FB7455AC7BA",
+        "build\\t478-s35\\alarm-final\\observer.txt.command-line.txt": "EB2B76667B443F3E22DCA6904D19D399EE4E876026EC3B79D70A5C860B8E4A8B",
+        "build\\t478-s35\\alarm-final\\observer.txt.console.txt": "F92EB501A6065D5E0D11477B482CDC5CB2408BEEC182F22E1B13AFE439F34338",
+        "build\\t478-s35\\alarm-final\\observer.txt.initial-console.txt": "D5127D50F0CB9691E6030D8DA7EDA42F96D95755436EE169FE32BF9EEE38843E",
+        "build\\t478-s35\\alarm-final\\pif-build.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\alarm-final\\pif-build.process.json": "9331A174628A9FAB17BC3540310087ADE09C5720EEAA5A8126A33D9176F5971E",
+        "build\\t478-s35\\alarm-final\\pif-build.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\alarm-final\\pif-build.stdout.txt": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+        "build\\t478-s35\\alarm-final\\pif-profile.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\alarm-final\\pif-profile.process.json": "D6126C04FC2C13ACAF8B1B676ABF352968DAE79B568B7255AAA31DC2B0217D5C",
+        "build\\t478-s35\\alarm-final\\pif-profile.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\alarm-final\\pif-profile.stdout.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\alarm-final\\profile-inputs.csv": "EE9A56EFD14A06F3C583A2A299F96C004AB831ACAC2D76EBA87CB1DBA172DABC",
+        "build\\t478-s35\\alarm-final\\result.txt": "9CE9DA46EE2CF4E76FBC05FEB6002F4F5B864567FD5AC07FFA1EB4920FDF6136",
+        "build\\t478-s35\\alarm-final\\runner-context.json": "A4E976C59988F0FC8F125C0B80AA6A05A4E06974FA736EE81188D7DE35A5F42A",
+        "build\\t478-s35\\alarm-final\\runtime-inputs.csv": "CC5CD9C9CB7F4720F1C817585E493B7D691F903AFAE58F7BF20AC1DC88AACB52",
+        "build\\t478-s35\\alarm-final\\token-context.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s35\\alarm-final\\token-context.process.json": "472AB4848BC7DB2093BB02E6C5722D4E081A40B7F6C9827AD7C0116D8883340C",
+        "build\\t478-s35\\alarm-final\\token-context.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s35\\alarm-final\\token-context.stdout.txt": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+      }
+    }
+  },
+  "release": [
+    {
+      "name": "run16.exe",
+      "sha256": "B89DC9AAB5EE1ECF870CD80D2B506EF2B2B440378806F694D9F54EC9DD7BC121"
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "4D2BFB23BB87B18510FCF74BF8BC9BD7BE4CEEF0F3094A5172B13499A056F440"
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "4D5F5A70F9F99693792F2823959D4BA0A1DA87B670265AF6B1D0EC3464804910"
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "603AC08F1E9BD89EC0175A197F16F8579DA0C62467FB1819F059D7DCF2CC9E56"
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "6539F10B5F72F2D681597C1839E965ADDB833FC7E4FC2FC7A05BEF729CB753E0"
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "35C65895054BB29CAF37A42064787D7774B41F574C1EE9D67E8732424AE3AFF2"
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "ACC98BEB46130BA2F84F69AADD22609050AACE5FC252F97F5E414A7E679E63B1"
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "E2C316CA0F6CCD416C9EA57B0949972BB66FCA6B72159AB20C6FC8DE60E208AF"
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "8A494B066C1820C070BE19968D3C9CA40C37F79C88322BEDC476A8FF8800C76A"
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "01DCC82365A511C98A4DB7AEF8395ADCEFE797384DA511670222B765367E6F2C"
+    }
+  ],
+  "diagnostic": {
+    "path": "build/t478-s35/rtc-before",
+    "checks": 67,
+    "failures": 13,
+    "passing_product_gate": false
+  },
+  "test_sources": {
+    "tests\\observation\\rtc_entry_probe.asm": "95A98C3DCDDB459EE080664A835143A01911A6609A80EE8817A6E131D6636252",
+    "tests\\observation\\rtc_alarm_probe.asm": "A8F27FD7E79D0A9E7B2427EB966D51557127EAC0B8085D0B604768AD5BA42D63",
+    "tests\\observation\\verify-rtc-bios-contract.py": "8F356B40250B42D162D7C4DA5376151EA31D7AEA2E98B47395B9AD20FCEE2AE0",
+    "tests\\observation\\verify-ccpu-sign-flags-guest.ps1": "3B9F4A21486E52CB79DD3BD80C2E0DF94A814465486411B4185AC62BDE4B06A0"
+  }
+}

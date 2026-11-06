@@ -80,7 +80,7 @@
 | 08 | [Original export-source/profile recovery](../../../artifacts/mvdm-audit/export-source-recovery-review.md); [published live export witness](../../../artifacts/mvdm-audit/s11-foundation-evidence/published-export-live/review.md) | [S32](m0-t478-s32-export-disposition.md) 已核对 140 条原版配置声明、274 项现行导出与旧序号连续性，并验证实际 VDD/MEM 创建及退出调用；模板恢复原版字节，Full 16 项及工作树发布完成。不宣称任意第三方消费者全覆盖 |
 | 12 | [DPMI buffers and saved state](m0-t478-s33-dpmi-buffer-state.md) | S33 已核清：原版接线存在；133 项受控检查、45 项租约边界、session 测试、4 个真实 INT21 用例与 11 个映像函数绑定通过；保留原版固定池耗尽及非法输入前提，不新增容错 |
 | 21 | [BIOS integrations](m0-t478-s34-bios-integration.md) | S34 修复原版 D11 从 PIC EOI 端口错误：74 项实际 PIC 检查、原 guest 向量、BIOS/EMS 及 IRQ 回归通过；Full 16/16、工作树发布完成。RTC 专项仍属 S35，不宣称全文件行为覆盖 |
-| 27 | [BIOS memory and RTC](../../../artifacts/mvdm-audit/shard-3/bios-memory-rtc-audit.md) | 部分已验证：原版内存和 RTC 入口有历史链接，INT 12 有旧 guest 测试；RTC BOP 70、IRQ/EOI 未覆盖 |
+| 27 | [BIOS memory and RTC](m0-t478-s35-rtc-investigation.md) | S35：实测可变 INT12、原版 ROM 异步/同步等待、闹钟 INT4A 与 IRQ/EOI 及状态恢复通过；取消后 busy 残留登记为原版 guest 限制。备用 host BOP70 计数缺陷保留为非正常路径限制，不宣称已修复；产品和发布包不变 |
 | 32 | [IOS and CCPU port owners](../../../artifacts/mvdm-audit/ios-owner-review.md) | 部分已验证：原版 IOS port 拆分/整端口解绑是原始契约，70 项受控检查通过；未发现因此缺失原版接线 |
 | 35 | [WOW shell, hooks and subclassing](../../../artifacts/mvdm-audit/shard-0/wow-shell-hook-image-review.md) | 部分已接入：原版 shell/hook/subclass 函数有历史镜像绑定；真实 callback 嵌套与退出未证明 |
 | 38 | [WINOLDAP guest module](../../../artifacts/mvdm-audit/shard-1/guest-winoldap-owner-review.md) | 部分已验证：O:/w31/SYSTEM 有另一版本 WINOLDAP.MOD；T445 在测试包用原版控制文件验证了 Win16/native/Win16 返回，实际加载身份仍未确定 |

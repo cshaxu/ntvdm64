@@ -4,9 +4,21 @@
 
 **No active M/T/S packet.**
 
-T478 S34 is closed with [BIOS/EMS and slave EOI evidence](../etc/evidence/m0-t478-s34-bios-integration.md).
-Next planned S35: finding 27 BIOS RTC. Continuous authorization remains.
-Temporary CURRENT size exception: accumulated closures retained through T478 final reconciliation.
+T478 S35 has reached its bounded conclusion;
+S36 (finding35, WOW shell/hooks) is next under continuous sequential authority.
+[S35 evidence](../etc/evidence/m0-t478-s35-rtc-investigation.md) records normal
+original ROM RTC verification and retained original limitations. Product package
+remains S34 03d9792b-753e-4407-8a52-883ad9bc83e3; tests/evidence-only local P,
+no publication change or push. Broader T478 inventory reconciliation remains open.
+Temporary CURRENT size exception retains prior closures through final reconciliation.
+
+## S35 Closure Record
+
+Finding27: mutable INT12, original ROM async/sync RTC waits and alarm INT4A,
+PIC EOI and state restoration passed on the unchanged S34 package. Original
+ROM cancellation and alternate host BOP70 limitations remain explicit;
+[S35 evidence](../etc/evidence/m0-t478-s35-rtc-investigation.md) contains exact
+results and unsuccessful diagnostic attempts. No new product capability.
 
 ## S1 Closure Record
 

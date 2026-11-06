@@ -48,4 +48,13 @@ The MEM case remains explicitly provisional pending its stated evidence.
 | P3 | Original COMMAND keyboard-layout cache may overflow for an overlong registry language token; current and both originals share the five-byte cache. Supported language tokens are two characters. [S10 evidence](../etc/evidence/m0-t478-s10-keyboard-layout.md) reproduces the invalid-configuration limit. | Retain under the owner no-extra-tolerance standard; reopen for a valid original token, project drift, or explicit malformed-input correction scope. |
 | P3 | Original release XMS private BOP dispatcher has no range guard; public XMS invalid-function handling is separate and already present in HIMEM. [S11 evidence](../etc/evidence/m0-t478-s11-xms-dispatch.md). | Retain original private-input limit; reopen for a valid original caller, project drift or explicitly admitted private-BOP validation. |
 
+
+| P3 | Original ROM INT15/8301 disables PIE but clears its wait flag through caller DS, leaving the BIOS BDA busy bit and causing a later request to be rejected. Normal asynchronous/synchronous waits work before cancellation. | Immutable original-guest limitation under standing owner disposition: preserve original ROM and explicit rejection evidence; no host workaround or guest patch. [RTC evidence](../etc/evidence/m0-t478-s35-rtc-investigation.md). |
+
+## Alternate host route limitation
+
+| Priority | Debt | Admission path |
+| --- | --- | --- |
+| P3 | Alternate original host BIOS BOP70 rtc_int uses DOUBLE_TIME high/low word layout inconsistent with x86 BDA count; controlled fixture has 13 failed checks. Normal tested IRQ8 uses original ROM instead. | Do not revive or advertise this alternate path as verified; reopen if a supported caller is shown to reach it. No normal-path repair is required by current evidence. [RTC investigation](../etc/evidence/m0-t478-s35-rtc-investigation.md). |
+
 This ledger contains no active work, roadmap, or completed-task record.
