@@ -1,5 +1,15 @@
 # T478: prior-finding S work plan
 
+> Owner clarification (S45 P19): earlier requirements to reconcile every
+> inventory identity are superseded. T478 finishes when required original
+> functionality is connected and no qualified original recovery/duplicate
+> replacement remains. Already implemented behavior, justified alternate
+> owners, out-of-scope features and registered unavailable original boundaries
+> need no new implementation. Missing audit coverage alone is not missing
+> functionality and does not authorize more fixtures or a new audit campaign.
+> Historical counts and evidence below are retained, not completion targets.
+
+
 This plan maps the [69 findings](../evidence/m0-t478-s1-classified-findings.md)
 to sequential proposed S packets. The active packet in CURRENT.md alone controls admission; these
 numbers are a plan, not simultaneous admission to implementation. The owner requests one S

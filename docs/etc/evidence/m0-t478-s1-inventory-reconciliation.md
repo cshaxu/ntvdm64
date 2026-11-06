@@ -1,5 +1,15 @@
 # T478 S1 inventory reconciliation — in progress
 
+> Owner clarification (S45 P19): earlier requirements to reconcile every
+> inventory identity are superseded. T478 finishes when required original
+> functionality is connected and no qualified original recovery/duplicate
+> replacement remains. Already implemented behavior, justified alternate
+> owners, out-of-scope features and registered unavailable original boundaries
+> need no new implementation. Missing audit coverage alone is not missing
+> functionality and does not authorize more fixtures or a new audit campaign.
+> Historical counts and evidence below are retained, not completion targets.
+
+
 ## Inputs pinned on 2026-11-05
 
 Product baseline: 5ec7351c9. Both audits identify original OpenNT

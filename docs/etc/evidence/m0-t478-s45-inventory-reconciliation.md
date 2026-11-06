@@ -1,5 +1,15 @@
 # T478 S45 existing inventory reconciliation
 
+> Owner clarification (S45 P19): earlier requirements to reconcile every
+> inventory identity are superseded. T478 finishes when required original
+> functionality is connected and no qualified original recovery/duplicate
+> replacement remains. Already implemented behavior, justified alternate
+> owners, out-of-scope features and registered unavailable original boundaries
+> need no new implementation. Missing audit coverage alone is not missing
+> functionality and does not authorize more fixtures or a new audit campaign.
+> Historical counts and evidence below are retained, not completion targets.
+
+
 Status: active. This resumes deferred S1/S42 work; it does not create a new
 source audit or reinterpret1546 audit identities as1546 defects.
 
@@ -744,3 +754,26 @@ not certified by this run; the separate export/type-profile row remains open.
 1030 active inventory identities remain pending. S45/T478 continue. Only the
 focused test and evidence changed; unchanged S43 assets/Full remain product
 evidence. No publication, O:/winnt write or push.
+
+## P19 scope correction and next evidence boundary
+
+Input: owner's explicit correction after P18 and confirmation that only clear
+missing original functionality warrants further work. HEAD at review is
+19deac025; the worktree was clean. CURRENT and the supporting plan now follow
+that instruction. Previous 1030 pending identities measure evidence mapping,
+not 1030 missing features; their completion is no longer a task requirement.
+
+Read the existing S1 reconciliation, S10 recovery worklist and finite handoff.
+The worklist itself distinguishes research leads from repair commitments and
+already excludes unsupported internal-hardening work. Its historical stage
+labels and test suggestions must not automatically create new work. The next
+check is the current disposition of concrete named recovery leads, not the next
+DEM/register inventory identity. No new missing feature or DEM pointer defect
+is established by this checkpoint; no product change or test is warranted yet.
+S45 remains the sole active S pending that finite candidate disposition.
+
+P19 verification: owned hidden governance runner PID28056 completed with exit0
+within its60s deadline; documentation governance passed with the existing
+CURRENT size warning. Diff review and git diff --check pass. This is a scope/
+status correction only; product inputs and assets are unchanged, so no build,
+runtime rerun or publication is claimed or required. Local commit only.
