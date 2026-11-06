@@ -703,6 +703,8 @@ BOOL W32MapViewOfFile( PHMAPPEDFILEALIAS pCache, HANDLE hFile)
             pCache->fAccess = TRUE;     // Assume Read Access
         } else {
             CloseHandle(pCache->hMappedFileObject);
+            /* DIV-874: failed view no longer owns the closed mapping. */
+            pCache->hMappedFileObject = 0;
         }
     }
     return(pCache->fAccess);
@@ -718,7 +720,7 @@ BOOL W32MapViewOfFile( PHMAPPEDFILEALIAS pCache, HANDLE hFile)
 
 VOID FlushMapFileCaches()
 {
-    PHMAPPEDFILEALIAS pCache;
+    PHMAPPEDFILEALIAS pCache, next;
 
     if (fCacheInit) {
         return;
@@ -729,11 +731,13 @@ VOID FlushMapFileCaches()
 
     dwTotalCacheBytes = dwTotalCacheAccess = 0;
 
-    while ( (pCache->hpfNext !=0) ) {
+    /* DIV-874: include the tail; freeing promotes nodes to the head. */
+    while (pCache != 0) {
+        next = pCache->hpfNext;
         if (pCache->hfile32 != 0) {
             FREEMAPFILECACHE(pCache->hfile32);
         }
-        pCache = pCache->hpfNext;
+        pCache = next;
     }
 }
 

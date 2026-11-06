@@ -1245,3 +1245,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S14 resource disposition](evidence/m0-t478-s14-resource-disposition.md): original NT CMOS selection and bounded non-ROM caller evidence.
 
 - [T478 S15 codepage owner](evidence/m0-t478-s15-codepage-owner.md): unresolved separate-Console defect and existing mirror query connection.
+
+- [T478 S16 file-cache retirement](evidence/m0-t478-s16-file-cache.md): full-list cleanup, failed mapping ownership and focused selected-object evidence.

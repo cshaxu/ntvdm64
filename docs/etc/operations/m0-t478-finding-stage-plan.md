@@ -248,3 +248,11 @@ the unused original non-ROM oversize limitation; no product changes. S15 is next
 is connected. The remaining codepage divergence belongs to separate NTCON/NTVWM
 Consoles and their handoff; recorded in TODO, not declared fixed. No production
 changes or topology expansion. S16/finding 34 follows.
+
+## S16 disposition
+
+[S16](../evidence/m0-t478-s16-file-cache.md) corrects original skipped-tail
+retirement and stale failed-view mapping ownership. Selected-object normal
+file/mapping and controlled failure tests pass (577 checks), as do coherent
+x86/x64 build and all 16 Full gates. Exact worktree release published; no new
+cache capability. S17/finding 42 follows.

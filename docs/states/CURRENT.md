@@ -221,3 +221,7 @@ T478 S14 [dispositions non-ROM resource applicability](../etc/evidence/m0-t478-s
 ## S15 Closure Record
 
 T478 S15 [assigns the unresolved codepage defect](../etc/evidence/m0-t478-s15-codepage-owner.md) to frontend/native Console ownership. Existing mirror query wiring is present; no product changes.
+
+## S16 Closure Record
+
+T478 S16 [repairs original file-cache retirement](../etc/evidence/m0-t478-s16-file-cache.md): full-list cleanup and cleared failed-view handle, 577 focused checks and 16 Full gates; worktree release only.
