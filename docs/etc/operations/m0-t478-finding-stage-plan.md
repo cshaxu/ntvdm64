@@ -35,7 +35,7 @@ is a missing-integration candidate, not a proven duplicate replacement.
 | S2 | 33 — WOW generic thunk | Establish caller/ABI and original assembly helper composition; restore a narrowly selected host binding where compatible, with calling-convention, negative and lifecycle tests. Do not globally enable i386 branches. |
 | S3 | 20 — ForceDOS host flag | Trace actual host entry and CREATE_FORCEDOS propagation; connect the original host path only if a supported caller requires it. Independent guest utilities are excluded. |
 | S4 | 26 — remote RAP provider | Trace selected host calls, supported feature and private transport boundary; connect a legitimate provider if viable and needed, otherwise document the precise unavailable contract. |
-| S5 | 09 — directory reset | Assess original kernel-only fast path and deletion-anchor behavior against the verified fallback; implement only a justified safe host mechanism, not an assumed need to restore NT kernel services. |
+| S5 | 09 — directory reset | Verify the existing restart/fallback; finish only demonstrated remaining original-semantics gaps if substantially implemented, otherwise prefer explicit failure and remove unnecessary code. Unavailable modern-Windows kernel indexed support may remain a registered accepted gap; no added capability is required. |
 
 ## Priority 3: known problems and partially completed findings
 
@@ -121,3 +121,20 @@ NetServerEnum branch, now restored with original conversion. Actual private
 RAP transport, password/session-key and private Browser boundaries retain
 explicit unavailable contracts. This per-boundary disposition closes S4;
 S5/finding 09 remains proposed, not admitted.
+
+## Owner scope clarification
+
+The owner explicitly rejects adding capability beyond original OpenNT.
+For S5, an unavailable NT4 kernel indexed directory path may remain a clearly
+registered gap; it is not a mandatory recovery target. Substantially completed
+existing restart support may be finished, but a speculative or fragmentary
+replacement should instead fail explicitly and lose unnecessary scaffolding.
+Do not expand deletion/rename tolerance or performance guarantees to create
+new closure obligations. Preserve verified useful existing behavior.
+
+## S5 disposition
+
+[S5](../evidence/m0-t478-s5-directory-restart.md) verifies the already implemented
+bounded restart and its explicit failure cases. No additional production repair
+is justified. The missing indexed kernel path is an owner-accepted registered
+gap, not a mandatory implementation item. S6/finding 04 remains proposed.

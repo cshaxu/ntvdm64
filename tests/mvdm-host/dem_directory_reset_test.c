@@ -3,6 +3,16 @@
  * This is provider evidence; it is not a guest INT21 execution claim. */
 #include "mvdm-host/dos/dem/demsrch.c"
 #include <stdio.h>
+#include <stdlib.h>
+
+/* This directory-only fixture has no worker/VM frontend. Fail if unrelated
+ * lifecycle code is unexpectedly entered, rather than simulating success. */
+DWORD mvdm_standalone_worker_close_frontends(void)
+{
+    fprintf(stderr, "Unexpected VM frontend teardown in directory fixture\n");
+    abort();
+    return ERROR_NOT_SUPPORTED;
+}
 
 static int assertions, failures;
 static WCHAR directory[MAX_PATH];

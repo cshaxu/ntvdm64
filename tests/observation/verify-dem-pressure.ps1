@@ -25,11 +25,12 @@ $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentV
 try {
     $runtime=New-PhysicalRuntimeStage $PackageRoot
     $scope=New-IsolatedPackageScope $runtime
-    Copy-Item "$out/DEMRESET.COM" "$runtime/DEMRESET.COM"
+    New-Item -ItemType Directory "$runtime/tests" -Force | Out-Null
+    Copy-Item "$out/DEMRESET.COM" "$runtime/tests/DEMRESET.COM"
     $env:PATH="$runtime/system32;"+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_INITIAL_GEOMETRY='80,30'
-    $arguments=@("$runtime/system32/run16.exe",$runtime,"$out/report.txt","$runtime/DEMRESET.COM",'--observation-timeout-ms','60000')
+    $arguments=@("$runtime/system32/run16.exe","$runtime/tests","$out/report.txt","$runtime/tests/DEMRESET.COM",'--observation-timeout-ms','60000')
     $process=Start-Process -FilePath $observerPath -ArgumentList $arguments -WorkingDirectory $runtime -WindowStyle Hidden -PassThru
     if(!$process.WaitForExit(75000)){ $process.Kill();$process.WaitForExit();throw 'Observer timeout' }
     $report=Get-Content "$out/report.txt" -Raw

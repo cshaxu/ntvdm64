@@ -32,14 +32,14 @@ try{
     if($LASTEXITCODE){throw 'SUBST failed'}
     $mapped=$true
     $scope=New-IsolatedPackageScope $runtime 'Z:\'
-    $env:PATH='Z:\system32;'+$savedPath
+    $env:PATH='Z:\system32;'+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
     $report=Join-Path $out 'guest.txt'
     $start=[Diagnostics.ProcessStartInfo]::new()
     $start.FileName=$observerPath; $start.UseShellExecute=$false; $start.CreateNoWindow=$true
-    foreach($arg in @('Z:\system32\run16.exe','Z:\',$report,'COMMAND.COM',
-        '--observe-console-input-text',"Z:\tests\DFCB01\FCBTEST.COM`rexit`r",
+    foreach($arg in @((Join-Path $runtime 'system32/run16.exe'),$owned,$report,'--wait',
+        'Z:\tests\DFCB01\FCBTEST.COM',
         '--observation-timeout-ms','20000')){
         $start.ArgumentList.Add($arg)
     }
@@ -53,8 +53,8 @@ try{
         ($stdout.Result+$stderr.Result) | Set-Content (Join-Path $out 'observer.txt')
         if($p.ExitCode -or !(Test-Path $report)){throw 'Observer/report failure'}
         $text=Get-Content $report -Raw
-        if($text -notmatch '(?m)^result=exited\r?$' -or $text -notmatch '(?m)^exit=0x00000001\r?$'){
-            throw 'Outer COMMAND did not complete normally'
+        if($text -notmatch '(?m)^result=exited\r?$' -or $text -notmatch '(?m)^exit=0x00000025\r?$'){
+            throw 'FCB probe did not return its direct receipt 37'
         }
         $trace=Join-Path $owned 'TRACE.BIN'
         if(!(Test-Path $trace)){throw 'No guest-owned witness'}
@@ -67,10 +67,10 @@ try{
         }
         Copy-Item $trace (Join-Path $out 'TRACE.BIN')
         [pscustomobject]@{result='PASS';elapsed_ms=$clock.ElapsedMilliseconds;
-            names=$names;command_exit=1;probe_sha256=(Get-FileHash $probe).Hash;
-            scope='Actual INT21 FCB first/next/end/missing + outer COMMAND completion; forced idle/mutation restart covered by provider fixture only'
+            names=$names;probe_exit=37;probe_sha256=(Get-FileHash $probe).Hash;
+            scope='Actual INT21 FCB first/next/end/missing + direct receipt 37; forced idle/mutation restart covered by provider fixture only'
         } | ConvertTo-Json | Set-Content (Join-Path $out 'result.json')
-        Write-Output 'DEM-FCB-GUEST-PASS: 3 unique names, EOF and missing FF, outer COMMAND completion'
+        Write-Output 'DEM-FCB-GUEST-PASS: 3 unique names, EOF and missing FF, direct receipt 37'
     }finally{$p.Dispose()}
 }finally{
     try{Stop-IsolatedPackageScope $scope}finally{

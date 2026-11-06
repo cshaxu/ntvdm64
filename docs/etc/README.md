@@ -1223,3 +1223,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S3 ForceDOS evidence](evidence/m0-t478-s3-forcedos.md): host flag ownership, actual caller tests and local package identity.
 
 - [T478 S4 remote RAP and server enumeration](evidence/m0-t478-s4-remote-rap.md): original public branch recovery, retained private boundaries and verification.
+
+- [T478 S5 directory restart disposition](evidence/m0-t478-s5-directory-restart.md): owner capability limit, current recovery verification and accepted indexed-path gap.
