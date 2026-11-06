@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [ValidateSet('shell','hook','word','caret','clipreject','keyboard','media')][string]$Case='hook',
+ [ValidateSet('shell','hook','word','caret','clipreject','keyboard','media','vdd')][string]$Case='hook',
  [switch]$LeaveHookInstalled,
  [string]$CompilerEnvironment,
  [ValidateSet(15,3,131,49153,49154)][int]$ClipboardFormat=15,
@@ -32,18 +32,25 @@ try {
  $label=[regex]::Match((Get-Content "$root/token.out" -Raw),'S-1-16-\d+').Value
  if($label -ne 'S-1-16-8192'){throw 'Require desktop-capable medium token'}
  @{pid=$PID;host=(Get-Process -Id $PID).Path;integrity=$label;script_sha256=(Get-FileHash $PSCommandPath).Hash}|ConvertTo-Json|Set-Content "$root/runner-context.json"
+ $extension=if($Case -eq 'vdd'){'COM'}else{'EXE'}
  $source="$PSScriptRoot/win16_${Case}_probe.asm"
+ if($Case -eq 'vdd'){$source="$PSScriptRoot/s44_vdd_bop.asm"}
  if($Case -eq 'word'){$source="$PSScriptRoot/win16_window_word_probe.asm"}
- $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'media'){'MEDPROBE'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
+ $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'vdd'){'S44BOP'}elseif($Case -eq 'media'){'MEDPROBE'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
- $defines=if($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
+ $defines=if($Case -eq 'vdd'){'-DS41_ISOLATED '}elseif($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
  if($OleRoundtrip){$defines+='-DOLE_ROUNDTRIP '}
- Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.EXE"') 30
+ Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.'+$extension+'"') 30
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
  Save-IsolatedPackageManifest $runtime "$root/manifest.json"
  $scope=New-IsolatedPackageScope $runtime
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
- Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
+ Copy-Item "$root/$probe.$extension" "$tests/$probe.$extension"
+ if($Case -eq 'vdd'){
+  if(!$ProviderBuildRoot){throw 'Controlled VDD requires current provider build root'}
+  Copy-Item "$ProviderBuildRoot/s44-bop-vdd.dll" "$tests/s44-bop-vdd.dll"
+  Get-FileHash "$tests/s44-bop-vdd.dll","$repo/tests/mvdm-host/s44_test_vdd.c"|Export-Csv -NoTypeInformation "$root/vdd-inputs.csv"
+ }
  if($Case -eq 'media'){
   Copy-Item "$runtime/system32/MMSYSTEM.DLL" "$tests/MMSYSTEM.DLL"
   if((Get-FileHash "$tests/MMSYSTEM.DLL").Hash -ne (Get-FileHash "$runtime/system32/MMSYSTEM.DLL").Hash){throw 'Immutable MMSYSTEM copy differs'}
@@ -98,7 +105,7 @@ try {
   Owned child-assemble $assembler ('-DCHILD -f bin "'+$source+'" -o "'+$root+'/SHLCHILD.EXE"') 30
   Copy-Item "$root/SHLCHILD.EXE" "$tests/SHLCHILD.EXE"
  }
- Get-FileHash $source,$PSCommandPath,$Observer,$LogonHelper,$assembler,"$root/$probe.EXE"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash $source,$PSCommandPath,$Observer,$LogonHelper,$assembler,"$root/$probe.$extension"|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-ChildItem "$runtime/system32" -File|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  Add-Type -Path (Resolve-Path $LogonHelper).Path
  $identity=[Security.Principal.WindowsIdentity]::GetCurrent()
@@ -106,12 +113,13 @@ try {
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
  $info.EnvironmentVariables.Clear()
  foreach($entry in $entries){$at=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}
+ $info.EnvironmentVariables['S44_VDD_TRACE_PATH']="$root/vdd.txt"
  $info.EnvironmentVariables['TEMP']=$runtime;$info.EnvironmentVariables['TMP']=$runtime
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
  $info.EnvironmentVariables['MVDM_WOW_CALLBACK_FRAME_TRACE_PATH']="$root/callbacks.txt"
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
- foreach($arg in @("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait',"$tests/$probe.EXE",'--observation-timeout-ms','45000')){$info.ArgumentList.Add($arg)}
+ foreach($arg in @("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait',"$tests/$probe.$extension",'--observation-timeout-ms','45000')){$info.ArgumentList.Add($arg)}
  if($DebugObserver){
   # Observe the existing private-desktop runner's owned process tree. This is
   # diagnostic only; preserving exceptions is not a capability acceptance.
@@ -129,6 +137,18 @@ try {
  $report=Get-Content "$root/observer.txt" -Raw
  if($DebugObserver){throw "Diagnostic debugger run; inspect exceptions, not acceptance"}
  if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){throw 'Guest/launcher did not complete normally'}
+ if($Case -eq 'vdd'){
+  $text=Get-Content "$root/observer.txt.console.txt" -Raw
+  $trace=@(Get-Content "$root/vdd.txt")
+  if($text -notmatch 'S44BOP OK' -or $text -match 'S44BOP FAIL'){throw 'Original BOP registration/dispatch failed'}
+  foreach($marker in @('BOP_INIT','BOP_DISPATCH','HOOK_INSTALL_OK','HOOK_INVALID_OK','IO_INSTALL_OK','IO_INB','IO_OUTB','DETACH','HOOK_REMOVE_OK')){
+   if($trace -notcontains $marker){throw "Missing controlled VDD marker: $marker"}
+  }
+  if($trace -match 'FAIL|UNEXPECTED'){throw 'Controlled VDD reported failure'}
+  'PASS original BOP register/dispatch/deregister, hook install/remove and owned IO callbacks'|Set-Content "$root/result.txt"
+  '0'|Set-Content "$root/exit.txt"
+  return
+ }
  Copy-Item "$tests/$probe.BIN" "$root/guest-report.bin"
  $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
  if($Case -eq 'shell'){

@@ -62,7 +62,11 @@ hex_done:
     ret
 
 handle dw 0
+%ifdef S41_ISOLATED
+dll_name db 's44-bop-vdd.dll',0
+%else
 dll_name db 'tests\\s44-bop-vdd.dll',0
+%endif
 ; The test DLL has a source-shaped `.def`-style export alias, matching the
 ; ordinary original VDD samples and their GetProcAddress input strings.
 init_name db 'S44BOPInit',0

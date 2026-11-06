@@ -27,7 +27,11 @@
 
 This is the owner's local retro-computing compatibility project. The temporary
 CURRENT size exception remains through final T478 reconciliation. S41 is
-admitted; no S41 product change or runtime conclusion has been made.
+admitted. [Current evidence](../etc/evidence/m0-t478-s41-vdd-optical-investigation.md)
+verifies real VDD register/dispatch/unregister and hook cleanup. Recovering the
+separate unprovided VCDEX host DLL is awaiting owner scope disposition; no
+product implementation or S41 closure occurs before that answer. No optical
+drive is available for actual-medium verification.
 
 ## S40 Closure Record
 
