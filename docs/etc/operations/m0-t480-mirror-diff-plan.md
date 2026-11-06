@@ -2,7 +2,7 @@
 
 Owner admission: queue head, latest main157c31855, dedicated worktree.
 The [proposal](../../proposals/proposal-unconnected-mirror-diff-cleanup-001.md)
-supplies the review method; [Current](../../states/CURRENT.md) alone admits S1.
+supplies the review method; [Current](../../states/CURRENT.md) alone owns the active S.
 Main T479 remains independently active. Historical proposal queue positions
 are superseded by this admission and the current queue.
 
@@ -36,3 +36,43 @@ have product consumers; no whole-file unconnected restoration is proved.
 S2 starts with the bounded formatting leads and independently evidenced inactive
 sub-blocks, not stale removed-file candidates. S3 retains semantic review of
 connected and mixed exclusion blocks. S1 closure does not close that review.
+
+## S2 admitted restoration boundary
+
+Owner admits S2 after S1 d08e0ffc7, requesting the problem/design explanation.
+This admission changes documentation only, not mirror source or release assets.
+
+S1 found no unconnected differing whole file. Accordingly, S2 does not promise
+a functional restoration or deletion of an entire adapter. Its finite primary
+input is the 146 whitespace-restoration-lead IDs in the S1 classification ledger.
+They include four confirmed candidates, not 146 proved safe changes.
+
+1. Restore F01-F03 in dos/command/cmdenv.c: original indentation of the
+   cchRemain check, setBX publication and DWORD Length declaration. Keep all
+   tokens, physical line counts, existing bindings and #line directives.
+2. Restore F04 in softpc.new/base/system/qevnt.c: original spaces inside the
+   lock-contract comment, retaining the #line and conditional structure.
+3. Review the remaining 142 IDs once. Restore only non-semantic differences
+   verified against original bytes and actual context. Blank-line, comment,
+   directive and macro-continuation cases need special care: apparent whitespace
+   equivalence does not prove unchanged preprocessing or diagnostic mapping.
+   Record restore, retain or transfer-to-S3 explicitly rather than enlarging the
+   task into an unbounded new audit. Candidate overlap does not create another
+   change or require an already completed fix to be repeated.
+4. An inactive substantive sub-block can be restored only if concrete compiler
+   and all-consumer evidence emerges during this finite review. Otherwise record
+   it for the existing semantic stage; lack of a runtime hit is never evidence.
+
+Already handled vdmtib.h/wkglobal.c/wklocal.c/nt_aorc.c removals and approved
+SafeLoadLibrary/i386, PIG, BIGEND and diagnostic #error exclusions remain outside
+the edit set. Do not revert active keyboard sas_loadw expansion, DPMI stack-info
+publication, floating-point exception reads, softpc.h calling conventions,
+VCDEX WINAPI or recovered apisrv.c merely to shrink the diff. These are not
+proved S2 restoration candidates. Guest is neither read nor changed; its earlier
+owner-requested submission was a separate completed operation.
+
+Success is fewer unnecessary mirror differences with unchanged product behavior,
+not new capability or generic fault tolerance. Reuse S1 evidence after identity
+checks; build/test/publish actual product edits under the local-only rule and
+verify affected preprocessing/line mapping. Do not rebuild or publish merely for
+this documentation-only admission.
