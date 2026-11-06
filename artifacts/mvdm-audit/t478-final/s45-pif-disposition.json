@@ -1,0 +1,39 @@
+{
+  "id": "DOS16:6183631816abcfe32197",
+  "disposition": "current original owner wired; bounded runtime and fault evidence; original malformed-input limits retained",
+  "runner": "build/t478-s45/run-fault-p8.ps1",
+  "runner_pid": 38832,
+  "timeouts_seconds": {
+    "build": 120,
+    "fixture": 30
+  },
+  "build_exit": 0,
+  "fixture_exit": 0,
+  "marker": "PIF_ORIGINAL_9_IO_FAILURES_CLOSE_PARTIAL_STATE_RETRY_IGNORE_OK",
+  "inputs": {
+    "tests/mvdm/oemuni/oemuni_pif_fault_fixture.c": "47cffec8a06a8b4d79164c16035b8ac42c4aa2cd2bd921e2c504d909857a468e",
+    "src/mvdm-host/softpc.new/host/src/nt_pif.c": "94ccb215daf9dbf46f802d64d4bd5e21e9cf02452077da93df143a08c3bf6fe8",
+    "tools/build/Generate-T420S17OemUniNinja.mjs": "1938d4ae3c75bcb33d2eac7b4950d03c74c9b4052949e3dbdba73f71f8cbffe9"
+  },
+  "cases": [
+    "Failure at each of five reads",
+    "Failure at each of four seeks",
+    "Exactly one close on each injected failure",
+    "Failure after386 payload retains parsed XMS fields",
+    "Successful complete control closes once",
+    "First allocation fails, Retry then allocation succeeds",
+    "First allocation fails, Ignore returns NULL without retry"
+  ],
+  "predecessors": [
+    "s45-pif-parser-partial.json",
+    "s45-pif-history-partial.json",
+    "s45-pif-root-partial.json"
+  ],
+  "limits": [
+    "Fault fixture includes unchanged original translation unit with macro-substituted I/O/malloc boundaries; not the release object or real OS I/O faults",
+    "Dialog response controlled; no interactive UI automation claim",
+    "Short positive reads, nonterminated fields and cyclic extension chains remain original limitations; no safety certification",
+    "No allocation-exhaustion rollback or new tolerance",
+    "Finite cases do not claim every PIF flag/value permutation"
+  ]
+}

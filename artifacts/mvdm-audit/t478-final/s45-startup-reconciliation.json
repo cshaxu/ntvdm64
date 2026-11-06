@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;14 bounded dispositions and12 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;15 bounded dispositions and11 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -69,9 +69,9 @@
       "id": "DOS16:6183631816abcfe32197",
       "module": "1.2",
       "contract": "PIF binary settings extraction and defaults",
-      "disposition": "pending",
+      "disposition": "wired; original limitations retained",
       "current_owner": "nt_pif.c GetPIFData selected original parser with retained path ownership fix",
-      "evidence_and_limits": "s45-pif-parser-partial.json and s45-pif-history-partial.json: current production-object extension/default cases plus repeated fast-paste/priority state, WNT config set/ignore/replace/repeated reads and real sharing-denied/missing opens pass. ASCII config conversion substituted. Remaining: default-path identity, legacy short-read/seek partial errors and allocation retry/IGNORE. No malformed-input safety claim. s45-pif-root-partial.json now verifies default-path identity and present/missing default using real session/root providers, not stubs. Original short-read limitation is source-confirmed; no read-exact recovery admitted. Post-open failure and allocator reply runtime evidence remains outstanding."
+      "evidence_and_limits": "s45-pif-disposition.json consolidates P5-P8: current production-object extension/default/history tests, real session/root default path, and unchanged-source controlled read/seek/malloc failure tests. No missing owner or product repair established. Original short-read/nonterminated/cyclic input limitations retained; no exhaustive flag matrix or interactive dialog certification."
     },
     {
       "id": "DOS16:e38a5b13166e6e9c8136",

@@ -80,8 +80,9 @@
     "current-original-owner-wired; bounded-startup-evidence": 11,
     "scope-excluded-host-boot-file-mutation": 1,
     "existing-pif-correction-retained; historical-focused-evidence": 1,
-    "pending-product-evidence": 1045,
+    "current-original-owner-wired; bounded-parser-evidence; original-limits-retained": 1,
     "current-original-owner-wired; bounded-caller-fixtures-verified": 1,
+    "pending-product-evidence": 1044,
     "inactive-edition-evidence-only": 483,
     "current-original-owner-wired; bounded-runtime-verified": 1
   },

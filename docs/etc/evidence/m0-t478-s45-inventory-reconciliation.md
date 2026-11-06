@@ -291,3 +291,42 @@ nonterminated or cyclic record limits do not become new tolerance requirements.
 The stable identity remains pending rather than claiming these cases passed.
 No product sources, guest bytes or published binaries change. S45 remains active
 with twelve startup rows/1045 active identities pending; no O:/winnt write or push.
+
+## P8 PIF disposition: selected original owner, no new product repair
+
+The [consolidated disposition](../../../artifacts/mvdm-audit/t478-final/s45-pif-disposition.json)
+resolves DOS16:6183631816abcfe32197 with explicit original limitations. P5-P7
+already established current production-object extension ordering/defaults,
+repeated state and retained configuration, actual open failures, and real
+session/default-root identity. P8 completes the bounded error-contract witness.
+
+The fault fixture includes the tracked nt_pif.c translation unit unchanged;
+macros substitute only _lopen/_lread/_llseek/_lclose and malloc after native
+headers are included. No transformed mirror copy is a build input. The existing
+OEMUNI fixture generator supplies CCPU40 formal flags. Nine cases inject failure
+at each of five reads and four seeks in a valid386-plus-tail chain. Every case
+returns FALSE and closes exactly once. Failures after the386 payload retain its
+XMS fields rather than rolling back. A complete control succeeds and closes once.
+Direct ch_malloc tests assert the actual malloc-failure dialog options: Retry
+retries and succeeds on the second allocation; Ignore returns NULL after one.
+The dialog reply is controlled, not an interactive UI acceptance claim.
+
+Background runner38832 completes build and fixture with exit0 and
+PIF_ORIGINAL_9_IO_FAILURES_CLOSE_PARTIAL_STATE_RETRY_IGNORE_OK. Commands and
+120/30-second deadlines are retained in build/t478-s45/run-fault-p8.ps1, with
+fault-p8 logs. Production sources/release objects are unchanged. This fault
+witness is distinguished from the P5-P7 direct production-object/native-file
+witnesses; none alone is presented as whole-system acceptance.
+
+The evidence establishes current original ownership and bounded original
+semantics, not every PIF flag/value permutation or malformed-input safety.
+Positive short reads are not checked for completeness; unterminated fields and
+cyclic extension chains have no newly invented recovery. These original limits
+remain limits under the owner's no-new-tolerance instruction. Retain the already
+justified DIV-157/DIV-278 path ownership/encoding bindings. No autonomous parser
+or missing host implementation was found to remove or restore here.
+
+Fifteen startup identities now have bounded dispositions; eleven startup rows
+and1044 active identities remain pending. S45 and T478 remain open. This is a
+test/evidence P only: no new product build/Full/publication is required for the
+unchanged S43 package, and no O:/winnt write or push occurred.
