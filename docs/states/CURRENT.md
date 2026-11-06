@@ -2,32 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T478 S39**
+**Active: M0 T478 S40**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Original inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| Identifier Mode | M0 T478 S39, Ordinary Mode, one active S. |
-| Admission And Approval | Continuous sequential owner authorization; S38 closes in this local delivery with [evidence](../etc/evidence/m0-t478-s38-clipboard-caret-investigation.md). S39 implementation follows the local P1 commit. |
-| Objective | Resolve finding52: verify selected original WKB32 host keyboard thunks, code-page/buffer/failure and task-lifetime behavior; fix only demonstrated host gaps. |
-| Non-goals | No guest/media mutation, new layouts or tolerance, repeated IRQ1/PIC work, O:/winnt write or push. No user-desktop input or global keyboard-setting mutation. |
-| Reference Baseline | S38 package818fff8c-efa7-4570-93d6-1f9c820f40ed, Full16/16; [keyboard audit](../../artifacts/mvdm-audit/shard-3/wow-keyboard-thunks-lifecycle-review.md) and [driver roles](../../artifacts/mvdm-audit/shard-3/wow-keyboard-driver-build-role-review.md). |
-| Files And ABI Surface | Original wow32/wkbman.c and selected keyboard dispatch/buffer providers; independent guest/native tests. No planned public protocol change. |
+| Identifier Mode | M0 T478 S40, Ordinary Mode, one active S. |
+| Admission And Approval | Continuous sequential owner authorization; S39 closes in this local tests/evidence delivery with [evidence](../etc/evidence/m0-t478-s39-keyboard-investigation.md). S40 implementation follows the local P1 commit. |
+| Objective | Resolve finding54: reconcile supported host wave/MIDI/MCI/fax paths, callbacks and task retirement beyond existing T466/S25/S37 work; repair only demonstrated original host gaps. |
+| Non-goals | No guest/media mutation, new multimedia capability or device emulation, revival of original disabled conversion bodies, O:/winnt write or push. No user device/settings changes. |
+| Reference Baseline | S38 package818fff8c-efa7-4570-93d6-1f9c820f40ed, Full16/16, retained by S39; [media audit](../../artifacts/mvdm-audit/shard-3/wow-multimedia-alias-consumer-followup.md) and [fax trace](../../artifacts/mvdm-audit/shard-1/wowfax-trace.md). |
+| Files And ABI Surface | Selected original WOW multimedia/fax host bindings and independent tests; no planned protocol change. |
 | Applicable Rules | EXECUTION, ARCHITECTURE, CODING, DOCUMENT and source policy; original semantics only. |
-| Verification | Reconcile current source/image and earlier evidence first; test applicable scalar, input/output buffer, code-page/DBCS, failure and exit contracts through existing isolated runners. Product changes require coherent build, focused/Full gates, worktree release and local commit. |
-| Expected Markers | All selected WKB32 families attributed to actual providers; concrete original/adapter behavior and test assertions, with external layout/code-page or original limits explicit. No whole-file claim from symbol presence. |
-| Asset Needs | Pinned original source, immutable guest, exact S38 package, existing medium-token/private-desktop observers and independent probes; build/t478-s39 evidence. |
-| Reporting Requirements | Distinguish existing completed behavior, original limitations and actual host defects; do not infer DBCS/dead-key/failure coverage from ASCII or IRQ1 tests. |
+| Verification | Reconcile previous fixes/tests and original provider ownership first. Exercise applicable device-independent callbacks/failures/lifecycle; distinguish absent external devices from missing host connections. Product changes require coherent build, focused/Full gates, worktree release and local commit. |
+| Expected Markers | Exact selected providers and existing recovery attributed; reproducible original failures or actual repairs, without claiming physical-device success from symbol binding. |
+| Asset Needs | Pinned original source, immutable guest, exact S38 package, isolated medium-token observers and existing multimedia/fax fixtures; build/t478-s40 evidence. |
+| Reporting Requirements | Separate existing verified behavior, original limitations, missing external device prerequisites and actual host defects. |
 | Stop Conditions | Material new guest/provider requirement or behavior beyond original semantics. |
-| Exit Criteria | Finding52 reconciled with reproducible evidence, any necessary repair verified, indexed local delivery complete; no push. |
+| Exit Criteria | Finding54 reconciled with reproducible evidence, necessary repairs verified and indexed local delivery complete; no push. |
 | Original Owner Request | Continue existing sequence; maximize effective original recovery/minimize mirror and local implementation differences; no added tolerance or repeated completed work. |
-| Similar-Issue Sweep | ToAscii binary state/results; ANSI/OEM string and buffer lengths; key names, virtual/scancode translation, guest mapping and task retirement. |
+| Similar-Issue Sweep | Multimedia aliases, callbacks, asynchronous task lifetime, fax failure ownership, excluded MCI conversion bodies. |
 
 This is the owner's local retro-computing compatibility project. The temporary
-CURRENT size exception remains through final T478 reconciliation. S39 is
-admitted; no S39 product change or runtime conclusion has been made.
+CURRENT size exception remains through final T478 reconciliation. S40 is
+admitted; no S40 product change or runtime conclusion has been made.
+
+## S39 Closure Record
+
+[Finding52 evidence](../etc/evidence/m0-t478-s39-keyboard-investigation.md) and
+[results](../../artifacts/mvdm-audit/shard-3/keyboard-s39-results.json) bind11
+original keyboard thunks to the exact release. Real guest conversion, guards,
+zero/short buffers, scalar/failure and normal exit checks pass, as do7 controlled
+dead-key/two-byte result-propagation cases. Capacity0 key-name terminator behavior
+matches original and native USER32. Actual DBCS layouts/dead-key composition are
+not certified. No product defect established or code change needed; ten-image
+S38 release and Full16/16 remain exact. Tests/evidence P1 only, no O:/winnt or push.
 
 ## S38 Closure Record
 

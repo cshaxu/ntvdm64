@@ -361,3 +361,13 @@ allocation/empty-dequeue fault and passes 24 existing publication checks. The
 owner explicitly accepts the original exhaustion limit and requires normal
 paths unchanged. No product repair or generic drain guarantee is claimed;
 tests/docs only, exact S27 release retained. S29/finding 65 follows.
+
+## S39 disposition
+
+[S39](../evidence/m0-t478-s39-keyboard-investigation.md) binds all11 unchanged
+original keyboard thunks to the current package and verifies real guest buffer,
+scalar/failure and exit paths. Seven controlled cases preserve signed/two-byte
+results and diacritic flags. Original zero-capacity ANSI key-name NUL behavior
+is retained; physical DBCS layouts/dead-key composition remain an explicit
+validation boundary. No missing host connection was found. Tests/evidence only,
+exact S38 release retained; S40/finding54 follows.

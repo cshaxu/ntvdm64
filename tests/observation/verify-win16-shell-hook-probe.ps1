@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [ValidateSet('shell','hook','word','caret','clipreject')][string]$Case='hook',
+ [ValidateSet('shell','hook','word','caret','clipreject','keyboard')][string]$Case='hook',
  [switch]$LeaveHookInstalled,
  [string]$CompilerEnvironment,
  [ValidateSet(15,3,131,49153,49154)][int]$ClipboardFormat=15,
@@ -34,7 +34,7 @@ try {
  @{pid=$PID;host=(Get-Process -Id $PID).Path;integrity=$label;script_sha256=(Get-FileHash $PSCommandPath).Hash}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $source="$PSScriptRoot/win16_${Case}_probe.asm"
  if($Case -eq 'word'){$source="$PSScriptRoot/win16_window_word_probe.asm"}
- $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
+ $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
  $defines=if($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
  if($OleRoundtrip){$defines+='-DOLE_ROUNDTRIP '}
@@ -141,6 +141,26 @@ try {
         $returnPattern='(?m)^'+$entry.Groups[1].Value+' after ret=0037 .*task='+$entry.Groups[2].Value+' '
         if($callbackTrace -notmatch $returnPattern){throw 'Shell callback did not return on its original task/thread'}
         'PASS actual guest ShellExecute success/failure, child execution and parent continuation'|Set-Content "$root/result.txt"
+ }elseif($Case -eq 'keyboard'){
+  if($bytes.Length -ne 144 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'KBP1'){throw 'Bad keyboard report'}
+  $values=@(0..11|ForEach-Object {[BitConverter]::ToUInt16($bytes,4+2*$_)})
+  @{returns=$values;payload=@($bytes[28..107]);edgeReturns=@(0..4|ForEach-Object {[BitConverter]::ToUInt16($bytes,108+2*$_)});edgePayload=@($bytes[118..143])}|ConvertTo-Json -Depth 4|Set-Content "$root/guest-report.json"
+  foreach($offset in @(28,36)){
+   if(($bytes[$offset..($offset+7)] -join ',') -ne '65,98,57,0,165,165,165,165'){throw 'String conversion/terminator/guard mismatch'}
+  }
+  foreach($offset in @(44,52)){
+   if(($bytes[$offset..($offset+7)] -join ',') -ne '65,0,90,57,165,165,165,165'){throw 'Binary conversion count or guard mismatch'}
+  }
+  if(@($bytes[60..67]|Where-Object {$_ -ne 165}).Count){throw 'Zero-count conversion wrote output'}
+  if($values[6] -ne 32 -or !$values[7] -or !$values[8] -or !$values[9] -or $values[10] -lt 1 -or $values[10] -gt 31 -or $values[11] -ne 1){throw 'Keyboard scalar/name/ToAscii mismatch'}
+  if($bytes[68+$values[10]] -ne 0 -or $bytes[100] -ne 165 -or $bytes[101] -ne 165 -or $bytes[102] -ne 32 -or $bytes[106] -ne 165 -or $bytes[107] -ne 165){throw 'Keyboard name/ToAscii buffer mismatch'}
+  if($values[5] -ne $values[8]){throw 'Space OEM scan disagrees with virtual-key scan'}
+  foreach($offset in @(108,110,112,114,116)){if([BitConverter]::ToUInt16($bytes,$offset) -ne 0){throw 'Invalid query/short name/noncharacter return mismatch'}}
+  foreach($offset in @(118,122,130,134)){
+   if(($bytes[$offset..($offset+3)] -join ',') -ne '0,165,165,165'){throw 'Empty string or one-byte name terminator/guard mismatch'}
+  }
+  if(@($bytes[126..129]|Where-Object {$_ -ne 165}).Count -or @($bytes[142..143]|Where-Object {$_ -ne 165}).Count){throw 'Zero-count or noncharacter result guard overwritten'}
+  'PASS real Win16 keyboard conversions, empty strings, invalid queries, short names, zero count, buffer guards, scalar queries and space ToAscii; layout-specific behavior not inferred'|Set-Content "$root/result.txt"
  }elseif($Case -eq 'clipreject'){
   if($bytes.Length -ne 18 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'CRJ1'){throw 'Bad Clipboard rejection report'}
   $values=@(0..6|ForEach-Object {[BitConverter]::ToUInt16($bytes,4+2*$_)})

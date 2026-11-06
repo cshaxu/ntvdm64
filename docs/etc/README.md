@@ -1291,3 +1291,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S37 DDE/WINMM investigation](evidence/m0-t478-s37-dde-mm-investigation.md): original DDEML window-word repair and WINMM interrupt ABI recovery; real callbacks, cancellation, Full16/16 and worktree release.
 
 - [T478 S38 clipboard/caret investigation](evidence/m0-t478-s38-clipboard-caret-investigation.md): structured-format rejection cleanup and original OLE conversion recovery; real guest/caret evidence, Full16/16 and worktree release.
+
+- [T478 S39 keyboard investigation](evidence/m0-t478-s39-keyboard-investigation.md): original thunk binding, real guest buffers/failures and controlled result propagation; unchanged product and explicit layout limits.
