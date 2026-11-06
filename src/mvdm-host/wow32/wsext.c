@@ -620,7 +620,7 @@ WWS32TaskCleanup(
     //
     // DIVERGENCE(MVDM-HOST-DIV-463): Retire async database requests before their task-owned 16-bit
     // buffers disappear.  wsdata owns the global context list and performs
-    // the provider cancellation after detaching matching entries.
+    // the provider cancellation after retiring matching entries.
     //
 
     WWS32CancelAsyncRequestsForTask( data->ThreadSerialNumber );

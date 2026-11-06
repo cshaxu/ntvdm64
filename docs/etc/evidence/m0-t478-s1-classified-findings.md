@@ -58,7 +58,7 @@
 | 04 | [SAS vector](../../../artifacts/mvdm-audit/shard-3/sas4gen-vector-audit.md) | 自主实现候选：SAS 两个备用实现为 debugbreak、另一槽为 NULL；实际调用可达性待核实 |
 | 13 | [Disk close and FDC thread](../../../artifacts/mvdm-audit/shard-3/floppy-lease-failure-role-review.md); [single-owner assessment](../../../artifacts/mvdm-audit/shard-3/fdc-session-single-owner-design.md) | 自主实现问题候选：COMMAND 状态是线程局部，FDC 跨线程不能直接看到；真实设备触发和安全修复待验证 |
 | 30 | [Codepage transition](../../../artifacts/mvdm-audit/shard-1/standalone-tool-chain-audit.md) | 自主实现 bug：独立 NTVWM/NTCON Console 代码页未同步；历史真实 DOS 输出复现，当前相关源码仍无传播路径 |
-| 65 | [WOW Winsock asynchronous database requests](../../../artifacts/mvdm-audit/shard-1/wow-winsock-database-review.md) | 自主实现风险：T467 已修复分配检查、显式取消及任务关联并通过 guest 测试；当前任务退出仍忽略取消结果再释放 buffer，失败竞态未证实 |
+| 65 | [WOW Winsock asynchronous database requests](../../../artifacts/mvdm-audit/shard-1/wow-winsock-database-review.md) | [S29](m0-t478-s29-winsock-rundown.md) 已修复任务退出忽略取消结果而提前释放原生缓冲区的自主实现问题；323 项受控检查、三项真实 Win16 场景及 16 项 Full 通过。取消失败且永无完成通知时保留原生所有权至进程退出，原版句柄回绕不扩展 |
 
 ## 缺失宿主接线候选：4 行
 

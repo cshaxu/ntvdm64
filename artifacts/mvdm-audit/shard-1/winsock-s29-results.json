@@ -1,0 +1,183 @@
+{
+  "result": "pass",
+  "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+  "bindings": [
+    {
+      "function": "_WWS32CancelAsyncRequestsForTask@4",
+      "bytes": 260,
+      "file_offset": 178640,
+      "relocations": 24
+    },
+    {
+      "function": "_WWS32FindAndRemoveAsyncContext@4",
+      "bytes": 152,
+      "file_offset": 178912,
+      "relocations": 13
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsdata.obj",
+      "sha256": "682A8118A1857E301EBB2E83642F048E5D6315FE8B48B614463BEF9FE9A9C2E5"
+    },
+    {
+      "path": "build\\t478-s29\\package-final\\system32\\WOW32.DLL",
+      "sha256": "90D056EF8544753FE624359CB68D7DE85421ED8DD183B473A30C895EB9489B3A"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wsdata.c",
+      "sha256": "01441093111CBC6D9AF499E16B05D8367A869EA1CB19E238B975BC781B94F8DE"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\winsockp.h",
+      "sha256": "F5CDF5EC898DD41C4C9657543B4D1C295BE1DC6FA88EC5D5D525A7770510BA4E"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 374881,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 2609,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1475,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 288,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66068,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 43988,
+        "CleanupMs": 379,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43597,
+        "CleanupMs": 403,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15491,
+        "CleanupMs": 369,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12270,
+        "CleanupMs": 366,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 74685,
+        "CleanupMs": 430,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12617,
+        "CleanupMs": 379,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28495,
+        "CleanupMs": 370,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30649,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5424,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7947,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10281,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4018,
+        "CleanupMs": 325,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7106,
+        "CleanupMs": 346,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": "WOW_WINSOCK_RUNDOWN checks=323 failures=0\n",
+  "baseline": "FAIL buffer remains alive while provider owns request\nFAIL rejected cancel retains native write destination\nWOW_WINSOCK_RUNDOWN checks=10 failures=2\n",
+  "guest": {
+    "Completion": {
+      "phase": 2,
+      "errors": 0,
+      "startup": 0,
+      "task": 2,
+      "completion": 1,
+      "freed": 1,
+      "cancel": 0,
+      "select": 0,
+      "disabled": 0,
+      "closed": 0
+    },
+    "Cancel": {
+      "phase": 2,
+      "errors": 0,
+      "startup": 0,
+      "task": 2,
+      "completion": 0,
+      "freed": 1,
+      "cancel": 1,
+      "select": 0,
+      "disabled": 0,
+      "closed": 0
+    },
+    "TaskLoss": {
+      "phase": 3,
+      "errors": 0,
+      "startup": 0,
+      "task": 2,
+      "completion": 0,
+      "freed": 0,
+      "cancel": 0,
+      "select": 0,
+      "disabled": 0,
+      "closed": 0
+    }
+  },
+  "publication": "PASS ten-image worktree release package=7434fc0b-10e5-4081-a37f-b33031436b9e; backup=build/t478-s29/release-before; no O:/winnt write\n",
+  "limitations": "Controlled cancellation failures, not native network fault injection; original handle wrap unchanged; failed cancellation without completion retains native storage until process exit. Static object binding is not runtime coverage."
+}

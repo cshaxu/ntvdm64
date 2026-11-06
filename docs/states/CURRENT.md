@@ -4,6 +4,10 @@
 
 **No active M/T/S packet.**
 
+T478 S29 is closed with [Winsock ownership evidence](../etc/evidence/m0-t478-s29-winsock-rundown.md).
+Next planned packet: S30, finding 01 CPU diagnostics; continuous owner authorization remains.
+Temporary CURRENT size exception: accumulated closure links are retained through T478 final reconciliation.
+
 ## S1 Closure Record
 
 T478 S1 planning handoff: [classified findings](../etc/evidence/m0-t478-s1-classified-findings.md).
@@ -297,3 +301,7 @@ Original DLC capability/rollback limits remain. S28/finding 62 follows.
 T478 S28 [records the owner-approved original exhaustion limit](../etc/evidence/m0-t478-s28-async-review.md).
 Fault reproduced; 24 existing publication checks pass. No product changes,
 no new drain guarantee; exact S27 release retained. S29/finding 65 follows.
+
+## T478 S29 Closure
+
+[Winsock task rundown](../etc/evidence/m0-t478-s29-winsock-rundown.md) repairs project-added premature buffer release after failed cancellation. 323 focused checks, three real Win16 cases and all 16 Full gates pass. Package 7434fc0b-10e5-4081-a37f-b33031436b9e is hash-published to worktree assets/release only; no O:/winnt or push. Original and never-completing-provider limits remain explicit.

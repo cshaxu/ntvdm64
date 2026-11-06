@@ -69,11 +69,18 @@ extern DWORD WWS32ThreadSerialNumberCounter;
 #define WWS32IsThreadInitialized \
     ( TlsGetValue( WWS32TlsSlot ) == NULL ? FALSE : TRUE )
 
+/* MVDM-HOST-DIV-882: task retirement and provider cancellation share ownership. */
+#define WWS32_ASYNC_RETIRED         0x01
+#define WWS32_ASYNC_CANCEL_STARTED  0x02
+#define WWS32_ASYNC_CANCEL_ACTIVE   0x04
+#define WWS32_ASYNC_COMPLETED       0x08
+
 typedef struct _WINSOCK_ASYNC_CONTEXT_BLOCK {
     LIST_ENTRY ContextBlockListEntry;
     HANDLE AsyncTaskHandle32;
     HAND16 AsyncTaskHandle16;
     DWORD ThreadSerialNumber;
+    DWORD RundownState;
 #line 76
     VPVOID vBuffer16;
     DWORD Buffer16Length;

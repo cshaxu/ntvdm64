@@ -1271,3 +1271,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S27 DLC completion event](evidence/m0-t478-s27-dlc-event.md): minimal original second-event check and explicit provider/initialization limits.
 
 - [T478 S28 async investigation](evidence/m0-t478-s28-async-review.md): owner-approved original exhaustion limit, reproduction and separated lifecycle evidence.
+
+- [T478 S29 Winsock rundown](evidence/m0-t478-s29-winsock-rundown.md): provider ownership repair, controlled failures, real Win16 cases and exact Full/release evidence.
