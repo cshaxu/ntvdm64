@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;16 bounded dispositions and10 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;17 bounded dispositions and9 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -85,9 +85,9 @@
       "id": "DOS16:4673504e1fe696895ecf",
       "module": "1.2",
       "contract": "CONFIG/AUTOEXEC temporary preprocessing",
-      "disposition": "pending",
+      "disposition": "wired; original limitations retained",
       "current_owner": "cmdconf.c ExpandConfigFiles/WriteExpanded retains byte parser and session-root binding",
-      "evidence_and_limits": "Next: reconcile existing CONFIG/AUTOEXEC parser witnesses, signed CHAR accounting and original failure limits; do not add new parser."
+      "evidence_and_limits": "s45-config-parser-disposition.json: exact function-token comparison against pinned original observations establishes only root-binding change in ExpandConfigFiles; WriteExpanded/WriteFileAssert unchanged. Current map and existing boot evidence establish owner selection/normal path. CHAR/raw-size/shell-buffer limits are original, not missing wiring; no new growth, wide counters or fault-safety claim."
     },
     {
       "id": "DOS16:ca680961be9e8806496a",

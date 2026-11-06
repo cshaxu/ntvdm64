@@ -364,3 +364,44 @@ The CONFIG/AUTOEXEC parser and its byte accounting remain a distinct pending row
 Sixteen startup identities have bounded dispositions; ten startup rows and1043
 active identities remain pending. S45 remains active. Product and the published
 S43 package are unchanged; no new Full/publication, O:/winnt write or push.
+
+## P10 CONFIG/AUTOEXEC original-owner and limitation disposition
+
+The [comparison receipt](../../../artifacts/mvdm-audit/t478-final/s45-config-parser-disposition.json)
+resolves DOS16:4673504e1fe696895ecf. It reuses the original audit's pinned full
+function observations, not its proposed future hardening requirements. After
+removing comments/whitespace/line directives, ExpandConfigFiles differs only in
+GetWindowsDirectory -> mvdm_softpc_system_copy_root plus its length/zero result.
+WriteExpanded and WriteFileAssert are token-identical. This is a bounded function
+comparison, not a bytewise whole-file mirror certificate. Current map binds all
+three to original-mvdm-command:cmdconf.obj; the unchanged S43 startup exercises
+normal boot, not every parser boundary.
+
+The [T420 S35 boot audit](m0-t420-s35-xms-capability-progress.md) independently
+found no omitted original host environment pre-sizing step. Original explicit
+SHELL /E is preserved; no synthesized /E, discarded environment entries or
+forced DOS=HIGH is admitted. The original parser is already selected, and no
+parallel autonomous CONFIG parser was found in this caller chain.
+
+Source-origin limitations remain: CHAR cchEnv accumulates derived environment
+bytes, and allocation uses raw input file length. For PATH=x with no CRLF, six
+raw bytes produce PATH/NUL/x/NUL/final-NUL, requiring eight bytes. This is a
+source-derived extent example, not a newly executed heap-corruption test. The
+original final index/realloc uses the narrowed counter. Third-party /c and /e
+text also uses the original fixed achRawFile and unbounded concatenation.
+SetEndOfFile/CloseHandle outcomes remain ignored; exact raw read and output
+write failures retain the original fatal route. WriteExpanded consumes input
+bytes rather than reporting expanded output length. All of these algorithms
+are present in the pinned original, not introduced by the project root binding.
+
+The external audit proposed checked growth, wider bookkeeping and new extent
+failure behavior as future acceptance. Those are proposals, not existing product
+authority; the owner's later original-semantics-only/no-new-tolerance instruction
+controls this T. Do not adopt them as mandatory new functionality, or mislabel
+these original limits as missing host wiring. They are explicitly unverified for
+adversarial/oversized inputs, and no claim of safety is made.
+
+This source/evidence P changes no runtime. Seventeen startup rows now have
+bounded dispositions, nine remain pending;1042 active inventory identities
+remain pending. T478/S45 stay active, the S43 release stays unchanged, and no
+O:/winnt write or push occurs.

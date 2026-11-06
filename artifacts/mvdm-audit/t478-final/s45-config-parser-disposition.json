@@ -1,0 +1,67 @@
+{
+  "id": "DOS16:4673504e1fe696895ecf",
+  "disposition": "original parser wired; original buffer/count limitations retained",
+  "upstream": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+    "source_evidence_sha256": "2528e2af657eb8437e9c9cea7ac2e7e71c9614f29faf93392da150909a84be55"
+  },
+  "current_source_sha256": "69d346b5665d6755eb63d2e012027d3861894bd39b4f18dfb217959532491e76",
+  "method": "Compare function tokens from pinned original source observations and current source, excluding comments, whitespace and line directives; not a bytewise mirror certification.",
+  "comparisons": {
+    "ExpandConfigFiles": {
+      "original_tokens": 1666,
+      "current_tokens": 1676,
+      "changes": [
+        {
+          "kind": "replace",
+          "original": [
+            "GetWindowsDirectory"
+          ],
+          "current": [
+            "mvdm_softpc_system_copy_root"
+          ]
+        },
+        {
+          "kind": "insert",
+          "original": [],
+          "current": [
+            "?",
+            "(",
+            "DWORD",
+            ")",
+            "strlen",
+            "(",
+            "achRawFile",
+            ")",
+            ":",
+            "0"
+          ]
+        }
+      ]
+    },
+    "WriteExpanded": {
+      "original_tokens": 177,
+      "current_tokens": 177,
+      "changes": []
+    },
+    "WriteFileAssert": {
+      "original_tokens": 79,
+      "current_tokens": 79,
+      "changes": []
+    }
+  },
+  "map_witness": [
+    "0001:00154cc0       _ExpandConfigFiles         00555cc0 f   original-mvdm-command:cmdconf.obj",
+    "0001:00155710       _WriteExpanded             00556710 f   original-mvdm-command:cmdconf.obj",
+    "0001:001558c0       _WriteFileAssert           005568c0 f   original-mvdm-command:cmdconf.obj"
+  ],
+  "original_limits": [
+    "CHAR environment count can narrow/wrap; no widening admitted",
+    "Raw-size allocation can be smaller than derived pairs: PATH=x is6 input bytes but PATH NUL x NUL NUL needs8",
+    "Third-party /c or /e text uses original fixed achRawFile concatenation",
+    "SetEndOfFile and CloseHandle results ignored",
+    "No synthetic shell /E sizing or guest modification admitted"
+  ],
+  "runtime_scope": "Reuse unchanged S43 normal DOS/WOW startup and existing T420 S35 original boot audit. No fresh boundary-fault execution and no malformed/large-input safety certification. No new product code."
+}
