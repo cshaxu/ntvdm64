@@ -2,38 +2,47 @@
 
 ## Current Work
 
-**Active: M0 T479 S2** - shared-library import verified and published; awaiting owner acceptance.
-This mixed-task side stage does not close or replace the guest mainline.
+**Active: M0 T479 S2** - guest multitasking bridge: design blind-spot audit and resolution.
+The accepted shared-library side stage is closed; this is the resumed guest mainline.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Candidate Proposal | [Guest multitask frontend package](../proposals/proposal-multitask-guest-vdm-frontends-001.md); this approved shared-import side stage retains the same T objective. |
-| Identifier Mode | M0 T479 S2/shared-library-import; Ordinary Mode, single executor/reviewer. |
-| Admission And Approval | Owner admits S2 to audit/import the adjacent win16-style public intersection, removing superseded implementations; subsequent approval permits making imported tests generic for both projects. |
-| Objective | Establish exact shared component intersection and compatibility, then replace eligible implementations with pinned byte-identical upstream copies and consolidate reusable tests. |
-| Non-goals | No styling feature restoration, guest modification, unrelated upstream-only components, or writes to the sibling repository. |
-| Reference Baseline | Local c43cec416; upstream O:/repos.hobby/win16style at d27956b4e5e62d6a81edbd511f2ba4bbd5290026, initially clean. |
-| Files And ABI Surface | Shared lib-win32 source/test intersection, owning consumers, build/test registration and provenance; audit before source replacement. |
-| Applicable Rules | Execution, source policy, architecture/coding/document rules; preserve LF and unrelated edits. |
-| Verification | Whole component source/test comparison, public API and dependency/caller audit, pinned hashes, cached supported builds and relevant/full product gates before coherent publication. |
-| Expected Markers | Per-component unchanged/changed/added/deleted inventory, compatibility decisions and no duplicate local implementation. |
-| Asset Needs | Read-only adjacent committed source/test tree; existing build caches and published baseline. |
-| Reporting Requirements | Audit feasibility first; distinguish exact source import from caller adaptation and upstream evidence from local tests. |
-| Stop Conditions | New semantic concession, unknown provenance, incompatible required behavior or concurrent upstream changes invalidate blind replacement. |
-| Exit Criteria | Reviewed import, byte-identity evidence, build/test/publication, commit/push; unresolved incompatibilities explicitly retained without false completion. |
-| Original Owner Request | Admit S2 to audit and execute unchanged import of the sibling public-intersection src and test, deleting local implementations; first audit whether import is feasible. |
-| Similar-Issue Sweep | API/ABI, GCC/MSVC and x86/x64, transitive dependencies, test helpers, error/lifetime behavior and all product consumers. |
-| Temporary Evidence | build/t479-s2-shared; owner S2; 60-minute phase, 2 GiB, 15-minute no-progress review; stable caches remain untouched. |
+| Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
+| Identifier Mode | M0 T479 S2/guest-bridge, design/proof phase; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner accepts and closes S2/shared-library-import, then requests continued discovery and resolution of guest multitasking design blind spots. |
+| Objective | Resolve concrete continuation, identity, command, notification, I/O and retirement ownership gaps against actual source; identify finite executable proof obligations without claiming untested feasibility. |
+| Non-goals | No original guest changes, hardware V86 monitor, periodic polling, timed suspend/resume, new transport, semantic concessions or unrelated features. |
+| Reference Baseline | 967ef3d31 accepted shared import; S1 research closure and retained original-source call-chain evidence. |
+| Files And ABI Surface | Guest bridge plan/design and evidence; inspect original COMMAND/CCPU/device paths, VMM declarations, frontend-base, NTVDM adapters and NTSRV contracts. No runtime ABI frozen merely from declarations. |
+| Applicable Rules | Execution, architecture/coding/document rules and source policy; immutable original guest and minimum registered mirror differences. |
+| Verification | Exact source call chains and owner/state/ordering matrix, negative/race analysis, admitted isolated proof where justified; governance and source-diff review for research delivery. |
+| Expected Markers | Finite resolved design findings, specific rejected shortcuts, concrete remaining runtime checks with owners and pass conditions. |
+| Asset Needs | Read-only original sources and retained research; current published package unchanged for documentation-only work. |
+| Reporting Requirements | Separate confirmed source facts, design decisions and runtime evidence; explain capability consequences rather than repeat next-step slogans. |
+| Stop Conditions | New semantic concession, guest patch, unknown provenance or incompatible architecture requires explicit disposition; missing proof is not a pass. |
+| Exit Criteria | Reviewed design/proof results and bounded implementation handoff; no S2 runtime closure without registration/event/lifecycle acceptance. |
+| Original Owner Request | Accept and close this shared-library S, then continue finding and resolving multitask-payload design blind spots. |
+| Similar-Issue Sweep | Both 54:08/0A; system/ordinary/reused VMs; single-task transitions; nested children; input/output/failure; NIDDB independent owner. |
+| Temporary Evidence | build/t479-s2-guest; this S owns 60-minute phases, 2 GiB, 15-minute no-progress review. |
 
-## S2 Shared Import Delivery
+## S2 Guest Design Checkpoint
+
+[Boundary audit](../etc/operations/m0-t479-s2-guest-design-boundaries.md) records
+seven concrete hazards and selected corrections: retirement locking, dispatch
+cancellation, paired launch capabilities, per-request COMMAND state, VM death,
+callback restoration and independent wakeup. Guest ABI/event execution and the
+complete I/O provider remain explicit S2--S5 proof gates, not passed claims.
+No runtime or published image changes accompany this research checkpoint.
+
+## S2 Shared Import Closure
 
 [Delivery evidence](../etc/evidence/m0-t479-s2-shared-import.md) records 46/46
 exact upstream source files, one generic test suite, MSVC/GCC x86/x64 passes,
 both cross-width matrices and Full 16/16. The coherent ten-image package
 f86fa099-e0ba-4d7f-bbd3-721fbee9b824 is published at both destinations.
-Guest-bridge implementation remains a separate workline; this delivery does
+Owner acceptance closes this side stage at 967ef3d31. Guest-bridge implementation remains a separate workline; this delivery does
 not imply guest multitasking support.
 
 ## S1 Closure Record
@@ -194,10 +203,10 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The [T479 side integration](../etc/evidence/m0-t479-s1-thunk-import.md) publishes
+The accepted [T479 shared import](../etc/evidence/m0-t479-s2-shared-import.md) publishes
 the ten-image product at application version 0.0.479 and protocol 67. Full
 16/16 selected gates pass and both publication targets match. Guest media is unchanged.
-Actual guest VM discovery and driver integration remain separately queued.
+Actual guest VM discovery and driver integration are the resumed S2 mainline; executable acceptance remains pending.
 The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
 remains retained baseline evidence.
 

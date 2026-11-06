@@ -1189,3 +1189,5 @@ owner acceptance of the research and mandatory S2--S5 verification handoff.
 the pinned source intersection, compatibility findings and generic-test plan.
 
 [T479 S2 shared import evidence](evidence/m0-t479-s2-shared-import.md) records source identity, common tests and delivery verification.
+
+[T479 S2 guest design boundaries](operations/m0-t479-s2-guest-design-boundaries.md) records source-confirmed hazards, selected corrections and finite executable proof gates.

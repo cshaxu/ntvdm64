@@ -32,13 +32,13 @@ media work; this admission is not permission to patch existing installations.
 
 | Stage | Outcome and decisive evidence |
 | --- | --- |
-| S1 (active) | Source-first contract: both BOP call chains, escaping the unreturned host stack, precise VM identity, VMM wait/resume legality, toolchain and NIDDB decision. Freeze ABI and acceptance matrix. |
-| S2 (planned) | Project-owned VxD registration, payload/VM generations and retirement connected to the host registry; verify each supported OS/load mode. |
+| S1 (closed research) | Source-first contract: both BOP call chains, escaping the unreturned host stack, precise VM identity, VMM wait/resume legality, toolchain and NIDDB decision. Freeze ABI and acceptance matrix. |
+| S2/guest-bridge (active design/proof) | Project-owned VxD registration, payload/VM generations and retirement connected to the host registry; verify each supported OS/load mode. |
 | S3 (planned) | Asynchronous 54:08/54:0A continuation and child-chain completion; two VMs in both completion orders, prove actual guest caller resume while sibling child remains alive. |
 | S4 (planned) | VM-specific input/output, final-output handoff, cancellation, nested chains and real Console behavior; preserve single-task/GUI/redirection paths. |
 | S5 (planned) | Integrated failure/lifecycle matrix, coherent cached build, full regression, publication and closure audit. |
 
-Only S1 is admitted. Stage boundaries may be refined from concrete source
+S1 is closed and S2/guest-bridge is admitted. Stage boundaries may be refined from concrete source
 findings, without dropping the full proposal requirements. Tests must prove
 actual guest recovery rather than screenshots or host-child exit alone.
 
@@ -88,3 +88,13 @@ The owner now admits S2/shared-library-import, recorded in its
 This is the sole active packet. Planned S2/guest-bridge retains its qualified
 identity under the mixed-task rule; no guest implementation or proof gate is
 silently closed or renumbered by this side work.
+
+## Accepted shared stage and resumed guest mainline
+
+Owner acceptance closes S2/shared-library-import at 967ef3d31, retaining the
+published and tested package. This supersedes the sole-active-side-stage
+wording above. S2/guest-bridge is now the sole active packet.
+The [design boundary audit](m0-t479-s2-guest-design-boundaries.md) resolves
+source-confirmed lock, cancellation, launch-context and global-command hazards,
+and assigns executable guest proof and complete I/O acceptance to S2--S5.
+It does not close S2 registration/runtime acceptance or narrow the proposal.

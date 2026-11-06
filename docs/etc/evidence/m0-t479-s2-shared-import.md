@@ -82,3 +82,6 @@ links the actual T479 S1 closure and original candidate proposal.
 Git whitespace checking reports upstream trailing blank lines in the two new
 process-image .c files. Preserve them for byte-exact import; all other changed
 files pass. The source manifest remains authoritative for those original bytes.
+
+Owner acceptance on 2026-11-05 closes S2/shared-library-import at 967ef3d31.
+The published package is retained; no rebuild is required for this closure.
