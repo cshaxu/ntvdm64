@@ -445,3 +445,43 @@ This is source/evidence reconciliation, not a product repair. Nineteen startup
 identities have bounded dispositions; seven remain pending and1040 active
 inventory identities remain pending. S45/T478 remain active, S43 release is
 unchanged, and no O:/winnt write, new publication or push occurs.
+
+## P12 early startup and PIF request-control disposition
+
+The [receipt](../../../artifacts/mvdm-audit/t478-final/s45-startup-control-disposition.json)
+reconciles DOS16:2dff4e2e17c9be86c67d and DOS16:901a32f49bf85e8d18cb.
+Current host_applInit retains video/keyboard/mouse selection, lowercase-f
+admission, case-insensitive w with its original early break, hex i task identity,
+DOS/WOW stream choice, main-thread duplication and ICA/UI/event order. Its
+registered host-start/close cohort and event cleanup guard are retained, not
+replaced by another startup manager. Maps select original nt_reset/nt_event
+and the existing mvdm_softpc_event_thread helper.
+
+The existing event_thread_startup_failure fixture was rebuilt against current
+join and alert implementations in the stable fixture cache. Background runner2280
+returned build0 and both suspended/running cases0, with S35_CHILD_RETURNED_0.
+The suspended child's procedure never enters; the started child exits with the
+expected native alert status. The fixture owns a two-second child deadline and
+its child cleanup; the outer runner bounds build120 and each case30 seconds.
+This revalidates the proven [T420 S35 repair](m0-t420-s35-xms-capability-progress.md),
+whose historical real CONFIG fault witness exited naturally. No claim is made
+that every startup switch/failure or the unavailable-native-alert fallback was
+retested. Current implementation prefers NTDLL NtAlertThread; the header's old
+APC-only description is not used as implementation evidence.
+
+config's PIF request advertises the original buffers/lengths and selected DOS,
+WOW or separate-WOW state. Its reply flows through selected original
+BaseSrvGetNextVDMCommand/BaseSrvFillPifInfo, not an invented PIF broker. Original
+server size checks accept ReservedLen equal to capacity and return the stored
+length. Original client capture uses AnsiStringReserved.Length+1, including NUL;
+config declares RESERVED_LENGTH129 then writes Reserved[GetPIF.ReservedLen].
+At exact129 this is an original extra-terminator out-of-bounds risk. The pinned
+prior audit explicitly records the same producer/consumer combination. No such
+overflow was forced in the product; this is source-proven risk, not a safety
+pass. Its proposed physical130/logical129 padding is not adopted as new tolerance
+under the current owner direction. Ordinary startup evidence does not erase it.
+
+Twenty-one startup rows have bounded dispositions; five startup rows and1038
+active identities remain pending. S45/T478 remain active. Changes here are tests,
+fixture build wiring and evidence only; the product/S43 release stays unchanged,
+with no O:/winnt write, new runtime publication or push.

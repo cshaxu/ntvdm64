@@ -1,0 +1,42 @@
+{
+  "ids": [
+    "DOS16:2dff4e2e17c9be86c67d",
+    "DOS16:901a32f49bf85e8d18cb"
+  ],
+  "runner": "build/t478-s45/run-startup-p12.ps1",
+  "runner_pid": 2280,
+  "build_exit": 0,
+  "tests": {
+    "suspended": {
+      "exit": 0,
+      "marker": "S35_CHILD_RETURNED_0"
+    },
+    "running": {
+      "exit": 0,
+      "marker": "S35_CHILD_RETURNED_0"
+    }
+  },
+  "sha256": {
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": "28479f1a005762263edaf4e50e326e52c4508bb67238f592eacf668ff9a910dd",
+    "src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c": "746c0e1326b3461ab8ef72d24c1054130732784f0211203563ac9c7c1e5c26aa",
+    "src/ntvdm-exe/win32/nt_thread_alert_compat.c": "5afe27d50b1e1ecb618dfdff7ba30f69e051cf892a391df64f57eb7c7a54b8c1",
+    "src/mvdm-host/softpc.new/host/src/config.c": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+    "src/non-mvdm/base/win32/client/vdm.c": "5622f66074cb994abdd5d85d0884b837fc17a24d182f00907e6df07db8c7d23f",
+    "src/non-mvdm/base/win32/server/srvvdm.c": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+    "tests/observation/event_thread_startup_failure.c": "3455315e285c3e75f72f0e96637a57d68b0792fd8e673c73bade381b8370161a"
+  },
+  "startup": "Original f/w/i ordering, early w break, absence-of-f ExitProcess0 and UI/ICA/event startup retained. Established close-cohort guards and pre-resume join repair remain.",
+  "reserved_limit": "config declares129 bytes and advertises129; original producer includesNUL, Fill accepts <= capacity, caller writes Reserved[returned length]. Exact129 is an original out-of-bounds terminator risk, not a missing RPC field.",
+  "limits": [
+    "No current exhaustive switch/error matrix",
+    "No forced129-byte production overflow execution or safety certification",
+    "Current event helper test covers the selected native alert path, not forced absence of NtAlertThread",
+    "S43 Full normal startup evidence reused; historical early CONFIG fault from T420 S35 is not a new run"
+  ],
+  "original_contracts": {
+    "DOS16:2dff4e2e17c9be86c67d": "Initialize video/keyboard/mouse function pointers then parse switches in order. Lowercase f authorizes expected launch presence; absence calls ExitProcess(0). w is case-insensitive and may break after f, so later switches need not be parsed. i plus nonempty text sets hex DosSessionId; it is not a native Console HANDLE. DOS stream I/O enablement differs from WOW. Duplicate main thread handle then initialize/lock ICA, initialize UI and start event thread.",
+    "DOS16:901a32f49bf85e8d18cb": "config fills an ASKING_FOR_PIF|DOS request with iTask=DosSessionId, selected output buffers and no command/environment payload. BaseSrv under DOS lock finds record by DosSesId when nonzero else native Console identity, calls BaseSrvFillPifInfo, and may adopt ConsoleHandle and zero stored DosSesId even when Fill status is failure. Fill chooses startup title over app name, initializes requested strings, checks requested capacities, returns required lengths and retains command record. Successful config updates ANSI current-dir hidden env and CWD, interprets Reserved override bits, then applies original PIF parser. Reservedproducer countincludesNUL; equality129 accepted andreturnedunchanged; callerthenwritesindex129 in129backing."
+  },
+  "original_records_sha256": "aa0ec644b68c682afce8e48bfe0a1734af83aa078e95efec51e8c254f1fec4a8"
+}

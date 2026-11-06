@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;19 bounded dispositions and7 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;21 bounded dispositions and5 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -125,17 +125,17 @@
       "id": "DOS16:2dff4e2e17c9be86c67d",
       "module": "1.2",
       "contract": "NTVDM early launcher switches and native initialization",
-      "disposition": "pending",
+      "disposition": "wired; existing lifecycle repair retained",
       "current_owner": "nt_reset.c host_applInit retains ordered f/w/i switch parsing and original host initialization",
-      "evidence_and_limits": "Source inspected; next correlate standalone bootstrap/termination changes and native init error tests. Not permission to change original early-break behavior."
+      "evidence_and_limits": "s45-startup-control-disposition.json: original startup ordering/source and selected maps; fresh suspended/running thread cleanup tests pass against current helpers, historical real early CONFIG fault plus S43 normal startup. No new all-switch/all-fault claim."
     },
     {
       "id": "DOS16:901a32f49bf85e8d18cb",
       "module": "1.2",
       "contract": "PIF startup configuration acquisition and Console association",
-      "disposition": "pending",
+      "disposition": "wired; original limitations retained",
       "current_owner": "config.c ASKING_FOR_PIF -> BaseSrv PIF fill and adoption",
-      "evidence_and_limits": "Reserved[GetPIF.ReservedLen] remains unguarded at capacity. Next compare actual producer capacities and existing original-limit evidence, not invent padding/tolerance."
+      "evidence_and_limits": "s45-startup-control-disposition.json: original ASKING_FOR_PIF buffers/state and original BaseSrvFillPifInfo selected; source confirms producer count includes NUL, equality129 accepted and original caller extra terminator risk. No buffer padding, alternate server or overflow safety claim."
     },
     {
       "id": "DOS16:263d8b0026d041d346f9",

@@ -84,7 +84,8 @@
     "current-original-owner-wired; bounded-caller-fixtures-verified": 1,
     "current-original-owner-wired; source-compared; original-limits-retained": 3,
     "current-original-owner-wired; bounded-native-temp-evidence": 1,
-    "pending-product-evidence": 1040,
+    "current-original-owner-wired; bounded-startup-control-evidence": 2,
+    "pending-product-evidence": 1038,
     "inactive-edition-evidence-only": 483,
     "current-original-owner-wired; bounded-runtime-verified": 1
   },
