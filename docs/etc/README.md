@@ -1237,3 +1237,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S10 keyboard-layout disposition](evidence/m0-t478-s10-keyboard-layout.md): connected original reader, valid two-character contract and retained malformed-configuration limit.
 
 - [T478 S11 XMS dispatch disposition](evidence/m0-t478-s11-xms-dispatch.md): public/private contract distinction, twelve selected routes and inherited private-input limit.
+
+- [T478 S12 redirector loader ownership](evidence/m0-t478-s12-redirector-loader.md): original failed-load module cleanup and removal of the unselected local loader.

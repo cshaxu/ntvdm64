@@ -32,21 +32,6 @@ int mvdm_softpc_project_wow_initial_environment(char **environment,unsigned long
     return 1;
 }
 
-void *mvdm_softpc_load_library(const char *name)
-{
-    WCHAR path[MAX_PATH];
-    PCWSTR provider=NULL;
-    DWORD error;
-    if(name && (!_stricmp(name,"WOW32") || !_stricmp(name,"WOW32.DLL")))
-        provider=L"system32\\WOW32.DLL";
-    else if(name && (!_stricmp(name,"VDMREDIR") || !_stricmp(name,"VDMREDIR.DLL")))
-        provider=L"system32\\VDMREDIR.DLL";
-    if(!provider)return LoadLibraryA(name);
-    error=common_product_path_w(provider,path,ARRAYSIZE(path));
-    if(error){SetLastError(error);return NULL;}
-    return LoadLibraryW(path);
-}
-
 static int mvdm_softpc_media_find_file(const char *root, const char *name,
     char *path_out, uint32_t path_out_bytes)
 {

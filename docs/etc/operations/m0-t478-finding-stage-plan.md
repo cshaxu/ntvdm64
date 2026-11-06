@@ -216,3 +216,13 @@ production or guest changes. S11/finding 22 is next proposed.
 validation and all twelve private host dispatch routes. Selected release tokens
 match both originals. No new private-BOP tolerance or repeated S7 repair is
 added. No production changes; S12/finding 24 is next proposed.
+
+## S12 disposition
+
+[S12](../evidence/m0-t478-s12-redirector-loader.md) corrects the original failed
+module load's destructor and restores unloaded callbacks, retaining the original
+BOP failure/no-retry contract. Actual selection disproves the old claim that the
+local rooted loader is active; its unselected body/fixture/target are removed.
+77 focused checks, remaining x86/x64 resource fixtures and all 16 Full gates pass.
+Package 0c8a03f9-60e6-46dc-9638-b25d41ae8e3d is published only to this worktree.
+S13/finding 28 is next proposed.

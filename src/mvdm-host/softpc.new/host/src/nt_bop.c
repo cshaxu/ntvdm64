@@ -677,7 +677,19 @@ closeAndReturnError:
 #endif
 #line 566
 
-    CloseHandle(hVdmRedir);
+    /* DIV-872: failed LoadLibrary resolution owns a module reference, not a
+       kernel handle. Restore the original unloaded callback state. */
+    VrDispatch = NULL;
+    VrInitialized = DefaultVrInitialized;
+    VrReadNamedPipe = NULL;
+    VrWriteNamedPipe = NULL;
+    VrIsNamedPipeName = NULL;
+    VrIsNamedPipeHandle = NULL;
+    VrAddOpenNamedPipeInfo = NULL;
+    VrConvertLocalNtPipeName = NULL;
+    VrRemoveOpenNamedPipeInfo = NULL;
+    if (hVdmRedir != NULL) FreeLibrary(hVdmRedir);
+    hVdmRedir = NULL;
     return FALSE;
 }
 

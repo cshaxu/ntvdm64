@@ -44,7 +44,6 @@ $sources = @(
     'tests/session/softpc_firmware_resource_fixture.c',
     'tests/session/softpc_media_resource_fixture.c',
     'src/common/system_root.c',
-    'tests/session/softpc_product_loader_fixture.c',
     'src/common/guest_environment.c',
     'tests/session/softpc_wow_boot_environment_fixture.c'
 )
@@ -63,25 +62,21 @@ $graph.Add('rule run')
 $graph.Add('  command = $in "' + (NinjaPath (Join-Path $root 'src/mvdm-guest/softpc.new/roms')) + '"')
 $graph.Add('rule run_dos')
 $graph.Add('  command = $in "' + (NinjaPath $runtime) + '"')
-$graph.Add('rule run_loader')
-$graph.Add('  command = $in "' + (NinjaPath (Join-Path $build 'loader-shadow')) + '"')
 $objects = @()
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = 'obj/' + $index + '-' + ([IO.Path]::GetFileNameWithoutExtension($sources[$index])) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $sources[$index])))
     $objects += $object
 }
-$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj obj/5-system_root.obj obj/7-guest_environment.obj')
-$graph.Add('build softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/7-guest_environment.obj')
-$graph.Add('build softpc-product-loader-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/6-softpc_product_loader_fixture.obj obj/7-guest_environment.obj')
-$graph.Add('build softpc-wow-boot-environment-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/7-guest_environment.obj obj/8-softpc_wow_boot_environment_fixture.obj')
+$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj')
+$graph.Add('build softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj')
+$graph.Add('build softpc-wow-boot-environment-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/6-guest_environment.obj obj/7-softpc_wow_boot_environment_fixture.obj')
 $graph.Add('rule run_boot')
 $graph.Add('  command = $in')
 $graph.Add('build verify-boot: run_boot softpc-wow-boot-environment-fixture.exe')
 $graph.Add('build verify: run softpc-firmware-resource-fixture.exe')
 $graph.Add('build verify-media: run_dos softpc-media-resource-fixture.exe')
-$graph.Add('build verify-loader: run_loader softpc-product-loader-fixture.exe')
-$graph.Add('build all-verify: phony verify verify-media verify-loader verify-boot')
+$graph.Add('build all-verify: phony verify verify-media verify-boot')
 $graph.Add('default all-verify')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 Write-Host "Generated T310 S8 firmware-resource graph: $build"

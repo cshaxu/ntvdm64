@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S11 is closed; [XMS dispatch disposition](../etc/evidence/m0-t478-s11-xms-dispatch.md).
-Sequential S12 admission is owner-authorized next.
+T478 S12 is closed; [redirector loader evidence](../etc/evidence/m0-t478-s12-redirector-loader.md).
+Sequential S13 admission is owner-authorized next.
 
 ## S1 Closure Record
 
@@ -26,6 +26,8 @@ recorded in [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
 The owner directs no push or main-runtime publication.
 
 ## S12 Closure Record
+
+T478 S12 [repairs original failed redirector module ownership](../etc/evidence/m0-t478-s12-redirector-loader.md), deletes the unselected local loader and passes 77 focused checks plus all 16 Full gates; worktree release only.
 
 The owner accepted [S12 source layout and compile-time boundaries](../etc/evidence/m0-t473-s12-source-layout-closure.md).
 
