@@ -1,6 +1,7 @@
 #line 23
 #ifndef _NTEXAPI_
 #define _NTEXAPI_
+
 #line 26
 #if _MSC_VER > 1000
 #pragma once
@@ -40,15 +41,19 @@ NtQueryPerformanceCounter (
 #endif
 #line 1409
 #ifndef _X86_
+
 #line 1411
 #ifndef IsNEC_98
 #endif
+
 #line 1415
 #ifndef IsNotNEC_98
 #endif
+
 #line 1419
 #ifndef SetNEC_98
 #endif
+
 #line 1423
 #ifndef SetNotNEC_98
 #endif

@@ -74,6 +74,7 @@ extern HOSTMOUSEFUNCS the_mouse_funcs;
 extern WORD BWVKey;
 extern char achES[];
 #endif
+
 #line 71
 #ifdef MONITOR
 #line 71
@@ -283,9 +284,11 @@ void  host_applInit(int argc,char *argv[])
 		    (DWORD) 0,
 		    FALSE,
 		    (DWORD) DUPLICATE_SAME_ACCESS);
+
 #line 261
     InitializeIcaLock();
     host_ica_lock();
+
 #line 264
     init_host_uis();    /* console setup */
     nt_start_event_thread();      /* Start event processing thread */
@@ -367,7 +370,7 @@ void host_terminate(void)
     if(VDMForWOW)
         ExitVDM(VDMForWOW,(ULONG)-1);    /* Kill everything for WOW VDM */
     else
-        ExitVDM(FALSE,0);
+	ExitVDM(FALSE,0);
 
     ExitProcess(VdmExitCode);
 }

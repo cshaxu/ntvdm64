@@ -1318,3 +1318,4 @@ the pinned source intersection, compatibility findings and generic-test plan.
 
 - [T480 S1 brief, audit and plan](evidence/m0-t480-s1-brief-audit-plan.md): pinned host-only diff census, stale candidate corrections and remaining consumer evidence.
 - [T480 S1 actual build and consumer closure](evidence/m0-t480-s1-build-consumers-closure.md): worktree builds, complete file consumers, link ownership, physical hunk coordinates and bounded restoration candidates.
+- [T480 S2 whitespace restoration](evidence/m0-t480-s2-whitespace-restoration.md): finite candidate dispositions, original whitespace recovery, all-consumer equivalence and local delivery evidence.

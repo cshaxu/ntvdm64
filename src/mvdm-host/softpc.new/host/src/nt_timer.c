@@ -245,6 +245,10 @@ LARGE_INTEGER CreepTicCount;
 int    HeartBeatResumes=0;
 BOOL   bDoingTicInterrupt=FALSE;
 BOOL   bUpdateRtc;
+
+
+
+
 #line 241
 #if defined (MONITOR) && defined (X86GFX)
 #line 242
@@ -596,6 +600,7 @@ DWORD HeartBeatThread(PVOID pv)
    DWORD dwRet = (DWORD)-1;
 
    try {
+
 #line 571
 #ifdef MONITOR
 #line 572
@@ -821,9 +826,9 @@ NTSTATUS DelayHeartBeat(LONG Delay)
              }
          }
 
-
 #line 840
 #endif
+
 #line 842
          // alerted to die
      /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter

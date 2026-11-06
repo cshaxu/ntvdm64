@@ -273,6 +273,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 #error Excluded unsupported delayed-interrupt monitor dispatch
 #line 277
 #else
+
 #line 279
         //
         // Cancel delay hw interrupt, delete quick event if any
@@ -297,12 +298,16 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
                                                 Delay - 200,
                                                 IrqLineNum
                                                 );
+
 #line 303
         //
         // Keep Wow Tasks active
         //
 #line 306
         WOWIdle(TRUE);
+
+
+
 #line 310
 #endif
 #line 311
@@ -335,9 +340,9 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 #ifndef MONITOR
 #line 333
 /*
-* QuickEvent call back function
-*
-*/
+ * QuickEvent call back function
+ *
+ */
 void DelayIrqQuickEvent(long param)
 {
    ULONG IrqLineNum = param;

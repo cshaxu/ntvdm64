@@ -1396,7 +1396,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #line 1334
                 ExitProcess(0);
                 return FALSE;
-            }
+                }
 
             if ( (CntrlHandlerState & CNTRL_PIFALLOWCLOSE) ||
                  (!(CntrlHandlerState & CNTRL_SHELLCOUNT) &&

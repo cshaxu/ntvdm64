@@ -49,6 +49,7 @@ EnterWowCritSect(
 
    return;
 }
+
 #line 4010
 _inline
 VOID

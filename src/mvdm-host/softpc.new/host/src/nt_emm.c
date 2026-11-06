@@ -391,7 +391,7 @@ DESCRIPTION	: In this implementation storage_ID is simply a pointer
 long host_reallocate_storage(long storage_ID, int size, int new_size)
 
 /*   IN 
-long	storage_ID	ptr to area of memory
+long	storage_ID	ptr to area of memory	
 int	size		original size - not used in this version
 	new_size	new size required
 */

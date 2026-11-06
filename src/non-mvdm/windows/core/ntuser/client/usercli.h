@@ -1207,6 +1207,7 @@ typedef struct tagMDIWND {
 #line 2317
 #define HANDLE_WARNING()
 #endif
+
 #line 2320
 #if DBG
 #line 2321
@@ -1226,6 +1227,7 @@ typedef struct tagMDIWND {
     CHECK_HANDLE_WARNING(h,FALSE);                      \
 }
 #endif
+
 #line 2358
 #if HANDLE_FIXUP
 #line 2359
@@ -1237,6 +1239,7 @@ typedef struct tagMDIWND {
     CHECK_HANDLE_WARNING(h,TRUE);                       \
 }
 #endif
+
 #line 2374
 #ifdef FE_SB // DBCS Messaging macros for client side.
 #error Excluded unsupported FE_SB client messaging macros

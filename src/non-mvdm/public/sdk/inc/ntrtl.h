@@ -135,6 +135,7 @@ NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
  * IsClientSystem; retain its body rather than generating a test-only copy. */
 #line 4938
 #if !defined(MIDL_PASS)
+
 #line 4940
 __inline LUID
 NTAPI
@@ -148,7 +149,7 @@ RtlConvertLongToLuid(
     TempLi.QuadPart = Long;
     TempLuid.LowPart = TempLi.LowPart;
     TempLuid.HighPart = TempLi.HighPart;
-
+    
     return TempLuid;
 }
 #line 4969

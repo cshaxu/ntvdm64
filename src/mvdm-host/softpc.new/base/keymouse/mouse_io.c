@@ -2336,6 +2336,7 @@ LOCAL void mouse_update IFN1(MOUSE_CALL_MASK, condition_mask)
 #line 2610
 #else   /* NTVDM */
 
+
 #line 2613
 if (alt_found)
    {

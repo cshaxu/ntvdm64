@@ -150,10 +150,11 @@ q_event_init(
  *  Caller must hold ica lock
  */
 #ifndef MONITOR
+
 #line 148
 /*
-*  Caller must hold ica lock
-*/
+ *  Caller must hold ica lock
+ */
 void
 ResetCpuQevCount(
      PLARGE_INTEGER CurrTime
@@ -453,6 +454,7 @@ delete_q_event(
 
 
 #ifndef MONITOR
+
 #line 451
 /*
  * The QuickEvent list stores time in usecs. The CPU quick event counter

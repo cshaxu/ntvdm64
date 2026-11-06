@@ -68,7 +68,7 @@ SafeLoadLibrary/i386, PIG, BIGEND and diagnostic #error exclusions remain outsid
 the edit set. Do not revert active keyboard sas_loadw expansion, DPMI stack-info
 publication, floating-point exception reads, softpc.h calling conventions,
 VCDEX WINAPI or recovered apisrv.c merely to shrink the diff. These are not
-proved S2 restoration candidates. Guest is neither read nor changed; its earlier
+proved S2 restoration candidates. Guest source is neither read nor changed; its earlier
 owner-requested submission was a separate completed operation.
 
 Success is fewer unnecessary mirror differences with unchanged product behavior,
@@ -76,3 +76,17 @@ not new capability or generic fault tolerance. Reuse S1 evidence after identity
 checks; build/test/publish actual product edits under the local-only rule and
 verify affected preprocessing/line mapping. Do not rebuild or publish merely for
 this documentation-only admission.
+
+Owner subsequently authorizes S2 implementation through local build, test,
+assets/release publication and commit. The [implementation evidence](../evidence/m0-t480-s2-whitespace-restoration.md)
+records all146 candidate dispositions. Established tests may consume immutable
+runtime media copies, without admitting guest source auditing or changes.
+
+## S2 closure
+
+All146 finite candidates are dispositioned:53 restored in30 files,70 retained
+for existing diagnostic layout and23 retained for logical-line preservation.
+All819 actual consumers are equivalent; both builds,16 Full gates and WINMINE
+gameplay passed. All11 tested images were published to this worktree
+assets/release; no guest changes, O:/winnt writes or push. The linked S2
+evidence contains complete receipts. S3 remains unadmitted; S2 has no open item.

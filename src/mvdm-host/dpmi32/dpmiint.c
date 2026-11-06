@@ -91,8 +91,7 @@ Routine Description:
     DBGTRACE(DPMI_SET_PMODE_INT_HANDLER, IntNumber,
                                          Handlers[IntNumber].CsSelector,
                                          Handlers[IntNumber].Eip);
-
-
+    
 #line 88
 #ifdef i386
 #line 89

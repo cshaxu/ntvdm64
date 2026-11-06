@@ -467,7 +467,7 @@ VOID cmdCreateProcess ( VOID )
     if (dwRet != ERROR_SUCCESS) {
         SetLastError(dwRet);
         Status = FALSE;
-    }
+        }
     else {
 #line 380
         Status = CreateProcess (

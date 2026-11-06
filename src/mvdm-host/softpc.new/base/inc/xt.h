@@ -123,6 +123,7 @@ extern CHAR *SPC_Product_Name;		/* "SoftPC" or "SoftWindows"	*/
  */
 
 #ifndef CPU_30_STYLE
+
 #line 139
 extern half_word pf_table[]; /* shouldn't this be in host_cpu.h ? */
 #endif /* CPU_30_STYLE */
