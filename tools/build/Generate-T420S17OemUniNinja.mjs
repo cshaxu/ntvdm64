@@ -38,6 +38,13 @@ if (!tempBody) throw new Error("Original temporary-file helper boundary changed"
 writeFileSync(`${build}/cmd-temp-body.inc`, tempBody);
 writeFileSync(`${build}/cmd-temp-source.sha256`, createHash("sha256").update(redirSource).digest("hex"));
 
+const commandSource = readFileSync(`${root}/src/mvdm-host/dos/command/cmdmisc.c`, "utf8");
+const tailStart = commandSource.indexOf("    pSrc = strrchr(VDMInfo.AppName");
+const tailEnd = commandSource.indexOf("    if (!mvdm_guest_location_release(&command_lease, 1))", tailStart);
+if (tailStart < 0 || tailEnd <= tailStart) throw new Error("COMMAND tail boundaries changed");
+writeFileSync(`${build}/cmd-tail-body.inc`, commandSource.slice(tailStart, tailEnd));
+writeFileSync(`${build}/cmd-tail-source.sha256`, createHash("sha256").update(commandSource).digest("hex"));
+
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
   "/FI", `\"${root}/src/compat/include/nt.h\"`,
@@ -56,7 +63,7 @@ const lines = [
   "rule regenerate",
   `  command = \"${process.execPath.replaceAll("\\", "/")}\" \"$root/tools/build/Generate-T420S17OemUniNinja.mjs\" \"$root\" \"${build}\" \"$formal\"`,
   "  generator = 1",
-  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm-host/dos/dem/demfile.c $root/src/mvdm-host/dos/dem/demgset.c $root/src/mvdm-host/dos/dem/dosdef.h $root/src/mvdm-host/dos/command/cmdredir.c",
+  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm-host/dos/dem/demfile.c $root/src/mvdm-host/dos/dem/demgset.c $root/src/mvdm-host/dos/dem/dosdef.h $root/src/mvdm-host/dos/command/cmdredir.c $root/src/mvdm-host/dos/command/cmdmisc.c",
   "rule cc",
   "  command = cl.exe $cflags /Fo$out $in",
   "  deps = msvc",
@@ -95,6 +102,9 @@ const lines = [
   "build obj/cmd-temp.obj: cc $root/tests/mvdm-host/dos/command/temp_file_fixture.c | cmd-temp-body.inc",
   `  cflags = $cflags /I "${build}"`,
   "build cmd-temp-fixture.exe: link obj/cmd-temp.obj",
+  "build obj/cmd-tail.obj: cc $root/tests/mvdm-host/dos/command/command_tail_fixture.c | cmd-tail-body.inc",
+  `  cflags = $cflags /I "${build}"`,
+  "build cmd-tail-fixture.exe: link obj/cmd-tail.obj",
   "build obj/pif-fault.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_fault_fixture.c",
   `  cflags = ${formalFlags}`,
   "build oemuni-pif-fault-fixture.exe: link obj/pif-fault.obj obj/process.obj obj/firmware-root-stub.obj",

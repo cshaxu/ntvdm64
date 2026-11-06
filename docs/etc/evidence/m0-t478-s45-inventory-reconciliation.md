@@ -611,3 +611,50 @@ Twenty-five startup identities have bounded dispositions; the first COMMAND
 frame remains pending.1034 active identities remain pending overall. This P
 changes evidence only, retains S43 assets, and leaves S45/T478 active. No
 O:/winnt write, new publication or push.
+
+## P16 first COMMAND frame disposition
+
+The [frame receipt](../../../artifacts/mvdm-audit/t478-final/s45-command-frame-disposition.json)
+resolves DOS16:92bb27b0a79b5f00a42b with current source and bounded native tail
+coverage. CMDINFO remains the original pack2 record with WORD positions,
+capacities and statuses, plus the DWORD redirector field. cmdGetNextCmd copies
+that fixed guest record synchronously and commits the original fields before
+clearing carry; it does not retain a guest pointer. First call sets
+FIRST_COMMAND/ErrorCode0 and uses the already-built guest environment.
+Subsequent merge is separate. Insufficient environment reports AX required
+size/CF1 and repeat state. These branches were source-reviewed, not newly
+fault-injected through a complete guest frame.
+
+PIF/uppercase exec-path output is committed to COMMAND's ExecPath location.
+Original basename/tail assembly, extension classification, drive/codepage,
+redirection identity and SCS_ToSync publication remain. [S9](m0-t478-s9-fdc-session.md)
+already corrected session ownership of shared numeric SCS registrations and
+verified43 actual-object checks; [S3](m0-t478-s3-forcedos.md) already connected
+ForceDOS to the original per-command consumer. Neither repair is repeated.
+The old T231 direct fixture uses retired opennt-bop/runtime_command_misc APIs
+and is not current product coverage.
+
+New [tail fixture](../../../tests/mvdm-host/dos/command/command_tail_fixture.c)
+compiles the exact selected tail block extracted by the existing fixture
+Ninja generator. Comparison with the pinned OpenNT function proves the block
+identical after newline normalization. Five cases assert empty-tail spacing,
+ordinary arguments, preserved leading whitespace, extensionless basename and
+the original inclusive127 count. Prefix/count/NUL and surrounding sentinel
+bytes are checked. No malformed-input tolerance or new release bounds check is
+introduced. This tests the block, not the entire source function, RPC or guest
+lease implementation.
+
+Background runner build/t478-s45/run-tail-p16.ps1 (PID38732) regenerates the
+stable oemuni-fixtures cache, invokes x86 MSVC Ninja cmd-tail-fixture.exe with a
+120s build budget, then runs it with a30s case budget. Build/test both exit0;
+CMD_ORIGINAL_TAIL_5_CASES_EMPTY_SPACES_127_GUARDS_OK is present. Original strncpy
+emits the existing deprecation warning. The runner follows run-temp-p9's owned
+hidden-process/log/exit pattern. The receipt pins source, generator and binary.
+No overlong-tail or arbitrary advertised-capacity safety is claimed.
+
+All26 startup identities now have bounded dispositions; this is not a universal
+startup fault-path pass.1033 active inventory identities remain pending in the
+larger S45/T478 reconciliation. Product source and S43 release remain unchanged;
+only focused tests/build support/evidence changed. No product rebuild, new Full,
+publication, O:/winnt write or push is claimed or required for these unchanged
+product inputs.

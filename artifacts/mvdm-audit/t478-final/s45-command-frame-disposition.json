@@ -1,0 +1,44 @@
+{
+  "id": "DOS16:92bb27b0a79b5f00a42b",
+  "scope": "First COMMAND frame original ownership, current bounded tail test; not all frame failures",
+  "sha256": {
+    "src/mvdm-host/dos/command/cmdmisc.c": "cb5e75063ceb75996d0d87caf77aff7acbde81a7e13f44f8c70db4e8c5ef42eb",
+    "src/mvdm-host/inc/cmdsvc.h": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c": "8fb2fb51ca69662f81dc4d4892b11d34a910b43cb507c7a0c8fc4ee63494eb77",
+    "tests/mvdm-host/dos/command/command_tail_fixture.c": "6d58f346f3cccaff77a3af212c78a3c1539a4f1cb8366122a7021058b7fd10be",
+    "tools/build/Generate-T420S17OemUniNinja.mjs": "3160804e098f4f372138bd2d29263dd662e50352a800ee4cc2283e4b2fc1c5aa",
+    "build/.ninja/msvc-x86-release/oemuni-fixtures/cmd-tail-fixture.exe": "3b25a3c40bbcd9bfdcc0f8a47836aef0cd9e9ec79deab0a6466be38dd9efcefa"
+  },
+  "original_tail": {
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+    "source_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+    "equal_after_newline_normalization": true,
+    "body_sha256": "d23711ea1bce9e6683f8d314829f5d0459ed3e2febeffdb61a4ff58902ee8074"
+  },
+  "run": {
+    "runner": "build/t478-s45/run-tail-p16.ps1",
+    "pid": 38732,
+    "build_timeout_ms": 120000,
+    "case_timeout_ms": 30000,
+    "build_exit": 0,
+    "test_exit": 0,
+    "marker": "CMD_ORIGINAL_TAIL_5_CASES_EMPTY_SPACES_127_GUARDS_OK"
+  },
+  "frame": [
+    "Original packed CMDINFO uses USHORT positions/sizes/status and DWORD redirector identity; current snapshot/copy commits the same structure.",
+    "First call selects FIRST_COMMAND/ErrorCode=0 and uses already constructed guest environment; does not re-query/rebuild it.",
+    "Insufficient environment returns required AX and CF=1 with repeat state; original later-command merge remains separate.",
+    "Exec path is copied back after PIF and uppercase; extension/tail/environment metadata, standard-redirection identity and SCS_ToSync are committed before CF=0.",
+    "SCS locations remain numeric session-owned registrations; S9 actual-object 43 checks and existing guest-memory tests cover their lifetime. S3 retains per-command ForceDOS assignment."
+  ],
+  "coverage": [
+    "Five native exact-body tail cases: path/basename, empty tail without extra space, ordinary argument, preserved leading spaces, no extension and inclusive count127 boundary; sentinel bytes and NUL/count verified.",
+    "S43 normal original guest startup reused; S9 shared registration and S3 ForceDOS evidence reused."
+  ],
+  "limits": [
+    "Tail test is an extracted exact source block, not full cmdGetNextCmd, RPC, lease or immutable guest execution.",
+    "T231 fixture targets retired opennt-bop/runtime_command_misc API; not current product evidence and not revived.",
+    "No arbitrary overlong/malformed tail, dynamic CMDINFO capacity, every lease failure or post-consumption rollback certification. Original ASSERT count limit is not new release bounds checking.",
+    "First-frame environment shortage is source-reviewed; no fresh full-frame environment retry injection."
+  ]
+}

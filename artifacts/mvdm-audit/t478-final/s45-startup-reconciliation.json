@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;25 bounded dispositions and1 explicitly pending subcontract, no product change",
+  "scope": "26 existing startup/bootstrap identities;26 bounded dispositions, no product change; not universal fault-path certification",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -205,9 +205,9 @@
       "id": "DOS16:92bb27b0a79b5f00a42b",
       "module": "1.3",
       "contract": "First COMMAND frame publication and pre-registered shared Guest locations",
-      "disposition": "pending",
+      "disposition": "wired; bounded current tail test and existing registration evidence",
       "current_owner": "cmdmisc.c cmdGetNextCmd and cmdSetInfo; original CMDINFO frame with session-owned SCS scalar registration",
-      "evidence_and_limits": "S9 fixed shared guest-state ownership and S3 ForceDOS ordering. Next reconcile complete first-frame widths/environment/tail/carry tests; do not infer all127-byte edges from boot."
+      "evidence_and_limits": "s45-command-frame-disposition.json: five exact-body native tail cases including127 pass; first frame/environment/carry source reviewed; S9 session registration and S3 ForceDOS retained. No full-frame fault matrix or retired T231 API runtime claim."
     }
   ],
   "inputs": [
