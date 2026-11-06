@@ -4,7 +4,15 @@
 
 **Active: M0 T479 S6** - Win3.1 complete VM I/O and nested chains.
 Owner-requested [combined integration](../etc/evidence/m0-t479-s6-main-integration.md) is delivered.
-Candidate fills pass current unit/guest tests; historical fill002 remains unlocalized, not fixed.
+Mouse31's DPMI callback repair and independent insignia-386 NIDDB companion
+pass actual Win3.1 mouse, DOS CLS/VER/DIR, child retirement and normal exit063.
+Callback reentry has a failing negative control062 and passing fixed061.
+Cached builds and Full05816/16 pass. Complete host package
+0e6d5811-5069-48ee-b54f-7c89e319698c is published and hash-verified at both
+destinations; authored addons are in assets/release and configured in O:/w31.
+Win95 desktop mouse064 is exercised; shutdown1 matches control060, not a
+zero-exit pass. Addons retain bounded candidate status. Garbled windowed DOS
+text is owner-known/nonblocking. fill002 and remaining S6 I/O stay open.
 
 [S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
 and original reentry ownership with actual two-VM nested execution. The original
@@ -27,7 +35,7 @@ license and common manifest are published and hash-verified at both destinations
 [Delivery and remaining boundaries](../etc/evidence/m0-t479-s6-main-integration.md).
 S6 remains active; fill002 is not reclassified or declared repaired. The old
 package and three combined fill runs now exit normally, without root-cause proof.
-Temporary scope: build/t479-s6-integration; owned60-minute phases,2GiB,
+Temporary scope: build/t479-s6-livecmd; owned60-minute phases,2GiB,
 15-minute no-progress review. Retain failed and successful receipts for S6.
 
 ## Active Packet
@@ -167,36 +175,12 @@ The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cl
 
 The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11--S19 handoff.
 
-## T471 Closure Record
-
-T471 closes at [its closure](../history/m0-t471-closure.md): same-artifact
-application/concurrency/abnormal evidence passed, while physical WRITE input
-remains the explicitly approved non-pass. No runtime or guest bytes changed.
-
 ## T469 Closure Record
 
 T469 COMM records: [S1](../history/m0-t469-s1-closure.md),
 [S2](../etc/evidence/m0-t469-s2-comm-source-disposition.md),
 [S3](../etc/evidence/m0-t469-s3-comm-retained-route.md),
 [closure](../history/m0-t469-closure.md). No guest bytes changed.
-
-## T463 S2 Closure Record
-
-The [T463 S2 record](../etc/evidence/m0-t463-s2-sol-options-attribution.md)
-retains the public HWND binding, SOL witness and Full gate. S3 owns remaining
-task lifecycle acceptance.
-
-The [T461 S3 record](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
-retains the durable-overlay delivery and its acceptance evidence.
-
-T461 S1's unchanged inventory is retained in its
-[owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md).
-
-## T461 S2 Closure Record
-
-The [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md)
-records the reviewed Registry bindings and product gate. S3 owns durable
-commit, restart tombstones and cross-worker serialization.
 
 ## T473 S1 Closure Record
 

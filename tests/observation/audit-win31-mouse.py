@@ -45,7 +45,9 @@ def names(pos,limit):
     return rows
 imports=[];table=n+u16(n+40)
 for i in range(u16(n+30)):
-    pos=n+u16(n+42)+u16(table+2*i);size=b[pos]
+    name_offset=u16(table+2*i)
+    if not name_offset:raise ValueError('zero module-name offset is an absent dependency to the Windows loader')
+    pos=n+u16(n+42)+name_offset;size=b[pos]
     imports.append(b[pos+1:pos+1+size].decode('ascii'))
 result={'role':'read-only-NE-ABI-evidence-not-runtime-validation','driver':str(path),
         'sha256':hashlib.sha256(b).hexdigest(),'neVersion':hex(u16(n+62)),

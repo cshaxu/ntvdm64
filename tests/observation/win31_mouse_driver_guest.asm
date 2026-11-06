@@ -53,6 +53,10 @@ main:
     cmp ax,1
     check 1
     push cs
+    call get_vector
+    cmp ax,0x71
+    check 66
+    push cs
     push word capability
     push cs
     call inquire
@@ -67,11 +71,11 @@ main:
     start_mouse event_one
     cmp ax,1
     check 6
-    cmp byte [pm_installed],1
+    cmp byte [allocated],1
     check 7
     cmp byte [installed],1
     check 8
-    cmp word [allocation_count],0
+    cmp word [allocation_count],1
     check 9
     cmp word [mock_hidden],4
     check 10
@@ -79,12 +83,12 @@ main:
     check 11
     cmp word [mock_current],mock_real_callback
     check 12
-    cmp word [mock_pm_mask],0x1f
+    cmp word [real_callback],mock_real_callback
     check 56
-    cmp word [mock_pm_handler],callback
+    cmp word [allocated_callback],callback
     check 57
     mov ax,cs
-    cmp word [mock_pm_handler+2],ax
+    cmp word [allocated_callback+2],ax
     check 58
 %ifdef MOUSE31_TEST_REENTRY
     ; A simulated provider delivers one event after preparing the outer
@@ -96,12 +100,18 @@ main:
     check 64
     cmp word [event_count],2
     check 65
+    cmp word [callback_regs+42],0x1234
+    check 68
+    cmp word [callback_regs+44],0x5678
+    check 69
+    cmp word [callback_regs+46],0x456b
+    check 70
     mov word [event_count],0
 %endif
     start_mouse event_two
     cmp ax,1
     check 13
-    cmp word [allocation_count],0
+    cmp word [allocation_count],1
     check 14
     cmp word [mock_hidden],4
     check 15
@@ -154,7 +164,7 @@ main:
     cmp ax,0
     check 30
     stop_mouse
-    cmp word [mock_pm_mask],0
+    cmp byte [allocated],0
     check 59
     cmp word [allocation_count],0
     check 31
@@ -180,7 +190,7 @@ main:
     stop_mouse
     cmp word [allocation_count],0
     check 35
-    cmp word [mock_pm_mask],0
+    cmp byte [installed],0
     check 60
     mov byte [present],0
     start_mouse event_one
@@ -188,8 +198,12 @@ main:
     check 36
     cmp word [allocation_count],0
     check 37
+    push cs
+    call get_vector
+    cmp ax,0xffff
+    check 67
     mov byte [present],1
-    mov word [fail_service],0x000a
+    mov word [fail_service],0x0303
     start_mouse event_one
     cmp ax,0
     check 38
@@ -208,7 +222,7 @@ main:
     start_mouse event_one
     mov word [fail_mouse],0x0c
     stop_mouse
-    cmp word [allocation_count],0
+    cmp word [allocation_count],1
     check 43
     cmp byte [installed],1
     check 44
@@ -220,12 +234,13 @@ main:
     check 46
     cmp word [mock_hidden],3
     check 47
-    ; If freeing the writable code alias fails, retain it for a later retry;
-    ; the real handler and cursor must already have been restored.
-    mov word [fail_service],0x0001
+    ; Failed callback release retains the thunk for a later cleanup; the
+    ; provider callback and cursor must already have been restored.
     start_mouse event_one
-    cmp ax,0
+    cmp ax,1
     check 51
+    mov word [fail_service],0x0304
+    stop_mouse
     cmp word [allocation_count],1
     check 52
     cmp byte [installed],0
@@ -275,10 +290,18 @@ restore_vector:
     pop ds
     ret
 emit_event:
-    mov ax,[callback_regs+28]
-    mov cx,[callback_regs+24]
-    mov dx,[callback_regs+20]
-    call far [cs:mock_pm_handler]
+    push ds
+    push cs
+    pop ds
+    mov word [callback_regs+46],0x4567
+    mov si,fake_real_stack
+    push cs
+    pop es
+    mov di,callback_regs
+    pushf
+    push cs
+    call callback
+    pop ds
     ret
 event_one:
     mov word [which_event],1
@@ -300,9 +323,9 @@ mock_dpmi:
     mov bp,sp
     cmp ax,[cs:fail_service]
     je .error
-    cmp ax,0x000a
+    cmp ax,0x0303
     je .allocate
-    cmp ax,0x0001
+    cmp ax,0x0304
     je .free
     cmp ax,0x300
     jne .error
@@ -328,7 +351,10 @@ mock_dpmi:
     jmp .ok
 .allocate:
     inc word [cs:allocation_count]
-    mov ax,cs
+    mov [cs:allocated_callback],si
+    mov [cs:allocated_callback+2],ds
+    mov cx,cs
+    mov dx,mock_real_callback
     jmp .ok
 .free:
     dec word [cs:allocation_count]
@@ -349,10 +375,10 @@ mock_dpmi:
     push si
     push di
     push es
-    mov ax,1
-    mov cx,320
-    mov dx,240
-    call far [cs:mock_pm_handler]
+    mov word [cs:callback_regs+28],1
+    mov word [cs:callback_regs+24],320
+    mov word [cs:callback_regs+20],240
+    call emit_event
     pop es
     pop di
     pop si
@@ -377,10 +403,14 @@ mock_dpmi:
     push si
     push di
     push es
-    mov ax,1
-    mov cx,320
-    mov dx,240
-    call far [cs:mock_pm_handler]
+    mov word [cs:callback_regs+28],1
+    mov word [cs:callback_regs+24],320
+    mov word [cs:callback_regs+20],240
+    mov word [cs:fake_real_stack],0xabcd
+    mov word [cs:fake_real_stack+2],0xef12
+    call emit_event
+    mov word [cs:fake_real_stack],0x1234
+    mov word [cs:fake_real_stack+2],0x5678
     pop es
     pop di
     pop si
@@ -445,7 +475,7 @@ fail_mouse: dw 0xffff
 capability: times 14 db 0
 dw 0x55aa
 fake_real_stack: dw 0x1234,0x5678
-callback_regs: times 50 db 0
+allocated_callback: dw 0,0
 which_event: dw 0
 event_count: dw 0
 event_ax: dw 0
@@ -454,10 +484,10 @@ event_cx: dw 0
 event_dx: dw 0
 failed_case: db 0
 %ifdef MOUSE31_TEST_PRIOR_PM
-pass_message: db 'M31PM:PASS 63 checks',13,10,'$'
+pass_message: db 'M31PM:PASS 65 checks',13,10,'$'
 %elifdef MOUSE31_TEST_REENTRY
-pass_message: db 'M31REENT:PASS 62 checks',13,10,'$'
+pass_message: db 'M31REENT:PASS 67 checks',13,10,'$'
 %else
-pass_message: db 'M31MOCK:PASS 60 checks',13,10,'$'
+pass_message: db 'M31MOCK:PASS 62 checks',13,10,'$'
 %endif
 fail_message: db 'M31MOCK:FAIL (exit code is case)',13,10,'$'

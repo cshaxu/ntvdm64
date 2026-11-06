@@ -19,7 +19,9 @@ main:
  mov byte [enabled],1
  mov word [event_proc],user32_registers
  mov [event_proc+2],cs
- mov [cs:callback_ds],ds
+ mov word [callback_regs+28],1
+ mov word [callback_regs+24],320
+ mov word [callback_regs+20],240
  push cs
  pop es
  mov eax,0x11112222
@@ -29,6 +31,8 @@ main:
  mov esi,0x99990000
  mov edi,0xaaaa0000
  mov ebp,0xbbbbcccc
+ mov si,real_stack
+ mov di,callback_regs
  mov ax,1
  mov [before_regs+0],eax
  mov [before_regs+4],ebx
@@ -37,6 +41,7 @@ main:
  mov [before_regs+16],esi
  mov [before_regs+20],edi
  mov [before_regs+24],ebp
+ pushf
  push cs
  call callback
  mov [after_regs+0],eax

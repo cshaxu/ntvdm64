@@ -37,6 +37,10 @@ start:
     mov es,bx
     mov ax,[es:0]
     mov [result_value],ax
+    mov ax,0x40
+    mov es,ax
+    mov al,[es:0xac]
+    mov [instance_byte],al
     mov dx,filename
     xor cx,cx
     mov ah,0x3c
@@ -58,4 +62,5 @@ filename: db 'M31VM.BIN',0
 result: db 'M31V'
 result_segment: dw 0
 result_value: dw 0
+instance_byte: db 0xff
 result_end:

@@ -61,20 +61,25 @@ main:
     mov dx,enabled_message
     mov ah,9
     int 0x21
-    cmp byte [pm_installed],1
+    cmp byte [allocated],1
     check 5
     cmp byte [installed],1
     check 6
     cmp byte [hide_owned],1
     check 7
-    ; Exercise the protected callback ABI directly. Actual event delivery
-    ; through the provider is covered by the Windows interaction test.
-    mov ax,1
-    mov cx,320
-    mov dx,240
+    ; Exercise the DPMI callback entry ABI directly. Real provider delivery
+    ; is covered separately by the Windows interaction test.
+    mov word [callback_regs+28],1
+    mov word [callback_regs+24],320
+    mov word [callback_regs+20],240
+    mov si,fake_real_stack
+    push ds
+    pop es
+    mov di,callback_regs
+    pushf
     push cs
     call callback
-    cmp byte [pm_installed],1
+    cmp byte [allocated],1
     check 8
     cmp word [event_count],1
     check 9
@@ -87,7 +92,7 @@ main:
     int 0x21
     push cs
     call disable
-    cmp byte [pm_installed],0
+    cmp byte [allocated],0
     check 12
     cmp byte [installed],0
     check 13
@@ -103,7 +108,7 @@ main:
     push word 1
     push cs
     call wep
-    cmp byte [pm_installed],0
+    cmp byte [allocated],0
     check 16
     mov dx,pass_message
     mov ah,9
@@ -133,7 +138,7 @@ dpmi_entry: dw 0,0
 in_protected: db 0
 failed_case: db 0
 capability: times 14 db 0
-invoke_regs: times 50 db 0
+fake_real_stack: dw 0x1234,0x5678
 event_count: dw 0
 event_ax: dw 0
 event_dx: dw 0

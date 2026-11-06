@@ -102,6 +102,13 @@ add bl,7
 mov [di],bl
 inc di
 loop .hex
+mov ax,2
+mov bx,0x40
+int 0x31
+jc fatal
+mov es,ax
+mov al,[es:0xac]
+mov [parent_before-data],al
 push ds
 push word command-data
 push word 1
@@ -131,6 +138,13 @@ push ax
 api 1,81
 mov word [child_seen-data],1
 .child_done:
+mov ax,2
+mov bx,0x40
+int 0x31
+jc fatal
+mov es,ax
+mov al,[es:0xac]
+mov [parent_after-data],al
 mov word [phase-data],5
 call checkpoint
 %endif
@@ -182,6 +196,8 @@ write_result: dw 0
 %ifdef MOUSE31_VM_CHILD
 launch_result: dw 0
 child_seen: dw 0
+parent_before: db 0xff
+parent_after: db 0xff
 %endif
 result_end:
 file: dw 0

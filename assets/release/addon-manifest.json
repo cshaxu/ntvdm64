@@ -12,10 +12,12 @@
     {
       "id": "win31",
       "file": "MOUSE31.DRV",
-      "sha256": "F4A4C4F742161AAF7E83441C5440ACEA7C20B73BA6B4EEC0EFF1D5A8F214A36E",
+      "sha256": "275D10A3E22946F83416BED9D263B22D2579C38D42E4630616D5B97ECF8A738B",
       "source": "src/addon/mouse31/mouse31.asm",
-      "sourceSha256": "8BA5FF0E77DE03FF735FF34B7960E7C2DF808E5F479DCD35E131641CD7089288",
-      "acceptance": "candidate"
+      "sourceSha256": "FD84BA3E008EB9A796E843771A9A02DD9189B47BFC1FB0D4FFD951740A873DB7",
+      "acceptance": "candidate",
+      "verifiedScope": "Win3.1 enhanced actual mouse, callback preservation, DOS child CLS/VER/DIR, retirement and normal exit with insignia-386; Win95 desktop mouse exercised, shutdown1 matches baseline, full Win95 VM lifecycle unverified.",
+      "evidence": "docs/etc/evidence/m0-t479-s6-main-integration.md"
     },
     {
       "id": "win95-compat",
@@ -52,6 +54,18 @@
       "acceptance": "candidate",
       "verifiedScope": "Win3.1 static bridge; actual two-VM command continuation, both native exit orders, forced VM retirement and handle reuse. Candidate only: physical input, complete I/O and nesting unaccepted; Win95 deferred.",
       "evidence": "docs/etc/evidence/m0-t479-s5-p1-host-checkpoint.md"
+    },
+    {
+      "id": "insignia-niddb",
+      "file": "insignia.386",
+      "kind": "static-vxd",
+      "architecture": "i386-protected-mode",
+      "source": "src/addon/insignia-386/insignia.asm",
+      "sourceSha256": "FE0958AD1775F324222F60FEA56BD95E6FF7E64B6B520DF58CAFA0C1BC9D3220",
+      "sha256": "BE8D709A604BF82D79801ADF7A5531E228450F28BEA49CD51BA49B1BDEFE4E45",
+      "acceptance": "candidate",
+      "verifiedScope": "Original host NIDDB lifecycle bridge only; real Win3.1 identity0->1->0, child retirement and normal exit verified. Not full historical INSIGNIA ABI. Win95 full lifecycle unverified.",
+      "evidence": "docs/etc/evidence/m0-t479-s6-main-integration.md"
     }
   ],
   "utilities": [

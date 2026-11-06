@@ -1,5 +1,5 @@
 ; Noninteractive Win16 witness for the already-loaded mouse bridge.
-; Calls its protected callback with guest test packets; no host input or UI control.
+; Calls its DPMI real callback with guest test packets; no host input or UI control.
 ; Reads the resulting original USER cursor/button state and writes M31WIN.BIN.
 bits 16
 org 0
@@ -96,12 +96,12 @@ check byte [es:bx],0xb8          ; loader-patched automatic DS prolog
 mov ax,[es:bx+1]
 mov [driver_ds-data],ax
 mov es,ax
-check byte [es:42],1             ; protected callback installed
-check byte [es:43],1             ; prior real callback captured
-check byte [es:44],1             ; enabled
-mov ax,[es:46]
+check byte [es:44],1             ; DPMI callback allocated
+check byte [es:45],1             ; prior real callback captured
+check byte [es:46],1             ; enabled
+mov ax,[es:40]
 mov [thunk-data],ax
-mov ax,[es:48]
+mov ax,[es:42]
 mov [thunk+2-data],ax
 mov word [phase-data],3
 call checkpoint
@@ -172,10 +172,20 @@ mov ax,0x4c00
 int 0x21
 
 invoke:
-mov ax,[packet+28-data]
-mov cx,[packet+24-data]
-mov dx,[packet+20-data]
-call far [thunk-data]           ; call the installed protected callback
+mov ax,[thunk-data]
+mov [packet+42-data],ax
+mov ax,[thunk+2-data]
+mov [packet+44-data],ax
+mov word [packet+46-data],0
+mov word [packet+48-data],0
+push ds
+pop es
+mov di,packet-data
+xor bx,bx
+xor cx,cx
+mov ax,0x0301                    ; simulate real-mode RETF procedure
+int 0x31
+jc failed
 inc word [events-data]
 ret
 cursor:
