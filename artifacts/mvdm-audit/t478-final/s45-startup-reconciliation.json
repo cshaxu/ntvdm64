@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;21 bounded dispositions and5 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;22 bounded dispositions and4 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -173,9 +173,9 @@
       "id": "DOS16:1f6a1765004d85a79063",
       "module": "1.2",
       "contract": "Launcher Unicode/ANSI environment construction before worker creation",
-      "disposition": "pending",
+      "disposition": "wired; existing package-root binding retained",
       "current_owner": "Run16 BaseCreateVDMEnvironment imported client.obj, then guest-root environment preparation",
-      "evidence_and_limits": "Original dual buffers are selected; next review current WIN16DIR/root projection versus original conversion and existing env evidence."
+      "evidence_and_limits": "s45-launcher-environment-disposition.json maps current caller, original create/destroy symbols, separate ANSI/Unicode consumers and retained T427 package-root adaptation. Existing normal startup evidence reused. Distinguishes clone fixture and worker initial-environment fixture from launcher coverage; no new oversized/fault/encoding matrix claim."
     },
     {
       "id": "DOS16:5c35263481cae628a01f",

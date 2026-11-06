@@ -1,0 +1,32 @@
+{
+  "id": "DOS16:1f6a1765004d85a79063",
+  "disposition": "original dual-environment owner wired; existing package-root boundary retained",
+  "sha256": {
+    "src/run16-exe/main.c": "a9553c4fbdb8be7bdf37219f319cccb73075cdbc5e22f588207ab3fa2435217a",
+    "src/non-mvdm/base/win32/client/vdm.c": "5622f66074cb994abdd5d85d0884b837fc17a24d182f00907e6df07db8c7d23f",
+    "src/common/guest_environment.c": "79c5424e8efe1628d053bad7d0758e8c4f3c1601fb40512486e97669402e9a0c",
+    "tests/opennt-host/environment_projection_fixture.c": "a7873f02f263d40a945ee270f02aa31393e67ab68de3b8fe9dc1ec04e9a0fc18",
+    "tests/session/softpc_wow_boot_environment_fixture.c": "a9781914ed23432708ea68061ca0eb41ea7038ff9cb8150dd2100cecf41f1acd"
+  },
+  "flow": [
+    "begin_worker_win16_directory copies host Unicode MULTI_SZ, replaces WIN16DIR with own package root, excludes private frontend/execution/stream carrier entries",
+    "Original BaseCreateVDMEnvironment produces normalized Unicode and converted ANSI buffers",
+    "WOW-only common_guest_environment_root replaces SYSTEMROOT only in ANSI guest record",
+    "Original BaseCheckVDM captures ANSI bytes; service StartVdmWorker receives Unicode block",
+    "BaseDestroyVDMEnvironment frees both on the common exit path"
+  ],
+  "map": [
+    "0001:00008fc0       BaseCreateVDMEnvironment   0000000140009fc0 f   opennt-base-client:client.obj",
+    "0001:00009490       BaseDestroyVDMEnvironment  000000014000a490 f   opennt-base-client:client.obj"
+  ],
+  "evidence": [
+    "docs/etc/evidence/m0-t427-s2-own-image-root-bindings.md",
+    "unchanged S43 normal DOS/WOW startup and Full16/16"
+  ],
+  "limits": [
+    "No new fixture run in this source-only checkpoint",
+    "Existing environment_projection_fixture compares explicit versus cloned Unicode buffers; it does not prove all ANSI or launch-scope behavior",
+    "WOW boot environment fixture tests the distinct worker initial guest copy, not launcher dual buffers",
+    "Original USHORT lengths and short-path conversion fallback remain; no arbitrary oversized environment safety claim"
+  ]
+}

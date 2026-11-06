@@ -485,3 +485,36 @@ Twenty-one startup rows have bounded dispositions; five startup rows and1038
 active identities remain pending. S45/T478 remain active. Changes here are tests,
 fixture build wiring and evidence only; the product/S43 release stays unchanged,
 with no O:/winnt write, new runtime publication or push.
+
+## P13 launcher dual-environment disposition
+
+The [caller/owner receipt](../../../artifacts/mvdm-audit/t478-final/s45-launcher-environment-disposition.json)
+resolves DOS16:1f6a1765004d85a79063. Current run16 builds a separate Unicode
+MULTI_SZ for WIN16DIR and strips private frontend/execution/stream carriers;
+it does not mutate its process environment. Original BaseCreateVDMEnvironment
+still owns path normalization and Unicode-to-ANSI conversion, and the launcher
+map resolves create/destroy to opennt-base-client:client.obj. Original bounded
+USHORT lengths and short-path fallback remain; no new capacity policy is added.
+
+The ANSI record goes to original BaseCheckVDM. For WOW/separate WOW only,
+common_guest_environment_root replaces SYSTEMROOT in that guest record, with
+its existing bounded copied-block ownership. The Unicode block goes to
+OpenNtBaseClientStartVdmWorker without this guest-root rewrite. The common done
+path calls original BaseDestroyVDMEnvironment for both buffers. Thus the package
+root adaptation is a finite source/consumer boundary, not a second environment
+projector or authority to rewrite native SYSTEMROOT.
+
+[T427 S2](m0-t427-s2-own-image-root-bindings.md) documents that existing split
+and its bounded projection/normal product tests; current S43 normal DOS/WOW
+startup is reused. The explicit/cloned environment fixture checks Unicode
+identity, not every ANSI result or launcher branch. The separate WOW boot
+fixture tests the initial guest environment in the worker, not these launcher
+outputs. Neither is misreported as fresh or complete launcher fault coverage.
+No new test is needed merely to repeat the unchanged source-owner mapping; no
+arbitrary oversized/DBCS/failure safety result is claimed.
+
+Twenty-two startup rows have bounded dispositions, four remain pending;1037
+active inventory identities remain pending. Command capture/consume, CheckVDM
+admission, worker rollback and first COMMAND frame stay separate open rows.
+S45/T478 remain active; product and release are unchanged, without O:/winnt
+writes or push.
