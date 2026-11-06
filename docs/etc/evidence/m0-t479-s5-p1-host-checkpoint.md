@@ -56,3 +56,15 @@ all allocation/retirement failures are not exhaustively fault-injected.
 Native process exit order is not a promise about guest callback scheduling.
 S5 remains active pending final scope/delivery review; this checkpoint cannot
 be used as a claim that the whole T479 objective is complete.
+
+## Subsequent Win3.1 addon candidate174
+
+Host checkpoint369cbf712 was pushed to origin/main with a clean worktree.
+The tested driver151 is subsequently copied to assets/release/ntvdm64.386,
+SHA256 D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2.
+Its current source hash matches build151; no rebuild or changed-image retest
+is needed. The addon manifest remains candidate and explicitly limits accepted
+scope to the recorded Win3.1 command/retirement/reuse witnesses. This supersedes
+the earlier unchanged-addon statement only for this subsequent delivery.
+No original guest installation, system32 addon or Win95 .vxd is changed.
+Complete input/I/O/nesting is not accepted. S5 remains active for final review.

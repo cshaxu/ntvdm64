@@ -20,16 +20,15 @@ The S4 candidate uses NASM OMF and Open Watcom LE, with shared resident code
 and data segments. Both output names currently contain the same statically
 loaded image; dynamic load/unload is not supported. The Win3.1 .386 is published
 as a candidate with its verified bridge scope in addon-manifest.json. Win95
-.vxd publication remains deferred. Neither provides the completed host command
-or I/O path yet; S5/S6 implement those contracts.
+.vxd publication remains deferred. Complete interactive I/O is not accepted; the S5 candidate scope is below.
 Historical experimental drivers are comparison evidence, not build inputs.
 
-The unshipped S5 source now registers the VMM callback with the host BOP entry
+The S5 candidate now registers the VMM callback with the host BOP entry
 and admits independent54:08/0A requests. Win3.1 tests cover two actual native
 commands in both exit orders, exact callback state, command-in-flight VM
 retirement and actual VM handle reuse. The54:0A input is still test stimulus;
 physical guest keyboard, full I/O and nested acceptance remain S6 obligations.
-These source/test results do not update the published S4 candidate by themselves.
+The Win3.1 candidate is published with those limits in addon-manifest.json.
 
 The current candidate allocates VMM-owned per-VM control-block storage, assigns
 a 64-bit generation at creation and invalidates execution at

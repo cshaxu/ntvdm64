@@ -5,19 +5,13 @@
 **Active: M0 T479 S5** - Win3.1 multitask command continuation.
 S4's Win3.1 checkpoint is delivered; its Win95 continuation remains open.
 [Entry/return audit](../etc/operations/m0-t479-s5-command-continuation.md).
-Local CDS/text application and selected-VM keyboard consumption pass in Win3.1
-diagnostics; NetCDS limited. VIDEO palette passes. Ordinary guest VGA writes
-pass both fonts in Win3.1; BIOS and nested-helper application do not. Failed
-helper candidates were removed with source-hash-verified restoration.
-Frame commit/rollback and off-CPU execution helpers pass focused host tests.
-Run152 passes the isolated real NTSRV/Run16/NTVWM chain through production
-BOP entry, capture and the worker-owned executor: both54:08 forms return37/38
-in two Win3.1 VMs;54:0A returns0 through the approved DOS carrier. A fallback
-to diagnostic entry now fails the test. Input remains a translated-key fixture.
-Five host suites pass. Physical guest input, fonts, complete I/O and final
-returned-key delivery remain unaccepted; full product delivery gates remain.
+Both54:08 forms and54:0A run through production entry/capture/executor in
+two actual Win3.1 VMs. Translated input remains a fixture, not physical input.
+Local CDS/text and palette pass; NetCDS isolation is a retained guest limit.
+Font application, complete I/O and returned keys remain unaccepted S6 work.
+Five focused host suites and Full16/16 selected product gates pass.
 Cached complete x86/x64 builds and shared tests pass. Generation-reuse rejection
-was reproduced and fixed in host tests; real combined reuse remains unproved.
+was reproduced and fixed; subsequent real reuse evidence is recorded below.
 Chain158 and real Win3.1 continuation159 pass. The chained gate runner lost
 USERPROFILE; fresh-process release160 passes focused/Full selected gates.
 Run161 passes real native-command execution followed by forced VM retirement,
@@ -28,7 +22,8 @@ Runs166/167 pass both deliberate native exit orders with full callback checks.
 Forced retirement overlap has host-unit proof; full I/O remains S6 work.
 Win95 is deferred.
 [S5 P1 host checkpoint](../etc/evidence/m0-t479-s5-p1-host-checkpoint.md) is
-published at both destinations; commit/push pending. S5 is not closed.
+published at both destinations and pushed as369cbf712. The tested Win3.1
+addon candidate is now published; its record/commit is pending. S5 is not closed.
 
 ## Active Packet
 

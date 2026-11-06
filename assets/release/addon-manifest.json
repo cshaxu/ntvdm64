@@ -47,11 +47,11 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "E7940ED84CD1276C8936D805ADA3DCD0D1F8CA7DF19209196EE097FEB68BD3A2",
-      "sha256": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F",
+      "sourceSha256": "E8B4064B39D044D29C7BFCF33E4926525390EA9D8D3BF1E46AA88581040924A6",
+      "sha256": "D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2",
       "acceptance": "candidate",
-      "verifiedScope": "Win3.1 static identity, callback, counted wait/wake, retirement, reuse and initialization rollback; command continuation and I/O not yet enabled",
-      "evidence": "docs/etc/evidence/m0-t479-s4-driver-load.md"
+      "verifiedScope": "Win3.1 static bridge; actual two-VM command continuation, both native exit orders, forced VM retirement and handle reuse. Candidate only: physical input, complete I/O and nesting unaccepted; Win95 deferred.",
+      "evidence": "docs/etc/evidence/m0-t479-s5-p1-host-checkpoint.md"
     }
   ],
   "utilities": [
