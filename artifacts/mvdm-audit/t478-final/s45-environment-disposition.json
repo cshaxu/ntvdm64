@@ -1,0 +1,197 @@
+{
+  "ids": [
+    "DOS16:c3ee8f2820af6f055614",
+    "DOS16:cd7494c32de5fcd66cdc"
+  ],
+  "disposition": "original environment owners wired; original limits retained",
+  "source_evidence_sha256": "2528e2af657eb8437e9c9cea7ac2e7e71c9614f29faf93392da150909a84be55",
+  "upstream": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "sha256": "afc71d306491fe6a7f8cd7356b8682176a33a05f3652bae735be079b3cd0a32b"
+  },
+  "current_source_sha256": "fa608e4f3f5b9379f2b38b6a03a193aca8ee5ce4edbf151c148967cba6406fc1",
+  "method": "Function-token comparison against merged consistent pinned original observations; comments/whitespace/line directives excluded, not whole-file bytewise equivalence.",
+  "comparisons": {
+    "cmdGetInitEnvironment": {
+      "original_tokens": 680,
+      "current_tokens": 761,
+      "changes": [
+        {
+          "kind": "insert",
+          "original": [],
+          "current": [
+            ";",
+            "mvdm_guest_location",
+            "environment_location",
+            ";",
+            "mvdm_guest_location_lease",
+            "environment_lease"
+          ]
+        },
+        {
+          "kind": "delete",
+          "original": [
+            "lpszzEnvBuffer",
+            "=",
+            "(",
+            "CHAR",
+            "*",
+            ")",
+            "GetVDMAddr",
+            "(",
+            "getES",
+            "(",
+            ")",
+            ",",
+            "0",
+            ")",
+            ";"
+          ],
+          "current": []
+        },
+        {
+          "kind": "insert",
+          "original": [],
+          "current": [
+            "if",
+            "(",
+            "!",
+            "mvdm_guest_location_set_real_mode",
+            "(",
+            "&",
+            "environment_location",
+            ",",
+            "(",
+            "USHORT",
+            ")",
+            "getES",
+            "(",
+            ")",
+            ",",
+            "0",
+            ")",
+            "|",
+            "|",
+            "!",
+            "mvdm_guest_location_acquire",
+            "(",
+            "&",
+            "environment_location",
+            ",",
+            "cchInitEnvironment",
+            "+",
+            "cbComSpec",
+            ",",
+            "GUEST_MEMORY_ACCESS_WRITE",
+            ",",
+            "&",
+            "environment_lease",
+            ")",
+            ")",
+            "{",
+            "setCF",
+            "(",
+            "1",
+            ")",
+            ";",
+            "setAX",
+            "(",
+            "(",
+            "USHORT",
+            ")",
+            "ERROR_INVALID_ADDRESS",
+            ")",
+            ";",
+            "return",
+            ";",
+            "}",
+            "lpszzEnvBuffer",
+            "=",
+            "(",
+            "CHAR",
+            "*",
+            ")",
+            "environment_lease",
+            ".",
+            "bytes",
+            ";"
+          ]
+        },
+        {
+          "kind": "insert",
+          "original": [],
+          "current": [
+            "if",
+            "(",
+            "!",
+            "mvdm_guest_location_release",
+            "(",
+            "&",
+            "environment_lease",
+            ",",
+            "1",
+            ")",
+            ")",
+            "{",
+            "setCF",
+            "(",
+            "1",
+            ")",
+            ";",
+            "setAX",
+            "(",
+            "(",
+            "USHORT",
+            ")",
+            "ERROR_INVALID_ADDRESS",
+            ")",
+            ";"
+          ]
+        },
+        {
+          "kind": "insert",
+          "original": [],
+          "current": [
+            "return",
+            ";",
+            "}"
+          ]
+        }
+      ]
+    },
+    "cmdCreateVDMEnvironment": {
+      "original_tokens": 657,
+      "current_tokens": 657,
+      "changes": []
+    },
+    "cmdSetEnvironmentVariable": {
+      "original_tokens": 526,
+      "current_tokens": 526,
+      "changes": []
+    },
+    "cmdExpandEnvironmentStrings": {
+      "original_tokens": 284,
+      "current_tokens": 284,
+      "changes": []
+    }
+  },
+  "map_witness": [
+    "0001:001589d0       _cmdCreateVDMEnvironment   005599d0 f   original-mvdm-command:cmdenv.obj",
+    "0001:00158ce0       _cmdExpandEnvironmentStrings 00559ce0 f   original-mvdm-command:cmdenv.obj",
+    "0001:00158ef0       _cmdGetInitEnvironment     00559ef0 f   original-mvdm-command:cmdenv.obj",
+    "0001:00159310       _cmdSetEnvironmentVariable 0055a310 f   original-mvdm-command:cmdenv.obj"
+  ],
+  "initial_limits": [
+    "Final realloc result assigned only after testing old pointer: original OOM defect",
+    "WORD paragraph-byte capacity and counters retained",
+    "Existing T420 S35/S37 guest discarded INIT lifetime failure is not a missing host pre-sizing step"
+  ],
+  "merge_limits": [
+    "Original duplicates/order/first-match semantics retained",
+    "Existing absent-empty deletion FALSE and longer-value delete-before-grow ordering retained",
+    "Original long-expansion temporary is not freed on success",
+    "Original error paths can free the environment without nulling the stored pointer",
+    "No dictionary, sorting/deduplication or uniform encoding rewrite admitted"
+  ],
+  "evidence_scope": "Current source/map plus unchanged S43 normal startup and historical S35/S37 traced guest copy. No new fault-injection, large-environment safety, DBCS matrix or interactive OOM certification."
+}

@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;17 bounded dispositions and9 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;19 bounded dispositions and7 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -101,17 +101,17 @@
       "id": "DOS16:c3ee8f2820af6f055614",
       "module": "1.2",
       "contract": "Initial DOS environment paragraph query and transfer",
-      "disposition": "pending",
+      "disposition": "wired; original limitations retained",
       "current_owner": "cmdenv.c cmdGetInitEnvironment retains paragraph query and synchronous destination lease",
-      "evidence_and_limits": "Original final realloc tests old pointer and WORD capacity remains. Next match existing environment tests and original limits; no claim that normal launch covers exhaustion/oversize."
+      "evidence_and_limits": "s45-environment-disposition.json compares current owners to pinned original: merge/set/expand token-identical; initial transfer differs only by registered synchronous guest lease. Current map and normal startup plus existing S35/S37 trace are bounded evidence. Old-pointer realloc, WORD capacity and original merge lifetime limits retained; no new hardening or guest pre-sizing workaround."
     },
     {
       "id": "DOS16:cd7494c32de5fcd66cdc",
       "module": "1.2",
       "contract": "Startup environment merge and original expansion rules",
-      "disposition": "pending",
+      "disposition": "wired; original limitations retained",
       "current_owner": "cmdenv.c cmdCreateVDMEnvironment/cmdSetEnvironmentVariable/cmdExpandEnvironmentStrings",
-      "evidence_and_limits": "Original order/duplicates/encoding phases remain; next reconcile historical env/expansion receipts and specific local-boundary changes."
+      "evidence_and_limits": "s45-environment-disposition.json compares current owners to pinned original: merge/set/expand token-identical; initial transfer differs only by registered synchronous guest lease. Current map and normal startup plus existing S35/S37 trace are bounded evidence. Old-pointer realloc, WORD capacity and original merge lifetime limits retained; no new hardening or guest pre-sizing workaround."
     },
     {
       "id": "DOS16:9853f295a95629f23c1e",

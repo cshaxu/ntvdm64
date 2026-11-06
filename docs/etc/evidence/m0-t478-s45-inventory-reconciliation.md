@@ -405,3 +405,43 @@ This source/evidence P changes no runtime. Seventeen startup rows now have
 bounded dispositions, nine remain pending;1042 active inventory identities
 remain pending. T478/S45 stay active, the S43 release stays unchanged, and no
 O:/winnt write or push occurs.
+
+## P11 initial and merged environment ownership
+
+The [environment comparison](../../../artifacts/mvdm-audit/t478-final/s45-environment-disposition.json)
+resolves DOS16:c3ee8f2820af6f055614 and DOS16:cd7494c32de5fcd66cdc. Consistent
+original cmdenv observations are merged by original line number; conflicting
+observations reject comparison. The complete cmdCreateVDMEnvironment,
+cmdSetEnvironmentVariable and cmdExpandEnvironmentStrings bodies are token-identical
+to the pinned original (657,526 and284 tokens). cmdGetInitEnvironment differs
+only by DIV-193's location/lease declarations, ES:0 acquisition replacing
+GetVDMAddr, release and the registered invalid-address result. Original snapshot,
+filter/conversion order, required-paragraph retry and copy/free logic remain.
+Current worker map resolves all four functions to original cmdenv.obj.
+
+The initial helper retains its original final realloc defect: it tests the old
+pointer before assigning the new result. WORD byte capacity/counters are also
+original. The [T420 S37 trace](m0-t420-s37-oemuni-capability-review.md) records
+first-entry BX0010 ->0119 and the second in-bounds copy overwriting the guest's
+discarded INIT EnvSiz. Its zero diagnostic process exit without the guest marker
+was not a passing workload. That known guest lifetime limitation does not justify
+a host-side automatic /E argument, environment truncation, forced DOS=HIGH or
+new guest modification. Existing S43 normal startup is bounded current evidence,
+not proof of arbitrary large-environment safety.
+
+Merge/set/expand retain source-defined order and duplicates, only-first-match
+replacement, first COMSPEC/windir filtering, custom percent expansion, and phase
+specific conversion. Longer replacement deletes before growth; failure is not
+rolled back. Existing empty deletion returns TRUE, absent empty deletion FALSE.
+The original success path does not free a separately allocated long-expansion
+temporary; some failure paths free the block without clearing its stored pointer.
+Those are source-origin lifetime limits, not a missing alternative environment
+manager. The external audit's safer realloc ownership, counter widening, adjusted
+copy extents and cleanup proposals are not silently adopted under this T's
+original-only/no-new-tolerance instruction. No claim is made that the original
+fault cases are safe or that all proposed runtime matrices were executed.
+
+This is source/evidence reconciliation, not a product repair. Nineteen startup
+identities have bounded dispositions; seven remain pending and1040 active
+inventory identities remain pending. S45/T478 remain active, S43 release is
+unchanged, and no O:/winnt write, new publication or push occurs.
