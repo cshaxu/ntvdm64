@@ -1,0 +1,288 @@
+{
+  "result": "bounded-review-pass",
+  "parent": "48884962e",
+  "product_changed": false,
+  "source_comparisons": {
+    "buffer.c": [
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\dpmi32\\buffer.c",
+        "sha256": "6123c2acefa990be5bf87600a232a32feb1b7435ea0c2f346aa174b56ca37abc"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\buffer.c",
+        "sha256": "6123c2acefa990be5bf87600a232a32feb1b7435ea0c2f346aa174b56ca37abc"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dpmi32\\buffer.c",
+        "sha256": "6123c2acefa990be5bf87600a232a32feb1b7435ea0c2f346aa174b56ca37abc"
+      }
+    ],
+    "savestat.c": [
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\dpmi32\\savestat.c",
+        "sha256": "59efaecefb32f3c1bd839cbf602587f0fb65ffd360c5e12ea807a255b06781de"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\savestat.c",
+        "sha256": "76864b5f6c852820722d123395e49da43fd206f2420dd38d00d1ce911b1d7e42"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dpmi32\\savestat.c",
+        "sha256": "76864b5f6c852820722d123395e49da43fd206f2420dd38d00d1ce911b1d7e42"
+      }
+    ]
+  },
+  "controlled_body_checks": 133,
+  "controlled_result": "PASS 133 controlled original buffer/state checks; exhaustion sentinel retained\n",
+  "lease_result": "LEASE_BOUNDARY_PASS checks=45\nexit=0\n",
+  "session_lease_result": "exit=0\n",
+  "lease_run": {
+    "Start": "2026-11-06T01:09:44.4100924-08:00",
+    "Command": "verify-guest-memory-lease.ps1 -BuildRoot build/t478-s33/lease-current",
+    "Pid": 20200,
+    "DeadlineSeconds": 180
+  },
+  "live_cases": [
+    {
+      "Pid": 38572,
+      "Mode": "low",
+      "ProbeSha256": "5870AC7A3A2BF24BF00BB815F5AF33F2ABFA7E26870813D1F5220AEF1DB0805C",
+      "Result": "pass",
+      "Route": "direct",
+      "ElapsedMs": 2494,
+      "evidence": {
+        "build\\t478-s33\\int21-live\\low-direct\\manifest.json": "01C1332D1422373D8EA173BFEEB6FDF43235EC80317F4D6C8A5DD53EE10C9314",
+        "build\\t478-s33\\int21-live\\low-direct\\guest.txt": "EDB0C386E1957DD0EBBDDA706819CAA08787538ECA19D6D5C23B635A0A1E5508",
+        "build\\t478-s33\\int21-live\\low-direct\\guest.txt.console.txt": "3244FDB0601F161ADC95E10B894A6807FF604D011C002E6A1E7B3FE338F2CF60"
+      }
+    },
+    {
+      "Pid": 33172,
+      "Mode": "low",
+      "ProbeSha256": "5870AC7A3A2BF24BF00BB815F5AF33F2ABFA7E26870813D1F5220AEF1DB0805C",
+      "Result": "pass",
+      "Route": "nested",
+      "ElapsedMs": 1383,
+      "evidence": {
+        "build\\t478-s33\\int21-live\\low-nested\\manifest.json": "87C93A1211B9921732E96783F778E7221DAD975B9472C40B9F11ADF2F88E012D",
+        "build\\t478-s33\\int21-live\\low-nested\\guest.txt": "7087FEAC86C9CE33FB6DD3FF805E69F3E96A862B6FF1219D40268F963CE0C9BB",
+        "build\\t478-s33\\int21-live\\low-nested\\guest.txt.console.txt": "3244FDB0601F161ADC95E10B894A6807FF604D011C002E6A1E7B3FE338F2CF60"
+      }
+    },
+    {
+      "Pid": 6296,
+      "Mode": "high",
+      "ProbeSha256": "297419687231B779874F9054D393BB1F43CC798B5A79763AD60EF48F0CAEDF45",
+      "Result": "pass",
+      "Route": "direct",
+      "ElapsedMs": 1346,
+      "evidence": {
+        "build\\t478-s33\\int21-live\\high-direct\\manifest.json": "512E7D2395EC0CFD32618361A23EF0658300D8DDA63C8CE2AF15EB28BC0B0540",
+        "build\\t478-s33\\int21-live\\high-direct\\guest.txt": "4A3D2FD89A410B051D0ACC7C4454EF118E7DDEF1A197410F1534D90765103F30",
+        "build\\t478-s33\\int21-live\\high-direct\\guest.txt.console.txt": "773670B228BFD5EA43428207599FC3C75AB70298D9BD7BBF44A506B16EB72968"
+      }
+    },
+    {
+      "Pid": 7800,
+      "Mode": "high",
+      "ProbeSha256": "297419687231B779874F9054D393BB1F43CC798B5A79763AD60EF48F0CAEDF45",
+      "Result": "pass",
+      "Route": "nested",
+      "ElapsedMs": 1500,
+      "evidence": {
+        "build\\t478-s33\\int21-live\\high-nested\\manifest.json": "638E97D1B80D193459156223C01598B99435CF3EC5DBC986E29856FD9231D3D0",
+        "build\\t478-s33\\int21-live\\high-nested\\guest.txt": "9649A89739793CD08BFC34937E9AEA20F0846B2CAE1EB431707EF747BEBFA52D",
+        "build\\t478-s33\\int21-live\\high-nested\\guest.txt.console.txt": "773670B228BFD5EA43428207599FC3C75AB70298D9BD7BBF44A506B16EB72968"
+      }
+    }
+  ],
+  "image_binding": {
+    "result": "pass",
+    "package_id": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+    "bindings": [
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiAllocateBuffer",
+        "bytes": 99,
+        "file_offset": 1439616,
+        "relocations": 6
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiMapAndCopyBuffer",
+        "bytes": 171,
+        "file_offset": 1439856,
+        "relocations": 10
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiUnmapAndCopyBuffer",
+        "bytes": 79,
+        "file_offset": 1440720,
+        "relocations": 5
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiFreeBuffer",
+        "bytes": 53,
+        "file_offset": 1439792,
+        "relocations": 4
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiFreeAllBuffers",
+        "bytes": 19,
+        "file_offset": 1439760,
+        "relocations": 2
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiMapString",
+        "bytes": 335,
+        "file_offset": 1440032,
+        "relocations": 12
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+        "object_sha256": "7DDBF16087AB52076B2D51ED65753B42B2731ED374E867B7A85DA259E4714871",
+        "function": "_DpmiCalcFcbLength",
+        "bytes": 21,
+        "file_offset": 1439728,
+        "relocations": 0
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\savestat.obj",
+        "object_sha256": "4868DC96C334231A6E1CF3ECC2160F201A0492C71B2A7AD83D15553F7B6DEB54",
+        "function": "_DpmiSaveSegmentsAndStack",
+        "bytes": 73,
+        "file_offset": 1439536,
+        "relocations": 8
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\savestat.obj",
+        "object_sha256": "4868DC96C334231A6E1CF3ECC2160F201A0492C71B2A7AD83D15553F7B6DEB54",
+        "function": "_DpmiRestoreSegmentsAndStack",
+        "bytes": 79,
+        "file_offset": 1439456,
+        "relocations": 8
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\int21map.obj",
+        "object_sha256": "4A0892BE3B1B8707EFDD04FA2DAF244073D0FE9936C36FD2818B5C5529A6AE49",
+        "function": "_ReadWriteFile",
+        "bytes": 446,
+        "file_offset": 1422864,
+        "relocations": 41
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\int21map.obj",
+        "object_sha256": "4A0892BE3B1B8707EFDD04FA2DAF244073D0FE9936C36FD2818B5C5529A6AE49",
+        "function": "_DpmiXlatInt21Call",
+        "bytes": 249,
+        "file_offset": 1428656,
+        "relocations": 28
+      }
+    ],
+    "image_sha256": "ACD25C83FC7885BF8C35612AEA346A41B6214F0EA2B202D7B798B5985863F190",
+    "limitations": "Relocation-masked full bodies prove static selection, not arbitrary nested guest execution."
+  },
+  "retained_release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "494F7E1ABA5FE3BFD0B402A2146C475F4879CA532016172AC717346541C9F991",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "DA08DEE537D42D5E1238521155D5E1B11DFF2945F7F3D60D99F939362D5FCB5A",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "463F6CD406CE3FCD608EEF116834CFBF22EC30C83B8D255D2C6D0E6383C94776",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "ACD25C83FC7885BF8C35612AEA346A41B6214F0EA2B202D7B798B5985863F190",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "0EB95B5315D32838566A27ECE08CA04BF7B0B8748DBCF65D36FD6E6B9F9C14F1"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "F0F82775C6DF0A2480AA6B1702E0BDF9174BD37E7BC03D88F931A67D7F10776F",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "EA4AFCB5208B2AFCBE553D0717C5C9687769538824F1FA9D962526B2EA8EA719",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "BDE32D7F57F5EDB5154694471339D1BCC00BBE82BE4C356A677DD757B8E0A9F9",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "015F327EA32A47497A7A46D9D8EA66F6D68F60E25DA8C621EA9569F4E35A753C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "0633A21F88C48AE23358F351AF8AA7433040A46440718FBA400E768FD7F10F86",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "A80B681265A26ADFD5A901A55C5A258D4C248B38F82316836334C2B05001D253"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "B907DDFDA38C3180A975B1009FF4E2476B545C17D2106819F0CF91F7AF272D57",
+      "Machine": 332,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "8FFABBD2E32C85AF76E240ED0BB5EE7D32F86C5E1DC7E85F8AC57DD003046FC9"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "536EB8BE9FA1B0D28912D354A0B94A029B7FE7556E927DEC9F7C33C652532568",
+      "Machine": 34404,
+      "PackageId": "3f06f0c6-d34a-4a6d-a862-4c89ed5373b2",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "background_pids": {
+    "controlled": 27384,
+    "live": 22868,
+    "image": 30432
+  },
+  "limits": [
+    "No arbitrary invalid guest-pointer/string tolerance",
+    "No general exception-unwind or concurrent StateStack guarantee",
+    "Original exhausted static-pool sentinel retained; not a safe failure",
+    "Nested COMMAND is not recursive INT21; controlled save-stack test separately covers 16 levels"
+  ]
+}

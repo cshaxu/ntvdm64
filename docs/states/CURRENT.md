@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S32 is closed with [export/profile evidence](../etc/evidence/m0-t478-s32-export-disposition.md).
-Next planned S33: finding 12 DPMI buffer/save state. Continuous authorization remains.
+T478 S33 is closed with [DPMI buffer/state evidence](../etc/evidence/m0-t478-s33-dpmi-buffer-state.md).
+Next planned S34: finding 21 BIOS integrations. Continuous authorization remains.
 Temporary CURRENT size exception: accumulated closures retained through T478 final reconciliation.
 
 ## S1 Closure Record
@@ -317,3 +317,7 @@ T478 S31 [verifies the current host DLL lifecycle](../etc/evidence/m0-t478-s31-d
 ## S32 Closure Record
 
 T478 S32 [reconciles original exports and host consumers](../etc/evidence/m0-t478-s32-export-disposition.md), restores exact template bytes and verifies 140 original declarations, 274 current ordinals, live task lifecycle and 16 Full gates. Package 3f06f0c6-d34a-4a6d-a862-4c89ed5373b2 is hash-published in this worktree only. No O:/winnt or push; original limits retained.
+
+## S33 Closure Record
+
+T478 S33 [verifies existing DPMI buffer/state wiring](../etc/evidence/m0-t478-s33-dpmi-buffer-state.md): 133 controlled checks, 45 lease boundaries plus session test, four real INT21 cases and eleven current image bindings pass. Original caller-precondition/exhaustion limits retained; no product change. Exact S32 package remains published.
