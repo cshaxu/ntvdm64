@@ -257,12 +257,13 @@ static DWORD prepend_input(void *context,const INPUT_RECORD *records,const uint6
     return frontend_session_prepend_tagged(channel->root,records,receipts,count);
 }
 
-static DWORD dispatch(void *context,const console_io_request *request,
+static DWORD dispatch(void *context,const frontend_base_cancel *cancel,const console_io_request *request,
     console_io_reply *reply,frontend_base_result *result)
 {
     frontend_io_channel *channel=context;
     DWORD error=ERROR_SUCCESS;
     BOOL video_locked=FALSE,video_part=FALSE,video_final=FALSE;
+    (void)cancel; /* Existing NTCON presentation owns its cancellation path. */
         /* No activation, input wait or publication is legal while this
          * channel holds the screen lock across the native read tiles. In
          * particular, an activation would wait for the presentation thread

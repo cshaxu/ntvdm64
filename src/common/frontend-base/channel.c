@@ -56,6 +56,7 @@ static DWORD send_reply(frontend_base_channel *channel,const console_io_reply *r
 static DWORD WINAPI channel_main(void *context)
 {
     frontend_base_channel *channel=context;
+    const frontend_base_cancel cancel={channel->stop,channel->worker};
     console_io_request *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     console_io_reply reply={0};
     BYTE reply_data[CONSOLE_IO_TILE_BYTES];
@@ -78,7 +79,7 @@ static DWORD WINAPI channel_main(void *context)
         request->data=request_data;
         error=request->bytes ? transfer(channel,FALSE,request_data,request->bytes) : ERROR_SUCCESS;
         if(error)break;
-        error=channel->ops.dispatch(channel->context,request,&reply,&result);
+        error=channel->ops.dispatch(channel->context,&cancel,request,&reply,&result);
         if(!error && (request->operation==CONSOLE_IO_READ_INPUT ||
             request->operation==CONSOLE_IO_PEEK_INPUT)) {
             /* Reset before peeking: the host readiness event covers an arrival
@@ -105,7 +106,7 @@ DWORD frontend_base_channel_stop(frontend_base_channel *channel)
 {
     DWORD wait;
     if(!channel)return ERROR_SUCCESS;
-    if(channel->stop)SetEvent(channel->stop);
+    if(channel->stop && !SetEvent(channel->stop))return GetLastError();
     if(channel->thread) {
         /* The thread cancels/drains OVERLAPPED before closing its pipe.
          * Never cancel through the stale pipe value after thread exit. */

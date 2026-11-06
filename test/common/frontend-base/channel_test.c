@@ -22,7 +22,7 @@ static DWORD attach(void *context,DWORD request,HANDLE pipe,HANDLE ready,DWORD *
 }
 static void generation(void *context,DWORD value){((fixture *)context)->generation=value;}
 static BOOL active_host(void *context){(void)context;return TRUE;}
-static DWORD dispatch_host(void *context,const console_io_request *request,console_io_reply *reply,frontend_base_result *result)
+static DWORD dispatch_host(void *context,const frontend_base_cancel *cancel,const console_io_request *request,console_io_reply *reply,frontend_base_result *result)
 {
     fixture *f=context;
     CHECK(f->generation==71);
@@ -36,6 +36,14 @@ static DWORD dispatch_host(void *context,const console_io_request *request,conso
         reply->bytes=CONSOLE_IO_TILE_BYTES;
         memset(reply->data,0x5a,reply->bytes);
         if(f->calls==2)CHECK(SetEvent(f->write_entered));
+    }
+    if(request->state.mode==5) {
+        HANDLE waits[]={cancel->stop,cancel->worker};
+        DWORD wait;
+        CHECK(SetEvent(f->write_entered));
+        wait=WaitForMultipleObjects(2,waits,FALSE,5000);
+        CHECK(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1);
+        return wait==WAIT_OBJECT_0 ? ERROR_OPERATION_ABORTED : ERROR_PROCESS_ABORTED;
     }
     return 0;
 }
@@ -76,14 +84,14 @@ static void request(fixture *f,DWORD mode,DWORD sequence,BOOL fragmented)
         transfer(f->peer,TRUE,(BYTE *)&q+3,CONSOLE_IO_REQUEST_HEADER_BYTES-3);
         transfer(f->peer,TRUE,"te",2);transfer(f->peer,TRUE,"st",2);
     }else transfer(f->peer,TRUE,&q,CONSOLE_IO_REQUEST_HEADER_BYTES);
-    if(mode!=1 && mode!=3 && mode!=4){
+    if(mode!=1 && mode!=3 && mode!=4 && mode!=5){
         transfer(f->peer,FALSE,&r,CONSOLE_IO_REPLY_HEADER_BYTES);
         CHECK(r.result && r.sequence==sequence);
     }
 }
 int main(int argc,char **argv)
 {
-    fixture a={0},b={0},failed={0};HANDLE wa,wb,wf;DWORD exit_code,flags;
+    fixture a={0},b={0},failed={0};HANDLE wa,wb,wf;DWORD exit_code,before,after;
     if(argc==3 && !strcmp(argv[1],"--peer")) {
         HANDLE parent=OpenProcess(SYNCHRONIZE,FALSE,(DWORD)strtoul(argv[2],NULL,10));
         if(parent){WaitForSingleObject(parent,15000);CloseHandle(parent);}
@@ -112,7 +120,9 @@ int main(int argc,char **argv)
         a.input=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(a.input);
         CHECK(DuplicateHandle(GetCurrentProcess(),process.hProcess,GetCurrentProcess(),&wa,SYNCHRONIZE,FALSE,0));
         CHECK(!frontend_base_channel_start(17,wa,a.input,&ops,&a,&a.channel));
-        request(&a,0,1,FALSE);
+        a.write_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(a.write_entered);
+        request(&a,5,1,FALSE);
+        CHECK(WaitForSingleObject(a.write_entered,5000)==WAIT_OBJECT_0);
         CHECK(TerminateProcess(process.hProcess,19));
         CHECK(WaitForSingleObject(process.hProcess,5000)==WAIT_OBJECT_0);
         CloseHandle(process.hProcess);
@@ -125,11 +135,16 @@ int main(int argc,char **argv)
     CHECK(WaitForSingleObject(frontend_base_channel_thread(b.channel),5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(frontend_base_channel_thread(b.channel),&exit_code) && exit_code==ERROR_WRITE_FAULT);
     stop(&b);CHECK(b.finished==1);
+    /* Check resource accounting rather than querying a consumed handle:
+     * strict-handle hosts may raise on that deliberately invalid API call. */
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     failed.bind_error=ERROR_ACCESS_DENIED;CHECK(start(&failed,&wf)==ERROR_ACCESS_DENIED);
-    CHECK(!failed.channel && !GetHandleInformation(wf,&flags));stop(&failed);
+    CHECK(!failed.channel);stop(&failed);
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
     ZeroMemory(&failed,sizeof(failed));failed.attach_error=ERROR_INVALID_DATA;
     CHECK(start(&failed,&wf)==ERROR_INVALID_DATA);
-    CHECK(!failed.channel && !GetHandleInformation(wf,&flags));stop(&failed);
+    CHECK(!failed.channel);stop(&failed);
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
     ZeroMemory(&a,sizeof(a));CHECK(!start(&a,&wa));
     /* Stop while a partial header leaves the production read pending. */
     transfer(a.peer,TRUE,"x",1);stop(&a);CHECK(a.finished==1);
@@ -143,6 +158,12 @@ int main(int argc,char **argv)
     request(&a,3,1,FALSE);
     CHECK(WaitForSingleObject(frontend_base_channel_thread(a.channel),5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(frontend_base_channel_thread(a.channel),&exit_code) && exit_code==ERROR_INVALID_DATA);
+    stop(&a);CHECK(a.finished==1);
+    ZeroMemory(&a,sizeof(a));CHECK(!start(&a,&wa));
+    a.write_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(a.write_entered);
+    request(&a,5,1,FALSE);
+    CHECK(WaitForSingleObject(a.write_entered,5000)==WAIT_OBJECT_0);
+    /* No read/write is pending: stop must interrupt provider-owned waiting. */
     stop(&a);CHECK(a.finished==1);
     puts("PASS frontend-base channel isolation framing cancellation rollback and reply ordering");
     return 0;

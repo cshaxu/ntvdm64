@@ -10,7 +10,7 @@
 typedef struct slot {
     common_frontend_location location;
     common_frontend_key key;
-    HANDLE notify,retire,changed,peer,attached,close_seen;
+    HANDLE notify,retire,changed,peer,attached,close_seen,close_release;
     BOOL closed,used,pending,attach_failure;
     DWORD sequence;
 } slot;
@@ -18,7 +18,7 @@ static slot slots[4];
 static HANDLE broker;
 static DWORD serial;
 static volatile LONG checks;
-static BOOL fail_state;
+static BOOL fail_state,fail_context;
 #define CHECK(x) do { InterlockedIncrement(&checks); if(!(x)) { printf("FAIL line %d: %s\n",__LINE__,#x); ExitProcess(1); } } while(0)
 static DWORD copy(HANDLE source,HANDLE *out)
 {return DuplicateHandle(GetCurrentProcess(),source,GetCurrentProcess(),out,SYNCHRONIZE,FALSE,0) ? 0 : GetLastError();}
@@ -30,6 +30,14 @@ static slot *lookup(const common_frontend_key *key)
     return NULL;
 }
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *out){return copy(broker,out);}
+DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *out)
+{
+    DWORD flags;
+    *out=NULL;CHECK(GetHandleInformation(frontend,&flags));
+    if(fail_context)return ERROR_ACCESS_DENIED;
+    *out=CreateEventW(NULL,TRUE,FALSE,NULL);
+    return *out ? ERROR_SUCCESS : GetLastError();
+}
 DWORD OpenNtBaseClientRegisterEmbeddedFrontend(const common_frontend_location *location,
     common_frontend_key *key,HANDLE *notification,HANDLE *retire)
 {
@@ -62,7 +70,9 @@ DWORD OpenNtBaseClientRetireWorkerlessFrontend(const common_frontend_key *key,DW
 DWORD OpenNtBaseClientCloseFrontendInstance(const common_frontend_key *key)
 {
     slot *s=lookup(key);if(!s)return ERROR_ACCESS_DENIED;
-    s->closed=TRUE;SetEvent(s->close_seen);SetEvent(s->retire);SetEvent(s->changed);return 0;
+    SetEvent(s->close_seen);
+    if(s->close_release)CHECK(WaitForSingleObject(s->close_release,5000)==WAIT_OBJECT_0);
+    s->closed=TRUE;SetEvent(s->retire);SetEvent(s->changed);return 0;
 }
 static void clear_slot(slot *s)
 {
@@ -97,7 +107,7 @@ DWORD OpenNtBaseClientAttachFrontendRequest(const common_frontend_key *key,DWORD
 DWORD OpenNtBaseClientFrontendIoDisconnected(const common_frontend_key *key)
 {return lookup(key) ? 0 : ERROR_ACCESS_DENIED;}
 typedef struct io_state { LONG calls,finished;HANDLE entered,release; } io_state;
-static DWORD dispatch(void *ctx,const console_io_request *req,console_io_reply *reply,
+static DWORD dispatch(void *ctx,const ntvdm_vm_cancel *cancel,const console_io_request *req,console_io_reply *reply,
     frontend_base_result *result)
 {
     io_state *state=ctx;(void)result;
@@ -105,7 +115,10 @@ static DWORD dispatch(void *ctx,const console_io_request *req,console_io_reply *
     InterlockedIncrement(&state->calls);
     if(req->state.mode==1) {
         SetEvent(state->entered);
-        CHECK(WaitForSingleObject(state->release,5000)==WAIT_OBJECT_0);
+        HANDLE waits[]={cancel->stop,cancel->worker,cancel->retired,cancel->broker,state->release};
+        DWORD wait=WaitForMultipleObjects(5,waits,FALSE,5000);
+        CHECK(wait>=WAIT_OBJECT_0 && wait<WAIT_OBJECT_0+5);
+        if(wait!=WAIT_OBJECT_0+4)return ERROR_OPERATION_ABORTED;
     }
     reply->result=TRUE;reply->state.count=req->state.count;return 0;
 }
@@ -170,6 +183,54 @@ static void wire_rejections(HANDLE input,const ntvdm_vm_io *io)
     }
 }
 
+typedef struct retire_call {
+    ntvdm_vm_host *host;
+    common_frontend_location identity;
+} retire_call;
+static DWORD WINAPI retire_vm(void *context)
+{
+    retire_call *call=context;
+    return ntvdm_vm_host_retire(call->host,&call->identity);
+}
+static void independent_retirement(HANDLE input,const ntvdm_vm_io *io)
+{
+    ntvdm_vm_host *host=NULL;
+    uint64_t payload;
+    common_frontend_location a,b,c;
+    io_state one={0},two={0};
+    slot *sa,*sb;
+    retire_call call;
+    HANDLE release,seen,thread,origin=NULL,execution=NULL;
+    DWORD result;
+    CHECK(!ntvdm_vm_host_create(&host));
+    CHECK(!ntvdm_vm_payload_begin(host,&payload));
+    CHECK(!ntvdm_vm_host_register(host,payload,1,input,io,&one,&a));
+    CHECK(!ntvdm_vm_host_register(host,payload,2,input,io,&two,&b));
+    CHECK(!ntvdm_vm_host_launch_context(host,&a,&origin,&execution));
+    CHECK(origin && execution);CloseHandle(origin);CloseHandle(execution);
+    origin=execution=NULL;fail_context=TRUE;
+    CHECK(ntvdm_vm_host_launch_context(host,&a,&origin,&execution)==ERROR_ACCESS_DENIED);
+    CHECK(!origin && !execution);fail_context=FALSE;
+    sa=connect_vm(&a,FALSE);sb=connect_vm(&b,FALSE);
+    release=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(release);
+    sa->close_release=release;CHECK(!copy(sa->close_seen,&seen));
+    call.host=host;call.identity=a;
+    thread=CreateThread(NULL,0,retire_vm,&call,0,NULL);CHECK(thread);
+    CHECK(WaitForSingleObject(seen,5000)==WAIT_OBJECT_0);
+    /* A is in a held RPC: B and a new VM in the SAME payload must progress. */
+    CHECK(!ntvdm_vm_host_origin(host,&b,&origin));CloseHandle(origin);origin=NULL;
+    exchange(sb,42,0);CHECK(two.calls==1);
+    CHECK(!ntvdm_vm_host_register(host,payload,3,input,io,NULL,&c));
+    CHECK(ntvdm_vm_host_origin(host,&a,&origin)==ERROR_INVALID_STATE && !origin);
+    CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+    CHECK(SetEvent(release));
+    CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(thread,&result) && result==ERROR_SUCCESS);
+    CHECK(ntvdm_vm_host_origin(host,&a,&origin)==ERROR_NOT_FOUND && !origin);
+    CHECK(!ntvdm_vm_host_destroy(host));
+    CloseHandle(thread);CloseHandle(seen);CloseHandle(release);
+}
+
 static void active_host_tests(HANDLE input,const ntvdm_vm_io *io)
 {
     ntvdm_vm_host *host=NULL;
@@ -200,8 +261,7 @@ static void active_host_tests(HANDLE input,const ntvdm_vm_io *io)
     CHECK(!copy(sb->close_seen,&close_seen));
     thread=CreateThread(NULL,0,close_host,host,0,NULL);CHECK(thread);
     CHECK(WaitForSingleObject(close_seen,5000)==WAIT_OBJECT_0);
-    CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT && two.finished==0);
-    SetEvent(two.release);
+    /* Retirement must cancel provider wait without any test-side release. */
     CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(thread,&result) && result==0 && two.finished==1);
     CHECK(ntvdm_vm_payload_begin(host,&replacement)==ERROR_OPERATION_ABORTED && !replacement);
@@ -238,17 +298,25 @@ int main(void)
     CHECK(failed.incarnation && failed.incarnation!=reused.incarnation);
     CHECK(ntvdm_vm_frontend_origin(registry,&failed,&origin)==ERROR_INVALID_STATE);
     CHECK(!ntvdm_vm_frontends_destroy(registry));fail_state=FALSE;
+    independent_retirement(input,&io);
     active_host_tests(input,&io);
     wire_rejections(input,&io);
     CHECK(!ntvdm_vm_frontends_create(8,&registry));
     {
-        io_state state={0};slot *s;
+        io_state state={0},waiting={0};slot *s,*other;
         CHECK(!ntvdm_vm_frontend_register(registry,0,input,&io,&state,&a));
-        s=connect_vm(&a,FALSE);
+        CHECK(!ntvdm_vm_frontend_register(registry,1,input,&io,&waiting,&b));
+        s=connect_vm(&a,FALSE);other=connect_vm(&b,FALSE);
+        waiting.entered=CreateEventW(NULL,TRUE,FALSE,NULL);
+        waiting.release=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(waiting.entered && waiting.release);
         transfer(s->peer,TRUE,"x",1); /* A blocked partial-header read. */
+        exchange(other,1,1);CHECK(WaitForSingleObject(waiting.entered,5000)==WAIT_OBJECT_0);
         SetEvent(broker);
         CHECK(!ntvdm_vm_frontends_destroy(registry));
         CHECK(state.finished==1 && !state.calls);
+        CHECK(waiting.finished==1 && waiting.calls==1);
+        CloseHandle(waiting.entered);CloseHandle(waiting.release);
     }
     for(i=0;i<4;++i)if(slots[i].used)clear_slot(&slots[i]);
     CloseHandle(input);CloseHandle(broker);

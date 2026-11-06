@@ -4,6 +4,11 @@
 #include "common/protocol/console_io.h"
 
 typedef struct frontend_base_channel frontend_base_channel;
+/* Borrowed until dispatch returns. Providers that block must include these
+ * handles in their wait set; pipe cancellation cannot cancel a provider wait. */
+typedef struct frontend_base_cancel {
+    HANDLE stop,worker;
+} frontend_base_cancel;
 typedef struct frontend_base_result {
     BOOL reply;
     DWORD terminal_error; /* Close after the reply, if one was requested. */
@@ -13,7 +18,7 @@ typedef struct frontend_base_channel_ops {
     DWORD (*attach)(void *,DWORD,HANDLE,HANDLE,DWORD *);
     void (*generation)(void *,DWORD);
     BOOL (*active)(void *);
-    DWORD (*dispatch)(void *,const console_io_request *,console_io_reply *,frontend_base_result *);
+    DWORD (*dispatch)(void *,const frontend_base_cancel *,const console_io_request *,console_io_reply *,frontend_base_result *);
     DWORD (*input_pending)(void *,BOOL *);
     void (*finish)(void *); /* Serving thread, before endpoint EOF. */
 } frontend_base_channel_ops;

@@ -8,15 +8,18 @@ typedef struct vm_frontend {
     struct vm_frontend *next;
     common_frontend_location location;
     common_frontend_key key;
-    HANDLE notification,retire,changed,broker,input_ready;
+    HANDLE notification,retire,changed,broker,input_ready,invalidated;
     frontend_base_service *service;
     ntvdm_vm_io io;
     void *context;
-    BOOL closing;
+    BOOL closing,busy;
     DWORD close_error,wire_generation,sequence;
 } vm_frontend;
 
 struct ntvdm_vm_frontends {
+    SRWLOCK lock;
+    CONDITION_VARIABLE changed;
+    BOOL closing;
     uint64_t payload;
     vm_frontend *entries;
 };
@@ -60,10 +63,12 @@ static void generation(void *context,DWORD value)
 }
 static BOOL active(void *context)
 {(void)context;return TRUE;}
-static DWORD dispatch(void *context,const console_io_request *request,
+static DWORD dispatch(void *context,const frontend_base_cancel *channel_cancel,const console_io_request *request,
     console_io_reply *reply,frontend_base_result *result)
 {
     vm_frontend *entry=context;
+    const ntvdm_vm_cancel cancel={channel_cancel->stop,channel_cancel->worker,
+        entry->invalidated,entry->broker};
     DWORD error;
     if(request->version!=CONSOLE_IO_VERSION)return ERROR_REVISION_MISMATCH;
     if(!entry->wire_generation || request->generation!=entry->wire_generation)return ERROR_ACCESS_DENIED;
@@ -71,7 +76,8 @@ static DWORD dispatch(void *context,const console_io_request *request,
         request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PRESENT_BARRIER ||
         request->operation==38)return ERROR_INVALID_DATA;
     entry->sequence=request->sequence;
-    error=entry->io.dispatch(entry->context,request,reply,result);
+    if(WaitForSingleObject(entry->invalidated,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
+    error=entry->io.dispatch(entry->context,&cancel,request,reply,result);
     /* Wire identity belongs to this authenticated channel, not guest/provider
      * state. The provider owns operation data and result only. */
     reply->version=CONSOLE_IO_VERSION;reply->generation=entry->wire_generation;
@@ -114,6 +120,7 @@ static DWORD fault(void *context)
 }
 static void free_entry(vm_frontend *entry)
 {
+    if(entry->invalidated)CloseHandle(entry->invalidated);
     if(entry->changed)CloseHandle(entry->changed);
     if(entry->notification)CloseHandle(entry->notification);
     if(entry->retire)CloseHandle(entry->retire);
@@ -129,6 +136,7 @@ DWORD ntvdm_vm_frontends_create(uint64_t payload,ntvdm_vm_frontends **output)
     if(!payload)return ERROR_INVALID_PARAMETER;
     registry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*registry));
     if(!registry)return ERROR_NOT_ENOUGH_MEMORY;
+    InitializeSRWLock(&registry->lock);InitializeConditionVariable(&registry->changed);
     registry->payload=payload;*output=registry;
     return ERROR_SUCCESS;
 }
@@ -144,30 +152,56 @@ DWORD ntvdm_vm_frontend_register(ntvdm_vm_frontends *registry,uint64_t vm,
     ZeroMemory(identity,sizeof(*identity));
     if(!registry || !input_ready || input_ready==INVALID_HANDLE_VALUE || !io ||
         !io->dispatch || !io->input_pending || !io->finish)return ERROR_INVALID_PARAMETER;
-    for(entry=registry->entries;entry;entry=entry->next)
-        if(entry->location.vm==vm)return ERROR_ALREADY_EXISTS;
     entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
     if(!entry)return ERROR_NOT_ENOUGH_MEMORY;
+    entry->invalidated=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!entry->invalidated){error=GetLastError();free_entry(entry);return error;}
     entry->location.payload=registry->payload;entry->location.vm=vm;
     AcquireSRWLockExclusive(&incarnation_lock);
     if(incarnation!=UINT64_MAX)entry->location.incarnation=++incarnation;
     ReleaseSRWLockExclusive(&incarnation_lock);
     if(!entry->location.incarnation){free_entry(entry);return ERROR_ARITHMETIC_OVERFLOW;}
     entry->io=*io;entry->context=context;entry->input_ready=input_ready;
+    AcquireSRWLockExclusive(&registry->lock);
+    if(registry->closing)error=ERROR_OPERATION_ABORTED;
+    else {
+        vm_frontend *other;
+        error=ERROR_SUCCESS;
+        for(other=registry->entries;other;other=other->next)
+            if(other->location.vm==vm){error=ERROR_ALREADY_EXISTS;break;}
+    }
+    if(!error) {
+        entry->busy=TRUE;
+        entry->next=registry->entries;registry->entries=entry;
+    }
+    ReleaseSRWLockExclusive(&registry->lock);
+    if(error){free_entry(entry);return error;}
     error=OpenNtBaseClientBrokerProcess(&entry->broker);
     if(!error)error=OpenNtBaseClientRegisterEmbeddedFrontend(&entry->location,&entry->key,
         &entry->notification,&entry->retire);
-    if(error){free_entry(entry);return error;}
+    if(error) {
+        vm_frontend **found;
+        AcquireSRWLockExclusive(&registry->lock);
+        found=find_entry(registry,&entry->location);*found=entry->next;
+        WakeAllConditionVariable(&registry->changed);
+        ReleaseSRWLockExclusive(&registry->lock);
+        free_entry(entry);return error;
+    }
     /* Once registered, failure leaves an owned rollback entry. Never discard
      * its key or borrowed context while the broker still owns the instance. */
-    entry->next=registry->entries;registry->entries=entry;*identity=entry->location;
+    *identity=entry->location;
     error=OpenNtBaseClientFrontendStateChanged(&entry->key,&entry->changed);
     if(!error)error=frontend_base_service_start(entry->notification,entry->retire,
         entry->broker,entry->changed,&ops,entry,&entry->service);
     if(error) {
         entry->closing=TRUE;
+        SetEvent(entry->invalidated);
         entry->close_error=OpenNtBaseClientCloseFrontendInstance(&entry->key);
     }
+    AcquireSRWLockExclusive(&registry->lock);
+    entry->busy=FALSE;
+    WakeAllConditionVariable(&registry->changed);
+    ReleaseSRWLockExclusive(&registry->lock);
     return error;
 }
 
@@ -175,27 +209,29 @@ DWORD ntvdm_vm_frontend_origin(ntvdm_vm_frontends *registry,
     const common_frontend_location *identity,HANDLE *origin)
 {
     vm_frontend **found;
-    DWORD wait;
-    if(!origin)return ERROR_INVALID_PARAMETER;
-    *origin=NULL;found=find_entry(registry,identity);
-    if(!found)return ERROR_NOT_FOUND;
-    if((*found)->closing || !(*found)->service)return ERROR_INVALID_STATE;
+    DWORD wait,error=ERROR_NOT_FOUND;
+    if(!origin || !registry || !identity)return ERROR_INVALID_PARAMETER;
+    *origin=NULL;
+    AcquireSRWLockShared(&registry->lock);
+    found=find_entry(registry,identity);
+    if(!found)goto done;
+    if(registry->closing || (*found)->busy || (*found)->closing || !(*found)->service) {
+        error=ERROR_INVALID_STATE;goto done;
+    }
     wait=WaitForSingleObject(frontend_base_service_thread((*found)->service),0);
-    if(wait==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
-    if(wait==WAIT_FAILED)return GetLastError();
-    if(!DuplicateHandle(GetCurrentProcess(),(*found)->notification,GetCurrentProcess(),
-        origin,SYNCHRONIZE,FALSE,0))return GetLastError();
-    return ERROR_SUCCESS;
+    if(wait==WAIT_OBJECT_0){error=ERROR_OPERATION_ABORTED;goto done;}
+    if(wait==WAIT_FAILED){error=GetLastError();goto done;}
+    error=DuplicateHandle(GetCurrentProcess(),(*found)->notification,GetCurrentProcess(),
+        origin,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+done:
+    ReleaseSRWLockShared(&registry->lock);return error;
 }
 
-DWORD ntvdm_vm_frontend_retire(ntvdm_vm_frontends *registry,
-    const common_frontend_location *identity)
+static DWORD retire_entry(vm_frontend *entry)
 {
-    vm_frontend **found=find_entry(registry,identity),*entry;
     DWORD error,wait,action=OPENNT_FRONTEND_RETIRE_NONE;
     BOOL lost;
-    if(!found)return ERROR_NOT_FOUND;
-    entry=*found;
+    if(!SetEvent(entry->invalidated))return GetLastError();
     lost=WaitForSingleObject(entry->broker,0)==WAIT_OBJECT_0;
     if(!lost && !entry->closing) {
         entry->closing=TRUE;
@@ -218,20 +254,55 @@ DWORD ntvdm_vm_frontend_retire(ntvdm_vm_frontends *registry,
         }
     }
     lost=WaitForSingleObject(entry->broker,0)==WAIT_OBJECT_0;
-    if(!lost) {
-        error=OpenNtBaseClientUnregisterFrontendInstance(&entry->key);
-        if(error)return error;
+    return lost ? ERROR_SUCCESS : OpenNtBaseClientUnregisterFrontendInstance(&entry->key);
+}
+
+DWORD ntvdm_vm_frontend_retire(ntvdm_vm_frontends *registry,
+    const common_frontend_location *identity)
+{
+    vm_frontend **found,*entry;
+    DWORD error=ERROR_NOT_FOUND;
+    if(!registry || !identity)return ERROR_INVALID_PARAMETER;
+    AcquireSRWLockExclusive(&registry->lock);
+    for(;;) {
+        found=find_entry(registry,identity);
+        if(!found)goto done;
+        entry=*found;
+        if(!SetEvent(entry->invalidated)){error=GetLastError();goto done;}
+        if(!entry->busy)break;
+        if(!SleepConditionVariableSRW(&registry->changed,&registry->lock,INFINITE,0)) {
+            error=GetLastError();goto done;
+        }
     }
-    *found=entry->next;free_entry(entry);
-    return ERROR_SUCCESS;
+    entry->busy=TRUE;
+    ReleaseSRWLockExclusive(&registry->lock);
+    error=retire_entry(entry);
+    AcquireSRWLockExclusive(&registry->lock);
+    found=find_entry(registry,identity);
+    if(!error)*found=entry->next;
+    else entry->busy=FALSE;
+    WakeAllConditionVariable(&registry->changed);
+    if(!error)free_entry(entry);
+done:
+    ReleaseSRWLockExclusive(&registry->lock);return error;
 }
 
 DWORD ntvdm_vm_frontends_destroy(ntvdm_vm_frontends *registry)
 {
-    DWORD error;
+    vm_frontend *entry;
+    common_frontend_location identity;
+    DWORD error=ERROR_SUCCESS;
     if(!registry)return ERROR_SUCCESS;
+    /* The owner has drained control callers; callbacks are joined below. */
+    AcquireSRWLockExclusive(&registry->lock);
+    registry->closing=TRUE;
+    for(entry=registry->entries;entry;entry=entry->next)
+        if(!SetEvent(entry->invalidated)){error=GetLastError();break;}
+    ReleaseSRWLockExclusive(&registry->lock);
+    if(error)return error;
     while(registry->entries) {
-        error=ntvdm_vm_frontend_retire(registry,&registry->entries->location);
+        identity=registry->entries->location;
+        error=ntvdm_vm_frontend_retire(registry,&identity);
         if(error)return error;
     }
     HeapFree(GetProcessHeap(),0,registry);

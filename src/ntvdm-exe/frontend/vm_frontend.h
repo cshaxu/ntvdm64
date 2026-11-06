@@ -5,13 +5,19 @@
 #include "common/protocol/frontend_instance.h"
 
 typedef struct ntvdm_vm_frontends ntvdm_vm_frontends;
+/* All handles are borrowed for this dispatch only. Retirement and broker
+ * loss must also interrupt a wait for guest application, before channel join. */
+typedef struct ntvdm_vm_cancel {
+    HANDLE stop,worker,retired,broker;
+} ntvdm_vm_cancel;
 
-/* Registry control is serialized by the payload owner. I/O callbacks run on
+/* Registry control is internally synchronized. Destroy requires drained control
+ * callers. I/O callbacks run on
  * the instance's channel thread and must not call registry control or retain
  * protocol buffer pointers. Context and input_ready remain borrowed until
  * retirement succeeds. No guest address may be used as a callback context. */
 typedef struct ntvdm_vm_io {
-    DWORD (*dispatch)(void *,const console_io_request *,console_io_reply *,frontend_base_result *);
+    DWORD (*dispatch)(void *,const ntvdm_vm_cancel *,const console_io_request *,console_io_reply *,frontend_base_result *);
     DWORD (*input_pending)(void *,BOOL *);
     void (*finish)(void *);
 } ntvdm_vm_io;

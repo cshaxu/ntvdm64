@@ -1,0 +1,286 @@
+{
+  "package": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 367710,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1646,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1347,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 347,
+        "CleanupMs": 523,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67548,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46949,
+        "CleanupMs": 528,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45427,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15328,
+        "CleanupMs": 613,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12724,
+        "CleanupMs": 505,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 60365,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12800,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28383,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30480,
+        "CleanupMs": 561,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4172,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7869,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10771,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4463,
+        "CleanupMs": 528,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7012,
+        "CleanupMs": 454,
+        "Passed": true
+      }
+    ]
+  },
+  "processes": {
+    "full-build-x86": "pid=35732 start=2026-11-06T01:50:23.6129493Z\nexit=0",
+    "full-build-x64": "pid=5332 start=2026-11-06T01:49:46.7915829Z\nexit=0",
+    "focused3": "pid=17220 start=2026-11-06T01:49:24.8037375Z\nexit=0",
+    "mirror-check": "pid=34892 start=2026-11-06T01:58:29.4810117Z\nexit=0",
+    "implementation-governance": "pid=12100 start=2026-11-06T01:59:19.9920200Z\nexit=0",
+    "publication": "pid=19964 start=2026-11-06T02:03:18.9115125Z\nexit=0",
+    "full": "pid=13236 start=2026-11-06T01:53:43.5353716Z host=modern-pwsh desktop-capable-context\nexit=0"
+  },
+  "publication": {
+    "part": "p2",
+    "package": "O:\\repos.hobby\\ntvdm64\\build\\t479-s2-guest\\p2-package",
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64\\assets\\release",
+      "O:\\winnt\\system32"
+    ],
+    "hashes": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "A9D2A0EA5422EB243451FE9889E7218B3EA2394D670E4ED84DBDB95DD4A17016",
+        "Machine": 34404,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "4FB06C889A3FB13DB9E1E3BCCC2253E1A11EABC985A56B46066E5EF9DE97CFED"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "A0B2B7A9F727C97B9B2FB62328353BB88AACA8C684A1BB8FD401AFAAB8A4189E",
+        "Machine": 34404,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "CEEE1B86FF8DB09CE726E0F326C0143652B39CF045769E85C677FA97D6ACDDAA"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "20A72C322C7A8C53008891DA122A2F9F434D65C0EBA73F7F2F17D0E3285356AC",
+        "Machine": 34404,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "88BDC7CAE7269CD6971A0A18D0996D42CCC3A96374FCF37553A67100A56F622F"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "877AAFEA523192D1CDB94C04772EF8BCD3279DFF4A70D0005ADBA7157E60DF37",
+        "Machine": 332,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "9511BD3D1FC25767EE7A51559C0EE21DACC5525BF39F19C2AF5B708598C84AA4"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "E8040D3FFA410ABDCBEC7F99E1765CDA8A052E61A99E9D92BC5E69E9F0BFD849",
+        "Machine": 34404,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "9414A488C5411C96FF8FF26966F5B315A5B52FC30A34113371A8009ECBC3B6C5"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "A1387D5E8F9A57593B63A987931EBA92C0E0144587506A6BC07347D2AA9AAB78",
+        "Machine": 34404,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "B00D18815D2A751C835E7402C97252132823B1AA22D432D15E731BEE1FD55F9A",
+        "Machine": 332,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "5C17CE4D63F9371E87F0E4DE49AD7DE6183FBACC74CD7A480943B258406B4F79",
+        "Machine": 332,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "4EDA8B0CEC1CBB7FBC8A1AF9A88184325522FDEB428E77365B6D4960174D5706",
+        "Machine": 332,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "D8809D0340D4D7CB47605D0019449C0B438775E566325E123EE49EAB474EE812"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "CA5CAC879E8A11616FAEF8215F26FD3539475A2E6A27275A646BCD3E580BEE9F",
+        "Machine": 34404,
+        "PackageId": "a0f0dc2c-9f29-4bbe-8dad-8859cabea128",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      },
+      {
+        "Name": "nthook32-LICENSE.txt",
+        "Sha256": "F968C2D86BA2A2F483E47431C7CD8D78878B239A47B34CBB792AC7FE5FCD04BE"
+      }
+    ],
+    "backup": "O:\\repos.hobby\\ntvdm64\\build\\t479-s2-guest\\p2-publication-backup",
+    "verifiedUtc": "2026-11-06T02:03:25.5809308Z"
+  },
+  "mirror": {
+    "files": 1055,
+    "exact": 482,
+    "format_only": [],
+    "missing_original": [],
+    "evidence_sha256": "08eda91a53a08107722af2204031967ae27f2959833a5de9d15f587fb141f7f3"
+  },
+  "code": {
+    "summary": {
+      "src/": {
+        "added": 217,
+        "deleted": 68,
+        "net": 149
+      },
+      "test/": {
+        "added": 108,
+        "deleted": 20,
+        "net": 88
+      }
+    },
+    "files": [
+      {
+        "path": "src/common/frontend-base/channel.c",
+        "added": 3,
+        "deleted": 2
+      },
+      {
+        "path": "src/common/frontend-base/channel.h",
+        "added": 6,
+        "deleted": 1
+      },
+      {
+        "path": "src/ntcon-exe/console_channel.c",
+        "added": 2,
+        "deleted": 1
+      },
+      {
+        "path": "src/ntvdm-exe/frontend/vm_frontend.c",
+        "added": 101,
+        "deleted": 30
+      },
+      {
+        "path": "src/ntvdm-exe/frontend/vm_frontend.h",
+        "added": 8,
+        "deleted": 2
+      },
+      {
+        "path": "src/ntvdm-exe/frontend/vm_host.c",
+        "added": 91,
+        "deleted": 30
+      },
+      {
+        "path": "src/ntvdm-exe/frontend/vm_host.h",
+        "added": 6,
+        "deleted": 2
+      },
+      {
+        "path": "test/common/frontend-base/channel_test.c",
+        "added": 27,
+        "deleted": 6
+      },
+      {
+        "path": "test/integration/broker_frontend_bootstrap_test.c",
+        "added": 4,
+        "deleted": 5
+      },
+      {
+        "path": "test/ntvdm-exe/frontend/vm_frontend_test.c",
+        "added": 77,
+        "deleted": 9
+      }
+    ]
+  }
+}

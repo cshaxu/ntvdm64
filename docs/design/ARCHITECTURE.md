@@ -48,6 +48,23 @@ the full broker identity. The actual guest driver/bridge remains queued.
 [Current](../states/CURRENT.md), [host composition evidence](../etc/evidence/m0-t477-s3-host-composition.md)
 and [monitor evidence](../etc/evidence/m0-t477-s4-vm-groups.md) record delivery.
 
+## VM host lifetime and dispatch cancellation - T479 S2
+
+The NTVDM host registry pins payloads during control calls. Its locks protect
+list/state changes only; authenticated RPC and thread joins occur outside them.
+Per-VM admission and retirement are serialized without blocking unrelated VMs.
+Close rejects new calls and drains existing references; destroy requires the
+owner to have stopped its control callers. Guest/CCPU and I/O callbacks must
+not synchronously join their own control or channel execution.
+
+Frontend dispatch receives borrowed channel-stop and worker-lifetime handles.
+A VM provider additionally observes VM invalidation and broker death when
+waiting for guest application. Local invalidation cancels unavailable guest
+work; it does not authorize independent worker/frontend process exit. NTSRV
+still decides association and lifecycle. VM launch obtains a frontend and
+execution capability pair through existing NTSRV authentication, without
+changing the hosting worker's upstream association.
+
 ## Generic integration libraries — T474 S3
 
 `lib-win32/rpc`, `lib-win32/io`, `lib-win32/file`, `lib-win32/process-attributes`, `lib-win32/process-observation`, `lib-win32/process-hook` and `lib-win32/handle` provide product-independent local RPC binding, async

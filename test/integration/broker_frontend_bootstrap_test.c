@@ -290,9 +290,9 @@ typedef struct vm_host_fixture {
     common_frontend_location first,second;
     DTASKMGR_KEY first_row;
 } vm_host_fixture;
-static DWORD vm_dispatch(void *context,const console_io_request *request,
+static DWORD vm_dispatch(void *context,const ntvdm_vm_cancel *cancel,const console_io_request *request,
     console_io_reply *reply,frontend_base_result *result)
-{(void)context;(void)request;(void)reply;(void)result;return ERROR_NOT_SUPPORTED;}
+{(void)context;(void)cancel;(void)request;(void)reply;(void)result;return ERROR_NOT_SUPPORTED;}
 static DWORD vm_pending(void *context,BOOL *pending)
 {(void)context;*pending=FALSE;return ERROR_SUCCESS;}
 static void vm_finish(void *context){(void)context;}
@@ -337,9 +337,8 @@ static DWORD vm_host_begin(vm_host_fixture *fixture)
     if(!error)error=ntvdm_vm_payload_begin(fixture->host,&fixture->payload);
     if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,10,fixture->input,&io,NULL,&fixture->first);
     if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,0x10000000bULL,fixture->input,&io,NULL,&fixture->second);
-    if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->first,&origins[0]);
-    if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->second,&origins[1]);
-    for(i=0;i<2 && !error;++i)error=OpenNtBaseClientAcquireConsoleContext(origins[i],&contexts[i]);
+    if(!error)error=ntvdm_vm_host_launch_context(fixture->host,&fixture->first,&origins[0],&contexts[0]);
+    if(!error)error=ntvdm_vm_host_launch_context(fixture->host,&fixture->second,&origins[1],&contexts[1]);
     if(!error && compare(contexts[0],contexts[1]))error=ERROR_INVALID_DATA;
     if(!error)error=vm_snapshot(fixture,TRUE);
     for(i=0;i<2;++i){if(origins[i])CloseHandle(origins[i]);if(contexts[i])CloseHandle(contexts[i]);}

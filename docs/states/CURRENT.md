@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T479 S2** - guest multitasking bridge: design blind-spot audit and resolution.
+**Active: M0 T479 S3** - per-request host command preparation for guest multitasking.
 The accepted shared-library side stage is closed; this is the resumed guest mainline.
 
 ## Active Packet
@@ -10,28 +10,37 @@ The accepted shared-library side stage is closed; this is the resumed guest main
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
-| Identifier Mode | M0 T479 S2/guest-bridge, design/proof phase; Ordinary Mode, single implementer/reviewer. |
-| Admission And Approval | Owner accepts and closes S2/shared-library-import, then requests continued discovery and resolution of guest multitasking design blind spots. |
-| Objective | Resolve concrete continuation, identity, command, notification, I/O and retirement ownership gaps against actual source; identify finite executable proof obligations without claiming untested feasibility. |
+| Identifier Mode | M0 T479 S3/host-command-preparation, implementation phase; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner approves the host-first S2--S7 roadmap and continuous execution; each S builds, tests, publishes, commits and pushes before advancing. |
+| Objective | Separate per-request command/environment/directory/handle/result ownership, reusing existing TLS handle adaptation and launch services; preserve the ordinary DOS route. No guest multitasking entry is enabled in this stage. |
 | Non-goals | No original guest changes, hardware V86 monitor, periodic polling, timed suspend/resume, new transport, semantic concessions or unrelated features. |
-| Reference Baseline | 967ef3d31 accepted shared import; S1 research closure and retained original-source call-chain evidence. |
-| Files And ABI Surface | Guest bridge plan/design and evidence; inspect original COMMAND/CCPU/device paths, VMM declarations, frontend-base, NTVDM adapters and NTSRV contracts. No runtime ABI frozen merely from declarations. |
+| Reference Baseline | S2 host foundation delivery; package a0f0dc2c-9f29-4bbe-8dad-8859cabea128, Full 16/16; original call-chain evidence with corrected TLS standard-handle mapping. |
+| Files And ABI Surface | ntvdm-exe/command and win32 command adapter, existing common launch facilities and matching tests/build declarations; minimal registered original hook only if source-proven necessary. Guest remains immutable. |
 | Applicable Rules | Execution, architecture/coding/document rules and source policy; immutable original guest and minimum registered mirror differences. |
-| Verification | Exact source call chains and owner/state/ordering matrix, negative/race analysis, admitted isolated proof where justified; governance and source-diff review for research delivery. |
-| Expected Markers | Finite resolved design findings, specific rejected shortcuts, concrete remaining runtime checks with owners and pass conditions. |
-| Asset Needs | Read-only original sources and retained research; current published package unchanged for documentation-only work. |
+| Verification | Source/capture/launch ownership review; independent simultaneous command snapshots, directories, streams and results; failure cleanup and ordinary nested DOS/native regression; cached ten-component build, full gates and publication. |
+| Expected Markers | No retained guest pointers or process-global request mutation; existing TLS handle protection preserved; independent copied inputs and resource ownership with exact results and rollback. |
+| Asset Needs | Existing immutable guest fixtures and complete current ten-image package, stable Ninja/ccache roots; no guest rebuild. |
 | Reporting Requirements | Separate confirmed source facts, design decisions and runtime evidence; explain capability consequences rather than repeat next-step slogans. |
 | Stop Conditions | New semantic concession, guest patch, unknown provenance or incompatible architecture requires explicit disposition; missing proof is not a pass. |
-| Exit Criteria | Reviewed design/proof results and bounded implementation handoff; no S2 runtime closure without registration/event/lifecycle acceptance. |
-| Original Owner Request | Accept and close this shared-library S, then continue finding and resolving multitask-payload design blind spots. |
+| Exit Criteria | Host command preparation and regression gates pass; complete package published, committed and pushed. S4 then proves actual guest registration/wait/wake; this stage cannot claim guest parallel execution. |
+| Original Owner Request | Set a persistent goal and execute approved host-first S2--S7 continuously, delivering each stage before advancing. |
 | Similar-Issue Sweep | Both 54:08/0A; system/ordinary/reused VMs; single-task transitions; nested children; input/output/failure; NIDDB independent owner. |
-| Temporary Evidence | build/t479-s2-guest; this S owns 60-minute phases, 2 GiB, 15-minute no-progress review. |
+| Temporary Evidence | build/t479-s3-command; this S owns 60-minute phases, 2 GiB, 15-minute no-progress review. Prior S2 evidence remains until its reviewed summary and commit are durable. |
+
+## S2 Host Foundation Closure
+
+[Implementation and closure](../etc/evidence/m0-t479-s2-host-foundation.md)
+records independent VM retirement, cancellable dispatch and paired launch
+contexts. Cached complete builds, actual RPC, 233 VM assertions and Full 16/16
+pass; package a0f0dc2c-9f29-4bbe-8dad-8859cabea128 is published and hash-verified
+at both destinations. No original mirror/guest changes. Continuous execution
+now admits S3; actual guest multitasking remains unproved until later stages.
 
 ## S2 Guest Design Checkpoint
 
 [Boundary audit](../etc/operations/m0-t479-s2-guest-design-boundaries.md) records
 seven concrete hazards and selected corrections: retirement locking, dispatch
-cancellation, paired launch capabilities, per-request COMMAND state, VM death,
+cancellation, paired launch capabilities, single-active COMMAND state (standard handles already TLS), VM death,
 callback restoration and independent wakeup. Guest ABI/event execution and the
 complete I/O provider remain explicit S2--S5 proof gates, not passed claims.
 No runtime or published image changes accompany this research checkpoint.
@@ -203,10 +212,10 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The accepted [T479 shared import](../etc/evidence/m0-t479-s2-shared-import.md) publishes
+The delivered [T479 host foundation](../etc/evidence/m0-t479-s2-host-foundation.md) publishes
 the ten-image product at application version 0.0.479 and protocol 67. Full
 16/16 selected gates pass and both publication targets match. Guest media is unchanged.
-Actual guest VM discovery and driver integration are the resumed S2 mainline; executable acceptance remains pending.
+S3 prepares independent host requests; actual guest VM discovery and driver execution remain S4 acceptance obligations.
 The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
 remains retained baseline evidence.
 

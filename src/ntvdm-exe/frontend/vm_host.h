@@ -4,14 +4,18 @@
 
 typedef struct ntvdm_vm_host ntvdm_vm_host;
 
-/* The worker owns this object until all callers have stopped. Registry control
- * is serialized here; I/O callbacks must not reenter these control functions. */
+/* The worker owns this object until all callers have stopped. Control calls may run concurrently; no registry lock spans RPC or joins.
+ * These synchronous control calls belong off the CCPU and I/O callback threads. */
 DWORD ntvdm_vm_host_create(ntvdm_vm_host **);
 DWORD ntvdm_vm_payload_begin(ntvdm_vm_host *,uint64_t *payload);
 DWORD ntvdm_vm_payload_end(ntvdm_vm_host *,uint64_t payload);
 DWORD ntvdm_vm_host_register(ntvdm_vm_host *,uint64_t payload,uint64_t vm,HANDLE input_ready,
     const ntvdm_vm_io *,void *context,common_frontend_location *);
 DWORD ntvdm_vm_host_origin(ntvdm_vm_host *,const common_frontend_location *,HANDLE *);
+/* Returns two owned capabilities or neither. NTSRV authenticates the VM root;
+ * acquiring its execution context never rebinds this worker's upstream root. */
+DWORD ntvdm_vm_host_launch_context(ntvdm_vm_host *,const common_frontend_location *,
+    HANDLE *frontend,HANDLE *execution);
 DWORD ntvdm_vm_host_retire(ntvdm_vm_host *,const common_frontend_location *);
 /* Terminal: forbids new admission, joins all callbacks, retains the object so
  * racing control callers receive cancellation rather than a freed pointer. */

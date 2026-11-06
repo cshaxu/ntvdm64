@@ -1191,3 +1191,7 @@ the pinned source intersection, compatibility findings and generic-test plan.
 [T479 S2 shared import evidence](evidence/m0-t479-s2-shared-import.md) records source identity, common tests and delivery verification.
 
 [T479 S2 guest design boundaries](operations/m0-t479-s2-guest-design-boundaries.md) records source-confirmed hazards, selected corrections and finite executable proof gates.
+
+[T479 S2 host foundation](evidence/m0-t479-s2-host-foundation.md) records independent retirement, provider cancellation, paired launch contexts and their actual verification.
+
+[T479 S2 host verification](evidence/m0-t479-s2-host-verification.json) retains complete gate and publication results.
