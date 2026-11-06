@@ -1,0 +1,21 @@
+metrics mintrack=136,39 size=36,22 frame=4,4 dpi=96
+minimized-metrics=237,39
+fixed-caption minmax-in min=136,39 max=1300,740
+fixed-caption request=154,240 actual=154,240 style=04CA0000
+sizeable-caption minmax-in min=136,39 max=1300,740
+sizeable-caption request=154,240 actual=154,240 style=04CE0000
+popup-border request=154,240 actual=154,240 style=80800000
+minimized-caption minmax-in min=136,39 max=1300,740
+minimized-caption position message=0046 size=237,39 flags=8134
+minimized-caption minmax-in min=136,39 max=1300,740
+minimized-caption position message=0047 size=237,39 flags=893C
+minimized-caption request=154,240 actual=237,39 style=20CA0000
+minimized-caption position message=0046 size=154,240 flags=001C
+minimized-caption minmax-in min=136,39 max=1300,740
+minimized-caption position message=0047 size=237,39 flags=081D
+minimized-caption position message=0046 size=237,240 flags=8160
+minimized-caption minmax-in min=136,39 max=1300,740
+minimized-caption position message=0047 size=237,240 flags=8160
+minimized-caption after-move154-and-restore=237,240 iconic=0
+minimized-caption position message=0046 size=0,0 flags=0097
+minimized-caption position message=0047 size=237,240 flags=1897

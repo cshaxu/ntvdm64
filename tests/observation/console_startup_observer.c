@@ -2004,6 +2004,16 @@ int main(int argc, char **argv)
     startup.hStdInput = input;
     startup.hStdOutput = output;
     startup.hStdError = output;
+    /* Explicit startup-show comparison on the owned test process only. */
+    {
+        char show[16];
+        DWORD count=GetEnvironmentVariableA("MVDM_OBSERVER_STARTUP_SHOW",show,sizeof(show));
+        if(count) {
+            if(count>=sizeof(show) || (strcmp(show,"normal") && strcmp(show,"minimized")))return 64;
+            startup.dwFlags |= STARTF_USESHOWWINDOW;
+            startup.wShowWindow = !strcmp(show,"normal") ? SW_SHOWNORMAL : SW_SHOWMINIMIZED;
+        }
+    }
     {
         size_t command_length = 0u;
         int argument_index;

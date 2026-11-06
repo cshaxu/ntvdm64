@@ -2,13 +2,26 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T478 S43 is locally closed.**
+**No active M/T/S packet. M0 T478 S44 is locally closed.**
 
-T478 remains unfinished. Resume the inherited normal-window geometry question
-and the explicitly deferred S42 inventory/handoff reconciliation. No new global
-audit, added tolerance, guest change, O:/winnt write or push is authorized.
-The owner's sequential continuation approval remains in force. CURRENT's
-temporary size exception remains until final reconciliation.
+T478 remains unfinished: resume the explicitly deferred S42 inventory/handoff
+reconciliation. The S44 geometry investigation preserves original minimized
+window sizing and modern USER metrics; no application-specific width fix is
+justified. No O:/winnt write or push. Sequential owner approval remains in
+force. CURRENT retains its temporary size exception pending reconciliation.
+
+## S44 Closure Record
+
+[Evidence](../etc/evidence/m0-t478-s44-window-sizing.md) and
+[results](../../artifacts/mvdm-audit/t478-final/sizing/results.json) trace the
+same HWND's154-to237 change to resizing while minimized. Native USER-only
+control reproduces it; explicit normal startup retains the minimized creation
+style. GETMINMAXINFO conversion is unchanged. Original xxxAdjustSize uses the
+minimized-size metric in this case. No product repair or new pixel policy.
+Diagnostic source edits are byte-restored and ordinary WOW32 rebuilt. The
+unchanged S43 release passes normal-start flag/reset/open/close/launcher exit;
+all11 published hashes match. S43 Full16/16 remains the package gate. This
+is test/evidence delivery, not a new release or broader app/T478 closure.
 
 ## S43 Closure Record
 

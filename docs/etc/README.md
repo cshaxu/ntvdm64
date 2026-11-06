@@ -1299,3 +1299,4 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S41 VDD/optical investigation](evidence/m0-t478-s41-vdd-optical-investigation.md): original VCDEX recovery, virtual optical/VDD verification and local eleven-image delivery completed.
 
 - [T478 S43 GDI color-alias repair](evidence/m0-t478-s43-gdi-color-alias.md): delivered real-alias/pseudo-color repair, real guest gray background, Full16/16 and local release; width remains separate.
+- [T478 S44 window sizing investigation](evidence/m0-t478-s44-window-sizing.md): same-run minimized-size cause, native control reproduction and unchanged-release gameplay; no product sizing override.

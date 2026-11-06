@@ -1,0 +1,15 @@
+window-ready elapsed=797 inherited-desktop=0
+owned-window=00B109AA pid=27812
+restored-window outer=237,240 client=221,181 class-brush=00900014 iconic=0
+PASS unchanged title and native frame=1
+board-ready elapsed=31 cell=3cc8733b counter=49380c32
+capture=before ok=1
+phase=flag elapsed=15 cell=62c0567b reference=3cc8733b
+capture=flag ok=1
+counter-before=49380c32 counter-flag=17940c32
+phase=reset elapsed=47 cell=3cc8733b reference=3cc8733b
+capture=reset ok=1
+phase=open elapsed=16 cell=c7639615 reference=3cc8733b
+capture=open ok=1
+PASS flag changed cell+counter, F2 restored covered cell, left click changed cell
+PASS owned game window closed after WM_CLOSE

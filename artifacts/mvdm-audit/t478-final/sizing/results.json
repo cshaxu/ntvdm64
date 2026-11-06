@@ -1,0 +1,60 @@
+{
+  "status": "investigation-complete-no-product-change",
+  "package": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+  "releaseImagesVerified": 11,
+  "nativeMinTrack": 136,
+  "nativeMinimizedWidth": 237,
+  "requested": [
+    154,
+    240
+  ],
+  "nativeMinimizedThenMoveRestore": [
+    237,
+    240
+  ],
+  "wowNormalStartRestored": [
+    237,
+    240
+  ],
+  "getMinMaxInfoUnchanged": true,
+  "geometryRoot": "WS_MINIMIZE creation then resize while minimized; native USER matches original minimized-size branch",
+  "guestMutation": false,
+  "productChange": false,
+  "diagnosticPublished": false,
+  "restoredSources": [
+    {
+      "restored": true,
+      "sha256": "F3373EFF80582BC6C6D7CB20D55F046209384FD4FCA39D54EE5567F144E74384",
+      "name": "wow_window_words_binding.c"
+    },
+    {
+      "restored": true,
+      "sha256": "DF7672B6DEC8D748E4B52E74FC93BB767F3100DA07074697C61FFCAFD24E8C5F",
+      "name": "wow_window_creation_binding.c"
+    }
+  ],
+  "normalReleaseGameplay": "pass, flag/reset/open/normal-exit",
+  "full": "S43 unchanged package Full16/16 reused; not rerun for test/document-only change",
+  "inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\native_window_sizing_probe.c",
+      "Hash": "E44E4F582369C88E81F9A0DCC0244F598DAF10F5AFD7E53BDE0165EB0F8B3BAA"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\wow_window_sizing_diagnostic.h",
+      "Hash": "30051AB422940FAD2E2B2D73185B00E1F79D69072CF65C43BCCC27052355F15C"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\console_startup_observer.c",
+      "Hash": "C2767BA404C66A714574B714430F6FCB8D05554D40E1B4837CA86400436A903D"
+    },
+    {
+      "Path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\createw.c",
+      "Hash": "DA4A0C0E0A85DBE88130F01CCCEECF9DA08A0FEBF3F841458D2A3CBD707A57D7"
+    },
+    {
+      "Path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\minmax.c",
+      "Hash": "9E8B6659598BF8BA09FDCFC0B9D21E8E9801F39F8795863FE0B568E658C93F3A"
+    }
+  ]
+}
