@@ -1,0 +1,192 @@
+{
+  "stage": "T478 S28",
+  "disposition": "Owner-approved retained original allocation-exhaustion limitation; no production changes",
+  "owner_decision": "登记原版内存耗尽限制，保持正常路径不变（推荐）",
+  "original_comparison": [
+    {
+      "file": "vrinit.c",
+      "function": "VrQueueCompletionHandler",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrHandleAsyncCompletion",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrRaiseInterrupt",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrDismissInterrupt",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrUninitialize",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrQueueCompletionHandler",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrHandleAsyncCompletion",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrRaiseInterrupt",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrDismissInterrupt",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrinit.c",
+      "function": "VrUninitialize",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrinit.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrnmpipe.c",
+      "function": "VrTerminateNamedPipes",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "release_body_equal": true
+    },
+    {
+      "file": "vrnmpipe.c",
+      "function": "VrTerminateNamedPipes",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrnmpipe.c",
+      "release_body_equal": true
+    }
+  ],
+  "queue_reproduction": "REDIR_ASYNC_BASELINE checks=9 failures=0 exception=c0000005\n",
+  "queue_inputs": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "A2E4878558786715E56BDA92357C5E1DB94CEF2949C1B0879BED44F1E7807866",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\vdmredir\\vrinit.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "3A945A88594294DB0D6D4EC98BEB1BAF4A61F7537276E7FCFEF6E12DEE3D18D8",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s28\\queue-baseline\\redir_queue_exact.h"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "2F0B178676D401D84CF00D3E0103E6CB8DF1B9AB4EBCCA895536DD83C0D7F8C1",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s28\\queue-baseline\\queue-test.exe"
+    }
+  ],
+  "existing_publication": {
+    "exit_code": 0,
+    "elapsed_ms": 359,
+    "executable_sha256": "5B82987FFB777BDB83369F9E5EC349C831F796487DD6F46661BBD2452CE5C898",
+    "scope": "Production async adapter/location/session/lease; controlled memory, not real pipe callback"
+  },
+  "publication_assertions": "PASS partial read completion succeeds\nPASS payload precedes error then count publication\nPASS partial read preserves actual bytes and error\nPASS release is idempotent and leases are closed\nPASS destination failure rejects completion\nPASS failure does not publish later completion words\nPASS failed commit closes lease\nPASS destination failure rejects completion\nPASS failure does not publish later completion words\nPASS failed commit closes lease\nPASS destination failure rejects completion\nPASS failure does not publish later completion words\nPASS failed commit closes lease\nPASS oversized read publishes nothing\nPASS write completion does not copy staging back\nPASS zero read publishes only completion words\nPASS unbound thread cannot publish\nPASS original completion worker binds owner\nPASS bound original completion worker publishes\nPASS completion returns thread binding\nPASS stale owner epoch rejected before publication\nPASS cancelled owner rejects original completion entry\nPASS ended guest memory cannot publish\nPASS final session cleanup succeeds\nassertions=24 failures=0\n\n",
+  "unchanged_package": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "AA66572E5C156FDA18499EF5B9FF9F454A0736661D0DD6470A12140524FCE088",
+      "Machine": 34404,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "FF10622B90A9BB086A2B7DFE8D2203AB783BBDA0E91EBA3E4BBC30FBAEFA618B",
+      "Machine": 34404,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "275522BC5379DB55BA0EB8DCD6846A951A52F7EE18D7B69CE2E2C69B0840C8EB",
+      "Machine": 34404,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "EE75ABA2BB6BD033C309A3AF1AEDD10599E5C4F401DEEDF528AB0EA0C413C595",
+      "Machine": 332,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "503D4F724179E4B27F3A1568312270E7FA81D5B28A9B111AABF55AD250285100"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "793D8D2E5A26A2ADF536E2DAB1E51D24F7B615723B3A9A3168688D3A3CC157E8",
+      "Machine": 34404,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "ADD44614E91314AB6FDAB57EB9FDA5EAEFCEC7B583B55FA2CD2D2B51C687264F",
+      "Machine": 34404,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "4F8262905AC97596144274DE69717DDA54535AA1B8B3914EF266E7ADAC196253",
+      "Machine": 332,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "3945D74D3F3250A1385C594209B8A688030302E3CEF1E503145C4AC1FA3E408E"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "9ED95D129F5295F4101636CC0A5EA2CA1943083BA0597DC691D926FB0FCE7C54",
+      "Machine": 332,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "8994FFE2C47749A6B711E7DA77238C99441B58AE5A494B04E6169A8E409BD607"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "6E6CE4754C869DAD7CBC8E034F62B990820E4239FFEA5A4F72F3C21B328108E2",
+      "Machine": 332,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "8057F0D6B81529FB4F8B461DB7F4DC9831A02FD080B73115028AAAB30A8C55B3"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "7ACC059F14D77E3C75CC7BE66276332E89C974137925B73AFA07A5FAA8DC94E7",
+      "Machine": 34404,
+      "PackageId": "c08075be-80dc-453c-b178-b0377ff9bb14",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "limitations": [
+    "C0000005 is an expected reproduction, not a repaired path.",
+    "No generic drain guarantee proven; task cleanup differs from DLL uninitialization.",
+    "No live network completion fault or new guest test performed.",
+    "S27 Full evidence retained only for unchanged product; no new Full claim."
+  ]
+}

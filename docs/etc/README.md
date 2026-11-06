@@ -1269,3 +1269,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S26 spool failure ownership](evidence/m0-t478-s26-spool-failure.md): provider-contract correction and untransferred printer/carrier/string cleanup.
 
 - [T478 S27 DLC completion event](evidence/m0-t478-s27-dlc-event.md): minimal original second-event check and explicit provider/initialization limits.
+
+- [T478 S28 async investigation](evidence/m0-t478-s28-async-review.md): owner-approved original exhaustion limit, reproduction and separated lifecycle evidence.

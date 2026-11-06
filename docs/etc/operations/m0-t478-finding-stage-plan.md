@@ -353,3 +353,11 @@ absence status 07, coherent build and Full 16/16 pass. Worktree release is
 hash-verified. Original partial-initialization rollback limits and the accepted
 DLC capability exclusion remain; first-launch 0x6BE is not claimed fixed.
 S28/finding 62 follows.
+
+## S28 disposition
+
+[S28](../evidence/m0-t478-s28-async-review.md) reproduces the original failed
+allocation/empty-dequeue fault and passes 24 existing publication checks. The
+owner explicitly accepts the original exhaustion limit and requires normal
+paths unchanged. No product repair or generic drain guarantee is claimed;
+tests/docs only, exact S27 release retained. S29/finding 65 follows.

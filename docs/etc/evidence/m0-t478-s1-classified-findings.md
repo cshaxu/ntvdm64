@@ -49,7 +49,7 @@
 | 57 | [WOW fax client](../../../artifacts/mvdm-audit/shard-1/wow-fax-owner-review.md) | 原版代码风险：当前传真分配后先清零再检查 NULL 等路径仍存在；fax 提供者与实际失败未确认 |
 | 58 | [WOW printer setup and spool failure paths](../../../artifacts/mvdm-audit/shard-3/wow-spool-loader-callers-review.md) | [S26](m0-t478-s26-spool-failure.md) 已核对 ClosePrinter 失败也消费句柄，FreePrn 无需改动；修复原版启动失败、载体创建失败及设置入口加载失败的资源遗漏。实际 raw provider 限制仍保留 |
 | 59 | [DLC completion event](../../../artifacts/mvdm-audit/shard-1/vdmredir-dlc-completion-event-audit.md) | 原版代码问题：当前第二事件失败检查仍指向第一个事件；DLC 提供者与故障触发未证实 |
-| 62 | [Redirector asynchronous completion](../../../artifacts/mvdm-audit/shard-3/redir-async-role-review.md) | 原版代码风险：当前异步队列分配失败后仍可能发送中断、退出缺少明显本地 drain；尚无真实触发证明 |
+| 62 | [Redirector asynchronous completion](../../../artifacts/mvdm-audit/shard-3/redir-async-role-review.md) | [S28](m0-t478-s28-async-review.md) 已隔离复现分配失败后的空队列异常；用户明确接受原版内存耗尽限制，正常路径不变。未声明通用 drain 或修复 |
 
 ## 自主实现问题或条件风险：4 行
 

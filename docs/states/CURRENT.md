@@ -291,3 +291,9 @@ T478 S27 [corrects the DLC second-event check](../etc/evidence/m0-t478-s27-dlc-e
 33 focused checks, selected-image binding, real DOS unavailable-provider witness,
 coherent build and Full 16/16 pass; exact worktree release published.
 Original DLC capability/rollback limits remain. S28/finding 62 follows.
+
+## S28 Closure Record
+
+T478 S28 [records the owner-approved original exhaustion limit](../etc/evidence/m0-t478-s28-async-review.md).
+Fault reproduced; 24 existing publication checks pass. No product changes,
+no new drain guarantee; exact S27 release retained. S29/finding 65 follows.
