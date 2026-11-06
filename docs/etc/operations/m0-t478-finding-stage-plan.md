@@ -294,3 +294,12 @@ and normal nested/single retirement with real native resources (57 checks).
 Original failed-restore/count transitions remain explicit; caller return
 contracts do not justify an invented universal abort/retry guarantee. No product
 changes; S20 release remains exact. S22/finding 51 follows.
+
+## S22 disposition
+
+[S22](../evidence/m0-t478-s22-font-output.md) limits original kerning conversion
+to the native returned count. Twenty focused checks and a real Win16 short-
+return witness pass; the prior package fails that same guest tail check.
+Other original font failure/invalid-input boundaries remain explicitly bounded,
+not declared repaired. Coherent build, 16 Full gates and exact worktree release
+pass. S23/finding 55 follows.

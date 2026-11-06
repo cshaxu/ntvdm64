@@ -344,7 +344,10 @@ ULONG FASTCALL WG32GetKerningPairs(PVDMFRAME pFrame)
     ul = GetKerningPairs(HDC32(parg16->f1), parg16->f2, lpkrnpair);
 
     if (FETCHDWORD(parg16->f3)) {
-        putkerningpairs16 (FETCHDWORD(parg16->f3), parg16->f2, lpkrnpair);
+        /* MVDM-HOST-DIV-877: only returned pairs contain native output. */
+        if (ul) {
+            putkerningpairs16 (FETCHDWORD(parg16->f3), ul, lpkrnpair);
+        }
         free_w (lpkrnpair);
     }
 

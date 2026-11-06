@@ -245,3 +245,11 @@ T478 S20 [repairs the failed DIB bitmap destructor](../etc/evidence/m0-t478-s20-
 ## S21 Closure Record
 
 T478 S21 [verifies normal original DIB retirement](../etc/evidence/m0-t478-s21-dib-retirement.md): 57 bounded checks pass, failure/count limits retained, product release unchanged.
+
+## S22 Closure Record
+
+T478 S22 [repairs the confirmed kerning output count](../etc/evidence/m0-t478-s22-font-output.md)
+with 20 focused checks, a baseline-failing/current-passing real Win16 witness,
+coherent build and 16/16 Full gates. Exact worktree release published; other
+original font failure limits remain explicit. S23 follows under continuous
+authorization; no O:/winnt write or push.

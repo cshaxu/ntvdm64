@@ -1257,3 +1257,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S20 DIB failure destructor](evidence/m0-t478-s20-dib-registration.md): real GDI ownership correction and explicit original post-selector rollback limit.
 
 - [T478 S21 DIB retirement disposition](evidence/m0-t478-s21-dib-retirement.md): 57 native/extracted-owner checks and explicit original failure/count limits.
+
+- [T478 S22 font output count](evidence/m0-t478-s22-font-output.md): real Win16 kerning copy-boundary repair and explicit original font-query limits.

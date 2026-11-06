@@ -1,0 +1,285 @@
+{
+  "baseline": "dfb396e21",
+  "sources": {
+    "files": [
+      {
+        "path": "src\\mvdm-host\\wow32\\wgdi31.c",
+        "sha256": "a8506e1732948134d112501c2fc7910b7aa3c00bc8ca506adfebe6935af87fc3"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi31.c",
+        "sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wgdi31.c",
+        "sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6"
+      }
+    ],
+    "functions": [
+      {
+        "function": "WG32GetFontData",
+        "currentMatchesOpenNT": true,
+        "currentMatchesNT45": true,
+        "originalsMatch": true
+      },
+      {
+        "function": "WG32GetGlyphOutline",
+        "currentMatchesOpenNT": true,
+        "currentMatchesNT45": true,
+        "originalsMatch": true
+      },
+      {
+        "function": "WG32GetKerningPairs",
+        "currentMatchesOpenNT": false,
+        "currentMatchesNT45": false,
+        "originalsMatch": true
+      },
+      {
+        "function": "WG32GetOutlineTextMetrics",
+        "currentMatchesOpenNT": true,
+        "currentMatchesNT45": true,
+        "originalsMatch": true
+      },
+      {
+        "function": "WG32GetCurrentPositionEx",
+        "currentMatchesOpenNT": true,
+        "currentMatchesNT45": true,
+        "originalsMatch": true
+      },
+      {
+        "function": "WG32GetCharABCWidths",
+        "currentMatchesOpenNT": true,
+        "currentMatchesNT45": true,
+        "originalsMatch": true
+      }
+    ]
+  },
+  "hostBaseline": "NATIVE metrics return=48 first=00 last=00\nNATIVE bitmap return=60 tail=00 last=00\nNATIVE kerning return=120 tail=a5 last=a5\nFAIL kerning tail untouched\nFAIL no unavailable kerning output\nFONT_OUTPUT checks=20 failures=2\n",
+  "hostCurrent": "NATIVE metrics return=48 first=00 last=00\nNATIVE bitmap return=60 tail=00 last=00\nNATIVE kerning return=120 tail=a5 last=a5\nFONT_OUTPUT checks=20 failures=0\n",
+  "guestBaseline": {
+    "wow": "FF20255A34D73FE466A349723B444BCEF0D75785A9B9F8B556ABD26D94BA5320",
+    "package": "E5706D367D635007BFC20456EDAC90E6C0A0C093D6DC5E829A37F924C21155B2",
+    "returned": 120,
+    "errors": 1,
+    "requested": 123,
+    "count": 120
+  },
+  "guestCurrent": {
+    "count": 120,
+    "requested": 123,
+    "errors": 0,
+    "package": "B33507910A3B8C4C8E3E0C6B4192AAB63257B85E36BCCA9A71956FE665ACC651",
+    "wow": "F24008993D3C56025CC867D985B64232D7754C31ADA5853A7F6760C1DAFD59F3",
+    "returned": 120
+  },
+  "productVerification": {
+    "Suite": "Full",
+    "ElapsedMs": 453682,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3681,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 4414,
+        "CleanupMs": 704,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 887,
+        "CleanupMs": 618,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 70868,
+        "CleanupMs": 584,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 50754,
+        "CleanupMs": 568,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 56626,
+        "CleanupMs": 535,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 17288,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13713,
+        "CleanupMs": 590,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 115318,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13158,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29044,
+        "CleanupMs": 557,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30559,
+        "CleanupMs": 559,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5741,
+        "CleanupMs": 531,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7964,
+        "CleanupMs": 603,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10759,
+        "CleanupMs": 543,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4506,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7244,
+        "CleanupMs": 481,
+        "Passed": true
+      }
+    ]
+  },
+  "limitations": [
+    "Host fixture uses explicit guest mapping/conversion seams.",
+    "Real Win16 witness tests successful short kerning output, not arbitrary failure or selector input.",
+    "Other original failed-output and invalid-input limitations remain explicit."
+  ],
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "52D3DBC023E79F09E34B13F31EBE9CC49D7D3BC88D08B2C19DF25811F341E582",
+      "Machine": 34404,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "98673896F354FF1A04253A1FF69E9FDB5B7C94306DFEFF0172574EEDA6CE42BC",
+      "Machine": 34404,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "515DA1638DAA235E4E2D9F6AFB191DAE25761EB307A691D9F1B745CB124F7544",
+      "Machine": 34404,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "5A09C66DF54064647E82B87D1CDB050DBBA1AFC1CBACB794C2800E71F89406C4",
+      "Machine": 332,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "AED52F8EC69342E75C01284E778657D543DC9DA8593A728921132C99323C55AB"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "1D877268D6B264E4D890E2B4FBEE24183EAF30A3CF15FA7C69AC30F08A310C2D",
+      "Machine": 34404,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "A401426F758379ED97170ED1BCE87F919ED2E8DECE6458FF0AE0222565B2AA3E",
+      "Machine": 34404,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "7272791FAF592F4736F98A5C4EBDE368FA06D3A3696F48DF168B95254DA9F782",
+      "Machine": 332,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "73594940A6D9B1BBA5E2AAE153BD45BF31594405B99FD6686A4D9B36E9FDE94C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "4B679DF4DC160ECCAE854F38FBAA5761B8A61922E32F36C4AEE229271E049ADA",
+      "Machine": 332,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "B5A98766D2755810F4B97AB2953A245B6AE8C081AB6F96FAA293583B58EFE5A2"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "4EA961C1C237E21F677E4BF58F67A33267C1BC693AFC082A90EB1750EB06A23F",
+      "Machine": 332,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "A077F1440AF3B93ACD9461E3645477810BAB7F2BA4AB44A71F7EB235F9A7919B"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "47BD76DB16EE1DB003A7EEBB1CBF13B924D4295F1A090C3A2369AFA60C0169BA",
+      "Machine": 34404,
+      "PackageId": "7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "publication": "PASS ten-image worktree release package=7fdf5ef1-17fb-46e2-ac6c-30aafd0d8d49; backup=build/t478-s22/release-before; no O:/winnt write",
+  "hostFixtureHashes": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "A8506E1732948134D112501C2FC7910B7AA3C00BC8CA506ADFEBE6935AF87FC3",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wgdi31.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "1C3AA8137472447A8EE09F6B123468D07D62C028E8CAD1A6228FA4E6C07B2FB1",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s22\\current\\font_exact.h"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "E3C65FBCE370F34165563E80C7F36C41BDAAA61B019F463004026789E8996DFE",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s22\\current\\font-test.exe"
+    }
+  ]
+}
