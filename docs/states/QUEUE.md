@@ -17,18 +17,16 @@ active-packet transition does not change any candidate's proposed scope.
 | --- | --- | --- |
 | 1 | Independent mirror-diff audit and minimization — audit connected and unconnected mirror differences and prior decisions; restore or minimize changes with evidence. Runtime trace coverage is not a connection criterion. | [Proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | 2 | Independent project-wide implementation minimization — reassess original-owner choices and autonomous implementations across all components; correct earlier decisions where needed and preserve verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
-| 3 | Win3.1 interactive performance root-cause recovery — repair the failed active-interaction measurement path, attribute actual input/IRQ/CCPU/VGA/presentation cost, then change only a proved project-owned bottleneck while retaining independently correct optimizations. | [Proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md) |
-| 4 | WOW multi-window performance recovery — attribute and reduce the latency of SOL Options and other Win16 secondary windows while preserving original callback, identity and lifecycle behavior. | [Proposal](../proposals/proposal-wow-multiwindow-performance-recovery-001.md) |
-| 5 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
-| 6 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
-| 7 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
-| 8 | Guest Windows / host bidirectional launch routing research — investigate redirecting guest double-click launches to the host and routing MS-DOS VM host-command requests back to guest Windows, with explicit execution-location choices. | [Proposal](../proposals/proposal-win31-bidirectional-launch-routing-001.md) |
-| 9 | Host-rendered Win32 applications inside guest Windows — investigate host execution/rendering with guest Win3.1 window presentation and input forwarding, without Win32s or original guest modifications. | [Proposal](../proposals/proposal-win31-host-window-presentation-001.md) |
+| 3 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
+| 4 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
+| 5 | Win3.1 interactive performance root-cause recovery — repair the failed active-interaction measurement path, attribute actual input/IRQ/CCPU/VGA/presentation cost, then change only a proved project-owned bottleneck while retaining independently correct optimizations. | [Proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md) |
+| 6 | WOW multi-window performance recovery — attribute and reduce the latency of SOL Options and other Win16 secondary windows while preserving original callback, identity and lifecycle behavior. | [Proposal](../proposals/proposal-wow-multiwindow-performance-recovery-001.md) |
+| 7 | Guest Windows / host bidirectional launch routing research — investigate redirecting guest double-click launches to the host and routing MS-DOS VM host-command requests back to guest Windows, with explicit execution-location choices. | [Proposal](../proposals/proposal-win31-bidirectional-launch-routing-001.md) |
+| 8 | Host-rendered Win32 applications inside guest Windows — investigate host execution/rendering with guest Win3.1 window presentation and input forwarding, without Win32s or original guest modifications. | [Proposal](../proposals/proposal-win31-host-window-presentation-001.md) |
+| 9 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
 
-The owner moved shared implementation ownership review to the front; it is
-now admitted in the independent worktree. The external system launch
-loader candidate was removed from the queue.
-The latter's proposal remains as historical planning material; it is not pending.
+The external system launch loader candidate was removed from the queue.
+Its proposal remains as historical planning material; it is not pending.
 
 The owner accepts the original WOW32 and VDMREDIR PE runtime imports from
 NTVDM and removes their elimination candidate from the queue. Its
@@ -45,13 +43,9 @@ performance optimization out of the active task and directed its candidate to
 the end of the queue at that time. This does not waive the active task's correctness or test
 obligations, including the separately observed native-return error 1400.
 
-On 2026-10-31 the owner moved the active task's unfinished original-code recovery to the
-front; mirror-diff cleanup is now second. Its proposal contains the audit
-checkpoint and four exact-byte restorations already performed; remaining
-cleanup is queued, not admitted into the current packet. Other candidates
-retain their relative order at that checkpoint. The owner subsequently moved
-WOW multi-window performance and multitasking guest VDM frontends immediately
-after Win3.1 interactive performance, retaining the other candidates' order.
+Earlier original-recovery admissions and queue reorderings are retained in
+the planning history linked below. The nine-row table above is the current
+queue order; historical positions do not add or reorder pending work.
 
 The owner confirms the former third candidate, Windows 3.1 ordinary-Setup
 post-copy protected-mode transition recovery, is complete and directs its
@@ -68,7 +62,9 @@ also remains linked for requirement traceability; it is not a queued candidate.
 The owner prioritizes the guest multitasking bridge as the active mainline;
 other candidates retain their relative order. Committed side-task imports are admitted separately within the mixed active task.
 
-The audit-inventory recovery package remains allocated in the independent
-worktree; its imported findings and remaining plan are linked by the
-[recovery proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md).
-Importing completed work does not close its outstanding inventory.
+The original-code recovery package is closed and its results are integrated
+into main; its dedicated worktree has been deleted. The
+[current status and closure links](CURRENT.md) retains the findings and
+limitations for traceability. It is not an additional queued task, and its
+historical inventory coverage does not create pending work. The nine
+candidates above retain their current scope and order.
