@@ -2,34 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T478 S37**
+**Active: M0 T478 S38**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Original inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| Identifier Mode | M0 T478 S37, Ordinary Mode, one active S. |
-| Admission And Approval | Continuous sequential authorization; S36 local P 4a8a74a24 closed with [evidence](../etc/evidence/m0-t478-s36-shell-hook-investigation.md). |
-| Objective | Resolve finding40: actual DDEML guest-to-host owner and supported WINMM asynchronous callback/retirement boundary; restore only demonstrated missing host wiring. |
-| Non-goals | No guest/media rebuild or mutation, new DDE manager/multimedia queue, extra original tolerance, O:/winnt write or push. Do not repeat already verified classic DDE and synchronous WINMM as substitutes for async proof. |
-| Reference Baseline | 4a8a74a24; exact S34 package 03d9792b-753e-4407-8a52-883ad9bc83e3; existing DDEML module/init/register observations, T465 classic DDE and T466 WINMM ownership evidence. |
-| Files And ABI Surface | Original DDEML/classic DDE and multimedia selected owners, existing callback/native bindings and independent tests. Guest files are read-only provenance/inputs. No planned public ABI change. |
-| Applicable Rules | EXECUTION, ARCHITECTURE, CODING, DOCUMENT and source policy; original-semantics ceiling. |
-| Verification | Establish exact unchanged guest/provider inputs and actual route before interpreting failures; original/candidate source and selected-image evidence, real guest init/callback/retirement and applicable native boundaries. Product changes require coherent build, focused/Full gates and worktree assets/release. Governance and diff review before local P. |
-| Expected Markers | DDE instance/module identity and callback/transaction results; WINMM queue owner, actual supported async operation and cancel/retirement or proven original/environment limit. Missing export or old source alone is not unavailability proof. |
-| Asset Needs | Existing pinned original sources/unchanged guest inputs, current package, modern pwsh medium-token private-desktop runners. build/t478-s37 evidence, 60-minute phase, 3-GiB size and 10-minute no-progress budget. |
-| Reporting Requirements | Exact sources, inputs and commands; separate host gaps, original guest limitations and device scope; retain failed attempts. |
-| Stop Conditions | Material new provider/guest requirement, unavailable boundary demanding broader scope, or semantics beyond original. |
-| Exit Criteria | Finding40 reconciled with demonstrated host gaps resolved within scope, applicable tests and indexed evidence complete, local P committed. |
-| Original Owner Request | Continue sequential recovery of original capabilities and minimize mirror/local implementations; no added tolerance or repeat work. |
-| Similar-Issue Sweep | DDE window instance words and callback identity, original thunk selection, MM callback ring registration/withdrawal, task loss and original disabled duplicate converter ownership. |
+| Identifier Mode | M0 T478 S38, Ordinary Mode, one active S. |
+| Admission And Approval | Continuous sequential owner authorization; S37 closes in this local delivery with [evidence](../etc/evidence/m0-t478-s37-dde-mm-investigation.md). |
+| Objective | Resolve finding48: establish current original clipboard format ownership/failure semantics and caret wiring; repair only demonstrated host gaps or incomplete existing repairs. |
+| Non-goals | No guest/media mutation, new clipboard formats, extra original tolerance, repeated completed CF_TEXT/DIB work, O:/winnt write or push. |
+| Reference Baseline | S37 package77579397-8a7e-4d07-add4-9a0e3e2404ac, Full16/16; T460 text/DIB evidence and [format audit](../../artifacts/mvdm-audit/shard-2/wow-clipboard-format-failure-review.md). |
+| Files And ABI Surface | Selected original wuclip/caret owners, existing native/guest handle adapters and independent tests. No planned public protocol change. |
+| Applicable Rules | EXECUTION, ARCHITECTURE, CODING, DOCUMENT and source policy; original semantics only. |
+| Verification | Compare actual original/current paths before classifying a bug; format-specific acceptance/rejection ownership and actual caret dispatch. Product changes require coherent build, appropriate focused/Full gates and worktree release. |
+| Expected Markers | Exact original/selected owners, demonstrated cache/copy ownership for remaining formats, caret identity/lifecycle evidence; separate existing repairs, original limitations and real host defects. |
+| Asset Needs | Pinned original sources and immutable guest inputs, current package, independent fixtures, modern pwsh medium-token private-desktop runners; build/t478-s38 evidence. |
+| Reporting Requirements | Report concrete gaps and bounded outcomes; do not infer all formats from text/DIB or invent allocator tolerance. |
+| Stop Conditions | Material new guest/provider requirement or behavior beyond original semantics. |
+| Exit Criteria | Finding48 reconciled, necessary bounded repairs verified, indexed evidence and local delivery complete; no push. |
+| Original Owner Request | Continue the existing S sequence, restore original capabilities and minimize mirror/local implementations; no new tolerance or duplicate completed work. |
+| Similar-Issue Sweep | CF_HDROP, metafile-pict and OLE descriptor cache/transfer branches; accepted versus rejected native ownership; caret owner and task lifetime. |
 
-This is the owner's local retro-computing compatibility project. Tests use only
-isolated owned processes and immutable original guest inputs. Temporary CURRENT
-size exception retains earlier closures through final T478 reconciliation.
+This is the owner's local retro-computing compatibility project. Temporary
+CURRENT size exception remains through final T478 reconciliation. S38 is
+admitted; no S38 implementation or capability verdict has been made yet.
 
-S37 [checkpoint](../etc/evidence/m0-t478-s37-dde-mm-investigation.md): original app-local DDEML init/register API returns pass, but callback count0 is not callback proof; native WINMM devices are present. Independent window-word controls isolate modern SetWindowWord rejection of the original short HWND (error1400), while full HWND succeeds. Minimal setter binding is implemented and coherent build plus real window-word regression pass. The DDEML timeout was a test callback DS bug: corrected strict registration/teardown passes on candidate and fails on S34. Full16/16 passed (377452ms); candidate8389208d-e0cd-4b48-a965-ba1f588dd98b is hash-verified in this worktree assets/release. P1 delivers the bounded setter/registration repair locally; WINMM async investigation remains, so S37 stays active.
+## S37 Closure Record
+
+[S37 evidence](../etc/evidence/m0-t478-s37-dde-mm-investigation.md) identifies the
+original app-local DDEML owner and repairs full-HWND window-word storage;
+P1 is860ac2d91. This P2 corrects the public interrupt calling convention while
+retaining original CPU40 PIC/ring behavior. Real38-callback wrap/cancel/exit,
+window-word/DDEML, DEM115 and redirector12 checks pass. Full16/16 passes in
+388963ms. Package77579397-8a7e-4d07-add4-9a0e3e2404ac is hash-published to this
+worktree assets/release. No guest changes, new tolerance, O:/winnt write or push.
+Device-specific multimedia/fax remains finding54/S40, not claimed complete here.
 
 ## S36 Closure Record
 

@@ -72,7 +72,7 @@ if ($OriginalProviders) {
         'original-opennt-netapi-api.lib','original-opennt-xactsrv.lib',
         'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-pipe.lib','lib-process-observation.lib','lib-file.lib',
         'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
-        'lib-process-hook.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
+        'lib-process-hook.lib','lib-process-image.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
     $libraries = $dependencies | ForEach-Object {
         $path = Join-Path (Join-Path $root $BuildCache) $_
         if (!(Test-Path $path)) { throw "Missing fixture dependency: $_" }
@@ -80,7 +80,7 @@ if ($OriginalProviders) {
     }
     # Same alias as the production ntvdm export definition; fixture overrides
     # keep their existing controlled host/register seams, never unresolved forcing.
-    $extraFlags = @('/force:multiple','/alternatename:_call_ica_hw_interrupt=_ica_hw_interrupt')
+    $extraFlags = @('/force:multiple','/alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12')
 }
 $linkResponse = Join-Path $out 'link.rsp'
 $linkArgs = @('/nologo','/OPT:REF') + $extraFlags + @("/OUT:$exe","/MAP:$exe.map") +

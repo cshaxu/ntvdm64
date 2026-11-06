@@ -290,6 +290,8 @@ foreach ($alias in @(
     # cdecl import-library spelling (including its leading underscore).
     [pscustomobject]@{ Decorated = 'mvdm_softpc_fast_bop_dispatch_offset@0'; Raw = '_mvdm_softpc_fast_bop_dispatch_offset' },
     [pscustomobject]@{ Decorated = 'mvdm_softpc_fast_bop_callback_offset@0'; Raw = '_mvdm_softpc_fast_bop_callback_offset' },
+    # Name-decoration binding to the public stdcall adapter, not CPU40 cdecl.
+    [pscustomobject]@{ Decorated = 'call_ica_hw_interrupt@12'; Raw = 'call_ica_hw_interrupt' },
     [pscustomobject]@{ Decorated = 'OpenNtRtlNtStatusToDosError@4'; Raw = 'OpenNtRtlNtStatusToDosError' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
     [pscustomobject]@{ Decorated = 'RegisterWowExec@4'; Raw = 'RegisterWowExec' },

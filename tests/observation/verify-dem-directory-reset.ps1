@@ -37,7 +37,7 @@ $libraries=$dependencies | ForEach-Object {
 }
 $exe=Join-Path $out 'dem-directory-reset-test.exe'
 # Existing host-fixture seam overrides, not forced unresolved symbols.
-& $wrapper link /nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt=_ica_hw_interrupt "/OUT:$exe" "/MAP:$exe.map" $object @libraries kernel32.lib ntdll.lib user32.lib gdi32.lib advapi32.lib rpcrt4.lib shell32.lib legacy_stdio_definitions.lib 2>&1 |
+& $wrapper link /nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12 "/OUT:$exe" "/MAP:$exe.map" $object @libraries kernel32.lib ntdll.lib user32.lib gdi32.lib advapi32.lib rpcrt4.lib shell32.lib legacy_stdio_definitions.lib 2>&1 |
     Tee-Object (Join-Path $out 'build.txt') -Append
 if($LASTEXITCODE){throw 'Link failed'}
 $map=Get-Content "$exe.map" -Raw

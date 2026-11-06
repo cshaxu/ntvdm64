@@ -1,6 +1,6 @@
 # T478 S37 DDEML and WINMM investigation
 
-Parent 4a8a74a24, finding40. S37 is active; this is a checkpoint, not closure.
+Parent 4a8a74a24, finding40. Historical checkpoints are retained below; the final S37 bounded closure and frozen results supersede their active status.
 Admission governance passed in background PID17040. No product or original
 guest changes, publication or push.
 
@@ -221,3 +221,256 @@ The seven-line product binding reuses the existing full-identity and native
 return owner; mirror files and original guest binaries are unchanged. P1 is a
 local delivery only, with S37 still active. Unverified multimedia probe sources
 remain outside this P commit for continued diagnosis.
+
+P1 committed locally as860ac2d91. The staged whitespace check additionally
+reported a blank EOF line in each newly copied init/register probe (the earlier
+unstaged check did not include untracked files). These two text-only lines are
+removed in the following working change; they do not affect assembled bytes.
+
+The LoadLibrary-only control supervisor37452 timed out. Supervisor26856 adds
+an interim receipt: stage1 is written before LoadLibrary("MMSYSTEM"), but stage2
+never appears. Therefore this failure precedes loading the independent callback
+DLL and cannot yet be attributed to its NE format. The selected dispatch trace
+shows repeated WK32FileOpen failures (FFFF0002) and WU32SysErrorBox on the guest
+task. Original MMSYSTEM imports KERNEL/USER/KEYBOARD, all present in the package.
+Next run enables the already existing file-failure trace to identify the actual
+requested path, rather than guessing a missing multimedia export or driver.
+
+Supervisor33276's original WK32FileOpen failure trace names literal MMSYSTEM
+without an extension throughout the search. The independent LoadLibrary-only
+probe supplied that incomplete filename. It now requests MMSYSTEM.DLL and
+MMTPROBE.DLL explicitly; the prior diagnostic cannot establish an original
+loader defect or unsupported library. Static-import startup failure remains a
+separate observation until the correct explicit-load control completes.
+
+Explicit-load supervisor36296 passes: MMSYSTEM module5942, test DLL5911,
+stage3, normal launcher exit0. Both files can load unchanged on this candidate;
+missing-library or unsupported-module claims are rejected. The next run returns
+to actual periodic timer/callback/cancel acceptance after the test-DLL data
+prefix correction; library-load success alone is not async proof.
+
+Periodic supervisor40136 still exits042B before a receipt. Its file trace names
+MMSYSTEM.DLL under tests, runtime root and runtime/system, while the selected
+file resides in runtime/system32. This narrows the remaining startup question
+to actual module resolution; it is not a timer-callback failure. The successful
+explicit-load control did not capture GetModuleFileName, so its numeric handles
+alone do not prove which MMSYSTEM copy loaded. Next verify actual module path
+and hash, and distinguish guest search/profile configuration from host package
+wiring before drawing an async-capability conclusion. All failed stages remain.
+
+Supervisor39336 verifies explicit-load provenance: actual path
+O:/tmp/nbae/system32/MMSYSTEM.DLL, SHA256
+080432D0CAD660B163D0D231D37603010F7D9366F58570AC7C74D171C518211A,
+matching the selected package original. App-local static control11208 still
+exits042B even after eliminating MMSYSTEM file-not-found, so search alone is
+not a proved root cause of that startup. Static-entry test construction remains
+under review rather than a declared production repair target.
+
+Dynamic control35692 loads both DLLs, resolves explicit ordinals and reaches
+original MMCALLPROC32 repeatedly; timeGetTime values advance. It ultimately
+fails before a final receipt. Additional application-side phase snapshots will
+distinguish timer submission, first wait, callback observation and cancellation.
+No new production modification has been made after P1.
+
+Supervisor26404 stops at phase10: the original timeSetEvent call returned0010,
+and the first300ms wait did not complete. Its interim receipt preserves the
+actual runtime/system32/MMSYSTEM.DLL path. The later query/cancel phases were
+not reached. This narrows the unresolved boundary to the first timed wait /
+asynchronous delivery, but does not yet prove callback entry or establish
+whether the fault is the independent DLL ABI or host callback wiring.
+
+## Import-ordinal correction and renewed acceptance
+
+Original kernel31/kernel.def proves Yield is29 (11 is LocalHandle), and
+USER/user.def proves InitApp is USER5 (KERNEL5 is LocalAlloc). These independently
+written probes had incorrect imports. Corrected the timer wait and the InitApp
+imports in the window-word and DDEML probes; this is a test repair, not a
+production behavior change. Supervisor17148 re-ran window-word and strict
+DDEML registration/teardown successfully on the released P1 package.
+
+The corrected timer probe reaches phase12: timeSetEvent0010, first300ms wait
+completed, callback count1 and bad-user-data0. It still exits042B later; the
+prior attribution to first-wait failure is superseded for corrected inputs.
+Supervisor22312's no-event control completes all three waits, queries and
+normal exit with all counters0. Its recorded module path/hash again matches
+the current package. Thus the wait/clock/query path works without the submitted
+event; subsequent observation must resolve event cancellation/late delivery.
+No unsupported-host or original-limitation classification is made yet.
+
+Supervisor34872's additional cancellation snapshot reaches stop0 and settled
+callback count1 after the second300ms wait; final wait/receipt still fails.
+Thus original timeKillEvent returns success and no additional callback had been
+observed at the settled snapshot. This is not yet complete cancel/exit proof.
+Original stack.asm::DriverCallback pushes WORD hdev, WORD msg, then three DWORDs;
+the independent callback's RETF16 and dwUser offsets14/16 match that layout.
+No-event control22312 passed all waits and normal exit, so the submitted-event
+case remains the only unresolved differential. No code fix is inferred yet.
+
+### Corrected ABI comparison and native crash evidence
+
+The corrected USER ordinal5 InitApp probe passes on P1 (ddeml-abi-register:
+callbackCount2, types80A2/80D2, all teardown returns1). The identical corrected
+probe against S34 fails the strict callback check: callbackCount0 although
+init/register/unregister/free/uninit return success. Supervisor26056 exit1 is
+the expected negative result, not a runner crash. The setter repair conclusion
+therefore survives the independent test-import correction.
+
+Supervisor34796 (mm-timer-fault) repeats the timed event failure with existing
+CPU/termination tracing enabled; guest exits042B. No termination trace was
+produced, and the CPU witness alone does not identify a fault. Windows events
+1000/1001 do: the exact private runtime O:/tmp/n174/system32/ntvdm.exe faults
+at native address00000010 with C0000005 (execute access), report identity
+08a318ee-137b-4c79-a7f2-4c05ebc0b79c. Saved evidence is
+build/t478-s37/mm-timer-fault/windows-crash-events.json. The earlier n5ee run
+has the same exception/address. This is native process failure, not merely an
+unread modal error dialog or a negative API result. WER archive retains only
+Report.wer; no dump was available there.
+
+Address10 also appears as the CPU40 inline-BOP sentinel, but equality alone
+DOES NOT establish the call origin. Next diagnosis should use the existing
+wow_exception_observer (owned process-tree debugger, original exception
+disposition retained) to obtain the native stack/module at failure. Such a
+debugger run is diagnostic only, never capability acceptance. No product
+change, new tolerance, guest mutation, release replacement or S closure is
+justified by the crash address alone. S37 remains active.
+
+### Native interrupt callback ABI mismatch isolated
+
+The original 32-bit diagnostic observer cannot launch the 64-bit console
+observer (CreateProcess error50). A test-only x64 build now reads descendant
+x86 state through Wow64GetThreadContext. Its first attempt forwarded the WOW64
+initial breakpoint4000001F and terminated startup; that run is invalid as a
+multimedia reproduction. The corrected observer consumes only this first-chance
+debugger breakpoint and preserves access-violation disposition.
+
+Supervisor25824/mm-timer-debug64b reproduces the native execute fault at10.
+Supervisor19168/mm-timer-stack records ESP-64 and module ownership, showing:
+WINMM RVA0ECdd (timer dispatch), RVA124A5 (return from interrupt publication),
+NTVDM RVA5D0AA (host_ica_unlock return). The native stack still contains three
+interrupt arguments 1,2,1; the following saved value/timer ID10 is subsequently
+used as a return address. This is not evidence of a CPU40 sentinel escape.
+
+Read-only dumpbin of the exact local SysWOW64/winmm.dll confirms:
+- NotifyCallbackData RVA118F0 resolves NTVDM.EXE!call_ica_hw_interrupt.
+- WOW32DriverCallback publishes the original ring, pushes three arguments,
+  calls that pointer at RVA124A3, then immediately pops EDI/ESI/EBP and RET1C.
+  It expects callee cleanup of those three arguments.
+- The product export (ordinal84) aliases original ica_hw_interrupt; its
+  selected original implementation is cdecl. Original wowmmcb.h explicitly
+  declares call_ica_hw_interrupt __cdecl; VDMREDIR and WOW32 also consume it.
+
+Thus the supported host's WINMM callback ABI and the original exported ABI
+mismatch. This explains the first successful guest notification followed by
+native stack corruption. No original queue replacement or new callback
+scheduler is needed. However, changing export84 to stdcall without auditing
+existing cdecl consumers would create another regression. Next work must
+choose a narrow boundary adaptation that preserves those original consumers,
+then test normal periodic callbacks, cancellation/exit and the existing
+redirector paths. No product fix has been made yet.
+
+Diagnostic inputs/logs remain under mm-timer-{debug,debug64,debug64b,stack};
+local native disassembly and exports under build/t478-s37/winmm-*.txt. Debugger
+results are diagnosis, never Full or real nondebug acceptance. No publication,
+O:/winnt write or push occurred in this investigation.
+
+### Original declaration correction and bounded implementation
+
+Re-reading the divergence prefix changes the attribution: explicit __cdecl in
+wowmmcb.h is project DIV-294, not original source. Original WOW32 uses /Gz;
+its original declaration therefore uses stdcall. The earlier investigation's
+phrase "original wowmmcb.h explicitly declares __cdecl" was incorrect and is
+superseded here. The selected CPU40 provider and redirector build use cdecl.
+This is a project ABI integration gap exposed by unchanged native WINMM.
+
+The candidate keeps original ica_hw_interrupt's cdecl implementation and adds
+only mvdm_public_ica_interrupt, a three-argument WINAPI forwarding boundary.
+The generated public export retains name and ordinal84 and targets that
+adapter. WOW32's original declaration is restored (remove this file's DIV-294
+cdecl change). Redirector vrica.h explicitly uses the public stdcall contract
+(DIV-884), because its selected CPU40 compilation default is cdecl. All known
+in-tree public callers are rebuilt together; internal CPU40 PIC calls keep
+the existing cdecl body. The prior package's incorrectly cdecl public boundary
+is not a compatibility promise for independently compiled cdecl external VDDs.
+No queue, interrupt order, failure handling or callback lifecycle is replaced.
+
+First build supervisor27456 failed VDMREDIR linking: new generated import
+library exports raw call_ica_hw_interrupt (no leading underscore), unlike the
+old cdecl alias. dumpbin /linkermember evidence is interrupt-imports.txt.
+Name-decoration bindings now use that observed raw name; both callsite and
+target are stdcall. Supervisor15232 rebuilds the corrected candidate, with
+results under build-p2b.*. Acceptance remains pending; no new release yet.
+
+### P2 candidate verification checkpoint
+
+Build-p2b supervisor15232 passes; governance21972 passes (existing documented
+CURRENT size exception only). Candidate package77579397-8a7e-4d07-add4-9a0e3e2404ac
+is staged at build/t478-s37/package-p2. It is not yet assets/release.
+Supervisor15736's real nondebug timer run passes: timer16, 15 callbacks,
+stop0, settled15, final15, bad-user-data0, normal exit. The no-timer control
+also passes with every counter0. Both bind unchanged package MMSYSTEM.DLL
+080432D0CAD660B163D0D231D37603010F7D9366F58570AC7C74D171C518211A.
+
+To exercise actual ring wrap rather than a single notification, the final
+probe waits750ms and requires at least17 callbacks across the original16-slot
+ring. Supervisor12624's mm-p2-wrap passes: before38, stop0, settled38, final38,
+bad0, normal exit. The same supervisor's word-p2 and ddeml-p2 pass; DDEML has
+exactly the register/unregister callbacks and clean free/uninitialize returns.
+Full runs serially afterwards under this supervisor in verify-p2-Full.
+Its result is still pending at this checkpoint; no publication or P2 commit.
+
+The compiled forwarding object disassembly (interrupt-adapter-disasm.txt)
+shows three argument pushes, CALL original _ica_hw_interrupt, ADD ESP,12,
+and RET12. interrupt-worker-exports.txt confirms name call_ica_hw_interrupt
+remains ordinal84. Internal PIC calls still target the cdecl original body.
+These witnesses establish the intended ABI correction rather than a coincidental
+passing timer test. Full and final review remain mandatory before delivery.
+
+## S37 bounded closure
+
+P1 (860ac2d91) restores original window-word storage through the existing full
+HWND mapping; P2 corrects the original public interrupt ABI at the CPU40
+boundary. The selected DDEML is the immutable app-local original DLL, not the
+unselected wddeml32.c manager. Registration and teardown now receive their
+original notifications. Existing classic DDE transaction evidence is retained;
+this does not assert every DDEML API or guest binary version has been tested.
+
+The real unchanged MMSYSTEM timer drives native WINMM, the original16-slot
+callback ring, original guest DriverCallback and the independently authored
+fixed DLL callback.38 notifications, correct user data, successful explicit
+cancel, stable subsequent counts and normal exit pass on the final candidate.
+The original time.c contract explicitly requires periodic timeSetEvent to be
+paired with timeKillEvent; this S adds no recovery for violating that contract,
+no lossless full-ring promise, no forced-unload quiescence guarantee and no new
+scheduler. Full-ring producer dropping/interrupt behavior and original queue
+ownership remain unchanged. Device-specific wave/MIDI/MCI/fax verification is
+finding54/S40, not an implicit claim from this common-boundary timer witness.
+
+Final Full16/16 passes in388963ms under supervisor12624. DOS4GW/NESticle retains
+the owner's established exclusion; it was not included in those16 gates.
+Test closure maintenance changes old static interrupt aliases to the same
+stdcall adapter. DEM115 assertions pass. The redirector test first lacked its
+separate archive, then found a stale fixture archive and an existing missing
+process-image link dependency; after rebuilding the fixture archive and
+listing the current dependency, supervisor24380 passes all12 original-provider
+assertions. These were test composition failures, not concealed product passes.
+The debugger observation helper builds as x64 and now omits native64 module
+addresses when attributing x86 context. No debugger run is acceptance evidence.
+
+Publication supervisor25192 copies/hash-verifies all ten images and the
+manifest into this worktree assets/release. Package:
+77579397-8a7e-4d07-add4-9a0e3e2404ac. Prior release is retained in
+build/t478-s37/release-before-p2. [Frozen results](../../../artifacts/mvdm-audit/shard-2/ddeml-winmm-s37-results.json)
+contain package hashes, focused receipts, Full timing and diagnosis hashes.
+No O:/winnt write or push. Governance and final staged review precede the
+local P2 delivery; S38/finding48 follows under continuous authorization.
+
+P2 mirror changes are limited to two declarations: wowmmcb.h removes the
+project cdecl intrusion (net-4 lines); vrica.h names the public convention in
+the cdecl build (net+2 lines, DIV-884). Non-MVDM is unchanged. The new
+10-line executable-owned adapter only forwards three arguments across the ABI;
+no original implementation is copied. Build name bindings and independent
+tests are counted separately from production behavior. Existing excluded
+branches and original guest/media bytes are unchanged.
+
+Final governance supervisor11268 passes, including the S38 admission packet;
+git diff --check passes. The temporary CURRENT size exception is documented.

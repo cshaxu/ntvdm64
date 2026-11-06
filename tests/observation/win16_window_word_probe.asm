@@ -49,7 +49,7 @@ test ax,ax
 jz fatal
 mov [instance-data],di
 push di
-api 1,5
+api 2,5
 test ax,ax
 jz fatal
 push cs

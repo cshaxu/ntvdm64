@@ -84,7 +84,7 @@
 | 32 | [IOS and CCPU port owners](../../../artifacts/mvdm-audit/ios-owner-review.md) | 部分已验证：原版 IOS port 拆分/整端口解绑是原始契约，70 项受控检查通过；未发现因此缺失原版接线 |
 | 35 | [WOW shell, hooks and subclassing](m0-t478-s36-shell-hook-investigation.md) | S36：真实 Shell 子进程/返回、CBT 嵌套/否决/显式与遗留 hook 退出通过；原版清理真实 USER hook、槽隔离/复用及 subclass 生命周期通过，84 个当前函数绑定；无产品缺口，未增加容错 |
 | 38 | [WINOLDAP guest module](../../../artifacts/mvdm-audit/shard-1/guest-winoldap-owner-review.md) | 部分已验证：O:/w31/SYSTEM 有另一版本 WINOLDAP.MOD；T445 在测试包用原版控制文件验证了 Win16/native/Win16 返回，实际加载身份仍未确定 |
-| 40 | [DDEML](../../../artifacts/mvdm-audit/shard-2/ddeml-owner-boundary.md); [WINMM callback](../../../artifacts/mvdm-audit/external-winmm-callback-boundary.md) | 部分已完成：T465 已实测经典 WM_DDE_* 正常会话和任务退出，T466 已证明同步 WINMM 桥；DDEML guest 实际 owner、异步 WINMM 设备未证实 |
+| 40 | [S37 DDEML/WINMM closure](m0-t478-s37-dde-mm-investigation.md) | S37：确认 app-local 原版 DDEML owner 并修复窗口字写入；修复本项目 WINMM 中断导出调用约定，真实周期回调38次、队列回绕、取消及正常退出通过，Full16/16。本项不宣称所有 wave/MIDI/MCI/fax 设备完成，54仍由S40核对。 |
 | 44 | [WRITE image identity](../../../artifacts/mvdm-audit/shard-2/win16-write-guest-review.md); [OLE server image](../../../artifacts/mvdm-audit/shard-0/ole-server-image-review.md) | 部分已完成：T475 S5 已在真实 Win16 WRITE 连续两次编辑、保存和退出并验证输出文件；OLE server 实际身份/路径及其他功能仍未核对 |
 | 46 | [Raw spool and shared handle carrier](../../../artifacts/mvdm-audit/shard-1/wow-spool-carrier-review.md) | 部分已完成/原版限制：T468 已验证正常 HDC 打印及对话框；原版 raw profile/provider 不可用和突发任务退出限制由用户接受，异常所有权见 58 |
 | 48 | [Clipboard formats](../../../artifacts/mvdm-audit/shard-2/wow-clipboard-format-failure-review.md); caret finding in [cross-shard findings](../../../artifacts/mvdm-audit/findings.md) | 部分已解决：T460 已验证文本/DIB 的受限场景；其他 clipboard 格式及 caret 仍缺实际证据 |

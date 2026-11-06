@@ -1,5 +1,6 @@
 {
-  "status": "active-no-callback-claim",
+  "status": "historical-checkpoints-superseded-by-s37-results",
+  "final_results": "artifacts/mvdm-audit/shard-2/ddeml-winmm-s37-results.json",
   "package": "03d9792b-753e-4407-8a52-883ad9bc83e3",
   "runs": {
     "init": {

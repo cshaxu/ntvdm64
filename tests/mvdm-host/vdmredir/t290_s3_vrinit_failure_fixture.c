@@ -48,7 +48,7 @@ USHORT getCS(VOID)
     return 0;
 }
 
-VOID call_ica_hw_interrupt(int adapter, int line, int state)
+VOID WINAPI call_ica_hw_interrupt(int adapter, int line, int state)
 {
     (void)adapter;
     (void)line;

@@ -280,7 +280,7 @@ db 3,1
 dw ..@call_%1-code+1,%2,%3
 %endmacro
 fixup 1,1,91
-fixup 2,1,5
+fixup 2,3,5
 fixup 3,1,47
 fixup 4,1,49
 fixup 5,1,51

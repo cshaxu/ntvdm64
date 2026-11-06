@@ -21,4 +21,6 @@ Revision History:
 
 --*/
 
-extern call_ica_hw_interrupt(int, int, int);
+/* DIVERGENCE(MVDM-HOST-DIV-884): the public interrupt export is stdcall;
+ * retain that ABI in this cdecl CPU40 redirector build. */
+extern void __stdcall call_ica_hw_interrupt(int, int, int);

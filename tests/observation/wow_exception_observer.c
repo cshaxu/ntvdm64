@@ -8,11 +8,13 @@
 
 static void address_owner(FILE *log, DWORD pid, DWORD address)
 {
-    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid);
     MODULEENTRY32 entry = {sizeof(entry)};
     if (snapshot == INVALID_HANDLE_VALUE) return;
     if (Module32First(snapshot, &entry)) do {
-        DWORD base = (DWORD)(uintptr_t)entry.modBaseAddr;
+        DWORD base;
+        if ((uintptr_t)entry.modBaseAddr > UINT32_MAX) continue;
+        base = (DWORD)(uintptr_t)entry.modBaseAddr;
         if (address >= base && address - base < entry.modBaseSize) {
             fprintf(log, " address=%08lx module=%s rva=%08lx\n", address,
                 entry.szModule, address - base);
@@ -26,18 +28,35 @@ static void exception_context(FILE *log, DEBUG_EVENT *event)
 {
     HANDLE thread = OpenThread(THREAD_GET_CONTEXT, FALSE, event->dwThreadId);
     HANDLE process = OpenProcess(PROCESS_VM_READ, FALSE, event->dwProcessId);
+#ifdef _WIN64
+    WOW64_CONTEXT context = {0};
+#else
     CONTEXT context = {0};
-    DWORD words[24], frame[2], ebp;
+#endif
+    DWORD words[48], frame[2], ebp;
     unsigned index;
+#ifdef _WIN64
+    context.ContextFlags = WOW64_CONTEXT_FULL;
+#else
     context.ContextFlags = CONTEXT_FULL;
+#endif
+    /* A 64-bit observer can launch the native launcher/observer and inspect
+     * its 32-bit NTVDM descendants. Context below deliberately describes x86. */
+#ifdef _WIN64
+    if (thread && process && Wow64GetThreadContext(thread, &context)) {
+#else
     if (thread && process && GetThreadContext(thread, &context)) {
+#endif
         fprintf(log, " eip=%08lx esp=%08lx ebp=%08lx eax=%08lx ebx=%08lx ecx=%08lx edx=%08lx esi=%08lx edi=%08lx\n",
             context.Eip, context.Esp, context.Ebp, context.Eax, context.Ebx,
             context.Ecx, context.Edx, context.Esi, context.Edi);
         address_owner(log, event->dwProcessId, context.Eip);
-        if (ReadProcessMemory(process, (void *)(uintptr_t)context.Esp, words, sizeof(words), NULL)) {
-            for (index = 0; index < 24; ++index) fprintf(log, " %08lx", words[index]);
+        if (ReadProcessMemory(process, (void *)(uintptr_t)(context.Esp - 64u), words, sizeof(words), NULL)) {
+            fprintf(log, " stack-base=%08lx (ESP-64)\n", context.Esp - 64u);
+            for (index = 0; index < 48; ++index) fprintf(log, " %08lx", words[index]);
             fputc('\n', log);
+            for (index = 0; index < 48; ++index)
+                address_owner(log, event->dwProcessId, words[index]);
         }
         ebp = context.Ebp;
         for (index = 0; index < 12 && ebp; ++index) {
@@ -107,7 +126,8 @@ int main(int argc, char **argv)
             --processes;
         } else if (event.dwDebugEventCode == EXCEPTION_DEBUG_EVENT) {
             EXCEPTION_RECORD *record = &event.u.Exception.ExceptionRecord;
-            if (record->ExceptionCode != EXCEPTION_BREAKPOINT && record->ExceptionCode != 0x40000005u)
+            if (record->ExceptionCode != EXCEPTION_BREAKPOINT && record->ExceptionCode != 0x40000005u &&
+                    !(record->ExceptionCode == 0x4000001fu && event.u.Exception.dwFirstChance))
                 disposition = DBG_EXCEPTION_NOT_HANDLED;
             if (record->ExceptionCode == EXCEPTION_ACCESS_VIOLATION ||
                     record->ExceptionCode == 0xc0000374u || !event.u.Exception.dwFirstChance) {

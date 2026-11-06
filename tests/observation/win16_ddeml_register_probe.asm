@@ -12,7 +12,7 @@ dw entries-ne,entries_end-entries
 dd 0
 dw 0x0302,2,0x100,0x1000
 dw 0,1,0,2
-dw 2,2,0
+dw 2,3,0
 dw segments-ne,resources-ne,resident-ne,modules-ne,imports-ne
 dd 0
 dw 0,4,0
@@ -25,10 +25,11 @@ resources: dw 0,0
 resident: db 7,'DDINIT1'
 dw 0
 db 0
-modules: dw kernel-imports,ddeml-imports
+modules: dw kernel-imports,ddeml-imports,user-imports
 imports:
 db 0
 kernel: db 6,'KERNEL'
+user: db 4,'USER'
 ddeml: db 5,'DDEML'
 entries: db 0
 entries_end:
@@ -263,7 +264,7 @@ db 3,1
 dw ..@call_%1-code+1,%2,%3
 %endmacro
 fixup 1,1,91
-fixup 2,1,5
+fixup 2,3,5
 fixup 3,1,47
 fixup 4,1,49
 fixup 5,1,51
@@ -313,4 +314,3 @@ service_name: db 'S10DDEPROBE',0
 result_name: db 'DREG.BIN',0
 data_end:
 image_end:
-

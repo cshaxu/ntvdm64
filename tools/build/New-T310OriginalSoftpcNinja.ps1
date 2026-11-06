@@ -300,7 +300,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvd
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
                         'mvdm_keyboard_history.c',
-                        'mvdm_keyboard_reset.c',
+                        'mvdm_keyboard_reset.c', 'mvdm_interrupt_export.c',
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
                         'v7_pointer.c', 'v7_pointer_binding.c',
@@ -445,7 +445,11 @@ if ($LASTEXITCODE -ne 0) { throw 'Original NTVDM export template preprocessing f
 $wow32ProviderExportLines = [Collections.Generic.List[string]]::new()
 foreach ($line in Get-Content -LiteralPath $preprocessedExportDefinition) {
     if ($line -match '^\s*#\s*line\b') { continue }
-    if ($line -match '^\s*NAME\s+') {
+    if ($line -match '^\s*call_ica_hw_interrupt\s*=') {
+        # Keep the original export name/ordinal while separating its public
+        # stdcall ABI from the CPU40 cdecl implementation.
+        $wow32ProviderExportLines.Add('    call_ica_hw_interrupt = _mvdm_public_ica_interrupt@12')
+    } elseif ($line -match '^\s*NAME\s+') {
         # The selected three-program worker retains the original ntvdm.exe
         # module identity.  WOW32 is late-loaded by that worker, so its import
         # library must name the actual parent module, while retaining every
@@ -908,7 +912,7 @@ $graph.Add('  restat = 1')
 # locks) never runs.  The parent import library is an implicit output of the
 # original process link, so this rule cannot create a second CCPU/SoftPC
 # executor inside the DLL.
-$graph.Add('  command = link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /def:' + (NinjaPath $redirExportDefinition) + ' /implib:$out.lib /out:$out $in kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /alternatename:_call_ica_hw_interrupt@12=call_ica_hw_interrupt /def:' + (NinjaPath $redirExportDefinition) + ' /implib:$out.lib /out:$out $in kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule broker_test_link')
 $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
 $graph.Add('rule rtl_fixture_link')
