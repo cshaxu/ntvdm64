@@ -286,3 +286,11 @@ CloseHandle-on-HBITMAP error with DeleteObject. Real native resource controls
 pass (82 checks), as do coherent builds and all 16 Full gates; exact worktree
 release published. Original post-selector registration rollback limitations
 remain explicit, without new recovery guarantees. S21 owns normal retirement.
+
+## S21 disposition
+
+[S21](../evidence/m0-t478-s21-dib-retirement.md) verifies five original bodies
+and normal nested/single retirement with real native resources (57 checks).
+Original failed-restore/count transitions remain explicit; caller return
+contracts do not justify an invented universal abort/retry guarantee. No product
+changes; S20 release remains exact. S22/finding 51 follows.

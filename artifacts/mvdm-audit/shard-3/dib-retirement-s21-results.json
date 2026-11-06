@@ -1,0 +1,33 @@
+{
+  "baseline": "e95b2b739",
+  "finding": 50,
+  "original_comparison": {
+    "O:/repos.external/OpenNT/base/mvdm": {
+      "W32FreeDibInfoHandle": true,
+      "W32CheckAndFreeDibInfo": true,
+      "W32FreeDibInfo": true,
+      "W32FindAndLockDibInfo": true,
+      "WK32FindAndReleaseDib": true
+    },
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm": {
+      "W32FreeDibInfoHandle": true,
+      "W32CheckAndFreeDibInfo": true,
+      "W32FreeDibInfo": true,
+      "W32FindAndLockDibInfo": true,
+      "WK32FindAndReleaseDib": true
+    }
+  },
+  "fixture_exit": 0,
+  "fixture_output": "ORIGINAL failed-restore lockcount=0 node-retained=1\nORIGINAL nested-find-release lockcount=1 result=0\nDIB_RETIREMENT checks=57 failures=0\n",
+  "scope": "Exact five original bodies and original record declarations; real native GDI/file/section/view, controlled selector restore and VDM removal; not guest lifecycle or production retry",
+  "production_changes": false,
+  "release_package_id": "e6000fef-d461-4e0f-b17c-decb791bd449",
+  "release_hashes_matched": 10,
+  "hashes": {
+    "src\\mvdm-host\\wow32\\wdib.c": "5adbf670425782914a2fdf15dbb9b3519409bc43a105e4f7f73e671b19b76606",
+    "test\\integration\\wow_dib_retirement_test.c": "c7b1e02cc3a56718a956332ef97ce4f34c2c5e24bc5e9985925e85013bd8de79",
+    "test\\integration\\verify-wow-dib-retirement.ps1": "7870b850f751a19e3b7be3cc24bdb39ad31ff760a1d1c9c3b809cb0bd0faf2d3",
+    "build\\t478-s21\\current-abi\\dib_retirement_exact.h": "7d5b20cd509c2d59882dc4d959f4c94d51bb4e0056a7e1b581b6793a9772113d",
+    "build\\t478-s21\\current-abi\\dib-test.exe": "08f14c2b51878a30c72e9f3c2497ae2c8cd611a2d67bc85d5842b7a8ade3500d"
+  }
+}

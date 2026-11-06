@@ -241,3 +241,7 @@ T478 S19 [repairs EDIT tab-stop fallthrough](../etc/evidence/m0-t478-s19-edit-ta
 ## S20 Closure Record
 
 T478 S20 [repairs the failed DIB bitmap destructor](../etc/evidence/m0-t478-s20-dib-registration.md): 82 native resource checks and 16 Full gates pass; late selector/mapping rollback remains an explicit original limit. Worktree release only.
+
+## S21 Closure Record
+
+T478 S21 [verifies normal original DIB retirement](../etc/evidence/m0-t478-s21-dib-retirement.md): 57 bounded checks pass, failure/count limits retained, product release unchanged.

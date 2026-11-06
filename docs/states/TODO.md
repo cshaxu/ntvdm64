@@ -26,6 +26,8 @@ distinguishes these from work already owned by a queued proposal.
 
 | P3 | Original DIB.DRV registration failure after mapping/selector mutation does not roll back all view/VDM/selector state; normal selector restoration can itself fail. | S20 fixes only the wrong bitmap destructor. Retain the original late-failure rollback limitation; no transactional/retry guarantee or safe forced-OOM claim. [S20 evidence](../etc/evidence/m0-t478-s20-dib-registration.md). |
 
+| P3 | Original DIB last-reference decrement precedes selector restoration; failure leaves count zero, and nested FindAndReleaseDib consumes a count before FALSE. Outer guest/host callers do not share one abort contract. | Normal nested retirement is verified. Retain original failure/reentry limits; reopen on a concrete valid end-to-end defect, not an invented universal retry/rollback promise. [S21 evidence](../etc/evidence/m0-t478-s21-dib-retirement.md). |
+
 ## Original guest retained limitations
 
 These entries are grouped by the original guest owner, not declared fixed.

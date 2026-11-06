@@ -1255,3 +1255,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S19 EDIT tab-stop return](evidence/m0-t478-s19-edit-tabstop.md): one-break original correction, selected-object matrix and gated real Win16 witness.
 
 - [T478 S20 DIB failure destructor](evidence/m0-t478-s20-dib-registration.md): real GDI ownership correction and explicit original post-selector rollback limit.
+
+- [T478 S21 DIB retirement disposition](evidence/m0-t478-s21-dib-retirement.md): 57 native/extracted-owner checks and explicit original failure/count limits.
