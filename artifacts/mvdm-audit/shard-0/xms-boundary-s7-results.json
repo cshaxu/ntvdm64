@@ -1,0 +1,242 @@
+{
+  "baseline_commit": "75c8d917e",
+  "application_version": "0.0.478",
+  "protocol": 67,
+  "source_sha256": {
+    "src/mvdm-host/xms.486/xmsblock.c": "961CE4CA726319F721E67A75E63E334568C4F0A313119C9C4FE2DAB4F429AA79",
+    "src/mvdm-host/xms.486/xms.c": "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75",
+    "src/common/protocol/version.h": "B7418FCCAE9BABB9E82B1E3D9111741BDB8DE12CA4872320233D5A04A552FE30",
+    "tests/mvdm-host/xms/xms_block_boundary_fixture.c": "60419BD7CB127FEAAF1ADA161A41EC276DFFF1387A287707F66063FD70E91F73",
+    "tests/observation/xms_block_boundaries.asm": "6CA71EF6BAC37D2504A4CEED4D71617C7BAF218517E9B0308CA9415D44D12011",
+    "tests/observation/verify-xms-block-boundaries.ps1": "E8DF030E15C7FE35BC04E52302FE97E9945A81F7401F123B14510344DDEB684B",
+    "tests/observation/verify-xms-block-guest.ps1": "817359B0B963686F2B62A7D25F99A8816A81B4092F90B4098C0353AF0128481E",
+    "O:/repos.external/OpenNT/base/mvdm/xms.486/xmsblock.c": "BAD1DE87B499D3052E757D858B39437232F5653610DC5560C06AFCC5E05FD391",
+    "O:/repos.external/OpenNT/base/mvdm/xms.486/xms.c": "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75",
+    "O:/repos.external/OpenNT/base/mvdm/dos/v86/dev/himem/himem4.asm": "0EAE030990A2EE242E94F0AB0D49248D4C0DE4CFF8CDAF5FF7E355C5939809F2",
+    "O:/repos.external/OpenNT/base/mvdm/suballoc/suballoc.c": "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/xms.486/xmsblock.c": "BAD1DE87B499D3052E757D858B39437232F5653610DC5560C06AFCC5E05FD391",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/xms.486/xms.c": "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/dos/v86/dev/himem/himem4.asm": "0EAE030990A2EE242E94F0AB0D49248D4C0DE4CFF8CDAF5FF7E355C5939809F2",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/suballoc/suballoc.c": "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0"
+  },
+  "provider": {
+    "pid": 18828,
+    "result": "XMS boundary assertions=139 failures=0",
+    "started": "2026-11-05T17:39:24.3114206-08:00",
+    "provider_sha256": "961CE4CA726319F721E67A75E63E334568C4F0A313119C9C4FE2DAB4F429AA79",
+    "exit_code": 0,
+    "executable_sha256": "FE1F3C2FDC2AD3DA6697D395D002CBA2CF8D996DF300CE10568BC835F2C177D0",
+    "ended": "2026-11-05T17:39:24.6868375-08:00"
+  },
+  "baseline_provider_result": "XMS boundary assertions=139 failures=35",
+  "guest_results": {
+    "Boundaries": "PASS guest XMS case=Boundaries",
+    "Existing": "PASS guest XMS case=Existing"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 440770,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1768,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1333,
+        "CleanupMs": 519,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 258,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67815,
+        "CleanupMs": 552,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 60879,
+        "CleanupMs": 559,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 53948,
+        "CleanupMs": 548,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 18900,
+        "CleanupMs": 569,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 15076,
+        "CleanupMs": 536,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 96084,
+        "CleanupMs": 496,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13555,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29061,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30741,
+        "CleanupMs": 598,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 7106,
+        "CleanupMs": 576,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8251,
+        "CleanupMs": 566,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11006,
+        "CleanupMs": 570,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5974,
+        "CleanupMs": 559,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8522,
+        "CleanupMs": 545,
+        "Passed": true
+      }
+    ]
+  },
+  "supervisor": {
+    "pid": 13276,
+    "started": "2026-11-05T17:32:41.8577043-08:00",
+    "ended": "2026-11-05T17:40:23.8364084-08:00",
+    "exit_code": 0
+  },
+  "release_manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "88D4061B2AEA10D26B2A24BEB41F94062370E4B88516E86694A2CC07AA82E8CE",
+      "Machine": 34404,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "DC32B299B5EA3388E65511E4643CD5A597E8E8D15EE595180CE9198E18402EC5",
+      "Machine": 34404,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "F19F32BCCB611EBCBE7EE6CC7EB993AE0968986F2F1485AD127AA0154C76490B",
+      "Machine": 34404,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "FC2AE8B9F969CDC4B372AC8F21A17ED88F135F55B8449DD855CECE0B389E81FB",
+      "Machine": 332,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "7040D4A360200510A182CFB10437D3CB9F4F7AE478A910DB69BBABB5772C14E8"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "FDF36FADD9E5343EA314E274B4F01AD8900837B25785AD74D46E41498669FD5D",
+      "Machine": 34404,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "71B03261EA539A4F1E76DFBC1E91028612E1A04720FC797B19B9A1C6694B3481",
+      "Machine": 34404,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "492C9ABB5B35460E77E0AEC035CD77E3CF293A8580A268DA7E259965FF0C98DA",
+      "Machine": 332,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "C60ACD5715CC07F6C396B272EDC0DBA79D8B5C46EC0741007B72C761733B3B92"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "F9936B62E955D81A16184E77C58F2E2416301283A8218579033455EA17AAD63F",
+      "Machine": 332,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "B5A98766D2755810F4B97AB2953A245B6AE8C081AB6F96FAA293583B58EFE5A2"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "8592802EEF4A147EA19BAC4E4872A554405357942A3BEB7C1086514912A19994",
+      "Machine": 332,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "DCF5CD8694701F0947303DA8FF2BEE239C1E2FBC18CDE6CFC8D8C14F4E863980"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "45D4987A387D83C01010E5E80CB0DF048D8E5DB3AD0ED58CA64FDD2AF502EAD5",
+      "Machine": 34404,
+      "PackageId": "25974683-9d30-4f02-a62c-32e8ca3df424",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "publication": "PASS ten-image worktree release package=25974683-9d30-4f02-a62c-32e8ca3df424; backup=build/t478-s7/release-before; no O:/winnt write",
+  "limitations": [
+    "Provider fixture register/backing seams are not guest evidence.",
+    "Guest equal-size requests may return in HIMEM; direct host case tested separately.",
+    "DOS4GW/NESticle remain owner-excluded, not passing tests."
+  ],
+  "retained_failed_attempts": [
+    "Original provider: 35 of 139 assertions failed.",
+    "Initial focused fixture unresolved unused move/query imports; fixed using aborting aliases.",
+    "Initial Existing guest assembly argument was malformed; fixed before launching the case.",
+    "Initial Full stopped on 0.0.477 versus active T478; version aligned and full final package rebuilt/retested.",
+    "Metadata runner read disposed Process.ExitCode; underlying provider passed; save exit before disposal corrected and final2 rerun passed."
+  ]
+}

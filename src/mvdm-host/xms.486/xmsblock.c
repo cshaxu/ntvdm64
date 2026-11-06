@@ -38,7 +38,9 @@
 VOID xmsAllocBlock (VOID)
 {
 BOOL Success;
-ULONG BaseAddress;
+/* DIVERGENCE(MVDM-HOST-DIV-870): zero length owns no storage; use the
+ * original XMSInit pool base, not an uninitialized address for later resize. */
+ULONG BaseAddress = 1024 * 1024 + 64 * 1024;
 ULONG size;
 
     size = getDX() * 1024;
@@ -130,6 +132,8 @@ ULONG NewSize;
     size = getDX() * 1024;
     NewSize = getBX() * 1024;
     BaseAddress = getAX() * 1024;
+    /* DIVERGENCE(MVDM-HOST-DIV-870): unchanged size retains the original base. */
+    NewAddress = BaseAddress;
     if(size != NewSize) {
 
         //

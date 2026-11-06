@@ -3238,3 +3238,9 @@ its bounded capture/launch owners and CCPU CALLF remain reused. No hardware
 V86 monitor or original guest changes. Source/return-state proof and current
 verification are in docs/etc/operations/m0-t479-s5-command-continuation.md;
 registration is not itself a runtime acceptance claim.
+
+### XMS boundary correction
+
+| ID | Purpose | Original issue | Retained adaptation | Evidence |
+| --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-870 | Initialize original XMS no-allocation return values. | OpenNT/OpenNT-4.5 xms.486/xmsblock.c reads BaseAddress for size zero and NewAddress for unchanged size without assigning them. Original HIMEM accepts zero-length handles and XMSInit fixes the pool base at 1 MiB + 64 KiB. | Preserve allocation bypass and register ABI: zero length uses that existing pool anchor without reserving bytes; equal size keeps the supplied base, matching original SAReallocate. No allocator or guest change. | xms.486/xmsblock.c; docs/etc/evidence/m0-t478-s7-xms-boundaries.md; focused actual-provider and immutable-guest lifecycle tests. |

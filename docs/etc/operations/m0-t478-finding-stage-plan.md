@@ -47,7 +47,7 @@ source evidence.
 | Planned S | Finding | Objective |
 | --- | --- | --- |
 | S6 | 04 — SAS vector | Reconcile prior successful tests and current selected consumers of unsupported SAS tail slots; repair only a demonstrated remaining original-semantics host defect. Unused slots do not justify new capability or speculative ABI cleanup. |
-| S7 | 10 — XMS block boundaries | Reproduce zero-size/equal-size paths and correct any reachable uninitialized state. |
+| S7 | 10 — XMS block boundaries | Reconcile existing passed XMS cases; establish the original zero-size/equal-size contract and current host reachability, then correct only remaining applicable uninitialized-result defects. No new capability or allocator redesign. |
 | S8 | 11 — suballocator rollback | Verify callback failure bitmap consistency and repair confirmed rollback defects. |
 | S9 | 13 — floppy/FDC ownership | Verify cross-thread state and actual host device lifetime; repair demonstrated ownership defects. |
 | S10 | 15 — keyboard layout | Determine whether a modifiable host boundary actually exposes the length risk; guest COMMAND changes are excluded. |
@@ -147,3 +147,12 @@ direct-object and PE checks support preserving the coherent layout and unsupport
 tails. No product implementation changes; no universal non-reachability claim.
 Reopen only with a concrete supported caller/original contract or failure evidence.
 S7/finding 10 is next proposed, not admitted.
+
+## S7 disposition
+
+[S7](../evidence/m0-t478-s7-xms-boundaries.md) resolves finding 10 with two
+initializations in the original XMS block owner, preserving existing zero-size
+and unchanged-size bypasses. No missing dispatcher/provider or displaced local
+implementation was found. Actual-provider, real DOS and all 16 selected Full
+gates pass; the final 0.0.478/protocol-67 package is published only to worktree
+assets/release. S8/finding 11 (suballocator callback rollback) is next proposed.

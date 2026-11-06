@@ -4,15 +4,17 @@
 
 **No active M/T/S packet.**
 
-T478 S6 closes at [SAS tail disposition](../etc/evidence/m0-t478-s6-sas-vector.md).
-Current original-source, archive/object and PE checks establish no demonstrated
-applicable repair. Preserve the existing layout and unavailable tails; no new
-capability or repeated implementation. This is research-only closure, not proof
-of universal non-reachability. Product/release remain the verified S4 package;
-no new build/publication, O:/winnt write or push. P1 records the bounded evidence
-and disposition locally. The [ordered plan](../etc/operations/m0-t478-finding-stage-plan.md)
-retains S7/finding 10 as next proposed, not admitted. Broader S1 inventory
-qualification remains open.
+T478 S7 closes at [XMS block boundaries](../etc/evidence/m0-t478-s7-xms-boundaries.md).
+Two original uninitialized return paths are corrected with two assignments:
+zero-size uses the original pool anchor without allocating storage; unchanged
+size keeps the existing address. No new XMS feature, allocator or guest change.
+Actual-provider tests pass 139 assertions (baseline: 35 failures), both real DOS
+cases pass, and all 16 selected Full gates pass. Application version is aligned
+to T478 (0.0.478); protocol remains 67. The exact tested ten-image package and
+manifest are published to worktree assets/release and hash verified. Local P1,
+no O:/winnt write or push. The [ordered plan](../etc/operations/m0-t478-finding-stage-plan.md)
+retains S8/finding 11 as next proposed, not admitted. Broader S1 qualification
+remains open.
 
 ## M0 T475 S5 Closure
 
@@ -131,13 +133,12 @@ packet above remains the only current S authority.
 ## Current Technical Baseline
 
 This worktree contains main cd8c8583e, the rebased S2 generic-call/EBX repair,
-S3 ForceDOS integration and S4 original public server enumeration recovery.
-Task-number overlap remains owner-approved. Application 0.0.477/protocol 67,
-coherent package 8f9f583a-a682-4175-b82e-1f926c9dbba4, passes all 16 Full gates.
-Its ten hashes match worktree assets/release; see [S4 evidence](../etc/evidence/m0-t478-s4-remote-rap.md).
-The native system currently returns 6118 for server enumeration; actual DOS
-matches it, while controlled original-handler tests cover successful conversion.
-O:/winnt remains untouched and original guest inputs are immutable.
+S3 ForceDOS integration, S4 original public server enumeration and S7 XMS boundary
+correction. Task-number overlap remains owner-approved. Application 0.0.478 /
+protocol 67, package 25974683-9d30-4f02-a62c-32e8ca3df424, passes all 16 selected
+Full gates; its ten hashes and manifest match worktree assets/release.
+See [S7 evidence](../etc/evidence/m0-t478-s7-xms-boundaries.md). DOS4GW/NESticle
+remain excluded. O:/winnt and original guest inputs remain unchanged.
 
 ## Temporary Evidence
 
