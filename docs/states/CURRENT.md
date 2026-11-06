@@ -36,8 +36,12 @@ Mainline source work is recorded in the
 [S1 guest call-chain audit](../etc/operations/m0-t479-s1-guest-callchain.md).
 The existing command wait blocks the whole worker; independent VM continuations
 must leave that host stack. Historical two-VM evidence was recovered from Git,
-including its duplicate-input failure. Seven bounded design decisions remain;
-no guest bridge runtime or new publication is claimed.
+including its duplicate-input failure. Follow-up source tracing selects a
+VMM callback/semaphore plus emulated event-device candidate for validation,
+confirms existing SAS paging translation, and excludes blindly forwarding
+NIDDB initialization. Callback/wait, notification, input, presentation and
+lifecycle proofs remain explicit S1 gates; no guest bridge runtime or new
+publication is claimed.
 
 [S1/generic-thunk integration](../etc/evidence/m0-t479-s1-thunk-import.md)
 retains T478 source S1/S2 identities. The imported S1 inventory is explicitly

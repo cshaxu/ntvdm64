@@ -138,3 +138,153 @@ Documentation verification ran in owned background process 27652, started
 An earlier detached launch (7232) produced no result and is not counted as a
 passing check; the successful supervisor retained process ownership through
 completion. No production rebuild is needed for this documentation checkpoint.
+
+## Follow-up: event-driven candidate and corrected source conclusions
+
+Research baseline: 3adad2816. This section supersedes assumptions, not the
+runtime admission gate above. No candidate driver or production modification
+has been exercised in this follow-up.
+
+### Command memory is already translated
+
+The complete selected chain is `mvdm_guest_location_acquire` ->
+`session_guest_memory_acquire` -> `mvdm_softpc_guest_memory_read` ->
+`c_sas_loads` -> `c_sas_hw_at` -> `bios_read_byte` in `ccpusas4.c`.
+The latter uses `xtrn2phy` when paging is active and has the original
+`biosDoInst` fallback. Therefore segment-times-16 is a *linear* address here,
+not proof of a physical-memory bypass. Do not add another page-table walker.
+The missing asynchronous contract is ownership of the current VM and lifetime
+of the address, not absence of SAS translation. Capture must finish on the CPU
+thread in the originating context; no mapping lease or guest address may be
+used by a channel thread after yielding. The fallback can execute guest code,
+so capture/reentry and failure require explicit tests before splitting the
+current singleton into independent requests.
+
+### Selected candidate to validate
+
+1. Preserve original command preparation for both services. Before the global
+   blocking/launch portion, copy command, environment, standard-handle
+   interpretation and return state into a request. Do not publish a child yet.
+2. Finish the existing `MS_bop_4` service-byte IP increment. Redirect execution
+   to a VMM-allocated V86 callback and return normally from the host BOP. The
+   callback supplies actual VMM identity and client state. A saved register
+   carrying a request reference is restored before guest return; it is not
+   authentication. No executable bytes are written into the DOS stack.
+3. Bind the request to the live payload/VM generation and existing authenticated
+   frontend origin. Submit through NTSRV. The original host BOP stack is gone
+   before any wait for admission, child execution or I/O completion.
+4. Use a VMM semaphore wait in guest driver context, with interrupt-service
+   flags validated on each supported guest. Do not use `Block_Poll`, periodic
+   suspend/resume, or hold a VMM critical section across a host operation.
+5. Host arrival of output/completion queues an identified event and requests a
+   guest-visible device interrupt through the existing ICA/CCPU. A project VxD
+   claims that device's IRQ through VPICD. Its interrupt handler acknowledges
+   the device and schedules/signals only through permitted VMM services; it
+   does not perform RPC, wait for host I/O, or touch arbitrary VM memory.
+6. The awakened target context applies pending I/O. Only after the final
+   presentation serial is applied and NTSRV completes the child chain may it
+   restore the caller and return the original service's CF/AL result.
+
+This is a proposed small emulated notification device, not a recovered NT4
+hardware V86 monitor. It adds real implementation work: IRQ allocation,
+pending/acknowledgement ownership and PIC-reset cancellation. Do not hardcode
+an apparently unused IRQ as safe. Registration must fail without acquiring
+the resource; it must not steal a guest device's interrupt. No new host broker
+transport is implied. The host pending queue is authoritative; interrupt
+edges merely announce pending work. An enqueue racing acknowledgement must
+remain observable, and a stale event must never revive a retired generation.
+
+The 3.0 DDK's reserved-semaphore note is not evidence that 3.1 lacks the service.
+Read-only Microsoft interface evidence includes MS-DOS 6
+`dev/smartdrv/sdvxd/vmm.inc` (services, wait flags, callback/API hooks) and
+Win2000SRC `private/shell/inc/win95/vmm.h` (the Win95 semaphore wrappers).
+Microsoft [KB Q75864](https://www.betaarchive.com/wiki/index.php/Microsoft_KB_Archive/75864)
+also identifies Signal_Semaphore among the asynchronous services for the
+documented Windows versions. Interface existence does not prove our callback
+can wait safely or that all required virtual interrupts are serviced.
+
+### Input and output are separate admission proofs
+
+Do not promote the historical fixed-character VKD experiment into a Console
+keyboard implementation. The input contract is one owner per event: forward
+an accepted event to the active child *or* leave it to the guest, never both.
+Keep make/break ownership across focus changes and handoff. Preserve the
+original path for inactive VMs and guest system shortcuts. A host queue failure
+is not permission to report a key consumed successfully. Native input records,
+layout/encoding, repeat, control keys and mouse events remain required.
+
+The documented VMM interrupt-chain mechanism can observe simulated V86
+interrupts, providing another candidate observation point after VKD routing.
+Its availability alone does not prove correct keyboard consumption/EOI or
+replace the PM API experiment with another untested hook. Compare the two
+points with the same event: record target VM, make/break, actual child read,
+and post-return BIOS input. Select the smallest point that proves single
+consumption on both guests and both full-screen/windowed paths. Do not install
+two production consumers or use an all-keys hotkey workaround.
+
+For output, retain existing frontend-base transaction and serial contracts.
+Host callbacks may buffer cells/geometry/cursor/input, but only a legal target
+VM context may apply guest presentation changes. Direct host writes to global
+B800 memory are not a VDD update contract. `PRESENT_BARRIER` must acknowledge
+the specified committed presentation in the guest model, not merely queue
+receipt; it cannot require an occluded window to become physically visible.
+File and pipe redirection bypass this presentation boundary. Every consumed
+Console opcode needs a provider disposition, including graphics, font,
+geometry, mode and input operations: a text-only success stub does not satisfy
+the admitted nested-payload scope. No unsupported-operation fallback or
+silent truncation has been approved in this research.
+
+### Environment, NIDDB and teardown
+
+Guest `doskrnl/bios/msint13.asm` and `doskrnl/dos/mscode.asm` distinguish Windows
+enhanced startup/exit notifications using INT 2F and DX bit 0. These are
+transition evidence, not proof that a usable bridge has loaded. Driver
+registration establishes READY; absence is not sufficient to classify a
+paged V86 guest as ordinary DOS. A future observer must be on the actual CCPU
+interrupt path, not assume the DPMI32 software-interrupt reporter sees it.
+
+NIDDB is a distinct mouse/device-state concern. Its B1 DeviceInit reaches
+`c_SasRegisterVirtualSelectors`, which writes two guest LDT descriptors.
+Do not forward that initialization merely to obtain VM registration. The
+current `virtual.c` already contains DIV-467 retirement restoration; older
+research calling that change unshipped is stale relative to this baseline.
+Any needed instancing must use a separately justified lifecycle adapter;
+neither activating the complete old protocol nor declaring all instancing
+unnecessary follows from the frontend design.
+
+VM destruction first closes admission for that generation, then reports
+retirement to NTSRV and disables guest delivery. Child/process handling remains
+NTSRV-owned. Pending host results for a retired VM are discarded as stale,
+never applied through the current VM. Guest semaphore/callback storage cannot
+be freed while a waiter or handler can still reference it. Static loading is
+the initial candidate on both guests; do not promise dynamic unload safety
+based on the historical dynamic-loader experiment. Payload shutdown must
+disarm the notification device before worker reuse.
+
+### Finite proof gate before freezing the ABI
+
+| Proof | Positive and negative observations required |
+| --- | --- |
+| Callback/wait | Both 54:08/0A, both guests; full caller state restored; sibling continues; signal-before-wait, signal-during-wait, VM destruction while blocked; no host BOP frame retained. |
+| Notification device | Claimed resource; masked/unmasked IRQ, HLT, early completion, enqueue/ack race, PIC reset and disarm; no idle polling or interrupt storm. |
+| Input owner | Both keyboard candidate observation points compared; make/break, repeat, modifiers, focus switch, handoff, no duplicate BIOS input; do not count a key-injection trace as child consumption. |
+| Presentation | Opcode inventory against actual DOS/native consumers; frame serial applied in exact VM before return; different VM geometry and nested graphics included. |
+| Lifecycle | System/pre-existing/reused VM, failed/partial registration, missing driver, payload exit, NTSRV loss; NIDDB mouse state independently checked. |
+
+These gates are prerequisites, not claimed passing tests. The research now
+identifies a concrete event-driven implementation candidate and rejects the
+old timed suspension path, but S1 is not closed and no universal feasibility
+claim is made for input/presentation. The next work is these bounded executable
+proofs and provider mapping, not additional unbounded alternative designs.
+
+Read-only comparison hashes (no source imported):
+
+- MS-DOS 6 VMM.INC: `28BD6EDABA10434DFCAD26BFCDAB8DBD1A3CC28100CD6910C67397D8C05F92E9`.
+- Win95 VMM.H: `A6F6B6178BD21ADB1CF5F30C791E875632FDB9BC5ACEEE9890425B3EDC85EC9F`.
+- OpenNT-4.5 `nt/private/os2/client/thunk/include/vkd.inc`:
+  `11BECFF50B3FED4F080A795925788F670C2BDE6F645926C8BF6198B61211B947`.
+
+Follow-up documentation validation: owned hidden process 8068 exited zero;
+documentation governance and `git diff --check` passed. Logs are
+`build/t479-s1/verify-followup.stdout` and `.stderr`. This delivery changes only
+this research record and its Current summary, not runtime or guest bytes.
