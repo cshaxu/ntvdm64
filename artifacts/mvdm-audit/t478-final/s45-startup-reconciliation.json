@@ -1,0 +1,331 @@
+{
+  "scope": "26 existing startup/bootstrap identities;12 bounded dispositions and14 explicitly pending subcontracts, no product change",
+  "rows": [
+    {
+      "id": "DOS16:541d06932befed15a369",
+      "module": "1.2",
+      "contract": "NTVDM initial host entry ordering",
+      "disposition": "wired",
+      "current_owner": "ntvdm.c entry -> TimerInit, CpuEnvInit, nls_init, host_main; standalone begin/finish surrounds retained order",
+      "evidence_and_limits": "Current map plus S43 real DOS/WOW startup. No injected TimerInit/SEH failure claim."
+    },
+    {
+      "id": "DOS16:b32af3ec2e34d12f11ee",
+      "module": "1.2",
+      "contract": "CPU configuration source and local lookup",
+      "disposition": "wired",
+      "current_owner": "CpuEnvInit and original getenv renamed mvdm_host_getenv; mvdm_shadow_registry read-only provider",
+      "evidence_and_limits": "Default seeding/early-return/list lookup retained. Registry snapshot proven separately in S42; CpuEnv-specific enumeration/allocation faults not re-exercised."
+    },
+    {
+      "id": "DOS16:002c6b3710a66e3c4d4e",
+      "module": "1.2",
+      "contract": "COMMAND initial home-drive binding",
+      "disposition": "wired",
+      "current_owner": "dos/command/cmd.c CMDInit -> NtvdmGetSystemDirectoryA -> selected firmware root",
+      "evidence_and_limits": "Only drive character is assigned and original length test remains. Actual package DOS startup; old initialization fixture alone uses a host root and is not current package proof."
+    },
+    {
+      "id": "DOS16:d6a05ee11a2d88e07d9d",
+      "module": "1.2",
+      "contract": "DEM initial directory and failure result",
+      "disposition": "wired",
+      "current_owner": "dos/dem/dem.c DemInit -> same selected root, original malloc/length FALSE path; scs_init terminates on FALSE",
+      "evidence_and_limits": "Current map and real NTIO/NTDOS startup. Allocation/root failures are source-reviewed, not newly injected."
+    },
+    {
+      "id": "DOS16:6266979dca9b4f13293a",
+      "module": "1.2",
+      "contract": "First VDM query and service initialization",
+      "disposition": "wired",
+      "current_owner": "scs_init -> GetNextVDMCommand(NULL) -> BaseSrvIsFirstVDM; service lock surrounds dispatch",
+      "evidence_and_limits": "Original service-global flag clears once. T412 first-query tests plus current locked handler/source; no new race/restart certification."
+    },
+    {
+      "id": "DOS16:be2bcd3ff1b863529226",
+      "module": "1.2",
+      "contract": "DEM startup process error mode",
+      "disposition": "wired",
+      "current_owner": "DemInit SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOOPENFILEERRORBOX)",
+      "evidence_and_limits": "Original flags/order remain before allocation; no WER UI guarantee or fabricated failure recovery."
+    },
+    {
+      "id": "DOS16:e28ad710adee162d6e0b",
+      "module": "1.2",
+      "contract": "First-system-VDM DOS boot-name marker materialization",
+      "disposition": "excluded",
+      "current_owner": "AddSystemFiles DIV-134 -> mvdm_softpc_prepare_system_file_compatibility no-op",
+      "evidence_and_limits": "Explicit non-invasive product rule excludes C:/IO.SYS and MSDOS.SYS marker writes. No virtual success or alternate boot-file creator; reopen only after owner scope change."
+    },
+    {
+      "id": "DOS16:23f151dcc66b8e776872",
+      "module": "1.2",
+      "contract": "One-shot PIF-selected configuration path",
+      "disposition": "retained-fix",
+      "current_owner": "GetPIFConfigFiles DIV-157/278; path retention plus OEM-to-ANSI boundary; GetPIFData frees replaced selections",
+      "evidence_and_limits": "T420 S35 demonstrates original one-read override loss; T420 S37 proves non-ASCII callers and matched LIM buffer. Do not undo established repair. No new all-PIF certification."
+    },
+    {
+      "id": "DOS16:6183631816abcfe32197",
+      "module": "1.2",
+      "contract": "PIF binary settings extraction and defaults",
+      "disposition": "pending",
+      "current_owner": "nt_pif.c GetPIFData selected original parser with retained path ownership fix",
+      "evidence_and_limits": "Next: map original extension/default/priority cases to existing fixture evidence; ordinary startup does not prove all PIF variants."
+    },
+    {
+      "id": "DOS16:e38a5b13166e6e9c8136",
+      "module": "1.2",
+      "contract": "Application of startup PIF names and launch metadata",
+      "disposition": "pending",
+      "current_owner": "cmdpif.c cmdCheckForPIF reached through mvdm_command_check_pif guest copy boundary",
+      "evidence_and_limits": "T453 S3 original-caller and environment fixtures exist; next pin current inputs and exact covered error/copy-release cases. S3 ForceDOS does not close all PIF semantics."
+    },
+    {
+      "id": "DOS16:4673504e1fe696895ecf",
+      "module": "1.2",
+      "contract": "CONFIG/AUTOEXEC temporary preprocessing",
+      "disposition": "pending",
+      "current_owner": "cmdconf.c ExpandConfigFiles/WriteExpanded retains byte parser and session-root binding",
+      "evidence_and_limits": "Next: reconcile existing CONFIG/AUTOEXEC parser witnesses, signed CHAR accounting and original failure limits; do not add new parser."
+    },
+    {
+      "id": "DOS16:ca680961be9e8806496a",
+      "module": "1.2",
+      "contract": "Shared temporary file acquisition boundary",
+      "disposition": "pending",
+      "current_owner": "cmdredir.c cmdCreateTempFile retains fallback, inheritable temporary file and cleanup",
+      "evidence_and_limits": "Second GetTempFileName result remains unchecked as original. Next associate existing temporary-file/pipe tests and disposition that original limit."
+    },
+    {
+      "id": "DOS16:c3ee8f2820af6f055614",
+      "module": "1.2",
+      "contract": "Initial DOS environment paragraph query and transfer",
+      "disposition": "pending",
+      "current_owner": "cmdenv.c cmdGetInitEnvironment retains paragraph query and synchronous destination lease",
+      "evidence_and_limits": "Original final realloc tests old pointer and WORD capacity remains. Next match existing environment tests and original limits; no claim that normal launch covers exhaustion/oversize."
+    },
+    {
+      "id": "DOS16:cd7494c32de5fcd66cdc",
+      "module": "1.2",
+      "contract": "Startup environment merge and original expansion rules",
+      "disposition": "pending",
+      "current_owner": "cmdenv.c cmdCreateVDMEnvironment/cmdSetEnvironmentVariable/cmdExpandEnvironmentStrings",
+      "evidence_and_limits": "Original order/duplicates/encoding phases remain; next reconcile historical env/expansion receipts and specific local-boundary changes."
+    },
+    {
+      "id": "DOS16:9853f295a95629f23c1e",
+      "module": "1.2",
+      "contract": "Startup Console-origin metadata bit",
+      "disposition": "wired",
+      "current_owner": "cmdmisc.c cmdGetStartInfo -> AL=(DosSessionId?1:0); cmddisp original SVC slot retained",
+      "evidence_and_limits": "Current source and mapped original function, normal guest startup. Not a replacement first-VDM query or Console allocator."
+    },
+    {
+      "id": "DOS16:2dff4e2e17c9be86c67d",
+      "module": "1.2",
+      "contract": "NTVDM early launcher switches and native initialization",
+      "disposition": "pending",
+      "current_owner": "nt_reset.c host_applInit retains ordered f/w/i switch parsing and original host initialization",
+      "evidence_and_limits": "Source inspected; next correlate standalone bootstrap/termination changes and native init error tests. Not permission to change original early-break behavior."
+    },
+    {
+      "id": "DOS16:901a32f49bf85e8d18cb",
+      "module": "1.2",
+      "contract": "PIF startup configuration acquisition and Console association",
+      "disposition": "pending",
+      "current_owner": "config.c ASKING_FOR_PIF -> BaseSrv PIF fill and adoption",
+      "evidence_and_limits": "Reserved[GetPIF.ReservedLen] remains unguarded at capacity. Next compare actual producer capacities and existing original-limit evidence, not invent padding/tolerance."
+    },
+    {
+      "id": "DOS16:263d8b0026d041d346f9",
+      "module": "1.2",
+      "contract": "Initial session request capture and typed reply contract",
+      "disposition": "pending",
+      "current_owner": "original vdm.c GetNextVDMCommand / srvvdm.c BaseSrvGetNextVDMCommand plus copied service transport",
+      "evidence_and_limits": "Current owners and T412 capacity/retry witnesses located. Next bind current transport/lifetime evidence for query-only versus consume and wake/retry."
+    },
+    {
+      "id": "DOS16:4c1abcb8b4894efee724",
+      "module": "1.2",
+      "contract": "DOS launcher template acquisition and session switch production",
+      "disposition": "pending",
+      "current_owner": "BaseGetVdmConfigInfo generated verbatim from selected vdm.c; BaseGetVDMKeyword and image-end boundary in common/base_srv/base_config.c",
+      "evidence_and_limits": "Registry template replaced with bound immutable package image; original formatting remains. Next reconcile path-boundary justification and exact generated-carrier identity; not an autonomous duplicate by object name."
+    },
+    {
+      "id": "DOS16:86818e62324bec6dccaf",
+      "module": "1.2",
+      "contract": "Initial DOS request preparation, admission and copied payload",
+      "disposition": "pending",
+      "current_owner": "Run16 -> original BaseCheckVDM; NTSRV -> original BaseSrvCheckVDM/CopyCommand",
+      "evidence_and_limits": "Current launcher/service maps prove original ownership. Next bind startup/copy/capacity and standard-handle tests to current worker admission."
+    },
+    {
+      "id": "DOS16:7f2437800dace598a2ec",
+      "module": "1.2",
+      "contract": "Initial worker publication, parent-wait choice and creation rollback",
+      "disposition": "pending",
+      "current_owner": "Run16 service-start/undo -> worker_registry.c -> original BaseUpdateVDMEntry/worker-spawn",
+      "evidence_and_limits": "Current service owns launch; legacy direct-CreateProcess audit recipe is not current orchestration. Next reconcile existing ownership/rollback tests, do not reintroduce launcher-owned lifecycle."
+    },
+    {
+      "id": "DOS16:1f6a1765004d85a79063",
+      "module": "1.2",
+      "contract": "Launcher Unicode/ANSI environment construction before worker creation",
+      "disposition": "pending",
+      "current_owner": "Run16 BaseCreateVDMEnvironment imported client.obj, then guest-root environment preparation",
+      "evidence_and_limits": "Original dual buffers are selected; next review current WIN16DIR/root projection versus original conversion and existing env evidence."
+    },
+    {
+      "id": "DOS16:5c35263481cae628a01f",
+      "module": "1.2",
+      "contract": "Guest-supplied initial COMSPEC capture and console-output reply",
+      "disposition": "wired",
+      "current_owner": "cmdmisc.c cmdComSpec original first-call/COMSPEC/AL behavior with DIV-192 synchronous guest string copy",
+      "evidence_and_limits": "Current map/SVC entry and normal guest execution; original final fixed-buffer strcpy bound is not claimed safe for arbitrary overlong input. No new tolerance."
+    },
+    {
+      "id": "DOS16:a3fbae188f099cd80873",
+      "module": "1.3",
+      "contract": "NTIO bootstrap image, state restoration and original executor handoff",
+      "disposition": "wired",
+      "current_owner": "nt_msscs.c InitialiseDosEmulation original reset/VDD/LIM/scs, exact NTIO read, state restore and CS:IP70:0",
+      "evidence_and_limits": "Current source/map and S43 actual DOS boot; S42 startup VDD evidence covers startup VDD loading; source confirms VDD-after-reset order. Missing/short boot-image fault matrix not newly run; original ignored error/return limits retained."
+    },
+    {
+      "id": "DOS16:d9d3f3b37cdee098e809",
+      "module": "1.3",
+      "contract": "NTDOS synchronous stream load and Guest destination/ownership contract",
+      "disposition": "wired",
+      "current_owner": "demmisc.c demLoadDos original DI:0 mapping, CreateFileOem and 16384-byte stream loop",
+      "evidence_and_limits": "Current map and actual immutable NTDOS boot; positive short read advances actual bytes, EOF closes, debug root lifetime stays original. No injected short-read or debug-toggle coverage claim."
+    },
+    {
+      "id": "DOS16:92bb27b0a79b5f00a42b",
+      "module": "1.3",
+      "contract": "First COMMAND frame publication and pre-registered shared Guest locations",
+      "disposition": "pending",
+      "current_owner": "cmdmisc.c cmdGetNextCmd and cmdSetInfo; original CMDINFO frame with session-owned SCS scalar registration",
+      "evidence_and_limits": "S9 fixed shared guest-state ownership and S3 ForceDOS ordering. Next reconcile complete first-frame widths/environment/tail/carry tests; do not infer all127-byte edges from boot."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "sha256": "ff11bc91ba70eb795f68c0e501588b9860f9677683d9c7a53e3915ff00292015"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+      "sha256": "94ccb215daf9dbf46f802d64d4bd5e21e9cf02452077da93df143a08c3bf6fe8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "sha256": "ecd43471f699e3172f50b08a871d94256841651799e37fe1e0eb0454e5de5253"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "cb5e75063ceb75996d0d87caf77aff7acbde81a7e13f44f8c70db4e8c5ef42eb"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "sha256": "fa608e4f3f5b9379f2b38b6a03a193aca8ee5ce4edbf151c148967cba6406fc1"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "sha256": "69d346b5665d6755eb63d2e012027d3861894bd39b4f18dfb217959532491e76"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "sha256": "418423e0da31b95b08031883f70842fd5f5b4ea1b928d6c40b4ab33a03da1da5"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "sha256": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_service.c",
+      "sha256": "72f268424fba27d2b99d55dd4f22e5381095e87e94da93ceb0078a118bf15821"
+    },
+    {
+      "path": "src/common/base_srv/base_config.c",
+      "sha256": "5274db2ebb5f2d9401718eba7d9d4cc719bd24cabd4cd28ebb937c7861f97220"
+    },
+    {
+      "path": "src/run16-exe/main.c",
+      "sha256": "a9553c4fbdb8be7bdf37219f319cccb73075cdbc5e22f588207ab3fa2435217a"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+      "sha256": "213ac4e77be040359352b7236c7ce7700b6f00ab9b29f5ab710502a9ede496ec"
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/launcher/run16.exe.map",
+      "sha256": "81f2a0eb923e9328abf330cc7d8002b52547c1f9cefbc3ea6339da6e4321bc79"
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/service/ntsrv.exe.map",
+      "sha256": "6a01d1ea6b9a55e104f18fba0809813af9ffa7489ea98c2ce64be0623ade23cb"
+    },
+    {
+      "path": "build/t478-s43/verify-Full/timings.json",
+      "sha256": "ee277969258c65b8f834cadcaeef5a45d6aac378501e2b4081869b2486d03cb9"
+    },
+    {
+      "path": "build/t478-s43/verify-Full/Console-17-summary.json",
+      "sha256": "51fd0523ac986d66b21916449d8c7431e146b0517bd719bc08eb8ef5aaf4d056"
+    },
+    {
+      "path": "assets/release/release-manifest.json",
+      "sha256": "03ffee996cdff4a262884b0ca249ae1e2aa5d48721b3b9788e751683d60e0831"
+    }
+  ],
+  "map_witnesses": {
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": [
+      "0001:00051ef0       _TimerInit                 00452ef0 f   original-softpc-host-roots:nt_timer.obj",
+      "0001:000537a0       _CpuEnvInit                004547a0 f   original-softpc-host-roots:ntvdm_entry.obj",
+      "0001:00053b40       _nls_init                  00454b40 f   original-softpc-host-roots:nt_nls.obj",
+      "0001:0005d4e0       _GetPIFConfigFiles         0045e4e0 f   original-softpc-host-roots:nt_pif.obj",
+      "0001:0005d550       _GetPIFData                0045e550 f   original-softpc-host-roots:nt_pif.obj",
+      "0001:000600b0       _InitialiseDosEmulation    004610b0 f   original-softpc-host-roots:nt_msscs.obj",
+      "0001:00068a50       _host_main                 00469a50 f   original-softpc-support:main.obj",
+      "0001:001500b0       _DemInit                   005510b0 f   original-mvdm-dem:dem.obj",
+      "0001:00154780       _demLoadDos                00555780 f   original-mvdm-dem:demmisc.obj",
+      "0001:00155ad0       _CMDInit                   00556ad0 f   original-mvdm-command:cmd.obj",
+      "0001:00155ce0       _cmdCreateTempFile         00556ce0 f   original-mvdm-command:cmdredir.obj",
+      "0001:00156850       _cmdComSpec                00557850 f   original-mvdm-command:cmdmisc.obj",
+      "0001:00156b00       _cmdGetNextCmd             00557b00 f   original-mvdm-command:cmdmisc.obj",
+      "0001:00157570       _cmdGetStartInfo           00558570 f   original-mvdm-command:cmdmisc.obj",
+      "0001:00158ef0       _cmdGetInitEnvironment     00559ef0 f   original-mvdm-command:cmdenv.obj"
+    ],
+    "build/.ninja/msvc-x64-release/launcher/run16.exe.map": [
+      "0001:00007da0       BaseCheckVDM               0000000140008da0 f   opennt-base-client:client.obj",
+      "0001:00008fc0       BaseCreateVDMEnvironment   0000000140009fc0 f   opennt-base-client:client.obj"
+    ],
+    "build/.ninja/msvc-x64-release/service/ntsrv.exe.map": [
+      "0001:0001b800       BaseGetVdmConfigInfo       000000014001c800 f   common-base-srv-bindings:config-command.obj",
+      "0001:000389d0       BaseSrvIsFirstVDM          00000001400399d0 f   opennt-base-server:srvvdm.obj"
+    ]
+  },
+  "current_runtime_scope": "Reuse unchanged S43 Full16/16 for normal startup/lifecycle only; no new fault matrix or current replay of historical PIF fixtures."
+}
