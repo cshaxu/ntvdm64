@@ -35,6 +35,9 @@ int main(void)
     attach_false = DllMain(0,1,0);
     thread_false = DllMain(0,2,0);
     detach_false = DllMain(0,0,0);
+    /* Process termination must not run explicit-unload provider cleanup. */
+    if (DllMain(0,0,(void *)1) != detach_false || cleanups != 2) return 5;
+    if (DllMain(0,3,0) != thread_false || cleanups != 2) return 6;
     printf("attach=%08lx false_attach=%08lx thread_false=%08lx detach_false=%08lx cleanups=%u\n",
            (unsigned long)attach,(unsigned long)attach_false,(unsigned long)thread_false,
            (unsigned long)detach_false,cleanups);

@@ -2,7 +2,8 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$ExpectedWow32Sha256,
-    [Parameter(Mandatory)][string]$BuildRoot
+    [Parameter(Mandatory)][string]$BuildRoot,
+    [ValidateSet('AttachFailure','MissingInit')][string]$FailureMode='AttachFailure'
 )
 # Only an isolated, deliberately failing diagnostic WOW32 is accepted.
 # The production package and guest files are never modified.
@@ -40,16 +41,24 @@ foreach($mode in @('default','wait')) {
         $start.Environment['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
         $start.Environment['MVDM_S42_WOW_RETURN_REPORT_PATH']="$out/$mode-stage.txt"
         $start.Environment['MVDM_TEST_WOW_ATTACH_MARKER']="$out/$mode-attach.txt"
+        $start.Environment['MVDM_TEST_WOW_UNLOAD_MARKER']="$out/$mode-unload.txt"
         $process=[Diagnostics.Process]::Start($start)
         if(!$process.WaitForExit(45000)){throw "$mode observer timeout"}
         $report=Get-Content "$out/$mode-observer.txt" -Raw
         $stages=Get-Content "$out/$mode-stage.txt" -Raw
-        if(!(Test-Path "$out/$mode-attach.txt") -or
-                (Get-Content "$out/$mode-attach.txt" -Raw) -ne 'attach-failure' -or
+        $markerOk=if($FailureMode -eq 'AttachFailure') {
+            (Test-Path "$out/$mode-attach.txt") -and
+                (Get-Content "$out/$mode-attach.txt" -Raw) -eq 'attach-failure'
+        } else {
+            (Test-Path "$out/$mode-unload.txt") -and
+                (Get-Content "$out/$mode-unload.txt" -Raw) -eq "attach`ndetach`n"
+        }
+        $expectedStage=if($FailureMode -eq 'AttachFailure'){'load-failed'}else{'init-export-missing'}
+        if(!$markerOk -or
                 $process.ExitCode -ne 0 -or $report -notmatch '(?m)^result=exited\r?$' -or
                 $report -notmatch '(?m)^exit=0x0000045[aA]\r?$' -or
-                $stages -notmatch 'wow-stage stage=load-failed') {
-            throw "$mode did not report real WOW32 attach failure"
+                $stages -notmatch ('wow-stage stage='+$expectedStage)) {
+            throw "$mode did not report real WOW32 $FailureMode"
         }
     } finally {
         if($process){$process.Dispose()}
@@ -57,5 +66,5 @@ foreach($mode in @('default','wait')) {
         finally { if($runtime){Remove-PhysicalRuntimeStage $runtime} }
     }
 }
-'PASS real WOW32 attach failure: default and --wait return ERROR_DLL_INIT_FAILED' |
+"PASS real WOW32 ${FailureMode}: default and --wait return ERROR_DLL_INIT_FAILED" |
     Set-Content "$out/result.txt"

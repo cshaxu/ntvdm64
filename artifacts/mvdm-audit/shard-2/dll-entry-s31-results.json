@@ -1,0 +1,212 @@
+{
+  "result": "pass",
+  "scope": "Host WOW32 entry and early explicit-unload disposition; diagnostic DLLs only",
+  "original": {
+    "current_sha256": "01C600795A733E090C6CED0C68CE82CFA2D75D15E7BD7D0B5615E78375B59A21",
+    "originals": [
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+        "sha256": "1DFE9900E6DA3BF0E2984C3DF42BDD155B177CFE7707BB24E1324037147D292A",
+        "initializer_equal_except": "existing retired private GdiQueryTable acquisition; no new difference"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wow32.c",
+        "sha256": "1DFE9900E6DA3BF0E2984C3DF42BDD155B177CFE7707BB24E1324037147D292A",
+        "initializer_equal_except": "existing retired private GdiQueryTable acquisition; no new difference"
+      }
+    ]
+  },
+  "bridge": {
+    "output": "attach=00000001 false_attach=00000000 thread_false=00000000 detach_false=00000000 cleanups=2\r\nPASS typed BOOLEAN bridge returns false and preserves cleanup\r\n",
+    "scope": "Selected bridge object with controlled BOOLEAN provider; not real DLL lifecycle acceptance",
+    "result": "pass",
+    "inputs": [
+      {
+        "Algorithm": "SHA256",
+        "Hash": "740A49A2B0625AAC12CD8FE6B5473AB35F55433767034ACACD4921E651F1DA73",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-dll-entry-bridge.c"
+      },
+      {
+        "Algorithm": "SHA256",
+        "Hash": "AB83CE0B6568336BECFDDE87879F92474378924AECFB9DFC7A3FD4D4E730AF94",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj"
+      },
+      {
+        "Algorithm": "SHA256",
+        "Hash": "C16A0A4225334F84776BEFB8957200D24FACC098791113B862677171F1A279E5",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\wow_dll_entry_boolean_fixture.c"
+      }
+    ]
+  },
+  "loader": {
+    "output": "wow_dll_loader_provider.c\r\nO:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\wow_dll_loader_provider.c(15): warning C4100: 'reserved': unreferenced formal parameter\r\nO:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\wow_dll_loader_provider.c(15): warning C4100: 'reason': unreferenced formal parameter\r\nO:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\wow_dll_loader_provider.c(14): warning C4100: 'instance': unreferenced formal parameter\r\n   Creating library O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s31\\bridge-final\\wow-bridge-test.lib and object O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s31\\bridge-final\\wow-bridge-test.exp\r\nwow_dll_loader_fixture.c\r\nWOW_BRIDGE_OS_LOADER attach_false=failed attach_true=loaded unload=1 bitmap=1 registry=1 rounds=8\r\n",
+    "scope": "Windows loader with selected bridge and controlled provider; not actual WOW guest DLL lifecycle",
+    "result": "pass",
+    "inputs": [
+      {
+        "Algorithm": "SHA256",
+        "Hash": "AB83CE0B6568336BECFDDE87879F92474378924AECFB9DFC7A3FD4D4E730AF94",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj"
+      },
+      {
+        "Algorithm": "SHA256",
+        "Hash": "4E36A08AA26FF21D2B2DA8D82DE8EABE0D91F0D9B0516B52C2528DF97C6287A2",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\wow_dll_loader_provider.c"
+      },
+      {
+        "Algorithm": "SHA256",
+        "Hash": "08F6813C41C442C8D9D66EB543E43BDF68D3ADC95471F145A1215CAFADB78D48",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\wow_dll_loader_fixture.c"
+      },
+      {
+        "Algorithm": "SHA256",
+        "Hash": "731BB107E8537F2C99E70405BB2B86B9A451CC9BA07970D4B5DDD2359B33C01E",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s31\\bridge-final\\wow-bridge-test.dll"
+      },
+      {
+        "Algorithm": "SHA256",
+        "Hash": "69BB3456A0CA83495B79736CBD0216B29EDDCA320327F421D8923FC6744F2C3F",
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s31\\bridge-final\\wow-bridge-loader.exe"
+      }
+    ]
+  },
+  "image": {
+    "result": "pass",
+    "object_sha256": "AB83CE0B6568336BECFDDE87879F92474378924AECFB9DFC7A3FD4D4E730AF94",
+    "image_sha256": "90D056EF8544753FE624359CB68D7DE85421ED8DD183B473A30C895EB9489B3A",
+    "function_bytes": 51,
+    "matched_image_va": 268923904,
+    "masked_relative_calls": [
+      {
+        "offset": 14,
+        "symbol": "_W32DllInitialize@12"
+      },
+      {
+        "offset": 36,
+        "symbol": "_wow_registry_binding_shutdown@0"
+      },
+      {
+        "offset": 41,
+        "symbol": "_wow_bitmap_bindings_shutdown@0"
+      }
+    ],
+    "scope": "Complete bridge body with call relocations masked; not original attach failure or full loader behavior"
+  },
+  "runtime": {
+    "attach": {
+      "result": "PASS real WOW32 AttachFailure: default and --wait return ERROR_DLL_INIT_FAILED\n",
+      "diagnostic_dll_sha256": "22EFA62A882336F18BE61D7D6968AA29DE85568E266831A733A421A6FD6DBFFF",
+      "cases": {
+        "default": {
+          "observer": "container=console-owning-nondebug\npid=4016\nresult=exited\nexit=0x0000045a\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=33564\nconsole-members-after-wait=1\nconsole-member=33564\ndirect-child pid=36932 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\nb15\\system32\\ntsrv.exe\ntimeout-ms=40000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\nb15\nfixed-system-root-chars=11\nfixed-system-root-short-chars=11\nfixed-system-root-short=O:\\tmp\\nb15\nimage-identity=unavailable\n",
+          "stages": "wow-stage stage=page-domain-entered cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=load-begin cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=load-failed cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\n",
+          "marker": "attach-failure"
+        },
+        "wait": {
+          "observer": "container=console-owning-nondebug\npid=12056\nresult=exited\nexit=0x0000045a\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=34156\nconsole-members-after-wait=1\nconsole-member=34156\ndirect-child pid=33240 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\ncf4\\system32\\ntsrv.exe\ntimeout-ms=40000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\ncf4\nfixed-system-root-chars=11\nfixed-system-root-short-chars=11\nfixed-system-root-short=O:\\tmp\\ncf4\nimage-identity=unavailable\n",
+          "stages": "wow-stage stage=page-domain-entered cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=load-begin cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=load-failed cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\n",
+          "marker": "attach-failure"
+        }
+      }
+    },
+    "unload": {
+      "result": "PASS real WOW32 MissingInit: default and --wait return ERROR_DLL_INIT_FAILED\n",
+      "diagnostic_dll_sha256": "B84AE82D7E976F041A2DE705D86DCA86CE620D0CFE763E4F6EA80C1CDE9D5BD5",
+      "cases": {
+        "default": {
+          "observer": "container=console-owning-nondebug\npid=7708\nresult=exited\nexit=0x0000045a\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=8428\nconsole-members-after-wait=1\nconsole-member=8428\ndirect-child pid=33324 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\n4b7\\system32\\ntsrv.exe\ntimeout-ms=40000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\n4b7\nfixed-system-root-chars=11\nfixed-system-root-short-chars=11\nfixed-system-root-short=O:\\tmp\\n4b7\nimage-identity=unavailable\n",
+          "stages": "wow-stage stage=page-domain-entered cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=load-begin cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=init-export-missing cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\n",
+          "marker": "attach\ndetach\n"
+        },
+        "wait": {
+          "observer": "container=console-owning-nondebug\npid=5328\nresult=exited\nexit=0x0000045a\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=27580\nconsole-members-after-wait=1\nconsole-member=27580\ndirect-child pid=4556 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\nbb9\\system32\\ntsrv.exe\ntimeout-ms=40000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\nbb9\nfixed-system-root-chars=11\nfixed-system-root-short-chars=11\nfixed-system-root-short=O:\\tmp\\nbb9\nimage-identity=unavailable\n",
+          "stages": "wow-stage stage=page-domain-entered cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=load-begin cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\nwow-stage stage=init-export-missing cr0=80000011 cr3=00900000 csip=01c7:aebc\\r\\n",
+          "marker": "attach\ndetach\n"
+        }
+      }
+    }
+  },
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "D279917DE06F879A3B474F16861DF122290FBFA845063FC0B04CFDC8D52E63DC",
+      "Machine": 34404,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "4F0A950810F5FB9508D54A7E9E336BE5DEA5F535D9E0B2BC332E7A11DD7D49A9",
+      "Machine": 34404,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "1F722FD3FDE5209753DB3EF63AB81C508429E26A209E88FBD673D0795B048D9D",
+      "Machine": 34404,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "CA3FE1B056D3FE93CA959F0651F81848DF6DD32FE06D702F69F9A24913007896",
+      "Machine": 332,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "F96A62BFE1D0722F54D34B7090D551960FFE7E3C3F339437F8AF20B331C3E6F4"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "082379C579A69E4AA774CFDCA34D9B5A4AE99B977B9C7255DCBB852CF7AF2C33",
+      "Machine": 34404,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "7EA5BA80B79AADB53BEEA2346FAD2F6209DB8167DBB03DADBD7A9FA200B0E606",
+      "Machine": 34404,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "90D056EF8544753FE624359CB68D7DE85421ED8DD183B473A30C895EB9489B3A",
+      "Machine": 332,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "015F327EA32A47497A7A46D9D8EA66F6D68F60E25DA8C621EA9569F4E35A753C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "E5DA08C2D3989B4312A21118A13FCF1513F00B0FD6B51520FF8F3569F19247BD",
+      "Machine": 332,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "8994FFE2C47749A6B711E7DA77238C99441B58AE5A494B04E6169A8E409BD607"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "4A6D7A1F4A82E9FCDA7C8249189B53DE9C468957BCC96D1A900C759BEDBEBF48",
+      "Machine": 332,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "63A960730B59592D2B6FA561B92B15B596F5229CE11638B41EBB6B8A102C68A2"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "FA6FAC70975DDA9FA3A2401B64EE28D91304E9A74BA710265EBA4E68F9A0DD01",
+      "Machine": 34404,
+      "PackageId": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "limits": "Early missing-export unload only, not arbitrary active WOW unloading. Detach marker proves control returned after original HeapDestroy call, not that every original resource is retired. Original small-heap/critical-section ownership limits retained."
+}

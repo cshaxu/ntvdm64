@@ -1275,3 +1275,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S29 Winsock rundown](evidence/m0-t478-s29-winsock-rundown.md): provider ownership repair, controlled failures, real Win16 cases and exact Full/release evidence.
 
 - [T478 S30 diagnostic disposition](evidence/m0-t478-s30-diagnostic-disposition.md): current source/object reconciliation confirms prior fixes; maintained fixtures and retained exact S29 package.
+
+- [T478 S31 DLL entry disposition](evidence/m0-t478-s31-dll-entry-disposition.md): original lifecycle comparison, actual attach failure and early explicit unload; unchanged release.

@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S30 is closed with [CPU diagnostic evidence](../etc/evidence/m0-t478-s30-diagnostic-disposition.md).
-Next planned S31: finding 07 DLL entry lifecycle. Continuous authorization remains.
+T478 S31 is closed with [host DLL lifecycle evidence](../etc/evidence/m0-t478-s31-dll-entry-disposition.md).
+Next planned S32: finding 08 export/profile consumers. Continuous authorization remains.
 Temporary CURRENT size exception: accumulated closures retained through T478 final reconciliation.
 
 ## S1 Closure Record
@@ -309,3 +309,7 @@ no new drain guarantee; exact S27 release retained. S29/finding 65 follows.
 ## S30 Closure Record
 
 T478 S30 [confirms the prior CPU diagnostic repairs](../etc/evidence/m0-t478-s30-diagnostic-disposition.md) with current source comparisons, selected CCPU tests and exact released-image binding. Test maintenance only; no product changes or new tolerance. Exact S29 package and its Full evidence remain unchanged.
+
+## S31 Closure Record
+
+T478 S31 [verifies the current host DLL lifecycle](../etc/evidence/m0-t478-s31-dll-entry-disposition.md): BOOLEAN/OS-loader checks and actual attach-failure/early-unload default/wait cases pass. Existing fixes retained; original lifetime limits explicit. Test-only delivery retains exact S29 release; no O:/winnt or push.
