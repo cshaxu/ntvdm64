@@ -2,13 +2,31 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T478 S44 is locally closed.**
+**Active: M0 T478 S45 — existing inventory and handoff reconciliation.**
 
-T478 remains unfinished: resume the explicitly deferred S42 inventory/handoff
-reconciliation. The S44 geometry investigation preserves original minimized
-window sizing and modern USER metrics; no application-specific width fix is
-justified. No O:/winnt write or push. Sequential owner approval remains in
-force. CURRENT retains its temporary size exception pending reconciliation.
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T478 S45; Ordinary Mode; sole active S. |
+| Admission And Approval | Owner continuous sequential approval; resume S1/S42's explicitly deferred existing inventory/handoff reconciliation after S43/S44. |
+| Objective | Map applicable stable audit identities and inherited handoffs to current original owners, local bindings, tests or explicit limitations; isolate genuinely actionable remaining host gaps. |
+| Non-goals | No new global audit, guest audit/change, speculative fault tolerance, alternate CPU, product capability, O:/winnt write or push. Source-only audit labels are not product pass/fail. |
+| Reference Baseline | 8f076ff6a; S43 eleven-image release unchanged; S44 width explained; pinned1546 inventory identities, including483 inactive-edition rows. |
+| Files And ABI Surface | Stable crosswalk, indexed evidence and status; current source/build/test files read-only. No product ABI change admitted by this reconciliation alone. |
+| Applicable Rules | Required documentation reading set and source policy; original-only semantics; owner's local-only delivery instructions. |
+| Verification | Pin audit inputs; inspect current source/composition and exact existing runtime evidence per claim; preserve unresolved coverage. Index identity/preservation checks, documentation governance and diff review. |
+| Expected Markers | Each resolved row names exact owner and bounded evidence or authorized exclusion; no bulk closure from filenames, static audit labels or Full alone. |
+| Asset Needs | Existing DOS16/WOW32 read-only inventories, current build maps and sealed S evidence; no external fetch. |
+| Reporting Requirements | Distinguish scope disposition, connection, tested behavior, original limitation and missing evidence; retain all denominators and remaining handoffs. |
+| Stop Conditions | Actual implementation gap requiring a separate bounded repair S; changed source baseline/input identities; material new capability or guest request. |
+| Exit Criteria | All applicable inventory/handoff rows reconciled, or explicit partial P checkpoint with remaining S45 work retained; no premature T closure. |
+| Original Owner Request | Continue original recovery, reuse prior audits, fix necessary host wiring/real gaps, do not add capability or tolerance. |
+| Similar-Issue Sweep | Related rows within each original owner family, with their distinct contracts and profile exclusions. |
+
+[Evidence](../etc/evidence/m0-t478-s45-inventory-reconciliation.md).
+CURRENT's temporary size exception retains prior closure links until final
+reconciliation; the hard32KiB limit remains.
 
 ## S44 Closure Record
 

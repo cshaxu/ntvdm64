@@ -1,0 +1,181 @@
+{
+  "scope": "Only DOS16 module1.1 profile selection; not every CPU instruction or dependency service",
+  "rows": {
+    "DOS16:fba9809d0d636de17805": "scope-excluded-retired-kernel-monitor-profile",
+    "DOS16:459781a6ded66751cc88": "scope-excluded-alternate-assembled-executor",
+    "DOS16:42c2581b0f33782a0100": "selected-original-ccpu40-profile; bounded-runtime-verified"
+  },
+  "base_defines": {
+    "cflags": [
+      "/D_NO_CRT_STDIO_INLINE",
+      "/DWIN32",
+      "/DWINNT",
+      "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+      "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+      "/DNTVDM",
+      "/DCPU_40_STYLE",
+      "/DNEW_CPU",
+      "/DCCPU",
+      "/DC_VID",
+      "/DSPC386",
+      "/DSIM32",
+      "/DV7VGA",
+      "/DANSI",
+      "/DPROD"
+    ],
+    "ccpu_flags": [
+      "/D_NO_CRT_STDIO_INLINE",
+      "/DWIN32",
+      "/DWINNT",
+      "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+      "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+      "/DNTVDM",
+      "/DCPU_40_STYLE",
+      "/DNEW_CPU",
+      "/DCCPU",
+      "/DC_VID",
+      "/DSPC386",
+      "/DSIM32",
+      "/DV7VGA",
+      "/DANSI",
+      "/DPROD"
+    ]
+  },
+  "ccpu_source_edges": 130,
+  "local_monitor_units": [
+    {
+      "edge": "build obj/bios/bios.obj",
+      "flags": [
+        "/D_NO_CRT_STDIO_INLINE",
+        "/DWIN32",
+        "/DWINNT",
+        "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+        "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+        "/DNTVDM",
+        "/DCPU_40_STYLE",
+        "/DNEW_CPU",
+        "/DCCPU",
+        "/DC_VID",
+        "/DSPC386",
+        "/DSIM32",
+        "/DV7VGA",
+        "/DANSI",
+        "/DPROD",
+        "/DMONITOR"
+      ]
+    },
+    {
+      "edge": "build obj/keymouse/keybd_io.obj",
+      "flags": [
+        "/D_NO_CRT_STDIO_INLINE",
+        "/DWIN32",
+        "/DWINNT",
+        "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+        "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+        "/DNTVDM",
+        "/DCPU_40_STYLE",
+        "/DNEW_CPU",
+        "/DCCPU",
+        "/DC_VID",
+        "/DSPC386",
+        "/DSIM32",
+        "/DV7VGA",
+        "/DANSI",
+        "/DPROD",
+        "/DMONITOR"
+      ]
+    },
+    {
+      "edge": "build obj/video/video.obj",
+      "flags": [
+        "/D_NO_CRT_STDIO_INLINE",
+        "/DWIN32",
+        "/DWINNT",
+        "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+        "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+        "/DNTVDM",
+        "/DCPU_40_STYLE",
+        "/DNEW_CPU",
+        "/DCCPU",
+        "/DC_VID",
+        "/DSPC386",
+        "/DSIM32",
+        "/DV7VGA",
+        "/DANSI",
+        "/DPROD",
+        "/DMONITOR",
+        "/DX86GFX",
+        "/DMVDM_STANDALONE_SAS_VIDEO"
+      ]
+    },
+    {
+      "edge": "build obj/comms/printer.obj",
+      "flags": [
+        "/D_NO_CRT_STDIO_INLINE",
+        "/DWIN32",
+        "/DWINNT",
+        "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+        "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+        "/DNTVDM",
+        "/DCPU_40_STYLE",
+        "/DNEW_CPU",
+        "/DCCPU",
+        "/DC_VID",
+        "/DSPC386",
+        "/DSIM32",
+        "/DV7VGA",
+        "/DANSI",
+        "/DPROD",
+        "/DMONITOR"
+      ]
+    },
+    {
+      "edge": "build obj/host/nt_lpt.obj",
+      "flags": [
+        "/D_NO_CRT_STDIO_INLINE",
+        "/DWIN32",
+        "/DWINNT",
+        "/DOPENNT_ADAPTER_NT_ALERT_THREAD",
+        "/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+        "/DNTVDM",
+        "/DCPU_40_STYLE",
+        "/DNEW_CPU",
+        "/DCCPU",
+        "/DC_VID",
+        "/DSPC386",
+        "/DSIM32",
+        "/DV7VGA",
+        "/DANSI",
+        "/DPROD",
+        "/DMONITOR"
+      ]
+    }
+  ],
+  "cpu30_define_present": false,
+  "executor_map": [
+    "0001:00008d80       _c_cpu_simulate            00409d80 f   original-ccpu386:c_main.obj",
+    "0001:00050610       _host_simulate             00451610 f   original-softpc-host-roots:nt_cpu.obj"
+  ],
+  "inputs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "66b8d4bd009b5df3073be818e3433cd3c1171c70258f2a4a97e15c723dc59af5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "213ac4e77be040359352b7236c7ce7700b6f00ab9b29f5ab710502a9ede496ec"
+    },
+    {
+      "path": "tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "b0155ce77faf206fb917f0f4be486d5fa08297925c2724f66e76de644ad08b28"
+    },
+    {
+      "path": "docs\\design\\GOAL.md",
+      "sha256": "86e93b0c22ec470e720d711a66f567e6553c07ccbc23c3d3760573d776033288"
+    },
+    {
+      "path": "assets\\release\\release-manifest.json",
+      "sha256": "03ffee996cdff4a262884b0ca249ae1e2aa5d48721b3b9788e751683d60e0831"
+    }
+  ]
+}

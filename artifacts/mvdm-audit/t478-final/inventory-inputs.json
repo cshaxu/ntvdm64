@@ -74,7 +74,10 @@
     "wow32/OpenNT-4.5": 483
   },
   "dispositions": {
-    "pending-product-evidence": 1062,
+    "scope-excluded-retired-kernel-monitor-profile": 1,
+    "scope-excluded-alternate-assembled-executor": 1,
+    "selected-original-ccpu40-profile; bounded-runtime-verified": 1,
+    "pending-product-evidence": 1059,
     "inactive-edition-evidence-only": 483,
     "current-original-owner-wired; bounded-runtime-verified": 1
   },

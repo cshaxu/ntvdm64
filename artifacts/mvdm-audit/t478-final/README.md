@@ -69,3 +69,13 @@ restores actual gray background with the original converter unchanged, passes
 Full16/16 and publishes11 images locally. S42's remaining reconciliation is
 explicitly deferred, not completed. The normal-width handoff remains open.
 CURRENT.md alone identifies the active packet.
+
+## S44 and S45 continuation
+
+[S44 sizing evidence](../../../docs/etc/evidence/m0-t478-s44-window-sizing.md)
+supersedes the open width note: the same-run minimized resize is reproduced
+by native USER and consistent with original sizing rules. No pixel override
+is justified. [S45](../../../docs/etc/evidence/m0-t478-s45-inventory-reconciliation.md)
+resumes the remaining mapping and distinguishes three build-profile rows.
+Its scope-only exclusions are not global service or instruction certification.
+The active packet and remaining work remain in CURRENT.md.

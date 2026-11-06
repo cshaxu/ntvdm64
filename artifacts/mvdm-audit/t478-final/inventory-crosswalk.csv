@@ -1,7 +1,7 @@
 audit,id,edition,module,contract,unit,audit_label,validity,reconciliation,evidence
-dos16,DOS16:fba9809d0d636de17805,OpenNT,1.1,386-monitor,build_variant,True,original_build_recipe_and_official_environment_documentation,pending-product-evidence,
-dos16,DOS16:459781a6ded66751cc88,OpenNT,1.1,non386-assembled-cpu,build_variant,True,original_build_recipe_and_official_environment_documentation,pending-product-evidence,
-dos16,DOS16:42c2581b0f33782a0100,OpenNT,1.1,non386-ccpu,build_variant,True,original_build_recipe_and_official_environment_documentation,pending-product-evidence,
+dos16,DOS16:fba9809d0d636de17805,OpenNT,1.1,386-monitor,build_variant,True,original_build_recipe_and_official_environment_documentation,scope-excluded-retired-kernel-monitor-profile,docs/etc/evidence/m0-t478-s45-inventory-reconciliation.md#build-profile-dispositions
+dos16,DOS16:459781a6ded66751cc88,OpenNT,1.1,non386-assembled-cpu,build_variant,True,original_build_recipe_and_official_environment_documentation,scope-excluded-alternate-assembled-executor,docs/etc/evidence/m0-t478-s45-inventory-reconciliation.md#build-profile-dispositions
+dos16,DOS16:42c2581b0f33782a0100,OpenNT,1.1,non386-ccpu,build_variant,True,original_build_recipe_and_official_environment_documentation,selected-original-ccpu40-profile; bounded-runtime-verified,docs/etc/evidence/m0-t478-s45-inventory-reconciliation.md#build-profile-dispositions
 dos16,DOS16:541d06932befed15a369,OpenNT,1.2,NTVDM initial host entry ordering,mechanism,True,original_entry_full_body_sequence_and_documented_native_primitives_plus_finite_provider_design,pending-product-evidence,
 dos16,DOS16:b32af3ec2e34d12f11ee,OpenNT,1.2,CPU configuration source and local lookup,mechanism,True,original_body_and_official_user_mode_native_contract,pending-product-evidence,
 dos16,DOS16:002c6b3710a66e3c4d4e,OpenNT,1.2,COMMAND initial home-drive binding,entry,True,original_local_body_and_official_native_directory_contract_plus_explicit_mapping_design,pending-product-evidence,
