@@ -330,6 +330,38 @@ inc word [continuation_errors]
 continuation_case 8
 continuation_case 8, 1
 continuation_case 10
+%ifdef NESTED_COMMAND
+; Retain actual guest text after the nested command. Merely queueing MEM
+; and observing EXIT is not proof that MEM executed or its output returned.
+push ds
+mov dx, nested_output
+xor cx, cx
+mov ah, 0x3c
+int 0x21
+jc .nested_failed
+mov bx, ax
+mov ax, 0xb800
+mov ds, ax
+xor dx, dx
+mov cx, 4000
+mov ah, 0x40
+int 0x21
+pushf
+push ax
+mov ah, 0x3e
+int 0x21
+pop ax
+popf
+jc .nested_failed
+cmp ax, 4000
+jne .nested_failed
+pop ds
+jmp .nested_done
+.nested_failed:
+pop ds
+inc word [continuation_errors]
+.nested_done:
+%endif
 add sp, 12
 pop es
 pop edi
@@ -803,3 +835,7 @@ output: db '@VM_IDENTITY_RESULT@',0
 times 128-($-output) db 0
 pair_ready: db '@VM_PAIR_READY@',0
 times 128-($-pair_ready) db 0
+%ifdef NESTED_COMMAND
+nested_output: db '@VM_NESTED_OUTPUT@',0
+times 128-($-nested_output) db 0
+%endif

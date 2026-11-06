@@ -1206,3 +1206,6 @@ the pinned source intersection, compatibility findings and generic-test plan.
 [T479 S4 driver load](evidence/m0-t479-s4-driver-load.md) and [results](evidence/m0-t479-s4-driver-load.json) record partial Win3.1 two-VM identity proof and remaining guest-bridge gates.
 
 - [T479 S5 P1 host checkpoint](evidence/m0-t479-s5-p1-host-checkpoint.md): verified host publication and remaining guest I/O boundaries.
+
+- [T479 S5 cmdexec reuse correction](operations/m0-t479-s5-cmdexec-reuse-audit.md): original command-family ownership and consolidation boundary.
+- [T479 S5 shared COMSPEC checkpoint](evidence/m0-t479-s5-comspec-checkpoint.md): corrected interpreter selection, shared preparation and actual nested output.

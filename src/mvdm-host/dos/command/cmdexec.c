@@ -663,9 +663,9 @@ VOID cmdExecComspec32 (VOID)
     DWORD dwRet;
     PCHAR   pEnv;
 
-    dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
+    dwRet = mvdm_command_prepare_comspec(Buffer, NULL);
 
-    if (dwRet == 0 || dwRet >= MAX_PATH){
+    if (dwRet != ERROR_SUCCESS){
         setCF(0);
 	setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
 	return;
@@ -740,26 +740,17 @@ VOID cmdExec (VOID)
         cmdExec32 (pCommandTail,pEnv);
     }
     else {
-        dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
-
-        if (dwRet == 0 || dwRet >= MAX_PATH){
+        /* DIVERGENCE(MVDM-HOST-DIV-196): one COMSPEC preparation for
+         * ordinary and VMM clients, retaining this original AH decision. */
+        dwRet = mvdm_command_prepare_comspec(Buffer, pCommandTail);
+        if (dwRet != ERROR_SUCCESS) {
             mvdm_command_native_child_abort();
 #line 571
             setCF(0);
-            setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
+            setAL((UCHAR)dwRet);
             return;
         }
 
-        if ((dwRet + 4 + strlen(pCommandTail)) > MAX_PATH) {
-            mvdm_command_native_child_abort();
-#line 577
-            setCF(0);
-            setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
-            return;
-        }
-
-        strcat (Buffer, " /c ");
-        strcat (Buffer, pCommandTail);
         /* Preserve this source branch explicitly before replacement changes
          * the session snapshot from the original tail to COMSPEC /c tail. */
         if (!mvdm_command_native_child_select_command_service(

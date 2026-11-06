@@ -111,6 +111,25 @@ int main(void)
     mvdm_command_capture_destroy(b);
     comspec_length=GetEnvironmentVariableA("COMSPEC",comspec,sizeof(comspec));
     CHECK(comspec_length && comspec_length<sizeof(comspec));
+    {
+        struct { char command[MAX_PATH]; char guard; } prepared;
+        char tail[MAX_PATH];
+        const char *shell="C:\\host\\shell.exe";
+        size_t fits=MAX_PATH-strlen(shell)-5;
+        CHECK(SetEnvironmentVariableA("COMSPEC",shell));
+        prepared.guard=0x5a;
+        CHECK(!mvdm_command_prepare_comspec(prepared.command,NULL));
+        CHECK(!strcmp(prepared.command,shell));
+        CHECK(!mvdm_command_prepare_comspec(prepared.command,"echo x"));
+        CHECK(!strcmp(prepared.command,"C:\\host\\shell.exe /c echo x"));
+        memset(tail,'x',sizeof(tail));tail[fits]=0;
+        CHECK(!mvdm_command_prepare_comspec(prepared.command,tail));
+        CHECK(strlen(prepared.command)==MAX_PATH-1 && prepared.guard==0x5a);
+        tail[fits]='x';tail[fits+1]=0;
+        CHECK(mvdm_command_prepare_comspec(prepared.command,tail)==ERROR_BAD_ENVIRONMENT);
+        CHECK(prepared.guard==0x5a);
+        CHECK(SetEnvironmentVariableA("COMSPEC",comspec));
+    }
     CHECK(!mvdm_vm_command_capture(10,1200,0x80000000u,1400,&b));
     CHECK(mvdm_command_capture_read(b,&bv));
     CHECK(bv.service==MVDM_COMMAND_SERVICE_INTERACTIVE && !strcmp(bv.command,comspec));

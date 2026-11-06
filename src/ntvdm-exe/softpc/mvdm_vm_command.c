@@ -54,7 +54,7 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
     session *owner = session_thread_current();
     char comspec[MAX_PATH];
     char directory[67]; /* drive, colon, slash, DOS AH=47's 64-byte result */
-    DWORD length;
+    DWORD error;
     if (!output) return ERROR_INVALID_PARAMETER;
     *output = NULL;
     if (service != 8 && service != 10) return ERROR_INVALID_FUNCTION;
@@ -85,8 +85,8 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
     if (service == 8 && (frame.eax & 0xff00u))
         input.service = MVDM_COMMAND_SERVICE_EXECUTE;
     if (service == 10) {
-        length = GetEnvironmentVariableA("COMSPEC", comspec, sizeof(comspec));
-        if (!length || length >= sizeof(comspec)) return ERROR_BAD_ENVIRONMENT;
+        error = mvdm_command_prepare_comspec(comspec, NULL);
+        if (error) return error;
         input.host_command = comspec;
         input.service = MVDM_COMMAND_SERVICE_INTERACTIVE;
     }
@@ -95,10 +95,8 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
         /* cmdExec validates the host COMSPEC after copying the guest tail.
          * Preserve its rejection even though the existing launcher carries
          * the explicit service/tail rather than the redundant combined text. */
-        length = GetEnvironmentVariableA("COMSPEC", comspec, sizeof(comspec));
-        if (!length || length >= sizeof(comspec) ||
-            !mvdm_command_capture_read(*output, &view) ||
-            length + 4u + strlen(view.command) > MAX_PATH) {
+        if (!mvdm_command_capture_read(*output, &view) ||
+            mvdm_command_prepare_comspec(comspec, view.command)) {
             mvdm_command_capture_destroy(*output);
             *output = NULL;
             return ERROR_BAD_ENVIRONMENT;

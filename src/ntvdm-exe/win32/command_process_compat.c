@@ -199,7 +199,9 @@ static BOOL opennt_command_launch_vdm_child(
     error = common_product_path_a(L"system32\\run16.exe", launcher, sizeof(launcher));
     if (error) { SetLastError(error); return FALSE; }
     if (service == MVDM_COMMAND_SERVICE_INTERACTIVE)
-        formatted = snprintf(child_command, sizeof(child_command), "\"%s\" command", launcher);
+        /* SVC_EXECCOMSPEC32 selects the host COMSPEC, not guest COMMAND.COM.
+         * Preserve the captured executable, including spaces, through Run16. */
+        formatted = snprintf(child_command, sizeof(child_command), "\"%s\" \"%s\"", launcher, command_line);
     else if (service == MVDM_COMMAND_SERVICE_EXECUTE && service_tail != NULL)
         formatted = snprintf(child_command, sizeof(child_command),
             "\"%s\" %s", launcher, service_tail);

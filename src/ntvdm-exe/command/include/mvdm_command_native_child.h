@@ -25,6 +25,9 @@ int mvdm_command_native_child_std_handles(ULONG handles_out[3]);
 const char *mvdm_command_native_child_command(void);
 const char *mvdm_command_native_child_environment(void);
 int mvdm_command_native_child_replace_command(const char *command);
+/* Shared original cmdExec/cmdExecComspec32 host COMSPEC preparation.
+ * NULL tail selects the executable alone; otherwise append the /c tail. */
+DWORD mvdm_command_prepare_comspec(char command[MAX_PATH], const char *tail);
 /* The branch itself is the authority.  The adapter must never recover it by
  * parsing COMSPEC, a program name, or shell punctuation. */
 enum {

@@ -1,0 +1,436 @@
+{
+  "baseline": "54996029a",
+  "role": "T479 S5 shared COMSPEC and real nested output checkpoint",
+  "originalGuest": "unchanged; isolated short-path probe copy only",
+  "artifacts": [
+    {
+      "path": "build\\t479-s5-command\\fullbuild193.stdout",
+      "bytes": 39602,
+      "sha256": "5A0D3577E2C29F2C12F55BB465899F24126B7FE2F06EA123FE299E4705DE6E35"
+    },
+    {
+      "path": "build\\t479-s5-command\\fullbuild193.stderr",
+      "bytes": 22,
+      "sha256": "3A1CF97D15A56535669CCB5A40687DFF36E0F08006196F0CFBBBC82A70345E7A"
+    },
+    {
+      "path": "build\\t479-s5-command\\fullbuild193.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested192.stdout",
+      "bytes": 65617,
+      "sha256": "986F2F2160960EB6DE2B194440D34EDA2F9B3D0BF8C56F17B6F9520F73DBB8BA"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested192.stderr",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested192.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested192\\runtime\\vm-pair.json",
+      "bytes": 1153,
+      "sha256": "1CEEE7A5D68A163A21FCAD84B752D532CEA1ED70246FBD4278DBB933B9AE719F"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested192\\runtime\\A.text.txt",
+      "bytes": 2000,
+      "sha256": "2E591CCF02FB9A593CC2D1CFA292A79003FFD75C780C5BA4F54DB3DD59D09B1E"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested192\\runtime\\B.text.txt",
+      "bytes": 2000,
+      "sha256": "FA6A4900B1E8F0359D67BE919EFAD4DFF879FCBEF30AF1B89C837B940156E92E"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested192\\runtime\\matrix-results.json",
+      "bytes": 367,
+      "sha256": "EE8C925E30D05B78924A4C9EC37C543ACA9F91EE75F6F7C923E74F0B520CF797"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested178.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested180.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested180.stderr",
+      "bytes": 51,
+      "sha256": "DEE43AFA5C233BB6EC2552480DD9CD313290E9DC247D297DA193EBEB1FA109EA"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested180.stdout",
+      "bytes": 67725,
+      "sha256": "569A6183AA9747B432E583254DA18E1B069E6EB281E4F378B80A2E0CBC213FD3"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested182.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested182.stderr",
+      "bytes": 51,
+      "sha256": "DEE43AFA5C233BB6EC2552480DD9CD313290E9DC247D297DA193EBEB1FA109EA"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested182.stdout",
+      "bytes": 533,
+      "sha256": "4B53A7707F856C7FA4095F175597C8A3D8F0026937208CE9AD213445ECFD61B5"
+    },
+    {
+      "path": "build\\t479-s5-command\\release194.stdout",
+      "bytes": 35348,
+      "sha256": "5F4919AF40CFE15D580CB2A101AD8F2214EAFE2990014EE41FB6917755B02A17"
+    },
+    {
+      "path": "build\\t479-s5-command\\release194.stderr",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build\\t479-s5-command\\release194.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\publication194.stdout",
+      "bytes": 80,
+      "sha256": "71F24E9F2263C7695E63E5F4A2757F1923867D50593885FD06BF434B50F0983A"
+    },
+    {
+      "path": "build\\t479-s5-command\\publication194.stderr",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build\\t479-s5-command\\publication194.exit",
+      "bytes": 3,
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "path": "build\\t479-s5-command\\r194-package\\product-system32-manifest.json",
+      "bytes": 3335,
+      "sha256": "046E73488FB45D128D6692AD0DD57CC2FEE3DE5E2F34F79000C25B417BCA21D5"
+    }
+  ],
+  "vmResults": [
+    {
+      "name": "A",
+      "signature": 1314147670,
+      "vm": 2156113920,
+      "generation": 3,
+      "status": 12870,
+      "negativeStatus": 12871,
+      "negativeResult": 1,
+      "start": 600063,
+      "finish": 600118,
+      "callback": 4276292839,
+      "callbackCount": 160,
+      "callbackErrors": 0,
+      "waitCount": 3,
+      "waitErrors": 0,
+      "pairCount": 1,
+      "pairErrors": 0,
+      "notificationPublished": 27,
+      "notificationSeen": 27,
+      "notificationIrq": 15,
+      "notificationErrors": 0,
+      "continuationCount": 3,
+      "continuationErrors": 0
+    },
+    {
+      "name": "B",
+      "signature": 1314147670,
+      "vm": 2155450368,
+      "generation": 2,
+      "status": 12870,
+      "negativeStatus": 12871,
+      "negativeResult": 1,
+      "start": 600063,
+      "finish": 600117,
+      "callback": 4276292839,
+      "callbackCount": 160,
+      "callbackErrors": 0,
+      "waitCount": 3,
+      "waitErrors": 0,
+      "pairCount": 1,
+      "pairErrors": 0,
+      "notificationPublished": 26,
+      "notificationSeen": 27,
+      "notificationIrq": 15,
+      "notificationErrors": 0,
+      "continuationCount": 3,
+      "continuationErrors": 0
+    }
+  ],
+  "limitations": [
+    "not physical keyboard acceptance",
+    "not CF=1 same-guest reentry",
+    "external DOS4GW/Nesticle fixture explicitly skipped",
+    "S5 execution/request consolidation remains open"
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "bytes": 25098,
+      "sha256": "0E6DC5238634C000FFED241EBA9BA2B3E4107F398FB3705352CD00FB1DE9C426"
+    },
+    {
+      "path": "src/ntvdm-exe/command/include/mvdm_command_native_child.h",
+      "bytes": 3463,
+      "sha256": "DE43C9C0F0D023A48CBB963856746C711C20EDD865F5508D747763DA8A2A70EC"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "bytes": 16178,
+      "sha256": "9D354D8AE156E5A8062694621D25FE9B3FD081B637072DA22EB49E0DB75219B6"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_command.c",
+      "bytes": 6756,
+      "sha256": "3914691B11F2B2C5157E6F4E22F3F4A5DE4C44DA0AC5617899461DA0C3A899C5"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/command_process_compat.c",
+      "bytes": 17765,
+      "sha256": "F3125933AC1A0E2F98F14B3EDCE9F29FAFFC611BB8CBB886659CBC4F1561A92A"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "bytes": 14799,
+      "sha256": "DF306510F1CB8F2DB482F1AB45A87C7D2D4C0A75CED2C65D588CFD2A01833B38"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "bytes": 24364,
+      "sha256": "92476D31EC930A21E65EF69BC9F963D3C71B7E02D449567AD9138A2EC87730E3"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "bytes": 26101,
+      "sha256": "3370592B9DC3529509EC781AB72FE73D0A8805C8D70D8B591D6AA4EC197AF22B"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_capture.c",
+      "bytes": 12250,
+      "sha256": "278280EAB930B148C119FB0F60C5FB3D180E1D6CA86E78BD69331CF45F26ABB9"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_launch.c",
+      "bytes": 10887,
+      "sha256": "62D355F1EF6419678B54FD5EC62D97E3D4B4DD41F6E749390CBCF20B77F28E1C"
+    }
+  ],
+  "publication": {
+    "part": "r194",
+    "package": "O:\\repos.hobby\\ntvdm64\\build\\t479-s5-command\\r194-package",
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64\\assets\\release",
+      "O:\\winnt\\system32"
+    ],
+    "hashes": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "79316FA36B867C97B592E1D32C9E09FC7699328D9FC76AE0B52EFDA7601BCA0F",
+        "Machine": 34404,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "D0428E79D0926E051991C9B73D45C6A48C1BC2E487739C1F7AA0188F01999DD9"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "30AB9F1ADED477FC3ACB9C235BC46E24DA9FB4F64EEFF67C817E217F7EAF79BF",
+        "Machine": 34404,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "F26D31FCE4D752F1B5DF0CF66E9B68E9392F24C1CE9F84CB0A63F9BBEE888DF8"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "288AB424ECA948D5BA16FB43E332A309F427EBEABCE331D311F852A98C353415",
+        "Machine": 34404,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "3E2388D4CD1E21949F562E57F1140BF30EF93AD66F0F21C8E061419B08D40AB7"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "9532E34F1C81A0B51FCFDBCB9D0D2151930E3575D0D888BAEDE264955EB9F5A4",
+        "Machine": 332,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "67AF7242381C8AB0245BA9C98594ED922951939D7570B935AD67E4BB14929830"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "96DB72C0E0115857EB47A2F6C2E26AC790C52B28DAD4B52A238A9E0B83856E1A",
+        "Machine": 34404,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "9358239D2D9D009044CAD072513E3A551E78171BBDE6DA9E689CE9CB740204AA"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "F51D3D7E262C344EDFCE2A80CCF6292CBB58A25AA3297C8B5E8F1BB14BE3A2CA",
+        "Machine": 34404,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "750A5B1765DDEC97FF462F579A33F95DBD511812C107321A8118101FF4EE1329",
+        "Machine": 332,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "68DA2B65405DC342A95BBE7B4CFD76107EAD2FD4B5ECFF97FDAF2B2B1AAE6CD9",
+        "Machine": 332,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "7E7396593078626855B54503541E3563480C8CA0A8A77585EF2E00EC26A12A87"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "700993066AC977C6BE9E0C8F531836B169D68F3A64E87BF35F307A86CBEA6BC4",
+        "Machine": 332,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "653A0FA69C9C0FEA7B4FA8612874C3AAAE60E986C635A89B6A98B87B14760450"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "276C674DB8F8405EA7D22B5021272930003EFED127CA8D02BB6561E0D61396B0",
+        "Machine": 34404,
+        "PackageId": "2915fea5-c2ec-4242-8f6a-fbe152c8c4f2",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      },
+      {
+        "Name": "nthook32-LICENSE.txt",
+        "Sha256": "F968C2D86BA2A2F483E47431C7CD8D78878B239A47B34CBB792AC7FE5FCD04BE"
+      }
+    ],
+    "backup": "O:\\repos.hobby\\ntvdm64\\build\\t479-s5-command\\r194-publication-backup",
+    "verifiedUtc": "2026-11-06T17:23:49.5416891Z"
+  },
+  "fullGates": {
+    "Suite": "Full",
+    "ElapsedMs": 409183,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1530,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1388,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 396,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67247,
+        "CleanupMs": 465,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 53403,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45469,
+        "CleanupMs": 464,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 17600,
+        "CleanupMs": 459,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 16505,
+        "CleanupMs": 493,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 84709,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12595,
+        "CleanupMs": 475,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29014,
+        "CleanupMs": 547,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30491,
+        "CleanupMs": 566,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 7334,
+        "CleanupMs": 472,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8292,
+        "CleanupMs": 441,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11253,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5028,
+        "CleanupMs": 391,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7892,
+        "CleanupMs": 450,
+        "Passed": true
+      }
+    ]
+  }
+}

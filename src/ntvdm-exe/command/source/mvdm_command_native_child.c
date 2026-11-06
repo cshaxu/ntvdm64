@@ -10,6 +10,24 @@
 #define MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES (32u * 1024u)
 #define MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES 12u
 
+/* Extracted from OpenNT base/mvdm/dos/command/cmdexec.c, cmdExec and
+ * cmdExecComspec32. Shared by live-CPU and saved-VMM-frame admission. The
+ * caller owns this buffer; neither the environment nor guest state is changed.
+ * Count the terminating NUL as well as the original four-byte " /c " suffix. */
+DWORD mvdm_command_prepare_comspec(char command[MAX_PATH], const char *tail)
+{
+    DWORD length = GetEnvironmentVariableA("COMSPEC", command, MAX_PATH);
+    if (!length || length >= MAX_PATH) return ERROR_BAD_ENVIRONMENT;
+    if (tail) {
+        size_t bytes = strlen(tail);
+        if (bytes >= MAX_PATH || length + 4u + bytes >= MAX_PATH)
+            return ERROR_BAD_ENVIRONMENT;
+        memcpy(command + length, " /c ", 4);
+        memcpy(command + length + 4, tail, bytes + 1);
+    }
+    return ERROR_SUCCESS;
+}
+
 typedef struct mvdm_command_native_child_state {
     session *owner;
     uint32_t owner_epoch;

@@ -5,10 +5,11 @@
 **Active: M0 T479 S5** - Win3.1 multitask command continuation.
 S4's Win3.1 checkpoint is delivered; its Win95 continuation remains open.
 [Entry/return audit](../etc/operations/m0-t479-s5-command-continuation.md).
+Approved shared cmdexec [design](../etc/operations/m0-t479-s5-cmdexec-reuse-audit.md) and host COMSPEC recovery are in progress.
 Both54:08 forms and54:0A run through production entry/capture/executor in
 two actual Win3.1 VMs. Translated input remains a fixture, not physical input.
 Local CDS/text and palette pass; NetCDS isolation is a retained guest limit.
-Font application, complete I/O and returned keys remain unaccepted S6 work.
+Fonts, complete I/O and returned keys remain unaccepted S6 work.
 Five focused host suites and Full16/16 selected product gates pass.
 Cached complete x86/x64 builds and shared tests pass. Generation-reuse rejection
 was reproduced and fixed; subsequent real reuse evidence is recorded below.
@@ -16,14 +17,16 @@ Chain158 and real Win3.1 continuation159 pass. The chained gate runner lost
 USERPROFILE; fresh-process release160 passes focused/Full selected gates.
 Run161 passes real native-command execution followed by forced VM retirement,
 stale-wake rejection and normal Win3.1 exit on the production worker.
-Run163 also passes actual VM handle reuse and a new native command returning37.
-Run164 confirms native CMD absence before fixture scope cleanup.
-Runs166/167 pass both deliberate native exit orders with full callback checks.
+Runs163--167 pass actual VM reuse, native child retirement and both exit orders.
 Forced retirement overlap has host-unit proof; full I/O remains S6 work.
-Win95 is deferred.
+Final reentry audit: CF=1 has transport tests but no production producer.
+Runs180/182 exposed a DOS-incompatible fixture PATH. Run192 passes actual
+MEM output in both VMs after host COMSPEC and fixture-path correction.
+Shared preparation passes107 capture/65 launch checks; build193 and Full194 pass.
+[COMSPEC checkpoint](../etc/evidence/m0-t479-s5-comspec-checkpoint.md) is published; S5 remains active.
 [S5 P1 host checkpoint](../etc/evidence/m0-t479-s5-p1-host-checkpoint.md) is
 published at both destinations and pushed as369cbf712. The tested Win3.1
-addon candidate is now published; its record/commit is pending. S5 is not closed.
+addon candidate is published/pushed as54996029a. S5 is not closed.
 
 ## Active Packet
 

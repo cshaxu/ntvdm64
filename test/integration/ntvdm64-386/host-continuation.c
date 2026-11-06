@@ -160,16 +160,21 @@ int test_xtrn2phy(uint32_t address, uint8_t access, uint32_t *physical)
  * this line; no process completion or exit code is substituted. */
 static DWORD interactive_input(mvdm_vm_executor *executor, uint64_t token)
 {
-    const char line[] = "exit\r";
-    const WORD keys[] = {'E', 'X', 'I', 'T', VK_RETURN};
-    const WORD scans[] = {0x12, 0x2d, 0x17, 0x14, 0x1c};
+    const char *line = "exit\r";
+    const WORD keys[] = {'M', 'E', 'M', VK_RETURN, 'E', 'X', 'I', 'T', VK_RETURN};
+    const WORD scans[] = {0x32, 0x12, 0x32, 0x1c, 0x12, 0x2d, 0x17, 0x14, 0x1c};
+    unsigned offset = 4;
     unsigned i;
-    for (i = 0; i < sizeof(line) - 1; ++i) {
+    if (GetEnvironmentVariableW(L"MVDM_NESTED_COMMAND", NULL, 0)) {
+        line = "mem\rexit\r";
+        offset = 0;
+    }
+    for (i = 0; line[i]; ++i) {
         KEY_EVENT_RECORD key = {0};
         DWORD error;
         key.bKeyDown = TRUE; key.wRepeatCount = 1;
-        key.wVirtualKeyCode = keys[i];
-        key.wVirtualScanCode = scans[i];
+        key.wVirtualKeyCode = keys[i + offset];
+        key.wVirtualScanCode = scans[i + offset];
         key.uChar.UnicodeChar = (WCHAR)line[i];
         error = mvdm_vm_executor_key(executor, token, &key);
         if (error) return error;

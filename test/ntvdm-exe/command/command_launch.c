@@ -76,7 +76,7 @@ int main(int argc,char **argv)
     size_t used;
     unsigned i;
     if(argc>1 && !strcmp(argv[1],"--warmup"))return 0;
-    if(argc==2 && !strcmp(argv[1],"command")){
+    if(argc==2 && !strcmp(argv[1],"C:\\shell space\\chosen.exe")){
         char mask[8];
         return GetEnvironmentVariableA(CONSOLE_COMMAND_STREAMS_ENV,mask,sizeof(mask)) &&
             !strcmp(mask,"6") ? 73 : 97;
@@ -157,7 +157,7 @@ int main(int argc,char **argv)
         PROCESS_INFORMATION process={0};
         HANDLE output_endpoint=CreateEventA(NULL,TRUE,FALSE,NULL);CHECK(output_endpoint);
         streams[0]=input;streams[1]=streams[2]=output_endpoint;endpoint=output_endpoint;
-        CHECK(!ntvdm_command_launch_prepare(MVDM_COMMAND_SERVICE_INTERACTIVE,"ignored",
+        CHECK(!ntvdm_command_launch_prepare(MVDM_COMMAND_SERVICE_INTERACTIVE,"C:\\shell space\\chosen.exe",
             "\0",2,cwd,streams,&bad));
         endpoint=NULL;CloseHandle(output_endpoint);
         CHECK(!ntvdm_command_launch_start(bad,caps[0],caps[1],CREATE_SUSPENDED,&process));

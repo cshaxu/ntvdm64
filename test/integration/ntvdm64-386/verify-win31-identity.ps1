@@ -16,6 +16,7 @@ param(
  [switch]$InitializationFailure,
  [switch]$Continuation,
  [switch]$RealCommand,
+ [switch]$NestedCommand,
  [string]$OrderedCommandImage,
  [ValidateSet('A','B')][string]$FirstCommand='A',
  [switch]$TraceContinuation,
@@ -29,6 +30,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($NestedCommand -and !$RealCommand){throw 'Nested command witness requires RealCommand'}
 if($OrderedCommandImage -and !$RealCommand){throw 'Ordered native commands require RealCommand'}
 if($RetireCommand -and (!$RetirementDriver -or $Continuation -or $DosWitnessImage)){throw 'Command retirement requires the retirement driver and production witness'}
 if($RealCommand -and (!$Continuation -or $VideoApplication -or $Keyboard -or $DeferredContinuation)){throw 'Real command witness requires non-deferred Continuation without keyboard/video diagnostics'}
@@ -102,6 +104,7 @@ $dosDefines=@()
 if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
+if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
 if($OrderedCommandImage){
  $dosDefines+='-DORDERED_COMMAND=1'
  Copy-Item -LiteralPath $OrderedCommandImage -Destination "$dest/PATCH/ORDER.EXE"
@@ -143,6 +146,14 @@ foreach($id in 'A','B'){
  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ROLE@')
  if($marker -lt 0){throw 'No VM role marker'}
  $bytes[$marker]=[byte][char]$id
+ if($NestedCommand){
+  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_NESTED_OUTPUT@')
+  if($marker -lt 0){throw 'Missing nested output marker'}
+  $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\$id.TXT")
+  if($value.Length -ge 128){throw 'Nested output path too long'}
+  [Array]::Clear($bytes,$marker,128)
+  [Array]::Copy($value,0,$bytes,$marker,$value.Length)
+ }
  if($RetireCommand){
   $fields=@{
    '@VM_NATIVE_READY@'=@(128,"$dest\PATCH\NATIVE.OK")
@@ -161,7 +172,16 @@ foreach($id in 'A','B'){
  if($RealCommand -or $RetireCommand){
   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ENVIRONMENT@')
   if($marker -lt 0){throw 'No native command environment marker'}
-  $environment=[Text.Encoding]::ASCII.GetBytes("ROLE=$id`0ROUND=0`0PATH=$PackageRoot\system32;C:\Windows\System32;C:\Windows`0`0")
+  # The matrix later creates its own short physical runtime. Its path is not
+  # known here; the repository package path is not necessarily DOS-addressable.
+  # Give the nested DOS witness an immutable MEM copy in the short guest fixture.
+  $commandPath="$PackageRoot\system32;C:\Windows\System32;C:\Windows"
+  if($NestedCommand){
+   Copy-Item -LiteralPath "$PackageRoot/system32/MEM.EXE" -Destination "$dest/PATCH/MEM.EXE" -Force
+   if((Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash "$dest/PATCH/MEM.EXE").Hash){throw 'Nested MEM copy differs'}
+   $commandPath="$dest\PATCH;$commandPath"
+  }
+  $environment=[Text.Encoding]::ASCII.GetBytes("ROLE=$id`0ROUND=0`0PATH=$commandPath`0`0")
   if($environment.Length -gt 512){throw 'Native command fixture environment too large'}
   [Array]::Clear($bytes,$marker,512)
   [Array]::Copy($environment,0,$bytes,$marker,$environment.Length)
@@ -242,6 +262,7 @@ Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Ite
 $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
 if($InitializationFailure){$env:MVDM_INIT_FAILURE_REPORT="$task/initialization-rollback.bin"}
 if($RealCommand){$env:MVDM_REAL_COMMAND='1'}
+if($NestedCommand){$env:MVDM_NESTED_COMMAND='1'}
 if($TraceContinuation){$env:MVDM_CONTINUATION_TRACE="$task/continuation-trace.txt"}
 if($InterruptObserver){$env:MVDM_INTERRUPT_OBSERVATION='1'}
 if($BlockedKeyboard){$env:MVDM_BLOCKED_KEYBOARD='1'}
@@ -365,6 +386,19 @@ try {
  }
  if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or [Math]::Max($rows[0].start,$rows[1].start) -ge [Math]::Min($rows[0].finish,$rows[1].finish)){throw 'Distinct concurrent VM identity not proved'}
  'PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks'
+ if($NestedCommand){
+  foreach($id in 'A','B'){
+   $cells=[IO.File]::ReadAllBytes("$dest/PATCH/$id.TXT")
+   Copy-Item "$dest/PATCH/$id.TXT" "$task/runtime/$id.TXT"
+   if($cells.Length -ne 4000){throw 'Nested text extent mismatch'}
+   $chars=[byte[]]::new(2000)
+   for($i=0;$i -lt 2000;$i++){$chars[$i]=$cells[2*$i]}
+   $screen=[Text.Encoding]::ASCII.GetString($chars)
+   [IO.File]::WriteAllText("$task/runtime/$id.text.txt",$screen)
+   if($screen -notmatch 'bytes total conventional memory' -or $screen -notmatch 'largest executable program size'){throw "Actual MEM output not returned to VM $id"}
+  }
+  'PASS nested MEM output actually returned to both guest VMs before EXIT'
+ }
  if($RealCommand){'PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested'}
  elseif($Continuation){'PASS 54:08 AH=0/AH=1 and 54:0A in both actual DOS VMs; diagnostic results only'}
  if($Reuse){Confirm-Reuse $rows}

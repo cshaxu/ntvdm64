@@ -1663,3 +1663,31 @@ input,320 callback-state checks and normal Win3.1 exit. Original guest bytes
 remain unchanged. Both controlled native orders now have actual Win3.1 proof.
 Hash-bound evidence is nativeOrder165_167. Guest callback scheduling is not
 forced; physical keyboard and complete I/O remain the S6 obligation.
+
+## Remaining reentry audit and nested witness176--177
+
+Final source review distinguishes terminal AL/CF restoration from original
+DOS reentry. The executor currently constructs zero-initialized completion and
+sets error/exit_code; it has no production reentry=1 producer. Host unit tests
+exercise reentry transport/consumption, but that is not actual guest reentry
+proof. Existing original cmdExec32 sets CF when GetNextVDMCommand supplies a
+new command; the independent VM launch path waits on its child launcher instead.
+Do not claim these mechanisms equivalent solely because terminal codes pass.
+This remains a finite S5 semantic audit item, with nested I/O scope still S6.
+
+Run176 rebuilt only the diagnostic input fixture to queue MEM then EXIT in
+both54:0A chains and exits0. That does not prove MEM ran: EXIT could succeed
+after a failed MEM. Run177 (PID40016) therefore saves each actual guest text
+page after return and requires both original MEM output markers, in addition
+to the full continuation checks. Its outcome is pending. No product images
+or original guest binaries are changed. Candidate publication54996029a remains
+the latest published/pushed addon checkpoint; S5 is not closed.
+
+Run177 exits1: DOS truncates A.TEXT to A.TEX, so the host report open fails.
+The original A.TEX exists with4000 bytes. Readback shows Cannot execute the
+fixture COMMAND.COM rather than MEM output. This contradicts any inference
+that prior54:0A terminal0 proved interactive command execution. It does not
+invalidate the separately verified native54:08 exits and lifecycle witnesses.
+Run178 (PID17948) corrects report names to TXT and repeats the strict output
+assertion. The failed interactive path is now an S5 blocking semantic finding;
+no full-command or S5 closure claim is justified until it is resolved.
