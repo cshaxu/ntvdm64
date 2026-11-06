@@ -270,3 +270,10 @@ Original mirror bodies remain unchanged. Focused 31 checks, actual binding
 lifetime, real Win16 lifecycle, persistence replay and Full 16/16 pass; exact
 worktree release published. Initial concurrent-writer failure remains explicitly
 recorded without a claimed cause/fix. S25 follows; no O:/winnt write or push.
+
+## S25 Closure Record
+
+T478 S25 [repairs original fax failure ownership](../etc/evidence/m0-t478-s25-fax-failure.md):
+135 focused checks, twelve mapped functions, coherent build and Full 16/16 pass.
+Exact ten-image worktree release published; external fax deployment is not claimed.
+S26/finding 58 is next under continuous owner authorization.

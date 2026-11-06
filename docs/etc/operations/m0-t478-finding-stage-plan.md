@@ -323,3 +323,13 @@ real Win16 embedding/SHELL lifecycle, final persistence regression, coherent
 build and Full 16/16 pass; exact worktree release published. An initial concurrent
 writer test failure remains cause-undetermined despite successful replays.
 S25/finding 57 follows.
+
+## S25 disposition
+
+[S25](../evidence/m0-t478-s25-fax-failure.md) corrects original selected fax
+list failure ownership, installer success result and successful printer handle
+retirement. Baseline fixture has 15 failures; current has 135 passing checks.
+All twelve mapped fax functions and Registry edges bind to the frozen product.
+Coherent build, Full 16/16 and exact worktree release pass. External fax driver/UI
+deployment and arbitrary installer rollback remain outside this bounded result.
+S26/finding 58 follows.

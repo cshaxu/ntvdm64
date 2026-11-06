@@ -102,8 +102,9 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
     HKEY  hKey = 0;
     DWORD dwType;
     DWORD cbBufSize;
-    LPSTR lpSupFaxDrvBuf;
-    LPSTR *alpSupFaxDrvList;
+    // MVDM-HOST-DIV-879: preserve empty/failure ownership.
+    LPSTR lpSupFaxDrvBuf = NULL;
+    LPSTR *alpSupFaxDrvList = NULL;
 
     *uCount = 0;
 
@@ -131,11 +132,12 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
     if (*uCount = BuildStrList(lpSupFaxDrvBuf, NULL)) {
         // Build an array of pointers to the start of the strings in the list.
         alpSupFaxDrvList = (LPSTR *) malloc_w(*uCount * sizeof(LPSTR));
-        RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
-        if (alpSupFaxDrvList) {
-            // Fill the array with string starting points.
-            BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);
+        if (!alpSupFaxDrvList) {
+            goto GSFD_error;
         }
+        RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
+        // Fill the array with string starting points.
+        BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);
     }
     goto GSFD_exit;
 
@@ -143,6 +145,12 @@ GSFD_error:
     LOGDEBUG(0,("WOW32!GetSupportedFaxDrivers failed!\n"));
 
 GSFD_exit:
+    if (!alpSupFaxDrvList) {
+        *uCount = 0;
+        if (lpSupFaxDrvBuf) {
+            free_w(lpSupFaxDrvBuf);
+        }
+    }
     if (hKey) {
         RegCloseKey(hKey);
     }
@@ -877,7 +885,9 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
     PRINTER_INFO_2 PrinterInfo;
     PORT_INFO_1 PortInfo;
     HKEY hKey = 0, hSubKey = 0;
+    // MVDM-HOST-DIV-879: successful installation owns a printer handle.
     BOOL bRetVal;
+    HANDLE hPrinter;
 
     LOGDEBUG(0,("InstallWowFaxPrinter, Section = %s, Key = %s, String = %s\n", szSection, szKey, szString));
 
@@ -927,7 +937,8 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
             // Install the printer driver.
             DriverInfo.cVersion = 1;
             DriverInfo.pName = "Windows 3.1 Compatible Fax Driver";
-            if ((*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo) == FALSE) {
+            bRetVal = (*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo);
+            if (!bRetVal) {
                 bRetVal = (GetLastError() == ERROR_PRINTER_DRIVER_ALREADY_INSTALLED);
             }
 
@@ -953,8 +964,12 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 PrinterInfo.pDriverName     = "Windows 3.1 Compatible Fax Driver";
                 PrinterInfo.pPrintProcessor = "WINPRINT";
                 PrinterInfo.pDatatype       = "RAW";
-                if ((*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo) == 0) {
+                hPrinter = (HANDLE)(*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo);
+                if (!hPrinter) {
                     bRetVal = (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS);
+                }
+                else {
+                    (*spoolerapis[WOW_ClosePrinter].lpfn)(hPrinter);
                 }
 #line 960
 #ifdef DBG
