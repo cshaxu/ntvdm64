@@ -1,0 +1,131 @@
+{
+  "task": "T478 S9",
+  "baseline": "1fb0a38f5",
+  "focusedChecks": 43,
+  "existingLeaseBoundaryChecks": 45,
+  "existingTests": [
+    "guest_memory_lease_test",
+    "guest_memory_lease_boundary_test",
+    "session_lifecycle_test",
+    "thread_start_session_fixture"
+  ],
+  "packageId": "694495a1-285e-4e8c-940f-3f2425de4445",
+  "appVersion": "0.0.478",
+  "protocol": 67,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 415352,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5683,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1697,
+        "CleanupMs": 587,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 380,
+        "CleanupMs": 471,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67610,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 59630,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 50989,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 17118,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 14424,
+        "CleanupMs": 498,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 76671,
+        "CleanupMs": 511,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13338,
+        "CleanupMs": 572,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29228,
+        "CleanupMs": 512,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31327,
+        "CleanupMs": 538,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4973,
+        "CleanupMs": 577,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7812,
+        "CleanupMs": 505,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11343,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4521,
+        "CleanupMs": 417,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8166,
+        "CleanupMs": 488,
+        "Passed": true
+      }
+    ]
+  },
+  "rawNtvdmSha256": "027366B46A867D85A4FD7031471CEBD2794EC213936635D75FEF20E761A39F47",
+  "publication": "assets/release only",
+  "physicalFloppyTested": false,
+  "dos4gwNesticle": "owner excluded, skipped",
+  "noPush": true,
+  "sourceHashes": {
+    "src\\ntvdm-exe\\command\\source\\mvdm_command_guest_state.c": "8fb2fb51ca69662f81dc4d4892b11d34a910b43cb507c7a0c8fc4ee63494eb77",
+    "src\\ntvdm-exe\\session\\guest_memory_lease.c": "98f1fb811e769ff00e9ed98ac8311b4d07dcd4b5c9d4d137f536eeea634b2d5c",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c": "e2eed1044f2c04b9db60165dd753ee726b1e7b1efd58f7336e0a6ec270cebe52",
+    "test\\integration\\fdc_command_session_test.c": "bb4a07d440ad8f4f6a6913118749f981f4bd80d244df9aa17fdffc1e02a3ce36"
+  }
+}

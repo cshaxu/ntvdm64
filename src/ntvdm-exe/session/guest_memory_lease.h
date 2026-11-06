@@ -20,6 +20,8 @@ struct guest_memory_lease {
 };
 
 typedef struct guest_memory_lease_context {
+    /* Zero-initialized Win32 SRW lock: copied access versus provider retirement. */
+    void *copy_lock;
     uint32_t epoch;
     uint32_t active;
     void *context;
@@ -37,5 +39,10 @@ int guest_memory_lease_acquire(guest_memory_lease_context *context,
     guest_memory_lease **lease_out, uint8_t **bytes_out);
 int guest_memory_lease_release(guest_memory_lease_context *context,
     guest_memory_lease *lease, int commit);
+
+/* Short copied access does not borrow a shared lease slot. The expected epoch
+ * prevents a saved numeric registration from accessing a replacement provider. */
+int guest_memory_lease_copy(guest_memory_lease_context *context, uint32_t epoch,
+    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write);
 
 #endif

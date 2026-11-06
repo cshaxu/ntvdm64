@@ -184,3 +184,20 @@ semantics ceiling, no stronger rollback or new production behavior is added.
 Known limitations remain recorded, not fixed; reopen only for project drift or
 explicitly admitted stronger original-failure semantics. S9/finding 13 is next
 proposed, not admitted.
+
+## Continuous execution authorization
+
+After S8, the owner authorizes automatic sequential admission, bounded objective
+selection and execution of the remaining S packets. Keep one active S in CURRENT;
+finish its evidence/local P before admitting the next. The original-semantics
+ceiling and worktree-only release/no-push constraints remain unchanged. This is
+not authority for parallel active packets or expanded capabilities.
+
+## S9 disposition
+
+[S9](../evidence/m0-t478-s9-fdc-session.md) repairs project-induced TLS registration
+and missing FDC thread session binding. Original device/reset behavior remains;
+short FD copies protect provider lifetime without consuming shared CPU lease
+slots. Focused 43 checks, existing session/thread/lease tests and 16 Full gates
+pass. Package 694495a1-285e-4e8c-940f-3f2425de4445 is published only to worktree
+assets/release. No physical floppy acceptance is claimed. S10/finding 15 is next.

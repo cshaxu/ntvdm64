@@ -33,6 +33,9 @@
 #include "host_def.h"
 #include <mvdm_guest_location.h>
 #include <mvdm_command_guest_state.h>
+/* DIV-871: bind the original void/cdecl FDC worker to its caller session. */
+#include "compat/include/thread_start_compat.h"
+#undef CreateThread
 
 
 #line 36
@@ -981,9 +984,9 @@ nt_rflop_command
 		    fdc_parms.command_block = command_block;
 		    fdc_parms.result_block = result_block;
 		    fdc_parms.owner_pdb = currentPdb;
-		    fdc_thread_handle = CreateThread(NULL,
+		    fdc_thread_handle = opennt_create_void_cdecl_parameter_thread(NULL,
 					   0,
-					   (LPTHREAD_START_ROUTINE)fdc_thread,
+					   (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)fdc_thread,
 					   (PVOID)&fdc_parms,
 					   0,
 					   &fdc_thread_id

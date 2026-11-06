@@ -4,17 +4,13 @@
 
 **No active M/T/S packet.**
 
-T478 S8 closes at [original suballocator disposition](../etc/evidence/m0-t478-s8-suballoc-disposition.md).
-Current and both original trees preprocess identically for the selected profile.
-Existing normal lifecycle cases pass; failure characterization reproduces the
-original partial-commit and failed-free limitations. These are retained known
-limitations, not repaired or passing rollback guarantees. Under the owner's
-original-semantics ceiling, no transactional recovery or production change is
-added. Local P1 records evidence and debt; no new product build/publication,
-O:/winnt write or push. The verified S7 package remains unchanged. The
-[ordered plan](../etc/operations/m0-t478-finding-stage-plan.md) applies this owner
-standard to every remaining S; S9/finding 13 is next proposed, not admitted.
-Broader S1 qualification remains open.
+T478 S9 is closed; [FDC session evidence](../etc/evidence/m0-t478-s9-fdc-session.md).
+The owner authorizes sequential S10 admission next.
+
+## S1 Closure Record
+
+T478 S1 planning handoff: [classified findings](../etc/evidence/m0-t478-s1-classified-findings.md).
+Broader inventory qualification remains open.
 
 ## M0 T475 S5 Closure
 
@@ -78,26 +74,38 @@ The [T473 baseline](../etc/evidence/m0-t473-s1-whole-closure-baseline.md) record
 
 ## S2 Closure Record
 
+T478 S2: [bounded conclusion](../etc/evidence/m0-t478-s2-generic-thunk.md).
+
 The [T473 CPU40/DPMI reconciliation](../etc/evidence/m0-t473-s2-cpu40-dpmi-reconciliation.md) and companion owner records retain the per-package decisions.
 
 ## S3 Closure Record
+
+T478 S3: [bounded conclusion](../etc/evidence/m0-t478-s3-forcedos.md).
 
 The [T473 CPU40 lifecycle](../etc/evidence/m0-t473-s3-cpu40-execution-lifecycle.md) records the execution and retirement boundary.
 
 ## S4 Closure Record
 
+T478 S4: [bounded conclusion](../etc/evidence/m0-t478-s4-remote-rap.md).
+
 The [T473 DOS/COMMAND/XMS lifecycle](../etc/evidence/m0-t473-s4-dos-command-xms-lifecycle.md) records the selected original owner paths.
 
 ## S5 Closure Record
+
+T478 S5: [bounded conclusion](../etc/evidence/m0-t478-s5-directory-restart.md).
 
 The [T473 SoftPC device lifecycle](../etc/evidence/m0-t473-s5-softpc-device-lifecycle.md) records the bounded device-owner audit.
 
 ## S7 Closure Record
 
+T478 S7: [bounded conclusion](../etc/evidence/m0-t478-s7-xms-boundaries.md).
+
 S7 closed at [its session/callback ownership audit](../etc/evidence/m0-t473-s7-wow-session-callback-audit.md)
 without a runtime change; S8 owns public-USER object identity and retirement.
 
 ## S8 Closure Record
+
+T478 S8: [bounded conclusion](../etc/evidence/m0-t478-s8-suballoc-disposition.md).
 
 S8 closes at its [public-USER evidence](../etc/evidence/m0-t473-s8-public-user-identity-recovery.md).
 The ten-image package is published; the skipped direct completion/input
@@ -105,9 +113,14 @@ control observation remains a non-pass. S9 owns generic wrappers.
 
 ## S9 Closure Record
 
+T478 S9 [restores original FDC/COMMAND session ownership](../etc/evidence/m0-t478-s9-fdc-session.md), with actual-object tests and all 16 selected Full gates passed; worktree release only.
+
+
 The [T473 USER wrapper evidence](../etc/evidence/m0-t473-s9-generic-user-wrapper-audit.md) records the mapped carrier family and delivered r10 package.
 
 ## S6 Closure Record
+
+T478 S6: [bounded conclusion](../etc/evidence/m0-t478-s6-sas-vector.md).
 
 S6 was a no-runtime [status-sequence correction](../etc/evidence/m0-t473-s6-status-sequence-correction.md);
 S7 owns the WOW32 session/callback audit.

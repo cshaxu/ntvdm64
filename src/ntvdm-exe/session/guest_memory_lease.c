@@ -1,5 +1,7 @@
 #include "guest_memory_lease.h"
 
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -18,7 +20,7 @@ int guest_memory_lease_context_valid(const guest_memory_lease_context *context)
           context->write != NULL));
 }
 
-int guest_memory_lease_begin(guest_memory_lease_context *lease_context,
+static int lease_begin(guest_memory_lease_context *lease_context,
     void *context, guest_memory_read_fn read, guest_memory_write_fn write)
 {
     if (!guest_memory_lease_context_valid(lease_context) ||
@@ -31,7 +33,7 @@ int guest_memory_lease_begin(guest_memory_lease_context *lease_context,
     return 1;
 }
 
-void guest_memory_lease_end(guest_memory_lease_context *context)
+static void lease_end(guest_memory_lease_context *context)
 {
     uint32_t index;
     if (!guest_memory_lease_context_valid(context)) return;
@@ -101,5 +103,43 @@ int guest_memory_lease_release(guest_memory_lease_context *context,
             lease->bounce, lease->byte_count);
     free(lease->bounce);
     memset(lease, 0, sizeof(*lease));
+    return result;
+}
+
+/* Copy-only clients (including original FDC helper threads) never contend for
+ * the CPU thread's borrowed slots. Retirement waits only for this bounded
+ * provider call, not for hardware work or a new device cancellation protocol. */
+int guest_memory_lease_begin(guest_memory_lease_context *context,
+    void *provider, guest_memory_read_fn read, guest_memory_write_fn write)
+{
+    int result;
+    if (context == NULL) return 0;
+    AcquireSRWLockExclusive((PSRWLOCK)&context->copy_lock);
+    result = lease_begin(context, provider, read, write);
+    ReleaseSRWLockExclusive((PSRWLOCK)&context->copy_lock);
+    return result;
+}
+
+void guest_memory_lease_end(guest_memory_lease_context *context)
+{
+    if (context == NULL) return;
+    AcquireSRWLockExclusive((PSRWLOCK)&context->copy_lock);
+    lease_end(context);
+    ReleaseSRWLockExclusive((PSRWLOCK)&context->copy_lock);
+}
+
+int guest_memory_lease_copy(guest_memory_lease_context *context, uint32_t epoch,
+    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write)
+{
+    int result = 0;
+    if (context == NULL || bytes == NULL || byte_count > UINT32_MAX-address)
+        return 0;
+    AcquireSRWLockShared((PSRWLOCK)&context->copy_lock);
+    if (guest_memory_lease_context_valid(context) && context->active &&
+        context->epoch == epoch) {
+        result = write ? context->write(context->context,address,bytes,byte_count)
+                       : context->read(context->context,address,bytes,byte_count);
+    }
+    ReleaseSRWLockShared((PSRWLOCK)&context->copy_lock);
     return result;
 }
