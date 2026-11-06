@@ -70,6 +70,9 @@ or ax,di
 jz .write_vxd
 xor ax,ax
 call far [vxd_api-data]
+%ifdef INIT_FAILURE
+jnc fatal                        ; failed driver must not advertise identity
+%endif
 mov [vxd_signature-data],eax
 mov [vxd_vm-data],ebx
 .write_vxd:
@@ -125,6 +128,7 @@ jne fatal
 push word [file-data]
 api 1,81                         ; _lclose
 
+%ifndef INIT_FAILURE
 .wait_a:
 api 1,29
 push ds
@@ -176,6 +180,7 @@ push ax
 api 1,81
 jmp .wait_retirement
 .exit:
+%endif
 %endif
 push word 0                      ; DWORD reserved
 push word 0

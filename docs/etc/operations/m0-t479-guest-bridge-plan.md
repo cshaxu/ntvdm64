@@ -42,9 +42,10 @@ not a completed runtime capability or permission to change original guest.
 | S1 (closed research) | Original call chains and candidate guest bridge, with executable proof explicitly deferred. |
 | S2/host-foundation (delivered) | Independent VM registry lifetime without lock-held RPC/joins; cancellable provider dispatch; paired frontend/execution capabilities. Concurrent two-VM and negative lifecycle tests plus product delivery. |
 | S3/host-command-preparation (delivered) | Per-request command/environment/CWD/standard handles/results without process-global mutation. Preserve ordinary DOS path; parallel host fixtures and redirection rollback. No guest multitasking entry enabled yet. |
-| S4/guest-driver (active) | Project VxD build/load, actual VM identity and inventory, generation/retirement, callback and counted wait/wake through a claimed emulated notification resource. Prove Win3.1 enhanced and Win95 independently. |
+| S4/guest-driver, Win3.1 checkpoint | Project VxD build/load, actual VM identity and inventory, generation/retirement/reuse, callback and counted wait/wake through a claimed emulated notification resource. Win3.1 proofs delivered; Win95 remains explicitly deferred below. |
 | S5/multitask-command | Both 54:08/0A asynchronous execution and original continuation/reentry semantics, including complete client state restoration; two-VM completion in both orders. |
 | S6/guest-io | Complete per-VM text/graphics/input/Console contract, final-output serial, cancellation and nested chains; actual guest acceptance. |
+| S4/guest-driver, Win95 continuation | After the owner-prioritized Win3.1 S5/S6 path works, independently prove remaining Win95 wait/wake, lifetime and initialization contracts. Retain original S4 scope; no completion credit from Win3.1. |
 | S7/integration | Complete failure/lifecycle and product regression, coherent cached full build, publication and final T acceptance. |
 
 S1 is closed and S2/guest-bridge is admitted. Stage boundaries may be refined from concrete source

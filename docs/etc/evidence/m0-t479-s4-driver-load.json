@@ -1,5 +1,5 @@
 {
-  "status": "S4 P1 normal host package delivered; guest driver remains a candidate, S4 open",
+  "status": "S4 Win3.1 bounded checkpoint delivered; S5 admitted, Win95 S4 proof deferred before S7/T closure",
   "tool": {
     "sha256": "3A14CD186BB7D2AF9215816F77DFEC9A5D1AA6D2A4E8EC71E1BC916F3DF8DD7A",
     "url": "https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/open-watcom-2_0-c-win-x64.exe",
@@ -1756,5 +1756,146 @@
       }
     ],
     "scope": "Actual VMM handle reuse and rejected old-generation APIs; no new product build or Win95 claim"
+  },
+  "win31InitializationRollback": {
+    "runnerExit": 0,
+    "matrix": {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t479-s4-driver\\checked-init-failure\\runtime\\386-dosonly1.observer.txt"
+    },
+    "api": {
+      "api": 0,
+      "signature": 0,
+      "vm": 0,
+      "driver": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F"
+    },
+    "markerSha256": "67ABDD721024F0FF4E0B3F4C2FC13BC5BAD42D0B7851D456D88D203D15AAA450",
+    "testPackage": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "19622E870252ACDFED463B3C57934C553D49501312395F5054C8680781395241",
+        "Machine": 34404,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "DDDFFDCEC4D02045DAFBE1E5003281301481A693B2190E6594C478B17F52A6FB"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "784DA474591892916EC81C02EF632243315A00A222058CAA16CB90DCE0883BC8",
+        "Machine": 34404,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "747CF01AB07C106B8BB4CC57471B3A15E8FC77BF72ED4E06B4FB0BFF9106304F"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "45760E5688BCE50946A0977F5B4A45F62A5AD10588CF50866711668CDA75E922",
+        "Machine": 34404,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "509CC63E45FC7AFEC9F9ADF703C3240AD5F47BDCA21731CD3F74323CA8BDB933"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "280B8873D34D55251B7DEED71A7B82B4AE84073E976A0DB18D737B1507774BF0",
+        "Machine": 332,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "26B13641C869B6CC4A8D6BFF1622DAC9069BD2EB0E4BACBD7E978A596ED63CAF"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "65E6EA62C7B30C1C7092EDCF9B5632EA604C09A89AC2411427AFC41E2BBA8BCA",
+        "Machine": 34404,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "2A34E537A1809D305660D8587E1A34B9B56A65C7A3A21565B3A96C1C56AC786B"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "FFB64AF8B6934E4A878FF36C8FAFFF74BE2FDE47CD0608FD4542D5229D706B98",
+        "Machine": 34404,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "4FFB5FDC3708B58328917CB07B478E10D45ED57E2DA023D844B89CBF6FE0D908",
+        "Machine": 332,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "8AA5839AAC55391C2F18323A2F8BB6A0B336C67297292A3159C0BA1F737A42C0"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "B3E5831AEE4964738D970DCF38898EED7F8ECE0399FC7BBA20D151A8139B911C",
+        "Machine": 332,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "0E2328509A0DA4A065CED20338B7934F5C5B2C06508347AD848FDDAD116554EF"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "A71427EA22D32E08106B965013C3C08CDE19BC185CC01EB650D7CA5FDB4D6D76",
+        "Machine": 332,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "2165D05C05802B2846615EB0EFE7786657F194DCDE972E63DB191C63E304ACE7"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "6BF6C784F5666B0D85D389F3C3C5982F54520CB23802E9C64ACBA8A6E73A5955",
+        "Machine": 34404,
+        "PackageId": "53874033-fdba-4713-91f2-0ea9eb8bb570",
+        "InputSha256": "419F93077BE8518CC5A2905A9989E933A82C889A0952C0A86B145C30115D94C8"
+      }
+    ],
+    "sources": [
+      {
+        "name": "host-init-failure.c",
+        "sha256": "99B5240FC197BE01510E897DE292FB8291C3F38527A77AC231516E0C5A03B36D"
+      },
+      {
+        "name": "win31-identity.asm",
+        "sha256": "4C4155E7700A2B8C1A9DFDA4F6D11D85B30ECE00FCD68780245677C03CC5599F"
+      },
+      {
+        "name": "verify-win31-identity.ps1",
+        "sha256": "9CC0657E34F1D66841C27E562B5887E62971BD4486E5E2CD8059B6EEAB58E216"
+      }
+    ],
+    "scope": "Actual failed arm after IRQ/VPICD acquisition, guest close, real host resource reacquisition, absent driver API and normal Windows exit; test-only link never published"
+  },
+  "driverPublication": {
+    "id": "ntvdm64-win31",
+    "file": "ntvdm64.386",
+    "kind": "static-vxd",
+    "architecture": "i386-protected-mode",
+    "source": "src/addon/ntvdm64-386/ntvdm64.asm",
+    "sourceSha256": "E7940ED84CD1276C8936D805ADA3DCD0D1F8CA7DF19209196EE097FEB68BD3A2",
+    "sha256": "781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F",
+    "acceptance": "candidate",
+    "verifiedScope": "Win3.1 static identity, callback, counted wait/wake, retirement, reuse and initialization rollback; command continuation and I/O not yet enabled",
+    "evidence": "docs/etc/evidence/m0-t479-s4-driver-load.md",
+    "verifiedRunners": [
+      "reuse",
+      "init-failure",
+      "retire-queued",
+      "bootstrap-runtime",
+      "full"
+    ],
+    "publicationCheckCorrection": "Initial task command used missing bootstrap.exit; corrected to bootstrap-runtime.exit, re-read every exit with Stop semantics and rechecked source/release hashes."
   }
 }

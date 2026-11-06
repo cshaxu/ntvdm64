@@ -426,3 +426,43 @@ not substitute for initialization rollback or Win95 acceptance. The test
 changes only independent fixtures and their runner; production images and
 the published candidate are unchanged, so the existing Full 16/16 evidence
 is reused rather than rerunning unrelated product tests.
+
+## P3 Win3.1 initialization rollback and bounded handoff
+
+`checked-init-failure` passed with exit zero. Its separate test-only BOP seam
+rejects arm after the real host reservation and guest VPICD virtualization.
+The actual guest driver calls close; the seam verifies the original IRQ can
+be reserved/released again and its EOI hook installed/removed again, then
+writes the required one-shot marker. Win3.1 exposes no driver API afterward
+(address/signature/VM all zero), reaches Program Manager and exits normally.
+Original installation hashes remain unchanged. This proves that exercised
+rollback branch; it is not exhaustive fault injection of every VMM allocator.
+
+The unchanged 4935-byte Win3.1 driver is now staged as a **candidate** at
+`assets/release/ntvdm64.386`, SHA-256
+`781641DDBFFB52CD4A587E2384654FFF933641CF7669891017A31B167E5DC04F`.
+The add-on manifest records its exact source hash, verified bridge scope and
+candidate status. It is not installed into O:/winnt or any original guest;
+the Win95 .vxd is not published. The ten-component P1 package remains unchanged
+and hash-verified at both destinations; cached inputs and Full 16/16 are reused.
+The first task-local publication check referred to a nonexistent bootstrap.exit;
+the corrected strict check reads bootstrap-runtime.exit and all other actual
+runner exits with terminating errors, then rechecks source and published hashes.
+That guard mistake is retained in the structured publication record.
+
+The owner's Win3.1-first instruction refines the stage sequence: this bounded
+S4 Win3.1 checkpoint hands off to S5 command continuation. **S4's Win95 obligations
+remain open**, to run after the Win3.1 S5/S6 path and before S7/T closure. No
+Win95 acceptance is inferred from this guest. Full PIC ICW1 reinitialization
+during an active guest, every VMM allocation failure and complete command/I/O
+shutdown are not established by these focused tests; retain them in S7's
+failure matrix rather than claim them passed. Tested real ICA cancellation,
+guest retirement/reuse, close and the injected arm failure remain distinct
+from those untested combinations.
+
+The private probe API device ID 7f80 has no claimed global allocation. Collision
+with an unrelated installed VxD is not tested; the candidate is only exercised
+in the owned copied fixtures. S5 must authenticate bridge registration rather
+than treating that number alone as identity. General-installation compatibility
+remains part of S7; this handoff is not permission to silently enable a conflicting
+driver. Final documentation governance and publication hash checks pass.

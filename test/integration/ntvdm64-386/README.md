@@ -68,3 +68,14 @@ queued wake API calls must fail, while a new-generation counted completion
 must succeed. The 36-byte `VRUS` report is cross-checked against the original
 two VM reports, and Windows exits only after the new VM has also retired.
 This uses the normal candidate package, not the host-thread test seam.
+
+`-InitializationFailure` uses a separate `host-init-failure.c` link seam:
+rename only the notification BOP entry to `mvdm_vm_bridge_bop_direct`, link
+the test entry first, and retain the real notification/IRQ implementation.
+It fails arm after host reservation and VPICD ownership. The real guest driver
+must close the bridge; the seam then reacquires/releases the exact IRQ and
+EOI hook and writes a one-shot marker to the runner-owned report path.
+The controller requires the failed driver to expose no successful identity,
+and the normal Windows startup/exit checks still apply. No DOS witnesses are
+launched in this negative case. Marker, matrix and API result are all required;
+absence of a functioning driver alone is not a passing failure test.

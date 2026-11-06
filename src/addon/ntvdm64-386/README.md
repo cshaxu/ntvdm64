@@ -18,8 +18,10 @@ the host `system32` directory. Original guest binaries remain unchanged.
 
 The S4 candidate uses NASM OMF and Open Watcom LE, with shared resident code
 and data segments. Both output names currently contain the same statically
-loaded image; dynamic load/unload is not supported. No driver here is released
-or claimed to provide the completed host bridge or wait/wake.
+loaded image; dynamic load/unload is not supported. The Win3.1 .386 is published
+as a candidate with its verified bridge scope in addon-manifest.json. Win95
+.vxd publication remains deferred. Neither provides the completed host command
+or I/O path yet; S5/S6 implement those contracts.
 Historical experimental drivers are comparison evidence, not build inputs.
 
 The current candidate allocates VMM-owned per-VM control-block storage, assigns
@@ -52,8 +54,11 @@ host-reserved IRQ 15: both DOS VMs observed a serial at least as new as their
 publication, with zero notification errors and normal Windows exit. This
 does not prove host task registration/completion or an off-CPU producer.
 Device ID `7f80` is a temporary
-isolated-test identity, not a claimed globally allocated device number. Final
-resource registration and collision handling remain S4 acceptance obligations.
+isolated-test identity, not a claimed globally allocated device number. The
+candidate is not automatically installed into general guest configurations.
+Conflicting private API device IDs remain an unverified compatibility boundary
+before general installation; S5 must not infer bridge identity from this ID
+alone. IRQ reservation/ownership and rollback have the separate proofs below.
 
 ## Build and provenance
 
@@ -80,8 +85,11 @@ can be acquired again. These assertions are not linked into the product.
 The subsequent normal-package reuse witness creates a third DOS VM after
 the first two retire, observes B's actual handle with generation 4 instead
 of 2, rejects both old-generation wake APIs and consumes a valid new signal.
-Guest initialization rollback, actual command-result integration and Win95
-wait/wake remain separate obligations. The owner now
+The actual initialization rollback witness rejects arm after IRQ/VPICD
+acquisition; the driver closes the host resource and ceases exposing an API,
+while Windows still starts and exits normally. This is one exercised failure
+branch, not exhaustive VMM allocator injection. Actual command-result
+integration and Win95 wait/wake remain separate obligations. The owner now
 prioritizes the complete Win3.1 path; no new Win95 investigation is running.
 
 VPICD descriptor/service ABI is checked against the read-only Microsoft

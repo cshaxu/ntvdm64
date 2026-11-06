@@ -2,41 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T479 S4** - project guest VxD registration and wait/wake proof.
-The accepted shared-library side stage is closed; this is the resumed guest mainline.
+**Active: M0 T479 S5** - Win3.1 multitask command continuation.
+S4's Win3.1 checkpoint is delivered; its Win95 continuation remains open.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
-| Identifier Mode | M0 T479 S4/guest-driver, implementation and executable-proof phase; Ordinary Mode, single implementer/reviewer. |
-| Admission And Approval | Owner approves the host-first S2--S7 roadmap and continuous execution; each S builds, tests, publishes, commits and pushes before advancing. |
-| Objective | Build/load the project VxD and prove actual VM identity/inventory, generation/retirement, callback and counted wait/wake through a claimed emulated notification resource on Win3.1 enhanced and Win95. |
-| Non-goals | No original guest changes/rebuild, hardware V86 monitor, new polling/timeouts/transport, or semantic concessions. Full 54:08/0A execution and I/O remain S5/S6. |
-| Reference Baseline | S3 host command preparation delivery; package 74269114-368c-45ab-b52d-bf103d08b0b9, Full 16/16, 31 capture and 59 launch assertions. Actual guest multitasking remains unproved. |
-| Files And ABI Surface | Project driver in src/addon/ntvdm64-386; release assets/release/ntvdm64.386 and ntvdm64.vxd. NTVDM VM bridge/notification and matching tests/build/load tools. Necessary mirror hooks require source proof/difference registration; original guest stays immutable. |
-| Applicable Rules | Execution, architecture/coding/document rules and source policy; immutable original guest and minimum registered mirror differences. |
-| Verification | Original VMM call-chain/ABI review; actual driver load, VM enumeration/retirement, callback return, counted wait/wake, resource claim/reset and cancellation on both guests; cached ten-component build, full gates and coherent publication. |
-| Expected Markers | Actual VMM VM identity, not focus/CR3 inference; callback stack/state preservation; independent notification wake while target VM waits; generation-safe retirement; no host wait inside CCPU callback. |
-| Asset Needs | Existing immutable Win3.1/Win95 fixtures and verified package; recovered project VxD toolchain with recorded provenance; stable Ninja/ccache roots. Original guest is never rebuilt. |
-| Reporting Requirements | Separate confirmed source facts, design decisions and runtime evidence; explain capability consequences rather than repeat next-step slogans. |
-| Stop Conditions | New semantic concession, guest patch, unknown provenance or incompatible architecture requires explicit disposition; missing proof is not a pass. |
-| Exit Criteria | Actual guest driver registration/wait/wake contracts pass independently on both guests; complete package built/tested/published, committed and pushed. S5 then wires multitask commands; no host-only substitute counts as guest proof. |
-| Original Owner Request | Set a persistent goal and execute approved host-first S2--S7 continuously, delivering each stage before advancing. |
-| Similar-Issue Sweep | Both 54:08/0A; system/ordinary/reused VMs; single-task transitions; nested children; input/output/failure; NIDDB independent owner. |
-| Temporary Evidence | build/t479-s4-driver; owned 60-minute phases, 2 GiB, 15-minute no-progress review. S3 evidence remains until its reviewed summary and delivery are durable. |
+| Identifier Mode | M0 T479 S5/multitask-command; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner approves continuous S2--S7 delivery and subsequently prioritizes complete Win3.1 before Win95. S4's bounded Win3.1 handoff admits S5; Win95 proof remains mandatory before T closure. |
+| Objective | Connect both 54:08/0A to independent host commands and restore the actual calling VM's continuation and complete client state once, while other VMs and guest Windows keep running. |
+| Non-goals | No original guest rebuild/patch, hardware V86 monitor, CPU30, new polling/timeouts/control transport, placeholder I/O or semantic concessions. Full I/O and nested acceptance remain S6; no new Win95 work yet. |
+| Reference Baseline | S4 Win3.1 bridge proofs and published ten-image package ca3b367a-3d54-4d05-a9a8-147594d7450d, Full 16/16. Candidate ntvdm64.386 has actual callback/wake/retirement/reuse/arm-failure evidence; it does not yet execute host commands. |
+| Files And ABI Surface | Project ntvdm64-386 driver, NTVDM command preparation/continuation and VM frontend ownership, existing NTSRV/RPC lifecycle and tests. Minimal justified mirror command/BOP seams must be registered. Add-ons only assets/release. |
+| Applicable Rules | Execution, architecture/coding/document rules and source policy; preserve original guest and register minimum mirror differences. |
+| Verification | Source trace both BOPs, real guest continuation/register/CF/AL/stack state, two VM commands completing in both orders, independent request data, normal/failure/retirement paths. Cached full builds, applicable full product gates and coherent publication per S. |
+| Expected Markers | No host wait inside CCPU BOP or cached guest pointer across scheduling. Actual VM identity/generation; NTSRV lifecycle authority; measured guest/other-VM progress. No dummy provider. |
+| Asset Needs | Immutable Win3.1 installation copied to isolated fixture, verified normal package and independently authored add-on; stable Ninja/ccache roots. |
+| Reporting Requirements | Separate source facts, implementation and tests; record unproved boundaries. |
+| Stop Conditions | New semantic concession, original guest modification, unknown provenance or incompatible architecture needs explicit disposition. Missing proof is not a pass. |
+| Exit Criteria | Both BOP continuations and independent execution pass actual Win3.1 tests; required complete host/add-on publication, reviewed commit and push. S6 receives complete I/O scope, not a reduced substitute. |
+| Original Owner Request | Execute host-first S2--S7 continuously; first run Win3.1 correctly, defer Win95 work. |
+| Similar-Issue Sweep | Both BOPs; native/DOS descendants; reordered completion, VM death/reuse, nesting/redirection; unchanged non-bridge path. |
+| Temporary Evidence | build/t479-s5-command; owned 60-minute phases, 2 GiB, 15-minute no-progress review. Retain build/t479-s4-driver until durable handoff checks finish. |
 
-S4 [P1 checkpoint](../etc/evidence/m0-t479-s4-driver-load.md): Win3.1 native-thread
-PIC wake, forced queued retirement and normal exit pass. Full 16/16; normal
-ten-component package ca3b367a-3d54-4d05-a9a8-147594d7450d published to both
-destinations. Actual Win3.1 VM handle reuse also passes. Driver remains a
-candidate; initialization rollback and command integration remain open.
-S4 is not closed.
+## S4 Win3.1 Checkpoint And Deferred Win95
 
-Owner priority: finish the Win3.1 enhanced-mode path first. Do not launch new
-Win95 investigations or tests while completing that path. Retain existing
-Win95 evidence; its remaining acceptance obligations are deferred, not passed.
+[Evidence and P deliveries](../etc/evidence/m0-t479-s4-driver-load.md) record
+actual identities, 320 callbacks, counted and blocked cross-VM waits, native
+thread/PIC wake, cancellation, forced queued retirement, actual handle reuse,
+normal exit and injected initialization rollback. ntvdm64.386 is published as
+a bridge candidate only. Ten host components remain the Full 16/16 P1 package.
+
+[The roadmap](../etc/operations/m0-t479-guest-bridge-plan.md) retains S4's
+Win95 wait/wake/lifecycle proof after the Win3.1 S5/S6 path and before S7/T
+closure. It is not passed or dropped. Full guest ICW1-reset combinations and
+exhaustive VMM allocation failures remain explicitly unverified in S7's matrix.
 
 ## S3 Host Command Preparation Closure
 

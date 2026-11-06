@@ -7,10 +7,12 @@ param(
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$RetirementDriver,
- [switch]$Reuse
+ [switch]$Reuse,
+ [switch]$InitializationFailure
 )
 $ErrorActionPreference='Stop'
 if($Reuse -and $RetirementDriver){throw 'Reuse and forced retirement are separate witnesses'}
+if($InitializationFailure -and ($Reuse -or $RetirementDriver)){throw 'Initialization failure is a separate witness'}
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $task=[IO.Path]::GetFullPath($OutputRoot)
 $source=(Resolve-Path -LiteralPath $InstallSource).Path.TrimEnd('\')
@@ -81,9 +83,11 @@ foreach($id in 'A','B'){
 $ini="$dest/WIN.INI"
 $s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
+if($InitializationFailure){$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*','load=')}
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
 
 $defines=@()
+if($InitializationFailure){$defines=@('-DINIT_FAILURE=1')}
 if($Reuse){
  & nasm -f bin "$PSScriptRoot/dos-reuse.asm" -o "$dest/PATCH/REUSE.COM"
  if($LASTEXITCODE){throw 'Reuse witness assembly failed'}
@@ -109,6 +113,7 @@ $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCE
 $nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
 $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
+if($InitializationFailure){$env:MVDM_INIT_FAILURE_REPORT="$task/initialization-rollback.bin"}
 try {
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases 386-dosonly1
  if($LASTEXITCODE){throw 'Guest matrix runner failed'}
@@ -117,6 +122,12 @@ try {
  Copy-Item "$dest/PATCH/VMLOAD.BIN" "$task/runtime/VMLOAD.BIN"
  $result=[ordered]@{api=[BitConverter]::ToUInt32($b,0);signature=[BitConverter]::ToUInt32($b,4);vm=[BitConverter]::ToUInt32($b,8);driver=(Get-FileHash "$dest/PATCH/NTVDM64.386").Hash}
  $result|ConvertTo-Json|Set-Content "$task/runtime/vxd-result.json"
+ if($InitializationFailure){
+  $rollback=[IO.File]::ReadAllBytes("$task/initialization-rollback.bin")
+  if($rollback.Length -ne 4 -or [BitConverter]::ToUInt32($rollback,0) -ne 1 -or $result.signature -eq 0x4e544d56){throw 'Initialization failure and actual IRQ rollback not proved'}
+  'PASS injected arm failure, real guest rollback, released host IRQ/hook and normal Windows exit'
+  return
+ }
  if($result.signature -ne 0x4e544d56 -or !$result.vm){throw 'VxD API identity did not pass'}
 
  if($RetirementDriver){
