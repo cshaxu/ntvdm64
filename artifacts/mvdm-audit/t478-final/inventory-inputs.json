@@ -1,0 +1,82 @@
+{
+  "inputs": [
+    {
+      "audit": "dos16",
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\README.md",
+      "bytes": 18985,
+      "sha256": "e626074d9edb1ff2af8eacd89460163559ef1560229ff9b27078f597a7058ea0"
+    },
+    {
+      "audit": "dos16",
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\seam-scope.json",
+      "bytes": 2110,
+      "sha256": "0efbde9140057115629ffceba6ecc8d58387b2a856d229f2913d3e06ddab075e"
+    },
+    {
+      "audit": "dos16",
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\seam-work.json",
+      "bytes": 58801,
+      "sha256": "536cf0f26c5a0a8461cb3810f18eb967bdf039aba01c6a110e186a1c8bc078e9"
+    },
+    {
+      "audit": "dos16",
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\seam-records.json",
+      "bytes": 1867476,
+      "sha256": "aa0ec644b68c682afce8e48bfe0a1734af83aa078e95efec51e8c254f1fec4a8"
+    },
+    {
+      "audit": "dos16",
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\module-handoffs.json",
+      "bytes": 207008,
+      "sha256": "12320abe30b5fee56869cdecb6d88511aa2c5715176f82e31f2a18d7737079b2"
+    },
+    {
+      "audit": "wow32",
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\README.md",
+      "bytes": 16672,
+      "sha256": "8ee53bb06336de5646843b83bbf6fca2a2aa96d95f5577d307ad8a95ec6d1d56"
+    },
+    {
+      "audit": "wow32",
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\SEAM-SCOPE.md",
+      "bytes": 3639,
+      "sha256": "db3575b489778c631535970813180038b75e8556bf509a4d482b4d92d3c6b32c"
+    },
+    {
+      "audit": "wow32",
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seams.csv",
+      "bytes": 4858151,
+      "sha256": "c6e08dd649a6c180f5e16aa9b99a525b6c22ebee41630f542c5d9be81c78e4a0"
+    },
+    {
+      "audit": "wow32",
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam-sites.csv",
+      "bytes": 162957081,
+      "sha256": "cd4d95dded409fdfede3e2bdf8cc80f26340534eb8556a06482592a0768fbb97"
+    },
+    {
+      "audit": "wow32",
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam-gaps.csv",
+      "bytes": 1234811,
+      "sha256": "de426fb8d896e295ac770d6f620fa5de0590e62380f8acbda87118e805eb5e2e"
+    },
+    {
+      "audit": "wow32",
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\IMPLEMENTATION-SEAMS.md",
+      "bytes": 244842,
+      "sha256": "8c17b1d26f82e837f065b78498a6cad2eaab9f04e636c321448c0b6942379470"
+    }
+  ],
+  "stable_rows": 1546,
+  "counts": {
+    "dos16/OpenNT": 308,
+    "wow32/OpenNT": 755,
+    "wow32/OpenNT-4.5": 483
+  },
+  "dispositions": {
+    "pending-product-evidence": 1062,
+    "inactive-edition-evidence-only": 483,
+    "partial-product-evidence; startup-registry-applicability-pending": 1
+  },
+  "qualification": "Identity accounting only; no inferred defect, product closure or new source-audit scope."
+}

@@ -2,16 +2,33 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T478 S41 is locally closed.**
+**Active: M0 T478 S42**
 
-The owner-approved original recovery sequence S2–S41 has reached S41 delivery.
-T478 itself is not declared complete: S1's larger inventory/handoff reconciliation
-remains outstanding. The [proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md)
-and [finding-stage plan](../etc/operations/m0-t478-finding-stage-plan.md) retain
-that boundary. The owner authorizes sequential continuation under original
-semantics only; do not add tolerance or repeat already resolved repairs.
-No O:/winnt write or push. CURRENT's temporary size exception remains until
-final reconciliation; prior S records below are retained evidence.
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Candidate Proposal | [Existing inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
+| Identifier Mode | M0 T478 S42, Ordinary Mode, one active S. |
+| Admission And Approval | Owner authorizes sequential admission and self-defined original-semantics goals; S41 P2 is12e17a4fb. |
+| Objective | Finish S1's existing audit/handoff reconciliation against S2–S41 deliveries; retain every stable inventory ID and identify only evidenced residual host work. |
+| Non-goals | No new global source audit, guest/media changes, new tolerance, retired hardware monitor, external repository edits, O:/winnt write or push. |
+| Reference Baseline | S41 commit12e17a4fb and eleven-image packaged7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3; Full16/16 and Product identity verification. |
+| Files And ABI Surface | Existing audit ledgers, T473 handoffs, S1 findings and S2–S41 evidence; index/closure documents only initially. |
+| Applicable Rules | EXECUTION, DOCUMENT, source policy, original-semantics-only owner standard. |
+| Verification | Pin inputs; account separately for active, inactive and unreviewed rows; inspect evidence for each actual closure claim. No name-match-only completion or rerunning unchanged product tests. |
+| Expected Markers | Stable-ID crosswalk, explicit remaining applicability/evidence decisions, source/provenance and delivery accounting. |
+| Asset Needs | Read-only DOS16/WOW32 management ledgers and existing local artifacts; current tested worktree release. |
+| Reporting Requirements | Separate old audit labels, current product evidence, accepted exclusions/limits and actual missing work. |
+| Stop Conditions | Material recovery outside original scope or conflicting owner boundary; do not infer new capability requirements from audit suggestions. |
+| Exit Criteria | All applicable existing inventory/handoff rows reconciled or explicit residual S briefs established; reviewed local documentation commit and governance pass. T completion requires no required work outstanding. |
+| Original Owner Request | Continue remaining sequence, maximize justified original recovery and minimize mirror/local duplication without added capabilities. |
+| Similar-Issue Sweep | Cross-check69 findings, two external ledgers and T473 handoffs without double counting source positions or inactive editions. |
+
+S42 reopens S1's outstanding reconciliation after all40 planned S2–S41 packets.
+The seven pinned ledger hashes still match the S1 inputs. Their labels are
+source-audit evidence, not proof of missing product behavior or runtime closure.
+CURRENT's temporary size exception remains through final reconciliation.
 
 ## S41 Closure Record
 

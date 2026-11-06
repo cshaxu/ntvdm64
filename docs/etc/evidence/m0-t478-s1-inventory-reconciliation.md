@@ -56,3 +56,14 @@ matching runtime evidence. Maintain separate selected-branch and excluded-
 branch cases, identify exact original and autonomous owner paths, and mark
 missing evidence unresolved. This record is preliminary and does not satisfy
 the owner's complete-report request or close S1.
+
+## S42 continuation after S41
+
+The [stable-identity crosswalk](../../../artifacts/mvdm-audit/t478-final/README.md)
+now accounts for308 DOS16/OpenNT,755 WOW32/OpenNT and483 inactive edition
+identities. All seven original ledger pins still match. This is a denominator
+and evidence-mapping checkpoint, not1063 missing features or a new source audit.
+VDD registry startup is explicitly separated from S41's tested selected plugin;
+WINMINE geometry/background remains a named inherited handoff until existing
+repair and current evidence are reconciled. S42 is active; T completion is not
+claimed. No changed product or regression rerun is required for this index.
