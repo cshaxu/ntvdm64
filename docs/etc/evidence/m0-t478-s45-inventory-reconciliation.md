@@ -518,3 +518,43 @@ active inventory identities remain pending. Command capture/consume, CheckVDM
 admission, worker rollback and first COMMAND frame stay separate open rows.
 S45/T478 remain active; product and release are unchanged, without O:/winnt
 writes or push.
+
+## P14 command delivery disposition
+
+The [command receipt](../../../artifacts/mvdm-audit/t478-final/s45-command-delivery-disposition.json)
+resolves DOS16:263d8b0026d041d346f9 as current original ownership with bounded
+historical evidence. Current maps bind GetNextVDMCommand to client.obj and
+BaseSrvGetNextVDMCommand to srvvdm.obj. Inspection follows the actual common
+codec, client RPC and locked NTSRV dispatch, not the retired adapter paths.
+
+Original environment queries return required length without deleting VDMINFO.
+PIF queries return before normal consumption; they are not wholly mutation-free:
+console adoption can occur even when filling PIF fails. Ordinary capacity
+failure reports all required lengths and retains the pending command. Successful
+copy marks DOS busy or WOW dispatched and releases command data; separate WOW
+releases its console record. Parent-completion notification precedes this size
+check in applicable states and is not transactionally undone on failure.
+Original client event wake sets SECOND_TIME and clears ExitCode before retry.
+
+Common transport allocates copied payload and reply before dispatch, carries
+required length separately from storage capacity, and validates reply identity
+before applying it. Events and streams use typed RPC attachments. This avoids a
+new allocation in payload finishing; it does not prove atomic rollback across
+later attachment or RPC failures. NTSRV management labels observe the original
+owner, and environment/PIF queries do not authorize normal worker I/O delivery.
+
+The [T412 record](m0-t412-s2-original-lifecycle.md) and retained fixture assert
+short-buffer retention, successful consumption, real wait/wake with NEXT.COM,
+two dispatches, retry exit code zero and drained captures. These are historical
+in-process results, not fresh certification of current RPC failures. The old
+Verify-BrokerOriginalLifecycle runner still names removed adapter-opennt-host
+paths and an obsolete configuration equality; it was not executed or counted
+as a pass. If fresh focused execution is needed, maintain that runner against
+the current owners first. Query nonconsumption here is source evidence, not a
+new runtime test. No original fault tolerance, rollback or capability is added.
+
+Twenty-three startup identities now have bounded dispositions; three remain
+pending (admission, worker rollback and first COMMAND frame).1036 active
+inventory identities remain pending. S45/T478 remain active. This is evidence
+only; unchanged S43 product/release and Full evidence are retained, with no
+O:/winnt write, publication or push.

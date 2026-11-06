@@ -1,0 +1,39 @@
+{
+  "id": "DOS16:263d8b0026d041d346f9",
+  "disposition": "current original owner wired; historical focused evidence; current source/composition review",
+  "sha256": {
+    "src/non-mvdm/base/win32/client/vdm.c": "5622f66074cb994abdd5d85d0884b837fc17a24d182f00907e6df07db8c7d23f",
+    "src/non-mvdm/base/win32/server/srvvdm.c": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+    "src/common/base_srv/base_command.c": "d0b15b1e5d671b37a4aef58214a24564eb4a30fe46fabaf551b6e0c3a61f6bd6",
+    "src/common/base_srv/base_payload.c": "57c474b63b5662f9b640171fee76a77936c0a1be4030110441dafcd0dade816d",
+    "src/common/base_srv/base_rpc_client_launch.c": "a37e13534704c26169aa7ef76aa1261ab92c2f2b53b898e3bd2e857e930a1a0c",
+    "src/ntsrv-exe/opennt/source/base_service.c": "72f268424fba27d2b99d55dd4f22e5381095e87e94da93ceb0078a118bf15821",
+    "tests/broker/original_server_lifecycle.c": "ad7590fbbb6a5fade01dbd3e5781a0783323299f44b6d20bb1617cec928df3d5",
+    "tools/audit/Verify-BrokerOriginalLifecycle.mjs": "c9a4abd39033abe527280b9573a45e6a2a50da582dc3dcc4ba3ccea2b6072410"
+  },
+  "contracts": {
+    "query": "ASKING_FOR_ENVIRONMENT returns required EnvLen and retains VDMINFO; PIF exits through BaseSrvFillPifInfo before normal consumption. PIF console adoption can occur before return, including failure: not a globally mutation-free query.",
+    "capacity": "Mandatory CmdLine and present optional buffer capacities checked before command consumption. All required lengths returned with STATUS_INVALID_PARAMETER; original client copies required sizes and returns FALSE.",
+    "consume": "Successful copy sets DOS VDM_BUSY or WOW fDispatched, returns scalars/streams, frees VDMINFO; separate WOW frees console record.",
+    "retry": "Original client waits on returned event; successful wake sets ASKING_FOR_SECOND_TIME and ExitCode=0, then retries. Earlier completion/parent notification is not rolled back by later capacity failure.",
+    "transport": "Common codecs preallocate payload/reply before original dispatch, separate capacity from returned length, validate generation/request identity. NTSRV binds authenticated request under service lock. Events and streams cross typed RPC attachments, not copied native values. Management labels do not own command consumption."
+  },
+  "historical_test": "tests/broker/original_server_lifecycle.c: short capacity retains TO_TAKE; successful retry yields VDM_BUSY; real event wake delivers NEXT.COM, retryCalls=2 and retryExit=0, captures=0; docs/etc/evidence/m0-t412-s2-original-lifecycle.md records passing run",
+  "limits": [
+    "No new runtime test in this checkpoint. Historical in-process capture transport is not proof of all current RPC fault paths.",
+    "Verify-BrokerOriginalLifecycle.mjs still refers to retired adapter-opennt-host paths and old configuration-body equality; it was inspected, not run or counted as a current pass.",
+    "Environment/PIF nonconsumption reviewed in selected source; no fresh query/consume runtime witness.",
+    "Preallocated reply construction does not imply transaction rollback across later resource attachment/RPC delivery failures.",
+    "Original wait failure/capacity/fixed-width limits retained; no added retry, rollback or fault tolerance."
+  ],
+  "maps": {
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": [
+      "0001:001619a0       _GetNextVDMCommand@4       005629a0 f   opennt-base-client:client.obj"
+    ],
+    "build/.ninja/msvc-x64-release/service/ntsrv.exe.map": [
+      "0001:0001ae50       OpenNtBaseFinishGetCommand 000000014001be50 f   common-base-srv-bindings:command.obj",
+      "0001:0001afd0       OpenNtBasePrepareGetCommand 000000014001bfd0 f   common-base-srv-bindings:command.obj",
+      "0001:00038020       BaseSrvGetNextVDMCommand   0000000140039020 f   opennt-base-server:srvvdm.obj"
+    ]
+  }
+}

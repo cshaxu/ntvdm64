@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;22 bounded dispositions and4 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;23 bounded dispositions and3 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -141,9 +141,9 @@
       "id": "DOS16:263d8b0026d041d346f9",
       "module": "1.2",
       "contract": "Initial session request capture and typed reply contract",
-      "disposition": "pending",
+      "disposition": "wired; historical focused evidence",
       "current_owner": "original vdm.c GetNextVDMCommand / srvvdm.c BaseSrvGetNextVDMCommand plus copied service transport",
-      "evidence_and_limits": "Current owners and T412 capacity/retry witnesses located. Next bind current transport/lifetime evidence for query-only versus consume and wake/retry."
+      "evidence_and_limits": "s45-command-delivery-disposition.json: current original query/capacity/consume/retry source and maps, historical T412 short-buffer and real-event tests. No fresh current-RPC fault or query runtime certification; stale historical runner remains unusable without maintenance."
     },
     {
       "id": "DOS16:4c1abcb8b4894efee724",
