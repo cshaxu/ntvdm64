@@ -6,7 +6,10 @@
 
 Owner admits queue head in this dedicated worktree from main157c31855.
 Main continues T479 S6; it is not closed, transferred or modified here.
-This is admission only: no new source audit or product verification is claimed.
+The [initial brief and audit](../etc/evidence/m0-t480-s1-brief-audit-plan.md)
+records1060 paired host C/H files:479 byte-identical and581 text-different.
+Source inventory is complete; actual build/include/link classification remains
+S1 work. No product changes or runtime verification are claimed.
 
 ## Active Packet
 

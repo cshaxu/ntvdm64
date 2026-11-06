@@ -25,3 +25,10 @@ diff reduction. Preserve historical snapshots and add successor conclusions.
 S1 admission does not promise a new audit-derived count or completed review.
 Future actual product edits require appropriate build/tests and worktree-only
 publication under the owner's local-only rule; no O:/winnt write or push.
+
+## Initial audit checkpoint
+
+[Brief, current findings and owner-group sequence](../evidence/m0-t480-s1-brief-audit-plan.md)
+records the current1060-file baseline and six issue/disposition groups. S1
+consumer classification remains outstanding; historical candidate counts and
+removed files must not be recycled into new implementation tasks.
