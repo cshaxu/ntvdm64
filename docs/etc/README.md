@@ -1211,3 +1211,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S5 shared COMSPEC checkpoint](evidence/m0-t479-s5-comspec-checkpoint.md): corrected interpreter selection, shared preparation and actual nested output.
 
 - [T479 S5 shared text preparation](evidence/m0-t479-s5-text-preparation.md): original conversion reuse, frame-only startup routing and retained controls.
+
+- [T479 S5 closure](evidence/m0-t479-s5-closure.md): original reentry owner attribution, real two-VM nested commands and S6 handoff.

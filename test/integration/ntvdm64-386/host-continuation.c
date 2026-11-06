@@ -161,20 +161,21 @@ int test_xtrn2phy(uint32_t address, uint8_t access, uint32_t *physical)
 static DWORD interactive_input(mvdm_vm_executor *executor, uint64_t token)
 {
     const char *line = "exit\r";
-    const WORD keys[] = {'M', 'E', 'M', VK_RETURN, 'E', 'X', 'I', 'T', VK_RETURN};
-    const WORD scans[] = {0x32, 0x12, 0x32, 0x1c, 0x12, 0x2d, 0x17, 0x14, 0x1c};
-    unsigned offset = 4;
     unsigned i;
-    if (GetEnvironmentVariableW(L"MVDM_NESTED_COMMAND", NULL, 0)) {
+    if (GetEnvironmentVariableW(L"MVDM_NESTED_COMMAND", NULL, 0))
         line = "mem\rexit\r";
-        offset = 0;
-    }
+    if (GetEnvironmentVariableW(L"MVDM_REENTRANT_COMMAND", NULL, 0))
+        line = "command /c cmd /c mem\rexit\r";
     for (i = 0; line[i]; ++i) {
         KEY_EVENT_RECORD key = {0};
         DWORD error;
         key.bKeyDown = TRUE; key.wRepeatCount = 1;
-        key.wVirtualKeyCode = keys[i + offset];
-        key.wVirtualScanCode = scans[i + offset];
+        /* The witness contains only ASCII letters, space, slash and Enter.
+         * Map its native key records without asserting physical guest input. */
+        key.wVirtualKeyCode = line[i] == '\r' ? VK_RETURN :
+            line[i] == ' ' ? VK_SPACE : line[i] == '/' ? VK_OEM_2 :
+            (WORD)(line[i] - 'a' + 'A');
+        key.wVirtualScanCode = (WORD)MapVirtualKeyW(key.wVirtualKeyCode, MAPVK_VK_TO_VSC);
         key.uChar.UnicodeChar = (WCHAR)line[i];
         error = mvdm_vm_executor_key(executor, token, &key);
         if (error) return error;

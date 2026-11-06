@@ -2,53 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T479 S5** - Win3.1 multitask command continuation.
-S4's Win3.1 checkpoint is delivered; its Win95 continuation remains open.
-[Entry/return audit](../etc/operations/m0-t479-s5-command-continuation.md).
-Approved shared cmdexec [design](../etc/operations/m0-t479-s5-cmdexec-reuse-audit.md) and host COMSPEC recovery are in progress.
-Both54:08 forms and54:0A run through production entry/capture/executor in
-two actual Win3.1 VMs. Translated input remains a fixture, not physical input.
-Local CDS/text and palette pass; NetCDS isolation is a retained guest limit.
-Fonts, complete I/O and returned keys remain unaccepted S6 work.
-Five focused host suites and Full16/16 selected product gates pass.
-Cached complete x86/x64 builds and shared tests pass. Generation-reuse rejection
-was reproduced and fixed; subsequent real reuse evidence is recorded below.
-Earlier chain proofs and runner recovery are indexed below.
-Run161 passes real native-command execution followed by forced VM retirement,
-stale-wake rejection and normal Win3.1 exit on the production worker.
-Runs163--167 pass actual VM reuse, native child retirement and both exit orders.
-Forced retirement overlap has host-unit proof; full I/O remains S6 work.
-Final reentry audit: CF=1 has transport tests but no production producer.
-Runs180/182 exposed a DOS-incompatible fixture PATH. Run192 passes actual
-MEM output in both VMs after host COMSPEC and fixture-path correction.
-P4 text preparation and startup routing are published; build211/Full212 pass.
-[P4 evidence](../etc/evidence/m0-t479-s5-text-preparation.md); S5 remains active.
-[COMSPEC checkpoint](../etc/evidence/m0-t479-s5-comspec-checkpoint.md) is published; S5 remains active.
-[S5 P1 host checkpoint](../etc/evidence/m0-t479-s5-p1-host-checkpoint.md) is
-published at both destinations and pushed as369cbf712. The tested Win3.1
-addon candidate is published/pushed as54996029a. S5 is not closed.
+**Active: M0 T479 S6** - Win3.1 complete VM I/O and nested chains.
+[S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
+and original reentry ownership with actual two-VM nested execution. The original
+DOS reentry cycle remains in the downstream DOS worker, not the enclosing VMM
+payload. No original guest changed. S5 final tests214--216 pass.
+Published package6c79f45b-88bd-4359-a9c8-15e3a753457e at507619ea8 retains
+complete cached build211 and Full212 selected16/16 gates; both destinations
+match. External DOS4GW/Nesticle fixtures were explicitly skipped.
+The independent ntvdm64.386 remains a candidate until complete I/O acceptance.
+S6 starts with the existing47-operation protocol and actual guest transfer paths;
+physical input, fonts and complete graphics/Console behavior are not accepted.
+S4 Win95 continuation remains deferred until the Win3.1 S6 path works.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
-| Identifier Mode | M0 T479 S5/multitask-command; Ordinary Mode, single implementer/reviewer. |
-| Admission And Approval | Owner approves continuous S2--S7 delivery and subsequently prioritizes complete Win3.1 before Win95. S4's bounded Win3.1 handoff admits S5; Win95 proof remains mandatory before T closure. |
-| Objective | Connect both 54:08/0A to independent host commands and restore the actual calling VM's continuation and complete client state once, while other VMs and guest Windows keep running. |
-| Non-goals | No original guest rebuild/patch, hardware V86 monitor, CPU30, new polling/timeouts/control transport, placeholder I/O or semantic concessions. Full I/O and nested acceptance remain S6; no new Win95 work yet. |
-| Reference Baseline | S4 Win3.1 bridge proofs and published ten-image package ca3b367a-3d54-4d05-a9a8-147594d7450d, Full 16/16. Candidate ntvdm64.386 has actual callback/wake/retirement/reuse/arm-failure evidence; it does not yet execute host commands. |
-| Files And ABI Surface | Project ntvdm64-386 driver, NTVDM command preparation/continuation and VM frontend ownership, existing NTSRV/RPC lifecycle and tests. Minimal justified mirror command/BOP seams must be registered. Add-ons only assets/release. |
-| Applicable Rules | Execution, architecture/coding/document rules and source policy; preserve original guest and register minimum mirror differences. |
-| Verification | Source trace both BOPs, real guest continuation/register/CF/AL/stack state, two VM commands completing in both orders, independent request data, normal/failure/retirement paths. Cached full builds, applicable full product gates and coherent publication per S. |
-| Expected Markers | No host wait inside CCPU BOP or cached guest pointer across scheduling. Actual VM identity/generation; NTSRV lifecycle authority; measured guest/other-VM progress. No dummy provider. |
-| Asset Needs | Immutable Win3.1 installation copied to isolated fixture, verified normal package and independently authored add-on; stable Ninja/ccache roots. |
-| Reporting Requirements | Separate source facts, implementation and tests; record unproved boundaries. |
+| Identifier Mode | M0 T479 S6/guest-io; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner approves continuous S2--S7 delivery, Win3.1 first; S5 bounded closure automatically admits S6. |
+| Objective | Complete per-VM text/graphics/Console I/O, actual input and nested task chains with final-output and cancellation guarantees while guest Windows continues. |
+| Non-goals | No original guest rebuild/patch, hardware V86 monitor, CPU30, new polling/timeouts/control transport, placeholder I/O or semantic concessions; Win95 follows Win3.1. |
+| Reference Baseline | S5 closure, P4 published package and candidate addon; real both-order continuation, retirement/reuse and DOS/native/DOS downstream reentry evidence. |
+| Files And ABI Surface | Existing NTVDM VM frontend/command/session, common I/O ownership, ntvdm64-386 bridge and integration tests; minimal registered mirror seams only if required. |
+| Applicable Rules | Execution, architecture/coding/document rules and source policy; preserve guest, provenance, minimum mirror differences and authority ownership. |
+| Verification | Audit all47 live operations by actual producer/caller; test per-VM state and identity, input consumption, geometry/fonts/graphics, final serial, cancellation and real nested chains. Cached full builds, applicable Full product gates and coherent publication. |
+| Expected Markers | Real operation results, no unsupported-success stubs; actual VM context for guest access, no native-thread CPU writes; correct generation/focus and no ancestor frontend takeover. |
+| Asset Needs | Immutable Win3.1 installation copied to isolated fixture, verified package and independent addon; stable Ninja/ccache roots. |
+| Reporting Requirements | Finite operation matrix with source owner, implementation, test evidence and explicit remaining boundaries. Distinguish provider stimulus from physical input. |
 | Stop Conditions | New semantic concession, original guest modification, unknown provenance or incompatible architecture needs explicit disposition. Missing proof is not a pass. |
-| Exit Criteria | Both BOP continuations and independent execution pass actual Win3.1 tests; required complete host/add-on publication, reviewed commit and push. S6 receives complete I/O scope, not a reduced substitute. |
-| Original Owner Request | Execute host-first S2--S7 continuously; first run Win3.1 correctly, defer Win95 work. |
-| Similar-Issue Sweep | Both BOPs; native/DOS descendants; reordered completion, VM death/reuse, nesting/redirection; unchanged non-bridge path. |
-| Temporary Evidence | build/t479-s5-command; owned 60-minute phases, 2 GiB, 15-minute no-progress review. Retain build/t479-s4-driver until durable handoff checks finish. |
+| Exit Criteria | Complete intended VM I/O and nested chains pass actual Win3.1 tests; cached build, full gates, coherent publication, review, commit/push. No S5 foundation regression may be deferred as an I/O feature. |
+| Original Owner Request | Execute host-first S2--S7 continuously; complete Win3.1 before Win95, preserve original guest and actual contracts. |
+| Similar-Issue Sweep | All47 operations, text/graphics producers, focus/keyboard/mouse, fonts, background output, final frames, redirection, nested frontends and retirement/reuse. |
+| Temporary Evidence | build/t479-s6-io; owned60-minute phases,2GiB,15-minute no-progress review. Retain build/t479-s5-command until closure evidence is durable and processes quiescent. |
 
 ## S4 Win3.1 Checkpoint And Deferred Win95
 

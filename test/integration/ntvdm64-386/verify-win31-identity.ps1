@@ -17,6 +17,7 @@ param(
  [switch]$Continuation,
  [switch]$RealCommand,
  [switch]$NestedCommand,
+ [switch]$ReentrantCommand,
  [string]$OrderedCommandImage,
  [ValidateSet('A','B')][string]$FirstCommand='A',
  [switch]$TraceContinuation,
@@ -30,6 +31,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($ReentrantCommand -and !$NestedCommand){throw 'Reentrant command witness requires NestedCommand'}
 if($NestedCommand -and !$RealCommand){throw 'Nested command witness requires RealCommand'}
 if($OrderedCommandImage -and !$RealCommand){throw 'Ordered native commands require RealCommand'}
 if($RetireCommand -and (!$RetirementDriver -or $Continuation -or $DosWitnessImage)){throw 'Command retirement requires the retirement driver and production witness'}
@@ -179,6 +181,10 @@ foreach($id in 'A','B'){
   if($NestedCommand){
    Copy-Item -LiteralPath "$PackageRoot/system32/MEM.EXE" -Destination "$dest/PATCH/MEM.EXE" -Force
    if((Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash "$dest/PATCH/MEM.EXE").Hash){throw 'Nested MEM copy differs'}
+   if($ReentrantCommand){
+    Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM" -Force
+    if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'Nested COMMAND copy differs'}
+   }
    $commandPath="$dest\PATCH;$commandPath"
   }
   $environment=[Text.Encoding]::ASCII.GetBytes("ROLE=$id`0ROUND=0`0PATH=$commandPath`0`0")
@@ -263,6 +269,7 @@ $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp
 if($InitializationFailure){$env:MVDM_INIT_FAILURE_REPORT="$task/initialization-rollback.bin"}
 if($RealCommand){$env:MVDM_REAL_COMMAND='1'}
 if($NestedCommand){$env:MVDM_NESTED_COMMAND='1'}
+if($ReentrantCommand){$env:MVDM_REENTRANT_COMMAND='1'}
 if($TraceContinuation){$env:MVDM_CONTINUATION_TRACE="$task/continuation-trace.txt"}
 if($InterruptObserver){$env:MVDM_INTERRUPT_OBSERVATION='1'}
 if($BlockedKeyboard){$env:MVDM_BLOCKED_KEYBOARD='1'}
@@ -395,6 +402,7 @@ try {
    for($i=0;$i -lt 2000;$i++){$chars[$i]=$cells[2*$i]}
    $screen=[Text.Encoding]::ASCII.GetString($chars)
    [IO.File]::WriteAllText("$task/runtime/$id.text.txt",$screen)
+   if($ReentrantCommand -and !$screen.Contains('command /c cmd /c mem')){throw "Reentrant command line absent in VM $id"}
    if($screen -notmatch 'bytes total conventional memory' -or $screen -notmatch 'largest executable program size'){throw "Actual MEM output not returned to VM $id"}
   }
   'PASS nested MEM output actually returned to both guest VMs before EXIT'

@@ -135,3 +135,7 @@ S3 host preparation is now [delivered](../evidence/m0-t479-s3-command-preparatio
 with complete cached builds, focused units, Full 16/16 and coherent publication.
 Automatic continuation admits S4; source registration is not substituted for
 actual guest callback, wait/wake or resource-lifetime acceptance.
+
+S5 is now [closed](../evidence/m0-t479-s5-closure.md): original reentry is
+proved in each downstream DOS worker; VMM callers retain independent chains.
+Automatic continuation admits S6 complete I/O. Win95 and S7 remain unchanged.

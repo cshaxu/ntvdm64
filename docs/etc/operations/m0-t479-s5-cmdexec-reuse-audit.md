@@ -356,3 +356,63 @@ build211 and then the complete product gates. No new package is published yet.
 Build211 and all16 selected Full212 gates pass. The verified normal ten-image
 package6c79f45b-88bd-4359-a9c8-15e3a753457e is published at both targets.
 [P4 delivery](../evidence/m0-t479-s5-text-preparation.md) retains the limits.
+
+## Reentry ownership audit and stronger witness214
+
+At P4, the original cmdExec32 sets CF=1 only when GetNextVDMCommand returns
+CmdSize>0; cmdReturnExitCode repeats the same queue decision. BaseService Get
+and Reenter select connection->console. This is execution-queue ownership,
+not an attribute of where the text is drawn.
+
+frontend_registry.c::OpenNtBaseServiceAcquireConsoleContext explicitly gives
+an embedded frontend's owner a new logical console with worker_generation=0;
+it does not inherit or mutate the enclosing payload worker's upstream console.
+vm_host.c::ntvdm_vm_host_launch_context passes this capability to the host
+launcher. BindConsoleContext fixes the authenticated child's console to that
+context. CheckVDM reuses a DOS worker only if its original wait is pending;
+otherwise it creates the original separate-session path. Consequently, a MEM
+child alone cannot prove that the containing Win3.1 VM received CF=1.
+
+The approved proposal requires independent downstream task chains and preserved
+reentrancy. Before changing either queue authority or completion flags, witness214
+extends the existing two-VM probe with `command /c cmd /c mem`, followed by EXIT.
+Both actual MEM outputs and callback state remain mandatory. COMMAND and MEM
+are same-hash copies in the short fixture path, not modified guest images.
+This exercises DOS/native/DOS nesting beneath each independent VM frontend.
+It still requires attribution of the actual reentry worker before resolving the
+remaining CF=1 obligation; a passing screen or child exit alone is insufficient.
+No runtime behavior is changed in this investigation. Earlier same-guest
+reentry wording remains unresolved, not waived by this ownership observation.
+
+Witness214 passes both actual command lines and MEM output, callback state and
+normal Win3.1 exit. Diagnostic215 adds only append-only observation immediately
+after the two original GetNextVDMCommand calls in a build-owned cmdexec copy.
+It does not alter the queue, CmdSize or CF decision. The two downstream DOS
+workers report:
+
+| Worker PID | cmdExec32 CmdSize | cmdReturnExitCode CmdSize |
+| --- | --- | --- |
+| 29888 | 3 | 0 |
+| 9924 | 3 | 0 |
+
+Both actual VM outputs and all320 callback checks pass. This is a real original
+CF=1 then CF=0 cycle in each downstream DOS worker, not the synthetic transport
+unit. Run216 removes this extra decision observer and adds an exact nested
+command-line assertion to the formal probe; its result is pending.
+
+The ownership conclusion follows the approved independent-chain architecture:
+the VMM caller has no pending original DOS queue in its new frontend context;
+its native chain contains the DOS worker that actually consumes such a queue.
+Returning CF=1 to the containing Win3.1 VM without a command for that VM would
+fabricate a guest reentry. The earlier blanket requirement for a production
+CF=1 producer in the VMM completion executor was an overbroad audit inference.
+It is superseded by actual queue-owner attribution, not a waiver of reentrancy.
+The original DOS worker still runs cmdExec32/cmdReturnExitCode unchanged around
+the shared preparation. No extra per-VM command engine or upstream queue alias
+is required by this route. Direct guest DOS execution remains guest-owned;
+this does not add host-to-guest launch routing for arbitrary commands.
+
+Run216 passes the exact nested command assertion, both MEM outputs, all320
+callback checks and normal Windows exit without the extra decision observer.
+[S5 closure](../evidence/m0-t479-s5-closure.md) records the resolved ownership
+contract and mandatory S6 handoff; no production image changes after P4.

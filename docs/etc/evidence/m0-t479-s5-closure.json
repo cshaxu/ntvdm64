@@ -1,0 +1,85 @@
+{
+  "baseline": "507619ea8",
+  "stage": "T479 S5 closure",
+  "productUnchanged": true,
+  "package": "6c79f45b-88bd-4359-a9c8-15e3a753457e",
+  "downstreamReentry": [
+    {
+      "returnCmdSize": 0,
+      "execCmdSize": 3,
+      "pid": 29888
+    },
+    {
+      "returnCmdSize": 0,
+      "execCmdSize": 3,
+      "pid": 9924
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "build\\t479-s5-command\\nested214.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested214.stdout",
+      "bytes": 65505,
+      "sha256": "48FC20A23F0FA0E82EE9FBFFAB9B94D97ADBFD6C7643CC6C2C5391B23853047D"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested215.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested215.stdout",
+      "bytes": 23406,
+      "sha256": "F034F8176B9D74EC9C5152AC4864AB2A2C502315B52386973E02DC7482637F0A"
+    },
+    {
+      "path": "build\\t479-s5-command\\reentry215\\decisions.bin",
+      "bytes": 48,
+      "sha256": "9B0ADB464364EFE95D4738CD72EF477D49B8FA2AF227B3A7CF5F0D49755D030A"
+    },
+    {
+      "path": "build\\t479-s5-command\\reentry215\\cmdexec.c",
+      "bytes": 25405,
+      "sha256": "F713CFC98C2157EE51D2C2586EDD46497F8D5D2929FB3A7C80C661DB99FF32D3"
+    },
+    {
+      "path": "build\\t479-s5-command\\build-reentry215.cmd",
+      "bytes": 5791,
+      "sha256": "8B93996D997069E5ECCF880A84D8F3C8BCAF4C72C207A26B850816D51D76D292"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested216.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build\\t479-s5-command\\nested216.stdout",
+      "bytes": 65505,
+      "sha256": "48FC20A23F0FA0E82EE9FBFFAB9B94D97ADBFD6C7643CC6C2C5391B23853047D"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested216\\runtime\\vm-pair.json",
+      "bytes": 1153,
+      "sha256": "E36D2815E648F3888571D238F2799CBE4DB6CBAFDF4A6A176262FBE7563AA0DB"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested216\\runtime\\A.text.txt",
+      "bytes": 2000,
+      "sha256": "A94772E64AE0574B3D93249B3B94E12237B90CF824AA2FC62E69ECCDA2F5E482"
+    },
+    {
+      "path": "build\\t479-s5-command\\checked-nested216\\runtime\\B.text.txt",
+      "bytes": 2000,
+      "sha256": "33B3546AB0F9175AEB0C6FC8D04ED73C8AA780B108E70DCB9B716165A09AA47C"
+    }
+  ],
+  "limits": [
+    "provider stimulus is not physical input",
+    "full I/O and nesting remain S6",
+    "Win95 deferred"
+  ]
+}
