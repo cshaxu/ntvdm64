@@ -1,4 +1,4 @@
-"""Hash actual preprocessor text with logical locations for all S2 consumers.
+"""Hash actual preprocessor text with logical locations for selected T480 consumers.
 
 Launch in the matching VS environment in an owned background runner. Compiler
 output is kept in memory per job, not as a multi-gigabyte duplicate source tree.
@@ -15,9 +15,10 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[2]
 NONEMPTY = re.compile(rb'(?m)^[ \t]*[^ \t\r\n][^\r\n]*')
 DIRECTIVE = re.compile(rb'^#line\s+(\d+)(?:\s+"([^"]*)")?\s*$')
+TOKENS = re.compile(rb'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|[A-Za-z_$][\w$]*|(?:\d[\w.]*|\.[0-9][\w.]*)|>>=|<<=|\.\.\.|\+\+|--|->|&&|\|\||==|!=|<=|>=|<<|>>|\+=|-=|\*=|/=|%=|&=|\^=|\|=|##|[^\s]')
 
 
-def fingerprint(data):
+def fingerprint(data, tokens=False):
     result = hashlib.sha256()
     logical, filename, previous, count = 1, b'', 0, 0
     for match in NONEMPTY.finditer(data):
@@ -29,6 +30,8 @@ def fingerprint(data):
             if directive[2] is not None:
                 filename = directive[2]
         else:
+            if tokens:
+                text = b'\x1f'.join(TOKENS.findall(text))
             result.update(filename + b'\0' + str(logical).encode() + b'\0' + text + b'\n')
             count += 1
         previous = match.end()
@@ -42,8 +45,8 @@ def main():
     parser.add_argument('--arch', choices=['x86', 'x64'], required=True)
     args = parser.parse_args()
     output = args.output.resolve()
-    if not output.is_relative_to(ROOT / 'build/t480-s2') or output.exists():
-        raise SystemExit('require fresh output under build/t480-s2')
+    if not any(output.is_relative_to(ROOT / ('build/' + task)) for task in ('t480-s2', 't480-s3')) or output.exists():
+        raise SystemExit('require fresh output under build/t480-s2 or build/t480-s3')
     output.mkdir(parents=True)
     evidence = json.loads(gzip.decompress((ROOT / 'artifacts/mvdm-audit/t480-s1-build-evidence.json.gz').read_bytes()))
     changed = {v['path'] for v in json.loads(args.plan.read_text(encoding='utf-8'))['changes']}
@@ -61,8 +64,11 @@ def main():
             (output / (failure + '.stderr')).write_bytes(run.stderr)
             raise RuntimeError('preprocessing failed: ' + key)
         digest, lines = fingerprint(run.stdout)
+        token_digest, token_lines = fingerprint(run.stdout, tokens=True)
+        assert lines == token_lines
         return {'object': key, 'command_sha256': hashlib.sha256(command.encode()).hexdigest(),
                 'semantic_location_sha256': digest, 'nonempty_lines': lines,
+                'token_location_sha256': token_digest,
                 'exit_code': run.returncode, 'stderr_sha256': hashlib.sha256(run.stderr).hexdigest()}
 
     records = []

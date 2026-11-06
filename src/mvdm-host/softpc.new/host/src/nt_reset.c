@@ -368,7 +368,7 @@ void host_terminate(void)
 #line 328
 
     if(VDMForWOW)
-        ExitVDM(VDMForWOW,(ULONG)-1);    /* Kill everything for WOW VDM */
+	ExitVDM(VDMForWOW,(ULONG)-1);	  // Kill everything for WOW VDM
     else
 	ExitVDM(FALSE,0);
 

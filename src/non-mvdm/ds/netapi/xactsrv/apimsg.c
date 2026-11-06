@@ -24,11 +24,11 @@ XsNetMessageBufferSend (
     NET_API_STATUS status;
 
     PXS_NET_MESSAGE_BUFFER_SEND parameters = Parameters;
-    LPTSTR nativeRecipient = NULL;
+    LPTSTR nativeRecipient = NULL;          // Native parameters
     LPBYTE nativeBuffer = NULL;
     DWORD nativeBufLen;
 
-    API_HANDLER_PARAMETERS_REFERENCE;
+    API_HANDLER_PARAMETERS_REFERENCE;       // Avoid warnings
 
 #line 79
     XsConvertTextParameter(

@@ -2611,3 +2611,18 @@ macros through existing nt_vdd.h/NTVDM exports. Selected i386 branch uses the
 existing MGetVdmPointer ABI; non-i386 definitions reject with#error and original
 line positions. No runtime implementation, kernel import or new pointer owner.
 Source hashes and finite closure: docs/etc/evidence/m0-t478-s41-vdd-optical-investigation.md.
+
+## T480 S3 bounded original restoration
+
+The selected `base/ntos/rtl/time.c` 1970 conversion again uses the original
+SecondsToStartOf1970 constant, ConvertSecondsTo100ns macro and complete
+RtlSecondsSince1970ToTime body, through the already declared NTDLL multiply
+provider. Seven calendar cases cover zero through ULONG maximum and output
+guards; no additional time functions or excluded profiles are admitted.
+
+`base/win32/client/vdm.c` restores original declarations, comments and structure
+for BaseCreateVDMEnvironment, BaseDestroyVDMEnvironment and BaseGetEnvNameType_U.
+OPENNT-HOST-065's native-width byte distance remains. All six actual x86/x64
+consumers preserve code, data, relocations and symbols. Original spelling in
+strucsiz.c, apimsg.c and ntexapi.h is restored with token/location checks.
+See [S3 evidence](../../docs/etc/evidence/m0-t480-s3-connected-restoration.md).

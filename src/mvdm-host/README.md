@@ -3301,3 +3301,15 @@ real aliases through COLOR_INFOBK, preserving original GETWNDCLASS16 and
 CTLCOLOR pseudo-color discrimination. The original mirror conversion is
 unchanged. No drawing engine, handle generation or application-specific path
 is added; see docs/etc/evidence/m0-t478-s43-gdi-color-alias.md.
+
+## T480 S3 bounded original restoration
+
+T480 S3 restores the original cmdCheckBinary tail-address expression, one
+`dpmiint.c` `#ifndef i386` boundary and the FPU stack-offset compound assignment.
+The actual x86 consumers preserve their object contracts; cmdCheckBinary has
+only an equivalent scale-one EDI/EDX addressing-byte permutation. This narrows
+the earlier DIV-582 selection record for that C boundary; the header carriers,
+CPU40 stack publication and other registered boundaries remain unchanged.
+Original comment/spelling fragments in DEM, DPMI, tape_io, nt_error and nt_reset
+also preserve actual preprocessor tokens and logical locations.
+See [S3 evidence](../../docs/etc/evidence/m0-t480-s3-connected-restoration.md).

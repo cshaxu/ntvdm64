@@ -948,7 +948,7 @@ Routine Description:
     DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);
 }
 
-#if !defined(i386) || defined(CPU_40_STYLE)
+#ifndef i386
 
 BOOL
 #line 862

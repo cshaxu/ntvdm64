@@ -186,7 +186,7 @@ Return Value:
 {
     LDT_ENTRY UNALIGNED *Descriptors;
     USHORT i;
-    ULONG Base;
+    ULONG  Base;
     ULONG Limit;
     USHORT registerCX;
     USHORT registerAX;

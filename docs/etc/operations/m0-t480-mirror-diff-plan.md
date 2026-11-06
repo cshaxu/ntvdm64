@@ -121,3 +121,14 @@ A smaller mirror diff obtained by copying original algorithms into adapters is
 not minimization. No new behavior, additional tolerance or guest work is
 admitted. Exact safe-edit counts will follow the owner-level evidence; do not
 present these investigation questions as already proved corrections.
+
+
+## S3 bounded closure
+
+Owner subsequently admitted implementation, including unnecessary structure and
+symbol-name differences. [S3 evidence](../evidence/m0-t480-s3-connected-restoration.md)
+records the conservative 5,812-ID disposition and proved restorations in13 host
+C/H files. Both builds, focused contracts, final Full16/16, gameplay and all11
+worktree-only publication hashes passed. First non-passing attempts remain
+recorded. Retention without safe-reversion proof is not a claim of minimality.
+S4 and S5 remain planned and unadmitted; no completed recovery is repeated.

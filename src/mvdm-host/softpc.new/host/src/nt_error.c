@@ -735,7 +735,7 @@ INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
     {
         /*:::::::::::::::::::::::::::::::::::::: Initialise Dialog controls */
         case WM_INITDIALOG:
-             pedgi = (PERRORDIALOGINFO)lParam;
+             pedgi = (PERRORDIALOGINFO) lParam;
 
              // set the desired icon
             switch (pedgi->dwOptions & (RMB_ICON_INFO | RMB_ICON_BANG |

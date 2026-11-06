@@ -93,7 +93,7 @@ NtQueryPerformanceCounter (
 NTSYSAPI
 ULONG
 NTAPI
-NtGetTickCount (
+NtGetTickCount(
     VOID
     );
 

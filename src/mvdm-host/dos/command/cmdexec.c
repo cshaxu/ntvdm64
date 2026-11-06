@@ -331,7 +331,7 @@ VOID cmdCheckBinary (VOID)
     strcpy ((PCHAR)&pSCSInfo->SCS_CmdTail[4],lpAppName);
     if (CommandTailLen) {
         pSCSInfo->SCS_CmdTail[4+AppNameLen] = ' ';
-        RtlCopyMemory ((PCHAR)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1,
+        RtlCopyMemory ((PCHAR)((ULONG)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1),
                 lpCommandTail,
                 CommandTailLen);
     }

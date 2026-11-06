@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T480 S3 connected restoration](evidence/m0-t480-s3-connected-restoration.md) records original expression, structure and naming recovery and its verification limits.
+
 [T479 S5 command continuation](operations/m0-t479-s5-command-continuation.md) fixes the checked BOP/VMM return boundary and finite implementation order.
 [Diagnostic evidence](evidence/m0-t479-s5-continuation-diagnostic.json) retains the failed exit and passing traced/untraced Win3.1 controls; real commands are not yet connected.
 

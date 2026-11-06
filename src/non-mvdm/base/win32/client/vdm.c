@@ -39,170 +39,258 @@ UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
 BOOL BaseCreateVDMEnvironment(
     PWCHAR lpEnvironment,
     ANSI_STRING * pAStringEnv,
+    UNICODE_STRING  *pUStringEnv
+    )
+{
+    WCHAR  *pEnv, *pDst, *EnvStrings,* pTmp, *pNewEnv;
+    DWORD   cchEnv, dw, Length, dwRemain;
+    NTSTATUS	Status;
+    UINT        NameType;
+    BOOL        bRet = FALSE;
+
+    if (!ARGUMENT_PRESENT(pAStringEnv) || !ARGUMENT_PRESENT(pUStringEnv)){
+	SetLastError(ERROR_INVALID_PARAMETER);
+	return FALSE;
+	}
+    try {
+	// the environment strings are shared by every thread of the same
+	// process. Since we have no idea of what the caller process
+	// is, we have to grab the entire environment to our local buffer in one
+	// shot then we can walk through the strings.
+	// Note that if another thread makes call to RtlSetEnvironmentVariable
+	// then we are out of sync. It is a problem of process structure and
+	// I don't want to think about it now.
+	// The funny thing is that we have to assume the environment
+	// is a block of strings(otherwise, how can we do it?)t, nothing more and
+	// nothing less. If someday and somebody dares to change it, he will be
+	// the one to blame. If the caller(CreateProcess)
+	// provides the environment, we assume it is safe to walk through it.
+	//
+
+	if (lpEnvironment == NULL) {
+	    // create a new environment and inherit the current process env
+	    Status = RtlCreateEnvironment(TRUE, (PVOID *)&EnvStrings);
+            if (!NT_SUCCESS(Status))
+                goto bveTryExit;
+	    }
+	else
+	    EnvStrings = lpEnvironment;
+
+	if (EnvStrings == NULL) {
+	    SetLastError(ERROR_BAD_ENVIRONMENT);
+            goto bveTryExit;
+	    }
+	// figure out how long the environment is
+	// why can Rtl just provides such a function for us?
+	//
+	cchEnv = 0;
+	pEnv = EnvStrings;
+	// environment is double-null terminated
+	while (!(*pEnv++ == UNICODE_NULL && *pEnv == UNICODE_NULL))
+	    cchEnv++;
+	// count the last two NULLs
+	cchEnv += 2;
+	// we don't want to change the original environment, so
+	// make a local buffer for it.
+        pNewEnv = (LPWSTR)RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG( VDM_TAG ),
+					  (cchEnv + MAX_PATH) * sizeof(WCHAR));
+	if (pNewEnv == NULL) {
+	    SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            goto bveTryExit;
+	    }
+	// give the last two for null
+	dwRemain = MAX_PATH - 2;
+	// now walk through the environment string
+	pEnv = EnvStrings;
+	// the new environmet will be
+	pDst = pNewEnv;
+	while (*pEnv != UNICODE_NULL) {
+	    pTmp = pEnv;
+	    // current directory environment has the form as:
+	    // "=d:=d:\pathname" where d: is the drive designator.
+	    if (pEnv[0] == (WCHAR) '=' ) {
+		if (((pEnv[1] >= (WCHAR) 'A' && pEnv[1] <= (WCHAR) 'Z') ||
+		     (pEnv[1] >= (WCHAR) 'a' && pEnv[1] <= (WCHAR) 'z')) &&
+		    pEnv[2] == (WCHAR) ':' &&
+		    pEnv[3] == (WCHAR) '=') {
+		    // copy the name and the '='
+		    *pDst++ = *pEnv++;*pDst++ = *pEnv++;
+		    *pDst++ = *pEnv++;*pDst++ = *pEnv++;
+		    // current dir is single path
+		    NameType = ENV_NAME_TYPE_SINGLE_PATH;
+		    }
+		else {
+		    // a weird environment was detected.
+		    // treat it as no path
+		    NameType = ENV_NAME_TYPE_NO_PATH;
+		    }
+		}
+	    else {
+		// copy down the name and the '='
+                while (*pEnv && (*pDst++ = *pEnv++) != (WCHAR) '=')
+                    ;
+
+		// and check the type
+		NameType = BaseGetEnvNameType_U(pTmp, (DWORD)(pEnv - pTmp) - 1);
+		}
+	    if (NameType == ENV_NAME_TYPE_NO_PATH) {
+		while ((*pDst++ = *pEnv++) != UNICODE_NULL)
+		    ;
+		}
+	    else if (NameType == ENV_NAME_TYPE_SINGLE_PATH) {
+		    Length = wcslen(pEnv) + 1;
+		    dw = GetShortPathNameW(pEnv, pDst, Length + dwRemain);
+		    // if the conversion failed, we simply pass down the original
+		    // one no matter what the reason is. This is done because we
+		    // are doing the environment strings.
+		    if (dw == 0 || dw >= Length + dwRemain){
+			RtlMoveMemory(pDst, pEnv, Length * sizeof(WCHAR));
+			dw = Length - 1;
+			}
+		    pDst += dw + 1;
+		    pEnv += Length;
+		    if (dw > Length)
+			dwRemain -= dw - Length;
+		    }
+		 else {
+		    // multiple path name found.
+		    // the character ';' is used for seperator
+		     pTmp = pEnv;
+		     while(*pEnv != UNICODE_NULL) {
+			if (*pEnv == (WCHAR) ';') {
+			    // length not include the ';'
+			    Length = (DWORD)(pEnv - pTmp);
+			    if (Length > 0) {
+				*pEnv = UNICODE_NULL;
+				dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
+				// again, if the conversion failed, use the original one
+				if (dw == 0 || dw > Length + dwRemain) {
+				    RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
+				    dw = Length;
+				    }
+				pDst += dw;
+				*pDst++ = *pEnv++ = (WCHAR)';';
+				if (dw > Length)
+				    dwRemain -= dw - Length;
+				}
+			     // skip all consecutive ';'
+			     while (*pEnv == (WCHAR) ';')
+				*pDst++ = *pEnv++;
+			     pTmp = pEnv;
+			     }
+			else
+			    pEnv++;
+			}
+		    // convert the last one
+		    if ((Length = (DWORD)(pEnv - pTmp)) != 0) {
+			dw = GetShortPathNameW(pTmp, pDst, Length+1 + dwRemain);
+			if (dw == 0 || dw > Length) {
+			    RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
+			    dw = Length;
+			    }
+			pDst += dw;
+			if (dw > Length)
+			    dwRemain -= dw - Length;
+			}
+		    *pDst++ = *pEnv++;
+		    }
+	    }
+	*pDst++ = UNICODE_NULL;
+	/* DIVERGENCE(OPENNT-HOST-065): preserve native-width byte distance. */
+#line 3182
+	cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
+	pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
+	pUStringEnv->Buffer = pNewEnv;
+	Status = RtlUnicodeStringToAnsiString(pAStringEnv,
+					      pUStringEnv,
+					      TRUE
+					      );
+
+	if (!NT_SUCCESS(Status)) {
+	    BaseSetLastNTError(Status);
+	    }
+	else
+            bRet = TRUE;
+bveTryExit:;
+	}
+    finally {
+	 if (lpEnvironment == NULL && EnvStrings != NULL)
+	    RtlDestroyEnvironment(EnvStrings);
+        }
+    return bRet;
+}
+/**
+    Destroy the environment block created by BaseCreateVDMEnvironment
+    Input: ANSI_STRING * pAnsiStringVDMEnv
+		      Environment block in ANSI, should be freed via
+		      RtlFreeAnsiString
+	   UNICODE_STRING * pUnicodeStringEnv
+		      Environment block in UNICODE. The Buffer should
+		      be freed with RtlFreeHeap.
+    Output: should always be TRUE.
+
+**/
+
+BOOL
+BaseDestroyVDMEnvironment(
+    ANSI_STRING *pAStringEnv,
     UNICODE_STRING *pUStringEnv
     )
 {
-    WCHAR *pEnv, *pDst, *EnvStrings, *pTmp, *pNewEnv;
-    DWORD cchEnv, dw, Length, dwRemain;
-    NTSTATUS Status;
-    UINT NameType;
-    BOOL bRet = FALSE;
-
-    if (!ARGUMENT_PRESENT(pAStringEnv) || !ARGUMENT_PRESENT(pUStringEnv)) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
-    try {
-#line 3053
-        if (lpEnvironment == NULL) {
-#line 3055
-            Status = RtlCreateEnvironment(TRUE, (PVOID *)&EnvStrings);
-            if (!NT_SUCCESS(Status)) goto bveTryExit;
-        } else EnvStrings = lpEnvironment;
-#line 3062
-        if (EnvStrings == NULL) {
-            SetLastError(ERROR_BAD_ENVIRONMENT);
-            goto bveTryExit;
-        }
-#line 3069
-        cchEnv = 0;
-        pEnv = EnvStrings;
-        while (!(*pEnv++ == UNICODE_NULL && *pEnv == UNICODE_NULL)) cchEnv++;
-#line 3075
-        cchEnv += 2;
-#line 3078
-        pNewEnv = (LPWSTR)RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG(VDM_TAG),
-            (cchEnv + MAX_PATH) * sizeof(WCHAR));
-        if (pNewEnv == NULL) {
-            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-            goto bveTryExit;
-        }
-#line 3085
-        dwRemain = MAX_PATH - 2;
-#line 3087
-        pEnv = EnvStrings;
-#line 3089
-        pDst = pNewEnv;
-        while (*pEnv != UNICODE_NULL) {
-            pTmp = pEnv;
-#line 3094
-            if (pEnv[0] == (WCHAR)'=') {
-                if (((pEnv[1] >= (WCHAR)'A' && pEnv[1] <= (WCHAR)'Z') ||
-                     (pEnv[1] >= (WCHAR)'a' && pEnv[1] <= (WCHAR)'z')) &&
-                    pEnv[2] == (WCHAR)':' && pEnv[3] == (WCHAR)'=') {
-                    *pDst++ = *pEnv++; *pDst++ = *pEnv++;
-                    *pDst++ = *pEnv++; *pDst++ = *pEnv++;
-#line 3103
-                    NameType = ENV_NAME_TYPE_SINGLE_PATH;
-                } else NameType = ENV_NAME_TYPE_NO_PATH;
-            } else {
-                while (*pEnv && (*pDst++ = *pEnv++) != (WCHAR)'=') ;
-#line 3117
-                NameType = BaseGetEnvNameType_U(pTmp, (DWORD)(pEnv - pTmp) - 1);
-            }
-            if (NameType == ENV_NAME_TYPE_NO_PATH) {
-                while ((*pDst++ = *pEnv++) != UNICODE_NULL) ;
-            } else if (NameType == ENV_NAME_TYPE_SINGLE_PATH) {
-#line 3124
-                Length = wcslen(pEnv) + 1;
-                dw = GetShortPathNameW(pEnv, pDst, Length + dwRemain);
-#line 3129
-                if (dw == 0 || dw >= Length + dwRemain) {
-                    RtlMoveMemory(pDst, pEnv, Length * sizeof(WCHAR));
-                    dw = Length - 1;
-                }
-                pDst += dw + 1;
-                pEnv += Length;
-                if (dw > Length) dwRemain -= dw - Length;
-            } else {
-#line 3141
-                pTmp = pEnv;
-                while (*pEnv != UNICODE_NULL) {
-                    if (*pEnv == (WCHAR)';') {
-#line 3145
-                        Length = (DWORD)(pEnv - pTmp);
-                        if (Length > 0) {
-                            *pEnv = UNICODE_NULL;
-                            dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
-#line 3150
-                            if (dw == 0 || dw > Length + dwRemain) {
-                                RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
-                                dw = Length;
-                            }
-                            pDst += dw;
-                            *pDst++ = *pEnv++ = (WCHAR)';';
-                            if (dw > Length) dwRemain -= dw - Length;
-                        }
-                        while (*pEnv == (WCHAR)';') *pDst++ = *pEnv++;
-#line 3162
-                        pTmp = pEnv;
-                    } else pEnv++;
-                }
-#line 3168
-                if ((Length = (DWORD)(pEnv - pTmp)) != 0) {
-                    dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
-                    if (dw == 0 || dw > Length) {
-                        RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
-                        dw = Length;
-                    }
-                    pDst += dw;
-                    if (dw > Length) dwRemain -= dw - Length;
-                }
-                *pDst++ = *pEnv++;
-#line 3179
-            }
-        }
-        *pDst++ = UNICODE_NULL;
-        /* DIVERGENCE(OPENNT-HOST-065): byte distance, not truncated addresses;
-         * retain the original bounded DWORD/USHORT environment lengths. */
-        cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
-#line 3183
-        pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
-        pUStringEnv->Buffer = pNewEnv;
-        Status = RtlUnicodeStringToAnsiString(pAStringEnv, pUStringEnv, TRUE);
-        if (!NT_SUCCESS(Status)) BaseSetLastNTError(Status); else bRet = TRUE;
-#line 3195
-bveTryExit:;
-    }
-    finally {
-        if (lpEnvironment == NULL && EnvStrings != NULL) RtlDestroyEnvironment(EnvStrings);
-    }
-#line 3201
-    return bRet;
-}
-
-#line 3216
-BOOL BaseDestroyVDMEnvironment(ANSI_STRING *pAStringEnv, UNICODE_STRING *pUStringEnv)
-{
-    if (pAStringEnv->Buffer) RtlFreeAnsiString(pAStringEnv);
-    if (pUStringEnv->Buffer) RtlFreeHeap(RtlProcessHeap(), 0, pUStringEnv->Buffer);
-#line 3225
+    if (pAStringEnv->Buffer)
+	RtlFreeAnsiString(pAStringEnv);
+    if (pUStringEnv->Buffer)
+	RtlFreeHeap(RtlProcessHeap(), 0, pUStringEnv->Buffer);
     return TRUE;
+
 }
 
-#line 3244
-UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
+/**
+    This function returns the name type of the given environment variable name
+    The name type has three possibilities. Each one represents if the
+    given name can have pathnames as its value.
+     ENV_NAME_TYPE_NO_PATH:   no pathname can be its value
+     ENV_NAME_TYPE_SINGLE_PATH: single pathname
+     ENV_NAME_MULTIPLE_PATH: multiple path
+
+
+    SIDE NOTE:
+	Currently, nt can not installed on a long path and it seems
+	that systemroot and windir are never be in long path.
+
+**/
+UINT
+BaseGetEnvNameType_U(WCHAR * Name, DWORD NameLength)
 {
-#line 3253
-    static ENV_INFO EnvInfoTable[STD_ENV_NAME_COUNT] = {
-        {ENV_NAME_TYPE_MULTIPLE_PATH, 4, ENV_NAME_PATH},
-        {ENV_NAME_TYPE_SINGLE_PATH, 6, ENV_NAME_WINDIR},
-        {ENV_NAME_TYPE_SINGLE_PATH, 10, ENV_NAME_SYSTEMROOT}
-    };
-    UINT NameType = ENV_NAME_TYPE_NO_PATH;
-    int i;
-#line 3267
+
+
+// so far we only take care of three predefined names:
+// PATH
+// WINDIR and
+// SYSTEMROOT.
+//
+static ENV_INFO     EnvInfoTable[STD_ENV_NAME_COUNT] = {
+			{ENV_NAME_TYPE_MULTIPLE_PATH, 4, ENV_NAME_PATH},
+			{ENV_NAME_TYPE_SINGLE_PATH, 6, ENV_NAME_WINDIR},
+			{ENV_NAME_TYPE_SINGLE_PATH, 10, ENV_NAME_SYSTEMROOT}
+			};
+
+
+
+   UINT NameType;
+   int	i;
+
+
+    NameType = ENV_NAME_TYPE_NO_PATH;
+
     for (i = 0; i < STD_ENV_NAME_COUNT; i++) {
-        if (EnvInfoTable[i].NameLength == NameLength &&
-            !_wcsnicmp(EnvInfoTable[i].Name, Name, NameLength)) {
-            NameType = EnvInfoTable[i].NameType;
-            break;
-        }
-#line 3272
-    }
-#line 3274
+	if (EnvInfoTable[i].NameLength == NameLength &&
+	    !_wcsnicmp(EnvInfoTable[i].Name, Name, NameLength)) {
+	    NameType = EnvInfoTable[i].NameType;
+	    break;
+	    }
+	}
     return NameType;
-#line 3275
 }
 
 #endif

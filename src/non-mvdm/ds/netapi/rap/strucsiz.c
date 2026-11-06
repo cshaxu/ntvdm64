@@ -36,7 +36,7 @@ RapStructureSize (
                 NULL,
                 NULL,
                 NULL,
-                NULL,
+                NULL,  // don't need to know structure alignment
                 TransmissionMode,
                 Native
                 );

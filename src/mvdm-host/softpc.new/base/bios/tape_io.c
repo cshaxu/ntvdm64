@@ -74,11 +74,11 @@ void cassette_io()
         unsigned long setup_int15_function = (unsigned long)getAH();
         unsigned long setup_int15_argument = (unsigned long)getAL();
 #ifdef PM
-#ifndef CPU_30_STYLE
+#ifndef	CPU_30_STYLE
 #line 73
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
 	word *, limit, sys_addr, descr_addr);
-#endif /* not CPU_30_STYLE */
+#endif	/* not CPU_30_STYLE */
 #line 76
 half_word cmos_u_m_s_hi;
 half_word cmos_u_m_s_lo;
