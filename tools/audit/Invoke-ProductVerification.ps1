@@ -100,6 +100,14 @@ if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'nthook64.dll')){
     }
     $packageNames+='nthook64.dll'
 }elseif($NativeHook64){throw 'Hook64 build input missing from runtime'}
+if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'VCDEX.DLL')){
+    $provider=Join-Path $cache 'VCDEX.DLL'
+    if(!(Test-Path -LiteralPath $provider) -or
+       (Get-IsolatedFileSha256 $provider) -ne (Get-IsolatedFileSha256 (Join-Path $runtimeBinary 'VCDEX.DLL'))){
+        throw 'Build cache/runtime mismatch: VCDEX.DLL'
+    }
+    $packageNames+='VCDEX.DLL'
+}elseif(Test-Path -LiteralPath (Join-Path $cache 'VCDEX.DLL')){throw 'VCDEX build input missing from runtime'}
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)

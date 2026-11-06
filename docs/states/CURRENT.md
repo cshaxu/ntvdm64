@@ -2,36 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T478 S41**
+**No active M/T/S packet. M0 T478 S41 is locally closed.**
 
-## Active Packet
+The owner-approved original recovery sequence S2–S41 has reached S41 delivery.
+T478 itself is not declared complete: S1's larger inventory/handoff reconciliation
+remains outstanding. The [proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md)
+and [finding-stage plan](../etc/operations/m0-t478-finding-stage-plan.md) retain
+that boundary. The owner authorizes sequential continuation under original
+semantics only; do not add tolerance or repeat already resolved repairs.
+No O:/winnt write or push. CURRENT's temporary size exception remains until
+final reconciliation; prior S records below are retained evidence.
 
-| Field | Record |
-| --- | --- |
-| Candidate Proposal | [Original inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| Identifier Mode | M0 T478 S41, Ordinary Mode, one active S. |
-| Admission And Approval | Continuous sequential owner authorization; S40 closes in this local tests/evidence delivery with [evidence](../etc/evidence/m0-t478-s40-multimedia-investigation.md). S41 implementation follows the local P1 commit. |
-| Objective | Resolve finding61: verify original RegisterVDD/native loader and host optical call ownership; repair only demonstrated host gaps. |
-| Non-goals | No guest/media mutation, VCDEX guest packaging/installation, new VDD/device emulation, O:/winnt write or push. No physical media writes or device-setting changes. |
-| Reference Baseline | S38 package818fff8c-efa7-4570-93d6-1f9c820f40ed, Full16/16, retained by S40; [MSCDEX boundary](../../artifacts/mvdm-audit/shard-0/mscdex-package-review.md) and [VDD roles](../../artifacts/mvdm-audit/shard-3/mscdex-guest-vdd-input-role-review.md). |
-| Files And ABI Surface | Selected original VDD host loader/services and host optical interface, existing binding/tests; no planned public ABI change. |
-| Applicable Rules | EXECUTION, ARCHITECTURE, CODING, DOCUMENT and source policy; original semantics only. |
-| Verification | Reconcile earlier VDD/export/provider evidence first. Verify applicable registration, dispatch, failure and retirement through actual current images; distinguish missing optical device/media from missing host wiring. Product changes require coherent build, focused/Full gates, worktree release and local commit. |
-| Expected Markers | Original host registration/load/dispatch/optical owners identified with current source and runtime evidence; external device limits explicit. |
-| Asset Needs | Pinned original source, immutable guest, exact S38 package, existing independent VDD probes and isolated runtime; build/t478-s41 evidence. |
-| Reporting Requirements | Separate original restrictions, absent external devices/guest deployment, completed earlier repairs and actual host defects; no guest packaging admission by implication. |
-| Stop Conditions | Material new guest/provider requirement or behavior beyond original semantics. |
-| Exit Criteria | Finding61 reconciled with reproducible evidence, necessary repairs verified and indexed local delivery complete; no push. |
-| Original Owner Request | Continue existing sequence; maximize effective original recovery/minimize mirror and local implementation differences; no added tolerance or repeated completed work. |
-| Similar-Issue Sweep | VDD registration/export ABI, load/init/dispatch/unregister failure ownership, existing host optical control and data paths. |
+## S41 Closure Record
 
-This is the owner's local retro-computing compatibility project. The temporary
-CURRENT size exception remains through final T478 reconciliation. S41 is
-admitted. [Current evidence](../etc/evidence/m0-t478-s41-vdd-optical-investigation.md)
-verifies real VDD register/dispatch/unregister and hook cleanup. Recovering the
-separate unprovided VCDEX host DLL is awaiting owner scope disposition; no
-product implementation or S41 closure occurs before that answer. No optical
-drive is available for actual-medium verification.
+[Evidence](../etc/evidence/m0-t478-s41-vdd-optical-investigation.md) and
+[results](../../artifacts/mvdm-audit/shard-3/vcdex-s41-results.json) close finding61:
+original standalone VCDEX source/build/package restored with only required
+DLL-entry ABI and unselected-branch adaptations. Real immutable MSCDEXNT uses
+the original VDD loader; mounted ISO TOC/volume/reopen, empty virtual drive,
+unsupported-read errors, normal exit and controlled VDD cleanup pass.
+Native TOC agrees exactly. Physical optical/audio certification is not claimed;
+original unsupported APIs and allocation limits remain. Test ISO detached and
+hash-unchanged, existing I: remains empty. Full16/16 passes in382810ms; additional
+Product verification includes all11 image identities. Package
+d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3 is hash-published to this worktree
+assets/release only. S41 P1 is8dea73067; P2 is the local recovery delivery.
+No guest modification, autonomous optical implementation, O:/winnt write or push.
 
 ## S40 Closure Record
 

@@ -14,7 +14,7 @@ function Save-IsolatedPackageManifest([string]$Runtime, [string]$Destination) {
     $rows = Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
     $rows = @($rows)
     $expected = @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
-        'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+        'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','VCDEX.DLL')
     if (!$rows.Count -or $rows.Count -gt $expected.Count -or
             @($rows | Select-Object -ExpandProperty Name -Unique).Count -ne $rows.Count) {
         throw 'Expected unique staged component records'
@@ -145,9 +145,10 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
             $rows=@($rows)
             $expected=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
                 'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+            if(@($rows | Where-Object Name -eq 'VCDEX.DLL').Count){$expected+='VCDEX.DLL'}
             if($rows.Count -ne $expected.Count -or
                @($rows | Select-Object -ExpandProperty Name -Unique).Count -ne $expected.Count) {
-                throw 'Fresh identity requires the complete ten-image manifest'
+                throw 'Fresh identity requires the complete host-image manifest'
             }
             $binary=Get-PackageBinaryRoot $stage
             $identity=[guid]::NewGuid()

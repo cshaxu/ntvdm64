@@ -1,0 +1,64 @@
+[
+  {
+    "destination": "src\\mvdm-host\\vdd\\samples\\mscdex\\vdd\\vcdex.c",
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.c",
+    "second_source": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.c",
+    "sha256": "1E04779EE75DE6B1CB294E4B036E68745F84815D73C6037EE577258E97C629CA",
+    "delivered_sha256": "b2323aa56f0f15d8bcc5c8374a2889f062c0c0760fcd2a874dfaca40f345f693",
+    "lines": 1474,
+    "changes_from_original": "--- \n+++ \n@@ -99,3 +99,3 @@\n \r\n-BOOL\r\n+BOOL WINAPI /* MVDM-HOST-DIV-886: Win32 DLL entry ABI in the cdecl build. */\r\n VDDInitialize(\r\n"
+  },
+  {
+    "destination": "src\\mvdm-host\\vdd\\samples\\mscdex\\vdd\\vcdex.h",
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.h",
+    "second_source": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.h",
+    "sha256": "EF58FF9747B8B14A904A3B2894FB496FEA500771AAEC462DD8CEFED63BC00B5A",
+    "delivered_sha256": "dd9536994f40eb35f25ed22508787be93e545d0e023e9a55eba81302b0a5dc06",
+    "lines": 75,
+    "changes_from_original": "--- \n+++ \n@@ -65,20 +65,4 @@\n #ifdef DEBUG\r\n-\r\n-USHORT DebugLevel = 0;\r\n-\r\n-#define DebugPrint(LEVEL,STRING)                \\\r\n-    {                                           \\\r\n-        if (DebugLevel & LEVEL)                 \\\r\n-            OutputDebugString (STRING);         \\\r\n-    }\r\n-\r\n-#define DebugFmt(LEVEL,STRING, PARM)            \\\r\n-    {                                           \\\r\n-    char szBuffer[80];                          \\\r\n-        if (DebugLevel & LEVEL) {               \\\r\n-            sprintf (szBuffer, STRING, PARM);   \\\r\n-            OutputDebugString (szBuffer);       \\\r\n-        }                                       \\\r\n-    }\r\n-\r\n+#error\r\n+#line 84\r\n #else\r\n"
+  },
+  {
+    "destination": "src\\mvdm-host\\vdd\\samples\\mscdex\\vdd\\mscdex.h",
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\mscdex.h",
+    "second_source": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\mscdex.h",
+    "sha256": "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430",
+    "delivered_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+    "lines": 313,
+    "changes_from_original": ""
+  },
+  {
+    "destination": "src\\mvdm-host\\vdd\\samples\\mscdex\\vdd\\vcdex.def",
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.def",
+    "second_source": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.def",
+    "sha256": "EAC12FD23DA49E0BA41BAE2BB628AF4722F0942B84D5671971E1E7B8873E84F6",
+    "delivered_sha256": "eac12fd23da49e0ba41bae2bb628af4722f0942b84d5671971e1e7b8873e84f6",
+    "lines": 8,
+    "changes_from_original": ""
+  },
+  {
+    "destination": "src\\mvdm-host\\vdd\\samples\\mscdex\\vdd\\sources",
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\sources",
+    "second_source": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\sources",
+    "sha256": "044A778E74888C3B361D7FA4AF06EE848D3B2BBB8FBBA32061AAE9F10B682950",
+    "delivered_sha256": "044a778e74888c3b361d7fa4af06ee848d3b2bbb8fbba32061aae9f10b682950",
+    "lines": 27,
+    "changes_from_original": ""
+  },
+  {
+    "destination": "src\\mvdm-host\\vdd\\samples\\mscdex\\vdd\\makefile",
+    "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\makefile",
+    "second_source": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\makefile",
+    "sha256": "B6EDA631FAC82BDC1F658AF98D33D2928E6AED045B282013EAF2F57123671495",
+    "delivered_sha256": "b6eda631fac82bdc1f658af98d33d2928e6aed045b282013eaf2f57123671495",
+    "lines": 11,
+    "changes_from_original": ""
+  },
+  {
+    "destination": "src\\non-mvdm\\public\\sdk\\inc\\vddsvc.h",
+    "source": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vddsvc.h",
+    "sha256": "70769DA0455AA0B610AB046A4000BC108176DABEB8178FF8B649C41F7CD0897D",
+    "delivered_sha256": "7546e851c7c5f20ee46b2c2185d89e918b2147cd40fd9b1c48eb6912942f1fad",
+    "lines": 188,
+    "changes_from_original": "--- \n+++ \n@@ -53,83 +53,4 @@\n #ifndef i386\r\n-\r\n-#define\tgetEAX()\t(ULONG)c_getAX()\r\n-#define\tgetAX() \tc_getAX()\r\n-#define\tgetAL() \tc_getAL()\r\n-#define getAH()         c_getAH()\r\n-#define\tgetEBX()\t(ULONG)c_getBX()\r\n-#define\tgetBX() \tc_getBX()\r\n-#define\tgetBL() \tc_getBL()\r\n-#define\tgetBH() \tc_getBH()\r\n-#define\tgetECX()\t(ULONG)c_getCX()\r\n-#define\tgetCX() \tc_getCX()\r\n-#define\tgetCL() \tc_getCL()\r\n-#define\tgetCH() \tc_getCH()\r\n-#define\tgetEDX()\t(ULONG)c_getDX()\r\n-#define\tgetDX() \tc_getDX()\r\n-#define\tgetDL() \tc_getDL()\r\n-#define\tgetDH() \tc_getDH()\r\n-#define\tgetESP()\t(ULONG)c_getSP()\r\n-#define\tgetSP() \tc_getSP()\r\n-#define\tgetEBP()\t(ULONG)c_getBP()\r\n-#define\tgetBP() \tc_getBP()\r\n-#define\tgetESI()\t(ULONG)c_getSI()\r\n-#define\tgetSI() \tc_getSI()\r\n-#define\tgetEDI()\t(ULONG)c_getDI()\r\n-#define\tgetDI() \tc_getDI()\r\n-#define\tgetEIP()\t(ULONG)c_getIP()\r\n-#define\tgetIP() \tc_getIP()\r\n-#define\tgetCS() \tc_getCS()\r\n-#define\tgetSS() \tc_getSS()\r\n-#define\tgetDS() \tc_getDS()\r\n-#define\tgetES() \tc_getES()\r\n-#define\tgetCF() \tc_getCF()\r\n-#define\tgetPF() \tc_getPF()\r\n-#define\tgetAF() \tc_getAF()\r\n-#define\tgetZF() \tc_getZF()\r\n-#define\tgetSF() \tc_getSF()\r\n-#define\tgetIF() \tc_getIF()\r\n-#define\tgetDF() \tc_getDF()\r\n-#define\tgetOF() \tc_getOF()\r\n-#define\tgetMSW()\tc_getMSW()\r\n-\r\n-#define\tsetEAX(value)\tc_setAX((WORD)value)\r\n-#define\tsetAX(value)\tc_setAX(value)\r\n-#define\tsetAH(value)\tc_setAH(value)\r\n-#define\tsetAL(value)\tc_setAL(value)\r\n-#define\tsetEBX(value)\tc_setBX((WORD)value)\r\n-#define\tsetBX(value)\tc_setBX(value)\r\n-#define\tsetBH(value)\tc_setBH(value)\r\n-#define\tsetBL(value)\tc_setBL(value)\r\n-#define\tsetECX(value)\tc_setCX((WORD)value)\r\n-#define\tsetCX(value)\tc_setCX(value)\r\n-#define\tsetCH(value)\tc_setCH(value)\r\n-#define\tsetCL(value)\tc_setCL(value)\r\n-#define\tsetEDX(value)\tc_setDX((WORD)value)\r\n-#define\tsetDX(value)\tc_setDX(value)\r\n-#define\tsetDH(value)\tc_setDH(value)\r\n-#define\tsetDL(value)\tc_setDL(value)\r\n-#define\tsetESP(value)\tc_setSP((WORD)value)\r\n-#define\tsetSP(value)\tc_setSP(value)\r\n-#define\tsetEBP(value)\tc_setBP((WORD)value)\r\n-#define\tsetBP(value)\tc_setBP(value)\r\n-#define\tsetESI(value)\tc_setSI((WORD)value)\r\n-#define\tsetSI(value)\tc_setSI(value)\r\n-#define\tsetEDI(value)\tc_setDI((WORD)value)\r\n-#define\tsetDI(value)\tc_setDI(value)\r\n-#define\tsetEIP(value)\tc_setIP((WORD)value)\r\n-#define\tsetIP(value)\tc_setIP(value)\r\n-#define\tsetCS(value)\tc_setCS(value)\r\n-#define\tsetSS(value)\tc_setSS(value)\r\n-#define\tsetDS(value)\tc_setDS(value)\r\n-#define\tsetES(value)\tc_setES(value)\r\n-#define\tsetCF(value)\tc_setCF(value)\r\n-#define\tsetPF(value)\tc_setPF(value)\r\n-#define\tsetAF(value)\tc_setAF(value)\r\n-#define\tsetZF(value)\tc_setZF(value)\r\n-#define\tsetSF(value)\tc_setSF(value)\r\n-#define\tsetIF(value)\tc_setIF(value)\r\n-#define\tsetDF(value)\tc_setDF(value)\r\n-#define\tsetOF(value)\tc_setOF(value)\r\n-#define\tsetMSW(value)\tc_setMSW(value)\r\n-\r\n+#error\r\n+#line 135\r\n #endif\r\n@@ -167,18 +88,4 @@\n #else\r\n-\r\n-PBYTE\r\n-Sim32GetVDMPointer(\r\n- ULONG\t Address,\r\n- ULONG   Size,\r\n- UCHAR   ProtectedMode\r\n-);\r\n-\r\n-BOOLEAN\r\n-Sim32FlushVDMPointer(\r\n- ULONG\t Address,\r\n- USHORT\t Size,\r\n- PBYTE\t Buffer,\r\n- BOOLEAN ProtectedMode\r\n-);\r\n-\r\n+#error\r\n+#line 184\r\n #endif\r\n@@ -275,72 +182,4 @@\n #else\r\n-\r\n-UCHAR c_getAL(VOID);\r\n-UCHAR c_getCL(VOID);\r\n-UCHAR c_getDL(VOID);\r\n-UCHAR c_getBL(VOID);\r\n-UCHAR c_getAH(VOID);\r\n-UCHAR c_getCH(VOID);\r\n-UCHAR c_getDH(VOID);\r\n-UCHAR c_getBH(VOID);\r\n-\r\n-USHORT c_getAX(VOID);\r\n-USHORT c_getCX(VOID);\r\n-USHORT c_getDX(VOID);\r\n-USHORT c_getBX(VOID);\r\n-USHORT c_getSP(VOID);\r\n-USHORT c_getBP(VOID);\r\n-USHORT c_getSI(VOID);\r\n-USHORT c_getDI(VOID);\r\n-USHORT c_getIP(VOID);\r\n-USHORT c_getES(VOID);\r\n-USHORT c_getCS(VOID);\r\n-USHORT c_getSS(VOID);\r\n-USHORT c_getDS(VOID);\r\n-\r\n-USHORT c_getMSW(VOID);\r\n-\r\n-ULONG c_getAF(VOID);\r\n-ULONG c_getCF(VOID);\r\n-ULONG c_getDF(VOID);\r\n-ULONG c_getIF(VOID);\r\n-ULONG c_getOF(VOID);\r\n-ULONG c_getPF(VOID);\r\n-ULONG c_getSF(VOID);\r\n-ULONG c_getZF(VOID);\r\n-\r\n-VOID c_setAL(UCHAR val);\r\n-VOID c_setCL(UCHAR val);\r\n-VOID c_setDL(UCHAR val);\r\n-VOID c_setBL(UCHAR val);\r\n-VOID c_setAH(UCHAR val);\r\n-VOID c_setCH(UCHAR val);\r\n-VOID c_setDH(UCHAR val);\r\n-VOID c_setBH(UCHAR val);\r\n-\r\n-VOID c_setAX(USHORT val);\r\n-VOID c_setCX(USHORT val);\r\n-VOID c_setDX(USHORT val);\r\n-VOID c_setBX(USHORT val);\r\n-VOID c_setSP(USHORT val);\r\n-VOID c_setBP(USHORT val);\r\n-VOID c_setSI(USHORT val);\r\n-VOID c_setDI(USHORT val);\r\n-VOID c_setIP(USHORT val);\r\n-\r\n-VOID c_setES(USHORT val);\r\n-VOID c_setCS(USHORT val);\r\n-VOID c_setSS(USHORT val);\r\n-VOID c_setDS(USHORT val);\r\n-\r\n-VOID c_setMSW(USHORT val);\r\n-\r\n-VOID c_setAF(ULONG val);\r\n-VOID c_setCF(ULONG val);\r\n-VOID c_setDF(ULONG val);\r\n-VOID c_setIF(ULONG val);\r\n-VOID c_setOF(ULONG val);\r\n-VOID c_setPF(ULONG val);\r\n-VOID c_setSF(ULONG val);\r\n-VOID c_setZF(ULONG val);\r\n-\r\n+#error\r\n+#line 346\r\n #endif\r\n"
+  }
+]

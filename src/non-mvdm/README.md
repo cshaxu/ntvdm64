@@ -2604,3 +2604,10 @@ remaining limitations are in docs/etc/evidence/m0-t478-s38-clipboard-caret-inves
 Five real rejection cases, real product/guest forward/reverse conversion,
 caret and Full16/16 pass on the S38 package. Scope and retained original
 limitations are explicit in the evidence.
+
+OPENNT-HOST-298 (T478 S41): recover original public/sdk/inc/vddsvc.h for
+selected original VCDEX.DLL. It supplies only VDD declarations and pointer
+macros through existing nt_vdd.h/NTVDM exports. Selected i386 branch uses the
+existing MGetVdmPointer ABI; non-i386 definitions reject with#error and original
+line positions. No runtime implementation, kernel import or new pointer owner.
+Source hashes and finite closure: docs/etc/evidence/m0-t478-s41-vdd-optical-investigation.md.

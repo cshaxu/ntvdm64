@@ -1,0 +1,452 @@
+{
+  "task": "M0 T478 S41 P2",
+  "package_id": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+  "images": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "8262946440E4F97A2E2F035A3C5C5550831D73EA7076BF1F3CEC7551473B55E5",
+      "Machine": 332,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "20314CE08E1F5109FC2725A5F94FBFD839F3776349AD270CDBB379EF0AFE03EC"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "5F20A382CB9ACFB41B6C6B4A8424686EEFAAC0C6FFC33FB2AB4E6D1EC2E68472",
+      "Machine": 34404,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "2594647096B57774FE79894D2FFEF53C4F7902870A080D5AC893C6A7EB6B194A",
+      "Machine": 34404,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "36C5F1AB08ADCAEBF07ED03F06D3AD8A703337111AD798B33C601DE845015E10",
+      "Machine": 34404,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "41B65E30BD73249F2E00AFDEC43184920ED39E7AD884D940E6C6D5EA07984114",
+      "Machine": 332,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "0E8ADF3F7E4323A8548E82616E7E0E385EC9F7B017B2E3AEC2E20BBFA5696DD5"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "53967EC04EF84295F08FF8FE1831E4433CC25CA096D02B34E1F2B9D80B7429D2",
+      "Machine": 34404,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "F59D08433DBCDBE0D6D6A19BA1682FD4E902FD921E916FBD29FF3311CA99A48B",
+      "Machine": 34404,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "A0AC47EB54A8779A0D8C47DF86EB3C38002EC007A36A9BD2861C8F844F65E0A5",
+      "Machine": 332,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "9A551A07491905219D9FA05E4E515777D9BAB8A4677FAD5D225D0B1CCFF8B428"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "093A7303B9B58D7EC35662A61D5945C2C7427147030C032CBEEE46E53CDE8975",
+      "Machine": 332,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "D5F4E5FB7FA0ADAE9D94DE6EB7A9A930BE19A1CCF6ADD682DAA9721D06FF3BC1"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "14F13318C24296519973941E09CA8B88B98C9D78B96515FDDB6CC6DDE7F85FF8",
+      "Machine": 332,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "2870F071412F1B94D2AEF6B10C5290F7A44C8CB1C420CA42F310381FC390580E"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "291DA16DDA45DB60FCCC73A48F37FED2812638D16D8E3A199642039B6FB2005D",
+      "Machine": 34404,
+      "PackageId": "d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 382810,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3784,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1430,
+        "CleanupMs": 325,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 199,
+        "CleanupMs": 293,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65738,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 49443,
+        "CleanupMs": 332,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 49331,
+        "CleanupMs": 392,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 18510,
+        "CleanupMs": 441,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11196,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 73819,
+        "CleanupMs": 222,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12584,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27817,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30022,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4851,
+        "CleanupMs": 392,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7501,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9579,
+        "CleanupMs": 376,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3113,
+        "CleanupMs": 315,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6526,
+        "CleanupMs": 388,
+        "Passed": true
+      }
+    ]
+  },
+  "product": {
+    "Suite": "Product",
+    "ElapsedMs": 165918,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 2902,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1408,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 353,
+        "CleanupMs": 426,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67653,
+        "CleanupMs": 525,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46976,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44017,
+        "CleanupMs": 371,
+        "Passed": true
+      }
+    ]
+  },
+  "optical_mounted": {
+    "count": 2,
+    "first": 5,
+    "version": 533,
+    "isCd": 1,
+    "signature": 44461,
+    "absoluteReadCarry": 0,
+    "volumeStatus": 256,
+    "diskStatus": 256,
+    "readLongStatus": 33027,
+    "repeatStatus": 256,
+    "volume": 222263,
+    "repeatVolume": 222263,
+    "diskInfo": [
+      10,
+      1,
+      1,
+      38,
+      23,
+      49,
+      0
+    ],
+    "letters": [
+      5,
+      8,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  "optical_empty": {
+    "count": 2,
+    "first": 5,
+    "version": 533,
+    "isCd": 1,
+    "signature": 44461,
+    "absoluteReadCarry": 0,
+    "volumeStatus": 33036,
+    "diskStatus": 33036,
+    "readLongStatus": 33027,
+    "repeatStatus": 33036,
+    "volume": 0,
+    "repeatVolume": 0,
+    "diskInfo": [
+      10,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "letters": [
+      5,
+      8,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  "native_toc": {
+    "raw": [
+      0,
+      18,
+      1,
+      1,
+      0,
+      20,
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      20,
+      170,
+      0,
+      0,
+      49,
+      23,
+      38
+    ],
+    "originalVolumeFrames": 222263,
+    "lastTrack": 1,
+    "firstTrack": 1,
+    "drive": "F",
+    "leadoutAddress": [
+      0,
+      49,
+      23,
+      38
+    ]
+  },
+  "native_empty_error": [
+    {
+      "message": "Exception calling \"Read\" with \"1\" argument(s): \"The device is not ready.\"",
+      "nativeError": null,
+      "type": "System.Management.Automation.MethodInvocationException"
+    },
+    {
+      "message": "The device is not ready.",
+      "nativeError": 21,
+      "type": "System.ComponentModel.Win32Exception"
+    }
+  ],
+  "vdd_markers": [
+    "ATTACH",
+    "HOOK_INSTALL_OK",
+    "HOOK_INVALID_OK",
+    "IO_INSTALL_OK",
+    "BOP_INIT",
+    "BOP_DISPATCH",
+    "IO_INB",
+    "IO_OUTB",
+    "DETACH",
+    "HOOK_REMOVE_OK"
+  ],
+  "media_contract_cases": [
+    {
+      "case": "historical archive",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "case": "unregistered replacement rejected",
+      "exit": 1,
+      "passed": true
+    },
+    {
+      "case": "registered host replacement",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "case": "host tamper rejected",
+      "exit": 1,
+      "passed": true
+    },
+    {
+      "case": "guest tamper rejected",
+      "exit": 1,
+      "passed": true
+    },
+    {
+      "case": "duplicate host records rejected",
+      "exit": 1,
+      "passed": true
+    },
+    {
+      "case": "host path substitution rejected",
+      "exit": 1,
+      "passed": true
+    }
+  ],
+  "iso_cleanup": {
+    "iso": "O:\\assets\\research\\MSDN_Premium_1994_WINNT35_WINNT_SDK.iso",
+    "IReady": false,
+    "attached": false
+  },
+  "iso_identity": {
+    "after": "5EE511B319930D939E41BE1D07AF7C552DCA18C9D0D58D9C5279A4869B5B3461",
+    "unchanged": true,
+    "before": "5EE511B319930D939E41BE1D07AF7C552DCA18C9D0D58D9C5279A4869B5B3461"
+  },
+  "publication": "PASS eleven-image worktree release package=d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3; backup=build/t478-s41/release-before; no O:/winnt write",
+  "limitations": [
+    "No physical-drive or audio-disc acceptance",
+    "Original absolute read/VTOC/directory API stubs remain",
+    "Original TSR IRET preserves input flags",
+    "No guest/media changes, O:/winnt write or push"
+  ]
+}

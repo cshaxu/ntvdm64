@@ -381,3 +381,13 @@ S25's repair; deployed fax/device-specific callback and forced-task-loss
 certification are not claimed. No missing host connection found; historical
 inactive converters stay excluded. Tests/evidence only, exact S38 release
 retained; S41/finding61 follows.
+
+## S41 disposition
+
+[S41](../evidence/m0-t478-s41-vdd-optical-investigation.md) restores the original
+VCDEX host provider with explicit owner approval. Mounted ISO and empty virtual
+drive, native TOC comparison, original unsupported commands and current VDD
+lifecycle pass; Full16/16 and11-image Product identity verification pass. The
+worktree release is hash-published and test attachment removed. No physical-drive
+or audio-disc acceptance and no new data-sector reader are claimed. This closes
+finding61; larger S1 inventory/handoff reconciliation remains separate.

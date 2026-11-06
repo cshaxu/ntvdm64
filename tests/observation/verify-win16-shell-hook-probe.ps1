@@ -3,13 +3,16 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [ValidateSet('shell','hook','word','caret','clipreject','keyboard','media','vdd')][string]$Case='hook',
+ [ValidateSet('shell','hook','word','caret','clipreject','keyboard','media','vdd','optical')][string]$Case='hook',
  [switch]$LeaveHookInstalled,
  [string]$CompilerEnvironment,
  [ValidateSet(15,3,131,49153,49154)][int]$ClipboardFormat=15,
  [string]$DebugObserver,
  [switch]$OleRoundtrip,
- [string]$ProviderBuildRoot)
+ [string]$ProviderBuildRoot,
+ [ValidateRange(0,25)][int]$OpticalDrive=5,
+ [uint32]$ExpectedOpticalFrames=0,
+ [switch]$OpticalNoMedia)
 # Original USER/Shell boundary probes: shell, hooks, window words and caret.
 # No Win16 Style modes or original guest build. Owned background invocation only.
 $ErrorActionPreference='Stop'
@@ -32,13 +35,13 @@ try {
  $label=[regex]::Match((Get-Content "$root/token.out" -Raw),'S-1-16-\d+').Value
  if($label -ne 'S-1-16-8192'){throw 'Require desktop-capable medium token'}
  @{pid=$PID;host=(Get-Process -Id $PID).Path;integrity=$label;script_sha256=(Get-FileHash $PSCommandPath).Hash}|ConvertTo-Json|Set-Content "$root/runner-context.json"
- $extension=if($Case -eq 'vdd'){'COM'}else{'EXE'}
+ $extension=if($Case -in @('vdd','optical')){'COM'}else{'EXE'}
  $source="$PSScriptRoot/win16_${Case}_probe.asm"
  if($Case -eq 'vdd'){$source="$PSScriptRoot/s44_vdd_bop.asm"}
  if($Case -eq 'word'){$source="$PSScriptRoot/win16_window_word_probe.asm"}
- $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'vdd'){'S44BOP'}elseif($Case -eq 'media'){'MEDPROBE'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
+ $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'optical'){'CDPROBE'}elseif($Case -eq 'vdd'){'S44BOP'}elseif($Case -eq 'media'){'MEDPROBE'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
- $defines=if($Case -eq 'vdd'){'-DS41_ISOLATED '}elseif($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
+ $defines=if($Case -eq 'optical'){'-DOPTICAL_DRIVE='+$OpticalDrive+' '}elseif($Case -eq 'vdd'){'-DS41_ISOLATED '}elseif($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
  if($OleRoundtrip){$defines+='-DOLE_ROUNDTRIP '}
  Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.'+$extension+'"') 30
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
@@ -151,7 +154,25 @@ try {
  }
  Copy-Item "$tests/$probe.BIN" "$root/guest-report.bin"
  $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
- if($Case -eq 'shell'){
+ if($Case -eq 'optical'){
+  if($bytes.Length -ne 65 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'CDP1'){throw 'Bad optical report'}
+  $names=@('count','first','version','isCd','signature','absoluteReadCarry','volumeStatus','diskStatus','readLongStatus','repeatStatus')
+  $record=[ordered]@{}
+  for($i=0;$i -lt 10;$i++){$record[$names[$i]]=[BitConverter]::ToUInt16($bytes,4+2*$i)}
+  $record.volume=[BitConverter]::ToUInt32($bytes,24)
+  $record.repeatVolume=[BitConverter]::ToUInt32($bytes,28)
+  $record.diskInfo=@($bytes[32..38]);$record.letters=@($bytes[39..64])
+  $record|ConvertTo-Json -Depth 4|Set-Content "$root/guest-report.json"
+  if(!$record.count -or $record.version -ne 0x215 -or $record.isCd -ne 1 -or $record.signature -ne 0xadad -or $record.letters -notcontains $OpticalDrive){throw 'MSCDEX registration/enumeration mismatch'}
+  if($record.absoluteReadCarry -ne 0 -or $record.readLongStatus -ne 0x8103){throw 'Original unsupported read contract mismatch'}
+  $expectedStatus=if($OpticalNoMedia){0x810c}else{0x100}
+  if($record.volumeStatus -ne $expectedStatus -or $record.diskStatus -ne $expectedStatus -or $record.repeatStatus -ne $expectedStatus -or $record.volume -ne $record.repeatVolume){throw 'Original optical TOC/volume/repeat failed'}
+  if($OpticalNoMedia){
+   if($record.volume -or @($record.diskInfo[1..6]|Where-Object {$_ -ne 0}).Count){throw 'No-media original result mismatch'}
+  }elseif(!$record.volume){throw 'Mounted medium has no TOC volume'}
+  if($ExpectedOpticalFrames -and $record.volume -ne $ExpectedOpticalFrames){throw 'Optical frame count mismatch'}
+  $(if($OpticalNoMedia){'PASS original empty-drive enumeration, failed TOC with zero result and unsupported-read status; original error mapping retained'}else{'PASS original MSCDEX registration, enumeration, TOC/volume and repeated query; unsupported data reads retain original failure'})|Set-Content "$root/result.txt"
+ }elseif($Case -eq 'shell'){
         if($bytes.Length -ne 36){throw 'Expected three12-byte Shell records'}
         $records=@()
         for($i=0;$i -lt 3;$i++){

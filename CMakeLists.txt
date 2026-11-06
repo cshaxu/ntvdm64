@@ -75,6 +75,8 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit011.c"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit012.c"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit013.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/vdd/samples/mscdex/vdd/sources"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/sas.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/gvi.h"
@@ -87,7 +89,7 @@ ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
   -NodeExecutable "${NTVDM_NODE}"
   -NinjaExecutable "${CMAKE_MAKE_PROGRAM}" ${_native_args})
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
-  add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd" ntvdm.exe
+  add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd" ntvdm.exe VCDEX.DLL
     BYPRODUCTS "${_worker_tree}/ntvdm.lib"
     USES_TERMINAL)
   # Its generator reads the actual parent's import library; configure only

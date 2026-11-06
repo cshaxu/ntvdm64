@@ -913,6 +913,23 @@ $graph.Add('  restat = 1')
 # original process link, so this rule cannot create a second CCPU/SoftPC
 # executor inside the DLL.
 $graph.Add('  command = link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /alternatename:_call_ica_hw_interrupt@12=call_ica_hw_interrupt /def:' + (NinjaPath $redirExportDefinition) + ' /implib:$out.lib /out:$out $in kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+# Original standalone MSCDEX host VDD; only its source manifest supplies C units.
+$vcdexRoot = Join-Path $root 'src/mvdm-host/vdd/samples/mscdex/vdd'
+$graph.Add('rule vcdex_cc')
+$graph.Add('  command = ' + $compilerCommand + ' /nologo /TC /c /W3 /O2 /showIncludes /Di386 /DWIN_32 /I "' + (NinjaPath $vcdexRoot) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file: ')
+$graph.Add('rule vcdex_rc')
+$graph.Add('  command = rc.exe /nologo /fo$out $in')
+$graph.Add('rule vcdex_link')
+$graph.Add('  command = link.exe /nologo /dll /machine:x86 /entry:VDDInitialize@12 /base:0x2000000 /map:$out.map /def:' + (NinjaPath (Join-Path $vcdexRoot 'vcdex.def')) + ' /implib:$out.lib /out:$out $in kernel32.lib user32.lib')
+$vcdexObjects = @(foreach($name in (Get-OriginalSources (Join-Path $vcdexRoot 'sources'))){
+    $object='obj/vcdex/'+[IO.Path]::GetFileNameWithoutExtension($name)+'.obj'
+    $graph.Add('build '+$object+': vcdex_cc '+(NinjaPath (Join-Path $vcdexRoot $name)))
+    $object
+})
+$graph.Add('build obj/vcdex/vcdex.res: vcdex_rc '+(NinjaPath (Join-Path $vcdexRoot 'vcdex.rc')))
+$graph.Add('build VCDEX.DLL: vcdex_link '+($vcdexObjects -join ' ')+' obj/vcdex/vcdex.res ntvdm.lib | '+(NinjaPath (Join-Path $vcdexRoot 'vcdex.def')))
 $graph.Add('rule broker_test_link')
 $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
 $graph.Add('rule rtl_fixture_link')

@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$BuildCache,
     [Parameter(Mandatory)][string]$Wow32,
     [Parameter(Mandatory)][string]$OutputRoot,
+    [string]$Vcdex='',
     [string]$NativeHook='',
     [string]$NativeHook64='',
     [string]$NativeFrontend='',
@@ -45,7 +46,9 @@ if(Test-Path -LiteralPath $manifestPath){Remove-Item -LiteralPath $manifestPath 
 if(Test-Path -LiteralPath $manifestTemporary){Remove-Item -LiteralPath $manifestTemporary -Force}
 $system=Join-Path $output 'system32'
 if(!(Test-Path -LiteralPath $system -PathType Container)){throw 'Baseline lacks original system32 media'}
-$names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
+$vcdexInput=if($Vcdex){(Resolve-Path -LiteralPath $Vcdex).Path}else{Join-Path $cache 'VCDEX.DLL'}
+if(!(Test-Path -LiteralPath $vcdexInput -PathType Leaf)){throw 'Missing original VCDEX host provider build input'}
+$names=@('VCDEX.DLL','run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
 if($NativeHook){$NativeHook=(Resolve-Path -LiteralPath $NativeHook).Path;$names+='nthook32.dll'}
 if($NativeHook64){$NativeHook64=(Resolve-Path -LiteralPath $NativeHook64).Path;$names+='nthook64.dll'}
 if($NativeWorker){
@@ -69,7 +72,7 @@ if($NativeService){
     if(!$NativeLauncher -or !$NativeService.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native service requires the native launcher and a build-owned input'}
 }
 $manifest=foreach($name in $names){
-    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}elseif($name -eq 'ntsrv.exe' -and $NativeService){$NativeService}else{Join-Path $cache $name}
+    $source=if($name -eq 'VCDEX.DLL'){$vcdexInput}elseif($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}elseif($name -eq 'ntsrv.exe' -and $NativeService){$NativeService}else{Join-Path $cache $name}
     try {$bytes=[IO.File]::ReadAllBytes($source)}
     catch {throw "Cannot read package input '$source': $($_.Exception.Message)"}
     $pe=[BitConverter]::ToInt32($bytes,60)

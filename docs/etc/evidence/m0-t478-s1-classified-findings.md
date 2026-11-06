@@ -90,7 +90,7 @@
 | 48 | [Clipboard formats](../../../artifacts/mvdm-audit/shard-2/wow-clipboard-format-failure-review.md); caret finding in [cross-shard findings](../../../artifacts/mvdm-audit/findings.md) | S38 已修复已证实的格式拒收与 OLE 转换接线缺口，并验证 caret；[收口证据](m0-t478-s38-clipboard-caret-investigation.md)明确保留原版限制及测试边界 |
 | 52 | [WOW keyboard thunks](../../../artifacts/mvdm-audit/shard-3/wow-keyboard-thunks-lifecycle-review.md); [driver build inputs](../../../artifacts/mvdm-audit/shard-3/wow-keyboard-driver-build-role-review.md) | S39 有界收口：[证据](m0-t478-s39-keyboard-investigation.md)；11 个原版 thunk 与当前发布绑定、真实 guest 缓冲区/失败/退出及 7 个受控透传用例通过，无产品改动；真实 DBCS 布局/死键组合不宣称已验证 |
 | 54 | [WOWFAX](../../../artifacts/mvdm-audit/shard-1/wowfax-trace.md); [multimedia alias selection](../../../artifacts/mvdm-audit/shard-3/wow-multimedia-alias-consumer-followup.md); [bridge image binding](../../../artifacts/mvdm-audit/shard-0/wow-media-resource-image-review.md) | S40 有界收口：[证据](m0-t478-s40-multimedia-investigation.md)；真实 wave 缓冲区完成/清理、MIDI 与 MCI 打开/关闭及正常退出通过；保留 S37 回调和 S25 传真修复，不恢复 #if 0；真实传真及任意任务丢失不宣称验证 |
-| 61 | [MSCDEX guest/VDD boundary](../../../artifacts/mvdm-audit/shard-0/mscdex-package-review.md); [build input roles](../../../artifacts/mvdm-audit/shard-3/mscdex-guest-vdd-input-role-review.md) | 只保留 host 侧问题：原版 RegisterVDD/宿主 loader 和光驱调用链是否可用待证；VCDEX guest 环境位置及安装不是 S1 独立任务 |
+| 61 | [S41 VDD/optical recovery](m0-t478-s41-vdd-optical-investigation.md) | 已恢复原版 VCDEX 宿主 DLL 并接入构建/发布；真实 MSCDEXNT、挂载 ISO/空虚拟光驱、原生 TOC 对照、VDD 生命周期、Full16/16 及11镜像 Product 核验通过。保留原版未实现 API；无物理光驱/音频光盘验收，不修改 guest。 |
 
 本节的已验证子项从待修 bug 中排除；未验证不等于已解决，也不自动构成缺陷或原版接线缺失。61 只保留宿主 VDD loader 和可定位宿主能力，guest 文件路径仅作证据。
 
