@@ -6,13 +6,20 @@
 #include <pif.h>
 #include "nt_pif.h"
 #include "mvdm_softpc_firmware.h"
-/* Explicit file names and ignored config paths must not enter these providers. */
+/* Explicit file names must not enter root/default discovery. */
+static unsigned configConversions;
 int mvdm_softpc_system_find_file(const char *name,char *path,uint32_t bytes)
 {(void)name;(void)path;(void)bytes;ExitProcess(99);return 0;}
 uint32_t NtvdmGetWindowsDirectoryA(char *path,uint32_t bytes)
 {(void)path;(void)bytes;ExitProcess(99);return 0;}
 int mvdm_softpc_config_path_to_ansi(char *path,uint32_t bytes)
-{(void)path;(void)bytes;ExitProcess(99);return 0;}
+{
+    /* ASCII identity substitute: verifies the caller boundary, not conversion. */
+    if (!path || bytes != MAX_PATH+12) ExitProcess(99);
+    ++configConversions; return 1;
+}
+extern VOID GetPIFConfigFiles(BOOL config, char *path);
+extern DWORD dwWNTPifFlags;
 ULONG DosSessionId;
 BOOL bPifFastPaste;
 PIF_DATA pfdata;
@@ -36,7 +43,7 @@ static void add(const char *signature, const void *body, WORD bytes)
 }
 int main(void)
 {
-    char temp[MAX_PATH],path[MAX_PATH];DWORD written;HANDLE file;
+    char temp[MAX_PATH],path[MAX_PATH],configPath[MAX_PATH+12],autoPath[MAX_PATH+12];DWORD written;HANDLE file;
     W286PIF30 a;W386PIF30 b;WENHPIF40 w;WNTPIF31 nt;
     PIFEXTHDR header;PIF_DATA data;unsigned row;
     CHECK(GetTempPathA(MAX_PATH,temp));CHECK(GetTempFileNameA(temp,"pif",0,path));
@@ -70,5 +77,44 @@ int main(void)
         if(row==4||row==5)CHECK(WNTPifFgPr==55&&WNTPifBgPr==55);
         if(row==6)CHECK(data.SubSysId==SUBSYS_DOS);
     }
-    CHECK(DeleteFileA(path));puts("PIF_ORIGINAL_PARSER_8_ROWS_OK");return 0;
+    puts("PIF_ORIGINAL_PARSER_8_ROWS_OK");
+    /* The first call sets fast paste. Later WNT and failed-open calls keep it. */
+    memset(image,0,sizeof(image));
+    previous=sizeof(STDPIF);memcpy(image+previous,&header,sizeof(header));used=previous+sizeof(header);
+    b.PfW386Flags |= fINT16Paste;add(W386HDRSIG30,&b,sizeof(b));
+    file=CreateFileA(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_TEMPORARY,NULL);
+    CHECK(file!=INVALID_HANDLE_VALUE);CHECK(WriteFile(file,image,used,&written,NULL)&&written==used);CHECK(CloseHandle(file));
+    CHECK(GetPIFData(&data,path)&&bPifFastPaste);
+    /* Loading a WNT path retains the prior fast-paste and priority globals.
+     * The second selection is ignored, the third replaces retained paths. */
+    for(row=0;row<3;++row){
+        strcpy(nt.nt31Prop.achConfigFile,row ? "SECOND.NT" : "FIRST.NT");
+        strcpy(nt.nt31Prop.achAutoexecFile,row ? "SECOND.AUT" : "FIRST.AUT");
+        memset(image,0,sizeof(image));previous=sizeof(STDPIF);
+        memcpy(image+previous,&header,sizeof(header));used=previous+sizeof(header);
+        add(WNTEXTSIG,&nt,sizeof(nt));
+        file=CreateFileA(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_TEMPORARY,NULL);
+        CHECK(file!=INVALID_HANDLE_VALUE);CHECK(WriteFile(file,image,used,&written,NULL)&&written==used);CHECK(CloseHandle(file));
+        memset(&data,0,sizeof(data));data.IgnoreConfigAutoexec=(row==1);
+        CHECK(GetPIFData(&data,path));
+        CHECK(bPifFastPaste&&WNTPifFgPr==70&&WNTPifBgPr==40);
+        GetPIFConfigFiles(TRUE,configPath);GetPIFConfigFiles(FALSE,autoPath);
+        CHECK(!strcmp(configPath,row==2 ? "SECOND.NT" : "FIRST.NT"));
+        CHECK(!strcmp(autoPath,row==2 ? "SECOND.AUT" : "FIRST.AUT"));
+        GetPIFConfigFiles(TRUE,configPath);
+        CHECK(!strcmp(configPath,row==2 ? "SECOND.NT" : "FIRST.NT"));
+    }
+    CHECK(configConversions==9);
+    /* Denied and missing opens reset PIF_DATA defaults/flags but not history. */
+    file=CreateFileA(path,GENERIC_READ,0,NULL,OPEN_EXISTING,0,NULL);
+    CHECK(file!=INVALID_HANDLE_VALUE);
+    data.xmsdes=123;dwWNTPifFlags=0xffffffff;
+    CHECK(!GetPIFData(&data,path));CHECK(CloseHandle(file));
+    CHECK(data.xmsdes==DEFAULTXMSLMT&&dwWNTPifFlags==0&&bPifFastPaste);
+    CHECK(DeleteFileA(path));data.xmsdes=123;dwWNTPifFlags=0xffffffff;
+    CHECK(!GetPIFData(&data,path));
+    CHECK(data.xmsdes==DEFAULTXMSLMT&&dwWNTPifFlags==0);
+    CHECK(bPifFastPaste&&WNTPifFgPr==70&&WNTPifBgPr==40);
+    GetPIFConfigFiles(TRUE,configPath);CHECK(!strcmp(configPath,"SECOND.NT"));
+    puts("PIF_ORIGINAL_REPEAT_IGNORE_REPLACE_OPEN_FAILURE_OK");return 0;
 }

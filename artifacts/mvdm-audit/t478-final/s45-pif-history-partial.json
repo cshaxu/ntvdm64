@@ -1,0 +1,38 @@
+{
+  "id": "DOS16:6183631816abcfe32197",
+  "status": "partial; pending remains",
+  "predecessor": "s45-pif-parser-partial.json",
+  "runner": "build/t478-s45/run-parser-p6.ps1",
+  "runner_pid": 37536,
+  "timeouts_seconds": {
+    "build": 120,
+    "fixture": 30
+  },
+  "build_exit": 0,
+  "fixture_exit": 0,
+  "markers": [
+    "PIF_ORIGINAL_PARSER_8_ROWS_OK",
+    "PIF_ORIGINAL_REPEAT_IGNORE_REPLACE_OPEN_FAILURE_OK"
+  ],
+  "sha256": {
+    "tests/mvdm/oemuni/oemuni_pif_parser_fixture.c": "51844a861e29932eed2fecb4fdbc6ee8423c7a6add7362a94a6f257980462229",
+    "src/mvdm-host/softpc.new/host/src/nt_pif.c": "94ccb215daf9dbf46f802d64d4bd5e21e9cf02452077da93df143a08c3bf6fe8",
+    "build/.ninja/msvc-x86-release/worker/obj/host/nt_pif.obj": "fde10ba9c3ff156735c8a2cdc31457207a34c89f58e21b29eeb26bb32b643b32"
+  },
+  "new_coverage": [
+    "386 fast paste and priority retained across later WNT loads",
+    "Three WNT selections: set, ignore, replace",
+    "Repeated CONFIG lookup and paired AUTOEXEC lookup",
+    "Actual sharing-denied and missing-file open failures",
+    "Open failures reset PIF_DATA defaults and dwWNTPifFlags but retain fast paste, priority and configured paths"
+  ],
+  "limits": [
+    "ASCII config conversion is a controlled identity substitute; no product encoding-provider claim",
+    "No allocation instrumentation: values replaced, freeing verified only by source review",
+    "No default-path discovery, short-read/seek failure injection or allocation retry/IGNORE certification",
+    "Original malformed/cyclic-file behavior is not certified safe"
+  ],
+  "product_change": false,
+  "tested_fixture_sha256": "cd3df091cc27159138db199b30ff2f1d4055e2075e98764d56e2a884fb98a4b1",
+  "post_test_change": "Comment only: identify subsequent WNT calls accurately; executable statements unchanged."
+}

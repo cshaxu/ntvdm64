@@ -228,3 +228,36 @@ existing DIV-157 ownership repair, whose demonstrated original defect was
 already recorded. No new product gap has been established in this checkpoint.
 The row stays pending, as do twelve startup rows and1045 active identities.
 No product change or new publication; S45 remains the sole active S.
+
+## P6 PIF call history, retained paths and real open failures
+
+The [history receipt](../../../artifacts/mvdm-audit/t478-final/s45-pif-history-partial.json)
+extends P5's fixture against the same original production nt_pif.obj. Background
+runner37536 builds and runs with exit0, preserving P5's eight cases and adding
+PIF_ORIGINAL_REPEAT_IGNORE_REPLACE_OPEN_FAILURE_OK. The generated script and
+logs are under build/t478-s45/parser-p6; deadlines remain120/30 seconds.
+
+A386 record sets fast paste and priorities70/40. Subsequent WNT records preserve
+those globals while setting FIRST.NT/FIRST.AUT, ignoring SECOND selections,
+then replacing them when IgnoreConfigAutoexec is cleared. Every selection is
+queried twice for CONFIG and once for AUTOEXEC. This demonstrates the retained
+DIV-157 repeated-read contract and replacement values. Source review shows
+free of both prior paths before replacement allocation; this test does not
+instrument allocation/free counts or certify allocation failure.
+
+An actual exclusive native handle denies the parser's open. After releasing
+that handle, the fixture deletes the file and repeats against the missing path.
+Both calls return FALSE, restore default XMS and clear dwWNTPifFlags, while
+retaining fast paste, priorities and SECOND.NT. There is no new global reset or
+rollback. The successful file deletion also observes normal parser handle close;
+post-open read/seek failure cleanup is not exercised here.
+
+The ASCII config-path conversion boundary is a controlled identity substitute
+with capacity checks and a call count. Original ExpandEnvironmentStringsOem and
+original PIF state remain linked. This tests the retained-path owner, not the
+production ANSI converter or non-ASCII expansion. Root/default discovery still
+fails closed if entered. Default-path identity, short-read/seek partial failure
+and allocation retry/IGNORE remain pending. No product bug or missing connection
+has been demonstrated by this checkpoint; no original malformed-input tolerance
+is added. The row remains pending and S45 stays active, with unchanged counts
+and unchanged S43 release. No O:/winnt write or push.
