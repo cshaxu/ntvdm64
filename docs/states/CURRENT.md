@@ -277,3 +277,10 @@ T478 S25 [repairs original fax failure ownership](../etc/evidence/m0-t478-s25-fa
 135 focused checks, twelve mapped functions, coherent build and Full 16/16 pass.
 Exact ten-image worktree release published; external fax deployment is not claimed.
 S26/finding 58 is next under continuous owner authorization.
+
+## S26 Closure Record
+
+T478 S26 [repairs untransferred spool ownership](../etc/evidence/m0-t478-s26-spool-failure.md)
+and resolves the ClosePrinter failure-contract audit without changing CloseJob.
+89 body checks, 72 prefix checks, three real Win16 controls, coherent build and
+Full 16/16 pass; exact worktree release published. S27/finding 59 is next.

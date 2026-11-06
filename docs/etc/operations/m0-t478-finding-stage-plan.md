@@ -333,3 +333,13 @@ All twelve mapped fax functions and Registry edges bind to the frozen product.
 Coherent build, Full 16/16 and exact worktree release pass. External fax driver/UI
 deployment and arbitrary installer rollback remain outside this bounded result.
 S26/finding 58 follows.
+
+## S26 disposition
+
+[S26](../evidence/m0-t478-s26-spool-failure.md) resolves the ClosePrinter audit
+premise: both modern contract and original provider consume the handle on error,
+so CloseJob remains unchanged. Confirmed OpenJob/carrier and four loader-failure
+string leaks are repaired. Exact-body 89 checks, prefix 72 checks, ten mapped
+functions, three real Win16 controls, coherent build and Full 16/16 pass.
+Exact worktree release published. External raw-job and missing-provider limits
+remain explicit; S27/finding 59 follows.

@@ -2358,6 +2358,8 @@ ULONG FASTCALL WG32GetEnvironment(PVDMFRAME pFrame)
 
     if (!(*spoolerapis[WOW_EXTDEVICEMODE].lpfn)) {
         if (!LoadLibraryAndGetProcAddresses("WINSPOOL.DRV", spoolerapis, WOW_SPOOLERAPI_COUNT)) {
+            // MVDM-HOST-DIV-880: copied parameters remain caller-owned.
+            if (psz1) free_w(psz1);
             return (0);
         }
     }

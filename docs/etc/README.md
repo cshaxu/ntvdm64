@@ -1265,3 +1265,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S24 embedding provider contracts](evidence/m0-t478-s24-embedding-provider.md): classes-root support, original legacy string size and reserved Win16 token repair.
 
 - [T478 S25 fax failure contracts](evidence/m0-t478-s25-fax-failure.md): original list failure and installer ownership repairs with isolated provider evidence.
+
+- [T478 S26 spool failure ownership](evidence/m0-t478-s26-spool-failure.md): provider-contract correction and untransferred printer/carrier/string cleanup.

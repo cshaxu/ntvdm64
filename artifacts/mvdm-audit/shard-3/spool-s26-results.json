@@ -1,0 +1,453 @@
+{
+  "result": "pass",
+  "functions": [
+    {
+      "name": "_WG32OpenJob@4",
+      "va": 268638624,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 658,
+      "relocation_words": 39
+    },
+    {
+      "name": "_WG32CloseJob@4",
+      "va": 268638224,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 195,
+      "relocation_words": 15
+    },
+    {
+      "name": "_GetPrn16@4",
+      "va": 268638064,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 80,
+      "relocation_words": 7
+    },
+    {
+      "name": "_Prn32@4",
+      "va": 268638144,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 68,
+      "relocation_words": 5
+    },
+    {
+      "name": "_FreePrn@4",
+      "va": 268637648,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 26,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WG32GetEnvironment@4",
+      "va": 268504560,
+      "function": true,
+      "owner": "wgdi.obj",
+      "bytes": 327,
+      "relocation_words": 19
+    },
+    {
+      "name": "_WG32DeviceMode@4",
+      "va": 268517328,
+      "function": true,
+      "owner": "wgprnset.obj",
+      "bytes": 244,
+      "relocation_words": 19
+    },
+    {
+      "name": "_WG32ExtDeviceMode@4",
+      "va": 268517584,
+      "function": true,
+      "owner": "wgprnset.obj",
+      "bytes": 564,
+      "relocation_words": 32
+    },
+    {
+      "name": "_WG32DeviceCapabilities@4",
+      "va": 268516528,
+      "function": true,
+      "owner": "wgprnset.obj",
+      "bytes": 772,
+      "relocation_words": 49
+    },
+    {
+      "name": "_LoadLibraryAndGetProcAddresses@12",
+      "va": 268516448,
+      "function": true,
+      "owner": "wgprnset.obj",
+      "bytes": 75,
+      "relocation_words": 2
+    }
+  ],
+  "original_provenance": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\printscan\\print\\spooler\\spoolss\\client\\change.c",
+      "sha256": "E04C19E4474CD5F40017CC6604BF5826653A419C91273EB4C5E100C6D9328630"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wspool.c",
+      "sha256": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wspool.c",
+      "sha256": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi.c",
+      "sha256": "4C28E5166B294AC2A17982B3FF6E6559F369B8A8A2DD766AA18E16C8F74379D6"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wgdi.c",
+      "sha256": "4C28E5166B294AC2A17982B3FF6E6559F369B8A8A2DD766AA18E16C8F74379D6"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgprnset.c",
+      "sha256": "7E53074328ACE93AE8CE39FB218FA780FF868999B40F7904FDBBFF45FBD7B990"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wgprnset.c",
+      "sha256": "7E53074328ACE93AE8CE39FB218FA780FF868999B40F7904FDBBFF45FBD7B990"
+    }
+  ],
+  "fixtures": [
+    {
+      "label": "baseline",
+      "output": "FAIL failed start retires native handle\nFAIL failed carrier retires both owners\nFAIL failed carrier returns zero\nFAIL failed carrier retires both owners\nFAIL failed carrier returns zero\nFAIL failed carrier retires both owners\nFAIL failed carrier lock has defined null result\nFAIL failed mapping has defined null result and unlock\nWOW_SPOOL_FAILURE checks=82 failures=8\n",
+      "hashes": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wspool.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "F784E73EEBB9CF36558E9206F160427ED97283E85B79D8C876D8B1BA22F18223",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\baseline\\spool_exact.h"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "6C51FCCF132C0C435F2A0C70936D8451C17CE52E7EAA5BB133F7352A7D78E3A8",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\baseline\\spool-test.exe"
+        }
+      ]
+    },
+    {
+      "label": "current",
+      "output": "WOW_SPOOL_FAILURE checks=89 failures=0\n",
+      "hashes": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "5E7055D8927343C2F9C7009CBEFBF05E37087085023EFC910EDC7D4EDDFB0935",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wspool.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "6E372A5D22EDD038B240A9024F024AD442B9D507B3E220A981F117EAE70746E6",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\current\\spool_exact.h"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "6D99D26F614129C4B865EE764B339A0A2ECDE1608EEFF5FEA2B1C2FA586871D8",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\current\\spool-test.exe"
+        }
+      ]
+    },
+    {
+      "label": "loader-baseline",
+      "output": "FAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nFAIL failed load releases copied parameters\nWOW_SPOOL_LOADER_FAILURE checks=72 failures=15\n",
+      "hashes": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "DEE0A0ECF5F73C013DC97D2CBAF12B85A56257038D3CE98E4A31AC11363BFA75",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wgdi.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "CE61C0D318227AA3CC0D9CF453AC5CD88F8B49C7E7CAFF8EAC7508F753113B86",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wgprnset.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "F21BEF9E14E4B76091174B94543C2A5EE0D80282FF4B30110F55133EDDD6C556",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\loader-baseline\\loader_prefixes.h"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "8A3FF3CE3E82FC9FC6B0A2D22D3272908370722E8153018EB1F6503B4AC44BF8",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\loader-baseline\\loader-test.exe"
+        }
+      ]
+    },
+    {
+      "label": "loader-current",
+      "output": "WOW_SPOOL_LOADER_FAILURE checks=72 failures=0\n",
+      "hashes": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "DA0ADA479CA88DCD5F2D53781DC4F66197C805447CCDCD0A3CA49463D68D1A6B",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wgdi.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "F891A6315CDC234C85B17AA7B784B9DFCE0703E85C7E924F7E78B3EE5D0C86FD",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wgprnset.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "43C62CE7F4D3F0B51FE0C27F0C66D436E38D8EEC6A5912327A111B453B40A7BD",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\loader-current\\loader_prefixes.h"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "A6122D64494B49E4879BEEF960ACF79AC3B83C3F9DF2386AD05A4B5913D66793",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\loader-current\\loader-test.exe"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build\\t478-s26\\package-final\\system32\\WOW32.DLL",
+      "sha256": "162AF9E8B54D30E5981551C3A41D32A70686FDB2E383EB37F9B27B313024FD78"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "A8C4DA5026DB03DC8FA6163362AC3CDC3FE8ED3FDE844BB1D982C79466854017"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "C08EF7C927EA707FE055AE11EDE9DE66B33F4E62A511AC9BF36BE10C9387CFF8"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wspool.c",
+      "sha256": "5E7055D8927343C2F9C7009CBEFBF05E37087085023EFC910EDC7D4EDDFB0935"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wspool.obj",
+      "sha256": "27083390CA502F0D8C07F349999651E36689F09CCC2543265E7B9C79F1914E99"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wgdi.c",
+      "sha256": "DA0ADA479CA88DCD5F2D53781DC4F66197C805447CCDCD0A3CA49463D68D1A6B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgdi.obj",
+      "sha256": "15329A97188BFBEF35BEFFA961AF4630A7F0D85659BFF3CD844A1C689CECA389"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wgprnset.c",
+      "sha256": "F891A6315CDC234C85B17AA7B784B9DFCE0703E85C7E924F7E78B3EE5D0C86FD"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgprnset.obj",
+      "sha256": "2DF1C279BCBFCC81224D78BA186F6371D7506EA098A42E63F4E6876C1D3551C1"
+    }
+  ],
+  "close_contract": "https://learn.microsoft.com/en-us/windows/win32/printdocs/closeprinter",
+  "limitations": "Extracted bodies/prefixes use isolated providers. Static image binding does not execute a native raw job. CloseJob and shared loader are unchanged.",
+  "system_spooler_exports": {
+    "path": "C:\\WINDOWS\\SysWOW64\\winspool.drv",
+    "sha256": "66A0A2FE993B36D103ED533FB25CFB2814312BF65D0AEFA05666B51934BDDBA3",
+    "present": [
+      "EXTDEVICEMODE",
+      "DEVICEMODE",
+      "DEVICECAPABILITIES",
+      "OpenPrinterA",
+      "StartDocPrinterA",
+      "StartPagePrinter",
+      "EndPagePrinter",
+      "EndDocPrinter",
+      "ClosePrinter",
+      "WritePrinter",
+      "DeletePrinter",
+      "GetPrinterDriverDirectoryA",
+      "AddPrinterA",
+      "AddPrinterDriverA",
+      "AddPortExA"
+    ],
+    "limitation": "Static current-host x86 export availability only; not raw printer execution or missing-export tolerance."
+  },
+  "guest_controls": [
+    {
+      "case": "raw-spool-profile",
+      "result": "PASS raw OpenJob reaches original explicit no-profile failure without host configuration\n",
+      "report": {
+        "openJob": 0,
+        "closeJob": 0
+      },
+      "inputs": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\win16_raw_spool_probe.asm",
+          "Hash": "931E38723BD1CA6CA526703CF07494F9DAC8483BA2A9EECA926FABD95622BCA6"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\guest-raw-spool-profile\\RAWPROBE.EXE",
+          "Hash": "43E20CBE4F69986391B3186F39BA29FC157E67AE27ACA0D6FA40485ED9300C57"
+        },
+        {
+          "Path": "O:\\tmp\\n32d\\system32\\WOW32.DLL",
+          "Hash": "162AF9E8B54D30E5981551C3A41D32A70686FDB2E383EB37F9B27B313024FD78"
+        }
+      ]
+    },
+    {
+      "case": "printdlg-default",
+      "result": "PASS original Win16 PrintDlg default conversion and returned-handle retirement witness\n",
+      "report": {
+        "result": 1,
+        "extendedError": 0,
+        "devMode": 6110,
+        "devNames": 6102,
+        "freeDevMode": 0,
+        "freeDevNames": 0
+      },
+      "inputs": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\win16_printdlg_default_probe.asm",
+          "Hash": "4020B532C10FA44BBC8CE67089C2860C64B2134864B3A43841C3A3FC5BFA0713"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\guest-printdlg-default\\PDGPROBE.EXE",
+          "Hash": "1F82AFB1E02925942BBA5476C84AC8D810C755E74FDF6CDCEA7CF74A0B750338"
+        },
+        {
+          "Path": "O:\\tmp\\n4fd\\system32\\WOW32.DLL",
+          "Hash": "162AF9E8B54D30E5981551C3A41D32A70686FDB2E383EB37F9B27B313024FD78"
+        }
+      ]
+    },
+    {
+      "case": "printdlg-cancel",
+      "result": "PASS original Win16 PrintDlg hook cancellation and ProcInstance retirement witness\n",
+      "report": {
+        "result": 0,
+        "extendedError": 0,
+        "hooks": 1,
+        "freed": 1
+      },
+      "inputs": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\win16_printdlg_cancel_probe.asm",
+          "Hash": "4197398204C04584D136C7F6E3DC08099971CDF9F4CF6CE43E91699273B84941"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s26\\guest-printdlg-cancel\\PDCANCEL.EXE",
+          "Hash": "23028B9EB20FB22F6FB0B5CA63E6CC624589F80E00FBD7B2EE6A4291C1B1D5B6"
+        },
+        {
+          "Path": "O:\\tmp\\n304\\system32\\WOW32.DLL",
+          "Hash": "162AF9E8B54D30E5981551C3A41D32A70686FDB2E383EB37F9B27B313024FD78"
+        }
+      ]
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 412371,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3562,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1416,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 292,
+        "CleanupMs": 462,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66880,
+        "CleanupMs": 515,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 51642,
+        "CleanupMs": 563,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 48415,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16642,
+        "CleanupMs": 528,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13042,
+        "CleanupMs": 489,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 92216,
+        "CleanupMs": 519,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13192,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27778,
+        "CleanupMs": 500,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30237,
+        "CleanupMs": 608,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 8016,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7743,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10155,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4403,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6784,
+        "CleanupMs": 483,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": "PASS ten-image worktree release package=c701c3dd-9acd-4070-b08b-9ef0acd5021b; backup=build/t478-s26/release-before; no O:/winnt write\n"
+}

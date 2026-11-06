@@ -1,5 +1,10 @@
 # M0 T468 S3 — printing and spool retirement disposition
 
+**T478 S26 provider resolution:** ClosePrinter consumes a valid native handle
+on both success and failure. FreePrn after a nonzero close error is therefore
+correct; the earlier uncertainty below is resolved without changing CloseJob.
+See [S26 failure ownership](m0-t478-s26-spool-failure.md).
+
 **Later source correction:** The success-only `FreePrn` description below is incorrect. `WG32CloseJob` calls `FreePrn` whenever `ul` is nonzero; a failed `ClosePrinter` with a nonzero `GetLastError()` also takes that branch. The provider's actual failure and handle-ownership behavior have not been reproduced. See the [T473 spool loader and caller review](../../../artifacts/mvdm-audit/shard-3/wow-spool-loader-callers-review.md).
 
 ## Scope and sources

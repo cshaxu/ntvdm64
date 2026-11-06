@@ -88,6 +88,9 @@ ULONG FASTCALL   WG32DeviceMode (PVDMFRAME pFrame)
 
     if (!(*spoolerapis[WOW_DEVICEMODE].lpfn)) {
         if (!LoadLibraryAndGetProcAddresses("WINSPOOL.DRV", spoolerapis, WOW_SPOOLERAPI_COUNT)) {
+            // MVDM-HOST-DIV-880: copied parameters remain caller-owned.
+            if (psz3) free_w(psz3);
+            if (psz4) free_w(psz4);
             return (0);
         }
     }
@@ -173,6 +176,10 @@ ULONG FASTCALL   WG32ExtDeviceMode (PVDMFRAME pFrame)
 
     if (!(*spoolerapis[WOW_EXTDEVICEMODE].lpfn)) {
         if (!LoadLibraryAndGetProcAddresses("WINSPOOL.DRV", spoolerapis, WOW_SPOOLERAPI_COUNT)) {
+            // MVDM-HOST-DIV-880: copied parameters remain caller-owned.
+            if (psz4) free_w(psz4);
+            if (psz5) free_w(psz5);
+            if (psz7) free_w(psz7);
             return (0);
         }
     }
@@ -306,6 +313,9 @@ ULONG FASTCALL   WG32DeviceCapabilities (PVDMFRAME pFrame)
         if (!LoadLibraryAndGetProcAddresses("WINSPOOL.DRV", 
                                             spoolerapis, 
                                             WOW_SPOOLERAPI_COUNT)) {
+            // MVDM-HOST-DIV-880: copied parameters remain caller-owned.
+            if (psz1) free_w(psz1);
+            if (psz2) free_w(psz2);
             return (0);
         }
     }

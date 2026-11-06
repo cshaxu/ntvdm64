@@ -1,5 +1,12 @@
 # S10 shard 3: shared spool loader callers and raw-job failure boundaries
 
+**T478 S26 correction:** Failed ClosePrinter does not preserve a valid native
+handle. The modern contract and original OpenNT client both consume it even
+when the provider reports an error, so the nonzero-error FreePrn path is retained.
+[S26 evidence](../../../docs/etc/evidence/m0-t478-s26-spool-failure.md) supersedes
+that suspected defect and records verified untransferred-resource repairs.
+The source-only review below is preserved as audit history.
+
 Read-only source analysis extending `wow-print-setup-failure-review.md`. Original `wspool.c` SHA-256 `C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8`; `wgdi.c` `4C28E5166B294AC2A17982B3FF6E6559F369B8A8A2DD766AA18E16C8F74379D6`. Cached WOW32 map includes `WG32OpenJob`, `WG32CloseJob`, `WG32GetEnvironment`, shared loader; its PE executable sections match the current release/installed DLL as recorded in `wow-generic-thunk-published-binding.md`. No device, guest or failure-injection execution was performed.
 
 ## Original responsibilities

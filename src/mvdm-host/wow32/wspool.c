@@ -93,9 +93,14 @@ ULONG FASTCALL   WG32OpenJob (PVDMFRAME pFrame)
 
             if (ul = (*spoolerapis[WOW_StartDocPrinterA].lpfn) (hnd, 1, (LPBYTE)&DocInfo1)) {
                 ul = GetPrn16(hnd);
+                // MVDM-HOST-DIV-880: no caller owns a failed carrier.
+                if (!ul) {
+                    (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);
+                }
             }
             else {
                 ul = GetLastError();
+                (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);
             }
 
         }
@@ -227,12 +232,15 @@ ULONG FASTCALL   WG32DeleteJob (PVDMFRAME pFrame)
 WORD GetPrn16(HANDLE h32)
 {
     HANDLE  hnd;
-    HAND16  h16 = 0;
     VPVOID  vp;
     LPBYTE  lpMem16;
 
     hnd = LocalAlloc16(LMEM_MOVEABLE, sizeof(HANDLE), (HANDLE) gUser16hInstance);
 
+    // MVDM-HOST-DIV-880: publish only an initialized carrier.
+    if (!hnd) {
+        return 0;
+    }
     vp = LocalLock16(hnd);
 
     if (vp) {
@@ -241,20 +249,23 @@ WORD GetPrn16(HANDLE h32)
             *((PDWORD16)lpMem16) = (DWORD) h32;
             FREEMISCPTR(lpMem16);
             LocalUnlock16(hnd);
+            return (LOWORD(hnd));
         }
+        LocalUnlock16(hnd);
     }
     else {
         LOGDEBUG (0, ("WOW::GETPRN16: Can't allocate a 16 bit handle\n"));
     }
 
-    return (LOWORD(hnd));
+    LocalFree16(hnd);
+    return 0;
 }
 
 
 HANDLE Prn32(WORD h16)
 {
     VPVOID  vp;
-    HANDLE  h32;
+    HANDLE  h32 = NULL; // MVDM-HOST-DIV-880: failed lock has no handle.
     LPBYTE  lpMem16;
 
     vp = LocalLock16 ((HANDLE) MAKELONG(h16, gUser16hInstance));
