@@ -1313,3 +1313,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S8/S9 shared import and display repair](operations/m0-t479-s8-s9-import-plan.md).
 
 - [T479 S8 unchanged shared-library delivery](evidence/m0-t479-s8-shared-delivery.md).
+- [T480 S1 admission](evidence/m0-t480-s1-admission.md): independent worktree and baseline; main task reserved.
+- [T480 mirror-diff stage plan](operations/m0-t480-mirror-diff-plan.md): finite host C/H difference review and minimization.
