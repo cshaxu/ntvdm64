@@ -82,7 +82,7 @@
 | 21 | [BIOS integrations](m0-t478-s34-bios-integration.md) | S34 修复原版 D11 从 PIC EOI 端口错误：74 项实际 PIC 检查、原 guest 向量、BIOS/EMS 及 IRQ 回归通过；Full 16/16、工作树发布完成。RTC 专项仍属 S35，不宣称全文件行为覆盖 |
 | 27 | [BIOS memory and RTC](m0-t478-s35-rtc-investigation.md) | S35：实测可变 INT12、原版 ROM 异步/同步等待、闹钟 INT4A 与 IRQ/EOI 及状态恢复通过；取消后 busy 残留登记为原版 guest 限制。备用 host BOP70 计数缺陷保留为非正常路径限制，不宣称已修复；产品和发布包不变 |
 | 32 | [IOS and CCPU port owners](../../../artifacts/mvdm-audit/ios-owner-review.md) | 部分已验证：原版 IOS port 拆分/整端口解绑是原始契约，70 项受控检查通过；未发现因此缺失原版接线 |
-| 35 | [WOW shell, hooks and subclassing](../../../artifacts/mvdm-audit/shard-0/wow-shell-hook-image-review.md) | 部分已接入：原版 shell/hook/subclass 函数有历史镜像绑定；真实 callback 嵌套与退出未证明 |
+| 35 | [WOW shell, hooks and subclassing](m0-t478-s36-shell-hook-investigation.md) | S36：真实 Shell 子进程/返回、CBT 嵌套/否决/显式与遗留 hook 退出通过；原版清理真实 USER hook、槽隔离/复用及 subclass 生命周期通过，84 个当前函数绑定；无产品缺口，未增加容错 |
 | 38 | [WINOLDAP guest module](../../../artifacts/mvdm-audit/shard-1/guest-winoldap-owner-review.md) | 部分已验证：O:/w31/SYSTEM 有另一版本 WINOLDAP.MOD；T445 在测试包用原版控制文件验证了 Win16/native/Win16 返回，实际加载身份仍未确定 |
 | 40 | [DDEML](../../../artifacts/mvdm-audit/shard-2/ddeml-owner-boundary.md); [WINMM callback](../../../artifacts/mvdm-audit/external-winmm-callback-boundary.md) | 部分已完成：T465 已实测经典 WM_DDE_* 正常会话和任务退出，T466 已证明同步 WINMM 桥；DDEML guest 实际 owner、异步 WINMM 设备未证实 |
 | 44 | [WRITE image identity](../../../artifacts/mvdm-audit/shard-2/win16-write-guest-review.md); [OLE server image](../../../artifacts/mvdm-audit/shard-0/ole-server-image-review.md) | 部分已完成：T475 S5 已在真实 Win16 WRITE 连续两次编辑、保存和退出并验证输出文件；OLE server 实际身份/路径及其他功能仍未核对 |

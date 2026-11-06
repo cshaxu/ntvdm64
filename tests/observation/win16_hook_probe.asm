@@ -104,6 +104,9 @@ call destroy_button
 jmp last_done
 bad_last: inc word [errors-data]
 last_done:
+%ifdef HOOK_LEAVE_INSTALLED
+jmp hook_left_installed
+%endif
 push word [hook-data+2]
 push word [hook-data]
 api 7                        ; UnhookWindowsHookEx
@@ -116,6 +119,7 @@ push word [proc-data+2]
 push word [proc-data]
 api 8                        ; FreeProcInstance
 mov word [freed-data],1
+hook_left_installed: ; Original task exit owns removal in the retirement variant.
 mov word [phase-data],4
 jmp finish
 failed:

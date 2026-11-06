@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','page-domain','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('original-hook-cleanup','task-lifecycle','process-retirement','menu-cleanup','menu-resource','page-domain','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [switch]$InitRollback,
     [switch]$CreationUnwind,
     [switch]$RetirementLockProbe,
@@ -186,8 +186,10 @@ foreach ($object in $fixtureSupportObjects) {
     }
 }
 $fixtureLibraries = @(
-    'worker-base.lib', 'common-root.lib', 'common-rpc.lib', 'lib-rpc.lib',
-    'common-native-hook-installer.lib', 'common-native-hook-context.lib', 'lib-process-hook.lib', 'lib-handle.lib',
+    'worker-base.lib', 'ntvdm-vm-frontend.lib', 'common-frontend-base.lib',
+    'base-rpc-client-core.lib', 'base-rpc-client-launch.lib',
+    'common-root.lib', 'common-rpc.lib', 'lib-rpc.lib',
+    'common-native-hook-installer.lib', 'common-native-hook-context.lib', 'lib-process-hook.lib', 'lib-process-image.lib', 'lib-handle.lib',
     'lib-file.lib', 'lib-crt-compat.lib', 'common-worker-thread.lib', 'lib-thread.lib',
     'lib-pipe.lib','lib-process-observation.lib','lib-file.lib', 'common-codec.lib', 'common-console.lib',
     'opennt-base-client.lib', 'opennt-base-bindings.lib', 'common-base-srv-bindings.lib', 'broker-transport.lib', 'common-base-srv-transport.lib',
@@ -224,6 +226,7 @@ Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))
 $fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
 Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_task_lifecycle.obj'
 $fixtureName = if ($Case -eq 'class-client') { 'wow_class_client_fixture.c' } else { 'wow_user_task_lifecycle_fixture.c' }
+if ($Case -eq 'original-hook-cleanup') { $fixtureName = 'wow_original_hook_cleanup_fixture.c' }
 if ($Case -eq 'class-lifetime') { $fixtureName = 'wow_window_class_lifetime_fixture.c' }
 if ($Case -eq 'process-retirement') { $fixtureName = 'wow_process_retirement_fixture.c' }
 if ($Case -eq 'native-dispatch-gate') {
@@ -315,7 +318,8 @@ if ($Case -eq 'page-domain') {
         (Get-FileHash -LiteralPath (Join-Path $out 'fixture.obj')).Hash) {
         throw 'Worker page-domain fixture copy did not preserve its object bytes'
     }
-} elseif ($Case -eq 'thunk-scope') { Invoke-Build ($fixture + ' /we4113 /we4047') }
+} elseif ($Case -eq 'original-hook-cleanup') { Invoke-Build $fixture }
+elseif ($Case -eq 'thunk-scope') { Invoke-Build ($fixture + ' /we4113 /we4047') }
 else { Invoke-Build ($fixture.Replace('/Gz', '/Gd')) }
 $staticImports = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\worker-static-imports.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_worker_static_imports.c"')
 if ($staticImports -eq $compile) { throw 'Static import substitution failed' }
@@ -1119,4 +1123,5 @@ if ($Case -eq 'native-nested') {
         throw 'Receiver window destroyed during the native call did not preserve return ownership'
     }
 }
+if ($Case -eq 'original-hook-cleanup' -and !($fixtureOutput -match '^WOW_ORIGINAL_HOOK_CLEANUP errors=0 removed=1 foreign_preserved=1 failed_unhook_cleared=1 reusable=1$')) { throw 'Original hook cleanup assertions missing' }
 Write-Output ("WOW_FIXTURE_OK case=" + $Case)

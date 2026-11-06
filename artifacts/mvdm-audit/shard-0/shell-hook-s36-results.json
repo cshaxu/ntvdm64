@@ -1,0 +1,1410 @@
+{
+  "status": "bounded-verification-complete",
+  "package": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+  "product_changed": false,
+  "runs": {
+    "shell-adapter": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\shell-adapter\\adapter-input.json": "0D7AC1D81CD61FE7357A7032FDDF26CFCEEEED53B9F7F3E298DC82889D54917D",
+        "build\\t478-s36\\shell-adapter\\adapter-process.json": "AD38CF90E70E7D15D2EFB6BA9AD4648B143186B12B6DD1D37E308AB9FDE9E916",
+        "build\\t478-s36\\shell-adapter\\adapter.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-adapter\\adapter.out": "AB6166E46260493E5ABD1D42FAD19428E74D0A8D5DE8A016FD89B453D8AF6B28",
+        "build\\t478-s36\\shell-adapter\\compile-process.json": "43AE8243FF83E479328733F0308EC897700112DBB9B6874C48807A93BD188438",
+        "build\\t478-s36\\shell-adapter\\compile.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-adapter\\compile.out": "7251FDB2DB09E3BC9005362070F899EC32FC7DB2D5D0844A7A57826A2C8FF4C9",
+        "build\\t478-s36\\shell-adapter\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\shell-adapter\\inputs.json": "A5B9DA64A363C7EBCFD4D1FA2F128F7A6EF9F7B02EE798EF2A75E7815EBB8789",
+        "build\\t478-s36\\shell-adapter\\probe-process.json": "1249E2C6DC2A812706CCECB97D213263546F320B950DCD0875C5F9D29CE7DA56",
+        "build\\t478-s36\\shell-adapter\\probe.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-adapter\\probe.out": "5194DA23B00BCA544A03767E17921577307A6C46FF439947C4CA35749D41B5AC"
+      },
+      "result": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=18516\ncallback thread=18516 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter/native-fallback.txt\" result=2\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c2d000688025cf00\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=18516 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter/native-fallback.txt\" result=42\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c2d000688025cf00\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=18516 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter/native-fallback.txt\" result=43\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c2d000688025cf00\ncase=2 result=43 error=6 calls=1 foreign_thread=0\nPASS actual adapter exception propagation and inner/outer TLS restoration\nPASS actual adapter old two-argument callback and nested invocation\nPASS modern WOWShellExecute synchronous callback and success/failure result\n"
+    },
+    "shell-unwind": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\shell-unwind\\adapter-input.json": "0D7AC1D81CD61FE7357A7032FDDF26CFCEEEED53B9F7F3E298DC82889D54917D",
+        "build\\t478-s36\\shell-unwind\\adapter-process.json": "95A0E5296F657C9B2B5A1673FD6794797FB3C71216E642AF778ACB54523C0380",
+        "build\\t478-s36\\shell-unwind\\adapter.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-unwind\\adapter.out": "AB6166E46260493E5ABD1D42FAD19428E74D0A8D5DE8A016FD89B453D8AF6B28",
+        "build\\t478-s36\\shell-unwind\\compile-process.json": "908757188255C7EA044CCE8E9FD82C7C19AB2D79CC0C9A44C875527A00449A3F",
+        "build\\t478-s36\\shell-unwind\\compile.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-unwind\\compile.out": "7251FDB2DB09E3BC9005362070F899EC32FC7DB2D5D0844A7A57826A2C8FF4C9",
+        "build\\t478-s36\\shell-unwind\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\shell-unwind\\inputs.json": "06184BE964817D8A664A23DF9CA3278A30188D18727BD94399BEE93F21B2AABF",
+        "build\\t478-s36\\shell-unwind\\probe-process.json": "8F03529405903F40E27A28A6A521A0FBA8A089D2331F3D5C6C0D87EEF132127B",
+        "build\\t478-s36\\shell-unwind\\probe.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-unwind\\probe.out": "1C243CF2DE8F48861D8C839BC7034E39599FF7A5F88A483759496F8B68114A69"
+      },
+      "result": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=22184\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=2\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=42\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=43\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d444 access=0 address=00000000\nfirst-chance: 000006ba e4470003\nPASS outer API exception boundary and restored callback TLS\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=2\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\nPASS provider invoked again after outer unwind\ncase=2 result=2 error=6 calls=1 foreign_thread=0\nPASS actual adapter old two-argument callback and nested invocation\nPASS modern WOWShellExecute synchronous callback and success/failure result\n"
+    },
+    "hook-binding": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\hook-binding\\compile.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\hook-binding\\compile.process.json": "FF11486F78DDEA4C13EDA9FBB80484E944541F590A34AB699F859DDED9B0A0E1",
+        "build\\t478-s36\\hook-binding\\compile.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\hook-binding\\compile.stdout.txt": "FF291D3E36A2AA9A83BF073F69A5E3A286964B21FD1C87652700C7AB968978B3",
+        "build\\t478-s36\\hook-binding\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\hook-binding\\fixture.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\hook-binding\\fixture.process.json": "DC41AAE93C92E837C0CE12487C28AEB3FF481D25271A8A7D854828219B9D43A1",
+        "build\\t478-s36\\hook-binding\\fixture.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\hook-binding\\fixture.stdout.txt": "3ACA52BB5A5AF691DA51380C086053162A2F9F34C60DE1C2B34662F38A67309A",
+        "build\\t478-s36\\hook-binding\\inputs.csv": "78EDC7EF7D0B4E990229E7649ABA2CB1D9BB7EC465BB259AF1D7C52950DF5436",
+        "build\\t478-s36\\hook-binding\\limits.txt": "AF82E148B19CBD33773D3050ACA4E376E5BFACB293F68D7317F1FE97A1F1DEF2"
+      },
+      "result": "WOW_HOOK_NATIVE_BOUNDARY errors=0 calls=24 local=17 global=1 invalid=1 null=1 mismatch=1 callback=1 dead=1 foreign=1 handles=108/108\n"
+    },
+    "guest-shell": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\guest-shell\\assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\assemble.process.json": "98F2155DDC069F66B5C94DF88D7DE904D1AA9D07FABD78044AD604A96943F4BF",
+        "build\\t478-s36\\guest-shell\\callbacks.txt": "86432708334D4833D1D39E72A34F90873D296B6554339A52C45DBC0601DD1F79",
+        "build\\t478-s36\\guest-shell\\child-assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\child-assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\child-assemble.process.json": "70E6962B54EC18CB3BC21DB5A76D74A7AD1883549A895BB9A5481919CB64C7AC",
+        "build\\t478-s36\\guest-shell\\environment-shape.csv": "B18E706F693319BF86A9C27E8CC8F2E5EEC4DB8DC86B38D9FB9B73B78686E74E",
+        "build\\t478-s36\\guest-shell\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\guest-shell\\guest-report.json": "143126D2789AD0D8A4ABFB5A220F011274B2AEA8A4B113F55D3131B22A5F6D77",
+        "build\\t478-s36\\guest-shell\\inputs.csv": "953CDA84337E451C4F75F4E36BFF1F4053C580D247B2EA6CE45D1C4B30DF7311",
+        "build\\t478-s36\\guest-shell\\manifest.json": "55C678FED490362B7239192B541944A958BAB6607E8748DA96CC07282B770E0D",
+        "build\\t478-s36\\guest-shell\\observer.process.json": "B81E10CCDD11A009E504427ED6E74BFDA7236C7FD3CBE9C5BCF27254D3A53619",
+        "build\\t478-s36\\guest-shell\\observer.txt": "FF092F0E55BC1EDCB7A56D935C9EC3D294C51696792B3FBD5D3CD0C76F923326",
+        "build\\t478-s36\\guest-shell\\observer.txt.command-line.txt": "D89BE8EF96253DA54D4A2A4F05EE2B973BB395A320B1C2EB249E27B8E62FD4A6",
+        "build\\t478-s36\\guest-shell\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s36\\guest-shell\\observer.txt.initial-console.txt": "E6EF62019017D41C11ED43608F026DA295696C61E9A383F927FABBDFD5C802E0",
+        "build\\t478-s36\\guest-shell\\result.txt": "A250F3009A0294D80EB0B99DDF5623C4FA931DFDE11F4EF80F72FD9C355EB401",
+        "build\\t478-s36\\guest-shell\\runner-context.json": "AC219EF08F1363BA3CF2F28BEBB944A040518BBF7C309B65C28216329C615808",
+        "build\\t478-s36\\guest-shell\\runtime-inputs.csv": "F11A5FD0391BA96E3A39075B47832304C22D0C5AEDC4988493191049C58BF13E",
+        "build\\t478-s36\\guest-shell\\token.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\token.out": "A45B63410F859BD6C6BCC96D0D9E07652B9DE7CD39CA8237B741C72B3DE94BAB",
+        "build\\t478-s36\\guest-shell\\token.process.json": "A8A726C2D8E7A7A9718521E868961F9E2D3B37DD6C953AC2CB7900CEEDAEBBA7",
+        "build\\t478-s36\\guest-shell\\windows.txt": "F4FA820C013AD9982280607DF35449E0ABFF1B56878666ACB20A39795426CA35"
+      },
+      "result": "PASS actual guest ShellExecute success/failure, child execution and parent continuation\n"
+    },
+    "guest-hook": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\guest-hook\\assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook\\assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook\\assemble.process.json": "C8F9AE6CE45827753381905BBD518F7EB9330EED709A45E654F499BB65F87EFD",
+        "build\\t478-s36\\guest-hook\\callbacks.txt": "1272F6B40850764E3E8A7A77F061435DABC4FB3664C96593C187015923EAAB74",
+        "build\\t478-s36\\guest-hook\\environment-shape.csv": "BBE0BC104EBA3B6E6FE18D653B02A7290BD3EDC469935506D8986098A54CA9D3",
+        "build\\t478-s36\\guest-hook\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\guest-hook\\guest-report.json": "841B52BDEF5E7B03108F3E63A2ACA636DD263A7917C1D4460B199C5536ECB103",
+        "build\\t478-s36\\guest-hook\\inputs.csv": "D38A53AA11CC17024A7FA94810A59CABE957FDCE032B53ECA7B8DB48288B74BD",
+        "build\\t478-s36\\guest-hook\\manifest.json": "CE281D119821D030F754E2E2121047CA3586B3798E0DDCB039E526C7A437F780",
+        "build\\t478-s36\\guest-hook\\observed-classes.json": "9CA1B1FB3628A4703179798AB9E210DD6E2681B3624FAEB92CEE20C4A09A3FB8",
+        "build\\t478-s36\\guest-hook\\observer.process.json": "140EEA04AE82AFEE079F8C69B4371F20F7CC0D3006A8BD22E188A50E3505371A",
+        "build\\t478-s36\\guest-hook\\observer.txt": "A9C61E9F9059A713D7E8D8A353394CC88E3E7DEDFCBEE32E619F38CFEFC31242",
+        "build\\t478-s36\\guest-hook\\observer.txt.command-line.txt": "CEE7C8325AAA49D68C20ACB32D12D4363D508067CDF92A79B02E669D8508C548",
+        "build\\t478-s36\\guest-hook\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s36\\guest-hook\\observer.txt.initial-console.txt": "428294F01DEE59C3E13BAF7301BB162188EA3A9667FC93207EE90F178CA055D5",
+        "build\\t478-s36\\guest-hook\\result.txt": "C26FD90632DF5F3ECB944807E82D2C4C57F5A81FAB7ACBF2C597665ADC8DB0DD",
+        "build\\t478-s36\\guest-hook\\runner-context.json": "AC219EF08F1363BA3CF2F28BEBB944A040518BBF7C309B65C28216329C615808",
+        "build\\t478-s36\\guest-hook\\runtime-inputs.csv": "F7E45D31A070357D66471AC38E6639CA4F85EC74F0371072DBA51D231E9CF368",
+        "build\\t478-s36\\guest-hook\\token.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook\\token.out": "A45B63410F859BD6C6BCC96D0D9E07652B9DE7CD39CA8237B741C72B3DE94BAB",
+        "build\\t478-s36\\guest-hook\\token.process.json": "748CCBB3C516A1A5F967A9AAD91E879219B22B7E95F5FA8A85FB715E9F00CCAA",
+        "build\\t478-s36\\guest-hook\\windows.txt": "267DCA9A851DB4B2B6EA27EA991DE2C36E8535C7A039E52D3C620A4A071910D7"
+      },
+      "result": "PASS real Win16 CBT query/nested creation/veto/recovery/unhook and launcher completion\n"
+    },
+    "guest-hook-exit2": {
+      "exit": "0",
+      "result": "PASS real Win16 CBT left installed until task exit; normal launcher completion (slot state requires separate owner proof)\n",
+      "files": {
+        "build\\t478-s36\\guest-hook-exit2\\assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook-exit2\\assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook-exit2\\assemble.process.json": "7C1DF9AF86CF72D540AACB525AF4C781846DDCBC17EF6E241D1B5DCE388742E8",
+        "build\\t478-s36\\guest-hook-exit2\\callbacks.txt": "C615EDD124E4436D2F14BD46E761D67B680F16E8434ED411497F8BE583575613",
+        "build\\t478-s36\\guest-hook-exit2\\environment-shape.csv": "9A8EA3CBEB7722CE3BC6348F327F95418C1EDDECB9E1E384513103A2E1CF5393",
+        "build\\t478-s36\\guest-hook-exit2\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\guest-hook-exit2\\guest-report.json": "D4F448D3C6835A24F35FDF17D1C5F2EC9D6AB3EB1F9246BFDC0E1F911BF8C0CA",
+        "build\\t478-s36\\guest-hook-exit2\\inputs.csv": "553DAF320B8134219CFF057B72EAF9A8D07DEA3959BFC5484B4B21E0D583F968",
+        "build\\t478-s36\\guest-hook-exit2\\manifest.json": "F04B74D91D0217312C02FF97C1E4CE68BFD5535E1D1C8643B1C44918229DA006",
+        "build\\t478-s36\\guest-hook-exit2\\observed-classes.json": "9CA1B1FB3628A4703179798AB9E210DD6E2681B3624FAEB92CEE20C4A09A3FB8",
+        "build\\t478-s36\\guest-hook-exit2\\observer.process.json": "0D6DF89FCAAE81D8EFB771C7BCE9246B8089B993DFB027EDE68D9756111E203D",
+        "build\\t478-s36\\guest-hook-exit2\\observer.txt": "1983EFD255E5DE82450F90D364FA8A377301CFDF52AD46A7287093D7292E2EEB",
+        "build\\t478-s36\\guest-hook-exit2\\observer.txt.command-line.txt": "799F3117C9B5B886D475FDBD5F6D740527631F7F4B3EDD52B1EA7ABA0BE4A5C6",
+        "build\\t478-s36\\guest-hook-exit2\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s36\\guest-hook-exit2\\observer.txt.initial-console.txt": "C6E982751E42190A09F75381EA5D2E5AB3C6113F92F5874C81309A1CD00A7D02",
+        "build\\t478-s36\\guest-hook-exit2\\result.txt": "48AB84CDBC7315B0D77B1E1059740A41EC67D96B0E6114691AB49336F12BF68B",
+        "build\\t478-s36\\guest-hook-exit2\\runner-context.json": "26D3ED5014BF521993158DA3DB93CF2CE7BFE71605638F3474AAB7F7B2A3E7D2",
+        "build\\t478-s36\\guest-hook-exit2\\runtime-inputs.csv": "A6A7E8C5DA41F7B34171566C7EF921776766E1DCF74FF728741A326CDC5F9E3D",
+        "build\\t478-s36\\guest-hook-exit2\\token.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook-exit2\\token.out": "A45B63410F859BD6C6BCC96D0D9E07652B9DE7CD39CA8237B741C72B3DE94BAB",
+        "build\\t478-s36\\guest-hook-exit2\\token.process.json": "3F770FAF2511A250D73A9D5C74ACA57208FA3A51A07D533C33A56431F47A576C",
+        "build\\t478-s36\\guest-hook-exit2\\windows.txt": "024FF426B916C05190B7BB6C0754FE891592EC6766E2064160AA20F5B85E64C6"
+      }
+    },
+    "original-hook-cleanup3": {
+      "exit": "0",
+      "result": "WOW_ORIGINAL_HOOK_CLEANUP errors=0 removed=1 foreign_preserved=1 failed_unhook_cleared=1 reusable=1\n",
+      "files": {
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-1.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-1.process.json": "865EEE7886A6AB93FFC00742C07FAB4857F3589AC21B61391CDB26AE2CC48C80",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-10.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-10.process.json": "3914ACD214B4F9FA11374ECA773C087709B9B2C3CEE23A9D5F94FE31016A4DC3",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-11.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-11.process.json": "8E09CD6B74BA32868091512B61A03A70A9D9925B3ABCAEEBACCE42862A7BA0B0",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-12.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-12.process.json": "6F7D740345BF98F833C50476647824E4181D5B628A8E1879F92AC380B699542E",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-13.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-13.process.json": "93A35D36DD151148EBDAA22DB3B95699FE446CC618ECC26098F3E9F2BD4F72F3",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-14.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-14.process.json": "153C897DBD04F48756A01B0E73A40B8A2C41CFA1A2E4BDD01B837DFB8A821184",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-15.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-15.process.json": "F5CAF0F9AF57648EDCB141953ED6776748E4AE372B06605AB224B44BE95A5FBF",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-16.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-16.process.json": "82197B5E3024C3D1153FDC33BDFD2802F0C35E9B29AF39B9BEED108A62445AC2",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-17.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-17.process.json": "34222FD5B86C3016E2789934382196C27F1D6D01BD19944E039A083356DCCBBC",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-18.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-18.process.json": "A451331A97E90E39BDC17009D545C84AA5A30535BA08B5064447ED8FF7E72751",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-19.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-19.process.json": "53497C7625AC8F4770CCB6B9E335D1A3EE5532D9AE8BE15AC4CB4F86FADED4F8",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-2.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-2.process.json": "3C66AD5C08A28EB033D0B318D77CB06F3D15D0345F1419EA3944E2ADFFF60856",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-20.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-20.process.json": "B49AFAFD7042BC67F79DD98D2EA8D4B5841F04EC211C011580A14AD0E7044BFE",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-3.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-3.process.json": "7F7650315D7D897A49BA5C3DC25864BCE7D1492BE2F2EA9B4A01FF216FC7BE44",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-4.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-4.process.json": "DEF2523D9ADC9747F1BAC16A9B1DC02223A1E2D0C5B66C475C21A4353A248D7B",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-5.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-5.process.json": "43DD278F5B331B9DB1B97A42BE79575ED9A6A2131AFD6600336A80676FFD9551",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-6.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-6.process.json": "F89FD0A07DA99268887EBCC089DBE2AC03AE66844464E894FF4D673F7EF73AE9",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-7.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-7.process.json": "D28684A305DCB729E4F244177690E915654A05337F61155FC6766D8648A647E5",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-8.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-8.process.json": "92E4B7FDB089278F9AF5E62B63F92ED18CD5F306FF08ED7FE74E9DECA003EAE7",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-9.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-command-9.process.json": "F2E05A3FA4904F39F5D14E8398DA6C0210E5D242179ACBD4A2F6050866B88C31",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-environment.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-environment.json": "6D4068BE819F9A5647F357BF22133F0C17EF463F83122B07E2CDB17DEE11458A",
+        "build\\t478-s36\\original-hook-cleanup3\\compiler-environment.process.json": "3045C75327829E14509E8AA3A5D7CA008ACEE97C3E58CC70A3497F92D6882D94",
+        "build\\t478-s36\\original-hook-cleanup3\\fixture-exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\original-hook-cleanup3\\fixture.map": "7C5B1AD6E9D74109EC182FE7323F3668B9AD3BB2A1C93B75E3E994B846F38D4B",
+        "build\\t478-s36\\original-hook-cleanup3\\stderr.txt": "0A1B61F25BB955A8084F8970D3B1AEB31786E19E964255D4D7ACE3182672C3B7",
+        "build\\t478-s36\\original-hook-cleanup3\\stdout.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      }
+    }
+  },
+  "pending": [],
+  "lifecycle": {
+    "first_pid": 32404,
+    "first_exit": 1,
+    "cause": "stale fixture link dependencies",
+    "second_pid": 21844,
+    "second_exit": 0,
+    "cases": [
+      "window-procedure",
+      "native-nested",
+      "task-lifecycle"
+    ],
+    "log_sha256": "FE48B765A74D77E35ED5C305E4141824FFB5A62FE0B3443B5CD2F4610479CF98"
+  },
+  "image": {
+    "result": "pass",
+    "sources": [
+      {
+        "path": "wow32/wshell.c",
+        "hashes": [
+          "1DAA7860C95A0E374566B900D2DA01E7459E7B88C0DFBE8E84B23F68BDF3AD40",
+          "1DAA7860C95A0E374566B900D2DA01E7459E7B88C0DFBE8E84B23F68BDF3AD40",
+          "1DAA7860C95A0E374566B900D2DA01E7459E7B88C0DFBE8E84B23F68BDF3AD40"
+        ],
+        "edge": "build obj/wshell.obj: cc O:/repos.hobby/ntvdm64/.worktrees/mirror-source-audit/src/mvdm-host/wow32/wshell.c",
+        "object_sha256": "509F4C3A4AD77B1FB8F1929C8E76F42008BC98D7B53EA41F2EB2B454BDA4522E",
+        "bindings": [
+          {
+            "name": "_ConvertToWin31Error@4",
+            "va": 268548992,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 156,
+            "relocation_words": 6,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 132
+          },
+          {
+            "name": "_CopyDropFilesFrom16@4",
+            "va": 268549152,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 152,
+            "relocation_words": 7,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 124
+          },
+          {
+            "name": "_CopyDropFilesFrom32@4",
+            "va": 268549312,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 246,
+            "relocation_words": 10,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 206
+          },
+          {
+            "name": "_DropFilesHandler@12",
+            "va": 268549568,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 703,
+            "relocation_words": 24,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 607
+          },
+          {
+            "name": "_Remove_Classes@4",
+            "va": 268550272,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 162,
+            "relocation_words": 7,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 134
+          },
+          {
+            "name": "_W32ShellExecuteCallBack@8",
+            "va": 268550448,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 136,
+            "relocation_words": 9,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 100
+          },
+          {
+            "name": "_WOWRegDeleteKey@8",
+            "va": 268550592,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 287,
+            "relocation_words": 11,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 243
+          },
+          {
+            "name": "_WS32DoEnvironmentSubst@4",
+            "va": 268550880,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 138,
+            "relocation_words": 8,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 106
+          },
+          {
+            "name": "_WS32DragAcceptFiles@4",
+            "va": 268551024,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 25,
+            "relocation_words": 1,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 21
+          },
+          {
+            "name": "_WS32DragFinish@4",
+            "va": 268551056,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 34,
+            "relocation_words": 2,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 26
+          },
+          {
+            "name": "_WS32DragQueryFile@4",
+            "va": 268551104,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 106,
+            "relocation_words": 5,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 86
+          },
+          {
+            "name": "_WS32ExtractIcon@4",
+            "va": 268551216,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 102,
+            "relocation_words": 4,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 86
+          },
+          {
+            "name": "_WS32FindExecutable@4",
+            "va": 268551328,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 123,
+            "relocation_words": 6,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 99
+          },
+          {
+            "name": "_WS32RegCloseKey@4",
+            "va": 268551456,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 33,
+            "relocation_words": 2,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 25
+          },
+          {
+            "name": "_WS32RegCreateKey@4",
+            "va": 268551504,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 171,
+            "relocation_words": 9,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 135
+          },
+          {
+            "name": "_WS32RegDeleteKey@4",
+            "va": 268551680,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 135,
+            "relocation_words": 8,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 103
+          },
+          {
+            "name": "_WS32RegEnumKey@4",
+            "va": 268551824,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 85,
+            "relocation_words": 5,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 65
+          },
+          {
+            "name": "_WS32RegOpenKey@4",
+            "va": 268551920,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 175,
+            "relocation_words": 9,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 139
+          },
+          {
+            "name": "_WS32RegQueryValue@4",
+            "va": 268552096,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 483,
+            "relocation_words": 20,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 403
+          },
+          {
+            "name": "_WS32RegSetValue@4",
+            "va": 268552592,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 186,
+            "relocation_words": 10,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 146
+          },
+          {
+            "name": "_WS32ShellAbout@4",
+            "va": 268552784,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 76,
+            "relocation_words": 4,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 60
+          },
+          {
+            "name": "_WS32ShellExecute@4",
+            "va": 268552864,
+            "function": true,
+            "owner": "wshell.obj",
+            "bytes": 108,
+            "relocation_words": 6,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 84
+          }
+        ]
+      },
+      {
+        "path": "wow32/wsubcls.c",
+        "hashes": [
+          "E75B7CAE0844A4503D1BF281E14393B9552AE495EF069F6C86366F59BAA38C2B",
+          "B37021CB2A0480F3ACA685EFB8006B32D31B0FE073B6B3FC9B99F05764679E4B",
+          "B37021CB2A0480F3ACA685EFB8006B32D31B0FE073B6B3FC9B99F05764679E4B"
+        ],
+        "edge": "build obj/wsubcls.obj: cc O:/repos.hobby/ntvdm64/.worktrees/mirror-source-audit/src/mvdm-host/wow32/wsubcls.c",
+        "object_sha256": "494FDA969691D69EB89552315858E561734FBC55B6F7AEC8F72B34D46BA1AFA1",
+        "bindings": [
+          {
+            "name": "_GetThunkWindowProc@16",
+            "va": 268612608,
+            "function": true,
+            "owner": "wsubcls.obj",
+            "bytes": 440,
+            "relocation_words": 19,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 364
+          },
+          {
+            "name": "_IsThunkWindowProc@8",
+            "va": 268613056,
+            "function": true,
+            "owner": "wsubcls.obj",
+            "bytes": 82,
+            "relocation_words": 2,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 74
+          }
+        ]
+      },
+      {
+        "path": "wow32/wuhook.c",
+        "hashes": [
+          "A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2",
+          "A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2",
+          "A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2"
+        ],
+        "edge": "build obj/wuhook.obj: cc O:/repos.hobby/ntvdm64/.worktrees/mirror-source-audit/src/mvdm-host/wow32/wuhook.c",
+        "object_sha256": "6458B343FA63C0EF9A635F4F36BCCF444C7DC4ACE374458D3B30955F23CCCA02",
+        "bindings": [
+          {
+            "name": "_WU32CallNextHookEx@4",
+            "va": 268575616,
+            "function": true,
+            "owner": "wuhook.obj",
+            "bytes": 100,
+            "relocation_words": 2,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 92
+          },
+          {
+            "name": "_WU32SetWindowsHookEx@4",
+            "va": 268575728,
+            "function": true,
+            "owner": "wuhook.obj",
+            "bytes": 163,
+            "relocation_words": 6,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 139
+          },
+          {
+            "name": "_WU32SetWindowsHookInternal@4",
+            "va": 268575904,
+            "function": true,
+            "owner": "wuhook.obj",
+            "bytes": 265,
+            "relocation_words": 9,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 229
+          },
+          {
+            "name": "_WU32UnhookWindowsHook@4",
+            "va": 268576176,
+            "function": true,
+            "owner": "wuhook.obj",
+            "bytes": 28,
+            "relocation_words": 2,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 20
+          },
+          {
+            "name": "_WU32UnhookWindowsHookEx@4",
+            "va": 268576208,
+            "function": true,
+            "owner": "wuhook.obj",
+            "bytes": 25,
+            "relocation_words": 2,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 17
+          }
+        ]
+      },
+      {
+        "path": "wow32/wowhooks.c",
+        "hashes": [
+          "B401F6CE0464288E139EF3420F7A368EC02C9F5AA8FA77B6CF23EAE3AA4465FB",
+          "345220990242CDE0890884F478BEF8622C2FC537C9E6200FA9B289145BE0CC67",
+          "345220990242CDE0890884F478BEF8622C2FC537C9E6200FA9B289145BE0CC67"
+        ],
+        "edge": "build obj/wowhooks.obj: cc O:/repos.hobby/ntvdm64/.worktrees/mirror-source-audit/src/mvdm-host/wow32/wowhooks.c",
+        "object_sha256": "90E6820D1B840C24D6AB15653550BBCA160FB1A9D4A79C87DE96C4F5CA425418",
+        "bindings": [
+          {
+            "name": "_WU32SubStdHookProc01@12",
+            "va": 268597232,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc02@12",
+            "va": 268597264,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc03@12",
+            "va": 268597296,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc04@12",
+            "va": 268597328,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc05@12",
+            "va": 268597360,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc06@12",
+            "va": 268597392,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc07@12",
+            "va": 268597424,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc08@12",
+            "va": 268597456,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc09@12",
+            "va": 268597488,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc10@12",
+            "va": 268597520,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc11@12",
+            "va": 268597552,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc12@12",
+            "va": 268597584,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc13@12",
+            "va": 268597616,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc14@12",
+            "va": 268597648,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc15@12",
+            "va": 268597680,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc16@12",
+            "va": 268597712,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc17@12",
+            "va": 268597744,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc18@12",
+            "va": 268597776,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc19@12",
+            "va": 268597808,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc20@12",
+            "va": 268597840,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc21@12",
+            "va": 268597872,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc22@12",
+            "va": 268597904,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc23@12",
+            "va": 268597936,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc24@12",
+            "va": 268597968,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc25@12",
+            "va": 268598000,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc26@12",
+            "va": 268598032,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc27@12",
+            "va": 268598064,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc28@12",
+            "va": 268598096,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc29@12",
+            "va": 268598128,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc30@12",
+            "va": 268598160,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc31@12",
+            "va": 268598192,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_WU32SubStdHookProc32@12",
+            "va": 268598224,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 22,
+            "relocation_words": 1,
+            "relocation_types": [
+              20
+            ],
+            "compared_bytes": 18
+          },
+          {
+            "name": "_GetEventMessage16@8",
+            "va": 268598256,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 86,
+            "relocation_words": 0,
+            "relocation_types": [],
+            "compared_bytes": 86
+          },
+          {
+            "name": "_ThunkCallWndProcHook16@16",
+            "va": 268598352,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 355,
+            "relocation_words": 13,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 303
+          },
+          {
+            "name": "_ThunkCallWndProcHook@16",
+            "va": 268598720,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 488,
+            "relocation_words": 18,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 416
+          },
+          {
+            "name": "_ThunkCbtHook16@16",
+            "va": 268599216,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 824,
+            "relocation_words": 46,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 640
+          },
+          {
+            "name": "_ThunkCbtHook@16",
+            "va": 268600048,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 892,
+            "relocation_words": 53,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 680
+          },
+          {
+            "name": "_ThunkJournalHook@16",
+            "va": 268600944,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 308,
+            "relocation_words": 15,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 248
+          },
+          {
+            "name": "_ThunkMouseHook@16",
+            "va": 268601264,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 300,
+            "relocation_words": 14,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 244
+          },
+          {
+            "name": "_ThunkMsgFilterHook16@16",
+            "va": 268601568,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 539,
+            "relocation_words": 26,
+            "relocation_types": [
+              6,
+              11,
+              20
+            ],
+            "compared_bytes": 435
+          },
+          {
+            "name": "_ThunkMsgFilterHook@16",
+            "va": 268602112,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 1748,
+            "relocation_words": 72,
+            "relocation_types": [
+              6,
+              11,
+              20
+            ],
+            "compared_bytes": 1460
+          },
+          {
+            "name": "_W32FreeHHook@8",
+            "va": 268603872,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 109,
+            "relocation_words": 5,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 89
+          },
+          {
+            "name": "_W32FreeHHookOfIndex@4",
+            "va": 268603984,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 79,
+            "relocation_words": 6,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 55
+          },
+          {
+            "name": "_W32FreeOwnedHooks@4",
+            "va": 268604064,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 82,
+            "relocation_words": 4,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 66
+          },
+          {
+            "name": "_W32GetHookDDEMsglParam@0",
+            "va": 268604160,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 100,
+            "relocation_words": 10,
+            "relocation_types": [
+              6,
+              11
+            ],
+            "compared_bytes": 60
+          },
+          {
+            "name": "_W32GetHookStateData@4",
+            "va": 268604272,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 72,
+            "relocation_words": 4,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 56
+          },
+          {
+            "name": "_W32GetThunkHookProc@12",
+            "va": 268604352,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 184,
+            "relocation_words": 10,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 144
+          },
+          {
+            "name": "_W32InitHookState@4",
+            "va": 268604544,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 56,
+            "relocation_words": 4,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 40
+          },
+          {
+            "name": "_W32IsDuplicateHook@12",
+            "va": 268604608,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 76,
+            "relocation_words": 2,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 68
+          },
+          {
+            "name": "_W32SetHookStateData@4",
+            "va": 268604688,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 59,
+            "relocation_words": 3,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 47
+          },
+          {
+            "name": "_W32UnhookHooks@8",
+            "va": 268604752,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 82,
+            "relocation_words": 4,
+            "relocation_types": [
+              6
+            ],
+            "compared_bytes": 66
+          },
+          {
+            "name": "_WU32StdDefHookProc@16",
+            "va": 268604848,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 624,
+            "relocation_words": 41,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 460
+          },
+          {
+            "name": "_WowOriginalStdHookProc@16",
+            "va": 268605472,
+            "function": true,
+            "owner": "wowhooks.obj",
+            "bytes": 572,
+            "relocation_words": 49,
+            "relocation_types": [
+              6,
+              11,
+              20
+            ],
+            "compared_bytes": 376
+          }
+        ]
+      },
+      {
+        "path": "wow32/wkman.c",
+        "hashes": [
+          "915E49C909FC9160AD03B11BC02AA62948B88EFAEC57E441C2B15C4DB3C73762",
+          "56BE1989F2BC3ACAFFCFA6345B20E38F5E7312BADF03AF04D4565F8F4A489AC9",
+          "56BE1989F2BC3ACAFFCFA6345B20E38F5E7312BADF03AF04D4565F8F4A489AC9"
+        ],
+        "edge": "build obj/wkman.obj: cc O:/repos.hobby/ntvdm64/.worktrees/mirror-source-audit/src/mvdm-host/wow32/wkman.c",
+        "object_sha256": "6CDB571B8BE26BB63F5A851FDE5C17DFACEDB87CBA5EEA0409C234151A942BC3",
+        "bindings": [
+          {
+            "name": "_W32DestroyTask@4",
+            "va": 268521264,
+            "function": true,
+            "owner": "wkman.obj",
+            "bytes": 174,
+            "relocation_words": 11,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 130
+          },
+          {
+            "name": "_WowOriginalFreeTask@4",
+            "va": 268534128,
+            "function": true,
+            "owner": "wkman.obj",
+            "bytes": 263,
+            "relocation_words": 24,
+            "relocation_types": [
+              6,
+              20
+            ],
+            "compared_bytes": 167
+          }
+        ]
+      }
+    ],
+    "release_sha256": "ACC98BEB46130BA2F84F69AADD22609050AACE5FC252F97F5E414A7E679E63B1",
+    "cached_sha256": "015F327EA32A47497A7A46D9D8EA66F6D68F60E25DA8C621EA9569F4E35A753C",
+    "map_sha256": "4000EF9EE3FEC185AB2F6D46140CD3E6275DF1DCA140DDA226D7A0EE5E1143E0",
+    "limits": "Static body selection only; S36 guest and lifecycle evidence is separate."
+  },
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "B89DC9AAB5EE1ECF870CD80D2B506EF2B2B440378806F694D9F54EC9DD7BC121",
+      "Machine": 34404,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "4D2BFB23BB87B18510FCF74BF8BC9BD7BE4CEEF0F3094A5172B13499A056F440",
+      "Machine": 34404,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "4D5F5A70F9F99693792F2823959D4BA0A1DA87B670265AF6B1D0EC3464804910",
+      "Machine": 34404,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "603AC08F1E9BD89EC0175A197F16F8579DA0C62467FB1819F059D7DCF2CC9E56",
+      "Machine": 332,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "E9624FA733A44428C48E47AAEB013F2B890312B62CF9D2AFE198D52DF097A6F6"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "6539F10B5F72F2D681597C1839E965ADDB833FC7E4FC2FC7A05BEF729CB753E0",
+      "Machine": 34404,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "35C65895054BB29CAF37A42064787D7774B41F574C1EE9D67E8732424AE3AFF2",
+      "Machine": 34404,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "ACC98BEB46130BA2F84F69AADD22609050AACE5FC252F97F5E414A7E679E63B1",
+      "Machine": 332,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "015F327EA32A47497A7A46D9D8EA66F6D68F60E25DA8C621EA9569F4E35A753C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "E2C316CA0F6CCD416C9EA57B0949972BB66FCA6B72159AB20C6FC8DE60E208AF",
+      "Machine": 332,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "A80B681265A26ADFD5A901A55C5A258D4C248B38F82316836334C2B05001D253"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "8A494B066C1820C070BE19968D3C9CA40C37F79C88322BEDC476A8FF8800C76A",
+      "Machine": 332,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "AAC4D6700C64A9EE4DE13D5A7EDC74C2FE4891FEA7CF0DF2D31F9815807DF595"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "01DCC82365A511C98A4DB7AEF8395ADCEFE797384DA511670222B765367E6F2C",
+      "Machine": 34404,
+      "PackageId": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ]
+}

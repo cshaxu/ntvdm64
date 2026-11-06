@@ -4,13 +4,19 @@
 
 **No active M/T/S packet.**
 
-T478 S35 has reached its bounded conclusion;
-S36 (finding35, WOW shell/hooks) is next under continuous sequential authority.
-[S35 evidence](../etc/evidence/m0-t478-s35-rtc-investigation.md) records normal
-original ROM RTC verification and retained original limitations. Product package
-remains S34 03d9792b-753e-4407-8a52-883ad9bc83e3; tests/evidence-only local P,
-no publication change or push. Broader T478 inventory reconciliation remains open.
+T478 S36 closed with [shell/hook evidence](../etc/evidence/m0-t478-s36-shell-hook-investigation.md).
+Next planned S37: finding40 DDE/WINMM. Continuous sequential authorization remains.
+Product package remains S34 03d9792b-753e-4407-8a52-883ad9bc83e3; test/evidence-only
+local P, no publication or push. Broader inventory reconciliation remains open.
 Temporary CURRENT size exception retains prior closures through final reconciliation.
+
+## S36 Closure Record
+
+Finding35: real Shell parent/child and CBT nesting/veto/explicit unhook/exit,
+original hook cleanup against real USER, native subclass/CallProc lifecycle and
+84 current image bindings passed. Existing product behavior suffices;
+[S36 evidence](../etc/evidence/m0-t478-s36-shell-hook-investigation.md) records
+failed test constructions and the exact limits. No new product capability.
 
 ## S35 Closure Record
 

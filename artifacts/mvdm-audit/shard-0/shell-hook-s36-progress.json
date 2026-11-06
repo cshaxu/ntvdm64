@@ -1,0 +1,135 @@
+{
+  "status": "active",
+  "package": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+  "product_changed": false,
+  "runs": {
+    "shell-adapter": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\shell-adapter\\adapter-input.json": "0D7AC1D81CD61FE7357A7032FDDF26CFCEEEED53B9F7F3E298DC82889D54917D",
+        "build\\t478-s36\\shell-adapter\\adapter-process.json": "AD38CF90E70E7D15D2EFB6BA9AD4648B143186B12B6DD1D37E308AB9FDE9E916",
+        "build\\t478-s36\\shell-adapter\\adapter.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-adapter\\adapter.out": "AB6166E46260493E5ABD1D42FAD19428E74D0A8D5DE8A016FD89B453D8AF6B28",
+        "build\\t478-s36\\shell-adapter\\compile-process.json": "43AE8243FF83E479328733F0308EC897700112DBB9B6874C48807A93BD188438",
+        "build\\t478-s36\\shell-adapter\\compile.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-adapter\\compile.out": "7251FDB2DB09E3BC9005362070F899EC32FC7DB2D5D0844A7A57826A2C8FF4C9",
+        "build\\t478-s36\\shell-adapter\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\shell-adapter\\inputs.json": "A5B9DA64A363C7EBCFD4D1FA2F128F7A6EF9F7B02EE798EF2A75E7815EBB8789",
+        "build\\t478-s36\\shell-adapter\\probe-process.json": "1249E2C6DC2A812706CCECB97D213263546F320B950DCD0875C5F9D29CE7DA56",
+        "build\\t478-s36\\shell-adapter\\probe.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-adapter\\probe.out": "5194DA23B00BCA544A03767E17921577307A6C46FF439947C4CA35749D41B5AC"
+      },
+      "result": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=18516\ncallback thread=18516 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter/native-fallback.txt\" result=2\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c2d000688025cf00\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=18516 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter/native-fallback.txt\" result=42\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c2d000688025cf00\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=18516 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-adapter/native-fallback.txt\" result=43\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c2d000688025cf00\ncase=2 result=43 error=6 calls=1 foreign_thread=0\nPASS actual adapter exception propagation and inner/outer TLS restoration\nPASS actual adapter old two-argument callback and nested invocation\nPASS modern WOWShellExecute synchronous callback and success/failure result\n"
+    },
+    "shell-unwind": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\shell-unwind\\adapter-input.json": "0D7AC1D81CD61FE7357A7032FDDF26CFCEEEED53B9F7F3E298DC82889D54917D",
+        "build\\t478-s36\\shell-unwind\\adapter-process.json": "95A0E5296F657C9B2B5A1673FD6794797FB3C71216E642AF778ACB54523C0380",
+        "build\\t478-s36\\shell-unwind\\adapter.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-unwind\\adapter.out": "AB6166E46260493E5ABD1D42FAD19428E74D0A8D5DE8A016FD89B453D8AF6B28",
+        "build\\t478-s36\\shell-unwind\\compile-process.json": "908757188255C7EA044CCE8E9FD82C7C19AB2D79CC0C9A44C875527A00449A3F",
+        "build\\t478-s36\\shell-unwind\\compile.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-unwind\\compile.out": "7251FDB2DB09E3BC9005362070F899EC32FC7DB2D5D0844A7A57826A2C8FF4C9",
+        "build\\t478-s36\\shell-unwind\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\shell-unwind\\inputs.json": "06184BE964817D8A664A23DF9CA3278A30188D18727BD94399BEE93F21B2AABF",
+        "build\\t478-s36\\shell-unwind\\probe-process.json": "8F03529405903F40E27A28A6A521A0FBA8A089D2331F3D5C6C0D87EEF132127B",
+        "build\\t478-s36\\shell-unwind\\probe.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\shell-unwind\\probe.out": "1C243CF2DE8F48861D8C839BC7034E39599FF7A5F88A483759496F8B68114A69"
+      },
+      "result": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=22184\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=2\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=42\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=43\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d444 access=0 address=00000000\nfirst-chance: 000006ba e4470003\nPASS outer API exception boundary and restored callback TLS\ncallback thread=22184 show=0 command=\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s36\\shell-unwind/native-fallback.txt\" result=2\ncallback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2380068f0253700\nPASS provider invoked again after outer unwind\ncase=2 result=2 error=6 calls=1 foreign_thread=0\nPASS actual adapter old two-argument callback and nested invocation\nPASS modern WOWShellExecute synchronous callback and success/failure result\n"
+    },
+    "hook-binding": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\hook-binding\\compile.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\hook-binding\\compile.process.json": "FF11486F78DDEA4C13EDA9FBB80484E944541F590A34AB699F859DDED9B0A0E1",
+        "build\\t478-s36\\hook-binding\\compile.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\hook-binding\\compile.stdout.txt": "FF291D3E36A2AA9A83BF073F69A5E3A286964B21FD1C87652700C7AB968978B3",
+        "build\\t478-s36\\hook-binding\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\hook-binding\\fixture.exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\hook-binding\\fixture.process.json": "DC41AAE93C92E837C0CE12487C28AEB3FF481D25271A8A7D854828219B9D43A1",
+        "build\\t478-s36\\hook-binding\\fixture.stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\hook-binding\\fixture.stdout.txt": "3ACA52BB5A5AF691DA51380C086053162A2F9F34C60DE1C2B34662F38A67309A",
+        "build\\t478-s36\\hook-binding\\inputs.csv": "78EDC7EF7D0B4E990229E7649ABA2CB1D9BB7EC465BB259AF1D7C52950DF5436",
+        "build\\t478-s36\\hook-binding\\limits.txt": "AF82E148B19CBD33773D3050ACA4E376E5BFACB293F68D7317F1FE97A1F1DEF2"
+      },
+      "result": "WOW_HOOK_NATIVE_BOUNDARY errors=0 calls=24 local=17 global=1 invalid=1 null=1 mismatch=1 callback=1 dead=1 foreign=1 handles=108/108\n"
+    },
+    "guest-shell": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\guest-shell\\assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\assemble.process.json": "98F2155DDC069F66B5C94DF88D7DE904D1AA9D07FABD78044AD604A96943F4BF",
+        "build\\t478-s36\\guest-shell\\callbacks.txt": "86432708334D4833D1D39E72A34F90873D296B6554339A52C45DBC0601DD1F79",
+        "build\\t478-s36\\guest-shell\\child-assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\child-assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\child-assemble.process.json": "70E6962B54EC18CB3BC21DB5A76D74A7AD1883549A895BB9A5481919CB64C7AC",
+        "build\\t478-s36\\guest-shell\\environment-shape.csv": "B18E706F693319BF86A9C27E8CC8F2E5EEC4DB8DC86B38D9FB9B73B78686E74E",
+        "build\\t478-s36\\guest-shell\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\guest-shell\\guest-report.json": "143126D2789AD0D8A4ABFB5A220F011274B2AEA8A4B113F55D3131B22A5F6D77",
+        "build\\t478-s36\\guest-shell\\inputs.csv": "953CDA84337E451C4F75F4E36BFF1F4053C580D247B2EA6CE45D1C4B30DF7311",
+        "build\\t478-s36\\guest-shell\\manifest.json": "55C678FED490362B7239192B541944A958BAB6607E8748DA96CC07282B770E0D",
+        "build\\t478-s36\\guest-shell\\observer.process.json": "B81E10CCDD11A009E504427ED6E74BFDA7236C7FD3CBE9C5BCF27254D3A53619",
+        "build\\t478-s36\\guest-shell\\observer.txt": "FF092F0E55BC1EDCB7A56D935C9EC3D294C51696792B3FBD5D3CD0C76F923326",
+        "build\\t478-s36\\guest-shell\\observer.txt.command-line.txt": "D89BE8EF96253DA54D4A2A4F05EE2B973BB395A320B1C2EB249E27B8E62FD4A6",
+        "build\\t478-s36\\guest-shell\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s36\\guest-shell\\observer.txt.initial-console.txt": "E6EF62019017D41C11ED43608F026DA295696C61E9A383F927FABBDFD5C802E0",
+        "build\\t478-s36\\guest-shell\\result.txt": "A250F3009A0294D80EB0B99DDF5623C4FA931DFDE11F4EF80F72FD9C355EB401",
+        "build\\t478-s36\\guest-shell\\runner-context.json": "AC219EF08F1363BA3CF2F28BEBB944A040518BBF7C309B65C28216329C615808",
+        "build\\t478-s36\\guest-shell\\runtime-inputs.csv": "F11A5FD0391BA96E3A39075B47832304C22D0C5AEDC4988493191049C58BF13E",
+        "build\\t478-s36\\guest-shell\\token.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-shell\\token.out": "A45B63410F859BD6C6BCC96D0D9E07652B9DE7CD39CA8237B741C72B3DE94BAB",
+        "build\\t478-s36\\guest-shell\\token.process.json": "A8A726C2D8E7A7A9718521E868961F9E2D3B37DD6C953AC2CB7900CEEDAEBBA7",
+        "build\\t478-s36\\guest-shell\\windows.txt": "F4FA820C013AD9982280607DF35449E0ABFF1B56878666ACB20A39795426CA35"
+      },
+      "result": "PASS actual guest ShellExecute success/failure, child execution and parent continuation\n"
+    },
+    "guest-hook": {
+      "exit": "0",
+      "files": {
+        "build\\t478-s36\\guest-hook\\assemble.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook\\assemble.out": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook\\assemble.process.json": "C8F9AE6CE45827753381905BBD518F7EB9330EED709A45E654F499BB65F87EFD",
+        "build\\t478-s36\\guest-hook\\callbacks.txt": "1272F6B40850764E3E8A7A77F061435DABC4FB3664C96593C187015923EAAB74",
+        "build\\t478-s36\\guest-hook\\environment-shape.csv": "BBE0BC104EBA3B6E6FE18D653B02A7290BD3EDC469935506D8986098A54CA9D3",
+        "build\\t478-s36\\guest-hook\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s36\\guest-hook\\guest-report.json": "841B52BDEF5E7B03108F3E63A2ACA636DD263A7917C1D4460B199C5536ECB103",
+        "build\\t478-s36\\guest-hook\\inputs.csv": "D38A53AA11CC17024A7FA94810A59CABE957FDCE032B53ECA7B8DB48288B74BD",
+        "build\\t478-s36\\guest-hook\\manifest.json": "CE281D119821D030F754E2E2121047CA3586B3798E0DDCB039E526C7A437F780",
+        "build\\t478-s36\\guest-hook\\observed-classes.json": "9CA1B1FB3628A4703179798AB9E210DD6E2681B3624FAEB92CEE20C4A09A3FB8",
+        "build\\t478-s36\\guest-hook\\observer.process.json": "140EEA04AE82AFEE079F8C69B4371F20F7CC0D3006A8BD22E188A50E3505371A",
+        "build\\t478-s36\\guest-hook\\observer.txt": "A9C61E9F9059A713D7E8D8A353394CC88E3E7DEDFCBEE32E619F38CFEFC31242",
+        "build\\t478-s36\\guest-hook\\observer.txt.command-line.txt": "CEE7C8325AAA49D68C20ACB32D12D4363D508067CDF92A79B02E669D8508C548",
+        "build\\t478-s36\\guest-hook\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s36\\guest-hook\\observer.txt.initial-console.txt": "428294F01DEE59C3E13BAF7301BB162188EA3A9667FC93207EE90F178CA055D5",
+        "build\\t478-s36\\guest-hook\\result.txt": "C26FD90632DF5F3ECB944807E82D2C4C57F5A81FAB7ACBF2C597665ADC8DB0DD",
+        "build\\t478-s36\\guest-hook\\runner-context.json": "AC219EF08F1363BA3CF2F28BEBB944A040518BBF7C309B65C28216329C615808",
+        "build\\t478-s36\\guest-hook\\runtime-inputs.csv": "F7E45D31A070357D66471AC38E6639CA4F85EC74F0371072DBA51D231E9CF368",
+        "build\\t478-s36\\guest-hook\\token.err": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "build\\t478-s36\\guest-hook\\token.out": "A45B63410F859BD6C6BCC96D0D9E07652B9DE7CD39CA8237B741C72B3DE94BAB",
+        "build\\t478-s36\\guest-hook\\token.process.json": "748CCBB3C516A1A5F967A9AAD91E879219B22B7E95F5FA8A85FB715E9F00CCAA",
+        "build\\t478-s36\\guest-hook\\windows.txt": "267DCA9A851DB4B2B6EA27EA991DE2C36E8535C7A039E52D3C620A4A071910D7"
+      },
+      "result": "PASS real Win16 CBT query/nested creation/veto/recovery/unhook and launcher completion\n"
+    }
+  },
+  "pending": [
+    "current selected-image binding: ThunkMsgFilterHook16 COFF assertion",
+    "original implicit task-owned hook cleanup coverage"
+  ],
+  "lifecycle": {
+    "first_pid": 32404,
+    "first_exit": 1,
+    "cause": "stale fixture link dependencies",
+    "second_pid": 21844,
+    "second_exit": 0,
+    "cases": [
+      "window-procedure",
+      "native-nested",
+      "task-lifecycle"
+    ],
+    "log_sha256": "FE48B765A74D77E35ED5C305E4141824FFB5A62FE0B3443B5CD2F4610479CF98"
+  }
+}

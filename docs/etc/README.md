@@ -1285,3 +1285,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S34 BIOS investigation](evidence/m0-t478-s34-bios-integration.md): minimal original D11 EOI repair, current BIOS/EMS and IRQ evidence, Full and worktree release.
 
 - [T478 S35 RTC investigation](evidence/m0-t478-s35-rtc-investigation.md): actual original ROM RTC waits/alarm/EOI verified; original cancellation and alternate host-body limitations retained.
+
+- [T478 S36 shell/hook investigation](evidence/m0-t478-s36-shell-hook-investigation.md): real Shell/CBT and original hook retirement evidence, restored test entry and current image binding.
