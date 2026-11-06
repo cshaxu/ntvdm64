@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [ValidateSet('shell','hook')][string]$Case='hook',
+ [ValidateSet('shell','hook','word')][string]$Case='hook',
  [switch]$LeaveHookInstalled)
 # Restores only the shell/hook contracts of the removed pre-db91004e5 runner.
 # No Win16 Style modes or original guest build. Owned background invocation only.
@@ -27,7 +27,8 @@ try {
  if($label -ne 'S-1-16-8192'){throw 'Require desktop-capable medium token'}
  @{pid=$PID;host=(Get-Process -Id $PID).Path;integrity=$label;script_sha256=(Get-FileHash $PSCommandPath).Hash}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $source="$PSScriptRoot/win16_${Case}_probe.asm"
- $probe=if($Case -eq 'shell'){'SHLPROBE'}else{'CBTPROB'}
+ if($Case -eq 'word'){$source="$PSScriptRoot/win16_window_word_probe.asm"}
+ $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
  $defines=if($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}else{''}
  Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.EXE"') 30
@@ -86,6 +87,13 @@ try {
         $returnPattern='(?m)^'+$entry.Groups[1].Value+' after ret=0037 .*task='+$entry.Groups[2].Value+' '
         if($callbackTrace -notmatch $returnPattern){throw 'Shell callback did not return on its original task/thread'}
         'PASS actual guest ShellExecute success/failure, child execution and parent continuation'|Set-Content "$root/result.txt"
+ }elseif($Case -eq 'word'){
+  if($bytes.Length -ne 22 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'WWP1'){throw 'Bad window-word report'}
+  $record=[ordered]@{};$names=@('created_value','previous','inside_read','readback','destroyed','unregistered','class_extra','second_previous','second_read')
+  for($i=0;$i -lt $names.Count;$i++){$record[$names[$i]]=[BitConverter]::ToUInt16($bytes,4+2*$i)}
+  $record|ConvertTo-Json|Set-Content "$root/guest-report.json"
+  if($record.created_value -ne 0x5a39 -or $record.previous -ne 0 -or $record.inside_read -ne 0x5a39 -or $record.readback -ne 0x5a39 -or !$record.destroyed -or !$record.unregistered -or $record.class_extra -ne 2 -or $record.second_previous -ne 0x5a39 -or $record.second_read -ne 0x6b4a){throw 'Create parameter/window-word contract failed'}
+  'PASS original USER16 creation parameter and two-byte window-word persistence'|Set-Content "$root/result.txt"
  }else{
     if($bytes.Length -ne 600){throw "Expected four22-byte phase records and512-byte class history; got $($bytes.Length)"}
     @(0..15|ForEach-Object {[Text.Encoding]::ASCII.GetString($bytes,88+32*$_,32).Split([char]0)[0]})|

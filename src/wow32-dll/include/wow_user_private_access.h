@@ -57,6 +57,7 @@ BOOL WINAPI wow_native_EndDialog(HWND w, INT_PTR result);
 HWND WINAPI wow_native_SetParent(HWND w, HWND parent);
 BOOL WINAPI wow_native_SetWindowPlacement(HWND w, const WINDOWPLACEMENT *placement);
 LONG WINAPI wow_native_SetWindowLongA(HWND w, int index, LONG value);
+WORD WINAPI wow_native_SetWindowWord(HWND w, int index, WORD value);
 HDWP WINAPI wow_native_DeferWindowPos(HDWP, HWND, HWND, int, int, int, int, UINT);
 BOOL WINAPI wow_native_EndDeferWindowPos(HDWP positions);
 UINT WINAPI wow_native_ArrangeIconicWindows(HWND w);
@@ -136,6 +137,7 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #include "wow_menu_native_bindings.h"
 #define GetWindowLongA wow_user_get_window_longA
 #define SetWindowLongA wow_user_set_window_longA
+#define SetWindowWord wow_native_SetWindowWord
 #define MapDialogRect wow_user_map_dialog_rect
 #define DlgDirListA wow_user_dlg_dir_listA
 #define DlgDirListComboBoxA wow_user_dlg_dir_list_comboA

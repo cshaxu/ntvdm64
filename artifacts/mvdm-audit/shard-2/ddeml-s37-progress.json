@@ -1,0 +1,207 @@
+{
+  "status": "active-no-callback-claim",
+  "package": "03d9792b-753e-4407-8a52-883ad9bc83e3",
+  "runs": {
+    "init": {
+      "exit": "0",
+      "result": {
+        "modulePath": "O:\\TMP\\N948\\TESTS\\DDEML.DLL",
+        "sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+        "invalidReserved": 16390,
+        "init": 0,
+        "instance": 147072,
+        "reinit": 0,
+        "reinitInstance": 147072,
+        "uninit": 1,
+        "secondUninit": 0
+      },
+      "files": {
+        "build\\t478-s37\\ddeml-init\\assemble.process.json": "0A0901240B0E0C34153898D80625EB2747622D75B6D1D7C740FDB6FF83FACB6B",
+        "build\\t478-s37\\ddeml-init\\callbacks.txt": "6B6C06689117E35AD757A41E612266AA1847811E6C819A9C516198E49C71F687",
+        "build\\t478-s37\\ddeml-init\\DINIT.BIN": "C47BAB56D0090EA2C5BE00A6521DF1880ABE1EFC69C5CB5F68F912CEF1CB9A1F",
+        "build\\t478-s37\\ddeml-init\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s37\\ddeml-init\\inputs.csv": "9D6C1562F7BDAAAC2A871CE98690A746943F0C645B7BE9B6C622F6244951501C",
+        "build\\t478-s37\\ddeml-init\\manifest.json": "F6F783BE1BCA15BC7A109C45E2352C1599BED70B5E6985E708EDACEBBD7409C9",
+        "build\\t478-s37\\ddeml-init\\observer.process.json": "C2B2969A2E0B5681AE011B1F2A91F33037A3003956BE475EE18FFCBB5038FF01",
+        "build\\t478-s37\\ddeml-init\\observer.txt": "6A058D8A6FBB681CF327F457353E7DAE7C262D134EEDF81E26D36F08F2862224",
+        "build\\t478-s37\\ddeml-init\\observer.txt.command-line.txt": "DC3B4BF95D5B062CC649CFD7455901C77AAF0E3473C3E77DD93D6D5DC92A38FC",
+        "build\\t478-s37\\ddeml-init\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s37\\ddeml-init\\observer.txt.initial-console.txt": "3DF7E12771AA1ED72A9E0FA53E288D00BDA72E2270DE9834B1A2295A2B7C0B47",
+        "build\\t478-s37\\ddeml-init\\result.json": "F911CB4DD433F09D82A35054DC32CD0C7D9A02FE5945DC1DDF7F05F011310B1E",
+        "build\\t478-s37\\ddeml-init\\runner-context.json": "D500E39C20B588212AE64233E10CB39CD8F92FE95E271619FB73AC55EB4817BF",
+        "build\\t478-s37\\ddeml-init\\runtime-inputs.csv": "BDCF3B2812626A5765127D2EE8261F51B0081A784EC06A037E8800A3FBAC4C5F",
+        "build\\t478-s37\\ddeml-init\\token.process.json": "79A2ABADDD46AD06ED66F4023DF71BDAD0A01ED95F646DA4CB033D2FE4C27E7E",
+        "build\\t478-s37\\ddeml-init\\windows.txt": "22D0351A2AC39C0142C69812B2CAD8D2188CE06116D6FDE5AC7B78D18E05F8B2"
+      }
+    },
+    "register": {
+      "exit": "0",
+      "result": {
+        "modulePath": "O:\\TMP\\NC9B\\TESTS\\DDEML.DLL",
+        "sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+        "init": 0,
+        "instance": 147072,
+        "service": 49357,
+        "register": 1,
+        "unregister": 1,
+        "free": 1,
+        "uninit": 1,
+        "callbackCount": 0,
+        "registerCount": 0,
+        "unregisterCount": 0,
+        "firstType": 0,
+        "lastType": 0
+      },
+      "files": {
+        "build\\t478-s37\\ddeml-register\\assemble.process.json": "E42958516350C3678707D8FE89B77C144D9B03D6C771A3D06A934C890276E773",
+        "build\\t478-s37\\ddeml-register\\callbacks.txt": "B8B86C98DAB34CB749D157BD3C653EEF5C0347A1BE26A9B4AD4A4F7A0D45DEED",
+        "build\\t478-s37\\ddeml-register\\DPRE.BIN": "A6104C3BF636483CD4DD5768A114DD040D9CBFBD993F7037894C2158546B6864",
+        "build\\t478-s37\\ddeml-register\\DREG.BIN": "303223A1EC398D75BCDBD34800A6EF960C5308DC13BB5B48531CB3F617C17479",
+        "build\\t478-s37\\ddeml-register\\DSTAGE.BIN": "CA358758F6D27E6CF45272937977A748FD88391DB679CEDA7DC7BF1F005EE879",
+        "build\\t478-s37\\ddeml-register\\exit.txt": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+        "build\\t478-s37\\ddeml-register\\inputs.csv": "925E1BE009304F9C8A89BECDCD6F03A8283C03631BEB862DF744DDFE3693D14D",
+        "build\\t478-s37\\ddeml-register\\manifest.json": "3D579EE9194D4C8592B29B181BB327396E47EB168A219C0645C9B329C958CAD8",
+        "build\\t478-s37\\ddeml-register\\observer.process.json": "A2842A8C86F57221D1A2E31354CFB21621C6A3CCEDDDFD852B64621FEAC07441",
+        "build\\t478-s37\\ddeml-register\\observer.txt": "30CE6F452088EFA3E389D9DAD44E1895F8B797CE8FF467F65CFB714522FC181C",
+        "build\\t478-s37\\ddeml-register\\observer.txt.command-line.txt": "F87B63043F234DB38D88CE10782EEC90F3A60E83D417AC9CA474EC6BFF721602",
+        "build\\t478-s37\\ddeml-register\\observer.txt.console.txt": "38D650C013929CB1FCBAE2B0996DD47A356504480F2705AB540B7F406EBDAB9E",
+        "build\\t478-s37\\ddeml-register\\observer.txt.initial-console.txt": "FBA195C9DE624618DCAB714C3C0BD9C5C0BE1FAA2C4252B7D3C78E368D1A9604",
+        "build\\t478-s37\\ddeml-register\\result.json": "82DD4EBC7E9C803B1075DF3CC28A17A73F3EA1164B13C06152D356A12CA5781C",
+        "build\\t478-s37\\ddeml-register\\runner-context.json": "D500E39C20B588212AE64233E10CB39CD8F92FE95E271619FB73AC55EB4817BF",
+        "build\\t478-s37\\ddeml-register\\runtime-inputs.csv": "14300D6D24CA5E0B9C7DB1EE5FFFD93C5A739D39285FE769AE63D12F9E9FD55A",
+        "build\\t478-s37\\ddeml-register\\token.process.json": "F832611099CA4BBE3CA9FAD1181766CBDC6EBE51F4427275B97334671F548BED",
+        "build\\t478-s37\\ddeml-register\\windows.txt": "80166E989479E4F380A8BF29FE898FAF6B769B7FB69B14B79CCBCEF2DF83CB35"
+      }
+    }
+  },
+  "mm_inventory": "WOW_MULTIMEDIA_FEASIBILITY wave_out=2 wave_in=2 midi_out=1 midi_in=0 aux=0 mixer=4 joystick=16 timer_min=1 timer_max=1000000\n",
+  "product_changed": true,
+  "direct_callback_control": {
+    "pid": 30260,
+    "exit": 0,
+    "result": {
+      "modulePath": "O:\\TMP\\N4B1\\TESTS\\DDEML.DLL",
+      "sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+      "init": 0,
+      "instance": 147072,
+      "service": 49357,
+      "register": 1,
+      "unregister": 1,
+      "free": 1,
+      "uninit": 1,
+      "callbackCount": 1,
+      "registerCount": 1,
+      "unregisterCount": 1,
+      "firstType": 0,
+      "lastType": 0
+    },
+    "interpretation": "direct callback works; no additional registration notification observed"
+  },
+  "window_word_diagnosis": {
+    "native_full": "pass for 2/4/6 extra bytes",
+    "native_short_set": "error1400, unchanged value",
+    "native_short_get": "reads existing value successfully",
+    "guest_initial": {
+      "created_value": 23097,
+      "previous": 0,
+      "inside_read": 0,
+      "readback": 0,
+      "destroyed": 1,
+      "unregistered": 1
+    },
+    "guest_extended": {
+      "created_value": 23097,
+      "previous": 0,
+      "inside_read": 0,
+      "readback": 0,
+      "destroyed": 1,
+      "unregistered": 1,
+      "class_extra": 2,
+      "second_previous": 0,
+      "second_read": 0
+    },
+    "product_changed": false,
+    "files": {
+      "build/t478-s37/window-word/guest-report.json": "8f3ff8eb5709cc2ebf27bfc67aabceb9a73b5392838c152e202a9cdd95022f91",
+      "build/t478-s37/window-word2/guest-report.json": "aed28a6eec9c59911b605d92a1247a3065366ecdcc432064903324f5f051ceba",
+      "build/t478-s37/window-word2/inputs.csv": "ed2296e19635bb1ebfe33ae4b51530c4b9187cd332a0960cacfb9fd3256543e2",
+      "build/t478-s37/native-word.result": "cf5d53b7bac264e74aa8462f6f6421f9b8f32b53ff1b921c1a22a8456638e9d1",
+      "build/t478-s37/native-word2.result": "268062875428661be3e306a3269cf17c5a0aa5c52c9e4a6ea118dca24f38d429",
+      "tests/adapter-mvdm-host-out/wow/wow_native_window_word_probe.c": "4f4bb6ea20094d60bc890f98f22e5a4063ba9d4aa71280fc6b64118040b99c14"
+    }
+  },
+  "candidate": {
+    "package": "8389208d-e0cd-4b48-a965-ba1f588dd98b",
+    "build_exit": 0,
+    "window_word": {
+      "created_value": 23097,
+      "previous": 0,
+      "inside_read": 23097,
+      "readback": 23097,
+      "destroyed": 1,
+      "unregistered": 1,
+      "class_extra": 2,
+      "second_previous": 23097,
+      "second_read": 27466
+    },
+    "ddeml": "strict registration callbacks and teardown pass after correcting independent callback DS prologue",
+    "release_published": true,
+    "files": {
+      "build/t478-s37/build.out": "b1f0b651e9c3df962535ccaf4a726cd895e4bef589a45bc1637cfbddb389b5b0",
+      "build/t478-s37/window-word-fixed/guest-report.json": "81239c3c25e01f17aa59cee4671d21d759a3dc1fdcfd05d47c0bb4dbb45b1690",
+      "build/t478-s37/ddeml-fixed-register/observer.txt": "cb0fae3cdc87c54e12d90e3f72d96a72aad78b02be25a782c037e7dc5a0bd2a7",
+      "build/t478-s37/ddeml-fixed2-register/DPRE.BIN": "2b1752b4566a6d517dfd2365f645e1de1f50a295b991c649d7a4a9a8058d1c6b",
+      "build/t478-s37/ddeml-fixed2-register/DSTAGE.BIN": "beead77994cf573341ec17b58bbf7eb34d2711c993c1d976b128b3188dc1829a",
+      "build/t478-s37/verify-final-Full/timings.json": "740ef48eec903f36775ff459df00f73fa2e4957204bf9c095154bb487ba5578c",
+      "build/t478-s37/publication.txt": "70fc44576f4fe18f8ee49473d27f868afe34dcda9020333a6b027388bb8436c3",
+      "assets/release/release-manifest.json": "d884f83659b639fa97dbc951676add2084faaec4c13e108dd3a1e24a8d01b9c5"
+    },
+    "full": {
+      "passed": 16,
+      "total": 16,
+      "elapsed_ms": 377452
+    }
+  },
+  "corrected_abi_comparison": {
+    "ddeml-baseline-corrected": {
+      "result": {
+        "modulePath": "O:\\TMP\\NDE0\\TESTS\\DDEML.DLL",
+        "sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+        "init": 0,
+        "instance": 147072,
+        "service": 49357,
+        "register": 1,
+        "unregister": 1,
+        "free": 1,
+        "uninit": 1,
+        "callbackCount": 0,
+        "registerCount": 0,
+        "unregisterCount": 0,
+        "firstType": 0,
+        "lastType": 0
+      },
+      "sha256": "2bff5498210e0db4d91206f494b9836b9dfb7500d634a2d9bfb7b97f0163392f",
+      "exit": 1
+    },
+    "ddeml-final": {
+      "result": {
+        "modulePath": "O:\\TMP\\N675\\TESTS\\DDEML.DLL",
+        "sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+        "init": 0,
+        "instance": 147072,
+        "service": 49357,
+        "register": 1,
+        "unregister": 1,
+        "free": 1,
+        "uninit": 1,
+        "callbackCount": 2,
+        "registerCount": 1,
+        "unregisterCount": 2,
+        "firstType": 32930,
+        "lastType": 32978
+      },
+      "sha256": "982de048689cafc3934dc822141d238d2898fd97a7fa83c80d6cb83a9dbd47e2",
+      "exit": 0
+    }
+  }
+}

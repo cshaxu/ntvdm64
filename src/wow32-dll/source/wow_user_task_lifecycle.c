@@ -1423,6 +1423,11 @@ HDWP WINAPI wow_native_DeferWindowPos(HDWP positions, HWND w, HWND after,
 WOW_NATIVE_MAPPED_CALL(BOOL, SetWindowPlacement,
     (HWND w, const WINDOWPLACEMENT *placement), (native, placement), FALSE,
     FALSE, NULL)
+/* ADAPTER-WOW-078: modern SetWindowWord rejects original HWND32's short
+ * carrier. Reuse the full-identity/native-return owner; USER owns the bytes
+ * and original WU32SetWindowWord retains offset and result conversion. */
+WOW_NATIVE_MAPPED_CALL(WORD, SetWindowWord,
+    (HWND w, int index, WORD value), (native, index, value), 0, FALSE, NULL)
 LONG WINAPI wow_native_SetWindowLongA(HWND w, int index, LONG value)
 {
     wow_user_native_call call;
