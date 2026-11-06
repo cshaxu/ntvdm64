@@ -777,3 +777,46 @@ within its60s deadline; documentation governance passed with the existing
 CURRENT size warning. Diff review and git diff --check pass. This is a scope/
 status correction only; product inputs and assets are unchanged, so no build,
 runtime rerun or publication is claimed or required. Local commit only.
+
+## P20 finite recovery-candidate disposition and S45 closure
+
+Baseline41e35db73. This review applies P19's owner correction, not the old
+per-identity coverage requirement. Read the69-finding classification, its
+S2-S41 plan/closure records, the S10 recovery worklist and finite handoff,
+the21 remaining physical-role candidates, and the earlier unselected-source
+ledger. Current source/build references below resolve possible missing owners;
+they are not claims of new runtime tests.
+
+| Concrete candidate family | Current disposition and evidence |
+| --- | --- |
+| Generic thunk, ForceDOS, RAP, directory restart | S2 restores original assembly with EBX preservation; S3 restores flag propagation; S4 restores the composable original enumeration/conversion and deletes its failure stub. S5 retains existing restart/failure behavior and the owner-accepted unavailable kernel fast-index boundary. See the linked stage plan and closure records. No further recovery is required. |
+| DDEML/WINMM, Clipboard/OLE, VCDEX | S37 fixes the project window-word/interrupt bindings; original app-local DDEML is the selected owner. S38 restores original OLE conversion; S41 restores the original independent VCDEX DLL, including ISO/VDD acceptance. Dormant alternative DDEML and multimedia converters are not competing missing features. |
+| Remaining69 findings | S6-S41 cover the admitted issues. The plan expressly excludes extra S work for32/38/44/46, guest-only/tools and accepted limits. S15's codepage defect remains separately owned Console debt in TODO, not a missing mirror getter or an original-code replacement opportunity. No guest package work or added hardening follows. |
+| WINMINE background and width | S43 fixes the actual GDI alias collision; S44 demonstrates the native minimized-window sizing cause. No autonomous sizing/drawing workaround or further restoration is needed. |
+| dbg/dbg.c versus standalone VDMDBG/BDE/extensions | The old fixture-only label is stale: current worker Ninja selects debugger-bindings.lib, and ntvdm.exe.map attributes DBGDispatch, DBGInit and notifications to debugger-bindings:dbg.obj. Current nt_msscs.c calls DBGInit and nt_bop.c MS_bop_6 calls DBGDispatch. The original package/caller and removed replacements are documented in T420 S43. The generator's old metadata string saying product excluded is not the actual link graph. Standalone debugger extensions remain outside the admitted runtime product; no second debugger import is required. |
+| HFX/SWIN_HFX, VFLOPPY, HUNTER/YODA/PROFILE, legacy terminal/menu UI, dedicated MDA/Hercules | These are separate historical protocols, diagnostic or device configurations, not missing portions of the admitted NT CCPU40 product. Existing reviews identify guarded consumers and missing/alternate provider closures; original NT host sources omit nt_hfx/nt_hunt/nt_vflop, and original nt_hfx.c explicitly supplies stubs. No selected product requirement/caller establishes a needed recovery. Do not enable an alternate profile or invent its provider; do not claim protocol/device equivalence to NT redirector/VGA/real floppy. |
+| Planar graphics and legacy declarations | Original nt_ega/nt_graph remain selected in original-softpc-host-roots.lib. Existing planar handoff traces original conversion into the bounded Console bitmap/presentation binding. Old nt_paint.h globals, monregs/x86def/nt_getxx/host platform headers and declaration-only role questions do not establish absent algorithms. No extra per-header tests are required. |
+| Disassembler and CPU alternatives | Existing original-role ledger distinguishes alternate target diagnostics, kernel CPU30 carriers and competing CPU/FPU/SAS state from selected CPU40 owners. Do not import a second executor/state provider. S6/S30 already disposition applicable vector/diagnostic issues. |
+| Unused C-VID scaffold69 | Generator declarations remain test-only and previously proved consumer-free; they are not a local product implementation replacing original video. Removing optional test scaffolding is not required to recover functionality or reduce mirror diff. No product change is justified by this row. |
+
+The21 physical-role rows are covered by the debugger, alternate-profile,
+planar/declaration and DDEML dispositions above; their historical pending labels
+remain evidence labels, not implementation commitments. The broader inventory
+remains an incomplete coverage catalogue, explicitly not a catalogue of missing
+functions. Nothing here certifies arbitrary devices, faults or all possible
+original configurations.
+
+No qualified outstanding original-function recovery or duplicate product-owner
+replacement remains in these inherited candidates. S45 closes under the owner's
+explicit criterion. Preserve original exhaustion, private-host-service,
+physical-device and immutable-guest limitations; no new runtime work is admitted.
+Final package and gate evidence are recorded in the T478 closure.
+
+P20 delivery checks: first owned runner PID6040 failed documentation governance
+because the linked receipt was scheduled to be created after the link check.
+No product failure occurred. The corrected order writes a pending receipt first;
+runner PID22756 completed exit0 within60s, verified all11 release hashes against
+both manifest and S43 receipt, confirmed no subsequent src/assets changes, and
+passed documentation governance and diff review. The receipt now records PASS.
+The existing CURRENT size warning remains. This is a local documentation-only
+closure; no runtime rerun, publication, O:/winnt write or push.

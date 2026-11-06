@@ -1,0 +1,185 @@
+{
+  "task": "M0 T478 S45 P20 closure",
+  "baseline": "41e35db73",
+  "product_commit": "487ce265c",
+  "package_id": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+  "checked_at_utc": "2026-11-06T18:25:49.3755225Z",
+  "runner_pid": 22756,
+  "images": [
+    {
+      "name": "VCDEX.DLL",
+      "sha256": "0258FE5E9C5E22B1C1FFC9BBA778D7F19C49CA6FEDCE56957087BCF739DD2CEC",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "run16.exe",
+      "sha256": "D71665086F5640903C7A7BEAEE0B9341E09A90F47ECD862B72BDFB01E3B061B9",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "AFF03F9907D809165BB14CC0E26629C5FCE508763F1EC0C1554A4197DFE12C1C",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "1B154630F506CD2BAAB39A926A7700579986962C8833533527C3C10EF5CDE124",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "4DC0D80FD2DDB7D046C5346167FBAF63FDB2789A5E8AB9EF0C29D3CF54C357BA",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "B2BA6D8D77C9E382A9CAF05F434F392707E1CAB275224F8D57EBB31B9BC4EEE2",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "99A1066954A39B03E1673201F84C52722E2EADF4B220C95B801A30C2ECE66F9A",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "21EC23EC10BECDF3FF1A09F51067C8B733AF2FEDDD52892E70E3105AD9F19F22",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "E3F1307968CD40C292E1F7122CE81CD6393F6E0F1BEAA87770AB2B56F9B0EEF0",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "8F8541534E7F20CBF03535059E4D0B39B4192363E541C78973C9655F07E4FA6D",
+      "manifest_match": true,
+      "s43_match": true
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "1EDD8CFAB16E0DCB10D9A3E43BDE0B0D8761801A8FA7C8F6624BAD1221FF0C47",
+      "manifest_match": true,
+      "s43_match": true
+    }
+  ],
+  "product_source_unchanged_since_s43": true,
+  "full_reused": {
+    "Suite": "Full",
+    "ElapsedMs": 372460,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3850,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1560,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 324,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65911,
+        "CleanupMs": 426,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48536,
+        "CleanupMs": 402,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43501,
+        "CleanupMs": 391,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15010,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11584,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 70212,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12384,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28061,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30231,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4021,
+        "CleanupMs": 421,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7750,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10073,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4267,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7007,
+        "CleanupMs": 377,
+        "Passed": true
+      }
+    ]
+  },
+  "governance": "PASS",
+  "diff_check": "PASS",
+  "limits": "No new runtime test; original recorded limitations retained; no O:/winnt write or push"
+}

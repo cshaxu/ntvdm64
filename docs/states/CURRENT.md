@@ -2,31 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T478 S45 — existing inventory and handoff reconciliation.**
+**No active M/T/S packet.** T478 and S45 are closed under the owner's
+concrete original-function recovery criterion. No next task is admitted.
 
-## Active Packet
+[T478 closure](../history/m0-t478-closure.md) records delivered original
+recovery, final package verification and retained limitations. Historical
+inventory coverage is not a pending implementation obligation.
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T478 S45; Ordinary Mode; sole active S. |
-| Admission And Approval | Owner continuous sequential approval, superseded by the latest clarification: continue only for concrete missing original functionality or original recovery replacing duplicate local code; inventory coverage is not a closure requirement. |
-| Objective | Disposition concrete recovery candidates in existing findings/handoffs against current owners; recover only required missing original behavior or replace duplicate local implementations. Stop when no qualifying recovery remains. |
-| Non-goals | No new global audit, guest audit/change, speculative fault tolerance, alternate CPU, product capability, O:/winnt write or push. Source-only audit labels are not product pass/fail. |
-| Reference Baseline | 8f076ff6a; S43 eleven-image release unchanged; S44 width explained; pinned1546 inventory identities, including483 inactive-edition rows. |
-| Files And ABI Surface | Indexed recovery evidence, plan and status; product source remains read-only in this S. No fixture expansion solely to fill audit coverage. A demonstrated repair receives a bounded repair S. |
-| Applicable Rules | Required documentation reading set and source policy; original-only semantics; owner's local-only delivery instructions. |
-| Verification | Inspect existing concrete candidate dispositions and current source/composition where still unresolved; reuse applicable completed-stage evidence. Documentation governance and diff review; no exhaustive inventory certification. |
-| Expected Markers | Each concrete candidate is recovered, already implemented, superseded by a justified provider, outside product scope, or an accepted unavailable original boundary. Unknown labels alone are not defects. |
-| Asset Needs | Existing DOS16/WOW32 read-only inventories, current build maps and sealed S evidence; no external fetch. |
-| Reporting Requirements | Distinguish actual missing functionality from testing limitations and historical audit bookkeeping. Preserve old evidence without turning unmapped identities into required work. |
-| Stop Conditions | Actual implementation gap requiring a separate bounded repair S; changed source baseline/input identities; material new capability or guest request. |
-| Exit Criteria | Concrete inherited recovery candidates have supported current dispositions and no required missing original functionality or duplicate replacement remains. Unmapped inventory identities or untested original edge cases alone do not prevent closure. |
-| Original Owner Request | Continue original recovery, reuse prior audits, fix necessary host wiring/real gaps, do not add capability or tolerance. |
-| Similar-Issue Sweep | Only adjacent callers/providers needed to establish a concrete candidate; no new whole-codebase or per-identity coverage campaign. |
-
-[Evidence](../etc/evidence/m0-t478-s45-inventory-reconciliation.md).
-CURRENT's temporary size exception retains prior closure links until final
-reconciliation; the hard32KiB limit remains.
+CURRENT's temporary size exception retains prior closure links; the hard
+32KiB limit remains. The following entries are historical stage records;
+the T478 closure supersedes their earlier forward-looking pending statements.
 
 ## S44 Closure Record
 
@@ -298,8 +283,7 @@ Current product is the unchanged S43 eleven-image package
 assets/release and verified by S43 Full16/16. S44 and S45 P1-P18 change no
 product source or published package. See the S43/S44 closure records above.
 The latest owner clarification supersedes inventory-wide reconciliation as
-an exit criterion: only concrete original recovery candidates remain to be
-dispositioned. DOS4GW/NESticle and guest modifications remain excluded;
+an exit criterion: the concrete recovery candidates are dispositioned in the T478 closure. DOS4GW/NESticle and guest modifications remain excluded;
 O:/winnt writes and pushes are prohibited.
 
 ## Temporary Evidence
