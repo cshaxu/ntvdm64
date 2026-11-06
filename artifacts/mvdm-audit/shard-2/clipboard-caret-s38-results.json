@@ -1,0 +1,225 @@
+{
+  "scope": "finding48 bounded clipboard rejection/OLE conversion and caret closure",
+  "package_id": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 377985,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3286,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1798,
+        "CleanupMs": 417,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 359,
+        "CleanupMs": 338,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65752,
+        "CleanupMs": 343,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48021,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 49372,
+        "CleanupMs": 338,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16284,
+        "CleanupMs": 365,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10762,
+        "CleanupMs": 294,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 68111,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13020,
+        "CleanupMs": 360,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28674,
+        "CleanupMs": 392,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30957,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5316,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8159,
+        "CleanupMs": 339,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9497,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4109,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7100,
+        "CleanupMs": 318,
+        "Passed": true
+      }
+    ]
+  },
+  "rejection": [
+    {
+      "pass": true,
+      "seconds": 9.3919184,
+      "format": 15
+    },
+    {
+      "pass": true,
+      "seconds": 7.2659028,
+      "format": 3
+    },
+    {
+      "pass": true,
+      "seconds": 7.477472,
+      "format": 131
+    },
+    {
+      "pass": true,
+      "seconds": 8.1795933,
+      "format": 49153
+    },
+    {
+      "pass": true,
+      "seconds": 8.4225991,
+      "format": 49154
+    }
+  ],
+  "roundtrip": {
+    "root": "build/t478-s38/ole-roundtrip-r1",
+    "values": [
+      49166,
+      15,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "binding": {
+      "input_sha256": "19847672D7B7FD4D5769E5E7801195F3B381A53C7607CBD2E6F0FECFEDCF4606",
+      "rva": 482832,
+      "package_sha256": "3A69A376EFADF3F9882F75D5BA870B0989446F53438419D138E69161E20DEBB9"
+    }
+  },
+  "caret": {
+    "root": "build/t478-s38/caret-r2",
+    "values": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      7,
+      9,
+      1,
+      1
+    ]
+  },
+  "ownership": {
+    "source_sha256": "79d61d0a443d31a4465f80effe2db49bfe7ee879a649e19ec534b5aafc7c5886",
+    "body_sha256": "f739b11f3731093e5b98c1afea6c3b90540202b41ed50fa28fa69ad7ee7aede6",
+    "fixture_sha256": "588267dfbd0f030cb21ddbe5ad084036a23f6fd46bd6eebd8c7ff8070f8408b8",
+    "scope": "controlled ownership only; no real guest/conversion claim",
+    "compile_exit": 0,
+    "test_exit": 0,
+    "passed_cases": 24,
+    "elapsed_seconds": 7.761674800072797
+  },
+  "published_images": [
+    {
+      "name": "run16.exe",
+      "sha256": "9A2A7C9669A09C74D8594E406D3891FCB91681AA000C6DE79582148B3899EF12"
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "FE99B7B5703057D2F5879D14813CD29D4A90B1C5BC6BDF5092E65BB0ABAF7705"
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "AC9B4BEB734565E2FB8E9D41E582F0701FCC8266F8917453939C0C01F4A47FDB"
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "47231D34E73EE1624A9698C06EAC1DC83FDC08C94867A3D6E2309B1092B0CE7F"
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "D9B9FF3818BA58AFE834887F8EF24669E8EF3135E6AE07EA25D1267404A85B28"
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "B3BE3DE242DC9D945F8B040E5D1E2391B7D56EB2C178BD73C6F425D0F3E12AD5"
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "3A69A376EFADF3F9882F75D5BA870B0989446F53438419D138E69161E20DEBB9"
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "8E02D424D0BB521759F60B940EFE7C40431E1768FC2658D1D100A2DCD597A5C2"
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "AE10C6066F4E67400A141619AFA74E6A57BF8E8D6BC8D614254AA87D87843C28"
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "339B0B499E3A5E56195EA72E7499EF102B41623F67C760FEE108FD0DADD0CF29"
+    }
+  ],
+  "limits": [
+    "No interactive Clipboard acceptance claimed by new probes",
+    "Original allocation/invalid-input limits retained; no added tolerance",
+    "Caret bitmap/global blink/asynchronous task-death not inferred from selected witness"
+  ]
+}

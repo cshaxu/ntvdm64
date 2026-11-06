@@ -132,6 +132,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_window_creation_binding.c'),
     (Join-Path $adapterWow 'wow_class_words_binding.c'),
     (Join-Path $adapterWow 'wow_clipboard_epoch.c'),
+    (Join-Path $adapterWow 'wow_ole_descriptor_binding.c'),
     (Join-Path $adapterWow 'wow_standard_class_bindings.c'),
     (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
     (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/chartran.c'),
@@ -456,6 +457,10 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $wow_cflags')
     }
 }
+# OPENNT-HOST-297: selected original conversion is C, despite upstream suffix.
+$objects.Add('obj/opennt-ole/thoputil.obj')
+$ninja.Add('build obj/opennt-ole/thoputil.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx')))
+$ninja.Add('  cflags = $wow_cflags')
 $objects.Add('obj/callpr32.obj')
 $ninja.Add('build obj/callpr32.obj: generic_call_asm ' + (ConvertTo-NinjaPath (Join-Path $wow 'i386/callpr32.asm')) + ' | ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/callconv.inc')))
 $supportObjects = [System.Collections.Generic.List[string]]::new()

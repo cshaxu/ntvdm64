@@ -31,3 +31,12 @@ Get-Content src/mvdm/wow32/wspool.c
 Get-Content docs/etc/evidence/m0-t468-s3-printing-retirement.md
 rg -n 'WG32OpenJob|WG32CloseJob|WG32GetEnvironment|LoadLibraryAndGetProcAddresses' build/.ninja/msvc-x86-release/wow32/wow32.dll.map
 ```
+
+## T478 S38 follow-up
+
+The OLE caller described above now selects the bounded original descriptor
+conversion provider instead of system OLETHK32. Actual guest tests proved a
+NULL legacy-WOW callback inside that system DLL; the new original conversion
+and failure ownership paths pass real guest tests and Full16/16. The shared
+spooler loader and its other callers are unchanged. See
+[the S38 evidence](../../../docs/etc/evidence/m0-t478-s38-clipboard-caret-investigation.md).

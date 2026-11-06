@@ -3,12 +3,18 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [ValidateSet('shell','hook','word')][string]$Case='hook',
- [switch]$LeaveHookInstalled)
-# Restores only the shell/hook contracts of the removed pre-db91004e5 runner.
+ [ValidateSet('shell','hook','word','caret','clipreject')][string]$Case='hook',
+ [switch]$LeaveHookInstalled,
+ [string]$CompilerEnvironment,
+ [ValidateSet(15,3,131,49153,49154)][int]$ClipboardFormat=15,
+ [string]$DebugObserver,
+ [switch]$OleRoundtrip,
+ [string]$ProviderBuildRoot)
+# Original USER/Shell boundary probes: shell, hooks, window words and caret.
 # No Win16 Style modes or original guest build. Owned background invocation only.
 $ErrorActionPreference='Stop'
 if($LeaveHookInstalled -and $Case -ne 'hook'){throw 'LeaveHookInstalled requires hook case'}
+if($OleRoundtrip -and ($Case -ne 'clipreject' -or $ClipboardFormat -notin @(49153,49154))){throw 'OLE roundtrip requires descriptor clipreject case'}
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
@@ -28,15 +34,52 @@ try {
  @{pid=$PID;host=(Get-Process -Id $PID).Path;integrity=$label;script_sha256=(Get-FileHash $PSCommandPath).Hash}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $source="$PSScriptRoot/win16_${Case}_probe.asm"
  if($Case -eq 'word'){$source="$PSScriptRoot/win16_window_word_probe.asm"}
- $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}else{'CBTPROB'}
+ $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
- $defines=if($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}else{''}
+ $defines=if($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
+ if($OleRoundtrip){$defines+='-DOLE_ROUNDTRIP '}
  Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.EXE"') 30
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
  Save-IsolatedPackageManifest $runtime "$root/manifest.json"
  $scope=New-IsolatedPackageScope $runtime
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
  Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
+ if($OleRoundtrip){
+  if(!$CompilerEnvironment -or !$ProviderBuildRoot){throw 'Require compiler environment and exact provider build root'}
+  $map=(Resolve-Path "$ProviderBuildRoot/wow32.dll.map").Path
+  $image=(Resolve-Path "$ProviderBuildRoot/wow32.dll").Path
+  $manifest=Get-Content "$PackageRoot/product-system32-manifest.json" -Raw|ConvertFrom-Json
+  $entry=@($manifest|Where-Object Name -eq 'WOW32.DLL')
+  if($entry.Count -ne 1 -or $entry[0].InputSha256 -ne (Get-FileHash $image).Hash){throw 'Map build image differs from staged package input'}
+  $mapText=Get-Content $map -Raw
+  $symbol=[regex]::Match($mapText,'_wow_ole_convert_descriptor@8\s+([0-9A-Fa-f]{8})\s+f\b')
+  $base=[regex]::Match($mapText,'Preferred load address is ([0-9A-Fa-f]+)')
+  if(!$symbol.Success -or !$base.Success){throw 'Missing product conversion symbol/base'}
+  $rva=[Convert]::ToUInt32($symbol.Groups[1].Value,16)-[Convert]::ToUInt32($base.Groups[1].Value,16)
+  $nativeSource="$PSScriptRoot/wow_ole_descriptor_roundtrip.c"
+  @('@echo off',('call "'+$CompilerEnvironment+'" -arch=x86 -host_arch=x64 >nul'),
+   'if errorlevel 1 exit /b %errorlevel%',
+   ('cl /nologo /LD /MT /O2 /DOLE_PROVIDER_RVA='+$rva+' "'+$nativeSource+'" /Fo"'+$root+'/ole.obj" /link /OUT:"'+$root+'/OLEHOST.DLL" /IMPLIB:"'+$root+'/ole.lib" /EXPORT:OleRoundtrip=_OleRoundtrip@12'),
+   'exit /b %errorlevel%')|Set-Content "$root/compiler.cmd"
+  Owned native-compile cmd.exe ('/d /c "'+$root+'/compiler.cmd"') 60
+  Copy-Item "$root/OLEHOST.DLL" "$runtime/system32/OLEHOST.DLL"
+  Copy-Item $map "$root/provider.map"
+  Get-FileHash $nativeSource,"$root/OLEHOST.DLL",$map,$image|Export-Csv -NoTypeInformation "$root/native-inputs.csv"
+  @{rva=$rva;input_sha256=$entry[0].InputSha256;package_sha256=$entry[0].Sha256}|ConvertTo-Json|Set-Content "$root/provider-binding.json"
+ }
+
+ if($Case -eq 'caret'){
+  if(!$CompilerEnvironment -or !(Test-Path -LiteralPath $CompilerEnvironment)){throw 'Caret observer requires VS compiler environment'}
+  $nativeSource="$PSScriptRoot/wow_caret_native_observer.c"
+  @('@echo off',('call "'+$CompilerEnvironment+'" -arch=x86 -host_arch=x64 >nul'),
+   'if errorlevel 1 exit /b %errorlevel%',
+   ('cl /nologo /LD /O2 "'+$nativeSource+'" /Fo"'+$root+'/caret.obj" /link user32.lib /OUT:"'+$root+'/CARHOST.DLL" /IMPLIB:"'+$root+'/caret.lib" /EXPORT:CaretObserve=_CaretObserve@12'),
+   'exit /b %errorlevel%')|Set-Content "$root/compiler.cmd"
+  Owned native-compile cmd.exe ('/d /c "'+$root+'/compiler.cmd"') 60
+  Copy-Item "$root/CARHOST.DLL" "$runtime/system32/CARHOST.DLL"
+  Get-FileHash $nativeSource,"$root/CARHOST.DLL"|Export-Csv -NoTypeInformation "$root/native-inputs.csv"
+ }
+
  if($Case -eq 'shell'){
   Owned child-assemble $assembler ('-DCHILD -f bin "'+$source+'" -o "'+$root+'/SHLCHILD.EXE"') 30
   Copy-Item "$root/SHLCHILD.EXE" "$tests/SHLCHILD.EXE"
@@ -55,11 +98,22 @@ try {
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  foreach($arg in @("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait',"$tests/$probe.EXE",'--observation-timeout-ms','45000')){$info.ArgumentList.Add($arg)}
+ if($DebugObserver){
+  # Observe the existing private-desktop runner's owned process tree. This is
+  # diagnostic only; preserving exceptions is not a capability acceptance.
+  $line=(@($info.ArgumentList)|ForEach-Object {'"'+$_+'"'}) -join ' '
+  $observed=$info.FileName
+  $info.FileName=(Resolve-Path $DebugObserver).Path
+  $info.ArgumentList.Clear()
+  foreach($arg in @('--exe',$observed,$line,"$root/exceptions.txt")){$info.ArgumentList.Add($arg)}
+  Get-FileHash $DebugObserver,"$PSScriptRoot/wow_exception_observer.c"|Export-Csv -NoTypeInformation "$root/debugger-inputs.csv"
+ }
  $process=[Diagnostics.Process]::Start($info);$null=$process.Handle
- @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');arguments=@($info.ArgumentList);timeoutSeconds=55}|ConvertTo-Json|Set-Content "$root/observer.process.json"
- if(!$process.WaitForExit(55000)){throw 'Owned guest observer deadline'}
+ @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');arguments=@($info.ArgumentList);timeoutSeconds=$(if($DebugObserver){135}else{55})}|ConvertTo-Json|Set-Content "$root/observer.process.json"
+ if(!$process.WaitForExit($(if($DebugObserver){135000}else{55000}))){throw 'Owned guest observer deadline'}
  $process.WaitForExit();$process.ExitCode|Set-Content "$root/observer.exit"
  $report=Get-Content "$root/observer.txt" -Raw
+ if($DebugObserver){throw "Diagnostic debugger run; inspect exceptions, not acceptance"}
  if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){throw 'Guest/launcher did not complete normally'}
  Copy-Item "$tests/$probe.BIN" "$root/guest-report.bin"
  $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
@@ -87,6 +141,18 @@ try {
         $returnPattern='(?m)^'+$entry.Groups[1].Value+' after ret=0037 .*task='+$entry.Groups[2].Value+' '
         if($callbackTrace -notmatch $returnPattern){throw 'Shell callback did not return on its original task/thread'}
         'PASS actual guest ShellExecute success/failure, child execution and parent continuation'|Set-Content "$root/result.txt"
+ }elseif($Case -eq 'clipreject'){
+  if($bytes.Length -ne 18 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'CRJ1'){throw 'Bad Clipboard rejection report'}
+  $values=@(0..6|ForEach-Object {[BitConverter]::ToUInt16($bytes,4+2*$_)})
+  $values|ConvertTo-Json|Set-Content "$root/guest-report.json"
+  if($values[1] -ne $(if($OleRoundtrip){15}else{0}) -or $values[2] -ne 1 -or $values[3] -ne 0 -or !$values[4] -or !$values[5] -or !$values[6]){throw 'Rejected structured format lost guest ownership or cleanup'}
+  $(if($OleRoundtrip){'PASS actual product OLE forward/reverse payload conversion, invalid input/direction, guest input and output ownership'}else{'PASS original Win16 rejected structured-format request, guest bytes retained and caller cleanup'})|Set-Content "$root/result.txt"
+ }elseif($Case -eq 'caret'){
+  if($bytes.Length -ne 24 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'CAR1'){throw 'Bad caret report'}
+  $values=@(0..9|ForEach-Object {[BitConverter]::ToUInt16($bytes,4+2*$_)})
+  $values|ConvertTo-Json|Set-Content "$root/guest-report.json"
+  if(@($values[0..5]|Where-Object {$_ -ne 1}).Count -or $values[6] -ne 7 -or $values[7] -ne 9 -or !$values[8] -or !$values[9]){throw 'Original caret/native owner, visibility, position or cleanup mismatch'}
+  'PASS original Win16 solid/gray caret owner, position, show/hide, replacement and explicit destruction'|Set-Content "$root/result.txt"
  }elseif($Case -eq 'word'){
   if($bytes.Length -ne 22 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'WWP1'){throw 'Bad window-word report'}
   $record=[ordered]@{};$names=@('created_value','previous','inside_read','readback','destroyed','unregistered','class_extra','second_previous','second_read')

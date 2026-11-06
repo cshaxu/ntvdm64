@@ -2584,3 +2584,23 @@ The original NULL-transport NetServerEnum and buffer-conversion algorithms are
 retained. DBG body is excluded with #error; unrelated server APIs are omitted.
 Source: pinned OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
 Evidence: docs/etc/evidence/m0-t478-s4-remote-rap.md.
+
+OPENNT-HOST-297 (T478 S38 candidate): select only original thoputil.cxx
+GetPtr16Description, GetReadPtr16, GetStringPtr16, ConvertObjDesc1632,
+ConvertObjDesc3216 and ConvertObjDescriptor at their original com/ole32 path.
+Both pinned editions have identical selected bodies. The provider is compiled
+as C; no C++ language/runtime, COM activation, OLE thunk manager or guest import.
+Original descriptors, conversion, failure/cleanup and DBCS scanning remain the
+owners. The NT selector view is the already selected ExpLdt; unavailable OLE16
+TouchPointer16 delegates to the existing original WOW segment-fault helper;
+inline guest-base arithmetic delegates to the existing synchronous pointer
+mapping boundary. Only these substitutions and the finite declaration include
+are adaptations. Unsupported original Chicago/DBG branches reject with#error.
+The declaration facade preserves complete original THUNKINFO fields and SDK
+OBJECTDESCRIPTOR shape; opaque pointer-only classes are C forward declarations.
+The adapter retains original process lead-byte initialization. The complete
+outgoing boundary, rejected system OLETHK32 route, function hashes, tests and
+remaining limitations are in docs/etc/evidence/m0-t478-s38-clipboard-caret-investigation.md.
+Five real rejection cases, real product/guest forward/reverse conversion,
+caret and Full16/16 pass on the S38 package. Scope and retained original
+limitations are explicit in the evidence.

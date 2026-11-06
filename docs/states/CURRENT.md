@@ -2,32 +2,47 @@
 
 ## Current Work
 
-**Active: M0 T478 S38**
+**Active: M0 T478 S39**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Original inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| Identifier Mode | M0 T478 S38, Ordinary Mode, one active S. |
-| Admission And Approval | Continuous sequential owner authorization; S37 closes in this local delivery with [evidence](../etc/evidence/m0-t478-s37-dde-mm-investigation.md). |
-| Objective | Resolve finding48: establish current original clipboard format ownership/failure semantics and caret wiring; repair only demonstrated host gaps or incomplete existing repairs. |
-| Non-goals | No guest/media mutation, new clipboard formats, extra original tolerance, repeated completed CF_TEXT/DIB work, O:/winnt write or push. |
-| Reference Baseline | S37 package77579397-8a7e-4d07-add4-9a0e3e2404ac, Full16/16; T460 text/DIB evidence and [format audit](../../artifacts/mvdm-audit/shard-2/wow-clipboard-format-failure-review.md). |
-| Files And ABI Surface | Selected original wuclip/caret owners, existing native/guest handle adapters and independent tests. No planned public protocol change. |
+| Identifier Mode | M0 T478 S39, Ordinary Mode, one active S. |
+| Admission And Approval | Continuous sequential owner authorization; S38 closes in this local delivery with [evidence](../etc/evidence/m0-t478-s38-clipboard-caret-investigation.md). S39 implementation follows the local P1 commit. |
+| Objective | Resolve finding52: verify selected original WKB32 host keyboard thunks, code-page/buffer/failure and task-lifetime behavior; fix only demonstrated host gaps. |
+| Non-goals | No guest/media mutation, new layouts or tolerance, repeated IRQ1/PIC work, O:/winnt write or push. No user-desktop input or global keyboard-setting mutation. |
+| Reference Baseline | S38 package818fff8c-efa7-4570-93d6-1f9c820f40ed, Full16/16; [keyboard audit](../../artifacts/mvdm-audit/shard-3/wow-keyboard-thunks-lifecycle-review.md) and [driver roles](../../artifacts/mvdm-audit/shard-3/wow-keyboard-driver-build-role-review.md). |
+| Files And ABI Surface | Original wow32/wkbman.c and selected keyboard dispatch/buffer providers; independent guest/native tests. No planned public protocol change. |
 | Applicable Rules | EXECUTION, ARCHITECTURE, CODING, DOCUMENT and source policy; original semantics only. |
-| Verification | Compare actual original/current paths before classifying a bug; format-specific acceptance/rejection ownership and actual caret dispatch. Product changes require coherent build, appropriate focused/Full gates and worktree release. |
-| Expected Markers | Exact original/selected owners, demonstrated cache/copy ownership for remaining formats, caret identity/lifecycle evidence; separate existing repairs, original limitations and real host defects. |
-| Asset Needs | Pinned original sources and immutable guest inputs, current package, independent fixtures, modern pwsh medium-token private-desktop runners; build/t478-s38 evidence. |
-| Reporting Requirements | Report concrete gaps and bounded outcomes; do not infer all formats from text/DIB or invent allocator tolerance. |
+| Verification | Reconcile current source/image and earlier evidence first; test applicable scalar, input/output buffer, code-page/DBCS, failure and exit contracts through existing isolated runners. Product changes require coherent build, focused/Full gates, worktree release and local commit. |
+| Expected Markers | All selected WKB32 families attributed to actual providers; concrete original/adapter behavior and test assertions, with external layout/code-page or original limits explicit. No whole-file claim from symbol presence. |
+| Asset Needs | Pinned original source, immutable guest, exact S38 package, existing medium-token/private-desktop observers and independent probes; build/t478-s39 evidence. |
+| Reporting Requirements | Distinguish existing completed behavior, original limitations and actual host defects; do not infer DBCS/dead-key/failure coverage from ASCII or IRQ1 tests. |
 | Stop Conditions | Material new guest/provider requirement or behavior beyond original semantics. |
-| Exit Criteria | Finding48 reconciled, necessary bounded repairs verified, indexed evidence and local delivery complete; no push. |
-| Original Owner Request | Continue the existing S sequence, restore original capabilities and minimize mirror/local implementations; no new tolerance or duplicate completed work. |
-| Similar-Issue Sweep | CF_HDROP, metafile-pict and OLE descriptor cache/transfer branches; accepted versus rejected native ownership; caret owner and task lifetime. |
+| Exit Criteria | Finding52 reconciled with reproducible evidence, any necessary repair verified, indexed local delivery complete; no push. |
+| Original Owner Request | Continue existing sequence; maximize effective original recovery/minimize mirror and local implementation differences; no added tolerance or repeated completed work. |
+| Similar-Issue Sweep | ToAscii binary state/results; ANSI/OEM string and buffer lengths; key names, virtual/scancode translation, guest mapping and task retirement. |
 
-This is the owner's local retro-computing compatibility project. Temporary
-CURRENT size exception remains through final T478 reconciliation. S38 is
-admitted; no S38 implementation or capability verdict has been made yet.
+This is the owner's local retro-computing compatibility project. The temporary
+CURRENT size exception remains through final T478 reconciliation. S39 is
+admitted; no S39 product change or runtime conclusion has been made.
+
+## S38 Closure Record
+
+Finding48: [evidence](../etc/evidence/m0-t478-s38-clipboard-caret-investigation.md)
+and [receipt](../../artifacts/mvdm-audit/shard-2/clipboard-caret-s38-results.json)
+record copied-format rejection cleanup and recovery of the original OLE
+conversion closure. The unavailable system kernel-WOW callback dependency is
+removed.24 controlled ownership cases, five real guest rejection cases,
+real product/guest forward/reverse conversion and current caret cases pass.
+Full16/16 passes in377985ms. All ten images of package
+818fff8c-efa7-4570-93d6-1f9c820f40ed are hash-published to this worktree
+assets/release, with prior assets backed up in build/t478-s38/release-before.
+This P1 is a local delivery only; no guest change, new tolerance, O:/winnt
+write or push. Public interactive Clipboard coverage is not inferred from the
+new isolated/provider probes; original allocation/invalid-input limits remain.
 
 ## S37 Closure Record
 

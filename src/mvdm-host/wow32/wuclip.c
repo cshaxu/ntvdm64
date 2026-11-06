@@ -20,8 +20,8 @@
 
 struct _CBFORMATS  ClipboardFormats;
 
-DLLENTRYPOINTS  OleStringConversion[WOW_OLESTRINGCONVERSION_COUNT] =
-                                    {"ConvertObjDescriptor", NULL};
+/* DIVERGENCE(MVDM-HOST-DIV-885): obsolete system-DLL lookup table removed. */
+#line 23
 
 
 
@@ -891,7 +891,15 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                     hMem32 = W32ConvertObjDescriptor((HANDLE) parg16->f2, CFOLE_ANSI_TO_UNICODE);
                 }
                 ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
-		WU32ICBStoreHandle(parg16->f1, parg16->f2);
+                /* DIVERGENCE(MVDM-HOST-DIV-453): retain NULL delayed
+                 * rendering; a rejected converted copy is still ours. */
+                if (!parg16->f2 || ul) {
+                    WU32ICBStoreHandle(parg16->f1, parg16->f2);
+                }
+                else if (hMem32) {
+                    GlobalFree(hMem32);
+                }
+#line 838
                 break;
             }
 
@@ -942,7 +950,15 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 hMem32 = CopyDropFilesFrom16(hMem16);
             }
             ul = (ULONG)SetClipboardData(WORD32(parg16->f1), hMem32);
-            WU32ICBStoreHandle(parg16->f1, hMem16);
+            /* DIVERGENCE(MVDM-HOST-DIV-453): preserve delayed rendering
+             * and release a rejected host copy without caching its guest. */
+            if (!hMem16 || ul) {
+                WU32ICBStoreHandle(parg16->f1, hMem16);
+            }
+            else if (hMem32) {
+                GlobalFree(hMem32);
+            }
+#line 879
             break;
 
         case CF_DSPBITMAP:
@@ -986,7 +1002,20 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 
             ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
 
-            WU32ICBStoreHandle(parg16->f1, hMem16);
+            /* DIVERGENCE(MVDM-HOST-DIV-453): on rejection neither the
+             * copied picture nor its new native metafile was transferred. */
+            if (!hMem16 || ul) {
+                WU32ICBStoreHandle(parg16->f1, hMem16);
+            }
+            else {
+                if (hMF32) {
+                    DeleteMetaFile(hMF32);
+                }
+                if (hMem32) {
+                    GlobalFree(hMem32);
+                }
+            }
+#line 923
             break;
 
     }
@@ -1320,15 +1349,9 @@ VOID InitCBFormats ()
 
 HGLOBAL W32ConvertObjDescriptor(HANDLE hMem, UINT flag)
 {
-    HANDLE hMemOut;
-
-    if (!(OleStringConversion[WOW_OLE_STRINGCONVERSION].lpfn)) {
-        if (!LoadLibraryAndGetProcAddresses("OLETHK32.DLL", OleStringConversion, WOW_OLESTRINGCONVERSION_COUNT)) {
-            return (0);
-        }
-    }
-
-    hMemOut = (HANDLE) (*OleStringConversion[WOW_OLE_STRINGCONVERSION].lpfn) (hMem, flag);
-
-    return (hMemOut);
+    /* DIVERGENCE(MVDM-HOST-DIV-885): the modern system OLETHK32 requires
+     * an unavailable kernel-WOW callback registration. Select the original
+     * descriptor conversion through the bounded local WOW binding. */
+    extern HGLOBAL WINAPI wow_ole_convert_descriptor(HANDLE, UINT);
+    return wow_ole_convert_descriptor(hMem, flag);
 }

@@ -1289,3 +1289,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S36 shell/hook investigation](evidence/m0-t478-s36-shell-hook-investigation.md): real Shell/CBT and original hook retirement evidence, restored test entry and current image binding.
 
 - [T478 S37 DDE/WINMM investigation](evidence/m0-t478-s37-dde-mm-investigation.md): original DDEML window-word repair and WINMM interrupt ABI recovery; real callbacks, cancellation, Full16/16 and worktree release.
+
+- [T478 S38 clipboard/caret investigation](evidence/m0-t478-s38-clipboard-caret-investigation.md): structured-format rejection cleanup and original OLE conversion recovery; real guest/caret evidence, Full16/16 and worktree release.

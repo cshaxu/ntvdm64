@@ -1,0 +1,244 @@
+[
+  {
+    "edition": "OpenNT",
+    "path": "O:\\repos.external\\OpenNT\\com\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "GetPtr16Description",
+    "first_line": 566,
+    "last_line": 756,
+    "body_sha256": "4b20584b2d1d1ec42dde7a9f90d38b049c057daadd3830ac90ee2ca32f1c08ea",
+    "calls": [
+      "GetPtr16Description",
+      "IS_LDT_SELECTOR",
+      "WOWCallback16",
+      "WOWFIXVDMPTR",
+      "WOWGetDescriptor",
+      "WOWGetVDMPointer",
+      "WOWGetVDMPointerFix",
+      "WOWRELVDMPTR",
+      "defined",
+      "entry",
+      "thkAssert",
+      "thkDebugOut"
+    ]
+  },
+  {
+    "edition": "OpenNT",
+    "path": "O:\\repos.external\\OpenNT\\com\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "GetReadPtr16",
+    "first_line": 776,
+    "last_line": 794,
+    "body_sha256": "51ba066b49cbfb4d21901f694644a5bc2f99dc1bb4d76d0b7e3c27cb3bfe8457",
+    "calls": [
+      "FAILED",
+      "GetPtr16Description",
+      "GetReadPtr16"
+    ]
+  },
+  {
+    "edition": "OpenNT",
+    "path": "O:\\repos.external\\OpenNT\\com\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "GetStringPtr16",
+    "first_line": 930,
+    "last_line": 996,
+    "body_sha256": "2212f753f7196811611a8bbbd27dc0a618bcfd025a778c1998d78f1555728bff",
+    "calls": [
+      "FAILED",
+      "GetPtr16Description",
+      "GetStringPtr16",
+      "WOWRELVDMPTR",
+      "min"
+    ]
+  },
+  {
+    "edition": "OpenNT",
+    "path": "O:\\repos.external\\OpenNT\\com\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "ConvertObjDesc1632",
+    "first_line": 2604,
+    "last_line": 2758,
+    "body_sha256": "dfd8feb9b43f8519e82bdf4409a7f118257dd2a52d5a7cf5dfdd97db35711f5e",
+    "calls": [
+      "AreFileApisANSI",
+      "ConvertObjDesc1632",
+      "GetReadPtr16",
+      "GetStringPtr16",
+      "GlobalAlloc",
+      "GlobalFree",
+      "GlobalLock",
+      "GlobalUnlock",
+      "MultiByteToWideChar",
+      "WOWGlobalLock16",
+      "WOWGlobalUnlock16",
+      "WOWRELVDMPTR",
+      "memcpy",
+      "thkDebugOut"
+    ]
+  },
+  {
+    "edition": "OpenNT",
+    "path": "O:\\repos.external\\OpenNT\\com\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "ConvertObjDesc3216",
+    "first_line": 2778,
+    "last_line": 2917,
+    "body_sha256": "dd17e175474c1ddd66ef33435a9dd52ce566c5da2575f6b530f1e47941c6254e",
+    "calls": [
+      "AreFileApisANSI",
+      "ConvertObjDesc3216",
+      "FIXVDMPTR",
+      "GlobalLock",
+      "GlobalUnlock",
+      "IsBadReadPtr",
+      "IsBadStringPtrW",
+      "RELVDMPTR",
+      "WOWGlobalAllocLock16",
+      "WOWGlobalUnlock16",
+      "WOWGlobalUnlockFree16",
+      "WideCharToMultiByte",
+      "lstrlenW",
+      "memcpy",
+      "thkDebugOut"
+    ]
+  },
+  {
+    "edition": "OpenNT",
+    "path": "O:\\repos.external\\OpenNT\\com\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "ConvertObjDescriptor",
+    "first_line": 4403,
+    "last_line": 4442,
+    "body_sha256": "08e6bf45d630f954f4e7b8d2ca8eb0d52c361f4a83d41f4f24ec6e628957c68e",
+    "calls": [
+      "ConvertObjDesc1632",
+      "ConvertObjDesc3216",
+      "ConvertObjDescriptor",
+      "FAILED",
+      "STDAPI_",
+      "thkAssert"
+    ]
+  },
+  {
+    "edition": "OpenNT45",
+    "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "GetPtr16Description",
+    "first_line": 566,
+    "last_line": 756,
+    "body_sha256": "4b20584b2d1d1ec42dde7a9f90d38b049c057daadd3830ac90ee2ca32f1c08ea",
+    "calls": [
+      "GetPtr16Description",
+      "IS_LDT_SELECTOR",
+      "WOWCallback16",
+      "WOWFIXVDMPTR",
+      "WOWGetDescriptor",
+      "WOWGetVDMPointer",
+      "WOWGetVDMPointerFix",
+      "WOWRELVDMPTR",
+      "defined",
+      "entry",
+      "thkAssert",
+      "thkDebugOut"
+    ]
+  },
+  {
+    "edition": "OpenNT45",
+    "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "GetReadPtr16",
+    "first_line": 776,
+    "last_line": 794,
+    "body_sha256": "51ba066b49cbfb4d21901f694644a5bc2f99dc1bb4d76d0b7e3c27cb3bfe8457",
+    "calls": [
+      "FAILED",
+      "GetPtr16Description",
+      "GetReadPtr16"
+    ]
+  },
+  {
+    "edition": "OpenNT45",
+    "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "GetStringPtr16",
+    "first_line": 930,
+    "last_line": 996,
+    "body_sha256": "2212f753f7196811611a8bbbd27dc0a618bcfd025a778c1998d78f1555728bff",
+    "calls": [
+      "FAILED",
+      "GetPtr16Description",
+      "GetStringPtr16",
+      "WOWRELVDMPTR",
+      "min"
+    ]
+  },
+  {
+    "edition": "OpenNT45",
+    "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "ConvertObjDesc1632",
+    "first_line": 2604,
+    "last_line": 2758,
+    "body_sha256": "dfd8feb9b43f8519e82bdf4409a7f118257dd2a52d5a7cf5dfdd97db35711f5e",
+    "calls": [
+      "AreFileApisANSI",
+      "ConvertObjDesc1632",
+      "GetReadPtr16",
+      "GetStringPtr16",
+      "GlobalAlloc",
+      "GlobalFree",
+      "GlobalLock",
+      "GlobalUnlock",
+      "MultiByteToWideChar",
+      "WOWGlobalLock16",
+      "WOWGlobalUnlock16",
+      "WOWRELVDMPTR",
+      "memcpy",
+      "thkDebugOut"
+    ]
+  },
+  {
+    "edition": "OpenNT45",
+    "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "ConvertObjDesc3216",
+    "first_line": 2778,
+    "last_line": 2917,
+    "body_sha256": "dd17e175474c1ddd66ef33435a9dd52ce566c5da2575f6b530f1e47941c6254e",
+    "calls": [
+      "AreFileApisANSI",
+      "ConvertObjDesc3216",
+      "FIXVDMPTR",
+      "GlobalLock",
+      "GlobalUnlock",
+      "IsBadReadPtr",
+      "IsBadStringPtrW",
+      "RELVDMPTR",
+      "WOWGlobalAllocLock16",
+      "WOWGlobalUnlock16",
+      "WOWGlobalUnlockFree16",
+      "WideCharToMultiByte",
+      "lstrlenW",
+      "memcpy",
+      "thkDebugOut"
+    ]
+  },
+  {
+    "edition": "OpenNT45",
+    "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\ole32\\olethunk\\olethk32\\thoputil.cxx",
+    "source_sha256": "0ee4ba619f5943e6a259a2ed94be41048817b77ef9950fc41b940c61f7971826",
+    "function": "ConvertObjDescriptor",
+    "first_line": 4403,
+    "last_line": 4442,
+    "body_sha256": "08e6bf45d630f954f4e7b8d2ca8eb0d52c361f4a83d41f4f24ec6e628957c68e",
+    "calls": [
+      "ConvertObjDesc1632",
+      "ConvertObjDesc3216",
+      "ConvertObjDescriptor",
+      "FAILED",
+      "STDAPI_",
+      "thkAssert"
+    ]
+  }
+]
