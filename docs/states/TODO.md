@@ -22,6 +22,8 @@ distinguishes these from work already owned by a queued proposal.
 
 | P3 | Original nt_mem flags precedence does not reject all aligned invalid/stale chunks; allocation commit failure can leave allocated/split header state before free accounting. | Retain original private-input and failure-recovery limits under the owner ceiling; do not claim safe repeated free or transactional rollback. Reopen for project drift, valid-caller failure requiring a separately admitted repair, or explicit stronger recovery scope. [S17 evidence](../etc/evidence/m0-t478-s17-virtual-memory.md). |
 
+| P3 | Original parameter-map same-key borrowers share the first task owner; forced owner purge may remove a referenced node. A valid supported cross-task overlap/termination symptom is unproved. | Preserve existing per-call DIV-347 cleanup; reopen on a concrete valid-call witness, without assuming task-death survival or adding a new ownership model. [S18 evidence](../etc/evidence/m0-t478-s18-parameter-map.md). |
+
 ## Original guest retained limitations
 
 These entries are grouped by the original guest owner, not declared fixed.

@@ -1,0 +1,20 @@
+{
+  "baseline": "18d0ec060024912e6b03aec69bdded6c9181af03",
+  "scope": "selected original release cache and exact extracted bodies with actual finalizer; lower services doubled, not actual guest",
+  "end": "2026-11-06T04:06:58.6090125Z",
+  "passed": true,
+  "current_baseline": "995780041",
+  "finding": 43,
+  "current_result": "PARAMETER_MAP failures=0 scenarios=54 reverse=148 buffer=84 forward=72\n",
+  "baseline_result": "FAIL NULL_PAIR\nFAIL NULL_LOOKUP\nFAIL UPDATE_FALSE_ROLLBACK\nFAIL UPDATE_SEH_ROLLBACK\nFAIL REVERSE_TEXT_OPTIONAL\nFAIL REVERSE_TEXT_ABORT\nFAIL REVERSE_CB_OPTIONAL\nFAIL REVERSE_CB_ABORT\nFAIL NULL CB_DIR no node\nFAIL FORWARD_TEXT_ABORT\nFAIL FORWARD_CB_ABORT\nFAIL HEAP_COPY_ABORT\nFAIL STACK_COPY_ABORT\nFAIL CB_DIR fallback abort release\nFAIL API_OPTIONAL\nFAIL API_ABORT\nFAIL REVERSE_TEXT_MUTATION\nFAIL REVERSE_CB_MUTATION\nFAIL REVERSE_CB_ABORT_MUTATION\nPARAMETER_MAP failures=19 scenarios=54 reverse=140 buffer=84 forward=72\n",
+  "production_changes": false,
+  "disposition": "Existing per-call DIV-347 fixes pass; same-key cross-task forced-death survival remains unproved original risk, no new owner model",
+  "release_package_id": "b4a13bec-806d-48d3-ad50-728178335129",
+  "release_hashes_matched": 10,
+  "input_hashes": {
+    "src\\mvdm-host\\wow32\\wparam.c": "0131ce3113859ab30c69ce29d9977252c9f856ac04f7a70d7a5d45cab06230ff",
+    "src\\mvdm-host\\wow32\\wuwind.c": "7937b35a43a66aad18e888b50cabf24c25ac9d2f10a88e340877e2480deaa23d",
+    "tests\\observation\\verify-wow-parameter-map.ps1": "57452da4cbeaa44d17d1ad3a1f6ab85487c326de6e40361e1d9dbc9e9bd797e2",
+    "tests\\observation\\wow_parameter_map_fixture.c": "332221c8ab1ebe9f3ca9398dac1c499513b670ad12191d02e891ae02e587c7a8"
+  }
+}

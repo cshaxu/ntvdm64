@@ -1249,3 +1249,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S16 file-cache retirement](evidence/m0-t478-s16-file-cache.md): full-list cleanup, failed mapping ownership and focused selected-object evidence.
 
 - [T478 S17 virtual-memory disposition](evidence/m0-t478-s17-virtual-memory.md): connected original allocator, retained failure limits and repaired test-only boundary.
+
+- [T478 S18 parameter-map disposition](evidence/m0-t478-s18-parameter-map.md): existing 54-scenario cleanup verification and bounded original cross-task risk.

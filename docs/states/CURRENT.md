@@ -229,3 +229,7 @@ T478 S16 [repairs original file-cache retirement](../etc/evidence/m0-t478-s16-fi
 ## S17 Closure Record
 
 T478 S17 [verifies the original allocator and records retained limits](../etc/evidence/m0-t478-s17-virtual-memory.md); existing memory fixture passes after test-only boundary repair. Product release unchanged.
+
+## S18 Closure Record
+
+T478 S18 [verifies existing parameter-map cleanup](../etc/evidence/m0-t478-s18-parameter-map.md): 54 scenarios pass; unproved original cross-task risk retained, no product changes.

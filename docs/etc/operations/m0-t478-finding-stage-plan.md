@@ -264,3 +264,10 @@ allocator bodies and existing real allocate/grow/shrink/free sharing tests.
 Original malformed-address and commit-failure recovery limitations remain
 explicit; current query/reallocate exports already exist. Only an asserted-
 unreached test boundary is repaired. S16 release is unchanged; S18 follows.
+
+## S18 disposition
+
+[S18](../evidence/m0-t478-s18-parameter-map.md) reruns the existing exact-body
+54-scenario parameter-map suite successfully. DIV-347 remains effective; the
+same-key cross-task forced-owner-death scenario remains an unproved original
+risk, not grounds for a new ownership model. No product changes; S19 follows.
