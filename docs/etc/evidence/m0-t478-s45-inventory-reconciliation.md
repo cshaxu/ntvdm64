@@ -261,3 +261,33 @@ and allocation retry/IGNORE remain pending. No product bug or missing connection
 has been demonstrated by this checkpoint; no original malformed-input tolerance
 is added. The row remains pending and S45 stays active, with unchanged counts
 and unchanged S43 release. No O:/winnt write or push.
+
+## P7 real default-root connection and original read limitation
+
+The [root receipt](../../../artifacts/mvdm-audit/t478-final/s45-pif-root-partial.json)
+uses a separate focused fixture linking the same original nt_pif.obj plus actual
+session, guest-memory lease, firmware and system-root implementations. There is
+no root-provider substitute. An owned temporary directory contains a valid
+_default.pif. Binding that directory to the real session makes the original
+GetPIFData empty-name path succeed; deleting that exact file makes the same call
+return FALSE with original defaults. A short root-output buffer reports the
+required size. Normal parser closure permits deletion; unbind/dispose and owned
+directory cleanup pass. Background runner33076 reports build0, fixture0 and
+PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK, under120/30-second deadlines.
+
+The read-only original audit source-evidence file pins OpenNT commit
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and nt_pif.c hash
+4ae2c1d2c4a66dc63c9b2ddd673fcae067f2fbdab953dc8d96aecfcf03c262bc.
+Its exact observations at original lines160-180 match the current source's
+seek/read failure branches: close and FALSE on -1; no exact-size comparison.
+A positive short read is not converted into a complete record by the parser.
+This is original behavior, not a missing project read-exact implementation.
+Do not add retry, zero-fill, rollback or claim truncated records are safe.
+
+The remaining qualification is post-open partial-error execution and allocator
+retry/IGNORE. The original ch_malloc loop and its dialog reply remain selected;
+source presence alone is not reported as runtime evidence. Existing malformed,
+nonterminated or cyclic record limits do not become new tolerance requirements.
+The stable identity remains pending rather than claiming these cases passed.
+No product sources, guest bytes or published binaries change. S45 remains active
+with twelve startup rows/1045 active identities pending; no O:/winnt write or push.

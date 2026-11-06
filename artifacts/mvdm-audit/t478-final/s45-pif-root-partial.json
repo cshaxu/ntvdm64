@@ -1,0 +1,178 @@
+{
+  "id": "DOS16:6183631816abcfe32197",
+  "status": "partial; pending remains",
+  "runner": "build/t478-s45/run-root-p7.ps1",
+  "runner_pid": 33076,
+  "timeouts_seconds": {
+    "build": 120,
+    "fixture": 30
+  },
+  "build_exit": 0,
+  "fixture_exit": 0,
+  "marker": "PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK",
+  "inputs": {
+    "tests/mvdm/oemuni/oemuni_pif_root_fixture.c": "8f10d9ee923f11d417c677d071dd36f1682b418093557de634c9d044f862d62e",
+    "tools/build/Generate-T420S17OemUniNinja.mjs": "be18319112320c0aaf068ca706cd6f31eaecb7fa5a7ec33eeda8546c67e3a9a7",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "69c437e55266c75941628476b0830f08d212e0f4b158bf189deecee4a32d4a7a",
+    "src/ntvdm-exe/session/session.c": "e59ab2a6ebe824c11553eaf6f758ef67b568c495a75d1f720675f6761ab12506",
+    "build/.ninja/msvc-x86-release/worker/obj/host/nt_pif.obj": "fde10ba9c3ff156735c8a2cdc31457207a34c89f58e21b29eeb26bb32b643b32"
+  },
+  "original_evidence": {
+    "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\source-evidence.json",
+    "sha256": "2528e2af657eb8437e9c9cea7ac2e7e71c9614f29faf93392da150909a84be55",
+    "upstream_file_sha256": "4ae2c1d2c4a66dc63c9b2ddd673fcae067f2fbdab953dc8d96aecfcf03c262bc",
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "observations": [
+      {
+        "line": 160,
+        "text": "if(_llseek(filehandle,0,0) == -1)"
+      },
+      {
+        "line": 161,
+        "text": "   {"
+      },
+      {
+        "line": 162,
+        "text": "   _lclose(filehandle);"
+      },
+      {
+        "line": 163,
+        "text": "   return FALSE;"
+      },
+      {
+        "line": 164,
+        "text": "   }"
+      },
+      {
+        "line": 165,
+        "text": "if(_lread(filehandle,(LPSTR)&pif286,sizeof(pif286)) == -1)"
+      },
+      {
+        "line": 166,
+        "text": "   {"
+      },
+      {
+        "line": 167,
+        "text": "   _lclose(filehandle);"
+      },
+      {
+        "line": 168,
+        "text": "   return FALSE;"
+      },
+      {
+        "line": 169,
+        "text": "   }"
+      },
+      {
+        "line": 171,
+        "text": "/*=============================================================="
+      },
+      {
+        "line": 172,
+        "text": "Go to the PIF extension signature area and try to read the "
+      },
+      {
+        "line": 173,
+        "text": "header in. "
+      },
+      {
+        "line": 174,
+        "text": "==============================================================*/"
+      },
+      {
+        "line": 176,
+        "text": "if (_lread(filehandle,(LPSTR)&exthdr,sizeof(exthdr)) == -1)"
+      },
+      {
+        "line": 177,
+        "text": "   {"
+      },
+      {
+        "line": 178,
+        "text": "   _lclose(filehandle);"
+      },
+      {
+        "line": 179,
+        "text": "   return FALSE;"
+      },
+      {
+        "line": 180,
+        "text": "   }"
+      },
+      {
+        "line": 425,
+        "text": "}"
+      },
+      {
+        "line": 427,
+        "text": "/*"
+      },
+      {
+        "line": 428,
+        "text": " * Allocate NumBytes memory and exit cleanly on failure."
+      },
+      {
+        "line": 429,
+        "text": " */"
+      },
+      {
+        "line": 430,
+        "text": "void *ch_malloc(unsigned int NumBytes)"
+      },
+      {
+        "line": 431,
+        "text": "{"
+      },
+      {
+        "line": 433,
+        "text": "    unsigned char *p = NULL;"
+      },
+      {
+        "line": 435,
+        "text": "    while ((p = malloc(NumBytes)) == NULL) {"
+      },
+      {
+        "line": 436,
+        "text": "\tif(RcMessageBox(EG_MALLOC_FAILURE, \"\", \"\","
+      },
+      {
+        "line": 437,
+        "text": "\t\t    RMB_ABORT | RMB_RETRY | RMB_IGNORE |"
+      },
+      {
+        "line": 438,
+        "text": "\t\t    RMB_ICON_STOP) == RMB_IGNORE)"
+      },
+      {
+        "line": 439,
+        "text": "\t    break;"
+      },
+      {
+        "line": 440,
+        "text": "    }"
+      },
+      {
+        "line": 441,
+        "text": "    return(p);"
+      },
+      {
+        "line": 442,
+        "text": "}"
+      }
+    ]
+  },
+  "coverage": [
+    "Real session-bound root identity",
+    "Original empty-name _default.pif lookup",
+    "Present default file parses",
+    "Missing optional file returns FALSE with default settings",
+    "Root API insufficient-capacity required length",
+    "Normal close/unbind/dispose and owned-directory cleanup"
+  ],
+  "limits": [
+    "No malformed-file safety or read-exact retry added",
+    "No post-open read/seek error injection or allocator retry/IGNORE runtime claim",
+    "RcMessageBox test substitute exits99 on unexpected call",
+    "No product source changes"
+  ]
+}

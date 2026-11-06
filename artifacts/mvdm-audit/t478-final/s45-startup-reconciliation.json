@@ -71,7 +71,7 @@
       "contract": "PIF binary settings extraction and defaults",
       "disposition": "pending",
       "current_owner": "nt_pif.c GetPIFData selected original parser with retained path ownership fix",
-      "evidence_and_limits": "s45-pif-parser-partial.json and s45-pif-history-partial.json: current production-object extension/default cases plus repeated fast-paste/priority state, WNT config set/ignore/replace/repeated reads and real sharing-denied/missing opens pass. ASCII config conversion substituted. Remaining: default-path identity, legacy short-read/seek partial errors and allocation retry/IGNORE. No malformed-input safety claim."
+      "evidence_and_limits": "s45-pif-parser-partial.json and s45-pif-history-partial.json: current production-object extension/default cases plus repeated fast-paste/priority state, WNT config set/ignore/replace/repeated reads and real sharing-denied/missing opens pass. ASCII config conversion substituted. Remaining: default-path identity, legacy short-read/seek partial errors and allocation retry/IGNORE. No malformed-input safety claim. s45-pif-root-partial.json now verifies default-path identity and present/missing default using real session/root providers, not stubs. Original short-read limitation is source-confirmed; no read-exact recovery admitted. Post-open failure and allocator reply runtime evidence remains outstanding."
     },
     {
       "id": "DOS16:e38a5b13166e6e9c8136",
