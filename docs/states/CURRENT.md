@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S10 is closed; [keyboard-layout disposition](../etc/evidence/m0-t478-s10-keyboard-layout.md).
-Sequential S11 admission is owner-authorized next.
+T478 S11 is closed; [XMS dispatch disposition](../etc/evidence/m0-t478-s11-xms-dispatch.md).
+Sequential S12 admission is owner-authorized next.
 
 ## S1 Closure Record
 
@@ -30,6 +30,8 @@ The owner directs no push or main-runtime publication.
 The owner accepted [S12 source layout and compile-time boundaries](../etc/evidence/m0-t473-s12-source-layout-closure.md).
 
 ## S11 Closure Record
+
+T478 S11 [verifies all twelve original XMS dispatch routes](../etc/evidence/m0-t478-s11-xms-dispatch.md); the public function guard already exists, and original private-input limits are retained.
 
 The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md) records the selected non-MVDM cleanup, published package equivalence and deferred recovery boundaries.
 

@@ -209,3 +209,10 @@ host reader with current objects: valid two-character layout succeeds; original
 no-install cases remain. Overlong invalid configuration reproduces the inherited
 cache limitation, retained under the owner no-extra-tolerance standard. No
 production or guest changes. S11/finding 22 is next proposed.
+
+## S11 disposition
+
+[S11](../evidence/m0-t478-s11-xms-dispatch.md) confirms original public XMS
+validation and all twelve private host dispatch routes. Selected release tokens
+match both originals. No new private-BOP tolerance or repeated S7 repair is
+added. No production changes; S12/finding 24 is next proposed.

@@ -1,0 +1,37 @@
+{
+  "task": "T478 S11",
+  "baseline": "9b74d4fab",
+  "releaseTokensEqualBothOriginals": true,
+  "selectedTokenSha256": "f69fc287a240eb0431c4662e531dbb1c0a3641cfd2f95d08840e7f6551daecb6",
+  "CAndAsmConstantsEqual": {
+    "XMS_A20": 0,
+    "XMS_MOVEBLOCK": 1,
+    "XMS_ALLOCBLOCK": 2,
+    "XMS_FREEBLOCK": 3,
+    "XMS_SYSPAGESIZE": 4,
+    "XMS_EXTMEM": 5,
+    "XMS_INITUMB": 6,
+    "XMS_REQUESTUMB": 7,
+    "XMS_RELEASEUMB": 8,
+    "XMS_NOTIFYHOOKI15": 9,
+    "XMS_QUERYEXTMEM": 10,
+    "XMS_REALLOCBLOCK": 11,
+    "XMS_LASTSVC": 12
+  },
+  "originalPublicFunctionGuard": "himem.asm 464: cmp ah,NumFns; invalid returns AX=0 / BL=ERR_NOTIMPLEMENTED before function dispatch",
+  "privateMisuseDisposition": "release original does not guard arbitrary private BOP index; retained original limit, not a supported public XMS request",
+  "sourceAndObjectHashes": {
+    "src\\mvdm-host\\xms.486\\xmsdisp.c": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsdisp.c": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\xms.486\\xmsdisp.c": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+    "src\\mvdm-host\\inc\\xmssvc.h": "e2661ecf606b903e4c3053c4e6fe8197f4f4b15dde81393fb6fd508f09bccebe",
+    "src\\mvdm-host\\inc\\xmssvc.inc": "53c87e63bb79566a5790c835d2979cc6e8fae48fb29cdea9ce2f3b6ef60e472e",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_bop.c": "8ea79491911b1a274c89771717062068df5c453e89648ee21dd588dffaf1e371",
+    "build\\.ninja\\msvc-x86-release\\worker\\obj\\xms\\xmsdisp.obj": "44a3705cbe3bdf627333ebad6f69e9276d86d530dddb26f17d9d053806bbd9a7",
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem.asm": "bfadf282d547b0b0dbc008405c4882f333c047ec235529d928e5d9ca0184e0ca"
+  },
+  "packageId": "694495a1-285e-4e8c-940f-3f2425de4445",
+  "tenReleaseHashesVerified": true,
+  "productChanged": false,
+  "probeLog": "XMS_PRIVATE_DISPATCH_PASS services=12 actual_dispatch_object=1 sentinel_handlers=1\n"
+}
