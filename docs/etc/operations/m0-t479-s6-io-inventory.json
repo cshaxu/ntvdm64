@@ -1,12 +1,12 @@
 {
-  "baseline": "572d854a3",
-  "method": "Exact enum and reference inventory; not preprocessing, implementation or acceptance proof",
+  "baseline": "d3bd17b6b",
+  "method": "Current dispatch source references across the three live provider layers; not runtime acceptance. Explicit cases and PUBLICATION_END special dispatch counted; actual payload restrictions retained.",
   "operations": [
     {
       "value": 1,
       "operation": "CONSOLE_IO_WRITE",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 2,
@@ -14,52 +14,59 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:209"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 3,
       "operation": "CONSOLE_IO_CURSOR_POSITION",
       "sites": [
-        "src/ntvdm-exe/softpc/mvdm_vm_application.c:99",
-        "src/ntvdm-exe/frontend/vm_text.c:237"
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:100",
+        "src/ntvdm-exe/frontend/vm_text.c:258"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 4,
       "operation": "CONSOLE_IO_CURSOR_INFO",
       "sites": [
-        "src/ntvdm-exe/softpc/mvdm_vm_application.c:99",
-        "src/ntvdm-exe/frontend/vm_text.c:243"
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:100",
+        "src/ntvdm-exe/frontend/vm_text.c:264"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 5,
       "operation": "CONSOLE_IO_FILL_CHARACTER",
-      "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:99",
+        "src/ntvdm-exe/frontend/vm_text.c:217"
+      ],
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 6,
       "operation": "CONSOLE_IO_FILL_ATTRIBUTE",
-      "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:99",
+        "src/ntvdm-exe/frontend/vm_text.c:217",
+        "src/ntvdm-exe/frontend/vm_text.c:220"
+      ],
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 7,
       "operation": "CONSOLE_IO_SCROLL",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 8,
       "operation": "CONSOLE_IO_ATTRIBUTE",
       "sites": [
         "src/ntvdm-exe/softpc/mvdm_vm_application.c:98",
-        "src/ntvdm-exe/frontend/vm_text.c:217"
+        "src/ntvdm-exe/frontend/vm_text.c:238"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 9,
@@ -69,7 +76,7 @@
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:174",
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:177"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 10,
@@ -77,7 +84,7 @@
       "sites": [
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:168"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 11,
@@ -85,60 +92,60 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:141"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 12,
       "operation": "CONSOLE_IO_READ_CELLS_A",
       "sites": [
-        "src/ntvdm-exe/frontend/vm_text.c:258"
+        "src/ntvdm-exe/frontend/vm_text.c:279"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 13,
       "operation": "CONSOLE_IO_READ_CELLS_W",
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:87",
-        "src/ntvdm-exe/frontend/vm_text.c:257"
+        "src/ntvdm-exe/frontend/vm_text.c:278"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 14,
       "operation": "CONSOLE_IO_WRITE_CELLS_A",
       "sites": [
-        "src/ntvdm-exe/softpc/mvdm_vm_application.c:100",
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:101",
         "src/ntvdm-exe/frontend/vm_text.c:86",
-        "src/ntvdm-exe/frontend/vm_text.c:258"
+        "src/ntvdm-exe/frontend/vm_text.c:279"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 15,
       "operation": "CONSOLE_IO_WRITE_CELLS_W",
       "sites": [
-        "src/ntvdm-exe/softpc/mvdm_vm_application.c:100",
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:101",
         "src/ntvdm-exe/frontend/vm_text.c:86",
         "src/ntvdm-exe/frontend/vm_text.c:87",
-        "src/ntvdm-exe/frontend/vm_text.c:257"
+        "src/ntvdm-exe/frontend/vm_text.c:278"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 16,
       "operation": "CONSOLE_IO_BUFFER_SIZE",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 17,
       "operation": "CONSOLE_IO_WINDOW_RECT",
       "sites": [
         "src/ntvdm-exe/softpc/mvdm_vm_application.c:98",
-        "src/ntvdm-exe/frontend/vm_text.c:222"
+        "src/ntvdm-exe/frontend/vm_text.c:243"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 18,
@@ -147,7 +154,7 @@
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:95",
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:183"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 19,
@@ -156,15 +163,15 @@
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:88",
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:183"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 20,
       "operation": "CONSOLE_IO_GET_CURSOR_INFO",
       "sites": [
-        "src/ntvdm-exe/frontend/vm_text.c:235"
+        "src/ntvdm-exe/frontend/vm_text.c:256"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 21,
@@ -172,7 +179,7 @@
       "sites": [
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:185"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 22,
@@ -180,7 +187,7 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:145"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 23,
@@ -188,64 +195,64 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:147"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 24,
       "operation": "CONSOLE_IO_GET_TITLE_A",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 25,
       "operation": "CONSOLE_IO_SET_TITLE_A",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 26,
       "operation": "CONSOLE_IO_GET_POINTER",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 27,
       "operation": "CONSOLE_IO_SET_POINTER",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 28,
       "operation": "CONSOLE_IO_GET_POINTER_CLIP",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 29,
       "operation": "CONSOLE_IO_SET_POINTER_CLIP",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 30,
       "operation": "CONSOLE_IO_CURRENT_FONT",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 31,
       "operation": "CONSOLE_IO_FONT_SIZE",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 32,
       "operation": "CONSOLE_IO_VIDEO_BEGIN",
       "sites": [
-        "src/ntvdm-exe/softpc/mvdm_vm_application.c:101",
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:102",
         "src/ntvdm-exe/frontend/vm_text.c:162"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 33,
@@ -254,31 +261,31 @@
         "src/ntvdm-exe/softpc/mvdm_vm_application.c:93",
         "src/ntvdm-exe/frontend/vm_text.c:178"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 34,
       "operation": "CONSOLE_IO_VIDEO_TEXT",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 35,
       "operation": "CONSOLE_IO_GET_DISPLAY_MODE",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 36,
       "operation": "CONSOLE_IO_SET_DISPLAY_MODE",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 37,
       "operation": "CONSOLE_IO_KEYBOARD_LAYOUT",
       "sites": [],
-      "status": "no explicit dispatch; unsupported default candidate"
+      "status": "no explicit dispatch; reaches unsupported default"
     },
     {
       "value": 39,
@@ -286,7 +293,7 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:182"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 40,
@@ -294,7 +301,7 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:150"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 41,
@@ -302,7 +309,7 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:153"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 42,
@@ -310,7 +317,7 @@
       "sites": [
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:149"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 43,
@@ -318,15 +325,15 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:156"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 44,
       "operation": "CONSOLE_IO_PUBLICATION_END",
       "sites": [
-        "src/ntvdm-exe/softpc/mvdm_vm_application.c:108"
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:109"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 45,
@@ -335,7 +342,7 @@
         "src/ntvdm-exe/softpc/mvdm_vm_application.c:94",
         "src/ntvdm-exe/frontend/vm_text.c:158"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 46,
@@ -343,7 +350,7 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:133"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 47,
@@ -351,7 +358,7 @@
       "sites": [
         "src/ntvdm-exe/softpc/mvdm_vm_io.c:161"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     },
     {
       "value": 48,
@@ -359,7 +366,12 @@
       "sites": [
         "src/ntvdm-exe/frontend/vm_text.c:204"
       ],
-      "status": "dispatch reference only; semantic/guest proof required"
+      "status": "dispatch selected; semantics and guest acceptance remain per-operation obligations"
     }
-  ]
+  ],
+  "inputBoundary": {
+    "queue": "src/ntvdm-exe/softpc/mvdm_vm_io.c:mvdm_vm_io_key",
+    "entry": "src/ntvdm-exe/softpc/mvdm_vm_executor.c:mvdm_vm_executor_key",
+    "finding": "No production or test caller of executor_key found in source. Current addon BOP operations0..15 have no key/event submission. Command entry typing is not interactive child input acceptance."
+  }
 }

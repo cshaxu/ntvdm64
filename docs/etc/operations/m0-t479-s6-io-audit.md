@@ -1,15 +1,36 @@
 # T479 S6 VM I/O implementation audit
 
-Baseline572d854a3. S5 is delivered; this is the finite S6 work inventory,
+Reconciled against delivered d3bd17b6b. This is the finite S6 work inventory,
 not an acceptance report. Original guest bytes remain immutable.
 
 [Operation inventory](m0-t479-s6-io-inventory.json) enumerates all47 live wire
-operations and actual source-reference locations. Seventeen have no explicit
-case in the current VM provider/application/text dispatch chain and reach its
-unsupported default. A reference is not proof that an operation is complete:
-VIDEO_BEGIN accepts only same-sized text, WINDOW_RECT accepts only full-grid
-identity changes, modes reject processing flags, and input currently has only
-provider stimulus acceptance. All47 require producer and guest-side review.
+operations and current provider-reference locations. Fifteen have no explicit
+dispatch and reach unsupported default; the previous17 count predates the two
+fill operations. The32 remaining entries have dispatch references, not blanket
+semantic acceptance. VIDEO_BEGIN still accepts only same-sized text, WINDOW_RECT
+only full-grid identity changes, and modes reject processing flags. Source
+references and positive payload coverage must remain separate.
+
+## Input gap traced after mouse repair
+
+The delivered mouse/VM repair proves the actual Windows pointer, DOS command
+entry and noninteractive CLS/VER/DIR sequence. It does not prove input to a
+running native interactive child. Source sweep of src and tests finds only the
+definition/declaration of mvdm_vm_executor_key, and its internal call to
+mvdm_vm_io_key. No production or test caller enters executor_key. The current
+addon command_return waits on a counted VMM semaphore with virtual interrupts
+serviced, but supplies no keyboard records to the host queue. Notification BOP
+operations0..15 have no input-delivery operation. Therefore READ_INPUT's queue
+mechanics cannot substitute for the absent guest producer.
+
+The bounded input repair must connect guest-selected VM input to the exact
+live continuation, retain key-up/down, repeat and modifier meaning, and prevent
+both guest BIOS and host child from consuming the same event. Retirement and
+channel cancellation must invalidate delivery. Do not read the outer host
+Console or route by foreground native HWND: neither identifies the guest VM.
+Existing command-entry and mouse tests remain valid within their own scope.
+VMM/VKD service choice and actual integration must be proven before runtime
+changes; no polling or synthetic successful input is authorized by this audit.
 
 ## Finite implementation groups
 
