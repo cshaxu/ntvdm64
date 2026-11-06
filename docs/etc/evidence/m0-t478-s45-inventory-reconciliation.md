@@ -330,3 +330,37 @@ Fifteen startup identities now have bounded dispositions; eleven startup rows
 and1044 active identities remain pending. S45 and T478 remain open. This is a
 test/evidence P only: no new product build/Full/publication is required for the
 unchanged S43 package, and no O:/winnt write or push occurred.
+
+## P9 original temporary-file helper disposition
+
+The [receipt](../../../artifacts/mvdm-audit/t478-final/s45-temp-file-disposition.json)
+resolves DOS16:ca680961be9e8806496a as an existing original owner with bounded
+native lifecycle evidence. Current worker map binds cmdCreateTempFile to
+original-mvdm-command:cmdredir.obj. The source retains allocation, GetTempPath
+zero/oversize gates, scs/0 filename generation, Windows-directory/root fallback,
+original security attributes and OPEN_ALWAYS/shared read-write/TEMPORARY open.
+[T427 S2](m0-t427-s2-own-image-root-bindings.md) already restored the real host
+Windows-directory fallback and removed the irrelevant firmware dependency.
+There is no outstanding product-root scratch repair to repeat.
+
+The old T290 standard-handle fixture does not call cmdCreateTempFile. The added
+focused fixture therefore compiles the exact function body extracted from current
+cmdredir.c, with a checked boundary and source hash. The generated graph depends
+on that source, and its implicit include dependency rebuilds the fixture. No
+product source is generated or changed. Actual native files in an owned temporary
+directory verify TMP/TEMP selection, returned path, inheritance flag, shared
+read-write opening, written bytes, close/delete and directory cleanup. Background
+runner20140 completed build0/test0 and
+CMD_ORIGINAL_TEMP_PATH_INHERIT_SHARED_RW_CLEANUP_OK with120/30-second deadlines.
+
+Failure paths are source-reviewed, not newly fault-injected. In particular the
+second GetTempFileName result is not checked before CreateFile; this existing
+original limitation is not a safe-failure claim or a reason to add tolerance.
+No fallback is forced to write into the host Windows directory or drive root.
+There is no new ACP/DBCS, ReFS or short-name-disabled qualification. These limits
+are separate from the normal original helper wiring and its tested lifecycle.
+The CONFIG/AUTOEXEC parser and its byte accounting remain a distinct pending row.
+
+Sixteen startup identities have bounded dispositions; ten startup rows and1043
+active identities remain pending. S45 remains active. Product and the published
+S43 package are unchanged; no new Full/publication, O:/winnt write or push.

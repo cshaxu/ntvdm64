@@ -1,0 +1,33 @@
+{
+  "id": "DOS16:ca680961be9e8806496a",
+  "disposition": "original owner wired; bounded native temporary-file lifecycle verified",
+  "runner": "build/t478-s45/run-temp-p9.ps1",
+  "runner_pid": 20140,
+  "build_exit": 0,
+  "fixture_exit": 0,
+  "marker": "CMD_ORIGINAL_TEMP_PATH_INHERIT_SHARED_RW_CLEANUP_OK",
+  "generated_helper_exact": true,
+  "helper_normalized_sha256": "8c631b77d09896c46ba5eb30e7086de28025c4e21392586fe654a24fe1212a09",
+  "map_witness": [
+    "0001:00155ce0       _cmdCreateTempFile         00556ce0 f   original-mvdm-command:cmdredir.obj"
+  ],
+  "inputs": {
+    "src/mvdm-host/dos/command/cmdredir.c": "418423e0da31b95b08031883f70842fd5f5b4ea1b928d6c40b4ab33a03da1da5",
+    "tests/mvdm-host/dos/command/temp_file_fixture.c": "c0eaea311651be6df94a3a07cf48ebb1ed04b3f7ca1e8f1870d6f051ee9d9826",
+    "tools/build/Generate-T420S17OemUniNinja.mjs": "b49478087c559ac672795256279dc0fa89ae25478052772ecff936989a2b654a"
+  },
+  "coverage": [
+    "Real native TMP/TEMP path selection",
+    "Returned allocated name and valid handle",
+    "HANDLE_FLAG_INHERIT",
+    "Concurrent shared read/write open and actual bytes",
+    "Close, delete and owned-directory cleanup"
+  ],
+  "limits": [
+    "Exact original function body compiled as fixture; runtime call not traced in release by this test",
+    "No injected allocator/GetTempPath/GetTempFileName/CreateFile failures",
+    "No new ACP/DBCS/ReFS/short-name-disabled certification",
+    "Original unchecked second GetTempFileName failure retained; not certified safe",
+    "Native Windows-directory/root fallback deliberately not forced to write to host directories"
+  ]
+}

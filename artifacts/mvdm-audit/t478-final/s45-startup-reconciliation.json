@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;15 bounded dispositions and11 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;16 bounded dispositions and10 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -93,9 +93,9 @@
       "id": "DOS16:ca680961be9e8806496a",
       "module": "1.2",
       "contract": "Shared temporary file acquisition boundary",
-      "disposition": "pending",
+      "disposition": "wired; original limitations retained",
       "current_owner": "cmdredir.c cmdCreateTempFile retains fallback, inheritable temporary file and cleanup",
-      "evidence_and_limits": "Second GetTempFileName result remains unchecked as original. Next associate existing temporary-file/pipe tests and disposition that original limit."
+      "evidence_and_limits": "s45-temp-file-disposition.json: exact original helper and current map, T427 host-scratch restoration, current native TMP/TEMP/name/inheritable handle/shared I/O/cleanup case. Failure ordering source-reviewed, not fault-injected; original unchecked second name failure retained. No host-directory fallback write or extra encoding/filesystem certification."
     },
     {
       "id": "DOS16:c3ee8f2820af6f055614",

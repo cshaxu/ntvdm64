@@ -32,6 +32,12 @@ writeFileSync(`${build}/dem-media-type.inc`, mediaHeader.slice(typeStart, typeEn
 writeFileSync(`${build}/dem-media-body.inc`, mediaSource.slice(mediaStart, mediaEnd));
 writeFileSync(`${build}/dem-media-source.sha256`, createHash("sha256").update(mediaSource).digest("hex"));
 
+const redirSource = readFileSync(`${root}/src/mvdm-host/dos/command/cmdredir.c`, "utf8");
+const tempBody = redirSource.match(/BOOL cmdCreateTempFile \(phTempFile,ppszTempFile\)[\s\S]*?^}/m)?.[0];
+if (!tempBody) throw new Error("Original temporary-file helper boundary changed");
+writeFileSync(`${build}/cmd-temp-body.inc`, tempBody);
+writeFileSync(`${build}/cmd-temp-source.sha256`, createHash("sha256").update(redirSource).digest("hex"));
+
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
   "/FI", `\"${root}/src/compat/include/nt.h\"`,
@@ -50,7 +56,7 @@ const lines = [
   "rule regenerate",
   `  command = \"${process.execPath.replaceAll("\\", "/")}\" \"$root/tools/build/Generate-T420S17OemUniNinja.mjs\" \"$root\" \"${build}\" \"$formal\"`,
   "  generator = 1",
-  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm-host/dos/dem/demfile.c $root/src/mvdm-host/dos/dem/demgset.c $root/src/mvdm-host/dos/dem/dosdef.h",
+  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm-host/dos/dem/demfile.c $root/src/mvdm-host/dos/dem/demgset.c $root/src/mvdm-host/dos/dem/dosdef.h $root/src/mvdm-host/dos/command/cmdredir.c",
   "rule cc",
   "  command = cl.exe $cflags /Fo$out $in",
   "  deps = msvc",
@@ -79,6 +85,9 @@ const lines = [
   "build obj/media.obj: cc $root/tests/mvdm/oemuni/oemuni_media_fixture.c",
   `  cflags = $cflags /I \"${build}\"`,
   "build oemuni-media-fixture.exe: link obj/media.obj",
+  "build obj/cmd-temp.obj: cc $root/tests/mvdm-host/dos/command/temp_file_fixture.c | cmd-temp-body.inc",
+  `  cflags = $cflags /I "${build}"`,
+  "build cmd-temp-fixture.exe: link obj/cmd-temp.obj",
   "build obj/pif-fault.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_fault_fixture.c",
   `  cflags = ${formalFlags}`,
   "build oemuni-pif-fault-fixture.exe: link obj/pif-fault.obj obj/process.obj obj/firmware-root-stub.obj",
