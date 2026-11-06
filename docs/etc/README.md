@@ -1233,3 +1233,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S8 suballocator disposition](evidence/m0-t478-s8-suballoc-disposition.md): original-equivalence comparison, existing lifecycle tests and retained failure limits.
 
 - [T478 S9 FDC session ownership](evidence/m0-t478-s9-fdc-session.md): original shared registration, bound FDC thread and copied scalar lifetime verification.
+
+- [T478 S10 keyboard-layout disposition](evidence/m0-t478-s10-keyboard-layout.md): connected original reader, valid two-character contract and retained malformed-configuration limit.

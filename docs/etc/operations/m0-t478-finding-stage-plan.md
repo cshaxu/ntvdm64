@@ -201,3 +201,11 @@ short FD copies protect provider lifetime without consuming shared CPU lease
 slots. Focused 43 checks, existing session/thread/lease tests and 16 Full gates
 pass. Package 694495a1-285e-4e8c-940f-3f2425de4445 is published only to worktree
 assets/release. No physical floppy acceptance is claimed. S10/finding 15 is next.
+
+## S10 disposition
+
+[S10](../evidence/m0-t478-s10-keyboard-layout.md) verifies the existing original
+host reader with current objects: valid two-character layout succeeds; original
+no-install cases remain. Overlong invalid configuration reproduces the inherited
+cache limitation, retained under the owner no-extra-tolerance standard. No
+production or guest changes. S11/finding 22 is next proposed.

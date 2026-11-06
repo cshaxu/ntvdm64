@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S9 is closed; [FDC session evidence](../etc/evidence/m0-t478-s9-fdc-session.md).
-The owner authorizes sequential S10 admission next.
+T478 S10 is closed; [keyboard-layout disposition](../etc/evidence/m0-t478-s10-keyboard-layout.md).
+Sequential S11 admission is owner-authorized next.
 
 ## S1 Closure Record
 
@@ -34,6 +34,8 @@ The owner accepted [S12 source layout and compile-time boundaries](../etc/eviden
 The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md) records the selected non-MVDM cleanup, published package equivalence and deferred recovery boundaries.
 
 ## S10 Closure Record
+
+T478 S10 [verifies existing keyboard-layout host wiring](../etc/evidence/m0-t478-s10-keyboard-layout.md) and records the original malformed-configuration limitation without new tolerance.
 
 The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
 

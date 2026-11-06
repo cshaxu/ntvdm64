@@ -1,0 +1,26 @@
+{
+  "task": "T478 S10",
+  "baseline": "0cc3139d4",
+  "disposition": "original malformed-configuration limit retained; no missing supported host wiring demonstrated",
+  "normalHostReader": "DX=1 for configured US using actual cmdkeyb/shadow registry objects and read-only package KB16.COM/KEYBOARD.SYS presence",
+  "noInstallCases": [
+    "layout unavailable",
+    "malformed hex:zz",
+    "absent layout"
+  ],
+  "originalLimit": "ABCDE accepted by host reader; all five szPrev bytes contain ABCDE with no terminator; original keyboard parser rejects non-two-character language tokens",
+  "guestExecuted": false,
+  "productChanged": false,
+  "packageId": "694495a1-285e-4e8c-940f-3f2425de4445",
+  "tenReleaseHashesVerified": true,
+  "sourceAndObjectHashes": {
+    "src\\mvdm-host\\dos\\command\\cmdkeyb.c": "d32313ee4993bf12135d62241eb2261188bd0696bf15846db73f80285fa0758a",
+    "src\\ntvdm-exe\\softpc\\mvdm_shadow_registry.c": "f4c5d63db9e437849468537742cac78e905bb32d4338173130ebcb02fc7f73d4",
+    "build\\.ninja\\msvc-x86-release\\worker\\obj\\command\\cmdkeyb.obj": "05a033deceec5445a1e034824de5de17830cf5f0ed25ee07377b868c018724f0",
+    "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj": "690f0afb08715d23fdc763f2373baf136daf5fda2ed2c8d6edf7acf55204a433",
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdkeyb.c": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\command\\cmdkeyb.c": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\keyb\\parser.asm": "03cfa52eab4d0b8717808003d742a1d29fd43ade86966bf23b7dfbbf8e922dfe"
+  },
+  "probeLog": "keyboard-probe.c\nbuild/t478-s10/keyboard-probe.c(32): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.\nS45_CMDKEYB_UNAVAILABLE_NO_INSTALL_OK\nS45_CMDKEYB_CONFIGURED_OK\nS45_CMDKEYB_MALFORMED_OK\nS45_CMDKEYB_ABSENT_OK\nS45_CMDKEYB_OVERLONG_ACCEPTED_OK\nORIGINAL_LIMITATION five-byte previous-layout cache has no terminator after overlong configuration\n"
+}
