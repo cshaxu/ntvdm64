@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**No active M/T/S packet.** **M0 T480 S3 is closed** by this local P delivery.
-T480 remains open; S4 and S5 are planned but not admitted.
+**No active M/T/S packet.** T480 S3 is closed by this local P delivery.
+T480 remains open. S4 and S5 are planned but not admitted.
 
 [S3 evidence](../etc/evidence/m0-t480-s3-connected-restoration.md) records
 restoration in 13 host C/H files: three original expressions, ten comment/spelling
