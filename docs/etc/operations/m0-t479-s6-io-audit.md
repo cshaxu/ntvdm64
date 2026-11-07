@@ -188,3 +188,43 @@ characters, but it does not reconstruct key releases and its conversion uses
 the host layout. Neither alone establishes guest-selected VM identity or a
 complete input contract. Keep these as evaluated reuse candidates; do not
 claim that forwarding their output alone repairs exclusive consumption.
+
+## Original BIOS input boundary072--073
+
+The passive route witness now also chains INT15 without modifying the client
+frame or reading a keyboard port. Original keybd_io.c keyboard_int invokes
+INT15/AH4F after obtaining the scan byte, before translation. Original
+NtPutInBuffer commits the translated BIOS word and tail before INT15/AX9102.
+These are reached original owners, not a new keyboard translation algorithm.
+
+Control072 reports all three hook installations (flags7). While native
+child4180 is confirmed waiting, the child VM80798000 sees AH4F with scans
+1E/9E for A and1C/9C for Enter. The native receipt again times out without
+events. Its observer image SHA-256 is
+E94DBE5EBFD6C5387FD4C41C6356D3B19BCC0879F28B6F1C0640F60BE9879241.
+
+Control073 adds read-only BDA head/tail observation at AX9102, through the
+documented current VM CB_High_Linear. Source SHA-256 is
+4781FDD5ED407513859554B2A3246590ECB73A30AAE2B18597628AD2D0572850;
+image is F234F9F7A08BE90F5BEBF7D4FC5C247D042710DBBEFA3FF0C535F30D35E0B729.
+Child31128 is ready before input at2026-11-07T00:31:45.8099284Z. The A make
+is followed by head0038/tail003A; A break follows without a character commit.
+Enter make then yields head0038/tail003C, followed by Enter break. The native
+receipt still times out. This proves translated keys remain queued in that
+VM's BIOS while the host request waits; the missing producer is not explained
+by absent keyboard IRQs, absent guest translation or absent native admission.
+
+Both are targeted window-message provider runs, not physical-key acceptance.
+NASM/Watcom build exits are0. Neither observer consumes a key, changes a
+client register or advances/rewinds a BIOS pointer. Each diagnostic ends by
+stopping only its isolated NTSRV after evidence capture; normal Windows exit
+is not claimed. Retain input-route072/073 ready/child receipts, build records
+and niddb072/073.txt under build/t479-s6-livecmd.
+
+The implementation should preserve the reached original translation and
+hardware acknowledgement. AX9102 offers a concrete candidate transfer point
+for translated characters, but is not a complete event producer: key releases
+and modifiers do not all append BIOS words. AH4F supplies raw transitions;
+correlation, extended sequences, layout, per-request ownership, queue failure
+and unread-input handback must be resolved together. No production filter,
+buffer rewrite or success stub is introduced by these observations.

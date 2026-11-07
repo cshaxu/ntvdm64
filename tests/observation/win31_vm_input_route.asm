@@ -33,6 +33,12 @@ control:
  jc .irq_absent
  or dword [installed],2
 .irq_absent:
+ mov eax,0x15
+ mov esi,bios_keyboard
+ vmm_call 0x41
+ jc .bios_absent
+ or dword [installed],4
+.bios_absent:
  mov edx,[installed]
  mov eax,0x53490000
  call record_vm
@@ -64,6 +70,39 @@ irq1:
  popad
  popfd
  stc                       ; original IRQ chain always owns consumption/EOI
+ ret
+bios_keyboard:
+ pushfd
+ pushad
+ mov edx,[ebp+28]           ; original BIOS intercept: client AH=4f, AL=scan
+ cmp dx,0x9102             ; original BIOS has committed a translated key
+ je .committed
+ and edx,0xff00
+ cmp edx,0x4f00
+ jne .chain
+ cmp dword [bios_count],128
+ jae .chain
+ inc dword [bios_count]
+ mov edx,[ebp+28]
+ mov eax,0x53490015
+ call record_vm
+ jmp .chain
+.committed:
+ cmp dword [commit_count],128
+ jae .chain
+ inc dword [commit_count]
+ mov esi,[ebx+4]           ; documented CB_High_Linear of the current VM
+ add esi,0x400
+ movzx edx,word [esi+0x1a]
+ mov eax,0x53490016
+ call record_vm
+ movzx edx,word [esi+0x1c]
+ mov eax,0x53490017
+ call record_vm
+.chain:
+ popad
+ popfd
+ stc                       ; preserve client flags and original scan handler
  ret
 pm_api:
  pushfd
@@ -99,3 +138,5 @@ previous_pm: dd 0
 installed: dd 0
 irq_count: dd 0
 pm_count: dd 0
+bios_count: dd 0
+commit_count: dd 0
