@@ -1,0 +1,89 @@
+{
+  "head": "d264fd8ee03770f4a833ce1b37763deae3b77c4e",
+  "utc": "2026-11-07T06:24:12.7687974Z",
+  "packageId": "daa392bf-02e0-439f-9b1c-e21804398133",
+  "host": [
+    {
+      "name": "VCDEX.DLL",
+      "sha256": "0D91F7B208B6CC1DD286F6F90B834A533FD035F0FC80580F8697B2262B6EE0BE",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "run16.exe",
+      "sha256": "2BEF44D40F2BFD62530B3AF09E0D7A79A703EADE48336AAA709AD03FA4142738",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "58C9B8DB463B9E7619F440ED35BDC3107F86033AA4E850ECC6AEE87F8F41A096",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "5864871E0E4B14FE52CB20D71284E6B7D7952A37C9D38056E80C5AD3F2DD88B8",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "580461BC86C46EDAEE44031FB437D7C554827FA2A3CCDD8C613234BF79D23119",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "DEC683511230270089D15F9B2606929E6AA94CA5CBF7D875513BEDDBBE5EB1FB",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "CAFC23DDE65F6D255C3CE7F810709C97CEF444160D0F6A39BC0E652C6CACF886",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "56DDFDA9126D9C13DB9D415F999BC7830FD36E13B54E17A533849016F11C6A11",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "D38102D2DAE7CABBEF44C6A064DC647A42F97BE593897EA6B54238152B584322",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "00C2021FA0B91E28A2497E6C764EEFB31CC77616972E2E56B8A69EFE8DE8F085",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "91DD6DBC8356AEACF799E98A5CEA1665EE3622B00C569E4527693330ACEC979C",
+      "bothDestinationsMatch": true
+    }
+  ],
+  "addons": [
+    {
+      "name": "MOUSE31.DRV",
+      "sha256": "275D10A3E22946F83416BED9D263B22D2579C38D42E4630616D5B97ECF8A738B",
+      "acceptance": "candidate",
+      "sourceMatches": true
+    },
+    {
+      "name": "ntvdm64.386",
+      "sha256": "3EC467536324961A2356E1C17A6437A8B46658491B8689A9BE1C92FE887DA4B3",
+      "acceptance": "candidate",
+      "sourceMatches": true
+    },
+    {
+      "name": "insignia.386",
+      "sha256": "BE8D709A604BF82D79801ADF7A5531E228450F28BEA49CD51BA49B1BDEFE4E45",
+      "acceptance": "candidate",
+      "sourceMatches": true
+    }
+  ],
+  "productionDiffFromPublishedP4": [],
+  "fullReceipt": "build/t479-s6-integration/r091-verification/full/timings.json",
+  "fullReceiptSha256": "12BAC56FD6CEABA7E9328BCD3CAC602C9B932CC241DC53FC2C93667C8F20BE81",
+  "fullGates": 16,
+  "fullElapsedMs": 438140,
+  "runtimeTestsRepeated": false,
+  "reason": "Production source and published image identities unchanged; owner-directed bounded closure, not successor acceptance."
+}

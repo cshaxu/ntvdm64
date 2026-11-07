@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T479 S7** - delivered-scope closure audit.
+**Active: M0 T479 S7** - audit complete; awaiting bounded T closure review.
 Owner closes S6 with gaps; all uncompleted implementation and acceptance work
 belongs to the [next queued T](../proposals/proposal-guest-multitask-io-completion-001.md),
 not S7. [S6 closure and exact handoff](../etc/evidence/m0-t479-s6-closure-handoff.md)
@@ -14,7 +14,7 @@ actual command/exit092 qualify that publication. No new runtime is published.
 Unpublished input candidate188/189 and actual handback190/normal-exit194 are
 preserved as a replayable patch and hash manifest, not selected source. Full171
 predates that candidate's final changes. Never publish cached candidate outputs
-as the restored source baseline. Original guest remains unchanged.
+as the restored source baseline. Original guest remains unchanged. [S7 audit](../etc/evidence/m0-t479-s7-closure-audit.md) verifies all11 published images at both destinations and three addon/source identities; no new runtime tests or publication were required for unchanged production inputs.
 
 ## Active Packet
 
@@ -47,9 +47,9 @@ normal exit and injected initialization rollback. ntvdm64.386 is published as
 a bridge candidate only. Ten host components remain the Full 16/16 P1 package.
 
 [The roadmap](../etc/operations/m0-t479-guest-bridge-plan.md) retains S4's
-Win95 wait/wake/lifecycle proof after the Win3.1 S5/S6 path and before S7/T
-closure. It is not passed or dropped. Full guest ICW1-reset combinations and
-exhaustive VMM allocation failures remain explicitly unverified in S7's matrix.
+Win95 wait/wake/lifecycle proof. Owner-directed S6 closure now transfers this
+unpassed obligation, full guest ICW1-reset combinations and unverified VMM
+allocation failures to the queue-first successor, not the bounded S7 audit.
 
 ## S3 Host Command Preparation Closure
 
@@ -220,10 +220,12 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The delivered [T479 host foundation](../etc/evidence/m0-t479-s2-host-foundation.md) publishes
-the ten-image product at application version 0.0.479 and protocol 67. Full
-16/16 selected gates pass and both publication targets match. Guest media is unchanged.
-S3 prepares independent host requests; actual guest VM discovery and driver execution remain S4 acceptance obligations.
+The current published baseline is P4 package daa392bf-02e0-439f-9b1c-e21804398133,
+application0.0.479/protocol67, eleven host images and bounded authored addons.
+S7 audit201 rechecks both publication destinations and unchanged production
+source against70e829d88. Full09116/16 remains prior accepted-source evidence.
+Guest media is unchanged; complete I/O/nested/Win95 acceptance belongs to the
+queued successor, not this bounded closure.
 The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
 remains retained baseline evidence.
 
