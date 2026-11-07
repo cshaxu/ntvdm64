@@ -1,0 +1,19 @@
+Start testing: Nov 07 08:39 Pacific Standard Time
+----------------------------------------------------------
+42/48 Testing: mvdm-vm-notification
+42/48 Test: mvdm-vm-notification
+Command: "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/softpc-tests/mvdm-vm-notification-test.exe"
+Directory: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/softpc-tests
+"mvdm-vm-notification" start time: Nov 07 08:39 Pacific Standard Time
+Output:
+----------------------------------------------------------
+PASS 3126 notification unit assertions; no real PIC claim
+<end of output>
+Test time =   0.23 sec
+----------------------------------------------------------
+Test Passed.
+"mvdm-vm-notification" end time: Nov 07 08:39 Pacific Standard Time
+"mvdm-vm-notification" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 07 08:39 Pacific Standard Time

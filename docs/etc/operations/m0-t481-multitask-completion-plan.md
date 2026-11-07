@@ -343,3 +343,28 @@ repeat Full gate is needed for this test-only change; the three actual affected
 integration paths were run. No new product timeout, retry, state or lifecycle
 authority is introduced. fill002/119 attribution and initialization rollback
 remain open; this does not close S2 or advance to S3.
+
+## S2 P5 initialization error propagation
+
+Input057 cached builds and notification tests pass on x86 and x64. The added
+executor_registration_failure_tests uses the real executor, threadpool,
+continuation, I/O provider and completion consumer, with existing broker/launcher
+substitutes. Payload creation denial leaves output NULL. Access-denied and
+broken-pipe frontend registration failures reach the consumer unchanged, with
+zero exit code, exactly one launch release per submission and no retirement of
+an unregistered frontend. Destroy joins completion; the next initialization and
+submission succeeds. No product logic or mirror bytes changed.
+
+Source audit distinguishes pre-registration rollback from post-registration
+ownership: vm_frontend.c publishes identity after broker registration, so later
+service startup failure retains an owned entry for retirement. The existing
+vm_frontend_test.c fail_state case asserts this identity survives failure,
+rejects launch-context access and destroys the registry. Terminal039 previously
+ran that registry fixture. These are unit boundary proofs, not new real RPC
+fault-injection evidence. Historical fill002/119 still need attribution.
+
+P4 was pushed as4aeae35de. Its evidence preserves failed050/052 and passing
+051/054/055. Historical fill002's C: temporary directory is the deliberate
+LocalDirectoryControl probe input, separate from its O: result files; this
+path difference is not established as a failure cause. Do not patch it on
+that hypothesis. Product remains P1, with no additional recovery machinery.

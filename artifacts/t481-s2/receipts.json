@@ -1,5 +1,5 @@
 {
-  "scope": "T481 S2 verified input/lifecycle evidence through P4; S2 remains open",
+  "scope": "T481 S2 verified input/lifecycle evidence through P5; S2 remains open",
   "receipts": [
     {
       "source": "build/t481-s2/input022-x86.log",
@@ -540,6 +540,36 @@
       "artifact": "artifacts/t481-s2/service-loss055/runtime/386-dosonly1.observer.txt.console.txt",
       "bytes": 927,
       "sha256": "ae134f39d391456463b319174377a26dc072839420c1dfe547d238ace2022972"
+    },
+    {
+      "source": "build/t481-s2/input057.out",
+      "artifact": "artifacts/t481-s2/input057.out",
+      "bytes": 1173,
+      "sha256": "a895798817c6ae530f6a12d4ea894d173eb7c02c0a49bbbc9a5bd6936a80f861"
+    },
+    {
+      "source": "build/t481-s2/input057.err",
+      "artifact": "artifacts/t481-s2/input057.err",
+      "bytes": 11,
+      "sha256": "9fb0b803d46b2edd81e77aaa615d5721c961271cdd410f5bda368f36f57b57eb"
+    },
+    {
+      "source": "build/t481-s2/input057.exit",
+      "artifact": "artifacts/t481-s2/input057.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/input057-x86.log",
+      "artifact": "artifacts/t481-s2/input057-x86.log",
+      "bytes": 909,
+      "sha256": "1a113b434bab74c36e0d4aa1b7356bf5d6e81732bc5b120d6bc43e5e55ecb6c0"
+    },
+    {
+      "source": "build/t481-s2/input057-x64.log",
+      "artifact": "artifacts/t481-s2/input057-x64.log",
+      "bytes": 909,
+      "sha256": "75872f0ec9e69304387d08b3ca5508a68580fb4f4cac9d3df08cb4f6f4f371bb"
     }
   ]
 }

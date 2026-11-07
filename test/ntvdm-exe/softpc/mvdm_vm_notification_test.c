@@ -567,15 +567,19 @@ static void continuation_tests(void)
 static HANDLE executor_started, executor_release, executor_retiring, executor_retire_release;
 static LONG executor_freed, executor_retired;
 static BOOL executor_hold_retirement;
+static DWORD executor_payload_error, executor_register_error;
 static void *executor_input[3]; /* Borrow only while the fixture holds execution. */
 DWORD ntvdm_vm_payload_begin(ntvdm_vm_host *host, uint64_t *payload)
-{ CHECK(host == (ntvdm_vm_host *)1); *payload = 1; return 0; }
+{ CHECK(host == (ntvdm_vm_host *)1); *payload = 0;
+  if (executor_payload_error) return executor_payload_error;
+  *payload = 1; return 0; }
 DWORD ntvdm_vm_host_register(ntvdm_vm_host *host, uint64_t payload, uint64_t vm,
     HANDLE input, const ntvdm_vm_io *io, void *context, common_frontend_location *location)
 {
     CHECK(host == (ntvdm_vm_host *)1 && payload == 1 && input && context);
     CHECK(io == &mvdm_vm_io_operations);
     CHECK(vm > 0 && vm < 3);
+    if (executor_register_error) return executor_register_error;
     executor_input[vm] = context;
     location->payload = payload; location->vm = vm; location->incarnation = vm;
     return 0;
@@ -897,6 +901,42 @@ static void executor_tests(void)
     CloseHandle(executor_retiring); CloseHandle(executor_retire_release);
 }
 
+static void executor_registration_failure_tests(void)
+{
+    mvdm_vm_executor *executor = (mvdm_vm_executor *)1;
+    mvdm_vm_completion completion;
+    const DWORD errors[] = {ERROR_ACCESS_DENIED, ERROR_BROKEN_PIPE};
+    LONG freed = executor_freed, retired = executor_retired;
+    uint64_t token;
+    unsigned i;
+    WORD irq;
+    executor_payload_error = ERROR_ACCESS_DENIED;
+    CHECK(mvdm_vm_executor_create((ntvdm_vm_host *)1, &executor) == ERROR_ACCESS_DENIED);
+    CHECK(!executor); /* Failed creation cannot publish a partial owner. */
+    executor_payload_error = 0;
+    for (i = 0; i < _countof(errors); ++i) {
+        CHECK(!mvdm_vm_notification_open(&irq));
+        CHECK(!mvdm_vm_notification_ready());
+        CHECK(!mvdm_vm_wake_register(1, 501 + i));
+        application_published = CreateEventW(NULL, TRUE, FALSE, NULL);
+        CHECK(application_published);
+        CHECK(!mvdm_vm_executor_create((ntvdm_vm_host *)1, &executor));
+        executor_register_error = errors[i];
+        CHECK(!mvdm_vm_executor_submit(executor, 1, (ntvdm_command_launch *)1,
+            executor_text(), &token) && token);
+        CHECK(WaitForSingleObject(application_published, 10000) == WAIT_OBJECT_0);
+        CHECK(!mvdm_vm_continuation_consume(token, 1, &completion));
+        CHECK(completion.error == errors[i] && !completion.exit_code);
+        mvdm_vm_executor_destroy(executor); /* Joins the completion producer. */
+        CHECK(executor_freed == freed + (LONG)i + 1);
+        CHECK(executor_retired == retired); /* No registered frontend to retire. */
+        executor_register_error = 0;
+        CHECK(!mvdm_vm_notification_close());
+        mvdm_vm_wake_reset();
+        CloseHandle(application_published); application_published = NULL;
+    }
+}
+
 static void returned_input_tests(void)
 {
     console_io_input keys[40] = {0}, output[40] = {0};
@@ -1141,6 +1181,7 @@ int main(void)
     continuation_tests();
     executor_tests();
     executor_reuse_tests();
+    executor_registration_failure_tests();
     returned_input_tests();
     DeleteCriticalSection(&ica);
     printf("PASS %ld notification unit assertions; no real PIC claim\n", assertions);
