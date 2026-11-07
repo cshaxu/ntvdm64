@@ -1,0 +1,613 @@
+{
+  "upstreamBefore": "9250732e",
+  "upstreamAfter": "1ec0d551",
+  "scope": "Textual applicability only; not semantic proof",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "hunks": [
+        {
+          "header": "-671,8 +671,8 @@ OUTPUT: None.",
+          "exactMatches": 0
+        },
+        {
+          "header": "-680,8 +680,8 @@ LOCAL IUH chain2_mark_range IFN1(IU32, count)",
+          "exactMatches": 0
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+      "hunks": [
+        {
+          "header": "-732,7 +732,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-790,7 +790,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-806,7 +806,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-821,7 +821,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-932,7 +932,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-946,12 +946,12 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-971,7 +971,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-995,7 +995,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1005,7 +1005,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1558,7 +1558,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1637,7 +1637,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1653,7 +1653,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1847,7 +1847,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1861,12 +1861,12 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1906,7 +1906,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1950,7 +1950,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1960,7 +1960,7 @@ switch ( id )",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+      "hunks": [
+        {
+          "header": "-1163,11 +1163,11 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1188,7 +1188,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1214,7 +1214,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1222,9 +1222,9 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1473,7 +1473,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1482,12 +1482,12 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1527,7 +1527,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1571,7 +1571,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1579,9 +1579,9 @@ switch ( id )",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+      "hunks": [
+        {
+          "header": "-4015,7 +4015,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-4039,7 +4039,7 @@ switch ( id )",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+      "hunks": [
+        {
+          "header": "-1699,7 +1699,7 @@ if(*((IU32\t*)&(r20)\t+\tREGLONG)>=32)",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1723,7 +1723,7 @@ if(*((IU32\t*)&(r20)\t+\tREGLONG)>=32)",
+          "exactMatches": 2
+        },
+        {
+          "header": "-3136,7 +3136,7 @@ if(*((IU32\t*)&(r20)\t+\tREGLONG)>=32)",
+          "exactMatches": 2
+        },
+        {
+          "header": "-3160,7 +3160,7 @@ if(*((IU32\t*)&(r20)\t+\tREGLONG)>=32)",
+          "exactMatches": 2
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+      "hunks": [
+        {
+          "header": "-2174,7 +2174,7 @@ if(*((IU32\t*)&(r20)\t+\tREGLONG)>=32)",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2198,7 +2198,7 @@ if(*((IU32\t*)&(r20)\t+\tREGLONG)>=32)",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+      "hunks": [
+        {
+          "header": "-1108,7 +1108,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1169,7 +1169,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1180,7 +1180,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1191,7 +1191,7 @@ switch ( id )",
+          "exactMatches": 3
+        },
+        {
+          "header": "-1214,7 +1214,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1280,7 +1280,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1291,7 +1291,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1302,7 +1302,7 @@ switch ( id )",
+          "exactMatches": 3
+        },
+        {
+          "header": "-1328,7 +1328,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1351,7 +1351,7 @@ switch ( id )",
+          "exactMatches": 3
+        },
+        {
+          "header": "-1362,7 +1362,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1373,7 +1373,7 @@ switch ( id )",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1393,7 +1393,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1417,9 +1417,9 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1470,7 +1470,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1487,7 +1487,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1550,7 +1550,7 @@ switch ( id )",
+          "exactMatches": 3
+        },
+        {
+          "header": "-1572,7 +1572,7 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1586,7 +1586,7 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1605,7 +1605,7 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 3
+        },
+        {
+          "header": "-1623,7 +1623,7 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1730,7 +1730,7 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1747,14 +1747,14 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1840,7 +1840,7 @@ if(*((IU16\t*)&(r22)\t+\tREGWORD\t)>=16)",
+          "exactMatches": 3
+        },
+        {
+          "header": "-1875,7 +1875,7 @@ if(*((IU32\t*)&(r22)\t+\tREGLONG)>=32)",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1888,7 +1888,7 @@ if(*((IU32\t*)&(r22)\t+\tREGLONG)>=32)",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1916,12 +1916,12 @@ if(*((IU32\t*)&(r22)\t+\tREGLONG)>=32)",
+          "exactMatches": 0
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid020.c",
+      "hunks": [
+        {
+          "header": "-1121,7 +1121,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1143,7 +1143,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1152,7 +1152,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1168,7 +1168,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1191,7 +1191,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1213,7 +1213,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1222,7 +1222,7 @@ switch ( id )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1238,7 +1238,7 @@ switch ( id )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1257,9 +1257,9 @@ switch ( id )",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "hunks": [
+        {
+          "header": "-289,6 +289,9 @@ extern\tDISPLAY_GLOBS\tPCDisplay;",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "hunks": [
+        {
+          "header": "-287,7 +287,7 @@ ega_copy_b_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-304,13 +304,13 @@ ega_copy_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-563,7 +563,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "hunks": [
+        {
+          "header": "-295,7 +295,7 @@ ega_mode1_chn_b_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-329,7 +329,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-337,13 +337,13 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-628,7 +628,7 @@ ega_mode2_chn_b_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-699,7 +699,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 1
+        },
+        {
+          "header": "-714,7 +714,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-726,7 +726,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 0
+        },
+        {
+          "header": "-764,13 +764,13 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "hunks": [
+        {
+          "header": "-533,13 +533,13 @@ static\tint\tega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-585,12 +585,12 @@ static\tvoid\tega_text_paint_dirty_recs IFN2(int, start_rec, int, end_rec)",
+          "exactMatches": 0
+        },
+        {
+          "header": "-783,7 +783,7 @@ void\tega_wrap_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-801,17 +801,17 @@ void\tega_wrap_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-831,13 +831,13 @@ void\tega_wrap_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-851,13 +851,13 @@ void\tega_wrap_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-881,14 +881,14 @@ void\tega_wrap_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-900,9 +900,9 @@ void\tega_wrap_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-946,7 +946,7 @@ void\tega_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-961,7 +961,7 @@ void\tega_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-974,12 +974,12 @@ void\tega_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-999,9 +999,9 @@ void\tega_split_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1040,12 +1040,12 @@ void ega_wrap_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1099,10 +1099,10 @@ void ega_wrap_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1114,7 +1114,7 @@ void ega_wrap_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1179,12 +1179,12 @@ void ega_text_update IFN0()",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1201,7 +1201,7 @@ void ega_text_update IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1218,7 +1218,7 @@ void ega_text_update IFN0()",
+          "exactMatches": 2
+        },
+        {
+          "header": "-1508,7 +1508,7 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1519,7 +1519,7 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1557,7 +1557,7 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1568,7 +1568,7 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1587,24 +1587,24 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1613,7 +1613,7 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 1
+        },
+        {
+          "header": "-1630,18 +1630,18 @@ cga_graph_update_chain2 IFN0()",
+          "exactMatches": 0
+        },
+        {
+          "header": "-2565,9 +2565,9 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2575,17 +2575,17 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+          "exactMatches": 0
+        },
+        {
+          "header": "-2643,8 +2643,8 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2655,12 +2655,12 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2680,10 +2680,10 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2788,8 +2788,8 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2800,12 +2800,12 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-2825,10 +2825,10 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,",
+          "exactMatches": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "hunks": [
+        {
+          "header": "-300,6 +300,10 @@ MODE_ENTRY vd_ext_graph_table[] = {",
+          "exactMatches": 1
+        },
+        {
+          "header": "-882,7 +886,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1079,7 +1083,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1158,9 +1162,9 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1332,7 +1336,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1501,7 +1505,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1630,7 +1634,7 @@ GLOBAL void vd_read_attrib_char IFN0()",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1791,7 +1795,7 @@ GLOBAL void vd_write_char_attrib IFN0()",
+          "exactMatches": 0
+        },
+        {
+          "header": "-1885,7 +1889,7 @@ GLOBAL void vd_write_char IFN0()",
+          "exactMatches": 0
+        },
+        {
+          "header": "-2030,7 +2034,7 @@ GLOBAL void vd_write_dot IFN0()",
+          "exactMatches": 2
+        },
+        {
+          "header": "-2050,7 +2054,7 @@ GLOBAL void vd_write_dot IFN0()",
+          "exactMatches": 2
+        },
+        {
+          "header": "-2375,7 +2379,7 @@ GLOBAL void vd_write_teletype IFN0()",
+          "exactMatches": 0
+        },
+        {
+          "header": "-2515,7 +2519,7 @@ GLOBAL void vd_write_teletype IFN0()",
+          "exactMatches": 0
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "hunks": [
+        {
+          "header": "-232,7 +232,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,",
+          "exactMatches": 0
+        },
+        {
+          "header": "-313,54 +313,19 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,",
+          "exactMatches": 0
+        },
+        {
+          "header": "-495,8 +460,8 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,",
+          "exactMatches": 1
+        },
+        {
+          "header": "-511,7 +476,7 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,",
+          "exactMatches": 2
+        }
+      ]
+    }
+  ]
+}

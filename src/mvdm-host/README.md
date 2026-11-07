@@ -3301,3 +3301,74 @@ real aliases through COLOR_INFOBK, preserving original GETWNDCLASS16 and
 CTLCOLOR pseudo-color discrimination. The original mirror conversion is
 unchanged. No drawing engine, handle generation or application-specific path
 is added; see docs/etc/evidence/m0-t478-s43-gdi-color-alias.md.
+
+T479 S9 updates MVDM-HOST-DIV-545 using SoftPC commit1ec0d551,
+softpc.new/base/video/video.c: replace the local V86-only base helper with
+upstream caller-BDA mode-table selection for both start and end bounds.
+Retain existing SAS translation and V86 scroll fallback. This is an unverified
+candidate pending the grouped CHAIN2 import and Win3.1 transition qualification;
+no guest source/binary change or new release is claimed.
+
+MVDM-HOST-DIV-889: T479 S9 imports the accepted SoftPC T99 S33 CHAIN2
+plane-address repair, fixed range9250732e..1ec0d551. Candidate generated rules:
+base/cvidc/sevid000.c, sevid001.c and sevid016.c through sevid020.c
+apply upstream plane-address, lane, stride and alignment corrections.
+Local GDP pointer bindings remain unchanged. Per-statement source mapping:
+docs/etc/evidence/m0-t479-s9-generated-rule-import.json.
+The read/write/display/dirty repair and local host-profile bindings are
+integrated; full runtime qualification and publication remain pending.
+See ../../docs/etc/operations/m0-t479-s8-s9-import-plan.md.
+
+DIV-889 candidate extension: the same upstream final addressing repair now
+covers base/inc/gvi.h, base/video/gfx_updt.c, egawrtm0.c, egwrtm12.c and
+host/src/nt_cga.c. Import the prerequisite SoftPC T88 chain2_mark_range
+and case4 dispatch from pinned1ec0d551 into base/cvidc/ev_glue.c; retain
+its existing unchained bitmap owner and register save/restore. gfx_updt
+selects case4 for CHAIN2 graphics instead of leaving previous pointers.
+Focused original-provider and EDIT/MEM/EXIT checks pass; full runtime
+qualification and publication remain pending.
+
+DIV-889 prerequisite: import SoftPC f1d394ca same-activation CHAIN2
+internal-label gotos across sevid000/001/016-020. Keep real S-rule calls
+and saved-local ownership; retain blank source lines for diagnostic positions.
+See docs/etc/evidence/m0-t479-s9-continuation-import.json.
+
+DIV-889 locally proved correction: sevid000 S_2089/S_2101 DWORD reads
+previously advanced the second CPU word by4, then returned a slot with only
+its low16 bits initialized; computed high-word scratch was discarded.
+Use offset+2 and compose both16-bit results into the existing local slot,
+preserving scalar reader/latch ownership and line counts. Upstream calloc
+makes replay stable but does not prove correct four-byte values; do not
+import blanket zero-allocation as a substitute. rules011 records unstable
+high bits; the fixture now checks explicit four-byte values at five offsets.
+
+DIV-889 host-profile closure: NTVDM && !MONITOR selects jazz_text_update,
+where SoftPC excludes that branch and selects ega_text_update. Preserve the
+original rectangle batching; use the same CHAIN2 pointer translation and
+8-byte cell stride, including cursor attribute reads. Full014/edit016 proved
+candidate-only EDIT menu loss; edit020 delivers its exit sequence after this
+correction, but subsequent MEM output loses alternating characters. The
+host copyConsoleToRegen in nt_fulsc.c still wrote cells4 bytes apart;
+correct its next-cell increment from3 to7 after the character increment.
+This preserves the Console handoff and original character/attribute source.
+No guest change. These additional host bindings require edit021 and full
+regression; source closure alone is not acceptance.
+
+DIV-889 upstream convergence: SoftPC 8c27a3b680afa838fb81a6520dd44620a52b59db
+independently repairs the same DWORD composition and adds the missing mode-1
+odd WORD next-group offsets (4/6 become8/10) in S_2100. Import those two
+constants without changing source line counts or GDP bindings. Adapt its
+six-offset, two-mode physical-byte oracle into the existing actual-provider
+fixture: rules026 fails at mode1/address101 (00300010 vs40302010);
+rules029 passes after the two-constant repair. Earlier mode0-only DWORD
+value checks were insufficient. The upstream calloc/GDP slot implementation
+is not imported: neither is necessary for this arithmetic correction.
+Full023 passed the prior candidate; cached030/Full031 and final transitions
+must qualify this newer candidate before publication.
+
+DIV-889 qualification: final bounded rules033, cached030 x86/x64 builds,
+Full03116/16 and actual Win3.1 transitions/input/commands/normal Windows exit
+pass. Published package44d63565-f8b2-47a4-b79f-42d4b8465197 is verified at both
+destinations. Historical candidate limitations above are superseded by
+../../docs/etc/evidence/m0-t479-s9-delivery.md, not erased. S6 and Win95 are
+outside this qualification. Owner acceptance remains pending.

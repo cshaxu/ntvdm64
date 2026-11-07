@@ -1169,8 +1169,8 @@ switch ( id )
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
 	case	L21_81if_f_id	:
 		L21_81if_f:	;	
-	{	extern	IUH	L21_77if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_77if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_77if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_76if_f_id	:
 		L21_76if_f:	;	
@@ -1358,8 +1358,8 @@ switch ( id )
 	/*	j_state	(IS32)(-2013004273),	(IS32)(-1),	(IS32)(0)	*/
 /*	J_LOAD_RETURN	NOT	IMPLIMENTED	*/
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
-	{	extern	IUH	L21_87if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_87if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_87if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_86if_f_id	:
 		L21_86if_f:	;	
@@ -1709,8 +1709,8 @@ if(*((IU16	*)&(r22)	+	REGWORD	)>=16)
 	if	(*((IU32	*)(LocalIUH+4)	+	REGLONG)	>	*((IU32	*)&(r21)	+	REGLONG))	goto	L21_94w_t;	
 	case	L21_95w_d_id	:
 		L21_95w_d:	;	
-	{	extern	IUH	L21_92if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_92if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_92if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_91if_f_id	:
 		L21_91if_f:	;	
@@ -2297,7 +2297,7 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
 	*((IU32	*)&(r22)	+	REGLONG)	=	(IU32)((*((IU32	*)(LocalIUH+0)	+	REGLONG)	<<	(32-(*((IU32	*)&(r21)	+	REGLONG)	+	*((IU32	*)&(r23)	+	REGLONG)))))	>>	(32	-	*((IU32	*)&(r23)	+	REGLONG));	
-	*((IUH	*)&(r23))	=	(IS32)(2)	;	
+	*((IUH	*)&(r23))	=	(IS32)(3) /* T99: retain the plane address A0 gap. */	;	
 	if(*((IU32	*)&(r23)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	Bit	No");
 	else
@@ -2305,8 +2305,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	*((IU8	*)((*((IHPE	*)&(r20)))	+	*((IHPE	*)&(r22)))	)	=	*((IU8	*)(LocalIUH+2)	+	REGBYTE)	;	
 	case	L21_104if_f_id	:
 		L21_104if_f:	;	
-	{	extern	IUH	L21_103if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_103if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_103if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_102if_f_id	:
 		L21_102if_f:	;	
@@ -2322,7 +2322,7 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
 	*((IU32	*)&(r21)	+	REGLONG)	=	(IU32)((*((IU32	*)(LocalIUH+0)	+	REGLONG)	<<	(32-(*((IU32	*)&(r20)	+	REGLONG)	+	*((IU32	*)&(r22)	+	REGLONG)))))	>>	(32	-	*((IU32	*)&(r22)	+	REGLONG));	
-	*((IUH	*)&(r22))	=	(IS32)(2)	;	
+	*((IUH	*)&(r22))	=	(IS32)(3) /* T99: retain the plane address A0 gap. */	;	
 	if(*((IU32	*)&(r22)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	Bit	No");
 	else
@@ -2656,8 +2656,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
 	case	L21_115if_f_id	:
 		L21_115if_f:	;	
-	{	extern	IUH	L21_111if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_111if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_111if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_110if_f_id	:
 		L21_110if_f:	;	
@@ -2845,8 +2845,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	/*	j_state	(IS32)(-2013004273),	(IS32)(-1),	(IS32)(0)	*/
 /*	J_LOAD_RETURN	NOT	IMPLIMENTED	*/
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
-	{	extern	IUH	L21_121if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_121if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_121if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_120if_f_id	:
 		L21_120if_f:	;	
@@ -3196,8 +3196,8 @@ if(*((IU16	*)&(r22)	+	REGWORD	)>=16)
 	if	(*((IU32	*)(LocalIUH+4)	+	REGLONG)	>	*((IU32	*)&(r21)	+	REGLONG))	goto	L21_128w_t;	
 	case	L21_129w_d_id	:
 		L21_129w_d:	;	
-	{	extern	IUH	L21_126if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_126if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_126if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_125if_f_id	:
 		L21_125if_f:	;	

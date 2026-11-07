@@ -19,6 +19,7 @@
 extern struct VideoVector C_Video;
 extern struct SasVector Sas;
 extern IHP Gdp;
+extern ULONG sr_lookup[16];
 extern IHP setup_global_data_ptr(void);
 extern void setup_vga_globals(void);
 extern void setReadPointers(IUH);
@@ -38,7 +39,7 @@ static unsigned char expected[65536];
 static IUH *scratch[] = { &r0,&r1,&r2,&r3,&r4,&r5,&r6,&r7,
     &r8,&r9,&r10,&r11,&r12,&r13,&r14,&r15,&r16,&r17,&r18,&r19,
     &r20,&r21,&r22,&r23,&r24,&r25,&r26,&r27,&r28,&r29,&r30,&r31 };
-#define CHECK(x) do { if (!(x)) { printf("FAIL line %d: %s\n",__LINE__,#x); return 1; } } while (0)
+#define CHECK(x) do { if (!(x)) { char message[1024]; DWORD count; int length=wsprintfA(message,"FAIL line %d: %s\r\n",__LINE__,#x); WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,(DWORD)length,&count,NULL); return 1; } } while (0)
 #define CHECK_FIELD(name,type,offset) do { \
     type value=(type)values[test]; \
     memset(Gdp,0xa5,65536); memcpy(expected,Gdp,65536); \
@@ -82,6 +83,242 @@ static DWORD WINAPI refresh(void *unused)
     unsigned i;
     (void)unused;
     for(i=0;i<100000;i++) setVideodirty_total(1000000);
+    return 0;
+}
+
+/* Adapted from SoftPC 1ec0d551 chain2_rule_smoke.c: same rule matrix,
+ * local C-VID setup and Win32-visible failure reporting. */
+static unsigned rule_mode, rule_parity, rule_slot, rule_flag;
+static LONG report_rule_exception(EXCEPTION_POINTERS *exception)
+{
+    char message[256]; DWORD count;
+    int length=wsprintfA(message,"CHAIN2 exception mode=%u parity=%u slot=%u flag=%u address=%p code=%08lx\r\n",
+        rule_mode,rule_parity,rule_slot,rule_flag,
+        exception->ExceptionRecord->ExceptionAddress,exception->ExceptionRecord->ExceptionCode);
+    WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,(DWORD)length,&count,NULL);
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+/* SoftPC 8c27a3b6 independent plane oracle, bound to local real providers. */
+static int check_chain2_dword_reads(IU8 *planes)
+{
+    /* Six seeded bytes and their paired planes must stay inside 256 KiB. */
+    const IU32 offsets[] = { 0x100, 0x101, 0x103, 0x107, 0x3fff, 0xfff9 };
+    const IU8 bytes[] = { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66 };
+    IU32 compare = getVideocolour_comp(), care = getVideodont_care();
+    IU32 mode, entry, i;
+    for (mode = 0; mode < 2; ++mode)
+    for (entry = 0; entry < sizeof(offsets) / sizeof(offsets[0]); ++entry) {
+        IU32 offset = offsets[entry];
+        IU32 value = mode ? 0x40302010u : 0x44332211u;
+        EVID_READ_POINTERS reader = mode ? read_mode1_evid[1] : read_mode0_evid[1];
+        setVideocolour_comp(0);
+        setVideodont_care(0);
+        for (i = 0; i < sizeof(bytes); ++i) {
+            IU32 address = offset + i;
+            IU32 physical = 4u * (address & ~1u) + (address & 1u);
+            planes[physical] = bytes[i];
+            planes[physical + 2u] = 0xf0;
+        }
+        r1 = (IUH)Gdp; r2 = 0xa5a5a5a5u; r3 = offset;
+        reader.d_read(offset);
+        if ((IU32)r2 != value)
+            fprintf(stderr, "CHAIN2 dword mode=%u offset=%x expected=%08x actual=%08x\n",
+                mode, offset, value, (IU32)r2);
+        CHECK((IU32)r2 == value);
+    }
+    setVideocolour_comp(compare);
+    setVideodont_care(care);
+    return 0;
+}
+static int check_chain2_rules(IU8 *planes)
+{
+    static IU8 expected[4u * 65536u];
+    IU8 input[128], output[64], first[64];
+    EVID_WRT_POINTERS saved = c_ev_write_ptr;
+    IU32 mode, parity, slot, pass, flag, i, offset;
+    CHECK(check_chain2_dword_reads(planes) == 0);
+    /* Odd/even selects a plane without compacting its address. Independent
+       physical offsets distinguish adjacent cells and preserve font planes. */
+    memset(planes, 0x5a, sizeof(expected));
+    c_ev_write_ptr = chain2_evid[4];
+    for (i = 0; i < 8; ++i) {
+        r1 = (IUH)Gdp; r2 = 0x100u + i; r3 = 0x30u + i;
+        c_ev_write_ptr.b_write(0x100u + i, 0x30u + i);
+    }
+    for (i = 0; i < 4; ++i) {
+        CHECK(planes[0x400u + i * 8u] == 0x30u + i * 2u);
+        CHECK(planes[0x401u + i * 8u] == 0x31u + i * 2u);
+        CHECK(planes[0x402u + i * 8u] == 0x5a);
+        CHECK(planes[0x404u + i * 8u] == 0x5a);
+        r1 = (IUH)Gdp; r3 = 0x100u + i * 2u;
+        read_mode0_evid[1].w_read(0x100u + i * 2u);
+        CHECK((IU16)r2 == (IU16)((0x31u + i * 2u) * 256u + 0x30u + i * 2u));
+    }
+    for (i = 0; i < 7; ++i) {
+        r1 = (IUH)Gdp; r3 = 0x100u + i;
+        read_mode0_evid[1].w_read(0x100u + i);
+        CHECK((IU16)r2 == (IU16)((0x31u + i) * 256u + 0x30u + i));
+    }
+    for (i = 0; i < 5; ++i) {
+        r1 = (IUH)Gdp; r3 = 0x100u + i;
+        read_mode0_evid[1].d_read(0x100u + i);
+        CHECK((IU32)r2 == ((0x33u+i)<<24 | (0x32u+i)<<16 | (0x31u+i)<<8 | (0x30u+i)));
+    }
+    /* String readers must traverse the same cells as scalar reads. */
+    for (mode = 0; mode < 2; ++mode)
+    for (parity = 0; parity < 2; ++parity)
+    for (slot = 0; slot < 2; ++slot) {
+        EVID_READ_POINTERS reader = mode ? read_mode1_evid[1] : read_mode0_evid[1];
+        rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=flag;
+        offset = slot ? 0x107u - parity : 0x100u + parity;
+        for (i = 0; i < 4; ++i) {
+            IU32 address = slot ? offset - i : offset + i;
+            r1 = (IUH)Gdp; r3 = address;
+            reader.b_read(address);
+            first[i] = (IU8)r2;
+        }
+        memset(output, 0xcc, sizeof(output));
+        r1 = (IUH)Gdp; r2 = (IUH)(output + 24); r3 = offset; r4 = 4; r5 = slot;
+        if (slot) reader.str_bwd_read(output + 24, offset, 4);
+        else reader.str_fwd_read(output + 24, offset, 4);
+        if (memcmp(first, output + 24, 4) != 0)
+            fprintf(stderr, "string read mode=%u parity=%u backward=%u expected=%02x actual=%02x\n", mode, parity, slot, first[0], output[24]);
+        CHECK(memcmp(first, output + 24, 4) == 0);
+    }
+    /* A RAM-to-video word move consumes the generated-rule descending RAM
+       source convention; verify each destination CPU byte independently. */
+    for (parity = 0; parity < 2; ++parity) {
+        for (i = 0; i < sizeof(input); ++i) input[i] = (IU8)(0x31u + i);
+        memset(planes, 0x5a, sizeof(expected));
+        c_ev_write_ptr = chain2_evid[4];
+        offset = 0x100u + parity;
+        r1 = (IUH)Gdp; r2 = offset; r3 = (IUH)(input + 32); r4 = 4; r5 = 1;
+        c_ev_write_ptr.w_fwd_move(offset, (IHPE)(input + 32), 4, 1);
+        for (i = 0; i < 8; ++i) {
+            IU32 address = offset + i;
+            IU8 actual = planes[4u * (address & ~1u) + (address & 1u)];
+            if (actual != input[32-i])
+                fprintf(stderr, "copy RAM word move parity=%u byte=%u expected=%02x actual=%02x\n", parity, i, input[32-i], actual);
+            CHECK(actual == input[32-i]);
+        }
+    }
+    /* Independent physical-plane oracle for the registered byte/word Copy fills.
+       Legacy odd dword fill value assembly is tracked separately in S33 evidence. */
+    for (parity = 0; parity < 2; ++parity)
+    for (slot = 0; slot < 2; ++slot) {
+        IU32 width = 1u << slot;
+        memset(planes, 0x5a, sizeof(expected));
+        r1 = (IUH)Gdp; r2 = 0x100u + parity; r3 = 0x11111111u; r4 = 8u / width;
+        if (slot == 0) c_ev_write_ptr.b_fill(0x100u + parity, 0x11, 8);
+        else c_ev_write_ptr.w_fill(0x100u + parity, 0x1111, 4);
+        for (i = 0; i < 8; ++i) {
+            IU32 address = 0x100u + parity + i;
+            if (planes[4u * (address & ~1u) + (address & 1u)] != (IU8)(0x11111111u >> ((i % width) * 8u)))
+                fprintf(stderr, "copy fill parity=%u width=%u byte=%u actual=%02x\n", parity, width, i, planes[4u * (address & ~1u) + (address & 1u)]);
+            CHECK(planes[4u * (address & ~1u) + (address & 1u)] ==
+                (IU8)(0x11111111u >> ((i % width) * 8u)));
+        }
+    }
+    for (i = 0; i < sizeof(input); ++i) input[i] = (IU8)(i * 17u + 0x35u);
+    for (mode = 0; mode < 4; ++mode)
+    for (parity = 0; parity < 4; ++parity) {
+        rule_mode=mode; rule_parity=parity; rule_slot=99;
+        offset = 0x100u + parity;
+        c_ev_write_ptr = chain2_evid[mode];
+        /* The former crash: an odd word continuation returns into dword.
+           Compare with ModeX's actual two-word decomposition, stride 4.
+           Copy has an independent inline four-byte algorithm; exercise its
+           continuation below without assuming this ModeX decomposition.
+           Upper bytes are zero: no change to legacy value-width semantics. */
+        memset(planes, 0x5a, sizeof(expected));
+        r1 = (IUH)Gdp; r2 = offset; r3 = 0xa5;
+        c_ev_write_ptr.d_write(offset, 0xa5);
+        memcpy(expected, planes, sizeof(expected));
+        memset(planes, 0x5a, sizeof(expected));
+        r1 = (IUH)Gdp; r2 = offset; r3 = 0xa5;
+        c_ev_write_ptr.w_write(offset, 0xa5);
+        r1 = (IUH)Gdp; r2 = offset + 4u; r3 = 0;
+        c_ev_write_ptr.w_write(offset + 4u, 0);
+        CHECK(memcmp(expected, planes, sizeof(expected)) == 0);
+    }
+    for (mode = 0; mode < 5; ++mode)
+    for (parity = 0; parity < 4; ++parity) {
+        offset = 0x100u + parity;
+        c_ev_write_ptr = chain2_evid[mode];
+        /* Exercise all compound entries with valid native RAM pointers.
+           Replay checks stable output and a scalar sentinel checks that nested
+           returns leave the next ordinary call usable. No missing video-source
+           bulk callback is manufactured by this fixture. */
+        for (slot = 0; slot < 12; ++slot)
+        for (flag = 1; flag <= (mode == 4 && slot >= 6 ? 2u : 1u); ++flag)
+        for (pass = 0; pass < 2; ++pass) {
+            IBOOL in_ram = flag == 1;
+            rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=flag;
+            IHPE source = in_ram ? (IHPE)(input + ((slot & 1u) ? 64u : 32u) + (parity & 1u)) : (IHPE)0x700u;
+            for (i = 0; i < sizeof(expected); ++i)
+                planes[i] = (IU8)(i * 37u + (i >> 3));
+            r1 = (IUH)Gdp; r2 = offset; r3 = 0xa5; r4 = 4; r5 = in_ram;
+            if (slot >= 6) r3 = (IUH)source;
+            switch (slot) {
+            case 0: c_ev_write_ptr.b_write(offset, 0xa5); break;
+            case 1: c_ev_write_ptr.w_write(offset, 0xa5); break;
+            case 2: c_ev_write_ptr.d_write(offset, 0xa5); break;
+            case 3: c_ev_write_ptr.b_fill(offset, 0xa5, 4); break;
+            case 4: c_ev_write_ptr.w_fill(offset, 0xa5, 4); break;
+            case 5: c_ev_write_ptr.d_fill(offset, 0xa5, 4); break;
+            case 6: c_ev_write_ptr.b_fwd_move(offset, source, 4, in_ram); break;
+            case 7: c_ev_write_ptr.b_bwd_move(offset, source, 4, in_ram); break;
+            case 8: c_ev_write_ptr.w_fwd_move(offset, source, 4, in_ram); break;
+            case 9: c_ev_write_ptr.w_bwd_move(offset, source, 4, in_ram); break;
+            case 10: c_ev_write_ptr.d_fwd_move(offset, source, 4, in_ram); break;
+            case 11: c_ev_write_ptr.d_bwd_move(offset, source, 4, in_ram); break;
+            }
+            r1 = (IUH)Gdp; r2 = 0x500; r3 = 0x69;
+            c_ev_write_ptr.b_write(0x500, 0x69);
+            if (!pass) memcpy(expected, planes, sizeof(expected));
+            else CHECK(memcmp(expected, planes, sizeof(expected)) == 0);
+        }
+    }
+    for (i = 0; i < sizeof(expected); ++i)
+        planes[i] = (IU8)(i * 37u + (i >> 3));
+    for (mode = 0; mode < 2; ++mode)
+    for (parity = 0; parity < 4; ++parity)
+    for (slot = 0; slot < 5; ++slot)
+    for (flag = 0; flag < (slot >= 3 ? 2u : 1u); ++flag) {
+        EVID_READ_POINTERS reader = mode ? read_mode1_evid[1] : read_mode0_evid[1];
+        rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=flag;
+        IU32 first_value = 0;
+        offset = 0x100u + parity;
+        for (pass = 0; pass < 2; ++pass) {
+            memset(output, 0xcc, sizeof(output));
+            r1 = (IUH)Gdp; r2 = (IUH)(output + 24u);
+            r3 = offset; r4 = 4; r5 = flag;
+            switch (slot) {
+            case 0: reader.b_read(offset); break;
+            case 1: reader.w_read(offset); break;
+            case 2: reader.d_read(offset); break;
+            case 3: reader.str_fwd_read(output + 24u, offset, 4); break;
+            case 4: reader.str_bwd_read(output + 24u, offset, 4); break;
+            }
+            if (!pass) {
+                first_value = (IU32)r2;
+                memcpy(first, output, sizeof(first));
+            } else {
+                if (slot < 3 && first_value != (IU32)r2) {
+                    char message[256]; DWORD count;
+                    int length=wsprintfA(message,"read replay mode=%u parity=%u slot=%u flag=%u first=%08x second=%08x\r\n",mode,parity,slot,flag,first_value,(IU32)r2);
+                    WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,(DWORD)length,&count,NULL);
+                }
+                if (slot < 3) CHECK(first_value == (IU32)r2);
+                CHECK(memcmp(first, output, sizeof(first)) == 0);
+            }
+            for (i = 0; i < 8; ++i) {
+                CHECK(output[i] == 0xcc);
+                CHECK(output[sizeof(output) - 1u - i] == 0xcc);
+            }
+        }
+    }
+    c_ev_write_ptr = saved;
     return 0;
 }
 
@@ -144,7 +381,7 @@ int main(void)
         }
         /* The original switch leaves the last selection intact for an
          * unknown selector. This is not acceptance of invalid chain indexes. */
-        setMarkPointers(4);
+        setMarkPointers(5);
         CHECK(getVideomark_byte()==(IHP)marks[CHAIN_4_MARK]->b_mark &&
               getVideomark_word()==(IHP)marks[CHAIN_4_MARK]->w_mark &&
               getVideomark_string()==(IHP)marks[CHAIN_4_MARK]->str_mark);
@@ -231,6 +468,22 @@ int main(void)
         }
         gvi_pc_low_regen=saved_base;
     }
+    {
+        static IU8 planes[4 * 65536];
+        IUH trace[64];
+        memset(trace,0,sizeof(trace));
+        ((IUH *)Gdp)[2]=(IUH)trace;
+        ((IUH *)Gdp)[3]=(IUH)trace;
+        ((IUH *)Gdp)[4]=(IUH)&trace[63];
+        setVideorplane(planes); setVideowplane(planes);
+        setVideoread_shift_count(0); setMarkPointers(0);
+        setVideosr_lookup(sr_lookup);
+        setVideodata_and_mask(0xffffffffu);
+        setVideoplane_enable(15); setVideoplane_enable_mask(0xffffffffu);
+        setVideobit_prot_mask(0xffffffffu);
+        __try { CHECK(check_chain2_rules(planes)==0); }
+        __except(report_rule_exception(GetExceptionInformation())) { return 1; }
+    }
     /* Negative control: the original generated setter reproduces the
      * shared-scratch clobber; the newly selected direct setter must not. */
     r21=121;
@@ -242,7 +495,7 @@ int main(void)
     CHECK(WaitForSingleObject(thread,10000)==WAIT_OBJECT_0); CloseHandle(thread);
     CHECK(getVideodirty_total()==1000000);
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
-    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
+    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
       WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,sizeof(message)-1,&written,NULL); }
     return 0;
 }

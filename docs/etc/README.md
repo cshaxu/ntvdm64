@@ -1313,3 +1313,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S8/S9 shared import and display repair](operations/m0-t479-s8-s9-import-plan.md).
 
 - [T479 S8 unchanged shared-library delivery](evidence/m0-t479-s8-shared-delivery.md).
+
+- [T479 S9 CHAIN2 delivery](evidence/m0-t479-s9-delivery.md): upstream alignment, regression controls and final qualification.

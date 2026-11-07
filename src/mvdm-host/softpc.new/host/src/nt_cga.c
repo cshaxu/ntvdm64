@@ -232,7 +232,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
     int lines;
     SMALL_RECT WriteRegion;
     PBYTE   to;
-    PBYTE   pScreenText = get_screen_ptr(ScreenOffset);
+    PBYTE   pScreenText = get_chain2_screen_ptr(ScreenOffset);
 
     /*:::::::::::::::::::::::::::::::::::::::::::: Output trace information */
 
@@ -288,56 +288,19 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 		org_height,clen);
     }
 
-    if (get_chars_per_line() == 80)
+    /* T99: gather the existing host cells from hardware odd/even planes. */
+    to = &textBuffer[(ScreenY*now_width + ScreenX) * TEXT_INCVAL];
+    for (lines = height; lines; lines--)
     {
-	//
-	// Slam Dunk Screen text buffer into shared buffer
-	// by copying full width blocks instead of subrecs.
-	//
-	RtlCopyMemory(&textBuffer[(ScreenY*get_offset_per_line()/2 + ScreenX)*TEXT_INCVAL],
-	       pScreenText,
-	       (((height - 1)*get_offset_per_line()/2) + clen)*TEXT_INCVAL
-	       );
-    }
-    else
-    {
-	// the sharing buffer width never changes((80 chars, decided at the
-	// moment we make the RegisterConsoleVDM call to the console).
-	// We have to do some transformation when our screen width is not
-	// 80.
-
-	// note that the sharing buffer has different format on x86 and RISC
-	// platforms. On x86, a cell is defined as:
-	//	typedef _x86cell {
-	//		byte	char;
-	//		byte	attributes;
-	//		}
-	// on RISC, a cell is defined as:
-	//	typedef _RISCcell {
-	//		byte	char;
-	//		byte	attributes;
-	//		byte	reserved_1;
-	//		byte	reserved_2;
-	//		}
-	// the size of each cell was defined by TEXT_INCVAL
-	//
-	// this is done so we can use memcpy for each line.
-	//
-
-
-	/*::::::::::::::::::::::::::::::::::::::::::::: Construct output buffer */
-	//Start location of repaint region
-	to = &textBuffer[(ScreenY*80 + ScreenX) * TEXT_INCVAL];
-
-	for(lines = height; lines; lines--)
-	{
-	    RtlCopyMemory(to, pScreenText, clen * TEXT_INCVAL);	// copy this line
-	    pScreenText += get_chars_per_line() * TEXT_INCVAL;	// update src ptr
-	    to += 80 * TEXT_INCVAL;				// update dst ptr
-	}
+        int cell;
+        for (cell = 0; cell < clen; cell++)
+            RtlCopyMemory(to + cell * TEXT_INCVAL,
+                pScreenText + cell * 8, TEXT_INCVAL);
+        pScreenText += get_offset_per_line() * 4;
+        to += now_width * TEXT_INCVAL;
     }
 
-
+#line 365 "nt_cga.c"
     /*:::::::::::::::::::::::::::::::::::::::::::::: Calculate write region */
 
     WriteRegion.Left = ScreenX;
@@ -470,8 +433,8 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,
 
 
     /* Build up DIB. */
-    inc = offset & 1 ? 3 : 1;
-    intelmem_ptr = get_screen_ptr(offset);
+    inc = offset & 1 ? 7 : 1; /* T99: odd/even plane spacing. */
+    intelmem_ptr = get_chain2_screen_ptr(offset);
     graph_ptr = (ULONG *) ((UTINY *) sc.ConsoleBufInfo.lpBitMap +
                            (screen_y * bytes_per_scanline + screen_x));
     local_len = len;
@@ -486,7 +449,7 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,
         graph_ptr++;
 
         intelmem_ptr += inc;
-        inc ^= 2;
+        inc ^= 6;
     }
     while( --local_len );
 

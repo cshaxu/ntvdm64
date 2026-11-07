@@ -130,14 +130,9 @@ sys_addr	stream_io_bios_busy_sysaddr;
  */
 GLOBAL sys_addr video_pc_low_regen,video_pc_high_regen;
 
-/* DIVERGENCE(MVDM-HOST-DIV-545): a V86 VM's text aperture is selected by
- * its BIOS mode, independently of the physical adapter's current mode. */
-LOCAL sys_addr text_regen_base IFN0()
-{
-    if (getVM())
-        return sas_hw_at_no_check(vd_video_mode) == 7 ? MDA_REGEN_START : CGA_REGEN_START;
-    return video_pc_low_regen;
-}
+/* DIVERGENCE(MVDM-HOST-DIV-545): SoftPC T99 S33 P4 selects both
+ * text aperture bounds from the caller's BIOS mode; SAS owns translation. */
+#define vd_text_mode() (vd_mode_table[sas_hw_at_no_check(vd_video_mode)])
 
 
 /*
@@ -816,7 +811,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
 
 	/* Set origin of data movement for calculating screen refresh */
 
-    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + text_regen_base();
+    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;
     col_incr = sas_w_at_no_check(VID_COLS) * 2;	/* offset to next line */
 
 	/* Try to scroll the adaptor memory & host screen. */
@@ -967,7 +962,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
     case 3: case 7:
 	is_alpha = TRUE;
 	/* set origin of data movement for calculating screen refresh */
-	source = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row) + text_regen_base();
+	source = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;
 	col_incr = vd_cols_on_screen * 2;	/* offset to next line */
 	break;
 
@@ -1044,9 +1039,9 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
     if (is_alpha) {
 
 	while(lines--) {
-	    if((dest + 2*colsdiff) > video_pc_high_regen+1)
+	    if((dest + 2*colsdiff) > vd_text_mode().end_addr+1)
 	    {
-		colsdiff = (int)((video_pc_high_regen+1-dest)/2);
+		colsdiff = (int)((vd_text_mode().end_addr+1-dest)/2);
 		lines = 0; /* force termination */
 	    }
 #ifdef REAL_VGA
@@ -1188,7 +1183,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,
     boolean		screen_updated = FALSE;
     int			vd_cols_on_screen = sas_w_at_no_check(VID_COLS);
 
-	source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + text_regen_base();
+	source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;
 	col_incr = sas_w_at_no_check(VID_COLS) * 2;
 
 	/* Try to scroll the adaptor memory & host screen. */
@@ -1320,7 +1315,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
     case 3: case 7:
 	is_alpha = TRUE;
 	col_incr = vd_cols_on_screen * 2;
-	source = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row)+text_regen_base();	/* top left */
+	source = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row)+vd_text_mode().start_addr;	/* top left */
 	break;
 
     case 4: case 5: case 6:
@@ -1448,7 +1443,7 @@ GLOBAL void vd_read_attrib_char IFN0()
     vd_cursor_row = sas_hw_at_no_check(VID_CURPOS + getBH()*2 + 1);
 
    if (alpha_num_mode()) {		/* alpha */
-	cpos = text_regen_base() + vd_cursor_offset(getBH());
+	cpos = vd_text_mode().start_addr + vd_cursor_offset(getBH());
 #line 1374
 #ifdef A2CPU
 #line 1375
@@ -1609,7 +1604,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
 #endif
 				)
-				sas_storew(text_regen_base() + cpos, (getBL() << 8) | getAL());
+				sas_storew(vd_text_mode().start_addr + cpos, (getBL() << 8) | getAL());
 			else
 #endif	/* EGG */
 				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
@@ -1623,7 +1618,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
 #endif
 				)
-				sas_storew(text_regen_base() + cpos, (getBL() << 8) | getAL());
+				sas_storew(vd_text_mode().start_addr + cpos, (getBL() << 8) | getAL());
 			else
 #endif	/* EGG */
 				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
@@ -1696,7 +1691,7 @@ GLOBAL void vd_write_char IFN0()
 #line 1586
 #endif
 				)
-				sas_store(text_regen_base() + cpos, getAL());
+				sas_store(vd_text_mode().start_addr + cpos, getAL());
 			else
 #line 1590
 #endif	/* EGG */
@@ -2198,7 +2193,7 @@ GLOBAL void vd_write_teletype IFN0()
 #line 2049
 #endif
 				)
-				sas_store(text_regen_base() + ch_addr, ch);
+				sas_store(vd_text_mode().start_addr + ch_addr, ch);
 			else
 #line 2053
 #endif	/* EGG */
@@ -2357,7 +2352,7 @@ GLOBAL void vd_write_teletype IFN0()
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #line 2205
 #else
-		sas_load( text_regen_base() + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);
+		sas_load( vd_text_mode().start_addr + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);
 #line 2207
 #endif /* A2CPU */
 

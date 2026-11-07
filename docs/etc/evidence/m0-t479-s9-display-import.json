@@ -1,0 +1,205 @@
+[
+  {
+    "file": "base/video/gfx_updt.c",
+    "applied": [
+      "-533,13 +533,13 @@ static\tint\tega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,",
+      "-783,7 +783,7 @@ void\tega_wrap_split_text_update IFN0()",
+      "-801,17 +801,17 @@ void\tega_wrap_split_text_update IFN0()",
+      "-831,13 +831,13 @@ void\tega_wrap_split_text_update IFN0()",
+      "-851,13 +851,13 @@ void\tega_wrap_split_text_update IFN0()",
+      "-881,14 +881,14 @@ void\tega_wrap_split_text_update IFN0()",
+      "-900,9 +900,9 @@ void\tega_wrap_split_text_update IFN0()",
+      "-946,7 +946,7 @@ void\tega_split_text_update IFN0()",
+      "-961,7 +961,7 @@ void\tega_split_text_update IFN0()",
+      "-974,12 +974,12 @@ void\tega_split_text_update IFN0()",
+      "-999,9 +999,9 @@ void\tega_split_text_update IFN0()",
+      "-1040,12 +1040,12 @@ void ega_wrap_text_update IFN0()",
+      "-1099,10 +1099,10 @@ void ega_wrap_text_update IFN0()",
+      "-1114,7 +1114,7 @@ void ega_wrap_text_update IFN0()",
+      "-1201,7 +1201,7 @@ void ega_text_update IFN0()",
+      "-1508,7 +1508,7 @@ cga_graph_update_chain2 IFN0()",
+      "-1519,7 +1519,7 @@ cga_graph_update_chain2 IFN0()",
+      "-1557,7 +1557,7 @@ cga_graph_update_chain2 IFN0()",
+      "-1568,7 +1568,7 @@ cga_graph_update_chain2 IFN0()",
+      "-1587,24 +1587,24 @@ cga_graph_update_chain2 IFN0()",
+      "-1613,7 +1613,7 @@ cga_graph_update_chain2 IFN0()",
+      "-2565,9 +2565,9 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+      "-2643,8 +2643,8 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+      "-2655,12 +2655,12 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+      "-2680,10 +2680,10 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,",
+      "-2788,8 +2788,8 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,",
+      "-2800,12 +2800,12 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,",
+      "-2825,10 +2825,10 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,",
+      "-585,12 +585,12 @@ static\tvoid\tega_text_paint_dirty_recs IFN2(int, start_rec, int, end_rec) [unique changed block]",
+      "-1179,12 +1179,12 @@ void ega_text_update IFN0() [unique changed block]",
+      "-2575,17 +2575,17 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height, [unique changed block]"
+    ],
+    "initial_unmatched_hunks": [
+      {
+        "header": "-1218,7 +1218,7 @@ void ega_text_update IFN0()",
+        "matches": 2,
+        "old": "\t\tdirty_curs_y = get_cur_y();\n\n\t\tdirty_curs_offs = screen_start+dirty_curs_y * (get_offset_per_line()<<1) + (dirty_curs_x<<2);\n\t\tattr = *(get_screen_ptr(dirty_curs_offs + 1));\n\n\t\thost_paint_cursor( dirty_curs_x, dirty_curs_y, attr );\n\t}\n",
+        "new": "\t\tdirty_curs_y = get_cur_y();\n\n\t\tdirty_curs_offs = screen_start+dirty_curs_y * (get_offset_per_line()<<1) + (dirty_curs_x<<2);\n\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));\n\n\t\thost_paint_cursor( dirty_curs_x, dirty_curs_y, attr );\n\t}\n",
+        "unresolved": [
+          {
+            "old": "\t\tattr = *(get_screen_ptr(dirty_curs_offs + 1));\n",
+            "new": "\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));\n",
+            "matches": 3
+          }
+        ]
+      },
+      {
+        "header": "-1630,18 +1630,18 @@ cga_graph_update_chain2 IFN0()",
+        "matches": 0,
+        "old": "\t\t\t\t\t\tfor(l=k+1;l>0;l--)\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t*to++ = *from;\n\t\t\t\t\t\t\tfrom += 2;\n\t\t\t\t\t\t}\n\t\n\t\t\t\t\t\tl = j - k - 1;\n\t\t\t\t\t\tto += l;\n\t\t\t\t\t\tfrom += l << 1;\n\t\n\t\t\t\t\t\tbreak;\t/* onto next line */\n\t\t\t\t\t}\n\t\n\t\t\t\t\tto++;\n\t\t\t\t\tfrom += 2;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n",
+        "new": "\t\t\t\t\t\tfor(l=k+1;l>0;l--)\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t*to++ = *from;\n\t\t\t\t\t\t\tfrom += 4;\n\t\t\t\t\t\t}\n\t\n\t\t\t\t\t\tl = j - k - 1;\n\t\t\t\t\t\tto += l;\n\t\t\t\t\t\tfrom += l << 2;\n\t\n\t\t\t\t\t\tbreak;\t/* onto next line */\n\t\t\t\t\t}\n\t\n\t\t\t\t\tto++;\n\t\t\t\t\tfrom += 4;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n",
+        "unresolved": [
+          {
+            "old": "\t\t\t\t\tfrom += 2;\n",
+            "new": "\t\t\t\t\tfrom += 4;\n",
+            "matches": 2
+          }
+        ]
+      }
+    ],
+    "reviewed_resolutions": [
+      {
+        "header": "-1218,7 +1218,7 @@ void ega_text_update IFN0()",
+        "status": "applied",
+        "basis": "Current normalized new block matches; verified against current source."
+      },
+      {
+        "header": "-1630,18 +1630,18 @@ cga_graph_update_chain2 IFN0()",
+        "status": "applied",
+        "basis": "Current normalized new block matches; verified against current source."
+      }
+    ],
+    "reviewed_source_sha256": "c2d1f583e2f56f2ba4675acb0cd98d336ec635a68c8d00cebd2f2596816994c9"
+  },
+  {
+    "file": "base/video/egawrtm0.c",
+    "applied": [
+      "-563,7 +563,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )"
+    ],
+    "initial_unmatched_hunks": [
+      {
+        "header": "-287,7 +287,7 @@ ega_copy_b_write IFN2(ULONG, value, ULONG, offset )",
+        "matches": 0,
+        "old": "\t(*update_alg.mark_byte)( offset );\n\n\tlsb = offset & 0x1;\n\toffset = (offset >> 1) << 2;\n\toffset |= lsb;\n\n\t*(IU8 *)(getVideowplane() + offset) = (IU8)value;\n",
+        "new": "\t(*update_alg.mark_byte)( offset );\n\n\tlsb = offset & 0x1;\n\toffset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;\n\toffset |= lsb;\n\n\t*(IU8 *)(getVideowplane() + offset) = (IU8)value;\n",
+        "unresolved": [
+          {
+            "old": "\toffset = (offset >> 1) << 2;\n",
+            "new": "\toffset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;\n",
+            "matches": 5
+          }
+        ]
+      },
+      {
+        "header": "-304,13 +304,13 @@ ega_copy_w_write IFN2(ULONG, value, ULONG, offset )",
+        "matches": 0,
+        "old": "\t(*update_alg.mark_word)( offset );\n\n\tlsb = offset & 0x1;\n\toffset = (offset >> 1) << 2;\n\tplanes = getVideowplane() + offset;\n\n\tif( lsb )\n\t{\n\t\t*(planes + 1) = (UTINY)value;\n\t\t*(planes + 4) = (UTINY)(value >> 8);\n\t}\n\telse\n\t{\n",
+        "new": "\t(*update_alg.mark_word)( offset );\n\n\tlsb = offset & 0x1;\n\toffset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;\n\tplanes = getVideowplane() + offset;\n\n\tif( lsb )\n\t{\n\t\t*(planes + 1) = (UTINY)value;\n\t\t*(planes + 8) = (UTINY)(value >> 8);\n\t}\n\telse\n\t{\n",
+        "unresolved": [
+          {
+            "old": "\toffset = (offset >> 1) << 2;\n",
+            "new": "\toffset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;\n",
+            "matches": 5
+          },
+          {
+            "old": "\t\t*(planes + 4) = (UTINY)(value >> 8);\n",
+            "new": "\t\t*(planes + 8) = (UTINY)(value >> 8);\n",
+            "matches": 0
+          }
+        ]
+      }
+    ],
+    "reviewed_resolutions": [
+      {
+        "header": "-287,7 +287,7 @@ ega_copy_b_write IFN2(ULONG, value, ULONG, offset )",
+        "status": "applied",
+        "basis": "Reviewed function body: same plane address/lane arithmetic; original local destination byte types and implicit narrowing retained instead of importing upstream-only casts."
+      },
+      {
+        "header": "-304,13 +304,13 @@ ega_copy_w_write IFN2(ULONG, value, ULONG, offset )",
+        "status": "applied",
+        "basis": "Reviewed function body: same plane address/lane arithmetic; original local destination byte types and implicit narrowing retained instead of importing upstream-only casts."
+      }
+    ],
+    "reviewed_source_sha256": "eb1a18d15bcda993bfadd358b372563d02c606a7ae35523ee0d50891151e637c"
+  },
+  {
+    "file": "base/video/egwrtm12.c",
+    "applied": [
+      "-295,7 +295,7 @@ ega_mode1_chn_b_write IFN2(ULONG, value, ULONG, offset )",
+      "-329,7 +329,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+      "-628,7 +628,7 @@ ega_mode2_chn_b_write IFN2(ULONG, value, ULONG, offset )",
+      "-699,7 +699,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+      "-764,13 +764,13 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )"
+    ],
+    "initial_unmatched_hunks": [
+      {
+        "header": "-337,13 +337,13 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+        "matches": 0,
+        "old": "\t\t\tEGA_plane01[offset + 1] = get_latch1;\n\n\t\tif( getVideoplane_enable() & 1 )\n\t\t\tEGA_plane01[offset + 4] = get_latch0;\n\n\t\tif( getVideoplane_enable() & 8 )\n\t\t\tEGA_plane23[offset + 1] = get_latch3;\n\n\t\tif( getVideoplane_enable() & 4 )\n\t\t\tEGA_plane23[offset + 4] = get_latch2;\n\t}\n\telse\t\t/* even address, low byte in planes 0 and 2 */\n\t{\n",
+        "new": "\t\t\tEGA_plane01[offset + 1] = get_latch1;\n\n\t\tif( getVideoplane_enable() & 1 )\n\t\t\tEGA_plane01[offset + 8] = get_latch0;\n\n\t\tif( getVideoplane_enable() & 8 )\n\t\t\tEGA_plane23[offset + 1] = get_latch3;\n\n\t\tif( getVideoplane_enable() & 4 )\n\t\t\tEGA_plane23[offset + 8] = get_latch2;\n\t}\n\telse\t\t/* even address, low byte in planes 0 and 2 */\n\t{\n",
+        "unresolved": [
+          {
+            "old": "\t\t\tEGA_plane01[offset + 4] = get_latch0;\n",
+            "new": "\t\t\tEGA_plane01[offset + 8] = get_latch0;\n",
+            "matches": 0
+          },
+          {
+            "old": "\t\t\tEGA_plane23[offset + 4] = get_latch2;\n",
+            "new": "\t\t\tEGA_plane23[offset + 8] = get_latch2;\n",
+            "matches": 0
+          }
+        ]
+      },
+      {
+        "header": "-714,7 +714,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+        "matches": 0,
+        "old": "\t\t\tif( getVideoplane_enable() & 1 )\n\t\t\t{\n\t\t\t\tvalue2 = high & 1 ? 0xff : 0;\n\t\t\t\tEGA_plane01[offset + 4] = (byte) do_logicals( value2, get_latch0 );\n\t\t\t}\n\n\t\t\tif( getVideoplane_enable() & 8 )\n",
+        "new": "\t\t\tif( getVideoplane_enable() & 1 )\n\t\t\t{\n\t\t\t\tvalue2 = high & 1 ? 0xff : 0;\n\t\t\t\tEGA_plane01[offset + 8] = (byte) do_logicals( value2, get_latch0 );\n\t\t\t}\n\n\t\t\tif( getVideoplane_enable() & 8 )\n",
+        "unresolved": [
+          {
+            "old": "\t\t\t\tEGA_plane01[offset + 4] = (byte) do_logicals( value2, get_latch0 );\n",
+            "new": "\t\t\t\tEGA_plane01[offset + 8] = (byte) do_logicals( value2, get_latch0 );\n",
+            "matches": 0
+          }
+        ]
+      },
+      {
+        "header": "-726,7 +726,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+        "matches": 0,
+        "old": "\t\t\tif( getVideoplane_enable() & 4 )\n\t\t\t{\n\t\t\t\tvalue2 = high & 4 ? 0xff : 0;\n\t\t\t\tEGA_plane23[offset + 4] = (byte) do_logicals( value2, get_latch2 );\n\t\t\t}\n\t\t}\n\t\telse\t\t/* even address, low byte in planes 0 and 2 */\n",
+        "new": "\t\t\tif( getVideoplane_enable() & 4 )\n\t\t\t{\n\t\t\t\tvalue2 = high & 4 ? 0xff : 0;\n\t\t\t\tEGA_plane23[offset + 8] = (byte) do_logicals( value2, get_latch2 );\n\t\t\t}\n\t\t}\n\t\telse\t\t/* even address, low byte in planes 0 and 2 */\n",
+        "unresolved": [
+          {
+            "old": "\t\t\t\tEGA_plane23[offset + 4] = (byte) do_logicals( value2, get_latch2 );\n",
+            "new": "\t\t\t\tEGA_plane23[offset + 8] = (byte) do_logicals( value2, get_latch2 );\n",
+            "matches": 0
+          }
+        ]
+      }
+    ],
+    "reviewed_resolutions": [
+      {
+        "header": "-337,13 +337,13 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+        "status": "applied",
+        "basis": "Reviewed function body: same plane address/lane arithmetic; original local destination byte types and implicit narrowing retained instead of importing upstream-only casts."
+      },
+      {
+        "header": "-714,7 +714,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+        "status": "applied",
+        "basis": "Reviewed function body: same plane address/lane arithmetic; original local destination byte types and implicit narrowing retained instead of importing upstream-only casts."
+      },
+      {
+        "header": "-726,7 +726,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )",
+        "status": "applied",
+        "basis": "Reviewed function body: same plane address/lane arithmetic; original local destination byte types and implicit narrowing retained instead of importing upstream-only casts."
+      }
+    ],
+    "reviewed_source_sha256": "17a2696a6da00184e8cc7cb66ecf512688b21b7250ec36c9f4a8874447b5d807"
+  }
+]

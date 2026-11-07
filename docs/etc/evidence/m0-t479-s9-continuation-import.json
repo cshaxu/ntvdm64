@@ -1,0 +1,246 @@
+{
+  "upstream": "f1d394ca6952e3812c9ea49037570069e4406302",
+  "reason": "Internal label tail calls enter a new crules activation with null CopyLocalIUH; same-activation goto retains the original saved locals. Real S-rule calls remain unchanged.",
+  "changes": [
+    {
+      "file": "sevid000.c",
+      "target": "L26_1if_d",
+      "sourceLine": 828
+    },
+    {
+      "file": "sevid000.c",
+      "target": "L26_3if_d",
+      "sourceLine": 937
+    },
+    {
+      "file": "sevid000.c",
+      "target": "L26_5if_d",
+      "sourceLine": 982
+    },
+    {
+      "file": "sevid000.c",
+      "target": "L26_24if_d",
+      "sourceLine": 1712
+    },
+    {
+      "file": "sevid000.c",
+      "target": "L26_26if_d",
+      "sourceLine": 1855
+    },
+    {
+      "file": "sevid000.c",
+      "target": "L26_28if_d",
+      "sourceLine": 1920
+    },
+    {
+      "file": "sevid001.c",
+      "target": "L26_58if_d",
+      "sourceLine": 1162
+    },
+    {
+      "file": "sevid001.c",
+      "target": "L26_60if_d",
+      "sourceLine": 1198
+    },
+    {
+      "file": "sevid001.c",
+      "target": "L26_78if_d",
+      "sourceLine": 1474
+    },
+    {
+      "file": "sevid001.c",
+      "target": "L26_80if_d",
+      "sourceLine": 1539
+    },
+    {
+      "file": "sevid016.c",
+      "target": "L21_1if_d",
+      "sourceLine": 4026
+    },
+    {
+      "file": "sevid016.c",
+      "target": "L21_9if_d",
+      "sourceLine": 4362
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_19if_d",
+      "sourceLine": 824
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_24if_d",
+      "sourceLine": 1150
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_35if_d",
+      "sourceLine": 1712
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_43if_d",
+      "sourceLine": 2048
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_53if_d",
+      "sourceLine": 2237
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_58if_d",
+      "sourceLine": 2563
+    },
+    {
+      "file": "sevid017.c",
+      "target": "L21_69if_d",
+      "sourceLine": 3153
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_77if_d",
+      "sourceLine": 1098
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_87if_d",
+      "sourceLine": 1287
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_92if_d",
+      "sourceLine": 1613
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_103if_d",
+      "sourceLine": 2188
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_111if_d",
+      "sourceLine": 2524
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_121if_d",
+      "sourceLine": 2713
+    },
+    {
+      "file": "sevid018.c",
+      "target": "L21_126if_d",
+      "sourceLine": 3039
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_137if_d",
+      "sourceLine": 1184
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_143if_d",
+      "sourceLine": 1296
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_141if_d",
+      "sourceLine": 1339
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_147if_d",
+      "sourceLine": 1369
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_149if_d",
+      "sourceLine": 1401
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_153if_d",
+      "sourceLine": 1491
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_155if_d",
+      "sourceLine": 1604
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_161if_d",
+      "sourceLine": 1760
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_163if_d",
+      "sourceLine": 1889
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_167if_d",
+      "sourceLine": 2160
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_177if_d",
+      "sourceLine": 2433
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_185if_d",
+      "sourceLine": 2790
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_195if_d",
+      "sourceLine": 3063
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_203if_d",
+      "sourceLine": 3420
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_213if_d",
+      "sourceLine": 3693
+    },
+    {
+      "file": "sevid019.c",
+      "target": "L21_221if_d",
+      "sourceLine": 4050
+    },
+    {
+      "file": "sevid020.c",
+      "target": "L21_231if_d",
+      "sourceLine": 875
+    },
+    {
+      "file": "sevid020.c",
+      "target": "L21_241if_d",
+      "sourceLine": 1137
+    },
+    {
+      "file": "sevid020.c",
+      "target": "L21_239if_d",
+      "sourceLine": 1179
+    },
+    {
+      "file": "sevid020.c",
+      "target": "L21_245if_d",
+      "sourceLine": 1209
+    },
+    {
+      "file": "sevid020.c",
+      "target": "L21_247if_d",
+      "sourceLine": 1241
+    },
+    {
+      "file": "sevid020.c",
+      "target": "L21_251if_d",
+      "sourceLine": 1329
+    }
+  ]
+}

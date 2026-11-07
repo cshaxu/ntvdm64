@@ -284,7 +284,7 @@ ega_copy_b_write IFN2(ULONG, value, ULONG, offset )
 	(*update_alg.mark_byte)( offset );
 
 	lsb = offset & 0x1;
-	offset = (offset >> 1) << 2;
+	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
 	offset |= lsb;
 
 	*(IU8 *)(getVideowplane() + offset) = value;
@@ -301,13 +301,13 @@ ega_copy_w_write IFN2(ULONG, value, ULONG, offset )
 	(*update_alg.mark_word)( offset );
 
 	lsb = offset & 0x1;
-	offset = (offset >> 1) << 2;
+	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
 	planes = getVideowplane() + offset;
 
 	if( lsb )
 	{
 		*(planes + 1) = value;
-		*(planes + 4) = value >> 8;
+		*(planes + 8) = value >> 8;
 	}
 	else
 	{
@@ -429,7 +429,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
    (*update_alg.mark_byte)( offset );
 
 	lsb = offset & 0x1;
-    offset = (offset >> 1) << 2;
+    offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
 
 	if( lsb )	/* odd address, in plane 1 or 3  */
 	{

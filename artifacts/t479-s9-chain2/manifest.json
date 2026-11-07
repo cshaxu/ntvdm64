@@ -1,0 +1,160 @@
+{
+  "purpose": "Owned Win3.1 candidate verification; no guest binaries",
+  "files": [
+    {
+      "path": "stage032.json",
+      "sha256": "dee13e86f45bc4e4d23099c99e4a113a1d7d79b4fca775710df70ed3a5c55c5d",
+      "bytes": 726
+    },
+    {
+      "path": "root032.txt",
+      "sha256": "78551c043c6d66459a1f8f0d6e47af405434304f0988bf21c00cf86a1d40a013",
+      "bytes": 26
+    },
+    {
+      "path": "root032.exit",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1
+    },
+    {
+      "path": "live036.exit",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1
+    },
+    {
+      "path": "rules026.err",
+      "sha256": "1623934dd2bd3506671a6853dd8d5b0462089feccdcf3b195000aeb9c11b22a5",
+      "bytes": 66
+    },
+    {
+      "path": "rules026.out",
+      "sha256": "4352fc73a35380112018681c50d94b0174c69afcba56e4247ee2d0f437f5fe95",
+      "bytes": 7100
+    },
+    {
+      "path": "rules029.out",
+      "sha256": "978c9a18e8e856bb98624ba36bc6822bd80bc4c00e668626cb6954214f83dc5a",
+      "bytes": 43662
+    },
+    {
+      "path": "rules033.exit",
+      "sha256": "9aca8dfce962538fb8131d73f84cada05e4dc79f5a0d3612c511b1150f3e33e2",
+      "bytes": 4
+    },
+    {
+      "path": "supervisor033.out",
+      "sha256": "e83e44678b08f7ab415b78691f87832ce62493209774b92c5f041d3748aad91a",
+      "bytes": 7325
+    },
+    {
+      "path": "resume038.out",
+      "sha256": "5706c5744e74cdb209612bc8400e47a0ac84dfc9a6530fd7d5f8532b22dae19f",
+      "bytes": 4247
+    },
+    {
+      "path": "resume038.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "initial032.txt",
+      "sha256": "f3b30efbe20df3fc2e141d9facd979cf55b0be525165c4d8d9de929a74aa2a6e",
+      "bytes": 3630
+    },
+    {
+      "path": "full032.txt",
+      "sha256": "f23b3be3038abf961f1b0d0c06e0fd1b20b46e17c01a34fe086525c7412558a5",
+      "bytes": 3630
+    },
+    {
+      "path": "typed032.bmp",
+      "sha256": "7f599d43c558b2ce71419e9ffb91eccab9f9a87463477870f975a3ed7305b896",
+      "bytes": 1228854
+    },
+    {
+      "path": "back032.bmp",
+      "sha256": "5f2d0004990c25a96d2f71d049430517bf310a0f1f616c317ee29a8c53e64f65",
+      "bytes": 1228854
+    },
+    {
+      "path": "command032-dir.bmp",
+      "sha256": "46c6e05457bd976d94db8883faf1cef9281830213ac2bc8abe9600807f89b94d",
+      "bytes": 1228854
+    },
+    {
+      "path": "command032-ver.bmp",
+      "sha256": "5d153f5b07601597b598c7087c577d3e3856e05701862eda296bb655d1a24ecc",
+      "bytes": 1228854
+    },
+    {
+      "path": "command032-cls.bmp",
+      "sha256": "d6b55745b25af5585d727944d1babb09030bd75e64c66e701874bf4b09eb6260",
+      "bytes": 1228854
+    },
+    {
+      "path": "dos-exit032.bmp",
+      "sha256": "017887ff41f7843a2dc921ac46aa6bd944e0860bab4e33e94e2713b2988a1b71",
+      "bytes": 1228854
+    },
+    {
+      "path": "exit-dialog032.bmp",
+      "sha256": "8dcb1d10580e844d4022c757a65dd50b545784c24a906f6c2dda3c6a6a62db89",
+      "bytes": 1228854
+    },
+    {
+      "path": "stage032.ps1",
+      "sha256": "a6e13c327cb80ff91b8ddc6a74396a81c7b3169402159e5849557cab1c0ceae5",
+      "bytes": 1313
+    },
+    {
+      "path": "control032.ps1",
+      "sha256": "efa60984be8784f521054ea8d174295990c7e677e2f47fd3003e306150488baf",
+      "bytes": 3237
+    },
+    {
+      "path": "resume036.ps1",
+      "sha256": "def0b03423cc0d4117f0a847b1113e32b15e57e5ec2bde145d166fd819b078a4",
+      "bytes": 2590
+    },
+    {
+      "path": "resume038.ps1",
+      "sha256": "b4aa4d9b0ef7324481fe9be0abf051643721450320c5b19d8f8e19f41277750b",
+      "bytes": 428
+    },
+    {
+      "path": "key032.c",
+      "sha256": "8389657d3ea1552c2f06d95174a34d8730aa7a708b0ec68f7db2ab1fd7e3b3a8",
+      "bytes": 4226
+    },
+    {
+      "path": "key032.cmd",
+      "sha256": "51692ceb1490f3a76ace96c74e8c8df790ba58d18e8a8716a0edd887d768593e",
+      "bytes": 318
+    },
+    {
+      "path": "rules033.cmd",
+      "sha256": "e9cf3b1a08cef073bfeebe15af5f1a28eee01cb8286666323993e05d0e6f9c50",
+      "bytes": 464
+    },
+    {
+      "path": "probe-inputs/rootwinenv.c",
+      "sha256": "3f5ad5c178d8bc648798ea27218e681b14e8f428a8660ae0dff2b134dafa2c57",
+      "bytes": 8665
+    },
+    {
+      "path": "probe-inputs/console.c",
+      "sha256": "67b5f0bd3ee849b588428f044a6b979ae10ea7564c5a56bb6d744d0fa829f18a",
+      "bytes": 635
+    },
+    {
+      "path": "probe-inputs/altenter-full.c",
+      "sha256": "0a56f70ed54e4e1d00cc6a2bc44477b6c3166f682f1cb84a0b50181a280f7bf9",
+      "bytes": 751
+    },
+    {
+      "path": "probe-inputs/surface.cmd",
+      "sha256": "25cd0a41eaab34d4c067048e9efb99a39e690b1548539a4a241bddf986388de5",
+      "bytes": 294
+    }
+  ]
+}

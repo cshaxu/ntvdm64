@@ -1,0 +1,691 @@
+{
+  "upstream": "9250732e..1ec0d551",
+  "method": "Exact original statement and occurrence within identical generated case label; no pointer binding replacement",
+  "mapped": [
+    {
+      "file": "sevid000.c",
+      "case": "L13_2067if_f_id",
+      "upstreamLine": 735,
+      "localLine": 734,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2068if_f_id",
+      "upstreamLine": 793,
+      "localLine": 792,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2068if_f_id",
+      "upstreamLine": 809,
+      "localLine": 808,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2068if_f_id",
+      "upstreamLine": 824,
+      "localLine": 823,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(4)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(8) /* T99: next odd/even plane pair. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2070if_f_id",
+      "upstreamLine": 935,
+      "localLine": 935,
+      "before": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_3if_d_id",
+      "upstreamLine": 949,
+      "localLine": 950,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_3if_d_id",
+      "upstreamLine": 954,
+      "localLine": 955,
+      "before": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r20)\t+\tREGLONG)\t;\t",
+      "after": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r20)\t+\tREGLONG) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: retain the selected odd/even lane. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_6w_t_id",
+      "upstreamLine": 974,
+      "localLine": 975,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_8w_t_id",
+      "upstreamLine": 998,
+      "localLine": 1000,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_5if_d_id",
+      "upstreamLine": 1008,
+      "localLine": 1010,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2079if_f_id",
+      "upstreamLine": 1561,
+      "localLine": 1563,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2080if_f_id",
+      "upstreamLine": 1640,
+      "localLine": 1642,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2080if_f_id",
+      "upstreamLine": 1656,
+      "localLine": 1658,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L13_2082if_f_id",
+      "upstreamLine": 1850,
+      "localLine": 1853,
+      "before": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_26if_d_id",
+      "upstreamLine": 1864,
+      "localLine": 1868,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_26if_d_id",
+      "upstreamLine": 1869,
+      "localLine": 1873,
+      "before": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG)\t;\t",
+      "after": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: retain the selected odd/even lane. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_29w_t_id",
+      "upstreamLine": 1909,
+      "localLine": 1913,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_31w_t_id",
+      "upstreamLine": 1953,
+      "localLine": 1958,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid000.c",
+      "case": "L26_28if_d_id",
+      "upstreamLine": 1963,
+      "localLine": 1968,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_57if_f_id",
+      "upstreamLine": 1166,
+      "localLine": 1166,
+      "before": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_61w_t_id",
+      "upstreamLine": 1191,
+      "localLine": 1191,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_63w_t_id",
+      "upstreamLine": 1217,
+      "localLine": 1218,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_60if_d_id",
+      "upstreamLine": 1225,
+      "localLine": 1226,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_60if_d_id",
+      "upstreamLine": 1227,
+      "localLine": 1228,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_77if_f_id",
+      "upstreamLine": 1476,
+      "localLine": 1478,
+      "before": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_78if_d_id",
+      "upstreamLine": 1485,
+      "localLine": 1487,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_78if_d_id",
+      "upstreamLine": 1490,
+      "localLine": 1492,
+      "before": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG)\t;\t",
+      "after": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: retain the selected odd/even lane. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_81w_t_id",
+      "upstreamLine": 1530,
+      "localLine": 1532,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_83w_t_id",
+      "upstreamLine": 1574,
+      "localLine": 1577,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_80if_d_id",
+      "upstreamLine": 1582,
+      "localLine": 1585,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_80if_d_id",
+      "upstreamLine": 1584,
+      "localLine": 1587,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t"
+    },
+    {
+      "file": "sevid017.c",
+      "case": "L21_34if_f_id",
+      "upstreamLine": 1726,
+      "localLine": 1834,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid017.c",
+      "case": "L21_68if_f_id",
+      "upstreamLine": 3163,
+      "localLine": 3336,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_136if_f_id",
+      "upstreamLine": 1194,
+      "localLine": 1398,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_138w_t_id",
+      "upstreamLine": 1217,
+      "localLine": 1421,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_142if_f_id",
+      "upstreamLine": 1305,
+      "localLine": 1525,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_144w_t_id",
+      "upstreamLine": 1331,
+      "localLine": 1551,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_140if_f_id",
+      "upstreamLine": 1354,
+      "localLine": 1575,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_140if_f_id",
+      "upstreamLine": 1365,
+      "localLine": 1586,
+      "before": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_146if_f_id",
+      "upstreamLine": 1376,
+      "localLine": 1598,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_147if_d_id",
+      "upstreamLine": 1396,
+      "localLine": 1615,
+      "before": "\t*((IUH\t*)(LocalIUH+8))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+8))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_150w_t_id",
+      "upstreamLine": 1420,
+      "localLine": 1640,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_150w_t_id",
+      "upstreamLine": 1422,
+      "localLine": 1642,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_152if_f_id",
+      "upstreamLine": 1490,
+      "localLine": 1736,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_156w_t_id",
+      "upstreamLine": 1589,
+      "localLine": 1854,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(4)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(8) /* T99: next odd/even plane pair. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_154if_f_id",
+      "upstreamLine": 1608,
+      "localLine": 1874,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_158w_t_id",
+      "upstreamLine": 1626,
+      "localLine": 1892,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(4)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(8) /* T99: next odd/even plane pair. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_160if_f_id",
+      "upstreamLine": 1757,
+      "localLine": 2042,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_162if_f_id",
+      "upstreamLine": 1891,
+      "localLine": 2196,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_164w_t_id",
+      "upstreamLine": 1919,
+      "localLine": 2224,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(8) /* T99: next odd/even plane pair. */\t;\t"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L21_164w_t_id",
+      "upstreamLine": 1924,
+      "localLine": 2229,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(8) /* T99: next odd/even plane pair. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_240if_f_id",
+      "upstreamLine": 1146,
+      "localLine": 1197,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_240if_f_id",
+      "upstreamLine": 1155,
+      "localLine": 1206,
+      "before": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_242w_t_id",
+      "upstreamLine": 1171,
+      "localLine": 1222,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_238if_f_id",
+      "upstreamLine": 1194,
+      "localLine": 1246,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_244if_f_id",
+      "upstreamLine": 1216,
+      "localLine": 1269,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_244if_f_id",
+      "upstreamLine": 1225,
+      "localLine": 1278,
+      "before": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_246if_f_id",
+      "upstreamLine": 1241,
+      "localLine": 1292,
+      "before": "\t*((IUH\t*)(LocalIUH+8))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+8))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_248w_t_id",
+      "upstreamLine": 1260,
+      "localLine": 1311,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L21_248w_t_id",
+      "upstreamLine": 1262,
+      "localLine": 1313,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t"
+    },
+    {
+      "file": "sevid017.c",
+      "case": "L13_2623if_f_id",
+      "upstreamLine": 1702,
+      "before": "\t*((IUH\t*)&(r23))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r23))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1809,
+      "parent": "S_2643_Chain2ModeXByteWrite_00000001_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid017.c",
+      "case": "L13_2641if_f_id",
+      "upstreamLine": 3139,
+      "before": "\t*((IUH\t*)&(r23))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r23))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 3311,
+      "parent": "S_2661_Chain2ModeXByteWrite_00000002_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2676if_f_id",
+      "upstreamLine": 1111,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1299,
+      "parent": "S_2696_Chain2ByteWrite_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2677if_f_id",
+      "upstreamLine": 1172,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1375,
+      "parent": "S_2697_Chain2ByteFill_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2678if_f_id",
+      "upstreamLine": 1283,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1502,
+      "parent": "S_2698_Chain2ByteMove_Copy_Fwd_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2679if_f_id",
+      "upstreamLine": 1473,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(1)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "upstreamMatches": 2,
+      "localMatches": 0,
+      "localLine": 1718,
+      "parent": "S_2699_Chain2WordWrite_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2680if_f_id",
+      "upstreamLine": 1553,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1818,
+      "parent": "S_2700_Chain2WordFill_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2680if_f_id",
+      "upstreamLine": 1575,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1840,
+      "parent": "S_2700_Chain2WordFill_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2682if_f_id",
+      "upstreamLine": 1733,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "upstreamMatches": 3,
+      "localMatches": 1,
+      "localLine": 2017,
+      "parent": "S_2702_Chain2DwordWrite_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2683if_f_id",
+      "upstreamLine": 1843,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 2147,
+      "parent": "S_2703_Chain2DwordFill_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2683if_f_id",
+      "upstreamLine": 1878,
+      "before": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r20))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 2182,
+      "parent": "S_2703_Chain2DwordFill_Copy_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid020.c",
+      "case": "L13_2709if_f_id",
+      "upstreamLine": 1124,
+      "before": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "after": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "localLine": 1174,
+      "parent": "S_2729_Chain2ByteMove_Copy_Bwd_id",
+      "method": "Same S rule and at least three adjacent identical context lines"
+    },
+    {
+      "file": "sevid001.c",
+      "case": "L26_58if_d_id",
+      "upstreamLine": 1170,
+      "before": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32 *)softpc_gdp_rule_slot((void *)r1, (unsigned int)(*((IHPE *)&(r20))), sizeof(IU32)))\t+\t*((IU32\t*)(LocalIUH+1)\t+\tREGLONG)\t;",
+      "after": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32 *)softpc_gdp_rule_slot((void *)r1, (unsigned int)(*((IHPE *)&(r20))), sizeof(IU32)))\t+\t((*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & ~1u) << 2) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: odd/even plane address. */\t;",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "parent": "S_2119_RdMode0Chain2StringReadBwd_id",
+      "contextMatches": 0,
+      "localLine": 1170,
+      "localBefore": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32\t*)((*((IHPE\t*)&(r1)))\t+\t*((IHPE\t*)&(r20)))\t)\t+\t*((IU32\t*)(LocalIUH+1)\t+\tREGLONG)\t;\t\t",
+      "localAfter": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32\t*)((*((IHPE\t*)&(r1)))\t+\t*((IHPE\t*)&(r20)))\t)\t+\t((*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & ~1u) << 2) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: odd/even plane address. */\t;\t\t",
+      "method": "Manual same S-rule unique statement; preserve GDP load"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2677if_f_id",
+      "upstreamLine": 1183,
+      "before": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "parent": "S_2697_Chain2ByteFill_Copy_id",
+      "contextMatches": 0,
+      "localLine": 1386,
+      "localBefore": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "localAfter": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "method": "Manual same S-rule unique statement; preserve GDP load"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2678if_f_id",
+      "upstreamLine": 1294,
+      "before": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "parent": "S_2698_Chain2ByteMove_Copy_Fwd_id",
+      "contextMatches": 0,
+      "localLine": 1513,
+      "localBefore": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(3)\t;\t",
+      "localAfter": "\t*((IUH\t*)(LocalIUH+7))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "method": "Manual same S-rule unique statement; preserve GDP load"
+    },
+    {
+      "file": "sevid019.c",
+      "case": "L13_2682if_f_id",
+      "upstreamLine": 1750,
+      "before": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "after": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "upstreamMatches": 1,
+      "localMatches": 0,
+      "parent": "S_2702_Chain2DwordWrite_Copy_id",
+      "contextMatches": 0,
+      "localLine": 2034,
+      "localBefore": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "localAfter": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "method": "Manual same S-rule unique statement; preserve GDP load"
+    }
+  ],
+  "pending": []
+}

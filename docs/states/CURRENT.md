@@ -3,7 +3,12 @@
 ## Current Work
 
 **Active: M0 T479 S9 — Win3.1 DOS display-transition repair.**
-Owner keeps T479 open. [S8 delivery](../etc/evidence/m0-t479-s8-shared-delivery.md)
+Owner keeps T479 open. S9 P1 is implemented and published, awaiting owner
+acceptance. [Delivery](../etc/evidence/m0-t479-s9-delivery.md) records cached
+x86/x64 builds, Full16/16, physical-plane negative/positive controls and real
+Win3.1 transitions/input/DIR/VER/CLS/normal exit. All11 images at both release
+destinations match package44d63565-f8b2-47a4-b79f-42d4b8465197.
+The following S8 record is the prior baseline. [S8 delivery](../etc/evidence/m0-t479-s8-shared-delivery.md)
 imports unchanged shared components, passes full cached builds and Full16/16,
 and publishes all11 host images as package49af0246-027c-4b11-9ac0-ae94c2a8cfa5.
 Its reviewed commit/push is the current delivery checkpoint.
@@ -28,7 +33,7 @@ the [queued successor](../proposals/proposal-guest-multitask-io-completion-001.m
 | Asset Needs | Read-only SoftPC source/evidence and existing immutable Win3.1 installation/media; isolated probe copies. |
 | Reporting Requirements | Exact imported repair/lineage, mirror diff, before/after evidence, remaining boundaries and release hashes. |
 | Stop Conditions | Unproved semantic loss, need to modify original guest, or new compatibility concession; preserve work and investigate. |
-| Exit Criteria | All three defects verified, applicable gates pass, full package published/hash checked, reviewed commit and push; T remains open. |
+| Exit Criteria | All three defects verified, applicable gates pass, full package published/hash checked, reviewed commit and push; owner acceptance pending and T remains open. |
 | Original Owner Request | Import SoftPC fixes for all three Win3.1 MS-DOS window/fullscreen display failures. |
 | Similar-Issue Sweep | CHAIN2 scalar/string/rule addressing, text BIOS read/write aperture, redraw and input visibility across repeated mode changes. |
 | Temporary Evidence | build/t479-s9-display, executor-owned60-minute phases/2GiB/15-minute no-progress review; archive necessary evidence before cleanup. |

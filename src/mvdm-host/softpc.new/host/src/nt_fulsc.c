@@ -849,7 +849,7 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
 	*to++ = from->Char.AsciiChar;
 	*to = (half_word) from->Attributes;
 	from++;
-	to += 3;	// skipping interleaved font planes.
+	to += 7;	// CHAIN2: next character is eight plane bytes away.
     }
     host_mark_screen_refresh();
 #else

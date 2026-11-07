@@ -1,0 +1,105 @@
+{
+  "Suite": "Full",
+  "ElapsedMs": 323475,
+  "InputPolicy": "Observed",
+  "WindowOwnedConsole": false,
+  "PreparationMs": 1486,
+  "Gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 895,
+      "CleanupMs": 344,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 176,
+      "CleanupMs": 329,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 65057,
+      "CleanupMs": 365,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 43743,
+      "CleanupMs": 388,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 42518,
+      "CleanupMs": 343,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14540,
+      "CleanupMs": 389,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 8373,
+      "CleanupMs": 340,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 37743,
+      "CleanupMs": 372,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12261,
+      "CleanupMs": 384,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28171,
+      "CleanupMs": 255,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30911,
+      "CleanupMs": 368,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 2873,
+      "CleanupMs": 358,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7550,
+      "CleanupMs": 360,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9425,
+      "CleanupMs": 357,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3783,
+      "CleanupMs": 376,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 7070,
+      "CleanupMs": 385,
+      "Passed": true
+    }
+  ]
+}

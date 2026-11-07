@@ -880,8 +880,8 @@ switch ( id )
 	/*	j_state	(IS32)(-2013004273),	(IS32)(-1),	(IS32)(0)	*/
 /*	J_LOAD_RETURN	NOT	IMPLIMENTED	*/
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
-	{	extern	IUH	L21_19if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_19if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_19if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_18if_f_id	:
 		L21_18if_f:	;	
@@ -1231,8 +1231,8 @@ if(*((IU16	*)&(r22)	+	REGWORD	)>=16)
 	if	(*((IU32	*)(LocalIUH+4)	+	REGLONG)	>	*((IU32	*)&(r21)	+	REGLONG))	goto	L21_26w_t;	
 	case	L21_27w_d_id	:
 		L21_27w_d:	;	
-	{	extern	IUH	L21_24if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_24if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_24if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_23if_f_id	:
 		L21_23if_f:	;	
@@ -1806,7 +1806,7 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
 	*((IU32	*)&(r22)	+	REGLONG)	=	(IU32)((*((IU32	*)(LocalIUH+0)	+	REGLONG)	<<	(32-(*((IU32	*)&(r21)	+	REGLONG)	+	*((IU32	*)&(r23)	+	REGLONG)))))	>>	(32	-	*((IU32	*)&(r23)	+	REGLONG));	
-	*((IUH	*)&(r23))	=	(IS32)(2)	;	
+	*((IUH	*)&(r23))	=	(IS32)(3) /* T99: retain the plane address A0 gap. */	;	
 	if(*((IU32	*)&(r23)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	Bit	No");
 	else
@@ -1814,8 +1814,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	*((IU8	*)((*((IHPE	*)&(r20)))	+	*((IHPE	*)&(r22)))	)	=	*((IU8	*)(LocalIUH+2)	+	REGBYTE)	;	
 	case	L21_36if_f_id	:
 		L21_36if_f:	;	
-	{	extern	IUH	L21_35if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_35if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_35if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_34if_f_id	:
 		L21_34if_f:	;	
@@ -1831,7 +1831,7 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
 	*((IU32	*)&(r21)	+	REGLONG)	=	(IU32)((*((IU32	*)(LocalIUH+0)	+	REGLONG)	<<	(32-(*((IU32	*)&(r20)	+	REGLONG)	+	*((IU32	*)&(r22)	+	REGLONG)))))	>>	(32	-	*((IU32	*)&(r22)	+	REGLONG));	
-	*((IUH	*)&(r22))	=	(IS32)(2)	;	
+	*((IUH	*)&(r22))	=	(IS32)(3) /* T99: retain the plane address A0 gap. */	;	
 	if(*((IU32	*)&(r22)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	Bit	No");
 	else
@@ -2165,8 +2165,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
 	case	L21_47if_f_id	:
 		L21_47if_f:	;	
-	{	extern	IUH	L21_43if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_43if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_43if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_42if_f_id	:
 		L21_42if_f:	;	
@@ -2354,8 +2354,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	/*	j_state	(IS32)(-2013004273),	(IS32)(-1),	(IS32)(0)	*/
 /*	J_LOAD_RETURN	NOT	IMPLIMENTED	*/
 	*((IUH	*)(r1+0))	=	(IS32)(16501)	;	
-	{	extern	IUH	L21_53if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_53if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_53if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_52if_f_id	:
 		L21_52if_f:	;	
@@ -2705,8 +2705,8 @@ if(*((IU16	*)&(r22)	+	REGWORD	)>=16)
 	if	(*((IU32	*)(LocalIUH+4)	+	REGLONG)	>	*((IU32	*)&(r21)	+	REGLONG))	goto	L21_60w_t;	
 	case	L21_61w_d_id	:
 		L21_61w_d:	;	
-	{	extern	IUH	L21_58if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_58if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_58if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_57if_f_id	:
 		L21_57if_f:	;	
@@ -3308,7 +3308,7 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
 	*((IU32	*)&(r22)	+	REGLONG)	=	(IU32)((*((IU32	*)(LocalIUH+0)	+	REGLONG)	<<	(32-(*((IU32	*)&(r21)	+	REGLONG)	+	*((IU32	*)&(r23)	+	REGLONG)))))	>>	(32	-	*((IU32	*)&(r23)	+	REGLONG));	
-	*((IUH	*)&(r23))	=	(IS32)(2)	;	
+	*((IUH	*)&(r23))	=	(IS32)(3) /* T99: retain the plane address A0 gap. */	;	
 	if(*((IU32	*)&(r23)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	Bit	No");
 	else
@@ -3316,8 +3316,8 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	*((IU8	*)((*((IHPE	*)&(r20)))	+	*((IHPE	*)&(r22)))	)	=	*((IU8	*)(LocalIUH+2)	+	REGBYTE)	;	
 	case	L21_70if_f_id	:
 		L21_70if_f:	;	
-	{	extern	IUH	L21_69if_d()	;	
-	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_69if_d(v1,v2,v3,v4);	return(returnValue);	}	
+	goto L21_69if_d; /* T88: keep this activation's saved locals. */
+
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L21_68if_f_id	:
 		L21_68if_f:	;	
@@ -3333,7 +3333,7 @@ if(*((IU32	*)&(r20)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
 	*((IU32	*)&(r21)	+	REGLONG)	=	(IU32)((*((IU32	*)(LocalIUH+0)	+	REGLONG)	<<	(32-(*((IU32	*)&(r20)	+	REGLONG)	+	*((IU32	*)&(r22)	+	REGLONG)))))	>>	(32	-	*((IU32	*)&(r22)	+	REGLONG));	
-	*((IUH	*)&(r22))	=	(IS32)(2)	;	
+	*((IUH	*)&(r22))	=	(IS32)(3) /* T99: retain the plane address A0 gap. */	;	
 	if(*((IU32	*)&(r22)	+	REGLONG)>=32)
 	CrulesRuntimeError("Bad	Bit	No");
 	else
