@@ -928,3 +928,41 @@ Win3.1 SYSTEM.INI still hashes to
 The authored addon source remains B9B9246BDEFD19E7B55C0E783FA69EA7730BB37E2F9B451DCC24A31C6E2D8B6A,
 matching078; its verified build may be reused without recompilation. Stage092
 is preparation, not a launched Win3.1 run or input acceptance.
+
+## BIOS store-service boundary111 (source proof only)
+
+Question: can the original INT16/AH05 service replace the unresolved VKD
+handback receiver without another input owner? Read-only inspection of
+src/mvdm-guest/softpc.new/bios/spckbd.asm (SHA256
+0F2A0D896E828579197F4147D1BA9BD07A071410093FA16A0706B6D335305950)
+identifies int16h_vector, i16vStdFns, i16v05h and i16v05h1.
+The selected source preserves the original guest implementation; no guest
+source or binary is modified or rebuilt.
+
+The service appends exactly CX to BUFFER_TAIL after IncrBuffPtr checks that
+the next position is not BUFFER_HEAD. Success advances the tail and returns
+AL0; full returns AL1 without advancing it. It neither consumes a native
+KEY_EVENT_RECORD nor stores make/release, repeat, Unicode or modifier fields.
+INT16/AH00 and AH10 consume the words through TranslateStd and TranslateExt;
+they do not recreate a raw virtual keyboard interrupt from these words.
+
+This is useful as a bounded BIOS-character sink, not proof of a complete
+input handback implementation. In particular, accepting a native input batch
+larger than the available BIOS ring and then discarding the unappended tail
+would lose records. Waiting for that ring to drain before returning the
+command can deadlock the parent which has not resumed its reads. Replacing
+records with BIOS words also needs a justified translation/consumer contract;
+release and control records cannot silently be labelled delivered.
+
+Keyb16Request in host base/keymouse/keybd_io.c is a different interface: BOP
+functions1--4 coordinate the international IRQ9 handler, hardware ownership,
+EOI and INT15 device-post. It is not INT16/AH05 and cannot be selected merely
+from its name. Inspected host SHA256:
+235DCCD77E38ABD5397CC6B064AD297D7F0CC1406A6676801590B0BBA739F510.
+
+No new runtime test or acceptance is claimed. The source proof rules out
+using a single BIOS append loop as the complete receiver; it does not rule
+out reusing the service inside a separately proved VM-generation-owned
+receiver. Existing published mouse/lifecycle acceptance is unchanged. The
+remaining production producer, receiver lifetime and native-record translation
+must be completed together before enabling this input route.

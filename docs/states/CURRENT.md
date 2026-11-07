@@ -58,7 +58,7 @@ Temporary scope: build/t479-s6-livecmd; owned60-minute phases,2GiB,
 | Reference Baseline | S5 closure, P4 published package and candidate addon; real both-order continuation, retirement/reuse and DOS/native/DOS downstream reentry evidence. |
 | Files And ABI Surface | Existing NTVDM VM frontend/command/session, common I/O ownership, ntvdm64-386 bridge and integration tests; minimal registered mirror seams only if required. |
 | Applicable Rules | Execution, architecture/coding/document rules and source policy; preserve guest, provenance, minimum mirror differences and authority ownership. |
-| Verification | Audit all47 live operations by actual producer/caller; test per-VM state and identity, input consumption, geometry/fonts/graphics, final serial, cancellation and real nested chains. Cached full builds, applicable Full product gates and coherent publication. |
+| Verification | Audit all47 defined operations by actual producer/caller; test per-VM state and identity, input consumption, geometry/fonts/graphics, final serial, cancellation and real nested chains. Cached full builds, applicable Full product gates and coherent publication. |
 | Expected Markers | Real operation results, no unsupported-success stubs; actual VM context for guest access, no native-thread CPU writes; correct generation/focus and no ancestor frontend takeover. |
 | Asset Needs | Immutable Win3.1 installation copied to isolated fixture, verified package and independent addon; stable Ninja/ccache roots. |
 | Reporting Requirements | Finite operation matrix with source owner, implementation, test evidence and explicit remaining boundaries. Distinguish provider stimulus from physical input. |
