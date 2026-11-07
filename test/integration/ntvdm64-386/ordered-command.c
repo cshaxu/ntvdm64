@@ -20,15 +20,37 @@ int main(int argc, char **argv)
     if (argc == 5) {
         char path[MAX_PATH], temporary[MAX_PATH];
         FILE *ready;
-        if (strcmp(argv[3], "hold") ||
+        BOOL resize = !strcmp(argv[3], "resize");
+        if (resize) {
+            HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+            COORD size = {80, 50};
+            SMALL_RECT window = {0, 0, 79, 24};
+            CONSOLE_SCREEN_BUFFER_INFO info;
+            CHAR_INFO marker = {{0}, 0x2f};
+            COORD one = {1, 1}, origin = {0, 0}, caret = {1, 25};
+            SMALL_RECT target = {0, 25, 0, 25};
+            if (!SetConsoleWindowInfo(output, TRUE, &window) ||
+                !SetConsoleScreenBufferSize(output, size) ||
+                !GetConsoleScreenBufferInfo(output, &info) ||
+                info.dwSize.X != 80 || info.dwSize.Y != 50) return 106;
+            marker.Char.UnicodeChar = (WCHAR)(role[0] + ('a' - 'A'));
+            window.Top = 25; window.Bottom = 49;
+            if (!WriteConsoleOutputW(output, &marker, one, origin, &target) ||
+                !SetConsoleCursorPosition(output, caret) ||
+                !SetConsoleWindowInfo(output, TRUE, &window)) return 107;
+        }
+        if ((!resize && strcmp(argv[3], "hold")) ||
             sprintf_s(path, sizeof(path), "%s-%c.txt", argv[4], role[0]) < 0 ||
             sprintf_s(temporary, sizeof(temporary), "%s.tmp", path) < 0 ||
-            fopen_s(&ready, temporary, "wx")) return 103;
-        fprintf(ready, "%lu\n", GetCurrentProcessId());
-        if (fclose(ready) || !MoveFileA(temporary, path)) return 104;
+            fopen_s(&ready, temporary, resize ? "w" : "wx")) return 103;
+        if (resize) fprintf(ready, "%lu resize round=%s\n", GetCurrentProcessId(), round);
+        else fprintf(ready, "%lu\n", GetCurrentProcessId());
+        if (fclose(ready) || !(resize ? MoveFileExA(temporary, path, MOVEFILE_REPLACE_EXISTING) : MoveFileA(temporary, path))) return 104;
         /* Real native task remains alive until Console/service teardown. */
-        WaitForSingleObject(GetCurrentProcess(), INFINITE);
-        return 105;
+        if (!resize) {
+            WaitForSingleObject(GetCurrentProcess(), INFINITE);
+            return 105;
+        }
     }
     sprintf_s(name, sizeof(name), "Local\\%s-%s-pid", argv[1], round);
     mapping = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(DWORD), name);

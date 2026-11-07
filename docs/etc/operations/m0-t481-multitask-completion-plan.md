@@ -399,3 +399,71 @@ input/text/geometry/font/codepage/display/metadata and nested-chain requirements
 S4 Win95 and S5 integrated qualification remain unchanged. S3 starts by tracing
 actual production producers to providers; no speculative implementation of unused
 wire operations, new recovery engine or second lifecycle authority is admitted.
+
+## S3 first reproducible geometry failure
+
+Geometry001 runs the existing real ordered native-command path in two Win3.1
+VMs, diagnostic host040 and addon038, adding a native80x50 buffer with80x25
+viewport. Both native RESIZE receipts prove SetConsoleScreenBufferSize and
+GetConsoleScreenBufferInfo succeeded. The actual guest continuation assertion
+fails for A; the outer normal Windows exit passes. This is a current failing
+integration case, not an old-risk investigation or a passing delivery.
+Evidence currently resides at build/t481-s3/geometry001 and the test-owned
+O:/tmp/m481g1/PATCH/RESIZE-A.txt and RESIZE-B.txt.
+
+Source chain: presentation.c capture retains full native buffer cells, while
+ntvwm_text_frame_pack already packs only srWindow into its display frame.
+publish_copy sends BUFFER_SIZE before that frame whenever full buffer size
+changes. vm_text.c rejects that unsupported operation, and also requires the
+VIDEO frame to match the actual guest grid. The native buffer is80x50 but its
+visible frame is80x25; conflating them rejects an otherwise unchanged visible
+geometry. The next repair should distinguish full Console state consumers
+from presentation-frame consumers using the existing I/O contract, preserve
+NTCON full-buffer semantics, and avoid adding a second virtual Console engine
+inside the VM provider. Actual visible-grid changes remain a separate S3
+obligation; accepting scrollback alone must not be called complete geometry.
+
+## S3 required two-editor interaction acceptance
+
+Owner adds simultaneous Windows3.1 MS-DOS prompt windows running the exact
+O:/winnt/edit.exe and O:/winnt/edit.com inputs. Verify image identity and actual
+native/DOS route, typing, Alt menu activation, arrows/Enter/Esc, guest mouse
+menu clicks and menu exit, focus switching without cross-VM input, survivor
+interaction after the peer exits, return to both prompts and normal Windows
+exit. Startup alone is not acceptance. Both files currently exist (266800 and
+413 bytes); edit.exe is PE AMD64; edit.com is the DOS QBASIC /EDCOM launcher. Interaction remains unverified.
+
+## S3 candidate geometry verification
+
+Cached002 builds pass for x86/x64. Full004 passes all16 gates in315247ms;
+this is the production r004-package, not diagnostic package003. Native006
+passes presentation, input-return and execution-lifetime fixtures after the
+new query is explicitly handled by their real I/O peer.
+
+Geometry003 first passes the former80x50-buffer/80x25-display failure.
+Geometry005 strengthens it: each real native child writes a distinct lowercase
+VM marker with attribute0x2f at absolute row25, moves its viewport to rows25..49,
+and the guest continuation reads physical screen cell0,0 through INT10 and
+checks that exact marker/attribute. Both VMs and command rounds pass, as do
+320 callback identity/stack/register/flags checks and normal Windows exit.
+The original installed Windows files remain unchanged. These runs use the
+existing diagnostic continuation observer and do not prove dual EDIT interaction.
+
+Candidate uses the existing WINDOW_QUERY to distinguish a physical display
+consumer from a full native Console consumer. Native buffer/absolute viewport
+state remains with NTVWM; the guest receives the existing packed visible frame.
+NTCON retains full buffer publication. I/O wire version31 rejects incompatible
+peers. No mirror or original guest modification, new transport, lifecycle owner,
+retry or product timeout is introduced. Actual visible-grid resizing and the
+owner-required dual EDIT input/mouse acceptance remain open. Candidate has not
+yet been published or committed; the published baseline remains S2 P1.
+S3 P1 delivery: geometry007 also passes with B completing first. All16 Full004
+gates, native006 and governance008 pass. Complete11 production package
+c0c312c1-01ca-408f-8b98-58ab8d9e812e is published and hash-verified at both
+assets/release and O:/winnt/system32; unchanged Win3.1 addon remains assets-only.
+Raw failure and success receipts are preserved in artifacts/t481-s3/receipts.json.
+This supersedes the candidate-not-published statement above. Review confirms
+all actual protocol providers answer the capability, failed query/commit bubbles
+through the existing error path, and full Console publication remains selected
+for NTCON. No mirror diff. Dual EDIT interaction and remaining S3 obligations
+are still open; this is a P baseline, not S3 closure.

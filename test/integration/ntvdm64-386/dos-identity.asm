@@ -278,6 +278,24 @@ mov ax, [callback_flags]
 xor ax, [before_flags]
 test ax, 0x0ed5                 ; arithmetic flags, DF, IF and result CF
 jnz %%error
+%ifdef RESIZED_COMMAND
+%if %1 != 10
+; The native buffer is80x50, with viewport rows25..49. Verify the
+; actual applied guest-visible cell, not only native API success.
+mov ah, 2
+xor bx, bx
+xor dx, dx
+int 0x10
+mov ah, 8
+int 0x10
+cmp ah, 0x2f
+jne %%error
+mov bl, [role]
+add bl, 'a'-'A'
+cmp al, bl
+jne %%error
+%endif
+%endif
 %ifndef REAL_COMMAND
 mov ah, 3
 xor bx, bx

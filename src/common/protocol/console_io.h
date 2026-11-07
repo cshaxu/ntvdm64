@@ -8,7 +8,7 @@
 /* Direct worker/frontend wire header; no pointers or native resource
  * identities cross the pipe.  Local payload pointers below are explicitly
  * process-local staging only.  Peers are authenticated by BaseSrv attachment. */
-#define CONSOLE_IO_VERSION 30u
+#define CONSOLE_IO_VERSION 31u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -115,7 +115,9 @@ enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,
     CONSOLE_WINDOW_CLIENT_RECT,
     CONSOLE_WINDOW_CLIENT_TO_SCREEN,
-    CONSOLE_WINDOW_TEXT_FRAME_REQUIRED
+    CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,
+    /* Receiver owns a physical display, not a native scrollback buffer. */
+    CONSOLE_WINDOW_PRESENTATION_ONLY
 };
 typedef struct console_io_state {
     int32_t x,y,width,height,left,top,right,bottom,max_width,max_height;

@@ -1,0 +1,6 @@
+Exception: O:\repos.hobby\ntvdm64\test\integration\ntvdm64-386\verify-win31-identity.ps1:405
+Line |
+ 405 |  . tinuationErrors){throw "Detached BOP continuation state failed: $id"}
+     |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Detached BOP continuation state
+     | failed: A

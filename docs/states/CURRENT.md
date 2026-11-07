@@ -53,3 +53,11 @@ bounded S2 closure. Owner directs that unreproduced fill002/119 remain history,
 not active defects or TODO; investigate only on a current reproducer. S3 is
 admitted under the existing sequential plan and continuous-execution approval.
 No whole-T completion or Win95 qualification is claimed.
+
+## S3 Progress
+
+P1 visible-frame projection repair is built and published as complete11 package
+c0c312c1-01ca-408f-8b98-58ab8d9e812e. Full00416/16, native006, and two-VM
+geometry005/007 both completion orders pass; raw receipts are under
+artifacts/t481-s3. P1 includes these sources and release evidence. Dual EDIT Alt/menu/guest-mouse and
+remaining VM I/O acceptance remain open; S3 is not closed.

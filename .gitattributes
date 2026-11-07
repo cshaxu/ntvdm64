@@ -91,3 +91,5 @@ test/integration/lib-nxvm/** -text
 
 # T481 S2 raw verification receipts retain their recorded byte hashes.
 artifacts/t481-s2/** -text -whitespace
+
+artifacts/t481-s3/** -text -whitespace

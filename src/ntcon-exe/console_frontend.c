@@ -299,6 +299,9 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         if(!ok)SetLastError(ERROR_INVALID_FUNCTION);
         break;
     case CONSOLE_IO_WINDOW_QUERY: {
+        if (s->mode==CONSOLE_WINDOW_PRESENTATION_ONLY) {
+            reply->state.left=FALSE;ok=TRUE;break;
+        }
         if (s->mode==CONSOLE_WINDOW_TEXT_FRAME_REQUIRED) {
             reply->state.left=owner->text_frame_required &&
                 owner->text_frame_required(owner->io_context);

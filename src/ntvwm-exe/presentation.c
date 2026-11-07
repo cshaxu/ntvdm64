@@ -278,7 +278,7 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
     console_video_description description;
     console_io_request request={0};console_io_reply reply;
     DWORD error=0,total,offset=0,count;
-    BOOL publication_held=FALSE;
+    BOOL publication_held=FALSE,frame_only;
     CHAR_INFO *published;
     SIZE_T cell_bytes;
     if(bytes<sizeof(*snapshot))return ERROR_INVALID_DATA;
@@ -302,68 +302,77 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
         }
     }
     if(error)goto captured_done;
+    ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_WINDOW_QUERY;
+    request.state.mode=CONSOLE_WINDOW_PRESENTATION_ONLY;
+    error=exchange(client,&request,&reply);
+    if(error)goto captured_done;
+    frame_only=reply.state.left!=FALSE;
     ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
     error=exchange(client,&request,&reply);
     if(error)goto captured_done;
     publication_held=TRUE;
-    request.operation=CONSOLE_IO_SCREEN_INFO;
-    error=exchange(client,&request,&reply);
-    if(!error && (reply.state.width!=snapshot->info.dwSize.X || reply.state.height!=snapshot->info.dwSize.Y)) {
-        /* Same order as ntvwm_screen_apply: grow before moving the viewport,
-         * shrink only after it fits. A native TUI may shrink 120x9001 to
-         * 80x25; shrinking beneath the old visible window is invalid. */
-        LONG width=max(reply.state.width,snapshot->info.dwSize.X);
-        LONG height=max(reply.state.height,snapshot->info.dwSize.Y);
-        if(width!=reply.state.width || height!=reply.state.height) {
-            request.operation=CONSOLE_IO_BUFFER_SIZE;
-            request.state.width=width;request.state.height=height;
+    /* A VM consumes the already packed visible frame. Native scrollback and
+     * its absolute cursor/viewport remain owned by the hidden Console. */
+    if(!frame_only) {
+        request.operation=CONSOLE_IO_SCREEN_INFO;
+        error=exchange(client,&request,&reply);
+        if(!error && (reply.state.width!=snapshot->info.dwSize.X || reply.state.height!=snapshot->info.dwSize.Y)) {
+            /* Same order as ntvwm_screen_apply: grow before moving the viewport,
+             * shrink only after it fits. A native TUI may shrink 120x9001 to
+             * 80x25; shrinking beneath the old visible window is invalid. */
+            LONG width=max(reply.state.width,snapshot->info.dwSize.X);
+            LONG height=max(reply.state.height,snapshot->info.dwSize.Y);
+            if(width!=reply.state.width || height!=reply.state.height) {
+                request.operation=CONSOLE_IO_BUFFER_SIZE;
+                request.state.width=width;request.state.height=height;
+                error=exchange(client,&request,&reply);
+            }
+            if(!error) {
+                ZeroMemory(&request,sizeof(request));
+                request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
+                request.state.left=snapshot->info.srWindow.Left;request.state.right=snapshot->info.srWindow.Right;
+                request.state.top=snapshot->info.srWindow.Top;request.state.bottom=snapshot->info.srWindow.Bottom;
+                error=exchange(client,&request,&reply);
+            }
+            if(!error && (width!=snapshot->info.dwSize.X || height!=snapshot->info.dwSize.Y)) {
+                request.operation=CONSOLE_IO_BUFFER_SIZE;
+                request.state.width=snapshot->info.dwSize.X;request.state.height=snapshot->info.dwSize.Y;
+                error=exchange(client,&request,&reply);
+            }
+        }
+        for(offset=0;!error && offset<total;offset+=count) {
+            ZeroMemory(&request,sizeof(request));
+            count=min((DWORD)snapshot->info.dwSize.X-offset%snapshot->info.dwSize.X,
+                CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell));
+            /* A sampled cursor/font change is not a write to every Console row.
+             * Derive dirty rows at this native producer, like VGA calc_update;
+             * explicit exchange/text publications remain completely unfiltered. */
+            if(client->published_count==total && client->published_width==(DWORD)snapshot->info.dwSize.X &&
+                !memcmp(client->published_cells+offset,cells+offset,count*sizeof(*cells)))continue;
+            request.operation=CONSOLE_IO_WRITE_CELLS_W;
+            request.state.width=count;request.state.height=1;
+            request.state.left=offset%snapshot->info.dwSize.X;request.state.right=request.state.left+count-1;
+            request.state.top=request.state.bottom=offset/snapshot->info.dwSize.X;
+            request.bytes=count*sizeof(console_io_cell);
+            request.data=(BYTE *)(cells+offset);
             error=exchange(client,&request,&reply);
         }
         if(!error) {
-            ZeroMemory(&request,sizeof(request));
-            request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
+            ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_CURSOR_POSITION;
+            request.state.x=snapshot->info.dwCursorPosition.X;request.state.y=snapshot->info.dwCursorPosition.Y;
+            error=exchange(client,&request,&reply);
+        }
+        if(!error) {
+            ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
             request.state.left=snapshot->info.srWindow.Left;request.state.right=snapshot->info.srWindow.Right;
             request.state.top=snapshot->info.srWindow.Top;request.state.bottom=snapshot->info.srWindow.Bottom;
             error=exchange(client,&request,&reply);
         }
-        if(!error && (width!=snapshot->info.dwSize.X || height!=snapshot->info.dwSize.Y)) {
-            request.operation=CONSOLE_IO_BUFFER_SIZE;
-            request.state.width=snapshot->info.dwSize.X;request.state.height=snapshot->info.dwSize.Y;
+        if(!error) {
+            ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_CURSOR_INFO;
+            request.state.cursor_size=snapshot->cursor.dwSize;request.state.cursor_visible=snapshot->cursor.bVisible!=FALSE;
             error=exchange(client,&request,&reply);
         }
-    }
-    for(offset=0;!error && offset<total;offset+=count) {
-        ZeroMemory(&request,sizeof(request));
-        count=min((DWORD)snapshot->info.dwSize.X-offset%snapshot->info.dwSize.X,
-            CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell));
-        /* A sampled cursor/font change is not a write to every Console row.
-         * Derive dirty rows at this native producer, like VGA calc_update;
-         * explicit exchange/text publications remain completely unfiltered. */
-        if(client->published_count==total && client->published_width==(DWORD)snapshot->info.dwSize.X &&
-            !memcmp(client->published_cells+offset,cells+offset,count*sizeof(*cells)))continue;
-        request.operation=CONSOLE_IO_WRITE_CELLS_W;
-        request.state.width=count;request.state.height=1;
-        request.state.left=offset%snapshot->info.dwSize.X;request.state.right=request.state.left+count-1;
-        request.state.top=request.state.bottom=offset/snapshot->info.dwSize.X;
-        request.bytes=count*sizeof(console_io_cell);
-        request.data=(BYTE *)(cells+offset);
-        error=exchange(client,&request,&reply);
-    }
-    if(!error) {
-        ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_CURSOR_POSITION;
-        request.state.x=snapshot->info.dwCursorPosition.X;request.state.y=snapshot->info.dwCursorPosition.Y;
-        error=exchange(client,&request,&reply);
-    }
-    if(!error) {
-        ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
-        request.state.left=snapshot->info.srWindow.Left;request.state.right=snapshot->info.srWindow.Right;
-        request.state.top=snapshot->info.srWindow.Top;request.state.bottom=snapshot->info.srWindow.Bottom;
-        error=exchange(client,&request,&reply);
-    }
-    if(!error) {
-        ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_CURSOR_INFO;
-        request.state.cursor_size=snapshot->cursor.dwSize;request.state.cursor_visible=snapshot->cursor.bVisible!=FALSE;
-        error=exchange(client,&request,&reply);
     }
     if(!error) {
         ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_ATTRIBUTE;

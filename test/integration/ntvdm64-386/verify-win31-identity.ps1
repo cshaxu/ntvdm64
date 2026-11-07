@@ -23,6 +23,7 @@ param(
  [switch]$ReentrantCommand,
  [switch]$FillApplication,
  [string]$OrderedCommandImage,
+ [switch]$ResizeCommand,
  [string]$UnreadInputImage,
  [ValidateSet('sequence','repeat','function','extended','oem')][string]$UnreadInputMode='sequence',
  [ValidateSet('A','B')][string]$FirstCommand='A',
@@ -37,6 +38,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($ResizeCommand -and (!$OrderedCommandImage -or !$RealCommand -or $ServiceLoss -or $WorkerCloseMonitor)){throw 'Resize requires independent real ordered commands'}
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
 if($ServiceLoss -and $WorkerCloseMonitor){throw 'Select service loss or managed worker close'}
 if(($ServiceLoss -or $WorkerCloseMonitor) -and (!$OrderedCommandImage -or !$RealCommand)){throw 'Termination requires real ordered native tasks'}
@@ -136,6 +138,7 @@ if($UnreadInputImage){
 }
 if($OrderedCommandImage){
  $dosDefines+='-DORDERED_COMMAND=1'
+ if($ResizeCommand){$dosDefines+='-DRESIZED_COMMAND=1'}
  Copy-Item -LiteralPath $OrderedCommandImage -Destination "$dest/PATCH/ORDER.EXE"
 }
 if($DirectoryYield){$dosDefines+='-DDIRECTORY_YIELD=1'}
@@ -223,6 +226,7 @@ foreach($id in 'A','B'){
   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ORDER_COMMAND@')
   if($marker -lt 0){throw 'Missing ordered command marker'}
   $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T479-$([IO.Path]::GetFileName($dest)) $FirstCommand"+[char]13)
+  if($ResizeCommand){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand resize $dest\PATCH\RESIZE"+[char]13)}
   if($ServiceLoss -or $WorkerCloseMonitor){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
   if($UnreadInputImage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
   if($value.Length -ge 256){throw 'Ordered command too long'}

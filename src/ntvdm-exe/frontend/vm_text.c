@@ -145,7 +145,8 @@ DWORD ntvdm_vm_text_dispatch(ntvdm_vm_text *text, const console_io_request *requ
     case CONSOLE_IO_CODE_PAGE:
         reply->state.count = h->codepage; return ERROR_SUCCESS;
     case CONSOLE_IO_WINDOW_QUERY:
-        if (request->state.mode != CONSOLE_WINDOW_TEXT_FRAME_REQUIRED) return ERROR_NOT_SUPPORTED;
+        if (request->state.mode != CONSOLE_WINDOW_TEXT_FRAME_REQUIRED &&
+            request->state.mode != CONSOLE_WINDOW_PRESENTATION_ONLY) return ERROR_NOT_SUPPORTED;
         reply->state.left = TRUE; return ERROR_SUCCESS;
     case CONSOLE_IO_SNAPSHOT_BEGIN:
         if (text->snapshot || text->staged) return ERROR_BUSY;

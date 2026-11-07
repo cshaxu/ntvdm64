@@ -327,6 +327,8 @@ int main(void)
     request.operation = CONSOLE_IO_CODE_PAGE;
     CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply) && reply.state.count == 437);
     request.operation = CONSOLE_IO_WINDOW_QUERY;
+    request.state.mode = CONSOLE_WINDOW_PRESENTATION_ONLY;
+    CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply) && reply.state.left);
     request.state.mode = CONSOLE_WINDOW_TEXT_FRAME_REQUIRED;
     CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply) && reply.state.left);
     request.state.mode = 0;

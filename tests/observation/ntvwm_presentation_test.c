@@ -119,7 +119,10 @@ static DWORD WINAPI peer(void *context)
         }
         if((state->mode>=9 && state->mode<=16) || state->mode==20 || state->mode==21 ||
             (state->mode==6 && sequence>5)) {
-            if(request.operation==CONSOLE_IO_PUBLICATION_BEGIN) {
+            if(request.operation==CONSOLE_IO_WINDOW_QUERY) {
+                if(request.state.mode!=CONSOLE_WINDOW_PRESENTATION_ONLY)return ERROR_INVALID_DATA;
+                reply.state.left=FALSE; /* Full Console peer, including scrollback. */
+            } else if(request.operation==CONSOLE_IO_PUBLICATION_BEGIN) {
                 if(state->publication_begins!=state->publication_ends+state->publication_aborts)error=ERROR_BUSY;
                 else ++state->publication_begins;
             } else if(request.operation==CONSOLE_IO_PUBLICATION_END || request.operation==CONSOLE_IO_PUBLICATION_ABORT) {

@@ -52,7 +52,7 @@
       "sourceSha256": "93CE82E6982AB293CD2636E71034F61C55C93A22B13D222FA84DE06285065DF2",
       "sha256": "A2A8690A5667BF402A491163BE8E77662C2A9A408ECD642AF0F1FDF8577C6D64",
       "acceptance": "candidate",
-      "verifiedScope": "Candidate: Win3.1 two-VM unread sequence/repeat/F1/F11 BIOS handback, command exit ordering, VM retirement/reuse and NTSRV-loss cleanup. Full physical input, remaining VM operations and Win95 not accepted; historical fill002/119 remain open. No Win95 alias published.",
+      "verifiedScope": "Candidate: Win3.1 two-VM unread sequence/repeat/F1/F11 BIOS handback, command exit ordering, VM retirement/reuse and NTSRV-loss cleanup. Full physical input, remaining VM operations and Win95 not accepted; unreproduced fill002/119 retained as history, not active defects. No Win95 alias published.",
       "evidence": "docs/etc/operations/m0-t481-multitask-completion-plan.md"
     },
     {

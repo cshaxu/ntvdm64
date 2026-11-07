@@ -1,0 +1,15 @@
+ordered-command.c
+CHANGED=0
+CHANGED=0
+CHANGED=1
+CHANGED=1
+CHANGED=13
+CHANGED=2
+CHANGED=6
+CHANGED=0
+
+386-dosonly1: started=True desktop-and-mode=True normal-exit=True pass=True
+PASS 1 selected Windows 3.1 mode/DOSONLY combinations
+PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks
+PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested
+Original Windows installation bytes verified unchanged
