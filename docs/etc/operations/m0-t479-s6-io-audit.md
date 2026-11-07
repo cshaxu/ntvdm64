@@ -622,6 +622,58 @@ processes naturally disappear, SYSTEM.INI restores byte-for-byte, and only the
 three hash-verified temporary probe files are removed. This is bounded design
 evidence, not implementation or S6 closure. P4 remains the published runtime.
 
+## Post-P4 VKD export and PM API audit095--096
+
+Read-only extraction of the actual isolated WIN386.EXE (SHA256
+C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8)
+finds W3 VKD at file offset243712. Its ordinal-one DDB is object1 offset1E8C,
+device0D, SDK030A, service count15. Consequently no service index0F or above
+is exported by this exact guest. Later-version keyboard filtering/byte-insertion
+services cannot be assumed available. No probe calls an unknown ordinal.
+
+The existing read-only inspect-win386-dosmgr.py now accepts an explicit VKD
+selection, leaving DOSMGR as its default. It validates the 32-bit ordinal-one
+export and DDB extent/name before reporting the count; it does not relocate
+or call any code. Actual run096 exits0 and reproduces exploratory095's object
+bytes (object1 SHA256 68E6D24ABC5789598487842E514B50FEEB934EC1F73CFBA4CFA93914BF806D4F).
+The default DOSMGR extraction, disassembly and metadata compare equal against
+the pre-change tool, apart from the explicit module-name field; the background
+comparison exits0. Outputs remain in build/t479-s6-livecmd/vkd096 and dosmgr096-*.
+
+Static tracing of the VKD PM entry at object offset0A9E accepts client EAX0/1
+and rejects other operation numbers. The input operation reads client EBX,
+ECX and EDX. Nonzero client EBX is checked by VMM and compared with the same
+VKD owner field returned by exported Get_Kbd_Owner (service08 at0954); a
+different VM reaches the client-carry failure path0B9B. Zero chooses that
+current owner. Force_Keys (service07 at091F) reads the same owner. Thus the
+existing PM API also cannot be treated as an arbitrary-background-VM input
+route. This is static control-flow evidence for this image, not runtime
+acceptance of all PM API behavior. No private offset/pointer is used by product
+code and no guest bytes are patched. This closes the two proposed shortcuts
+(later-version services and unrestricted PM API), not the S6 handback gap.
+
+The remaining exported Reflect_Hot_Key service is also not a general event
+replay interface. Microsoft DDK chapter36 specifies a real hot-key handle,
+target VM and shift state, followed by leaving hot-key state. In this same
+extracted image its entry08C7 dereferences the handle at08E4, delivers the
+make through0F09, sets bit80 at08FB and delivers the break through0F09 again.
+It then calls17A4, which clears the global pending hot-key field1FCC and can
+invoke notification/shift-restoration paths. This confirms the documented
+side effects; it cannot preserve an arbitrary separate make or break record.
+Defining hot keys solely to obtain replay handles would introduce actual
+keyboard registrations and hot-key state changes. No such registration,
+fabricated handle, private-offset call or guest modification is implemented.
+This is source/document and fixed-image static evidence, not a runtime
+Reflect_Hot_Key test or proof that every possible VKD integration is excluded.
+
+The input handback decision now excludes three concrete shortcuts: replacing
+an existing paste (actual094 data loss), injecting into the current keyboard
+owner (wrong target for a background VM), and reflecting a hot key (synthesized
+make/break and hot-key cancellation). The required remaining design must keep
+unread input owned by the exact VM across native command retirement and use
+a guest-consumption boundary that preserves that input's semantics. Do not
+close S6 or enable the unfinished producer on the strength of these exclusions.
+
 ## Failure-atomic input read082--085
 
 Review found that read_keys consumed the queue before resetting its readiness

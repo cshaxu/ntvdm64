@@ -1,9 +1,10 @@
-"""Read-only W3/LE object extraction for the supplied DOSMGR; no guest writes."""
+"""Read-only W3/LE extraction for DOSMGR/VKD research; no guest writes."""
 import argparse, hashlib, json, pathlib, struct, subprocess
 p = argparse.ArgumentParser()
 p.add_argument('--image', required=True)
 p.add_argument('--output', required=True)
 p.add_argument('--ndisasm', required=True)
+p.add_argument('--module', choices=('DOSMGR', 'VKD'), default='DOSMGR')
 a = p.parse_args()
 out = pathlib.Path(a.output).resolve()
 repo = pathlib.Path(__file__).resolve().parents[2]
@@ -20,14 +21,15 @@ for i in range(u16(base+4)):
     off = base+16+i*16
     entries.append({'name': b[off:off+8].decode('ascii').strip(),
                     'offset': u32(off+8), 'extra': u32(off+12)})
-module = next(x['offset'] for x in entries if x['name'] == 'DOSMGR')
+module = next(x['offset'] for x in entries if x['name'] == a.module)
 if b[module:module+2] != b'LE':
-    raise ValueError('DOSMGR is not LE')
+    raise ValueError(f'{a.module} is not LE')
 page_size, last_size = u32(module+0x28), u32(module+0x2c)
 objects, count = module+u32(module+0x40), u32(module+0x44)
 pages = module+u32(module+0x48)
 data_base = u32(module+0x80)
 rows = []
+object_data = []
 out.mkdir(parents=True)
 for i in range(count):
     o = objects+24*i
@@ -43,6 +45,7 @@ for i in range(count):
         data.extend(b[start:start+page_size])
         mappings.append({'object_offset': j*page_size, 'file_offset': start})
     data = bytes(data[:size])
+    object_data.append(data)
     path = out / f'object-{i+1}.bin'
     path.write_bytes(data)
     bits = 32 if flags & 0x2000 else 16
@@ -56,7 +59,27 @@ for i in range(count):
     rows.append({'object': i+1, 'size': size, 'base': address, 'flags': hex(flags),
                  'bits': bits, 'pages': mappings, 'strings': strings})
 result = {'image': a.image, 'sha256': hashlib.sha256(b).hexdigest(),
+          'module': a.module,
           'module_offset': module, 'data_base': data_base, 'objects': rows}
+if a.module == 'VKD':
+    # Ordinal one is the DDB in this static VxD. Refuse a different bundle
+    # shape instead of mistaking an arbitrary data sequence for its header.
+    entry = module + u32(module + 0x5c)
+    if b[entry:entry+2] != b'\x01\x03':
+        raise ValueError('expected one 32-bit DDB export')
+    obj, offset = u16(entry+2), u32(entry+5)
+    if not 1 <= obj <= len(object_data):
+        raise ValueError('DDB object outside table')
+    data = object_data[obj-1]
+    if offset+56 > len(data) or data[offset+12:offset+20] != b'VKD     ':
+        raise ValueError('invalid VKD DDB extent/name')
+    result['ddb'] = {
+        'object': obj, 'offset': offset,
+        'sdk_version': struct.unpack_from('<H', data, offset+4)[0],
+        'device_id': struct.unpack_from('<H', data, offset+6)[0],
+        'service_count': struct.unpack_from('<I', data, offset+52)[0],
+        'pm_api_unrelocated': struct.unpack_from('<I', data, offset+32)[0],
+    }
 # Internal LE fixups identify cross-object string references even when the
 # unrelocated instruction operand is zero. Refuse unfamiliar record shapes.
 fixup_pages = module+u32(module+0x68)
