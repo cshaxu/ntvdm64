@@ -201,6 +201,7 @@ BOOL frontend_window_keyboard_record(const kvm_input_event *event,
         case BASE_KEY_ALT: vk = VK_MENU; break;
         case BASE_KEY_SHIFT: vk = VK_SHIFT; break;
         case BASE_KEY_PAUSE: vk = VK_PAUSE; break;
+        case BASE_KEY_BREAK: vk = VK_CANCEL; break;
         case BASE_KEY_PRINT_SCREEN: vk = VK_SNAPSHOT; break;
         default: break;
         }

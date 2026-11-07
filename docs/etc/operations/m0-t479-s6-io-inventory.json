@@ -372,6 +372,6 @@
   "inputBoundary": {
     "queue": "src/ntvdm-exe/softpc/mvdm_vm_io.c:mvdm_vm_io_key",
     "entry": "src/ntvdm-exe/softpc/mvdm_vm_executor.c:mvdm_vm_executor_key",
-    "finding": "No production or test caller of executor_key found in source. Current addon BOP operations0..15 have no key/event submission. Command entry typing is not interactive child input acceptance."
+    "finding": "Delivered addon operations0..15 have no key submission. Local host BOP16 now calls executor_key with VM/token validation; notification unit tests076..080 exercise it. No production guest caller exists yet. Passive IRQ-return witness080 proves BIOS modifier/character processing, not native-child delivery. Command entry typing is not interactive child input acceptance."
   }
 }

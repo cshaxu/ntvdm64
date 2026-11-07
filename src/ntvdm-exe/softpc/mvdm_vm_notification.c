@@ -3,6 +3,8 @@
 #include "mvdm_vm_wake.h"
 #include "mvdm_vm_continuation.h"
 #include "mvdm_vm_ingress.h"
+#include "mvdm_vm_executor.h"
+#include "mvdm_standalone_worker.h"
 
 /* Original NT VDD/ICA ABI. Avoid importing historical CPU selection macros
  * into this host-owned component. Register/remove are serialized by ICA. */
@@ -185,6 +187,10 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         return 1;
     case 15:
         result->status = high ? ERROR_INVALID_PARAMETER : mvdm_vm_ingress_register(low);
+        break;
+    case 16:
+        result->status = mvdm_vm_executor_key_bop(mvdm_standalone_worker_executor(),
+            vm, low, high);
         break;
     case 12: {
         mvdm_vm_completion completion;

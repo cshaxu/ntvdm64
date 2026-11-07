@@ -78,7 +78,7 @@ static DWORD input_pending(void *context, BOOL *pending)
 }
 static DWORD read_keys(mvdm_vm_io *io, const console_io_request *request, console_io_reply *reply)
 {
-    uint32_t count, i;
+    uint32_t count, remaining, i;
     if (request->state.count > CONSOLE_IO_INPUT_CAPACITY || !reply->data)
         return ERROR_INVALID_PARAMETER;
     /* These copied guest events have no borrowed native Console key-state
@@ -89,16 +89,18 @@ static DWORD read_keys(mvdm_vm_io *io, const console_io_request *request, consol
         return ERROR_INVALID_PARAMETER;
     AcquireSRWLockExclusive(&io->input_lock);
     count = min(io->count, request->state.count);
+    remaining = io->count - (request->operation == CONSOLE_IO_READ_INPUT ? count : 0);
+    /* A failed readiness transition must not consume undelivered input. */
+    if (!remaining && !ResetEvent(io->ready)) {
+        DWORD error = GetLastError();
+        ReleaseSRWLockExclusive(&io->input_lock); return error;
+    }
     for (i = 0; i < count; ++i)
         memcpy(reply->data + i * sizeof(console_io_input),
             &io->keys[(io->head + i) % CONSOLE_IO_INPUT_CAPACITY], sizeof(console_io_input));
     if (request->operation == CONSOLE_IO_READ_INPUT) {
         io->head = (io->head + count) % CONSOLE_IO_INPUT_CAPACITY;
-        io->count -= count;
-    }
-    if (!io->count && !ResetEvent(io->ready)) {
-        DWORD error = GetLastError();
-        ReleaseSRWLockExclusive(&io->input_lock); return error;
+        io->count = remaining;
     }
     ReleaseSRWLockExclusive(&io->input_lock);
     reply->state.count = count; reply->bytes = count * sizeof(console_io_input);

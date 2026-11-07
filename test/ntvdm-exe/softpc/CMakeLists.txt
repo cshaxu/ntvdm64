@@ -4,7 +4,7 @@ add_executable(mvdm-vm-notification-test
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_wake.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_continuation.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_application.c"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_io.c"
+  mvdm_vm_io_test.c
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_executor.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/frontend/vm_text.c"
   "${CMAKE_SOURCE_DIR}/src/common/frontend-base/video.c")

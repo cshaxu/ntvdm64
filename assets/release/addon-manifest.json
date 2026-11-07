@@ -49,11 +49,11 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "E8B4064B39D044D29C7BFCF33E4926525390EA9D8D3BF1E46AA88581040924A6",
-      "sha256": "D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2",
+      "sourceSha256": "B9B9246BDEFD19E7B55C0E783FA69EA7730BB37E2F9B451DCC24A31C6E2D8B6A",
+      "sha256": "3EC467536324961A2356E1C17A6437A8B46658491B8689A9BE1C92FE887DA4B3",
       "acceptance": "candidate",
-      "verifiedScope": "Win3.1 static bridge; actual two-VM command continuation, both native exit orders, forced VM retirement and handle reuse. Candidate only: physical input, complete I/O and nesting unaccepted; Win95 deferred.",
-      "evidence": "docs/etc/evidence/m0-t479-s5-p1-host-checkpoint.md"
+      "verifiedScope": "Candidate: prior continuation scope plus per-VM token ownership and actual Win3.1 CLS/VER/DIR, DOS retirement and normal exit092. Complete guest input and unread-input handback remain unaccepted; Win95 deferred. No Win95 alias is published.",
+      "evidence": "docs/etc/operations/m0-t479-s6-io-audit.md"
     },
     {
       "id": "insignia-niddb",

@@ -1,4 +1,5 @@
 #include "mvdm_vm_executor.h"
+#include "mvdm_softpc_guest_memory.h"
 
 typedef struct command_job {
     struct command_job *next;
@@ -10,6 +11,7 @@ typedef struct command_job {
     uint64_t token;
     uint64_t generation;
     uint32_t vm;
+    BOOL finishing;
 } command_job;
 
 struct mvdm_vm_executor {
@@ -71,6 +73,11 @@ static VOID CALLBACK execute(PTP_CALLBACK_INSTANCE instance, void *context)
         completion.error = mvdm_vm_command_execute(job->continuation, job->launch,
             owner->host, &location, &exit_code);
     completion.exit_code = exit_code;
+    /* The command has ended, but retirement still owns live I/O callbacks.
+     * Reject new producer events before that join; lifetime is not admission. */
+    AcquireSRWLockExclusive(&owner->lock);
+    job->finishing = TRUE;
+    ReleaseSRWLockExclusive(&owner->lock);
     if (location.incarnation) {
         error = ntvdm_vm_host_retire(owner->host, &location);
         /* Failed retirement cannot free memory under unjoined I/O callbacks.
@@ -143,18 +150,42 @@ DWORD mvdm_vm_executor_submit(mvdm_vm_executor *owner, uint32_t vm,
     return error;
 }
 
-DWORD mvdm_vm_executor_key(mvdm_vm_executor *owner, uint64_t token,
+DWORD mvdm_vm_executor_key(mvdm_vm_executor *owner, uint32_t vm, uint64_t token,
     const KEY_EVENT_RECORD *key)
 {
     command_job *job;
     DWORD error = ERROR_NOT_FOUND;
-    if (!owner || !key) return ERROR_INVALID_PARAMETER;
+    if (!owner || !vm || !key) return ERROR_INVALID_PARAMETER;
     AcquireSRWLockShared(&owner->lock);
     for (job = owner->jobs; job && job->token != token; job = job->next) {}
     if (owner->closing) error = ERROR_OPERATION_ABORTED;
-    else if (job && job->io) error = mvdm_vm_io_key(job->io, key);
+    else if (job && job->vm == vm && job->io)
+        error = job->finishing ? ERROR_OPERATION_ABORTED : mvdm_vm_io_key(job->io, key);
     ReleaseSRWLockShared(&owner->lock);
     return error;
+}
+
+DWORD mvdm_vm_executor_key_bop(mvdm_vm_executor *owner, uint32_t vm,
+    uint32_t address, uint32_t extent)
+{
+    uint32_t descriptor[8];
+    KEY_EVENT_RECORD key = {0};
+    uint64_t token;
+    if (!owner) return ERROR_NOT_READY;
+    if (extent != sizeof(descriptor)) return ERROR_INVALID_PARAMETER;
+    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)descriptor,
+        sizeof(descriptor))) return ERROR_INVALID_ADDRESS;
+    if (descriptor[2] > 1 || !descriptor[3] || descriptor[3] > UINT16_MAX ||
+        descriptor[4] > UINT16_MAX || descriptor[5] > UINT16_MAX ||
+        descriptor[6] > UINT16_MAX) return ERROR_INVALID_DATA;
+    token = ((uint64_t)descriptor[1] << 32) | descriptor[0];
+    key.bKeyDown = (BOOL)descriptor[2];
+    key.wRepeatCount = (WORD)descriptor[3];
+    key.wVirtualKeyCode = (WORD)descriptor[4];
+    key.wVirtualScanCode = (WORD)descriptor[5];
+    key.uChar.UnicodeChar = (WCHAR)descriptor[6];
+    key.dwControlKeyState = descriptor[7];
+    return mvdm_vm_executor_key(owner, vm, token, &key);
 }
 
 void mvdm_vm_executor_close(mvdm_vm_executor *owner)

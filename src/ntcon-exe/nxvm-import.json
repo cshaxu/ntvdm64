@@ -4,7 +4,7 @@
   "license": "MIT; Copyright (c) 2026 Neko; see ../lib-nxvm/LICENSE.nxvm",
   "licenseSha256": "BF37952D329B48CEE37B42D90B96D30DC049940902E42D69338A19CF72003543",
   "destination": "src",
-  "localAdaptation": "T475 S1: mechanical include prefix lib/ to lib-nxvm/ only; upstreamSha256 preserves the prior imported bytes for affected files",
+  "localAdaptation": "T475 S1: mechanical include prefix lib/ to lib-nxvm/; T479 S6: additive Break key identity in base/input_interface.h, base/win32/input.c and types/win32/input.h. upstreamSha256 retains the imported source identity; local hashes include this input repair.",
   "profile": "MSVC Win32/x64 /MT /std:c11 production; x86/x64 library verification; frontend-only",
   "files": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "path": "lib-nxvm/base/input_interface.h",
-      "sha256": "1BB23430DE1208D67FBC42123B2C79DE7202738ED1FB3689D879172FAFA8E375",
+      "sha256": "AB0236547A025B0802317191875169D7933C95BCE8467495E315A7E3DEA8BEE5",
       "compile": false,
       "upstreamSha256": "E4872206B67B88BEFC683BE62650EF4112DA677D5D583BF603B6AFD6E4F8FA82"
     },
@@ -68,7 +68,7 @@
     },
     {
       "path": "lib-nxvm/base/win32/input.c",
-      "sha256": "EA3256DAABA06423ACAB6FA7A1E1216F3DCDD2312793D290C57B448176479D23",
+      "sha256": "178609A79C7F8F52AA3EC6B5AA0E76C6BFA7D3A494A5781C187679F43392DE7A",
       "compile": true,
       "upstreamSha256": "E3A8AEBCC8F373937FA0C40E962070F55BA3AEE66ECAD3C27383DF10823F967E"
     },
@@ -287,7 +287,7 @@
     },
     {
       "path": "lib-nxvm/types/win32/input.h",
-      "sha256": "8D7B5C8B14B2A2C03FD8FD996D8B710D8CE946A700168584A5F262210E0D302C",
+      "sha256": "32F572C570C497C34BD69FA6430C475E2F94372BEC2B60C8AC3486190321BEA2",
       "compile": false
     },
     {

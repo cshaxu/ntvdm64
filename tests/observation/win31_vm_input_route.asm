@@ -1,5 +1,5 @@
 ; T479 S6 isolated input-route witness, never a release/runtime dependency.
-; ABI: original MS-DOS6 VMM.INC; Microsoft VxD DDK chapters33/36.
+; ABI: original MS-DOS6 VMM.INC; Microsoft VxD DDK chapters23/33/36.
 ; Only records boundaries using the existing host diagnostic BOP log.
 ; No keyboard port reads, event consumption, translation or host task delivery.
 bits 32
@@ -39,6 +39,12 @@ control:
  jc .bios_absent
  or dword [installed],4
 .bios_absent:
+ mov eax,0x1b
+ mov esi,bios_break
+ vmm_call 0x41
+ jc .break_absent
+ or dword [installed],8
+.break_absent:
  mov edx,[installed]
  mov eax,0x53490000
  call record_vm
@@ -66,10 +72,45 @@ irq1:
  mov edx,[irq_count]
  mov eax,0x53490009
  call record_vm
+ ; VMM service 0x0d defers observation until this interrupt's IRET.
+ ; Reference data belongs to this invocation, including nested IRQ entries.
+ mov esi,[ebx+4]
+ movzx edx,word [esi+0x41c]
+ xor eax,eax                ; no timeout; observe only an actual return
+ mov esi,irq1_return
+ vmm_call 0x0d
 .chain:
  popad
  popfd
  stc                       ; original IRQ chain always owns consumption/EOI
+ ret
+irq1_return:
+ pushfd
+ pushad
+ mov eax,0x53490018          ; reference: tail before the interrupt
+ call record_vm
+ mov esi,[ebx+4]
+ movzx edx,word [esi+0x41c]
+ mov eax,0x53490019          ; tail after the original handler returned
+ call record_vm
+ movzx edx,word [esi+0x417]
+ mov eax,0x5349001a          ; original BIOS modifier/lock flags
+ call record_vm
+ movzx edx,byte [esi+0x496]
+ mov eax,0x5349001c          ; BIOS enhanced/prefix/right-modifier state
+ call record_vm
+ popad
+ popfd
+ ret
+bios_break:
+ pushfd
+ pushad
+ mov eax,0x5349001b
+ xor edx,edx
+ call record_vm
+ popad
+ popfd
+ stc                       ; observation only; original Break handler owns it
  ret
 bios_keyboard:
  pushfd

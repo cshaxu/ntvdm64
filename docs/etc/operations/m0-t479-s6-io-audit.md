@@ -11,13 +11,70 @@ semantic acceptance. VIDEO_BEGIN still accepts only same-sized text, WINDOW_RECT
 only full-grid identity changes, and modes reject processing flags. Source
 references and positive payload coverage must remain separate.
 
+## P4 publication093 and review
+
+Cached089, Full09116/16 and actual command/normal-exit092 qualify this bounded
+input foundation checkpoint, not S6 closure. Publication093 replaces all11
+host images, hook license and common manifest at assets/release and
+O:/winnt/system32. All destination hashes match sealed package
+daa392bf-02e0-439f-9b1c-e21804398133; recoverable previous packages are retained
+under build/t479-s6-integration/publication-backup093. The first preflight
+used the wrong cached-build receipt directory and failed before replacement;
+the corrected script exits0. No product code changed after Full091.
+
+The tested candidate ntvdm64.386 and updated addon manifest are published only
+to assets/release. The existing release had no ntvdm64.vxd; an initial backup
+preflight exposed that before replacement. Only the verified Win3.1 artifact
+is published. Its original-media/configuration boundaries remain unchanged;
+no Win95 acceptance or original guest patch is implied.
+
+Review retains one lock-owned token/VM admission path, rejects new input while
+retirement joins callbacks, copies bounded BOP data before use, and leaves
+failed input reads unconsumed. The per-VM addon token replaces suspended-stack
+ownership. The Break repair adds one distinct key identity without renumbering
+Pause or other keys. Three shared-library adaptations are explicitly recorded;
+this source is not byte-identical to upstream SoftPC. No MVDM mirror changed.
+Negative controls and per-architecture fixtures are recorded below. The passive
+input observation probe is test-only; no real guest producer or unread-input
+handback is claimed implemented. Owner QUEUE/proposal changes are preserved
+outside this delivery.
+
+## Candidate command and normal-exit regression092
+
+The sealed Full091 package daa392bf-02e0-439f-9b1c-e21804398133 runs
+from O:/tmp/nb55 with the already built candidate addon078. Exact-owned
+Run16 33808, NTCON36060 and NTVDM17164 identify this run. No INPUT.386
+observer is loaded. The Console Alt+Enter provider returns0; ordinary
+window-key providers deliver CLS/VER/DIR and EXIT. The retained command
+frames show DIR output and a prompt, and a separately issued VER shows
+the host Windows version and a prompt. Initial garbled text is the
+owner-known, nonblocking issue; this run does not repair it.
+
+EXIT retires DOS VM8000 (NIDDB0B) and returns to Program Manager. F10,
+File/Exit opens the observed Exit Windows dialog; Enter completes NIDDB17
+and root wait0/exit0. Supervisor and root receipts are0. Exact-path process
+inspection confirms all nb55 processes exited naturally, without a service
+kill. Only then was the authored addon backup restored; its previous hash
+and unchanged SYSTEM.INI hash match input-driver092/receipt.json.
+
+Evidence: build/t479-s6-livecmd/control092-{aftercommands,ver,retired,exitdialog}.bmp,
+control-root092.txt, control-root092.exit, control092-supervisor.exit and
+niddb092.txt. The diagnostic observer had already ended before these commands;
+its remaining1 line is not used as process-exit evidence. This run validates
+successive native command handoffs and normal exit with the new host package;
+it does not exercise new mouse movement, Ctrl+Break, input to a running child,
+or unread-input handback, and is not S6 closure or publication.
+
 ## Input gap traced after mouse repair
 
 The delivered mouse/VM repair proves the actual Windows pointer, DOS command
 entry and noninteractive CLS/VER/DIR sequence. It does not prove input to a
-running native interactive child. Source sweep of src and tests finds only the
-definition/declaration of mvdm_vm_executor_key, and its internal call to
-mvdm_vm_io_key. No production or test caller enters executor_key. The current
+running native interactive child. There is no production caller of
+mvdm_vm_executor_key; its implementation calls mvdm_vm_io_key. Correction to
+the initial audit: the sweep omitted the singular test/ root. The existing
+test/ntvdm-exe/softpc/mvdm_vm_notification_test.c exercises executor input,
+cancellation and VM reuse. Those unit callers prove queue mechanics, not a
+guest input producer. The current
 addon command_return waits on a counted VMM semaphore with virtual interrupts
 serviced, but supplies no keyboard records to the host queue. Notification BOP
 operations0..15 have no input-delivery operation. Therefore READ_INPUT's queue
@@ -228,3 +285,399 @@ and modifiers do not all append BIOS words. AH4F supplies raw transitions;
 correlation, extended sequences, layout, per-request ownership, queue failure
 and unread-input handback must be resolved together. No production filter,
 buffer rewrite or success stub is introduced by these observations.
+
+## Input recipient validation074
+
+Local S6 work now requires both the VMM-supplied VM and the exact continuation
+token at mvdm_vm_executor_key. The executor's shared lock pins the job and I/O
+provider through enqueue; its existing continuation invalidation rejects a
+retired generation. A different live VM cannot submit to that token. No new
+identity table, lock, polling, timeout or mirror difference is introduced.
+
+The existing notification fixture now checks VM0 rejection, both directions
+of cross-VM token misuse, valid delivery to each VM, unknown tokens and input
+after normal completion. Its existing close/retirement/reused-VM cases retain
+their assertions. Review confirms removal from the job list precedes provider
+destruction and completion publication, so the post-completion rejection does
+not depend on a scheduling delay. These are local queue/lifetime checks, not
+proof of production keyboard delivery.
+
+Background input074.cmd uses the existing VS2022 x86 environment and cached
+msvc-x86-release tree, builds mvdm-vm-notification-test, then runs the exact
+CTest case mvdm-vm-notification. Exit0; 1593 assertions, CTest1/1 pass in0.27s.
+Retain input074.run/out/err/test.log under build/t479-s6-io. The source unit
+SHA-256 is755D341AE874181D2C73FA050B56A1581149AFC0E44F906096B6EDE0E0C1889D.
+Input075 repeats the same fixture in the existing x64 cached tree: exit0,
+CTest1/1 pass in0.22s, with its own run/out/err/test.log retained alongside074.
+This validates the host-owned unit on both architectures, not an x64 NTVDM
+product or actual guest input.
+
+This remains uncommitted grouped implementation, not a P delivery. The guest
+producer, exclusive BIOS consumption, complete input semantics and full
+production gates remain pending; no new package is published by this check.
+
+## Bounded input ingress076
+
+The local implementation adds operation16 to the existing signed, ring0-only
+BOP B1 dispatch. It passes the VMM caller identity to the executor and copies
+exactly eight DWORDs through the existing guest-memory lease provider: token
+low/high, key down, repeat, virtual key, scan, Unicode character and control
+state. Boolean/WORD fields are range-checked before narrowing. No new transport,
+guest pointer retention, producer timeout or input receipt is introduced.
+The queue's existing failure return remains authoritative: no error confirms
+event consumption. This is a translated-event ingress, not a raw scan decoder.
+
+The existing notification fixture substitutes only the bounded guest-memory
+copy and worker getter for this boundary. It invokes the real BOP dispatcher,
+executor and queue. It rejects no executor, non-ring0, other-VM token, wrong
+extent, unmapped span, oversized fields and zero repeats. Both queues remain
+empty after failures. Successful make/repeat and break records are read back
+through the real input provider after the source memory is overwritten; all
+fields remain intact and the other VM remains empty. This proves copy and
+recipient behavior, not execution of BOP16 by the real guest addon.
+
+Background input076 uses the same cached x86 build/CTest command as074;
+exit0, 1631 assertions, CTest1/1 in0.26s. The exact script/run/out/err/test.log
+are retained under build/t479-s6-io. Guest producer and end-to-end native-child
+acceptance remain open; operation16 is not yet exercised by the released addon.
+Input077 builds the same changed boundary in the x64 cached tree: exit0,
+CTest1/1 in0.23s. Its separate run/out/err/test.log is retained alongside076.
+Both runs are unit evidence; neither is a complete package or guest test.
+
+Further source review confirms the original nt_keycd.c BiosKeyToInputRecord
+uses RtlOemToUnicodeN, VkKeyScanW and MapVirtualKey and can rewrite scan/control
+fields. Reusing it without reviewing the active guest codepage and the native
+recipient's key semantics would not prove preservation of observed guest
+transitions. The read-only Microsoft VKD service table
+OpenNT-4.5/nt/private/os2/client/thunk/include/vkd.inc, SHA-256
+11BECFF50B3FED4F080A795925788F670C2BDE6F645926C8BF6198B61211B947, exposes
+message-key and paste/hotkey services but no general translated native-input
+record service. These source facts constrain producer implementation; they do
+not authorize a host-layout guess or an all-key hotkey consumer.
+
+## Per-VM token ownership and actual command control078
+
+The authored addon now stores the live request token only in the calling VM's
+control block. Admission publishes it, work/completion read it, and terminal
+return clears it. Creation zeros the fields; executable/generation guards still
+exclude retired VMs. The stack copy and its eight-byte adjustment are removed,
+so input callbacks need not borrow a suspended command's stack. No mirror or
+original guest binary changes.
+
+Background build078 uses the checked-in addon build.ps1 and pinned NASM/Watcom.
+Source SHA-256 B9B9246BDEFD19E7B55C0E783FA69EA7730BB37E2F9B451DCC24A31C6E2D8B6A
+produces identical 5075-byte .386/.vxd candidates, SHA-256
+3EC467536324961A2356E1C17A6437A8B46658491B8689A9BE1C92FE887DA4B3; exit0.
+Manifest, listing and map: build/t479-s6-livecmd/input-driver078.
+
+Control078 reuses control-root068.ps1 with fresh evidence names and a precreated
+inspector directory. Only the authored NTVDM64.386 in O:/tmp/w479m/PATCH is
+temporarily replaced, with an exact backup. The unchanged complete ne30 package
+runs Win3.1 with Mouse31 and INSIGNIA.386; the new host BOP16 code is not deployed
+for this test. Root22760, NTVDM14140 and NTCON23592 identify the run. INPUT.386 is
+not loaded; SYSTEM.INI is unchanged.
+
+The existing owned Console Alt+Enter probe and exact-PID/path window-message
+provider exercise CLS, VER, DIR and EXIT. Retained frames show clean prompt,
+native Windows version and prompt, directory listing and prompt, then Program
+Manager after DOS VM retirement. These successive native commands verify the
+new token storage. They are provider-input tests, not physical input or input
+to an already running native child. Initial DOS garbling remains nonblocking.
+
+The first Alt+F4 provider attempt does not open an exit dialog and is not a pass.
+F10/File/Exit subsequently opens Exit Windows; Enter confirms normal shutdown.
+Original NIDDB0B retires DOS VM8000; NIDDB17 records Windows shutdown. The root
+receipt reports wait0/exit0. The diagnostic observer's remaining1 line is not
+proof of native-process exit; subsequent exact-path CIM inspection finds all
+ne30 processes naturally gone, without service kill. Only then is the addon
+backup restored, SHA-256
+D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2.
+SYSTEM.INI remains45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874.
+All control078 scripts, receipts, logs and frames remain in the livecmd root.
+This is local candidate regression, not publication or S6 closure.
+
+Source follow-up rejects an unsynchronized history lookup: kbd_inb/EOI may
+retire or replace the hardware output slot; keybd_io.c INT15 releases keyboard
+ownership before recursive guest execution and reacquires it afterwards;
+nt_event.c updates its original history before entering the dispatch hardware
+lock. Reuse needs a stable copied source identity and synchronization proof.
+No such unsafe lookup was added. Modifiers, extended sequences, failure
+ownership and post-task input remain producer obligations.
+
+## Normal completion admission boundary079/080
+
+The executor previously accepted keys while a completed command was joining
+its frontend retirement: the job and provider were alive, but the command no
+longer consumed input. A job-owned finishing flag is now set under the existing
+executor lock before retirement. Input rejects that state with
+ERROR_OPERATION_ABORTED; another VM's token remains ERROR_NOT_FOUND. This
+does not claim to return keys already accepted before command completion.
+
+The real executor fixture holds normal retirement on its existing test event,
+without requesting cancellation. It verifies rejection before completion is
+published, then releases retirement and observes normal completion. Cached
+background x86 input079 and x64 input080 each pass1640 assertions, CTest1/1,
+in0.39s and0.26s respectively. Scripts, run receipts and LastTest copies are in
+build/t479-s6-io. The grouped production changes remain unpublished.
+
+## Original interrupt-return observation080
+
+The [Microsoft Windows3.0 DDK, chapter23](https://www.pcjs.org/documents/books/mspl13/win/w3ddkvxd/)
+documents Call_When_VM_Returns as an interrupt-return callback, paired with
+Hook_V86_Int_Chain before the client IRET frame is built. EAX0 requests no
+timeout; EBX identifies the returning VM and EDX carries invocation-local
+reference data. The original MS-DOS6 dev/smartdrv/sdvxd/vmm.inc service table
+assigns ordinal0x0d; file SHA-256 is
+28BD6EDABA10434DFCAD26BFCDAB8DBD1A3CC28100CD6910C67397D8C05F92E9.
+Only ABI facts are used; no reference implementation is imported.
+
+The existing passive input-route probe now schedules that callback from IRQ1.
+It records the prior tail in callback reference data and reads post-handler
+BIOS tail and flags. It changes no BIOS buffers, ports, flags or input ownership.
+The VMM itself supplies and restores the normal return callback. Probe source
+before its subsequent comment-only chapter correction was
+6B126E221A109436534FE777305C487E759C98DC03904CF5D40C7AEECEBECF1B;
+background NASM/Watcom build080 exits0 and produces INPUT.386
+05D740031D1B29FC1131F47272589CCA45D0CF2EC5C65B8A88201C26F99FC646.
+
+Control080 uses the unchanged complete ne30 host package and the existing
+addon. Only the isolated w479m SYSTEM.INI temporarily loads INPUT.386. Root
+Run16=15736, NTCON=29828, NTVDM=37296. An initial Alt+Enter probe mistakenly
+targeted CUI carrier38788; its successful Console write is not VM input
+evidence. Exact process reconstruction selected root15736, after which the
+owned provider observed the window and delivered keys successfully.
+
+DOS VM80798000 shows raw Shift2a/aa followed by post-handler flags0002/0000
+without tail movement. A1e produces a BIOS commit and matching return-tail
+advance; release9e does not. Enter1c advances the tail; release9c does not.
+These observations also occur after IK.EXE pid12040 reports waiting-real-input.
+Its diagnostic30-second deadline still expires with no native input, as
+expected for this non-consuming probe and the absent production producer.
+This is positive callback-order evidence and negative end-to-end input evidence.
+
+DOS EXIT then retires the VM; F10/File/Exit opens the observed Windows shutdown
+dialog and Enter confirms. Root receipt is wait0/exit0. Exact-path process
+inspection finds the stage quiescent without killing its service. SYSTEM.INI
+is restored byte-for-byte to45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874.
+Build, probe, child readiness/failure, input commands, trace and cleanup receipts
+remain under build/t479-s6-livecmd/input-route080 and control080*.
+
+The result supports reusing actual BIOS post-processing instead of an
+independent modifier-state machine. It does not yet prove translated event
+delivery, extended/Pause sequences, layout conversion, Ctrl+Break ownership,
+unread-input handback or nested IRQ correlation. Original
+nt_event.c ReturnBiosBufferKeys uses BiosKeyToInputRecord for residual BIOS
+characters and can synthesize release events; that handback algorithm is not
+a complete live transition producer. Those distinctions remain implementation
+requirements, not new semantic concessions or accepted omissions.
+
+## Control-key boundary081: reject a blanket post-IRQ producer
+
+Source review of keybd_io.c establishes two materially different paths:
+PAUSE sets HOLD_STATE, acknowledges IRQ and executes a nested guest wait before
+returning; Ctrl+Break clears the BIOS queue, sets bios_break and calls INT1B
+before appending a zero word. Thus an IRQ-return observer alone cannot forward
+all control keys promptly or prevent their effects on the waiting DOS parent.
+The existing ntvwm-exe/console_state.c already translates a received VK_CANCEL
+to CTRL_BREAK_EVENT and processed Ctrl+C to CTRL_C_EVENT. Reuse that native
+owner; do not create a second native-process signal path in the guest bridge.
+
+The passive probe adds an INT1B observer and records enhanced BIOS flags at
+IRQ return. Background build081 exits0; source
+F2E0ABB4CEA383A16EC9144B49D8425F255313947D5F7FC4172F2A544CE5E5BA,
+INPUT.38626BB49781437B3C2E405154B2BE97C6F6B38EE20686E416F69CB164D920726D7.
+The isolated unchanged ne30 package uses root28924, NTCON26880, NTVDM16072.
+IK.EXE17324 reports waiting-real-input before the stimulus. The exact-owned
+window provider's VK_CANCEL/control4 attempt actually yields raw E1/1D/45,
+not a demonstrated Ctrl+Break sequence. Therefore this is not an INT1B test
+pass. The trace stops after45 with no matching IRQ-return record. A later A
+provider call succeeds at the window boundary but produces no additional
+record. The native child independently expires its diagnostic30-second wait.
+The earlier ordinary-key run080 remains distinct positive evidence.
+
+Do not attribute the failure to the product or the observer without a matching
+no-observer control. It does disprove using this stimulus as Ctrl+Break coverage
+and prevents treating post-IRQ observation as complete input implementation.
+No production input filter is enabled. Terminating only the owned NTSRV14248
+ends the failed diagnostic; this is explicit teardown, not normal-exit proof.
+All stage processes then disappear and SYSTEM.INI is restored to its prior
+45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874 hash.
+The trace-before-teardown, readiness/child failure, build, command and cleanup
+receipts are retained in build/t479-s6-livecmd/input-route081 and control081*.
+
+Input implementation must distinguish translated characters, raw modifier/
+release transitions and control-key effects. Use original BIOS translation
+where it completes, preserve a request/VM-bound input owner, and hand native
+control events to the existing NTVWM consumer. No native consumer may receive
+an event while that same event remains pending for the DOS parent. Native
+PREPEND_KEYS and the VM queue must also survive normal command retirement;
+currently executor teardown destroys remaining queued events. That is an
+existing S6 ownership gap to implement together with the producer, not a
+separate feature or an authorized loss of input.
+
+## Input handback service selection
+
+Chapter36 of the same Microsoft DDK rules out VKD_Force_Keys as a direct
+per-VM handback: it delivers to the keyboard-focus VM and accepts no target VM
+argument. The retiring command's VM need not own focus. Do not silently change
+focus or return its input to whichever VM happens to be active.
+
+VKD_Start_Paste does accept an explicit VM and copies its supplied buffer,
+but its records are OEM character/scan/shift tuples, not arbitrary native
+make/break records. It can finish, be cancelled or lose its VM; an accepted
+paste is not proof of final consumption. Existing paste interaction, conversion
+and ordering still require proof before selecting it for handback. Neither
+service is currently called by the product. Reuse the existing BOP and
+guest-application acknowledgement transport for any selected handback; do not
+introduce another channel, native-thread guest writes or a polling loop.
+
+## Failure-atomic input read082--085
+
+Review found that read_keys consumed the queue before resetting its readiness
+event. If ResetEvent failed, the operation reported failure but the unread
+records were already gone. The correction resets readiness under the existing
+queue lock before copying/consuming the final records. Failure leaves the queue
+unchanged; no new runtime state, retry or timeout is introduced. Production
+mvdm_vm_io.c changes by eight added and six removed lines.
+
+The initial082 negative closed the actual borrowed event and produced Windows
+STATUS_INVALID_HANDLE (0xC0000008), not the intended failed-operation assertion.
+It is not a valid negative control. The replacement test-only translation unit
+includes the real provider and substitutes only ResetEvent for a selected valid
+handle. No failure switch enters the production provider or its ABI.
+
+With the unfixed provider, cached x86 run083 fails at line259: input_pending no
+longer reports the queued record after the failed read (CTest exit8). With the
+fix, x86 run084 passes1646 assertions in0.54s and x64 run085 passes the same1646
+in0.24s; both build/test runners exit0. The test checks failure status, zero
+delivered bytes, retained pending input and the original record on PEEK.
+Receipts and exact build/test output are build/t479-s6-io/input082--085.*.
+Fixed provider SHA-256 is
+69BC922F5C7309BC2F1E079829A1EB4FF8914818D74171D7BD19133699CC100D;
+test seam SHA-256 is
+B5E5A83C33B0A747A86AF9A6116E4F86DE5A8F600259D4E04B475FC32E01FF76.
+
+This is local verification, not product publication or complete input delivery.
+The real guest producer and normal-retirement handback remain open together;
+retaining input on a failed read does not repair queue destruction at retirement.
+
+## Window input identity086--087
+
+The formal console_startup_observer write_window_key_records helper omitted
+WM_KEY bit24 even when its INPUT_RECORD specified ENHANCED_KEY. Preserve that
+bit for both make and break messages. This is a one-line test-provider repair,
+not a guest or product workaround. Cached x64 wow_message_observer build086
+exits0. It proves compilation only; no actual Ctrl+Break delivery is claimed.
+
+The temporary key-default helper used in081 also omitted bit24. More
+fundamentally, the selected shared base/win32/input.c has no VK_CANCEL mapping.
+The checked-in win31_vm_keyboard_decode.c witness links that actual provider,
+without mocks, windows or guest changes. Run087 compiles successfully and exits1:
+ordinary A, Pause and right Control are accepted; VK_CANCEL with scan46 returns
+accepted0/key0. The two existing types_interface.h CRT deprecation warnings
+remain warnings, not the failed assertion. base_keyboard_decode returns
+BASE_KEYBOARD_UNMAPPED for this transition, before NTCON or guest delivery.
+The current SoftPC src/lib counterpart likewise has no CANCEL/BREAK mapping.
+
+Thus fixing the test's extended flag alone cannot establish Ctrl+Break input.
+Nor does this decoder result explain the precise E1 sequence in081: that
+stimulus still lacks a demonstrated end-to-end key identity. Keep those claims
+separate. The next control-key implementation must retain a distinct Break
+identity through the shared decoder and NTCON, then exercise the actual VM
+input owner; it must not relabel Pause, bypass the selected library or add a
+second native control-event path. The pinned shared-library manifest and
+upstream identity must be accounted for with any such change. No shared
+library or original keyboard controller has been changed in086--087.
+
+## Break identity repair088 and cached build089
+
+The finite correction adds BASE_KEY_BREAK at the unused0x0003000e value,
+without renumbering any existing key, maps the exact SDK VK_CANCEL value in
+the Win32 adapter, and preserves it as VK_CANCEL in NTCON. Pause remains
+BASE_KEY_PAUSE/VK_PAUSE. This is five added production lines across the shared
+declaration/adapter and NTCON, with no control-event generation, guest changes,
+original mirror changes or alternate input transport.
+
+This deliberately changes three imported library files locally; it is not an
+unchanged SoftPC import. nxvm-import.json now records the additive T479 S6
+repair and current file hashes, retaining the prior upstreamSha256 identities.
+The shared library's license and all other imported files remain unchanged.
+Do not claim cross-project byte identity until the same repair is incorporated
+upstream and the import is reconciled.
+
+Run088 compiles and runs the real decoder and existing NTCON keyboard fixture
+on x64, exit0. The same input that was rejected in087 now produces neutral
+196622; Pause still produces196617. Explicit NTCON assertions check Break
+make/release, scan46, Ctrl/extended flags and distinct Pause scan45. Existing
+layout/dead-key, surrogate, failed-sink, source-isolation and retirement tests
+also pass. These are boundary tests, not actual guest Ctrl+Break acceptance.
+The same real decoder and complete frontend keyboard fixture pass x86 run090,
+exit0. No assertion was relaxed between the negative and positive cases.
+Build089 uses the previous successful cached055 x86/x64 commands unchanged
+to build the complete host component set and selected shared tests. The owned
+runner exits0; x86 and x64 each pass14 selected shared tests (2.00s and1.50s).
+The complete output has no failed compilation/link step. This is cached build
+and selected-test evidence, not the Full product gate or VM input acceptance.
+
+Full091 reuses the successful Full058 launcher, logon environment and modern
+desktop-capable PowerShell runner, with a fresh r091 evidence/package root.
+It first rebuilds the formal console observer from current source in its
+existing stable Ninja tree, preserving the extended-bit correction086 in the
+actual gate input. Supervisor script SHA-256 is
+F33D60D8F797165A709C556C394D7498B0B8E5DFDF2EE03EE591FCEF7AD35F92.
+Read full091.exit/supervisor.exit and the individual r091-verification results
+before assigning a verdict; starting this run is not a passing result.
+
+The first091 wrapper exits1 after successful fixture execution and staging.
+Its child output is not retained by that legacy wrapper, so the precise thrown
+exception is unproven. This must not be described as a product test failure or
+an unavailable desktop. The8 VM cases all satisfy their Expected exit codes,
+including the intentionally nonzero73/74 lifecycle exits. The final frontend
+scope fixture exits0 with PASS output. The staged manifest contains11 images,
+all matching their hashes; the15-file control cache is populated.
+
+The prior successful058 handoff already documents this same wrapper stopping
+after staging and its explicit Node/Python continuation. Reuse that actual
+successful runner for091, rather than repeating the completed fixtures or
+using a new package. full091-resume.ps1 SHA-256 is
+F33247514D264828B1E3F7DE56DBF1156207532352F8C87AEB4BBCC1FAD92FC2;
+its logon-environment supervisor is
+050A84AE9B77FE22192224B4CAEA0D285024844102C272834A8752A1D183A470.
+The continuation records a transcript and caught exception explicitly. Preserve
+the original exit1 alongside its eventual result. full091-source.json pins17
+uncommitted source/test inputs; no product source changes during this run.
+
+The resumed091 runner passes both real Win16 generic-call cases (normal and
+calling-convention mismatch): each records three guest phases, zero errors
+and three releases. The actual frontend-instances fixture also passes. Full
+then reaches the retained WINMINE/SOL/WRITE startup frontier and command-exit
+matrices. These intermediate results are not a final Full verdict, gameplay
+acceptance, or completion of the missing S6 VM input producer/handback.
+
+Review of the input changes keeps ownership explicit: the shared library
+names Break without generating a control event; NTCON only preserves the
+native key record; NTVWM remains the existing Ctrl+C/Break policy owner.
+The VM queue's failure-atomic change stays under its existing lock and creates
+no new lifetime owner. The finishing flag closes input admission before joining
+the existing frontend retirement, but does not yet return unread records to
+the DOS VM. Those unchanged outstanding obligations prevent S6 closure even
+if the ordinary product regression succeeds.
+
+Full091 continuation now exits0 (inner and outer receipts). Its timing ledger
+records16/16 selected gates passed in438140ms, including Console/Window command
+exit, native GUI lifetime, protocol rejection, terminal handback, frontend loss
+and nested-window handoff. DOS4GW/Nesticle remains the owner-approved explicit
+skip, not a passing test. Package daa392bf-02e0-439f-9b1c-e21804398133 retains
+11 matching image hashes; all17 pinned source/test hashes remain unchanged.
+The first wrapper's exit1 remains preserved. No new default publication or
+S6 closure follows from this regression result alone: actual Win3.1 candidate
+checks and complete VM input/handback still remain.
+
+Background stage092 uses the existing New-PhysicalRuntimeStage helper to copy
+that exact candidate to fresh O:/tmp/nb55. All11 image hashes match the sealed
+manifest. No old stage or original installation is overwritten. The isolated
+Win3.1 SYSTEM.INI still hashes to
+45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874.
+The authored addon source remains B9B9246BDEFD19E7B55C0E783FA69EA7730BB37E2F9B451DCC24A31C6E2D8B6A,
+matching078; its verified build may be reused without recompilation. Stage092
+is preparation, not a launched Win3.1 run or input acceptance.

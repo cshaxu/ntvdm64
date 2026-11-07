@@ -36,7 +36,9 @@ vm_semaphore equ 12
 vm_waiting equ 16
 vm_io_buffer equ 20
 vm_codepage equ 24
-vm_bytes equ 28
+vm_token_low equ 28
+vm_token_high equ 32
+vm_bytes equ 36
 screen_header equ 36
 
 segment _LTEXT public align=16 class=CODE use32
@@ -106,6 +108,8 @@ control:
     mov [edi+vm_generation_low], eax
     mov [edi+vm_generation_high], edx
     mov dword [edi+vm_executable], 1
+    mov dword [edi+vm_token_low], 0
+    mov dword [edi+vm_token_high], 0
     cmp dword [esp+28], 1           ; saved Device_Init, only the system VM
     je .notification_init
     jmp .register_vm
@@ -384,10 +388,14 @@ command_return:
     add esp, 20+64
     test eax, eax
     jnz .begin_failed
-    push edx
-    push ebx
+    ; The per-VM control block is the sole live token owner. IRQ/input
+    ; callbacks cannot borrow this suspended command's stack.
+    mov edi, [vm_offset]
+    add edi, [esp+16]
+    mov [edi+vm_token_low], ebx
+    mov [edi+vm_token_high], edx
 .wait_work:
-    mov ebx, [esp+24]              ; original VMM handle in saved PUSHAD
+    mov ebx, [esp+16]              ; original VMM handle in saved PUSHAD
     mov edi, [vm_offset]
     add edi, ebx
     mov eax, [edi+vm_semaphore]
@@ -397,17 +405,21 @@ command_return:
     vmm_call 0x27
     ; The same counted wake carries either guest I/O or terminal completion.
     ; Apply I/O here, in this VM's resumed callback, never in the IRQ handler.
-    mov edx, [esp]
-    mov esi, [esp+4]
-    mov ebx, [esp+24]
+    mov ebx, [esp+16]
+    mov edi, [vm_offset]
+    add edi, ebx
+    mov edx, [edi+vm_token_low]
+    mov esi, [edi+vm_token_high]
     call command_apply_work
     test eax, eax
     jnz .error
     test ecx, ecx                  ; consume the separate terminal wake too
     jnz .wait_work
-    mov ebx, [esp+24]
-    mov edx, [esp]
-    mov esi, [esp+4]
+    mov ebx, [esp+16]
+    mov edi, [vm_offset]
+    add edi, ebx
+    mov edx, [edi+vm_token_low]
+    mov esi, [edi+vm_token_high]
     host_notify 12
     cmp eax, 996                    ; ERROR_IO_INCOMPLETE: wait for next event
     je .wait_work
@@ -426,9 +438,10 @@ command_return:
     and dword [ebp+client_flags], ~1
 .done:
     mov edi, [vm_offset]
-    add edi, [esp+24]
+    add edi, [esp+16]
+    mov dword [edi+vm_token_low], 0
+    mov dword [edi+vm_token_high], 0
     mov dword [edi+vm_waiting], 0
-    add esp, 8
     popad
     ret                           ; FAR frame was consumed before admission
 .snapshot_failed:

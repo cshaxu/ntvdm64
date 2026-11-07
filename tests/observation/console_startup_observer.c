@@ -1085,6 +1085,7 @@ static BOOL write_window_key_records(const INPUT_RECORD *records,DWORD count)
         const KEY_EVENT_RECORD *key=&records[index].Event.KeyEvent;
         LPARAM bits=1|((LPARAM)key->wVirtualScanCode<<16);
         if(records[index].EventType!=KEY_EVENT)return FALSE;
+        if(key->dwControlKeyState&ENHANCED_KEY)bits|=(LPARAM)1<<24;
         if(!key->bKeyDown)bits|=(LPARAM)0xc0000000;
         if(!send_window_keyboard_message(window,key->bKeyDown ? WM_KEYDOWN : WM_KEYUP,
             key->wVirtualKeyCode,bits,key->dwControlKeyState,

@@ -15,7 +15,13 @@ void mvdm_vm_executor_destroy(mvdm_vm_executor *);
  * real executor is queued. The caller retains both objects on any failure. */
 DWORD mvdm_vm_executor_submit(mvdm_vm_executor *, uint32_t vm,
     ntvdm_command_launch *, ntvdm_vm_text *, uint64_t *token);
-/* A translated guest event, scoped to this exact live request token. */
-DWORD mvdm_vm_executor_key(mvdm_vm_executor *, uint64_t token,
+/* A translated guest event, scoped to the submitting VM and exact live token.
+ * The I/O owner also checks continuation invalidation before enqueueing. */
+DWORD mvdm_vm_executor_key(mvdm_vm_executor *, uint32_t vm, uint64_t token,
     const KEY_EVENT_RECORD *);
+/* CPU-only BOP input: eight DWORDs (token low/high, down, repeat, virtual key,
+ * scan, Unicode character, control state). Copy before enqueue; never retain
+ * guest memory. Failure means the producer still owns the event. */
+DWORD mvdm_vm_executor_key_bop(mvdm_vm_executor *, uint32_t vm,
+    uint32_t address, uint32_t extent);
 #endif

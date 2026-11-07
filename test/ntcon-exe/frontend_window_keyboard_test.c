@@ -271,6 +271,22 @@ int main(int argc,char **argv)
     assert(record.Event.KeyEvent.wVirtualKeyCode == VK_MENU);
     assert(record.Event.KeyEvent.dwControlKeyState ==
         (RIGHT_ALT_PRESSED | LEFT_CTRL_PRESSED | ENHANCED_KEY));
+    event.data.key.key = BASE_KEY_BREAK;
+    event.data.key.scan_code = 0x46;
+    assert(frontend_window_keyboard_record(&event, LEFT_CTRL_PRESSED, layout, &record));
+    assert(record.Event.KeyEvent.wVirtualKeyCode == VK_CANCEL &&
+        record.Event.KeyEvent.bKeyDown && record.Event.KeyEvent.wVirtualScanCode == 0x46 &&
+        record.Event.KeyEvent.dwControlKeyState == (LEFT_CTRL_PRESSED | ENHANCED_KEY));
+    event.data.key.pressed = 0;
+    assert(frontend_window_keyboard_record(&event, LEFT_CTRL_PRESSED, layout, &record));
+    assert(record.Event.KeyEvent.wVirtualKeyCode == VK_CANCEL && !record.Event.KeyEvent.bKeyDown);
+    event.data.key.key = BASE_KEY_PAUSE;
+    event.data.key.scan_code = 0x45;
+    event.data.key.flags = 0;
+    event.data.key.pressed = 1;
+    assert(frontend_window_keyboard_record(&event, 0, layout, &record));
+    assert(record.Event.KeyEvent.wVirtualKeyCode == VK_PAUSE &&
+        record.Event.KeyEvent.wVirtualScanCode == 0x45 && !record.Event.KeyEvent.dwControlKeyState);
     event.type = KVM_EVENT_TEXT;
     event.data.text.scalar = 0x00e9;
     assert(frontend_window_keyboard_record(&event, 0, layout, &record));

@@ -13,6 +13,14 @@ destinations; authored addons are in assets/release and configured in O:/w31.
 Win95 desktop mouse064 is exercised; shutdown1 matches control060, not a
 zero-exit pass. Addons retain bounded candidate status. Garbled windowed DOS
 text is owner-known/nonblocking. fill002 and remaining S6 I/O stay open.
+P4 input work adds a VM/token-bound BOP receiver and failure-atomic queue
+reads (x86/x64 checks084/085). Break identity is repaired through the shared
+decoder and NTCON (088/090); three library adaptations are manifest-recorded.
+Addon token ownership moves from callback stack to per-VM storage; actual
+Win3.1 command handoff and normal root exit0 pass092. Cached089 and Full091
+16/16 pass; package daa392bf-02e0-439f-9b1c-e21804398133 is published at both
+destinations. Guest input production and unread-input handback remain incomplete.
+Details remain in the [I/O audit](../etc/operations/m0-t479-s6-io-audit.md).
 
 [S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
 and original reentry ownership with actual two-VM nested execution. The original
