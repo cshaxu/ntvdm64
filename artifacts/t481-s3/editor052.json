@@ -1,0 +1,46 @@
+{
+  "case": "T481 S3 editor052",
+  "pid": 5940,
+  "exit": 0,
+  "result": {
+    "firstExit": "Dos",
+    "nativeVm": "80836000",
+    "dosVm": "80799000",
+    "menus": true,
+    "completed": 2,
+    "mouseVerified": false,
+    "saveVerified": false
+  },
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor052/editor-result.json",
+      "bytes": 169,
+      "sha256": "9976ede2106d2a22c605e9090d03847efa6b75e7675cd67208b13b4c1d1b7cfb"
+    },
+    {
+      "path": "build/t481-s3/editor052/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "5ce463a680bf417058ae3081e79d747830ea249bb2ba81f80134a497d952b53a"
+    },
+    {
+      "path": "build/t481-s3/editor052/controller.asm",
+      "bytes": 7358,
+      "sha256": "4e6e1c0cb65b4a8eb894b9f5737325edf102d118b628285fad4878b2f1b026c1"
+    },
+    {
+      "path": "build/t481-s3/editor052/screens.txt",
+      "bytes": 22748,
+      "sha256": "2ad72fb3fc4e38103eacdceb12ec7bdb19168164fcb9a85c7186b6fde9b9cdb8"
+    },
+    {
+      "path": "build/t481-s3/editor052/trace.txt",
+      "bytes": 23134,
+      "sha256": "54d12fee021e78004baa8993c665eee2f316d219498b59b240df3eaf73d1ed84"
+    },
+    {
+      "path": "build/t481-s3/editor052.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    }
+  ]
+}

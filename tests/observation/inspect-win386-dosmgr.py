@@ -1,10 +1,10 @@
-"""Read-only W3/LE extraction for DOSMGR/VKD research; no guest writes."""
+"""Read-only W3/LE extraction for DOSMGR/VKD/VMD research; no guest writes."""
 import argparse, hashlib, json, pathlib, struct, subprocess
 p = argparse.ArgumentParser()
 p.add_argument('--image', required=True)
 p.add_argument('--output', required=True)
 p.add_argument('--ndisasm', required=True)
-p.add_argument('--module', choices=('DOSMGR', 'VKD'), default='DOSMGR')
+p.add_argument('--module', choices=('DOSMGR', 'VKD', 'VMD'), default='DOSMGR')
 a = p.parse_args()
 out = pathlib.Path(a.output).resolve()
 repo = pathlib.Path(__file__).resolve().parents[2]

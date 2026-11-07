@@ -1,0 +1,38 @@
+{
+  "case": "VM mouse queue candidate x86/x64",
+  "pid": 25100,
+  "exit": 0,
+  "checks": [
+    "existing notification/continuation/executor tests",
+    "mouse absolute cell/buttons/modifiers",
+    "different VM queue remains empty",
+    "negative coordinate rejected without readiness"
+  ],
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_io.c",
+      "sha256": "c74103ec36f26853c82bd9e8a404115fbd606c762ea86daf68f01689b24e492b"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_vm_io.h",
+      "sha256": "d1abafa10dab7677bef94a128036b797a37f15455214e035699a080b34f4d9a5"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/mvdm_vm_notification_test.c",
+      "sha256": "d9d3dc8ae32bc6de16dff494838ce77e333d10c362f9edf33840892acd9e69da"
+    },
+    {
+      "path": "build/t481-s3/mouse-io089.stdout",
+      "sha256": "b021e67b93371279aaf23c2de7391ef1f9003634dd3063d8e20844a91d159625"
+    },
+    {
+      "path": "build/t481-s3/mouse-io089.ps1",
+      "sha256": "64ddaa940a3d3e6ba2af01f0b589b819d98bfb9c8404d0f31011d50eea14f331"
+    }
+  ],
+  "limits": [
+    "No production mouse caller yet",
+    "Guest callback installation/restoration and host payload mouse integration remain open",
+    "Full package not built or published"
+  ]
+}

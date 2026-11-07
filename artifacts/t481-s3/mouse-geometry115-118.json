@@ -1,0 +1,37 @@
+{
+  "case": "S3 CPU mouse geometry115-118",
+  "coordinateFixtureExit": 0,
+  "integration117Exit": 1,
+  "geometryFragmentExit": 0,
+  "bridgeExit": 0,
+  "limits": [
+    "Mouse menus/normal exit117 failed.",
+    "119 uses real positive physical movement before reading the cursor origin; no warp or relaxed assertions."
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/mouse116.stdout",
+      "bytes": 18552,
+      "sha256": "2EA05B82152CD7F1DE2F2606684F46C535402FF26969765E6940E48F4300E7B5"
+    },
+    {
+      "path": "build/t481-s3/mouse118.stdout",
+      "bytes": 689,
+      "sha256": "4148383C57666013EA4CC45C74760B02769E0CFF387D0F26D0D949827177102C"
+    },
+    {
+      "path": "build/t481-s3/editor117/trace.txt",
+      "bytes": 36284,
+      "sha256": "62C45D2D2B740E0E5FF5FF3077BFFB41466EA98A221608CE9088795F733919A4"
+    },
+    {
+      "path": "build/t481-s3/editor117/runtime/matrix-results.json",
+      "bytes": 430,
+      "sha256": "78238267535A631DD06AB31E14BD73B158504CF4CDC9F33038AD82ED063104F4"
+    }
+  ],
+  "observations": [
+    "Original selected mode67 and extent640x480 now used during root physical motion.",
+    "Root negative movement remains clamped because INT33 starts0,0 while USER reports320,240."
+  ]
+}

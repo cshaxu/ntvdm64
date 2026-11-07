@@ -1,0 +1,33 @@
+{
+  "case": "DOSONLY1 guest mouse menu calibration",
+  "pid": 8888,
+  "result": "failed: menu did not open, x entered text, runner timeout",
+  "cause": "unresolved: stimulus coordinates or guest-to-DOS mouse route; not attributed to host payload",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor060/runtime/matrix-results.json",
+      "sha256": "a6a7f9261f2391e1a05a24a32f6de5be6c655282796f431c558e8dc937ef3a68",
+      "bytes": 429
+    },
+    {
+      "path": "build/t481-s3/editor060/runtime/386-dosonly1.observer.txt",
+      "sha256": "1b7b81581263375af1bdd231a62d2476d2bf1dbe54397cc9567e1cca6f333339",
+      "bytes": 15341
+    },
+    {
+      "path": "build/t481-s3/editor060/controller.asm",
+      "sha256": "d236888b28f5f58776919c1ebe0bd401c89a859b2f69d6f14d39652b76f5346f",
+      "bytes": 9761
+    },
+    {
+      "path": "build/t481-s3/editor060/screens.txt",
+      "sha256": "0c0c2dc50d3610a9bdb05cdeeb059af2b473a1166112368ecc467ed67223be16",
+      "bytes": 127100
+    },
+    {
+      "path": "build/t481-s3/editor060/trace.txt",
+      "sha256": "ebf6f25ba4b23397f49cdafc8772b269f6d112101ad2613eba0ab5f3fe1191e6",
+      "bytes": 50596
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "case": "Mouse coordinate boundary narrowing",
+  "runs": {
+    "095": {
+      "pid": 5508,
+      "exit": 1
+    },
+    "097": {
+      "pid": 5996,
+      "exit": 1
+    }
+  },
+  "findings": [
+    "BOP19 accepted both VM tokens with status0",
+    "Delivered cell locations36-39,16-18 do not match menu target",
+    "Relative dx=-251 dy=-81 accepted at root mouse queue",
+    "Observed virtual extent640x200 during graphics guest Windows",
+    "No normal Windows exit in either run"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor095/runtime/matrix-results.json",
+      "sha256": "62bfc38f9e2bae32c6c76dd0d32911a0e9de6c3c16d2708fd7e0759d5e6d8e0a"
+    },
+    {
+      "path": "build/t481-s3/editor095/trace.txt",
+      "sha256": "4ce05f5c17723c47e22e9ee881b1495498a00ec937a80f0b441b884d7cc5ab9f"
+    },
+    {
+      "path": "build/t481-s3/editor097/runtime/matrix-results.json",
+      "sha256": "82d121ec7661bdab2a2eb648167139b3e862c428847b00a2a79a6618380ac915"
+    },
+    {
+      "path": "build/t481-s3/editor097/trace.txt",
+      "sha256": "67d0435c5da3fec3b77a0729a1baec942223d92744b12237779249e79dc5d290"
+    }
+  ],
+  "interpretation": "Input destination and token dispatch work; origin of wrong cursor position remains unproven. Physical IRQ/NIDDB observation is next, no speculative product mouse fix."
+}

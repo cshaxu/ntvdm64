@@ -1,0 +1,80 @@
+[
+  {
+    "case": "068",
+    "passed": false,
+    "files": [
+      {
+        "path": "build/t481-s3/editor068/runtime/matrix-results.json",
+        "bytes": 429,
+        "sha256": "90cb5874b907831309c2399092e77fbcd12c3224b5fe8124e6322f894c8a3c8e"
+      },
+      {
+        "path": "build/t481-s3/editor068/runtime/386-dosonly1.observer.txt",
+        "bytes": 588,
+        "sha256": "ccac28ac938676189535ee7a0ffdd8af7872cf93f73c3f9a46198f57e0f41480"
+      },
+      {
+        "path": "build/t481-s3/editor068/trace.txt",
+        "bytes": 15935,
+        "sha256": "ef0762869265b6ee3642f622b806d7438bcfb907f053f6ab70d29eb004795d69"
+      },
+      {
+        "path": "build/t481-s3/editor068/screens.txt",
+        "bytes": 127100,
+        "sha256": "a4e7e66c2f14eec0cc8eb33c2bc79f5a253e6ff8c751570427ec104b3c40dd52"
+      }
+    ]
+  },
+  {
+    "case": "069",
+    "passed": false,
+    "files": [
+      {
+        "path": "build/t481-s3/editor069/runtime/matrix-results.json",
+        "bytes": 429,
+        "sha256": "c5d29d2a62c2be49fca5cbcad511903a3ef04e5b986c230e47da3e908ca5336b"
+      },
+      {
+        "path": "build/t481-s3/editor069/runtime/386-dosonly1.observer.txt",
+        "bytes": 15602,
+        "sha256": "0c866b986dce12c8c421ebf51f579bf73284ba6dd1d50df284871e8934e315db"
+      },
+      {
+        "path": "build/t481-s3/editor069/trace.txt",
+        "bytes": 50615,
+        "sha256": "2eed03049d318300f39e7409ffb1aeb93b218bc198150f6bb666ff374a4b4c00"
+      },
+      {
+        "path": "build/t481-s3/editor069/screens.txt",
+        "bytes": 127100,
+        "sha256": "15d20ecdf2fdf41d964e1e7d6ed5bda8421bbecc0b0d9299fbf51aed2a2098cc"
+      }
+    ]
+  },
+  {
+    "case": "070",
+    "passed": false,
+    "files": [
+      {
+        "path": "build/t481-s3/editor070/runtime/matrix-results.json",
+        "bytes": 429,
+        "sha256": "e96e3ab7b890cba5d223fcaecac6a2cbfa8ef0e8bec2277ee43da3b3f2387eb7"
+      },
+      {
+        "path": "build/t481-s3/editor070/runtime/386-dosonly1.observer.txt",
+        "bytes": 16116,
+        "sha256": "fe78f65cd43ddf9b55d3562cb0fb913a8535d804b5e31b049b7aa99fef1db572"
+      },
+      {
+        "path": "build/t481-s3/editor070/trace.txt",
+        "bytes": 46635,
+        "sha256": "b0b0d2b204d2507c36c189665e3603e3a0ff1b0a30b325bfe798442429ba93c9"
+      },
+      {
+        "path": "build/t481-s3/editor070/screens.txt",
+        "bytes": 129150,
+        "sha256": "8eb9d950f88bb865ad0a7bde81ba006904bc2894cc7c8585f955f71360532468"
+      }
+    ]
+  }
+]

@@ -1,0 +1,66 @@
+{
+  "case": "T481 S3 editor138",
+  "exit": 0,
+  "result": {
+    "dosonly": 1,
+    "guestEditorMenu": true,
+    "mouseMenu": true,
+    "hostCommandAdmissions": 0,
+    "hostRegistryVerified": true,
+    "normalExit": true
+  },
+  "registry": [
+    {
+      "key": "01dd6efb29538aca:1:2:0000000000000000",
+      "parent": "0000000000000000:0:0:0000000000000000",
+      "category": 1,
+      "pid": 26404,
+      "kind": 0,
+      "depth": 0,
+      "actions": 1,
+      "state": 2,
+      "stack": 0,
+      "image": "NTCON"
+    },
+    {
+      "key": "01dd6efb29538aca:2:3:0000000000000000",
+      "parent": "01dd6efb29538aca:1:2:0000000000000000",
+      "category": 2,
+      "pid": 17200,
+      "kind": 0,
+      "depth": 1,
+      "actions": 1,
+      "state": 2,
+      "stack": 1,
+      "image": "O:\\tmp\\m481e138\\PATCH\\WIN386.PIF"
+    }
+  ],
+  "limits": "Snapshot at guest EDIT readiness plus whole-run zero command admissions. Does not prohibit ordinary guest VMM DOS concurrency. Diagnostic package; not publication.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor138/editor-result.json",
+      "bytes": 159,
+      "sha256": "ab32d96cb5bfe5270f5079a3064995efac174c33a0736be4c1ad8f3ef287800e"
+    },
+    {
+      "path": "build/t481-s3/editor138/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "f1095ac983c81e92824066f94a692551e34dc19f1b6ee2777a6028a0576c30dd"
+    },
+    {
+      "path": "build/t481-s3/editor138/runtime/386-dosonly1.registry.json",
+      "bytes": 412,
+      "sha256": "bdb9aa28aabc7b0cdf054de23872997b4304bc00cb046c60b9cce1ec6e282570"
+    },
+    {
+      "path": "build/t481-s3/editor138/controller.asm",
+      "bytes": 13559,
+      "sha256": "1bcd5afbd511fa083e6be5bbde02622d5af79daa2e30725f22e1d25915574a52"
+    },
+    {
+      "path": "build/t481-s3/editor138/trace.txt",
+      "bytes": 42944,
+      "sha256": "cfd5e2000ef927406b7d9aaa6e9f9c89e7c93ca97c8938a6cae608652a2c4e6f"
+    }
+  ]
+}

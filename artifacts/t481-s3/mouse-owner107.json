@@ -1,0 +1,32 @@
+{
+  "observations": [
+    "Root PID50f4 owns all observed coordinate events.",
+    "Its mode transitions67 to03; BIOS449 is1b during subsequent physical motion.",
+    "Separate nested PID584c startup mode03 cannot account for root coordinate observations."
+  ],
+  "nestedPid": 22604,
+  "exit": 1,
+  "limits": [
+    "NIDDB creation and INT33 reset ordering still require correlation.",
+    "Normal Windows exit failed; not acceptance."
+  ],
+  "inputs": [
+    {
+      "bytes": 58323,
+      "path": "build/t481-s3/editor107/trace.txt",
+      "sha256": "ADC685CD8E47CFB985406738F1AFB541ECE6559213C32EC92EFC397CFD02CC54"
+    },
+    {
+      "bytes": 430,
+      "path": "build/t481-s3/editor107/runtime/matrix-results.json",
+      "sha256": "F52665A9F2E5066DEAA34681E902969975A0C49F0416DF55B3BB84BCEC63A70A"
+    },
+    {
+      "bytes": 501,
+      "path": "build/t481-s3/editor107.stdout",
+      "sha256": "4998D368B1FD5FCEF6165E8AA1511A7B279C5273A9AE0B40D9047A6E418CEC70"
+    }
+  ],
+  "case": "S3 mouse state process attribution107",
+  "rootPid": 20724
+}

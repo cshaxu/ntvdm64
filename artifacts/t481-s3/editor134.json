@@ -1,0 +1,43 @@
+{
+  "case": "T481 S3 editor134",
+  "exit": 0,
+  "result": {
+    "firstExit": "Dos",
+    "nativeVm": "8083b000",
+    "dosVm": "80799000",
+    "menus": true,
+    "completed": 2,
+    "mouseMenu": true,
+    "mouseExitVerified": true,
+    "saveVerified": false
+  },
+  "normalWindowsExit": true,
+  "limits": "Reverse-order contrast passes with read-only scroll observation; editor132 remains unexplained. Only final receipt survives in134;135 records each mouse target separately.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor134/editor-result.json",
+      "bytes": 194,
+      "sha256": "3ee27f464992a070cdd6e3bef040706e1bda03d65212b5a65a5580382a835299"
+    },
+    {
+      "path": "build/t481-s3/editor134/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "57b3eb68755334a520bfabc3ba74293b2b9d86268d157d4f0e4ba82de5f898ab"
+    },
+    {
+      "path": "build/t481-s3/editor134/controller.asm",
+      "bytes": 13488,
+      "sha256": "d68575646cb98f29d8458e4ad294bcca50cc8d6ced041548f5aaad7e9b2fbec1"
+    },
+    {
+      "path": "build/t481-s3/editor134/trace.txt",
+      "bytes": 59764,
+      "sha256": "9e9c0f00092a8f6d58c76bf4bd1dde4c489b236c1c415fdb6299a7a314400736"
+    },
+    {
+      "path": "O:/tmp/m481e134/PATCH/MOUSE.BIN",
+      "bytes": 78,
+      "sha256": "c3019501dda7822f041d9e48b33fe48d6f04f1ad7c9ad354ff1350541811cd72"
+    }
+  ]
+}

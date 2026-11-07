@@ -1,0 +1,25 @@
+{
+  "scope": "T481 S3 P3 mouse and DOSONLY boundary",
+  "productionReview": [
+    "Original NIDDB owns per-VM mouse state; Create_VM allocation precedes BIOS child initialization.",
+    "CPU owner scales queued displacement after selecting the original instance; producer no longer reads VM geometry.",
+    "Mouse delivery requires matching VM/token and live job; existing input queue and modifier conversion are reused.",
+    "INT33 callback exchange saves/restores full VMM client state on completion and failed admission."
+  ],
+  "verification": [
+    "cached139 x86/x64 products and shared tests",
+    "mouse142 both widths",
+    "editor144/145 actual two-editor mouse Exit in both orders",
+    "editor146 actual DOSONLY guest editor, native rejection, zero admissions, registry snapshot and normal exit",
+    "Full147 16/16",
+    "publication150 eleven host images at both destinations, addons assets only"
+  ],
+  "limitations": [
+    "editor132 wrong-column observation remains unattributed; later reverse-order controls pass, no fixed claim.",
+    "Diagnostic editor ingress is isolated test stimulus, not end-to-end physical input proof.",
+    "Win95 and remaining S3 operation/geometry/font/codepage/nested coverage are not completed."
+  ],
+  "mirrorDiff": "No changes in src/mvdm-host, src/mvdm-guest or src/non-mvdm",
+  "guest": "No original guest modification or rebuild",
+  "publication": "42a32c73-c220-4be6-98b6-de443efdc6cc"
+}

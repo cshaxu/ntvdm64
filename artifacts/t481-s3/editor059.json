@@ -1,0 +1,42 @@
+{
+  "case": "T481 S3 DOSONLY1 editors",
+  "pid": 10352,
+  "exit": 0,
+  "result": {
+    "dosonly": 1,
+    "guestEditorMenu": true,
+    "hostCommandAdmissions": 0,
+    "normalExit": true
+  },
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor059/editor-result.json",
+      "bytes": 104,
+      "sha256": "354e68d9d8af2075df6afc0515e21484c6530dbe1ec9706e27e147e7705455a5"
+    },
+    {
+      "path": "build/t481-s3/editor059/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "6b5477749884aef02394c467102b42f5523bd7304d28e0cd2ec23115cd2675f1"
+    },
+    {
+      "path": "build/t481-s3/editor059/controller.asm",
+      "bytes": 8761,
+      "sha256": "363831ca03a8d4e5c3faff59f9de3200d5a47ec796c2b7a2482b22c33b76a2b5"
+    },
+    {
+      "path": "build/t481-s3/editor059/screens.txt",
+      "bytes": 151700,
+      "sha256": "69a04a9546436fb2631f4c982652853722c2066c61db80f87265f37c6034f2c3"
+    },
+    {
+      "path": "build/t481-s3/editor059/trace.txt",
+      "bytes": 20867,
+      "sha256": "13b83221c123d28c7e8c37ed3ed4513a58da8b3e3c255b8fafaef29589fe60da"
+    }
+  ],
+  "limits": [
+    "mouse remains unqualified",
+    "no saved-content assertion in this case"
+  ]
+}

@@ -49,10 +49,10 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "93CE82E6982AB293CD2636E71034F61C55C93A22B13D222FA84DE06285065DF2",
-      "sha256": "A2A8690A5667BF402A491163BE8E77662C2A9A408ECD642AF0F1FDF8577C6D64",
+      "sourceSha256": "0E2DCAB7DA561B9A3922A9CCD5AF12E03F3566B9EBDEC416CAA2E7AB13C14CE9",
+      "sha256": "74CF28F8F27B41B140144984B0C4F28B044009F3B4AE332AB331416A3939CFEF",
       "acceptance": "candidate",
-      "verifiedScope": "Candidate: Win3.1 two-VM unread sequence/repeat/F1/F11 BIOS handback, command exit ordering, VM retirement/reuse and NTSRV-loss cleanup. Full physical input, remaining VM operations and Win95 not accepted; unreproduced fill002/119 retained as history, not active defects. No Win95 alias published.",
+      "verifiedScope": "Candidate: retained S2 input/lifecycle baseline; Win3.1 dual host/DOS EDIT keyboard and mouse menus/Exit, both completion orders, DOSONLY1 guest execution/native rejection with no host payload. Remaining S3 I/O and Win95 unqualified; historical editor132 coordinate mismatch not attributed.",
       "evidence": "docs/etc/operations/m0-t481-multitask-completion-plan.md"
     },
     {
@@ -61,11 +61,11 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/insignia-386/insignia.asm",
-      "sourceSha256": "FE0958AD1775F324222F60FEA56BD95E6FF7E64B6B520DF58CAFA0C1BC9D3220",
-      "sha256": "BE8D709A604BF82D79801ADF7A5531E228450F28BEA49CD51BA49B1BDEFE4E45",
+      "sourceSha256": "3E1B1ABCC2D2304BED890F5651CD458DD398896F0A07839B882AA244B90EDBFC",
+      "sha256": "A005F94C1FF57F1A8B534D6F9BD7EAA3F4CE0EED1A7BCBCF350E954530030959",
       "acceptance": "candidate",
-      "verifiedScope": "Original host NIDDB lifecycle bridge only; real Win3.1 identity0->1->0, child retirement and normal exit verified. Not full historical INSIGNIA ABI. Win95 full lifecycle unverified.",
-      "evidence": "docs/etc/evidence/m0-t479-s6-main-integration.md"
+      "verifiedScope": "Candidate: original NIDDB Create_VM allocation before BIOS initialization; original VMD/BOP BF callback, actual Win3.1 DOS editor mouse and normal exit. Requires original VMD loaded. Not full INSIGNIA ABI; Win95 unqualified.",
+      "evidence": "docs/etc/operations/m0-t481-multitask-completion-plan.md"
     }
   ],
   "utilities": [

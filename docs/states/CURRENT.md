@@ -56,26 +56,40 @@ No whole-T completion or Win95 qualification is claimed.
 
 ## S3 Progress
 
-P1 visible-frame projection repair is built and published as complete11 package
-c0c312c1-01ca-408f-8b98-58ab8d9e812e. Full00416/16, native006, and two-VM
-geometry005/007 both completion orders pass; raw receipts are under
-artifacts/t481-s3. P1 includes these sources and release evidence. Dual EDIT Alt/menu/guest-mouse and
-remaining VM I/O acceptance remain open; S3 is not closed. Required editor matrix:
-dosonly=0 routes both images through Run16 to their respective workers;
-dosonly=1 runs edit.com inside guest DOS and rejects native edit.exe without
-launching a host editor, leaving the prompt usable. DOSONLY1 must also prove
-no command-triggered host payload, nested worker/task chain or VM payload
-frontend; original guest DOS VM concurrency remains permitted.
+Previous committed P2 dc1adea38 is complete11 package
+b3ea681a-18f4-490b-960c-b1acd249eeba, matching both destinations. Full04716/16
+and real editor049 keyboard menus/normal exit qualified that bounded baseline.
+It does not contain the current mouse changes.
 
-Prompt031/032 now pass two actual COMMAND prompt echo/exit calibrations in
-DOSONLY0/1 respectively, including normal Win3.1 exit. DOSONLY0 observes real
-host command admissions/completions; DOSONLY1 observes none. These are fixture
-and basic routing evidence only; the required dual EDIT matrix remains open.
+Current candidate retains original NIDDB/VMD mouse ownership, allocates child
+instances at Create_VM before BIOS work, scales relative input on the CPU owner
+using the selected original mouse instance, and transports exact-VM/token mouse
+records through the existing I/O queue. Mouse modifier decoding reuses the
+keyboard helper. No original guest or MVDM mirror source is changed.
 
-S3 candidate: modern EDIT Alt+F needs a printable character at the VT boundary;
-NTVWM now fills a missing Alt character only in VT mode. Native041/042 contrast
-and real Console045 pass. Cached043 and actual guest editor046 now pass, including both Alt menus and
-normal exit. Full047 passed 16/16. The checked-in editor049 runner also passed distinct-VM
-Alt menus, two completions and normal Win3.1 exit. Complete11 package b3ea681a-18f4-490b-960c-b1acd249eeba is now published
-to both destinations with matching hashes; commit/push follows. Mouse/save/
-reverse-order and DOSONLY1 editor acceptance remain open.
+- Cached139 complete x86/x64 builds and shared tests14/14 per width pass.
+- Mouse142 x86/x64 unit tests cover queue return, identity, lock toggles and
+  right Ctrl/Alt. Candidate143 builds the current host and authored .386.
+- Actual editor144/145 pass both orders: separate native EDIT.EXE and DOS
+  EDIT.COM VMs, mouse File/Exit, both completions and normal Windows exit.
+- Editor146 DOSONLY1 passes guest EDIT mouse interaction, native EDIT rejection,
+  zero whole-run host command admissions and normal Windows exit. Its actual
+  NTSRV snapshot has only root NTCON and DOS worker: no VM payload frontend,
+  native task or nested worker. Ordinary guest DOS VM concurrency is permitted.
+- Full140 passed16/16 for the pre142 frozen package. Full147 passed16/16 against
+  the current candidate; old Full results cannot qualify the new bytes.
+- Governance149 passed. Publication150 completed: complete11 package
+  42a32c73-c220-4be6-98b6-de443efdc6cc matches both destinations; two
+  addons are in assets/release only. P3 source review is recorded in review151.json; commit/push follows.
+
+Evidence is in artifacts/t481-s3/editor144.json through editor146.json,
+mouse-modifiers142.json, full140.json, full147.json and publication150.json; the working plan retains earlier
+controls and failed observations. Editor132's once-observed wrong callback
+column remains unattributed; later repeated reverse-order tests pass. Do not
+label that old failure fixed or use it as proof of a product cause.
+
+S3 remains active: complete the reached operation/geometry/font/codepage,
+display/metadata and nested-chain obligations from the working plan. The mouse
+candidate is a bounded P delivery, not S3 or whole-T closure. S4 Win95 and S5
+combined qualification remain unchanged. Addons publish only to assets/release,
+not host system32; the paired candidate requires original device=*vmd loading.

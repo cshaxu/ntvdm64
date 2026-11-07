@@ -7,6 +7,8 @@ param(
     [string]$RetiredNativeCommandMarker,
     [string[]]$ServiceLossMarkers,
     [string]$WorkerCloseMonitor,
+    [string]$RegistrySnapshotMonitor,
+    [string]$RegistrySnapshotMarker,
     [switch]$ConsoleClose,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
@@ -14,6 +16,7 @@ param(
     [switch]$AllowUserInstallation
 )
 $ErrorActionPreference = 'Stop'
+if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires both monitor and marker'}
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
 if($WorkerCloseMonitor -and !$ServiceLossMarkers){throw 'Worker close requires native readiness markers'}
 if (@($Cases | Select-Object -Unique).Count -ne $Cases.Count) { throw 'Duplicate matrix cases' }
@@ -134,14 +137,14 @@ try {
         $text = $baseConfig
         if ($case.DosOnly) { $text += "`r`ndosonly`r`n" }
         [IO.File]::WriteAllBytes($config,$encoding.GetBytes($text))
-        $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false
+        $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false; $registryCaptured=$false
         $report=Join-Path $output "$($case.Name).observer.txt"
         try {
             $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
             $scope=New-IsolatedPackageScope $stage
-            if($WorkerCloseMonitor) {
+            if($WorkerCloseMonitor -or $RegistrySnapshotMonitor) {
                 $monitor=Join-Path $stage 'system32/monitor-rpc-test.exe'
-                Copy-Item -LiteralPath $WorkerCloseMonitor -Destination $monitor
+                Copy-Item -LiteralPath $(if($WorkerCloseMonitor){$WorkerCloseMonitor}else{$RegistrySnapshotMonitor}) -Destination $monitor
                 & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $monitor -PackageId ([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe"))))
             }
             $pifName=if($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
@@ -166,6 +169,12 @@ try {
             $desktop = 'NTVDMConsoleTest-' + $process.Id
             while (!$process.WaitForExit(500)) {
                 if ([DateTime]::UtcNow -ge $deadline) { throw 'Observer did not complete its bounded observation' }
+                if($RegistrySnapshotMarker -and !$registryCaptured -and (Test-Path -LiteralPath $RegistrySnapshotMarker)) {
+                    $snapshot=Join-Path $output "$($case.Name).registry.json"
+                    & $monitor --tree-json 2> "$snapshot.err" | Set-Content -LiteralPath $snapshot
+                    if($LASTEXITCODE){throw 'Read-only registry snapshot failed'}
+                    $registryCaptured=$true
+                }
                 if($ServiceLossMarkers -and !$serviceLossPassed -and
                     @($ServiceLossMarkers | Where-Object {!(Test-Path -LiteralPath $_)}).Count -eq 0) {
                     $pinned=[Collections.Generic.List[Diagnostics.Process]]::new()
@@ -238,6 +247,7 @@ try {
                     [IO.File]::AppendAllText((Join-Path $output "$($case.Name).serial-dialogs.txt"),$observation)
                 }
             }
+            if($RegistrySnapshotMarker -and !$registryCaptured){throw 'Registry readiness marker was not observed'}
             if($RetiredNativeCommandMarker) {
                 # Observe before scope cleanup: cleanup must not manufacture
                 # successful native-command retirement for the guest witness.

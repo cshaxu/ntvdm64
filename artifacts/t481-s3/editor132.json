@@ -1,0 +1,28 @@
+{
+  "case": "T481 S3 editor132",
+  "exit": 1,
+  "interpretation": "Not passed: reverse order mouse callback column9 versus requested column4; cleanup access denied and missing final matrix result. No success claimed.",
+  "diagnosticPackage": "package129",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor132.exit",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t481-s3/editor132/controller.asm",
+      "bytes": 13254,
+      "sha256": "9d325037ffb5622efb02e6ab7a2ad3f34027fb0846350767aef40393473e318c"
+    },
+    {
+      "path": "build/t481-s3/editor132/trace.txt",
+      "bytes": 61470,
+      "sha256": "751978cc4a5b7ee3acdb538dc3c5c213a4f797f39aba621b452dce45620830d2"
+    },
+    {
+      "path": "build/t481-s3/editor132/screens.txt",
+      "bytes": 18612,
+      "sha256": "69cbef71fa835ea8a4add36c4f799e39b33eb1a8b86e44db08c2ce79741eb433"
+    }
+  ]
+}

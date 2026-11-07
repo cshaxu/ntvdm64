@@ -1,0 +1,35 @@
+{
+  "case": "VMD callback ABI correction",
+  "originalEvidence": "WIN386 object2 00EE-00F5 reads Client_ES at60 and Client_SI at4",
+  "query079": "2A-01-00-00-00-00-00-00-00-00-00-00-70-0D-01-80-0C-00-00-00-00-00-00-00-01-00-00-00-00-00-00-00-02-32-4A-06-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00",
+  "correction": "Return ES:SI rather than ES:DI",
+  "runs": [
+    {
+      "run": "079",
+      "exit": 1,
+      "mouseCallbacks": 0,
+      "vmCreates": [
+        "7 805e1000 00000001",
+        "7 80798000 00000002",
+        "7 80839000 00000003"
+      ],
+      "hostAdmissions": 0,
+      "traceSha256": "657136305d7e149e9a3980a3185e5836988179f2459a24f9fee82d83c95991ec",
+      "matrixSha256": "f0766a04d55d5f41471e2c9435f23f2b881005c85ffe1e1cef58ac71964622cf"
+    },
+    {
+      "run": "080",
+      "exit": 1,
+      "mouseCallbacks": 0,
+      "vmCreates": [
+        "7 805e1000 00000001",
+        "7 80798000 00000002",
+        "7 8079f000 00000003"
+      ],
+      "hostAdmissions": 0,
+      "traceSha256": "1d903f804459706bce6c7f5e9ac37a83f059f174d3490782b636edb684a91d68",
+      "matrixSha256": "994032d4c85b704f97c697ec6963029225c0b08fce863f60e79d81918e219472"
+    }
+  ],
+  "limitation": "079 used incorrect test ABI. 080 uses corrected ABI but did not reach two prompt reads; no runtime acceptance claimed."
+}

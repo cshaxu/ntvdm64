@@ -26,6 +26,8 @@ BOOL mvdm_softpc_mouse_pending(const mvdm_mouse_bridge *);
 BOOL mvdm_softpc_mouse_active(const mvdm_mouse_bridge *);
 /* Original CCPU painter reads a synchronized route snapshot, never UI state. */
 BOOL mvdm_softpc_mouse_route_active(void);
+/* CPU-side conversion, with the selected original instance extent. */
+DWORD mvdm_softpc_mouse_prepare(mvdm_mouse_bridge *,unsigned,unsigned);
 BOOL mvdm_softpc_mouse_next(mvdm_mouse_bridge *,mvdm_mouse_input_sample *);
 /* After the CPU cursor owner restores the LEAVE background, retire only that
  * consumed route. Later ENTER/MOVE records and producer state survive. */

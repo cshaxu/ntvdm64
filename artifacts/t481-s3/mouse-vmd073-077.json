@@ -1,0 +1,75 @@
+{
+  "runs": [
+    {
+      "run": "073",
+      "exit": 1,
+      "broadcastHits": 0,
+      "enhancedCallbackHits": 0,
+      "hostAdmissions": 0,
+      "files": [
+        {
+          "path": "build/t481-s3/editor073/trace.txt",
+          "sha256": "fd5d817de120bef545c43c2e81c9e22b1c5e9fffe2a6bc18b21db78946180876"
+        },
+        {
+          "path": "build/t481-s3/editor073/runtime/matrix-results.json",
+          "sha256": "8bd0fe09a0de1504220f340f3364c93fff69f44b6fb66881fe652cbe3814edf1"
+        },
+        {
+          "path": "build/t481-s3/editor073/controller.asm",
+          "sha256": "072c8b4591053ffa45f0f44eb4b024a3e53e038bdb2bcab1f08f5813a6085eee"
+        }
+      ]
+    },
+    {
+      "run": "076",
+      "exit": 1,
+      "broadcastHits": 0,
+      "enhancedCallbackHits": 0,
+      "hostAdmissions": 0,
+      "files": [
+        {
+          "path": "build/t481-s3/editor076/trace.txt",
+          "sha256": "9d5377d6e2fae61f09e4232df17c3ea4cfddc02a1632f96545c05ac708921b84"
+        },
+        {
+          "path": "build/t481-s3/editor076/runtime/matrix-results.json",
+          "sha256": "0022aa17673f0e61821c2dfb6fd18391ccc48792b1bd0f3a8e6eef9e122954f4"
+        },
+        {
+          "path": "build/t481-s3/editor076/controller.asm",
+          "sha256": "5dc37d2796298fca4acb33801fa8739ce6bed9c9bcaef9de9df923fb63dee7f9"
+        }
+      ]
+    },
+    {
+      "run": "077",
+      "exit": 1,
+      "broadcastHits": 0,
+      "enhancedCallbackHits": 0,
+      "hostAdmissions": 0,
+      "files": [
+        {
+          "path": "build/t481-s3/editor077/trace.txt",
+          "sha256": "730271ececde5243c6169a3f2ce8521157a624f0e589ad24d769280ee7cd2538"
+        },
+        {
+          "path": "build/t481-s3/editor077/runtime/matrix-results.json",
+          "sha256": "419ceff88611c9903b4518eef3c640ca5e053faf1ee607a52fa43b4e0995d886"
+        },
+        {
+          "path": "build/t481-s3/editor077/controller.asm",
+          "sha256": "7ab3ac9898fca93a7d3ae1c4aa240d5cfcdf7b4e67a2f1bd5ef510396fa93630"
+        }
+      ]
+    }
+  ],
+  "vmdImageHash": "c67e667e25e91c65efb5acddec437da8b586037da7de502228ca8fbd806cf3f8",
+  "vmdModuleOffset": 158720,
+  "vmdDdbObject": 1,
+  "vmdDdbOffset": "0xac8",
+  "vmdV86Api": "0xa11",
+  "vmdPmApi": "0xa11",
+  "guest077VmdApi": "0000:0000",
+  "limits": "No runtime pass; minimal callback bridge alone did not restore delivery. Explicit VMD loading contrast pending."
+}

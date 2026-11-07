@@ -1,0 +1,58 @@
+{
+  "case": "T481 S3 editor135",
+  "exit": 0,
+  "result": {
+    "firstExit": "Dos",
+    "nativeVm": "80836000",
+    "dosVm": "80799000",
+    "menus": true,
+    "completed": 2,
+    "mouseMenu": true,
+    "mouseExitVerified": true,
+    "saveVerified": false
+  },
+  "normalWindowsExit": true,
+  "limits": "Four separate click receipts; zero scrollbar position. DOS cells4,0/4,9 and native cells4,0/4,7. Does not explain failed editor132.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor135/editor-result.json",
+      "bytes": 194,
+      "sha256": "04d1d6f76dc08714bdcd360ca195d278fb7ba82d05b12c2530c725c40116f993"
+    },
+    {
+      "path": "build/t481-s3/editor135/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "9f3167fefa9c06b441346254deb8757176e692b72c4db5c7d31f37f7a7d50f19"
+    },
+    {
+      "path": "build/t481-s3/editor135/controller.asm",
+      "bytes": 13558,
+      "sha256": "f40eb6488769db7646eb4a5c5ab48c7d84b53fb3b82c00dce36e3bb09d5030c3"
+    },
+    {
+      "path": "build/t481-s3/editor135/trace.txt",
+      "bytes": 61220,
+      "sha256": "ef3e5c6afaba39af75d358e46461557fc470d1bec70dde4de787c0d26727a7b5"
+    },
+    {
+      "path": "O:\\tmp\\m481e135\\PATCH\\MOUSE0.BIN",
+      "bytes": 78,
+      "sha256": "dea9db92d865612932bd5f44a98d8846a3cd3142cd6b33883bf039f00b6b6998"
+    },
+    {
+      "path": "O:\\tmp\\m481e135\\PATCH\\MOUSE1.BIN",
+      "bytes": 78,
+      "sha256": "903d0bd83748e4bd5e3e0af913505d08f51d6376b60abd05084e90536304c883"
+    },
+    {
+      "path": "O:\\tmp\\m481e135\\PATCH\\MOUSE2.BIN",
+      "bytes": 78,
+      "sha256": "afbe786051f3ce33d55cdd41ae45c819fb0b61705581b097805ed5d01605e8b2"
+    },
+    {
+      "path": "O:\\tmp\\m481e135\\PATCH\\MOUSE3.BIN",
+      "bytes": 78,
+      "sha256": "c3019501dda7822f041d9e48b33fe48d6f04f1ad7c9ad354ff1350541811cd72"
+    }
+  ]
+}

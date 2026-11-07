@@ -196,6 +196,10 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         result->status = mvdm_vm_executor_bios_key_bop(mvdm_standalone_worker_executor(),
             vm, low, high);
         break;
+    case 19:
+        result->status = mvdm_vm_executor_mouse_bop(mvdm_standalone_worker_executor(),
+            vm, low, high);
+        break;
     case 18:
         result->status = mvdm_vm_executor_return_key_bop(vm, low, high,
             &result->value, &result->serial_low);

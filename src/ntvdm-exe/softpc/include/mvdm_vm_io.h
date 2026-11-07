@@ -16,6 +16,8 @@ extern const ntvdm_vm_io mvdm_vm_io_operations;
 DWORD mvdm_vm_io_key(mvdm_vm_io *, const KEY_EVENT_RECORD *);
 /* Entire translated-character sequence is accepted or left with its producer. */
 DWORD mvdm_vm_io_keys(mvdm_vm_io *, const KEY_EVENT_RECORD *, uint32_t count);
+/* Guest INT33 callback converted to absolute Console cell coordinates. */
+DWORD mvdm_vm_io_mouse(mvdm_vm_io *, const MOUSE_EVENT_RECORD *);
 /* After producers/callbacks join, transfer unread records to the VM owner. */
 DWORD mvdm_vm_io_return_input(mvdm_vm_io *, uint32_t vm, uint64_t generation);
 void mvdm_vm_io_destroy(mvdm_vm_io *); /* Only after callbacks/producers join. */

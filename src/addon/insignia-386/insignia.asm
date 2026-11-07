@@ -23,8 +23,6 @@ control:
     je .system_vm
     cmp eax,7                       ; Create_VM, before any fallible VM_Init
     je .new_vm
-    cmp eax,9                       ; VM_Init (not Create_VM)
-    je .child_vm
     cmp eax,0x0b                    ; VM_Not_Executeable
     je .retire
     cmp eax,5                       ; System_Exit
@@ -47,6 +45,22 @@ control:
     test eax,eax
     jz .fail
     mov [vm_offset],eax
+    ; VMM owns this immutable, shared V86 callback for the Windows lifetime.
+    push dword 4                   ; GVDAParaAlign; not instanced or reclaimed
+    push dword 4
+    vmm_call 0xa8                   ; _Allocate_Global_V86_Data_Area
+    add esp,8
+    test eax,eax
+    jz .fail
+    cmp eax,0xffff0                 ; must be representable as real DS:0000
+    ja .fail
+    mov dword [eax],0xcbbfc4c4      ; original BOP BF, RETF
+    shr eax,4
+    mov [mouse_segment],ax
+    mov eax,0x2f
+    mov esi,mouse_broadcast
+    vmm_call 0x41                  ; Hook_V86_Int_Chain
+    jc .fail
     jmp .ok
 .instance_byte:
     push dword 0
@@ -60,8 +74,7 @@ control:
 .new_vm:
     mov edi,[vm_offset]
     mov dword [ebx+edi],0           ; do not inherit the system VM's live flag
-    jmp .ok
-.child_vm:
+    ; Allocate before Init_VM/BIOS work can touch the inherited instance.
     niddb_call 9                    ; original snapshot -> fresh child instance
 .created:
     jc .fail
@@ -88,6 +101,33 @@ control:
     niddb_call 0x17
     jmp .ok
 
+; VMD's real-mode driver query. Original NIDDB owns the per-VM state.
+; EBP is the VMM Client_Reg_Struc; leave all unrelated broadcasts untouched.
+mouse_broadcast:
+    cmp word [ebp+28],0x1607
+    jne .chain
+    cmp word [ebp+16],0x000c
+    jne .chain
+    cmp word [ebp+24],0
+    je .instanced
+    cmp word [ebp+24],1
+    jne .chain
+    push eax
+    mov ax,[mouse_segment]
+    mov [ebp+60],ax                 ; Client_DS (not Client_ES)
+    pop eax
+    mov word [ebp+4],0              ; Client_SI
+    mov word [ebp+28],0             ; supported callback
+    clc
+    ret
+.instanced:
+    mov word [ebp+24],1             ; mouse state already virtualized by NIDDB
+    clc
+    ret
+.chain:
+    stc
+    ret
+
 segment _LDATA public align=16 class=DATA use32
 global insignia_ddb
 insignia_ddb:
@@ -99,5 +139,6 @@ insignia_ddb:
     dd 0x80000000
     dd control,0,0,0,0,0,0,0
 vm_offset: dd 0
+mouse_segment: dw 0
 instance_item:
     dd 0,0,0x4ac,1,0x200            ; V86 address (not CB_High_Linear), ALWAYS_Field

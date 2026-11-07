@@ -1,0 +1,44 @@
+{
+  "case": "T481 S3 editor145",
+  "exit": 0,
+  "result": {
+    "firstExit": "Native",
+    "nativeVm": "8083b000",
+    "dosVm": "80799000",
+    "menus": true,
+    "completed": 2,
+    "mouseMenu": true,
+    "mouseExitVerified": true,
+    "saveVerified": false
+  },
+  "diagnosticPackage": "package143",
+  "driver": "driver143",
+  "limits": "Actual guest mouse through diagnostic ingress and production providers. Not Full qualification, Win95 or S3 closure.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor145.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t481-s3/editor145/editor-result.json",
+      "bytes": 197,
+      "sha256": "1406912efdeaa0f825c1b46fcc2129908d3381a9a1103212dfc5707cee7511c7"
+    },
+    {
+      "path": "build/t481-s3/editor145/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "a2e687b621443ffada88b440ccde980315de5503e31cd07663ac21284cb6f0fb"
+    },
+    {
+      "path": "build/t481-s3/editor145/controller.asm",
+      "bytes": 13558,
+      "sha256": "2702658db8ade1ce680f575241792a5caba20342534c3c1a876deef79da34a16"
+    },
+    {
+      "path": "build/t481-s3/editor145/trace.txt",
+      "bytes": 61407,
+      "sha256": "48b351bab4af70d2ce88fc217b55300d2b56093c496dd89aaa0eecff2cf4d826"
+    }
+  ]
+}

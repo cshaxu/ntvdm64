@@ -60,13 +60,11 @@ void mvdm_vm_io_destroy(mvdm_vm_io *io)
     CloseHandle(io->ready);
     HeapFree(GetProcessHeap(), 0, io);
 }
-DWORD mvdm_vm_io_keys(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys, uint32_t count)
+static DWORD enqueue_input(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys,
+    const console_io_input *mouse, uint32_t count)
 {
     uint32_t i;
     DWORD error = ERROR_SUCCESS;
-    if (!io || !keys || !count || count > CONSOLE_IO_INPUT_CAPACITY) return ERROR_INVALID_PARAMETER;
-    for (i = 0; i < count; ++i)
-        if (!keys[i].wRepeatCount) return ERROR_INVALID_PARAMETER;
     AcquireSRWLockExclusive(&io->input_lock);
     {
         DWORD state = WaitForSingleObject(mvdm_vm_continuation_invalidated(io->continuation), 0);
@@ -78,18 +76,40 @@ DWORD mvdm_vm_io_keys(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys, uint32_t cou
         else if (!SetEvent(io->ready)) error = GetLastError();
         else {
             for (i = 0; i < count; ++i) {
-                console_io_input wire = {0};
-                wire.type = KEY_EVENT; wire.key_down = keys[i].bKeyDown != FALSE;
-                wire.repeat = keys[i].wRepeatCount; wire.virtual_key = keys[i].wVirtualKeyCode;
-                wire.scan = keys[i].wVirtualScanCode; wire.character = keys[i].uChar.UnicodeChar;
-                wire.control = keys[i].dwControlKeyState;
-                io->keys[(io->head + io->count + i) % CONSOLE_IO_INPUT_CAPACITY] = wire;
+                console_io_input event = {0};
+                if (mouse) event = *mouse;
+                else {
+                    event.type = KEY_EVENT; event.key_down = keys[i].bKeyDown != FALSE;
+                    event.repeat = keys[i].wRepeatCount; event.virtual_key = keys[i].wVirtualKeyCode;
+                    event.scan = keys[i].wVirtualScanCode; event.character = keys[i].uChar.UnicodeChar;
+                    event.control = keys[i].dwControlKeyState;
+                }
+                io->keys[(io->head + io->count + i) % CONSOLE_IO_INPUT_CAPACITY] = event;
             }
             io->count += count;
         }
     }
     ReleaseSRWLockExclusive(&io->input_lock);
     return error;
+}
+DWORD mvdm_vm_io_keys(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys, uint32_t count)
+{
+    uint32_t i;
+    if (!io || !keys || !count || count > CONSOLE_IO_INPUT_CAPACITY) return ERROR_INVALID_PARAMETER;
+    for (i = 0; i < count; ++i)
+        if (!keys[i].wRepeatCount) return ERROR_INVALID_PARAMETER;
+    return enqueue_input(io, keys, NULL, count);
+}
+DWORD mvdm_vm_io_mouse(mvdm_vm_io *io, const MOUSE_EVENT_RECORD *mouse)
+{
+    console_io_input event = {0};
+    if (!io || !mouse || mouse->dwMousePosition.X < 0 || mouse->dwMousePosition.Y < 0 ||
+        (mouse->dwEventFlags != 0 && mouse->dwEventFlags != MOUSE_MOVED))
+        return ERROR_INVALID_PARAMETER;
+    event.type = MOUSE_EVENT; event.x = mouse->dwMousePosition.X;
+    event.y = mouse->dwMousePosition.Y; event.buttons = mouse->dwButtonState;
+    event.control = mouse->dwControlKeyState; event.flags = mouse->dwEventFlags;
+    return enqueue_input(io, NULL, &event, 1);
 }
 DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
 { return mvdm_vm_io_keys(io, key, 1); }
@@ -141,10 +161,17 @@ static DWORD prepend_keys(mvdm_vm_io *io, const console_io_request *request, con
     for (i = 0; i < count; ++i) {
         console_io_input key;
         memcpy(&key, request->data + i * sizeof(key), sizeof(key));
-        if (key.type != KEY_EVENT || !key.repeat || key.repeat > UINT16_MAX ||
-            key.virtual_key > UINT16_MAX || key.scan > UINT16_MAX || key.character > UINT16_MAX ||
-            key.key_down > 1 || key.receipt_low || key.receipt_high)
-            return ERROR_INVALID_DATA;
+        if (key.receipt_low || key.receipt_high) return ERROR_INVALID_DATA;
+        if (key.type == KEY_EVENT) {
+            if (!key.repeat || key.repeat > UINT16_MAX || key.virtual_key > UINT16_MAX ||
+                key.scan > UINT16_MAX || key.character > UINT16_MAX || key.key_down > 1)
+                return ERROR_INVALID_DATA;
+        } else if (key.type == MOUSE_EVENT) {
+            if (key.x < 0 || key.y < 0 || key.x > INT16_MAX || key.y > INT16_MAX ||
+                (key.flags != 0 && key.flags != MOUSE_MOVED) || key.repeat ||
+                key.virtual_key || key.scan || key.character || key.key_down || key.menu || key.focus)
+                return ERROR_INVALID_DATA;
+        } else return ERROR_INVALID_DATA;
     }
     AcquireSRWLockExclusive(&io->input_lock);
     if (count > CONSOLE_IO_INPUT_CAPACITY - io->count) error = ERROR_NOT_ENOUGH_MEMORY;

@@ -1,0 +1,54 @@
+{
+  "case": "T481 S3 editor130",
+  "exit": 0,
+  "result": {
+    "firstExit": "Native",
+    "nativeVm": "8083b000",
+    "dosVm": "80799000",
+    "menus": true,
+    "completed": 2,
+    "mouseMenu": true,
+    "mouseExitVerified": false,
+    "saveVerified": false
+  },
+  "normalWindowsExit": true,
+  "testRepair": "Concurrent NTVDM trace append permits FILE_SHARE_WRITE; editor128 terminated with Win32 error32 before completing mouse input.",
+  "limits": "Diagnostic package only. Native Exit was keyboard, DOS Exit mouse. Both mouse Exit paths and reversed order remain separate tests.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor130/editor-result.json",
+      "bytes": 198,
+      "sha256": "11c032b3f7907f258b6e9fba97c49def5fd4be60b87ce4bac2c3f0dc656f3236"
+    },
+    {
+      "path": "build/t481-s3/editor130/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "c2ae8aaf92c7636879b7a0b2207468a95a26204236fdbbc88c074070c890f334"
+    },
+    {
+      "path": "build/t481-s3/editor130/controller.asm",
+      "bytes": 13150,
+      "sha256": "9f6e6e1cdde2bb68bec3d4134e39afd8872e04d727f6cd8b26eff3b673bfce29"
+    },
+    {
+      "path": "build/t481-s3/editor130/trace.txt",
+      "bytes": 56077,
+      "sha256": "7eb89077bbec209fd8f77f62d7a35412cbfced40546341778a21ced2045631b8"
+    },
+    {
+      "path": "build/t481-s3/editor130/screens.txt",
+      "bytes": 26884,
+      "sha256": "843428b948a942b39c041090a4f56d3b84ee0ed0f3ba57a3490f7e1878ed93a6"
+    },
+    {
+      "path": "build/t481-s3/editor128/runtime/386-dosonly0.observer.txt",
+      "bytes": 570,
+      "sha256": "44cfc7a48d796d36b3757aa8dc30f41b2e8ad5e09278d09f4225720082c28275"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "bytes": 41589,
+      "sha256": "c7df543bf27235d317a95f0c475fa46504f20bed5ba0ec2369f32cb51d588fc7"
+    }
+  ]
+}

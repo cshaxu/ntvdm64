@@ -1,4 +1,5 @@
 #include "mvdm_vm_io.h"
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
 #include "mvdm_vm_bridge.h"
@@ -92,6 +93,87 @@ static DWORD stage_video(ntvdm_vm_text *text, char role)
 
 typedef struct { diagnostic_request *first, *second; } completion_pair;
 static void trace(unsigned operation, uint32_t vm, uint32_t token);
+/* Diagnostic-only pass-through for the original INT33 and enhanced mouse
+ * owners. Observe their real calls; never synthesize a callback or result. */
+extern void mouse_io_interrupt(void), mouse_EM_callback(void);
+extern uint16_t c_getSI(void);
+extern void mouse_int1(void);
+extern uint8_t c_sas_hw_at(uint32_t address);
+extern uint16_t c_getCS(void);
+extern void virtual_device_trap(void);
+extern uint32_t c_getEBX(void);
+void test_virtual_device_trap(void)
+{
+    uint32_t operation=c_getEAX();
+    if(operation!=0x4e544d56) {
+        trace(0x590,operation,c_getEBX());
+        trace(0x591,GetCurrentProcessId(),c_sas_hw_at(0x4ac));
+    }
+    virtual_device_trap();
+    if(operation!=0x4e544d56)
+        trace(0x592,c_getEAX(),c_getCF());
+}
+void test_mouse_record(DWORD pid,const MOUSE_EVENT_RECORD *mouse,DWORD width,DWORD height)
+{
+    trace(0x5a0,pid,mouse->dwEventFlags);
+    trace(0x5a1,(uint32_t)mouse->dwMousePosition.X,(uint32_t)mouse->dwMousePosition.Y);
+    trace(0x5a2,mouse->dwButtonState,mouse->dwControlKeyState);
+    trace(0x5a3,width,height);
+}
+void test_mouse_mode(unsigned after, unsigned mode, unsigned instance_mode, unsigned cs, unsigned ip)
+{
+    trace(0x570+after*3,mode,instance_mode | (GetCurrentProcessId()<<8));
+    trace(0x571+after*3,cs,ip);
+    trace(0x572+after*3,c_sas_hw_at(0x4ac),c_sas_hw_at(0x449));
+}
+void test_mouse_coordinate_state(unsigned video, unsigned instance_mode, unsigned x, unsigned y)
+{
+    trace(0x564,video,instance_mode | (GetCurrentProcessId()<<8));
+    trace(0x565,x,y);
+}
+void test_mouse_coordinates(unsigned mode, int dx, int dy, int old_x, int old_y, int x, int y)
+{
+    {
+        trace(0x560,mode,c_sas_hw_at(0x4ac));
+        trace(0x561,(uint32_t)dx,(uint32_t)dy);
+        trace(0x562,(uint32_t)old_x,(uint32_t)old_y);
+        trace(0x563,(uint32_t)x,(uint32_t)y);
+    }
+}
+void test_mouse_int1(void)
+{
+    mvdm_mouse_bridge *state=mvdm_softpc_mouse_current();
+    trace(0x550,c_sas_hw_at(0x4ac),state?state->queue.count:0);
+    if(state && state->queue.count) {
+        mvdm_mouse_input_sample *sample=&state->queue.samples[state->queue.head];
+        trace(0x551,(uint32_t)sample->dx,(uint32_t)sample->dy);
+    }
+    mouse_int1();
+    trace(0x552,c_getCS(),c_getIP());
+    trace(0x553,GetCurrentProcessId(),c_getAX());
+    trace(0x554,c_getCX(),c_getDX());
+    trace(0x555,c_getBX(),c_getSI());
+}
+void test_mouse_io_interrupt(void)
+{
+    uint16_t function=c_getAX();
+    if(function==0 || function==4 || function==0x0c || function==0x14) {
+        trace(0x516,GetCurrentProcessId(),c_sas_hw_at(0x4ac));
+        trace(0x517,c_getCS(),c_getIP());
+        trace(0x510,function,c_getCX());
+        trace(0x511,c_getES(),c_getDX());
+    }
+    mouse_io_interrupt();
+    if(function==0 || function==0x0c || function==0x14)
+        trace(0x512,c_getAX(),c_getBX());
+}
+void test_mouse_EM_callback(void)
+{
+    trace(0x520,c_getAX(),c_getSI());
+    trace(0x521,c_getBX(),c_getCX());
+    trace(0x522,c_getDX(),c_getES());
+    mouse_EM_callback();
+}
 /* Optional bios.obj link interposition; observe arguments, then call the
  * unchanged original BIOS entry. No guest register or device mutation. */
 static void trace_video(void (*entry)(void), unsigned operation)
@@ -105,7 +187,15 @@ static void trace_video(void (*entry)(void), unsigned operation)
 }
 void test_video_io(void) { trace_video(video_io, 0x320); }
 void test_ega_video_io(void) { trace_video(ega_video_io, 0x324); }
-void test_mouse_video_io(void) { trace_video(mouse_video_io, 0x328); }
+void test_mouse_video_io(void)
+{
+    if ((c_getAX() >> 8) == 0 || c_getAX() == 0x6f05) {
+        trace(0x580,GetCurrentProcessId(),c_sas_hw_at(0x4ac));
+        trace(0x581,c_getAX(),c_getBX());
+        trace(0x582,c_getCS(),c_getIP());
+    }
+    trace_video(mouse_video_io, 0x328);
+}
 /* Optional loader diagnostic: preserve the real DEM read and record its
  * requested extent, destination and actual DOS result. */
 void test_dem_read(void)
@@ -391,7 +481,7 @@ static void trace(unsigned operation, uint32_t vm, uint32_t token)
     length = GetEnvironmentVariableA("MVDM_CONTINUATION_TRACE", path, sizeof(path));
     if (!length || length >= sizeof(path)) return;
     AcquireSRWLockExclusive(&lock);
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
+    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
     length = (DWORD)sprintf_s(line, sizeof(line), "%u %08lx %08lx\n",
@@ -538,6 +628,44 @@ static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
     HeapFree(GetProcessHeap(), 0, cells);
 }
 
+/* Read-only guest DOS screen at its actual VMM high mapping. Unlike host
+ * application frames this also observes DOSONLY1, without admitting a job. */
+static void trace_guest_screen(uint32_t vm, uint32_t base)
+{
+    static struct {uint32_t vm; char text[80*25+26];} prior[16];
+    static FILE *stream;
+    static DWORD editor_seen;
+    char path[MAX_PATH], text[80*25+26];
+    BYTE cells[80*25*2];
+    DWORD i, written;
+    HANDLE file;
+    if (!GetEnvironmentVariableA("MVDM_GUEST_SCREEN", path, sizeof(path))) return;
+    if (!mvdm_softpc_guest_memory_copy_from(base+0xb8000, cells, sizeof(cells))) return;
+    for(i=0;i<80*25;++i) {
+        text[i+i/80]=cells[2*i]>=32 && cells[2*i]<127 ? cells[2*i] : ' ';
+        if(i%80==79) text[i+i/80+1]='\n';
+    }
+    text[80*25+25]=0;
+    for(i=0;i<16 && prior[i].vm && prior[i].vm!=vm;++i) {}
+    if(i==16) ExitProcess(ERROR_BUFFER_OVERFLOW);
+    if(strcmp(prior[i].text,text)) {
+        prior[i].vm=vm;
+        strcpy_s(prior[i].text,sizeof(prior[i].text),text);
+        if(!stream) (void)fopen_s(&stream,path,"ab");
+        if(!stream) ExitProcess(ERROR_OPEN_FAILED);
+        fprintf(stream,"VM=%08lx GUEST 80x25\n%s\n",(unsigned long)vm,text);
+        fflush(stream);
+    }
+    if(!editor_seen && strstr(text,"File") && strstr(text,"Edit") &&
+       GetEnvironmentVariableA("MVDM_EDITORS_READY",path,sizeof(path))) {
+        editor_seen=1;
+        file=CreateFileA(path,GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CREATE_ALWAYS,0,NULL);
+        if(file==INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
+        if(!WriteFile(file,&editor_seen,sizeof(editor_seen),&written,NULL) || written!=sizeof(editor_seen)) ExitProcess(ERROR_WRITE_FAULT);
+        CloseHandle(file);
+    }
+}
+
 int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     uint32_t low, uint32_t high, uint32_t vm, int ring0,
     mvdm_vm_bridge_result *result)
@@ -549,16 +677,67 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     /* Original diagnostic keyboard operations predate the production input
      * ingress/handback BOPs. Real-command tests must use the actual providers,
      * never acknowledge a production handback with an empty diagnostic result. */
-    if (operation >= 16 && operation <= 18 &&
+    if (operation == 19 && GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0)) {
+        uint32_t mouse[7] = {0};
+        int handled = mvdm_vm_bridge_bop_direct(signature, operation, low, high,
+            vm, ring0, result);
+        trace(0x530, vm, result->status);
+        if (high == sizeof(mouse) && mvdm_softpc_guest_memory_copy_from(low,
+                (uint8_t *)mouse, sizeof(mouse))) {
+            trace(0x531, mouse[0], mouse[1]);
+            trace(0x532, mouse[2], mouse[3]);
+            trace(0x533, mouse[4], mouse[5]);
+        }
+        return handled;
+    }
+    if (operation >= 16 && operation <= 19 &&
         GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0))
         return mvdm_vm_bridge_bop_direct(signature, operation, low, high,
             vm, ring0, result);
+    if (operation == 255) {
+        console_mouse_input mouse;
+        ZeroMemory(result,sizeof(*result));
+        if(high!=sizeof(mouse) || !mvdm_softpc_guest_memory_copy_from(low,(BYTE *)&mouse,sizeof(mouse))) {
+            result->status=ERROR_INVALID_PARAMETER;return 1;
+        }
+        {
+            mvdm_mouse_bridge *state=mvdm_softpc_mouse_current();
+            /* The real NTCON window may already own ENTER. The probe joins
+             * that route explicitly; it does not reset or double-enter it. */
+            result->status=mouse.action==CONSOLE_MOUSE_ENTER && state && state->submitted
+                ? ERROR_ALREADY_EXISTS : mvdm_softpc_mouse_submit(state,&mouse);
+        }
+        trace(255,mouse.action,result->status);
+        trace(0x540,(uint32_t)mouse.dx,(uint32_t)mouse.dy);
+        {
+            mvdm_mouse_bridge *state=mvdm_softpc_mouse_current();
+            if(state) {
+                trace(0x541,state->virtual_width,state->virtual_height);
+                trace(0x542,state->queue.count,state->active);
+            }
+        }
+        return 1;
+    }
+    if (operation == 254) {
+        trace_guest_screen(vm,low);
+        ZeroMemory(result,sizeof(*result));
+        return 1;
+    }
     if (operation == 251) {
         static uint32_t readers[16];
         static DWORD count;
         WCHAR path[MAX_PATH];
         DWORD i, written;
         trace(251, vm, 0);
+        trace_guest_screen(vm,low);
+        if(GetEnvironmentVariableW(L"MVDM_READ_TOTAL",path,MAX_PATH)) {
+            static DWORD total;
+            HANDLE file=CreateFileW(path,GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CREATE_ALWAYS,0,NULL);
+            ++total;
+            if(file==INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
+            if(!WriteFile(file,&total,sizeof(total),&written,NULL) || written!=sizeof(total)) ExitProcess(ERROR_WRITE_FAULT);
+            CloseHandle(file);
+        }
         ZeroMemory(result, sizeof(*result));
         if (!GetEnvironmentVariableW(L"MVDM_PROMPT_READERS", path, MAX_PATH)) return 1;
         for (i = 0; i < count; ++i) if (readers[i] == vm) return 1;

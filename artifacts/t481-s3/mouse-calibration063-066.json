@@ -1,0 +1,82 @@
+[
+  {
+    "case": "063",
+    "result": "failed calibration",
+    "files": [
+      {
+        "path": "build/t481-s3/editor063/runtime/matrix-results.json",
+        "bytes": 429,
+        "sha256": "3ec568577dd9610737c540e3fe590ba2baa7ed0e3f932b6da625adfeb62f3227"
+      },
+      {
+        "path": "build/t481-s3/editor063/runtime/386-dosonly1.observer.txt",
+        "bytes": 15461,
+        "sha256": "c837e6ea7b9de24eee2bfe7f91dcc84d05e4b66670ab98169a367766532f2e76"
+      },
+      {
+        "path": "build/t481-s3/editor063/trace.txt",
+        "bytes": 37381,
+        "sha256": "ad22b33df74d4b4eaabe0a14dee60985e0aa49c266a1196d060f96ece0fb7a62"
+      }
+    ]
+  },
+  {
+    "case": "064",
+    "result": "failed calibration",
+    "files": [
+      {
+        "path": "build/t481-s3/editor064/runtime/matrix-results.json",
+        "bytes": 429,
+        "sha256": "8daded3587f76e9608292d05fc652b0e12d694eac7bcd88c34858f1bd1273205"
+      },
+      {
+        "path": "build/t481-s3/editor064/runtime/386-dosonly1.observer.txt",
+        "bytes": 15258,
+        "sha256": "25aede96d8becb71d34dbf9cf62f6770b27802d349e463de84d356468be75832"
+      },
+      {
+        "path": "build/t481-s3/editor064/trace.txt",
+        "bytes": 38002,
+        "sha256": "62c0186e88f21506c78419ea9a727335b48ab107ecbcbcc0a2f6126968bafcf9"
+      }
+    ],
+    "geometry": {
+      "client": [
+        0,
+        0,
+        600,
+        301
+      ],
+      "target": [
+        69,
+        51
+      ],
+      "actualCursor": [
+        320,
+        240
+      ]
+    }
+  },
+  {
+    "case": "066",
+    "result": "failed calibration",
+    "files": [
+      {
+        "path": "build/t481-s3/editor066/runtime/matrix-results.json",
+        "bytes": 429,
+        "sha256": "6822b94bf00daeeff51ae178cd611636f0c352d023c9fe54a42cbca869389f55"
+      },
+      {
+        "path": "build/t481-s3/editor066/runtime/386-dosonly1.observer.txt",
+        "bytes": 15164,
+        "sha256": "f841f79805a6ff4778af21e05ce62cc1be52e1f20384ea8717fb1da88802a788"
+      },
+      {
+        "path": "build/t481-s3/editor066/trace.txt",
+        "bytes": 55230,
+        "sha256": "09549e6a15cac1039116922b565d7b12a74d45cca15b940a4ecf5fdc2fbdd25b"
+      }
+    ],
+    "inputError": "ERROR_INVALID_STATE: duplicate ENTER on an already submitted NTCON Window mouse route"
+  }
+]

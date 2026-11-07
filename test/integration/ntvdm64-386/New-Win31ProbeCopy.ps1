@@ -6,7 +6,8 @@ param(
  [Parameter(Mandatory)][string]$InstallRoot,
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$InterruptObserver,
- [string]$RetirementDriver
+ [string]$RetirementDriver,
+ [string]$InstanceDriver
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
@@ -57,6 +58,15 @@ $s=[regex]::Replace($s,'(?ims)^\[386Enh\]\r?\n(?<body>.*?)(?=^\[|\z)',{
 })
 [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
 Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.386"
+if($InstanceDriver){
+ $instance=(Resolve-Path -LiteralPath $InstanceDriver).Path
+ $s=[regex]::Replace($s,'(?im)^[ \t]*device[ \t]*=[^\r\n]*insignia\.386[ \t]*(?:\r?\n|$)','')
+ Copy-Item -LiteralPath $instance -Destination "$dest/PATCH/INSIGNIA.386"
+ $s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\INSIGNIA.386")
+ [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
+ [ordered]@{source=$instance;sha256=(Get-FileHash $instance).Hash;installed=(Get-FileHash "$dest/PATCH/INSIGNIA.386").Hash}|
+  ConvertTo-Json|Set-Content "$task/instance-driver.json"
+}
 if($InterruptObserver){
  Copy-Item -LiteralPath (Resolve-Path -LiteralPath $InterruptObserver).Path -Destination "$dest/PATCH/INTS.386"
  $s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\INTS.386")

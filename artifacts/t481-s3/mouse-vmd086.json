@@ -1,0 +1,56 @@
+{
+  "case": "DOSONLY1 actual guest mouse File menu",
+  "pid": 27592,
+  "exit": 0,
+  "result": {
+    "dosonly": 1,
+    "guestEditorMenu": true,
+    "mouseMenu": true,
+    "hostCommandAdmissions": 0,
+    "normalExit": true
+  },
+  "provider": "original mouse_EM_callback through BOP BF",
+  "configuration": "explicit original VMD plus independent diagnostic DS:SI callback bridge and published NIDDB companion",
+  "limits": [
+    "File opened by actual mouse; Exit selected with keyboard X, not mouse",
+    "diagnostic TSR only, not production integration",
+    "native payload mouse routing still unqualified"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor086/editor-result.json",
+      "bytes": 126,
+      "sha256": "fea0bf4c01fabfc24eb997cd5d4fe8f51d46e65b99d8cc8db896cb9d5e13ee00"
+    },
+    {
+      "path": "build/t481-s3/editor086/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "3808123e6488d1f59bcf08534bdb8eb7fc2e467241035b77c784dd1a37d99431"
+    },
+    {
+      "path": "build/t481-s3/editor086/trace.txt",
+      "bytes": 22312,
+      "sha256": "8d0bd22dc8b77b5d7f9e373c23a59227ff50fc0d7b4f92f498a4fa79ad6526c6"
+    },
+    {
+      "path": "build/t481-s3/editor086/screens.txt",
+      "bytes": 155800,
+      "sha256": "45845aafd9f8055dbcce064844c81bf608c58be57b5373b13e078cc90815088d"
+    },
+    {
+      "path": "build/t481-s3/mcall086.com",
+      "bytes": 138,
+      "sha256": "2ffbb42944690680e8be81a70653a7fb0caed316f40a79a81de733c829e18eb6"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/mouse-vmd-callout.asm",
+      "bytes": 1556,
+      "sha256": "69aba8f8e457528f5f3219bc671bc3a338f70afbbc604f9900b0eb4c48cdd0e0"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/editor-actions.inc",
+      "bytes": 2247,
+      "sha256": "007fc4f7f43ea97d84d2a14c73974fd850beab90790a24f474dcae467fd9c953"
+    }
+  ]
+}

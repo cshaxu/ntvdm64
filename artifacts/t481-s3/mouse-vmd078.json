@@ -1,0 +1,28 @@
+{
+  "run": "editor078",
+  "pid": 4276,
+  "exit": 1,
+  "configuration": "isolated device=*vmd plus diagnostic DOS callout bridge",
+  "vmdApi": "003B:0370",
+  "vmdVersion": "0300",
+  "broadcasts": [
+    "2567 805e1000 00000001",
+    "2567 805e1000 00000000"
+  ],
+  "enhancedCallbackHits": 0,
+  "normalExit": false,
+  "files": [
+    {
+      "path": "build/t481-s3/editor078/trace.txt",
+      "sha256": "f896626285cef2a793991a126cece5fcb9b00fd111c31abc944edf3782a2ff84"
+    },
+    {
+      "path": "build/t481-s3/editor078/runtime/matrix-results.json",
+      "sha256": "9d8a501d0d4b3ac2a5267e218339c85ab7e9b316b92c9579e8e665d6a6774d64"
+    },
+    {
+      "path": "O:/tmp/m481e78/PATCH/MOUSE.BIN",
+      "sha256": "0bfd8e7586a9d26ce0dd867304d95639ca389c79a633ae62e1f6b27c8d34bcfc"
+    }
+  ]
+}

@@ -41,7 +41,10 @@ vm_token_high equ 32
 vm_physical equ 36
 vm_return_word equ 40
 vm_return_repeat equ 44
-vm_bytes equ 48
+vm_mouse_saved equ 48
+vm_mouse_mask equ 52
+vm_mouse_address equ 56
+vm_bytes equ 60
 screen_header equ 36
 
 segment _LTEXT public align=16 class=CODE use32
@@ -88,6 +91,12 @@ control:
     test eax, eax
     jz .fail
     mov [command_callback], eax
+    mov esi, mouse_event
+    xor edx, edx
+    vmm_call 0x0b
+    test eax, eax
+    jz .fail
+    mov [mouse_callback], eax
     jmp .ok
 .create:
     mov edi, [vm_offset]
@@ -114,6 +123,7 @@ control:
     mov dword [edi+vm_token_low], 0
     mov dword [edi+vm_token_high], 0
     mov dword [edi+vm_physical], 0
+    mov dword [edi+vm_mouse_saved], 0
     mov dword [edi+vm_return_repeat], 0
     cmp dword [esp+28], 1           ; saved Device_Init, only the system VM
     je .notification_init
@@ -457,6 +467,107 @@ bios_return:
     stc
     ret
 
+; Exchange the original per-VM INT33 callback, without resetting its mouse.
+; Save full client state so neither setup nor restoration changes COMMAND results.
+mouse_install:
+    pushad
+    mov edi, [vm_offset]
+    add edi, ebx
+    mov dword [edi+vm_mouse_saved], 1
+    mov eax, [mouse_callback]
+    mov [edi+vm_mouse_address], eax
+    mov dword [edi+vm_mouse_mask], 0x7f
+    call mouse_exchange
+    popad
+    ret
+mouse_restore:
+    pushad
+    mov edi, [vm_offset]
+    add edi, ebx
+    cmp dword [edi+vm_mouse_saved], 0
+    je .done
+    call mouse_exchange
+    mov dword [edi+vm_mouse_saved], 0
+.done:
+    popad
+    ret
+mouse_exchange:
+    pushad
+    sub esp, 108
+    mov edi, esp
+    vmm_call 0x8d
+    vmm_call 0x82
+    mov edi, [vm_offset]
+    add edi, ebx
+    mov eax, [edi+vm_mouse_mask]
+    mov [ebp+client_ecx], ax
+    mov eax, [edi+vm_mouse_address]
+    mov [ebp+client_edx], ax
+    shr eax, 16
+    mov [ebp+56], ax                ; Client_ES
+    mov word [ebp+client_eax], 0x14
+    mov eax, 0x33
+    vmm_call 0x84
+    mov edi, [vm_offset]
+    add edi, ebx
+    movzx eax, word [ebp+client_ecx]
+    mov [edi+vm_mouse_mask], eax
+    movzx eax, word [ebp+56]
+    shl eax, 16
+    mov ax, [ebp+client_edx]
+    mov [edi+vm_mouse_address], eax
+    vmm_call 0x86
+    mov esi, esp
+    vmm_call 0x8e
+    add esp, 108
+    popad
+    ret
+mouse_event:
+    pushad
+    mov edi, [vm_offset]
+    add edi, ebx
+    cmp dword [edi+vm_executable], 1
+    jne .done
+    mov eax, [edi+vm_token_low]
+    mov edx, [edi+vm_token_high]
+    mov ecx, eax
+    or ecx, edx
+    jz .done
+    sub esp, 28
+    mov [esp], eax
+    mov [esp+4], edx
+    movzx eax, word [ebp+client_eax]
+    mov [esp+8], eax                ; original INT33 event mask
+    movzx eax, word [ebp+client_ebx]
+    mov [esp+12], eax               ; buttons
+    mov edx, [ebx+4]
+    movzx eax, word [ebp+client_ecx]
+    shr eax, 3                     ; original text grid is 8x8 in modes 2/3/7
+    cmp byte [edx+0x449], 1
+    ja .column_ready
+    shr eax, 1                     ; modes 0/1 use 16x8, not font pixels
+.column_ready:
+    mov [esp+16], eax
+    movzx eax, word [ebp+client_edx]
+    shr eax, 3
+    mov [esp+20], eax
+    movzx eax, byte [edx+0x496]
+    shl eax, 16
+    mov ax, [edx+0x417]
+    mov [esp+24], eax               ; same BIOS flags/extended state as keyboard
+    mov edx, esp
+    mov esi, 28
+    host_notify 19
+    test eax, eax
+    jz .accepted
+    mov [irq_error], eax            ; preserve failure, never report accepted
+.accepted:
+    add esp, 28
+.done:
+    popad
+    vmm_call 0x4a                   ; original mouse_int2 FAR return frame
+    ret
+
 ; Candidate translated characters plus actual raw break notifications.
 ; Original BIOS/VKD still own scan translation, prefixes and modifier state.
 ; The host matches a break only to a make accepted by this exact VM/token.
@@ -616,6 +727,7 @@ command_return:
     call command_screen
     test eax, eax
     jnz .snapshot_failed
+    call mouse_install
     push esi                       ; copied text snapshot extent
     push edx                       ; temporary VMM heap, released after BOP
     lea eax, [esp+8]
@@ -682,6 +794,8 @@ command_return:
     mov [ebp+client_eax], al
     and dword [ebp+client_flags], ~1
 .done:
+    mov ebx, [esp+16]
+    call mouse_restore
     mov edi, [vm_offset]
     add edi, [esp+16]
     mov dword [edi+vm_token_low], 0
@@ -692,6 +806,8 @@ command_return:
 .snapshot_failed:
     add esp, 64
 .begin_failed:
+    mov ebx, [esp+16]
+    call mouse_restore
     mov edi, [vm_offset]
     add edi, [esp+16]
     mov dword [edi+vm_waiting], 0
@@ -1404,6 +1520,7 @@ generation_low: dd 0
 generation_high: dd 0
 v86_callback: dd 0
 command_callback: dd 0
+mouse_callback: dd 0
 directory_buffer: dd 0
 irq_handle: dd 0
 irq_serial_low: dd 0

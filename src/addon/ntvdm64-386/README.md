@@ -105,3 +105,27 @@ It is research evidence, not an imported source or build dependency.
 
 The [stage plan](../../../docs/etc/operations/m0-t479-guest-bridge-plan.md)
 owns the implementation sequence and executable acceptance requirements.
+
+## Win3.1 mouse integration candidate (T481 S3)
+
+The paired authored drivers have distinct owners: INSIGNIA.386 supplies original
+NIDDB VM lifetime and the VMD BOP BF callback contract; NTVDM64.386 temporarily
+exchanges the VM's INT33 callback while its host command token is live. It
+restores the previous callback on admission failure and command completion.
+The host validates VM plus token before queuing copied text-cell mouse records.
+No original guest binary is modified.
+
+The isolated verified profile loads all three entries under `[386Enh]`:
+
+```ini
+device=*vmd
+device=<addon-directory>\INSIGNIA.386
+device=<addon-directory>\NTVDM64.386
+```
+
+Use a single entry for each driver. `mouse=*vmd` alone did not load VMD in the
+observed profile. These are configuration requirements, not permission to
+replace the original VMD or install addons in host system32. Addon publication
+belongs only in assets/release. Current candidate test evidence and unresolved
+qualification are tracked in the T481 working plan; this section does not
+qualify Win95 or supersede the last published addon manifest.

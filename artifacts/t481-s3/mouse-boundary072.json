@@ -1,0 +1,49 @@
+{
+  "case": "DOSONLY1 windowed EDIT mouse callback boundary",
+  "pid": 26444,
+  "exit": 1,
+  "normalExit": false,
+  "int33Registration": 3,
+  "enhancedMouseCallbackHits": 0,
+  "mouseSubmission": [
+    "255 00000001 000000b7",
+    "255 00000002 00000000",
+    "255 00000002 00000000",
+    "255 00000002 00000000",
+    "255 00000002 00000000"
+  ],
+  "hostCommandAdmissions": 0,
+  "interpretation": "INT33 callback registered; actual relative moves/buttons accepted; no BOP BF observed; menu and normal exit failed. Absence of BF alone does not prove the missing VMD binding or justify a replacement.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/diagnostic071.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t481-s3/editor072/trace.txt",
+      "bytes": 50706,
+      "sha256": "5aeeacf08f855c0d54e950988baae4a4d0722fd36249fb77df249dfcf563992c"
+    },
+    {
+      "path": "build/t481-s3/editor072/screens.txt",
+      "bytes": 129150,
+      "sha256": "cdf673c189d32bd89c46181b22cde1c5444a6477bbd61d3d59acb5514d914de1"
+    },
+    {
+      "path": "build/t481-s3/editor072/runtime/matrix-results.json",
+      "bytes": 429,
+      "sha256": "f024bad2f3e17249746e3ce1965da8d1955b1b11a611846714142bafdbde829f"
+    },
+    {
+      "path": "build/t481-s3/editor072.exit",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "bytes": 38224,
+      "sha256": "ba5fc5ceee78ab01f54d8c1513e589865e54e984333c280fe48bc121333545d7"
+    }
+  ]
+}

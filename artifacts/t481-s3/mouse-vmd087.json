@@ -1,0 +1,45 @@
+{
+  "case": "DOSONLY1 VMD mouse with production addon candidate, no diagnostic TSR",
+  "pid": 5348,
+  "exit": 0,
+  "result": {
+    "dosonly": 1,
+    "guestEditorMenu": true,
+    "mouseMenu": true,
+    "hostCommandAdmissions": 0,
+    "normalExit": true
+  },
+  "configuration": "Explicit original VMD, authored insignia087; original guest unchanged",
+  "inputs": [
+    {
+      "path": "src/addon/insignia-386/insignia.asm",
+      "bytes": 4137,
+      "sha256": "862b64ad76db0e4acee481787ac57a13b7b70cb818998bdf20fc7d9fcc51e728"
+    },
+    {
+      "path": "build/t481-s3/insignia087/insignia.386",
+      "bytes": 4674,
+      "sha256": "91362b7a43791c967ed6c773bc5e7bbd20572bbfda3c4bb808d1cff62e1f4d66"
+    },
+    {
+      "path": "build/t481-s3/editor087/editor-result.json",
+      "bytes": 126,
+      "sha256": "fea0bf4c01fabfc24eb997cd5d4fe8f51d46e65b99d8cc8db896cb9d5e13ee00"
+    },
+    {
+      "path": "build/t481-s3/editor087/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "0a4714f73a4a30c0fda9f372b13a1004e29d48f2dfadacb5b7a64ae2b74b709d"
+    },
+    {
+      "path": "build/t481-s3/editor087/trace.txt",
+      "bytes": 22082,
+      "sha256": "f816a48bfbcaa77cfc654a5bce7323e1dfcbe43309eacf6fdfeebf1cd8018bdb"
+    }
+  ],
+  "limits": [
+    "Diagnostic host observation package071, not full production gate",
+    "Mouse opens File; Exit still keyboard",
+    "Native payload mouse and direct host chain inventory not yet qualified"
+  ]
+}

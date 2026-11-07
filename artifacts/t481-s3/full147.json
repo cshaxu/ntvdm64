@@ -1,0 +1,30 @@
+{
+  "case": "T481 S3 Full147",
+  "exit": 0,
+  "suite": "Full",
+  "gates": 16,
+  "failed": 0,
+  "limits": "Current production candidate143. Full gate plus editor144-146 qualify bounded mouse/DOSONLY delivery, not remaining S3 or Win95.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/full147.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "build/t481-s3/r147-verification/full/timings.json",
+      "bytes": 2098,
+      "sha256": "5efe0d228137db23e98cf584e4d1b57dd3ca354ece99fb8d2f0c102b7e1965a9"
+    },
+    {
+      "path": "build/t481-s3/r147-package/product-system32-manifest.json",
+      "bytes": 3665,
+      "sha256": "1ffb141da594bc1599c21021c74a93e5e49e7ee41a1f177447ddff35b14d8a06"
+    },
+    {
+      "path": "build/t481-s3/cached139.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    }
+  ]
+}

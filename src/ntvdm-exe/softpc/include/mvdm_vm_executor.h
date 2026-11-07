@@ -33,6 +33,9 @@ DWORD mvdm_vm_executor_key_bop(mvdm_vm_executor *, uint32_t vm,
  * Failure leaves the producer's event and pairing state unconsumed. */
 DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *, uint32_t vm,
     uint32_t address, uint32_t extent);
+/* Token low/high, INT33 mask, buttons, text cells X/Y, BIOS417. */
+DWORD mvdm_vm_executor_mouse_bop(mvdm_vm_executor *, uint32_t vm,
+    uint32_t address, uint32_t extent);
 /* CPU-only generation low/high and active OEM code page. Transfer one
  * converted BIOS word/repeat count; failed conversion keeps the record. */
 DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,

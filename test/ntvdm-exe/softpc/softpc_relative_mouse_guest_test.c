@@ -20,6 +20,9 @@
 word VirtualX=640,VirtualY=200;
 IU8 Currently_emulated_video_mode=3;
 MOUSE_STATUS os_pointer_data;
+static MM_INSTANCE_DATA mouse_instance;
+static MM_INSTANCE_DATA *mouse_instance_ptr=&mouse_instance;
+MM_INSTANCE_DATA_HANDLE mm_handle=&mouse_instance_ptr;
 static BOOL bFunctionZeroReset,bFunctionFour;
 static IS16 newF4x,newF4y;
 static struct { BOOL bF7,bF8; IS16 xmin,xmax,ymin,ymax; } confine;
@@ -54,6 +57,8 @@ int main(void)
 {
     MOUSE_CURSOR_STATUS cursor={0};MOUSE_VECTOR counter={0};
     int x=100,y=50;BOOL unchanged=FALSE;
+    current_video_mode=3;
+    virtual_screen.bottom_right.x=640;virtual_screen.bottom_right.y=200;
     cursor.position.x=100;cursor.position.y=50;
 #define APPLY() mvdm_softpc_mouse_apply(&cursor,&counter,&x,&y,&unchanged, \
     bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y)
@@ -95,16 +100,17 @@ int main(void)
     assert(APPLY() && x==244 && y==90);
     mvdm_softpc_mouse_cancel(&bridge);
     /* Video 7 mode 67h is represented as 1bh in the BIOS data area. */
-    bios_mode=0x1b;Currently_emulated_video_mode=0x67;VirtualY=480;
+    bios_mode=0x1b;Currently_emulated_video_mode=3;VirtualY=200;
+    current_video_mode=0x67;virtual_screen.bottom_right.y=480;
     bFunctionFour=TRUE;newF4x=0;newF4y=0;
     receive(CONSOLE_MOUSE_MOVE,0,1000,0);
     assert(APPLY() && y==479);
     mvdm_softpc_mouse_cancel(&bridge);
-    /* A nonmatching actual mode must retain the normal unknown-mode limit. */
+    /* Host video cache is irrelevant: selected instance owns graphics bounds. */
     Currently_emulated_video_mode=0x12;
     bFunctionFour=TRUE;newF4x=0;newF4y=0;
     receive(CONSOLE_MOUSE_MOVE,0,1000,0);
-    assert(APPLY() && y==199);
+    assert(APPLY() && y==479);
     mvdm_softpc_mouse_cancel(&bridge);
     puts("PASS production mouse adapter: copied ingress, original coordinates, reset/position, idle buttons, overflow, release/re-entry; memory/IRQ mocked, cursor drawing untested");
     return 0;

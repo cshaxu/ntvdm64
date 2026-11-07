@@ -245,6 +245,35 @@ static void provider_tests(mvdm_vm_continuation *continuation)
             ((console_io_input *)data)[2].character == 'a');
         CHECK(WaitForSingleObject(mvdm_vm_io_ready(a), 0) == WAIT_TIMEOUT);
     }
+    {
+        MOUSE_EVENT_RECORD mouse = {{4, 9}, FROM_LEFT_1ST_BUTTON_PRESSED, SHIFT_PRESSED, 0};
+        CHECK(!mvdm_vm_io_mouse(a, &mouse));
+        CHECK(!mvdm_vm_io_operations.input_pending(b, &pending) && !pending);
+        q.operation = CONSOLE_IO_READ_INPUT; q.state.count = 1; q.state.mode = 0;
+        CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 1);
+        CHECK(((console_io_input *)data)->type == MOUSE_EVENT &&
+            ((console_io_input *)data)->x == 4 && ((console_io_input *)data)->y == 9 &&
+            ((console_io_input *)data)->buttons == FROM_LEFT_1ST_BUTTON_PRESSED &&
+            ((console_io_input *)data)->control == SHIFT_PRESSED);
+        {
+            console_io_input returned = *(console_io_input *)data;
+            q.operation = CONSOLE_IO_PREPEND_KEYS; q.state.count = 1;
+            q.data = (BYTE *)&returned; q.bytes = sizeof(returned);
+            returned.x = -1;
+            CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+            CHECK(!r.result && r.error == ERROR_INVALID_DATA);
+            returned.x = 4;
+            CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+            CHECK(r.result && r.state.count == 1);
+            q.operation = CONSOLE_IO_READ_INPUT; q.data = NULL; q.bytes = 0;
+            CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result));
+            CHECK(r.result && r.state.count == 1 && !memcmp(data, &returned, sizeof(returned)));
+        }
+        mouse.dwMousePosition.X = -1;
+        CHECK(mvdm_vm_io_mouse(a, &mouse) == ERROR_INVALID_PARAMETER);
+        CHECK(WaitForSingleObject(mvdm_vm_io_ready(a), 0) == WAIT_TIMEOUT);
+    }
     q.operation = CONSOLE_IO_SET_MODE; q.state.input = 1;
     q.state.mode = ENABLE_EXTENDED_FLAGS | ENABLE_MOUSE_INPUT | ENABLE_WINDOW_INPUT;
     CHECK(!mvdm_vm_io_operations.dispatch(a, &cancel, &q, &r, &result) && r.result);
@@ -672,6 +701,37 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
     }
     CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
     CHECK(!mvdm_vm_io_operations.input_pending(executor_input[2], &pending) && !pending);
+    {
+        uint32_t mouse[7] = {descriptor[0], descriptor[1], 3, 1, 4, 9, 3};
+        memcpy(guest_memory, mouse, sizeof(mouse));
+        CHECK(mvdm_vm_executor_mouse_bop(executor, 2, 0, 28) == ERROR_NOT_FOUND);
+        CHECK(mvdm_vm_executor_mouse_bop(executor, 1, 0, 24) == ERROR_INVALID_PARAMETER);
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 19, 0, 28, 1, 1, &bridge));
+        CHECK(!bridge.status);
+        memset(guest_memory, 0xff, sizeof(guest_memory));
+        q.operation = CONSOLE_IO_READ_INPUT; q.state.count = 2;
+        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 1 && received[0].type == MOUSE_EVENT);
+        CHECK(received[0].x == 4 && received[0].y == 9 && received[0].buttons == 1 &&
+            received[0].control == SHIFT_PRESSED && received[0].flags == 0);
+        CHECK(!mvdm_vm_io_operations.input_pending(executor_input[2], &pending) && !pending);
+        mouse[6] = 0x7f; /* BIOS modifiers and all three lock toggles. */
+        memcpy(guest_memory, mouse, sizeof(mouse));
+        CHECK(!mvdm_vm_executor_mouse_bop(executor, 1, 0, 28));
+        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 1 && received[0].control ==
+            (SHIFT_PRESSED | LEFT_CTRL_PRESSED | LEFT_ALT_PRESSED |
+             CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON));
+        mouse[6] = 0x0c007c; /* Right Ctrl/Alt, three locks, no left side. */
+        memcpy(guest_memory, mouse, sizeof(mouse));
+        CHECK(!mvdm_vm_executor_mouse_bop(executor, 1, 0, 28));
+        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 1 && received[0].control ==
+            (RIGHT_CTRL_PRESSED | RIGHT_ALT_PRESSED | CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON));
+        mouse[0] ^= 0x80000000;
+        memcpy(guest_memory, mouse, sizeof(mouse));
+        CHECK(mvdm_vm_executor_mouse_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
+    }
     {
         uint32_t bios[7] = {(uint32_t)token, (uint32_t)(token >> 32), 0x1e,
             1, 0x1e61, 0, 0};

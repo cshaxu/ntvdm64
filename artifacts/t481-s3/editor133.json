@@ -1,0 +1,38 @@
+{
+  "case": "T481 S3 editor133",
+  "exit": 0,
+  "interpretation": "DOSONLY1 guest EDIT mouse File/Exit, native EDIT rejection, zero host command admission and normal Windows exit pass. Separate host registry inventory assertion remains open.",
+  "diagnosticPackage": "package129",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor133.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t481-s3/editor133/controller.asm",
+      "bytes": 13255,
+      "sha256": "9b8ddc5fb4636fcd4d4c9a3e4ffb2e9033314d70750cf207e8d39f5f1e76eade"
+    },
+    {
+      "path": "build/t481-s3/editor133/trace.txt",
+      "bytes": 43036,
+      "sha256": "94e8c0359810de996e8da66e975935486e785dea313b42aeefb993c069a0f3e6"
+    },
+    {
+      "path": "build/t481-s3/editor133/screens.txt",
+      "bytes": 155800,
+      "sha256": "36a835c9f0a66373726b1d822c1fa9bbdeffeeb05c64d0c1ccc3bc18e087b59c"
+    },
+    {
+      "path": "build/t481-s3/editor133/editor-result.json",
+      "bytes": 126,
+      "sha256": "fea0bf4c01fabfc24eb997cd5d4fe8f51d46e65b99d8cc8db896cb9d5e13ee00"
+    },
+    {
+      "path": "build/t481-s3/editor133/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "37694617bd048c71a2c7c77a740c356ed00e54580e8a0a1f905879ad846d04a9"
+    }
+  ]
+}

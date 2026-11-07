@@ -306,6 +306,37 @@ DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *owner, uint32_t vm,
     return error;
 }
 
+DWORD mvdm_vm_executor_mouse_bop(mvdm_vm_executor *owner, uint32_t vm,
+    uint32_t address, uint32_t extent)
+{
+    uint32_t d[7];
+    uint64_t token;
+    command_job *job;
+    MOUSE_EVENT_RECORD mouse = {0};
+    DWORD error = ERROR_NOT_FOUND;
+    if (!owner) return ERROR_NOT_READY;
+    if (extent != sizeof(d)) return ERROR_INVALID_PARAMETER;
+    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)d, sizeof(d)))
+        return ERROR_INVALID_ADDRESS;
+    if (!d[2] || d[2] > 127 || d[3] > 7 || d[4] > INT16_MAX ||
+        d[5] > INT16_MAX || d[6] > 0xffffffu) return ERROR_INVALID_DATA;
+    token = ((uint64_t)d[1] << 32) | d[0];
+    mouse.dwMousePosition.X = (SHORT)d[4];
+    mouse.dwMousePosition.Y = (SHORT)d[5];
+    mouse.dwButtonState = (d[3] & 1 ? FROM_LEFT_1ST_BUTTON_PRESSED : 0) |
+        (d[3] & 2 ? RIGHTMOST_BUTTON_PRESSED : 0) |
+        (d[3] & 4 ? FROM_LEFT_2ND_BUTTON_PRESSED : 0);
+    mouse.dwControlKeyState = bios_controls(d[6] & 0xffffu, d[6] >> 16, 0);
+    mouse.dwEventFlags = (d[2] & 0x7e) ? 0 : MOUSE_MOVED;
+    AcquireSRWLockExclusive(&owner->lock);
+    for (job = owner->jobs; job; job = job->next)
+        if (job->vm == vm && job->token == token) break;
+    if (job && !job->finishing && !owner->closing)
+        error = mvdm_vm_io_mouse(job->io, &mouse);
+    ReleaseSRWLockExclusive(&owner->lock);
+    return error;
+}
+
 static DWORD bios_key_modifiers(DWORD flags)
 {
     DWORD result = flags & SHIFT_PRESSED;

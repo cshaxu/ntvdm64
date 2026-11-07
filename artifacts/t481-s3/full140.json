@@ -1,0 +1,30 @@
+{
+  "case": "T481 S3 Full140",
+  "exit": 0,
+  "suite": "Full",
+  "gates": 16,
+  "failed": 0,
+  "limits": "Frozen pre142 modifiers package. Latest candidate143 qualification144-147 is separate; no publication.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/full140.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "build/t481-s3/r140-verification/full/timings.json",
+      "bytes": 2098,
+      "sha256": "f7c123a28bcffcf73329e859fa5bf3bc28c2a7e04d847861df6318d259098818"
+    },
+    {
+      "path": "build/t481-s3/r140-package/product-system32-manifest.json",
+      "bytes": 3665,
+      "sha256": "dd96bec17cd65d3bd5a332e4ec7a4c5b260546cdd589620bdb66575ff6a50017"
+    },
+    {
+      "path": "build/t481-s3/cached139.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    }
+  ]
+}

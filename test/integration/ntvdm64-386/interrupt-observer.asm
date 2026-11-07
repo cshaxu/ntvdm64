@@ -30,6 +30,16 @@ control:
     int 0x20
     dd 0x10041
     jc .failed
+    mov eax, 0x2f
+    mov esi, observe_mouse_broadcast
+    int 0x20
+    dd 0x10041
+    jc .failed
+    mov eax, 0x16
+    mov esi, observe_bios_read
+    int 0x20
+    dd 0x10041
+    jc .failed
     popad
 .ok:
     clc
@@ -46,16 +56,42 @@ observe:
     mov eax, 0x4e544d56
     mov ecx, 250                    ; diagnostic host only; no product service
     db 0xc4,0xc4,0xb1
+    cmp dword [esp+28], 8         ; sample display during actual timer delivery
+    jne .done
+    mov ebx, [esp+16]             ; BOP returns its value in EBX; restore VM identity
+    mov edx, [ebx+4]
+    xor esi, esi
+    mov eax, 0x4e544d56
+    mov ecx, 254
+    db 0xc4,0xc4,0xb1
+.done:
     popad
     popfd
     stc                            ; pass the original interrupt onward
+    ret
+observe_mouse_broadcast:
+    cmp word [ebp+28], 0x1607
+    jne .chain
+    cmp word [ebp+16], 0x000c
+    jne .chain
+    pushfd
+    pushad
+    mov edx, 0x607                 ; observation tag, not a product operation
+    movzx esi, word [ebp+24]       ; VMD broadcast subfunction
+    mov eax, 0x4e544d56
+    mov ecx, 250
+    db 0xc4,0xc4,0xb1
+    popad
+    popfd
+.chain:
+    stc                           ; leave every original client register unchanged
     ret
 observe_dos_read:
     cmp byte [ebp+29], 0x0a        ; actual DOS buffered line read, observation only
     jne .chain
     pushfd
     pushad
-    xor edx, edx
+    mov edx, [ebx+4]              ; actual CB_High_Linear, observation only
     xor esi, esi
     mov eax, 0x4e544d56
     mov ecx, 251
@@ -63,6 +99,18 @@ observe_dos_read:
     popad
     popfd
 .chain:
+    stc
+    ret
+observe_bios_read:
+    pushfd
+    pushad
+    mov edx, [ebx+4]
+    movzx esi, word [ebp+28]
+    mov eax, 0x4e544d56
+    mov ecx, 254
+    db 0xc4,0xc4,0xb1
+    popad
+    popfd
     stc
     ret
 observe_keyboard_intercept:
@@ -102,6 +150,8 @@ stimulus:
     pushad
     push dword [ebp+28]
     mov dword [ebp+28], 0         ; failure/not yet blocked
+    test word [esp], 0x400       ; diagnostic physical mouse stimulus
+    jnz .mouse
     mov edi, [ebp+20]             ; optional target VM from witness RDY file
     test edi,edi
     jz .send
@@ -128,6 +178,39 @@ stimulus:
     mov eax, 0x4e544d56
     mov ecx, 253
     db 0xc4,0xc4,0xb1
+    mov dword [ebp+28],1
+    jmp .done
+.mouse:
+    sub esp,16
+    movsx eax,word [ebp+16]
+    mov [esp],eax
+    movsx eax,word [ebp+24]
+    mov [esp+4],eax
+    mov ax,[ebp+4]               ; Client_ESI width
+    mov [esp+8],ax
+    mov ax,[ebp]                 ; Client_EDI height
+    mov [esp+10],ax
+    mov eax,[esp+16]
+    and eax,3
+    mov [esp+12],ax
+    mov word [esp+14],2          ; existing Window MOVE
+    test word [esp+16],0x800
+    jz .mouse_send
+    mov word [esp+14],1          ; existing Window ENTER
+.mouse_send:
+    mov edx,esp
+    mov esi,16
+    mov eax,0x4e544d56
+    mov ecx,255
+    db 0xc4,0xc4,0xb1
+    add esp,16
+    test eax,eax
+    jz .mouse_ok
+    cmp eax,183                  ; explicit reuse of NTCON's already-entered route
+    jne .done
+    test word [esp],0x800
+    jz .done
+.mouse_ok:
     mov dword [ebp+28],1
 .done:
     add esp,4

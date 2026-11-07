@@ -26,6 +26,7 @@ static void submit(mvdm_mouse_bridge *s,unsigned action,int dx,int dy,unsigned b
 static mvdm_mouse_input_sample take(mvdm_mouse_bridge *s,unsigned action,int dx,int dy,unsigned buttons)
 {
     mvdm_mouse_input_sample out;
+    assert(!mvdm_softpc_mouse_prepare(s,VirtualX,VirtualY));
     assert(mvdm_softpc_mouse_next(s,&out));
     assert(out.action==action && out.dx==dx && out.dy==dy && out.buttons==buttons);
     return out;
@@ -55,10 +56,14 @@ int main(void)
     /* Mode-13 raster width 320 maps to original virtual width 640. */
     submit(&s,CONSOLE_MOUSE_MOVE,3,2,2,320,200,ERROR_SUCCESS);
     take(&s,CONSOLE_MOUSE_MOVE,6,2,2);
-    submit(&s,CONSOLE_MOUSE_MOVE,INT_MAX,0,0,1,200,ERROR_ARITHMETIC_OVERFLOW);
+    submit(&s,CONSOLE_MOUSE_MOVE,INT_MAX,0,0,1,200,ERROR_SUCCESS);
+    assert(mvdm_softpc_mouse_prepare(&s,640,200)==ERROR_ARITHMETIC_OVERFLOW);
+    mvdm_softpc_mouse_cancel(&s);
     submit(&s,CONSOLE_MOUSE_MOVE,0,0,4,320,200,ERROR_INVALID_DATA);
     VirtualY=0;
-    submit(&s,CONSOLE_MOUSE_MOVE,0,0,0,320,200,ERROR_NOT_READY);
+    submit(&s,CONSOLE_MOUSE_MOVE,0,0,0,320,200,ERROR_SUCCESS);
+    assert(mvdm_softpc_mouse_prepare(&s,640,0)==ERROR_INVALID_DATA);
+    mvdm_softpc_mouse_cancel(&s);
     VirtualY=200;
     /* Retiring an old route must not cancel an already accepted new route. */
     submit(&s,CONSOLE_MOUSE_LEAVE,0,0,0,0,0,ERROR_SUCCESS);
@@ -126,6 +131,21 @@ int main(void)
         assert(s.input_ready==ready && !s.queue.count && !s.active && !s.submitted);
         CloseHandle(ready);s.input_ready=NULL;
     }
+    /* Geometry is selected at consumption, not from another VM's host cache. */
+    submit(&s,CONSOLE_MOUSE_ENTER,0,0,0,640,480,ERROR_SUCCESS);
+    assert(!mvdm_softpc_mouse_prepare(&s,640,480));
+    assert(mvdm_softpc_mouse_next(&s,&out));
+    submit(&s,CONSOLE_MOUSE_MOVE,0,120,0,640,480,ERROR_SUCCESS);
+    assert(s.queue.samples[s.queue.head].dy==120);
+    assert(!mvdm_softpc_mouse_prepare(&s,640,480));
+    assert(mvdm_softpc_mouse_next(&s,&out) && out.dy==120);
+    /* A scaled fragment is never scaled again, even after an instance switch. */
+    submit(&s,CONSOLE_MOUSE_MOVE,20000,0,1,320,480,ERROR_SUCCESS);
+    assert(!mvdm_softpc_mouse_prepare(&s,640,480));
+    assert(mvdm_softpc_mouse_next(&s,&out) && out.dx==SHRT_MAX && !out.buttons);
+    assert(!mvdm_softpc_mouse_prepare(&s,320,200));
+    assert(mvdm_softpc_mouse_next(&s,&out) && out.dx==40000-SHRT_MAX && out.buttons==1);
+    mvdm_softpc_mouse_reset(&s);
     puts("PASS pressure wake: full reset, partial delivery blocked, freed slot and cancellation signalled, handoff retains borrowed handle");
     puts("PASS relative bridge: scale/remainders, buttons, rapid re-entry, atomic rejection, independent state, cancellation; mocked ICA/IRQ only");
     return 0;

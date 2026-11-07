@@ -1,0 +1,43 @@
+{
+  "case": "Guest INT33 callback to token-scoped host mouse candidate",
+  "unit": "x86/x64 mouse-io092 pass",
+  "integration": "editor093 failed normal exit; menus absent",
+  "pid": 8464,
+  "exit": 1,
+  "inputs": [
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sha256": "784f96ab091af54f54d25ea156a152f8d302bbac793e9aa6afe838e645de7e71"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_executor.c",
+      "sha256": "7c9b4dea058f1924f93d105b6f8a67a4d99c7841fece4158a0b617eda62185df"
+    },
+    {
+      "path": "build/t481-s3/driver091/ntvdm64.386",
+      "sha256": "dbe661f5ee758cb3f55f170f66f19438184b662a2b53642b66c38341392cbc9e"
+    },
+    {
+      "path": "build/t481-s3/editor093/runtime/matrix-results.json",
+      "sha256": "f5138289250de19596b5c2751e04bb85d5cb76df6cb4936660bbf95644eb6fba"
+    },
+    {
+      "path": "build/t481-s3/editor093/trace.txt",
+      "sha256": "61e89da023acabe346ac3fc823aeb41ccc4ea85491118f35b55675e1e28eda0c"
+    },
+    {
+      "path": "build/t481-s3/mouse-io092.stdout",
+      "sha256": "48e28e6e504de66aacdefff8f5b8e7cc8b69fdc77e4ab70a83bed2c684d3005e"
+    }
+  ],
+  "observations": [
+    "MOUSE.BIN requested69,159 actual320,240",
+    "Both host command admissions reached",
+    "INT33 AX14 installation and one normal restoration observed"
+  ],
+  "limits": [
+    "No publication",
+    "Need direct callback/status trace; reason for pointer discrepancy unproven",
+    "Unread mouse and teardown boundary review still open"
+  ]
+}

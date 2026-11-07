@@ -14,9 +14,6 @@ extern void EmulateCoordinates(half_word,IS16,IS16,IS16 *,IS16 *);
 extern void host_ica_lock(void);
 extern void host_ica_unlock(void);
 extern void mouse_pointer_route_changed(int);
-extern IU8 Currently_emulated_video_mode;
-/* The selected CCPU SAS read is the original sas_load expansion. */
-extern IU8 c_sas_hw_at(IU32 address);
 
 BOOL mvdm_softpc_mouse_route_active(void)
 {
@@ -43,16 +40,13 @@ BOOL mvdm_softpc_mouse_apply(MOUSE_CURSOR_STATUS *cursor,MOUSE_VECTOR *counter,
 {
     mvdm_mouse_bridge *state=mvdm_softpc_mouse_current();
     mvdm_mouse_input_sample input;
-    half_word mode;
+    half_word mode=(half_word)current_video_mode;
+    DWORD error=mvdm_softpc_mouse_prepare(state,virtual_screen.bottom_right.x,
+        virtual_screen.bottom_right.y);
+    if(error)DisplayErrorTerm(EHS_FUNC_FAILED,error,__FILE__,__LINE__);
     if(!mvdm_softpc_mouse_next(state,&input))return FALSE;
-    mode=c_sas_hw_at(0x449);
-    /* Video 7 stores extended graphics modes as mode - 0x4c in the
-     * BIOS data area. LimitCoordinates needs the actual mode, just as the
-     * original mouse video interception does. Require agreement with the
-     * video owner so an unrelated BIOS mode is never reinterpreted. */
-    if(mode>=0x14 && mode<=0x1d &&
-        Currently_emulated_video_mode==(IU8)(mode+0x4c))
-        mode=Currently_emulated_video_mode;
+    /* These original reset calculations must use the selected instance too. */
+    VirtualX=virtual_screen.bottom_right.x;VirtualY=virtual_screen.bottom_right.y;
     if(input.action==CONSOLE_MOUSE_ENTER && !resetting && !*position_set) {
         /* The base INT33 owner may have changed position since the last IRQ.
          * Its current guest position, not the host IRQ cache, seeds the route. */

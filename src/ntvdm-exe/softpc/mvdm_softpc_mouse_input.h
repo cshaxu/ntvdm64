@@ -11,6 +11,7 @@ typedef struct mvdm_mouse_input_sample {
     int32_t dx,dy;
     uint32_t buttons;
     uint32_t action;
+    uint16_t width,height; /* source pixels; zero after CPU-owned scaling */
 } mvdm_mouse_input_sample;
 typedef struct mvdm_mouse_input {
     mvdm_mouse_input_sample samples[MVDM_MOUSE_INPUT_CAPACITY];

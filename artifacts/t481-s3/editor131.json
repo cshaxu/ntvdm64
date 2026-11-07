@@ -1,0 +1,38 @@
+{
+  "case": "T481 S3 editor131",
+  "exit": 0,
+  "interpretation": "Both actual mouse File/Exit paths and normal Windows exit passed; stored runner mouseExitVerified=false is a stale reporting field, controller proves mouse-only editor Exit.",
+  "diagnosticPackage": "package129",
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor131.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t481-s3/editor131/controller.asm",
+      "bytes": 13254,
+      "sha256": "96279da699d4e47379d5d234d24717746d88371392065cd16bd9bd0209a7be62"
+    },
+    {
+      "path": "build/t481-s3/editor131/trace.txt",
+      "bytes": 60730,
+      "sha256": "36a45368dd6f8ad5db0d9a8ac2c0eae1744b4e54e0999d97f9b2a029a8d62864"
+    },
+    {
+      "path": "build/t481-s3/editor131/screens.txt",
+      "bytes": 26884,
+      "sha256": "de15e82036af98e17820c3b52a97de9b0fddd58afc8a3f23b7e734912bc84721"
+    },
+    {
+      "path": "build/t481-s3/editor131/editor-result.json",
+      "bytes": 198,
+      "sha256": "f62fd0dce2da0b7d2e4d39f2d25cb814f8052dd2bfea0cea4cb36abc83f643be"
+    },
+    {
+      "path": "build/t481-s3/editor131/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "cea288f64e1af797dd7c1a8321afd52aeb2f09bfeb2c6b03e414c2acee03fd9b"
+    }
+  ]
+}

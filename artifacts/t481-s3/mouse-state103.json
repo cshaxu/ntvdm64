@@ -1,0 +1,37 @@
+{
+  "editorMenus": false,
+  "observations": [
+    "Relative input reaches original mouse_int1.",
+    "While BIOS449=1b, emulated video and selected mouse instance mode are03, position0,0.",
+    "Negative movement remains clamped at0,0. Mode conversion alone does not explain the stale start position."
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor103/trace.txt",
+      "sha256": "D832461A70E6B3099AC6E6AD84ED195E2FBB731531D708FC397C89247E8B816E",
+      "bytes": 40368
+    },
+    {
+      "path": "build/t481-s3/editor103/runtime/matrix-results.json",
+      "sha256": "55DE34CD59C92B955A18CCF4CC756DEEF715C509913D3F1F6D71A748BA9AD9C8",
+      "bytes": 428
+    },
+    {
+      "path": "build/t481-s3/editor103.stdout",
+      "sha256": "E2192D3A0E248F344B472DEC25F028A4A510FF29D6E8F579CE257302CAF551D5",
+      "bytes": 537
+    },
+    {
+      "path": "test/integration/ntvdm64-386/mouse-coordinate-observer.c",
+      "sha256": "E365B7C18F013ED38CAEA19EC175C0A758C99BD2A3BEE70BC0076BF6359F5459",
+      "bytes": 791
+    }
+  ],
+  "normalWindowsExit": true,
+  "case": "S3 dual editor coordinate observation103",
+  "limits": [
+    "Writer responsible for state transition not yet identified.",
+    "No production repair or release from these observations."
+  ],
+  "exit": 1
+}

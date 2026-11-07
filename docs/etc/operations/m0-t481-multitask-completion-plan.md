@@ -688,3 +688,442 @@ The authored addon and original guest binaries are unchanged. Governance050
 passed. Product scope is the 30-line VT Alt character adaptation; the remainder
 is diagnostic acceptance and shared test preparation. Mirror diff is zero.
 No S3 closure or remaining input/display qualification is claimed.
+
+### S3 editor completion order and saved-content isolation
+
+The formal runner now selects `-FirstExit Native|Dos` and optional
+`-SaveWitness`. Editor052 (PID5940, FirstExit Dos) passed: DOS EDIT completes
+first, then modern EDIT still accepts Alt+F; both prompt windows and Windows
+exit normally. Editor053 (PID16016, SaveWitness) passed: distinct files A.TXT
+and B.TXT contain exactly aaa and bbb after trimming their editor-specific
+line endings. The guest controller types through the original keyboard path;
+no file content is injected by the host. Menus remain in distinct VM frames.
+The tests use the published P2 product sources plus diagnostic host observation;
+no new production source changed. Receipts: artifacts/t481-s3/editor052.json
+and editor053.json. These do not qualify mouse input or DOSONLY1 editors.
+
+### S3 DOSONLY1 editor qualification
+
+Editor059 (PID10352) passes: exact O:/winnt/edit.exe emits "This program
+cannot be run in DOS mode" and the COMMAND prompt reads again; O:/winnt/edit.com
+opens the original DOS editor, Alt+F displays Save As/Exit, and both prompts
+and Windows exit normally. The complete BOP trace contains zero operation11
+admissions. Source closure: mvdm_vm_command_admit is the only executor submit
+caller; execute registers the VM frontend and launches the host chain. The
+startup payload/frontends context is heap/lock bookkeeping only;
+ntvdm_vm_frontends_create does not register an NTSRV frontend or launch a task.
+Thus no command-triggered host chain/frontend was created in this case.
+
+Editor055 and058 completed guest shutdown but failed the menu-observation
+assertion. The timer observer used EBX after BOP had returned its result there;
+restoring the saved actual VM handle fixes that test-only observation error.
+Editor056 exited110 while the diagnostic screen logger repeatedly reopened its
+file; attribution beyond the diagnostic open-error path is not claimed. The
+logger now retains its stream and deduplicates per VM. None of these failed
+runs is counted as passing product acceptance. Editor059 retains current positive
+receipts in artifacts/t481-s3/editor059.json. No product or original guest
+change is involved. Editor060 is the separate guest USER mouse-menu calibration;
+mouse delivery through the host payload still requires its own test and repair.
+
+Editor060 (PID8888) is a failed mouse calibration, not a host payload failure:
+DOSONLY1 guest USER SetCursorPos + register-based mouse_event down/up did not
+open File; following x appeared in Untitled text and the 90-second runner timed
+out. The saved final guest screen establishes that input continued but the
+menu click was not accepted. Next investigate actual guest client coordinates
+and the original VMD/INT33 delivery before choosing any production mouse seam.
+No assertion was relaxed. Evidence: artifacts/t481-s3/editor060.json.
+
+### S3 mouse stimulus route correction
+
+Editor063/064 tested original nt_process_mouse absolute Console input, which
+is not the active NTCON Window route. Editor064's guest-written MOUSE.BIN gives
+client 600x301, desired desktop (69,51), actual USER cursor (320,240). Source:
+nt_mouse.c host_os_mouse_pointer first consumes mvdm_softpc_mouse_apply;
+mvdm_softpc_mouse_next returns a zero-motion sample even with an empty queue
+while its Window route remains active, so the legacy absolute queue is bypassed.
+These probes do not establish a production mouse delivery defect.
+
+Editor066 switched to the selected relative route but sent duplicate ENTER:
+trace255 reports ERROR_INVALID_STATE (0x139f), matching the existing submitted
+NTCON route. The diagnostic now reports ERROR_ALREADY_EXISTS for that setup
+observation, and its guest stimulus explicitly accepts that setup-only result;
+MOVE/button events still require actual success from the production submitter.
+No production semantics changed or failures were converted to success for
+actual input. Editor068 (PID26920) is running the corrected calibration.
+Evidence for the failed probes: artifacts/t481-s3/mouse-calibration063-066.json.
+
+Editor068 accepted relative MOVE but Windows exited255. The source installation
+has current published MOUSE31.DRV but no INSIGNIA.386 entry. Existing mouse31
+acceptance explicitly depends on that NIDDB companion. The shared probe-copy
+helper now accepts an explicit InstanceDriver; the editor runner selects the
+published companion and records source/installed SHA256. Original installation
+is untouched. This configuration correction is necessary, not yet proof of
+complete DOS mouse delivery.
+
+Editor069 with the companion accepts all movement/button samples and retains
+the editor, but target (69,51) observes cursor (60,43); the failed click then
+inserts x. Editor070 uses one measured relative-motion correction and observes
+(69,47), inside the first text row, but still inserts x rather than opening
+File. Both reach the runner timeout; neither passes. The selected input path is
+now the existing Window relative queue through original mouse processing and
+the guest driver, not direct USER mouse_event or the bypassed legacy absolute
+queue. The remaining source investigation is the guest VMD/INT33 DOS-VM mouse
+handoff, including whether original mouse_EM_callback (BOP BF) is reached.
+Do not infer that adding host payload MOUSE_EVENT ingress alone solves this
+pure-guest control case. Evidence: artifacts/t481-s3/mouse-calibration068-070.json.
+
+Editor072 (PID26444, diagnostic071, DOSONLY1 with published NIDDB companion)
+failed mouse-menu/normal-exit acceptance. Actual INT33 reset returns FFFF/2;
+EDIT registers mask1F at 3DF8:0223. All four relative movement/button submissions
+return success; the already-active ENTER is explicitly observed as183. Original
+mouse_EM_callback/BOP BF has zero hits. No host command admissions occur.
+Evidence: artifacts/t481-s3/mouse-boundary072.json. These observations narrow
+the next audit to the original VMD/windowed-DOS mouse notification contract;
+they do not alone prove that BF is required by this retail guest path. The
+published companion currently implements NIDDB lifecycle only. Do not add a
+second mouse engine or modify immutable guest binaries.
+Microsoft Q74572 distinguishes Windows mouse input from DOS application mouse
+support and assigns hardware ownership switching to VMD:
+https://jeffpar.github.io/kbarchive/kb/074/Q74572/ . Original Microsoft DDK
+Virtual Device Adaptation Guide describes VMD interrupt reflection/EOI:
+https://www.pcjs.org/documents/books/mspl13/win/w3ddkvxd/ . These are interface
+research references only, not imported code or runtime dependencies.
+
+Editor073 confirms no observed INT2F1607/BX0C through Hook_V86_Int_Chain;
+this hook alone is not proof about VMD Exec_Int nested execution. Read-only
+WIN386 module extraction vmd074 (image SHA256 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8)
+finds the real VMD callout: object2 00CD-0118 requests AX1607/BX0C/CX1,
+requires AX0 and saves ES:DI. Both exported V86 and PM API entries are0A11.
+The independent test-only mouse-vmd-callout.asm exposes the existing BOP BF
+provider, with NIDDB remaining state owner; no external implementation is copied.
+Editor075 fails assembly before runtime (fixed scalar paragraph count).
+Editor076 still fails menu/exit; this is not a product fix. Editor077 adds
+read-only INT2F1684/BX0C + GetVersion and receives a zero VMD API pointer,
+although SYSTEM.INI has mouse=*vmd. Original VMD is present in the bundle;
+its runtime loading/selection is now the concrete question. Editor078 explicitly
+adds device=*vmd only to the isolated copy; PID4276 owns that pending contrast.
+Evidence: artifacts/t481-s3/mouse-vmd073-077.json. Original installation and
+published product remain unchanged. API cross-check (research only, no import):
+https://git.javispedro.com/cgit/vbados.git/tree/int2fwin.h
+blob d3bd969df1f6d6e85aab25d6803f8ecc3a800daa, author Javier S. Pedro, GPL2+;
+retail VMD machine code and original mouse_EM_callback establish the selected
+ABI independently. This reference does not authorize importing its code.
+
+Editor078 is terminal exit1. Explicit device=*vmd changes the observed VMD
+API from0000:0000 to003B:0370, GetVersion0300, and makes the original VMD
+CX1/CX0 broadcasts visible. This is direct evidence that the prior copied
+configuration did not activate that interface; merely finding mouse=*vmd in
+SYSTEM.INI was insufficient. Mouse-menu/normal-exit still fail and BOP BF
+still has zero hits, so loading is necessary to investigate, not a complete
+fix. Next check must inspect the actual real-mode CX1 reply (AX and ES:DI)
+and the retained DOS bridge installation before changing callback semantics.
+No candidate was published. Evidence: artifacts/t481-s3/mouse-vmd078.json.
+
+ABI correction: the earlier notes saying VMD saves ES:DI were incorrect.
+Retail object2 00EE reads Client_ES (offset3C), 00F5 reads Client_SI (offset4).
+Original VMM Client_Reg_Struc independently confirms these offsets. Editor079
+DPMI0300 query proves the diagnostic TSR is resident: AX0, ES064A, DI012A,
+SI0. Therefore the first bridge returned the wrong offset register. The test
+now returns ES:SI; no product was published with the incorrect bridge.
+Editor080 runs that corrected bridge but fails before two DOS prompt reads;
+only system VM creation is observed and no BF callbacks occur. Windows probe
+startup/enhanced mode is observed, so this is not evidence that Windows never
+started. Need inspect why child VM creation did not complete before claiming
+the corrected adapter works. Evidence: artifacts/t481-s3/mouse-vmd079-080.json.
+
+Superseding ABI correction: mechanical parsing of the original MS-DOS6 VMM
+Client_Reg_Struc gives Client_ES=56, Client_DS=60, Client_ESI=4. Thus retail
+VMD object2 00EE/00F5 requests DS:SI, NOT ES:DI or ES:SI. Both previous manual
+interpretations were wrong. artifacts/t481-s3/vmm-client-offsets.json records
+the computed layout. The independent diagnostic bridge now returns DS:SI.
+Editor081/082 window enumeration and the read-only private-desktop capture
+show actual Prompt probe A/B minimized windows, not missing Windows startup.
+The runner now opens both via its existing OpenIcon before waiting for DOS
+readiness. Editor083 with the wrong ES:SI bridge still failed; editor084 without
+the bridge reaches both DOS reads and the mouse stimulus, isolating the bridge
+as the new startup interference. Editor085 added the original documented
+Win386 instance descriptor to the diagnostic TSR but still used wrong ES:SI;
+its failure does not establish an instancing defect. Editor086 (PID27592)
+is the first test with the mechanically verified DS:SI reply. Its result is
+pending. No prototype/diagnostic code has been published as a product fix.
+Instance descriptor ABI reference, read-only: MS-DOS6 dev/ega/ega.inc
+Win386_Startup_Info_Struc/Instance_Item_Struc and dev/ega/int10rtn.inc
+Do_Startup_Instance_Stuff; no external implementation imported.
+
+Editor086 PASSES: actual relative mouse left-down/up reaches original BOP BF
+with masks3/5, opens the DOS EDIT File menu, then keyboard X exits EDIT;
+both COMMAND prompts and Win3.1 exit normally. DOSONLY1 native executable
+rejection remains observed and host command admission count is zero.
+Evidence: artifacts/t481-s3/mouse-vmd086.json. This proves the bounded callback
+contract: load original VMD, return the DOS callback as DS:SI, reuse original
+mouse_EM_callback/NIDDB. The diagnostic TSR is not a product deliverable;
+production integration must preserve callback memory/VM lifetime through the
+admitted addon, avoid a second mouse engine, and retest normal/reused VMs.
+Mouse selection of Exit and native payload mouse delivery remain unqualified.
+
+### S3 production callback candidate / editor087
+
+2026-11-07: replaced the test TSR with an independently authored 4-byte shared
+V86 stub in insignia-386. Original VMM allocation A8 owns lifetime; interrupt
+chain service41 answers VMD's original 1607/000C queries with DS:SI. Original
+BOP BF/NIDDB remain the mouse state/algorithm owner. The original vmm.inc
+service table and Client_Reg_Struc were checked, including DS60/SI4. No original
+guest binary or host mirror changed. Source provenance is in the addon README.
+
+Background editor087 PID5348 returned0: DOSONLY1 guest EDIT File menu by actual
+mouse, native DOS rejection, zero host command admissions and normal Windows
+exit. The test does not install MCALL.COM. Input/source/binary hashes and limits:
+artifacts/t481-s3/mouse-vmd087.json. This supersedes the diagnostic-TSR dependency
+of086, not its historical result. Explicit `device=*vmd` remains a test profile
+prerequisite; general installation wiring has not yet been changed. Remaining:
+mouse Exit, native payload mouse ingress, direct zero-host-chain evidence,
+full existing S3 matrix and coherent delivery. No publication/closure claimed.
+
+### S3 mouse Exit / editor088
+
+Background PID25420 exit0. Reused insignia087 unchanged. The controller opens
+DOS EDIT File with real mouse down/up, then clicks row9 Exit with real down/up;
+no X keystroke substitutes for Exit in MOUSE_MENU mode. DOSONLY1 native rejection,
+zero host admissions, both prompts and normal Windows exit pass. Artifact:
+artifacts/t481-s3/mouse-vmd088.json. Removed the unused recursive window-dump
+helper and its data; it was diagnostic-only and had no remaining caller.
+
+Host payload mouse gap is concrete: mvdm_vm_executor_bios_key_bop accepts only
+translated keyboard descriptors; mvdm_vm_io_keys produces KEY_EVENT only and
+prepend_keys rejects other types. Original mouse_EM_callback gets VMD events
+but owns guest INT33 state, not a native payload queue. A correct extension
+must retain current VM/token admission and retirement, route MOUSE_EVENT through
+the existing I/O channel, preserve original BOP BF for no-payload guest handling,
+and derive coordinates from the actual guest geometry. No foreground-global
+routing or duplicate mouse controller is authorized. This is the next source
+integration boundary, not evidence of native payload mouse completion.
+
+### S3 host mouse queue / input089
+
+Background PID25100 exit0; cached x86/x64 mvdm-vm-notification target and CTest
+both pass. mvdm_vm_io_mouse accepts absolute Console mouse records through the
+same enqueue lock, capacity, invalidation and readiness transition as keyboard.
+No new queue or lifecycle owner. Existing arbitrary valid keyboard batch size
+is preserved. Added tests prove mouse fields, queue isolation and invalid
+coordinate rejection; artifacts/t481-s3/mouse-io089.json records exact hashes.
+This entry has no production caller yet and is not end-to-end acceptance.
+
+Source audit found the smaller guest integration seam: original mouse_io.c
+mouse_get_and_set_subroutine (INT33 AX14) already exchanges CX mask and ES:DX
+callback while preserving old values. jump_to_user_subroutine supplies AX event,
+BX buttons, CX/DX position and an original mouse_int2 return frame. Allocate a
+VMM V86 callback in ntvdm64-386, exchange the actual VM's callback while its
+command owns the payload token, then restore the saved original callback on all
+command exits. Existing insignia VMD/BOP BF binding and original NIDDB remain
+unchanged. This avoids a second VMD query owner or a foreground-global mapping.
+The guest callback must validate its executable VM/current token, copy a bounded
+mouse descriptor through the existing BOP notification, and far-return through
+the original mouse completion path. Coordinate conversion, teardown, unread
+mouse disposition and real dual-editor behavior still need implementation and
+proof; these are not granted by the passing queue tests.
+
+### S3 INT33 ingress candidate / 091-095
+
+The candidate exchanges the original INT33 AX14 callback before admission and
+restores it on failed admission and completed/error return. Per-VM saved state
+is in the existing VMM control block; destroyed VMs retain original NIDDB
+retirement. VMM callback forwards seven DWORDs through existing signed BOP19:
+exact token, original event/buttons, text-cell coordinates and BIOS417 modifiers.
+Original text_grids uses16x8 in modes0/1,8x8 in2/3/7; command_screen only admits
+these text modes. No host mirror changed. ABI ordinal audit corrected the local
+candidate FAR-return service to4A before any runtime execution.
+
+Diagnostic090 failed compilation (missing SHRT_MAX declaration); corrected to
+INT16_MAX, diagnostic091/addon build passed. Cached unit092 x86/x64 passes,
+including BOP19 actual dispatch, wrong VM/token rejection and copied descriptor.
+Real dual-editor095 is NOT yet run: diagnostic094 PID18056 is building added
+observation first. Preceding editor093 PID8464 terminal exit1: both commands
+start, native command completes, but no File menu and Windows does not exit.
+Mouse requested69,159 yet actual guest pointer320,240; callback/VM/status tracing
+is needed to distinguish stimulus position from provider failure. Do not
+reinterpret this failed test as success or publish the candidate. Evidence:
+artifacts/t481-s3/mouse-ingress093.json. Unread mouse disposition and full teardown
+review remain open in addition to required integration acceptance.
+
+### S3 coordinate boundary / 095-099
+
+095 PID5508 and097 PID5996 are terminal exit1, no normal Windows exit. Both
+provide stronger evidence than093: BOP19 receives correct VM/token with status0,
+but cell coordinates36-39/16-18 miss the menu.097 observes real relative deltas
+(-251,-81) accepted into the root mouse queue, whose virtual extent is640x200.
+The guest GetCursorPos remains320,240. Pure-guest087/088 actual positions69,50
+and69,158 matched their requested menu cells. This narrows the issue before
+host task input conversion; it does not prove whether the physical coordinate
+cache, NIDDB selection or a callback changed it. No speculative runtime patch.
+Artifact: artifacts/t481-s3/mouse-coordinate095-097.json.
+
+Diagnostic098 PID21336 adds pass-through physical mouse_int1 observations:
+actual BIOS04AC instance, queued delta, and resulting guest callback CS:IP.
+editor099 is prepared but not yet launched. Existing original handlers execute
+unchanged, and diagnostic images are never published. This will distinguish
+incorrect physical IRQ instance/callback from scaling or stimulus issues.
+
+### S3 instance/coordinate observation103
+
+Editor103 PID10852 exited1: Windows normal exit passed, but both editor File
+menu assertion failed. Actual relative movement reaches mouse_int1; BIOS449
+is1b while the video cache and selected mouse instance mode are03 and position
+is0,0. Negative movement therefore remains clamped. This is not proof that
+mode decoding alone is the root cause. Evidence: artifacts/t481-s3/mouse-state103.json.
+Diagnostic104 built successfully; editor105 adds pass-through observations of
+the original video-to-mouse mode notification to identify the state writer.
+No original guest change or new release.
+
+Observation qualification: the diagnostic trace path is inherited by nested
+workers. Before attributing a mode update to the root worker, diagnostic106
+adds the actual process ID to coordinate/mode observation records (upper bits
+of the instance-mode value). Unqualified earlier mode-transition records must
+not be interpreted as a proved root-worker write. Diagnostic106 built/staged
+successfully; editor105 is still observed live and must finish before107.
+
+Editor107 exited1; PID-qualified records prove root PID20724 itself has mode03
+and position0,0 during BIOS1b physical motion. Nested PID22604 is separately
+identified. Normal exit failed. See artifacts/t481-s3/mouse-owner107.json.
+Diagnostic110 built; editor111 observes NIDDB lifecycle plus INT33 and INT10
+entrypoints in one run. No speculative production state correction applied.
+
+### S3 companion initialization ordering candidate112
+
+Editor111 traces root19480 setting each child BIOS mode03 while04AC is still0,
+before the companion's VM_Init notification obtains identity1/2. This proves
+an initialization ordering gap: child BIOS work can change the system mouse
+instance. Candidate112 calls the unchanged original NIDDB operation9 from
+Create_VM7 instead, before Init_VM/BIOS execution; later VM_Init is ignored.
+Existing creation flag and VM_Not_Executeable retirement remain the owners.
+The addon compiled successfully; editor113 is the same-package runtime contrast.
+See artifacts/t481-s3/mouse-instance-order111.json. Acceptance remains open.
+
+Editor113 exited1 on both-menu assertion. The ordering contrast is positive:
+NIDDB operation9 now precedes each text-mode notification, which reads04AC1/2.
+At physical input, root mouse instance mode remains67 instead of baseline03.
+The host-global video cache still reads03 and submitted scaling uses640x200;
+position remains0,0. Do not claim complete mouse repair. Editor114 checks the
+existing DOSONLY1 mouse/exit control with candidate112 and diagnostic110.
+
+### S3 CPU-side mouse geometry candidate115
+
+DOSONLY1 editor114 passes guest menu/mouse Exit, native rejection, zero command
+admissions and normal Windows exit with companion112. Candidate115 preserves
+source dimensions in the existing mouse queue and scales its head once on the
+CPU owner after original instance selection. Existing short-counter splitting
+then runs unchanged. Coalescing also requires equal source dimensions. The
+original instance virtual_screen/current_video_mode replace asynchronous
+VirtualX/Y and the host video cache as geometry authority. Arithmetic failure
+bubbles through the existing fatal adapter boundary; no retry or timer added.
+Bridge115 and original-coordinate fixture116 passed (mocked ICA/IRQ/memory).
+Editor117 is the real dual-editor contrast; no publication/acceptance yet.
+
+Geometry/fragment118 passed: a sample queued under stale host geometry uses
+the selected CPU extent, and a partially consumed scaled sample is not scaled
+again after an extent change. Editor117 fails; it confirms correct mode67 and
+640x480 displacement, but original coordinate origin0,0 differs from USER320,240.
+Editor119 adds real button-free positive movement before GetCursorPos delta
+calculation, without guest state writes, synthetic success or weaker assertions.
+Evidence: artifacts/t481-s3/mouse-geometry115-118.json. No release qualification.
+
+Editor119 terminated with C0000005 before command/mouse receipts; trace queue
+countf7f7f7f7 is not a mouse calibration result. Candidate queue sample layout
+changed, but diagnostic115 rebuilt softpc-bindings only. Diagnostic120 now
+requests the entire cached ntvdm.exe dependency closure before diagnostic link
+to rebuild every holder of the changed structure. Do not qualify115/117 runtime
+as ABI-coherent until this rebuild and comparison complete.
+
+Coherent cached rebuild120 rebuilt console_client (holder of the enlarged
+mouse queue) and passed bridge tests. Editor121 reaches native EDIT File menu
+by actual mouse and normal Windows exit, but DOS EDIT menu remains absent.
+BOP19 carries cell4,0 to the right VM; nested DOS absolute-input handling is
+the remaining mouse ingress seam. No dual-menu pass is claimed.
+
+Mouse return review found PREPEND_KEYS still rejected MOUSE_EVENT records that
+the same VM queue now supplies. Candidate122 preserves those exact valid
+records, validates negative/out-of-range cells and rejects unrelated input
+types/receipts; unit122 x86/x64 is running. BIOS return semantics unchanged.
+
+Mouse return unit122 passed x86/x64. Editor124 still fails dual-menu acceptance;
+actual nested DOS callback observed only initial position0,0, not the later
+File click. Diagnostic125 did not compile because its nt_event observation
+wrapper omitted the existing per-file thread_start_compat forced include.
+No runtime126 occurred. Diagnostic127 uses the exact nt_event edge flags;
+editor128 will observe decoded ordinary MOUSE_EVENT records and clipping size
+at the original input loop. Existing errors/LastError are preserved.
+
+Editor128 exited with error32: diagnostic trace opened the shared file with
+FILE_SHARE_READ only, so concurrent NTVDM append could terminate the process.
+Observer129 permits shared append. Editor130 then passes both mouse File menus,
+DOS mouse Exit, native keyboard Exit and normal Windows exit. Evidence:
+artifacts/t481-s3/editor130.json. This supersedes128 as an input-chain result;
+it does not retrospectively diagnose every older failure. Editor131-133 now
+exercise native mouse Exit, reversed completion order and DOSONLY1 serially.
+No candidate publication or S3 closure is claimed.
+
+Editor131 passes both actual mouse File/Exit paths and Windows normal exit.
+Editor132 reverse order does not pass: the measured USER target/actual point
+are both69,159, but VM callback delivers cell9,9 instead of the forward-case
+cell4,9; input-loop and original DOS callback both receive that wrong column.
+Its cleanup also reported access denied on isolated ned0/nthook64.dll; no
+remaining processes in ned0 or m481e132 were found afterwards. Do not treat
+the incomplete matrix result as a pass. Editor133 DOSONLY control runs separately.
+
+Editor133 completed exit0: guest EDIT mouse menu/Exit, native rejection, zero
+host command admissions and Windows normal exit. Artifacts131-133 seal source
+controller and result hashes. Separate host registry assertions remain open;
+reverse-order coordinate mismatch remains a required S3 correction.
+
+Editor134 reverse-order contrast passes with read-only GetScrollPos receipts;
+no product change since129. Final receipt has zero scroll position, but is for
+the final native window, not the earlier DOS window. Thus132 is still open,
+not a deterministic order failure and not proved to be product scaling.
+Editor135 records each click separately instead of overwriting MOUSE.BIN.
+
+Editor135 reverse order passed again. Four separate receipts prove exact
+USER target/actual coordinates and zero scroll for each click; original VM
+callbacks deliver DOS4,0/4,9 and native4,0/4,7. No product edit since129.
+Evidence: artifacts/t481-s3/editor134.json and editor135.json. Preserve132
+as unresolved failure, not a proved product regression or waived gate.
+Test reporting now derives mouseExitVerified from the executed mouse branch.
+
+Editor136 registry query failed1722 because the selected monitor fixture was
+built2026-10-26 before current scope code. Registry137 rebuilds the fixture
+from current x86 cached graph. Editor138 passes: actual NTSRV snapshot while
+guest EDIT is ready contains exactly one NTCON and one DOS worker carrying
+WIN386.PIF, with no VM frontend/native task/extra worker. Full-run BOP11
+admissions remain zero; guest mouse EDIT, native rejection and normal exit
+pass. artifacts/t481-s3/editor138.json seals registry and runtime evidence.
+Cached139 full product/shared-unit build is running; not yet qualification.
+
+Cached139 completed exit0: complete x86/x64 product build and shared tests
+14/14 for each width. Full140 started as hidden PID6368 using the existing
+logon-environment runner and current observer graph. It must finish before
+any new default publication. The current mirror/guest source diff is empty.
+
+Input review142 removes duplicate partial mouse modifier decoding: reuse
+bios_controls and pass BIOS417/418 plus496 in the existing seventh dword.
+Tests prove lock toggles and right-side Ctrl/Alt on x86/x64. Evidence:
+artifacts/t481-s3/mouse-modifiers142.json. No new transport or state. Driver
+and product rebuild/real guest qualification remain required; Full140 is
+still testing the pre142 frozen package and cannot qualify these new bytes.
+
+Full140 completed exit0,16/16 gates on its pre142 frozen product package.
+Candidate143 rebuild completed exit0 including current .386. Serial runner
+qualification144-147 (PID3556) now executes reverse/forward mouse editors,
+DOSONLY registry and new Full147; it stops on any failure. No publication yet.
+
+### S3 candidate Full147 completed
+
+Current production package 42a32c73-c220-4be6-98b6-de443efdc6cc passed Full147
+16/16, exit0. Evidence: artifacts/t481-s3/full147.json. Together with actual
+editor144/145 mouse exits and editor146 DOSONLY no-payload witness, this
+qualifies the bounded P3 candidate. Publication and reviewed commit/push remain
+pending; remaining S3 and S4/S5 obligations are unchanged.
+
+Publication150 completed with exit0 after governance149. All eleven host
+images and the manifest match at assets/release and O:/winnt/system32.
+NTVDM64.386, INSIGNIA.386 and addon-manifest.json publish only to assets/release.
+Original guest source/media and O:/w31 configuration are unchanged. Exact
+publication evidence is artifacts/t481-s3/publication150.json; reviewed
+commit/push are still pending. This is not whole-S3 closure.

@@ -1,0 +1,49 @@
+{
+  "case": "DOSONLY1 mouse File and mouse Exit, no keyboard menu selection",
+  "pid": 25420,
+  "exit": 0,
+  "result": {
+    "dosonly": 1,
+    "guestEditorMenu": true,
+    "mouseMenu": true,
+    "hostCommandAdmissions": 0,
+    "normalExit": true
+  },
+  "inputs": [
+    {
+      "path": "test/integration/ntvdm64-386/editor-actions.inc",
+      "bytes": 2335,
+      "sha256": "71a48b65e4defd8919fa71a329f51e461ea607dc5616cf693e69836d684f9ac9"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/editor-routines.inc",
+      "bytes": 6129,
+      "sha256": "3d912ebccfafc931feffb5bb52306973757056b9aa5a77c9c91f36b8d5e86b99"
+    },
+    {
+      "path": "build/t481-s3/insignia087/insignia.386",
+      "bytes": 4674,
+      "sha256": "91362b7a43791c967ed6c773bc5e7bbd20572bbfda3c4bb808d1cff62e1f4d66"
+    },
+    {
+      "path": "build/t481-s3/editor088/editor-result.json",
+      "bytes": 126,
+      "sha256": "fea0bf4c01fabfc24eb997cd5d4fe8f51d46e65b99d8cc8db896cb9d5e13ee00"
+    },
+    {
+      "path": "build/t481-s3/editor088/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "f5a5c72168836695731b1a41244d9c634cbe7d0fcff8d105f27677d89d6a2fce"
+    },
+    {
+      "path": "build/t481-s3/editor088/trace.txt",
+      "bytes": 21537,
+      "sha256": "51d293e7f867937e043e8c055137e7a3cba642b240fd63f13c21da6d12d04bb8"
+    }
+  ],
+  "limits": [
+    "Host diagnostic package071",
+    "Native payload mouse not yet connected",
+    "Direct host inventory assertion pending"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "case": "T481 S3 mouse modifiers142",
+  "exit": 0,
+  "widths": [
+    "x86",
+    "x64"
+  ],
+  "finding": "Mouse duplicated partial BIOS modifier decoding, losing lock toggles and right-side Ctrl/Alt.",
+  "repair": "Reuse bios_controls; same seven-dword descriptor carries BIOS417/418 and496 like keyboard input. No queue or transport added.",
+  "limits": "Unit evidence only for new modifier encoding. Authored driver rebuild and real-guest/production qualification pending. Full140 uses pre-fix frozen package.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/mouse-io142.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t481-s3/mouse-io142.stdout",
+      "bytes": 1132,
+      "sha256": "98986b7328f927b2b7a7b256665ddd6a15690f683c435f4f59d7aa75a2374044"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_executor.c",
+      "bytes": 19837,
+      "sha256": "05da6c6fb0f82c48bb636c7b00df9771e1631280d67245b05a81c59fffa12978"
+    },
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "bytes": 40570,
+      "sha256": "0e2dcab7da561b9a3922a9ccd5af12e03f3566b9ebdec416caa2e7ab13c14ce9"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/mvdm_vm_notification_test.c",
+      "bytes": 67811,
+      "sha256": "8c85e184da4877469256dd2057cf8c5adfddc02f9420c86c805b1271fe643843"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "observations": [
+    "Root PID19480 sets graphics67.",
+    "Each child BIOS text-mode03 notification runs with BIOS04AC=0 before original NIDDB operation9 assigns child identity1 or2."
+  ],
+  "candidate": "insignia112 moves original NIDDB operation9 from VMM VM_Init9 to Create_VM7; no original guest or mirror modification",
+  "verification": "editor113 running; no acceptance or publication yet",
+  "case": "S3 companion instance initialization ordering111",
+  "baselineExit": 1,
+  "inputs": [
+    {
+      "sha256": "51D3EA82D62D82B9DC26CCCA0CA3C9DF0A7ADA21825611F17E32FB2158D501EF",
+      "path": "build/t481-s3/editor111/trace.txt",
+      "bytes": 36996
+    },
+    {
+      "sha256": "11435796D935091B2550EF219196769B0E6F92DB06B529DB669B6D460F5E42E7",
+      "path": "build/t481-s3/editor111/runtime/matrix-results.json",
+      "bytes": 430
+    },
+    {
+      "sha256": "8B06256526938986BEEA9EBCBFD09123E372CF6733E4AE451796FB67F4C2379D",
+      "path": "build/t481-s3/insignia112/build.json",
+      "bytes": 713
+    }
+  ]
+}
