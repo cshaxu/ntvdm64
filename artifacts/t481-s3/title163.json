@@ -1,0 +1,45 @@
+{
+  "case": "T481 S3 title and identity-size163",
+  "exit": 0,
+  "comparison": "BUFFER_SIZE GET_TITLE_A SET_TITLE_A: baseline155 status50, candidate163 status0",
+  "controls": "Title161 x86/x64 unit passes after final cleanup correction; hidden native160 supplies empty/zero/small/sufficient behavior evidence",
+  "actual": "Two editors mouse exits, normal Windows exit",
+  "limits": "No Win95, complete S3, guest USER title update, or Full/current default publication claim. Keyboard layout and pointer clip requests still return unsupported.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/title161.exit",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "build/t481-s3/title161.stdout.log",
+      "sha256": "4DA472FBBCA9C75325F5972093A5680E1F1AC5C2834365372773704CB9D96A03",
+      "bytes": 1070
+    },
+    {
+      "path": "build/t481-s3/title-native160.json",
+      "sha256": "4E0CFB54326AF6E258E21DC76BA80D16E720FC71E889FFF17236E111AF23DDF4",
+      "bytes": 2045
+    },
+    {
+      "path": "build/t481-s3/editor163.exit",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "build/t481-s3/editor163/trace.txt",
+      "sha256": "2EE5FCE7BEAB55FC94D3AADB25A937C87D611CFE031BDF7FA285E43A32A52B5A",
+      "bytes": 65386
+    },
+    {
+      "path": "build/t481-s3/editor163/editor-result.json",
+      "sha256": "1406912EFDEAA0F825C1B46FCC2129908D3381A9A1103212DFC5707CEE7511C7",
+      "bytes": 197
+    },
+    {
+      "path": "build/t481-s3/editor163/runtime/matrix-results.json",
+      "sha256": "64AB38184EF583C23C10ABE758D464AA461ABAEB00951F870205D5F80D1FC6ED",
+      "bytes": 428
+    }
+  ]
+}

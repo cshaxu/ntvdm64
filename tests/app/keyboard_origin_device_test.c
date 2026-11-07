@@ -52,8 +52,8 @@ static int WaitKbdHdw(unsigned long timeout) { (void)timeout;return 0; }
 static void HostReleaseKbd(void) { }
 static int bios_buffer_size(void) { return 0; }
 static unsigned reset_pending_irq_calls;
-static void mvdm_keyboard_reset_pending_irq(void) {
-    if(output_full && nt_keyboard_history.output)++reset_pending_irq_calls;
+static void mvdm_keyboard_reset_pending_irq(int pending) {
+    if(pending)++reset_pending_irq_calls;
 }
 #include "keyboard_device_add.inc"
 #include "keyboard_device_remove.inc"
@@ -93,7 +93,10 @@ int main(void)
     continue_output();
     CHECK(output_full && output_contents==0x32 && nt_keyboard_history.output==1);
     CHECK(!nt_keyboard_history.device[0] && PendingKeyboardHistory()==1);
-    kbd_output_data_read=1;bKbdEoiPending=1;KbdEOIHook(1,0);
+    /* Consumed port data is not unused input, even before its EOI. */
+    kbd_output_data_read=1;
+    CHECK(output_full && !PendingKeyboardHistory());
+    bKbdEoiPending=1;KbdEOIHook(1,0);
     CHECK(!output_full && !nt_keyboard_history.output && !PendingKeyboardHistory());
     puts("PASS actual enqueue/remove/output/EOI preserves then retires origin; ignored release has none");
     buff_6805_out_ptr=buff_6805_in_ptr=511;calc_buff_6805_left();

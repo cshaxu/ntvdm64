@@ -130,7 +130,7 @@ DWORD ntvdm_vm_text_dispatch(ntvdm_vm_text *text, const console_io_request *requ
     if (!text || !request || !reply) return ERROR_INVALID_PARAMETER;
     h = header(text);
     switch (request->operation) {
-    case CONSOLE_IO_PREPARE_TEXT_REGION:
+    case CONSOLE_IO_BUFFER_SIZE: case CONSOLE_IO_PREPARE_TEXT_REGION:
         if (text->snapshot || text->staged) return ERROR_BUSY;
         if (request->state.width <= 0 || request->state.height <= 0)
             return ERROR_INVALID_PARAMETER;

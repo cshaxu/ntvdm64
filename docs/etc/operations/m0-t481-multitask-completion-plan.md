@@ -1127,3 +1127,240 @@ NTVDM64.386, INSIGNIA.386 and addon-manifest.json publish only to assets/release
 Original guest source/media and O:/w31 configuration are unchanged. Exact
 publication evidence is artifacts/t481-s3/publication150.json; reviewed
 commit/push are still pending. This is not whole-S3 closure.
+
+### S3 production I/O call witness153
+
+P3 is committed/pushed as 4895e93c4. Diagnostic152 reuses the successful
+143 link recipe and wraps only VM I/O dispatch, preserving the implementation,
+return value and last error. Editor153 passes two mouse exits and normal
+Windows exit. Its trace confirms BUFFER_SIZE, GET_TITLE_A, SET_TITLE_A and
+SET_POINTER_CLIP and KEYBOARD_LAYOUT return ERROR_NOT_SUPPORTED on reached calls. READ_TEXT_CONFIGURATION
+initially returns ERROR_NOT_FOUND before a frame exists; this is not conflated
+with missing implementation. No font query is observed; do not infer universal
+unreachability. Counts and raw hashes: artifacts/t481-s3/io-operations153.json.
+Next work follows these actual consumers and their state owners. No production
+source or default release has changed since P3.
+
+### S3 request parameters155 and identity-size candidate156
+
+Read-only diagnostic154/editor155 passes both mouse editor exits and normal
+Windows exit. Exact parameters are sealed in artifacts/t481-s3/io-parameters155.json.
+The reached BUFFER_SIZE requests80x25, identical to the current guest grid.
+Candidate156 shares PREPARE_TEXT_REGION's existing idle/positive/exact-extent
+validation. It adds no state or resize engine; different extents remain an
+explicit unsupported boundary pending guest geometry work. Positive, invalid
+and different-size unit cases are added. Cached x86/x64 text156 is running
+as PID23836; no passing claim or publication yet.
+
+GET_TITLE_A requests260 bytes; setters carry18/31 bytes. Clip is NULL release.
+Original cmdkeyb.c cmdGetKbdLayout deliberately takes NoInstallkb16 after a
+failed Console layout query; do not fabricate a host HKL as the guest layout.
+Title/caption ownership and guest clip ownership still need completion.
+
+Identity-size156 completed: x86/x64 each169 assertions. Diagnostic157 and
+actual editor158 pass; operation16 now returns0 instead of50, both editors
+exit by mouse and Windows exits normally. Evidence: identity-size158.json.
+No whole-S3 completion or new default publication is claimed.
+
+Title source review: original config.c temporarily sets a unique title to
+find ConsoleWindowClass, then restores the initial title. VM io.title currently
+means caption/handoff, not a complete Console-title or guest USER-window
+implementation. Do not conflate these roles or return a fabricated HWND.
+The inspected original MS-DOS6 dev/smartdrv/sdvxd/shell.inc (Microsoft notice,
+SHA256 F02962370C12489BA283F947A30DD932721E98C68B89A5CF7829F77089CC4C6B)
+contains five services, no direct title setter. This is source research only,
+not proof that no guest title interface exists; no code was imported.
+
+### S3 Console-title candidate159--163
+
+The protocol already separates full SET/GET_TITLE_A from128-byte presentation
+PUBLISH_TITLE_A/GET_HANDOFF_TITLE_A. Existing console_client_test.c explicitly
+expects SET followed by supplemental caption publication. Candidate VM I/O
+therefore owns one dynamic full API title per command, independently of the
+existing caption. Initial text is copied; replacement allocates before freeing
+the old value; teardown and failed event creation free it. No native/guest
+window lookup or guest USER title mutation is claimed. Publishing a shortened
+caption cannot truncate the API title. Same-VM channel ownership remains the
+serialization boundary; NTSRV lifecycle and transport are unchanged.
+
+Unit159 passed but its expected truncation was disproved by independent hidden
+Console witness160. The selected native GetConsoleTitleA returns0 and one NUL
+for a nonempty title with insufficient capacity; zero capacity and an empty
+title leave storage untouched. Candidate161 and tests are corrected accordingly;
+both architectures pass. Review then fixed event-creation failure cleanup.
+Qualification162-163 PID23900 reruns both widths, rebuilds the complete selected
+NTVDM dependency closure and executes actual mouse editors. It is running;
+no default publication or full-S3 claim. Raw native controls: title-native160.json.
+
+Original Windows3.1 DDK INT2F documentation was consulted at
+https://dos-help.soulsphere.org/ddag31qh.hlp/winint2fabout.html (historical
+Microsoft documentation mirror). Its listed services are not proof that every
+possible VM title interface is absent; no external implementation was imported.
+
+Qualification162-163 completes exit0. Actual requests16/24/25 all return0,
+contrasted with155 status50; both editors exit by mouse and Windows exits
+normally. artifacts/t481-s3/title163.json seals the positive/negative comparison
+and native title control. Candidate remains unpublished pending remaining
+review/qualification; layout and clip remain explicit unresolved operations.
+
+### S3 nested-chain witness164
+
+The identity runner now accepts InstanceDriver and ExplicitVmd, matching the
+current editor profile without modifying O:/w31. Current package162 with
+143/112 addons was exercised with two concurrent real command chains:
+command /c cmd /c mem, followed by exit. Run164 failed the90s contract.
+B.TXT contains actual MEM output and exit; A.TXT and both final result records
+were absent. The runtime was not qualified. Cleanup additionally failed to
+remove the test-stage nthook64.dll; this does not explain the preceding timeout.
+Original installation hashes were verified unchanged. Exact hashes and limits:
+artifacts/t481-s3/nested164.json. Control165 removes only the reentrant command
+layer to separate basic nested MEM from deeper chain failure. No default
+publication changed; neither failure has an established root cause yet.
+Control165 completed exit0: both concurrent VM chains execute MEM, receive its
+actual output, finish all320 callback checks and exit Windows normally.
+artifacts/t481-s3/nested165.json seals the results. This narrows investigation
+to the deeper164 chain; it does not establish causality or waive its failure.
+The164 timeout snapshot retained one native CMD and nested NTVDM worker.
+
+Repeat166 of the exact deeper chain passed both actual MEM screen assertions,
+320 callback checks and normal Windows exit. Evidence: nested166.json.
+The164 nested-worker stack resolves through the matching diagnostic162 map
+to cmdGetNextCmd/GetNextVDMCommand waiting; it is not proof that MEM was still
+running. The root CPU sample is lin2phy, insufficient to locate a stall.
+Do not erase164 or claim it repaired. A late registry capture attempt found
+the already cleaned166 stage and supplied no registry evidence.
+
+Cached167 uses the established x86/x64 Ninja/ccache recipes. Full168 waits
+for that exact build process and a successful receipt before constructing
+the current complete11 package and running existing component/Full gates.
+Owned process records and stdout/stderr are under build/t481-s3. Pending,
+not publication or acceptance evidence. No production source changed during
+these runs; isolated test-runner profile wiring is the only new source edit.
+
+### S3 remaining operation ownership audit during Full168
+
+Cached167 completed exit0; shared-win32 tests14/14 pass in each architecture.
+Full168 is live and owns the current frozen candidate. No production mutation
+or competing runtime test is permitted while that qualification is in flight.
+
+The153/155 unsupported-call observations classify protocol coverage, not each
+caller's functional outcome. Source checks narrow the remaining work:
+
+- cmdkeyb.c:cmdGetKbdLayout explicitly takes NoInstallkb16 on layout-query
+  failure, sets DX=0 and calls cmdInitConsole. Do not manufacture the modern
+  host thread's HKL as the guest Windows/VKD layout. Existing editor passes
+  do not prove non-US layouts or layout changes; that input boundary stays open.
+- nt_mouse.c:MouseDetachMenuItem calls ClipCursor(NULL) without checking its
+  result. The155 request is release-only. MvdmClipCursor routes this to the VM
+  I/O owner; no code should clip the unrelated modern desktop. Acquisition,
+  guest clipping ownership and release behavior remain to be classified from
+  actual required callers, not resolved by an unconditional success stub.
+- ntvdm64.asm:command_video_apply uses BIOS1100 (load font only), deliberately
+  preserving text geometry. Different VIDEO glyph height alone therefore does
+  not justify overwriting the snapshot's BIOS cell-height field. Prove actual
+  geometry changes through the guest owner before changing that projection.
+- ntvdm64.asm captures the current DOS code page with INT21/6601 in the target
+  nested VM. That is the existing authority, not host OEM defaults. SBCS input
+  receipts do not qualify DBCS or an active code-page transition.
+- Existing geometry005/007 verifies80x50 native buffer with80x25 viewport and
+  shifted viewport output. It does not prove a changed guest visible grid.
+
+These findings neither waive the original operation obligations nor introduce
+new behavior. Full168, publication and remaining actual-operation acceptance
+must be reported separately.
+Full168 completed exit0, all16 gates passed on the current complete11 package.
+Evidence: artifacts/t481-s3/full168.json. Governance169 passed. These results
+do not erase nested164, qualify unfinished S3 operations or constitute a new
+default publication. Cached167 evidence is artifacts/t481-s3/cached167.json.
+
+Identity runner now forwards the existing optional registry-monitor/marker
+arguments to the matrix; it does not add product or lifecycle behavior.
+Run170 reached normal Windows exit and generated both text outputs, but
+registry capture failed RPC1722, so its overall result is failed. It selected
+the x64 monitor fixture dated2026-10-26. Repeat171 uses the proven146 x86
+fixture (rebuilt2026-11-07). This comparison is pending; do not attribute1722
+to the product or declare its cause proven. Evidence: nested170.json.
+
+Repeat171 reproduced the90s timeout and cleanup DLL occupation, without B.TXT.
+Thus the earlier B-completion snapshot trigger cannot diagnose this case.
+Evidence: artifacts/t481-s3/nested171.json. The matrix now optionally captures
+the live service tree on failure before scope teardown, preserving the primary
+error even if capture fails. This is test-only, no product wait/retry change.
+Repeat172 PID19760 runs this diagnostic. Production remains frozen since Full168.
+
+### S3 nested-chain diagnostic172--177
+
+172 and174 passed with the current x86 registry fixture;173 repeated the timeout.
+The successful live task tree shows separate VM frontend ownership and real
+native/DOS workers, not ancestor NTCON takeover. It does not prove I/O handback.
+Evidence: artifacts/t481-s3/nested172-174.json.175 also passed unchanged.
+The matrix previously classified observer timeouts only after cleanup; it now
+recognizes the existing timeout receipt before cleanup so optional failure
+registry capture can observe the live service. This changes no product timeout.
+
+The failed nested NTVDM stack is idle in cmdGetNextCmd/GetNextVDMCommand.
+Input tracing is therefore the next specific diagnostic: the witness queues
+command plus exit before the nested child runs. Original nt_event.c calls
+ReturnUnusedKeyEvents then ReturnBiosBufferKeys before relinquishing I/O.
+Diagnostic176 logs successful VM READ_INPUT/PREPEND_KEYS records by queue
+identity, character and make/break, without consuming or modifying records.
+The selected product source remains unchanged from Full168. Diagnostic176
+built exit0; actual run177 PID3656 is active on its separate package. Input loss
+is a hypothesis, not a root-cause conclusion. No new default publication.
+Run177 reproduced the timeout and captured the failure tree before cleanup.
+The remaining VM has an active native CMD, with the nested DOS worker EMPTY.
+READ_INPUT/PREPEND_KEYS observations show one queue's original exit sequence
+subsequently read as texit, with t/CR and exi fragments among returns. This is
+stronger than a timeout alone, but not yet attribution to a particular return
+stage. Repeated record delivery across ownership changes is not by itself
+duplicate consumption. Evidence: artifacts/t481-s3/nested177.json.
+Next inspect original ReturnUnusedKeyEvents/ReturnBiosBufferKeys and the
+project history/zero-receipt VM boundary; do not assume physical-key receipts
+can simply be copied from NTCON or introduce a second keyboard engine.
+
+### S3 keyboard handoff correction189--193
+
+The failed deep-chain witnesses repeatedly returned exit as texit; native
+Console observation185 saw the corrupt sequence already on ingress, while
+queue enqueue observation187 contained only the original stimulus. Child
+keyboard observation182 ruled out the separate read-before-EOI history defect
+as the cause of that run.
+
+The selected reset chain is Reset6805and8042 ->
+mvdm_keyboard_reset_pending_irq -> ica_hw_interrupt_cancel ->
+host_EOI_hook(-1) -> KbdEOIHook -> continue_output. Previously the cancellation
+ran before clearing the device queue. Its callback queued the next scan and
+left a new delayed IRQ after the subsequent reset discarded its provenance.
+The actual controller/PIC fixture188 proves this scheduling error; candidate189
+captures the existing user-origin eligibility, clears the device first, then
+cancels. The same fixture changes from89 assertions/1 failure to89/0.
+Original keyboard/EOI algorithms remain selected; DIV-321 records the ordering
+adaptation. No original guest is changed.
+
+Separately DIV-317 now excludes an already-read output slot from unused-input
+selection without retiring the slot before EOI. Origin178 fails that contract;
+origin193 passes it and the pre-existing origin/reset cases. This is not claimed
+as the cause of texit.
+
+Nested191 and192 pass both guest VM chains, MEM output,320 callback assertions
+and normal Win3.1 exit. These runs precede the separate DIV-317 predicate fix;
+the combined candidate still requires current-package acceptance. Evidence:
+artifacts/t481-s3/reset189.json, nested191.json and repeat193.json. Cached194
+and dependent Full196 are the combined candidate delivery qualification.
+This is a bounded P repair, not completion of the remaining S3 operation,
+geometry/font/codepage, redirection/cancellation or later Win95 obligations.
+
+### S3 combined qualification and publication201--203
+
+Full196 passed16/16; final197 passed real editor198, DOSONLY1 editor199 and
+nested200 after restoring original diagnostic line1163. DOSONLY1 had zero
+host admissions. The final production NTVDM differs from Full196 only in
+COFF/debug timestamps after package-ID normalization; ten other build input
+hashes are identical. See artifacts/t481-s3/final201.json.
+
+Publication203 delivered complete11 package c7f7cdca-4214-4452-a01d-d2f1c3858d25
+to both release destinations, verifying every image and manifest. Addons
+remain assets-only and unchanged. See artifacts/t481-s3/publication203.json.
+Governance202 passed. P4 final review/commit/push are not yet complete.
+Remaining S3 geometry/fonts/codepages, operation and nested cancellation
+requirements are unchanged; publication does not close S3 or qualify Win95.

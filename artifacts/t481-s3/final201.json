@@ -1,0 +1,29 @@
+{
+  "package": "package201",
+  "full": "Full196 passed16/16",
+  "final": "final197 exit0",
+  "editor": "editor198 keyboard/menu/mouse exit pass",
+  "dosonly": "editor199 guest EDIT, native rejection, zero host admissions pass",
+  "nested": "nested200 both outputs,320 callback assertions,normal exit pass",
+  "equivalence": {
+    "inputHashesEqual": 10,
+    "ntvdm": "After normalizing package identity, only COFF TimeDateStamp offset296 and IMAGE_DEBUG_DIRECTORY TimeDateStamp offset1736716 differ; four changed bytes total",
+    "bytes": 2137600,
+    "diagnosticLineRestored": 1163
+  },
+  "receipts": [
+    {
+      "run": "editor198",
+      "hash": "90D76B1E39D018410991D66990916535739D4E10A5315DB461DFE31777BD9308"
+    },
+    {
+      "run": "editor199",
+      "hash": "952577021476D2FB1AA33C95764322A4612D293EC5F22AF211468B1006CA4AFF"
+    },
+    {
+      "run": "nested200",
+      "hash": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91"
+    }
+  ],
+  "limits": "Bounded S3 P delivery; remaining operation/geometry/codepage/nested cancellation and Win95 scope not closed"
+}

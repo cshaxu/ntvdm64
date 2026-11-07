@@ -1,0 +1,20 @@
+{
+  "scope": "T481 S3 keyboard handoff reset",
+  "baseline": "reset188",
+  "baselineResult": "89 assertions, 1 failure: delayed keyboard IRQ scheduled after whole-device reset",
+  "candidate": "reset189",
+  "candidateResult": "89 assertions, 0 failures",
+  "mechanism": "Cancellation invokes KbdEOIHook(-1), which continues the output queue. Old reset cancelled before clearing queue and allowed callback to schedule the next scan. Candidate captures eligibility then clears queues before cancellation.",
+  "files": [
+    "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "src/ntvdm-exe/softpc/mvdm_keyboard_reset.c"
+  ],
+  "registration": "MVDM-HOST-DIV-321",
+  "limits": [
+    "Actual production keyboard/PIC with controlled host delay scheduler.",
+    "Real VM nested causality validation is running as nested191.",
+    "Origin178 read-before-EOI history defect remains separate and uncorrected."
+  ],
+  "baselineLogHash": "54FC162F6E948E99EA5631A904740FCA3D3A6F0CFAFEE27C2A8EE3F6D1EE06CA",
+  "candidateLogHash": "4638416F9C78CDD2A01527C55588BFEB639F09EC586450C6B65D4A40EE4EA4BF"
+}

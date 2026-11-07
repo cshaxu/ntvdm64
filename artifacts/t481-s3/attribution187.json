@@ -1,0 +1,14 @@
+{
+  "scope": "T481 S3 nested input attribution",
+  "runs": [
+    185,
+    187
+  ],
+  "result": "pre-fix failure",
+  "native185": "For native PID2900 the first two returns were exit; the next write was already texit. Extra t therefore reached native Console on ingress.",
+  "enqueue187": "Both VM input-enqueue traces contain exactly command /c cmd /c mem followed by exit, with no extra t.",
+  "traceHash185": "81C182C8BFACCF56132009D29CE72B13C3BD3CAD5F70626FE98B31223A312FE8",
+  "traceHash187": "ED1C61169ED4877C73C2C0FB1BE39C250D7C0ADE7D92E47709CBB6B376B0AF93",
+  "diagnosticControls": "Run184 invalid: diagnostic NTVWM linked with Windows subsystem; corrected to selected Console subsystem before185. No product cause inferred from184.",
+  "disposition": "Superseded by deterministic reset188 failure and reset189 plus nested191/192 correction evidence."
+}

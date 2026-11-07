@@ -5,7 +5,8 @@
 struct mvdm_vm_io {
     ntvdm_vm_text *text;
     mvdm_vm_continuation *continuation;
-    char title[CONSOLE_IO_TITLE_BYTES];
+    char title[CONSOLE_IO_TITLE_BYTES]; /* presentation/handoff caption */
+    char *console_title; /* full API title; caption publication cannot truncate it */
     SRWLOCK input_lock;
     HANDLE ready;
     console_io_input keys[CONSOLE_IO_INPUT_CAPACITY];
@@ -25,9 +26,14 @@ DWORD mvdm_vm_io_create(ntvdm_vm_text *text, mvdm_vm_continuation *continuation,
     if (length == CONSOLE_IO_TITLE_BYTES) return ERROR_INVALID_PARAMETER;
     io = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*io));
     if (!io) return ERROR_NOT_ENOUGH_MEMORY;
+    io->console_title = HeapAlloc(GetProcessHeap(), 0, length + 1);
+    if (!io->console_title) { HeapFree(GetProcessHeap(), 0, io); return ERROR_NOT_ENOUGH_MEMORY; }
+    memcpy(io->console_title, title, length + 1);
     io->ready = CreateEventW(NULL, TRUE, FALSE, NULL);
     if (!io->ready) {
-        error = GetLastError(); HeapFree(GetProcessHeap(), 0, io); return error;
+        error = GetLastError();
+        HeapFree(GetProcessHeap(), 0, io->console_title);
+        HeapFree(GetProcessHeap(), 0, io); return error;
     }
     InitializeSRWLock(&io->input_lock);
     io->text = text; io->continuation = continuation;
@@ -58,6 +64,7 @@ void mvdm_vm_io_destroy(mvdm_vm_io *io)
 {
     if (!io) return;
     CloseHandle(io->ready);
+    HeapFree(GetProcessHeap(), 0, io->console_title);
     HeapFree(GetProcessHeap(), 0, io);
 }
 static DWORD enqueue_input(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys,
@@ -201,6 +208,38 @@ static DWORD dispatch(void *context, const ntvdm_vm_cancel *cancel,
     result->reply = TRUE; result->terminal_error = 0;
     reply->bytes = 0; ZeroMemory(&reply->state, sizeof(reply->state));
     switch (request->operation) {
+    case CONSOLE_IO_SET_TITLE_A: {
+        char *copy;
+        if (!request->data || !request->bytes || request->bytes > CONSOLE_IO_TILE_BYTES ||
+            memchr(request->data, 0, request->bytes) != request->data + request->bytes - 1) {
+            error = ERROR_INVALID_PARAMETER; break;
+        }
+        copy = HeapAlloc(GetProcessHeap(), 0, request->bytes);
+        if (!copy) { error = ERROR_NOT_ENOUGH_MEMORY; break; }
+        memcpy(copy, request->data, request->bytes);
+        HeapFree(GetProcessHeap(), 0, io->console_title);
+        io->console_title = copy;
+        error = ERROR_SUCCESS;
+        break;
+    }
+    case CONSOLE_IO_GET_TITLE_A: {
+        uint32_t capacity = request->state.count, length, count;
+        if (request->bytes || capacity > CONSOLE_IO_TILE_BYTES || (capacity && !reply->data)) {
+            error = ERROR_INVALID_PARAMETER; break;
+        }
+        length = (uint32_t)strlen(io->console_title);
+        count = length < capacity ? length : 0;
+        /* Match the selected native ANSI API: insufficient storage receives
+         * an empty string; an empty title leaves the caller buffer untouched. */
+        if (capacity && length) {
+            memcpy(reply->data, io->console_title, count);
+            reply->data[count] = 0;
+            reply->bytes = count + 1;
+        }
+        reply->state.count = count;
+        error = ERROR_SUCCESS;
+        break;
+    }
     case CONSOLE_IO_PUBLISH_TITLE_A:
         /* Channel-owned caption, also the next carrier's handoff title.
          * Do not change the worker's native Console or execution identity. */

@@ -1,0 +1,24 @@
+{
+  "result": "failed",
+  "case": "nested170 optional registry capture",
+  "observed": "Windows normalExit=true, both A.TXT/B.TXT produced; task-tree probe failed RPC1722",
+  "limitation": "No successful registry capture; not a product deadlock proof. Selected x64 monitor fixture was dated2026-10-26; repeated171 selects proven x86 fixture rebuilt2026-11-07.",
+  "files": [
+    {
+      "path": "build/t481-s3/nested170/runtime/matrix-results.json",
+      "sha256": "6A5BE0A597EF4C53C8070F2A57F602FFFBD5CCF16BEEE332FA65F7286E7F2955"
+    },
+    {
+      "path": "build/t481-s3/nested170/runtime/386-dosonly0.registry.json.err",
+      "sha256": "70E0CE714782A05B95795F612AACE9885035D5C5F82CD9213748A1EC3825EA1E"
+    },
+    {
+      "path": "build/t481-s3/nested170.stdout",
+      "sha256": "CB6C1AA168BA2B3283754893E034656B71252A859D206CFA25E30A0DF809927E"
+    },
+    {
+      "path": "build/t481-s3/nested170.stderr",
+      "sha256": "9F7D98D289BDEF151C4F3CBAA0D4EAF43F13F2D2022735A5F5754DB75797D844"
+    }
+  ]
+}

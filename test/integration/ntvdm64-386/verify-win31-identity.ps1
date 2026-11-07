@@ -7,9 +7,13 @@ param(
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$RetirementDriver,
+ [string]$InstanceDriver,
+ [switch]$ExplicitVmd,
  [switch]$RetireCommand,
  [switch]$ServiceLoss,
  [string]$WorkerCloseMonitor,
+ [string]$RegistrySnapshotMonitor,
+ [string]$RegistrySnapshotMarker,
  [switch]$ConsoleClose,
  [string]$InterruptObserver,
  [switch]$Keyboard,
@@ -39,6 +43,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires monitor and marker'}
 if($ResizeCommand -and (!$OrderedCommandImage -or !$RealCommand -or $ServiceLoss -or $WorkerCloseMonitor)){throw 'Resize requires independent real ordered commands'}
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
 if($ServiceLoss -and $WorkerCloseMonitor){throw 'Select service loss or managed worker close'}
@@ -68,9 +73,17 @@ if($LocalDirectoryControl -and !$Continuation){throw 'Local directory control re
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-$copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -RetirementDriver $RetirementDriver
+$copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -RetirementDriver $RetirementDriver -InstanceDriver $InstanceDriver
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 $enc=[Text.Encoding]::GetEncoding(28591)
+if($ExplicitVmd){
+ $system="$dest/SYSTEM.INI"
+ $iniText=$enc.GetString([IO.File]::ReadAllBytes($system))
+ if($iniText -notmatch '(?im)^[ \t]*device[ \t]*=[ \t]*\*vmd[ \t]*(?:;[^\r\n]*)?$'){
+  $iniText=[regex]::Replace($iniText,'(?im)^\[386Enh\]','[386Enh]'+"`r`ndevice=*vmd")
+  [IO.File]::WriteAllBytes($system,$enc.GetBytes($iniText))
+ }
+}
 
 $dosWitness=if($RetirementDriver){'dos-retirement.asm'}else{'dos-identity.asm'}
 $dosDefines=@()
@@ -273,6 +286,7 @@ function Confirm-Reuse($rows){
 }
 try {
  $retirementOptions=@{}
+ if($RegistrySnapshotMonitor){$retirementOptions.RegistrySnapshotMonitor=$RegistrySnapshotMonitor;$retirementOptions.RegistrySnapshotMarker=$RegistrySnapshotMarker}
  if($ServiceLoss -or $WorkerCloseMonitor){$retirementOptions.ServiceLossMarkers=@("$dest\PATCH\HOLD-A.txt","$dest\PATCH\HOLD-B.txt")}
  if($WorkerCloseMonitor){$retirementOptions.WorkerCloseMonitor=$WorkerCloseMonitor;$retirementOptions.ConsoleClose=$ConsoleClose}
  if($RetireCommand){$retirementOptions.RetiredNativeCommandMarker="$dest\PATCH\NATIVE.OK"}

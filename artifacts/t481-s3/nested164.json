@@ -1,0 +1,38 @@
+{
+  "case": "two guest VMs: command /c cmd /c mem then exit",
+  "result": "failed",
+  "runnerExit": 1,
+  "observation": "90s runner timeout; B.TXT contains actual MEM output and exit, A.TXT and final A/B.BIN absent",
+  "secondaryFailure": "isolated cleanup could not remove nthook64.dll; original guest source hashes verified unchanged",
+  "qualification": "Diagnostic provider-boundary input, not physical keyboard acceptance. Root cause not established.",
+  "files": [
+    {
+      "path": "build/t481-s3/nested164.ps1",
+      "sha256": "032BED725119B004295B4E0F7800ABDA4EA38BFB220005DEFB187E857865C3D1"
+    },
+    {
+      "path": "build/t481-s3/nested164.stdout",
+      "sha256": "3A8B95E138167632E913F01878CEF266EB336AA8629A8E3395109DB44F354E36"
+    },
+    {
+      "path": "build/t481-s3/nested164.stderr",
+      "sha256": "A5D40BFC680433D7616E71B13AAD5CC64AC3F3DDAFE040660045444C3C9C7826"
+    },
+    {
+      "path": "build/t481-s3/nested164/continuation-trace.txt",
+      "sha256": "B525BF3BE7C670C1371CFB4A04BE4534B02AFEB6FF235171ACB6991B2ACB3C01"
+    },
+    {
+      "path": "build/t481-s3/nested164/runtime/386-dosonly0.inputs.json",
+      "sha256": "015664ECAEACDEFF0C9B180B0C028384D858D8B75A68CE6F87457F5E668985FE"
+    },
+    {
+      "path": "build/t481-s3/nested164/runtime/386-dosonly0.observer.txt",
+      "sha256": "3C4B3BDFEB9DB0D137A01A1DC02DD2429DB31575466CCDB6C4A43F7546ADC2B3"
+    },
+    {
+      "path": "O:/tmp/m481n164/PATCH/B.TXT",
+      "sha256": "079E589418C7F9C1A48E87721108D5EC67A7C94D07F5C06812C48BCAEB15249A"
+    }
+  ]
+}

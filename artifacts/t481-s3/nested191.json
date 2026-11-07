@@ -1,0 +1,20 @@
+{
+  "run": "nested191",
+  "result": "pass",
+  "candidate": "diagnostic190 with DIV-321 reset ordering fix",
+  "checks": [
+    "Two guest DOS VMs nested command /c cmd /c mem then exit",
+    "MEM output returned to both VMs",
+    "320 callback identity/stack/register/flags checks",
+    "Normal Win3.1 exit",
+    "Original installation unchanged",
+    "Both queue traces retain exit without texit"
+  ],
+  "traceHash": "AF54A2E3EEB2CF821FC7C53D5D346B98273DF0A72B7D7E7EFA8427B7E69C1170",
+  "stdoutHash": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91",
+  "limitations": [
+    "Diagnostic provider-generated input, not physical keyboard validation",
+    "First passing integration after fix; broader and repeated regressions pending",
+    "No new default publication or S closure"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "run": "cached194",
+  "result": "pass",
+  "exit": "0",
+  "scope": "Complete cached x86/x64 component build; shared14 per architecture; keyboard/PIC89",
+  "stdoutHash": "D872E501C6A1ADB37CC719F54A89110A3F8BEE67EE3214F7F4965F20EC3CB93B",
+  "stderrHash": "5CDD7B5657DCC55B7261BD4BDF3C98A6F2E1CFFD0DF446D23033C265635E659E",
+  "full": "Full196 active; not yet qualified",
+  "publication": "unchanged"
+}

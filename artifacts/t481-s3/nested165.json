@@ -1,0 +1,47 @@
+{
+  "case": "two guest VMs: native interactive command carrier executes MEM then exit",
+  "result": "pass",
+  "runnerExit": 0,
+  "assertions": [
+    "two distinct concurrent VM generations",
+    "320 callback identity/stack/register/flags checks",
+    "actual MEM output returned to both VM text screens",
+    "normal Windows exit",
+    "original installation bytes unchanged"
+  ],
+  "limitation": "Provider-boundary deterministic input, not physical keyboard; does not qualify deeper command /c cmd /c mem case164",
+  "files": [
+    {
+      "path": "build/t481-s3/nested165.ps1",
+      "sha256": "4E1118BE1F25C423C36719C13BADD48D7CFA978F9125257124EC9BFA5FE5392B"
+    },
+    {
+      "path": "build/t481-s3/nested165.stdout",
+      "sha256": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91"
+    },
+    {
+      "path": "build/t481-s3/nested165.stderr",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t481-s3/nested165/continuation-trace.txt",
+      "sha256": "DE47CE79543AE417CE7790626AA9C8126B3C48E3694B63CC02DBD421E1BA34E9"
+    },
+    {
+      "path": "build/t481-s3/nested165/runtime/matrix-results.json",
+      "sha256": "F9567C9A2BF682EA6CF2BAA3D4D1BF70D8571E2BDF2B294491F219849C23807C"
+    },
+    {
+      "path": "build/t481-s3/nested165/runtime/vm-pair.json",
+      "sha256": "D40ADDFF83B4D8E451C530239020913567CFB9323120EE2FA3C5C56029D19DAB"
+    },
+    {
+      "path": "build/t481-s3/nested165/runtime/A.TXT",
+      "sha256": "90C2A23799CEE6495BBF3A321C23DA3F19AD46F7109E7B97C20AEA4B0C7905BB"
+    },
+    {
+      "path": "build/t481-s3/nested165/runtime/B.TXT",
+      "sha256": "85849508BC2BDA89BDC8BD4F3363EE27C7B48882858E8A762B17F250D854E99B"
+    }
+  ]
+}

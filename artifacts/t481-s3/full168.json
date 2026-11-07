@@ -1,0 +1,30 @@
+{
+  "result": "pass",
+  "exit": 0,
+  "suite": "Full",
+  "gates": 16,
+  "package": "build/t481-s3/r168-package",
+  "publication": "not published; unexplained nested164 remains recorded",
+  "files": [
+    {
+      "path": "build/t481-s3/full168.ps1",
+      "sha256": "F763DB51137B13B0CF67A687BADAB18C1CB2A4BDA8B976035BB25779EDFA2C2B"
+    },
+    {
+      "path": "build/t481-s3/verify168.ps1",
+      "sha256": "B954D73C59896070BBDA67EA5922CA3615C5B29535AAB2BA4A371A1A17FF3093"
+    },
+    {
+      "path": "build/t481-s3/full168-process.json",
+      "sha256": "65FD5DFABD4475A3CFDDF822F468252E8E29171E774AF997113C54B259EC5887"
+    },
+    {
+      "path": "build/t481-s3/r168-verification/full/timings.json",
+      "sha256": "93367255CCD38F980494D77793A1C2B9C87EFB3CB304FED3C20BDE43B3AD3AC8"
+    },
+    {
+      "path": "build/t481-s3/r168-package/product-system32-manifest.json",
+      "sha256": "E1B56CBAED64E773ED88C3B52258AB4A1C4477A59B3D6E2E281E087A793A0A3F"
+    }
+  ]
+}

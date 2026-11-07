@@ -1,0 +1,23 @@
+{
+  "result": "failed",
+  "case": "deep chain repeat171 with current x86 registry fixture",
+  "observation": "90s timeout repeated; B.TXT trigger absent; cleanup nthook64.dll occupation",
+  "files": [
+    {
+      "path": "build/t481-s3/nested171.stdout",
+      "sha256": "8DF239E63133A1950E45E9584EEAE4F49575CB877B1C1F806B9931B328D6DEAF"
+    },
+    {
+      "path": "build/t481-s3/nested171.stderr",
+      "sha256": "E88CFDF303C7615781C6B4B4E19373B6800D253C0A6A35267BC0D5C274D39D84"
+    },
+    {
+      "path": "build/t481-s3/nested171/runtime/386-dosonly0.observer.txt",
+      "sha256": "9ED40A40CB0761E4860F42CF4F130B7E48871468369F33782EA4328B732403F5"
+    },
+    {
+      "path": "build/t481-s3/nested171/continuation-trace.txt",
+      "sha256": "6AA276821FEFA698C9BF74D50E4833F5F3C9B354FED08806BA3FDDE766095356"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "run": "Full196",
+  "result": "pass",
+  "gates": 16,
+  "failures": 0,
+  "timingsHash": "F099506FE8828CDCB5A1A9870B7FA9647124244CBA3CA6F9F843B11E3C15C931",
+  "package": "b0dcbb50-6002-44d8-bd14-b92f7b9b9cbe",
+  "qualification": "Before diagnostic #line1163 restoration; final package equivalence checked separately"
+}

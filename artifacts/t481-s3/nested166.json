@@ -1,0 +1,46 @@
+{
+  "case": "repeat two-VM command /c cmd /c mem then exit",
+  "result": "pass",
+  "exit": 0,
+  "assertions": [
+    "MEM output in both VM screens",
+    "320 callback checks",
+    "normal Windows exit",
+    "unchanged original installation"
+  ],
+  "limit": "Does not explain or erase timeout164. Snapshot attempt after completion found cleaned stage and produced no registry evidence.",
+  "failure164Stack": [
+    "nested NTVDM cmdGetNextCmd -> GetNextVDMCommand waiting",
+    "root CCPU observed in lin2phy; one sample cannot prove hang location"
+  ],
+  "files": [
+    {
+      "path": "build/t481-s3/nested166.ps1",
+      "sha256": "2F8BD4E04ABCD8F33DCD312731B8F11BB09D81D0BF48B936DB886F28125A4DD7"
+    },
+    {
+      "path": "build/t481-s3/nested166.stdout",
+      "sha256": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91"
+    },
+    {
+      "path": "build/t481-s3/nested166/continuation-trace.txt",
+      "sha256": "68941E40BEDE9A1193128F134CB3B1874EC058CEAC34FAB844E593885B446257"
+    },
+    {
+      "path": "build/t481-s3/nested166/runtime/vm-pair.json",
+      "sha256": "753E9952C6A868FCC5D40FC7809D5BA1FBDC77763D7CD3BE891064A751272FB1"
+    },
+    {
+      "path": "build/t481-s3/nested166/runtime/matrix-results.json",
+      "sha256": "09CC381715E20DEBBF0D7AE7511579028F1C5E5D4EC5B028968E575719274BB9"
+    },
+    {
+      "path": "build/t481-s3/nested166/runtime/A.TXT",
+      "sha256": "A4B6DEAD4A72AC4BBA089634B19F9EC637C77F8D2F5E88E2BFC276731E3F7AFC"
+    },
+    {
+      "path": "build/t481-s3/nested166/runtime/B.TXT",
+      "sha256": "611FB63602B308C451CFB1A176F96FABC3194BB38F0AA23A2D1928A3CEFA3A9D"
+    }
+  ]
+}

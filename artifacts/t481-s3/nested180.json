@@ -1,0 +1,13 @@
+{
+  "run": "nested180",
+  "diagnosticBuild": 179,
+  "result": "failed",
+  "cause": "unattributed input reorder",
+  "observed": "One VM returned exit then t/CR and exi batches; subsequent reads texit/CR. Nested DOS worker EMPTY, CMD active.",
+  "keyboardBoundaryObservation": "No 0xb01/0xb02 records; wrapper link selection verified in map, but child process trace availability unproven. This run does not prove read-before-EOI causality.",
+  "cleanup": "nthook64.dll occupied",
+  "source": "test/integration/ntvdm64-386/keyboard-handoff-observer.c",
+  "traceHash": "2FD3FA50B7C00222D3D6B8227837FA1B3D7E10B8EBC52E98007463769BB48458",
+  "registryHash": "DDB4FCD73F0CDBE53244BE158FEFD91EAAE5E4AFF02791B970D62A367002A472",
+  "publication": "unchanged"
+}

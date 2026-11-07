@@ -1,0 +1,19 @@
+{
+  "run": "nested182",
+  "result": "failed both VM nested chains",
+  "diagnosticBuild": 181,
+  "keyboardRows": [
+    "8744 4 151 1 0 0 7",
+    "27276 4 151 1 0 0 7",
+    "8744 0 156 0 1 1 0",
+    "27276 0 156 0 1 1 0",
+    "8744 0 156 0 1 1 0",
+    "27276 0 156 0 1 1 0"
+  ],
+  "conclusion": "All observed PendingKeyboardHistory handoffs have either unread full output or retired output; no read-but-unacknowledged slot. Both VM queues still show texit. Thus origin178 defect is not demonstrated cause of this failure.",
+  "nextBoundary": "NTVWM hidden Console input admission and unused-record return after the DOS suffix and BIOS prefix were delivered",
+  "traceHash": "DE74ACBDF993E4A48CD509D53AEED815771FAD0762365A02DE065E59D4D510BB",
+  "keyboardHash": "6FF2C3A062BBBD425B8179149DA9A732C8234D37791792625946D7E0B6BAFB7C",
+  "guest": "Original installation bytes verified unchanged",
+  "publication": "unchanged"
+}

@@ -492,6 +492,27 @@ static void trace(unsigned operation, uint32_t vm, uint32_t token)
     ReleaseSRWLockExclusive(&lock);
 }
 
+/* Diagnostic queue observations only; no key is consumed or rewritten. */
+void test_vm_io_records(uint32_t owner, uint32_t operation, const void *data, uint32_t count)
+{
+    const console_io_input *records = data;
+    uint32_t i;
+    if (!data || count > CONSOLE_IO_INPUT_CAPACITY) return;
+    for (i = 0; i < count; ++i) if (records[i].type == KEY_EVENT)
+        trace(0xa00 + operation, owner,
+            (records[i].character & 0xffffu) | (records[i].key_down ? 0x10000u : 0));
+}
+void test_vm_io_result(const console_io_request *request, DWORD transport, DWORD reply)
+{
+    unsigned operation = request ? request->operation : 0;
+    trace(0x600u + operation, GetCurrentProcessId(), transport ? transport : reply);
+    if (request && (transport || reply)) {
+        trace(0x700u + operation, request->state.width, request->state.height);
+        trace(0x800u + operation, request->state.count, request->state.has_clip);
+        trace(0x900u + operation, request->state.mode, request->bytes);
+    }
+}
+
 /* Read-only diagnostic of the existing vm_command descriptor and VMM client
  * frame (layout documented by mvdm_vm_command.c). Never recapture/normalize
  * the command: that would change the original CR terminator before admission. */

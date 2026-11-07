@@ -1,0 +1,14 @@
+{
+  "scope": "T481 S3 keyboard input return",
+  "test": "tests/observation/verify-keyboard-origin-device.ps1 -BuildRoot build/t481-s3/origin178",
+  "result": "expected contract failure",
+  "exit": 1,
+  "assertion": "output_full && !PendingKeyboardHistory() after simulated port-60 consumption before EOI",
+  "sourceHash": "89353B58523D7CC243EF63A5DC59B350028C6F7AC1A0D0B9C1353221227895B6",
+  "limitations": [
+    "Fixture records kbd_output_data_read directly; it does not execute kbd_inb.",
+    "Confirms history-selection boundary mismatch, not causality of nested177 texit.",
+    "No product repair or publication in this run."
+  ],
+  "stdoutHash": "3045EF870C3BF02EE956061E549F7DEAF124A1B84D8ACBDF54E7C8DFD586C132"
+}

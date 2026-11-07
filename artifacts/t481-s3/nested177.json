@@ -1,0 +1,46 @@
+{
+  "result": "failed",
+  "exit": 1,
+  "observation": "One queue re-delivers texit after original exit stimulus. Failure task tree retains native CMD with an empty DOS worker; nested MEM is no longer active.",
+  "limit": "Record observation establishes changed input sequence, not which original or adapted return stage caused it. Repeated strings may include legitimate ownership returns; counts alone are not duplicate consumption proof.",
+  "sequences": [
+    {
+      "operationAndQueue": "2578 0620feb8",
+      "keyDownCharacters": "command /c cmd /c mem<CR>exit<CR>exit<CR>exit<CR>exit<CR>texit<CR>texit<CR>texit<CR>"
+    },
+    {
+      "operationAndQueue": "2578 0638ffe0",
+      "keyDownCharacters": "command /c cmd /c mem<CR>exit<CR>exit<CR>exit<CR>exit<CR>exit<CR>exit<CR>exit<CR>"
+    },
+    {
+      "operationAndQueue": "2581 0620feb8",
+      "keyDownCharacters": "exit<CR>t<CR>exiexit<CR>texit<CR>texit<CR>texit<CR>"
+    },
+    {
+      "operationAndQueue": "2581 0638ffe0",
+      "keyDownCharacters": "exit<CR>exit<CR>exit<CR>exit<CR>exit<CR>exit<CR>"
+    }
+  ],
+  "files": [
+    {
+      "path": "build/t481-s3/nested177/continuation-trace.txt",
+      "sha256": "7B3917962C9BC2E811B4DC069639224216FD3B12CE15090ACDE3AF0C9805AF2F"
+    },
+    {
+      "path": "build/t481-s3/nested177/runtime/386-dosonly0.failure-registry.json",
+      "sha256": "4CEA5E4B8D543BAC457B7FD6515E32D4E613B0F29BC9B69A01150F145BCDD684"
+    },
+    {
+      "path": "build/t481-s3/nested177/runtime/386-dosonly0.observer.txt",
+      "sha256": "A0599B1B9473BDC30FC1B3AEF080B0C1D4CD14EF3DD4F90B67A60F526C83B046"
+    },
+    {
+      "path": "build/t481-s3/nested177.stdout",
+      "sha256": "5C95B86CFB65F94043422F097A54B40063138D87DDE7FD8B87D15D1C2DC57D62"
+    },
+    {
+      "path": "build/t481-s3/nested177.stderr",
+      "sha256": "AC0D2B88F65BEA8D61576995FD291673730BFC5369BD2E89CC728DC864ADF65A"
+    }
+  ]
+}

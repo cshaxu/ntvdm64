@@ -1,0 +1,59 @@
+{
+  "runs": [
+    {
+      "run": 172,
+      "exit": 0,
+      "files": [
+        {
+          "path": "build/t481-s3/nested172.stdout",
+          "sha256": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91"
+        },
+        {
+          "path": "build/t481-s3/nested172.stderr",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        {
+          "path": "build/t481-s3/nested172/runtime/386-dosonly0.registry.json",
+          "sha256": "0DD35E921D1B2E736006972F5268836C71A0357BB6147CD001C367EFEB95D56A"
+        }
+      ]
+    },
+    {
+      "run": 173,
+      "exit": 1,
+      "files": [
+        {
+          "path": "build/t481-s3/nested173.stdout",
+          "sha256": "1EAF5644484C191E8124CAB25C39A0BDC1F4EC4DE03258044023978D93D7E16A"
+        },
+        {
+          "path": "build/t481-s3/nested173.stderr",
+          "sha256": "622316F8520CFFAF61F0D76F120FAF601A317CF2098C2BC2DFF394E4C8D61DE6"
+        },
+        {
+          "path": "build/t481-s3/nested173/runtime/386-dosonly0.registry.json",
+          "sha256": "2F93F3BB97546841020211F16CB9CC54209CA6A7F859AB7571596790E3D77D3D"
+        }
+      ]
+    },
+    {
+      "run": 174,
+      "exit": 0,
+      "files": [
+        {
+          "path": "build/t481-s3/nested174.stdout",
+          "sha256": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91"
+        },
+        {
+          "path": "build/t481-s3/nested174.stderr",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        {
+          "path": "build/t481-s3/nested174/runtime/386-dosonly0.registry.json",
+          "sha256": "DC75DA498DD52170AFB3A72E1AE27C8697BB12E45BD329704C287944A5FE7BC3"
+        }
+      ]
+    }
+  ],
+  "conclusion": "172 and174 pass;173 timeout. Live registry capture works with current fixture. Timeout was classified only after cleanup; test now classifies the existing timeout receipt before cleanup to capture failure state."
+}

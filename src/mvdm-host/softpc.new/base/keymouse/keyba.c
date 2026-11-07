@@ -92,7 +92,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-317): metadata only; original scan bytes unchanged. */
 #include "mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
-extern void mvdm_keyboard_reset_pending_irq(void); /* DIVERGENCE(MVDM-HOST-DIV-321) */
+extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOST-DIV-321) */
 #endif
 
 
@@ -1024,14 +1024,14 @@ GLOBAL unsigned PendingKeyboardHistory(void)
 {
     return mvdm_keyboard_history_pending(&nt_keyboard_history,buff_6805_out_ptr,
         buff_6805_in_ptr,BUFF_6805_PMAX,scanning_discontinued ? held_event_count : 0,
-        output_full,pending_8042,waiting_for_upcode);
+        output_full && !kbd_output_data_read,pending_8042,waiting_for_upcode);
 }
 
 #line 1119
 void Reset6805and8042(void)
 {
     int key;
-    mvdm_keyboard_reset_pending_irq(); /* DIVERGENCE(MVDM-HOST-DIV-321) */
+    int cancel_irq = output_full && nt_keyboard_history.output; /* DIV-321 */
     mvdm_keyboard_history_clear_device(&nt_keyboard_history); /* DIV-317 */
 
     /* Reset 6805 */
@@ -1078,6 +1078,9 @@ void Reset6805and8042(void)
     //Removed by (DAB)
     //host_kb_light_off (5);
     num_lock_on = TRUE;
+    /* DIV-321: cancellation calls EOI; empty queues before it can refill. */
+    mvdm_keyboard_reset_pending_irq(cancel_irq);
+#line 1163
 }
 
 #endif /* NTVDM */

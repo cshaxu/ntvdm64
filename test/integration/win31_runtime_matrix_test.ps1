@@ -247,6 +247,9 @@ try {
                     [IO.File]::AppendAllText((Join-Path $output "$($case.Name).serial-dialogs.txt"),$observation)
                 }
             }
+            if((Get-Content -LiteralPath $report -Raw) -match '(?m)^result=timeout\r?$') {
+                throw 'Runtime observer timed out'
+            }
             if($RegistrySnapshotMarker -and !$registryCaptured){throw 'Registry readiness marker was not observed'}
             if($RetiredNativeCommandMarker) {
                 # Observe before scope cleanup: cleanup must not manufacture
@@ -260,7 +263,18 @@ try {
                     ConvertTo-Json -Depth 5 | Set-Content (Join-Path $output "$($case.Name).native-retirement.json")
                 if($remaining.Count){throw 'Native command remains alive before scope cleanup'}
             }
-        } catch { $errorText=$_.ToString() }
+        } catch {
+            $errorText=$_.ToString()
+            # Preserve the live service tree before cleanup destroys a failed
+            # chain. A diagnostic failure must not replace the primary result.
+            if($RegistrySnapshotMonitor -and $stage -and (Test-Path -LiteralPath $monitor)) {
+                $snapshot=Join-Path $output "$($case.Name).failure-registry.json"
+                try {
+                    & $monitor --tree-json 2> "$snapshot.err" | Set-Content -LiteralPath $snapshot
+                    "exit=$LASTEXITCODE" | Set-Content "$snapshot.exit"
+                } catch { $_.ToString() | Set-Content "$snapshot.capture-error.txt" }
+            }
+        }
         finally {
             if($process){if(!$process.HasExited){$process.Kill();[void]$process.WaitForExit(5000)};$process.Dispose()}
             if($scope){Stop-IsolatedPackageScope $scope}

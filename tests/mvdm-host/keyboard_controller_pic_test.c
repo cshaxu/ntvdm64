@@ -7,6 +7,9 @@
 #include <sas.h>
 #include <ica.h>
 #include "ntvdm-exe/session/session.h"
+#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+extern mvdm_keyboard_history nt_keyboard_history;
+extern void Reset6805and8042(void);
 
 extern void sas_init(PHY_ADDR), sas_term(void), c_cpu_init(void);
 extern void AT_kbd_init(void), kbd_outb(io_addr, half_word);
@@ -23,6 +26,7 @@ extern void ica_inb(io_addr, IU8 *), ica_outb(io_addr, IU8);
 extern IS32 ica_intack(IU32 *);
 
 static unsigned assertions, failures, eoi_calls, delayed_calls;
+static int delayed_keyboard_pending;
 #define CHECK(c) do { ++assertions; if (!(c)) { ++failures; \
     fprintf(stderr, "FAIL line %u: %s\n", (unsigned)__LINE__, #c); } } while (0)
 
@@ -35,7 +39,8 @@ void host_EOI_hook(int line, int count)
 }
 ULONG host_DelayHwInterrupt(int line, int count, ULONG delay)
 {
-    (void)line; (void)count; (void)delay;
+    if (line == 1) delayed_keyboard_pending = count != 0;
+    (void)delay;
     ++delayed_calls;
     return 0; /* No timer/real BIOS ISR proof in this fixture. */
 }
@@ -204,6 +209,17 @@ int main(void)
     chord_key(49, TRUE,  0x2f, TRUE);  /* V */
     chord_key(49, FALSE, 0xaf, TRUE);
     fprintf(stderr, "PASS physical Alt+Enter and following key through controller/PIC\n");
+    /* Whole-device handoff reset must not schedule the next queued byte
+     * from the PIC cancellation callback while discarding that same queue. */
+    bDelayIntPending = FALSE; DelayIrqLine = 0;
+    AddTo6805BuffImm(0x17); AddTo6805BuffImm(0x14); continue_output();
+    nt_keyboard_history.output = 1; /* A returnable source-owned key. */
+    CHECK(output_full && bKbdEoiPending);
+    if (!(pic(0x0a) & 2)) ica_hw_interrupt(0, 1, 1);
+    delayed_keyboard_pending = 0;
+    Reset6805and8042();
+    CHECK(!output_full && !pending_8042);
+    CHECK(!delayed_keyboard_pending);
     sas_term(); (void)session_thread_unbind(&owner); (void)session_dispose(&owner);
     fprintf(stderr, "KEYBOARD_PIC_PROFILE assertions=%u failures=%u\n", assertions, failures);
     return failures ? 1 : 0;

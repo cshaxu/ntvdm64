@@ -318,6 +318,19 @@ int main(void)
     CHECK(ntvdm_vm_text_dispatch(text, &request, &reply) == ERROR_INVALID_PARAMETER);
     request.operation = CONSOLE_IO_BARRIER;
     CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply));
+    /* The nested DOS startup repeats its current extent. It must not resize,
+     * lose cells/cursor, or claim a different guest mode has been applied. */
+    request.operation = CONSOLE_IO_BUFFER_SIZE;
+    request.state.width = frame.h.columns; request.state.height = frame.h.rows;
+    CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply));
+    ++request.state.width;
+    CHECK(ntvdm_vm_text_dispatch(text, &request, &reply) == ERROR_NOT_SUPPORTED);
+    request.state.width = 0;
+    CHECK(ntvdm_vm_text_dispatch(text, &request, &reply) == ERROR_INVALID_PARAMETER);
+    request.operation = CONSOLE_IO_SCREEN_INFO;
+    CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply));
+    CHECK(reply.state.width == (int32_t)frame.h.columns &&
+        reply.state.height == (int32_t)frame.h.rows && reply.state.attribute == 0x1e);
     request.operation = CONSOLE_IO_PREPARE_TEXT_REGION;
     request.state.width = frame.h.columns; request.state.height = frame.h.rows;
     CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply));

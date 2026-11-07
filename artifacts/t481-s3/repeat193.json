@@ -1,0 +1,14 @@
+{
+  "nestedRepeat": "nested192",
+  "result": "pass",
+  "checks": [
+    "Both MEM outputs",
+    "320 callback checks",
+    "Normal Win3.1 exit",
+    "Original guest unchanged"
+  ],
+  "independentHistory": "origin193 passes previously failing read-before-EOI assertion and all existing origin cases",
+  "nestedHash": "34BA44B1C592C7FD82ACA28AE35BFBB72B50953A8EC457E2149BB62B928FDB91",
+  "originHash": "BB1176D216FB1FC8554F9965C2B909383B109395CD7171EB3425B951814F8B10",
+  "limits": "Nested192 precedes the separate read-before-EOI predicate fix. Current combined candidate requires fresh qualification."
+}

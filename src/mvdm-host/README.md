@@ -3420,3 +3420,17 @@ of opening a modal error dialog that prevents its join. Live-service failures
 retain original reporting. Diagnostic line anchors are preserved. No guest
 changes, timeout or thread termination is introduced. See the failure and
 verification in the [T481 plan](../../docs/etc/operations/m0-t481-multitask-completion-plan.md).
+
+T481 S3 refinement of MVDM-HOST-DIV-321: capture user-origin IRQ ownership
+before Reset6805and8042 clears state, and retire delayed/PIC requests after
+the device queue is empty. PIC cancellation invokes KbdEOIHook and previously
+refilled the next byte before reset discarded its origin. Actual controller/PIC
+fixture reset188 fails the no-delayed-refill assertion on the prior ordering.
+The candidate preserves normal EOI, PIC reinitialization and original guest.
+Controller189 passes89/89; nested191/192/200 and Full196 pass. Combined package publication203 is recorded in the T481 plan.
+
+T481 S3 refinement of MVDM-HOST-DIV-317: PendingKeyboardHistory excludes an
+output slot whose port-60 data has been consumed, even when the slot awaits
+EOI. Other device slots with that origin remain selectable. Origin178 is the
+failing control. This is independent of the DIV-321 cancellation/refill fix;
+it does not alter output retirement or normal/early EOI behavior.

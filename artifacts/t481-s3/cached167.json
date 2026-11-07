@@ -1,0 +1,23 @@
+{
+  "result": "pass",
+  "exit": 0,
+  "scope": "cached complete x86/x64 build and shared tests14/14 per width",
+  "files": [
+    {
+      "path": "build/t481-s3/cached167.ps1",
+      "sha256": "77B856716AB7E13B6592DBBC6758F5811BD3E3F3610B4FDC74A97932F071D7F5"
+    },
+    {
+      "path": "build/t481-s3/cached167.stdout",
+      "sha256": "FED49A57CAF5EF7FB4F3FEF00E893D583ED667E36CFBC5ADB226963D8F524EC0"
+    },
+    {
+      "path": "build/t481-s3/cached167.stderr",
+      "sha256": "3A1CF97D15A56535669CCB5A40687DFF36E0F08006196F0CFBBBC82A70345E7A"
+    },
+    {
+      "path": "build/t481-s3/cached167-process.json",
+      "sha256": "E44B10EDAA2A4F46977FE761FA63ABCFA923798689872FADC646DF28F16E4617"
+    }
+  ]
+}
