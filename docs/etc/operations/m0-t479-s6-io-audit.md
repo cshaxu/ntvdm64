@@ -3,13 +3,85 @@
 Reconciled against delivered d3bd17b6b. This is the finite S6 work inventory,
 not an acceptance report. Original guest bytes remain immutable.
 
-[Operation inventory](m0-t479-s6-io-inventory.json) enumerates all47 live wire
-operations and current provider-reference locations. Fifteen have no explicit
-dispatch and reach unsupported default; the previous17 count predates the two
-fill operations. The32 remaining entries have dispatch references, not blanket
+[Operation inventory](m0-t479-s6-io-inventory.json) enumerates all47 defined wire
+operations and provider-reference locations. Enumeration is not proof of a
+reached product producer: the scroll108 caller audit corrects that earlier
+overstatement. Fifteen have no explicit dispatch and reach unsupported default;
+the previous17 count predates the two fill operations. The32 remaining entries
+have dispatch references, not blanket
 semantic acceptance. VIDEO_BEGIN still accepts only same-sized text, WINDOW_RECT
 only full-grid identity changes, and modes reject processing flags. Source
 references and positive payload coverage must remain separate.
+
+## Withdrawn scroll candidate099--108 (never published)
+
+The existing SCROLL wire caller is MvdmScrollConsoleScreenBufferA in
+ntvdm-exe/win32/console_client.c. NTCON delegates it to the native Console;
+the VM provider returns unsupported. The experiment added one
+transaction-local cell operation and selects it as an implicit publication
+mutation. No protocol, guest code or original mirror changes are made.
+
+Semantic reference: OpenNT-4.5 nt/private/ntos/w32/ntcon/server/output.c,
+ScrollRegion; SHA256
+7D783C350B91618C47DEA9721A04E5232F28086C2A693D92B86EAAB645A474DC.
+Its original server implementation depends on Console screen rows, cursor,
+scroll-buffer and display ownership, so importing that dependency closure is
+not appropriate for this copied VM frame. The independent local implementation
+preserves source-screen clipping, destination/fill clipping, overlapping source
+capture and the zero-character/zero-attribute default-fill rule. It modifies
+only the existing staged candidate; guest acknowledgement still owns commit.
+It allocates one bounded snapshot of the current cell grid before mutation;
+allocation failure leaves the candidate unchanged. Cursor/geometry are retained.
+
+Run099 failed before compilation because the runner selected a CMake
+subdirectory rather than the existing root Ninja tree. Run100 compiled but
+failed in fixture creation: the new3x3 fixture included trailing C-structure
+padding. The corrected explicit header-plus-cell extent in101 reaches the
+unsupported SCROLL dispatch and fails there against unchanged production code.
+Run102 uses that same corrected fixture with the candidate and passes360 VM
+text ownership/publication assertions. No failed run is counted as acceptance.
+
+Noninteractive native Console witness104 passes six independent character and
+attribute expectations for overlapping diagonal movement, upward movement,
+column clipping, negative source origin, off-grid destination and identity.
+It creates an inactive buffer in its owned hidden runner Console, not the
+user's Console or a guest window. The host buffer is80x25 with a3x3 write clip;
+all six source regions refer to the same3x3 data as the VM fixture. The separate
+fully-outside-source unit case is not covered by this host witness. Script
+SHA256 CBA26F0CB32C7F1AFE513F177B0535EDD83C5EC74910AEDB6CB24914C370E38E;
+receipts are build/t479-s6-livecmd/scroll-native104.*. These checks prove cell
+semantics within their cases, not actual guest SCROLL or complete S6 I/O.
+
+Expanded x86 run105 passes416 text and1858 notification assertions, including
+scroll acknowledgement, four cancellation sources, duplicate cancellation
+handles and guest failure rollback. The six native cases also pass with zero
+fill/default attributes in scroll-native104-default. Build103 passes x86 and
+14 shared tests, then loses its observing session during x64; recorded PID19704
+and project build descendants are absent in a subsequent CIM inventory and no
+final receipt exists. Preserve this interruption. Cached107 resumes x64 only
+and exits0 with14 shared tests passed. Neither run is a Full or guest verdict.
+
+The subsequent complete caller sweep finds the missing acceptance prerequisite:
+nt_graph.c nt_scroll_up and nt_scroll_down unconditionally return FALSE before
+their ScrollConsoleScreenBuffer calls. The other matches are the wrapper,
+protocol declaration, NTCON handler and test callers. Native CUI applications
+scroll their hidden Console and publish captured VIDEO frames; a successful
+native scroll therefore does not witness a SCROLL packet to this VM provider.
+Do not remove the original early returns merely to exercise this experiment.
+
+Accordingly108 withdraws the four owned source/test edits byte-for-byte to their
+HEAD blobs. build/t479-s6-livecmd/scroll108-withdrawn.patch and
+scroll108-withdrawal.json retain the experiment and before/restored hashes.
+No guest, mirror or published product was changed. This corrects the inventory's
+claim that all47 enumerated operations were live; it does not waive complete
+VM I/O, input handback, the actual video-scroll behavior or other S6 requirements.
+No new Full run or default publication is justified for the withdrawn code.
+Candidate103 binaries must not be used as release inputs after withdrawal;
+the previously published P4 remains the accepted runtime.
+Cached restore109 rebuilds NTVDM from the restored source and exits0, including
+the VdmTib ownership check. This restores the build target, not a new release.
+No product or test source diff remains from the experiment. The prepared
+Full106 scripts were not started and must not be cited as test evidence.
 
 ## P4 publication093 and review
 

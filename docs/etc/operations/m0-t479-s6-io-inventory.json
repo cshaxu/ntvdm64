@@ -1,6 +1,6 @@
 {
   "baseline": "d3bd17b6b",
-  "method": "Current dispatch source references across the three live provider layers; not runtime acceptance. Explicit cases and PUBLICATION_END special dispatch counted; actual payload restrictions retained.",
+  "method": "Defined protocol operations and dispatch references across three provider layers, not proof of reached product callers or runtime acceptance. Explicit cases and PUBLICATION_END special dispatch counted; actual payload restrictions retained. Caller audit108 excludes SCROLL as a currently reached VM operation; other caller classifications are not implied.",
   "operations": [
     {
       "value": 1,
@@ -57,7 +57,7 @@
       "value": 7,
       "operation": "CONSOLE_IO_SCROLL",
       "sites": [],
-      "status": "no explicit dispatch; reaches unsupported default"
+      "status": "unsupported; caller audit108: original nt_scroll_up/down return before the wrapper call; native CUI scroll is captured as VIDEO. Test-only candidate withdrawn, not a reached product gap"
     },
     {
       "value": 8,
