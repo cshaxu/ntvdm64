@@ -8,7 +8,7 @@ program, final delivery and explicit proof limits.
 
 ## Latest Integration
 
-Rebased onto main 3eb6a1d3a; T480 remains closed. Host mirror sources retain
+Rebased onto main ab413287f; T480 remains closed. Host mirror sources retain
 the accepted T480 bytes; assets/release now uses main's complete package.
 The test/publication results below belong to the pre-rebase revision, not a
 new test of the combined revision. See the task closure's post-rebase record.

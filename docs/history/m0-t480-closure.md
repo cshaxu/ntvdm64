@@ -64,3 +64,17 @@ standing integration-only delivery arrangement, no new build, runtime test or
 publication is claimed. Final ancestry, source/asset identity, documentation
 and diff checks accompany this rebase. T480 remains closed; no new S is admitted.
 No O:/winnt write or push.
+
+## Subsequent rebase onto T479 S8 (2026-11-06)
+
+Owner requested another latest-main rebase. Replayed all 14 local commits
+from 80a4cdbb1 onto ab413287f76c6ffca6610c69ef206dccd76ae15b;
+resulting replay tip is 8e1f78fa4. Backup:
+`codex/t480-before-rebase-ab413287f`.
+Only docs/states/CURRENT.md and docs/etc/README.md conflicted: retain the
+T480 state and both sets of supporting-material links. No source or binary
+conflict occurred. Host mirror sources are unchanged from the preceding T480
+tip; assets/release is identical to the new main. Main's uncommitted S9 work
+was left untouched. T480 remains closed. This is integration-only: historical
+runtime receipts are not a fresh test of this combined revision. No new build,
+runtime test, publication, O:/winnt write or push.
