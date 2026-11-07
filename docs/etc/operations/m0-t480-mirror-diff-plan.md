@@ -132,3 +132,20 @@ C/H files. Both builds, focused contracts, final Full16/16, gameplay and all11
 worktree-only publication hashes passed. First non-passing attempts remain
 recorded. Retention without safe-reversion proof is not a claim of minimality.
 S4 and S5 remain planned and unadmitted; no completed recovery is repeated.
+
+
+## S4 admission
+
+Owner admits the next planned S after S3 commit511f23fc0. The active packet in
+Current owns S4: reconcile S2/S3-affected divergence registrations and test/evidence
+claims against the delivered source. Prior snapshots remain historical; add or
+narrow successor descriptions rather than erase past conclusions. This is not
+another full semantic audit or permission to revert the3,641 conservatively
+retained blocks. S5 aggregate review remains unadmitted.
+
+Start with the narrowed DIV-582/DIV-869 selector account, preserved
+OPENNT-HOST-065 environment width boundary, recovered RTL1970 implementation,
+and S2/S3 comment/layout claims. Then check the finite union of affected files
+for other stale registrations, source hashes and test references. Product
+behavior is not scheduled to change; compile/test/publication is required if
+an actual product change is subsequently justified, not for this admission.
