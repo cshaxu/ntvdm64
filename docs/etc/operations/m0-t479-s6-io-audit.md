@@ -131,3 +131,60 @@ MVDM_S42_VXD_BOP_REPORT_PATH diagnostic before starting the owned worker.
 The callback's set carry flag deliberately chains every INT09. A future test
 that consumes keys must use a separate implementation and evidence, not quietly
 change the meaning of this passive calibration.
+
+## Native input receipt069--071: missing producer reproduced
+
+The authored tests/observation/win31_vm_input_child.c opens its report, records
+its PID, switches its own Console input to raw mode and blocks in the real
+ReadConsoleInputW. It logs every returned key record and exits after Enter
+release. An independent30-second diagnostic deadline terminates a missing-input
+case with ERROR_TIMEOUT; this is not a product timeout or a passing result.
+Successful later acceptance must inspect A/Enter make/break records and
+post-return BIOS input, not merely the child's exit code.
+
+Control069's supervisor failed after launch because inspect069 did not exist.
+The already-live owned guest was inspected and continued without relaunch;
+the known COM1/2/4 warnings were explicitly ignored. Child8732 entered its
+read and timed out with no key records. The test key was sent immediately
+after the launch command, so ordering was insufficient to establish active-child
+ownership. Control070 used the corrected observer directory and child10400,
+but fopen_s denied live report reads. The observing PowerShell command also
+lacked terminating-error behavior and incorrectly continued after that read
+error. Neither attempt proves readiness before the test key.
+
+Control071 corrects those test defects: _fsopen with _SH_DENYWR allows a
+read-only observer; that observer uses terminating errors, waits for the
+flushed waiting-real-input record, checks the recorded process is alive, and
+only then sends A and Enter. The retained ready071.txt records child22308
+ready before input at 2026-11-07T00:20:47.0978610Z. Its final receipt records
+started, waiting-real-input and deadline wait=258 error=0, with no key record.
+The guest IRQ observations continue, and after child retirement the DOS
+prompt executes A, producing the native shell's unknown-command error.
+This supplies the required negative: input arriving during the admitted host
+child still reaches guest BIOS/COMMAND instead of that child's input queue.
+
+The input stimulus is the existing exact-PID/path-checked key-default.exe
+window-message provider, not physical SendInput acceptance. Foreground-checked
+SendInput was attempted in069 and refused before sending; it was not counted.
+The final source SHA-256 is
+67F30214457FE10594E0B8E4B726A9BD52E21FD7B92B54133654697C8F252BD0;
+the MSVC x64 image is
+0FA1A0541E7A6537A6DD93531FD6A62C283A8BF1049DCAC195868B090921658C.
+Build: the existing VS2022 x64 environment, cl /std:c11 on this source;
+retained input-child071-build.exit is0. The executable was copied as IK.EXE
+only into O:/tmp/w479m; command `ik ik071.txt` ran inside its DOS VM.
+
+Retain input-route070/ready071.txt, child-receipt071.txt, niddb070.txt and
+control071-after.bmp under build/t479-s6-livecmd. This run ends through explicit
+owned-service diagnostic teardown, not a normal Windows-exit pass. After all
+owned package processes retired, SYSTEM.INI was restored to the same
+45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874 hash.
+The production package, original guest executables and O:/w31 are unchanged.
+
+Reuse audit: original nt_event.c owns KEY_EVENT_RECORD history; the existing
+mvdm_keyboard_history.c carries source metadata, not a replacement keyboard
+translator. Original nt_keycd.c BiosKeyToInputRecord converts BIOS buffer
+characters, but it does not reconstruct key releases and its conversion uses
+the host layout. Neither alone establishes guest-selected VM identity or a
+complete input contract. Keep these as evaluated reuse candidates; do not
+claim that forwarding their output alone repairs exclusive consumption.
