@@ -279,3 +279,10 @@ retry, deadline, reconnect policy or second lifecycle authority is introduced.
 Mirror runtime delta against the previous baseline: nt_event.c +8/-0, registered
 DIV-355; guest bytes unchanged. Addon +252/-4 and NTVDM-owned runtime +369/-11
 implement the retained input ownership/conversion, not mirror algorithms.
+
+P1 is committed/pushed at a7024b666. A post-commit blob audit finds34 of36
+raw evidence files were newline-normalized by inherited core.autocrlf behavior;
+their retained build-source bytes still match every recorded hash. A follow-up
+evidence-only P pins artifacts/t481-s2 to -text and restores those exact bytes,
+then verifies each staged blob against the manifest. No source or product image
+changes and no runtime-test repetition are involved.

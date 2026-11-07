@@ -88,3 +88,6 @@ artifacts/t479-s6-handoff/** -text
 
 test/lib-nxvm/lib/** -text
 test/integration/lib-nxvm/** -text
+
+# T481 S2 raw verification receipts retain their recorded byte hashes.
+artifacts/t481-s2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
