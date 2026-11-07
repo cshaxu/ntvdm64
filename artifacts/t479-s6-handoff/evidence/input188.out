@@ -1,0 +1,32 @@
+[1/4] Building C object softpc-tests\CMakeFiles\mvdm-vm-notification-test.dir\__\__\__\src\ntvdm-exe\softpc\mvdm_vm_executor.c.obj
+[2/4] Building C object softpc-tests\CMakeFiles\mvdm-vm-notification-test.dir\__\__\__\src\ntvdm-exe\softpc\mvdm_vm_notification.c.obj
+[3/4] Building C object softpc-tests\CMakeFiles\mvdm-vm-notification-test.dir\mvdm_vm_notification_test.c.obj
+[4/4] Linking C executable softpc-tests\mvdm-vm-notification-test.exe
+Test project O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release
+    Start 15: mvdm-vm-notification
+1/1 Test #15: mvdm-vm-notification .............   Passed    0.23 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.41 sec
+[1/4] Building C object softpc-tests\CMakeFiles\mvdm-vm-notification-test.dir\__\__\__\src\ntvdm-exe\softpc\mvdm_vm_notification.c.obj
+[2/4] Building C object softpc-tests\CMakeFiles\mvdm-vm-notification-test.dir\__\__\__\src\ntvdm-exe\softpc\mvdm_vm_executor.c.obj
+[3/4] Building C object softpc-tests\CMakeFiles\mvdm-vm-notification-test.dir\mvdm_vm_notification_test.c.obj
+[4/4] Linking C executable softpc-tests\mvdm-vm-notification-test.exe
+Test project O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release
+    Start 15: mvdm-vm-notification
+1/1 Test #15: mvdm-vm-notification .............   Passed    0.20 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.39 sec
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker'
+[1/6] CC O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_vm_ingress.c
+[2/6] CC O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_vm_notification.c
+[3/6] CC O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_vm_executor.c
+[4/6] CC O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_standalone_worker.c
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\vdm.h(428): warning C4201: nonstandard extension used: nameless struct/union
+[5/6] LIB softpc-bindings.lib
+[6/6] cmd.exe /d /s /c "link.exe /nologo /subsystem:console /opt:ref /out:ntvdm.exe /map:ntvdm.exe.map /def:generated/ntvdm-wow32-provider.def worker-base.lib ntvdm-vm-frontend.lib common-frontend-base.lib lib-pipe.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj obj/adapter-redir/mvdm_redirector_worker_copy.obj obj/adapter-redir/mvdm_redirector_async.obj obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib lib-process-launch.lib lib-crt-compat.lib common-worker-thread.lib lib-thread.lib lib-process-hook.lib lib-file.lib lib-process-image.lib lib-handle.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe" "O:/repos.hobby/ntvdm64/tools/audit/Verify-VdmTibStorage.mjs" ntvdm.exe.map obj/adapter-monitor/mvdm_vdm_tib.obj"
+   Creating library ntvdm.lib and object ntvdm.exp
+PASS: VdmTib owner=mvdm_vdm_tib.obj bytes=4208 address=0x7edf68; no overlapping symbol

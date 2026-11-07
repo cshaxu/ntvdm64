@@ -1,0 +1,10 @@
+{
+  "replay": "PASS: all10 reconstructed candidate files byte-identical; patch and20 evidence hashes verified",
+  "replayExit": 0,
+  "replayPid": 13284,
+  "governance": "Documentation governance verification passed.",
+  "governanceExit": 0,
+  "governancePid": 556,
+  "sourceDiffAgainstBase": "none",
+  "runtimePublished": false
+}

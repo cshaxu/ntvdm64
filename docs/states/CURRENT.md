@@ -2,71 +2,41 @@
 
 ## Current Work
 
-**Active: M0 T479 S6** - Win3.1 complete VM I/O and nested chains.
-Owner-requested [combined integration](../etc/evidence/m0-t479-s6-main-integration.md) is delivered.
-Mouse31's DPMI callback repair and independent insignia-386 NIDDB companion
-pass actual Win3.1 mouse, DOS CLS/VER/DIR, child retirement and normal exit063.
-Callback reentry has a failing negative control062 and passing fixed061.
-Cached builds and Full05816/16 pass. Complete host package
-0e6d5811-5069-48ee-b54f-7c89e319698c is published and hash-verified at both
-destinations; authored addons are in assets/release and configured in O:/w31.
-Win95 desktop mouse064 is exercised; shutdown1 matches control060, not a
-zero-exit pass. Addons retain bounded candidate status. Garbled windowed DOS
-text is owner-known/nonblocking. fill002 and remaining S6 I/O stay open.
-P4 input work adds a VM/token-bound BOP receiver and failure-atomic queue
-reads (x86/x64 checks084/085). Break identity is repaired through the shared
-decoder and NTCON (088/090); three library adaptations are manifest-recorded.
-Addon token ownership moves from callback stack to per-VM storage; actual
-Win3.1 command handoff and normal root exit0 pass092. Cached089 and Full091
-16/16 pass; package daa392bf-02e0-439f-9b1c-e21804398133 is published at both
-destinations. Guest input production and unread-input handback remain incomplete.
-Details remain in the [I/O audit](../etc/operations/m0-t479-s6-io-audit.md).
+**Active: M0 T479 S7** - delivered-scope closure audit.
+Owner closes S6 with gaps; all uncompleted implementation and acceptance work
+belongs to the [next queued T](../proposals/proposal-guest-multitask-io-completion-001.md),
+not S7. [S6 closure and exact handoff](../etc/evidence/m0-t479-s6-closure-handoff.md)
+retain the candidate, failures and nine finite requirement groups.
 
-[S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
-and original reentry ownership with actual two-VM nested execution. The original
-DOS reentry cycle remains in the downstream DOS worker, not the enclosing VMM
-payload. No original guest changed. S5 final tests214--216 pass.
-Published package6c79f45b-88bd-4359-a9c8-15e3a753457e at507619ea8 retains
-complete cached build211 and Full212 selected16/16 gates; both destinations
-match. External DOS4GW/Nesticle fixtures were explicitly skipped.
-The independent ntvdm64.386 remains a candidate until complete I/O acceptance.
-S6 starts with the existing47-operation protocol and actual guest transfer paths;
-physical input, fonts and complete graphics/Console behavior are not accepted.
-S4 Win95 continuation remains deferred until the Win3.1 S6 path works.
-
-## T478 Integration Delivery
-
-Main fast-forwarded f095c77bf to661a1315f (67 commits). Fresh combined
-x86/x64 builds, focused fixtures, actual guest regressions and Full16/16 pass.
-Package795498ef-6a71-4fd8-a82c-0f0a7d02e76c includes VCDEX.DLL: all11 images,
-license and common manifest are published and hash-verified at both destinations.
-[Delivery and remaining boundaries](../etc/evidence/m0-t479-s6-main-integration.md).
-S6 remains active; fill002 is not reclassified or declared repaired. The old
-package and three combined fill runs now exit normally, without root-cause proof.
-Temporary scope: build/t479-s6-livecmd; owned60-minute phases,2GiB,
-15-minute no-progress review. Retain failed and successful receipts for S6.
+Published baseline remains P4 package daa392bf-02e0-439f-9b1c-e21804398133,
+all11 host images plus the bounded Win3.1 addon. Cached089, Full09116/16 and
+actual command/exit092 qualify that publication. No new runtime is published.
+Unpublished input candidate188/189 and actual handback190/normal-exit194 are
+preserved as a replayable patch and hash manifest, not selected source. Full171
+predates that candidate's final changes. Never publish cached candidate outputs
+as the restored source baseline. Original guest remains unchanged.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
-| Identifier Mode | M0 T479 S6/guest-io; Ordinary Mode, single implementer/reviewer. |
-| Admission And Approval | Owner approves continuous S2--S7 delivery, Win3.1 first; S5 bounded closure automatically admits S6. |
-| Objective | Complete per-VM text/graphics/Console I/O, actual input and nested task chains with final-output and cancellation guarantees while guest Windows continues. |
-| Non-goals | No original guest rebuild/patch, hardware V86 monitor, CPU30, new polling/timeouts/control transport, placeholder I/O or semantic concessions; Win95 follows Win3.1. |
-| Reference Baseline | S5 closure, P4 published package and candidate addon; real both-order continuation, retirement/reuse and DOS/native/DOS downstream reentry evidence. |
-| Files And ABI Surface | Existing NTVDM VM frontend/command/session, common I/O ownership, ntvdm64-386 bridge and integration tests; minimal registered mirror seams only if required. |
-| Applicable Rules | Execution, architecture/coding/document rules and source policy; preserve guest, provenance, minimum mirror differences and authority ownership. |
-| Verification | Audit all47 defined operations by actual producer/caller; test per-VM state and identity, input consumption, geometry/fonts/graphics, final serial, cancellation and real nested chains. Cached full builds, applicable Full product gates and coherent publication. |
-| Expected Markers | Real operation results, no unsupported-success stubs; actual VM context for guest access, no native-thread CPU writes; correct generation/focus and no ancestor frontend takeover. |
-| Asset Needs | Immutable Win3.1 installation copied to isolated fixture, verified package and independent addon; stable Ninja/ccache roots. |
-| Reporting Requirements | Finite operation matrix with source owner, implementation, test evidence and explicit remaining boundaries. Distinguish provider stimulus from physical input. |
-| Stop Conditions | New semantic concession, original guest modification, unknown provenance or incompatible architecture needs explicit disposition. Missing proof is not a pass. |
-| Exit Criteria | Complete intended VM I/O and nested chains pass actual Win3.1 tests; cached build, full gates, coherent publication, review, commit/push. No S5 foundation regression may be deferred as an I/O feature. |
-| Original Owner Request | Execute host-first S2--S7 continuously; complete Win3.1 before Win95, preserve original guest and actual contracts. |
-| Similar-Issue Sweep | All47 operations, text/graphics producers, focus/keyboard/mouse, fonts, background output, final frames, redirection, nested frontends and retirement/reuse. |
-| Temporary Evidence | build/t479-s6-io; owned60-minute phases,2GiB,15-minute no-progress review. Retain build/t479-s5-command until closure evidence is durable and processes quiescent. |
+| Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md); unfinished scope assigned to the queue-first successor. |
+| Identifier Mode | M0 T479 S7/delivered-scope-audit; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner directs S6 closure and transfer of all unfinished work to the next T; prior continuous S2--S7 authority admits this bounded closure audit only. |
+| Objective | Verify delivered T479 scope, exact source/package identity and complete next-T handoff before T closure; no claim of complete guest I/O. |
+| Non-goals | No more S6 implementation, original guest modification, new semantic waiver, new feature or unqualified candidate publication. |
+| Reference Baseline | HEAD cedebcab5; published P4 package; S6 closure, actual190/194 candidate evidence and archived exact replay patch. |
+| Files And ABI Surface | Current/roadmap/queue/proposal/closure evidence and candidate archive; no runtime ABI change in this handoff. |
+| Applicable Rules | Execution, architecture/coding/document rules and source policy; owner-directed bounded closure supersedes former full-I/O S6 exit scope. |
+| Verification | Governance and links; candidate hashes/replay, source restoration, published11-image/addon provenance, all transferred failures and prior S delivery records; applicable checks if actual selected source changes. |
+| Expected Markers | One active packet, queue-first successor, no missing obligation or false pass, no candidate mistaken for published code. |
+| Asset Needs | Existing source, release manifests and retained test evidence; no new guest input. |
+| Reporting Requirements | Delivered versus candidate versus unverified, exact pending owner and publication status. |
+| Stop Conditions | Lost candidate/evidence, unexplained package mismatch or requested new semantic concession; investigate without inventing success. |
+| Exit Criteria | Complete delivered-scope review, documented handoff, governance/diff checks, reviewed commit/push; T remains open until its bounded closure is recorded. |
+| Original Owner Request | Close S6, record gaps, then move unfinished work into the next queued T rather than S7. |
+| Similar-Issue Sweep | All nine successor groups; S4 deferred Win95, fill002/119 and S6 operation reachability included. |
+| Temporary Evidence | Existing build/t479-s6-livecmd; owned60-minute phases,2GiB,15-minute no-progress review; preserve evidence until durable. |
 
 ## S4 Win3.1 Checkpoint And Deferred Win95
 

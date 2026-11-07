@@ -1,0 +1,4 @@
+vxd-control eax=00000003 bx=1000 cx=0000 dx=0000
+vxd-control eax=00000009 bx=8000 cx=0000 dx=c108
+vxd-control eax=0000000b bx=8000 cx=0000 dx=0000
+vxd-control eax=00000017 bx=1000 cx=0000 dx=0001

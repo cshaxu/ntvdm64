@@ -1,5 +1,10 @@
 # T479 S6 VM I/O implementation audit
 
+Owner closes S6 and transfers every unfinished row and candidate to the
+[next queued T](../../proposals/proposal-guest-multitask-io-completion-001.md).
+The [bounded closure](../evidence/m0-t479-s6-closure-handoff.md) supersedes
+older active-S6 wording below; historical failures remain non-passes.
+
 Reconciled against delivered d3bd17b6b. This is the finite S6 work inventory,
 not an acceptance report. Original guest bytes remain immutable.
 
@@ -966,3 +971,546 @@ out reusing the service inside a separately proved VM-generation-owned
 receiver. Existing published mouse/lifecycle acceptance is unchanged. The
 remaining production producer, receiver lifetime and native-record translation
 must be completed together before enabling this input route.
+
+## Unpublished BIOS-character ingress112--116
+
+This worktree candidate connects the demonstrated INT15/9102 commit boundary
+rather than creating a second keyboard translator. The independent addon
+installs its hook after initialization, checks the current VM's live command
+token and BIOS ring, and submits a copied token/BIOS-word descriptor through
+BOP17. The host calls the already selected original BiosKeyToInputRecord and
+the existing token/VM-bound executor queue. Only successful enqueue permits
+the addon to remove that newest BIOS word; failure leaves the word in place.
+All original INT15 handlers still receive the notification. No original guest
+or mirror bytes change, no guest pointer is retained, and no RPC or native
+wait is introduced in the hook. This is character ingress only, not a complete
+physical-key provider; do not default-publish it in its current state.
+
+Run112 stops before compilation because cmd.exe parses an unquoted slash-form
+batch path as the command `build`. Corrected113 uses the same cached input079
+command, builds NTVDM and the addon, and runs the actual original keycode object
+contract. Results: x86 notification1662 assertions; original-object268322
+checks, zero failures; worker link/VdmTib check and addon build pass. Run116
+passes the same1662 notification assertions on x64. The notification fixture
+substitutes only the converter boundary; the separate object fixture and real
+guest witness below exercise actual conversion. The original object's
+host-layout-dependent conversion is not proof of raw make/release identity.
+
+Diagnostic stage114 initially uses the wrong SYSTEM path (before any addon
+replacement), then retains a mixed embedded-package rejection1306. That is a
+staging failure, not Win3.1 input failure. The new NTVDM is linked with a
+different embedded package identity, so changing JSON alone is insufficient.
+Stage115 uses New-PhysicalRuntimeStage -FreshPackageIdentity to stamp all11
+images consistently at O:/tmp/n540. The exact-path keyboard probe initially
+rejects this new root72; rebuilding it with only nb55->n540 changed preserves
+its ownership guard. These failed attempts remain retained, not passed.
+
+Actual run115: root3996, NTCON8880, NTVDM2704; isolated guest w479m loads
+candidate addon F6F93A6260B606A5A64850BB967643038DDAD084CFF597ED41447EABC3BB7DF0.
+IK.EXE23500 records waiting-real-input before the exact-owned window stimulus.
+It then records A down, repeat1, VK41/scan1e/Unicode61 and Enter down, repeat1,
+VK0d/scan1c/Unicode0d. Both control fields are0. Prior unchanged runs071/080
+recorded no child input. Thus the actual guest-selected character path now
+reaches the native consumer; successful queue unit tests alone were not used
+for this conclusion.
+
+The same unchanged child requires an Enter RELEASE to finish. That record is
+not implemented and its30-second diagnostic deadline expires. This test is
+NOT an end-to-end pass; neither its assertion nor deadline was relaxed. After
+that failure, DOS EXIT retires VM8000 through NIDDB0B, Windows File/Exit reaches
+the observed confirmation dialog, and confirming records NIDDB17. Root exits0
+and exact-path process inventory is naturally empty. This separately proves
+normal cleanup in this case, not full input acceptance.
+
+Cleanup116 restores the isolated addon to
+D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2;
+SYSTEM.INI remains45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874.
+The copied child receipt hashes to
+C285082EA90854BD515A36F39B5EE021AC8311C6A380670EBD2BB3158004FE28.
+Evidence is build/t479-s6-livecmd/input112--116*, control115*, keycode113,
+input-driver113 and package114; preserve failing receipts alongside successes.
+The addon code segment grows from0xf36 to0x101e (232 bytes); data remains0x80.
+Crossing the4KiB code-page boundary explains the larger9195-byte output versus
+5075-byte078. It is not four kilobytes of new instructions.
+
+Remaining before delivery: actual release/modifier/control events, native
+input left unread at completion, backpressure and ordering, and guest codepage
+and non-character cases. A failed enqueue retaining a BIOS word is not accepted
+as final native-child input routing. The current receiver and hook are an
+unpublished development candidate; P4 remains the published runtime. No Full
+gate, coherent publication or production commit is claimed for this candidate.
+
+### Paired-key candidate118 and actual runs119--135
+
+Candidate118 extends BOP17 to seven DWORDs: token, physical scan including E0,
+make/release, translated BIOS word, BIOS417/418 flags and BIOS496 flags.
+Per-command accepted makes retain their native identity until the matching
+physical release is successfully enqueued. Failed enqueue does not mutate that
+pairing. The addon observes AH4F releases and AX9102 committed makes in the
+actual VM; original BIOS remains the modifier-state authority. Standalone
+modifier events, Pause/Break and later INT15 filter ordering are not proved.
+The candidate changes project-owned code only, not original guest or mirrors.
+
+Cached118 builds the worker and addon, and passes1672 notification assertions
+on each width. Addon SHA256 is
+A1024393100DBA3A41902BD4BE3EC226094A313633D3805EF7780803B3207625.
+Stage119 uses the fresh-identity coherent11-image stage O:/tmp/ncf8; its root
+is24220, NTCON404 and NTVDM18056. The unchanged IK witness14464 receives real
+A and Enter make/release pairs and completes error0. Run120 adds E0 Left and
+F1 pairs and shifted A, also completing error0. Its Shift flag remains set:
+this stimulus supplied a modifier snapshot without a physical Shift sequence.
+Runs121/123 then type malformed command names and fail native-child readiness.
+They are failures, not skipped passes. Normal exit attempts124/126 fail; the
+root diagnostic ends wait258/exit259 at600seconds. Stopping the exact owned
+NTSRV leaves NTVWM7840; its identity is retained in input119-residual.json and
+it is explicitly terminated. Neither cleanup nor residual retirement passes.
+The precise cause of that malformed-input/exit sequence remains unresolved.
+
+Fresh run130 reuses the same candidate with root21352, NTCON16404 and
+NTVDM20952. It explicitly sends Shift down, A make/release, Shift up, Enter
+make/release. Witness8612 records uppercase A with SHIFT and Enter with flags0,
+then completes error0. This proves character modifier projection for this
+sequence, not delivery of standalone Shift records. DOS EXIT emits NIDDB0B;
+Windows File/Exit confirmation emits NIDDB17; root returns0 and all exact-stage
+processes naturally disappear. Original candidate addon is then restored to
+D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2;
+SYSTEM.INI remains45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874.
+
+New unit coverage separates ordinary and E0 physical identities even when
+translated scans coincide, and rejects duplicate release without releasing the
+other key. Run128 fails because the new four-record assertion reused a
+two-record read request. Corrected129 sizes both buffer and request correctly;
+x86/x64 tests pass,0.23/0.20seconds. Failed128 remains retained. Evidence roots:
+build/t479-s6-livecmd/input118--135*, control119*, control130*, input-driver118.
+Copied IK119/120/130 receipts hash respectively
+8E7EF448EEC478AFA55ECC3FA7880D13AB41790E7A1CCE197091E6E982E6F100,
+DCDC2406736902621F0EE914694BB12EA269CC9474A3C2E88E45F4FD3C086C39,
+F09FD8BEB1E85DFE13C86C8D6730A03927B95CE48CFA2F88C62D5392704ACAA9.
+These are focused results only. Native unread-input handback, backpressure,
+control-only events and the failed119 cleanup remain open. P4 remains the
+published package; no Full gate, new publication or S6 closure is claimed.
+
+### Backpressure pairing and residual-process review137--138
+
+The real provider/executor fixture now fills the input queue, rejects a make,
+and verifies that a release cannot be manufactured for that rejected make.
+After one slot is freed the make succeeds; its release fails while the queue
+is full, but remains available after draining. The retry produces exactly one
+release and a duplicate is rejected. The filler records and accepted make are
+also checked in FIFO order. This verifies receiver pairing failure atomicity,
+not the addon's retry/handback behavior. Run137 stops at /WX on the test's
+signed/unsigned comparison; corrected138 passes both cached x86 and x64
+notification tests (0.23/0.20seconds). Logs/scripts remain under
+build/t479-s6-livecmd/input137* and input138*; no runtime image changed in this
+test-only increment.
+
+Review of the119 residual does not yet identify its blocked stack. NTVWM's
+service_lost sets the same quit event passed to both the channel and publisher
+before acquiring membership.lock, so an ordinary channel wait already has a
+cancellation route. return_unused_input instead calls synchronous
+ReadConsoleInputW after GetNumberOfConsoleInputEvents; that call is not bound
+to quit. A competing reader could invalidate the count, but no retained119
+stack proves this occurred. Do not replace the shutdown owner or label this
+source-level race the observed root cause without a controlled reproduction.
+The VM queue is still destroyed before continuation consumption, as audit097
+records; the actual VM-generation-owned guest consumer remains unimplemented.
+
+### Failed-exit contrast140--148
+
+Reused candidate118 and the same physical stage ncf8, with root14288,
+NTCON6824, NTVDM7032 and carrier4304. The first input140 probe ran before the
+window existed and failed before delivering any key; input141 reused that
+same live instance after the actual window was observed. Witness16664 then
+completed with Left/F1/shifted-A/Enter pairs. Enter again retained SHIFT after
+the synthetic modifier-only stimulus. Subsequent input142 typed IK IKDEF>TXT,
+confirming the malformed dot-to-greater-than observation. DOS returned to its
+prompt; exit144 then retired VM8000 normally (NIDDB0B), and Windows exit148
+recorded NIDDB17 and root wait0/exit0. Exact-stage processes were naturally
+empty. Thus the Shift residue and one malformed redirected command are not
+sufficient to reproduce119's stall. This is a contrast, not a repair or
+closure of119; its earlier two malformed commands and timing are not identical.
+
+The existing tests/observation/live_process_ip_snapshot.c was built as x64
+snapshot140.exe. It captured carrier4304 before/after DOS exit in stack143 and
+stack145, retaining every suspend/read/resume path. These are healthy-control
+stacks, not a blocked-process stack. No production cancellation change was
+made on the strength of the speculative ReadConsoleInput race.
+The isolated addon was restored after quiescence; original guest and current
+publication remain unchanged. Evidence is control140*, input140--142*,
+exit144--148*, stack143-4304*, stack145-4304* and IK140.TXT in the active
+build/t479-s6-livecmd scope. The next residual diagnosis must capture the
+actual failed process before cleanup; do not repeat this healthy contrast as
+proof that the failure is solved.
+
+### Independent modifier events149--155 (unpublished candidate)
+
+Candidate149 extends the same seven-DWORD BOP17 contract: BIOS word0 on a
+make denotes only one of the six fixed physical Shift/Ctrl/Alt keys. Other
+characters still use the original BiosKeyToInputRecord. The addon forwards
+their actual AH4F make/release edges; they do not remove a BIOS ring word.
+Since AH4F precedes the BIOS update, the receiver projects that one edge onto
+the copied417/418/496 bits. No stored guest state is changed and no second
+modifier-state owner is added. Accepted-make pairing and full-queue failure
+atomicity remain the same per-command mechanism.
+
+Source basis is keyboard.h status definitions and keybd_io.c shift handling,
+SHA256 respectively1FE1D02140170EEF068A61E8FEEC7F2E6BAFC2D235CA6D2B345F898827F8AD9E
+and235DCCD77E38ABD5397CC6B064AD297D7F0CC1406A6676801590B0BBA739F510.
+No original mirror/guest changes. Cached149 passes2841 notification assertions
+on each width, the actual worker link/VdmTib check and addon build. Addon SHA256
+2D32A5D2D9D80651058C2D46A3631BBEE3F47DF1CD130FCCD484803143518DB4,9195bytes.
+
+Fresh coherent11-image diagnostic150 uses O:/tmp/n454, root5256, NTCON9964,
+NTVDM11756. Witness9568 receives Shift down, uppercase A down/up, Shift up,
+Enter down/up, with flags0 after Shift release; complete error0. Witness6244
+then receives both Shifts, both Ctrls and both Alts as independent down/up
+pairs. Native VK/scan/flags distinguish right Ctrl/Alt with ENHANCED_KEY;
+the final Enter is unmodified and complete error0. Copied receipts IK150/151
+hash toF168271D747646D791FA61E26AA7747CC3D382C80B4AFF15FD5ACD0D28C884DB and
+1C32B8BF76B968648ABA13A2F88F2240CCFAEB509F2F189E5E73D0D522B458BC.
+DOS exit152 emits NIDDB0B, Windows confirmation155 emits NIDDB17; root returns0
+and exact-stage processes are naturally empty. The isolated addon and INI
+return to the same preserved hashes recorded above.
+
+These real results close the standalone modifier-event test gap for the
+specified sequences, not the whole input contract. Later INT15 filtering,
+Pause/Break, lock keys, Alt-numpad input, backpressure routing and unread-input
+handback remain unaccepted. The119 residual is still unresolved. Candidate
+source is not published, committed or offered for S6 acceptance. Evidence:
+build/t479-s6-livecmd/input149*, input-driver149, stage150*, control150*,
+input150/151*, exit152--155* and the copied receipts. P4 remains published.
+
+### Scanless BIOS character157--161 (unpublished candidate)
+
+Candidate157 distinguishes a BIOS-only scanless character from a physical
+make/release. Alt release can precede the AX9102 ring commit; interpreting
+that commit as another physical Alt make would recreate held Alt state.
+BOP17 kind2 carries physical0 and a nonzero scanless BIOS byte. The original
+BiosKeyToInputRecord supplies its mapped native key. As in nt_event.c's
+ReturnBiosBufferKeys mapped branch, enqueue down/up together, without changing
+physical held-key state. The common VM input queue now reserves and appends
+the whole batch atomically; the single-key entry delegates to it. Full-queue
+failure does not consume the BIOS word or partially enqueue the pair.
+
+This is not the original unmappable-character reconstruction: that branch
+uses a longer Alt/numpad sequence. A converter result with native scan0 is
+explicitly rejected, leaving the guest word intact. No complete Alt-numpad
+support claim follows. No original mirror or guest binary changed.
+
+Cached157 passes2849 notification assertions on each width, the worker
+link/VdmTib check and addon build. The9195-byte addon SHA256 is
+BCA912D8632E338B6E1006E942DDE79F1D391128AAFD3225C33E270B37FA56DA.
+Fresh coherent diagnostic158 uses O:/tmp/n93f, root10732, NTCON8660,
+NTVDM16960. Native witness22536 receives actual guest Alt down/up, mapped
+uppercase A down/up after Alt+numeric65, then Enter down/up with modifiers0;
+complete error0. Its copied IK158.TXT SHA256 is
+7B2A62525A2415DDE45F45D7B5E7B892BDACDBAC622745BA87C1133C56A1E63A.
+Mapped A has SHIFT_PRESSED from original character conversion; this does not
+represent a newly held physical Shift or Alt key.
+
+DOS exit159 emits NIDDB0B. Exit Windows is visually observed in exit160.bmp;
+confirmation161 emits NIDDB17. Root reports wait0/exit0 and exact-stage
+process inventory is empty, without forced cleanup. The isolated addon and
+SYSTEM.INI are restored to the preserved hashes above. Evidence lives in
+build/t479-s6-livecmd/input157*, input-driver157, stage158*, control158*,
+input158*, IK158.TXT and exit159--161*. These are actual targeted observations,
+not Full gate results or publication. Unread-input handback, special controls,
+later INT15 filters and the119 residual remain open; P4 remains published.
+Negative control163 uses the frozen149 worker and addon, not rebuilt sources.
+The copied package150/163 NTVDM files both hash to
+6A2E18D80D8B6EAA4CF5CBF75E32D8CD0F417D3EF0BE65F070C6F04CED18E91A
+before physical staging. Exact runtime O:/tmp/n9a1, root16772, NTCON25216,
+NTVDM24604. The same Alt+numeric65 stimulus produces Alt down/up followed by
+A down with LEFT_ALT_PRESSED and no A up. Witness20824 still ends on Enter;
+its complete error0 alone is not a passing keyboard assertion. IK163.TXT
+SHA256 FFC3D74CD86EE113C332F5B5B1FF6202D481A75DDF1EE1963A37CA32EF95EE5B
+contrasts directly with fixed158. Thus the bad modifier and missing release
+are observed failures, not solely source deductions.
+
+DOS exit164 emits0B. The first menu attempt165 yields a gray frame; Escape166
+returns the observed Program Manager. Repeating the menu167 shows Exit Windows;
+confirmation168 emits17, root wait0/exit0 and no exact-stage processes remain.
+No claim is made about the transient gray-frame cause. Isolated addon/INI are
+restored to preserved hashes. Evidence: stage163*, input163*, IK163.TXT,
+control163*, exit164--168*, recover166* in the same bounded scope. This negative
+control strengthens only the mapped scanless-key fix; S6 remains open.
+## Unread-input loss witness172--176 (open failure)
+
+A disposable native probe writes exactly Z down/up to its own Console with
+WriteConsoleInputW, records counts and exits without reading them. This is
+explicitly synthetic input, not a physical-key witness or original guest change.
+Source build/t479-s6-livecmd/handback172.c SHA256
+F819577C80CEA89C940BB9A664033FF390D6D4BC953C7C7E17F6DBADB9E3FEF5.
+Candidate157 runs as fresh coherent stage173 O:/tmp/n40e, root12900,
+NTCON24816. HB172 HB173.TXT reports before3/written2/after5/error0. After its
+return, the next typed HB172 HB174.TXT runs successfully, with the same counts,
+instead of a preceding unread Z affecting that command. This directly proves
+loss of the first returned Z pair; the second receipt proves another successful
+native enqueue, not a second independent guest-consumption assertion.
+Receipts SHA256 respectively
+7D40AE35C34988BCC8E7E41CFFD66BD404D89306B20D6FF1AAEE26C08F655D34 and
+A98D6B0BEEA38BD7B58D081E7784C0AC0AAA2158735E2783F97EE782AB9EBC5A.
+
+The source chain remains presentation.c return_unused_input -> PREPEND_KEYS
+-> mvdm_vm_io prepend_keys -> executor execute retire/join -> destroy io ->
+continuation_complete. The real observation matches that missing ownership
+transfer. It does not prove which individual returned record reached each
+intermediate call; no per-call instrumentation is claimed. A return receipt or
+successful child exit cannot substitute for guest input preservation.
+
+DOS exit174 yields0B; observed Program Manager and Exit Windows175 precede
+confirmation176, root wait0/exit0 and no exact-stage processes. The isolated
+addon/INI return to preserved hashes. No repair of this gap is claimed; it
+blocks complete input acceptance. Do not publish the producer merely because
+its ordinary key tests pass. The required receiver remains VM-generation-owned,
+outlives command completion, preserves FIFO and has an actual guest consumer;
+AH05 alone and a retained command continuation remain insufficient.
+
+Cached170 completes both architecture builds and14 selected shared tests per
+width. Full171 is separately started against a freshly staged current package;
+its final outcome must be read from its exit and reports, not inferred from
+these cached checks. No new publication or S6 closure is claimed.
+The exact validated diagnostic source is retained as
+[win31_vm_unread_input_child.c](../../../artifacts/t479-s6-handoff/candidate.patch)
+for repeatable post-fix acceptance. It intentionally creates native Console
+records and must never be cited as proof of physical guest key production.
+The guest acceptance assertion is preservation after child return, not this
+probe's successful WriteConsoleInput or process exit.
+Full171 is now terminal with exit0: all16 selected gates pass in309717ms,
+including Console/Window17, native GUI, cooked return, session isolation and
+nested window handoff. Cached170 and governance177 also exit0. The fresh
+11-image package is5f29c793-8237-43bf-8f9d-411fdce26d8b under
+build/t479-s6-integration/r171-package; NTVDM SHA256 is
+92CAC66DB80C5C426918ECA4476C9247205DD67F224FECAFB4A355576813139C.
+Full timings.json SHA256 is
+C42844B98EB35A38DE7BA8D5928359415C82740DCB6A1125E4A3D5FD01C5FF50.
+These gates do not cover the failing guest unread-input contract173. They
+are compatibility evidence for this candidate, not permission to enable the
+unfinished producer or claim S6 acceptance. P4 stays the published baseline.
+## IRQ1 ownership audit179 (source evidence)
+
+The exact original WIN386 identity already recorded in VKD096 remains the
+input. Its VKD initialization object2 SHA256 is
+0BA6A89D8F0DDD7A400ED487BE24F880EA80AD0C8ED6B830007FFDC1892FB03A.
+At object2 offset03AF, the inline service CD20/00030001 invokes
+VPICD_Virtualize_IRQ with EDI3700. With object2 base3000 this selects offset0700:
+IRQ1, options0, hardware callback1B50, virtual callback122C, EOI11FC,
+IRET1248, timeout500. Do not confuse the preceding call01BD/descriptor36E4:
+that is IRQ12 with options2 and is shareable; it is not the keyboard IRQ.
+
+The original vpicd.inc defines Can_Share as bit1. The same fixed Microsoft DDK
+chapter37 states that every participant must select Can_Share for a shared
+IRQ. Therefore a second Virtualize_IRQ for keyboard injection is not a legal
+shared-owner design for this guest. No descriptor was changed, no handle was
+fabricated and no new keyboard controller was installed. This is fixed-image
+and ABI evidence, not a runtime second-owner probe or proof against all other
+legal guest input mechanisms. It rules out that specific proposed shortcut;
+VM-generation ownership and a correct guest consumer are still required.
+## Receiver implementation boundary180
+
+Do not implement a VM-generation input stash in isolation and describe that
+as the handback repair. The existing wake registry already supplies authoritative
+VM generation/retirement. Adding another identity registry is unnecessary;
+retaining records there without a guest consumer changes loss into accumulation.
+Feeding such a backlog to the next native child is also incorrect: the DOS
+parent must get its opportunity to consume typeahead before choosing that child.
+The native-child queue and the parent's guest input queue are different owners.
+
+The Microsoft DDK Install_IO_Handler contract (same fixed transcript) allows
+only one handler per port and returns carry when already hooked. Thus a plan
+combining a second IRQ1 owner with a second keyboard port handler cannot be
+assumed composable with the retained VKD. No port hook, fake EOI, software IRQ
+substitute or original guest mutation was added. The earlier IRQ1 proof remains
+specific to the inspected guest; the I/O service contract alone is not a new
+runtime test of this guest's port-handler registration.
+
+The remaining implementation must connect three parts as one change: retain
+the exact remaining records in the existing VM generation; transfer them to a
+proven parent-consumption mechanism without waiting for that parent while its
+command callback is blocked; retire/cancel them on VM death without admitting
+handle reuse. A native replay or retained queue test alone cannot satisfy the
+already failing HB173/HB174 guest-consumption assertion. No new runtime fix or
+publication is claimed by this clarification.
+Fixed-image cross-check: VKD object2 offsets0638/0642 select EDX64,
+ESI1854 then inline VMM service00010096; offsets0648/0652 select EDX60,
+ESI1960 and the same service. The original vmm.inc service table identifies
+index96 as Install_IO_Handler. These are the original keyboard status/data
+port registrations, not newly installed or runtime-tested hooks. NDISASM's
+linear listing must not treat the four service-selector bytes after INT20 as
+ordinary instructions. The source-policy boundary remains unchanged.
+## Owner clarification and hidden-cursor candidate181
+
+The owner response to the proposed BIOS/INT16 handback boundary is to preserve
+OpenNT semantics as far as possible. It is not recorded as approval to omit
+raw IRQ/TSR observations. No BIOS-only handback was implemented on that basis.
+The original return/re-consumption chain remains the input implementation target.
+
+An independent S6 VIDEO validation gap has a minimal addon-only candidate.
+Original selected vga_prts.c do_new_cursor can set cursor_visible FALSE without
+clearing cursor_start1/cursor_height1. The real console_text producer copies
+those fields. command_apply previously rejected every nonzero second segment,
+even when cursor_visible is zero; command_video_apply already represents that
+case by BIOS shape2000 without rendering either segment. The host acknowledged
+projection likewise stores shape2000 when invisible.
+
+Candidate181 checks visible as a boolean first and skips only the unsupported
+second-segment rejection when invisible. Position/first-segment, extent, font,
+palette and cell validation remain; visible second segments still reject.
+This does not add a second renderer or attempt to change original VGA behavior.
+vga_prts.c source SHA256:
+1CDB3C5B166953B8E75C9169E9AB8230C7576A4C17065C70DA8851282F801B6C.
+Independent addon build181 exits0; resulting SHA256:
+F6D018339E8EFB24E552036374B96D6233ACF2D73451D421A108D295D0DC4D9D.
+No original guest or mirror source changed. This is a source-proven rejection
+case and a build result, not an actual guest hidden-split-cursor test. The
+specific guest application/negative-control acceptance is still outstanding.
+Full171 predates this addon edit and must not be cited as covering it. No new
+package is published or committed, and the input handback failure remains open.
+## Approved BIOS/INT16 handback boundary183
+
+Owner explicitly approves returning unread input to the COMMAND parent using
+original BIOS/INT16 semantics: preserve characters, function keys and ordering;
+replaying those returned records through IRQ1 or TSR raw keyboard callbacks is
+not required. This supersedes the undecided handback boundary above and the
+previous clarification181 only in this specific respect. Native child input
+still retains full INPUT_RECORD semantics. Do not add a second keyboard/IRQ
+owner, polling, arbitrary timeouts or retry/recovery machinery.
+
+Implementation may retain pending BIOS input under the existing exact VM
+identity/generation, independent of command completion. The parent must resume
+before waiting for consumption; a full BIOS buffer must leave the ordered tail
+owned rather than discard it. VM death cancels its pending input and handle
+reuse must not inherit it. Failure reporting, conversion of supported characters
+and function keys, publication acknowledgements and normal task lifecycle remain
+required. This approval is not evidence that the implementation exists or that
+HB173/HB174 passes; those real failures remain the acceptance baseline. Original
+guest binaries remain unchanged; the independently authored addon supplies the
+necessary bridge through original BIOS interfaces.
+## Handback consumption audit and fixture184
+
+After explicit approval183, source tracing confirms that command execute marks
+finishing, retires the frontend (joining callbacks), removes the job and destroys
+mvdm_vm_io before completing the continuation. PREPEND_KEYS has returned native
+records to that same queue; completion therefore cannot preserve them. VM wake
+registration already owns exact VM/generation retirement and must remain the
+identity authority; a second numeric-VM-only registry is unnecessary.
+
+Original spckbd.asm i16v00h/i16v01h use TranslateStd; i16v10h/i16v11h use
+TranslateExt. The former discards extended-only keys and normalizes E0 while
+the latter normalizes F0 fill-in keys. A direct scan-code return that ignores
+these distinctions is not original INT16 behavior. AH05 inserts one BIOS word
+and returns AL=1 on full; it is not a whole-queue handback mechanism. The final
+bridge must retain an uninserted tail without waiting for COMMAND consumption
+before allowing COMMAND to resume. BIOS translation should stay with its
+original owner rather than adding another standard/extended translation table.
+The documented VMM Hook_V86_Int_Chain supports current-VM callbacks and chaining;
+Begin_Nest_Exec/Exec_Int supports calls only in the current VM. Neither fact alone
+proves that a proposed nested INT16 hook is safe against recursion or VKD hooks.
+No such runtime hook has been installed in this step.
+
+The checked-in unread-input diagnostic now supplies four exact cases: original
+z down/up, twenty alternating a/b pairs (larger than the ordinary fifteen-word
+BIOS queue), one repeat-count20 z event, and F1 down/up. All omit Enter and log
+each complete emitted record. This is synthetic native input, not a physical
+keyboard witness. It also reports partial WriteConsoleInput success explicitly
+as ERROR_WRITE_FAULT rather than reading stale LastError after API success.
+Background build184 PID3716, /W4 /WX, exits0; logs are
+build/t479-s6-livecmd/handback184.out/.err/.exit. The expanded cases have not yet
+been run in the guest and do not constitute a handback pass. The existing real
+failure173 remains open. Governance182 also exits0; diff whitespace check passes.
+No original guest changed and no new package was published.
+
+## VM-owned unread input candidate185--187
+
+The command executor now transfers unread input after ntvdm_vm_host_retire has
+joined I/O callbacks and after finishing rejects new producer events, before
+removing/destroying the command provider and before publishing completion.
+No executor lock is held across this transfer into ICA: CPU ingress can already
+hold ICA before acquiring the executor lock. The existing registered vm_entry,
+with its exact generation, owns copied ordered records. There is no second VM
+identity registry or new control channel. Retirement/reset frees the records;
+a stale producer cannot append to a reused numeric handle. Transfer errors are
+reported through completion rather than silently reported as successful return.
+
+The provider copies its wrapped FIFO only at this terminal boundary. Failed
+transfer leaves the provider records unchanged. Successful transfer empties it,
+so repeating the transfer cannot duplicate input. The VM owner supports bounded
+peek/consume, preserves unconsumed tails and appends after them; repeat counts,
+function-key fields and native record order are copied without translation.
+Allocation/count overflow is rejected. No timer, polling, retry or IRQ replay
+was introduced. Changes are project-owned; original mirror/guest bytes unchanged.
+
+Background185 PID10520 passes both x86/x64 notification fixtures. Strengthened
+186 PID23640 passes2922 assertions on each architecture, including actual provider
+transfer followed by provider destruction, wrong-generation non-consumption,
+no duplication, more than fifteen retained records, partial read then append,
+peek, independent VMs, retirement/reuse and reset. These are host unit tests,
+not guest BIOS acceptance. Worker187 PID4828 performs the real cached x86 NTVDM
+compile/link and VdmTib owner check, exit0 (one existing original-header C4201
+warning). Exact stdout/stderr/results use the matching numbered prefixes below
+build/t479-s6-livecmd. The published package remains unchanged.
+
+Still required: connect the retained records to the independent guest addon's
+BIOS consumer, using the active guest code page and original standard/extended
+INT16 semantics. The current host-only queue has no production consumer yet;
+records are retained until VM retirement, not proven delivered to COMMAND.
+Do not publish this intermediate state or claim failure173 repaired. Next real
+acceptance uses fixture184's character/order/repeat/function cases, with the
+retained failing baseline173. Full171 predates these changes and is not their
+verification evidence.
+
+## BIOS consumer candidate188--194: first actual handback pass
+
+The independent addon now hooks only INT16 AH00/01/10/11 when no command is
+waiting in that exact VM. BOP18 accepts copied generation low/high and active
+DOS OEM code page, transfers one converted BIOS word plus repeat count, and
+leaves conversion failures in the host queue. Release/modifier-only records do
+not create BIOS characters. Character conversion rejects replacement or a
+multi-byte result rather than silently truncating it. Non-character function
+keys search the already-linked original nt_keycd.c BiosKeyToInputRecord mapping;
+no duplicate Shift/Ctrl/Alt table was added. The retained ordinary INPUT_RECORD
+path to native children is unchanged.
+
+The addon holds one word/repeat count in its existing per-VM control block.
+Read decrements repeats; peek does not. Its pending-word normalization follows
+spckbd.asm TranslateStd/TranslateExt, including standard-interface discard of
+extended-only keys and E0/F0 normalization. Original source SHA256:
+0F2A0D896E828579197F4147D1BA9BD07A071410093FA16A0706B6D335305950.
+This is a source-derived bridge for the approved handback boundary, not a claim
+that it executes the original BIOS handler for these pending words. Other INT16
+calls and empty queues continue down the original VMM/VKD/BIOS chain. It neither
+replays IRQ1/TSR callbacks nor updates original guest code. Later hooks consuming
+INT16 before this hook, unsupported character encodings and the full function-key
+matrix remain explicit acceptance boundaries. A conversion error is retained and
+recorded in the existing bridge error field, not a successful consumption.
+
+Background188 PID10452: both fixture widths, actual x86 NTVDM cached compile/link,
+VdmTib ownership and independent addon build pass. Addon SHA256:
+A2A8690A5667BF402A491163BE8E77662C2A9A408ECD642AF0F1FDF8577C6D64.
+Background189 PID23820:2959 assertions per width pass, including BOP privilege,
+size, VM/generation, Z repeat20, key-up suppression, F1 and failed CP437 conversion
+retention. The unit substitutes the original converter; real conversion still
+requires actual/source-object coverage, not the stub's F1 result alone.
+
+Actual190 uses fresh helper stage O:/tmp/n403, root10952, NTCON7048 and NTVDM19704,
+through the same rootwinenv/logon environment/owned window-message probe as173.
+HB172 HB190.TXT leaves synthetic Z-down/up (native23640, before3/written2/after5).
+After return, typing HB172 HB191.TXT does NOT create HB191; the preserved typeahead
+prevents that unprefixed command from executing. Clearing the line and retyping
+it creates HB191 (native10012, same counts). handback190.exit is0. Earlier173
+created the second receipt without clearing, proving the contrasting loss.
+This proves the specific returned-typeahead case, not every possible prior input
+record or function-key/long-tail behavior. Receipt SHA256:
+HB190 5C45F952801B3CCAF8418E2491B56DE93B78636ADD14903EEC5789F3EE415DA5
+HB191 3870A04BA1E7BB8C32B0A39B7C14CC5DBD7B705C379D7ACF9DFEEED9F3A9D471.
+
+Normal DOS EXIT192 emits0B; actual Program Manager is observed. Normal Windows
+exit193/194 observes its confirmation and emits17; root wait0/exit0 and the exact
+stage has zero processes. No force termination is used. Isolated addon and INI
+are restored/verified to D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2
+and45E3A30585E4B74D57A15E9815A495D7EFE85891FB059B2FD58759546FE5C874.
+
+Remaining before delivery: actual repeat/order beyond BIOS capacity and function
+keys, conversion edge/source-object checks, multi-VM consumption and remaining
+S6 I/O/nested contracts. Full171 predates this implementation. No new publication,
+commit or push is claimed, and the entire S6 remains open.

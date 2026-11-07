@@ -80,3 +80,8 @@ tools/historical/msdos400/** text=auto eol=crlf
 tools/historical/msdos6-qb45/** text=auto eol=crlf
 tools/historical/opennt-4.5/** text=auto eol=crlf
 tools/opennt/tools16/** text=auto eol=crlf
+
+# Exact owner-directed candidate handoff; patch context whitespace is evidence.
+artifacts/t479-s6-handoff/candidate.patch -whitespace
+artifacts/t479-s6-handoff/evidence/** -whitespace
+artifacts/t479-s6-handoff/** -text

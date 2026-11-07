@@ -1305,3 +1305,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S6 pre-import checkpoint](evidence/m0-t479-s6-pre-import.md): owner-directed preservation commit, failed fill002 evidence and integration handoff.
 
 - [T479 S6 combined main delivery](evidence/m0-t479-s6-main-integration.md): fast-forwarded recovery, unified eleven-image build/verification/publication and retained S6 failure boundaries.
+
+- [T479 S6 bounded closure](evidence/m0-t479-s6-closure-handoff.md): owner-directed transfer of uncompleted work and preserved candidate to the next queued T.

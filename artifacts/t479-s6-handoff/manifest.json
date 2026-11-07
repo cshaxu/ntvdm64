@@ -1,0 +1,190 @@
+{
+  "base": "cedebcab55ec1da1b15557454985da78dca7ccf8",
+  "role": "Unpublished T479 S6 candidate transferred to next queued T; not a build or release input",
+  "patch_sha256": "5e2a78c7cf87d2264f377b1d86c2843c27eabddbbf6fa0b9d5fa06e15ea38170",
+  "files": [
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "bytes": 37596,
+      "sha256": "93ce82e6982ab293cd2636e71034f61c55c93a22b13d222fa84de06285065df2",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_vm_executor.h",
+      "bytes": 2424,
+      "sha256": "d19745bf173f51dbf9709999485270425b31f81337d2f1ea3a8b70755213d158",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_vm_io.h",
+      "bytes": 1237,
+      "sha256": "b2ed4ccca122d31a089091c2b0d402879b4033fa82ecd78b530428531296862a",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_vm_wake.h",
+      "bytes": 1277,
+      "sha256": "8717ebfb6ad64ee6efba2aa0033aeadd3660927dbad279b605d30d65fbbbe3dc",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_executor.c",
+      "bytes": 17787,
+      "sha256": "75bb967a0e4abed59d26285fac14779ed3b038327fcee29eb9c68bdf5a01fb64",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_io.c",
+      "bytes": 10318,
+      "sha256": "adb475658d0d6db3efa8594c3ae465600f4fe7304d8578a95b1e5bd9f71d7f40",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_notification.c",
+      "bytes": 7774,
+      "sha256": "d72362d0ee331f238eadf54d95e05f742efa8700faaa0614474c35dedfc4c1c4",
+      "new": false
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_wake.c",
+      "bytes": 6798,
+      "sha256": "a2d491839da13778b602599455fb51228873c9e60e3396810f1f1c4ed7164fb9",
+      "new": false
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/mvdm_vm_notification_test.c",
+      "bytes": 60999,
+      "sha256": "edb6620f320f78a740b7cc5b342c535ffe82e5eb414d843eed91163c917e5353",
+      "new": false
+    },
+    {
+      "path": "tests/observation/win31_vm_unread_input_child.c",
+      "bytes": 2810,
+      "sha256": "c852012a194c9be57b54b79420b636540592bec67fce7ce4b9560f49519122cf",
+      "new": true
+    }
+  ],
+  "restoration": "Read README.md; verify this manifest and baseline; on changed source integrate the full-index patch with review, never overwrite newer work. Rebuild and reverify before any publication.",
+  "evidence": [
+    {
+      "original": "build/t479-s6-livecmd/input188.ps1",
+      "path": "evidence/input188.ps1",
+      "bytes": 957,
+      "sha256": "b3b5e05bfdab7ba23d7766b3eaa31956597955711e8df7c3fbc1a2a3ac1b1275"
+    },
+    {
+      "original": "build/t479-s6-livecmd/input188.out",
+      "path": "evidence/input188.out",
+      "bytes": 4245,
+      "sha256": "72164a43cd818e81d2b0b30d17f5098237ca776f2f4add581a33a76730f348cb"
+    },
+    {
+      "original": "build/t479-s6-livecmd/input188.err",
+      "path": "evidence/input188.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "build/t479-s6-livecmd/input188.exit",
+      "path": "evidence/input188.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "original": "build/t479-s6-livecmd/input189-x86.test.log",
+      "path": "evidence/input189-x86.test.log",
+      "bytes": 909,
+      "sha256": "ab7e56de7be048c3ece6cd1d38370a3d376ab2540de380cd1c6e54da9cc49c4f"
+    },
+    {
+      "original": "build/t479-s6-livecmd/input189-x64.test.log",
+      "path": "evidence/input189-x64.test.log",
+      "bytes": 909,
+      "sha256": "19370e3bd75e1869d0795fc0b8531ba7a63a5b44d07284030c1bec821abf8433"
+    },
+    {
+      "original": "build/t479-s6-livecmd/input189.exit",
+      "path": "evidence/input189.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "original": "build/t479-s6-livecmd/handback190.ps1",
+      "path": "evidence/handback190.ps1",
+      "bytes": 1365,
+      "sha256": "d884f4f62e8c7fd14c7ef303d30b9dd09f6f58a747fbce6db3a6f8e23f37349f"
+    },
+    {
+      "original": "build/t479-s6-livecmd/handback190.exit",
+      "path": "evidence/handback190.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "original": "build/t479-s6-livecmd/HB173.TXT",
+      "path": "evidence/HB173.TXT",
+      "bytes": 73,
+      "sha256": "7d40ae35c34988bcc8e7e41cffd66bd404d89306b20d6ff1aaee26c08f655d34"
+    },
+    {
+      "original": "build/t479-s6-livecmd/HB174.TXT",
+      "path": "evidence/HB174.TXT",
+      "bytes": 73,
+      "sha256": "a98d6b0beea38bd7b58d081e7784c0ac0aaa2158735e2783f97ee782ab9ebc5a"
+    },
+    {
+      "original": "build/t479-s6-livecmd/HB190.TXT",
+      "path": "evidence/HB190.TXT",
+      "bytes": 73,
+      "sha256": "5c45f952801b3ccaf8418e2491b56de93b78636add14903eec5789f3ee415da5"
+    },
+    {
+      "original": "build/t479-s6-livecmd/HB191.TXT",
+      "path": "evidence/HB191.TXT",
+      "bytes": 73,
+      "sha256": "3870a04ba1e7bb8c32b0a39b7c14cc5dbd7b705c379d7acf9dfeeed9f3a9d471"
+    },
+    {
+      "original": "build/t479-s6-livecmd/control-root190.txt",
+      "path": "evidence/control-root190.txt",
+      "bytes": 26,
+      "sha256": "0f6e70d0ca63873852b874084e9dc3b249ee54d1bc881b88cbe0d74c517377c5"
+    },
+    {
+      "original": "build/t479-s6-livecmd/control-root190.exit",
+      "path": "evidence/control-root190.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "original": "build/t479-s6-livecmd/niddb190.txt",
+      "path": "evidence/niddb190.txt",
+      "bytes": 200,
+      "sha256": "dca66e8baab3aa2645d03ded66b7a27b5fd581e76309a654922d4b98376ee917"
+    },
+    {
+      "original": "build/t479-s6-livecmd/key190.c",
+      "path": "evidence/key190.c",
+      "bytes": 3847,
+      "sha256": "35cd6954aa304cecba6419a4a2de8a3feed82b6cd1c663e89b3ef98ddfcf0c4b"
+    },
+    {
+      "original": "build/t479-s6-livecmd/stage190.ps1",
+      "path": "evidence/stage190.ps1",
+      "bytes": 2007,
+      "sha256": "a46af9e5d9cd30f028368103521d2a329f518f63c6a3483c94f90e767ee04de4"
+    },
+    {
+      "original": "build/t479-s6-livecmd/stage190.json",
+      "path": "evidence/stage190.json",
+      "bytes": 133,
+      "sha256": "99e1e4b68b0ea74e57d68118b582a469b5e2da4086da574e121c8095c4198c92"
+    },
+    {
+      "original": "build/t479-s6-livecmd/control-root190.ps1",
+      "path": "evidence/control-root190.ps1",
+      "bytes": 2501,
+      "sha256": "d45b7dea003c85ea52aaf872a07d0754dc307adb0639dfcfebe343a865390dc9"
+    }
+  ]
+}

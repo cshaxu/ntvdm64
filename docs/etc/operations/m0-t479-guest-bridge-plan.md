@@ -139,3 +139,13 @@ actual guest callback, wait/wake or resource-lifetime acceptance.
 S5 is now [closed](../evidence/m0-t479-s5-closure.md): original reentry is
 proved in each downstream DOS worker; VMM callers retain independent chains.
 Automatic continuation admits S6 complete I/O. Win95 and S7 remain unchanged.
+
+## Superseding S6 bounded closure and next-T transfer
+
+The owner closes S6 at its delivered checkpoint and moves all unfinished work
+into the [next queued T](../../proposals/proposal-guest-multitask-io-completion-001.md),
+not S7. This supersedes the complete-I/O-before-S7 grouping above. The
+[closure](../evidence/m0-t479-s6-closure-handoff.md) retains exact candidate and
+failure evidence. T479 S7 audits only delivered-scope closure; the successor
+owns complete I/O/nested/Win95 implementation, proof and new publication.
+Transfer does not mark those capabilities passed or erase the original goal.

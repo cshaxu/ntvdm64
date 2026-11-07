@@ -1,0 +1,1171 @@
+diff --git a/src/addon/ntvdm64-386/ntvdm64.asm b/src/addon/ntvdm64-386/ntvdm64.asm
+index 7988d5bcb22c3098d3ccc0ff7c4e2a586c52af7e..9cb2031fe67ea8ba6e3ffef8e330dba429a1ac2e 100644
+--- a/src/addon/ntvdm64-386/ntvdm64.asm
++++ b/src/addon/ntvdm64-386/ntvdm64.asm
+@@ -38,7 +38,10 @@ vm_io_buffer equ 20
+ vm_codepage equ 24
+ vm_token_low equ 28
+ vm_token_high equ 32
+-vm_bytes equ 36
++vm_physical equ 36
++vm_return_word equ 40
++vm_return_repeat equ 44
++vm_bytes equ 48
+ screen_header equ 36
+ 
+ segment _LTEXT public align=16 class=CODE use32
+@@ -110,6 +113,8 @@ control:
+     mov dword [edi+vm_executable], 1
+     mov dword [edi+vm_token_low], 0
+     mov dword [edi+vm_token_high], 0
++    mov dword [edi+vm_physical], 0
++    mov dword [edi+vm_return_repeat], 0
+     cmp dword [esp+28], 1           ; saved Device_Init, only the system VM
+     je .notification_init
+     jmp .register_vm
+@@ -146,10 +151,22 @@ control:
+     mov esi, [edi+vm_generation_high]
+     host_notify 7
+     test eax, eax
+-    jz .ok
++    jz .registered
+     cmp dword [esp+28], 1
+     je .shutdown_failed
+     jmp .initialization_failed
++.registered:
++    cmp dword [esp+28], 1           ; install once, after fallible setup
++    jne .ok
++    mov eax, 0x15
++    mov esi, bios_character
++    vmm_call 0x41                  ; Hook_V86_Int_Chain
++    jc .shutdown_failed
++    mov eax, 0x16
++    mov esi, bios_return
++    vmm_call 0x41
++    jc .shutdown_failed
++    jmp .ok
+ .release_notification:
+     host_notify 5
+     jmp .initialization_failed
+@@ -343,6 +360,233 @@ api:
+     popad
+     ret
+ 
++; Returned native typeahead belongs to this VM after its command completes.
++; Original spckbd.asm TranslateStd/TranslateExt defines the word normalization
++; below. Only returned words are handled here; all other INT16 calls chain.
++; No IRQ1/TSR replay, guest code patch or second keyboard controller.
++bios_return:
++    pushad
++    mov al, [ebp+client_eax+1]
++    and al, 0xef
++    cmp al, 1
++    ja .chain
++    mov edi, [vm_offset]
++    test edi, edi
++    jz .chain
++    add edi, ebx
++    cmp dword [edi+vm_executable], 1
++    jne .chain
++    cmp dword [edi+vm_waiting], 0
++    jne .chain
++    cmp dword [edi+vm_codepage], 0
++    je .chain
++.next:
++    cmp dword [edi+vm_return_repeat], 0
++    jne .translate
++    sub esp, 12
++    mov eax, [edi+vm_generation_low]
++    mov [esp], eax
++    mov eax, [edi+vm_generation_high]
++    mov [esp+4], eax
++    mov eax, [edi+vm_codepage]
++    mov [esp+8], eax
++    mov ebx, [esp+12+16]
++    mov edx, esp
++    mov esi, 12
++    host_notify 18
++    add esp, 12
++    cmp eax, 259                    ; no returned input: original BIOS/VKD
++    je .chain
++    test eax, eax
++    jnz .failed
++    mov edi, [vm_offset]
++    add edi, [esp+16]
++    mov [edi+vm_return_word], ebx
++    mov [edi+vm_return_repeat], edx
++.translate:
++    movzx ecx, byte [ebp+client_eax+1]
++    mov ax, [edi+vm_return_word]
++    test cl, 0x10
++    jnz .extended
++    cmp ah, 0xe0                   ; original TranslateStd keypad Enter/slash
++    jne .standard
++    mov ah, 0x1c
++    cmp al, 0x0d
++    je .ready
++    cmp al, 0x0a
++    je .ready
++    mov ah, 0x35
++    jmp .ready
++.standard:
++    cmp ah, 0x84
++    ja .discard
++    cmp al, 0xf0
++    jne .standard_e0
++    test ah, ah
++    jnz .discard
++.standard_e0:
++    cmp al, 0xe0
++    jne .ready
++    jmp .normalize
++.extended:
++    cmp al, 0xf0                   ; original TranslateExt fill-in normalization
++    jne .ready
++.normalize:
++    test ah, ah
++    jz .ready
++    xor al, al
++.ready:
++    mov [ebp+client_eax], ax
++    test cl, 1
++    jnz .peek
++    dec dword [edi+vm_return_repeat]
++    jmp .handled
++.peek:
++    and dword [ebp+client_flags], ~0x40
++.handled:
++    popad
++    clc
++    ret
++.discard:
++    mov dword [edi+vm_return_repeat], 0
++    jmp .next
++.failed:
++    mov [irq_error], eax            ; retained host record, never false success
++.chain:
++    popad
++    stc
++    ret
++
++; Candidate translated characters plus actual raw break notifications.
++; Original BIOS/VKD still own scan translation, prefixes and modifier state.
++; The host matches a break only to a make accepted by this exact VM/token.
++bios_character:
++    pushfd
++    pushad
++    mov ax, [ebp+client_eax]
++    cmp ax, 0x9102
++    je .active
++    cmp ah, 0x4f
++    jne .chain
++.active:
++    mov edi, [vm_offset]
++    test edi, edi
++    jz .chain
++    add edi, ebx
++    cmp dword [edi+vm_executable], 1
++    jne .chain
++    mov ecx, [edi+vm_token_low]
++    or ecx, [edi+vm_token_high]
++    jz .chain
++    mov edx, [ebx+4]
++    add edx, 0x400                  ; actual VM's BIOS data, not physical focus
++    cmp ax, 0x9102
++    je .committed
++    mov dword [edi+vm_physical], 0
++    cmp al, 0xe0                   ; prefixes/controller responses aren't keys
++    jae .chain
++    test byte [edx+0x96], 0xc1      ; E1/keyboard-ID sequences need own handling
++    jnz .chain
++    movzx ecx, al
++    and ecx, 0x7f
++    jz .chain
++    test byte [edx+0x96], 2         ; original LC_E0 prefix state
++    jz .physical
++    or ecx, 128
++.physical:
++    mov [edi+vm_physical], ecx
++    test al, 128
++    jnz .release
++    cmp ecx, 0x2a
++    je .modifier
++    cmp ecx, 0x36
++    je .modifier
++    cmp ecx, 0x1d
++    je .modifier
++    cmp ecx, 0x9d
++    je .modifier
++    cmp ecx, 0x38
++    je .modifier
++    cmp ecx, 0xb8
++    jne .chain                     ; character waits for translated commit
++.modifier:
++    sub esp, 36
++    mov dword [esp+12], 1
++    mov dword [esp+16], 0           ; no translated word for a modifier
++    jmp .send
++.release:
++    sub esp, 36
++    mov dword [esp+12], 0           ; real release, never generated on make
++    mov dword [esp+16], 0
++    jmp .send
++.committed:
++    cmp dword [edi+vm_physical], 0
++    je .chain
++    movzx eax, word [edx+0x1c]
++    cmp ax, [edx+0x1a]
++    je .chain
++    movzx ecx, word [edx+0x80]
++    movzx esi, word [edx+0x82]
++    cmp ecx, esi
++    jae .chain
++    cmp eax, ecx
++    jb .chain
++    cmp eax, esi
++    jae .chain
++    mov ebp, eax
++    or ebp, ecx
++    or ebp, esi
++    test ebp, 1
++    jnz .chain
++    cmp eax, ecx
++    jne .not_wrapped
++    mov eax, esi
++.not_wrapped:
++    sub eax, 2
++    sub esp, 36
++    mov [esp+28], eax
++    mov [esp+32], edx
++    movzx eax, word [edx+eax]
++    mov [esp+16], eax
++    mov dword [esp+12], 1
++    test ah, ah
++    jnz .send
++    mov dword [esp+12], 2           ; BIOS-only character (e.g. Alt-numpad)
++.send:
++    movzx eax, word [edx+0x17]
++    mov [esp+20], eax
++    movzx eax, byte [edx+0x96]
++    mov [esp+24], eax
++    mov eax, [edi+vm_physical]
++    cmp dword [esp+12], 2
++    jne .store_physical
++    xor eax, eax                   ; no physical key remains to release
++.store_physical:
++    mov [esp+8], eax
++    mov eax, [edi+vm_token_low]
++    mov [esp], eax
++    mov eax, [edi+vm_token_high]
++    mov [esp+4], eax
++    mov edx, esp
++    mov esi, 28
++    host_notify 17
++    test eax, eax
++    jnz .retained
++    cmp dword [esp+12], 0
++    je .retained
++    cmp dword [esp+16], 0
++    je .retained                   ; raw modifiers did not append a BIOS word
++    mov eax, [esp+28]
++    mov edx, [esp+32]
++    mov [edx+0x1c], ax               ; consume only after host acceptance
++.retained:
++    add esp, 36
++.chain:
++    popad
++    popfd
++    stc                            ; preserve the original INT15 handler chain
++    ret
++
+ v86_call:
+     ; This entry is invoked by an actual guest FAR CALL, which supplies its
+     ; return frame. It must NOT be used for a post-BOP redirected continuation.
+@@ -394,6 +638,7 @@ command_return:
+     add edi, [esp+16]
+     mov [edi+vm_token_low], ebx
+     mov [edi+vm_token_high], edx
++    mov dword [edi+vm_physical], 0
+ .wait_work:
+     mov ebx, [esp+16]              ; original VMM handle in saved PUSHAD
+     mov edi, [vm_offset]
+@@ -620,10 +865,13 @@ command_screen_apply:
+     mov eax, [edx+1068]
+     cmp eax, [edi+4]
+     jae .unsupported_before
+-    cmp dword [edx+1084], 0         ; second cursor segment needs explicit mapping
+-    jne .unsupported_before
+     cmp dword [edx+1088], 1
+     ja .invalid
++    cmp dword [edx+1088], 0         ; hidden cursor does not render either segment
++    je .cursor_geometry
++    cmp dword [edx+1084], 0         ; visible second segment still needs mapping
++    jne .unsupported_before
++.cursor_geometry:
+     mov eax, [edx+1072]
+     cmp eax, 31
+     ja .unsupported_before
+diff --git a/src/ntvdm-exe/softpc/include/mvdm_vm_executor.h b/src/ntvdm-exe/softpc/include/mvdm_vm_executor.h
+index f819e45fa334b0d71091089843481778a33c6958..5a1990f34d0443de68b3fb6338c42c4fa47066c5 100644
+--- a/src/ntvdm-exe/softpc/include/mvdm_vm_executor.h
++++ b/src/ntvdm-exe/softpc/include/mvdm_vm_executor.h
+@@ -24,4 +24,17 @@ DWORD mvdm_vm_executor_key(mvdm_vm_executor *, uint32_t vm, uint64_t token,
+  * guest memory. Failure means the producer still owns the event. */
+ DWORD mvdm_vm_executor_key_bop(mvdm_vm_executor *, uint32_t vm,
+     uint32_t address, uint32_t extent);
++/* CPU-only seven-DWORD descriptor: token low/high, physical scan (bit7=E0),
++ * kind (0 release, 1 make, 2 BIOS-only character), BIOS scan/OEM word,
++ * BIOS417/418, BIOS496. Kind2 has physical0 and a nonzero scanless OEM byte;
++ * it reconstructs native character records, not a physical make/release pair.
++ * The BIOS word is zero on release or a raw modifier make.
++ * Match real releases to accepted makes in this command, never synthesize one.
++ * Failure leaves the producer's event and pairing state unconsumed. */
++DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *, uint32_t vm,
++    uint32_t address, uint32_t extent);
++/* CPU-only generation low/high and active OEM code page. Transfer one
++ * converted BIOS word/repeat count; failed conversion keeps the record. */
++DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,
++    uint32_t extent, uint32_t *word, uint32_t *repeat);
+ #endif
+diff --git a/src/ntvdm-exe/softpc/include/mvdm_vm_io.h b/src/ntvdm-exe/softpc/include/mvdm_vm_io.h
+index c0ca36f3cf194388f4030aedad3cae3b765426e7..8ef01485c666563fbdfdd389a0156e1745f52d57 100644
+--- a/src/ntvdm-exe/softpc/include/mvdm_vm_io.h
++++ b/src/ntvdm-exe/softpc/include/mvdm_vm_io.h
+@@ -14,5 +14,9 @@ extern const ntvdm_vm_io mvdm_vm_io_operations;
+ /* Producer supplies a translated guest key, never host layout guesses. Failure
+  * means not accepted; the producer must not consume that guest event. */
+ DWORD mvdm_vm_io_key(mvdm_vm_io *, const KEY_EVENT_RECORD *);
++/* Entire translated-character sequence is accepted or left with its producer. */
++DWORD mvdm_vm_io_keys(mvdm_vm_io *, const KEY_EVENT_RECORD *, uint32_t count);
++/* After producers/callbacks join, transfer unread records to the VM owner. */
++DWORD mvdm_vm_io_return_input(mvdm_vm_io *, uint32_t vm, uint64_t generation);
+ void mvdm_vm_io_destroy(mvdm_vm_io *); /* Only after callbacks/producers join. */
+ #endif
+diff --git a/src/ntvdm-exe/softpc/include/mvdm_vm_wake.h b/src/ntvdm-exe/softpc/include/mvdm_vm_wake.h
+index 25a5b14a8cbf34e4591a0565a77684e3d20db2e4..c32756dbac47c1ec877e321b63efcc18fd63128d 100644
+--- a/src/ntvdm-exe/softpc/include/mvdm_vm_wake.h
++++ b/src/ntvdm-exe/softpc/include/mvdm_vm_wake.h
+@@ -1,6 +1,7 @@
+ #ifndef MVDM_VM_WAKE_H
+ #define MVDM_VM_WAKE_H
+ #include <stdint.h>
++#include "common/protocol/console_io.h"
+ typedef struct {
+     uint32_t vm;
+     uint64_t generation;
+@@ -14,5 +15,11 @@ uint32_t mvdm_vm_wake_lookup(uint32_t vm, mvdm_vm_wake_identity *identity);
+ uint32_t mvdm_vm_wake_retire(uint32_t vm, uint64_t generation);
+ uint32_t mvdm_vm_wake_publish(uint32_t vm, uint64_t generation, uint64_t *serial);
+ uint32_t mvdm_vm_wake_take(mvdm_vm_wake_identity *identity);
++/* Unread records outlive command completion, but never their exact VM.
++ * Append copies atomically. Read permits peeking; consuming is explicit. */
++uint32_t mvdm_vm_wake_return_input(uint32_t vm, uint64_t generation,
++    const console_io_input *keys, uint32_t count);
++uint32_t mvdm_vm_wake_read_input(uint32_t vm, uint64_t generation,
++    console_io_input *keys, uint32_t capacity, uint32_t *count, int consume);
+ void mvdm_vm_wake_reset(void);
+ #endif
+diff --git a/src/ntvdm-exe/softpc/mvdm_vm_executor.c b/src/ntvdm-exe/softpc/mvdm_vm_executor.c
+index 87152b7b6e1464f4f62245cc39f84f02bd836bfa..d8d39a2cfaacc59f214301e287ef0181abd1a249 100644
+--- a/src/ntvdm-exe/softpc/mvdm_vm_executor.c
++++ b/src/ntvdm-exe/softpc/mvdm_vm_executor.c
+@@ -12,6 +12,7 @@ typedef struct command_job {
+     uint64_t generation;
+     uint32_t vm;
+     BOOL finishing;
++    KEY_EVENT_RECORD held[256]; /* Per-command physical make/release pairing. */
+ } command_job;
+ 
+ struct mvdm_vm_executor {
+@@ -84,6 +85,9 @@ static VOID CALLBACK execute(PTP_CALLBACK_INSTANCE instance, void *context)
+          * This is an unrecoverable local lifecycle failure, not success. */
+         if (error && error != ERROR_NOT_FOUND) ExitProcess(error);
+     }
++    error = mvdm_vm_io_return_input(job->io, job->vm, job->generation);
++    if (error && !completion.error)
++        completion.error = error == ERROR_NOT_FOUND ? ERROR_OPERATION_ABORTED : error;
+     /* Remove input access before destroying its provider. Close waits for the
+      * job until ALL resources and the completion producer are finished. */
+     AcquireSRWLockExclusive(&owner->lock);
+@@ -188,6 +192,204 @@ DWORD mvdm_vm_executor_key_bop(mvdm_vm_executor *owner, uint32_t vm,
+     return mvdm_vm_executor_key(owner, vm, token, &key);
+ }
+ 
++/* Original BIOS character conversion; physical identity and current BIOS
++ * modifier state come from the same guest VM, not the host foreground state. */
++extern BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD);
++static WORD bios_modifier(uint32_t physical)
++{
++    switch (physical) {
++    case 0x2a: case 0x36: return VK_SHIFT;
++    case 0x1d: case 0x9d: return VK_CONTROL;
++    case 0x38: case 0xb8: return VK_MENU;
++    default: return 0;
++    }
++}
++/* AH4F precedes the original BIOS state update. Project only this edge onto
++ * the copied BIOS flags; the guest remains the owner of the stored state. */
++static void bios_modifier_edge(uint32_t physical, BOOL down, uint32_t *flags, uint32_t *extended)
++{
++    uint32_t bit = 0;
++    switch (physical) {
++    case 0x2a: bit = 2; break;
++    case 0x36: bit = 1; break;
++    case 0x1d: bit = 0x100; break;
++    case 0x38: bit = 0x200; break;
++    case 0x9d: *extended = (*extended & ~4u) | (down ? 4u : 0); break;
++    case 0xb8: *extended = (*extended & ~8u) | (down ? 8u : 0); break;
++    }
++    *flags = (*flags & ~bit) | (down ? bit : 0);
++    if (physical == 0x1d || physical == 0x9d)
++        *flags = (*flags & ~4u) | ((*flags & 0x100) || (*extended & 4) ? 4u : 0);
++    if (physical == 0x38 || physical == 0xb8)
++        *flags = (*flags & ~8u) | ((*flags & 0x200) || (*extended & 8) ? 8u : 0);
++}
++static DWORD bios_controls(uint32_t flags, uint32_t extended, uint32_t physical)
++{
++    DWORD state = physical & 128 ? ENHANCED_KEY : 0;
++    if (flags & 3) state |= SHIFT_PRESSED;
++    if (flags & 0x40) state |= CAPSLOCK_ON;
++    if (flags & 0x20) state |= NUMLOCK_ON;
++    if (flags & 0x10) state |= SCROLLLOCK_ON;
++    if (flags & 0x100) state |= LEFT_CTRL_PRESSED;
++    if (flags & 0x200) state |= LEFT_ALT_PRESSED;
++    if (extended & 4) state |= RIGHT_CTRL_PRESSED;
++    if (extended & 8) state |= RIGHT_ALT_PRESSED;
++    if ((flags & 4) && !(state & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)))
++        state |= LEFT_CTRL_PRESSED;
++    if ((flags & 8) && !(state & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)))
++        state |= LEFT_ALT_PRESSED;
++    return state;
++}
++DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *owner, uint32_t vm,
++    uint32_t address, uint32_t extent)
++{
++    uint32_t descriptor[7], physical;
++    KEY_EVENT_RECORD key = {0};
++    command_job *job;
++    uint64_t token;
++    DWORD error = ERROR_NOT_FOUND;
++    if (!owner) return ERROR_NOT_READY;
++    if (extent != sizeof(descriptor)) return ERROR_INVALID_PARAMETER;
++    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)descriptor,
++        sizeof(descriptor))) return ERROR_INVALID_ADDRESS;
++    physical = descriptor[2];
++    if (physical > 255 || descriptor[3] > 2 ||
++        (descriptor[3] == 2 ? (physical || !descriptor[4] || descriptor[4] > 255) : !(physical & 127)) ||
++        descriptor[4] > UINT16_MAX || descriptor[5] > UINT16_MAX ||
++        descriptor[6] > 255 || (!descriptor[3] && descriptor[4])) return ERROR_INVALID_DATA;
++    token = ((uint64_t)descriptor[1] << 32) | descriptor[0];
++    if (descriptor[3]) {
++        key.bKeyDown = TRUE;
++        if (!descriptor[4] && bios_modifier(physical)) {
++            key.wRepeatCount = 1;
++            key.wVirtualKeyCode = bios_modifier(physical);
++            key.wVirtualScanCode = (WORD)(physical & 127);
++        } else {
++            key.wVirtualScanCode = (WORD)(descriptor[4] >> 8);
++            key.uChar.AsciiChar = (CHAR)(descriptor[4] & 255);
++            if (!BiosKeyToInputRecord(&key)) return ERROR_NO_UNICODE_TRANSLATION;
++            /* The original unmappable-character branch reconstructs a full
++             * Alt/numpad sequence. Do not label a plain pair equivalent. */
++            if (descriptor[3] == 2 && !key.wVirtualScanCode) return ERROR_NOT_SUPPORTED;
++        }
++    }
++    AcquireSRWLockExclusive(&owner->lock);
++    for (job = owner->jobs; job && job->token != token; job = job->next) {}
++    if (owner->closing) error = ERROR_OPERATION_ABORTED;
++    else if (job && job->vm == vm && job->io) {
++        if (job->finishing) error = ERROR_OPERATION_ABORTED;
++        else if (descriptor[3] == 2) {
++            /* Original nt_event.c reconstructs mapped BIOS characters as native
++             * down/up records. They have no remaining physical key to pair:
++             * Alt was already released when the BIOS committed this word. */
++            KEY_EVENT_RECORD pair[2] = {key, key};
++            pair[1].bKeyDown = FALSE;
++            error = mvdm_vm_io_keys(job->io, pair, 2);
++        } else if (descriptor[3] || job->held[physical].bKeyDown) {
++            if (!descriptor[3]) {
++                key = job->held[physical];
++                key.bKeyDown = FALSE;
++                key.wRepeatCount = 1;
++                key.uChar.UnicodeChar = 0; /* Same physical KEYUP shape as NTCON. */
++            }
++            if (bios_modifier(physical))
++                bios_modifier_edge(physical, descriptor[3] != 0, &descriptor[5], &descriptor[6]);
++            key.dwControlKeyState = bios_controls(descriptor[5], descriptor[6], physical);
++            error = mvdm_vm_io_key(job->io, &key);
++            if (!error) {
++                if (descriptor[3]) job->held[physical] = key;
++                else ZeroMemory(&job->held[physical], sizeof(key));
++            }
++        }
++    }
++    ReleaseSRWLockExclusive(&owner->lock);
++    return error;
++}
++
++static DWORD bios_key_modifiers(DWORD flags)
++{
++    DWORD result = flags & SHIFT_PRESSED;
++    if (flags & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)) result |= LEFT_CTRL_PRESSED;
++    if (flags & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)) result |= LEFT_ALT_PRESSED;
++    return result;
++}
++static DWORD returned_bios_word(const console_io_input *input, UINT codepage, WORD *word)
++{
++    DWORD scan;
++    if (!input->key_down) return ERROR_NO_MORE_ITEMS;
++    if (input->character) {
++        WCHAR character = (WCHAR)input->character;
++        char bytes[2];
++        BOOL substituted = FALSE;
++        int length = WideCharToMultiByte(codepage, WC_NO_BEST_FIT_CHARS,
++            &character, 1, bytes, sizeof(bytes), NULL, &substituted);
++        if (!length) return GetLastError();
++        if (substituted || length != 1) return ERROR_NO_UNICODE_TRANSLATION;
++        scan = input->scan;
++        if ((input->control & ENHANCED_KEY) &&
++            (input->virtual_key == VK_RETURN || input->virtual_key == VK_DIVIDE)) scan = 0xe0;
++        if (scan > 255) return ERROR_INVALID_DATA;
++        *word = (WORD)((scan << 8) | (BYTE)bytes[0]);
++        return ERROR_SUCCESS;
++    }
++    switch (input->virtual_key) {
++    case VK_SHIFT: case VK_LSHIFT: case VK_RSHIFT:
++    case VK_CONTROL: case VK_LCONTROL: case VK_RCONTROL:
++    case VK_MENU: case VK_LMENU: case VK_RMENU:
++    case VK_CAPITAL: case VK_NUMLOCK: case VK_SCROLL:
++        return ERROR_NO_MORE_ITEMS; /* No BIOS character, no raw IRQ replay. */
++    }
++    /* Reuse nt_keycd.c's original function-key mapping rather than maintaining
++     * another Shift/Ctrl/Alt scan table. This runs only for returned keys. */
++    for (scan = 1; scan <= 0xa6; ++scan) {
++        KEY_EVENT_RECORD decoded = {0};
++        decoded.wVirtualScanCode = (WORD)scan;
++        if (BiosKeyToInputRecord(&decoded) && decoded.wVirtualScanCode == input->scan &&
++            bios_key_modifiers(decoded.dwControlKeyState) == bios_key_modifiers(input->control)) {
++            *word = (WORD)(scan << 8);
++            if ((input->control & ENHANCED_KEY) && !bios_key_modifiers(input->control))
++                *word |= 0xe0;
++            return ERROR_SUCCESS;
++        }
++    }
++    return ERROR_NOT_SUPPORTED;
++}
++extern void host_ica_lock(void);
++extern void host_ica_unlock(void);
++DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,
++    uint32_t extent, uint32_t *word, uint32_t *repeat)
++{
++    uint32_t descriptor[3], count;
++    uint64_t generation;
++    console_io_input input;
++    WORD converted = 0;
++    DWORD error;
++    *word = *repeat = 0;
++    if (extent != sizeof(descriptor)) return ERROR_INVALID_PARAMETER;
++    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)descriptor, sizeof(descriptor)))
++        return ERROR_INVALID_ADDRESS;
++    generation = ((uint64_t)descriptor[1] << 32) | descriptor[0];
++    if (!descriptor[2] || !IsValidCodePage(descriptor[2])) return ERROR_INVALID_PARAMETER;
++    host_ica_lock();
++    for (;;) {
++        error = mvdm_vm_wake_read_input(vm, generation, &input, 1, &count, 0);
++        if (error) break;
++        if (!count) { error = ERROR_NO_MORE_ITEMS; break; }
++        error = returned_bios_word(&input, descriptor[2], &converted);
++        if (error && error != ERROR_NO_MORE_ITEMS) break;
++        {
++            DWORD consumed = mvdm_vm_wake_read_input(vm, generation, &input, 1, &count, 1);
++            if (consumed) { error = consumed; break; }
++        }
++        if (error == ERROR_NO_MORE_ITEMS) continue;
++        *word = converted;
++        *repeat = input.repeat;
++        break;
++    }
++    host_ica_unlock();
++    return error;
++}
++
+ void mvdm_vm_executor_close(mvdm_vm_executor *owner)
+ {
+     if (!owner) return;
+diff --git a/src/ntvdm-exe/softpc/mvdm_vm_io.c b/src/ntvdm-exe/softpc/mvdm_vm_io.c
+index 7278573aeb31d96c031d60092c545b0e25bacd80..090ee3b3ee4edc6b5291d68f215bb11492532588 100644
+--- a/src/ntvdm-exe/softpc/mvdm_vm_io.c
++++ b/src/ntvdm-exe/softpc/mvdm_vm_io.c
+@@ -1,4 +1,5 @@
+ #include "mvdm_vm_io.h"
++#include "mvdm_vm_wake.h"
+ #include <string.h>
+ 
+ struct mvdm_vm_io {
+@@ -35,21 +36,37 @@ DWORD mvdm_vm_io_create(ntvdm_vm_text *text, mvdm_vm_continuation *continuation,
+     return ERROR_SUCCESS;
+ }
+ HANDLE mvdm_vm_io_ready(mvdm_vm_io *io) { return io ? io->ready : NULL; }
++DWORD mvdm_vm_io_return_input(mvdm_vm_io *io, uint32_t vm, uint64_t generation)
++{
++    console_io_input *keys;
++    uint32_t i;
++    DWORD error;
++    if (!io) return ERROR_INVALID_PARAMETER;
++    /* The caller joined all callbacks and rejected producers; no executor
++     * lock is held while entering ICA. Preserve wrapped FIFO order. */
++    if (!io->count) return ERROR_SUCCESS;
++    keys = HeapAlloc(GetProcessHeap(), 0, io->count * sizeof(*keys));
++    if (!keys) return ERROR_NOT_ENOUGH_MEMORY;
++    for (i = 0; i < io->count; ++i)
++        keys[i] = io->keys[(io->head + i) % CONSOLE_IO_INPUT_CAPACITY];
++    error = mvdm_vm_wake_return_input(vm, generation, keys, io->count);
++    if (!error) io->head = io->count = 0;
++    HeapFree(GetProcessHeap(), 0, keys);
++    return error;
++}
+ void mvdm_vm_io_destroy(mvdm_vm_io *io)
+ {
+     if (!io) return;
+     CloseHandle(io->ready);
+     HeapFree(GetProcessHeap(), 0, io);
+ }
+-DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
++DWORD mvdm_vm_io_keys(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys, uint32_t count)
+ {
+-    console_io_input wire = {0};
++    uint32_t i;
+     DWORD error = ERROR_SUCCESS;
+-    if (!io || !key || !key->wRepeatCount) return ERROR_INVALID_PARAMETER;
+-    wire.type = KEY_EVENT; wire.key_down = key->bKeyDown != FALSE;
+-    wire.repeat = key->wRepeatCount; wire.virtual_key = key->wVirtualKeyCode;
+-    wire.scan = key->wVirtualScanCode; wire.character = key->uChar.UnicodeChar;
+-    wire.control = key->dwControlKeyState;
++    if (!io || !keys || !count || count > CONSOLE_IO_INPUT_CAPACITY) return ERROR_INVALID_PARAMETER;
++    for (i = 0; i < count; ++i)
++        if (!keys[i].wRepeatCount) return ERROR_INVALID_PARAMETER;
+     AcquireSRWLockExclusive(&io->input_lock);
+     {
+         DWORD state = WaitForSingleObject(mvdm_vm_continuation_invalidated(io->continuation), 0);
+@@ -57,16 +74,25 @@ DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
+             error = state == WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
+     }
+     if (!error) {
+-        if (io->count == CONSOLE_IO_INPUT_CAPACITY) error = ERROR_NOT_ENOUGH_MEMORY;
++        if (count > CONSOLE_IO_INPUT_CAPACITY - io->count) error = ERROR_NOT_ENOUGH_MEMORY;
+         else if (!SetEvent(io->ready)) error = GetLastError();
+         else {
+-            io->keys[(io->head + io->count) % CONSOLE_IO_INPUT_CAPACITY] = wire;
+-            ++io->count;
++            for (i = 0; i < count; ++i) {
++                console_io_input wire = {0};
++                wire.type = KEY_EVENT; wire.key_down = keys[i].bKeyDown != FALSE;
++                wire.repeat = keys[i].wRepeatCount; wire.virtual_key = keys[i].wVirtualKeyCode;
++                wire.scan = keys[i].wVirtualScanCode; wire.character = keys[i].uChar.UnicodeChar;
++                wire.control = keys[i].dwControlKeyState;
++                io->keys[(io->head + io->count + i) % CONSOLE_IO_INPUT_CAPACITY] = wire;
++            }
++            io->count += count;
+         }
+     }
+     ReleaseSRWLockExclusive(&io->input_lock);
+     return error;
+ }
++DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
++{ return mvdm_vm_io_keys(io, key, 1); }
+ static DWORD input_pending(void *context, BOOL *pending)
+ {
+     mvdm_vm_io *io = context;
+diff --git a/src/ntvdm-exe/softpc/mvdm_vm_notification.c b/src/ntvdm-exe/softpc/mvdm_vm_notification.c
+index 8c66f9c28ad7a581cb5d6f7645a60180b38099c4..e66953da9cc7382cde0c93e81b25a0f27196c952 100644
+--- a/src/ntvdm-exe/softpc/mvdm_vm_notification.c
++++ b/src/ntvdm-exe/softpc/mvdm_vm_notification.c
+@@ -192,6 +192,14 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
+         result->status = mvdm_vm_executor_key_bop(mvdm_standalone_worker_executor(),
+             vm, low, high);
+         break;
++    case 17:
++        result->status = mvdm_vm_executor_bios_key_bop(mvdm_standalone_worker_executor(),
++            vm, low, high);
++        break;
++    case 18:
++        result->status = mvdm_vm_executor_return_key_bop(vm, low, high,
++            &result->value, &result->serial_low);
++        return 1;
+     case 12: {
+         mvdm_vm_completion completion;
+         result->value = 0;
+diff --git a/src/ntvdm-exe/softpc/mvdm_vm_wake.c b/src/ntvdm-exe/softpc/mvdm_vm_wake.c
+index 269d18b12f3af58dfd2782e3b5aa35a45da5f9ce..af22f90a57eb81ac35a6766511dc175b88c7e2d5 100644
+--- a/src/ntvdm-exe/softpc/mvdm_vm_wake.c
++++ b/src/ntvdm-exe/softpc/mvdm_vm_wake.c
+@@ -1,11 +1,14 @@
+ #include "mvdm_vm_wake.h"
+ #include "mvdm_vm_notification.h"
++#include <string.h>
+ 
+ extern void host_ica_lock(void);
+ extern void host_ica_unlock(void);
+ typedef struct vm_entry {
+     struct vm_entry *next;
+     mvdm_vm_wake_identity identity;
++    console_io_input *input;
++    uint32_t input_head, input_count;
+ } vm_entry;
+ typedef struct wake_entry {
+     struct wake_entry *next;
+@@ -63,7 +66,10 @@ uint32_t mvdm_vm_wake_retire(uint32_t vm, uint64_t generation)
+         tail = p;
+     }
+     host_ica_unlock();
+-    if (entry) HeapFree(GetProcessHeap(), 0, entry);
++    if (entry) {
++        if (entry->input) HeapFree(GetProcessHeap(), 0, entry->input);
++        HeapFree(GetProcessHeap(), 0, entry);
++    }
+     return error;
+ }
+ 
+@@ -121,6 +127,71 @@ uint32_t mvdm_vm_wake_take(mvdm_vm_wake_identity *identity)
+     return ERROR_SUCCESS;
+ }
+ 
++uint32_t mvdm_vm_wake_return_input(uint32_t vm, uint64_t generation,
++    const console_io_input *keys, uint32_t count)
++{
++    vm_entry *entry;
++    console_io_input *copy;
++    DWORD error = ERROR_NOT_FOUND;
++    if (!vm || !generation || (count && !keys)) return ERROR_INVALID_PARAMETER;
++    host_ica_lock();
++    entry = *find_vm(vm);
++    if (entry && entry->identity.generation == generation) {
++        error = ERROR_SUCCESS;
++        if (count) {
++            if (count > UINT32_MAX - entry->input_count ||
++                count > SIZE_MAX / sizeof(*copy) - entry->input_count)
++                error = ERROR_ARITHMETIC_OVERFLOW;
++            else if (!(copy = HeapAlloc(GetProcessHeap(), 0,
++                ((size_t)entry->input_count + count) * sizeof(*copy))))
++                error = ERROR_NOT_ENOUGH_MEMORY;
++            else {
++                if (entry->input_count)
++                    memcpy(copy, entry->input + entry->input_head,
++                        entry->input_count * sizeof(*copy));
++                memcpy(copy + entry->input_count, keys, count * sizeof(*copy));
++                if (entry->input) HeapFree(GetProcessHeap(), 0, entry->input);
++                entry->input = copy;
++                entry->input_head = 0;
++                entry->input_count += count;
++            }
++        }
++    }
++    host_ica_unlock();
++    return error;
++}
++
++uint32_t mvdm_vm_wake_read_input(uint32_t vm, uint64_t generation,
++    console_io_input *keys, uint32_t capacity, uint32_t *count, int consume)
++{
++    vm_entry *entry;
++    DWORD error = ERROR_NOT_FOUND;
++    if (!count) return ERROR_INVALID_PARAMETER;
++    *count = 0;
++    if (!vm || !generation || !keys || !capacity || (consume != 0 && consume != 1))
++        return ERROR_INVALID_PARAMETER;
++    host_ica_lock();
++    entry = *find_vm(vm);
++    if (entry && entry->identity.generation == generation) {
++        error = ERROR_SUCCESS;
++        *count = min(capacity, entry->input_count);
++        if (*count) {
++            memcpy(keys, entry->input + entry->input_head, *count * sizeof(*keys));
++            if (consume) {
++                entry->input_head += *count;
++                entry->input_count -= *count;
++                if (!entry->input_count) {
++                    HeapFree(GetProcessHeap(), 0, entry->input);
++                    entry->input = NULL;
++                    entry->input_head = 0;
++                }
++            }
++        }
++    }
++    host_ica_unlock();
++    return error;
++}
++
+ void mvdm_vm_wake_reset(void)
+ {
+     host_ica_lock();
+@@ -132,6 +203,7 @@ void mvdm_vm_wake_reset(void)
+     tail = &first;
+     while (vms) {
+         vm_entry *next = vms->next;
++        if (vms->input) HeapFree(GetProcessHeap(), 0, vms->input);
+         HeapFree(GetProcessHeap(), 0, vms);
+         vms = next;
+     }
+diff --git a/test/ntvdm-exe/softpc/mvdm_vm_notification_test.c b/test/ntvdm-exe/softpc/mvdm_vm_notification_test.c
+index 140558e617eb1bac978d6814aa8faa5b3209ee8d..4ecbf012b9dea42a29d08e879eba044d28b55f60 100644
+--- a/test/ntvdm-exe/softpc/mvdm_vm_notification_test.c
++++ b/test/ntvdm-exe/softpc/mvdm_vm_notification_test.c
+@@ -11,6 +11,20 @@
+ 
+ static unsigned char guest_memory[256];
+ static mvdm_vm_executor *input_executor;
++/* Conversion itself is exercised by keycode_object_contract_fixture using
++ * the actual original object. This substitute checks the ingress boundary. */
++BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD key)
++{
++    if (key->wVirtualScanCode == 0x3b && !key->uChar.AsciiChar) {
++        key->wVirtualKeyCode = VK_F1; key->wRepeatCount = 1;
++        key->dwControlKeyState = 0; return TRUE;
++    }
++    if ((key->wVirtualScanCode != 0x1e && key->wVirtualScanCode != 0) || key->uChar.AsciiChar != 'a') return FALSE;
++    key->wVirtualScanCode = 0x1e;
++    key->wRepeatCount = 1; key->wVirtualKeyCode = 'A';
++    key->uChar.UnicodeChar = L'a'; key->dwControlKeyState = 0;
++    return TRUE;
++}
+ HANDLE vm_io_reset_failure;
+ mvdm_vm_executor *mvdm_standalone_worker_executor(void) { return input_executor; }
+ /* Ingress selection/capture has its own tests; these isolate notification. */
+@@ -262,7 +276,21 @@ static void provider_tests(mvdm_vm_continuation *continuation)
+     CHECK(r.result && r.state.count == 1 &&
+         ((console_io_input *)data)->character == 'a');
+     vm_io_reset_failure = NULL;
+-    mvdm_vm_io_destroy(b); mvdm_vm_io_destroy(a); ntvdm_vm_text_destroy(text);
++    {
++        console_io_input returned;
++        uint32_t count;
++        uint64_t generation = mvdm_vm_continuation_generation(continuation);
++        CHECK(mvdm_vm_io_return_input(b, 1, generation + 1) == ERROR_NOT_FOUND);
++        CHECK(!mvdm_vm_io_operations.input_pending(b, &pending) && pending);
++        CHECK(!mvdm_vm_io_return_input(b, 1, generation));
++        CHECK(!mvdm_vm_io_operations.input_pending(b, &pending) && !pending);
++        CHECK(!mvdm_vm_io_return_input(b, 1, generation)); /* No duplicate. */
++        mvdm_vm_io_destroy(b);
++        CHECK(!mvdm_vm_wake_read_input(1, generation, &returned, 1, &count, 1));
++        CHECK(count == 1 && returned.character == 'a' && returned.scan == 0x1e);
++        CHECK(!mvdm_vm_wake_read_input(1, generation, &returned, 1, &count, 1) && !count);
++    }
++    mvdm_vm_io_destroy(a); ntvdm_vm_text_destroy(text);
+ }
+ 
+ static void application_tests(uint64_t token, mvdm_vm_continuation *request)
+@@ -591,7 +619,7 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
+     uint32_t descriptor[8] = {(uint32_t)token, (uint32_t)(token >> 32),
+         1, 3, 'A', 0x1e, 'a', SHIFT_PRESSED};
+     mvdm_vm_bridge_result bridge;
+-    console_io_input received[2];
++    console_io_input received[4];
+     console_io_request q = {0}; console_io_reply r = {0};
+     frontend_base_result result = {0}; ntvdm_vm_cancel cancel = {0};
+     BOOL pending;
+@@ -629,7 +657,7 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
+     q.operation = CONSOLE_IO_READ_INPUT; q.state.count = 2;
+     r.data = (uint8_t *)received;
+     CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+-    CHECK(r.result && r.state.count == 2 && r.bytes == sizeof(received));
++    CHECK(r.result && r.state.count == 2 && r.bytes == 2 * sizeof(received[0]));
+     CHECK(received[0].key_down == 1 && received[0].repeat == 3);
+     CHECK(received[1].key_down == 0 && received[1].repeat == 1);
+     for (i = 0; i < 2; ++i) {
+@@ -640,6 +668,145 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
+     }
+     CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
+     CHECK(!mvdm_vm_io_operations.input_pending(executor_input[2], &pending) && !pending);
++    {
++        uint32_t bios[7] = {(uint32_t)token, (uint32_t)(token >> 32), 0x1e,
++            1, 0x1e61, 0, 0};
++        memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 27) == ERROR_INVALID_PARAMETER);
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 250, 28) == ERROR_INVALID_ADDRESS);
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 17, 0, 28, 1, 0, &bridge));
++        CHECK(bridge.status == ERROR_ACCESS_DENIED);
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 2, 0, 28) == ERROR_NOT_FOUND);
++        for (i = 2; i < 7; ++i) {
++            uint32_t saved = bios[i];
++            bios[i] = UINT32_MAX; memcpy(guest_memory, bios, sizeof(bios));
++            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_INVALID_DATA);
++            bios[i] = saved;
++        }
++        bios[4] = 0; memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NO_UNICODE_TRANSLATION);
++        CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
++        bios[4] = 0x1e61; memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 17, 0, 28, 1, 1, &bridge));
++        CHECK(!bridge.status);
++        /* A release must use this accepted make, not a second translation.
++         * Its current BIOS flags may differ from those of the original make. */
++        bios[3] = 0; bios[4] = 0; bios[5] = 0x170; bios[6] = 8;
++        memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 2, 0, 28) == ERROR_NOT_FOUND);
++        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
++        memset(guest_memory, 0xff, sizeof(guest_memory));
++        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++        CHECK(r.result && r.state.count == 2);
++        CHECK(received[0].key_down == 1 && received[0].repeat == 1);
++        CHECK(received[0].virtual_key == 'A' && received[0].scan == 0x1e);
++        CHECK(received[0].character == 'a' && !received[0].control);
++        CHECK(!received[1].key_down && received[1].repeat == 1 && !received[1].character);
++        CHECK(received[1].virtual_key == 'A' && received[1].scan == 0x1e);
++        CHECK(received[1].control == (LEFT_CTRL_PRESSED | RIGHT_ALT_PRESSED |
++            CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON));
++        CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
++        /* The E0 prefix is part of physical identity, even when BIOS
++         * translation produces the same native scan for both keys. */
++        bios[3] = 1; bios[4] = 0x1e61; bios[5] = bios[6] = 0;
++        bios[2] = 0x1e; memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++        bios[2] = 0x9e; memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++        bios[3] = 0; bios[4] = 0;
++        memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
++        bios[2] = 0x1e; memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++        q.state.count = 4;
++        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++        CHECK(r.result && r.state.count == 4);
++        CHECK(received[0].key_down && !received[0].control);
++        CHECK(received[1].key_down && received[1].control == ENHANCED_KEY);
++        CHECK(!received[2].key_down && received[2].control == ENHANCED_KEY);
++        CHECK(!received[3].key_down && !received[3].control);
++        /* A BIOS-only character is not another make of the already released
++         * Alt key. It reconstructs a complete native pair atomically. */
++        bios[2] = 0; bios[3] = 2; bios[4] = 'a';
++        memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++        CHECK(r.result && r.state.count == 2);
++        CHECK(received[0].key_down && !received[1].key_down);
++        CHECK(received[0].character == 'a' && received[1].character == 'a');
++        bios[2] = 0x38;
++        memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_INVALID_DATA);
++        bios[3] = 0; bios[4] = 0;
++        memcpy(guest_memory, bios, sizeof(bios));
++        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
++        {
++            static const uint32_t modifiers[][5] = {
++                {0x2a, VK_SHIFT, 2, 0, SHIFT_PRESSED},
++                {0x36, VK_SHIFT, 1, 0, SHIFT_PRESSED},
++                {0x1d, VK_CONTROL, 0x104, 0, LEFT_CTRL_PRESSED},
++                {0x9d, VK_CONTROL, 4, 4, RIGHT_CTRL_PRESSED | ENHANCED_KEY},
++                {0x38, VK_MENU, 0x208, 0, LEFT_ALT_PRESSED},
++                {0xb8, VK_MENU, 8, 8, RIGHT_ALT_PRESSED | ENHANCED_KEY}
++            };
++            for (i = 0; i < ARRAYSIZE(modifiers); ++i) {
++                bios[2] = modifiers[i][0]; bios[3] = 1;
++                bios[4] = bios[5] = bios[6] = 0;
++                memcpy(guest_memory, bios, sizeof(bios));
++                CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++                bios[3] = 0; bios[5] = modifiers[i][2]; bios[6] = modifiers[i][3];
++                memcpy(guest_memory, bios, sizeof(bios));
++                CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++                CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++                CHECK(r.result && r.state.count == 2);
++                CHECK(received[0].key_down && received[0].virtual_key == modifiers[i][1]);
++                CHECK(received[0].scan == (modifiers[i][0] & 127) && !received[0].character);
++                CHECK(received[0].control == modifiers[i][4]);
++                CHECK(!received[1].key_down && received[1].virtual_key == modifiers[i][1]);
++                CHECK(received[1].control == (modifiers[i][4] & ENHANCED_KEY));
++            }
++            bios[2] = 0x1e; bios[5] = bios[6] = 0;
++        }
++        {
++            KEY_EVENT_RECORD filler = {TRUE, 1, 'B', 0x30, {'b'}, 0};
++            /* A rejected make must not invent a later release. Conversely,
++             * backpressure on release must retain the accepted make. */
++            for (i = 0; i < CONSOLE_IO_INPUT_CAPACITY; ++i)
++                CHECK(!mvdm_vm_io_key(executor_input[1], &filler));
++            bios[3] = 1; bios[4] = 0x1e61;
++            memcpy(guest_memory, bios, sizeof(bios));
++            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_ENOUGH_MEMORY);
++            bios[3] = 0; bios[4] = 0;
++            memcpy(guest_memory, bios, sizeof(bios));
++            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
++            q.state.count = 1;
++            CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++            CHECK(r.result && r.state.count == 1 && received[0].virtual_key == 'B');
++            bios[2] = 0; bios[3] = 2; bios[4] = 'a';
++            memcpy(guest_memory, bios, sizeof(bios));
++            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_ENOUGH_MEMORY);
++            bios[2] = 0x1e;
++            bios[3] = 1; bios[4] = 0x1e61;
++            memcpy(guest_memory, bios, sizeof(bios));
++            CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++            bios[3] = 0; bios[4] = 0;
++            memcpy(guest_memory, bios, sizeof(bios));
++            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_ENOUGH_MEMORY);
++            for (i = 0; i < CONSOLE_IO_INPUT_CAPACITY; ++i) {
++                CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++                CHECK(r.result && r.state.count == 1);
++                CHECK(received[0].virtual_key == (uint32_t)(i + 1 == CONSOLE_IO_INPUT_CAPACITY ? 'A' : 'B'));
++            }
++            CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
++            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
++            CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
++            CHECK(r.result && r.state.count == 1 && !received[0].key_down);
++            CHECK(received[0].virtual_key == 'A' && !received[0].character);
++            CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
++        }
++    }
+     input_executor = NULL;
+ }
+ static void executor_tests(void)
+@@ -730,6 +897,75 @@ static void executor_tests(void)
+     CloseHandle(executor_retiring); CloseHandle(executor_retire_release);
+ }
+ 
++static void returned_input_tests(void)
++{
++    console_io_input keys[40] = {0}, output[40] = {0};
++    uint32_t count, i;
++    WORD irq;
++    CHECK(!mvdm_vm_notification_open(&irq));
++    CHECK(!mvdm_vm_wake_register(1, 301));
++    CHECK(!mvdm_vm_wake_register(2, 302));
++    for (i = 0; i < 40; ++i) {
++        keys[i].type = KEY_EVENT; keys[i].key_down = !(i & 1);
++        keys[i].repeat = i + 1; keys[i].character = 'a' + i;
++    }
++    CHECK(mvdm_vm_wake_return_input(1, 300, keys, 40) == ERROR_NOT_FOUND);
++    CHECK(!mvdm_vm_wake_return_input(1, 301, keys, 40));
++    CHECK(!mvdm_vm_wake_read_input(2, 302, output, 40, &count, 1) && !count);
++    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 15, &count, 0) && count == 15);
++    CHECK(!memcmp(keys, output, 15 * sizeof(*keys)));
++    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 15, &count, 1) && count == 15);
++    CHECK(!memcmp(keys, output, 15 * sizeof(*keys)));
++    CHECK(!mvdm_vm_wake_return_input(1, 301, keys, 2));
++    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 40, &count, 1) && count == 27);
++    CHECK(!memcmp(keys + 15, output, 25 * sizeof(*keys)));
++    CHECK(!memcmp(keys, output + 25, 2 * sizeof(*keys)));
++    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 40, &count, 1) && !count);
++    CHECK(!mvdm_vm_wake_return_input(1, 301, keys, 40));
++    CHECK(!mvdm_vm_wake_retire(1, 301));
++    CHECK(!mvdm_vm_wake_register(1, 303));
++    CHECK(mvdm_vm_wake_return_input(1, 301, keys, 1) == ERROR_NOT_FOUND);
++    CHECK(mvdm_vm_wake_read_input(1, 301, output, 40, &count, 1) == ERROR_NOT_FOUND && !count);
++    CHECK(!mvdm_vm_wake_read_input(1, 303, output, 40, &count, 1) && !count);
++    CHECK(!mvdm_vm_wake_return_input(1, 303, keys, 40));
++    mvdm_vm_wake_reset();
++    CHECK(!mvdm_vm_wake_register(1, 304));
++    CHECK(!mvdm_vm_wake_read_input(1, 304, output, 40, &count, 1) && !count);
++    {
++        uint32_t descriptor[3] = {304, 0, 437};
++        mvdm_vm_bridge_result result;
++        ZeroMemory(keys, sizeof(keys));
++        keys[0].type = keys[1].type = KEY_EVENT;
++        keys[0].key_down = 1; keys[0].repeat = 20;
++        keys[0].character = 'z'; keys[0].scan = 0x2c; keys[0].virtual_key = 'Z';
++        keys[1].repeat = 1; keys[1].scan = 0x2c; keys[1].virtual_key = 'Z';
++        CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 2));
++        memcpy(guest_memory, descriptor, sizeof(descriptor));
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 0, &result));
++        CHECK(result.status == ERROR_ACCESS_DENIED);
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 11, 1, 1, &result));
++        CHECK(result.status == ERROR_INVALID_PARAMETER);
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 2, 1, &result));
++        CHECK(result.status == ERROR_NOT_FOUND);
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
++        CHECK(!result.status && result.value == 0x2c7a && result.serial_low == 20);
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
++        CHECK(result.status == ERROR_NO_MORE_ITEMS); /* Release is not another char. */
++        keys[0].character = 0; keys[0].scan = 0x3b; keys[0].virtual_key = VK_F1;
++        CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 1));
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
++        CHECK(!result.status && result.value == 0x3b00 && result.serial_low == 20);
++        keys[0].character = 0x4e00;
++        CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 1));
++        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
++        CHECK(result.status == ERROR_NO_UNICODE_TRANSLATION);
++        CHECK(!mvdm_vm_wake_read_input(1, 304, output, 1, &count, 0) && count == 1);
++        CHECK(output[0].character == 0x4e00 && output[0].repeat == 20);
++    }
++    mvdm_vm_wake_reset();
++    CHECK(!mvdm_vm_notification_close());
++}
++
+ static void executor_reuse_tests(void)
+ {
+     mvdm_vm_executor *executor;
+@@ -887,6 +1123,7 @@ int main(void)
+     continuation_tests();
+     executor_tests();
+     executor_reuse_tests();
++    returned_input_tests();
+     DeleteCriticalSection(&ica);
+     printf("PASS %ld notification unit assertions; no real PIC claim\n", assertions);
+     return 0;
+diff --git a/tests/observation/win31_vm_unread_input_child.c b/tests/observation/win31_vm_unread_input_child.c
+new file mode 100644
+--- /dev/null
++++ b/tests/observation/win31_vm_unread_input_child.c
+@@ -0,0 +1,62 @@
++/* Diagnostic native child: deliberately leave records in its own Console.
++ * Unlike win31_vm_input_child, this proves handback, not physical input.
++ * Usage: child report [z|sequence|repeat|function]. No case injects Enter. */
++#define WIN32_LEAN_AND_MEAN
++#include <windows.h>
++#include <stdio.h>
++#include <share.h>
++#include <string.h>
++
++static void pair(INPUT_RECORD *records, WORD vk, WORD scan, WCHAR character, WORD repeat)
++{
++    ZeroMemory(records, 2 * sizeof(*records));
++    records[0].EventType = KEY_EVENT;
++    records[0].Event.KeyEvent.bKeyDown = TRUE;
++    records[0].Event.KeyEvent.wRepeatCount = repeat;
++    records[0].Event.KeyEvent.wVirtualKeyCode = vk;
++    records[0].Event.KeyEvent.wVirtualScanCode = scan;
++    records[0].Event.KeyEvent.uChar.UnicodeChar = character;
++    records[1] = records[0];
++    records[1].Event.KeyEvent.bKeyDown = FALSE;
++    records[1].Event.KeyEvent.wRepeatCount = 1;
++    records[1].Event.KeyEvent.uChar.UnicodeChar = 0;
++}
++
++int main(int argc, char **argv)
++{
++    INPUT_RECORD records[40] = {0};
++    HANDLE input = GetStdHandle(STD_INPUT_HANDLE);
++    FILE *report;
++    const char *mode = argc == 3 ? argv[2] : "z";
++    DWORD before = 0, after = 0, written = 0, error = 0, count = 2, i;
++    if (argc < 2 || argc > 3) return 64;
++    pair(records, 'Z', 0x2c, L'z', 1);
++    if (!strcmp(mode, "sequence")) {
++        /* Twenty ordered characters exceed the normal 15-word BIOS ring. */
++        count = 40;
++        for (i = 0; i < 20; ++i)
++            pair(records + 2 * i, i & 1 ? 'B' : 'A', i & 1 ? 0x30 : 0x1e,
++                i & 1 ? L'b' : L'a', 1);
++    } else if (!strcmp(mode, "repeat")) {
++        pair(records, 'Z', 0x2c, L'z', 20);
++    } else if (!strcmp(mode, "function")) {
++        pair(records, VK_F1, 0x3b, 0, 1);
++    } else if (strcmp(mode, "z")) return 64;
++    if (!(report = _fsopen(argv[1], "w", _SH_DENYWR))) return 64;
++    if (!GetNumberOfConsoleInputEvents(input, &before)) error = GetLastError();
++    if (!error) {
++        if (!WriteConsoleInputW(input, records, count, &written)) error = GetLastError();
++        else if (written != count) error = ERROR_WRITE_FAULT;
++    }
++    if (!error && !GetNumberOfConsoleInputEvents(input, &after)) error = GetLastError();
++    fprintf(report, "pid=%lu synthetic-unread=%s before=%lu requested=%lu written=%lu after=%lu error=%lu\n",
++        GetCurrentProcessId(), mode, before, count, written, after, error);
++    for (i = 0; i < count; ++i) {
++        const KEY_EVENT_RECORD *key = &records[i].Event.KeyEvent;
++        fprintf(report, "record=%lu down=%d repeat=%u vk=%04x scan=%04x unicode=%04x\n",
++            i, key->bKeyDown, key->wRepeatCount, key->wVirtualKeyCode,
++            key->wVirtualScanCode, key->uChar.UnicodeChar);
++    }
++    if (fclose(report) && !error) error = ERROR_WRITE_FAULT;
++    return (int)error;
++}
