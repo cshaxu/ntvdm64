@@ -150,3 +150,22 @@ a proven cause or a pass. Preserve full-r1/cooked-return receipts and rerun the
 complete suite on the final package. The final run passed this unchanged
 assertion and 12 immediate relaunch pairs. No product workaround or assertion
 relaxation was added; the intermittent cause has not been independently proved.
+
+
+## S4 replay and registration clarification
+
+[S4 reconciliation](m0-t480-s4-registration-reconciliation.md) supplies the
+successor registration and stage-identity ledger without changing these results.
+The raw vdm-restoration.json describes the intermediate CRLF file; final current
+source identity is vdm-line-ending-correction.json plus vdm-final-x86/x64 results
+and environment-final-test.json. It is not valid to replace the intermediate
+hash inside the immutable historical archive.
+
+For a fresh compiler reproduction, capture the expression/environment before
+state at ae65e175b and the delivered after/final state at511f23fc0, using the
+frozen commands and matching VS environment. Use distinct fresh directories as
+required by each capture runner. The final source contains LF; the intermediate
+CRLF object captures are separate evidence. Read-only receipt reconciliation
+can instead run from committed archives with the S4 verifier. S2's verifier
+retains its S2-specific source-hash contract. No old failure is erased or
+relabelled by these replay instructions.

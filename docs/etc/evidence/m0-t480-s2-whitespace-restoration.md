@@ -107,3 +107,15 @@ without guest sources or duplicate product executables.
 S2 is closed: all146 admitted candidates are dispositioned, all53 safe
 restorations are delivered, and no S2 item is deferred. T480 remains open;
 S3 substantive and mixed-hunk review is not admitted by this closure.
+
+
+## S4 replay clarification
+
+The S2 verifier intentionally requires the S2 post-restoration source hashes.
+Replay it against commit b35effafd with the sealed S2 evidence, not the current
+S3 source tree: cmdexec.c, dpmiint.c, nt_reset.c and ntexapi.h were subsequently
+changed by S3. A hash mismatch there is correct version binding, not a failed
+S2 compiler-equivalence result. The original receipts and verifier remain
+unchanged. [S4 reconciliation](m0-t480-s4-registration-reconciliation.md)
+checks the immutable S2 receipts against their Git revision and separately
+binds the current S3 successor identities.

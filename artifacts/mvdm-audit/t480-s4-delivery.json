@@ -1,0 +1,43 @@
+{
+  "task": "T480 S4",
+  "passed": true,
+  "files": 39,
+  "product_changed": false,
+  "new_runtime_run": false,
+  "publication": false,
+  "push": false,
+  "O_winnt_write": false,
+  "runs": {
+    "reconcile-final": {
+      "start": {
+        "timeoutSeconds": 300,
+        "command": "reconcile-final.cmd",
+        "started": "2026-11-07T00:08:03.898235Z",
+        "pid": 26164
+      },
+      "result": {
+        "exitCode": 0,
+        "pid": 26164,
+        "finished": "2026-11-07T00:08:13.5175538Z"
+      }
+    },
+    "closure": {
+      "start": {
+        "started": "2026-11-07T00:09:17.8940193Z",
+        "timeoutSeconds": 300,
+        "pid": 5512,
+        "command": "closure.cmd"
+      },
+      "result": {
+        "finished": "2026-11-07T00:09:42.7667051Z",
+        "pid": 5512,
+        "exitCode": 0
+      }
+    }
+  },
+  "archive": {
+    "path": "artifacts/mvdm-audit/t480-s4-verification.zip",
+    "sha256": "61a00074af4d68cf25450fbe947d2c56443a372d9eefc651f06e041ef5ca0bd6"
+  },
+  "ledger_sha256": "247b78caaab700166fdf1cab30b268ac935c2ede378b7fb6a964aa7484a3c7c8"
+}

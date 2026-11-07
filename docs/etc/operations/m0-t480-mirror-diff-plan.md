@@ -149,3 +149,15 @@ and S2/S3 comment/layout claims. Then check the finite union of affected files
 for other stale registrations, source hashes and test references. Product
 behavior is not scheduled to change; compile/test/publication is required if
 an actual product change is subsequently justified, not for this admission.
+
+
+## S4 closure
+
+Owner subsequently authorizes implementation through closure. The
+[S4 reconciliation](../evidence/m0-t480-s4-registration-reconciliation.md)
+checks39 affected host files, both sealed archives,819 S2 consumer records,
+six final environment identities and11 unchanged release hashes. Successor
+notes narrow DPMI claims, correct environment path/hash attribution and explain
+historical verifier revision requirements. No product or guest change, rebuild,
+runtime retest, publication, O:/winnt write or push was needed or performed.
+S5 remains planned and unadmitted; conservative S3 retention is not minimality.

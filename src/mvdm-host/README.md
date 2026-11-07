@@ -398,6 +398,13 @@ it does not establish complete DPMI fault semantics. Original/current
 boundary evidence is in
 `../../artifacts/mvdm-audit/s13-bfs-depth1-original-dpmi-selectors.json`.
 
+T480 S4 successor: the paragraph above is the historical DIV-582 account.
+S3 restored the C-file boundary before DpmiFaultHandler to original
+`#ifndef i386`; its actual selected x86 compiler command does not define i386,
+and its object contract is unchanged. This does not retire the remaining
+header/carrier registration or CPU40 stack publication. See the S3/S4 evidence
+for the precise restored fragment; the old snapshot is not the current selector.
+
 MVDM-HOST-DIV-581: retain the standalone-SAS video write adaptation within
 the restored original outer conditions; unsupported direct host-pointer writes
 remain rejected. The selected SAS path is unchanged. Original boundaries and
@@ -3223,6 +3230,12 @@ MVDM-HOST-DIV-868: restore original conditional and selected mouse-host source p
 
 DIV-869: restore sampled original diagnostic line positions in dpmi32/dpmiint.c while retaining the existing DIV-582 CPU40 selector. Evidence: artifacts/mvdm-audit/t476-s2-dpmi-worker.json. Compiler and complete context validation remain pending.
 
+T480 S4 successor to DIV-869: the pending statement above describes the T476
+snapshot. For the bounded S3 selector restoration, actual consumer compilation
+and COFF comparison passed; S2 diagnostic-location evidence is preserved.
+This closes that restoration's validation, not every historical DPMI claim.
+Current selector details are recorded in the DIV-582 successor above.
+
 MVDM-HOST-DIV-674: restore only the original generic-call branch in wow32/wkgthunk.c under WOW_X86_GENERIC_CALL; other i386 exclusions remain.
 
 MVDM-HOST-DIV-675: wow32/i386/callpr32.asm saves/restores EBX and adjusts its three parameter offsets by four bytes. Original dynamic stack restoration is unchanged. S2 actual-thunk, real Win16 normal/mismatch and exception-retirement tests passed; see docs/etc/evidence/m0-t478-s2-generic-thunk.md.
@@ -3313,3 +3326,14 @@ CPU40 stack publication and other registered boundaries remain unchanged.
 Original comment/spelling fragments in DEM, DPMI, tape_io, nt_error and nt_reset
 also preserve actual preprocessor tokens and logical locations.
 See [S3 evidence](../../docs/etc/evidence/m0-t480-s3-connected-restoration.md).
+
+
+## T480 S4 registration reconciliation
+
+S2's original spacing/comment/blank restorations do not retire behavioral
+registrations. S3 narrows only its measured command-tail expression, DPMI
+selector, FPU expression and comment/spelling fragments. Required bindings,
+previous bug fixes and existing exclusions remain. The finite affected-file
+ledger binds stage-specific hashes and consumer receipts; file-level registration
+matches are context, not a new proof of necessity.
+See [S4 evidence](../../docs/etc/evidence/m0-t480-s4-registration-reconciliation.md).
