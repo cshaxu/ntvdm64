@@ -172,3 +172,14 @@ completed changes are not repeated. Conservative S3 dispositions alone do not
 prove minimality. Validate any new edit against original ownership and all
 actual consumers, then use the existing coherent build/test/local-publication
 workflow. Guest and new capability remain excluded; no O:/winnt write or push.
+
+
+## S5 and task closure
+
+[S5 evidence](../evidence/m0-t480-s5-final-minimization.md) records the final
+1060-file review, six further original comments, all819 consumer comparisons,
+coherent builds, Full16/16, gameplay and11-image worktree publication. The
+[task closure](../../history/m0-t480-closure.md) supersedes this completed plan.
+No further stage is admitted. Conservative retained differences and the
+alignment-sensitive metric limits remain explicit; no guest, new functionality,
+O:/winnt write or push was introduced.

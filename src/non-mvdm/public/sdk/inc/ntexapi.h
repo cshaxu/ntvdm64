@@ -104,4 +104,4 @@ NtGetTickCount(
 #error Excluded unsupported C++ NT executive declaration context
 #endif
 #line 1846
-#endif
+#endif // _NTEXAPI_

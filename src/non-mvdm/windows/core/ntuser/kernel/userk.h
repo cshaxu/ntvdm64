@@ -409,4 +409,4 @@ ExitWowCritSect(
 #endif
 #line 5216
 #line 5217
-#endif
+#endif  // !_USERK_

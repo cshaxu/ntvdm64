@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T480 S5 final minimization](evidence/m0-t480-s5-final-minimization.md) records the complete host inventory, final reductions and verification limits.
+
 [T480 S4 registration reconciliation](evidence/m0-t480-s4-registration-reconciliation.md) binds the affected source versions, registrations and historical validation receipts.
 
 [T480 S3 connected restoration](evidence/m0-t480-s3-connected-restoration.md) records original expression, structure and naming recovery and its verification limits.

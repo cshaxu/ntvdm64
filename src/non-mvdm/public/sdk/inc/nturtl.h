@@ -10,4 +10,4 @@ ULONG NTAPI RtlIsDosDeviceName_U(PWSTR DosFileName);
 #line 294
 BOOLEAN NTAPI RtlDosPathNameToNtPathName_U(PCWSTR DosFileName, PUNICODE_STRING NtFileName, PWSTR *FilePart, PVOID RelativeName);
 #line 1103
-#endif
+#endif  // _NTURTL_

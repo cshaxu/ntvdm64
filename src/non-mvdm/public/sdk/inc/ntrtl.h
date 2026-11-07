@@ -388,4 +388,4 @@ RtlConvertLongToLuid(
 #line 6336
 
 #line 6347
-#endif
+#endif  // _NTRTL_

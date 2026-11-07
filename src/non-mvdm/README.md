@@ -2645,3 +2645,13 @@ from OPENNT-HOST-005's unchanged time declaration boundary. Neither restoration
 expands product behavior. S2/S3 spelling changes do not retire other behavioral
 registrations, including the selected declaration cohorts.
 See [S4 evidence](../../docs/etc/evidence/m0-t480-s4-registration-reconciliation.md).
+
+
+## T480 S5 original comment restoration
+
+Restore only original same-line terminal comments on the matching outer guards
+in ntexapi.h, ntregapi.h, ntrtl.h, nturtl.h and userk.h, plus the closing
+RapStructureSize comment in strucsiz.c. Guard nesting was checked before edit.
+No line insertion, condition, declaration, implementation or #line/#error change
+is introduced. Source identities and all actual consumer comparisons are in the
+T480 S5 evidence. Earlier behavioral registrations remain unchanged.

@@ -42,5 +42,5 @@ RapStructureSize (
                 );
 
     return structureSize;
-}
+} // RapStructureSize
 #line 93

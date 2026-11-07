@@ -45,8 +45,8 @@ def main():
     parser.add_argument('--arch', choices=['x86', 'x64'], required=True)
     args = parser.parse_args()
     output = args.output.resolve()
-    if not any(output.is_relative_to(ROOT / ('build/' + task)) for task in ('t480-s2', 't480-s3')) or output.exists():
-        raise SystemExit('require fresh output under build/t480-s2 or build/t480-s3')
+    if not any(output.is_relative_to(ROOT / ('build/' + task)) for task in ('t480-s2', 't480-s3', 't480-s5')) or output.exists():
+        raise SystemExit('require fresh output under build/t480-s2, build/t480-s3 or build/t480-s5')
     output.mkdir(parents=True)
     evidence = json.loads(gzip.decompress((ROOT / 'artifacts/mvdm-audit/t480-s1-build-evidence.json.gz').read_bytes()))
     changed = {v['path'] for v in json.loads(args.plan.read_text(encoding='utf-8'))['changes']}

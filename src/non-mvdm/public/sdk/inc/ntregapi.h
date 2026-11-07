@@ -36,4 +36,4 @@ typedef enum _KEY_VALUE_INFORMATION_CLASS {
 #error Excluded unsupported C++ NT registry declaration context
 #endif
 #line 524
-#endif
+#endif // _NTREGAPI_
