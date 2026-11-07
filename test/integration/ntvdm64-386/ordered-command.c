@@ -12,11 +12,24 @@ int main(int argc, char **argv)
     HANDLE mapping = NULL, first_ready = NULL, second_ready = NULL, first = NULL;
     DWORD *pid = NULL, code = 0;
     int result = 100;
-    if (argc != 3 || strlen(argv[1]) > 100 ||
+    if ((argc != 3 && argc != 5) || strlen(argv[1]) > 100 ||
         !GetEnvironmentVariableA("ROLE", role, sizeof(role)) ||
         !GetEnvironmentVariableA("ROUND", round, sizeof(round))) return 101;
     if ((role[0] != 'A' && role[0] != 'B') ||
         (argv[2][0] != 'A' && argv[2][0] != 'B')) return 102;
+    if (argc == 5) {
+        char path[MAX_PATH], temporary[MAX_PATH];
+        FILE *ready;
+        if (strcmp(argv[3], "hold") ||
+            sprintf_s(path, sizeof(path), "%s-%c.txt", argv[4], role[0]) < 0 ||
+            sprintf_s(temporary, sizeof(temporary), "%s.tmp", path) < 0 ||
+            fopen_s(&ready, temporary, "wx")) return 103;
+        fprintf(ready, "%lu\n", GetCurrentProcessId());
+        if (fclose(ready) || !MoveFileA(temporary, path)) return 104;
+        /* Real native task remains alive until Console/service teardown. */
+        WaitForSingleObject(GetCurrentProcess(), INFINITE);
+        return 105;
+    }
     sprintf_s(name, sizeof(name), "Local\\%s-%s-pid", argv[1], round);
     mapping = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(DWORD), name);
     if (!mapping) goto done;

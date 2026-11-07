@@ -38,7 +38,10 @@ vm_io_buffer equ 20
 vm_codepage equ 24
 vm_token_low equ 28
 vm_token_high equ 32
-vm_bytes equ 36
+vm_physical equ 36
+vm_return_word equ 40
+vm_return_repeat equ 44
+vm_bytes equ 48
 screen_header equ 36
 
 segment _LTEXT public align=16 class=CODE use32
@@ -110,6 +113,8 @@ control:
     mov dword [edi+vm_executable], 1
     mov dword [edi+vm_token_low], 0
     mov dword [edi+vm_token_high], 0
+    mov dword [edi+vm_physical], 0
+    mov dword [edi+vm_return_repeat], 0
     cmp dword [esp+28], 1           ; saved Device_Init, only the system VM
     je .notification_init
     jmp .register_vm
@@ -146,10 +151,22 @@ control:
     mov esi, [edi+vm_generation_high]
     host_notify 7
     test eax, eax
-    jz .ok
+    jz .registered
     cmp dword [esp+28], 1
     je .shutdown_failed
     jmp .initialization_failed
+.registered:
+    cmp dword [esp+28], 1           ; install once, after fallible setup
+    jne .ok
+    mov eax, 0x15
+    mov esi, bios_character
+    vmm_call 0x41                  ; Hook_V86_Int_Chain
+    jc .shutdown_failed
+    mov eax, 0x16
+    mov esi, bios_return
+    vmm_call 0x41
+    jc .shutdown_failed
+    jmp .ok
 .release_notification:
     host_notify 5
     jmp .initialization_failed
@@ -343,6 +360,233 @@ api:
     popad
     ret
 
+; Returned native typeahead belongs to this VM after its command completes.
+; Original spckbd.asm TranslateStd/TranslateExt defines the word normalization
+; below. Only returned words are handled here; all other INT16 calls chain.
+; No IRQ1/TSR replay, guest code patch or second keyboard controller.
+bios_return:
+    pushad
+    mov al, [ebp+client_eax+1]
+    and al, 0xef
+    cmp al, 1
+    ja .chain
+    mov edi, [vm_offset]
+    test edi, edi
+    jz .chain
+    add edi, ebx
+    cmp dword [edi+vm_executable], 1
+    jne .chain
+    cmp dword [edi+vm_waiting], 0
+    jne .chain
+    cmp dword [edi+vm_codepage], 0
+    je .chain
+.next:
+    cmp dword [edi+vm_return_repeat], 0
+    jne .translate
+    sub esp, 12
+    mov eax, [edi+vm_generation_low]
+    mov [esp], eax
+    mov eax, [edi+vm_generation_high]
+    mov [esp+4], eax
+    mov eax, [edi+vm_codepage]
+    mov [esp+8], eax
+    mov ebx, [esp+12+16]
+    mov edx, esp
+    mov esi, 12
+    host_notify 18
+    add esp, 12
+    cmp eax, 259                    ; no returned input: original BIOS/VKD
+    je .chain
+    test eax, eax
+    jnz .failed
+    mov edi, [vm_offset]
+    add edi, [esp+16]
+    mov [edi+vm_return_word], ebx
+    mov [edi+vm_return_repeat], edx
+.translate:
+    movzx ecx, byte [ebp+client_eax+1]
+    mov ax, [edi+vm_return_word]
+    test cl, 0x10
+    jnz .extended
+    cmp ah, 0xe0                   ; original TranslateStd keypad Enter/slash
+    jne .standard
+    mov ah, 0x1c
+    cmp al, 0x0d
+    je .ready
+    cmp al, 0x0a
+    je .ready
+    mov ah, 0x35
+    jmp .ready
+.standard:
+    cmp ah, 0x84
+    ja .discard
+    cmp al, 0xf0
+    jne .standard_e0
+    test ah, ah
+    jnz .discard
+.standard_e0:
+    cmp al, 0xe0
+    jne .ready
+    jmp .normalize
+.extended:
+    cmp al, 0xf0                   ; original TranslateExt fill-in normalization
+    jne .ready
+.normalize:
+    test ah, ah
+    jz .ready
+    xor al, al
+.ready:
+    mov [ebp+client_eax], ax
+    test cl, 1
+    jnz .peek
+    dec dword [edi+vm_return_repeat]
+    jmp .handled
+.peek:
+    and dword [ebp+client_flags], ~0x40
+.handled:
+    popad
+    clc
+    ret
+.discard:
+    mov dword [edi+vm_return_repeat], 0
+    jmp .next
+.failed:
+    mov [irq_error], eax            ; retained host record, never false success
+.chain:
+    popad
+    stc
+    ret
+
+; Candidate translated characters plus actual raw break notifications.
+; Original BIOS/VKD still own scan translation, prefixes and modifier state.
+; The host matches a break only to a make accepted by this exact VM/token.
+bios_character:
+    pushfd
+    pushad
+    mov ax, [ebp+client_eax]
+    cmp ax, 0x9102
+    je .active
+    cmp ah, 0x4f
+    jne .chain
+.active:
+    mov edi, [vm_offset]
+    test edi, edi
+    jz .chain
+    add edi, ebx
+    cmp dword [edi+vm_executable], 1
+    jne .chain
+    mov ecx, [edi+vm_token_low]
+    or ecx, [edi+vm_token_high]
+    jz .chain
+    mov edx, [ebx+4]
+    add edx, 0x400                  ; actual VM's BIOS data, not physical focus
+    cmp ax, 0x9102
+    je .committed
+    mov dword [edi+vm_physical], 0
+    cmp al, 0xe0                   ; prefixes/controller responses aren't keys
+    jae .chain
+    test byte [edx+0x96], 0xc1      ; E1/keyboard-ID sequences need own handling
+    jnz .chain
+    movzx ecx, al
+    and ecx, 0x7f
+    jz .chain
+    test byte [edx+0x96], 2         ; original LC_E0 prefix state
+    jz .physical
+    or ecx, 128
+.physical:
+    mov [edi+vm_physical], ecx
+    test al, 128
+    jnz .release
+    cmp ecx, 0x2a
+    je .modifier
+    cmp ecx, 0x36
+    je .modifier
+    cmp ecx, 0x1d
+    je .modifier
+    cmp ecx, 0x9d
+    je .modifier
+    cmp ecx, 0x38
+    je .modifier
+    cmp ecx, 0xb8
+    jne .chain                     ; character waits for translated commit
+.modifier:
+    sub esp, 36
+    mov dword [esp+12], 1
+    mov dword [esp+16], 0           ; no translated word for a modifier
+    jmp .send
+.release:
+    sub esp, 36
+    mov dword [esp+12], 0           ; real release, never generated on make
+    mov dword [esp+16], 0
+    jmp .send
+.committed:
+    cmp dword [edi+vm_physical], 0
+    je .chain
+    movzx eax, word [edx+0x1c]
+    cmp ax, [edx+0x1a]
+    je .chain
+    movzx ecx, word [edx+0x80]
+    movzx esi, word [edx+0x82]
+    cmp ecx, esi
+    jae .chain
+    cmp eax, ecx
+    jb .chain
+    cmp eax, esi
+    jae .chain
+    mov ebp, eax
+    or ebp, ecx
+    or ebp, esi
+    test ebp, 1
+    jnz .chain
+    cmp eax, ecx
+    jne .not_wrapped
+    mov eax, esi
+.not_wrapped:
+    sub eax, 2
+    sub esp, 36
+    mov [esp+28], eax
+    mov [esp+32], edx
+    movzx eax, word [edx+eax]
+    mov [esp+16], eax
+    mov dword [esp+12], 1
+    test ah, ah
+    jnz .send
+    mov dword [esp+12], 2           ; BIOS-only character (e.g. Alt-numpad)
+.send:
+    movzx eax, word [edx+0x17]
+    mov [esp+20], eax
+    movzx eax, byte [edx+0x96]
+    mov [esp+24], eax
+    mov eax, [edi+vm_physical]
+    cmp dword [esp+12], 2
+    jne .store_physical
+    xor eax, eax                   ; no physical key remains to release
+.store_physical:
+    mov [esp+8], eax
+    mov eax, [edi+vm_token_low]
+    mov [esp], eax
+    mov eax, [edi+vm_token_high]
+    mov [esp+4], eax
+    mov edx, esp
+    mov esi, 28
+    host_notify 17
+    test eax, eax
+    jnz .retained
+    cmp dword [esp+12], 0
+    je .retained
+    cmp dword [esp+16], 0
+    je .retained                   ; raw modifiers did not append a BIOS word
+    mov eax, [esp+28]
+    mov edx, [esp+32]
+    mov [edx+0x1c], ax               ; consume only after host acceptance
+.retained:
+    add esp, 36
+.chain:
+    popad
+    popfd
+    stc                            ; preserve the original INT15 handler chain
+    ret
+
 v86_call:
     ; This entry is invoked by an actual guest FAR CALL, which supplies its
     ; return frame. It must NOT be used for a post-BOP redirected continuation.
@@ -394,6 +638,7 @@ command_return:
     add edi, [esp+16]
     mov [edi+vm_token_low], ebx
     mov [edi+vm_token_high], edx
+    mov dword [edi+vm_physical], 0
 .wait_work:
     mov ebx, [esp+16]              ; original VMM handle in saved PUSHAD
     mov edi, [vm_offset]
@@ -620,10 +865,13 @@ command_screen_apply:
     mov eax, [edx+1068]
     cmp eax, [edi+4]
     jae .unsupported_before
-    cmp dword [edx+1084], 0         ; second cursor segment needs explicit mapping
-    jne .unsupported_before
     cmp dword [edx+1088], 1
     ja .invalid
+    cmp dword [edx+1088], 0         ; hidden cursor does not render either segment
+    je .cursor_geometry
+    cmp dword [edx+1084], 0         ; visible second segment still needs mapping
+    jne .unsupported_before
+.cursor_geometry:
     mov eax, [edx+1072]
     cmp eax, 31
     ja .unsupported_before

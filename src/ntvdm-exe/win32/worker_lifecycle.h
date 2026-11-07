@@ -11,4 +11,6 @@ void ntvdm_worker_lifecycle_authorize_exit(void);
 DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 /* Caller owns the duplicate until its I/O producers have stopped. */
 DWORD ntvdm_worker_lifecycle_fault_event(HANDLE *);
+/* Input errors during authorized teardown must not open a modal dialog. */
+BOOL ntvdm_worker_lifecycle_input_terminal(void);
 #endif

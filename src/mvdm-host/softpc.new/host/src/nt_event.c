@@ -64,6 +64,8 @@
 #include "mvdm_softpc_termination.h"
 #include "worker-base/connection.h" /* MVDM-HOST-DIV-355: Console exit intent. */
 #include "mvdm_softpc_event_thread.h"
+/* MVDM-HOST-DIV-355: authenticated teardown is not an input fault dialog. */
+#include "ntvdm-exe/win32/worker_lifecycle.h"
 /* DIVERGENCE(MVDM-HOST-DIV-317): pending scan data retains its raw origin. */
 #include "mvdm_keyboard_history.h"
 mvdm_keyboard_history nt_keyboard_history;
@@ -434,6 +436,9 @@ DWORD nt_event_loop(void)
                 update_key_history(&InputRecord[0], RecordsRead);
                 }
             else {
+                /* MVDM-HOST-DIV-355: let the original event thread join. */
+                if (ntvdm_worker_lifecycle_input_terminal()) return 0;
+#line 390
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
                 break; //Read from console failed
                 }
@@ -453,6 +458,9 @@ DWORD nt_event_loop(void)
            //
         else {
            if (!NT_SUCCESS(status)) {
+                /* MVDM-HOST-DIV-355: let the original event thread join. */
+                if (ntvdm_worker_lifecycle_input_terminal()) return 0;
+#line 409
                 DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
                 }
            return 0;

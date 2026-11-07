@@ -5,6 +5,7 @@ param(
     [Parameter(Mandatory)][string]$OutputRoot,
     [string]$WindowsProbeImage,
     [string]$RetiredNativeCommandMarker,
+    [string[]]$ServiceLossMarkers,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
@@ -129,7 +130,7 @@ try {
         $text = $baseConfig
         if ($case.DosOnly) { $text += "`r`ndosonly`r`n" }
         [IO.File]::WriteAllBytes($config,$encoding.GetBytes($text))
-        $stage=$null; $scope=$null; $process=$null; $errorText=$null
+        $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false
         $report=Join-Path $output "$($case.Name).observer.txt"
         try {
             $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
@@ -152,6 +153,41 @@ try {
             $desktop = 'NTVDMConsoleTest-' + $process.Id
             while (!$process.WaitForExit(500)) {
                 if ([DateTime]::UtcNow -ge $deadline) { throw 'Observer did not complete its bounded observation' }
+                if($ServiceLossMarkers -and !$serviceLossPassed -and
+                    @($ServiceLossMarkers | Where-Object {!(Test-Path -LiteralPath $_)}).Count -eq 0) {
+                    $pinned=[Collections.Generic.List[Diagnostics.Process]]::new()
+                    try {
+                        $owned=@(Get-CimInstance Win32_Process | Where-Object {
+                            $_.ExecutablePath -and $_.ExecutablePath.StartsWith($stage+'\system32\',[StringComparison]::OrdinalIgnoreCase)
+                        })
+                        $service=@($owned | Where-Object Name -eq 'ntsrv.exe')
+                        if($service.Count -ne 1 -or !($owned | Where-Object Name -eq 'ntvdm.exe') -or
+                            !($owned | Where-Object Name -eq 'ntvwm.exe')){throw 'Missing isolated guest/native service chain'}
+                        foreach($row in $owned){
+                            $item=[Diagnostics.Process]::GetProcessById($row.ProcessId)
+                            $null=$item.Handle;$pinned.Add($item)
+                        }
+                        foreach($marker in $ServiceLossMarkers){
+                            $targetId=[int](Get-Content -LiteralPath $marker -Raw).Trim()
+                            $item=[Diagnostics.Process]::GetProcessById($targetId)
+                            $null=$item.Handle
+                            if($item.MainModule.FileName -ine (Join-Path (Split-Path $marker) 'ORDER.EXE')){
+                                $item.Dispose();throw 'Native readiness identity mismatch'
+                            }
+                            $pinned.Add($item)
+                        }
+                        $victim=$pinned | Where-Object Id -eq $service[0].ProcessId
+                        $victim.Kill()
+                        foreach($item in $pinned){
+                            $remaining=[Math]::Max(0,($deadline-[DateTime]::UtcNow).TotalMilliseconds)
+                            if(!$item.WaitForExit([int]$remaining)){throw "Service-loss survivor: $($item.Id)"}
+                        }
+                        [ordered]@{beforeScopeCleanup=$true;service=$victim.Id;
+                            exited=@($pinned | ForEach-Object {[ordered]@{pid=$_.Id;exit=$_.ExitCode}})} |
+                            ConvertTo-Json -Depth 5 | Set-Content (Join-Path $output "$($case.Name).service-loss.json")
+                        $serviceLossPassed=$true
+                    } finally {foreach($item in $pinned){$item.Dispose()}}
+                }
                 if (!$case.Enhanced) { continue }
                 # Include the system CMD intermediary, then follow only the
                 # observer's descendants; never act on unrelated processes.
@@ -209,9 +245,10 @@ try {
         }
         $observation=if(Test-Path -LiteralPath $report){Get-Content -LiteralPath $report -Raw}else{''}
         $exited=$observation -match '(?m)^result=exited\r?$' -and $observation -match '(?m)^exit=0x00000000\r?$'
-        $pass=$started -and $valid -and $exited -and !$errorText
+        $terminal=if($ServiceLossMarkers){$serviceLossPassed -and $observation -match '(?m)^result=exited\r?$'}else{$exited}
+        $pass=$started -and $valid -and $terminal -and !$errorText
         $results.Add([pscustomobject]@{case=$case.Name;dosonly=$case.DosOnly;enhanced=$case.Enhanced;
-            probeStarted=$started;progmanAndMode=$valid;flags=$flags;hwnd=$hwnd;observedDosOnly=$observedDosOnly;normalExit=$exited;
+            probeStarted=$started;progmanAndMode=$valid;flags=$flags;hwnd=$hwnd;observedDosOnly=$observedDosOnly;normalExit=$exited;serviceLoss=$serviceLossPassed;
             passed=$pass;error=$errorText;observer=$report})
         Write-Host "$($case.Name): started=$started desktop-and-mode=$valid normal-exit=$exited pass=$pass"
     }

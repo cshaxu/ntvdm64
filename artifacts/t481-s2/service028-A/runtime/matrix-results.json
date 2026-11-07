@@ -1,0 +1,15 @@
+{
+  "case": "386-dosonly1",
+  "dosonly": true,
+  "enhanced": true,
+  "probeStarted": true,
+  "progmanAndMode": true,
+  "flags": 2085,
+  "hwnd": 4456,
+  "observedDosOnly": 1,
+  "normalExit": false,
+  "serviceLoss": false,
+  "passed": false,
+  "error": "Service-loss survivor: 26160",
+  "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s2\\service028-A\\runtime\\386-dosonly1.observer.txt"
+}

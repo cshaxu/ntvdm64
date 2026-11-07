@@ -1,0 +1,101 @@
+[
+  {
+    "Case": "registry",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-vm-frontend-test.exe",
+    "SHA256": "4861B3FF84B1D163757919B66E03B961E2D7D5B353DA2D214C19291F4901C0A8",
+    "PID": 7520,
+    "Started": "2026-11-07T15:56:30.8136975Z",
+    "Expected": 0,
+    "Exit": 0,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "input-terminal",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 19036,
+    "Started": "2026-11-07T15:56:30.9300224Z",
+    "Expected": 0,
+    "Exit": 0,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "natural-exit",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 9112,
+    "Started": "2026-11-07T15:56:31.0366033Z",
+    "Expected": 0,
+    "Exit": 0,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "natural-loss",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 25012,
+    "Started": "2026-11-07T15:56:31.1372156Z",
+    "Expected": 0,
+    "Exit": 0,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "natural-console",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 22852,
+    "Started": "2026-11-07T15:56:31.2213893Z",
+    "Expected": 0,
+    "Exit": 0,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "lifecycle-console",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 5944,
+    "Started": "2026-11-07T15:56:31.3093121Z",
+    "Expected": 73,
+    "Exit": 73,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "lifecycle-wow",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 27132,
+    "Started": "2026-11-07T15:56:31.4106371Z",
+    "Expected": 74,
+    "Exit": 74,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "lifecycle-loss",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 12532,
+    "Started": "2026-11-07T15:56:31.5097628Z",
+    "Expected": 74,
+    "Exit": 74,
+    "TimedOut": false,
+    "Passed": true
+  },
+  {
+    "Case": "lifecycle-pending",
+    "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\console-client-test.exe",
+    "SHA256": "71A53F9C16462A271DBC45BCA542B043475F49E20B30EE208F5933BA54550C87",
+    "PID": 20844,
+    "Started": "2026-11-07T15:56:31.6102026Z",
+    "Expected": 73,
+    "Exit": 73,
+    "TimedOut": false,
+    "Passed": true
+  }
+]

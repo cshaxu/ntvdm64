@@ -9,6 +9,7 @@ $report=[IO.Path]::GetFullPath($ReportRoot)
 $null=New-Item -ItemType Directory -Force -Path $report
 $cases=@(
     @{Name='registry';Image='ntvdm-vm-frontend-test.exe';Arguments=@();Expected=0},
+    @{Name='input-terminal';Image='console-client-test.exe';Arguments=@('--input-terminal');Expected=0},
     @{Name='natural-exit';Image='console-client-test.exe';Arguments=@('--natural-exit');Expected=0},
     @{Name='natural-loss';Image='console-client-test.exe';Arguments=@('--natural-loss');Expected=0},
     @{Name='natural-console';Image='console-client-test.exe';Arguments=@('--natural-console');Expected=0},

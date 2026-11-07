@@ -11,6 +11,20 @@
 
 static unsigned char guest_memory[256];
 static mvdm_vm_executor *input_executor;
+/* Conversion itself is exercised by keycode_object_contract_fixture using
+ * the actual original object. This substitute checks the ingress boundary. */
+BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD key)
+{
+    if (key->wVirtualScanCode == 0x3b && !key->uChar.AsciiChar) {
+        key->wVirtualKeyCode = VK_F1; key->wRepeatCount = 1;
+        key->dwControlKeyState = 0; return TRUE;
+    }
+    if ((key->wVirtualScanCode != 0x1e && key->wVirtualScanCode != 0) || key->uChar.AsciiChar != 'a') return FALSE;
+    key->wVirtualScanCode = 0x1e;
+    key->wRepeatCount = 1; key->wVirtualKeyCode = 'A';
+    key->uChar.UnicodeChar = L'a'; key->dwControlKeyState = 0;
+    return TRUE;
+}
 HANDLE vm_io_reset_failure;
 mvdm_vm_executor *mvdm_standalone_worker_executor(void) { return input_executor; }
 /* Ingress selection/capture has its own tests; these isolate notification. */
@@ -262,7 +276,21 @@ static void provider_tests(mvdm_vm_continuation *continuation)
     CHECK(r.result && r.state.count == 1 &&
         ((console_io_input *)data)->character == 'a');
     vm_io_reset_failure = NULL;
-    mvdm_vm_io_destroy(b); mvdm_vm_io_destroy(a); ntvdm_vm_text_destroy(text);
+    {
+        console_io_input returned;
+        uint32_t count;
+        uint64_t generation = mvdm_vm_continuation_generation(continuation);
+        CHECK(mvdm_vm_io_return_input(b, 1, generation + 1) == ERROR_NOT_FOUND);
+        CHECK(!mvdm_vm_io_operations.input_pending(b, &pending) && pending);
+        CHECK(!mvdm_vm_io_return_input(b, 1, generation));
+        CHECK(!mvdm_vm_io_operations.input_pending(b, &pending) && !pending);
+        CHECK(!mvdm_vm_io_return_input(b, 1, generation)); /* No duplicate. */
+        mvdm_vm_io_destroy(b);
+        CHECK(!mvdm_vm_wake_read_input(1, generation, &returned, 1, &count, 1));
+        CHECK(count == 1 && returned.character == 'a' && returned.scan == 0x1e);
+        CHECK(!mvdm_vm_wake_read_input(1, generation, &returned, 1, &count, 1) && !count);
+    }
+    mvdm_vm_io_destroy(a); ntvdm_vm_text_destroy(text);
 }
 
 static void application_tests(uint64_t token, mvdm_vm_continuation *request)
@@ -591,7 +619,7 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
     uint32_t descriptor[8] = {(uint32_t)token, (uint32_t)(token >> 32),
         1, 3, 'A', 0x1e, 'a', SHIFT_PRESSED};
     mvdm_vm_bridge_result bridge;
-    console_io_input received[2];
+    console_io_input received[4];
     console_io_request q = {0}; console_io_reply r = {0};
     frontend_base_result result = {0}; ntvdm_vm_cancel cancel = {0};
     BOOL pending;
@@ -629,7 +657,7 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
     q.operation = CONSOLE_IO_READ_INPUT; q.state.count = 2;
     r.data = (uint8_t *)received;
     CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
-    CHECK(r.result && r.state.count == 2 && r.bytes == sizeof(received));
+    CHECK(r.result && r.state.count == 2 && r.bytes == 2 * sizeof(received[0]));
     CHECK(received[0].key_down == 1 && received[0].repeat == 3);
     CHECK(received[1].key_down == 0 && received[1].repeat == 1);
     for (i = 0; i < 2; ++i) {
@@ -640,6 +668,145 @@ static void executor_input_bop_tests(mvdm_vm_executor *executor, uint64_t token)
     }
     CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
     CHECK(!mvdm_vm_io_operations.input_pending(executor_input[2], &pending) && !pending);
+    {
+        uint32_t bios[7] = {(uint32_t)token, (uint32_t)(token >> 32), 0x1e,
+            1, 0x1e61, 0, 0};
+        memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 27) == ERROR_INVALID_PARAMETER);
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 250, 28) == ERROR_INVALID_ADDRESS);
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 17, 0, 28, 1, 0, &bridge));
+        CHECK(bridge.status == ERROR_ACCESS_DENIED);
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 2, 0, 28) == ERROR_NOT_FOUND);
+        for (i = 2; i < 7; ++i) {
+            uint32_t saved = bios[i];
+            bios[i] = UINT32_MAX; memcpy(guest_memory, bios, sizeof(bios));
+            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_INVALID_DATA);
+            bios[i] = saved;
+        }
+        bios[4] = 0; memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NO_UNICODE_TRANSLATION);
+        CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
+        bios[4] = 0x1e61; memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 17, 0, 28, 1, 1, &bridge));
+        CHECK(!bridge.status);
+        /* A release must use this accepted make, not a second translation.
+         * Its current BIOS flags may differ from those of the original make. */
+        bios[3] = 0; bios[4] = 0; bios[5] = 0x170; bios[6] = 8;
+        memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 2, 0, 28) == ERROR_NOT_FOUND);
+        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
+        memset(guest_memory, 0xff, sizeof(guest_memory));
+        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 2);
+        CHECK(received[0].key_down == 1 && received[0].repeat == 1);
+        CHECK(received[0].virtual_key == 'A' && received[0].scan == 0x1e);
+        CHECK(received[0].character == 'a' && !received[0].control);
+        CHECK(!received[1].key_down && received[1].repeat == 1 && !received[1].character);
+        CHECK(received[1].virtual_key == 'A' && received[1].scan == 0x1e);
+        CHECK(received[1].control == (LEFT_CTRL_PRESSED | RIGHT_ALT_PRESSED |
+            CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON));
+        CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
+        /* The E0 prefix is part of physical identity, even when BIOS
+         * translation produces the same native scan for both keys. */
+        bios[3] = 1; bios[4] = 0x1e61; bios[5] = bios[6] = 0;
+        bios[2] = 0x1e; memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+        bios[2] = 0x9e; memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+        bios[3] = 0; bios[4] = 0;
+        memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
+        bios[2] = 0x1e; memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+        q.state.count = 4;
+        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 4);
+        CHECK(received[0].key_down && !received[0].control);
+        CHECK(received[1].key_down && received[1].control == ENHANCED_KEY);
+        CHECK(!received[2].key_down && received[2].control == ENHANCED_KEY);
+        CHECK(!received[3].key_down && !received[3].control);
+        /* A BIOS-only character is not another make of the already released
+         * Alt key. It reconstructs a complete native pair atomically. */
+        bios[2] = 0; bios[3] = 2; bios[4] = 'a';
+        memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+        CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+        CHECK(r.result && r.state.count == 2);
+        CHECK(received[0].key_down && !received[1].key_down);
+        CHECK(received[0].character == 'a' && received[1].character == 'a');
+        bios[2] = 0x38;
+        memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_INVALID_DATA);
+        bios[3] = 0; bios[4] = 0;
+        memcpy(guest_memory, bios, sizeof(bios));
+        CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
+        {
+            static const uint32_t modifiers[][5] = {
+                {0x2a, VK_SHIFT, 2, 0, SHIFT_PRESSED},
+                {0x36, VK_SHIFT, 1, 0, SHIFT_PRESSED},
+                {0x1d, VK_CONTROL, 0x104, 0, LEFT_CTRL_PRESSED},
+                {0x9d, VK_CONTROL, 4, 4, RIGHT_CTRL_PRESSED | ENHANCED_KEY},
+                {0x38, VK_MENU, 0x208, 0, LEFT_ALT_PRESSED},
+                {0xb8, VK_MENU, 8, 8, RIGHT_ALT_PRESSED | ENHANCED_KEY}
+            };
+            for (i = 0; i < ARRAYSIZE(modifiers); ++i) {
+                bios[2] = modifiers[i][0]; bios[3] = 1;
+                bios[4] = bios[5] = bios[6] = 0;
+                memcpy(guest_memory, bios, sizeof(bios));
+                CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+                bios[3] = 0; bios[5] = modifiers[i][2]; bios[6] = modifiers[i][3];
+                memcpy(guest_memory, bios, sizeof(bios));
+                CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+                CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+                CHECK(r.result && r.state.count == 2);
+                CHECK(received[0].key_down && received[0].virtual_key == modifiers[i][1]);
+                CHECK(received[0].scan == (modifiers[i][0] & 127) && !received[0].character);
+                CHECK(received[0].control == modifiers[i][4]);
+                CHECK(!received[1].key_down && received[1].virtual_key == modifiers[i][1]);
+                CHECK(received[1].control == (modifiers[i][4] & ENHANCED_KEY));
+            }
+            bios[2] = 0x1e; bios[5] = bios[6] = 0;
+        }
+        {
+            KEY_EVENT_RECORD filler = {TRUE, 1, 'B', 0x30, {'b'}, 0};
+            /* A rejected make must not invent a later release. Conversely,
+             * backpressure on release must retain the accepted make. */
+            for (i = 0; i < CONSOLE_IO_INPUT_CAPACITY; ++i)
+                CHECK(!mvdm_vm_io_key(executor_input[1], &filler));
+            bios[3] = 1; bios[4] = 0x1e61;
+            memcpy(guest_memory, bios, sizeof(bios));
+            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_ENOUGH_MEMORY);
+            bios[3] = 0; bios[4] = 0;
+            memcpy(guest_memory, bios, sizeof(bios));
+            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
+            q.state.count = 1;
+            CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+            CHECK(r.result && r.state.count == 1 && received[0].virtual_key == 'B');
+            bios[2] = 0; bios[3] = 2; bios[4] = 'a';
+            memcpy(guest_memory, bios, sizeof(bios));
+            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_ENOUGH_MEMORY);
+            bios[2] = 0x1e;
+            bios[3] = 1; bios[4] = 0x1e61;
+            memcpy(guest_memory, bios, sizeof(bios));
+            CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+            bios[3] = 0; bios[4] = 0;
+            memcpy(guest_memory, bios, sizeof(bios));
+            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_ENOUGH_MEMORY);
+            for (i = 0; i < CONSOLE_IO_INPUT_CAPACITY; ++i) {
+                CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+                CHECK(r.result && r.state.count == 1);
+                CHECK(received[0].virtual_key == (uint32_t)(i + 1 == CONSOLE_IO_INPUT_CAPACITY ? 'A' : 'B'));
+            }
+            CHECK(!mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28));
+            CHECK(mvdm_vm_executor_bios_key_bop(executor, 1, 0, 28) == ERROR_NOT_FOUND);
+            CHECK(!mvdm_vm_io_operations.dispatch(executor_input[1], &cancel, &q, &r, &result));
+            CHECK(r.result && r.state.count == 1 && !received[0].key_down);
+            CHECK(received[0].virtual_key == 'A' && !received[0].character);
+            CHECK(!mvdm_vm_io_operations.input_pending(executor_input[1], &pending) && !pending);
+        }
+    }
     input_executor = NULL;
 }
 static void executor_tests(void)
@@ -728,6 +895,93 @@ static void executor_tests(void)
     CloseHandle(application_published); application_published = NULL;
     CloseHandle(closing); CloseHandle(executor_started); CloseHandle(executor_release);
     CloseHandle(executor_retiring); CloseHandle(executor_retire_release);
+}
+
+static void returned_input_tests(void)
+{
+    console_io_input keys[40] = {0}, output[40] = {0};
+    uint32_t count, i;
+    WORD irq;
+    CHECK(!mvdm_vm_notification_open(&irq));
+    CHECK(!mvdm_vm_wake_register(1, 301));
+    CHECK(!mvdm_vm_wake_register(2, 302));
+    for (i = 0; i < 40; ++i) {
+        keys[i].type = KEY_EVENT; keys[i].key_down = !(i & 1);
+        keys[i].repeat = i + 1; keys[i].character = 'a' + i;
+    }
+    CHECK(mvdm_vm_wake_return_input(1, 300, keys, 40) == ERROR_NOT_FOUND);
+    CHECK(!mvdm_vm_wake_return_input(1, 301, keys, 40));
+    CHECK(!mvdm_vm_wake_read_input(2, 302, output, 40, &count, 1) && !count);
+    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 15, &count, 0) && count == 15);
+    CHECK(!memcmp(keys, output, 15 * sizeof(*keys)));
+    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 15, &count, 1) && count == 15);
+    CHECK(!memcmp(keys, output, 15 * sizeof(*keys)));
+    CHECK(!mvdm_vm_wake_return_input(1, 301, keys, 2));
+    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 40, &count, 1) && count == 27);
+    CHECK(!memcmp(keys + 15, output, 25 * sizeof(*keys)));
+    CHECK(!memcmp(keys, output + 25, 2 * sizeof(*keys)));
+    CHECK(!mvdm_vm_wake_read_input(1, 301, output, 40, &count, 1) && !count);
+    CHECK(!mvdm_vm_wake_return_input(1, 301, keys, 40));
+    CHECK(!mvdm_vm_wake_retire(1, 301));
+    CHECK(!mvdm_vm_wake_register(1, 303));
+    CHECK(mvdm_vm_wake_return_input(1, 301, keys, 1) == ERROR_NOT_FOUND);
+    CHECK(mvdm_vm_wake_read_input(1, 301, output, 40, &count, 1) == ERROR_NOT_FOUND && !count);
+    CHECK(!mvdm_vm_wake_read_input(1, 303, output, 40, &count, 1) && !count);
+    CHECK(!mvdm_vm_wake_return_input(1, 303, keys, 40));
+    mvdm_vm_wake_reset();
+    CHECK(!mvdm_vm_wake_register(1, 304));
+    CHECK(!mvdm_vm_wake_read_input(1, 304, output, 40, &count, 1) && !count);
+    {
+        uint32_t descriptor[3] = {304, 0, 437};
+        mvdm_vm_bridge_result result;
+        ZeroMemory(keys, sizeof(keys));
+        keys[0].type = keys[1].type = KEY_EVENT;
+        keys[0].key_down = 1; keys[0].repeat = 20;
+        keys[0].character = 'z'; keys[0].scan = 0x2c; keys[0].virtual_key = 'Z';
+        keys[1].repeat = 1; keys[1].scan = 0x2c; keys[1].virtual_key = 'Z';
+        CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 2));
+        memcpy(guest_memory, descriptor, sizeof(descriptor));
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 0, &result));
+        CHECK(result.status == ERROR_ACCESS_DENIED);
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 11, 1, 1, &result));
+        CHECK(result.status == ERROR_INVALID_PARAMETER);
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 2, 1, &result));
+        CHECK(result.status == ERROR_NOT_FOUND);
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
+        CHECK(!result.status && result.value == 0x2c7a && result.serial_low == 20);
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
+        CHECK(result.status == ERROR_NO_MORE_ITEMS); /* Release is not another char. */
+        keys[0].character = 0; keys[0].scan = 0x3b; keys[0].virtual_key = VK_F1;
+        CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 1));
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
+        CHECK(!result.status && result.value == 0x3b00 && result.serial_low == 20);
+        {
+            const DWORD modifiers[] = {0, SHIFT_PRESSED, RIGHT_CTRL_PRESSED,
+                RIGHT_ALT_PRESSED, SHIFT_PRESSED | RIGHT_CTRL_PRESSED,
+                SHIFT_PRESSED | RIGHT_CTRL_PRESSED | RIGHT_ALT_PRESSED};
+            const WORD scans[] = {0x85, 0x87, 0x89, 0x8b, 0x89, 0x8b};
+            unsigned key, mode;
+            for (key = 0; key != 2; ++key) {
+                keys[0].scan = 0x57 + key; keys[0].virtual_key = VK_F11 + key;
+                for (mode = 0; mode != sizeof(scans) / sizeof(scans[0]); ++mode) {
+                    keys[0].control = modifiers[mode];
+                    CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 1));
+                    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
+                    CHECK(!result.status && result.value == (DWORD)((scans[mode] + key) << 8)
+                        && result.serial_low == 20);
+                }
+            }
+            keys[0].control = 0;
+        }
+        keys[0].character = 0x4e00;
+        CHECK(!mvdm_vm_wake_return_input(1, 304, keys, 1));
+        CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 18, 0, 12, 1, 1, &result));
+        CHECK(result.status == ERROR_NO_UNICODE_TRANSLATION);
+        CHECK(!mvdm_vm_wake_read_input(1, 304, output, 1, &count, 0) && count == 1);
+        CHECK(output[0].character == 0x4e00 && output[0].repeat == 20);
+    }
+    mvdm_vm_wake_reset();
+    CHECK(!mvdm_vm_notification_close());
 }
 
 static void executor_reuse_tests(void)
@@ -887,6 +1141,7 @@ int main(void)
     continuation_tests();
     executor_tests();
     executor_reuse_tests();
+    returned_input_tests();
     DeleteCriticalSection(&ica);
     printf("PASS %ld notification unit assertions; no real PIC claim\n", assertions);
     return 0;

@@ -1,3 +1,9 @@
+%ifdef ORDERED_COMMAND
+%define CUSTOM_COMMAND 1
+%endif
+%ifdef UNREAD_INPUT
+%define CUSTOM_COMMAND 1
+%endif
 ; Independently authored DOS witness; API results are written after an interval
 ; so the host can prove two actual VMs were simultaneously executing.
 bits 16
@@ -134,7 +140,7 @@ push edi
 push es
 mov al, [role]
 %ifdef REAL_COMMAND
-%ifndef ORDERED_COMMAND
+%ifndef CUSTOM_COMMAND
 sub al, 'A'
 add al, '7'
 mov [test_command+13], al
@@ -158,7 +164,7 @@ push dword 0x11111111
 %endif
 mov [standard_offset], sp
 %macro continuation_case 1-2 0
-%ifdef ORDERED_COMMAND
+%ifdef CUSTOM_COMMAND
 mov byte [test_environment+13], '0'+%2
 %endif
 %ifdef DIRECTORY_YIELD
@@ -320,6 +326,87 @@ mov word [video_failure], 2
 call check_video_fonts
 jc %%error
 mov word [video_failure], 0
+%endif
+%ifdef UNREAD_INPUT
+%if %1 == 8
+; Actual BIOS consumer, after the production native command has returned.
+; Repeated peek must preserve each word. Twenty words exceed the BIOS ring.
+%ifidn UNREAD_MODE,sequence
+mov cx,20
+%elifidn UNREAD_MODE,repeat
+mov cx,20
+%else
+mov cx,1
+%endif
+xor si,si
+%%returned:
+mov [unread_index],si
+mov word [unread_stage],1
+%ifidn UNREAD_MODE,function
+mov ah,0x01
+%else
+mov ah,0x11
+%endif
+int 0x16
+mov [unread_actual],ax
+jz %%error
+mov word [unread_stage],2
+mov bx,ax
+%ifidn UNREAD_MODE,function
+mov ah,0x01
+%else
+mov ah,0x11
+%endif
+int 0x16
+jz %%error
+cmp ax,bx
+jne %%error
+mov word [unread_stage],3
+%ifidn UNREAD_MODE,function
+mov ah,0x00
+%else
+mov ah,0x10
+%endif
+int 0x16
+mov [unread_actual],ax
+cmp ax,bx
+jne %%error
+%ifidn UNREAD_MODE,sequence
+mov dx,0x1e61
+test si,1
+jz %%role
+mov dx,0x3062
+%%role:
+cmp byte [role],'A'
+je %%compare
+mov dx,0x2e63
+test si,1
+jz %%compare
+mov dx,0x2064
+%%compare:
+%elifidn UNREAD_MODE,repeat
+mov dx,0x2c7a
+%elifidn UNREAD_MODE,function
+mov dx,0x3b00
+%elifidn UNREAD_MODE,extended
+mov dx,0x8500
+%endif
+mov word [unread_stage],4
+mov [unread_expected],dx
+cmp ax,dx
+jne %%error
+inc si
+loop %%returned
+mov word [unread_stage],5
+%ifidn UNREAD_MODE,function
+mov ah,0x01
+%else
+mov ah,0x11
+%endif
+int 0x16
+jnz %%error
+mov word [unread_stage],0
+%endif
 %endif
 inc word [continuation_count]
 jmp %%done
@@ -588,6 +675,12 @@ video_offset: dw 0
 %ifdef KEYBOARD
 keyboard_result: dw 0
 %endif
+%ifdef UNREAD_INPUT
+unread_stage: dw 0
+unread_index: dw 0
+unread_actual: dw 0
+unread_expected: dw 0
+%endif
 result_end:
 %ifdef CONTINUATION
 command_callback: dd 0
@@ -807,7 +900,7 @@ video_seq_index: db 0
 video_gc_index: db 0
 %endif
 %ifdef REAL_COMMAND
-%ifdef ORDERED_COMMAND
+%ifdef CUSTOM_COMMAND
 test_command: db '@VM_ORDER_COMMAND@',0
 times 256-($-test_command) db 0
 %else

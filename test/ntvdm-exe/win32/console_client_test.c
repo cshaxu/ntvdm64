@@ -340,6 +340,23 @@ int main(int argc,char **argv)
     BOOL broken_video=argc==2 && !strcmp(argv[1],"--broken-video");
     BOOL broken_pipe=broken_video || (argc==2 && !strcmp(argv[1],"--broken-pipe"));
     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
+    if(argc==2 && !strcmp(argv[1],"--input-terminal")) {
+        SetLastError(ERROR_PIPE_NOT_CONNECTED);
+        CHECK(!ntvdm_worker_lifecycle_input_terminal());
+        CHECK(GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
+        SetLastError(ERROR_PIPE_NOT_CONNECTED);
+        CHECK(!ntvdm_worker_lifecycle_input_terminal());
+        CHECK(GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+        CHECK(SetEvent(broker_lifetime));
+        SetLastError(ERROR_PIPE_NOT_CONNECTED);
+        CHECK(ntvdm_worker_lifecycle_input_terminal());
+        CHECK(GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+        ntvdm_worker_lifecycle_end();
+        CHECK(!ntvdm_worker_lifecycle_input_terminal());
+        puts("PASS input failure remains ordinary until authenticated service death");
+        return 0;
+    }
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     fault_reported=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(fault_reported);
     if(argc==2 && (!strcmp(argv[1],"--natural-exit") || !strcmp(argv[1],"--natural-loss") || !strcmp(argv[1],"--natural-console"))) {
@@ -352,11 +369,13 @@ int main(int argc,char **argv)
         CHECK(WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
         CHECK(fault_reports==1 && WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
         CHECK(vm_frontend_closes==0);
+        CHECK(!ntvdm_worker_lifecycle_input_terminal()); /* Request is not permission. */
         CHECK(SetEvent(loss ? broker_lifetime : text ? broker_console_close : broker_shutdown));
         CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
         CHECK(GetExitCodeThread(thread,&result) && result==(loss ? ERROR_INVALID_HANDLE : 131) && fault_reports==1);
         CHECK(!loss || VdmExitCode==ERROR_INVALID_HANDLE);
         CHECK(vm_frontend_closes==3);
+        CHECK(ntvdm_worker_lifecycle_input_terminal());
         CloseHandle(thread);ntvdm_worker_lifecycle_end();
         puts("PASS natural pre-cleanup permission waits for instruction/loss; same-thread recursion reports once");
         return 0;

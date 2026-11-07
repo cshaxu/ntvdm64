@@ -1,4 +1,5 @@
 #include "mvdm_vm_io.h"
+#include "mvdm_vm_wake.h"
 #include <string.h>
 
 struct mvdm_vm_io {
@@ -35,21 +36,37 @@ DWORD mvdm_vm_io_create(ntvdm_vm_text *text, mvdm_vm_continuation *continuation,
     return ERROR_SUCCESS;
 }
 HANDLE mvdm_vm_io_ready(mvdm_vm_io *io) { return io ? io->ready : NULL; }
+DWORD mvdm_vm_io_return_input(mvdm_vm_io *io, uint32_t vm, uint64_t generation)
+{
+    console_io_input *keys;
+    uint32_t i;
+    DWORD error;
+    if (!io) return ERROR_INVALID_PARAMETER;
+    /* The caller joined all callbacks and rejected producers; no executor
+     * lock is held while entering ICA. Preserve wrapped FIFO order. */
+    if (!io->count) return ERROR_SUCCESS;
+    keys = HeapAlloc(GetProcessHeap(), 0, io->count * sizeof(*keys));
+    if (!keys) return ERROR_NOT_ENOUGH_MEMORY;
+    for (i = 0; i < io->count; ++i)
+        keys[i] = io->keys[(io->head + i) % CONSOLE_IO_INPUT_CAPACITY];
+    error = mvdm_vm_wake_return_input(vm, generation, keys, io->count);
+    if (!error) io->head = io->count = 0;
+    HeapFree(GetProcessHeap(), 0, keys);
+    return error;
+}
 void mvdm_vm_io_destroy(mvdm_vm_io *io)
 {
     if (!io) return;
     CloseHandle(io->ready);
     HeapFree(GetProcessHeap(), 0, io);
 }
-DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
+DWORD mvdm_vm_io_keys(mvdm_vm_io *io, const KEY_EVENT_RECORD *keys, uint32_t count)
 {
-    console_io_input wire = {0};
+    uint32_t i;
     DWORD error = ERROR_SUCCESS;
-    if (!io || !key || !key->wRepeatCount) return ERROR_INVALID_PARAMETER;
-    wire.type = KEY_EVENT; wire.key_down = key->bKeyDown != FALSE;
-    wire.repeat = key->wRepeatCount; wire.virtual_key = key->wVirtualKeyCode;
-    wire.scan = key->wVirtualScanCode; wire.character = key->uChar.UnicodeChar;
-    wire.control = key->dwControlKeyState;
+    if (!io || !keys || !count || count > CONSOLE_IO_INPUT_CAPACITY) return ERROR_INVALID_PARAMETER;
+    for (i = 0; i < count; ++i)
+        if (!keys[i].wRepeatCount) return ERROR_INVALID_PARAMETER;
     AcquireSRWLockExclusive(&io->input_lock);
     {
         DWORD state = WaitForSingleObject(mvdm_vm_continuation_invalidated(io->continuation), 0);
@@ -57,16 +74,25 @@ DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
             error = state == WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
     }
     if (!error) {
-        if (io->count == CONSOLE_IO_INPUT_CAPACITY) error = ERROR_NOT_ENOUGH_MEMORY;
+        if (count > CONSOLE_IO_INPUT_CAPACITY - io->count) error = ERROR_NOT_ENOUGH_MEMORY;
         else if (!SetEvent(io->ready)) error = GetLastError();
         else {
-            io->keys[(io->head + io->count) % CONSOLE_IO_INPUT_CAPACITY] = wire;
-            ++io->count;
+            for (i = 0; i < count; ++i) {
+                console_io_input wire = {0};
+                wire.type = KEY_EVENT; wire.key_down = keys[i].bKeyDown != FALSE;
+                wire.repeat = keys[i].wRepeatCount; wire.virtual_key = keys[i].wVirtualKeyCode;
+                wire.scan = keys[i].wVirtualScanCode; wire.character = keys[i].uChar.UnicodeChar;
+                wire.control = keys[i].dwControlKeyState;
+                io->keys[(io->head + io->count + i) % CONSOLE_IO_INPUT_CAPACITY] = wire;
+            }
+            io->count += count;
         }
     }
     ReleaseSRWLockExclusive(&io->input_lock);
     return error;
 }
+DWORD mvdm_vm_io_key(mvdm_vm_io *io, const KEY_EVENT_RECORD *key)
+{ return mvdm_vm_io_keys(io, key, 1); }
 static DWORD input_pending(void *context, BOOL *pending)
 {
     mvdm_vm_io *io = context;

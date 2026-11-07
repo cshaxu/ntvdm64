@@ -1,0 +1,11 @@
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker'
+[1/4] CC O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/worker_lifecycle.c
+[2/4] CC O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_client.c
+[3/4] CC O:/repos.hobby/ntvdm64/test/ntvdm-exe/win32/console_client_test.c
+O:/repos.hobby/ntvdm64/test/ntvdm-exe/win32/console_client_test.c(374): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/test/ntvdm-exe/win32/console_client_test.c(477): warning C4456: declaration of 'info' hides previous local declaration
+O:/repos.hobby/ntvdm64/test/ntvdm-exe/win32/console_client_test.c(327): note: see declaration of 'info'
+O:/repos.hobby/ntvdm64/test/ntvdm-exe/win32/console_client_test.c(530): warning C4456: declaration of 'actual' hides previous local declaration
+O:/repos.hobby/ntvdm64/test/ntvdm-exe/win32/console_client_test.c(328): note: see declaration of 'actual'
+[4/4] link.exe /nologo /out:console-client-test.exe obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj common-frontend-base.lib worker-base.lib lib-handle.lib obj/opennt-abi-host-compat/console_grid.obj lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib user32.lib gdi32.lib
+PASS input failure remains ordinary until authenticated service death

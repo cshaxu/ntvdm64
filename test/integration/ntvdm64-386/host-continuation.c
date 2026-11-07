@@ -158,7 +158,7 @@ int test_xtrn2phy(uint32_t address, uint8_t access, uint32_t *physical)
 /* Deterministic provider-boundary stimulus, not a physical guest keyboard
  * translation claim. The interactive COMSPEC must really consume and execute
  * this line; no process completion or exit code is substituted. */
-static DWORD interactive_input(mvdm_vm_executor *executor, uint64_t token)
+static DWORD interactive_input(mvdm_vm_executor *executor, uint32_t vm, uint64_t token)
 {
     const char *line = "exit\r";
     unsigned i;
@@ -177,10 +177,10 @@ static DWORD interactive_input(mvdm_vm_executor *executor, uint64_t token)
             (WORD)(line[i] - 'a' + 'A');
         key.wVirtualScanCode = (WORD)MapVirtualKeyW(key.wVirtualKeyCode, MAPVK_VK_TO_VSC);
         key.uChar.UnicodeChar = (WCHAR)line[i];
-        error = mvdm_vm_executor_key(executor, token, &key);
+        error = mvdm_vm_executor_key(executor, vm, token, &key);
         if (error) return error;
         key.bKeyDown = FALSE;
-        error = mvdm_vm_executor_key(executor, token, &key);
+        error = mvdm_vm_executor_key(executor, vm, token, &key);
         if (error) return error;
     }
     return ERROR_SUCCESS;
@@ -434,6 +434,13 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     if (signature != MVDM_VM_BRIDGE_SIGNATURE || !ring0)
         return mvdm_vm_bridge_bop_direct(signature, operation, low, high,
             vm, ring0, result);
+    /* Original diagnostic keyboard operations predate the production input
+     * ingress/handback BOPs. Real-command tests must use the actual providers,
+     * never acknowledge a production handback with an empty diagnostic result. */
+    if (operation >= 16 && operation <= 18 &&
+        GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0))
+        return mvdm_vm_bridge_bop_direct(signature, operation, low, high,
+            vm, ring0, result);
     if (operation == 16) {
         trace(0x400 + low, vm, high);
         ZeroMemory(result, sizeof(*result));
@@ -491,7 +498,7 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         if (result->status) ExitProcess(result->status);
         token = ((uint64_t)result->serial_low << 32) | result->value;
         if (service == 10) {
-            error = interactive_input(mvdm_standalone_worker_executor(), token);
+            error = interactive_input(mvdm_standalone_worker_executor(), vm, token);
             if (error) ExitProcess(error);
         }
         return 1;

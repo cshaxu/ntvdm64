@@ -1,0 +1,221 @@
+{
+  "scope": "T481 S2 P1 verified input/lifecycle delivery; S2 remains open",
+  "receipts": [
+    {
+      "source": "build/t481-s2/input022-x86.log",
+      "artifact": "artifacts/t481-s2/input022-x86.log",
+      "bytes": 909,
+      "sha256": "46f24ab21bfc08c00b48b690fb419a0ba58c4f9a087305189c388c7a2c549154"
+    },
+    {
+      "source": "build/t481-s2/input022-x64.log",
+      "artifact": "artifacts/t481-s2/input022-x64.log",
+      "bytes": 909,
+      "sha256": "242062d0787b67072fe81c73145a28a343ee2a4520ceae84ebf0dc25a237ffe1"
+    },
+    {
+      "source": "build/t481-s2/unread024/runtime/vm-pair.json",
+      "artifact": "artifacts/t481-s2/unread024/runtime/vm-pair.json",
+      "bytes": 1153,
+      "sha256": "a628eab8600cb4b7f758160985c20bd7f57bb702431e59fcb9462b1b86289d50"
+    },
+    {
+      "source": "build/t481-s2/retirement025/runtime/vm-retirement.json",
+      "artifact": "artifacts/t481-s2/retirement025/runtime/vm-retirement.json",
+      "bytes": 266,
+      "sha256": "63e93ece84cc4042aa187e796e0695979713f056899907213be09d3c511058d9"
+    },
+    {
+      "source": "build/t481-s2/retirement025/runtime/vm-reuse.json",
+      "artifact": "artifacts/t481-s2/retirement025/runtime/vm-reuse.json",
+      "bytes": 120,
+      "sha256": "1eca685a2da74307a5c0f81211a77fd789102812d55169ea2a809735613e1433"
+    },
+    {
+      "source": "build/t481-s2/retirement025/runtime/386-dosonly1.native-retirement.json",
+      "artifact": "artifacts/t481-s2/retirement025/runtime/386-dosonly1.native-retirement.json",
+      "bytes": 106,
+      "sha256": "508b82b34ad88bcdb1cb5a6ab0952077beebef03648c2d60ec45f5f3e44efed2"
+    },
+    {
+      "source": "build/t481-s2/ordered026-A/runtime/vm-pair.json",
+      "artifact": "artifacts/t481-s2/ordered026-A/runtime/vm-pair.json",
+      "bytes": 1153,
+      "sha256": "f7dd8625d4b1e78219a0284ce2dfc35db39f3b117aa4d45cbb4a60f3289d4ff0"
+    },
+    {
+      "source": "build/t481-s2/ordered026-B/runtime/vm-pair.json",
+      "artifact": "artifacts/t481-s2/ordered026-B/runtime/vm-pair.json",
+      "bytes": 1153,
+      "sha256": "f189f39dce411c6933737daa92aac7b769c0889fbc0b56a78e5f6652ac5474e2"
+    },
+    {
+      "source": "build/t481-s2/service028-A/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/service028-A/runtime/matrix-results.json",
+      "bytes": 407,
+      "sha256": "b94647eab95869b58f4de1329cb711e43d9051a10d9a6a496c91fea85f3c370b"
+    },
+    {
+      "source": "build/t481-s2/service028-ntvdm-snapshot.txt",
+      "artifact": "artifacts/t481-s2/service028-ntvdm-snapshot.txt",
+      "bytes": 16251,
+      "sha256": "c38fc8ca1a3d5c792fdc73d006ac287f547dc0f6f97dc2e4120c00eaf74b2693"
+    },
+    {
+      "source": "build/t481-s2/service030-A/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/service030-A/runtime/matrix-results.json",
+      "bytes": 379,
+      "sha256": "6cd14eb4a2a3e1d5bfe761b620b1c583146b993429cc17ff3975dcdcaa1f835e"
+    },
+    {
+      "source": "build/t481-s2/service030-A/runtime/386-dosonly1.service-loss.json",
+      "artifact": "artifacts/t481-s2/service030-A/runtime/386-dosonly1.service-loss.json",
+      "bytes": 624,
+      "sha256": "7ea006be83338b086452cc6fb0efa02a17e07983fdaf32b8c038de13311f4fe3"
+    },
+    {
+      "source": "build/t481-s2/input032-sequence/runtime/vm-pair.json",
+      "artifact": "artifacts/t481-s2/input032-sequence/runtime/vm-pair.json",
+      "bytes": 1153,
+      "sha256": "9efd522e596e24eba3160826a5a34569b6784627dd0d792f84f43cd3046eb17e"
+    },
+    {
+      "source": "build/t481-s2/input032-extended/runtime/vm-pair.json",
+      "artifact": "artifacts/t481-s2/input032-extended/runtime/vm-pair.json",
+      "bytes": 1153,
+      "sha256": "ad69c337a792f59a95d5f7607b19d7afa0bf108b1a5164374355ced64ddad50a"
+    },
+    {
+      "source": "build/t481-s2/terminal031.out",
+      "artifact": "artifacts/t481-s2/terminal031.out",
+      "bytes": 1540,
+      "sha256": "3126de4741f6de8834fed5b15320c84a5325482a1519d3208673b4c9427d89b2"
+    },
+    {
+      "source": "build/t481-s2/cached033.out",
+      "artifact": "artifacts/t481-s2/cached033.out",
+      "bytes": 41339,
+      "sha256": "2e68f5448b5b7fc6555e5a50e8fbc5889abc67f864a1a63b9a273ea86b6fc052"
+    },
+    {
+      "source": "build/t481-s2/cached033.exit",
+      "artifact": "artifacts/t481-s2/cached033.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "build/t481-s2/r034-verification/vm-host-unit/results.json",
+      "artifact": "artifacts/t481-s2/r034-verification/vm-host-unit/results.json",
+      "bytes": 3429,
+      "sha256": "1a5b7c8f2e0ccb0335f4d8891460b1df4ea7ddc7be83826ec76799d5ea385e3c"
+    },
+    {
+      "source": "build/t481-s2/r034-verification/full/timings.json",
+      "artifact": "artifacts/t481-s2/r034-verification/full/timings.json",
+      "bytes": 2099,
+      "sha256": "6d353889d2bda366f44e80b116c0c13aeb2232930f328cb97fb7721779c7519f"
+    },
+    {
+      "source": "build/t481-s2/terminal039/results.json",
+      "artifact": "artifacts/t481-s2/terminal039/results.json",
+      "bytes": 3427,
+      "sha256": "c57c74d6a63cb4beac64bc9e8fa19fed15b009f632552f8e72d754455a55db9b"
+    },
+    {
+      "source": "build/t481-s2/terminal039/natural-exit.stdout",
+      "artifact": "artifacts/t481-s2/terminal039/natural-exit.stdout",
+      "bytes": 100,
+      "sha256": "fd2c59d4746345f9ea739b297327c94d298bc3b8efb57a2e6fdb2844bb5992a0"
+    },
+    {
+      "source": "build/t481-s2/worker038.exit",
+      "artifact": "artifacts/t481-s2/worker038.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/service040.exit",
+      "artifact": "artifacts/t481-s2/service040.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/service040-A/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/service040-A/runtime/matrix-results.json",
+      "bytes": 379,
+      "sha256": "bb0c1fd4b3bdcc534e165ad636dde7ded9c9160d1d429dc8569ee49278a42ad6"
+    },
+    {
+      "source": "build/t481-s2/service040-A/runtime/386-dosonly1.service-loss.json",
+      "artifact": "artifacts/t481-s2/service040-A/runtime/386-dosonly1.service-loss.json",
+      "bytes": 627,
+      "sha256": "f57110819df8d166aab95099199f8fafa76d1be0f2edb02bd45d986e80ecbbab"
+    },
+    {
+      "source": "build/t481-s2/service040-A/runtime/386-dosonly1.inputs.json",
+      "artifact": "artifacts/t481-s2/service040-A/runtime/386-dosonly1.inputs.json",
+      "bytes": 859,
+      "sha256": "ecda237a0f61fd3587e78898e84213d80f8ed027ace1b97a90cf3ff1904fc501"
+    },
+    {
+      "source": "build/t481-s2/full041.exit",
+      "artifact": "artifacts/t481-s2/full041.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "build/t481-s2/r041-verification/full/timings.json",
+      "artifact": "artifacts/t481-s2/r041-verification/full/timings.json",
+      "bytes": 2099,
+      "sha256": "f5c529c46ad37aa6dd14b34925423f4af20a5103ca68ffa2135e220834bcd1c0"
+    },
+    {
+      "source": "build/t481-s2/r041-package/product-system32-manifest.json",
+      "artifact": "artifacts/t481-s2/r041-package/product-system32-manifest.json",
+      "bytes": 3665,
+      "sha256": "9c271226dcf3759236731a6f18e9e0c3855e75fafc031c0ea34a7f1dad829170"
+    },
+    {
+      "source": "build/t481-s2/retirement042/runtime/vm-retirement.json",
+      "artifact": "artifacts/t481-s2/retirement042/runtime/vm-retirement.json",
+      "bytes": 266,
+      "sha256": "63e93ece84cc4042aa187e796e0695979713f056899907213be09d3c511058d9"
+    },
+    {
+      "source": "build/t481-s2/retirement042/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/retirement042/runtime/matrix-results.json",
+      "bytes": 380,
+      "sha256": "25c952374588350e1105e4cb328a8ecbec43d1ebc9852fb7613461f8f0812582"
+    },
+    {
+      "source": "build/t481-s2/retirement042/runtime/386-dosonly1.native-retirement.json",
+      "artifact": "artifacts/t481-s2/retirement042/runtime/386-dosonly1.native-retirement.json",
+      "bytes": 106,
+      "sha256": "5db1162106940441a33dc051780f432d7f96da41cc21d07d96c37326a5b8e0e0"
+    },
+    {
+      "source": "build/t481-s2/unread042/runtime/vm-pair.json",
+      "artifact": "artifacts/t481-s2/unread042/runtime/vm-pair.json",
+      "bytes": 1153,
+      "sha256": "67b9eb064333277075f9ed604a39224baea3a7399a93e1240e833cfae9baaafe"
+    },
+    {
+      "source": "build/t481-s2/unread042/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/unread042/runtime/matrix-results.json",
+      "bytes": 376,
+      "sha256": "16b5cbc0c7d5f06308c52d5b07419164efec03744a13671102b7937bf17e2f6d"
+    },
+    {
+      "source": "build/t481-s2/live042.exit",
+      "artifact": "artifacts/t481-s2/live042.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/publication044.json",
+      "artifact": "artifacts/t481-s2/publication044.json",
+      "bytes": 4228,
+      "sha256": "80fa482a09fe8fdbd1844efed7af32f503d0115f913a1f2e3c4b8828c6ffb608"
+    }
+  ]
+}

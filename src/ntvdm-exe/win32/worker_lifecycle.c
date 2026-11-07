@@ -18,6 +18,17 @@ static struct {
     BOOL original_ready;
 } lifecycle;
 
+BOOL ntvdm_worker_lifecycle_input_terminal(void)
+{
+    DWORD saved=GetLastError();
+    BOOL terminal=lifecycle.owner &&
+        ((lifecycle.server && WaitForSingleObject(lifecycle.server,0)==WAIT_OBJECT_0) ||
+         (lifecycle.worker_close && WaitForSingleObject(lifecycle.worker_close,0)==WAIT_OBJECT_0) ||
+         (lifecycle.console_close && WaitForSingleObject(lifecycle.console_close,0)==WAIT_OBJECT_0));
+    SetLastError(saved);
+    return terminal;
+}
+
 DWORD ntvdm_worker_lifecycle_fault_event(HANDLE *event)
 {
     if(!event)return ERROR_INVALID_PARAMETER;

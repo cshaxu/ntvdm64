@@ -8,6 +8,7 @@ param(
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$RetirementDriver,
  [switch]$RetireCommand,
+ [switch]$ServiceLoss,
  [string]$InterruptObserver,
  [switch]$Keyboard,
  [switch]$BlockedKeyboard,
@@ -20,6 +21,8 @@ param(
  [switch]$ReentrantCommand,
  [switch]$FillApplication,
  [string]$OrderedCommandImage,
+ [string]$UnreadInputImage,
+ [ValidateSet('sequence','repeat','function','extended')][string]$UnreadInputMode='sequence',
  [ValidateSet('A','B')][string]$FirstCommand='A',
  [switch]$TraceContinuation,
  [switch]$VideoApplication,
@@ -32,6 +35,8 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($ServiceLoss -and (!$OrderedCommandImage -or !$RealCommand)){throw 'Service loss requires real ordered native tasks'}
+if($UnreadInputImage -and (!$RealCommand -or $OrderedCommandImage -or $NestedCommand)){throw 'Unread input requires separate RealCommand witness'}
 if($FillApplication -and (!$Continuation -or $RealCommand)){throw 'Fill application requires diagnostic Continuation'}
 if($ReentrantCommand -and !$NestedCommand){throw 'Reentrant command witness requires NestedCommand'}
 if($NestedCommand -and !$RealCommand){throw 'Nested command witness requires RealCommand'}
@@ -89,7 +94,18 @@ $system="$dest/SYSTEM.INI"
 $enc=[Text.Encoding]::GetEncoding(28591)
 $s=$enc.GetString([IO.File]::ReadAllBytes($system))
 if([regex]::Matches($s,'(?im)^\[386Enh\]').Count -ne 1){throw 'No unique enhanced section'}
-$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\NTVDM64.386")
+# The source installation may already load this authored bridge. Replace its
+# copied configuration entry instead of registering the same device twice.
+$s=[regex]::Replace($s,'(?ims)^\[386Enh\]\r?\n(?<body>.*?)(?=^\[|\z)',{
+ param($section)
+ $body=[regex]::Replace($section.Groups['body'].Value,'(?im)^[ \t]*device[ \t]*=[^\r\n]*(?:\r?\n|$)',{
+  param($entry)
+  $value=($entry.Value -split '=',2)[1].Split(';')[0].Trim().Trim('"')
+  if([IO.Path]::GetFileName($value) -ieq 'NTVDM64.386'){return ''}
+  return $entry.Value
+ })
+ return "[386Enh]`r`ndevice=$dest\PATCH\NTVDM64.386`r`n"+$body
+})
 [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
 Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.386"
 if($InterruptObserver){
@@ -109,6 +125,11 @@ if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
 if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
+if($UnreadInputImage){
+ $dosDefines+='-DUNREAD_INPUT=1'
+ $dosDefines+=('-DUNREAD_MODE='+$UnreadInputMode)
+ Copy-Item -LiteralPath $UnreadInputImage -Destination "$dest/PATCH/UNREAD.EXE"
+}
 if($OrderedCommandImage){
  $dosDefines+='-DORDERED_COMMAND=1'
  Copy-Item -LiteralPath $OrderedCommandImage -Destination "$dest/PATCH/ORDER.EXE"
@@ -194,10 +215,12 @@ foreach($id in 'A','B'){
   [Array]::Clear($bytes,$marker,512)
   [Array]::Copy($environment,0,$bytes,$marker,$environment.Length)
  }
- if($OrderedCommandImage){
+ if($OrderedCommandImage -or $UnreadInputImage){
   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ORDER_COMMAND@')
   if($marker -lt 0){throw 'Missing ordered command marker'}
   $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T479-$([IO.Path]::GetFileName($dest)) $FirstCommand"+[char]13)
+  if($ServiceLoss){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
+  if($UnreadInputImage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
   if($value.Length -ge 256){throw 'Ordered command too long'}
   [Array]::Clear($bytes,$marker,256)
   [Array]::Copy($value,0,$bytes,$marker,$value.Length)
@@ -295,9 +318,14 @@ function Confirm-Reuse($rows){
 }
 try {
  $retirementOptions=@{}
+ if($ServiceLoss){$retirementOptions.ServiceLossMarkers=@("$dest\PATCH\HOLD-A.txt","$dest\PATCH\HOLD-B.txt")}
  if($RetireCommand){$retirementOptions.RetiredNativeCommandMarker="$dest\PATCH\NATIVE.OK"}
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases 386-dosonly1 @retirementOptions
  if($LASTEXITCODE){throw 'Guest matrix runner failed'}
+ if($ServiceLoss){
+  'PASS actual Win3.1 VM native chains exit after isolated service death; no normal-exit claim'
+  return
+ }
  if(!(Test-Path "$dest/PATCH/VMLOAD.BIN")){throw 'No guest API result'}
  $b=[IO.File]::ReadAllBytes("$dest/PATCH/VMLOAD.BIN")
  Copy-Item "$dest/PATCH/VMLOAD.BIN" "$task/runtime/VMLOAD.BIN"
@@ -334,6 +362,7 @@ try {
   $data=[IO.File]::ReadAllBytes("$dest/PATCH/$id.BIN")
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
   $expectedBytes=if($Continuation){76}else{72}
+  if($UnreadInputImage){$expectedBytes+=8}
   if($VideoApplication){$expectedBytes+=10}
   if($Keyboard){$expectedBytes+=2}
   if($data.Length -ne $expectedBytes -or [Text.Encoding]::ASCII.GetString($data,0,4) -ne 'VMID'){throw 'Invalid witness output'}
@@ -358,6 +387,10 @@ try {
    if($VideoApplication){
     $video=@(0..4|ForEach-Object{[BitConverter]::ToUInt16($data,76+2*$_)})
     Write-Host "$id VIDEO stage/samples/height/offset=$($video -join ',')"
+   }
+   if($UnreadInputImage){
+    $inputState=@(0..3|ForEach-Object{[BitConverter]::ToUInt16($data,76+2*$_)})
+    Write-Host "$id unread stage/index/actual/expected=$($inputState -join ',')"
    }
    $row.continuationCount=[BitConverter]::ToUInt16($data,72)
    $row.continuationErrors=[BitConverter]::ToUInt16($data,74)
@@ -394,7 +427,11 @@ try {
    irq1BeforeHostWake=$before.Count;traceSha256=(Get-FileHash "$task/continuation-trace.txt").Hash}|
    ConvertTo-Json|Set-Content "$task/runtime/blocked-keyboard.json"
  }
- if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or [Math]::Max($rows[0].start,$rows[1].start) -ge [Math]::Min($rows[0].finish,$rows[1].finish)){throw 'Distinct concurrent VM identity not proved'}
+ # These INT1A intervals start at .timing AFTER commands and peer wake;
+ # they are not VM lifetime intervals. Requiring their overlap rejects valid
+ # scheduling. The blocked-peer signal requires both generations to be live.
+ if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or
+    @($rows|Where-Object {$_.pairCount -ne 1 -or $_.pairErrors}).Count){throw 'Distinct live VM identities and blocked-peer wake not proved'}
  'PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks'
  if($NestedCommand){
   foreach($id in 'A','B'){
@@ -409,6 +446,16 @@ try {
    if($screen -notmatch 'bytes total conventional memory' -or $screen -notmatch 'largest executable program size'){throw "Actual MEM output not returned to VM $id"}
   }
   'PASS nested MEM output actually returned to both guest VMs before EXIT'
+ }
+ if($UnreadInputImage){
+  foreach($id in 'A','B'){foreach($round in '0','1'){
+   $record="$dest/PATCH/INPUT-$id-$round.txt"
+   $first=Get-Content $record -TotalCount 1
+   $count=if($UnreadInputMode -eq 'sequence'){40}else{2}
+   if($first -notmatch "synthetic-unread=$UnreadInputMode .*requested=$count written=$count .*error=0$"){throw "Native unread records not proved: $id/$round"}
+   Copy-Item $record "$task/runtime/INPUT-$id-$round.txt"
+  }}
+  "PASS real native unread-input $UnreadInputMode returned through guest BIOS peek/read in both VMs and both command rounds"
  }
  if($RealCommand){'PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested'}
  elseif($Continuation){'PASS 54:08 AH=0/AH=1 and 54:0A in both actual DOS VMs; diagnostic results only'}

@@ -5,7 +5,7 @@
 **Active: M0 T481 S2 — Guest VM input return and lifecycle completion.**
 Owner expands T481 to own the complete queue-first guest multitask completion
 package. S1 integration delivery is committed and pushed at ceea7f1f8; its
-package remains the published baseline, not proof of complete VM I/O.
+package remains the comparison baseline, not proof of complete VM I/O.
 The [working plan](../etc/operations/m0-t481-multitask-completion-plan.md)
 retains every T479 S6 obligation and the remaining sequential stages.
 
@@ -19,7 +19,7 @@ retains every T479 S6 obligation and the remaining sequential stages.
 | Objective | Complete Win3.1 VM input return and normal/cancelled lifecycle without suspending unrelated guest VMs. |
 | Non-goals | No original guest modification/rebuild; no Win95-first work, hardware V86 monitor, speculative protocol completion or new lifecycle authority. |
 | Reference Baseline | ceea7f1f8; archived T479 S6 candidate based on cedebcab55ec1da1b15557454985da78dca7ccf8. |
-| Files And ABI Surface | Authored ntvdm64-386, NTVDM VM executor/I/O/wake/frontend adapters and their tests; retain existing RPC and I/O control ownership. |
+| Files And ABI Surface | Authored ntvdm64-386, NTVDM VM executor/I/O/wake/frontend and lifecycle adapters, minimal registered nt_event terminal-input join and tests; retain existing RPC and I/O control ownership. |
 | Applicable Rules | Execution, architecture, coding, source policy and the approved BIOS/INT16 input-return boundary. |
 | Verification | Review candidate per file; input order/repeats/extended keys/two-VM reuse; attribute fill002 and119; cancellation/normal exit; cached builds, Full gates and actual guest probes. |
 | Expected Markers | No lost returned keys, no cross-VM delivery, no stranded worker or blocked retirement; actual guest receipts rather than dispatch-only coverage. |
@@ -33,7 +33,11 @@ retains every T479 S6 obligation and the remaining sequential stages.
 
 ## Current Technical Baseline
 
-Combined T479/T480 package 25408bd6-e51b-489d-9255-0951c53ad9f3 is published at both release destinations after cached x86/x64 builds, Full16/16, CHAIN2 provider checks, governance and real Win3.1 transition, input, commands and normal-exit verification. Awaiting owner acceptance.
+S2 P1 package8b216ec7-75d1-4979-a21e-c588ca4d02d6 is published at both
+release destinations: all11 host images, Full04116/16, final production VM
+retirement/reuse, diagnostic unread-input handback and normal Win3.1 exit.
+Win3.1 ntvdm64.386 is published only in assets/release. This is a bounded
+verified baseline, not complete VM I/O or S2 closure. P1 records this package.
 
 
 ## Recent M0 Closures
@@ -43,4 +47,8 @@ Combined T479/T480 package 25408bd6-e51b-489d-9255-0951c53ad9f3 is published at 
 
 ## Recent Governance
 
-S1 integration delivery is committed and pushed at ceea7f1f8. S2 is admitted by the owner; no new runtime release is claimed.
+S1 is delivered at ceea7f1f8. S2 P1 has cached x86/x64 builds,14 shared tests
+per architecture,3043 notification assertions per width,9 lifecycle cases,
+Full04116/16 and actual Win3.1 receipts. All11 published host hashes match the
+tested manifest. Historical fill002/119 attribution and remaining S2 obligations
+stay open in the working plan. No S closure or complete-feature claim is made.

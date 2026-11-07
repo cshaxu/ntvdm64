@@ -3408,3 +3408,15 @@ previous bug fixes and existing exclusions remain. The finite affected-file
 ledger binds stage-specific hashes and consumer receipts; file-level registration
 matches are context, not a new proof of necessity.
 See [S4 evidence](../../docs/etc/evidence/m0-t480-s4-registration-reconciliation.md).
+
+
+### T481 S2 — terminal input join (MVDM-HOST-DIV-355)
+
+Extend the lifecycle registration to nt_event_loop's failed input read and
+failed wait. The host predicate observes only its established lifecycle owner,
+signalled authenticated shutdown/Console-close or NTSRV handle and preserves GetLastError.
+During terminal teardown these paths return from the original event loop instead
+of opening a modal error dialog that prevents its join. Live-service failures
+retain original reporting. Diagnostic line anchors are preserved. No guest
+changes, timeout or thread termination is introduced. See the failure and
+verification in the [T481 plan](../../docs/etc/operations/m0-t481-multitask-completion-plan.md).

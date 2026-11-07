@@ -24,4 +24,17 @@ DWORD mvdm_vm_executor_key(mvdm_vm_executor *, uint32_t vm, uint64_t token,
  * guest memory. Failure means the producer still owns the event. */
 DWORD mvdm_vm_executor_key_bop(mvdm_vm_executor *, uint32_t vm,
     uint32_t address, uint32_t extent);
+/* CPU-only seven-DWORD descriptor: token low/high, physical scan (bit7=E0),
+ * kind (0 release, 1 make, 2 BIOS-only character), BIOS scan/OEM word,
+ * BIOS417/418, BIOS496. Kind2 has physical0 and a nonzero scanless OEM byte;
+ * it reconstructs native character records, not a physical make/release pair.
+ * The BIOS word is zero on release or a raw modifier make.
+ * Match real releases to accepted makes in this command, never synthesize one.
+ * Failure leaves the producer's event and pairing state unconsumed. */
+DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *, uint32_t vm,
+    uint32_t address, uint32_t extent);
+/* CPU-only generation low/high and active OEM code page. Transfer one
+ * converted BIOS word/repeat count; failed conversion keeps the record. */
+DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,
+    uint32_t extent, uint32_t *word, uint32_t *repeat);
 #endif

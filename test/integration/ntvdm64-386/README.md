@@ -159,9 +159,9 @@ PAUSE. VM B must observe that file before the test VxD destroys blocked A.
 The test rejects a late wake, checks both reports and normal Windows exit.
 With `-Reuse`, the controller starts a new VM after retirement; it must reuse
 an actual old VM handle with a new generation, reject the old generation,
-and execute another native command returning37. This does not establish the
-absence of native processes before the outer fixture's cleanup, or force the
-new command to overlap an old frontend's pending retirement.
+and execute another native command returning37. The runtime matrix checks that the marked native CMD is absent before scope
+cleanup and records that observation. This does not force the new command to
+overlap an old frontend's pending retirement or prove all worker retirement.
 
 `-OrderedCommandImage <ordered-command.exe> -FirstCommand A|B` extends
 `-RealCommand` with two real native processes per54:08 round. The first
@@ -171,3 +171,45 @@ itself. Per-fixture/per-round named objects prevent cross-run pairing. Both
 orders retain the guest register/flags/stack checks;54:0A still uses the
 translated input fixture. This proves native exit ordering, not a prescribed
 ordering of subsequent guest callback scheduling.
+
+## Real native unread-input handback
+
+The continuation witnesses execute test-only BOP54:254 markers. They require a
+separately linked host-continuation.c diagnostic executable, not an ordinary
+published NTVDM. Rename the notification entry to mvdm_vm_bridge_bop_direct and
+interpose CmdDispatch in the test-only nt_bop object. Preserve its link map and
+never publish that diagnostic executable. In RealCommand mode, command admission
+and input BOP16--18 delegate to production; old keyboard diagnostics cannot
+return fabricated success for these requests.
+
+Compile tests/observation/win31_vm_unread_input_child.c as an ordinary native
+CUI test executable. Run verify-win31-identity.ps1 with Continuation,
+RealCommand, UnreadInputImage and UnreadInputMode (sequence, repeat, function or
+extended), plus the usual addon/package/install/observer/output paths. Each
+invocation needs fresh output and installation roots. Invoke each in a separate
+modern pwsh process: the existing runner narrows its environment for DOS.
+
+Both VM parents run the real child twice through BOP54:08. The child leaves
+synthetic unread INPUT_RECORDs in its own Console; the parent checks BIOS
+peek/read results after actual command return. Sequence uses20 alternating
+characters with different values for A/B. Repeat checks20 occurrences from one
+repeat-count record. Function uses standard INT16 F1; extended uses extended
+INT16 F11. Every word must survive two peeks, be consumed once, match its scan
+and character, and leave no extra word. Native reports and guest results are
+retained. BOP54:0A separately uses the existing input stimulus to exit its real
+interactive shell. These are input-handback proofs, not physical keyboard or
+complete interactive-I/O acceptance.
+
+VM lifetime concurrency is proved by distinct generations plus actual cross-VM
+wake of a peer reporting blocked+waiting0x401. The DOS .timing intervals begin
+after commands and this wake; they must not be compared as lifetime intervals.
+Command execution overlap and opposite exit orders use the separate ordered
+native-command witness.
+
+`-ServiceLoss -OrderedCommandImage <ordered-command.exe> -RealCommand
+-Continuation` selects a distinct failure-path witness. Both VM native tasks
+atomically publish their PIDs and wait. The matrix pins their handles and the
+exact isolated host processes, terminates only that NTSRV and requires exit
+before containment. It records serviceLoss separately from normalExit; this
+mode does not claim BIOS handback or normal Windows shutdown. A surviving
+process fails the matrix, even if the finally block later cleans it up.
