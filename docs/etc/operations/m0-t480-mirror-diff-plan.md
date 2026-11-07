@@ -161,3 +161,14 @@ notes narrow DPMI claims, correct environment path/hash attribution and explain
 historical verifier revision requirements. No product or guest change, rebuild,
 runtime retest, publication, O:/winnt write or push was needed or performed.
 S5 remains planned and unadmitted; conservative S3 retention is not minimality.
+
+
+## S5 admission and implementation boundary
+
+Owner admits S5 after465ba5dcb and authorizes implementation through closure.
+Recompute the complete host C/H comparison, reconcile stage identities, and
+look for remaining safe expression/layout/structure/naming reductions. Earlier
+completed changes are not repeated. Conservative S3 dispositions alone do not
+prove minimality. Validate any new edit against original ownership and all
+actual consumers, then use the existing coherent build/test/local-publication
+workflow. Guest and new capability remain excluded; no O:/winnt write or push.
