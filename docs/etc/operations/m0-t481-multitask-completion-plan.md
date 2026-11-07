@@ -1364,3 +1364,49 @@ remain assets-only and unchanged. See artifacts/t481-s3/publication203.json.
 Governance202 passed. P4 final review/commit/push are not yet complete.
 Remaining S3 geometry/fonts/codepages, operation and nested cancellation
 requirements are unchanged; publication does not close S3 or qualify Win95.
+
+### S3 remaining-owner audit205
+
+P4 is committed and pushed at6f0c60bfa; publication203 is the current complete11
+package. Post-delivery source audit separates these obligations:
+
+- KEYBOARD_LAYOUT: original dos/command/cmdkeyb.c explicitly sends a failed
+  Console-layout query to NoInstallkb16, returns DX=0 and calls cmdInitConsole.
+  ADAPTER-WIN32-034 forbids substituting a thread HKL. The VM provider currently
+  returns unsupported; guest OEM codepage is not a keyboard-layout identifier.
+  This is a proved fallback path, not proof of international layout support.
+- SET_POINTER_CLIP(NULL): original nt_mouse.c MouseDetachMenuItem releases the
+  host Console menu clip. The VM provider cannot release the outer desktop's
+  clip or claim arbitrary guest clipping is implemented. Non-null clipping and
+  actual per-VM ownership still require a guest-owner design; no success stub.
+- Geometry: command_screen captures INT10 mode, rows, columns, font height and
+  cursor; command application validates current VM geometry before writing.
+  vm_text's host snapshot alone cannot implement a mode/viewport change. Any
+  resize work must include guest application and acknowledgement, not only a
+  larger host allocation. Current same-size BUFFER_SIZE support is bounded.
+- Codepage: the guest vm_codepage is carried in the screen header and validated
+  by executor_return_key_bop. It is already the conversion input; it must not
+  be replaced by the Windows thread locale. Additional codepage cases remain.
+
+Worker-close205 reuses the passed S2 worker-close051 runner, with final
+package197/driver143 and explicit VMD/insignia112. It exercises real ordered
+native commands and NTSRV worker shutdown after both HOLD markers, not normal
+completion. Owned PID8696; logs and exit receipt under build/t481-s3. No product
+source change or rebuild is made for this audit. Inspect the terminal result
+before counting this case; broader nested cancellation remains separate.
+
+### S3 lifecycle and nested redirection206--209
+
+Service-loss206 and console-close207 passed real held native tasks in two
+Win3.1 VMs using the S2 proven runner on final package197. Evidence
+artifacts/t481-s3/lifecycle206.json distinguishes forced retirement from normal
+exit. Neither modifies the original installation or production sources.
+
+The test-only continuation adds a NestedRedirect mode requiring ReentrantCommand.
+Each VM runs command /c cmd /c mem with output to result.txt, appends its ROLE,
+and uses TYPE piped to FIND before EXIT. Native key records use VkKeyScanA for
+punctuation/modifiers; this remains deterministic provider stimulus, not actual
+physical guest input. Diagnostic208 builds successfully. Redirect209 passes
+actual file MEM content, separate A/B append markers, pipe screen content,320
+callback checks and normal Win3.1 exit. Evidence artifacts/t481-s3/redirect209.json.
+Geometry/font/codepage and the full cancellation-owner matrix remain open.

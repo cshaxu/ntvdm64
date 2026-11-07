@@ -256,15 +256,22 @@ static DWORD interactive_input(mvdm_vm_executor *executor, uint32_t vm, uint64_t
         line = "mem\rexit\r";
     if (GetEnvironmentVariableW(L"MVDM_REENTRANT_COMMAND", NULL, 0))
         line = "command /c cmd /c mem\rexit\r";
+    if (GetEnvironmentVariableW(L"MVDM_NESTED_REDIRECT", NULL, 0))
+        line = "command /c cmd /c mem > result.txt\recho %ROLE%>> result.txt\rtype result.txt | find \"bytes total\"\rexit\r";
     for (i = 0; line[i]; ++i) {
         KEY_EVENT_RECORD key = {0};
         DWORD error;
         key.bKeyDown = TRUE; key.wRepeatCount = 1;
-        /* The witness contains only ASCII letters, space, slash and Enter.
-         * Map its native key records without asserting physical guest input. */
-        key.wVirtualKeyCode = line[i] == '\r' ? VK_RETURN :
-            line[i] == ' ' ? VK_SPACE : line[i] == '/' ? VK_OEM_2 :
-            (WORD)(line[i] - 'a' + 'A');
+        /* Synthetic native records, not a physical guest-keyboard claim. */
+        if (line[i] == '\r') key.wVirtualKeyCode = VK_RETURN;
+        else {
+            SHORT mapped = VkKeyScanA(line[i]);
+            if (mapped == -1) return ERROR_NO_UNICODE_TRANSLATION;
+            key.wVirtualKeyCode = LOBYTE(mapped);
+            key.dwControlKeyState = ((mapped & 0x100) ? SHIFT_PRESSED : 0) |
+                ((mapped & 0x200) ? LEFT_CTRL_PRESSED : 0) |
+                ((mapped & 0x400) ? LEFT_ALT_PRESSED : 0);
+        }
         key.wVirtualScanCode = (WORD)MapVirtualKeyW(key.wVirtualKeyCode, MAPVK_VK_TO_VSC);
         key.uChar.UnicodeChar = (WCHAR)line[i];
         error = mvdm_vm_executor_key(executor, vm, token, &key);

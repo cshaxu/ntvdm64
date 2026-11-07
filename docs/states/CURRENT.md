@@ -196,3 +196,34 @@ artifacts/t481-s3/publication203.json. Governance202 passed. Production diff
 review confirms reset callback ordering and consumed-input exclusion; same-size
 BUFFER_SIZE acceptance is not arbitrary resizing. Commit/push remain pending;
 S3 remains active with its full remaining matrix.
+
+P4 committed/pushed at6f0c60bfa; working tree was clean after delivery.
+Remaining-owner audit205 is recorded in the plan: original layout-query
+fallback is distinguished from actual layout support; geometry requires guest
+application, and guest codepage is authoritative. Worker-close205 PID8696
+runs the proven isolated lifecycle recipe on final package197; result pending.
+
+Worker-close205 terminal exit0: actual ordered VM native chains retire through
+NTSRV managed worker close; original installation unchanged. Evidence
+artifacts/t481-s3/worker-close205.json. This is not a normal-exit or full nested
+cancellation-matrix claim. Source remains P4; further S3 work remains active.
+
+Lifecycle206 completed exit0: service-loss206 and console-close207 both pass
+real ordered VM task retirement, with original installation bytes unchanged.
+Evidence artifacts/t481-s3/lifecycle206.json. New test-only nested redirection
+witness adds actual file/append/pipe assertions in separate VM directories.
+Diagnostic208 and dependent redirect209 run under owned PID25100; results
+pending, no production change or new publication.
+
+Diagnostic208 and redirect209 terminal exit0. Both real nested DOS/native
+chains produce MEM files, append their own A/B marker and pipe filtered output
+back to the correct guest screen;320 callback checks and normal Windows exit
+pass. Evidence artifacts/t481-s3/redirect209.json. Synthetic provider input
+is explicitly not physical-keyboard proof. Changes are test/evidence only;
+P4 remains the published production baseline.
+
+P5 test-only qualification: diagnostic208, redirect209, original nested210
+and governance211 all exit0. Test input mapper changes preserve original
+nested behavior. No production source/build input changed; existing published
+package203 is reused subject to final both-destination hash check. Evidence
+artifacts/t481-s3/qualification210.json. P5 does not close S3.

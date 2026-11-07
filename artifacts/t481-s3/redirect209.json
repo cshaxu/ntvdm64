@@ -1,0 +1,40 @@
+{
+  "case": "T481 S3 two-VM nested redirect209",
+  "exit": 0,
+  "pid": 25100,
+  "build": "diagnostic208 exit0",
+  "productBase": "6f0c60bfa",
+  "stimulus": "command /c cmd /c mem > result.txt; echo %ROLE%>> result.txt; type result.txt | find bytes-total; exit",
+  "result": "Actual MEM file output in each VM directory; appended distinct A/B lines; pipe output on both guest screens;320 callback checks;normal Win3.1 exit",
+  "limits": "Provider-stimulated native key records, not physical guest keyboard; does not prove every nested cancellation or arbitrary geometry",
+  "inputs": [
+    {
+      "path": "build/t481-s3/redirect209.ps1",
+      "sha256": "C6A9CC2C0BCF2CE6BC7D2E5F5DA499A0B5A1225A040E7EF479268A7BAD36CD07"
+    },
+    {
+      "path": "build/t481-s3/redirect209.exit",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "path": "build/t481-s3/redirect209/runtime/matrix-results.json",
+      "sha256": "782BF8CCF517A20376CFBD28FDCFD5559261D71A512FF2BFF9DDD755FD5A1E6D"
+    },
+    {
+      "path": "build/t481-s3/redirect209/runtime/A.redirect.txt",
+      "sha256": "55E5E5673D8608495CAC3D244FE122C2BB96B495F150052F469E1FF45DCBC955"
+    },
+    {
+      "path": "build/t481-s3/redirect209/runtime/B.redirect.txt",
+      "sha256": "3B752C71050E8E63DC469A97530FEABCE2E32C5F4E20EF0AE9EBC124C919D764"
+    },
+    {
+      "path": "build/t481-s3/redirect209/runtime/A.text.txt",
+      "sha256": "E3B295D6E85C3AB40CD9941727A093E39A321A364AB8269A2EC16C35899EC03C"
+    },
+    {
+      "path": "build/t481-s3/redirect209/runtime/B.text.txt",
+      "sha256": "80E60B07CB63AA785F48E76638EB866C9AC213340BD17F8B3B5B57A945AF8FB9"
+    }
+  ]
+}

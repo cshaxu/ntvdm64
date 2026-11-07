@@ -1,0 +1,53 @@
+{
+  "source": "6f0c60bfa",
+  "pid": 2944,
+  "cases": [
+    {
+      "case": "service-loss206",
+      "exit": 0,
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": false,
+        "serviceLoss": true,
+        "workerClose": false,
+        "consoleClose": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\service-loss206\\runtime\\386-dosonly0.observer.txt"
+      },
+      "runnerHash": "0057E7DBD0424F6BB0C31E975EF4C60AAB071F87DA2C3A07901562688DBEEB24",
+      "matrixHash": "E16FA5CAAFAA3243C3F8CD38E155884495228EB4E4E431689E4A04BC91BEFAEB"
+    },
+    {
+      "case": "console-close207",
+      "exit": 0,
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": false,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": true,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\console-close207\\runtime\\386-dosonly0.observer.txt"
+      },
+      "runnerHash": "8CB4CFC6011B3F150CC0A3E750E86C98AA7C0714F86683ADEBED4C45BDABA0DD",
+      "matrixHash": "DE3F86593C6D6E6036F004D42F1734E4631AC2CB2033D76DE095FF8DD9429276"
+    }
+  ],
+  "limits": "Managed shutdown/service disconnect, not normal exit or every nested cancellation order"
+}

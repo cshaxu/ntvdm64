@@ -1,0 +1,28 @@
+{
+  "case": "T481 S3 managed worker shutdown205",
+  "source": "6f0c60bfa",
+  "exit": 0,
+  "pid": 8696,
+  "runner": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+  "package": "build/t481-s3/package197",
+  "result": "Two real ordered VM native commands; NTSRV worker close; selected runtime case passed; immutable installation unchanged",
+  "limits": "Managed worker close, not normal exit; does not prove every nested cancellation owner or completion ordering",
+  "inputs": [
+    {
+      "path": "build/t481-s3/worker-close205.ps1",
+      "sha256": "DB894D13FA69CF08A7D52FF0D77817F5A2728172FEF33C986CCD2B4306EF26FB"
+    },
+    {
+      "path": "build/t481-s3/worker-close205.exit",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "path": "build/t481-s3/worker-close205/runtime/matrix-results.json",
+      "sha256": "3902722573792997D339206199CB18EDE2C27F98D2F83C6E75177CC4210BB30B"
+    },
+    {
+      "path": "build/t481-s3/worker-close205/runtime/worker-close.stdout",
+      "sha256": "7C72C9ADF75D66284BF1992A4C5898484BAF44223C586F94DD2DB3E2811A1F72"
+    }
+  ]
+}

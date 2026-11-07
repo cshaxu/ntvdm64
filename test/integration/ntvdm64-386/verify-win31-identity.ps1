@@ -25,6 +25,7 @@ param(
  [switch]$RealCommand,
  [switch]$NestedCommand,
  [switch]$ReentrantCommand,
+ [switch]$NestedRedirect,
  [switch]$FillApplication,
  [string]$OrderedCommandImage,
  [switch]$ResizeCommand,
@@ -50,6 +51,7 @@ if($ServiceLoss -and $WorkerCloseMonitor){throw 'Select service loss or managed 
 if(($ServiceLoss -or $WorkerCloseMonitor) -and (!$OrderedCommandImage -or !$RealCommand)){throw 'Termination requires real ordered native tasks'}
 if($UnreadInputImage -and (!$RealCommand -or $OrderedCommandImage -or $NestedCommand)){throw 'Unread input requires separate RealCommand witness'}
 if($FillApplication -and (!$Continuation -or $RealCommand)){throw 'Fill application requires diagnostic Continuation'}
+if($NestedRedirect -and !$ReentrantCommand){throw 'Nested redirection requires reentrant commands'}
 if($ReentrantCommand -and !$NestedCommand){throw 'Reentrant command witness requires NestedCommand'}
 if($NestedCommand -and !$RealCommand){throw 'Nested command witness requires RealCommand'}
 if($OrderedCommandImage -and !$RealCommand){throw 'Ordered native commands require RealCommand'}
@@ -263,6 +265,7 @@ if($InitializationFailure){$env:MVDM_INIT_FAILURE_REPORT="$task/initialization-r
 if($RealCommand){$env:MVDM_REAL_COMMAND='1'}
 if($NestedCommand){$env:MVDM_NESTED_COMMAND='1'}
 if($ReentrantCommand){$env:MVDM_REENTRANT_COMMAND='1'}
+if($NestedRedirect){$env:MVDM_NESTED_REDIRECT='1'}
 if($FillApplication){$env:MVDM_FILL_APPLICATION='1'}
 if($TraceContinuation){$env:MVDM_CONTINUATION_TRACE="$task/continuation-trace.txt"}
 if($InterruptObserver){$env:MVDM_INTERRUPT_OBSERVATION='1'}
@@ -413,7 +416,14 @@ try {
    $screen=[Text.Encoding]::ASCII.GetString($chars)
    [IO.File]::WriteAllText("$task/runtime/$id.text.txt",$screen)
    if($ReentrantCommand -and !$screen.Contains('command /c cmd /c mem')){throw "Reentrant command line absent in VM $id"}
-   if($screen -notmatch 'bytes total conventional memory' -or $screen -notmatch 'largest executable program size'){throw "Actual MEM output not returned to VM $id"}
+   if($NestedRedirect){
+    $redirect=Join-Path "$directoryRoot/V$id" 'result.txt'
+    $text=[IO.File]::ReadAllText($redirect)
+    Copy-Item -LiteralPath $redirect -Destination "$task/runtime/$id.redirect.txt"
+    if($text -notmatch 'bytes total conventional memory' -or $text -notmatch 'largest executable program size' -or
+       $text -notmatch "(?m)^$id\s*$"){throw "Nested redirect/append content invalid in VM $id"}
+    if($screen -notmatch 'bytes total conventional memory'){throw "Nested pipe output absent in VM $id"}
+   } elseif($screen -notmatch 'bytes total conventional memory' -or $screen -notmatch 'largest executable program size'){throw "Actual MEM output not returned to VM $id"}
   }
   'PASS nested MEM output actually returned to both guest VMs before EXIT'
  }

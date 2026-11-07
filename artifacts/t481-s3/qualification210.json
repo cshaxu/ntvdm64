@@ -1,0 +1,10 @@
+{
+  "case": "T481 S3 P5 test-only qualification",
+  "base": "6f0c60bfa",
+  "diagnostic208": "exit0",
+  "redirect209": "exit0;two real nested redirected files, append markers, pipe screens,320 callbacks,normal exit",
+  "nested210": "exit0;original nested mode preserved",
+  "governance211": "exit0",
+  "productChanged": false,
+  "remaining": "S3 geometry/font/codepage and cancellation inventory, S4 Win95 and S5 combined qualification"
+}
