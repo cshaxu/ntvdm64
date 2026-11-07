@@ -286,3 +286,33 @@ their retained build-source bytes still match every recorded hash. A follow-up
 evidence-only P pins artifacts/t481-s2 to -text and restores those exact bytes,
 then verifies each staged blob against the manifest. No source or product image
 changes and no runtime-test repetition are involved.
+
+## S2 OEM boundary and historical evidence audit
+
+OEM048 is a test-only addition using the unchanged published runtime closure
+and separately linked diagnostic host040, addon038. Both actual native children
+report codepage437, write U+00E9/scan12 for A and U+00E4/scan1e for B, twice.
+Both guest parents observe exact BIOS words1282/1e84 after two peeks and one
+read, then an empty queue.320 callback checks and normal Windows exit pass.
+Native reports, matrix and pair receipts are preserved. The existing unit
+negative leaves unrepresentable U+4E00 unconsumed with
+ERROR_NO_UNICODE_TRANSLATION. This closes the CP437 non-ASCII proof gap only;
+DBCS/code-page changes remain the assigned S3 operation boundary.
+
+Historical fill002 review confirms its trace reached both report markers and
+both VM-retire notifications, but retained evidence does not identify the later
+shutdown failure. Its original receipt names NTVDM hash525223C8860140E654DBCEB30B4A563B978B3C078A531AB56870E485872583EF.
+The still-existing disposable fill002-package now contains hash
+10306EB6FB18E156E6C4A873CB7BDBAA607F94E7CE6D749B1AC1C80F0A1B513F
+and a different package manifest. The current continuation-worker image/map
+also predates/differs from that observation. Do not symbolize the old snapshot
+against those mutable paths or treat them as the original failing package.
+This is an evidence limitation, not proof that the product failure is resolved.
+
+Four dispatch cancellation inputs have source owners: channel stop and worker
+handles come from frontend-base; VM retirement and broker handles come from
+vm_frontend. Existing application_tests selects each independently and a
+combined cancellation; actual service040 and retirement042 cover broker death
+and VM retirement. Full cancellation/rollback acceptance still needs explicit
+mapping of remaining real paths; no new recovery mechanism is warranted by
+this audit. Historical119 still lacks a captured blocked carrier stack.

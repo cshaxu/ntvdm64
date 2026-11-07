@@ -390,6 +390,12 @@ mov dx,0x2c7a
 mov dx,0x3b00
 %elifidn UNREAD_MODE,extended
 mov dx,0x8500
+%elifidn UNREAD_MODE,oem
+mov dx,0x1282                    ; U+00E9 -> CP437 82h, original physical scan
+cmp byte [role],'A'
+je %%oem_ready
+mov dx,0x1e84                    ; U+00E4 -> CP437 84h in the other VM
+%%oem_ready:
 %endif
 mov word [unread_stage],4
 mov [unread_expected],dx

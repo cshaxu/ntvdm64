@@ -22,7 +22,7 @@ param(
  [switch]$FillApplication,
  [string]$OrderedCommandImage,
  [string]$UnreadInputImage,
- [ValidateSet('sequence','repeat','function','extended')][string]$UnreadInputMode='sequence',
+ [ValidateSet('sequence','repeat','function','extended','oem')][string]$UnreadInputMode='sequence',
  [ValidateSet('A','B')][string]$FirstCommand='A',
  [switch]$TraceContinuation,
  [switch]$VideoApplication,

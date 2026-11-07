@@ -1,6 +1,6 @@
 /* Diagnostic native child: deliberately leave records in its own Console.
  * Unlike win31_vm_input_child, this proves handback, not physical input.
- * Usage: child report [z|sequence|repeat|function]. No case injects Enter. */
+ * Usage: child report [z|sequence|repeat|function|extended|oem]. No Enter. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
@@ -56,6 +56,11 @@ int main(int argc, char **argv)
         pair(records, VK_F1, 0x3b, 0, 1);
     } else if (!strcmp(mode, "extended")) {
         pair(records, VK_F11, 0x57, 0, 1);
+    } else if (!strcmp(mode, "oem")) {
+        /* CP437 characters differ per VM, independent of physical layout. */
+        if (GetConsoleCP() != 437) return ERROR_INVALID_DATA;
+        pair(records, role[0] == 'B' ? 'A' : 'E', role[0] == 'B' ? 0x1e : 0x12,
+            role[0] == 'B' ? 0x00e4 : 0x00e9, 1);
     } else if (strcmp(mode, "z")) return 64;
     if (vm) {
         if (sprintf_s(report_path, sizeof(report_path), "%s-%c-%c.txt", argv[1], role[0], round[0]) < 0)
@@ -68,8 +73,8 @@ int main(int argc, char **argv)
         else if (written != count) error = ERROR_WRITE_FAULT;
     }
     if (!error && !GetNumberOfConsoleInputEvents(input, &after)) error = GetLastError();
-    fprintf(report, "pid=%lu synthetic-unread=%s before=%lu requested=%lu written=%lu after=%lu error=%lu\n",
-        GetCurrentProcessId(), mode, before, count, written, after, error);
+    fprintf(report, "pid=%lu synthetic-unread=%s before=%lu requested=%lu written=%lu after=%lu codepage=%u error=%lu\n",
+        GetCurrentProcessId(), mode, before, count, written, after, GetConsoleCP(), error);
     for (i = 0; i < count; ++i) {
         const KEY_EVENT_RECORD *key = &records[i].Event.KeyEvent;
         fprintf(report, "record=%lu down=%d repeat=%u vk=%04x scan=%04x unicode=%04x\n",

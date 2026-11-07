@@ -213,3 +213,12 @@ exact isolated host processes, terminates only that NTSRV and requires exit
 before containment. It records serviceLoss separately from normalExit; this
 mode does not claim BIOS handback or normal Windows shutdown. A surviving
 process fails the matrix, even if the finally block later cleans it up.
+
+`UnreadInputMode oem` checks the existing CP437 path without changing runtime
+code: native VM A leaves U+00E9 and VM B U+00E4, each with its scan identity.
+Both command rounds must return exact BIOS words1282/1e84, survive repeated
+peek and leave no extra word. The child rejects a non437 Console prerequisite
+and records its actual code page. This is non-ASCII single-byte handback, not
+DBCS, arbitrary code-page switching or physical keyboard coverage. The unit
+suite separately proves an unrepresentable U+4E00 returns a conversion error
+without consuming the original queued record.

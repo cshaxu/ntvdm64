@@ -1,0 +1,3 @@
+pid=14452 synthetic-unread=oem before=5 requested=2 written=2 after=7 codepage=437 error=0
+record=0 down=1 repeat=1 vk=0041 scan=001e unicode=00e4
+record=1 down=0 repeat=1 vk=0041 scan=001e unicode=0000
