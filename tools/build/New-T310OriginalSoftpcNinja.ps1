@@ -691,6 +691,7 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
     Set-Content -LiteralPath $parallelRunner -Encoding ascii
 
 $includeRootPaths = @(
+    'src/lib-nxvm',
     'src',
     'src/common/base_srv',
     'src/vdmredir-dll/include',
@@ -1460,7 +1461,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('rule base_rpc_test_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/ntvwm/next_command.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib | ntsrv.exe ntvwm.exe')
-    $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"' + ' /I "' + (NinjaPath (Join-Path $root 'src/lib-nxvm')) + '"'
     # Frontend-only nxvm closure. Refuse source drift before emitting objects;
     # no dependency on the sibling repository at build or runtime.
     $windowManifest = Get-Content (Join-Path $frontendRoot 'nxvm-import.json') -Raw | ConvertFrom-Json
@@ -1470,7 +1471,7 @@ if ($Architecture -eq 'x86') {
         throw 'Frontend nxvm license hash mismatch'
     }
     foreach ($row in $windowManifest.files) {
-        if ($row.path -notmatch '^lib-nxvm/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or $row.path.Contains('..')) {
+        if ($row.path -notmatch '^lib-nxvm/lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or $row.path.Contains('..')) {
             throw "Invalid frontend nxvm path: $($row.path)"
         }
         if ((Get-NodeSha256 (Join-Path (Join-Path $root 'src') $row.path)) -ne $row.sha256) {
@@ -1962,7 +1963,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('rule rpc_management_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /acf "' + (NinjaPath (Join-Path $root 'src/common/protocol/rpc_management.acf')) + '" /client stub /server none /out obj/basesrv /h rpc_management.h /cstub rpc_management_c.c $in')
     $graph.Add('build obj/basesrv/rpc_management_c.c obj/basesrv/rpc_management.h: rpc_management_idl ' + (NinjaPath (Join-Path $root 'src/common/protocol/rpc_management.idl')) + ' | ' + (NinjaPath (Join-Path $root 'src/common/protocol/rpc_management.acf')))
-    $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"' + ' /I "' + (NinjaPath (Join-Path $root 'src/lib-nxvm')) + '"'
     $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/main.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/basesrv/stub.obj: cc obj/basesrv/service_s.c | obj/basesrv/service.h')

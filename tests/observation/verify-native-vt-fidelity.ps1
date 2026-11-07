@@ -33,7 +33,7 @@ try {
     $source|ForEach-Object{Get-FileHash (Join-Path $repo $_)}|ConvertTo-Json|Set-Content "$root\sources.json"
     foreach($arch in @('x64','x86')) {
         $commands=@('@echo off',('call "'+$VsDevCmd+'" -no_logo -arch='+$arch+' -host_arch=x64'),'if errorlevel 1 exit /b %errorlevel%')
-        $flags='/nologo /MT /O2 /W4 /we4013 /std:c11 /D_WIN32_WINNT=0x0A00 /DWIN32_LEAN_AND_MEAN /I "'+$repo+'\src" /I "'+$repo+'\src\ntcon-exe"'
+        $flags='/nologo /MT /O2 /W4 /we4013 /std:c11 /D_WIN32_WINNT=0x0A00 /DWIN32_LEAN_AND_MEAN /I "'+$repo+'\src\lib-nxvm" /I "'+$repo+'\src" /I "'+$repo+'\src\ntcon-exe"'
         $commands+=('cl.exe '+$flags+' /DVT_PRODUCER_ONLY /Fo"'+$root+'\producer-'+$arch+'.obj" /Fe"'+$root+'\producer-'+$arch+'.exe" "'+$repo+'\tests\observation\native_vt_fidelity_test.c" /link /incremental:no')
         $commands+='if errorlevel 1 exit /b %errorlevel%'
         if($arch -eq 'x64') {

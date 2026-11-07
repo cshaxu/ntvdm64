@@ -4,7 +4,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
-#include "lib-nxvm/kvm-window/window.h"
+#include "lib-nxvm/lib/kvm-window/window.h"
 
 #ifdef WIN31_CONSOLE_API_TRACE
 BOOL win31_console_api_on_message(void);

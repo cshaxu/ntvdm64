@@ -154,7 +154,7 @@ src/
   non-mvdm/
   compat/
   common/{protocol,codec,console}/
-  lib-nxvm/{types,base,kvm-base,kvm-window}/
+  lib-nxvm/lib/{types,base,kvm-base,kvm-window}/
   lib-win32/{rpc,io,file,handle,process-attributes,process-observation,process-hook}/
   worker-base/
   run16-exe/

@@ -149,3 +149,9 @@ not S7. This supersedes the complete-I/O-before-S7 grouping above. The
 failure evidence. T479 S7 audits only delivered-scope closure; the successor
 owns complete I/O/nested/Win95 implementation, proof and new publication.
 Transfer does not mark those capabilities passed or erase the original goal.
+
+## Owner-added S8 and S9
+
+T479 remains open. [S8/S9 import plan](m0-t479-s8-s9-import-plan.md)
+admits unchanged SoftPC shared libraries first and Win3.1 display transitions
+second. S6 unfinished scope remains in the durable successor handoff.

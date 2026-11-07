@@ -1,0 +1,499 @@
+{
+  "source": "O:/repos.hobby/softpc/src/lib",
+  "revision": "26d118e53986a58c550f3cf69bf7905f2bde10b1",
+  "scope": "Existing four shared component trees; initial audit, not import or acceptance",
+  "files": [
+    {
+      "path": "types/atomic.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "616285a73f5dde8b8792ea345ac996a7f877d8549b3b618c527d4aeff4975a2f",
+      "localSha256": "87dfeae1e52b244643af688a56156f7fb4bcbc11d87edfac8f789d5d9b9a03a9"
+    },
+    {
+      "path": "types/file.h",
+      "state": "added",
+      "upstreamSha256": "1278983e5d67d20c13d406705087783980a0e72b5010ca62d0cd772821b8196d",
+      "localSha256": null
+    },
+    {
+      "path": "types/linux/clock.h",
+      "state": "added",
+      "upstreamSha256": "4f0bf62ca6703d62cf98676d7212b9faed44cbfc0759e97f8f496c253c2eaca6",
+      "localSha256": null
+    },
+    {
+      "path": "types/linux/file.h",
+      "state": "added",
+      "upstreamSha256": "5f1476615b583c86af5fa3665f3aeae0918e2e357122193fbbfbf9a9da879d24",
+      "localSha256": null
+    },
+    {
+      "path": "types/linux/memory.h",
+      "state": "added",
+      "upstreamSha256": "077a8a472734abfb4cd0ff371a63c82373e200eb7510213d58be3bd52487496a",
+      "localSha256": null
+    },
+    {
+      "path": "types/linux/process.h",
+      "state": "added",
+      "upstreamSha256": "8c2bb44940bf9b3a65e0c9fd76b463dfd68459201a8dd7fe7e78664fcd80fcec",
+      "localSha256": null
+    },
+    {
+      "path": "types/linux/sync.h",
+      "state": "added",
+      "upstreamSha256": "60835f8d1fec6d9fd98370415af2c9cb426f2b45db1aace995322140258ea630",
+      "localSha256": null
+    },
+    {
+      "path": "types/linux/test.h",
+      "state": "added",
+      "upstreamSha256": "f589cd55befd5fafe0d95571adc69e480962be93fca4424950b4274aa4c863bd",
+      "localSha256": null
+    },
+    {
+      "path": "types/math.h",
+      "state": "added",
+      "upstreamSha256": "3a4fc7b527c3d8ce018838cb8fd259f383d817dbed3d67094dfd48d12ec2a688",
+      "localSha256": null
+    },
+    {
+      "path": "types/README.md",
+      "state": "identical",
+      "upstreamSha256": "b48a46280ba13243788736913c4230ec62197b2aa4fd35cf771f3a0c82df34e2",
+      "localSha256": "b48a46280ba13243788736913c4230ec62197b2aa4fd35cf771f3a0c82df34e2"
+    },
+    {
+      "path": "types/test.h",
+      "state": "added",
+      "upstreamSha256": "e36b48ac96f1d1be6437dee0172732cedbf2a62b1416f0843a60be9327469dc7",
+      "localSha256": null
+    },
+    {
+      "path": "types/types_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "b4f0f0f9438823cd978ed5ae173cce8f52759e8ef1ea9f4a41e668cae8318616",
+      "localSha256": "7c0c7ff001058cf76f857037ffd5ff57de158643c0790a1ec7dde424615dfcd6"
+    },
+    {
+      "path": "types/win32/audio.h",
+      "state": "added",
+      "upstreamSha256": "24cfa2585beb4218239489937a5f58060968fa7843f794add8fbce793ddee2e7",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/clock.h",
+      "state": "added",
+      "upstreamSha256": "232a1d723a33d1c3d62cda6c3044539e0c00bf0c430f5c1a6e222c84ce65555b",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/console.h",
+      "state": "added",
+      "upstreamSha256": "264de2bc5c28bd4ed1c4d0da52fbd1f59abc3d5476d855b0f5a95e6a8ab2c9b6",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/file.h",
+      "state": "added",
+      "upstreamSha256": "83e9ce7d7bb88f43727f93f2fbb96996922c4c5881c7d75b74c1c00dd76a15ed",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/input.h",
+      "state": "identical",
+      "upstreamSha256": "32f572c570c497c34bd69fa6430c475e2f94372bec2b60c8ac3486190321bea2",
+      "localSha256": "32f572c570c497c34bd69fa6430c475e2f94372bec2b60c8ac3486190321bea2"
+    },
+    {
+      "path": "types/win32/memory.h",
+      "state": "added",
+      "upstreamSha256": "b89109af9c4f21deec8607012b91598ac573f0a73a3d3439eaa5b7e8ee0e329c",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/process.h",
+      "state": "added",
+      "upstreamSha256": "a18b2b0228b53417e746e6e68e9084b6813f41297449e1ca34c0bb351a62c1e5",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/scalar.h",
+      "state": "identical",
+      "upstreamSha256": "28e8fcb83d1b853efa591b02e07db747637789b20032ea86266eb744ce109e87",
+      "localSha256": "28e8fcb83d1b853efa591b02e07db747637789b20032ea86266eb744ce109e87"
+    },
+    {
+      "path": "types/win32/sync.h",
+      "state": "identical",
+      "upstreamSha256": "b700c04df5576d805baf08a023202b24f3acc850b776ae7e4c04e0e698498a1a",
+      "localSha256": "b700c04df5576d805baf08a023202b24f3acc850b776ae7e4c04e0e698498a1a"
+    },
+    {
+      "path": "types/win32/test.h",
+      "state": "added",
+      "upstreamSha256": "e056806754316412c71c9af2ac8fb6ad344f196b9aaec8369946563db162a609",
+      "localSha256": null
+    },
+    {
+      "path": "types/win32/text.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "81c49970596780598c239f0eee36d39a1a6b6cc57ddd578e25a45f3c53e6a745",
+      "localSha256": "b27825dd25b7077141c7ab654be2aefc5974c950feeb41c4512f79d434b157a4"
+    },
+    {
+      "path": "types/win32/window.h",
+      "state": "identical",
+      "upstreamSha256": "043655f14a37ff2643e8953ca190a1144f92a3d2eb7d541ed97a7b5f1cb63ebe",
+      "localSha256": "043655f14a37ff2643e8953ca190a1144f92a3d2eb7d541ed97a7b5f1cb63ebe"
+    },
+    {
+      "path": "base/clock.c",
+      "state": "added",
+      "upstreamSha256": "d676b2d515bd348e1f97ef9e68c42e37104d8bd6ccbaafd3c41279ed129c4342",
+      "localSha256": null
+    },
+    {
+      "path": "base/clock.h",
+      "state": "added",
+      "upstreamSha256": "25132e88a45adebfad5274f00f60d4cad27b0e46b8f97afbb4a9d5e0f8e4f39f",
+      "localSha256": null
+    },
+    {
+      "path": "base/clock_interface.h",
+      "state": "added",
+      "upstreamSha256": "745f49bb6c99ddfe996a5760d3b3868d2de4f1da318c0eee1c49673adb2d9192",
+      "localSha256": null
+    },
+    {
+      "path": "base/input.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "84106834cc2c09baed5c076956559f469d45a33aa5b0b0cc2245f0e2f25585bf",
+      "localSha256": "fb8ea058c40f736d8ff0c6ad3261cbc4fd807b495de21fa6a9dd59083e0dd080"
+    },
+    {
+      "path": "base/input.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "b9c6216148c60b677bba5b84dc257636af4e081cbbcb246709a15bbd177c2cbd",
+      "localSha256": "2dcd9ea754f4d82b673a48096cc488e268be602f4d57765b7d998df97aad2622"
+    },
+    {
+      "path": "base/input_adapter_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "f0b092ce078e27b5d0913505796c1e59f50ade9e316176acc52ea6a8b790802f",
+      "localSha256": "065c7072a6ab20a9db7da9bbc21b439aaf419e73a97d5e2172e70c66332437de"
+    },
+    {
+      "path": "base/input_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "eb018c8a63f96f1bb58aa86912e68e201a7ae3488b671f0531ac9b53f1542e41",
+      "localSha256": "ab0236547a025b0802317191875169d7933c95bce8467495e315a7e3dea8bee5"
+    },
+    {
+      "path": "base/linux/clock.c",
+      "state": "added",
+      "upstreamSha256": "9c897dec458cd64a6459157d561dc0e64d1befe34a64e50e4c85ea1b93cd3e8e",
+      "localSha256": null
+    },
+    {
+      "path": "base/linux/input.c",
+      "state": "added",
+      "upstreamSha256": "3eae5424dc4dc582e01bd8fdd480fc29f9a754c1df1ac5835cb2c3912d7c35ed",
+      "localSha256": null
+    },
+    {
+      "path": "base/linux/input.h",
+      "state": "added",
+      "upstreamSha256": "67fdd1755f8d6f6798a4ef80fea73c43402ea4e3299a0f631ba443217405228f",
+      "localSha256": null
+    },
+    {
+      "path": "base/linux/process.c",
+      "state": "added",
+      "upstreamSha256": "0b6fa79a8b7703ef3814c9180e26f79729118ac61b5e826e609d5cae258705ae",
+      "localSha256": null
+    },
+    {
+      "path": "base/linux/sync.c",
+      "state": "added",
+      "upstreamSha256": "159e5ca92ed046e020f8401bd16070f4950208e548ef2e89c20d3ef852244a69",
+      "localSha256": null
+    },
+    {
+      "path": "base/process.c",
+      "state": "added",
+      "upstreamSha256": "19e3f79391a2c0d4b159dcbe68db9c170868442f75dfa8bfd704b596e9ce6c29",
+      "localSha256": null
+    },
+    {
+      "path": "base/process.h",
+      "state": "added",
+      "upstreamSha256": "399188eaad526388d70cdd4b4b7a1f8c234d8e6230c45daececff02240818dd1",
+      "localSha256": null
+    },
+    {
+      "path": "base/process_interface.h",
+      "state": "added",
+      "upstreamSha256": "0627c41bfe9622689703d5b330b04b07115b723b0f71b5c0776d9987857df2ee",
+      "localSha256": null
+    },
+    {
+      "path": "base/README.md",
+      "state": "identical",
+      "upstreamSha256": "3d05218caf3a50369f0c4f7ce8bff10e5ce24f7e97c032977b6bb2c59cc91e75",
+      "localSha256": "3d05218caf3a50369f0c4f7ce8bff10e5ce24f7e97c032977b6bb2c59cc91e75"
+    },
+    {
+      "path": "base/sync.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "1f4b176855a47f46f4850faae2fb4bb75367c210a7a1bcccee7571d9ff7170c6",
+      "localSha256": "264533161d44574d7f4a9cec73d88366d428717214d3857960a8e6cc8a0ac6ea"
+    },
+    {
+      "path": "base/sync.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "6bd490041eed0a423d9a0835bfe4b89847de0cf14ecfe73735a7cd715e54b4c8",
+      "localSha256": "338dd793745d27db30a076ddda2d2bc78f167b8db57100432db6e1c1cf5d41d5"
+    },
+    {
+      "path": "base/sync_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "c867b4e6ae002570773d08f1fec9a9c30cc46c5f5863bd7e7f06501f01653d37",
+      "localSha256": "29c8a433f79135fd713dd6ef8227a5fd44cb6c549301072da2d3341c6972ac10"
+    },
+    {
+      "path": "base/text.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "a16acd788196566d200067612006b834345905a129b22116a72c9f1655780b77",
+      "localSha256": "ae04ff87998327acb49bb477a185b68ff38e389d3763b9f728637c023037a39c"
+    },
+    {
+      "path": "base/text_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "14eabe0722606c91b2d2a0c9900ade4156224aa4989aafa9eabb55657da05cad",
+      "localSha256": "d5e044119b7c4f8cccdeae7bdcdf37ca7be18b2988b57103d2555a9e3f6fcc53"
+    },
+    {
+      "path": "base/win32/clock.c",
+      "state": "added",
+      "upstreamSha256": "d402b0e74d41922102a08c4ef4b8ce9439dfb18681956a76db8726a10bc4613b",
+      "localSha256": null
+    },
+    {
+      "path": "base/win32/input.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "eda85b96e13736df68a7d418100632ba35c107e26029a54fe4047d55e30f79c3",
+      "localSha256": "178609a79c7f8f52aa3ec6b5aa0e76c6bfa7d3a494a5781c187679f43392de7a"
+    },
+    {
+      "path": "base/win32/process.c",
+      "state": "added",
+      "upstreamSha256": "bfba83a7019db9f2331c61102befca4e3d9a3604d02860d99f4f6e05b1adf890",
+      "localSha256": null
+    },
+    {
+      "path": "base/win32/sync.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "da9c7497de92ef08610980d4f2d4d6a827070d0c26e601a5a560b7e4c8497d18",
+      "localSha256": "a8ed6206a3cb4eb94094c2cb5a1c505a0196ad4bd09e9a6c3ee2cd74230ce12d"
+    },
+    {
+      "path": "kvm-base/component.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "1cc7f7bcf2c54097efcfb4e55651b02e7599339fb4ad488e049349391ab4812b",
+      "localSha256": "33a68f710584050f0779893ffcef0d542e40cb5be056fd54df6bae565af63a5f"
+    },
+    {
+      "path": "kvm-base/component_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "89ab9619582f5ffa365dadeceb2e89ece94a4e064fa783ab5313a5d9845af473",
+      "localSha256": "9115abb69c764924cb2b7e8c721a4d2ed79590ed00a67fb7b5d952882994d0f7"
+    },
+    {
+      "path": "kvm-base/event_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "eaefa7f83572cd8e6836ee6f71b9d7853b207966f8f72858871e4c84bf98683f",
+      "localSha256": "2838d5cf74115d341b38a29dd5c945102ee4d57a83b065dd4fe67842f6ded160"
+    },
+    {
+      "path": "kvm-base/frame_exchange.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "369bf435d33789c2c1111eb8677b1f430c42d1543091c5c26168634d0ea8d6be",
+      "localSha256": "7bc8aa0d05cefa696da553f67344d55dd4b5031ed1c7feb53dc12fe752745084"
+    },
+    {
+      "path": "kvm-base/frame_exchange_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "a6bf67af86a8572c7edf24af1256847fed6b87ce0df422ebde7783564da8ac04",
+      "localSha256": "42f955dcbb67a4f9c505d170feb4be554224251220dc8614a1270846f0706408"
+    },
+    {
+      "path": "kvm-base/frame_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "e5b194122d8e85683cfb8f5af502c8aab34156d6d12d103960d2595df632f349",
+      "localSha256": "27235bdd142af028d7ae6a66dac911a61f1b3da282b4be5a341c39ac79ab47e5"
+    },
+    {
+      "path": "kvm-base/hotkey.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "0b92d5caaa394eb73674a539e856e70f9b2ed48f79506b645fbd22306092ae28",
+      "localSha256": "849c7fc022b359bbd25e528a56b03dbd687b4e21098a48282b16aa84a12d0977"
+    },
+    {
+      "path": "kvm-base/hotkey_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "5ec0b9d94a3f3b115e710c2b3ab2a2f2d44997248d4d19d559813ecdb87cf71f",
+      "localSha256": "3f229fcf7a4c9e16f549d42c3171d7815c52b186ca733167105a7007c367957c"
+    },
+    {
+      "path": "kvm-base/input.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "ef2139f462e06fc40942733c4c6ba4654a35793eef6419ea862311f176181710",
+      "localSha256": "b18d1bd1156d334946aed89255dcb63c0884e09e77bc436039b7196162991781"
+    },
+    {
+      "path": "kvm-base/input_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "427b94b8092fa4a2c4ce085e769c7416227401bc4f2e2e053c48dff3126bdcf0",
+      "localSha256": "d6004dc07d9827f389c52aa9e54cb4a4ef7a89e7e3bee8381752523d879903f1"
+    },
+    {
+      "path": "kvm-base/mailbox.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "ce247af572e2f1700dfa2cef9ec2d111e5808224d6c89b4aa2526e25b964b611",
+      "localSha256": "07fd37140742615cd42764acd841a3e76d519de937deba1f4d96f98a5ce75927"
+    },
+    {
+      "path": "kvm-base/mailbox_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "081c4e9eac81f98534b8f0563be87ae5989362cfdd468237f23db6b83c4b062e",
+      "localSha256": "cfead85fac882400a84adfd26b498afd9febef23528273155ca385a254627429"
+    },
+    {
+      "path": "kvm-base/README.md",
+      "state": "identical",
+      "upstreamSha256": "2bb350316a5a14aacb900f94fccb97fa98a20e41d9ac105898627e51240afdf3",
+      "localSha256": "2bb350316a5a14aacb900f94fccb97fa98a20e41d9ac105898627e51240afdf3"
+    },
+    {
+      "path": "kvm-base/worker_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "e33095c2d18957bcbce9518fc1b7ae2a333d5fc5e500fa39d9af6b188787288b",
+      "localSha256": "aa0ff8438df79153b4d44eadf44d89f70ac2ff30f0fe0cf8a4b373bbffb7e675"
+    },
+    {
+      "path": "kvm-window/frame_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "52516f8ad8d4b301c0855c3c1a94184c685c9ea4295b597aa8e951567cb4d4e0",
+      "localSha256": "5568f7605c7326c49ad75ed3050e06ec9a91e4a2ab142e52770a37ac60259f1e"
+    },
+    {
+      "path": "kvm-window/geometry.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "a6055c9dbfd5ed1b91bcf3a826944c16f265d2a504fd954ac5ffb5ccd04b0e00",
+      "localSha256": "52ee13d883610f51234df3cb139a5a8ca5b947a8ea20f029d2abe92fd60bf52d"
+    },
+    {
+      "path": "kvm-window/geometry.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "99b2ca148e6dd5bedd3cf292b993d3af4368808245f4b2b0eb0f8828bfeafdd0",
+      "localSha256": "8223fdb7efcb04bcfb1e42bed8fdeff3eed6f973de6c11aaa119a6adfd41982b"
+    },
+    {
+      "path": "kvm-window/linux/component.c",
+      "state": "added",
+      "upstreamSha256": "8ad69acf57c37462fead12f96173dc9e67a787e8130802ee9946de840ae87f92",
+      "localSha256": null
+    },
+    {
+      "path": "kvm-window/motion.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "273d61b00ffbb59fc06f65ff37e0c9321646be18364d3558ff2822348b51e480",
+      "localSha256": "507a7ccd07b823f407d34631c2a88132d14f28cae30cb1b3f56b4d20e1a68868"
+    },
+    {
+      "path": "kvm-window/motion.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "975b3102c90892f7d7044163fa648fbbed1ce7fedce9fec2bcb68f0591606b82",
+      "localSha256": "2de1cccda9f9cb0633629a65d449193c609e04acc3b523f906f925205c9ded8c"
+    },
+    {
+      "path": "kvm-window/README.md",
+      "state": "identical",
+      "upstreamSha256": "a3506097d6f9a63beccbfe695e3137cf146eac6edee69aa066c2790c2133cd1b",
+      "localSha256": "a3506097d6f9a63beccbfe695e3137cf146eac6edee69aa066c2790c2133cd1b"
+    },
+    {
+      "path": "kvm-window/render.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "52f013855a711b1b494bd753d75d8fb49a7725f200d19d60bf681135b2e84217",
+      "localSha256": "bb5eea949a74b6a7a8a3d4a16e6f8913eb382df59e45b6d3c87cb82212a83542"
+    },
+    {
+      "path": "kvm-window/render.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "294268c44fc1293fd56fce32e5dd655643620acd80056081937289f9c21135c3",
+      "localSha256": "438013f034f8bfd3abc927ccb5c709d754170c5999e726e621d6e1bd4ac9c187"
+    },
+    {
+      "path": "kvm-window/win32/component.c",
+      "state": "changed",
+      "upstreamSha256": "58e0f648a20fa72eda1aa6f6767f4278a46e72077238542f4b21452ac695b707",
+      "localSha256": "9f8937c30eb74c5451626bad31981191cae9f60081d0ef218690ff378ffc80de"
+    },
+    {
+      "path": "kvm-window/win32/geometry.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "2cf84d9f903fa7e8b079e62bc91255bb0b2089a3f128941ca3de42f6d487208b",
+      "localSha256": "6b42a920ce5da62e6ea72f3337d4974fc5ad2c77df3e090ee25c5e9c6302fbfc"
+    },
+    {
+      "path": "kvm-window/win32/geometry.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "f096524bb57b0ab6de551e86c6115f5c07f2a0aa586fe9b2919eb87d7f49f0b3",
+      "localSha256": "90026eb0f21bc7128c868a3fff8171f86dbcb5ee14a62b615244a0a2059dcfad"
+    },
+    {
+      "path": "kvm-window/win32/input.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "5f50b5ee924dbc418cea6c9ac2ede248d7d835353893fa460ad5645c95e45674",
+      "localSha256": "c9eca17031779c003fa544a95f8d3e9e2e63e557669450d627ca4bd3c1a6d99d"
+    },
+    {
+      "path": "kvm-window/win32/input.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "44a2daedb409c21740d558cd319618702e53420286fbb16db2f116ecad950e65",
+      "localSha256": "c77bbc84ef6bc390be03c35556d189c6c76d69a30cef9baa0ea310070400e30c"
+    },
+    {
+      "path": "kvm-window/win32/mouse.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "476c0a45ff89cf6c66347e7ae08d4cbf3621677de5de132bbaa607af5e5fb0ff",
+      "localSha256": "0ac80a1058efae4879c90708e78e0ffa5d7c0433cc2180c0909fe08a05be07b5"
+    },
+    {
+      "path": "kvm-window/win32/mouse.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "1c4bbde9fe60f9de2dbf43b12f6eb509c18a3c9f38ef526d1e1deb477b68b4b9",
+      "localSha256": "0b687c8dab0fc112ee81673c05312f892954e88584d44aabf936061e11c86e19"
+    },
+    {
+      "path": "kvm-window/window.c",
+      "state": "include-prefix-only",
+      "upstreamSha256": "e5d7e3f7bb8706718b93fb1878b94b9d138761956e5aa7240e22592cf6f06804",
+      "localSha256": "998e7cb6154e3694d6c6b4553b9a1eed04c657179788b0219a8f076986a9e24b"
+    },
+    {
+      "path": "kvm-window/window.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "0a0c6faa150ba9ffd0125161cc8aa9d7d7afda9ef38d67791fa2896faa6a473b",
+      "localSha256": "bba6ad3e534d12ad83c82a7f1f1dbddd6867ca53de003bcef6c2442da0daf534"
+    },
+    {
+      "path": "kvm-window/window_interface.h",
+      "state": "include-prefix-only",
+      "upstreamSha256": "5261a8c675326cb5126d71af7a191a21f5b23dd84c7dd67ed8b93a8cfbf80de6",
+      "localSha256": "2d939af9216b1bc43628784e6b7abf15ba917ecdb10ac683210575aeeb47292b"
+    }
+  ]
+}

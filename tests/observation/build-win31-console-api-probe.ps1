@@ -16,7 +16,7 @@ foreach($source in $sources) {
     $commands+='cl.exe /nologo /MT /std:c11'+$testFlag+' /I"'+$repo+'/src" /FI"'+$repo+'/src/compat/include/process_hook_msvc.h" /c /Fo"'+$obj+'" "'+$source+'"'
     $commands+='if errorlevel 1 exit /b %errorlevel%';$objects+='"'+$obj+'"'
 }
-$commands+='cl.exe /nologo /MT /std:c11 /DWIN31_CONSOLE_API_TRACE /c /I"'+$repo+'/src" /I"'+$repo+'/src/ntcon-exe" /Fo"'+$root+'/hook.obj" "'+$PSScriptRoot+'/private-mouse-input.c"'
+$commands+='cl.exe /nologo /MT /std:c11 /DWIN31_CONSOLE_API_TRACE /c /I"'+$repo+'/src" /I"'+$repo+'/src/lib-nxvm" /I"'+$repo+'/src/ntcon-exe" /Fo"'+$root+'/hook.obj" "'+$PSScriptRoot+'/private-mouse-input.c"'
 $commands+='if errorlevel 1 exit /b %errorlevel%'
 $commands+='link.exe /nologo /DLL /OUT:"'+$root+'/mouse-hook.dll" /IMPLIB:"'+$root+'/hook.lib" /EXPORT:MouseInputHook '+($objects -join ' ')+' "'+$root+'/hook.obj" user32.lib kernel32.lib'
 $commands+='if errorlevel 1 exit /b %errorlevel%'

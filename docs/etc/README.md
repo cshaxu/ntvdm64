@@ -1309,3 +1309,7 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S6 bounded closure](evidence/m0-t479-s6-closure-handoff.md): owner-directed transfer of uncompleted work and preserved candidate to the next queued T.
 
 - [T479 S7 closure audit](evidence/m0-t479-s7-closure-audit.md): verified unchanged publication, bounded acceptance and durable next-T handoff.
+
+- [T479 S8/S9 shared import and display repair](operations/m0-t479-s8-s9-import-plan.md).
+
+- [T479 S8 unchanged shared-library delivery](evidence/m0-t479-s8-shared-delivery.md).

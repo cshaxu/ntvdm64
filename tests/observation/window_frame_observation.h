@@ -1,6 +1,6 @@
 #ifndef WINDOW_FRAME_OBSERVATION_H
 #define WINDOW_FRAME_OBSERVATION_H
-#include "lib-nxvm/kvm-window/frame_interface.h"
+#include "lib-nxvm/lib/kvm-window/frame_interface.h"
 
 /* Test-only, same-bitness observation of the pinned native leaf prefix.
  * Never a product IPC or a lock: callers reject changing samples, and actual

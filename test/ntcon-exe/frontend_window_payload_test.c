@@ -1,7 +1,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
-#include "lib-nxvm/types/types_interface.h"
+#include "lib-nxvm/lib/types/types_interface.h"
 
 /* Instrument only leaf payload allocation, never exchange metadata or product
  * code. Includes the unchanged public inline allocator/retirement routines. */
@@ -24,7 +24,7 @@ static void payload_release(void *memory)
 }
 #define lib_allocate_zero payload_allocate
 #define lib_release payload_release
-#include "lib-nxvm/kvm-window/frame_interface.h"
+#include "lib-nxvm/lib/kvm-window/frame_interface.h"
 #undef lib_allocate_zero
 #undef lib_release
 

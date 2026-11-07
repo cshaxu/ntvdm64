@@ -14,7 +14,7 @@ if ((Get-FileHash (Join-Path $repo 'src/lib-nxvm/LICENSE.nxvm') -Algorithm SHA25
 }
 $sources = @()
 foreach ($row in $manifest.files) {
-    if ($row.path -notmatch '^lib-nxvm/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or
+    if ($row.path -notmatch '^lib-nxvm/lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or
         $row.path.Contains('..')) { throw "Invalid imported path: $($row.path)" }
     $file = Join-Path (Join-Path $repo 'src') $row.path
     if ((Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash -ne $row.sha256) {
@@ -34,7 +34,7 @@ $sources += Join-Path $repo 'src/common/frontend-base/video.c'
 $sources += Join-Path $repo 'test/ntcon-exe/frontend_window_library_test.c'
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = Join-Path $output "$index.obj"
-    & cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$output" "/Fo$object" $sources[$index]
+    & cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$repo/src/lib-nxvm" "/I$output" "/Fo$object" $sources[$index]
     if ($LASTEXITCODE) { throw "Compilation failed: $($sources[$index])" }
     $objects += $object
 }
@@ -46,9 +46,9 @@ if ($LASTEXITCODE) { throw 'Window library assertions failed' }
 Write-Output 'Retired ConPTY controller fixture is not built here; actual Window input/return is gated by Verify-CommandExitStatus Window17.'
 $keyboardObject = Join-Path $output 'window-keyboard.obj'
 $keyboardTestObject = Join-Path $output 'keyboard-test.obj'
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')
+& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$repo/src/lib-nxvm" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')
 if ($LASTEXITCODE) { throw 'Window keyboard compilation failed' }
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardTestObject" (Join-Path $repo 'test/ntcon-exe/frontend_window_keyboard_test.c')
+& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$repo/src/lib-nxvm" "/Fo$keyboardTestObject" (Join-Path $repo 'test/ntcon-exe/frontend_window_keyboard_test.c')
 if ($LASTEXITCODE) { throw 'Window keyboard fixture compilation failed' }
 $keyboardExe = Join-Path $output 'frontend-window-keyboard-test.exe'
 & link.exe /nologo /machine:x86 "/out:$keyboardExe" $keyboardObject $keyboardTestObject user32.lib

@@ -30,10 +30,10 @@ src/mvdm-guest/** -text -whitespace
 src/non-mvdm/** -text -whitespace
 # Pinned nxvm presentation inputs retain their upstream byte identity.
 src/frontend-exe/lib/** -text
-src/lib-nxvm/base/** -text
-src/lib-nxvm/types/** -text
-src/lib-nxvm/kvm-base/** -text
-src/lib-nxvm/kvm-window/** -text
+src/lib-nxvm/lib/base/** -text
+src/lib-nxvm/lib/types/** -text
+src/lib-nxvm/lib/kvm-base/** -text
+src/lib-nxvm/lib/kvm-window/** -text
 src/lib-nxvm/LICENSE.nxvm -text
 src/lib-nxvm/LICENSE.libvterm -text
 src/lib-nxvm/libvterm-0.3.3.tar.gz -text
@@ -85,3 +85,6 @@ tools/opennt/tools16/** text=auto eol=crlf
 artifacts/t479-s6-handoff/candidate.patch -whitespace
 artifacts/t479-s6-handoff/evidence/** -whitespace
 artifacts/t479-s6-handoff/** -text
+
+test/lib-nxvm/lib/** -text
+test/integration/lib-nxvm/** -text

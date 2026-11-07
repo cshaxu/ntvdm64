@@ -24,7 +24,6 @@ active-packet transition does not change any candidate's proposed scope.
 | 7 | Guest Windows / host bidirectional launch routing research — investigate redirecting guest double-click launches to the host and routing MS-DOS VM host-command requests back to guest Windows, with explicit execution-location choices. | [Proposal](../proposals/proposal-win31-bidirectional-launch-routing-001.md) |
 | 8 | Host-rendered Win32 applications inside guest Windows — investigate host execution/rendering with guest Win3.1 window presentation and input forwarding, without Win32s or original guest modifications. | [Proposal](../proposals/proposal-win31-host-window-presentation-001.md) |
 | 9 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
-| 10 | Win3.1 windowed DOS text debugging — reproduce and attribute abnormal text in the guest MS-DOS window, then repair the proved rendering or handoff defect without modifying original guest binaries. | [Proposal](../proposals/proposal-win31-windowed-dos-text-debug-001.md) |
 
 The external system launch loader candidate was removed from the queue.
 Its proposal remains as historical planning material; it is not pending.
@@ -45,7 +44,7 @@ the end of the queue at that time. This does not waive the active task's correct
 obligations, including the separately observed native-return error 1400.
 
 Earlier original-recovery admissions and queue reorderings are retained in
-the planning history linked below. The ten-row table above is the current
+the planning history linked below. The nine-row table above is the current
 queue order; historical positions do not add or reorder pending work.
 
 The owner confirms the former third candidate, Windows 3.1 ordinary-Setup
@@ -73,3 +72,7 @@ candidates above retain their current scope and order.
 The mirror-diff audit/minimization candidate is admitted in a dedicated
 worktree and is no longer pending here. Its [proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md)
 retains the scope; the remaining candidates preserve their relative order.
+
+The former windowed DOS text candidate is now assigned to the current task display-repair stage in the
+[active packet](CURRENT.md);
+it is no longer a separate queued task.

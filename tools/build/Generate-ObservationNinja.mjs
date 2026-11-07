@@ -14,7 +14,7 @@ const source = (path) => `${root}/${path}`;
 mkdirSync(build, { recursive: true });
 writeFileSync(resolve(build, 'build.ninja'), [
   'ninja_required_version = 1.10',
-  'cflags = /nologo /TC /std:c11 /c /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src') + '" /I"' + source('src/ntcon-exe') + '"',
+  'cflags = /nologo /TC /std:c11 /c /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src') + '" /I"' + source('src/ntcon-exe') + '" /I"' + source('src/lib-nxvm') + '"',
   'rule cc',
   '  command = cl.exe $cflags /Fo$out $in',
   '  deps = msvc',
@@ -32,7 +32,7 @@ writeFileSync(resolve(build, 'build.ninja'), [
     source('tests/observation/run16_direct_command_observer.c'),
   'build run16-direct-command-observer.exe: link run16-direct-command-observer.obj',
   'build terminal-observer.obj: cc ' + source('tests/observation/console_terminal_observer.c'),
-  '  cflags = /nologo /TC /std:c11 /c /MT /W4 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src') + '" /I"' + source('src/ntcon-exe') + '"',
+  '  cflags = /nologo /TC /std:c11 /c /MT /W4 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src') + '" /I"' + source('src/ntcon-exe') + '" /I"' + source('src/lib-nxvm') + '"',
   'build terminal-observer.exe: link terminal-observer.obj',
   'default console-startup-observer.exe',
   ''

@@ -6,7 +6,7 @@ if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIg
 New-Item -ItemType Directory -Path $root|Out-Null
 $lines=@('@echo off','call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul',
     'if errorlevel 1 exit /b %errorlevel%',
-    ('cl.exe /nologo /MT /std:c11 /LD /I"'+$repo+'\src\ntcon-exe" /Fo"'+$root+'\hook.obj" /Fe"'+$root+'\mouse-hook.dll" "'+$PSScriptRoot+'\private-mouse-input.c" user32.lib /link /EXPORT:MouseInputHook /IMPLIB:"'+$root+'\mouse-hook.lib"'),
+    ('cl.exe /nologo /MT /std:c11 /LD /I"'+$repo+'\src" /I"'+$repo+'\src\lib-nxvm" /I"'+$repo+'\src\ntcon-exe" /Fo"'+$root+'\hook.obj" /Fe"'+$root+'\mouse-hook.dll" "'+$PSScriptRoot+'\private-mouse-input.c" user32.lib /link /EXPORT:MouseInputHook /IMPLIB:"'+$root+'\mouse-hook.lib"'),
     'if errorlevel 1 exit /b %errorlevel%',
     ('cl.exe /nologo /MT /std:c11 /Fo"'+$root+'\probe.obj" /Fe"'+$root+'\probe.exe" "'+$PSScriptRoot+'\win101_mouse_window_probe.c" user32.lib'),
     'if errorlevel 1 exit /b %errorlevel%')

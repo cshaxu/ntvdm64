@@ -11,11 +11,11 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 }
 $wrapper=(Resolve-Path $CompilerWrapper).Path
 $null=New-Item -ItemType Directory -Path $root
-$sources=@('src/lib-nxvm/kvm-window/render.c','tests/observation/measure-window-render.c')
+$sources=@('src/lib-nxvm/lib/kvm-window/render.c','tests/observation/measure-window-render.c')
 $objects=@()
 foreach($source in $sources) {
     $object=Join-Path $root (([IO.Path]::GetFileNameWithoutExtension($source))+'.obj')
-    & $wrapper cl.exe /nologo /MT /W4 /WX /O2 /std:c11 /D_CRT_SECURE_NO_WARNINGS /TC "/I$repo/src/ntcon-exe" "/I$repo/src" /c (Join-Path $repo $source) "/Fo$object" *>&1 |
+    & $wrapper cl.exe /nologo /MT /W4 /WX /O2 /std:c11 /D_CRT_SECURE_NO_WARNINGS /TC "/I$repo/src/ntcon-exe" "/I$repo/src" "/I$repo/src/lib-nxvm" /c (Join-Path $repo $source) "/Fo$object" *>&1 |
         Set-Content (Join-Path $root ((Split-Path $object -Leaf)+'.log'))
     if($LASTEXITCODE){throw "Compilation failed: $source"}
     $objects+=$object

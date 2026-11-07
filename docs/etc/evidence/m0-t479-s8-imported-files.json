@@ -1,0 +1,713 @@
+{
+  "revision": "26d118e5",
+  "files": [
+    {
+      "path": "src/lib-nxvm/lib/base/clock.c",
+      "source": "src/lib/base/clock.c",
+      "sha256": "d676b2d515bd348e1f97ef9e68c42e37104d8bd6ccbaafd3c41279ed129c4342",
+      "bytes": 1056
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/clock.h",
+      "source": "src/lib/base/clock.h",
+      "sha256": "25132e88a45adebfad5274f00f60d4cad27b0e46b8f97afbb4a9d5e0f8e4f39f",
+      "bytes": 255
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/clock_interface.h",
+      "source": "src/lib/base/clock_interface.h",
+      "sha256": "745f49bb6c99ddfe996a5760d3b3868d2de4f1da318c0eee1c49673adb2d9192",
+      "bytes": 331
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/input.c",
+      "source": "src/lib/base/input.c",
+      "sha256": "84106834cc2c09baed5c076956559f469d45a33aa5b0b0cc2245f0e2f25585bf",
+      "bytes": 2580
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/input.h",
+      "source": "src/lib/base/input.h",
+      "sha256": "b9c6216148c60b677bba5b84dc257636af4e081cbbcb246709a15bbd177c2cbd",
+      "bytes": 323
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/input_adapter_interface.h",
+      "source": "src/lib/base/input_adapter_interface.h",
+      "sha256": "f0b092ce078e27b5d0913505796c1e59f50ade9e316176acc52ea6a8b790802f",
+      "bytes": 1494
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/input_interface.h",
+      "source": "src/lib/base/input_interface.h",
+      "sha256": "eb018c8a63f96f1bb58aa86912e68e201a7ae3488b671f0531ac9b53f1542e41",
+      "bytes": 3321
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/linux/clock.c",
+      "source": "src/lib/base/linux/clock.c",
+      "sha256": "9c897dec458cd64a6459157d561dc0e64d1befe34a64e50e4c85ea1b93cd3e8e",
+      "bytes": 591
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/linux/input.c",
+      "source": "src/lib/base/linux/input.c",
+      "sha256": "3eae5424dc4dc582e01bd8fdd480fc29f9a754c1df1ac5835cb2c3912d7c35ed",
+      "bytes": 2385
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/linux/input.h",
+      "source": "src/lib/base/linux/input.h",
+      "sha256": "67fdd1755f8d6f6798a4ef80fea73c43402ea4e3299a0f631ba443217405228f",
+      "bytes": 745
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/linux/process.c",
+      "source": "src/lib/base/linux/process.c",
+      "sha256": "0b6fa79a8b7703ef3814c9180e26f79729118ac61b5e826e609d5cae258705ae",
+      "bytes": 920
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/linux/sync.c",
+      "source": "src/lib/base/linux/sync.c",
+      "sha256": "159e5ca92ed046e020f8401bd16070f4950208e548ef2e89c20d3ef852244a69",
+      "bytes": 7540
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/process.c",
+      "source": "src/lib/base/process.c",
+      "sha256": "19e3f79391a2c0d4b159dcbe68db9c170868442f75dfa8bfd704b596e9ce6c29",
+      "bytes": 579
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/process.h",
+      "source": "src/lib/base/process.h",
+      "sha256": "399188eaad526388d70cdd4b4b7a1f8c234d8e6230c45daececff02240818dd1",
+      "bytes": 252
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/process_interface.h",
+      "source": "src/lib/base/process_interface.h",
+      "sha256": "0627c41bfe9622689703d5b330b04b07115b723b0f71b5c0776d9987857df2ee",
+      "bytes": 607
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/README.md",
+      "source": "src/lib/base/README.md",
+      "sha256": "3d05218caf3a50369f0c4f7ce8bff10e5ce24f7e97c032977b6bb2c59cc91e75",
+      "bytes": 2663
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/sync.c",
+      "source": "src/lib/base/sync.c",
+      "sha256": "1f4b176855a47f46f4850faae2fb4bb75367c210a7a1bcccee7571d9ff7170c6",
+      "bytes": 5269
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/sync.h",
+      "source": "src/lib/base/sync.h",
+      "sha256": "6bd490041eed0a423d9a0835bfe4b89847de0cf14ecfe73735a7cd715e54b4c8",
+      "bytes": 1156
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/sync_interface.h",
+      "source": "src/lib/base/sync_interface.h",
+      "sha256": "c867b4e6ae002570773d08f1fec9a9c30cc46c5f5863bd7e7f06501f01653d37",
+      "bytes": 2935
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/text.c",
+      "source": "src/lib/base/text.c",
+      "sha256": "a16acd788196566d200067612006b834345905a129b22116a72c9f1655780b77",
+      "bytes": 1237
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/text_interface.h",
+      "source": "src/lib/base/text_interface.h",
+      "sha256": "14eabe0722606c91b2d2a0c9900ade4156224aa4989aafa9eabb55657da05cad",
+      "bytes": 550
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/win32/clock.c",
+      "source": "src/lib/base/win32/clock.c",
+      "sha256": "d402b0e74d41922102a08c4ef4b8ce9439dfb18681956a76db8726a10bc4613b",
+      "bytes": 628
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/win32/input.c",
+      "source": "src/lib/base/win32/input.c",
+      "sha256": "eda85b96e13736df68a7d418100632ba35c107e26029a54fe4047d55e30f79c3",
+      "bytes": 4737
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/win32/process.c",
+      "source": "src/lib/base/win32/process.c",
+      "sha256": "bfba83a7019db9f2331c61102befca4e3d9a3604d02860d99f4f6e05b1adf890",
+      "bytes": 2310
+    },
+    {
+      "path": "src/lib-nxvm/lib/base/win32/sync.c",
+      "source": "src/lib/base/win32/sync.c",
+      "sha256": "da9c7497de92ef08610980d4f2d4d6a827070d0c26e601a5a560b7e4c8497d18",
+      "bytes": 5254
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/component.c",
+      "source": "src/lib/kvm-base/component.c",
+      "sha256": "1cc7f7bcf2c54097efcfb4e55651b02e7599339fb4ad488e049349391ab4812b",
+      "bytes": 7634
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/component_interface.h",
+      "source": "src/lib/kvm-base/component_interface.h",
+      "sha256": "89ab9619582f5ffa365dadeceb2e89ece94a4e064fa783ab5313a5d9845af473",
+      "bytes": 1817
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/event_interface.h",
+      "source": "src/lib/kvm-base/event_interface.h",
+      "sha256": "eaefa7f83572cd8e6836ee6f71b9d7853b207966f8f72858871e4c84bf98683f",
+      "bytes": 2644
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/frame_exchange.c",
+      "source": "src/lib/kvm-base/frame_exchange.c",
+      "sha256": "369bf435d33789c2c1111eb8677b1f430c42d1543091c5c26168634d0ea8d6be",
+      "bytes": 5295
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/frame_exchange_interface.h",
+      "source": "src/lib/kvm-base/frame_exchange_interface.h",
+      "sha256": "a6bf67af86a8572c7edf24af1256847fed6b87ce0df422ebde7783564da8ac04",
+      "bytes": 2862
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/frame_interface.h",
+      "source": "src/lib/kvm-base/frame_interface.h",
+      "sha256": "e5b194122d8e85683cfb8f5af502c8aab34156d6d12d103960d2595df632f349",
+      "bytes": 5133
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/hotkey.c",
+      "source": "src/lib/kvm-base/hotkey.c",
+      "sha256": "0b92d5caaa394eb73674a539e856e70f9b2ed48f79506b645fbd22306092ae28",
+      "bytes": 8024
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/hotkey_interface.h",
+      "source": "src/lib/kvm-base/hotkey_interface.h",
+      "sha256": "5ec0b9d94a3f3b115e710c2b3ab2a2f2d44997248d4d19d559813ecdb87cf71f",
+      "bytes": 2251
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/input.c",
+      "source": "src/lib/kvm-base/input.c",
+      "sha256": "ef2139f462e06fc40942733c4c6ba4654a35793eef6419ea862311f176181710",
+      "bytes": 4919
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/input_interface.h",
+      "source": "src/lib/kvm-base/input_interface.h",
+      "sha256": "427b94b8092fa4a2c4ce085e769c7416227401bc4f2e2e053c48dff3126bdcf0",
+      "bytes": 843
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/mailbox.c",
+      "source": "src/lib/kvm-base/mailbox.c",
+      "sha256": "ce247af572e2f1700dfa2cef9ec2d111e5808224d6c89b4aa2526e25b964b611",
+      "bytes": 6027
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/mailbox_interface.h",
+      "source": "src/lib/kvm-base/mailbox_interface.h",
+      "sha256": "081c4e9eac81f98534b8f0563be87ae5989362cfdd468237f23db6b83c4b062e",
+      "bytes": 3505
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/README.md",
+      "source": "src/lib/kvm-base/README.md",
+      "sha256": "2bb350316a5a14aacb900f94fccb97fa98a20e41d9ac105898627e51240afdf3",
+      "bytes": 9411
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-base/worker_interface.h",
+      "source": "src/lib/kvm-base/worker_interface.h",
+      "sha256": "e33095c2d18957bcbce9518fc1b7ae2a333d5fc5e500fa39d9af6b188787288b",
+      "bytes": 2418
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/frame_interface.h",
+      "source": "src/lib/kvm-window/frame_interface.h",
+      "sha256": "52516f8ad8d4b301c0855c3c1a94184c685c9ea4295b597aa8e951567cb4d4e0",
+      "bytes": 8111
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/geometry.c",
+      "source": "src/lib/kvm-window/geometry.c",
+      "sha256": "a6055c9dbfd5ed1b91bcf3a826944c16f265d2a504fd954ac5ffb5ccd04b0e00",
+      "bytes": 8394
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/geometry.h",
+      "source": "src/lib/kvm-window/geometry.h",
+      "sha256": "99b2ca148e6dd5bedd3cf292b993d3af4368808245f4b2b0eb0f8828bfeafdd0",
+      "bytes": 1746
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/linux/component.c",
+      "source": "src/lib/kvm-window/linux/component.c",
+      "sha256": "8ad69acf57c37462fead12f96173dc9e67a787e8130802ee9946de840ae87f92",
+      "bytes": 449
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/motion.c",
+      "source": "src/lib/kvm-window/motion.c",
+      "sha256": "273d61b00ffbb59fc06f65ff37e0c9321646be18364d3558ff2822348b51e480",
+      "bytes": 2022
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/motion.h",
+      "source": "src/lib/kvm-window/motion.h",
+      "sha256": "975b3102c90892f7d7044163fa648fbbed1ce7fedce9fec2bcb68f0591606b82",
+      "bytes": 735
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/README.md",
+      "source": "src/lib/kvm-window/README.md",
+      "sha256": "a3506097d6f9a63beccbfe695e3137cf146eac6edee69aa066c2790c2133cd1b",
+      "bytes": 8809
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/render.c",
+      "source": "src/lib/kvm-window/render.c",
+      "sha256": "52f013855a711b1b494bd753d75d8fb49a7725f200d19d60bf681135b2e84217",
+      "bytes": 3890
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/render.h",
+      "source": "src/lib/kvm-window/render.h",
+      "sha256": "294268c44fc1293fd56fce32e5dd655643620acd80056081937289f9c21135c3",
+      "bytes": 668
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/component.c",
+      "source": "src/lib/kvm-window/win32/component.c",
+      "sha256": "58e0f648a20fa72eda1aa6f6767f4278a46e72077238542f4b21452ac695b707",
+      "bytes": 49140
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/geometry.c",
+      "source": "src/lib/kvm-window/win32/geometry.c",
+      "sha256": "2cf84d9f903fa7e8b079e62bc91255bb0b2089a3f128941ca3de42f6d487208b",
+      "bytes": 8376
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/geometry.h",
+      "source": "src/lib/kvm-window/win32/geometry.h",
+      "sha256": "f096524bb57b0ab6de551e86c6115f5c07f2a0aa586fe9b2919eb87d7f49f0b3",
+      "bytes": 1447
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/input.c",
+      "source": "src/lib/kvm-window/win32/input.c",
+      "sha256": "5f50b5ee924dbc418cea6c9ac2ede248d7d835353893fa460ad5645c95e45674",
+      "bytes": 718
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/input.h",
+      "source": "src/lib/kvm-window/win32/input.h",
+      "sha256": "44a2daedb409c21740d558cd319618702e53420286fbb16db2f116ecad950e65",
+      "bytes": 426
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/mouse.c",
+      "source": "src/lib/kvm-window/win32/mouse.c",
+      "sha256": "476c0a45ff89cf6c66347e7ae08d4cbf3621677de5de132bbaa607af5e5fb0ff",
+      "bytes": 8738
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/win32/mouse.h",
+      "source": "src/lib/kvm-window/win32/mouse.h",
+      "sha256": "1c4bbde9fe60f9de2dbf43b12f6eb509c18a3c9f38ef526d1e1deb477b68b4b9",
+      "bytes": 1130
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/window.c",
+      "source": "src/lib/kvm-window/window.c",
+      "sha256": "e5d7e3f7bb8706718b93fb1878b94b9d138761956e5aa7240e22592cf6f06804",
+      "bytes": 3435
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/window.h",
+      "source": "src/lib/kvm-window/window.h",
+      "sha256": "0a0c6faa150ba9ffd0125161cc8aa9d7d7afda9ef38d67791fa2896faa6a473b",
+      "bytes": 815
+    },
+    {
+      "path": "src/lib-nxvm/lib/kvm-window/window_interface.h",
+      "source": "src/lib/kvm-window/window_interface.h",
+      "sha256": "5261a8c675326cb5126d71af7a191a21f5b23dd84c7dd67ed8b93a8cfbf80de6",
+      "bytes": 2863
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/atomic.h",
+      "source": "src/lib/types/atomic.h",
+      "sha256": "616285a73f5dde8b8792ea345ac996a7f877d8549b3b618c527d4aeff4975a2f",
+      "bytes": 7635
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/file.h",
+      "source": "src/lib/types/file.h",
+      "sha256": "1278983e5d67d20c13d406705087783980a0e72b5010ca62d0cd772821b8196d",
+      "bytes": 886
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/linux/clock.h",
+      "source": "src/lib/types/linux/clock.h",
+      "sha256": "4f0bf62ca6703d62cf98676d7212b9faed44cbfc0759e97f8f496c253c2eaca6",
+      "bytes": 304
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/linux/file.h",
+      "source": "src/lib/types/linux/file.h",
+      "sha256": "5f1476615b583c86af5fa3665f3aeae0918e2e357122193fbbfbf9a9da879d24",
+      "bytes": 424
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/linux/memory.h",
+      "source": "src/lib/types/linux/memory.h",
+      "sha256": "077a8a472734abfb4cd0ff371a63c82373e200eb7510213d58be3bd52487496a",
+      "bytes": 535
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/linux/process.h",
+      "source": "src/lib/types/linux/process.h",
+      "sha256": "8c2bb44940bf9b3a65e0c9fd76b463dfd68459201a8dd7fe7e78664fcd80fcec",
+      "bytes": 228
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/linux/sync.h",
+      "source": "src/lib/types/linux/sync.h",
+      "sha256": "60835f8d1fec6d9fd98370415af2c9cb426f2b45db1aace995322140258ea630",
+      "bytes": 1509
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/linux/test.h",
+      "source": "src/lib/types/linux/test.h",
+      "sha256": "f589cd55befd5fafe0d95571adc69e480962be93fca4424950b4274aa4c863bd",
+      "bytes": 274
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/math.h",
+      "source": "src/lib/types/math.h",
+      "sha256": "3a4fc7b527c3d8ce018838cb8fd259f383d817dbed3d67094dfd48d12ec2a688",
+      "bytes": 243
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/README.md",
+      "source": "src/lib/types/README.md",
+      "sha256": "b48a46280ba13243788736913c4230ec62197b2aa4fd35cf771f3a0c82df34e2",
+      "bytes": 4792
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/test.h",
+      "source": "src/lib/types/test.h",
+      "sha256": "e36b48ac96f1d1be6437dee0172732cedbf2a62b1416f0843a60be9327469dc7",
+      "bytes": 318
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/types_interface.h",
+      "source": "src/lib/types/types_interface.h",
+      "sha256": "b4f0f0f9438823cd978ed5ae173cce8f52759e8ef1ea9f4a41e668cae8318616",
+      "bytes": 4032
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/audio.h",
+      "source": "src/lib/types/win32/audio.h",
+      "sha256": "24cfa2585beb4218239489937a5f58060968fa7843f794add8fbce793ddee2e7",
+      "bytes": 4249
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/clock.h",
+      "source": "src/lib/types/win32/clock.h",
+      "sha256": "232a1d723a33d1c3d62cda6c3044539e0c00bf0c430f5c1a6e222c84ce65555b",
+      "bytes": 276
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/console.h",
+      "source": "src/lib/types/win32/console.h",
+      "sha256": "264de2bc5c28bd4ed1c4d0da52fbd1f59abc3d5476d855b0f5a95e6a8ab2c9b6",
+      "bytes": 3751
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/file.h",
+      "source": "src/lib/types/win32/file.h",
+      "sha256": "83e9ce7d7bb88f43727f93f2fbb96996922c4c5881c7d75b74c1c00dd76a15ed",
+      "bytes": 1012
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/input.h",
+      "source": "src/lib/types/win32/input.h",
+      "sha256": "32f572c570c497c34bd69fa6430c475e2f94372bec2b60c8ac3486190321bea2",
+      "bytes": 2893
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/memory.h",
+      "source": "src/lib/types/win32/memory.h",
+      "sha256": "b89109af9c4f21deec8607012b91598ac573f0a73a3d3439eaa5b7e8ee0e329c",
+      "bytes": 515
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/process.h",
+      "source": "src/lib/types/win32/process.h",
+      "sha256": "a18b2b0228b53417e746e6e68e9084b6813f41297449e1ca34c0bb351a62c1e5",
+      "bytes": 409
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/scalar.h",
+      "source": "src/lib/types/win32/scalar.h",
+      "sha256": "28e8fcb83d1b853efa591b02e07db747637789b20032ea86266eb744ce109e87",
+      "bytes": 1133
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/sync.h",
+      "source": "src/lib/types/win32/sync.h",
+      "sha256": "b700c04df5576d805baf08a023202b24f3acc850b776ae7e4c04e0e698498a1a",
+      "bytes": 1943
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/test.h",
+      "source": "src/lib/types/win32/test.h",
+      "sha256": "e056806754316412c71c9af2ac8fb6ad344f196b9aaec8369946563db162a609",
+      "bytes": 512
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/text.h",
+      "source": "src/lib/types/win32/text.h",
+      "sha256": "81c49970596780598c239f0eee36d39a1a6b6cc57ddd578e25a45f3c53e6a745",
+      "bytes": 386
+    },
+    {
+      "path": "src/lib-nxvm/lib/types/win32/window.h",
+      "source": "src/lib/types/win32/window.h",
+      "sha256": "043655f14a37ff2643e8953ca190a1144f92a3d2eb7d541ed97a7b5f1cb63ebe",
+      "bytes": 9197
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/base_text_smoke.c",
+      "source": "test/lib/base/base_text_smoke.c",
+      "sha256": "8bdff7559864957a91f4549f30848cae7d95de551380b61be86e3fbc6a94f345",
+      "bytes": 1069
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/clock_smoke.c",
+      "source": "test/lib/base/clock_smoke.c",
+      "sha256": "d7e52ecec156d9bc12cdc49d6a2632d15c66787263df1a6afbd2b08f0970dab4",
+      "bytes": 738
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/linux/clock_failure_smoke.c",
+      "source": "test/lib/base/linux/clock_failure_smoke.c",
+      "sha256": "bbded5824ad60af0d06fde04e129074300e62820bdcd8ae17fe03047d595564a",
+      "bytes": 1471
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/linux/keyboard_decode_smoke.c",
+      "source": "test/lib/base/linux/keyboard_decode_smoke.c",
+      "sha256": "b251e9e79927202f694c90f1f3716f9942adc35bdc20c700cc8bc104b97f5333",
+      "bytes": 2813
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/linux/sync_fakes.h",
+      "source": "test/lib/base/linux/sync_fakes.h",
+      "sha256": "98f8419da993609d5a7516f8acae7318d4a55d538502ff9e85241589feef185e",
+      "bytes": 5618
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/linux/sync_smoke.c",
+      "source": "test/lib/base/linux/sync_smoke.c",
+      "sha256": "6b53cf9c1f8f1f17b8a72e78d7066c13175e0db2f13e8e9b40e75ed9683710d1",
+      "bytes": 8254
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/process_directory_smoke.c",
+      "source": "test/lib/base/process_directory_smoke.c",
+      "sha256": "5f419f5f0ad9d7584fc799aeef03f26fb77b9fdc575f5577e1855a58159b0c6a",
+      "bytes": 5459
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/win32/clock_failure_smoke.c",
+      "source": "test/lib/base/win32/clock_failure_smoke.c",
+      "sha256": "11c5ba3749c2be913d984bdafe9d2a3218673a5a4859b2b4f4a25c2dbad1baeb",
+      "bytes": 1996
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/win32/keyboard_decode_smoke.c",
+      "source": "test/lib/base/win32/keyboard_decode_smoke.c",
+      "sha256": "0f7b9f3eafb95f27a6ec030157ede398924507f837e11d1ab0859c81509063e8",
+      "bytes": 6684
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/win32/keyboard_layout_smoke.c",
+      "source": "test/lib/base/win32/keyboard_layout_smoke.c",
+      "sha256": "6945ab1e340dd32204a277aea07920d9124b27ff39637fb9112bd56a843fe04f",
+      "bytes": 1759
+    },
+    {
+      "path": "test/lib-nxvm/lib/base/win32/sync_smoke.c",
+      "source": "test/lib/base/win32/sync_smoke.c",
+      "sha256": "030ea00bc62c8b4c8d335496f1a565de095c86b5c084f7d29c05d1cacd5f826f",
+      "bytes": 7929
+    },
+    {
+      "path": "test/lib-nxvm/lib/fixtures/lifetime.cmake",
+      "source": "test/lib/fixtures/lifetime.cmake",
+      "sha256": "b580265ab69dc1904cb028634a095f24767cd553775cf9b10ca58722a03ed718",
+      "bytes": 661
+    },
+    {
+      "path": "test/lib-nxvm/lib/fixtures/lifetime.h",
+      "source": "test/lib/fixtures/lifetime.h",
+      "sha256": "1d4e6a34be325c7abc6b8617ee8edfee0dc11a2e84108804466b92348c3c5569",
+      "bytes": 503
+    },
+    {
+      "path": "test/lib-nxvm/lib/fixtures/window_frame.h",
+      "source": "test/lib/fixtures/window_frame.h",
+      "sha256": "ff5b58cda999240fcfb4a4b540d6244fd66457f68f6a6394b26fb18e1ea1a269",
+      "bytes": 807
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/frame_exchange_smoke.c",
+      "source": "test/lib/kvm-base/frame_exchange_smoke.c",
+      "sha256": "91d069bf9d514b23975109aa630df37475da0c9efd379d08eac477cbe8890c8e",
+      "bytes": 13113
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/hotkey_policy_smoke.c",
+      "source": "test/lib/kvm-base/hotkey_policy_smoke.c",
+      "sha256": "a87b4675f1b83db913bf8ab7ca272935e1bf3587f33078f93eed51dbfed4217b",
+      "bytes": 9256
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/input_delivery_smoke.c",
+      "source": "test/lib/kvm-base/input_delivery_smoke.c",
+      "sha256": "5c5d0ecda5b54bba443d2df3e992a5ab1d72fc2357361bb0f489ca87d7cb1511",
+      "bytes": 5670
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/kvm_component_contract_smoke.c",
+      "source": "test/lib/kvm-base/kvm_component_contract_smoke.c",
+      "sha256": "87ffa7c669487aa31fc8710d7299e8ef894299e76c5207fd9e0cc57cf23caa67",
+      "bytes": 12131
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/kvm_frame_lock_smoke.c",
+      "source": "test/lib/kvm-base/kvm_frame_lock_smoke.c",
+      "sha256": "89f90e119c175b3eef3a8f88ae0578d6902e729ea404572a0719b471cc99da8e",
+      "bytes": 4063
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/kvm_keyboard_lifetime_smoke.c",
+      "source": "test/lib/kvm-base/kvm_keyboard_lifetime_smoke.c",
+      "sha256": "bdda88cf8e978997560dcac4b56227cb5decd7c6faea9822eac9082a8278d387",
+      "bytes": 10357
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/kvm_mailbox_selection_smoke.c",
+      "source": "test/lib/kvm-base/kvm_mailbox_selection_smoke.c",
+      "sha256": "47188f034620099bf292759fd96b87dbfbc5bbbb11369a5e8024f533505c1240",
+      "bytes": 5702
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-base/text_cursor_smoke.c",
+      "source": "test/lib/kvm-base/text_cursor_smoke.c",
+      "sha256": "fd165c4c20d6dcabb13672b8ef3641b055d2db33e9c47888e8949e8048d99cc8",
+      "bytes": 5374
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/geometry_smoke.c",
+      "source": "test/lib/kvm-window/geometry_smoke.c",
+      "sha256": "446e97f4b2c28c5597ab81668487884be9954cf83a6321ed287cefe6cd7697c3",
+      "bytes": 4481
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/kvm_frame_copy_smoke.c",
+      "source": "test/lib/kvm-window/kvm_frame_copy_smoke.c",
+      "sha256": "79fa9f9899e77eca79b94bc580460ea58b18b16ef8eddb4d2ee2878d84c0df7f",
+      "bytes": 9803
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/kvm_frame_damage_mouse_smoke.c",
+      "source": "test/lib/kvm-window/kvm_frame_damage_mouse_smoke.c",
+      "sha256": "d21494aa4ead121be69114ddc7c41aefb8481336a764ac0c1fed6f10ab154eaa",
+      "bytes": 23883
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/kvm_leaf_control_capacity_smoke.c",
+      "source": "test/lib/kvm-window/kvm_leaf_control_capacity_smoke.c",
+      "sha256": "eb40983f31e95415035b76a48ef32bac45d4121b9edee2fd5adc1ee7743f6b27",
+      "bytes": 5278
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/linux/component_smoke.c",
+      "source": "test/lib/kvm-window/linux/component_smoke.c",
+      "sha256": "092738c9f496d7de69f51393532edf1e6b9362bc1f888df18694218f8dcb23b6",
+      "bytes": 848
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/win32/kvm_input_admission_smoke.c",
+      "source": "test/lib/kvm-window/win32/kvm_input_admission_smoke.c",
+      "sha256": "deacdef21aa3a57d490d9f057bcc28c8a63fbf9869bbf777755902bf77e746dc",
+      "bytes": 15801
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/win32/kvm_window_capture_contract_smoke.c",
+      "source": "test/lib/kvm-window/win32/kvm_window_capture_contract_smoke.c",
+      "sha256": "abd601cd9badebd001d0c993b0679d76ab09b321dcc33222a7a55c8f981f1d2e",
+      "bytes": 66996
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/win32/modifier_state_smoke.c",
+      "source": "test/lib/kvm-window/win32/modifier_state_smoke.c",
+      "sha256": "b205e156446db1c08194e92ea83b54116cc95f0749f47f8353dc88e8145ddcaf",
+      "bytes": 986
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/win32/window_keyboard_lifetime_smoke.c",
+      "source": "test/lib/kvm-window/win32/window_keyboard_lifetime_smoke.c",
+      "sha256": "6004c2959af98063256fac63732c8a9c07fbedd0d70db8493c59160639c8a054",
+      "bytes": 10306
+    },
+    {
+      "path": "test/lib-nxvm/lib/kvm-window/window_failure_output_smoke.c",
+      "source": "test/lib/kvm-window/window_failure_output_smoke.c",
+      "sha256": "b24bba0d9e3ee636caab9890517f00901c5ab961d41bf6ae2132eb71af019ce6",
+      "bytes": 268
+    },
+    {
+      "path": "test/lib-nxvm/lib/types/types_contract_smoke.c",
+      "source": "test/lib/types/types_contract_smoke.c",
+      "sha256": "c443cd5800b126da8f5dc26fff54ae142035a55ebe1519199af3cc48ffb43f9a",
+      "bytes": 5411
+    },
+    {
+      "path": "test/integration/lib-nxvm/fixtures/window_frame.h",
+      "source": "test/lib/fixtures/window_frame.h",
+      "sha256": "ff5b58cda999240fcfb4a4b540d6244fd66457f68f6a6394b26fb18e1ea1a269",
+      "bytes": 807
+    },
+    {
+      "path": "test/integration/lib-nxvm/integration/kvm_window_modal_smoke.c",
+      "source": "test/lib/integration/kvm_window_modal_smoke.c",
+      "sha256": "380d944a4a1a175590e1010669d3072418eda2f63b47f535bee2ed52fbfdc667",
+      "bytes": 9935
+    },
+    {
+      "path": "test/integration/lib-nxvm/integration/kvm_window_retirement_smoke.c",
+      "source": "test/lib/integration/kvm_window_retirement_smoke.c",
+      "sha256": "ed296326b43c8245aa9ee11f0c034eb4d77d9b9b91bbf758d92588bedeb6d18e",
+      "bytes": 15586
+    }
+  ]
+}

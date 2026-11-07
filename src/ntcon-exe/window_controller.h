@@ -1,7 +1,7 @@
 #ifndef FRONTEND_WINDOW_CONTROLLER_H
 #define FRONTEND_WINDOW_CONTROLLER_H
 #include <windows.h>
-#include "lib-nxvm/kvm-window/window_interface.h"
+#include "lib-nxvm/lib/kvm-window/window_interface.h"
 #include "window_input_queue.h"
 
 typedef struct frontend_window_controller frontend_window_controller;

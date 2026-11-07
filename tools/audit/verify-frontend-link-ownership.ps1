@@ -293,7 +293,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     # Current product composition does not select KVM in other executables.
     foreach ($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')) {
-        if (@(Get-FrontendSources $target 'lib-nxvm' | Where-Object { $_ -like 'kvm-*/*' }).Count) { throw "$target unexpectedly links the frontend window implementation" }
+        if (@(Get-FrontendSources $target 'lib-nxvm' | Where-Object { $_ -like 'lib/kvm-*/*' }).Count) { throw "$target unexpectedly links the frontend window implementation" }
     }
     $service = @(Get-FrontendSources 'ntcon.exe')
     if ('native_console_host.c' -in $service) { throw 'Retired helper entered ntcon.exe' }
@@ -308,7 +308,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             'window_keyboard.c', 'window_input_queue.c')) {
         if ($required -notin $service) { throw "ntcon.exe omits $required" }
     }
-    if ('kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib-nxvm')) { throw 'ntcon.exe omits shared window implementation' }
+    if ('lib/kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib-nxvm')) { throw 'ntcon.exe omits shared window implementation' }
     if ('video.c' -notin @(Get-FrontendSources 'ntcon.exe' 'common/frontend-base')) { throw 'ntcon.exe omits shared frame receiver' }
 }
 
@@ -405,7 +405,7 @@ foreach ($leakInput in @('frontend-window.lib', 'frontend-terminal.lib', 'ntcon-
             $_ -replace ': (\S+) ', (': $1 ' + $leakInput + ' ')
         } else { $_ }
     })
-    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/lib-nxvm/kvm-window/win32/component.c'
+    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/lib-nxvm/lib/kvm-window/win32/component.c'
     $rejected = $false
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Window ownership negative control did not reject $leakInput" }

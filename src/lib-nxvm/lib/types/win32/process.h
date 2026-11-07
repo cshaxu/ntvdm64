@@ -1,0 +1,12 @@
+#ifndef LIB_TYPES_WIN32_PROCESS_H
+#define LIB_TYPES_WIN32_PROCESS_H
+
+#include "lib/types/win32/scalar.h"
+
+#define lib_win32_get_module_file_name_w GetModuleFileNameW
+#define lib_win32_get_current_process GetCurrentProcess
+#define lib_win32_terminate_process TerminateProcess
+#define lib_win32_get_current_process_id GetCurrentProcessId
+#define lib_win32_get_process_handle_count GetProcessHandleCount
+
+#endif

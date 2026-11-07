@@ -2,41 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T479 S7** - audit complete; awaiting bounded T closure review.
-Owner closes S6 with gaps; all uncompleted implementation and acceptance work
-belongs to the [next queued T](../proposals/proposal-guest-multitask-io-completion-001.md),
-not S7. [S6 closure and exact handoff](../etc/evidence/m0-t479-s6-closure-handoff.md)
-retain the candidate, failures and nine finite requirement groups.
-
-Published baseline remains P4 package daa392bf-02e0-439f-9b1c-e21804398133,
-all11 host images plus the bounded Win3.1 addon. Cached089, Full09116/16 and
-actual command/exit092 qualify that publication. No new runtime is published.
-Unpublished input candidate188/189 and actual handback190/normal-exit194 are
-preserved as a replayable patch and hash manifest, not selected source. Full171
-predates that candidate's final changes. Never publish cached candidate outputs
-as the restored source baseline. Original guest remains unchanged. [S7 audit](../etc/evidence/m0-t479-s7-closure-audit.md) verifies all11 published images at both destinations and three addon/source identities; no new runtime tests or publication were required for unchanged production inputs.
+**Active: M0 T479 S9 — Win3.1 DOS display-transition repair.**
+Owner keeps T479 open. [S8 delivery](../etc/evidence/m0-t479-s8-shared-delivery.md)
+imports unchanged shared components, passes full cached builds and Full16/16,
+and publishes all11 host images as package49af0246-027c-4b11-9ac0-ae94c2a8cfa5.
+Its reviewed commit/push is the current delivery checkpoint.
+The archived S6 candidate remains unselected; its incomplete work remains in
+the [queued successor](../proposals/proposal-guest-multitask-io-completion-001.md).
+[S6 handoff](../etc/evidence/m0-t479-s6-closure-handoff.md) preserves that scope.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md); unfinished scope assigned to the queue-first successor. |
-| Identifier Mode | M0 T479 S7/delivered-scope-audit; Ordinary Mode, single implementer/reviewer. |
-| Admission And Approval | Owner directs S6 closure and transfer of all unfinished work to the next T; prior continuous S2--S7 authority admits this bounded closure audit only. |
-| Objective | Verify delivered T479 scope, exact source/package identity and complete next-T handoff before T closure; no claim of complete guest I/O. |
-| Non-goals | No more S6 implementation, original guest modification, new semantic waiver, new feature or unqualified candidate publication. |
-| Reference Baseline | HEAD cedebcab5; published P4 package; S6 closure, actual190/194 candidate evidence and archived exact replay patch. |
-| Files And ABI Surface | Current/roadmap/queue/proposal/closure evidence and candidate archive; no runtime ABI change in this handoff. |
-| Applicable Rules | Execution, architecture/coding/document rules and source policy; owner-directed bounded closure supersedes former full-I/O S6 exit scope. |
-| Verification | Governance and links; candidate hashes/replay, source restoration, published11-image/addon provenance, all transferred failures and prior S delivery records; applicable checks if actual selected source changes. |
-| Expected Markers | One active packet, queue-first successor, no missing obligation or false pass, no candidate mistaken for published code. |
-| Asset Needs | Existing source, release manifests and retained test evidence; no new guest input. |
-| Reporting Requirements | Delivered versus candidate versus unverified, exact pending owner and publication status. |
-| Stop Conditions | Lost candidate/evidence, unexplained package mismatch or requested new semantic concession; investigate without inventing success. |
-| Exit Criteria | Complete delivered-scope review, documented handoff, governance/diff checks, reviewed commit/push; T remains open until its bounded closure is recorded. |
-| Original Owner Request | Close S6, record gaps, then move unfinished work into the next queued T rather than S7. |
-| Similar-Issue Sweep | All nine successor groups; S4 deferred Win95, fill002/119 and S6 operation reachability included. |
-| Temporary Evidence | Existing build/t479-s6-livecmd; owned60-minute phases,2GiB,15-minute no-progress review; preserve evidence until durable. |
+| Candidate Proposal | [Windowed DOS text repair](../proposals/proposal-win31-windowed-dos-text-debug-001.md); [S8/S9 plan](../etc/operations/m0-t479-s8-s9-import-plan.md). |
+| Identifier Mode | M0 T479 S9/display-transitions; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner adds this S after unchanged shared import, explicitly covering all three Win3.1 DOS window/fullscreen failures and directing reuse of SoftPC recent S records. |
+| Objective | Correct window-to-fullscreen garbling, fullscreen-to-window character corruption, and invisible typed characters with moving cursor after return. |
+| Non-goals | No original guest modification/rebuild, unrelated Win95 changes, archived S6 restoration or T closure. |
+| Reference Baseline | S8 published package49af0246; SoftPC accepted S33 final state1ec0d551, including P1/P3 CHAIN2 and P4 BDA text aperture repairs. |
+| Files And ABI Surface | Reached mvdm-host cvidc/video/host nt_cga paths and corresponding local tests/adapters; audit exact mapping before importing. |
+| Applicable Rules | Execution, source policy, mirror provenance/diff registration and architecture/coding/document rules. |
+| Verification | Source dependency and semantic comparison; matched targeted controls, real Win3.1 repeated window/fullscreen transitions with input/DIR/CLS/VER/exit; affected DOS/WOW regressions, cached full builds, Full and coherent publication. |
+| Expected Markers | Correct visible cells and input after both transition directions, preserved guest behavior and no false pass from upstream evidence alone. |
+| Asset Needs | Read-only SoftPC source/evidence and existing immutable Win3.1 installation/media; isolated probe copies. |
+| Reporting Requirements | Exact imported repair/lineage, mirror diff, before/after evidence, remaining boundaries and release hashes. |
+| Stop Conditions | Unproved semantic loss, need to modify original guest, or new compatibility concession; preserve work and investigate. |
+| Exit Criteria | All three defects verified, applicable gates pass, full package published/hash checked, reviewed commit and push; T remains open. |
+| Original Owner Request | Import SoftPC fixes for all three Win3.1 MS-DOS window/fullscreen display failures. |
+| Similar-Issue Sweep | CHAIN2 scalar/string/rule addressing, text BIOS read/write aperture, redraw and input visibility across repeated mode changes. |
+| Temporary Evidence | build/t479-s9-display, executor-owned60-minute phases/2GiB/15-minute no-progress review; archive necessary evidence before cleanup. |
 
 ## S4 Win3.1 Checkpoint And Deferred Win95
 

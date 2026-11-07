@@ -1,7 +1,7 @@
 /* S6 input-boundary witness: real shared decoder, no window or guest mutation. */
 #include <windows.h>
 #include <stdio.h>
-#include "lib-nxvm/base/input.h"
+#include "lib-nxvm/lib/base/input.h"
 
 int main(void)
 {
