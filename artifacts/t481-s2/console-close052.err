@@ -1,0 +1,6 @@
+Exception: O:\repos.hobby\ntvdm64\test\integration\win31_runtime_matrix_test.ps1:291
+Line |
+ 291 |  . }).Count) { throw 'Win31 runtime matrix did not pass all selected cas .
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Win31 runtime matrix did not
+     | pass all selected cases

@@ -1,0 +1,24 @@
+container=console-owning-nondebug
+pid=14004
+result=exited
+exit=0x000000ff
+graphics-handshake=none
+post-exit-observation-ms=0
+console-owner-observer=23380
+console-members-after-wait=1
+console-member=23380
+timeout-ms=90000
+milestone-input=0 milestone-waits=0 milestone-wait-ms=0
+window-key-message-count=0 window-enter-count=0
+scripted-console-input=delivered
+console-mouse-mode-observed=no
+console-mouse-input=none
+scripted-console-input-trigger=(Y/N)?
+scripted-console-input-sequence=explicit-observer-escaped-text
+scripted-console-input-ready=yes
+scripted-console-input-remaining=1
+fixed-system-root=O:\tmp\m481z5
+fixed-system-root-chars=13
+fixed-system-root-short-chars=13
+fixed-system-root-short=O:\tmp\m481z5
+image-identity=unavailable

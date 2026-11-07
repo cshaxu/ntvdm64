@@ -9,6 +9,8 @@ param(
  [string]$RetirementDriver,
  [switch]$RetireCommand,
  [switch]$ServiceLoss,
+ [string]$WorkerCloseMonitor,
+ [switch]$ConsoleClose,
  [string]$InterruptObserver,
  [switch]$Keyboard,
  [switch]$BlockedKeyboard,
@@ -35,7 +37,9 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
-if($ServiceLoss -and (!$OrderedCommandImage -or !$RealCommand)){throw 'Service loss requires real ordered native tasks'}
+if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
+if($ServiceLoss -and $WorkerCloseMonitor){throw 'Select service loss or managed worker close'}
+if(($ServiceLoss -or $WorkerCloseMonitor) -and (!$OrderedCommandImage -or !$RealCommand)){throw 'Termination requires real ordered native tasks'}
 if($UnreadInputImage -and (!$RealCommand -or $OrderedCommandImage -or $NestedCommand)){throw 'Unread input requires separate RealCommand witness'}
 if($FillApplication -and (!$Continuation -or $RealCommand)){throw 'Fill application requires diagnostic Continuation'}
 if($ReentrantCommand -and !$NestedCommand){throw 'Reentrant command witness requires NestedCommand'}
@@ -219,7 +223,7 @@ foreach($id in 'A','B'){
   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ORDER_COMMAND@')
   if($marker -lt 0){throw 'Missing ordered command marker'}
   $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T479-$([IO.Path]::GetFileName($dest)) $FirstCommand"+[char]13)
-  if($ServiceLoss){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
+  if($ServiceLoss -or $WorkerCloseMonitor){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
   if($UnreadInputImage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
   if($value.Length -ge 256){throw 'Ordered command too long'}
   [Array]::Clear($bytes,$marker,256)
@@ -318,12 +322,13 @@ function Confirm-Reuse($rows){
 }
 try {
  $retirementOptions=@{}
- if($ServiceLoss){$retirementOptions.ServiceLossMarkers=@("$dest\PATCH\HOLD-A.txt","$dest\PATCH\HOLD-B.txt")}
+ if($ServiceLoss -or $WorkerCloseMonitor){$retirementOptions.ServiceLossMarkers=@("$dest\PATCH\HOLD-A.txt","$dest\PATCH\HOLD-B.txt")}
+ if($WorkerCloseMonitor){$retirementOptions.WorkerCloseMonitor=$WorkerCloseMonitor;$retirementOptions.ConsoleClose=$ConsoleClose}
  if($RetireCommand){$retirementOptions.RetiredNativeCommandMarker="$dest\PATCH\NATIVE.OK"}
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases 386-dosonly1 @retirementOptions
  if($LASTEXITCODE){throw 'Guest matrix runner failed'}
- if($ServiceLoss){
-  'PASS actual Win3.1 VM native chains exit after isolated service death; no normal-exit claim'
+ if($ServiceLoss -or $WorkerCloseMonitor){
+  'PASS actual Win3.1 VM native chains retire after selected lifecycle action; no normal-exit claim'
   return
  }
  if(!(Test-Path "$dest/PATCH/VMLOAD.BIN")){throw 'No guest API result'}

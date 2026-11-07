@@ -1,0 +1,20 @@
+container=console-owning-nondebug
+pid=23708
+result=exited
+exit=0xffffffff
+graphics-handshake=none
+post-exit-observation-ms=0
+console-owner-observer=568
+console-members-after-wait=1
+console-member=568
+timeout-ms=90000
+milestone-input=0 milestone-waits=0 milestone-wait-ms=0
+window-key-message-count=0 window-enter-count=0
+scripted-console-input=none
+console-mouse-mode-observed=no
+console-mouse-input=none
+fixed-system-root=O:\tmp\m481z1
+fixed-system-root-chars=13
+fixed-system-root-short-chars=13
+fixed-system-root-short=O:\tmp\m481z1
+image-identity=unavailable

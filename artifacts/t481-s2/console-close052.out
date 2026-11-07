@@ -1,0 +1,18 @@
+CHANGED=0
+CHANGED=0
+CHANGED=1
+CHANGED=1
+CHANGED=13
+CHANGED=2
+CHANGED=6
+CHANGED=0
+
+386-dosonly1: started=True desktop-and-mode=True normal-exit=False pass=False
+Original Windows installation bytes verified unchanged
+Exception: O:\repos.hobby\ntvdm64\build\t481-s2\console-close052.ps1:6
+Line |
+   6 |   if($LASTEXITCODE){throw 'Actual managed worker close failed'}
+     |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Actual managed worker close
+     | failed
+

@@ -1,0 +1,10 @@
+NODE pid=25996 task=0 kind=0 state=0 image=NTCON
+WORKER pid=5780 task=0 kind=0 state=2 image=O:\tmp\m481z5\PATCH\WIN386.PIF
+NODE pid=5780 task=0 kind=0 state=0 image=
+WORKER pid=3036 task=1 kind=3 state=2 image=O:\tmp\m481z5\PATCH\ORDER.EXE
+NODE pid=5780 task=0 kind=0 state=0 image=
+WORKER pid=25456 task=1 kind=3 state=2 image=O:\tmp\m481z5\PATCH\ORDER.EXE
+NODE pid=26144 task=1 kind=3 state=0 image=O:\tmp\m481z5\PATCH\ORDER.EXE
+NODE pid=5996 task=1 kind=3 state=0 image=O:\tmp\m481z5\PATCH\ORDER.EXE
+PASS: authenticated DTASKMGR RPC accepted selected live node close
+PASS: authenticated DTASKMGR RPC sees at least one live worker

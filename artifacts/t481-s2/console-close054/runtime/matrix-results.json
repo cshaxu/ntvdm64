@@ -1,0 +1,17 @@
+{
+  "case": "386-dosonly1",
+  "dosonly": true,
+  "enhanced": true,
+  "probeStarted": true,
+  "progmanAndMode": true,
+  "flags": 2085,
+  "hwnd": 4456,
+  "observedDosOnly": 1,
+  "normalExit": false,
+  "serviceLoss": false,
+  "workerClose": false,
+  "consoleClose": true,
+  "passed": true,
+  "error": null,
+  "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s2\\console-close054\\runtime\\386-dosonly1.observer.txt"
+}

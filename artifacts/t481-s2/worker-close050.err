@@ -1,0 +1,6 @@
+Remove-Item: O:\repos.hobby\ntvdm64\tests\observation\isolated_package_cleanup.ps1:207
+Line |
+ 207 |      Remove-Item -LiteralPath $root -Recurse -Force
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Access to the path
+     | 'O:\tmp\n4ff\system32\nthook64.dll' is denied.

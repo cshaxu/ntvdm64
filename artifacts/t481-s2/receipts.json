@@ -1,5 +1,5 @@
 {
-  "scope": "T481 S2 P1 verified input/lifecycle delivery; S2 remains open",
+  "scope": "T481 S2 verified input/lifecycle evidence through P4; S2 remains open",
   "receipts": [
     {
       "source": "build/t481-s2/input022-x86.log",
@@ -264,6 +264,282 @@
       "artifact": "artifacts/t481-s2/oem048/INPUT-B-1.txt",
       "bytes": 206,
       "sha256": "9a5076a229bc76f6ccd3a3be64c61aae7e114435cbc1c049ae7d990edb0de9a6"
+    },
+    {
+      "source": "build/t481-s2/worker-close050.out",
+      "artifact": "artifacts/t481-s2/worker-close050.out",
+      "bytes": 422,
+      "sha256": "1c3da7acd08b707c8eea04114989ff4b8791cd64a16d2cb268a9f222b70e36b6"
+    },
+    {
+      "source": "build/t481-s2/worker-close050.err",
+      "artifact": "artifacts/t481-s2/worker-close050.err",
+      "bytes": 298,
+      "sha256": "b86d19294aa7034783da28bd8ce962c2f2218fb800a147860dbc1c336b3712c7"
+    },
+    {
+      "source": "build/t481-s2/worker-close050.exit",
+      "artifact": "artifacts/t481-s2/worker-close050.exit",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "source": "build/t481-s2/worker-close050/runtime/386-dosonly1.inputs.json",
+      "artifact": "artifacts/t481-s2/worker-close050/runtime/386-dosonly1.inputs.json",
+      "bytes": 859,
+      "sha256": "dbf9ccee7ab8f7f5831d71357cba039dc0f0257dad63ff5a800411510062969e"
+    },
+    {
+      "source": "build/t481-s2/worker-close050/runtime/386-dosonly1.observer.txt",
+      "artifact": "artifacts/t481-s2/worker-close050/runtime/386-dosonly1.observer.txt",
+      "bytes": 562,
+      "sha256": "151f7d6493a0ab7e49ced6ca6301142d855305dbfea496615541a41402f96172"
+    },
+    {
+      "source": "build/t481-s2/worker-close050/runtime/386-dosonly1.observer.txt.console.txt",
+      "artifact": "artifacts/t481-s2/worker-close050/runtime/386-dosonly1.observer.txt.console.txt",
+      "bytes": 35,
+      "sha256": "f64900a878d01f9114e6c32a95bd9ef089487479bb3fc7cea7c73dccef626157"
+    },
+    {
+      "source": "build/t481-s2/worker-close050/runtime/worker-close.stdout",
+      "artifact": "artifacts/t481-s2/worker-close050/runtime/worker-close.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/worker-close050/runtime/worker-close.stderr",
+      "artifact": "artifacts/t481-s2/worker-close050/runtime/worker-close.stderr",
+      "bytes": 16,
+      "sha256": "e4cb64db441deface7d1eebe3c88575545ad20b7ec70ea246118db89d4b55e2b"
+    },
+    {
+      "source": "build/t481-s2/worker-close051.out",
+      "artifact": "artifacts/t481-s2/worker-close051.out",
+      "bytes": 378,
+      "sha256": "536aacba69a5c91ca220a4bcf20af7c82b4321b6b140eda080ded68c9b15a4a6"
+    },
+    {
+      "source": "build/t481-s2/worker-close051.err",
+      "artifact": "artifacts/t481-s2/worker-close051.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/worker-close051.exit",
+      "artifact": "artifacts/t481-s2/worker-close051.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/matrix-results.json",
+      "bytes": 407,
+      "sha256": "e88f4d81ee784a9a4e7b61d48ccc901ee3e6c7b6823570f196003ac6b49bb289"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/386-dosonly1.inputs.json",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/386-dosonly1.inputs.json",
+      "bytes": 859,
+      "sha256": "b6c4d8672305cde3bd7285f520ddfe9d0403de12da74e7f7159aede5a3f0b571"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/386-dosonly1.service-loss.json",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/386-dosonly1.service-loss.json",
+      "bytes": 671,
+      "sha256": "1a33a98939f492bdd07bbc3513ff57848f93f39f0a0280158d272a886a98e114"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/386-dosonly1.observer.txt",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/386-dosonly1.observer.txt",
+      "bytes": 565,
+      "sha256": "ee9f7f8700013ad2bd3db7cdd2f50175633f6284c912718487999001dfc86f3e"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/386-dosonly1.observer.txt.console.txt",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/386-dosonly1.observer.txt.console.txt",
+      "bytes": 927,
+      "sha256": "ae134f39d391456463b319174377a26dc072839420c1dfe547d238ace2022972"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/worker-close.stdout",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/worker-close.stdout",
+      "bytes": 647,
+      "sha256": "fe7f064466bb35eba2936d5ad0533f5278ce29ee16fcce6d5cf09d146aacb120"
+    },
+    {
+      "source": "build/t481-s2/worker-close051/runtime/worker-close.stderr",
+      "artifact": "artifacts/t481-s2/worker-close051/runtime/worker-close.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/console-close052.out",
+      "artifact": "artifacts/t481-s2/console-close052.out",
+      "bytes": 502,
+      "sha256": "3c3f3d5cf83c9542210b3a259177bed695d6a0bb729f04d7e1f4f1e767bf433a"
+    },
+    {
+      "source": "build/t481-s2/console-close052.err",
+      "artifact": "artifacts/t481-s2/console-close052.err",
+      "bytes": 327,
+      "sha256": "c79c02c93715fe2fd79bea38d023a074414ec8248a2fa8630261c61c815efe8f"
+    },
+    {
+      "source": "build/t481-s2/console-close052.exit",
+      "artifact": "artifacts/t481-s2/console-close052.exit",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/matrix-results.json",
+      "bytes": 435,
+      "sha256": "acb394d13959fb9d2fb7dc028eed40c3d58a96628d651698d2b8177b99d787ec"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/386-dosonly1.inputs.json",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/386-dosonly1.inputs.json",
+      "bytes": 859,
+      "sha256": "0c1ea7ca4af90792724c6985e1b2a16232c8c5bbb1079f510eb1891b3e7ee464"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/386-dosonly1.service-loss.json",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/386-dosonly1.service-loss.json",
+      "bytes": 711,
+      "sha256": "4e08e9594bf6169a70a62dfb3ff568d410f2ff7acda809bc6ca0e50149946b3d"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/386-dosonly1.observer.txt",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/386-dosonly1.observer.txt",
+      "bytes": 667,
+      "sha256": "829ee8ec5eb4b77a3fd8f55d70d306717dba124ff5109abccfde5326de85855a"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/386-dosonly1.observer.txt.console.txt",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/386-dosonly1.observer.txt.console.txt",
+      "bytes": 962,
+      "sha256": "44664834225bdd07859d04c555082d7aee96aaa444d7264fa6980a71755f843d"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/worker-close.stdout",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/worker-close.stdout",
+      "bytes": 646,
+      "sha256": "6fcd57cdb80debac8891969487b71c878d5d47956063f3ec2d8af9fd4262f6c3"
+    },
+    {
+      "source": "build/t481-s2/console-close052/runtime/worker-close.stderr",
+      "artifact": "artifacts/t481-s2/console-close052/runtime/worker-close.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/console-close054.out",
+      "artifact": "artifacts/t481-s2/console-close054.out",
+      "bytes": 378,
+      "sha256": "536aacba69a5c91ca220a4bcf20af7c82b4321b6b140eda080ded68c9b15a4a6"
+    },
+    {
+      "source": "build/t481-s2/console-close054.err",
+      "artifact": "artifacts/t481-s2/console-close054.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/console-close054.exit",
+      "artifact": "artifacts/t481-s2/console-close054.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/matrix-results.json",
+      "bytes": 434,
+      "sha256": "8d4e2a7c26f064719102c536526449e83ffbcce389fd1db0e91e1cc327633c54"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/386-dosonly1.inputs.json",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/386-dosonly1.inputs.json",
+      "bytes": 859,
+      "sha256": "7cc96edd3dab62b630046da488ddb2cb814e42ea21071dfa859367efccc25db8"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/386-dosonly1.service-loss.json",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/386-dosonly1.service-loss.json",
+      "bytes": 713,
+      "sha256": "0a870c2fee20a851390d40e9c839ec6b438605c5d1c1cc1cde3f86e6bcfa1bdf"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/386-dosonly1.observer.txt",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/386-dosonly1.observer.txt",
+      "bytes": 740,
+      "sha256": "6aff1cc92123987e66380be3197fa950a92ff02851b15bb435c648d265945fd0"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/386-dosonly1.observer.txt.console.txt",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/386-dosonly1.observer.txt.console.txt",
+      "bytes": 964,
+      "sha256": "0c4784f76d3418a93079b6f1a0ca8eb0b36d4aaedf204e3df9ec95b6bdf7e699"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/worker-close.stdout",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/worker-close.stdout",
+      "bytes": 644,
+      "sha256": "eef25ce5aec02bbc2798081233df9d1dec33611b91e46afeaa0c73448d03fac8"
+    },
+    {
+      "source": "build/t481-s2/console-close054/runtime/worker-close.stderr",
+      "artifact": "artifacts/t481-s2/console-close054/runtime/worker-close.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/service-loss055.out",
+      "artifact": "artifacts/t481-s2/service-loss055.out",
+      "bytes": 378,
+      "sha256": "536aacba69a5c91ca220a4bcf20af7c82b4321b6b140eda080ded68c9b15a4a6"
+    },
+    {
+      "source": "build/t481-s2/service-loss055.err",
+      "artifact": "artifacts/t481-s2/service-loss055.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "build/t481-s2/service-loss055.exit",
+      "artifact": "artifacts/t481-s2/service-loss055.exit",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "source": "build/t481-s2/service-loss055/runtime/matrix-results.json",
+      "artifact": "artifacts/t481-s2/service-loss055/runtime/matrix-results.json",
+      "bytes": 433,
+      "sha256": "fad469af99e9e198181b86d1f0888e5d5695e979ecee42c4a109e18cab153325"
+    },
+    {
+      "source": "build/t481-s2/service-loss055/runtime/386-dosonly1.inputs.json",
+      "artifact": "artifacts/t481-s2/service-loss055/runtime/386-dosonly1.inputs.json",
+      "bytes": 859,
+      "sha256": "84e5f22e347df48c8408c7c12399c6ca38881903adf68bdec46fc68d890dba37"
+    },
+    {
+      "source": "build/t481-s2/service-loss055/runtime/386-dosonly1.service-loss.json",
+      "artifact": "artifacts/t481-s2/service-loss055/runtime/386-dosonly1.service-loss.json",
+      "bytes": 684,
+      "sha256": "67d2543d140628e5cce11717bec76c75b7799620d128e9f1bf34c8f5b35c5187"
+    },
+    {
+      "source": "build/t481-s2/service-loss055/runtime/386-dosonly1.observer.txt",
+      "artifact": "artifacts/t481-s2/service-loss055/runtime/386-dosonly1.observer.txt",
+      "bytes": 566,
+      "sha256": "7840ca9f9ee490306db881ad8dcfa65ebac0b073f7f397e9fa8955cb11617622"
+    },
+    {
+      "source": "build/t481-s2/service-loss055/runtime/386-dosonly1.observer.txt.console.txt",
+      "artifact": "artifacts/t481-s2/service-loss055/runtime/386-dosonly1.observer.txt.console.txt",
+      "bytes": 927,
+      "sha256": "ae134f39d391456463b319174377a26dc072839420c1dfe547d238ace2022972"
     }
   ]
 }

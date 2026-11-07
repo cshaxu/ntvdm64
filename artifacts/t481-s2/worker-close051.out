@@ -1,0 +1,13 @@
+CHANGED=0
+CHANGED=0
+CHANGED=1
+CHANGED=1
+CHANGED=13
+CHANGED=2
+CHANGED=6
+CHANGED=0
+
+386-dosonly1: started=True desktop-and-mode=True normal-exit=False pass=True
+PASS 1 selected Windows 3.1 mode/DOSONLY combinations
+PASS actual Win3.1 VM native chains retire after selected lifecycle action; no normal-exit claim
+Original Windows installation bytes verified unchanged

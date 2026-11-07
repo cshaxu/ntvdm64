@@ -316,3 +316,30 @@ combined cancellation; actual service040 and retirement042 cover broker death
 and VM retirement. Full cancellation/rollback acceptance still needs explicit
 mapping of remaining real paths; no new recovery mechanism is warranted by
 this audit. Historical119 still lacks a captured blocked carrier stack.
+
+## S2 P4 actual cancellation coverage
+
+Worker-close051, Console-close054 and service-loss055 pass with two real
+Win3.1 VM native chains held alive before the selected lifecycle action.
+Each receipt proves all10 pinned service/client/native processes exited before
+scope cleanup. Management cases authenticate the monitor against the staged
+package and require the service alive at acknowledgement. Service death uses
+the exact pinned isolated NTSRV. These intentional exits are not normalExit.
+The existing production retirement042 covers VM retirement independently.
+
+Failed050 was test package authentication: converting the raw16-byte identity
+as GUID text reversed GUID fields. The runner now constructs GUID from bytes.
+Failed052 already proved all10 process exits, but the outer CMD test batch
+waited for its legitimate Console-close confirmation.054 answers only the
+observed (Y/N)? prompt through the existing observer and then verifies exit.
+Neither failure justified a product recovery mechanism. Failed and passing
+receipts are retained in the receipt index above. Failure containment only
+kills already identity-checked pinned test processes, after recording failure;
+it cannot establish the beforeScopeCleanup success assertion.
+
+This delivery changes two integration runners only (+49/-12); runtime, addon,
+mirror and release image bytes are unchanged from P1. No product build or
+repeat Full gate is needed for this test-only change; the three actual affected
+integration paths were run. No new product timeout, retry, state or lifecycle
+authority is introduced. fill002/119 attribution and initialization rollback
+remain open; this does not close S2 or advance to S3.

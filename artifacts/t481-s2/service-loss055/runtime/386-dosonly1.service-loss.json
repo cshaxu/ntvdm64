@@ -1,0 +1,48 @@
+{
+  "beforeScopeCleanup": true,
+  "service": 16476,
+  "managedWorkerClose": false,
+  "consoleClose": false,
+  "exited": [
+    {
+      "pid": 25840,
+      "exit": 6
+    },
+    {
+      "pid": 16476,
+      "exit": -1
+    },
+    {
+      "pid": 6504,
+      "exit": 6
+    },
+    {
+      "pid": 13500,
+      "exit": 6
+    },
+    {
+      "pid": 25964,
+      "exit": 6
+    },
+    {
+      "pid": 19852,
+      "exit": 6
+    },
+    {
+      "pid": 24816,
+      "exit": 6
+    },
+    {
+      "pid": 25756,
+      "exit": 6
+    },
+    {
+      "pid": 3704,
+      "exit": -1073741510
+    },
+    {
+      "pid": 20516,
+      "exit": -1073741510
+    }
+  ]
+}

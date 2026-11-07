@@ -6,12 +6,16 @@ param(
     [string]$WindowsProbeImage,
     [string]$RetiredNativeCommandMarker,
     [string[]]$ServiceLossMarkers,
+    [string]$WorkerCloseMonitor,
+    [switch]$ConsoleClose,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
     [switch]$AllowUserInstallation
 )
 $ErrorActionPreference = 'Stop'
+if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
+if($WorkerCloseMonitor -and !$ServiceLossMarkers){throw 'Worker close requires native readiness markers'}
 if (@($Cases | Select-Object -Unique).Count -ne $Cases.Count) { throw 'Duplicate matrix cases' }
 $repo = (Resolve-Path "$PSScriptRoot/../..").Path
 $install = (Resolve-Path -LiteralPath $InstallRoot).Path.TrimEnd('\')
@@ -135,6 +139,11 @@ try {
         try {
             $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
             $scope=New-IsolatedPackageScope $stage
+            if($WorkerCloseMonitor) {
+                $monitor=Join-Path $stage 'system32/monitor-rpc-test.exe'
+                Copy-Item -LiteralPath $WorkerCloseMonitor -Destination $monitor
+                & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $monitor -PackageId ([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe"))))
+            }
             $pifName=if($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
             [ordered]@{case=$case.Name; package=$package; packageId=(Get-IsolatedPackageIdentity "$stage\system32\ntvdm.exe");
                 ntvdmSha256=(Get-FileHash "$stage\system32\ntvdm.exe").Hash;
@@ -146,8 +155,12 @@ try {
             $env:PATH="$stage\system32;C:\Windows\System32;C:\Windows"
             $env:TEMP='O:\tmp'; $env:TMP='O:\tmp'
             $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'; $env:MVDM_OBSERVER_SHORT_HISTORY='1'
-            $process=Start-Process $observer -ArgumentList @('C:\Windows\System32\cmd.exe',$install,$report,
-                '/d','/c',(Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs") -WindowStyle Hidden -PassThru
+            $observerArgs=@('C:\Windows\System32\cmd.exe',$install,$report,
+                '/d','/c',(Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs")
+            # Console-close legitimately interrupts the outer test batch too.
+            # Answer only its observed CMD confirmation, never inject into a VM.
+            if($ConsoleClose){$observerArgs+=@('--observe-console-input-marker','(Y/N)?','--observe-console-input-escaped','y\r')}
+            $process=Start-Process $observer -ArgumentList $observerArgs -WindowStyle Hidden -PassThru
             $deadline = [DateTime]::UtcNow.AddMilliseconds($TimeoutMs+15000)
             $known = @($process.Id)
             $desktop = 'NTVDMConsoleTest-' + $process.Id
@@ -177,16 +190,35 @@ try {
                             $pinned.Add($item)
                         }
                         $victim=$pinned | Where-Object Id -eq $service[0].ProcessId
-                        $victim.Kill()
+                        if($WorkerCloseMonitor) {
+                            $closeName=if($ConsoleClose){'ntcon.exe'}else{'ntvdm.exe'}
+                            $workers=@($owned | Where-Object Name -eq $closeName)
+                            if($workers.Count -ne 1){throw 'Expected one exact-stage guest worker'}
+                            $closeArgs=if($ConsoleClose){@('--close-node','1',"$($workers[0].ProcessId)")}else{@('--terminate',"$($workers[0].ProcessId)")}
+                            $close=Start-Process $monitor -ArgumentList $closeArgs -WindowStyle Hidden -PassThru -RedirectStandardOutput "$output/worker-close.stdout" -RedirectStandardError "$output/worker-close.stderr"
+                            try {
+                                if(!$close.WaitForExit(18000)){throw 'Worker-close RPC did not finish'}
+                                if($close.ExitCode){throw 'Worker-close RPC rejected'}
+                                if($victim.HasExited){throw 'Service died before management acknowledgement'}
+                            } finally {
+                                if(!$close.HasExited){$close.Kill();$close.WaitForExit()}
+                                $close.Dispose()
+                            }
+                        } else {$victim.Kill()}
                         foreach($item in $pinned){
                             $remaining=[Math]::Max(0,($deadline-[DateTime]::UtcNow).TotalMilliseconds)
-                            if(!$item.WaitForExit([int]$remaining)){throw "Service-loss survivor: $($item.Id)"}
+                            if(!$item.WaitForExit([int]$remaining)){throw "Lifecycle survivor: $($item.Id)"}
                         }
-                        [ordered]@{beforeScopeCleanup=$true;service=$victim.Id;
+                        [ordered]@{beforeScopeCleanup=$true;service=$victim.Id;managedWorkerClose=([bool]$WorkerCloseMonitor -and !$ConsoleClose);consoleClose=[bool]$ConsoleClose;
                             exited=@($pinned | ForEach-Object {[ordered]@{pid=$_.Id;exit=$_.ExitCode}})} |
                             ConvertTo-Json -Depth 5 | Set-Content (Join-Path $output "$($case.Name).service-loss.json")
                         $serviceLossPassed=$true
-                    } finally {foreach($item in $pinned){$item.Dispose()}}
+                    } finally {
+                        foreach($item in $pinned){
+                            try {if(!$serviceLossPassed -and !$item.HasExited){$item.Kill();$item.WaitForExit()}}
+                            finally {$item.Dispose()}
+                        }
+                    }
                 }
                 if (!$case.Enhanced) { continue }
                 # Include the system CMD intermediary, then follow only the
@@ -248,7 +280,7 @@ try {
         $terminal=if($ServiceLossMarkers){$serviceLossPassed -and $observation -match '(?m)^result=exited\r?$'}else{$exited}
         $pass=$started -and $valid -and $terminal -and !$errorText
         $results.Add([pscustomobject]@{case=$case.Name;dosonly=$case.DosOnly;enhanced=$case.Enhanced;
-            probeStarted=$started;progmanAndMode=$valid;flags=$flags;hwnd=$hwnd;observedDosOnly=$observedDosOnly;normalExit=$exited;serviceLoss=$serviceLossPassed;
+            probeStarted=$started;progmanAndMode=$valid;flags=$flags;hwnd=$hwnd;observedDosOnly=$observedDosOnly;normalExit=$exited;serviceLoss=($serviceLossPassed -and !$WorkerCloseMonitor);workerClose=($serviceLossPassed -and [bool]$WorkerCloseMonitor -and !$ConsoleClose);consoleClose=($serviceLossPassed -and [bool]$ConsoleClose);
             passed=$pass;error=$errorText;observer=$report})
         Write-Host "$($case.Name): started=$started desktop-and-mode=$valid normal-exit=$exited pass=$pass"
     }
