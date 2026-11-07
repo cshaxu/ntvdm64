@@ -517,6 +517,56 @@ separate feature or an authorized loss of input.
 
 ## Input handback service selection
 
+### Post-P4 closure of the receipt/replay design question
+
+The common wire's receipt fields do not make native CUI input reversible.
+`ntvwm-exe/presentation.c::ntvwm_presentation_input` requests ordinary input,
+decodes it to INPUT_RECORD and writes to the hidden Console. Its
+`return_unused_input` reads the actual remaining Console records and calls
+the untagged `ntcon_worker_prepend_keys`. The native Console does not retain
+the frontend's receipt, and a child can generate its own input. Therefore a
+new VM ledger must not infer exact original guest bytes by matching returned
+native records to previously supplied keys. Equal keys are not identities.
+The current VM provider explicitly rejects tagged returns and nonempty live
+receipt payloads; changing that alone cannot solve this downstream loss.
+Do not add a duplicate receipt framework or alter common wire ABI for this.
+
+The preserved input must instead be the actual returned records, followed by
+guest events not yet delivered to the native consumer. The existing native
+return loop prepends batches from the tail, preserving FIFO. After broker
+retirement has joined those callbacks, finishing closes new native admission;
+the executor must transfer the remaining queue before destroying its provider
+and before publishing terminal completion. VM destruction cancels the transfer
+through the existing continuation invalidation. Native worker death is not
+successful input handback.
+
+Original `keybd_io.c::NtPutInBuffer` writes the translated BIOS pair and tail
+before INT15 AX9102 and before K26/interrupt exit. That is an exact translated
+character boundary, unlike raw scan history. It still cannot stand for all
+make/release and control events. The producer must preserve that distinction;
+do not use BIOS-only input as the full implementation.
+
+The Microsoft DDK's VKD_Start_Paste copies its caller's buffer into VKD-owned
+storage for the explicit EBX VM. It may subsequently wait for that VM's INT16
+requests. Consequently, waiting for paste completion before returning the
+blocked command callback can deadlock: the DOS parent cannot issue the INT16
+that completes the paste until that callback returns. An eventual implementation
+must distinguish acceptance of owned replay data from later parent consumption;
+it cannot reuse the screen-frame rule requiring actual rendering as the input
+completion rule. This is a source-derived ordering constraint, not a runtime
+pass or approval to discard input. Concurrent existing paste, input ordering,
+OEM/extended-key conversion and cancellation still require actual evidence.
+
+ABI cross-check: OpenNT-4.5 nt/private/os2/client/thunk/include/vkd.inc lists
+Start_Paste at service index0A and separates left/right modifier bits; those
+bits are not Win32 dwControlKeyState. The DDK describes four-byte OEM/scan/shift
+entries, not INPUT_RECORD. Read-only DDK transcript:
+O:/repos.external/pcjs/documents/books/mspl13/win/w3ddkvxd/README.md,
+SHA256 6F31B0F9328E4319540C15794838353D90865215D3452E853E1D5110A17514BC.
+It is Microsoft documentation comparison evidence, never a runtime dependency.
+No production input filter, guessed inverse translation or paste call is added
+by this analysis; P4 remains the published baseline.
+
 Chapter36 of the same Microsoft DDK rules out VKD_Force_Keys as a direct
 per-VM handback: it delivers to the keyboard-focus VM and accepts no target VM
 argument. The retiring command's VM need not own focus. Do not silently change
@@ -530,6 +580,47 @@ and ordering still require proof before selecting it for handback. Neither
 service is currently called by the product. Reuse the existing BOP and
 guest-application acknowledgement transport for any selected handback; do not
 introduce another channel, native-thread guest writes or a polling loop.
+
+## Real VKD paste ownership counterexample094
+
+Independent probes win31_vm_paste_route.asm and win31_vm_paste_child.asm
+exercise the actual guest VKD service, not a stub. Read-only ABI source:
+OpenNT-4.5/nt/private/os2/client/thunk/include/vkd.inc, SHA256
+11BECFF50B3FED4F080A795925788F670C2BDE6F645926C8BF6198B61211B947.
+The background NASM/Watcom build exits0. Runtime uses the unchanged published
+P4 nb55 package, old configured addon and temporary PASTE.386 in isolated
+O:/tmp/w479m. The only setup mutation is a backed-up SYSTEM.INI device entry
+and independently authored probe files. Original guest binaries are untouched.
+
+The first launch through the DOS COMMAND window produces no result file and
+is not acceptance evidence: that route does not establish execution in the
+enclosing Win3.1 VM. Launching PASTE.COM directly from Program Manager's Run
+dialog yields the signed52-byte PST1 result. Single paste accepts q/scan10;
+the VxD changes its original source byte to z immediately after service return.
+The DOS consumer nevertheless reads1071 and receives completion10 (reference1,
+reason0), proving copied-buffer behavior in this run.
+
+The overlap case submits q then r, synchronously inside the same VxD API call,
+before returning to the DOS client. Both service calls report success. The DOS
+client polls original INT16 for36 BIOS ticks and reads only1372 (r); one callback
+reports20 (reference2, reason0). No q or first-paste cancellation callback is
+recorded. Thus a second successful Start_Paste does not prove preservation of
+the first pending paste. This is a concrete counterexample to using uncoordinated
+Start_Paste as lossless command input handback. Do not install that design.
+It does not prove every VKD version or paste mode behaves identically.
+
+Files under build/t479-s6-livecmd/paste094 retain build/launch receipts, map,
+listing, raw result and configuration backup. SHA256 result.bin:
+52489902BA50C25CE82C959AA25CB322F469479C76177454E893F59ECC598EE9;
+paste.386 C6B12F4DE43276DCEF51A56738B3277B91921CBAA9A662CD6AB1C7D910ECCD30;
+paste.com 2FEB9E5402418A8EA846E13AC8D1EEF025179D5070027A6C90E5ABA9164B2C39.
+Only the source provenance comment was corrected after the build.
+
+NIDDB records two DOS VM retirements. Observed Exit Windows confirmation and
+root25460 wait0/exit0 prove normal shutdown; the supervisor exits0, all nb55
+processes naturally disappear, SYSTEM.INI restores byte-for-byte, and only the
+three hash-verified temporary probe files are removed. This is bounded design
+evidence, not implementation or S6 closure. P4 remains the published runtime.
 
 ## Failure-atomic input read082--085
 
