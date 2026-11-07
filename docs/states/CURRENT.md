@@ -36,7 +36,7 @@ records the upstream audit and its evidence limits.
 
 ## Current Technical Baseline
 
-S9 package 44d63565-f8b2-47a4-b79f-42d4b8465197 remains deployed; the combined T480 candidate is undergoing verification and is not yet published.
+Combined T479/T480 package 25408bd6-e51b-489d-9255-0951c53ad9f3 is published at both release destinations after cached x86/x64 builds, Full16/16, CHAIN2 provider checks, governance and real Win3.1 transition, input, commands and normal-exit verification. Awaiting owner acceptance.
 
 
 ## Recent M0 Closures
@@ -46,4 +46,4 @@ S9 package 44d63565-f8b2-47a4-b79f-42d4b8465197 remains deployed; the combined T
 
 ## Recent Governance
 
-The integration remains in progress; combined release and validation are pending.
+The combined release and validation have completed; final delivery is being committed.
