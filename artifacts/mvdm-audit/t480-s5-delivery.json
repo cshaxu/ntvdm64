@@ -1,0 +1,411 @@
+{
+  "task": "T480 S5",
+  "baseline": "7f683ca81",
+  "runs": {
+    "admission": {
+      "start": {
+        "timeoutSeconds": 300,
+        "pid": 4216,
+        "command": "admission.cmd",
+        "started": "2026-11-07T00:15:36.834962Z"
+      },
+      "result": {
+        "pid": 4216,
+        "finished": "2026-11-07T00:16:02.6841195Z",
+        "exitCode": 0
+      }
+    },
+    "pp-before-x86": {
+      "start": {
+        "pid": 38860,
+        "command": "pp-before-x86.cmd",
+        "started": "2026-11-07T00:19:34.0236459Z",
+        "timeoutSeconds": 900
+      },
+      "result": {
+        "pid": 38860,
+        "finished": "2026-11-07T00:26:07.8885048Z",
+        "exitCode": 0
+      }
+    },
+    "pp-before-x64": {
+      "start": {
+        "timeoutSeconds": 900,
+        "pid": 16880,
+        "started": "2026-11-07T00:19:34.1761598Z",
+        "command": "pp-before-x64.cmd"
+      },
+      "result": {
+        "pid": 16880,
+        "exitCode": 0,
+        "finished": "2026-11-07T00:20:51.9241891Z"
+      }
+    },
+    "pp-after-x86": {
+      "start": {
+        "pid": 21352,
+        "timeoutSeconds": 1800,
+        "command": "pp-after-x86.cmd",
+        "started": "2026-11-07T00:26:14.1143139Z"
+      },
+      "result": {
+        "pid": 21352,
+        "finished": "2026-11-07T00:32:12.2608901Z",
+        "exitCode": 0
+      }
+    },
+    "pp-after-x64": {
+      "start": {
+        "command": "pp-after-x64.cmd",
+        "pid": 25696,
+        "started": "2026-11-07T00:26:14.1115348Z",
+        "timeoutSeconds": 1800
+      },
+      "result": {
+        "exitCode": 0,
+        "pid": 25696,
+        "finished": "2026-11-07T00:27:17.056973Z"
+      }
+    },
+    "equivalence": {
+      "start": {
+        "started": "2026-11-07T00:32:14.7719727Z",
+        "pid": 23156,
+        "command": "equivalence.cmd",
+        "timeoutSeconds": 300
+      },
+      "result": {
+        "finished": "2026-11-07T00:32:17.1929623Z",
+        "pid": 23156,
+        "exitCode": 0
+      }
+    },
+    "inventory-final": {
+      "start": {
+        "timeoutSeconds": 300,
+        "command": "inventory-final.cmd",
+        "started": "2026-11-07T00:26:32.3862103Z",
+        "pid": 34324
+      },
+      "result": {
+        "finished": "2026-11-07T00:26:57.1185779Z",
+        "exitCode": 0,
+        "pid": 34324
+      }
+    },
+    "build-x86": {
+      "start": {
+        "command": "build-x86.cmd",
+        "started": "2026-11-07T00:32:19.7356715Z",
+        "pid": 13800,
+        "timeoutSeconds": 1800
+      },
+      "result": {
+        "exitCode": 0,
+        "finished": "2026-11-07T00:36:08.5438318Z",
+        "pid": 13800
+      }
+    },
+    "build-x64": {
+      "start": {
+        "command": "build-x64.cmd",
+        "started": "2026-11-07T00:32:20.098338Z",
+        "pid": 25792,
+        "timeoutSeconds": 1800
+      },
+      "result": {
+        "exitCode": 0,
+        "pid": 25792,
+        "finished": "2026-11-07T00:33:44.1267847Z"
+      }
+    },
+    "stage": {
+      "start": {
+        "command": "stage.cmd",
+        "pid": 7332,
+        "started": "2026-11-07T00:36:10.6252702Z",
+        "timeoutSeconds": 1800
+      },
+      "result": {
+        "exitCode": 0,
+        "pid": 7332,
+        "finished": "2026-11-07T00:36:21.5534699Z"
+      }
+    },
+    "full": {
+      "start": {
+        "pid": 23188,
+        "command": "full.cmd",
+        "timeoutSeconds": 1800,
+        "started": "2026-11-07T00:36:25.6699973Z"
+      },
+      "result": {
+        "pid": 23188,
+        "finished": "2026-11-07T00:43:29.9543555Z",
+        "exitCode": 0
+      }
+    },
+    "gameplay": {
+      "start": {
+        "timeoutSeconds": 1800,
+        "command": "gameplay.cmd",
+        "pid": 35852,
+        "started": "2026-11-07T00:43:31.4928631Z"
+      },
+      "result": {
+        "finished": "2026-11-07T00:43:52.6727301Z",
+        "pid": 35852,
+        "exitCode": 0
+      }
+    },
+    "publish": {
+      "start": {
+        "started": "2026-11-07T00:43:57.131905Z",
+        "pid": 32356,
+        "timeoutSeconds": 1800,
+        "command": "publish.cmd"
+      },
+      "result": {
+        "pid": 32356,
+        "finished": "2026-11-07T00:44:01.4753519Z",
+        "exitCode": 0
+      }
+    },
+    "governance-final": {
+      "start": {
+        "pid": 12688,
+        "started": "2026-11-07T00:44:44.9003734Z",
+        "timeoutSeconds": 300,
+        "command": "governance-final.cmd"
+      },
+      "result": {
+        "pid": 12688,
+        "exitCode": 0,
+        "finished": "2026-11-07T00:45:30.2690888Z"
+      }
+    }
+  },
+  "equivalence": {
+    "passed": true,
+    "files": 6,
+    "consumers": 819,
+    "contract": "Identical complete emitted text, tokens and logical locations for every frozen actual consumer"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 422316,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6804,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 2932,
+        "CleanupMs": 727,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 515,
+        "CleanupMs": 623,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68542,
+        "CleanupMs": 701,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 51951,
+        "CleanupMs": 600,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 49365,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16442,
+        "CleanupMs": 558,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13408,
+        "CleanupMs": 592,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 88811,
+        "CleanupMs": 716,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12632,
+        "CleanupMs": 704,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29967,
+        "CleanupMs": 704,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30891,
+        "CleanupMs": 655,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5113,
+        "CleanupMs": 648,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7859,
+        "CleanupMs": 657,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11061,
+        "CleanupMs": 641,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5654,
+        "CleanupMs": 629,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7949,
+        "CleanupMs": 599,
+        "Passed": true
+      }
+    ]
+  },
+  "gameplay": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+  "publication": {
+    "published": "2026-11-07T00:44:01.2337719Z",
+    "destination": "O:\\repos.hobby\\ntvdm64\\.worktrees\\t480-mirror-diff-audit\\assets\\release",
+    "packageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+    "images": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "25BC4B96736AB881A72319A9F8905DF62C21DFEC4114FE2C52D664CD1BD4B108",
+        "Machine": 332,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "36E7157F94E9F375106C836D0A1ED2526FC8B5A0267BBD5DE1F65499B39962C1"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "3A2DB0AD30097F722E99CA0A1C9652FB5EE2D246528750E63C69F9E1D60B852D",
+        "Machine": 34404,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "8879C77C4C6B5EE4D0CDB2074A0956C8336D3788EBF975A4C981A1C4038709EA"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "A4F9109B667FA24C65CA2D6098CAD7607BD20AAB67073F1B34E7C7C60E773602",
+        "Machine": 34404,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "4ED7EFA75438751D132DB7A6722F6A957DC39BB8B57B062764DC3EE6233CD7F6"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "051DF557E4BE36CE2D1583AD1F32FCC2F3D0E01FDB95132BCA46C989E1E2E391",
+        "Machine": 34404,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "7901F5159A9199A86895E6081C085819973B77303905C26B3F835A0E77BA2368"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "4612C8181839A70D1FAA94CEE09D723E1A0E2317480D11459A8CB1ED60C9DABB",
+        "Machine": 332,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "B3493E1FFE0844D273C86BA455E5F314761AFB6A3347766262F056F6B2D2ED43"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "1946DCB6D33D00A1C1BB596615F9B31C171ACD21A5C7024DEDB061EAB0F31D75",
+        "Machine": 34404,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "68DD08AF9903D8B2C13F517D205678D23FAC070E558CCEB1C8544665473BDFE2"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "27F7E17E4EE44F0F78B445D783A668C61266C171E8D4BC64FBFDE80356EEFD18",
+        "Machine": 34404,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "83959199DEA7826D959568F5BCDEBC49198375D4F292BD615E882B8C5227A0C9"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "F9E7B9DED8BE5A97026C205626285FD5E06EE9225A2422910525637C9A929C06",
+        "Machine": 332,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "4F9D44BBDA89F9538F043EB7A463B636DA6E763299B876B118A52A8FCC4289F5"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "8111CE04562BADD1753181F64B2593A6D887E26F80690698B3DAE71CE51BD9B4",
+        "Machine": 332,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "B769277CC1468AF70A7447053268F183E60892D7018430F6FC806B71C38BD1C0"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "08A9BBC458ABD73E33ABAB0526A35CF3D4A0EE338BC70FC6A9F825D8C749A0C4",
+        "Machine": 332,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "BAFEA34F2411803F98226EA104EBE3680660BEEDB731C25C2C3C92FAAD460614"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "9228B2079CE9FEE480FD62D4390C8B34078A51964EBA04C4D68539B65C218044",
+        "Machine": 34404,
+        "PackageId": "5b376da7-2a95-474f-baee-b9b82c37096f",
+        "InputSha256": "64307861D39F47F22C749696A1594E50126341F04B091B049BE3B50CD880ABCA"
+      }
+    ],
+    "gates": 16,
+    "gameplay": "passed",
+    "push": false,
+    "installedWindowsWrite": false
+  },
+  "archive": {
+    "path": "artifacts/mvdm-audit/t480-s5-verification.zip",
+    "sha256": "396816301e04ca743a7a1df86666b08f091a2b8fd4015dba88c90bb0345ef734",
+    "files": 522
+  },
+  "inventory_sha256": "21d44010d62a44ef0581d959f83b25448c5e18e724108c37df75ada89a40fd16",
+  "limits": [
+    "No guest source/ASM/new functionality or tolerance. No O:/winnt write or push.",
+    "DOS4GW/NESticle remains the prior excluded case, not a pass.",
+    "Conservative retained adaptations and text metrics do not establish global mathematical minimality.",
+    "Historical S3 first Full failure remains recorded; no root cause is claimed by S5."
+  ]
+}

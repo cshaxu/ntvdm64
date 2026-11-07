@@ -1,0 +1,33 @@
+{
+  "baseline": "ab413287f76c6ffca6610c69ef206dccd76ae15b",
+  "before": "80a4cdbb1",
+  "afterReplay": "8e1f78fa4",
+  "backup": "codex/t480-before-rebase-ab413287f",
+  "start": {
+    "timeoutSeconds": 300,
+    "started": "2026-11-07T07:14:31.4681743Z",
+    "pid": 17896,
+    "command": "rebase-s8-check.cmd"
+  },
+  "result": {
+    "exitCode": 0,
+    "finished": "2026-11-07T07:15:09.2377845Z",
+    "pid": 17896
+  },
+  "commands": [
+    "@echo off",
+    "pwsh -NoProfile -ExecutionPolicy Bypass -File tools/governance/Verify-DocumentationGovernance.ps1",
+    "if errorlevel 1 exit /b %errorlevel%",
+    "git merge-base --is-ancestor ab413287f HEAD",
+    "if errorlevel 1 exit /b %errorlevel%",
+    "git diff --exit-code ab413287f HEAD -- assets/release",
+    "if errorlevel 1 exit /b %errorlevel%",
+    "git diff --exit-code codex/t480-before-rebase-ab413287f HEAD -- src/mvdm-host src/non-mvdm",
+    "if errorlevel 1 exit /b %errorlevel%",
+    "git diff --check",
+    "exit /b %errorlevel%",
+    ""
+  ],
+  "stdout": "Documentation governance verification passed.",
+  "scope": "Integration only; historical runtime evidence unchanged; no new build/runtime test/publication/push"
+}

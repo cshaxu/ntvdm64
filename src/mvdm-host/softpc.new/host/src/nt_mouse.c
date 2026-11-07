@@ -469,6 +469,7 @@ AssembleCallMask(call_mask);
 //
 
 mcs->button_status=os_pointer_data.button_l | os_pointer_data.button_r<<1;
+
 #line 574
 host_ica_unlock();  // synch with the event thread
 

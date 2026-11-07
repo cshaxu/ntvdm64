@@ -2166,6 +2166,7 @@ LOCAL VOID KbdIntDelay(VOID)
 //This function is called by the ICA with the ica lock
 void KbdEOIHook(int IrqLine, int CallCount)
 {
+
 #line 2251
    if (!bKbdEoiPending)  // sanity
        return;
@@ -2614,7 +2615,7 @@ buffer_status_8042 IFN0()
 
 LOCAL VOID codes_to_translate  IFN0()
 {
-char tempscan;
+	char tempscan;
 
 while (!pending_8042 && (free_6805_buff_size < BUFF_6805_VMAX) && !keyboard_interface_disabled && !output_full)
 	{

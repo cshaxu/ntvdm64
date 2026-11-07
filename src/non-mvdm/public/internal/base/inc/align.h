@@ -98,6 +98,7 @@ Environment:
 #line 98
 #error Unsupported excluded original configuration
 #else  // none of the above
+
 #line 102
 #error "Unknown alignment requirements for align.h"
 #endif  // none of the above

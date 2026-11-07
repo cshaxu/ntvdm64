@@ -3346,8 +3346,8 @@ TYPEC4:
 #line 3339
 #endif /* SFELLOW */
 #line 3340
-	  case 0xfe:
-		  c_cpu_unsimulate();
+		  case 0xfe:
+			  c_cpu_unsimulate();
 			  /* Never returns (?) */
 #line 3343
 		  default:
@@ -4511,6 +4511,7 @@ NEXT_INST:
    took_absolute_toc = FALSE;
 
    SETUP_HOST_IP(p);
+
 #line 4507
    /*
       THIS IS A CHEAT.

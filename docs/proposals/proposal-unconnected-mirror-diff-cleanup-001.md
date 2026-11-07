@@ -2,8 +2,8 @@
 
 ## Admission and objective
 
-This candidate is the second queued package, after the original-source first
-review. It allocates no numeric T and does not replace the active packet.
+This proposal is admitted in the dedicated mirror-diff review worktree;
+[Current](../states/CURRENT.md) owns its numeric admission and active packet.
 The historical 2026-10-29 request and checkpoint below are retained as
 evidence, not the current queue order or a completed review.
 
@@ -38,7 +38,7 @@ checks; changed inputs or counterevidence require renewed checks. Neither a
 prior sign-off nor lack of a trace is a substantive independent decision.
 This review may correct unjustified original inclusion or exclusion when
 encountered; broader autonomous-implementation questions are recorded for
-the third review, without deferring cleanup necessary to this task's repairs.
+the separate project-wide implementation review, without deferring cleanup necessary to this task's repairs.
 
 ## Scope and method
 
@@ -76,7 +76,7 @@ the third review, without deferring cleanup necessary to this task's repairs.
 | S2 | Independently review and restore proven unconnected file, header, branch and provider differences. | All consumers and conditional selections are checked; original restoration is verified without harming connected changes or supported configurations. |
 | S3 | Independently review connected mirror differences by original owner and minimize each safely. | Original contract and smallest feasible binding assessed; necessary fixes and retained differences have evidence; relevant normal, negative and teardown tests cover changes. Split by complete owner as needed. |
 | S4 | Reconcile reversed admission/exclusion decisions, affected tests, registrations and handoff to the project-wide review. | No prior decision is accepted solely on prior authority; related corrections are implemented and residual broader implementation findings have stable IDs. |
-| S5 | Independently reconcile the complete hunk ledger and run applicable build, regression and delivery gates. | Every difference is restored, minimized or justified; source/build identities, limitations and evidence are recorded for the third review. |
+| S5 | Independently reconcile the complete hunk ledger and run applicable build, regression and delivery gates. | Every difference is restored, minimized or justified; source/build identities, limitations and evidence are recorded for the separate project-wide implementation review. |
 
 These are proposed stages; admission may split them into sequential bounded S
 packets without dropping review coverage or altering the active T.

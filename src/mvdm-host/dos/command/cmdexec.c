@@ -331,7 +331,7 @@ VOID cmdCheckBinary (VOID)
     strcpy ((PCHAR)&pSCSInfo->SCS_CmdTail[4],lpAppName);
     if (CommandTailLen) {
         pSCSInfo->SCS_CmdTail[4+AppNameLen] = ' ';
-        RtlCopyMemory ((PCHAR)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1,
+        RtlCopyMemory ((PCHAR)((ULONG)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1),
                 lpCommandTail,
                 CommandTailLen);
     }
@@ -467,7 +467,7 @@ VOID cmdCreateProcess ( VOID )
     if (dwRet != ERROR_SUCCESS) {
         SetLastError(dwRet);
         Status = FALSE;
-    }
+        }
     else {
 #line 380
         Status = CreateProcess (

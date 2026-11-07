@@ -1,0 +1,69 @@
+{
+  "changes": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "line": 107,
+      "before": "#endif",
+      "after": "#endif // _NTEXAPI_",
+      "reason": "restore original matching outer include-guard comment",
+      "matching_guard": "#ifndef _NTEXAPI_",
+      "before_sha256": "edf552d19810acb726154a5e8bcea297c1449c6200c2641dfdf22528cb927997",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "after_sha256": "fae4c43815b02d7d637b1d771f0befa010f1062719ee4cf65989e642747d60c3"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "line": 39,
+      "before": "#endif",
+      "after": "#endif // _NTREGAPI_",
+      "reason": "restore original matching outer include-guard comment",
+      "matching_guard": "#ifndef _NTREGAPI_",
+      "before_sha256": "d942e1008f34b2203c43a60c9e19cfa3821881dba0b571ef5cfb022c5b9f8c3d",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "after_sha256": "c4f7765e4bbdd596fdd89833d5a806c77efc01e9d8377e438488aace376e6a9f"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "line": 391,
+      "before": "#endif",
+      "after": "#endif  // _NTRTL_",
+      "reason": "restore original matching outer include-guard comment",
+      "matching_guard": "#ifndef _NTRTL_",
+      "before_sha256": "9f053d52b77df22b329c64d0b138ac3df760f3ea7d7fb0796c20564a7433caa9",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "after_sha256": "4672e4cdfdd11cbdcc581e2e8e3f33740dee039e25ccb06f68cadb9e9d5805b9"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "line": 13,
+      "before": "#endif",
+      "after": "#endif  // _NTURTL_",
+      "reason": "restore original matching outer include-guard comment",
+      "matching_guard": "#ifndef _NTURTL_",
+      "before_sha256": "9db2ed0cd6cb791cd9d53b9eff623b3d02a7010ccd858c7ab7aa7cdc07f142ef",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "after_sha256": "6502c08cf8d3c162f80be6816e8e93250d7e2993ee1884bb9a63e9c08756d9e3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "line": 412,
+      "before": "#endif",
+      "after": "#endif  // !_USERK_",
+      "reason": "restore original matching outer include-guard comment",
+      "matching_guard": "#ifndef _USERK_",
+      "before_sha256": "65ef753241ec0c6fcd1738813ac3aadca373a3d92c4b1541380234b7fbd50974",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "after_sha256": "b0de135fbac7f436aaed675dae3aaf20be944b59998aebed5622b3fa188eca73"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "line": 45,
+      "before": "}",
+      "after": "} // RapStructureSize",
+      "reason": "restore original function-ending comment without inserting original blank line",
+      "before_sha256": "3306e7628dc242c6e2dd260ccb4731dbe096dd3246a884a59f97c641362e8f02",
+      "original_sha256": "b8a2677d4140e82eb197a1d16076603bf34ba661a7006fa8ac23fa1c0618e6e6",
+      "after_sha256": "74cb6b9ce935f6624903c7472740088baada906ba1edd53a20ccf85d2c5e43c9"
+    }
+  ]
+}

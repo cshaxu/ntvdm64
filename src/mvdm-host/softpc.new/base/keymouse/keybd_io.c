@@ -1590,7 +1590,7 @@ void kb_setup_vectors(void)
     pMinConsecutiveTicks = (word *)  (Start_of_M_area + ((KbdSeg<<4)+w+8));
 
 #if defined(MONITOR)
-    phy_base   = (double_word)KbdSeg << 4;
+   phy_base   = (double_word)KbdSeg << 4;
 
      /* key tables */
    shift_keys  =  phy_base + *pkio_table++;

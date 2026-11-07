@@ -1050,6 +1050,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
     BOOL AeAutoDebug;
     WORD wDebugButton;
 
+
 #line 1186
     if (!gfDebugExceptions) {
 

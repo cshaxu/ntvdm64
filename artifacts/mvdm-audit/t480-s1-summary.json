@@ -1,0 +1,43 @@
+{
+  "head": "6850d28a58318462c826dc77efdf9b341366b90b",
+  "census_sha256": "bf4f827fcbfd4646f9fff327d65abda5d58d7bea24b5af5a16b7050b2ed3b699",
+  "supplemental_sha256": "889e54cfc94b251313f6705a35115c9dbc84127926fa134fdcce81e5aa8c9596",
+  "script_sha256": "2eafd09f8fba2012e968bff6abf23a863aa9fd3f42b570203aea154daf16b235",
+  "scope": "Tracked host C/H only; no guest file contents read",
+  "counts": {
+    "text-different": 581,
+    "byte-identical": 479
+  },
+  "roots": {
+    "src/mvdm-host": {
+      "text-different": 440,
+      "byte-identical": 439
+    },
+    "src/non-mvdm": {
+      "text-different": 141,
+      "byte-identical": 40
+    }
+  },
+  "total_files": 1060,
+  "total_text_hunks": 9376,
+  "source_pins": {
+    "match": 1060
+  },
+  "drift": {
+    "unchanged": 650,
+    "changed": 409,
+    "no-prior-current-pin": 1
+  },
+  "added_since_census": [
+    "src/mvdm-host/vdd/samples/mscdex/vdd/mscdex.h",
+    "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+    "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/public/sdk/inc/vddsvc.h"
+  ],
+  "not_in_census": [],
+  "not_in_tree": [],
+  "hunks_with_error": 3680,
+  "hunks_with_line": 8629,
+  "limits": "Lexical SequenceMatcher blocks, not semantic fixes or minimal diff. Existing #error/#line policy retained; connection unverified. No runtime coverage inference."
+}

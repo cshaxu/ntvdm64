@@ -296,6 +296,7 @@ Return Value:
 
 --*/
 {
+
 #line 289
     Ldt = (PVOID)Sim32GetVDMPointer(
         (getAX() << 16),

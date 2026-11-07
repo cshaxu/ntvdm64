@@ -293,7 +293,7 @@ void rs232_io()
 	** Yes both XT and AT BIOS's really do this.
 	*/
 	setAH( getAH()-3 );
-       break;
+      	break;
    }
    mvdm_softpc_report_setup_hardware_probe("int14-leave", getAH(), getDX());
 #line 293

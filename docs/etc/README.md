@@ -1,5 +1,11 @@
 # Supporting Material
 
+[T480 S5 final minimization](evidence/m0-t480-s5-final-minimization.md) records the complete host inventory, final reductions and verification limits.
+
+[T480 S4 registration reconciliation](evidence/m0-t480-s4-registration-reconciliation.md) binds the affected source versions, registrations and historical validation receipts.
+
+[T480 S3 connected restoration](evidence/m0-t480-s3-connected-restoration.md) records original expression, structure and naming recovery and its verification limits.
+
 [T479 S5 command continuation](operations/m0-t479-s5-command-continuation.md) fixes the checked BOP/VMM return boundary and finite implementation order.
 [Diagnostic evidence](evidence/m0-t479-s5-continuation-diagnostic.json) retains the failed exit and passing traced/untraced Win3.1 controls; real commands are not yet connected.
 
@@ -1315,3 +1321,9 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S8 unchanged shared-library delivery](evidence/m0-t479-s8-shared-delivery.md).
 
 - [T479 S9 CHAIN2 delivery](evidence/m0-t479-s9-delivery.md): upstream alignment, regression controls and final qualification.
+- [T480 S1 admission](evidence/m0-t480-s1-admission.md): independent worktree and baseline; main task reserved.
+- [T480 mirror-diff stage plan](operations/m0-t480-mirror-diff-plan.md): finite host C/H difference review and minimization.
+
+- [T480 S1 brief, audit and plan](evidence/m0-t480-s1-brief-audit-plan.md): pinned host-only diff census, stale candidate corrections and remaining consumer evidence.
+- [T480 S1 actual build and consumer closure](evidence/m0-t480-s1-build-consumers-closure.md): worktree builds, complete file consumers, link ownership, physical hunk coordinates and bounded restoration candidates.
+- [T480 S2 whitespace restoration](evidence/m0-t480-s2-whitespace-restoration.md): finite candidate dispositions, original whitespace recovery, all-consumer equivalence and local delivery evidence.

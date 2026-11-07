@@ -1429,6 +1429,7 @@ ica_intack IFN1(IU32 *, hook_address)
 #line 1767
 #error Excluded unsupported monitor PIC IRET hook
 #else
+
 #line 1545
 /*
  *  obsolete, to be removed... but the current ntvdm emulator libs ref

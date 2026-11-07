@@ -347,7 +347,7 @@ VOID demCloseFCB (VOID)
 {
 HANDLE	hFile;
 
-    hFile = GETHANDLE(getAX(), getSI());
+    hFile = GETHANDLE (getAX(),getSI());
 
     if(hFile == 0) {
 

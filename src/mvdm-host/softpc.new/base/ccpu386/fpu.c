@@ -5849,7 +5849,7 @@ GLOBAL	void NpxStackRegAsString IFN3(FPSTACKENTRY *, fpStPtr, char *, buf, IU32,
 /* this one is only ever used in trace.c and only if pure CCPU */
 GLOBAL char * getNpxStackReg IFN2(IU32, reg_num, char *, buffer)
 {
-	reg_num += (IU32)(TOSPtr - FPUStackBase);
+	reg_num += TOSPtr - FPUStackBase;
 	NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);
 	return buffer;
 }

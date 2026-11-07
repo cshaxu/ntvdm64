@@ -1,0 +1,306 @@
+{
+  "head": "806bf16084874ff32a1813eaff5013712ae79cd0",
+  "targets": [
+    {
+      "target": "ntvdm.exe",
+      "graph": "msvc-x86-release/worker",
+      "compile_count": 493,
+      "image_sha256": "aeb9390c7459d35cb1bd597291c3a133d09e75e4d48c8b97495baef47a184bbb",
+      "maps": {
+        "nthook32.dll.map": "6675deb8f86e08bd5051ddef1cc74796a0c5940e147f116de4ffb206e4d178da",
+        "ntvdm.exe.map": "e4724b1d1a76a83ab8fbc14fa801e48e7c4f0bb67d13cf7a4a740ae3f3a51b06",
+        "VCDEX.DLL.map": "cc4606b9f2aec076fd11b6fd154557bac89f1418c1f3bf929af36032d4692999"
+      }
+    },
+    {
+      "target": "VCDEX.DLL",
+      "graph": "msvc-x86-release/worker",
+      "compile_count": 494,
+      "image_sha256": "36e7157f94e9f375106c836d0a1ed2526fc8b5a0267bbd5de1f65499b39962c1",
+      "maps": {
+        "nthook32.dll.map": "6675deb8f86e08bd5051ddef1cc74796a0c5940e147f116de4ffb206e4d178da",
+        "ntvdm.exe.map": "e4724b1d1a76a83ab8fbc14fa801e48e7c4f0bb67d13cf7a4a740ae3f3a51b06",
+        "VCDEX.DLL.map": "cc4606b9f2aec076fd11b6fd154557bac89f1418c1f3bf929af36032d4692999"
+      }
+    },
+    {
+      "target": "VDMREDIR.dll",
+      "graph": "msvc-x86-release/worker",
+      "compile_count": 536,
+      "image_sha256": "4e63f058920002bcd4cd0b53921a9b74c0bb273ce9548735f2b47c944ab2ae33",
+      "maps": {
+        "nthook32.dll.map": "6675deb8f86e08bd5051ddef1cc74796a0c5940e147f116de4ffb206e4d178da",
+        "ntvdm.exe.map": "e4724b1d1a76a83ab8fbc14fa801e48e7c4f0bb67d13cf7a4a740ae3f3a51b06",
+        "VCDEX.DLL.map": "cc4606b9f2aec076fd11b6fd154557bac89f1418c1f3bf929af36032d4692999"
+      }
+    },
+    {
+      "target": "nthook32.dll",
+      "graph": "msvc-x86-release/worker",
+      "compile_count": 52,
+      "image_sha256": "83b54165d43f8d5bb160db0afd44c95e87a20fd69e06d4f19c18ba30b89b00f4",
+      "maps": {
+        "nthook32.dll.map": "6675deb8f86e08bd5051ddef1cc74796a0c5940e147f116de4ffb206e4d178da",
+        "ntvdm.exe.map": "e4724b1d1a76a83ab8fbc14fa801e48e7c4f0bb67d13cf7a4a740ae3f3a51b06",
+        "VCDEX.DLL.map": "cc4606b9f2aec076fd11b6fd154557bac89f1418c1f3bf929af36032d4692999"
+      }
+    },
+    {
+      "target": "wow32.dll",
+      "graph": "msvc-x86-release/wow32",
+      "compile_count": 233,
+      "image_sha256": "9a91ca60643fd0b626f8fa0b6cb4cb4836dc1f4125a95def9bf7b4e2c717045e",
+      "maps": {
+        "wow32.dll.map": "b829e69987a00831b5f69aca635b8075eefd5b30222696b24bb9bb49b13dfe32"
+      }
+    },
+    {
+      "target": "ntvwm.exe",
+      "graph": "msvc-x64-release/worker",
+      "compile_count": 63,
+      "image_sha256": "ee4659f74cf9e2622cd39831f4ca27746269072d28fb766bd0b2d15e89e6e34f",
+      "maps": {
+        "ntvwm.exe.map": "e4ec1cc4b3f84d874f6155f89542a986ff6e31339136e64b062be61262c19922"
+      }
+    },
+    {
+      "target": "ntcon.exe",
+      "graph": "msvc-x64-release/frontend",
+      "compile_count": 66,
+      "image_sha256": "d681edf588efa4cb0fb0afb637656bbb451baf56d3b2b1a4dc17dc64e45150c3",
+      "maps": {
+        "ntcon.exe.map": "b7616ace4cbb1e2eb17f916304aef66d96a07ec88335ddbb0cd18f2f8a43c133"
+      }
+    },
+    {
+      "target": "ntmon.exe",
+      "graph": "msvc-x64-release/monitor",
+      "compile_count": 15,
+      "image_sha256": "319f41d284c27500757fe1d992fbaeb7ac8278aed600f4394c959c95fab221b2",
+      "maps": {
+        "ntmon.exe.map": "7269047304eb0011eb381ecf54487691d8fc1c4f6380e0207c4f61c286656dd9"
+      }
+    },
+    {
+      "target": "run16.exe",
+      "graph": "msvc-x64-release/launcher",
+      "compile_count": 58,
+      "image_sha256": "30d42dd50acb07787ee38392a6812ca99551254e7a9783d1e834a3ea4ee14514",
+      "maps": {
+        "run16.exe.map": "d0db43e8e46c4116e89fc6a731b33416ee47de78f4d158ff86d428654fd64993"
+      }
+    },
+    {
+      "target": "ntsrv.exe",
+      "graph": "msvc-x64-release/service",
+      "compile_count": 61,
+      "image_sha256": "1490e03d76ee703ee2e5981e6cbfc414768de27e360b30ad592388b4d9020a61",
+      "maps": {
+        "ntsrv.exe.map": "61e4bb4519ffbf21ead30a3e15005380d8f84936175b6f2be352f5c250f1bbb6"
+      }
+    },
+    {
+      "target": "nthook64.dll",
+      "graph": "msvc-x64-release/hook",
+      "compile_count": 25,
+      "image_sha256": "b098773ad1fc713eb7712c56f8ffc762539ae0aea0de50f080ccb3fd103f05d7",
+      "maps": {
+        "nthook64.dll.map": "c087901a7318be1eaaaced151b58a3ad44d78ecbd96e51a0973ddacafec329c8"
+      }
+    }
+  ],
+  "compile_commands": 1063,
+  "files": 1060,
+  "hunk_categories": {
+    "product-input-substantive-review": 2132,
+    "contains-existing-exclusion-review-mixed-content": 3680,
+    "diagnostic-line-or-blank-insertion": 3418,
+    "whitespace-restoration-lead": 146
+  },
+  "source_edits": "none in host mirrors; owner explicitly admitted existing guest changes separately without audit",
+  "runs": {
+    "x86": {
+      "started": "2026-11-06T21:41:42.1668954Z",
+      "pid": 37452,
+      "exitCode": 0,
+      "finished": "2026-11-06T21:48:12.4742882Z"
+    },
+    "x64": {
+      "exitCode": 0,
+      "pid": 27368,
+      "started": "2026-11-06T21:42:09.9320129Z",
+      "finished": "2026-11-06T21:46:27.8360229Z"
+    },
+    "consumer-r4": {
+      "finished": "2026-11-06T21:53:55.839144Z",
+      "pid": 14272,
+      "exitCode": 0
+    },
+    "preprocess": {
+      "pid": 40768,
+      "finished": "2026-11-06T21:53:53.7581503Z",
+      "exitCode": 0
+    }
+  },
+  "preprocessing": [
+    {
+      "source": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "object": "msvc-x86-release/worker/obj/keymouse/keybd_io.obj",
+      "command": "cl.exe /nologo /TC /E /MT /W4  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/session\" /DMONITOR /O2 O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "exit_code": 0,
+      "output": "1.i",
+      "output_sha256": "cc1550d4e352e9755cb9b86c6fb9077a2f3cf362d1b1317e4a305ccbaf62c809"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "object": "msvc-x86-release/worker/obj/ccpu/fpu.obj",
+      "command": "cl.exe /nologo /TC /E /MT /W4  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/session\" /O2 O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "exit_code": 0,
+      "output": "2.i",
+      "output_sha256": "36486fa0735717c525b5e9076ebe77dc5c65a7b9073f210457eb3c86f5061fe2"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "object": "msvc-x86-release/worker/obj/video/egawrtm0.obj",
+      "command": "cl.exe /nologo /TC /E /MT /W4  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/session\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/build/.ninja/msvc-x86-release/worker/generated\" /O2 O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "exit_code": 0,
+      "output": "3.i",
+      "output_sha256": "c071c5e7b59ce708104c03af8ffa4b0b2fe2013bbca6704d3c840ccaae6512fb"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "object": "msvc-x86-release/worker/obj/video/egwrtm12.obj",
+      "command": "cl.exe /nologo /TC /E /MT /W4  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/session\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/build/.ninja/msvc-x86-release/worker/generated\" /O2 O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "exit_code": 0,
+      "output": "4.i",
+      "output_sha256": "30fc1474fe3e7e06e022571a14822d426d7497e7225809949548ec504fd156f4"
+    },
+    {
+      "source": "src/mvdm-host/dpmi32/dpmiint.c",
+      "object": "msvc-x86-release/worker/obj/dpmi/dpmiint.obj",
+      "command": "cl.exe /nologo /TC /E /MT /W4  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\"  /D_X86_ /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/session\" /DLINKED_INTO_MONITOR /O2 O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/dpmi32/dpmiint.c",
+      "exit_code": 0,
+      "output": "5.i",
+      "output_sha256": "01f5765e25600dcb48d3bed40b1bf9d2695988b1a4598e49251d8c4ecb236d96"
+    },
+    {
+      "source": "src/mvdm-host/wow32/wow32.c",
+      "object": "msvc-x86-release/wow32/obj/wow32.obj",
+      "command": "cl.exe /nologo /TC /E /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/ntvdm-exe/session\" /DWOW_ORIGINAL_THUNK_BUILD /DWOWSysErrorBox=wow_user_sys_error_box /O2 O:/repos.hobby/ntvdm64/.worktrees/t480-mirror-diff-audit/src/mvdm-host/wow32/wow32.c",
+      "exit_code": 0,
+      "output": "6.i",
+      "output_sha256": "591689d66d2c70000fa96eece924d0cb32553fc627a6233b804223ac9ac39cb6"
+    }
+  ],
+  "receipt_files": {
+    "build/t480-s1/consumer-r4/msvc-x64-release-frontend-deps.txt": "0319337056ac0a30c4b056414f2f45f848387705a7df6e53102871dea885955f",
+    "build/t480-s1/consumer-r4/msvc-x64-release-hook-deps.txt": "866227acd898647a843a60529d7674f5bd33b4be0e88d87b2ff068c2e5d39340",
+    "build/t480-s1/consumer-r4/msvc-x64-release-launcher-deps.txt": "9c78ea775b86bbef671264d3bf48b4487b9465d9392792de86335ea7abd7ad28",
+    "build/t480-s1/consumer-r4/msvc-x64-release-monitor-deps.txt": "5f6ec53dca1e95435e59905a845d4cc98f8070ac9d11231f2c146f999638e52e",
+    "build/t480-s1/consumer-r4/msvc-x64-release-service-deps.txt": "942f6d0217591329f6e2548e86b59a230b8b89de5c9b782fb522b392bbdbc440",
+    "build/t480-s1/consumer-r4/msvc-x64-release-worker-deps.txt": "2ba5be8e2bc66b11a5f71d446963e57dc9f1cf63be1ca9dfbc31767b81a2eac0",
+    "build/t480-s1/consumer-r4/msvc-x86-release-worker-deps.txt": "3cf956b06f048b1b5832d4ea8e4e7116a7ac5bf73b249840dd0e9e6571227fbb",
+    "build/t480-s1/consumer-r4/msvc-x86-release-wow32-deps.txt": "1bf8d00e58800ac045e471ac3e7f23348cd93f661e78cafe291b33a46954c00e",
+    "build/t480-s1/consumer-r4/ntcon.exe-commands.txt": "5069358fd0ffc0b540ce9fb42894a8e1fedaefd29b9429a586ba9f97839aea87",
+    "build/t480-s1/consumer-r4/nthook32.dll-commands.txt": "6701dc8f0ce9e747569b20063628b54a3402d99360ddf6e0d8835255ae96e327",
+    "build/t480-s1/consumer-r4/nthook64.dll-commands.txt": "38923f91807da851e1658c5302f2e1e06ba6e3db1d7f8f5dd480f02f6b1eb0e0",
+    "build/t480-s1/consumer-r4/ntmon.exe-commands.txt": "2dcb2e4aac53df33ca214e05348c56244e103975d4b96747f18adc8e2a50b689",
+    "build/t480-s1/consumer-r4/ntsrv.exe-commands.txt": "bf88a0f0ef623d6959dfe4d974da9d9506c038b2290d33588154858739489af3",
+    "build/t480-s1/consumer-r4/ntvdm.exe-commands.txt": "b9940f4045b9bebee5b298eec3b2c4b5a1eb26f6d8d0644ba64ebffa67659cf4",
+    "build/t480-s1/consumer-r4/ntvwm.exe-commands.txt": "dcc3427bd1dfd5989c9c9efeb130c385b5df83d5ca00fa9bf3cae86de665d8f5",
+    "build/t480-s1/consumer-r4/run16.exe-commands.txt": "9b7c68d92aae07ac8aa82ed52b88aadda2e0e7a1016a5249e02c7a0ba01ca59d",
+    "build/t480-s1/consumer-r4/VCDEX.DLL-commands.txt": "5dae118ab0a4175aa04b239fb179413609ff16baf4dcb595083e2371094bbcde",
+    "build/t480-s1/consumer-r4/VDMREDIR.dll-commands.txt": "f074ae6b47f11dab7ed6279f5a5e50e132e8340611d4317af1dabd9215b5320d",
+    "build/t480-s1/consumer-r4/wow32.dll-commands.txt": "085318c4aa4abe75ce4f76fdfbfe7b7b41e049d2d6d3824db8c6c8c6500a3f42",
+    "build/t480-s1/preprocess-r1/1.cmd": "3530e4a7903778023c0f6339e4e11067210ea276d12ce3498f895700660a53ad",
+    "build/t480-s1/preprocess-r1/1.i": "cc1550d4e352e9755cb9b86c6fb9077a2f3cf362d1b1317e4a305ccbaf62c809",
+    "build/t480-s1/preprocess-r1/1.stderr": "d225e38118fdfb735e30061abbef2618363b0fda0014091540fdfc5614bbac70",
+    "build/t480-s1/preprocess-r1/2.cmd": "04f76ed39cbdc4e154a6bb502e91b5e71a46a6996fdacac209186c1419e743d0",
+    "build/t480-s1/preprocess-r1/2.i": "36486fa0735717c525b5e9076ebe77dc5c65a7b9073f210457eb3c86f5061fe2",
+    "build/t480-s1/preprocess-r1/2.stderr": "7aba3f4903b90836b5ff095ef1b80b1633333a8737838f7f59ab813b80e18352",
+    "build/t480-s1/preprocess-r1/3.cmd": "45e41aada64e024a7c5c08b7e6ac150df8619845801573a539036aeb00c7e0b7",
+    "build/t480-s1/preprocess-r1/3.i": "c071c5e7b59ce708104c03af8ffa4b0b2fe2013bbca6704d3c840ccaae6512fb",
+    "build/t480-s1/preprocess-r1/3.stderr": "4b27d7085c0a98bf397c9d4184704b37ddfc390d776d245c26797be256338517",
+    "build/t480-s1/preprocess-r1/4.cmd": "6a10240d499bef327bdeb5c10ca3ad011e175fe5135777535d5e330c8350b09f",
+    "build/t480-s1/preprocess-r1/4.i": "30fc1474fe3e7e06e022571a14822d426d7497e7225809949548ec504fd156f4",
+    "build/t480-s1/preprocess-r1/4.stderr": "5a35f96a2b928ec4fc6aee22069061ac21c081efc7bec019dc8a14c09f451804",
+    "build/t480-s1/preprocess-r1/5.cmd": "7562af0e43c044a9f75c4991463ff30652d6a941a2fd3884e00e6a53fb74f40e",
+    "build/t480-s1/preprocess-r1/5.i": "01f5765e25600dcb48d3bed40b1bf9d2695988b1a4598e49251d8c4ecb236d96",
+    "build/t480-s1/preprocess-r1/5.stderr": "81c30a059de5e0b309ad60adfbef204683731daadb58eea3f35db7dec1754adb",
+    "build/t480-s1/preprocess-r1/6.cmd": "8934066b0db94dc7763bf30b1ce36dc70d0b8ea561783b10ca6204435f84dbd7",
+    "build/t480-s1/preprocess-r1/6.i": "591689d66d2c70000fa96eece924d0cb32553fc627a6233b804223ac9ac39cb6",
+    "build/t480-s1/preprocess-r1/6.stderr": "e0e1af157aeeb677d930493cb327bb06e24e5790befc31422642468f2de5ac21",
+    "build/t480-s1/preprocess-r1/summary.json": "f1de48daa42812192975e17035d8406263d7638981ef599d93e8d06a097e02e0",
+    "build/t480-s1/build-evidence/build-x64.cmd": "da56e59d90f3c9588a9305c6625de6c4cb912f6eb379431a25f6bd891695b598",
+    "build/t480-s1/build-evidence/build-x86.cmd": "de8d517338a3a7867f27b2a138f9bf608b90a125040f76e651479c3408ca227d",
+    "build/t480-s1/build-evidence/collect-r2.ps1": "2533f17aec81269c9e229cedec9d3b5dc5afc3fe09515dc46fa9db80c7b51fee",
+    "build/t480-s1/build-evidence/collect-r3.ps1": "b53e179fc9132dce1820a87a54ea4dcbe3be1189599b5d3317606629b4600dee",
+    "build/t480-s1/build-evidence/collect-r4.ps1": "22a2c90fcecc7fa6c322d6541995c3beb02834a63310ff2b99d2290da73c1d43",
+    "build/t480-s1/build-evidence/collect.ps1": "eb9bf42e1a988d4be57b8befc2aff659f456a0ed2ae5674afe91d35d24a1848a",
+    "build/t480-s1/build-evidence/consumer-r2.result.json": "1a352707f6f78c63b39827c9e31160475392f0fe5530180d8a43556b89b0777c",
+    "build/t480-s1/build-evidence/consumer-r2.started.json": "412e6cdf1f34add41636e0558c67c770767b2935c14453209368f6153f504b8c",
+    "build/t480-s1/build-evidence/consumer-r2.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/t480-s1/build-evidence/consumer-r2.stdout.log": "df1ad2984a1c64374ed9d571db59ee7505ac867ad9ba468dc4388db874e3ea77",
+    "build/t480-s1/build-evidence/consumer-r3.result.json": "bf6fa83fac8ae1ebaedc8d4f908cf360c6d939b5e59ca4750a8ac3fdef0f58ea",
+    "build/t480-s1/build-evidence/consumer-r3.started.json": "5de7e890a092dd2d13af14c055a92b2f46929bced83f3f88d177cb2c82cf0c8b",
+    "build/t480-s1/build-evidence/consumer-r3.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/t480-s1/build-evidence/consumer-r3.stdout.log": "b43fba6c6ed9bf74d1ce04d286dc2636db7228c8b319a3a67064c81175eb7bda",
+    "build/t480-s1/build-evidence/consumer-r4.result.json": "7a23501475eead508c844889cada732b9af20218e974a96463b430298d0ead17",
+    "build/t480-s1/build-evidence/consumer-r4.started.json": "4b5a601187427adc6ada0ab9156ef97e3ccb5fda441831615c60c10779fc1385",
+    "build/t480-s1/build-evidence/consumer-r4.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/t480-s1/build-evidence/consumer-r4.stdout.log": "b43fba6c6ed9bf74d1ce04d286dc2636db7228c8b319a3a67064c81175eb7bda",
+    "build/t480-s1/build-evidence/consumer.result.json": "fdf59da4ddbc19966c48a41742af0c41ce9bfbd476f9b342658dd3470b2769fa",
+    "build/t480-s1/build-evidence/consumer.started.json": "d90eddc1142f3d3c2d9dea4df7dc25b679a670c8dfc2b1df2f8a33af556f5871",
+    "build/t480-s1/build-evidence/consumer.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/t480-s1/build-evidence/consumer.stdout.log": "df1ad2984a1c64374ed9d571db59ee7505ac867ad9ba468dc4388db874e3ea77",
+    "build/t480-s1/build-evidence/preprocess.ps1": "08172415511eb0a6583dafb913d2161b341ed5e43bb253da701d8ac7268c3d2d",
+    "build/t480-s1/build-evidence/preprocess.result.json": "3d15c5a8d3d54e0fe54f857937ad81894233b9ea3048ec074ecc3a44d45ff828",
+    "build/t480-s1/build-evidence/preprocess.started.json": "f4b7dcfda1386960b1bc9a52a71b1986d0fc32f399da8329f69850107a404048",
+    "build/t480-s1/build-evidence/preprocess.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/t480-s1/build-evidence/preprocess.stdout.log": "5a96b4ddb2c9d834271bd10f56ea25ecb10409b5fe9a8589b30e4113f0ae6ba5",
+    "build/t480-s1/build-evidence/supervise.ps1": "1ca08df24e6b6b7bc925ab2405016f3af677ad7ca8bd44d8881f69f35381e474",
+    "build/t480-s1/build-evidence/x64.result.json": "b9b955d672157549fd43c6c53fb570ce65a224709d84e60b3fee4459e369dbc0",
+    "build/t480-s1/build-evidence/x64.started.json": "9ab4ad2da15fc5410e9328eb52dba157a8a73764060e786c4106a67df43771ad",
+    "build/t480-s1/build-evidence/x64.stderr.log": "d6e616e271ee11dc87c195165de692545fc89ee794bf354537a912d46fe2ff04",
+    "build/t480-s1/build-evidence/x64.stdout.log": "c37c5fdc9b3d09cfbb05ce7c9e8b0ebe5270fa54412464da9797bc487c9a50c3",
+    "build/t480-s1/build-evidence/x86.result.json": "da1fb6e6e90cf59e29ff9776aa22e23ee1a692a54aebd6260d78e30496f97243",
+    "build/t480-s1/build-evidence/x86.started.json": "05ef0afcae28c3d1e03522b948ec8adf9f6ef9b81f53cdd227fb920cc17b8ed2",
+    "build/t480-s1/build-evidence/x86.stderr.log": "4e0971c7e1c7bf5015c1c2fa074e669ff3bcfcd990cf9c722701d555ef31dc93",
+    "build/t480-s1/build-evidence/x86.stdout.log": "3c02abce5547f6eee1c7d4613b3a1c1c3a28d945e34fe2b6b7101d37820dd87f",
+    "build/.ninja/msvc-x86-release/worker/build.ninja": "fc5c434c85e3c4365d2049731197152a9aca162d6f7f4451c33109af45654c12",
+    "build/.ninja/msvc-x86-release/worker/.ninja_log": "fe466513b6e28d3d96e1923ecd406a632d80e7141fdbef15d94dcadb9420631b",
+    "build/.ninja/msvc-x86-release/worker/nthook32.dll.map": "6675deb8f86e08bd5051ddef1cc74796a0c5940e147f116de4ffb206e4d178da",
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": "e4724b1d1a76a83ab8fbc14fa801e48e7c4f0bb67d13cf7a4a740ae3f3a51b06",
+    "build/.ninja/msvc-x86-release/worker/VCDEX.DLL.map": "cc4606b9f2aec076fd11b6fd154557bac89f1418c1f3bf929af36032d4692999",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja": "43c47147602ac89f204c79815e84ac20d32ede8312844a99668e89e7de5c5c04",
+    "build/.ninja/msvc-x86-release/wow32/.ninja_log": "36809f1dd2a3311f11b9c748a634be875b422d09ac239825880c2c7cf5b4cc97",
+    "build/.ninja/msvc-x86-release/wow32/wow32.dll.map": "b829e69987a00831b5f69aca635b8075eefd5b30222696b24bb9bb49b13dfe32",
+    "build/.ninja/msvc-x64-release/worker/build.ninja": "10136d480c31b538efd162180639f2f51a9103380012e7e9ec54125035b47d6d",
+    "build/.ninja/msvc-x64-release/worker/.ninja_log": "47c8e8a4ce65935c433b5c72256b2a1ce56f31791fb0d168b0d5b2b4ff4d8f00",
+    "build/.ninja/msvc-x64-release/worker/ntvwm.exe.map": "e4ec1cc4b3f84d874f6155f89542a986ff6e31339136e64b062be61262c19922",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja": "9fb73b258b282a26cf6ec7bc47df3f6b7f640bdfdc8e6ab77a1fb0acd10dc14c",
+    "build/.ninja/msvc-x64-release/frontend/.ninja_log": "f089988d2afcdd486f49d01471e61055aacff46dccc6f015dd131b7520164c57",
+    "build/.ninja/msvc-x64-release/frontend/ntcon.exe.map": "b7616ace4cbb1e2eb17f916304aef66d96a07ec88335ddbb0cd18f2f8a43c133",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja": "3a87a71c8b1d8c59239a92ae32e4e61c63ee760046a7e920c4b12e54ef110e4c",
+    "build/.ninja/msvc-x64-release/monitor/.ninja_log": "4221edd7e2b3fa5b038a323af8bf2b04d77db34d797003ad22ad735ca8c8c5fd",
+    "build/.ninja/msvc-x64-release/monitor/ntmon.exe.map": "7269047304eb0011eb381ecf54487691d8fc1c4f6380e0207c4f61c286656dd9",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja": "9eff6ad85a031330cf1ef5bff4b4ca081a12aa2decd711fff2fc783aefce036c",
+    "build/.ninja/msvc-x64-release/launcher/.ninja_log": "feba47569cc0a1960427469e72301f2d16e04580ca2f8f16074a4ac9641a7671",
+    "build/.ninja/msvc-x64-release/launcher/run16.exe.map": "d0db43e8e46c4116e89fc6a731b33416ee47de78f4d158ff86d428654fd64993",
+    "build/.ninja/msvc-x64-release/service/build.ninja": "1da0f24e99163144d67819ac4b0889dd28bdead44d456ea32c1b3f83bb512eff",
+    "build/.ninja/msvc-x64-release/service/.ninja_log": "cc6fd9ab67da4c4dc44fe141169fa8242b965dd2559fda77069619fafaaa31be",
+    "build/.ninja/msvc-x64-release/service/ntsrv.exe.map": "61e4bb4519ffbf21ead30a3e15005380d8f84936175b6f2be352f5c250f1bbb6",
+    "build/.ninja/msvc-x64-release/hook/build.ninja": "8a42f45cd5f12e7876fd6fba91af3ca1578ce3ddb2ea67f6414e1fc708aaec41",
+    "build/.ninja/msvc-x64-release/hook/.ninja_log": "f80e16d53b99ec2866925de2d8cf4d088c47e351987be2f8de7a3ddce0b5780f",
+    "build/.ninja/msvc-x64-release/hook/nthook64.dll.map": "c087901a7318be1eaaaced151b58a3ad44d78ecbd96e51a0973ddacafec329c8"
+  },
+  "audit_tool_sha256": {
+    "tools\\audit\\collect-host-mirror-build-evidence.py": "883907b36fad3e3cb59f53a90e22358df3de33422e1412a41a03633ad36223ef",
+    "tools\\audit\\capture-host-mirror-preprocessing.py": "c0c7aa8480c819bc63a03da1f5c00b7798428bde53fae55d26b5d61c4d99dbbe"
+  },
+  "governance": {
+    "exitCode": 0,
+    "pid": 4516,
+    "finished": "2026-11-06T22:00:57.178041Z"
+  }
+}

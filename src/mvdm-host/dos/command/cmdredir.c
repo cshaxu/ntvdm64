@@ -393,7 +393,7 @@ BOOL cmdHandleStdOutErrWithPipe(
 	pRdrInfo->ri_hStdErrFile = hFile;
 
     }
-	    hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
+    hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
 			    (DWORD)0,
 			    cmdPipeOutThread,
 			    (LPVOID)pPipe,
@@ -519,7 +519,7 @@ BOOL cmdHandleStdinWithPipe (
     pPipe->hPipe = pRdrInfo->ri_hStdIn;
     pPipe->pFileName = pStdinFileName;
     InitializeCriticalSection(&pPipe->CriticalSection);
-	    pPipe->hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
+    pPipe->hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
 			       (DWORD)0,
 			       cmdPipeInThread,
 			       (LPVOID)pPipe,

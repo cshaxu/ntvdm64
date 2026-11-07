@@ -49,6 +49,7 @@ EnterWowCritSect(
 
    return;
 }
+
 #line 4010
 _inline
 VOID
@@ -408,4 +409,4 @@ ExitWowCritSect(
 #endif
 #line 5216
 #line 5217
-#endif
+#endif  // !_USERK_

@@ -61,22 +61,67 @@ Revision History:
  */
 #if defined(MVDM_STANDALONE_TIME1970_ONLY)
 
+#line 149
+const LARGE_INTEGER SecondsToStartOf1970 = {0xb6109100, 0x00000002};
+#line 190
+#define ConvertSecondsTo100ns(SECONDS) (                           \
+    RtlExtendedIntegerMultiply( (SECONDS), 10000000 )              \
+    )
+
 #line 1222
 VOID
 RtlSecondsSince1970ToTime (
     IN ULONG ElapsedSeconds,
     OUT PLARGE_INTEGER Time
     )
-#line 1248
+
+/*++
+
+Routine Description:
+
+    This routine converts the seconds since the start of 1970 to an
+    NT Time value
+
+Arguments:
+
+    ElapsedSeconds - Supplies the number of seconds from the start of 1970
+        to convert from
+
+    Time - Receives the converted Time value
+
+Return Value:
+
+    None
+
+--*/
+
 {
     LARGE_INTEGER Seconds;
 
-#line 1255
+    //
+    //  Move elapsed seconds to a large integer
+    //
+
     Seconds.LowPart = ElapsedSeconds;
     Seconds.HighPart = 0;
-    Seconds.QuadPart = Seconds.QuadPart + 0x00000002b6109100i64;
-    Time->QuadPart = Seconds.QuadPart * 10000000i64;
-#line 1275
+
+    //
+    //  Convert number of seconds from 1970 to number of seconds from 1601
+    //
+
+    Seconds.QuadPart = Seconds.QuadPart + SecondsToStartOf1970.QuadPart;
+
+    //
+    //  Convert seconds to 100ns resolution
+    //
+
+    *(PLARGE_INTEGER)Time = ConvertSecondsTo100ns( Seconds );
+
+    //
+    //  return to our caller
+    //
+
+    return;
 }
 
 #else

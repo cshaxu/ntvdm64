@@ -2611,3 +2611,47 @@ macros through existing nt_vdd.h/NTVDM exports. Selected i386 branch uses the
 existing MGetVdmPointer ABI; non-i386 definitions reject with#error and original
 line positions. No runtime implementation, kernel import or new pointer owner.
 Source hashes and finite closure: docs/etc/evidence/m0-t478-s41-vdd-optical-investigation.md.
+
+## T480 S3 bounded original restoration
+
+The selected `base/ntos/rtl/time.c` 1970 conversion again uses the original
+SecondsToStartOf1970 constant, ConvertSecondsTo100ns macro and complete
+RtlSecondsSince1970ToTime body, through the already declared NTDLL multiply
+provider. Seven calendar cases cover zero through ULONG maximum and output
+guards; no additional time functions or excluded profiles are admitted.
+
+`base/win32/client/vdm.c` restores original declarations, comments and structure
+for BaseCreateVDMEnvironment, BaseDestroyVDMEnvironment and BaseGetEnvNameType_U.
+OPENNT-HOST-065's native-width byte distance remains. All six actual x86/x64
+consumers preserve code, data, relocations and symbols. Original spelling in
+strucsiz.c, apimsg.c and ntexapi.h is restored with token/location checks.
+See [S3 evidence](../../docs/etc/evidence/m0-t480-s3-connected-restoration.md).
+
+
+## T480 S4 registration reconciliation
+
+OPENNT-HOST-014's original environment subset remains selected. Its current
+project adapter is `../ntvdm-exe/win32/mvdm_base_vdm_environment.c`; the older
+`../ntvdm/win32/` table path above is historical. S3 restored the three
+functions' original structure; OPENNT-HOST-065's native-width byte-distance
+correction remains necessary and was not removed. The final LF source identity
+is in the S3 line-ending correction and six final consumer receipts, not the
+intermediate CRLF hash in vdm-restoration.json.
+
+The RTL1970 selected subset now uses the original constant, macro and function
+body; the old literal-arithmetic form is superseded. Existing subset selection
+and excluded branches remain. This is an implementation restoration, distinct
+from OPENNT-HOST-005's unchanged time declaration boundary. Neither restoration
+expands product behavior. S2/S3 spelling changes do not retire other behavioral
+registrations, including the selected declaration cohorts.
+See [S4 evidence](../../docs/etc/evidence/m0-t480-s4-registration-reconciliation.md).
+
+
+## T480 S5 original comment restoration
+
+Restore only original same-line terminal comments on the matching outer guards
+in ntexapi.h, ntregapi.h, ntrtl.h, nturtl.h and userk.h, plus the closing
+RapStructureSize comment in strucsiz.c. Guard nesting was checked before edit.
+No line insertion, condition, declaration, implementation or #line/#error change
+is introduced. Source identities and all actual consumer comparisons are in the
+T480 S5 evidence. Earlier behavioral registrations remain unchanged.

@@ -1,0 +1,417 @@
+{
+  "task": "T480 S3",
+  "baseline": "ae65e175b",
+  "applicationVersion": "0.0.480",
+  "protocol": 67,
+  "runs": {
+    "build-x86": {
+      "start": {
+        "timeoutSeconds": 3600,
+        "command": "build-x86.cmd",
+        "started": "2026-11-06T23:19:13.7130776Z",
+        "pid": 39508
+      },
+      "result": {
+        "exitCode": 0,
+        "finished": "2026-11-06T23:26:03.5217401Z",
+        "pid": 39508
+      }
+    },
+    "build-x64": {
+      "start": {
+        "command": "build-x64.cmd",
+        "started": "2026-11-06T23:19:13.8398115Z",
+        "timeoutSeconds": 3600,
+        "pid": 34248
+      },
+      "result": {
+        "finished": "2026-11-06T23:27:24.6272332Z",
+        "exitCode": 0,
+        "pid": 34248
+      }
+    },
+    "build-r2-x86": {
+      "start": {
+        "started": "2026-11-06T23:34:24.4319573Z",
+        "command": "build-r2-x86.cmd",
+        "pid": 35684,
+        "timeoutSeconds": 1800
+      },
+      "result": {
+        "finished": "2026-11-06T23:36:56.3401802Z",
+        "pid": 35684,
+        "exitCode": 0
+      }
+    },
+    "build-r2-x64": {
+      "start": {
+        "timeoutSeconds": 1800,
+        "started": "2026-11-06T23:34:24.4354298Z",
+        "command": "build-r2-x64.cmd",
+        "pid": 36144
+      },
+      "result": {
+        "exitCode": 0,
+        "finished": "2026-11-06T23:36:39.0838163Z",
+        "pid": 36144
+      }
+    },
+    "time-replay": {
+      "start": {
+        "timeoutSeconds": 600,
+        "pid": 19612,
+        "started": "2026-11-06T23:27:14.0691697Z",
+        "command": "time-replay.cmd"
+      },
+      "result": {
+        "exitCode": 0,
+        "pid": 19612,
+        "finished": "2026-11-06T23:27:34.3710773Z"
+      }
+    },
+    "vdm-final-x86": {
+      "start": {
+        "started": "2026-11-06T23:45:18.7328341Z",
+        "command": "vdm-final-x86.cmd",
+        "pid": 20452,
+        "timeoutSeconds": 300
+      },
+      "result": {
+        "finished": "2026-11-06T23:45:57.9956994Z",
+        "pid": 20452,
+        "exitCode": 0
+      }
+    },
+    "vdm-final-x64": {
+      "start": {
+        "pid": 31788,
+        "timeoutSeconds": 300,
+        "command": "vdm-final-x64.cmd",
+        "started": "2026-11-06T23:45:18.8980824Z"
+      },
+      "result": {
+        "pid": 31788,
+        "finished": "2026-11-06T23:45:50.7030263Z",
+        "exitCode": 0
+      }
+    },
+    "review-final-r2": {
+      "start": {
+        "command": "review-final-r2.cmd",
+        "timeoutSeconds": 300,
+        "started": "2026-11-06T23:46:15.7652177Z",
+        "pid": 27684
+      },
+      "result": {
+        "finished": "2026-11-06T23:46:43.1800611Z",
+        "exitCode": 0,
+        "pid": 27684
+      }
+    },
+    "stage-r2": {
+      "start": {
+        "pid": 8248,
+        "started": "2026-11-06T23:38:18.1867721Z",
+        "command": "stage-r2.cmd",
+        "timeoutSeconds": 300
+      },
+      "result": {
+        "pid": 8248,
+        "finished": "2026-11-06T23:38:31.0652766Z",
+        "exitCode": 0
+      }
+    },
+    "full-r2": {
+      "start": {
+        "started": "2026-11-06T23:38:55.0393552Z",
+        "pid": 12904,
+        "command": "full-r2.cmd",
+        "timeoutSeconds": 1800
+      },
+      "result": {
+        "pid": 12904,
+        "finished": "2026-11-06T23:46:36.1822217Z",
+        "exitCode": 0
+      }
+    },
+    "gameplay-r2": {
+      "start": {
+        "started": "2026-11-06T23:47:21.1645875Z",
+        "pid": 40956,
+        "command": "gameplay-r2.cmd",
+        "timeoutSeconds": 600
+      },
+      "result": {
+        "exitCode": 0,
+        "pid": 40956,
+        "finished": "2026-11-06T23:47:51.62002Z"
+      }
+    },
+    "publish": {
+      "start": {
+        "pid": 36292,
+        "timeoutSeconds": 300,
+        "command": "publish.cmd",
+        "started": "2026-11-06T23:48:09.2838725Z"
+      },
+      "result": {
+        "pid": 36292,
+        "finished": "2026-11-06T23:48:14.1944434Z",
+        "exitCode": 0
+      }
+    },
+    "governance-final-r2": {
+      "start": {
+        "command": "governance-final.cmd",
+        "timeoutSeconds": 300,
+        "started": "2026-11-06T23:50:24.8573844Z",
+        "pid": 28180
+      },
+      "result": {
+        "pid": 28180,
+        "exitCode": 0,
+        "finished": "2026-11-06T23:50:56.7750061Z"
+      }
+    }
+  },
+  "restoration": {
+    "passed": true,
+    "actual_objects": 3,
+    "spelling_consumers": 13,
+    "permitted_instruction_difference": "one commutative scale-one x86 SIB address in cmdCheckBinary",
+    "excluded_metadata": [
+      "COFF timestamp",
+      "CodeView object path",
+      "compiler section checksums"
+    ]
+  },
+  "environment": {
+    "passed": true,
+    "source_sha256": "035605347876f41df21917a6aa40e3f42e2fee5735a6e07dbf3cfed2dae0ba48",
+    "objects": [
+      "msvc-x86-release/worker/obj/opennt-base-vdm/vdm.obj",
+      "msvc-x86-release/worker/obj/opennt-base-client/client.obj",
+      "msvc-x86-release/worker/obj/opennt-base-client/classifier.obj",
+      "msvc-x64-release/launcher/obj/opennt-base-client/client.obj",
+      "msvc-x64-release/launcher/obj/opennt-base-client/classifier.obj",
+      "msvc-x64-release/hook/unit17.obj"
+    ],
+    "contract": "Identical code, data, relocations and symbols; metadata exclusions as documented by the COFF reader"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 459314,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6374,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1657,
+        "CleanupMs": 739,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 457,
+        "CleanupMs": 680,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 69204,
+        "CleanupMs": 714,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 58553,
+        "CleanupMs": 632,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 53058,
+        "CleanupMs": 648,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16784,
+        "CleanupMs": 673,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12459,
+        "CleanupMs": 657,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 107863,
+        "CleanupMs": 698,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12757,
+        "CleanupMs": 644,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 30155,
+        "CleanupMs": 668,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31041,
+        "CleanupMs": 834,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 10943,
+        "CleanupMs": 719,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8423,
+        "CleanupMs": 618,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11197,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 6165,
+        "CleanupMs": 581,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8718,
+        "CleanupMs": 602,
+        "Passed": true
+      }
+    ]
+  },
+  "gameplay": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+  "publication": {
+    "published": "2026-11-06T23:48:13.904311Z",
+    "destination": "O:\\repos.hobby\\ntvdm64\\.worktrees\\t480-mirror-diff-audit\\assets\\release",
+    "packageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+    "images": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "90994D50FE4A4C173D02C15ABFE17B751B0CD469B5E5DEBCD1E7D90451AF32F5",
+        "Machine": 332,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "36E7157F94E9F375106C836D0A1ED2526FC8B5A0267BBD5DE1F65499B39962C1"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "951AAC4953299666D993CA3A03D53FF5E960F7B4ED261643EDDB898BB50D4776",
+        "Machine": 34404,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "B7E9AA5DE357FA1E0FF7272D1B57FF93E7809E8DF9988B50CB20AE632A1EE706"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "72476A6E956408C648A0B492AD2116F51E2F28BCAB401000EEA84B6159502AEA",
+        "Machine": 34404,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "E7D5952F5B2AEE584A0529D5F114AD93FF1A991C8D2100849D5BAFF97BE2DA0A"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "AF27793215A03129501219C0346C0DCD4953155D4D879600042BA122AB9DE26C",
+        "Machine": 34404,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "086AE8F73F7DF085D45732DDBF7E009F2B61A63C609EEA3FD3F37CF76E7A4F89"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "FF7BA2095E1F7082766B6E503989CD0A5AD3A05B490C6CF1BF588ED4FB15C424",
+        "Machine": 332,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "182764040BF7F394468048873E12B56D605EE3429A4BDCAB8850DCFF56772CA4"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "0B4B0EA53F1CE7B9EDE04AE2FA5B680C362A8B602EEE61023599EE3FA42F06A0",
+        "Machine": 34404,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "4DE6DF2E77D81E90B6734BEB622A3BDDE186E66A528BE5197A00544F14935246"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "0A16A32C8A98999818B6097EAB1CA70E3E3772FB96060A8A4DCEDE46373AE901",
+        "Machine": 34404,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "83959199DEA7826D959568F5BCDEBC49198375D4F292BD615E882B8C5227A0C9"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "9096B322E221DFF6945281DA2DFA426561565597F38E6331E73A940F08AC9D0D",
+        "Machine": 332,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "17E350744F9CA17065A344CDE5918BF80BD5122B0427BC06F8C2F577A123E631"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "FFD4ED659D00E934C17A6FE869899B8B0CF16132304D0F1A9B6AD66CF95CBE4E",
+        "Machine": 332,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "472E5BBEAC2BD3CE0586B52D6752F20345287EC6462039EFCAD01DE2C4EE7C39"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "B97DC78E393CF47268CA97CB991AA9A5AC1AAECF1BDF87DD2E0F218CA0D615BB",
+        "Machine": 332,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "7419AC17FFD94F375FB095945895609109A1D61D8A638C95B479625CE73ED135"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "588E2AABFD89BC089167B5F89B9753352C9AE5DE6165F5307FEA8E94D2014CC8",
+        "Machine": 34404,
+        "PackageId": "0632ce9f-6bc8-41a9-9b6b-71eeae476c01",
+        "InputSha256": "F4F7C15EBCC0C8157250AF04F5A02D78E77074F0A05E2AE30B1972D6DC75FDD6"
+      }
+    ],
+    "gates": 16,
+    "gameplay": "passed",
+    "push": false,
+    "installedWindowsWrite": false
+  },
+  "archive": {
+    "path": "artifacts/mvdm-audit/t480-s3-verification.zip",
+    "sha256": "1f2f93f875ef88c79c3dd3a8ee7694da567a071da718893ee0129115603af998",
+    "files": 1022
+  },
+  "limits": [
+    "Conservative retention is not proof of global minimum diff.",
+    "First Full attempt failed at scripted same-console relaunch; preserved, not counted as pass.",
+    "DOS4GW/NESticle remains excluded by earlier owner instruction.",
+    "No guest source change, O:/winnt write or push."
+  ]
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.c",
+    "original_sha256": "1e04779ee75de6b1cb294e4b036e68745f84815d73c6037ee577258e97c629ca",
+    "current_sha256": "b2323aa56f0f15d8bcc5c8374a2889f062c0c0760fcd2a874dfaca40f345f693",
+    "prior_evidence": "artifacts/mvdm-audit/shard-3/vcdex-s41-source-provenance.json"
+  },
+  {
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.h",
+    "original_sha256": "ef58ff9747b8b14a904a3b2894fb496fea500771aaec462dd8cefed63bc00b5a",
+    "current_sha256": "dd9536994f40eb35f25ed22508787be93e545d0e023e9a55eba81302b0a5dc06",
+    "prior_evidence": "artifacts/mvdm-audit/shard-3/vcdex-s41-source-provenance.json"
+  },
+  {
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/mscdex.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\mscdex.h",
+    "original_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+    "current_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+    "prior_evidence": "artifacts/mvdm-audit/shard-3/vcdex-s41-source-provenance.json"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vddsvc.h",
+    "original_sha256": "70769da0455aa0b610ab046a4000bc108176dabeb8178ff8b649c41f7cd0897d",
+    "current_sha256": "7546e851c7c5f20ee46b2c2185d89e918b2147cd40fd9b1c48eb6912942f1fad",
+    "prior_evidence": "artifacts/mvdm-audit/shard-3/vcdex-s41-source-provenance.json"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "original": "O:/repos.external/OpenNT/ds/netapi/xactsrv/apisrv.c",
+    "original_sha256": "070437121d8a1ee57ea07672ea9aba3e85a8f4b80b802034cc208383dca4e5cd",
+    "current_sha256": "",
+    "prior_evidence": "docs/etc/evidence/m0-t478-s4-remote-rap.md",
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "git_blob_sha256": "74597c158e3d31ef9823d77fd785d4684e90904086e3dc914611a568a388cc34",
+    "git_normalized_equal": true
+  }
+]

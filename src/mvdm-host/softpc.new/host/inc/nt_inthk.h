@@ -37,5 +37,6 @@ IMPORT NTSTATUS VdmInstallSoftwareIntHandler IPT1(PVOID, SoftwareIntHandler);
 #line 36
 IMPORT BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 #endif
+
 #line 39
 IMPORT NTSTATUS VdmInstallFaultHandler IPT1(PVOID, FaultHandler);

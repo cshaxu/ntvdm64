@@ -36,11 +36,11 @@ RapStructureSize (
                 NULL,
                 NULL,
                 NULL,
-                NULL,
+                NULL,  // don't need to know structure alignment
                 TransmissionMode,
                 Native
                 );
 
     return structureSize;
-}
+} // RapStructureSize
 #line 93

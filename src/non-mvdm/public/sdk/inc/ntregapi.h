@@ -4,10 +4,12 @@
 #line 22
 #ifndef _NTREGAPI_
 #define _NTREGAPI_
+
 #line 25
 #if _MSC_VER > 1000
 #pragma once
 #endif
+
 #line 29
 #ifdef __cplusplus
 #line 30
@@ -34,4 +36,4 @@ typedef enum _KEY_VALUE_INFORMATION_CLASS {
 #error Excluded unsupported C++ NT registry declaration context
 #endif
 #line 524
-#endif
+#endif // _NTREGAPI_

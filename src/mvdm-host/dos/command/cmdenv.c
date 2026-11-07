@@ -264,7 +264,7 @@ VOID cmdGetInitEnvironment(VOID)
 		    }
 		}
 
-		if (cchRemain < cchString) {
+                if (cchRemain < cchString) {
                     if (cchIncrement < cchString)
                         cchIncrement = cchString;
 		    lpszzEnvBuffer =
@@ -319,7 +319,7 @@ VOID cmdGetInitEnvironment(VOID)
 #line 310
     cchEnvBuffer =  (WORD)getBX() << 4;
     if (cchEnvBuffer < cchInitEnvironment + cbComSpec) {
-	setBX((USHORT)((cchInitEnvironment + cbComSpec + 15) >> 4));
+        setBX((USHORT)((cchInitEnvironment + cbComSpec + 15) >> 4));
 	return;
     }
     else {
@@ -384,7 +384,7 @@ PCHAR	p1, p2;
 BOOL	fFoundComSpec;
 BOOL	fFoundWindir;
 BOOL	fVarIsWindir;
-    DWORD	Length;
+DWORD	Length;
 PCHAR	lpszzVDMEnv, lpszzEnv;
 CHAR	achBuffer[MAX_PATH + 1];
 
