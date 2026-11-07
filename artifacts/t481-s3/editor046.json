@@ -1,0 +1,63 @@
+{
+  "case": "T481 S3 editor046 VT Alt repair",
+  "mode": "386-dosonly0",
+  "runner_pid": 26216,
+  "result": "keyboard/menu/normal-exit scope passed",
+  "product_delivery": false,
+  "proved": [
+    "modern EDIT Alt+F New File menu appears in VM1 text",
+    "DOS EDIT Alt+F Save As/Exit menu appears in VM2 text",
+    "independent command completion and both prompts return",
+    "normal Windows exit",
+    "cached x86/x64 builds and real Console045 passed"
+  ],
+  "missing": [
+    "guest mouse",
+    "typing/save isolation",
+    "reverse completion order",
+    "DOSONLY1 editor matrix",
+    "Full/publication/commit/push"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor046/screens.txt",
+      "bytes": 24816,
+      "sha256": "ef81c4a3a19b50460f7ca33a3ab7ef22e6a3fccc2ea5a8b97022924818d062a0"
+    },
+    {
+      "path": "build/t481-s3/editor046/trace.txt",
+      "bytes": 24168,
+      "sha256": "14b7581c19424fdad98a2220154c111e4ddfcef1c7bad569e9cc850a9c813d88"
+    },
+    {
+      "path": "build/t481-s3/editor046/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "a940f98e006e7938d63e1a4d8601699e4aa8ccf673f48791a0be3d49a227fdd9"
+    },
+    {
+      "path": "build/t481-s3/editor046.ps1",
+      "bytes": 4293,
+      "sha256": "7f12854d28ac664b63ea50420ead5fd21c2d3954bc6840f7a5c7d6245af6244a"
+    },
+    {
+      "path": "build/t481-s3/editor046/controller.asm",
+      "bytes": 7824,
+      "sha256": "230f11435104c403cfc56fa398d9e630deff0a1256c52a672d029c16009e7a37"
+    },
+    {
+      "path": "build/t481-s3/package046/system32/ntvwm.exe",
+      "bytes": 325632,
+      "sha256": "230c0eb1f787a1a6095dc73da3c2be81d1ea7805dce2b4e7bd3e7c5f79921b45"
+    },
+    {
+      "path": "build/t481-s3/cached043.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "build/t481-s3/state045.out",
+      "bytes": 311,
+      "sha256": "08960357bf0d1f59095215c71f1c6a6acbfe6f42a3d1fd1fd3cb773122edb618"
+    }
+  ]
+}

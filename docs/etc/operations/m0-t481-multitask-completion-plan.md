@@ -467,3 +467,224 @@ all actual protocol providers answer the capability, failed query/commit bubbles
 through the existing error path, and full Console publication remains selected
 for NTCON. No mirror diff. Dual EDIT interaction and remaining S3 obligations
 are still open; this is a P baseline, not S3 closure.
+## S3 dual EDIT input boundary audit
+
+Against P1 0472ee23c, source tracing finds two distinct paths. The actual target is dosonly=0. Both commands first traverse cmdExec32/Run16;
+Run16 routes edit.com into a DOS NTVDM worker (then QBASIC /EDCOM), and
+edit.exe into NTVWM. Both require I/O back to their originating guest VM. bios_character in the owned
+ntvdm64.asm forwards BIOS-translated keys plus real make/release/modifier
+notifications through host_notify17; mvdm_vm_executor and mvdm_vm_io_keys
+convert/enqueue KEY_EVENT only. The VM I/O public ingress has no mouse record
+entry. Insignia per-VM mouse-state preservation alone therefore cannot prove
+native EDIT mouse delivery. This is a required capability gap, not evidence
+that the DOS editor or its original mouse driver is broken.
+
+The existing interrupt-observer.asm stimulus also uses operation17, while
+host-continuation.c forwards operations16..18 directly to production under
+MVDM_REAL_COMMAND. Its A/B-only calibration stimulus cannot simply be reused
+for real-command editor input: it would collide with production key ingress.
+Keep test stimulus separate from production operations; do not bypass the
+production recipient or claim injected native INPUT_RECORDs as guest input.
+Original USER keybd_event289 and mouse_event299 are register-based guest APIs
+(documented in wow16/user/winmisc2.asm); they are another candidate stimulus
+boundary, not yet proof of VKD forwarding into a DOS VM.
+
+Next bounded witness must launch the two exact editor images in separate
+real guest DOS prompts, retain their VM identity and native process evidence,
+then establish one actual guest keyboard/menu interaction before adding mouse
+clicks. Preserve failures with the selected VM/window and visible state.
+Only after a current click trace shows the missing native ingress should the
+adapter be wired to an original mouse event owner with the same VM/token;
+no second mouse controller or guest binary modification is admitted. Existing
+Full gates and geometry receipts do not satisfy this editor contract.
+Owner correction: the earlier DOS-editor-local-input inference was wrong for
+dosonly=0. Original tcode.asm d16_run checks scs_dosonly; only DOSONLY_YES
+returns to local DOS execution, otherwise AH=1 SVC_CMDEXEC carries the command.
+The identity runner previously hardcoded386-dosonly1. It now exposes RuntimeCase
+and defaults to386-dosonly0; explicit386-dosonly1 remains a control. Historical
+P1 geometry evidence retains its actual mode and does not establish ordinary
+COMMAND prompt routing or dual EDIT acceptance. Both editor chains must be
+observed under dosonly=0, including the nested NTVDM for edit.com.
+
+### Required DOSONLY editor routing matrix
+
+Owner explicitly requires both modes; neither substitutes for the other:
+
+| Mode | Command typed in the guest MS-DOS prompt | Required result |
+| --- | --- | --- |
+| dosonly=0 | O:\winnt\edit.exe | cmdExec32/Run16 to NTVWM; keyboard and guest mouse interaction in the originating VM frontend. |
+| dosonly=0 | O:\winnt\edit.com | cmdExec32/Run16 to nested NTVDM; editor I/O returns to the originating VM frontend. |
+| dosonly=1 | O:\winnt\edit.com | Executes within the original guest DOS VM, including QBASIC /EDCOM, with usable keyboard/menu/mouse and normal exit. |
+| dosonly=1 | O:\winnt\edit.exe | Reports execution failure; no native host editor task is launched. Prompt remains responsive and exits normally. |
+
+Record actual command routing and worker/task identities, not just screen
+appearance. For dosonly=0, the two editors must coexist in separate guest
+prompt windows with isolated input and independent completion. The dosonly=1
+negative must assert both the visible error and absence of a launched native
+editor; a hung prompt is a failure, not a successful rejection. Current direct
+BOP geometry probes are separate boundary evidence and do not prove this matrix.
+DOSONLY isolation acceptance (owner requirement): with dosonly=1, neither
+editor command may create the project's detached host multitask payload. The
+original Windows3.1 DOS VMs may still exist and run concurrently; that is not
+a host payload. Assert no command-correlated nested Run16 launch, no new
+NTSRV worker/task chain and no corresponding VM payload frontend registration.
+Take before/during/after identity-bound observations so a short-lived unwanted
+launch is not missed by an end-only process snapshot. Scope observations to
+the test-owned session and distinguish the outer launcher/NTVDM from a new
+command child. edit.com must remain usable in its original VM; edit.exe must
+fail and leave a usable prompt. A blank monitor screen alone is not evidence.
+
+Geometry012 passes on386-dosonly0 with both real BOP command continuations,
+exact visible cells and normal Windows exit. This is additional mode coverage
+of the projection repair only, not the prompt/editor/DOSONLY-isolation proof.
+Prompt calibration013/014 (temporary experiment, no product change): isolated
+copies m481p13/m481p14, production P1 package, two COMMAND.COM PIFs and a
+Win16 USER-keybd_event controller. Both reach Program Manager with actual
+DOSONLY0 witness, but neither produces typed echo receipts or normal exit.
+The014 controller additionally waits for GetTickCount progress before recording
+a guest window inventory; that inventory is absent. This does not yet localize
+a keyboard or product fault: the controller may not reach its stimulus. Keep
+these as failed calibration, not EDIT results. Prompt015 moves inventory before
+that wait to distinguish target-window creation from probe pacing; runner PID
+23684, output build/t481-s3/prompt015, isolated installation O:/tmp/m481p15.
+No original guest bytes or published product changed. Scripts and assembled
+controller sources are retained under build/t481-s3 for this active investigation.
+Prompt calibration correction:013..021 used a nonexistent O:/winnt/COMMAND.COM
+in their generated PIFs. The actual immutable COMMAND is under system32; mere
+window titles were not successful guest process admission. No product timer
+failure is established.022 (same timer/controller, no DOS windows) passes.
+023 copies package COMMAND.COM into its owned PATCH directory, verifies SHA256
+908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43 and
+uses that exact path. Both real dosonly0 prompts produce lowercase a/b receipts
+through typed echo/redirection. Normal exit still fails: actual key traces and
+subsequent BOP admissions are retained, but final command text is not yet known.
+Do not call that failure a product defect until the received command is checked.
+
+Keyboard019 separately passes the established two-VM BIOS consumer, including
+exact1e61/3062 key words and normal Windows exit. Test-only observer operations
+now have distinct250/252/253 aliases, so real production16..18 ingress can remain
+selected while physical stimuli run. The diagnostic stimulus accepts explicit
+make/break to support actual Alt/Shift menu sequences; it still enters the
+original controller, not BIOS memory or native child INPUT_RECORD injection.
+Diagnostic024/Prompt025 add read-only command-tail tracing before admission
+(no second capture or CR normalization) to identify the exit failure. Product
+package remains P1; no new runtime repair or completed editor acceptance claimed.
+Prompt025 reproduces023 with read-only pre-admission command traces. The two
+expected echo tails arrive intact and create exact a/b text files. The later
+expected exit commands arrive as IT and XIT. Physical make/break stimulus and
+INT15 observations include the full E/X/I/T sequence in the correct VM. This
+localizes the failed shutdown to command input before cmdExec admission, not
+Windows ExitWindows itself. It does not yet establish whether input was lost
+by project handback or legitimately consumed/flushed by the still-running native
+CMD child. Preserve that distinction; do not replay input already consumed by
+a child. Need a prompt-ready/command-completed comparison and ownership trace
+before changing runtime. Evidence: build/t481-s3/prompt025/trace.txt and guest
+copy O:/tmp/m481p25. All prompt013..025 failures remain non-passes; the successful
+standalone timer control022 and physical keyboard019 are separate calibrations.
+
+Prompt031 calibration passes (receipt: artifacts/t481-s3/prompt031.json).
+The independently authored diagnostic observer chains INT21 unchanged and
+records actual AH0A line-read entry. Both VM identities reach this entry before
+the controller targets either prompt. Key make and release are separately
+paced; the controller waits for production BOP12 completion before exit.
+Both echo redirections produce exact a/b files, both COMMAND windows close,
+and the unchanged Windows3.1 system exits normally under dosonly0. This is
+real prompt/command evidence, not EDIT acceptance or DOSONLY1 isolation.
+The comparison changed both readiness and key-edge pacing, so it does not
+alone attribute the previous missing prefix to one cause or prove early
+unread-input handback. No production behavior was changed or republished.
+Prompt027/028 timed out before command admission.028 accidentally reused
+027's routine include and therefore is not a separated-edge control.
+Diagnostic029's first runner failed before compilation because its output
+directory was absent; corrected runner029b built successfully. Prompt030
+failed during controller assembly (missing separator before wait_readers),
+never executed a guest, and was corrected in fresh probe031. Preserve these
+as fixture failures, not product regressions. Build/test products remain
+inside owned temporary roots; the immutable input installation was copied.
+
+Prompt032 applies the same real-prompt calibration to386-dosonly1. Both
+original guest COMMAND windows execute local echo redirection, create exact
+a/b receipts and exit; Windows exits normally. The complete diagnostic trace
+has four INT21/AH0A read entries and zero production VM command admissions
+(operation11). Receipt: artifacts/t481-s3/prompt032.json. This establishes
+basic DOSONLY command separation, not the requested EDIT-specific routing,
+interaction or whole-lifetime worker/frontend isolation acceptance. Those
+remain mandatory open S3 items; no original guest or product package changed.
+
+
+Editor040 establishes actual simultaneous editor execution under dosonly0:
+the trace contains exact O:/winnt/edit.exe and edit.com tails in distinct
+VMs before either completion, and copied VIDEO text contains both editors.
+The DOS editor's welcome dialog is dismissed with Esc, Alt+F renders Save As
+and Exit, then its menu Exit returns to COMMAND. Modern EDIT exits by Ctrl+Q;
+its Alt+F menu was NOT observed, so that requirement remains open. Both
+COMMAND windows and Windows exit normally. Receipt: artifacts/t481-s3/editor040.json.
+Text is sampled after production BOP13 transfer, before guest frees it; BOP14
+separately reports successful guest application. It is not a pixel screenshot.
+Before this valid run,034's diagnostic incorrectly read the buffer at BOP14
+(after command_buffer_free) and terminated itself with487;036 read the older
+BIOS snapshot instead of the authoritative VIDEO text;038 copied actual editor
+frames but its readiness fwrite resolved to original fprt.obj's debug function
+(which returns len without writing). The diagnostic uses checked WriteFile
+for the readiness count now. These are corrected fixture defects, not product
+fixes. Run038's owned native EDIT22136 survived timeout cleanup; verified exact
+image/creation time and terminated that test-owned process before040. No user
+process or published host package was replaced. Modern Alt, typing/save, guest
+mouse, completion-order reverse and DOSONLY1 editor isolation remain mandatory.
+
+
+VT Alt candidate: original nt_keycd.c BiosKeyToInputRecord preserves zero
+UnicodeChar for BIOS Alt+letter words. Native hidden-console EDIT control041
+shows zero-character Alt+F does not open New File, while otherwise identical
+Alt+F with f does. NTVWM's VT boundary now derives a single printable character
+from copied Shift/Caps/Num state and the current layout, using non-mutating
+ToUnicodeEx; classic mode, key-up, existing characters and Ctrl+Alt are unchanged.
+No mirror/addon/guest change. Native042 opens the menu for both input forms.
+State045 passes the complete real-Console fixture, including classic zero-char
+preservation and actual conhost VT ESC+f. The initial new assertion044 wrongly
+expected an unencoded native record in VT mode; corrected to its observable
+character sequence rather than weakening the required Alt behavior. Historical
+standalone runners also needed the current process-observation/console_members.c
+link dependency. Receipt: artifacts/t481-s3/alt-input045.json.
+Cached043 PID24656 is the current x86/x64 build; editor046-run PID26216 waits
+that exact process and checks its exit receipt before staging and testing.
+The candidate is not yet fully qualified, published or committed. The prior
+complete11 P1 package remains the installed verified baseline.
+
+Editor046 now passes with the candidate NTVWM: modern New File menu and DOS
+Save As/Exit menu are both present in their distinct VM text frames; both
+commands complete, both prompts return/close and Windows exits normally.
+Cached043 x86/x64 builds/shared tests and Console045 passed. Receipt:
+artifacts/t481-s3/editor046.json. Full047 PID25152 is running the established
+specialized/Full sequence on fresh production r047 staging, explicitly taking
+VCDEX.DLL from the current x86 build. This is not yet a publication or P.
+Mouse, typing/saved-content isolation, reverse completion order and DOSONLY1
+editor acceptance remain open; these successful menus do not discharge them.
+
+### S3 reusable editor probe preparation
+
+The successful editor046 experiment is being promoted to
+`test/integration/ntvdm64-386/verify-win31-editors.ps1` with checked-in
+controller includes. `New-Win31ProbeCopy.ps1` now owns the same immutable-copy,
+PIF/GRP rebasing and authored-driver installation previously embedded in the
+identity runner. No original guest binary is changed. The editor runner no
+longer extracts and executes another script's source text; it restores its
+environment and checks the original installation hashes. Menu assertions require
+modern and DOS menu contents in distinct VM frames and two command completions.
+Unused inventory diagnostics were removed. Background source048 (PID15280)
+passed PowerShell parsing; this is not runtime qualification. Full047 remains
+live (PID25152, child13764), progressing through cooked-return cases. The new
+formal runner must execute serially after that package run. DOSONLY1 editor,
+mouse, save/isolation and reverse completion remain open.
+Full047 subsequently exited 0: all 16 Full gates passed. Formal editor049
+(PID19580) also exited 0 with distinct VM menu assertions, two completions and
+normal Windows exit. Exact input/result hashes are retained in
+`artifacts/t481-s3/editor049-full047.json`. This qualifies the bounded Alt
+repair, not remaining mouse/save/DOSONLY1 acceptance.
+
+Publication051 passed: complete11 package b3ea681a-18f4-490b-960c-b1acd249eeba
+at assets/release and O:/winnt/system32, all hashes equal the tested manifest.
+The authored addon and original guest binaries are unchanged. Governance050
+passed. Product scope is the 30-line VT Alt character adaptation; the remainder
+is diagnostic acceptance and shared test preparation. Mirror diff is zero.
+No S3 closure or remaining input/display qualification is claimed.

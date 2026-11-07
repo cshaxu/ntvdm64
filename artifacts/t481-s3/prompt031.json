@@ -1,0 +1,85 @@
+{
+  "case": "T481 S3 prompt031",
+  "mode": "386-dosonly0",
+  "runner_pid": 22968,
+  "result": "pass",
+  "product_delivery": false,
+  "assertions": [
+    "two distinct guest DOS VMs enter real INT21/AH0A",
+    "each original COMMAND admits echo via production BOP11",
+    "each writes matching a/b text receipt",
+    "both commands complete via production BOP12",
+    "both prompts exit and Windows exits normally"
+  ],
+  "not_proved": [
+    "dual EDIT interaction",
+    "guest mouse menus",
+    "DOSONLY1 isolation",
+    "early typeahead correctness"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/prompt031.ps1",
+      "bytes": 4292,
+      "sha256": "2c94022f9690b51d39bd1619f4b20cc15eca462022ae23bbbfdd07b3c26e632d"
+    },
+    {
+      "path": "build/t481-s3/prompt031/controller.asm",
+      "bytes": 6682,
+      "sha256": "e565803efd53016863b8f7d9efbc37ea9126b16d4afb2918e799644537a246c4"
+    },
+    {
+      "path": "build/t481-s3/prompt031/controller.exe",
+      "bytes": 1904,
+      "sha256": "244a52064a00ae003d9d4b7d310d50109220a1e7a08d11d459ab210780c47023"
+    },
+    {
+      "path": "build/t481-s3/prompt031/trace.txt",
+      "bytes": 15432,
+      "sha256": "e98656367a4fbe4c9b8d9dea6ae1900d7d435c1e1c5ff4b7882f3e699c97f6bf"
+    },
+    {
+      "path": "build/t481-s3/prompt031/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "003a3c69fd3314ed767ab61c295ecddceb2c7cc229296101f1c15e0e18438e07"
+    },
+    {
+      "path": "build/t481-s3/diagnostic029/ntvdm.exe",
+      "bytes": 2147840,
+      "sha256": "8049841e5037459e8ba883836ef164d16b7125e5870e1cbdd9166cc83392633c"
+    },
+    {
+      "path": "build/t481-s3/observer029/observer.386",
+      "bytes": 4631,
+      "sha256": "d161dfc950f4d08c7cf173d0437ccf5ce416b367c7e171cbab2c2a8ae7246205"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "bytes": 29450,
+      "sha256": "962a03f04b2c2e68d4ad842424e1e846cf304fe4b164e011fa9f5074e7b9dc72"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/interrupt-observer.asm",
+      "bytes": 3703,
+      "sha256": "3196b816ed735edf42a912bcd1bf2baca052ae8212248ac598083dfa46864d8f"
+    }
+  ],
+  "guest_receipts": [
+    {
+      "name": "A.TXT",
+      "hex": "610d0a"
+    },
+    {
+      "name": "B.TXT",
+      "hex": "620d0a"
+    },
+    {
+      "name": "READERS.BIN",
+      "hex": "02000000"
+    },
+    {
+      "name": "DONE.BIN",
+      "hex": "02000000"
+    }
+  ]
+}

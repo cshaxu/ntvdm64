@@ -1,0 +1,70 @@
+{
+  "case": "T481 S3 formal dual editor and Full",
+  "full": {
+    "pid": 25152,
+    "exit": 0,
+    "gates": 16,
+    "failed": 0
+  },
+  "editor": {
+    "pid": 19580,
+    "exit": 0,
+    "result": {
+      "nativeVm": "8083b000",
+      "dosVm": "80799000",
+      "menus": true,
+      "completed": 2,
+      "mouseVerified": false,
+      "saveVerified": false
+    }
+  },
+  "remaining": [
+    "mouse",
+    "typing/save isolation",
+    "reverse completion order",
+    "DOSONLY1 editors",
+    "remaining S3 acceptance"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/r047-verification/full/timings.json",
+      "bytes": 2098,
+      "sha256": "01b01ac8c78336ee8222132835f3175a1dd5c4540bacb42dee0649564dd6a03c"
+    },
+    {
+      "path": "build/t481-s3/full047.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "build/t481-s3/editor049/editor-result.json",
+      "bytes": 146,
+      "sha256": "af5780c626aca7a497b227296d1b0ce618ac15a53004803c4ed035e16e4e555b"
+    },
+    {
+      "path": "build/t481-s3/editor049/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "e41f61db2483674c8ba960be2c2a937c08e44b2b406ec96df1a3e454b48f9146"
+    },
+    {
+      "path": "build/t481-s3/editor049/screens.txt",
+      "bytes": 26884,
+      "sha256": "894be246a721f59a9582e6abb7f48fd92171404140c0117191c7f09b6141967c"
+    },
+    {
+      "path": "build/t481-s3/editor049/trace.txt",
+      "bytes": 24765,
+      "sha256": "17c6b238605f0e87bedc1ba6ba2d9909ea6586101f070eca1b8e595315d2484a"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-editors.ps1",
+      "bytes": 5843,
+      "sha256": "276a7e6d82f908fd9e55bdf8cb29be82dbe6abdca190db1c9d0f40ba1ce26cc5"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1",
+      "bytes": 4047,
+      "sha256": "1bc08f16969982ff5e15bff4accb0c94f7a1440d16afffac14be4b157fad7632"
+    }
+  ]
+}

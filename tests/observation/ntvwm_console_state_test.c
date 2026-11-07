@@ -67,6 +67,28 @@ static int input_contract(void)
         VERIFY_INPUT(ReadConsoleInputW(input,readback,ARRAYSIZE(readback),&count) &&
             count==(DWORD)length && readback[count-1].Event.KeyEvent.uChar.UnicodeChar==L'm');
     }
+    {
+        INPUT_RECORD alt={0};
+        alt.EventType=KEY_EVENT;alt.Event.KeyEvent.bKeyDown=TRUE;
+        alt.Event.KeyEvent.wRepeatCount=1;alt.Event.KeyEvent.wVirtualKeyCode='F';
+        alt.Event.KeyEvent.wVirtualScanCode=0x21;
+        alt.Event.KeyEvent.dwControlKeyState=LEFT_ALT_PRESSED;
+        VERIFY_INPUT(SetConsoleMode(input,0) && FlushConsoleInputBuffer(input));
+        VERIFY_INPUT(!ntvwm_input_write(input,&alt,1,&count) && count==1);
+        VERIFY_INPUT(ReadConsoleInputW(input,readback,1,&count) && count==1 &&
+            !readback[0].Event.KeyEvent.uChar.UnicodeChar);
+        VERIFY_INPUT(SetConsoleMode(input,ENABLE_VIRTUAL_TERMINAL_INPUT));
+        VERIFY_INPUT(!ntvwm_input_write(input,&alt,1,&count) && count==1);
+        /* conhost encodes the Alt prefix for a VT reader. */
+        VERIFY_INPUT(ReadConsoleInputW(input,readback,ARRAYSIZE(readback),&count) && count==2 &&
+            readback[0].Event.KeyEvent.uChar.UnicodeChar==27 &&
+            readback[1].Event.KeyEvent.uChar.UnicodeChar==L'f');
+        VERIFY_INPUT(SetConsoleMode(input,0) && FlushConsoleInputBuffer(input));
+        alt.Event.KeyEvent.dwControlKeyState|=LEFT_CTRL_PRESSED;
+        VERIFY_INPUT(!ntvwm_input_write(input,&alt,1,&count) && count==1);
+        VERIFY_INPUT(ReadConsoleInputW(input,readback,1,&count) && count==1 &&
+            !readback[0].Event.KeyEvent.uChar.UnicodeChar);
+    }
     /* The actual Console, not a frontend parser, performs cooked line editing. */
     VERIFY_INPUT(SetConsoleMode(input,ENABLE_LINE_INPUT|ENABLE_PROCESSED_INPUT));
     records[1]=records[0];records[1].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;

@@ -1,0 +1,58 @@
+{
+  "case": "T481 S3 editor040",
+  "mode": "386-dosonly0",
+  "runner_pid": 23968,
+  "result": "partial evidence; editor acceptance incomplete",
+  "product_delivery": false,
+  "proved": [
+    "two exact command tails O:\\winnt\\edit.exe and O:\\winnt\\edit.com admitted in different VMs",
+    "modern editor and DOS editor text frames both present before either command completes",
+    "DOS EDIT Alt+F menu shows Save As and Exit",
+    "modern EDIT Ctrl+Q and DOS EDIT menu Exit complete independently",
+    "both COMMAND prompts return, close and Windows exits normally"
+  ],
+  "missing": [
+    "modern EDIT Alt+F menu not observed despite keys sent",
+    "typing and saved-content isolation",
+    "guest mouse menu/exit",
+    "reversed completion order",
+    "DOSONLY1 editor positive/negative isolation"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/editor040.ps1",
+      "bytes": 4293,
+      "sha256": "7b0c94fe04372d2188b364faf9ed75df9aff1c695cccd513435cfb43f99bdf92"
+    },
+    {
+      "path": "build/t481-s3/editor040/controller.asm",
+      "bytes": 7824,
+      "sha256": "ed1a8ba0525fded99bd940492eca05f2692c24e18e19129f6aaeadad645cf230"
+    },
+    {
+      "path": "build/t481-s3/editor040/screens.txt",
+      "bytes": 18612,
+      "sha256": "8ae0f4dd910ae5a019d19ef128cd5c47544ca769d3a944acdddb08edd3a6a477"
+    },
+    {
+      "path": "build/t481-s3/editor040/trace.txt",
+      "bytes": 23320,
+      "sha256": "c4a8b2f48f0f1c8a2b149aef6abf1a922edb740bc48f12f0dc0d892510057b10"
+    },
+    {
+      "path": "build/t481-s3/editor040/runtime/matrix-results.json",
+      "bytes": 428,
+      "sha256": "b3acc27ffcbb9c95a7160c3d704241461479aa749aeee0fbd89b4ff8e4e6523e"
+    },
+    {
+      "path": "build/t481-s3/diagnostic039/ntvdm.exe",
+      "bytes": 2152960,
+      "sha256": "11ef63024126415e59507a097c33c71c1e917ebb478482328f6a387e798e285a"
+    },
+    {
+      "path": "build/t481-s3/observer039/observer.386",
+      "bytes": 4631,
+      "sha256": "d161dfc950f4d08c7cf173d0437ccf5ce416b367c7e171cbab2c2a8ae7246205"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ Push-Location $repo
 try {
     $exe=Join-Path $output 'ntvwm-console-state.exe'
     & cl.exe /nologo /W4 /MT /Isrc tests/observation/ntvwm_console_state_test.c `
-        src/ntvwm-exe/console_state.c `
+        src/ntvwm-exe/console_state.c src/lib-win32/process-observation/console_members.c `
         "/Fo$output\" "/Fe$exe" /link /incremental:no user32.lib *> (Join-Path $output 'build.log')
     if($LASTEXITCODE){throw "Compile failed: $output/build.log"}
     & $exe *> $log

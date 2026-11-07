@@ -1,0 +1,99 @@
+{
+  "packageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+  "destinations": [
+    "O:/repos.hobby/ntvdm64/assets/release",
+    "O:/winnt/system32"
+  ],
+  "images": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "32CF6F8DF3DED89D8A9E94A928B7B974CEB36238E0BC04CD9BA3FA3B2ED41A06",
+      "Machine": 332,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "55E27E892656CD363C46DD3AB334FED67B7EFF8CC62CC4EC53CBAEBC4AFA993E"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "EB80BCEEE8BDF667993DFFB94B1E99AC1A5483FBCAFCDE0D8CB3A332B3158585",
+      "Machine": 34404,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "5C479555AD95156267A82B259D2B015E74220FDF371D6F4A8A6099DE3B25CBF6"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "C970F4E207F90D258FD2F1FB3415C6DD79EEEA64DBBD499E8C73441E5A04C3EF",
+      "Machine": 34404,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "D04647E4F681885F159203493F4B9977A64AC790F70D5E969D0D13EA484734D4"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "DD98D01CA2431F642E090666A24FBEAA18BD62FFFCD4BE173DC026A00EE2F365",
+      "Machine": 34404,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "3F2EF5CCFD84B6F9E8B0D98A9791832557972523831927CA01CD5C6C9BF28A5E"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "5CD0A0797F985E7DBCF76AEA16E36A76FD194A2BBDE542B7F7A1A342A0574D8C",
+      "Machine": 332,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "137F262A1B0526C295520AB4A2CBFD7C2CC33B34500234B20604CA1248835063"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "2B1C7C421058912523DE62E6469EBD2FFF6A0AB120B12528527D78D696CF8978",
+      "Machine": 34404,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "9ABAD82D0EC06B779154E1B9E39FCF52938234CE4EC1FFA333AEB7BB625C4AA6"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "46698A4241E6FEA2D40BC4B0DF7C8EF8788C1F3BBCBAF330EBA91DDC6D0A2B85",
+      "Machine": 34404,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "F33949DAAC7347C597CE1E8A2E13CE7274E5DC2CAD77E89CAFC3E00DD33CBE51"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "B0492C3C62A943545A2A86A0100F8E8AE334F84B81ECD55D027B1558A80ADCB4",
+      "Machine": 332,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "6578739DBC914600E1F823C7783A8E615665ACE30E3D87E4470E4C4D74DE7374"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "AD57E949B350D0AFACBD90B1F7B4EAA39BBDC92732CE5AE7A10D19D917946BE8",
+      "Machine": 332,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "FF757E9BD370EE960B06D2EB287F8EE1E8D2727B9FFBF382FE43A6570408B8C0"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "BF137A48FFEBC8BBC6AFEA882D9C9D0C655E98784F96B04481ABAE61F1ACC316",
+      "Machine": 332,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "A2DB9F2246E890267733A0E00CCBEAFF8F9A7901DC2BD7A39D0E420E58DED861"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "BFF2B747F52A2D5CD374092FA93AED66C08F40CA9C2F822FAEF6C703276750C3",
+      "Machine": 34404,
+      "PackageId": "b3ea681a-18f4-490b-960c-b1acd249eeba",
+      "InputSha256": "8DB7B735BAF33F68BF5215B519454F540094FFFDF2C459FFDC8757B0FF1011C8"
+    }
+  ],
+  "manifestHash": "ED74FA4E2C5C32260A3488D1C5410F6A19F9B3D2D80723064B5549331C86D012",
+  "utc": "2026-11-07T18:23:28.5066446Z"
+}

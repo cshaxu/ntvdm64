@@ -7,8 +7,8 @@
 #include "mvdm_guest_location.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_vm_command.h"
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
 #include "ntvdm-exe/session/session.h"
+#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
 #include "common/protocol/console_io.h"
 #include "ntvdm-exe/frontend/vm_text.h"
 #include <windows.h>
@@ -402,6 +402,37 @@ static void trace(unsigned operation, uint32_t vm, uint32_t token)
     ReleaseSRWLockExclusive(&lock);
 }
 
+/* Read-only diagnostic of the existing vm_command descriptor and VMM client
+ * frame (layout documented by mvdm_vm_command.c). Never recapture/normalize
+ * the command: that would change the original CR terminator before admission. */
+static void trace_command(uint32_t address, uint32_t extent, uint32_t vm)
+{
+    uint32_t descriptor[5], frame[18], word = 0, i;
+    session *owner = session_thread_current();
+    guest_memory_lease *lease;
+    uint8_t *bytes;
+    mvdm_guest_location location;
+    mvdm_guest_location_lease command;
+    if (extent != sizeof(descriptor) || !session_guest_memory_acquire(owner,
+        address, sizeof(descriptor), GUEST_MEMORY_ACCESS_READ, &lease, &bytes))
+        ExitProcess(ERROR_INVALID_ADDRESS);
+    memcpy(descriptor, bytes, sizeof(descriptor));
+    if (!session_guest_memory_release(owner, lease, 0) ||
+        !session_guest_memory_acquire(owner, descriptor[0], sizeof(frame),
+            GUEST_MEMORY_ACCESS_READ, &lease, &bytes)) ExitProcess(ERROR_INVALID_ADDRESS);
+    memcpy(frame, bytes, sizeof(frame));
+    if (!session_guest_memory_release(owner, lease, 0)) ExitProcess(ERROR_INVALID_ADDRESS);
+    mvdm_guest_location_set_real_mode(&location, (uint16_t)frame[15], (uint16_t)frame[1]);
+    if (!mvdm_guest_location_acquire_vm(&location, descriptor[1], 64,
+        GUEST_MEMORY_ACCESS_READ, &command)) ExitProcess(ERROR_INVALID_ADDRESS);
+    for (i = 0; i < 64; ++i) {
+        uint8_t ch = command.bytes[i];
+        word |= (uint32_t)ch << ((i % 4) * 8);
+        if (i % 4 == 3 || !ch || ch == 13) { trace(0x360 + i / 4, vm, word); word = 0; }
+        if (!ch || ch == 13) break;
+    }
+    if (!mvdm_guest_location_release(&command, 0)) ExitProcess(ERROR_INVALID_ADDRESS);
+}
 BOOL test_cmd_dispatch(ULONG service)
 {
     uint32_t callback, target[2];
@@ -426,6 +457,87 @@ BOOL test_cmd_dispatch(ULONG service)
     return TRUE;
 }
 
+/* Diagnostic-only copy after transfer, before guest application/free.
+ * Operation14 traces separately establish the later application result. */
+static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
+{
+    uint32_t descriptor[7], count, i, cell_address, cell_bytes = 2, stride;
+    ntvdm_vm_text_header header;
+    char path[MAX_PATH], *text;
+    BYTE *cells;
+    FILE *file;
+    static uint32_t editors[16];
+    static DWORD editor_count;
+    if (!GetEnvironmentVariableA("MVDM_SCREEN_TRACE", path, sizeof(path))) return;
+    if (extent != sizeof(descriptor) ||
+        !mvdm_softpc_guest_memory_copy_from(address, (BYTE *)descriptor, sizeof(descriptor)) ||
+        descriptor[6] || descriptor[5] < sizeof(header) ||
+        !mvdm_softpc_guest_memory_copy_from(descriptor[4], (BYTE *)&header, sizeof(header))) return;
+    if (!header.columns || !header.rows || header.columns > 256 || header.rows > 256) return;
+    count = header.columns * header.rows;
+    if (descriptor[5] < sizeof(header) + count * 2) return;
+    cell_address = descriptor[4] + sizeof(header);
+    stride = header.columns * 2;
+    if (descriptor[5] >= sizeof(header) + count * 2 + sizeof(ntvdm_vm_video_application)) {
+        ntvdm_vm_video_application video;
+        uint32_t offset = sizeof(header) + count * 2;
+        if (!mvdm_softpc_guest_memory_copy_from(descriptor[4] + offset, (BYTE *)&video, sizeof(video)))
+            ExitProcess(ERROR_INVALID_ADDRESS);
+        if (video.signature == NTVDM_VM_VIDEO_SIGNATURE &&
+            video.description.kind == CONSOLE_VIDEO_TEXT_FRAME) {
+            const console_video_description *d = &video.description;
+            if (!d->width || !d->height || d->width > 256 || d->height > 256 ||
+                (d->stride != d->width * 2 && d->stride != d->width * 3) ||
+                d->bytes != sizeof(console_text_style) + d->height * d->stride ||
+                descriptor[5] - offset - sizeof(video) < d->bytes)
+                ExitProcess(ERROR_INVALID_DATA);
+            header.columns = d->width; header.rows = d->height;
+            count = header.columns * header.rows;
+            stride = d->stride; cell_bytes = stride / header.columns;
+            cell_address = descriptor[4] + offset + sizeof(video) + sizeof(console_text_style);
+        }
+    }
+    cells = HeapAlloc(GetProcessHeap(), 0, stride * header.rows);
+    text = HeapAlloc(GetProcessHeap(), 0, count + header.rows + 1);
+    if (!cells || !text) ExitProcess(ERROR_NOT_ENOUGH_MEMORY);
+    if (!mvdm_softpc_guest_memory_copy_from(cell_address, cells, stride * header.rows))
+        ExitProcess(ERROR_INVALID_ADDRESS);
+    for (i = 0; i < header.rows; ++i) {
+        uint32_t x;
+        for (x = 0; x < header.columns; ++x) {
+            BYTE ch = cells[i * stride + x * cell_bytes];
+            text[i * (header.columns + 1) + x] = ch >= 32 && ch < 127 ? (char)ch : ' ';
+        }
+        text[i * (header.columns + 1) + header.columns] = '\n';
+    }
+    text[count + header.rows] = 0;
+    (void)fopen_s(&file, path, "ab");
+    if (!file) ExitProcess(ERROR_OPEN_FAILED);
+    fprintf(file, "VM=%08lx TOKEN=%08lx:%08lx %lux%lu\n%s\n",
+        (unsigned long)vm, (unsigned long)descriptor[1], (unsigned long)descriptor[0],
+        (unsigned long)header.columns, (unsigned long)header.rows, text);
+    fclose(file);
+    if (strstr(text, "File") && strstr(text, "Edit") &&
+        GetEnvironmentVariableA("MVDM_EDITORS_READY", path, sizeof(path))) {
+        for (i = 0; i < editor_count && editors[i] != vm; ++i) {}
+        if (i == editor_count) {
+            if (editor_count == sizeof(editors) / sizeof(editors[0])) ExitProcess(ERROR_BUFFER_OVERFLOW);
+            editors[editor_count++] = vm;
+            {
+                DWORD written;
+                HANDLE ready = CreateFileA(path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+                    NULL, CREATE_ALWAYS, 0, NULL);
+                if (ready == INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
+                if (!WriteFile(ready, &editor_count, sizeof(editor_count), &written, NULL) ||
+                    written != sizeof(editor_count)) ExitProcess(ERROR_WRITE_FAULT);
+                CloseHandle(ready);
+            }
+        }
+    }
+    HeapFree(GetProcessHeap(), 0, text);
+    HeapFree(GetProcessHeap(), 0, cells);
+}
+
 int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     uint32_t low, uint32_t high, uint32_t vm, int ring0,
     mvdm_vm_bridge_result *result)
@@ -441,12 +553,33 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0))
         return mvdm_vm_bridge_bop_direct(signature, operation, low, high,
             vm, ring0, result);
-    if (operation == 16) {
+    if (operation == 251) {
+        static uint32_t readers[16];
+        static DWORD count;
+        WCHAR path[MAX_PATH];
+        DWORD i, written;
+        trace(251, vm, 0);
+        ZeroMemory(result, sizeof(*result));
+        if (!GetEnvironmentVariableW(L"MVDM_PROMPT_READERS", path, MAX_PATH)) return 1;
+        for (i = 0; i < count; ++i) if (readers[i] == vm) return 1;
+        if (count == sizeof(readers) / sizeof(readers[0])) ExitProcess(ERROR_BUFFER_OVERFLOW);
+        readers[count++] = vm;
+        {
+            HANDLE file = CreateFileW(path, GENERIC_WRITE,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, 0, NULL);
+            if (file == INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
+            if (!WriteFile(file, &count, sizeof(count), &written, NULL) || written != sizeof(count))
+                ExitProcess(ERROR_WRITE_FAULT);
+            CloseHandle(file);
+        }
+        return 1;
+    }
+    if (operation == 16 || operation == 250) {
         trace(0x400 + low, vm, high);
         ZeroMemory(result, sizeof(*result));
         return 1;
     }
-    if (operation == 18) {
+    if (operation == 18 || operation == 252) {
         trace(18, vm, high);
         if (GetEnvironmentVariableW(L"MVDM_CONSUME_KEYBOARD", NULL, 0))
             InterlockedExchange(&keyboard_consumer, (LONG)vm);
@@ -463,24 +596,28 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         }
         return 1;
     }
-    if (operation == 17) {
+    if (operation == 17 || operation == 253) {
         KEY_EVENT_RECORD key = {0};
         ZeroMemory(result, sizeof(*result));
         /* Test-only stimulus through the original scan-code conversion and
          * controller. No BIOS buffer writes or fabricated interrupt/result. */
-        if ((low != 'A' || high != 0x1e) &&
-            (low != 'B' || high != 0x30)) {
+        if (!(low & 0xff) || (low & ~0x3ffu) ||
+            (low & 0x300) == 0x300 || !high || high > 0x7f) {
             result->status = ERROR_INVALID_PARAMETER;
             return 1;
         }
-        key.wVirtualKeyCode = (WORD)low;
+        key.wVirtualKeyCode = (WORD)(low & 0xff);
         key.wVirtualScanCode = (WORD)high;
         key.wRepeatCount = 1;
         host_ica_lock();
-        key.bKeyDown = TRUE;
-        nt_key_down_action(&key);
-        key.bKeyDown = FALSE;
-        nt_key_up_action(&key);
+        if (!(low & 0x200)) {
+            key.bKeyDown = TRUE;
+            nt_key_down_action(&key);
+        }
+        if (!(low & 0x100)) {
+            key.bKeyDown = FALSE;
+            nt_key_up_action(&key);
+        }
         host_ica_unlock();
         trace(17, vm, low);
         if (low == 'A' && blocked_keyboard_ready && !SetEvent(blocked_keyboard_ready))
@@ -489,9 +626,38 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     }
     if (operation == 5 || operation == 7 || operation == 8 ||
         operation == 11 || operation == 12) trace(operation, vm, low);
+    if (operation == 13) {
+        int handled = mvdm_vm_bridge_bop_direct(signature, operation, low, high, vm, ring0, result);
+        if (handled && !result->status) trace_application(vm, low, high);
+        return handled;
+    }
+    if (operation == 14) {
+        uint32_t descriptor[7];
+        if (high == sizeof(descriptor) &&
+            mvdm_softpc_guest_memory_copy_from(low, (BYTE *)descriptor, sizeof(descriptor)))
+            trace(0x370, vm, descriptor[6]);
+    }
+    if (operation == 12) {
+        static LONG completed;
+        WCHAR path[MAX_PATH];
+        int handled = mvdm_vm_bridge_bop_direct(signature, operation, low, high,
+            vm, ring0, result);
+        if (handled && !result->status &&
+            GetEnvironmentVariableW(L"MVDM_COMPLETION_COUNT", path, MAX_PATH)) {
+            DWORD count = (DWORD)InterlockedIncrement(&completed), written;
+            HANDLE file = CreateFileW(path, GENERIC_WRITE,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, 0, NULL);
+            if (file == INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
+            if (!WriteFile(file, &count, sizeof(count), &written, NULL) || written != sizeof(count))
+                ExitProcess(ERROR_WRITE_FAULT);
+            CloseHandle(file);
+        }
+        return handled;
+    }
     if (operation == 11 && GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0)) {
         uint32_t service;
         DWORD error = mvdm_vm_command_service(low, high, &service);
+        if (!error && service == 8) trace_command(low, high, vm);
         if (error) ExitProcess(error);
         mvdm_vm_bridge_bop_direct(signature, operation, low, high, vm, ring0, result);
         trace(0x351, vm, result->status);

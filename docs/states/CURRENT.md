@@ -60,4 +60,22 @@ P1 visible-frame projection repair is built and published as complete11 package
 c0c312c1-01ca-408f-8b98-58ab8d9e812e. Full00416/16, native006, and two-VM
 geometry005/007 both completion orders pass; raw receipts are under
 artifacts/t481-s3. P1 includes these sources and release evidence. Dual EDIT Alt/menu/guest-mouse and
-remaining VM I/O acceptance remain open; S3 is not closed.
+remaining VM I/O acceptance remain open; S3 is not closed. Required editor matrix:
+dosonly=0 routes both images through Run16 to their respective workers;
+dosonly=1 runs edit.com inside guest DOS and rejects native edit.exe without
+launching a host editor, leaving the prompt usable. DOSONLY1 must also prove
+no command-triggered host payload, nested worker/task chain or VM payload
+frontend; original guest DOS VM concurrency remains permitted.
+
+Prompt031/032 now pass two actual COMMAND prompt echo/exit calibrations in
+DOSONLY0/1 respectively, including normal Win3.1 exit. DOSONLY0 observes real
+host command admissions/completions; DOSONLY1 observes none. These are fixture
+and basic routing evidence only; the required dual EDIT matrix remains open.
+
+S3 candidate: modern EDIT Alt+F needs a printable character at the VT boundary;
+NTVWM now fills a missing Alt character only in VT mode. Native041/042 contrast
+and real Console045 pass. Cached043 and actual guest editor046 now pass, including both Alt menus and
+normal exit. Full047 passed 16/16. The checked-in editor049 runner also passed distinct-VM
+Alt menus, two completions and normal Win3.1 exit. Complete11 package b3ea681a-18f4-490b-960c-b1acd249eeba is now published
+to both destinations with matching hashes; commit/push follows. Mouse/save/
+reverse-order and DOSONLY1 editor acceptance remain open.

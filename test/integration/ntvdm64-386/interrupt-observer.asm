@@ -25,6 +25,11 @@ control:
     int 0x20
     dd 0x10041
     jc .failed
+    mov eax, 0x21
+    mov esi, observe_dos_read
+    int 0x20
+    dd 0x10041
+    jc .failed
     popad
 .ok:
     clc
@@ -39,11 +44,26 @@ observe:
     mov edx, eax                   ; reflected vector
     mov esi, [ebx]                 ; actual CB_VM_Status, observed only
     mov eax, 0x4e544d56
-    mov ecx, 16                    ; diagnostic host only; no product service
+    mov ecx, 250                    ; diagnostic host only; no product service
     db 0xc4,0xc4,0xb1
     popad
     popfd
     stc                            ; pass the original interrupt onward
+    ret
+observe_dos_read:
+    cmp byte [ebp+29], 0x0a        ; actual DOS buffered line read, observation only
+    jne .chain
+    pushfd
+    pushad
+    xor edx, edx
+    xor esi, esi
+    mov eax, 0x4e544d56
+    mov ecx, 251
+    db 0xc4,0xc4,0xb1
+    popad
+    popfd
+.chain:
+    stc
     ret
 observe_keyboard_intercept:
     cmp byte [ebp+29], 0x4f         ; Client_AH, BIOS scan interception only
@@ -77,7 +97,7 @@ observe_ddb:
 
 segment _LTEXT
 stimulus:
-    ; Independent probe API: client AX=virtual key, BX=scan code.
+    ; Independent probe API: client AX=virtual key plus bit8 make-only / bit9 break-only, BX=scan code.
     ; The diagnostic host routes it through the real emulated controller.
     pushad
     push dword [ebp+28]
@@ -100,13 +120,13 @@ stimulus:
     mov edx, [ebx]
     mov esi,edx
     mov eax,0x4e544d56
-    mov ecx,18
+    mov ecx,252
     db 0xc4,0xc4,0xb1
 .send:
     movzx edx, word [esp]         ; saved original client AX
     movzx esi, word [ebp+16]       ; Client_EBX
     mov eax, 0x4e544d56
-    mov ecx, 17
+    mov ecx, 253
     db 0xc4,0xc4,0xb1
     mov dword [ebp+28],1
 .done:

@@ -202,6 +202,32 @@ void ntvwm_trace_error(const char *stage,DWORD operation,DWORD error)
 
 /* Same-owner recovery: S8 native_console_host.c::input_records. Do not use an
  * inherited Ctrl-C ignore flag: each native target retains its own handlers. */
+/* BIOS Alt combinations carry a scan code but no character. Classic Console
+ * consumers need that original record; a VT consumer needs the printable
+ * character so conhost can encode its Alt prefix. Use only this record's
+ * modifiers and a non-mutating layout translation; do not maintain key state. */
+static INPUT_RECORD vt_key_character(const INPUT_RECORD *input)
+{
+    INPUT_RECORD result=*input;
+    const KEY_EVENT_RECORD *key=&input->Event.KeyEvent;
+    BYTE state[256]={0};WCHAR text[2];int length;
+    DWORD control=key->dwControlKeyState;
+    if(input->EventType!=KEY_EVENT || !key->bKeyDown || key->uChar.UnicodeChar ||
+        !(control&(LEFT_ALT_PRESSED|RIGHT_ALT_PRESSED)) ||
+        (control&(LEFT_CTRL_PRESSED|RIGHT_CTRL_PRESSED)) || key->wVirtualKeyCode>255)
+        return result;
+    state[key->wVirtualKeyCode]=0x80;
+    if(control&SHIFT_PRESSED)state[VK_SHIFT]=0x80;
+    if(control&CAPSLOCK_ON)state[VK_CAPITAL]=1;
+    if(control&NUMLOCK_ON)state[VK_NUMLOCK]=1;
+    /* Alt is represented by dwControlKeyState, not part of character lookup.
+     * Flag4 leaves the host thread's dead-key translation state unchanged. */
+    length=ToUnicodeEx(key->wVirtualKeyCode,key->wVirtualScanCode,state,
+        text,ARRAYSIZE(text),4,GetKeyboardLayout(0));
+    if(length==1 && text[0]>=32)result.Event.KeyEvent.uChar.UnicodeChar=text[0];
+    return result;
+}
+
 DWORD ntvwm_input_write(HANDLE input,const INPUT_RECORD *records,DWORD count,DWORD *written)
 {
     DWORD mode,done;
@@ -226,6 +252,10 @@ DWORD ntvwm_input_write(HANDLE input,const INPUT_RECORD *records,DWORD count,DWO
             DWORD error=write_vt_mouse(input,&record->Event.MouseEvent);
             if(error)return error;
         } else {
+            INPUT_RECORD translated;
+            if(mode&ENABLE_VIRTUAL_TERMINAL_INPUT) {
+                translated=vt_key_character(record);record=&translated;
+            }
             if(!WriteConsoleInputW(input,record,1,&done))return GetLastError();
             if(done!=1)return ERROR_WRITE_FAULT;
         }

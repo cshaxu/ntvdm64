@@ -1,0 +1,43 @@
+{
+  "case": "T481 S3 native VT Alt character candidate",
+  "product_delivery": false,
+  "baseline": "BIOS-style Alt+F with UnicodeChar=0 does not open modern EDIT menu; explicit f does",
+  "candidate": "VT-only non-mutating character lookup opens menu for both forms",
+  "passed": [
+    "edit-alt041 baseline/control",
+    "edit-alt042 repaired zero-character/control",
+    "state045 complete hidden Console contract including classic zero-char and VT ESC+f"
+  ],
+  "pending": [
+    "cached043 x86/x64 and shared tests",
+    "editor046 real guest dual-editor menu validation",
+    "Full and coherent publication/commit/push"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/alt041/result.txt",
+      "bytes": 3113,
+      "sha256": "dff03fede7e3ff40a8fd240d2728c7b4d6b236451048efa5dc105bf28b43bcbb"
+    },
+    {
+      "path": "build/t481-s3/alt042/result.txt",
+      "bytes": 3113,
+      "sha256": "282ea420ee5e3a844090452a3e3f2a56e19e8f7583d08422b7ce4b33e84cb1a7"
+    },
+    {
+      "path": "build/t481-s3/state045.out",
+      "bytes": 311,
+      "sha256": "08960357bf0d1f59095215c71f1c6a6acbfe6f42a3d1fd1fd3cb773122edb618"
+    },
+    {
+      "path": "src/ntvwm-exe/console_state.c",
+      "bytes": 26302,
+      "sha256": "90c1d064c5888c06f6d7a3a2d1bc41e00b799ffd3d2e1481c0b14e57060c1f5a"
+    },
+    {
+      "path": "tests/observation/ntvwm_console_state_test.c",
+      "bytes": 15057,
+      "sha256": "6e5e13d3690ba014d40245434feb3993598e1e980b834eab42ee3ccac0816c47"
+    }
+  ]
+}

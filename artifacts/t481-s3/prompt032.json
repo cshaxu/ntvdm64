@@ -1,0 +1,60 @@
+{
+  "case": "T481 S3 prompt032",
+  "mode": "386-dosonly1",
+  "runner_pid": 25184,
+  "result": "pass",
+  "product_delivery": false,
+  "assertions": [
+    "two actual original COMMAND DOS prompt VMs",
+    "two matching echo file receipts",
+    "zero VM command admission operation11 across full diagnostic trace",
+    "both prompts and Windows exit normally"
+  ],
+  "not_proved": [
+    "edit.com guest-local interaction",
+    "edit.exe rejection",
+    "complete process/worker/frontend isolation matrix",
+    "guest mouse menus"
+  ],
+  "inputs": [
+    {
+      "path": "build/t481-s3/prompt032.ps1",
+      "bytes": 4582,
+      "sha256": "c974c0bacf991ed61c02bc543714a4b09cdc5b8c0e1614236e43a5fbd3b11b08"
+    },
+    {
+      "path": "build/t481-s3/prompt032/controller.asm",
+      "bytes": 6943,
+      "sha256": "f984cc48b38d3a13873044f54867ec43bb38447679a9b6d8a175347f7bf17516"
+    },
+    {
+      "path": "build/t481-s3/prompt032/controller.exe",
+      "bytes": 2008,
+      "sha256": "697d53de2017aa86ab92ba77416397c70771cdd84ddf4b233032ab525fda06ac"
+    },
+    {
+      "path": "build/t481-s3/prompt032/trace.txt",
+      "bytes": 14714,
+      "sha256": "4c83f60863496b22214dadd53211eca08c769c621cb89dfc7edc110f3b9d63bb"
+    },
+    {
+      "path": "build/t481-s3/prompt032/runtime/matrix-results.json",
+      "bytes": 427,
+      "sha256": "b0d3e9c61abe0addb4d47513e4b531ec89774cbe406cc30d1e5fd7777bae7e57"
+    }
+  ],
+  "guest_receipts": [
+    {
+      "name": "A.TXT",
+      "hex": "610d0a"
+    },
+    {
+      "name": "B.TXT",
+      "hex": "620d0a"
+    },
+    {
+      "name": "READERS.BIN",
+      "hex": "02000000"
+    }
+  ]
+}
