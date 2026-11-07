@@ -674,6 +674,38 @@ unread input owned by the exact VM across native command retirement and use
 a guest-consumption boundary that preserves that input's semantics. Do not
 close S6 or enable the unfinished producer on the strength of these exclusions.
 
+## Input lifetime audit097: completion is not a handback owner
+
+Current source gives the following concrete normal-return sequence:
+NTVWM presentation_end stops its input publisher, captures the final screen,
+reads remaining native Console records and PREPEND_KEYS returns them in
+tail-first batches preserving FIFO. The VM provider validates and prepends
+these records to its owned queue. After command execution returns, executor
+sets finishing, retires the frontend and joins its callbacks, removes the job,
+destroys that queue, and only then completes the guest continuation. There is
+no transfer of those remaining records between retirement and destruction.
+The join protects memory lifetime but does not preserve input ownership.
+
+Moving the queue pointer into the continuation alone would not fix this:
+mvdm_vm_continuation_consume copies completion and immediately detaches the
+registry reference. That operation is exactly what lets the waiting guest
+command return. Later INT16 or IRQ consumers therefore need ownership that
+outlives this command token, scoped to the same VM generation. Retaining a
+continuation indefinitely, replaying into the current focus VM, or claiming
+queue destruction as an input flush would each violate a different contract.
+The existing47-operation wire protocol has no separate flush-input operation;
+no new operation or successful flush stub is introduced by this audit.
+
+Required order: close producer admission; join native/frontend callbacks;
+transfer the remaining ordered records to a proven VM-generation-owned guest
+consumer; acknowledge that ownership transfer; then publish command completion.
+Do not wait for actual DOS consumption before completion, because the parent
+may only issue its next keyboard read after command return. VM death cancels
+its own pending input; numeric handle reuse must not inherit it. The remaining
+implementation question is the actual guest consumer, not adding another
+host snapshot API or retaining the short-lived job longer. No runtime changes
+or new acceptance claims accompany this call-chain result.
+
 ## Failure-atomic input read082--085
 
 Review found that read_keys consumed the queue before resetting its readiness
