@@ -43,3 +43,24 @@ Historical S3 first Full scripted relaunch failure remains non-passing evidence;
 its later unchanged test and12 immediate pairs passed. No intermittent root
 cause is claimed. Existing DOS4GW/NESticle exclusion remains, never a pass.
 No guest or new feature/tolerance work is included in this closure.
+
+## Post-closure rebase (2026-11-06)
+
+Owner requested rebase onto the latest committed main and T closure. Rebased
+all 13 local commits from 0c7f8963a onto main
+3eb6a1d3aaf9097bf711dc661e5217b75a488e60; replay tip is fdece4bd7.
+The pre-rebase history remains at codex/t480-before-rebase-20261106, preserving
+historical evidence revision references. Main's uncommitted work was untouched.
+
+Only Current and release assets conflicted. Current retains this worktree's
+T480 closure; assets/release is byte-identical to the pinned main commit.
+Both host mirror source trees are byte-identical to the accepted pre-rebase
+T480 tip. Main's addon, test and evidence updates are retained. Importing these
+already committed changes does not constitute new guest audit or implementation.
+
+S5 Full16/16, gameplay and publication receipts describe the pre-rebase package,
+not the combined revision or today's main-derived release assets. Under the
+standing integration-only delivery arrangement, no new build, runtime test or
+publication is claimed. Final ancestry, source/asset identity, documentation
+and diff checks accompany this rebase. T480 remains closed; no new S is admitted.
+No O:/winnt write or push.

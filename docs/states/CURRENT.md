@@ -6,7 +6,15 @@
 [Task closure](../history/m0-t480-closure.md) records the bounded host-mirror
 program, final delivery and explicit proof limits.
 
-## Latest Delivery
+## Latest Integration
+
+Rebased onto main 3eb6a1d3a; T480 remains closed. Host mirror sources retain
+the accepted T480 bytes; assets/release now uses main's complete package.
+The test/publication results below belong to the pre-rebase revision, not a
+new test of the combined revision. See the task closure's post-rebase record.
+No new build, runtime test, publication or push was performed for this rebase.
+
+## Latest Delivery (before rebase)
 
 [S5 evidence](../etc/evidence/m0-t480-s5-final-minimization.md): six original
 same-line comments restored; all1060 host C/H identities and prior coverage
