@@ -2,37 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T481 S1 — Integrate T480 mirror audit with T479 delivery.**
-Owner closes T479 and directs all T480 commits, including guest mirror format
-restoration, to be integrated, then built, tested, published, committed and
-pushed. Original guest binaries remain unmodified and are not recompiled.
-[T479 S9 delivery](../etc/evidence/m0-t479-s9-delivery.md) preserves its
-qualified CHAIN2 package; [T479 S6 handoff](../etc/evidence/m0-t479-s6-closure-handoff.md)
-and the [queued successor](../proposals/proposal-guest-multitask-io-completion-001.md)
-retain unfinished guest multitasking obligations. [T480 closure](../history/m0-t480-closure.md)
-records the upstream audit and its evidence limits.
+**Active: M0 T481 S2 — Guest VM input return and lifecycle completion.**
+Owner expands T481 to own the complete queue-first guest multitask completion
+package. S1 integration delivery is committed and pushed at ceea7f1f8; its
+package remains the published baseline, not proof of complete VM I/O.
+The [working plan](../etc/operations/m0-t481-multitask-completion-plan.md)
+retains every T479 S6 obligation and the remaining sequential stages.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Candidate Proposal | Owner-directed integration of T480. |
-| Identifier Mode | M0 T481 S1, Ordinary Mode. |
-| Admission And Approval | Owner explicitly directs closure, complete T480 integration and delivery. |
-| Objective | Preserve both histories and verified S9 functionality; qualify and publish combined host package. |
-| Non-goals | No original guest binary modification or recompilation; no unrelated feature work. |
-| Reference Baseline | Main 151c01c1c and T480 a3dd057ee, common ancestor ab413287f. |
-| Files And ABI Surface | T480 mirror restorations, affected build/tests/docs and eleven-image release. |
-| Applicable Rules | Execution, source policy and mirror provenance. |
-| Verification | Resolve conflicts; cached full builds, affected tests and Full gate; verify release hashes. |
-| Expected Markers | S9 CHAIN2 remains intact, T480 selected changes retained, eleven coherent images. |
-| Asset Needs | Existing build cache and test-owned guest media; no guest rebuild. |
-| Reporting Requirements | Integration scope, conflicts, test results, release hashes and remaining limits. |
-| Stop Conditions | Unproved semantic loss or need to modify guest binary. |
-| Exit Criteria | Complete build, tests, coherent publication, review, commit and push; await acceptance. |
-| Original Owner Request | Close T479, integrate all adjacent T480 results and deliver. |
-| Similar-Issue Sweep | Audit overlapping mirror and S9 source changes and registrations. |
-| Temporary Evidence | build/t481-integration, owned background runs and retained receipts. |
+| Candidate Proposal | Queue-first guest multitask I/O completion, now admitted into T481. |
+| Identifier Mode | M0 T481 S2, Ordinary Mode. |
+| Admission And Approval | Owner directs this T to finish the queue-first task and sets active goal: complete multitask payload functionality. |
+| Objective | Complete Win3.1 VM input return and normal/cancelled lifecycle without suspending unrelated guest VMs. |
+| Non-goals | No original guest modification/rebuild; no Win95-first work, hardware V86 monitor, speculative protocol completion or new lifecycle authority. |
+| Reference Baseline | ceea7f1f8; archived T479 S6 candidate based on cedebcab55ec1da1b15557454985da78dca7ccf8. |
+| Files And ABI Surface | Authored ntvdm64-386, NTVDM VM executor/I/O/wake/frontend adapters and their tests; retain existing RPC and I/O control ownership. |
+| Applicable Rules | Execution, architecture, coding, source policy and the approved BIOS/INT16 input-return boundary. |
+| Verification | Review candidate per file; input order/repeats/extended keys/two-VM reuse; attribute fill002 and119; cancellation/normal exit; cached builds, Full gates and actual guest probes. |
+| Expected Markers | No lost returned keys, no cross-VM delivery, no stranded worker or blocked retirement; actual guest receipts rather than dispatch-only coverage. |
+| Asset Needs | Existing immutable Win3.1 media and owned probe runners; independently authored addon build. |
+| Reporting Requirements | Selected code versus candidate; caller/provider evidence; exact open failures and coherent package hashes. |
+| Stop Conditions | New semantic concession or original guest patch required; retain failing evidence and continue independent work. |
+| Exit Criteria | Input/lifecycle matrix proved; complete host/addon publication, review, commit and push. No known foundation defect transferred to force closure. |
+| Original Owner Request | This T must also own complete queue-first multitask payload completion. |
+| Similar-Issue Sweep | VM generation reuse, all four cancellation owners, input ownership, nested handback and NTSRV coordination. |
+| Temporary Evidence | build/t481-s2, task-owned runs; 24-hour/4-GiB review budget, inspect no-progress runs at their contract deadlines; archive required evidence before disposal. |
 
 ## Current Technical Baseline
 
@@ -46,4 +43,4 @@ Combined T479/T480 package 25408bd6-e51b-489d-9255-0951c53ad9f3 is published at 
 
 ## Recent Governance
 
-The combined release and validation have completed; final delivery is being committed.
+S1 integration delivery is committed and pushed at ceea7f1f8. S2 is admitted by the owner; no new runtime release is claimed.

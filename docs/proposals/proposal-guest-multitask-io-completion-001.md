@@ -1,6 +1,10 @@
 # Proposal — guest multitask I/O completion and acceptance
 
-## Admission and ownership
+## Admission disposition
+
+Owner admits this complete package into T481. The [active working plan](../etc/operations/m0-t481-multitask-completion-plan.md) owns execution; the proposal below is retained as the original obligation inventory, not an additional queued task.
+
+## Original admission and ownership
 
 Owner-directed next T candidate, placed first in Queue after the bounded T479
 S6 closure. No numeric T is allocated before admission. This package owns all
