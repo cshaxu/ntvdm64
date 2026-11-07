@@ -17,7 +17,7 @@ no missing capability is silently waived.
 
 | S | Scope | Required outcome |
 | --- | --- | --- |
-| S2 | Input candidate, input return, normal/cancelled lifecycle | Ordered/repeated/extended input, greater-than15-word handback, two-VM isolation/reuse; source attribution and repair of fill002 and119; blocked I/O cancellation and normal exit. |
+| S2 | Input candidate, input return, normal/cancelled lifecycle | Ordered/repeated/extended input, greater-than15-word handback, two-VM isolation/reuse; blocked I/O cancellation and normal exit; historical fill002/119 disposition follows the owner-approved closure below. |
 | S3 | Remaining Win3.1 input/text/geometry/fonts/codepages/display/metadata and nested chains | Reached production caller/provider matrix; actual guest application acknowledgements; two real VM chains in both completion orders, redirection and cancellation. |
 | S4 | Win95 after Win3.1 | Wait/wake, identity, init rollback, input/presentation and lifetime verified separately; qualified .vxd artifact. |
 | S5 | Combined qualification | All obligation rows have actual acceptance evidence or explicitly approved source-proven immutable-guest disposition; complete11 host images and addon manifests, applicable Full regressions, publication, review, commit/push. |
@@ -368,3 +368,34 @@ P4 was pushed as4aeae35de. Its evidence preserves failed050/052 and passing
 LocalDirectoryControl probe input, separate from its O: result files; this
 path difference is not established as a failure cause. Do not patch it on
 that hypothesis. Product remains P1, with no additional recovery machinery.
+
+## S2 closure and S3 admission
+
+Owner approves closing S2 with the two unreproduced historical failures retained
+as history, then clarifies: investigate only a reproducible current failure.
+fill002's fill/exit rerun passed; current normal/cancelled two-VM paths pass.
+119's exact old stimulus timing was not preserved, so exact replay is not claimed.
+Neither old failure is declared fixed. Neither is an active defect, TODO item or
+S3 obligation. Reopen only on a concrete current reproducer. The broad historical
+binary-hash search was cancelled after this instruction, without a match claim.
+This supersedes earlier requirements in this plan/proposal to attribute them
+before closure, not the obligation to fix newly reproducible failures.
+
+S2 completion evidence is retained in artifacts/t481-s2/receipts.json:
+
+| Requirement | Evidence and boundary |
+| --- | --- |
+| Ordered input beyond15 words, peeks, repeats, F1/F11 | unread042 and input020/021 real guest receipts; original conversion and focused units; no raw IRQ/TSR replay claim. |
+| Two-VM input identity, reuse and retirement | unread042 and production retirement042, different generations and native child departure before containment. |
+| CP437 non-ASCII return | OEM048 two VM/two round exact BIOS words1282/1e84; DBCS/codepage-change behavior belongs to S3. |
+| Normal exit and both completion orders | fill011, ordered command controls and final live042; old failed runs remain non-passes. |
+| Cancellation | application_tests all four cancellation handles; service040/055, worker-close051, Console-close054 and retirement042 actual chains. |
+| Initialization and failure ownership | terminal039 registry rollback; input0573126 assertions per width, real executor/provider with broker boundary substitutes. No blanket real fault-injection claim. |
+| Delivery | P1 complete11 package8b216ec7-75d1-4979-a21e-c588ca4d02d6, Full04116/16, published .386; P2-P5 preserve evidence and improve tests without product changes. |
+
+S2 is closed by owner acceptance of this bounded evidence and historical-failure
+disposition. P5 is f25220d98. S3 now owns the already approved remaining Win3.1
+input/text/geometry/font/codepage/display/metadata and nested-chain requirements;
+S4 Win95 and S5 integrated qualification remain unchanged. S3 starts by tracing
+actual production producers to providers; no speculative implementation of unused
+wire operations, new recovery engine or second lifecycle authority is admitted.
