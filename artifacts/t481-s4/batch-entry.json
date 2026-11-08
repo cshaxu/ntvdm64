@@ -1,0 +1,21 @@
+{
+  "classification": "Existing Win95 DOS batch native-executable path did not reach project cmdExec32 admission; interactive NT COMMAND prompt path is separately covered by editor003.",
+  "candidateTraceSha256": "E3E6CE47C1D34E0AFDD27A96F0296911FBCE4E15A57E5A9782837261FD095B32",
+  "diagnosticTraceCounts": {
+    "8": 2,
+    "11": 0,
+    "12": 0,
+    "263": 0,
+    "264": 0
+  },
+  "batSha256": "87514118DC2FC1A6E2B1B9C1AD939B7F0DB76910B062A9DA21A29E52B397F49B",
+  "guestComspec": "O:\\TMP\\N45E\\SYSTEM32\\COMMAND.COM",
+  "directNativeStdoutBytes": 0,
+  "comspecInternalEchoControl": "NATIVE_A",
+  "historicalBaseline": "win95594 repeats empty output with historical host and old VxD",
+  "source": "src/mvdm-guest/dos/v86/cmd/command/tcode.asm d16_run; src/mvdm-host/dos/command/cmddisp.c services 7 and 8",
+  "limits": [
+    "Trace proves these dispatch/admission points were not reached, not which guest image emitted Incorrect DOS version.",
+    "This direct Win95 batch path remains an existing observable limitation; it is not evidence that the covered interactive cmdExec32 path failed."
+  ]
+}

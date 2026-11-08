@@ -1,0 +1,104 @@
+{
+  "candidate": "579",
+  "packageId": "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
+  "images": [
+    {
+      "name": "VCDEX.DLL",
+      "sha256": "652AFC1686D56F2A89E65D7D4D3002302B487CE9B2E165752667046A32F6C8EC",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "run16.exe",
+      "sha256": "6C02DBDC37EA08784238C95F8811B3125D6B362A496AFBE2A7F5DB63A3997708",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "59EC0BDC183E704CE5FAD7060F43AF48468343D459882FE5520E0B5DE7BF0660",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "34B8A2E87C0361B6D01AC4A8261738F99CBF7BD0D89FF02381CF152808648964",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "A28CA86CF6B21C15670B5AC44D03242F12A84C88A0A50DDF18196C207F777BA9",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "3D53D12F5D4BD063A4666417061BA6AB84E8BD1AEBD3E323DAB2B442B3CAC96D",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "DEAB03971C98314D060AA2501144E3721E8B26C01D4FC1D7D8B21ECF8106C354",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "C81C272D6DCF6858A4707ACB5BBE28E453E6D9F401DFFF888AB90A32108D50D2",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "84538848370B556B41AF095E42A77D6E8970027B3A36A473B44EAF11A8D60B15",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "08837EC3117E90BD61480DB229AC2DFEC84E6BB8F4E8660539A3E6690119CADF",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "0A070AF54B5D9CCB04F756939678C2A3AC6880B933E0AD2C90C911FF05BD49BC",
+      "destinations": [
+        "assets\\release",
+        "O:\\winnt\\system32"
+      ]
+    }
+  ],
+  "w31": [
+    {
+      "name": "ntvdm64.386",
+      "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B"
+    },
+    {
+      "name": "insignia.386",
+      "sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B"
+    }
+  ]
+}
