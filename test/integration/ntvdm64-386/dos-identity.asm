@@ -134,37 +134,9 @@ call far [api]
 jc .write
 mov [command_callback], edx
 %ifdef GUEST_GRID_CONTROL
-; The guest BIOS owns this change. A requests8-pixel glyphs; B retains16.
-; Later host commands must inherit and preserve each VM's real geometry.
-mov ax, 3
-int 0x10
-cmp byte [role], 'A'
-jne .grid_ready
-mov ax, 0x1112
-xor bx, bx
-int 0x10
-.grid_ready:
-mov ax, 0x1130
-xor bx, bx
-int 0x10
-mov [grid_last_row], dl
-mov [grid_height], cx
-; Give the two real VMs distinct DAC7 values through their guest BIOS.
-mov ax, 0x1010
-mov bx, 7
-xor cx, cx
-mov dx, 0x3f00
-cmp byte [role], 'A'
-je .palette_ready
-xor dx, dx
-mov cl, 63
-.palette_ready:
-int 0x10
-; Capture actual guest-owned glyph bytes before the first native handoff.
-mov byte [font_capture], 1
-call check_video_fonts
-call check_guest_palette
-mov byte [font_capture], 0
+%ifndef GUEST_GRID_SWITCH
+call setup_guest_grid
+%endif
 %endif
 %ifdef BLOCKED_KEYBOARD
 cmp byte [role],'A'
@@ -201,6 +173,9 @@ push dword 0x11111111
 %endif
 mov [standard_offset], sp
 %macro continuation_case 1-2 0
+%ifdef GUEST_GRID_SWITCH
+call setup_guest_grid
+%endif
 %ifdef GUEST_GRID_CONTROL
 mov word [grid_stage], 10
 %endif
@@ -375,8 +350,8 @@ mov word [grid_stage], 31
 %endif
 cmp cx, [grid_height]
 jne %%error
-cmp byte [role], 'A'
-jne %%grid_b
+cmp byte [grid_small], 0
+je %%grid_b
 cmp dl, 24
 jbe %%error
 cmp cx, 8
@@ -854,6 +829,9 @@ grid_failure_height: dw 0
 font_nonzero: dw 0
 font_checks: dw 0
 palette_checks: dw 0
+%ifdef GUEST_GRID_SWITCH
+grid_configurations: dw 0
+%endif
 %endif
 result_end:
 %ifdef GUEST_GRID_CONTROL
@@ -1220,6 +1198,58 @@ times 128-($-nested_output) db 0
 %endif
 
 %ifdef GUEST_GRID_CONTROL
+setup_guest_grid:
+pushad
+push es
+; The guest BIOS owns this change. A requests8-pixel glyphs; B retains16.
+; Later host commands must inherit and preserve each VM's real geometry.
+mov ax, 3
+int 0x10
+mov byte [grid_small], 0
+cmp byte [role], 'A'
+jne .size_selected
+mov byte [grid_small], 1
+.size_selected:
+%ifdef GUEST_GRID_SWITCH
+cmp word [continuation_count], 1
+jne .size_ready
+xor byte [grid_small], 1
+.size_ready:
+%endif
+cmp byte [grid_small], 0
+je .grid_ready
+mov ax, 0x1112
+xor bx, bx
+int 0x10
+.grid_ready:
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+mov [grid_last_row], dl
+mov [grid_height], cx
+; Give the two real VMs distinct DAC7 values through their guest BIOS.
+mov ax, 0x1010
+mov bx, 7
+xor cx, cx
+mov dx, 0x3f00
+cmp byte [role], 'A'
+je .palette_ready
+xor dx, dx
+mov cl, 63
+.palette_ready:
+int 0x10
+; Capture actual guest-owned glyph bytes before the first native handoff.
+mov byte [font_capture], 1
+call check_video_fonts
+call check_guest_palette
+mov byte [font_capture], 0
+%ifdef GUEST_GRID_SWITCH
+inc word [grid_configurations]
+%endif
+pop es
+popad
+ret
+grid_small: db 0
 grid_last_row: db 0
 grid_height: dw 0
 %endif

@@ -1,0 +1,96 @@
+{
+  "packageId": "d543bd0a-0d6b-469a-9914-68c759fa2552",
+  "unchanged": true,
+  "images": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VCDEX.DLL",
+      "sha256": "76ABC5D8FD9BEE4D1D5DC43B2F7094BC026241295A593F85D419651DAF72EA8E"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\run16.exe",
+      "sha256": "4F66579E8D4C75DC8226F16C98A69FD5265287443F8D40301E5A2504E6FE0D8A"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntsrv.exe",
+      "sha256": "E9CFCCB3BA80A566D9606943F87ED13248CE6B64B14B0DB2C111B0522EE1943D"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntcon.exe",
+      "sha256": "4CF706C88D2DAEFD04852A9DC775C9F36A8BF47A5857976B7EE3459593ADA5EE"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvdm.exe",
+      "sha256": "04DDC0F6A704E808533751A8226F063006EA07B74BB7A4383D30AF0B3CC68CDA"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvwm.exe",
+      "sha256": "6C8E9472F1DFCFB7600D752FA7BE892E1CEAD7F0E05D6169647567F676AA1F1F"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntmon.exe",
+      "sha256": "04578CDBDC4FA338FB8077BBC038675548A51B562DDB7F0EE7A282ED070B44D7"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\WOW32.DLL",
+      "sha256": "74BE2F7FCA901D12312E3FCE43066234906440F1F91625C12943A1FF7F47EEF3"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VDMREDIR.DLL",
+      "sha256": "4BC780D5D255B2F4DC83B128886222D3339E6E7BDF576B1EE07C199424534A94"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook32.dll",
+      "sha256": "193C5FABC7AA0622CF3427A94D6EFD0F6FA63DBE3742DA7C8FDAB5A09F4356FE"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook64.dll",
+      "sha256": "70B0B0E1C04594A497E08C74595FA8A76D6AACC795DCA08D7EFF2086DFC97EC5"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VCDEX.DLL",
+      "sha256": "76ABC5D8FD9BEE4D1D5DC43B2F7094BC026241295A593F85D419651DAF72EA8E"
+    },
+    {
+      "path": "O:\\winnt\\system32\\run16.exe",
+      "sha256": "4F66579E8D4C75DC8226F16C98A69FD5265287443F8D40301E5A2504E6FE0D8A"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntsrv.exe",
+      "sha256": "E9CFCCB3BA80A566D9606943F87ED13248CE6B64B14B0DB2C111B0522EE1943D"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntcon.exe",
+      "sha256": "4CF706C88D2DAEFD04852A9DC775C9F36A8BF47A5857976B7EE3459593ADA5EE"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "sha256": "04DDC0F6A704E808533751A8226F063006EA07B74BB7A4383D30AF0B3CC68CDA"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvwm.exe",
+      "sha256": "6C8E9472F1DFCFB7600D752FA7BE892E1CEAD7F0E05D6169647567F676AA1F1F"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntmon.exe",
+      "sha256": "04578CDBDC4FA338FB8077BBC038675548A51B562DDB7F0EE7A282ED070B44D7"
+    },
+    {
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "74BE2F7FCA901D12312E3FCE43066234906440F1F91625C12943A1FF7F47EEF3"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "sha256": "4BC780D5D255B2F4DC83B128886222D3339E6E7BDF576B1EE07C199424534A94"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook32.dll",
+      "sha256": "193C5FABC7AA0622CF3427A94D6EFD0F6FA63DBE3742DA7C8FDAB5A09F4356FE"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook64.dll",
+      "sha256": "70B0B0E1C04594A497E08C74595FA8A76D6AACC795DCA08D7EFF2086DFC97EC5"
+    }
+  ],
+  "manifestHash": "E71C8A54A2468BEFFA07DD10F6CC390BD18CD53190E077AA6C9AD6228EFA8057",
+  "productionSourceDiff": []
+}

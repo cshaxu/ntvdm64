@@ -133,8 +133,17 @@ diagnostic274 passes all10 repetitions with per-milestone timing and unchanged
 assertions; handoff274.json retains the result. Full266's single failure is
 unreproduced, not attributed or claimed fixed. Publication277 deployed all11
 verified images and manifest to both destinations; addons remain assets-only.
-Evidence: artifacts/t481-s3/final275.json and publication277.json. P8 commit/
-push is pending; S3 remains active.
+Evidence: artifacts/t481-s3/final275.json and publication277.json. P8 is committed/pushed at6a7c6ee8e; S3 remains active.
+
+## S3 guest grid transition evidence
+
+Test-only279/280 pass both completion orders after each real VM changes its
+BIOS grid/font before all three native continuations (A8/16/8px, B16/8/16px).
+Each run verifies three actual configurations, nonempty glyph and palette
+preservation,320 callback checks and normal Windows exit. Original guest
+installation unchanged. Evidence: artifacts/t481-s3/grid-switch281.json.
+This is guest-owned change between commands, not native-requested resize
+inside a command. Product publication277 stays unchanged; P9 delivery pending.
 
 ## Remaining Scope
 

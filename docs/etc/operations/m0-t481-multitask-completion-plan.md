@@ -1586,3 +1586,20 @@ Evidence: artifacts/t481-s3/final275.json, qualification273.json,
 handoff272.json, handoff274.json and publication277.json. This is bounded
 CP850 presentation delivery, not proof of original DOS codepage switching,
 DBCS or whole-S3 completion. Remaining scope stays in the sequential plan.
+
+### S3 P9 guest-owned grid transitions
+
+The actual producer audit distinguishes native scrollback from guest-visible
+geometry: NTVWM's presentation-only route skips BUFFER_SIZE/WINDOW_RECT for
+its hidden Console; VM BIOS remains the grid owner. Test-only GuestGridSwitch
+now changes that owner between three real native continuations. A alternates
+8/16/8-pixel BIOS fonts and B16/8/16, recapturing nonempty glyphs and palette
+before each handoff and verifying them on return. Shared setup saves registers
+and ES; ordinary GuestGridControl retains its initial-only setup.
+
+279(A-first)/280(B-first) pass three configurations and three glyph/palette
+comparisons per VM,320 callbacks per run, normal Windows exit and unchanged
+original guest installation. Evidence: artifacts/t481-s3/grid-switch281.json.
+No product or mirror changes. Existing Full273/publication277 remains the
+unchanged-input release baseline. Native-requested resize during a command,
+arbitrary grids and graphics remain separate obligations, not inferred passes.

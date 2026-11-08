@@ -30,6 +30,7 @@ param(
  [string]$OrderedCommandImage,
  [switch]$ResizeCommand,
  [switch]$GuestGridControl,
+ [switch]$GuestGridSwitch,
  [ValidateSet('386-dosonly0','386-dosonly1')][string]$RuntimeCase='386-dosonly0',
  [string]$UnreadInputImage,
  [ValidateSet('sequence','repeat','function','extended','oem')][string]$UnreadInputMode='sequence',
@@ -45,6 +46,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($GuestGridSwitch -and !$GuestGridControl){throw 'Grid switching requires guest grid control'}
 if($GuestGridControl -and (!$RealCommand -or !$OrderedCommandImage -or $ResizeCommand -or $NestedCommand)){throw 'Guest grid control requires independent real ordered commands'}
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires monitor and marker'}
 if($ResizeCommand -and (!$OrderedCommandImage -or !$RealCommand -or $ServiceLoss -or $WorkerCloseMonitor)){throw 'Resize requires independent real ordered commands'}
@@ -95,6 +97,7 @@ if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
 if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
+if($GuestGridSwitch){$dosDefines+='-DGUEST_GRID_SWITCH=1'}
 if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
 if($UnreadInputImage){
  $dosDefines+='-DUNREAD_INPUT=1'
@@ -339,6 +342,7 @@ try {
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
   $expectedBytes=if($Continuation){76}else{72}
   if($GuestGridControl){$expectedBytes+=16}
+  if($GuestGridSwitch){$expectedBytes+=2}
   if($UnreadInputImage){$expectedBytes+=8}
   if($VideoApplication){$expectedBytes+=10}
   if($Keyboard){$expectedBytes+=2}
@@ -373,6 +377,10 @@ try {
    $row.continuationErrors=[BitConverter]::ToUInt16($data,74)
    if($GuestGridControl){Write-Host ("{0} grid stage={1} return={2:X8} row={3} height={4}" -f $id,[BitConverter]::ToUInt16($data,76),[BitConverter]::ToUInt32($data,78),[BitConverter]::ToUInt16($data,82),[BitConverter]::ToUInt16($data,84))}
    if($GuestGridControl){
+    if($GuestGridSwitch){
+     $row.gridConfigurations=[BitConverter]::ToUInt16($data,92)
+     if($row.gridConfigurations -ne 3){throw "Guest grid transitions incomplete: $id"}
+    }
     $row.fontNonzeroBytes=[BitConverter]::ToUInt16($data,86)
     $row.palettePreservationChecks=[BitConverter]::ToUInt16($data,90)
     if($row.palettePreservationChecks -ne 3){throw "Guest palette preservation not proved: $id"}

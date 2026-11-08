@@ -1,0 +1,36 @@
+{
+  "assertions": "Three actual configurations, three nonempty glyph comparisons and three palette comparisons per VM; callback/register identity and normal Windows exit.",
+  "productChanges": 0,
+  "files": [
+    {
+      "sha256": "D191500A51B629D11BA6A150A69175C02EA09BE0D90ECD99502F6F8EE25097EC",
+      "path": "test/integration/ntvdm64-386/dos-identity.asm"
+    },
+    {
+      "sha256": "92EC2D10F14EF213CD05A7DA5068A5BF3744EF41ECF214769CC8AF0A97B6DE4F",
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1"
+    }
+  ],
+  "case": "Win3.1 guest-owned geometry changes between native continuations",
+  "setup": "Each VM configures BIOS mode3 before each of three continuations; A uses8/16/8px fonts and B16/8/16px. Each captures actual glyphs/palette before admission and compares after completion.",
+  "limits": "Not native-requested resize during an active command, arbitrary grids, graphics or original DOS active-codepage switching.",
+  "base": "6a7c6ee8e",
+  "cases": [
+    {
+      "callbackChecks": 320,
+      "order": "A-first",
+      "run": 279,
+      "normalExit": true,
+      "guestSourceUnchanged": true,
+      "logSha256": "DA3CCF39A3721B79768413D5BB40E31A26525E7E0264F4A803488DB221F1EFBE"
+    },
+    {
+      "callbackChecks": 320,
+      "order": "B-first",
+      "run": 280,
+      "normalExit": true,
+      "guestSourceUnchanged": true,
+      "logSha256": "DA3CCF39A3721B79768413D5BB40E31A26525E7E0264F4A803488DB221F1EFBE"
+    }
+  ]
+}
