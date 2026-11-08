@@ -104,6 +104,19 @@ assets-only. Governance247 passed. Evidence artifacts/t481-s3/publication248.jso
 P6 includes reviewed source, tests and published assets; S3 remains active.
 No original guest or mirror is changed.
 
+## S3 Current Font Evidence
+
+Test-only font252/253 passes both native completion orders: each VM compares
+its actual nonempty VGA glyph banks before/after all three continuations.
+A1540/B2320 nonzero bytes,320 callbacks and normal Windows exit per run;
+original guest unchanged. Evidence: artifacts/t481-s3/font253.json. This is
+BIOS-selected font preservation, not arbitrary custom font or palette proof.
+P7 palette254/255 additionally proves distinct guest DAC7 red/blue, all16 text
+DAC entries and attribute mappings preserved after three commands in each VM,
+in both completion orders. Evidence: artifacts/t481-s3/palette255.json.
+Test-only delivery retains the unchanged P6 production package; full S3
+closure and arbitrary native palette/font changes remain unqualified.
+
 ## Remaining Scope
 
 S3 remains active: reached operations, arbitrary runtime geometry changes,

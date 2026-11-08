@@ -1511,3 +1511,36 @@ P6 publication248 completed: package14d987d1-7fe7-4a7d-bc6e-af50e08c0bd6,
 all11 images and manifest verified at both release destinations, addons
 assets-only. Governance247 passed. Publication248 and final247 retain exact
 hashes and gate results. P6 delivers this bounded repair; S3 stays active.
+
+### S3 actual glyph preservation 251--253
+
+The existing grid probe now snapshots both actual VGA font banks before native
+command admission and compares every active glyph row after each of three
+continuations. It reuses the existing plane-reader and restores all touched VGA
+registers/latches; it does not reload fonts after the command. The snapshots
+are guest-local test scratch, not new product state.
+
+251 passed initial comparison. Strengthened252(B first) and253(A first) both
+pass nonempty-byte and three-comparison assertions: A1540 and B2320 nonzero
+bytes,320 callback checks per run, normal Windows exit and unchanged original
+guest installation. Evidence: artifacts/t481-s3/font253.json. Run250 failed
+test assembly due to unsupported NASM defined() syntax; corrected before251.
+No production code, mirror or published package changed. This proves retention
+of the tested BIOS-selected glyph banks, not arbitrary custom font application,
+palette changes or whole S3 closure. Test delivery remains pending.
+
+### S3 P7 glyph/palette preservation qualification
+
+254(A first) and255(B first) add guest BIOS DAC7 red/blue controls, then
+compare all16 text DAC entries and attribute mappings after each real native
+continuation. Both pass three font and three palette comparisons per VM,
+320 callbacks and normal Windows exit, preserving original installation bytes.
+The existing plane-reader is shared; each read restores registers and latches.
+Evidence: artifacts/t481-s3/palette255.json supersedes the narrower font253
+result without erasing it. No product/mirror/addon source changes.
+
+This is a test-only P7: production cached231, Full24516/16 and publication248
+remain the unchanged-input baseline. Delivery256 rechecks all11 actual deployed
+images and manifests at both destinations before committing. No rebuild or
+package replacement is necessary for unchanged production inputs. Custom font
+loading, native-requested palette changes and other S3 rows remain unqualified.

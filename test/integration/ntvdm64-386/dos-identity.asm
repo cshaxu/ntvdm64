@@ -149,6 +149,22 @@ xor bx, bx
 int 0x10
 mov [grid_last_row], dl
 mov [grid_height], cx
+; Give the two real VMs distinct DAC7 values through their guest BIOS.
+mov ax, 0x1010
+mov bx, 7
+xor cx, cx
+mov dx, 0x3f00
+cmp byte [role], 'A'
+je .palette_ready
+xor dx, dx
+mov cl, 63
+.palette_ready:
+int 0x10
+; Capture actual guest-owned glyph bytes before the first native handoff.
+mov byte [font_capture], 1
+call check_video_fonts
+call check_guest_palette
+mov byte [font_capture], 0
 %endif
 %ifdef BLOCKED_KEYBOARD
 cmp byte [role],'A'
@@ -379,6 +395,14 @@ mov word [grid_stage], 32
 %endif
 cmp ah, 80
 jne %%error
+mov word [grid_stage], 33
+call check_video_fonts
+jc %%error
+inc word [font_checks]
+mov word [grid_stage], 34
+call check_guest_palette
+jc %%error
+inc word [palette_checks]
 %endif
 %ifdef RESIZED_COMMAND
 %if %1 != 10
@@ -827,9 +851,20 @@ grid_failure: dw 0
 grid_failure_return: dd 0
 grid_failure_row: dw 0
 grid_failure_height: dw 0
+font_nonzero: dw 0
+font_checks: dw 0
+palette_checks: dw 0
 %endif
 result_end:
 %ifdef GUEST_GRID_CONTROL
+; Diagnostic scratch is outside the fixed result record.
+video_sample0: dw 0
+video_sample1: dw 0
+video_height: dw 0
+video_offset: dw 0
+font_capture: db 0
+font_before: times 16384 db 0
+palette_before: times 64 db 0
 grid_stage: dw 0
 grid_return: dd 0
 grid_actual_row: dw 0
@@ -850,6 +885,12 @@ directory_cds: dd 0
 directory_cds_count: dd 0
 directory_tick: dw 0
 %ifdef VIDEO_APPLICATION
+%define READ_VIDEO_FONTS 1
+%endif
+%ifdef GUEST_GRID_CONTROL
+%define READ_VIDEO_FONTS 1
+%endif
+%ifdef READ_VIDEO_FONTS
 %ifdef VIDEO_FONT_CONTROL
 load_control_fonts:
 push ax
@@ -992,10 +1033,35 @@ mov al, [es:si+bp]
 mov [video_sample0], al
 mov al, [es:si+bp+0x4000]
 mov [video_sample1], al
+%ifdef GUEST_GRID_CONTROL
+cmp byte [font_capture], 0
+je .compare_saved
+mov al, [es:si+bp]
+mov [font_before+si+bp], al
+test al, al
+jz .capture_second
+inc word [font_nonzero]
+.capture_second:
+mov al, [es:si+bp+0x4000]
+mov [font_before+si+bp+8192], al
+test al, al
+jz .next_row
+inc word [font_nonzero]
+jmp .next_row
+.compare_saved:
+mov al, [font_before+si+bp]
+cmp [es:si+bp], al
+jne .mismatch
+mov al, [font_before+si+bp+8192]
+cmp [es:si+bp+0x4000], al
+jne .mismatch
+.next_row:
+%else
 cmp [es:si+bp], bl
 jne .mismatch
 cmp [es:si+bp+0x4000], bl
 jne .mismatch
+%endif
 inc bp
 cmp bp, [video_height]
 jb .row
@@ -1051,6 +1117,73 @@ ret
 video_regs: times 5 db 0
 video_seq_index: db 0
 video_gc_index: db 0
+%endif
+%ifdef GUEST_GRID_CONTROL
+; Read attribute mapping and all16 text DAC entries from this VM's BIOS.
+; ES:BP and the next command's environment remain untouched on return.
+check_guest_palette:
+push eax
+push bx
+push cx
+push dx
+push si
+push bp
+push es
+xor bx, bx
+xor si, si
+.entry:
+mov ax, 0x1007
+int 0x10
+mov [palette_actual], bh
+xor bh, bh
+mov ax, 0x1015
+int 0x10
+mov [palette_actual+1], dh
+mov [palette_actual+2], cx
+cmp bx, 7
+jne .snapshot
+cmp ch, 0
+jne .bad
+cmp byte [role], 'A'
+jne .blue
+cmp dh, 63
+jne .bad
+cmp cl, 0
+jne .bad
+jmp .snapshot
+.blue:
+cmp dh, 0
+jne .bad
+cmp cl, 63
+jne .bad
+.snapshot:
+mov eax, [palette_actual]
+cmp byte [font_capture], 0
+je .compare
+mov [palette_before+si], eax
+jmp .next
+.compare:
+cmp [palette_before+si], eax
+jne .bad
+.next:
+add si, 4
+inc bx
+cmp bx, 16
+jb .entry
+clc
+jmp .done
+.bad:
+stc
+.done:
+pop es
+pop bp
+pop si
+pop dx
+pop cx
+pop bx
+pop eax
+ret
+palette_actual: dd 0
 %endif
 %ifdef REAL_COMMAND
 %ifdef CUSTOM_COMMAND

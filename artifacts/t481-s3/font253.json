@@ -1,0 +1,74 @@
+{
+  "case": "T481 S3 actual guest font preservation",
+  "productionCommit": "1dc3d0a27",
+  "productionChanged": false,
+  "publishedNewPackage": false,
+  "runs": [
+    {
+      "run": 252,
+      "firstCommand": "B",
+      "exit": 0,
+      "A": {
+        "nonzeroBytes": 1540,
+        "comparisons": 3
+      },
+      "B": {
+        "nonzeroBytes": 2320,
+        "comparisons": 3
+      },
+      "callbackChecks": 320,
+      "normalWindowsExit": true,
+      "originalGuestUnchanged": true,
+      "process": {
+        "pid": 11012,
+        "start": "2026-11-07T16:32:03.542149-08:00",
+        "script": "O:/repos.hobby/ntvdm64/build/t481-s3/font252.ps1",
+        "sha": "5435F5930739EBE079D0CCD44CACA5AD32BDFDB08C0673436690553C8179E634"
+      }
+    },
+    {
+      "run": 253,
+      "firstCommand": "A",
+      "exit": 0,
+      "A": {
+        "nonzeroBytes": 1540,
+        "comparisons": 3
+      },
+      "B": {
+        "nonzeroBytes": 2320,
+        "comparisons": 3
+      },
+      "callbackChecks": 320,
+      "normalWindowsExit": true,
+      "originalGuestUnchanged": true,
+      "process": {
+        "pid": 27524,
+        "start": "2026-11-07T16:33:10.55285-08:00",
+        "script": "O:/repos.hobby/ntvdm64/build/t481-s3/font253.ps1",
+        "sha": "525E35AE5FF57EDDC6E79B04E4ADF0CCE5439C2354DC516BE68D941144FA71F5"
+      }
+    }
+  ],
+  "limits": [
+    "Only current BIOS-selected 8/16-row font banks; arbitrary custom font loading and palette changes not proved.",
+    "No saved editor file assertion or whole-S3 closure."
+  ],
+  "hashes": [
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "sha256": "44f80753e9a13cf6d1ec0c3ddb12a2cfcf3c2111817f5b543f7b3b913cfe523e"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "sha256": "5775e9737c95b4a1396d7745e7217f339fb0e4b269a139db4540299b31dc65ca"
+    },
+    {
+      "path": "build/t481-s3/font252.out",
+      "sha256": "6577e6b46cb40e3e62b5ac69d58df97449390c3c0e3b8b768c79b7bc7be2af0b"
+    },
+    {
+      "path": "build/t481-s3/font253.out",
+      "sha256": "6577e6b46cb40e3e62b5ac69d58df97449390c3c0e3b8b768c79b7bc7be2af0b"
+    }
+  ]
+}

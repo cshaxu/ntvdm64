@@ -1,0 +1,65 @@
+{
+  "case": "T481 S3 P7 guest glyph and palette preservation",
+  "productionBase": "1dc3d0a27",
+  "productionChanges": false,
+  "runs": [
+    {
+      "run": 254,
+      "first": "A",
+      "exit": 0,
+      "A": {
+        "fontNonzero": 1540,
+        "fontChecks": 3,
+        "paletteChecks": 3
+      },
+      "B": {
+        "fontNonzero": 2320,
+        "fontChecks": 3,
+        "paletteChecks": 3
+      },
+      "callbackChecks": 320,
+      "normalExit": true,
+      "originalGuestUnchanged": true
+    },
+    {
+      "run": 255,
+      "first": "B",
+      "exit": 0,
+      "A": {
+        "fontNonzero": 1540,
+        "fontChecks": 3,
+        "paletteChecks": 3
+      },
+      "B": {
+        "fontNonzero": 2320,
+        "fontChecks": 3,
+        "paletteChecks": 3
+      },
+      "callbackChecks": 320,
+      "normalExit": true,
+      "originalGuestUnchanged": true
+    }
+  ],
+  "hashes": [
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "sha256": "74ec5fa91a0d73a0ec55f4a2af7ba24863aae5b050133648f9ccfdfe907113c0"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "sha256": "23e3be2284d73b68681f2c6e9085a71746cc02ab30852736b5200e205c5eb160"
+    },
+    {
+      "path": "build/t481-s3/palette254.out",
+      "sha256": "3a36af4516def796c86ec72a809ce228fc14171162fcad1f96e54aed1e09d294"
+    },
+    {
+      "path": "build/t481-s3/palette255.out",
+      "sha256": "3a36af4516def796c86ec72a809ce228fc14171162fcad1f96e54aed1e09d294"
+    }
+  ],
+  "limits": [
+    "BIOS-selected fonts, text DAC0..15 and attribute mappings only; arbitrary font loading and native palette mutation not qualified.",
+    "No whole-S3 closure."
+  ]
+}

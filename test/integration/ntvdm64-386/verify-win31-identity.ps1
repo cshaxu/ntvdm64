@@ -338,7 +338,7 @@ try {
   $data=[IO.File]::ReadAllBytes("$dest/PATCH/$id.BIN")
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
   $expectedBytes=if($Continuation){76}else{72}
-  if($GuestGridControl){$expectedBytes+=10}
+  if($GuestGridControl){$expectedBytes+=16}
   if($UnreadInputImage){$expectedBytes+=8}
   if($VideoApplication){$expectedBytes+=10}
   if($Keyboard){$expectedBytes+=2}
@@ -372,6 +372,14 @@ try {
    $row.continuationCount=[BitConverter]::ToUInt16($data,72)
    $row.continuationErrors=[BitConverter]::ToUInt16($data,74)
    if($GuestGridControl){Write-Host ("{0} grid stage={1} return={2:X8} row={3} height={4}" -f $id,[BitConverter]::ToUInt16($data,76),[BitConverter]::ToUInt32($data,78),[BitConverter]::ToUInt16($data,82),[BitConverter]::ToUInt16($data,84))}
+   if($GuestGridControl){
+    $row.fontNonzeroBytes=[BitConverter]::ToUInt16($data,86)
+    $row.palettePreservationChecks=[BitConverter]::ToUInt16($data,90)
+    if($row.palettePreservationChecks -ne 3){throw "Guest palette preservation not proved: $id"}
+    $row.fontPreservationChecks=[BitConverter]::ToUInt16($data,88)
+    Write-Host "$id actual font nonzero=$($row.fontNonzeroBytes) preservation-checks=$($row.fontPreservationChecks) palette-checks=$($row.palettePreservationChecks)"
+    if(!$row.fontNonzeroBytes -or $row.fontPreservationChecks -ne 3){throw "Actual nonempty guest glyph preservation not proved: $id"}
+   }
    if($row.continuationCount -ne 3 -or $row.continuationErrors){throw "Detached BOP continuation state failed: $id"}
   }
   if($Keyboard){
