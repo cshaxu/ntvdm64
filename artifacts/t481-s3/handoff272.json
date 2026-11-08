@@ -1,0 +1,45 @@
+{
+  "original_failure": "Full266: expected exit23 and parent-return marker present, but input delivery false",
+  "full273_owner": {
+    "sha": "EEAB251D9949DEF3BDC4886E179B1153053BE76FEA1DC94281F062FF1A895B7E",
+    "pid": 29140,
+    "script": "O:/repos.hobby/ntvdm64/build/t481-s3/full273.ps1",
+    "started": "2026-11-08T01:05:45.7436947Z"
+  },
+  "diagnostic": "Observer records window ownership, attach, send, detach and keyboard restore stages; success contract unchanged",
+  "runner271": "Invalid reproduction setup: passed system32 instead of package root and changed WindowOwnedConsole. Exit3 before input. Not a product result.",
+  "runner272": {
+    "cases": [
+      {
+        "run": 1,
+        "input_delivered": true,
+        "expected_exit": true,
+        "report": "O:/repos.hobby/ntvdm64/build/t481-s3/handoff272-1.observer",
+        "key_failure_none": true,
+        "sha256": "3CD026A927E7330A3DDF75B70666CC313E8D557F1CC010E4C57AAF370A1E04FC"
+      },
+      {
+        "run": 2,
+        "input_delivered": true,
+        "expected_exit": true,
+        "report": "O:/repos.hobby/ntvdm64/build/t481-s3/handoff272-2.observer",
+        "key_failure_none": true,
+        "sha256": "12B4F11C60AA50688ED5552A4EFF9E28DE3E4758C2A7AE3A986750114B549809"
+      },
+      {
+        "run": 3,
+        "input_delivered": true,
+        "expected_exit": true,
+        "report": "O:/repos.hobby/ntvdm64/build/t481-s3/handoff272-3.observer",
+        "key_failure_none": true,
+        "sha256": "57FED391FF8EC1A22CC4E41EE45C342A549F36F5193C0D4812C80E012BCC13B0"
+      }
+    ],
+    "private_desktop": true,
+    "exit": 0
+  },
+  "interpretation": "Failure did not reproduce in three exact private-desktop focused runs. Final-key race remains unproven; no runtime lifecycle change authorized by these results.",
+  "next": "Full273 repeats full qualifying sequence with diagnostic observer",
+  "question": "Locate Full266 final nested-window-handoff failure without weakening assertions",
+  "counter_comparison": "Full266 failure and all focused272 passes have157 successful key messages,6 successful Enter downs and29 milestone waits. Full266 milestone time22672ms versus focused272-1 time2782ms; the extra interval matches the20000ms milestone observation budget. This contradicts the tentative failed-final-keyup explanation; final milestone timeout is the leading hypothesis, not yet a demonstrated cause."
+}

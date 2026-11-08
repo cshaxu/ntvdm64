@@ -26,6 +26,8 @@ typedef struct peer_state {
     HANDLE publication_ack;
     unsigned mode,calls;
     BOOL physical;
+    UINT codepage;
+    WORD first_glyph;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
     unsigned publication_begins,publication_ends,publication_aborts;
     unsigned titles,cell_writes;
@@ -187,6 +189,13 @@ static DWORD WINAPI peer(void *context)
                     reply.bytes=min(sizeof(configuration)-offset,CONSOLE_IO_TILE_BYTES);
                     memcpy(reply.data,(BYTE *)&configuration+offset,reply.bytes);
                 }
+            } else if(request.operation==CONSOLE_IO_CODE_PAGE) {
+                reply.state.count=state->codepage;
+            } else if(request.operation==CONSOLE_IO_WRITE_CELLS_A) {
+                if(!request.state.top && request.bytes>=sizeof(console_io_cell)) {
+                    console_io_cell first;memcpy(&first,request.data,sizeof(first));
+                    state->first_glyph=first.character;
+                }
             } else if(request.operation==CONSOLE_IO_READ_CELLS_W) {
                 DWORD i;
                 if(request.state.width!=20 || request.state.height<1 || request.state.top<0 ||
@@ -246,7 +255,8 @@ static void run_case(unsigned mode)
     WCHAR name[120];HANDLE pipe=NULL,client=INVALID_HANDLE_VALUE,thread=NULL,stop=NULL,process=NULL;
     ntvwm_presentation *endpoint=NULL;peer_state state={0};DWORD error,exit_code=0;
     console_io_request request={0};console_io_reply reply;
-    BOOL physical=mode==22;
+    UINT codepage=mode==23 ? 850 : 437;
+    BOOL physical=mode==22 || mode==23;
     if(physical)mode=11;
     swprintf_s(name,120,L"\\\\.\\pipe\\ntvwm-presentation-test-%lu-%u",GetCurrentProcessId(),mode);
     pipe=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
@@ -256,7 +266,7 @@ static void run_case(unsigned mode)
     CHECK(client!=INVALID_HANDLE_VALUE);if(client==INVALID_HANDLE_VALUE)goto done;
     CHECK(ConnectNamedPipe(pipe,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
     stop=CreateEventW(NULL,TRUE,mode==5,NULL);CHECK(stop!=NULL);if(!stop)goto done;
-    state.pipe=pipe;state.mode=mode;state.physical=physical;
+    state.pipe=pipe;state.mode=mode;state.physical=physical;state.codepage=codepage;
     state.publication_ack=CreateSemaphoreW(NULL,0,64,NULL);
     CHECK(state.publication_ack!=NULL);if(!state.publication_ack)goto done;
     state.screen.width=20;state.screen.height=8;state.screen.right=19;state.screen.bottom=7;
@@ -406,7 +416,12 @@ static void run_case(unsigned mode)
                         SMALL_RECT viewport={0,8,19,15};
                         CHECK(SetConsoleScreenBufferSize(buffer,(COORD){20,16}));
                         CHECK(SetConsoleWindowInfo(buffer,TRUE,&viewport));
+                        if(codepage==850)CHECK(WriteConsoleOutputCharacterW(buffer,L"\x00f8",1,(COORD){0,8},&count) && count==1);
                         CHECK(!ntvwm_presentation_flush(endpoint,&font));
+                        if(codepage==850) {
+                            fprintf(log_file,"CP850 o-slash glyph=%04x expected=009b\n",state.first_glyph);
+                            CHECK(state.first_glyph==0x9b);
+                        }
                         CHECK(!state.screen.cursor_visible && state.cell_writes>0);
                         CHECK(GetConsoleScreenBufferInfo(buffer,&after));
                         CHECK(after.dwCursorPosition.X==5 && after.dwCursorPosition.Y==2);
@@ -728,7 +743,7 @@ int wmain(int argc,WCHAR **argv)
          * Verify exact injected-input order before changing Console geometry;
          * do not weaken the queue-count assertions or wait out the event. */
         run_case(7);run_case(8);run_case(19);
-        for(mode=0;mode<=22;++mode)
+        for(mode=0;mode<=23;++mode)
             if(mode!=7 && mode!=8 && mode!=16 && mode!=19)run_case(mode);
     }
     fprintf(log_file,"NTVWM-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);

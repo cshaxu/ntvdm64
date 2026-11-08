@@ -204,6 +204,54 @@ static int fill_transaction(void)
     return 0;
 }
 
+/* The same byte means cent in437 and o-slash in850. Independent VM
+ * snapshots must retain their guest codepage across Unicode transactions. */
+static int codepage_isolation(void)
+{
+    struct { ntvdm_vm_text_header h; uint8_t cells[2]; } initial = {
+        {1, 1, 0, 0, 0x0607, 3, 0, 437, 16}, {0x9b, 7}
+    };
+    const UINT pages[2] = {437, 850};
+    const WORD characters[2] = {0x00a2, 0x00f8};
+    ntvdm_vm_text *text[2] = {NULL, NULL};
+    console_io_request q = {0};
+    console_io_reply r = {0};
+    console_io_cell cell;
+    unsigned i, round;
+    for (i = 0; i < 2; ++i) {
+        initial.h.codepage = pages[i];
+        CHECK(!ntvdm_vm_text_create(&initial, sizeof(initial.h) + 2, &text[i]));
+    }
+    for (round = 0; round < 2; ++round) for (i = 0; i < 2; ++i) {
+        ZeroMemory(&q, sizeof(q)); ZeroMemory(&r, sizeof(r));
+        q.operation = CONSOLE_IO_CODE_PAGE;
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r) && r.state.count == pages[i]);
+        q.operation = CONSOLE_IO_READ_CELLS_W;
+        q.state.width = q.state.height = 1; r.data = (BYTE *)&cell;
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r));
+        CHECK(cell.character == characters[i] && cell.attribute == 7);
+        q.operation = CONSOLE_IO_PUBLICATION_BEGIN;
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r));
+        q.operation = CONSOLE_IO_WRITE_CELLS_W;
+        q.data = (BYTE *)&cell; q.bytes = sizeof(cell);
+        cell.character = 0x4e00; /* Neither admitted SBCS can represent this. */
+        CHECK(ntvdm_vm_text_dispatch(text[i], &q, &r) == ERROR_NO_UNICODE_TRANSLATION);
+        q.operation = CONSOLE_IO_PUBLICATION_ABORT;
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r));
+        q.operation = CONSOLE_IO_PUBLICATION_BEGIN;
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r));
+        q.operation = CONSOLE_IO_WRITE_CELLS_W;
+        cell.character = characters[i];
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r));
+        CHECK(!ntvdm_vm_text_finish(text[i], ERROR_SUCCESS));
+        q.operation = CONSOLE_IO_READ_CELLS_A; q.data = NULL; q.bytes = 0;
+        CHECK(!ntvdm_vm_text_dispatch(text[i], &q, &r));
+        CHECK(cell.character == 0x9b && cell.attribute == 7);
+    }
+    for (i = 0; i < 2; ++i) ntvdm_vm_text_destroy(text[i]);
+    return 0;
+}
+
 int main(void)
 {
     struct { ntvdm_vm_text_header h; uint8_t cells[8]; } frame = {
@@ -217,6 +265,7 @@ int main(void)
     ntvdm_vm_text_publication candidate;
     void *application;
     uint32_t application_bytes;
+    CHECK(!codepage_isolation());
     CHECK(!publication_video());
     CHECK(!fill_transaction());
     CHECK(ntvdm_vm_text_create(&frame, sizeof(frame) - 1, &text) == ERROR_INVALID_DATA);

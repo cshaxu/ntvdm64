@@ -117,6 +117,25 @@ in both completion orders. Evidence: artifacts/t481-s3/palette255.json.
 Test-only delivery retains the unchanged P6 production package; full S3
 closure and arbitrary native palette/font changes remain unqualified.
 
+## S3 P8 Candidate
+
+CP850 publication reproduced wrong glyph003f for U+00F8 (expected009b).
+The NTVWM candidate queries existing guest CODE_PAGE and reuses the current
+glyph converter; no mirror/guest/protocol change. Provider257 passes216 checks;
+native259 passes604+605+1084 assertions, including the failing CP850 case.
+Evidence: artifacts/t481-s3/codepage259.json. Qualification267 passed cached
+builds and guest editor/nested/font/palette cases; Full266 passed15/16, failing
+nested-window input delivery despite expected exit23. Focused272 passes three
+times with diagnostic observer, not proof of root cause. Full273 passes16/16;
+all11 candidate hashes and guest-tested NTVWM input identity are verified.
+Evidence: artifacts/t481-s3/handoff272.json and qualification273.json. Bounded
+diagnostic274 passes all10 repetitions with per-milestone timing and unchanged
+assertions; handoff274.json retains the result. Full266's single failure is
+unreproduced, not attributed or claimed fixed. Publication277 deployed all11
+verified images and manifest to both destinations; addons remain assets-only.
+Evidence: artifacts/t481-s3/final275.json and publication277.json. P8 commit/
+push is pending; S3 remains active.
+
 ## Remaining Scope
 
 S3 remains active: reached operations, arbitrary runtime geometry changes,

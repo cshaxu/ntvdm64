@@ -1544,3 +1544,45 @@ remain the unchanged-input baseline. Delivery256 rechecks all11 actual deployed
 images and manifests at both destinations before committing. No rebuild or
 package replacement is necessary for unchanged production inputs. Custom font
 loading, native-requested palette changes and other S3 rows remain unqualified.
+
+### S3 P8 candidate: guest-codepage physical cell publication
+
+257 passes216 VM text assertions including independent CP437/CP850 Unicode
+round trips and unrepresentable-character failure/abort. DOS INT21/6601 owns
+guest codepage. VM raw input mode is separate from NTVWM's actual hidden
+Console cooked/VT processing; notification fixtures cover raw mode get/set
+and rejection of unimplemented cooked/output flags.
+
+258 deterministically fails: actual NTVWM publication of U+00F8 to a CP850
+physical peer yields003f instead of009b. Sender reused its CP437 packed frame.
+259 queries existing CODE_PAGE at physical-cell publication, validates SBCS
+and reuses the existing glyph converter with that page. NTCON's owned font
+remains CP437; trailing-cell blanks and cursor/publication rules are retained.
+This corrects project-owned native presentation, not an OpenNT algorithm. No
+mirror/guest change, new ABI, cache, timeout or replacement state owner.
+259 passes604 presentation,605 input-return and1084 lifecycle assertions.
+Evidence: artifacts/t481-s3/codepage259.json. Frozen qualification267 owns
+cached260, candidate261, editors262, nested263, glyph/palette264/265 and Full266.
+These remain pending until receipts are inspected. No new default publication.
+Guest codepage switching and DBCS are not proved by this native peer fixture.
+
+### S3 P8 qualification and publication
+
+Cached260 and candidate261 passed; actual editor262, nested263 and glyph/
+palette264/265 passed. Full266 failed only final nested-window input delivery:
+exit23 and parent-return text were present. It is retained as a failed run.
+An unchanged assertion set with diagnostic-only observer fields passed all
+three focused272 runs, Full27316/16, and ten per-milestone focused274 runs.
+The157 accepted messages,6 Enter downs and29 waits match between success and
+failure; the extra20000ms points to a milestone observation wait, not a
+proven key-send failure. No speculative runtime shutdown fix or test waiver
+was made. The single failure is unreproduced and is not claimed repaired.
+
+Final275 verifies source review268, all11 candidate hashes and equality of
+NTVWM build input with the actual Win3.1-tested package261. Governance276
+passed. Publication277 deploys the entire tested r273 package to both release
+destinations with matching hashes; unchanged authored addons remain assets-only.
+Evidence: artifacts/t481-s3/final275.json, qualification273.json,
+handoff272.json, handoff274.json and publication277.json. This is bounded
+CP850 presentation delivery, not proof of original DOS codepage switching,
+DBCS or whole-S3 completion. Remaining scope stays in the sequential plan.

@@ -1,0 +1,52 @@
+{
+  "case": "T481 S3 P8 source review",
+  "base": "3e918f5ec",
+  "reviewedFiles": [
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "e863090757099a1e9ff75a0ead355a964bf905f44dcd0640208e863e6faabf17"
+    },
+    {
+      "path": "src/ntvwm-exe/text_frame.c",
+      "sha256": "f55498c6c799b7745ba20aa5730bf63f02a900506a0a04e786ec7de2d206b94a"
+    },
+    {
+      "path": "src/ntvwm-exe/text_frame.h",
+      "sha256": "081e76d726163d2ba70a07f9e763274139dfc29ac59939e0d604dd82faaf79cf"
+    },
+    {
+      "path": "test/ntvdm-exe/frontend/vm_text_test.c",
+      "sha256": "9db03a3f286204c953b1b3c3425e49d3d4f2f641b8481d717a8bd020dd796259"
+    },
+    {
+      "path": "tests/observation/ntvwm_presentation_test.c",
+      "sha256": "4285f77798fcfb963c3e1293265c328393bdc6bb506e1031a7e7f95467f135e2"
+    }
+  ],
+  "owner": "Existing NTVWM presentation boundary; guest DOS codepage remains authority through CODE_PAGE; NTCON owns its CP437 font.",
+  "mirrorDiff": {
+    "added": 0,
+    "deleted": 0
+  },
+  "retained": [
+    "Original Unicode snapshot, no reconstruction from lossy CP437 bytes.",
+    "Original PC control-picture and unsupported-character fallback mapping reused.",
+    "Trailing wide cells remain blank; cursor projection and glyph ownership unchanged.",
+    "Codepage query failure propagates through publication abort; no success stub or retry.",
+    "No persistent page state, wire change, allocation or guest modification."
+  ],
+  "evidence": [
+    "codepage257:216 provider assertions",
+    "native258:CP850 baseline003f, one assertion failed",
+    "native259:604+605+1084 assertions zero failures; CP850009b"
+  ],
+  "pending": [
+    "qualification267 guest and Full completion",
+    "complete11 publication",
+    "commit/push"
+  ],
+  "limits": [
+    "CP850 peer fixture is not proof that original DOS changes active codepage or loads the corresponding guest font.",
+    "Existing SBCS rejection remains; DBCS not newly supported."
+  ]
+}

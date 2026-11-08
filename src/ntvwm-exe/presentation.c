@@ -270,7 +270,7 @@ done:
 /* Entire transaction, including final video ACK, completes before the shared
  * engine records success. Never inspect mutable Console state on this thread. */
 /* A VM with no copied font configuration still owns its real glyphs. Send
- * already mapped VGA cells through the existing transaction; never replace those
+ * guest-codepage VGA cells through the existing transaction; never replace those
  * glyphs with the native worker's startup fallback bitmap. */
 static DWORD publish_visible_cells(ntvwm_presentation *client,
     const native_publication *snapshot,const BYTE *payload)
@@ -280,16 +280,35 @@ static DWORD publish_visible_cells(ntvwm_presentation *client,
     const BYTE *packed=payload+sizeof(*style);
     console_io_cell row[CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell)];
     console_io_request q={0};console_io_reply reply;
-    DWORD x,y,error,step=d->stride/d->width;
+    DWORD x,y,error,codepage,step=d->stride/d->width;
+    CPINFO cp;
+    const CHAR_INFO *cells=(const CHAR_INFO *)(snapshot+1);
     BOOL cursor_inside=style->cursor_column>=0 && style->cursor_row>=0 &&
         (DWORD)style->cursor_column<d->width && (DWORD)style->cursor_row<d->height;
     if(d->width>ARRAYSIZE(row))return ERROR_NOT_SUPPORTED;
+    q.operation=CONSOLE_IO_CODE_PAGE;
+    error=exchange(client,&q,&reply);if(error)return error;
+    codepage=reply.state.count;
+    if(codepage<=CP_THREAD_ACP)return ERROR_INVALID_DATA;
+    if(!GetCPInfo(codepage,&cp))return GetLastError();
+    if(cp.MaxCharSize!=1)return ERROR_NOT_SUPPORTED;
     for(y=0;y<d->height;++y) {
         for(x=0;x<d->width;++x) {
 
             const BYTE *p=packed+y*d->stride+x*step;
             if(step==3 && p[2])return ERROR_NOT_SUPPORTED;
             row[x].character=p[0];row[x].attribute=p[1];
+            if(codepage!=437) {
+                const CHAR_INFO *source=cells+(y+snapshot->info.srWindow.Top)*snapshot->info.dwSize.X+
+                    snapshot->info.srWindow.Left+x;
+                /* Keep the packer's trailing/wide-cell blank, but map actual
+                 * characters using the guest owner rather than the NTCON font. */
+                if(!(source->Attributes&COMMON_LVB_TRAILING_BYTE) &&
+                    !((x || snapshot->info.srWindow.Left) && source->Char.UnicodeChar>=0xdc00 &&
+                      source->Char.UnicodeChar<=0xdfff && source[-1].Char.UnicodeChar>=0xd800 &&
+                      source[-1].Char.UnicodeChar<=0xdbff))
+                    row[x].character=ntvwm_text_glyph(codepage,source->Char.UnicodeChar);
+            }
         }
         ZeroMemory(&q,sizeof(q));q.operation=CONSOLE_IO_WRITE_CELLS_A;
         q.state.width=d->width;q.state.height=1;q.state.right=d->width-1;

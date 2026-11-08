@@ -1,0 +1,63 @@
+{
+  "case": "T481 S3 CP850 physical VM publication",
+  "published": false,
+  "provider257": {
+    "exit": 0,
+    "assertions": 216
+  },
+  "negative258": {
+    "exit": 1,
+    "checks": 604,
+    "failures": 1,
+    "actualGlyph": "003f",
+    "expectedGlyph": "009b"
+  },
+  "candidate259": {
+    "exit": 0,
+    "presentationChecks": 604,
+    "inputReturnChecks": 605,
+    "lifetimeChecks": 1084,
+    "failures": 0,
+    "glyph": "009b"
+  },
+  "qualification": {
+    "pid": 25208,
+    "start": "2026-11-07T16:45:49.2026269-08:00",
+    "script": "O:/repos.hobby/ntvdm64/build/t481-s3/qualify267.ps1",
+    "sha": "4895D074E6BE97BB4FA1845C9523B19F0560C79D93F9D7E0506022486A3C8DCC"
+  },
+  "hashes": [
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "e863090757099a1e9ff75a0ead355a964bf905f44dcd0640208e863e6faabf17"
+    },
+    {
+      "path": "src/ntvwm-exe/text_frame.c",
+      "sha256": "f55498c6c799b7745ba20aa5730bf63f02a900506a0a04e786ec7de2d206b94a"
+    },
+    {
+      "path": "src/ntvwm-exe/text_frame.h",
+      "sha256": "081e76d726163d2ba70a07f9e763274139dfc29ac59939e0d604dd82faaf79cf"
+    },
+    {
+      "path": "test/ntvdm-exe/frontend/vm_text_test.c",
+      "sha256": "9db03a3f286204c953b1b3c3425e49d3d4f2f641b8481d717a8bd020dd796259"
+    },
+    {
+      "path": "tests/observation/ntvwm_presentation_test.c",
+      "sha256": "4285f77798fcfb963c3e1293265c328393bdc6bb506e1031a7e7f95467f135e2"
+    },
+    {
+      "path": "build/t481-s3/codepage257.out",
+      "sha256": "cf750fe68b202ec685764521962de20a89dc070a936a6163cc646160f8f5e0f4"
+    },
+    {
+      "path": "build/t481-s3/native258/presentation.txt",
+      "sha256": "e00934313cfa3b5b4eac93e892494b9ee410f0d1f0f1d8514f54e8239d47a68e"
+    },
+    {
+      "path": "build/t481-s3/native259/presentation.txt",
+      "sha256": "9c4004a233733ab910f41044ecabe94a45534165420b7954631d214269b17696"
+    }
+  ]
+}

@@ -66,7 +66,7 @@ void ntvwm_mouse_compose(const ntvwm_mouse *mouse,const console_video_descriptio
 /* Recovered from ntcon-exe/window_frame.c native_glyph. Same bounded PC
  * mapping, now at its backend owner. Unsupported Unicode is one '?' cell;
  * the second cell of a wide/surrogate pair remains blank. */
-static BYTE pc_glyph(WCHAR character)
+BYTE ntvwm_text_glyph(UINT codepage,WCHAR character)
 {
     static const WCHAR pictures[31]={
         0x263a,0x263b,0x2665,0x2666,0x2663,0x2660,0x2022,0x25d8,
@@ -78,7 +78,7 @@ static BYTE pc_glyph(WCHAR character)
     for(i=0;i<31;++i)if(character==pictures[i])return (BYTE)(i+1);
     if(character==0x2302)return 127;
     if(character<32 || character==127)return '?';
-    if(WideCharToMultiByte(437,WC_NO_BEST_FIT_CHARS,&character,1,&byte,1,"?",&replaced)!=1 || replaced)
+    if(WideCharToMultiByte(codepage,WC_NO_BEST_FIT_CHARS,&character,1,&byte,1,"?",&replaced)!=1 || replaced)
         return '?';
     return (BYTE)byte;
 }
@@ -135,7 +135,7 @@ DWORD ntvwm_text_frame_pack(const CONSOLE_SCREEN_BUFFER_INFOEX *screen,
             destination[2]=source->Attributes&COMMON_LVB_UNDERSCORE ? CONSOLE_TEXT_UNDERLINE : 0;
         }
         if(source->Attributes&COMMON_LVB_REVERSE_VIDEO)attribute=(BYTE)((attribute<<4)|(attribute>>4));
-        destination[0]=pc_glyph(source->Char.UnicodeChar);destination[1]=attribute;
+        destination[0]=ntvwm_text_glyph(437,source->Char.UnicodeChar);destination[1]=attribute;
         if(source->Attributes&COMMON_LVB_TRAILING_BYTE)destination[0]=' ';
         if((x || screen->srWindow.Left) && source->Char.UnicodeChar>=0xdc00 && source->Char.UnicodeChar<=0xdfff &&
             source[-1].Char.UnicodeChar>=0xd800 && source[-1].Char.UnicodeChar<=0xdbff)destination[0]=' ';

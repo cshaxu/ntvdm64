@@ -1033,6 +1033,10 @@ static HWND scripted_input_window(void)
     return window;
 }
 static DWORD scripted_window_key_messages, scripted_window_enters;
+static const char *scripted_key_failure = "none";
+static DWORD scripted_key_error;
+static UINT scripted_key_message;
+static WORD scripted_key_virtual;
 /* SendMessage does not update a foreign thread's keyboard-state table.
  * Share only this owned private-desktop UI queue, then supply the same
  * explicit modifier/toggle facts as the Console INPUT_RECORD fixture.
@@ -1043,6 +1047,9 @@ static BOOL send_window_keyboard_message(HWND window, UINT message,
     char desktop[96]; DWORD needed, pid = 0, thread;
     BYTE saved[256], state[256] = {0}; MSG pending;
     DWORD_PTR result; BOOL sent = FALSE;
+    scripted_key_message = message;
+    scripted_key_virtual = virtual_key;
+    scripted_key_failure = "window-owner";
     thread = GetWindowThreadProcessId(window, &pid);
     if (!thread || pid != scripted_window_frontend ||
         !GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),
@@ -1050,6 +1057,7 @@ static BOOL send_window_keyboard_message(HWND window, UINT message,
         (strncmp(desktop, "NTVDMConsoleTest-", 17) &&
          !GetEnvironmentVariableA("MVDM_OBSERVER_CAF_OWNED_CONSOLE",NULL,0))) return FALSE;
     (void)PeekMessageW(&pending, NULL, 0, 0, PM_NOREMOVE);
+    scripted_key_failure = "attach-input";
     if (!GetKeyboardState(saved) ||
         !AttachThreadInput(GetCurrentThreadId(), thread, TRUE)) return FALSE;
     state[VK_NUMLOCK] = (control & NUMLOCK_ON) ? 1 : 0;
@@ -1065,12 +1073,22 @@ static BOOL send_window_keyboard_message(HWND window, UINT message,
      * strict echo failure before Enter; never enabled by normal matrices. */
     if (GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_CAPS_DIAGNOSTIC",NULL,0))
         state[VK_CAPITAL] = 1;
+    scripted_key_failure = "send-message";
+    SetLastError(ERROR_SUCCESS);
     if (SetKeyboardState(state))
         sent = SendMessageTimeoutW(window, message, key, bits,
             SMTO_ABORTIFHUNG, 3000, &result) != 0;
-    if (!AttachThreadInput(GetCurrentThreadId(), thread, FALSE)) sent = FALSE;
-    if (!SetKeyboardState(saved)) sent = FALSE;
+    scripted_key_error = GetLastError();
+    if (!AttachThreadInput(GetCurrentThreadId(), thread, FALSE)) {
+        scripted_key_failure = "detach-input";
+        scripted_key_error = GetLastError(); sent = FALSE;
+    }
+    if (!SetKeyboardState(saved)) {
+        scripted_key_failure = "restore-state";
+        scripted_key_error = GetLastError(); sent = FALSE;
+    }
     if (sent) {
+        scripted_key_failure = "none";
         ++scripted_window_key_messages;
         if (message == WM_KEYDOWN && virtual_key == VK_RETURN && down)
             ++scripted_window_enters;
@@ -3025,6 +3043,9 @@ managed_close_done: ;
             (unsigned)milestone_input,milestone_waits,milestone_wait_ms);
         fprintf(report,"window-key-message-count=%lu window-enter-count=%lu\n",
             scripted_window_key_messages,scripted_window_enters);
+        fprintf(report,"window-key-failure=%s error=%lu message=%u key=%u\n",
+            scripted_key_failure,scripted_key_error,scripted_key_message,
+            (unsigned)scripted_key_virtual);
         if (performance_timeline) {
             unsigned index;
             fprintf(report,"performance-samples=%u overflow=%u\n",performance_count,(unsigned)performance_overflow);

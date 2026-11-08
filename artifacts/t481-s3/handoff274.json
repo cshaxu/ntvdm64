@@ -1,0 +1,48 @@
+{
+  "originalFailure": "Full266 retained and unexplained, not claimed fixed",
+  "conclusion": "Ten diagnostic focused runs and Full273 pass unchanged assertions; no reproducible failure found within this bounded investigation",
+  "productChangedForInvestigation": false,
+  "runs": [
+    {
+      "sha256": "5C222A11FF8E5EF53F2F086609A423524EEC999A08FE2E96CD1A6E14E3323695",
+      "file": "handoff274-1.observer"
+    },
+    {
+      "sha256": "5DAF484CE91C42C3A64B37325BC8EACFB9C412C743B9780F01C69C0F67707667",
+      "file": "handoff274-10.observer"
+    },
+    {
+      "sha256": "2CF5127481E0AD65F3A4D3600E3E40087C99FDD4B202E43BF6D568C94EA6A7CC",
+      "file": "handoff274-2.observer"
+    },
+    {
+      "sha256": "DD16C498247DB80330954FC276407BA9D8AAEA51A30865E4E2E6049E91DAE69E",
+      "file": "handoff274-3.observer"
+    },
+    {
+      "sha256": "A48B15F9F0BA41737F4EEF45BE704EDC57F77E07377A87670F391D1A178513F3",
+      "file": "handoff274-4.observer"
+    },
+    {
+      "sha256": "E8E7B4B97F7A077CC1399AA5FAE4E2AAE2279F300BDB202A16F2AA9EF56149D1",
+      "file": "handoff274-5.observer"
+    },
+    {
+      "sha256": "B8DF54707F2A0F366333123F7F12010F4F27911DC01A2C058156EC4500330D48",
+      "file": "handoff274-6.observer"
+    },
+    {
+      "sha256": "F8F3552409C1992C188DC5E4C96B0BB47A1AA4189C5B88C554602A8538357A46",
+      "file": "handoff274-7.observer"
+    },
+    {
+      "sha256": "C967CC805A6F6A6EE2E2332BAAFD92ED274B48D8C3F54957A07EC0F0D7755691",
+      "file": "handoff274-8.observer"
+    },
+    {
+      "sha256": "E16D812A9DDAFC615094CF5E424DC28187D701E34BA60F64DA388F8FE343FB01",
+      "file": "handoff274-9.observer"
+    }
+  ],
+  "exit": 0
+}
