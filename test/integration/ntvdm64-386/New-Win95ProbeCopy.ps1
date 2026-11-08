@@ -52,10 +52,10 @@ $system="$dest/SYSTEM.INI"
 $enc=[Text.Encoding]::GetEncoding(28591)
 $s=$enc.GetString([IO.File]::ReadAllBytes($system))
 if([regex]::Matches($s,'(?im)^\[386Enh\]').Count -ne 1){throw 'No unique enhanced section'}
-$s=[regex]::Replace($s,'(?im)^[ \t]*device[ \t]*=[^\r\n]*(?:ntvdm64\.vxd|insignia\.386|ints\.386)[ \t]*(?:;[^\r\n]*)?\r?\n','')
-$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\NTVDM64.VXD")
+$s=[regex]::Replace($s,'(?im)^[ \t]*device[ \t]*=[^\r\n]*(?:ntvdm64\.(?:386|vxd)|insignia\.386|ints\.386)[ \t]*(?:;[^\r\n]*)?\r?\n','')
+$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\NTVDM64.386")
 [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
-Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.VXD"
+Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.386"
 if($InstanceDriver -or $InterruptObserver){
  $entries=''
  if($InstanceDriver){Copy-Item -LiteralPath (Resolve-Path -LiteralPath $InstanceDriver).Path -Destination "$dest/PATCH/INSIGNIA.386";$entries+="`r`ndevice=$dest\PATCH\INSIGNIA.386"}

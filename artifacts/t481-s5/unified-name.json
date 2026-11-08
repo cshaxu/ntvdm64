@@ -1,0 +1,31 @@
+{
+  "driver": "ntvdm64.386",
+  "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
+  "win95Config": "device=<isolated copy>/PATCH/NTVDM64.386",
+  "win95ProductionHost": {
+    "vms": 2,
+    "nativeCommands": 4,
+    "callbacks": 320,
+    "result": "PASS",
+    "guestInstallation": "unchanged"
+  },
+  "win95Editors": {
+    "nativeVm": "c2d200e8",
+    "dosVm": "c31200e8",
+    "completed": 2,
+    "menus": true,
+    "mouseMenu": true,
+    "saveVerified": true,
+    "observerExit": "0x00000001",
+    "normalShutdownProved": false
+  },
+  "win31Driver": "already byte-identical; published W31 installation verified",
+  "hostImages": "11 images verified at assets/release and O:/winnt/system32; unchanged since Full 16/16",
+  "w31SystemIni": "unchanged",
+  "removedDuplicate": "assets/release/ntvdm64.vxd",
+  "limits": [
+    "Win95 editor input test uses diagnostic host",
+    "Win95 observer exit 1 remains unclassified",
+    "Win95 test used isolated Windows copy"
+  ]
+}

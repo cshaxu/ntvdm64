@@ -127,7 +127,7 @@ try {
  if(!(Test-Path "$dest/PATCH/VMLOAD.BIN")){throw 'No guest API result'}
  $b=[IO.File]::ReadAllBytes("$dest/PATCH/VMLOAD.BIN")
  Copy-Item "$dest/PATCH/VMLOAD.BIN" "$task/runtime/VMLOAD.BIN"
- $result=[ordered]@{api=[BitConverter]::ToUInt32($b,0);signature=[BitConverter]::ToUInt32($b,4);vm=[BitConverter]::ToUInt32($b,8);driver=(Get-FileHash "$dest/PATCH/NTVDM64.VXD").Hash}
+ $result=[ordered]@{api=[BitConverter]::ToUInt32($b,0);signature=[BitConverter]::ToUInt32($b,4);vm=[BitConverter]::ToUInt32($b,8);driver=(Get-FileHash "$dest/PATCH/NTVDM64.386").Hash}
  $result|ConvertTo-Json|Set-Content "$task/runtime/vxd-result.json"
  if($InitializationFailure){
   $rollback=[IO.File]::ReadAllBytes("$task/initialization-rollback.bin")

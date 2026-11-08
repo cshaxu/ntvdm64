@@ -6,10 +6,9 @@ T479. It is not an imported Windows component or a hardware V86 monitor.
 | Guest | Release artifact |
 | --- | --- |
 | Windows 3.1 enhanced mode | `assets/release/ntvdm64.386` |
-| Windows 95 | `assets/release/ntvdm64.vxd` |
+| Windows 95 | `assets/release/ntvdm64.386` |
 
-Both formats belong here. Shared implementation stays in this component;
-format-specific link settings do not justify separate implementations.
+Both systems use the same statically loaded image and filename.
 Build products and diagnostic probes belong under the active task's `build/`
 directory. Publication copies validated artifacts to `assets/release/`, not
 the host `system32` directory. Original guest binaries remain unchanged.
@@ -17,10 +16,8 @@ the host `system32` directory. Original guest binaries remain unchanged.
 ## Current state
 
 The S4 candidate uses NASM OMF and Open Watcom LE, with shared resident code
-and data segments. Both output names currently contain the same statically
-loaded image; dynamic load/unload is not supported. The Win3.1 .386 is published
-as a candidate with its verified bridge scope in addon-manifest.json. Win95
-.vxd publication remains deferred. Complete interactive I/O is not accepted; the S5 candidate scope is below.
+and data segments. Both systems use this one image; dynamic load/unload is not
+supported. The addon manifest records the verified scope and outstanding limits.
 Historical experimental drivers are comparison evidence, not build inputs.
 
 The S5 candidate now registers the VMM callback with the host BOP entry

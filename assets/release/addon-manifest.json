@@ -44,7 +44,7 @@
       "acceptance": "candidate"
     },
     {
-      "id": "ntvdm64-win31",
+      "id": "ntvdm64",
       "file": "ntvdm64.386",
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
@@ -52,8 +52,8 @@
       "sourceSha256": "87441DAA2B686378BCD1B2482617688838F3F7AB295320417EC7134B9326C6F3",
       "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
       "acceptance": "candidate",
-      "verifiedScope": "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 production host native command and diagnostic interactive editor tests passed; normal shutdown unverified.",
-      "evidence": "artifacts/t481-s5/qualification001.json"
+      "verifiedScope": "Same static image for Win3.1 and Win95. Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host; Win95 .386 loading and production-host native commands passed. Win95 normal shutdown unverified.",
+      "evidence": "artifacts/t481-s5/unified-name.json"
     },
     {
       "id": "insignia-niddb",
@@ -65,18 +65,6 @@
       "sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
       "acceptance": "candidate",
       "verifiedScope": "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 production host native command and diagnostic interactive editor tests passed; normal shutdown unverified.",
-      "evidence": "artifacts/t481-s5/qualification001.json"
-    },
-    {
-      "id": "ntvdm64-win95",
-      "file": "ntvdm64.vxd",
-      "kind": "static-vxd",
-      "architecture": "i386-protected-mode",
-      "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "87441DAA2B686378BCD1B2482617688838F3F7AB295320417EC7134B9326C6F3",
-      "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
-      "acceptance": "candidate",
-      "verifiedScope": "Win95 VxD load, two VM identities, ordered wake, PIC notification and 320 callbacks; production host native commands passed; normal shutdown unverified.",
       "evidence": "artifacts/t481-s5/qualification001.json"
     }
   ],

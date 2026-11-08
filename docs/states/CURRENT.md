@@ -45,7 +45,7 @@ diagnostic host. Win95 observer exit code 1 and the historical direct native
 batch path remain explicitly unproved as normal behavior. They must not be
 reported as passing; see [S4 closure](../etc/evidence/m0-t481-s4-closure.md).
 
-S5 delivery is complete and awaits owner acceptance; the T remains open.
+S5 unified the Win3.1 and Win95 addon name as `NTVDM64.386`: Win95 loading, two-VM production commands and diagnostic editor interaction pass; the duplicate VXD artifact is removed. [Evidence](../../artifacts/t481-s5/unified-name.json). Host and W31 bytes remain identical to the qualified Full package. Historical evidence retains original filenames; original guest binaries remain unchanged. S5 delivery awaits owner acceptance; T remains open.
 
 ## Recent M0 Closures
 

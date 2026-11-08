@@ -245,7 +245,7 @@ not alter machine locale, original guest binaries or production code, and is
 not DBCS or guest-runtime codepage-switch acceptance.
 
 `verify-win95-editors.ps1` runs the same two-prompt editor interactions in a
-disposable Win95 installation copy. Supply the authored VxD, INSIGNIA driver,
+disposable Win95 installation copy. Supply the authored NTVDM64.386, INSIGNIA driver,
 test interrupt observer, diagnostic real-command package and console observer.
 The copy path must be an unused short `O:\tmp` path of the same length as the
 source, so `relocate-win95-hive-equal.py` can update copied registry values
@@ -260,7 +260,7 @@ specifies its exact guest-ANSI title bytes; no other window is closed. The
 test records the observer exit code without claiming normal Win95 shutdown.
 
 `verify-win95-identity.ps1 -Reuse` uses the same disposable Win95 copy and
-checks two concurrent VM identities, 320 callbacks, actual handle reuse, and
+loads the same NTVDM64.386 as Win3.1 and checks two concurrent VM identities, 320 callbacks, actual handle reuse, and
 old-generation wake rejection. `-InitializationFailure` instead requires the
 test-only `host-init-failure.c` link and verifies that a failed driver arm
 rolls back the actual host IRQ and EOI hook; no DOS identity witnesses run.

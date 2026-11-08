@@ -33,7 +33,6 @@ export ntvdm64_ddb.1
     [IO.File]::WriteAllText("$out/ntvdm64.lnk",$link.Replace("`r`n","`n"))
     & $linker '@ntvdm64.lnk'
     if ($LASTEXITCODE) { throw 'Open Watcom link failed' }
-    Copy-Item -LiteralPath "$out/ntvdm64.386" -Destination "$out/ntvdm64.vxd"
     [ordered]@{
         source = (Get-FileHash "$PSScriptRoot/ntvdm64.asm").Hash
         assembler = $assembler
@@ -41,8 +40,6 @@ export ntvdm64_ddb.1
         linker = $linker
         linkerSha256 = (Get-FileHash $linker).Hash
         loadMode = 'static'
-        artifacts = @('ntvdm64.386','ntvdm64.vxd') | ForEach-Object {
-            [ordered]@{name=$_;bytes=(Get-Item "$out/$_").Length;sha256=(Get-FileHash "$out/$_").Hash}
-        }
+        artifacts = @([ordered]@{name='ntvdm64.386';bytes=(Get-Item "$out/ntvdm64.386").Length;sha256=(Get-FileHash "$out/ntvdm64.386").Hash})
     } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath "$out/build.json" -Encoding utf8
 } finally { Pop-Location }
