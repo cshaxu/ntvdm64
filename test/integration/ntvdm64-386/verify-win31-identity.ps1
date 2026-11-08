@@ -32,6 +32,7 @@ param(
  [switch]$VisibleResizeCommand,
  [switch]$VisibleResizeRoundTrip,
  [switch]$GuestGridControl,
+ [switch]$GuestCustomFont,
  [switch]$GuestGridSwitch,
  [switch]$GuestScanlineControl,
  [ValidateSet('386-dosonly0','386-dosonly1')][string]$RuntimeCase='386-dosonly0',
@@ -52,6 +53,7 @@ $ErrorActionPreference='Stop'
 if($VisibleResizeRoundTrip){$VisibleResizeCommand=$true}
 if($VisibleResizeCommand){$ResizeCommand=$true}
 if($GuestGridSwitch -and !$GuestGridControl){throw 'Grid switching requires guest grid control'}
+if($GuestCustomFont -and !$GuestGridControl){throw 'Custom font requires guest grid control'}
 if($GuestScanlineControl -and !$GuestGridSwitch){throw 'Scanline control requires guest grid switching'}
 if($GuestGridControl -and (!$RealCommand -or !$OrderedCommandImage -or $ResizeCommand -or $NestedCommand)){throw 'Guest grid control requires independent real ordered commands'}
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires monitor and marker'}
@@ -103,6 +105,7 @@ if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
 if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
+if($GuestCustomFont){$dosDefines+='-DGUEST_CUSTOM_FONT=1'}
 if($GuestGridSwitch){$dosDefines+='-DGUEST_GRID_SWITCH=1'}
 if($GuestScanlineControl){$dosDefines+='-DGUEST_SCANLINE_CONTROL=1'}
 if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}

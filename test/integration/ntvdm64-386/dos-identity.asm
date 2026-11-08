@@ -1048,6 +1048,14 @@ mov al, [es:si+bp]
 mov [video_sample0], al
 mov al, [es:si+bp+0x4000]
 mov [video_sample1], al
+%ifdef GUEST_CUSTOM_FONT
+; Prove the BIOS actually loaded our per-VM glyph, before comparing snapshots.
+cmp si, 65*32
+jne .custom_checked
+cmp [es:si+bp], bl
+jne .mismatch
+.custom_checked:
+%endif
 %ifdef GUEST_GRID_CONTROL
 cmp byte [font_capture], 0
 je .compare_saved
@@ -1269,6 +1277,28 @@ xor bx, bx
 int 0x10
 mov [grid_last_row], dl
 mov [grid_height], cx
+%ifdef GUEST_CUSTOM_FONT
+; Original load_font restores mode registers. Use1110 to recalculate rows,
+; then query the resulting BIOS geometry instead of assuming1100 preserves it.
+push ds
+pop es
+mov bp, custom_glyph_a
+cmp byte [role], 'A'
+je .custom_ready
+mov bp, custom_glyph_b
+.custom_ready:
+mov bh, [grid_height]
+xor bl, bl
+mov cx, 1
+mov dx, 65
+mov ax, 0x1110
+int 0x10
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+mov [grid_last_row], dl
+mov [grid_height], cx
+%endif
 ; Give the two real VMs distinct DAC7 values through their guest BIOS.
 mov ax, 0x1010
 mov bx, 7
@@ -1294,4 +1324,8 @@ ret
 grid_small: db 0
 grid_last_row: db 0
 grid_height: dw 0
+%ifdef GUEST_CUSTOM_FONT
+custom_glyph_a: times 32 db 0x3c
+custom_glyph_b: times 32 db 0x66
+%endif
 %endif

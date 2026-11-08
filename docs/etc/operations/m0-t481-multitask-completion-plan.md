@@ -1703,3 +1703,13 @@ assets/release and O:/winnt/system32, package b6c8ac10-d9d0-46d8-81d4-e7f86ee899
 Updated authored ntvdm64.386 and unchanged insignia.386 remain assets-only.
 Evidence: artifacts/t481-s3/publication326.json. Governance324 passed.
 P11 commit/push pending; S3 and later S4/S5 remain open.
+
+P12 test-only custom329/330 pass both completion orders: original BIOS1110 loads
+distinct glyph65 bytes in each VM, actual VGA reads prove installation and
+three complete glyph/palette comparisons per VM preserve them across commands
+and guest grid switching;320 callbacks and normal Windows exit per run.
+Custom328's1100 stale-geometry test assumption is retained as a failed control.
+Evidence: artifacts/t481-s3/custom328.json and custom330.json. Production
+source/addons unchanged; publication326 all11 hashes still match both targets.
+Full320 is reused by unchanged-input identity. Native font replacement/DBCS
+and remaining S3/S4/S5 are not qualified by this test.

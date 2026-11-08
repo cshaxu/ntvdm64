@@ -222,3 +222,14 @@ and records its actual code page. This is non-ASCII single-byte handback, not
 DBCS, arbitrary code-page switching or physical keyboard coverage. The unit
 suite separately proves an unrepresentable U+4E00 returns a conversion error
 without consuming the original queued record.
+
+`-GuestGridControl -GuestGridSwitch -GuestCustomFont` with real ordered
+commands loads glyph65 through original INT10/1110: VM A uses3c bytes and VM B
+uses66 bytes, with8/16-pixel grids changing between continuations. The probe
+queries actual BIOS geometry after loading, reads virtual VGA font memory to
+prove those bytes were installed, and compares both complete font banks and
+text palettes after each command. Run both `-FirstCommand A` and `B`. This
+proves guest custom-glyph preservation, not native-requested font replacement,
+DBCS or preservation across a separately requested native resize. Original
+INT10/1100 restores mode registers through load_font; do not assume it retains
+the prior row count (retained failing fixture: artifacts/t481-s3/custom328.json).

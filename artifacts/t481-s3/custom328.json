@@ -1,0 +1,38 @@
+{
+  "case": "Custom glyph witness1100 geometry assumption",
+  "exit": 1,
+  "observation": "Guest API1100 with height8 changes BIOS row count from50 to25 before native continuation; original load_font restores low_set_mode(video_mode). Probe compared stale row count.",
+  "interpretation": "Fixture assumption failure, not proof of publication losing custom glyphs.",
+  "correction": "Use original1110 to load and recalculate, then query actual1130 geometry; retain full glyph/palette/callback assertions.",
+  "files": [
+    {
+      "path": "build/t481-s3/custom328.ps1",
+      "sha256": "5DF75E7B8A0F4767F02093AE863CD2766C14FC0E995A8372B934A9DD60455C38"
+    },
+    {
+      "path": "build/t481-s3/custom328.out",
+      "sha256": "0CEF06B7D83CEC753CA5607D2DC391364B20AF29322AB42FC45B47B193F4D3ED"
+    },
+    {
+      "path": "build/t481-s3/custom328.err",
+      "sha256": "70F21922803FB8F4FB9D61F48296C824CF5DBA5F3DCF28C1DF7EDB2E7A63D315"
+    },
+    {
+      "path": "build/t481-s3/custom328/identity.com",
+      "sha256": "1118D843C9E9B2ED58A684DC3435D3195D3DA40DD54CA86A4793F46D7A1FD503"
+    },
+    {
+      "path": "build/t481-s3/custom328/continuation-trace.txt",
+      "sha256": "339CC9331256E63FEA96074ECE354E7BB25B7FD48CBA81A2B2DC9D64C4C29E39"
+    },
+    {
+      "path": "build/t481-s3/custom328/runtime/matrix-results.json",
+      "sha256": "75A944232E13C4DDCFDD8A401AEA7462EBA60B7EBC7FD9F1360D8513AF4FBA4D"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "sha256": "E18573FAA00606DD8926AC310232E2B20FB090B7160B90F669D76893ED97DAD6"
+    }
+  ],
+  "followup": "custom329; result pending"
+}

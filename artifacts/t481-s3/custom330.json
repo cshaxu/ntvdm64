@@ -1,0 +1,232 @@
+{
+  "case": "T481 S3 P12 actual custom-glyph preservation",
+  "productionBase": "367612661",
+  "productionChanges": false,
+  "runs": [
+    {
+      "run": 329,
+      "first": "A",
+      "exit": 0,
+      "vmPair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1254533,
+          "finish": 1254589,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0,
+          "gridConfigurations": 3,
+          "fontNonzeroBytes": 5604,
+          "palettePreservationChecks": 3,
+          "fontPreservationChecks": 3
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1254533,
+          "finish": 1254587,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0,
+          "gridConfigurations": 3,
+          "fontNonzeroBytes": 6393,
+          "palettePreservationChecks": 3,
+          "fontPreservationChecks": 3
+        }
+      ],
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\custom329\\runtime\\386-dosonly0.observer.txt"
+      }
+    },
+    {
+      "run": 330,
+      "first": "B",
+      "exit": 0,
+      "vmPair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1255858,
+          "finish": 1255914,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0,
+          "gridConfigurations": 3,
+          "fontNonzeroBytes": 5604,
+          "palettePreservationChecks": 3,
+          "fontPreservationChecks": 3
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1255858,
+          "finish": 1255912,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0,
+          "gridConfigurations": 3,
+          "fontNonzeroBytes": 6393,
+          "palettePreservationChecks": 3,
+          "fontPreservationChecks": 3
+        }
+      ],
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\custom330\\runtime\\386-dosonly0.observer.txt"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "build/t481-s3/custom329.ps1",
+      "sha256": "2CDD5ECBF7A13D9689016A18810C6ACF2A082356929519F7F5AAF6CCDC367ADF"
+    },
+    {
+      "path": "build/t481-s3/custom329.out",
+      "sha256": "402442FF1EBA4ABC42487F0A3BD1EB7B3946A99F92C4991073BBBBC7A3345650"
+    },
+    {
+      "path": "build/t481-s3/custom329.err",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t481-s3/custom329/identity.com",
+      "sha256": "73DCD1CD1D7A2039100786B70CB0B0AC7D156AF697173CF3C3225635D4A68B0C"
+    },
+    {
+      "path": "build/t481-s3/custom329/runtime/vm-pair.json",
+      "sha256": "381FFE2298B7BC87634C26A9F0410083064870061B95AFF1C1E0DEE39DE0A5C4"
+    },
+    {
+      "path": "build/t481-s3/custom329/runtime/A.BIN",
+      "sha256": "4A3D7381D16704E3ABBEA29CDB201F970B6BD263F48E9E40C5B53E7C8F2FF7B4"
+    },
+    {
+      "path": "build/t481-s3/custom329/runtime/B.BIN",
+      "sha256": "F98A33D256A38EB7D9348224EB030CE5D3B480B130CA9297007E472EC45A69B4"
+    },
+    {
+      "path": "build/t481-s3/custom330.ps1",
+      "sha256": "640FF94EEE3DD2331CCF4FA8AD00815A9DE15B02861D94641976D978A1EDCDF1"
+    },
+    {
+      "path": "build/t481-s3/custom330.out",
+      "sha256": "402442FF1EBA4ABC42487F0A3BD1EB7B3946A99F92C4991073BBBBC7A3345650"
+    },
+    {
+      "path": "build/t481-s3/custom330.err",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t481-s3/custom330/identity.com",
+      "sha256": "73DCD1CD1D7A2039100786B70CB0B0AC7D156AF697173CF3C3225635D4A68B0C"
+    },
+    {
+      "path": "build/t481-s3/custom330/runtime/vm-pair.json",
+      "sha256": "D01575C925AC8782D7467FB6E878475F43EF2AA9C5755B2B108A702ECFD876E4"
+    },
+    {
+      "path": "build/t481-s3/custom330/runtime/A.BIN",
+      "sha256": "1B393FFC6E077BE7289ACB64BB153FFB8B6162F3D82170FAE69710BBC938D121"
+    },
+    {
+      "path": "build/t481-s3/custom330/runtime/B.BIN",
+      "sha256": "CE219A43EE8B0EF8906209E4EF7C92098264DE0EEDC91EC49612F2E79F9734F6"
+    }
+  ],
+  "limits": [
+    "Original1100 stale-geometry probe failure retained in custom328.json.",
+    "Custom glyph retained across native commands and guest grid switching, not native font replacement or native resize with custom fonts.",
+    "DBCS and remaining S3/S4/S5 remain open."
+  ],
+  "unchangedPackage": "b6c8ac10-d9d0-46d8-81d4-e7f86ee8991a",
+  "previousFull": "artifacts/t481-s3/full320.json"
+}
