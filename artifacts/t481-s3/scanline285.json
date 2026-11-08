@@ -1,0 +1,36 @@
+{
+  "sequence": "INT10 AX1202 BL30; AX0003; AX1112 BX0; AX1130 BX0",
+  "win31": {
+    "recordSha256": "204947DC5B9E4E1E8C444B1F07762DC56602ADCAAB907950332E8464EDB1FD92",
+    "exit": "1",
+    "actualHeight": 8,
+    "stage": 31,
+    "actualLastRow": 59,
+    "normalWindowsExit": true,
+    "originalGuestUnchanged": true
+  },
+  "next": "Trace BIOS character-generator recalc_text use of get_screen_height against selected VMM virtual display state; do not patch dimensions or declare50-row runtime support.",
+  "base": "97aa65255",
+  "interpretation": "Standalone DOS supplies50 rows; Win3.1 VM supplies60. Earlier comparison to captured grid succeeded before the exact49-last-row assertion failed, so the native continuation preserved the already60-row grid. Win3.1 virtual display context is implicated; attribution to original guest versus host VDD/BIOS binding is not proven.",
+  "dos": {
+    "actual": {
+      "lastRow": 49,
+      "fontHeight": 8,
+      "int12ax": 4626
+    },
+    "recordSha256": "B26DF7F5504AD1BA3699E4B32AFA710D5B63C2DE9C4D6FF9D48DA8586A94CB62",
+    "exit": "0"
+  },
+  "case": "400 scanline BIOS control: standalone DOS versus Win3.1 VM",
+  "publishedChanges": false,
+  "fullScreenRequestedControl": {
+    "exit": 1,
+    "normalWindowsExit": true,
+    "limit": "PIF fullscreen requested; not proof of continuously foreground hardware ownership for both concurrent VMs",
+    "fontHeight": 8,
+    "stage": 31,
+    "lastRow": 59,
+    "run": 286
+  },
+  "sourceFinding": "ega_vide.c recalc_text derives scan_lines from get_screen_height()+1. gvi.h get_screen_height reads global PCDisplay.screen_height and EGA_GRAPH.multiply_vert_by_two, not a VM identity parameter. vga_func_12 selects BIOS VGA line flags. This identifies a possible physical-versus-virtual state dependency; runtime read trace still needed before claiming causal attribution."
+}

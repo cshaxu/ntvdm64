@@ -3434,3 +3434,20 @@ output slot whose port-60 data has been consumed, even when the slot awaits
 EOI. Other device slots with that origin remain selectable. Origin178 is the
 failing control. This is independent of the DIV-321 cancellation/refill fix;
 it does not alter output retirement or normal/early EOI behavior.
+
+MVDM-HOST-DIV-890 (T481 S3): `ega_vide.c::recalc_text` reads
+VGA height through the existing virtualised CRTC port service in software V86.
+The original `ios.c::outb` and `ccpusas4.c::c_IOVirtualised` already send BIOS
+writes through Win3.1 VDD, but the original row calculation read physical
+PCDisplay. Diagnostic292 observes virtual VDE399 before BIOS1112, physical
+height481, then virtual VDE479 and60 rows after the call. The candidate retains
+the original V7 multiplier, rounding, font loading and row update, restoring
+the selected CRTC index after reads. Non-V86 and EGA paths are unchanged.
+No new state or guest modification; source comparison with SoftPC found the
+same physical-height calculation, not a ready-made correction. Bounded mirror
+addition only; qualification and limitations are recorded below.
+DIV-890 verification: failed baseline292 versus candidate294/295 virtual VDE
+399 preserved; dual-VM callbacks/fonts/palettes and normal exits pass. Cached296,
+Full29716/16, standaloneDOS298, editor300 and productionWin31 four-combination301
+pass. See artifacts/t481-s3/review303.json; arbitrary graphics and reentrant VDD
+failure are not inferred from these results.

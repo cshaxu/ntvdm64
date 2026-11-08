@@ -31,6 +31,7 @@ param(
  [switch]$ResizeCommand,
  [switch]$GuestGridControl,
  [switch]$GuestGridSwitch,
+ [switch]$GuestScanlineControl,
  [ValidateSet('386-dosonly0','386-dosonly1')][string]$RuntimeCase='386-dosonly0',
  [string]$UnreadInputImage,
  [ValidateSet('sequence','repeat','function','extended','oem')][string]$UnreadInputMode='sequence',
@@ -47,6 +48,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 if($GuestGridSwitch -and !$GuestGridControl){throw 'Grid switching requires guest grid control'}
+if($GuestScanlineControl -and !$GuestGridSwitch){throw 'Scanline control requires guest grid switching'}
 if($GuestGridControl -and (!$RealCommand -or !$OrderedCommandImage -or $ResizeCommand -or $NestedCommand)){throw 'Guest grid control requires independent real ordered commands'}
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires monitor and marker'}
 if($ResizeCommand -and (!$OrderedCommandImage -or !$RealCommand -or $ServiceLoss -or $WorkerCloseMonitor)){throw 'Resize requires independent real ordered commands'}
@@ -67,7 +69,7 @@ if($Continuation -and ($InitializationFailure -or $Reuse -or $RetirementDriver))
 if($VideoApplication -and !$Continuation){throw 'VIDEO application requires continuation witness'}
 if($VideoFontControl -and !$VideoApplication){throw 'Font control requires VIDEO application; it is not driver font acceptance'}
 if($VideoFontDirectControl -and (!$VideoApplication -or $VideoFontControl)){throw 'Direct font control requires VIDEO application and excludes BIOS control'}
-if($FullscreenVmControl -and !$VideoApplication){throw 'Fullscreen control requires the VIDEO witness; it is not windowed acceptance'}
+if($FullscreenVmControl -and !$VideoApplication -and !$GuestGridControl){throw 'Fullscreen control requires VIDEO or guest grid witness; it is not windowed acceptance'}
 if($TraceContinuation -and !$Continuation){throw 'Continuation tracing requires its witness'}
 if($DeferredContinuation -and !$Continuation){throw 'Deferred completion requires its witness'}
 if($DirectoryYield -and (!$Continuation -or $DeferredContinuation)){throw 'Directory yield control requires immediate continuation'}
@@ -98,6 +100,7 @@ if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
 if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
 if($GuestGridSwitch){$dosDefines+='-DGUEST_GRID_SWITCH=1'}
+if($GuestScanlineControl){$dosDefines+='-DGUEST_SCANLINE_CONTROL=1'}
 if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
 if($UnreadInputImage){
  $dosDefines+='-DUNREAD_INPUT=1'

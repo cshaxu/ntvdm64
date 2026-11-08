@@ -176,14 +176,22 @@ void test_mouse_EM_callback(void)
 }
 /* Optional bios.obj link interposition; observe arguments, then call the
  * unchanged original BIOS entry. No guest register or device mutation. */
+#ifdef TEST_VIDEO_GEOMETRY
+extern void test_video_geometry_snapshot(unsigned, unsigned);
+#else
+#define test_video_geometry_snapshot(after, function) ((void)0)
+#endif
 static void trace_video(void (*entry)(void), unsigned operation)
 {
-    if ((c_getAX() >> 8) == 0x11) {
+    unsigned function = c_getAX();
+    if ((function >> 8) == 0 || (function >> 8) == 0x11 || (function >> 8) == 0x12) {
         trace(operation, c_getAX(), c_getBX());
         trace(operation + 1, c_getCX(), c_getDX());
         trace(operation + 2, c_getES(), c_getBP());
     }
+    if ((function >> 8) == 0 || (function >> 8) == 0x11 || (function >> 8) == 0x12) test_video_geometry_snapshot(0, function);
     entry();
+    if ((function >> 8) == 0 || (function >> 8) == 0x11 || (function >> 8) == 0x12) test_video_geometry_snapshot(1, function);
 }
 void test_video_io(void) { trace_video(video_io, 0x320); }
 void test_ega_video_io(void) { trace_video(ega_video_io, 0x324); }
@@ -497,6 +505,13 @@ static void trace(unsigned operation, uint32_t vm, uint32_t token)
         ExitProcess(ERROR_WRITE_FAULT);
     CloseHandle(file);
     ReleaseSRWLockExclusive(&lock);
+}
+
+/* Optional BIOS geometry trace; the linked observer preserves the CRTC index. */
+void test_video_geometry(unsigned after, unsigned function, unsigned lines, unsigned rows)
+{
+    trace(0xb20 + after * 2, function, lines);
+    trace(0xb21 + after * 2, c_sas_hw_at(0x4ac), rows);
 }
 
 /* Diagnostic queue observations only; no key is consumed or rewritten. */

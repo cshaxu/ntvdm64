@@ -1,0 +1,29 @@
+{
+  "candidate": "MVDM-HOST-DIV-890",
+  "cachedBuild": {
+    "stdoutSha256": "4E3331C01543A2ECE7BCBDFEA7153F7A20D8CA324FECE240627B468B8A7E2AEF",
+    "x86SharedTests": "14/14",
+    "x64SharedTests": "14/14",
+    "keyboardControllerExit": 0,
+    "exit": 0,
+    "run": 296
+  },
+  "reverseOrder": {
+    "originalGuestUnchanged": true,
+    "exit": 0,
+    "normalWindowsExit": true,
+    "fontChecksPerVm": 3,
+    "callbackChecks": 320,
+    "stdoutSha256": "87A6028F4988029C05380E542FD61B0ABAC5801FEC2BB8453160FD4D2999B58D",
+    "paletteChecksPerVm": 3,
+    "run": 295,
+    "traceSha256": "CD07011EA1D40D642F618F28A2BAA2670F90E54B0C28B3C6386166AC389F1A7A"
+  },
+  "full": {
+    "state": "running",
+    "run": 297,
+    "childPid": 23980,
+    "parentPid": 6392
+  },
+  "publication": "Unchanged; candidate not published"
+}

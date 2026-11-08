@@ -354,6 +354,10 @@ cmp byte [grid_small], 0
 je %%grid_b
 cmp dl, 24
 jbe %%error
+%ifdef GUEST_SCANLINE_CONTROL
+cmp dl, 49
+jne %%error
+%endif
 cmp cx, 8
 jne %%error
 jmp %%grid_ok
@@ -1203,6 +1207,11 @@ pushad
 push es
 ; The guest BIOS owns this change. A requests8-pixel glyphs; B retains16.
 ; Later host commands must inherit and preserve each VM's real geometry.
+%ifdef GUEST_SCANLINE_CONTROL
+mov ax, 0x1202
+mov bl, 0x30
+int 0x10
+%endif
 mov ax, 3
 int 0x10
 mov byte [grid_small], 0

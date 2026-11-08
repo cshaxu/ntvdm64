@@ -1,0 +1,16 @@
+{
+  "run": 294,
+  "candidate": "MVDM-HOST-DIV-890",
+  "buildExit": 0,
+  "testExit": 0,
+  "traceSha256": "0A7F5334647834BB902CF57038A3A17F3B8EA91941292B6D4A98A0CEE7A4E694",
+  "outputSha256": "87A6028F4988029C05380E542FD61B0ABAC5801FEC2BB8453160FD4D2999B58D",
+  "virtualVdeBefore": 399,
+  "virtualVdeAfter": 399,
+  "callbackChecks": 320,
+  "fontChecksPerVm": 3,
+  "paletteChecksPerVm": 3,
+  "normalWindowsExit": true,
+  "originalGuestUnchanged": true,
+  "limits": "Diagnostic package; reverse order, production cached build and full regression/publication pending."
+}

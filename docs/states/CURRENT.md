@@ -143,7 +143,7 @@ Each run verifies three actual configurations, nonempty glyph and palette
 preservation,320 callback checks and normal Windows exit. Original guest
 installation unchanged. Evidence: artifacts/t481-s3/grid-switch281.json.
 This is guest-owned change between commands, not native-requested resize
-inside a command. Product publication277 stays unchanged; P9 delivery pending.
+inside a command. Product publication277 stays unchanged; P9 is committed/pushed at97aa65255.
 
 ## Remaining Scope
 
@@ -156,3 +156,41 @@ not alter the unrelated modern desktop. S4 Win95 and S5 combined qualification
 remain uncompleted. The BIOS/INT16 handback boundary remains approved.
 No S3 or whole-T closure is claimed. Historical evidence stays in the working
 plan and artifacts rather than an expanding Current chronology.
+
+## S3 bounded scanline investigation
+
+Diagnostic287 builds successfully. Run288 reproduces the strict50-row test
+failure but exits Windows normally and verifies original guest bytes unchanged.
+The BIOS1112 entry sees481 physical scanlines and changes VM2 BDA rows25->60
+before native handoff. Evidence: artifacts/t481-s3/scanline288.json. This
+excludes NTVWM handoff as the origin of this particular change; it does not
+yet establish whether virtual BIOS behavior or missing host binding is wrong.
+Production publication277 remains unchanged; no diagnostic image is published.
+
+Diagnostic292 proves the mismatch: virtual CRTC VDE399 becomes479 because
+recalc_text used physical height481. DIV-890 adds16 lines to read the existing
+virtual CRTC in software V86, preserving the original calculation and restoring
+the index. Candidate293 builds; actual dual-VM scanline294 passes the retained
+50-row assertion, three font/palette checks per VM,320 callback checks and
+normal Windows exit. Original guest unchanged. Evidence: scanline292.json and
+scanline294.json in artifacts/t481-s3. Reverse-order295 passes the same guest checks. Cached296 passes both widths
+and shared tests14/14 each, plus keyboard regression exit0. Full297 is running;
+no candidate default publication or full qualification yet.
+
+Full297 completes16/16 with production package d75521ce-8b98-4319-9ec7-31b445a12af3.
+Standalone production DOS298 retains50 rows/font8. Editor299 was an invalid
+fixture/package pairing: the controller waits on diagnostic-only readiness
+files absent from the production host. It is retained as failure, not pass.
+Correct diagnostic editor300 passes keyboard/menu/mouse Exit and normal exit.
+Uninstrumented production Win3.1 four-combination301 is running. Evidence:
+artifacts/t481-s3/qualification297.json. Publication/commit remain pending.
+
+## S3 P10 delivery
+
+Production301 passes all four Win3.1 standard/enhanced and DOSONLY0/1 cases.
+Publication304 deploys all11 tested images and manifest to assets/release and
+O:/winnt/system32, package d75521ce-8b98-4319-9ec7-31b445a12af3; all hashes
+match. Authored addons remain assets-only and unchanged. Full29716/16,
+DOS298, editor300, scanline294/295 and fixture302 qualify the bounded DIV-890
+repair. Evidence: artifacts/t481-s3/review303.json and publication304.json.
+Commit/push pending. S3 remaining operation scope and S4/S5 remain open.

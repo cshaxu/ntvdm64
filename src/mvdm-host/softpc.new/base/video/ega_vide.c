@@ -709,6 +709,22 @@ void recalc_text IFN1(int, height)
 
 	if(video_adapter == EGA && !(get_EGA_switches() & 1) && (video_mode < 4))
 		scan_lines = 200; /* Low res text mode */
+	/* DIVERGENCE(MVDM-HOST-DIV-890): BIOS port writes are virtualised
+	 * in software V86; read the same VM's CRTC, not physical PCDisplay. */
+	else if (video_adapter == VGA && getVM())
+	{
+		half_word index, low, overflow, control;
+		io_addr port = sas_w_at_no_check(VID_INDEX);
+		inb(port, &index);
+		outb(port, 0x12); inb(port + 1, &low);
+		outb(port, 7); inb(port + 1, &overflow);
+		outb(port, 0x17); inb(port + 1, &control);
+		outb(port, index);
+		scan_lines = low | ((overflow & 2) << 7) | ((overflow & 0x40) << 3);
+		/* Preserve get_screen_height's V7 retrace multiplier and +1. */
+		scan_lines = ((scan_lines + 1) << ((control >> 2) & 1)) + 1;
+	}
+#line 743
 	else
 		scan_lines = get_screen_height() + 1;
 

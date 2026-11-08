@@ -1,0 +1,46 @@
+{
+  "implementation_constraints": [
+    "Keep guest BIOS/VMM as mode owner; no direct host writes to BIOS geometry fields.",
+    "Preserve current guest font/palette when dimensions remain unchanged.",
+    "Any geometry transition must acknowledge actual queried BIOS dimensions before committing host snapshot.",
+    "Unrepresentable dimensions must fail before partial application; changing font/mode and then reporting unsupported would require explicit rollback.",
+    "Do not infer arbitrary native-window dimensions from standard VGA mode tables."
+  ],
+  "case": "T481 S3 runtime native resize source audit",
+  "files": [
+    {
+      "sha256": "E863090757099A1E9FF75A0EAD355A964BF905F44DCD0640208E863E6FAABF17",
+      "path": "src/ntvwm-exe/presentation.c"
+    },
+    {
+      "sha256": "1205788BA9012AD0C391AB91EC35EC6BE315F116AA3C5B1D23435F323FE24F05",
+      "path": "src/ntvdm-exe/frontend/vm_text.c"
+    },
+    {
+      "sha256": "FF66557EE4F78576C6BF38EA91E8ECCB69942566DC586F6F48AA21027034DE7F",
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_application.c"
+    },
+    {
+      "sha256": "0E2DCAB7DA561B9A3922A9CCD5AF12E03F3566B9EBDEC416CAA2E7AB13C14CE9",
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm"
+    },
+    {
+      "sha256": "4707DF970954EDCAE73BA0E47F9C46E76405BC7BB6271A24D359F2BD2AF0024D",
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c"
+    },
+    {
+      "sha256": "9935AA8C68ACF42CAFC96A7A46403BCB015F347509B25780B7F56920D11756C3",
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c"
+    }
+  ],
+  "base": "97aa65255",
+  "proved": [
+    "Native presentation-only route skips hidden Console BUFFER_SIZE/WINDOW_RECT; physical fontless path publishes cells at zero-origin visible coordinates.",
+    "VM cell provider rejects coordinates outside committed BIOS grid; VIDEO_BEGIN rejects different grid dimensions.",
+    "command_screen_apply verifies real BIOS mode, columns, rows and font height before applying; growing host cache alone cannot make resizing correct.",
+    "Original vga_func_12 BL30 selects200/350/400 scanlines; ega character-generator AL11/12/14 loads14/8/16px and invokes recalc_text. recalc_text derives rows from actual scanlines.",
+    "Existing ResizeCommand changes native buffer to80x50 but retains80x25 viewport; it does not prove actual VM visible-grid resizing."
+  ],
+  "productChange": false,
+  "next": "Establish guest BIOS scanline/font transition witness and exact rollback/preservation contract before selecting runtime resize implementation"
+}

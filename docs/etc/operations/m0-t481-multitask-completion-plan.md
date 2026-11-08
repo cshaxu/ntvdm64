@@ -1603,3 +1603,53 @@ original guest installation. Evidence: artifacts/t481-s3/grid-switch281.json.
 No product or mirror changes. Existing Full273/publication277 remains the
 unchanged-input release baseline. Native-requested resize during a command,
 arbitrary grids and graphics remain separate obligations, not inferred passes.
+
+### S3 P10 candidate: virtual BIOS font geometry
+
+The400-scanline control fails at stage31 on the unchanged baseline: standalone
+DOS gives50 rows, but Win3.1 VM gives60. Diagnostic288 records BIOS1112 changing
+BDA rows25->60 using physical height481 before native handoff. Diagnostic290
+shows mode3 changes physical height in the system VM but leaves it unchanged
+in child VMs. Diagnostic292 reads the virtual CRTC through existing inb/outb:
+VDE399 before1112 becomes479 afterwards. The CRTC index is restored after
+observation. All controls exit Windows normally and leave original guest bytes
+unchanged; these are retained failures, not passing geometry tests.
+
+The actual original chain is low_set_mode/do_outb -> ios.c outb ->
+ccpusas4.c c_IOVirtualised -> biosDoInst in software V86. That correctly gives
+Win3.1 VDD the port operations, while recalc_text directly reads physical
+PCDisplay. The mismatch is an original host BIOS input-boundary defect, not
+NTVWM handoff, guest code corruption or a reason to import hardware V86 logic.
+SoftPC has the same physical calculation; no existing correction was copied.
+
+DIV-890 adds16 mirror lines: only VGA in software V86 reads VDE/overflow and
+CRTC17 retrace scaling via existing virtual ports, restores the index, then
+uses the original formula and remaining algorithm. No cache, state owner,
+new ABI, guest modification or unsupported-dimension success is introduced.
+Source review preserves the V7 horizontal-retrace multiplier (CRTC17 bit2),
+not the unrelated scan-doubling bit in CRTC9.
+
+Candidate293 builds. Actual294(A-first) and295(B-first) pass the strict50-row
+assertion, three font/palette comparisons in each VM,320 callback checks,
+normal Windows exit and original guest identity. Virtual VDE remains399.
+Evidence: artifacts/t481-s3/scanline285.json, scanline288.json,
+scanline290.json, scanline292.json and scanline294.json. Cached296 production
+qualification is ongoing. No candidate default publication or S3 closure is
+claimed. Native-requested resize remains distinct from these guest-owned
+BIOS transitions, as retained in resize-audit283.json.
+
+P10 qualification: cached296 passes both widths/shared14/14 each and keyboard
+regression; Full297 passes16/16. Production DOS298 preserves50 rows/font8.
+Editor299 was an invalid production-package/diagnostic-fixture pairing, whose
+controller waits for diagnostic-only EDITORS.BIN; retained as non-pass in
+qualification297.json. Correct diagnostic editor300 passes menu/mouse Exit.
+Uninstrumented production301 passes all four Win3.1 mode/DOSONLY combinations
+and normal exits. Fixture302 compiles default/TEST_VIDEO_GEOMETRY variants;
+default has no geometry-observer import. Review303 records exact source hashes
+and unchanged scope limits. Complete package publication and commit pending.
+
+P10 publication304 completes the coherent11-image release at both destinations
+with manifest/hash equality, package d75521ce-8b98-4319-9ec7-31b445a12af3.
+Authored addon hashes remain unchanged/assets-only. Evidence: review303.json
+and publication304.json in artifacts/t481-s3. This delivers DIV-890 only;
+the remaining S3 obligations and later Win95/combined qualification are open.

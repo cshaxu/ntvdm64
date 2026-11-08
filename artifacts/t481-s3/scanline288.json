@@ -1,0 +1,27 @@
+{
+  "base": "97aa652552a77bd253c1cf520804a0fdc2625e7e",
+  "run": 288,
+  "kind": "diagnostic, not production qualification",
+  "buildExit": 0,
+  "testExit": 1,
+  "normalWindowsExit": true,
+  "originalGuestUnchanged": true,
+  "traceSha256": "5CB7DF75C2920B07C2EF55F6273A8B938D83BB17547A42170B65D0AD162A8175",
+  "traceExcerpt": [
+    "2848 00001112 000001e1",
+    "2849 00000002 00000019",
+    "2850 00001112 000001e1",
+    "2851 00000002 0000003c"
+  ],
+  "meaning": {
+    "rowsAfter": 60,
+    "vmInstance": 2,
+    "rowsBefore": 25,
+    "beforeFontFunction": "INT10 AX1112",
+    "physicalScanLines": 481
+  },
+  "proven": "The original BIOS font entry changes the VM BDA row count from25 to60 while physical get_screen_height()+1 is481. This precedes native command handoff; NTVWM is not the producer of this observed dimension change.",
+  "unproven": "Why the Win3.1 virtual BIOS path uses the physical height after the400-scanline request; legality of that virtualized behavior and any missing VDD binding remain unproved.",
+  "next": "Trace mode3/scanline request dispatch and selected original VDD BIOS virtualization ownership before selecting any correction.",
+  "productionChanged": false
+}
