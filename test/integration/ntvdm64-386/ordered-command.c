@@ -23,6 +23,15 @@ int main(int argc, char **argv)
         BOOL roundtrip = !strcmp(argv[3], "visible-roundtrip");
         BOOL visible_resize = roundtrip || !strcmp(argv[3], "visible-resize");
         BOOL resize = visible_resize || !strcmp(argv[3], "resize");
+        BOOL codepage = !strcmp(argv[3], "codepage");
+        if (codepage) {
+            CHAR_INFO cell = {{0}, 0x2f};
+            COORD one = {1, 1}, origin = {0, 0};
+            SMALL_RECT target = {0, 0, 0, 0};
+            if (!SetConsoleOutputCP(850) || GetConsoleOutputCP() != 850) return 111;
+            cell.Char.UnicodeChar = 0x00a2; /* Cent sign: CP437 glyph9b, CP850 glyphbd. */
+            if (!WriteConsoleOutputW(GetStdHandle(STD_OUTPUT_HANDLE), &cell, one, origin, &target)) return 110;
+        }
         if (resize) {
             HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
             COORD size = {80, 50};
@@ -52,15 +61,16 @@ int main(int argc, char **argv)
                 !GetConsoleScreenBufferInfo(output, &info) ||
                 info.srWindow.Top != window.Top || info.srWindow.Bottom != window.Bottom) return 107;
         }
-        if ((!resize && strcmp(argv[3], "hold")) ||
+        if ((!resize && !codepage && strcmp(argv[3], "hold")) ||
             sprintf_s(path, sizeof(path), "%s-%c.txt", argv[4], role[0]) < 0 ||
             sprintf_s(temporary, sizeof(temporary), "%s.tmp", path) < 0 ||
-            fopen_s(&ready, temporary, resize ? "w" : "wx")) return 103;
+            fopen_s(&ready, temporary, (resize || codepage) ? "w" : "wx")) return 103;
         if (resize) fprintf(ready, "%lu resize round=%s\n", GetCurrentProcessId(), round);
+        else if (codepage) fprintf(ready, "%lu codepage=%u round=%s\n", GetCurrentProcessId(), GetConsoleOutputCP(), round);
         else fprintf(ready, "%lu\n", GetCurrentProcessId());
-        if (fclose(ready) || !(resize ? MoveFileExA(temporary, path, MOVEFILE_REPLACE_EXISTING) : MoveFileA(temporary, path))) return 104;
+        if (fclose(ready) || !((resize || codepage) ? MoveFileExA(temporary, path, MOVEFILE_REPLACE_EXISTING) : MoveFileA(temporary, path))) return 104;
         /* Real native task remains alive until Console/service teardown. */
-        if (!resize) {
+        if (!resize && !codepage) {
             WaitForSingleObject(GetCurrentProcess(), INFINITE);
             return 105;
         }

@@ -173,6 +173,16 @@ push dword 0x11111111
 %endif
 mov [standard_offset], sp
 %macro continuation_case 1-2 0
+%ifdef GUEST_CODEPAGE
+mov word [codepage_stage], 1
+mov ax, 0x6601
+int 0x21
+mov [codepage_actual], bx
+mov [codepage_result], ax
+jc %%error
+cmp bx, GUEST_CODEPAGE
+jne %%error
+%endif
 %ifdef GUEST_GRID_SWITCH
 call setup_guest_grid
 %endif
@@ -382,6 +392,31 @@ mov word [grid_stage], 34
 call check_guest_palette
 jc %%error
 inc word [palette_checks]
+%endif
+%ifdef GUEST_CODEPAGE
+%if %1 != 10
+mov word [codepage_stage], 2
+mov ax, 0x6601
+int 0x21
+mov [codepage_actual], bx
+mov [codepage_result], ax
+jc %%error
+cmp bx, GUEST_CODEPAGE
+jne %%error
+xor bx, bx
+xor dx, dx
+mov ah, 2
+int 0x10
+mov ah, 8
+int 0x10
+mov [codepage_cell], ax
+%if GUEST_CODEPAGE == 850
+cmp ax, 0x2fbd
+%else
+cmp ax, 0x2f9b
+%endif
+jne %%error
+%endif
 %endif
 %ifdef RESIZED_COMMAND
 %if %1 != 10
@@ -869,6 +904,12 @@ palette_checks: dw 0
 %ifdef GUEST_GRID_SWITCH
 grid_configurations: dw 0
 %endif
+%endif
+%ifdef GUEST_CODEPAGE
+codepage_stage: dw 0
+codepage_actual: dw 0
+codepage_result: dw 0
+codepage_cell: dw 0
 %endif
 result_end:
 %ifdef GUEST_GRID_CONTROL

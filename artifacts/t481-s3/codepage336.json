@@ -1,0 +1,309 @@
+{
+  "case": "T481 S3 P13 native CP850 and actual guest CP437 ownership",
+  "productionBase": "576b25ac6",
+  "productionChanges": false,
+  "runs": [
+    {
+      "run": 334,
+      "exit": 0,
+      "first": "A",
+      "nativeOutputPageChanged": false,
+      "pair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1264955,
+          "finish": 1265009,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1264955,
+          "finish": 1265009,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        }
+      ],
+      "cells": [
+        {
+          "vm": "A",
+          "guestPage": 437,
+          "cell": 12187,
+          "nativeMarker": "9520"
+        },
+        {
+          "vm": "B",
+          "guestPage": 437,
+          "cell": 12187,
+          "nativeMarker": "26444"
+        }
+      ]
+    },
+    {
+      "run": 335,
+      "exit": 0,
+      "first": "A",
+      "nativeOutputPageChanged": true,
+      "pair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1266322,
+          "finish": 1266376,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1266322,
+          "finish": 1266377,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        }
+      ],
+      "cells": [
+        {
+          "vm": "A",
+          "guestPage": 437,
+          "cell": 12187,
+          "nativeMarker": "24136 codepage=850 round=1"
+        },
+        {
+          "vm": "B",
+          "guestPage": 437,
+          "cell": 12187,
+          "nativeMarker": "28888 codepage=850 round=1"
+        }
+      ]
+    },
+    {
+      "run": 336,
+      "exit": 0,
+      "first": "B",
+      "nativeOutputPageChanged": true,
+      "pair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1267715,
+          "finish": 1267771,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1267715,
+          "finish": 1267769,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        }
+      ],
+      "cells": [
+        {
+          "vm": "A",
+          "guestPage": 437,
+          "cell": 12187,
+          "nativeMarker": "14828 codepage=850 round=1"
+        },
+        {
+          "vm": "B",
+          "guestPage": 437,
+          "cell": 12187,
+          "nativeMarker": "18220 codepage=850 round=1"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "build/t481-s3/codepage334.ps1",
+      "sha256": "745479336BAD7C867AF81DC5B38541A328427D08192D03CCF374CB5E6518765C"
+    },
+    {
+      "path": "build/t481-s3/codepage334.out",
+      "sha256": "948F25DE684DB60887AA2B2E775C71E967A46264D1CB2BA40EECAA236C09BBB4"
+    },
+    {
+      "path": "build/t481-s3/codepage334.err",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t481-s3/codepage334/identity.com",
+      "sha256": "2A628F81400010E502F5A8518582613550081B47851D001D3D05A683A6FFB631"
+    },
+    {
+      "path": "build/t481-s3/codepage334/runtime/A.BIN",
+      "sha256": "5C2DB46BAAA7AE61D215F829D5070C144407265400012BE90B99B81EB96485BA"
+    },
+    {
+      "path": "build/t481-s3/codepage334/runtime/B.BIN",
+      "sha256": "D7FE937F0BD7441502008954A5CAB20A5D2381F1A024470CD1101218E3F00109"
+    },
+    {
+      "path": "build/t481-s3/codepage334/runtime/matrix-results.json",
+      "sha256": "3D2E66E8C40105AEECD33773CCBEB839F6471CAC39820F3C2B0A566C596B0442"
+    },
+    {
+      "path": "build/t481-s3/codepage335.ps1",
+      "sha256": "B1ACDFADC30B6CE774B4F1D553D1D7C8E14636396CDD7B37C68FF418D2212112"
+    },
+    {
+      "path": "build/t481-s3/codepage335.out",
+      "sha256": "948F25DE684DB60887AA2B2E775C71E967A46264D1CB2BA40EECAA236C09BBB4"
+    },
+    {
+      "path": "build/t481-s3/codepage335.err",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t481-s3/codepage335/identity.com",
+      "sha256": "2A628F81400010E502F5A8518582613550081B47851D001D3D05A683A6FFB631"
+    },
+    {
+      "path": "build/t481-s3/codepage335/runtime/A.BIN",
+      "sha256": "8B4E1596F0C46E0C6AA296106FAF3586793AC1A8B61DB675F21E14814FA823EA"
+    },
+    {
+      "path": "build/t481-s3/codepage335/runtime/B.BIN",
+      "sha256": "0F657423B0EBA1C4F0A95C118C504AE4B9185F0A2114F9075AE4D0AABB3CA7D2"
+    },
+    {
+      "path": "build/t481-s3/codepage335/runtime/matrix-results.json",
+      "sha256": "A255F3FA1CF3692AA3A958C4F3003903A7E6AF5F814F5B372A019A432C313EC2"
+    },
+    {
+      "path": "build/t481-s3/codepage336.ps1",
+      "sha256": "CE30079437F0C3C8100BF49924C79CC7CEE5D008D170EE0E0E4C3E73BB5DBA48"
+    },
+    {
+      "path": "build/t481-s3/codepage336.out",
+      "sha256": "B9FEFB7F822C2AA7CBAA92388A1196D11919AF9BD7B6B8B2C3BA6BB1E4D0E3DB"
+    },
+    {
+      "path": "build/t481-s3/codepage336.err",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t481-s3/codepage336/identity.com",
+      "sha256": "2A628F81400010E502F5A8518582613550081B47851D001D3D05A683A6FFB631"
+    },
+    {
+      "path": "build/t481-s3/codepage336/runtime/A.BIN",
+      "sha256": "C766BFFD158705ABA4F14667BA010EEDBA1F396BDD10DEA7F773A2F28E5B10EF"
+    },
+    {
+      "path": "build/t481-s3/codepage336/runtime/B.BIN",
+      "sha256": "4E5C05BE996D76100E231E4CF677539DAF7042E5B85B45C5EA911BF398548930"
+    },
+    {
+      "path": "build/t481-s3/codepage336/runtime/matrix-results.json",
+      "sha256": "22A88FFF5C435FC4E296B840FEEE12BFAC5984B306FAA1A228FF16838CF53EC5"
+    }
+  ],
+  "limits": [
+    "CP850 guest prerequisite failed under original GetOEMCP437 policy; see codepage333.json.",
+    "Not guest runtime codepage switching or DBCS acceptance."
+  ],
+  "unchangedPackage": "b6c8ac10-d9d0-46d8-81d4-e7f86ee8991a",
+  "reusedFull": "artifacts/t481-s3/full320.json"
+}

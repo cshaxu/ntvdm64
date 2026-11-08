@@ -233,3 +233,13 @@ proves guest custom-glyph preservation, not native-requested font replacement,
 DBCS or preservation across a separately requested native resize. Original
 INT10/1100 restores mode registers through load_font; do not assume it retains
 the prior row count (retained failing fixture: artifacts/t481-s3/custom328.json).
+
+`-GuestCodepage 437` (or850 on a matching host) with independent real ordered
+commands verifies DOS INT21/6601 before/after native commands and BIOS cell
+readback of Unicode U+00A2. The native child deliberately sets its own output
+page to850; the guest cell must remain9b for437 orbd for850, with attribute2f.
+The original cmdconf.c filters CONFIG.NT COUNTRY settings and synthesizes them
+from GetOEMCP; the runner must not pretend a COUNTRY override selected850.
+A prerequisite mismatch fails explicitly before child launch. This test does
+not alter machine locale, original guest binaries or production code, and is
+not DBCS or guest-runtime codepage-switch acceptance.

@@ -1,0 +1,45 @@
+{
+  "case": "Original DOS country selection and CP850 prerequisite",
+  "runs": [
+    332,
+    333
+  ],
+  "result": "non-pass: expected850, actual437 before native command",
+  "source": "cmdconf.c filters COUNTRY from user CONFIG then generates country and GetOEMCP at original preprocessing boundary; addon reads DOS6601 inside command_directory.",
+  "conclusion": "Do not override original locale policy or claim failed native conversion: child never reached. Test now accepts explicit expected guest codepage and validates actual DOS query.",
+  "limits": [
+    "No CP850 real guest acceptance in this host environment.",
+    "CP850 peer fixture evidence remains distinct.",
+    "DBCS and runtime codepage change remain unverified."
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "sha256": "69D346B5665D6755EB63D2E012027D3861894BD39B4F18DFB217959532491E76"
+    },
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sha256": "6B1C746B9F6046980649DC18AF075B1DF93A2652E4B938171D968AFDB398A9A5"
+    },
+    {
+      "path": "build/t481-s3/codepage332.out",
+      "sha256": "A111E678DA186EC61BF9841012BAB46785ABC580AA204F47DF513CA365697AFD"
+    },
+    {
+      "path": "build/t481-s3/codepage333.out",
+      "sha256": "AB47B90732344274096289D7A3482485F39F2A163D8C72F142A0A525FEF515E0"
+    },
+    {
+      "path": "build/t481-s3/codepage333/runtime/A.BIN",
+      "sha256": "D9406B7B5D7E414BBA75A9993BD16C71E3F34B4B17B1EB74AC295A1D97C7524E"
+    },
+    {
+      "path": "build/t481-s3/codepage333/identity.com",
+      "sha256": "2F885BF095BC8CE0422B41B936CFE6A235AE30FDDD36378CBD4847D16053682A"
+    },
+    {
+      "path": "build/t481-s3/codepage333/runtime/matrix-results.json",
+      "sha256": "F0A3492B81808A5BA19C22C5BEBB0B40EED2CC97374648B8BD35AB40EDDB8B03"
+    }
+  ]
+}

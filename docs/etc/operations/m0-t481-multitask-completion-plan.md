@@ -1713,3 +1713,24 @@ Evidence: artifacts/t481-s3/custom328.json and custom330.json. Production
 source/addons unchanged; publication326 all11 hashes still match both targets.
 Full320 is reused by unchanged-input identity. Native font replacement/DBCS
 and remaining S3/S4/S5 are not qualified by this test.
+
+### S3 P13 codepage owner validation
+
+Original cmdconf.c removes user COUNTRY entries and synthesizes country and
+GetOEMCP; authored command_directory reads resulting DOS6601. The isolated
+CP850 CONFIG attempt332/333 therefore sees437 before native command and fails.
+Retain artifacts/t481-s3/codepage333.json; no product defect or CP850 acceptance
+is inferred. Native fixture259's CP850 proof remains a separate peer case.
+
+Actual334 validates DOS437 and Unicode cent cell2f9b in both VMs,320 callbacks
+and normal Windows exit.335 additionally changes native output page to850;
+guest must still report437 and render9b, not850'sbd. Opposite command order
+remains required. No source/locale/guest patch is used to manufacture CP850.
+
+P13 test-only334/335/336 pass: actual DOS437 before/after commands; native
+Unicode cent becomes guest2f9b.335/336 additionally set native outputCP850
+and pass both completion orders,320 callbacks and normal Windows exit.
+Evidence: artifacts/t481-s3/codepage336.json. Original COUNTRY filtering and
+failed850 prerequisite are retained in codepage333.json. No runtime source
+changes; all11 publication326 hashes match both targets, Full320 reused.
+Guest850, active guest codepage transitions and DBCS remain unverified.

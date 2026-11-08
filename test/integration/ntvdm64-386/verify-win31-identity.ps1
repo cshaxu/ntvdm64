@@ -33,6 +33,7 @@ param(
  [switch]$VisibleResizeRoundTrip,
  [switch]$GuestGridControl,
  [switch]$GuestCustomFont,
+ [ValidateSet(0,437,850)][int]$GuestCodepage=0,
  [switch]$GuestGridSwitch,
  [switch]$GuestScanlineControl,
  [ValidateSet('386-dosonly0','386-dosonly1')][string]$RuntimeCase='386-dosonly0',
@@ -54,6 +55,7 @@ if($VisibleResizeRoundTrip){$VisibleResizeCommand=$true}
 if($VisibleResizeCommand){$ResizeCommand=$true}
 if($GuestGridSwitch -and !$GuestGridControl){throw 'Grid switching requires guest grid control'}
 if($GuestCustomFont -and !$GuestGridControl){throw 'Custom font requires guest grid control'}
+if($GuestCodepage -and (!$OrderedCommandImage -or !$RealCommand -or $ResizeCommand -or $GuestGridControl -or $ServiceLoss -or $WorkerCloseMonitor)){throw 'Codepage witness requires independent real ordered commands'}
 if($GuestScanlineControl -and !$GuestGridSwitch){throw 'Scanline control requires guest grid switching'}
 if($GuestGridControl -and (!$RealCommand -or !$OrderedCommandImage -or $ResizeCommand -or $NestedCommand)){throw 'Guest grid control requires independent real ordered commands'}
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires monitor and marker'}
@@ -106,6 +108,7 @@ if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
 if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
 if($GuestCustomFont){$dosDefines+='-DGUEST_CUSTOM_FONT=1'}
+if($GuestCodepage){$dosDefines+=('-DGUEST_CODEPAGE='+$GuestCodepage)}
 if($GuestGridSwitch){$dosDefines+='-DGUEST_GRID_SWITCH=1'}
 if($GuestScanlineControl){$dosDefines+='-DGUEST_SCANLINE_CONTROL=1'}
 if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
@@ -210,6 +213,7 @@ foreach($id in 'A','B'){
    $resizeMode=if($VisibleResizeRoundTrip){'visible-roundtrip'}elseif($VisibleResizeCommand){'visible-resize'}else{'resize'}
    $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand $resizeMode $dest\PATCH\RESIZE"+[char]13)
   }
+  if($GuestCodepage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand codepage $dest\PATCH\CODEPAGE"+[char]13)}
   if($ServiceLoss -or $WorkerCloseMonitor){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
   if($UnreadInputImage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
   if($value.Length -ge 256){throw 'Ordered command too long'}
@@ -356,6 +360,7 @@ try {
   $data=[IO.File]::ReadAllBytes("$dest/PATCH/$id.BIN")
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
   $expectedBytes=if($Continuation){76}else{72}
+  if($GuestCodepage){$expectedBytes+=8}
   if($GuestGridControl){$expectedBytes+=16}
   if($GuestGridSwitch){$expectedBytes+=2}
   if($UnreadInputImage){$expectedBytes+=8}
@@ -380,6 +385,7 @@ try {
   $row.notificationErrors=[BitConverter]::ToUInt16($data,70)
   if(!$row.notificationPublished -or $row.notificationSeen -lt $row.notificationPublished -or $row.notificationIrq -gt 15 -or $row.notificationErrors){throw "Actual PIC/VPICD notification failed: $id"}
   if($Continuation){
+   if($GuestCodepage){Write-Host "$id codepage stage/actual/result/cell=$(@(0..3|ForEach-Object{[BitConverter]::ToUInt16($data,76+2*$_)}) -join ',')"}
    if($VideoApplication){
     $video=@(0..4|ForEach-Object{[BitConverter]::ToUInt16($data,76+2*$_)})
     Write-Host "$id VIDEO stage/samples/height/offset=$($video -join ',')"

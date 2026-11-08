@@ -185,18 +185,6 @@ only host storage is insufficient. Evidence: artifacts/t481-s3/resize308.json.
 Windows exits normally; this does not make the identity assertions pass.
 No new production changes or publication after P10.
 
-Region311 candidate adds explicit visible-region staging with size derived from
-the header. x86/x64 mvdm-vm-text tests pass grow/shrink, refusal rollback and
-disconnect discard. Evidence: artifacts/t481-s3/region311.json. Native publisher
-and real BIOS geometry application are not yet connected; resize308 remains
-failing. No new publication/commit and no S3 closure.
-
-Native312 connects PREPARE_TEXT_REGION before VM cell/VIDEO writes inside the
-existing transaction. Presentation/input-return/lifetime fixtures pass; the peer
-checks preparation ordering and visible20x8->20x10, not hidden20x16 scrollback.
-Evidence: artifacts/t481-s3/native312.json. This supersedes Region311's publisher
-not-connected limitation only. Real guest geometry switching is still pending.
-
 ## S3 visible-grid candidate qualification
 
 NTVDM stages grid/font-height proposals; NTVWM prepares the visible region
@@ -225,11 +213,6 @@ Updated authored ntvdm64.386 and unchanged insignia.386 remain assets-only.
 Evidence: artifacts/t481-s3/publication326.json. Governance324 passed.
 P11 is committed/pushed at367612661; S3 and later S4/S5 remain open.
 
-Custom328 exercises original BIOS1100 loading distinct glyph65 bytes in two
-VMs, verifies actual VGA bytes before/after native continuations and changes
-guest grids between commands. This test-only addition uses package313 and
-driver313; runtime sources and publication326 remain unchanged. Result pending.
-
 P12 test-only custom329/330 pass both completion orders: original BIOS1110 loads
 distinct glyph65 bytes in each VM, actual VGA reads prove installation and
 three complete glyph/palette comparisons per VM preserve them across commands
@@ -239,3 +222,16 @@ Evidence: artifacts/t481-s3/custom328.json and custom330.json. Production
 source/addons unchanged; publication326 all11 hashes still match both targets.
 Full320 is reused by unchanged-input identity. Native font replacement/DBCS
 and remaining S3/S4/S5 are not qualified by this test.
+
+P12 is committed/pushed at576b25ac6. Codepage332 now tests original CONFIG.NT
+COUNTRY selection of CP850 in an isolated copy, confirms DOS6601 before/after
+commands and reads actual BIOS cell9b for native Unicode00f8. Product code
+unchanged; result pending. It does not claim runtime codepage switching or DBCS.
+
+P13 test-only334/335/336 pass: actual DOS437 before/after commands; native
+Unicode cent becomes guest2f9b.335/336 additionally set native outputCP850
+and pass both completion orders,320 callbacks and normal Windows exit.
+Evidence: artifacts/t481-s3/codepage336.json. Original COUNTRY filtering and
+failed850 prerequisite are retained in codepage333.json. No runtime source
+changes; all11 publication326 hashes match both targets, Full320 reused.
+Guest850, active guest codepage transitions and DBCS remain unverified.
