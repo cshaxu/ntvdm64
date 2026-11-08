@@ -2149,3 +2149,27 @@ Win95566/568/569 padding controls show a 3033-byte DOS witness was blocked by Wi
 Candidate579 publishes the eleven-image package549 and its exact manifest to assets/release and O:/winnt/system32, installs driver538 NTVDM64.386 and insignia479 into O:/w31/PATCH, and records the Win95 VXD separately in addon-manifest.json. All destination hashes were checked after copy; O:/w31/SYSTEM.INI retained its pre-existing hash and addon configuration. Prior files are recoverable under build/t481-s3/publication-backup579. This publication is a user-test candidate, not S3 closure: Win95 real host-command output remains failing/unresolved and the full 50-visible-row path was unavailable on the current host. Evidence artifacts/t481-s3/publication579.json and qualification549.json.
 Win95581/583 use two real interactive COMMAND.COM prompt VMs, not batch files. With the Win95 test PIF conventional-memory range set to 128-640 KiB, the existing guest input observer opens O:/WINNT/EDIT.EXE and EDIT.COM in distinct VMs, observes both File menus, closes both editors and receives two production command admissions and terminal completions. Formal test/integration/ntvdm64-386/verify-win95-editors.ps1 reproduces this on an isolated copy and checks distinct VM identities and trace; the host is the diagnostic real-command link. The observer process reports result=exited and exit=1, also seen in the earlier historical Win95 baseline; this does not prove normal shutdown. Win95 mouse menu, saved content, 0x400 blocked-state interpretation and exact production-host runtime remain outside this run. Earlier batch-test failure exercises a different COMMAND path and is not evidence that the interactive prompt fails. Artifact artifacts/t481-s3/win95-editors583.json.
 Win95584 records the Win16 controller reaching its ExitWindows request after both editor completions, with no controller fatal or post-return marker; the host observer exits with code 1. Win95585/586 run an independent simple Win95 startup/ExitWindows controller without any project VxD: both the historical and current host packages also exit 1. The code is therefore not introduced by this addon or by the current host relative to that baseline. The historical meaning of exit 1 is still not established, so this is baseline-equivalence evidence rather than a claim that every Win95 shutdown is normal. Original installation hashes remain unchanged.
+Win95587/589 mouse-menu attempts timed out: the Win95 DOS prompt contains a ttyGrab text child and a separate ToolbarWindow child, so the earlier Win3.1 parent-client calculation pointed at the toolbar; the original Win95 Welcome window also covered the target. Win95590 confirms child classes and rectangles. The formal Win95 test now selects the actual ttyGrab child and can close only an explicitly specified welcome title in the isolated guest copy. Win95592 and the formal repeat Win95593 pass two distinct prompt VMs, native and DOS editors, five guest mouse target receipts, both mouse-menu exits, saved contents aaa/bbb and two terminal completions. Win95593 uses driver538 and the diagnostic real-command host; original Win95 installation is byte-identical. Observer exit 1 matches both no-addon baseline controls; its original meaning remains unproved. Evidence artifacts/t481-s3/win95-editors593.json.
+Win95594 repeats the 128-640 KiB Win95 DOS batch invocation with the historical host package and old VxD: both batches reach DONE, while both native CMD output files are empty, matching candidate Win95574. This is an existing observable batch-path limitation, not an S3 candidate regression. The interactive prompt path is independently verified by Win95593. The batch-path program classification and whether it should reach cmdExec remain an explicit S4 investigation; no conclusion or repair is asserted.
+
+## S3 closure and S4 admission
+
+S3 closes with the [fixed-scope evidence](../evidence/m0-t481-s3-closure.md),
+complete candidate579 publication, four Win3.1 startup/exit combinations,
+Full549 16/16 and separately scoped Win95 interactive editor qualification.
+Candidate579 is available for owner hand testing; no T closure is claimed.
+
+S4 now owns the original Win95 obligations in the stage table above: independently
+verify VM lifetime/reuse and initialization rollback, input/presentation and
+wait/wake; preserve original guest bytes. Also trace the reproduced native-CMD
+batch failure against the historical baseline and the real guest entry path;
+determine whether the admitted cmdExec contract reaches it, then either repair
+the reached project-owned gap or explicitly retain the original/unsupported
+boundary without inventing a guest modification. Preserve Win95593 interactive
+prompt behavior, mouse menu and saved-content checks. Compare the observed Win95
+exit code 1 with the original semantics before calling it normal; both historical
+and current no-addon controls return 1. The diagnostic-host editor evidence
+must not be described as exact production-host interactive proof. The absent
+VMM 0x400 bit is a coverage boundary until its Win95 semantics is established;
+ordered completion was independently verified. No broad new functionality is
+admitted by these investigations.

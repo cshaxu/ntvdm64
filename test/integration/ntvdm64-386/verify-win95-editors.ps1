@@ -7,9 +7,16 @@ param(
  [Parameter(Mandatory)][string]$InstallSource,
  [Parameter(Mandatory)][string]$InstallRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$OutputRoot
+ [Parameter(Mandatory)][string]$OutputRoot,
+ [switch]$MouseMenu,
+ [switch]$SaveWitness,
+ [string]$DismissWelcomeTitleHex
 )
 $ErrorActionPreference='Stop'
+if($DismissWelcomeTitleHex){
+ if($DismissWelcomeTitleHex -notmatch '^(?:[0-9a-fA-F]{2}){1,63}$'){throw 'Welcome title must be guest ANSI bytes in hexadecimal'}
+ for($i=0;$i -lt $DismissWelcomeTitleHex.Length;$i+=2){if($DismissWelcomeTitleHex.Substring($i,2) -eq '00'){throw 'Welcome title cannot contain a zero byte'}}
+}
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $task=[IO.Path]::GetFullPath($OutputRoot)
 $source=(Resolve-Path -LiteralPath $InstallSource).Path.TrimEnd('\')
@@ -68,6 +75,7 @@ $s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\I
 
 Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
+if($SaveWitness){foreach($name in 'A.TXT','B.TXT'){[IO.File]::WriteAllBytes("$dest/PATCH/$name",[byte[]]@())}}
 foreach($id in 'A','B'){
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "Prompt probe $id" --program "$dest\PATCH\COMMAND.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'PIF failed'}
@@ -81,11 +89,82 @@ foreach($id in 'A','B'){
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU 0`n%define DOSONLY 0`n%define SAVE_WITNESS 0`n%define FIRST_DOS 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
 $actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
 $asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
-$asm=$asm.Replace('code_end:',(Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw)+"`ncode_end:")
+$routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
+if($DismissWelcomeTitleHex){
+ $routines=$routines.Replace("target_prompt:`n","target_prompt:`ncall dismiss_welcome`n")
+ $routines=$routines.Replace("mouse_cell:`n","mouse_cell:`ncall dismiss_welcome`n")
+ $routines+=@'
+
+; Close only the explicitly named guest welcome window in this test copy.
+dismiss_welcome:
+pushad
+push word 0
+push word 0
+push ds
+push word welcome_title-data
+api 2,50                         ; FindWindow by exact title
+or ax,ax
+jz .done
+push ax
+push word 0x10                  ; WM_CLOSE
+push word 0
+push word 0
+push word 0
+api 2,110                       ; PostMessage
+call settle
+.done:
+popad
+ret
+'@
+}
+if($MouseMenu){
+ $rect="push word [active-data]`npush ds`npush word mouse_rect-data"
+ $point="push word [active-data]`npush ds`npush word mouse_point-data"
+ if(!$routines.Contains($rect) -or !$routines.Contains($point)){throw 'Mouse geometry insertion point missing'}
+ $routines=$routines.Replace($rect,"call mouse_find_text`npush word [mouse_hwnd-data]`npush ds`npush word mouse_rect-data")
+ $routines=$routines.Replace($point,"push word [mouse_hwnd-data]`npush ds`npush word mouse_point-data")
+ $routines+=@'
+
+; Win95 puts a toolbar in the DOS window's parent client area. Locate the
+; actual text child rather than assuming the Win3.1 parent geometry.
+mouse_find_text:
+push word [active-data]
+push word 5                       ; GW_CHILD
+api 2,262
+.next:
+test ax,ax
+jz fatal
+mov [mouse_hwnd-data],ax
+push ax
+push ds
+push word mouse_class-data
+push word 64
+api 2,58                        ; GetClassName
+cmp dword [mouse_class-data],0x47797474 ; ttyG
+jne .other
+cmp word [mouse_class-data+4],0x6172   ; ra
+jne .other
+cmp word [mouse_class-data+6],0x0062   ; b and terminator
+je .found
+.other:
+push word [mouse_hwnd-data]
+push word 2                       ; GW_HWNDNEXT
+api 2,262
+jmp .next
+.found:
+ret
+'@
+}
+$asm=$asm.Replace('code_end:',$routines+"`ncode_end:")
 $asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`n"+(Get-Content "$repo/test/integration/ntvdm64-386/editor-events.inc" -Raw)+"`ndata_end:")
+if($MouseMenu){$asm=$asm.Replace('data_end:',"mouse_hwnd: dw 0`nmouse_class: times 64 db 0`ndata_end:")}
+if($DismissWelcomeTitleHex){
+ $titleBytes=@(for($i=0;$i -lt $DismissWelcomeTitleHex.Length;$i+=2){'0x'+$DismissWelcomeTitleHex.Substring($i,2)}) -join ','
+ $asm=$asm.Replace('data_end:',"welcome_title: db $titleBytes,0`ndata_end:")
+}
 [IO.File]::WriteAllText("$task/controller.asm",$asm,[Text.UTF8Encoding]::new($false))
 & nasm -f bin "$task/controller.asm" -o "$task/controller.exe"
 if($LASTEXITCODE){throw 'Controller assembly failed'}
@@ -147,7 +226,24 @@ try {
  if($nativeVm -eq $dosVm){throw 'Editor menus must belong to distinct guest VMs'}
  $trace=Get-Content "$task/trace.txt" -Raw
  if(@([regex]::Matches($trace,'(?m)^11 ')).Count -lt 2 -or @([regex]::Matches($trace,'(?m)^12 ')).Count -lt 2){throw 'Both real command admissions and completions are required'}
- [ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;completed=2;menus=$true;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}|ConvertTo-Json|Set-Content "$task/editor-result.json"
+ if($SaveWitness){foreach($pair in @(@('A.TXT','aaa'),@('B.TXT','bbb'))){
+  $path="$dest/PATCH/$($pair[0])";$saved=Get-Content -LiteralPath $path -Raw
+  if([string]::IsNullOrEmpty($saved) -or $saved.Trim() -cne $pair[1]){throw "Wrong saved contents: $path"}
+  Copy-Item -LiteralPath $path -Destination $task
+ }}
+ if($MouseMenu){
+  $receipts=@(Get-ChildItem "$dest/PATCH/MOUSE*.BIN")
+  $expectedReceipts=if($SaveWitness){5}else{4}
+  if($receipts.Count -ne $expectedReceipts){throw 'Mouse receipt count mismatch'}
+  foreach($receipt in $receipts){
+   $data=[IO.File]::ReadAllBytes($receipt.FullName)
+   if($data.Length -ne 78){throw 'Invalid mouse receipt'}
+   $dx=[Math]::Abs([int][BitConverter]::ToInt16($data,8)-[int][BitConverter]::ToInt16($data,12))
+   $dy=[Math]::Abs([int][BitConverter]::ToInt16($data,10)-[int][BitConverter]::ToInt16($data,14))
+   if($dx -gt 3 -or $dy -gt 4){throw "Mouse missed target: $($receipt.Name)"}
+  }
+ }
+ [ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;completed=2;menus=$true;mouseMenu=[bool]$MouseMenu;saveVerified=[bool]$SaveWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}|ConvertTo-Json|Set-Content "$task/editor-result.json"
  'PASS Win95 two prompt VMs opened and closed native and DOS editors; normal shutdown not proven'
 
 } finally {

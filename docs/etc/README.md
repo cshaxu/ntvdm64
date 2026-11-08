@@ -1329,3 +1329,4 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T480 S2 whitespace restoration](evidence/m0-t480-s2-whitespace-restoration.md): finite candidate dispositions, original whitespace recovery, all-consumer equivalence and local delivery evidence.
 
 - [T481 multitask completion plan](operations/m0-t481-multitask-completion-plan.md) - admitted scope, source audit and staged acceptance.
+- [T481 S3 closure](evidence/m0-t481-s3-closure.md) - frozen repair evidence, candidate publication and Win95 handoff boundaries.

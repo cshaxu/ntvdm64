@@ -97,8 +97,8 @@ while Windows still starts and exits normally. This is one exercised failure
 branch, not exhaustive VMM allocator injection. Win95 also passed a separate
 two-VM signal-order witness: A had not finished before B signalled and did
 finish afterwards. Two Win95 prompt VMs also opened and closed the native and
-DOS editors with a diagnostic host. The VMM blocked-status bit was not
-observed; Win95 normal shutdown, mouse and saved content remain unproved.
+DOS editors, used mouse menus and saved contents with a diagnostic host. The
+VMM blocked-status bit and Win95 normal-shutdown exit code remain unproved.
 
 VPICD descriptor/service ABI is checked against the read-only Microsoft
 1988--1990 `OpenNT-4.5/nt/private/os2/client/thunk/include/vpicd.inc`, SHA-256

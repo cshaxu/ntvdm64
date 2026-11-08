@@ -252,5 +252,9 @@ source, so `relocate-win95-hive-equal.py` can update copied registry values
 without changing their extents. The test leaves the source installation
 unchanged, assigns conventional memory explicitly in its PIFs, and checks
 that native and DOS editor menus belong to different VMs and both commands
-complete. It records the observer exit code but does not claim normal Win95
-shutdown, mouse-menu coverage or saved-content coverage.
+complete. `-MouseMenu -SaveWitness` also verifies guest mouse menu choices,
+pointer receipts and saved contents. Win95's `ttyGrab` child, rather than
+its toolbar-containing parent, supplies mouse geometry. For a copied guest
+whose welcome window covers the test, `-DismissWelcomeTitleHex` optionally
+specifies its exact guest-ANSI title bytes; no other window is closed. The
+test records the observer exit code without claiming normal Win95 shutdown.
