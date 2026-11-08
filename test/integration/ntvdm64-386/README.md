@@ -243,3 +243,14 @@ from GetOEMCP; the runner must not pretend a COUNTRY override selected850.
 A prerequisite mismatch fails explicitly before child launch. This test does
 not alter machine locale, original guest binaries or production code, and is
 not DBCS or guest-runtime codepage-switch acceptance.
+
+`verify-win95-editors.ps1` runs the same two-prompt editor interactions in a
+disposable Win95 installation copy. Supply the authored VxD, INSIGNIA driver,
+test interrupt observer, diagnostic real-command package and console observer.
+The copy path must be an unused short `O:\tmp` path of the same length as the
+source, so `relocate-win95-hive-equal.py` can update copied registry values
+without changing their extents. The test leaves the source installation
+unchanged, assigns conventional memory explicitly in its PIFs, and checks
+that native and DOS editor menus belong to different VMs and both commands
+complete. It records the observer exit code but does not claim normal Win95
+shutdown, mouse-menu coverage or saved-content coverage.

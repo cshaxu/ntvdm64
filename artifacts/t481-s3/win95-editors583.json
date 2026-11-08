@@ -1,0 +1,30 @@
+{
+  "test": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
+  "driverSha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
+  "packageManifestSha256": "AE66D24F7E62183BEE3DD10E7B5791230DF4B593102E157208976111DD8E0B7F",
+  "packageKind": "diagnostic host with real command ingress",
+  "result": {
+    "nativeVm": "c2d200e8",
+    "dosVm": "c31200e8",
+    "completed": 2,
+    "menus": true,
+    "observerExit": "0x00000001",
+    "normalShutdownProved": false
+  },
+  "traceSha256": "266829AB43C7F8E5912C31636637C7EA82C05268C83B197B521E2170CE35169B",
+  "screensSha256": "B597ABB0AAF6466C91C62154640CF165D89E81C4132ED6712CEDB549870CA1F4",
+  "originalInstallation": "verified byte-identical",
+  "limits": [
+    "Win95 host observer exited with code 1; normal shutdown unproved",
+    "mouse menu and save content not exercised in this Win95 run",
+    "Win95 VMM blocked-status bit not established"
+  ],
+  "shutdownControl": {
+    "requestMarker": "present before ExitWindows",
+    "fatalMarker": "absent",
+    "returnMarker": "absent",
+    "historicalHostWithoutProjectVxd": "exited 1",
+    "currentHostWithoutProjectVxd": "exited 1",
+    "semantics": "same baseline return; original meaning unproved"
+  }
+}

@@ -1,0 +1,157 @@
+[CmdletBinding()]
+param(
+ [Parameter(Mandatory)][string]$DriverImage,
+ [Parameter(Mandatory)][string]$InstanceDriver,
+ [Parameter(Mandatory)][string]$InterruptObserver,
+ [Parameter(Mandatory)][string]$PackageRoot,
+ [Parameter(Mandatory)][string]$InstallSource,
+ [Parameter(Mandatory)][string]$InstallRoot,
+ [Parameter(Mandatory)][string]$Observer,
+ [Parameter(Mandatory)][string]$OutputRoot
+)
+$ErrorActionPreference='Stop'
+$repo=(Resolve-Path "$PSScriptRoot/../../..").Path
+$task=[IO.Path]::GetFullPath($OutputRoot)
+$source=(Resolve-Path -LiteralPath $InstallSource).Path.TrimEnd('\')
+$dest=[IO.Path]::GetFullPath($InstallRoot).TrimEnd('\')
+$DriverImage=(Resolve-Path -LiteralPath $DriverImage).Path
+$PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
+$Observer=(Resolve-Path -LiteralPath $Observer).Path
+if(!$task.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $task)){throw 'Fresh repository build output required'}
+if(!$dest.StartsWith('O:\tmp\',[StringComparison]::OrdinalIgnoreCase) -or $dest -match '[^\x21-\x7e]' -or (Test-Path $dest) -or $dest.StartsWith($source+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Fresh, short, independent O:/tmp guest copy required'}
+if(!(Test-Path "$source/WIN.COM") -or !(Test-Path "$source/SYSTEM.INI")){throw 'Installed Windows 95 source required'}
+if($source.Length -ne $dest.Length){throw 'Hive relocation requires paths of equal length'}
+New-Item -ItemType Directory $task|Out-Null
+# This is a background integration runner. It uses the established matrix
+# desktop/scope and guest-internal input, never foreground input automation.
+$original=@(Get-ChildItem $source -Force -Recurse -File | ForEach-Object {[ordered]@{path=$_.FullName.Substring($source.Length);sha256=(Get-FileHash $_.FullName).Hash}})
+$original|ConvertTo-Json|Set-Content "$task/original.json"
+New-Item -ItemType Directory $dest|Out-Null
+Get-ChildItem $source -Force|Copy-Item -Destination $dest -Recurse
+# Relocate only the hives and configuration consumed by this isolated case.
+# Do not run the broad installation migrator over unrelated Win95 PIF formats.
+foreach($hive in 'SYSTEM.DAT','USER.DAT'){
+ $path="$dest/$hive"
+ & python "$PSScriptRoot/relocate-win95-hive-equal.py" $path "$path.CANDIDATE" $source $dest
+ if($LASTEXITCODE){throw 'Isolated guest hive path relocation failed'}
+ [IO.File]::SetAttributes($path,[IO.FileAttributes]::Normal)
+ [IO.File]::Copy("$path.CANDIDATE",$path,$true)
+}
+[IO.File]::WriteAllText("$dest/.t479-owner",$task)
+foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {
+ $enc=[Text.Encoding]::GetEncoding(28591)
+ $s=$enc.GetString([IO.File]::ReadAllBytes($file.FullName))
+ $s=[regex]::Replace($s,[regex]::Escape($source),{param($m) $dest},'IgnoreCase')
+ [IO.File]::WriteAllBytes($file.FullName,$enc.GetBytes($s))
+}
+foreach($file in Get-Item "$dest/PATCH/WIN.PIF"){
+ & "$repo/assets/release/PIF.EXE" replace-root $file.FullName --from $source --to $dest
+ if($LASTEXITCODE){throw 'PIF rebase failed'}
+}
+foreach($file in Get-ChildItem $dest -Filter '*.GRP'){
+ & "$repo/assets/release/GRP.EXE" replace-root $file.FullName --root $dest
+ if($LASTEXITCODE){throw 'GRP rebase failed'}
+}
+$system="$dest/SYSTEM.INI"
+$enc=[Text.Encoding]::GetEncoding(28591)
+$s=$enc.GetString([IO.File]::ReadAllBytes($system))
+if([regex]::Matches($s,'(?im)^\[386Enh\]').Count -ne 1){throw 'No unique enhanced section'}
+$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\NTVDM64.VXD")
+[IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
+Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.VXD"
+Copy-Item -LiteralPath $InstanceDriver -Destination "$dest/PATCH/INSIGNIA.386"
+Copy-Item -LiteralPath $InterruptObserver -Destination "$dest/PATCH/INTS.386"
+$s=$enc.GetString([IO.File]::ReadAllBytes($system))
+$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\INSIGNIA.386`r`ndevice=$dest\PATCH\INTS.386")
+[IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
+
+
+Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
+if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
+foreach($id in 'A','B'){
+ & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "Prompt probe $id" --program "$dest\PATCH\COMMAND.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
+ if($LASTEXITCODE){throw 'PIF failed'}
+ $pif=[IO.File]::ReadAllBytes("$dest/PATCH/$id.PIF");$t=[Text.Encoding]::ASCII.GetString($pif)
+ $std=$t.IndexOf('MICROSOFT PIFEX');$hdr=$t.IndexOf('WINDOWS 386 3.0');if($std -lt 0 -or $hdr -lt 0){throw 'Missing PIF extension'};$body=[BitConverter]::ToUInt16($pif,$hdr+18)
+ foreach($offset in @(32,$body)){[Array]::Copy([BitConverter]::GetBytes([uint16]640),0,$pif,$offset,2)}
+ foreach($offset in @(34,($body+2))){[Array]::Copy([BitConverter]::GetBytes([uint16]128),0,$pif,$offset,2)}
+ $sum=0;for($at=2;$at -lt $std;++$at){$sum=($sum+$pif[$at]) -band 255};$pif[1]=[byte]$sum
+ [IO.File]::WriteAllBytes("$dest/PATCH/$id.PIF",$pif)
+}
+$ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
+$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
+[IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
+$asm="%define MOUSE_MENU 0`n%define DOSONLY 0`n%define SAVE_WITNESS 0`n%define FIRST_DOS 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
+$asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
+$asm=$asm.Replace('code_end:',(Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw)+"`ncode_end:")
+$asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`n"+(Get-Content "$repo/test/integration/ntvdm64-386/editor-events.inc" -Raw)+"`ndata_end:")
+[IO.File]::WriteAllText("$task/controller.asm",$asm,[Text.UTF8Encoding]::new($false))
+& nasm -f bin "$task/controller.asm" -o "$task/controller.exe"
+if($LASTEXITCODE){throw 'Controller assembly failed'}
+
+$bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
+foreach($field in @(@('@W31_BOOT_PATH@',"$dest\PATCH\BOOT.BIN"),@('@W31_READY_PATH@',"$dest\PATCH\READY.BIN"))){
+ $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf($field[0]);if($marker -lt 0){throw "Missing controller marker $($field[0])"}
+ $value=[Text.Encoding]::ASCII.GetBytes($field[1]);[Array]::Clear($bytes,$marker,128);[Array]::Copy($value,0,$bytes,$marker,$value.Length)
+}
+[IO.File]::WriteAllBytes("$task/controller.exe",$bytes)
+$keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
+$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
+Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
+$env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
+$env:MVDM_COMPLETION_COUNT="$dest/PATCH/DONE.BIN"
+$env:MVDM_PROMPT_READERS="$dest/PATCH/READERS.BIN"
+$env:MVDM_SCREEN_TRACE="$task/screens.txt"
+$env:MVDM_EDITORS_READY="$dest/PATCH/EDITORS.BIN"
+$env:MVDM_REAL_COMMAND='1'
+$env:MVDM_CONTINUATION_TRACE="$task/trace.txt"
+
+try {
+
+ . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ $stage=$null;$scope=$null;$process=$null
+ New-Item -ItemType Directory "$task/runtime"|Out-Null
+ Copy-Item "$task/controller.exe" "$dest/PATCH/VMTEST.EXE"
+ $s=$enc.GetString([IO.File]::ReadAllBytes("$dest/WIN.INI"))
+ $s=[regex]::Replace($s,'(?im)^run=[^\r\n]*',"run=$dest\PATCH\VMTEST.EXE")
+ [IO.File]::WriteAllBytes("$dest/WIN.INI",$enc.GetBytes($s))
+ try {
+  $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity
+  $scope=New-IsolatedPackageScope $stage
+  $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+  $env:MVDM_OBSERVER_OWN_JOB='1'
+  $env:PATH="$stage\system32;C:\Windows\System32;C:\Windows"
+  $process=Start-Process $Observer -ArgumentList @("$stage/system32/run16.exe",$dest,"$task/runtime/observer.txt","$dest/PATCH/WIN.PIF",'--observation-timeout-ms','90000') -WindowStyle Hidden -PassThru
+  @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');stage=$stage}|ConvertTo-Json|Set-Content "$task/runtime/process.json"
+  if(!$process.WaitForExit(105000)){throw 'Owned Win95 observer deadline'}
+  $process.WaitForExit()
+  $process.ExitCode|Set-Content "$task/runtime/observer.exit"
+ } finally {
+  if($process){if(!$process.HasExited){$process.Kill($true);$process.WaitForExit()};$process.Dispose()}
+  if($scope){Stop-IsolatedPackageScope $scope}
+  if($stage){Remove-PhysicalRuntimeStage $stage}
+ }
+
+ $observation=Get-Content "$task/runtime/observer.txt" -Raw
+ if($observation -notmatch '(?m)^result=exited\r?$'){throw 'Win95 observer did not see exit'}
+ if(!(Test-Path "$dest/PATCH/DONE.BIN")){throw 'No editor completion witness'}
+ if([BitConverter]::ToUInt32([IO.File]::ReadAllBytes("$dest/PATCH/DONE.BIN"),0) -ne 2){throw 'Expected two editor completions'}
+ if(!(Test-Path "$task/screens.txt")){throw 'No editor screen witness'}
+ $frames=@((Get-Content "$task/screens.txt" -Raw) -split '(?m)(?=^VM=)' | Where-Object {$_ -match '^VM='})
+ $native=@($frames|Where-Object {$_ -match 'New File' -and $_ -match 'Exit'})
+ $dos=@($frames|Where-Object {$_ -match 'Save As' -and $_ -match 'Exit' -and $_ -notmatch 'New File'})
+ if(!$native.Count -or !$dos.Count){throw 'Both editor menus must be observed'}
+ $nativeVm=[regex]::Match($native[0],'^VM=(\w+)').Groups[1].Value
+ $dosVm=[regex]::Match($dos[0],'^VM=(\w+)').Groups[1].Value
+ if($nativeVm -eq $dosVm){throw 'Editor menus must belong to distinct guest VMs'}
+ $trace=Get-Content "$task/trace.txt" -Raw
+ if(@([regex]::Matches($trace,'(?m)^11 ')).Count -lt 2 -or @([regex]::Matches($trace,'(?m)^12 ')).Count -lt 2){throw 'Both real command admissions and completions are required'}
+ [ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;completed=2;menus=$true;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}|ConvertTo-Json|Set-Content "$task/editor-result.json"
+ 'PASS Win95 two prompt VMs opened and closed native and DOS editors; normal shutdown not proven'
+
+} finally {
+ if(@(Get-ChildItem $source -Force -Recurse -File).Count -ne $original.Count){throw 'Original installation file inventory changed'}
+ foreach($row in $original){if((Get-FileHash ($source+$row.path)).Hash -ne $row.sha256){throw "Original changed: $($row.path)"}}
+ 'Original Windows installation bytes verified unchanged'
+}

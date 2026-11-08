@@ -38,9 +38,9 @@ Candidate579 is published as a complete eleven-image package to
 installed in `O:/w31/PATCH`. Full549 passes 16/16 and the Win3.1 four-mode
 matrix passes. The font-bank and directory repairs have scoped evidence in
 [the working plan](../etc/operations/m0-t481-multitask-completion-plan.md).
-Win95 VM wake/order and callbacks pass, but native command I/O and normal
-shutdown remain unproved; current command tests produce empty output. S3
-remains active and this publication is a hand-test candidate, not closure.
+Win95 VM wake/order, callbacks and interactive prompt editor tests pass with a
+diagnostic host; normal shutdown remains unproved. S3 remains active and this
+publication is a hand-test candidate, not closure.
 
 S2 P1 package8b216ec7-75d1-4979-a21e-c588ca4d02d6 is published at both
 release destinations: all11 host images, Full04116/16, final production VM
