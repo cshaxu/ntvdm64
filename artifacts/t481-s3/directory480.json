@@ -1,0 +1,23 @@
+{
+  "task": "T481 S3",
+  "limits": [
+    "Diagnostic command continuations, not real native process completion",
+    "One pinned NTDOS identity; no proof for all DOS layouts",
+    "Win95, host process environment and broader lifetime not yet qualified",
+    "Font failure remains open",
+    "Diagnostic host linked test-only altered BIOS font-mode setup; not production-video qualification"
+  ],
+  "addon_sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
+  "yield_guest_ticks": 18,
+  "normal_windows_exit": true,
+  "trace_sha256": "AD5CD5CAA64AAA67CDFCD6CE57F97D565EA4F046231BC19DFF39CA2F3EAFFED5",
+  "run": "video480",
+  "host_tests": [
+    "cached x86 shared 14/14",
+    "mvdm-vm-notification with protected-ring and missing-directory checks",
+    "real session fixture including late segment update and stale memory epoch"
+  ],
+  "result": "PASS",
+  "callback_checks": 320,
+  "scope": "dynamic DOSWOWDATA-based NetCDS address; original VMM AddInstanceItem; strict distinct paths in two DOS VMs"
+}

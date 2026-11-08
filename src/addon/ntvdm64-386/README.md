@@ -94,9 +94,10 @@ of 2, rejects both old-generation wake APIs and consumes a valid new signal.
 The actual initialization rollback witness rejects arm after IRQ/VPICD
 acquisition; the driver closes the host resource and ceases exposing an API,
 while Windows still starts and exits normally. This is one exercised failure
-branch, not exhaustive VMM allocator injection. Actual command-result
-integration and Win95 wait/wake remain separate obligations. The owner now
-prioritizes the complete Win3.1 path; no new Win95 investigation is running.
+branch, not exhaustive VMM allocator injection. Win95 also passed a separate
+two-VM signal-order witness: A had not finished before B signalled and did
+finish afterwards. Its VMM blocked-status bit was not observed; Win95 normal
+shutdown and actual host-command I/O remain separate verification obligations.
 
 VPICD descriptor/service ABI is checked against the read-only Microsoft
 1988--1990 `OpenNT-4.5/nt/private/os2/client/thunk/include/vpicd.inc`, SHA-256
@@ -105,6 +106,12 @@ It is research evidence, not an imported source or build dependency.
 
 The [stage plan](../../../docs/etc/operations/m0-t479-guest-bridge-plan.md)
 owns the implementation sequence and executable acceptance requirements.
+
+The current Win3.1 text handoff selects the BIOS font banks before writing
+each bank through a short V86 helper in the receiving VM. The helper saves and
+restores the VGA registers it uses; the VMM receives its address as CX:EDX.
+Two distinct banks in two VMs have been read back through the last glyph row;
+that result alone does not establish every visible-mode transition.
 
 ## Win3.1 mouse integration candidate (T481 S3)
 

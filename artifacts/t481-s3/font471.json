@@ -1,0 +1,19 @@
+{
+  "control": "test-only hook attempts to map same VMM page handle to reserved scratch page in target DOS VM before original VDD mapping",
+  "run": "video471",
+  "normal_windows_exit": true,
+  "task": "T481 S3",
+  "limits": [
+    "Scratch-page mapping failed in DOS VM and does not compare null page backing",
+    "Test interposes an additional VMM call; does not prove product behavior",
+    "Full early font witness fails before identity"
+  ],
+  "trace_sha256": "155DFF7127F7FDF00CB18E903DF8897A512A1E1C5A6650E42AE1BA2D38C07BC5",
+  "scratch": {
+    "return_value": "00000000",
+    "pte": "000c3c26",
+    "linear": "7000",
+    "mapped": 0
+  },
+  "result": "INCONCLUSIVE"
+}

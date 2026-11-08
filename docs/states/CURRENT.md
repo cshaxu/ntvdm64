@@ -16,7 +16,7 @@ retains every T479 S6 obligation and the remaining sequential stages.
 | Candidate Proposal | Queue-first guest multitask I/O completion, now admitted into T481. |
 | Identifier Mode | M0 T481 S3, Ordinary Mode. |
 | Admission And Approval | Owner directs this T to finish the queue-first task and sets active goal: complete multitask payload functionality. |
-| Objective | Complete remaining reached Win3.1 input, text, geometry, fonts, codepages, display/metadata and nested chains without suspending unrelated VMs. |
+| Objective | Resolve the actual font-bank defect; implement address-independent directory isolation; then qualify all candidates with Win3.1, Win95 and full regression. Record coverage-only boundaries without expanding scope. |
 | Non-goals | No original guest modification/rebuild; no Win95-first work, hardware V86 monitor, speculative protocol completion or new lifecycle authority. |
 | Reference Baseline | f25220d98; S2 published package8b216ec7-75d1-4979-a21e-c588ca4d02d6. |
 | Files And ABI Surface | Authored ntvdm64-386, NTVDM VM text/I/O/frontend, NTVWM presentation and existing RPC/I/O callers; exact changes follow caller/provider audit. |
@@ -26,12 +26,21 @@ retains every T479 S6 obligation and the remaining sequential stages.
 | Asset Needs | Existing immutable Win3.1 media and owned probe runners; independently authored addon build. |
 | Reporting Requirements | Selected code versus candidate; caller/provider evidence; exact open failures and coherent package hashes. |
 | Stop Conditions | New semantic concession or original guest patch required; retain failing evidence and continue independent work. |
-| Exit Criteria | Required Win3.1 operation and nested-chain matrix proved; coherent host/addon publication, review, commit and push. No known foundation defect transferred to force closure. |
+| Exit Criteria | Font cause resolved; directory isolation without fixed addresses; Win3.1, Win95 and full regressions assessed; coherent publication, review, commit and push. Record coverage-only limits without treating defects as passed. |
 | Original Owner Request | This T must also own complete queue-first multitask payload completion. |
 | Similar-Issue Sweep | VM generation reuse, all four cancellation owners, input ownership, nested handback and NTSRV coordination. |
 | Temporary Evidence | build/t481-s3, task-owned runs; 24-hour/4-GiB review budget, inspect no-progress runs at their contract deadlines; archive required evidence before disposal. |
 
 ## Current Technical Baseline
+
+Candidate579 is published as a complete eleven-image package to
+`assets/release` and `O:/winnt/system32`; its two Win3.1 add-ons are also
+installed in `O:/w31/PATCH`. Full549 passes 16/16 and the Win3.1 four-mode
+matrix passes. The font-bank and directory repairs have scoped evidence in
+[the working plan](../etc/operations/m0-t481-multitask-completion-plan.md).
+Win95 VM wake/order and callbacks pass, but native command I/O and normal
+shutdown remain unproved; current command tests produce empty output. S3
+remains active and this publication is a hand-test candidate, not closure.
 
 S2 P1 package8b216ec7-75d1-4979-a21e-c588ca4d02d6 is published at both
 release destinations: all11 host images, Full04116/16, final production VM
@@ -223,10 +232,7 @@ source/addons unchanged; publication326 all11 hashes still match both targets.
 Full320 is reused by unchanged-input identity. Native font replacement/DBCS
 and remaining S3/S4/S5 are not qualified by this test.
 
-P12 is committed/pushed at576b25ac6. Codepage332 now tests original CONFIG.NT
-COUNTRY selection of CP850 in an isolated copy, confirms DOS6601 before/after
-commands and reads actual BIOS cell9b for native Unicode00f8. Product code
-unchanged; result pending. It does not claim runtime codepage switching or DBCS.
+P13 pushed at33fad5723. S3 VIDEO bank1 still fails366. Host privilege candidate passes42/42 but does not fix it; neither host nor ntvdm64.386 candidates are published. Details and independent directory failure remain in the working plan.
 
 P13 test-only334/335/336 pass: actual DOS437 before/after commands; native
 Unicode cent becomes guest2f9b.335/336 additionally set native outputCP850

@@ -1,0 +1,19 @@
+{
+  "task": "T481 S3",
+  "run": "video380",
+  "result": "FAIL",
+  "control": "DOS VM calls INT10/1100 for both font banks after native continuation",
+  "samples": {
+    "offset": 0,
+    "height": 16,
+    "bank1": 0,
+    "bank0": 60
+  },
+  "normal_windows_exit": true,
+  "limits": [
+    "Post-continuation VM state, not a fresh-VM test",
+    "Does not identify guest or host owner"
+  ],
+  "log_sha256": "80C5A2CDFDCDAEE34A0DFB82AD30CE5D9D3278495B0DE41DA8A805985A729786",
+  "trace_sha256": "25922DDF5C11011BC78BB9F0FE6E2D3FD47C10F7C41717796AD5FC7DCFC77A32"
+}

@@ -1,0 +1,85 @@
+{
+  "task": "T481 S3",
+  "status": "Open; font bank1 root cause not established",
+  "runs": [
+    {
+      "log_sha256": "01A7685D6BA6EAC1329CDEFD60EF8D2FFE1CB5483339838B187FE97C5743CB66",
+      "control": "CPL privilege correction plus authored font-height candidate",
+      "result": "FAIL",
+      "trace_sha256": "834D6CA9AB31A95BF1E3234BD3611353F8603416F0B35C12F9265C7C00D53DE4",
+      "detail": "bank0=60 bank1=0 height8; normal Win3.1 exit",
+      "run": 366,
+      "log": "build/t481-s3/video366.out"
+    },
+    {
+      "log_sha256": "EE38A3B4BDC2AC9C3A34698C86CE3BBE3BE831870F54CA8171DB70644255E598",
+      "control": "read-only registered selector observation",
+      "result": "FAIL",
+      "trace_sha256": "17D976F7C0C17300F5EA63B59476BC7B531FC259B0F9DC545654253886E51A4F",
+      "detail": "PM data selector zero at each bank1 write",
+      "run": 368,
+      "log": "build/t481-s3/video368.out"
+    },
+    {
+      "log_sha256": "E7916EA5F816487E0798ABF8F7D45B9A8BCD8A3B621FF02A216932B66E47D071",
+      "control": "read-only VGA register observation",
+      "result": "FAIL",
+      "trace_sha256": "EC91B11E10A37311E88E49A6A5711FD00163DE611D935C45090A115C61B9CAF3",
+      "detail": "SEQ2=04 SEQ4=06 GC4=00 GC5=00 GC6=04 for both banks",
+      "run": 370,
+      "log": "build/t481-s3/video370.out"
+    },
+    {
+      "log_sha256": "283AD9EAC1785E08F34AB144D8D96B527D35B6494D1B3B45591BF1A5223B24EA",
+      "control": "guest DS0 32-bit linear MOV font writes",
+      "result": "PASS",
+      "trace_sha256": "1A4002A578A53A6BD5BEB4F1D662BB35DC7B80F45205DC24532C2F6465FB96F1",
+      "detail": "both banks correct in both VMs; 320 callback checks; normal exit",
+      "run": 371,
+      "log": "build/t481-s3/video371.out"
+    },
+    {
+      "log_sha256": "72B6AC2F4A1AFBEB36410384B8B38818EE397FC41D7CCE81F8A299863A487BFC",
+      "control": "original ROM instruction entry/return observation",
+      "result": "FAIL",
+      "trace_sha256": "B19C7FBAFC68F5F355FED7FB4E7C93E78A9E007151BF0AB7E23B8CB52A62FA20",
+      "detail": "both banks reach original MOV/BOP helper; not a skipped-fallback defect",
+      "run": 373,
+      "log": "build/t481-s3/video373.out"
+    },
+    {
+      "log_sha256": "E59B946A0CCD7A4CDB816B060262137B1DBAB594F2F041699FA096C4D0BBDD01",
+      "control": "diagnostic GC read plane2 intervention",
+      "result": "FAIL",
+      "trace_sha256": "64A7CC468208A023E34FCC73467E2DD8D549B6C20DF7F01C6616529C27EDA211",
+      "detail": "bank1 remains zero; not a production fix",
+      "run": 375,
+      "log": "build/t481-s3/video375.out"
+    },
+    {
+      "log_sha256": "7105C8DB6D8E71C760640F5E9CB88E64BFFF6419397E3177B61B93E1C858388E",
+      "control": "diagnostic sequencer mode07 intervention",
+      "result": "FAIL",
+      "trace_sha256": "9592229592513918EC54EB41B2AD3FF8BB8B01C28454C2A754E595AB10717F20",
+      "detail": "bank1 remains zero; not a production fix",
+      "run": 377,
+      "log": "build/t481-s3/video377.out"
+    },
+    {
+      "log_sha256": "6588FF793B164F0B4B88876318033DAD13A22238035F07EAD048A59FE3D00DC3",
+      "control": "diagnostic font-bank selection intervention",
+      "result": "FAIL",
+      "trace_sha256": "E8BCD91BAE6845C759C326693EE2E6875E933A806D4F567981FEA905AECD74A3",
+      "detail": "bank1 remains zero; not a production fix",
+      "run": 379,
+      "log": "build/t481-s3/video379.out"
+    }
+  ],
+  "publication": "Unchanged publication326, no candidate deployment",
+  "guest": "Original installation byte verification retained by each runner",
+  "limits": [
+    "DirectorySnapshotControl uses same PATCH directory in both VMs; does not qualify directory isolation",
+    "CPL matrix repair is independently demonstrated but did not resolve this font failure",
+    "Diagnostic interventions are not ordinary observers or production repairs"
+  ]
+}

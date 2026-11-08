@@ -1,0 +1,21 @@
+{
+  "runs": [
+    {
+      "normal_windows_exit": true,
+      "result": "FAIL",
+      "bank1": 0,
+      "run": "video433",
+      "control": "five font-plane port writes replace initial BIOS font mode, original restore preserved",
+      "bank0": 60
+    },
+    {
+      "normal_windows_exit": false,
+      "result": "INCONCLUSIVE",
+      "note": "Windows failed before reaching the desktop; not a valid font-bank comparison",
+      "run": "video435",
+      "control": "same intervention with original full mode restore omitted",
+      "process_exit": "0xc0000374"
+    }
+  ],
+  "task": "T481 S3"
+}

@@ -1,0 +1,20 @@
+{
+  "task": "T481 S3",
+  "finding": "NTDOS public Win386 instance table does not list NetCDS or CurDrv",
+  "pinned_ntdos_sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+  "installed_ntdos_sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+  "map_sha256": "8ABBCDDA3E564B2B153AC9BB7FA795837A9E80A14BF0201D5AEA2246D2E39171",
+  "map_offsets": {
+    "InstanceTable": "0fd2",
+    "SYSINITVAR": "0026",
+    "NetCDS": "13f3",
+    "CurDrv": "0338"
+  },
+  "runtime": "video399 INT21 AH52 returned DOS data segment 00a7, offset0026",
+  "limits": [
+    "Map-to-binary lineage and runtime layout still require direct verification",
+    "Absence from this one instance table does not rule out DOSMGR or other instancing mechanisms",
+    "Host =drive environment is independently shared; instance registration alone is not a complete repair",
+    "No guest code/data modifications authorized"
+  ]
+}

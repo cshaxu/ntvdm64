@@ -1,0 +1,14 @@
+{
+  "run": "editor490",
+  "task": "T481 S3",
+  "limits": [
+    "Baseline uses diagnostic observer; not current candidate qualification"
+  ],
+  "mouseExitVerified": true,
+  "scope": "prior published host and prior addons, same current desktop, native-first editor interaction",
+  "saveVerified": true,
+  "menus": true,
+  "result": "PASS",
+  "completed": 2,
+  "screens_sha256": "E950DEC64B0B7DE1C141D28083AF810CA63D8013D1E22C54F9D1510723645EA0"
+}

@@ -1,0 +1,27 @@
+{
+  "run": "video465",
+  "result": "PASS_OBSERVATION",
+  "test_mapping": {
+    "return_value": "ffffffff",
+    "physical": "0015f000",
+    "linear": "00007000"
+  },
+  "trace_sha256": "D9293094F2D95B7B58CAD04396747BD4C8921899916FEFDC70EA171E2C90D6C4",
+  "null_handle": "8000ce64",
+  "normal_windows_exit": true,
+  "bank1_mapping": {
+    "linear_page": "a4",
+    "handle": "8000ce64",
+    "flags": 0,
+    "readback": 0,
+    "pages": 1,
+    "offset": 0,
+    "pte_after": "000c3267"
+  },
+  "task": "T481 S3",
+  "limits": [
+    "Mapping hook observes request before service; completion return is not yet observed",
+    "Same handle and offset but different VM and linear address; no inference of service success",
+    "Full early font witness intentionally fails before identity"
+  ]
+}

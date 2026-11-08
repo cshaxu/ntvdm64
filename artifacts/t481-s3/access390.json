@@ -1,0 +1,15 @@
+{
+  "task": "T481 S3",
+  "run": "access390",
+  "result": "PASS",
+  "checks": 90,
+  "failures": 0,
+  "scope": "Original CCPU/SAS scalar permission and project guest-memory lease read/commit matrix, CPL0/3 and 386 PTE combinations",
+  "prior_control": "access388: old lease check yielded 27 failures, including 3 invalid expectations about write acquisition",
+  "limits": [
+    "Uses existing fixture host seams and linker FORCE warnings",
+    "Does not prove V86 reentrant fallback, cross-page or Win3.1 font repair"
+  ],
+  "log_sha256": "5B6FEBD3A67F6CB84955464F2717DD61CA97833080BDD2777BD02713E1A7903B",
+  "source_sha256": "E6A09C79940903D3DCCD1B1EE30C60C691F4276E5EA7ED779FEDBA6D624B9D25"
+}

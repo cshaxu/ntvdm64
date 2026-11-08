@@ -1,0 +1,18 @@
+{
+  "limits": [
+    "The mapping control succeeds as observed by changed translation, regardless of unverified return convention",
+    "Full run remains failed at the early font witness and does not validate identity",
+    "Does not determine why installed V7VDD maps bank1 to C3000"
+  ],
+  "linear": "00007000",
+  "result": "PASS_CONTROL",
+  "control": "map original VMM _GetNulPageHandle into unused page inside isolated V86 allocation and compare translation",
+  "run": "video458",
+  "bios_bank1_physical": "000c3000",
+  "map_return": "ffffffff",
+  "trace_sha256": "D28D5F57FDB2953D893F65A89530427A3E75325039CED92B2215E30D689FBB45",
+  "normal_windows_exit": true,
+  "task": "T481 S3",
+  "physical_after": "0015f000",
+  "physical_before": "00007000"
+}

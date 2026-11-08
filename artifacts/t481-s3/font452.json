@@ -1,0 +1,17 @@
+{
+  "vddint_sha256": "30A7CE3B6B81E67BB815CEAF69E1A64C1BC6611265063B502768BC8EAAEDDC3B",
+  "limits": [
+    "Reference is not the installed Win3.1 V7VDD",
+    "Null-page identity and active installed VDD branch are not verified",
+    "Evidence does not authorize replacing VDD or modifying guest"
+  ],
+  "vddvmmem_sha256": "50C518F3C332C72CFAB394FA03751573016ABFB2FA7ABEAD6DD422AB88B04F42",
+  "kind": "read-only reference",
+  "source": "vbesvga.drv revision 622f38512555a42ed324af1aa62adfefbccd8f2a",
+  "task": "T481 S3",
+  "findings": [
+    "INT 10h AH=11 marks BIOS font loading and disables VM mappings",
+    "page-fault path distinguishes BIOS font loading and direct font programming",
+    "several page-fault paths map a null page including nested mode set and invalid mappings"
+  ]
+}

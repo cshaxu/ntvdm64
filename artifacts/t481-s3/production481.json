@@ -1,0 +1,39 @@
+{
+  "insignia_sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
+  "result": "PASS",
+  "run": "production481",
+  "task": "T481 S3",
+  "cases": [
+    {
+      "case": "std-dosonly0",
+      "normal_exit": true,
+      "dosonly": 0,
+      "passed": true
+    },
+    {
+      "case": "std-dosonly1",
+      "normal_exit": true,
+      "dosonly": 1,
+      "passed": true
+    },
+    {
+      "case": "386-dosonly0",
+      "normal_exit": true,
+      "dosonly": 0,
+      "passed": true
+    },
+    {
+      "case": "386-dosonly1",
+      "normal_exit": true,
+      "dosonly": 1,
+      "passed": true
+    }
+  ],
+  "scope": "isolated production-shaped package, candidate NTVDM and Insignia, Win3.1 std/386 x DOSONLY 0/1 startup and normal exit",
+  "limits": [
+    "Does not validate interactive editors, arbitrary fonts or native command completion",
+    "Win95 and full regression still pending",
+    "Candidate package not published"
+  ],
+  "ntvdm_sha256": "9CF31BE6E9D386587DF9EE9EC8B64E0F0DA143F43ABDD2CBFC98EED5AD7D8FD1"
+}

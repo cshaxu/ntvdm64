@@ -1,0 +1,18 @@
+{
+  "task": "T481 S3",
+  "runs": [
+    "video510",
+    "video511"
+  ],
+  "result": "BOTH_FONT_READBACK_PASS_REP_EXIT_TIMEOUT",
+  "scope": "Same Win3.1 package, addons, guest installation and font witness; video510 uses REP STOSB for second bank; video511 uses original scalar MOV",
+  "rep_stosb": "Both VMs passed both-bank font readback, 160 callbacks and three continuations each; observer timed out during Windows exit",
+  "scalar_mov": "both VMs read back both banks through offset 8175; 320 callback checks and normal Windows exit",
+  "rep_trace_sha256": "003A44CE7003922E803613AD44BEB79F00595207FA535E1CDDF4137F277A3109",
+  "scalar_trace_sha256": "2F0448409EF057AA0DE12B08794EBAF84E41381EC619454877D51115ACB3A83A",
+  "limits": [
+    "Whole REP run lacks normal Windows exit; cause unknown",
+    "REP STOSB is not prior helper REP MOVSB",
+    "Neither control proves production font transfer"
+  ]
+}

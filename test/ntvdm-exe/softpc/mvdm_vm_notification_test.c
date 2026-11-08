@@ -27,6 +27,11 @@ BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD key)
 }
 HANDLE vm_io_reset_failure;
 mvdm_vm_executor *mvdm_standalone_worker_executor(void) { return input_executor; }
+/* Directory registration has an independent real session/lease fixture. */
+static int directory_available = 1;
+int mvdm_command_guest_state_directory_instance(uint32_t *linear, uint32_t *bytes)
+{ *linear = 0x1234; *bytes = 71; return directory_available; }
+
 /* Ingress selection/capture has its own tests; these isolate notification. */
 DWORD mvdm_vm_ingress_register(uint32_t callback)
 { return callback ? ERROR_SUCCESS : ERROR_NOT_READY; }
@@ -482,6 +487,15 @@ static void io_tests(uint64_t token, mvdm_vm_continuation *request)
     CHECK(copy[0] == 1 && copy[1] == 2 && copy[2] == 3);
     memcpy(descriptor, &token, sizeof(token));
     memcpy(guest_memory, descriptor, sizeof(descriptor));
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 6, 0, 0, 0, 0, &bridge));
+    CHECK(bridge.status == ERROR_ACCESS_DENIED);
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 6, 0, 0, 0, 1, &bridge));
+    CHECK(bridge.status == ERROR_SUCCESS && bridge.serial_low == 0x1234 &&
+        bridge.serial_high == 71);
+    directory_available = 0;
+    CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 6, 0, 0, 0, 1, &bridge));
+    CHECK(bridge.status == ERROR_NOT_READY);
+    directory_available = 1;
     CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 1, 0, &bridge));
     CHECK(bridge.status == ERROR_ACCESS_DENIED);
     CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 13, 0, sizeof(descriptor), 2, 1, &bridge));

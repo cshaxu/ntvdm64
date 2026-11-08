@@ -1,0 +1,19 @@
+{
+  "trace_sha256": "1DA1FF152862ED8C68A3700708D9E85AAE462CD07F2A811BAA709C3EFE2A1425",
+  "result": "PASS",
+  "limits": [
+    "Values sampled after guest direct stores; not simultaneous with BIOS execution",
+    "Mapping difference is evidence, not the root cause of VMM selection"
+  ],
+  "run": "video439",
+  "control": "test-only direct guest 32-bit linear stores and BOP page-table snapshot after first bank pair",
+  "normal_windows_exit": true,
+  "task": "T481 S3",
+  "sample": {
+    "pde": "0028c027",
+    "vm": 1,
+    "bank0_pte": "0032ce67",
+    "bank1_pte": "0032fe67",
+    "cpl": 3
+  }
+}

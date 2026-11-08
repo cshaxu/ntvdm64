@@ -1,0 +1,22 @@
+{
+  "task": "T481 S3",
+  "run": "video429",
+  "result": "PASS",
+  "origin": "original NTDOS DOSWOWDATA.lpCDSBuffer passed in DEMSETDTALOCATION",
+  "observations": {
+    "field": "000013f3",
+    "effective_linear": "00001e63",
+    "device_init": "00001e63",
+    "doswowdata": "00a7:1482"
+  },
+  "checks": 320,
+  "normal_windows_exit": true,
+  "yield": "18 guest ticks",
+  "limits": [
+    "Diagnostic process-global observation is not production session ownership",
+    "First-use per-drive host environment and VM lifecycle remain unverified",
+    "Original guest installation unchanged; no product publication"
+  ],
+  "trace_sha256": "8B620964C937ED527FC4B54EF20603E9B8BBB6034308C535D991B03985E09EA6",
+  "addon_sha256": "C655E048B17D70037786852EE6EFB522A04ACD3A2F07BA96082B736DB14945FD"
+}

@@ -1,0 +1,22 @@
+{
+  "task": "T481 S3",
+  "limits": [
+    "Does not establish BIOS font loading correctness",
+    "BIOS and guest execute in different contexts"
+  ],
+  "normal_windows_exit": true,
+  "run": "video444",
+  "height": 16,
+  "result": "PASS",
+  "control": "guest direct font-plane setup uses five pairs of byte OUT operations, followed by 32-bit linear stores",
+  "bankA": [
+    60,
+    60
+  ],
+  "trace_sha256": "AD4D15593BB6B7FD29C20CF5BB7974DBE1FDF4451633969B6D5C137B542C44E0",
+  "callback_checks": 320,
+  "bankB": [
+    102,
+    102
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "task": "T481 S3",
+  "run": "video415",
+  "result": "FAIL",
+  "candidate": "test-only insignia413 issues BOP54 diagnostic marker during Device_Init to query existing SCS registration",
+  "outcome": "Win3.1 desktop not reached; no expected marker observed",
+  "observed": "CMDSETINFO service marker 261 occurred earlier in trace",
+  "limits": [
+    "Marker absence does not prove Device_Init was reached or that SCS registration was unavailable",
+    "No source change to original guest or product insignia",
+    "Do not invoke diagnostic BOP54 from ring0 as a product solution"
+  ],
+  "trace_sha256": "0064826B75067A145E7BDDC63FD3288AF5001496ADB4F12626550D4E76B8C314",
+  "addon_sha256": "D0D94439FC774785E6A30EEBDFE69C37D06C4E25A1588AE2DFA42728CF70FCD2"
+}

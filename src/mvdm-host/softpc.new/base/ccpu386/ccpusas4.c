@@ -1600,7 +1600,7 @@ bios_read_byte IFN1(LIN_ADDR, linAddr)
 	   that the access and dirty bits are kosher.
 	 */
 
-	if ( getCPL() != 3 )
+	if ( getCPL() == 3 ) /* DIVERGENCE MVDM-HOST-DIV-891: CPL3 requests user access. */
 	{
 		access_request = access_request | PG_U;
 	}
@@ -1665,7 +1665,7 @@ bios_read_word IFN1(LIN_ADDR, linAddr)
 	   that the access and dirty bits are kosher.
 	 */
 
-	if ( getCPL() != 3 )
+	if ( getCPL() == 3 ) /* DIVERGENCE MVDM-HOST-DIV-891: CPL3 requests user access. */
 	{
 		access_request = access_request | PG_U;
 	}
@@ -1729,7 +1729,7 @@ bios_read_double IFN1(LIN_ADDR, linAddr)
 	   that the access and dirty bits are kosher.
 	 */
 
-	if ( getCPL() != 3 )
+	if ( getCPL() == 3 ) /* DIVERGENCE MVDM-HOST-DIV-891: CPL3 requests user access. */
 	{
 		access_request = access_request | PG_U;
 	}
@@ -1794,7 +1794,7 @@ bios_write_byte IFN2(LIN_ADDR, linAddr, IU8, value)
 	   that the access and dirty bits are kosher.
 	 */
 
-	if ( getCPL() != 3 )
+	if ( getCPL() == 3 ) /* DIVERGENCE MVDM-HOST-DIV-891: CPL3 requests user access. */
 	{
 		access_request = access_request | PG_U;
 	}
@@ -1858,7 +1858,7 @@ bios_write_word IFN2(LIN_ADDR, linAddr, IU16, value)
 	   that the access and dirty bits are kosher.
 	 */
 
-	if ( getCPL() != 3 )
+	if ( getCPL() == 3 ) /* DIVERGENCE MVDM-HOST-DIV-891: CPL3 requests user access. */
 	{
 		access_request = access_request | PG_U;
 	}
@@ -1922,7 +1922,7 @@ bios_write_double IFN2(LIN_ADDR, linAddr, IU32, value)
 	   that the access and dirty bits are kosher.
 	 */
 
-	if ( getCPL() != 3 )
+	if ( getCPL() == 3 ) /* DIVERGENCE MVDM-HOST-DIV-891: CPL3 requests user access. */
 	{
 		access_request = access_request | PG_U;
 	}

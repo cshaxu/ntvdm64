@@ -77,3 +77,5 @@ Only ABI facts are used; no third-party implementation is imported.
 Editor087 proves actual DOSONLY1 guest EDIT mouse File-menu delivery and normal
 exit with this addon and no diagnostic TSR. The host package is instrumented;
 mouse Exit, native payload mouse and full delivery gates remain open.
+
+T481 S3 candidate: Device_Init resolves the DOS-owned DOSWOWDATA.lpCDSBuffer through the existing ring-0 BOP, then registers the returned address and original CDS size as an ALWAYS_Field. The address is not a fixed guest offset; the host revalidates session and guest-memory epochs and reads the live DOS-owned pointer. A failed lookup or _AddInstanceItem returns initialization failure. Strict dual-DOS-VM distinct-directory/yield control passes in video480; real native command lifecycle, other DOS layouts and Win95 remain unqualified. This candidate is not yet published.

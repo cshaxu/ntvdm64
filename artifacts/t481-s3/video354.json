@@ -1,0 +1,33 @@
+{
+  "case": "T481 S3 complete VIDEO font height",
+  "productionBase": "33fad5723",
+  "directoryControls": {
+    "run349": "Only capture assertion bit256 (directory) fails",
+    "run350": "Directory mismatch already before any application acknowledgement after guest-only yield",
+    "scope": "Keep strict directory test unresolved; explicit snapshot control independently compares captured path to actual guest AH47 copy"
+  },
+  "baseline": {
+    "fontHeight": 16,
+    "normalWindowsExit": true,
+    "run": 352,
+    "driver": "driver313",
+    "expectedFontHeight": 8,
+    "applicationAcknowledgements": 6,
+    "exit": 1
+  },
+  "candidate": {
+    "run": 354,
+    "change": "Use original BIOS1110 instead of1100, verify BIOS1130 height and rows before acknowledgement",
+    "remainingFailure": "VGA font bank1 readback is0 rather than requested3c; bank0 is3c",
+    "applicationAcknowledgements": 6,
+    "exit": 1,
+    "normalWindowsExit": true,
+    "driver": "driver353",
+    "component": "src/addon/ntvdm64-386/ntvdm64.asm",
+    "fontHeight": 8
+  },
+  "published": false,
+  "originalGuestChanged": false,
+  "mirrorChanged": false,
+  "insigniaChanged": false
+}

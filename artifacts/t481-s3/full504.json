@@ -1,0 +1,16 @@
+{
+  "task": "T481 S3",
+  "run": "full504",
+  "result": "PASS",
+  "suite": "Full",
+  "gates": 16,
+  "passed": 16,
+  "published_package": "828b1d4b-a150-4699-82ba-1e28ca68c3b4",
+  "test_package": "45c6ba32-c29a-49fe-a046-fd337c46409f",
+  "timings_sha256": "4E9055D90547A52F686AC4EB571F572410160502262E4055D8F0D92C2B297C08",
+  "limits": [
+    "Independent test package uses fresh PE package-identity resource; not byte-identical to published package",
+    "Does not validate Win95 or resolve font bank",
+    "Owner reported EDIT.EXE and EDIT.COM work in Win3.1 prompt"
+  ]
+}

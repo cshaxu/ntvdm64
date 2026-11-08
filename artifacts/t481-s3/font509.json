@@ -1,0 +1,24 @@
+{
+  "task": "T481 S3",
+  "run": "video509",
+  "scope": "Read-only stack and V7VDD instance state observation during null-page mapping",
+  "result": "PASS_OBSERVATION",
+  "installed_v7vdd_sha256": "909A5E6C313DAF4DE4559171E211EF9AE7C5F15D10194F091A91BE8A352F0275",
+  "v7_object1_runtime_base": "8001615C",
+  "matched_object_offsets": [
+    "0x0f72",
+    "0x11f0"
+  ],
+  "actual_runtime_flags": "00400090",
+  "ordinary_page_handle": "804023a8",
+  "requested_null_handle": "8000ce64",
+  "trace_sha256": "5B26E4A55A281E98CE171CEDEE3979A85503015CB60167083E3945F960405020",
+  "normal_windows_exit": true,
+  "limits": [
+    "Runtime base in this run inferred from matching instructions and must be recomputed across runs",
+    "V7VDD-specific state-bit meaning and why it was set are not established",
+    "Diagnostic host and test addon only; font witness intentionally fails before identity completion",
+    "The precise upstream triggering and whether null mapping is correct for the BIOS callback remain unproved"
+  ],
+  "static_code_observation": "Installed V7VDD object 1 sets flag 0x10 at 0x2a47 and clears it at 0x2adf; intervening path inspects client AH for INT 10h function 0x11 at 0x2a7f. The observed mapping routine at 0x0f9f-0x0fc4 uses the null handle when the page entry is negative and flag 0x10 is set."
+}

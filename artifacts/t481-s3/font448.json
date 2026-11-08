@@ -1,0 +1,25 @@
+{
+  "guest_B": {
+    "bank0": 60,
+    "stage": 2,
+    "bank1": 0,
+    "expected": 102
+  },
+  "control": "guest preloads both banks with opposite role font, then BIOS loads expected role font and final guest read disables direct writes",
+  "task": "T481 S3",
+  "guest_A": {
+    "bank0": 102,
+    "stage": 2,
+    "bank1": 0,
+    "expected": 60
+  },
+  "trace_sha256": "E0B88789C29F9A1FC7B2E69178A566F1A873DBE73339CC4F158F14E8206F3AB4",
+  "normal_windows_exit": true,
+  "limits": [
+    "Early intentional font assertion stops later VM identity checks",
+    "The first pre-touch result was not independently asserted because role restoration modifies flags",
+    "Does not establish why VMM mappings diverge"
+  ],
+  "result": "FAIL",
+  "run": "video448"
+}

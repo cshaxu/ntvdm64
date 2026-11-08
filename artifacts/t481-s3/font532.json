@@ -1,0 +1,26 @@
+{
+  "task": "T481 S3",
+  "runs": [
+    "video524",
+    "video525",
+    "video526",
+    "video527",
+    "video528",
+    "video529",
+    "video531",
+    "video532"
+  ],
+  "result": "OPEN",
+  "findings": [
+    "Same-valued fonts 3c/66 pass, but both distinct banks 5a/a5 and same-valued banks 5a/a5 abort before witness output",
+    "First bank helper entry and copy complete; second bank source copy and Simulate_Far_Call return are observed, but no second helper entry before VM retirement",
+    "Copied helper entry bytes are identical before both calls",
+    "Guest VMM frame observed before Resume_Exec, but exact field interpretation is not yet confirmed"
+  ],
+  "limits": [
+    "Instrumentation and test-only historical helper may change scheduling and flags",
+    "Not yet a production repair or proof that glyph byte values are themselves the cause",
+    "Win95 not run"
+  ],
+  "trace_sha256": "CDE00EA4FF2F3443B03EB01E3651F98C4DB8D456A1141A2231C3718367A46B22"
+}

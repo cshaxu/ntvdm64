@@ -1,0 +1,20 @@
+{
+  "task": "T481 S3",
+  "run": "video510",
+  "result": "FONT_READBACK_PASS_EXIT_TIMEOUT",
+  "scope": "Test-only Win3.1 direct font writing control: first bank scalar MOV, second bank REP STOSB per glyph",
+  "observed": [
+    "Both guest witnesses wrote complete results",
+    "Both banks pass all requested glyph rows through offset 8175 in each VM",
+    "320 callback checks and three continuations per VM report zero errors",
+    "Runtime observer timed out without normal Windows exit",
+    "Source installation hashes unchanged"
+  ],
+  "limits": [
+    "No normal Windows exit; whole integration test failed",
+    "No instruction pointer or root cause for timeout",
+    "REP STOSB differs from previous helper REP MOVSB",
+    "Does not prove production font application is correct"
+  ],
+  "trace_sha256": "003A44CE7003922E803613AD44BEB79F00595207FA535E1CDDF4137F277A3109"
+}

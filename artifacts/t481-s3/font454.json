@@ -1,0 +1,19 @@
+{
+  "limits": [
+    "PageGetSizeAddr result ffffffff was not validated for the special null handle",
+    "Does not establish identity of null page or exclude c3000",
+    "Overall early font witness fails before identity"
+  ],
+  "result": "INCONCLUSIVE",
+  "task": "T481 S3",
+  "observed": {
+    "physical": "0015f000",
+    "size": "ffffffff",
+    "mapped": 1,
+    "linear": "80604000"
+  },
+  "normal_windows_exit": true,
+  "trace_sha256": "5A407F5BE696CE39873071ABE3FFC52D93BF60E4DC8BA874617075F48F6C805B",
+  "run": "video454",
+  "control": "test-only VxD calls original _GetNulPageHandle and _PageGetSizeAddr then translates returned EDX"
+}

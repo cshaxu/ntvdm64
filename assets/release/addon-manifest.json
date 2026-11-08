@@ -49,11 +49,11 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "6B1C746B9F6046980649DC18AF075B1DF93A2652E4B938171D968AFDB398A9A5",
-      "sha256": "F9804FAF3B2144B3EFD0A54E81D12F30AD3E065851F4752E57E8AAFA2980ADEB",
+      "sourceSha256": "87441DAA2B686378BCD1B2482617688838F3F7AB295320417EC7134B9326C6F3",
+      "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
       "acceptance": "candidate",
-      "verifiedScope": "Candidate: retained input/lifecycle baseline; Win3.1 dual EDIT keyboard/save/mouse Exit in both orders; native visible80x50 and25->50->25 BIOS-verified row changes; production standard/enhanced DOSONLY0/1 startup/normal exit. Other modes/custom fonts, remaining S3 and Win95 unqualified.",
-      "evidence": "artifacts/t481-s3/review324.json"
+      "verifiedScope": "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 host-command I/O and normal shutdown unverified.",
+      "evidence": "artifacts/t481-s3/qualification549.json"
     },
     {
       "id": "insignia-niddb",
@@ -61,11 +61,23 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/insignia-386/insignia.asm",
-      "sourceSha256": "3E1B1ABCC2D2304BED890F5651CD458DD398896F0A07839B882AA244B90EDBFC",
-      "sha256": "A005F94C1FF57F1A8B534D6F9BD7EAA3F4CE0EED1A7BCBCF350E954530030959",
+      "sourceSha256": "D3C2E05139B67A9E43FFECBBC987D7D6D469242B1FEF69BD77D4F85E7A4E7A8F",
+      "sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
       "acceptance": "candidate",
-      "verifiedScope": "Candidate: original NIDDB Create_VM allocation before BIOS initialization; original VMD/BOP BF callback, actual Win3.1 DOS editor mouse and normal exit. Requires original VMD loaded. Not full INSIGNIA ABI; Win95 unqualified.",
-      "evidence": "docs/etc/operations/m0-t481-multitask-completion-plan.md"
+      "verifiedScope": "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 host-command I/O and normal shutdown unverified.",
+      "evidence": "artifacts/t481-s3/qualification549.json"
+    },
+    {
+      "id": "ntvdm64-win95",
+      "file": "ntvdm64.vxd",
+      "kind": "static-vxd",
+      "architecture": "i386-protected-mode",
+      "source": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sourceSha256": "87441DAA2B686378BCD1B2482617688838F3F7AB295320417EC7134B9326C6F3",
+      "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
+      "acceptance": "candidate",
+      "verifiedScope": "Win95 VxD load, two VM identities, ordered wake, PIC notification and 320 callbacks; native command I/O and normal shutdown unverified.",
+      "evidence": "artifacts/t481-s3/qualification549.json"
     }
   ],
   "utilities": [

@@ -23,9 +23,10 @@
  * fixed-result mode stays diagnostic. REAL_COMMAND delegates BOP11 admission
  * to production and supplies only translated input stimulus. */
 extern BOOL CmdDispatch(ULONG);
-extern uint32_t c_getEAX(void), c_getEDX(void);
-extern uint16_t c_getIP(void);
-extern uint16_t c_getDS(void), c_getDX(void), c_getCX(void), c_getAX(void);
+extern int mvdm_command_guest_state_scs_field(uint32_t, uint16_t *, uint16_t *);
+extern uint32_t c_getEAX(void), c_getEDX(void), c_getESI(void);
+extern uint16_t c_getIP(void), c_getCS(void);
+extern uint16_t c_getDS(void), c_getDX(void), c_getCX(void), c_getAX(void), c_getSI(void);
 extern uint16_t c_getBX(void), c_getES(void), c_getBP(void);
 extern void video_io(void), ega_video_io(void);
 extern void mouse_video_io(void);
@@ -44,11 +45,48 @@ typedef struct {
     uint32_t service, route, vm;
     ntvdm_vm_text *text;
     char role;
+    char guest_directory[67];
 } diagnostic_request;
 static diagnostic_request *waiting;
 static uint32_t waiting_service;
 static HANDLE blocked_keyboard_ready;
 static volatile LONG keyboard_consumer;
+static void trace(unsigned operation, uint32_t vm, uint32_t token);
+static uint32_t test_original_cds_buffer;
+/* Read-only original DEM directory service observation, diagnostic link only. */
+extern BOOL DemDispatch(ULONG);
+BOOL test_dem_dispatch(ULONG service)
+{
+    BOOL result;
+    if (service == 0x1b) {
+        mvdm_guest_location location;
+        mvdm_guest_location_lease lease;
+        uint16_t ds = c_getDS();
+        uint32_t field;
+        test_original_cds_buffer = 0;
+        if (mvdm_guest_location_set_real_mode(&location, ds, c_getSI()) &&
+            mvdm_guest_location_acquire(&location, 36, GUEST_MEMORY_ACCESS_READ, &lease)) {
+            memcpy(&field, lease.bytes + 8, sizeof(field));
+            test_original_cds_buffer = ((uint32_t)ds << 4) + (field & 0xffffu);
+            trace(0xc50, ((uint32_t)ds << 16) | c_getSI(), field);
+            trace(0xc51, test_original_cds_buffer, 0);
+            (void)mvdm_guest_location_release(&lease, 0);
+        }
+    }
+    result = DemDispatch(service);
+    if (service == 0x13 || service == 0x18 || service == 0x1a) {
+        DWORD saved = GetLastError(), length, i;
+        char path[MAX_PATH];
+        trace(0xc00, service, (uint32_t)c_getCF());
+        trace(0xc01, c_getCS(), c_getIP());
+        length = GetCurrentDirectoryA(sizeof(path), path);
+        if (length && length < sizeof(path))
+            for (i = 0; i < length; ++i) trace(0xc02, i, (uint8_t)path[i]);
+        SetLastError(saved);
+    }
+    return result;
+}
+
 static DWORD stage_video(ntvdm_vm_text *text, char role)
 {
     ntvdm_vm_text_publication view;
@@ -77,6 +115,8 @@ static DWORD stage_video(ntvdm_vm_text *text, char role)
     /* Deliberately distinct glyphs for a later pixel/readback witness. Palette
      * and cell readback below do not by themselves prove displayed glyphs. */
     memset(style->fonts, role == 'A' ? 0x3c : 0x66, sizeof(style->fonts));
+    if (GetEnvironmentVariableA("MVDM_VIDEO_DISTINCT_FONTS", NULL, 0))
+        memset(style->fonts[1], role == 'A' ? 0x5a : 0xa5, sizeof(style->fonts[1]));
     memcpy(payload + sizeof(*style), h + 1, h->columns * h->rows * 2);
     request.operation = CONSOLE_IO_VIDEO_BEGIN; request.state.mode = 1;
     request.bytes = sizeof(description); request.data = (BYTE *)&description;
@@ -96,15 +136,23 @@ static void trace(unsigned operation, uint32_t vm, uint32_t token);
 /* Diagnostic-only pass-through for the original INT33 and enhanced mouse
  * owners. Observe their real calls; never synthesize a callback or result. */
 extern void mouse_io_interrupt(void), mouse_EM_callback(void);
-extern uint16_t c_getSI(void);
 extern void mouse_int1(void);
 extern uint8_t c_sas_hw_at(uint32_t address);
-extern uint16_t c_getCS(void);
 extern void virtual_device_trap(void);
 extern uint32_t c_getEBX(void);
+extern void c_setEDX(uint32_t);
 void test_virtual_device_trap(void)
 {
     uint32_t operation=c_getEAX();
+    if (operation == 0x4e530001u || operation == 0x4e530002u) {
+        uint16_t segment = 0, offset = 0;
+        int found = mvdm_command_guest_state_scs_field(0, &segment, &offset);
+        trace(0xc40, (uint32_t)found, ((uint32_t)segment << 16) | offset);
+        trace(0xc52, test_original_cds_buffer, 0);
+        if (operation == 0x4e530002u)
+            c_setEDX(test_original_cds_buffer);
+        return;
+    }
     if(operation!=0x4e544d56) {
         trace(0x590,operation,c_getEBX());
         trace(0x591,GetCurrentProcessId(),c_sas_hw_at(0x4ac));
@@ -213,6 +261,7 @@ void test_dem_read(void)
     trace(0x311, c_getAX(), (uint32_t)c_getCF());
 }
 extern int xtrn2phy(uint32_t address, uint8_t access, uint32_t *physical);
+extern uint32_t c_getCR3(void);
 extern uint32_t c_sas_memory_size(void);
 extern void c_sas_store(uint32_t address, uint8_t value);
 extern uint8_t c_sas_hw_at(uint32_t address);
@@ -308,18 +357,24 @@ static void complete_one(diagnostic_request *request)
         if (ntvdm_vm_text_dispatch(request->text, &read, &reply) ||
             (!GetEnvironmentVariableW(L"MVDM_SCREEN_UNSEEDED", NULL, 0) &&
             (cell.character != (uint16_t)request->role || cell.attribute != 0x1e)))
-            ExitProcess(ERROR_INVALID_DATA);
+            { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
     }
-    if (!mvdm_command_capture_read(request->capture, &view) ||
-        strcmp(view.environment, environment) || view.environment_bytes != 8 ||
-        (request->service == 8 && strcmp(view.command, command)) ||
-        view.service != request->route ||
-        view.standard_handles[0] != 0x11111111 ||
-        view.standard_handles[1] != 0x22222222 ||
-        view.standard_handles[2] != 0x33333333 ||
-        view.default_drive != expected_drive || !view.directory ||
-        !strrchr(view.directory, '\\') || strcmp(strrchr(view.directory, '\\'), directory))
+    if (!mvdm_command_capture_read(request->capture, &view))
         ExitProcess(ERROR_INVALID_DATA);
+    {
+        unsigned failed = (strcmp(view.environment, environment) ? 1 : 0) |
+            (view.environment_bytes != 8 ? 2 : 0) |
+            (request->service == 8 && strcmp(view.command, command) ? 4 : 0) |
+            (view.service != request->route ? 8 : 0) |
+            (view.standard_handles[0] != 0x11111111 ? 16 : 0) |
+            (view.standard_handles[1] != 0x22222222 ? 32 : 0) |
+            (view.standard_handles[2] != 0x33333333 ? 64 : 0) |
+            (view.default_drive != expected_drive ? 128 : 0) |
+            (!view.directory || (GetEnvironmentVariableW(L"MVDM_DIRECTORY_SNAPSHOT", NULL, 0)
+             ? strcmp(view.directory, request->guest_directory)
+             : !strrchr(view.directory, '\\') || strcmp(strrchr(view.directory, '\\'), directory)) ? 256 : 0);
+        if (failed) { trace(0x3fe, request->role, failed); ExitProcess(ERROR_INVALID_DATA); }
+    }
     mvdm_command_capture_destroy(request->capture);
     {
         void *application;
@@ -356,7 +411,7 @@ static void complete_one(diagnostic_request *request)
         write.operation = CONSOLE_IO_ATTRIBUTE; write.state.attribute = 0x2f;
         if (ntvdm_vm_text_dispatch(text, &write, &reply)) ExitProcess(ERROR_INVALID_STATE);
         if (GetEnvironmentVariableA("MVDM_VIDEO_APPLICATION", NULL, 0) &&
-            stage_video(text, request->role)) ExitProcess(ERROR_INVALID_DATA);
+            stage_video(text, request->role)) { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
         if (ntvdm_vm_text_copy_application(text, &application, &application_bytes)) ExitProcess(ERROR_INVALID_STATE);
         if (GetEnvironmentVariableA("MVDM_VIDEO_APPLICATION", NULL, 0)) {
             const ntvdm_vm_text_header *h = application;
@@ -364,7 +419,7 @@ static void complete_one(diagnostic_request *request)
             uint32_t bad = 2, good = NTVDM_VM_VIDEO_VERSION;
             memcpy(version, &bad, sizeof(bad));
             if (mvdm_vm_application_publish(request->executor, application, application_bytes, NULL) != ERROR_INVALID_DATA)
-                ExitProcess(ERROR_INVALID_DATA);
+                { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
             memcpy(version, &good, sizeof(good));
         }
         {
@@ -420,11 +475,11 @@ static diagnostic_request *capture(uint32_t descriptor_address, uint32_t descrip
     request->service = service_lease.bytes[0];
     if (!mvdm_guest_location_release(&service_lease, 0)) ExitProcess(ERROR_INVALID_ADDRESS);
     if ((request->service != 8 && request->service != 10) ||
-        (frame[7] & 0xffff0000u) != 0x54320000u) ExitProcess(ERROR_INVALID_DATA);
+        (frame[7] & 0xffff0000u) != 0x54320000u) { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
     request->route = request->service == 10 ? MVDM_COMMAND_SERVICE_INTERACTIVE :
         (frame[7] & 0xff00u) ? MVDM_COMMAND_SERVICE_EXECUTE : MVDM_COMMAND_SERVICE_NONE;
     request->role = (char)frame[6];
-    if (request->role != 'A' && request->role != 'B') ExitProcess(ERROR_INVALID_DATA);
+    if (request->role != 'A' && request->role != 'B') { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
     error = mvdm_vm_command_snapshot(request->service, descriptor_address,
         descriptor_bytes, &request->capture, &request->text);
     trace(0x20a, request->service, error);
@@ -432,22 +487,27 @@ static diagnostic_request *capture(uint32_t descriptor_address, uint32_t descrip
     {
         console_io_request read = {0}; console_io_reply reply = {0};
         read.operation = CONSOLE_IO_SCREEN_INFO;
-        if (ntvdm_vm_text_dispatch(request->text, &read, &reply)) ExitProcess(ERROR_INVALID_DATA);
+        if (ntvdm_vm_text_dispatch(request->text, &read, &reply)) { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
         if (!GetEnvironmentVariableW(L"MVDM_SCREEN_UNSEEDED", NULL, 0) &&
-            (reply.state.x != 2 || reply.state.y != 3)) ExitProcess(ERROR_INVALID_DATA);
+            (reply.state.x != 2 || reply.state.y != 3)) { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
         trace(0x208, reply.state.width, reply.state.height);
     }
     {
         mvdm_command_capture_view view;
         size_t i, length;
-        if (!mvdm_command_capture_read(request->capture, &view)) ExitProcess(ERROR_INVALID_DATA);
+        if (!mvdm_command_capture_read(request->capture, &view)) { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
         trace(0x203, frame[7], view.service);
         trace(0x206, (uint32_t)(unsigned char)request->role, frame[6]);
         length = view.directory ? strlen(view.directory) : 0;
         for (i = 0; i < length; ++i) trace(0x204, (uint32_t)i, (uint8_t)view.directory[i]);
         mvdm_guest_location_set_real_mode(&location, (uint16_t)frame[15], (uint16_t)frame[0]);
-        if (!mvdm_guest_location_acquire_vm(&location, base, 76,
+        if (!mvdm_guest_location_acquire_vm(&location, base,
+            GetEnvironmentVariableW(L"MVDM_DIRECTORY_NETCDS", NULL, 0) ? 142 : 76,
             GUEST_MEMORY_ACCESS_READ, &service_lease)) ExitProcess(ERROR_INVALID_ADDRESS);
+        if (!memchr(service_lease.bytes, 0, 64)) ExitProcess(ERROR_INVALID_DATA);
+        request->guest_directory[0] = (char)('A' + (frame[7] & 0xff));
+        request->guest_directory[1] = ':'; request->guest_directory[2] = '\\';
+        memcpy(request->guest_directory + 3, service_lease.bytes, 64);
         for (i = 0; i < 64 && service_lease.bytes[i]; ++i)
             trace(0x205, (uint32_t)i, service_lease.bytes[i]);
         for (i = 64; i < 76; i += 4) {
@@ -455,6 +515,10 @@ static diagnostic_request *capture(uint32_t descriptor_address, uint32_t descrip
             memcpy(&value, service_lease.bytes + i, sizeof(value));
             trace(0x207, (uint32_t)i, value);
         }
+
+        if (GetEnvironmentVariableW(L"MVDM_DIRECTORY_NETCDS", NULL, 0))
+            for (i = 0; i < 64 && service_lease.bytes[78+i]; ++i)
+                trace(0xc20, (uint32_t)i, service_lease.bytes[78+i]);
         if (!mvdm_guest_location_release(&service_lease, 0)) ExitProcess(ERROR_INVALID_ADDRESS);
     }
     return request;
@@ -466,7 +530,7 @@ static VOID CALLBACK complete_pair(PTP_CALLBACK_INSTANCE instance, void *context
     (void)instance;
     /* Second arrival completes first. Both references remain owned until the
      * publishing call returns, even if the CPU consumes/retires immediately. */
-    if (pair->first->role == pair->second->role) ExitProcess(ERROR_INVALID_DATA);
+    if (pair->first->role == pair->second->role) { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
     if (blocked_keyboard_ready) {
         if (WaitForSingleObject(blocked_keyboard_ready, INFINITE) != WAIT_OBJECT_0)
             ExitProcess(GetLastError());
@@ -508,6 +572,15 @@ static void trace(unsigned operation, uint32_t vm, uint32_t token)
 }
 
 /* Optional BIOS geometry trace; the linked observer preserves the CRTC index. */
+void test_video_font_mapping(unsigned address, unsigned pte, unsigned flags)
+{
+    trace(0xb32, address, pte);
+    trace(0xb33, address, flags);
+}
+void test_video_font_store(unsigned address, unsigned value, unsigned readback)
+{
+    trace(0xb30, address, value | (readback << 8));
+}
 void test_video_geometry(unsigned after, unsigned function, unsigned lines, unsigned rows)
 {
     trace(0xb20 + after * 2, function, lines);
@@ -570,13 +643,44 @@ BOOL test_cmd_dispatch(ULONG service)
 {
     uint32_t callback, target[2];
     if (service == 254) {
+
+        if ((c_getEAX() & 0xffff0000u) == 0x4e430000u) {
+            uint32_t physical = 0, address = c_getEDX();
+            trace(0xc30, c_getEAX() & 0xffu, address);
+            trace(0xc31, xtrn2phy(address, 2u, &physical) ? physical : 0xffffffffu,
+                (uint32_t)c_getVM());
+            trace(0xc32, c_getCR3(), c_getCPL());
+        }
         trace(254, c_getEAX(), c_getIP());
         return TRUE;
     }
     if ((service != 8 && service != 10) ||
         (c_getEAX() & 0xffff0000u) != 0x54320000u) {
+        BOOL result;
+        uint16_t ds = c_getDS(), si = (uint16_t)c_getESI();
+        uint8_t drive = (uint8_t)c_getAX();
+        DWORD saved;
         trace(0x100 + service, 0, 0);
-        return CmdDispatch(service);
+        if (service == 4) {
+            trace(0xc12, drive, ((uint32_t)ds << 16) | si);
+            trace(0xc13, c_getCS(), c_getIP());
+        }
+        result = CmdDispatch(service);
+        if (service == 4) {
+            mvdm_guest_location location;
+            mvdm_guest_location_lease lease;
+            size_t i;
+            saved = GetLastError();
+            trace(0xc10, drive, (uint32_t)c_getCF());
+            if (!c_getCF() && mvdm_guest_location_set_real_mode(&location, ds, si) &&
+                mvdm_guest_location_acquire(&location, 64, GUEST_MEMORY_ACCESS_READ, &lease)) {
+                for (i = 0; i < 64 && lease.bytes[i]; ++i)
+                    trace(0xc11, (uint32_t)i, lease.bytes[i]);
+                (void)mvdm_guest_location_release(&lease, 0);
+            }
+            SetLastError(saved);
+        }
+        return result;
     }
     callback = c_getEDX();
     if (GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0))
@@ -622,7 +726,7 @@ static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
                 (d->stride != d->width * 2 && d->stride != d->width * 3) ||
                 d->bytes != sizeof(console_text_style) + d->height * d->stride ||
                 descriptor[5] - offset - sizeof(video) < d->bytes)
-                ExitProcess(ERROR_INVALID_DATA);
+                { trace(0x3ff, __LINE__, ERROR_INVALID_DATA); ExitProcess(ERROR_INVALID_DATA); }
             if (!mvdm_softpc_guest_memory_copy_from(descriptor[4] + offset + sizeof(video),
                 (BYTE *)&video_height, sizeof(video_height))) ExitProcess(ERROR_INVALID_ADDRESS);
             header.columns = d->width; header.rows = d->height;

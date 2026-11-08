@@ -1,0 +1,21 @@
+{
+  "task": "T481 S3",
+  "runs": [
+    "video522",
+    "video524",
+    "video525",
+    "video526"
+  ],
+  "result": "CANDIDATE_NOT_QUALIFIED",
+  "scope": "Project-authored virtual VGA helper with BIOS font-bank selection before writes and existing geometry checks",
+  "same_banks": "video522: both VMs read both banks through offset8175; 320 callbacks and normal Windows exit",
+  "distinct_banks": "video524/525: actual VM abort before guest result, error 995; video526 reproduces with unmodified witness",
+  "limits": [
+    "Distinct data failure has not been localized",
+    "Diagnostic host and addons are test-only; no product source modified",
+    "Not an acceptance of pixel-level glyph selection",
+    "Win95 not run"
+  ],
+  "source_sha256": "114FCB98C6CDB4E2EC32F07C546BA612BEA432EF49169D75DA61A7B47A1CE9FB",
+  "binary_sha256": "E06FC25E63C1E44F14A009BA35AA6959EE3B2312DA2663EFFE32B04EEA761169"
+}

@@ -1,0 +1,25 @@
+{
+  "task": "T481 S3",
+  "run": "access391",
+  "same_fixture": true,
+  "baseline": {
+    "lease": "old inverted CPL",
+    "failures": 30,
+    "exit": 1,
+    "checks": 90
+  },
+  "candidate": {
+    "lease": "CPL3 selects user access",
+    "failures": 0,
+    "exit": 0,
+    "checks": 90
+  },
+  "unchanged": "CCPU candidate and test fixture identical in both runs",
+  "limitations": [
+    "Protected-mode PTE matrix only",
+    "Does not qualify V86 fallback, font or directory behavior",
+    "Existing fixture link uses FORCE with retained warnings"
+  ],
+  "stderr_sha256": "C22DA990365D245E981B4DEFA0FC510FA1E5AECF28145C32CAB044763B40CF3D",
+  "fixture_sha256": "E6A09C79940903D3DCCD1B1EE30C60C691F4276E5EA7ED779FEDBA6D624B9D25"
+}

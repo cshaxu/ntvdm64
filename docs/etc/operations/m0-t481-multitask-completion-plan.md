@@ -1734,3 +1734,416 @@ Evidence: artifacts/t481-s3/codepage336.json. Original COUNTRY filtering and
 failed850 prerequisite are retained in codepage333.json. No runtime source
 changes; all11 publication326 hashes match both targets, Full320 reused.
 Guest850, active guest codepage transitions and DBCS remain unverified.
+
+## S3 complete VIDEO diagnostic prerequisite (338-345)
+
+The new short-font VIDEO witness338 and ordinary-font339 both exit13.
+Diagnostic343 identifies the capture assertion at host-continuation.c:323:
+first A/B applications acknowledge zero, but the second continuation reports
+PATCH instead of its initial PATCH/VA or PATCH/VB directory. Direct DOS AH47
+and the captured directory agree. Deferred344 reproduces; no-VIDEO345 also
+reproduces, excluding font application as the cause of this specific failure.
+Evidence: artifacts/t481-s3/video345.json. Keep the strict assertion; source
+attribution remains open. These diagnostic failures neither qualify full VIDEO
+nor justify changing BIOS1100 to1110. Diagnostic stderr was not retained by
+the observer, so failure locations now use its existing trace channel.
+All changes are test-only; no new production repair, publication or P delivery.
+Original guest installation hashes remain unchanged. S3 remains open.
+
+### S3 VIDEO font-height baseline and candidate352/354
+
+Diagnostic349 reports only failure bit256 (directory).350 yields in guest
+before the first continuation and fails before any application acknowledgement;
+this excludes host frame completion as a necessary cause. Original AH47 reads
+CDS directly for a fixed drive (doskrnl/dos/path.asm:CurrentValidate/noquery).
+The strict VA/VB test remains available and unresolved. Explicit optional
+DirectorySnapshotControl compares capture with the independent current guest
+AH47 result; it does not qualify cross-VM directory isolation.
+
+With that control,352 reaches six successful application acknowledgements and
+normal Windows exit, but actual BIOS height is16 instead of requested8.
+Authored ntvdm64.386 candidate353 uses original BIOS1110 and checks1130 height
+and rows before acknowledging.354 proves height8 and normal exit, but font
+bank1 reads0 rather than3c (bank0 is3c), so overall acceptance still fails.
+The original BIOS trace reaches1110/BX0800 and1110/BX0801. Do not attribute
+the remaining bank failure without following its virtual VGA write/read path.
+Evidence: artifacts/t481-s3/video354.json. No mirror, original guest or
+insignia.386 change. Candidate is not published, committed or qualified.
+
+### S3 BIOS scalar privilege investigation363/364
+
+Real guest MOV font control362 passes both banks and normal Win3.1 exit;
+BIOS-mediated361 writes bank0 but immediately reads zero after bank1 writes.
+The read-only observer records CPL3/VM1 and raw nonpresent PTE values; those
+raw entries are not evidence of a current valid TLB mapping. DirectorySnapshotControl
+now deliberately uses the same PATCH directory in both VMs, avoiding the
+independent AH47 race; strict distinct-directory acceptance remains open.
+
+The actual CCPU/SAS permission fixture363e fails24/42 with the prior six
+inverted CPL tests; candidate364 passes42/42 after changing !=3 to ==3.
+The selected original386 permission table and PDE/PTE OR rule define the
+expectations. Both tests link real CPU, SAS and physical memory with existing
+asserted-unreached host lifecycle seams. First363c failed linking because the
+host seams were omitted; that was not runtime evidence. DIV-891 records the
+six same-line mirror substitutions, without new APIs or guest modifications.
+Evidence: artifacts/t481-s3/access364.json. This PM matrix does not prove
+V86 fallback, cross-page/reentrant behavior or the Win3.1 bank-loss root cause.
+Isolated diagnostic365 builds; real Win3.1 VIDEO366 is running.
+No candidate publication, commit or S3 closure is claimed.
+Candidate366 still fails the second font bank (A samples60/0, height8),
+despite six successful applications and normal Win3.1 exit. Therefore DIV-891
+does not resolve the observed bank loss and remains independently unqualified
+for publication. Diagnostic368 reads the registered PM data selector as zero
+at every failed second-bank write, excluding selector contamination on this
+path. Original CCPU intentionally bypasses segment-limit checks in V86; do not
+invent a segment workaround. The next bounded observation compares virtual
+sequencer/graphics-controller registers at each bank write.
+Further completed controls: 368 confirms the PM selector is zero; 370 records
+SEQ2=04, SEQ4=06, GC4=00, GC5=00, GC6=04 at both bank writes. 371 uses the
+BIOS-style DS=0/32-bit operand in the real guest and passes both banks,
+320 callback assertions and normal exit. 373's complete trace shows both
+banks enter the actual ROM MOV/BOP helper (bytes c4028867 at F3080); an early
+partial-log inference that bank1 skipped fallback was withdrawn. 375 selects
+GC read plane2 only and still fails; 377 changes SEQ4 from06 to07 only and
+still fails. These explicit diagnostic interventions are not production fixes.
+All failures retain the font assertions and report normal guest exit separately.
+379's font-bank selection control also fails bank1; do not retain that
+intervention as a repair. Completed control matrix and log/trace identities:
+artifacts/t481-s3/video379.json. The finite unresolved split is now original
+BIOS full font-loading mode/restore versus the working direct guest VGA write
+path, plus the separately reproduced strict VA/VB directory identity failure.
+Do not claim a confirmed font root cause from the CPL matrix, selector,
+operand-size, read-plane, sequencer-mode or bank-selection hypotheses; all
+relevant negative controls are retained. No new package is published.
+### S3 ordinary guest BIOS font control380
+
+The existing VIDEO_FONT_CONTROL independently calls DOS VM INT10/1100 for
+both banks after the native continuation, then reads actual VGA plane2.
+It fails bank1 (A: 60/0 at offset0, height16) while Windows exits normally.
+This demonstrates that the failure also occurs with ordinary guest BIOS
+calls in the same post-continuation VM state; it does not establish behavior
+in a fresh VM before any continuation, nor identify the responsible owner.
+Original installation bytes remain unchanged. Log and trace hashes are
+recorded in artifacts/t481-s3/video380.json. No new publication or closure.
+Early control381 calls original DOS VM INT10/1100 twice and reads both VGA
+font banks before its first diagnostic continuation BOP. A.BIN records
+stage2/bank0=60/bank1=0/height16/offset0; Windows exits normally. The harness
+correctly fails its later identity assertion because this early failure exits
+before that API check. This establishes pre-continuation reproduction, not
+the responsible BIOS/VDD owner or B-task acceptance. Evidence and hashes:
+artifacts/t481-s3/video381.json. No original guest changed or candidate
+published.
+Early direct control382 explicitly writes and reads both banks before the
+first continuation as well as after each VIDEO application. Both VMs pass
+(A60/60, B102/102), 320 callback checks and normal Windows exit, with original
+installation unchanged. Together with early BIOS control381 this localizes the
+difference to the BIOS loading/virtual mapping path, while their differing
+register setup prevents attributing the fault to a specific component.
+Evidence: artifacts/t481-s3/video382.json. Neither control qualifies the
+addon BIOS font application or the outstanding distinct-directory test.
+### S3 directory ownership source check
+
+The strict VA/VB test assigns distinct existing absolute paths via DOS AH=3Bh,
+selects the corresponding drive and reads AH=47h before the driver callback.
+command_directory independently executes AH=47h in the current nested VM and
+copies the result before ending nested execution. Original DOS path.asm
+$CURRENT_DIR reads ThisCDS directly for CURDIR_NT_FIX drives; original host
+demSetDefaultDrive maps the selected DOS path onto the process current
+directory with SetCurrentDirectoryOem. Original cmdmisc.c also reports current
+directories on command completion. Those are different state owners and
+neither fact establishes that host process CWD is the authoritative per-VM
+CDS. Diagnostic350 yields before the first continuation and reproduces
+failure before application acknowledgements, excluding completion as a
+necessary trigger. The strict test and original guest remain unchanged; a
+VM scheduling/CDS writer has not yet been identified, and adding a second
+independently maintained directory table would be speculative.
+Directory observer387 resolves original CDS guest logical043d0 using each VM
+linear base. Captures B/A/B report linear844043d0/848043d0/844043d0 and same
+CR3 001de000; xtrn2phy resolves only A to000043d0, not B. Therefore equal
+DOS logical CDS addresses do not prove shared physical storage, and this
+observer cannot determine B physical identity. Strict directory assertion
+still fails and normal Windows exit is not achieved. Diagnostic385 omitted
+the VM base and is invalid for mapping comparison. Evidence and hashes:
+artifacts/t481-s3/directory387.json. Diagnostic383 first failed to compile
+for missing prototype; corrected candidate386 built successfully.
+### S3 guest-memory lease privilege consistency388-390
+
+The project-owned mvdm_softpc_guest_memory_range_valid copied the original
+inverted CPL comparison. With candidate DIV-891, that would make lease
+preflight and actual CCPU SAS accesses disagree. It now requests PG_U for
+CPL3, matching the corrected original CCPU helpers and the selected 386
+access table. The expanded real-CPU/session fixture390 passes90/90 checks
+covering scalar read/write and lease read/commit across CPL0/3 and PTE
+combinations. Initial388 reported27 failures using the old preflight, but
+three write-acquire expectations were invalid: the bounce lease checks
+write permission on commit. Updated fixture390 tests actual commit.
+Evidence: artifacts/t481-s3/access390.json. This is no proof of the font
+bank root cause, V86 fallback, cross-page/reentrancy or production readiness;
+the candidate remains unpublished.
+Access391 repeats the corrected 90-check fixture against identical CCPU
+candidate and test inputs: only project lease CPL selection changes. The old
+lease check fails30/90; the candidate passes90/90. The script restores the
+candidate source in a finally block before rebuilding. This supersedes the
+inexact388 baseline count; it does not qualify V86 or full runtime behavior.
+Evidence: artifacts/t481-s3/access391.json.
+WOW shared-owner sweep: mvdm_softpc_wow_page_domain.c also copies the original
+BIOS write access request for its bounded allocated-page bulk-store fast path.
+Its CPL test now matches DIV-891 and the scalar fallback (CPL3 selects PG_U).
+This is a project-owned one-line change, not an additional mirror divergence.
+Existing WOW page-domain fixture is linked by the lifecycle verifier, so its
+actual coverage must be examined and executed before qualifying the change.
+Cached392 is running with owner PID22044; do not infer success from startup.
+The font-bank and distinct-directory failures remain open.
+Cached392 completes exit0: x86 and x64 builds and shared tests14/14 each,
+keyboard/PIC89/89. WOW window-borrow fixture393 failed to link because its
+library list omitted existing lib-process-launch; fixture list corrected.
+WOW394 passes actual page-domain fixture, including immediate stores and
+trace fallback. This is not a comprehensive CPL/PTE matrix nor real Win16
+acceptance. Evidence artifacts/t481-s3/wow394.json. No package published;
+font bank and directory tests remain failing.
+Directory source audit395 corrects observer387's target: test drive O is
+index14, while observed DOS CDSCount is5. Original GetCDSFromDrv selects
+DOSDATA:NetCDS for index >= CDSCount, not the ordinary table at043d0.
+It conditionally calls CMDGETCURDIR on sync; original cmdGetCurrentDir
+reads host process environment =O:, and original demSetCurrentDir sets
+that environment entry. Therefore observer387's ordinary-table mappings do
+not identify the O: directory's backing. video350 records B seeing VA before
+any application acknowledgement. Host process environment is shared, but
+source alone does not establish whether shared NetCDS, sync, another writer
+or VM switching produced that observation. Evidence directory395.json.
+No guest changes or second directory authority introduced.
+Directory399 adds a diagnostic-only observer around original CmdDispatch
+service4, retaining the real service and logging its returned guest bytes.
+Both VA and VB appear in successful DEM directory-set traces. B's second
+capture reads VA and fails; the last DEM directory set before that capture
+is VA, with no O-drive CMDGETCURDIR call in that interval. This rules out an
+O: CMDGETCURDIR invocation in that specific interval, not all process-wide
+environment effects or NetCDS/VM restoration causes. DEM trace lacks VM
+identity, and the diagnostic abort prevents normal Windows exit.
+Evidence: artifacts/t481-s3/directory399.json. Diagnostic396 failed because
+the script renamed a component path; 398 corrected the script and built.
+Directory400 source/identity audit: the pinned original NTDOS.SYS and installed
+O:/winnt/system32/ntdos.sys have identical SHA256 95766232...F93BC84.
+NTDOS.MAP places SYSINITVAR at0026, CurDrv0338 and NetCDS13f3; video399's
+AH52 also returned offset0026. Original dostab.asm Win386 instance table
+does not list CurDrv or NetCDS in its seven described regions. This is not
+proof that DOSMGR or another VMM mechanism never instances them, nor proof
+that the map matches every loaded variable. Existing insignia.386 calls
+_AddInstanceItem during Device_Init; blindly adding NetCDS would leave the
+separately shared host =drive environment unaddressed. No binary identity
+assumption or guest modification has been added to production. Evidence:
+artifacts/t481-s3/directory400.json.
+Directory402 identity-bound read-only guest witness: package NTDOS.SYS
+SHA256 95766232...F93BC84 is checked before execution, and AH52 SYSINITVAR
+offset0026 is verified before reading DOSDATA:13f3 (NetCDS, original map).
+B first captures VB in AH47, NetCDS and copied command; A captures VA in all
+three; B second captures VA in all three and strict assertion fails.
+This excludes command-capture copying as the cause of that occurrence:
+B's observed original DOS directory already changed before the copy.
+It does not identify the writer or prove page sharing/instancing.
+Diagnostic terminates before normal Windows exit; no original guest modified.
+Evidence: artifacts/t481-s3/directory402.json.
+Directory405 observes actual CPU translation immediately after each guest
+NetCDS read, before callback. B/A/B all report V86 CPL3, CR3=001de000 and
+linear=physical=00001e63 for NetCDS. Directory402 established B's VB value
+becoming VA across the A run. This establishes same physical location at
+the observations, but does not exclude VMM copy/swap instancing. The
+identity-bound test uses the original map and verifies NTDOS binary hash;
+no production offset or guest patch is introduced. Strict failure aborts
+the diagnostic and does not establish normal exit. Evidence directory405.json.
+Diagnostic403 failed on duplicate test prototype; 404 built after correction.
+Directory406 corrects the inference from the initial seven DOS instance
+entries: original mscode.asm win386_inst explicitly returns not-previously-
+instanced for CDS/SFT/device chain so Windows DOSMGR handles them. Original
+msinit.asm fills the seven initial entry segments; absence from that list
+alone does not establish no other instancing. The original DOSMGR service
+declaration includes DOSMGR_Copy_VM_Drive_State and _DOSMGR_Set_Exec_VM_Data,
+but names alone do not establish their calling convention or treatment of
+NTDOS's NetCDS / shared host =drive environment. Evidence directory406.json.
+Do not register fixed NetCDS offsets in the addon or claim a fix without
+tracing those boundaries. Original guest remains unmodified.
+Directory407-409: independently authored insignia.386 was copied into a
+disposable diagnostic build only, adding a second VMM _AddInstanceItem
+descriptor for observed NetCDS linear00001e63, length71, ALWAYS_Field.
+Original installed guest and production addon are unchanged. Relative to
+strict failing405, 408 passes two distinct VM directories, 320 callback
+checks and normal Windows exit;409 additionally yields18 guest ticks before
+each callback and also passes. NetCDS page instancing is therefore a
+causally supported repair direction for this test, not an accepted final
+design: the fixed diagnostic address is not production-safe, and first-use
+host =drive synchronization, other drives, variable DOS layouts, VM
+creation/retirement, setup failure and Windows modes remain unproved.
+Evidence artifacts/t481-s3/directory409.json; candidate is not published.
+Directory410 is a disposable test-only insignia.386 derived from407. During
+Device_Init it tries original DOS AH52 through VMM nested V86 execution,
+computes the diagnostic NetCDS address from returned ES plus map offset13f3,
+and rejects unexpected SYSINITVAR BX. The fixed absolute address is removed
+from this experiment; the offset remains identity-bound and is not a product
+design. Binary built successfully. Actual Windows test411 is running as
+owner PID20108; its outcome has not been observed. Do not restart it based
+on an observation timeout. No original guest or released addon changed.
+Directory411 failed: isolated insignia410 nested DOS AH52 during Device_Init
+did not reach the Win3.1 desktop and observer timed out. Original guest
+installation stayed unchanged. The failing VMM call is not identified, so
+do not state that every initialization-stage AH52 is unsupported; do not
+reuse this initialization technique as a product fix. Evidence directory411.json.
+
+Source alternative: original msinit.asm calls CMDSETINFO from DOSDATA DS,
+passing DS:DX = SCS_COMSPEC, before normal command operation. The existing
+session-owned mvdm_command_guest_state records this source location; its
+scs_field accessor canonicalizes the linear address. Original NTDOS.MAP
+places SCS_COMSPEC12fc and NetCDS13f3, difference00f7, but map-derived
+offset and input identity are not a universal DOS ABI. Neither execution
+timing of that registration relative to Device_Init nor a generic way to
+identify NetCDS has yet been established. No new BOP or production offset
+has been added. DOSMGR service declarations alone do not supply the missing
+NetCDS offset.
+Directory415 attempted an isolated BOP54 marker from test-only insignia413
+Device_Init to query existing session SCS location without a DOS call.
+Win3.1 failed to reach the desktop and the expected marker was absent;
+original CMDSETINFO service marker261 did occur earlier. The missing marker
+does not prove Device_Init was reached or registration was unavailable.
+Do not use this ring0 BOP54 instrumentation in production.
+Evidence directory415.json. Diagnostic412 first failed due to an unavailable
+test include; the corrected test-only declaration built in414.
+Directory418: test-only insignia417 uses the existing BOP B1 mechanism to
+observe session SCS registration during Device_Init. It succeeds with
+canonical SCS01d6:000c (linear1d6c), and the pinned map's 0xf7 delta gives
+observed NetCDS1e63. Strict distinct-directory test,320 callback checks and
+normal Windows exit pass. This tests availability, not a product ABI or a
+generic DOS layout. Shared =drive environment and lifecycle remain open.
+Evidence directory418.json. BOP54 experiment415 was an invalid approach.
+Directory421/423 tests a diagnostic BOP B1 returning the existing session's
+registered SCS linear address plus pinned NTDOS map delta0xf7; addon derives
+its instance address at runtime. First421 failed after the addon allowed an
+intervening VMM service to overwrite EDX before saving the result. The
+corrected test-only addon422 saves it immediately;423 passes strict dual-VM
+directory assertions, 18-tick guest yields,320 callback checks and normal
+Windows exit. Original guest installation unchanged. This is not yet a
+production ABI: the delta is identity-specific, and shared host drive state,
+initial synchronization, other DOS layouts and VM lifecycle remain open.
+Evidence directory423.json. No candidate published.
+Directory425-429 eliminates the prior fixed0xf7 delta in the diagnostic
+provider. Original NTDOS lmstub.asm DOSWOWDATA declares lpCDSBuffer as
+OFFSET DOSDATA:NetCDS, and msinit.asm passes DS:SI to DEMSETDTALOCATION.
+Original demSetDTALocation already reads this same structure for lpSftAddr.
+Diagnostic426 observes actual DS:SI=00a7:1482, lpCDSBuffer=000013f3,
+and derives linear1e63 from DS and the original offset. This address remains
+available at Device_Init. Test-only provider428 returns that value directly;
+429 passes strict dual-VM distinct directories, 18-tick guest yields,320
+callback checks and normal Windows exit. Original guest unchanged. The test
+observer retains a process-global numeric value; production must instead
+honor session and guest-memory epoch lifetime, avoid copying private guest
+data, and propagate absent/invalid registration without fabricating success.
+Shared =drive environment, first-use/other-drive state, VM lifecycle and
+font-bank failure remain unverified. Evidence directory429.json.
+### Owner-frozen remaining scope
+
+Owner directs the remaining work in this order: (1) determine and correct
+the actual font-bank cause; (2) implement directory isolation without fixed
+addresses, preserving the original DOSWOWDATA contract and VM lifecycle;
+(3) qualify all candidates together with Win3.1, Win95 and full regression.
+Coverage expansion without evidence of a current functional defect is
+recorded as a boundary instead of recursively expanding this work. Actual
+known defects and failed acceptance remain open; passing a narrow case does
+not replace the combined qualification or authorize publication.
+Owner freezes remaining work to actual font cause, address-independent
+directory isolation and combined Win3.1/Win95/full qualification. Font431
+changes both previously observed VGA differences together (GC read plane2 and
+sequencer mode07); second bank still reads0, Windows exits normally.
+This excludes their combination in this control, not unmeasured register or
+VMM mode effects. Direct guest MOV passes but original load_font calls
+low_set_mode(FONT_LOAD_MODE) then restores a full BIOS mode; compare that
+whole transition before proposing a fix. Evidence font431.json.
+Font433 substitutes only diagnostic font-plane setup for the original initial mode switch while retaining original mode restore; bank1 still reads zero and Windows exits. Font435 also omits the restore, but Windows exits 0xc0000374 before the desktop: this is an invalid font-bank comparison, not a proposed fix. Evidence font435.json. Production mirror remains unchanged by these controls.
+
+Font437 captured paging before/after BIOS writes: bank0 PTE 003d0e00->003d1e67 reads back 3c; bank1 000c3e00->000c3267 reads back 00 after writing 3c. The mappings differ, but no evidence yet proves why or compares guest direct writes in the same VM context. Evidence font437.json; this is not a runtime fix.
+
+Font439 guest linear MOV control passes and samples both bank PTEs to RAM (0032ce67 and 0032fe67 in one observed VM); font437 BIOS bank1 PTE is 000c3267 and SAS type 2 is ROM. Original phy_w8 discards ROM writes. This establishes why that observed BIOS write does not persist but not why VMM chooses the mapping. ios.c defines VIRTUALISATION and outb invokes IOVirtualised: do not claim BIOS port operations simply bypass the VMM. Evidence font437.json and font439.json.
+
+Font441 observes unchanged CR3 001de000 and CS:DS f000:0c56 across a bank1 BIOS store in one VM, so those particular before/after PTEs are from the same page-table root. Windows exits normally but the overall probe fails detached continuation state; do not treat it as a passing functional case or exclude changes to PTE entries. Evidence font441.json.
+
+Font443 changes the five diagnostic font-plane index/data accesses to the same 16-bit OUT width used by the successful guest MOV control; bank1 still reads 00 after writing 3c. This rules out this width substitution as a sufficient fix, not all VMM state differences. Windows exits normally; the overall witness also fails detached continuation state. Evidence font443.json. No production video-source change.
+
+Font444 completes the reverse width control: ordinary guest uses the same five byte OUT pairs yet reads both banks correctly (A 3c/3c, B 66/66), 320 checks and normal Windows exit. Together with font443, differing instruction width is not sufficient to explain the BIOS/guest result. Evidence font443.json and font444.json; original guest and production runtime unchanged.
+
+Font447 test-only relocation of VGA byte helpers into witness code registered segment 0c56 and showed an early bank1 write/read 66/00, but runtime timed out without normal exit. This intervention is invalid as a conclusive location test; no claim that helper segment is irrelevant or safe. Evidence font447.json. No production or original guest change.
+
+Font448 preloads opposite role values by real guest MOV, disables further direct stores, then invokes BIOS control loads: A expects 3c but final guest reads 66/00; B expects 66 but reads 3c/00. Both exit Windows normally, witness fails before identity as designed. Pre-touch return itself was not independently asserted (role restore changes flags); no claim beyond recorded bytes and BIOS-stage trace. Evidence font448.json. This shows immediate BIOS bank0 readback does not establish persistence into subsequent guest-visible mapping; both mappings need investigation.
+
+Font451 observes mode restore invalidating both font-aperture PTEs: one sample bank0 0032ce07->0032ce00 and bank1 000c3267->000c3e00. This agrees with font448: data visible during the BIOS mode is not necessarily visible when the DOS VM remaps the aperture. The early witness includes an unmatched diagnostic marker and fails before identity validation; mode instrumentation and original guest remain unchanged. Why VMM selects ROM remains unproved. Evidence font451.json.
+
+Font452 source comparison: pinned non-installed VDD reference explicitly distinguishes INT10 font mode from direct-programmed font mode and may map a null page during nested mode set or illegal page mappings. This is consistent with observed ROM/zero mapping and PTE invalidation, but is not evidence that installed V7VDD takes that branch or that C3000 is its null page. No reference source imported. Evidence font452.json.
+
+Font454 queried _GetNulPageHandle then _PageGetSizeAddr in an isolated VxD; returned size ffffffff, EDX 80604000 translates to 0015f000. Because the special null handle may not be accepted by PageGetSizeAddr, this is inconclusive and cannot identify or exclude C3000. Normal Windows exit; early font witness still fails. Evidence font454.json.
+
+Font458 maps the actual original VMM _GetNulPageHandle into an isolated allocated V86 page: linear 7000 translates to 7000 before and 15f000 after. Thus this VMM null handle's page is not the observed BIOS bank1 C3000 mapping. Return convention ffffffff remains unverified but the mapping change is directly observed; no original guest change. Early font witness still fails before identity. Evidence font458.json. Reference VDD null-page branch is not the cause established by this test.
+
+CORRECTION font463: in the same Win3.1 instance _GetNulPageHandle returned 8000ce64, and the installed V7VDD immediately mapped exactly 8000ce64 into A4 before each failed bank1 store, with resulting PTE 000c3267. Therefore font458 cannot exclude a null mapping; its different observed physical page may reflect parameters/context or stale translation and the earlier exclusion is withdrawn. Hook observes original service calls only; offset/flags and physical discrepancy remain open. Windows exited normally; full witness fails early. Evidence font463.json.
+
+Font465 same-instance observation: null handle 8000ce64 maps isolated page 7000 to 15f000; installed V7VDD requests handle 8000ce64 into page A4 with count1, offset0, flags0 in each failing DOS VM, yet PTE after the nested write is c3267 and readback 00. Hook observes request entry only: service result and timing are not established, and VM/context differ. Windows exits normally; early font witness fails before identity. Evidence font465.json.
+
+Font469 observes raw PTE at _MapIntoV86 service return: same null handle/offset0/flags0 returns ffffffff with scratch system-VM page 7000 PTE 0015f207 but DOS font page A4 PTE 000c3207 immediately on return. The C3000 mapping is already present at service return, not a later PTE rewrite. Return hook forwards through existing chain using copied args; verify with a nonwrapped control before attributing implementation owner. Windows exits normally; full witness fails early. Evidence font469.json.
+
+Font471 same-DOS-VM scratch mapping attempt returned 0 and no translation for linear7000 (PTE c3c26 not present); therefore it cannot compare the null backing page within that DOS VM. This is an inconclusive isolated control, not a product failure or proof of a mapping cause. Windows exits normally; early font witness fails. Evidence font471.json.
+
+Directory472 failed before compilation because cmd.exe interpreted a forward-slash script path; directory473 uses the corrected path, completes cached x86 build, shared tests 14/14, mvdm-vm-notification 1/1 including the new ring0/result checks, and builds the authored insignia.386 candidate. New production candidate retains DOSWOWDATA by session/memory epochs, resolves current lpCDSBuffer with a short lease, and passes the address/sizeof(CDS) over existing BOP to VMM _AddInstanceItem. This is not yet guest qualification or publication. Diagnostic474 is being built for the strict dual-VM directory witness. Evidence and hashes pending.
+
+Directory480 passes strict distinct-directory dual DOS-VM test with production dynamic DOSWOWDATA query, 18 guest ticks, 320 callback checks and normal Windows exit; original installation unchanged. Updated insignia candidate also checks zero-failure returns from both _AddInstanceItem calls. Scalar478 real session fixture passes registration-before-SCS, live far-pointer segment, session isolation and expired memory epoch; unrelated PIF branch is an aborting test-only substitute. Notification BOP unit test covers ring0 and missing registration. This proves only the pinned NTDOS diagnostic continuation case, not all layouts, native process behavior or Win95. Evidence directory480.json. Font mapping failure remains open; no publication.
+
+Production-shaped isolated Win3.1 matrix481 passes std/386 x DOSONLY0/1, all four reach correct mode and exit normally with candidate host and insignia479; source installation hash checks pass. This is startup/exit evidence only, not editor interaction, full font fidelity, Win95 or Full. Evidence production481.json. No default publication.
+
+Font483 pins installed V7VDD.386 SHA256 909a5e6c313daf4de4559171e211ef9ae7c5f15d10194f091a91be8a352f0275 and extracts its LE objects read-only. The original VMM mapping hook's immediate return address 80017052 is shared across different map handles, so it is a common dispatch boundary, not a proven V7VDD decision site. Evidence font483.json. No installed guest changes.
+
+Editor484 fails before W31CHECK/desktop witness with runtime observer timeout; no menu assertions run. Installation root O:/tmp/m481editor484 is longer than previous passing O:/tmp/m481e321; this is an unproved difference, not a diagnosis. Original source untouched; previous processes ended. Evidence editor484.json. Editor487 repeats with prior 8.3-style short path.
+
+Editor487 with short install path gets both editors, DOS File/Exit menu, but native Edit rather than File and times out; no normal exit. Cleanup found test EDIT PID36640 holding the isolated nthook64; its identity was verified and process closed. Long-path editor484 had previously timed out before guest witness; short path alone is not a fix. Old complete candidate editor490 is running as same-environment comparison. Evidence editor487.json.
+
+Editor490 same-environment prior host/addons baseline passes both editor menus, both saved files, guest mouse Exit and normal Windows exit; evidence editor490.json. Editor491 was an invalid new Insignia/old host combination because old host lacks BOP operation6; it failed normal exit and cannot isolate regression. Editor492 now compares current host against prior ntvdm64.386 and Insignia.386. No candidate accepted.
+
+CORRECTION: diagnostic474/package474 used by directory475/480 and editor487/492 accidentally interposes build-only ega_mode_probe432 font-mode experiment, not the original video implementation. The distinct-directory observations remain observations under that altered link, not production-video qualification; editor failures under package474 cannot be attributed to the production host candidate. Production481 used actual production NTVDM 9cf31b... and remains valid for four-mode startup/exit. Rebuild diagnostic with original video observer before relying on the directory or editor guest checks. User reproduction runs deployed NTVDM 4a0678... (same as r320-package) and installed O:/w31/PATCH/NTVDM64.386 d5f6b1..., different from published addon f9804f..., with no explicit Insignia entry in SYSTEM.INI. These are configuration facts, not yet a root-cause finding.
+
+Directory498 supersedes directory480 for the original video implementation: dynamic DOSWOWDATA NetCDS location, strict two-VM directory/yield witness, 320 callback checks and normal Windows exit pass. This remains a diagnostic continuation with one NTDOS identity. Evidence artifacts/t481-s3/directory498.json.
+
+Editors499-501 with original video observer pass real Win3.1 EDIT.EXE and EDIT.COM keyboard, menu, guest mouse Exit and saved-content checks in both exit orders; DOSONLY=1 guest EDIT and native rejection pass with normal exit. These are diagnostic-host observations, not Full or Win95 qualification. Evidence artifacts/t481-s3/editor499.json.
+
+Owner requested immediate manual-test candidate publication. Package481 was staged with 11 host images and synchronized to assets/release and O:/winnt/system32 with manifest/hash verification. Authored ntvdm64.386 and insignia.386 were published to assets/release and installed in O:/w31/PATCH, with Insignia enabled in SYSTEM.INI; prior files/configuration were backed up under build/t481-s3/w31-install-backup502. Publication502 is a candidate: the owner's illegal-instruction dialog has not been reproduced or diagnosed, and Win95 and Full are not qualified. It does not close S3.
+
+Owner reports actual MS-DOS Prompt immediately raises a Win3.1 invalid-instruction integrity dialog. Before candidate publication the installed host NTVDM was 4a0678... and NTVDM64.386 was d5f6b1..., without configured Insignia. Two isolated probes using those bytes saw the prompt but did not capture a #32770 dialog; startup-PIF probe exited normally, while post-desktop WinExec-PIF probe failed normal exit after its own WM_CLOSE. Dialog class matching and the latter close path are not validated against the user report. The report remains unresolved, not refuted by either probe. Evidence artifacts/t481-s3/prompt-regression502.json.
+
+Owner reports manual validation on the newly published candidate: both EDIT.EXE and EDIT.COM work in the Win3.1 MS-DOS prompt. This is an owner observation, not a claim about untested fonts or Win95. Full503 runs against a fresh-identity copy of the published package; all PE package-identity resources necessarily differ from published binaries. The test must be evaluated as behavior of the identity-adjusted copy, not exact byte-identical package qualification.
+
+Full503 on a fresh-identity candidate copy passed seven gates and failed version-negatives before execution: the direct test caller omitted OPENNT_BROKER_PRODUCT_BUILD, so fixture compilation searched the staged package for service.h instead of the actual service build tree. This is a caller-configuration failure, not a product pass; remaining gates did not run. Full504 reruns the entire suite with the existing successful service build directory. Evidence artifacts/t481-s3/full503.json.
+
+Owner disposition: the earlier MS-DOS Prompt invalid-instruction dialog is attributed to the incomplete prior driver configuration. The current candidate installs and enables both authored drivers, and the owner manually verified EDIT.EXE and EDIT.COM in the prompt. Do not continue a separate investigation of that historical dialog; this disposition is the owner's determination, not a traced exception-level root-cause proof.
+
+Full504 passes 16/16 gates on the complete candidate package with a fresh PE package identity to isolate the owner's active session. It is behavioral evidence for the identity-adjusted copy, not byte-identity proof for the published images. Previous full503 failed only due to test caller configuration; full504 re-ran the full suite with the correct build tree. Evidence artifacts/t481-s3/full504.json. Font bank cause and Win95 remain open.
+
+Font508/509 read-only caller attribution: sampled runtime instruction bytes match the installed V7VDD object 1 at offsets 0x0f72 and 0x11f0 (run509 base 8001615c). At the null mapping, the observed V7VDD instance flags are 00400090, its ordinary page handle is 804023a8 and the requested handle is the VMM null handle 8000ce64. The actual instructions at offsets 0x0f9f-0x0fc4 select the null handle on a sign-marked page with instance bit 0x10; this narrows the observed path but does not establish why that state arose or equate it to a different VDD version's bit definitions. Windows exited normally; the early intentional font witness still fails. Test-only diagnostic BOP numbering conflict was corrected; original guest and production code were not changed. Evidence artifacts/t481-s3/font509.json.
+
+Font509 follow-up disassembly of the actual installed V7VDD finds the observed 0x10 state set at object1:2a47 and cleared at 2adf; this path inspects client AH=11h at 2a7f, consistent with the video/font mode operation. The null-map routine checks a negative page entry and this bit before selecting the null handle. This links the symptom to the VDD mode-transition interval, but does not yet prove the upstream state cause or authorize bypassing the VM mapping. Evidence artifacts/t481-s3/font509.json.
+
+Font510 attempts a narrow test-only direct guest comparison: bank0 scalar MOV, bank1 REP STOSB per glyph. The enhanced Windows desktop appeared, but the runtime observer timed out without normal exit; therefore no font or REP correctness conclusion can be drawn. It also is not the prior helper's REP MOVSB instruction. Original installation bytes remained unchanged. Evidence artifacts/t481-s3/font510.json. No product CCPU or guest-image modification followed.
+
+Font511 repeats font510 with the same current package, addon, flags, isolated source and test path, but uses the original scalar MOV stores. It passes both banks to offset 8175 in two VMs, 320 callback checks and normal Windows exit; font510 REP STOSB variant timed out. This is a controlled difference, not proof of a CCPU defect or the prior REP MOVSB helper failure. Evidence artifacts/t481-s3/font511.json.
+
+Correction font510/511: manual inspection of the original 86-byte A.BIN and B.BIN with the same offsets used by verify-win31-identity.ps1 proves font510 reached and passed the full font checks in both VMs (A 60/60, B 102/102, height16, final offset8175), each with 160 callbacks and three continuations, zero errors. Its overall run still fails because Windows did not exit before the observer deadline. Thus font510 does not show REP STOSB font writes fail; the exit timeout remains unclassified. Artifacts font510.json and font511.json corrected; raw output is retained.
+
+Font512 uses the same current diagnostic host, authored addons, guest installation and strict witness as font511, but changes bank1 writes to REP MOVSB with a role-specific 16-byte source. Both VMs read both banks through offset8175, 320 callback checks and normal Windows exit pass. Therefore REP MOVSB itself is not sufficient to reproduce the previous nested helper's failure; the guest-issued versus nested-execution/mapping context remains distinct. Original installation unchanged; no production font-transfer acceptance. Evidence artifacts/t481-s3/font512.json.
+
+Font514/515 compare A5000 mapping events using the same observer and host: the historical nested helper fails bank1 at offset4096; guest-issued REP MOVSB passes both banks in both VMs. Both observations contain null and ordinary handle mappings (nested 2/16, guest 14/8), so the mere presence of a null mapping is not sufficient to explain the failed font transfer. Events are not yet tied to the exact store, and addon implementations differ intentionally. Normal Windows exit and original installation hashes pass in both runs; font514 integration remains failed. Evidence artifacts/t481-s3/font515.json.
+
+Font516/517 target the historical virtual writer at bank1 offset4096: immediately after REP MOVSB, the mapped A5000 physical page contains expected glyph data; later guest readback in the same CR3 resolves A5000 to a different zero page. Font518 guest direct write/read uses the same physical page and succeeds. Font519 shows omitting BIOS 1103 after writes avoids loss, and font520 preserves 1103 by moving it before virtual writes; same-valued banks pass both VMs with normal exit. BIOS-only reorder521 still fails. Candidate522 merges the virtual writer and ordering with current geometry checks and passes same-valued two-bank readback, but differing-bank control524/525 aborts before guest result (error995); 526 reproduces with original witness, so the candidate remains unqualified. Neither the product source nor published artifacts contain candidate522. Evidence artifacts/t481-s3/font526.json.
+
+Font527 shows that changing both banks to the same alternate byte pattern also aborts before guest witness output; bank inequality alone is therefore not established as the cause. Font528/529/531/532 test-only instrumentation sees bank0 helper enter and copy completely, bank1 data copy and VMM Simulate_Far_Call return, and identical helper code bytes at both calls; the second helper entry is not seen before VM retirement. The exact VMM client frame and effects of instrumentation on flags/scheduling remain unproved. Candidate522 remains unqualified. Evidence artifacts/t481-s3/font532.json.
+
+Font534/539 resolve the tested bank defect with the original VMM CX:EDX Simulate_Far_Call contract (historical helper had incorrectly supplied the target in EAX). Guest client EIP 0010 had confirmed the wrong target; correct offset 2000 enters the helper irrespective of glyph data. Apply BIOS 1103 font selection before virtual writes so subsequent bank mappings retain them; keep geometry validation. Formal VIDEO_DISTINCT_FONTS regression uses different bank data in each VM: A=3c/5a, B=66/a5, all glyph rows through offset8175, 320 callbacks and normal Windows exit. Original guest untouched. Source is integrated in NTVDM64.386, build538 is byte-identical to passing candidate534. EDIT.EXE/EDIT.COM both orders and DOSONLY1 pass editors535-537. Evidence artifacts/t481-s3/font539.json; geometry and Win95 still pending.
+
+Resize540/543/547: the 80x50 visible-console witness fails before handing the requested geometry to the guest. A test-only diagnostic of the native fixture identifies SetConsoleWindowInfo returning ERROR_INVALID_PARAMETER (87); GetLargestConsoleWindowSize reports 106x31, with an 80x50 backing buffer. The previous driver reproduces the same failure, so this does not establish a regression in the new font driver. The Windows 3.1 desktop reached normal exit. Actual visible 80x50 guest handoff remains unverified on this desktop. The test harness now retains the process-scoped PowerShell execution policy when sanitizing its environment, so it can run its nested integration script under the documented per-process policy.
+Resize548 uses the same current driver and isolated package with an 80x50 backing buffer and a 25-row visible window supported by the actual host. Both DOS VMs complete native 54:08/54:0A continuation, 320 identity/stack/register/flags checks and Win3.1 normal exit; original installation bytes remain unchanged. This verifies the supported geometry, not the unavailable 50-row-visible path.
+Qualification549 stages the current 11 host images and driver538; Win3.1 std/386 x DOSONLY0/1 passes with normal exit. Full549 passes 16/16 gates using a fresh package identity (behavioral evidence for the staged package, not byte-identity proof for published files). Resize548 passes 80x50 backing with 25 visible rows; visible 50 rows is unverified because the host maximum is 31. Win95550 loads the current VxD but its current default DOS witness produces no VM output; Win95551 and 552 reproduce the same issue using a historical VxD and then both historical host and VxD. Win95553/554 substitute the identical previously successful DOS witness binary: both historical and current host/VxD combinations pass two concurrent VM identity and 320 callback checks. Win95554 observer exits with code 1, so normal Win95 exit and real input/output remain unproved. Original Win95 installation is unchanged. Evidence artifacts/t481-s3/qualification549.json.
+Win95555/556 correct the old Win95 harness for the current DOS identity witness: fill the A/B role and PAIR.KEY placeholders, then validate its 72-byte result. Both VMs now write results: counted waits pass (3/0 in each), notification counters and IRQ checks pass, A reports successful cross-VM wait, but B reports one cross-VM assertion failure. Instrumented Win95556 records CF clear and ECX=1: the driver reports its own wait flag, while the probe's required VMM CB_VM_Status bit 0x400 is not set on this Win95 run. This does not demonstrate a lost wake: A resumed and passed; it also does not prove the VM was actually blocked at signal time. Win3.1 checked the 0x401 combination. The Win95 status-bit interpretation and actual blocked-wait coverage remain unproved; no product behavior or assertion was changed. Historical 44-byte witness passes but does not check this newer contract. Original Win95 installation hashes remain unchanged.
+Win95557 observes complete VMM status 0x2 (background) while the driver waiting flag is set; no 0x400 bit was observed. Win95558 tests a separate observable-order contract: B verifies A has not produced its completion before the signal; A then completes, both counted waits, cross-VM order and PIC notification checks pass. It does not assert the kernel blocked bit or replace the Win3.1 0x401 test. The same test-only fixture is now in dos-identity.asm under WIN95_ORDERED_PROOF; its compiled bytes match the passing witness SHA-256. Win95 observer exits with code 1, so a normal guest shutdown and real Win95 command I/O remain unproved.
+Win95559/561 attempt the existing two-VM REAL_COMMAND witness under Win95 using the Win3.1 diagnostic host. They time out before a command-submission event or result files. Win95562 removes diagnostic-only guest BOP markers and still times out; Win95563 uses guest DOS file stage markers and neither VM writes its entry marker. Win95564 repeats the same fixture under the historical host and VxD and has the same missing markers; original installation remains unchanged. This demonstrates the present fixture/setup has no validated Win95 command coverage and does not establish a regression in the candidate. No normal Win95 exit or real command I/O is claimed; the failure is not reclassified as a product success.
+Win95566/568/569 padding controls show a 3033-byte DOS witness was blocked by Win95 conventional-memory configuration; 2048- and 2049-byte controls pass, so no 2048-byte threshold is asserted. The Win95 guest window displayed an insufficient conventional memory dialog. Win95573 sets 128 KiB minimum and 640 KiB maximum in both standard and Win386 sections of the test PIF, checks the PIF checksum, and both guest batches reach their DONE markers; their native stdout files remain empty. A temporary PowerShell assertion mistakenly treated null content as passing; that PASS is invalid. Win95574 fixes the assertion and fails. Win95575 shows the exact guest message "Incorrect DOS version" when invoking the native command. The OpenNT COMMAND.COM binary contains that message and its original init.asm requires an exact INT 21h GET_VERSION match, but the actual emitting image has not been identified; do not assert this as the cause of the empty output yet. The native command path has not been proved on Win95, and original installation files remain unchanged.
+Candidate579 publishes the eleven-image package549 and its exact manifest to assets/release and O:/winnt/system32, installs driver538 NTVDM64.386 and insignia479 into O:/w31/PATCH, and records the Win95 VXD separately in addon-manifest.json. All destination hashes were checked after copy; O:/w31/SYSTEM.INI retained its pre-existing hash and addon configuration. Prior files are recoverable under build/t481-s3/publication-backup579. This publication is a user-test candidate, not S3 closure: Win95 real host-command output remains failing/unresolved and the full 50-visible-row path was unavailable on the current host. Evidence artifacts/t481-s3/publication579.json and qualification549.json.

@@ -1,0 +1,18 @@
+{
+  "result": "FAIL",
+  "trace_sha256": "BA56C429E7D74783F85AFE5A5FB92921DAB0F8710791529853AA8BF8D89415E7",
+  "normal_windows_exit": true,
+  "sample": {
+    "ds": "0c56",
+    "bank1_before_cr3": "001de000",
+    "bank1_after_cr3": "001de000",
+    "cs": "f000"
+  },
+  "run": "video441",
+  "limits": [
+    "Full witness also failed detached continuation state; evidence limited to sampled store",
+    "Constant CR3 does not rule out page-table changes or guest VM identity issues"
+  ],
+  "task": "T481 S3",
+  "control": "diagnostic font setup and CR3/CS/DS sampled around original BIOS store"
+}

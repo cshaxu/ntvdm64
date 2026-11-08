@@ -42,11 +42,17 @@ param(
  [ValidateSet('A','B')][string]$FirstCommand='A',
  [switch]$TraceContinuation,
  [switch]$VideoApplication,
+ [switch]$VideoDistinctFonts,
+ [switch]$VideoShortFont,
  [switch]$VideoFontControl,
+ [switch]$VideoFontEarlyControl,
  [switch]$VideoFontDirectControl,
+ [switch]$VideoFontLinearControl,
  [switch]$FullscreenVmControl,
  [switch]$DeferredContinuation,
  [switch]$DirectoryYield,
+ [switch]$DirectoryNetCds,
+ [switch]$DirectorySnapshotControl,
  [switch]$LocalDirectoryControl,
  [string]$DosWitnessImage
 )
@@ -75,11 +81,14 @@ if($Reuse -and $RetirementDriver -and !$RetireCommand){throw 'Combined reuse req
 if($InitializationFailure -and ($Reuse -or $RetirementDriver)){throw 'Initialization failure is a separate witness'}
 if($Continuation -and ($InitializationFailure -or $Reuse -or $RetirementDriver)){throw 'Continuation is a separate witness'}
 if($VideoApplication -and !$Continuation){throw 'VIDEO application requires continuation witness'}
+if($VideoDistinctFonts -and (!$VideoApplication -or $VideoFontControl -or $VideoFontDirectControl)){throw 'Distinct fonts require the addon VIDEO path'}
+if($VideoShortFont -and (!$VideoApplication -or $VideoFontControl -or $VideoFontDirectControl)){throw 'Short VIDEO font requires real addon application without font-control substitutes'}
 if($VideoFontControl -and !$VideoApplication){throw 'Font control requires VIDEO application; it is not driver font acceptance'}
 if($VideoFontDirectControl -and (!$VideoApplication -or $VideoFontControl)){throw 'Direct font control requires VIDEO application and excludes BIOS control'}
 if($FullscreenVmControl -and !$VideoApplication -and !$GuestGridControl){throw 'Fullscreen control requires VIDEO or guest grid witness; it is not windowed acceptance'}
 if($TraceContinuation -and !$Continuation){throw 'Continuation tracing requires its witness'}
 if($DeferredContinuation -and !$Continuation){throw 'Deferred completion requires its witness'}
+if($DirectorySnapshotControl -and (!$Continuation -or $RealCommand)){throw 'Directory snapshot control requires diagnostic continuation'}
 if($DirectoryYield -and (!$Continuation -or $DeferredContinuation)){throw 'Directory yield control requires immediate continuation'}
 if($Keyboard -and ($InitializationFailure -or $Reuse -or $RetirementDriver)){throw 'Keyboard calibration requires ordinary identity witnesses'}
 if($Keyboard -and !$InterruptObserver){throw 'Keyboard calibration requires the diagnostic interrupt observer and host package'}
@@ -125,12 +134,17 @@ if($OrderedCommandImage){
  Copy-Item -LiteralPath $OrderedCommandImage -Destination "$dest/PATCH/ORDER.EXE"
 }
 if($DirectoryYield){$dosDefines+='-DDIRECTORY_YIELD=1'}
+if($DirectoryNetCds){if((Get-FileHash (Join-Path $PackageRoot 'system32/NTDOS.SYS')).Hash -ne '957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84'){throw 'Unexpected NTDOS identity'};$dosDefines+='-DDIRECTORY_NETCDS=1'}
 if($Keyboard){$dosDefines+='-DKEYBOARD=1'}
 if($BlockedKeyboard){$dosDefines+='-DBLOCKED_KEYBOARD=1'}
 if($ConsumeKeyboard){$dosDefines+='-DCONSUME_KEYBOARD=1'}
 if($VideoApplication){$dosDefines+='-DVIDEO_APPLICATION=1'}
+if($VideoDistinctFonts){$dosDefines+='-DVIDEO_DISTINCT_FONTS=1'}
+if($VideoShortFont){$dosDefines+='-DVIDEO_SHORT_FONT=1'}
 if($VideoFontControl){$dosDefines+='-DVIDEO_FONT_CONTROL=1'}
+if($VideoFontEarlyControl){if(!$VideoFontControl -and !$VideoFontDirectControl){throw 'Early font control requires a font control'};$dosDefines+='-DVIDEO_FONT_EARLY_CONTROL=1'}
 if($VideoFontDirectControl){$dosDefines+='-DVIDEO_FONT_DIRECT_CONTROL=1'}
+if($VideoFontLinearControl){if(!$VideoFontDirectControl){throw 'Linear control requires direct font control'};$dosDefines+='-DVIDEO_FONT_LINEAR_CONTROL=1'}
 if($DosWitnessImage){
  Copy-Item -LiteralPath (Resolve-Path -LiteralPath $DosWitnessImage).Path -Destination "$task/identity.com"
 } else {
@@ -146,7 +160,9 @@ if($LocalDirectoryControl){
 }
 foreach($id in 'A','B'){
  $directory="$dest\PATCH"
- if($Continuation){$directory="$directoryRoot\V$id";New-Item -ItemType Directory -Path $directory|Out-Null}
+ # Font/application isolation control uses a shared, stable working directory.
+ # The default VA/VB contract remains a separate strict directory test.
+ if($Continuation -and !$DirectorySnapshotControl){$directory="$directoryRoot\V$id";New-Item -ItemType Directory -Path $directory|Out-Null}
  $bytes=[IO.File]::ReadAllBytes("$task/identity.com")
  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_IDENTITY_RESULT@')
  if($marker -lt 0){throw 'No output marker'}
@@ -282,7 +298,7 @@ foreach($field in $fields){
  [Array]::Copy($value,0,$bytes,$offset,$value.Length)
 }
 [IO.File]::WriteAllBytes("$task/controller.exe",$bytes)
-$keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS')
+$keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
 $nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
 $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
@@ -297,7 +313,10 @@ if($InterruptObserver){$env:MVDM_INTERRUPT_OBSERVATION='1'}
 if($BlockedKeyboard){$env:MVDM_BLOCKED_KEYBOARD='1'}
 if($ConsumeKeyboard){$env:MVDM_CONSUME_KEYBOARD='1'}
 if($VideoApplication){$env:MVDM_VIDEO_APPLICATION='1'}
+if($VideoDistinctFonts){$env:MVDM_VIDEO_DISTINCT_FONTS='1'}
 if($DeferredContinuation){$env:MVDM_CONTINUATION_DEFER='1'}
+if($DirectoryNetCds){$env:MVDM_DIRECTORY_NETCDS='1'}
+if($DirectorySnapshotControl){$env:MVDM_DIRECTORY_SNAPSHOT='1'}
 if($LocalDirectoryControl){$env:MVDM_CONTINUATION_LOCAL='1'}
 if($DosWitnessImage){$env:MVDM_SCREEN_UNSEEDED='1'}
 function Confirm-Reuse($rows){

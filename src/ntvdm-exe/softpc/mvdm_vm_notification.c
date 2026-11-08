@@ -5,6 +5,7 @@
 #include "mvdm_vm_ingress.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
+#include "ntvdm-exe/command/include/mvdm_command_guest_directory.h"
 
 /* Original NT VDD/ICA ABI. Avoid importing historical CPU selection macros
  * into this host-owned component. Register/remove are serialized by ICA. */
@@ -164,6 +165,10 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         }
         host_ica_unlock();
         break;
+    case 6:
+        result->status = mvdm_command_guest_state_directory_instance(
+            &result->serial_low, &result->serial_high) ? ERROR_SUCCESS : ERROR_NOT_READY;
+        return 1;
     case 7: result->status = mvdm_vm_wake_register(vm, serial); break;
     case 8:
         host_ica_lock();

@@ -901,7 +901,7 @@ static void page_domain_store_owned_words(ULONG address, const ULONG *words,
             bytes <= MVDM_SOFTPC_PAGE_BYTES &&
             (address & (MVDM_SOFTPC_PAGE_BYTES - 1u)) <=
                 MVDM_SOFTPC_PAGE_BYTES - bytes) {
-        if (c_getCPL() != 3u) access |= 2u; /* original PG_U */
+        if (c_getCPL() == 3u) access |= 2u; /* PG_U for user access */
         if (c_getVM()) access |= 4u; /* original accessed/dirty handling */
         if (xtrn2phy(address, access, &physical)) {
             CopyMemory(c_GetPhyAdd(physical), words, bytes);

@@ -1,0 +1,20 @@
+{
+  "observed": [
+    "Both editor windows started",
+    "DOS File menu and Exit appeared",
+    "Native Edit menu appeared instead of File; EDIT remained alive",
+    "Runtime observer timed out",
+    "Cleanup hit loaded nthook64; isolated test EDIT PID36640 closed after identity check"
+  ],
+  "result": "FAIL",
+  "screens_sha256": "3ABFAE5CB97AA8F9A0FB6855F06CD85215799F481CB582B8384CA71E48D6C289",
+  "run": "editor487",
+  "normal_windows_exit": false,
+  "task": "T481 S3",
+  "limits": [
+    "The visible menu mismatch does not by itself identify whether product input or automation caused it",
+    "Same-environment historical candidate comparison pending",
+    "Diagnostic host linked test-only altered BIOS font-mode setup; this failure cannot establish a production-host regression"
+  ],
+  "scope": "two editors keyboard/mouse, Native first, actual guest"
+}

@@ -1,0 +1,40 @@
+{
+  "task": "T481 S3",
+  "case": "BIOS scalar paging privilege",
+  "baseline": {
+    "run": "access363e",
+    "cases": 42,
+    "failures": 24,
+    "result": "FAIL"
+  },
+  "candidate": {
+    "run": "access364",
+    "cases": 42,
+    "failures": 0,
+    "result": "PASS"
+  },
+  "implementation": "Six CPL comparisons; original paging, TLB and BIOS fallback retained",
+  "limitations": [
+    "Protected-mode RAM matrix only; Win3.1 V86 font application pending",
+    "No claim of exceptional fallback or cross-page equivalence",
+    "Fixture uses existing fail-closed host boundaries; link warnings are retained"
+  ],
+  "files": [
+    {
+      "path": "build/t481-s3/access363e.err",
+      "sha256": "0179F4CDF9634C72E1F80BE37BFA539A7FF112C1651881C9D1DA4DD5B37176F6"
+    },
+    {
+      "path": "build/t481-s3/access364.err",
+      "sha256": "56ACD09B04F904BBE6FFD7835F0AAB519706E61410914A2902B4B27491F9ACF4"
+    },
+    {
+      "path": "tests/mvdm-host/ccpu_bios_access_test.c",
+      "sha256": "A03C7CA9AEDDF906D33D3182D7A1ADC797FA0460EEE4FECC852CA52428B72626"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "25DFD0EDFE1C142451E50610579F2A2E6722A6F58A8BC65CD02D8E56CC34D20A"
+    }
+  ]
+}

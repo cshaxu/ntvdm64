@@ -26,6 +26,7 @@
 #include <winbase.h>
 #include "demdasd.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "mvdm_command_guest_state.h"
 #line 28
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
@@ -577,6 +578,9 @@ VOID demSetDTALocation (VOID)
         getCX());
 #line 566
 
+    /* DIVERGENCE MVDM-HOST-DIV-892: failed registration invalidates the prior location. */
+    mvdm_command_guest_state_clear_doswow();
+
     /* DIVERGENCE MVDM-HOST-DIV-007: `lpSftAddr` is source numeric data in
      * DOSWOWDATA.  Read it under one short lease, then retain DS:offset;
      * neither DOSWOWDATA nor the SFT chain is retained as a host pointer. */
@@ -587,6 +591,9 @@ VOID demSetDTALocation (VOID)
         if (!mvdm_guest_location_release(&dos_wow_data_lease, FALSE)) {
             memset(&sft_head_location, 0, sizeof(sft_head_location));
         } else {
+            /* DIVERGENCE MVDM-HOST-DIV-892: keep the original DOSWOWDATA
+             * address numerically for the session-bound directory query. */
+            (void)mvdm_command_guest_state_register_doswow(getDS(), getSI());
             (void)mvdm_guest_location_set_real_mode(&sft_head_location,
                 getDS(), (WORD)sft_offset);
         }

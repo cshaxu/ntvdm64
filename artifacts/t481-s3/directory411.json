@@ -1,0 +1,15 @@
+{
+  "task": "T481 S3",
+  "run": "video411",
+  "result": "FAIL",
+  "candidate": "test-only insignia410 invokes DOS AH52 through nested V86 at Device_Init",
+  "outcome": "Win3.1 desktop not reached; observer timed out; original installation unchanged",
+  "limits": [
+    "Exact VMM call at which startup stalled is not known",
+    "Does not prove AH52 is unavailable in all initialization contexts",
+    "Original guest and released addon unchanged"
+  ],
+  "log_sha256": "D9DB8C0A02D4AFA6A2870B270966E70025A605C722A93A37A71CF56B6C7370CD",
+  "trace_sha256": "87BAD2BCC3D5E55EA9A1C4F64CFC574BE30A6BA972BD24602373968D6378E0BC",
+  "addon_sha256": "7BAC78F4BFE49843D5B34E6858C49F04C81C4640038D2B26F8A0920176ADCB68"
+}

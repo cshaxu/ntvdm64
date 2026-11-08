@@ -1,0 +1,24 @@
+{
+  "bank1": {
+    "value_written": 60,
+    "readback": 0,
+    "pte_after": "000c3267",
+    "pte_before": "000c3e00"
+  },
+  "bank0": {
+    "value_written": 60,
+    "readback": 60,
+    "pte_after": "003d1e67",
+    "pte_before": "003d0e00"
+  },
+  "task": "T481 S3",
+  "run": "video437",
+  "result": "FAIL",
+  "limits": [
+    "PTE values are one observed request, not proof of root cause",
+    "Probe reads page tables and VGA registers; does not establish normal guest direct-write mapping"
+  ],
+  "control": "diagnostic font-mode setup, observe page tables immediately after original BIOS SAS store",
+  "normal_windows_exit": true,
+  "trace_sha256": "49630DEB4D3E7057AD7A323E2932108F95F43B2BAF843DA70A4B658CDEC6EED9"
+}

@@ -1,0 +1,15 @@
+{
+  "task": "T481 S3",
+  "run": "full503",
+  "result": "FAILED_TEST_CONFIGURATION",
+  "passed_gates": 7,
+  "failed_gate": "version-negatives",
+  "cause": "Caller failed to set OPENNT_BROKER_PRODUCT_BUILD to the actual service build tree; generated old-app.c could not include service.h.",
+  "evidence": "build/t481-s3/full503/version-negative/build.log",
+  "limits": [
+    "Not a product pass or product failure conclusion",
+    "Remaining gates did not run",
+    "Fresh package identity differs from published PE resources"
+  ],
+  "followup": "full504 uses build/.ninja/msvc-x64-release/service and reruns complete suite"
+}

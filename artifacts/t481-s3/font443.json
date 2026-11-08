@@ -1,0 +1,20 @@
+{
+  "result": "FAIL",
+  "run": "video443",
+  "limits": [
+    "Only five font-plane port operations changed; not identical complete context",
+    "Overall probe also fails detached continuation state"
+  ],
+  "bank1": {
+    "value_written": 60,
+    "readback": 0
+  },
+  "control": "replace BIOS diagnostic five byte-index/data pairs with same five 16-bit OUT operations as successful guest direct control",
+  "bank0": {
+    "value_written": 60,
+    "readback": 60
+  },
+  "normal_windows_exit": true,
+  "task": "T481 S3",
+  "trace_sha256": "91B7A53D2932F6DEDB782B3785EA491EB10325A166B5E1131D66D8B9D2DBCCBB"
+}

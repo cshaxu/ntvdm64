@@ -1,0 +1,17 @@
+{
+  "task": "T481 S3",
+  "run": "video431",
+  "result": "FAIL",
+  "control": "diagnostic BIOS font writes with GC read plane2 and sequencer mode07 simultaneously",
+  "samples": {
+    "height": 8,
+    "bank0": 60,
+    "bank1": 0
+  },
+  "normal_windows_exit": true,
+  "limits": [
+    "Only the two selected VGA settings were changed; other mode state was not equalized",
+    "Test-only interventions; no production repair"
+  ],
+  "trace_sha256": "B13647BD3D497F5643BFD20360BECEC49292BA5BC49360216BB3935EBE8140F5"
+}

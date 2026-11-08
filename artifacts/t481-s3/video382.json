@@ -1,0 +1,23 @@
+{
+  "task": "T481 S3",
+  "run": "video382",
+  "result": "PASS",
+  "control": "Guest writes and reads both font banks before first continuation and after each VIDEO application",
+  "samples_A": [
+    60,
+    60
+  ],
+  "samples_B": [
+    102,
+    102
+  ],
+  "height": 16,
+  "callback_checks": 320,
+  "normal_windows_exit": true,
+  "limits": [
+    "Test explicitly writes both font banks; it does not qualify addon BIOS font application",
+    "Register setup differs from BIOS full mode setup; exact causality unproven"
+  ],
+  "log_sha256": "283AD9EAC1785E08F34AB144D8D96B527D35B6494D1B3B45591BF1A5223B24EA",
+  "trace_sha256": "FF8DF256F41C728011F49C41FC89283811BCFC476D7F42A30DBF103FFBCA44AB"
+}

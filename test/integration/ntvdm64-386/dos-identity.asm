@@ -39,6 +39,15 @@ mov byte [si-1], 'N'
 %endmacro
 push cs
 pop ds
+%ifdef VIDEO_FONT_EARLY_CONTROL
+mov word [video_failure], 2
+%ifdef VIDEO_FONT_CONTROL
+call load_control_fonts
+%endif
+call check_video_fonts
+jc .write
+mov word [video_failure], 0
+%endif
 %ifdef CONTINUATION
 db 0xc4,0xc4,0x54,254
 %endif
@@ -133,6 +142,17 @@ mov ax, 9
 call far [api]
 jc .write
 mov [command_callback], edx
+%ifdef VIDEO_SHORT_FONT
+push es
+mov ax, 0x1112
+xor bx, bx
+int 0x10
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+mov [video_last_row], dl
+pop es
+%endif
 %ifdef GUEST_GRID_CONTROL
 %ifndef GUEST_GRID_SWITCH
 call setup_guest_grid
@@ -222,6 +242,32 @@ mov eax, [es:bx+0x16]           ; original SysInitVars.SYSI_CDS
 mov [directory_cds], eax
 mov al, [es:bx+0x21]            ; original SysInitVars.SYSI_NCDS
 mov [directory_cds_count], al
+%ifdef DIRECTORY_NETCDS
+; NTDOS.SYS/map identity is checked by the diagnostic runner. ES:BX is
+; DOSDATA:SYSINITVAR; this map places NetCDS at DOSDATA:13f3.
+cmp bx, 0x26
+jne %%error
+mov [directory_netcds_segment], es
+push ds
+push es
+pop ds
+mov si, 0x13f3
+push cs
+pop es
+mov di, directory_netcds
+mov cx, 64
+cld
+rep movsb
+pop ds
+pushad
+movzx edx, word [directory_netcds_segment]
+shl edx, 4
+add edx, 0x13f3
+mov eax, 0x4e430000
+mov al, [role]
+db 0xc4,0xc4,0x54,254
+popad
+%endif
 pop es
 ; Distinct real BIOS text per VM, with a nonzero cursor to prove restoration.
 xor bx, bx
@@ -490,6 +536,19 @@ cmp al, bl
 jne %%error
 %endif
 %ifdef VIDEO_APPLICATION
+%ifdef VIDEO_SHORT_FONT
+mov word [video_failure], 3
+push es
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+pop es
+mov [video_height], cx
+cmp cx, 8
+jne %%error
+cmp dl, [video_last_row]
+jne %%error
+%endif
 mov word [video_failure], 1
 mov ax, 0x1015
 mov bx, 7
@@ -755,14 +814,34 @@ int 0x1a
 sub dx, [peer_tick]
 cmp dx, 9
 jb .peer_yield
+%ifdef WIN95_ORDERED_PROOF
+; This Win95 witness checks the observable order separately from the Win3.1
+; VMStat_Blocked assertion: A must not finish before B signals.
+mov dx, peer_result_path
+mov ax, 0x3d00
+int 0x21
+jc .peer_not_completed
+mov bx, ax
+mov ah, 0x3e
+int 0x21
+jmp .pair_error
+.peer_not_completed:
+cmp ax, 2                         ; file not found
+jne .pair_error
+%endif
 mov ebx, [peer_identity]
 mov edx, [peer_identity+4]
 mov esi, [peer_identity+8]
 mov ax, 8                          ; host queue + physical IRQ wakes VM A
 call far [api]
 jc .pair_error
+%ifdef WIN95_ORDERED_PROOF
+test ecx, 1                        ; driver wait entered
+jz .pair_error
+%else
 cmp ecx, 0x401                     ; VMM blocked + driver wait entered
 jne .pair_error
+%endif
 inc word [pair_count]
 jmp .notification
 .pair_error:
@@ -912,6 +991,9 @@ codepage_result: dw 0
 codepage_cell: dw 0
 %endif
 result_end:
+%ifdef VIDEO_SHORT_FONT
+video_last_row: db 0
+%endif
 %ifdef GUEST_GRID_CONTROL
 ; Diagnostic scratch is outside the fixed result record.
 video_sample0: dw 0
@@ -940,6 +1022,10 @@ directory_lol: dd 0
 directory_cds: dd 0
 directory_cds_count: dd 0
 directory_tick: dw 0
+%ifdef DIRECTORY_NETCDS
+directory_netcds: times 64 db 0
+directory_netcds_segment: dw 0
+%endif
 %ifdef VIDEO_APPLICATION
 %define READ_VIDEO_FONTS 1
 %endif
@@ -1068,8 +1154,24 @@ mov cx, 256
 .write_glyph:
 xor bp, bp
 .write_row:
+%ifdef VIDEO_FONT_LINEAR_CONTROL
+; Match the original BIOS fallback's DS=0, 32-bit linear operand.
+movzx edx, si
+movzx eax, bp
+add edx, eax
+add edx, 0xa0000
+push ds
+xor ax, ax
+mov ds, ax
+mov al, bl
+mov [edx], al
+add edx, 0x4000
+mov [edx], al
+pop ds
+%else
 mov [es:si+bp], bl
 mov [es:si+bp+0x4000], bl
+%endif
 inc bp
 cmp bp, [video_height]
 jb .write_row
@@ -1123,7 +1225,16 @@ jne .mismatch
 %else
 cmp [es:si+bp], bl
 jne .mismatch
+%ifdef VIDEO_DISTINCT_FONTS
+mov al, 0x5a
+cmp byte [role], 'A'
+je .distinct_expected
+mov al, 0xa5
+.distinct_expected:
+cmp [es:si+bp+0x4000], al
+%else
 cmp [es:si+bp+0x4000], bl
+%endif
 jne .mismatch
 %endif
 inc bp
@@ -1278,6 +1389,10 @@ output: db '@VM_IDENTITY_RESULT@',0
 times 128-($-output) db 0
 pair_ready: db '@VM_PAIR_READY@',0
 times 128-($-pair_ready) db 0
+%ifdef WIN95_ORDERED_PROOF
+peer_result_path: db '@VM_A_RESULT@',0
+times 128-($-peer_result_path) db 0
+%endif
 %ifdef NESTED_COMMAND
 nested_output: db '@VM_NESTED_OUTPUT@',0
 times 128-($-nested_output) db 0

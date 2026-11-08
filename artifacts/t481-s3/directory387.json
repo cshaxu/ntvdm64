@@ -1,0 +1,32 @@
+{
+  "task": "T481 S3",
+  "run": "video387",
+  "result": "FAIL",
+  "observations": [
+    {
+      "linear": "844043d0",
+      "cr3": "001de000",
+      "role": "B",
+      "physical": "unavailable"
+    },
+    {
+      "linear": "848043d0",
+      "cr3": "001de000",
+      "role": "A",
+      "physical": "000043d0"
+    },
+    {
+      "linear": "844043d0",
+      "cr3": "001de000",
+      "role": "B",
+      "physical": "unavailable"
+    }
+  ],
+  "limits": [
+    "xtrn2phy did not resolve B, so physical page identity cannot be compared",
+    "strict directory assertion failed before normal Win3.1 exit",
+    "diagnostic385 omitted VM base and is invalid evidence"
+  ],
+  "log_sha256": "AAB746E3A01B0347863793BC0E191BC3D4B681C18F9A388ECC06754086CFF3AB",
+  "trace_sha256": "D7B2CFEDB0366A3C024A854B423844BB8D01BB922DAD407A5A9C87AC7EB05523"
+}

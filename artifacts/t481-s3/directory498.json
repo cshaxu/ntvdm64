@@ -1,0 +1,16 @@
+{
+  "task": "T481 S3",
+  "run": "video498",
+  "result": "PASS",
+  "scope": "Two concurrent Win3.1 DOS VMs, dynamic DOSWOWDATA NetCDS location and original VMM AddInstanceItem; original BIOS video implementation",
+  "host_package_sha256": "90E42C83736EC04E82204142B1ED0737B91B6A6C4D94E5141DB95BACE0093825",
+  "addon_sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
+  "trace_sha256": "76A2A158F0B13C99552629F7D449EA137B6C400B842D7A3360D99E034727726B",
+  "callback_checks": 320,
+  "normal_windows_exit": true,
+  "limits": [
+    "Diagnostic command continuations only; not real native process completion",
+    "One pinned NTDOS identity; not all DOS layouts",
+    "Font failure, Win95 and Full remain unqualified"
+  ]
+}

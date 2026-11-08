@@ -1,0 +1,20 @@
+{
+  "task": "T481 S3",
+  "run": "editors499-501",
+  "result": "PASS",
+  "scope": "Original video implementation, two actual Win3.1 DOS prompt VMs, native EDIT.EXE and DOS EDIT.COM, keyboard/menu and guest mouse Exit, native-first and DOS-first; DOSONLY=1 DOS editor and native rejection",
+  "cases": [
+    "editor499 native-first",
+    "editor500 DOS-first",
+    "editor501 DOSONLY=1"
+  ],
+  "normal_windows_exit": true,
+  "package_host_sha256": "90E42C83736EC04E82204142B1ED0737B91B6A6C4D94E5141DB95BACE0093825",
+  "ntvdm64_sha256": "BBE11E722FB57510AFE57515100739339BC6CF10A014CDC35EB33733008E838C",
+  "insignia_sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
+  "limits": [
+    "Diagnostic host observer; not a Full regression",
+    "Does not resolve reported illegal-instruction dialog",
+    "Win95 and full regression remain unqualified"
+  ]
+}

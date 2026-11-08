@@ -1,0 +1,35 @@
+{
+  "task": "T481 S3",
+  "candidate": "test-only derived insignia.386",
+  "fixed_linear_address": "00001e63",
+  "length": 71,
+  "guest": "identity-checked original NTDOS, unchanged",
+  "baseline": {
+    "result": "FAIL",
+    "directory_error": "B observes VA",
+    "run": "video405"
+  },
+  "candidate_runs": [
+    {
+      "checks": 320,
+      "normal_exit": true,
+      "result": "PASS",
+      "run": "video408"
+    },
+    {
+      "checks": 320,
+      "normal_exit": true,
+      "result": "PASS",
+      "additional": "18-tick guest yield before each callback",
+      "run": "video409"
+    }
+  ],
+  "candidate_sha256": "88F102254388F7946C118EC94F766BFEE3B9C9807D90C92046B0170A6EF0A7F6",
+  "trace408_sha256": "52B9AC04B3AA179E9B31BA5E4FED907ECA7B6F04BCB1C655D49742DE00B53911",
+  "trace409_sha256": "38BFF4283221900A40368BB1AEB556E8ED3540AEAB3EA311B7F30455C10798D6",
+  "limits": [
+    "Fixed linear address is diagnostic only and cannot be published",
+    "Other drives, host environment, first-use sync, DOSMGR interactions and lifecycle need independent coverage",
+    "Original guest and production addon unchanged"
+  ]
+}

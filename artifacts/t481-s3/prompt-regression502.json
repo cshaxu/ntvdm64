@@ -1,0 +1,32 @@
+{
+  "task": "T481 S3",
+  "scope": "Reported MS-DOS Prompt invalid instruction",
+  "reported": "run16 cmd -> Win3.1 enhanced -> open MS-DOS Prompt: invalid-instruction dialog",
+  "runs": [
+    {
+      "prompt_seen": true,
+      "dialog_seen": false,
+      "name": "userprompt494",
+      "normal_windows_exit": true,
+      "method": "DOSPRMPT.PIF loaded at Windows startup"
+    },
+    {
+      "prompt_seen": true,
+      "dialog_seen": false,
+      "name": "userprompt497",
+      "normal_windows_exit": false,
+      "method": "WinExec DOSPRMPT.PIF after Program Manager ready"
+    }
+  ],
+  "limits": [
+    "Dialog detection used class #32770 and title, which was not independently proven against the reported window",
+    "User report remains unresolved; tests cannot prove absence",
+    "Second probe uses WM_CLOSE for its own prompt and did not complete normal shutdown"
+  ],
+  "installed_at_report": {
+    "ntvdm_exe_sha256": "4A06789155E62C155570B13D2E1FE666AE40FAAD6694655D08A5A58BE79111BE",
+    "insignia_configured": false,
+    "ntvdm64_sha256": "D5F6B13A0DCAA99230F4F873F17A42604B65BD116262B541DF8FC90364D2B5A2"
+  },
+  "result": "UNRESOLVED"
+}

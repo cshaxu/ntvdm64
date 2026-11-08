@@ -1,0 +1,36 @@
+{
+  "candidate": "driver538",
+  "host": "package538 diagnostic link",
+  "scenarios": [
+    {
+      "firstExit": "Native",
+      "nativeVm": "80839000",
+      "dosVm": "80798000",
+      "menus": true,
+      "completed": 2,
+      "mouseMenu": true,
+      "mouseExitVerified": true,
+      "saveVerified": true
+    },
+    {
+      "firstExit": "Dos",
+      "nativeVm": "80839000",
+      "dosVm": "80798000",
+      "menus": true,
+      "completed": 2,
+      "mouseMenu": true,
+      "mouseExitVerified": true,
+      "saveVerified": true
+    },
+    {
+      "dosonly": 1,
+      "guestEditorMenu": true,
+      "mouseMenu": true,
+      "hostCommandAdmissions": 0,
+      "hostRegistryVerified": false,
+      "normalExit": true
+    }
+  ],
+  "wrapperExit": 0,
+  "scope": "Win3.1 real EDIT.EXE and EDIT.COM; DOSONLY=1 guest editor and native rejection; diagnostic host, not Win95"
+}

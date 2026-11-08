@@ -1,0 +1,16 @@
+{
+  "normal_windows_exit": true,
+  "null_handle": "8000ce64",
+  "bank1_map_handle": "8000ce64",
+  "run": "video463",
+  "task": "T481 S3",
+  "result": "PASS_OBSERVATION",
+  "bank1_linear_page": "a4",
+  "bank1_pte_after": "000c3267",
+  "limits": [
+    "MapIntoV86 offset and flags not yet observed",
+    "Same handle maps to different observed physical pages in separate control; earlier inference in font458 that C3000 is not null is withdrawn",
+    "Full early font witness fails before identity"
+  ],
+  "trace_sha256": "8F6C6A0ED6FAC0CEE723F6948FCC28BB047762344153AB6E2769E293CAF25303"
+}

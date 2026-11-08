@@ -1,0 +1,29 @@
+{
+  "task": "T481 S3",
+  "runs": [
+    "video514",
+    "video515"
+  ],
+  "result": "DIFFERENTIAL_OBSERVATION",
+  "scope": "Same A5000 mapping observer, same diagnostic host and installed Win3.1 source; historical nested helper versus guest-issued direct REP MOVSB",
+  "nested": {
+    "normalWindowsExit": true,
+    "otherMapEvents": 16,
+    "nullMapEvents": 2,
+    "font": "A bank1 failed at offset 4096"
+  },
+  "guest": {
+    "normalWindowsExit": true,
+    "otherMapEvents": 8,
+    "nullMapEvents": 14,
+    "font": "both banks in both VMs passed through offset8175"
+  },
+  "limits": [
+    "Mapping events are not yet correlated with individual target stores",
+    "Different addon implementations are deliberately compared",
+    "Presence of null mapping alone is not proof of root cause",
+    "Historical nested helper is a test-only candidate"
+  ],
+  "nested_trace_sha256": "43829D18268A45E7E252997FD4892F535371E2BA4235695C921E0B0077DBD413",
+  "guest_trace_sha256": "F3799F6EF132CC4C17B08FA0948C491BBB205E616D9629499AF2C4004A96EF61"
+}

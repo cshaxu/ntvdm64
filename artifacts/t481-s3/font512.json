@@ -1,0 +1,18 @@
+{
+  "task": "T481 S3",
+  "run": "video512",
+  "result": "PASS",
+  "scope": "Same current diagnostic package and Win3.1 source as video511; guest uses scalar MOV bank0 and REP MOVSB per glyph bank1",
+  "observed": [
+    "Both VM font bank samples match and final offset is 8175",
+    "320 callbacks and both VM continuations pass",
+    "Windows exits normally",
+    "Source installation unchanged"
+  ],
+  "trace_sha256": "E3EB27BF52AE606B64E76C20ACC2EB06DBEA83AA75AD226A00ADEA696B10DEAA",
+  "limits": [
+    "Guest-issued instruction, not project nested V86 helper",
+    "Does not prove BIOS font path or production font transfer",
+    "Win95 not run"
+  ]
+}

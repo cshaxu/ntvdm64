@@ -1,0 +1,22 @@
+{
+  "task": "T481 S3",
+  "run": "video381",
+  "result": "FAIL",
+  "control": "DOS VM INT10/1100 and VGA readback before first diagnostic continuation BOP",
+  "stage_samples_height_offset": [
+    2,
+    60,
+    0,
+    16,
+    0
+  ],
+  "normal_windows_exit": true,
+  "harness_exit": 1,
+  "harness_error": "Identity/negative API failed because early witness exits before API checks",
+  "limits": [
+    "A early witness proves failure before continuation; no conclusion about exact BIOS/VDD owner",
+    "No B task acceptance claimed"
+  ],
+  "data_sha256": "DC14A69BFC69186010A6A1F12B8CE112AE9CECD078D7827CB578A63FD9BD408F",
+  "trace_sha256": "D61DFEC147EEDC926628847540A2A00CACBB4326E815436612D9897782805D7F"
+}

@@ -3451,3 +3451,24 @@ DIV-890 verification: failed baseline292 versus candidate294/295 virtual VDE
 Full29716/16, standaloneDOS298, editor300 and productionWin31 four-combination301
 pass. See artifacts/t481-s3/review303.json; arbitrary graphics and reentrant VDD
 failure are not inferred from these results.
+
+MVDM-HOST-DIV-891 (T481 S3, candidate): ccpusas4.c BIOS byte/word/dword
+read/write helpers select PG_U for CPL3, not for CPL0-2. The selected original
+386 c_tlb.c::access_check makes supervisor access unrestricted and user
+access conditional on the combined PDE/PTE permissions. The original six
+inverted comparisons disagree with that contract. Actual CCPU/SAS fixture
+access363e fails24/42 assertions before correction; the fixture uses a
+supervisor PDE because original386 combines PDE/PTE user permission with OR.
+No decoder, paging implementation, BIOSDoInst fallback, TLB ownership or
+guest binary is replaced. Six same-line replacements preserve diagnostic
+line numbers. Adjacent SoftPC retains the same comparisons; no matching
+ready-made correction was found. Direct reuse is already selected; an external
+adapter cannot correct this local permission request without duplicating the
+original translation/fallback algorithm. This bounded original-host correction
+uses the source-policy standing exception. Candidate verification is pending;
+it is not yet qualified as the cause of the Win3.1 font-bank failure.
+DIV-891 local verification: access364 passes42/42; diagnostic366 and subsequent
+controls still fail Win3.1 bank1. This comparison establishes that the privilege
+candidate is not a complete font repair. Full product qualification and
+publication remain pending; see artifacts/t481-s3/video379.json.
+MVDM-HOST-DIV-892 (T481 S3, candidate): demSetDTALocation registers the original DS:SI DOSWOWDATA numeric location after its existing bounded lease succeeds, and invalidates a prior registration first. The adapter resolves the live lpCDSBuffer for per-VM instance registration, without a guest-layout constant or retained guest pointer. Original guest remains unchanged. Awaiting lifecycle and real guest qualification.

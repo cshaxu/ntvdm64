@@ -1,0 +1,18 @@
+{
+  "task": "T481 S3",
+  "finding": "DOSMGR owns standard CDS/SFT/device instancing and exposes drive-state copy",
+  "evidence": {
+    "original_dos_source": "src/mvdm-guest/dos/v86/doskrnl/dos/mscode.asm",
+    "dosmgr_query": "mscode.asm win386_inst returns not-already-instanced so DOSMGR handles CDS/SFT/device chain",
+    "original_instance_init": "msinit.asm fills segment fields of seven original entries",
+    "abi_sha256": "54D3B731E217EC2A466FA582DB35D5FBDE3C01A41A8852A8F4D639557377D6EA",
+    "original_dos_sha256": "59F4903BE6456362EDE5C53FA49A31805946F5411E0A6960B0A89257A5C7D569",
+    "public_dosmgr_abi": "O:/repos.external/ms-dos-6/dev/emm386/lhvxd/dosmgr.inc"
+  },
+  "limits": [
+    "Service declarations alone do not establish DOSMGR_Copy_VM_Drive_State calling convention or suitability",
+    "NetCDS and host =drive state are not proven covered by standard CDS handling",
+    "No live behavior or new addon fix claimed"
+  ],
+  "guest_changed": false
+}

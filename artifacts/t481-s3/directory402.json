@@ -1,0 +1,32 @@
+{
+  "task": "T481 S3",
+  "run": "video402",
+  "result": "FAIL",
+  "ntdos_sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+  "observations": [
+    {
+      "role": "B",
+      "netcds": "O:\\TMP\\M481V402\\PATCH\\VB",
+      "ah47": "TMP\\M481V402\\PATCH\\VB",
+      "capture": "O:\\TMP\\M481V402\\PATCH\\VB"
+    },
+    {
+      "role": "A",
+      "netcds": "O:\\TMP\\M481V402\\PATCH\\VA",
+      "ah47": "TMP\\M481V402\\PATCH\\VA",
+      "capture": "O:\\TMP\\M481V402\\PATCH\\VA"
+    },
+    {
+      "role": "B",
+      "netcds": "O:\\TMP\\M481V402\\PATCH\\VA",
+      "ah47": "TMP\\M481V402\\PATCH\\VA",
+      "capture": "O:\\TMP\\M481V402\\PATCH\\VA"
+    }
+  ],
+  "limits": [
+    "NetCDS offset is test-only and identity-bound to selected NTDOS map and binary",
+    "Snapshot is taken after AH47; direct writer and VM instancing are not established",
+    "Diagnostic abort prevents normal Windows exit"
+  ],
+  "trace_sha256": "7F79E744E61D1C259AB8C4A0A0E0F5DBD6749DE31DC7EDD5D734DE39D5EFE96F"
+}

@@ -1,0 +1,18 @@
+{
+  "task": "T481 S3",
+  "run": "video399",
+  "result": "FAIL",
+  "observations": [
+    "Successful DEM directory settings include both VA and VB",
+    "Last captured DEM settings before B second capture include VA",
+    "B second capture reads VA and fails directory assertion",
+    "No O-drive CMDGETCURDIR call between the final VA set and B capture"
+  ],
+  "limits": [
+    "Call trace does not identify VM identity for each DEM call",
+    "NetCDS sharing or VM switch restoration remains unproved",
+    "No normal Windows exit after diagnostic process termination"
+  ],
+  "trace_sha256": "5D4B6682ADA2635269BD83F8DEFD0D2562F8CADF11E003EE031F6DD07506FA08",
+  "log_sha256": "EBB6180E0E4D6959CF80E180CAA4FFF5D27189CCE6D0D515D6D5375667565362"
+}

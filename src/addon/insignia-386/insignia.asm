@@ -63,10 +63,28 @@ control:
     jc .fail
     jmp .ok
 .instance_byte:
+    ; Resolve DOS-owned CDS location via the existing authenticated host BOP.
+    push ebx
+    mov eax,0x4e544d56
+    mov ecx,6
+    db 0xc4,0xc4,0xb1
+    pop ebx
+    test eax,eax
+    jnz .fail
+    mov [directory_instance+8],edx
+    mov [directory_instance+12],esi
     push dword 0
     push dword instance_item
     vmm_call 0xa6                   ; _AddInstanceItem, initialization-only
     add esp,8
+    test eax,eax
+    jz .fail
+    push dword 0
+    push dword directory_instance
+    vmm_call 0xa6
+    add esp,8
+    test eax,eax
+    jz .fail
     jmp .ok
 .system_vm:
     niddb_call 3                    ; original snapshot -> system VM instance
@@ -142,3 +160,5 @@ vm_offset: dd 0
 mouse_segment: dw 0
 instance_item:
     dd 0,0,0x4ac,1,0x200            ; V86 address (not CB_High_Linear), ALWAYS_Field
+
+directory_instance: dd 0,0,0,0,0x200 ; original DOS-owned CDS, ALWAYS_Field

@@ -1,0 +1,27 @@
+{
+  "task": "T481 S3",
+  "run": "video539",
+  "result": "PASS",
+  "scope": "Formal regression: two concurrent Win3.1 DOS VMs, distinct role and bank glyphs, full 256 glyphs x 16 scanlines",
+  "bank_samples": {
+    "B": [
+      "66",
+      "a5"
+    ],
+    "A": [
+      "3c",
+      "5a"
+    ]
+  },
+  "last_offset": 8175,
+  "callback_checks": 320,
+  "normal_windows_exit": true,
+  "source_sha256": "87441DAA2B686378BCD1B2482617688838F3F7AB295320417EC7134B9326C6F3",
+  "driver_sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
+  "trace_sha256": "D4CE4E4838780FAB6E04AC6004B4665B1CC7ACFA75C350A7539A0CCEA7888D56",
+  "root_cause": "Historical test helper supplied target offset in EAX; original VMM Simulate_Far_Call consumes CX:EDX. 1103 after writing additionally changes the visible mapping; ordering selection before virtual writes preserves bank readback.",
+  "limits": [
+    "Diagnostic continuation; not a pixel-render or real command proof",
+    "Resize, Win95, full integration after this driver revision pending"
+  ]
+}

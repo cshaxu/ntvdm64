@@ -1,0 +1,19 @@
+{
+  "limits": [
+    "Diagnostic uses modified initial font-plane setup",
+    "Witness includes test marker handled by generic trap; guest identity checks did not complete",
+    "PTE invalidation is observed; its guest VDD cause remains unproved"
+  ],
+  "trace_sha256": "35BE628F981D9EC1A33EC7135FBACDC1D8DE9F59311B362853EE1C58BAC7E92C",
+  "sample": {
+    "bank0_after_restore": "0032ce00",
+    "bank1_before_restore": "000c3267",
+    "bank1_after_restore": "000c3e00",
+    "bank0_before_restore": "0032ce07"
+  },
+  "run": "video451",
+  "result": "FAIL",
+  "control": "test-only pre-touch plus read-only PTE snapshots around original low_set_mode restore",
+  "normal_windows_exit": true,
+  "task": "T481 S3"
+}

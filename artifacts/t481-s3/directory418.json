@@ -1,0 +1,19 @@
+{
+  "task": "T481 S3",
+  "run": "video418",
+  "result": "PASS",
+  "operation": "test-only BOP B1 SCS query during insignia Device_Init",
+  "scs_canonical": "01d6:000c",
+  "scs_linear": "00001d6c",
+  "netcds_linear_observed": "00001e63",
+  "map_delta": "00f7",
+  "checks": 320,
+  "normal_exit": true,
+  "limits": [
+    "BOP and fixed instance address are test-only",
+    "One known NTDOS image only; map delta is not a generic DOS ABI",
+    "Shared =drive environment and lifecycle remain unverified"
+  ],
+  "trace_sha256": "F50F5AE854B857D415693BD55F7C655E881EDD5F1C4686E3F7826B25BC0C70FB",
+  "addon_sha256": "DCD51C987BBD800FD943DAE3E0EAE4C6B55CF9D11270ABDA1FF5B65643E9C71B"
+}

@@ -5,6 +5,7 @@
 #include <vdmapi.h>
 
 #include "mvdm_guest_location.h"
+#include "mvdm_command_guest_directory.h"
 
 #ifdef __cplusplus
 extern "C" {

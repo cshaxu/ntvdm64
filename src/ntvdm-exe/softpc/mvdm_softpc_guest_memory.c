@@ -34,7 +34,7 @@ static int mvdm_softpc_guest_memory_range_valid(uint32_t address,
      * page before SAS copies: a failed lease must not enter BIOS emulation
      * or partially write its destination. Called synchronously on the CPU
      * thread; no mapping or guest pointer survives this operation. */
-    if (c_getCPL() != 3u) access |= 2u;
+    if (c_getCPL() == 3u) access |= 2u;
     if (c_getVM()) access |= 4u;
     while (byte_count) {
         uint32_t physical, chunk = 4096u - (address & 4095u);

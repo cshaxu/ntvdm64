@@ -1,0 +1,51 @@
+{
+  "case": "T481 S3 full VIDEO diagnostic prerequisite failure",
+  "productionBase": "33fad5723",
+  "productionChanged": false,
+  "published": false,
+  "runs": [
+    {
+      "run": 338,
+      "shortFont": true,
+      "exit": 1
+    },
+    {
+      "run": 339,
+      "shortFont": false,
+      "exit": 1
+    },
+    {
+      "failureLine": 323,
+      "run": 343,
+      "firstApplicationsSucceeded": 2,
+      "video": true,
+      "exit": 1
+    },
+    {
+      "deferred": true,
+      "run": 344,
+      "failureLine": 323,
+      "video": true,
+      "exit": 1
+    },
+    {
+      "failureLine": 323,
+      "run": 345,
+      "firstApplicationsSucceeded": 2,
+      "video": false,
+      "exit": 1
+    }
+  ],
+  "finding": "Diagnostic command capture assertion fails on second continuation. First A/B application acknowledgements return zero. Actual captured and direct DOS directory changes from PATCH/VA or PATCH/VB to PATCH. Same failure without VIDEO rules out attributing this failure to font loading.",
+  "limits": [
+    "Not a product font failure proof",
+    "Not full VIDEO acceptance",
+    "Directory root cause unresolved; retain failing assertion",
+    "Original guest installation hash verification passed"
+  ],
+  "evidence": [
+    "build/t481-s3/video343/continuation-trace.txt",
+    "build/t481-s3/video344/continuation-trace.txt",
+    "build/t481-s3/video345/continuation-trace.txt"
+  ]
+}

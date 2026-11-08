@@ -1,0 +1,22 @@
+{
+  "task": "T481 S3",
+  "cached392": {
+    "exit": 0,
+    "keyboard_pic": "89/89",
+    "result": "PASS",
+    "shared_x64": "14/14",
+    "shared_x86": "14/14"
+  },
+  "wow394": {
+    "result": "PASS",
+    "case": "window-borrow",
+    "test": "actual CCPU page-domain immediate stores and trace fallback",
+    "limit": "does not prove all CPL/PTE combinations or real Win16"
+  },
+  "wow393": {
+    "reason": "missing process-launch library in fixture link list",
+    "result": "LINK FAILURE",
+    "resolved_in": "wow394"
+  },
+  "log_sha256": "13E33BF59198DC7CF93BCAB86050DA64FFB4E393C92F0B7FEA8C1D861D3C0AA8"
+}

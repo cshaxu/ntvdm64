@@ -1,0 +1,27 @@
+{
+  "scratch": {
+    "physical": "0015f000",
+    "linear": "7000",
+    "pte": "0015f207"
+  },
+  "limits": [
+    "Return hook forwards through existing VMM hook chain and copies arguments; no production behavior claim",
+    "Test page belongs to system VM; font page belongs to DOS VM",
+    "Full early font witness fails before identity"
+  ],
+  "font": {
+    "flags": 0,
+    "physical": "000c3000",
+    "return_value": "ffffffff",
+    "pte_at_return": "000c3207",
+    "linear": "a4000",
+    "offset": 0
+  },
+  "result": "PASS_OBSERVATION",
+  "trace_sha256": "D2532F1264C3EF084FF4A1CD4C0B3EA432F31FC524C0D83D1D9FDE4A90EAB166",
+  "normal_windows_exit": true,
+  "service": "_MapIntoV86",
+  "run": "video469",
+  "null_handle": "8000ce64",
+  "task": "T481 S3"
+}

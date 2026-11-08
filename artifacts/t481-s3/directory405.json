@@ -1,0 +1,38 @@
+{
+  "task": "T481 S3",
+  "run": "video405",
+  "result": "FAIL",
+  "observations": [
+    {
+      "linear": "00001e63",
+      "cr3": "001de000",
+      "vm": 1,
+      "physical": "00001e63",
+      "cpl": 3,
+      "role": "B"
+    },
+    {
+      "linear": "00001e63",
+      "cr3": "001de000",
+      "vm": 1,
+      "physical": "00001e63",
+      "cpl": 3,
+      "role": "A"
+    },
+    {
+      "linear": "00001e63",
+      "cr3": "001de000",
+      "vm": 1,
+      "physical": "00001e63",
+      "cpl": 3,
+      "role": "B"
+    }
+  ],
+  "limits": [
+    "Same physical location does not exclude VMM swap/copy-based instancing",
+    "Identity-bound test-only NTDOS map offset",
+    "Diagnostic failed strict directory assertion and did not exit Windows normally"
+  ],
+  "trace_sha256": "F6A163CBDCE44E5398CD87D8E1AC7448C3335CBC58885F6586EA2F6162040DBB",
+  "log_sha256": "05DE78BFC6CD2697C04CCCD2A7BB7C77118F34351F1F5FB6DD222916C9FDFFC3"
+}

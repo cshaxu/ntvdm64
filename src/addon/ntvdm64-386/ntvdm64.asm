@@ -130,7 +130,7 @@ control:
     jmp .register_vm
 .notification_init:
     push dword 0x304               ; paragraph aligned, instanced, zeroed
-    push dword 8192                ; instanced DOS directory / BIOS font transfer
+    push dword 8192+font_v86_end-font_v86 ; instanced font data and virtual writer
     vmm_call 0xa8                   ; _Allocate_Global_V86_Data_Area
     add esp, 8
     test eax, eax
@@ -1174,6 +1174,12 @@ command_video_apply:
     mov [esp], edx
     mov [esp+4], edi
     mov dword [esp+8], 0
+    mov esi, [esp]
+    mov eax, [esi+1060]
+    shl eax, 2                      ; font B=0, font A=1 if attribute selects
+    mov [ebp+client_ebx], ax
+    mov word [ebp+client_eax], 0x1103
+    call .int10
 .font:
     mov eax, [directory_buffer]
     shr eax, 4
@@ -1200,24 +1206,53 @@ command_video_apply:
     add esi, eax
     dec dword [esp+12]
     jnz .glyph
+    ; Place code after the maximum packed font extent. Re-copy in this VM;
+    ; never depend on another VM's instanced allocation contents.
+    mov edi, [directory_buffer]
+    shr edi, 4
+    mov [ebp+56], di
+    mov word [ebp+8], 8192
+    mov eax, 0x3808
+    vmm_call 0x1c
+    cmp eax, -1
+    je .mapping_error
+    mov edi, eax
+    mov esi, font_v86
+    mov ecx, font_v86_end-font_v86
+    cld
+    rep movsb
     mov esi, [esp]
     mov eax, [esi+1056]
-    shl eax, 8
-    or eax, [esp+8]
-    mov [ebp+client_ebx], ax         ; BH=height, BL=font bank
+    mov [ebp+8], ax                 ; Client_BP: packed glyph height
+    mov eax, [directory_buffer]
+    shr eax, 4
+    mov [ebp+60], ax                ; Client_DS: font buffer
+    mov cx, ax                     ; helper target CS
+    mov word [ebp+client_esi], 0
+    mov eax, [esp+8]
+    shl eax, 14
+    mov [ebp], ax                   ; Client_DI: VGA bank offset
     mov word [ebp+client_ecx], 256
-    mov word [ebp+client_edx], 0
-    mov word [ebp+client_eax], 0x1100 ; load only, preserve text geometry
-    call .int10
+    mov edx, 8192                   ; helper target IP for CX:EDX
+    vmm_call 0x48                   ; Simulate_Far_Call(CX:EDX)
+    vmm_call 0x85                   ; Resume_Exec until helper RETF
     inc dword [esp+8]
     cmp dword [esp+8], 2
     jb .font
-    mov esi, [esp]
-    mov eax, [esi+1060]
-    shl eax, 2                      ; font B=0, font A=1 if attribute selects
-    mov [ebp+client_ebx], ax
-    mov word [ebp+client_eax], 0x1103
+
+    ; Preserve the admitted BIOS geometry contract after both virtual writes.
+    mov word [ebp+client_eax], 0x1130
+    mov word [ebp+client_ebx], 0
     call .int10
+    mov esi, [esp]
+    movzx eax, word [ebp+client_ecx]
+    cmp eax, [esi+1056]
+    jne .geometry_error
+    movzx eax, byte [ebp+client_edx]
+    inc eax
+    mov edi, [esp+4]
+    cmp eax, [edi+4]
+    jne .geometry_error
     mov word [ebp+client_ebx], 0     ; native high background bit is intensity
     mov word [ebp+client_eax], 0x1003
     call .int10
@@ -1281,6 +1316,9 @@ command_video_apply:
     loop .cells
     xor eax, eax
     jmp .done
+.geometry_error:
+    mov eax, 13
+    jmp .done
 .mapping_error:
     mov eax, 487
 .done:
@@ -1292,6 +1330,110 @@ command_video_apply:
     mov eax, 0x10
     vmm_call 0x84
     ret
+
+; Executed only in a saved nested V86 context. DS:SI=packed font, BP=height,
+; CX=256, DI=bank offset. Leave CRTC geometry and all changed VGA state intact.
+; Relative calls are position independent after copying into GVDA.
+bits 16
+font_v86:
+    pushf
+    cli
+    pusha
+    push es
+    mov dx, 0x3c4
+    in al, dx
+    push ax
+    mov al, 2
+    call .read_index
+    push ax
+    mov al, 4
+    call .read_index
+    push ax
+    mov ax, 0x0402
+    out dx, ax
+    mov ax, 0x0704
+    out dx, ax
+    mov dx, 0x3ce
+    in al, dx
+    push ax
+    mov al, 1
+    call .read_index
+    push ax
+    mov al, 3
+    call .read_index
+    push ax
+    mov al, 4
+    call .read_index
+    push ax
+    mov al, 5
+    call .read_index
+    push ax
+    mov al, 6
+    call .read_index
+    push ax
+    mov al, 8
+    call .read_index
+    push ax
+    mov ax, 0x0001
+    out dx, ax
+    mov ax, 0x0003
+    out dx, ax
+    mov ax, 0x0204
+    out dx, ax
+    mov ax, 0x0005
+    out dx, ax
+    mov ax, 0x0406
+    out dx, ax
+    mov ax, 0xff08
+    out dx, ax
+    mov ax, 0xa000
+    mov es, ax
+    cld
+.glyph:
+    push cx
+    mov cx, bp
+    rep movsb
+    mov ax, 32
+    sub ax, bp
+    add di, ax
+    pop cx
+    loop .glyph
+    ; Restore GC8,6,5,4,3,1 and the saved GC index, then SEQ4,2/index.
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, al
+    mov dx, 0x3c4
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, ax
+    pop ax
+    out dx, al
+    pop es
+    popa
+    popf
+    retf
+.read_index:
+    out dx, al
+    mov ah, al
+    inc dx
+    in al, dx
+    xchg al, ah
+    dec dx
+    ret
+font_v86_end:
+bits 32
 
 ; Snapshot through this VM's virtual BIOS, never a host/global B800 alias.
 ; Header: nine dwords (columns, rows, cursor x/y, shape, mode, page, code page, font height), then

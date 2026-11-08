@@ -1,0 +1,17 @@
+{
+  "result": "INCONCLUSIVE",
+  "failure": "runtime observer timed out",
+  "partial_bank1_write": 102,
+  "partial_bank1_read": 0,
+  "limits": [
+    "Intervention changed both read and write fallback for entire VGA aperture",
+    "Timed out before normal exit; cannot conclude helper segment is irrelevant or safe",
+    "Only test-owned source and DOS witness used"
+  ],
+  "normal_windows_exit": false,
+  "task": "T481 S3",
+  "control": "test-only CCPU fallback executes equivalent memory instructions from DOS witness segment",
+  "run": "video447",
+  "observed_marker": "0c562c94 / 00002c9a",
+  "trace_sha256": "0083245155DAE3B47113F15C555B8532BA9C7A8C2EFA67E1897EC1C2DA95E4C7"
+}

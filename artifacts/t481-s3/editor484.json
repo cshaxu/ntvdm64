@@ -1,0 +1,14 @@
+{
+  "scope": "dual editor diagnostic; guest startup did not reach W31CHECK",
+  "normal_windows_exit": false,
+  "trace_sha256": "34C6F4DE833E73A905DBA31BA7FE0F8DFD81E213ED48C8E47B0EAD79729D638A",
+  "limits": [
+    "Longer isolated installation path differs from previous successful run",
+    "Cause not yet established; do not infer product regression or success"
+  ],
+  "install_root": "O:/tmp/m481editor484",
+  "run": "editor484",
+  "result": "FAIL",
+  "error": "Runtime observer timed out",
+  "task": "T481 S3"
+}

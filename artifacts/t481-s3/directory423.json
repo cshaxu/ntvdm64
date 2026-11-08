@@ -1,0 +1,24 @@
+{
+  "task": "T481 S3",
+  "candidate": "test-only session SCS address passed over diagnostic BOP B1, pinned-map delta 0xf7",
+  "baseline": {
+    "run": "video421",
+    "reason": "test addon used EDX after another VMM service could overwrite it",
+    "result": "FAIL"
+  },
+  "corrected": {
+    "normal_exit": true,
+    "run": "video423",
+    "checks": 320,
+    "guest_yield": "18 ticks",
+    "result": "PASS"
+  },
+  "ntdos_sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+  "addon_sha256": "C655E048B17D70037786852EE6EFB522A04ACD3A2F07BA96082B736DB14945FD",
+  "trace_sha256": "489B2BA6B20ABB7F44569B9C5985F7200AC8DDB56713F0F7C9B041F249213590",
+  "limits": [
+    "Test-only BOP and identity-bound delta; not an accepted generic DOS ABI",
+    "Shared per-drive environment, first-use and lifecycle remain unverified",
+    "Original guest and released product unchanged"
+  ]
+}

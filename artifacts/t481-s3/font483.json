@@ -1,0 +1,14 @@
+{
+  "task": "T481 S3",
+  "limits": [
+    "Same return address occurs for several distinct handles; it identifies a common dispatcher, not a VDD branch",
+    "Does not establish why VDD selected null mapping",
+    "Full font witness fails early before identity"
+  ],
+  "normal_windows_exit": true,
+  "run": "video483",
+  "result": "INCONCLUSIVE",
+  "observed_service_return_address": "80017052",
+  "installed_v7vdd_sha256": "909A5E6C313DAF4DE4559171E211EF9AE7C5F15D10194F091A91BE8A352F0275",
+  "trace_sha256": "512EC9103A7F9474F30E47960F4011B3FFB2F8CFA8485BE6A69A08BC401B6B6B"
+}

@@ -1,0 +1,16 @@
+{
+  "task": "T481 S3",
+  "finding": "O drive uses DOS NetCDS rather than the ordinary CDS table",
+  "evidence": [
+    "video350 reports CDSCount 5 and default drive 14 (O:)",
+    "original GetCDSFromDrv enters NetCDS branch when drive index >= CDSCount",
+    "original cmdGetCurrentDir reads process environment =O:; demSetCurrentDir writes it",
+    "video350 B captures VA and fails before native application acknowledgement"
+  ],
+  "limits": [
+    "NetCDS physical location and exact writer remain unobserved",
+    "Source explains shared host state but does not alone prove which state caused the observed overwrite",
+    "Do not infer physical sharing from ordinary CDS table mapping"
+  ],
+  "trace_sha256": "0EEFF7E4B6B4B7FBAFC8548F2303491AD700EE28ABCC42BF52FCA054A62E959C"
+}
