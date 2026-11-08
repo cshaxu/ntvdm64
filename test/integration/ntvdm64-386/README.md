@@ -267,3 +267,9 @@ rolls back the actual host IRQ and EOI hook; no DOS identity witnesses run.
 Both record process exit without claiming Win95 normal shutdown. The shared
 copy and PIF setup is in `New-Win95ProbeCopy.ps1` and
 `Set-Win95ProbePifMemory.ps1`.
+
+`verify-win95-identity.ps1 -NativeCommand` runs two native CMD exit-code
+commands per guest VM on the ordinary host package. The guest validates the
+returned code, registers, flags and stack; the BOP54:0A interactive shell and
+physical keyboard/mouse are not tested by this case. Test-only markers are
+excluded from the DOS witness, and the package receives an isolated identity.

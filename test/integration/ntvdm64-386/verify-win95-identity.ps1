@@ -7,7 +7,8 @@ param(
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
  [switch]$Reuse,
- [switch]$InitializationFailure
+ [switch]$InitializationFailure,
+ [switch]$NativeCommand
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
@@ -16,11 +17,13 @@ $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
 $task=$copy.Task;$source=$copy.Source;$dest=$copy.Destination;$original=$copy.Original
 $enc=[Text.Encoding]::GetEncoding(28591)
-if($Reuse -and $InitializationFailure){throw 'Initialization failure is a separate witness'}
+if(($Reuse -and $InitializationFailure) -or ($NativeCommand -and ($Reuse -or $InitializationFailure))){throw 'Native command, reuse and initialization failure are separate witnesses'}
 
 if(!$InitializationFailure){
 
-& nasm -f bin -DWIN95_ORDERED_PROOF=1 "$PSScriptRoot/dos-identity.asm" -o "$task/identity.com"
+$dosDefines=@('-DWIN95_ORDERED_PROOF=1')
+if($NativeCommand){$dosDefines+=@('-DCONTINUATION=1','-DREAL_COMMAND=1','-DPRODUCTION_NATIVE_ONLY=1')}
+& nasm -f bin @dosDefines "$PSScriptRoot/dos-identity.asm" -o "$task/identity.com"
 if($LASTEXITCODE){throw 'DOS identity witness build failed'}
 foreach($id in 'A','B'){
  $bytes=[IO.File]::ReadAllBytes("$task/identity.com")
@@ -37,6 +40,14 @@ foreach($id in 'A','B'){
  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ROLE@')
  if($marker -lt 0){throw 'No VM role marker'}
  $bytes[$marker]=[byte][char]$id
+ if($NativeCommand){
+  foreach($field in @(@('@VM_ENVIRONMENT@',"ROLE=$id`0ROUND=0`0PATH=$PackageRoot\system32;C:\Windows\System32;C:\Windows`0`0",512),@('@VM_DIRECTORY@',"$dest\PATCH",128))){
+   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf($field[0])
+   $value=[Text.Encoding]::ASCII.GetBytes($field[1])
+   if($marker -lt 0 -or $value.Length -ge $field[2]){throw 'Invalid native command field'}
+   [Array]::Clear($bytes,$marker,$field[2]);[Array]::Copy($value,0,$bytes,$marker,$value.Length)
+  }
+ }
  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_A_RESULT@')
  if($marker -lt 0){throw 'No peer result marker'}
  [Array]::Clear($bytes,$marker,128)
@@ -130,7 +141,9 @@ try {
  $rows=@(foreach($id in 'A','B'){
   $data=[IO.File]::ReadAllBytes("$dest/PATCH/$id.BIN")
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
-  if($data.Length -ne 72 -or [Text.Encoding]::ASCII.GetString($data,0,4) -ne 'VMID'){throw 'Invalid witness output'}
+  $expectedLength=if($NativeCommand){76}else{72}
+  if($data.Length -ne $expectedLength -or [Text.Encoding]::ASCII.GetString($data,0,4) -ne 'VMID'){throw 'Invalid witness output'}
+  if($NativeCommand -and ([BitConverter]::ToUInt16($data,72) -ne 2 -or [BitConverter]::ToUInt16($data,74))){throw "Real native continuation failed: $id"}
   $row=[ordered]@{name=$id;signature=[BitConverter]::ToUInt32($data,4);vm=[BitConverter]::ToUInt32($data,8);generation=[BitConverter]::ToUInt64($data,12);status=[BitConverter]::ToUInt16($data,20);negativeStatus=[BitConverter]::ToUInt16($data,22);negativeResult=[BitConverter]::ToUInt32($data,24);start=[BitConverter]::ToUInt32($data,28);finish=[BitConverter]::ToUInt32($data,32)}
   if($row.signature -ne 0x4e544d56 -or !$row.vm -or !$row.generation -or ($row.status -band 1) -or !($row.negativeStatus -band 1) -or $row.negativeResult -ne 1){throw "Identity/negative API failed: $id"}
   $row.callback=[BitConverter]::ToUInt32($data,36)
@@ -144,6 +157,7 @@ try {
  $rows|ConvertTo-Json|Set-Content "$task/runtime/vm-pair.json"
  if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or [Math]::Max($rows[0].start,$rows[1].start) -ge [Math]::Min($rows[0].finish,$rows[1].finish)){throw 'Distinct concurrent VM identity not proved'}
  'PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks'
+ if($NativeCommand){'PASS four actual native commands via production host with guest return, register, flags and stack checks'}
  if($Reuse){
   $b=[IO.File]::ReadAllBytes("$dest/PATCH/REUSE.BIN");Copy-Item "$dest/PATCH/REUSE.BIN" "$task/runtime/REUSE.BIN"
   if($b.Length -ne 36 -or [Text.Encoding]::ASCII.GetString($b,0,4) -ne 'VRUS'){throw 'Invalid reuse report'}

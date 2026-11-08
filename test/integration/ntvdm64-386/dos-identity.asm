@@ -8,6 +8,11 @@
 ; so the host can prove two actual VMs were simultaneously executing.
 bits 16
 org 0x100
+%macro diagnostic_marker 0
+%ifndef PRODUCTION_NATIVE_ONLY
+db 0xc4,0xc4,0x54,254
+%endif
+%endmacro
 %macro keyboard_ready 0
 mov si, output
 %%name:
@@ -49,7 +54,7 @@ jc .write
 mov word [video_failure], 0
 %endif
 %ifdef CONTINUATION
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 %endif
 xor ax, ax
 mov es, ax
@@ -125,11 +130,11 @@ jb .callback
 pop edi
 pop ebp
 %ifdef CONTINUATION
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 mov dx, test_directory
 mov ah, 0x3b
 int 0x21
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 jc .write
 mov dl, [test_directory]
 sub dl, 'A'
@@ -265,7 +270,7 @@ shl edx, 4
 add edx, 0x13f3
 mov eax, 0x4e430000
 mov al, [role]
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 popad
 %endif
 pop es
@@ -273,20 +278,20 @@ pop es
 xor bx, bx
 xor dx, dx
 mov ah, 2
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 int 0x10
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 mov al, [role]
 mov ah, 9
 mov bx, 0x001e
 mov cx, 1
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 int 0x10
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 mov dx, 0x0302
 mov ah, 2
 int 0x10
-db 0xc4,0xc4,0x54,254
+diagnostic_marker
 mov [before_sp], sp
 mov eax, 0x54320000 | (%2 << 8) | %1
 mov al, [default_drive]
@@ -687,7 +692,9 @@ inc word [continuation_errors]
 %endmacro
 continuation_case 8
 continuation_case 8, 1
+%ifndef PRODUCTION_NATIVE_ONLY
 continuation_case 10
+%endif
 %ifdef NESTED_COMMAND
 ; Retain actual guest text after the nested command. Merely queueing MEM
 ; and observing EXIT is not proof that MEM executed or its output returned.
