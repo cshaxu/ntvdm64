@@ -2173,3 +2173,5 @@ must not be described as exact production-host interactive proof. The absent
 VMM 0x400 bit is a coverage boundary until its Win95 semantics is established;
 ordered completion was independently verified. No broad new functionality is
 admitted by these investigations.
+
+S4 reuse001 uses the production candidate with a fresh isolated package identity: two concurrent Win95 VMs complete 320 callbacks; a third actually reuses an old VM handle with a new generation, rejects both stale wakes and consumes the new completion. Init002 injects a failure after IRQ reservation using a diagnostic host; the real guest closes its bridge and the host reacquires/releases the same IRQ and EOI hook. Editor003 reruns the shared fixture with keyboard, mouse menus and both saved contents. Original Win95 installation hashes remain unchanged. The Win95 observer exits with code 1; none of these runs proves normal shutdown or the VMM blocked-status bit. Evidence: artifacts/t481-s4/reuse001.json, init002.json and editor003.json.

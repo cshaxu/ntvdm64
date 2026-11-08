@@ -1,0 +1,16 @@
+{
+  "test": "test/integration/ntvdm64-386/verify-win95-identity.ps1 -InitializationFailure",
+  "host": "test-only injected arm failure, otherwise current worker objects",
+  "ntvdmSha256": "BD36803C782B3353A2FCCFC3244C174200BEE6249794B8687676BB92E685800B",
+  "guestApi": {
+    "api": 0,
+    "signature": 0,
+    "vm": 0,
+    "driver": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B"
+  },
+  "rollbackMarkerSha256": "67ABDD721024F0FF4E0B3F4C2FC13BC5BAD42D0B7851D456D88D203D15AAA450",
+  "limits": [
+    "observer exited with code 1; normal shutdown not established"
+  ],
+  "originalInstallation": "verified byte-identical"
+}

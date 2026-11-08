@@ -18,60 +18,11 @@ if($DismissWelcomeTitleHex){
  for($i=0;$i -lt $DismissWelcomeTitleHex.Length;$i+=2){if($DismissWelcomeTitleHex.Substring($i,2) -eq '00'){throw 'Welcome title cannot contain a zero byte'}}
 }
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
-$task=[IO.Path]::GetFullPath($OutputRoot)
-$source=(Resolve-Path -LiteralPath $InstallSource).Path.TrimEnd('\')
-$dest=[IO.Path]::GetFullPath($InstallRoot).TrimEnd('\')
-$DriverImage=(Resolve-Path -LiteralPath $DriverImage).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-if(!$task.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $task)){throw 'Fresh repository build output required'}
-if(!$dest.StartsWith('O:\tmp\',[StringComparison]::OrdinalIgnoreCase) -or $dest -match '[^\x21-\x7e]' -or (Test-Path $dest) -or $dest.StartsWith($source+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Fresh, short, independent O:/tmp guest copy required'}
-if(!(Test-Path "$source/WIN.COM") -or !(Test-Path "$source/SYSTEM.INI")){throw 'Installed Windows 95 source required'}
-if($source.Length -ne $dest.Length){throw 'Hive relocation requires paths of equal length'}
-New-Item -ItemType Directory $task|Out-Null
-# This is a background integration runner. It uses the established matrix
-# desktop/scope and guest-internal input, never foreground input automation.
-$original=@(Get-ChildItem $source -Force -Recurse -File | ForEach-Object {[ordered]@{path=$_.FullName.Substring($source.Length);sha256=(Get-FileHash $_.FullName).Hash}})
-$original|ConvertTo-Json|Set-Content "$task/original.json"
-New-Item -ItemType Directory $dest|Out-Null
-Get-ChildItem $source -Force|Copy-Item -Destination $dest -Recurse
-# Relocate only the hives and configuration consumed by this isolated case.
-# Do not run the broad installation migrator over unrelated Win95 PIF formats.
-foreach($hive in 'SYSTEM.DAT','USER.DAT'){
- $path="$dest/$hive"
- & python "$PSScriptRoot/relocate-win95-hive-equal.py" $path "$path.CANDIDATE" $source $dest
- if($LASTEXITCODE){throw 'Isolated guest hive path relocation failed'}
- [IO.File]::SetAttributes($path,[IO.FileAttributes]::Normal)
- [IO.File]::Copy("$path.CANDIDATE",$path,$true)
-}
-[IO.File]::WriteAllText("$dest/.t479-owner",$task)
-foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {
- $enc=[Text.Encoding]::GetEncoding(28591)
- $s=$enc.GetString([IO.File]::ReadAllBytes($file.FullName))
- $s=[regex]::Replace($s,[regex]::Escape($source),{param($m) $dest},'IgnoreCase')
- [IO.File]::WriteAllBytes($file.FullName,$enc.GetBytes($s))
-}
-foreach($file in Get-Item "$dest/PATCH/WIN.PIF"){
- & "$repo/assets/release/PIF.EXE" replace-root $file.FullName --from $source --to $dest
- if($LASTEXITCODE){throw 'PIF rebase failed'}
-}
-foreach($file in Get-ChildItem $dest -Filter '*.GRP'){
- & "$repo/assets/release/GRP.EXE" replace-root $file.FullName --root $dest
- if($LASTEXITCODE){throw 'GRP rebase failed'}
-}
-$system="$dest/SYSTEM.INI"
+$copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstanceDriver $InstanceDriver -InterruptObserver $InterruptObserver -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
+$task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 $enc=[Text.Encoding]::GetEncoding(28591)
-$s=$enc.GetString([IO.File]::ReadAllBytes($system))
-if([regex]::Matches($s,'(?im)^\[386Enh\]').Count -ne 1){throw 'No unique enhanced section'}
-$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\NTVDM64.VXD")
-[IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
-Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.VXD"
-Copy-Item -LiteralPath $InstanceDriver -Destination "$dest/PATCH/INSIGNIA.386"
-Copy-Item -LiteralPath $InterruptObserver -Destination "$dest/PATCH/INTS.386"
-$s=$enc.GetString([IO.File]::ReadAllBytes($system))
-$s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\INSIGNIA.386`r`ndevice=$dest\PATCH\INTS.386")
-[IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
-
 
 Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
@@ -79,12 +30,7 @@ if($SaveWitness){foreach($name in 'A.TXT','B.TXT'){[IO.File]::WriteAllBytes("$de
 foreach($id in 'A','B'){
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "Prompt probe $id" --program "$dest\PATCH\COMMAND.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'PIF failed'}
- $pif=[IO.File]::ReadAllBytes("$dest/PATCH/$id.PIF");$t=[Text.Encoding]::ASCII.GetString($pif)
- $std=$t.IndexOf('MICROSOFT PIFEX');$hdr=$t.IndexOf('WINDOWS 386 3.0');if($std -lt 0 -or $hdr -lt 0){throw 'Missing PIF extension'};$body=[BitConverter]::ToUInt16($pif,$hdr+18)
- foreach($offset in @(32,$body)){[Array]::Copy([BitConverter]::GetBytes([uint16]640),0,$pif,$offset,2)}
- foreach($offset in @(34,($body+2))){[Array]::Copy([BitConverter]::GetBytes([uint16]128),0,$pif,$offset,2)}
- $sum=0;for($at=2;$at -lt $std;++$at){$sum=($sum+$pif[$at]) -band 255};$pif[1]=[byte]$sum
- [IO.File]::WriteAllBytes("$dest/PATCH/$id.PIF",$pif)
+ & "$PSScriptRoot/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/$id.PIF"
 }
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
@@ -93,6 +39,9 @@ $asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY 0`n%define SA
 $actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
 $asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 $routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
+$activation="push word [active-data]`napi 2,59`ncall settle`nret"
+if(!$routines.Contains($activation)){throw 'Prompt activation insertion point missing'}
+$routines=$routines.Replace($activation,"push word [active-data]`napi 2,59`ncall settle`napi 2,60`ncmp ax,[active-data]`njne target_prompt`nret")
 if($DismissWelcomeTitleHex){
  $routines=$routines.Replace("target_prompt:`n","target_prompt:`ncall dismiss_welcome`n")
  $routines=$routines.Replace("mouse_cell:`n","mouse_cell:`ncall dismiss_welcome`n")

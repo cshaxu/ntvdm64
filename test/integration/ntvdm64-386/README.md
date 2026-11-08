@@ -258,3 +258,12 @@ its toolbar-containing parent, supplies mouse geometry. For a copied guest
 whose welcome window covers the test, `-DismissWelcomeTitleHex` optionally
 specifies its exact guest-ANSI title bytes; no other window is closed. The
 test records the observer exit code without claiming normal Win95 shutdown.
+
+`verify-win95-identity.ps1 -Reuse` uses the same disposable Win95 copy and
+checks two concurrent VM identities, 320 callbacks, actual handle reuse, and
+old-generation wake rejection. `-InitializationFailure` instead requires the
+test-only `host-init-failure.c` link and verifies that a failed driver arm
+rolls back the actual host IRQ and EOI hook; no DOS identity witnesses run.
+Both record process exit without claiming Win95 normal shutdown. The shared
+copy and PIF setup is in `New-Win95ProbeCopy.ps1` and
+`Set-Win95ProbePifMemory.ps1`.

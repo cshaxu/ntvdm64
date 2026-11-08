@@ -1,0 +1,47 @@
+{
+  "test": "test/integration/ntvdm64-386/verify-win95-identity.ps1 -Reuse",
+  "host": "candidate549 with fresh isolated package identity",
+  "pair": [
+    {
+      "name": "A",
+      "signature": 1314147670,
+      "vm": 3268542696,
+      "generation": 2,
+      "status": 12870,
+      "negativeStatus": 12871,
+      "negativeResult": 1,
+      "start": 208401,
+      "finish": 208463,
+      "callback": 102704768,
+      "callbackCount": 160,
+      "callbackErrors": 0
+    },
+    {
+      "name": "B",
+      "signature": 1314147670,
+      "vm": 3272737000,
+      "generation": 3,
+      "status": 12870,
+      "negativeStatus": 12871,
+      "negativeResult": 1,
+      "start": 208401,
+      "finish": 208463,
+      "callback": 102704768,
+      "callbackCount": 160,
+      "callbackErrors": 0
+    }
+  ],
+  "reuse": {
+    "vm": 3268542696,
+    "generation": 4,
+    "oldGeneration": 2,
+    "error": 0,
+    "rejected": 2,
+    "consumed": 1
+  },
+  "limits": [
+    "Win95 VMM blocked-status bit not established",
+    "observer exited with code 1; normal shutdown not established"
+  ],
+  "originalInstallation": "verified byte-identical"
+}

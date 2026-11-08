@@ -1,0 +1,18 @@
+{
+  "test": "test/integration/ntvdm64-386/verify-win95-editors.ps1 -MouseMenu -SaveWitness",
+  "host": "package538 diagnostic real-command link",
+  "result": {
+    "nativeVm": "c2d200e8",
+    "dosVm": "c31200e8",
+    "completed": 2,
+    "menus": true,
+    "mouseMenu": true,
+    "saveVerified": true,
+    "observerExit": "0x00000001",
+    "normalShutdownProved": false
+  },
+  "limits": [
+    "exact production-host interactive Win95 path not directly observed"
+  ],
+  "originalInstallation": "verified byte-identical"
+}
