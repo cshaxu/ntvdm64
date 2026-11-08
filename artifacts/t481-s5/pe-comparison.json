@@ -1,0 +1,213 @@
+[
+  {
+    "name": "run16.exe",
+    "length": 308224,
+    "changedBytes": 6,
+    "locations": [
+      {
+        "offset": 264,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 265,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 266,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 211428,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 211429,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 211430,
+        "field": "debug_timestamp"
+      }
+    ],
+    "normalizedNewSha256": "18CAA15CEC91EC436E02190A30DE579C7B9DE7B9FB1E8086EB09848C4BA3CA30"
+  },
+  {
+    "name": "ntsrv.exe",
+    "length": 411136,
+    "changedBytes": 6,
+    "locations": [
+      {
+        "offset": 248,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 249,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 250,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 300084,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 300085,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 300086,
+        "field": "debug_timestamp"
+      }
+    ],
+    "normalizedNewSha256": "ED502130442A19B8BD4805CFD647A7F531C39D94D1ECB7CE1622C10232221A5D"
+  },
+  {
+    "name": "ntcon.exe",
+    "length": 357376,
+    "changedBytes": 6,
+    "locations": [
+      {
+        "offset": 264,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 265,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 266,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 250580,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 250581,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 250582,
+        "field": "debug_timestamp"
+      }
+    ],
+    "normalizedNewSha256": "E8A5397BC750482A3BD0C44856A84F796EC442E491051C7AFA86AC5095EA20D0"
+  },
+  {
+    "name": "ntvdm.exe",
+    "length": 2139136,
+    "changedBytes": 4,
+    "locations": [
+      {
+        "offset": 296,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 297,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 1738252,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 1738253,
+        "field": "debug_timestamp"
+      }
+    ],
+    "normalizedNewSha256": "7E6E9BB11702792CC357555135E791491A29DF32B73EC9A4E3728CEAB3BA954D"
+  },
+  {
+    "name": "ntvwm.exe",
+    "length": 327168,
+    "changedBytes": 6,
+    "locations": [
+      {
+        "offset": 248,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 249,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 250,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 227252,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 227253,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 227254,
+        "field": "debug_timestamp"
+      }
+    ],
+    "normalizedNewSha256": "958CFFAEE71D62B696FF0B016A8D0C8F05D44E26547B9637C5440B8A4DFF8F13"
+  },
+  {
+    "name": "ntmon.exe",
+    "length": 169984,
+    "changedBytes": 0,
+    "locations": [],
+    "normalizedNewSha256": "DEAB03971C98314D060AA2501144E3721E8B26C01D4FC1D7D8B21ECF8106C354"
+  },
+  {
+    "name": "WOW32.DLL",
+    "length": 712192,
+    "changedBytes": 0,
+    "locations": [],
+    "normalizedNewSha256": "C81C272D6DCF6858A4707ACB5BBE28E453E6D9F401DFFF888AB90A32108D50D2"
+  },
+  {
+    "name": "VDMREDIR.DLL",
+    "length": 209920,
+    "changedBytes": 0,
+    "locations": [],
+    "normalizedNewSha256": "84538848370B556B41AF095E42A77D6E8970027B3A36A473B44EAF11A8D60B15"
+  },
+  {
+    "name": "VCDEX.DLL",
+    "length": 10240,
+    "changedBytes": 0,
+    "locations": [],
+    "normalizedNewSha256": "652AFC1686D56F2A89E65D7D4D3002302B487CE9B2E165752667046A32F6C8EC"
+  },
+  {
+    "name": "nthook32.dll",
+    "length": 216064,
+    "changedBytes": 4,
+    "locations": [
+      {
+        "offset": 272,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 273,
+        "field": "coff_timestamp"
+      },
+      {
+        "offset": 134228,
+        "field": "debug_timestamp"
+      },
+      {
+        "offset": 134229,
+        "field": "debug_timestamp"
+      }
+    ],
+    "normalizedNewSha256": "B2B2C4335E5670109351EBBBEA45DD392E2DD68E6B7D07AECA3E93F9DCE066C9"
+  },
+  {
+    "name": "nthook64.dll",
+    "length": 261120,
+    "changedBytes": 0,
+    "locations": [],
+    "normalizedNewSha256": "0A070AF54B5D9CCB04F756939678C2A3AC6880B933E0AD2C90C911FF05BD49BC"
+  }
+]

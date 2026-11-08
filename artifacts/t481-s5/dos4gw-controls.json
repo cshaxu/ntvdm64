@@ -1,0 +1,22 @@
+{
+  "fixtureRoot": "O:/winnt",
+  "fixtures": {
+    "DOS4GW.EXE": "B8265123AC8A189637448618409EF3ECD2E9F3E1A47062C685A02240F688DEC1",
+    "NESTICLE.EXE": "224E348E1FD5C11B16EF096FF5607C7C57C49D65FA7E4DBBC9B2A5C9C53E832B"
+  },
+  "inheritedEnvironment": {
+    "exit": 1,
+    "result": "FAIL visible illegal-instruction dialog, CS 03f4 IP 1ff0 OP 63 6f 64 65 78"
+  },
+  "minimalEnvironment": {
+    "exit": 0,
+    "result": "PASS visible graphics window active after observation; no gameplay/pixel acceptance"
+  },
+  "interpretation": "Matches the previously recorded inherited-environment vs minimal-environment controls; does not attribute the reported GP fault or prove this is the same cause.",
+  "sha256": {
+    "dos4gw-normal.log": "9CD979F2F2F47D39F99DFDCADA01FF2379D37721677A0FCCD1343DD47C031676",
+    "dos4gw-minimal.log": "C95E8B49E92434B61511AE952A6C9753357FD85A524063A30804C476C94A8916",
+    "dos4gw-normal/nesticle.txt.timeout-live.txt": "B7689A5CEB15BBFB07CEB246AB5A2EDC5B14520EB5A07A7BEFEB2291E927ED6C",
+    "dos4gw-minimal/nesticle.txt.timeout-live.txt": "9DF1223B75871BE4BFD3CBB3C68B648373C1A3E242FAEC0BB9E8AA0AB7987AE1"
+  }
+}

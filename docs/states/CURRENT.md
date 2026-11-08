@@ -31,13 +31,21 @@ closed; the T remains open. See the [S4 evidence](../etc/evidence/m0-t481-s4-clo
 
 ## Current Technical Baseline
 
-Candidate579 remains published: eleven host images match both destinations;
-`NTVDM64.386` and `INSIGNIA.386` match `O:/w31/PATCH` and release. S4 proved
+Candidate001 is published: eleven host images match both destinations;
+`NTVDM64.386` and `INSIGNIA.386` match `O:/w31/PATCH` and release. Cached
+x86/x64 builds, Full 16/16 and four Win3.1 mode/DOSONLY cases pass; see
+[qualification](../../artifacts/t481-s5/qualification001.json),
+[publication](../../artifacts/t481-s5/publication001.json), and
+[obligation audit](../../artifacts/t481-s5/obligation-audit.md). The optional
+DOS4GW/NESticle inherited-environment test reproduces its existing TODO failure;
+the minimal environment control reaches graphics. S4 proved
 production-host four native commands across two Win95 VMs, real handle reuse,
 and diagnostic initialization rollback; its interactive mouse/editor test uses a
 diagnostic host. Win95 observer exit code 1 and the historical direct native
 batch path remain explicitly unproved as normal behavior. They must not be
 reported as passing; see [S4 closure](../etc/evidence/m0-t481-s4-closure.md).
+
+S5 delivery is complete and awaits owner acceptance; the T remains open.
 
 ## Recent M0 Closures
 

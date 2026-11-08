@@ -1,0 +1,139 @@
+{
+  "packageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+  "destinations": [
+    "O:/repos.hobby/ntvdm64/assets/release",
+    "O:/winnt/system32",
+    "O:/w31/PATCH"
+  ],
+  "images": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "68E8F2572FC2719A7FB4DD88E962F2682C9413FA3344D88D60FBC0EC356A8C58",
+      "Machine": 332,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "55E27E892656CD363C46DD3AB334FED67B7EFF8CC62CC4EC53CBAEBC4AFA993E"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "D2188B154CAC7407D85C2813A260AAD84D672C9894E26A4D7421162477036B83",
+      "Machine": 34404,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "34F452406A7A0AA60843E30F77A0F6DCD50E6D44D35F33AC248BA775E23D7B6B"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "3C1FE42449132F11725064DE847CF565673EBA4F8B84442115AC8427D1A2A19B",
+      "Machine": 34404,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "8438766A7DB24E898B4FE7C33BA0E70E4843709DEF32B4D6C68264DCC0C7B0AC"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "2E5C28E86E91160903FD839003AC4D06A6DFF95BF011DA0FD0C649A940E5E86F",
+      "Machine": 34404,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "5429480E1410FE1BCB7B082367DA64DF652186DEF73F7CFA6666AA7B241F7D24"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "6DA99B438AB888577A2F6EAADFED3A57A8D19567A3413CAE217A33CE43153C25",
+      "Machine": 332,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "05D5364DA80B15E118A351E206F2484D048EBE523B7B094B404B110783DC6B76"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "E11DD6771CCDE58EE73DDE3521FFD60DB090BF592791B0028A30618EF14EE9FC",
+      "Machine": 34404,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "11CF079706AA09725D4A6F6FAEEDB2C172DC4991AE1F70269B1E22C9C05C8562"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "FDEF28082CF7C70C6097B270E6E2C13E3827FDFABB8AE0F6E2D86DCC4EDEDC72",
+      "Machine": 34404,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "F33949DAAC7347C597CE1E8A2E13CE7274E5DC2CAD77E89CAFC3E00DD33CBE51"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "7F5186E1800CA39FF6CA65CBFBD7BA05DCAEDF6CA744630C11D6BB22CAA07390",
+      "Machine": 332,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "6578739DBC914600E1F823C7783A8E615665ACE30E3D87E4470E4C4D74DE7374"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "556FC1BC1F8A56C314F4405B82EBA68913D593E50701CBC4C4D1C501C725F13A",
+      "Machine": 332,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "FF757E9BD370EE960B06D2EB287F8EE1E8D2727B9FFBF382FE43A6570408B8C0"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "7288A7CD60320D43028C756C66CEF1507169A8FF2031C95732BB357C1A81A2CC",
+      "Machine": 332,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "FAD4D76F112E180EE22903DFF0320FC22411C140786DF3E7E38EFA5487FD8DCD"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "6EDC6BF4E443F54D5F37146C93E5B6CEEFDCB92EC5F4941EA2F2DDCB3316885F",
+      "Machine": 34404,
+      "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+      "InputSha256": "8DB7B735BAF33F68BF5215B519454F540094FFFDF2C459FFDC8757B0FF1011C8"
+    }
+  ],
+  "addons": [
+    {
+      "Name": "ntvdm64.386",
+      "Source": "O:/repos.hobby/ntvdm64/build/t481-s3/driver538/ntvdm64.386",
+      "Hash": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B"
+    },
+    {
+      "Name": "insignia.386",
+      "Source": "O:/repos.hobby/ntvdm64/build/t481-s3/insignia479/insignia.386",
+      "Hash": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B"
+    },
+    {
+      "Name": "ntvdm64.vxd",
+      "Source": "O:/repos.hobby/ntvdm64/build/t481-s3/driver538/ntvdm64.vxd",
+      "Hash": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B"
+    },
+    {
+      "Name": "addon-manifest.json",
+      "Source": "O:/repos.hobby/ntvdm64/build/t481-s5/addon-manifest001.json",
+      "Hash": "B9EEB7056CFD4DD0E85BDF0EDEDF40ACA54E8BBFB21FA2DA83EC1BDDE5CEB19A"
+    }
+  ],
+  "w31": [
+    {
+      "Name": "ntvdm64.386",
+      "Source": "O:/repos.hobby/ntvdm64/build/t481-s3/driver538/ntvdm64.386",
+      "Hash": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B"
+    },
+    {
+      "Name": "insignia.386",
+      "Source": "O:/repos.hobby/ntvdm64/build/t481-s3/insignia479/insignia.386",
+      "Hash": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B"
+    }
+  ],
+  "w31ConfigSha256": "B8CC85F02C6000C1E48DF9038D2C75FC0E112820DCBCFC3A8A6909BC7D28E95B",
+  "status": "candidate",
+  "limits": [
+    "Win95 interactive mouse uses diagnostic host; normal shutdown exit code semantics unverified",
+    "50 visible rows exceed current host capability"
+  ],
+  "utc": "2026-11-08T11:47:43.1025549Z"
+}

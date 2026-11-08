@@ -1,90 +1,90 @@
 [
-    {
-        "Name":  "VCDEX.DLL",
-        "RelativePath":  "system32\\VCDEX.DLL",
-        "Sha256":  "652AFC1686D56F2A89E65D7D4D3002302B487CE9B2E165752667046A32F6C8EC",
-        "Machine":  332,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "55E27E892656CD363C46DD3AB334FED67B7EFF8CC62CC4EC53CBAEBC4AFA993E"
-    },
-    {
-        "Name":  "run16.exe",
-        "RelativePath":  "system32\\run16.exe",
-        "Sha256":  "6C02DBDC37EA08784238C95F8811B3125D6B362A496AFBE2A7F5DB63A3997708",
-        "Machine":  34404,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "56FAC28F43B43A0C275021E968F9529FE6F633BE57D701B1629FB3B0E302EEFF"
-    },
-    {
-        "Name":  "ntsrv.exe",
-        "RelativePath":  "system32\\ntsrv.exe",
-        "Sha256":  "59EC0BDC183E704CE5FAD7060F43AF48468343D459882FE5520E0B5DE7BF0660",
-        "Machine":  34404,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "1A8FFCCFEEEA9B1173C2C56CCB43EF984DF330AA1BECC311C7735F0AF5B93626"
-    },
-    {
-        "Name":  "ntcon.exe",
-        "RelativePath":  "system32\\ntcon.exe",
-        "Sha256":  "34B8A2E87C0361B6D01AC4A8261738F99CBF7BD0D89FF02381CF152808648964",
-        "Machine":  34404,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "73A906BA4F5A1080755FD5BE3F3DDCF7EF461B5F8E9CD3922D933C70D5EC7DBC"
-    },
-    {
-        "Name":  "ntvdm.exe",
-        "RelativePath":  "system32\\ntvdm.exe",
-        "Sha256":  "A28CA86CF6B21C15670B5AC44D03242F12A84C88A0A50DDF18196C207F777BA9",
-        "Machine":  332,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "8E1704B3F8EEA0F389A59FBF80EFDF7A85F8A0619047CA067E396658AB44BFED"
-    },
-    {
-        "Name":  "ntvwm.exe",
-        "RelativePath":  "system32\\ntvwm.exe",
-        "Sha256":  "3D53D12F5D4BD063A4666417061BA6AB84E8BD1AEBD3E323DAB2B442B3CAC96D",
-        "Machine":  34404,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "6AFC04846515C53EB783586E3EF42B2447EBFA15C8089A98A335A08E6CFE72C9"
-    },
-    {
-        "Name":  "ntmon.exe",
-        "RelativePath":  "system32\\ntmon.exe",
-        "Sha256":  "DEAB03971C98314D060AA2501144E3721E8B26C01D4FC1D7D8B21ECF8106C354",
-        "Machine":  34404,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "F33949DAAC7347C597CE1E8A2E13CE7274E5DC2CAD77E89CAFC3E00DD33CBE51"
-    },
-    {
-        "Name":  "WOW32.DLL",
-        "RelativePath":  "system32\\WOW32.DLL",
-        "Sha256":  "C81C272D6DCF6858A4707ACB5BBE28E453E6D9F401DFFF888AB90A32108D50D2",
-        "Machine":  332,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "6578739DBC914600E1F823C7783A8E615665ACE30E3D87E4470E4C4D74DE7374"
-    },
-    {
-        "Name":  "VDMREDIR.DLL",
-        "RelativePath":  "system32\\VDMREDIR.DLL",
-        "Sha256":  "84538848370B556B41AF095E42A77D6E8970027B3A36A473B44EAF11A8D60B15",
-        "Machine":  332,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "FF757E9BD370EE960B06D2EB287F8EE1E8D2727B9FFBF382FE43A6570408B8C0"
-    },
-    {
-        "Name":  "nthook32.dll",
-        "RelativePath":  "system32\\nthook32.dll",
-        "Sha256":  "08837EC3117E90BD61480DB229AC2DFEC84E6BB8F4E8660539A3E6690119CADF",
-        "Machine":  332,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "64271FC2C01CEBC386A1D7B3E3AD001DDB3839437E366BC9BFC6BB41F122B1CF"
-    },
-    {
-        "Name":  "nthook64.dll",
-        "RelativePath":  "system32\\nthook64.dll",
-        "Sha256":  "0A070AF54B5D9CCB04F756939678C2A3AC6880B933E0AD2C90C911FF05BD49BC",
-        "Machine":  34404,
-        "PackageId":  "2f22fbfe-ee21-4df6-a59b-ef50997e42ff",
-        "InputSha256":  "8DB7B735BAF33F68BF5215B519454F540094FFFDF2C459FFDC8757B0FF1011C8"
-    }
+  {
+    "Name": "VCDEX.DLL",
+    "RelativePath": "system32\\VCDEX.DLL",
+    "Sha256": "68E8F2572FC2719A7FB4DD88E962F2682C9413FA3344D88D60FBC0EC356A8C58",
+    "Machine": 332,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "55E27E892656CD363C46DD3AB334FED67B7EFF8CC62CC4EC53CBAEBC4AFA993E"
+  },
+  {
+    "Name": "run16.exe",
+    "RelativePath": "system32\\run16.exe",
+    "Sha256": "D2188B154CAC7407D85C2813A260AAD84D672C9894E26A4D7421162477036B83",
+    "Machine": 34404,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "34F452406A7A0AA60843E30F77A0F6DCD50E6D44D35F33AC248BA775E23D7B6B"
+  },
+  {
+    "Name": "ntsrv.exe",
+    "RelativePath": "system32\\ntsrv.exe",
+    "Sha256": "3C1FE42449132F11725064DE847CF565673EBA4F8B84442115AC8427D1A2A19B",
+    "Machine": 34404,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "8438766A7DB24E898B4FE7C33BA0E70E4843709DEF32B4D6C68264DCC0C7B0AC"
+  },
+  {
+    "Name": "ntcon.exe",
+    "RelativePath": "system32\\ntcon.exe",
+    "Sha256": "2E5C28E86E91160903FD839003AC4D06A6DFF95BF011DA0FD0C649A940E5E86F",
+    "Machine": 34404,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "5429480E1410FE1BCB7B082367DA64DF652186DEF73F7CFA6666AA7B241F7D24"
+  },
+  {
+    "Name": "ntvdm.exe",
+    "RelativePath": "system32\\ntvdm.exe",
+    "Sha256": "6DA99B438AB888577A2F6EAADFED3A57A8D19567A3413CAE217A33CE43153C25",
+    "Machine": 332,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "05D5364DA80B15E118A351E206F2484D048EBE523B7B094B404B110783DC6B76"
+  },
+  {
+    "Name": "ntvwm.exe",
+    "RelativePath": "system32\\ntvwm.exe",
+    "Sha256": "E11DD6771CCDE58EE73DDE3521FFD60DB090BF592791B0028A30618EF14EE9FC",
+    "Machine": 34404,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "11CF079706AA09725D4A6F6FAEEDB2C172DC4991AE1F70269B1E22C9C05C8562"
+  },
+  {
+    "Name": "ntmon.exe",
+    "RelativePath": "system32\\ntmon.exe",
+    "Sha256": "FDEF28082CF7C70C6097B270E6E2C13E3827FDFABB8AE0F6E2D86DCC4EDEDC72",
+    "Machine": 34404,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "F33949DAAC7347C597CE1E8A2E13CE7274E5DC2CAD77E89CAFC3E00DD33CBE51"
+  },
+  {
+    "Name": "WOW32.DLL",
+    "RelativePath": "system32\\WOW32.DLL",
+    "Sha256": "7F5186E1800CA39FF6CA65CBFBD7BA05DCAEDF6CA744630C11D6BB22CAA07390",
+    "Machine": 332,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "6578739DBC914600E1F823C7783A8E615665ACE30E3D87E4470E4C4D74DE7374"
+  },
+  {
+    "Name": "VDMREDIR.DLL",
+    "RelativePath": "system32\\VDMREDIR.DLL",
+    "Sha256": "556FC1BC1F8A56C314F4405B82EBA68913D593E50701CBC4C4D1C501C725F13A",
+    "Machine": 332,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "FF757E9BD370EE960B06D2EB287F8EE1E8D2727B9FFBF382FE43A6570408B8C0"
+  },
+  {
+    "Name": "nthook32.dll",
+    "RelativePath": "system32\\nthook32.dll",
+    "Sha256": "7288A7CD60320D43028C756C66CEF1507169A8FF2031C95732BB357C1A81A2CC",
+    "Machine": 332,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "FAD4D76F112E180EE22903DFF0320FC22411C140786DF3E7E38EFA5487FD8DCD"
+  },
+  {
+    "Name": "nthook64.dll",
+    "RelativePath": "system32\\nthook64.dll",
+    "Sha256": "6EDC6BF4E443F54D5F37146C93E5B6CEEFDCB92EC5F4941EA2F2DDCB3316885F",
+    "Machine": 34404,
+    "PackageId": "f58574b5-8d88-4e2b-8d09-93e8b4ea8020",
+    "InputSha256": "8DB7B735BAF33F68BF5215B519454F540094FFFDF2C459FFDC8757B0FF1011C8"
+  }
 ]

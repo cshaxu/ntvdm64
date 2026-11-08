@@ -1,0 +1,124 @@
+{
+  "suite": "Full",
+  "gateCount": 16,
+  "gatesPassed": 16,
+  "gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1007,
+      "CleanupMs": 512,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 154,
+      "CleanupMs": 512,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66526,
+      "CleanupMs": 498,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 43295,
+      "CleanupMs": 529,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 38290,
+      "CleanupMs": 489,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 11520,
+      "CleanupMs": 559,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 8648,
+      "CleanupMs": 452,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 39324,
+      "CleanupMs": 510,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12295,
+      "CleanupMs": 448,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28369,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30804,
+      "CleanupMs": 441,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 2886,
+      "CleanupMs": 484,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7531,
+      "CleanupMs": 533,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9634,
+      "CleanupMs": 449,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4038,
+      "CleanupMs": 451,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6226,
+      "CleanupMs": 431,
+      "Passed": true
+    }
+  ],
+  "console17": "17/17 expected returns",
+  "window17": "17/17 expected returns",
+  "win31Matrix": "4/4 startup/mode/normal exit",
+  "cachedBuild": "x86 and x64 pass; shared tests 14/14 each",
+  "keyboardPic": "89 assertions, 0 failures",
+  "packageManifestSha256": "8FD63495BBA08D5FF3D7CA47A03FB5D92D51017A705809F0B190B0971A9E956A",
+  "skipped": [
+    "dos4gw-nesticle: external fixture not provided"
+  ],
+  "logs": {
+    "cached-x86.log": "13B4FA925161E0A3D34A284366F77A77E018ACC6AFDE2239E34CB0205CEEF5C3",
+    "cached-x64.log": "152B9A7F61F78B28036C69E3E20D26B8C9FB30C2868714FE327B413ECFD1D479",
+    "keyboard-pic.log": "E7D48DE8B19DFC022688AF2AF7661D3501FAC3B76644BB6B264BE1A243242BCF",
+    "production001.log": "20563226903725393968E1DD64AFB88C6EAF9400EA0C5CBCE4385EA4E6179E5B",
+    "full001-child.out": "873E48CAED946CCCF506D177D7079F8E188EC629A35D287A3DC50745D4FC9AAE"
+  },
+  "limits": [
+    "Win95 observer exit 1 remains unclassified",
+    "Win95 interactive mouse/editor evidence uses diagnostic host",
+    "50 visible rows exceed current desktop"
+  ]
+}
