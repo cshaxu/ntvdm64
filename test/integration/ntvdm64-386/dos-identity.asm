@@ -84,6 +84,10 @@ call far [callback]
 pushf
 pop word [callback_flags]
 cld
+%ifdef GUEST_GRID_CONTROL
+mov [grid_return], eax
+mov word [grid_stage], 1
+%endif
 cmp sp, [before_sp]
 jne .callback_error
 cmp ebp, 0x12345678
@@ -129,6 +133,23 @@ mov ax, 9
 call far [api]
 jc .write
 mov [command_callback], edx
+%ifdef GUEST_GRID_CONTROL
+; The guest BIOS owns this change. A requests8-pixel glyphs; B retains16.
+; Later host commands must inherit and preserve each VM's real geometry.
+mov ax, 3
+int 0x10
+cmp byte [role], 'A'
+jne .grid_ready
+mov ax, 0x1112
+xor bx, bx
+int 0x10
+.grid_ready:
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+mov [grid_last_row], dl
+mov [grid_height], cx
+%endif
 %ifdef BLOCKED_KEYBOARD
 cmp byte [role],'A'
 jne .ordinary_keyboard
@@ -164,6 +185,9 @@ push dword 0x11111111
 %endif
 mov [standard_offset], sp
 %macro continuation_case 1-2 0
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 10
+%endif
 %ifdef CUSTOM_COMMAND
 mov byte [test_environment+13], '0'+%2
 %endif
@@ -241,43 +265,121 @@ db 0xc4,0xc4,0x54,%1
 pushf
 pop word [callback_flags]
 cld
+%ifdef GUEST_GRID_CONTROL
+mov [grid_return], eax
+mov word [grid_stage], 1
+%endif
 cmp sp, [before_sp]
 jne %%error
 %ifdef REAL_COMMAND
 %if %1 == 10
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 20
+%endif
 cmp eax, 0x54320000
 jne %%error
 %else
 cmp byte [role], 'A'
 jne %%native_b
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 21
+%endif
 cmp eax, 0x54320025 | (%2 << 8)
 jne %%error
 jmp %%native_result
 %%native_b:
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 22
+%endif
 cmp eax, 0x54320026 | (%2 << 8)
 jne %%error
 %%native_result:
 %endif
 %else
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 21
+%endif
 cmp eax, 0x54320025 | (%2 << 8)
 jne %%error
 %endif
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 23
+%endif
 cmp ebx, 0x10203040
 jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 24
+%endif
 cmp ecx, [expected_ecx]
 jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 25
+%endif
 cmp edx, [command_callback]
 jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 26
+%endif
 cmp esi, [expected_esi]
 jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 27
+%endif
 cmp edi, [expected_edi]
 jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 28
+%endif
 cmp ebp, [expected_ebp]
 jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 29
+%endif
 mov ax, [callback_flags]
 xor ax, [before_flags]
 test ax, 0x0ed5                 ; arithmetic flags, DF, IF and result CF
 jnz %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 2
+; BIOS1130 returns ES:BP; ES still owns the next command's environment.
+push es
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+pop es
+mov [grid_actual_row], dx
+mov [grid_actual_height], cx
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 30
+%endif
+cmp dl, [grid_last_row]
+jne %%error
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 31
+%endif
+cmp cx, [grid_height]
+jne %%error
+cmp byte [role], 'A'
+jne %%grid_b
+cmp dl, 24
+jbe %%error
+cmp cx, 8
+jne %%error
+jmp %%grid_ok
+%%grid_b:
+cmp dl, 24
+jne %%error
+cmp cx, 16
+jne %%error
+%%grid_ok:
+mov ax, 0x0f00
+int 0x10
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 32
+%endif
+cmp ah, 80
+jne %%error
+%endif
 %ifdef RESIZED_COMMAND
 %if %1 != 10
 ; The native buffer is80x50, with viewport rows25..49. Verify the
@@ -432,9 +534,24 @@ jnz %%error
 mov word [unread_stage],0
 %endif
 %endif
+%ifdef GUEST_GRID_CONTROL
+mov word [grid_stage], 0
+%endif
 inc word [continuation_count]
 jmp %%done
 %%error:
+%ifdef GUEST_GRID_CONTROL
+push ax
+mov ax, [grid_stage]
+mov [grid_failure], ax
+mov eax, [grid_return]
+mov [grid_failure_return], eax
+mov ax, [grid_actual_row]
+mov [grid_failure_row], ax
+mov ax, [grid_actual_height]
+mov [grid_failure_height], ax
+pop ax
+%endif
 inc word [continuation_errors]
 %%done:
 %endmacro
@@ -705,7 +822,19 @@ unread_index: dw 0
 unread_actual: dw 0
 unread_expected: dw 0
 %endif
+%ifdef GUEST_GRID_CONTROL
+grid_failure: dw 0
+grid_failure_return: dd 0
+grid_failure_row: dw 0
+grid_failure_height: dw 0
+%endif
 result_end:
+%ifdef GUEST_GRID_CONTROL
+grid_stage: dw 0
+grid_return: dd 0
+grid_actual_row: dw 0
+grid_actual_height: dw 0
+%endif
 %ifdef CONTINUATION
 command_callback: dd 0
 default_drive: db 0
@@ -955,4 +1084,9 @@ times 128-($-pair_ready) db 0
 %ifdef NESTED_COMMAND
 nested_output: db '@VM_NESTED_OUTPUT@',0
 times 128-($-nested_output) db 0
+%endif
+
+%ifdef GUEST_GRID_CONTROL
+grid_last_row: db 0
+grid_height: dw 0
 %endif

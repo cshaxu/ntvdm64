@@ -1,0 +1,113 @@
+{
+  "fullExit": 0,
+  "qualificationExit": 0,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 320514,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1657,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1023,
+        "CleanupMs": 394,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 129,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65883,
+        "CleanupMs": 474,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 42156,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 38454,
+        "CleanupMs": 418,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13463,
+        "CleanupMs": 365,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 8716,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 42351,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12281,
+        "CleanupMs": 438,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27806,
+        "CleanupMs": 371,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30245,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3093,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7503,
+        "CleanupMs": 382,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9388,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3180,
+        "CleanupMs": 370,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 5701,
+        "CleanupMs": 321,
+        "Passed": true
+      }
+    ]
+  },
+  "nativeResult": "PASS presentation, input return and execution lifetime",
+  "package": "build/t481-s3/r227-package",
+  "published": false,
+  "open": "Candidate viewport-external cursor handling: negative fixture229 running PID27444"
+}

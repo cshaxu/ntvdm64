@@ -1,0 +1,49 @@
+{
+  "result": "identical except parsed PE/debug timestamps and package identity",
+  "images": [
+    {
+      "package": "r232-package",
+      "rawSha256": "4c9d0cfed7882ee05fb919602008cec22a8c9a1ef19e6744a88f89767ee14445",
+      "normalizedSha256": "9b9d3af2a7ac2cc93d4effb1cf02483a79b20c88ce4bc822e774a5a0c131a779",
+      "fields": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          226740,
+          4,
+          "IMAGE_DEBUG_DIRECTORY timestamp"
+        ],
+        [
+          323196,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "package": "package233",
+      "rawSha256": "0dedf212c59bb54e482730ee0f8835d585029ca4765740ae738ab433198fbad2",
+      "normalizedSha256": "9b9d3af2a7ac2cc93d4effb1cf02483a79b20c88ce4bc822e774a5a0c131a779",
+      "fields": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          226740,
+          4,
+          "IMAGE_DEBUG_DIRECTORY timestamp"
+        ],
+        [
+          323196,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    }
+  ]
+}

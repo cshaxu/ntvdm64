@@ -29,6 +29,7 @@ param(
  [switch]$FillApplication,
  [string]$OrderedCommandImage,
  [switch]$ResizeCommand,
+ [switch]$GuestGridControl,
  [ValidateSet('386-dosonly0','386-dosonly1')][string]$RuntimeCase='386-dosonly0',
  [string]$UnreadInputImage,
  [ValidateSet('sequence','repeat','function','extended','oem')][string]$UnreadInputMode='sequence',
@@ -44,6 +45,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($GuestGridControl -and (!$RealCommand -or !$OrderedCommandImage -or $ResizeCommand -or $NestedCommand)){throw 'Guest grid control requires independent real ordered commands'}
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires monitor and marker'}
 if($ResizeCommand -and (!$OrderedCommandImage -or !$RealCommand -or $ServiceLoss -or $WorkerCloseMonitor)){throw 'Resize requires independent real ordered commands'}
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
@@ -92,6 +94,7 @@ $dosDefines=@()
 if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
+if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
 if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
 if($UnreadInputImage){
  $dosDefines+='-DUNREAD_INPUT=1'
@@ -335,6 +338,7 @@ try {
   $data=[IO.File]::ReadAllBytes("$dest/PATCH/$id.BIN")
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
   $expectedBytes=if($Continuation){76}else{72}
+  if($GuestGridControl){$expectedBytes+=10}
   if($UnreadInputImage){$expectedBytes+=8}
   if($VideoApplication){$expectedBytes+=10}
   if($Keyboard){$expectedBytes+=2}
@@ -367,6 +371,7 @@ try {
    }
    $row.continuationCount=[BitConverter]::ToUInt16($data,72)
    $row.continuationErrors=[BitConverter]::ToUInt16($data,74)
+   if($GuestGridControl){Write-Host ("{0} grid stage={1} return={2:X8} row={3} height={4}" -f $id,[BitConverter]::ToUInt16($data,76),[BitConverter]::ToUInt32($data,78),[BitConverter]::ToUInt16($data,82),[BitConverter]::ToUInt16($data,84))}
    if($row.continuationCount -ne 3 -or $row.continuationErrors){throw "Detached BOP continuation state failed: $id"}
   }
   if($Keyboard){

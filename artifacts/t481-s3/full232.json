@@ -1,0 +1,121 @@
+{
+  "source": "CBD5629A23FDB0860405B758F1F72C241A5FCE86CEC470602F30A430B1CBC95C",
+  "cachedExit": 0,
+  "fullExit": 0,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 318623,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1620,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1232,
+        "CleanupMs": 450,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 163,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65100,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 40501,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 37983,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13192,
+        "CleanupMs": 370,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 8900,
+        "CleanupMs": 321,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 42203,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12282,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27804,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30491,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3094,
+        "CleanupMs": 358,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7376,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9544,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3387,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 5956,
+        "CleanupMs": 378,
+        "Passed": true
+      }
+    ]
+  },
+  "package": "build/t481-s3/r232-package",
+  "manifest": "DF53CB2BFE908DE533AC29A89D70BB52F14060281DC9DFCD1429D05047C2DAC3",
+  "published": false,
+  "pending": [
+    "grid234",
+    "grid235",
+    "editor236",
+    "nested237",
+    "governance238",
+    "publish239"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "T481 S3 candidate: fontless physical VM text publication and cursor viewport projection",
+  "productionFiles": [
+    "src/ntvwm-exe/presentation.c"
+  ],
+  "mirrorDiff": "none",
+  "originalGuestChanges": "none",
+  "ownership": [
+    "Guest retains glyphs when no font configuration is handed off",
+    "Hidden Console owns native scrollback and absolute cursor",
+    "NTVWM projects existing packed VGA glyph/attribute bytes and cursor; no duplicate Unicode conversion",
+    "Existing PUBLICATION_END acknowledges guest application; text barrier has no video serial",
+    "NTCON and known-font video still use exact video serial barrier"
+  ],
+  "failureRules": [
+    "Publication errors use existing abort and propagate",
+    "No success on failed final capture or barrier",
+    "No new retry, deadline or protocol"
+  ],
+  "coverage": [
+    "Grid224/226 different physical grids both completion orders passed before cursor correction",
+    "Full227 and native228 passed before cursor correction",
+    "Native229 five expected regression failures",
+    "Native230 564 presentation,605 input-return,1084 lifetime checks passed",
+    "Editor236 op15/1113 regression fixed by preserving original packed glyph mapping",
+    "Native240 2253 assertions passed",
+    "Editor242 keyboard/menu/mouse Exit passed",
+    "Nested243 actual MEM output and normal exit passed",
+    "Grid244/246 both completion orders passed",
+    "Final Full24516/16 and publication248 verified"
+  ],
+  "pending": [
+    "S3 scope outside this bounded P6 remains in Current and working plan"
+  ],
+  "limits": [
+    "Grid height preservation is not font bitmap preservation proof",
+    "No claim for arbitrary runtime resize, DBCS/layout, palette or all S3 operations"
+  ],
+  "sourceHash": "9112AD76C36A75CBBB53C4907A0CF2D4EAAEDEC6FE13CC4637019CF9B4954295",
+  "testHash": "034601DEDFCB1ACF6915C9ED7B3B4E284F68C14A83929F4132A49E23C74B8E3E"
+}

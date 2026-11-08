@@ -1,0 +1,15 @@
+{
+  "baseline": "build/t481-s3/native229/presentation.txt",
+  "baselineFailures": 5,
+  "fixed": "build/t481-s3/native230",
+  "exit": 0,
+  "checks": {
+    "lifetime": 1084,
+    "presentation": 564,
+    "inputReturn": 605
+  },
+  "failures": 0,
+  "production": "src/ntvwm-exe/presentation.c",
+  "sourceHash": "CBD5629A23FDB0860405B758F1F72C241A5FCE86CEC470602F30A430B1CBC95C",
+  "pendingJob": 26100
+}

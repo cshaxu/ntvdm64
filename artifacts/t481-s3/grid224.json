@@ -1,0 +1,51 @@
+{
+  "case": "T481 S3 guest grid preservation",
+  "candidate": "build/t481-s3/package220",
+  "published": false,
+  "grid224": {
+    "exit": 0,
+    "normalWindowsExit": true,
+    "vms": [
+      "A:80x60/font8",
+      "B:80x25/font16"
+    ],
+    "callbacks": 320,
+    "originalGuestUnchanged": true,
+    "log": "build/t481-s3/grid224.stdout"
+  },
+  "failures": {
+    "grid217": "Actual BIOS8/VIDEO16 mismatch",
+    "grid219": "No video serial for cell-only handoff",
+    "grid221": "A continuation count2/errors1",
+    "grid223": "54320165: second native process returned101; BIOS1130 test did not preserve ES",
+    "grid224": "ES preserved; all assertions pass"
+  },
+  "pending": {
+    "pid": 19480,
+    "script": "build/t481-s3/qualify225.ps1",
+    "cases": [
+      "reverse order grid226",
+      "cached225",
+      "Full227",
+      "native228"
+    ]
+  },
+  "hashes": [
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "0723B8E50272786E805AED489A84064C5DF1D9C0BC4E2B25E3BFDA168C181259"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "sha256": "37082568CAE44A7D588B94607D1487D9FED15E492BE36CD1F78E8FDE0E5BA78D"
+    },
+    {
+      "path": "build/t481-s3/grid224.stdout",
+      "sha256": "5B7AB749B62FA5075EEE39BC0194DA45BB8AF03B8630ED442B7CF4DDC1286E66"
+    },
+    {
+      "path": "build/t481-s3/package220/system32/ntvwm.exe",
+      "sha256": "F880C85E1D9698A4D10FF48EBCE1A1B4A056ACECAA9C7B3AB02D2685BE5BD80B"
+    }
+  ]
+}

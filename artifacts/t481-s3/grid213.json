@@ -1,0 +1,27 @@
+{
+  "case": "T481 S3 guest-selected50/25 rows grid213",
+  "exit": 1,
+  "pid": 8136,
+  "result": "Runtime observer timeout; actual PUBLICATION_END operation44 returns ERROR_NOT_SUPPORTED(50)",
+  "control": "Each VM sets BIOS mode3; A additionally invokes1112; after each real ordered host command the guest checks A50rows/8pixels and B25rows/16pixels",
+  "hypothesis": "Initial guest snapshot has BIOS height but no copied font configuration; NTVWM default16pixel frame may conflict with A8pixel BIOS",
+  "limits": "Failure reproduced; exact payload-height attribution pending diagnostic214/grid215. Not a passed geometry test.",
+  "inputs": [
+    {
+      "path": "build/t481-s3/grid213.ps1",
+      "sha256": "38C42007165D666A957A8823D4079BAD00BB7B660DDE564420D5356702209D28"
+    },
+    {
+      "path": "build/t481-s3/grid213.exit",
+      "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+    },
+    {
+      "path": "build/t481-s3/grid213/runtime/matrix-results.json",
+      "sha256": "57695DAA5BE8DF57F3AEE025A50C4B19EEBBC8C1043C808335BDB3E93ECCCB22"
+    },
+    {
+      "path": "build/t481-s3/grid213/continuation-trace.txt",
+      "sha256": "123F19F7ECEBDB35B5CB7A13E43007F2EF1F7F9CC4F6F0BF27A1A99A811B67F8"
+    }
+  ]
+}

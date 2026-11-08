@@ -579,14 +579,13 @@ BOOL test_cmd_dispatch(ULONG service)
  * Operation14 traces separately establish the later application result. */
 static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
 {
-    uint32_t descriptor[7], count, i, cell_address, cell_bytes = 2, stride;
+    uint32_t descriptor[7], count, i, cell_address, cell_bytes = 2, stride, video_height = 0;
     ntvdm_vm_text_header header;
     char path[MAX_PATH], *text;
     BYTE *cells;
     FILE *file;
     static uint32_t editors[16];
     static DWORD editor_count;
-    if (!GetEnvironmentVariableA("MVDM_SCREEN_TRACE", path, sizeof(path))) return;
     if (extent != sizeof(descriptor) ||
         !mvdm_softpc_guest_memory_copy_from(address, (BYTE *)descriptor, sizeof(descriptor)) ||
         descriptor[6] || descriptor[5] < sizeof(header) ||
@@ -609,12 +608,17 @@ static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
                 d->bytes != sizeof(console_text_style) + d->height * d->stride ||
                 descriptor[5] - offset - sizeof(video) < d->bytes)
                 ExitProcess(ERROR_INVALID_DATA);
+            if (!mvdm_softpc_guest_memory_copy_from(descriptor[4] + offset + sizeof(video),
+                (BYTE *)&video_height, sizeof(video_height))) ExitProcess(ERROR_INVALID_ADDRESS);
             header.columns = d->width; header.rows = d->height;
             count = header.columns * header.rows;
             stride = d->stride; cell_bytes = stride / header.columns;
             cell_address = descriptor[4] + offset + sizeof(video) + sizeof(console_text_style);
         }
     }
+    trace(0xb10, header.rows, header.font_height);
+    trace(0xb11, header.columns, video_height);
+    if (!GetEnvironmentVariableA("MVDM_SCREEN_TRACE", path, sizeof(path))) return;
     cells = HeapAlloc(GetProcessHeap(), 0, stride * header.rows);
     text = HeapAlloc(GetProcessHeap(), 0, count + header.rows + 1);
     if (!cells || !text) ExitProcess(ERROR_NOT_ENOUGH_MEMORY);
@@ -631,9 +635,10 @@ static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
     text[count + header.rows] = 0;
     (void)fopen_s(&file, path, "ab");
     if (!file) ExitProcess(ERROR_OPEN_FAILED);
-    fprintf(file, "VM=%08lx TOKEN=%08lx:%08lx %lux%lu\n%s\n",
+    fprintf(file, "VM=%08lx TOKEN=%08lx:%08lx %lux%lu BIOSFONT=%lu VIDEOFONT=%lu\n%s\n",
         (unsigned long)vm, (unsigned long)descriptor[1], (unsigned long)descriptor[0],
-        (unsigned long)header.columns, (unsigned long)header.rows, text);
+        (unsigned long)header.columns, (unsigned long)header.rows,
+        (unsigned long)header.font_height, (unsigned long)video_height, text);
     fclose(file);
     if (strstr(text, "File") && strstr(text, "Edit") &&
         GetEnvironmentVariableA("MVDM_EDITORS_READY", path, sizeof(path))) {

@@ -1,0 +1,24 @@
+{
+  "case": "T481 S3 grid217 live payload evidence",
+  "terminal": false,
+  "pid": 16864,
+  "traceOperations": {
+    "2833": "columns, VIDEO font height",
+    "2832": "rows, BIOS font height"
+  },
+  "observed": [
+    "2832 00000019 00000010",
+    "2833 00000050 00000010",
+    "2832 0000003c 00000008",
+    "2833 00000050 00000010",
+    "2832 00000019 00000010",
+    "2833 00000050 00000010",
+    "2832 0000003c 00000008",
+    "2833 00000050 00000010",
+    "2832 00000019 00000010",
+    "2833 00000050 00000010"
+  ],
+  "finding": "25row BIOS16/VIDEO16;60row BIOS8/VIDEO16. Initial missing font configuration lets native fallback16 reach the8pixel VM.",
+  "testCorrection": "BIOS1112 does not guarantee50rows; record actual BIOS geometry and preserve it across commands. Current GuestGridControl50row assertion must be corrected after the active run terminates.",
+  "limits": "Live evidence; overall run remains nonpassing/unqualified. No production repair yet."
+}

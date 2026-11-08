@@ -269,6 +269,46 @@ done:
 
 /* Entire transaction, including final video ACK, completes before the shared
  * engine records success. Never inspect mutable Console state on this thread. */
+/* A VM with no copied font configuration still owns its real glyphs. Send
+ * already mapped VGA cells through the existing transaction; never replace those
+ * glyphs with the native worker's startup fallback bitmap. */
+static DWORD publish_visible_cells(ntvwm_presentation *client,
+    const native_publication *snapshot,const BYTE *payload)
+{
+    const console_video_description *d=&snapshot->description;
+    const console_text_style *style=(const console_text_style *)payload;
+    const BYTE *packed=payload+sizeof(*style);
+    console_io_cell row[CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell)];
+    console_io_request q={0};console_io_reply reply;
+    DWORD x,y,error,step=d->stride/d->width;
+    BOOL cursor_inside=style->cursor_column>=0 && style->cursor_row>=0 &&
+        (DWORD)style->cursor_column<d->width && (DWORD)style->cursor_row<d->height;
+    if(d->width>ARRAYSIZE(row))return ERROR_NOT_SUPPORTED;
+    for(y=0;y<d->height;++y) {
+        for(x=0;x<d->width;++x) {
+
+            const BYTE *p=packed+y*d->stride+x*step;
+            if(step==3 && p[2])return ERROR_NOT_SUPPORTED;
+            row[x].character=p[0];row[x].attribute=p[1];
+        }
+        ZeroMemory(&q,sizeof(q));q.operation=CONSOLE_IO_WRITE_CELLS_A;
+        q.state.width=d->width;q.state.height=1;q.state.right=d->width-1;
+        q.state.top=q.state.bottom=y;q.bytes=d->width*sizeof(*row);q.data=(BYTE *)row;
+        error=exchange(client,&q,&reply);if(error)return error;
+    }
+    /* The hidden Console retains the absolute cursor even outside its visible
+     * viewport. The guest projection hides it until it enters that viewport. */
+    if(cursor_inside) {
+        ZeroMemory(&q,sizeof(q));q.operation=CONSOLE_IO_CURSOR_POSITION;
+        q.state.x=style->cursor_column;q.state.y=style->cursor_row;
+        error=exchange(client,&q,&reply);if(error)return error;
+    }
+    ZeroMemory(&q,sizeof(q));q.operation=CONSOLE_IO_CURSOR_INFO;
+    q.state.cursor_size=snapshot->cursor.dwSize;
+    q.state.cursor_visible=cursor_inside && snapshot->cursor.bVisible!=FALSE;
+    return exchange(client,&q,&reply);
+}
+
 static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
 {
     ntvwm_presentation *client=context;
@@ -379,7 +419,11 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
         request.state.attribute=snapshot->info.wAttributes;
         error=exchange(client,&request,&reply);
     }
-    if(!error)error=ntvwm_presentation_text(client,&description,payload,description.bytes);
+    if(!error) {
+        if(frame_only && !client->has_handoff_font)
+            error=publish_visible_cells(client,snapshot,payload);
+        else error=ntvwm_presentation_text(client,&description,payload,description.bytes);
+    }
     if(!error) {
         ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_END;
         error=exchange(client,&request,&reply);
@@ -642,12 +686,18 @@ DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style
     if(!error)error=final_capture(client,font);
     if(!error)error=return_unused_input(client);
     if(!error) {
-        request.operation=CONSOLE_IO_PRESENT_BARRIER;
-        /* Bind final I/O release to the complete native frame just captured.
-         * The regular flush path stays asynchronous; only handoff waits for
-         * NTCON's presentation-thread commit of this serial. */
-        request.state.mode=client->channel.video_serial;
+        request.operation=CONSOLE_IO_WINDOW_QUERY;
+        request.state.mode=CONSOLE_WINDOW_PRESENTATION_ONLY;
         error=exchange(client,&request,&reply);
+        if(!error) {
+            BOOL cells_only=reply.state.left && !client->has_handoff_font;
+            ZeroMemory(&request,sizeof(request));
+            /* VM cell transactions were applied at PUBLICATION_END and have
+             * no video serial. NTCON still requires its exact visible frame. */
+            request.operation=cells_only ? CONSOLE_IO_BARRIER : CONSOLE_IO_PRESENT_BARRIER;
+            if(!cells_only)request.state.mode=client->channel.video_serial;
+            error=exchange(client,&request,&reply);
+        }
     }
     client->title_valid=FALSE;
     LeaveCriticalSection(&client->lock);return error;

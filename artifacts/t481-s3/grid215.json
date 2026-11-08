@@ -1,0 +1,10 @@
+{
+  "case": "T481 S3 grid215 repeated failure",
+  "exit": 1,
+  "diagnosticBuild": 0,
+  "observation": "Guest BOP14 acknowledges one VM with50 while peer acknowledgements are0; expected BIOSFONT/VIDEOFONT file did not appear",
+  "limits": "No payload-height proof; failure cleanup also reports nthook64.dll occupied in owned O:/tmp/n79c scope. Do not call this a passing run or attribute the exact cause yet.",
+  "next": "diagnostic216/grid217 PID16864 uses existing continuation trace operations0xb10/0xb11",
+  "traceHash": "9636B08D43D991EB27D14F960BD6F456D8F904D1748ED9C5B158202289B0F4DB",
+  "logHash": "039DE8739E7F9091A32F1C26F4E88F64F7CBFA533D1B309D37F70619C1BD802F"
+}

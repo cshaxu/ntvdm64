@@ -1,0 +1,22 @@
+{
+  "failedCase": "editor236",
+  "failure": "Native menu absent; WRITE_CELLS_W operation15 returned1113",
+  "failedTraceHash": "ED1B83AABDF066A3FCBFD564A98E6437242FA1C2F0D4F4CE1C341E5AF38A045A",
+  "fix": "Reuse existing packed VGA glyph bytes through WRITE_CELLS_A instead of strict Unicode re-encoding",
+  "sourceHash": "9112AD76C36A75CBBB53C4907A0CF2D4EAAEDEC6FE13CC4637019CF9B4954295",
+  "nativeFixture": "native240:2253 checks/0 failures",
+  "editorCase": "editor242",
+  "editorExit": 0,
+  "editorResult": {
+    "firstExit": "Native",
+    "nativeVm": "8083b000",
+    "dosVm": "80799000",
+    "menus": true,
+    "completed": 2,
+    "mouseMenu": true,
+    "mouseExitVerified": true,
+    "saveVerified": false
+  },
+  "savedContentProven": false,
+  "published": false
+}

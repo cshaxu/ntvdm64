@@ -25,6 +25,7 @@ typedef struct peer_state {
     HANDLE pipe;
     HANDLE publication_ack;
     unsigned mode,calls;
+    BOOL physical;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
     unsigned publication_begins,publication_ends,publication_aborts;
     unsigned titles,cell_writes;
@@ -67,6 +68,8 @@ static DWORD WINAPI peer(void *context)
                 state->video.pending_description.bytes-state->video.received)
             video_final=TRUE;
         ++state->calls;
+        if(state->physical && (request.operation==CONSOLE_IO_VIDEO_BEGIN ||
+            request.operation==CONSOLE_IO_PRESENT_BARRIER || request.operation==CONSOLE_IO_WRITE_CELLS_W))return ERROR_INVALID_FUNCTION;
         if(state->mode==0) {
             /* This case calls the generic barrier explicitly below; the
              * sequence-specific final barrier belongs to presentation_end. */
@@ -75,7 +78,7 @@ static DWORD WINAPI peer(void *context)
             if(sequence>ARRAYSIZE(expected) || request.operation!=expected[sequence-1])
                 return ERROR_INVALID_FUNCTION;
         }
-        if(request.operation==CONSOLE_IO_WRITE_CELLS_W)++state->cell_writes;
+        if(request.operation==CONSOLE_IO_WRITE_CELLS_W || request.operation==CONSOLE_IO_WRITE_CELLS_A)++state->cell_writes;
         /* The sender must never acquire the frontend implicitly. */
         if(request.operation==38)return ERROR_INVALID_FUNCTION; /* Retired activation. */
         if(state->mode==0 || (state->mode==6 && sequence<=5)) {
@@ -121,7 +124,7 @@ static DWORD WINAPI peer(void *context)
             (state->mode==6 && sequence>5)) {
             if(request.operation==CONSOLE_IO_WINDOW_QUERY) {
                 if(request.state.mode!=CONSOLE_WINDOW_PRESENTATION_ONLY)return ERROR_INVALID_DATA;
-                reply.state.left=FALSE; /* Full Console peer, including scrollback. */
+                reply.state.left=state->physical; /* Physical VM or full Console peer. */
             } else if(request.operation==CONSOLE_IO_PUBLICATION_BEGIN) {
                 if(state->publication_begins!=state->publication_ends+state->publication_aborts)error=ERROR_BUSY;
                 else ++state->publication_begins;
@@ -166,6 +169,8 @@ static DWORD WINAPI peer(void *context)
                 }
             } else if(request.operation==CONSOLE_IO_CURSOR_POSITION) {
                 state->screen.x=request.state.x;state->screen.y=request.state.y;
+            } else if(request.operation==CONSOLE_IO_CURSOR_INFO) {
+                state->screen.cursor_visible=request.state.cursor_visible;
             } else if(request.operation==CONSOLE_IO_GET_CURSOR_INFO) {
                 reply.state.cursor_size=25;reply.state.cursor_visible=1;
                 if(state->mode==12)reply.state.cursor_size=0;
@@ -208,7 +213,8 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_VIDEO_DATA)
                 error=frontend_video_data(&state->video,request.state.mode,request.state.count,request.data,request.bytes);
             else if(request.operation!=CONSOLE_IO_BARRIER && request.operation!=CONSOLE_IO_PRESENT_BARRIER && request.operation!=CONSOLE_IO_SET_MODE &&
-                request.operation!=CONSOLE_IO_WRITE_CELLS_W && request.operation!=CONSOLE_IO_CURSOR_POSITION &&
+                request.operation!=CONSOLE_IO_WRITE_CELLS_W && request.operation!=CONSOLE_IO_WRITE_CELLS_A &&
+                request.operation!=CONSOLE_IO_CURSOR_POSITION &&
                 request.operation!=CONSOLE_IO_CURSOR_INFO && request.operation!=CONSOLE_IO_ATTRIBUTE)
                 return ERROR_INVALID_FUNCTION;
             reply.result=error==0;reply.error=error;
@@ -240,6 +246,8 @@ static void run_case(unsigned mode)
     WCHAR name[120];HANDLE pipe=NULL,client=INVALID_HANDLE_VALUE,thread=NULL,stop=NULL,process=NULL;
     ntvwm_presentation *endpoint=NULL;peer_state state={0};DWORD error,exit_code=0;
     console_io_request request={0};console_io_reply reply;
+    BOOL physical=mode==22;
+    if(physical)mode=11;
     swprintf_s(name,120,L"\\\\.\\pipe\\ntvwm-presentation-test-%lu-%u",GetCurrentProcessId(),mode);
     pipe=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
         PIPE_TYPE_BYTE|PIPE_READMODE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,65536,65536,0,NULL);
@@ -248,7 +256,7 @@ static void run_case(unsigned mode)
     CHECK(client!=INVALID_HANDLE_VALUE);if(client==INVALID_HANDLE_VALUE)goto done;
     CHECK(ConnectNamedPipe(pipe,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
     stop=CreateEventW(NULL,TRUE,mode==5,NULL);CHECK(stop!=NULL);if(!stop)goto done;
-    state.pipe=pipe;state.mode=mode;
+    state.pipe=pipe;state.mode=mode;state.physical=physical;
     state.publication_ack=CreateSemaphoreW(NULL,0,64,NULL);
     CHECK(state.publication_ack!=NULL);if(!state.publication_ack)goto done;
     state.screen.width=20;state.screen.height=8;state.screen.right=19;state.screen.bottom=7;
@@ -394,7 +402,21 @@ static void run_case(unsigned mode)
                         CHECK(WriteConsoleInputW(input,keys,ARRAYSIZE(keys),&written) && written==ARRAYSIZE(keys));
                     }
                     CHECK(SetConsoleActiveScreenBuffer(buffer));
-                    if(mode==11) {
+                    if(physical) {
+                        SMALL_RECT viewport={0,8,19,15};
+                        CHECK(SetConsoleScreenBufferSize(buffer,(COORD){20,16}));
+                        CHECK(SetConsoleWindowInfo(buffer,TRUE,&viewport));
+                        CHECK(!ntvwm_presentation_flush(endpoint,&font));
+                        CHECK(!state.screen.cursor_visible && state.cell_writes>0);
+                        CHECK(GetConsoleScreenBufferInfo(buffer,&after));
+                        CHECK(after.dwCursorPosition.X==5 && after.dwCursorPosition.Y==2);
+                        viewport.Top=0;viewport.Bottom=7;
+                        CHECK(SetConsoleWindowInfo(buffer,TRUE,&viewport));
+                        CHECK(!ntvwm_presentation_flush(endpoint,&font));
+                        CHECK(state.screen.cursor_visible && state.screen.x==5 && state.screen.y==2);
+                        CHECK(!state.video.published_serial);
+                    }
+                    if(mode==11 && !physical) {
                         unsigned writes;
                         BYTE glyph;
                         /* Real begin enables the production publisher. Wait
@@ -428,7 +450,7 @@ static void run_case(unsigned mode)
                         CHECK(!ntvwm_presentation_capture(endpoint,&font));
                         CHECK(ntvwm_presentation_end(endpoint,&font)==ERROR_NOT_READY);
                     } else CHECK(ntvwm_presentation_end(endpoint,&font)==0);
-                    if(mode==11)CHECK(state.screen.x==3 && state.screen.y==4);
+                    if(mode==11 && !physical)CHECK(state.screen.x==3 && state.screen.y==4);
                     if(mode==16) {
                         DWORD remaining=MAXDWORD;
                         CHECK(GetNumberOfConsoleInputEvents(GetStdHandle(STD_INPUT_HANDLE),&remaining) && !remaining);
@@ -606,7 +628,7 @@ done:
             CHECK(state.returned[i].type==KEY_EVENT && state.returned[i].key_down==1 &&
                 state.returned[i].repeat==1 && state.returned[i].character==0x100+i);
     }
-    if(mode==11)CHECK(state.video.published_serial==4 && state.video.pixels &&
+    if(mode==11 && !physical)CHECK(state.video.published_serial==4 && state.video.pixels &&
         state.video.pixels[sizeof(console_text_style)+2*(2*20+4)]=='N');
     if(mode==13) {
         CHECK(state.video.published_serial==1 && state.video.pixels);
@@ -706,7 +728,7 @@ int wmain(int argc,WCHAR **argv)
          * Verify exact injected-input order before changing Console geometry;
          * do not weaken the queue-count assertions or wait out the event. */
         run_case(7);run_case(8);run_case(19);
-        for(mode=0;mode<=21;++mode)
+        for(mode=0;mode<=22;++mode)
             if(mode!=7 && mode!=8 && mode!=16 && mode!=19)run_case(mode);
     }
     fprintf(log_file,"NTVWM-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);

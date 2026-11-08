@@ -1410,3 +1410,104 @@ physical guest input. Diagnostic208 builds successfully. Redirect209 passes
 actual file MEM content, separate A/B append markers, pipe screen content,320
 callback checks and normal Win3.1 exit. Evidence artifacts/t481-s3/redirect209.json.
 Geometry/font/codepage and the full cancellation-owner matrix remain open.
+
+### S3 guest-selected grid213
+
+The new GuestGridControl probe invokes BIOS mode3 in both VMs and1112 in A,
+then requires A=80x50/font8 and B=80x25/font16 after real ordered commands.
+Grid213 fails with actual PUBLICATION_END50 and runtime timeout. It is not
+proof that BIOS mode switching itself failed. Initial VM snapshots contain
+height but no published font configuration; NTVWM falls back to its built-in
+16pixel font. Diagnostic214/grid215 will observe the transmitted BIOSFONT and
+VIDEOFONT values before application. Product implementation is unchanged.
+Original ega_char_gen in base/video/ega_vide.c distinguishes1100 load-only
+from1110 load+recalc_text(height); use this original mechanism if row-changing
+font application proves necessary, rather than authoring duplicate VGA logic.
+Evidence artifacts/t481-s3/grid213.json; PID22968 owns the diagnostic sequence.
+
+### S3 guest grid correction and qualification224--228
+
+Grid217 proves initial BIOS8/VIDEO16 disagreement, not a guest failure. The
+NTVWM initial snapshot has no font configuration; its native fallback font
+must not overwrite the physical VM's glyph owner. Candidate presentation.c
+uses the existing Unicode cell transaction for a physical VM without a copied
+font configuration, then the existing text barrier. Font-bearing video and
+NTCON retain their serial-bound presentation barrier. Errors abort the staged
+transaction and propagate through the existing lifecycle; no new transport,
+font cache, retry or deadline is introduced. This changes project-owned code,
+not mirrored source or original guest binaries.
+
+Grid219 failed all three A continuations; correcting the cell-only final
+barrier yielded two passes in grid221. Grid223 captured54320165 in round1:
+the native fixture returned101 because test BIOS1130 overwrote ES, the next
+command's environment segment. Preserving ES fixes the test. Grid224 and
+reverse-order grid226 both pass the actual A80x60/font8 and B80x25/font16
+preservation, native08/AH0/AH1 and0A returns,320 callback checks, normal Windows
+exit and unchanged original installation. This supersedes the initial fixed
+50-row assumption. Evidence: artifacts/t481-s3/grid224.json and run logs.
+
+Qualification225 (PID19480) runs cached225, Full227 and native228 serially.
+No new release is claimed until their terminal receipts are inspected.
+Source review identified an additional required candidate check: a valid
+native cursor outside the viewport must not be misclassified as an invalid
+frame by the new cell-only route. The current guard rejects it; preserve this
+open item until corrected and tested. Arbitrary runtime geometry changes,
+font bitmap preservation, palette/codepage and remaining S3 operations are
+not inferred from the passed grid-height witness.
+
+### S3 viewport cursor correction229--230
+
+Qualification225 completed: Full22716/16, both grid completion orders,
+x86/x64 shared checks14/14 and keyboard/PIC89/89. Native228 passed the existing
+presentation/input-return/lifetime fixtures. See qualification228.json.
+
+Source review found the new cell path rejected a valid cursor outside the
+native viewport. The physical-peer fixture229 reproduces five failures in
+flush, re-entry and final handoff. Production now keeps absolute cursor state
+in the hidden Console, omits guest position updates while outside the viewport,
+and projects visibility as native-visible AND inside. Re-entry sends the real
+relative position. No new cache or guest state is introduced. Fixture230
+passes presentation564, input-return605 and lifetime1084 assertions. Its peer
+rejects VIDEO_BEGIN/PRESENT_BARRIER on the fontless physical route, proving
+that text-only handoff does not invent a video serial. Existing full Console
+and known-font cases remain exercised. See artifacts/t481-s3/cursor230.json.
+
+Final-source qualification231 (PID26100) runs cached231, Full232 and diagnostic
+package233 with grid234/235. Additional real editor and nested chain checks
+must use that same candidate NTVWM before publication. Prior Full227 does not
+qualify the cursor correction by itself. S3's broader requirements remain.
+
+### S3 real editor regression236 and mapping correction240
+
+Final Full23216/16 and grid234/235 passed, but editor236 failed the native
+File-menu witness. Trace identifies op15 (WRITE_CELLS_W) error1113; the native
+editor's initial frame appeared but its menu never committed. Thus the new
+cell path must not substitute strict guest Unicode encoding for the established
+text_frame VGA-glyph mapping. It now sends the already packed glyph/attribute
+bytes through existing WRITE_CELLS_A. This removes the duplicate conversion
+and preserves VIDEO's fallback/reverse mapping. Underline remains explicitly
+unsupported by the guest application; it is not silently discarded.
+
+Native240 passes the same2253 assertions, and the physical-peer fixture now
+rejects Unicode-cell publication as well as invented video barriers. Real
+editor requalification is required: native fixtures alone cannot close this
+regression. Qualification241 (PID22816) rebuilds only affected ntvwm.exe in the
+existing Ninja cache, then stages package241, runs editor242, nested243,
+grid244/246, and Full245 serially. Earlier gates do not qualify this last fix.
+
+The prior r232 and diagnostic233 NTVWM byte difference was separately proven:
+20 differing bytes, exclusively parsed COFF/debug timestamps and package GUID;
+normalized complete images match. Evidence ntvwm-package-identity233.json is
+not a claim about later packages. Publish only the final tested production
+package, never the diagnostic NTVDM image.
+
+Final qualification241 completed0: editor242, nested243, grid244/246 and
+Full24516/16 passed on the mapping-corrected candidate. Native240 passed2253
+assertions. Evidence artifacts/t481-s3/final247.json. Complete11 production
+package r245 is manifest-verified and shares the NTVWM input hash with the
+guest-tested diagnostic241 package. Governance/publication/P6 remain pending.
+
+P6 publication248 completed: package14d987d1-7fe7-4a7d-bc6e-af50e08c0bd6,
+all11 images and manifest verified at both release destinations, addons
+assets-only. Governance247 passed. Publication248 and final247 retain exact
+hashes and gate results. P6 delivers this bounded repair; S3 stays active.
