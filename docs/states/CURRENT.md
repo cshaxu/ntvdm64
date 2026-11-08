@@ -150,40 +150,15 @@ inside a command. Product publication277 stays unchanged; P9 is committed/pushed
 S3 remains active: reached operations, arbitrary runtime geometry changes,
 actual font bitmap/palette preservation, codepage/layout cases, display/metadata
 and remaining nested cancellation boundaries stay in the working plan. Grid
-height preservation is not proof of arbitrary font contents. Saved editor-file
-contents are not inferred from menu interaction. Guest pointer clipping must
+height preservation is not proof of arbitrary font contents. Combined editor save/content and mouse Exit pass306/307 in both orders. Guest pointer clipping must
 not alter the unrelated modern desktop. S4 Win95 and S5 combined qualification
 remain uncompleted. The BIOS/INT16 handback boundary remains approved.
 No S3 or whole-T closure is claimed. Historical evidence stays in the working
 plan and artifacts rather than an expanding Current chronology.
 
-## S3 bounded scanline investigation
-
-Diagnostic287 builds successfully. Run288 reproduces the strict50-row test
-failure but exits Windows normally and verifies original guest bytes unchanged.
-The BIOS1112 entry sees481 physical scanlines and changes VM2 BDA rows25->60
-before native handoff. Evidence: artifacts/t481-s3/scanline288.json. This
-excludes NTVWM handoff as the origin of this particular change; it does not
-yet establish whether virtual BIOS behavior or missing host binding is wrong.
-Production publication277 remains unchanged; no diagnostic image is published.
-
-Diagnostic292 proves the mismatch: virtual CRTC VDE399 becomes479 because
-recalc_text used physical height481. DIV-890 adds16 lines to read the existing
-virtual CRTC in software V86, preserving the original calculation and restoring
-the index. Candidate293 builds; actual dual-VM scanline294 passes the retained
-50-row assertion, three font/palette checks per VM,320 callback checks and
-normal Windows exit. Original guest unchanged. Evidence: scanline292.json and
-scanline294.json in artifacts/t481-s3. Reverse-order295 passes the same guest checks. Cached296 passes both widths
-and shared tests14/14 each, plus keyboard regression exit0. Full297 is running;
-no candidate default publication or full qualification yet.
-
-Full297 completes16/16 with production package d75521ce-8b98-4319-9ec7-31b445a12af3.
-Standalone production DOS298 retains50 rows/font8. Editor299 was an invalid
-fixture/package pairing: the controller waits on diagnostic-only readiness
-files absent from the production host. It is retained as failure, not pass.
-Correct diagnostic editor300 passes keyboard/menu/mouse Exit and normal exit.
-Uninstrumented production Win3.1 four-combination301 is running. Evidence:
-artifacts/t481-s3/qualification297.json. Publication/commit remain pending.
+P10 scanline investigation and failed controls remain in the working plan and
+artifacts/t481-s3/scanline288.json, scanline292.json, scanline294.json and
+qualification297.json. The completed delivery is recorded below.
 
 ## S3 P10 delivery
 
@@ -193,4 +168,59 @@ O:/winnt/system32, package d75521ce-8b98-4319-9ec7-31b445a12af3; all hashes
 match. Authored addons remain assets-only and unchanged. Full29716/16,
 DOS298, editor300, scanline294/295 and fixture302 qualify the bounded DIV-890
 repair. Evidence: artifacts/t481-s3/review303.json and publication304.json.
-Commit/push pending. S3 remaining operation scope and S4/S5 remain open.
+P10 is committed/pushed at c3df64bdf. S3 operation scope and S4/S5 remain open.
+
+Dual-editor306/307 now combine SaveWitness and guest mouse Exit in both
+completion orders; files A.TXT/B.TXT contain aaa/bbb and both VMs/Windows exit
+normally. Evidence: artifacts/t481-s3/editor307.json. Earlier save-only
+qualification remains valid; this adds the latest combined path. Visible-grid
+resize308 is a new baseline witness: native80x50 buffer AND50-row viewport,
+separate from the old25-row scrollback test. Runtime geometry work stays open.
+
+Resize308 is a retained failure, now localized: four publications each write25
+rows then WRITE_CELLS_A returns87 for the next row. Native readiness verifies
+actual80x50 visible geometry; the VM provider still bounds writes to its
+existing BIOS grid. Guest apply also rejects different rows/font, so enlarging
+only host storage is insufficient. Evidence: artifacts/t481-s3/resize308.json.
+Windows exits normally; this does not make the identity assertions pass.
+No new production changes or publication after P10.
+
+Region311 candidate adds explicit visible-region staging with size derived from
+the header. x86/x64 mvdm-vm-text tests pass grow/shrink, refusal rollback and
+disconnect discard. Evidence: artifacts/t481-s3/region311.json. Native publisher
+and real BIOS geometry application are not yet connected; resize308 remains
+failing. No new publication/commit and no S3 closure.
+
+Native312 connects PREPARE_TEXT_REGION before VM cell/VIDEO writes inside the
+existing transaction. Presentation/input-return/lifetime fixtures pass; the peer
+checks preparation ordering and visible20x8->20x10, not hidden20x16 scrollback.
+Evidence: artifacts/t481-s3/native312.json. This supersedes Region311's publisher
+not-connected limitation only. Real guest geometry switching is still pending.
+
+## S3 visible-grid candidate qualification
+
+NTVDM stages grid/font-height proposals; NTVWM prepares the visible region
+inside its existing publication; authored ntvdm64.386 calls original BIOS
+font-row services and queries dimensions before acknowledging. insignia.386
+and original Windows guest binaries are unchanged. Diagnostic313 builds.
+Run314 exposed a probe ES-clobber after BIOS1130, corrected before315.
+315/316 pass80x50 in both completion orders.317 passes25->50->25 with actual
+BIOS rows/font and cell markers in both VMs,320 callback checks and normal
+Windows exit. Evidence: artifacts/t481-s3/resize316.json and resize317.json.
+Mouse source audit confirms absolute cell events, not NTCON pixel deltas.
+Cached319 completes exit0; both shared suites14/14 and keyboard/PIC pass. Custom-font/other-mode changes
+and remaining S3 operations remain open; this is not universal resize proof.
+Full320/editor321/editor322/production323 are serialized by qualification320
+(owner PID29024; script/log/exit records under build/t481-s3). Production
+source stays frozen. No new publication or commit until qualification/review.
+
+Qualification320 completes exit0: Full32016/16, editor321/322 save and guest
+mouse Exit in both orders, production323 all four mode/DOSONLY startup and
+normal-exit cases pass. Evidence: artifacts/t481-s3/full320.json, editor322.json
+and review324.json. Complete publication and P11 commit/push remain pending.
+
+P11 publication326 completed: all11 tested host images and manifest match at
+assets/release and O:/winnt/system32, package b6c8ac10-d9d0-46d8-81d4-e7f86ee8991a.
+Updated authored ntvdm64.386 and unchanged insignia.386 remain assets-only.
+Evidence: artifacts/t481-s3/publication326.json. Governance324 passed.
+P11 commit/push pending; S3 and later S4/S5 remain open.

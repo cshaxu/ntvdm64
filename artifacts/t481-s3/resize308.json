@@ -1,0 +1,106 @@
+{
+  "case": "Native visible 80x50 grid fails at fixed guest grid boundary",
+  "base": "c3df64bdf0ec31d4760d5434c5b8129b5d2bc373",
+  "run": 308,
+  "exit": 1,
+  "productChanged": false,
+  "traceMeaning": "1550=0x600+CONSOLE_IO_WRITE_CELLS_A(14); 0x57=ERROR_INVALID_PARAMETER",
+  "failures": [
+    {
+      "precedingSuccessfulRows": 25,
+      "line": 381,
+      "records": [
+        "1550 00005574 00000057",
+        "1806 00000050 00000001",
+        "2062 00000000 00000000",
+        "2318 00000000 00000140"
+      ]
+    },
+    {
+      "precedingSuccessfulRows": 25,
+      "line": 451,
+      "records": [
+        "1550 00005574 00000057",
+        "1806 00000050 00000001",
+        "2062 00000000 00000000",
+        "2318 00000000 00000140"
+      ]
+    },
+    {
+      "precedingSuccessfulRows": 25,
+      "line": 557,
+      "records": [
+        "1550 00005574 00000057",
+        "1806 00000050 00000001",
+        "2062 00000000 00000000",
+        "2318 00000000 00000140"
+      ]
+    },
+    {
+      "precedingSuccessfulRows": 25,
+      "line": 627,
+      "records": [
+        "1550 00005574 00000057",
+        "1806 00000050 00000001",
+        "2062 00000000 00000000",
+        "2318 00000000 00000140"
+      ]
+    }
+  ],
+  "nativeReadiness": [
+    "28548 resize round=1",
+    "16088 resize round=1"
+  ],
+  "guestResult": {
+    "continuationCount": 1,
+    "continuationErrors": 2,
+    "expectedCount": 3
+  },
+  "observations": [
+    "Native readiness is written after actual buffer80x50 and viewport0..49 API verification.",
+    "Each failed publication writes25 rows successfully, then receives87 for the next80-cell row.",
+    "The trace omits row coordinates; row25 follows from the producer zero-origin loop plus25 consecutive successful writes, not a directly logged coordinate.",
+    "Guest VM text cells bounds-checks against the existing header. The producer presentation-only route skips BUFFER_SIZE and writes the packed visible frame.",
+    "command_screen_apply verifies existing BIOS columns/rows/font and cannot apply a new grid. Merely growing host storage would move failure to that guest validation.",
+    "The Windows runtime matrix exited normally; identity assertions failed. No pass or S closure is claimed."
+  ],
+  "next": "Implement a guest-owner geometry transition in the existing publication/ack contract; retain committed state until acknowledged and reject unsupported geometry before application.",
+  "files": [
+    {
+      "path": "build/t481-s3/resize308.ps1",
+      "sha256": "FAC9B3EAFF2A3B51556BCBF81C151ED29EE61226DB8861DE1501F65AC3E08A8A"
+    },
+    {
+      "path": "build/t481-s3/resize308/continuation-trace.txt",
+      "sha256": "862C4C47E5763D873521929C928B04A650AAD798C371096C60F30FAB28EE5E4F"
+    },
+    {
+      "path": "build/t481-s3/resize308/runtime/A.BIN",
+      "sha256": "3EC14EEADC690C151970DF9BA69FCC7B81195534D0132F0C80334CDF913FEF5F"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/ordered-command.c",
+      "sha256": "CBB755027944DD5A50E9B352D3923BA2105A78F3909A91B6307E88E4AFE0F921"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "sha256": "8D4DB24EF75BFEFE8877CB51F6B921C258485204FFCE46A7227C5459BB7B61CC"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "sha256": "FE4EFA218BC35CFD9843E40BA42648DD57F35838BF9A097A96A8D8C2CCFA9B06"
+    },
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "E863090757099A1E9FF75A0EAD355A964BF905F44DCD0640208E863E6FAABF17"
+    },
+    {
+      "path": "src/ntvdm-exe/frontend/vm_text.c",
+      "sha256": "1205788BA9012AD0C391AB91EC35EC6BE315F116AA3C5B1D23435F323FE24F05"
+    },
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sha256": "0E2DCAB7DA561B9A3922A9CCD5AF12E03F3566B9EBDEC416CAA2E7AB13C14CE9"
+    }
+  ]
+}

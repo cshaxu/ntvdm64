@@ -1,0 +1,86 @@
+{
+  "base": "c3df64bdf0ec31d4760d5434c5b8129b5d2bc373",
+  "case": "Combined dual-editor saving and guest mouse Exit in both completion orders",
+  "runs": [
+    {
+      "run": 306,
+      "exit": 0,
+      "result": {
+        "firstExit": "Native",
+        "nativeVm": "8083b000",
+        "dosVm": "80799000",
+        "menus": true,
+        "completed": 2,
+        "mouseMenu": true,
+        "mouseExitVerified": true,
+        "saveVerified": true
+      },
+      "files": [
+        {
+          "file": "A.TXT",
+          "text": "aaa",
+          "bytes": [
+            97,
+            97,
+            97
+          ],
+          "sha256": "9834876DCFB05CB167A5C24953EBA58C4AC89B1ADF57F28F2F9D09AF107EE8F0"
+        },
+        {
+          "file": "B.TXT",
+          "text": "bbb\r\n",
+          "bytes": [
+            98,
+            98,
+            98,
+            13,
+            10
+          ],
+          "sha256": "3E01B3077B23102158A10F26088ADCF69C9CF67BC77E34D4CDC6315904C82137"
+        }
+      ]
+    },
+    {
+      "run": 307,
+      "exit": 0,
+      "result": {
+        "firstExit": "Dos",
+        "nativeVm": "8083b000",
+        "dosVm": "80799000",
+        "menus": true,
+        "completed": 2,
+        "mouseMenu": true,
+        "mouseExitVerified": true,
+        "saveVerified": true
+      },
+      "files": [
+        {
+          "file": "A.TXT",
+          "text": "aaa",
+          "bytes": [
+            97,
+            97,
+            97
+          ],
+          "sha256": "9834876DCFB05CB167A5C24953EBA58C4AC89B1ADF57F28F2F9D09AF107EE8F0"
+        },
+        {
+          "file": "B.TXT",
+          "text": "bbb\r\n",
+          "bytes": [
+            98,
+            98,
+            98,
+            13,
+            10
+          ],
+          "sha256": "3E01B3077B23102158A10F26088ADCF69C9CF67BC77E34D4CDC6315904C82137"
+        }
+      ]
+    }
+  ],
+  "guestPackage": "build/t481-s3/package293",
+  "publishedProductionPackage": "d75521ce-8b98-4319-9ec7-31b445a12af3",
+  "scope": "Diagnostic observation/input witnesses, real editor file writes and original keyboard/mouse providers; not uninstrumented UI automation",
+  "productChanged": false
+}

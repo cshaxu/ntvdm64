@@ -1,0 +1,40 @@
+{
+  "exit": 0,
+  "run": 319,
+  "files": [
+    {
+      "path": "build/t481-s3/cached319.ps1",
+      "sha256": "77A19AFA13661253840FDECE335AC2B92774FEEC3C0E0CD1F98D700866FCF6B3"
+    },
+    {
+      "path": "build/t481-s3/cached319.out",
+      "sha256": "A588F04151340BDE54DCC921F5C909D767D84B37C04FA9E175E52B0F495F8E3F"
+    },
+    {
+      "path": "build/t481-s3/cached319.err",
+      "sha256": "5CDD7B5657DCC55B7261BD4BDF3C98A6F2E1CFFD0DF446D23033C265635E659E"
+    },
+    {
+      "path": "src/ntvdm-exe/frontend/vm_text.c",
+      "sha256": "5DD9A0B808949681E4505A28FB03532E498C7543407D0EE768AC1EF6E3095086"
+    },
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "05DC7433E6284AB7B83761636E29586B363F0D83DE120D2F27958EB7EC08F8F2"
+    },
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sha256": "6B1C746B9F6046980649DC18AF075B1DF93A2652E4B938171D968AFDB398A9A5"
+    }
+  ],
+  "shared": {
+    "x64": "14/14",
+    "x86": "14/14"
+  },
+  "case": "Cached complete host builds and shared/keyboard regressions",
+  "limits": [
+    "Full320 is separate and not yet completed",
+    "Existing fixture linker override warnings retained in log; no warning-free claim",
+    "No publication or P delivery yet"
+  ]
+}

@@ -387,9 +387,42 @@ inc word [palette_checks]
 %if %1 != 10
 ; The native buffer is80x50, with viewport rows25..49. Verify the
 ; actual applied guest-visible cell, not only native API success.
+%ifdef VISIBLE_RESIZED_COMMAND
+push es                         ; BIOS1130 returns ES:BP, not only dimensions
+mov ax, 0x1130
+xor bx, bx
+int 0x10
+pop es
+%ifdef VISIBLE_RESIZE_ROUNDTRIP
+%if %2 == 1
+cmp dl, 24
+%else
+cmp dl, 49
+%endif
+%else
+cmp dl, 49
+%endif
+jne %%error
+%ifdef VISIBLE_RESIZE_ROUNDTRIP
+%if %2 == 1
+cmp cx, 16
+%else
+cmp cx, 8
+%endif
+jne %%error
+%endif
+%endif
 mov ah, 2
 xor bx, bx
 xor dx, dx
+%ifdef VISIBLE_RESIZED_COMMAND
+mov dh, 25
+%ifdef VISIBLE_RESIZE_ROUNDTRIP
+%if %2 == 1
+mov dh, 12
+%endif
+%endif
+%endif
 int 0x10
 mov ah, 8
 int 0x10

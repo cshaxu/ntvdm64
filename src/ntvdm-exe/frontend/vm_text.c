@@ -4,7 +4,6 @@
 
 struct ntvdm_vm_text {
     uint8_t *committed, *staged;
-    uint32_t bytes;
     uint16_t attribute, staged_attribute;
     BOOL snapshot, video_started, implicit;
     uint32_t configuration_revision;
@@ -13,6 +12,53 @@ struct ntvdm_vm_text {
 
 static ntvdm_vm_text_header *header(ntvdm_vm_text *text)
 { return (ntvdm_vm_text_header *)(text->staged ? text->staged : text->committed); }
+
+static uint32_t text_bytes(const void *bytes)
+{
+    const ntvdm_vm_text_header *h = bytes;
+    return sizeof(*h) + h->columns * h->rows * 2;
+}
+
+/* Only the visible frame changes here, never native Console scrollback.
+ * The guest still owns acceptance; abort leaves the committed grid intact. */
+static DWORD prepare_region(ntvdm_vm_text *text, int32_t columns, int32_t rows)
+{
+    ntvdm_vm_text_header *old = header(text), *next;
+    uint8_t *cells;
+    uint32_t i, y;
+    if (text->snapshot) return ERROR_BUSY;
+    if (columns <= 0 || columns > 255 || rows <= 0 || rows > 256)
+        return ERROR_INVALID_PARAMETER;
+    if ((uint32_t)columns == old->columns && (uint32_t)rows == old->rows)
+        return ERROR_SUCCESS;
+    if (!text->staged || text->video_started)
+        return ERROR_INVALID_STATE;
+    next = HeapAlloc(GetProcessHeap(), 0, sizeof(*next) + (uint32_t)columns * rows * 2);
+    if (!next) return ERROR_NOT_ENOUGH_MEMORY;
+    *next = *old;
+    next->columns = columns; next->rows = rows;
+    if (next->columns == old->columns && next->rows != old->rows) {
+        uint32_t scanlines = old->rows * old->font_height;
+        uint32_t height = scanlines / next->rows;
+        /* Candidate only. The virtual BIOS must independently verify the
+         * resulting rows/height before this projection can be committed. */
+        if (height && height <= 32 && (scanlines + 1) / height == next->rows)
+            next->font_height = height;
+    }
+    next->x = min(next->x, next->columns - 1);
+    next->y = min(next->y, next->rows - 1);
+    cells = (uint8_t *)(next + 1);
+    for (i = 0; i < next->columns * next->rows; ++i) {
+        cells[i * 2] = ' '; cells[i * 2 + 1] = (uint8_t)text->staged_attribute;
+    }
+    for (y = 0; y < min(old->rows, next->rows); ++y)
+        memcpy(cells + y * next->columns * 2,
+            (uint8_t *)(old + 1) + y * old->columns * 2,
+            min(old->columns, next->columns) * 2);
+    HeapFree(GetProcessHeap(), 0, text->staged);
+    text->staged = (uint8_t *)next;
+    return ERROR_SUCCESS;
+}
 
 static void cursor(const ntvdm_vm_text_header *h, console_io_state *state)
 {
@@ -26,12 +72,12 @@ DWORD ntvdm_vm_text_begin(ntvdm_vm_text *text, BOOL implicit)
 {
     if (!text) return ERROR_INVALID_PARAMETER;
     if (text->snapshot || text->staged) return ERROR_BUSY;
-    text->staged = HeapAlloc(GetProcessHeap(), 0, text->bytes);
+    text->staged = HeapAlloc(GetProcessHeap(), 0, text_bytes(text->committed));
     if (!text->staged) return ERROR_NOT_ENOUGH_MEMORY;
     text->video_started = FALSE;
     text->implicit = implicit;
     text->staged_attribute = text->attribute;
-    memcpy(text->staged, text->committed, text->bytes);
+    memcpy(text->staged, text->committed, text_bytes(text->committed));
     return ERROR_SUCCESS;
 }
 unsigned ntvdm_vm_text_pending(const ntvdm_vm_text *text)
@@ -62,7 +108,7 @@ DWORD ntvdm_vm_text_create(const void *bytes, uint32_t count, ntvdm_vm_text **ou
     if (!text) return ERROR_NOT_ENOUGH_MEMORY;
     text->committed = HeapAlloc(GetProcessHeap(), 0, count);
     if (!text->committed) { HeapFree(GetProcessHeap(), 0, text); return ERROR_NOT_ENOUGH_MEMORY; }
-    memcpy(text->committed, bytes, count); text->bytes = count;
+    memcpy(text->committed, bytes, count);
     /* BIOS cells carry attributes, but there is no BIOS-wide default for a
      * native Console writer. Seed that frontend-owned value once; subsequent
      * cursor movement must not replace SetConsoleTextAttribute's value. */
@@ -130,7 +176,9 @@ DWORD ntvdm_vm_text_dispatch(ntvdm_vm_text *text, const console_io_request *requ
     if (!text || !request || !reply) return ERROR_INVALID_PARAMETER;
     h = header(text);
     switch (request->operation) {
-    case CONSOLE_IO_BUFFER_SIZE: case CONSOLE_IO_PREPARE_TEXT_REGION:
+    case CONSOLE_IO_PREPARE_TEXT_REGION:
+        return prepare_region(text, request->state.width, request->state.height);
+    case CONSOLE_IO_BUFFER_SIZE:
         if (text->snapshot || text->staged) return ERROR_BUSY;
         if (request->state.width <= 0 || request->state.height <= 0)
             return ERROR_INVALID_PARAMETER;
@@ -295,7 +343,7 @@ DWORD ntvdm_vm_text_candidate(ntvdm_vm_text *text, ntvdm_vm_text_publication *vi
         view->video_bytes = text->video.pending;
         view->video_serial = text->video.pending_serial;
     }
-    view->text = text->staged; view->text_bytes = text->bytes;
+    view->text = text->staged; view->text_bytes = text_bytes(text->staged);
     return ERROR_SUCCESS;
 }
 
@@ -358,6 +406,13 @@ DWORD ntvdm_vm_text_finish(ntvdm_vm_text *text, DWORD application_error)
         }
     }
     if (!application_error) {
+        const ntvdm_vm_text_header *old = (const ntvdm_vm_text_header *)text->committed;
+        const ntvdm_vm_text_header *next = (const ntvdm_vm_text_header *)text->staged;
+        if (!text->video_started &&
+            (old->columns != next->columns || old->rows != next->rows)) {
+            frontend_video_dispose(&text->video);
+            text->configuration_revision = 0;
+        }
         HeapFree(GetProcessHeap(), 0, text->committed);
         text->committed = text->staged;
         text->attribute = text->staged_attribute;

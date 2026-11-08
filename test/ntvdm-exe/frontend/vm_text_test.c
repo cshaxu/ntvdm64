@@ -252,6 +252,64 @@ static int codepage_isolation(void)
     return 0;
 }
 
+static int region_transaction(void)
+{
+    struct { ntvdm_vm_text_header h; uint8_t cells[8]; } initial = {
+        {2, 2, 1, 1, 0x0607, 3, 0, 437, 16},
+        {'A', 7, 'B', 7, 'C', 7, 'D', 7}
+    };
+    ntvdm_vm_text *text = NULL;
+    console_io_request q = {0};
+    console_io_reply r = {0};
+    void *copy = NULL;
+    uint32_t size;
+    ntvdm_vm_text_header *h;
+    BYTE *cells;
+    CHECK(!ntvdm_vm_text_create(&initial, sizeof(initial), &text));
+    q.operation = CONSOLE_IO_PREPARE_TEXT_REGION;
+    q.state.width = q.state.height = 3;
+    CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_INVALID_STATE);
+    CHECK(!ntvdm_vm_text_begin(text, FALSE));
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r));
+    CHECK(!ntvdm_vm_text_copy_application(text, &copy, &size));
+    CHECK(size == sizeof(*h) + 18);
+    h = copy; cells = (BYTE *)(h + 1);
+    CHECK(h->columns == 3 && h->rows == 3 && h->x == 1 && h->y == 1);
+    CHECK(cells[0] == 'A' && cells[2] == 'B' && cells[6] == 'C' && cells[8] == 'D');
+    CHECK(cells[4] == ' ' && cells[5] == 7 && cells[16] == ' ');
+    HeapFree(GetProcessHeap(), 0, copy);
+    CHECK(ntvdm_vm_text_finish(text, ERROR_NOT_SUPPORTED) == ERROR_NOT_SUPPORTED);
+    q.operation = CONSOLE_IO_SCREEN_INFO;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r));
+    CHECK(r.state.width == 2 && r.state.height == 2);
+    CHECK(!ntvdm_vm_text_begin(text, FALSE));
+    q.operation = CONSOLE_IO_PREPARE_TEXT_REGION;
+    q.state.width = 256;
+    CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_INVALID_PARAMETER);
+    q.state.width = q.state.height = 1;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r));
+    CHECK(!ntvdm_vm_text_copy_application(text, &copy, &size));
+    h = copy;
+    CHECK(size == sizeof(*h) + 2 && h->x == 0 && h->y == 0);
+    CHECK(((BYTE *)(h + 1))[0] == 'A');
+    HeapFree(GetProcessHeap(), 0, copy);
+    /* This unit models the acknowledgement, not a real BIOS application. */
+    CHECK(!ntvdm_vm_text_finish(text, ERROR_SUCCESS));
+    q.operation = CONSOLE_IO_SCREEN_INFO;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r));
+    CHECK(r.state.width == 1 && r.state.height == 1);
+    CHECK(!ntvdm_vm_text_begin(text, FALSE));
+    q.operation = CONSOLE_IO_PREPARE_TEXT_REGION;
+    q.state.width = q.state.height = 3;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r));
+    ntvdm_vm_text_disconnect(text);
+    q.operation = CONSOLE_IO_SCREEN_INFO;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r));
+    CHECK(r.state.width == 1 && r.state.height == 1);
+    ntvdm_vm_text_destroy(text);
+    return 0;
+}
+
 int main(void)
 {
     struct { ntvdm_vm_text_header h; uint8_t cells[8]; } frame = {
@@ -266,6 +324,7 @@ int main(void)
     void *application;
     uint32_t application_bytes;
     CHECK(!codepage_isolation());
+    CHECK(!region_transaction());
     CHECK(!publication_video());
     CHECK(!fill_transaction());
     CHECK(ntvdm_vm_text_create(&frame, sizeof(frame) - 1, &text) == ERROR_INVALID_DATA);
@@ -384,7 +443,8 @@ int main(void)
     request.state.width = frame.h.columns; request.state.height = frame.h.rows;
     CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply));
     ++request.state.width;
-    CHECK(ntvdm_vm_text_dispatch(text, &request, &reply) == ERROR_NOT_SUPPORTED);
+    /* Changed visible geometry now requires an explicit candidate/guest ack. */
+    CHECK(ntvdm_vm_text_dispatch(text, &request, &reply) == ERROR_INVALID_STATE);
     request.state.width = 1; request.state.height = 1;
     request.operation = CONSOLE_IO_CODE_PAGE;
     CHECK(!ntvdm_vm_text_dispatch(text, &request, &reply) && reply.state.count == 437);

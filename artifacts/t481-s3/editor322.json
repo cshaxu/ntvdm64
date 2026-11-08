@@ -1,0 +1,82 @@
+{
+  "case": "P11 dual EDIT save and guest mouse Exit in both completion orders",
+  "results": [
+    {
+      "run": "editor321",
+      "exit": 0,
+      "result": {
+        "firstExit": "Native",
+        "nativeVm": "8083b000",
+        "dosVm": "80799000",
+        "menus": true,
+        "completed": 2,
+        "mouseMenu": true,
+        "mouseExitVerified": true,
+        "saveVerified": true
+      },
+      "files": [
+        {
+          "path": "build/t481-s3/editor321.ps1",
+          "sha256": "45C8893A039614B7CEE467238BF5EBD944459EE4183B2155A9364071C4E77C32"
+        },
+        {
+          "path": "build/t481-s3/editor321/editor-result.json",
+          "sha256": "A48047D82B91D11B3B7F82DC0DEC475394A679518FC643DF54BD5EC85968CD26"
+        },
+        {
+          "path": "build/t481-s3/editor321/runtime/matrix-results.json",
+          "sha256": "1127C844F6B6CDE6BB86D7B00BEC3F1D932D9CB947E57B7EB9F2DDD2410B90D2"
+        },
+        {
+          "path": "build/t481-s3/editor321/A.TXT",
+          "sha256": "9834876DCFB05CB167A5C24953EBA58C4AC89B1ADF57F28F2F9D09AF107EE8F0"
+        },
+        {
+          "path": "build/t481-s3/editor321/B.TXT",
+          "sha256": "3E01B3077B23102158A10F26088ADCF69C9CF67BC77E34D4CDC6315904C82137"
+        }
+      ]
+    },
+    {
+      "run": "editor322",
+      "exit": 0,
+      "result": {
+        "firstExit": "Dos",
+        "nativeVm": "8083b000",
+        "dosVm": "80799000",
+        "menus": true,
+        "completed": 2,
+        "mouseMenu": true,
+        "mouseExitVerified": true,
+        "saveVerified": true
+      },
+      "files": [
+        {
+          "path": "build/t481-s3/editor322.ps1",
+          "sha256": "A68532B29FA9E19CD75EE975EDC3CCF72A1E031EDF8D1B110321C3602E2AD7E3"
+        },
+        {
+          "path": "build/t481-s3/editor322/editor-result.json",
+          "sha256": "B3B808E601D18F1D2375BB9CF791317341914E456C3D5226DAB5A625F5EE5F83"
+        },
+        {
+          "path": "build/t481-s3/editor322/runtime/matrix-results.json",
+          "sha256": "620E044D0BA0C4BBB1B2A9CB4CB95944145486121F5A6013919CA30672BBACBE"
+        },
+        {
+          "path": "build/t481-s3/editor322/A.TXT",
+          "sha256": "9834876DCFB05CB167A5C24953EBA58C4AC89B1ADF57F28F2F9D09AF107EE8F0"
+        },
+        {
+          "path": "build/t481-s3/editor322/B.TXT",
+          "sha256": "3E01B3077B23102158A10F26088ADCF69C9CF67BC77E34D4CDC6315904C82137"
+        }
+      ]
+    }
+  ],
+  "driverSha256": "F9804FAF3B2144B3EFD0A54E81D12F30AD3E065851F4752E57E8AAFA2980ADEB",
+  "limits": [
+    "Diagnostic package313 with observer300; production stock matrix is separate.",
+    "Not arbitrary resize/custom font acceptance."
+  ]
+}

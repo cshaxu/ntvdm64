@@ -49,11 +49,11 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "0E2DCAB7DA561B9A3922A9CCD5AF12E03F3566B9EBDEC416CAA2E7AB13C14CE9",
-      "sha256": "74CF28F8F27B41B140144984B0C4F28B044009F3B4AE332AB331416A3939CFEF",
+      "sourceSha256": "6B1C746B9F6046980649DC18AF075B1DF93A2652E4B938171D968AFDB398A9A5",
+      "sha256": "F9804FAF3B2144B3EFD0A54E81D12F30AD3E065851F4752E57E8AAFA2980ADEB",
       "acceptance": "candidate",
-      "verifiedScope": "Candidate: retained S2 input/lifecycle baseline; Win3.1 dual host/DOS EDIT keyboard and mouse menus/Exit, both completion orders, DOSONLY1 guest execution/native rejection with no host payload. Remaining S3 I/O and Win95 unqualified; historical editor132 coordinate mismatch not attributed.",
-      "evidence": "docs/etc/operations/m0-t481-multitask-completion-plan.md"
+      "verifiedScope": "Candidate: retained input/lifecycle baseline; Win3.1 dual EDIT keyboard/save/mouse Exit in both orders; native visible80x50 and25->50->25 BIOS-verified row changes; production standard/enhanced DOSONLY0/1 startup/normal exit. Other modes/custom fonts, remaining S3 and Win95 unqualified.",
+      "evidence": "artifacts/t481-s3/review324.json"
     },
     {
       "id": "insignia-niddb",

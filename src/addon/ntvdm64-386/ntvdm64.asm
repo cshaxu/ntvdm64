@@ -1046,10 +1046,52 @@ command_screen_apply:
     movzx eax, byte [ebp+client_edx]
     inc eax
     cmp eax, [edi+4]
+    jne .resize_rows
+    movzx eax, word [ebp+client_ecx]
+    cmp eax, [edi+32]
+    jne .unsupported
+    jmp .geometry_ready
+.resize_rows:
+    ; Keep the current text mode/columns and scanline timing. The original
+    ; BIOS font services own the row change; never write BIOS data ourselves.
+    movzx ecx, word [ebp+client_ecx]
+    imul eax, ecx
+    inc eax
+    xor edx, edx
+    mov ecx, [edi+32]
+    cmp ecx, 8
+    je .height_valid
+    cmp ecx, 14
+    je .height_valid
+    cmp ecx, 16
+    jne .unsupported
+.height_valid:
+    div ecx
+    cmp eax, [edi+4]
+    jne .unsupported
+    mov eax, 0x1112
+    cmp ecx, 8
+    je .load_height
+    mov eax, 0x1111
+    cmp ecx, 14
+    je .load_height
+    mov eax, 0x1114
+.load_height:
+    mov [ebp+client_eax], ax
+    mov word [ebp+client_ebx], 0
+    call .int10
+    mov word [ebp+client_eax], 0x1130
+    mov word [ebp+client_ebx], 0
+    call .int10
+    mov edi, [esp+108]
+    movzx eax, byte [ebp+client_edx]
+    inc eax
+    cmp eax, [edi+4]
     jne .unsupported
     movzx eax, word [ebp+client_ecx]
     cmp eax, [edi+32]
     jne .unsupported
+.geometry_ready:
     mov edx, [esp+116]
     test edx, edx
     jz .video_applied

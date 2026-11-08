@@ -31,6 +31,8 @@ typedef struct peer_state {
     unsigned snapshot_begins,snapshot_ends,screen_reads;
     unsigned publication_begins,publication_ends,publication_aborts;
     unsigned titles,cell_writes;
+    BOOL region_prepared;
+    int32_t region_width,region_height;
     console_io_state screen;
     frontend_video video;
     console_io_input returned[2*CONSOLE_IO_INPUT_CAPACITY+3];
@@ -129,7 +131,13 @@ static DWORD WINAPI peer(void *context)
                 reply.state.left=state->physical; /* Physical VM or full Console peer. */
             } else if(request.operation==CONSOLE_IO_PUBLICATION_BEGIN) {
                 if(state->publication_begins!=state->publication_ends+state->publication_aborts)error=ERROR_BUSY;
-                else ++state->publication_begins;
+                else {++state->publication_begins;state->region_prepared=FALSE;}
+            } else if(request.operation==CONSOLE_IO_PREPARE_TEXT_REGION) {
+                if(!state->physical ||
+                    state->publication_begins!=state->publication_ends+state->publication_aborts+1 ||
+                    request.state.width<=0 || request.state.height<=0)return ERROR_INVALID_DATA;
+                state->region_prepared=TRUE;
+                state->region_width=request.state.width;state->region_height=request.state.height;
             } else if(request.operation==CONSOLE_IO_PUBLICATION_END || request.operation==CONSOLE_IO_PUBLICATION_ABORT) {
                 if(state->publication_begins!=state->publication_ends+state->publication_aborts+1)error=ERROR_INVALID_STATE;
                 else if(request.operation==CONSOLE_IO_PUBLICATION_END)++state->publication_ends;
@@ -192,6 +200,9 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_CODE_PAGE) {
                 reply.state.count=state->codepage;
             } else if(request.operation==CONSOLE_IO_WRITE_CELLS_A) {
+                if(state->physical && (!state->region_prepared || request.state.left<0 ||
+                    request.state.top<0 || request.state.right>=state->region_width ||
+                    request.state.bottom>=state->region_height))return ERROR_INVALID_DATA;
                 if(!request.state.top && request.bytes>=sizeof(console_io_cell)) {
                     console_io_cell first;memcpy(&first,request.data,sizeof(first));
                     state->first_glyph=first.character;
@@ -429,6 +440,11 @@ static void run_case(unsigned mode)
                         CHECK(SetConsoleWindowInfo(buffer,TRUE,&viewport));
                         CHECK(!ntvwm_presentation_flush(endpoint,&font));
                         CHECK(state.screen.cursor_visible && state.screen.x==5 && state.screen.y==2);
+                        CHECK(state.region_prepared && state.region_width==20 && state.region_height==8);
+                        viewport.Bottom=9;
+                        CHECK(SetConsoleWindowInfo(buffer,TRUE,&viewport));
+                        CHECK(!ntvwm_presentation_flush(endpoint,&font));
+                        CHECK(state.region_width==20 && state.region_height==10);
                         CHECK(!state.video.published_serial);
                     }
                     if(mode==11 && !physical) {

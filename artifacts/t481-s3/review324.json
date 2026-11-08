@@ -1,0 +1,155 @@
+{
+  "case": "P11 source review and qualification",
+  "reviewedFiles": [
+    {
+      "path": "src/ntvdm-exe/frontend/vm_text.c",
+      "sha256": "5DD9A0B808949681E4505A28FB03532E498C7543407D0EE768AC1EF6E3095086"
+    },
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "05DC7433E6284AB7B83761636E29586B363F0D83DE120D2F27958EB7EC08F8F2"
+    },
+    {
+      "path": "src/addon/ntvdm64-386/ntvdm64.asm",
+      "sha256": "6B1C746B9F6046980649DC18AF075B1DF93A2652E4B938171D968AFDB398A9A5"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/dos-identity.asm",
+      "sha256": "E81CFB6B790082FCA80E07B29AE2ADF496B7A61D5940E4B66AD89B47BAA8DF7C"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/ordered-command.c",
+      "sha256": "D8FC950AB4CC57EA86BABA48F344CE6C1A30A4A799C1C3A961E4DE8A3FF6CBE5"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
+      "sha256": "8DE2E5C818B0E4E6A7E46DA1DEFFFAD744CFF317AFA38B230C47ADFAF26206E2"
+    },
+    {
+      "path": "test/ntvdm-exe/frontend/vm_text_test.c",
+      "sha256": "2ECC23BF90405E09908A12A91EFD82571AAD3443B2CCA6CDF3C5614FD3B9BC0C"
+    },
+    {
+      "path": "tests/observation/ntvwm_presentation_test.c",
+      "sha256": "006F6EEEEA4F48BE1ED42091036D3C9B6B180D63921081F73EB13A13ED5B3AB5"
+    }
+  ],
+  "conclusions": [
+    "Visible viewport is prepared inside existing publication; native scrollback remains native-owned.",
+    "Staged extent derives from header; refusal/disconnect retains committed state.",
+    "Original BIOS font service owns actual row change; addon verifies returned dimensions before success.",
+    "No new mirror change, original guest mutation, protocol or wait."
+  ],
+  "gates": [
+    {
+      "name": "cached319",
+      "exit": 0
+    },
+    {
+      "name": "full320",
+      "exit": 0
+    },
+    {
+      "name": "resize315",
+      "exit": 0
+    },
+    {
+      "name": "resize316",
+      "exit": 0
+    },
+    {
+      "name": "resize317",
+      "exit": 0
+    },
+    {
+      "name": "editor321",
+      "exit": 0
+    },
+    {
+      "name": "editor322",
+      "exit": 0
+    },
+    {
+      "name": "production323",
+      "exit": 0
+    }
+  ],
+  "productionMatrix": [
+    {
+      "case": "std-dosonly0",
+      "dosonly": false,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "serviceLoss": false,
+      "workerClose": false,
+      "consoleClose": false,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\production323\\runtime\\std-dosonly0.observer.txt"
+    },
+    {
+      "case": "std-dosonly1",
+      "dosonly": true,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "serviceLoss": false,
+      "workerClose": false,
+      "consoleClose": false,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\production323\\runtime\\std-dosonly1.observer.txt"
+    },
+    {
+      "case": "386-dosonly0",
+      "dosonly": false,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "serviceLoss": false,
+      "workerClose": false,
+      "consoleClose": false,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\production323\\runtime\\386-dosonly0.observer.txt"
+    },
+    {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "serviceLoss": false,
+      "workerClose": false,
+      "consoleClose": false,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\production323\\runtime\\386-dosonly1.observer.txt"
+    }
+  ],
+  "limits": [
+    "Same-column standard BIOS font row changes qualified, not arbitrary columns/modes/custom fonts.",
+    "Unexpected BIOS failure after service not proven universally reversible.",
+    "S3 remaining operations and S4/S5 remain open."
+  ],
+  "remarks": [
+    "Existing command_screen_apply header comment describes pre-change geometry restriction; body documents and implements validated row change. Correct this comment without altering tested binary in follow-up."
+  ]
+}

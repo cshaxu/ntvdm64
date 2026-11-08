@@ -1653,3 +1653,53 @@ with manifest/hash equality, package d75521ce-8b98-4319-9ec7-31b445a12af3.
 Authored addon hashes remain unchanged/assets-only. Evidence: review303.json
 and publication304.json in artifacts/t481-s3. This delivers DIV-890 only;
 the remaining S3 obligations and later Win95/combined qualification are open.
+### S3 P11 candidate: native visible grid publication
+
+The retained308 failure is at WRITE_CELLS_A after25 successful rows: native
+visible80x50 was never prepared in the VM provider. The older buffer80x50 /
+viewport80x25 witness did not cover this case. Evidence: resize308.json.
+
+NTVWM now sends PREPARE_TEXT_REGION inside its existing publication before
+writing visible cells/VIDEO; it still does not send hidden Console scrollback
+to a VM. NTVDM allocates a private candidate and derives its byte extent from
+the validated header, removing the duplicate size field. Refusal/disconnect
+keeps committed state. Acknowledged text-only geometry invalidates old VIDEO
+configuration. Native BUFFER_SIZE semantics are unchanged.
+
+For changed rows at unchanged columns, the host proposes a fitting font height;
+this is not hardware authority. Authored ntvdm64.386 independently validates
+current BIOS dimensions and the requested8/14/16-pixel font-row relation, invokes
+the original BIOS1111/1112/1114 service, then queries BIOS1130. Only matching
+rows/height permit cells and success acknowledgement. No original guest binary,
+insignia.386, mirror source or protocol layout changes. No new wait/transport.
+
+313 builds.314 exposed an ES preservation defect in the new BIOS-query probe,
+not a passing run. After correcting that probe,315/316 pass native80x50 in both
+completion orders;317 passes25->50->25 with actual row/font and cell assertions,
+320 callback checks and normal Windows exit. Original installation unchanged.
+Evidence: artifacts/t481-s3/resize316.json and resize317.json. Region311 unit
+and Native312 protocol fixtures are separate evidence, not guest substitutes.
+
+Mouse source trace uses the existing original INT33 text8x8/16x8 coordinate
+contract, converted to absolute cells by mouse_event, then MOUSE_EVENT through
+mvdm_vm_executor/io. It is not the NTCON frame-pixel-delta path; no speculative
+font-height cache or second input conversion was added.
+
+Remaining boundaries: custom-font and other mode/column transitions, unexpected
+BIOS failure after a service call, and the rest of S3 operations are not closed
+by these cases. Unsupported preconditions still return errors; no arbitrary
+VGA layout support or universal rollback is claimed. Cached319 completes both
+widths, shared14/14 each and keyboard/PIC. Qualification320 serializes Full320,
+dual editor save/mouse321/322 and production four-combination323. Publication,
+review and P11 commit/push remain pending.
+
+Qualification320 completes exit0: Full32016/16, editor321/322 save and guest
+mouse Exit in both orders, production323 all four mode/DOSONLY startup and
+normal-exit cases pass. Evidence: artifacts/t481-s3/full320.json, editor322.json
+and review324.json. Complete publication and P11 commit/push remain pending.
+
+P11 publication326 completed: all11 tested host images and manifest match at
+assets/release and O:/winnt/system32, package b6c8ac10-d9d0-46d8-81d4-e7f86ee8991a.
+Updated authored ntvdm64.386 and unchanged insignia.386 remain assets-only.
+Evidence: artifacts/t481-s3/publication326.json. Governance324 passed.
+P11 commit/push pending; S3 and later S4/S5 remain open.

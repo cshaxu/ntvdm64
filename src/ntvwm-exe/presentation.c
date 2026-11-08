@@ -372,6 +372,14 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
     publication_held=TRUE;
     /* A VM consumes the already packed visible frame. Native scrollback and
      * its absolute cursor/viewport remain owned by the hidden Console. */
+    if(frame_only) {
+        ZeroMemory(&request,sizeof(request));
+        request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;
+        request.state.width=description.width;
+        request.state.height=description.height;
+        error=exchange(client,&request,&reply);
+        if(error)goto captured_done;
+    }
     if(!frame_only) {
         request.operation=CONSOLE_IO_SCREEN_INFO;
         error=exchange(client,&request,&reply);

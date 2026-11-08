@@ -1,0 +1,212 @@
+{
+  "case": "Two Win3.1 DOS VMs accept native visible80x50 in both completion orders",
+  "base": "c3df64bdf0ec31d4760d5434c5b8129b5d2bc373",
+  "diagnosticBuild": 313,
+  "componentChanges": [
+    "NTVWM.exe: visible region preparation inside publication",
+    "NTVDM.exe: staged grid allocation and candidate font height",
+    "ntvdm64.386: BIOS1111/1112/1114 font-row transition and queried result"
+  ],
+  "unchanged": [
+    "insignia.386",
+    "original Windows guest binaries"
+  ],
+  "runs": [
+    {
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\resize315\\runtime\\386-dosonly0.observer.txt"
+      },
+      "first": "A",
+      "run": 315,
+      "files": [
+        {
+          "sha256": "8261DA0481BD26DE83E9EA2504410686CA9545AAA1D73441CD40EC8B1B4B1D59",
+          "path": "build/t481-s3/resize315.ps1"
+        },
+        {
+          "sha256": "8D135D472D84140079D6A2A67F5698D6534D85125718B1FA6DED3709D2CE0940",
+          "path": "build/t481-s3/resize315/identity.com"
+        },
+        {
+          "sha256": "C0F9D20882F02446A6076F4DB847F15157AEB0674CEE4A645837CD6435A7B05C",
+          "path": "build/t481-s3/resize315/continuation-trace.txt"
+        },
+        {
+          "sha256": "5FEC3CDFDF28EDDEFE9F74A93456DD6D76477F8A0DFECACDC7DB11341A849F97",
+          "path": "build/t481-s3/resize315/runtime/vxd-result.json"
+        }
+      ],
+      "pair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1224518,
+          "finish": 1224572,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1224518,
+          "finish": 1224572,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        }
+      ],
+      "exit": 0
+    },
+    {
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t481-s3\\resize316\\runtime\\386-dosonly0.observer.txt"
+      },
+      "first": "B",
+      "run": 316,
+      "files": [
+        {
+          "sha256": "1E7E13F40CD1974D16C5CA824D3C5349E22E6B9E2C5CD0CE3A25C352B079EB7B",
+          "path": "build/t481-s3/resize316.ps1"
+        },
+        {
+          "sha256": "8D135D472D84140079D6A2A67F5698D6534D85125718B1FA6DED3709D2CE0940",
+          "path": "build/t481-s3/resize316/identity.com"
+        },
+        {
+          "sha256": "94E7493BFEAC1417236732B32DF9A6D055F67186982CEF86E3A15D825B17C17D",
+          "path": "build/t481-s3/resize316/continuation-trace.txt"
+        },
+        {
+          "sha256": "5FEC3CDFDF28EDDEFE9F74A93456DD6D76477F8A0DFECACDC7DB11341A849F97",
+          "path": "build/t481-s3/resize316/runtime/vxd-result.json"
+        }
+      ],
+      "pair": [
+        {
+          "name": "A",
+          "signature": 1314147670,
+          "vm": 2156113920,
+          "generation": 3,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1226587,
+          "finish": 1226642,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 15,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        },
+        {
+          "name": "B",
+          "signature": 1314147670,
+          "vm": 2155450368,
+          "generation": 2,
+          "status": 12870,
+          "negativeStatus": 12871,
+          "negativeResult": 1,
+          "start": 1226587,
+          "finish": 1226641,
+          "callback": 4276292839,
+          "callbackCount": 160,
+          "callbackErrors": 0,
+          "waitCount": 3,
+          "waitErrors": 0,
+          "pairCount": 1,
+          "pairErrors": 0,
+          "notificationPublished": 14,
+          "notificationSeen": 15,
+          "notificationIrq": 15,
+          "notificationErrors": 0,
+          "continuationCount": 3,
+          "continuationErrors": 0
+        }
+      ],
+      "exit": 0
+    }
+  ],
+  "priorFailure": {
+    "exit": 1,
+    "description": "All traced publication-end calls succeeded but the test continuation assertion failed. INT10/1130 in the new probe did not preserve ES; fixed before315, same runtime package/driver reused.",
+    "run": 314
+  },
+  "mouseAudit": [
+    "ntvdm64.asm mouse_event converts original INT33 text coordinates to cells using8x8 (16x8 for40-column modes)",
+    "mvdm_vm_executor.c and mvdm_vm_io.c forward absolute cell coordinates as MOUSE_EVENT",
+    "NTVWM passes those cell events through; the NTCON pixel-delta path is not this VM input path"
+  ],
+  "limits": [
+    "Not full S3 acceptance",
+    "No universal grid/mode-switch claim; current addon changes rows through8/14/16-pixel ROM BIOS font services without switching columns/mode",
+    "Arbitrary/custom-font transitions and unexpected BIOS rejection remain to qualify",
+    "No new publication, commit or push"
+  ]
+}

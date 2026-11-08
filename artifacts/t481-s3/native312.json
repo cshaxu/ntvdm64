@@ -1,0 +1,57 @@
+{
+  "case": "Visible geometry sent before cells inside the existing publication",
+  "base": "c3df64bdf0ec31d4760d5434c5b8129b5d2bc373",
+  "run": 312,
+  "exit": 0,
+  "results": "PASS presentation, input return and execution lifetime",
+  "summary": [
+    "NTVWM-PRESENTATION checks=612 failures=0 named-pipe=yes production-activation=no",
+    "NTVWM-PRESENTATION checks=605 failures=0 named-pipe=yes production-activation=no",
+    "NTVWM-REQUEST-LIFETIME checks=1084 failures=0 completed=48 cancelled=16 target-survival=yes remaining-handles=0"
+  ],
+  "coverage": [
+    "Physical VM peer requires PREPARE_TEXT_REGION inside each explicit publication before cell writes",
+    "Prepared dimensions follow visible20x8 then20x10, not the hidden20x16 scrollback buffer",
+    "Cells must fit the prepared visible rectangle",
+    "Input return and lifetime regression groups pass"
+  ],
+  "limitations": [
+    "Peer is a protocol fixture, not the Win3.1 BIOS/VDD",
+    "No native80x50 guest acceptance or new package publication",
+    "Guest application still rejects changed geometry; next implementation must preserve same-grid glyph/palette and make actual BIOS mode changes explicit"
+  ],
+  "files": [
+    {
+      "path": "src/ntvwm-exe/presentation.c",
+      "sha256": "05DC7433E6284AB7B83761636E29586B363F0D83DE120D2F27958EB7EC08F8F2"
+    },
+    {
+      "path": "tests/observation/ntvwm_presentation_test.c",
+      "sha256": "006F6EEEEA4F48BE1ED42091036D3C9B6B180D63921081F73EB13A13ED5B3AB5"
+    },
+    {
+      "path": "build/t481-s3/native312.ps1",
+      "sha256": "DD0BD5E921926B9497728EC31B148E5CE62141B24976D085AF8BAA6CED3D139F"
+    },
+    {
+      "path": "build/t481-s3/native312/inputs.json",
+      "sha256": "6B403392CC908D30043CBE792596B256DB4A2380C7011AFB70BCB778E04DDF78"
+    },
+    {
+      "path": "build/t481-s3/native312/presentation.txt",
+      "sha256": "3E1073AF544E4E335CF87DB71C1292C30423856E8AD088A4770DAA178CABAAF5"
+    },
+    {
+      "path": "build/t481-s3/native312/input-return.txt",
+      "sha256": "12A5BAAF9883B0325ECA15533F96EA7255E6B6578B25A282991343413C8DF636"
+    },
+    {
+      "path": "build/t481-s3/native312/lifetime.txt",
+      "sha256": "3EBD01E3C328B4693A0746175FBCE13CCD976ABDE0FC97EC5869A2FA2B3DB72C"
+    },
+    {
+      "path": "build/t481-s3/native312/result.txt",
+      "sha256": "574A1D1AF636B8D39FFE94BA2E9214B3B861480905CFBF3A2883EFC5784CCE06"
+    }
+  ]
+}

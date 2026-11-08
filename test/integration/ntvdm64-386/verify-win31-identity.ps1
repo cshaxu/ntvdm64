@@ -29,6 +29,8 @@ param(
  [switch]$FillApplication,
  [string]$OrderedCommandImage,
  [switch]$ResizeCommand,
+ [switch]$VisibleResizeCommand,
+ [switch]$VisibleResizeRoundTrip,
  [switch]$GuestGridControl,
  [switch]$GuestGridSwitch,
  [switch]$GuestScanlineControl,
@@ -47,6 +49,8 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($VisibleResizeRoundTrip){$VisibleResizeCommand=$true}
+if($VisibleResizeCommand){$ResizeCommand=$true}
 if($GuestGridSwitch -and !$GuestGridControl){throw 'Grid switching requires guest grid control'}
 if($GuestScanlineControl -and !$GuestGridSwitch){throw 'Scanline control requires guest grid switching'}
 if($GuestGridControl -and (!$RealCommand -or !$OrderedCommandImage -or $ResizeCommand -or $NestedCommand)){throw 'Guest grid control requires independent real ordered commands'}
@@ -110,6 +114,8 @@ if($UnreadInputImage){
 if($OrderedCommandImage){
  $dosDefines+='-DORDERED_COMMAND=1'
  if($ResizeCommand){$dosDefines+='-DRESIZED_COMMAND=1'}
+ if($VisibleResizeCommand){$dosDefines+='-DVISIBLE_RESIZED_COMMAND=1'}
+ if($VisibleResizeRoundTrip){$dosDefines+='-DVISIBLE_RESIZE_ROUNDTRIP=1'}
  Copy-Item -LiteralPath $OrderedCommandImage -Destination "$dest/PATCH/ORDER.EXE"
 }
 if($DirectoryYield){$dosDefines+='-DDIRECTORY_YIELD=1'}
@@ -197,7 +203,10 @@ foreach($id in 'A','B'){
   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ORDER_COMMAND@')
   if($marker -lt 0){throw 'Missing ordered command marker'}
   $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T479-$([IO.Path]::GetFileName($dest)) $FirstCommand"+[char]13)
-  if($ResizeCommand){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand resize $dest\PATCH\RESIZE"+[char]13)}
+  if($ResizeCommand){
+   $resizeMode=if($VisibleResizeRoundTrip){'visible-roundtrip'}elseif($VisibleResizeCommand){'visible-resize'}else{'resize'}
+   $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand $resizeMode $dest\PATCH\RESIZE"+[char]13)
+  }
   if($ServiceLoss -or $WorkerCloseMonitor){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
   if($UnreadInputImage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
   if($value.Length -ge 256){throw 'Ordered command too long'}

@@ -20,7 +20,9 @@ int main(int argc, char **argv)
     if (argc == 5) {
         char path[MAX_PATH], temporary[MAX_PATH];
         FILE *ready;
-        BOOL resize = !strcmp(argv[3], "resize");
+        BOOL roundtrip = !strcmp(argv[3], "visible-roundtrip");
+        BOOL visible_resize = roundtrip || !strcmp(argv[3], "visible-resize");
+        BOOL resize = visible_resize || !strcmp(argv[3], "resize");
         if (resize) {
             HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
             COORD size = {80, 50};
@@ -29,15 +31,26 @@ int main(int argc, char **argv)
             CHAR_INFO marker = {{0}, 0x2f};
             COORD one = {1, 1}, origin = {0, 0}, caret = {1, 25};
             SMALL_RECT target = {0, 25, 0, 25};
+            if (roundtrip && round[0] == '1') {
+                size.Y = 25; caret.Y = 12; target.Top = target.Bottom = 12;
+            }
+            if (visible_resize) {
+                CONSOLE_FONT_INFOEX font = {sizeof(font)};
+                if (!GetCurrentConsoleFontEx(output, FALSE, &font)) return 108;
+                font.dwFontSize.Y = 8;
+                if (!SetCurrentConsoleFontEx(output, FALSE, &font)) return 109;
+            }
             if (!SetConsoleWindowInfo(output, TRUE, &window) ||
                 !SetConsoleScreenBufferSize(output, size) ||
                 !GetConsoleScreenBufferInfo(output, &info) ||
-                info.dwSize.X != 80 || info.dwSize.Y != 50) return 106;
+                info.dwSize.X != size.X || info.dwSize.Y != size.Y) return 106;
             marker.Char.UnicodeChar = (WCHAR)(role[0] + ('a' - 'A'));
-            window.Top = 25; window.Bottom = 49;
+            window.Top = visible_resize ? 0 : 25; window.Bottom = size.Y - 1;
             if (!WriteConsoleOutputW(output, &marker, one, origin, &target) ||
                 !SetConsoleCursorPosition(output, caret) ||
-                !SetConsoleWindowInfo(output, TRUE, &window)) return 107;
+                !SetConsoleWindowInfo(output, TRUE, &window) ||
+                !GetConsoleScreenBufferInfo(output, &info) ||
+                info.srWindow.Top != window.Top || info.srWindow.Bottom != window.Bottom) return 107;
         }
         if ((!resize && strcmp(argv[3], "hold")) ||
             sprintf_s(path, sizeof(path), "%s-%c.txt", argv[4], role[0]) < 0 ||

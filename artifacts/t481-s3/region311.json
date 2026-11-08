@@ -1,0 +1,72 @@
+{
+  "case": "Visible-region candidate allocation and acknowledgement ownership",
+  "base": "c3df64bdf0ec31d4760d5434c5b8129b5d2bc373",
+  "run": 311,
+  "exit": 0,
+  "architectures": [
+    "x86",
+    "x64"
+  ],
+  "test": "mvdm-vm-text",
+  "coverage": [
+    "Explicit candidate required for changed extent",
+    "Grow preserves rows and initializes new cells",
+    "Shrink produces exact wire size and bounds the cursor",
+    "Guest refusal retains committed geometry",
+    "Acknowledged commit changes geometry",
+    "Disconnect discards unacknowledged resize"
+  ],
+  "implementation": [
+    "Derive byte extent from the validated header instead of independently maintained size",
+    "Keep native BUFFER_SIZE restriction; PREPARE_TEXT_REGION changes visible candidate only",
+    "Discard old video configuration after an acknowledged text-only geometry change"
+  ],
+  "priorRuns": [
+    {
+      "exit": 1,
+      "reason": "cmd runner used forward slash in script pathname; compilation did not start",
+      "run": 309
+    },
+    {
+      "exit": 1,
+      "reason": "Existing test expected NOT_SUPPORTED outside a transaction; updated to INVALID_STATE under the new explicit-candidate contract, keeping rejection assertion",
+      "run": 310
+    }
+  ],
+  "limitations": [
+    "Not wired to the native publisher yet",
+    "Guest BIOS geometry application remains unimplemented; original resize308 failure is not fixed",
+    "Unit finish(success) models an acknowledgement, not proof of real guest application",
+    "No full product build, publication, commit or push for this candidate"
+  ],
+  "files": [
+    {
+      "sha256": "AE5E34099ABA4272F8EFB7E9D633AA63190B4BFC806C8BFA76540BE97BC05304",
+      "path": "src/ntvdm-exe/frontend/vm_text.c"
+    },
+    {
+      "sha256": "2ECC23BF90405E09908A12A91EFD82571AAD3443B2CCA6CDF3C5614FD3B9BC0C",
+      "path": "test/ntvdm-exe/frontend/vm_text_test.c"
+    },
+    {
+      "sha256": "8537A0624662AABE175A3F446285CB43066D87EAC6A3675FB356D54AE3BE8DE8",
+      "path": "build/t481-s3/region311.cmd"
+    },
+    {
+      "sha256": "7C6A9C209AFC26DEB5348D9A8899FA706E088955F3961BD2A1576D047401C5AA",
+      "path": "build/t481-s3/region311.out"
+    },
+    {
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "path": "build/t481-s3/region311.err"
+    },
+    {
+      "sha256": "340AE6E59C508503B9DA1F13DDB408FB8F7A5B0A9FF3D7CB698984AE52860FE0",
+      "path": "build/.ninja/msvc-x86-release/Testing/Temporary/LastTest.log"
+    },
+    {
+      "sha256": "F68361BEE95CAB1A6DB9C3C2ABF775A015AA3AA47B90CFD76C2E7933F2B5BCBD",
+      "path": "build/.ninja/msvc-x64-release/Testing/Temporary/LastTest.log"
+    }
+  ]
+}
