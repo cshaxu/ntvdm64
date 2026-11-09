@@ -386,3 +386,51 @@ EXEC is not generally missing: the reproduced failure is specific to the
 32-bit payload route in this VM context. The precise failing component and
 any relationship to filesystem redirection remain unproved. All guest copies
 were retired and source installation hashes matched.
+
+`win95-batch-termtrace2` captured the DOS termination site for the PE32
+failure in both VMs. The exact instruction bytes match the original Win95
+`SYSTEM/CONAGENT.EXE` (SHA-256
+`086FA12CCD06C56636BF90134F9E2CE98407E6B894CB6E7C3F31622ADCC3348E`),
+which exits with `AX=4C04`; the PE64 control returned normally. Static
+inspection identifies more than one route to this exit, including agent
+initialization and the VCOND 0209 call, so this does not yet identify which
+route failed. `Incorrect DOS version` also occurs in CONAGENT; previous
+attribution of that message to COMMAND alone was incomplete.
+
+`win95-batch-vcond-self` tried to observe the VCOND query but its positive
+self-check did not hit the hook, so zero observed queries are inconclusive.
+`win95-batch-open-trace` observed CONAGENT's initialization open call in both
+VMs: carry clear and handle 5, while the PE32 result remained 4 and the PE64
+control remained 0. The hook did not establish whether later initialization
+or VCOND failed. Both runs verified the original installation unchanged and
+removed their disposable guest copy; the harness reported missing native
+output, and neither run is an acceptance pass. No guest or product code was
+changed.
+
+`win95-batch-io-trace` and `win95-batch-vcond-query` extended the disposable
+DOS witness to record file service return values. In each PE32 case the agent
+successfully opened its executable, read its header and resource records, and
+read its message resources; the witness still returned 4. This excludes a
+simple failure to open or read the agent executable, but does not prove the
+rest of initialization or the subsequent VCOND call succeeded. The INT 2F
+query counter was corrected to include null service results, yet its parent
+self-query still did not reach the hook; the query observation is therefore
+not usable as a negative witness. PE64 controls still returned 0. Original
+installation hashes were verified and the owned guest copies removed. These
+are diagnostic results, not a passed native-output regression.
+
+`win95-batch-dos-version` captured INT 21h/AH=30h at the original
+CONAGENT initialization call (return IP 0299): AX=0005 in both VMs. Its
+original code requires AX=0007 and returns carry on a mismatch; on both
+exits the agent's VCOND pointer and state were still zero and carry was set.
+This identifies a concrete pre-VCOND DOS-version failure in this scenario.
+The existing launch package's SETVER table supplies 7.0 for WIN.COM and
+VMM32.VXD but does not list CONAGENT.EXE. That omission is a possible
+configuration remedy, not yet a demonstrated complete fix.
+
+A test-only INT 21h version substitution (`win95-batch-dos7-control`) timed
+out and did not produce both requested witnesses; its only observed B record
+returned 0 but does not establish the intended agent path. It therefore does
+not prove that 7.0 resolves the operation, and no equivalent substitution was
+added to product code. The source installation was hash-verified unchanged
+and the temporary guest copy retired.
