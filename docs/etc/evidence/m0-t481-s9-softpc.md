@@ -274,3 +274,14 @@ the reason is not established. This shows the NT COMMAND can execute the BAT
 in that test while its explicit native command still fails; it does not prove
 why native admission is missed or explain A. Source installation bytes were
 unchanged, and the owned guest copy and package stage were removed.
+
+`win95-batch-vector2` sampled DOS INT 21h through a disposable test COM in
+both failing BATs. Both returned DOS version AX=0005 and the same INT 21h
+entry; its first 32 bytes matched `O:/WINDOWS/IFSHLP.SYS` at file offset 1184.
+The captured IFSHLP far-jump predecessor began with a stub that calls another
+routine before an indirect jump. `win95-batch-vector3` sampled that indirect
+pointer without executing the preceding call; it therefore cannot establish
+the actual dispatch target during an EXEC request. These observations locate
+the first hook only; they do not yet identify the executing DOS loader or a
+safe fix. Both runs reproduced empty native output, preserved the installation
+hashes, and cleaned their owned copies and stages.
