@@ -331,6 +331,21 @@ WinExec, not proof of the direct DOS EXEC path or interactive behavior. The
 observer timed out after the witness; shutdown is not a pass. Original source
 installation hashes matched and the owned guest copy and stage were retired.
 
+`win95-dos-notepad` then used an authored DOS EXEC witness to start that
+same original PE32 Notepad from VM A, while an authored Win16 controller
+looked for the guest `Notepad` window and would close it if found. The DOS
+open succeeded and measured 34,816 bytes, matching the original file, but
+EXEC returned child status 4 and the controller did not record a Notepad
+window. Both BAT completion files were written; the outer observer recorded
+exit code 1, which does not prove normal shutdown. This contrasts with the
+successful guest WinExec control, but a transient window could have escaped
+the controller's observation, and the code returning status 4 remains
+unidentified. The runner initially could not perform its own source check or
+cleanup because a test-script variable shadowed the source path. A separate
+same-format full inventory/hash comparison matched the retained pre-test
+snapshot, then the explicitly owned copy was removed. No product or original
+guest binary was changed.
+
 `win95-batch-process-watch2` repeated the production-host 32/64 comparison
 with a separate process-snapshot observer and delayed native test programs.
 Both PE64 targets were observed as Windows processes parented by NTVWM, then

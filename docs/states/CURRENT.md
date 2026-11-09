@@ -50,6 +50,8 @@ retains the Win95 investigation. The independently tested interactive COMMAND
 path must not be conflated with this batch path. A guest WinExec control also
 launched original Win95 PE32 Notepad and found its window in guest USER; PE32
 guest ownership must be preserved when addressing the separate DOS EXEC case.
+The same original Notepad returned status 4 through the DOS EXEC witness;
+no guest window was observed in that run, whose precise failure remains open.
 
 ## Current Technical Baseline
 
