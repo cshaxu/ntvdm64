@@ -43,6 +43,16 @@ so it does not establish normal shutdown. The exact production-host editor
 path, owner's repeated Win3.1 switch sequence and final S10 acceptance remain
 unverified.
 
+The CMD multitask installer's synthetic Win3.1/Win95 configuration and exact
+restore tests passed. The identity integration fixture now also offers
+`-InstallViaTool`: on a Win95 copy it runs the actual installer, checks both
+released driver hashes, then runs the ordinary production-host native-command
+witness. Two of three runs passed both VM identities, 320 callbacks and four
+native commands; the middle run exited `0xC0000420` without the first VM's
+result file. This intermittent failure remains unclassified. The observer
+exit code alone does not prove which fail-fast site ran. Each run verified the
+source Win95 installation bytes unchanged. The failed run is not a pass.
+
 SoftPC `1ec0d551` virtual text aperture changes are already registered under
 DIV-545; `8c27a3b6` CHAIN2 reads are already DIV-889. CPL access, slave EOI
 and virtual text height are already covered by DIV-891, DIV-883 and DIV-890.

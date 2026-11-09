@@ -273,3 +273,8 @@ commands per guest VM on the ordinary host package. The guest validates the
 returned code, registers, flags and stack; the BOP54:0A interactive shell and
 physical keyboard/mouse are not tested by this case. Test-only markers are
 excluded from the DOS witness, and the package receives an isolated identity.
+Add `-InstallViaTool` to install the two released drivers using the actual
+`tools/win-multitask/APPLY.CMD` on the isolated Win95 copy before starting the
+same witness. The source installation must not already contain either driver
+entry, and the supplied driver must match the released image. This tests the
+installer-to-runtime chain without changing the source installation.
