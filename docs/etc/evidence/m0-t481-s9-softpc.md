@@ -501,3 +501,14 @@ desktop and exited normally. Two concurrent DOS VM identities, 320 callback
 checks, and both 54:08 native command returns per VM passed; this witness
 intentionally excludes 54:0A and physical keyboard/mouse. The original Win3.1
 installation was hash-verified and the disposable copy removed.
+
+A read-only inspection found that the existing user installation's
+`O:/WINDOWS/PATCH/WIN.CMD` contains two references to the removed test stage
+`O:/tmp/nca7/system32`; the referenced Run16 is absent, while the deployed
+`O:/winnt/system32/run16.exe` exists. The generated launcher template in
+`tools/win95-launch/APPLY.CMD` instead writes the selected Run16 path. The
+origin of the pre-existing installed launcher has not been established.
+An attempt to correct only those two paths in the existing installation was
+rejected by automatic approval review because it would write to the guest
+installation; no installation file was changed. This launcher observation
+is separate from the isolated tests, which use their own copied WIN.PIF.
