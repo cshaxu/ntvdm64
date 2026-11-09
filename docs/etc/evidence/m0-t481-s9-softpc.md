@@ -299,3 +299,16 @@ was not determined. The original installation hashes matched and the owned
 guest and package copies were retired. This comparison narrows the missing
 boundary but does not prove exactly which classification or conversion step
 failed, or authorize a guest mutation.
+
+`win95-batch-exec-controls2` ran an authored COM witness in each failing
+batch and recorded real DOS INT 21h open, EXEC and child-status results.
+After the witness released excess DOS memory, both VMs opened the native
+host CMD successfully, EXEC returned carry clear, and the child's termination
+status was `0004`. A missing-file control returned carry set with error 2;
+a normal test DOS COM returned carry clear and status `0025`. Both batches
+still reproduced empty native CMD output. The initial `exec-controls` run
+omitted memory release and its DOS control failed with error 8; it is not a
+valid successful-EXEC control. The published host CMD is x64, and its static
+MZ stub would exit with code 1, so status 4 alone does not identify the code
+actually executed. The source Win95 installation was hash-verified and the
+owned test copy and stage were retired. No guest or product binary was changed.
