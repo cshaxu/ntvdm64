@@ -841,6 +841,44 @@ whose NE segment 1 begins at file offset `0x640`. Thus the faulting offset
 observations, not proof of the invalid operand, failing state owner, or root
 cause. The page-table and descriptor values were read after the exception;
 subsequent mapping changes cannot be excluded without further evidence.
+The original NE export table identifies segment 1 offset `0219` as
+`DIB_MOVECURSOREXT`. Static disassembly shows a call from `02d9` to `0471`,
+then from `0566` to `06a3`; that routine loads `FS:DI` from `[BX+78]` and
+branches to the `0799` copy loop. This establishes a cursor-movement code
+path reaching the same instruction, consistent with the owner's mouse action;
+the saved exception does not by itself prove that this was the precise caller
+or establish the fault-time FS selector, DI value, or descriptor limit.
+
+Further snapshot reconstruction found LDT aliases `03b7` and `03e7` for a
+data segment at `80123120` containing the expected DIBENG fields: pitch 1024,
+640x480, 8-bit and two cursor-save records. The first and second records
+contain pointers `1fd7:0000` and `1fd7:1980`, respectively, and a 48x34
+extent. Snapshot selector `1fd7` describes a writable present segment at
+`80184900` with inclusive limit `32ff`; the two offsets and limit correspond
+to two 0x1980-byte buffers. Adjacent to the saved `032f:0799` return frame,
+the snapshot contains the sequence `1fd7`, `00d3`, `03b7`, `12a73300`,
+`00083072`, followed by other register-sized values. The selectors match
+the cursor-save pointer, DIBENG's source selector and this data segment;
+the low word `3300` is exactly one beyond the cursor-save segment limit.
+This is strong evidence of a target-segment boundary violation, but the
+surrounding exception-handler save layout has not yet been verified, so the
+`3300` word is not yet asserted as the fault-time DI register. Nor does this
+establish why the offset reached that value or which component corrupted it.
+For an independent cross-check, the captured system VM control block at
+`c15200e8` has `CB_Client_Pointer=c13a1f70`; the first dword of that VMM
+client frame is also `12a73300` (EDI, low word `3300`) according to the
+locally retained VMM `Client_Reg_Struc` definition. This client frame is the
+post-fault state, so it corroborates but does not independently prove that DI
+was unchanged from the faulting instruction.
+
+The saved privilege-transition frame records `SS:SP=0087:0fc4`; the captured
+LDT and page tables resolve that stack, whose first words are `0fe8 0569
+0fe8 01a4`. In DIBENG segment 1, `0569` is the return from the call at
+`0566` into the failing copy helper, and `01a4` is the return from the call
+at `01a1` into its caller `0471`. The NE export table places `01a1` in
+`DIB_CHECKCURSOREXT` (export begins at `012a`). This stack evidence identifies
+the actual cursor-check path for the saved frame; the earlier
+`DIB_MOVECURSOREXT` observation was only another static caller of `0471`.
 
 The concurrent Win3.1 batch comparison was already running when the owner
 moved batch work to S10. Its isolated runner exited 1 without its VMLOAD
