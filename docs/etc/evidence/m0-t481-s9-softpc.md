@@ -675,3 +675,12 @@ reported intermittent blue screen. Mouse events bypassed physical Raw Input,
 and Console keyboard records were synthesized; this is not physical-input
 acceptance, proof of normal Win95 shutdown, or proof that every run succeeds.
 The observer ended its owned processes after the capture.
+
+`win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
+repeating the same menu, VER, DIR and EXIT scenario. Captures and console
+snapshots show the menu path, command output and desktop return; no blue screen
+was observed. Because the fullscreen handoff destroyed the original hook
+window before its FIFO acknowledgement, the report's generic
+`input-sink-acknowledged=yes` only reflects the test's console-success branch:
+it does not prove all 100 queued motions were accepted. This is not physical
+Raw Input or normal Win95 shutdown acceptance.
