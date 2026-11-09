@@ -264,3 +264,13 @@ original NT COMMAND source checks DOS version in `ConProc` before proceeding.
 These observations suggest a possible version-check path but do not prove
 which process displayed the historical message or why this particular native
 command did not reach admission. No guest or runtime change is inferred.
+
+`win95-batch-shells` explicitly set the PIF programs to the copied Win95
+COMMAND for A and a byte-identical copy of the released NT COMMAND for B,
+each with `/c` and its own BAT. PIF inspection confirmed both fields. B wrote
+the version, COMSPEC, internal-command control and DONE files but its native
+CMD output was empty. A produced no BAT witness before the observer timed out;
+the reason is not established. This shows the NT COMMAND can execute the BAT
+in that test while its explicit native command still fails; it does not prove
+why native admission is missed or explain A. Source installation bytes were
+unchanged, and the owned guest copy and package stage were removed.
