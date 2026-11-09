@@ -50,6 +50,9 @@ retains the Win95 investigation. The independently tested interactive COMMAND
 path must not be conflated with this batch path. A guest WinExec control also
 launched original Win95 PE32 Notepad and found its window in guest USER; PE32
 guest ownership must be preserved when addressing the separate DOS EXEC case.
+A fresh production-only Win95 test passed two VM identities, 320 callbacks
+and four native command return checks after installing the released drivers;
+physical editor input and normal shutdown remain unverified.
 The same original Notepad returned status 4 through the DOS EXEC witness;
 no guest window was observed in that run. In both reproduced PE32 failures,
 original Win95 CONAGENT received DOS 5.0 but requires DOS 7.0 and exited

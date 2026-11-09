@@ -448,5 +448,33 @@ menu and save witnesses against package-rotate (NTVDM SHA-256
 matching deployed O:/winnt) and the released drivers. The test observed its
 startup READY marker, but the observer timed out and both saved witness files
 remained empty; it did not establish editor interaction or normal shutdown.
-It is a failure, not a substitute for the earlier diagnostic-host pass.
+The fixture requires a diagnostic host for its test-only BOP markers, so this
+production-package invocation was invalid and is not evidence of a product
+regression or a substitute for the earlier diagnostic-host pass.
 The source installation hashes matched and the owned guest copy was removed.
+
+`win95-editors-production-welcome` repeated the production editor run with
+the exact welcome-window dismissal used by the earlier diagnostic pass. It
+still timed out with READY but without completed editors or saved text.
+This invocation is also invalid because the fixture requires diagnostic BOPs.
+
+`win95-editors-diag-control` used the same current source installation,
+driver pair, observer, dismissal and fixture with the retained diagnostic
+package. It passed two editor VM identities, both menus, five mouse receipts
+and both save contents; its outer Win95 exit was 1 and normal shutdown is not
+proved. `win95-editors-ab-ntvdm` then used that diagnostic package with only
+its NTVDM replaced by the deployed production NTVDM, restamped together as a
+private test package. It timed out at READY with no editor or save witnesses.
+The fixture requires the diagnostic-only BOP interposition; replacing NTVDM
+removed the very test interface, so the mixed run is invalid and cannot
+attribute any product regression to NTVDM. The mixed package was used
+only in isolation and was not published. All three runs hash-verified the
+original installation and retired their guest copies.
+
+`win95-production-native-recheck` used the released driver pair installed
+by the actual multitask installer and the production package, with the
+production-native-only witness (no diagnostic BOP markers). Both concurrent
+VMs passed identity and generation checks, 320 callback checks, and four
+native command return/register/flags/stack checks. The observer saw exit 1;
+this is not proof of normal Win95 shutdown, physical input, or editor menus.
+The original installation hashes matched and the guest copy was removed.
