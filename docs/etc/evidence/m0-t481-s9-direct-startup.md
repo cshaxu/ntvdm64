@@ -166,6 +166,22 @@ or the exact reason the owner's S7 session passed. Outputs are under
 `build/t481-s9/direct-dos-explorer*` and
 `build/t481-s9/explorer-env-metadata.txt`; no variable values were saved.
 
+To remove the PowerShell environment from the observed target launches, a
+separate test-owned Python process was launched by desktop Explorer PID
+22072; process metadata confirmed that actual parent and its PSMODULEPATH
+length was 295. Without changing its inherited environment it ran absolute
+staged COMMAND `/c ver` and MEM paths, directly in new Consoles and with
+`cmd /d /s /c` as parent. Every case had a separate staged package identity.
+Both direct launches timed out at 30 seconds; the two CMD-parent cases exited
+1. No output or dialog was captured, so the CMD results could be command-line
+or product failures and cannot establish the owner's successful parent path;
+the timeouts cannot by themselves attribute a crash to the environment copy.
+The supervisor initially returned zero merely because the Python loop finished;
+this is not a passing test. The disposable Python probe was changed to report
+`completed-with-failures` when any case fails, making the supervisor fail on a
+repeat. The actual completed run is retained as
+`build/t481-s9/explorer-native-dos.jsonl`; no environment values were saved.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
