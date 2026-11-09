@@ -634,3 +634,8 @@ reversed expected keys. It failed the native continuation as intended, and
 the source installation was verified unchanged. These tests exercise guest
 USER-synthesized input through the production host path, not physical input,
 mouse interaction or the actual EDIT programs.
+
+`win95-guest-input-reverse-order` repeated the production guest-input witness
+with VM B focused and keyed before VM A. Both distinct receipts and all 320
+callback checks passed. The ExitWindows return remained unobserved; the
+original installation was verified unchanged and the owned copy removed.

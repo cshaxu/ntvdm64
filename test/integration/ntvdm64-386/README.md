@@ -295,6 +295,7 @@ the guest controller focuses their windows in turn and injects keys through
 Win16 USER. This exercises the production input path after that injection,
 but is not a physical keyboard or mouse test. Compiling the helper with
 `-DREVERSE_EXPECTATION=1` supplies a negative control that must fail.
+`-ReverseInputOrder` focuses VM B before VM A to check the opposite order.
 `-ShutdownWitness` additionally records that the controller reached the
 `ExitWindows` call site after both VMs retired and, if the call returns,
 records its return value. An absent return marker does not prove successful

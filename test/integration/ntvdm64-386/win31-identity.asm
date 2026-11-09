@@ -348,8 +348,13 @@ je %%consumed
 push ax
 api 1,81
 %endmacro
-send_guest_key production_ready_a,production_title_a,0x1e41,production_focus_a,production_sent_a,production_key_a
+%ifdef REVERSE_INPUT_ORDER
 send_guest_key production_ready_b,production_title_b,0x3042,production_focus_b,production_sent_b,production_key_b
+%endif
+send_guest_key production_ready_a,production_title_a,0x1e41,production_focus_a,production_sent_a,production_key_a
+%ifndef REVERSE_INPUT_ORDER
+send_guest_key production_ready_b,production_title_b,0x3042,production_focus_b,production_sent_b,production_key_b
+%endif
 %endif
 .wait_a:
 api 1,29

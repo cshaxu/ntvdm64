@@ -12,11 +12,13 @@ param(
  [switch]$NativeCommand,
  [string]$ProductionComspecImage,
  [switch]$GuestInput,
+ [switch]$ReverseInputOrder,
  [switch]$InstallViaTool,
  [switch]$ShutdownWitness
 )
 $ErrorActionPreference='Stop'
 if($GuestInput -and !$ProductionComspecImage){throw 'GuestInput requires the input-reading COMSPEC witness'}
+if($ReverseInputOrder -and !$GuestInput){throw 'ReverseInputOrder requires GuestInput'}
 if($ProductionComspecImage){
  if($NativeCommand){throw 'COMSPEC witness selects its own native mode'}
  $ProductionComspecImage=(Resolve-Path -LiteralPath $ProductionComspecImage).Path
@@ -121,6 +123,7 @@ if($Reuse){
 }
 if($ShutdownWitness){$defines+=@('-DSHUTDOWN_WITNESS=1')}
 if($GuestInput){$defines+=@('-DPRODUCTION_GUEST_INPUT=1')}
+if($ReverseInputOrder){$defines+=@('-DREVERSE_INPUT_ORDER=1')}
 & nasm -f bin @defines "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
 if($LASTEXITCODE){throw 'Win16 controller build failed'}
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
