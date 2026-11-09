@@ -578,3 +578,14 @@ editor acceptance. Both test runners verified the installed source inventory
 and hashes unchanged and removed their owned copies. An optional instance
 image parameter was added to the identity runner so this check does not
 silently drop the installed instance driver in its copy.
+
+On owner request the deployed Run16 was launched against the installed
+Win95 PIF. A private-desktop observer saw a frontend titled Windows 95, but
+that title did not prove desktop readiness. A separate visible-desktop attempt
+produced a black capture; window activation failed twice and no UI input was
+performed. A further direct launch using a cleaned process environment stayed
+alive for 30 seconds, after which the owned test process was terminated; all
+project processes were absent afterward. These observations do not distinguish
+capture/activation failure from a guest display/startup failure and are not a
+production interactive pass. The independently run diagnostic editor checks
+and production command checks remain scoped as recorded above.
