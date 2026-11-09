@@ -320,6 +320,17 @@ trace subscription was denied access and supplied no process evidence. These
 tests do not settle PE32 ownership or justify redirecting all Win95 PE32
 programs. Source installation hashes matched and owned copies were removed.
 
+`win95-batch-process-watch2` repeated the production-host 32/64 comparison
+with a separate process-snapshot observer and delayed native test programs.
+Both PE64 targets were observed as Windows processes parented by NTVWM, then
+wrote their host markers; neither PE32 target was observed or wrote a marker,
+and both DOS witnesses returned status 4. Snapshot polling can miss a short
+process, so this is not proof that no PE32 process was ever created. Both
+batches wrote their completion markers, the outer launcher returned code 1,
+and the original installation was hash-verified and the owned copy retired.
+An earlier observer attempt failed before guest startup because the separate
+PowerShell runner lacked its file-hash module; it is not runtime evidence.
+
 `win95-batch-exec-controls2` ran an authored COM witness in each failing
 batch and recorded real DOS INT 21h open, EXEC and child-status results.
 After the witness released excess DOS memory, both VMs opened the native
