@@ -326,6 +326,16 @@ jmp .wait_retirement
 .exit:
 %endif
 %endif
+%ifdef SHUTDOWN_WITNESS
+push ds
+push word shutdown_name-data
+push word 0
+api 1,83                         ; _lcreat before ExitWindows
+cmp ax,-1
+je fatal
+push ax
+api 1,81                         ; _lclose
+%endif
 push word 0                      ; DWORD reserved
 push word 0
 push word 0                      ; UINT return code
@@ -366,6 +376,10 @@ vm_a_name: db '@VM_A_PATH@',0
 times 128-($-vm_a_name) db 0
 vm_b_name: db '@VM_B_PATH@',0
 times 128-($-vm_b_name) db 0
+%ifdef SHUTDOWN_WITNESS
+shutdown_name: db '@VM_SHUTDOWN_PATH@',0
+times 128-($-shutdown_name) db 0
+%endif
 %ifdef KEYBOARD
 key_hwnd: dw 0
 ; Keep the HWND pair contiguous for the four-byte state report.

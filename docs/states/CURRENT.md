@@ -54,7 +54,8 @@ A production-only Win3.1 enhanced-mode test passed two VM identities, 320
 callbacks, four native command returns and normal guest exit.
 A fresh production-only Win95 test passed two VM identities, 320 callbacks
 and four native command return checks after installing the released drivers;
-physical editor input and normal shutdown remain unverified.
+the controller reached the ExitWindows call site after VM retirement, but
+physical editor input and normal shutdown remain unverified (outer exit 1).
 The same original Notepad returned status 4 through the DOS EXEC witness;
 no guest window was observed in that run. In both reproduced PE32 failures,
 original Win95 CONAGENT received DOS 5.0 but requires DOS 7.0 and exited

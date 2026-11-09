@@ -278,6 +278,10 @@ commands per guest VM on the ordinary host package. The guest validates the
 returned code, registers, flags and stack; the BOP54:0A interactive shell and
 physical keyboard/mouse are not tested by this case. Test-only markers are
 excluded from the DOS witness, and the package receives an isolated identity.
+`-ShutdownWitness` additionally records that the controller reached the
+`ExitWindows` call site after both VMs retired. It does not assert that
+Windows completed shutdown or that the outer process returned success.
+
 Add `-InstallViaTool` to install the two released drivers using the actual
 `tools/win-multitask/APPLY.CMD` on the isolated Win95 copy before starting the
 same witness. The source installation must not already contain either driver

@@ -512,3 +512,13 @@ An attempt to correct only those two paths in the existing installation was
 rejected by automatic approval review because it would write to the guest
 installation; no installation file was changed. This launcher observation
 is separate from the isolated tests, which use their own copied WIN.PIF.
+
+`win95-shutdown-witness2` extended the production-native-only test with a
+Win16 marker immediately before its `ExitWindows` call. After installation
+via the real tool, both VM identity and 320 callback checks passed, all four
+native calls returned, and the marker was present after both VM retirements.
+The observer saw the outer process exit with code 1, so the marker establishes
+that the call site was reached, not that Windows shut down normally. The first
+attempt failed before launch because the new PowerShell field was incorrectly
+nested; the corrected attempt above is the actual runtime result. Original
+installation hashes matched and the disposable copy was removed.

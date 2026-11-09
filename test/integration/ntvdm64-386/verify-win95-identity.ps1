@@ -9,7 +9,8 @@ param(
  [switch]$Reuse,
  [switch]$InitializationFailure,
  [switch]$NativeCommand,
- [switch]$InstallViaTool
+ [switch]$InstallViaTool,
+ [switch]$ShutdownWitness
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
@@ -106,11 +107,13 @@ if($Reuse){
  & "$PSScriptRoot/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/REUSE.PIF"
  $defines=@('-DREUSE=1')
 }
+if($ShutdownWitness){$defines+=@('-DSHUTDOWN_WITNESS=1')}
 & nasm -f bin @defines "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
 if($LASTEXITCODE){throw 'Win16 controller build failed'}
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
 $fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"),@('@W31_BOOT_PATH@',"$dest\PATCH\BOOT.BIN"),@('@W31_READY_PATH@',"$dest\PATCH\READY.BIN"))
 if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}
+if($ShutdownWitness){$fields+= ,@('@VM_SHUTDOWN_PATH@',"$dest\PATCH\SHUT.BIN")}
 foreach($field in $fields){
  $image=[Text.Encoding]::ASCII.GetString($bytes)
  $offset=$image.IndexOf($field[0],[StringComparison]::Ordinal)
@@ -195,6 +198,11 @@ try {
  }
  $observation=Get-Content "$task/runtime/observer.txt" -Raw
  if($observation -notmatch '(?m)^result=exited\r?$'){throw 'Win95 observer did not see exit'}
+ if($ShutdownWitness){
+  if(!(Test-Path "$dest/PATCH/SHUT.BIN")){throw 'Controller did not reach ExitWindows'}
+  Copy-Item "$dest/PATCH/SHUT.BIN" "$task/runtime/SHUT.BIN"
+  'PASS guest controller reached the ExitWindows call site after both VM retirements'
+ }
 
 
 } finally {
