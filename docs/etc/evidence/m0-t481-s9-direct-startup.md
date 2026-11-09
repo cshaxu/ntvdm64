@@ -339,3 +339,8 @@ the NTVDM `config.nt` unsuitable dialog; the successful retry used the shorter
 `O:\tmp\q8c`. This is a test-input difference, not a proven root cause for
 the longer-path failure; it does not establish production support for that
 path or the owner's complete editor interaction.
+
+The same desktop-launched check of installed `O:/w31/patch/winstd.cmd`
+subsequently observed the `Windows 3.1 Standard` frontend without an illegal
+instruction dialog. Its title alone does not prove desktop readiness or normal
+exit; the separate isolated direct-Run16 matrix supplied those assertions.
