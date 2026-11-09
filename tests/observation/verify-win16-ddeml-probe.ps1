@@ -96,6 +96,7 @@ try {
 finally {
  if($process){if(!$process.HasExited){taskkill.exe /PID $process.Id /T /F | Out-Null};$process.Dispose()}
  try {if($scope){Stop-IsolatedPackageScope $scope}}finally {
-  if($runtime -and (Test-Path "$root/exit.txt") -and (Get-Content "$root/exit.txt") -eq '0'){Remove-PhysicalRuntimeStage $runtime}
+  if($tests){foreach($name in @('DPRE.BIN','DPOST.BIN','DSTAGE.BIN','DINIT.BIN','DREG.BIN')){if(Test-Path "$tests/$name"){Copy-Item "$tests/$name" "$root/$name" -Force}}}
+  if($runtime){Remove-PhysicalRuntimeStage $runtime}
  }
 }

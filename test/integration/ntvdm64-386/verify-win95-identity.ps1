@@ -26,6 +26,7 @@ if($InstallViaTool){
 }
 $copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
 $task=$copy.Task;$source=$copy.Source;$dest=$copy.Destination;$original=$copy.Original
+try {
 $enc=[Text.Encoding]::GetEncoding(28591)
 if($InstallViaTool){
  # The copy helper stages this driver itself. Remove only its exact entry and
@@ -200,4 +201,8 @@ try {
  if(@(Get-ChildItem $source -Force -Recurse -File).Count -ne $original.Count){throw 'Original installation file inventory changed'}
  foreach($row in $original){if((Get-FileHash ($source+$row.path)).Hash -ne $row.sha256){throw "Original changed: $($row.path)"}}
  'Original Windows installation bytes verified unchanged'
+}
+} finally {
+ . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ Remove-OwnedGuestProbeCopy $dest $task $source
 }

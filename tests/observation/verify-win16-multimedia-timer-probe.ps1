@@ -101,7 +101,7 @@ try {
 finally {
  if($process){if(!$process.HasExited){taskkill.exe /PID $process.Id /T /F | Out-Null};$process.Dispose()}
  try {if($scope){Stop-IsolatedPackageScope $scope}}finally {
-  # Retain failed physical stages for diagnosis; helper validates successful deletion.
-  if($runtime -and (Test-Path "$root/exit.txt") -and (Get-Content "$root/exit.txt") -eq '0'){Remove-PhysicalRuntimeStage $runtime}
+  if($tests -and $probe -and (Test-Path "$tests/$probe.BIN")){Copy-Item "$tests/$probe.BIN" "$root/interim.bin" -Force}
+  if($runtime){Remove-PhysicalRuntimeStage $runtime}
  }
 }

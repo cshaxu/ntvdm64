@@ -35,8 +35,13 @@ try {
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot `
   -InstallRoot $dest -Observer $Observer -OutputRoot "$($copy.Task)/runtime"
 } finally {
+ try {
  if(@(Get-ChildItem $copy.Source -Force -Recurse -File).Count -ne $copy.Original.Count){throw 'Source installation inventory changed'}
  foreach($row in $copy.Original){
   if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Source installation changed: $($row.path)"}
+ }
+ } finally {
+  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  Remove-OwnedGuestProbeCopy $dest $copy.Task $copy.Source
  }
 }

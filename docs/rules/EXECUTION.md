@@ -478,6 +478,16 @@ retain only necessary results/hashes/conclusions in tracked task evidence,
 then remove unneeded output. Reusable tools belong in tracked tools/tests,
 not a permanent build directory. Cache trees cannot hide evidence/test media.
 
+Owner clarification: `O:/tmp` test stages and guest installation copies are
+also disposable. Every test must join its owned processes, preserve the
+necessary result, failure diagnostics and hashes in its task record, and
+remove its marked, exclusively owned temporary directories when that test
+finishes, including on failure. This supersedes instructions to retain an
+entire failed stage for later diagnosis. Verify exact resolved paths, ownership,
+links and active use before deletion; preserve and report any unsafe or active
+directory. Never remove unmarked user data, original guest installations or
+another task's active files to satisfy cleanup.
+
 [Clear-BuildOutput.ps1](../../tools/build/Clear-BuildOutput.ps1) is the single
 default-preview deletion and residual-inspection tool. Supply exact reviewed
 repository-relative targets and an ownership manifest; Apply requires actual

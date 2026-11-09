@@ -59,7 +59,7 @@ try {
     [ordered]@{stage=$stage;observer=$observerPath;observerSha256=(Get-FileHash $observerPath).Hash;
         control=$control;cases=$results} |
         ConvertTo-Json -Depth 5 | Set-Content -Encoding utf8 (Join-Path $log 'result.json')
-    if($passed){Remove-PhysicalRuntimeStage $stage}
+    if($stage){Remove-PhysicalRuntimeStage $stage}
 }
-if(!$passed){throw 'Console-to-Window source handoff control failed; stage retained'}
+if(!$passed){throw 'Console-to-Window source handoff control failed; see recorded result'}
 'PASS real DOS and native CUI input after repeated source entry'

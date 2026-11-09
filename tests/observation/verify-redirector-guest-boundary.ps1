@@ -63,6 +63,6 @@ try{
         [Environment]::SetEnvironmentVariable('MVDM_TEST_DIRECT_CMD',$savedDirect)
         [Environment]::SetEnvironmentVariable('PATH',$savedPath)
         $results | ConvertTo-Json | Set-Content (Join-Path $out 'results.json')
-        if($passed -and $runtime){Remove-PhysicalRuntimeStage $runtime}
+        if($runtime){Remove-PhysicalRuntimeStage $runtime}
     }
 }

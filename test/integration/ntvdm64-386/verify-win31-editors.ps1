@@ -28,6 +28,7 @@ $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -InstanceDriver $InstanceDriver
 $task=$copy.Task; $dest=$copy.Destination
+try {
 $enc=[Text.Encoding]::GetEncoding(28591)
 if($ExplicitVmd){
  $system="$dest/SYSTEM.INI"
@@ -140,3 +141,7 @@ if($SaveWitness){
 [ordered]@{firstExit=$FirstExit;nativeVm=$nativeVm;dosVm=$dosVm;menus=$true;completed=2;mouseMenu=[bool]$MouseMenu;mouseExitVerified=[bool]$MouseMenu;saveVerified=[bool]$SaveWitness;firstDosBeforeSecond=[bool]$FirstDosBeforeSecond;stagedMenuFrames=[bool]($FirstDosBeforeSecond -and $MouseMenu)}|
  ConvertTo-Json|Set-Content "$task/editor-result.json"
 Write-Output "PASS dual editor keyboard/menu/normal-exit; saved-content=$([bool]$SaveWitness); mouse-Exit=$([bool]$MouseMenu)"
+} finally {
+ . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ Remove-OwnedGuestProbeCopy $dest $task $copy.Source
+}

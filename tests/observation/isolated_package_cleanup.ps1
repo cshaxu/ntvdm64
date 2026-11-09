@@ -206,6 +206,67 @@ function Remove-PhysicalRuntimeStage([string]$Stage) {
     if($active.Count){throw 'Test stage still has running processes; stop the owned scope before removal'}
     Remove-Item -LiteralPath $root -Recurse -Force
 }
+function Remove-OwnedGuestProbeCopy([string]$Destination,[string]$Task,[string]$Source) {
+    if(!(Test-Path -LiteralPath $Destination)){return}
+    $root=(Resolve-Path -LiteralPath $Destination).Path
+    $taskRoot=(Resolve-Path -LiteralPath $Task).Path
+    $buildRoot=(Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path.TrimEnd('\')+'\'
+    $tempRoot=(Resolve-Path -LiteralPath 'O:\tmp').Path.TrimEnd('\')
+    if($tempRoot -ine 'O:\tmp' -or !$root.StartsWith($tempRoot+'\',[StringComparison]::OrdinalIgnoreCase) -or
+       !$taskRoot.StartsWith($buildRoot,[StringComparison]::OrdinalIgnoreCase)) {
+        throw 'Refuse guest probe cleanup: invalid target or task root'
+    }
+    $cursor=Get-Item -LiteralPath $root -Force
+    while($cursor.FullName.Length -ge $tempRoot.Length){
+        if($cursor.Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Refuse guest probe cleanup: linked ancestor'}
+        $cursor=$cursor.Parent
+        if(!$cursor){break}
+    }
+    $cursor=Get-Item -LiteralPath $taskRoot -Force
+    while($cursor.FullName.Length -ge $buildRoot.TrimEnd('\').Length){
+        if($cursor.Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Refuse guest probe cleanup: linked evidence path'}
+        $cursor=$cursor.Parent
+        if(!$cursor){break}
+    }
+    $owner=Join-Path $root '.t479-owner'
+    if(!(Test-Path -LiteralPath $owner -PathType Leaf) -or
+       (Get-Content -LiteralPath $owner -Raw).Trim() -ine $taskRoot) {
+        throw 'Refuse guest probe cleanup: owner mismatch'
+    }
+    $prefix=$root+'\'
+    $self=Get-CimInstance Win32_Process -Filter "ProcessId=$PID"
+    $supervisor=if($self){$self.ParentProcessId}else{0}
+    $active=@(Get-CimInstance Win32_Process | Where-Object {
+        $_.ProcessId -ne $PID -and $_.ProcessId -ne $supervisor -and
+        (($_.ExecutablePath -and $_.ExecutablePath.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)) -or
+         ($_.CommandLine -and $_.CommandLine.IndexOf($prefix,[StringComparison]::OrdinalIgnoreCase) -ge 0))
+    })
+    if($active.Count){throw 'Refuse guest probe cleanup: directory still in use'}
+    $contents=@(Get-ChildItem -LiteralPath $root -Force -Recurse -ErrorAction Stop)
+    if(@($contents|Where-Object {$_.Name -ieq '.git' -or ($_.Attributes -band [IO.FileAttributes]::ReparsePoint)}).Count){
+        throw 'Refuse guest probe cleanup: Git data or link'
+    }
+    $patch=Join-Path $root 'PATCH'
+    if(Test-Path -LiteralPath $patch){
+        $witnesses=@(Get-ChildItem -LiteralPath $patch -File | Where-Object {
+            $_.Name -match '^(?i:(?:A|B|BOOT|READY|VMLOAD|DONE|REUSE|READERS|EDITORS|MENUSTG|MOUSE\d+)\.(?:BIN|TXT))$'
+        })
+        foreach($witness in $witnesses){
+            $original=Join-Path (Join-Path $Source 'PATCH') $witness.Name
+            if((Test-Path -LiteralPath $original) -and
+               (Get-IsolatedFileSha256 $original) -eq (Get-IsolatedFileSha256 $witness.FullName)){continue}
+            if($witness.Length -gt 1MB){throw 'Refuse guest probe cleanup: unusually large witness'}
+            $evidence=Join-Path $taskRoot 'guest-witnesses'
+            if(!(Test-Path -LiteralPath $evidence)){New-Item -ItemType Directory -Path $evidence|Out-Null}
+            Copy-Item -LiteralPath $witness.FullName -Destination (Join-Path $evidence $witness.Name)
+        }
+    }
+    if(((Get-Item -LiteralPath $root -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -or
+       (Get-Content -LiteralPath $owner -Raw).Trim() -ine $taskRoot){
+        throw 'Refuse guest probe cleanup: target changed'
+    }
+    Remove-Item -LiteralPath $root -Recurse -Force -ErrorAction Stop
+}
 function Get-PackageBinaryRoot([string]$PackageRoot) {
     # Test-only compatibility for sealed flat baselines and build-link caches.
     # Production has one layout: <root>\system32. Never mix the two layouts.

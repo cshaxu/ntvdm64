@@ -98,7 +98,8 @@ try {
 finally {
  if($process){if(!$process.HasExited){$process.Kill($true);$process.WaitForExit()};$process.Dispose()}
  if($scope){Stop-IsolatedPackageScope $scope}
+ if(Test-Path -LiteralPath $logPath){Copy-Item -LiteralPath $logPath "$out/OBS95.LOG" -Force}
  foreach($row in $saved){if($row.exists){[IO.File]::SetAttributes($row.path,[IO.FileAttributes]::Normal);[IO.File]::Copy($row.backup,$row.path,$true);[IO.File]::SetAttributes($row.path,$row.attributes);if((Get-FileHash -LiteralPath $row.path).Hash -ne $row.hash){throw 'Guest configuration restoration failed'}}elseif(Test-Path -LiteralPath $row.path){Remove-Item -LiteralPath $row.path -Force}}
  if($createdTests -and (Test-Path "$WindowsRoot/PATCH/TESTS") -and @(Get-ChildItem "$WindowsRoot/PATCH/TESTS" -Force).Count -eq 0){Remove-Item -LiteralPath "$WindowsRoot/PATCH/TESTS"}
- if($stage -and (Test-Path "$out/result.json") -and (Get-Content "$out/result.json" -Raw|ConvertFrom-Json).passed){Remove-PhysicalRuntimeStage $stage}
+ if($stage){Remove-PhysicalRuntimeStage $stage}
 }

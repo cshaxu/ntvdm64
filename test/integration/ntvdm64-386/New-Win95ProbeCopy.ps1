@@ -30,7 +30,9 @@ New-Item -ItemType Directory $task|Out-Null
 $original=@(Get-ChildItem $source -Force -Recurse -File | ForEach-Object {[ordered]@{path=$_.FullName.Substring($source.Length);sha256=(Get-FileHash $_.FullName).Hash}})
 $original|ConvertTo-Json|Set-Content "$task/original.json"
 New-Item -ItemType Directory $dest|Out-Null
-Get-ChildItem $source -Force|Copy-Item -Destination $dest -Recurse
+[IO.File]::WriteAllText("$dest/.t479-owner",$task)
+try {
+Get-ChildItem $source -Force|Where-Object Name -ne '.t479-owner'|Copy-Item -Destination $dest -Recurse
 # Relocate only the hives and configuration consumed by this isolated case.
 # Do not run the broad installation migrator over unrelated Win95 PIF formats.
 foreach($hive in 'SYSTEM.DAT','USER.DAT'){
@@ -41,7 +43,6 @@ foreach($hive in 'SYSTEM.DAT','USER.DAT'){
  [IO.File]::SetAttributes($path,[IO.FileAttributes]::Normal)
  [IO.File]::Copy($candidate,$path,$true)
 }
-[IO.File]::WriteAllText("$dest/.t479-owner",$task)
 foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {
  $enc=[Text.Encoding]::GetEncoding(28591)
  $s=$enc.GetString([IO.File]::ReadAllBytes($file.FullName))
@@ -75,3 +76,9 @@ if($InstanceDriver -or $InterruptObserver){
 
 
 [pscustomobject]@{Task=$task;Source=$source;Destination=$dest;Original=$original}
+} catch {
+ $failure=$_
+ . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ try {Remove-OwnedGuestProbeCopy $dest $task $source} catch {Write-Warning "Guest copy retained: $($_.Exception.Message)"}
+ throw $failure
+}

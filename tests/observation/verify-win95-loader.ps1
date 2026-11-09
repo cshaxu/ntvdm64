@@ -79,7 +79,10 @@ try {
 finally{
  if($process){if(!$process.HasExited){$process.Kill($true);$process.WaitForExit()};$process.Dispose()}
  if($scope){Stop-IsolatedPackageScope $scope}
+ if(Test-Path -LiteralPath $logPath){Copy-Item -LiteralPath $logPath "$out/MENU95.LOG" -Force}
+ if($stage -and (Test-Path "$stage/CHILD95.LOG")){Copy-Item -LiteralPath "$stage/CHILD95.LOG" "$out/CHILD95.LOG" -Force}
+ if(Test-Path "$WindowsRoot/PATCH/TESTS/OBS95.LOG"){Copy-Item "$WindowsRoot/PATCH/TESTS/OBS95.LOG" "$out/OBS95.LOG" -Force}
  foreach($row in $saved){if($row.exists){[IO.File]::SetAttributes($row.path,[IO.FileAttributes]::Normal);[IO.File]::Copy($row.backup,$row.path,$true);[IO.File]::SetAttributes($row.path,$row.attributes);if((Get-FileHash -LiteralPath $row.path).Hash -ne $row.hash){throw 'Guest configuration restoration failed'}}elseif([IO.File]::Exists($row.path)){Remove-Item -LiteralPath $row.path -Force}}
  if($createdTests -and (Test-Path "$WindowsRoot/PATCH/TESTS") -and @(Get-ChildItem "$WindowsRoot/PATCH/TESTS" -Force).Count -eq 0){Remove-Item -LiteralPath "$WindowsRoot/PATCH/TESTS"}
- if($stage -and $passed){Remove-PhysicalRuntimeStage $stage}
+ if($stage){Remove-PhysicalRuntimeStage $stage}
 }
