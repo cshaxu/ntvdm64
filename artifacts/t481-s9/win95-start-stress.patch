@@ -1,0 +1,29 @@
+diff --git a/build/t481-s9/win95-mouse-menu-observer.c b/build/t481-s9/win95-start-stress-observer.c
+index 5034ec0c7..a26e241f5 100644
+--- a/build/t481-s9/win95-mouse-menu-observer.c
++++ b/build/t481-s9/win95-start-stress-observer.c
+@@ -1923,6 +1923,24 @@ static BOOL window_mouse_probe(const char *launcher,const char *report_path,BOOL
+         Sleep(200);
+         if(!PostMessageW(window,WM_APP+0x5f0,0,0))goto done;
+         Sleep(700); (void)observer_capture_window_graphics(report_path,"menu-05");
++        /* Test-only: 40 movements and button cycles at Start. Wait for the
++         * input sink's FIFO receipt, then capture the resulting guest frame. */
++        for(index=0;index<40;++index) {
++            if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM((index&1)?-3:3,0)))goto done;
++            Sleep(80);
++            if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
++            Sleep(80);
++            if(!PostMessageW(window,WM_APP+0x5f0,0,0))goto done;
++            Sleep(120);
++        }
++        if(!PostMessageW(window,WM_APP+0x5f1,burst+7+120,0))goto done;
++        acknowledged=WaitForSingleObject(acknowledgment,20000)==WAIT_OBJECT_0;
++        Sleep(1500);
++        (void)observer_capture_window_graphics(report_path,"start-stress");
++        fprintf(report,"start-cycles=40 fifo-receipt=%s\n",acknowledged?"yes":"no");
++        ok=acknowledged;
++        goto done;
++
+         if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(60,-230)))goto done;
+         Sleep(1200); (void)observer_capture_window_graphics(report_path,"menu-06");
+         if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(155,40)))goto done;

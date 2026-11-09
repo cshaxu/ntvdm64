@@ -905,6 +905,24 @@ source path, not evidence that the owner's fault entered it or that its
 register restoration is wrong. A fault-time witness is still required before
 changing the original behavior.
 
+`win95-start-stress3` used a separate copy of the live installation and the
+hash-matched published host/addons on a private desktop. The test-only
+frontend sink received 40 movement/click cycles at Start and acknowledged
+the full FIFO; the captured final 640x480 frame shows the Win95 Start menu
+and no blue screen. The receipt proves frontend acceptance, not delivery of
+every record to Windows or physical Raw Input. The observer was intentionally
+retired at its deadline, so its timeout is not a Windows shutdown result.
+The source inventory was hash-verified except the active `WIN386.SWP`, which
+was excluded rather than read or copied; `O:/tmp/q98` and the owned stage
+were removed. The user's faulting instance was not touched. The first attempt
+could not hash the live locked swap; the second reached a frontend but the
+probe's mixed-separator launcher path failed its image-identity check before
+input, and is not a product result. The third used a native Windows path.
+The one-off observer delta is retained as
+[`win95-start-stress.patch`](../../../artifacts/t481-s9/win95-start-stress.patch)
+(SHA-256 `025140771185A18F5856C1FAEFD2B974C18357B65C0079DE3C47A57B91153FE4`).
+This non-reproduction does not invalidate the owner's captured exception.
+
 The concurrent Win3.1 batch comparison was already running when the owner
 moved batch work to S10. Its isolated runner exited 1 without its VMLOAD
 witness; it cannot answer the batch question. The source hashes were verified
