@@ -120,6 +120,17 @@ control changed both source copy and destination path relative to recheck2,
 it cannot attribute recheck2's failure to the longer path. The earlier
 `0xC0000420` also was not reproduced by this run.
 
+`win95-recheck5` (supervisor PID 33640, start 2026-11-09T05:27:50Z)
+repeated recheck2's source, package, installer and equal-length destination
+shape using a new independent destination. It again timed out with a zero
+driver API signature and VM; no two-VM assertions ran. The source inventory
+and hashes were verified unchanged. The successful short-path recheck4 uses a
+different prepared installation copy: the selected WIN.COM, VMM32.VXD and
+SYSTEM.INI hashes match, while its registry hives and WIN.PIF differ. Thus
+these two repetitions show a consistent difference between these test inputs,
+not whether path length, registry contents, PIF or another setup difference
+causes it. Neither failure demonstrates the earlier `0xC0000420`.
+
 The tested 11-image package `53589968-545f-4d1d-8951-db38d0131d13` was
 published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and
