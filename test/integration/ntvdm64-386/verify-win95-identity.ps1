@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
  [Parameter(Mandatory)][string]$DriverImage,
+ [string]$InstanceDriver,
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$InstallSource,
  [Parameter(Mandatory)][string]$InstallRoot,
@@ -22,6 +23,7 @@ if($ProductionComspecImage){
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
+if($InstallViaTool -and $InstanceDriver){throw 'Installer witness selects its own instance driver'}
 if($InstallViaTool){
  $sourceIni=[IO.File]::ReadAllText((Resolve-Path -LiteralPath "$InstallSource/SYSTEM.INI"))
  if($sourceIni -match '(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)'){
@@ -31,7 +33,7 @@ if($InstallViaTool){
   throw 'Installer witness requires the released driver image'
  }
 }
-$copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
+$copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstanceDriver $InstanceDriver -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
 $task=$copy.Task;$source=$copy.Source;$dest=$copy.Destination;$original=$copy.Original
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)

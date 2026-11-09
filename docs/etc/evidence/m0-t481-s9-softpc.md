@@ -561,3 +561,20 @@ installed INSIGNIA.386 and NTVDM64.386 in that installation; both hashes
 matched assets/release, and SYSTEM.INI contains both device entries. This is
 installation and configuration evidence, not a Win95 runtime or manual
 acceptance pass. The installed original guest binaries were not modified.
+
+After the owner authorized Win95 installation changes and requested the agent
+run tests first, the deployed Run16 launched the installed WIN.PIF in a private
+desktop. The Windows 95 frontend appeared without an observed host error
+dialog during 15 seconds; this title alone does not establish desktop readiness
+or normal shutdown. `win95-installed-native` then used a disposable copy of
+the now-installed tree, explicitly staging both released driver images, and
+the production package. Two VM identities, 320 callbacks, four native command
+returns and the post-retirement ExitWindows call-site marker passed. The outer
+process exited 1 without an observed ExitWindows return; normal shutdown is
+not proved. `win95-installed-editors` used a separate diagnostic host to drive
+two editor VMs; both menus, five mouse receipts and the saved `aaa`/`bbb`
+contents passed. This is diagnostic input, not physical-input or production
+editor acceptance. Both test runners verified the installed source inventory
+and hashes unchanged and removed their owned copies. An optional instance
+image parameter was added to the identity runner so this check does not
+silently drop the installed instance driver in its copy.

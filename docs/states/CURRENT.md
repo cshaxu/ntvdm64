@@ -71,8 +71,10 @@ The 11-image host candidate and W31 addon pair are published and hash-verified.
 The 11 deployed host hashes and both installed W31 driver hashes were
 rechecked. The owner subsequently permanently authorized changes to the
 Win95 installation: its launcher paths were corrected, and both released
-multitask drivers installed and hash-verified. Manual Win95 acceptance
-remains pending.
+multitask drivers installed and hash-verified. The installed PIF produced
+a Win95 frontend; a copy with both released drivers passed production
+two-VM/native-command checks and diagnostic editor interaction checks.
+Physical editor input and normal Win95 shutdown remain unverified.
 Win95 manual acceptance and the repeated Win3.1 CAF/fullscreen sequence remain
 outstanding; neither is implied by the owner's S8 closure.
 

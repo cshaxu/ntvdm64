@@ -279,6 +279,10 @@ Both record process exit without claiming Win95 normal shutdown. The shared
 copy and PIF setup is in `New-Win95ProbeCopy.ps1` and
 `Set-Win95ProbePifMemory.ps1`.
 
+`verify-win95-identity.ps1 -InstanceDriver <insignia.386>` stages the
+instance driver alongside NTVDM64.386 in its disposable copy. It cannot
+be combined with `-InstallViaTool`, which selects the released pair.
+
 `verify-win95-identity.ps1 -NativeCommand` runs two native CMD exit-code
 commands per guest VM on the ordinary host package. The guest validates the
 returned code, registers, flags and stack; the BOP54:0A interactive shell and
