@@ -150,6 +150,29 @@ static int check_chain2_rules(IU8 *planes)
         }
         setVideocolour_comp(compare); setVideodont_care(care);
     }
+    /* Mode 0, assign, full plane/bit masks: rotate 0x81 right by 1..7. */
+    {
+        IU32 rotate=getVideorotate(); IU8 wrmode=getVideowrmode(), chain=getVideochain();
+        setVideochain(UNCHAINED); setVideowrmode(MODE_0); setVideowrstate(0);
+        setVideosr_nmask(0xffffffffu); setVideosr_masked_val(0);
+        setVideodata_and_mask(0xffffffffu); setVideodata_xor_mask(0);
+        setVideolatch_xor_mask(0xffffffffu); setVideoplane_enable_mask(0xffffffffu);
+        setVideobit_prot_mask(0xffffffffu); setVideolatches(0);
+        for (i=1;i<8;++i) {
+            IU32 byte=((0x81u>>i)|(0x81u<<(8u-i)))&0xffu;
+            setVideorotate(i); memset(planes,0,0x1000); setWritePointers();
+            r1=(IUH)Gdp; r2=0x100; r3=0x81; c_ev_write_ptr.b_write(0x100,0x81);
+            if (*(IU32 *)(planes+0x400)!=byte*0x01010101u)
+                fprintf(stderr,"generic rotate=%u result=%08lx\n",i,(unsigned long)*(IU32 *)(planes+0x400));
+            CHECK(*(IU32 *)(planes+0x400)==byte*0x01010101u);
+            memset(planes,0,0x1000);
+            r1=(IUH)Gdp; r2=0x100; r3=0x1281; c_ev_write_ptr.w_write(0x100,0x1281);
+            CHECK(*(IU32 *)(planes+0x400)==byte*0x01010101u);
+            byte=((0x12u>>i)|(0x12u<<(8u-i)))&0xffu;
+            CHECK(*(IU32 *)(planes+0x404)==byte*0x01010101u);
+        }
+        setVideorotate(rotate); setVideowrmode(wrmode); setVideochain(chain);
+    }
     /* Unchained DWORD must read the same four consecutive guest bytes as
        four independent byte reads, including the second word's offset. */
     for (i = 0; i < 256; ++i) planes[4u * i] = (IU8)(i * 17u + 3u);

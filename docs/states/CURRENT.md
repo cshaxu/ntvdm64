@@ -17,7 +17,7 @@ S10 retains final Win95 and multitask acceptance; the T remains open.
 | Admission And Approval | Owner closed S8 and approved S9 SoftPC imports and Win95 repair investigation. |
 | Objective | Audit recent SoftPC software-emulation repairs, import applicable minimal changes, and investigate and repair demonstrated Win95 multitask defects. |
 | Non-goals | Do not modify or rebuild original guest images; do not import unrelated changes or claim unobserved bugs. |
-| Reference Baseline | Published host package d29c4100-b9a2-4a80-a3b4-e82dc98896a4 and released addon pair; Win3.1 repeated-switch and Win95 owner acceptance remain unverified. |
+| Reference Baseline | Published host package 95d80e95-adb7-456e-b82c-e9932054909f and released addon pair; Win3.1 repeated-switch and Win95 owner acceptance remain unverified. |
 | Files And ABI Surface | Selected CCPU, C-VID, video and related host adapters; corresponding tests and exception records. |
 | Applicable Rules | Execution, source policy, guest immutability and original-semantics-first. |
 | Verification | Trace original and SoftPC callers; run matched positive and negative tests, cached builds, Full and relevant Win3.1 and Win95 regressions. |
@@ -33,6 +33,10 @@ S9 disposable workspace: `build/t481-s9`, owned by this packet; budget 8 hours,
 20 GiB, with a 30-minute no-progress review. Join owned processes and record
 results before cleanup; reusable fixtures remain in `tests/mvdm-host`.
 [S9 evidence](../etc/evidence/m0-t481-s9-softpc.md) records candidate results.
+The owner rejected the current delivery after direct Win3.1 startup failed;
+the reproduced inherited-environment guest defect and passing isolated
+short-PATH control are recorded in [direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
+S8 was owner-directed closed without acceptance; S9 acceptance remains failed.
 
 ## Current Technical Baseline
 

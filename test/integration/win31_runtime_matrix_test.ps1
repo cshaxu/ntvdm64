@@ -10,6 +10,8 @@ param(
     [string]$RegistrySnapshotMonitor,
     [string]$RegistrySnapshotMarker,
     [switch]$ConsoleClose,
+    [switch]$DirectRun16,
+    [switch]$DirectShortPath,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
@@ -19,6 +21,7 @@ $ErrorActionPreference = 'Stop'
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires both monitor and marker'}
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
 if($WorkerCloseMonitor -and !$ServiceLossMarkers){throw 'Worker close requires native readiness markers'}
+if($DirectShortPath -and !$DirectRun16){throw 'Short PATH comparison requires direct Run16'}
 if (@($Cases | Select-Object -Unique).Count -ne $Cases.Count) { throw 'Duplicate matrix cases' }
 $repo = (Resolve-Path "$PSScriptRoot/../..").Path
 $install = (Resolve-Path -LiteralPath $InstallRoot).Path.TrimEnd('\')
@@ -155,11 +158,16 @@ try {
                 systemIniSha256=(Get-FileHash $systemIni).Hash; winIniSha256=(Get-FileHash $winIni).Hash;
                 dosProbeSha256=(Get-FileHash $dosProbe).Hash; windowsProbeSha256=(Get-FileHash $probe).Hash} |
                 ConvertTo-Json | Set-Content -LiteralPath (Join-Path $output "$($case.Name).inputs.json") -Encoding UTF8
-            $env:PATH="$stage\system32;C:\Windows\System32;C:\Windows"
+            $env:PATH=if($DirectRun16 -and !$DirectShortPath){"$stage\system32;$($savedEnv.PATH)"}else{"$stage\system32;C:\Windows\System32;C:\Windows"}
             $env:TEMP='O:\tmp'; $env:TMP='O:\tmp'
             $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'; $env:MVDM_OBSERVER_SHORT_HISTORY='1'
-            $observerArgs=@('C:\Windows\System32\cmd.exe',$install,$report,
-                '/d','/c',(Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs")
+            $observerArgs=if($DirectRun16){
+                @("$stage\system32\run16.exe",$install,$report,
+                  (Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs")
+            }else{
+                @('C:\Windows\System32\cmd.exe',$install,$report,
+                  '/d','/c',(Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs")
+            }
             # Console-close legitimately interrupts the outer test batch too.
             # Answer only its observed CMD confirmation, never inject into a VM.
             if($ConsoleClose){$observerArgs+=@('--observe-console-input-marker','(Y/N)?','--observe-console-input-escaped','y\r')}

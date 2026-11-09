@@ -3743,7 +3743,7 @@ switch ( id )
 	*((IUH	*)&(r20))	=	(IS32)(1430)	;	
 	*((IUH	*)&(r21))	=	(IS32)(2)	;	
 	if	(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r20)))	)	==	*((IU8	*)&(r21)	+	REGBYTE))	goto	L24_2if_f;	
-	*((IUH	*)&(r22))	=	(IS32)(1407)	;	
+	*((IUH	*)&(r22))	=	(IS32)(1404)	;	
 	*((IU8	*)&(r21)	+	REGBYTE)	=	*((IU8	*)(LocalIUH+1)	+	REGBYTE)	;	
 if(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)>=8)
 	CrulesRuntimeError("Bad	Bit	No");
@@ -4302,7 +4302,7 @@ if(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)>=8)
 	*((IUH	*)&(r20))	=	(IS32)(1430)	;	
 	*((IUH	*)&(r21))	=	(IS32)(2)	;	
 	if	(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r20)))	)	==	*((IU8	*)&(r21)	+	REGBYTE))	goto	L24_45if_f;	
-	*((IUH	*)&(r22))	=	(IS32)(1407)	;	
+	*((IUH	*)&(r22))	=	(IS32)(1404)	;	
 	*((IU8	*)&(r21)	+	REGBYTE)	=	*((IU8	*)(LocalIUH+1)	+	REGBYTE)	;	
 if(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)>=8)
 	CrulesRuntimeError("Bad	Bit	No");
@@ -4312,7 +4312,7 @@ if(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)>=8)
 	*((IU8	*)&(r20)	+	REGBYTE)	=	*((IU8	*)&(r21)	+	REGBYTE)	;	
 	*((IUH	*)&(r20))	=	*((IU8	*)&(r20)	+	REGBYTE);	
 	*((IU32	*)(LocalIUH+2)	+	REGLONG)	=	*((IU32	*)&(r20)	+	REGLONG)	;	
-	*((IUH	*)&(r22))	=	(IS32)(1407)	;	
+	*((IUH	*)&(r22))	=	(IS32)(1404)	;	
 	*((IU8	*)&(r20)	+	REGBYTE)	=	*(UOFF_15_8(	(LocalIUH+1)	))	;	
 if(*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)>=8)
 	CrulesRuntimeError("Bad	Bit	No");

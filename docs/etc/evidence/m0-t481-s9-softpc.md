@@ -96,5 +96,21 @@ proof of normal shutdown. Both source Windows installations were verified
 unchanged. The candidate was published as the complete 11-image package
 `d29c4100-b9a2-4a80-a3b4-e82dc98896a4` to `assets/release` and
 `O:/winnt/system32`; both W31 drivers remained hash-identical to the released
-drivers and `O:/w31/SYSTEM.INI` was unchanged. The earlier intermittent Win95
-`0xC0000420` and unverified generic-write rotation remain open boundaries.
+drivers and `O:/w31/SYSTEM.INI` was unchanged. At that point the earlier
+intermittent Win95 `0xC0000420` and generic-write rotation remained open.
+
+The initial rotation fixture used an incorrect zero latch-XOR mask. Setting it
+to the real VGA mode-0 assign value (`0xffffffff`) produced a discriminating
+actual-provider test: a rotation count of one wrote `0x81818181` before the
+change, rather than `0xc0c0c0c0`. DIV-898 corrects the three direct GDP rotate
+subfield offsets in `sevid004.c`; selected generic byte and WORD writes then
+passed counts 1 through 7, checking both WORD bytes in all four planes. The
+subsequent candidate passed all 16 selected Full gates, the four Win3.1
+mode/DOSONLY startup and normal-exit combinations, and the production Win95
+installer/two-VM/four-native-command witness. DOS4GW/Nesticle was skipped
+for lack of the external fixture; Win95 exit 1 does not establish normal
+shutdown. Both source Windows installations remained unchanged. All eleven
+host images were published with package identity
+`95d80e95-adb7-456e-b82c-e9932054909f`; both W31 drivers matched the release
+and SYSTEM.INI remained unchanged. The owner's repeated Win3.1 switch sequence
+and final production Win95 editor interaction remain unverified.
