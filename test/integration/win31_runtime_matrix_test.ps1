@@ -12,6 +12,7 @@ param(
     [switch]$ConsoleClose,
     [switch]$DirectRun16,
     [switch]$DirectShortPath,
+    [switch]$DirectPif,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
@@ -22,6 +23,7 @@ if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Regi
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
 if($WorkerCloseMonitor -and !$ServiceLossMarkers){throw 'Worker close requires native readiness markers'}
 if($DirectShortPath -and !$DirectRun16){throw 'Short PATH comparison requires direct Run16'}
+if($DirectPif -and !$DirectRun16){throw 'PIF comparison requires direct Run16'}
 if (@($Cases | Select-Object -Unique).Count -ne $Cases.Count) { throw 'Duplicate matrix cases' }
 $repo = (Resolve-Path "$PSScriptRoot/../..").Path
 $install = (Resolve-Path -LiteralPath $InstallRoot).Path.TrimEnd('\')
@@ -163,7 +165,7 @@ try {
             $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'; $env:MVDM_OBSERVER_SHORT_HISTORY='1'
             $observerArgs=if($DirectRun16){
                 @("$stage\system32\run16.exe",$install,$report,
-                  (Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs")
+                  (Join-Path $patch $(if($DirectPif){$pifName}else{$case.Command})),'--observation-timeout-ms',"$TimeoutMs")
             }else{
                 @('C:\Windows\System32\cmd.exe',$install,$report,
                   '/d','/c',(Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs")

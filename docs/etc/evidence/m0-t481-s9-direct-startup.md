@@ -26,6 +26,29 @@ remained 010A, and Windows started and exited normally. These observations
 match the previously retained original guest defect in TODO, without proving
 the guest state of the owner's already-closed process.
 
+The owner subsequently kept a matching failure open for a read-only snapshot.
+The live process displayed `CS:04D3 IP:1F91 OP:63 6f 64 65 78`; the probe
+confirmed those instruction bytes and found PSP environment segment 057E in
+an owner-04D3 memory block of 0181 paragraphs. Both the fault address and
+the known DS:203C `EnvSiz` location lie inside that block. The first probe
+read no environment variable values beyond the instruction bytes already
+displayed. At the owner's explicit subsequent approval, a second read-only
+probe scanned the live environment block in memory, without saving or printing
+values. It identified both the displayed instruction location and DS:203C as
+inside `PSMODULEPATH`, whose value is 295 bytes long: the two offsets within
+that value are 103 and 274 bytes respectively. The displayed `codex` bytes
+therefore do not require an entry in PATH. The owner reports that their PATH
+has no `codex` entry; this finding is consistent with that report. The block
+observation and controlled copy trace establish the current overlap, but the
+live failure is a snapshot after the copy, not a live before/after trace.
+
+In a further isolated control, invoking the enhanced-mode PIF directly through
+Run16 with the agent's inherited environment also failed before the desktop,
+at illegal bytes `63 68 61 69 6e`. This rules out the batch wrapper as a
+sufficient explanation for that reproduction; it does not claim every direct
+PIF launch fails. The retained matrix runner exposes this control through
+`-DirectRun16 -DirectPif`.
+
 No product fix has been made for the guest defect: current authority explicitly
 prohibits modifying the original guest, automatic environment truncation,
 injected `/E:` or allocator special cases. Shortening PATH is a per-invocation
