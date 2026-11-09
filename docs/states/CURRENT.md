@@ -2,51 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T481 S8 — Win3.1 full-screen mouse pointer investigation.**
-S7 is owner-closed with the reported Win3.1 interaction and black-screen
-results and the undelivered candidate and limitations documented in the
-[S7 closure](../etc/evidence/m0-t481-s7-closure.md). After S8, S9 audits and
-imports applicable recent SoftPC software-emulation fixes; S10 investigates
-Win95 and completes its remaining multitask acceptance. The T remains open.
-S8 source and test evidence is tracked in [mouse investigation](../etc/evidence/m0-t481-s8-mouse.md).
-The full-screen pointer driver and the 11-image host package with the original
-EGA cursor coordinate-restoration fix are published as an owner-test candidate.
-Full selected gates and the Win3.1 four-case matrix passed; repeated CAF and
-Alt+Enter acceptance and Win95 regression remain outstanding. S8 is not closed.
-Owner reports the candidate generally works, but a windowed DOS EDIT.COM
-session can show two malformed pointer blocks or crash after switching to full
-screen, using CAF, returning to a window and entering full screen again. This
-actual report is part of S8 and needs reproduction and diagnosis.
+**Active: M0 T481 S9 — SoftPC software-emulation imports and Win95 checks.**
+The owner closed S8 and directed S9 to proceed with the applicable SoftPC
+repairs and Win95 investigation. The S8 delivery and its unverified repeated
+switch boundary are recorded in the [S8 closure](../etc/evidence/m0-t481-s8-closure.md).
+S10 retains final Win95 and multitask acceptance; the T remains open.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md). |
-| Identifier Mode | M0 T481 S8, Ordinary Mode. |
-| Admission And Approval | Owner closed S7 and admitted S8 to investigate the Win3.1 full-screen mouse pointer, with repair and delivery under existing authorization. |
-| Objective | Reproduce and identify why the mouse pointer disappears when switching EDIT.COM and EDIT.EXE sessions to full screen while mouse input continues; repair the reached cause. |
-| Non-goals | Do not alter original guest binaries or assume the failures share a cause. |
-| Reference Baseline | S7 owner-tested O:/w31 configuration and published S5 host and driver package; S6/S7 candidates are not a qualified release. |
-| Files And ABI Surface | Inspect VM input, video and activation paths, INSIGNIA.386 and NTVDM64.386 interfaces, and production probes. |
+| Identifier Mode | M0 T481 S9, Ordinary Mode. |
+| Admission And Approval | Owner closed S8 and approved S9 SoftPC imports and Win95 repair investigation. |
+| Objective | Audit recent SoftPC software-emulation repairs, import applicable minimal changes, and investigate and repair demonstrated Win95 multitask defects. |
+| Non-goals | Do not modify or rebuild original guest images; do not import unrelated changes or claim unobserved bugs. |
+| Reference Baseline | Published candidate 3766b9221; Win3.1 repeated-switch and Win95 owner acceptance remain unverified. |
+| Files And ABI Surface | Selected CCPU, C-VID, video and related host adapters; corresponding tests and exception records. |
 | Applicable Rules | Execution, source policy, guest immutability and original-semantics-first. |
-| Verification | Trace original and actual paths; compare window versus full screen and both editors using isolated facilities, verify pointer pixels as well as input and switching back, run applicable regressions, and verify released and O:/w31 deployed identities. |
-| Expected Markers | Evidence identifies input destination, VM activation and display ownership at each failure or states missing observations. |
-| Asset Needs | Existing installed Win3.1, released runtime and addon drivers, and existing test facilities. |
-| Reporting Requirements | Describe reproducibility, causes, repairs, tests, deployment and limitations; distinguish facts from hypotheses. |
-| Stop Conditions | Original guest modification or new observable semantic relaxation. |
-| Exit Criteria | Reported failures repaired and verified, applicable coherent package built, published and hash-verified, O:/w31 updated, changes reviewed, committed and pushed. |
-| Original Owner Request | In Win3.1, EDIT.EXE and EDIT.COM retain working mouse motion and clicks after switching full screen, but the mouse pointer disappears. |
-| Similar-Issue Sweep | Compare single and multiple VM input routing, frame ownership, foreground switching and exit. |
+| Verification | Trace original and SoftPC callers; run matched positive and negative tests, cached builds, Full and relevant Win3.1 and Win95 regressions. |
+| Expected Markers | Each upstream repair has applicability, provenance, selected caller and actual test or explicit boundary. |
+| Asset Needs | Adjacent SoftPC source, existing isolated guest copies, complete host package and addon drivers. |
+| Reporting Requirements | Separate actual failures, imported changes, tests, publication and unverified boundaries. |
+| Stop Conditions | Original guest mutation or unapproved observable semantic retreat. |
+| Exit Criteria | Applicable fixes reviewed, built, tested, fully published, recorded, committed and pushed; remaining S10 acceptance explicitly handed off. |
+| Original Owner Request | Close S8; start S9 SoftPC software-emulation fixes and Win95 repair. |
+| Similar-Issue Sweep | Check selected CCPU, BIOS, C-VID and video callers and upstream dependencies. |
+
+S9 disposable workspace: `build/t481-s9`, owned by this packet; budget 8 hours,
+20 GiB, with a 30-minute no-progress review. Join owned processes and record
+results before cleanup; reusable fixtures remain in `tests/mvdm-host`.
+[S9 evidence](../etc/evidence/m0-t481-s9-softpc.md) records candidate results.
 
 ## Current Technical Baseline
 
-The eleven host components and W31 addon pair are published; see
-[qualification](../../artifacts/t481-s5/qualification001.json),
-[unified driver name](../../artifacts/t481-s5/unified-name.json), and
-[S5 closure](../etc/evidence/m0-t481-s5-closure.md). Win95 has not yet received
-owner manual acceptance. The reproduced DOS4GW inherited-environment issue and
-Win95 exit-code limitation remain recorded and are not made passes by S6.
+The 11-image host candidate and W31 addon pair are published and hash-verified.
+Win95 manual acceptance and the repeated Win3.1 CAF/fullscreen sequence remain
+outstanding; neither is implied by the owner's S8 closure.
 
 ## Recent M0 Closures
 

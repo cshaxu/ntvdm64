@@ -2,6 +2,10 @@
 
 [T481 S7 closure](evidence/m0-t481-s7-closure.md) records owner acceptance of the Win3.1 configuration candidate and transfers full-screen pointer investigation to S8.
 
+[T481 S8 closure](evidence/m0-t481-s8-closure.md) records the owner-directed handoff and remaining acceptance boundaries.
+
+[T481 S9 SoftPC evidence](evidence/m0-t481-s9-softpc.md) records the candidate imports and verification.
+
 [T481 S7 investigation](evidence/m0-t481-s7-investigation.md) records the two-window mouse and display investigation.
 
 [T481 S8 mouse investigation](evidence/m0-t481-s8-mouse.md) records the Win3.1 full-screen pointer candidate, evidence, manual-test deployment and remaining verification limits.

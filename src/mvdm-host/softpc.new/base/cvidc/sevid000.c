@@ -1409,7 +1409,7 @@ switch ( id )
 	*((IU16	*)(LocalIUH+2)	+	REGWORD)	=	*((IU16	*)&(r2)	+	REGWORD	)	;	
 	*((IUH	*)(r1+0))	=	(IS32)(16225)	;	
 	*((IUH	*)(r1+0))	=	(IS32)(16224)	;	
-	*((IUH	*)&(r20))	=	(IS32)(8)	;	
+	*((IUH	*)&(r20))	=	(IS32)(2) /* MVDM-HOST-DIV-896: next guest word. */	;	
 	*((IU32	*)&(r21)	+	REGLONG)	=	*((IU32	*)(LocalIUH+0)	+	REGLONG)	+	*((IU32	*)&(r20)	+	REGLONG)	;		
 	*((IU32	*)&(r3)	+	REGLONG)	=	*((IU32	*)&(r21)	+	REGLONG)	;	
 /*	J_SAVE_RETURN	NOT	IMPLIMENTED	*/

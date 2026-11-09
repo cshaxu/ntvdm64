@@ -136,6 +136,20 @@ static int check_chain2_rules(IU8 *planes)
     IU8 input[128], output[64], first[64];
     EVID_WRT_POINTERS saved = c_ev_write_ptr;
     IU32 mode, parity, slot, pass, flag, i, offset;
+    /* Unchained DWORD must read the same four consecutive guest bytes as
+       four independent byte reads, including the second word's offset. */
+    for (i = 0; i < 256; ++i) planes[4u * i] = (IU8)(i * 17u + 3u);
+    for (offset = 0x20; offset < 0x28; ++offset) {
+        IU32 value = 0;
+        for (i = 0; i < 4; ++i) {
+            r1 = (IUH)Gdp; r3 = offset + i;
+            read_mode0_evid[0].b_read(offset + i);
+            value |= ((IU32)r2 & 0xffu) << (i * 8u);
+        }
+        r1 = (IUH)Gdp; r3 = offset;
+        read_mode0_evid[0].d_read(offset);
+        CHECK((IU32)r2 == value);
+    }
     CHECK(check_chain2_dword_reads(planes) == 0);
     /* Odd/even selects a plane without compacting its address. Independent
        physical offsets distinguish adjacent cells and preserve font planes. */
@@ -202,8 +216,7 @@ static int check_chain2_rules(IU8 *planes)
             CHECK(actual == input[32-i]);
         }
     }
-    /* Independent physical-plane oracle for the registered byte/word Copy fills.
-       Legacy odd dword fill value assembly is tracked separately in S33 evidence. */
+    /* Independent physical-plane oracle for the registered byte/word Copy fills. */
     for (parity = 0; parity < 2; ++parity)
     for (slot = 0; slot < 2; ++slot) {
         IU32 width = 1u << slot;
@@ -217,6 +230,35 @@ static int check_chain2_rules(IU8 *planes)
                 fprintf(stderr, "copy fill parity=%u width=%u byte=%u actual=%02x\n", parity, width, i, planes[4u * (address & ~1u) + (address & 1u)]);
             CHECK(planes[4u * (address & ~1u) + (address & 1u)] ==
                 (IU8)(0x11111111u >> ((i % width) * 8u)));
+        }
+    }
+    /* SoftPC 19a68782: verify the complete plane, including untouched bytes,
+       so odd heads and short tails cannot silently corrupt adjacent cells. */
+    {
+        const IU32 starts[] = {0x101, 0x100, 0x103, 0x107, 0x3fff, 0xffe1};
+        const IU32 values[] = {0x44332211u, 0x89abcdefu, 0, 0xffffffffu};
+        const IU32 counts[] = {1, 2, 7, 0};
+        IU32 start, value, count;
+        memset(planes, 0x5a, sizeof(expected));
+        memset(expected, 0x5a, sizeof(expected));
+        r1=(IUH)Gdp; r2=0x101; r3=0x1234; r4=0;
+        c_ev_write_ptr.b_fill(0x101, 0x34, 0);
+        r1=(IUH)Gdp; r2=0x101; r3=0x1234; r4=0;
+        c_ev_write_ptr.w_fill(0x101, 0x1234, 0);
+        CHECK(memcmp(planes, expected, sizeof(expected)) == 0);
+        for (start = 0; start < sizeof(starts)/sizeof(starts[0]); ++start)
+        for (value = 0; value < sizeof(values)/sizeof(values[0]); ++value)
+        for (count = 0; count < sizeof(counts)/sizeof(counts[0]); ++count) {
+            memset(planes, 0x5a, sizeof(expected));
+            memset(expected, 0x5a, sizeof(expected));
+            for (i = 0; i < counts[count] * 4u; ++i) {
+                IU32 address = starts[start] + i;
+                expected[4u * (address & ~1u) + (address & 1u)] =
+                    (IU8)(values[value] >> ((i % 4u) * 8u));
+            }
+            r1=(IUH)Gdp; r2=starts[start]; r3=values[value]; r4=counts[count];
+            c_ev_write_ptr.d_fill(starts[start], values[value], counts[count]);
+            CHECK(memcmp(planes, expected, sizeof(expected)) == 0);
         }
     }
     for (i = 0; i < sizeof(input); ++i) input[i] = (IU8)(i * 17u + 0x35u);

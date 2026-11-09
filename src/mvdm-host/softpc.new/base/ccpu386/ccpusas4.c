@@ -1693,13 +1693,13 @@ bios_read_word IFN1(LIN_ADDR, linAddr)
 		if (!selectors_set)
 			return;
 
-		return ((IU8)biosDoInst(code_sel, BIOS_RDW_OFFSET, 0, data_sel, linAddr));
+		return ((IU16)biosDoInst(code_sel, BIOS_RDW_OFFSET, 0, data_sel, linAddr)); /* MVDM-HOST-DIV-894: preserve read width. */
 	}
 	else
 	{
 		sub_note_trace1(SAS_VERBOSE, "Page read word VM virtualisation at 0x%x", linAddr);
 
-		return ((IU8)biosDoInst(BIOS_VIRTUALISE_SEGMENT, BIOS_RDW_OFFSET, 0, data_sel, linAddr));
+		return ((IU16)biosDoInst(BIOS_VIRTUALISE_SEGMENT, BIOS_RDW_OFFSET, 0, data_sel, linAddr));
 	}
 }
 
@@ -1757,13 +1757,13 @@ bios_read_double IFN1(LIN_ADDR, linAddr)
 		if (!selectors_set)
 			return;
 
-		return ((IU8)biosDoInst(code_sel, BIOS_RDD_OFFSET, 0, data_sel, linAddr));
+		return ((IU32)biosDoInst(code_sel, BIOS_RDD_OFFSET, 0, data_sel, linAddr));
 	}
 	else
 	{
 		sub_note_trace1(SAS_VERBOSE, "Page read double VM virtualisation at 0x%x", linAddr);
 
-		return ((IU8)biosDoInst(BIOS_VIRTUALISE_SEGMENT, BIOS_RDD_OFFSET, 0, data_sel, linAddr));
+		return ((IU32)biosDoInst(BIOS_VIRTUALISE_SEGMENT, BIOS_RDD_OFFSET, 0, data_sel, linAddr));
 	}
 }
 
