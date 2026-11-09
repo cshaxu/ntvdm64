@@ -49,11 +49,11 @@
       "kind": "static-vxd",
       "architecture": "i386-protected-mode",
       "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "87441DAA2B686378BCD1B2482617688838F3F7AB295320417EC7134B9326C6F3",
-      "sha256": "0E4DA9B0B88FE89B20C30CBD7751EF1C4299316D6317BA40C98116B137A5712B",
+      "sourceSha256": "B8B37812839D0652A1D87709315D76459F05FAE860779A0A99F20911FBA22643",
+      "sha256": "A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB",
       "acceptance": "candidate",
-      "verifiedScope": "Same static image for Win3.1 and Win95. Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host; Win95 .386 loading and production-host native commands passed. Win95 normal shutdown unverified.",
-      "evidence": "artifacts/t481-s5/unified-name.json"
+      "verifiedScope": "S8 manual-test candidate: Win3.1 EDIT.EXE and EDIT.COM full-screen pointer frames observed; dual-editor normal exit passed without switching. Switch-back input and exit automation and Win95 regression are unverified.",
+      "evidence": "docs/etc/evidence/m0-t481-s8-mouse.md"
     },
     {
       "id": "insignia-niddb",

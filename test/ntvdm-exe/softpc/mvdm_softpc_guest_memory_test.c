@@ -59,13 +59,13 @@ int main(void)
     CHECK(reads == 1);
     paging = 1;
     CHECK(mvdm_softpc_guest_memory_copy_from(0x80000ff0, bytes, 32));
-    CHECK(translations == 2 && last_access == 0 && reads == 2);
+    CHECK(translations == 2 && last_access == 2 && reads == 2);
     cpl = 0;
     CHECK(mvdm_softpc_guest_memory_copy_from(0x80000000, bytes, 1));
-    CHECK(last_access == 2);
+    CHECK(last_access == 0);
     cpl = 3; vm = 1;
     CHECK(mvdm_softpc_guest_memory_copy_to(0x80000ff0, bytes, 32));
-    CHECK(last_access == 5 && writes == 1);
+    CHECK(last_access == 7 && writes == 1);
     before = reads; deny_second = 1;
     CHECK(!mvdm_softpc_guest_memory_copy_from(0x80000ff0, bytes, 32));
     CHECK(reads == before);

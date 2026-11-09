@@ -2,52 +2,57 @@
 
 ## Current Work
 
-**Active: M0 T481 S5 — combined qualification and delivery.** S1–S4 are
-closed; the T remains open. See the [S4 evidence](../etc/evidence/m0-t481-s4-closure.md),
-[S3 evidence](../etc/evidence/m0-t481-s3-closure.md) and the
-[working plan](../etc/operations/m0-t481-multitask-completion-plan.md).
+**Active: M0 T481 S8 — Win3.1 full-screen mouse pointer investigation.**
+S7 is owner-closed with the reported Win3.1 interaction and black-screen
+results and the undelivered candidate and limitations documented in the
+[S7 closure](../etc/evidence/m0-t481-s7-closure.md). After S8, S9 audits and
+imports applicable recent SoftPC software-emulation fixes; S10 investigates
+Win95 and completes its remaining multitask acceptance. The T remains open.
+S8 source and test evidence is tracked in [mouse investigation](../etc/evidence/m0-t481-s8-mouse.md).
+The full-screen pointer driver and the 11-image host package with the original
+EGA cursor coordinate-restoration fix are published as an owner-test candidate.
+Full selected gates and the Win3.1 four-case matrix passed; repeated CAF and
+Alt+Enter acceptance and Win95 regression remain outstanding. S8 is not closed.
+Owner reports the candidate generally works, but a windowed DOS EDIT.COM
+session can show two malformed pointer blocks or crash after switching to full
+screen, using CAF, returning to a window and entering full screen again. This
+actual report is part of S8 and needs reproduction and diagnosis.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md). |
-| Identifier Mode | M0 T481 S5, Ordinary Mode. |
-| Admission And Approval | Owner approved continuous execution and per-S complete delivery. |
-| Objective | Audit all admitted obligations against evidence, complete cached builds and applicable integrated Win3.1/Win95, DOS and WOW regression; publish and verify the complete host and addon package and W31 driver pair. |
-| Non-goals | No original guest modification/rebuild, hardware V86 monitor, unrelated 486 changes or speculative protocol expansion. |
-| Reference Baseline | Candidate579 package `2f22fbfe-ee21-4df6-a59b-ef50997e42ff`, S3 Full549 16/16; S4 native002, reuse001, init002 and editor003. |
-| Files And ABI Surface | Existing product, addon, integration tests, manifests and task evidence; only reached defects may require implementation. |
-| Applicable Rules | Execution, architecture, coding, source policy and approved BIOS/INT16 unread-input return boundary. |
-| Verification | Cached x86/x64 builds, applicable Full gates, four Win3.1 mode/DOSONLY cases, actual Win95 tests and complete package/addon/W31 hashes; preserve diagnostic versus production distinctions. |
-| Expected Markers | Both VM chains complete without cross-delivery or stranded workers; guest files unchanged; package and W31 hashes agree. |
-| Asset Needs | Existing Win3.1 and Win95 installations on isolated copies, cached builds, test probes and release staging. |
-| Reporting Requirements | Requirement-by-requirement evidence, deviations, exact test and package hashes, release destinations, commit and push. |
-| Stop Conditions | New semantic concession or original guest patch required; preserve evidence and continue independent work. |
-| Exit Criteria | All original obligations evaluated without claiming unsupported paths passed; bounded coverage or approved immutable-guest exceptions stated, required tests pass and complete product is built, published, committed and pushed. |
-| Original Owner Request | Complete the multitask payload; each S builds, tests, publishes, commits and pushes; update W31 for owner testing. |
-| Similar-Issue Sweep | VM isolation, shutdown, input handback, window presentation, native/DOS nesting, source ownership and package coherence. |
-| Temporary Evidence | `build/t481-s5`; task-owned runs, 24-hour/4-GiB review budget. Archive necessary outcomes and hashes before cleanup. |
+| Identifier Mode | M0 T481 S8, Ordinary Mode. |
+| Admission And Approval | Owner closed S7 and admitted S8 to investigate the Win3.1 full-screen mouse pointer, with repair and delivery under existing authorization. |
+| Objective | Reproduce and identify why the mouse pointer disappears when switching EDIT.COM and EDIT.EXE sessions to full screen while mouse input continues; repair the reached cause. |
+| Non-goals | Do not alter original guest binaries or assume the failures share a cause. |
+| Reference Baseline | S7 owner-tested O:/w31 configuration and published S5 host and driver package; S6/S7 candidates are not a qualified release. |
+| Files And ABI Surface | Inspect VM input, video and activation paths, INSIGNIA.386 and NTVDM64.386 interfaces, and production probes. |
+| Applicable Rules | Execution, source policy, guest immutability and original-semantics-first. |
+| Verification | Trace original and actual paths; compare window versus full screen and both editors using isolated facilities, verify pointer pixels as well as input and switching back, run applicable regressions, and verify released and O:/w31 deployed identities. |
+| Expected Markers | Evidence identifies input destination, VM activation and display ownership at each failure or states missing observations. |
+| Asset Needs | Existing installed Win3.1, released runtime and addon drivers, and existing test facilities. |
+| Reporting Requirements | Describe reproducibility, causes, repairs, tests, deployment and limitations; distinguish facts from hypotheses. |
+| Stop Conditions | Original guest modification or new observable semantic relaxation. |
+| Exit Criteria | Reported failures repaired and verified, applicable coherent package built, published and hash-verified, O:/w31 updated, changes reviewed, committed and pushed. |
+| Original Owner Request | In Win3.1, EDIT.EXE and EDIT.COM retain working mouse motion and clicks after switching full screen, but the mouse pointer disappears. |
+| Similar-Issue Sweep | Compare single and multiple VM input routing, frame ownership, foreground switching and exit. |
 
 ## Current Technical Baseline
 
-Candidate001 is published: eleven host images match both destinations;
-`NTVDM64.386` and `INSIGNIA.386` match `O:/w31/PATCH` and release. Cached
-x86/x64 builds, Full 16/16 and four Win3.1 mode/DOSONLY cases pass; see
+The eleven host components and W31 addon pair are published; see
 [qualification](../../artifacts/t481-s5/qualification001.json),
-[publication](../../artifacts/t481-s5/publication001.json), and
-[obligation audit](../../artifacts/t481-s5/obligation-audit.md). The optional
-DOS4GW/NESticle inherited-environment test reproduces its existing TODO failure;
-the minimal environment control reaches graphics. S4 proved
-production-host four native commands across two Win95 VMs, real handle reuse,
-and diagnostic initialization rollback; its interactive mouse/editor test uses a
-diagnostic host. Win95 observer exit code 1 and the historical direct native
-batch path remain explicitly unproved as normal behavior. They must not be
-reported as passing; see [S4 closure](../etc/evidence/m0-t481-s4-closure.md).
-
-S5 unified the Win3.1 and Win95 addon name as `NTVDM64.386`: Win95 loading, two-VM production commands and diagnostic editor interaction pass; the duplicate VXD artifact is removed. [Evidence](../../artifacts/t481-s5/unified-name.json). Host and W31 bytes remain identical to the qualified Full package. Historical evidence retains original filenames; original guest binaries remain unchanged. S5 delivery awaits owner acceptance; T remains open.
+[unified driver name](../../artifacts/t481-s5/unified-name.json), and
+[S5 closure](../etc/evidence/m0-t481-s5-closure.md). Win95 has not yet received
+owner manual acceptance. The reproduced DOS4GW inherited-environment issue and
+Win95 exit-code limitation remain recorded and are not made passes by S6.
 
 ## Recent M0 Closures
 
 - [T480](../history/m0-t480-closure.md): adjacent audit closure.
 - [T479](../history/m0-t479-closure.md): guest multitask transferred to T481.
+
+## Recent Governance
+
+See the [execution rules](../rules/EXECUTION.md) for the current governance.

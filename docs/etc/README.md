@@ -1,5 +1,17 @@
 # Supporting Material
 
+[T481 S7 closure](evidence/m0-t481-s7-closure.md) records owner acceptance of the Win3.1 configuration candidate and transfers full-screen pointer investigation to S8.
+
+[T481 S7 investigation](evidence/m0-t481-s7-investigation.md) records the two-window mouse and display investigation.
+
+[T481 S8 mouse investigation](evidence/m0-t481-s8-mouse.md) records the Win3.1 full-screen pointer candidate, evidence, manual-test deployment and remaining verification limits.
+
+[T481 S6 closure](evidence/m0-t481-s6-closure.md) records the owner-directed handoff and remaining multitask obligations.
+
+[T481 S5 closure](evidence/m0-t481-s5-closure.md) records the delivered integrated candidate, owner-directed stage closure and pending Win95 manual acceptance.
+
+[T481 S4 closure](evidence/m0-t481-s4-closure.md) records the Win95 lifecycle investigation and acceptance boundary.
+
 [T480 S5 final minimization](evidence/m0-t480-s5-final-minimization.md) records the complete host inventory, final reductions and verification limits.
 
 [T480 S4 registration reconciliation](evidence/m0-t480-s4-registration-reconciliation.md) binds the affected source versions, registrations and historical validation receipts.

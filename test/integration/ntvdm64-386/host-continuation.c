@@ -220,6 +220,9 @@ void test_mouse_EM_callback(void)
     trace(0x520,c_getAX(),c_getSI());
     trace(0x521,c_getBX(),c_getCX());
     trace(0x522,c_getDX(),c_getES());
+    /* BOP dispatch already selected this instance. Pair the callback with
+     * its virtualising byte and process before observing the original call. */
+    trace(0x523,c_sas_hw_at(0x4ac),GetCurrentProcessId());
     mouse_EM_callback();
 }
 /* Optional bios.obj link interposition; observe arguments, then call the
@@ -705,6 +708,8 @@ static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
     FILE *file;
     static uint32_t editors[16];
     static DWORD editor_count;
+    static uint32_t first_menu_vm;
+    static DWORD menu_stage;
     if (extent != sizeof(descriptor) ||
         !mvdm_softpc_guest_memory_copy_from(address, (BYTE *)descriptor, sizeof(descriptor)) ||
         descriptor[6] || descriptor[5] < sizeof(header) ||
@@ -759,6 +764,30 @@ static void trace_application(uint32_t vm, uint32_t address, uint32_t extent)
         (unsigned long)header.columns, (unsigned long)header.rows,
         (unsigned long)header.font_height, (unsigned long)video_height, text);
     fclose(file);
+    /* Test-only stage receipt: first DOS editor's menu opens, closes, then
+     * opens again. This samples candidate frames, not visible window pixels. */
+    if (GetEnvironmentVariableA("MVDM_MENU_SEQUENCE", path, sizeof(path))) {
+        BOOL editor = strstr(text, "File") && strstr(text, "Edit") &&
+            !strstr(text, "New File");
+        BOOL menu = editor && strstr(text, "Save As") && strstr(text, "Exit");
+        BOOL advanced = FALSE;
+        if (!first_menu_vm && editor) first_menu_vm = vm;
+        if (vm == first_menu_vm) {
+            if ((menu_stage == 0 || menu_stage == 2) && menu) advanced = TRUE;
+            else if (menu_stage == 1 && editor && !menu) advanced = TRUE;
+        }
+        if (advanced) {
+            DWORD written;
+            HANDLE receipt;
+            ++menu_stage;
+            receipt = CreateFileA(path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+                NULL, CREATE_ALWAYS, 0, NULL);
+            if (receipt == INVALID_HANDLE_VALUE) ExitProcess(GetLastError());
+            if (!WriteFile(receipt, &menu_stage, sizeof(menu_stage), &written, NULL) ||
+                written != sizeof(menu_stage)) ExitProcess(ERROR_WRITE_FAULT);
+            CloseHandle(receipt);
+        }
+    }
     if (strstr(text, "File") && strstr(text, "Edit") &&
         GetEnvironmentVariableA("MVDM_EDITORS_READY", path, sizeof(path))) {
         for (i = 0; i < editor_count && editors[i] != vm; ++i) {}

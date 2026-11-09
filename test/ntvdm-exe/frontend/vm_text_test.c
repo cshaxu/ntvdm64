@@ -1,4 +1,5 @@
 #include "ntvdm-exe/frontend/vm_text.h"
+#include "ntvwm-exe/text_frame.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -21,6 +22,10 @@ static int publication_video(void)
     console_text_configuration configuration;
     BYTE tile[CONSOLE_IO_TILE_BYTES];
     ntvdm_vm_text *text = NULL;
+    ntvwm_mouse mouse = {0};
+    INPUT_RECORD input[2];
+    console_frame_mouse_input enter = {0};
+    DWORD count = 0;
     frame.style.font_height = 16;
     frame.style.fonts[0][65][0] = 0x7e;
     frame.cells[0] = 'A'; frame.cells[1] = 7;
@@ -28,6 +33,12 @@ static int publication_video(void)
     description.width = description.height = 1; description.stride = 2;
     description.bytes = sizeof(console_text_style) + 2;
     description.palette[7] = 0xaaaaaa;
+    CHECK(!ntvwm_mouse_geometry(&mouse, (SMALL_RECT){0, 0, 0, 0}, 16));
+    enter.action = CONSOLE_MOUSE_ENTER; enter.width = 8; enter.height = 16;
+    CHECK(!ntvwm_mouse_input(&mouse, &enter, input, &count));
+    CHECK(mouse.visible);
+    ntvwm_mouse_compose(&mouse, &description, (BYTE *)&frame);
+    CHECK(frame.cells[0] == 'A' && frame.cells[1] == (7 ^ 0x77));
     CHECK(!ntvdm_vm_text_create(&initial, sizeof(initial.h) + 2, &text));
     q.operation = CONSOLE_IO_READ_TEXT_CONFIGURATION; r.data = tile;
     CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_NOT_FOUND);
@@ -59,6 +70,8 @@ static int publication_video(void)
         !memcmp(&trailer.description, &description, sizeof(description)));
     CHECK(!memcmp((uint8_t *)application + sizeof(initial.h) + 2 + sizeof(trailer),
         &frame, description.bytes));
+    CHECK(((uint8_t *)application)[sizeof(initial.h) + 2 + sizeof(trailer) +
+        sizeof(console_text_style) + 1] == (7 ^ 0x77));
     frame.style.fonts[0][65][0] = 0; description.palette[7] = 0;
     CHECK(((const console_text_style *)view.video_bytes)->fonts[0][65][0] == 0x7e &&
         view.video->palette[7] == 0xaaaaaa); /* Owned copies, not publisher buffers. */

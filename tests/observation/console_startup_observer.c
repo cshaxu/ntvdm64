@@ -447,6 +447,115 @@ static void capture_timeout_guest(FILE *report,HANDLE process,DWORD pid,
     char value[32],path[MAX_PATH],*end;DWORD rva,base=0,offset;
     unsigned __int64 parsed;SIZE_T copied;HANDLE output;BYTE page[4096];
     DWORD written;
+    char sr_text[32], ip_text[32];
+    char mouse_text[32];
+    char instance_text[32];
+    DWORD sr_length = GetEnvironmentVariableA("MVDM_OBSERVER_CCPU_SR_RVA", sr_text, sizeof(sr_text));
+    DWORD ip_length = GetEnvironmentVariableA("MVDM_OBSERVER_CCPU_IP_RVA", ip_text, sizeof(ip_text));
+    DWORD mouse_length = GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HANDLE_RVA", mouse_text, sizeof(mouse_text));
+    DWORD instance_length = GetEnvironmentVariableA("MVDM_OBSERVER_LAST_VM_RVA", instance_text, sizeof(instance_text));
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_KEYBOARD_STATE", NULL, 0)) {
+        /* RVAs must be independently checked against this exact test image. */
+        static const DWORD rvas[] = {0x1c7784u,0x20ae4cu,0x20ae50u,0x42056cu,0x42057cu,0x420564u};
+        DWORD state[6]; SIZE_T n; unsigned i;
+        for(i=0;i<6;++i) if(image->image_size<4u || rvas[i]>image->image_size-4u ||
+            !ReadProcessMemory(process,(LPCVOID)(ULONG_PTR)(image->base_address+rvas[i]),
+                &state[i],sizeof(state[i]),&n) || n!=sizeof(state[i])) break;
+        if(i==6)fprintf(report,"guest-keyboard pid=%lu pending=%lu read=%lu ack=%lu full=%lu free=%lu disabled=%lu\n",
+            (unsigned long)pid,(unsigned long)state[0],(unsigned long)state[1],
+            (unsigned long)state[2],(unsigned long)state[3],(unsigned long)state[4],(unsigned long)state[5]);
+        else fputs("guest-keyboard-error=read-or-rva\n",report);
+    }
+    if (mouse_length && mouse_length < sizeof(mouse_text)) {
+        char *mouse_end;
+        unsigned __int64 mouse_rva = _strtoui64(mouse_text, &mouse_end, 16);
+        DWORD handle = 0, instance = 0, disabled = 0, flag = 0;
+        SIZE_T n = 0;
+        if (mouse_end != mouse_text && !*mouse_end && image->image_size >= 4u &&
+            mouse_rva <= image->image_size - 4u &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(image->base_address + mouse_rva),
+                              &handle, 4, &n) && n == 4 && handle &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)handle, &instance, 4, &n) &&
+            n == 4 && instance && instance <= MAXDWORD - 0x5a4u &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(instance + 0x5a0u),
+                              &disabled, 4, &n) && n == 4 &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(instance + 0x19cu),
+                              &flag, 4, &n) && n == 4)
+            fprintf(report, "guest-mouse pid=%lu handle=%08lx instance=%08lx disabled=%lu flag=%ld\n",
+                    (unsigned long)pid, (unsigned long)handle, (unsigned long)instance,
+                    (unsigned long)disabled, (long)(LONG)flag);
+        else fputs("guest-mouse-error=read-or-rva\n", report);
+    }
+    if (instance_length && instance_length < sizeof(instance_text)) {
+        char *instance_end;
+        unsigned __int64 instance_rva = _strtoui64(instance_text, &instance_end, 16);
+        DWORD selected = 0;
+        SIZE_T n = 0;
+        if (instance_end != instance_text && !*instance_end && image->image_size >= 4u &&
+            instance_rva <= image->image_size - 4u &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(image->base_address + instance_rva),
+                              &selected, 4, &n) && n == 4)
+            fprintf(report, "guest-mouse-last-instance pid=%lu value=%lu\n",
+                    (unsigned long)pid, (unsigned long)selected);
+        else fputs("guest-mouse-instance-error=read-or-rva\n", report);
+    }
+    if (mouse_length && instance_length &&
+        GetEnvironmentVariableA("MVDM_OBSERVER_NIDDB_TABLES", NULL, 0)) {
+        char *mouse_end, *instance_end;
+        unsigned __int64 mouse_rva = _strtoui64(mouse_text, &mouse_end, 16);
+        unsigned __int64 last_rva = _strtoui64(instance_text, &instance_end, 16);
+        DWORD handle = 0, records[80][2], slot, i;
+        SIZE_T n = 0;
+        /* Four master pointers precede four associated bookkeeping arrays;
+         * 80 two-DWORD records precede the cached selected-instance DWORD. */
+        if (mouse_end == mouse_text || *mouse_end || instance_end == instance_text ||
+            *instance_end || last_rva < 0x2d4u || image->image_size < 4u ||
+            last_rva > image->image_size - 4u || mouse_rva > image->image_size - 4u ||
+            !ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(image->base_address + mouse_rva),
+                               &handle, 4, &n) || n != 4 ||
+            handle < image->base_address + last_rva - 0x2d4u ||
+            handle >= image->base_address + last_rva - 0x2d4u + 16u ||
+            ((handle - (image->base_address + last_rva - 0x2d4u)) & 3u) ||
+            !ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(image->base_address + last_rva - 0x284u),
+                               records, sizeof(records), &n) || n != sizeof(records)) {
+            fputs("guest-mouse-tables-error=read-or-rva\n", report);
+        } else {
+            slot = (DWORD)((handle - (image->base_address + last_rva - 0x2d4u)) / 4u);
+            for (i = 0; i < 80u; ++i) if (records[i][1]) {
+                DWORD state = 0, disabled = 0, flag = 0;
+                if (records[i][1] <= MAXDWORD - slot * 4u &&
+                    ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(records[i][1] + slot * 4u),
+                                      &state, 4, &n) && n == 4 && state && state <= MAXDWORD - 0x5a4u &&
+                    ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(state + 0x5a0u),
+                                      &disabled, 4, &n) && n == 4 &&
+                    ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(state + 0x19cu),
+                                      &flag, 4, &n) && n == 4)
+                    fprintf(report, "guest-mouse-vm pid=%lu index=%lu vm=%08lx disabled=%lu flag=%ld\n",
+                            (unsigned long)pid, (unsigned long)i, (unsigned long)records[i][0],
+                            (unsigned long)disabled, (long)(LONG)flag);
+                else fprintf(report, "guest-mouse-vm-error pid=%lu index=%lu\n",
+                             (unsigned long)pid, (unsigned long)i);
+            }
+        }
+    }
+    if (sr_length && sr_length < sizeof(sr_text) && ip_length && ip_length < sizeof(ip_text)) {
+        char *sr_end, *ip_end;
+        unsigned __int64 sr_rva = _strtoui64(sr_text, &sr_end, 16);
+        unsigned __int64 ip_rva = _strtoui64(ip_text, &ip_end, 16);
+        DWORD cs[9], ip;
+        SIZE_T cs_bytes = 0, ip_bytes = 0;
+        if (sr_end != sr_text && !*sr_end && ip_end != ip_text && !*ip_end &&
+            image->image_size >= 72u && sr_rva <= image->image_size - 72u &&
+            image->image_size >= sizeof(ip) && ip_rva <= image->image_size - sizeof(ip) &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(image->base_address + sr_rva + 36u),
+                              cs, sizeof(cs), &cs_bytes) && cs_bytes == sizeof(cs) &&
+            ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)(image->base_address + ip_rva),
+                              &ip, sizeof(ip), &ip_bytes) && ip_bytes == sizeof(ip))
+            fprintf(report, "guest-cpu pid=%lu cs=%04lx cs-base=%08lx cs-limit=%08lx eip=%08lx\n",
+                    (unsigned long)pid, (unsigned long)(cs[0] & 0xffffu),
+                    (unsigned long)cs[7], (unsigned long)cs[8], (unsigned long)ip);
+        else fputs("guest-cpu-error=read-or-rva\n", report);
+    }
     if(!prefix || !GetEnvironmentVariableA("MVDM_OBSERVER_GUEST_BASE_RVA",value,sizeof(value)))return;
     value[sizeof(value)-1]=0;parsed=_strtoui64(value,&end,16);
     if(end==value || *end || parsed>MAXDWORD || image->image_size<sizeof(base) ||
@@ -1565,6 +1674,44 @@ static BOOL wait_for_console_mouse_mode(HANDLE input, DWORD *mode_out,
  * Clearing the opt-in in the child's environment prevents recursive launch.
  * This container does not put the product in a kill-on-close Job: lifecycle
  * evidence must describe the product's own completion, not Job teardown. */
+/* Dismiss only missing COM-port dialogs belonging to the selected disposable
+ * NTVDM image. All other errors remain visible to the test. */
+static BOOL CALLBACK ignore_test_serial_warning(HWND window, LPARAM context)
+{
+    const char *expected = (const char *)context;
+    char image[MAX_PATH], message[1024], label[32];
+    DWORD pid = 0, size = sizeof(image);
+    DWORD_PTR reply;
+    HANDLE process;
+    HWND text, button;
+    unsigned port;
+    GetWindowThreadProcessId(window, &pid);
+    process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
+    if (!process) return TRUE;
+    if (!QueryFullProcessImageNameA(process, 0, image, &size) ||
+        _stricmp(image, expected) != 0) { CloseHandle(process); return TRUE; }
+    CloseHandle(process);
+    text = GetDlgItem(window, 104);
+    button = GetDlgItem(window, 102);
+    if (!text || !button || !IsWindowVisible(window) ||
+        !IsWindowVisible(button) || !IsWindowEnabled(button)) return TRUE;
+    GetWindowTextA(text, message, sizeof(message));
+    GetWindowTextA(button, label, sizeof(label));
+    if (strcmp(label, "&Ignore") != 0) return TRUE;
+    for (port = 1; port <= 4; ++port) {
+        char expected_message[128];
+        sprintf_s(expected_message, sizeof(expected_message),
+                  "The system cannot open COM%u port requested by the application.", port);
+        if (strstr(message, expected_message)) {
+            BOOL sent = SendMessageTimeoutA(button, BM_CLICK, 0, 0,
+                SMTO_ABORTIFHUNG, 1000, &reply) != 0;
+            fprintf(stderr, "test-serial-ignore COM%u sent=%u\n", port, sent ? 1u : 0u);
+            break;
+        }
+    }
+    return TRUE;
+}
+
 static int private_desktop_observer(void)
 {
     char name[64];
@@ -1574,6 +1721,8 @@ static int private_desktop_observer(void)
     PROCESS_INFORMATION child = { 0 };
     DWORD result = 69;
     DWORD wait;
+    char serial_image[MAX_PATH];
+    DWORD serial_length;
 
     sprintf_s(name, sizeof(name), "NTVDMConsoleTest-%lu", GetCurrentProcessId());
     desktop = CreateDesktopA(name, NULL, NULL, 0, GENERIC_ALL, NULL);
@@ -1594,8 +1743,19 @@ static int private_desktop_observer(void)
         /* The nested private-desktop controller must outlive the bounded
          * observation it hosts.  Keep a small teardown allowance rather than
          * silently truncating an explicitly permitted diagnostic interval. */
-        wait = WaitForSingleObject(child.hProcess,
-                                   PRIVATE_DESKTOP_OBSERVER_TIMEOUT_MS);
+        serial_length = GetEnvironmentVariableA("MVDM_OBSERVER_SERIAL_NTVDM",
+                                                serial_image, sizeof(serial_image));
+        if (serial_length && serial_length < sizeof(serial_image)) {
+            ULONGLONG deadline = GetTickCount64() + PRIVATE_DESKTOP_OBSERVER_TIMEOUT_MS;
+            do {
+                wait = WaitForSingleObject(child.hProcess, 500);
+                if (wait != WAIT_TIMEOUT) break;
+                EnumDesktopWindows(desktop, ignore_test_serial_warning, (LPARAM)serial_image);
+            } while (GetTickCount64() < deadline);
+        } else {
+            wait = WaitForSingleObject(child.hProcess,
+                                       PRIVATE_DESKTOP_OBSERVER_TIMEOUT_MS);
+        }
         if (wait == WAIT_OBJECT_0) GetExitCodeProcess(child.hProcess, &result);
         else {
             /* Test timeout is a failure, never a successful task completion. */
@@ -1741,15 +1901,29 @@ static BOOL window_mouse_probe(const char *launcher,const char *report_path,BOOL
             if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM((index&1) ? -1 : 1,0)))goto done;
     }
     if(!edit_ready) {
-        if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(16,8)))goto done;
+        LPARAM movement=(GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_MOVE_ONLY",NULL,0) ||
+            GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_CLICK_CENTER",NULL,0)) ?
+            MAKELPARAM(160,80) : MAKELPARAM(16,8);
+        if(!PostMessageW(window,WM_APP+0x5f0,0,movement))goto done;
         Sleep(250);
-        if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
-        Sleep(250);
-        if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
+        if(!GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_MOVE_ONLY",NULL,0)) {
+            if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
+            Sleep(250);
+            if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
+        }
+    }
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_SINK_KEY",NULL,0)) {
+        char trace_path[MAX_PATH]; FILE *trace_file=NULL;
+        if(GetEnvironmentVariableA("MVDM_CONTINUATION_TRACE",trace_path,sizeof(trace_path))) {
+            trace_file=fopen(trace_path,"ab");
+            if(trace_file){fputs("TEST-SINK-KEY-BEGIN\n",trace_file);fclose(trace_file);}
+        }
+        if(!PostMessageW(window,WM_APP+0x5f2,1,0) || !PostMessageW(window,WM_APP+0x5f2,0,0))goto done;
     }
     /* Posting is not consumption. Keep the hook installed until the Window
      * thread accepts every sample and processes this FIFO tail marker. */
-    if(!PostMessageW(window,WM_APP+0x5f1,burst+(edit_ready ? 0 : 3),0))goto done;
+    if(!PostMessageW(window,WM_APP+0x5f1,burst+(GetEnvironmentVariableA("MVDM_OBSERVER_SINK_KEY",NULL,0) ? 2 : 0)+(edit_ready ? 0 :
+        (GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_MOVE_ONLY",NULL,0) ? 1 : 3)),0))goto done;
     ok=WaitForSingleObject(acknowledgment,20000)==WAIT_OBJECT_0;
 done:
     fprintf(report,"burst-records=%lu\n",burst);
@@ -1759,6 +1933,56 @@ done:
     if(acknowledgment)CloseHandle(acknowledgment);
     if(hook)UnhookWindowsHookEx(hook);if(module)FreeLibrary(module);if(process)CloseHandle(process);
     if(fclose(report)!=0)ok=FALSE;return ok;
+}
+
+/* Capture the actual pinned Window graphics frame, never a parked Console. */
+static BOOL observer_capture_window_graphics(const char *prefix,const char *suffix)
+{
+    HWND window=find_scripted_window(); DWORD pid=0; HANDLE process=NULL;
+    observed_window_frame first,second; lib_u32 *pixels=NULL,*verify;
+    SIZE_T bytes; FILE *out=NULL; char path[MAX_PATH]; BOOL ok=FALSE;
+    if(!window || !IsWindowVisible(window))return FALSE;
+    GetWindowThreadProcessId(window,&pid);
+    if(pid!=scripted_window_frontend || !(process=OpenProcess(PROCESS_VM_READ|SYNCHRONIZE,FALSE,pid)))return FALSE;
+    if(!observer_window_frame_read(process,window,&first))goto done;
+    if(first.frame.text) {
+        kvm_text_cell *cells=NULL,*check; lib_size text_bytes; BOOL captured=FALSE;
+        if(kvm_frame_extent(first.text.text_columns,first.text.text_rows,first.text.stride,
+            sizeof(*cells),&text_bytes)!=LIB_STATUS_OK || text_bytes>64u*1024u*1024u ||
+            first.text.capacity<text_bytes/sizeof(*cells) || !(cells=malloc(text_bytes*2)))goto done;
+        check=(kvm_text_cell *)((BYTE *)cells+text_bytes);
+        if(observer_read_bytes(process,first.text.cells,cells,text_bytes) &&
+            observer_read_bytes(process,first.text.cells,check,text_bytes) && !memcmp(cells,check,text_bytes) &&
+            observer_window_frame_read(process,window,&second) && !memcmp(&first,&second,sizeof(first)) &&
+            snprintf(path,sizeof(path),"%s.%s.cells",prefix,suffix)>0 && (out=fopen(path,"wb"))) {
+            captured=fwrite(cells,1,text_bytes,out)==text_bytes;
+            if(fclose(out)!=0)captured=FALSE;
+            out=NULL;
+        }
+        free(cells);ok=captured;goto done;
+    }
+    if(!first.frame.graphics ||
+        !first.graphics.width || !first.graphics.height ||
+        first.graphics.stride<first.graphics.width ||
+        first.graphics.height>SIZE_MAX/first.graphics.stride/sizeof(*pixels))goto done;
+    bytes=(SIZE_T)first.graphics.stride*first.graphics.height*sizeof(*pixels);
+    if(first.graphics.capacity<bytes/sizeof(*pixels) || bytes>64u*1024u*1024u ||
+        !(pixels=malloc(bytes*2)))goto done;
+    verify=(lib_u32 *)((BYTE *)pixels+bytes);
+    if(!observer_read_bytes(process,first.graphics.pixels,pixels,bytes) ||
+        !observer_read_bytes(process,first.graphics.pixels,verify,bytes) ||
+        memcmp(pixels,verify,bytes) || !observer_window_frame_read(process,window,&second) ||
+        memcmp(&first,&second,sizeof(first)))goto done;
+    if(snprintf(path,sizeof(path),"%s.%s.ppm",prefix,suffix)<0 || !(out=fopen(path,"wb")))goto done;
+    fprintf(out,"P6\n%u %u\n255\n",first.graphics.width,first.graphics.height);
+    for(lib_u32 y=0;y<first.graphics.height;++y)for(lib_u32 x=0;x<first.graphics.width;++x) {
+        lib_u32 c=pixels[(SIZE_T)y*first.graphics.stride+x];
+        fputc((c>>16)&255,out);fputc((c>>8)&255,out);fputc(c&255,out);
+    }
+    ok=!ferror(out);
+done:
+    if(out && fclose(out)!=0)ok=FALSE;
+    free(pixels);CloseHandle(process);return ok;
 }
 
 int main(int argc, char **argv)
@@ -2648,6 +2872,7 @@ managed_close_done: ;
            !SendMessageTimeoutW(window,WM_KEYUP,'T',(LPARAM)0xc0140001,SMTO_ABORTIFHUNG,3000,&result))report_failed=1;
     }
     if(GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HOOK",NULL,0) &&
+        !GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_STAGE",NULL,0) &&
         !GetEnvironmentVariableA("MVDM_OBSERVER_EDIT_MOUSE_BURST",NULL,0) &&
         !window_mouse_probe(argv[1],argv[3],FALSE))report_failed=1;
     if(graphics_handshake)
@@ -2731,6 +2956,53 @@ managed_close_done: ;
                 if (observe_edit_return) record_performance("edit-submit", "edit.com", 0, TRUE);
                 scripted_console_input_delivered = write_console_input_text(input,scripted_console_input_text,
                     scripted_console_line_delay_ms,output,argv[3]);
+            }
+            if (scripted_console_input_delivered &&
+                GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_STAGE",NULL,0)) {
+                char stage[MAX_PATH];
+                DWORD length=GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_STAGE",stage,sizeof(stage));
+                ULONGLONG deadline=GetTickCount64()+60000;
+                if(!length || length>=sizeof(stage)) scripted_console_input_delivered=FALSE;
+                else {
+                    while(GetFileAttributesA(stage)==INVALID_FILE_ATTRIBUTES && GetTickCount64()<deadline)
+                        Sleep(25);
+                    if(GetFileAttributesA(stage)!=INVALID_FILE_ATTRIBUTES) {
+                        (void)observer_capture_window_graphics(argv[3],"mouse-before");
+                        scripted_console_input_delivered=window_mouse_probe(argv[1],argv[3],FALSE);
+                        Sleep(500);
+                        (void)observer_capture_window_graphics(argv[3],"mouse-after");
+                        if(scripted_console_input_delivered &&
+                           GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_FRAME_UPDATE",NULL,0)) {
+                            INPUT_RECORD keys[2]={0};
+                            char trace_path[MAX_PATH]; FILE *trace_file=NULL;
+                            if(GetEnvironmentVariableA("MVDM_CONTINUATION_TRACE",trace_path,sizeof(trace_path))) {
+                                trace_file=fopen(trace_path,"ab");
+                                if(trace_file) { fputs("TEST-KEY-BEGIN\n",trace_file);fclose(trace_file); }
+                            }
+                            if(GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_FROZEN",NULL,0)) {
+                                HWND w=find_scripted_window(); DWORD pid=0; BYTE frozen=0xff; SIZE_T n=0;
+                                HANDLE p; char path[MAX_PATH]; FILE *f=NULL; void *context;
+                                if(w) GetWindowThreadProcessId(w,&pid);
+                                context=w ? (void *)GetWindowLongPtrW(w,GWLP_USERDATA) : NULL;
+                                p=pid==scripted_window_frontend ? OpenProcess(PROCESS_VM_READ,FALSE,pid) : NULL;
+                                if(p && context) (void)ReadProcessMemory(p,(BYTE *)context+224,&frozen,sizeof(frozen),&n);
+                                if(p)CloseHandle(p);
+                                snprintf(path,sizeof(path),"%s.window-frozen.txt",argv[3]);
+                                f=fopen(path,"w");if(f){fprintf(f,"frozen=%lu bytes=%zu\n",(unsigned long)frozen,n);fclose(f);}
+                            }
+                            keys[0].EventType=KEY_EVENT;
+                            keys[0].Event.KeyEvent.bKeyDown=TRUE;
+                            keys[0].Event.KeyEvent.wRepeatCount=1;
+                            keys[0].Event.KeyEvent.wVirtualKeyCode='A';
+                            keys[0].Event.KeyEvent.wVirtualScanCode=0x1e;
+                            keys[0].Event.KeyEvent.uChar.UnicodeChar='a';
+                            keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+                            scripted_console_input_delivered=write_window_key_records(keys,2);
+                            Sleep(1000);
+                            (void)observer_capture_window_graphics(argv[3],"mouse-update");
+                        }
+                    } else scripted_console_input_delivered=FALSE;
+                }
             }
             if (scripted_console_input_delivered &&
                 (scripted_console_input_next_marker || scripted_console_input_next_text)) {

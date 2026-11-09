@@ -11,8 +11,14 @@ mov [active-data],ax
 push ax
 api 2,44
 push word [active-data]
+api 2,45                        ; bring another task's window to the top
+push word [active-data]
 api 2,59
+.wait_active:
 call settle
+api 2,60                        ; do not claim delivery to an inactive prompt
+cmp ax,[active-data]
+jne .wait_active
 ret
 settle:
 pushad
@@ -149,13 +155,15 @@ test ax,ax
 jnz wait_gone
 ret
 wait_readers:
+mov dword [wanted_count-data],2
+wait_reader_count:
 api 1,29
 push ds
 push word readers_name-data
 push word 0
 api 1,85
 cmp ax,-1
-je wait_readers
+je wait_reader_count
 mov [file-data],ax
 push ax
 push ds
@@ -166,21 +174,23 @@ mov [read_count-data],ax
 push word [file-data]
 api 1,81
 cmp word [read_count-data],4
-jne wait_readers
+jne wait_reader_count
 mov eax,[completed_count-data]
-cmp eax,2
-jb wait_readers
+cmp eax,[wanted_count-data]
+jb wait_reader_count
 ; allow any additional DOS readers
 ret
 
 wait_editors:
+mov dword [wanted_count-data],2-DOSONLY
+wait_editor_count:
 api 1,29
 push ds
 push word editors_name-data
 push word 0
 api 1,85
 cmp ax,-1
-je wait_editors
+je wait_editor_count
 mov [file-data],ax
 push ax
 push ds
@@ -191,12 +201,38 @@ mov [read_count-data],ax
 push word [file-data]
 api 1,81
 cmp word [read_count-data],4
-jne wait_editors
+jne wait_editor_count
 mov eax,[completed_count-data]
-cmp eax,2-DOSONLY
-jb wait_editors
+cmp eax,[wanted_count-data]
+jb wait_editor_count
 ; allow any additional DOS readers
 ret
+
+%if FIRST_DOS_BEFORE_SECOND && MOUSE_MENU
+wait_menu_stage:
+api 1,29
+push ds
+push word menu_stage_name-data
+push word 0
+api 1,85
+cmp ax,-1
+je wait_menu_stage
+mov [file-data],ax
+push ax
+push ds
+push word completed_count-data
+push word 4
+api 1,82
+mov [read_count-data],ax
+push word [file-data]
+api 1,81
+cmp word [read_count-data],4
+jne wait_menu_stage
+mov eax,[completed_count-data]
+cmp eax,[wanted_count-data]
+jb wait_menu_stage
+ret
+%endif
 
 alt_file:
 %if MOUSE_MENU

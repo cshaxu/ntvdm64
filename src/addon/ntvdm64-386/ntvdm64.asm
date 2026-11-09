@@ -44,7 +44,8 @@ vm_return_repeat equ 44
 vm_mouse_saved equ 48
 vm_mouse_mask equ 52
 vm_mouse_address equ 56
-vm_bytes equ 60
+vm_mouse_shows equ 60
+vm_bytes equ 64
 screen_header equ 36
 
 segment _LTEXT public align=16 class=CODE use32
@@ -124,6 +125,7 @@ control:
     mov dword [edi+vm_token_high], 0
     mov dword [edi+vm_physical], 0
     mov dword [edi+vm_mouse_saved], 0
+    mov dword [edi+vm_mouse_shows], 0
     mov dword [edi+vm_return_repeat], 0
     cmp dword [esp+28], 1           ; saved Device_Init, only the system VM
     je .notification_init
@@ -478,6 +480,7 @@ mouse_install:
     mov [edi+vm_mouse_address], eax
     mov dword [edi+vm_mouse_mask], 0x7f
     call mouse_exchange
+    call mouse_pointer_acquire
     popad
     ret
 mouse_restore:
@@ -486,10 +489,91 @@ mouse_restore:
     add edi, ebx
     cmp dword [edi+vm_mouse_saved], 0
     je .done
+    call mouse_pointer_release
     call mouse_exchange
     mov dword [edi+vm_mouse_saved], 0
 .done:
     popad
+    ret
+; Borrow the parent VM's original INT33 cursor while its command owns the
+; screen. VMD suppresses drawing in windowed mode. Save only the show calls
+; we add, so completion restores the prior per-VM visibility count.
+mouse_pointer_acquire:
+    pushad
+    sub esp, 112
+    mov edi, esp
+    vmm_call 0x8d
+    vmm_call 0x82
+    mov word [ebp+client_eax], 0x2a
+    mov eax, 0x33
+    vmm_call 0x84
+    movsx eax, word [ebp+client_eax]
+    mov edi, [vm_offset]
+    add edi, ebx
+    mov dword [edi+vm_mouse_shows], 0
+    test eax, eax
+    jns .done
+    neg eax
+    mov [edi+vm_mouse_shows], eax
+    mov [esp+108], eax
+.show:
+    mov word [ebp+client_eax], 1
+    mov eax, 0x33
+    vmm_call 0x84
+    dec dword [esp+108]
+    jnz .show
+.done:
+    vmm_call 0x86
+    mov esi, esp
+    vmm_call 0x8e
+    add esp, 112
+    popad
+    ret
+mouse_pointer_release:
+    pushad
+    mov edi, [vm_offset]
+    add edi, ebx
+    mov ecx, [edi+vm_mouse_shows]
+    mov dword [edi+vm_mouse_shows], 0
+    mov edx, 2
+    call mouse_pointer_count
+    popad
+    ret
+mouse_pointer_suspend:
+    pushad
+    mov ecx, 1
+    mov edx, 2
+    call mouse_pointer_count
+    popad
+    ret
+mouse_pointer_resume:
+    pushad
+    mov ecx, 1
+    mov edx, 1
+    call mouse_pointer_count
+    popad
+    ret
+mouse_pointer_count:
+    test ecx, ecx
+    jz .done
+    sub esp, 116
+    mov [esp+108], ecx
+    mov [esp+112], edx
+    mov edi, esp
+    vmm_call 0x8d
+    vmm_call 0x82
+.next:
+    mov eax, [esp+112]
+    mov [ebp+client_eax], ax
+    mov eax, 0x33
+    vmm_call 0x84
+    dec dword [esp+108]
+    jnz .next
+    vmm_call 0x86
+    mov esi, esp
+    vmm_call 0x8e
+    add esp, 116
+.done:
     ret
 mouse_exchange:
     pushad
@@ -882,7 +966,13 @@ command_apply_work:
     mov ebx, [esp+28+16]
     mov edx, [esp+16]
     mov esi, [esp+20]
+    ; Remove the software cursor before overwriting its saved background;
+    ; restore it after the snapshot even when applying the snapshot fails.
+    call mouse_pointer_suspend
     call command_screen_apply
+    push eax
+    call mouse_pointer_resume
+    pop eax
     jmp .acknowledge
 .no_memory:
     mov eax, 8

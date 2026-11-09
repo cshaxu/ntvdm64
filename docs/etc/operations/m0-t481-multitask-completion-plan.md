@@ -2181,3 +2181,16 @@ S4 batch-entry source/trace classification: candidate Win95574 has zero diagnost
 S4 publication-check rehashes all eleven candidate579 images in both release and O:/winnt/system32, plus both authored W31 drivers in assets/release and O:/w31/PATCH; all match the recorded published hashes. No S4 production sources changed. The Win95 0x400 CB_VM_Status observation is returned to the diagnostic API and is not used to decide semaphore signaling or command wake; actual scheduling uses VMM Wait_Semaphore/Signal_Semaphore and the ordered cross-VM witness, but the Win95 meaning of that bit remains unproved. Evidence: artifacts/t481-s4/publication-check.json and reuse001.json.
 
 S4 native001 and formal native002 use candidate549 without the diagnostic host interposition, reidentified solely for the isolated test. Two Win95 VMs each execute two native CMD commands through BOP54:08 and verify return values, registers, flags and stack; identity and 320 callbacks pass. This proves the production-host native command admission/completion path, not physical input or the BOP54:0A interactive shell. The original Win95 install is unchanged. Process exit 1 remains baseline-equivalent but not independently classified as normal. The formal test witness is byte-identical to native001 and the ordinary identity witness is unchanged by its marker macro. Evidence: artifacts/t481-s4/native002.json.
+
+Owner-directed continuation: S7 is bounded closed as recorded in the
+[closure](../evidence/m0-t481-s7-closure.md); its installer candidate and
+delivery remain outstanding. S8 investigates and repairs the invisible
+full-screen Win3.1 editor mouse pointer. Owner subsequently inserts S9 to
+audit recent SoftPC software-emulation fixes against this project's actual
+selected CCPU/device paths and import applicable corrections with provenance,
+minimal mirror differences, and focused verification. Do not assume every
+recent SoftPC commit is applicable or import unrelated changes. S10 researches
+Win95 and completes the remaining applicable multitask and manual-acceptance
+evidence after S9. S8 remains active; this is a sequence correction, not S9
+admission or a waiver of outstanding delivery. The existing T481 integrated
+delivery obligations remain in force.

@@ -13,6 +13,7 @@ param(
  [switch]$SaveWitness,
  [switch]$DosOnly,
  [switch]$MouseMenu,
+ [switch]$FirstDosBeforeSecond,
  [switch]$ExplicitVmd,
  [string]$MouseCalloutBridge,
  [string]$RegistrySnapshotMonitor,
@@ -20,6 +21,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 if($DosOnly -and $SaveWitness){throw 'DOSONLY save witness is a separate case'}
+if($DosOnly -and $FirstDosBeforeSecond){throw 'The first-editor sequence requires DOSONLY=0'}
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 if(!$InstanceDriver){$InstanceDriver="$repo/assets/release/insignia.386"}
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
@@ -52,13 +54,15 @@ foreach($id in 'A','B'){
  [IO.File]::WriteAllBytes("$dest/PATCH/$id.PIF",$pif)
 }
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
-$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
+$load=if($FirstDosBeforeSecond){"$dest\PATCH\B.PIF"}else{"$dest\PATCH\A.PIF $dest\PATCH\B.PIF"}
+$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$load")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY $([int][bool]$DosOnly)`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS $([int]($FirstExit -eq 'Dos'))`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY $([int][bool]$DosOnly)`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS $([int]($FirstExit -eq 'Dos'))`n%define FIRST_DOS_BEFORE_SECOND $([int][bool]$FirstDosBeforeSecond)`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
 $actions=Get-Content "$PSScriptRoot/editor-actions.inc" -Raw
 $asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 $asm=$asm.Replace('code_end:',(Get-Content "$PSScriptRoot/editor-routines.inc" -Raw)+"`ncode_end:")
-$asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`n"+(Get-Content "$PSScriptRoot/editor-events.inc" -Raw)+"`ndata_end:")
+$asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`nlaunch_a: db '$dest\PATCH\A.PIF',0`n"+(Get-Content "$PSScriptRoot/editor-events.inc" -Raw)+"`ndata_end:")
+$asm=$asm.Replace('data_end:',"menu_stage_name: db '$dest\PATCH\MENUSTG.BIN',0`ndata_end:")
 if($DosOnly){$asm=$asm.Replace('\PATCH\DONE.BIN','\PATCH\TOTAL.BIN')}
 [IO.File]::WriteAllText("$task/controller.asm",$asm,[Text.UTF8Encoding]::new($false))
 & nasm -f bin "$task/controller.asm" -o "$task/controller.exe"
@@ -73,6 +77,7 @@ $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp
 $env:MVDM_COMPLETION_COUNT="$dest/PATCH/DONE.BIN"
 $env:MVDM_PROMPT_READERS="$dest/PATCH/READERS.BIN"
 $env:MVDM_SCREEN_TRACE="$task/screens.txt"
+if($FirstDosBeforeSecond -and $MouseMenu){$env:MVDM_MENU_SEQUENCE="$dest/PATCH/MENUSTG.BIN"}
 $env:MVDM_EDITORS_READY="$dest/PATCH/EDITORS.BIN"
 $env:MVDM_REAL_COMMAND='1'
 if($DosOnly){
@@ -117,6 +122,13 @@ if(!$native.Count -or !$dos.Count){throw 'Both editor File menus must be observe
 $nativeVm=[regex]::Match($native[0],'^VM=(\w+)').Groups[1].Value
 $dosVm=[regex]::Match($dos[0],'^VM=(\w+)').Groups[1].Value
 if($nativeVm -eq $dosVm){throw 'Editor menus must belong to distinct guest VMs'}
+if($FirstDosBeforeSecond -and $MouseMenu){
+ $menuStage="$dest/PATCH/MENUSTG.BIN"
+ if(!(Test-Path -LiteralPath $menuStage) -or
+    [BitConverter]::ToUInt32([IO.File]::ReadAllBytes($menuStage),0) -lt 3){
+  throw 'First DOS editor menu did not reopen after the second VM appeared'
+ }
+}
 if([BitConverter]::ToUInt32([IO.File]::ReadAllBytes("$dest/PATCH/DONE.BIN"),0) -ne 2){throw 'Both commands must complete'}
 if($SaveWitness){
  foreach($pair in @(@('A.TXT','aaa'),@('B.TXT','bbb'))){
@@ -125,6 +137,6 @@ if($SaveWitness){
   Copy-Item -LiteralPath $path -Destination $task
  }
 }
-[ordered]@{firstExit=$FirstExit;nativeVm=$nativeVm;dosVm=$dosVm;menus=$true;completed=2;mouseMenu=[bool]$MouseMenu;mouseExitVerified=[bool]$MouseMenu;saveVerified=[bool]$SaveWitness}|
+[ordered]@{firstExit=$FirstExit;nativeVm=$nativeVm;dosVm=$dosVm;menus=$true;completed=2;mouseMenu=[bool]$MouseMenu;mouseExitVerified=[bool]$MouseMenu;saveVerified=[bool]$SaveWitness;firstDosBeforeSecond=[bool]$FirstDosBeforeSecond;stagedMenuFrames=[bool]($FirstDosBeforeSecond -and $MouseMenu)}|
  ConvertTo-Json|Set-Content "$task/editor-result.json"
 Write-Output "PASS dual editor keyboard/menu/normal-exit; saved-content=$([bool]$SaveWitness); mouse-Exit=$([bool]$MouseMenu)"

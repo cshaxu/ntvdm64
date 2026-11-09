@@ -5439,8 +5439,9 @@ LOCAL EGA_graphics_cursor_display IFN0()
 
         MOUSE_SCALAR saved_cursor_pos;
         MOUSE_SCALAR saved_bottom_right;
+        boolean scaled_mouse = jap_mouse;
 
-        if (jap_mouse) {
+        if (scaled_mouse) {
                 /* fake up the mode 0x12 cursor position, saving original */
                 saved_cursor_pos=cursor_status.position.y;
                 saved_bottom_right=virtual_screen.bottom_right.y;
@@ -5598,12 +5599,13 @@ LOCAL EGA_graphics_cursor_display IFN0()
 				byte_offset += get_actual_offset_per_line();
 			line++;
 		}
-                if (jap_mouse) {
-                        /* put things back how they should be */
-                        cursor_status.position.y = saved_cursor_pos;
-                        virtual_screen.bottom_right.y = saved_bottom_right;
-                }
 	}
+        /* DIVERGENCE(MVDM-HOST-DIV-893): restore temporary coordinates even
+         * when the cursor lies outside the screen or in the exclusion area. */
+        if (scaled_mouse) {
+                cursor_status.position.y = saved_cursor_pos;
+                virtual_screen.bottom_right.y = saved_bottom_right;
+        }
 #line 5787
 #endif /* REAL_VGA */
 #line 5788
