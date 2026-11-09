@@ -532,6 +532,16 @@ same-host controls with and without the multitask drivers both returned 1, so
 this exit code alone is not evidence that the multitask driver caused it.
 The original installation hashes matched and the disposable copy was removed.
 
+The current launcher source was also traced read-only: the PIF route waits for
+the service's parent-completion event and obtains its result through
+`BaseCheckForVDM`; `run16` returns that result unless a separately latched
+service failure supersedes it. In the original DOS command path,
+`cmdmisc.c` takes `VDMInfo.ErrorCode` from the guest command return and can
+assign it to `VdmExitCode` at terminal shutdown. These source paths identify
+possible owners of a numerical result, but the existing Win95 logs did not
+capture which value or branch produced the observed 1. They therefore do not
+establish either clean shutdown or a guest/host fault.
+
 `win31-production-comspec43` and `win95-production-comspec43` ran the
 ordinary production package and released drivers with a test-only native
 COMSPEC returning 43. In each system both concurrent DOS VMs issued 54:0A,
