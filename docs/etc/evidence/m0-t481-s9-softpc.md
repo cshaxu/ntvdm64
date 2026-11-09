@@ -82,6 +82,18 @@ driver in SoftPC's different runtime, while this project still selects it.
 SoftPC `ecf263a8` concerns snapshot interfaces not present by name here; no
 claim of equivalent snapshot behavior follows from that observation.
 
+The adjacent SoftPC main was checked through `6acc1193`: its subsequent S42
+P3 removes its own `ccpu386/nop.c` and `ccpu386/vglob.c`, P4 removes its
+retired DOS mouse snapshot payload, and P6 updates a binary snapshot. These
+are not new software-emulation fixes to copy wholesale. The current project's
+generated x86 worker `build.ninja` still compiles `ccpu386/nop.c` and the
+distinct original `cpu/src/evid/vglob.c`; its generator explicitly uses the
+latter as a C-VID accessor source. SoftPC's retirement therefore does not
+establish that either selected local translation unit is removable. Its
+snapshot changes target a different SoftPC snapshot composition and do not
+establish a corresponding local defect. No source or binary was imported or
+removed on that basis.
+
 The tested 11-image package `53589968-545f-4d1d-8951-db38d0131d13` was
 published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and
