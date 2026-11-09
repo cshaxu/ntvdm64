@@ -478,3 +478,9 @@ VMs passed identity and generation checks, 320 callback checks, and four
 native command return/register/flags/stack checks. The observer saw exit 1;
 this is not proof of normal Win95 shutdown, physical input, or editor menus.
 The original installation hashes matched and the guest copy was removed.
+
+The Win95 editor fixture now preflights the expected diagnostic-host marker
+strings before creating a guest copy. The retained diagnostic image contains
+both; the ordinary production image was rejected immediately and no output or
+guest-copy directory was created. This is an applicability check, not proof
+that a package with those strings implements the test interface correctly.

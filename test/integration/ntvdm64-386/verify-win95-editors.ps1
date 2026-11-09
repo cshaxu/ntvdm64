@@ -20,6 +20,13 @@ if($DismissWelcomeTitleHex){
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
+# This fixture sends diagnostic-only BOP markers for input and observations.
+# Reject an ordinary host before staging a guest rather than timing out.
+$hostImage=[IO.File]::ReadAllBytes((Join-Path $PackageRoot 'system32/ntvdm.exe'))
+if(![Text.Encoding]::ASCII.GetString($hostImage).Contains('MVDM_SCREEN_TRACE') -or
+   ![Text.Encoding]::Unicode.GetString($hostImage).Contains('MVDM_REAL_COMMAND')){
+ throw 'Editor fixture requires the diagnostic real-command NTVDM; use a production-only witness for the released package'
+}
 $copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstanceDriver $InstanceDriver -InterruptObserver $InterruptObserver -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 try {
