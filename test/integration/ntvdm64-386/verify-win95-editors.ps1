@@ -2,17 +2,20 @@
 param(
  [Parameter(Mandatory)][string]$DriverImage,
  [Parameter(Mandatory)][string]$InstanceDriver,
- [Parameter(Mandatory)][string]$InterruptObserver,
+ [string]$InterruptObserver,
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$InstallSource,
  [Parameter(Mandatory)][string]$InstallRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
  [switch]$MouseMenu,
+ [switch]$GuestUserInput,
  [switch]$SaveWitness,
  [string]$DismissWelcomeTitleHex
 )
 $ErrorActionPreference='Stop'
+if($GuestUserInput -and ($MouseMenu -or !$SaveWitness)){throw 'GuestUserInput requires SaveWitness and does not support MouseMenu'}
+if(!$GuestUserInput -and !$InterruptObserver){throw 'Diagnostic editor witness requires InterruptObserver'}
 if($DismissWelcomeTitleHex){
  if($DismissWelcomeTitleHex -notmatch '^(?:[0-9a-fA-F]{2}){1,63}$'){throw 'Welcome title must be guest ANSI bytes in hexadecimal'}
  for($i=0;$i -lt $DismissWelcomeTitleHex.Length;$i+=2){if($DismissWelcomeTitleHex.Substring($i,2) -eq '00'){throw 'Welcome title cannot contain a zero byte'}}
@@ -23,11 +26,13 @@ $Observer=(Resolve-Path -LiteralPath $Observer).Path
 # This fixture sends diagnostic-only BOP markers for input and observations.
 # Reject an ordinary host before staging a guest rather than timing out.
 $hostImage=[IO.File]::ReadAllBytes((Join-Path $PackageRoot 'system32/ntvdm.exe'))
-if(![Text.Encoding]::ASCII.GetString($hostImage).Contains('MVDM_SCREEN_TRACE') -or
-   ![Text.Encoding]::Unicode.GetString($hostImage).Contains('MVDM_REAL_COMMAND')){
+if(!$GuestUserInput -and (![Text.Encoding]::ASCII.GetString($hostImage).Contains('MVDM_SCREEN_TRACE') -or
+   ![Text.Encoding]::Unicode.GetString($hostImage).Contains('MVDM_REAL_COMMAND'))){
  throw 'Editor fixture requires the diagnostic real-command NTVDM; use a production-only witness for the released package'
 }
-$copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstanceDriver $InstanceDriver -InterruptObserver $InterruptObserver -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
+$copyArgs=@{DriverImage=$DriverImage;InstanceDriver=$InstanceDriver;InstallSource=$InstallSource;InstallRoot=$InstallRoot;OutputRoot=$OutputRoot}
+if($InterruptObserver){$copyArgs.InterruptObserver=$InterruptObserver}
+$copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" @copyArgs
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
@@ -43,15 +48,101 @@ foreach($id in 'A','B'){
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$asm="%define MOUSE_MENU $([int][bool]($MouseMenu -or $GuestUserInput))`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
 $actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
-$asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 $routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
+if($GuestUserInput){
+ $actions=$actions.Replace('call wait_readers','call production_wait').Replace('call wait_editors','call production_wait').Replace('call wait_complete','call production_wait')
+ $saveSequence="mov si,events_text_b-data`ncall type_events`ncall alt_file`nmov si,events_s-data`ncall type_events"
+ if(!$actions.Contains($saveSequence)){throw 'DOS save sequence changed'}
+ $actions=$actions.Replace($saveSequence,"mov si,events_text_b-data`ncall type_events`ncall mouse_file`nmov word [mouse_half_row-data],9`ncall mouse_cell")
+ $inject=@'
+inject_key:
+pushad
+mov cx,ax
+and ax,0xff
+cmp ch,2
+jne .make
+or ah,0x80
+.make:
+xor si,si
+xor di,di
+api 2,289                       ; USER keybd_event in focused guest VM
+popad
+ret
+production_wait:
+push cx
+mov cx,20
+.again:
+call settle
+loop .again
+pop cx
+ret
+wait_complete:
+'@
+ $routines=[regex]::Replace($routines,'(?s)inject_key:\s*.*?wait_complete:',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $inject},1)
+ $mouse=@'
+mouse_input:
+pushad
+mov dx,ax
+and dx,1
+mov [production_pending_button-data],dx
+xor bx,bx
+xor cx,cx
+xor ax,ax
+cmp word [mouse_delta-data],0
+jnz .move
+cmp word [mouse_delta-data+2],0
+jz .buttons
+.move:
+movzx eax,word [mouse_point-data]
+imul eax,eax,65535
+movzx edi,word [mouse_extent-data]
+dec edi
+jz fatal
+xor edx,edx
+div edi
+mov bx,ax
+movzx eax,word [mouse_point-data+2]
+imul eax,eax,65535
+movzx edi,word [mouse_extent-data+2]
+dec edi
+jz fatal
+xor edx,edx
+div edi
+mov cx,ax
+mov ax,0x8001                  ; absolute guest desktop coordinates
+mov dx,[production_pending_button-data]
+.buttons:
+cmp dx,[production_buttons-data]
+je .dispatch
+mov [production_buttons-data],dx
+test dx,dx
+jz .up
+or ax,2
+jmp .dispatch
+.up:
+or ax,4
+.dispatch:
+test ax,ax
+jz .done
+mov dx,2
+xor si,si
+xor di,di
+api 2,299                       ; guest USER mouse_event
+.done:
+popad
+ret
+'@
+ $routines=[regex]::Replace($routines,'(?s)mouse_input:\s*.*\z',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $mouse})
+}
+$asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 if($routines -notmatch '(?s)api 2,59\s+\.wait_active:\s+call settle\s+api 2,60\s+[^\r\n]*[\r\n]+cmp ax,\[active-data\]\s+jne \.wait_active'){
  throw 'Shared editor routine must wait for the selected prompt to become active'
 }
 if($DismissWelcomeTitleHex){
  $routines=$routines.Replace("target_prompt:`n","target_prompt:`ncall dismiss_welcome`n")
+ $routines=$routines.Replace(".wait_active:`ncall settle`n", ".wait_active:`ncall settle`ncall dismiss_welcome`n")
  $routines=$routines.Replace("mouse_cell:`n","mouse_cell:`ncall dismiss_welcome`n")
  $routines+=@'
 
@@ -77,7 +168,7 @@ popad
 ret
 '@
 }
-if($MouseMenu){
+if($MouseMenu -or $GuestUserInput){
  $rect="push word [active-data]`npush ds`npush word mouse_rect-data"
  $point="push word [active-data]`npush ds`npush word mouse_point-data"
  if(!$routines.Contains($rect) -or !$routines.Contains($point)){throw 'Mouse geometry insertion point missing'}
@@ -117,7 +208,8 @@ ret
 }
 $asm=$asm.Replace('code_end:',$routines+"`ncode_end:")
 $asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`n"+(Get-Content "$repo/test/integration/ntvdm64-386/editor-events.inc" -Raw)+"`ndata_end:")
-if($MouseMenu){$asm=$asm.Replace('data_end:',"mouse_hwnd: dw 0`nmouse_class: times 64 db 0`ndata_end:")}
+if($GuestUserInput){$asm=$asm.Replace('data_end:',"production_buttons: dw 0`nproduction_pending_button: dw 0`ndata_end:")}
+if($MouseMenu -or $GuestUserInput){$asm=$asm.Replace('data_end:',"mouse_hwnd: dw 0`nmouse_class: times 64 db 0`ndata_end:")}
 if($DismissWelcomeTitleHex){
  $titleBytes=@(for($i=0;$i -lt $DismissWelcomeTitleHex.Length;$i+=2){'0x'+$DismissWelcomeTitleHex.Substring($i,2)}) -join ','
  $asm=$asm.Replace('data_end:',"welcome_title: db $titleBytes,0`ndata_end:")
@@ -157,6 +249,7 @@ try {
   $scope=New-IsolatedPackageScope $stage
   $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
   $env:MVDM_OBSERVER_OWN_JOB='1'
+  if($GuestUserInput){$env:MVDM_OBSERVER_CAPTURE_WINDOW='1'}
   $env:PATH="$stage\system32;C:\Windows\System32;C:\Windows"
   $process=Start-Process $Observer -ArgumentList @("$stage/system32/run16.exe",$dest,"$task/runtime/observer.txt","$dest/PATCH/WIN.PIF",'--observation-timeout-ms','90000') -WindowStyle Hidden -PassThru
   @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');stage=$stage}|ConvertTo-Json|Set-Content "$task/runtime/process.json"
@@ -171,6 +264,7 @@ try {
 
  $observation=Get-Content "$task/runtime/observer.txt" -Raw
  if($observation -notmatch '(?m)^result=exited\r?$'){throw 'Win95 observer did not see exit'}
+ if(!$GuestUserInput){
  if(!(Test-Path "$dest/PATCH/DONE.BIN")){throw 'No editor completion witness'}
  if([BitConverter]::ToUInt32([IO.File]::ReadAllBytes("$dest/PATCH/DONE.BIN"),0) -ne 2){throw 'Expected two editor completions'}
  if(!(Test-Path "$task/screens.txt")){throw 'No editor screen witness'}
@@ -183,14 +277,15 @@ try {
  if($nativeVm -eq $dosVm){throw 'Editor menus must belong to distinct guest VMs'}
  $trace=Get-Content "$task/trace.txt" -Raw
  if(@([regex]::Matches($trace,'(?m)^11 ')).Count -lt 2 -or @([regex]::Matches($trace,'(?m)^12 ')).Count -lt 2){throw 'Both real command admissions and completions are required'}
+ }
  if($SaveWitness){foreach($pair in @(@('A.TXT','aaa'),@('B.TXT','bbb'))){
   $path="$dest/PATCH/$($pair[0])";$saved=Get-Content -LiteralPath $path -Raw
   if([string]::IsNullOrEmpty($saved) -or $saved.Trim() -cne $pair[1]){throw "Wrong saved contents: $path"}
   Copy-Item -LiteralPath $path -Destination $task
  }}
- if($MouseMenu){
+ if($MouseMenu -or $GuestUserInput){
   $receipts=@(Get-ChildItem "$dest/PATCH/MOUSE*.BIN")
-  $expectedReceipts=if($SaveWitness){5}else{4}
+  $expectedReceipts=if($GuestUserInput){6}elseif($SaveWitness){5}else{4}
   if($receipts.Count -ne $expectedReceipts){throw 'Mouse receipt count mismatch'}
   foreach($receipt in $receipts){
    $data=[IO.File]::ReadAllBytes($receipt.FullName)
@@ -200,8 +295,11 @@ try {
    if($dx -gt 3 -or $dy -gt 4){throw "Mouse missed target: $($receipt.Name)"}
   }
  }
- [ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;completed=2;menus=$true;mouseMenu=[bool]$MouseMenu;saveVerified=[bool]$SaveWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}|ConvertTo-Json|Set-Content "$task/editor-result.json"
- 'PASS Win95 two prompt VMs opened and closed native and DOS editors; normal shutdown not proven'
+ $result=[ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;guestUserInput=[bool]$GuestUserInput;mouseMenu=[bool]($MouseMenu -or $GuestUserInput);saveVerified=[bool]$SaveWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}
+ if(!$GuestUserInput){$result.completed=2;$result.menus=$true}
+ $result|ConvertTo-Json|Set-Content "$task/editor-result.json"
+ if($GuestUserInput){'PASS Win95 two prompt editors saved distinct text and closed using guest USER keyboard and mouse; physical input and normal shutdown not proven'}
+ else {'PASS Win95 two prompt VMs opened and closed native and DOS editors; normal shutdown not proven'}
 
 } finally {
  if(@(Get-ChildItem $source -Force -Recurse -File).Count -ne $original.Count){throw 'Original installation file inventory changed'}
@@ -209,6 +307,17 @@ try {
  'Original Windows installation bytes verified unchanged'
 }
 } finally {
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
- Remove-OwnedGuestProbeCopy $dest $task $source
+ try {
+  if($GuestUserInput){
+   foreach($name in 'A.TXT','B.TXT'){
+    if(Test-Path -LiteralPath "$dest/PATCH/$name"){Copy-Item -LiteralPath "$dest/PATCH/$name" -Destination "$task/observed-$name"}
+   }
+   Get-ChildItem -LiteralPath "$dest/PATCH" -Filter 'MOUSE*.BIN' -File | ForEach-Object {
+    Copy-Item -LiteralPath $_.FullName -Destination "$task/observed-$($_.Name)"
+   }
+  }
+ } finally {
+  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  Remove-OwnedGuestProbeCopy $dest $task $source
+ }
 }

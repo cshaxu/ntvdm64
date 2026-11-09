@@ -67,6 +67,14 @@ original Win95 CONAGENT received DOS 5.0 but requires DOS 7.0 and exited
 before VCOND setup. A complete remedy and subsequent behavior remain unproved;
 see the S9 evidence for the failed version-substitution control.
 
+The production Win95 two-prompt EDIT.EXE/EDIT.COM witness now passes guest
+USER-synthesized keyboard and mouse saves, six checked menu-click positions
+and closure. It does not independently prove VM identity, physical input or
+normal shutdown. The diagnostic witness also passed with two distinct VM
+identities after fixing its Welcome activation wait. Per owner direction,
+investigation of the intermittent physical mouse blue screen is deferred until
+it can be reproduced again.
+
 ## Current Technical Baseline
 
 The 11-image host candidate and W31 addon pair are published and hash-verified.

@@ -743,6 +743,52 @@ The one-off observer source delta is retained as
 it contains fixed installation paths and screen coordinates and is not a
 general-purpose or physical-input test.
 
+`win95-production-editor-guest-mouse4` and the final renamed-runner repeat
+`win95-production-editor-guest-mouse5` used two prompt windows in an isolated
+Win95 copy and the production host and addon pair. Guest USER synthesized
+keyboard and absolute mouse events saved `aaa` and `bbb`, six checked mouse
+receipts matched target coordinates, and both prompt windows closed. The source
+installation hashes matched and the owned copy was removed. The original
+relative-motion test overshot both coordinates by a factor of two; the test
+uses guest USER absolute coordinates instead. The two window titles do not
+independently prove VM identities or simultaneity of both editors. The outer
+Win95 exit was 1, so normal shutdown is not established. Physical Raw Input
+and the owner's intermittent mouse blue screen remain unverified.
+
+`win95-production-editor-pwsh3` repeated the guest USER keyboard and mouse
+case under modern pwsh, PID 23932, started 2026-11-09T18:38:59Z, using
+`build/t481-s9/package-rotate`; its NTVDM SHA-256 was
+`695801153810E17C0767A42DE1D735CC730307578147E1CD31DAB81018AB3D1A`,
+matching the deployed NTVDM. The runner exited 0, saved both expected texts,
+checked six mouse receipts and verified source installation bytes; its owned
+`O:/tmp/q98` copy was removed. The outer Win95 result remained 1, and VM
+identity, physical input, and normal shutdown were not proven. The earlier
+`win95-production-editor-pwsh2` run mistakenly used the diagnostic package;
+it is not evidence for the released host package.
+
+The older diagnostic editor case timed out with both the current runner and
+the committed HEAD runner under the same modern pwsh invocation: PIDs 5984
+and 5468, starts 2026-11-09T18:35:04Z and 18:37:04Z, respectively, both
+exited 1 after the observer timed out. Their guest controllers and the prior
+passing diagnostic control share SHA-256
+`F59466BA27849EB64742D16B6400868E60B4F644029F0B776F9FB38C9774EF90`.
+This comparison does not establish the timeout cause or prove the diagnostic
+test passed; it does not demonstrate a regression caused by the runner edit.
+Both timed-out runs reached two prompt readers but produced no EDITORS.BIN;
+the earlier passing control also reached two readers and did produce it.
+The temporary HEAD runner and isolated guest copy were removed.
+
+`win95-editors-diag-focus` repeated the diagnostic case after making the
+existing optional Welcome dismissal run during each prompt activation wait,
+as the production-input path already did. Background modern pwsh PID 30164
+started 2026-11-09T18:43:18Z and exited 0. The fixture observed both editor
+menus, distinct diagnostic VM identifiers, two completions, five mouse
+receipts and both saved texts; the source hashes matched and `O:/tmp/q98` was
+removed. The timed-out runs issued no diagnostic keyboard injections, while
+this run reached both command admissions. This supports a fixture activation
+wait problem; it does not prove exactly which guest window blocked focus.
+Outer Win95 exit remained 1; physical input and normal shutdown remain open.
+
 `win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
 repeating the same menu, VER, DIR and EXIT scenario. Captures and console
 snapshots show the menu path, command output and desktop return; no blue screen

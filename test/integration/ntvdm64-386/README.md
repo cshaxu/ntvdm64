@@ -270,6 +270,12 @@ whose welcome window covers the test, `-DismissWelcomeTitleHex` optionally
 specifies its exact guest-ANSI title bytes; no other window is closed. The
 test records the observer exit code without claiming normal Win95 shutdown.
 
+`-GuestUserInput -SaveWitness` instead uses the ordinary production host and
+guest USER keyboard/mouse events, without the diagnostic interrupt observer.
+It verifies both saved files, six menu-click position receipts and window
+closure. This is synthetic guest input; it does not prove physical Raw Input,
+VM identities or normal Win95 shutdown. Do not combine it with `-MouseMenu`.
+
 `verify-win95-identity.ps1 -Reuse` uses the same disposable Win95 copy and
 loads the same NTVDM64.386 as Win3.1 and checks two concurrent VM identities, 320 callbacks, actual handle reuse, and
 old-generation wake rejection. `-InitializationFailure` instead requires the
