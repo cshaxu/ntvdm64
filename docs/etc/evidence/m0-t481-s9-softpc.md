@@ -730,6 +730,19 @@ the resulting editor frame contained a `1`. This does not establish whether
 the synthetic navigation was interpreted as intended or identify a product
 failure. Both test processes were retired by their owner.
 
+`win95-mouse-edit-exe7` used the same production-package mouse-menu route,
+opened the actual native EDIT.EXE File menu, and sent `x` to select Exit.
+The test observed the parent DOS prompt return and, after DOS EXIT, captured
+the Win95 desktop again. This is a positive synthetic keyboard/menu and
+frontend-injected mouse result; it does not explain the preceding Escape or
+End observations, prove physical Raw Input, or exercise two simultaneous
+editor VMs. The observer retired its owned processes after capture.
+The one-off observer source delta is retained as
+[`win95-mouse-menu-probe.patch`](../../../artifacts/t481-s9/win95-mouse-menu-probe.patch)
+(SHA-256 `E401DADF3A89FFE2CAE3DDAC3D02FFAC0A9BC93251AF5457D5B0FC74D65791AE`);
+it contains fixed installation paths and screen coordinates and is not a
+general-purpose or physical-input test.
+
 `win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
 repeating the same menu, VER, DIR and EXIT scenario. Captures and console
 snapshots show the menu path, command output and desktop return; no blue screen
