@@ -607,3 +607,14 @@ This establishes installed-system desktop readiness for this run, not physical
 editor input, 54:0A interaction or normal Windows shutdown. The observer ended
 its own timed test; an elevated process check found no surviving project
 processes. No original guest binary was modified.
+
+A read-only check of the owner's named editor files identifies
+`O:/winnt/edit.exe` as AMD64 PE (SHA-256
+`5F54A0FA8CBF5423AEF8BE8502173A59183CF3ADBC913212B1066EF8FFF3D9C0`)
+and `O:/winnt/edit.com` as a DOS COM image (SHA-256
+`E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46`).
+The latter contains the `QBASIC.EXE` and `/EDCOM` launcher strings, and
+`O:/winnt/QBASIC.EXE` exists. Therefore the separately reproduced Win95 PE32
+CONAGENT failure is not itself proof that either of these specific files fails;
+it remains an independently recorded compatibility gap. File classification
+alone does not prove interactive operation or the complete child chain.
