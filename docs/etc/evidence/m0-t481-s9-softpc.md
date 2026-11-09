@@ -211,3 +211,12 @@ host images were published with package identity
 `95d80e95-adb7-456e-b82c-e9932054909f`; both W31 drivers matched the release
 and SYSTEM.INI remained unchanged. The owner's repeated Win3.1 switch sequence
 and final production Win95 editor interaction remain unverified.
+
+After the desktop environment was restored, `win95-post-shell` repeated the
+actual installer and production native-command witness using a fresh copy of
+`O:/WINDOWS` and the released host package. The two concurrent DOS VMs, 320
+callback checks and four native commands passed; source installation bytes
+were verified unchanged and the owned copy and package stage were removed.
+The observer again recorded an exit code of 1. This repeats the existing
+runtime evidence but does not prove normal Win95 shutdown or production-host
+editor and mouse interaction.
