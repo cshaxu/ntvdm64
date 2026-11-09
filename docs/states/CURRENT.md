@@ -44,9 +44,10 @@ desktop and exited normally. The original guest large-environment limitation
 remains, and the owner has not yet revalidated this delivery. S9 acceptance
 remains failed pending that revalidation and its other outstanding work.
 The previously recorded Win95 direct-BAT native-output failure reproduced
-on the current published package; its cause remains unproved and S10 retains
-the Win95 investigation. The independently tested interactive COMMAND path
-must not be conflated with this batch path.
+on the current published package. Controlled PE32/PE64 witnesses narrow it to
+the 32-bit payload path in this VM context; the cause remains unproved and S10
+retains the Win95 investigation. The independently tested interactive COMMAND
+path must not be conflated with this batch path.
 
 ## Current Technical Baseline
 

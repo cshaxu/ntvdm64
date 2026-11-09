@@ -312,3 +312,20 @@ valid successful-EXEC control. The published host CMD is x64, and its static
 MZ stub would exit with code 1, so status 4 alone does not identify the code
 actually executed. The source Win95 installation was hash-verified and the
 owned test copy and stage were retired. No guest or product binary was changed.
+
+`win95-batch-wowcmd-size`, `win95-batch-pe32` and `win95-batch-z32` narrow
+the above conclusion. In both VMs, opening `C:/Windows/System32/cmd.exe`
+through the guest returned the 261,120-byte 32-bit CMD, matching SysWOW64;
+the 339,968-byte 64-bit CMD copy returned status 0, while hash-identical
+copies of the 32-bit CMD returned status 4. Authored PE32 and PE64 controls
+have a DOS stub returning 51, native code returning 37 and a per-VM host-file
+witness. Ordinary EXEC of PE64 returned 37 and wrote both host witnesses;
+ordinary EXEC of PE32 returned 4 and wrote neither. Outside Win95, the
+published Run16 executed both controls, returned 37 and wrote their witnesses.
+In the separate Win95 `/z` comparison, ordinary EXEC of PE32 A did not write
+its host witness, while original COMMAND `/z` for PE32 B did. Both BATs wrote
+DONE; the observer timed out, so no normal-exit claim follows. Thus ordinary
+EXEC is not generally missing: the reproduced failure is specific to the
+32-bit payload route in this VM context. The precise failing component and
+any relationship to filesystem redirection remain unproved. All guest copies
+were retired and source installation hashes matched.
