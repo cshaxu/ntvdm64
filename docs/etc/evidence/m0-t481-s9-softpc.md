@@ -657,3 +657,21 @@ the sink acknowledgment. The visible guest pointer moved from approximately
 (320,240) to (160,80), and the desktop remained visible. This establishes guest
 motion for that injected record, but not physical Raw Input or the blue-screen
 report. The observer terminated its owned run after the final capture.
+
+`win95-mouse-script-chain` used `run16` on the installed `PATCH/WIN.CMD`
+instead of submitting WIN.PIF directly. The frontend acknowledged one injected
+motion, the before/after captures show the guest pointer moving from roughly
+(320,240) to (160,80), and the desktop remained visible. This also bypasses
+physical Raw Input; it neither reproduces nor disproves the owner's blue screen.
+
+`win95-mouse-menu08` used the installed launcher, production package and
+drivers on a private desktop. A test-only frontend input-sink hook moved the
+guest pointer and clicked Welcome's close button, Start, Programs and the
+MS-DOS item. Sequential graphics captures show each menu state. The prompt
+transitioned to the Console; its captured `ver` output reported the host
+Windows version, `dir` produced a directory listing, and after `exit` a
+captured Win95 desktop was visible again. This run did not reproduce the
+reported intermittent blue screen. Mouse events bypassed physical Raw Input,
+and Console keyboard records were synthesized; this is not physical-input
+acceptance, proof of normal Win95 shutdown, or proof that every run succeeds.
+The observer ended its owned processes after the capture.
