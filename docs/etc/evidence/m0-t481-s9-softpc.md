@@ -77,3 +77,24 @@ published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and
 `O:/w31/SYSTEM.INI` was verified unchanged. This is a manual-test candidate;
 S9 and the Win95 acceptance work remain open.
+
+Further S9 review of SoftPC `a43c6d24` found that the local x86 GDP layout
+uses direct offsets, unlike its translated compatibility accessor. The local
+actual-provider fixture failed the CHAIN2 BYTE mode-1 comparison against a
+nonuniform low-order mask before correcting the colour-compare/don't-care
+subfield offsets, and passed afterward for CHAIN2 BYTE and CHAIN4 WORD cases.
+DIV-897 records 56 changed offset literals in two original C-VID files; no
+parallel GDP state or helper was added. A related generic-write rotation
+offset remains unchanged: an attempted real-write fixture lacked sufficient
+state setup and returned zero even with the offset corrected, so it does not
+prove the expected write behavior. That test was not retained as a passing
+test. The candidate passed all 16 selected Full gates (with the external
+DOS4GW/Nesticle fixture skipped), the four Win3.1 mode/DOSONLY startup and
+normal-exit combinations, and the production Win95 installer/two-VM/four
+native-command witness. The Win95 observer still reported exit code 1, not
+proof of normal shutdown. Both source Windows installations were verified
+unchanged. The candidate was published as the complete 11-image package
+`d29c4100-b9a2-4a80-a3b4-e82dc98896a4` to `assets/release` and
+`O:/winnt/system32`; both W31 drivers remained hash-identical to the released
+drivers and `O:/w31/SYSTEM.INI` was unchanged. The earlier intermittent Win95
+`0xC0000420` and unverified generic-write rotation remain open boundaries.

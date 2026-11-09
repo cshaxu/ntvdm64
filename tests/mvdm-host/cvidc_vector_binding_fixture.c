@@ -136,6 +136,20 @@ static int check_chain2_rules(IU8 *planes)
     IU8 input[128], output[64], first[64];
     EVID_WRT_POINTERS saved = c_ev_write_ptr;
     IU32 mode, parity, slot, pass, flag, i, offset;
+    {
+        const IU32 masks[][2] = {{0,0},{0xffffffffu,0},{0,0xffffffffu},{0x12345678u,0x87654321u}};
+        IU32 compare=getVideocolour_comp(), care=getVideodont_care();
+        for (i=0;i<sizeof(masks)/sizeof(masks[0]);++i) {
+            IU32 value=masks[i][0]|masks[i][1];
+            setVideocolour_comp(masks[i][0]); setVideodont_care(masks[i][1]);
+            memset(planes,0,0x1000);
+            r1=(IUH)Gdp; r3=0x100; read_mode1_evid[1].b_read(0x100);
+            CHECK((IU8)r2==(IU8)value);
+            r1=(IUH)Gdp; r3=0x100; read_mode1_evid[2].w_read(0x100);
+            CHECK((IU16)r2==(IU16)value);
+        }
+        setVideocolour_comp(compare); setVideodont_care(care);
+    }
     /* Unchained DWORD must read the same four consecutive guest bytes as
        four independent byte reads, including the second word's offset. */
     for (i = 0; i < 256; ++i) planes[4u * i] = (IU8)(i * 17u + 3u);

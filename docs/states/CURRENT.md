@@ -17,7 +17,7 @@ S10 retains final Win95 and multitask acceptance; the T remains open.
 | Admission And Approval | Owner closed S8 and approved S9 SoftPC imports and Win95 repair investigation. |
 | Objective | Audit recent SoftPC software-emulation repairs, import applicable minimal changes, and investigate and repair demonstrated Win95 multitask defects. |
 | Non-goals | Do not modify or rebuild original guest images; do not import unrelated changes or claim unobserved bugs. |
-| Reference Baseline | Published candidate 3766b9221; Win3.1 repeated-switch and Win95 owner acceptance remain unverified. |
+| Reference Baseline | Published host package d29c4100-b9a2-4a80-a3b4-e82dc98896a4 and released addon pair; Win3.1 repeated-switch and Win95 owner acceptance remain unverified. |
 | Files And ABI Surface | Selected CCPU, C-VID, video and related host adapters; corresponding tests and exception records. |
 | Applicable Rules | Execution, source policy, guest immutability and original-semantics-first. |
 | Verification | Trace original and SoftPC callers; run matched positive and negative tests, cached builds, Full and relevant Win3.1 and Win95 regressions. |
