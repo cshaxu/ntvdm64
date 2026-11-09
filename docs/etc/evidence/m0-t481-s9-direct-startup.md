@@ -316,6 +316,17 @@ dialog during its 25-second observation windows; this alone is not an exit
 or full application test. Owned test stages were removed. The guest's large
 environment limitation remains; this desktop repair is not a product fix.
 
+An additional test launched the installed `O:/winnt/system32/run16.exe
+command` directly from the replacement desktop Explorer, with no pre-existing
+project process. After NTVDM started, a Console observer saw the DOS banner
+and submitted `exit`; the launcher exited within 20 seconds and the project
+processes were subsequently absent. The process exit code was unavailable to
+this observer, so this establishes return, not an exit-code assertion. This
+run used the deployed package rather than a fresh-identity test package.
+An independent repeat submitted `ver` before `exit`, observed the native
+Microsoft Windows version line in the test Console, and saw the launcher exit.
+It likewise did not retrieve the launcher's exit code.
+
 After that restart, a desktop-launched production `run16
 O:\w31\patch\win386.cmd` reached the `Windows 3.1 386 Enhanced` frontend
 after dismissing the previously authorized COM-port warning. A title alone
