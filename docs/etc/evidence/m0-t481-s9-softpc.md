@@ -300,6 +300,26 @@ guest and package copies were retired. This comparison narrows the missing
 boundary but does not prove exactly which classification or conversion step
 failed, or authorize a guest mutation.
 
+`win95-batch-svc32` used a separately linked diagnostic host that records
+every original COMMAND SVC, with only the PE32 test in each BAT. Both guest
+EXEC calls returned status 4, both BATs completed and neither native marker
+appeared. The trace contained zero SVC 7, zero SVC 8 and no VM native-command
+admissions. In the production-host `win95-batch-classify-short` comparison,
+both 64-bit witnesses did write their host markers and the existing classifier
+reported two 64-bit results; both 32-bit witnesses returned 4 without markers
+or 32-bit classification records. Its observer timed out after both BAT
+markers. The diagnostic host result is not exact production-host tracing;
+classification records are emitted only after successful host classification,
+so their absence alone does not prove that the function was never entered.
+
+A separate Win95 `WinExec` control used a test PE32 with only KERNEL32 imports
+and a `GetVersion` file witness. WinExec returned a value above 32, but the
+entry-point file was not written before the test controller exited; this does
+not prove whether the program ran in guest or host. A Windows process-start
+trace subscription was denied access and supplied no process evidence. These
+tests do not settle PE32 ownership or justify redirecting all Win95 PE32
+programs. Source installation hashes matched and owned copies were removed.
+
 `win95-batch-exec-controls2` ran an authored COM witness in each failing
 batch and recorded real DOS INT 21h open, EXEC and child-status results.
 After the witness released excess DOS memory, both VMs opened the native
