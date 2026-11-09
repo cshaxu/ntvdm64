@@ -589,3 +589,21 @@ project processes were absent afterward. These observations do not distinguish
 capture/activation failure from a guest display/startup failure and are not a
 production interactive pass. The independently run diagnostic editor checks
 and production command checks remain scoped as recorded above.
+
+A privileged, read-only process-tree check corrected the earlier cleanup
+assumption: ordinary sandboxed process enumeration had missed the agent's
+live Win95 Run16/NTSRV and related workers. The explicitly identified owned
+processes were stopped under the owner's standing authorization, and an
+elevated process-tree check confirmed no project processes remained. The
+prior black desktop capture and intervening runs with these residual instances
+are not evidence of a product black-screen regression.
+
+`win95-clean-instance-frame` then ran the installed WIN.CMD with the production
+host on a private desktop, from a clean process state. The task-only observer
+read the actual NTCON-published 640x480 graphics frame before ending its owned
+process. It shows the Win95 desktop, taskbar and welcome dialog; the PNG SHA-256
+is B6B638072D86E37B2E278486DF3045514D65599C75DB7426EEDDAEF28829BF3B.
+This establishes installed-system desktop readiness for this run, not physical
+editor input, 54:0A interaction or normal Windows shutdown. The observer ended
+its own timed test; an elevated process check found no surviving project
+processes. No original guest binary was modified.
