@@ -320,6 +320,17 @@ trace subscription was denied access and supplied no process evidence. These
 tests do not settle PE32 ownership or justify redirecting all Win95 PE32
 programs. Source installation hashes matched and owned copies were removed.
 
+`win95-notepad2-multitask` used the released host and addon pair with a fresh
+Win95 copy. An authored Win16 controller first required that the guest USER
+tree contain no `Notepad` window, then called WinExec on the copied original
+Win95 `NOTEPAD.EXE` (PE32, source SHA-256
+`CF2D882D6EC84BB4F9E6475D3B3674E4A480153FF3D34CAAB617F1A799A45AD0`)
+and recorded both the successful WinExec return and a subsequently found guest
+`Notepad` window. This is a positive guest Win32 ownership control for
+WinExec, not proof of the direct DOS EXEC path or interactive behavior. The
+observer timed out after the witness; shutdown is not a pass. Original source
+installation hashes matched and the owned guest copy and stage were retired.
+
 `win95-batch-process-watch2` repeated the production-host 32/64 comparison
 with a separate process-snapshot observer and delayed native test programs.
 Both PE64 targets were observed as Windows processes parented by NTVWM, then

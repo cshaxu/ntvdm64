@@ -47,7 +47,9 @@ The previously recorded Win95 direct-BAT native-output failure reproduced
 on the current published package. Controlled PE32/PE64 witnesses narrow it to
 the 32-bit payload path in this VM context; the cause remains unproved and S10
 retains the Win95 investigation. The independently tested interactive COMMAND
-path must not be conflated with this batch path.
+path must not be conflated with this batch path. A guest WinExec control also
+launched original Win95 PE32 Notepad and found its window in guest USER; PE32
+guest ownership must be preserved when addressing the separate DOS EXEC case.
 
 ## Current Technical Baseline
 
