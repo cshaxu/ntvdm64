@@ -28,10 +28,11 @@ Get-ChildItem $source -Force|Copy-Item -Destination $dest -Recurse
 # Do not run the broad installation migrator over unrelated Win95 PIF formats.
 foreach($hive in 'SYSTEM.DAT','USER.DAT'){
  $path="$dest/$hive"
- & python "$PSScriptRoot/relocate-win95-hive-equal.py" $path "$path.CANDIDATE" $source $dest | Out-Host
+ $candidate=Join-Path $task "$hive.CANDIDATE"
+ & python "$PSScriptRoot/relocate-win95-hive-equal.py" $path $candidate $source $dest | Out-Host
  if($LASTEXITCODE){throw 'Isolated guest hive path relocation failed'}
  [IO.File]::SetAttributes($path,[IO.FileAttributes]::Normal)
- [IO.File]::Copy("$path.CANDIDATE",$path,$true)
+ [IO.File]::Copy($candidate,$path,$true)
 }
 [IO.File]::WriteAllText("$dest/.t479-owner",$task)
 foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {

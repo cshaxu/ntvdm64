@@ -142,6 +142,12 @@ changed between owner launches, or attribute every timeout to the known guest
 overlap. The running owner's original guest and installation were not used as
 the test target.
 
+An additional shell-launch parent probe called `Shell.Application.ShellExecute`
+from a supervised PowerShell process and recorded only process identities. Its
+new PowerShell child's live parent was that PowerShell launcher, not Explorer.
+It therefore cannot stand in for the owner's Win+R launch or establish the
+environment Explorer supplied. No process environment values were recorded.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,

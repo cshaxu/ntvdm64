@@ -105,6 +105,21 @@ assertions. This is a failed repeat, not a reproduction of the earlier
 are under `build/t481-s9/win95-recheck2`. An earlier detached attempt was
 reaped with its parent and produced no runtime result.
 
+Short-path comparison: `win95-recheck3` stopped before runtime because its
+source was itself an older owned test copy containing `SYSTEM.DAT.CANDIDATE`;
+the copy helper attempted to reuse that name inside the new destination. The
+helper now writes relocation candidates in the fresh test output directory,
+leaving both source and copied prior files untouched. `win95-recheck4`
+(supervisor PID 37148, start 2026-11-09T05:14:03Z) used a fresh short-path
+copy of the old `win95585` no-addon test installation, the same production
+package and released addons, and the actual installer. The test exited zero:
+two distinct concurrent VMs passed identity, negative API and 320 callback
+checks, and all source hashes remained unchanged. The observer recorded
+`result=exited`, guest exit 1; normal shutdown remains unproved. Because this
+control changed both source copy and destination path relative to recheck2,
+it cannot attribute recheck2's failure to the longer path. The earlier
+`0xC0000420` also was not reproduced by this run.
+
 The tested 11-image package `53589968-545f-4d1d-8951-db38d0131d13` was
 published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and
