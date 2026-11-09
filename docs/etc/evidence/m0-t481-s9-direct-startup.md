@@ -148,6 +148,24 @@ new PowerShell child's live parent was that PowerShell launcher, not Explorer.
 It therefore cannot stand in for the owner's Win+R launch or establish the
 environment Explorer supplied. No process environment values were recorded.
 
+The desktop ShellWindows dispatch was subsequently used for a separate
+test-owned hidden process; its recorded parent was `explorer.exe` PID 22072,
+not the PowerShell client. A separate Python child of that same desktop
+dispatch recorded only `PSMODULEPATH` and length 295, matching the length in
+the owner's faulting NTVDM. Equal lengths do not prove equal values, full
+environment identity, or when this variable acquired its current content.
+
+Explorer-launched PowerShell PID 30660 then ran the independently staged DOS
+matrix at 2026-11-09T05:16:53Z. Its four cleaned-environment cases exited zero;
+its four inherited-environment cases timed out. `failures=4` is a failed
+diagnostic, not a passing run. The PowerShell host and stage PATH prefix may
+change the environment relative to a direct Win+R Run16; no console output,
+dialog or exception capture was made. The result therefore strengthens the
+environment comparison without establishing the owner's CMD-parent contrast
+or the exact reason the owner's S7 session passed. Outputs are under
+`build/t481-s9/direct-dos-explorer*` and
+`build/t481-s9/explorer-env-metadata.txt`; no variable values were saved.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
