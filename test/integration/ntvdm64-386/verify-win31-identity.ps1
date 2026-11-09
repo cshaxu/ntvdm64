@@ -23,6 +23,7 @@ param(
  [switch]$InitializationFailure,
  [switch]$Continuation,
  [switch]$RealCommand,
+ [switch]$ProductionNative,
  [switch]$NestedCommand,
  [switch]$ReentrantCommand,
  [switch]$NestedRedirect,
@@ -57,6 +58,10 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($ProductionNative){
+ if($Continuation -or $RealCommand){throw 'ProductionNative selects its own continuation mode'}
+ $Continuation=$true; $RealCommand=$true
+}
 if($VisibleResizeRoundTrip){$VisibleResizeCommand=$true}
 if($VisibleResizeCommand){$ResizeCommand=$true}
 if($GuestGridSwitch -and !$GuestGridControl){throw 'Grid switching requires guest grid control'}
@@ -116,6 +121,7 @@ $dosDefines=@()
 if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
+if($ProductionNative){$dosDefines+='-DPRODUCTION_NATIVE_ONLY=1'}
 if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
 if($GuestCustomFont){$dosDefines+='-DGUEST_CUSTOM_FONT=1'}
 if($GuestCodepage){$dosDefines+=('-DGUEST_CODEPAGE='+$GuestCodepage)}
@@ -429,7 +435,8 @@ try {
     Write-Host "$id actual font nonzero=$($row.fontNonzeroBytes) preservation-checks=$($row.fontPreservationChecks) palette-checks=$($row.palettePreservationChecks)"
     if(!$row.fontNonzeroBytes -or $row.fontPreservationChecks -ne 3){throw "Actual nonempty guest glyph preservation not proved: $id"}
    }
-   if($row.continuationCount -ne 3 -or $row.continuationErrors){throw "Detached BOP continuation state failed: $id"}
+   $expectedContinuations=if($ProductionNative){2}else{3}
+   if($row.continuationCount -ne $expectedContinuations -or $row.continuationErrors){throw "Detached BOP continuation state failed: $id"}
   }
   if($Keyboard){
    $row.keyboard=[BitConverter]::ToUInt16($data,$expectedBytes-2)
@@ -499,7 +506,8 @@ try {
   }}
   "PASS real native unread-input $UnreadInputMode returned through guest BIOS peek/read in both VMs and both command rounds"
  }
- if($RealCommand){'PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested'}
+ if($ProductionNative){'PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested'}
+ elseif($RealCommand){'PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested'}
  elseif($Continuation){'PASS 54:08 AH=0/AH=1 and 54:0A in both actual DOS VMs; diagnostic results only'}
  if($Reuse){Confirm-Reuse $rows}
 

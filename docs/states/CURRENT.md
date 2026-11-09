@@ -50,6 +50,8 @@ retains the Win95 investigation. The independently tested interactive COMMAND
 path must not be conflated with this batch path. A guest WinExec control also
 launched original Win95 PE32 Notepad and found its window in guest USER; PE32
 guest ownership must be preserved when addressing the separate DOS EXEC case.
+A production-only Win3.1 enhanced-mode test passed two VM identities, 320
+callbacks, four native command returns and normal guest exit.
 A fresh production-only Win95 test passed two VM identities, 320 callbacks
 and four native command return checks after installing the released drivers;
 physical editor input and normal shutdown remain unverified.

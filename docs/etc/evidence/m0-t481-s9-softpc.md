@@ -494,3 +494,10 @@ it does not contain CONAGENT.EXE. The original runtime SETVER table was also
 read-only inspected. This is a source-level explanation consistent with the
 observed AX=0005, not a runtime proof that adding an entry alone completes the
 Win95 operation. No guest binary or installed configuration was modified.
+
+`win31-production-native` used the ordinary current package, released driver
+pair and the production-only DOS witness. Enhanced-mode DOSONLY=0 reached the
+desktop and exited normally. Two concurrent DOS VM identities, 320 callback
+checks, and both 54:08 native command returns per VM passed; this witness
+intentionally excludes 54:0A and physical keyboard/mouse. The original Win3.1
+installation was hash-verified and the disposable copy removed.

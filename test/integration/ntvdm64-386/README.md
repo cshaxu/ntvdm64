@@ -172,6 +172,11 @@ orders retain the guest register/flags/stack checks;54:0A still uses the
 translated input fixture. This proves native exit ordering, not a prescribed
 ordering of subsequent guest callback scheduling.
 
+`verify-win31-identity.ps1 -ProductionNative` uses the ordinary production
+host, the `PRODUCTION_NATIVE_ONLY` DOS witness and two real 54:08 commands
+per VM. It verifies VM identity, callback and return state without the
+diagnostic BOP interposition; it does not cover 54:0A or physical input.
+
 ## Real native unread-input handback
 
 The continuation witnesses execute test-only BOP54:254 markers. They require a
