@@ -2197,6 +2197,11 @@ delivery obligations remain in force.
 
 ## Current S9/S10 handoff status
 
+Owner's latest sequencing supersedes the handoff below: S9 investigates the
+currently reproduced Win95 mouse blue screen; S10 owns the Win3.1 and Win95
+batch-launched PE32 investigation; S11 owns all other outstanding multitask
+capabilities, Win95 acceptance and integrated delivery. None is waived.
+
 The owner subsequently accepted S8; the preceding historical statement that
 S8 remains active is superseded. S9 is active under CURRENT. The latest
 published coherent 11-image host package and W31 driver pair are hash-verified;

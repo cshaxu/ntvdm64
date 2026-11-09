@@ -807,3 +807,42 @@ window before its FIFO acknowledgement, the report's generic
 `input-sink-acknowledged=yes` only reflects the test's console-success branch:
 it does not prove all 100 queued motions were accepted. This is not physical
 Raw Input or normal Win95 shutdown acceptance.
+
+## Owner's reproduced Win95 blue screen
+
+On 2026-11-09 the owner reproduced the fault and requested live observation.
+Read-only process inspection identified deployed Run16 PID 7040, NTSRV
+18540, NTCON 4952 and NTVDM 39836. A read-only NTCON graphics-frame probe
+captured the actual 640x480 frame (`owner-blue-native.ppm`, SHA-256
+`EFB218666C0929037A281EF1165AFF8D75D5F4837FA26CE1AF7AEBAC95939CBA`).
+The frame displayed a Windows blue screen whose Chinese glyphs were corrupted.
+A bounded NTVDM full-memory snapshot in `build/t481-s9/owner-win95-blue.dmp`
+(47,518,218 bytes; SHA-256
+`3D0D1E0E8857E7CBBADCB069B2B41E4CC933CDF294EE8641DEA742C29D062DCC`)
+contained the original GBK text: fatal exception `0D` at `032F:00000799`,
+and the current application would be terminated. This proves the displayed
+guest exception and its text, not the responsible instruction or component.
+The deployed NTVDM and NTCON hashes match the published package; both authored
+drivers were present in the Win95 installation. The instance was not closed
+or manipulated. The snapshot is task-owned evidence and must be retired after
+its useful findings are recorded; it is not a release artifact.
+
+The dumped CCPU state identified current CR3 `002f3000` and current LDT base
+`80099000`. Walking the captured guest page tables resolved selector `032f`
+to descriptor bytes `bf 0e 00 90 12 fb 00 80`: code base `80129000`, limit
+`0ebf`, 16-bit, present ring-3 code. The captured page-table mapping of
+`80129799` yielded bytes `64 88 0d`, decoded in 16-bit mode as
+`mov [fs:di], cl`; nearby instructions form a byte-copy loop. The exact
+18-byte loop occurs at file offset `0xdd0` in the installed original
+`SYSTEM/DIBENG.DLL` (SHA-256
+`E9A819064F841185370EF62E1F49DA8E80596D53FD49001390DF7849C68EB2CD`),
+whose NE segment 1 begins at file offset `0x640`. Thus the faulting offset
+`0x799` matches that module's first segment. These are snapshot-derived
+observations, not proof of the invalid operand, failing state owner, or root
+cause. The page-table and descriptor values were read after the exception;
+subsequent mapping changes cannot be excluded without further evidence.
+
+The concurrent Win3.1 batch comparison was already running when the owner
+moved batch work to S10. Its isolated runner exited 1 without its VMLOAD
+witness; it cannot answer the batch question. The source hashes were verified
+and `O:/tmp/q98` was removed. No further batch investigation is admitted to S9.

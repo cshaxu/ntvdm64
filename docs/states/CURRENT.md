@@ -29,6 +29,11 @@ S10 retains final Win95 and multitask acceptance; the T remains open.
 | Original Owner Request | Close S8; start S9 SoftPC software-emulation fixes and Win95 repair. |
 | Similar-Issue Sweep | Check selected CCPU, BIOS, C-VID and video callers and upstream dependencies. |
 
+Owner correction: S9 now prioritizes the currently reproduced Win95 mouse
+blue screen. S10 will investigate Win3.1 and Win95 batch-launched PE32
+programs; S11 receives all other remaining multitask and integrated acceptance
+work. Preserve the current faulting instance for read-only probing.
+
 S9 disposable workspace: `build/t481-s9`, owned by this packet; budget 8 hours,
 20 GiB, with a 30-minute no-progress review. Join owned processes and record
 results before cleanup; reusable fixtures remain in `tests/mvdm-host`.
