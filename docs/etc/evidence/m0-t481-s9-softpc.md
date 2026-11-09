@@ -543,3 +543,12 @@ also passed. This tests actual execution and continuation, not physical or
 interactive shell input. Both source installations matched their hashes and
 the disposable copies were removed. After adding this mode, production 54:08
 regressions passed again for both Win3.1 and Win95.
+
+A fresh read-only deployed-hash check matched all 11 host-image manifest
+entries against `O:/winnt/system32`. The two installed `O:/w31/PATCH` drivers
+matched the released NTVDM64.386 and INSIGNIA.386. The existing
+`O:/WINDOWS/PATCH` contains neither driver, and its SYSTEM.INI has no entry
+for either, so that Win95 installation is not presently prepared for the
+multitask feature. Isolated Win95 tests explicitly install the drivers in
+owned copies; their passes do not show that the user's existing Win95 tree is
+installed or ready for manual acceptance. No installation was changed.

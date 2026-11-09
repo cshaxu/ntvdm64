@@ -68,6 +68,9 @@ see the S9 evidence for the failed version-substitution control.
 ## Current Technical Baseline
 
 The 11-image host candidate and W31 addon pair are published and hash-verified.
+The 11 deployed host hashes and both installed W31 driver hashes were
+rechecked. The existing O:/WINDOWS installation has neither multitask
+driver installed; isolated Win95 tests installed them only in copies.
 Win95 manual acceptance and the repeated Win3.1 CAF/fullscreen sequence remain
 outstanding; neither is implied by the owner's S8 closure.
 
