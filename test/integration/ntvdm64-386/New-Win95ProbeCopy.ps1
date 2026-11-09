@@ -17,6 +17,13 @@ if(!$task.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 if(!$dest.StartsWith('O:\tmp\',[StringComparison]::OrdinalIgnoreCase) -or $dest -match '[^\x21-\x7e]' -or (Test-Path $dest) -or $dest.StartsWith($source+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Fresh, short, independent O:/tmp guest copy required'}
 if(!(Test-Path "$source/WIN.COM") -or !(Test-Path "$source/SYSTEM.INI")){throw 'Installed Windows 95 source required'}
 if($source.Length -ne $dest.Length){throw 'Hive relocation requires paths of equal length'}
+$autoexec=Join-Path $source 'PATCH/AUTOEXEC.NT'
+if(Test-Path -LiteralPath $autoexec){
+ $text=[IO.File]::ReadAllText($autoexec)
+ foreach($match in [regex]::Matches($text,'(?im)^\s*set\s+(?:windir|winbootdir)\s*=\s*([a-z]:\\[^\r\n]*)\s*$')){
+  if($match.Groups[1].Value.TrimEnd() -ine $source){throw 'Source AUTOEXEC.NT points at another Windows installation'}
+ }
+}
 New-Item -ItemType Directory $task|Out-Null
 # This is a background integration runner. It uses the established matrix
 # desktop/scope and guest-internal input, never foreground input automation.

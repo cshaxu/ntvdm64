@@ -131,6 +131,32 @@ these two repetitions show a consistent difference between these test inputs,
 not whether path length, registry contents, PIF or another setup difference
 causes it. Neither failure demonstrates the earlier `0xC0000420`.
 
+Further read-only inspection found a concrete invalid-input difference:
+`O:/tmp/vm47995/PATCH/{CONFIG.NT,AUTOEXEC.NT,WIN.CMD}` references the old
+`O:/WINDOWS` installation rather than its own root. The copy helper replaces
+the stated source root, not arbitrary pre-existing aliases, so recheck2 and
+recheck5 retained those references in their isolated destinations. Their PIF
+fields did point to the isolated destinations, but the referenced NT config
+and environment files then pointed outside them. By contrast, the recheck4
+source and destination config files reference their respective own roots.
+The failing inputs thus do not meet the intended fully isolated installation
+precondition, and these runs must not be used as Win95 product regression or
+path-length evidence. This establishes a test setup defect, not the exact
+instruction or mechanism that yielded the zero API response. No source or
+external Windows installation was modified during this inspection.
+
+The isolated-copy helper now rejects an explicitly absolute `windir` or
+`winbootdir` in the source AUTOEXEC.NT when it names another installation.
+It does not infer or rewrite a different source root. The negative control
+with `vm47995` rejected the stale root before creating either destination or
+output directory (supervisor PID 25068). The positive control
+`win95-valid-source` used the self-consistent `z97` source, the production
+package and the actual installer: two distinct concurrent DOS VMs and 320
+callback checks passed, source bytes remained unchanged, and the observer
+reported `result=exited` with exit 1 (normal shutdown still unproved).
+This guard covers the explicit `windir`/`winbootdir` form, not every possible
+foreign path in every configuration file.
+
 The tested 11-image package `53589968-545f-4d1d-8951-db38d0131d13` was
 published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and
