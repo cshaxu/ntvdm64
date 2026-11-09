@@ -157,6 +157,18 @@ reported `result=exited` with exit 1 (normal shutdown still unproved).
 This guard covers the explicit `windir`/`winbootdir` form, not every possible
 foreign path in every configuration file.
 
+`win95-production-native` combined the actual `-InstallViaTool` path with
+`-NativeCommand` against the self-consistent `z97` source, released addons
+and production `package-rotate`; supervisor PID 39604 started at
+2026-11-09T05:36:30Z and exited zero. Two distinct concurrent VM identities,
+negative API checks and 320 callback checks passed, followed by four real
+native commands with guest return, register, flags and stack assertions.
+The source installation's inventory and hashes remained unchanged. The
+observer reported `result=exited`, exit 1; this does not establish normal
+Win95 shutdown, physical editor input, mouse interaction, or resolution of
+the separate Win+R startup failure. This combined installer/production-native
+run does not use the diagnostic editor host interposition.
+
 The tested 11-image package `53589968-545f-4d1d-8951-db38d0131d13` was
 published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and
