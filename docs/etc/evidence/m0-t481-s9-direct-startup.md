@@ -3,7 +3,7 @@
 The owner reported `run16 O:/w31/patch/win386.cmd` terminating before the
 desktop with illegal instruction bytes `63 6f 64 65 78`. S8 had not received
 owner acceptance. The selected matrix previously launched the batch from an
-existing CMD and replaced PATH, so it did not cover this direct inherited-PATH
+existing CMD and replaced PATH, so it did not cover this direct inherited-environment
 case. `win31_runtime_matrix_test.ps1 -DirectRun16` now provides that route;
 `-DirectShortPath` is its isolated short-PATH control.
 
@@ -102,3 +102,34 @@ supports one environment-sensitive startup mechanism in both modes; it does
 not prove when or how the owner's interactive environment changed. The S7
 manual success remains valid historical evidence, and the current owner
 report remains a failed acceptance requiring an actual solution.
+
+## Startup environment ownership and S7 comparison
+
+The installed launch scripts set TEMP and TMP in their local CMD environment
+and call the matching PIF through a nested Run16. The native launch request
+carries the outer Run16 environment to its CMD child. For the PIF,
+`run16-exe/main.c::begin_worker_win16_directory` builds a child copy, replaces
+WIN16DIR and removes named internal frontend/stream entries.
+`BaseCreateVDMEnvironment` produces the projected worker environment. Run16
+passes its Unicode form to `OpenNtBaseClientStartVdmWorker`; NTSRV's
+`OpenNtBaseServiceStartVdmWorker` passes that request environment to worker
+creation. It does not simply substitute NTSRV's own environment. The original
+`cmdGetInitEnvironment` later reads the worker environment, constructs the OEM
+guest environment and copies it into the allocation.
+
+In the owner's live fault the previously displayed instruction bytes and the
+INIT field both fell inside PSMODULEPATH; only the name and its 295-byte value
+length were emitted by the explicitly approved in-memory probe. This does not
+identify PSMODULEPATH as the sole cause: block size and layout, not one
+specific variable, govern the overlap. Neither the owner observation nor the
+agent-only PATH controls establish that the owner's PATH contained `codex` or
+changed between S7 and S9.
+
+From S7 baseline 6831b9dd7 through the investigation revision, there is no
+source diff under Run16, NTSRV, NTVWM, the COMMAND host service, or the
+original COMMAND guest source. Release input manifests identify the same
+unstamped input bytes for the other ten host images; NTVDM changed. The host
+emulator changes and authored addon remain separate comparisons, not a
+reconstruction of the earlier live environment. The owner's S7 process
+environment was not captured, so these facts cannot identify what changed in
+that process between the two manual runs.
