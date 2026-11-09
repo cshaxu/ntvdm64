@@ -3,9 +3,10 @@
 S8 was closed by the owner; its remaining observed-test boundaries are recorded
 in [the S8 closure](m0-t481-s8-closure.md). S9 remains active.
 
-Three candidate mirror changes are registered as MVDM-HOST-DIV-894 through
-896. They are selected by the x86 product build; source selection does not
-establish that a guest workload hit each path.
+Five mirror changes are registered as MVDM-HOST-DIV-894 through 898 and
+included in the published S9 candidate. They are selected by the x86 product
+build; source selection does not establish that a guest workload hit each
+path. The initial three changes are:
 
 - BIOS word and DWORD virtualization fallback: a fixture extracts both
   actual function bodies and uses stubbed address translation and nested
