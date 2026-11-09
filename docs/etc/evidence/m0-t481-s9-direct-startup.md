@@ -112,6 +112,18 @@ independently captured. It must not be assumed to share the PIF failure's
 mechanism merely because both go through DOS. Compare direct and existing-CMD
 launches with matched environments and both COMMAND and other DOS programs.
 
+A preliminary hidden-window probe used one isolated package and inherited
+agent environment to compare a newly created Console with a CMD parent, for
+`command /c ver` and `MEM.EXE`. All four processes timed out after 30 seconds.
+The supervisor initially returned zero despite the per-case timeouts; that is
+a probe defect, not a test pass. Its disposable script was corrected to return
+failure when any case fails. It did not record console output or dialog state,
+and it reused one service after each timed-out case. It therefore neither
+reproduces the owner's successful CMD-parent comparison nor attributes any
+timeout to product behavior; a valid comparison requires isolated cases and
+the existing observer's captured console/dialog evidence. The first probe and
+its captured statuses remain under `build/t481-s9/direct-dos-matrix.*`.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
