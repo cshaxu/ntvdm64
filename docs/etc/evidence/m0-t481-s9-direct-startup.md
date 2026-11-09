@@ -182,6 +182,27 @@ this is not a passing test. The disposable Python probe was changed to report
 repeat. The actual completed run is retained as
 `build/t481-s9/explorer-native-dos.jsonl`; no environment values were saved.
 
+The owner later reported an existing CMD → `run16 command` → Win3.1 success,
+and a direct Win+R `run16 command` failure. A closer control used desktop
+Explorer's own ShellWindows dispatch to launch the isolated stage's actual
+`run16.exe command`, then separately launched a new CMD from that Explorer to
+run the same command. The read-only dialog probe checked only whether a
+stage-owned NTVDM had visible child text containing `illegal instruction`;
+it did not record the text or environment values. For both the current
+`package-rotate` and S7 `package001`, the direct case had parent
+`explorer.exe` and the fresh-CMD case had parent `cmd.exe`; all four reached
+NTVDM and displayed that error type. Runs were supervised under PIDs 16156
+and 24544 respectively. Each case had an independent staged package identity
+and cleanup scope. Results: `build/t481-s9/explorer-exact-compare.jsonl` and
+`build/t481-s9/explorer-exact-s7.jsonl`.
+
+This reproduces the direct interactive failure with the real desktop launch
+parent and shows that today's Explorer-derived environment also triggers it
+with the S7 host package. It does not establish the failed instruction bytes,
+the complete cause of these four new failures, or the environment of the
+owner's already-running successful CMD. A freshly launched CMD inheriting
+today's Explorer environment is not evidence about that earlier CMD session.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
