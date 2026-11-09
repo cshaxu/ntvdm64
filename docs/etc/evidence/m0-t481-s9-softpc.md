@@ -687,6 +687,34 @@ return; the latter reported an invalid handle while the menu remained in the
 captured Console snapshot. That is a failing probe result, not a diagnosed
 product defect. Neither case proves physical input or two-VM isolation.
 
+`win95-mouse-edit-exe3` narrowed the native-editor probe failure: its input
+writer returned success for Escape, but the observed File menu did not close
+before the probe deadline, so Ctrl+Q was not sent. A successful input write is
+not proof the native editor consumed that record; the captured view may also
+be stale across Console handoff. This remains undiagnosed and is not a product
+fix or acceptance result.
+
+`win95-mouse-edit-exe4` re-opened active CONOUT at each probe milestone to
+test the stale-output-handle hypothesis. The File menu remained visible after
+Escape and the menu-dismiss milestone still failed, so that change alone did
+not explain or fix the result. Input ownership/consumption remains unproved;
+the diagnostic observer change was not incorporated into product code.
+
+`win95-mouse-edit-exe5` repeated the current-buffer observation and queried
+the probe's Console input queue after the unchanged-menu timeout. The queue
+query succeeded with zero pending records; this proves only that no input
+records remained on that queue, not which reader consumed Escape or whether
+the native editor received it. The File menu remained visible in the
+observation. The failure remains open and no runtime change is inferred.
+
+`win95-native-escape-probe` used the same mouse-menu and DOS launch route to
+run a test-owned native console program. After its readiness marker, the
+program's `ReadConsoleInputW` received a key-down with VK_ESCAPE=27 and
+UnicodeChar=27; it returned to the DOS prompt, and EXIT returned to the Win95
+desktop. This proves Escape reached that native test program in this run,
+not that EDIT.EXE consumed it: the editor may use a different Console mode or
+read API. Its temporary `O:/tmp/KREC.EXE` was hash-checked and removed.
+
 `win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
 repeating the same menu, VER, DIR and EXIT scenario. Captures and console
 snapshots show the menu path, command output and desktop return; no blue screen
