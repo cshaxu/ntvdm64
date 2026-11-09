@@ -39,9 +39,9 @@ $asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY 0`n%define SA
 $actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
 $asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 $routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
-$activation="push word [active-data]`napi 2,59`ncall settle`nret"
-if(!$routines.Contains($activation)){throw 'Prompt activation insertion point missing'}
-$routines=$routines.Replace($activation,"push word [active-data]`napi 2,59`ncall settle`napi 2,60`ncmp ax,[active-data]`njne target_prompt`nret")
+if($routines -notmatch '(?s)api 2,59\s+\.wait_active:\s+call settle\s+api 2,60\s+[^\r\n]*[\r\n]+cmp ax,\[active-data\]\s+jne \.wait_active'){
+ throw 'Shared editor routine must wait for the selected prompt to become active'
+}
 if($DismissWelcomeTitleHex){
  $routines=$routines.Replace("target_prompt:`n","target_prompt:`ncall dismiss_welcome`n")
  $routines=$routines.Replace("mouse_cell:`n","mouse_cell:`ncall dismiss_welcome`n")

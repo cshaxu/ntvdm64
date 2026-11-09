@@ -1,7 +1,7 @@
 # T481 S9: SoftPC import evidence (in progress)
 
 S8 was closed by the owner; its remaining observed-test boundaries are recorded
-in [the S8 closure](m0-t481-s8-closure.md). S9 is not yet complete or published.
+in [the S8 closure](m0-t481-s8-closure.md). S9 remains active.
 
 Three candidate mirror changes are registered as MVDM-HOST-DIV-894 through
 896. They are selected by the x86 product build; source selection does not
@@ -30,9 +30,18 @@ passed standard/enhanced mode with DOSONLY 0/1, including normal exits.
 An isolated Win95 test using the candidate host and released NTVDM64.386 passed
 two concurrent VM identities, 320 callback checks and four native commands;
 the source installation's file hashes were unchanged. The observer reported
-guest exit code 1, so normal Win95 shutdown is not established. Mouse/editors,
-the owner's repeated Win3.1 switch sequence and full S10 acceptance remain
-unverified on this candidate.
+guest exit code 1, so normal Win95 shutdown is not established.
+
+The Win95 editor fixture was updated to recognize the activation wait already
+present in the shared routine instead of inserting the obsolete version. With
+the current CCPU and C-VID libraries linked into a separately built diagnostic
+host, `verify-win95-editors.ps1 -MouseMenu -SaveWitness` passed two distinct
+prompt VMs, native and DOS editors, mouse menu interaction and both saved
+contents; the source installation hashes remained unchanged. The diagnostic
+host is not the shipped executable. Its observer reported Win95 exit code 1,
+so it does not establish normal shutdown. The exact production-host editor
+path, owner's repeated Win3.1 switch sequence and final S10 acceptance remain
+unverified.
 
 SoftPC `1ec0d551` virtual text aperture changes are already registered under
 DIV-545; `8c27a3b6` CHAIN2 reads are already DIV-889. CPL access, slave EOI
