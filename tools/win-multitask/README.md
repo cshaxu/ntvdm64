@@ -21,3 +21,10 @@ without `device=*vmd` reached EDIT.COM but did not open its mouse menu; adding
 the entry made the corresponding mouse-menu sequence pass. An earlier startup
 failure involving a different test copy remains unattributed. Production-host
 and visible-window validation are still required.
+
+`test/integration/multitask/verify-win31-installer.ps1` tests the actual
+installer on an isolated Win3.1 copy, then runs the production host's four
+standard/enhanced and DOSONLY combinations. When the source already has the
+drivers, the fixture removes only its own copied driver files and entries to
+create a pre-install state; it verifies source file hashes afterward. This
+startup/exit matrix does not establish editor or fullscreen interaction.

@@ -53,6 +53,16 @@ result file. This intermittent failure remains unclassified. The observer
 exit code alone does not prove which fail-fast site ran. Each run verified the
 source Win95 installation bytes unchanged. The failed run is not a pass.
 
+`test/integration/multitask/verify-win31-installer.ps1` additionally exercised
+the actual CMD installer on an isolated copy of the owner's Win3.1 installation.
+The fixture removed only its own copied driver files and entries to construct
+a pre-install state, then applied the tool and checked both released driver
+hashes. With the then-published production package, standard/enhanced and
+DOSONLY 0/1 all reached the desktop and exited normally. Source installation
+file hashes were unchanged. This matrix starts through CMD with a short PATH;
+it does not cover the owner's direct inherited-environment failure or full
+editor interaction. The installer package is not yet claimed as delivered.
+
 Two subsequent debugger-observed repeats also passed the native-command
 witness and recorded no `0xC0000420`; debugger scheduling differs, so neither
 is evidence that the prior failure was fixed. The status equals the explicit
