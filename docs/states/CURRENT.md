@@ -33,10 +33,12 @@ S9 disposable workspace: `build/t481-s9`, owned by this packet; budget 8 hours,
 20 GiB, with a 30-minute no-progress review. Join owned processes and record
 results before cleanup; reusable fixtures remain in `tests/mvdm-host`.
 [S9 evidence](../etc/evidence/m0-t481-s9-softpc.md) records candidate results.
-The owner rejected the current delivery after direct Win3.1 startup failed;
+The owner accepted S8, but rejected the current delivery after direct Win3.1 startup failed;
 the reproduced inherited-environment guest defect and passing isolated
 short-PATH control are recorded in [direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
-S8 was owner-directed closed without acceptance; S9 acceptance remains failed.
+The owner additionally reports Win+R direct `run16 command` fails, while a
+CMD-launched chain can start Win3.1. Investigate this as a direct Run16/DOS
+startup issue, not solely as a Win3.1 launcher issue. S9 acceptance remains failed.
 
 ## Current Technical Baseline
 

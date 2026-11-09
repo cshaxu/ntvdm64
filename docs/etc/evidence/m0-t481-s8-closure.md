@@ -7,8 +7,9 @@ passing corrected-body cases; selected Full and the four Win3.1 startup/exit
 combinations passed. See the [investigation](m0-t481-s8-mouse.md) for the
 owner failure, retained scene, source analysis and precise evidence.
 
-The owner has not reported a retest after this particular release. Repeated
-CAF/fullscreen pointer rendering and exit therefore remain unverified, not a
-pass. Win95 on the new candidate is also unverified; S9 investigates relevant
+The owner subsequently reported S8 acceptance. This records the owner's
+acceptance of the S8 result; it does not by itself establish Win95 behavior
+or eliminate the separate S9 direct DOS startup failure. Win95 on the new
+candidate is unverified; S9 investigates relevant
 repairs and S10 retains final Win95/multitask acceptance. DOS4GW/Nesticle was
 skipped because its external fixture was unavailable. The T stays open.

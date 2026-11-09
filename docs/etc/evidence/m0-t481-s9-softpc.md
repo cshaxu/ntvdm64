@@ -94,6 +94,17 @@ snapshot changes target a different SoftPC snapshot composition and do not
 establish a corresponding local defect. No source or binary was imported or
 removed on that basis.
 
+An isolated production-package `verify-win95-identity.ps1 -InstallViaTool`
+repeat was started under PID 26008 at 2026-11-09T04:58:13Z using
+`package-rotate`, the released addon, and a fresh copy of the historical
+Win95 source. The installer completed and the source installation's final
+hash check passed. The observer timed out; the guest API witness reported a
+zero signature and VM, so the test exited 1 without reaching its two-VM
+assertions. This is a failed repeat, not a reproduction of the earlier
+`0xC0000420`, not a pass, and not a diagnosis. Output and exact test artifacts
+are under `build/t481-s9/win95-recheck2`. An earlier detached attempt was
+reaped with its parent and produced no runtime result.
+
 The tested 11-image package `53589968-545f-4d1d-8951-db38d0131d13` was
 published to both `assets/release` and `O:/winnt/system32`, with manifest
 hashes checked. The two released drivers already match `O:/w31/PATCH`, and

@@ -105,6 +105,13 @@ report remains a failed acceptance requiring an actual solution.
 
 ## Startup environment ownership and S7 comparison
 
+The owner subsequently accepted S8, and reported a broader comparison:
+Win+R direct `run16 command` also fails, while CMD → `run16 command` →
+`win386` can start. The precise direct-command failure has not yet been
+independently captured. It must not be assumed to share the PIF failure's
+mechanism merely because both go through DOS. Compare direct and existing-CMD
+launches with matched environments and both COMMAND and other DOS programs.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
