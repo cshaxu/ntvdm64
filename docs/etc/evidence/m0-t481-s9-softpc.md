@@ -650,3 +650,10 @@ did not reproduce the report and do not exercise physical Raw Input or prove
 the owner's failure absent. The observer ended each owned run after capture.
 The first hook attempt targeted a window recreated during startup and did not
 deliver input; it is not a negative test. No product or guest code was changed.
+
+`win95-mouse-before-after` repeated a single motion with the installed launcher's
+IME environment and captured the same frontend immediately before and after
+the sink acknowledgment. The visible guest pointer moved from approximately
+(320,240) to (160,80), and the desktop remained visible. This establishes guest
+motion for that injected record, but not physical Raw Input or the blue-screen
+report. The observer terminated its owned run after the final capture.
