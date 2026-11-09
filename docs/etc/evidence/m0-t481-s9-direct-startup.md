@@ -228,6 +228,51 @@ launched and therefore does not reconstruct the owner's actual CMD environment.
 These results support environment-sensitive initial COMMAND startup but do
 not explain what changed in the owner's earlier CMD or S7 sessions.
 
+With the owner's explicit authorization, a read-only process-memory probe
+recorded variable names/lengths and totals, never values. Current desktop
+Explorer PID 28636 contained 91 environment entries totaling 12,922 UTF-16
+bytes; PATH length was 2,423 characters, PSMODULEPATH length was 295, and 21
+`CODEX_`/`BROWSER_USE_`/`NODE_REPL_`-prefixed entries occupied 1,457 UTF-16
+characters including entry terminators. Eight still-running older CMD processes
+with no identified live parent each had 17 entries totaling 850 UTF-16 bytes,
+PATH length 109 and no PSMODULEPATH or those prefixes. Their relationship to
+the owner's successful CMD is unproved. The presence of agent-prefixed names
+does not establish who started or changed Explorer, and no values were read
+out or persisted.
+
+An Explorer-dispatched native Python child then ran two fresh, independently
+staged product cases. Both inherited the same PATH and PSMODULEPATH unchanged.
+The first kept the complete inherited environment and timed out running
+`COMMAND.COM /c ver`; the second removed only the three agent-name prefixes
+from its own child environment and exited 0. No user's process or system
+environment was changed; both owned test stages were removed. This supports
+the additional environment entries as a trigger in this controlled setup,
+not a user-approved product filter or proof of correct displayed output. It
+does not prove the owner's earlier S7 or existing-CMD environment. The
+metadata and result are retained under `build/t481-s9/process-env-lengths2.out`
+and `explorer-env-factor.jsonl`; no variable values were saved.
+
+The same authorized length-only inspection found two other Explorer processes
+in the session, PIDs 14508 and 8544, started at 09:56 and 09:57 local time on
+2026-11-08, before the S7 closure record. Each had 45 environment entries,
+6,674 UTF-16 bytes, PATH length 1,507, PSMODULEPATH length 91 and no entries
+with the three agent prefixes. The current desktop Explorer PID 28636, started
+at 21:36, had 91 entries and the larger lengths above. This establishes that
+older and current Explorer processes coexist with materially different
+environments. It does not establish which process launched the owner's S7
+test, or how the current Explorer acquired its environment. The inspection
+recorded no environment values.
+
+An additional isolated test used Windows `CreateEnvironmentBlock` with the
+current user token and `inherit=FALSE`, without inspecting or saving its
+values and without changing the user's running processes or permanent
+environment. Fresh separately staged COMMAND `/c ver` and MEM processes
+both exited 0. Supervisor PID 40972 started at 2026-11-09T06:26:33Z; owned
+worker scopes and stages were retired. This establishes that the Windows-
+generated user environment is a usable startup control on this machine. It
+does not prove correct visible output or that every DOS program works, nor
+does it alter the underlying original COMMAND environment-size defect.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
@@ -256,3 +301,30 @@ emulator changes and authored addon remain separate comparisons, not a
 reconstruction of the earlier live environment. The owner's S7 process
 environment was not captured, so these facts cannot identify what changed in
 that process between the two manual runs.
+
+With explicit owner approval, the active desktop Explorer (PID 28636) was
+restarted in session 1 using `CreateEnvironmentBlock` for the normal user
+token. Its replacement, PID 40828, owned the desktop; its environment had
+7,214 UTF-16 bytes, 55 entries, PATH length 1,507, PSMODULEPATH length 91,
+and no agent-prefixed entries. Only names and lengths were inspected. No
+permanent environment or guest file was changed.
+
+From the replacement Explorer, an isolated `run16 command` launch reached
+an NTVDM worker and a console observer read the Windows NT DOS banner. The
+separate direct and CMD-parent comparison observed no illegal-instruction
+dialog during its 25-second observation windows; this alone is not an exit
+or full application test. Owned test stages were removed. The guest's large
+environment limitation remains; this desktop repair is not a product fix.
+
+After that restart, a desktop-launched production `run16
+O:\w31\patch\win386.cmd` reached the `Windows 3.1 386 Enhanced` frontend
+after dismissing the previously authorized COM-port warning. A title alone
+does not prove desktop readiness. A separate isolated direct-Run16 matrix,
+using a normal-user-environment control and the existing startup witnesses,
+passed both standard and enhanced mode with DOSONLY=0, including desktop/mode
+and normal-exit assertions. Both owned installation copies were retired.
+The first matrix attempt used `O:\tmp\t481s9cle` and failed both modes with
+the NTVDM `config.nt` unsuitable dialog; the successful retry used the shorter
+`O:\tmp\q8c`. This is a test-input difference, not a proven root cause for
+the longer-path failure; it does not establish production support for that
+path or the owner's complete editor interaction.

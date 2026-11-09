@@ -36,9 +36,13 @@ results before cleanup; reusable fixtures remain in `tests/mvdm-host`.
 The owner accepted S8, but rejected the current delivery after direct Win3.1 startup failed;
 the reproduced inherited-environment guest defect and passing isolated
 short-PATH control are recorded in [direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
-The owner additionally reports Win+R direct `run16 command` fails, while a
-CMD-launched chain can start Win3.1. Investigate this as a direct Run16/DOS
-startup issue, not solely as a Win3.1 launcher issue. S9 acceptance remains failed.
+The owner additionally reported Win+R direct `run16 command` failing while a
+CMD-launched chain could start Win3.1. After the owner-approved desktop shell
+restart with a normal user environment, a direct command reached its DOS banner
+and an isolated direct Win3.1 standard/enhanced DOSONLY=0 matrix reached the
+desktop and exited normally. The original guest large-environment limitation
+remains, and the owner has not yet revalidated this delivery. S9 acceptance
+remains failed pending that revalidation and its other outstanding work.
 
 ## Current Technical Baseline
 
