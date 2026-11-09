@@ -676,6 +676,17 @@ and Console keyboard records were synthesized; this is not physical-input
 acceptance, proof of normal Win95 shutdown, or proof that every run succeeds.
 The observer ended its owned processes after the capture.
 
+`win95-mouse-edit-com2` continued the mouse-menu scenario into the Win95
+MS-DOS Console. After the visible `EDIT.COM` welcome, a synthetic Escape and
+Alt-F exposed the File menu including Exit; selecting Exit returned to the
+DOS prompt, and `exit` returned to the Win95 desktop. It used production host
+and addon images, frontend mouse injection and Console keyboard records.
+`win95-mouse-edit-exe` and `win95-mouse-edit-exe2` also reached the native
+EDIT.EXE File menu, but the probe did not establish editor exit or desktop
+return; the latter reported an invalid handle while the menu remained in the
+captured Console snapshot. That is a failing probe result, not a diagnosed
+product defect. Neither case proves physical input or two-VM isolation.
+
 `win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
 repeating the same menu, VER, DIR and EXIT scenario. Captures and console
 snapshots show the menu path, command output and desktop return; no blue screen
