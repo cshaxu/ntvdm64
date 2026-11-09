@@ -722,6 +722,14 @@ after EXIT. The installed EDIT.EXE imports `NtReadFile`, but its exact mode
 and complete input sequence were not captured; this control does not prove
 the editor received Escape. The temporary probe was hash-checked and removed.
 
+During `win95-edit-mode`, a separate read-only process attached to the unique
+test-owned EDIT.EXE Console and observed input mode `0x288`, including VT
+input. `win95-mouse-edit-exe6` then attempted File-menu End and Enter instead
+of Escape. The menu disappeared, but the DOS parent prompt did not return;
+the resulting editor frame contained a `1`. This does not establish whether
+the synthetic navigation was interpreted as intended or identify a product
+failure. Both test processes were retired by their owner.
+
 `win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
 repeating the same menu, VER, DIR and EXIT scenario. Captures and console
 snapshots show the menu path, command output and desktop return; no blue screen
