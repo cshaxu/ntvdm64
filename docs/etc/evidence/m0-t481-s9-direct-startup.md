@@ -124,6 +124,24 @@ timeout to product behavior; a valid comparison requires isolated cases and
 the existing observer's captured console/dialog evidence. The first probe and
 its captured statuses remain under `build/t481-s9/direct-dos-matrix.*`.
 
+An independent follow-up (`build/t481-s9/direct-dos-isolated.ps1`, supervisor
+PID 10728, start 2026-11-09T05:06:38Z) created and retired a fresh package and
+service for each case. It ran `command /c ver` and `MEM.EXE`, each directly in
+a new hidden Console and via a new `cmd /d /c` parent. With the recorded
+machine/user PATH and agent-only environment variable prefixes removed, all
+four exited zero. With the agent's inherited environment, all four hit the
+30-second diagnostic deadline. The runner returned failure (1), not success.
+The output is `build/t481-s9/direct-dos-isolated.txt`; values of environment
+variables were neither printed nor saved by the probe. Each run included a
+test-stage PATH prefix and uses a hidden new Console, so it is not an exact
+Win+R invocation. No output, dialog text or runtime stack was captured; exit
+zero is not a proof of correct displayed content. This matrix establishes a
+repeatable environment-sensitive difference in the test setup but does not
+reproduce or refute the owner's CMD-parent success, identify which variable
+changed between owner launches, or attribute every timeout to the known guest
+overlap. The running owner's original guest and installation were not used as
+the test target.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
