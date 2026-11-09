@@ -864,12 +864,27 @@ This is strong evidence of a target-segment boundary violation, but the
 surrounding exception-handler save layout has not yet been verified, so the
 `3300` word is not yet asserted as the fault-time DI register. Nor does this
 establish why the offset reached that value or which component corrupted it.
+If that value is confirmed as the attempted offset, the selected CCPU
+`limit_check` treats a byte access beyond an expand-up segment's inclusive
+limit as `GP(0)`. This is the expected bounds check; a fix must explain the
+out-of-range offset or prove the descriptor/state is wrong, rather than
+silencing the exception.
 For an independent cross-check, the captured system VM control block at
 `c15200e8` has `CB_Client_Pointer=c13a1f70`; the first dword of that VMM
 client frame is also `12a73300` (EDI, low word `3300`) according to the
 locally retained VMM `Client_Reg_Struc` definition. This client frame is the
 post-fault state, so it corroborates but does not independently prove that DI
 was unchanged from the faulting instruction.
+
+The same `EDI=12a73300` / `ESI=00083072` pair also appears in a
+pushad-shaped sequence in guest stack memory at linear `80001f6e`, with
+`EBP=0000ce50` and a nearby `0799:032f`, flags `0286`, and stack
+`0087:0fc4` record. `BP=ce50` is consistent with the recorded sign and parity
+flags following the loop's 16-bit `dec bp`; DIBENG loads that counter from
+the cursor-record width, which is 48 in the later snapshot. This strengthens
+the corrupted-loop-state hypothesis, but guest stack memory contains saved
+historical frames and the exact exception save path still needs confirmation
+before treating the entire sequence as an unambiguous fault-time register set.
 
 The saved privilege-transition frame records `SS:SP=0087:0fc4`; the captured
 LDT and page tables resolve that stack, whose first words are `0fe8 0569
@@ -879,6 +894,16 @@ at `01a1` into its caller `0471`. The NE export table places `01a1` in
 `DIB_CHECKCURSOREXT` (export begins at `012a`). This stack evidence identifies
 the actual cursor-check path for the saved frame; the earlier
 `DIB_MOVECURSOREXT` observation was only another static caller of `0471`.
+
+The selected mouse source was traced without modification. The original
+`BOP BF` routes to `mouse_EM_callback`; its movement case calls
+`mouse_EM_move`, which updates the mouse state and passes the event to
+`mouse_update`. The latter can suspend mouse interrupts and enter a registered
+guest callback, then issues the original PIC EOIs; `mouse_int2` restores the
+saved 16-bit registers and resumes interrupts. This is an actual selected
+source path, not evidence that the owner's fault entered it or that its
+register restoration is wrong. A fault-time witness is still required before
+changing the original behavior.
 
 The concurrent Win3.1 batch comparison was already running when the owner
 moved batch work to S10. Its isolated runner exited 1 without its VMLOAD
