@@ -69,8 +69,10 @@ see the S9 evidence for the failed version-substitution control.
 
 The 11-image host candidate and W31 addon pair are published and hash-verified.
 The 11 deployed host hashes and both installed W31 driver hashes were
-rechecked. The existing O:/WINDOWS installation has neither multitask
-driver installed; isolated Win95 tests installed them only in copies.
+rechecked. The owner subsequently permanently authorized changes to the
+Win95 installation: its launcher paths were corrected, and both released
+multitask drivers installed and hash-verified. Manual Win95 acceptance
+remains pending.
 Win95 manual acceptance and the repeated Win3.1 CAF/fullscreen sequence remain
 outstanding; neither is implied by the owner's S8 closure.
 

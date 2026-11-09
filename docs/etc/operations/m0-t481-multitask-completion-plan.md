@@ -2220,9 +2220,9 @@ test or generalize it to the 54:08/0A production witnesses.
 
 S10 retains the owner's final Win95 multitask interaction and integrated
 acceptance, including actual input/presentation and coherent publication.
-`O:/WINDOWS` currently has no installed multitask driver entries and its
-WIN.CMD points to a removed test stage. Automatic review rejected direct
-repair of that installation, which remains unchanged; isolated tests install
-into separately owned copies. See S9 evidence for the exact tests, source
-hashes, boundaries and cleanup. No S9, S10 or T closure follows from this
-handoff update.
+The owner subsequently authorized modifications to `O:/WINDOWS`. Its stale
+WIN.CMD runtime paths were corrected and the released multitask drivers
+installed using the existing tool; both driver hashes and SYSTEM.INI
+entries were verified. Manual acceptance remains pending. See S9 evidence
+for exact tests, source hashes, boundaries and cleanup. No S9, S10 or T
+closure follows from this handoff update.

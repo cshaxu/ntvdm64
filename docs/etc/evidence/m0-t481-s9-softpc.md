@@ -552,3 +552,12 @@ for either, so that Win95 installation is not presently prepared for the
 multitask feature. Isolated Win95 tests explicitly install the drivers in
 owned copies; their passes do not show that the user's existing Win95 tree is
 installed or ready for manual acceptance. No installation was changed.
+
+The owner subsequently granted permanent authorization to modify the Win95
+installation. After confirming no project processes were active, the two
+expired `O:/tmp/nca7/system32` paths in `O:/WINDOWS/PATCH/WIN.CMD` were
+replaced with `O:/winnt/system32`. The actual `win-multitask/APPLY.CMD`
+installed INSIGNIA.386 and NTVDM64.386 in that installation; both hashes
+matched assets/release, and SYSTEM.INI contains both device entries. This is
+installation and configuration evidence, not a Win95 runtime or manual
+acceptance pass. The installed original guest binaries were not modified.
