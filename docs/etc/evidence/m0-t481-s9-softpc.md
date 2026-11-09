@@ -286,3 +286,16 @@ the actual dispatch target during an EXEC request. These observations locate
 the first hook only; they do not yet identify the executing DOS loader or a
 safe fix. Both runs reproduced empty native output, preserved the installation
 hashes, and cleaned their owned copies and stages.
+
+`win95-batch-z` used the production package and ran two otherwise comparable
+Win95 BATs: A invoked host CMD directly; B invoked the original guest
+`%COMSPEC% /z` with the same CMD and equivalent redirected output. Both BATs
+created DONE markers. A's output was empty, while B contained `NATIVE_B`,
+establishing that the original `/z` to `cmdExec` backend can execute and
+redirect the native command in this environment. The ordinary EXEC route still
+did not yield that output. The Win95 observer timed out after the markers, so
+this is not a normal-exit or complete lifecycle pass; the cause of the timeout
+was not determined. The original installation hashes matched and the owned
+guest and package copies were retired. This comparison narrows the missing
+boundary but does not prove exactly which classification or conversion step
+failed, or authorize a guest mutation.
