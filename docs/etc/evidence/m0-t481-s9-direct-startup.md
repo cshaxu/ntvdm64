@@ -203,6 +203,31 @@ the complete cause of these four new failures, or the environment of the
 owner's already-running successful CMD. A freshly launched CMD inheriting
 today's Explorer environment is not evidence about that earlier CMD session.
 
+The desktop Explorer that parented the earlier direct probe (PID 22072) has
+since exited. The current desktop ShellWindows dispatch launched a metadata
+probe from Explorer PID 28636, started at 2026-11-08 21:36:25 local time; its
+PSMODULEPATH value length was again 295, with no value recorded. A fresh
+current-package direct/ CMD-parent interactive comparison under that new
+Explorer (supervisor PID 5284, started 2026-11-09T06:13:26Z) again found the
+stage-owned NTVDM `illegal instruction` dialog in both cases. Both owned
+stages were retired by the runner. This confirms the failure remains after
+the Explorer change; equal variable lengths do not prove equal environments
+and this does not reconstruct the owner's prior successful CMD session.
+
+An actual interactive CMD control was then launched by current desktop
+Explorer PID 28636 in a fresh isolated stage. A test-owned process attached to
+that CMD's Console, waited for its prompt and typed `run16 command`; it saw
+no DOS banner within 20 seconds while the stage-owned NTVDM displayed an
+illegal-instruction dialog. The test-owned CMD, worker scope and stage were
+retired; no existing user terminal was touched. In an independent cleaned-
+environment control using the same input probe, the CMD prompt and DOS
+banner appeared and no illegal-instruction dialog was observed. The probe's
+later `ver`, `exit` and return marker were not observed, so neither complete
+interaction nor normal exit is claimed. The cleaned control was PowerShell-
+launched and therefore does not reconstruct the owner's actual CMD environment.
+These results support environment-sensitive initial COMMAND startup but do
+not explain what changed in the owner's earlier CMD or S7 sessions.
+
 The installed launch scripts set TEMP and TMP in their local CMD environment
 and call the matching PIF through a nested Run16. The native launch request
 carries the outer Run16 environment to its CMD child. For the PIF,
