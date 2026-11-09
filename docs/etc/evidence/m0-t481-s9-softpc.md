@@ -232,3 +232,11 @@ this control; it does not establish why the launcher returns 1 or prove that
 Win95 completed its normal shutdown. The first combined runner's second case
 did not start because its first case had replaced PATH; the separate retry
 above is the valid multitask-side observation.
+
+The current adjacent SoftPC main remains `6acc1193`. A further literal scan
+of this project's generated `base/cvidc/*.c` found no remaining assignments
+of the five affected original subfield offsets 1378, 1379, 1382, 1383 and
+1407. The selected accessor and existing actual-provider fixture are retained;
+this scan supports completeness for those exact offsets, not correctness of
+all C-VID field references or proof that every corrected rule was reached by
+a real guest.
