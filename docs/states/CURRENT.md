@@ -51,8 +51,10 @@ path must not be conflated with this batch path. A guest WinExec control also
 launched original Win95 PE32 Notepad and found its window in guest USER; PE32
 guest ownership must be preserved when addressing the separate DOS EXEC case.
 Production 54:0A tests also passed in two VMs under Win3.1 and Win95 using
-a short-lived test COMSPEC with a verified exit code; interactive input was
-not tested by those controls.
+a short-lived test COMSPEC with a verified exit code. A separate Win95 test
+focused two concurrently active VMs in turn and confirmed that guest USER
+synthesized keys reached the matching native child; physical keyboard and
+mouse input were not covered by that test.
 A production-only Win3.1 enhanced-mode test passed two VM identities, 320
 callbacks, four native command returns and normal guest exit.
 A fresh production-only Win95 test passed two VM identities, 320 callbacks

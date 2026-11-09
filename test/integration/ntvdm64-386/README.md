@@ -288,6 +288,13 @@ commands per guest VM on the ordinary host package. The guest validates the
 returned code, registers, flags and stack; the BOP54:0A interactive shell and
 physical keyboard/mouse are not tested by this case. Test-only markers are
 excluded from the DOS witness, and the package receives an isolated identity.
+For a guest-input witness, compile `comspec-input.c` with the native compiler
+and pass its executable as `-ProductionComspecImage` together with
+`-GuestInput`. Two concurrently active VM children each read a distinct key;
+the guest controller focuses their windows in turn and injects keys through
+Win16 USER. This exercises the production input path after that injection,
+but is not a physical keyboard or mouse test. Compiling the helper with
+`-DREVERSE_EXPECTATION=1` supplies a negative control that must fail.
 `-ShutdownWitness` additionally records that the controller reached the
 `ExitWindows` call site after both VMs retired and, if the call returns,
 records its return value. An absent return marker does not prove successful

@@ -11,10 +11,12 @@ param(
  [switch]$InitializationFailure,
  [switch]$NativeCommand,
  [string]$ProductionComspecImage,
+ [switch]$GuestInput,
  [switch]$InstallViaTool,
  [switch]$ShutdownWitness
 )
 $ErrorActionPreference='Stop'
+if($GuestInput -and !$ProductionComspecImage){throw 'GuestInput requires the input-reading COMSPEC witness'}
 if($ProductionComspecImage){
  if($NativeCommand){throw 'COMSPEC witness selects its own native mode'}
  $ProductionComspecImage=(Resolve-Path -LiteralPath $ProductionComspecImage).Path
@@ -77,7 +79,8 @@ foreach($id in 'A','B'){
  if($marker -lt 0){throw 'No VM role marker'}
  $bytes[$marker]=[byte][char]$id
  if($NativeCommand){
-  foreach($field in @(@('@VM_ENVIRONMENT@',"ROLE=$id`0ROUND=0`0PATH=$PackageRoot\system32;C:\Windows\System32;C:\Windows`0`0",512),@('@VM_DIRECTORY@',"$dest\PATCH",128))){
+  $readyEnv=if($GuestInput){"VM_READY_DIR=$dest\PATCH`0"}else{''}
+  foreach($field in @(@('@VM_ENVIRONMENT@',"ROLE=$id`0ROUND=0`0${readyEnv}PATH=$PackageRoot\system32;C:\Windows\System32;C:\Windows`0`0",512),@('@VM_DIRECTORY@',"$dest\PATCH",128))){
    $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf($field[0])
    $value=[Text.Encoding]::ASCII.GetBytes($field[1])
    if($marker -lt 0 -or $value.Length -ge $field[2]){throw 'Invalid native command field'}
@@ -117,6 +120,7 @@ if($Reuse){
  $defines=@('-DREUSE=1')
 }
 if($ShutdownWitness){$defines+=@('-DSHUTDOWN_WITNESS=1')}
+if($GuestInput){$defines+=@('-DPRODUCTION_GUEST_INPUT=1')}
 & nasm -f bin @defines "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
 if($LASTEXITCODE){throw 'Win16 controller build failed'}
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
@@ -124,6 +128,15 @@ $fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PAT
 if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}
 if($ShutdownWitness){$fields+= ,@('@VM_SHUTDOWN_PATH@',"$dest\PATCH\SHUT.BIN")}
 if($ShutdownWitness){$fields+= ,@('@VM_SHUTDOWN_RETURN_PATH@',"$dest\PATCH\RETN.BIN")}
+if($GuestInput){
+ $fields+= ,@('@VM_INPUT_READY_A@',"$dest\PATCH\READY-A.BIN")
+ $fields+= ,@('@VM_INPUT_READY_B@',"$dest\PATCH\READY-B.BIN")
+ foreach($id in 'A','B'){
+  $fields+= ,@("@VM_FOCUS_$id@","$dest\PATCH\FOCUS-$id.BIN")
+  $fields+= ,@("@VM_SENT_$id@","$dest\PATCH\SENT-$id.BIN")
+  $fields+= ,@("@VM_KEY_$id@","$dest\PATCH\KEY-$id.BIN")
+ }
+}
 foreach($field in $fields){
  $image=[Text.Encoding]::ASCII.GetString($bytes)
  $offset=$image.IndexOf($field[0],[StringComparison]::Ordinal)
@@ -197,7 +210,16 @@ try {
  $rows|ConvertTo-Json|Set-Content "$task/runtime/vm-pair.json"
  if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or [Math]::Max($rows[0].start,$rows[1].start) -ge [Math]::Min($rows[0].finish,$rows[1].finish)){throw 'Distinct concurrent VM identity not proved'}
  'PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks'
- if($ProductionComspecImage){'PASS production 54:0A with short-lived test COMSPEC in both DOS VMs; interactive input untested'}
+ if($GuestInput){
+  foreach($id in 'A','B'){
+   foreach($phase in 'READY','FOCUS','SENT','KEY'){
+    if(!(Test-Path -LiteralPath "$dest/PATCH/$phase-$id.BIN")){throw "Missing guest input phase $phase for $id"}
+   }
+   $key=[IO.File]::ReadAllBytes("$dest/PATCH/KEY-$id.BIN")
+   if($key.Length -ne 2 -or [BitConverter]::ToUInt16($key,0) -ne ([int][char]$id+32)){throw "Wrong native key receipt for $id"}
+  }
+  'PASS guest USER-synthesized keys reached each VM native 54:0A child; physical input untested'
+ } elseif($ProductionComspecImage){'PASS production 54:0A with short-lived test COMSPEC in both DOS VMs; interactive input untested'}
  elseif($NativeCommand){'PASS four actual native commands via production host with guest return, register, flags and stack checks'}
  if($Reuse){
   $b=[IO.File]::ReadAllBytes("$dest/PATCH/REUSE.BIN");Copy-Item "$dest/PATCH/REUSE.BIN" "$task/runtime/REUSE.BIN"
@@ -229,6 +251,15 @@ try {
  'Original Windows installation bytes verified unchanged'
 }
 } finally {
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
- Remove-OwnedGuestProbeCopy $dest $task $source
+ try {
+  if($GuestInput){
+   $witness="$task/input-witness";New-Item -ItemType Directory -Force $witness|Out-Null
+   foreach($name in 'READY-A.BIN','READY-B.BIN','FOCUS-A.BIN','FOCUS-B.BIN','SENT-A.BIN','SENT-B.BIN','KEY-A.BIN','KEY-B.BIN','A.BIN','B.BIN'){
+    if(Test-Path -LiteralPath "$dest/PATCH/$name"){Copy-Item -LiteralPath "$dest/PATCH/$name" -Destination $witness}
+   }
+  }
+ } finally {
+  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  Remove-OwnedGuestProbeCopy $dest $task $source
+ }
 }

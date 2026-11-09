@@ -270,6 +270,87 @@ push word [key_file-data]
 api 1,81
 send_test_key key_a,'A',0x1e,vm_a_name
 %endif
+%ifdef PRODUCTION_GUEST_INPUT
+%macro guest_input_stage 1
+push ds
+push word %1-data
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+push ax
+api 1,81
+%endmacro
+%macro send_guest_key 6
+%%ready:
+api 1,29
+push ds
+push word %1-data
+push word 0
+api 1,85                         ; _lopen: native child is reading input
+cmp ax,-1
+je %%ready
+push ax
+api 1,81
+%%window:
+api 1,29
+push word 0
+push word 0
+push ds
+push word production_welcome-data
+api 2,50                         ; FindWindow exact welcome title
+or ax,ax
+jz %%find_vm
+push ax
+push word 0x10
+push word 0
+push word 0
+push word 0
+api 2,110                        ; PostMessage WM_CLOSE in owned copy
+%%find_vm:
+push word 0
+push word 0
+push ds
+push word %2-data
+api 2,50                         ; FindWindow exact VM title
+or ax,ax
+jz %%window
+mov [production_hwnd-data],ax
+push ax
+api 2,44                         ; restore minimized VM
+push word [production_hwnd-data]
+api 2,59                         ; SetActiveWindow
+api 1,29
+api 2,60
+cmp ax,[production_hwnd-data]
+jne %%window
+guest_input_stage %4
+xor si,si
+xor di,di
+mov ax,%3
+mov bx,%3 >> 8
+and ax,0xff
+api 2,289                        ; guest USER keybd_event make
+mov ax,%3
+and ax,0xff
+or ah,0x80
+mov bx,%3 >> 8
+api 2,289                        ; guest USER keybd_event break
+guest_input_stage %5
+%%consumed:
+api 1,29
+push ds
+push word %6-data
+push word 0
+api 1,85                         ; native receipt before switching VM focus
+cmp ax,-1
+je %%consumed
+push ax
+api 1,81
+%endmacro
+send_guest_key production_ready_a,production_title_a,0x1e41,production_focus_a,production_sent_a,production_key_a
+send_guest_key production_ready_b,production_title_b,0x3042,production_focus_b,production_sent_b,production_key_b
+%endif
 .wait_a:
 api 1,29
 push ds
@@ -395,6 +476,28 @@ vm_a_name: db '@VM_A_PATH@',0
 times 128-($-vm_a_name) db 0
 vm_b_name: db '@VM_B_PATH@',0
 times 128-($-vm_b_name) db 0
+%ifdef PRODUCTION_GUEST_INPUT
+production_hwnd: dw 0
+production_title_a: db 'VM identity A',0
+production_title_b: db 'VM identity B',0
+production_welcome: db 0xbb,0xb6,0xd3,0xad,0
+production_ready_a: db '@VM_INPUT_READY_A@',0
+times 128-($-production_ready_a) db 0
+production_ready_b: db '@VM_INPUT_READY_B@',0
+times 128-($-production_ready_b) db 0
+production_focus_a: db '@VM_FOCUS_A@',0
+times 128-($-production_focus_a) db 0
+production_focus_b: db '@VM_FOCUS_B@',0
+times 128-($-production_focus_b) db 0
+production_sent_a: db '@VM_SENT_A@',0
+times 128-($-production_sent_a) db 0
+production_sent_b: db '@VM_SENT_B@',0
+times 128-($-production_sent_b) db 0
+production_key_a: db '@VM_KEY_A@',0
+times 128-($-production_key_a) db 0
+production_key_b: db '@VM_KEY_B@',0
+times 128-($-production_key_b) db 0
+%endif
 %ifdef SHUTDOWN_WITNESS
 shutdown_name: db '@VM_SHUTDOWN_PATH@',0
 times 128-($-shutdown_name) db 0

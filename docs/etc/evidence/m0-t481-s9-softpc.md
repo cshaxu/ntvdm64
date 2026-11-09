@@ -618,3 +618,19 @@ The latter contains the `QBASIC.EXE` and `/EDCOM` launcher strings, and
 CONAGENT failure is not itself proof that either of these specific files fails;
 it remains an independently recorded compatibility gap. File classification
 alone does not prove interactive operation or the complete child chain.
+
+`win95-guest-input-mode-restore` used the production host package and released
+drivers in an isolated copy of the installed Win95 tree. Two DOS VMs and their
+native 54:0A children were simultaneously live. A Win16 controller focused
+each VM in turn and used guest USER `keybd_event` to send its distinct key;
+the native children received A=`a` and B=`b`, and both guest continuations
+passed. The 320 callback identity, register, stack and flags checks also
+passed. The controller reached `ExitWindows`, but its return was not observed;
+this is not proof of normal shutdown. The original installation's bytes were
+verified unchanged and the temporary copy was removed.
+
+`win95-guest-input-reverse-mode-restore` compiled the same test helper with
+reversed expected keys. It failed the native continuation as intended, and
+the source installation was verified unchanged. These tests exercise guest
+USER-synthesized input through the production host path, not physical input,
+mouse interaction or the actual EDIT programs.
