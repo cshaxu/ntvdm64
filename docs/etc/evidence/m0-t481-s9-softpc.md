@@ -484,3 +484,13 @@ strings before creating a guest copy. The retained diagnostic image contains
 both; the ordinary production image was rejected immediately and no output or
 guest-copy directory was created. This is an applicability check, not proof
 that a package with those strings implements the test interface correctly.
+
+Original DOS source tracing identifies the existing per-program version
+mechanism: `Scan_Special_Entries` searches the loaded SETVER table by executable
+name; EXEC writes the selected `Special_Version` to the new PSP; `Get_Version`
+returns that PSP field. The installed private Win95 launch SETVER table was
+read-only inspected and contains WIN.COM=7.0 and VMM32.VXD=7.0, ending there;
+it does not contain CONAGENT.EXE. The original runtime SETVER table was also
+read-only inspected. This is a source-level explanation consistent with the
+observed AX=0005, not a runtime proof that adding an entry alone completes the
+Win95 operation. No guest binary or installed configuration was modified.
