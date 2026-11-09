@@ -35,8 +35,7 @@ read no environment variable values beyond the instruction bytes already
 displayed. At the owner's explicit subsequent approval, a second read-only
 probe scanned the live environment block in memory, without saving or printing
 values. It identified both the displayed instruction location and DS:203C as
-inside `PSMODULEPATH`, whose value is 295 bytes long: the two offsets within
-that value are 103 and 274 bytes respectively. The displayed `codex` bytes
+inside `PSMODULEPATH`, whose value is 295 bytes long. The displayed `codex` bytes
 therefore do not require an entry in PATH. The owner reports that their PATH
 has no `codex` entry; this finding is consistent with that report. The block
 observation and controlled copy trace establish the current overlap, but the
