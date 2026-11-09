@@ -522,3 +522,12 @@ that the call site was reached, not that Windows shut down normally. The first
 attempt failed before launch because the new PowerShell field was incorrectly
 nested; the corrected attempt above is the actual runtime result. Original
 installation hashes matched and the disposable copy was removed.
+
+`win95-shutdown-return` extended the call-site witness with a second file
+written only after `ExitWindows` returns, including its AX value. Both VM
+retirements and the pre-call marker were observed, the outer process exited
+with code 1, and the return marker was absent. This does not distinguish a
+successful non-returning shutdown from termination during shutdown. Prior
+same-host controls with and without the multitask drivers both returned 1, so
+this exit code alone is not evidence that the multitask driver caused it.
+The original installation hashes matched and the disposable copy was removed.

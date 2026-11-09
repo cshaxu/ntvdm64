@@ -340,6 +340,25 @@ push word 0                      ; DWORD reserved
 push word 0
 push word 0                      ; UINT return code
 api 2,7                          ; ExitWindows
+%ifdef SHUTDOWN_WITNESS
+mov [shutdown_return-data],ax
+push ds
+push word shutdown_return_name-data
+push word 0
+api 1,83                         ; _lcreat only if ExitWindows returned
+cmp ax,-1
+je fatal
+mov [file-data],ax
+push ax
+push ds
+push word shutdown_return-data
+push word 2
+api 1,86                         ; _lwrite return value
+cmp ax,2
+jne fatal
+push word [file-data]
+api 1,81                         ; _lclose
+%endif
 mov ax,0x4c00
 int 0x21
 fatal:
@@ -379,6 +398,9 @@ times 128-($-vm_b_name) db 0
 %ifdef SHUTDOWN_WITNESS
 shutdown_name: db '@VM_SHUTDOWN_PATH@',0
 times 128-($-shutdown_name) db 0
+shutdown_return: dw 0
+shutdown_return_name: db '@VM_SHUTDOWN_RETURN_PATH@',0
+times 128-($-shutdown_return_name) db 0
 %endif
 %ifdef KEYBOARD
 key_hwnd: dw 0

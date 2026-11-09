@@ -114,6 +114,7 @@ $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
 $fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"),@('@W31_BOOT_PATH@',"$dest\PATCH\BOOT.BIN"),@('@W31_READY_PATH@',"$dest\PATCH\READY.BIN"))
 if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}
 if($ShutdownWitness){$fields+= ,@('@VM_SHUTDOWN_PATH@',"$dest\PATCH\SHUT.BIN")}
+if($ShutdownWitness){$fields+= ,@('@VM_SHUTDOWN_RETURN_PATH@',"$dest\PATCH\RETN.BIN")}
 foreach($field in $fields){
  $image=[Text.Encoding]::ASCII.GetString($bytes)
  $offset=$image.IndexOf($field[0],[StringComparison]::Ordinal)
@@ -202,6 +203,12 @@ try {
   if(!(Test-Path "$dest/PATCH/SHUT.BIN")){throw 'Controller did not reach ExitWindows'}
   Copy-Item "$dest/PATCH/SHUT.BIN" "$task/runtime/SHUT.BIN"
   'PASS guest controller reached the ExitWindows call site after both VM retirements'
+  if(Test-Path "$dest/PATCH/RETN.BIN"){
+   $returned=[IO.File]::ReadAllBytes("$dest/PATCH/RETN.BIN")
+   if($returned.Length -ne 2){throw 'Invalid ExitWindows return witness'}
+   Copy-Item "$dest/PATCH/RETN.BIN" "$task/runtime/RETN.BIN"
+   Write-Host ('ExitWindows returned AX={0:X4}' -f [BitConverter]::ToUInt16($returned,0))
+  } else {'ExitWindows return not observed'}
  }
 
 

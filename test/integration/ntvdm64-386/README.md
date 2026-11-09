@@ -279,8 +279,9 @@ returned code, registers, flags and stack; the BOP54:0A interactive shell and
 physical keyboard/mouse are not tested by this case. Test-only markers are
 excluded from the DOS witness, and the package receives an isolated identity.
 `-ShutdownWitness` additionally records that the controller reached the
-`ExitWindows` call site after both VMs retired. It does not assert that
-Windows completed shutdown or that the outer process returned success.
+`ExitWindows` call site after both VMs retired and, if the call returns,
+records its return value. An absent return marker does not prove successful
+shutdown; the outer process result is reported separately.
 
 Add `-InstallViaTool` to install the two released drivers using the actual
 `tools/win-multitask/APPLY.CMD` on the isolated Win95 copy before starting the
