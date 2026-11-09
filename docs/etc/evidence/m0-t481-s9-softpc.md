@@ -240,3 +240,27 @@ of the five affected original subfield offsets 1378, 1379, 1382, 1383 and
 this scan supports completeness for those exact offsets, not correctness of
 all C-VID field references or proof that every corrected rule was reached by
 a real guest.
+
+`win95-batch-current3` revisited the existing S4 Win95 direct-batch boundary
+on the published production host and released pair of drivers, using a fresh
+`O:/WINDOWS` copy. Both BATs wrote their `DONE_A` / `DONE_B` markers while
+the native CMD redirection files were zero bytes; the observer saw the outer
+launcher exit with code 1. This reproduces the historical output symptom,
+not its root cause, and does not contradict the separately proven interactive
+COMMAND route. The original installation hashes remained unchanged; the owned
+guest copy and package stage were removed. The first two attempts did not run
+the workload because of test-script setup errors and are not runtime evidence.
+This remains a Win95 acceptance investigation, without a guest patch or a new
+claim about which guest interpreter emitted the old version error.
+
+`win95-batch-current5` repeated that failure with controls in each BAT. Guest
+`ver` wrote `MS-DOS Version 5.00.500`; the test COMSPEC was the isolated
+package's `SYSTEM32/COMMAND.COM`, and `%COMSPEC% /c echo CONTROL_A` wrote the
+expected text. Both direct native CMD outputs were still empty, both BATs
+finished, and the original installation remained unchanged. A read-only byte
+comparison found the exact historical `Incorrect DOS version` text in the
+deployed NT COMMAND.COM, but not in the installed Win95 COMMAND.COM; the
+original NT COMMAND source checks DOS version in `ConProc` before proceeding.
+These observations suggest a possible version-check path but do not prove
+which process displayed the historical message or why this particular native
+command did not reach admission. No guest or runtime change is inferred.
