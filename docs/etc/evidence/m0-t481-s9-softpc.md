@@ -53,6 +53,17 @@ result file. This intermittent failure remains unclassified. The observer
 exit code alone does not prove which fail-fast site ran. Each run verified the
 source Win95 installation bytes unchanged. The failed run is not a pass.
 
+Two subsequent debugger-observed repeats also passed the native-command
+witness and recorded no `0xC0000420`; debugger scheduling differs, so neither
+is evidence that the prior failure was fixed. The status equals the explicit
+invalid virtual-instance fail-fast code, but no exception record or stack was
+retained for the failed run, and that equality does not establish its source.
+An additional ordinary production-host run with `-Reuse -InstallViaTool` passed
+actual VMM handle reuse, rejection of direct and queued old-generation wakes,
+new-generation counted completion and 320 callback checks. Its source Win95
+installation was verified unchanged. None of these runs proves normal Win95
+shutdown; the recorded guest process exit was 1.
+
 SoftPC `1ec0d551` virtual text aperture changes are already registered under
 DIV-545; `8c27a3b6` CHAIN2 reads are already DIV-889. CPL access, slave EOI
 and virtual text height are already covered by DIV-891, DIV-883 and DIV-890.
