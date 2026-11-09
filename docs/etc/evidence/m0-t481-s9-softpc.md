@@ -434,3 +434,19 @@ returned 0 but does not establish the intended agent path. It therefore does
 not prove that 7.0 resolves the operation, and no equivalent substitution was
 added to product code. The source installation was hash-verified unchanged
 and the temporary guest copy retired.
+
+`win95-batch-dos7-scoped` repeated the test-only version substitution with
+the caller segment constrained to the observed CONAGENT initialization.
+The observer timed out, neither VM produced the requested completion record,
+and the harness reported missing native output. This still does not show a
+working version-only remedy. The original source matched its recorded hashes
+and the disposable copy was removed.
+
+`win95-editors-production` ran the formal two-VM editor fixture with mouse
+menu and save witnesses against package-rotate (NTVDM SHA-256
+`695801153810E17C0767A42DE1D735CC730307578147E1CD31DAB81018AB3D1A`,
+matching deployed O:/winnt) and the released drivers. The test observed its
+startup READY marker, but the observer timed out and both saved witness files
+remained empty; it did not establish editor interaction or normal shutdown.
+It is a failure, not a substitute for the earlier diagnostic-host pass.
+The source installation hashes matched and the owned guest copy was removed.
