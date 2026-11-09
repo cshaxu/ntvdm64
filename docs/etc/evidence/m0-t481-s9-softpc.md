@@ -220,3 +220,15 @@ were verified unchanged and the owned copy and package stage were removed.
 The observer again recorded an exit code of 1. This repeats the existing
 runtime evidence but does not prove normal Win95 shutdown or production-host
 editor and mouse interaction.
+
+`win95-shutdown-original` and `win95-shutdown-retry-multitask` compared two
+fresh `O:/WINDOWS` copies using the same released host and the same Win16
+startup/ExitWindows witness. The first copy had both multitask drivers
+removed; the second had both installed. Each recorded the witness boot and
+Program Manager readiness files, then the observed launcher exited with code
+1. Both source inventories and hashes were verified and the owned copies and
+stages removed. Thus exit 1 is not specific to installing these drivers in
+this control; it does not establish why the launcher returns 1 or prove that
+Win95 completed its normal shutdown. The first combined runner's second case
+did not start because its first case had replaced PATH; the separate retry
+above is the valid multitask-side observation.
