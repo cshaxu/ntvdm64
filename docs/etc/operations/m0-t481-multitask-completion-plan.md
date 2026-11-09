@@ -2194,3 +2194,35 @@ Win95 and completes the remaining applicable multitask and manual-acceptance
 evidence after S9. S8 remains active; this is a sequence correction, not S9
 admission or a waiver of outstanding delivery. The existing T481 integrated
 delivery obligations remain in force.
+
+## Current S9/S10 handoff status
+
+The owner subsequently accepted S8; the preceding historical statement that
+S8 remains active is superseded. S9 is active under CURRENT. The latest
+published coherent 11-image host package and W31 driver pair are hash-verified;
+S9 owner revalidation of direct Win+R startup remains pending.
+
+Current production-only VM witnesses cover Win3.1 and Win95 54:08 and
+54:0A with short-lived test COMSPEC, including nonzero child exit propagation,
+registers, flags, stack and both VM identities. They do not establish actual
+interactive input. Win95 editor keyboard/mouse/save evidence uses a separate
+diagnostic host and must not be presented as production input acceptance.
+Win95 controller shutdown reaches the ExitWindows call site after both VMs
+retire, but outer exit 1 is also seen without multitask drivers; normal Win95
+shutdown remains unproved.
+
+The direct Win95 DOS EXEC/PE32 failure is reproduced separately: original
+CONAGENT receives DOS 5.0 while requesting 7.0, and the existing private SETVER
+table has no CONAGENT entry. A complete policy-compliant correction and its
+post-version behavior are not proved. Preserve guest immutability and the
+separate successful guest WinExec ownership; do not treat this as a passing
+test or generalize it to the 54:08/0A production witnesses.
+
+S10 retains the owner's final Win95 multitask interaction and integrated
+acceptance, including actual input/presentation and coherent publication.
+`O:/WINDOWS` currently has no installed multitask driver entries and its
+WIN.CMD points to a removed test stage. Automatic review rejected direct
+repair of that installation, which remains unchanged; isolated tests install
+into separately owned copies. See S9 evidence for the exact tests, source
+hashes, boundaries and cleanup. No S9, S10 or T closure follows from this
+handoff update.
