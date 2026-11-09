@@ -715,6 +715,13 @@ desktop. This proves Escape reached that native test program in this run,
 not that EDIT.EXE consumed it: the editor may use a different Console mode or
 read API. Its temporary `O:/tmp/KREC.EXE` was hash-checked and removed.
 
+`win95-native-escape-vt` repeated that route with a test-owned native program
+which enabled `ENABLE_VIRTUAL_TERMINAL_INPUT` and read through `ReadFile`.
+It observed byte 27, returned to the DOS prompt, and the desktop was visible
+after EXIT. The installed EDIT.EXE imports `NtReadFile`, but its exact mode
+and complete input sequence were not captured; this control does not prove
+the editor received Escape. The temporary probe was hash-checked and removed.
+
 `win95-mouse-menu-burst` queued 100 alternating mouse-motion records before
 repeating the same menu, VER, DIR and EXIT scenario. Captures and console
 snapshots show the menu path, command output and desktop return; no blue screen
