@@ -24,6 +24,7 @@ param(
  [switch]$Continuation,
  [switch]$RealCommand,
  [switch]$ProductionNative,
+ [string]$ProductionComspecImage,
  [switch]$NestedCommand,
  [switch]$ReentrantCommand,
  [switch]$NestedRedirect,
@@ -58,8 +59,9 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
-if($ProductionNative){
- if($Continuation -or $RealCommand){throw 'ProductionNative selects its own continuation mode'}
+if($ProductionNative -or $ProductionComspecImage){
+ if($Continuation -or $RealCommand -or ($ProductionNative -and $ProductionComspecImage)){throw 'Production modes select their own continuation'}
+ if($ProductionComspecImage){$ProductionComspecImage=(Resolve-Path -LiteralPath $ProductionComspecImage).Path}
  $Continuation=$true; $RealCommand=$true
 }
 if($VisibleResizeRoundTrip){$VisibleResizeCommand=$true}
@@ -121,7 +123,8 @@ $dosDefines=@()
 if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
 if($RealCommand){$dosDefines+='-DREAL_COMMAND=1'}
-if($ProductionNative){$dosDefines+='-DPRODUCTION_NATIVE_ONLY=1'}
+if($ProductionNative -or $ProductionComspecImage){$dosDefines+='-DPRODUCTION_NATIVE_ONLY=1'}
+if($ProductionComspecImage){$dosDefines+='-DPRODUCTION_COMSPEC_ONLY=1'}
 if($GuestGridControl){$dosDefines+='-DGUEST_GRID_CONTROL=1'}
 if($GuestCustomFont){$dosDefines+='-DGUEST_CUSTOM_FONT=1'}
 if($GuestCodepage){$dosDefines+=('-DGUEST_CODEPAGE='+$GuestCodepage)}
@@ -309,6 +312,7 @@ $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCE
 $nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
 $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
+if($ProductionComspecImage){$env:COMSPEC=$ProductionComspecImage}
 if($InitializationFailure){$env:MVDM_INIT_FAILURE_REPORT="$task/initialization-rollback.bin"}
 if($RealCommand){$env:MVDM_REAL_COMMAND='1'}
 if($NestedCommand){$env:MVDM_NESTED_COMMAND='1'}
@@ -435,7 +439,7 @@ try {
     Write-Host "$id actual font nonzero=$($row.fontNonzeroBytes) preservation-checks=$($row.fontPreservationChecks) palette-checks=$($row.palettePreservationChecks)"
     if(!$row.fontNonzeroBytes -or $row.fontPreservationChecks -ne 3){throw "Actual nonempty guest glyph preservation not proved: $id"}
    }
-   $expectedContinuations=if($ProductionNative){2}else{3}
+   $expectedContinuations=if($ProductionComspecImage){1}elseif($ProductionNative){2}else{3}
    if($row.continuationCount -ne $expectedContinuations -or $row.continuationErrors){throw "Detached BOP continuation state failed: $id"}
   }
   if($Keyboard){
@@ -506,7 +510,8 @@ try {
   }}
   "PASS real native unread-input $UnreadInputMode returned through guest BIOS peek/read in both VMs and both command rounds"
  }
- if($ProductionNative){'PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested'}
+ if($ProductionComspecImage){'PASS production 54:0A with short-lived test COMSPEC in both DOS VMs; interactive input untested'}
+ elseif($ProductionNative){'PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested'}
  elseif($RealCommand){'PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested'}
  elseif($Continuation){'PASS 54:08 AH=0/AH=1 and 54:0A in both actual DOS VMs; diagnostic results only'}
  if($Reuse){Confirm-Reuse $rows}

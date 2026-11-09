@@ -328,7 +328,11 @@ jne %%error
 %ifdef GUEST_GRID_CONTROL
 mov word [grid_stage], 20
 %endif
+%ifdef PRODUCTION_COMSPEC_ONLY
+cmp eax, 0x5432002b
+%else
 cmp eax, 0x54320000
+%endif
 jne %%error
 %else
 cmp byte [role], 'A'
@@ -690,9 +694,13 @@ pop ax
 inc word [continuation_errors]
 %%done:
 %endmacro
+%ifndef PRODUCTION_COMSPEC_ONLY
 continuation_case 8
 continuation_case 8, 1
+%endif
 %ifndef PRODUCTION_NATIVE_ONLY
+continuation_case 10
+%elifdef PRODUCTION_COMSPEC_ONLY
 continuation_case 10
 %endif
 %ifdef NESTED_COMMAND

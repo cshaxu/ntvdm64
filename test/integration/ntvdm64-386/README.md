@@ -177,6 +177,12 @@ host, the `PRODUCTION_NATIVE_ONLY` DOS witness and two real 54:08 commands
 per VM. It verifies VM identity, callback and return state without the
 diagnostic BOP interposition; it does not cover 54:0A or physical input.
 
+`-ProductionComspecImage` on the Win3.1 or Win95 identity runner selects
+the ordinary production host and issues 54:0A once per VM. Build
+`comspec-exit.c` as a native console executable and pass its path; the
+witness requires its distinctive exit code 43 and preserves the callback
+registers, flags and stack. This is not an interactive-input test.
+
 ## Real native unread-input handback
 
 The continuation witnesses execute test-only BOP54:254 markers. They require a

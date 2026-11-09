@@ -9,10 +9,16 @@ param(
  [switch]$Reuse,
  [switch]$InitializationFailure,
  [switch]$NativeCommand,
+ [string]$ProductionComspecImage,
  [switch]$InstallViaTool,
  [switch]$ShutdownWitness
 )
 $ErrorActionPreference='Stop'
+if($ProductionComspecImage){
+ if($NativeCommand){throw 'COMSPEC witness selects its own native mode'}
+ $ProductionComspecImage=(Resolve-Path -LiteralPath $ProductionComspecImage).Path
+ $NativeCommand=$true
+}
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
@@ -50,6 +56,7 @@ if(!$InitializationFailure){
 
 $dosDefines=@('-DWIN95_ORDERED_PROOF=1')
 if($NativeCommand){$dosDefines+=@('-DCONTINUATION=1','-DREAL_COMMAND=1','-DPRODUCTION_NATIVE_ONLY=1')}
+if($ProductionComspecImage){$dosDefines+='-DPRODUCTION_COMSPEC_ONLY=1'}
 & nasm -f bin @dosDefines "$PSScriptRoot/dos-identity.asm" -o "$task/identity.com"
 if($LASTEXITCODE){throw 'DOS identity witness build failed'}
 foreach($id in 'A','B'){
@@ -128,6 +135,7 @@ $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCE
 $nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
 $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
+if($ProductionComspecImage){$env:COMSPEC=$ProductionComspecImage}
 try {
 
  . "$repo/tests/observation/isolated_package_cleanup.ps1"
@@ -173,7 +181,7 @@ try {
   Copy-Item "$dest/PATCH/$id.BIN" "$task/runtime/$id.BIN"
   $expectedLength=if($NativeCommand){76}else{72}
   if($data.Length -ne $expectedLength -or [Text.Encoding]::ASCII.GetString($data,0,4) -ne 'VMID'){throw 'Invalid witness output'}
-  if($NativeCommand -and ([BitConverter]::ToUInt16($data,72) -ne 2 -or [BitConverter]::ToUInt16($data,74))){throw "Real native continuation failed: $id"}
+  if($NativeCommand -and ([BitConverter]::ToUInt16($data,72) -ne $(if($ProductionComspecImage){1}else{2}) -or [BitConverter]::ToUInt16($data,74))){throw "Real native continuation failed: $id"}
   $row=[ordered]@{name=$id;signature=[BitConverter]::ToUInt32($data,4);vm=[BitConverter]::ToUInt32($data,8);generation=[BitConverter]::ToUInt64($data,12);status=[BitConverter]::ToUInt16($data,20);negativeStatus=[BitConverter]::ToUInt16($data,22);negativeResult=[BitConverter]::ToUInt32($data,24);start=[BitConverter]::ToUInt32($data,28);finish=[BitConverter]::ToUInt32($data,32)}
   if($row.signature -ne 0x4e544d56 -or !$row.vm -or !$row.generation -or ($row.status -band 1) -or !($row.negativeStatus -band 1) -or $row.negativeResult -ne 1){throw "Identity/negative API failed: $id"}
   $row.callback=[BitConverter]::ToUInt32($data,36)
@@ -187,7 +195,8 @@ try {
  $rows|ConvertTo-Json|Set-Content "$task/runtime/vm-pair.json"
  if($rows[0].vm -eq $rows[1].vm -or $rows[0].generation -eq $rows[1].generation -or [Math]::Max($rows[0].start,$rows[1].start) -ge [Math]::Min($rows[0].finish,$rows[1].finish)){throw 'Distinct concurrent VM identity not proved'}
  'PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks'
- if($NativeCommand){'PASS four actual native commands via production host with guest return, register, flags and stack checks'}
+ if($ProductionComspecImage){'PASS production 54:0A with short-lived test COMSPEC in both DOS VMs; interactive input untested'}
+ elseif($NativeCommand){'PASS four actual native commands via production host with guest return, register, flags and stack checks'}
  if($Reuse){
   $b=[IO.File]::ReadAllBytes("$dest/PATCH/REUSE.BIN");Copy-Item "$dest/PATCH/REUSE.BIN" "$task/runtime/REUSE.BIN"
   if($b.Length -ne 36 -or [Text.Encoding]::ASCII.GetString($b,0,4) -ne 'VRUS'){throw 'Invalid reuse report'}

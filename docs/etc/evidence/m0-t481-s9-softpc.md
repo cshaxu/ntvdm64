@@ -531,3 +531,15 @@ successful non-returning shutdown from termination during shutdown. Prior
 same-host controls with and without the multitask drivers both returned 1, so
 this exit code alone is not evidence that the multitask driver caused it.
 The original installation hashes matched and the disposable copy was removed.
+
+`win31-production-comspec43` and `win95-production-comspec43` ran the
+ordinary production package and released drivers with a test-only native
+COMSPEC returning 43. In each system both concurrent DOS VMs issued 54:0A,
+observed that exact exit value with preserved registers, flags and stack,
+and passed the 320 callback checks. Win3.1 reached desktop and exited
+normally; the Win95 observer exited 1 after reaching the ExitWindows call
+site, without a return witness. The initial Win3.1 zero-exit COMSPEC control
+also passed. This tests actual execution and continuation, not physical or
+interactive shell input. Both source installations matched their hashes and
+the disposable copies were removed. After adding this mode, production 54:08
+regressions passed again for both Win3.1 and Win95.
