@@ -639,3 +639,14 @@ mouse interaction or the actual EDIT programs.
 with VM B focused and keyed before VM A. Both distinct receipts and all 320
 callback checks passed. The ExitWindows return remained unobserved; the
 original installation was verified unchanged and the owned copy removed.
+
+The owner reported that Win95 blue-screened on mouse movement immediately
+after desktop startup. `win95-mouse-repro3` and `win95-mouse-burst100` ran
+the installed production package and addon pair on a private desktop. A
+test-only frontend hook delivered one, then 100 alternating relative motion
+records to the production input sink; the sink acknowledged both deliveries.
+The captured frame after each run still showed the Win95 desktop. These runs
+did not reproduce the report and do not exercise physical Raw Input or prove
+the owner's failure absent. The observer ended each owned run after capture.
+The first hook attempt targeted a window recreated during startup and did not
+deliver input; it is not a negative test. No product or guest code was changed.
