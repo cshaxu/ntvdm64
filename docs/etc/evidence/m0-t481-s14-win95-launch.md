@@ -235,6 +235,15 @@ return was not observed. DOSONLY=1 ran an actual guest DOS program without a
 native CUI worker; its test fixture retired the session, so it is not evidence
 of normal guest shutdown. The source Win95 installation remained unchanged.
 
+After the DEM pathname consolidation, package
+`092da729-caf9-4a89-8f2e-305e368faacf` was also tested with the actual
+Win3.1 setup-selection script in isolated installation copies. DOSONLY=0
+and DOSONLY=1 each produced the expected profiles and driver selection; both
+Standard and 386 Enhanced started and exited normally in each mode, and the
+four configured program groups parsed. The fixture still substitutes a
+successful original Setup invocation, so this is not an automated fresh
+Setup result; the owner's separate manual fresh-install report is above.
+
 An additional Win95 DOSONLY=0 shutdown witness reached `ExitWindows` after
 both test VMs retired. The observed root Run16 and NTVDM process exit codes
 were both 1; NTCON exited 0. Two earlier no-addon controls also returned 1,
