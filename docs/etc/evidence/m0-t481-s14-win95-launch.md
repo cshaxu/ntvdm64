@@ -124,6 +124,12 @@ empty-group symptom on the original Program Manager's DDE path and confirms
 that the fix repairs this path; it does not substitute for a complete fresh
 original Setup run. A PowerShell null/empty assertion in the prior profile
 test was also corrected so an empty file cannot satisfy the check.
+The DDE witness was subsequently expanded to create all four groups named in
+the original new-install INF: Main, Accessories, Games and StartUp. The same
+four GRP files parsed in all three runs. With the pre-fix host, PROGMAN.INI
+remained zero bytes; with the fixed host, all four references were present in
+both DOSONLY=0 and DOSONLY=1, and both Windows sessions exited normally.
+This is an original Program Manager DDE comparison, not a full Setup rerun.
 
 Review of the retained original-Setup captures narrows why that attempt was
 incomplete: copying reached 91%, then Setup displayed “Cannot read from drive

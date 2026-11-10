@@ -140,10 +140,11 @@ mov [dde_conv+2-data],dx
 or ax,dx
 jz .dde_finish
 mov word [dde_stage-data],5
+%macro create_group 2
 push ds
-push word dde_command-data
+push word %1-data
 push word 0
-push word dde_command_end-dde_command
+push word %2-%1
 push word [dde_conv+2-data]
 push word [dde_conv-data]
 push word 0
@@ -159,6 +160,12 @@ mov [dde_transaction-data],ax
 mov [dde_transaction+2-data],dx
 or ax,dx
 jz .dde_finish
+inc word [dde_result-data]
+%endmacro
+create_group dde_main,dde_main_end
+create_group dde_accessories,dde_accessories_end
+create_group dde_games,dde_games_end
+create_group dde_startup,dde_startup_end
 mov word [dde_stage-data],6
 push word [dde_conv+2-data]
 push word [dde_conv-data]
@@ -234,8 +241,14 @@ dde_service_h: dd 0
 dde_topic_h: dd 0
 dde_conv: dd 0
 dde_service: db 'PROGMAN',0
-dde_command: db '[CreateGroup(NTDVM_TEST,O:\tmp\q31\PATCH\DDERUN.GRP)]',0
-dde_command_end:
+dde_main: db '[CreateGroup(Main,O:\tmp\q31\PATCH\DDEMAIN.GRP)]',0
+dde_main_end:
+dde_accessories: db '[CreateGroup(Accessories,O:\tmp\q31\PATCH\DDEACC.GRP)]',0
+dde_accessories_end:
+dde_games: db '[CreateGroup(Games,O:\tmp\q31\PATCH\DDEGAME.GRP)]',0
+dde_games_end:
+dde_startup: db '[CreateGroup(StartUp,O:\tmp\q31\PATCH\DDESTART.GRP)]',0
+dde_startup_end:
 dde_result_name: db 'O:\tmp\q31\PATCH\DDE.BIN',0
 data_end:
 image_end:

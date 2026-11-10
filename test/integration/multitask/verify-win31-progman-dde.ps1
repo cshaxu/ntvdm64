@@ -18,23 +18,27 @@ try {
  if($LASTEXITCODE){throw 'Win16 DDE witness assembly failed'}
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest `
   -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/dde.exe" -Cases $Case
- foreach($name in 'PROGMAN.INI','PATCH/DDE.BIN','PATCH/DDERUN.GRP'){
+ $groups=@('DDEMAIN.GRP','DDEACC.GRP','DDEGAME.GRP','DDESTART.GRP')
+ foreach($name in @('PROGMAN.INI','PATCH/DDE.BIN')+@($groups|ForEach-Object {"PATCH/$_"})){
   if(Test-Path -LiteralPath "$dest/$name" -PathType Leaf){Copy-Item -LiteralPath "$dest/$name" -Destination "$task/$([IO.Path]::GetFileName($name))"}
  }
  if(!(Test-Path -LiteralPath "$dest/PATCH/DDE.BIN" -PathType Leaf)){throw 'DDE witness result missing'}
  $result=[IO.File]::ReadAllBytes("$dest/PATCH/DDE.BIN")
- if($result.Length -ne 8 -or [BitConverter]::ToUInt16($result,0) -ne 6){throw 'DDE transaction did not complete'}
- if(!(Test-Path -LiteralPath "$dest/PATCH/DDERUN.GRP" -PathType Leaf)){throw 'DDE group missing'}
- & "$repo/assets/release/GRP.EXE" show "$dest/PATCH/DDERUN.GRP"
- if($LASTEXITCODE){throw 'DDE group is invalid'}
+ if($result.Length -ne 8 -or [BitConverter]::ToUInt16($result,0) -ne 6 -or
+    [BitConverter]::ToUInt16($result,2) -ne $groups.Count){throw 'DDE transactions did not complete'}
+ foreach($group in $groups){
+  if(!(Test-Path -LiteralPath "$dest/PATCH/$group" -PathType Leaf)){throw "DDE group missing: $group"}
+  & "$repo/assets/release/GRP.EXE" show "$dest/PATCH/$group"
+  if($LASTEXITCODE){throw "DDE group invalid: $group"}
+ }
  $ini=[IO.File]::ReadAllText("$dest/PROGMAN.INI")
- $hasGroup=$ini -match '(?im)^Group\d+\s*=\s*[^\r\n]*DDERUN\.GRP\s*$'
+ $found=@($groups|Where-Object {$ini -match ('(?im)^Group\d+\s*=\s*[^\r\n]*'+[regex]::Escape($_)+'\s*$')})
  if($ExpectUnwrittenProfile){
-  if($ini.Length -ne 0 -or $hasGroup){throw 'Baseline did not reproduce the unwritten empty profile'}
-  'PASS baseline DDE creates group but leaves original profile empty'
+  if($ini.Length -ne 0 -or $found.Count){throw 'Baseline did not reproduce the unwritten empty profile'}
+  'PASS baseline DDE creates four groups but leaves original profile empty'
  } else {
-  if(!$ini.Length -or !$hasGroup){throw 'DDE group is not referenced by the profile'}
-  'PASS original Program Manager DDE group creation with initially empty profile'
+  if(!$ini.Length -or $found.Count -ne $groups.Count){throw 'DDE groups are not all referenced by the profile'}
+  'PASS original Program Manager DDE creates four groups with initially empty profile'
  }
 } finally {
  try {foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Source changed: $($row.path)"}}}
