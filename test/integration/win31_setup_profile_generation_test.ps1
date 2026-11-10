@@ -7,6 +7,8 @@ $patch=Join-Path $root 'media/PATCH';$bin=Join-Path $root 'bin';$install=Join-Pa
 New-Item -ItemType Directory -Path $patch,$bin,(Join-Path $install 'SYSTEM')|Out-Null
 Copy-Item -LiteralPath "$repo/tools/win31-setup/SETUP.CMD" -Destination "$patch/SETUP.CMD"
 Copy-Item -LiteralPath "$repo/assets/release/PIF.EXE" -Destination "$patch/PIF.EXE"
+Copy-Item -LiteralPath "$repo/tools/win-multitask/APPLY.CMD" -Destination "$patch/MULTITASK.CMD"
+foreach($name in 'HASH.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item -LiteralPath "$repo/assets/release/$name" -Destination "$patch/$name"}
 @('@echo off','exit /b 0')|Set-Content "$bin/run16.cmd" -Encoding ascii
 $before=@{}
 foreach($name in @('WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','SYSTEM/MOUSE.DRV','SYSTEM.INI')){
@@ -16,7 +18,8 @@ $oldPath=$env:PATH;$oldNoPause=$env:NTVDM_SETUP_TEST_NO_PAUSE
 try{
     $env:PATH="$bin;$oldPath";$env:NTVDM_SETUP_TEST_NO_PAUSE='1'
     foreach($round in 1..2){
-        $text=($install|& cmd.exe /d /c "$patch/SETUP.CMD" 2>&1|Out-String)
+        [IO.File]::WriteAllText("$root/input.txt","$install`r`n1`r`n",[Text.Encoding]::ASCII)
+        $text=(& cmd.exe /d /c "`"$patch/SETUP.CMD`" < `"$root/input.txt`"" 2>&1|Out-String)
         if($LASTEXITCODE){throw "Profile generation $round failed: $text"}
     }
     $profiles=Join-Path $install 'PATCH'
@@ -33,7 +36,8 @@ try{
     $saved=@{};foreach($name in $files){$saved[$name]=(Get-FileHash "$profiles/$name").Hash}
     [IO.File]::AppendAllText("$profiles/CONFIG.NT","`r`nREM user configuration`r`n")
     $custom=(Get-FileHash "$profiles/CONFIG.NT").Hash
-    $text=($install|& cmd.exe /d /c "$patch/SETUP.CMD" 2>&1|Out-String)
+    [IO.File]::WriteAllText("$root/input.txt","$install`r`n1`r`n",[Text.Encoding]::ASCII)
+    $text=(& cmd.exe /d /c "`"$patch/SETUP.CMD`" < `"$root/input.txt`"" 2>&1|Out-String)
     if($LASTEXITCODE -ne 5 -or !$text.Contains('Preserve changed profile')){throw 'Changed profile was not preserved'}
     foreach($name in $files){$expected=if($name -eq 'CONFIG.NT'){$custom}else{$saved[$name]};if((Get-FileHash "$profiles/$name").Hash -ne $expected){throw "Failed preparation changed $name"}}
     if(Test-Path "$profiles/W31PROFILES"){throw 'Profile staging directory remains'}
@@ -43,5 +47,24 @@ try{
         !$before.ContainsKey($_.FullName)
     })
     if($unexpected.Count){throw "Profile-only finalization added an unexpected installed file: $($unexpected[0].FullName)"}
-    'PASS Setup profile generation/repeat, legacy PIF fields, conflict preservation and unchanged installed inputs; Setup execution is a test shim'
+    if((Get-Content "$profiles/CONFIG.NT" -Raw) -notmatch '(?im)^dosonly\s*$'){throw 'DOSONLY=1 profile did not enable DOSONLY'}
+    foreach($name in 'INSIGNIA.386','NTVDM64.386'){if(Test-Path "$profiles/$name"){throw "DOSONLY=1 installed $name"}}
+    $native=Join-Path $root 'N';New-Item -ItemType Directory -Path (Join-Path $native 'SYSTEM')|Out-Null
+    foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE'){[IO.File]::WriteAllText((Join-Path $native $name),'fixture')}
+    $nativeGuest=@{};foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE'){$nativeGuest[$name]=(Get-FileHash (Join-Path $native $name)).Hash}
+    [IO.File]::WriteAllText("$native/SYSTEM.INI","[386Enh]`r`n")
+    foreach($round in 1..2){
+        [IO.File]::WriteAllText("$root/input.txt","$native`r`n0`r`n",[Text.Encoding]::ASCII)
+        $text=(& cmd.exe /d /c "`"$patch/SETUP.CMD`" < `"$root/input.txt`"" 2>&1|Out-String)
+        if($LASTEXITCODE){throw "DOSONLY=0 profile generation $round failed: $text"}
+    }
+    $nativePatch=Join-Path $native 'PATCH'
+    if((Get-Content "$nativePatch/CONFIG.NT" -Raw) -match '(?im)^dosonly\s*$'){throw 'DOSONLY=0 profile enabled DOSONLY'}
+    foreach($name in 'INSIGNIA.386','NTVDM64.386'){
+        if((Get-FileHash "$nativePatch/$name").Hash -ne (Get-FileHash "$patch/$name").Hash){throw "Wrong installed driver: $name"}
+        if(!(Get-Content "$native/SYSTEM.INI" -Raw).Contains("$native\PATCH\$name")){throw "Missing driver entry: $name"}
+    }
+    foreach($name in 'WINSTD.PIF','WIN386.PIF'){if(!(Test-Path "$nativePatch/$name")){throw "Missing $name"}}
+    foreach($name in $nativeGuest.Keys){if((Get-FileHash (Join-Path $native $name)).Hash -ne $nativeGuest[$name]){throw "Guest binary changed: $name"}}
+    'PASS both DOSONLY modes, driver staging, repeated profile generation and conflict preservation; Setup execution is a test shim'
 }finally{$env:PATH=$oldPath;$env:NTVDM_SETUP_TEST_NO_PAUSE=$oldNoPause}

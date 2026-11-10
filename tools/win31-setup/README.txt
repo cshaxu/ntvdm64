@@ -3,8 +3,10 @@ Windows 3.1 Setup
 
 Run the tool's APPLY.CMD and select a copy of the installation media. Then run
 that media copy's PATCH\SETUP.CMD, select an installation directory in Setup,
-and provide the same directory when asked. The installed directory receives
-its own PATCH\WINSTD.CMD and PATCH\WIN386.CMD launchers.
+and provide the same directory when asked. After Setup, select DOSONLY=0 for
+host multitask payloads or DOSONLY=1 for guest-only DOS execution. Mode 0
+installs the released multitask drivers. The installed directory receives its
+own PATCH\WINSTD.CMD and PATCH\WIN386.CMD launchers.
 
 UNAPPLY.CMD restores the compressed media files directly from adjacent .BAK
 files and deletes the entire media PATCH directory, including user files.

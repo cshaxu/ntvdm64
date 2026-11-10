@@ -32,6 +32,11 @@ S13 retains the other multitask gaps, normal Win95 shutdown evidence and
 integrated acceptance. The direct-start large inherited-environment boundary
 remains recorded in [S9 direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
 
+S13 setup implementation and its coherent host package have passed the
+recorded four-mode and Full checks and been published. The four-mode probe
+uses a Setup executable shim; a fresh original interactive Setup run is not
+yet established by that evidence. See [S13 evidence](../etc/evidence/m0-t481-s13-win31-setup.md).
+
 S14 enhances `tools/win95-launch` with the same DOSONLY=0 / DOSONLY=1
 selection and matching launch configuration. For DOSONLY=0, install the
 released `insignia.386` and `ntvdm64.386` in the installed Win95 `PATCH`

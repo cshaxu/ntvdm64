@@ -1,7 +1,9 @@
 # Windows multitask addon
 
 Close Windows, then run `APPLY.CMD` and enter the installed Windows directory,
-or pass that path as its first argument. The command detects a prepared Win3.1
+or pass that path as its first argument. A second argument may specify the
+directory containing the released drivers and HASH.EXE, for a self-contained
+setup package. The command detects a prepared Win3.1
 or Win95 installation, copies the two released `.386` drivers into `PATCH`,
 and adds their entries under `[386Enh]` in `SYSTEM.INI`. On Win3.1 it also
 adds `device=*vmd` if absent, preserving an existing matching entry. It does

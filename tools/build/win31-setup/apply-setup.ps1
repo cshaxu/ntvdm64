@@ -29,6 +29,10 @@ $files['MOUSE31.DRV'] = [IO.File]::ReadAllBytes($driver)
 $files['README.TXT'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win31-setup/README.txt'))
 $files['SETUP.CMD'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win31-setup/SETUP.CMD'))
 $files['PIF.EXE'] = [IO.File]::ReadAllBytes((Join-Path $release 'PIF.EXE'))
+$files['MULTITASK.CMD'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win-multitask/APPLY.CMD'))
+foreach($name in 'HASH.EXE','INSIGNIA.386','NTVDM64.386') {
+    $files[$name] = [IO.File]::ReadAllBytes((Join-Path $release $name))
+}
 
 $patch = Join-Path $media 'PATCH'; $owned = @{}
 if(Test-Path -LiteralPath $patch) {

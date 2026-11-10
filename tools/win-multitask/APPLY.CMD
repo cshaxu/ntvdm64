@@ -13,6 +13,7 @@ if not defined IS31 if not defined IS95 (echo Unsupported or incomplete Windows 
 if defined IS31 if defined IS95 (echo Ambiguous Windows installation.& exit /b 2)
 if not "%TARGET: =%"=="%TARGET%" (echo An ASCII short path without spaces is required.& exit /b 5)
 for %%I in ("%~dp0..\..\assets\release") do set "RELEASE=%%~fI"
+if not "%~2"=="" for %%I in ("%~2") do set "RELEASE=%%~fI"
 for %%F in (INSIGNIA.386 NTVDM64.386 HASH.EXE) do if not exist "%RELEASE%\%%F" (echo Missing released component %%F.& exit /b 3)
 set "PATCH=%TARGET%\PATCH"
 set "INI=%TARGET%\SYSTEM.INI"

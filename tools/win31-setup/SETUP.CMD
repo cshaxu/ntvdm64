@@ -47,6 +47,10 @@ for %%I in ("%INSTALLROOT%") do set "INSTALLROOT=%%~fI"
 set "DEST=%INSTALLROOT%\PATCH"
 if not exist "%~dp0PIF.EXE" (echo Missing PIF.EXE.& exit /b 3)
 for %%F in (SYSTEM\DOSX.EXE SYSTEM\KRNL386.EXE SYSTEM\WIN386.EXE SYSTEM.INI) do if not exist "%INSTALLROOT%\%%F" (echo Missing installed file: %%F& exit /b 5)
+set "DOSMODE=0"
+set /p "DOSMODE=Choose DOSONLY mode [0=host multitask, 1=guest only] (default 0): "
+if not "%DOSMODE%"=="0" if not "%DOSMODE%"=="1" (echo Choose 0 or 1.& exit /b 4)
+if "%DOSMODE%"=="0" for %%F in (MULTITASK.CMD HASH.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%~dp0%%F" (echo Missing setup component: %%F& exit /b 3)
 if not exist "%DEST%\" mkdir "%DEST%" || exit /b 4
 if not exist "%DEST%\TEMP\" mkdir "%DEST%\TEMP" || exit /b 4
 set "WORK=%DEST%\W31PROFILES"
@@ -57,6 +61,7 @@ set "patch_result=6"
 >>"%WORK%\CONFIG.NT" echo dos=high, umb
 >>"%WORK%\CONFIG.NT" echo device=%%SystemRoot%%\system32\himem.sys
 >>"%WORK%\CONFIG.NT" echo files=128
+if "%DOSMODE%"=="1" >>"%WORK%\CONFIG.NT" echo dosonly
 >"%WORK%\AUTOEXEC.NT" echo @echo off
 >>"%WORK%\AUTOEXEC.NT" echo SET TEMP=%DEST%\TEMP
 >>"%WORK%\AUTOEXEC.NT" echo SET TMP=%DEST%\TEMP
@@ -65,6 +70,7 @@ set "patch_result=6"
 "%~dp0PIF.EXE" create "%WORK%\WIN386.PIF" --title "Windows 3.1 386 Enhanced" --program "%INSTALLROOT%\WIN.COM" --directory "%INSTALLROOT%" --arguments "/3" --config "%DEST%\CONFIG.NT" --autoexec "%DEST%\AUTOEXEC.NT" --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1 || goto profile_cleanup
 for %%M in (WINSTD WIN386) do call :make_launch %%M || goto profile_cleanup
 for %%F in (CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do if exist "%DEST%\%%F" fc /b "%DEST%\%%F" "%WORK%\%%F" >nul || (echo Preserve changed profile: %%F& set "patch_result=5"& goto profile_cleanup)
+if "%DOSMODE%"=="0" call :install_multitask || goto profile_cleanup
 for %%F in (CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do copy /y "%WORK%\%%F" "%DEST%\%%F" >nul || goto profile_cleanup
 set "patch_result=0"
 echo Prepared %DEST%
@@ -74,6 +80,14 @@ rmdir "%WORK%" 2>nul
 rmdir "%TEMP%" 2>nul
 if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
 exit /b %patch_result%
+:install_multitask
+if not exist "%DEST%\MULTITASK.INI.NEW" (
+  call "%~dp0MULTITASK.CMD" "%INSTALLROOT%" "%~dp0" || exit /b 5
+  exit /b 0
+)
+fc /b "%INSTALLROOT%\SYSTEM.INI" "%DEST%\MULTITASK.INI.NEW" >nul || (echo Preserve changed multitask configuration.& exit /b 5)
+for %%F in (INSIGNIA.386 NTVDM64.386) do fc /b "%DEST%\%%F" "%~dp0%%F" >nul || (echo Preserve changed multitask driver: %%F& exit /b 5)
+exit /b 0
 :make_launch
 >"%WORK%\%~1.CMD" echo @echo off
 >>"%WORK%\%~1.CMD" echo setlocal

@@ -2,7 +2,7 @@
 
 Use `APPLY.CMD` and enter the path of a **copy** of the Windows 3.1 installation media. The original supplied media must remain unchanged. The command prepares that target's `PATCH`, adapts the checked kernel inputs and substitutes the released mouse driver. Exact original compressed files are retained beside their inputs as `KRNL386.EX_.BAK`, `WIN386.EX_.BAK` and `MOUSE.DR_.BAK`.
 
-Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. Select the actual Windows installation directory in Setup, then enter it when the script asks. SETUP.CMD generates that installation's own `PATCH\WINSTD.CMD`, `PATCH\WIN386.CMD`, PIFs and configuration using PIF.EXE; it does not patch installed guest binaries again. Setup scratch uses the target's `PATCH\TEMP`. Default NT profiles are not edited.
+Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. After Setup succeeds, enter the selected Windows installation directory and choose DOSONLY mode: `0` enables host multitask payloads and installs the two released `.386` drivers; `1` selects guest-only DOS execution. The default is `0`. SETUP.CMD generates the installation's own `PATCH\WINSTD.CMD`, `PATCH\WIN386.CMD`, PIFs and configuration using PIF.EXE. The multitask installer updates `SYSTEM.INI`; original installed guest binaries are not patched again. Setup scratch uses the target's `PATCH\TEMP`. Default NT profiles are not edited.
 
 `patch31.exe` applies hash-checked kernel adaptations to staging copies.
 `SZDD.EXE` writes the SZDD compressed files consumed by original Setup.
