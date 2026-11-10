@@ -41,6 +41,13 @@ hash-verified. The W31 addon pair matched the released files.
 
 ## Owner-reported fresh Win3.1 installation failure
 
+After publication of package `092da729-caf9-4a89-8f2e-305e368faacf`, the
+owner reported that running `tools/win31-setup` in a new Windows 3.1
+installation succeeded and Program Manager groups were normal. The owner
+did not specify the installation directory or DOSONLY choice in that report.
+This is manual acceptance of that fresh-install result; the separate automated
+original Setup attempt described below remained incomplete.
+
 The owner reports that original graphical Setup completed normally and
 returned to the script, but Program Manager was empty. On the specified
 `O:/w31` installation, read-only inspection found a zero-byte PROGMAN.INI

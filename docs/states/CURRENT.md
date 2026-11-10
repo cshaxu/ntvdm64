@@ -73,8 +73,10 @@ along with all 16 selected Full gates. Package
 `b385aa0d-20bc-4de9-ad4e-3372a4e14bfc` was published to both host locations.
 That package was subsequently rechecked through both real Win95 launch modes
 and all four Win3.1 Program Manager DDE mode combinations. The Win95
-guest-only witness still retires its own session; a fresh original Win3.1
-Setup remains unverified.
+guest-only witness still retires its own session. The owner subsequently
+reported successful `tools/win31-setup` installation in a new Windows 3.1
+directory with normal Program Manager groups; the automated original Setup
+attempt remains incomplete and the reported mode was not specified.
 For DOSONLY=0, the root Run16 and NTVDM both returned 1 after the guest
 ExitWindows witness. A mapped call-site trace identifies the original
 `cmdGetNextCmd` return path; why the guest supplied 1 remains unproved, so
@@ -84,7 +86,8 @@ The DEM open/create pathname lease now shares its identical copy and error
 handling in one local helper. Cached x86/x64 builds and the x86 worker relink
 passed, as did all 16 selected Full gates and the real Win3.1 empty-profile
 probe. Package `092da729-caf9-4a89-8f2e-305e368faacf` was published to both
-host locations; original fresh Setup remains unverified.
+host locations. The owner subsequently reported successful fresh Setup with
+normal program groups; this is manual acceptance, not an automated Setup pass.
 
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The
