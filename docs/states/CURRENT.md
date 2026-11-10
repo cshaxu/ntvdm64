@@ -44,6 +44,12 @@ directory and configure the existing Win95 installation for multitask
 payloads. Validate both choices, including launch, guest DOS execution and
 the intended host-payload behavior, while preserving original guest binaries.
 
+S14 implementation and complete host package are published for owner
+acceptance. Both choices were exercised in real isolated Win95 copies; the
+guest-only fixture terminates its own session after the DOS witness and does
+not establish normal Win95 shutdown. The original interactive Win3.1 Setup
+was not rerun. See [S14 evidence](../etc/evidence/m0-t481-s14-win95-launch.md).
+
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The
 published O:/WINNT/edit.exe and C:/Windows/System32/edit.exe have identical

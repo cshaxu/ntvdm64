@@ -14,6 +14,7 @@ param(
  [switch]$GuestInput,
  [switch]$ReverseInputOrder,
  [switch]$InstallViaTool,
+ [switch]$InstallViaLaunch,
  [switch]$ShutdownWitness
 )
 $ErrorActionPreference='Stop'
@@ -28,6 +29,7 @@ $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 if($InstallViaTool -and $InstanceDriver){throw 'Installer witness selects its own instance driver'}
+if($InstallViaTool -and $InstallViaLaunch){throw 'Select one installation witness'}
 if($InstallViaTool){
  $sourceIni=[IO.File]::ReadAllText((Resolve-Path -LiteralPath "$InstallSource/SYSTEM.INI"))
  if($sourceIni -match '(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)'){
@@ -41,6 +43,24 @@ $copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -Instan
 $task=$copy.Task;$source=$copy.Source;$dest=$copy.Destination;$original=$copy.Original
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
+if($InstallViaLaunch){
+ # Only this owned copy is reset to a pre-launch-package state.
+ $system="$dest/SYSTEM.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($system))
+ $text=[regex]::Replace($text,'(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)\s*\r*\n','')
+ [IO.File]::WriteAllBytes($system,$enc.GetBytes($text))
+ foreach($name in 'CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
+  $item="$dest/PATCH/$name";if(Test-Path -LiteralPath $item){Remove-Item -LiteralPath $item}
+ }
+ if(Test-Path "$dest/PATCH/TEMP"){Remove-Item -LiteralPath "$dest/PATCH/TEMP"}
+ if(Test-Path "$dest/SYSTEM/MOUSE.DRV.BAK"){Remove-Item -LiteralPath "$dest/SYSTEM/MOUSE.DRV.BAK"}
+ [IO.File]::WriteAllText("$task/launch-input.txt","$dest`r`n0`r`n",[Text.Encoding]::ASCII)
+ $savedPath=$env:PATH;$env:PATH="$PackageRoot/system32;$savedPath"
+ try {& cmd.exe /d /c "`"$repo/tools/win95-launch/APPLY.CMD`" < `"$task/launch-input.txt`"" *> "$task/launch-apply.log";if($LASTEXITCODE){throw 'Win95 launch preparation failed'}}
+ finally {$env:PATH=$savedPath}
+ foreach($name in 'INSIGNIA.386','NTVDM64.386'){
+  if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Installed driver differs: $name"}
+ }
+}
 if($InstallViaTool){
  # The copy helper stages this driver itself. Remove only its exact entry and
  # file to test the actual installer on an otherwise prepared isolated copy.

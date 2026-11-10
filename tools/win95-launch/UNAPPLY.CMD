@@ -8,6 +8,10 @@ for %%I in ("%TARGET%") do set "TARGET=%%~sI"
 set "SYSTEM=%TARGET%\SYSTEM"
 set "PATCH=%TARGET%\PATCH"
 if not exist "%TARGET%\SYSTEM.INI" (echo Missing SYSTEM.INI.& exit /b 2)
+if exist "%PATCH%\MULTITASK.LAUNCH" (
+  call "%~dp0..\win-multitask\UNAPPLY.CMD" "%TARGET%" || exit /b 5
+  del /q "%PATCH%\MULTITASK.LAUNCH" || exit /b 5
+)
 call :find_active_mouse
 if errorlevel 1 goto restore_cores
 set "TARGET_PREFIX=%TARGET%\"

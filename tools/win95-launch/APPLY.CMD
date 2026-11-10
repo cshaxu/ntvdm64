@@ -19,24 +19,25 @@ for %%F in ("%TARGET%\WIN.COM" "%SYSTEM%\VMM32.VXD" "%SYSTEM%\KRNL386.EXE" "%TAR
   echo Missing Win95 installation file: %%~F
   exit /b 2
 )
-for %%F in (patch95.exe compat95.sys PIF.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
+for %%F in (patch95.exe compat95.sys PIF.EXE MOUSE31.DRV SETVER.EXE) do if not exist "%RELEASE%\%%F" (
   echo Missing released component: %RELEASE%\%%F
   exit /b 3
 )
-for %%F in (CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE VMM32.W95NEW KERNEL.W95NEW TEMP) do if exist "%PATCH%\%%F" (
+for %%F in (CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE VMM32.W95NEW KERNEL.W95NEW MULTITASK.LAUNCH MULTITASK.INI.BAK MULTITASK.INI.NEW MULTITASK.HASH INSIGNIA.386 NTVDM64.386 TEMP) do if exist "%PATCH%\%%F" (
   echo Refusing to overwrite pre-existing PATCH content: %%F
   exit /b 5
 )
+findstr /i /l /c:"INSIGNIA.386" /c:"NTVDM64.386" /c:"NTVDM64.VXD" "%TARGET%\SYSTEM.INI" >nul && (echo Existing multitask entries require inspection.& exit /b 5)
+set "DOSMODE=0"
+set /p "DOSMODE=Choose DOSONLY mode [0=host multitask, 1=guest only] (default 0): "
+if not "%DOSMODE%"=="0" if not "%DOSMODE%"=="1" (echo Choose 0 or 1.& exit /b 4)
+if "%DOSMODE%"=="0" for %%F in (INSIGNIA.386 NTVDM64.386 HASH.EXE) do if not exist "%RELEASE%\%%F" (echo Missing released component: %%F& exit /b 3)
+if "%DOSMODE%"=="0" if not exist "%~dp0..\win-multitask\APPLY.CMD" (echo Missing multitask installer.& exit /b 3)
 
 set "RUN16="
 for /f "delims=" %%I in ('where run16.exe 2^>nul') do if not defined RUN16 set "RUN16=%%I"
 if not defined RUN16 (
   echo Missing run16.exe on PATH.
-  exit /b 3
-)
-for %%I in ("%RUN16%") do set "RUNTIME=%%~dpI"
-if not exist "%RUNTIME%SETVER.EXE" (
-  echo Missing SETVER.EXE beside %RUN16%.
   exit /b 3
 )
 call :find_active_mouse || exit /b 5
@@ -75,7 +76,7 @@ if not exist "%PATCH%\TEMP\" (
 if not exist "%PATCH%\VMM32.W95NEW" goto fail
 "%RELEASE%\patch95.exe" prepare-kernel "%SYSTEM%\KRNL386.EXE" "%PATCH%\KERNEL.W95NEW" || goto fail
 if not exist "%PATCH%\KERNEL.W95NEW" goto fail
-"%RELEASE%\patch95.exe" prepare-setver "%RUNTIME%SETVER.EXE" "%PATCH%\SETVER.EXE" || goto fail
+"%RELEASE%\patch95.exe" prepare-setver "%RELEASE%\SETVER.EXE" "%PATCH%\SETVER.EXE" || goto fail
 
 move /y "%SYSTEM%\VMM32.VXD" "%SYSTEM%\VMM32.VXD.W95LAUNCH.BAK" >nul || goto fail
 set "NEW_VMM_BACKUP=1"
@@ -96,6 +97,7 @@ copy /y "%RELEASE%\MOUSE31.DRV" "%MOUSE_PATH%" >nul || goto fail
   echo files=128
   echo device=%TARGET%\IFSHLP.SYS
   echo device=%PATCH%\compat95.sys /ROOT=%TARGET%%LOGO_OPTION%
+  if "%DOSMODE%"=="1" echo dosonly
 )
 >"%PATCH%\AUTOEXEC.NT" (
   echo @echo off
@@ -109,6 +111,13 @@ copy /y "%RELEASE%\MOUSE31.DRV" "%MOUSE_PATH%" >nul || goto fail
 >"%PATCH%\WIN.CMD" (
   echo @echo off
   echo call "%RUN16%" "%%~dp0WIN.PIF"
+)
+if "%DOSMODE%"=="0" (
+  call "%~dp0..\win-multitask\APPLY.CMD" "%TARGET%" "%RELEASE%" || goto fail
+  type nul >"%PATCH%\MULTITASK.LAUNCH" || (
+    call "%~dp0..\win-multitask\UNAPPLY.CMD" "%TARGET%"
+    goto fail
+  )
 )
 echo Win95 launcher prepared: %PATCH%\WIN.CMD
 exit /b 0
