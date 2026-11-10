@@ -6,6 +6,12 @@
 
 [T481 S9 SoftPC evidence](evidence/m0-t481-s9-softpc.md) records the candidate imports and verification.
 
+[T481 S9 closure](evidence/m0-t481-s9-closure.md) records the mouse reentry repair delivery and transferred boundaries.
+
+[T481 S10 Edit mouse evidence](evidence/m0-t481-s10-edit-mouse.md) records the native EDIT.EXE physical input investigation.
+
+[T481 S9 temporary cleanup](evidence/m0-t481-s9-temp-cleanup.md) records bounded test-owned temporary-directory cleanup.
+
 [T481 S9 direct startup](evidence/m0-t481-s9-direct-startup.md) records the owner-reported failure and environment controls.
 
 [T481 S7 investigation](evidence/m0-t481-s7-investigation.md) records the two-window mouse and display investigation.

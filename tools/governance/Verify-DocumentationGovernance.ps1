@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
     [switch]$SelfTest
@@ -396,7 +396,11 @@ foreach ($currentPath in @($markdownPaths | Where-Object { $_.FullName -notmatch
         # checkpoints inside CURRENT; it cannot re-enter a current rule/design.
         $legacyNtvdm64 = $value -match '^(?i:O:\\ntvdm64(?:\\|$))' -and
             $currentPath.FullName -match '(?i)\\docs\\(?:etc\\|states\\CURRENT\.md$)'
-        if ($value -notmatch '^(?i:O:\\winnt(?:\\|$)|O:\\repos\.external(?:\\|$))' -and -not $legacyNtvdm64) { throw "Unapproved local path in current authority: $($currentPath.FullName): $value" }
+        # Owner-approved Windows installation and task scratch locations are
+        # evidence paths, not additional product runtime-package roots.
+        $approvedGuestEvidence = $value -match '^(?i:O:\\(?:w31|windows|tmp)(?:\\|$))' -and
+            $currentPath.FullName -match '(?i)\\docs\\etc\\'
+        if ($value -notmatch '^(?i:O:\\winnt(?:\\|$)|O:\\repos\.external(?:\\|$))' -and -not $legacyNtvdm64 -and -not $approvedGuestEvidence) { throw "Unapproved local path in current authority: $($currentPath.FullName): $value" }
     }
 }
 Assert-RelativeLinks @($markdownPaths | ForEach-Object FullName)

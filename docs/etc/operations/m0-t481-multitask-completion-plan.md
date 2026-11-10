@@ -2231,3 +2231,14 @@ installed using the existing tool; both driver hashes and SYSTEM.INI
 entries were verified. Manual acceptance remains pending. See S9 evidence
 for exact tests, source hashes, boundaries and cleanup. No S9, S10 or T
 closure follows from this handoff update.
+
+
+## S9 closure and subsequent sequence
+
+The owner accepted the mouse reentry repair and requested formal delivery
+before investigating native EDIT.EXE physical clicks. S9 closed at commit
+41fd60439; see [closure](../evidence/m0-t481-s9-closure.md). The immediate
+S10 packet now investigates EDIT.EXE input as requested; the previously
+assigned Win3.1/Win95 batch-PE32 packet moves to S11, and other remaining
+multitask and integrated acceptance moves to S12. All original obligations
+remain. The only active packet and its detailed verification are in CURRENT.
