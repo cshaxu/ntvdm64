@@ -108,6 +108,14 @@ exit 0 is not a completed-install receipt. The rerun must handle the empty
 optical drive without canceling a copy operation and assert the installed files
 and groups explicitly.
 
+A separate test-only NTVDM relink made native opens of `\\??\\I:` return
+object-not-found for that process; neither production images nor system drive
+assignments were changed. Original Setup still exited without WIN.COM or
+groups, although the sampled surfaces did not capture the former error
+dialog. This experiment does not establish that the drive was hidden from
+every guest query, nor that the `I:` dialog was the sole cause. The test
+relink is not suitable for publication or as unmodified-product acceptance.
+
 An isolated-process device-map experiment did not hide `I:`: even after the
 process-local map call returned success, a child `dir I:\` still reported the
 existing device as not ready. It is not a working isolation method; the system
