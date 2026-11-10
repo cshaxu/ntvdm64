@@ -31,6 +31,23 @@ closure documents still describe their former use; Git retains the scripts.
 The owner-designated live tools and all historical binary tool inputs remain
 pending their separate retention/asset inventory.
 
+The 244 files under `tools/historical` and 15 obsolete T225/T235 guest-build
+scripts and their wrapper were removed. Before removal, the 94 historical
+executables and their help, error-message, configuration and provenance files
+were copied byte-for-byte into `historical-tools.zip`; the adjacent manifest
+records each source, size and SHA-256. Original headers, libraries, object
+files and retired scripts remain recoverable from Git. The mirror-retention
+estimator now checks the preserved OpenNT 4.5 binaries in that archive.
+`assets/winnt.zip` was not modified; it may receive files only with the
+owner's explicit approval of those files.
+Before this cleanup, `winnt.zip` already had SHA-256
+`92714715fc0fce4cb33268f534e9e7d7d45ae612937249a2c2b2e2e013099947`,
+whereas its guest manifest recorded `b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7`.
+The 66 listed guest-file hashes match the ZIP; the additional GRAFTABL.COM
+entry was previously recorded by `s13-r625-graftabl-archive.json` but not
+added to the guest manifest. This cleanup does not alter either file or claim
+that their archive-level records are reconciled.
+
 The owner explicitly retains tools/opennt, win31-path, win31-setup,
 win95-launch, win95-path and win101-setup. This is a directory/ownership
 review; it does not certify every historical script for current execution.

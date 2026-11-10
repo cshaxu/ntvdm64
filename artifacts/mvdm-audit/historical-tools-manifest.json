@@ -1,0 +1,570 @@
+{
+  "schema": "ntvdm64.historical-tools.v1",
+  "archive_sha256": "52efd0dab7773a42fdeaff6cf1ec047c04befd471d8bbe6ac544777d5cca128b",
+  "files": [
+    {
+      "path": "msdos400/ASC2HLP.EXE",
+      "source": "tools/historical/msdos400/ASC2HLP.EXE",
+      "bytes": 62040,
+      "sha256": "5d8afb2d23a13e93b321af122dff443ee25ca5fedeb5feeb1a373b9b6e511812"
+    },
+    {
+      "path": "msdos400/ATTRIB.EXE",
+      "source": "tools/historical/msdos400/ATTRIB.EXE",
+      "bytes": 10624,
+      "sha256": "7fc2696a3380b98670cdde913e3d81eaddaab6db8661b8371b5601af269e7651"
+    },
+    {
+      "path": "msdos400/BUILDIDX.EXE",
+      "source": "tools/historical/msdos400/BUILDIDX.EXE",
+      "bytes": 15895,
+      "sha256": "10e6fb22df1521a2b200e708cb4a8e8d1748cc68d1c4ed1e65531596f1b11f0d"
+    },
+    {
+      "path": "msdos400/BUILDMSG.EXE",
+      "source": "tools/historical/msdos400/BUILDMSG.EXE",
+      "bytes": 23181,
+      "sha256": "0cdcb1e36d9017f7f0e66fd4c539eb34ddeb74073e74f50733943a54cf7c707c"
+    },
+    {
+      "path": "msdos400/C1.ERR",
+      "source": "tools/historical/msdos400/C1.ERR",
+      "bytes": 14393,
+      "sha256": "53c4d172d684080c45c1b94f5eeaa7c514ce0147aa2fd2d52cadc29a04671217"
+    },
+    {
+      "path": "msdos400/C1.EXE",
+      "source": "tools/historical/msdos400/C1.EXE",
+      "bytes": 114521,
+      "sha256": "8d33c6d87aa74b042b7d7cb01a23241c4cc3b1b8b446b8f1548bd167e3c7bf62"
+    },
+    {
+      "path": "msdos400/C1L.EXE",
+      "source": "tools/historical/msdos400/C1L.EXE",
+      "bytes": 149303,
+      "sha256": "bdd8189be005009331ff61dd3cb7a0ce9b246ea522dd8ab2c83a8339e5c30f09"
+    },
+    {
+      "path": "msdos400/C2.EXE",
+      "source": "tools/historical/msdos400/C2.EXE",
+      "bytes": 202919,
+      "sha256": "a513c98bc2ce11bd00901b560252b5727ab9b6bacd9319b9eaba08f9e314b99b"
+    },
+    {
+      "path": "msdos400/C23.ERR",
+      "source": "tools/historical/msdos400/C23.ERR",
+      "bytes": 3272,
+      "sha256": "f9edb742d0b3a4d17e489d672334ef0fac46767063122d338f55e5933f533b07"
+    },
+    {
+      "path": "msdos400/C3.EXE",
+      "source": "tools/historical/msdos400/C3.EXE",
+      "bytes": 125221,
+      "sha256": "c1269628534d5deb48171ba9e42f761dcb1c28a0087c73780db0ee2e4352e6fa"
+    },
+    {
+      "path": "msdos400/CL.ERR",
+      "source": "tools/historical/msdos400/CL.ERR",
+      "bytes": 2276,
+      "sha256": "031c67018ab843db00765009611ea1fcb70c5fffd9fb8fa5635fddd84dc6828f"
+    },
+    {
+      "path": "msdos400/CL.EXE",
+      "source": "tools/historical/msdos400/CL.EXE",
+      "bytes": 31329,
+      "sha256": "cad40cef732beea3455225fbd62286c664166db7c3f87e2402e22b2e3f107771"
+    },
+    {
+      "path": "msdos400/CL.HLP",
+      "source": "tools/historical/msdos400/CL.HLP",
+      "bytes": 2169,
+      "sha256": "1443b8e9d7eb34417fb77986efb9a667b85a489dd7b44a337211d809efdfa783"
+    },
+    {
+      "path": "msdos400/COMPRESS.COM",
+      "source": "tools/historical/msdos400/COMPRESS.COM",
+      "bytes": 1368,
+      "sha256": "d0deb39a5d1946fe54a6b0b4cc91fbfc9547703ae1408dc9ce04f876d5dbe8f7"
+    },
+    {
+      "path": "msdos400/CONVERT.EXE",
+      "source": "tools/historical/msdos400/CONVERT.EXE",
+      "bytes": 16340,
+      "sha256": "26176c60027009f40d51f9ed1271779a3d2953b88daf559badaf7fb20d5ec03a"
+    },
+    {
+      "path": "msdos400/DBOF.EXE",
+      "source": "tools/historical/msdos400/DBOF.EXE",
+      "bytes": 10262,
+      "sha256": "7f853d1db3947cee6612d5a46e262bff20cfaa8583fdb72bf9c158f56336de4b"
+    },
+    {
+      "path": "msdos400/EXE2BIN.EXE",
+      "source": "tools/historical/msdos400/EXE2BIN.EXE",
+      "bytes": 3050,
+      "sha256": "a66a3875d7f310d95312651f38d0b43246d3bacfa720f28c49445fcc10bbfa8f"
+    },
+    {
+      "path": "msdos400/EXEC.EXE",
+      "source": "tools/historical/msdos400/EXEC.EXE",
+      "bytes": 9299,
+      "sha256": "f1ba635fda038d541645318de86094e04e69e3bdc4c79896b02b9758666b57de"
+    },
+    {
+      "path": "msdos400/EXEFIX.EXE",
+      "source": "tools/historical/msdos400/EXEFIX.EXE",
+      "bytes": 11776,
+      "sha256": "6ade9f789d8f7c6d6834028eaaa0588010581c96062eadb70e859e7dbe65f97b"
+    },
+    {
+      "path": "msdos400/EXEMOD.EXE",
+      "source": "tools/historical/msdos400/EXEMOD.EXE",
+      "bytes": 12336,
+      "sha256": "efe11a2f61d257c2737ca0ab2b731fd9e2ddcf0f06bb79e77aa6cefdb4c0c399"
+    },
+    {
+      "path": "msdos400/EXEPACK.EXE",
+      "source": "tools/historical/msdos400/EXEPACK.EXE",
+      "bytes": 14803,
+      "sha256": "568554322d29e46f79c0c760ac2391cb0689dc7acb9aed79a428194ec6fb83e7"
+    },
+    {
+      "path": "msdos400/LIB.EXE",
+      "source": "tools/historical/msdos400/LIB.EXE",
+      "bytes": 49661,
+      "sha256": "21094b0f11ea0567e4eb71182b2749ada558bc3c9e9e8f6ef7c149a0e67b7c6f"
+    },
+    {
+      "path": "msdos400/LINK.EXE",
+      "source": "tools/historical/msdos400/LINK.EXE",
+      "bytes": 65539,
+      "sha256": "124a3c800edc16b60f696d35a9dfec798b68b78fe2ca90c5988ea76bdeab1a8a"
+    },
+    {
+      "path": "msdos400/MANIFEST.json",
+      "source": "tools/historical/msdos400/MANIFEST.json",
+      "bytes": 19281,
+      "sha256": "4e2679d2763a35d629bbc4685d2e3f2e038b116d14974ca8f2daecf7c5567a1a"
+    },
+    {
+      "path": "msdos400/MASM.EXE",
+      "source": "tools/historical/msdos400/MASM.EXE",
+      "bytes": 110703,
+      "sha256": "1c6286c69b616160b8475ad17453ee872702a2c98075c2159ec792a1c745275f"
+    },
+    {
+      "path": "msdos400/MENUBLD.EXE",
+      "source": "tools/historical/msdos400/MENUBLD.EXE",
+      "bytes": 14831,
+      "sha256": "2a81faf702fb1fc50e49fe80d0f3c5b00509232364823e0c39a47b1a34f3c0a3"
+    },
+    {
+      "path": "msdos400/NMAKE.EXE",
+      "source": "tools/historical/msdos400/NMAKE.EXE",
+      "bytes": 70795,
+      "sha256": "229f7e7f0aea1a2204e376b3ec18cae2d014cd2e59df05451a9e8837cecfde7d"
+    },
+    {
+      "path": "msdos400/NOSRVBLD.EXE",
+      "source": "tools/historical/msdos400/NOSRVBLD.EXE",
+      "bytes": 15607,
+      "sha256": "eacb1dde40274dd8c6ba4fd5b7c08e44e720fa2b32b147d4012343e68215f80e"
+    },
+    {
+      "path": "msdos400/TOOLS.INI",
+      "source": "tools/historical/msdos400/TOOLS.INI",
+      "bytes": 2629,
+      "sha256": "47d66c54a62d1abdf2d6913c11917dc43ddf4deafde29b57ed64ca5fae1bc3d8"
+    },
+    {
+      "path": "msdos6-qb45/MANIFEST.json",
+      "source": "tools/historical/msdos6-qb45/MANIFEST.json",
+      "bytes": 23773,
+      "sha256": "c7417dffb9d5977456d65e387f5e8c468ac6241a2138931d8806ed71eaab904d"
+    },
+    {
+      "path": "msdos6-qb45/bin/buildprs.exe",
+      "source": "tools/historical/msdos6-qb45/bin/buildprs.exe",
+      "bytes": 194901,
+      "sha256": "6c683e034a05d3ff9ea9f13389138d255b08e354aa5ced956525af97ed786383"
+    },
+    {
+      "path": "msdos6-qb45/bin/c1.err",
+      "source": "tools/historical/msdos6-qb45/bin/c1.err",
+      "bytes": 14393,
+      "sha256": "53c4d172d684080c45c1b94f5eeaa7c514ce0147aa2fd2d52cadc29a04671217"
+    },
+    {
+      "path": "msdos6-qb45/bin/c1.exe",
+      "source": "tools/historical/msdos6-qb45/bin/c1.exe",
+      "bytes": 114521,
+      "sha256": "8d33c6d87aa74b042b7d7cb01a23241c4cc3b1b8b446b8f1548bd167e3c7bf62"
+    },
+    {
+      "path": "msdos6-qb45/bin/c2.exe",
+      "source": "tools/historical/msdos6-qb45/bin/c2.exe",
+      "bytes": 202919,
+      "sha256": "a513c98bc2ce11bd00901b560252b5727ab9b6bacd9319b9eaba08f9e314b99b"
+    },
+    {
+      "path": "msdos6-qb45/bin/c23.err",
+      "source": "tools/historical/msdos6-qb45/bin/c23.err",
+      "bytes": 3272,
+      "sha256": "f9edb742d0b3a4d17e489d672334ef0fac46767063122d338f55e5933f533b07"
+    },
+    {
+      "path": "msdos6-qb45/bin/c3.exe",
+      "source": "tools/historical/msdos6-qb45/bin/c3.exe",
+      "bytes": 125221,
+      "sha256": "c1269628534d5deb48171ba9e42f761dcb1c28a0087c73780db0ee2e4352e6fa"
+    },
+    {
+      "path": "msdos6-qb45/bin/cat.exe",
+      "source": "tools/historical/msdos6-qb45/bin/cat.exe",
+      "bytes": 10073,
+      "sha256": "1ceca30479748f21389dd014bcac925b002b48bf4cfd4f96a94c5872bec487f6"
+    },
+    {
+      "path": "msdos6-qb45/bin/cl.err",
+      "source": "tools/historical/msdos6-qb45/bin/cl.err",
+      "bytes": 2276,
+      "sha256": "031c67018ab843db00765009611ea1fcb70c5fffd9fb8fa5635fddd84dc6828f"
+    },
+    {
+      "path": "msdos6-qb45/bin/cl.exe",
+      "source": "tools/historical/msdos6-qb45/bin/cl.exe",
+      "bytes": 31329,
+      "sha256": "cad40cef732beea3455225fbd62286c664166db7c3f87e2402e22b2e3f107771"
+    },
+    {
+      "path": "msdos6-qb45/bin/cl.hlp",
+      "source": "tools/historical/msdos6-qb45/bin/cl.hlp",
+      "bytes": 2169,
+      "sha256": "1443b8e9d7eb34417fb77986efb9a667b85a489dd7b44a337211d809efdfa783"
+    },
+    {
+      "path": "msdos6-qb45/bin/exepack.exe",
+      "source": "tools/historical/msdos6-qb45/bin/exepack.exe",
+      "bytes": 14803,
+      "sha256": "568554322d29e46f79c0c760ac2391cb0689dc7acb9aed79a428194ec6fb83e7"
+    },
+    {
+      "path": "msdos6-qb45/bin/exp.exe",
+      "source": "tools/historical/msdos6-qb45/bin/exp.exe",
+      "bytes": 41487,
+      "sha256": "d28bb70c77162831d0ee892b38d78bba2edeb735b85690a8aea688bc64c06808"
+    },
+    {
+      "path": "msdos6-qb45/bin/fgrep.exe",
+      "source": "tools/historical/msdos6-qb45/bin/fgrep.exe",
+      "bytes": 12997,
+      "sha256": "95797d43a55414d4879bfb56b063784681eaa83f8552e9d293be04809455f4e4"
+    },
+    {
+      "path": "msdos6-qb45/bin/lib.exe",
+      "source": "tools/historical/msdos6-qb45/bin/lib.exe",
+      "bytes": 34895,
+      "sha256": "cb76479346b20fe29cac2b387e8358cda2456779213657d1d60b05104b71efc7"
+    },
+    {
+      "path": "msdos6-qb45/bin/link.exe",
+      "source": "tools/historical/msdos6-qb45/bin/link.exe",
+      "bytes": 65539,
+      "sha256": "124a3c800edc16b60f696d35a9dfec798b68b78fe2ca90c5988ea76bdeab1a8a"
+    },
+    {
+      "path": "msdos6-qb45/bin/makemsgs.exe",
+      "source": "tools/historical/msdos6-qb45/bin/makemsgs.exe",
+      "bytes": 17112,
+      "sha256": "dd5c39955780420628416273dc149bb03461ede937e2a4381ac1fb8d1d6e221a"
+    },
+    {
+      "path": "msdos6-qb45/bin/mapsym.exe",
+      "source": "tools/historical/msdos6-qb45/bin/mapsym.exe",
+      "bytes": 18026,
+      "sha256": "fbc2a5f04b944de86011fd3161ef28e88c4b1462d3358d75eeef56f98b9694e6"
+    },
+    {
+      "path": "msdos6-qb45/bin/masm.exe",
+      "source": "tools/historical/msdos6-qb45/bin/masm.exe",
+      "bytes": 110675,
+      "sha256": "3c0ddcb518022025a98770b90deef5abd30b8b87a43859fef2c187b30e425a5a"
+    },
+    {
+      "path": "msdos6-qb45/bin/mv.exe",
+      "source": "tools/historical/msdos6-qb45/bin/mv.exe",
+      "bytes": 31195,
+      "sha256": "2f23f9f957c185681bb940e90ff314f1979bd982ab3295411b55f227487665bd"
+    },
+    {
+      "path": "msdos6-qb45/bin/nmake.exe",
+      "source": "tools/historical/msdos6-qb45/bin/nmake.exe",
+      "bytes": 67975,
+      "sha256": "f3820698c686c1ba2fa3b0b8cd3f0e39d67b522211e4cbaca1dab89b85abb159"
+    },
+    {
+      "path": "msdos6-qb45/bin/optabler.exe",
+      "source": "tools/historical/msdos6-qb45/bin/optabler.exe",
+      "bytes": 40390,
+      "sha256": "4fb4bfa4c869a9bceebc0aa9c390a94c4be47afd958625b1eda297e2e08e342f"
+    },
+    {
+      "path": "msdos6-qb45/bin/redirect.exe",
+      "source": "tools/historical/msdos6-qb45/bin/redirect.exe",
+      "bytes": 9288,
+      "sha256": "6b13755ddea3f25b6491352a040849beef37e10a1974f9b6942eaf9ccdf3fe86"
+    },
+    {
+      "path": "msdos6-qb45/bin/results.exe",
+      "source": "tools/historical/msdos6-qb45/bin/results.exe",
+      "bytes": 50397,
+      "sha256": "a4d87ccd911f8f7475e15f45da46b63dff4bb2f6fdd0d3ab8be6148f0362056b"
+    },
+    {
+      "path": "msdos6-qb45/bin/sed.exe",
+      "source": "tools/historical/msdos6-qb45/bin/sed.exe",
+      "bytes": 19575,
+      "sha256": "d086b752b0bf114874d19077d068964c29009a3ebb8baf71882ac208557c39bf"
+    },
+    {
+      "path": "msdos6-qb45/bin/szscrn.exe",
+      "source": "tools/historical/msdos6-qb45/bin/szscrn.exe",
+      "bytes": 8120,
+      "sha256": "03d2ca42745f3ace1802f9addb34ce6ecd5e8b59d37ee1b607c700cba0d99df3"
+    },
+    {
+      "path": "msdos6-qb45/binb/hlpmake2.exe",
+      "source": "tools/historical/msdos6-qb45/binb/hlpmake2.exe",
+      "bytes": 66893,
+      "sha256": "4911fc913daae398190da741939876bfac22b1635090c8ee8d8e2be016900157"
+    },
+    {
+      "path": "msdos6-qb45/binb/link510.exe",
+      "source": "tools/historical/msdos6-qb45/binb/link510.exe",
+      "bytes": 142015,
+      "sha256": "163d8b86c18b93ccae9b2380d850cd42a9a5e1fd89a163b16170979afbbabb07"
+    },
+    {
+      "path": "msdos6-qb45/binb/lk.exe",
+      "source": "tools/historical/msdos6-qb45/binb/lk.exe",
+      "bytes": 142015,
+      "sha256": "163d8b86c18b93ccae9b2380d850cd42a9a5e1fd89a163b16170979afbbabb07"
+    },
+    {
+      "path": "msdos6-qb45/binb/replace.exe",
+      "source": "tools/historical/msdos6-qb45/binb/replace.exe",
+      "bytes": 28623,
+      "sha256": "14204de06050062b67bcd63b827098bc160c7655a3ce1b8a275571fafbc107e3"
+    },
+    {
+      "path": "msdos6-qb45/binb/tok.exe",
+      "source": "tools/historical/msdos6-qb45/binb/tok.exe",
+      "bytes": 45543,
+      "sha256": "a3bd1850820f2ec6eeaf0275a3854e82f4b593cb34ed065111ce7a05517023a6"
+    },
+    {
+      "path": "opennt-4.5/MANIFEST.json",
+      "source": "tools/historical/opennt-4.5/MANIFEST.json",
+      "bytes": 7815,
+      "sha256": "09a198ad5768a6f17e4add6bfbbd73c9f0940cc13da669c903c0d18434e5ddc9"
+    },
+    {
+      "path": "opennt-4.5/buildidx.exe",
+      "source": "tools/historical/opennt-4.5/buildidx.exe",
+      "bytes": 16541,
+      "sha256": "6a301eaee8ea8516e541da2a61a22f1db7d09b15c278a88a8d73083aac0f4d91"
+    },
+    {
+      "path": "opennt-4.5/buildmsg.exe",
+      "source": "tools/historical/opennt-4.5/buildmsg.exe",
+      "bytes": 48828,
+      "sha256": "0d8ea59396a769e440549322a2ec9d1ab70423147e702ef1b1f42606cadd50cd"
+    },
+    {
+      "path": "opennt-4.5/c1.err",
+      "source": "tools/historical/opennt-4.5/c1.err",
+      "bytes": 57513,
+      "sha256": "2f6af4a7ca7dd061e340f517609482fd263845f2f2b9ed837490a3a980d5018d"
+    },
+    {
+      "path": "opennt-4.5/c13216.exe",
+      "source": "tools/historical/opennt-4.5/c13216.exe",
+      "bytes": 341504,
+      "sha256": "3170a7c6e90faa3fc593d7b8514c8e23d67e8bd5de0eb3d8173c8b89bbe1fa1c"
+    },
+    {
+      "path": "opennt-4.5/c1xx3216.exe",
+      "source": "tools/historical/opennt-4.5/c1xx3216.exe",
+      "bytes": 551936,
+      "sha256": "86f1b2f4411fc9ad48030c0503d92f53d93be9f020404ce8bd32cf3d67fd41d1"
+    },
+    {
+      "path": "opennt-4.5/c23.err",
+      "source": "tools/historical/opennt-4.5/c23.err",
+      "bytes": 4631,
+      "sha256": "816cf9ee6deddd4cbb1655f5aba516b9471b6cf6494de9d44e52d9d59d73e6ff"
+    },
+    {
+      "path": "opennt-4.5/c23216.exe",
+      "source": "tools/historical/opennt-4.5/c23216.exe",
+      "bytes": 502272,
+      "sha256": "153f14c922089c962fe42668bfc38d3a68adeead50d65e0e6a196dfc56b211cc"
+    },
+    {
+      "path": "opennt-4.5/c23pcd.exe",
+      "source": "tools/historical/opennt-4.5/c23pcd.exe",
+      "bytes": 331264,
+      "sha256": "5a4820b00a5e6310ae5d2976423b8359e97f475e7f1c597f39cedd450c975fd8"
+    },
+    {
+      "path": "opennt-4.5/c33216.exe",
+      "source": "tools/historical/opennt-4.5/c33216.exe",
+      "bytes": 246784,
+      "sha256": "e38b304e6f3f3abf9b7afcc2d4867bd19bb89c2789436aa96f91c8333c7ab044"
+    },
+    {
+      "path": "opennt-4.5/cl.err",
+      "source": "tools/historical/opennt-4.5/cl.err",
+      "bytes": 1792,
+      "sha256": "abaf652bd8fd8a0cf4241fb58e7dcb420267c0921126f2146d5cee591c9fc097"
+    },
+    {
+      "path": "opennt-4.5/cl.msg",
+      "source": "tools/historical/opennt-4.5/cl.msg",
+      "bytes": 4279,
+      "sha256": "3ef4c6d6dbc46b40b159330300af63a6ec0093207970fd95266a5267d8f865e8"
+    },
+    {
+      "path": "opennt-4.5/cl16.exe",
+      "source": "tools/historical/opennt-4.5/cl16.exe",
+      "bytes": 91648,
+      "sha256": "fd857e7b5df2431b1312b987f3729ee7101aac59d21cc2e14e82d3f1dd6d97d3"
+    },
+    {
+      "path": "opennt-4.5/cvpack.err",
+      "source": "tools/historical/opennt-4.5/cvpack.err",
+      "bytes": 2313,
+      "sha256": "b13db1db1c6e66f497b569cfe4c039bf64eb3437acfb158ab531d9dbace6021f"
+    },
+    {
+      "path": "opennt-4.5/cvpack16.exe",
+      "source": "tools/historical/opennt-4.5/cvpack16.exe",
+      "bytes": 79360,
+      "sha256": "73335ab475f1c9d9027a75c137024e0897f8187a1d83f308ec9e79e794921420"
+    },
+    {
+      "path": "opennt-4.5/fixexe.exe",
+      "source": "tools/historical/opennt-4.5/fixexe.exe",
+      "bytes": 22016,
+      "sha256": "0048dc25a8b527a5489779fe95b4b1b9367b8b56b49189fb0ed3b0d76a6b701c"
+    },
+    {
+      "path": "opennt-4.5/getsize.exe",
+      "source": "tools/historical/opennt-4.5/getsize.exe",
+      "bytes": 14403,
+      "sha256": "496882b8405fe1514ed4de4f77c6c7ac923420a4d086e94a83562f175028d1c3"
+    },
+    {
+      "path": "opennt-4.5/h2inc.exe",
+      "source": "tools/historical/opennt-4.5/h2inc.exe",
+      "bytes": 27209,
+      "sha256": "fbb1e12752c4c0a7518725ee16f98e10151634bb3840eda9f1c136551649d189"
+    },
+    {
+      "path": "opennt-4.5/implib.exe",
+      "source": "tools/historical/opennt-4.5/implib.exe",
+      "bytes": 71168,
+      "sha256": "45dc9b73fb9a46e213825970cc4e998950bcf3564bfeefa81e51e2d64610d23c"
+    },
+    {
+      "path": "opennt-4.5/lib16.exe",
+      "source": "tools/historical/opennt-4.5/lib16.exe",
+      "bytes": 134144,
+      "sha256": "dcadf5e7a21a72b9c98366ceae307dae529002f21279b0c697bdb7bdd2b0bc05"
+    },
+    {
+      "path": "opennt-4.5/link16.exe",
+      "source": "tools/historical/opennt-4.5/link16.exe",
+      "bytes": 131072,
+      "sha256": "910ed26e6c8d72d64faa82a7eeabb6d5c002b347024c8f1d778fddbbb8ac1b00"
+    },
+    {
+      "path": "opennt-4.5/link_60.exe",
+      "source": "tools/historical/opennt-4.5/link_60.exe",
+      "bytes": 131072,
+      "sha256": "910ed26e6c8d72d64faa82a7eeabb6d5c002b347024c8f1d778fddbbb8ac1b00"
+    },
+    {
+      "path": "opennt-4.5/masm.exe",
+      "source": "tools/historical/opennt-4.5/masm.exe",
+      "bytes": 208656,
+      "sha256": "e54afaa9565e046cd862c29a015d685de43311acccf796469030e162ced6d00d"
+    },
+    {
+      "path": "opennt-4.5/mkpublic.exe",
+      "source": "tools/historical/opennt-4.5/mkpublic.exe",
+      "bytes": 10217,
+      "sha256": "5c4c7f6ca057a8ded485f6771ac27dfea689ee9a78632237a34b84e6f55aa1a0"
+    },
+    {
+      "path": "opennt-4.5/nosrvbld.exe",
+      "source": "tools/historical/opennt-4.5/nosrvbld.exe",
+      "bytes": 16299,
+      "sha256": "e49e569b7e0775bdd731bcf18cea1d85c29dabc1aa9a7285de51249387711665"
+    },
+    {
+      "path": "opennt-4.5/q23.exe",
+      "source": "tools/historical/opennt-4.5/q23.exe",
+      "bytes": 208384,
+      "sha256": "08cce8cf3ab01061e22f7612561cd42a0e456d8b61f5bb832ba622786a9f9e8b"
+    },
+    {
+      "path": "opennt-4.5/rc16.exe",
+      "source": "tools/historical/opennt-4.5/rc16.exe",
+      "bytes": 44099,
+      "sha256": "838455c5ee149d3bc2adf2a80840e5ac0aae138d93ac3d8876deee16e6833ad3"
+    },
+    {
+      "path": "opennt-4.5/rcpp.exe",
+      "source": "tools/historical/opennt-4.5/rcpp.exe",
+      "bytes": 99499,
+      "sha256": "42268cae70387e133ba0596b5b50f8878eba2b6cb85fd1c6f689b2430f7bf720"
+    },
+    {
+      "path": "opennt-4.5/rcqq.err",
+      "source": "tools/historical/opennt-4.5/rcqq.err",
+      "bytes": 14393,
+      "sha256": "53c4d172d684080c45c1b94f5eeaa7c514ce0147aa2fd2d52cadc29a04671217"
+    },
+    {
+      "path": "opennt-4.5/rcqq.exe",
+      "source": "tools/historical/opennt-4.5/rcqq.exe",
+      "bytes": 99481,
+      "sha256": "ad1c3ea071e9d85ebedcb4370d6e5b1134f92dfb2065558d06a898926b807ebe"
+    },
+    {
+      "path": "opennt-4.5/reloc.exe",
+      "source": "tools/historical/opennt-4.5/reloc.exe",
+      "bytes": 15635,
+      "sha256": "300b58668d46c3281ef2c017409aa9300499155d6593a8a9552781d2d96cc2b3"
+    },
+    {
+      "path": "opennt-4.5/stripdd.exe",
+      "source": "tools/historical/opennt-4.5/stripdd.exe",
+      "bytes": 8605,
+      "sha256": "748a4d0f8bf3afd7cce867d452ea3c475c267c9a308856c15b872d5a813039d9"
+    },
+    {
+      "path": "opennt-4.5/stripz.exe",
+      "source": "tools/historical/opennt-4.5/stripz.exe",
+      "bytes": 7931,
+      "sha256": "6d424555368e2f61d201dd249532672a12164c35afb507a3e3556595511ea689"
+    },
+    {
+      "path": "opennt-pre-t260/CMakeLists.txt",
+      "source": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+      "bytes": 183650,
+      "sha256": "6e58720a7f76cbdf544d31e6aa9894ef44d86122c467968f57e5afca21cdb537"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import difflib
 import hashlib
 import json
 import runpy
+import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -45,6 +46,10 @@ def main():
                (r['relative_path'] in provenance and provenance[r['relative_path']]['source_path'])]
     records = []
     missing = []
+    with zipfile.ZipFile(AUDIT / 'historical-tools.zip') as archive:
+        historical_tools = {name.casefold(): hashlib.sha256(archive.read(name)).hexdigest().upper()
+                            for name in archive.namelist()
+                            if name.startswith('opennt-4.5/')}
     for entry in sources:
         path = entry['relative_path']
         primary = bool(entry['opennt_sha256'])
@@ -56,11 +61,11 @@ def main():
         guest = ROOT / 'src/mvdm-guest' / path
         current = guest if guest.is_file() else ROOT / 'src/mvdm-host' / path
         if not current.is_file():
-            relocated = ROOT / 'tools/historical/opennt-4.5' / Path(path).name
+            relocated = 'opennt-4.5/' + Path(path).name
             historical = (path.startswith('tools16/') and entry['opennt45_sha256'] and
-                          relocated.is_file() and sha(relocated) == entry['opennt45_sha256'].upper())
+                          historical_tools.get(relocated.casefold()) == entry['opennt45_sha256'].upper())
             missing.append(dict(relative_path=path, status=ledger[path]['status'],
-                                retained_historical_path=str(relocated.relative_to(ROOT)) if historical else ''))
+                                retained_historical_path='artifacts/mvdm-audit/historical-tools.zip!' + relocated if historical else ''))
             continue
         expected_hash = (entry['opennt_sha256'] if primary else entry['opennt45_sha256'] if secondary
                          else supplemental['source_sha256']).upper()
