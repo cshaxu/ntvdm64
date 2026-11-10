@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import sys
+import zipfile
 
 
 def main():
@@ -12,6 +13,22 @@ def main():
     manifest = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
     if manifest.get("schema") != "ntvdm64.guest-archive.v1" or not manifest.get("files"):
         raise ValueError("invalid or empty guest manifest")
+    archive = Path(__file__).resolve().parents[2] / "assets/winnt.zip"
+    if hashlib.sha256(archive.read_bytes()).hexdigest().casefold() != manifest["archive_sha256"].casefold():
+        raise ValueError("guest archive hash mismatch")
+    archive_rows = manifest["files"] + manifest.get("archive_only", [])
+    archive_paths = {row["path"].casefold(): row for row in archive_rows}
+    if len(archive_paths) != len(archive_rows):
+        raise ValueError("duplicate archive manifest path")
+    with zipfile.ZipFile(archive) as zipped:
+        members = [item for item in zipped.infolist() if not item.is_dir()]
+        if len(members) != len(archive_paths) or {item.filename.casefold() for item in members} != set(archive_paths):
+            raise ValueError("guest archive membership mismatch")
+        for item in members:
+            row = archive_paths[item.filename.casefold()]
+            data = zipped.read(item)
+            if len(data) != row["bytes"] or hashlib.sha256(data).hexdigest().casefold() != row["sha256"].casefold():
+                raise ValueError(f"guest archive identity mismatch: {item.filename}")
     configurable = {"system.ini", "system32/autoexec.nt", "system32/config.nt"}
     # The archive also contains a historical native VCDEX sample. S41 replaces
     # only this host DLL with the coherently built product provider; guest

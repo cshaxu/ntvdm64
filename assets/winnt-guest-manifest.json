@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7",
+  "archive_sha256": "92714715fc0fce4cb33268f534e9e7d7d45ae612937249a2c2b2e2e013099947",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -753,5 +753,13 @@
       "imports": []
     }
   ],
-  "acceptance": "Byte-identical preserved guest inputs and static NE closure; historical native tools retained without functional certification."
+  "acceptance": "Byte-identical preserved guest inputs and static NE closure; historical native tools retained without functional certification.",
+  "archive_only": [
+    {
+      "path": "WINNT/SYSTEM32/GRAFTABL.COM",
+      "bytes": 51200,
+      "sha256": "bc241d49e73a10471500bcfcda8302ef72fd7411f7b8dea92289b4244ea2c87e",
+      "source": "artifacts/mvdm-audit/s13-r625-graftabl-archive.json"
+    }
+  ]
 }

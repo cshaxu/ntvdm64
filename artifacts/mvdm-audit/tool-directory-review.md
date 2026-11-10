@@ -45,8 +45,11 @@ Before this cleanup, `winnt.zip` already had SHA-256
 whereas its guest manifest recorded `b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7`.
 The 66 listed guest-file hashes match the ZIP; the additional GRAFTABL.COM
 entry was previously recorded by `s13-r625-graftabl-archive.json` but not
-added to the guest manifest. This cleanup does not alter either file or claim
-that their archive-level records are reconciled.
+added to the guest manifest. The owner confirmed that this entry is approved.
+The manifest now records the actual ZIP hash and GRAFTABL as archive-only;
+the verifier checks exact ZIP membership and every member's identity without
+requiring this archive-only entry in a staged runtime. The ZIP itself remains
+byte-identical.
 
 The owner explicitly retains tools/opennt, win31-path, win31-setup,
 win95-launch, win95-path and win101-setup. This is a directory/ownership
