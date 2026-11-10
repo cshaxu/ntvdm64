@@ -140,7 +140,7 @@ mov [dde_conv+2-data],dx
 or ax,dx
 jz .dde_finish
 mov word [dde_stage-data],5
-%macro create_group 2
+%macro dde_execute 2
 push ds
 push word %1-data
 push word 0
@@ -162,10 +162,13 @@ or ax,dx
 jz .dde_finish
 inc word [dde_result-data]
 %endmacro
-create_group dde_main,dde_main_end
-create_group dde_accessories,dde_accessories_end
-create_group dde_games,dde_games_end
-create_group dde_startup,dde_startup_end
+dde_execute dde_main,dde_main_end
+dde_execute dde_fileman,dde_fileman_end
+dde_execute dde_accessories,dde_accessories_end
+dde_execute dde_notepad,dde_notepad_end
+dde_execute dde_games,dde_games_end
+dde_execute dde_winmine,dde_winmine_end
+dde_execute dde_startup,dde_startup_end
 mov word [dde_stage-data],6
 push word [dde_conv+2-data]
 push word [dde_conv-data]
@@ -243,10 +246,16 @@ dde_conv: dd 0
 dde_service: db 'PROGMAN',0
 dde_main: db '[CreateGroup(Main,O:\tmp\q31\PATCH\DDEMAIN.GRP)]',0
 dde_main_end:
+dde_fileman: db '[AddItem(O:\tmp\q31\WINFILE.EXE,File Manager)]',0
+dde_fileman_end:
 dde_accessories: db '[CreateGroup(Accessories,O:\tmp\q31\PATCH\DDEACC.GRP)]',0
 dde_accessories_end:
+dde_notepad: db '[AddItem(O:\tmp\q31\NOTEPAD.EXE,Notepad)]',0
+dde_notepad_end:
 dde_games: db '[CreateGroup(Games,O:\tmp\q31\PATCH\DDEGAME.GRP)]',0
 dde_games_end:
+dde_winmine: db '[AddItem(O:\tmp\q31\WINMINE.EXE,Minesweeper)]',0
+dde_winmine_end:
 dde_startup: db '[CreateGroup(StartUp,O:\tmp\q31\PATCH\DDESTART.GRP)]',0
 dde_startup_end:
 dde_result_name: db 'O:\tmp\q31\PATCH\DDE.BIN',0

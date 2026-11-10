@@ -130,6 +130,12 @@ four GRP files parsed in all three runs. With the pre-fix host, PROGMAN.INI
 remained zero bytes; with the fixed host, all four references were present in
 both DOSONLY=0 and DOSONLY=1, and both Windows sessions exited normally.
 This is an original Program Manager DDE comparison, not a full Setup rerun.
+The witness also sends original Program Manager AddItem transactions for
+File Manager, Notepad and Minesweeper. Released GRP.EXE confirmed the
+respective executable entries in Main, Accessories and Games in the pre-fix
+comparison and both fixed DOSONLY modes; no AddItem was sent for StartUp.
+The fixed modes retained all four INI references, while the baseline INI
+remained empty. All three test-owned Win3.1 copies were removed afterwards.
 
 Review of the retained original-Setup captures narrows why that attempt was
 incomplete: copying reached 91%, then Setup displayed “Cannot read from drive

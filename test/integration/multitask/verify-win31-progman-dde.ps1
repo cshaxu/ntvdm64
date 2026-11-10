@@ -25,11 +25,15 @@ try {
  if(!(Test-Path -LiteralPath "$dest/PATCH/DDE.BIN" -PathType Leaf)){throw 'DDE witness result missing'}
  $result=[IO.File]::ReadAllBytes("$dest/PATCH/DDE.BIN")
  if($result.Length -ne 8 -or [BitConverter]::ToUInt16($result,0) -ne 6 -or
-    [BitConverter]::ToUInt16($result,2) -ne $groups.Count){throw 'DDE transactions did not complete'}
+    [BitConverter]::ToUInt16($result,2) -ne 7){throw 'DDE transactions did not complete'}
+ $items=@{'DDEMAIN.GRP'='WINFILE.EXE';'DDEACC.GRP'='NOTEPAD.EXE';'DDEGAME.GRP'='WINMINE.EXE'}
  foreach($group in $groups){
   if(!(Test-Path -LiteralPath "$dest/PATCH/$group" -PathType Leaf)){throw "DDE group missing: $group"}
-  & "$repo/assets/release/GRP.EXE" show "$dest/PATCH/$group"
+  $shown=@(& "$repo/assets/release/GRP.EXE" show "$dest/PATCH/$group")
   if($LASTEXITCODE){throw "DDE group invalid: $group"}
+  if($items.ContainsKey($group) -and !($shown | Where-Object {$_ -match ([regex]::Escape($items[$group])+'\s*$')})){
+   throw "Expected program item missing from $group"
+  }
  }
  $ini=[IO.File]::ReadAllText("$dest/PROGMAN.INI")
  $found=@($groups|Where-Object {$ini -match ('(?im)^Group\d+\s*=\s*[^\r\n]*'+[regex]::Escape($_)+'\s*$')})
