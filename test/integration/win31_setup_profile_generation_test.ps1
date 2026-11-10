@@ -11,7 +11,7 @@ Copy-Item -LiteralPath "$repo/tools/win-multitask/APPLY.CMD" -Destination "$patc
 foreach($name in 'HASH.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item -LiteralPath "$repo/assets/release/$name" -Destination "$patch/$name"}
 @('@echo off','exit /b 0')|Set-Content "$bin/run16.cmd" -Encoding ascii
 $before=@{}
-foreach($name in @('WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','SYSTEM/MOUSE.DRV','SYSTEM.INI')){
+foreach($name in @('WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','SYSTEM/MOUSE.DRV','SYSTEM.INI','PROGMAN.INI')){
     $file=Join-Path $install $name;[IO.File]::WriteAllText($file,"fixture only: $name");$before[$file]=(Get-FileHash -LiteralPath $file).Hash
 }
 $oldPath=$env:PATH;$oldNoPause=$env:NTVDM_SETUP_TEST_NO_PAUSE
@@ -50,8 +50,8 @@ try{
     if((Get-Content "$profiles/CONFIG.NT" -Raw) -notmatch '(?im)^dosonly\s*$'){throw 'DOSONLY=1 profile did not enable DOSONLY'}
     foreach($name in 'INSIGNIA.386','NTVDM64.386'){if(Test-Path "$profiles/$name"){throw "DOSONLY=1 installed $name"}}
     $native=Join-Path $root 'N';New-Item -ItemType Directory -Path (Join-Path $native 'SYSTEM')|Out-Null
-    foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE'){[IO.File]::WriteAllText((Join-Path $native $name),'fixture')}
-    $nativeGuest=@{};foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE'){$nativeGuest[$name]=(Get-FileHash (Join-Path $native $name)).Hash}
+    foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','PROGMAN.INI'){[IO.File]::WriteAllText((Join-Path $native $name),'fixture')}
+    $nativeGuest=@{};foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','PROGMAN.INI'){$nativeGuest[$name]=(Get-FileHash (Join-Path $native $name)).Hash}
     [IO.File]::WriteAllText("$native/SYSTEM.INI","[386Enh]`r`n")
     foreach($round in 1..2){
         [IO.File]::WriteAllText("$root/input.txt","$native`r`n0`r`n",[Text.Encoding]::ASCII)
@@ -64,6 +64,7 @@ try{
         if((Get-FileHash "$nativePatch/$name").Hash -ne (Get-FileHash "$patch/$name").Hash){throw "Wrong installed driver: $name"}
         if(!(Get-Content "$native/SYSTEM.INI" -Raw).Contains("$native\PATCH\$name")){throw "Missing driver entry: $name"}
     }
+    foreach($name in 'MULTITASK.HASH','MULTITASK.INI.BAK','MULTITASK.INI.NEW'){if(Test-Path "$nativePatch/$name"){throw "Unexpected installed recovery record: $name"}}
     foreach($name in 'WINSTD.PIF','WIN386.PIF'){if(!(Test-Path "$nativePatch/$name")){throw "Missing $name"}}
     foreach($name in $nativeGuest.Keys){if((Get-FileHash (Join-Path $native $name)).Hash -ne $nativeGuest[$name]){throw "Guest binary changed: $name"}}
     'PASS both DOSONLY modes, driver staging, repeated profile generation and conflict preservation; Setup execution is a test shim'

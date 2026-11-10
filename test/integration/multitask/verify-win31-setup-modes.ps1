@@ -52,6 +52,7 @@ foreach($mode in 0,1){
    if($installed -and (Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Driver differs: $name"}
   }
   foreach($name in $guest.Keys){if((Get-FileHash "$dest/$name").Hash -ne $guest[$name]){throw "Guest binary changed: $name"}}
+  & "$repo/test/integration/win31_program_groups_test.ps1" -InstallRoot $dest
   $cases=if($mode -eq 0){@('std-dosonly0','386-dosonly0')}else{@('std-dosonly1','386-dosonly1')}
   & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -Cases $cases
  } finally {

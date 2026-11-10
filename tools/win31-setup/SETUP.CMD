@@ -81,12 +81,20 @@ rmdir "%TEMP%" 2>nul
 if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
 exit /b %patch_result%
 :install_multitask
-if not exist "%DEST%\MULTITASK.INI.NEW" (
+if not exist "%DEST%\INSIGNIA.386" if not exist "%DEST%\NTVDM64.386" (
   call "%~dp0MULTITASK.CMD" "%INSTALLROOT%" "%~dp0" || exit /b 5
+)
+for %%F in (INSIGNIA.386 NTVDM64.386) do fc /b "%DEST%\%%F" "%~dp0%%F" >nul || (echo Preserve changed multitask driver: %%F& exit /b 5)
+for %%I in ("%INSTALLROOT%") do set "MULTIROOT=%%~sI"
+for %%F in (INSIGNIA.386 NTVDM64.386) do findstr /i /l /x /c:"device=%MULTIROOT%\PATCH\%%F" "%INSTALLROOT%\SYSTEM.INI" >nul || (echo Preserve changed multitask configuration.& exit /b 5)
+if not exist "%DEST%\MULTITASK.INI.NEW" (
+  if exist "%DEST%\MULTITASK.INI.BAK" exit /b 5
+  if exist "%DEST%\MULTITASK.HASH" exit /b 5
   exit /b 0
 )
+for %%F in (MULTITASK.INI.BAK MULTITASK.HASH) do if not exist "%DEST%\%%F" exit /b 5
 fc /b "%INSTALLROOT%\SYSTEM.INI" "%DEST%\MULTITASK.INI.NEW" >nul || (echo Preserve changed multitask configuration.& exit /b 5)
-for %%F in (INSIGNIA.386 NTVDM64.386) do fc /b "%DEST%\%%F" "%~dp0%%F" >nul || (echo Preserve changed multitask driver: %%F& exit /b 5)
+for %%F in (MULTITASK.HASH MULTITASK.INI.BAK MULTITASK.INI.NEW) do del /q "%DEST%\%%F" || exit /b 5
 exit /b 0
 :make_launch
 >"%WORK%\%~1.CMD" echo @echo off

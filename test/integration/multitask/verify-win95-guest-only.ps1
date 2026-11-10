@@ -48,7 +48,9 @@ try {
   $until=[DateTime]::UtcNow.AddSeconds(90)
   while(!(Test-Path "$dest/PATCH/ONLY.BIN") -and !$process.HasExited -and [DateTime]::UtcNow -lt $until){Start-Sleep -Milliseconds 200;$process.Refresh()}
   if(!(Test-Path "$dest/PATCH/ONLY.BIN") -or [IO.File]::ReadAllText("$dest/PATCH/ONLY.BIN") -ne 'PASS'){throw 'Guest DOS witness did not complete'}
-  'PASS Win95 DOSONLY=1 launches and executes a guest DOS program; test-owned session retired by fixture'
+  $workers=@(Get-CimInstance Win32_Process | Where-Object { $_.ExecutablePath -and $_.ExecutablePath -ieq "$stage\system32\ntvwm.exe" })
+  if($workers.Count){throw 'Guest-only DOS witness unexpectedly started a native CUI worker'}
+  'PASS Win95 DOSONLY=1 executes a guest DOS program; no native CUI worker present while it waits; test-owned session retired by fixture'
  } finally {
   if($process){if(!$process.HasExited){$process.Kill($true);$process.WaitForExit()};$process.Dispose()}
   if($scope){Stop-IsolatedPackageScope $scope};if($stage){Remove-PhysicalRuntimeStage $stage}

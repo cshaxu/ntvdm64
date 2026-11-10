@@ -12,6 +12,8 @@ mov ah, 40h
 int 21h
 mov ah, 3eh
 int 21h
+xor ax, ax
+int 16h
 done:
 mov ax, 4c00h
 int 21h
