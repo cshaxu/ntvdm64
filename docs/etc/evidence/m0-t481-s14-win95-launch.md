@@ -108,6 +108,14 @@ exit 0 is not a completed-install receipt. The rerun must handle the empty
 optical drive without canceling a copy operation and assert the installed files
 and groups explicitly.
 
+The private-desktop controller was also paused on the later configuration
+screen. A capture confirms that “let you make the modifications later” was
+selected before Enter; subsequent captures nevertheless showed AUTOEXEC and
+CONFIG backup dialogs, and the resulting isolated tree remained incomplete.
+Thus a selected radio button alone is not proof that the intended Setup path
+was accepted; this controller sequence cannot be used as successful Setup
+evidence. The diagnostic relink and isolated installation were not published.
+
 A separate test-only NTVDM relink made native opens of `\\??\\I:` return
 object-not-found for that process; neither production images nor system drive
 assignments were changed. Original Setup still exited without WIN.COM or
