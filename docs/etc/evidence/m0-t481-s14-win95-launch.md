@@ -192,3 +192,7 @@ each referenced `.GRP`, instead of accepting any existing file. A real empty
 StartUp group passed, while a corrupt group and a non-group file were rejected;
 all four groups in the owner's recovered O:/w31 also parsed. This improves the
 assertion for later runs, but it does not prove an original fresh installation.
+The full four-case Win3.1 mode matrix was rerun with this strengthened check:
+all four launches and normal exits passed, both copied installations had four
+parseable groups, and the owned O:/tmp/q31 copy was cleaned. Original Setup
+was still a shim in that particular matrix.
