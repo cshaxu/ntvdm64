@@ -17,8 +17,9 @@ mkdirSync(`${build}/obj`, { recursive: true });
 const demSource = readFileSync(`${root}/src/mvdm-host/dos/dem/demfile.c`, "utf8");
 const demStart = demSource.indexOf("VOID demCreateCommon (flCreateType)");
 const demEnd = demSource.indexOf("BOOL IsCdRomFile (PSTR pszPath)", demStart);
-if (demStart < 0 || demEnd <= demStart) throw new Error("DEM source boundaries changed");
-writeFileSync(`${build}/dem-create-body.inc`, demSource.slice(demStart, demEnd));
+const demNameHelper = demSource.match(/^static BOOL demCopyFileName\(CHAR fileName\[MAX_PATH\]\)[\s\S]*?^}/m)?.[0];
+if (demStart < 0 || demEnd <= demStart || !demNameHelper) throw new Error("DEM source boundaries changed");
+writeFileSync(`${build}/dem-create-body.inc`, `${demNameHelper}\n${demSource.slice(demStart, demEnd)}`);
 writeFileSync(`${build}/dem-create-source.sha256`, createHash("sha256").update(demSource).digest("hex"));
 const mediaSource = readFileSync(`${root}/src/mvdm-host/dos/dem/demgset.c`, "utf8");
 const mediaStart = mediaSource.search(/BOOL\s+GetMediaId\(/);
@@ -86,7 +87,7 @@ const lines = [
   "build obj/config-path-test.obj: cc $root/tests/mvdm/oemuni/oemuni_config_path_fixture.c",
   '  cflags = $cflags /I "$root/src" /I "$root/src/ntvdm-exe/softpc/include"',
   "build oemuni-config-path-fixture.exe: link obj/config-path.obj obj/config-path-test.obj obj/system-root.obj",
-  "build obj/font-retry.obj: cc $root/tests/mvdm/oemuni/oemuni_font_retry_fixture.c",
+  "build obj/font-retry.obj: cc $root/tests/mvdm/oemuni/oemuni_font_retry_fixture.c | dem-create-body.inc",
   `  cflags = $cflags /I \"${build}\"`,
   "build oemuni-font-retry-fixture.exe: link obj/font-retry.obj",
   "build obj/media.obj: cc $root/tests/mvdm/oemuni/oemuni_media_fixture.c",

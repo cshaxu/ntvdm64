@@ -227,6 +227,13 @@ published and all 11 host-image hashes matched in both release locations; the
 installed W31 driver hashes matched. This does not close the original Setup or
 whole-mirror audit gaps.
 
+The separate OEM font-create retry fixture was not part of those Full gates.
+Its source extractor needed the new shared DEM pathname helper as well as the
+original create handler; that test-only integration has now been corrected.
+The actual extracted helper and handler pass all five prior font-retry cases
+and two invalid-address cases, each rejecting before a host create call. No
+production image changed in this follow-up.
+
 The same published package was subsequently exercised through both Win95
 launch selections. DOSONLY=0 reached two concurrently active DOS VMs, 320
 identity/stack/register/flags checks and four native commands; the shutdown
