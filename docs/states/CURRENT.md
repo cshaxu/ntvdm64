@@ -2,40 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T481 S13 — Win3.1 setup and remaining multitask acceptance.**
+**No active S packet. T481 S13 is closed; S14 is next for admission.**
 S12 was closed by owner decision after the reported close dialog did not recur
 in bounded probes; its root cause remains unlocated. See
 [S12 evidence](../etc/operations/m0-t481-multitask-completion-plan.md#s12-preliminary-source-observations).
 
-## Active Packet
+## S13 closure
 
-| Field | Record |
-| --- | --- |
-| Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md). |
-| Identifier Mode | M0 T481 S13, Ordinary Mode. |
-| Admission And Approval | Owner accepted S12 closure and prioritized S13 and S14; the owner directed the Win3.1 setup enhancement and retained multitask acceptance. |
-| Objective | Update Win3.1 setup to select DOSONLY=0 or 1, generate matching launch profiles and configure released multitask drivers for DOSONLY=0; complete remaining admitted multitask acceptance. |
-| Non-goals | Do not alter or rebuild original guest binaries; do not use Computer Use; do not change unrelated product behavior. |
-| Reference Baseline | S10 production package e09695f6-40f3-453d-8b96-e732d1050f4d; original DOS and GUI startup profiles and released driver pair. |
-| Files And ABI Surface | tools/win31-setup, applicable existing addon tools, launch-profile and integration tests, current task records. |
-| Applicable Rules | Execution, source policy, guest immutability, source-first and minimal implementation; patch packages use CMD and existing addon tools only. |
-| Verification | Validate DOSONLY=0 and 1 for Standard and 386 Enhanced profiles, installation and launch; verify released driver staging and applicable multitask lifecycle and I/O acceptance. |
-| Expected Markers | Four profiles select their intended mode; DOSONLY=0 installs and configures both released drivers; original guest binaries remain unchanged. |
-| Asset Needs | Released addon tools and drivers, isolated Windows 3.1 installations and real test facilities; clean task-owned O:/tmp copies. |
-| Reporting Requirements | Exact setup changes, all four case results, hashes and unverified boundaries; retain integrated acceptance obligations. |
-| Stop Conditions | Original guest mutation or unapproved observable semantic retreat. |
-| Exit Criteria | Required changes and acceptance completed; coherent package built, tested, published, committed and pushed as applicable. |
-| Original Owner Request | Select DOSONLY at end of setup, generate matching profiles, install the two released multitask drivers for DOSONLY=0, and test four combinations. |
-| Similar-Issue Sweep | Win31 setup and generated profiles; Win95 counterpart remains S14. |
-
-S13 retains the other multitask gaps, normal Win95 shutdown evidence and
-integrated acceptance. The direct-start large inherited-environment boundary
-remains recorded in [S9 direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
-
-S13 setup implementation and its coherent host package have passed the
-recorded four-mode and Full checks and been published. The four-mode probe
-uses a Setup executable shim; a fresh original interactive Setup run is not
-yet established by that evidence. See [S13 evidence](../etc/evidence/m0-t481-s13-win31-setup.md).
+S13 completed its setup selection, four actual Win3.1 mode launches and full
+coherent package delivery. Original Setup was not rerun interactively: its
+unchanged command and failure-exit contract were checked with a test shim.
+This is a stated verification boundary, not evidence of a fresh installation.
+See [S13 evidence](../etc/evidence/m0-t481-s13-win31-setup.md). Remaining
+integrated Win95 acceptance belongs to S14.
 
 S14 enhances `tools/win95-launch` with the same DOSONLY=0 / DOSONLY=1
 selection and matching launch configuration. For DOSONLY=0, install the
