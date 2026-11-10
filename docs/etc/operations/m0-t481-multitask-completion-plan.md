@@ -2277,6 +2277,46 @@ management Console-close route. Neither result alone demonstrates that a real
 host console-window X close during a Win95 session avoids a hard-error dialog.
 The existing `console_startup_observer.c` already has window-close probes and
 should be evaluated for reuse against that specific route in S12.
+S12 `close-baseline` extends the existing private-desktop observer to wait for
+the Win16 controller's READY.BIN, send WM_CLOSE to its own Console window,
+and watch the exact staged NTVDM for the generic error dialog. The sent
+marker was observed, and the nested observer exited 0xC000013A; no matching
+dialog was captured. This is a single negative observation, not proof that
+the dialog is fixed: the error-dialog detector has not yet passed a positive
+control, and the owner's original diagnostic package has a different NTVDM
+hash from the S10 production candidate. Original installation hashes matched
+and O:/tmp/q94 was removed.
+The subsequent owner diagnostic-package run sent the close but captured no
+dialog; its source-inventory guard observed a newly created zero-byte
+WNBOOTNG.STS in the original installation during the run, so the source was
+not byte-for-byte unchanged and that run does not prove isolation. The file
+was left intact. A later production-candidate run verified the then-current
+source hashes but cleanup initially refused an in-use guest copy; after the
+referencing process exited the real ownership-checked cleanup completed. The
+dialog detector passed an independently authored private-desktop synthetic
+positive control and a wrong-process negative control. These checks do not
+establish the reported close error's root cause or prove that the observer's
+Console window represents the user's physical Console window.
+The revised visible-console probe on the production S10 package reached its
+Win95 desktop-ready marker and posted WM_CLOSE to a visible
+`ConsoleWindowClass`; it did not observe the error in that run. The separate
+two-editor attempt saved the first file, but the second file remained empty
+and its reported Console HWND was not queryable/visible on the private
+desktop; the observer exited 96 without sending a close. That attempt is not
+a negative reproduction or an editor acceptance result. Both corresponding
+isolated copies were retired; source hashes matched during these runs.
+The owner clarified that the close may be attempted during startup without
+waiting for the desktop. In an isolated direct-root test on the logged-in
+desktop, visible Console WM_CLOSE was posted and the root launcher exited
+without an observed error dialog within the test's ten-second
+observation, once with the S10 candidate and once with the owner's diagnostic
+package. A startup-phase diagnostic run also exited without recording a hard
+error; a separate startup run did not establish full retirement within ten
+seconds. These limited observations do not reproduce or explain the owner's
+one historical pipe-error dialog. The owner accepts S12 closure without
+further reproduction and prioritizes S13 and S14. No product behavior or
+original guest binary was changed, and no fix is claimed. The temporary
+probe changes were retired, and task-owned O:/tmp copies were removed.
 
 ## S11 current baseline
 
