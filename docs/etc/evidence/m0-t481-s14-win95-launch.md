@@ -181,6 +181,12 @@ explains a possible distinction an installer could observe, but there is no
 evidence yet that Setup calls either function before its SWAPTST5 probe. An
 isolated DOS IOCTL witness timed out before producing output; it is not a
 passing runtime check and does not justify changing those original semantics.
+That attempt had a visible 16-bit subsystem error dialog, so it did not prove
+an IOCTL wait. A subsequent independent DOS witness used a short test-stage
+path and a minimized process environment: it exited 0 after asserting that
+4408 returned AX=1 and 4409 returned DX=0x1000 for I:. The observer captured
+its PASS output. This confirms the runtime values but still does not establish
+which IOCTLs the original Setup program actually calls.
 
 An additional test-only relink logged only native file opens on I: without
 changing their return values. During original Setup it recorded an initial
