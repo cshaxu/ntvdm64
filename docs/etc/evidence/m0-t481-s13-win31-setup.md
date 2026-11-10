@@ -32,6 +32,14 @@ W31 addon hashes matched the released pair. The first Full attempt stopped at
 the identity check before running any gate; the recorded pass is the rerun
 with its comparison cache populated from the stamped candidate.
 
+The owner-facing entrypoints are the committed `tools/win31-setup` scripts.
+The media-preparation tool takes its executable and driver materials from
+`assets/release`: HASH.EXE, PIF.EXE, SZDD.EXE, patch31.exe, MOUSE31.DRV,
+insignia.386 and ntvdm64.386 were individually checked against the addon
+manifest. The shared CMD implementation is staged from the repository tools;
+the media itself is the user-supplied copy. The original Setup launch and
+failure-exit contract passed `win31_setup_runner_test.ps1` after delivery.
+
 This evidence does not replace the remaining integrated multitask and Win95
 acceptance. The reported console-close dialog remains an unresolved historical
 observation, not a claimed fix.
