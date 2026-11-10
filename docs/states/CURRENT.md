@@ -71,6 +71,10 @@ The next candidate also removes the local zero-length write bypass; 20 real
 DOS truncate/seek rounds and 20 guest VDMREDIR zero-byte pipe writes passed,
 along with all 16 selected Full gates. Package
 `b385aa0d-20bc-4de9-ad4e-3372a4e14bfc` was published to both host locations.
+That package was subsequently rechecked through both real Win95 launch modes
+and all four Win3.1 Program Manager DDE mode combinations. The Win95
+guest-only witness still retires its own session; a fresh original Win3.1
+Setup remains unverified.
 
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The

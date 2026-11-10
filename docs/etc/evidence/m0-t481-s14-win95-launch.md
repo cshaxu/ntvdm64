@@ -178,6 +178,17 @@ timestamps. The owner permits skipping repeat tests for this exact case; the
 tested 11-image package `b385aa0d-20bc-4de9-ad4e-3372a4e14bfc` was published
 and hash-verified in both host locations; the installed W31 addon pair matched.
 
+The published package was subsequently checked again against both actual Win95
+launch choices. DOSONLY=0 observed two concurrent DOS VMs, 320 callback
+identity/stack/register/flags checks, and four native commands returning to
+their guest callers; the original installation was verified unchanged.
+DOSONLY=1 ran a guest DOS witness with no native CUI worker, after which the
+fixture retired the session; normal Win95 shutdown is not established.
+On separate isolated Win3.1 copies, original Program Manager DDE created and
+indexed four groups with an initially empty profile in standard and enhanced
+modes with both DOSONLY settings. All four Windows sessions exited normally.
+This still does not substitute for a complete original interactive Setup run.
+
 After delivery, the verified external DOS4GW/Nesticle fixture was located
 and run separately against that same package. In a reduced inherited
 environment, NESticle remained running with a visible graphics window; the
