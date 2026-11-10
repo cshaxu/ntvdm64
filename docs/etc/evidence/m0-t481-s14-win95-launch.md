@@ -108,6 +108,11 @@ exit 0 is not a completed-install receipt. The rerun must handle the empty
 optical drive without canceling a copy operation and assert the installed files
 and groups explicitly.
 
+An isolated-process device-map experiment did not hide `I:`: even after the
+process-local map call returned success, a child `dir I:\` still reported the
+existing device as not ready. It is not a working isolation method; the system
+drive assignment and optical device were not modified.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
