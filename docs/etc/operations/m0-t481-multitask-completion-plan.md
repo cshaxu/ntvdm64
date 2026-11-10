@@ -2242,3 +2242,14 @@ S10 packet now investigates EDIT.EXE input as requested; the previously
 assigned Win3.1/Win95 batch-PE32 packet moves to S11, and other remaining
 multitask and integrated acceptance moves to S12. All original obligations
 remain. The only active packet and its detailed verification are in CURRENT.
+
+## S10 diagnostic acceptance and S11 frontend close
+
+The owner subsequently reported the diagnostic Win95 version fully working.
+The mouse investigation made no product change and did not establish the
+cause of the earlier EDIT.EXE report; the diagnostic/formal package identity
+and event attribution limitations remain in [S10 evidence](../evidence/m0-t481-s10-edit-mouse.md).
+The owner then requested investigation of a pipe-disconnection system-error
+dialog after closing the console window. This is admitted as S11; the former
+batch-PE32 S11 and integrated-acceptance S12 move to S12 and S13 respectively,
+without removing their obligations. CURRENT owns the active packet.
