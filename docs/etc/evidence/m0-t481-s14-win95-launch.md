@@ -441,3 +441,357 @@ The full four-case Win3.1 mode matrix was rerun with this strengthened check:
 all four launches and normal exits passed, both copied installations had four
 parseable groups, and the owned O:/tmp/q31 copy was cleaned. Original Setup
 was still a shim in that particular matrix.
+
+## Win3.1 eight startup cases and no-driver prompt investigation
+
+On isolated copies of the owner's installed Win3.1, both Standard and Enhanced
+booted, reported the requested DOSONLY value (0 and 1) and exited normally
+with the addon pair configured and with it absent. The runner checked source
+file hashes before removing the copies. These eight results cover startup and
+shutdown without using a DOS prompt.
+
+A separate Enhanced DOSONLY=1 probe without either addon launched a copy of
+DOSPRMPT.PIF via WinExec. With its original COMMAND.COM program field and a
+test-only /c echo command it wrote S14_OK to the requested DOS file and
+returned normally. In the explicit-path control, using a copy of the package
+COMMAND.COM, WinExec also returned 14DE but no output file appeared. Guest
+graphics frame 13 showed an invalid-instruction system-integrity error for
+MS-DOS Prompt; frame 20 showed ExitWindows refusing to exit while it remained
+active. The observer timed out. This establishes an actual guest error under
+that control. It does not establish a pathname defect or a mouse callback
+cause. The interactive original prompt and post-error mouse remain open.
+Task evidence: build/t481-s14/w31-eight-startup and
+build/t481-s14/prompt-command-resolution2.
+
+### Win3.1 profile coverage
+
+Eight-prompt-receipts passed the DOS command output, Notepad and zero-exit
+checks in all eight cases. Eight-prompt-mouse also required guest-observed
+movement, press and release after the DOS command. Both Standard profiles
+passed with both DOSONLY values. Enhanced passed both with the addons. Without
+them DOSONLY=0 produced command output and reached mouse readiness, but the
+frontend probe returned 68 and the launcher exited 0xffffffff. DOSONLY=1 timed
+out before the command result and before mouse input. The failure points differ.
+
+In the no-addon Enhanced DOSONLY=1 paired experiment, the stock mouse=*vmd
+and the explicit device=*vmd configurations each passed once and timed out
+once. The latter's failing frame shows the guest invalid-instruction dialog
+before mouse readiness. The final source-inventory check also reported a count
+change; original inventory identity was not established by this run. Separate
+diagnostic package fault-source/run2 passed once and twice lost the frontend
+after command output. Run1 was rejected before guest execution by the manifest
+check and supplies no guest evidence.
+
+The common matrix uses a copy of DOSPRMPT.PIF with /c echo. This verifies DOS
+command output and desktop recovery but cannot prove which host scheduling
+path was used. Existing dual-editor tests exercise guest DOS and PE rejection
+with DOSONLY=1, and two host payload chains with DOSONLY=0, under their own
+enhanced-mode addon fixtures. S14 still needs per-profile runtime evidence
+for synchronous child wait and resumption, independent VM progress with a
+host child in flight where supported, and fullscreen presentation handoffs.
+
+Four further production-package trials each started from a freshly generated
+no-addon profile copied from the same source. All four enhanced DOSONLY=1
+trials produced the DOS receipt, observed mouse movement and press/release
+after returning to Notepad, and exited Windows normally. Their source
+inventory SHA-256 was identical, as were SYSTEM.INI, WIN.INI and CONFIG.NT
+input hashes. See build/t481-s14/fresh-prompt-reproduction. This tests the
+PIF /c scenario; it does not establish interactive prompt stability or the
+cause of the earlier failures on reused installations.
+
+The same released package was then exercised twice per installation on two
+more isolated copies, with pre-boot file inventories. Copy A timed out on
+both its first and second boots before the DOS receipt. Its two inventories
+were identical. Copy B passed both times, including mouse and exit. Its
+DOSAPP.INI and PROGMAN.INI changed on normal shutdown. Thus a second boot
+is neither necessary nor sufficient to make this particular probe fail.
+The four single-boot plus four paired trials gave six passes and two
+timeouts; this is a bounded sample, not a failure-rate estimate. See
+build/t481-s14/prompt-second-boot. These runs did not attribute the guest
+fault to a component.
+
+Four further independent no-addon enhanced DOSONLY=1 runs retained process
+handles through observation. Two timed out with Run16, NTVDM and NTCON all
+alive before cleanup. On both passes all three exited with code zero
+(build/t481-s14/fault-source/owners).
+
+A separate four-run release-package control placed guest markers immediately
+before and after WinExec of DOSCHECK.PIF. Two passed. In fresh4 both markers
+existed, but the DOS command receipt was absent and no mouse input had been
+sent. The return marker does not record the WinExec return value. In fresh3
+the command and Notepad readiness receipts existed. The mouse helper returned
+68 with an empty report while NTCON was still alive. In that helper this
+meant no matching frontend window was found, with no input delivered. See
+build/t481-s14/fault-source/stages. The matrix now distinguishes an empty
+window lookup from desktop enumeration and delivery failures. It permits a
+new lookup only while no input has been sent, within the existing observer
+deadline. A permanently absent frontend still fails the case.
+
+The eight-profile rerun with the updated test helper and the same release
+package passed seven rows (build/t481-s14/eight-presentation-ready).
+Enhanced DOSONLY=0 without the pair timed out after the Win16 boot marker
+and before the DOS command output or the first mouse request. Enhanced
+DOSONLY=1 without the pair passed on this run. No product fix follows from
+the change to the mouse test helper.
+
+On four more independent release-package boots of enhanced DOSONLY=1
+without addons, the PIF WinExec returned 0x14DE every time. With the
+inherited observer environment, both runs timed out before command output;
+with the Windows-generated logon environment, both passed. The measured
+environment entries occupied 3908 and 1931 characters respectively, using
+the sum of each name, equals sign, value and terminator. Padding the logon
+environment to 3908 using one inert variable passed twice; the interleaved
+1931-character controls also passed twice. This rules out a deterministic
+threshold at that host environment size. See fault-source/environment-control
+and fault-source/environment-padding under the S14 build directory.
+
+An isolated diagnostic used the existing command_environment_trace.c around
+cmdGetInitEnvironment. All four diagnostic runs passed (two per environment),
+and none of their observed environment allocations overlapped DS:203C.
+These samples cannot establish what changed in a failing guest. The original
+COMMAND EndInit calls that service on the permanent-shell path; a secondary
+shell can take copy_old_env without entering the traced service. The prior
+discarded-INIT bug remains unproven for this S14 fault. Diagnostic artifacts
+are in fault-source/writer-control and env-writer. Only test copies ran the
+diagnostic executable.
+
+The setup matrix also checks the installed [386Enh] entries for each addon,
+including its exact installed path, multiplicity, or absence. The ensuing
+release-package run passed all eight prompt/Notepad/mouse/exit cases,
+including enhanced without drivers for both DOSONLY values
+(build/t481-s14/eight-profile-references). It did not run the original
+graphical installer again. Dual DOS-window interaction and the fullscreen
+presentation transitions remain separate acceptance requirements.
+
+PIF.EXE show on the owner's DOSPRMPT.PIF reports W386.FLAGS=0x21008.
+The original pif.h defines 0x8 as fFullScreen and 0x2 as fBackground.
+The eight cases therefore exercise a profile requesting fullscreen and
+foreground scheduling. They do not establish the actual visible mode of
+each frame. In a four-run isolated enhanced DOSONLY=1 no-addon control,
+a direct DOS .COM writing the same receipt via INT 21h passed twice; the
+original shell running /c echo passed once and timed out once
+(fault-source/direct-dos-control). These counts do not isolate a shell bug.
+
+With the original shell and arguments held fixed, changing only fFullScreen
+on a test PIF produced two successful windowed-profile runs. Both fullscreen
+controls timed out before DOS command output (fault-source/display-control).
+Other fullscreen runs have passed. This comparison identifies a useful
+trigger, without establishing a deterministic failure or its cause.
+
+Two independent no-addon enhanced DOSONLY=1 trials launched distinct
+windowed COMMAND prompts with background execution enabled. Each launched a
+DOS .COM which wrote its own marker and could finish only after reading the
+other's. The guest controller started B after observing A's marker, and
+required A.END and B.END before exercising Notepad mouse input and requesting
+Windows exit. Both passed (fault-source/windowed-dos-pair). This proves
+overlapping guest execution; keyboard focus and interactive fullscreen
+switching are separate properties.
+
+The checked-in test sources were rerun together in eight-plus-guest-pair:
+seven of eight single-prompt cases passed. The no-addon enhanced DOSONLY=1
+case timed out after the Win16 boot marker and before the command receipt.
+Both additional windowed guest-pair cases passed (addons configured and
+absent). A.RUN, B.RUN, A.END and B.END were collected independently for each
+profile, followed by the Notepad mouse and normal Windows-exit witnesses.
+The combined runner correctly returned failure for the single-prompt timeout.
+
+Two isolated host-only diagnostics then observed original DEM file operations.
+The open-only instrument passed four times (dem-prompt/results). With both
+open and read observation and the original fullscreen PIF flags throughout,
+two runs passed and two timed out (dem-prompt-read/results). After the guest
+WinExec return marker, all four searched for COMMAND.COM and recorded a
+successful open. On both passes a second successful open was followed by
+successful reads of 62 bytes at offset 0 and 50384 bytes at offset 62, then
+creation of EXEC.TXT. Both failures stopped after the first successful open.
+No second open, tracked shell-image read or output file was observed. This
+distinguishes the failures from shell search exhaustion and from a lost
+mouse event following command completion. The read probe follows the most
+recent COMMAND.COM handle opened through DEM; it cannot rule out accesses
+through another interface. Neither diagnostic was published.
+
+In a separate four-run diagnostic, fault recording was enabled at the
+controller's PIF-launch marker and disabled upon a successful open/create
+of EXEC.TXT. Three runs passed. Their recorded invalid-opcode traps in this
+interval were on opcode 63h in V86 mode. The timeout in prompt-exception/
+results/fresh2 again lacked the second shell open, and recorded an additional
+V86 #UD at 01B7:033D, with preceding instructions decoding a long series of
+zero bytes. This provides a failing guest execution trace before the command
+receipt. The trapping address does not identify who transferred control there.
+
+The prompt-edge diagnostic retained changes of CS/VM execution preceding
+each distinct non-ARPL invalid opcode. In two failing runs (second/fresh3
+and fresh4) the chain entered the BIOS mouse IRQ at F000:EE00, executed the
+BIOS OUTB trampoline at F000:3050 for the PIC acknowledgements, entered
+FEFE:0B37 (ARPL), then returned from the guest VMM to 01B7:0228. Execution
+there reached the invalid opcode. The source matches
+mouse_io.c::jump_to_user_subroutine followed by the two outb calls in
+mouse_int1 and the original guest BIOS OUTB trampoline. The eight edge
+runs included six passes; no production CPU behavior was changed.
+
+Independent registration/dispatch observation (prompt-mouse-owner/second)
+confirmed two failures with the same installed INT 33h callback FEFE:0B37.
+The failing dispatch had condition mask 1 (movement), SS:SP=00A7:0792.
+The earlier desktop dispatch of the same callback had SS:SP=0E29:0236.
+Both reported CR3=1DC000, IVT physical address 0 and callback physical
+address FFB17. Those values cannot distinguish the two contexts in these
+samples. Stack addresses are diagnostic evidence and do not identify a VM.
+MOUSE31.DRV obtains the callback using DPMI 0303 and installs it using
+INT 33h function 0Ch. Without NIDDB activation virtual_swap_instance
+returns before selecting an instance. This accounts for how one stored
+callback can still be selected during a DOS-prompt transition.
+
+In an isolated causal control, the original IRQ, counters and EOI were
+retained. A test flag allowed withholding only movement callbacks between
+PIF launch and first DOS output. All four boots passed. One flagged boot
+actually withheld a dispatch to FEFE:0B37 with SS=00A7; both later guest
+mouse phases and normal exit passed. The other flagged boot saw no callback
+to withhold. Both unflagged boots passed on this occasion. This control is
+in prompt-mouse-control/results. It supports investigating callback ownership;
+dropping movement during startup would change input semantics and has not
+been installed or proposed as the fix.
+
+Four further no-addon fullscreen runs instrumented the original INT33
+dispatcher and enhanced mouse BOP in prompt-mouse-functions/results. All
+four completed. Each trace contains exchange 14h, registration 0Ch with
+mask 1Fh, desktop button down/up and final 0Ch removal. None reached
+15h/16h/17h or mouse_EM_callback. The original MOUSE_CONTEXT includes
+the callback address and mask; changing its serializer would not affect
+these four boots.
+
+An independent DOS child probe in prompt-child-context/results queried
+INT2F/1683h for the executing VM ID and INT33/24h for the mouse version.
+The latter is a read-only provider query. The first boot reproduced the
+fullscreen failure before this program ran; the dispatch log again shows
+a movement callback on SS=00A7. The second boot ran the program and shut
+down normally. VMCTX.BIN was 02 00 00 08 02 03; the host recorded VM ID 2
+from the marked query and found FEFE:0B37 still selected, matching the
+desktop callback registered earlier in that same run. Thus the stale
+registration is directly observable even on a successful boot, independent
+of the timing of mouse motion. Neither test changed the installed system.
+
+With both addons installed and DOSONLY still asserted by the boot witness,
+the same VM 2 query found 0000:0000 twice. Both controls completed. On the
+published-code reference, eight-distinct-vms passed all eight configuration
+cases plus the two DOSONLY=1 prompt-pair cases. Each pair recorded VM IDs
+2 and 3 and completed the mutual wait. The private desktop sent the mouse
+input; Setup's post-install stage used its existing shim.
+
+An addon-only experiment left the desktop callback out of INT33 and chained
+the protected IRQ9 handler before querying the original provider's position
+and buttons. In both prompt-pm-input boots the DOS child reported success
+and the host found a null callback for VM 2. One completed all mouse and exit
+checks; the other accepted frontend input but did not record the guest's
+mouse-down marker. Two additional prompt-pm-samples boots recorded IRQ,
+position query, press, release and exit. This proves a usable protected IRQ
+path, but not reliable delivery on every transition; the experiment is
+confined to build-owned test copies.
+
+Two alias controls in prompt-rm-vector changed only the representation of
+the system VM's real IRQ9 address (same linear address). The Win16 client
+read back offset EE10; DOS VM 2 still reported F000:EE00 in both runs.
+A real-vector-only driver in prompt-rm-input nevertheless missed the desktop
+press in both boots. Both reached the DOS command receipt. In both traces
+the original IRQ provider processed the press and the experimental handler
+never queried position. An isolated IVT entry alone is insufficient.
+
+The prompt-pm-scoped experiment instead exchanges the INT33 callback only
+while chaining the system VM's protected IRQ, then restores the interrupted
+registration. The original provider computes the event mask and handles EOI.
+Two no-addon DOSONLY=1 boots completed the DOS command, Notepad movement,
+button-down/up and normal Windows exit. Both DOS children reported VM 2 and
+the untouched F000:EE00 IRQ vector; the host saw a null callback during the
+child's version query. These are experimental results, not release acceptance.
+
+The experimental IRQ scope subsequently passed eight launch/mouse/exit
+configurations and both dual-prompt runs with the formal host package.
+The repository candidate uses that scope for enhanced Windows with a
+shared DOS mouse provider. It keeps direct registration for standard mode
+and an instanced provider, and uses a stack-local DPMI register image.
+The NE ABI and guest fixtures assembled. Its two no-addon ownership trials
+completed with a null desktop callback in VM 2. In scoped-reviewed/eight2
+all ten runtime reports passed, but the copied outer runner expected the
+earlier three-byte pair receipt and rejected the new five-byte format.
+The four retained END records contain role A/B, VM ID 2/3 respectively,
+and callback mask zero. This run did not pass the outer gate.
+
+The updated outer runner in scoped-reviewed/acceptance passed 8/8 basic
+configurations and 2/2 enhanced DOSONLY=1 pairs with driver SHA256
+5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07.
+The pair fixture exchanges and immediately restores the actual DOS callback
+before either child announces readiness. Both driver profiles returned
+4102000000 / 4203000000 (A in VM 2 and B in VM 3, both masks zero).
+The same no-addon windowed pair on the prior released driver completed and
+exited normally but returned 4102001F00 / 4203001F00; the new gate failed
+on the inherited mask. This control detects the bug without requiring a
+timing-dependent crash or host instrumentation.
+
+The prewin copy ran the freshly assembled M31TEST (62 checks), M31PM (65),
+M31REENT (67) and M31CTX (32-bit GPR preservation), with guest output and
+failure checks. M31REAL reported DPMI unavailable in that boot profile.
+Direct COM launch from the long package root returned 042Bh; a separate
+short-root direct launch timed out. Neither direct invocation passed.
+
+Follow-up with a short isolated package root and the integration runner's
+user environment: M31TEST and M31PM reported 62 and 65 checks respectively.
+The real DOSX run (M31REAL) reached ENABLE, DISABLE and PASS (16 checks),
+and M31CTX completed the register-preservation check. Results are in
+scoped-reviewed/shortenv-{mock,prior-pm,M31REAL,M31CTX}.
+
+The native-command-receipt run exited 0. All eight configurations reached
+normal Windows exit, including enhanced mode with both addons and DOSONLY=0.
+The four DOSONLY=0 cases checked the host CMD version via an atomically
+published file. Both extra DOSONLY=1 prompt pairs passed. Setup used a shim.
+The earlier native-command-short run timed out on normal exit in the enhanced
+two-addon DOSONLY=0 case. The new run used the default PIF directory and a
+complete command receipt; it does not isolate which difference mattered.
+
+The separate native-order/test run exercised production BOP 54:08 with two
+concurrent native programs in different enhanced-mode VMs. Both entered
+before either could finish, the second observed the first process exit,
+and the guest checked the two exit codes (37 and 38). Both VM receipts show
+160 callbacks with zero callback errors. These runs cover command execution
+and return; they do not exercise switching the fullscreen presentation.
+
+fullscreen-key-01 passed the eight basic cases, both windowed DOS VM pairs
+and two fullscreen DOSONLY=1 runs (both addons installed and both absent).
+The actual active Console screen contained S14_DOS_FULLSCREEN_READY.
+CAF opened a visible NTCON window owned by the isolated frontend. Input sent
+through that window satisfied the DOS INT16 check for lowercase k. On DOS
+exit the Win16 controller opened Notepad, observed a mouse press and release,
+closed it, and exited Windows normally. This checks entry using the PIF
+fullscreen flag; a windowed prompt switched to fullscreen with Alt+Enter
+is a distinct entry path.
+
+window-fullscreen-all passed all 14 invocations (8 basic, 2 concurrent guest
+prompt pairs, 4 enhanced fullscreen transitions). Each transition started
+with a windowed PIF. After the guest reported READY the private-desktop
+observer sent Alt down, Enter down/up and Alt up. All four Console snapshots
+contained the DOS marker. CAF selected a visible NTCON text window, and DOS
+received k from that window. The reports record six frontend key messages
+including one Enter keydown. All four Windows sessions returned to graphics,
+accepted the mouse press/release and exited. In these cases DOS completed on
+k: the two-prompt coexistence and fullscreen transition are separate tests,
+so they do not establish that both prompts accept input after switching back.
+
+The cached x86 and x64 default builds had no work after configuration. The
+11 host image hashes agree across candidate-dem-unified, assets/release and
+O:/winnt/system32. The updated private observer built and linked separately.
+
+full-gate-mouse31/timings.json records 16/16 selected Full gates passing.
+The external DOS4GW/Nesticle fixture was not supplied and was skipped.
+MOUSE31.DRV was staged to assets/release from scoped-reviewed; its SHA-256
+is 5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07.
+The same file replaced the previously released project-authored driver in
+O:/w31/SYSTEM/MOUSE.DRV after confirming its prior hash, and the installed
+hash matched. setup-release-roundtrip used the current CMD patch tool with
+the original media files from the installation kit's backups in an isolated
+copy. Apply, repeat apply, restoration, and preservation of an unrecognized
+file all passed. No original installed guest executable was replaced.
+
+The stronger pair-key-01 combined sequence did not pass. In the no-addon
+run both VMs were alive and B accepted k in fullscreen text and b on return
+to graphics. A did not acknowledge input before timeout. Two earlier
+single-window failures in this run sent zero key messages. The harness
+restored an absent environment variable as an empty but present switch.
+The runner now removes absent switches, and the paired guest controller
+uses the established OpenIcon/BringWindowToTop sequence for A.

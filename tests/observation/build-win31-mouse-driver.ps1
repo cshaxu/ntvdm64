@@ -71,7 +71,7 @@ for($i=0;$i -lt $expected.Count;$i++) {
 if(!@($audit.residentNames|Where-Object {$_.name -eq 'WEP' -and $_.ordinal -eq 8}).Count) {
     throw 'Missing named Windows cleanup export'
 }
-if($audit.segments[0].flags -ne '0x40' -or $audit.segments[1].flags -ne '0x41') {
+if($audit.segments[0].flags -ne '0x140' -or $audit.segments[1].flags -ne '0x41') {
     throw 'Callbacks/data must be fixed and resident'
 }
 [ordered]@{role='independent-guest-driver-build-not-runtime-pass';source=$source;

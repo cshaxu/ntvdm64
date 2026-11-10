@@ -12,12 +12,12 @@
     {
       "id": "win31",
       "file": "MOUSE31.DRV",
-      "sha256": "275D10A3E22946F83416BED9D263B22D2579C38D42E4630616D5B97ECF8A738B",
+      "sha256": "5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07",
       "source": "src/addon/mouse31/mouse31.asm",
-      "sourceSha256": "FD84BA3E008EB9A796E843771A9A02DD9189B47BFC1FB0D4FFD951740A873DB7",
-      "acceptance": "candidate",
-      "verifiedScope": "Win3.1 enhanced actual mouse, callback preservation, DOS child CLS/VER/DIR, retirement and normal exit with insignia-386; Win95 desktop mouse exercised, shutdown1 matches baseline, full Win95 VM lifecycle unverified.",
-      "evidence": "docs/etc/evidence/m0-t479-s6-main-integration.md"
+      "sourceSha256": "456111F60E0C1D152574A70EC17117880EC6512D16067431B6266080F3FDD40E",
+      "acceptance": "verified",
+      "verifiedScope": "Win3.1 eight setup profiles, enhanced fullscreen Console and Window input, guest DOS prompt callback isolation, DOSX real-provider and register preservation.",
+      "evidence": "docs/etc/evidence/m0-t481-s14-win95-launch.md"
     },
     {
       "id": "win95-compat",

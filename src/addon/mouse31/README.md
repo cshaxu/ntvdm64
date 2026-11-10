@@ -21,10 +21,13 @@ BuildRoot below build/ and an explicit Python interpreter.
   register its real address through simulated INT33, not a protected selector
   through INT33/0Ch. Actual enhanced-mode reflection of the latter registered
   an invalid C000 address in the S6 failure witness.
-- Enhanced mode requires the independent insignia-386 companion to activate
-  original host NIDDB device-state instances. Real callback pointers belong to
-  their VM; no driver-allocated real-mode gate is assumed to be mapped in another
-  VM. Preserve only the bridge's own pointer-hide contribution.
+- In enhanced mode the VMD instance query (INT2F 1607h, BX=0Ch, CX=0)
+  selects callback lifetime. A provider with per-VM state retains the
+  registration, as does the standard-mode provider. With a shared provider,
+  the system VM's protected IRQ9 handler exchanges the registration around
+  the previous handler and restores it on return. Each nested IRQ saves its
+  own previous mask and address on the interrupted stack. The existing DOS
+  provider owns event masks and PIC acknowledgement.
 - Real-mode ES values are numeric SI/packet fields. Never load a returned
   real segment into protected ES. Only the protected register-image pointer
   uses ES; a real DPMI test caught and verified this correction.

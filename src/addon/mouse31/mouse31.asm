@@ -1,5 +1,5 @@
 ; Independent Win3.1 protected-mode INT33 bridge. Not an OpenNT mirror.
-; No hardware vectors/PIC, original driver patch, TSR or host component.
+; Enhanced Windows without an instanced DOS provider scopes the callback to IRQ9.
 bits 16
 %ifndef MOUSE31_GUEST_TEST
 org 0
@@ -20,7 +20,7 @@ dw 0,4,0
 db 2,0
 dw 0,0,0,0x030a
 segments:
-dw (code-$$)/16,code_end-code,0x0040,code_end-code
+dw (code-$$)/16,code_end-code,0x0140,code_end-code
 dw (data-$$)/16,data_end-data,0x0041,data_end-data
 resources: dw 0,0
 resident:
@@ -52,7 +52,7 @@ code:
 code equ 0
 %endif
 
-%define IO (io_regs-data)
+
 %define EVENT (event_proc-data)
 %define OLD (old_proc-data)
 %define MASK (old_mask-data)
@@ -89,41 +89,54 @@ code equ 0
 ; Only the protected pointer to the DPMI register image is loaded into ES.
 ; CF reports DPMI infrastructure failure; protected ES remains unchanged.
 mouse_call:
-    push di
-    push bp
-    mov [IO+28],ax
-    mov [IO+16],bx
-    mov [IO+24],cx
-    mov [IO+20],dx
-    mov [IO+34],si
-    mov word [IO+18],0
-    mov word [IO+22],0
-    mov word [IO+26],0
-    mov word [IO+30],0
-    mov word [IO+32],0x0200
-    mov word [IO+46],0           ; host supplies a fresh real-mode stack
-    mov word [IO+48],0
-    push es
-    mov ax,ds
-    mov es,ax
-    mov di,IO
-    mov ax,0x0300
-    mov bx,0x0033
-    xor cx,cx
-    int 0x31
-    pop es
-    jc .done
-    mov ax,[IO+28]
-    mov bx,[IO+16]
-    mov cx,[IO+24]
-    mov dx,[IO+20]
-    mov si,[IO+34]
-    clc
-.done:
-    pop bp
-    pop di
+    push word 33h
+    call simulate_interrupt
     ret
-
+multiplex_call:
+    push word 2fh
+    call simulate_interrupt
+    ret
+simulate_interrupt:
+    push bp
+    mov bp,sp
+    push di
+    push es
+    sub sp,50                   ; private DPMI register image for this invocation
+    mov di,sp
+    push ss
+    pop es
+    push ax
+    push cx
+    xor ax,ax
+    mov cx,25
+    cld
+    rep stosw
+    pop cx
+    pop ax
+    mov di,sp
+    mov [es:di+28],ax
+    mov [es:di+16],bx
+    mov [es:di+24],cx
+    mov [es:di+20],dx
+    mov [es:di+34],si
+    mov word [es:di+32],0200h
+    mov bx,[bp+4]
+    mov ax,0300h
+    xor cx,cx
+    int 31h
+    jc .done
+    mov di,sp
+    mov ax,[ss:di+28]
+    mov bx,[ss:di+16]
+    mov cx,[ss:di+24]
+    mov dx,[ss:di+20]
+    mov si,[ss:di+34]
+.done:
+    lea sp,[bp-4]               ; preserve the DPMI carry result
+    pop es
+    pop di
+    pop bp
+    ret 2
 provider_query:
     mov byte [info-data],0
     mov ax,0x0024               ; inquire without resetting the DOS driver
@@ -179,6 +192,67 @@ allocate_callback:
 .ready: clc
 .done: ret
 
+; The old handler retains the hardware IRQ and EOI. Exchange callbacks only
+; for its dynamic scope. Each interrupted frame keeps its own previous owner.
+desktop_irq:
+    times 4 push ax            ; exchanged flag, mask, offset and segment
+    pushf
+    push cs
+    push word .returned-code
+    push ax                    ; fill the old IRQ handler's far address below
+    push ax
+    pushfd
+    pushad
+    push ds
+    push es
+    mov bp,sp
+    db 0xb8
+.data_selector: dw 0xffff      ; NE loader supplies the driver's data selector
+    mov ds,ax
+    mov ax,[irq_prev-data]
+    mov [ss:bp+40],ax
+    mov ax,[irq_prev-data+2]
+    mov [ss:bp+42],ax
+    mov word [ss:bp+50],0
+    cmp byte [ENABLED],0
+    je .chain
+    mov ax,14h
+    mov cx,1fh
+    mov dx,[THUNK]
+    mov si,[THUNK+2]
+    call mouse_call
+    jc .chain
+    mov word [ss:bp+50],1
+    mov [ss:bp+52],cx
+    mov [ss:bp+54],dx
+    mov [ss:bp+56],si
+.chain:
+    pop es
+    pop ds
+    popad
+    popfd
+    retf                       ; old handler sees original registers and flags
+.returned:
+    pushfd
+    pushad
+    push ds
+    push es
+    mov bp,sp
+    cmp word [ss:bp+40],0
+    je .done
+    ; mouse_call uses SS-local storage and does not require driver DS.
+    mov ax,0ch
+    mov cx,[ss:bp+42]
+    mov dx,[ss:bp+44]
+    mov si,[ss:bp+46]
+    call mouse_call
+.done:
+    pop es
+    pop ds
+    popad
+    popfd
+    add sp,8
+    iret
 enable:
     win_prolog
     les di,[bp+6]
@@ -193,6 +267,38 @@ enable:
     je .failed
     call allocate_callback
     jc .failed
+    mov ax,1600h               ; enhanced Windows reports its major version
+    int 2fh
+    and al,7fh
+    cmp al,3
+    jb .direct
+    mov ax,1607h               ; VMD asks whether DOS mouse state is instanced
+    mov bx,0ch
+    xor cx,cx
+    xor si,si
+    call multiplex_call
+    jc .rollback
+    test cx,cx
+    jnz .direct
+    mov ax,0400h               ; DPMI slave PIC base plus one is IRQ9
+    int 31h
+    inc dl
+    mov [irq_vector-data],dl
+    mov bl,dl
+    mov ax,0204h
+    int 31h
+    jc .rollback
+    mov [irq_prev-data],dx
+    mov [irq_prev-data+2],cx
+    mov bl,[irq_vector-data]
+    mov cx,cs
+    mov dx,desktop_irq-code
+    mov ax,0205h
+    int 31h
+    jc .rollback
+    mov byte [irq_installed-data],1
+    jmp .hide
+.direct:
     mov ax,0x0014
     xor cx,cx
     xor dx,dx
@@ -204,12 +310,15 @@ enable:
     mov [OLD],dx
     mov [OLD+2],si
     mov byte [INSTALLED],1
+.hide:
     mov ax,2
     xor si,si
     call mouse_call
     jc .rollback
     mov byte [HIDDEN],1
     mov byte [ENABLED],1
+    cmp byte [irq_installed-data],0
+    jne .success
     mov ax,0x000c
     mov cx,0x001f
     mov dx,[THUNK]
@@ -231,6 +340,16 @@ enable:
 ; never frees a thunk while the provider may still reference it.
 cleanup:
     mov byte [ENABLED],0
+    cmp byte [irq_installed-data],0
+    je .direct
+    mov bl,[irq_vector-data]
+    mov cx,[irq_prev-data+2]
+    mov dx,[irq_prev-data]
+    mov ax,0205h
+    int 31h
+    jc .done
+    mov byte [irq_installed-data],0
+.direct:
     cmp byte [INSTALLED],0
     je .show
     mov ax,0x000c
@@ -305,12 +424,6 @@ callback:
     push word [si]
     sub si,2
     loop .save_callback
-    mov si,IO+48
-    mov cx,25
-.save_image:
-    push word [si]
-    sub si,2
-    loop .save_image
     cmp byte [ENABLED],0
     je .return
     mov bp,[di+28]
@@ -350,12 +463,6 @@ callback:
     pop dx
     pop cx
 .return:
-    mov si,IO
-    mov cx,25
-.restore_image:
-    pop word [si]
-    add si,2
-    loop .restore_image
     mov bp,sp
     mov si,[ss:bp+50]
     mov cx,25
@@ -389,6 +496,9 @@ normalize:
     ret
 code_end:
 %ifndef MOUSE31_GUEST_TEST
+dw 1                           ; internal segment-selector fixup
+db 2,0
+dw desktop_irq.data_selector-code,2,0
 align 16,db 0
 data:
 %else
@@ -405,7 +515,9 @@ allocated: db 0
 installed: db 0
 enabled: db 0
 hide_owned: db 0
-io_regs: times 50 db 0
+irq_prev: dd 0
+irq_vector: db 0
+irq_installed: db 0
 callback_regs: times 50 db 0
 data_end:
 image_end:
