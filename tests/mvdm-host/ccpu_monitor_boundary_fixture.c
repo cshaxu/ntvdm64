@@ -42,6 +42,8 @@ extern int c_setCS(uint16_t);
 extern int c_setSS(uint16_t);
 extern int c_setDS(uint16_t);
 extern int c_setES(uint16_t);
+extern int c_setFS(uint16_t);
+extern unsigned short c_getBP(void);
 extern void c_setSP(uint16_t);
 extern void c_setCR3(uint32_t);
 extern void c_setCR0(uint32_t);
@@ -1085,6 +1087,52 @@ static int vdd_sas_unbound_control(void) {
     __except(v86_installed_exception(GetExceptionInformation())) {return 1;}
     return 0;
 }
+static BOOL cursor_copy_fault(unsigned long vector, unsigned long error) {
+    if(vector!=13 || error!=0)return FALSE;
+    ++test_fault;frame_fault_eip=c_getEIP();c_setEIP(0x1010);return TRUE;
+}
+/* Execute the DIBENG 8-bit cursor-save inner loop through the original CPU.
+ * The FS limit ends at the final byte, so an extra iteration cannot pass. */
+static int protected_cursor_copy_loop(void) {
+    unsigned char gdt[48]={0};
+    unsigned char program[]={0xbd,0x30,0x00,0x67,0x26,0x8a,0x0e,
+        0x64,0x88,0x0d,0x66,0x46,0x47,0x4d,0x75,0xf3,
+        0xb8,0xef,0xbe,0xd6,0xfe};
+    BOOL paged=(test_case==175 || test_case==176);
+    BOOL overflow=(test_case==174 || test_case==176);
+    unsigned i,destination=paged ? 0xff0 : 0x600;
+    if(overflow)program[1]=49;
+    c_cpu_init();
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    *(uint32_t *)(gdt+0x28)=destination+47;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(paged ? 0x3000 : 0x1000),gdt,sizeof(gdt));
+    CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    if(paged) {
+        uint32_t *pte=(uint32_t *)c_GetPhyAdd(0x5000);
+        ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(uint32_t *)c_GetPhyAdd(0x4000)=0x5007;
+        for(i=0;i<512;i++)pte[i]=(i<<12)|7;pte[1]=0x9007;
+    }
+    for(i=0;i<48;i++){
+        unsigned target=paged && i>=16 ? 0x9000+i-16 : destination+i;
+        *c_GetPhyAdd(0x500+i)=(unsigned char)(i^0xa5);*c_GetPhyAdd(target)=0;
+    }
+    *c_GetPhyAdd(paged ? 0x9020 : 0x630)=0x7e;
+    c_setGDT_BASE_LIMIT(paged ? 0x3000 : 0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);
+    c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x23);c_setFS(0x2b);
+    c_setSP(0x800);CCPU_GR[6]=0x500;CCPU_GR[7]=destination;c_setIP(0x1000);
+    if(paged){c_setCR3(0x4000);c_setPG(1);}
+    test_fault=frame_fault_eip=0;VdmInstallFaultHandler((void *)cursor_copy_fault);
+    c_cpu_simulate();VdmInstallFaultHandler(NULL);if(paged)c_setPG(0);
+    if((overflow ? (test_fault!=1 || frame_fault_eip!=0x1007 || c_getBP()!=1) :
+        (test_fault!=0 || c_getBP()!=0)) || c_getAX()!=0xbeef || CCPU_GR[6]!=0x530 ||
+       (CCPU_GR[7]&0xffff)!=destination+48 || *c_GetPhyAdd(paged ? 0x9020 : 0x630)!=0x7e)return 0;
+    for(i=0;i<48;i++){
+        unsigned target=paged && i>=16 ? 0x9000+i-16 : destination+i;
+        if(*c_GetPhyAdd(target)!=(unsigned char)(i^0xa5))return 0;
+    }
+    return 1;
+}
 int main(int argc, char **argv) {
     session owner;
     int ok;
@@ -1095,7 +1143,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();c_cpu_init();
-    if(test_case>=168 && test_case<=172) ok=protected_monitor_ownership();
+    if(test_case>=173 && test_case<=176) ok=protected_cursor_copy_loop();
+    else if(test_case>=168 && test_case<=172) ok=protected_monitor_ownership();
     else if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();

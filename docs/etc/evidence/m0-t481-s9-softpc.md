@@ -927,3 +927,645 @@ The concurrent Win3.1 batch comparison was already running when the owner
 moved batch work to S10. Its isolated runner exited 1 without its VMLOAD
 witness; it cannot answer the batch question. The source hashes were verified
 and `O:/tmp/q98` was removed. No further batch investigation is admitted to S9.
+
+The owner subsequently observed another blue screen while using `EDIT.COM`:
+mouse clicks did not work, and Escape was pressed in an attempt to dismiss
+the Welcome message. The retained frame shows exception 0E at 0137:BFF70020,
+distinct from the previous 0D at 032F:00000799. The post-fault NTVDM snapshot
+`build/t481-s9/owner-after-user-click.dmp` has SHA-256
+`5306b623ad7f48a4a36dc0a02dd094f3b22b80183a50feca34064242eda76e49`;
+the frame `build/t481-s9/owner-after-user-click.ppm` has SHA-256
+`b4e94420f34c790a71b87f33a636aa18000add9659906754f3a8d26f1ce6b6d6`.
+Installed `KERNEL32.DLL` has preferred image base BFF70000; its first code
+section begins at BFF71000, so offset 20 is in the image-header range. This
+is an address relationship, not proof of cause or of a shared cause with 0D.
+The snapshot was captured after the blue screen, not at the fault instruction.
+
+A read-only scan of the post-fault dump found guest memory records matching
+the 32-bit `EXCEPTION_RECORD` layout: access violation, instruction address
+00000005, write access to BFF70020. Other records identify reads at
+BFF766A9 and BFF85C39 while handling exceptions, and 970 matching records
+have address 83FC83FB; the latter may include stale or repeated stack data.
+The pre-input and previous blue-screen snapshots had no matching records by
+this scan. Their presence is evidence of an exception cascade, but memory
+scanning alone does not establish chronology, the first fault, or causation.
+The installed KERNEL32 code at BFF766A9/BFF85C39 is exception-dispatch code.
+
+The repeated 83FC83FB records were checked against their adjacent x86 guest
+CONTEXT: 970 have the same exception address as saved EIP; 963 consecutive
+record offsets differ by 0x1c8 bytes. For two sampled records, saved EBP+18h
+contains 83FC83FB, and saved EBX is 0084FF50. The bytes at 0084FF50 include
+`f9 83 fa 83 fb 83 fc 83 fd 83 fe 9f e5 ...`; this is consistent with a
+record pointer being interpreted from non-handler data. The installed
+KERNEL32 exception dispatcher at BFF85C39 reads `[ebx+4]` as a handler, and
+BFF766B5 calls the corresponding argument `[ebp+18h]`. These observations
+support repeated dispatch to an invalid handler value, but do not establish
+when or why that record pointer acquired this value, nor a specific mouse or
+CPU defect. The snapshots preserve after-fault state, not a live first-fault
+trace.
+
+The saved guest FS selector 1F2F resolves through the saved LDT to base
+81546858. Its FS:0 value is 007E2FB8. Walking the linked exception records
+from that head in the post-fault snapshot reaches 976 nodes whose handler is
+BFF766C4, followed by record 0084FF50 with next value 83FA83F9 and handler
+83FC83FB. The previous record is 0084F9EC. Thus the invalid handler is not
+just a loose byte pattern in the dump: it is reachable from the saved active
+exception chain. This still does not show when the original chain became
+invalid or what wrote those bytes.
+
+For the same saved FS selector, the pre-input snapshot has FS:0 = 0084FFB8,
+whereas the post-fault snapshot has FS:0 = 007E2FB8. Guest bytes at 0084FF50
+also differ between these snapshots. They are snapshots of different points
+in a live session, so this comparison does not by itself identify a writer;
+it does confirm that the bad chain is not simply the pre-input state.
+
+The owner reports that text-mode mouse movement and clicks work in Console
+and Window, graphics-mode operation remains stable without mouse movement,
+while graphics-mode mouse movement can lead to blue screens or illegal
+operations. These are owner observations, not yet a controlled A/B test.
+A later live session displayed a guest `Kernel32` illegal-operation dialog
+over an MS-DOS Prompt containing an `edit.exe` session. Its NTVDM PID was
+4828; the previous blue-screen instance had already exited. The read-only
+snapshot `build/t481-s9/owner-illegal-operation.dmp` has SHA-256
+`25ff45f81b59598c5ad9c4bda8e6636acebdf4572b59fda20f84427f42661c46`;
+`build/t481-s9/owner-illegal-operation.ppm` has SHA-256
+`556b3a42aabdaf7607d5a9a78975c43e383361318979bb53d54f4dd9a02e6a8b`.
+A keyboard probe to expand Details could not acquire foreground and sent no
+input. A scan for the previous 32-bit exception-record layout found no match;
+this does not prove that the faults are unrelated.
+
+The owner subsequently reported that the illegal-operation dialog vanished
+and the guest no longer responded except for mouse-pointer movement. NTVDM
+PID 4828 and NTCON PID 16440 remained alive. Two samples showed NTVDM CPU
+accumulation increasing (632.94 to 646.78 seconds); thread 36280 was running.
+The read-only snapshots `owner-unresponsive-after-error.dmp` and
+`owner-unresponsive-sample2.dmp` retain two different native instruction
+addresses for that thread. These observations distinguish a live busy process
+from exit, but do not yet identify the guest loop or its cause. Do not use
+the separately built diagnostic map as if it matched this released binary.
+
+The released image has no available matching symbol map. Its instruction
+pointer global was inferred from the deployed image's disassembly and the
+independently matching CCPU register-array layout; the inferred control
+registers include CR3=002F3000, matching the guest paging snapshot. Read-only
+samples report guest IPs C000397A and C0003828 after the loss of response,
+while the earlier dialog snapshot reports C000A0C4. Guest bytes at each IP
+are mapped and readable. These are samples, not proof of a repeating loop,
+not a matched-symbol attribution, and not the triggering fault.
+
+Disassembly of the installed DIBENG cursor-save helper shows that at 0791
+it loads BP from the cursor record width, then 0795-07A0 copies one byte and
+executes `dec bp; jnz` for each pixel. The post-fault frame contains BP=CE50
+and DI=3300; the later cursor records report width 0030. If these values
+belong to the actual fault and no nested state change occurred, a count that
+began at 0030 could not naturally reach CE50 without passing zero. A count
+that began at zero would wrap and could reach CE50 after 31B0 iterations; the
+corresponding initial DI would be 0150. These are arithmetic possibilities,
+not a demonstrated initial width or proof of faulty DEC/JNZ behavior. The
+existing real-mode throughput fixture tests DEC ECX/JNZ, not this exact
+protected-mode 16-bit BP/cursor-save context.
+
+Static disassembly narrows the zero-width hypothesis: the caller at 0471
+chooses a cursor-record index at DS:0168, explicitly writes width 0030 at
+record+74h at 04AB, adjusts it for pixel depth, writes height 0022 at 0560,
+and calls the faulting helper at 0566. With the later observed 8-bit depth,
+the width shift at 04F8 is zero. Therefore a zero width is not the ordinary
+caller setup: it would require a changed record/index/depth, altered CPU or
+control flow, or that the after-fault evidence is not the original context.
+The saved frame remains insufficient to select among those causes.
+
+Static CCPU tracing: opcode 4D enters TYPE40 with USE16, reads and writes
+word register index 5 through CCPU_WR, and calls original DEC with size 16;
+DEC sets ZF from the masked result. Opcode 75 dispatches original JNZ,
+which reads that ZF. This confirms the intended selected source sequence but
+is not an execution witness and does not exclude interrupts, register changes,
+or a bug elsewhere in address/state handling.
+
+Owner clarified that DOS Prompt and Start are not necessary for reproduction:
+repeated graphics-desktop movement and clicking can suffice. After owner
+confirmed PowerShell is permitted for tests (restriction applies to patch
+packages), `desktop-repro/run01` ran on a private desktop and isolated Win95
+copy: 160 movement/down/up cycles were accepted by the test-only frontend
+input sink. Four intermediate frames and a final frame were captured; no blue
+screen was visible. Welcome remained open and most later screenshots were
+identical, so actual guest delivery of every event, broad pointer coverage,
+physical Raw Input, and normal Win95 exit are unproved. The observer ended at
+its observation deadline (`result=timeout`), not a product exit or pass. The
+copy helper verified source hashes apart from the active swap excluded by
+design, and the owned `O:/tmp/q98` copy was removed. This non-reproduction
+does not contradict the owner's physical-input reproductions.
+
+A second desktop-only isolated run (`desktop-repro/run02`) used the existing
+private-desktop keyboard probe to dismiss Welcome, then sent 160 ordered
+movement/down/up cycles in four sustained directions with eight frame
+checkpoints. The frontend acknowledged all 480 injected mouse events. Captured
+frames demonstrate visible pointer movement and no blue screen at those
+checkpoints. The sampled positions covered only a small top-left region and
+this test injected below Raw Input; it does not demonstrate guest receipt of
+every input, physical-device behavior, or broad desktop coverage. Its observer
+retired at its deadline, not a normal guest exit. Source hashes were checked
+except the excluded active swap and `O:/tmp/q98` was removed.
+
+`desktop-repro/run03` repeated the 160-cycle desktop-only probe with larger
+12-pixel relative steps. Eight intermediate frames show the guest pointer
+moving between the upper-left region and the desktop interior, with no blue
+screen visible at the checkpoints; the frontend acknowledged all 480 mouse
+records. This still injects below Raw Input, samples rather than proves guest
+processing of each record, and intentionally ends at the observer deadline,
+so it is neither a physical-input reproduction nor normal-exit acceptance.
+Source hashes were unchanged except the deliberately unexamined active swap;
+the owned temporary guest copy was removed.
+
+`desktop-repro/run04` increased the desktop-only sweep to 640 movement/down/up
+cycles, with eight intermediate graphics captures and an early blue-frame
+check. The frontend reported 1,920 accepted records and no blue checkpoint;
+images differ as the mouse moves. The same caveats apply: injection bypasses
+Raw Input, sink acceptance does not prove each record was processed by the
+guest, and observer deadline termination is not normal guest exit. Source
+hashes were unchanged except the active swap deliberately excluded; the owned
+`O:/tmp/q98` copy was removed. This remains a non-reproduction, not a fix.
+
+The separate PUSHAD-shaped sequence near guest stack 80001F6E is not itself
+proven to be a VMM `Client_Reg_Struc`: the words following its eight candidate
+registers do not align with that structure's error/EIP/CS positions in the
+referenced VMM definition. Consequently none of those candidate values can be
+promoted to fault-time register facts merely by matching the surrounding
+0799:032F return frame. The separately located post-fault client record is a
+different structure at C13A1F70.
+
+An isolated visible-desktop Raw Input probe (`desktop-repro/raw03`) pinned
+its target to the isolated frontend image and would stop on focus/capture
+loss. It stopped before any input because `GetCursorPos` returned error 5;
+`quser` contemporaneously reported the user's session disconnected. No
+`WM_INPUT` and no guest mouse operation occurred, so this is not a product
+result. The test-owned runtime retired at its observer deadline, the source
+hash check passed except for the deliberately excluded active swap, and
+`O:/tmp/q98` was removed. The earlier `raw01` attempt failed during script
+setup before launching the observer and likewise cleaned its owned copy.
+
+A targeted CCPU fixture now executes the exact 8-bit DIB cursor inner-loop
+opcodes in 16-bit protected code using the original CCPU: a 48-byte source is
+copied into an FS segment whose inclusive limit is the final destination
+byte. Case 173 verifies all copied bytes, BP=0, the expected ESI/DI, and an
+untouched byte just beyond the limit. Case 174 requests 49 bytes and requires
+a general-protection exception exactly at the FS write, with the out-of-range
+sentinel unchanged. Both exited zero; the existing monitor-boundary suite,
+now including these cases, reported 141 cases passed. These tests have no
+paging, asynchronous mouse IRQ, guest callbacks or VM switches and do not prove
+the Win95 failure fixed or identify its cause. The x86 fixture was built with
+the generated Ninja graph and configured ccache using historical Node 22;
+no product image was deployed.
+
+After the owner connected RDP, `raw05` again stopped before sending input:
+GetCursorPos returned access denied. At one subsequent read, `quser` reported
+the session Active and a minimal probe resolved both thread and input desktop
+as Default; GetCursorPos still returned error 5. A second probe opened WinSta0
+with read attributes, selected it in its own process, and bound its own thread
+to the input desktop successfully, but GetCursorPos still returned error 5.
+This is a probe-access failure, not evidence of a Win95 failure or of missing
+RDP connectivity. No desktop or product action was sent; test-owned runtime
+retired and the temporary guest copy was removed.
+
+At the owner's request, `win95-editors-readwrite01` repeated the checked-in
+private-desktop Win95 two-prompt production-package editor witness, with the
+new `-ReadWriteWitness` mode. It seeded existing files with `seedA` and
+`seedB`, launched O:/WINNT/EDIT.EXE and EDIT.COM in the two prompts, used
+guest USER mouse/keyboard input, checked six menu-coordinate receipts, saved,
+and observed both prompt windows close. The resulting files contained
+`aaaseedA` and `bbbseedB` (the latter followed by CRLF). Runner reported PASS;
+the original installation hashes were verified unchanged, and owned
+`O:/tmp/q98` was removed. NTVDM hash matched the deployed image. Input is
+synthesized in guest USER, not physical NTCON Raw Input; production witness
+does not establish distinct VM IDs. The observer saw Win95 exit status 1, so
+normal Win95 shutdown remains unproved.
+
+The same exact instruction loop was then exercised with paging enabled and
+the 48-byte FS destination crossing from one guest linear page to a
+non-contiguous physical page. Cases 175 and 176 passed the 48-byte copy and
+49th-byte segment-limit fault controls; the existing CCPU boundary suite
+reported 143 cases passed. This rules out neither a different mapping nor
+interrupt, callback, reentrancy, or VM-switch behavior in the live failure.
+
+On a later Active RDP observation, a minimal probe also received access denied
+from GetCursorInfo and GetPhysicalCursorPos; GetForegroundWindow returned
+NULL. These are host probe results, not guest behavior, and opening/binding
+an input desktop with the same displayed name did not make GetCursorPos
+succeed. The actual object/session or policy cause has not been established.
+
+An isolated desktop-only mouse sweep reproduced an Explorer illegal-operation
+report at cycle 256 (`desktop-repro/details02`). The guest dialog's expanded
+details identify a page fault in USER.EXE at module offset 001C:00003AC8;
+the displayed CPU context has CS:EIP 16A7:00003AC8. The diagnostic worker's
+protected-mode exception record independently matches that CS:EIP with vector
+14, error 00000004 and CR2 00676FD4. The saved diagnostic dump has SHA-256
+31ED629D6E8578A224716D440422722FE1CA5872D9A5795146DF76C3CF3C7122;
+the expanded dialog capture has SHA-256
+A54D831C8A90056EBA9CB4AF75840949C143CCD8011D68CCFC8C991A3339FF27.
+The test uses synthetic guest-facing input rather than physical Raw Input.
+The faulting address's provenance and its relationship to the separate owner
+blue-screen report remain unproved. A preceding `details01` run completed
+512 injected mouse cycles without the sampled dialog or blue frame; it is a
+non-reproduction, not evidence of a fix.
+In that saved snapshot, the SS selector 1C07 has base 00667000 and the
+fault-time BP low word is 0002. The displayed instruction begins `FF 76 D2`
+(`push word ptr [bp-2e]` in the 16-bit code segment): 16-bit offset wrap gives
+FFD4 and linear address 00676FD4, matching the exception record. The saved
+snapshot's page table contains a non-present PTE 00057000 for that linear
+address. Descriptor and page-table observations are from the saved snapshot,
+not independent proof of their state before the fault. Why the stack access
+occurred or why its page was unavailable is not yet established.
+A decoded snapshot of USER.EXE shows the faulting `push [bp-2e]` following
+an indirect path through a far call at 3AAB or 3AB9. BP is 0002 in the saved
+exception context, while SP is 8AFC. This is a lead to investigate the caller
+and return path, not proof of which component changed BP or whether the stack
+page should have been present.
+A separate isolated sweep (`desktop-repro/stacktrace02`) produced an
+Explorer illegal-operation dialog after 256 cycles. Its expanded details name
+KERNEL32.DLL at 0137:BFF715A9; the captured protected-mode exception record
+at that address is vector 13, error 00008004, with EDX FFFF8007. This is a
+different displayed fault from the USER.EXE page fault; a common cause remains
+unproved. The initial instruction trace did not freeze at the fault and was
+overwritten during subsequent guest error handling, so it cannot establish the
+preceding register transition. A diagnostic-only rebuild changes the trace to
+freeze on either observed fault site; it does not change product code.
+The lighter diagnostic sweep `desktop-repro/stacktrace05` reproduced an
+Explorer illegal-operation dialog at cycle 64, showing KERNEL32.DLL at
+0137:BFF71556. The protected exception history contains a page fault there
+with error 6 and CR2 0065800A; an earlier page fault at the same address was
+also observed, so address alone cannot distinguish an unrecovered fault from
+normal guest page handling. The initial fixed-site trace freeze did not cover
+this site. The next diagnostic snapshots the preceding instruction history
+for faults in the small observed KERNEL32 address range rather than assuming
+only one fixed address. This remains diagnostic-only, and its timing can
+change the reproduction.
+On owner correction, the investigation stopped using a single exception address
+as the trigger. A matched, production-host desktop input control used the same
+Win95 source, native payload addon, private observer and 512 mouse cycles with
+and without the INSIGNIA.386 companion (`no-insignia01` / `with-insignia01`).
+Neither sampled run displayed the error; both reported input-sink FIFO
+acknowledgment, verified original-source hashes except the excluded live swap,
+and removed their owned guest copies. Each is a single non-reproduction and
+uses synthetic input below Raw Input; it neither proves stability nor isolates
+INSIGNIA. A diagnostic-only worker was then built to record the original BOP
+mouse callback entry/exit and selected VM identity independent of fault address.
+The address-independent `mouse-lifecycle01` diagnostic captured 8,938 BOP
+wrapper entry/exit records in one 512-cycle desktop sweep with no sampled
+fault. Records contain 3,077 mouse_int1 entry/exit pairs and 1,392 mouse_int2
+entry/exit pairs; mouse_EM_callback had no recorded entry. All captured records
+reported virtual instance 0. A LIFO check found 1,392 nested wrapper entries,
+no unmatched completed pairs, and no VM-identity mismatch within matched
+pairs. BP at mouse_int2 entry and return matched for its 1,392 pairs. These are
+wrapper observations in a single no-fault run; they do not establish that each
+injected event reached guest application code, prove the full asynchronous
+callback contract, or exclude a different failing execution. This diagnostic
+uses the production CCPU and host exception code and only instruments the
+BIOS BOP wrapper, not an exception-address trigger.
+A second address-independent diagnostic (`mouse-callstate01`) also recorded
+when the original INT 33 mouse callback saved its per-instance register state
+and when mouse_int2 consumed and restored it. In a no-fault 512-cycle sweep,
+all 1,392 save / pre-restore / post-restore triplets paired under a LIFO
+check, all used virtual instance 0, the saved AX/BX/CX/DX/BP values had not
+changed before restoration, and restored BP matched the saved word. This is
+one non-reproducing execution, not evidence that the failing execution has the
+same state or that no other register, interrupt, or display path is involved.
+A second no-fault `mouse-callstate02` sweep independently recorded 1,392 more
+save/pre-restore/post-restore triplets; all paired, retained the recorded
+per-instance saved words, and restored BP as saved. This does not cover a
+faulting execution and must not be interpreted as complete mouse correctness.
+An address-independent `mouse-draw01` diagnostic counted entry to the
+project-routed original software cursor painter during the same isolated
+Win95 desktop mouse sweep. In the 512-cycle run, the painter entry count was
+zero; the callback instrumentation remains present in that diagnostic worker.
+The sampled run did not reproduce the fault. The zero count rules out that
+painter only for this observed run, not for every mode or a faulting run.
+An address-independent ordering control (`mouse-ordered01`) used a diagnostic
+sequence number shared by mouse callback and protected-exception records. In
+one 512-cycle no-fault sweep it recorded 1,392 paired callback windows and
+7,705 protected exceptions; 4,969 of those records fell between callback
+save and return (3,812 vector 13 and 1,157 vector 14). This is direct evidence
+that exceptions in a mouse callback interval alone are not a failure signal;
+the diagnostics did not observe the reported crash in this run. Sequence
+ordering is diagnostic observation from the worker, not a proof of physical
+input delivery or a complete exception-recovery audit.
+A second ordered run (`mouse-ordered02`) completed the same 512-cycle
+sweep without a sampled error dialog; it does not establish stability. Both
+ordered runs inject below Raw Input. Further identical retries would not
+establish root cause without a failing ordered witness or independent source
+and state evidence, so the investigation should not treat them as a substitute
+for identifying the state transition.
+`mouse-fullreg01` extended the address-independent diagnostic to capture the
+full EAX/EBX/ECX/EDX/ESI/EDI/EBP values on original mouse callback entry and
+return. In one 512-cycle non-faulting sweep, all 1,392 observed pairs retained
+the high 16 bits of those seven registers. This checks a limitation of the
+previous low-word-only witness, but it does not prove preservation for an
+unseen failing execution or other registers and flags. The tested route uses
+synthetic input below Raw Input.
+The editor read/write assertion was tightened to compare the complete ASCII
+content, allowing only an optional terminal CRLF instead of stripping arbitrary
+whitespace. `win95-editors-readwrite02` passed on the production host package
+with guest USER input: A.TXT was exactly `aaaseedA` (8 bytes) and B.TXT was
+exactly `bbbseedB\r\n` (10 bytes); the six pointer-coordinate receipts and
+both prompt closures passed. The original installation hashes were verified
+unchanged and the owned `O:/tmp/q98` copy was removed. The observer returned
+1, so this is neither physical Raw Input nor normal Win95-shutdown acceptance.
+`mouse-thread01` added the native thread ID to the address-independent BOP
+wrapper trace. During a non-faulting 512-cycle sweep, all 8,938 records came
+from one worker thread. The 1,392 nested wrapper entries were all on that same
+thread; LIFO entry/exit pairing remained complete, with no cross-thread nested
+pair in this sample. This distinguishes observed same-thread reentry from
+concurrent thread entry, but does not establish behavior in the failure run.
+`mouse-stack01` attempted to distinguish true C-stack recursion from
+same-thread event interleaving by recording native call stacks at mouse_int1
+wrapper entry. The run completed 512 injected cycles without a sampled fault;
+the 3,077 entry captures had only one or two recoverable frames in this
+optimized x86 build, and the first two entries of a nested-looking sequence
+both resolved only to the diagnostic recorder. Therefore the earlier LIFO
+sequence establishes same-thread event ordering, not that recursive native
+call frames were proved. No claim about recursion as a cause is supported.
+The frame-pointer diagnostic `mouse-stackfp01` resolved the earlier nested
+mouse-entry sequence to two CCPU simulations: the outer caller was host_main,
+and the inner caller was the original CCPU `biosDoInst` helper. The first
+version of the diagnostic itself read the guest virtualizing byte, so that
+read could have caused nested simulation. In `mouse-stackclean01`, both
+recorders were changed to read the NIDDB manager's already selected host-side
+instance instead of issuing a guest-memory read. The same inner biosDoInst
+caller and same-thread nested sequence remained in this non-faulting run.
+Thus the observed nested simulation is not solely caused by the recorder's
+former guest-memory read. Its precise initiating caller and relation to the
+Win95 failure are still unproved; original NIDDB selection itself performs a
+guest-memory read and the mouse code contains other guest-memory accesses.
+`mouse-caller01` additionally preserved frame pointers for CCPU's SAS helper.
+A sampled nested mouse wrapper stack resolved to the outer `mouse_int1`,
+`outb`, `c_IOVirtualised`, `biosDoInst`, inner `c_cpu_simulate`, and inner
+`mouse_int1`. Source shows that mouse_update sends the slave and master PIC
+EOIs through outb, while c_IOVirtualised forwards VM-mode I/O through the
+original BIOS instruction helper. The outer mouse callback-save record
+occurred before the inner entry; that sampled inner entry did not produce a
+second callback-save record. Thus this is a real nested virtualized-I/O path
+in the non-faulting trace, not solely an observer guest-read artifact. This
+is not proof that EOI is misordered or that the path causes the Win95 crash;
+the run finished its 512-cycle sweep without a sampled error.
+`mouse-bioscontext01` recorded the original biosDoInst entry, guest helper
+entry/return and host register restoration while mouse_int1 was active. The
+ring retained the latest 16,384 records of 24,608 total: 4,096 complete
+entry/setup/return/restore groups. Their recorded simulation level, CS, EIP,
+EAX, DS, EDX, EBP, SS and ESP matched at entry and after restoration. The helper
+ports were A0 and 20, 2,048 each. In 105 groups the observed flags differed
+only in the IOPL bits (xor 00003000); 3,991 groups had identical observed
+flags. For one sample, the change 00023846 to 00020846 occurred inside the
+nested guest helper. Original biosDoInst does not explicitly save and restore
+flags, so this observation is not by itself proof of a defect or causation;
+Win95 virtual interrupt/IOPL semantics and the guest's intended state must be
+traced before proposing any change. The run did not show the reported failure,
+and the finite ring contains only the latest operations.
+`mouse-ioplwriter01` instrumented both selected CCPU IOPL writers while
+mouse_int1 was active. In its non-faulting sweep, all 283 observed changes
+went through original setFLAGS at CPL0; none used c_setIOPL. A further
+frame-pointer control `iopl-stack01` resolved all 244 recorded writes to
+original CCPU IRET -> c_setEFLAGS -> setFLAGS, including both positions
+previously observed. Original IRET takes the restored flags from the guest
+return frame; the evidence therefore identifies an original guest IRET path,
+not an unobserved project C-VID direct IOPL setter. The sample does not prove
+that every guest return frame is correct or establish the crash root cause.
+`mouse-fullcontext01` extended the biosDoInst trace to EBX, ECX, ESI, EDI,
+ES, FS, GS, CR0 and CR3. In a non-faulting 512-cycle sweep, the latest 4,096
+complete virtual-I/O groups paired successfully and all those fields, as
+well as the previously recorded CS, EIP, EAX, DS, EDX, EBP, SS, ESP and
+simulation level, matched at entry and after return. EFLAGS was intentionally
+excluded from that equality assertion: the separately recorded IOPL changes
+were traced to original guest IRET. This finite non-faulting sample does not
+prove exception, interrupt or guest state in a failing execution.
+`reproduce-long01` reran the same private-desktop edge-sweep pattern with
+2,048 movement/button cycles using the previously reproducing diagnostic
+NTVDM SHA-256 212E1BC42C194D11524730C13EA3B7ACA682EF46C5A0F335CAC597A40B6EE3C7.
+No blue or illegal-operation frame was detected at the sampled checkpoints;
+the frontend acknowledged the FIFO. This is a non-reproduction using
+synthetic input, not proof that every event reached guest USER or that the
+owner's physical-input failure is fixed. Earlier `details02` and `trace06`
+remain separately recorded positive reproductions using the same diagnostic
+image with shorter runs.
+The source inventories for the earlier positive `details02` reproduction
+and the later 2,048-cycle `reproduce-long01` non-reproduction contain the same
+1,166 paths and matching SHA-256 values for every inventoried file. Both
+exclude the potentially active WIN386.SWP and use the same saved diagnostic
+NTVDM hash; this rules out changes in inventoried source files as the
+explanation, but does not establish identical scheduling, complete guest
+input delivery, transient state or physical Raw Input behavior.
+An offline comparison of the retained protected-exception histories for
+positive `details02` and no-fault `details01` normalized each record to
+(vector, error code, CS base + EIP), without using the unstable selector as
+identity. From positive record 4,000 through 4,870, every such key also
+appeared somewhere in the control; the first new key after that interval was
+the reported USER.EXE page fault at record 4,871. This comparison does not
+compare full instruction streams, memory writes, scheduling, or prove that
+prior equal-address exceptions had equal state; it shows only that looking
+for an earlier new exception address in this interval does not isolate the
+state corruption. The immediately preceding records already had changing EBP
+values, including low word 0002; their intent and causal relationship to the
+subsequent fault remain unproved.
+Following the owner's RDP observation, `reproduce-start01` swept to the lower
+left and then issued small alternating movement/click cycles near the Win95
+Start region for 1,024 cycles. No sampled error frame appeared and the
+frontend FIFO receipt succeeded. This synthetic relative-input probe does not
+establish that each click opened Start or reproduce the RDP Raw Input path.
+The owner's report of an immediate pointer jump to the guest desktop edge is
+therefore still an active reproduction clue, not disproved by this control.
+
+The owner's live RDP Win95 failure was retained without input or window
+closure. Read-only capture saved `owner-rdp-current-20261109.dmp` (SHA-256
+9D002308130D5DB28D428E3D8F18913D07A9E4A512C174FCF4B14C1E0669E0DE) and
+`owner-rdp-current-20261109.ppm` (SHA-256
+D4C7646B9F2EA66B4A7A65129EB02811431A817493CC5E0249E62F30EE1C94F7).
+The screenshot shows Explorer's illegal-operation dialog with the pointer at
+the desktop's left edge. The saved guest error text identifies a USER.EXE
+page fault at 001c:00000744, CS:EIP 16a7:00000744, SS 1c17, ESI 0000ffd0,
+EBP 00000000; instruction bytes begin 36 89 44 f6. This is direct evidence
+of the owner's failure, not evidence that the earlier USER.EXE failure had
+the same cause. The deployed NTVDM SHA-256 is
+695801153810E17C0767A42DE1D735CC730307578147E1CD31DAB81018AB3D1A,
+different from the earlier diagnostic and package binaries. Applying the
+previous run's page-table and LDT addresses to this dump did not validate;
+its stack mapping and fault address therefore remain unproven. The owner's
+report of mouse movement and edge jumps remains an input-path clue, not a
+proven cause.
+The captured image was matched byte-for-byte to `cache-rotate/ntvdm.exe`.
+Independent page-table and descriptor scanning located CR3 002f3000 and LDT
+80099000, validated by recovering the exact reported 15 instruction bytes
+from CS 16a7:0744. SS 1c17 has base 00667000 and limit 0000ffff; the 16-bit
+instruction accesses 00676fc6, within that limit. Its post-fault captured PTE
+is 00057000 (not present). The earlier positive control accessed 00676fd4;
+this is a shared stack-region observation, not proof of the original fault's
+PTE or proof of its cause because this snapshot was taken after Windows had
+raised the error. See `owner-find-paging-fast.py` and
+`owner-validated-stack.py` in the S9 disposable workspace.
+The decoded USER code at 0712–0744 writes several fields through SS:SI,
+then calls 2c0e and writes another through SS:SI. At the captured failure SI
+is ffd0 (-48 signed). The original INT 33 mouse callback places the mouse X
+motion in SI and `mouse_int2` restores its saved SI; the host uses a
+suspension flag to defer additional mouse IRQs until the callback completes.
+This makes callback register restoration or an intervening nested path a
+specific testable hypothesis, not a demonstrated cause: the actual earlier
+SI, execution path, and live fault-time PTE were not recorded. The existing
+non-faulting full-register control recorded correct restoration for all 1,392
+observed callback pairs, so changing the mouse callback without a failing
+witness would be unsupported.
+Owner-directed diagnostic delivery: the separately identified complete
+11-image package was installed at O:/tmp/w95dbg, and the existing
+O:/WINDOWS/PATCH/WIN.CMD was changed to use its system32 directory for both
+PATH and run16. Package identity bdc586d6-0024-48d0-98b6-a43d9371d16f
+was assigned consistently to all images; manifest hashes were verified after
+copy. The instrumented NTVDM SHA-256 is
+ECF18C088A8A9EB3EF20C952C7DB87E9B25F666E7850D22E93FCC2FF3BC077F0.
+Its rolling in-memory traces retain mouse callback registers, saved SI/DI,
+motion, position, selected instance, nested mouse and protected exceptions;
+they do not automatically persist after the process exits. The previously
+saved owner dump remains separate. A hidden MEM smoke attempt did not finish
+within its diagnostic deadline; its four owned diagnostic processes were
+identified by exact path/PID and stopped. This is not a passing startup or
+Win95 acceptance result. Do not claim the owner's graphical failure fixed.
+A task-local decoder for the diagnostic image's callback and exception
+rings is available at build/t481-s9/decode-owner-diagnostic.py. A synthetic
+fixture verified both ring header layouts and wraparound chronological order;
+this is a parser check, not a product or mouse-behavior test. No diagnostic
+Win95 process was present when last checked. The ring data require a live
+process capture before its exit; they are not persistent event logs.
+The owner diagnostic package was additionally launched in an independent
+Win95 copy using the private probe stage. A read-only live dump of the owned
+NTVDM was decoded with the task-local parser: 4,285 callback records
+(events 1/2/3), 3,214 records with nonzero motion, and 10,485 protected
+exception records were recovered with the shared sequence numbers. This
+validates actual diagnostic collection and decoding, not any inference that
+these exceptions were abnormal or that the Win95 graphics-mouse bug is fixed.
+The isolated runner remains responsible for completion and cleanup.
+The diagnostic package's isolated private-desktop validation completed its
+512 injected mouse cycles with a frontend FIFO receipt and returned normally
+from the runner. Its observer intentionally ended at its deadline while the
+guest remained active; sampled final frame shows a Win95 desktop. A heuristic
+saved a fault dump, but no actual failure is established by that flag alone.
+The owned guest copy O:/tmp/q98 and runtime stage O:/tmp/n3e2 were removed;
+source hashes were unchanged except the excluded active swap. This does not
+validate actual RDP input or normal guest shutdown.
+The isolated diagnostic capture contains a concrete nested callback failure,
+not merely an inferred one. For VM 0, event sequence 46377 entered an outer
+callback and saved SI=1f8f and BP=8f90. During its virtualized master-PIC
+EOI, sequence 46385 entered another callback in the same VM and overwrote the
+same instance save slots with SI=0780 and BP=0000. The inner return completed;
+outer `mouse_int2` then returned at sequence 46414 using the inner save slots.
+AX, BX, CX, DX, SI, DI and BP differed from the outer entry's saved values.
+The lifecycle and BIOS-I/O records place the nested entry during the outer
+`biosDoInst` for port 20h. This establishes broken register preservation in
+the existing runtime under that synthetic 1920-pixel edge-jump workload; the
+run ended at its observer deadline with a visible desktop, so it alone does
+not prove this caused the owner's illegal operation. The finding invalidates
+any broader claim that the previous non-faulting callback sample proved all
+returns were paired correctly.
+Candidate fix (not published): `mouse_io.c` places each callback's nine
+16-bit saved register values and condition mask on that callback's existing
+guest stack, followed by the original INT2 far-return address; `mouse_int2`
+consumes that frame in reverse order. This preserves the guest binaries and
+does not add host-owned per-VM state or a fixed nesting limit. The retained
+NIDDB structure fields remain in place for layout compatibility.
+`tests/observation/verify-mouse-callback-reentry.py` compiles the actual
+tracked baseline and current selected callback bodies with a memory/register
+fixture: the baseline fails the outer nested restore and the candidate passes
+single, nested, condition-mask, stack-balance and 16-bit stack-wrap checks.
+The x86 cached NTVDM build and mocked-ICA relative mouse bridge test passed.
+A diagnostic candidate's isolated Win95 run retained 1,536 correctly restored
+callback pairs but encountered no nested callback, so that runtime sample does
+not itself prove the nested correction. Its 512-cycle private probe ended at
+its own observation deadline; the temporary guest and stage were removed.
+The production candidate passed Win3.1 std and 386 DOSONLY=0 desktop/normal
+exit witnesses. Physical RDP and full Win95 regressions remain outstanding.
+Win95 production-candidate editor witness passed after using the same exact
+welcome-window title setting as the earlier successful run. Two DOS prompt
+editors used guest USER keyboard and mouse, saved the checked distinct file
+contents and closed. The observer exited 1 and normal Win95 shutdown and
+physical RDP input remain unproved. An earlier attempt omitted the welcome
+window dismissal and timed out before editing; it is not a product pass or a
+proved product failure. Both nested isolated copies were removed, and the
+non-swap source inventory was verified unchanged.
+After the baseline/candidate fixture, Win3.1 startup/exit and Win95 editor
+witnesses, the owner-requested isolated diagnostic package at O:/tmp/w95dbg
+was replaced as a complete 11-image set with the nested-frame candidate;
+its UUID is 8d9804b3-b059-4e2b-98ea-abbc6e244aed and NTVDM SHA-256 is
+F535E3B05EAC7CB9C123AB9DF6FEE78ECAD24235A0616432001532F648C17E2F.
+Every installed image matched its manifest and the task-owned previous
+staging directory was removed. WIN.CMD still points to this diagnostic path;
+the ordinary O:/winnt package was not modified. This is a diagnostic
+candidate for the owner's actual RDP exercise, not a formal product release.
+The owner reported repeated failures on mouse click and retained the latest
+scene. Read-only process inspection identified run16 PID 39932 and NTVDM PID
+35604 under O:/WINNT/system32, not the O:/tmp/w95dbg diagnostic package;
+its command was `run16.exe o:\windows\patch\win`. Thus the matching debug
+collector did not attach and these runs cannot accept or reject the candidate.
+A live NTVDM dump was saved as owner-click-blue-20261109.dmp (SHA-256
+EF663AE41AA53C6862E578930EDBB9616A53758993B1DA41BC02A9BC6F6EB67B);
+the PPM is owner-click-blue-20261109.ppm (SHA-256
+450345DE4964A026C7568F2CAD842CC4B536EA811ED69491B017130C2303C824).
+The captured screen shows an Explorer illegal-operation dialog. The owner
+also reports blue screens on clicks; do not conflate the observed screenshot
+with a captured blue-screen image. No input was sent to the owner's session.
+The owner was given the explicit WIN.CMD invocation; a separate collector
+continues to watch only the independent diagnostic executable path.
+Full candidate gate run 2 passed guest-media, export, WOW frontier, both
+17-case console/window matrices, RPC and native-GUI gates, then failed its
+version-negative fixture compilation: the selected flat image cache had no
+`obj/basesrv/service.h` (C1083). This is a missing native build-tree input,
+not a passed gate or a demonstrated runtime regression. A cached x64 service
+build was started to supply the expected generated header, objects and
+archives before repeating the gate. The owner-reported click failure remained
+on the ordinary O:/WINNT binary; its retained scene was saved separately.
+The external read-only collector for the owner diagnostic package uses the
+candidate link map's two data RVAs, validates both markers, and continuously
+replaces a bounded trace snapshot while the exact diagnostic NTVDM is live.
+Its two RVAs were independently checked against a captured live candidate
+process and both markers matched. A single saved snapshot contains callback
+and exception ring data, not a full guest memory dump. The collector PID and
+output are task-owned and retained in build/t481-s9.
+The independently identified candidate diagnostic process PID 34460 was
+observed by the background ring collector and then exited; its bounded final
+snapshot was saved as owner-rdp-live-rings.bin and decoded to
+owner-rdp-click-records.json. The saved callback data contain 11 left-button
+press/release pairs and one right-button press/release pair. All 226 paired
+callbacks, including several nested same-VM callbacks, restored all seven
+recorded 32-bit general registers to their entry values. This is real input
+coverage of the candidate fix, but the snapshot was sampled at 250 ms and
+no fault screen or process exit reason was captured, so it is not proof that
+the owner-reported blue-screen cause is fixed or identified. The owner was
+asked whether this captured run was the failing click run; answer pending.
+Owner acceptance: with the candidate diagnostic package started directly via
+O:/WINDOWS/PATCH/WIN.CMD, Win95 graphical mouse clicks and EDIT.COM window
+clicks worked. The owner also reported EDIT.EXE in a window did not respond
+to clicks; by explicit direction, investigate that separately after this
+repair's formal delivery, under the later multitask acceptance scope. Earlier
+`run16 O:/WINDOWS/PATCH/WIN` exercised the formal O:/WINNT worker; the actual
+resolver tries .COM, .EXE, .BAT, then .PIF and does not try .CMD, so the
+extensionless request finds WIN.PIF instead of invoking WIN.CMD. This explains
+the different package selection; it is not evidence that the outer Run16
+binary alone caused the guest mouse failure.
+The candidate passed the complete selected Full gate: 16 passed, zero
+failed, against its identical 11-image package. The external DOS4GW/Nesticle
+fixture was not supplied and that gate was explicitly skipped. Version
+negative peers passed once the genuine x64 service graph and object/archive
+inputs were rebuilt; the earlier missing-header result remains recorded as a
+failed harness setup, not a product pass.
+The cached x86 NTVDM, WOW32, VCDEX, VDMREDIR and nthook32 targets, and
+cached x64 native worker/frontend/monitor/launcher/service and nthook64
+targets built successfully. All 11 were compared with the Full-tested
+package by PE section and resource contents: code and other non-resource
+sections match; each .rdata mismatch is the link timestamp duplicated from
+its PE header, and resource payloads match except the injected package-ID
+resource. Raw files therefore differ, but no other content difference was
+found. `compare-reentry-resources.py` records the resource comparison.
+Formal delivery: candidate package 90b4ec7f-bdf0-4011-8b2d-af156031f27d
+was published as a coherent 11-image set to assets/release and
+O:/winnt/system32. Both destinations were rehashed against the Full-tested
+manifest. The W31 installed .386 files were hash-equal to the released addon
+manifest and W31 SYSTEM.INI was unchanged. The owner-selected temporary Win95
+WIN.CMD diagnostic path was switched back to the newly published formal
+package; the isolated diagnostic package remains available for the deferred
+EDIT.EXE investigation. The owner accepted Win95 desktop and EDIT.COM mouse
+interaction with this fix; native EDIT.EXE physical mouse input is deferred.
+A separately attempted historical `test_mirror_rejected_conditions.py` check
+failed on its stale S13 c_main.c:519 inventory; that file is unchanged from
+HEAD, and the Full 16-gate result does not include or cure that old check.

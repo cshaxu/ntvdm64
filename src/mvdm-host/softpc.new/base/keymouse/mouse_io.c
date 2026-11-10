@@ -2397,8 +2397,26 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 }
 
 
+/* DIVERGENCE(MVDM-HOST-DIV-318): a second IRQ may arrive while the
+ * virtualized PIC EOI executes. Keep each callback's saved words on its
+ * own guest stack, ahead of the existing INT2 return address. */
+LOCAL void mouse_callback_push IFN1(word, value)
+{
+    setSP(getSP() - 2);
+    sas_storew(effective_addr(getSS(), getSP()), value);
+}
+
+LOCAL word mouse_callback_pop IFN0()
+{
+    word value;
+    sas_loadw(effective_addr(getSS(), getSP()), &value);
+    setSP(getSP() + 2);
+    return value;
+}
+
 void mouse_int2()
 {
+    MOUSE_CALL_MASK condition_mask;
 	/*
 	 *	Part 2 of the mouse hardware interrupt service routine. Control
 	 *	is passed to this routine when the "user subroutine" that may
@@ -2413,21 +2431,22 @@ void mouse_int2()
 #endif
 #line 2673
 
-	setAX(saved_AX);
-	setBX(saved_BX);
-	setCX(saved_CX);
-	setDX(saved_DX);
-	setSI(saved_SI);
-	setDI(saved_DI);
-	setES(saved_ES);
-	setBP(saved_BP);
-	setDS(saved_DS);
+    condition_mask = mouse_callback_pop();
+    setDS(mouse_callback_pop());
+    setBP(mouse_callback_pop());
+    setES(mouse_callback_pop());
+    setDI(mouse_callback_pop());
+    setSI(mouse_callback_pop());
+    setDX(mouse_callback_pop());
+    setCX(mouse_callback_pop());
+    setBX(mouse_callback_pop());
+    setAX(mouse_callback_pop());
 
 	/*
 	 *	If the cursor is currently displayed, move it to the new
 	 *	position
 	 */
-	if (last_condition_mask & MOUSE_CALL_MASK_POSITION_BIT)
+	if (condition_mask & MOUSE_CALL_MASK_POSITION_BIT)
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 		{
 #ifdef	MOUSE_16_BIT
@@ -6180,6 +6199,18 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	 *	part of the mouse hardware interrupt service routine
 	 */
 
+    /* Preserve this invocation before a virtualized EOI can reenter it. */
+    mouse_callback_push(getAX());
+    mouse_callback_push(getBX());
+    mouse_callback_push(getCX());
+    mouse_callback_push(getDX());
+    mouse_callback_push(getSI());
+    mouse_callback_push(getDI());
+    mouse_callback_push(getES());
+    mouse_callback_push(getBP());
+    mouse_callback_push(getDS());
+    mouse_callback_push(condition_mask);
+
 	/*
 	 *	Push address of second part of mouse hardware interrupt service
 	 *	routine
@@ -6214,34 +6245,13 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 #endif /* !CPU_30_STYLE */
 #line 6630
 
-	/*
-	 *	Put parameters into the registers, saving the previous contents
-	 *	to be restored in the second part of the mouse hardware 
-	 *	interrupt service routine
-	 */
-	saved_AX = getAX();
+	/* Set callback parameters; INT2 restores the saved stack frame. */
 	setAX(condition_mask);
-	saved_BX = getBX();
 	setBX(cursor_status.button_status);
-	saved_CX = getCX();
 	setCX(cursor_status.position.x);
-	saved_DX = getDX();
 	setDX(cursor_status.position.y);
-	saved_SI = getSI();
 	setSI(mouse_motion.x);
-	saved_DI = getDI();
 	setDI(mouse_motion.y);
-	saved_ES = getES();
-	saved_BP = getBP();
-	saved_DS = getDS();
-
-	/*
-	 *	Save the condition mask so that the second part of the mouse
-	 *	hardware interrupt service routine can determine whether the
-	 *	cursor has changed position
-	 */
-
-	last_condition_mask = condition_mask;
 
 	/*
 	 *	Enable interrupts

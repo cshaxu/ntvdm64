@@ -29,10 +29,28 @@ S10 retains final Win95 and multitask acceptance; the T remains open.
 | Original Owner Request | Close S8; start S9 SoftPC software-emulation fixes and Win95 repair. |
 | Similar-Issue Sweep | Check selected CCPU, BIOS, C-VID and video callers and upstream dependencies. |
 
-Owner correction: S9 now prioritizes the currently reproduced Win95 mouse
-blue screen. S10 will investigate Win3.1 and Win95 batch-launched PE32
-programs; S11 receives all other remaining multitask and integrated acceptance
-work. Preserve the current faulting instance for read-only probing.
+Owner correction: S9 prioritizes and delivers the reproduced Win95 mouse
+callback reentry repair. The owner accepted Win95 desktop and EDIT.COM mouse
+behavior with the diagnostic candidate and directed EDIT.EXE window mouse
+click failure to follow this delivery. S10 investigates Win3.1 and Win95
+batch-launched PE32 programs; S11 receives the EDIT.EXE physical mouse issue
+and all other remaining multitask and integrated acceptance work. Two reproduced fault instances were captured read-only; the later hung
+instance was closed with owner authorization to run the editor witness.
+
+Address-independent mouse diagnostics captured paired original INT 33 callback
+entry and return in non-faulting Win95 sweeps. A later frame-pointer trace
+identified nested original PIC EOI virtualization through biosDoInst; sampled
+registers and stack were restored; sampled IOPL changes were traced to
+original guest IRET flag restoration. The project-routed software cursor painter was not entered
+in one sweep. These observations do not prove the faulting path safe; matched
+single-run INSIGNIA-enabled/disabled controls did not reproduce. The root
+cause remains unresolved; see the S9 evidence.
+
+A later diagnostic run proved same-VM mouse callback nesting during a
+virtualized PIC EOI overwrites the outer callback's saved registers. A
+candidate stores each callback frame on its guest stack; a baseline-failing
+nested fixture and Win3.1 std/386 startup/exit witnesses pass. Win95 editor,
+real RDP reproduction and complete delivery remain pending. See S9 evidence.
 
 S9 disposable workspace: `build/t481-s9`, owned by this packet; budget 8 hours,
 20 GiB, with a 30-minute no-progress review. Join owned processes and record
@@ -72,17 +90,21 @@ original Win95 CONAGENT received DOS 5.0 but requires DOS 7.0 and exited
 before VCOND setup. A complete remedy and subsequent behavior remain unproved;
 see the S9 evidence for the failed version-substitution control.
 
-The production Win95 two-prompt EDIT.EXE/EDIT.COM witness now passes guest
+The production Win95 two-prompt EDIT.EXE/EDIT.COM witness passes guest
 USER-synthesized keyboard and mouse saves, six checked menu-click positions
-and closure. It does not independently prove VM identity, physical input or
-normal shutdown. The diagnostic witness also passed with two distinct VM
-identities after fixing its Welcome activation wait. Per owner direction,
-investigation of the intermittent physical mouse blue screen is deferred until
-it can be reproduced again.
+and closure; the latest run also verified editing and saving pre-existing
+distinct contents. It does not independently prove VM identity, physical input
+or normal Win shutdown. The diagnostic witness passed with two distinct VM
+identities after fixing its Welcome activation wait. The owner accepted desktop and EDIT.COM mouse behavior on the nested-callback
+repair diagnostic; EDIT.EXE physical window clicks remain a separate S11
+issue. See S9 evidence for the observed nested register corruption, fix,
+controls and remaining Win95 shutdown boundary.
 
 ## Current Technical Baseline
 
-The 11-image host candidate and W31 addon pair are published and hash-verified.
+The 11-image host package `90b4ec7f-bdf0-4011-8b2d-af156031f27d` and W31
+addon pair are published and hash-verified. Full gate: 16 passed; external
+DOS4GW/Nesticle was not supplied. The Win95 WIN.CMD now uses the formal package.
 The 11 deployed host hashes and both installed W31 driver hashes were
 rechecked. The owner subsequently permanently authorized changes to the
 Win95 installation: its launcher paths were corrected, and both released
@@ -93,8 +115,9 @@ An earlier black desktop capture was inconclusive; after cleaning residual
 test processes, a production NTCON frame from the installed WIN.CMD showed
 the Win95 desktop and welcome dialog. Physical editor input and normal
 Win95 shutdown remain unverified.
-Win95 manual acceptance and the repeated Win3.1 CAF/fullscreen sequence remain
-outstanding; neither is implied by the owner's S8 closure.
+Full Win95 multitask acceptance, native EDIT.EXE physical mouse input and
+the repeated Win3.1 CAF/fullscreen sequence remain outstanding; desktop and
+EDIT.COM mouse interaction were owner-accepted on the diagnostic candidate.
 
 ## Recent M0 Closures
 

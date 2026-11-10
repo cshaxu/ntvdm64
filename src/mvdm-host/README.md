@@ -1563,6 +1563,12 @@ bridge; its existing EOI/pending and cancellation boundaries include that
 queue. `nt_mouse.c` retains original absolute input as fallback and delegates
 only relative ingress conversion to `ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c`.
 Original EmulateCoordinates, limits and callback masks remain owners.
+T481 S9 candidate: `mouse_io.c` stores each callback's original register
+words and condition mask on that callback's guest stack before the existing
+INT2 return address. Nested virtualized PIC-EOI callbacks therefore cannot
+overwrite an outer callback's saved values. The stack frame is consumed by
+INT2; original guest binaries and callback dispatch are unchanged. See
+[the S9 evidence](../../docs/etc/evidence/m0-t481-s9-softpc.md).
 The attempted MONITOR/X86GFX cursor hooks were removed after final-link and
 source review disproved their availability in this CCPU40 composition.
 The reviewed 286d54a3 reference's non-MONITOR `mouse_io.c` software cursor

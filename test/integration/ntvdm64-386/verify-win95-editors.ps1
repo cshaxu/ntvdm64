@@ -11,10 +11,12 @@ param(
  [switch]$MouseMenu,
  [switch]$GuestUserInput,
  [switch]$SaveWitness,
+ [switch]$ReadWriteWitness,
  [string]$DismissWelcomeTitleHex
 )
 $ErrorActionPreference='Stop'
 if($GuestUserInput -and ($MouseMenu -or !$SaveWitness)){throw 'GuestUserInput requires SaveWitness and does not support MouseMenu'}
+if($ReadWriteWitness -and (!$GuestUserInput -or !$SaveWitness)){throw 'ReadWriteWitness requires GuestUserInput and SaveWitness'}
 if(!$GuestUserInput -and !$InterruptObserver){throw 'Diagnostic editor witness requires InterruptObserver'}
 if($DismissWelcomeTitleHex){
  if($DismissWelcomeTitleHex -notmatch '^(?:[0-9a-fA-F]{2}){1,63}$'){throw 'Welcome title must be guest ANSI bytes in hexadecimal'}
@@ -39,7 +41,10 @@ $enc=[Text.Encoding]::GetEncoding(28591)
 
 Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
-if($SaveWitness){foreach($name in 'A.TXT','B.TXT'){[IO.File]::WriteAllBytes("$dest/PATCH/$name",[byte[]]@())}}
+if($SaveWitness){foreach($name in 'A.TXT','B.TXT'){
+ $seed=if($ReadWriteWitness){if($name -eq 'A.TXT'){'seedA'}else{'seedB'}}else{''}
+ [IO.File]::WriteAllBytes("$dest/PATCH/$name",[Text.Encoding]::ASCII.GetBytes($seed))
+}}
 foreach($id in 'A','B'){
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "Prompt probe $id" --program "$dest\PATCH\COMMAND.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'PIF failed'}
@@ -278,9 +283,9 @@ try {
  $trace=Get-Content "$task/trace.txt" -Raw
  if(@([regex]::Matches($trace,'(?m)^11 ')).Count -lt 2 -or @([regex]::Matches($trace,'(?m)^12 ')).Count -lt 2){throw 'Both real command admissions and completions are required'}
  }
- if($SaveWitness){foreach($pair in @(@('A.TXT','aaa'),@('B.TXT','bbb'))){
-  $path="$dest/PATCH/$($pair[0])";$saved=Get-Content -LiteralPath $path -Raw
-  if([string]::IsNullOrEmpty($saved) -or $saved.Trim() -cne $pair[1]){throw "Wrong saved contents: $path"}
+ if($SaveWitness){$expected=if($ReadWriteWitness){@(@('A.TXT','aaaseedA'),@('B.TXT','bbbseedB'))}else{@(@('A.TXT','aaa'),@('B.TXT','bbb'))};foreach($pair in $expected){
+  $path="$dest/PATCH/$($pair[0])";$saved=[Text.Encoding]::ASCII.GetString([IO.File]::ReadAllBytes($path))
+  if($saved -cne $pair[1] -and $saved -cne ($pair[1]+"`r`n")){throw "Wrong saved contents: $path"}
   Copy-Item -LiteralPath $path -Destination $task
  }}
  if($MouseMenu -or $GuestUserInput){
@@ -295,7 +300,7 @@ try {
    if($dx -gt 3 -or $dy -gt 4){throw "Mouse missed target: $($receipt.Name)"}
   }
  }
- $result=[ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;guestUserInput=[bool]$GuestUserInput;mouseMenu=[bool]($MouseMenu -or $GuestUserInput);saveVerified=[bool]$SaveWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}
+ $result=[ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;guestUserInput=[bool]$GuestUserInput;mouseMenu=[bool]($MouseMenu -or $GuestUserInput);saveVerified=[bool]$SaveWitness;readWriteVerified=[bool]$ReadWriteWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}
  if(!$GuestUserInput){$result.completed=2;$result.menus=$true}
  $result|ConvertTo-Json|Set-Content "$task/editor-result.json"
  if($GuestUserInput){'PASS Win95 two prompt editors saved distinct text and closed using guest USER keyboard and mouse; physical input and normal shutdown not proven'}
