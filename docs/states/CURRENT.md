@@ -2,38 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T481 S11 — Win3.1/Win95 batch-launched PE32 investigation.**
-S10 completed the owner's acceptance and full delivery; see
-[S10 evidence](../etc/evidence/m0-t481-s10-edit-mouse.md).
+**Active: M0 T481 S12 — Console-window close error investigation.**
+S11 research attributed intermediate execution to Win95 SHELL VxD; the owner
+explicitly states the observed batch behavior is not a bug and requires no fix.
+See [S11 evidence](../etc/operations/m0-t481-multitask-completion-plan.md#s11-current-baseline).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md). |
-| Identifier Mode | M0 T481 S11, Ordinary Mode. |
-| Admission And Approval | Owner explicitly ordered batch startup as S11 and console close investigation as S12. |
-| Objective | Reproduce and attribute batch-launched PE32 failures in Win3.1 and Win95 and repair the evidenced owned boundary without modifying original guest binaries. |
-| Non-goals | Do not modify or rebuild original guest images; do not change unrelated guest or 486 behavior; do not use Computer Use. |
-| Reference Baseline | Published package e09695f6-40f3-453d-8b96-e732d1050f4d; historical Win95 DOS EXEC evidence records CONAGENT DOS version mismatch and separate missing batch dispatch. |
-| Files And ABI Surface | As evidence requires: original DOS execution and version handling, authored multitask bridge, owned host adapters, relevant tests and exception registration. |
+| Identifier Mode | M0 T481 S12, Ordinary Mode. |
+| Admission And Approval | Owner ordered S12 to investigate the System Error shown when the host Console window is closed. |
+| Objective | Reproduce and attribute the Console-window close error; repair an evidenced owned lifecycle or reporting defect. |
+| Non-goals | Do not modify or rebuild original guest binaries, alter unrelated behavior, or use Computer Use. |
+| Reference Baseline | S10 production package e09695f6-40f3-453d-8b96-e732d1050f4d; user observed broken-pipe System Error on X close. |
+| Files And ABI Surface | NTSRV lifecycle, NTCON/worker-base frontend channel and NTVDM error reporting, as evidence requires; focused integration probes. |
 | Applicable Rules | Execution, source policy, guest immutability, NTSRV lifecycle ownership, source-first and minimal implementation. |
-| Verification | Reproduce both guest versions using isolated fixtures; distinguish DOS version handling, actual executable dispatch and output; run focused and applicable Full gates. |
-| Expected Markers | Batch-launched native executables produce correct output and result in Win3.1 and Win95; ordinary DOS and interactive paths remain correct. |
-| Asset Needs | Published host package, authored released drivers, existing Win95 copy and private probe infrastructure; O:/tmp task copies cleaned after use. |
-| Reporting Requirements | Identify each actual failing call chain, supported behavior, exact published artifacts and unverified boundaries. |
+| Verification | Reproduce actual console-window X close in an isolated Win95 session; distinguish orderly shutdown from unexpected channel failure; run focused and required Full gates for a runtime change. |
+| Expected Markers | Identify actual error caller and ownership ordering; no misleading dialog on orderly close while genuine errors remain visible. |
+| Asset Needs | Published package, authored released drivers, isolated Win95 copy and private probe infrastructure; remove owned O:/tmp copies. |
+| Reporting Requirements | Explain the actual close sequence, root cause, test evidence, package identities and unverified boundaries. |
 | Stop Conditions | Original guest mutation or unapproved observable semantic retreat. |
-| Exit Criteria | Reproduced defect repaired or causally disposed, focused and applicable regressions passed, reviewed coherent package published, committed and pushed; remaining acceptance handed onward. |
-| Original Owner Request | Investigate Win3.1 and Win95 batch-launched PE32 separately, before the console close error. |
-| Similar-Issue Sweep | Batch and interactive launch, internal commands, native CUI and guest DOS executables. |
+| Exit Criteria | Observed issue repaired or causally disposed; focused and applicable regressions passed; any runtime delivery built, published, committed and pushed. |
+| Original Owner Request | Investigate the System Error after clicking the console X and make exit cleanup graceful. |
+| Similar-Issue Sweep | Management close, worker exit, frontend loss and genuine transport failure. |
 
-S12 investigates the owner-observed pipe-disconnection dialog on console window
-close. S13 retains
-the other multitask gaps, normal Win95 shutdown
-evidence and integrated acceptance. These obligations are not waived.
-The previously observed direct-start large inherited-environment boundary
-remains recorded in [S9 direct startup](../etc/evidence/m0-t481-s9-direct-startup.md);
-no guest workaround is claimed.
+S13 retains the other multitask gaps, normal Win95 shutdown evidence and
+integrated acceptance. The direct-start large inherited-environment boundary
+remains recorded in [S9 direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
 
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The
@@ -46,10 +43,10 @@ through Win95, focus, geometry or the physical RDP route.
 
 [S10 evidence](../etc/evidence/m0-t481-s10-edit-mouse.md) records the input-chain investigation.
 
-S11 disposable workspace: `build/t481-s11`, owner S11; budget 8 hours,
+S12 disposable workspace: `build/t481-s12`, owner S12; budget 8 hours,
 20 GiB, 30-minute no-progress review. Stop and join owned processes, record
 results, and clean task-specific O:/tmp copies before retirement. The owner
-diagnostic package remains available for the subsequent close investigation.
+diagnostic package remains available for the close investigation.
 
 ## Current Technical Baseline
 
