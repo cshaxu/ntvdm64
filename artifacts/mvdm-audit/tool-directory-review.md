@@ -51,6 +51,12 @@ the verifier checks exact ZIP membership and every member's identity without
 requiring this archive-only entry in a staged runtime. The ZIP itself remains
 byte-identical.
 
+A further 28 task-specific historical governance scripts were removed after
+exact-name searches found no current build, test, policy, design or proposal
+consumer. They generated or checked superseded task ledgers and topologies;
+the outdated tool README entries were removed. Git retains their history.
+Current documentation governance tools and owner-designated utilities remain.
+
 The owner explicitly retains tools/opennt, win31-path, win31-setup,
 win95-launch, win95-path and win101-setup. This is a directory/ownership
 review; it does not certify every historical script for current execution.
