@@ -100,6 +100,14 @@ passed in both DOSONLY modes. This proves the empty-file API defect and its
 repair; the isolated full-Setup attempts still did not complete, so they do
 not independently prove the original installer's complete call sequence.
 
+Review of the retained original-Setup captures narrows why that attempt was
+incomplete: copying reached 91%, then Setup displayed “Cannot read from drive
+I.” The probe accepted Cancel; Setup continued into its configuration screens
+and returned zero, but its installation lacked WIN.COM and group files. Thus
+exit 0 is not a completed-install receipt. The rerun must handle the empty
+optical drive without canceling a copy operation and assert the installed files
+and groups explicitly.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
