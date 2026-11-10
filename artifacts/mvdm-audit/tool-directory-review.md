@@ -19,6 +19,11 @@ some scripts still require the removed paths. The old group and its historical
 records remain recoverable from Git; this does not remove the current
 documentation gates or the historical binary toolchains.
 
+The unreferenced T335 one-time ledger generator and old console observer
+build wrapper were removed as well. The latter's observer source remains;
+current tests use the formal message-probes build target. No runtime image or
+guest component is removed by this cleanup.
+
 The owner explicitly retains tools/opennt, win31-path, win31-setup,
 win95-launch, win95-path and win101-setup. This is a directory/ownership
 review; it does not certify every historical script for current execution.
