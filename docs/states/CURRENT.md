@@ -93,7 +93,10 @@ both DOSONLY choices and Standard/386 startup and normal exit, with four
 parseable groups in each copy. That matrix still uses a Setup shim.
 
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
-events and therefore does not prove the owner's physical mouse route. The
+events and therefore does not prove the owner's physical mouse route. With
+the current published package, its two prompt VMs both opened menus, saved
+their distinct modified files and closed; the original installation was
+unchanged. The
 published O:/WINNT/edit.exe and C:/Windows/System32/edit.exe have identical
 SHA-256 `5F54A0FA8CBF5423AEF8BE8502173A59183CF3ADBC913212B1066EF8FFF3D9C0`.
 An independent real hidden-console probe observed Edit input mode 0x288:

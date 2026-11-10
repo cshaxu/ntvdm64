@@ -242,6 +242,14 @@ return was not observed. DOSONLY=1 ran an actual guest DOS program without a
 native CUI worker; its test fixture retired the session, so it is not evidence
 of normal guest shutdown. The source Win95 installation remained unchanged.
 
+The released package `092da729-caf9-4a89-8f2e-305e368faacf` subsequently
+passed `verify-win95-editors.ps1` with two concurrent prompt VMs and the
+guest USER input, save and read/write witnesses: both editors opened their
+menus, saved their distinct modified file contents and closed. The source
+Win95 installation hashes remained unchanged. This test synthesizes input
+through guest USER; it does not establish the physical RDP mouse path or
+normal Win95 shutdown.
+
 After the DEM pathname consolidation, package
 `092da729-caf9-4a89-8f2e-305e368faacf` was also tested with the actual
 Win3.1 setup-selection script in isolated installation copies. DOSONLY=0
