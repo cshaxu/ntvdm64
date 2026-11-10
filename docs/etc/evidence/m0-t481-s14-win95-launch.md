@@ -151,6 +151,9 @@ A preliminary source census covers 1,060 tracked `mvdm-host` and
 does not assess the behavior of any difference. The per-file source paths,
 hashes and pending review status are recorded in
 `artifacts/mvdm-audit/t481-s14-mirror-restoration-inventory.json`.
+The DEM read and seek diagnostic registrations DIV-185 and DIV-186 were
+still described as active despite removal of their call sites and providers
+in `a2ec4d531`; their entries are now explicitly retired.
 
 Review of the adjacent original DEM write path found that the prior adapter
 introduced a second `CX=0` buffer path even though the shared lease now accepts
