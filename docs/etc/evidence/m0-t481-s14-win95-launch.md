@@ -122,6 +122,14 @@ result again lacked WIN.COM and program groups despite exit 0. Disabling those
 key sequence is therefore insufficient. The owned O:/tmp/qst copy and the
 isolated runtime were cleaned after the test.
 
+A further original-Setup run paused after applying those choices: its captured
+options screen shows both printer setup and hard-disk application scanning
+unchecked. After explicit continuation, copying reached 93% and Setup still
+reported `Cannot read from drive I`; the existing controller again selected
+Cancel and the incomplete installation had neither WIN.COM nor groups. This
+rules out those two optional choices as a sufficient way to avoid this test
+failure. The owned temporary copy was removed.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
