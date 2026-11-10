@@ -68,20 +68,46 @@ S6 or claim its previously unverified rows passed merely to simplify planning.
 
 ## Remaining S sequence
 
-S13 is closed. S14 awaits owner acceptance. Admit S15 only after the owner
-closes S14; S16 follows the Win95 matrix.
+S13 and S14 are closed. The owner admitted S15 for setup patch changes and
+will supply its detailed requirements. Mouse transition research, the former
+Win95 matrix and the remaining audit are deferred; their next S numbers are
+not allocated yet.
 
 | Packet | Scope and evidence required for closure |
 | --- | --- |
-| S14 | Win3.1 Standard and 386 Enhanced, each with the released INSIGNIA.386 and NTVDM64.386 pair configured or absent, each with DOSONLY=0 and 1. Record all eight cases independently. Reproduce the no-driver DOSONLY=1 prompt error and mouse loss on an isolated copy of the installed configuration, identify the failing transition and verify its repair with the same actions. |
-| S15 | Win95, same driver pair configured or absent crossed with DOSONLY=0 and 1. Verify the generated profile, guest DOS prompt, mouse and keyboard interaction, return to Windows and normal shutdown in each case. Verify guest-only execution for DOSONLY=1 even with the drivers present. Exercise the supported two-VM host payload route with DOSONLY=0 and both drivers loaded. Record actual routing without the pair separately. |
-| S16 | Reconcile outstanding mirror audit dispositions against the existing inventory, close remaining integrated acceptance and delivery obligations, and record an owner and evidence for any residual item. Carry forward earlier package and shutdown evidence with its limitations. |
+| S15 | Setup patch changes; admitted, awaiting owner requirements before implementation. |
+| Deferred mouse investigation | Reproduce EDIT.COM Console text -> CAF Window text -> Alt+Enter guest graphical DOS window: lingering DOS cursor and ineffective menu clicks. Use the captured O:/w31 no-addon DOSONLY=1 configuration; do not require installing the pair as a workaround. |
+| S14 (closed) | Six execution/scheduling contracts, two Standard smoke controls, four enhanced fullscreen cases and two paired-prompt cases passed. Owner deferred the later EDIT mouse return regression; see the evidence handoff. |
+| Deferred Win95 matrix | Win95, same driver pair configured or absent crossed with DOSONLY=0 and 1. Verify the generated profile, guest DOS prompt, mouse and keyboard interaction, return to Windows and normal shutdown in each case. Verify guest-only execution for DOSONLY=1 even with the drivers present. Exercise the supported two-VM host payload route with DOSONLY=0 and both drivers loaded. Record actual routing without the pair separately. |
+| Deferred audit | Reconcile outstanding mirror audit dispositions against the existing inventory, close remaining integrated acceptance and delivery obligations, and record an owner and evidence for any residual item. Carry forward earlier package and shutdown evidence with its limitations. |
 
 For S14 the driver axis records the installed files and active configuration.
 Standard mode does not load enhanced-mode VxDs. For each DOSONLY value, run
 full Standard interaction without the pair and a startup/mode/normal-exit
 control with the pair installed. All four enhanced profiles retain full
 interaction. This covers eight installations and six behavioral combinations.
+The six mandatory execution/scheduling acceptance rows are:
+
+| Windows mode | DOSONLY | Loaded addon pair | Command execution | Guest Windows during child execution |
+| --- | --- | --- | --- | --- |
+| Standard | 0 | 0 | cmdExec host shell-out | Blocking |
+| Standard | 1 | 0 | Internal guest DOS | Blocking |
+| Enhanced | 0 | 0 | cmdExec host shell-out | Blocking |
+| Enhanced | 1 | 0 | Internal guest DOS | Nonblocking |
+| Enhanced | 0 | 1 | cmdExec host shell-out | Nonblocking |
+| Enhanced | 1 | 1 | Internal guest DOS | Nonblocking |
+
+`test/integration/multitask/verify-win31-setup-modes.ps1` must assert these
+rows, not merely startup and a completed command's output. Blocking means
+the whole guest Windows stops making progress, not just the calling COMMAND
+waiting for its child. An independent Win16 witness must run before and after
+the child, remain stopped during a controlled live child interval for blocking
+rows, and continue during that interval for nonblocking rows. The runner
+releases the child after observing that interval; cleanup cannot count as
+successful return. Record the child execution owner, progress samples, normal
+return, real Windows mode and guest DOSONLY per row. Test observation budgets
+do not change production scheduling or timeout policy.
+
 In Standard mode with DOSONLY=0, COMMAND requests that delegate to the
 host use the blocking cmdExec/cmdExec32 shell-out. The caller resumes with
 the host child's result. Installing the enhanced-mode drivers on disk leaves
@@ -97,7 +123,7 @@ and verify both DOS sessions still accept input before normal exit.
 For guest DOS work, DOSONLY=1 keeps execution in the guest with either driver
 configuration. Enhanced Windows still schedules its own DOS VMs. Test their
 input, output and retirement without requiring a host payload. For an actual
-host shell-out with DOSONLY=0 and no enhanced-mode bridge, the legacy wait may
+host shell-out with DOSONLY=0 and no enhanced-mode bridge, the legacy wait must
 pause guest Windows. Require the child to finish, its result to reach the
 caller, and Windows input and execution to resume. Concurrent guest progress
 during a host payload is required only for enhanced DOSONLY=0 with the pair

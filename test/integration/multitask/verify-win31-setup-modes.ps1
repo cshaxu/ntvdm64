@@ -78,9 +78,12 @@ foreach($mode in 0,1){
   if($LASTEXITCODE -or !$hostVersion){throw 'Cannot obtain native CMD version for comparison'}
   $nativeScript=Join-Path $dest 'S14.CMD'
   if(Test-Path $nativeScript){throw 'Native command fixture already exists'}
-  [IO.File]::WriteAllText($nativeScript,"@echo off`r`nver >$receipt.tmp`r`nmove /y $receipt.tmp $receipt >nul`r`n",[Text.Encoding]::ASCII)
+  [IO.File]::WriteAllText($nativeScript,"@echo off`r`nver >$dest\PATCH\SCHED.RUN`r`n:wait`r`nif not exist $dest\PATCH\SCHED.GO goto wait`r`nver >$receipt.tmp`r`nmove /y $receipt.tmp $receipt >nul`r`necho done>$dest\PATCH\SCHED.END`r`n",[Text.Encoding]::ASCII)
+  $scheduleChild=Join-Path $dest 'SCHED.COM'
+  & nasm -f bin "-DW31_INSTALL='$dest'" "$PSScriptRoot/win31-scheduling-child.asm" -o $scheduleChild
+  if($LASTEXITCODE){throw 'Scheduling DOS child assembly failed'}
   $controller=Join-Path $task 'prompt-check.exe'
-  & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
+  & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'Prompt controller assembly failed'}
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
    $out=Join-Path $task $case
@@ -94,23 +97,32 @@ foreach($mode in 0,1){
     }
     continue
    }
-   $argument=if($case.EndsWith('dosonly0')){"/c $nativeCmd /d /c $nativeScript"}else{"/c echo S14_OK>$receipt"}
+   $argument=if($case.EndsWith('dosonly0')){"/c $nativeCmd /d /c $nativeScript"}else{"/c $scheduleChild"}
    $expected=if($case.EndsWith('dosonly0')){$hostVersion}else{'S14_OK'}
+   $scheduling=if($case.StartsWith('std-') -or ($case -eq '386-dosonly0' -and $mode -eq 1)){'blocking'}else{'nonblocking'}
    & "$repo/assets/release/PIF.EXE" update $profile --arguments $argument
    if($LASTEXITCODE){throw "Cannot configure DOS prompt for $case"}
    $signals=@("$dest/PATCH/MREADY.BIN","$dest/PATCH/MDOWN.BIN")
    foreach($signal in $signals){if(Test-Path $signal){throw "Stale fixture signal: $signal"}}
    try {
-    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools
+    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -Scheduling $scheduling
     if(!(Test-Path $receipt) -or (Get-Content -LiteralPath $receipt -Raw).Trim() -cne $expected){throw "Unexpected command output for $case"}
+    $owner=if($case.EndsWith('dosonly0')){$hostVersion}else{'DOS'}
+    if((Get-Content "$dest/PATCH/SCHED.RUN" -Raw).Trim() -cne $owner){throw "Wrong execution owner: $case"}
    } catch {
     $failures+= "setup=$mode $case $($_.Exception.Message)"
    } finally {
     foreach($signal in $signals){if(Test-Path $signal){Move-Item -LiteralPath $signal -Destination $out}}
     if(Test-Path $receipt){Move-Item -LiteralPath $receipt -Destination (Join-Path $out 'command.txt')}
+    foreach($name in 'SCHED.RUN','SCHED.GO','SCHED.END','SCHED.HB'){
+     $path=Join-Path "$dest/PATCH" $name
+     if(Test-Path $path){Move-Item -LiteralPath $path -Destination $out}
+    }
    }
   }
   # Enhanced DOSONLY=1 must schedule two guest prompts even without addons.
+  & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
+  if($LASTEXITCODE){throw 'Interactive controller assembly failed'}
   # Preserve the single-prompt source flags except for windowed/background.
   $description=& "$repo/assets/release/PIF.EXE" show $profile
   $flagsLine=$description | Select-String '^W386\.FLAGS=0x([0-9a-f]+)$'
@@ -165,7 +177,7 @@ foreach($mode in 0,1){
   } catch {
    $failures+="setup=$mode 386-dosonly1-pair $($_.Exception.Message)"
   } finally {
-   foreach($name in 'A.RUN','B.RUN','A.END','B.END','A.FOC','B.KEY','MREADY.BIN','MDOWN.BIN'){
+   foreach($name in 'A.RUN','B.RUN','A.END','B.END','A.FOC','B.REQ','B.FOC','B.KEY','MREADY.BIN','MDOWN.BIN'){
     $path=Join-Path "$dest/PATCH" $name
     if(Test-Path $path){Move-Item -LiteralPath $path -Destination $out}
    }

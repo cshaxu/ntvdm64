@@ -72,6 +72,10 @@ test ax,ax
 jz .wait
 mov [hwnd-data],ax
 %ifdef W31_PROMPT_CHECK
+%ifdef W31_SCHEDULING_CHECK
+; A closed append receipt is observable without sharing a live DOS handle.
+call .heartbeat
+%endif
 ; Launch the installed DOS Prompt profile with the fixture's /c command.
 push ds
 push word prompt_name-data
@@ -79,6 +83,52 @@ push word 1
 api 1,166                        ; WinExec
 cmp ax,32
 jb fatal
+%ifdef W31_SCHEDULING_CHECK
+.schedule_wait:
+api 1,29                         ; Independent Win16 task must get CPU time.
+call .heartbeat
+push ds
+push word schedule_done-data
+push word 0
+api 1,85
+cmp ax,-1
+je .schedule_wait
+push ax
+api 1,81
+call .heartbeat                 ; Post-child progress is mandatory too.
+jmp .schedule_complete
+.heartbeat:
+push ds
+push word heartbeat_name-data
+push word 1
+api 1,85
+cmp ax,-1
+jne .heartbeat_open
+push ds
+push word heartbeat_name-data
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+.heartbeat_open:
+mov [heartbeat_file-data],ax
+push ax
+push word 0
+push word 0
+push word 2
+api 1,84                         ; _llseek(handle, 0, SEEK_END)
+push word [heartbeat_file-data]
+push ds
+push word heartbeat_byte-data
+push word 1
+api 1,86
+cmp ax,1
+jne fatal
+push word [heartbeat_file-data]
+api 1,81
+ret
+.schedule_complete:
+%endif
 %ifdef W31_PROMPT_PAIR
 mov bx,first_running-data
 call .wait_file
@@ -98,6 +148,49 @@ push word 1
 api 1,166
 cmp ax,32
 jb fatal
+mov bx,second_running-data
+call .wait_file
+.second_active:
+api 1,29
+api 2,60
+test ax,ax
+jz .second_active
+cmp ax,[hwnd-data]
+je .second_active
+cmp ax,[first_window-data]
+je .second_active
+mov [second_window-data],ax
+; The host requests focus only after observing the return to graphics.
+; A graphics frame alone does not establish DOS keyboard focus.
+mov bx,second_request-data
+call .wait_file
+.activate_second:
+api 1,29
+push word [second_window-data]
+api 2,44
+push word [second_window-data]
+api 2,45
+push word [second_window-data]
+api 2,59
+api 1,29
+api 2,60
+cmp ax,[second_window-data]
+jne .activate_second
+push ds
+push word second_focus-data
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+push ax
+push ax
+push ds
+push word second_id-data
+push word 1
+api 1,86
+cmp ax,1
+jne fatal
+api 1,81
 mov bx,second_done-data
 call .wait_file
 .activate_first:
@@ -268,11 +361,22 @@ ready_name: db '@W31_READY_PATH@',0
 times 128-($-ready_name) db 0
 %ifdef W31_PROMPT_CHECK
 prompt_name: db W31_INSTALL,'\DOSCHECK.PIF',0
+%ifdef W31_SCHEDULING_CHECK
+heartbeat_name: db W31_INSTALL,'\PATCH\SCHED.HB',0
+schedule_done: db W31_INSTALL,'\PATCH\SCHED.END',0
+heartbeat_file: dw 0
+heartbeat_byte: db 'H'
+%endif
 %ifdef W31_PROMPT_PAIR
 second_prompt: db W31_INSTALL,'\DOSPAIR.PIF',0
 first_running: db W31_INSTALL,'\PATCH\A.RUN',0
 first_done: db W31_INSTALL,'\PATCH\A.END',0
 second_done: db W31_INSTALL,'\PATCH\B.END',0
+second_running: db W31_INSTALL,'\PATCH\B.RUN',0
+second_request: db W31_INSTALL,'\PATCH\B.REQ',0
+second_focus: db W31_INSTALL,'\PATCH\B.FOC',0
+second_window: dw 0
+second_id: db 'B'
 first_focus: db W31_INSTALL,'\PATCH\A.FOC',0
 first_window: dw 0
 first_id: db 'A'

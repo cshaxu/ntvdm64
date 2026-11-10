@@ -2,28 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T481 S14 — Win3.1 release and owner acceptance. S15 is queued.**
+**Active: M0 T481 S15 — setup patch planning; awaiting owner requirements.**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md#remaining-s-sequence). |
-| Identifier Mode | M0 T481 S14, Ordinary Mode. |
-| Admission And Approval | Owner requires manual S14 acceptance before closure and S15 admission. |
-| Objective | Deliver the Win3.1 guest-only mouse fix and the six-behavior integration matrix. |
-| Non-goals | Win95 verification belongs to S15. Remaining mirror audit belongs to S16. |
-| Reference Baseline | Driver release acced8559 and interaction fixtures f68569518. |
-| Files And ABI Surface | Win3.1 setup integration runner; product images retain their verified identities. |
-| Applicable Rules | Existing build, release, source and private-desktop probe rules. |
-| Verification | Six full configurations, two Standard startup/exit controls, four enhanced fullscreen and two paired-window cases. |
-| Expected Markers | Real guest DOSONLY value, Windows mode and normal exit for every configuration; command, input and mode-transition receipts for interactive cases. |
-| Asset Needs | Published assets/release package, O:/winnt/system32 and O:/w31. |
-| Reporting Requirements | Verify both release locations and distinguish smoke controls from full interaction. |
-| Stop Conditions | After build, publication verification, tests, commit and push, wait for owner acceptance. |
-| Exit Criteria | Delivery gates pass and the owner confirms S14 by manual testing. |
-| Original Owner Request | Simplify the Win3.1 matrix and present S14 for manual acceptance before starting S15. |
-| Similar-Issue Sweep | Standard ignores enhanced-mode drivers. Enhanced retains all four independent profiles. |
+| Identifier Mode | M0 T481 S15, Ordinary Mode. |
+| Admission And Approval | Owner closed S14 and admitted setup patch work; detailed requested actions will follow. |
+| Objective | Prepare the setup patch changes specified by the owner. No implementation scope is inferred before those requirements arrive. |
+| Non-goals | Deferred Win3.1 mouse transition investigation, Win95 matrix and mirror audit. |
+| Reference Baseline | S14 six scheduling contracts and all 14 matrix runs passed; unchanged published host package 092da729-caf9-4a89-8f2e-305e368faacf. |
+| Files And ABI Surface | Setup patch tools; exact files and behavior pending owner requirements. |
+| Applicable Rules | Existing source, CMD-only patch-package, assets-only input, build and release rules. |
+| Verification | Define affected setup checks from the forthcoming requirements; retain S14 regression baseline. |
+| Expected Markers | Pending concrete setup outputs and assertions; no new capability claimed. |
+| Asset Needs | Released assets only for patch-package inputs. |
+| Reporting Requirements | Explicit generated-file changes, tests and delivery identities. |
+| Stop Conditions | Wait for the owner's detailed S15 requirements before implementation. |
+| Exit Criteria | To be finalized with the scoped setup requirements, then verified delivery and owner acceptance. |
+| Original Owner Request | Close S14; admit S15 for setup patch actions to be specified; defer the mouse bug to later investigation. |
+| Similar-Issue Sweep | Review related setup tools only after the requested behavior is defined. |
+
+## S14 closure and handoff
+
+S14 is closed by owner direction on 2026-11-10. The six scheduling cases passed
+with independent Win16 progress measurements; the complete 14-case matrix
+also passed. This is not a claim that the later reported EDIT mouse transition
+is fixed. Its configuration, reproducer, captured state, unresolved hypotheses
+and next steps are retained in the [closure and mouse handoff](../etc/evidence/m0-t481-s14-win95-launch.md#s14-final-scheduling-verification-and-owner-directed-closure).
+The owner no longer needs to preserve the live window. S15 does not continue
+that investigation. Subsequent scope allocation remains pending; the former
+Win95 and mirror-review obligations are retained in the proposal.
 
 ## Evidence from earlier deliveries
 

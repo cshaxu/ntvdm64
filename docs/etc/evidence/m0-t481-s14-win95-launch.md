@@ -844,3 +844,92 @@ The preliminary Win95 fixture edit is retained separately in local Git stash
 95b41389de0f1b0d05299e775fe95c23adf7888a. Its isolated runs ended before
 manual acceptance; they do not constitute S15 closure or authorization to
 resume S15.
+
+## S14 final scheduling verification and owner-directed closure
+
+On 2026-11-10 the owner closed S14 on the completed six-configuration contract
+and explicitly deferred the later EDIT mouse transition failure. S15 is now
+setup patch work awaiting detailed instructions. The former Win95 matrix and
+mirror review remain pending, not silently completed or cancelled.
+
+The tracked verify-win31-setup-modes.ps1 runner now holds an authored DOS or
+native CMD child alive until the host test releases SCHED.GO. An independent
+Win16 task appends progress bytes before, during and after the child lifetime.
+SCHED.RUN identifies the execution owner. No product timeout or guest binary
+was changed. The final run used candidate-dem-unified, O:/w31 as read-only copy
+source, and the rebuilt message-probes/console-startup-observer.exe.
+
+Run: build/t481-s14/scheduling-focus/run.ps1, background modern pwsh PID36848,
+started 2026-11-10T20:53:31.3759526Z, completed exit0. Runner SHA-256:
+19DEE3393A5E87E979F3F676C50A0DAFD1A6B267BCEF525CA2D0DDD618AFD59C.
+Results are under build/t481-s14/scheduling-matrix-focus. All 14 case records
+report passed and normalExit: six full configurations, two Standard startup
+controls with inert enhanced addons, four fullscreen cases and two paired
+DOS windows. Setup is still a shim; this is not a new original installer run.
+
+| Mode | DOSONLY | Loaded pair | Expected scheduling | Progress during hold | After child | Result |
+| --- | --- | --- | --- | --- | --- | --- |
+| Standard | 0 | 0 | Blocking | 7 -> 7 | 9 | Pass |
+| Standard | 1 | 0 | Blocking | 7 -> 7 | 9 | Pass |
+| Enhanced | 0 | 0 | Blocking | 98 -> 98 | 100 | Pass |
+| Enhanced | 1 | 0 | Nonblocking | 104 -> 633 | 635 | Pass |
+| Enhanced | 0 | 1 | Nonblocking | 263 -> 1926 | 1933 | Pass |
+| Enhanced | 1 | 1 | Nonblocking | 185 -> 769 | 770 | Pass |
+
+The earlier scheduling-matrix run passed these six contracts but timed out
+in the final no-addon pair. A graphics frame did not establish keyboard focus;
+the fixture now requests and verifies the second DOS window's focus before
+sending its post-return key, matching the first-window focus handshake.
+The final complete run passed. This is a test synchronization change, not a
+product mouse fix. Observer compilation/linking passed using the cached x64
+wow_message_observer target (background PID34900); no product source changed.
+The preceding Full evidence applies only to the unchanged product identities.
+
+### Deferred EDIT mouse transition investigation
+
+Actual owner installation: O:/w31, PATCH/CONFIG.NT contains DOSONLY,
+SYSTEM.INI has mouse=*vmd and no configured INSIGNIA.386 or NTVDM64.386.
+MOUSE.DRV matches released MOUSE31.DRV SHA-256
+5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07.
+Host NTVDM SHA-256:
+0FBEFB8F20420C23F7615C7C01B9B5A3BD1655530B2C32342ACCB27A26A91447.
+
+Reproducer: start PATCH/WIN386.CMD; open MS-DOS Prompt in Console text;
+run O:/winnt/edit.com (pointer/clicks work); CAF to Window text (still works);
+Alt+Enter back to the guest graphical DOS window. The DOS block remains beside
+the Windows arrow, and EDIT menu clicks do not work. Earlier attempts showed
+two tall colored glyph strips. The owner supplied screenshots and the live
+read-only frontend capture independently showed both cursors. Do not replace
+this with a test that finishes EDIT before returning to graphics.
+
+Captured read-only evidence: build/t481-s14/live-mouse-return-5492 and
+live-mouse-return-33832; surface.exe captured NTCON PID20200's 640x480 graphics
+frame. The NTVDM map was used only after checking .text/.rdata/.data identity.
+Snapshots are non-atomic: emulated mode103, BIOS modes27/3 respectively;
+jap_mouse0/1, cursor_flag=-1, callback mask31, cursor_EM_disabled0 and
+save_area_in_use0. These observations do not identify the writer or establish
+a temporal callback sequence. No input was sent to the user's scene.
+
+Source leads, not proved causes: mouse_io.c's jap_mouse routing and
+mouse_EM_callback hide/show contract; mouse31.asm's enhanced IRQ-scoped callback
+restoration; the original VMD graphics/text handoff. The current no-addon
+configuration uses mouse=*vmd, while win-multitask/APPLY.CMD normalizes it to
+explicit device=*vmd. Whether this changes actual VMD loading is unproved;
+the proposed isolated query did not execute. Do not install the addon pair
+as a substitute for fixing the no-addon contract.
+
+Next investigation must reproduce the exact live-EDIT sequence on an isolated
+copy, compare explicit VMD configuration only as a control, and trace cursor
+hide/restore, active VM and callback ownership across both transitions.
+Retain ordinary Standard and enhanced no-addon behavior. No new product fix
+or causal attribution is claimed. The owner was told the live scene can be
+closed; further testing must not depend on it. This deferred issue does not
+count as a passing mouse test, and is explicitly excluded from S14 closure.
+
+Closure verification (background PID3332, exit0): documentation governance
+passed; git diff --check passed; all 11 manifest images matched assets/release,
+O:/winnt/system32 and candidate-dem-unified/system32. Installed MOUSE31 matched
+the release. All 14 final matrix records passed normal exit; owned O:/tmp/q31
+was removed. No product source or release image changed in this test/document
+delivery, so no redundant product rebuild or redeployment was performed.
+The deferred Win95 test stash 95b41389de0f1b0d05299e775fe95c23adf7888a is retained.

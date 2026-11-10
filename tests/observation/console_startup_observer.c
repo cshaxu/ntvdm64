@@ -3013,6 +3013,15 @@ managed_close_done: ;
                     Sleep(25);
                 }
                 if(owner)CloseHandle(owner);
+                if(graphics) {
+                    FILE *request;
+                    snprintf(path,sizeof(path),"%s\\PATCH\\B.REQ",argv[2]);
+                    request=fopen(path,"wb");
+                    graphics=request && fputs("B",request)>=0;
+                    if(request && fclose(request))graphics=FALSE;
+                    snprintf(path,sizeof(path),"%s\\PATCH\\B.FOC",argv[2]);
+                    graphics=graphics && wait_for_report_marker_after(path,"B",0,20000);
+                }
                 snprintf(path,sizeof(path),"%s\\PATCH\\A.FOC",argv[2]);
                 scripted_console_input_delivered=graphics &&
                     write_console_input_text(input,"b",0,output,NULL) &&

@@ -16,6 +16,7 @@ param(
     [string]$MouseProbeRoot,
     [switch]$FullscreenKey,
     [switch]$PromptPair,
+    [ValidateSet('blocking','nonblocking')][string]$Scheduling,
     [switch]$CaptureWindows,
     [string]$SurfaceObserver,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
@@ -150,6 +151,7 @@ try {
         $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false; $registryCaptured=$false
         $report=Join-Path $output "$($case.Name).observer.txt"
         $mouseStage=0
+        $scheduleSamples=@(); $scheduleStart=$null; $scheduleReleased=$false
         $captureCount=0
         try {
             $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
@@ -196,6 +198,16 @@ try {
             $desktop = 'NTVDMConsoleTest-' + $process.Id
             while (!$process.WaitForExit(500)) {
                 if ([DateTime]::UtcNow -ge $deadline) { throw 'Observer did not complete its bounded observation' }
+                if($Scheduling -and !$scheduleReleased -and (Test-Path "$patch/SCHED.RUN")) {
+                    if(Test-Path "$patch/SCHED.END"){throw 'Child ended before test release'}
+                    $heartbeat=Get-Item "$patch/SCHED.HB" -ErrorAction Stop
+                    if(!$scheduleStart){$scheduleStart=[DateTime]::UtcNow}
+                    $scheduleSamples+= [ordered]@{ms=([DateTime]::UtcNow-$scheduleStart).TotalMilliseconds;bytes=$heartbeat.Length}
+                    if($scheduleSamples[-1].ms -ge 3000) {
+                        [IO.File]::WriteAllText("$patch/SCHED.GO",'release')
+                        $scheduleReleased=$true
+                    }
+                }
                 if($MouseProbeRoot -and $mouseStage -lt 2) {
                     $signal=@('MREADY.BIN','MDOWN.BIN')[$mouseStage]
                     if(Test-Path -LiteralPath (Join-Path $patch $signal)){
@@ -301,6 +313,16 @@ try {
             }
             if((Get-Content -LiteralPath $report -Raw) -match '(?m)^result=timeout\r?$') {
                 throw 'Runtime observer timed out'
+            }
+            if($Scheduling) {
+                $after=if(Test-Path "$patch/SCHED.HB"){(Get-Item "$patch/SCHED.HB").Length}else{0}
+                $progress=$scheduleSamples.Count -ge 3 -and $scheduleSamples[-1].bytes -gt $scheduleSamples[0].bytes
+                $schedulePass=$scheduleReleased -and (Test-Path "$patch/SCHED.END") -and
+                    $scheduleSamples[0].bytes -gt 0 -and $after -gt $scheduleSamples[-1].bytes -and
+                    ($progress -eq ($Scheduling -eq 'nonblocking'))
+                [ordered]@{expected=$Scheduling; samples=$scheduleSamples;after=$after;released=$scheduleReleased;passed=$schedulePass} |
+                    ConvertTo-Json -Depth 5 | Set-Content "$output/$($case.Name).scheduling.json"
+                if(!$schedulePass){throw "Guest scheduling contract failed: $Scheduling"}
             }
             if($RegistrySnapshotMarker -and !$registryCaptured){throw 'Registry readiness marker was not observed'}
             if($RetiredNativeCommandMarker) {
