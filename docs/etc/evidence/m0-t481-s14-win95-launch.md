@@ -816,3 +816,31 @@ desktop and original graphical installer were outside this private setup-shim
 run. Its two temporary install roots from diagnosis and final verification
 (q31p and q31) were absent after cleanup. Product baseline acced8559 is on
 origin/main. S15 owns Win95; S16 owns the outstanding mirror audit.
+
+### Owner acceptance checkpoint
+
+The owner superseded the automatic S14 closure and S15 admission. Keep the
+published driver and require manual S14 acceptance. The two Standard profiles
+with the addon pair configured now use the basic Win16 startup witness and
+the DOSONLY query. Standard profiles without the pair and all four enhanced
+profiles retain command and mouse interaction. The fullscreen and paired-VM
+checks remain in the enhanced matrix.
+
+Both cached host builds completed without recompilation. A fresh assembly in
+owner-accept-driver reproduced the released MOUSE31.DRV byte for byte, including
+the copy in O:/w31/SYSTEM/MOUSE.DRV. All 11 host images matched their manifest
+in assets/release, O:/winnt/system32 and the tested package. The existing
+16-gate Full result applies to these unchanged product images.
+
+six-interactive exited 0. The six interactive configurations produced
+command and mouse receipts. The two Standard controls with the drivers
+configured each observed the expected DOSONLY value and normal Windows exit
+without starting the prompt or mouse fixture. All four enhanced fullscreen
+cases and both two-prompt return-and-focus cases passed in the same run.
+Standard DOSONLY=0 without drivers exercised a delegated host command and
+desktop recovery; blocking is the legacy cmdExec/cmdExec32 contract.
+
+The preliminary Win95 fixture edit is retained separately in local Git stash
+95b41389de0f1b0d05299e775fe95c23adf7888a. Its isolated runs ended before
+manual acceptance; they do not constitute S15 closure or authorization to
+resume S15.

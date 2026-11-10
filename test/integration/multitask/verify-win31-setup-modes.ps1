@@ -83,11 +83,21 @@ foreach($mode in 0,1){
   & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'Prompt controller assembly failed'}
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
+   $out=Join-Path $task $case
+   # Standard Windows ignores [386Enh]. Exercise interaction on the bare
+   # profile; with the pair installed, verify startup, DOSONLY and exit.
+   if($mode -eq 0 -and $case.StartsWith('std-')){
+    try {
+     & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -Cases $case
+    } catch {
+     $failures+="setup=$mode $case smoke $($_.Exception.Message)"
+    }
+    continue
+   }
    $argument=if($case.EndsWith('dosonly0')){"/c $nativeCmd /d /c $nativeScript"}else{"/c echo S14_OK>$receipt"}
    $expected=if($case.EndsWith('dosonly0')){$hostVersion}else{'S14_OK'}
    & "$repo/assets/release/PIF.EXE" update $profile --arguments $argument
    if($LASTEXITCODE){throw "Cannot configure DOS prompt for $case"}
-   $out=Join-Path $task $case
    $signals=@("$dest/PATCH/MREADY.BIN","$dest/PATCH/MDOWN.BIN")
    foreach($signal in $signals){if(Test-Path $signal){throw "Stale fixture signal: $signal"}}
    try {
@@ -172,4 +182,4 @@ foreach($mode in 0,1){
  }
 }
 if($failures.Count){throw ($failures -join [Environment]::NewLine)}
-'PASS eight Win3.1 profiles, two enhanced DOSONLY=1 guest prompt pairs and four enhanced window/fullscreen keyboard cases; Setup used a shim'
+'PASS six interactive Win3.1 configurations, two Standard startup/exit controls, two enhanced prompt pairs and four fullscreen keyboard cases; Setup used a shim'

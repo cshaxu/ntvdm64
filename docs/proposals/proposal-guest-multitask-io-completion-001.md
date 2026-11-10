@@ -68,7 +68,8 @@ S6 or claim its previously unverified rows passed merely to simplify planning.
 
 ## Remaining S sequence
 
-S13 and S14 are closed. S15 is active. S16 follows the Win95 matrix.
+S13 is closed. S14 awaits owner acceptance. Admit S15 only after the owner
+closes S14; S16 follows the Win95 matrix.
 
 | Packet | Scope and evidence required for closure |
 | --- | --- |
@@ -77,7 +78,15 @@ S13 and S14 are closed. S15 is active. S16 follows the Win95 matrix.
 | S16 | Reconcile outstanding mirror audit dispositions against the existing inventory, close remaining integrated acceptance and delivery obligations, and record an owner and evidence for any residual item. Carry forward earlier package and shutdown evidence with its limitations. |
 
 For S14 the driver axis records the installed files and active configuration.
-Standard mode does not load enhanced-mode VxDs. Launch a real fullscreen DOS
+Standard mode does not load enhanced-mode VxDs. For each DOSONLY value, run
+full Standard interaction without the pair and a startup/mode/normal-exit
+control with the pair installed. All four enhanced profiles retain full
+interaction. This covers eight installations and six behavioral combinations.
+In Standard mode with DOSONLY=0, COMMAND requests that delegate to the
+host use the blocking cmdExec/cmdExec32 shell-out. The caller resumes with
+the host child's result. Installing the enhanced-mode drivers on disk leaves
+this behavior unchanged.
+For full Standard interaction, launch a real fullscreen DOS
 prompt, execute a command, exit to Windows, use the mouse to open an ordinary
 Windows application and verify normal Windows exit. In enhanced mode open two
 independent DOS windows, distinguish their command output, switch focus and

@@ -2,28 +2,28 @@
 
 ## Current Work
 
-**Active: M0 T481 S15 — Win95 patch and four runtime configurations.**
+**Active: M0 T481 S14 — Win3.1 release and owner acceptance. S15 is queued.**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md#remaining-s-sequence). |
-| Identifier Mode | M0 T481 S15, Ordinary Mode. |
-| Admission And Approval | Owner assigned the four Win95 configurations to S15 after the S14 Win3.1 matrix. |
-| Objective | Verify Win95 prompt execution, guest mouse/keyboard, return to Windows and shutdown for both DOSONLY choices with the two .386 drivers present or absent. |
-| Non-goals | S16 owns remaining mirror audit and integrated closure. |
-| Reference Baseline | S14 released host manifest and MOUSE31.DRV. Historical dual-editor tests are scoped to their recorded driver and input paths. |
-| Files And ABI Surface | tools/win95-launch, tools/win-multitask, their assets and isolated runtime fixtures. No ABI change planned. |
-| Applicable Rules | CMD and existing addon tools for end-user packages. Use private probes, preserve original guest software and unrelated installations. |
-| Verification | Run the actual patch, verify active config and driver identities, then collect per-profile runtime witnesses. |
-| Expected Markers | DOSONLY=1 stays in guest with either profile. Exercise two payload VMs for DOSONLY=0 with drivers. Identify the no-driver DOSONLY=0 behavior. Record menu, keyboard, file I/O, Windows return and shutdown separately. |
-| Asset Needs | Released host and addon assets, isolated Win95 installation copies. |
-| Reporting Requirements | Distinguish actual guest shutdown from forced session retirement and each input path from physical mouse input. |
-| Stop Conditions | Unexpected original-image mutation or new unapproved compatibility tradeoff. |
-| Exit Criteria | Four configuration results and applicable package, runtime, delivery and cleanup evidence. |
-| Original Owner Request | Win95 DOSONLY=0/1 crossed with installed/absent drivers in S15. |
-| Similar-Issue Sweep | Check independence of mouse state, DOS execution routing and VM lifecycle across all four rows. |
+| Identifier Mode | M0 T481 S14, Ordinary Mode. |
+| Admission And Approval | Owner requires manual S14 acceptance before closure and S15 admission. |
+| Objective | Deliver the Win3.1 guest-only mouse fix and the six-behavior integration matrix. |
+| Non-goals | Win95 verification belongs to S15. Remaining mirror audit belongs to S16. |
+| Reference Baseline | Driver release acced8559 and interaction fixtures f68569518. |
+| Files And ABI Surface | Win3.1 setup integration runner; product images retain their verified identities. |
+| Applicable Rules | Existing build, release, source and private-desktop probe rules. |
+| Verification | Six full configurations, two Standard startup/exit controls, four enhanced fullscreen and two paired-window cases. |
+| Expected Markers | Real guest DOSONLY value, Windows mode and normal exit for every configuration; command, input and mode-transition receipts for interactive cases. |
+| Asset Needs | Published assets/release package, O:/winnt/system32 and O:/w31. |
+| Reporting Requirements | Verify both release locations and distinguish smoke controls from full interaction. |
+| Stop Conditions | After build, publication verification, tests, commit and push, wait for owner acceptance. |
+| Exit Criteria | Delivery gates pass and the owner confirms S14 by manual testing. |
+| Original Owner Request | Simplify the Win3.1 matrix and present S14 for manual acceptance before starting S15. |
+| Similar-Issue Sweep | Standard ignores enhanced-mode drivers. Enhanced retains all four independent profiles. |
 
 ## Evidence from earlier deliveries
 
@@ -114,7 +114,7 @@ through Win95, focus, geometry or the physical RDP route.
 
 [S10 evidence](../etc/evidence/m0-t481-s10-edit-mouse.md) records the input-chain investigation.
 
-S15 disposable workspace: `build/t481-s15`, owner S15; budget 8 hours,
+S14 disposable workspace: `build/t481-s14`, owner S14; budget 8 hours,
 20 GiB, 30-minute no-progress review. Stop and join owned processes, record
 results, and clean task-specific O:/tmp copies before retirement. The owner
 diagnostic package remains available for the close investigation.
