@@ -118,6 +118,12 @@ did not generate the installed PATCH. Its original Setup was not replaced by
 a shim. This validates failure handling, not a completed installation. The
 isolated media and installation tree were removed afterwards.
 
+The real SETUP.CMD entry was also exercised with the separate test-only
+no-I: relink. Setup again returned 0 but left no WIN.COM; SETUP.CMD rejected
+the directory and generated no installed PATCH. This relink did not prove
+that every guest query saw I: as absent, so the outcome neither isolates the
+cause nor establishes production acceptance. The test-owned copy was removed.
+
 The private-desktop controller was also paused on the later configuration
 screen. A capture confirms that “let you make the modifications later” was
 selected before Enter; subsequent captures nevertheless showed AUTOEXEC and
