@@ -59,6 +59,15 @@ proved by a completed fresh installation. The owner's existing four groups
 were restored and the three verified obsolete records removed. The final
 11-image host package is published for renewed acceptance.
 
+Owner subsequently directed a project-wide mirror adaptation review: restore
+original code where its behavior was unnecessarily diverted by local seams.
+The first candidate restores the shared zero-length lease contract and removes
+the added `demRead` bypass. A 1,060-file source-pin census is recorded in
+`artifacts/mvdm-audit/t481-s14-mirror-restoration-inventory.json`; its entries
+are pending review, not completed dispositions. The candidate has not yet
+completed the project-wide audit. The zero-length checkpoint passed Full and
+was published as package `4089b369-3dd9-419c-aee6-382052fee85e`.
+
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The
 published O:/WINNT/edit.exe and C:/Windows/System32/edit.exe have identical

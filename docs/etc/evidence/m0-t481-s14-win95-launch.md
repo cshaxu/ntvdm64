@@ -92,8 +92,8 @@ DOSONLY 0 and 1, while the same API succeeded on a nonempty INI. Direct Win16
 `_lread` of zero bytes returned 0xffff, while `_lwrite` of zero returned 0,
 normal four-byte write and read both returned 4. The selected `demRead`
 adapter rejected the zero-byte guest-memory lease before original I/O; the
-original zero-length read has no data buffer to lease. After changing only
-the existing MVDM-HOST-DIV-195 seam, the same real Win3.1 probe returned 0
+original zero-length read transfers no guest data. The first fix changed
+the existing MVDM-HOST-DIV-195 seam; the same real Win3.1 probe returned 0
 for zero-byte read, 4 for ordinary read, and 1 for both empty-profile writes;
 the resulting files contained their expected group entries. The fixed probe
 passed in both DOSONLY modes. This proves the empty-file API defect and its
@@ -124,6 +124,33 @@ empty-group symptom on the original Program Manager's DDE path and confirms
 that the fix repairs this path; it does not substitute for a complete fresh
 original Setup run. A PowerShell null/empty assertion in the prior profile
 test was also corrected so an empty file cannot satisfy the check.
+
+The follow-up source review traced the regression to the shared
+`mvdm_guest_location_acquire_vm` wrapper introduced by `369cbf712`:
+the underlying session lease already supported zero bytes, but the wrapper
+rejected them. The mirror `demRead` zero-byte bypass was removed; the shared
+wrapper and copy operation again accept zero-byte transfers. The original
+`demRead` I/O path and lease are shared by zero and nonzero reads. The same
+wrapper is used by FCB I/O. A location fixture checks zero-byte leases, a
+zero-byte copy and address overflow; the existing session and redirector
+fixtures also passed. The Win3.1 empty-profile probe passed in both DOSONLY
+modes against the follow-up candidate. Fresh interactive Setup remains
+unverified. The wider mirror-adaptation audit is not complete.
+
+The follow-up candidate passed cached x86/x64 builds, actual NTVDM relink,
+the session and redirector fixtures, and all 16 selected Full gates. The
+external DOS4GW/Nesticle fixture was unavailable and skipped. All 11 images
+of package `4089b369-3dd9-419c-aee6-382052fee85e` were published and
+hash-verified in both release locations; the installed Win3.1 driver pair
+was also verified. Package identity stamping changes image hashes from the
+raw linker outputs; the staged tested and published hashes match.
+
+A preliminary source census covers 1,060 tracked `mvdm-host` and
+`non-mvdm` C/H files. Each T480 source pin was revalidated by SHA-256;
+471 files match their selected original byte for byte and 589 differ. This
+does not assess the behavior of any difference. The per-file source paths,
+hashes and pending review status are recorded in
+`artifacts/mvdm-audit/t481-s14-mirror-restoration-inventory.json`.
 The DDE witness was subsequently expanded to create all four groups named in
 the original new-install INF: Main, Accessories, Games and StartUp. The same
 four GRP files parsed in all three runs. With the pre-fix host, PROGMAN.INI
@@ -243,7 +270,7 @@ either caused the error. The diagnostic image was not published.
 An additional test-only relink logged only native file opens on I: without
 changing their return values. During original Setup it recorded an initial
 successful open of `\\??\\I:`, followed by four create attempts on
-`\\??\\I:\\SWAPTST5` and repeated opens of the root returning NTSTATUS
+the `SWAPTST5` probe on the I: drive and repeated opens of the root returning NTSTATUS
 `0xc0000013` (no media). The name is consistent with a swap-file probe, but
 the exact guest caller has not been identified. This establishes that the
 guest did request the empty drive; it does not prove why Setup selected that

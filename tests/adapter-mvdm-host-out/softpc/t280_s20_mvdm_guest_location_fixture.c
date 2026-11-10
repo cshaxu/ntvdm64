@@ -58,6 +58,20 @@ int main(void)
     if (!mvdm_guest_location_from_far_value(&location, 0x12340056u) ||
         !mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
             &lease) || !mvdm_guest_location_release(&lease, 0)) return 4;
+    if (!mvdm_guest_location_acquire(&location, 0u, GUEST_MEMORY_ACCESS_WRITE,
+            &lease) || lease.bytes == NULL || lease.lease == NULL ||
+        !mvdm_guest_location_release(&lease, 1) ||
+        !mvdm_guest_location_acquire_vm(&location, 0u, 0u,
+            GUEST_MEMORY_ACCESS_WRITE, &lease) ||
+        !mvdm_guest_location_release(&lease, 1) ||
+        !mvdm_guest_location_copy_to_guest(&location, replacement, 0u)) return 13;
+    if (!mvdm_guest_location_acquire_vm(&location, UINT32_MAX - address, 0u,
+            GUEST_MEMORY_ACCESS_READ, &lease) ||
+        !mvdm_guest_location_release(&lease, 0) ||
+        mvdm_guest_location_acquire_vm(&location, UINT32_MAX - address, 1u,
+            GUEST_MEMORY_ACCESS_READ, &lease) ||
+        mvdm_guest_location_acquire_vm(&location, UINT32_MAX - address + 1u, 0u,
+            GUEST_MEMORY_ACCESS_READ, &lease)) return 14;
     memory.bytes[0x88u] = 0x56u;
     memory.bytes[0x89u] = 0x00u;
     memory.bytes[0x8au] = 0x34u;

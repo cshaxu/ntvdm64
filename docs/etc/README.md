@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T481 S13 Win3.1 setup](evidence/m0-t481-s13-win31-setup.md) records setup selection and acceptance.
+
+[T481 S14 Win95 launch](evidence/m0-t481-s14-win95-launch.md) records launch selection and the Win3.1 profile investigation.
+
 [T481 S7 closure](evidence/m0-t481-s7-closure.md) records owner acceptance of the Win3.1 configuration candidate and transfers full-screen pointer investigation to S8.
 
 [T481 S8 closure](evidence/m0-t481-s8-closure.md) records the owner-directed handoff and remaining acceptance boundaries.

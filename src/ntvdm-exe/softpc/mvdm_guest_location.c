@@ -112,7 +112,7 @@ int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
 {
     mvdm_guest_location_lease lease;
 
-    if (location == NULL || bytes == NULL || byte_count == 0u ||
+    if (location == NULL || bytes == NULL ||
         !mvdm_guest_location_acquire(location, byte_count,
             GUEST_MEMORY_ACCESS_WRITE, &lease)) return 0;
     memcpy(lease.bytes, bytes, byte_count);
@@ -136,9 +136,8 @@ int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
     if (lease_out != NULL) memset(lease_out, 0, sizeof(*lease_out));
     if (lease_out == NULL || instance == NULL ||
         !mvdm_guest_location_linear_address(location, &address) ||
-        linear_base > UINT32_MAX - address || !byte_count) return 0;
+        linear_base > UINT32_MAX - address) return 0;
     address += linear_base;
-    if (byte_count - 1 > UINT32_MAX - address) return 0;
 
     return session_guest_memory_acquire(instance, address, byte_count, access,
         &lease_out->lease, &lease_out->bytes);

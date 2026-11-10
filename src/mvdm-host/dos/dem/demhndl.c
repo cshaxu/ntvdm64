@@ -139,7 +139,6 @@ VOID demRead (VOID)
 HANDLE  hFile;
 LPVOID  lpBuf;
 DWORD   dwBytesRead;
-UCHAR   emptyBuffer;
 USHORT  usDS,usDX;
 DWORD   dwReadError;
 BOOL    ok;
@@ -154,20 +153,17 @@ BOOL    bufferLeaseActive;
     usDS = getDS();
     usDX = getDX();
     bufferLeaseActive = FALSE;
-    /* DIVERGENCE(MVDM-HOST-DIV-195): retain the original synchronous I/O
-     * order while leasing only nonempty guest buffers. A zero-byte read has
-     * no guest buffer to lease and must still reach the original I/O path. */
-    lpBuf = &emptyBuffer;
-    if (getCX() != 0) {
-        if (!mvdm_guest_location_set_real_mode(&bufferLocation, usDS, usDX) ||
-            !mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
-                GUEST_MEMORY_ACCESS_WRITE, &bufferLease)) {
-            SetLastError(ERROR_INVALID_ADDRESS);
-            goto readFailureExit;
-        }
-        bufferLeaseActive = TRUE;
-        lpBuf = (LPVOID)bufferLease.bytes;
+    /* DIVERGENCE(MVDM-HOST-DIV-195): the source passes a durable guest alias
+     * to synchronous host I/O.  Retain its ReadFile/named-pipe/CF/AX order,
+     * but hold one bounded writable session lease only for this call. */
+    if (!mvdm_guest_location_set_real_mode(&bufferLocation, usDS, usDX) ||
+        !mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
+            GUEST_MEMORY_ACCESS_WRITE, &bufferLease)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        goto readFailureExit;
     }
+    bufferLeaseActive = TRUE;
+    lpBuf = (LPVOID)bufferLease.bytes;
 
     //
     // if this handle is a named pipe then use VrReadNamedPipe since we have
