@@ -155,6 +155,12 @@ guest did request the empty drive; it does not prove why Setup selected that
 drive or that addressing it alone completes installation. The diagnostic
 image was not published, and its isolated installation copy was removed.
 
+A follow-up test-only relink attempted to redirect this process's I: native
+opens into an owned temporary directory. The original Setup run again lacked
+WIN.COM and groups after exit 0. The probe did not independently verify that
+all guest drive accesses used the redirect, so this is not evidence that a
+valid writable drive was supplied; it is not a product fix or acceptance.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
