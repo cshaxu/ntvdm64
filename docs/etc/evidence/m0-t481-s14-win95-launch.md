@@ -130,6 +130,13 @@ Cancel and the incomplete installation had neither WIN.COM nor groups. This
 rules out those two optional choices as a sufficient way to avoid this test
 failure. The owned temporary copy was removed.
 
+The DOS host drive enumeration does not rely only on GetDriveType: its
+`GetPhysicalDriveType` in `dos/dem/demgset.c` opens each drive device and
+queries its filesystem device type, and `demGetDrives` records CD-ROM drives
+as present. This identifies an actual host-to-guest enumeration path; it does
+not by itself establish which Setup operation requested I: or justify a
+production change to hide empty CD-ROM drives.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
