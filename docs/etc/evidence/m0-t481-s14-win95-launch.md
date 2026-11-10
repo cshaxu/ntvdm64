@@ -100,6 +100,18 @@ passed in both DOSONLY modes. This proves the empty-file API defect and its
 repair; the isolated full-Setup attempts still did not complete, so they do
 not independently prove the original installer's complete call sequence.
 
+Further read-only source tracing found that the original installed SETUP.INF
+describes `[progman.groups]` as Program Manager DDE control, rather than
+asserting that Setup itself writes each group entry. The installed original
+PROGMAN.EXE (SHA-256
+`81AB580D6FB9A22D727A58C77125DEB4825186C6656F7368375AD429463D67E4`)
+has three NE relocation entries importing KERNEL ordinal 129, identified in
+`kernel31/kernel.def` as WritePrivateProfileString. This establishes that
+both original Setup and Program Manager use that profile API, and that the
+INF names a DDE group-creation path. It still does not prove which of those
+call sites writes each `[Groups]` entry or that the empty-read defect was the
+sole cause of the owner's empty groups; fresh-install acceptance remains open.
+
 Review of the retained original-Setup captures narrows why that attempt was
 incomplete: copying reached 91%, then Setup displayed “Cannot read from drive
 I.” The probe accepted Cancel; Setup continued into its configuration screens
