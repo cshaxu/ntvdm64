@@ -13,6 +13,7 @@ param(
     [switch]$DirectRun16,
     [switch]$DirectShortPath,
     [switch]$DirectPif,
+    [switch]$PreparedProfile,
     [string]$MouseProbeRoot,
     [switch]$FullscreenKey,
     [switch]$PromptPair,
@@ -60,7 +61,7 @@ $ready = Join-Path $patch 'W31READY.BIN'
 foreach ($path in @($probe,$dosProbe,$dosResult,$boot,$ready)) {
     if (Test-Path -LiteralPath $path) { throw "Test input/output already exists: $path" }
 }
-foreach ($name in @('WINSTD.PIF','WIN386.PIF','WINSTD.CMD','WIN386.CMD')) {
+foreach ($name in $(if($PreparedProfile){@('WIN.PIF')}else{@('WINSTD.PIF','WIN386.PIF','WINSTD.CMD','WIN386.CMD')})) {
     if (!(Test-Path -LiteralPath (Join-Path $patch $name) -PathType Leaf)) { throw "Missing $name" }
 }
 if ($Cases -contains '386-dosonly0' -or $Cases -contains '386-dosonly1') {
@@ -70,7 +71,10 @@ if ($Cases -contains '386-dosonly0' -or $Cases -contains '386-dosonly1') {
         throw 'Enhanced-mode test copy must not access a physical disk or permanent swap file'
     }
 }
-foreach ($case in @(@('WINSTD.PIF','/S'),@('WIN386.PIF','/3'))) {
+if($PreparedProfile -and $Cases.Count -ne 1){throw 'Prepared profile requires one exact case'}
+$pifCases=@()
+if($PreparedProfile){ $pifCases+= ,@('WIN.PIF',$(if($Cases[0].StartsWith('std-')){'/S'}else{'/3'})) }else{ $pifCases=@(@('WINSTD.PIF','/S'),@('WIN386.PIF','/3')) }
+foreach ($case in $pifCases) {
     $pif = Join-Path $patch $case[0]
     $shown = & (Join-Path $repo 'assets/release/PIF.EXE') show $pif
     if ($LASTEXITCODE) { throw "Invalid test PIF: $pif" }
@@ -145,9 +149,13 @@ try {
         @{Name='386-dosonly1'; Command='WIN386.CMD'; Enhanced=$true; DosOnly=$true}
     ) | Where-Object {$_.Name -in $Cases}) {
         foreach ($path in @($boot,$ready,$dosResult)) { if(Test-Path -LiteralPath $path){Remove-Item -LiteralPath $path} }
-        $text = $baseConfig
-        if ($case.DosOnly) { $text += "`r`ndosonly`r`n" }
-        [IO.File]::WriteAllBytes($config,$encoding.GetBytes($text))
+        if($PreparedProfile) {
+            if((($encoding.GetString($configBytes) -match '(?im)^dosonly\s*$')) -ne $case.DosOnly){throw 'Prepared launcher selected the wrong DOSONLY'}
+        } else {
+            $text = $baseConfig
+            if ($case.DosOnly) { $text += "`r`ndosonly`r`n" }
+            [IO.File]::WriteAllBytes($config,$encoding.GetBytes($text))
+        }
         $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false; $registryCaptured=$false
         $report=Join-Path $output "$($case.Name).observer.txt"
         $mouseStage=0
@@ -161,7 +169,7 @@ try {
                 Copy-Item -LiteralPath $(if($WorkerCloseMonitor){$WorkerCloseMonitor}else{$RegistrySnapshotMonitor}) -Destination $monitor
                 & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $monitor -PackageId ([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe"))))
             }
-            $pifName=if($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
+            $pifName=if($PreparedProfile){'WIN.PIF'}elseif($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
             [ordered]@{case=$case.Name; package=$package; packageId=(Get-IsolatedPackageIdentity "$stage\system32\ntvdm.exe");
                 ntvdmSha256=(Get-FileHash "$stage\system32\ntvdm.exe").Hash;
                 pifSha256=(Get-FileHash (Join-Path $patch $pifName)).Hash;
@@ -172,7 +180,9 @@ try {
             $env:PATH=if($DirectRun16 -and !$DirectShortPath){"$stage\system32;$($savedEnv.PATH)"}else{"$stage\system32;C:\Windows\System32;C:\Windows"}
             $env:TEMP='O:\tmp'; $env:TMP='O:\tmp'
             $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'; $env:MVDM_OBSERVER_SHORT_HISTORY='1'
-            $observerArgs=if($DirectRun16){
+            $observerArgs=if($PreparedProfile){
+                @('C:\Windows\System32\cmd.exe',$install,$report,'/d','/c','call',"$stage\system32\run16.exe",(Join-Path $patch 'WIN.PIF'),'--observation-timeout-ms',"$TimeoutMs")
+            }elseif($DirectRun16){
                 @("$stage\system32\run16.exe",$install,$report,
                   (Join-Path $patch $(if($DirectPif){$pifName}else{$case.Command})),'--observation-timeout-ms',"$TimeoutMs")
             }else{

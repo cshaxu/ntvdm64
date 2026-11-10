@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T481 S15 — setup patch planning; awaiting owner requirements.**
+**Active: M0 T481 S15 — dynamic Win3.1 setup launcher; verification complete, awaiting owner acceptance.**
 
 ## Active Packet
 
@@ -10,20 +10,35 @@
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md#remaining-s-sequence). |
 | Identifier Mode | M0 T481 S15, Ordinary Mode. |
-| Admission And Approval | Owner closed S14 and admitted setup patch work; detailed requested actions will follow. |
-| Objective | Prepare the setup patch changes specified by the owner. No implementation scope is inferred before those requirements arrive. |
+| Admission And Approval | Owner approved one WIN.CMD launcher, always-installed addon pair, runtime mode/DOSONLY selection and comment-based driver toggles. |
+| Objective | Install both drivers and one WIN.CMD; generate NT profiles and WIN.PIF at launch, toggle only the two owned SYSTEM.INI device entries. |
 | Non-goals | Deferred Win3.1 mouse transition investigation, Win95 matrix and mirror audit. |
 | Reference Baseline | S14 six scheduling contracts and all 14 matrix runs passed; unchanged published host package 092da729-caf9-4a89-8f2e-305e368faacf. |
-| Files And ABI Surface | Setup patch tools; exact files and behavior pending owner requirements. |
+| Files And ABI Surface | tools/win31-setup, its package producer and affected integration tests; no runtime ABI change. |
 | Applicable Rules | Existing source, CMD-only patch-package, assets-only input, build and release rules. |
-| Verification | Define affected setup checks from the forthcoming requirements; retain S14 regression baseline. |
-| Expected Markers | Pending concrete setup outputs and assertions; no new capability claimed. |
+| Verification | CMD round trip, six launcher selections, repeated switching, preservation/failure checks and affected Win3.1 runtime matrix. |
+| Expected Markers | Both addon hashes, one launcher/PIF, selected DOSONLY and mode, exactly two enabled/commented entries, preserved unrelated INI and guest binaries. |
 | Asset Needs | Released assets only for patch-package inputs. |
 | Reporting Requirements | Explicit generated-file changes, tests and delivery identities. |
-| Stop Conditions | Wait for the owner's detailed S15 requirements before implementation. |
-| Exit Criteria | To be finalized with the scoped setup requirements, then verified delivery and owner acceptance. |
+| Stop Conditions | Stop for a demonstrated semantic regression or unapproved guest modification. |
+| Exit Criteria | Verified package publication, tests, commit/push and owner acceptance. |
 | Original Owner Request | Close S14; admit S15 for setup patch actions to be specified; defer the mouse bug to later investigation. |
 | Similar-Issue Sweep | Review related setup tools only after the requested behavior is defined. |
+
+## S15 progress
+
+The owner-approved launcher is implemented in tools/win31-setup/WIN.CMD.
+Setup always installs both drivers and PIF.EXE; the installed WIN.CMD selects
+mode/DOSONLY and toggles the two device entries, generating one WIN.PIF and
+the NT files. The known S14 mouse issue remains deferred. See the
+[S15 implementation and verification](../etc/evidence/m0-t481-s15-win31-dynamic-launch.md).
+Cached x86/x64 builds reported no work. Script contract, package round trip,
+exit-code and failure tests passed. Six scheduling contracts and all 14 runtime cases passed on the new generated
+profiles using a static isolated source. Temporary guest copies were removed.
+All 11 published host hashes remain unchanged at both release locations.
+Task scratch: build/t481-s15 and short build/s15a through build/s15d,
+owner S15, 8-hour/20-GiB budget and 30-minute no-progress review. The real
+matrix owns and removes O:/tmp/q31; never remove the owner's O:/w31.
 
 ## S14 closure and handoff
 

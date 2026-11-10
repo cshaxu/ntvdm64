@@ -40,29 +40,27 @@ foreach($mode in 0,1){
   $guest=@{};foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE'){$guest[$name]=(Get-FileHash "$dest/$name").Hash}
   $media=Join-Path $task 'media/PATCH';$shim=Join-Path $task 'shim'
   New-Item -ItemType Directory -Path $media,$shim|Out-Null
-  Copy-Item "$repo/tools/win31-setup/SETUP.CMD" "$media/SETUP.CMD"
-  Copy-Item "$repo/tools/win-multitask/APPLY.CMD" "$media/MULTITASK.CMD"
-  foreach($name in 'PIF.EXE','HASH.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$name" "$media/$name"}
+  foreach($name in 'SETUP.CMD','WIN.CMD'){Copy-Item "$repo/tools/win31-setup/$name" "$media/$name"}
+  foreach($name in 'PIF.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$name" "$media/$name"}
   [IO.File]::WriteAllText("$shim/run16.cmd","@echo off`r`nexit /b 0`r`n",[Text.Encoding]::ASCII)
-  [IO.File]::WriteAllText("$task/input.txt","$dest`r`n$mode`r`n",[Text.Encoding]::ASCII)
+  [IO.File]::WriteAllText("$task/input.txt","$dest`r`n",[Text.Encoding]::ASCII)
   $env:PATH="$shim;$savedPath";$env:NTVDM_SETUP_TEST_NO_PAUSE='1'
   & cmd.exe /d /c "`"$media/SETUP.CMD`" < `"$task/input.txt`"" *> "$task/setup.log"
-  if($LASTEXITCODE){throw "Setup profile generation failed for DOSONLY=$mode"}
+  if($LASTEXITCODE){throw 'Setup finalization failed'}
   $env:PATH=$savedPath
-  $config=Get-Content "$dest/PATCH/CONFIG.NT" -Raw
-  if(($config -match '(?im)^dosonly\s*$') -ne ($mode -eq 1)){throw "Wrong DOSONLY=$mode configuration"}
-  $systemIni=$enc.GetString([IO.File]::ReadAllBytes($ini))
-  $enhanced=[regex]::Matches($systemIni,'(?ims)^\[386Enh\][^\n]*\n(.*?)(?=^\[|\z)')
-  if($enhanced.Count -ne 1){throw 'Expected one installed [386Enh] section'}
-  foreach($name in 'INSIGNIA.386','NTVDM64.386'){
-   $installed=Test-Path -LiteralPath "$dest/PATCH/$name"
-   if($installed -ne ($mode -eq 0)){throw "Wrong DOSONLY=$mode driver state: $name"}
-   $references=@([regex]::Matches($enhanced[0].Groups[1].Value,'(?im)^\s*device\s*=\s*([^;\r\n]+)') |
-     ForEach-Object {$_.Groups[1].Value.Trim().Trim('"')} | Where-Object {[IO.Path]::GetFileName($_) -ieq $name})
-   if($references.Count -ne [int]$installed -or ($installed -and $references[0] -ine "$dest\PATCH\$name")){
-    throw "Installed [386Enh] driver reference differs from profile: $name"
+  function Select-LaunchProfile([string]$case) {
+   $enhanced=$case.StartsWith('386-');$dos=[int]$case.EndsWith('dosonly1')
+   $selection="$(if($enhanced){2}else{1})`r`n$dos`r`n"
+   if($enhanced){$selection+="$([int]($mode -eq 0))`r`n"}
+   [IO.File]::WriteAllText("$task/input.txt",$selection)
+   $env:PATH="$shim;$savedPath"
+   try {
+    & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/input.txt`"" *> "$task/select-$case.log"
+    if($LASTEXITCODE){throw "Launcher selection failed: $case"}
+   } finally {$env:PATH=$savedPath}
+   foreach($name in 'INSIGNIA.386','NTVDM64.386'){
+    if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Wrong driver $name"}
    }
-   if($installed -and (Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Driver differs: $name"}
   }
   foreach($name in $guest.Keys){if((Get-FileHash "$dest/$name").Hash -ne $guest[$name]){throw "Guest binary changed: $name"}}
   & "$repo/test/integration/win31_program_groups_test.ps1" -InstallRoot $dest
@@ -87,11 +85,12 @@ foreach($mode in 0,1){
   if($LASTEXITCODE){throw 'Prompt controller assembly failed'}
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
    $out=Join-Path $task $case
+   Select-LaunchProfile $case
    # Standard Windows ignores [386Enh]. Exercise interaction on the bare
    # profile; with the pair installed, verify startup, DOSONLY and exit.
    if($mode -eq 0 -and $case.StartsWith('std-')){
     try {
-     & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -Cases $case
+     & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -Cases $case
     } catch {
      $failures+="setup=$mode $case smoke $($_.Exception.Message)"
     }
@@ -105,7 +104,7 @@ foreach($mode in 0,1){
    $signals=@("$dest/PATCH/MREADY.BIN","$dest/PATCH/MDOWN.BIN")
    foreach($signal in $signals){if(Test-Path $signal){throw "Stale fixture signal: $signal"}}
    try {
-    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -Scheduling $scheduling
+    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -Scheduling $scheduling
     if(!(Test-Path $receipt) -or (Get-Content -LiteralPath $receipt -Raw).Trim() -cne $expected){throw "Unexpected command output for $case"}
     $owner=if($case.EndsWith('dosonly0')){$hostVersion}else{'DOS'}
     if((Get-Content "$dest/PATCH/SCHED.RUN" -Raw).Trim() -cne $owner){throw "Wrong execution owner: $case"}
@@ -135,9 +134,10 @@ foreach($mode in 0,1){
   & "$repo/assets/release/PIF.EXE" update $profile --arguments "/c $program" --w386-flags $flags
   if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt for Alt+Enter'}
   foreach($case in '386-dosonly1','386-dosonly0'){
+   Select-LaunchProfile $case
    $out=Join-Path $task "$case-fullscreen"
    try {
-    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -FullscreenKey
+    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -FullscreenKey
     $observed=Get-Content "$out/$case.observer.txt" -Raw
     if($observed -notmatch '(?m)^window-key-message-count=6 window-enter-count=1\r?$'){throw 'Observer did not deliver the four Alt+Enter events and the k down/up pair'}
     if(!(Test-Path $receipt) -or (Get-Content "$out/$case.observer.txt.caf.txt" -Raw) -notmatch 'caf-visible-window=1'){throw 'Missing fullscreen DOS keyboard or NTCON text window witness'}
@@ -164,9 +164,10 @@ foreach($mode in 0,1){
   $controller=Join-Path $task 'prompt-pair.exe'
   & nasm -f bin -DW31_PROMPT_CHECK -DW31_PROMPT_PAIR "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'DOS pair controller assembly failed'}
+  Select-LaunchProfile '386-dosonly1'
   $out=Join-Path $task '386-dosonly1-pair'
   try {
-   & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases '386-dosonly1' -MouseProbeRoot $mouseTools -PromptPair
+   & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases '386-dosonly1' -MouseProbeRoot $mouseTools -PromptPair
    $vmIds=foreach($id in 'A','B'){
     $entry=[IO.File]::ReadAllBytes("$dest/PATCH/$id.END")
     if($entry.Length -ne 5 -or $entry[0] -ne [byte][char]$id){throw "Invalid guest completion for $id"}

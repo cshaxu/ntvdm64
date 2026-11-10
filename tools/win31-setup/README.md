@@ -2,7 +2,13 @@
 
 Use `APPLY.CMD` and enter the path of a **copy** of the Windows 3.1 installation media. The original supplied media must remain unchanged. The command prepares that target's `PATCH`, adapts the checked kernel inputs and substitutes the released mouse driver. Exact original compressed files are retained beside their inputs as `KRNL386.EX_.BAK`, `WIN386.EX_.BAK` and `MOUSE.DR_.BAK`.
 
-Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. After Setup succeeds, enter the selected Windows installation directory and choose DOSONLY mode: `0` enables host multitask payloads and installs the two released `.386` drivers; `1` selects guest-only DOS execution. The default is `0`. SETUP.CMD generates the installation's own `PATCH\WINSTD.CMD`, `PATCH\WIN386.CMD`, PIFs and configuration using PIF.EXE. The multitask installer updates `SYSTEM.INI`; original installed guest binaries are not patched again. Setup scratch uses the target's `PATCH\TEMP`. Default NT profiles are not edited.
+If a media copy still contains an older package, use its `UNAPPLY.CMD` recovery workflow before applying this version; APPLY preserves unrecognized existing helper files.
+
+Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. After Setup succeeds, enter the selected Windows installation directory. Finalization always copies `INSIGNIA.386`, `NTVDM64.386`, `PIF.EXE` and the single `WIN.CMD` launcher into its `PATCH`. The two device entries in `[386Enh]` start commented out. Original installed guest binaries are not patched again.
+
+Run the installed `PATCH\WIN.CMD` to select Standard or 386 Enhanced, then DOSONLY (`0` host commands, `1` guest DOS). Enhanced mode additionally offers the two-driver enable switch. Standard mode leaves both entries commented. The launcher generates `CONFIG.NT`, `AUTOEXEC.NT` and one `WIN.PIF` each time, and enables/disables only its two device entries. There is no template PIF, second installer, PowerShell runtime dependency or permanent configuration backup. Other SYSTEM.INI entries are preserved. Invalid choices or configuration errors stop before launch; temporary configuration staging is removed. Do not reconfigure an installation while its Windows instance is running.
+
+The installation is self-contained except for `run16` on PATH. `PATCH\TEMP` holds runtime scratch. The generated NT files and PIF are owned outputs and are replaced on the next launch; customize unrelated SYSTEM.INI entries rather than those generated files. Six configurations retain the S14 execution/scheduling contracts. This does not resolve the separately deferred EDIT mouse transition defect.
 
 `patch31.exe` applies hash-checked kernel adaptations to staging copies.
 `SZDD.EXE` writes the SZDD compressed files consumed by original Setup.

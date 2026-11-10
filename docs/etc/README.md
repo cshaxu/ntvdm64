@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T481 S15 dynamic Win3.1 launcher](evidence/m0-t481-s15-win31-dynamic-launch.md) records setup package changes and verification.
+
 [T481 S13 Win3.1 setup](evidence/m0-t481-s13-win31-setup.md) records setup selection and acceptance.
 
 [T481 S14 Win95 launch](evidence/m0-t481-s14-win95-launch.md) records launch selection and the Win3.1 profile investigation.

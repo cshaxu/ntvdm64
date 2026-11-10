@@ -8,7 +8,7 @@ $package = (Resolve-Path -LiteralPath $PackageRoot).Path.TrimEnd('\')
 $install = (Resolve-Path -LiteralPath $InstallRoot).Path.TrimEnd('\')
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path.TrimEnd('\')
 $payload = Join-Path $package 'PATCH'
-foreach($name in @('SETUP.CMD','PIF.EXE','MOUSE31.DRV','README.TXT','MULTITASK.CMD','HASH.EXE','INSIGNIA.386','NTVDM64.386')) {
+foreach($name in @('SETUP.CMD','PIF.EXE','MOUSE31.DRV','README.TXT','WIN.CMD','HASH.EXE','INSIGNIA.386','NTVDM64.386')) {
     if(!(Test-Path -LiteralPath (Join-Path $payload $name) -PathType Leaf)) {throw "Missing package payload: $name"}
 }
 foreach($forbidden in @('PATCHSET.EXE','KRNL386-ADAPTED.EXE','WIN386-ADAPTED.EXE','KRNL386-RETAIL.EXE','WIN386-RETAIL.EXE','WORK','TEMP','configure-launch.ps1','run-setup.ps1','WIN31-TEMPLATE.PIF','WIN386-ADAPTATION.JSON','addon-files.json')) {
@@ -16,8 +16,11 @@ foreach($forbidden in @('PATCHSET.EXE','KRNL386-ADAPTED.EXE','WIN386-ADAPTED.EXE
 }
 $runner=Get-Content -LiteralPath (Join-Path $payload 'SETUP.CMD') -Raw
 if(!$runner.Contains('call run16 command /c SETUP.EXE')) {throw 'Setup runner does not use the synchronous DOS COMMAND entry'}
-if(!$runner.Contains('PIF.EXE" create') -or $runner.Contains('PATCHSET.EXE" --win31')) {throw 'Setup runner must generate profiles without repatching installed guests'}
-& (Join-Path $repo 'test\integration\win31_launch_profile_test.ps1') -InstallRoot $install -ProfileDirectory (Join-Path $install 'PATCH') -SetupMode
+if(!(Get-Content (Join-Path $payload 'WIN.CMD') -Raw).Contains('PIF.EXE" create') -or $runner.Contains('PATCHSET.EXE" --win31')) {throw 'Setup runner must generate profiles without repatching installed guests'}
+foreach($name in 'WIN.CMD','PIF.EXE','INSIGNIA.386','NTVDM64.386'){
+ if((Get-FileHash (Join-Path $install "PATCH/$name")).Hash -ne (Get-FileHash (Join-Path $payload $name)).Hash){throw "Installed payload differs: $name"}
+}
+foreach($name in 'WINSTD.CMD','WIN386.CMD','MULTITASK.CMD'){if(Test-Path (Join-Path $install "PATCH/$name")){throw "Obsolete installed launcher: $name"}}
 $forbiddenRoots = @($package)
 # A build-owned installation fixture may deliberately live under the
 # repository's build tree.  Its self-contained profiles must name the

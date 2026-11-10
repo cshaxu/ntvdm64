@@ -20,7 +20,7 @@ try {
  $root | & cmd.exe /d /c $undo;if($LASTEXITCODE){throw 'UNAPPLY failed'}
  foreach($n in $before.Keys){if((Get-FileHash (Join-Path $root $n)).Hash -ne $before[$n]){throw "Original compressed bytes not restored: $n"}}
  foreach($n in @('KRNL386.EX_.BAK','WIN386.EX_.BAK','MOUSE.DR_.BAK')){if(Test-Path (Join-Path $root $n)){throw "Backup remains after recovery: $n"}}
- foreach($n in @('KRNL386.EX_.BAK','WIN386.EX_.BAK','SETUP.CMD','PIF.EXE','MULTITASK.CMD','HASH.EXE','INSIGNIA.386','NTVDM64.386','PATCHSET.EXE','MOUSE31.DRV','KRNL386-RETAIL.EXE','WIN386-RETAIL.EXE','KRNL386-ADAPTED.EXE','WIN386-ADAPTED.EXE')){if(Test-Path -LiteralPath (Join-Path $root "PATCH/$n")){throw "Recovered tool file remains: $n"}}
+ foreach($n in @('KRNL386.EX_.BAK','WIN386.EX_.BAK','SETUP.CMD','WIN.CMD','PIF.EXE','MULTITASK.CMD','HASH.EXE','INSIGNIA.386','NTVDM64.386','PATCHSET.EXE','MOUSE31.DRV','KRNL386-RETAIL.EXE','WIN386-RETAIL.EXE','KRNL386-ADAPTED.EXE','WIN386-ADAPTED.EXE')){if(Test-Path -LiteralPath (Join-Path $root "PATCH/$n")){throw "Recovered tool file remains: $n"}}
  if(Test-Path $unknown){throw 'PATCH was not removed'}
  New-Item -ItemType Directory -Path (Join-Path $root 'PATCH') | Out-Null
  $unknownPif=Join-Path $root 'PATCH/PIF.EXE';[IO.File]::WriteAllText($unknownPif,'user payload')

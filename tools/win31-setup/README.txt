@@ -1,14 +1,12 @@
-Windows 3.1 Setup
-=================
+Windows 3.1 Setup patch
 
-Run the tool's APPLY.CMD and select a copy of the installation media. Then run
-that media copy's PATCH\SETUP.CMD, select an installation directory in Setup,
-and provide the same directory when asked. After Setup, select DOSONLY=0 for
-host multitask payloads or DOSONLY=1 for guest-only DOS execution. Mode 0
-installs the released multitask drivers. The installed directory receives its
-own PATCH\WINSTD.CMD and PATCH\WIN386.CMD launchers.
+Run APPLY.CMD against a copy of the installation media, then run its
+PATCH\SETUP.CMD. After graphical Setup finishes, enter the installed directory.
+Both .386 drivers and PIF.EXE are always copied to the installed PATCH.
 
-UNAPPLY.CMD restores the compressed media files directly from adjacent .BAK
-files and deletes the entire media PATCH directory, including user files.
-Installed launch profiles are separate. SETUP.CMD does not patch installed
-guest binaries again. Never use original media as the target; use a copy.
+Start the installed PATCH\WIN.CMD. Select Standard or 386 Enhanced, DOSONLY
+0 or 1, and (Enhanced only) whether to enable the two drivers. WIN.CMD
+regenerates CONFIG.NT, AUTOEXEC.NT and WIN.PIF; it toggles the two owned
+SYSTEM.INI entries by commenting/uncommenting them. Other entries are kept.
+run16 must be on PATH. Do not reconfigure a running Windows installation.
+No PowerShell or repository path is needed by the installed launcher.

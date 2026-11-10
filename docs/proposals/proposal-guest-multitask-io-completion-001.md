@@ -69,13 +69,13 @@ S6 or claim its previously unverified rows passed merely to simplify planning.
 ## Remaining S sequence
 
 S13 and S14 are closed. The owner admitted S15 for setup patch changes and
-will supply its detailed requirements. Mouse transition research, the former
+approved dynamic mode/DOSONLY/driver selection in one installed WIN.CMD. Mouse transition research, the former
 Win95 matrix and the remaining audit are deferred; their next S numbers are
 not allocated yet.
 
 | Packet | Scope and evidence required for closure |
 | --- | --- |
-| S15 | Setup patch changes; admitted, awaiting owner requirements before implementation. |
+| S15 | Always install the two addons and PIF utility. One WIN.CMD selects Standard/Enhanced, DOSONLY and enhanced driver enablement, regenerates NT files/WIN.PIF and toggles its two SYSTEM.INI entries by comments. Verify six selections, repeated transitions and failure handling; deliver the updated setup package. |
 | Deferred mouse investigation | Reproduce EDIT.COM Console text -> CAF Window text -> Alt+Enter guest graphical DOS window: lingering DOS cursor and ineffective menu clicks. Use the captured O:/w31 no-addon DOSONLY=1 configuration; do not require installing the pair as a workaround. |
 | S14 (closed) | Six execution/scheduling contracts, two Standard smoke controls, four enhanced fullscreen cases and two paired-prompt cases passed. Owner deferred the later EDIT mouse return regression; see the evidence handoff. |
 | Deferred Win95 matrix | Win95, same driver pair configured or absent crossed with DOSONLY=0 and 1. Verify the generated profile, guest DOS prompt, mouse and keyboard interaction, return to Windows and normal shutdown in each case. Verify guest-only execution for DOSONLY=1 even with the drivers present. Exercise the supported two-VM host payload route with DOSONLY=0 and both drivers loaded. Record actual routing without the pair separately. |
