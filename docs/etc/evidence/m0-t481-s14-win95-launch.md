@@ -136,6 +136,10 @@ respective executable entries in Main, Accessories and Games in the pre-fix
 comparison and both fixed DOSONLY modes; no AddItem was sent for StartUp.
 The fixed modes retained all four INI references, while the baseline INI
 remained empty. All three test-owned Win3.1 copies were removed afterwards.
+The same fixed-host DDE witness also passed standard-mode DOSONLY=0 and
+DOSONLY=1, including all four references, three representative program items,
+and normal Windows exit. Thus the real Program Manager comparison covers all
+four mode combinations; it still does not run original Setup end-to-end.
 
 Review of the retained original-Setup captures narrows why that attempt was
 incomplete: copying reached 91%, then Setup displayed “Cannot read from drive

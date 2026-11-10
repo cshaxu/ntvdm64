@@ -3,7 +3,7 @@ param(
  [Parameter(Mandatory)][string]$InstallSource,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
- [ValidateSet('386-dosonly0','386-dosonly1')][string]$Case='386-dosonly0',
+ [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')][string]$Case='386-dosonly0',
  [switch]$ExpectUnwrittenProfile
 )
 $ErrorActionPreference='Stop'
