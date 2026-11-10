@@ -197,6 +197,16 @@ result. This is a correction in the original owner, not a second provider.
 The separate guest-address lifetime changes in this file were not evaluated
 by that comparison; this is not a complete disposition of the file.
 
+For DEM open/create, `GetVDMAddr` is not an absent interface: the selected
+macro calls `Sim32pGetVDMPointer`, which calls `c_GetLinAdd`. Source tracing
+shows that `c_GetLinAdd` returns a pointer to physical address zero when a
+paged translation fails. The current bounded pathname lease instead reports
+failure. Consequently, the existing seam cannot be removed on the mere
+assumption that both interfaces return a host pointer. Whether it is needed
+for every reachable DOS pathname and whether its length/failure behavior can
+be simplified require a separate caller and address-boundary comparison; no
+runtime equivalence or complete DEM review is claimed here.
+
 An additional Win95 DOSONLY=0 shutdown witness reached `ExitWindows` after
 both test VMs retired. The observed root Run16 and NTVDM process exit codes
 were both 1; NTCON exited 0. Two earlier no-addon controls also returned 1,
