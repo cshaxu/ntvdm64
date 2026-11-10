@@ -24,6 +24,13 @@ build wrapper were removed as well. The latter's observer source remains;
 current tests use the formal message-probes build target. No runtime image or
 guest component is removed by this cleanup.
 
+The obsolete T274, T275, T277–T282 and T301 governance cohorts (83 scripts,
+329,254 bytes) were removed after exact-name searches found no current build,
+test, policy, design or state consumers outside those cohorts. Historical
+closure documents still describe their former use; Git retains the scripts.
+The owner-designated live tools and all historical binary tool inputs remain
+pending their separate retention/asset inventory.
+
 The owner explicitly retains tools/opennt, win31-path, win31-setup,
 win95-launch, win95-path and win101-setup. This is a directory/ownership
 review; it does not certify every historical script for current execution.
