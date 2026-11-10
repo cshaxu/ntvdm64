@@ -108,6 +108,16 @@ exit 0 is not a completed-install receipt. The rerun must handle the empty
 optical drive without canceling a copy operation and assert the installed files
 and groups explicitly.
 
+The previous GUI attempts launched a PIF directly rather than the actual
+SETUP.CMD. A further isolated test ran the real media PATCH/SETUP.CMD from
+host CMD and traced CMD, Run16, NTSRV, NTVDM and NTCON. Original Setup reached
+its GUI but remained incomplete after the test controller handled the empty
+optical-drive dialog. Run16 reported 0; the real script then rejected the
+selected installation directory because WIN.COM was absent, returned 5, and
+did not generate the installed PATCH. Its original Setup was not replaced by
+a shim. This validates failure handling, not a completed installation. The
+isolated media and installation tree were removed afterwards.
+
 The private-desktop controller was also paused on the later configuration
 screen. A capture confirms that “let you make the modifications later” was
 selected before Enter; subsequent captures nevertheless showed AUTOEXEC and
