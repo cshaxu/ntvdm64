@@ -80,6 +80,12 @@ ExitWindows witness. A mapped call-site trace identifies the original
 `cmdGetNextCmd` return path; why the guest supplied 1 remains unproved, so
 this is not recorded as normal-shutdown acceptance.
 
+The DEM open/create pathname lease now shares its identical copy and error
+handling in one local helper. Cached x86/x64 builds and the x86 worker relink
+passed, as did all 16 selected Full gates and the real Win3.1 empty-profile
+probe. Package `092da729-caf9-4a89-8f2e-305e368faacf` was published to both
+host locations; original fresh Setup remains unverified.
+
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The
 published O:/WINNT/edit.exe and C:/Windows/System32/edit.exe have identical

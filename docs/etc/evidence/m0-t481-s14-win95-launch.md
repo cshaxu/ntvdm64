@@ -207,6 +207,19 @@ for every reachable DOS pathname and whether its length/failure behavior can
 be simplified require a separate caller and address-boundary comparison; no
 runtime equivalence or complete DEM review is claimed here.
 
+The already-selected open and create pathname adaptations duplicated the same
+DS:SI bounded copy and invalid-address handling. They now share one local
+`demCopyFileName` in the original DEM translation unit; their distinct original
+handlers, error ordering and leases remain. This reduces that file by eight
+net lines in the worktree diff, without claiming restoration of the original
+alias contract. The cached x86 and x64 builds and the actual x86 worker relink
+passed. All 16 selected Full gates passed (the external DOS4GW fixture was not
+supplied to that run). A real Win3.1 enhanced-mode empty-profile probe also
+passed with normal exit. Package `092da729-caf9-4a89-8f2e-305e368faacf` was
+published and all 11 host-image hashes matched in both release locations; the
+installed W31 driver hashes matched. This does not close the original Setup or
+whole-mirror audit gaps.
+
 An additional Win95 DOSONLY=0 shutdown witness reached `ExitWindows` after
 both test VMs retired. The observed root Run16 and NTVDM process exit codes
 were both 1; NTCON exited 0. Two earlier no-addon controls also returned 1,

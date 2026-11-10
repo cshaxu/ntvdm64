@@ -26,6 +26,22 @@ BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
 
+/* DIVERGENCE(MVDM-HOST-DIV-195): open pathname.
+ * DIVERGENCE(MVDM-HOST-DIV-231): create pathname.
+ * Copy the original DS:SI pathname within the current session. */
+static BOOL demCopyFileName(CHAR fileName[MAX_PATH])
+{
+    mvdm_guest_location location;
+    uint32_t bytes;
+
+    if (mvdm_guest_location_set_real_mode(&location, getDS(), getSI()) &&
+        mvdm_guest_location_copy_c_string(&location, (uint8_t *)fileName,
+            MAX_PATH, &bytes)) return TRUE;
+    SetLastError(ERROR_INVALID_ADDRESS);
+    demClientError(INVALID_HANDLE_VALUE, (CHAR)-1);
+    return FALSE;
+}
+
 /* DIVERGENCE MVDM-HOST-DIV-006: preserve the source's optional-current-PDB
  * convention without retaining a native pointer to its two-byte DOS value. */
 static BOOL demCurrentPdbAddress(PULONG pPDB)
@@ -184,8 +200,6 @@ LPSTR   dupFileName;
 DWORD   dwFileSize,dwSizeHigh;
 SECURITY_ATTRIBUTES sa;
 CHAR    fileName[MAX_PATH];
-ULONG   fileNameBytes;
-mvdm_guest_location fileNameLocation;
 
 #line 159
     if (getAL()){
@@ -193,17 +207,7 @@ mvdm_guest_location fileNameLocation;
         return;
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-195): the source uses a durable host alias
-     * for the DOS pathname.  Preserve its local pathname, canonicalization,
-     * CreateFile and error sequence, but copy at most MAX_PATH bytes through
-     * one synchronous session lease before the original body uses it. */
-    if (!mvdm_guest_location_set_real_mode(&fileNameLocation, getDS(),
-        getSI()) || !mvdm_guest_location_copy_c_string(&fileNameLocation,
-        (uint8_t *)fileName, (uint32_t)sizeof(fileName), &fileNameBytes)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        demClientError(INVALID_HANDLE_VALUE, (CHAR)-1);
-        return;
-    }
+    if (!demCopyFileName(fileName)) return;
     lpFileName = fileName;
 
 #if DBG
@@ -637,24 +641,12 @@ DWORD   dwDesiredAccess;
 SECURITY_ATTRIBUTES sa;
 CHAR    cFOTName[MAX_PATH];
 CHAR    fileName[MAX_PATH];
-ULONG   fileNameBytes;
-mvdm_guest_location fileNameLocation;
 #line 600
 BOOL    ttfOnce,IsFirst;
 DWORD   dwLastError;
 
 
-    /* DIVERGENCE(MVDM-HOST-DIV-231): the source borrows the DOS pathname
-     * through a synchronous GetVDMAddr alias.  CCPU40 guest backing cannot
-     * expose that alias to a Win32 call, so copy one bounded NUL-terminated
-     * pathname for this original handler invocation only. */
-    if (!mvdm_guest_location_set_real_mode(&fileNameLocation, getDS(),
-        getSI()) || !mvdm_guest_location_copy_c_string(&fileNameLocation,
-        (uint8_t *)fileName, (uint32_t)sizeof(fileName), &fileNameBytes)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        demClientError(INVALID_HANDLE_VALUE, (CHAR)-1);
-        return;
-    }
+    if (!demCopyFileName(fileName)) return;
     lpFileName = fileName;
 #line 605
     dwAttr = (DWORD)getCX();
