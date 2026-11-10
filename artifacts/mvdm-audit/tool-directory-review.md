@@ -1,5 +1,24 @@
 # T473 S10 tools retention review
 
+T481 follow-up: the owner requested removal of unused tools. The obsolete
+MS-DOS 6 importer was already absent from the worktree; its historical
+toolchain and manifest remain in `tools/historical/msdos6-qb45`. The T148
+one-off archive repacker has no current caller and targets the retired T130
+archive. The T198 S97 and T199 S37 wrappers have no current caller and each
+depends on an absent T198 probe. Those four scripts were removed; Git history
+retains their contents. The T95 entrypoint remains because an integration
+fixture calls it. The observation startup script remains referenced by an
+active proposal and source exception records. This is a partial disposition,
+not proof that every other tool has been reviewed.
+
+The T276 governance cohort (100 scripts, 303,150 bytes) was also removed as
+one retired internal group: exact script-name searches found no consumers
+outside that group in current tools, tests, state/design/rule documents or
+the root build. Its historical ledger outputs were removed or archived, and
+some scripts still require the removed paths. The old group and its historical
+records remain recoverable from Git; this does not remove the current
+documentation gates or the historical binary toolchains.
+
 The owner explicitly retains tools/opennt, win31-path, win31-setup,
 win95-launch, win95-path and win101-setup. This is a directory/ownership
 review; it does not certify every historical script for current execution.

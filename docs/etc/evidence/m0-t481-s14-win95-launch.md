@@ -220,6 +220,14 @@ published and all 11 host-image hashes matched in both release locations; the
 installed W31 driver hashes matched. This does not close the original Setup or
 whole-mirror audit gaps.
 
+The same published package was subsequently exercised through both Win95
+launch selections. DOSONLY=0 reached two concurrently active DOS VMs, 320
+identity/stack/register/flags checks and four native commands; the shutdown
+witness again reached `ExitWindows` but the launcher returned 1 and its
+return was not observed. DOSONLY=1 ran an actual guest DOS program without a
+native CUI worker; its test fixture retired the session, so it is not evidence
+of normal guest shutdown. The source Win95 installation remained unchanged.
+
 An additional Win95 DOSONLY=0 shutdown witness reached `ExitWindows` after
 both test VMs retired. The observed root Run16 and NTVDM process exit codes
 were both 1; NTCON exited 0. Two earlier no-addon controls also returned 1,
