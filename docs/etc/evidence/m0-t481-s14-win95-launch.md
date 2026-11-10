@@ -189,6 +189,14 @@ indexed four groups with an initially empty profile in standard and enhanced
 modes with both DOSONLY settings. All four Windows sessions exited normally.
 This still does not substitute for a complete original interactive Setup run.
 
+Mirror-restoration review also compared `demgset.c` with pinned OpenNT. The
+`GetMediaId` padding change (DIV-279) must remain: the original writes spaces
+to `VolumeID` while checking `FileSystemType`, and the S37 real INT21/6900
+before/after witness records both the incorrect NUL padding and corrected
+result. This is a correction in the original owner, not a second provider.
+The separate guest-address lifetime changes in this file were not evaluated
+by that comparison; this is not a complete disposition of the file.
+
 An additional Win95 DOSONLY=0 shutdown witness reached `ExitWindows` after
 both test VMs retired. The observed root Run16 and NTVDM process exit codes
 were both 1; NTCON exited 0. Two earlier no-addon controls also returned 1,
