@@ -71,6 +71,154 @@ api 2,50                         ; FindWindow("Progman", NULL)
 test ax,ax
 jz .wait
 mov [hwnd-data],ax
+%ifdef W31_PROMPT_CHECK
+; Launch the installed DOS Prompt profile with the fixture's /c command.
+push ds
+push word prompt_name-data
+push word 1
+api 1,166                        ; WinExec
+cmp ax,32
+jb fatal
+%ifdef W31_PROMPT_PAIR
+mov bx,first_running-data
+call .wait_file
+; The PIF title may change while COMMAND executes its child. Remember the
+; actual DOS window while it is the only prompt, before starting prompt B.
+.first_active:
+api 1,29
+api 2,60
+test ax,ax
+jz .first_active
+cmp ax,[hwnd-data]               ; Program Manager
+je .first_active
+mov [first_window-data],ax
+push ds
+push word second_prompt-data
+push word 1
+api 1,166
+cmp ax,32
+jb fatal
+mov bx,second_done-data
+call .wait_file
+.activate_first:
+api 1,29
+push word [first_window-data]
+api 2,44                         ; OpenIcon
+push word [first_window-data]
+api 2,45                         ; BringWindowToTop across guest tasks
+push word [first_window-data]
+api 2,59                         ; SetActiveWindow
+api 1,29
+api 2,60                         ; GetActiveWindow
+cmp ax,[first_window-data]
+jne .activate_first
+push ds
+push word first_focus-data
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+push ax
+push ax
+push ds
+push word first_id-data
+push word 1
+api 1,86                         ; _lwrite
+cmp ax,1
+jne fatal
+api 1,81
+mov bx,first_done-data
+%else
+mov bx,receipt_name-data
+%endif
+call .wait_file
+push ds
+push word app_name-data
+push word 1
+api 1,166
+cmp ax,32
+jb fatal
+.await_app:
+api 1,29
+push ds
+push word app_class-data
+push word 0
+push word 0
+api 2,50                         ; FindWindow
+test ax,ax
+jz .await_app
+mov [app_window-data],ax
+; Center the pointer so the relative move cannot be clipped at an edge.
+push word 300
+push word 220
+api 2,70
+push ds
+push word initial_point-data
+api 2,17
+mov bx,mouse_ready-data
+call .announce
+.await_press:
+api 1,29
+push word 1                      ; VK_LBUTTON
+api 2,249
+test ax,0x8000
+jz .await_press
+push ds
+push word current_point-data
+api 2,17
+mov eax,[current_point-data]
+cmp eax,[initial_point-data]
+je .await_press
+mov bx,mouse_down-data
+call .announce
+.await_release:
+api 1,29
+push word 1
+api 2,249
+test ax,0x8000
+jnz .await_release
+push word [app_window-data]
+push word 0x10                   ; WM_CLOSE
+push word 0
+push word 0
+push word 0
+api 2,110                        ; PostMessage
+test ax,ax
+jz fatal
+.await_close:
+api 1,29
+push word [app_window-data]
+api 2,47                         ; IsWindow
+test ax,ax
+jnz .await_close
+jmp .finished
+.wait_file:
+push bx
+api 1,29
+pop bx
+push bx
+push ds
+push bx
+push word 0
+api 1,85                         ; _lopen
+pop bx
+cmp ax,-1
+je .wait_file
+push ax
+api 1,81
+ret
+.announce:
+push ds
+push bx
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+push ax
+api 1,81
+ret
+.finished:
+%endif
 push ds
 push word ready_name-data
 push word 0
@@ -118,5 +266,26 @@ boot_name: db '@W31_BOOT_PATH@',0
 times 128-($-boot_name) db 0
 ready_name: db '@W31_READY_PATH@',0
 times 128-($-ready_name) db 0
+%ifdef W31_PROMPT_CHECK
+prompt_name: db W31_INSTALL,'\DOSCHECK.PIF',0
+%ifdef W31_PROMPT_PAIR
+second_prompt: db W31_INSTALL,'\DOSPAIR.PIF',0
+first_running: db W31_INSTALL,'\PATCH\A.RUN',0
+first_done: db W31_INSTALL,'\PATCH\A.END',0
+second_done: db W31_INSTALL,'\PATCH\B.END',0
+first_focus: db W31_INSTALL,'\PATCH\A.FOC',0
+first_window: dw 0
+first_id: db 'A'
+%else
+receipt_name: db W31_INSTALL,'\PATCH\EXEC.TXT',0
+%endif
+app_name: db W31_INSTALL,'\NOTEPAD.EXE',0
+app_class: db 'Notepad',0
+app_window: dw 0
+initial_point: dd 0
+current_point: dd 0
+mouse_ready: db W31_INSTALL,'\PATCH\MREADY.BIN',0
+mouse_down: db W31_INSTALL,'\PATCH\MDOWN.BIN',0
+%endif
 data_end:
 image_end:

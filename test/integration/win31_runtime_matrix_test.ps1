@@ -13,6 +13,11 @@ param(
     [switch]$DirectRun16,
     [switch]$DirectShortPath,
     [switch]$DirectPif,
+    [string]$MouseProbeRoot,
+    [switch]$FullscreenKey,
+    [switch]$PromptPair,
+    [switch]$CaptureWindows,
+    [string]$SurfaceObserver,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
     [ValidateSet('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1')]
     [string[]]$Cases = @('std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'),
@@ -123,7 +128,7 @@ $baseConfig = $encoding.GetString($configBytes)
 $baseConfig = [regex]::Replace($baseConfig,'(?im)^\s*dosonly\s*\r?\n','')
 $results = [Collections.Generic.List[object]]::new()
 $savedEnv = @{}
-foreach ($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SHORT_HISTORY')) {
+foreach ($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_FULLSCREEN_READY','MVDM_OBSERVER_PROMPT_PAIR')) {
     $savedEnv[$name] = [Environment]::GetEnvironmentVariable($name,'Process')
 }
 try {
@@ -144,6 +149,8 @@ try {
         [IO.File]::WriteAllBytes($config,$encoding.GetBytes($text))
         $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false; $registryCaptured=$false
         $report=Join-Path $output "$($case.Name).observer.txt"
+        $mouseStage=0
+        $captureCount=0
         try {
             $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
             $scope=New-IsolatedPackageScope $stage
@@ -173,12 +180,36 @@ try {
             # Console-close legitimately interrupts the outer test batch too.
             # Answer only its observed CMD confirmation, never inject into a VM.
             if($ConsoleClose){$observerArgs+=@('--observe-console-input-marker','(Y/N)?','--observe-console-input-escaped','y\r')}
+            Remove-Item Env:MVDM_OBSERVER_PROMPT_PAIR,Env:MVDM_OBSERVER_FULLSCREEN_READY -ErrorAction SilentlyContinue
+            if($FullscreenKey -or $PromptPair){
+                $env:MVDM_OBSERVER_WINDOW_INPUT='1'
+                $env:MVDM_OBSERVER_FULLSCREEN_READY=Join-Path $patch 'FULL.RUN'
+                if($PromptPair){
+                    $env:MVDM_OBSERVER_FULLSCREEN_READY=Join-Path $patch 'B.RUN'
+                    $env:MVDM_OBSERVER_PROMPT_PAIR='1'
+                }
+                $observerArgs+=@('--observe-console-input-marker','S14_DOS_FULLSCREEN_READY','--observe-console-input-escaped','k')
+            }
             $process=Start-Process $observer -ArgumentList $observerArgs -WindowStyle Hidden -PassThru
             $deadline = [DateTime]::UtcNow.AddMilliseconds($TimeoutMs+15000)
             $known = @($process.Id)
             $desktop = 'NTVDMConsoleTest-' + $process.Id
             while (!$process.WaitForExit(500)) {
                 if ([DateTime]::UtcNow -ge $deadline) { throw 'Observer did not complete its bounded observation' }
+                if($MouseProbeRoot -and $mouseStage -lt 2) {
+                    $signal=@('MREADY.BIN','MDOWN.BIN')[$mouseStage]
+                    if(Test-Path -LiteralPath (Join-Path $patch $signal)){
+                        $frontend=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -ieq "$stage\system32\ntcon.exe"})
+                        if($frontend.Count -ne 1){throw "Expected one owned frontend at $signal"}
+                        $button=1-$mouseStage
+                        & "$MouseProbeRoot/probe.exe" $frontend[0].ProcessId $desktop "$MouseProbeRoot/mouse-hook.dll" (16*$button) (8*$button) $button "$output/$signal.mouse.txt"
+                        # Guest readiness can precede recreation of the host
+                        # presentation window after the DOS prompt closes.
+                        # 71 means no window existed and no input was sent.
+                        if($LASTEXITCODE -eq 0){$mouseStage++}
+                        elseif($LASTEXITCODE -ne 71){throw "Frontend input failed at $signal (exit $LASTEXITCODE)"}
+                    }
+                }
                 if($RegistrySnapshotMarker -and !$registryCaptured -and (Test-Path -LiteralPath $RegistrySnapshotMarker)) {
                     $snapshot=Join-Path $output "$($case.Name).registry.json"
                     & $monitor --tree-json 2> "$snapshot.err" | Set-Content -LiteralPath $snapshot
@@ -253,6 +284,17 @@ try {
                     if ($_.Exception.NativeErrorCode -ne 2) { throw }
                     continue # The observer has not created its desktop yet.
                 }
+                if ($CaptureWindows) {
+                    [IO.File]::AppendAllText((Join-Path $output "$($case.Name).windows.txt"),
+                        [DateTime]::UtcNow.ToString('o') + "`r`n" + $observation)
+                    if ($SurfaceObserver -and $captureCount -lt 40) {
+                        $frontend=@($rows | Where-Object { $_.ExecutablePath -ieq "$stage\system32\ntcon.exe" })
+                        if ($frontend.Count -eq 1) {
+                            $captureCount++
+                            & $SurfaceObserver $frontend[0].ProcessId $desktop (Join-Path $output "$($case.Name).surface-$captureCount.bmp") *> $null
+                        }
+                    }
+                }
                 if ($observation -match 'serial-ignore=True') {
                     [IO.File]::AppendAllText((Join-Path $output "$($case.Name).serial-dialogs.txt"),$observation)
                 }
@@ -323,7 +365,10 @@ try {
     [IO.File]::WriteAllBytes($config,$configBytes)
     [IO.File]::WriteAllBytes($autoexec,$autoBytes)
     foreach ($path in @($probe,$dosProbe,$dosResult,$boot,$ready)) { if(Test-Path -LiteralPath $path){Remove-Item -LiteralPath $path} }
-    foreach ($name in $savedEnv.Keys) { [Environment]::SetEnvironmentVariable($name,$savedEnv[$name],'Process') }
+    foreach ($name in $savedEnv.Keys) {
+        if ($null -eq $savedEnv[$name]) { Remove-Item "Env:$name" -ErrorAction SilentlyContinue }
+        else { [Environment]::SetEnvironmentVariable($name,$savedEnv[$name],'Process') }
+    }
     $results | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $output 'matrix-results.json') -Encoding UTF8
 }
 if($results.Count -ne $Cases.Count -or @($results | Where-Object {!$_.passed}).Count) { throw 'Win31 runtime matrix did not pass all selected cases' }

@@ -517,6 +517,8 @@ Owner explicitly requires both modes; neither substitutes for the other:
 | dosonly=1 | O:\winnt\edit.com | Executes within the original guest DOS VM, including QBASIC /EDCOM, with usable keyboard/menu/mouse and normal exit. |
 | dosonly=1 | O:\winnt\edit.exe | Reports execution failure; no native host editor task is launched. Prompt remains responsive and exits normally. |
 
+These DOSONLY=0 editor concurrency rows describe the enhanced-mode fixture with both addons. For the current eight profiles, see the [S14 scope and execution rules](../../proposals/proposal-guest-multitask-io-completion-001.md#remaining-s-sequence). A native shell-out in enhanced mode without the addons uses the synchronous contract.
+
 Record actual command routing and worker/task identities, not just screen
 appearance. For dosonly=0, the two editors must coexist in separate guest
 prompt windows with isolated input and independent completion. The dosonly=1

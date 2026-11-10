@@ -1221,6 +1221,38 @@ static BOOL write_window_key_records(const INPUT_RECORD *records,DWORD count)
     return TRUE;
 }
 static HANDLE scripted_target_process;
+/* Only the test DOS program that owns the foreground prompt writes ready_path.
+ * Its visible text in the active Console is checked separately after this chord. */
+static BOOL fullscreen_prompt_chord(const char *ready_path,const char *token)
+{
+    INPUT_RECORD keys[4]={0};
+    HWND window;
+    BOOL sent;
+    ULONGLONG deadline;
+    unsigned i;
+    if(!wait_for_report_marker_after(ready_path,token,0,20000))return FALSE;
+    deadline=GetTickCount64()+5000;
+    do {
+        window=find_owned_kvm_window();
+        if(window && IsWindowVisible(window))break;
+        Sleep(25);
+    } while(GetTickCount64()<deadline);
+    if(!window || !IsWindowVisible(window))return FALSE;
+    GetWindowThreadProcessId(window,&scripted_window_frontend);
+    for(i=0;i<4;++i){
+        KEY_EVENT_RECORD *key=&keys[i].Event.KeyEvent;
+        BOOL alt=i==0 || i==3;
+        keys[i].EventType=KEY_EVENT;
+        key->bKeyDown=i<2;
+        key->wRepeatCount=1;
+        key->wVirtualKeyCode=alt ? VK_MENU : VK_RETURN;
+        key->wVirtualScanCode=alt ? 0x38 : 0x1c;
+        key->dwControlKeyState=i==3 ? 0 : LEFT_ALT_PRESSED;
+    }
+    sent=write_window_key_records(keys,4);
+    scripted_window_frontend=0;
+    return sent;
+}
 static BOOL milestone_input;
 static unsigned milestone_waits;
 static ULONGLONG milestone_wait_ms;
@@ -2875,6 +2907,12 @@ managed_close_done: ;
         !GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_STAGE",NULL,0) &&
         !GetEnvironmentVariableA("MVDM_OBSERVER_EDIT_MOUSE_BURST",NULL,0) &&
         !window_mouse_probe(argv[1],argv[3],FALSE))report_failed=1;
+    {
+        char ready_path[MAX_PATH];
+        DWORD length=GetEnvironmentVariableA("MVDM_OBSERVER_FULLSCREEN_READY",ready_path,sizeof(ready_path));
+        if(length && (length>=sizeof(ready_path) || !fullscreen_prompt_chord(ready_path,
+            GetEnvironmentVariableA("MVDM_OBSERVER_PROMPT_PAIR",NULL,0) ? "B" : "READY")))report_failed=1;
+    }
     if(graphics_handshake)
         graphics_handshake_ok=graphics_window_return(input,output,argv[3]);
     if (scripted_console_input) {
@@ -2956,6 +2994,30 @@ managed_close_done: ;
                 if (observe_edit_return) record_performance("edit-submit", "edit.com", 0, TRUE);
                 scripted_console_input_delivered = write_console_input_text(input,scripted_console_input_text,
                     scripted_console_line_delay_ms,output,argv[3]);
+            }
+            if (scripted_console_input_delivered &&
+                GetEnvironmentVariableA("MVDM_OBSERVER_PROMPT_PAIR",NULL,0)) {
+                char path[MAX_PATH]; observed_window_frame frame;
+                DWORD frontend=scripted_window_frontend;
+                HANDLE owner=OpenProcess(PROCESS_VM_READ|SYNCHRONIZE,FALSE,frontend);
+                ULONGLONG deadline=GetTickCount64()+20000;
+                BOOL graphics=FALSE;
+                snprintf(path,sizeof(path),"%s\\PATCH\\B.KEY",argv[2]);
+                scripted_console_input_delivered=owner && fullscreen_prompt_chord(path,"B");
+                scripted_window_frontend=frontend;
+                while(scripted_console_input_delivered && GetTickCount64()<deadline){
+                    HWND w=find_scripted_window();
+                    if(w && observer_window_frame_read(owner,w,&frame) && frame.frame.graphics){
+                        graphics=TRUE;break;
+                    }
+                    Sleep(25);
+                }
+                if(owner)CloseHandle(owner);
+                snprintf(path,sizeof(path),"%s\\PATCH\\A.FOC",argv[2]);
+                scripted_console_input_delivered=graphics &&
+                    write_console_input_text(input,"b",0,output,NULL) &&
+                    wait_for_report_marker_after(path,"A",0,20000) &&
+                    write_console_input_text(input,"a",0,output,NULL);
             }
             if (scripted_console_input_delivered &&
                 GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_STAGE",NULL,0)) {

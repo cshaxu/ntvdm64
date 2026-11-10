@@ -795,3 +795,24 @@ single-window failures in this run sent zero key messages. The harness
 restored an absent environment variable as an empty but present switch.
 The runner now removes absent switches, and the paired guest controller
 uses the established OpenIcon/BringWindowToTop sequence for A.
+
+The paired guest controller actually created A.FOC: the DOS filesystem
+shortened A.FOCUS to an 8.3 filename while the host observer waited for its
+long spelling. The prior guest files include B.KEY and B.END and the captured
+first-window caption was "S14 prompt A". Both ends now use A.FOC and the
+controller keeps the first window handle before launching the second. On the
+released driver the setup-release-final two-addon pair completed both A.END
+and B.END, registered 14 front-end key messages with two Enter keydowns,
+and exited Windows normally. The extra four messages after the two chords
+and fullscreen k are the b and a down/up pairs for the two guest windows.
+
+S14 closure: the final unmodified setup-release-final runner exited 0.
+Both driver profiles produced A.FOC=41, A.END=4102000000 and B.END=4203000000
+and exited normally. Each pair report counts 14 key messages, two Enter
+keydowns and successful input delivery. Both VMs resumed after switching
+VM 3 back from fullscreen: VM 3 received b, then VM 2 received a. All
+14 matrix-results.json files report passed and normalExit. The physical
+desktop and original graphical installer were outside this private setup-shim
+run. Its two temporary install roots from diagnosis and final verification
+(q31p and q31) were absent after cleanup. Product baseline acced8559 is on
+origin/main. S15 owns Win95; S16 owns the outstanding mirror audit.

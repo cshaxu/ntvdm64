@@ -65,3 +65,37 @@ First audit/replay and qualify the preserved input candidate; next complete the
 remaining reached Win3.1 I/O and lifecycle/nested groups; then Win95 and combined
 acceptance. Allocate bounded S packets at this T's admission. Do not reopen T479
 S6 or claim its previously unverified rows passed merely to simplify planning.
+
+## Remaining S sequence
+
+S13 and S14 are closed. S15 is active. S16 follows the Win95 matrix.
+
+| Packet | Scope and evidence required for closure |
+| --- | --- |
+| S14 | Win3.1 Standard and 386 Enhanced, each with the released INSIGNIA.386 and NTVDM64.386 pair configured or absent, each with DOSONLY=0 and 1. Record all eight cases independently. Reproduce the no-driver DOSONLY=1 prompt error and mouse loss on an isolated copy of the installed configuration, identify the failing transition and verify its repair with the same actions. |
+| S15 | Win95, same driver pair configured or absent crossed with DOSONLY=0 and 1. Verify the generated profile, guest DOS prompt, mouse and keyboard interaction, return to Windows and normal shutdown in each case. Verify guest-only execution for DOSONLY=1 even with the drivers present. Exercise the supported two-VM host payload route with DOSONLY=0 and both drivers loaded. Record actual routing without the pair separately. |
+| S16 | Reconcile outstanding mirror audit dispositions against the existing inventory, close remaining integrated acceptance and delivery obligations, and record an owner and evidence for any residual item. Carry forward earlier package and shutdown evidence with its limitations. |
+
+For S14 the driver axis records the installed files and active configuration.
+Standard mode does not load enhanced-mode VxDs. Launch a real fullscreen DOS
+prompt, execute a command, exit to Windows, use the mouse to open an ordinary
+Windows application and verify normal Windows exit. In enhanced mode open two
+independent DOS windows, distinguish their command output, switch focus and
+verify mouse and keyboard operation. Switch one DOS VM to fullscreen, exercise
+both NTCON Console and Window text presentations, return to the guest window
+and verify both DOS sessions still accept input before normal exit.
+
+For guest DOS work, DOSONLY=1 keeps execution in the guest with either driver
+configuration. Enhanced Windows still schedules its own DOS VMs. Test their
+input, output and retirement without requiring a host payload. For an actual
+host shell-out with DOSONLY=0 and no enhanced-mode bridge, the legacy wait may
+pause guest Windows. Require the child to finish, its result to reach the
+caller, and Windows input and execution to resume. Concurrent guest progress
+during a host payload is required only for enhanced DOSONLY=0 with the pair
+loaded. The NIDDB companion also serves per-VM mouse/device state independently
+of host payload selection.
+
+Capture configuration and behavior per row. Keep the two original setup
+selections as package controls; vary the other driver combinations only in
+isolated copies. Startup, synthetic input delivery alone, or forced teardown
+cannot establish these interaction and normal-exit results.

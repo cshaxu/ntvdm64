@@ -21,8 +21,14 @@ int main(int argc,char **argv){
     desktop=OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_ENUMERATE|DESKTOP_HOOKCONTROL|DESKTOP_WRITEOBJECTS);
     if(!desktop){fclose(report);return 67;}
     if(!SetThreadDesktop(desktop)){fprintf(report,"set-desktop-error=%lu\n",GetLastError());CloseDesktop(desktop);fclose(report);return 68;}
-    EnumDesktopWindows(desktop,find,0);
-    if(!window){CloseDesktop(desktop);fclose(report);return 68;}
+    if(!EnumDesktopWindows(desktop,find,0) && !window){
+        fprintf(report,"enum-desktop-error=%lu\n",GetLastError());
+        CloseDesktop(desktop);fclose(report);return 68;
+    }
+    if(!window){
+        fprintf(report,"frontend=%lu awaiting-window=1\n",wanted);
+        CloseDesktop(desktop);fclose(report);return 71;
+    }
     thread=GetWindowThreadProcessId(window,&pid);
     target=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);
     if(!target){fclose(report);return 69;}

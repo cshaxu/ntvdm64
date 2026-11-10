@@ -2,49 +2,57 @@
 
 ## Current Work
 
-**Active: M0 T481 S14 — Win95 launch multitask selection.**
-S12 was closed by owner decision after the reported close dialog did not recur
-in bounded probes; its root cause remains unlocated. See
-[S12 evidence](../etc/operations/m0-t481-multitask-completion-plan.md#s12-preliminary-source-observations).
+**Active: M0 T481 S15 — Win95 patch and four runtime configurations.**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md). |
-| Identifier Mode | M0 T481 S14, Ordinary Mode. |
-| Admission And Approval | Owner approved both patch packages and directed the fresh Win3.1 installation failures to be investigated and repaired in S14 while keeping S13 closed. |
-| Objective | Complete Win95 mode selection and repair Win3.1 setup's empty Program Manager and unwanted MULTITASK records. |
-| Non-goals | Do not alter or rebuild original guest binaries; do not use Computer Use; do not change unrelated product behavior. |
-| Reference Baseline | S13 production package c3bc700e-d623-4059-a47a-0f69641fc7dd; existing Win95 launch package and released driver pair. |
-| Files And ABI Surface | tools/win95-launch, tools/win31-setup, shared multitask installer and host execution paths as necessary, applicable addon tools, integration tests, current task records. |
-| Applicable Rules | Execution, source policy, guest immutability, source-first and minimal implementation; patch packages use CMD and existing addon tools only. |
-| Verification | Validate both Win95 modes and real guest execution; trace and reproduce the Win3.1 Program Manager failure, validate fresh installation and group entries, clean PATCH records and both DOSONLY choices. |
-| Expected Markers | Both profiles select the intended mode; DOSONLY=0 installs and configures both released drivers; original guest binaries remain unchanged except previously approved package adaptations. |
-| Asset Needs | Released addon tools and drivers, isolated Win95 installation and test facilities; clean task-owned O:/tmp copies. |
-| Reporting Requirements | Exact package changes, both mode results, hashes and unverified boundaries; retain integrated acceptance obligations. |
-| Stop Conditions | Original guest mutation or unapproved observable semantic retreat. |
-| Exit Criteria | Required changes and acceptance completed; coherent package built, tested, published, committed and pushed as applicable. |
-| Original Owner Request | Offer Win95 DOSONLY choices; investigate and repair empty Win3.1 Program Manager and unwanted MULTITASK.HASH, MULTITASK.INI.BAK and MULTITASK.INI.NEW in S14. |
-| Similar-Issue Sweep | Win31 setup, shared installer and generated Win95 profiles. |
+| Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md#remaining-s-sequence). |
+| Identifier Mode | M0 T481 S15, Ordinary Mode. |
+| Admission And Approval | Owner assigned the four Win95 configurations to S15 after the S14 Win3.1 matrix. |
+| Objective | Verify Win95 prompt execution, guest mouse/keyboard, return to Windows and shutdown for both DOSONLY choices with the two .386 drivers present or absent. |
+| Non-goals | S16 owns remaining mirror audit and integrated closure. |
+| Reference Baseline | S14 released host manifest and MOUSE31.DRV. Historical dual-editor tests are scoped to their recorded driver and input paths. |
+| Files And ABI Surface | tools/win95-launch, tools/win-multitask, their assets and isolated runtime fixtures. No ABI change planned. |
+| Applicable Rules | CMD and existing addon tools for end-user packages. Use private probes, preserve original guest software and unrelated installations. |
+| Verification | Run the actual patch, verify active config and driver identities, then collect per-profile runtime witnesses. |
+| Expected Markers | DOSONLY=1 stays in guest with either profile. Exercise two payload VMs for DOSONLY=0 with drivers. Identify the no-driver DOSONLY=0 behavior. Record menu, keyboard, file I/O, Windows return and shutdown separately. |
+| Asset Needs | Released host and addon assets, isolated Win95 installation copies. |
+| Reporting Requirements | Distinguish actual guest shutdown from forced session retirement and each input path from physical mouse input. |
+| Stop Conditions | Unexpected original-image mutation or new unapproved compatibility tradeoff. |
+| Exit Criteria | Four configuration results and applicable package, runtime, delivery and cleanup evidence. |
+| Original Owner Request | Win95 DOSONLY=0/1 crossed with installed/absent drivers in S15. |
+| Similar-Issue Sweep | Check independence of mouse state, DOS execution routing and VM lifecycle across all four rows. |
 
-S13 retains the other multitask gaps, normal Win95 shutdown evidence and
-integrated acceptance. The direct-start large inherited-environment boundary
-remains recorded in [S9 direct startup](../etc/evidence/m0-t481-s9-direct-startup.md).
+## Evidence from earlier deliveries
+
+The S14 Mouse31 source candidate passed the eight basic profile interactions
+and both DOSONLY=1 guest pairs. The old release leaked desktop callback mask
+001Fh into both DOS VMs; the candidate returns zero for both. See the
+[paired control and test boundaries](../etc/evidence/m0-t481-s14-win95-launch.md).
+All four DOSONLY=0 profiles returned a host CMD version receipt and exited
+Windows normally in native-command-receipt. The enhanced two-addon profile
+also completed two overlapping native commands with verified exit codes.
+All four enhanced configurations passed windowed prompt -> Alt+Enter ->
+Console text -> CAF -> window text -> DOS completion and Windows mouse/exit.
+The 16 selected Full gates and the setup CMD media round trip passed.
+The driver in assets/release and O:/w31/SYSTEM/MOUSE.DRV matches the tested
+candidate. The final integrated release matrix passed all 14 runs, including focus and distinct post-switch input in both guest DOS windows.
 
 S13 implementation, four-mode runtime checks and Full delivery are complete.
 The post-Setup probe uses a Setup executable shim; a fresh original interactive
 Setup run was not repeated. The unchanged original launch and failure-exit
 contract was separately tested. See [S13 evidence](../etc/evidence/m0-t481-s13-win31-setup.md).
 
-S14 enhances `tools/win95-launch` with the same DOSONLY=0 / DOSONLY=1
+Earlier S14 work enhanced `tools/win95-launch` with the same DOSONLY=0 / DOSONLY=1
 selection and matching launch configuration. For DOSONLY=0, install the
 released `insignia.386` and `ntvdm64.386` in the installed Win95 `PATCH`
 directory and configure the existing Win95 installation for multitask
 payloads. Validate both choices, including launch, guest DOS execution and
 the intended host-payload behavior, while preserving original guest binaries.
 
-S14 implementation and complete host package are published for owner
+The earlier S14 implementation and complete host package were published for owner
 acceptance. Both choices were exercised in real isolated Win95 copies; the
 guest-only fixture terminates its own session after the DOS witness and does
 not establish normal Win95 shutdown. The original interactive Win3.1 Setup
@@ -106,15 +114,15 @@ through Win95, focus, geometry or the physical RDP route.
 
 [S10 evidence](../etc/evidence/m0-t481-s10-edit-mouse.md) records the input-chain investigation.
 
-S14 disposable workspace: `build/t481-s14`, owner S14; budget 8 hours,
+S15 disposable workspace: `build/t481-s15`, owner S15; budget 8 hours,
 20 GiB, 30-minute no-progress review. Stop and join owned processes, record
 results, and clean task-specific O:/tmp copies before retirement. The owner
 diagnostic package remains available for the close investigation.
 
 ## Current Technical Baseline
 
-The published 11-image host package and installed W31 addon pair are
-hash-verified. Win95 WIN.CMD points to the formal package. Original guest
+The published 11-image host package was hash-verified. The installed Win3.1
+addon selection depends on the selected profile. Win95 WIN.CMD points to the formal package. Original guest
 binaries remain immutable. See [S9 evidence](../etc/evidence/m0-t481-s9-softpc.md)
 for the 16 Full gates, skips, Win95 observer exit boundary and historical
 mirror-guard test limitation.

@@ -7,7 +7,8 @@ param(
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$InterruptObserver,
  [string]$RetirementDriver,
- [string]$InstanceDriver
+ [string]$InstanceDriver,
+ [string]$MouseDriver
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
@@ -27,6 +28,13 @@ New-Item -ItemType Directory $dest|Out-Null
 [IO.File]::WriteAllText("$dest/.t479-owner",$task)
 try {
 Get-ChildItem $source -Force|Where-Object Name -ne '.t479-owner'|Copy-Item -Destination $dest -Recurse
+if($MouseDriver){
+ $hash=(Get-FileHash -LiteralPath $MouseDriver).Hash
+ $mousePath=Join-Path $dest 'SYSTEM/MOUSE.DRV'
+ Copy-Item -LiteralPath $MouseDriver -Destination $mousePath -Force
+ if((Get-FileHash -LiteralPath $mousePath).Hash -ne $hash){throw 'Mouse driver staging mismatch'}
+ $hash | Set-Content "$task/mouse-driver.sha256"
+}
 foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {
  $enc=[Text.Encoding]::GetEncoding(28591)
  $s=$enc.GetString([IO.File]::ReadAllBytes($file.FullName))

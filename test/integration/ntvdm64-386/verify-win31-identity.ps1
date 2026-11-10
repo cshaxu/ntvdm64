@@ -8,6 +8,7 @@ param(
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$RetirementDriver,
  [string]$InstanceDriver,
+ [string]$MouseDriver,
  [switch]$ExplicitVmd,
  [switch]$RetireCommand,
  [switch]$ServiceLoss,
@@ -105,7 +106,7 @@ if($LocalDirectoryControl -and !$Continuation){throw 'Local directory control re
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-$copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -RetirementDriver $RetirementDriver -InstanceDriver $InstanceDriver
+$copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -RetirementDriver $RetirementDriver -InstanceDriver $InstanceDriver -MouseDriver $MouseDriver
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
