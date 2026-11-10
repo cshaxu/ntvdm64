@@ -145,6 +145,16 @@ as present. This identifies an actual host-to-guest enumeration path; it does
 not by itself establish which Setup operation requested I: or justify a
 production change to hide empty CD-ROM drives.
 
+An additional test-only relink logged only native file opens on I: without
+changing their return values. During original Setup it recorded an initial
+successful open of `\\??\\I:`, followed by four create attempts on
+`\\??\\I:\\SWAPTST5` and repeated opens of the root returning NTSTATUS
+`0xc0000013` (no media). The name is consistent with a swap-file probe, but
+the exact guest caller has not been identified. This establishes that the
+guest did request the empty drive; it does not prove why Setup selected that
+drive or that addressing it alone completes installation. The diagnostic
+image was not published, and its isolated installation copy was removed.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
