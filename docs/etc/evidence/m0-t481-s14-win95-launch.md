@@ -145,6 +145,11 @@ process-local map call returned success, a child `dir I:\` still reported the
 existing device as not ready. It is not a working isolation method; the system
 drive assignment and optical device were not modified.
 
+A separate short-lived test logon was also tried as a DOS-device isolation
+boundary. Creating a private shadow for I: failed with Windows error 5; the
+original user-session mapping remained `\\Device\\IsoCdRom0`. No real account
+credentials or network connection were used. The helper was removed.
+
 A subsequent isolated original-Setup run used the final published candidate
 and sent keys intended to deselect printer setup and hard-disk application
 scanning in the optional tasks dialog; no post-input screenshot proved both
