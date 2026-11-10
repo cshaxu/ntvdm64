@@ -186,3 +186,9 @@ The latter retires its own session and is not a normal-shutdown proof. Package
 hash-verified in both `assets/release` and `O:/winnt/system32`; the installed
 W31 addon pair was separately verified. Fresh original graphical Setup remains
 an acceptance gap and must not be represented as a successful complete rerun.
+
+The Program Manager group checker now uses released `GRP.EXE show` to validate
+each referenced `.GRP`, instead of accepting any existing file. A real empty
+StartUp group passed, while a corrupt group and a non-group file were rejected;
+all four groups in the owner's recovered O:/w31 also parsed. This improves the
+assertion for later runs, but it does not prove an original fresh installation.
