@@ -53,7 +53,8 @@ was not rerun. See [S14 evidence](../etc/evidence/m0-t481-s14-win95-launch.md).
 Owner observed that a fresh `O:/w31` installation has an empty Program Manager
 and unwanted multitask recovery records. S13 remains closed; these are S14
 acceptance failures. An empty-file read defect was fixed and verified through
-the real Win16 profile API; the exact original Setup call chain has not been
+the real Win16 profile API and an original Program Manager DDE group-creation
+baseline/fix comparison; the exact original Setup call chain has not been
 proved by a completed fresh installation. The owner's existing four groups
 were restored and the three verified obsolete records removed. The final
 11-image host package is published for renewed acceptance.

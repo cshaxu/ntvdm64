@@ -112,6 +112,19 @@ INF names a DDE group-creation path. It still does not prove which of those
 call sites writes each `[Groups]` entry or that the empty-read defect was the
 sole cause of the owner's empty groups; fresh-install acceptance remains open.
 
+An independent Win16 DDE client has now exercised the real installed Win3.1
+Program Manager in an isolated copy with an initially empty PROGMAN.INI. The
+same `[CreateGroup(...)]` transaction succeeded and produced a parseable GRP
+both before and after the zero-read fix. On the pre-fix host, however, the
+actual PROGMAN.INI remained zero bytes; on the fixed host, it contained the
+group reference. The fixed result also passed DOSONLY=1, and the Win16
+empty-profile/file-I/O witness was rerun. Source installation hashes were
+checked and the owned copies removed. This directly reproduces the observed
+empty-group symptom on the original Program Manager's DDE path and confirms
+that the fix repairs this path; it does not substitute for a complete fresh
+original Setup run. A PowerShell null/empty assertion in the prior profile
+test was also corrected so an empty file cannot satisfy the check.
+
 Review of the retained original-Setup captures narrows why that attempt was
 incomplete: copying reached 91%, then Setup displayed “Cannot read from drive
 I.” The probe accepted Cancel; Setup continued into its configuration screens

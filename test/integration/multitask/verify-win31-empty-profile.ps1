@@ -22,7 +22,8 @@ try {
  $r=0..8 | ForEach-Object {[BitConverter]::ToUInt16($result,2*$_)}
  if($r[0] -ne 1 -or $r[2] -ne 1 -or $r[4] -eq 0xffff -or $r[5] -ne 0 -or $r[6] -ne 4 -or $r[7] -ne 0 -or $r[8] -ne 4){throw "Unexpected profile or read/write status: $r"}
  foreach($name in 'PROGMAN.INI','PTEST.INI'){
-  if((Get-Content "$dest/$name" -Raw) -notmatch '(?im)^Group1=O:\\tmp\\q31\\MAIN\.GRP\s*$'){throw "Missing written group in $name"}
+  $contents=[IO.File]::ReadAllText("$dest/$name")
+  if(!$contents.Length -or $contents -notmatch '(?im)^Group1=O:\\tmp\\q31\\MAIN\.GRP\s*$'){throw "Missing written group in $name"}
   Copy-Item "$dest/$name" "$task/$name"
  }
  Copy-Item "$dest/PATCH/APITEST.BIN" "$task/APITEST.BIN"
