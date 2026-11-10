@@ -67,6 +67,10 @@ the added `demRead` bypass. A 1,060-file source-pin census is recorded in
 are pending review, not completed dispositions. The candidate has not yet
 completed the project-wide audit. The zero-length checkpoint passed Full and
 was published as package `4089b369-3dd9-419c-aee6-382052fee85e`.
+The next candidate also removes the local zero-length write bypass; 20 real
+DOS truncate/seek rounds and 20 guest VDMREDIR zero-byte pipe writes passed,
+along with all 16 selected Full gates. Package
+`b385aa0d-20bc-4de9-ad4e-3372a4e14bfc` was published to both host locations.
 
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The

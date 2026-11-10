@@ -307,27 +307,19 @@ LONG    lLoc;
 DWORD	dwErrCode;
 mvdm_guest_location bufferLocation;
 mvdm_guest_location_lease bufferLease;
-BOOL    bufferLeaseActive;
 
 #line 262
     hFile = GETHANDLE (getAX(),getBP());
-    bufferLeaseActive = FALSE;
-    lpBuf = NULL;
-
     /* DIVERGENCE(MVDM-HOST-DIV-231): preserve the original synchronous
-     * WriteFile order, but borrow its input bytes through one bounded read
-     * lease instead of exposing a native GetVDMAddr alias.  CX=0 has no
-     * source buffer in the original SetEndOfFile route. */
-    if (getCX() != 0) {
-        if (!mvdm_guest_location_set_real_mode(&bufferLocation, getDS(),
-            getDX()) || !mvdm_guest_location_acquire(&bufferLocation,
-            (DWORD)getCX(), GUEST_MEMORY_ACCESS_READ, &bufferLease)) {
-            SetLastError(ERROR_INVALID_ADDRESS);
-            goto writeFailureExit;
-        }
-        bufferLeaseActive = TRUE;
-        lpBuf = (LPVOID)bufferLease.bytes;
+     * WriteFile order with a bounded guest-memory lease. */
+    if (!mvdm_guest_location_set_real_mode(&bufferLocation, getDS(),
+        getDX()) || !mvdm_guest_location_acquire(&bufferLocation,
+        (DWORD)getCX(), GUEST_MEMORY_ACCESS_READ, &bufferLease)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        demClientError(hFile, (CHAR)-1);
+        return;
     }
+    lpBuf = (LPVOID)bufferLease.bytes;
 
 
     //
@@ -376,6 +368,8 @@ BOOL    bufferLeaseActive;
             goto writeFailureExit;
 #line 307
         }
+        (void)mvdm_guest_location_release(&bufferLease, FALSE);
+#line 308
         setCF (0);
         return;
     }
@@ -390,10 +384,7 @@ BOOL    bufferLeaseActive;
 	dwErrCode = GetLastError();
 	if(dwErrCode == ERROR_DISK_FULL) {
 
-	    if (bufferLeaseActive) {
-	        (void)mvdm_guest_location_release(&bufferLease, FALSE);
-	        bufferLeaseActive = FALSE;
-	    }
+	    (void)mvdm_guest_location_release(&bufferLease, FALSE);
 #line 322
 	    setCF(0);
 	    setAX(0);
@@ -403,20 +394,14 @@ BOOL    bufferLeaseActive;
 	SetLastError(dwErrCode);
 
 writeFailureExit:
-    if (bufferLeaseActive) {
-        (void)mvdm_guest_location_release(&bufferLease, FALSE);
-        bufferLeaseActive = FALSE;
-    }
+    (void)mvdm_guest_location_release(&bufferLease, FALSE);
 #line 330
 	demClientError(hFile, (CHAR)-1);
 	return ;
     }
 
 writeSuccessExit:
-    if (bufferLeaseActive) {
-        (void)mvdm_guest_location_release(&bufferLease, FALSE);
-        bufferLeaseActive = FALSE;
-    }
+    (void)mvdm_guest_location_release(&bufferLease, FALSE);
 #line 335
     setCF(0);
     setAX((USHORT)dwBytesWritten);

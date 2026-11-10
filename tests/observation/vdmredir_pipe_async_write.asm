@@ -16,6 +16,21 @@ start:
     jc failure
     mov [pipe_handle], ax
 
+    ; Synchronous zero-byte writes must reach the pipe rather than the
+    ; regular-file truncation path, and must release each guest lease.
+    mov byte [zero_writes], 20
+zero_write_again:
+    mov bx, [pipe_handle]
+    xor cx, cx
+    mov dx, write_data
+    mov ah, 40h
+    int 21h
+    jc close_failure
+    or ax, ax
+    jnz close_failure
+    dec byte [zero_writes]
+    jnz zero_write_again
+
     mov ax, result_bytes
     mov [request + 0], ax
     mov ax, ds
@@ -88,6 +103,7 @@ success_message db 'ASYNC-WRITE-OK', 13, 10
 success_message_end:
 pipe_handle     dw 0
 completed       db 0
+zero_writes     db 0
 result_bytes    dd 0
 result_error    dd 0
 request         times 20 db 0

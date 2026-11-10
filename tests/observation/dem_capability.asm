@@ -120,6 +120,35 @@ start:
     mov ax, 5C01h                  ; unlock region
     int 21h
     jc fail_close
+
+    mov byte [stage], 'Z'
+    mov byte [zero_write_rounds], 20
+zero_write_retry:
+    mov bx, [handle]
+    xor cx, cx
+    mov dx, 2
+    mov ax, 4200h                  ; seek to byte 2
+    int 21h
+    jc fail_close
+    mov bx, [handle]
+    xor cx, cx                     ; zero-length DOS write truncates
+    mov dx, payload
+    mov ah, 40h
+    int 21h
+    jc fail_close
+    mov bx, [handle]
+    xor cx, cx
+    xor dx, dx
+    mov ax, 4202h                  ; verify the new end position
+    int 21h
+    jc fail_close
+    cmp ax, 2
+    jne fail_close
+    or dx, dx
+    jnz fail_close
+    dec byte [zero_write_rounds]
+    jnz zero_write_retry
+
     mov bx, [handle]
     mov ah, 3Eh
     int 21h
@@ -273,6 +302,7 @@ print_hex_word:
 handle       dw 0
 share_handle dw 0
 stage        db 'A'
+zero_write_rounds db 0
 last_ax      dw 0
 file_name    db 'D33.TMP',0
 second_name  db 'D33B.TMP',0

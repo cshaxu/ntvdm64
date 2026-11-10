@@ -151,6 +151,29 @@ A preliminary source census covers 1,060 tracked `mvdm-host` and
 does not assess the behavior of any difference. The per-file source paths,
 hashes and pending review status are recorded in
 `artifacts/mvdm-audit/t481-s14-mirror-restoration-inventory.json`.
+
+Review of the adjacent original DEM write path found that the prior adapter
+introduced a second `CX=0` buffer path even though the shared lease now accepts
+zero bytes. The write path now acquires one read lease for all lengths, follows
+the original named-pipe and regular-file selection, and releases the lease on
+all exits, including the original zero-length `SetEndOfFile` route. Its mirror
+diff against the pinned `demhndl.c` decreased from +115/-42 to +100/-42 lines;
+the extra line restores original diagnostic line 308 after lease cleanup.
+The real DOS DEM fixture repeated seek-to-two, zero write and end-position
+verification 20 times, then completed its original file and FCB checks. A
+real DOS VDMREDIR fixture also completed 20 synchronous zero-byte pipe writes,
+then an asynchronous four-byte transfer; the peer received the expected bytes.
+The existing asynchronous read and NetAPI guest controls passed as well. A
+native local message-pipe control accepted zero-byte NULL and non-NULL buffers.
+Both DOSONLY
+Win3.1 empty-profile probes passed on the first candidate. Its NTVDM image and
+the Full candidate differ only in the PE and debug timestamps and the 16-byte
+package identity. All 16 selected Full gates passed on the latter; the external
+DOS4GW/Nesticle fixture was unavailable and skipped. After restoring `#line`,
+the raw NTVDM rebuild differs from the tested link only in its PE and debug
+timestamps. The owner permits skipping repeat tests for this exact case; the
+tested 11-image package `b385aa0d-20bc-4de9-ad4e-3372a4e14bfc` was published
+and hash-verified in both host locations; the installed W31 addon pair matched.
 The DDE witness was subsequently expanded to create all four groups named in
 the original new-install INF: Main, Accessories, Games and StartUp. The same
 four GRP files parsed in all three runs. With the pre-fix host, PROGMAN.INI
