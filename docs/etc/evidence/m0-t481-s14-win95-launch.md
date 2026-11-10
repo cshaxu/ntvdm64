@@ -189,6 +189,21 @@ indexed four groups with an initially empty profile in standard and enhanced
 modes with both DOSONLY settings. All four Windows sessions exited normally.
 This still does not substitute for a complete original interactive Setup run.
 
+An additional Win95 DOSONLY=0 shutdown witness reached `ExitWindows` after
+both test VMs retired. The observed root Run16 and NTVDM process exit codes
+were both 1; NTCON exited 0. Two earlier no-addon controls also returned 1,
+so this is not shown to be a new multitask regression. In a further isolated
+run, the existing default-off termination observer recorded `TerminateVDM`
+return address `005A7E0B` and the pinned NTVDM image base was `00450000`.
+The tested image map and disassembly identify RVA `00157E0B` as the return
+immediately after `cmdGetNextCmd` copies `VDMInfo.ErrorCode` into
+`VdmExitCode` and calls `TerminateVDM`. The original command code populates
+that field from the guest COMMAND return record. This establishes the
+original host return path in this run; it does not establish why the Win95
+guest supplied 1, or that 1 represents normal Windows shutdown. The Win95
+identity fixture now explicitly prints the observed root exit code instead
+of leaving it implicit; a nonzero exit is not claimed as normal shutdown.
+
 After delivery, the verified external DOS4GW/Nesticle fixture was located
 and run separately against that same package. In a reduced inherited
 environment, NESticle remained running with a visible graphics window; the

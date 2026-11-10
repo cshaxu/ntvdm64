@@ -75,6 +75,10 @@ That package was subsequently rechecked through both real Win95 launch modes
 and all four Win3.1 Program Manager DDE mode combinations. The Win95
 guest-only witness still retires its own session; a fresh original Win3.1
 Setup remains unverified.
+For DOSONLY=0, the root Run16 and NTVDM both returned 1 after the guest
+ExitWindows witness. A mapped call-site trace identifies the original
+`cmdGetNextCmd` return path; why the guest supplied 1 remains unproved, so
+this is not recorded as normal-shutdown acceptance.
 
 Known baseline: the Win95 dual-editor test uses guest USER synthetic mouse
 events and therefore does not prove the owner's physical mouse route. The

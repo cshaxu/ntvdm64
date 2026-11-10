@@ -255,6 +255,9 @@ try {
  }
  $observation=Get-Content "$task/runtime/observer.txt" -Raw
  if($observation -notmatch '(?m)^result=exited\r?$'){throw 'Win95 observer did not see exit'}
+ $exitLine=[regex]::Match($observation,'(?m)^exit=0x([0-9A-Fa-f]{8})\r?$')
+ if(!$exitLine.Success){throw 'Win95 launcher exit code was not recorded'}
+ Write-Host ("Win95 launcher exit=0x{0}; nonzero is not a normal-shutdown assertion" -f $exitLine.Groups[1].Value.ToUpperInvariant())
  if($ShutdownWitness){
   if(!(Test-Path "$dest/PATCH/SHUT.BIN")){throw 'Controller did not reach ExitWindows'}
   Copy-Item "$dest/PATCH/SHUT.BIN" "$task/runtime/SHUT.BIN"
