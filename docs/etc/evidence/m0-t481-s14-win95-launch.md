@@ -113,6 +113,15 @@ process-local map call returned success, a child `dir I:\` still reported the
 existing device as not ready. It is not a working isolation method; the system
 drive assignment and optical device were not modified.
 
+A subsequent isolated original-Setup run used the final published candidate
+and sent keys intended to deselect printer setup and hard-disk application
+scanning in the optional tasks dialog; no post-input screenshot proved both
+checkbox states. Setup still displayed the same `Cannot read from drive
+I` error during file copying; the test controller selected Cancel and the
+result again lacked WIN.COM and program groups despite exit 0. Disabling those
+key sequence is therefore insufficient. The owned O:/tmp/qst copy and the
+isolated runtime were cleaned after the test.
+
 The owner also rejected MULTITASK.HASH, MULTITASK.INI.BAK and
 MULTITASK.INI.NEW in the installed PATCH directory. The configuration and
 driver hashes were checked against those records and released drivers, then
