@@ -174,6 +174,14 @@ as present. This identifies an actual host-to-guest enumeration path; it does
 not by itself establish which Setup operation requested I: or justify a
 production change to hide empty CD-ROM drives.
 
+Source tracing additionally found that original `demIoctlChangeable` reports
+CD-ROM as fixed for DOS IOCTL 4408, while IOCTL 4409 reports it as remote;
+the original guest dispatch forwards both requests to that handler. This
+explains a possible distinction an installer could observe, but there is no
+evidence yet that Setup calls either function before its SWAPTST5 probe. An
+isolated DOS IOCTL witness timed out before producing output; it is not a
+passing runtime check and does not justify changing those original semantics.
+
 An additional test-only relink logged only native file opens on I: without
 changing their return values. During original Setup it recorded an initial
 successful open of `\\??\\I:`, followed by four create attempts on
