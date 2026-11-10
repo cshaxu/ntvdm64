@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T481 S11 — graceful console frontend closure.**
-S9 was formally delivered; S10 recorded the owner's successful diagnostic
-manual run, with the limitations in [S10 evidence](../etc/evidence/m0-t481-s10-edit-mouse.md).
+**Active: M0 T481 S11 — Win3.1/Win95 batch-launched PE32 investigation.**
+S10 completed the owner's acceptance and full delivery; see
+[S10 evidence](../etc/evidence/m0-t481-s10-edit-mouse.md).
 
 ## Active Packet
 
@@ -12,23 +12,24 @@ manual run, with the limitations in [S10 evidence](../etc/evidence/m0-t481-s10-e
 | --- | --- |
 | Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md). |
 | Identifier Mode | M0 T481 S11, Ordinary Mode. |
-| Admission And Approval | Owner requested a new S to investigate the system error shown when the console window is closed; automatic S continuation was approved. |
-| Objective | Reproduce and attribute the pipe-disconnection error on frontend window closure, then make the owned lifecycle cleanup graceful where supported by evidence. |
+| Admission And Approval | Owner explicitly ordered batch startup as S11 and console close investigation as S12. |
+| Objective | Reproduce and attribute batch-launched PE32 failures in Win3.1 and Win95 and repair the evidenced owned boundary without modifying original guest binaries. |
 | Non-goals | Do not modify or rebuild original guest images; do not change unrelated guest or 486 behavior; do not use Computer Use. |
-| Reference Baseline | Published package 90b4ec7f-bdf0-4011-8b2d-af156031f27d, commit 41fd60439, released multitask drivers; owner observed the error in the instrumented test package. |
-| Files And ABI Surface | As evidence requires: NTCON, worker-base, NTSRV, NTVDM frontend and lifecycle boundaries, related tests and exception registration. |
+| Reference Baseline | Published package e09695f6-40f3-453d-8b96-e732d1050f4d; historical Win95 DOS EXEC evidence records CONAGENT DOS version mismatch and separate missing batch dispatch. |
+| Files And ABI Surface | As evidence requires: original DOS execution and version handling, authored multitask bridge, owned host adapters, relevant tests and exception registration. |
 | Applicable Rules | Execution, source policy, guest immutability, NTSRV lifecycle ownership, source-first and minimal implementation. |
-| Verification | Reproduce closure using the existing probe facilities; trace the actual error and ordering; distinguish expected retirement from unexpected disconnection; run focused and applicable Full gates. |
-| Expected Markers | Closing the frontend retires the owned session without a spurious system error, while genuine errors remain visible and lifecycle ownership is preserved. |
+| Verification | Reproduce both guest versions using isolated fixtures; distinguish DOS version handling, actual executable dispatch and output; run focused and applicable Full gates. |
+| Expected Markers | Batch-launched native executables produce correct output and result in Win3.1 and Win95; ordinary DOS and interactive paths remain correct. |
 | Asset Needs | Published host package, authored released drivers, existing Win95 copy and private probe infrastructure; O:/tmp task copies cleaned after use. |
-| Reporting Requirements | Identify the emitting component, actual failure and closure order, exact published artifacts and unverified boundaries. |
+| Reporting Requirements | Identify each actual failing call chain, supported behavior, exact published artifacts and unverified boundaries. |
 | Stop Conditions | Original guest mutation or unapproved observable semantic retreat. |
 | Exit Criteria | Reproduced defect repaired or causally disposed, focused and applicable regressions passed, reviewed coherent package published, committed and pushed; remaining acceptance handed onward. |
-| Original Owner Request | Investigate graceful cleanup after the console window X produced a pipe-disconnection system error. |
-| Similar-Issue Sweep | Normal frontend close, managed console close, worker close, backend death and genuine pipe errors. |
+| Original Owner Request | Investigate Win3.1 and Win95 batch-launched PE32 separately, before the console close error. |
+| Similar-Issue Sweep | Batch and interactive launch, internal commands, native CUI and guest DOS executables. |
 
-S12 retains the previously planned Win3.1 and Win95 batch-launched PE32
-investigation. S13 retains the other multitask gaps, normal Win95 shutdown
+S12 investigates the owner-observed pipe-disconnection dialog on console window
+close. S13 retains
+the other multitask gaps, normal Win95 shutdown
 evidence and integrated acceptance. These obligations are not waived.
 The previously observed direct-start large inherited-environment boundary
 remains recorded in [S9 direct startup](../etc/evidence/m0-t481-s9-direct-startup.md);
@@ -48,7 +49,7 @@ through Win95, focus, geometry or the physical RDP route.
 S11 disposable workspace: `build/t481-s11`, owner S11; budget 8 hours,
 20 GiB, 30-minute no-progress review. Stop and join owned processes, record
 results, and clean task-specific O:/tmp copies before retirement. The owner
-diagnostic package remains available while investigating its close failure.
+diagnostic package remains available for the subsequent close investigation.
 
 ## Current Technical Baseline
 

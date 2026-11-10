@@ -2253,3 +2253,8 @@ The owner then requested investigation of a pipe-disconnection system-error
 dialog after closing the console window. This is admitted as S11; the former
 batch-PE32 S11 and integrated-acceptance S12 move to S12 and S13 respectively,
 without removing their obligations. CURRENT owns the active packet.
+
+Owner correction: S10 required complete delivery before proceeding. S11 is
+the Win3.1/Win95 batch-launched PE32 investigation; S12 is the console-window
+close error; S13 retains integrated acceptance. Earlier sequence text above is
+superseded by this correction.

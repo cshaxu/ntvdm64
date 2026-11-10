@@ -91,3 +91,19 @@ difference: ten images have identical raw bytes in every section except
 and `.reloc`. Section equality is stronger than a timestamp comparison for
 the ten images, but does not establish equivalence of the instrumented NTVDM
 or prove which executable owned the recorded callbacks.
+
+## S10 full delivery
+
+After the owner required a fresh complete delivery, the x86 and x64 cached
+configure/builds passed and the actual nested product link targets were built.
+A new 11-image package `e09695f6-40f3-453d-8b96-e732d1050f4d` was staged
+from those inputs. Its selected Full run passed 16 gates with zero failures;
+the external DOS4GW/Nesticle fixture was unavailable and explicitly skipped.
+The first Full invocation stopped before any gate because unstamped build
+inputs did not match the newly stamped package; the consistent-input rerun
+passed. The complete tested package was published to `assets/release` and
+`O:/winnt/system32`, with all 11 destination hashes verified. Both installed
+W31 addon hashes matched their released files and its SYSTEM.INI was unchanged.
+Win95 normal shutdown and the separately observed console-close error remain
+subsequent work; the diagnostic owner's success does not prove why the earlier
+EDIT.EXE observation differed.
