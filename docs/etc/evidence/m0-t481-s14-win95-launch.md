@@ -188,6 +188,17 @@ path and a minimized process environment: it exited 0 after asserting that
 its PASS output. This confirms the runtime values but still does not establish
 which IOCTLs the original Setup program actually calls.
 
+An independent test-only hook was then positively controlled with a DOS
+witness: it observed both IOCTL 4408 and 4409 on I: and their expected
+results. During the real SETUP.CMD isolated run, the same hook recorded five
+I: 4409 calls returning DX=0x1000, followed by one 4408 call returning AX=1;
+the empty-drive error was also captured. The hook was process-wide, so these
+records do not identify the precise guest caller, and this run did not log a
+SWAPTST5 create through the instrumented NtCreateFile entry. The original
+installation remained incomplete and the real script returned 5. This is
+evidence that both IOCTLs are reached during installation, not proof that
+either caused the error. The diagnostic image was not published.
+
 An additional test-only relink logged only native file opens on I: without
 changing their return values. During original Setup it recorded an initial
 successful open of `\\??\\I:`, followed by four create attempts on
