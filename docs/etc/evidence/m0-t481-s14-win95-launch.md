@@ -139,7 +139,7 @@ unverified. The wider mirror-adaptation audit is not complete.
 
 The follow-up candidate passed cached x86/x64 builds, actual NTVDM relink,
 the session and redirector fixtures, and all 16 selected Full gates. The
-external DOS4GW/Nesticle fixture was unavailable and skipped. All 11 images
+external DOS4GW/Nesticle fixture was not supplied and was skipped. All 11 images
 of package `4089b369-3dd9-419c-aee6-382052fee85e` were published and
 hash-verified in both release locations; the installed Win3.1 driver pair
 was also verified. Package identity stamping changes image hashes from the
@@ -169,11 +169,20 @@ Both DOSONLY
 Win3.1 empty-profile probes passed on the first candidate. Its NTVDM image and
 the Full candidate differ only in the PE and debug timestamps and the 16-byte
 package identity. All 16 selected Full gates passed on the latter; the external
-DOS4GW/Nesticle fixture was unavailable and skipped. After restoring `#line`,
+DOS4GW/Nesticle fixture was not supplied and was skipped. After restoring `#line`,
 the raw NTVDM rebuild differs from the tested link only in its PE and debug
 timestamps. The owner permits skipping repeat tests for this exact case; the
 tested 11-image package `b385aa0d-20bc-4de9-ad4e-3372a4e14bfc` was published
 and hash-verified in both host locations; the installed W31 addon pair matched.
+
+After delivery, the verified external DOS4GW/Nesticle fixture was located
+and run separately against that same package. In a reduced inherited
+environment, NESticle remained running with a visible graphics window; the
+test does not assert gameplay or pixels. With the agent's inherited environment,
+the separate test encountered a visible 16-bit subsystem error dialog. A
+repeat captured illegal instruction bytes `63 68 61 69 6e`, consistent with
+the recorded large-environment failure, but no live environment-block trace
+was captured for this run and the cause is not independently proved.
 The DDE witness was subsequently expanded to create all four groups named in
 the original new-install INF: Main, Accessories, Games and StartUp. The same
 four GRP files parsed in all three runs. With the pre-fix host, PROGMAN.INI
@@ -314,7 +323,7 @@ setup-script change now removes them after verifying the installed drivers
 and configuration; its repeat-install and both mode checks passed.
 
 The final cached x86 and x64 build and link completed. Full passed all 16
-selected gates with the external DOS4GW/Nesticle fixture unavailable. The
+selected gates with the external DOS4GW/Nesticle fixture not supplied. The
 final targeted package passed the empty-profile probe in both DOSONLY modes,
 all four Win3.1 mode/startup cases with four real group references (using a
 Setup shim), Win95 two-VM native command checks, and a guest-only DOS witness.
