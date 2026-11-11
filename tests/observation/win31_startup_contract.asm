@@ -84,6 +84,92 @@ api 1,166                        ; WinExec
 cmp ax,32
 jb fatal
 %ifdef W31_SCHEDULING_CHECK
+%ifdef W31_SCHEDULING_INTERACTIVE
+; Use the interactive COMMAND prompt, not COMMAND /c's SingleCom path.
+.schedule_focus:
+api 1,29
+push word 0
+push word 0
+push ds
+push word schedule_title-data
+api 2,50
+test ax,ax
+jz .schedule_focus
+mov [schedule_window-data],ax
+push ax
+api 2,44
+push word [schedule_window-data]
+api 2,45
+push word [schedule_window-data]
+api 2,59
+call .schedule_settle
+api 2,60
+cmp ax,[schedule_window-data]
+jne .schedule_focus
+mov si,schedule_keys-data
+call .schedule_type
+jmp .schedule_wait
+.schedule_type:
+lodsw
+test ax,ax
+jz .schedule_type_done
+pushad
+mov bx,ax
+shr bx,8
+and ax,0xff
+push ax
+push bx
+xor si,si
+xor di,di
+api 2,289                       ; register-based Win16 USER keybd_event
+pop bx
+pop ax
+or ah,0x80
+xor si,si
+xor di,di
+api 2,289
+popad
+call .schedule_settle
+jmp .schedule_type
+.schedule_type_done:
+ret
+.schedule_settle:
+pushad
+push word 0
+push word 0
+push word 100
+push word 0
+push word 0
+api 2,10                        ; SetTimer; pump messages between test keys
+test ax,ax
+jz fatal
+mov [schedule_timer-data],ax
+.schedule_message:
+push ds
+push word schedule_message-data
+push word 0
+push word 0
+push word 0
+api 2,108
+test ax,ax
+jz fatal
+cmp word [schedule_message-data+2],0x113
+jne .schedule_dispatch
+mov ax,[schedule_message-data+4]
+cmp ax,[schedule_timer-data]
+je .schedule_timer_done
+.schedule_dispatch:
+push ds
+push word schedule_message-data
+api 2,114
+jmp .schedule_message
+.schedule_timer_done:
+push word 0
+push word [schedule_timer-data]
+api 2,12
+popad
+ret
+%endif
 .schedule_wait:
 api 1,29                         ; Independent Win16 task must get CPU time.
 call .heartbeat
@@ -96,6 +182,10 @@ je .schedule_wait
 push ax
 api 1,81
 call .heartbeat                 ; Post-child progress is mandatory too.
+%ifdef W31_SCHEDULING_INTERACTIVE
+mov si,schedule_exit_keys-data
+call .schedule_type
+%endif
 jmp .schedule_complete
 .heartbeat:
 push ds
@@ -366,6 +456,14 @@ heartbeat_name: db W31_INSTALL,'\PATCH\SCHED.HB',0
 schedule_done: db W31_INSTALL,'\PATCH\SCHED.END',0
 heartbeat_file: dw 0
 heartbeat_byte: db 'H'
+%ifdef W31_SCHEDULING_INTERACTIVE
+schedule_title: db 'Scheduling prompt',0
+schedule_window: dw 0
+schedule_timer: dw 0
+schedule_message: times 18 db 0
+schedule_keys: dw 0x1f53,0x2e43,0x2348,0x1245,0x2044,0x34be,0x2e43,0x184f,0x324d,0x1c0d,0
+schedule_exit_keys: dw 0x1245,0x2d58,0x1749,0x1454,0x1c0d,0
+%endif
 %endif
 %ifdef W31_PROMPT_PAIR
 second_prompt: db W31_INSTALL,'\DOSPAIR.PIF',0

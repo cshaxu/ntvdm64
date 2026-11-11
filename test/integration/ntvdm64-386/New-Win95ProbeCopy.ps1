@@ -5,6 +5,7 @@ param(
  [Parameter(Mandatory)][string]$InstallRoot,
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$InstanceDriver,
+ [string]$MouseDriver,
  [string]$InterruptObserver
 )
 $ErrorActionPreference='Stop'
@@ -56,6 +57,21 @@ foreach($file in Get-Item "$dest/PATCH/WIN.PIF"){
 foreach($file in Get-ChildItem $dest -Filter '*.GRP'){
  & "$repo/assets/release/GRP.EXE" replace-root $file.FullName --root $dest | Out-Host
  if($LASTEXITCODE){throw 'GRP rebase failed'}
+}
+if($MouseDriver){
+ $enc=[Text.Encoding]::GetEncoding(28591)
+ $MouseDriver=(Resolve-Path -LiteralPath $MouseDriver).Path
+# The source installation may predate the accepted mouse driver. Exercise the
+# asset installed by APPLY.CMD, not an unrelated historical installation byte.
+$iniText=$enc.GetString([IO.File]::ReadAllBytes("$dest/SYSTEM.INI"))
+$boot=[regex]::Match($iniText,'(?ims)^\[boot\][^\r\n]*\r?\n(.*?)(?=^\[|\z)').Groups[1].Value
+$mouse=[regex]::Matches($boot,'(?im)^mouse\.drv\s*=\s*([^\r\n]+)')
+if($mouse.Count -ne 1 -or $mouse[0].Groups[1].Value.Trim() -ine 'mouse.drv'){
+ throw 'Prepared mouse fixture requires the prepared SYSTEM/MOUSE.DRV boot entry'
+}
+Copy-Item $MouseDriver "$dest/SYSTEM/MOUSE.DRV"
+@{source=(Get-FileHash "$source/SYSTEM/MOUSE.DRV").Hash;tested=(Get-FileHash "$dest/SYSTEM/MOUSE.DRV").Hash;asset=(Get-FileHash $MouseDriver).Hash}|ConvertTo-Json|Set-Content "$task/mouse-driver.json"
+
 }
 $system="$dest/SYSTEM.INI"
 $enc=[Text.Encoding]::GetEncoding(28591)

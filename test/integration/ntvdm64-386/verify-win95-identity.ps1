@@ -48,7 +48,7 @@ if($InstallViaLaunch){
  $system="$dest/SYSTEM.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($system))
  $text=[regex]::Replace($text,'(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)\s*\r*\n','')
  [IO.File]::WriteAllBytes($system,$enc.GetBytes($text))
- foreach($name in 'CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
+ foreach($name in 'PIF.EXE','CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
   $item="$dest/PATCH/$name";if(Test-Path -LiteralPath $item){Remove-Item -LiteralPath $item}
  }
  if(Test-Path "$dest/PATCH/TEMP"){Remove-Item -LiteralPath "$dest/PATCH/TEMP"}
@@ -57,6 +57,14 @@ if($InstallViaLaunch){
  $savedPath=$env:PATH;$env:PATH="$PackageRoot/system32;$savedPath"
  try {& cmd.exe /d /c "`"$repo/tools/win95-launch/APPLY.CMD`" < `"$task/launch-input.txt`"" *> "$task/launch-apply.log";if($LASTEXITCODE){throw 'Win95 launch preparation failed'}}
  finally {$env:PATH=$savedPath}
+ $selector=Join-Path $task 'selector';New-Item -ItemType Directory $selector|Out-Null
+ [IO.File]::WriteAllText("$selector/run16.cmd","@echo off`r`nexit /b 0`r`n")
+ [IO.File]::WriteAllText("$task/select-input.txt","0`r`n1`r`n")
+ $selectPath=$env:PATH;$env:PATH="$selector;$selectPath"
+ try {
+  & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/select-input.txt`"" *> "$task/select-launch.log"
+  if($LASTEXITCODE){throw 'Dynamic Win95 profile selection failed'}
+ } finally {$env:PATH=$selectPath}
  foreach($name in 'INSIGNIA.386','NTVDM64.386'){
   if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Installed driver differs: $name"}
  }

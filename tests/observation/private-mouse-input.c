@@ -30,7 +30,7 @@ LRESULT CALLBACK MouseInputHook(int code, WPARAM removed, LPARAM value)
             }
             accepted=0;message->message=WM_NULL;
         }
-        if (message->message == WM_APP + 0x5f0) {
+        if (message->message == WM_APP + 0x5f0 || message->message == WM_APP + 0x5f2) {
             /* Pinned win32/component.c context starts with kvm_window*. */
             kvm_window **context = (kvm_window **)GetWindowLongPtrW(message->hwnd, GWLP_USERDATA);
             if (context && *context) {
@@ -43,10 +43,28 @@ LRESULT CALLBACK MouseInputHook(int code, WPARAM removed, LPARAM value)
                 event.data.mouse.delta_x = (SHORT)LOWORD(message->lParam);
                 event.data.mouse.delta_y = (SHORT)HIWORD(message->lParam);
                 event.data.mouse.buttons = (lib_u32)message->wParam;
+                if (message->message == WM_APP + 0x5f2) {
+                    event.type = KVM_EVENT_KEY;
+                    event.data.key.scan_code = LOWORD(message->lParam);
+                    event.data.key.key = (base_key)message->wParam;
+                    event.data.key.flags = 0;
+                    event.data.key.pressed = ((ULONG_PTR)message->lParam >> 16) & 1u;
+                    event.data.key.modifiers = (lib_u8)((ULONG_PTR)message->lParam >> 24);
+                } else
                 if (message->wParam == 0x80000000u)
                     event.type = KVM_EVENT_SOURCE_RETIRED;
                 if (component->input_sink &&
-                    component->input_sink(component->input_context, &event))++accepted;
+                    component->input_sink(component->input_context, &event)) {
+                    WCHAR name[96];HANDLE delivered;
+                    ++accepted;
+                    /* A single input can retire this HWND before a later
+                     * acknowledgment message. Confirm acceptance here. The
+                     * existing burst observer still uses its count barrier. */
+                    swprintf_s(name,96,L"Local\\NTVDM-Mouse-Probe-%lu-%lu-Input",
+                        GetCurrentProcessId(),GetCurrentThreadId());
+                    delivered=OpenEventW(EVENT_MODIFY_STATE,FALSE,name);
+                    if(delivered){SetEvent(delivered);CloseHandle(delivered);}
+                }
             }
             message->message = WM_NULL;
         }

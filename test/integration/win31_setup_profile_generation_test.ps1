@@ -41,8 +41,8 @@ try {
   if(((Get-Content "$dest/CONFIG.NT" -Raw) -match '(?im)^dosonly\s*$') -ne ($dos -eq 1)){throw 'DOSONLY mismatch'}
   $actual=[IO.File]::ReadAllText("$install/SYSTEM.INI")
   foreach($n in 'INSIGNIA.386','NTVDM64.386'){
-   $prefix=if($drivers){''}else{';'}
-   if(@([regex]::Matches($actual,[regex]::Escape($n))).Count -ne 1 -or !$actual.Contains("${prefix}device=$install\PATCH\$n")){throw "Duplicate/wrong driver state $n"}
+   $prefix=if(($mode -eq 2) -and ($n -eq 'INSIGNIA.386' -or $drivers)){''}else{';'}
+   if(@([regex]::Matches($actual,[regex]::Escape($n))).Count -ne 1 -or ![regex]::IsMatch($actual,'(?m)^'+[regex]::Escape("${prefix}device=$install\PATCH\$n")+'\r?$')){throw "Duplicate/wrong driver state $n"}
   }
   $unrelated=[regex]::Replace($actual,'(?im)^;?device=.*(?:INSIGNIA|NTVDM64)\.386\r?\n','')
   if($unrelated.Replace("`r`n","`n") -cne $ini.Replace("`r`n","`n")){throw 'Unrelated INI changed'}

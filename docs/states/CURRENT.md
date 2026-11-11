@@ -2,8 +2,31 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T481 S16 is closed with owner acceptance.
-T481 remains open; no next S is admitted by this closure.
+**No active M/T/S packet.** T481 S17 is closed.
+T481 remains open. No next S is admitted by this closure.
+
+## S17 closure
+
+Owner authorized closure with Win95 exit code 1 registered as an unresolved
+boundary after exit, natural process retirement and restart verification.
+All four profiles passed both startup and restart (eight automatic exits);
+no package processes remained before failure cleanup. Actual exit 1 is preserved.
+Private-desktop editor interaction/read/modify/save/close, applicable mode
+transitions, DOS reentry and native scheduling have separate passing evidence.
+These probes do not certify physical RDP Raw Input.
+
+Cached x86/x64 builds and all 16 selected Full gates passed. DOS4GW/NESticle
+was skipped for its unavailable external fixture, not counted as passed.
+The complete 11-image package 7b97a73d-08ce-4f0a-8a31-ed3519218703 is published
+and hash-verified in assets/release and O:/winnt/system32. Updated WIN.CMD
+launchers are installed in O:/w31/PATCH and O:/WINDOWS/PATCH; their addons
+match assets. Repository tools are included in this delivery. winnt.zip and
+original guest binaries are unchanged; no new mirror diff was introduced.
+
+See [S17 verification and closure](../etc/evidence/m0-t481-s17-win95-four-profiles.md#final-verification-and-closure).
+The owner confirmed dos_identity_child.asm and dos_identity_observed.c belong
+to another session; preserve them outside this delivery. Any further changes
+from that research also remain separately owned.
 
 ## S16 accepted closure
 

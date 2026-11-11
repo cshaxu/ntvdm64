@@ -14,10 +14,13 @@ param(
     [switch]$DirectShortPath,
     [switch]$DirectPif,
     [switch]$PreparedProfile,
+    [switch]$Windows95,
+    [switch]$Win95ExitBoundary,
     [string]$MouseProbeRoot,
     [switch]$FullscreenKey,
     [switch]$PromptPair,
     [ValidateSet('blocking','nonblocking')][string]$Scheduling,
+    [string]$ScheduledRun16Command,
     [switch]$CaptureWindows,
     [string]$SurfaceObserver,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
@@ -26,6 +29,8 @@ param(
     [switch]$AllowUserInstallation
 )
 $ErrorActionPreference = 'Stop'
+if($Win95ExitBoundary -and !$Windows95){throw 'Exit-code boundary applies only to Win95'}
+if($Win95ExitBoundary -and $env:MVDM_OBSERVER_OWN_JOB){throw 'Natural retirement requires an observer without forced job cleanup'}
 if([bool]$RegistrySnapshotMonitor -ne [bool]$RegistrySnapshotMarker){throw 'Registry snapshot requires both monitor and marker'}
 if($ConsoleClose -and !$WorkerCloseMonitor){throw 'Console close requires management monitor'}
 if($WorkerCloseMonitor -and !$ServiceLossMarkers){throw 'Worker close requires native readiness markers'}
@@ -71,9 +76,10 @@ if ($Cases -contains '386-dosonly0' -or $Cases -contains '386-dosonly1') {
         throw 'Enhanced-mode test copy must not access a physical disk or permanent swap file'
     }
 }
+if($Windows95 -and (!$PreparedProfile -or @($Cases | Where-Object { !$_.StartsWith('386-') }).Count)){throw 'Win95 requires a prepared enhanced profile'}
 if($PreparedProfile -and $Cases.Count -ne 1){throw 'Prepared profile requires one exact case'}
 $pifCases=@()
-if($PreparedProfile){ $pifCases+= ,@('WIN.PIF',$(if($Cases[0].StartsWith('std-')){'/S'}else{'/3'})) }else{ $pifCases=@(@('WINSTD.PIF','/S'),@('WIN386.PIF','/3')) }
+if($PreparedProfile){ $pifCases+= ,@('WIN.PIF',$(if($Windows95){''}elseif($Cases[0].StartsWith('std-')){'/S'}else{'/3'})) }else{ $pifCases=@(@('WINSTD.PIF','/S'),@('WIN386.PIF','/3')) }
 foreach ($case in $pifCases) {
     $pif = Join-Path $patch $case[0]
     $shown = & (Join-Path $repo 'assets/release/PIF.EXE') show $pif
@@ -160,6 +166,7 @@ try {
         $report=Join-Path $output "$($case.Name).observer.txt"
         $mouseStage=0
         $scheduleSamples=@(); $scheduleStart=$null; $scheduleReleased=$false
+        $scheduledRun16=@()
         $captureCount=0
         try {
             $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
@@ -211,6 +218,12 @@ try {
                 if($Scheduling -and !$scheduleReleased -and (Test-Path "$patch/SCHED.RUN")) {
                     if(Test-Path "$patch/SCHED.END"){throw 'Child ended before test release'}
                     $heartbeat=Get-Item "$patch/SCHED.HB" -ErrorAction Stop
+                    if($ScheduledRun16Command -and !$scheduledRun16.Count){
+                        $scheduledRun16=@(Get-CimInstance Win32_Process -Filter "Name='run16.exe'" |
+                            Where-Object {$_.ExecutablePath -ieq "$stage\system32\run16.exe" -and
+                                $_.CommandLine -like "*$ScheduledRun16Command*"} |
+                            Select-Object ProcessId,ParentProcessId,CommandLine)
+                    }
                     if(!$scheduleStart){$scheduleStart=[DateTime]::UtcNow}
                     $scheduleSamples+= [ordered]@{ms=([DateTime]::UtcNow-$scheduleStart).TotalMilliseconds;bytes=$heartbeat.Length}
                     if($scheduleSamples[-1].ms -ge 3000) {
@@ -324,13 +337,33 @@ try {
             if((Get-Content -LiteralPath $report -Raw) -match '(?m)^result=timeout\r?$') {
                 throw 'Runtime observer timed out'
             }
+            if($Win95ExitBoundary){
+                # Observe natural retirement before the failure-cleanup helper.
+                $retired=@()
+                foreach($row in @(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $scope.Paths})){
+                    try {$owned=[Diagnostics.Process]::GetProcessById($row.ProcessId)}catch [ArgumentException]{continue}
+                    try {
+                        if(!$owned.HasExited -and ($owned.MainModule.FileName -ine $row.ExecutablePath -or
+                            [Math]::Abs(($owned.StartTime.ToUniversalTime()-$row.CreationDate.ToUniversalTime()).Ticks) -gt 10)){
+                            throw 'Process identity changed during retirement observation'
+                        }
+                        if(!$owned.WaitForExit(10000)){throw "Owned process did not retire naturally: $($row.ProcessId)"}
+                        $retired+=@{pid=$row.ProcessId;exit=$owned.ExitCode}
+                    } finally {$owned.Dispose()}
+                }
+                $survivors=@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $scope.Paths})
+                @{beforeScopeCleanup=$true;retired=$retired;survivors=@($survivors | ForEach-Object {$_.ProcessId})} |
+                    ConvertTo-Json -Depth 4 | Set-Content "$output/$($case.Name).natural-retirement.json"
+                if($survivors.Count){throw 'Owned process survived natural retirement'}
+            }
             if($Scheduling) {
                 $after=if(Test-Path "$patch/SCHED.HB"){(Get-Item "$patch/SCHED.HB").Length}else{0}
                 $progress=$scheduleSamples.Count -ge 3 -and $scheduleSamples[-1].bytes -gt $scheduleSamples[0].bytes
                 $schedulePass=$scheduleReleased -and (Test-Path "$patch/SCHED.END") -and
                     $scheduleSamples[0].bytes -gt 0 -and $after -gt $scheduleSamples[-1].bytes -and
-                    ($progress -eq ($Scheduling -eq 'nonblocking'))
-                [ordered]@{expected=$Scheduling; samples=$scheduleSamples;after=$after;released=$scheduleReleased;passed=$schedulePass} |
+                    ($progress -eq ($Scheduling -eq 'nonblocking')) -and
+                    (!$ScheduledRun16Command -or $scheduledRun16.Count -gt 0)
+                [ordered]@{expected=$Scheduling; samples=$scheduleSamples;after=$after;released=$scheduleReleased;run16=$scheduledRun16;passed=$schedulePass} |
                     ConvertTo-Json -Depth 5 | Set-Content "$output/$($case.Name).scheduling.json"
                 if(!$schedulePass){throw "Guest scheduling contract failed: $Scheduling"}
             }
@@ -360,6 +393,15 @@ try {
             }
         }
         finally {
+            if($Scheduling){
+              try {
+                [ordered]@{samples=$scheduleSamples;released=$scheduleReleased;run16=$scheduledRun16;error=$errorText} |
+                    ConvertTo-Json -Depth 5 | Set-Content "$output/$($case.Name).scheduling-observation.json"
+                foreach($marker in 'SCHED.RUN','SCHED.END','SCHED.HB','EXEC.TXT'){
+                    if(Test-Path "$patch/$marker"){Copy-Item "$patch/$marker" "$output/$($case.Name).$marker"}
+                }
+              } catch { Write-Warning "Scheduling failure capture: $_" }
+            }
             if($process){if(!$process.HasExited){$process.Kill();[void]$process.WaitForExit(5000)};$process.Dispose()}
             if($scope){Stop-IsolatedPackageScope $scope}
             if($stage){Remove-PhysicalRuntimeStage $stage}
@@ -385,11 +427,13 @@ try {
         }
         $observation=if(Test-Path -LiteralPath $report){Get-Content -LiteralPath $report -Raw}else{''}
         $exited=$observation -match '(?m)^result=exited\r?$' -and $observation -match '(?m)^exit=0x00000000\r?$'
-        $terminal=if($ServiceLossMarkers){$serviceLossPassed -and $observation -match '(?m)^result=exited\r?$'}else{$exited}
+        $exitBoundary=$Win95ExitBoundary -and $observation -match '(?m)^result=exited\r?$' -and $observation -match '(?m)^exit=0x00000001\r?$'
+        $exitAccepted=$exited -or $exitBoundary
+        $terminal=if($ServiceLossMarkers){$serviceLossPassed -and $observation -match '(?m)^result=exited\r?$'}else{$exitAccepted}
         $pass=$started -and $valid -and $terminal -and !$errorText
         $results.Add([pscustomobject]@{case=$case.Name;dosonly=$case.DosOnly;enhanced=$case.Enhanced;
             probeStarted=$started;progmanAndMode=$valid;flags=$flags;hwnd=$hwnd;observedDosOnly=$observedDosOnly;normalExit=$exited;serviceLoss=($serviceLossPassed -and !$WorkerCloseMonitor);workerClose=($serviceLossPassed -and [bool]$WorkerCloseMonitor -and !$ConsoleClose);consoleClose=($serviceLossPassed -and [bool]$ConsoleClose);
-            passed=$pass;error=$errorText;observer=$report})
+            exitAccepted=$exitAccepted;knownExitOne=$exitBoundary;passed=$pass;error=$errorText;observer=$report})
         Write-Host "$($case.Name): started=$started desktop-and-mode=$valid normal-exit=$exited pass=$pass"
     }
 } finally {
@@ -404,4 +448,4 @@ try {
     $results | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $output 'matrix-results.json') -Encoding UTF8
 }
 if($results.Count -ne $Cases.Count -or @($results | Where-Object {!$_.passed}).Count) { throw 'Win31 runtime matrix did not pass all selected cases' }
-"PASS $($Cases.Count) selected Windows 3.1 mode/DOSONLY combinations"
+"PASS $($Cases.Count) selected $(if($Windows95){'Windows 95'}else{'Windows 3.1'}) mode/DOSONLY combinations"

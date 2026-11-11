@@ -4,7 +4,8 @@ param(
  [Parameter(Mandatory)][string]$InstallSource,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$OutputRoot,
- [string]$MouseDriver
+ [string]$MouseDriver,
+ [switch]$DosReentry
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
@@ -81,9 +82,12 @@ foreach($mode in 0,1){
   & nasm -f bin "-DW31_INSTALL='$dest'" "$PSScriptRoot/win31-scheduling-child.asm" -o $scheduleChild
   if($LASTEXITCODE){throw 'Scheduling DOS child assembly failed'}
   $controller=Join-Path $task 'prompt-check.exe'
-  & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
+  $controllerOptions=@()
+  if($DosReentry){$controllerOptions+= '-DW31_SCHEDULING_INTERACTIVE'}
+  & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'Prompt controller assembly failed'}
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
+   if($DosReentry -and $case -ne '386-dosonly0'){continue}
    $out=Join-Path $task $case
    Select-LaunchProfile $case
    # Standard Windows ignores [386Enh]. Exercise interaction on the bare
@@ -96,17 +100,29 @@ foreach($mode in 0,1){
     }
     continue
    }
-   $argument=if($case.EndsWith('dosonly0')){"/c $nativeCmd /d /c $nativeScript"}else{"/c $scheduleChild"}
-   $expected=if($case.EndsWith('dosonly0')){$hostVersion}else{'S14_OK'}
-   $scheduling=if($case.StartsWith('std-') -or ($case -eq '386-dosonly0' -and $mode -eq 1)){'blocking'}else{'nonblocking'}
-   & "$repo/assets/release/PIF.EXE" update $profile --arguments $argument
+   # DOSONLY=0 selects Run16 routing, not universal guest suspension: a DOS
+   # child can reenter the existing worker while guest Windows keeps running.
+   $nativeChild=$case.EndsWith('dosonly0') -and !$DosReentry
+   $argument=if($DosReentry){''}elseif($nativeChild){"/c $nativeCmd /d /c $nativeScript"}else{"/c $scheduleChild"}
+   $expected=if($nativeChild){$hostVersion}else{'S14_OK'}
+   $scheduling=if($case.StartsWith('std-') -or ($nativeChild -and $mode -eq 1)){'blocking'}else{'nonblocking'}
+   & "$repo/assets/release/PIF.EXE" update $profile --title 'Scheduling prompt' --directory $dest --arguments $argument
    if($LASTEXITCODE){throw "Cannot configure DOS prompt for $case"}
+   if($DosReentry){
+    $description=& "$repo/assets/release/PIF.EXE" show $profile
+    $flagsLine=$description | Select-String '^W386\.FLAGS=0x([0-9a-f]+)$'
+    if($LASTEXITCODE -or !$flagsLine){throw 'Cannot read interactive DOS prompt flags'}
+    $flags=([Convert]::ToUInt32($flagsLine.Matches[0].Groups[1].Value,16) -band (-bnot 8)) -bor 2
+    & "$repo/assets/release/PIF.EXE" update $profile --w386-flags $flags
+    if($LASTEXITCODE){throw 'Cannot select windowed/background DOS prompt'}
+   }
    $signals=@("$dest/PATCH/MREADY.BIN","$dest/PATCH/MDOWN.BIN")
    foreach($signal in $signals){if(Test-Path $signal){throw "Stale fixture signal: $signal"}}
    try {
-    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -Scheduling $scheduling
+    $route=if($DosReentry){'SCHED.COM'}else{''}
+    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -Scheduling $scheduling -ScheduledRun16Command $route
     if(!(Test-Path $receipt) -or (Get-Content -LiteralPath $receipt -Raw).Trim() -cne $expected){throw "Unexpected command output for $case"}
-    $owner=if($case.EndsWith('dosonly0')){$hostVersion}else{'DOS'}
+    $owner=if($nativeChild){$hostVersion}else{'DOS'}
     if((Get-Content "$dest/PATCH/SCHED.RUN" -Raw).Trim() -cne $owner){throw "Wrong execution owner: $case"}
    } catch {
     $failures+= "setup=$mode $case $($_.Exception.Message)"
@@ -119,7 +135,8 @@ foreach($mode in 0,1){
     }
    }
   }
-  # Enhanced DOSONLY=1 must schedule two guest prompts even without addons.
+  if($DosReentry){continue}
+  # Enhanced DOSONLY=1 schedules guest prompts with either payload selection.
   & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'Interactive controller assembly failed'}
   # Preserve the single-prompt source flags except for windowed/background.
@@ -195,4 +212,8 @@ foreach($mode in 0,1){
  }
 }
 if($failures.Count){throw ($failures -join [Environment]::NewLine)}
-'PASS six interactive Win3.1 configurations, two Standard startup/exit controls, two enhanced prompt pairs and four fullscreen keyboard cases; Setup used a shim'
+if($DosReentry){
+ 'PASS enhanced DOSONLY=0 DOS-child scheduling with NTVDM64 disabled/enabled; Setup used a shim'
+}else{
+ 'PASS six interactive Win3.1 configurations, two Standard startup/exit controls, two enhanced prompt pairs and four fullscreen keyboard cases; Setup used a shim'
+}

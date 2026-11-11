@@ -12,6 +12,9 @@ if exist "%PATCH%\MULTITASK.LAUNCH" (
   call "%~dp0..\win-multitask\UNAPPLY.CMD" "%TARGET%" || exit /b 5
   del /q "%PATCH%\MULTITASK.LAUNCH" || exit /b 5
 )
+if not exist "%PATCH%\MULTITASK.INI.BAK" if exist "%PATCH%\WIN.CMD" (
+  findstr /l /c:"--remove" "%PATCH%\WIN.CMD" >nul && (call "%PATCH%\WIN.CMD" --remove || exit /b 5)
+)
 call :find_active_mouse
 if errorlevel 1 goto restore_cores
 set "TARGET_PREFIX=%TARGET%\"

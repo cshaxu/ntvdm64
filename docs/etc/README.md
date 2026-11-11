@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T481 S17 Win95 four-profile acceptance](evidence/m0-t481-s17-win95-four-profiles.md) records dynamic launcher changes, execution contracts, test results and remaining delivery boundaries.
+
 [T481 S15 dynamic Win3.1 launcher](evidence/m0-t481-s15-win31-dynamic-launch.md) records setup package changes and verification.
 
 [T481 S16 mouse transitions](evidence/m0-t481-s16-win31-mouse-transitions.md) records the reproducer and diagnostic boundaries.

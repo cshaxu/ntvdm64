@@ -2,7 +2,9 @@ param(
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$InstallSource,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$OutputRoot
+ [Parameter(Mandatory)][string]$OutputRoot,
+ [ValidateSet(0,1)][int]$Multitask=0,
+ [string]$RejectNativeImage
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
@@ -16,7 +18,7 @@ try {
  $text=$enc.GetString([IO.File]::ReadAllBytes($ini))
  $text=[regex]::Replace($text,'(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)\s*\r*\n','')
  [IO.File]::WriteAllBytes($ini,$enc.GetBytes($text))
- foreach($name in 'CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
+ foreach($name in 'PIF.EXE','CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
   if(Test-Path "$dest/PATCH/$name"){Remove-Item -LiteralPath "$dest/PATCH/$name"}
  }
  if(Test-Path "$dest/PATCH/TEMP"){Remove-Item -LiteralPath "$dest/PATCH/TEMP"}
@@ -25,14 +27,46 @@ try {
  $env:PATH="$package/system32;$savedPath"
  & cmd.exe /d /c "`"$repo/tools/win95-launch/APPLY.CMD`" < `"$task/input.txt`"" *> "$task/apply.log"
  if($LASTEXITCODE){throw 'Guest-only launch preparation failed'}
+ $selector=Join-Path $task 'selector';New-Item -ItemType Directory $selector|Out-Null
+ [IO.File]::WriteAllText("$selector/run16.cmd","@echo off`r`nexit /b 0`r`n")
+ [IO.File]::WriteAllText("$task/select-input.txt","1`r`n$Multitask`r`n")
+ $selectPath=$env:PATH;$env:PATH="$selector;$selectPath"
+ try {
+  & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/select-input.txt`"" *> "$task/select-launch.log"
+  if($LASTEXITCODE){throw 'Dynamic Win95 profile selection failed'}
+ } finally {$env:PATH=$selectPath}
  if((Get-Content "$dest/PATCH/CONFIG.NT" -Raw) -notmatch '(?im)^dosonly\s*$'){throw 'Guest-only profile lacks DOSONLY'}
- foreach($name in 'INSIGNIA.386','NTVDM64.386'){if(Test-Path "$dest/PATCH/$name"){throw "Unexpected driver $name"}}
- & nasm -f bin "$PSScriptRoot/win95-guest-only.asm" -o "$dest/PATCH/ONLY.COM"
+  $selectedIni=Get-Content "$dest/SYSTEM.INI" -Raw
+ if([bool]($selectedIni -match '(?im)^device=.*NTVDM64\.386') -ne [bool]$Multitask -or $selectedIni -notmatch '(?im)^device=.*INSIGNIA\.386'){throw 'Guest-only profile driver selection mismatch'}
+ $defines=@()
+ if($RejectNativeImage){
+  $image=(Resolve-Path -LiteralPath $RejectNativeImage).Path
+  $pe=[IO.File]::ReadAllBytes($image);$header=[BitConverter]::ToInt32($pe,60)
+  if([BitConverter]::ToUInt16($pe,$header+4) -ne 0x8664){throw 'Rejection witness requires the specified AMD64 image'}
+  # DOS can execute a PE image's MZ stub. Pin its entry and exact refusal
+  # instructions instead of incorrectly expecting EXEC to reject the format.
+  $stub=[BitConverter]::ToUInt16($pe,8)*16
+  if([BitConverter]::ToUInt32($pe,20) -ne 0 -or
+     [BitConverter]::ToString($pe,$stub,14) -ne '0E-1F-BA-0E-00-B4-09-CD-21-B8-01-4C-CD-21'){
+   throw 'Rejection witness requires the known DOS refusal stub'
+  }
+  Copy-Item -LiteralPath $image -Destination "$dest/PATCH/NATIVE.EXE"
+  Get-FileHash "$dest/PATCH/NATIVE.EXE" | ConvertTo-Json | Set-Content "$task/native-image.json"
+  $defines=@('-DREJECT_NATIVE=1')
+ }
+ & nasm -f bin @defines "$PSScriptRoot/win95-guest-only.asm" -o "$dest/PATCH/ONLY.COM"
  if($LASTEXITCODE){throw 'DOS probe assembly failed'}
  $bytes=[IO.File]::ReadAllBytes("$dest/PATCH/ONLY.COM");$i=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@OUTPUT@')
  $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ONLY.BIN")
  if($i -lt 0 -or $path.Length -ge 128){throw 'Invalid DOS probe path'}
  [Array]::Clear($bytes,$i,128);[Array]::Copy($path,0,$bytes,$i,$path.Length);[IO.File]::WriteAllBytes("$dest/PATCH/ONLY.COM",$bytes)
+ if($RejectNativeImage){
+  $i=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@NATIVE@')
+  $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\NATIVE.EXE")
+  if($i -lt 0 -or $path.Length -ge 128){throw 'Invalid native probe path'}
+  [Array]::Clear($bytes,$i,128);[Array]::Copy($path,0,$bytes,$i,$path.Length)
+  [IO.File]::WriteAllBytes("$dest/PATCH/ONLY.COM",$bytes)
+ }
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/ONLY.PIF" --title 'Guest DOS' --program "$dest\PATCH\ONLY.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'Guest-only PIF creation failed'}
  & "$repo/test/integration/ntvdm64-386/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/ONLY.PIF"
@@ -50,6 +84,7 @@ try {
   if(!(Test-Path "$dest/PATCH/ONLY.BIN") -or [IO.File]::ReadAllText("$dest/PATCH/ONLY.BIN") -ne 'PASS'){throw 'Guest DOS witness did not complete'}
   $workers=@(Get-CimInstance Win32_Process | Where-Object { $_.ExecutablePath -and $_.ExecutablePath -ieq "$stage\system32\ntvwm.exe" })
   if($workers.Count){throw 'Guest-only DOS witness unexpectedly started a native CUI worker'}
+  if($RejectNativeImage){'PASS Win95 DOSONLY=1 executes the pinned AMD64 image DOS refusal stub with normal exit code 1'}
   'PASS Win95 DOSONLY=1 executes a guest DOS program; no native CUI worker present while it waits; test-owned session retired by fixture'
  } finally {
   if($process){if(!$process.HasExited){$process.Kill($true);$process.WaitForExit()};$process.Dispose()}

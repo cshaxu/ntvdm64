@@ -7,15 +7,15 @@ for %%F in (WIN.COM SYSTEM.INI) do if not exist "%ROOT%\%%F" (echo Missing %%F.&
 for %%F in (PIF.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%PATCH%%%F" (echo Missing %%F.& exit /b 2)
 set "MODE=1"
 set "DOSMODE=0"
-set "DRIVERS=0"
+set "MULTITASK=0"
 if /i "%~1"=="--install" goto configure
 where run16 >nul 2>nul || (echo run16.exe must be available through PATH.& exit /b 2)
 set /p "MODE=Windows mode [1=Standard, 2=386 Enhanced] (default 1): "
 if not "%MODE%"=="1" if not "%MODE%"=="2" (echo Choose 1 or 2.& exit /b 4)
 set /p "DOSMODE=DOSONLY [0=host commands, 1=guest DOS] (default 0): "
 if not "%DOSMODE%"=="0" if not "%DOSMODE%"=="1" (echo Choose 0 or 1.& exit /b 4)
-if "%MODE%"=="2" set /p "DRIVERS=Enable INSIGNIA.386 and NTVDM64.386 [0=no, 1=yes] (default 0): "
-if not "%DRIVERS%"=="0" if not "%DRIVERS%"=="1" (echo Choose 0 or 1.& exit /b 4)
+if "%MODE%"=="2" set /p "MULTITASK=Enable NTVDM64.386 multitask payloads [0=no, 1=yes] (default 0): "
+if not "%MULTITASK%"=="0" if not "%MULTITASK%"=="1" (echo Choose 0 or 1.& exit /b 4)
 if "%MODE%"=="1" echo Standard mode does not load enhanced-mode drivers.
 :configure
 rem One short-lived staging directory also rejects overlapping reconfiguration.
@@ -29,8 +29,10 @@ set "FOUND=0"
 set "DRIVERCOUNT=0"
 set "SEEN_INSIGNIA.386="
 set "SEEN_NTVDM64.386="
-set "COMMENT=;"
-if "%DRIVERS%"=="1" set "COMMENT="
+set "COMMENT_NTVDM64.386=;"
+if "%MULTITASK%"=="1" set "COMMENT_NTVDM64.386="
+set "COMMENT_INSIGNIA.386="
+if "%MODE%"=="1" set "COMMENT_INSIGNIA.386=;"
 >"%WORK%\SYSTEM.INI" (
   for /f "delims=" %%A in ('findstr /n "^" "%INI%"') do (
     set "LINE=%%A"
@@ -53,7 +55,7 @@ if "%DRIVERS%"=="1" set "COMMENT="
     if defined SKIP (
       set /a DRIVERCOUNT+=1
       set "SEEN_!SKIP!=1"
-      if /i not "%~1"=="--install" echo(!COMMENT!device=!ROOT!\PATCH\!SKIP!
+      if /i not "%~1"=="--install" for %%D in (!SKIP!) do echo(!COMMENT_%%D!device=!ROOT!\PATCH\%%D
     ) else echo(!LINE!
     if /i "!LINE!"=="[386Enh]" (
       set /a FOUND+=1

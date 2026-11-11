@@ -12,9 +12,24 @@ param(
  [switch]$GuestUserInput,
  [switch]$SaveWitness,
  [switch]$ReadWriteWitness,
+ [string]$FrontendMouseProbeRoot,
+ [switch]$FullscreenTransitions,
+ [switch]$FrontendKeyboard,
+ [switch]$Windows31,
+ [switch]$BlockingDosFirst,
+ [string]$ThreadSnapshot,
+ [ValidateSet(0,1)][int]$DosOnly=0,
+ [Alias('Drivers')][ValidateSet(0,1)][int]$Multitask=1,
  [string]$DismissWelcomeTitleHex
 )
 $ErrorActionPreference='Stop'
+if(($DosOnly -or !$Multitask) -and !$GuestUserInput){throw 'Profile variations require the production controller'}
+$blockingEditor=(!$DosOnly -and !$Multitask)
+if($blockingEditor -and (!$FrontendMouseProbeRoot -or !$ReadWriteWitness)){throw 'Blocking editor acceptance requires frontend input and read/write witnesses'}
+if($FrontendKeyboard -and !$FrontendMouseProbeRoot){throw 'Frontend keyboard requires frontend probe tools'}
+if($FullscreenTransitions -and !$FrontendMouseProbeRoot){throw 'Fullscreen transitions require frontend input/frame probes'}
+if($FrontendMouseProbeRoot -and !$GuestUserInput){throw 'Frontend mouse requires the production guest controller'}
+if($FrontendMouseProbeRoot){$FrontendMouseProbeRoot=(Resolve-Path $FrontendMouseProbeRoot).Path}
 if($GuestUserInput -and ($MouseMenu -or !$SaveWitness)){throw 'GuestUserInput requires SaveWitness and does not support MouseMenu'}
 if($ReadWriteWitness -and (!$GuestUserInput -or !$SaveWitness)){throw 'ReadWriteWitness requires GuestUserInput and SaveWitness'}
 if(!$GuestUserInput -and !$InterruptObserver){throw 'Diagnostic editor witness requires InterruptObserver'}
@@ -32,12 +47,36 @@ if(!$GuestUserInput -and (![Text.Encoding]::ASCII.GetString($hostImage).Contains
    ![Text.Encoding]::Unicode.GetString($hostImage).Contains('MVDM_REAL_COMMAND'))){
  throw 'Editor fixture requires the diagnostic real-command NTVDM; use a production-only witness for the released package'
 }
-$copyArgs=@{DriverImage=$DriverImage;InstanceDriver=$InstanceDriver;InstallSource=$InstallSource;InstallRoot=$InstallRoot;OutputRoot=$OutputRoot}
+$copyArgs=@{DriverImage=$DriverImage;InstanceDriver=$InstanceDriver;InstallSource=$InstallSource;InstallRoot=$InstallRoot;OutputRoot=$OutputRoot;MouseDriver="$repo/assets/release/MOUSE31.DRV"}
 if($InterruptObserver){$copyArgs.InterruptObserver=$InterruptObserver}
-$copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" @copyArgs
+$family=if($Windows31){"Win31"}else{"Win95"}
+$copy=& "$PSScriptRoot/New-${family}ProbeCopy.ps1" @copyArgs
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
+# Exercise the shipped dynamic launcher; the shim only suppresses launch while
+# preparing the profile. The observer below runs its real generated PIF.
+$launcher=if($Windows31){"win31-setup"}else{"win95-launch"}
+Copy-Item "$repo/tools/$launcher/WIN.CMD" "$dest/PATCH/WIN.CMD"
+Copy-Item "$repo/assets/release/PIF.EXE" "$dest/PATCH/PIF.EXE"
+& cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" --install"
+if($LASTEXITCODE){throw 'Editor launcher setup failed'}
+$selector=Join-Path $task 'selector';New-Item -ItemType Directory $selector|Out-Null
+[IO.File]::WriteAllText("$selector/run16.cmd","@echo off`r`nexit /b 0`r`n")
+$choices=if($Windows31){"2`r`n$DosOnly`r`n$Multitask`r`n"}else{"$DosOnly`r`n$Multitask`r`n"}
+[IO.File]::WriteAllText("$task/select-input.txt",$choices)
+$selectPath=$env:PATH;$env:PATH="$selector;$selectPath"
+try {
+ & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/select-input.txt`"" *> "$task/select.log"
+ if($LASTEXITCODE){throw 'Editor launcher profile failed'}
+} finally {$env:PATH=$selectPath}
+if(((Get-Content "$dest/PATCH/CONFIG.NT" -Raw) -match '(?im)^dosonly\s*$') -ne [bool]$DosOnly){throw 'Selected DOSONLY mismatch'}
+$selectedIni=Get-Content "$dest/SYSTEM.INI" -Raw
+foreach($driver in 'INSIGNIA.386','NTVDM64.386'){
+ $enabled=[regex]::IsMatch($selectedIni,'(?im)^device='+[regex]::Escape("$dest\PATCH\$driver")+'\s*$')
+ if($enabled -ne [bool]($driver -eq 'INSIGNIA.386' -or $Multitask)){throw "Selected driver mismatch: $driver"}
+}
+Copy-Item -LiteralPath "$dest/SYSTEM.INI" -Destination "$task/selected-system.ini"
 
 Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
@@ -53,7 +92,7 @@ foreach($id in 'A','B'){
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU $([int][bool]($MouseMenu -or $GuestUserInput))`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$asm="%define MOUSE_MENU $([int][bool]($MouseMenu -or $GuestUserInput))`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n%define FIRST_DOS_BEFORE_SECOND 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
 $actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
 $routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
 if($GuestUserInput){
@@ -141,6 +180,55 @@ ret
 '@
  $routines=[regex]::Replace($routines,'(?s)mouse_input:\s*.*\z',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $mouse})
 }
+if($DosOnly){
+ # The common action template exercises two working editors. For a guest-only
+ # profile both are DOS EDIT; native rejection is a separate contract witness.
+ $actions=$actions.Replace('mov word [mouse_half_row-data],15','mov word [mouse_half_row-data],19')
+ $actions=$actions.Replace("mov si,events_text_a-data","mov si,events_esc-data`ncall type_events`nmov si,events_text_a-data")
+ $saveNative="mov ax,0x111`nmov bx,0x1d`ncall inject_key`nmov si,events_s-data`ncall type_events`nmov ax,0x211`nmov bx,0x1d`ncall inject_key"
+ if(!$actions.Contains($saveNative)){throw 'Native save action changed'}
+ $actions=$actions.Replace($saveNative,"call alt_file`nmov word [mouse_half_row-data],9`ncall mouse_cell")
+}
+if($FullscreenTransitions){
+ foreach($marker in 'mov si,events_text_a-data','mov si,events_text_b-data'){
+  $actions=$actions.Replace($marker,"mov ax,0x8000`ncall mouse_input`ncall target_prompt`n"+$marker)
+ }
+}
+if($blockingEditor){
+ $actions=@'
+mov word [which-data],title_a-data
+call target_prompt
+call production_wait
+call target_prompt
+mov si,events_a-data
+call type_events
+mov ax,0x2000
+call mouse_input
+call target_prompt
+mov si,events_exit-data
+call type_events
+call wait_gone
+mov word [which-data],title_b-data
+call target_prompt
+call production_wait
+call target_prompt
+mov si,events_b-data
+call type_events
+call production_wait
+call target_prompt
+mov ax,0x2001
+call mouse_input
+call target_prompt
+mov si,events_exit-data
+call type_events
+call wait_gone
+'@
+ if($BlockingDosFirst){
+  $split=$actions.IndexOf('mov word [which-data],title_b-data')
+  if($split -lt 0){throw 'Missing DOS editor action block'}
+  $actions=$actions.Substring($split)+"`n"+$actions.Substring(0,$split)
+ }
+}
 $asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 if($routines -notmatch '(?s)api 2,59\s+\.wait_active:\s+call settle\s+api 2,60\s+[^\r\n]*[\r\n]+cmp ax,\[active-data\]\s+jne \.wait_active'){
  throw 'Shared editor routine must wait for the selected prompt to become active'
@@ -173,7 +261,7 @@ popad
 ret
 '@
 }
-if($MouseMenu -or $GuestUserInput){
+if(($MouseMenu -or $GuestUserInput) -and !$Windows31){
  $rect="push word [active-data]`npush ds`npush word mouse_rect-data"
  $point="push word [active-data]`npush ds`npush word mouse_point-data"
  if(!$routines.Contains($rect) -or !$routines.Contains($point)){throw 'Mouse geometry insertion point missing'}
@@ -211,8 +299,27 @@ jmp .next
 ret
 '@
 }
+if($FrontendMouseProbeRoot){
+ if($FrontendKeyboard){
+  $routines=[regex]::Replace($routines,'(?s)inject_key:.*?production_wait:',"inject_key:`njmp frontend_key`nproduction_wait:")
+ }
+ $mouseRequest=Get-Content "$PSScriptRoot/frontend-mouse-request.inc" -Raw
+ # Replace only the existing mouse_input body; later geometry helpers remain.
+ $routines=[regex]::Replace($routines,'(?s)mouse_input:.*?(?=\r?\n; Close only|\r?\n; Win95 puts|\z)',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $mouseRequest})
+ $asm=$asm.Replace('data_end:',"frontend_request: times 4 dw 0`nfrontend_ack: dw 0`nfrontend_request_name: db '$dest\PATCH\MREQ.BIN',0`nfrontend_ack_name: db '$dest\PATCH\MACK.BIN',0`ndata_end:")
+}
 $asm=$asm.Replace('code_end:',$routines+"`ncode_end:")
 $asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`n"+(Get-Content "$repo/test/integration/ntvdm64-386/editor-events.inc" -Raw)+"`ndata_end:")
+if($DosOnly){
+ $dosEvents=[regex]::Match($asm,'(?m)^events_b:.*$').Value.Replace('events_b:','events_a:').Replace('SAVE_ARG_B','SAVE_ARG_A')
+ if(!$dosEvents){throw 'Missing DOS editor event sequence'}
+ $asm=[regex]::Replace($asm,'(?m)^events_a:.*$',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $dosEvents})
+}
+if($blockingEditor){
+ # Native shell-out freezes the guest controller; DOS reentry does not.
+ # Keep DOS Enter in the guest sequence and hand off after guest progress.
+ $asm=$asm.Replace('SAVE_ARG_A 0x1c0d,0','SAVE_ARG_A 0')
+}
 if($GuestUserInput){$asm=$asm.Replace('data_end:',"production_buttons: dw 0`nproduction_pending_button: dw 0`ndata_end:")}
 if($MouseMenu -or $GuestUserInput){$asm=$asm.Replace('data_end:',"mouse_hwnd: dw 0`nmouse_class: times 64 db 0`ndata_end:")}
 if($DismissWelcomeTitleHex){
@@ -238,6 +345,7 @@ $env:MVDM_PROMPT_READERS="$dest/PATCH/READERS.BIN"
 $env:MVDM_SCREEN_TRACE="$task/screens.txt"
 $env:MVDM_EDITORS_READY="$dest/PATCH/EDITORS.BIN"
 $env:MVDM_REAL_COMMAND='1'
+$env:MVDM_TERMINATE_VDM_REPORT_PATH="$task/termination.txt"
 $env:MVDM_CONTINUATION_TRACE="$task/trace.txt"
 
 try {
@@ -251,14 +359,59 @@ try {
  [IO.File]::WriteAllBytes("$dest/WIN.INI",$enc.GetBytes($s))
  try {
   $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity
+  $stage=[IO.Path]::GetFullPath($stage)
   $scope=New-IsolatedPackageScope $stage
+  $env:MVDM_OBSERVER_SERIAL_NTVDM="$stage\system32\ntvdm.exe"
   $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
   $env:MVDM_OBSERVER_OWN_JOB='1'
   if($GuestUserInput){$env:MVDM_OBSERVER_CAPTURE_WINDOW='1'}
   $env:PATH="$stage\system32;C:\Windows\System32;C:\Windows"
-  $process=Start-Process $Observer -ArgumentList @("$stage/system32/run16.exe",$dest,"$task/runtime/observer.txt","$dest/PATCH/WIN.PIF",'--observation-timeout-ms','90000') -WindowStyle Hidden -PassThru
+  # Per-key frontend round trips also need the long interaction budget.
+  $timeout=if($FullscreenTransitions -or $FrontendKeyboard){180000}else{90000}
+  $process=Start-Process $Observer -ArgumentList @("$stage/system32/run16.exe",$dest,"$task/runtime/observer.txt","$dest/PATCH/WIN.PIF",'--observation-timeout-ms',"$timeout") -WindowStyle Hidden -PassThru
   @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');stage=$stage}|ConvertTo-Json|Set-Content "$task/runtime/process.json"
-  if(!$process.WaitForExit(105000)){throw 'Owned Win95 observer deadline'}
+  if($FrontendMouseProbeRoot){
+   . "$PSScriptRoot/Invoke-EditorFullscreenProbe.ps1"
+   $sequence=0;$keyModifiers=0;$deadline=[DateTime]::UtcNow.AddMilliseconds($timeout+15000)
+   while(!$process.HasExited -and [DateTime]::UtcNow -lt $deadline){
+    $request=$null
+    try {if(Test-Path "$dest/PATCH/MREQ.BIN"){$request=[IO.File]::ReadAllBytes("$dest/PATCH/MREQ.BIN")}} catch [IO.IOException] {}
+    if($request -and $request.Length -eq 8){
+     $next=[BitConverter]::ToUInt16($request,0)
+     if($next -eq $sequence+1){
+      $frontend=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'"|Where-Object {$_.ExecutablePath -ieq "$stage\system32\ntcon.exe"})
+      if($frontend.Count -ne 1){
+       $process.Refresh()
+       if($process.HasExited){throw 'Owned observer ended before frontend input completed; inspect observer.txt'}
+       throw 'Expected one owned NTCON for mouse input'
+      }
+      $dx=[BitConverter]::ToInt16($request,2);$dy=[BitConverter]::ToInt16($request,4);$buttons=[BitConverter]::ToUInt16($request,6)
+      if(($buttons -band 0x4000) -ne 0){
+       $down=$buttons -band 1
+       $keys=@{13=131073;8=131074;27=196609;9=196610;16=196611;17=196612;18=196613;186=59;190=46;220=92}
+       $key=if($keys.ContainsKey([int]$dy)){$keys[[int]$dy]}elseif(($dy -ge 48 -and $dy -le 57) -or ($dy -ge 65 -and $dy -le 90) -or $dy -eq 32){$dy}else{throw "Unsupported fixture key $dy"}
+       $bit=switch($dy){16 {4} 17 {1} 18 {2} default {0}}
+       if($down){$keyModifiers=$keyModifiers -bor $bit}else{$keyModifiers=$keyModifiers -band (-bnot $bit)}
+       & "$FrontendMouseProbeRoot/probe.exe" $frontend[0].ProcessId "NTVDMConsoleTest-$($process.Id)" "$FrontendMouseProbeRoot/mouse-hook.dll" --key $dx $key $down $keyModifiers "$task/runtime/key-$next.txt"
+       if($LASTEXITCODE){throw "Frontend keyboard delivery failed: $LASTEXITCODE"}
+      } elseif($buttons -eq 0x2000 -or $buttons -eq 0x2001){
+       $editor=if($buttons -eq 0x2000){'Native'}else{'Dos'}
+       Invoke-EditorFullscreenProbe -ProbeRoot $FrontendMouseProbeRoot -FrontendPid $frontend[0].ProcessId -Desktop "NTVDMConsoleTest-$($process.Id)" -OutputPrefix "$task/runtime/block-$next" -BlockingEditor $editor -ThreadSnapshot $ThreadSnapshot -WindowedDos
+      } elseif($buttons -eq 0x8000){
+       Invoke-EditorFullscreenProbe -ProbeRoot $FrontendMouseProbeRoot -FrontendPid $frontend[0].ProcessId -Desktop "NTVDMConsoleTest-$($process.Id)" -OutputPrefix "$task/runtime/full-$next"
+      } else {
+       & "$FrontendMouseProbeRoot/probe.exe" $frontend[0].ProcessId "NTVDMConsoleTest-$($process.Id)" "$FrontendMouseProbeRoot/mouse-hook.dll" $dx $dy $buttons "$task/runtime/mouse-$next.txt"
+       if($LASTEXITCODE){throw "Frontend mouse delivery failed: $LASTEXITCODE"}
+      }
+      [IO.File]::WriteAllBytes("$dest/PATCH/MACK.NEW",[BitConverter]::GetBytes([uint16]$next))
+      Move-Item -LiteralPath "$dest/PATCH/MACK.NEW" -Destination "$dest/PATCH/MACK.BIN" -Force
+      $sequence=$next
+     }
+    }
+    Start-Sleep -Milliseconds 20;$process.Refresh()
+   }
+   if(!$process.HasExited){throw 'Owned Win95 observer deadline'}
+  } elseif(!$process.WaitForExit(105000)){throw 'Owned Win95 observer deadline'}
   $process.WaitForExit()
   $process.ExitCode|Set-Content "$task/runtime/observer.exit"
  } finally {
@@ -288,9 +441,9 @@ try {
   if($saved -cne $pair[1] -and $saved -cne ($pair[1]+"`r`n")){throw "Wrong saved contents: $path"}
   Copy-Item -LiteralPath $path -Destination $task
  }}
- if($MouseMenu -or $GuestUserInput){
+ if(($MouseMenu -or $GuestUserInput) -and !$blockingEditor){
   $receipts=@(Get-ChildItem "$dest/PATCH/MOUSE*.BIN")
-  $expectedReceipts=if($GuestUserInput){6}elseif($SaveWitness){5}else{4}
+  $expectedReceipts=if($GuestUserInput){6+2*$DosOnly}elseif($SaveWitness){5}else{4}
   if($receipts.Count -ne $expectedReceipts){throw 'Mouse receipt count mismatch'}
   foreach($receipt in $receipts){
    $data=[IO.File]::ReadAllBytes($receipt.FullName)
@@ -300,11 +453,11 @@ try {
    if($dx -gt 3 -or $dy -gt 4){throw "Mouse missed target: $($receipt.Name)"}
   }
  }
- $result=[ordered]@{nativeVm=$nativeVm;dosVm=$dosVm;guestUserInput=[bool]$GuestUserInput;mouseMenu=[bool]($MouseMenu -or $GuestUserInput);saveVerified=[bool]$SaveWitness;readWriteVerified=[bool]$ReadWriteWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}
+ $result=[ordered]@{family=$family;nativeVm=$nativeVm;dosVm=$dosVm;dosonly=$DosOnly;instanceDriver=$true;multitask=$Multitask;editors=@($(if($DosOnly){'EDIT.COM'}else{'EDIT.EXE'}),'EDIT.COM');guestUserInput=[bool]$GuestUserInput;frontendMouse=[bool]$FrontendMouseProbeRoot;fullscreenTransitions=[bool]$FullscreenTransitions;frontendKeyboard=[bool]$FrontendKeyboard;mouseMenu=[bool]($MouseMenu -or $GuestUserInput);saveVerified=[bool]$SaveWitness;readWriteVerified=[bool]$ReadWriteWitness;observerExit=([regex]::Match($observation,'(?m)^exit=(\S+)').Groups[1].Value);normalShutdownProved=$false}
  if(!$GuestUserInput){$result.completed=2;$result.menus=$true}
  $result|ConvertTo-Json|Set-Content "$task/editor-result.json"
- if($GuestUserInput){'PASS Win95 two prompt editors saved distinct text and closed using guest USER keyboard and mouse; physical input and normal shutdown not proven'}
- else {'PASS Win95 two prompt VMs opened and closed native and DOS editors; normal shutdown not proven'}
+ if($GuestUserInput){"PASS $family two prompt editors saved distinct text and closed; mouse=$(if($FrontendMouseProbeRoot){'private frontend sink'}else{'guest USER'}); physical Raw Input and normal shutdown not proven"}
+ else {"PASS $family two prompt VMs opened and closed selected editors; normal shutdown not proven"}
 
 } finally {
  if(@(Get-ChildItem $source -Force -Recurse -File).Count -ne $original.Count){throw 'Original installation file inventory changed'}

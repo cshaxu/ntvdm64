@@ -6,9 +6,14 @@ If a media copy still contains an older package, use its `UNAPPLY.CMD` recovery 
 
 Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. After Setup succeeds, enter the selected Windows installation directory. Finalization always copies `INSIGNIA.386`, `NTVDM64.386`, `PIF.EXE` and the single `WIN.CMD` launcher into its `PATCH`. The two device entries in `[386Enh]` start commented out. Original installed guest binaries are not patched again.
 
-Run the installed `PATCH\WIN.CMD` to select Standard or 386 Enhanced, then DOSONLY (`0` host commands, `1` guest DOS). Enhanced mode additionally offers the two-driver enable switch. Standard mode leaves both entries commented. The launcher generates `CONFIG.NT`, `AUTOEXEC.NT` and one `WIN.PIF` each time, and enables/disables only its two device entries. There is no template PIF, second installer, PowerShell runtime dependency or permanent configuration backup. Other SYSTEM.INI entries are preserved. Invalid choices or configuration errors stop before launch; temporary configuration staging is removed. Do not reconfigure an installation while its Windows instance is running.
+Run the installed `PATCH\WIN.CMD` to select Standard or 386 Enhanced, then DOSONLY (`0` host commands, `1` guest DOS). Enhanced mode always loads INSIGNIA.386 for base VM/mouse support and offers a switch only for NTVDM64.386 multitask payloads. Standard mode leaves both entries commented. The launcher generates `CONFIG.NT`, `AUTOEXEC.NT` and one `WIN.PIF` each time, and enables/disables only its two device entries. There is no template PIF, second installer, PowerShell runtime dependency or permanent configuration backup. Other SYSTEM.INI entries are preserved. Invalid choices or configuration errors stop before launch; temporary configuration staging is removed. Do not reconfigure an installation while its Windows instance is running.
 
-The installation is self-contained except for `run16` on PATH. `PATCH\TEMP` holds runtime scratch. The generated NT files and PIF are owned outputs and are replaced on the next launch; customize unrelated SYSTEM.INI entries rather than those generated files. Six configurations retain the S14 execution/scheduling contracts. This does not resolve the separately deferred EDIT mouse transition defect.
+The installation is self-contained except for `run16` on PATH. `PATCH\TEMP` holds runtime scratch. The generated NT files and PIF are owned outputs and are replaced on the next launch; customize unrelated SYSTEM.INI entries rather than those generated files. The six configurations follow the execution/scheduling contracts below; mouse transition repairs are delivered by the released runtime and drivers.
+
+In enhanced mode, DOSONLY=0 with NTVDM64.386 disabled blocks Windows only
+while running a native CUI program. DOS programs reenter the existing worker
+and can continue in guest DOS windows with guest VM multitasking, as with
+DOSONLY=1. INSIGNIA.386 stays loaded independently of that payload switch.
 
 `patch31.exe` applies hash-checked kernel adaptations to staging copies.
 `SZDD.EXE` writes the SZDD compressed files consumed by original Setup.

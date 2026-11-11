@@ -70,15 +70,15 @@ S6 or claim its previously unverified rows passed merely to simplify planning.
 
 S13 through S16 are closed. S15 delivered dynamic mode/DOSONLY/driver
 selection in one installed WIN.CMD; S16 repaired the accepted mouse transition
-defects. The Win95 matrix and remaining audit are deferred; their next S
-numbers are not allocated yet.
+defects. The Win95 launcher and four-profile matrix are closed as S17 under the owner-approved exit-code boundary.
+The remaining audit stays deferred without a newly allocated S number.
 
 | Packet | Scope and evidence required for closure |
 | --- | --- |
 | S15 (accepted) | Always install the two addons and PIF utility. One WIN.CMD selects Standard/Enhanced, DOSONLY and enhanced driver enablement, regenerates NT files/WIN.PIF and toggles its two SYSTEM.INI entries by comments. Verify six selections, repeated transitions and failure handling; deliver the updated setup package. |
 | S16 | Closed with owner acceptance: repaired EDIT.COM text/graphics painter selection and saved-background restoration; 14/14 Win3.1 cases and 16/16 selected Full gates passed. Accepted visible intermediate cleanup; no new transition barrier. See [evidence](../etc/evidence/m0-t481-s16-win31-mouse-transitions.md#final-verification-and-closure). |
 | S14 (closed) | Six execution/scheduling contracts, two Standard smoke controls, four enhanced fullscreen cases and two paired-prompt cases passed. Owner deferred the later EDIT mouse return regression; see the evidence handoff. |
-| Deferred Win95 matrix | Win95, same driver pair configured or absent crossed with DOSONLY=0 and 1. Verify the generated profile, guest DOS prompt, mouse and keyboard interaction, return to Windows and normal shutdown in each case. Verify guest-only execution for DOSONLY=1 even with the drivers present. Exercise the supported two-VM host payload route with DOSONLY=0 and both drivers loaded. Record actual routing without the pair separately. |
+| S17 (closed): Win95 dynamic launcher and four-profile matrix | Win95 DOSONLY=0/1 crossed with NTVDM64.386 multitask off/on; owner approved fixed INSIGNIA.386 base support in enhanced mode, including Win31. Verify the generated profile, guest DOS prompt, mouse and keyboard interaction, return to Windows and normal shutdown in each case. Verify guest-only execution for DOSONLY=1 even with the drivers present. Exercise the supported two-VM host payload route with DOSONLY=0 and both drivers loaded. Record blocking host routing without NTVDM64.386 separately. |
 | Deferred audit | Reconcile outstanding mirror audit dispositions against the existing inventory, close remaining integrated acceptance and delivery obligations, and record an owner and evidence for any residual item. Carry forward earlier package and shutdown evidence with its limitations. |
 
 For S14 the driver axis records the installed files and active configuration.
@@ -86,7 +86,15 @@ Standard mode does not load enhanced-mode VxDs. For each DOSONLY value, run
 full Standard interaction without the pair and a startup/mode/normal-exit
 control with the pair installed. All four enhanced profiles retain full
 interaction. This covers eight installations and six behavioral combinations.
-The six mandatory execution/scheduling acceptance rows are:
+The historical six execution/scheduling rows below used a native command for
+DOSONLY=0. S17 owner clarification: they do not classify every command in that
+profile as blocking. In enhanced mode with DOSONLY=0 and NTVDM64.386 disabled,
+native CUI shell-out blocks guest Windows, but DOS commands reenter the
+existing worker and retain windowed guest VM multitasking. INSIGNIA.386 is
+now fixed base support. Test native shell-out and DOS reentry separately;
+the old addon-pair axis is superseded by the NTVDM64.386-only switch.
+
+The historical six execution/scheduling acceptance rows are:
 
 | Windows mode | DOSONLY | Loaded addon pair | Command execution | Guest Windows during child execution |
 | --- | --- | --- | --- | --- |

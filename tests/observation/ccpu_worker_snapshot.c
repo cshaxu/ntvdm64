@@ -60,6 +60,9 @@ static void print_bytes(HANDLE process, DWORD backing, DWORD length,
 int main(int argc, char **argv)
 {
     DWORD pid, actual = 0, preferred = 0, symbols[15], index, sample;
+    const char *command_names[] = {"_fBlock", "_IsRepeatCall", "_IsFirstCall",
+        "_Exe32ActiveCount", "_event_thread_blocked_reason"};
+    DWORD command_symbols[5];
     DWORD suspended_tid = 0;
     HANDLE suspended_thread = NULL;
     HANDLE snapshot, process;
@@ -98,6 +101,8 @@ int main(int argc, char **argv)
     if (!(symbols[14] = map_address(map, delay_handles_name))) {
         fprintf(stderr, "missing symbol %s\n", delay_handles_name); return 66;
     }
+    for (index = 0; index < 5; ++index)
+        command_symbols[index] = map_address(map, command_names[index]);
     fclose(map);
     snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
     module.dwSize = sizeof(module);
@@ -114,6 +119,13 @@ int main(int argc, char **argv)
     if (!actual) return 67;
     process = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
     if (!process) return 68;
+    for (index = 0; index < 5; ++index) {
+        DWORD value = 0;
+        if (command_symbols[index] && read_exact(process,
+                actual + command_symbols[index] - preferred, &value,
+                index == 3 ? sizeof(WORD) : sizeof(value)))
+            printf("host-state %s=%lu\n", command_names[index], value);
+    }
     if (suspended_tid) {
         suspended_thread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, suspended_tid);
         if (!suspended_thread || SuspendThread(suspended_thread) == (DWORD)-1) return 70;

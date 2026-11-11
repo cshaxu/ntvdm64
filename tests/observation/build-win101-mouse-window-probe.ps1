@@ -8,7 +8,9 @@ $lines=@('@echo off','call "C:\Program Files (x86)\Microsoft Visual Studio\2022\
     'if errorlevel 1 exit /b %errorlevel%',
     ('cl.exe /nologo /MT /std:c11 /LD /I"'+$repo+'\src" /I"'+$repo+'\src\lib-nxvm" /I"'+$repo+'\src\ntcon-exe" /Fo"'+$root+'\hook.obj" /Fe"'+$root+'\mouse-hook.dll" "'+$PSScriptRoot+'\private-mouse-input.c" user32.lib /link /EXPORT:MouseInputHook /IMPLIB:"'+$root+'\mouse-hook.lib"'),
     'if errorlevel 1 exit /b %errorlevel%',
-    ('cl.exe /nologo /MT /std:c11 /Fo"'+$root+'\probe.obj" /Fe"'+$root+'\probe.exe" "'+$PSScriptRoot+'\win101_mouse_window_probe.c" user32.lib'),
+    ('cl.exe /nologo /MT /std:c11 /I"'+$repo+'\src" /I"'+$repo+'\src\lib-nxvm" /Fo"'+$root+'\probe.obj" /Fe"'+$root+'\probe.exe" "'+$PSScriptRoot+'\win101_mouse_window_probe.c" user32.lib'),
+    'if errorlevel 1 exit /b %errorlevel%',
+    ('cl.exe /nologo /MT /std:c11 /Fo"'+$root+'\console-snapshot.obj" /Fe"'+$root+'\console-snapshot.exe" "'+$PSScriptRoot+'\console_live_snapshot.c" user32.lib'),
     'if errorlevel 1 exit /b %errorlevel%')
 [IO.File]::WriteAllLines("$root/build.cmd",$lines,[Text.Encoding]::ASCII)
 & "$root/build.cmd" *> "$root/build.log"
