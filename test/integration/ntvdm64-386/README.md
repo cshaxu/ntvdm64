@@ -288,8 +288,8 @@ copy and PIF setup is in `New-Win95ProbeCopy.ps1` and
 `Set-Win95ProbePifMemory.ps1`.
 
 `verify-win95-identity.ps1 -InstanceDriver <insignia.386>` stages the
-instance driver alongside NTVDM64.386 in its disposable copy. It cannot
-be combined with `-InstallViaTool`, which selects the released pair.
+instance driver alongside NTVDM64.386 in its disposable copy. With
+`-InstallViaLaunch`, the launcher instead installs the released driver pair.
 
 `verify-win95-identity.ps1 -NativeCommand` runs two native CMD exit-code
 commands per guest VM on the ordinary host package. The guest validates the
@@ -309,8 +309,7 @@ but is not a physical keyboard or mouse test. Compiling the helper with
 records its return value. An absent return marker does not prove successful
 shutdown; the outer process result is reported separately.
 
-Add `-InstallViaTool` to install the two released drivers using the actual
-`tools/win-multitask/APPLY.CMD` on the isolated Win95 copy before starting the
-same witness. The source installation must not already contain either driver
-entry, and the supplied driver must match the released image. This tests the
-installer-to-runtime chain without changing the source installation.
+Add `-InstallViaLaunch` to prepare the isolated Win95 copy with
+`tools/win95-launch/APPLY.CMD`, then select the dynamic WIN.CMD profile
+before starting the same witness. This is the sole installer-to-runtime
+route; the standalone multitask installer is retired.

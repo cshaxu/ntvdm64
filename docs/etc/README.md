@@ -1370,3 +1370,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T481 S3 closure](evidence/m0-t481-s3-closure.md) - frozen repair evidence, candidate publication and Win95 handoff boundaries.
 
 - [T481 S20 test reduction](evidence/m0-t481-s20-test-reduction.md): retired contracts, test classification, shared setup and verification.
+
+- [T481 S21 launch-tool consolidation](evidence/m0-t481-s21-launch-tool-consolidation.md): dynamic driver ownership, standalone retirement and final delivery checks.

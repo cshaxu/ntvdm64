@@ -8,11 +8,10 @@ for %%I in ("%TARGET%") do set "TARGET=%%~sI"
 set "SYSTEM=%TARGET%\SYSTEM"
 set "PATCH=%TARGET%\PATCH"
 if not exist "%TARGET%\SYSTEM.INI" (echo Missing SYSTEM.INI.& exit /b 2)
-if exist "%PATCH%\MULTITASK.LAUNCH" (
-  call "%~dp0..\win-multitask\UNAPPLY.CMD" "%TARGET%" || exit /b 5
-  del /q "%PATCH%\MULTITASK.LAUNCH" || exit /b 5
-)
-if not exist "%PATCH%\MULTITASK.INI.BAK" if exist "%PATCH%\WIN.CMD" (
+rem Restore the original INI only for installations made by the retired package.
+if exist "%PATCH%\MULTITASK.INI.BAK" (
+  copy /b /y "%PATCH%\MULTITASK.INI.BAK" "%TARGET%\SYSTEM.INI" >nul || exit /b 5
+) else if exist "%PATCH%\WIN.CMD" (
   findstr /l /c:"--remove" "%PATCH%\WIN.CMD" >nul && (call "%PATCH%\WIN.CMD" --remove || exit /b 5)
 )
 call :find_active_mouse

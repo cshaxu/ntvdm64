@@ -13,7 +13,6 @@ param(
  [string]$ProductionComspecImage,
  [switch]$GuestInput,
  [switch]$ReverseInputOrder,
- [switch]$InstallViaTool,
  [switch]$InstallViaLaunch,
  [switch]$ShutdownWitness
 )
@@ -28,17 +27,6 @@ if($ProductionComspecImage){
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-if($InstallViaTool -and $InstanceDriver){throw 'Installer witness selects its own instance driver'}
-if($InstallViaTool -and $InstallViaLaunch){throw 'Select one installation witness'}
-if($InstallViaTool){
- $sourceIni=[IO.File]::ReadAllText((Resolve-Path -LiteralPath "$InstallSource/SYSTEM.INI"))
- if($sourceIni -match '(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)'){
-  throw 'Installer witness requires a source without multitask driver entries'
- }
- if((Get-FileHash $DriverImage).Hash -ne (Get-FileHash "$repo/assets/release/ntvdm64.386").Hash){
-  throw 'Installer witness requires the released driver image'
- }
-}
 $copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstanceDriver $InstanceDriver -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
 $task=$copy.Task;$source=$copy.Source;$dest=$copy.Destination;$original=$copy.Original
 try {
@@ -66,21 +54,6 @@ if($InstallViaLaunch){
   if($LASTEXITCODE){throw 'Dynamic Win95 profile selection failed'}
  } finally {$env:PATH=$selectPath}
  foreach($name in 'INSIGNIA.386','NTVDM64.386'){
-  if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Installed driver differs: $name"}
- }
-}
-if($InstallViaTool){
- # The copy helper stages this driver itself. Remove only its exact entry and
- # file to test the actual installer on an otherwise prepared isolated copy.
- $system="$dest/SYSTEM.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($system))
- $line='(?im)^device='+[regex]::Escape("$dest\PATCH\NTVDM64.386")+'\r?\n'
- if([regex]::Matches($text,$line).Count -ne 1){throw 'Expected one copy-helper driver entry'}
- $text=[regex]::Replace($text,$line,'')
- [IO.File]::WriteAllBytes($system,$enc.GetBytes($text))
- Remove-Item -LiteralPath "$dest/PATCH/NTVDM64.386"
- & "$repo/tools/win-multitask/APPLY.CMD" $dest
- if($LASTEXITCODE){throw "Multitask installation failed: $LASTEXITCODE"}
- foreach($name in 'NTVDM64.386','INSIGNIA.386'){
   if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Installed driver differs: $name"}
  }
 }

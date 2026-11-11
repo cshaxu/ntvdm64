@@ -30,7 +30,7 @@ is supplied by the user and is not part of the release. The tool does not
 modify the system DOS Prompt PIF or the Start menu PIF.
 
 UNAPPLY removes the dynamic launcher's two device entries, or restores the
-legacy shared multitask configuration when installed,
+original SYSTEM.INI backup from the retired standalone multitask installer when present,
 then reads the active mouse path from `SYSTEM.INI` and restores each backup
 that exists, without hash checks. It also accepts legacy `.W95LAUNCH.BAK`
 mouse backups. It deletes the entire `PATCH` directory, including user files
@@ -48,3 +48,9 @@ native executable must not silently become a host payload. Each applicable
 path is checked for mouse movement/clicks, DOS-window/fullscreen transitions,
 editor interaction/save/exit and return. Script fixtures use a run16 shim and
 cannot establish these runtime results. Current evidence is in the active S.
+
+The standalone win-multitask package is retired. Driver deployment is owned by
+APPLY.CMD and configuration by the installed WIN.CMD --install/--remove,
+matching win31-setup's dynamic launcher model. No new MULTITASK.INI backup,
+hash or staging records are generated. UNAPPLY accepts existing original INI
+backups only for removal of old installations; it does not call another tool.

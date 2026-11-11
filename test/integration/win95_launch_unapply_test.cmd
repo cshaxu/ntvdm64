@@ -16,11 +16,18 @@ copy /y "%RELEASE%\MOUSE31.DRV" "%SYSTEM%\MOUSE.DRV" >nul || exit /b 2
 copy /y "%RELEASE%\compat95.sys" "%PATCH%\compat95.sys" >nul || exit /b 2
 >"%WINDOWS%\SYSTEM.INI" echo [boot]
 >>"%WINDOWS%\SYSTEM.INI" echo mouse.drv=MOUSE.DRV
+if /i "%~2"=="legacy" (
+  copy /b "%WINDOWS%\SYSTEM.INI" "%PATCH%\MULTITASK.INI.BAK" >nul || exit /b 3
+  >>"%WINDOWS%\SYSTEM.INI" echo [386Enh]
+  >>"%WINDOWS%\SYSTEM.INI" echo device=%PATCH%\INSIGNIA.386
+  >"%PATCH%\MULTITASK.LAUNCH" echo legacy
+)
 echo %WINDOWS%| call "%~dp0..\..\tools\win95-launch\UNAPPLY.CMD" || exit /b 4
 findstr /x /c:"original-vmm" "%SYSTEM%\VMM32.VXD" >nul || exit /b 5
 findstr /x /c:"original-mouse" "%SYSTEM%\MOUSE.DRV" >nul || exit /b 6
 if exist "%SYSTEM%\VMM32.VXD.W95LAUNCH.BAK" exit /b 7
 if exist "%SYSTEM%\MOUSE.DRV.W95LAUNCH.BAK" exit /b 8
 if exist "%PATCH%\" exit /b 9
+findstr /i /c:"INSIGNIA.386" "%WINDOWS%\SYSTEM.INI" >nul && exit /b 10
 echo WIN95_LAUNCH_UNAPPLY_OK
 exit /b 0

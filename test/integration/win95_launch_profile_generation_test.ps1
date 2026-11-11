@@ -56,6 +56,10 @@ try {
  [IO.File]::WriteAllText("$root/input.txt","9`r`n")
  & cmd.exe /d /c "`"$dest/WIN.CMD`" < `"$root/input.txt`"" | Out-Null
  if($LASTEXITCODE -ne 4 -or @(Get-Content "$root/launched.txt").Count -ne $count){throw 'Invalid choice launched Windows'}
+ & cmd.exe /d /c "`"$dest/WIN.CMD`" --remove" | Out-Null
+ if($LASTEXITCODE){throw 'Dynamic driver removal failed'}
+ $removed=[IO.File]::ReadAllText("$install/SYSTEM.INI")
+ if($removed.Replace("`r`n","`n") -cne $ini.Replace("`r`n","`n")){throw 'Driver removal changed unrelated INI'}
  [IO.File]::WriteAllText("$install/SYSTEM.INI","[boot]`r`nkeep=value`r`n")
  [IO.File]::WriteAllText("$root/input.txt","1`r`n0`r`n")
  & cmd.exe /d /c "`"$dest/WIN.CMD`" < `"$root/input.txt`"" | Out-Null
