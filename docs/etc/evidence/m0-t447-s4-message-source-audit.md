@@ -301,7 +301,7 @@ borrow composition; those source attributions are not a first-bad runtime
 bisect or a claim that P2 alone introduced the slowdown.
 
 The new reproducible group is
-`test/observation/verify-wow-mine-latency.ps1`, using the existing actual
+`test/integration/verify-wow-mine-latency.ps1`, using the existing actual
 WINMINE identity/pixel helpers, plus `wow_mine_latency_probe.c` and the existing
 read-only `wow_native_pc_sample.c` with optional bounded rounds/QPC stamps.
 It posts twelve right-click down/up pairs, requires twelve actual cell-pixel
@@ -1371,7 +1371,7 @@ entry/guest continuation/return and retirement, not physical OK-button input,
 all native control layouts or remaining mixed-message families.
 
 The reproducible pure-native reference is now
-test/observation/verify-native-modal-control.ps1 with mandatory Observer,
+test/integration/verify-native-modal-control.ps1 with mandatory Observer,
 CompilerDriver and fresh build-owned BuildRoot. Native-control-r4 passes that
 committed-form runner, explicitly x86/MT/O2; native_modal_control.c and the
 shared wow_native_modal_probe.c never load WOW/style. The actual guest runner
@@ -5091,7 +5091,7 @@ No original guest or public run16 option is added. The separate process is
 a test endpoint, not a production helper HWND/process or adapter mechanism.
 
 Reproducer: hidden background pwsh -NoProfile -ExecutionPolicy Bypass -File
-test/observation/verify-wow-external-native.ps1 -BuildRoot
+test/integration/verify-wow-external-native.ps1 -BuildRoot
 <repo>/build/t447-s4-external-native/group-r1. Supervisor PID47648 starts
 2026-10-19T04:24:11.878Z; test starts04:24:12.709Z, finishes04:27:02.347Z,
 exit0. Build commands PID30784/40280 configure both stable ccache presets
@@ -5214,7 +5214,7 @@ still runs inside the sender worker; this does not claim a new external
 native endpoint. Original USER16 calls, converters and native USER perform
 all actual message delivery. There is no test provider in production.
 
-Reproducer: hidden owned pwsh -File test/observation/verify-wow-external-native.ps1
+Reproducer: hidden owned pwsh -File test/integration/verify-wow-external-native.ps1
 -CrossWorkers -BuildRoot <repo>/build/t447-s4-cross-worker/group-r1.
 Supervisor PID46596 starts 2026-10-19T04:46:16.286Z; group runs04:46:17.175Z
 through04:48:47.163Z and returns0. Stable x86/x64 fixture builds PID19772/
@@ -5353,7 +5353,7 @@ assertion. Receiver-thread/process death, HWND reuse, arbitrary failed sends,
 implicit receive and remaining M4 families are not proved by window death.
 
 Final reproducer: hidden owned pwsh -File
-test/observation/verify-wow-external-native.ps1 -PendingSend -BuildRoot
+test/integration/verify-wow-external-native.ps1 -PendingSend -BuildRoot
 <repo>/build/t447-s4-pending-send/group-r2. Supervisor PID11572 starts
 05:07:46.011Z; group05:07:46.970--05:10:08.588Z, exit0. x86/x64 builds
 PID30036/12412 exit0, using the existing stable caches. Native controls

@@ -231,7 +231,7 @@ desktop remains unswitched. Capture now shows the real board. Run r075 posts
 ordinary mouse/key messages and captures flag/reset/open results; visible
 counter changes from 10 to 9 and open cells show numbers.
 
-The reproducible entry is `test/observation/verify-wow-mine-gameplay.ps1` and
+The reproducible entry is `test/integration/verify-wow-mine-gameplay.ps1` and
 its native `wow_mine_gameplay_probe.c`. Run r077 uses the r072 candidate package
 and passes flag plus counter change, F2 reset to the original covered-cell
 image, left-click cell change, normal WM_CLOSE, and `run16 --wait` completion

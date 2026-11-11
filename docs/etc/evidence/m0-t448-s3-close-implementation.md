@@ -286,7 +286,7 @@ cases: cmd PID 35804, command PID 24540, direct ntmon PID 14784. Each verifies
 self-NTMON confirmation, management close completion and visible input before
 Enter, including the active-buffer assertion. Run interval was
 2026-10-21 05:23:12 through 05:23:57 UTC. Exact reproducer is
-test/observation/verify-console-caf-self-delete.ps1 with package-r7,
+test/integration/verify-console-caf-self-delete.ps1 with package-r7,
 the x64 console-startup-observer and handoff-pty harness; results are retained
 under build/t448-s3/delivery-r7c-caf. This proves those runs, not universal
 elimination of the historically intermittent defect.
@@ -2374,7 +2374,7 @@ service. These five shared-mechanism checks do not replace the existing
 operation-specific normal/admission/error/output tests or claim every RPC
 method's lifecycle proven. Those remain part of the full acceptance inventory.
 
-Rename the real-package runner to test/observation/verify-client-rpc-wait.ps1;
+Rename the real-package runner to test/integration/verify-client-rpc-wait.ps1;
 old disposable deadline runners are invalid for this candidate. Full-component
 and second-incremental build r36 starts in background PID 28064. RPC controller
 36452 waits for that exact process and successful build result, then compiles
@@ -3329,7 +3329,7 @@ faults. Four individual failures and one combined failure require every
 independent step to be attempted, the first error to survive, input restoration
 to remain independent, the presentation thread to be joined and retained
 resources to remain safely cleanable. No production or guest change is made.
-The permanent runner is test/observation/verify-frontend-restoration.ps1.
+The permanent runner is test/integration/verify-frontend-restoration.ps1.
 
 Hidden r58 controller 31752 failed at 18:54:40.427 UTC before the new cases:
 stop-join's initial geometry setup returned error87, largest58x15, requested

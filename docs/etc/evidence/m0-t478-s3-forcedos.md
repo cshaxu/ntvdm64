@@ -55,7 +55,7 @@ The existing console_startup_observer.c provides the process/exit observation.
 GENHOST.DLL is built from the independent wow_generic_callback_probe.c fixture using
 the export arguments in verify-wow-generic-call.ps1; the DLL is only a test dependency, not a product input.
 
-The retained test/observation/verify-forcedos.ps1 takes explicit PackageRoot,
+The retained test/integration/verify-forcedos.ps1 takes explicit PackageRoot,
 BuildRoot, Observer, NativeParent and GenericHostDll arguments. It assembles the
 independent NE using NASM; Case selects forced, normal, nested, native or
 sequence, with -Ansi selecting CreateProcessA instead of W. Each test uses an

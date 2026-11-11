@@ -160,7 +160,7 @@ r013 controlled negative sets Caps in that private shared table: real VER,
 one failed exact echo milestone, six key messages and zero Enter reproduce
 the r008 signature. Correct input supplies ver then exit and reports two Enter
 events, normal output and real exit0. Reproducible entrypoint is
-test/observation/verify-owned-window-input-state.ps1 with RuntimeRoot
+test/integration/verify-owned-window-input-state.ps1 with RuntimeRoot
 r007-final-runtime, Observer r012-observer/console-startup-observer.exe and
 fresh build LogRoot. r014 reruns the entire Full suite using the corrected
 observer against the unchanged final product bytes. No longer timeout, injected

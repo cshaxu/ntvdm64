@@ -55,7 +55,7 @@ Current reproducible entries:
   explicit HANDLE_LIST/Unicode environment/CWD/streams, eight malformed
   payloads, invalid capability and missing DLL. Fixture events prove local
   transport/ownership only, not NTSRV authorization.
-- `test/observation/verify-native-hook-chain.ps1`: production SysWOW64 CMD
+- `test/integration/verify-native-hook-chain.ps1`: production SysWOW64 CMD
   absolute/bare COMMAND, parent-output return and explicit run16 via SUBST
   identity; optional WindowObserver verifies WINMINE startup receipt and
   the retained localized visible main window, not gameplay.

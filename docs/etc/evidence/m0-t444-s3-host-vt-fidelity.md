@@ -26,7 +26,7 @@ Results and limitations follow below.
 
 ## Reproducible test and observations
 
-Entrypoint: test/observation/verify-native-vt-fidelity.ps1, with BuildRoot
+Entrypoint: test/integration/verify-native-vt-fidelity.ps1, with BuildRoot
 build/M0-T444/S3/r003, FrontendBuild build/M0-T444/S1/r115/Frontend, and Observer
 build/M0-T444/S1/r050/console-startup-observer.exe. Launch the script as an owned
 background PowerShell process; it launches hidden, bounded compiler/test children

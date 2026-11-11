@@ -88,7 +88,7 @@ an authenticated RPC from that dead peer; corrected it to inspect service-owned
 terminal state, retaining the shutdown-negative assertion.
 
 Reproducible actual-UI entrypoint is
-`test/observation/verify-console-caf-self-delete.ps1`, with the compiled
+`test/integration/verify-console-caf-self-delete.ps1`, with the compiled
 `console_startup_observer.c` and `console_handoff_pty_probe.c`, an exact complete
 package and fresh build LogRoot. It launches the system conhost, uses real
 in-worker NTMON Delete/Y, validates the selected frontend identity, and checks

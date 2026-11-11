@@ -161,7 +161,7 @@ boundaries remain explicitly limited as recorded above.
 `final-pic-combined-r1` subsequently passes both the fourteen production-PIC
 assertions and actual DOS IRQ0 control/reinitialization using the coherent
 `final-reviewed-package-r1`. The runner is
-`test/observation/verify-pic-reset-eoi.ps1 -OutputRoot
+`test/integration/verify-pic-reset-eoi.ps1 -OutputRoot
 build/t460-s3/final-pic-combined-r1 -PackageRoot
 build/t460-s3/final-reviewed-package-r1 -Observer
 build/.ninja/msvc-x64-release/observation/console-startup-observer.exe`.

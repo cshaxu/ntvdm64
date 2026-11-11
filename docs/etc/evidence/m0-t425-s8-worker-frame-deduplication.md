@@ -143,7 +143,7 @@ Final source checks and tests:
   ordered cursor states (20,10, start=2,height=3,visible), hidden, then
   (21,10,visible); their character grids match exactly. Original do_new_cursor
   computes end-start, not end-start+1. Test entrypoint is
-  test/observation/verify-dos-mouse-frame-publication.ps1 -Case Registers
+  test/integration/verify-dos-mouse-frame-publication.ps1 -Case Registers
   -GuestPath Z:/REG8.COM, with r041/diagnostic-runtime and r043/registers.
 - r043 Route: mouse-cursor-route.asm shows the mouse in Console before CAF,
   constrains its guest position, then observes ENTER drawing and source LEAVE
@@ -520,7 +520,7 @@ transport and records actual publication calls at the production worker-client
 boundary. It is not a substitute frame producer or a literal byte-count trace.
 Its package differs only by the diagnostic NTVDM executable; the normal eight
 products are the independently sealed regression/publication candidate.
-New test/observation/verify-dos-idle-frame-publication.ps1 uses an unswitched
+New test/integration/verify-dos-idle-frame-publication.ps1 uses an unswitched
 private desktop, original COMMAND/EDIT, a twelve-second live observation and
 the actual I/O25 VIDEO_BEGIN operation for a five-second idle interval.
 
@@ -539,8 +539,8 @@ Reproduce each actual idle case with the diagnostic runtime containing the
 ntvdm-console-wire-observer.exe build at its normal ntvdm.exe name:
 
 ```powershell
-test/observation/verify-dos-idle-frame-publication.ps1 -RuntimeRoot build/M0-T425/S8/r003/diagnostic-runtime -Observer build/M0-T425/S6/r005/observer.exe -ReportRoot build/M0-T425/S8/r007 -Display Console
-test/observation/verify-dos-idle-frame-publication.ps1 -RuntimeRoot build/M0-T425/S8/r003/diagnostic-runtime -Observer build/M0-T425/S6/r005/observer.exe -ReportRoot build/M0-T425/S8/r009 -Display Window
+test/integration/verify-dos-idle-frame-publication.ps1 -RuntimeRoot build/M0-T425/S8/r003/diagnostic-runtime -Observer build/M0-T425/S6/r005/observer.exe -ReportRoot build/M0-T425/S8/r007 -Display Console
+test/integration/verify-dos-idle-frame-publication.ps1 -RuntimeRoot build/M0-T425/S8/r003/diagnostic-runtime -Observer build/M0-T425/S6/r005/observer.exe -ReportRoot build/M0-T425/S8/r009 -Display Window
 ```
 
 Choose fresh existing build report directories for reruns; old reports are

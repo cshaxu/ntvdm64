@@ -28,7 +28,7 @@ application.  No project-owned lifecycle replacement was introduced.
 
 ## Reproducible acceptance
 
-`test/observation/verify-wow-write-lifecycle.ps1` compiles the checked-in
+`test/integration/verify-wow-write-lifecycle.ps1` compiles the checked-in
 `wow_write_lifecycle_probe.c`, creates one owned private desktop and launches
 two `run16 --wait WRITE.EXE` rounds on that same desktop.  It identifies the
 reused `ntvdm.exe` by its exact staged full image path, observes the real
@@ -47,7 +47,7 @@ second application in the correctly retained worker but observed a different
 private desktop and incorrectly treated short-lived `run16` as the app
 owner.  The corrected test records the actual shell/worker ownership.
 
-`test/observation/verify-wow-idle-workers.ps1 -SharedTasks -LifecycleOnly`
+`test/integration/verify-wow-idle-workers.ps1 -SharedTasks -LifecycleOnly`
 is the narrower shared-worker lifecycle witness.  Its current run,
 `build/t463-s3/idle-lifecycle-r5`, proves two distinct tasks overlap in one
 worker, each has exactly one completion/retirement, neither emits idle work

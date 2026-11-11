@@ -800,7 +800,7 @@ management snapshot and confirmed Console close. r2 failed because the test's
 environment fill overwrote its equals sign; the fixture, not product semantics,
 was corrected. r1 was the earlier attached-target launch checkpoint.
 
-Production entrypoint test/observation/verify-native-root-console.ps1 selects
+Production entrypoint test/integration/verify-native-root-console.ps1 selects
 the formal build and private-desktop console-startup-observer.exe. Logs2
 t423-s12-native-root-r1 through r4 preserve these findings:
 
@@ -871,7 +871,7 @@ native-migration-input-r1/monitor-build.log; runtime:
 Logs2/t423-s12-monitor-layout-r1.stdout.log. Real NTMon interaction is pending.
 
 The next stricter real-guest concurrent-output check FAILS. Entrypoint:
-test/observation/verify-native-guest-output.ps1 with Observer S11/input-r4,
+test/integration/verify-native-guest-output.ps1 with Observer S11/input-r4,
 PackageRoot Z:, ProcessPackageRoot S12/p, BuildRoot S12/concurrent-r1 and prefix
 t423-s12-concurrent-r1. The native target returns 37, but the visible snapshot
 contains NATIVE-BASE, NATIVE-DURING-DOS, DOS-INTERVAL and DOS-RESUMED, missing

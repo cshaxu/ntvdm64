@@ -6,7 +6,7 @@ input.
 
 ## Witness
 
-`test/observation/verify-win16-print-probe.ps1` is the restored narrow
+`test/integration/verify-win16-print-probe.ps1` is the restored narrow
 successor to the former style-coupled generic hook runner.  It has no style
 parameter or UI automation.  It compiles the independently authored
 `win16_print_probe.asm`, stages a complete physical copy of the existing

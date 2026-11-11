@@ -103,7 +103,7 @@ The strengthened r006 diagnostic object has SHA256
 its manifest proves the unchanged accepted attribution body and 0/5 references.
 The earlier diagnostic hash above belongs to r001, not r006.
 
-`pwsh -File test/observation/verify-service-fixtures.ps1 -Observer
+`pwsh -File test/adapter-basesrv/verify-service-fixtures.ps1 -Observer
 build/M0-T427/S4/r049/console-startup-observer.exe -Fixture
 build/M0-T427/S2/r001/basesrv-service-reservation-test.exe -LogRoot
 build/M0-T429/S2/r012 -Concurrency 4` passes all 29 retained production-archive

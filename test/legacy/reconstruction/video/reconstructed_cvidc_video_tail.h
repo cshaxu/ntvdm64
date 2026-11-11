@@ -1,6 +1,0 @@
-#ifndef RUNNER_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
-#define RUNNER_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
-
-int runner_reconstructed_cvidc_video_tail_initialize(void);
-
-#endif

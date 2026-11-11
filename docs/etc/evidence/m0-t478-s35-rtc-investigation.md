@@ -126,7 +126,7 @@ image evidence are frozen in
 [RTC results](../../../artifacts/mvdm-audit/shard-3/rtc-s35-results.json).
 The independent COM programs were assembled, not original guest programs.
 
-Reproduce with `test/observation/verify-ccpu-sign-flags-guest.ps1` using
+Reproduce with `test/integration/verify-ccpu-sign-flags-guest.ps1` using
 `-Workload RtcEntry` and then `-Workload RtcAlarm`, each with a fresh
 `-BuildRoot build/t478-s35/<unique-name>`,
 `-PackageRoot build/t478-s34/package-final`,

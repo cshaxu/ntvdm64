@@ -2970,7 +2970,7 @@ the production delivery gates. Hidden `div337-boundaries-r1` supervisor37444
 ran the independently authored Shell exception guest with the same original
 provider closure and a one-shot diagnostic fault. `frozen-shell-exception-r4`
 (Close) and `frozen-shell-exception-r5` (Ignore) both exit0. Entry:
-`test/observation/verify-wow-mine-gameplay.ps1 -ShellExceptionSibling
+`test/integration/verify-wow-mine-gameplay.ps1 -ShellExceptionSibling
 -ShellExceptionResponse Close|Ignore` with the hash-checked diagnostic manifest.
 Close retains the first checkpoint only. Ignore records phases0/1/2, no guest
 stack/operation errors, a completed child and an ordinary missing-file failure

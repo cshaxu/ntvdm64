@@ -78,7 +78,7 @@ in finally, verifies exact case count and checks eight runtime hashes.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/typeahead_witness_test.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/verify-typeahead.ps1 -RuntimeRoot build/M0-T425/S9/r022/runtime -Observer build/M0-T425/S9/r033/console-startup-observer.exe -LogRoot build/M0-T425/S11/r006
+powershell -NoProfile -ExecutionPolicy Bypass -File test/integration/verify-typeahead.ps1 -RuntimeRoot build/M0-T425/S9/r022/runtime -Observer build/M0-T425/S9/r033/console-startup-observer.exe -LogRoot build/M0-T425/S11/r006
 ```
 
 Unit: identical native/DOS output and repeated samples accepted; eight stale,

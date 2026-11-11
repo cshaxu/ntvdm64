@@ -86,7 +86,7 @@ retroactively rewritten as an earlier passing observation.
   ProcessPackageRoot O:/winnt, observer-modal.exe and G7.COM from the S4 build.
   The checked-in verifier also checks actual guest text and interaction,
   including EDIT exit and subsequent MEM; exit codes alone are not the gate.
-- test/observation/verify-wow-headless-frontiers.ps1 with PackageNetworkProfile,
+- test/integration/verify-wow-headless-frontiers.ps1 with PackageNetworkProfile,
   PackageRoot O:/winnt, the S4 observer and worker-window-snapshot reader,
   and LogPrefix m0-t423-s4-published-wow preserves all three separate frontiers.
   The corresponding .windows.txt reports contain the visible WINMINE main
@@ -349,7 +349,7 @@ no automatic S4 admission and no functional closure implied by this record.
 
 Owner clarified the literal GGGCCCGGGCCC chain and mixed D/W triples.
 Read test/app/frontend-segments.cmd, frontend_gui_boundary_test.c and
-test/observation/verify-native-root-console.ps1. The existing gui-segments
+test/integration/verify-native-root-console.ps1. The existing gui-segments
 case proves a native character context, three GUI-subsystem boundaries, a
 new character identity and return to the original identity. It does not
 execute six GUI targets plus six character targets; it does not cover every
@@ -374,7 +374,7 @@ start the next run16 and return its actual result. Character identity comes
 from real BaseSrv RetainFrontendRoot, not PID ancestry or an environment string
 alone. GUI stages reject inherited frontend/execution capabilities.
 
-test/observation/verify-twelve-target-chain.ps1 defaults only to WDW-DWD and
+test/integration/verify-twelve-target-chain.ps1 defaults only to WDW-DWD and
 DDW-WWD. Each has six GUI targets and six character targets. D stages execute
 immutable COMMAND.COM /c with generated test BAT files; native ENTER/RETURN
 identity probes are auxiliary observation, not substitutes for DOS execution
@@ -453,7 +453,7 @@ the owner session remains untouched and integrated execution remains pending.
 
 #### Input-driver repeatable positive/negative gate
 
-Added test/observation/verify-chain-input-driver.ps1 so the native self-test
+Added test/integration/verify-chain-input-driver.ps1 so the native self-test
 is reproducible and fails on missing screen/report evidence. The driver's
 --selftest-missing deliberately requests an absent ready marker: it must
 time out without injecting text, return failure to its fixture parent, and
@@ -1085,7 +1085,7 @@ all seven outputs. Earlier package hashes do not certify this refreshed set.
   native nesting, inherited history/geometry, GUI capability filtering, and
   distinct C identities across three consecutive GUI boundaries with the
   original identity restored on return.
-- New test/observation/verify-wow-headless-frontiers.ps1 makes the three
+- New test/integration/verify-wow-headless-frontiers.ps1 makes the three
   owner-waived headless comparisons reproducible. Build-package logs
   `m0-t423-s4-coherent-wow-{winmine,sol,write}` observe each actual NETWORK.DRV
   modal on an unswitched private desktop, no character frontend, and a live
@@ -1181,7 +1181,7 @@ The ordinary frontend binary was restored in the isolated package afterwards.
 
 `build/M0-T423/S4/wow-isolation-service.log` proves WOW launcher/worker cannot
 join a valid character frontend/context; original WOW Get/Exit still succeeds.
-`test/observation/verify-dos-wow-isolation.ps1` additionally executes COMMAND
+`test/integration/verify-dos-wow-isolation.ps1` additionally executes COMMAND
 -> WINMINE to the NETWORK.DRV modal, observing two workers and one character
 frontend. Terminating the identified test WOW worker is followed by real MEM
 output and COMMAND exit 1. See build-package log
@@ -1858,7 +1858,7 @@ the unchanged published BaseSrv is
 
 Verification so far:
 
-- test/observation/verify-console-close-contract.ps1, with S2 control-observer,
+- test/integration/verify-console-close-contract.ps1, with S2 control-observer,
   the above build root and prefix m0-t423-s3-execution-context: all 24 service
   modes and all three Console-client close/pipe cases passed on the private
   desktop. The expanded --frontend-root case covers separate object rights,
@@ -2136,7 +2136,7 @@ geometry retries are not partial-frame success. A cursor outside a scrolled
 viewport must not drag it back; unchanged metadata must not create repeated
 resize input events.
 
-Checked-in test/observation/verify-native-root-console.ps1, using the S2
+Checked-in test/integration/verify-native-root-console.ps1, using the S2
 control observer, BuildRoot build/M0-T423/S1/restart-formal-x86 and LogPrefix
 m0-t423-s3-root-composition-final, passes five actual CLI cases:
 

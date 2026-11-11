@@ -457,7 +457,7 @@ Regenerated the existing formal x86 graph and built ntmon.exe incrementally:
 only the new output link ran. Logs: build/M0-T423/S8/ntmon-graph-r1.log and
 ntmon-build-r1.log. SHA256:
 DAE97C2CCC405DA33946060A4A43B54646E0B957CA3B154579B0A633752412FF.
-`test/observation/verify-monitor-layout.ps1 -BuildRoot
+`test/integration/verify-monitor-layout.ps1 -BuildRoot
 build/M0-T423/S8/ntmon-layout-r1` built and passed the EDIT frame, four arrows,
 colors, 25 rows, overflow selection, horizontal extent, shrink, empty and
 confirmation assertions. This fixture is layout coverage, not a new real RPC
@@ -1284,7 +1284,7 @@ and no unknown broker/session was adopted or terminated.
 ### S8 cumulative mouse and graphics refresh
 
 The retained build-local S7 mouse orchestration is now reproducible as
-`test/observation/verify-window-mouse.ps1`. It preserves all five original
+`test/integration/verify-window-mouse.ps1`. It preserves all five original
 real-guest assertions, uses an unswitched private desktop, refuses a
 pre-existing broker and restores observer control environment variables.
 Invocation: S7 observer-renamed.exe, PackageRoot T:/, existing immutable

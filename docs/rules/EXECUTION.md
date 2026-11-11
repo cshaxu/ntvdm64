@@ -153,7 +153,7 @@ against the same mutable build root until the prior owned run has completed or
 been explicitly stopped and recorded.
 
 In-process service fixtures without the global BaseSrv endpoint may run with
-bounded concurrency through test/observation/verify-service-fixtures.ps1.
+bounded concurrency through test/adapter-basesrv/verify-service-fixtures.ps1.
 Real-package RPC/frontend/session scenarios must remain serial. A runner must
 propagate actual fixture/assertion failures, enforce per-case time budgets,
 clean only its pinned owned processes, and restore its environment even on

@@ -45,7 +45,7 @@ identifier; older failing reports do not certify later artifacts.
   The original no-command RETURN_ON_NO_COMMAND branch returns STATUS_NO_MEMORY;
   its caller clears command size and resumes. The project grant now covers
   that original result without changing the return or original caller.
-- `test/observation/verify-broker-io-handoff.ps1 -Case nested-window` r002 r011
+- `test/integration/verify-broker-io-handoff.ps1 -Case nested-window` r002 r011
   and cleaned r003 r001 pass actual CMD -> COMMAND -> VER/MEM -> CMD output,
   executed parent marker, CAF visibility and final exit=23. The script records
   all eight runtime hashes and verifies they remain unchanged during each run.

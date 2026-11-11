@@ -67,7 +67,7 @@ three tested original functions to provider.obj.
   composition failure, resolved by explicit fail-fast out-of-scope aliases.
   It is not recorded as a product defect or passing run.
 
-`test/observation/verify-xms-block-guest.ps1` uses the existing private-desktop
+`test/integration/verify-xms-block-guest.ps1` uses the existing private-desktop
 observer and New-PhysicalRuntimeStage/owned cleanup. Original HIMEM is unmodified.
 The independently authored xms_block_boundaries.asm repeats 32 complete zero-size
 allocate/lock/unlock/query/equal-size/grow-to-1KB/equal-size/free lifecycles and

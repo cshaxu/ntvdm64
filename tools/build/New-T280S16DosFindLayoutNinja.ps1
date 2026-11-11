@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('x86', 'x64')]
+    [ValidateSet('x86')]
     [string]$Architecture,
     [string]$RepositoryRoot = ''
 )
@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-dos-find-layout" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /FI ' + $root + '/src/compat/include/nt.h /I ' + $root + '/src/compat/include /I ' + $root + '/src/mvdm-host/dos/dem /I ' + $root + '/src/mvdm-support/inc /I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc /I ' + $root + '/src/mvdm-platform-abi/source/public/ddk/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc /I ' + $root + '/src/mvdm-host/softpc.new/host/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /FI ' + $root + '/src/compat/include/nt.h /I ' + $root + '/src/compat/include /I ' + $root + '/src/mvdm-host/dos/dem /I ' + $root + '/src/mvdm-host/inc /I ' + $root + '/src/non-mvdm/public/sdk/inc /I ' + $root + '/src/non-mvdm/public/ddk/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc /I ' + $root + '/src/mvdm-host/softpc.new/host/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -26,7 +26,7 @@ rule link
   command = link /nologo /out:`$out `$in
   description = LINK `$out
 
-build obj/layout.obj: cc `$root/test/legacy/adapter-softpc/t280_s16_dos_find_layout_fixture.c
+build obj/layout.obj: cc `$root/test/mvdm-host/dos/dem/dos_find_layout_test.c
 build dos_find_layout_fixture.exe: link obj/layout.obj
 default dos_find_layout_fixture.exe
 "@

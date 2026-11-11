@@ -380,7 +380,7 @@ retire1000 and latency200. r78 ordinary NTCON80x50 mouse target receives real
 motion before press and a release, with sink acknowledgment and exit0.
 These passed gates do not override the subsequent r79 failure.
 
-The new reusable test/observation/verify-text-geometry-handoff.ps1 runs the
+The new reusable test/integration/verify-text-geometry-handoff.ps1 runs the
 formal ntw32-geometry-handoff-probe.exe and NASM-built GRID.COM from existing
 package tests/, in private desktops with a200-column observer buffer. It
 requires nine child completions, three history/size checks, actual guest/MEM/

@@ -138,7 +138,7 @@ Commands for the final retained gate (repository-relative paths):
 
 Publication and smoke entrypoints are retained as r053/publish.ps1 and
 r054/published-smoke.ps1. Formal x86 NTMON and monitor-layout-test targets
-use the selected S2/r001 Ninja graph; test/observation/verify-monitor-layout.ps1
+use the selected S2/r001 Ninja graph; test/integration/verify-monitor-layout.ps1
 uses r049's observer and reports r049/monitor-layout.txt. Same graph's
 guest-environment-test and common-system-root-test pass; application-search-test
 passes with fresh r049/search-fixture. r049's input-milestone-test preserves

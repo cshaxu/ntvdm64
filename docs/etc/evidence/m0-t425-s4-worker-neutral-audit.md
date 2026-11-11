@@ -43,7 +43,7 @@ blocking/resume/completion likewise remain their respective worker semantics.
 Command, with absolute paths and unswitched private desktop:
 
 ```powershell
-test/observation/verify-worker-neutral-input.ps1 `
+test/integration/verify-worker-neutral-input.ps1 `
   -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T424/S2/r001 `
   -Observer O:/repos.hobby/ntvdm64/build/M0-T424/S2/r001/observer.exe `
   -LogRoot O:/repos.hobby/ntvdm64/build/M0-T425/S4/r001/focused
@@ -121,8 +121,8 @@ lossy reimport of an already prepared Unicode grid.
 | test/observation/ntvwm_presentation_test.c --input-return and ordinary report | Real copied pipe/key return, reply failures and common decoder negatives; S4 688/0 and presentation426/0. Activation provider is substituted and explicitly not guest proof. |
 | test/component-integration/verify-frontend-link-ownership.ps1 | Graph recursively checks no frontend-private source in launcher/workers, no helper/native backend in frontend, retired archives/control pipes absent; deliberate leakage negatives rejected. S4 PASS. |
 | tools/audit/Verify-CommandExitStatus.ps1 -OrdinaryFrontend | 17 routes each Console/Window, COMMAND/MEM/EDIT text and nested recovery, exit results, one root receiver, expected output after each command. Final selected S3 r004 summaries each17/zero mismatch; tests inspect output, not merely exit0. |
-| test/observation/verify-command-native-edit-return.ps1 and verify-frontend-relaunch.ps1 | Actual modern EDIT CtrlQ -> CMD -> DOS MEM; outer native cooked return and relaunch. Selected S3 retained phase PASS. |
-| test/observation/verify-ntvwm-management.ps1 -TwoSessions and verify-broker-retirement.ps1 | Independent session survives selected close; both workers' death and frontend loss return explicit direct failure and broker-ordered retirement. Selected S3 retained phase PASS. |
+| test/integration/verify-command-native-edit-return.ps1 and verify-frontend-relaunch.ps1 | Actual modern EDIT CtrlQ -> CMD -> DOS MEM; outer native cooked return and relaunch. Selected S3 retained phase PASS. |
+| test/integration/verify-ntvwm-management.ps1 -TwoSessions and verify-broker-retirement.ps1 | Independent session survives selected close; both workers' death and frontend loss return explicit direct failure and broker-ordered retirement. Selected S3 retained phase PASS. |
 | verify-s7-rpc-fixtures.ps1, verify-native-gui-routing.ps1, Verify-ProductVersions.mjs | RPC11 and GUI5, explicit wait37/default0, old app/protocol/interface rejection1306. Selected S3 rpc/versions phases terminate0. |
 | observe-wow-frontiers.ps1 and exact baseline signature review | Three separate observations retain WINMINE window and original SOL/WRITE error boundaries. No gameplay or SOL/WRITE functionality acceptance is invented. |
 

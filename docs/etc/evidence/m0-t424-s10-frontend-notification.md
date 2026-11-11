@@ -167,7 +167,7 @@ cache sources and hashes. It copies the accepted S9 immutable guests and
 configuration. No formal product files are replaced. Tests temporarily map
 only Z: and remove it in finally.
 
-`test/observation/verify-frontend-rapid-relaunch.ps1` runs a real outer CMD
+`test/integration/verify-frontend-rapid-relaunch.ps1` runs a real outer CMD
 batch with twelve immediate native CMD /C and DOS COMMAND /C MEM pairs,
 followed by one final native CMD /C request. There is no line pacing or
 inter-launch sleep. It asserts actual outer completion, real Console output
@@ -419,7 +419,7 @@ Reproduction/test entrypoints:
   service cases; unchanged S9's baseline interleaving fails before repair.
 - console-channel-r005.exe --private-desktop <report>: real coordinate/grid/
   cursor/VT test; --private-desktop-full retains channel/fault/resource tests.
-- test/observation/verify-frontend-rapid-relaunch.ps1 and
+- test/integration/verify-frontend-rapid-relaunch.ps1 and
   verify-frontend-rapid-interactive.ps1: no launch/line-delay masking.
 - coordinate-regression-r002: classifier227, execution lifetime1073/zero
   remaining handles, Console17/Window17, EDIT, relaunch/isolation and four

@@ -226,7 +226,7 @@ This agrees with nohelper-members-r1 and the two nohelper-chain-r1 chains;
 no new observer, helper or Job-based product membership mechanism is needed.
 
 Native-root refresh t423-s9-native-root-r1 passes six cases through
-test/observation/verify-native-root-console.ps1: output (37), input (23),
+test/integration/verify-native-root-console.ps1: output (37), input (23),
 shell (0), nested native (23), interactive nested native (inner 37 / outer 23),
 and retained history (19). The reports and Console text are under Logs2.
 Input cases require executed markers, not echoed commands; history requires
@@ -303,7 +303,7 @@ no helper fallback or test exemption has been introduced.
 
 ## Real NTMon Console and Window input
 
-test/observation/verify-native-monitor.ps1 now executes the actual staged
+test/integration/verify-native-monitor.ps1 now executes the actual staged
 ntmon.exe through run16 and the production ConPTY, not the layout fixture.
 The observer's explicit --observe-console-function-key accepts F1..F12 and
 uses Console INPUT_RECORDs or the existing private-desktop Window key route.
@@ -2203,7 +2203,7 @@ It is removed from the driver, not relabelled as a passing product close.
 Resource ClosePseudoConsole and frontend-loss tests retain that independent
 lifecycle obligation; physical desktop observation retains its owner waiver.
 
-test/observation/verify-twelve-target-chain.ps1 now asserts the admitted
+test/integration/verify-twelve-target-chain.ps1 now asserts the admitted
 retention policy, preserves all prior nesting/identity/direct-result/live-I/O
 and original DOS-record checks, then performs separately labelled fixture
 housekeeping on pinned, image-verified frontend processes. Housekeeping is

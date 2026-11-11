@@ -41,7 +41,7 @@ Win32/x86 /MT CCPU40 cache build/M0-T424/S2/r001.
 - [x] console-frame-failure-test.exe --private-desktop-full: exit=0, final
   fixture PASS; rollback/publication/channel/FIFO/cancellation/peer death and
   stable pending handle count 437. Mocked broker attachment is not guest proof.
-- [x] test/observation/verify-worker-neutral-input.ps1: all seven cases pass.
+- [x] test/integration/verify-worker-neutral-input.ps1: all seven cases pass.
 - [x] test/component-integration/verify-frontend-link-ownership.ps1 passes,
   including deliberate dependency leakage negatives.
 - [x] Fresh Console17/Window17, retained lifecycle/EDIT/isolation, RPC11/GUI5,

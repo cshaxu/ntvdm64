@@ -88,7 +88,7 @@ as an independent native comparator. In the sandbox the OS returns access denied
 (5); under the same normal user context as the product test it returns 6118.
 The acceptance comparison uses the latter, not a hardcoded interchangeable error.
 
-`test/observation/verify-redirector-remote.ps1` assembles an independent COM
+`test/integration/verify-redirector-remote.ps1` assembles an independent COM
 probe and runs it through the coherent package in an owned physical O:/tmp stage.
 The real original guest dispatch, CCPU40, VDMREDIR and host binding execute:
 32 remote API + 32 raw transactions + 32 null transactions return CF=1/AX=120;

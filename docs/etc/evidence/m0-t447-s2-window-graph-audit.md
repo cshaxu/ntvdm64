@@ -1600,7 +1600,7 @@ and complete mutation wiring remain follow-up work, not runtime acceptance.
 Background delivery-r1/run.ps1 PID26380 supervised checks PID8976 with an
 1800-second deadline; runner.exit and checks.exit are0. Exact entrypoints:
 
-- test/observation/verify-wow-mine-gameplay.ps1 with the sealed product-r2
+- test/integration/verify-wow-mine-gameplay.ps1 with the sealed product-r2
   package, retained S5 observer, provider/msvc-x86.cmd and WindowStyle
   Off/Win16/All. All three prove flag/counter change, F2 reset, opening a
   cell, WM_CLOSE and normal zero-status run16 completion. This preserves
@@ -3941,7 +3941,7 @@ dependency group; do not bridge only one message or infer WRITE usability.
 This test-only continuation retains published runtime5edea33bb. The purpose
 is to distinguish a visible main window from actual deal/draw/close behavior;
 it does not close S2 or change the runtime. Entrypoints are
-`test/observation/verify-wow-sol-gameplay.ps1` and its
+`test/integration/verify-wow-sol-gameplay.ps1` and its
 `wow_sol_gameplay_probe.c`. The runner compiles only the probe, uses a fresh
 owned physical stage and isolated desktop, and verifies Run16's actual exit
 before fixture cleanup. No guest memory access, patch, injected procedure,

@@ -74,7 +74,7 @@ callee advertised by the guest as stdcall) completed three GEN1 records.
 Each recorded zero errors, 3 Pascal callbacks, 1 cdecl callback and 1 nested
 native entry after execution; the final record confirmed 3 resource releases.
 The same NE probe was used; only the native test calling convention changed.
-The retained runner is test/observation/verify-wow-generic-call.ps1, using
+The retained runner is test/integration/verify-wow-generic-call.ps1, using
 explicit build root, compiler driver and observer arguments. No original guest
 was modified. Full product gate is still pending.
 

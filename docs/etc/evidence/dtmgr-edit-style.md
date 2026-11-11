@@ -2,7 +2,7 @@
 
 Current naming: the owner renamed the component to `src/monitor-exe` and
 the product to `monitor.exe`. The current test entry is
-`test/observation/verify-monitor-layout.ps1`; retained names/hashes below
+`test/integration/verify-monitor-layout.ps1`; retained names/hashes below
 identify historical dtmgr artifacts, not the renamed candidate.
 
 ## Request and boundary

@@ -2,8 +2,21 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T481 remains open; S19 has completed its bounded
-cleanup and delivery verification. No next S is admitted by this closure.
+**No active M/T/S packet.** T481 remains open; S20 is complete.
+
+## S20 closure
+
+[Test scope, reduction and verification](../etc/evidence/m0-t481-s20-test-reduction.md):
+retired 132 obsolete files (12,238 lines); preserved the unique DOS DTA layout
+fixture, pinned shared-library fixtures and unresolved identity research.
+Real-package runners live under test/integration; bounded provider fixtures
+remain unit tests. Three WOW runners share one owned setup/cleanup helper.
+Cached x86/x64 compilation, the DTA fixture, six before/after WOW runs and all
+16 selected Full gates passed. External DOS4GW/NESticle remains explicitly
+skipped for unavailable fixtures. No production or guest implementation changed.
+The existing 11-image package is hash-verified at both publication destinations;
+no replacement package is required for this test-only delivery. S20 P1 delivers
+this cleanup. Parallel Win95 proposal and win-multitask removals are excluded.
 
 ## S19 closure
 

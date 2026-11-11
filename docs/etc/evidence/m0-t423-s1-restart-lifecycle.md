@@ -243,7 +243,7 @@ used. It requires the child to receive the event, finish cleanup and return
   17 cases (`O:/winnt/logs/t423-s1-dos17-control-r1-summary.json`);
   this is not a delivered P.
 - Direct DOS control events separately pass through
-  `test/observation/verify-run16-dos-control.ps1 -Observer
+  `test/integration/verify-run16-dos-control.ps1 -Observer
   O:/winnt/tests/t423-s1-console-observer.exe -LogPrefix t423-s1-dos-control-r2`.
   The observer generates real C and Break events after the actual COMMAND
   prompt, then enters VER/MEM/EXIT. Both cases assert event generation,

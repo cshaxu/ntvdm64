@@ -175,7 +175,7 @@ An isolated candidate NTVDM build containing DIV-357 was exercised through the
 real DOS INT 33 save/move/restore path: `SUM=26 SAVED=26`,
 `MOUSE-STATE-PASS`, observer exit 0; the updated probe also verifies rejection
 of both a corrupted checksum and a corrupted cookie with a matching checksum.
-The reproducible entry is `test/observation/verify-mouse-state-checksum.ps1`.
+The reproducible entry is `test/integration/verify-mouse-state-checksum.ps1`.
 The prior sealed baseline produced
 `SUM=26 SAVED=00`, `MOUSE-STATE-FAIL`. The candidate stage was cleaned after
 the witness. This verifies that case, not malformed-buffer handling or the
@@ -194,7 +194,7 @@ read back `22h` after changing only the cursor-disable bit. Successive text
 frames showed `(20,10, visible=1)`, `(20,10, visible=0)`, then
 `(21,10, visible=1)` with the same scan-line shape; the guest and observer
 exited successfully. The reproducible entry is
-`test/observation/verify-vga-cursor-disable.ps1`; it requires the test-only
+`test/integration/verify-vga-cursor-disable.ps1`; it requires the test-only
 console-wire observer worker and checks that the text cells remain unchanged.
 This is a window-text witness, not a proof of every
 graphics mode or frontend. An earlier attempt timed out before observation;
@@ -235,7 +235,7 @@ no-deletion pressure case then reaches C; a 54-assertion production-DEM
 fixture also covers resource release and preservation of an empty-buffer end
 status. The deleted-lookahead case still reports no more files after B and is
 not claimed repaired. The repeatable real-DOS cases are in
-`test/observation/verify-dem-pressure.ps1` (`NoDelete`, `NoPressure`, and
+`test/integration/verify-dem-pressure.ps1` (`NoDelete`, `NoPressure`, and
 `Deleted`); the last records an observed known limitation, not a repair pass.
 Original index reset has not been supplied.
 

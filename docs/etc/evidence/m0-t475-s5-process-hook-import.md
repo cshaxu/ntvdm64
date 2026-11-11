@@ -559,7 +559,7 @@ close and returned exit code 0. This probe does not edit or save a document.
 ## WRITE edit and save comparison
 
 The owner excludes DOS4GW/NESticle from this acceptance. The enhanced
-`test/observation/verify-wow-write-lifecycle.ps1` uses a private desktop and
+`test/integration/verify-wow-write-lifecycle.ps1` uses a private desktop and
 fresh physical package stage. For each of two successive WRITE sessions it
 posts a distinctive text marker to the document, invokes Save, enters a
 unique path within that stage, checks the resulting file bytes for the marker,

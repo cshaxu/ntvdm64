@@ -59,7 +59,7 @@ Build r008 then passes both current-source runs:
   callback update, endpoints/normalization, button bits, disabled-provider
   input, no empty callback, balanced hide/show and repeated Disable.
 
-Entrypoint is test/observation/verify-win101-mouse-driver-guest.ps1 with
+Entrypoint is test/integration/verify-win101-mouse-driver-guest.ps1 with
 DriverBuild=build/M0-T435/S2/r008-driver,
 PackageInput=build/M0-T434/S5/r037-runtime,
 Observer=build/M0-T425/S9/r033/console-startup-observer.exe,

@@ -133,7 +133,7 @@ only the test fixture is compiled x86 /MT with user32.lib, under build/M0-T423/S
 The final strengthened all-five run passed with an explicit worker-exit check
 before any test cleanup, not just launcher/frontend retirement. Reproducer:
 map the fresh build/M0-T423/S5/p candidate to R: temporarily, then run
-test/observation/verify-frontend-lifetime.ps1 with Observer
+test/integration/verify-frontend-lifetime.ps1 with Observer
 build/M0-T423/S4/observer-modal.exe, PackageRoot R:/, ProcessPackageRoot the
 physical candidate, EvidenceRoot build/M0-T423/S5/mixed-fault-retirement,
 LogPrefix m0-t423-s5-mixed-fault-retirement and ExpandedFaults. Remove the

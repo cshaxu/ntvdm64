@@ -29,7 +29,7 @@ but that question does not authorize expanding this interval-only delivery.
 - test/observation/verify-native-acquisition-interval.ps1 checks the actual
   production20ms literal and unchanged shutdown/release wait-set (source
   contract only), passing in S7/source-check.txt.
-- test/observation/verify-worker-neutral-input.ps1 with the original
+- test/integration/verify-worker-neutral-input.ps1 with the original
   T427/S4/r049 observer and cache runs on private Consoles: all seven cases
   pass in S7/r002, including501 native presentation and689 input-return checks.
   The earlier direct fixture invocation without its private Console has five

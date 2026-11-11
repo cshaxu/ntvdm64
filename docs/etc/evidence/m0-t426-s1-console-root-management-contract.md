@@ -27,7 +27,7 @@ Get-Content src/common/rpc/management.c
 Get-Content test/adapter-basesrv/base_service_reservation_test.c
 Get-Content test/app/common_management_test.c
 Get-Content test/observation/monitor_layout_test.c
-Get-Content test/observation/verify-monitor-layout.ps1
+Get-Content test/integration/verify-monitor-layout.ps1
 ```
 
 Source conclusions below are high-confidence inspection, not newly executed
@@ -172,8 +172,8 @@ These are required future assertions, not passing results of this S.
 | test/adapter-basesrv/monitor_rpc_test.c | Actual RPC populated/empty snapshot, generation/type/instance negative selectors, malformed/version/application mismatch; peer/session authorization, no management-only connection pins. |
 | test/app/common_management_test.c | Production common client preserves RPC error/exception, empty outputs and allocation cleanup; forwards full stable key unchanged; malformed input invokes no RPC. |
 | test/observation/monitor_layout_test.c | Real renderer cells: hierarchy/STATE/elapsed, exact title/footer, long paths/scrollbars, missing roots, independent WOW/GUI nodes without UNBOUND, stable selection after reorder/removal, no stale confirmation. Add production input-dispatch cases for UP/DOWN/DEL/ESC and no-op missing roots. |
-| test/observation/verify-monitor-layout.ps1 | Repair stale src/interface IDL and missing common-rpc link dependencies before use, or replace with formal Ninja fixture target; all products/intermediates under build. Existing script is not a valid current build command. |
-| test/observation/verify-ntvwm-management.ps1 and verify-native-gui-routing.ps1 | Extend actual serial package checks to distinguish GUI target from carrier; native direct completion/reuse unchanged, two Console sessions cannot cross-control. |
+| test/integration/verify-monitor-layout.ps1 | Repair stale src/interface IDL and missing common-rpc link dependencies before use, or replace with formal Ninja fixture target; all products/intermediates under build. Existing script is not a valid current build command. |
+| test/integration/verify-ntvwm-management.ps1 and verify-native-gui-routing.ps1 | Extend actual serial package checks to distinguish GUI target from carrier; native direct completion/reuse unchanged, two Console sessions cannot cross-control. |
 | tools/audit/Invoke-ProductVerification.ps1 plus existing lifecycle/RPC probes | Retain Console17/Window17, WOW frontiers, nested DOS/native both ways, loss/cleanup and version negatives; coherent eight-file package hash/publication. No parallel global-endpoint/Z product matrices. |
 
 Monitor fixture currently includes its production main.c, not a copied fake

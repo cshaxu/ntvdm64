@@ -304,3 +304,12 @@ against their defect contract, not presented as performance optimizations.
   state, focused positive/negative verification and unsupported behavior.
 - Preserve unrelated worktree changes. Use `git mv` for an admitted pure move
   and never treat `src.old/` as an implementation input.
+
+## Test scope and footprint
+
+Follow [test scope and dependencies](../../test/README.md). Real runtime/guest
+acceptance belongs in test/integration; bounded unit tests may use inner
+components with explicit dependencies. Shared libraries must not depend on
+outer application fixtures. Share repeated setup at its narrow common owner,
+retain basic behavior and meaningful failure/lifecycle coverage, and retire
+obsolete implementation contracts rather than adding overlapping test layers.

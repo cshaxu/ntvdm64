@@ -913,14 +913,14 @@ no-input negative after the reset/set-position ordering correction.
 ### Nested, fault and independent WOW frontier retention
 
 Current candidate, unchanged after r20, passed
-test/observation/verify-twelve-target-chain.ps1 with formal BuildRoot,
+test/integration/verify-twelve-target-chain.ps1 with formal BuildRoot,
 PackageRoot Q:/, EvidenceRoot build/M0-T423/S7/chains-r21, LogRoot
 O:/winnt/Logs2 and prefix m0-t423-s7-chains-r21. Both GGGWDWGGGDWD and
 GGGDDWGGGWWD have ordered ENTER/RETURN, direct results, actual character I/O,
 two distinct frontend groups and natural retirement. The summary records
 frontend identities 25904:2 / 6936:13 and 13908:38 / 2900:52 respectively.
 
-test/observation/verify-frontend-lifetime.ps1 with observer-text.exe,
+test/integration/verify-frontend-lifetime.ps1 with observer-text.exe,
 PackageRoot Q:/, ProcessPackageRoot build/M0-T423/S7/p, EvidenceRoot
 build/M0-T423/S7/faults-r22, LogRoot O:/winnt/Logs2, prefix
 m0-t423-s7-faults-r22 and -ExpandedFaults -Window passed all five cases:

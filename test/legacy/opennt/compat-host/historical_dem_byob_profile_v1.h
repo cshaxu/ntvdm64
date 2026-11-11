@@ -1,6 +1,0 @@
-#ifndef RUNNER_HISTORICAL_DEM_BYOB_PROFILE_V1_H
-#define RUNNER_HISTORICAL_DEM_BYOB_PROFILE_V1_H
-
-int __cdecl runner_historical_dem_byob_profile_v1_replace_directory(const char *directory);
-
-#endif

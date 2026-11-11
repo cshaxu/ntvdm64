@@ -2873,7 +2873,7 @@ launcher path discovery or final Window rendering.
 
 Reproducer: NASM -f bin -o build/M0-T423/S2/VFRAME.COM
 test/observation/video_frame_delivery.asm; then
-test/observation/verify-video-frame-delivery.ps1 with FormalBuild
+test/integration/verify-video-frame-delivery.ps1 with FormalBuild
 build/M0-T423/S1/restart-formal-x86, WowBuild
 build/M0-T423/S1/restart-wow-x86, Backup
 build/M0-T423/S2/baseline-db4ab61eb2db41b296d49d3ce6b8de6d,
@@ -3212,7 +3212,7 @@ Its close/logoff/shutdown policy instead consults worker-local state; that
 function is not a frontend input reader or a callback pointer to serialize.
 The launcher retains its wait while the target receives the native event.
 
-The checked-in test/observation/verify-run16-dos-control.ps1 now has fresh
+The checked-in test/integration/verify-run16-dos-control.ps1 now has fresh
 candidate evidence: m0-t423-s2-control-owner-current-r2-c.txt and -break.txt
 under O:/winnt/logs. Each generated-control sidecar proves successful real
 event generation (0 and 1 respectively); guest VER/MEM text, zero remaining
@@ -4541,7 +4541,7 @@ mistaken for this build lock.
 
 Reproducible checked-in tests:
 
-- test/observation/verify-console-close-contract.ps1 takes Observer,
+- test/integration/verify-console-close-contract.ps1 takes Observer,
   BuildRoot and Prefix. It forces an unswitched private desktop, runs three
   native Console-client cases and the complete service fixture mode catalogue
   (24 including default, excluding reservation-child), checking actual PASS
@@ -4658,7 +4658,7 @@ active; this evidence-only P neither admits S3 nor changes its exit standard.
 
 ### Nonzero DOS completion and batch-entry contrast
 
-Added test/observation/verify-dos-nonzero-continue.ps1 and its
+Added test/integration/verify-dos-nonzero-continue.ps1 and its
 dos-nonzero-continue.bat. The runner assembles the existing independently
 authored dpmi_exec_child.asm without defines: tail " OK" prints its success
 marker and exits 7; absent tail prints its negative marker and exits 99.

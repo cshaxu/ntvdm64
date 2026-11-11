@@ -415,7 +415,7 @@ Build-native-startup-rpc-r005/r006.log and build-native-startup-auth.log pass.
 The actual product path (not a mock) starts native CMD, captures its output
 marker and returns exit 37 through the broker: native-startup-product-r001/r002.txt
 and native-startup-product-tracked.txt. The reproducible entrypoint is
-test/observation/verify-native-rpc-startup.ps1 with Observer=the selected cache's
+test/integration/verify-native-rpc-startup.ps1 with Observer=the selected cache's
 observer.exe, PackageRoot=build/M0-T424/S2/r001 and a fresh ReportPath under
 build/M0-T424/S7/r001. It asserts child result/output, not observer exit alone.
 The selected cache supplies the six current candidate EXEs; this native-only
@@ -575,7 +575,7 @@ rejection. Obsolete native/bootstrap pipe reply DTOs and version constants
 have no callers and are removed from common/protocol/frontend_protocol.h.
 
 Build-rpc-fixture-migration/r002/r003.log link six x86 EXEs and the selected
-fixtures. The tracked entrypoint test/observation/verify-s7-rpc-fixtures.ps1
+fixtures. The tracked entrypoint test/integration/verify-s7-rpc-fixtures.ps1
 takes Observer=cache observer.exe, PackageRoot=build/M0-T424/S2/r001,
 ReportPrefix=fresh path under build/M0-T424/S7/r001, and selected Cases. It
 requires actual child exit zero and assertion output on a private desktop.
@@ -619,7 +619,7 @@ was corrected, not broadened; build-native-registry-r003.log links six x86 EXEs
 and fixtures. A comma-separated -File Cases argument failed PowerShell validation
 before execution; the actual -Command array invocation below passes both cases.
 
-Reproduce with test/observation/verify-s7-rpc-fixtures.ps1, selected cache
+Reproduce with test/integration/verify-s7-rpc-fixtures.ps1, selected cache
 observer.exe, PackageRoot=build/M0-T424/S2/r001,
 ReportPrefix=build/M0-T424/S7/r001/native-registry-migration-r002 and
 Cases=@('native-registry','native-command'). Both actual children exit zero with

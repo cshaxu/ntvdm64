@@ -26,7 +26,7 @@ dependent build inputs or later behavior are unchanged.
 
 | Stable obligation | Selected chain and observed status | Existing evidence and remaining boundary |
 | --- | --- | --- |
-| M1, C01--C03/C09/C10: send, post, retrieval, filters and quit | `mvdm/wow32/wumsg.c` and message thunks retain original conversions and native USER transport; `wow_user_message_bridge.c` services the native send boundary, not a replacement queue. | `test/observation/verify-win16-message-probe.ps1` asserts ordinary same-worker send/nesting/reply/post/filter/quit and has distinct cross-worker and external-peer modes. T447 recorded bounded passes; the script itself records unproved implicit focus, full converted structures and other variants. Do not infer complete M1 from one mode. |
+| M1, C01--C03/C09/C10: send, post, retrieval, filters and quit | `mvdm/wow32/wumsg.c` and message thunks retain original conversions and native USER transport; `wow_user_message_bridge.c` services the native send boundary, not a replacement queue. | `test/integration/verify-win16-message-probe.ps1` asserts ordinary same-worker send/nesting/reply/post/filter/quit and has distinct cross-worker and external-peer modes. T447 recorded bounded passes; the script itself records unproved implicit focus, full converted structures and other variants. Do not infer complete M1 from one mode. |
 | M2: mixed receive, reply and continuation | Original `WU32InSendMessage`/`WU32ReplyMessage` use native USER. Current `wow_user_task_lifecycle.c::native_call_begin/end` uses an execution scope; it does not manufacture a received SMS. | The old opening table in the S4 ledger describes a *superseded* target-based `psmsSent` candidate. The later ADAPTER-WOW-077 record and current source show it was removed. Keep actual mixed/implicit receive, duplicate/no-pending reply and reentry evidence separate from this source observation; full M2 is open. |
 | M3: scheduling and exceptional waits | `non-mvdm/.../taskman.c` retains original task scheduling; lifecycle scope supplies actual native-stack readiness. `mvdm/softpc.new/host/src/nt_eoi.c::BlockWOWIdle` remains the one-bit interrupt owner. | S4's final source disposition rejects speculative unconditional idle toggles. A real original `W32Dispatch/W32Exception` Ignore/Close and subsequent task/hardware-wakeup witness is not established by the normal callback fixture. Preserve original behavior until the whole exception path is proved. |
 | M4: conversion and data lifetime | Original `wumsg.c`, `wmsg16.c`, `wmdisp32.c` and `wdde.c` own conversions; DIV-350--354 and existing call-local acquisition records are present in current source. | T447 source-body alias/queue fixtures and a real classic Execute/ACK witness are bounded evidence. They do not prove DATA/POKE/ADVISE/INITIATE, failed transfer, all output structures or complete cross-worker lifetime. Verify source and actual selected build identity before reusing an old candidate result. |
@@ -77,7 +77,7 @@ targeted operation, and the shared worker-base must not interpret WOW policy.
 
 ## Existing real-message probe: assertion boundaries
 
-The checked-in `test/observation/verify-win16-message-probe.ps1` is not a
+The checked-in `test/integration/verify-win16-message-probe.ps1` is not a
 single all-features run. Its option validation deliberately separates modes:
 `ClassicDde` cannot be combined with cross-worker, external peer, pending
 send, construction or early-reply/timeout payload modes; cross-worker requires

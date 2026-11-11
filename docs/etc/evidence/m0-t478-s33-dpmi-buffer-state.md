@@ -43,7 +43,7 @@ test implementation. Admission then passed (PID 30668).
 - `test/observation/verify-guest-memory-lease.ps1 -BuildRoot build/t478-s33/lease-current`
   (child PID 20200, 180-second owned deadline): 45 boundary checks and session
   fixture exit zero. Existing test source and production source are unchanged.
-- `test/observation/verify-dpmi-int21-state.ps1 -PackageRoot build/t478-s32/package-final -BuildRoot <worktree>/build/t478-s33/int21-live -Observer build/t478-s32/observer.exe`
+- `test/integration/verify-dpmi-int21-state.ps1 -PackageRoot build/t478-s32/package-final -BuildRoot <worktree>/build/t478-s33/int21-live -Observer build/t478-s32/observer.exe`
   (PID 22868): four actual guest cases pass, low/high buffers on direct/twice-
   nested COMMAND routes, 2494/1383/1346/1500 ms observer elapsed respectively.
   Each has a fresh identity-bound physical package and private desktop, uses

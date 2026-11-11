@@ -133,7 +133,7 @@ The first new PIC run crashed because the fixture omitted InitializeIcaLock;
 the worker's original initialization was not missing. Only test setup changed.
 
 Reproduce selected guest cases with
-`test/observation/verify-memory-transition-guest.ps1 -RuntimeRoot
+`test/integration/verify-memory-transition-guest.ps1 -RuntimeRoot
 build/M0-T430/S6/r007-runtime -Observer
 build/M0-T427/S4/r049/console-startup-observer.exe -BuildRoot
 build/M0-T430/S6/<fresh> -Case <case>`.

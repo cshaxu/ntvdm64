@@ -133,7 +133,7 @@ The service now owns both actions consistently:
 No component gains a new direct lifecycle link; no guest file, BOP, COMMAND
 or BaseCheckVDM logic changes.
 
-`test/observation/verify-root-carrier-exit.ps1` is the fixed executable
+`test/integration/verify-root-carrier-exit.ps1` is the fixed executable
 regression.  It uses a physical isolated package, a clean deployment-like
 environment, and result-gated input—not typeahead.  Against
 `build/t451-s5/root-exit-r12/package`, all of the following passed:

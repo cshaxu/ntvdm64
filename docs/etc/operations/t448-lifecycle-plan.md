@@ -273,7 +273,7 @@ through the failure result, rather than infer it from stale thread state.
 
 S5 repeats real conhost and terminal paths with CMD, COMMAND and direct NTMON,
 CAF before/after NTMON, internal/external close, normal exit and no-CAF controls.
-Use existing test/observation/verify-console-caf-self-delete.ps1 and strengthen
+Use existing test/integration/verify-console-caf-self-delete.ps1 and strengthen
 service fixtures in test/adapter-basesrv/base_service_reservation_test.c;
 frontend_scope_lifetime_test and console_channel_lifetime_test cover local
 failure ordering. Add explicit deterministic phase/cancellation assertions to
