@@ -34,16 +34,16 @@ under authoritative process inspection. Subsequent admission checks identified
 missing active-packet syntax and proposal link; these were corrected before
 test implementation. Admission then passed (PID 30668).
 
-- `python tests/observation/verify-dpmi-buffer-state.py --build-root build/t478-s33/buffer-state`
+- `python test/observation/verify-dpmi-buffer-state.py --build-root build/t478-s33/buffer-state`
   (PID 27384): both original comparisons and 133 controlled x86 body checks pass.
   It compiles the original buffer/state bodies, excluding SegmentToSelector's
   guest executor. Register/selector dependencies are controlled, not real CPU
   execution. Release-style assertions are disabled; exhaustion checks the
   sentinel without dereferencing it, and does not claim safe exhaustion.
-- `tests/observation/verify-guest-memory-lease.ps1 -BuildRoot build/t478-s33/lease-current`
+- `test/observation/verify-guest-memory-lease.ps1 -BuildRoot build/t478-s33/lease-current`
   (child PID 20200, 180-second owned deadline): 45 boundary checks and session
   fixture exit zero. Existing test source and production source are unchanged.
-- `tests/observation/verify-dpmi-int21-state.ps1 -PackageRoot build/t478-s32/package-final -BuildRoot <worktree>/build/t478-s33/int21-live -Observer build/t478-s32/observer.exe`
+- `test/observation/verify-dpmi-int21-state.ps1 -PackageRoot build/t478-s32/package-final -BuildRoot <worktree>/build/t478-s33/int21-live -Observer build/t478-s32/observer.exe`
   (PID 22868): four actual guest cases pass, low/high buffers on direct/twice-
   nested COMMAND routes, 2494/1383/1346/1500 ms observer elapsed respectively.
   Each has a fresh identity-bound physical package and private desktop, uses

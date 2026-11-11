@@ -33,7 +33,7 @@ ownership, input handoff, final capture, or completion protocol.
 - The observed `O:/WINNT/mysmb64.exe`, identical to the owner-maintained
   sibling-project asset, shows its inherited carrier during its Console
   presenter path. Esc is a normal target exit, not NTVWM shutdown.
-- `tests/observation/ntvwm_console_winevent_probe.c` establishes that an
+- `test/observation/ntvwm_console_winevent_probe.c` establishes that an
   out-of-context Console WinEvent hook requires a message loop and that the
   worker can receive Console-originated events across the worker/conhost
   process boundary.

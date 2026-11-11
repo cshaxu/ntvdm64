@@ -23,8 +23,8 @@ if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne 
     throw 'Owned-Console Window input requires the isolated launcher identity; no product process was started.'
 }
 . (Join-Path $PSScriptRoot 'Merge-ConsoleTextSnapshots.ps1')
-. (Join-Path $PSScriptRoot '../../tests/observation/typeahead_witness.ps1')
-. (Join-Path $PSScriptRoot '../../tests/observation/isolated_package_cleanup.ps1')
+. (Join-Path $PSScriptRoot '../../test/observation/typeahead_witness.ps1')
+. (Join-Path $PSScriptRoot '../../test/observation/isolated_package_cleanup.ps1')
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 $LogRoot = (Resolve-Path -LiteralPath $LogRoot).Path

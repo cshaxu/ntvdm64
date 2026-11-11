@@ -114,7 +114,7 @@ packet neither changes `demsrch.c` nor uses that result to claim a product
 defect.
 
 The separately authored Win16 directory probe was rebuilt from
-`tests/observation/win16_directory_probe.asm` (1,277 bytes) and launched in
+`test/observation/win16_directory_probe.asm` (1,277 bytes) and launched in
 an isolated copy with the existing observer.  Its r3 record reached the
 selected `run16.exe`, NTSRV and NTVDM images but did not reach the guest
 directory calls before the observer's existing 20-second bound; no `DIRP.DON`
@@ -136,7 +136,7 @@ or a second cwd state.
 
 ## Coherent package and product witness
 
-`tests/build/Test-FullComponentBuild.ps1` recorded the first and unchanged
+`test/build/Test-FullComponentBuild.ps1` recorded the first and unchanged
 second cached passes in `build/t453-s2/full-component-build/result.json`.
 The exact ten selected images passed, including the rebuilt x86 `ntvdm.exe`,
 `WOW32.DLL`, `VDMREDIR.DLL`, `nthook32.dll` and the x64 carrier/service/hook

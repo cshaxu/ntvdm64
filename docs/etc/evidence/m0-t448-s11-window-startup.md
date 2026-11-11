@@ -118,7 +118,7 @@ observer, launches the unchanged MEM with DOS EXEC, captures the current PSP
 on MEM's output call, restores the original vector, and reports `078E`.
 In that same invocation MEM reports `4294936352` = `FFFF8720h`, exactly
 `0 - 078Eh * 16` modulo 2^32. The test program is
-`tests/observation/t448_mem_exec_probe.asm`; it does not patch guest images or
+`test/observation/t448_mem_exec_probe.asm`; it does not patch guest images or
 their code. The packaged MEM is byte-identical to the retained
 `src/mvdm/dos/v86/cmd/mem/mem.exe`. Combined with the associated source's
 explicit zero dummy, this directly supports the guest executable's underflow
@@ -138,7 +138,7 @@ The diagnostic control changes only the final checksum byte in the
 independent test's own output buffer to the measured sum, calls the same
 restore API again, and observes restored position (`CHECKSUM-CONTROL-PASS`).
 The original unmodified state still fails, so the program exits 1. Probe:
-`tests/observation/t448_mouse_checksum_probe.asm`. This diagnostic input is
+`test/observation/t448_mouse_checksum_probe.asm`. This diagnostic input is
 not a guest patch, product workaround or repaired behavior.
 Current comparative SoftPC `src/app-softpc/softpc.new/base/keymouse/mouse_io.c`
 (SHA-256 `c42ee094f4ee9bb4db8da7492b7e333da92baa7b429f5409d3455ed68ef197a6`)
@@ -175,7 +175,7 @@ An isolated candidate NTVDM build containing DIV-357 was exercised through the
 real DOS INT 33 save/move/restore path: `SUM=26 SAVED=26`,
 `MOUSE-STATE-PASS`, observer exit 0; the updated probe also verifies rejection
 of both a corrupted checksum and a corrupted cookie with a matching checksum.
-The reproducible entry is `tests/observation/verify-mouse-state-checksum.ps1`.
+The reproducible entry is `test/observation/verify-mouse-state-checksum.ps1`.
 The prior sealed baseline produced
 `SUM=26 SAVED=00`, `MOUSE-STATE-FAIL`. The candidate stage was cleaned after
 the witness. This verifies that case, not malformed-buffer handling or the
@@ -194,7 +194,7 @@ read back `22h` after changing only the cursor-disable bit. Successive text
 frames showed `(20,10, visible=1)`, `(20,10, visible=0)`, then
 `(21,10, visible=1)` with the same scan-line shape; the guest and observer
 exited successfully. The reproducible entry is
-`tests/observation/verify-vga-cursor-disable.ps1`; it requires the test-only
+`test/observation/verify-vga-cursor-disable.ps1`; it requires the test-only
 console-wire observer worker and checks that the text cells remain unchanged.
 This is a window-text witness, not a proof of every
 graphics mode or frontend. An earlier attempt timed out before observation;
@@ -235,7 +235,7 @@ no-deletion pressure case then reaches C; a 54-assertion production-DEM
 fixture also covers resource release and preservation of an empty-buffer end
 status. The deleted-lookahead case still reports no more files after B and is
 not claimed repaired. The repeatable real-DOS cases are in
-`tests/observation/verify-dem-pressure.ps1` (`NoDelete`, `NoPressure`, and
+`test/observation/verify-dem-pressure.ps1` (`NoDelete`, `NoPressure`, and
 `Deleted`); the last records an observed known limitation, not a repair pass.
 Original index reset has not been supplied.
 

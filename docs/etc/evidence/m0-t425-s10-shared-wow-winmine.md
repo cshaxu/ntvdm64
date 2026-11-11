@@ -40,7 +40,7 @@ WINMINE.EXE SHA256:
 A9D2AFBD1AA98E38F3679F3A1A5DC0463367DD47C9AB1792E5AB8BBDC3441C0C.
 No profile/environment reduction or guest patch is introduced.
 
-Reuse tests/observation/wow_shared_launch_test.c. Add only --async-second,
+Reuse test/observation/wow_shared_launch_test.c. Add only --async-second,
 which makes its second invocation ordinary startup-only too. Existing
 --async, --wait-first, shared worker/window identity, redundant WOWEXEC and
 independent completion assertions remain intact. The probe owns a private
@@ -51,7 +51,7 @@ Build in build/M0-T425/S10/r001 using the retained S9/r033/msvc-x86.cmd and:
 
 ```text
 cl /nologo /TC /MT /W4 /D_CRT_SECURE_NO_WARNINGS
-  tests/observation/wow_shared_launch_test.c
+  test/observation/wow_shared_launch_test.c
   /Fobuild/M0-T425/S10/r001/wow-shared-launch-test.obj
   /Febuild/M0-T425/S10/r001/wow-shared-launch-test.exe /link user32.lib
 ```

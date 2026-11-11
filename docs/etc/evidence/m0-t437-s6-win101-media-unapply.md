@@ -20,7 +20,7 @@ only if it becomes empty. The recovery tool itself is never copied to media.
 ## Focused verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win101_setup_cmd_test.ps1 -ToolRoot tools\win101-setup -BuildRoot build\x
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win101_setup_cmd_test.ps1 -ToolRoot tools\win101-setup -BuildRoot build\x
 ```
 
 Passed. The compact `build\x` fixture is required by the historical PIF field-size

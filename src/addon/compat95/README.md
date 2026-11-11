@@ -157,7 +157,7 @@ The offline DS decoder's MIT attribution/license is in the Python header and
 
 ## Verification
 
-[verify-win95-bootlogo.ps1](../../../tests/observation/verify-win95-bootlogo.ps1)
+[verify-win95-bootlogo.ps1](../../../test/observation/verify-win95-bootlogo.ps1)
 uses the existing physical-package-stage/private-desktop observer ownership
 helpers. Supply the runtime package, built add-on, local BMP, existing native
 observer, guest desktop observer, Python, exact worker MAP and native-layout

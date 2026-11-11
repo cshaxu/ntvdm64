@@ -19,7 +19,7 @@ are superseded by the evidence below; they are not newly outstanding tasks.
 ## Fixed entry and responsibility audit
 
 All run roots below are under build/M0-T447/S3. Existing test entrypoints
-are under tests/observation; exact commands, owned processes and input hashes
+are under test/observation; exact commands, owned processes and input hashes
 remain in those run roots and the source ledger.
 
 | Required chain | Actual production implementation / authority | Acceptance and boundary |

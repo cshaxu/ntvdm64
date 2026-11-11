@@ -51,7 +51,7 @@ The x64 `ntcon.exe` linked successfully. The initial wrapper then failed because
 it named the x86 Ninja script `run-ninja.cmd` rather than
 `run-ninja-parallel.cmd`; the corrected invocation built and passed the six
 `frontend-window-{library,controller,keyboard,mouse,lifetime,payload}-test.exe`
-fixtures and `tests/component-integration/verify-frontend-link-ownership.ps1`
+fixtures and `test/component-integration/verify-frontend-link-ownership.ps1`
 including its negative controls. Earlier diagnostic graph generation with x64
 as the reference failed because that generator expects x86; no product failure
 was inferred. Run logs, PIDs, times and exit codes are in `build/t474-s3-p2`.

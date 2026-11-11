@@ -96,11 +96,11 @@ identity rules where a given original caller requires a projection.
 
 | Entrypoint | What it proves | What it does not prove |
 | --- | --- | --- |
-| `tests/adapter-mvdm-host-out/wow/wow_user_client_view_layout_fixture.c` | Selected original-layout sizes for WND, desktop, CLS, MENU and ITEM compile together. | Runtime publication or lifecycle. |
-| `tests/mvdm-host/wow_page_domain_fixture.c` | Page-domain WND graph, menu attachment/query, retirement and selected local/external capture transactions. | A complete immutable-guest USER16 run for every object family. |
-| `tests/mvdm-host/wow_page_domain_reclaim_fixture.c` | Failed page decommit remains a retained reclamation condition, not a retryable consumed borrow. | Real native destruction. |
-| `tests/adapter-mvdm-host-out/wow/wow_window_{ownership,words_lifetime,creation_order}_fixture.c` | Managed ownership, retained words and creation/rollback ordering. | Foreign/system class scope or host-originated geometry. |
-| `tests/observation/verify-wow-user-profile.ps1` | The selected USER.EXE contains the pinned direct-reader/layout profile. | Correct current producer invocation at every runtime boundary. |
+| `test/adapter-mvdm-host-out/wow/wow_user_client_view_layout_fixture.c` | Selected original-layout sizes for WND, desktop, CLS, MENU and ITEM compile together. | Runtime publication or lifecycle. |
+| `test/mvdm-host/wow_page_domain_fixture.c` | Page-domain WND graph, menu attachment/query, retirement and selected local/external capture transactions. | A complete immutable-guest USER16 run for every object family. |
+| `test/mvdm-host/wow_page_domain_reclaim_fixture.c` | Failed page decommit remains a retained reclamation condition, not a retryable consumed borrow. | Real native destruction. |
+| `test/adapter-mvdm-host-out/wow/wow_window_{ownership,words_lifetime,creation_order}_fixture.c` | Managed ownership, retained words and creation/rollback ordering. | Foreign/system class scope or host-originated geometry. |
+| `test/observation/verify-wow-user-profile.ps1` | The selected USER.EXE contains the pinned direct-reader/layout profile. | Correct current producer invocation at every runtime boundary. |
 
 These are executable evidence for their stated slice only.  S1 ran no
 product build or runtime test because it changes no implementation and has no

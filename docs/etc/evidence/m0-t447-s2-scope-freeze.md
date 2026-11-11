@@ -197,7 +197,7 @@ application/DOS/publication/hash/mirror/governance/commit/push gates remain.
 No other feature may be absorbed into this S2 closure denominator.
 
 All following paths are under build/M0-T447/S2. The checked-in entrypoint for
-F cases is tests/observation/verify-wow-task-lifecycle.ps1 -Case NAME. Its
+F cases is test/observation/verify-wow-task-lifecycle.ps1 -Case NAME. Its
 assertions, not the supervisor exit alone, define coverage. CCPU fixtures
 exercise the production provider/page domain but native witness callbacks are
 not real guest callback execution.
@@ -218,7 +218,7 @@ P15 WOW32 SHA256:
 548670A8B417681B2E6152D114A41DD997E67699E9978C99D6E848A8847FA985.
 No new source, mirror, guest or release bytes change in this audit.
 
-Reproduction entrypoints for E2/E5/E6 (all under tests/observation):
+Reproduction entrypoints for E2/E5/E6 (all under test/observation):
 verify-wow-creation-boundaries.ps1 -Case hook;
 verify-win16-discovery.ps1; verify-win16-hook-probe.ps1;
 verify-wow-sol-gameplay.ps1 and verify-wow-mine-gameplay.ps1 with
@@ -572,7 +572,7 @@ exception and introduces no timer retry. No timer policy implementation was
 copied or left alongside the original.
 
 The checked-in supplementary entrypoint is
-tests/observation/verify-wow-creation-boundaries.ps1 -Case timer with the
+test/observation/verify-wow-creation-boundaries.ps1 -Case timer with the
 production provider and a build-owned output root. Its fixture links the
 actual wrapper object and explicitly mocks only scope owners/original body;
 it checks all 27 index/argument tuples, nested call, exception and both entry
@@ -654,7 +654,7 @@ DestroyWindow loop or late guest callback has been introduced.
 
 ### Real timer witness and terminal-classification review
 
-tests/observation/win16_timer_probe.asm is an independently authored NE test,
+test/observation/win16_timer_probe.asm is an independently authored NE test,
 not modified original media. Its imports use retained USER ordinals 10/12
 (SetTimer/KillTimer), 108/114 (GetMessage/DispatchMessage), 1/60/88
 (MessageBox/GetActiveWindow/EndDialog), plus the existing probe's KERNEL
@@ -1029,7 +1029,7 @@ These latter two use production wrappers with mocked owners/originals, not
 actual guest resource cleanup. No subsequent foundation case ran.
 
 graph-snapshot/stderr.txt records the first failed assertion at
-tests/mvdm-host/wow_page_domain_fixture.c:952: the enrolled native BUTTON's
+test/mvdm-host/wow_page_domain_fixture.c:952: the enrolled native BUTTON's
 native_cleanup is NULL before terminal preparation. The current recognition
 path matches invoked procedures against registered standard targets;
 enroll_created_window instead captures the actual GWL_WNDPROC, which can be
@@ -1188,7 +1188,7 @@ S3/S4/S5/S6 ownership table remains unchanged.
 
 ### Terminal caller acceptance, separate from guest resource lifetime
 
-The checked-in tests/observation/verify-thread-start-boundary.ps1 runs the
+The checked-in test/observation/verify-thread-start-boundary.ps1 runs the
 actual session/thread-start sources with the expanded existing fixture,
 MSVC x86 /O2 /MT and no substituted session owner. All compiler/object/link
 outputs stay in the supplied fresh build root. Each child records its exact
@@ -1673,7 +1673,7 @@ WK32ICallProc32/MakeCall; wcall16.c WOWCallback16/Ex and RET_WOWCALLBACK16=56.
 The entry inherits the original generic thunk's task. It is not an arbitrary
 native-thread entry and requires no new task registry or parallel dispatcher.
 
-Checked-in inputs are tests/observation/win16_generic_probe.asm and
+Checked-in inputs are test/observation/win16_generic_probe.asm and
 wow_generic_callback_probe.c. verify-win16-hook-probe.ps1 -Case generic
 assembles the independent NE, builds the native witness DLL entirely under
 its evidence root, stages both only in the isolated package's tests directory,
@@ -2420,7 +2420,7 @@ WOW32 is23F9E2CA985DCC01B9B9C2ECCB941EAD765174F533094DE638E0DF2BF797C091.
 This builds the current grouped changes; it is not application acceptance,
 package publication or a new P delivery.
 
-The diagnostic-only tests/observation/wow_startup_failure_provider.c includes
+The diagnostic-only test/observation/wow_startup_failure_provider.c includes
 the complete selected queue.c body, replacing only its allocation boundary
 in a separately linked object. For the independent GENPROBE module's exact
 counted name, its second InitTask allocation fails; original retries, rollback
@@ -2970,7 +2970,7 @@ the production delivery gates. Hidden `div337-boundaries-r1` supervisor37444
 ran the independently authored Shell exception guest with the same original
 provider closure and a one-shot diagnostic fault. `frozen-shell-exception-r4`
 (Close) and `frozen-shell-exception-r5` (Ignore) both exit0. Entry:
-`tests/observation/verify-wow-mine-gameplay.ps1 -ShellExceptionSibling
+`test/observation/verify-wow-mine-gameplay.ps1 -ShellExceptionSibling
 -ShellExceptionResponse Close|Ignore` with the hash-checked diagnostic manifest.
 Close retains the first checkpoint only. Ignore records phases0/1/2, no guest
 stack/operation errors, a completed child and an ordinary missing-file failure
@@ -3355,7 +3355,7 @@ and are not erased by any subsequent controlled result.
 
 Controlled r2 completes its three WRITE observations with visible
 MSWRITE_MENU, MSWRITE_DOC and MSWRITE_PAGEINFO. Added reproducible checker
-tests/observation/verify-wow-write-frontier.ps1 requires those visible classes
+test/observation/verify-wow-write-frontier.ps1 requires those visible classes
 in all four samples with a stable live worker identity; it rejects an
 illegal-instruction dialog and explicitly disclaims editing/saving/normal
 exit. It does not convert the observer timeout into application completion.

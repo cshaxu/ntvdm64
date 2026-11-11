@@ -293,7 +293,7 @@ S7 verifies its completed integration; it cannot postpone S2's required owner.
 The following 26 mappings inherit E40's binary/source evidence. All runtime
 contracts remain pending successor acceptance; GetDesktopWindow has the
 specific failing E42 witness. Forty-seven instruction checks are maintained
-by tests/observation/verify-wow-user-profile.ps1, not duplicated here as
+by test/observation/verify-wow-user-profile.ps1, not duplicated here as
 manually copied opcodes. S1 records each check's mapping/field/owner and any
 additional consumers discovered by complete-source review.
 

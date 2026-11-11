@@ -107,7 +107,7 @@ log as a substitute for this review.
 ## Evidence, Verification, And Closure
 
 Each implementation S delivers reproducible test source/scripts in the
-repository under tests/, alongside the implementation they verify. Each
+repository under test/, alongside the implementation they verify. Each
 capability checklist row links an exact test entrypoint/case/arguments,
 expected assertions, prerequisites and source/artifact/run evidence. Exercise
 the selected production caller/provider and real guest boundary where
@@ -153,7 +153,7 @@ against the same mutable build root until the prior owned run has completed or
 been explicitly stopped and recorded.
 
 In-process service fixtures without the global BaseSrv endpoint may run with
-bounded concurrency through tests/observation/verify-service-fixtures.ps1.
+bounded concurrency through test/observation/verify-service-fixtures.ps1.
 Real-package RPC/frontend/session scenarios must remain serial. A runner must
 propagate actual fixture/assertion failures, enforce per-case time budgets,
 clean only its pinned owned processes, and restore its environment even on
@@ -475,7 +475,7 @@ test media, staging, old configure trees and old output packages. The active
 task records its temporary root, owner, wall-clock/size/no-progress budgets
 before running. At a phase/task boundary, join its owned background jobs,
 retain only necessary results/hashes/conclusions in tracked task evidence,
-then remove unneeded output. Reusable tools belong in tracked tools/tests,
+then remove unneeded output. Reusable tools belong in tracked tools/test,
 not a permanent build directory. Cache trees cannot hide evidence/test media.
 
 Owner clarification: `O:/tmp` test stages and guest installation copies are
@@ -502,7 +502,7 @@ unknown/user data to achieve an empty listing. Report retained exceptions.
 The documentation gate checks documents only; safety tests call the real
 cleanup tool in-process. No background cleaner or recovery framework.
 
-Do not emit build products into the repository root, src, tests, tools or
+Do not emit build products into the repository root, src, test, tools or
 artifacts. These lifecycle rules do not remove the existing explicit runtime
 deployment exceptions below, or authorize product/guest changes during tooling
 work. Build/governance-only Td deliveries need risk-proportionate build and

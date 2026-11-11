@@ -681,7 +681,7 @@ tests pending a user/admin-performed edit of that one host profile file.  No
 registry, guest binary or product source was changed by this experiment.
 The no-effect `O:\winnt\SYSTEM.INI` change was then restored byte-for-byte to
 the recorded SHA-256 baseline.  The repeatable
-`tests/observation/invoke-wow-user-network-profile-a-b.ps1` script now owns
+`test/observation/invoke-wow-user-network-profile-a-b.ps1` script now owns
 the two real-profile runs: it requires an administrator token, backs up the
 actual host profile, accepts only `Blank` or hash-pinned original `Wfwnet`,
 collects the normal runtime witnesses, and has an explicit restore operation.
@@ -1375,7 +1375,7 @@ uses native monitor context. The bounded binding retains the same guest word
 and preserves all other bits; it does not patch guest media or relax CALLF
 mode checks. RI/VIF or the complete native monitor are not claimed.
 
-The x86 `/MT` `tests/mvdm-host/dpmi/fast_bop_mode_fixture.c`, linked against
+The x86 `/MT` `test/mvdm-host/dpmi/fast_bop_mode_fixture.c`, linked against
 the actual adapter object, passed (`FAST_BOP_MODE_BOUNDARY_OK`). Mocked CPU/SAS
 checks cover disabled no-write behavior, null/missing-LDT failure, three
 endpoint identities, unknown-target refusal and real/protected/real state
@@ -1710,7 +1710,7 @@ result explicitly remains incomplete evidence: no sealed dirty-source/build
 snapshot or rendered-content verification. It corroborates E49, not whole-S2
 acceptance.
 
-`tests/observation/verify-pm-entry-contract.ps1` extracts the complete current
+`test/observation/verify-pm-entry-contract.ps1` extracts the complete current
 `DpmiCpu40SwitchToProtectedMode` function without editing its body and compiles
 it under MSVC x86 /MT with observed CPU/descriptor dependencies. The fixture
 passes all 65,536 low-FLAGS combinations, plus invalid-IDT and absent-GDT-shadow
@@ -1936,7 +1936,7 @@ Follow-up checks on the E54 artifacts completed successfully:
 
 - Original class/client fixture: `WOW_FIXTURE_OK case=class-client`, rebuilt
   against current provider and worker owners through
-  `tests/observation/verify-wow-task-lifecycle.ps1`.
+  `test/observation/verify-wow-task-lifecycle.ps1`.
 - All 17 established DOS routes pass; report
   `O:/winnt/logs/t422-s2-geometry-20260924175450-2bb2b2b5-summary.json`.
   The Verify-CommandExitStatus invocation retains E52's observer/G7 inputs
@@ -2057,7 +2057,7 @@ pass. S2 remains open and these working-tree changes are not committed/pushed.
 
 ## E57 production window binding, nested destruction and SEH fixture
 
-`tests/observation/verify-wow-task-lifecycle.ps1 -Case window-borrow` now
+`test/observation/verify-wow-task-lifecycle.ps1 -Case window-borrow` now
 links the full existing page-domain fixture to the selected production provider
 objects. Unlike class/task-only cases it omits the parent page-domain stubs.
 The optional WOW_WINDOW_BORROW_FIXTURE body creates actual hidden native
@@ -2408,7 +2408,7 @@ private native state: modern USER remains responsible for its own controls.
 Before importing another cleanup slice, a host-only probe now tests that
 public boundary independently of guest execution and project task state.
 
-Source: tests/adapter-mvdm-host-out/wow/native_window_thread_exit_probe.c.
+Source: test/adapter-mvdm-host-out/wow/native_window_thread_exit_probe.c.
 MSVC x86 /MT /W4 build under
 build/M0-T422/S2/native-thread-exit-20260924; executable invoked with a 15-second
 outer process timeout. Output:
@@ -3562,7 +3562,7 @@ The completed MSVC x86 native-fixture run uses Case native-identity,
 ProviderBuildRoot build/M0-T422/S2/wow32-provider-r10,
 WorkerBuildRoot build/M0-T422/S2/formal-x86-r9 and
 BuildRoot build/M0-T422/S2/native-sms-identity-red-20260924 through
-tests/observation/verify-wow-task-lifecycle.ps1. Fixture SHA-256:
+test/observation/verify-wow-task-lifecycle.ps1. Fixture SHA-256:
 6D71A3817D7C42391D518F9D9F87B6AA96372F39C1505F68DFE97C997DAE3355.
 Both sends report sent=005AEB0C, current=00000000 and return result=114;
 the final result is errors=2, native_direct=4, exit=1. Thus transport return
@@ -3621,7 +3621,7 @@ No test code assigns psmsCurrent, rewrites scheduler fields, or creates an SMS.
 The interval is deliberately widened; it is not ordinary guest acceptance.
 
 All roots below are build/M0-T422/S2/native-foreign-alias-20260924-rN.
-Invoke tests/observation/verify-wow-task-lifecycle.ps1 with Case native-foreign,
+Invoke test/observation/verify-wow-task-lifecycle.ps1 with Case native-foreign,
 ProviderBuildRoot build/M0-T422/S2/wow32-provider-r10 and
 WorkerBuildRoot build/M0-T422/S2/formal-x86-r9. The runner's existing MSVC x86
 native-fixture composition retains its parent stubs and /force:multiple link;
@@ -3755,7 +3755,7 @@ receiver samples scheduler state under the production data lock. It does not
 change task eligibility, assign psmsCurrent or supply a fake sender identity.
 Other fixture cases retain the production wrapper call unchanged.
 
-MSVC x86 build/run through tests/observation/verify-wow-task-lifecycle.ps1:
+MSVC x86 build/run through test/observation/verify-wow-task-lifecycle.ps1:
 Case native-reply, ProviderBuildRoot build/M0-T422/S2/wow32-provider-r10,
 WorkerBuildRoot build/M0-T422/S2/formal-x86-r9,
 BuildRoot build/M0-T422/S2/native-reply-phase-20260924-r1.
@@ -3812,7 +3812,7 @@ scheduler nor prove original structure offsets, native thread scheduling,
 message capture, guest behavior or a product-compatible whole translation
 unit. The source body itself, including all reply branches, is not rewritten.
 
-Command: tests/observation/verify-wow-reply-contract.ps1 with BuildRoot
+Command: test/observation/verify-wow-reply-contract.ps1 with BuildRoot
 build/M0-T422/S2/original-reply-contract-20260924-r1 and LogPath
 O:/winnt/logs/t422-s2-original-reply-contract-20260924-r1.log.
 Build succeeds with no reported compiler warnings; cases=12/errors=0.

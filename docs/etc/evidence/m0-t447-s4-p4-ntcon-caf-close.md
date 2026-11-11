@@ -88,7 +88,7 @@ an authenticated RPC from that dead peer; corrected it to inspect service-owned
 terminal state, retaining the shutdown-negative assertion.
 
 Reproducible actual-UI entrypoint is
-`tests/observation/verify-console-caf-self-delete.ps1`, with the compiled
+`test/observation/verify-console-caf-self-delete.ps1`, with the compiled
 `console_startup_observer.c` and `console_handoff_pty_probe.c`, an exact complete
 package and fresh build LogRoot. It launches the system conhost, uses real
 in-worker NTMON Delete/Y, validates the selected frontend identity, and checks
@@ -237,7 +237,7 @@ the diagnostic character with Backspace before submitting an empty line, and
 switches further input away from the now-dead CAF HWND. Pre-Enter snapshots
 are now taken before sending Enter, not immediately after sending it.
 
-`tests/observation/console_handoff_pty_probe.c` supplies an owned ConPTY/Job
+`test/observation/console_handoff_pty_probe.c` supplies an owned ConPTY/Job
 container and captures its actual terminal output. The observer's opt-in
 owned-PTY mode keeps this Console instead of detaching into AllocConsole.
 The test-only inherited input-pipe handle is made non-inheritable before
@@ -262,7 +262,7 @@ Evidence under `build/t447-s4-p4`:
 ### Pending cooked-read buffer experiment
 
 An independently authored host-only diagnostic,
-`tests/observation/console_cooked_buffer_probe.c`, tests a concrete possible
+`test/observation/console_cooked_buffer_probe.c`, tests a concrete possible
 mechanism without modifying or launching product/guest images. Public Microsoft
 [Console host source](https://github.com/microsoft/terminal/blob/main/src/host/readDataCooked.cpp)
 retains a SCREEN_INFORMATION reference for each cooked read and uses that

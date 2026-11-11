@@ -125,7 +125,7 @@ produced a false zero-byte failure.  The corresponding nested result is
 S34_NATIVE_CHILD_STDIN=S34_NATIVE_CHILD_STDOUT_OK
 ```
 
-The tracked `tests/observation/s34_host_pipe_matrix.cmd` now uses only
+The tracked `test/observation/s34_host_pipe_matrix.cmd` now uses only
 `G1.OUT`, `G2.OUT` and `G3.OUT` as guest-owned output names and fails on the
 first nonzero row.  On the current published x86 package it proved:
 
@@ -174,7 +174,7 @@ The final source identities are:
 `run16.exe`, `basesrv.exe`, `ntvdm.exe` and `VDMREDIR.dll`. The matching
 published `O:\winnt` files were used to rebuild `S34N.EXE` and `S34E.EXE`.
 
-`tests/observation/s34_host_pipe_matrix.cmd` then completed three fresh runs
+`test/observation/s34_host_pipe_matrix.cmd` then completed three fresh runs
 with error level zero for every row. It proves host stdout pipe, host file
 redirection and host stdin pipe separately from guest parsing; it proves guest
 `>`, `>>`, `<` and `|`; and it proves the exact pipe marker in `G1.OUT`,

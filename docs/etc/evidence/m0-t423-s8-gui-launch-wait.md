@@ -128,7 +128,7 @@ are not parsed or reconstructed. Quoted option-looking filenames and options
 after the executable remain target text. Original classification and command
 execution remain the eventual consumers.
 
-`tests/app/run16_launch_options_test.c` exercises 19 cases, including compact
+`test/app/run16_launch_options_test.c` exercises 19 cases, including compact
 command/c, quoting, redirection, trailing whitespace, option-like executable
 names, explicit terminator, duplicate flags and null/empty inputs. The generated
 graph now exposes `run16-launch-options-test.exe`; the candidate is deliberately
@@ -138,7 +138,7 @@ Focused run: `build/M0-T423/S8/launch-options-r1`, VS2022 BuildTools
 VsDevCmd `-arch=x86 -host_arch=x64`, then:
 
 ```text
-cl.exe /nologo /MT /W4 /WX /Fe:launch-options-test.exe ../../../../tests/app/run16_launch_options_test.c ../../../../src/run16-exe/launch_options.c
+cl.exe /nologo /MT /W4 /WX /Fe:launch-options-test.exe ../../../../test/app/run16_launch_options_test.c ../../../../src/run16-exe/launch_options.c
 launch-options-test.exe
 ```
 
@@ -167,7 +167,7 @@ text still use their existing synchronous route. Win16 remains synchronous
 until the authenticated startup binding is implemented; this deliberate
 incomplete candidate is not published as the unified S8 product.
 
-`tests/app/run16_gui_wait_test.c` builds both a Console supervisor and a
+`test/app/run16_gui_wait_test.c` builds both a Console supervisor and a
 windowless GUI target. It launches the actual candidate run16 with
 CREATE_NO_WINDOW. Named test events and a mapping establish that the target
 has started and is still alive; the supervisor then releases it to exit 37.
@@ -262,7 +262,7 @@ package publication was made by this test work.
 
 ## Real new-worker startup fault gate
 
-Added `tests/observation/wow_startup_fault_test.c`. The authored native
+Added `test/observation/wow_startup_fault_test.c`. The authored native
 supervisor creates a private unswitched desktop, owns a fresh broker and
 starts real run16 WINMINE with DEBUG_PROCESS. It identifies the new worker
 by exact physical image path and injects at that worker's WOW32 DLL-load
@@ -457,7 +457,7 @@ Regenerated the existing formal x86 graph and built ntmon.exe incrementally:
 only the new output link ran. Logs: build/M0-T423/S8/ntmon-graph-r1.log and
 ntmon-build-r1.log. SHA256:
 DAE97C2CCC405DA33946060A4A43B54646E0B957CA3B154579B0A633752412FF.
-`tests/observation/verify-monitor-layout.ps1 -BuildRoot
+`test/observation/verify-monitor-layout.ps1 -BuildRoot
 build/M0-T423/S8/ntmon-layout-r1` built and passed the EDIT frame, four arrows,
 colors, 25 rows, overflow selection, horizontal extent, shrink, empty and
 confirmation assertions. This fixture is layout coverage, not a new real RPC
@@ -487,7 +487,7 @@ was not published and no production inputs changed during this run.
 
 ## Native locked-image failure and frontend documentation review
 
-Extended `tests/app/run16_gui_wait_test.c` with two locked-image negative
+Extended `test/app/run16_gui_wait_test.c` with two locked-image negative
 cases using only its authored GUI executable. The native control attempts
 CreateProcess while a write handle remains open and must fail with 32.
 The first fixture incorrectly expected run16 to return that same code;
@@ -519,7 +519,7 @@ not a substitute.
 
 ## Real shared-WOW startup fault verification
 
-Extended `tests/observation/wow_shared_launch_test.c` with `--worker-fault`
+Extended `test/observation/wow_shared_launch_test.c` with `--worker-fault`
 and `--broker-fault`. These are test-only switches, not product controls.
 After a real asynchronous WINMINE launch and verified worker image path, the
 fixture finds that worker's WOWExecClass thread on its private, unswitched
@@ -605,7 +605,7 @@ results to an existing approved log directory with a unique prefix. Independent
 command (Node 22, scoped execution permission, no running ntsrv beforehand):
 
 ```text
-node tests/broker/verify_ntsrv_idle.mjs build/M0-T423/S1/restart-formal-x86 <native-ninja.exe> O:/winnt/Logs2 t423-s8-idle-audit-r2
+node test/broker/verify_ntsrv_idle.mjs build/M0-T423/S1/restart-formal-x86 <native-ninja.exe> O:/winnt/Logs2 t423-s8-idle-audit-r2
 ```
 
 The test only terminates handles of processes it creates and does not adopt an
@@ -885,7 +885,7 @@ it does not replace still-open WOW reuse/failure or ordinary DOS17 gates.
 
 ### Real shared-WOW probe: retained failure, not reuse acceptance
 
-The private-desktop `tests/observation/wow_shared_launch_test.c` probe uses
+The private-desktop `test/observation/wow_shared_launch_test.c` probe uses
 the staged T:/ package and its physical build/M0-T423/S8/p identity. Run
 `t423-s8-wow-shared-r1` below O:/winnt/Logs2 reports the first asynchronous
 launcher returned successfully with WINMINE worker 33388 still alive, then
@@ -1284,7 +1284,7 @@ and no unknown broker/session was adopted or terminated.
 ### S8 cumulative mouse and graphics refresh
 
 The retained build-local S7 mouse orchestration is now reproducible as
-`tests/observation/verify-window-mouse.ps1`. It preserves all five original
+`test/observation/verify-window-mouse.ps1`. It preserves all five original
 real-guest assertions, uses an unswitched private desktop, refuses a
 pre-existing broker and restores observer control environment variables.
 Invocation: S7 observer-renamed.exe, PackageRoot T:/, existing immutable

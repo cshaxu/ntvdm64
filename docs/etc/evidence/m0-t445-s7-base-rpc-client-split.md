@@ -88,7 +88,7 @@ still requires both parent and grandchild completion witnesses per case.
 r130 compiles both widths successfully; r131 runs the full unquoted safe-path
 matrix. Its first Off x86-to-x64 chain has both actual child success records;
 remaining cases are pending. The reusable observer is now
-tests/observation/verify-style-product-chains.ps1: same owned physical stage,
+test/observation/verify-style-product-chains.ps1: same owned physical stage,
 private-desktop fixture, controlled environment, per-policy child witnesses
 and cleanup. Unlike root-exit-only checks it rejects missing descendant
 evidence and preserves witness/failure files before deleting its test stage.
@@ -378,11 +378,11 @@ processes with pinned handles and explicit deadlines; no user desktop actions.
 | r007 | 20424 / 13:38:09 | Exit0,600s deadline: final core rebuild, NTVDM/NTVWM/WOW provider, boundary and lifecycle repeat pass; actual NTCON argument rejection exits87. |
 | r008 | 11292 / 13:39:44 | Exit1 before staging: Ninja target spelling VDMREDIR.DLL was wrong; target is VDMREDIR.dll. |
 
-The graph/map test is tests/component-integration/verify-base-rpc-client-split.mjs,
+The graph/map test is test/component-integration/verify-base-rpc-client-split.mjs,
 arguments build/M0-T445/S7/Frontend and build/M0-T445/S7/Launcher. It checks
 57 frontend and48 launcher source inputs, rejects four injected dependency/
 symbol violations and confirms the launcher retains its execution facade.
-tests/app/base_rpc_client_style_lifecycle_test.c checks actual linked APIs for
+test/app/base_rpc_client_style_lifecycle_test.c checks actual linked APIs for
 invalid inputs, absent delivery and repeated disconnected cleanup; it does
 not claim connected delivery/guest propagation coverage.
 

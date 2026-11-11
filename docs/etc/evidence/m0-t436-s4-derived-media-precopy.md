@@ -31,7 +31,7 @@ scripts.  Run `r060-derived-package` performed all of the following:
 5. Re-expanded each replacement with Windows `EXPAND.EXE` and compared its
    SHA-256 with the exact candidate.
 
-`tests/component-integration/win31_derived_media_test.ps1` repeated step 5 on
+`test/component-integration/win31_derived_media_test.ps1` repeated step 5 on
 the delivered derived package and passed.  The candidate and retail identities
 remain those checked by the existing adaptation scripts:
 

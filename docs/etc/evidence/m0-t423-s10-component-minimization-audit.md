@@ -168,7 +168,7 @@ desktop limitations remain explicit, and SOL/WRITE are not usability passes.
 ## Audit delivery verification
 
 The generator was rerun to `build/M0-T423/S10/dependency-r3` with the same counts.
-`tests/component-integration/verify-frontend-link-ownership.ps1` passed, including
+`test/component-integration/verify-frontend-link-ownership.ps1` passed, including
 seven leakage negative controls and the launcher rebuild control. Documentation
 governance and `git diff --check` passed. This P contains audit tooling and
 documentation only: no production compilation, new runtime claim or publication.

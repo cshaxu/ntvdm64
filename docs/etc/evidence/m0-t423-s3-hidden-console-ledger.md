@@ -86,14 +86,14 @@ retroactively rewritten as an earlier passing observation.
   ProcessPackageRoot O:/winnt, observer-modal.exe and G7.COM from the S4 build.
   The checked-in verifier also checks actual guest text and interaction,
   including EDIT exit and subsequent MEM; exit codes alone are not the gate.
-- tests/observation/verify-wow-headless-frontiers.ps1 with PackageNetworkProfile,
+- test/observation/verify-wow-headless-frontiers.ps1 with PackageNetworkProfile,
   PackageRoot O:/winnt, the S4 observer and worker-window-snapshot reader,
   and LogPrefix m0-t423-s4-published-wow preserves all three separate frontiers.
   The corresponding .windows.txt reports contain the visible WINMINE main
   window, original SOL memory error and original WRITE memory error. No
   character frontend is created. This is baseline preservation, not SOL/WRITE
   completion or manual WINMINE playability acceptance.
-- tests/component-integration/verify-generated-input-stability.ps1, using
+- test/component-integration/verify-generated-input-stability.ps1, using
   build/M0-T423/S1/restart-formal-x86 and the existing Node 22/Ninja tools,
   exits 0: two graph generations preserve ROM/DEF bytes and timestamps with
   no production rebuild. Caches remain under build/.
@@ -215,7 +215,7 @@ stream observer invokes native CMD /d /c with the space-free absolute matrix
 path and R: argument. Final diff review, historical-timeout disposition and
 verified publication/commit remain open; this table does not close S4.
 
-`tests/observation/run16_new_console_lifecycle.c` now accepts `--wow` in place
+`test/observation/run16_new_console_lifecycle.c` now accepts `--wow` in place
 of numeric completion arguments. Build with MSVC x86 /MT /W4 and user32.lib,
 with /Fo and /Fe below build/M0-T423/S4. Invoke the resulting
 `wow-console-lifecycle.exe R:\ APP.EXE REPORT --wow`, with R: temporarily
@@ -291,7 +291,7 @@ Preservation:
 | mvdm/softpc.new/host/src/nt_event.c + README DIV-313 | Preserve +12-line original block/resume notification hook pending migrated verification; no new CPU/guest scheduler, no mirror rewrite for EXE split. | Existing I/O activation ordering and nested return. |
 | product-abi/console_io.h, version.h | Keep copied direct I/O contract and shared product version; change endpoint owner, no process pointers in records. | Version rejection, sizes/identity, malformed records. |
 | tools/build/New-T310OriginalSoftpcNinja.ps1 | Reassign existing objects once to frontend/client targets, add frontend.exe and package manifest; remove renderer/helper objects from run16 link. | x86 dependency graph, coherent seven-file package after migration. |
-| tests/app/native_console_* and frontend_scope_lifetime_test, console_client_test; tests/adapter-basesrv tests; observation/native CLI and command-exit audit | Reuse assertions and fixtures; update launched helper/owner identity and lifecycle oracle; add GUI-separated groups. | Do not discard old passing behavior or count fixture-only passes as production. |
+| test/app/native_console_* and frontend_scope_lifetime_test, console_client_test; test/adapter-basesrv tests; observation/native CLI and command-exit audit | Reuse assertions and fixtures; update launched helper/owner identity and lifecycle oracle; add GUI-separated groups. | Do not discard old passing behavior or count fixture-only passes as production. |
 
 Delete only **after replacement verification**: run16 private-helper dispatch,
 local-root/native launch bypass, renderer/pump teardown at launcher exit,
@@ -348,8 +348,8 @@ no automatic S4 admission and no functional closure implied by this record.
 #### Twelve-target chain coverage correction
 
 Owner clarified the literal GGGCCCGGGCCC chain and mixed D/W triples.
-Read tests/app/frontend-segments.cmd, frontend_gui_boundary_test.c and
-tests/observation/verify-native-root-console.ps1. The existing gui-segments
+Read test/app/frontend-segments.cmd, frontend_gui_boundary_test.c and
+test/observation/verify-native-root-console.ps1. The existing gui-segments
 case proves a native character context, three GUI-subsystem boundaries, a
 new character identity and return to the original identity. It does not
 execute six GUI targets plus six character targets; it does not cover every
@@ -367,14 +367,14 @@ in this clarification. S5 keeps the expanded fault/backend matrix.
 
 #### Two actual twelve-target chains: initial runtime coverage
 
-Added tests/app/frontend_chain_target.c as two formal x86 /MT test targets:
+Added test/app/frontend_chain_target.c as two formal x86 /MT test targets:
 frontend-chain-gui.exe (Windows subsystem, actual visible STATIC window with
 message pumping while waiting) and frontend-chain-cui.exe. Native stages
 start the next run16 and return its actual result. Character identity comes
 from real BaseSrv RetainFrontendRoot, not PID ancestry or an environment string
 alone. GUI stages reject inherited frontend/execution capabilities.
 
-tests/observation/verify-twelve-target-chain.ps1 defaults only to WDW-DWD and
+test/observation/verify-twelve-target-chain.ps1 defaults only to WDW-DWD and
 DDW-WWD. Each has six GUI targets and six character targets. D stages execute
 immutable COMMAND.COM /c with generated test BAT files; native ENTER/RETURN
 identity probes are auxiliary observation, not substitutes for DOS execution
@@ -453,7 +453,7 @@ the owner session remains untouched and integrated execution remains pending.
 
 #### Input-driver repeatable positive/negative gate
 
-Added tests/observation/verify-chain-input-driver.ps1 so the native self-test
+Added test/observation/verify-chain-input-driver.ps1 so the native self-test
 is reproducible and fails on missing screen/report evidence. The driver's
 --selftest-missing deliberately requests an absent ready marker: it must
 time out without injecting text, return failure to its fixture parent, and
@@ -722,7 +722,7 @@ cache relinks invalidate the tested one-shot package? Inspected explicit
 archive/link edges in build/M0-T423/S1/restart-formal-x86/build.ninja and the
 complete PE bytes, not only source or file timestamps.
 
-The checked-in tests/component-integration/verify-frontend-link-ownership.ps1
+The checked-in test/component-integration/verify-frontend-link-ownership.ps1
 with that BuildRoot passes: frontend-client.lib and run16 reach exactly four
 frontend-owned client/materialization sources; ntvdm reaches none; frontend
 reaches the service, dispatcher, capture/view, helper and client closure.
@@ -806,7 +806,7 @@ of the seven product binaries; it does not claim the expanded S5 fault matrix.
 #### Same-checkpoint stream matrix and termination-owner audit
 
 The unchanged one-shot package passes the existing
-tests/observation/s34_host_pipe_matrix.cmd under the enhanced observer and
+test/observation/s34_host_pipe_matrix.cmd under the enhanced observer and
 private desktop. Launch: native SystemRoot/System32/cmd.exe /d /c
 with one command string `call <absolute matrix path> R:` and working directory
 R: mapped to build/M0-T423/S4/p. Evidence:
@@ -857,7 +857,7 @@ not interactive WOW acceptance or S4 closure/publication.
 
 #### Same-checkpoint execution versus frontend lifetime
 
-Recompiled current tests/observation/frontend_loss_noio_test.c as x86 /MT;
+Recompiled current test/observation/frontend_loss_noio_test.c as x86 /MT;
 build/M0-T423/S4/frontend-loss-noio-current-build.log records the build. The
 test is copied only to the build package's tests/NOIOLIFE.EXE, using existing
 authored tests/NOIO.COM without changing guest media. With R: mapped to that
@@ -1005,7 +1005,7 @@ first no-op check still failed: Ninja identified an unchanged implicit import
 library older than its resource input. MSVC does not rewrite an unchanged
 import library; restat on the worker and redirector DLL link rules prevents
 perpetual relinking without weakening input dependencies. The checked-in
-tests/component-integration/verify-generated-input-stability.ps1 regenerates
+test/component-integration/verify-generated-input-stability.ps1 regenerates
 twice, checks both input hashes/timestamps and requires all six targets in
 the formal graph to report no work. It passes; evidence is
 build/M0-T423/S4/generated-input-stability-test.log, with the earlier negative
@@ -1085,7 +1085,7 @@ all seven outputs. Earlier package hashes do not certify this refreshed set.
   native nesting, inherited history/geometry, GUI capability filtering, and
   distinct C identities across three consecutive GUI boundaries with the
   original identity restored on return.
-- New tests/observation/verify-wow-headless-frontiers.ps1 makes the three
+- New test/observation/verify-wow-headless-frontiers.ps1 makes the three
   owner-waived headless comparisons reproducible. Build-package logs
   `m0-t423-s4-coherent-wow-{winmine,sol,write}` observe each actual NETWORK.DRV
   modal on an unswitched private desktop, no character frontend, and a live
@@ -1181,7 +1181,7 @@ The ordinary frontend binary was restored in the isolated package afterwards.
 
 `build/M0-T423/S4/wow-isolation-service.log` proves WOW launcher/worker cannot
 join a valid character frontend/context; original WOW Get/Exit still succeeds.
-`tests/observation/verify-dos-wow-isolation.ps1` additionally executes COMMAND
+`test/observation/verify-dos-wow-isolation.ps1` additionally executes COMMAND
 -> WINMINE to the NETWORK.DRV modal, observing two workers and one character
 frontend. Terminating the identified test WOW worker is followed by real MEM
 output and COMMAND exit 1. See build-package log
@@ -1360,7 +1360,7 @@ The initial GUI fixture returned 92 because it tried to write a Console handle
 without attaching a Console (m0-t423-s4-gui-filter-01-gui-boundary). Its two
 capability-absence checks had already passed. Corrected test uses a redirected
 file, which CMD then types; production does not attach GUI to a Console to
-satisfy a false test premise. tests/app/frontend-gui-boundary.cmd and the GUI
+satisfy a false test premise. test/app/frontend-gui-boundary.cmd and the GUI
 subsystem fixture now verify both stripped locators, writable redirected output,
 and result 37 through inner run16 and outer CMD.
 
@@ -1424,7 +1424,7 @@ idle DOS channels stop before native final presentation/input reclaim. Input
 forwarding checks stop after acquiring its lock, so it cannot consume input
 again after reclaim. The existing standalone-loop caller remains transitional.
 
-tests/app/frontend_bootstrap_test.c now exercises actual frontend.exe/helper
+test/app/frontend_bootstrap_test.c now exercises actual frontend.exe/helper
 normal retirement. CMD emits FRONTEND-FINAL-37 and exits 37; the fixture waits
 for frontend exit zero and reads the visible Console buffer to assert that
 last text. A separate fixture launcher creates frontend and a real blocked
@@ -1500,7 +1500,7 @@ short-buffer return is the required total count; zero is failure, not empty.
 Reference: [Microsoft Console membership contract](https://learn.microsoft.com/en-us/windows/console/getconsoleprocesslist).
 Private helper protocol is 8; direct DOS and broker ABIs are unchanged.
 
-tests/app/native_console_members_test.c launches a real native parent and child
+test/app/native_console_members_test.c launches a real native parent and child
 through frontend.exe's private helper on an unswitched private desktop. It
 asserts 0 users before launch, 2 after child readiness, 1 after direct-parent
 exit 37, then 0 after the child is released. Helper death must return a query
@@ -1536,7 +1536,7 @@ frontend. Startup rollback terminates only an unaccepted new frontend, before
 task submission. Successful release closes local references, not the frontend.
 Existing broker-loss watch is selected in the independent process.
 
-Checked-in tests/app/frontend_bootstrap_test.c runs on the existing private
+Checked-in test/app/frontend_bootstrap_test.c runs on the existing private
 desktop observer, with only its own sibling candidate broker/frontend processes.
 It refuses an already-running broker rather than using/killing somebody else's.
 O:/winnt/logs/m0-t423-s4-independent-identities.txt and its .console.txt witness
@@ -1578,7 +1578,7 @@ changed; frontend-client.lib no longer depends on renderer, input pump or
 service implementation. The formal source manifest records its exact inputs.
 
 MSVC x86 run16 and frontend-request-client-test builds passed. Checked-in
-`tests/app/frontend_request_client_test.c` links only the client archive and
+`test/app/frontend_request_client_test.c` links only the client archive and
 native system libraries. Its broker-admission seam is mocked (not RPC security
 acceptance); the pipe exchange and target process are real. Cases assert actual
 CMD exit 37, rejection, bad version, contradictory result, EOF and partial reply.
@@ -1721,7 +1721,7 @@ obligations, not claims that all implementation is absent.
 
 ## Hidden attachment preserves inherited capability: measured prerequisite
 
-Extended the existing tests/app/frontend_capability_inheritance_test.c rather
+Extended the existing test/app/frontend_capability_inheritance_test.c rather
 than adding another transport. The child now asserts that the root PID is not
 in its Console process list and that its Console window is not visible. The
 existing direct/CMD/nested-CMD paths still prove inherited SYNCHRONIZE-only
@@ -1858,12 +1858,12 @@ the unchanged published BaseSrv is
 
 Verification so far:
 
-- tests/observation/verify-console-close-contract.ps1, with S2 control-observer,
+- test/observation/verify-console-close-contract.ps1, with S2 control-observer,
   the above build root and prefix m0-t423-s3-execution-context: all 24 service
   modes and all three Console-client close/pipe cases passed on the private
   desktop. The expanded --frontend-root case covers separate object rights,
   wrong generation, helper reconnect, root rundown and root death.
-- tests/adapter-basesrv/dtaskmgr_rpc_test.c now additionally exercises real
+- test/adapter-basesrv/dtaskmgr_rpc_test.c now additionally exercises real
   authenticated RPC Connect/Register/Acquire/Bind/Disconnect, typed event
   transfer, wait-only rights, wrong generation, frontend-as-execution rejection
   and rejection after root disconnect/reconnect. Run via the private observer
@@ -1892,7 +1892,7 @@ environment entries. With no execution locator, the existing S2 path remains
 selected. The root-managed backend's production locator emission is not yet
 implemented; test-created locators do not certify that missing producer.
 
-tests/app/frontend_scope_lifetime_test.c links the actual production scope
+test/app/frontend_scope_lifetime_test.c links the actual production scope
 with explicit broker/channel test substitutes. It now checks orphan/malformed
 locators, rejected/dead root, valid inner joining, distinct execution-binding
 failure/success, no extra root registration or channel creation and no clearing
@@ -1966,7 +1966,7 @@ changes return ERROR_RETRY with zero accepted cells. The root must discard an
 incomplete frame; this is not an atomic snapshot of concurrent text writes.
 No MVDM/OpenNT mirror or guest code is changed.
 
-tests/app/native_console_capture_test.c uses real Windows storage in a separate
+test/app/native_console_capture_test.c uses real Windows storage in a separate
 hidden Console on the unswitched observer desktop. It verifies Unicode cells,
 attributes, nonzero viewport origin, cursor and mode/codepage metadata, all 300
 buffer rows including offscreen history, active CONOUT$ rather than stale stdout,
@@ -1990,7 +1990,7 @@ retains no kill-on-disconnect ownership. Before COMMIT, stop/disconnect rolls ba
 only that unhanded-off suspended creation. This is not a new scheduler, worker
 selection or native process-tree ownership rule.
 
-tests/app/native_console_host_test.c drives the actual sibling run16.exe, not a
+test/app/native_console_host_test.c drives the actual sibling run16.exe, not a
 substitute helper. Two runs (m0-t423-s3-native-host.txt and -2.txt) pass with exit
 zero and explicit assertions: real CMD output read from the hidden buffer;
 cooked input accepted by CMD; exact native results 37 and 23; reuse of one helper;
@@ -2136,7 +2136,7 @@ geometry retries are not partial-frame success. A cursor outside a scrolled
 viewport must not drag it back; unchanged metadata must not create repeated
 resize input events.
 
-Checked-in tests/observation/verify-native-root-console.ps1, using the S2
+Checked-in test/observation/verify-native-root-console.ps1, using the S2
 control observer, BuildRoot build/M0-T423/S1/restart-formal-x86 and LogPrefix
 m0-t423-s3-root-composition-final, passes five actual CLI cases:
 
@@ -2339,7 +2339,7 @@ original DOS command/native-return handoff to the single root input owner.
 
 The stalled-helper completion item above now has evidence from the current
 production asynchronous composition, not the superseded synchronous view wait.
-The checked-in tests/app/native_console_frontend_test.c links the ordinary
+The checked-in test/app/native_console_frontend_test.c links the ordinary
 native_console_frontend/backend/view/host/launch/capture objects. Its helper
 role calls the actual host function. Test-only control suspends that helper's
 own host thread, or terminates the exact test-helper process after checking its

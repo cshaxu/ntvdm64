@@ -1465,7 +1465,7 @@ guest stack, followed by the original INT2 far-return address; `mouse_int2`
 consumes that frame in reverse order. This preserves the guest binaries and
 does not add host-owned per-VM state or a fixed nesting limit. The retained
 NIDDB structure fields remain in place for layout compatibility.
-`tests/observation/verify-mouse-callback-reentry.py` compiles the actual
+`test/observation/verify-mouse-callback-reentry.py` compiles the actual
 tracked baseline and current selected callback bodies with a memory/register
 fixture: the baseline fails the outer nested restore and the candidate passes
 single, nested, condition-mask, stack-balance and 16-bit stack-wrap checks.

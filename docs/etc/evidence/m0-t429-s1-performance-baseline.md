@@ -19,13 +19,13 @@ are copied, not rebuilt or patched. No SoftPC runtime comparison was run yet.
 The test observer is compiled with the existing x86 environment wrapper:
 
 ```powershell
-& build/M0-T427/S4/r049/msvc-x86.cmd cl.exe /nologo /TC /std:c11 /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /Isrc/ntcon-exe /Fobuild/M0-T429/S1/r001/console-startup-observer.obj /Febuild/M0-T429/S1/r001/console-startup-observer.exe tests/observation/console_startup_observer.c /link kernel32.lib user32.lib dbghelp.lib
+& build/M0-T427/S4/r049/msvc-x86.cmd cl.exe /nologo /TC /std:c11 /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /Isrc/ntcon-exe /Fobuild/M0-T429/S1/r001/console-startup-observer.obj /Febuild/M0-T429/S1/r001/console-startup-observer.exe test/observation/console_startup_observer.c /link kernel32.lib user32.lib dbghelp.lib
 ```
 
 Reproducible measurement entrypoint:
 
 ```powershell
-& tests/observation/measure-edit-baseline.ps1 -Observer build/M0-T429/S1/r003/console-startup-observer.exe -RuntimeRoot build/M0-T429/S1/r003/runtime -ReportRoot <fresh-build-report-directory> -Iterations 5
+& test/observation/measure-edit-baseline.ps1 -Observer build/M0-T429/S1/r003/console-startup-observer.exe -RuntimeRoot build/M0-T429/S1/r003/runtime -ReportRoot <fresh-build-report-directory> -Iterations 5
 ```
 
 Run r003 uses Z: for the isolated runtime. Every sample has a fresh product
@@ -88,7 +88,7 @@ sample and cache/order noise). No improvement is claimed.
 | ntvdm-exe/win32/console_compat.c:466–496 | At most five raw records per read, bounded by mouse capacity; Sleep(1) only when downstream capacity is exhausted. | Need actual capacity/batch/backlog measurement; do not call this per-event throttling. |
 | ntvdm-exe/softpc/mvdm_softpc_mouse_input.c | Pressure merging begins above 16 queued movements; button/route edges remain distinct. | Preserve original-compatible displacement/order, measure consumption rather than assuming every motion becomes one IRQ. |
 
-`tests/observation/nt_transition_cost.c` links the actual, unmodified diagnostic
+`test/observation/nt_transition_cost.c` links the actual, unmodified diagnostic
 provider translation unit, compiled x86 /MT /Gy without added optimization.
 Unused provider boundaries have fail-closed test link sentinels, not substitute
 CPU/guest implementations. Six 5-million-call trials include one warm-up;
@@ -102,7 +102,7 @@ Provider and fixture build commands:
 
 ```powershell
 & build/M0-T427/S4/r049/msvc-x86.cmd cl.exe /nologo /TC /std:c11 /MT /Gy /W4 /D_CRT_SECURE_NO_WARNINGS /Isrc /Isrc/ntvdm-exe/softpc/include /Fobuild/M0-T429/S1/r001/nt_transition_provider.obj /c src/ntvdm-exe/softpc/mvdm_softpc_termination.c
-& build/M0-T427/S4/r049/msvc-x86.cmd cl.exe /nologo /TC /std:c11 /MT /W4 /WX /Fobuild/M0-T429/S1/r001/nt_transition_cost.obj /Febuild/M0-T429/S1/r001/nt-transition-cost.exe tests/observation/nt_transition_cost.c /link build/M0-T429/S1/r001/nt_transition_provider.obj /OPT:REF kernel32.lib
+& build/M0-T427/S4/r049/msvc-x86.cmd cl.exe /nologo /TC /std:c11 /MT /W4 /WX /Fobuild/M0-T429/S1/r001/nt_transition_cost.obj /Febuild/M0-T429/S1/r001/nt-transition-cost.exe test/observation/nt_transition_cost.c /link build/M0-T429/S1/r001/nt_transition_provider.obj /OPT:REF kernel32.lib
 & build/M0-T429/S1/r001/nt-transition-cost.exe
 ```
 
@@ -147,8 +147,8 @@ Successful existing quiesced I/O close flushes the report. Overflow is explicit.
 Entrypoints (fresh build/report roots required):
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/build-worker-performance.ps1 -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T429/S1/r007
-powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/measure-worker-boundaries.ps1 -MeasuredWorker build/M0-T429/S1/r007/ntvdm-performance-observer.exe -Observer build/M0-T429/S1/r003/console-startup-observer.exe -ReportRoot O:/repos.hobby/ntvdm64/build/M0-T429/S1/r009
+powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/build-worker-performance.ps1 -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T429/S1/r007
+powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/measure-worker-boundaries.ps1 -MeasuredWorker build/M0-T429/S1/r007/ntvdm-performance-observer.exe -Observer build/M0-T429/S1/r003/console-startup-observer.exe -ReportRoot O:/repos.hobby/ntvdm64/build/M0-T429/S1/r009
 ```
 
 Build reuses manifest-hashed selected x86 /MT CCPU40 link inputs from
@@ -224,8 +224,8 @@ These binaries are test-only, not published to O:/winnt.
 Reproduction:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/build-worker-performance.ps1 -BuildRoot <fresh-build-root>
-powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/measure-worker-boundaries.ps1 -MeasuredWorker build/M0-T429/S1/r016/ntvdm-performance-observer.exe -MeasuredFrontend build/M0-T429/S1/r016/ntcon-performance-observer.exe -Observer build/M0-T429/S1/r012/console-startup-observer.exe -ReportRoot <fresh-build-report-root> -Edit -Iterations 3
+powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/build-worker-performance.ps1 -BuildRoot <fresh-build-root>
+powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/measure-worker-boundaries.ps1 -MeasuredWorker build/M0-T429/S1/r016/ntvdm-performance-observer.exe -MeasuredFrontend build/M0-T429/S1/r016/ntcon-performance-observer.exe -Observer build/M0-T429/S1/r012/console-startup-observer.exe -ReportRoot <fresh-build-report-root> -Edit -Iterations 3
 ```
 
 r012 observer uses the existing x86 `/std:c11 /MT /W4 /WX /wd4201` recipe,

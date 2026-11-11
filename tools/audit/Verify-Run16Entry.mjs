@@ -13,7 +13,7 @@ const map=fs.readFileSync(`${exe}.map`,'utf8');
 assert(map.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseGetBinaryTypeW@8')&&line.includes('opennt-base-client:classifier.obj')));
 assert(!map.includes('base_vdm_local.obj')&&!map.includes('machine_shell.obj'));
 const runner=path.join(build,'compile.cmd');
-fs.writeFileSync(runner,'@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncl.exe /nologo /MT /W4 "'+root+'/tests/app/run16_native_child.c" /Fochild.obj /Fe"native child.exe"\r\n');
+fs.writeFileSync(runner,'@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncl.exe /nologo /MT /W4 "'+root+'/test/app/run16_native_child.c" /Fochild.obj /Fe"native child.exe"\r\n');
 const compiled=spawnSync('cmd.exe',['/d','/c',`call "${runner}"`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,encoding:'utf8',timeout:60000});
 fs.writeFileSync(path.join(build,'build.log'),compiled.stdout+compiled.stderr);
 assert.equal(compiled.status,0,'native child build failed');

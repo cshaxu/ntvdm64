@@ -29,7 +29,7 @@ const lines = [
   "rule link",
   "  command = link.exe /nologo /out:$out $in kernel32.lib libcmt.lib libvcruntime.lib libucrt.lib",
   "build obj/suballoc.obj: cc $root/src/mvdm-host/suballoc/suballoc.c",
-  "build obj/fixture.obj: cc $root/tests/mvdm/suballoc/suballoc_lifecycle_fixture.c",
+  "build obj/fixture.obj: cc $root/test/mvdm/suballoc/suballoc_lifecycle_fixture.c",
   "build suballoc-lifecycle-fixture.exe: link obj/suballoc.obj obj/fixture.obj",
   "default suballoc-lifecycle-fixture.exe",
   ""

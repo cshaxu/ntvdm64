@@ -81,7 +81,7 @@ of the earlier IRQ detection. This proves retained ownership at that failure
 checkpoint, not that no disable/re-enable call ever occurred. INT33 points
 to C502:23C4. These earlier RPC42 snapshots are not new RPC45 execution proof.
 
-Reproducer: tests/observation/audit-win101-mouse-contract.ps1 reads the
+Reproducer: test/observation/audit-win101-mouse-contract.ps1 reads the
 original driver and retained snapshot only. It reports hashes, NE segments,
 ordinal entry addresses and IVT; it does not execute or patch either input.
 MOUSE.DRV has NE flags8005, automatic DS3, initialization CS1:0 and four fixed

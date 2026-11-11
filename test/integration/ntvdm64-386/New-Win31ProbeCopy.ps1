@@ -90,7 +90,7 @@ if($RetirementDriver){
 [pscustomobject]@{Task=$task; Source=$source; Destination=$dest; Original=$original}
 } catch {
  $failure=$_
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  try {Remove-OwnedGuestProbeCopy $dest $task $source} catch {Write-Warning "Guest copy retained: $($_.Exception.Message)"}
  throw $failure
 }

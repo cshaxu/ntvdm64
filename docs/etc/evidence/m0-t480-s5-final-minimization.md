@@ -133,9 +133,9 @@ Checked-in entrypoints:
   only after successful baseline captures; pinned originals must be available.
 - `tools/audit/verify-t480-s2-preprocessing.py` accepts the S5 plan/output root
   and runs each frozen real consumer under its matching VS environment.
-- `tests/build/verify-t480-s5-comments.py build/t480-s5` requires exact consumer
+- `test/build/verify-t480-s5-comments.py build/t480-s5` requires exact consumer
   sets, commands, emitted text, tokens, logical locations and final hashes.
-- `tests/build/verify-t480-s5-inventory.py --output build/t480-s5/<fresh-dir>`
+- `test/build/verify-t480-s5-inventory.py --output build/t480-s5/<fresh-dir>`
   checks the final inventory against the pinned originals, Git and stage receipts.
 
 All compiler/test invocations run through owned background supervisors with

@@ -109,7 +109,7 @@ The formal graph is `build/M0-T420/S35/formal-x86-r1`. Its default library
 build completed 469 edges; explicit `ntvdm.exe run16.exe basesrv.exe dtmgr.exe
 VDMREDIR.dll` completed the remaining 58 edges. Those five artifacts supplied
 the post-correction tests. Test fixture sources are `xms_capability.asm`,
-`xms_umb_driver.asm` and `xms_profile_builder.c` under `tests/observation`.
+`xms_umb_driver.asm` and `xms_profile_builder.c` under `test/observation`.
 `Build-T420S35XmsGuestTest.ps1` builds the default profile; `-ReserveInt15`
 builds the retained failing reproducer. Neither option rewrites package media.
 
@@ -173,7 +173,7 @@ data, import or export content differs. The deployed historical binary hashes
 remain unchanged; this is not a claim that the relinked hashes are identical.
 This verification does not accept the ordinary-environment low-DOS failure.
 
-`tests/observation/command_environment_trace.c` includes the unchanged current
+`test/observation/command_environment_trace.c` includes the unchanged current
 cmdenv translation unit under a renamed function, then surrounds that function
 with read-only guest leases. The formal graph never selects this wrapper.
 `Build-T420S35EnvironmentTrace.ps1` retains the formal x86 compile flags and
@@ -234,7 +234,7 @@ not introduce an idle timeout or call harness termination a successful exit.
 The test-owned process group was cleaned after the snapshot. The r1 JSON
 used insufficient serialization depth; r2 preserves structured process rows.
 
-The follow-up `tests/observation/xms_worker_reuse.c` was compiled with MSVC
+The follow-up `test/observation/xms_worker_reuse.c` was compiled with MSVC
 Win32/x86 `/MT /W4` into `build/M0-T420/S35/diagnostics-r1/reuse.exe`.
 The existing Console observer ran it with package root `O:\winnt` and report
 `s35-reuse-r1.txt`; the probe itself wrote `s35-reuse-r1.reuse.txt`.
@@ -441,7 +441,7 @@ Do not claim this specific runtime cause proven until the original
 `nt_init_called` state/thread identity or a bounded reproducer corroborates it.
 
 The bounded local reproducer now confirms the helper defect independently:
-`tests/observation/event_thread_startup_failure.c` links the actual
+`test/observation/event_thread_startup_failure.c` links the actual
 `mvdm_softpc_event_thread.c` and `nt_thread_alert_compat.c` with MSVC x86
 `/MT /W4`. Build root: `build/M0-T420/S35/shutdown-reproducer-r1`.
 Its child creates the thread suspended and calls the product join helper;
@@ -488,7 +488,7 @@ APC-only substitution is not an accepted lifecycle repair. Product source
 has no retained change from this experiment.
 
 Original-wait recovery now has one positive modern-host boundary witness:
-`tests/observation/native_console_wait_probe.c` compiles as x86 and runs in a
+`test/observation/native_console_wait_probe.c` compiles as x86 and runs in a
 hidden, real Console. It calls the exported NTDLL NtWaitForMultipleObjects
 with the actual STD_INPUT_HANDLE plus a signaled event. Log
 `s35-native-console-wait-r1.txt` records status `00000001` and exit 0.

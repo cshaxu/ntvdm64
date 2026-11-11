@@ -27,7 +27,7 @@ function command(args,logName) {
     fs.closeSync(log);
     assert.equal(result.status,0,`${logName}: ${result.error?.message ?? result.status}`);
 }
-command(`cl.exe ${flags} /we4013 /FI "${root}/tests/broker/source_compile_probe.h" /I "${build}" /I "${root}/src/non-mvdm/base/win32/inc" /Fo"${build}/srvvdm.obj" "${source}"`,'compile.log');
+command(`cl.exe ${flags} /we4013 /FI "${root}/test/broker/source_compile_probe.h" /I "${build}" /I "${root}/src/non-mvdm/base/win32/inc" /Fo"${build}/srvvdm.obj" "${source}"`,'compile.log');
 command(`dumpbin.exe /symbols "${build}/srvvdm.obj"`,'symbols.txt');
 assert.deepEqual(fs.readFileSync(source),sourceBefore,'The original owner must not be edited');
 const object=fs.readFileSync(path.join(build,'srvvdm.obj'));

@@ -23,7 +23,7 @@ The decoder keeps original **source slots**, not compacted visible-button ordina
 
 ## Evidence and bounded verification
 
-T464's retained executable fixture `tests/observation/verify-wow-hard-error-decoder.ps1` passed the five source-slot/default/cancel assertions and its Full gate passed fourteen product gates. The published evidence is [T464 S4 hard-error acceptance](m0-t464-s4-hard-error-acceptance.md).
+T464's retained executable fixture `test/observation/verify-wow-hard-error-decoder.ps1` passed the five source-slot/default/cancel assertions and its Full gate passed fourteen product gates. The published evidence is [T464 S4 hard-error acceptance](m0-t464-s4-hard-error-acceptance.md).
 
 For this source-only reconciliation, an attempted fresh fixture launch did not create an owned result receipt. It is **not counted as a pass or fail**; the user explicitly directed that this unavailable verification not block continued work. Current source inspection confirms no changes to the decoder, public receiver, original WOW handoff, or packaged runtime images since the retained T464 acceptance. Consequently S4 relies on the retained executable proof plus current source identity rather than inventing a modal driver or claiming a new runtime witness.
 

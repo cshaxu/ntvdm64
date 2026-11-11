@@ -153,11 +153,11 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         return @($sources | Sort-Object)
     }
     foreach($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe')) {
-        if(@(Get-FrontendSources $target 'adapter-basesrv' 'tests').Count) {
+        if(@(Get-FrontendSources $target 'adapter-basesrv' 'test').Count) {
             throw "$target includes service test-only translation/hooks"
         }
     }
-    $fixtureSources=@(Get-FrontendSources 'basesrv-service-reservation-test.exe' 'adapter-basesrv' 'tests')
+    $fixtureSources=@(Get-FrontendSources 'basesrv-service-reservation-test.exe' 'adapter-basesrv' 'test')
     if(@(Compare-Object @('base_service_reservation_test.c','base_service_fixture.c') $fixtureSources).Count) {
         throw 'Service fixture must select its private hooks and reservation test'
     }

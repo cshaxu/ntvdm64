@@ -301,7 +301,7 @@ borrow composition; those source attributions are not a first-bad runtime
 bisect or a claim that P2 alone introduced the slowdown.
 
 The new reproducible group is
-`tests/observation/verify-wow-mine-latency.ps1`, using the existing actual
+`test/observation/verify-wow-mine-latency.ps1`, using the existing actual
 WINMINE identity/pixel helpers, plus `wow_mine_latency_probe.c` and the existing
 read-only `wow_native_pc_sample.c` with optional bounded rounds/QPC stamps.
 It posts twelve right-click down/up pairs, requires twelve actual cell-pixel
@@ -726,7 +726,7 @@ candidate speedup is claimed yet; P3 remains installed.
 The real EMS control initially fails on unchanged P3 with EMS NOT INSTALLED,
 not a candidate regression. Original nt_pif.h defaults EMS limit/request to0;
 config.c obtains the DOS allocation from PIFEMSMemSize, while WOW deliberately
-uses0. Reuse tests/observation/ems_pif_builder.c to request1MiB in a private
+uses0. Reuse test/observation/ems_pif_builder.c to request1MiB in a private
 E30.PIF/E30.NT/E30AUTO.NT profile. The existing memory-transition runner uses
 SUBST and foreground tools, so the new observer runner reuses its producer,
 not that obsolete orchestration. No installed profile or original guest is
@@ -1371,11 +1371,11 @@ entry/guest continuation/return and retirement, not physical OK-button input,
 all native control layouts or remaining mixed-message families.
 
 The reproducible pure-native reference is now
-tests/observation/verify-native-modal-control.ps1 with mandatory Observer,
+test/observation/verify-native-modal-control.ps1 with mandatory Observer,
 CompilerDriver and fresh build-owned BuildRoot. Native-control-r4 passes that
 committed-form runner, explicitly x86/MT/O2; native_modal_control.c and the
 shared wow_native_modal_probe.c never load WOW/style. The actual guest runner
-is tests/observation/verify-win16-native-modal-probe.ps1 with PackageRoot,
+is test/observation/verify-win16-native-modal-probe.ps1 with PackageRoot,
 Observer, CompilerDriver, the actual-message group's LogonHelper assembly,
 fresh BuildRoot and WindowStyle Off/Win16/All. Each root records exact inputs,
 image hashes, real owned processes/deadlines, guest returns and retirement.
@@ -5091,7 +5091,7 @@ No original guest or public run16 option is added. The separate process is
 a test endpoint, not a production helper HWND/process or adapter mechanism.
 
 Reproducer: hidden background pwsh -NoProfile -ExecutionPolicy Bypass -File
-tests/observation/verify-wow-external-native.ps1 -BuildRoot
+test/observation/verify-wow-external-native.ps1 -BuildRoot
 <repo>/build/t447-s4-external-native/group-r1. Supervisor PID47648 starts
 2026-10-19T04:24:11.878Z; test starts04:24:12.709Z, finishes04:27:02.347Z,
 exit0. Build commands PID30784/40280 configure both stable ccache presets
@@ -5214,7 +5214,7 @@ still runs inside the sender worker; this does not claim a new external
 native endpoint. Original USER16 calls, converters and native USER perform
 all actual message delivery. There is no test provider in production.
 
-Reproducer: hidden owned pwsh -File tests/observation/verify-wow-external-native.ps1
+Reproducer: hidden owned pwsh -File test/observation/verify-wow-external-native.ps1
 -CrossWorkers -BuildRoot <repo>/build/t447-s4-cross-worker/group-r1.
 Supervisor PID46596 starts 2026-10-19T04:46:16.286Z; group runs04:46:17.175Z
 through04:48:47.163Z and returns0. Stable x86/x64 fixture builds PID19772/
@@ -5353,7 +5353,7 @@ assertion. Receiver-thread/process death, HWND reuse, arbitrary failed sends,
 implicit receive and remaining M4 families are not proved by window death.
 
 Final reproducer: hidden owned pwsh -File
-tests/observation/verify-wow-external-native.ps1 -PendingSend -BuildRoot
+test/observation/verify-wow-external-native.ps1 -PendingSend -BuildRoot
 <repo>/build/t447-s4-pending-send/group-r2. Supervisor PID11572 starts
 05:07:46.011Z; group05:07:46.970--05:10:08.588Z, exit0. x86/x64 builds
 PID30036/12412 exit0, using the existing stable caches. Native controls
@@ -5475,7 +5475,7 @@ of movement, exception cleanup or concurrent mapping lifetime.
 Native evidence is necessary before changing normal output: the earlier
 COPYDATA early-reply witness protects the sender's page but does not observe
 USER's receiver capture. The new independently authored
-tests/observation/wow_message_capture_control.c uses raw public USER32 only:
+test/observation/wow_message_capture_control.c uses raw public USER32 only:
 main-thread native WndProc plus held sender-thread handle, four standard
 messages, early ReplyMessage6, sender-owned page protected NOACCESS and
 verified unreadable, acknowledgement, then a second cross-thread scalar
@@ -5591,7 +5591,7 @@ The complete source/alternatives/budget are in the working plan and local
 345 registration; this cohort is not the complete M4 inventory or S4 closure.
 
 Supplemental producer is
-tests/observation/verify-wow-message-construction.ps1, using the exact selected
+test/observation/verify-wow-message-construction.ps1, using the exact selected
 whole original converter bodies/types and six original parameter-map functions
 with lower allocator/mapping/window services doubled. Baseline58fa75e55 and
 candidate are compiled x86 /MT /O2 /W4 /WX. Model-r1 lacks test declarations;
@@ -5674,7 +5674,7 @@ exit0 is not success. Both queued successors refuse their failed prerequisite;
 no application/publication success is inferred from those refusals.
 
 The reusable unpublished observer is
-tests/observation/new-wow-common-return-diagnostic.ps1 plus
+test/observation/new-wow-common-return-diagnostic.ps1 plus
 wow_common_return_diagnostic.h. It compiles two generated copies of current
 project-owned lifecycle/thunk sources and relinks the exact cached original
 objects into a separate DLL. It never edits a product source/cache object,
@@ -7191,7 +7191,7 @@ closure. No production source, mirror, public/wire ABI, release binary,
 guest ZIP or configuration changes. The native observation supplies a missing
 input to the whole conversion design, not a source of trace-derived patches.
 
-Reproducer: tests/observation/verify-wow-message-capture.ps1 -EvidenceRoot
+Reproducer: test/observation/verify-wow-message-capture.ps1 -EvidenceRoot
 <fresh build child>, launched hidden with recorded PID/arguments and a3000s
 outer budget. It builds the existing wow_capture_native_control target in
 each stable MSVC Release tree after explicit VsDevCmd -arch=x86/x64, proves
@@ -7655,7 +7655,7 @@ retains the original strict failure. No sleep, manager, retained state,
 private USER access, ABI, mirror or guest change. Continuous native mutation
 is not claimed to guarantee acquisition progress.
 
-The formal source entrypoint is tests/observation/verify-wow-native-chain-capture.ps1,
+The formal source entrypoint is test/observation/verify-wow-native-chain-capture.ps1,
 with a fresh build child and the stable x86 compiler driver; -Reacquire selects
 the full transaction matrix. The raw three native witnesses additionally
 assert that existing foreign-cycle cutting and allocation failure never mark

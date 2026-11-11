@@ -50,7 +50,7 @@ pointer crosses the machine/broker boundary or enters guest state.
 
 | Check | Result |
 | --- | --- |
-| `tests/mvdm-host/dos/Verify-T409OriginalVddLifecycle.ps1` | Pass: all five original owner functions selected; original source ordering present; only synchronous SFT-head binding retained; no selected shadow caller/build member. |
+| `test/mvdm-host/dos/Verify-T409OriginalVddLifecycle.ps1` | Pass: all five original owner functions selected; original source ordering present; only synchronous SFT-head binding retained; no selected shadow caller/build member. |
 | Formal graph generation | Pass with Git Bash Node `v22.22.1`, root `build/M0-T409/S2/r002-original-vdd-clean`. |
 | Formal Win32/x86 link | Pass: `original-softpc-process.exe`, 3,238,400 bytes. `demfile.c` and `wkfileio.c` compile; link completes without the shadow provider. Historical warning families remain warnings only. |
 | Staging | Pass: `build/output/ntvdm32.exe` and `O:\ntvdm64\ntvdm32.exe`, both 3,238,400 bytes, SHA-256 `837f3cff9681406e8952453d153d5afe2b70d34c584b27835944f07679a658cf`. |

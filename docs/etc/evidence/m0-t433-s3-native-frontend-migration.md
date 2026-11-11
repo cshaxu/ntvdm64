@@ -36,7 +36,7 @@ Baseline: S2 production14796f8ba56a51075f098a532d251531a9937db2, sealed
   both Hooks and unchanged original media/configuration.
 - r005-observer: Generate-ObservationNinja with x64; startup observer,
   input-milestone-test and worker-window-snapshot. Milestone negatives pass.
-- r007-focused: tests/observation/verify-native-frontend.ps1 with the above
+- r007-focused: test/observation/verify-native-frontend.ps1 with the above
   cache/baseline/WOW32/Hook64/worker inputs. Eleven AMD64 fixtures and two
   package-input negatives pass; results.json retains each result and log.
 - r001 channel-x86-fixture/frame-x86-fixture: the same updated full Console

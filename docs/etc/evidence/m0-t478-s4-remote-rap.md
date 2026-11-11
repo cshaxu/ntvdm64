@@ -71,7 +71,7 @@ that earlier rejection alone was not used as proof of this new exclusion. Origin
 
 ## Focused verification and interpretation
 
-`tests/observation/verify-redirector-server-enum.ps1` compiles actual apisrv.c
+`test/observation/verify-redirector-server-enum.ps1` compiles actual apisrv.c
 with its production CCPU40/x86 flags, replacing only public NetServerEnum and
 NetApiBufferFree at the fixture boundary. It links real original conversion
 helpers; the map verifies XsNetServerEnum2 from apisrv-test.obj and XsFillEnumBuffer
@@ -88,7 +88,7 @@ as an independent native comparator. In the sandbox the OS returns access denied
 (5); under the same normal user context as the product test it returns 6118.
 The acceptance comparison uses the latter, not a hardcoded interchangeable error.
 
-`tests/observation/verify-redirector-remote.ps1` assembles an independent COM
+`test/observation/verify-redirector-remote.ps1` assembles an independent COM
 probe and runs it through the coherent package in an owned physical O:/tmp stage.
 The real original guest dispatch, CCPU40, VDMREDIR and host binding execute:
 32 remote API + 32 raw transactions + 32 null transactions return CF=1/AX=120;

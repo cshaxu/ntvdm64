@@ -74,7 +74,7 @@ Run its run-ninja-parallel.cmd product-programs and the focused fixture targets.
 The primary build completed 602 steps. New-T404S5Wow32ProviderNinja.ps1,
 Architecture=x86, BuildRoot=run-root/wow32 and ParentImportLibrary=run-root/ntvdm.lib,
 rebuilt WOW32.DLL from 77 bodies/105 carriers. The startup observer was rebuilt
-x86 /MT from tests/observation/console_startup_observer.c with user32/dbghelp;
+x86 /MT from test/observation/console_startup_observer.c with user32/dbghelp;
 all objects and outputs stay in the run root. Subsequent fixture-only incremental
 builds leave the tested production artifacts unchanged.
 
@@ -95,7 +95,7 @@ builds leave the tested production artifacts unchanged.
 | Root failure | Same management script, LogPrefix=t424-s2-frontend-loss, FrontendLoss | Pass associated Console close and non-success direct completion. |
 | WOW retained frontier | observe-wow-frontiers.ps1, Observer=run-root/observer.exe, WindowObserver=build/M0-T423/S9/publication-window-reader.exe, Prefix=t424-s2-wow-frontier, PackageRoot=Z:/, ProcessPackageRoot=run-root/runtime, LogRoot=run-root, PostExitObservationMs=5000 | WINMINE guest main window retained; SOL/WRITE retain original out-of-memory dialogs, not usability passes. |
 
-The new identity-only fixture is tests/component-integration/worker_identity_version_test.c.
+The new identity-only fixture is test/component-integration/worker_identity_version_test.c.
 Compile with cl /c /MT /W4, /I run-root/obj/basesrv /I src, output object
 under the run root; link its object with run-root/obj/run16/stub.obj,
 run-root/broker-transport.lib, rpcrt4/kernel32/advapi32 into

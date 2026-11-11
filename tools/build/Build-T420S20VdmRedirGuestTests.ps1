@@ -20,7 +20,7 @@ if (Test-Path -LiteralPath $build) {
 }
 
 $nasm = Get-Command -Name $NasmExecutable -ErrorAction Stop
-$source = Join-Path $repository 'tests\observation'
+$source = Join-Path $repository 'test\observation'
 $outputs = [ordered]@{
     'VDMPRDR.COM' = 'vdmredir_pipe_open_read.asm'
     'VDMPTX.COM'  = 'vdmredir_pipe_transact.asm'

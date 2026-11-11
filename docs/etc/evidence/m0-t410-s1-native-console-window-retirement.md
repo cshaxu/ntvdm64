@@ -31,7 +31,7 @@ retired.
 
 ## Procedure and results
 
-1. Ran `tests/app/Verify-T410NativeConsoleRoute.ps1`: pass.  It proves the
+1. Ran `test/app/Verify-T410NativeConsoleRoute.ps1`: pass.  It proves the
    retired sources and build entries are absent, `entry.c` has no presentation
    reference, app has no Console-input injection, and the native text
    registration/invalidation/`WriteConsoleOutputA` path remains.

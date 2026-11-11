@@ -318,7 +318,7 @@ remaining launch dependencies and old local-policy retirement are not done.
 
 ## Original owner libraries without test declaration scaffolding
 
-The selected lifecycle build no longer force-includes tests/broker/
+The selected lifecycle build no longer force-includes test/broker/
 source_compile_probe.h, creates an empty ntdddfs.h or generates a non-inline
 RtlConvertLongToLuid body. The source audit identified the DFS include as an
 unrelated final include in basesrv.h: srvvdm.c uses no DFS declarations. The

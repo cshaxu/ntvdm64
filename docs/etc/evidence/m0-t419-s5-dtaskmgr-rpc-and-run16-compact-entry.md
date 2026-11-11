@@ -9,7 +9,7 @@ fall through to the native host shell?
 ## Inputs and procedure
 
 The compared clients were `src/dtaskmgr/main.c` and the passing focused
-fixture `tests/adapter-basesrv/dtaskmgr_rpc_test.c`. The latter opens a real
+fixture `test/adapter-basesrv/dtaskmgr_rpc_test.c`. The latter opens a real
 self process handle with `OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION |
 SYNCHRONIZE, FALSE, GetCurrentProcessId())`; the former had sent the
 non-duplicable pseudo-handle returned by `GetCurrentProcess()`.

@@ -24,7 +24,7 @@ fixture links the production service archive; no copied service implementation
 or replacement provider is introduced.
 
 Reproducible entrypoint:
-`tests/adapter-basesrv/base_service_reservation_test.c`,
+`test/adapter-basesrv/base_service_reservation_test.c`,
 `frontend_notification()` / `frontend_join_wait()`.
 
 Commands from the repository root:
@@ -167,7 +167,7 @@ cache sources and hashes. It copies the accepted S9 immutable guests and
 configuration. No formal product files are replaced. Tests temporarily map
 only Z: and remove it in finally.
 
-`tests/observation/verify-frontend-rapid-relaunch.ps1` runs a real outer CMD
+`test/observation/verify-frontend-rapid-relaunch.ps1` runs a real outer CMD
 batch with twelve immediate native CMD /C and DOS COMMAND /C MEM pairs,
 followed by one final native CMD /C request. There is no line pacing or
 inter-launch sleep. It asserts actual outer completion, real Console output
@@ -252,7 +252,7 @@ r004/r005 attempts misquoted the CMD FINDSTR pipeline, printed diagnostic
 errors into the Console and produced no valid hidden comparison; neither is
 a pass. r003/r006/r007/r008 reports stay under the S10 build run.
 
-The tracked `tests/app/frontend_chain_input.c` adds private-desktop-only
+The tracked `test/app/frontend_chain_input.c` adds private-desktop-only
 `--viewport-write-test <report>` and `--active-viewport-write-test <report>`.
 They create isolated Console buffers, preserve/restore the original active
 buffer, and compare classic/VT output with mixed-origin/current viewport
@@ -419,7 +419,7 @@ Reproduction/test entrypoints:
   service cases; unchanged S9's baseline interleaving fails before repair.
 - console-channel-r005.exe --private-desktop <report>: real coordinate/grid/
   cursor/VT test; --private-desktop-full retains channel/fault/resource tests.
-- tests/observation/verify-frontend-rapid-relaunch.ps1 and
+- test/observation/verify-frontend-rapid-relaunch.ps1 and
   verify-frontend-rapid-interactive.ps1: no launch/line-delay masking.
 - coordinate-regression-r002: classifier227, execution lifetime1073/zero
   remaining handles, Console17/Window17, EDIT, relaunch/isolation and four

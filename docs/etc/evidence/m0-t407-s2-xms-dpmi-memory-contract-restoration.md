@@ -46,7 +46,7 @@ Build roots are disposable and contained under `build/M0-T407/S2/`.
 
 | Check | Command / input | Observed result |
 | --- | --- | --- |
-| Forward transport and overlap distinction | `xms-mapped-memory-fixture.exe`, built from `tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c` | Exit `0`: forward copy, overlap-safe callback move, lease-bound failure and teardown paths pass. |
+| Forward transport and overlap distinction | `xms-mapped-memory-fixture.exe`, built from `test/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c` | Exit `0`: forward copy, overlap-safe callback move, lease-bound failure and teardown paths pass. |
 | Original XMS initialization/provider branches | `node tools/build/Generate-T371XmsStartupNinja.mjs . build/M0-T407/S2/r003-xms-startup`; x86 Ninja fixture | Exit `0`: normal VDM allocation invokes VDM commit/decommit; `STATUS_NOT_IMPLEMENTED` uses original SA fallback without those callbacks. |
 | Formal selected graph | `New-T310OriginalSoftpcNinja.ps1 -Architecture x86 ...`; `ninja ... original-softpc-process.exe` in VS x86 environment | Candidate graph compiled and `original-softpc-process.exe` linked successfully (3,236,352 bytes).  Existing source warnings only, including `xms.c` unused arguments, `suballoc.c` C4701 and `vdm.c` C4701/C4703. |
 | Review | paired S1 original/current diff, `git diff --check`, focused source review | No XMS-specific descriptor parser or transfer loop remains in the adapter.  D37 is intentionally unchanged and recorded above. |

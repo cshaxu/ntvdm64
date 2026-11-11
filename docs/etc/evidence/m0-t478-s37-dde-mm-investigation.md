@@ -23,7 +23,7 @@ unavailability and no writes to O:/winnt were made.
 ## Current real DDEML observations
 
 The two existing independently authored shard2 init/register probes were copied
-byte-for-byte to tests/observation/win16_ddeml_{init,register}_probe.asm. The new
+byte-for-byte to test/observation/win16_ddeml_{init,register}_probe.asm. The new
 verify-win16-ddeml-probe.ps1 preserves their receipt assertions and uses the
 current proven physical-stage, fresh package ID, medium-token private desktop
 and original logon environment. It records the DLL actually returned by guest

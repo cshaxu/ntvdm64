@@ -24,10 +24,10 @@ Get-Content src/ntsrv-exe/opennt/source/native_commands.c
 Get-Content src/ntsrv-exe/main.c
 Get-Content src/ntmon-exe/main.c
 Get-Content src/common/rpc/management.c
-Get-Content tests/adapter-basesrv/base_service_reservation_test.c
-Get-Content tests/app/common_management_test.c
-Get-Content tests/observation/monitor_layout_test.c
-Get-Content tests/observation/verify-monitor-layout.ps1
+Get-Content test/adapter-basesrv/base_service_reservation_test.c
+Get-Content test/app/common_management_test.c
+Get-Content test/observation/monitor_layout_test.c
+Get-Content test/observation/verify-monitor-layout.ps1
 ```
 
 Source conclusions below are high-confidence inspection, not newly executed
@@ -165,15 +165,15 @@ These are required future assertions, not passing results of this S.
 
 | Test entrypoint / proposed case | Required assertions |
 | --- | --- |
-| tests/adapter-basesrv/base_service_reservation_test.c --management-tree (new) | Two roots, DOS/native mixed children, top-level WOW worker with executable children, independent GUI row, pending/blocked BUSY and resident IDLE; no UNBOUND, fake per-task PID, stale wrapped-task identity or mutation of task waits/results; released pipe retains association. |
+| test/adapter-basesrv/base_service_reservation_test.c --management-tree (new) | Two roots, DOS/native mixed children, top-level WOW worker with executable children, independent GUI row, pending/blocked BUSY and resident IDLE; no UNBOUND, fake per-task PID, stale wrapped-task identity or mutation of task waits/results; released pipe retains association. |
 | Same fixture --management-missing-root (new) | Controlled root rundown while exact watch lives; old PID MISSING with child, new generation isolated, final watch removal prunes descriptor; allocation failure/rollback and service Stop leak checks. |
 | Same fixture --management-close (new) | Stable worker/root/GUI selectors; stale instance/key/PID replacement rejected without signaling replacement; root restoration and process-exit barriers; native close failure; GUI DEL leaves carrier and unrelated GUI/WOW alive. |
 | Existing fixture default, --native-worker, --native-command, --io-authority, --frontend-authority, --wow-start-late-query | Existing actual DOS/WOW record, native receipt, root authentication, blocking/reentry and stop/closed tests remain; do not weaken old assertions when row counts expand. |
-| tests/adapter-basesrv/monitor_rpc_test.c | Actual RPC populated/empty snapshot, generation/type/instance negative selectors, malformed/version/application mismatch; peer/session authorization, no management-only connection pins. |
-| tests/app/common_management_test.c | Production common client preserves RPC error/exception, empty outputs and allocation cleanup; forwards full stable key unchanged; malformed input invokes no RPC. |
-| tests/observation/monitor_layout_test.c | Real renderer cells: hierarchy/STATE/elapsed, exact title/footer, long paths/scrollbars, missing roots, independent WOW/GUI nodes without UNBOUND, stable selection after reorder/removal, no stale confirmation. Add production input-dispatch cases for UP/DOWN/DEL/ESC and no-op missing roots. |
-| tests/observation/verify-monitor-layout.ps1 | Repair stale src/interface IDL and missing common-rpc link dependencies before use, or replace with formal Ninja fixture target; all products/intermediates under build. Existing script is not a valid current build command. |
-| tests/observation/verify-ntvwm-management.ps1 and verify-native-gui-routing.ps1 | Extend actual serial package checks to distinguish GUI target from carrier; native direct completion/reuse unchanged, two Console sessions cannot cross-control. |
+| test/adapter-basesrv/monitor_rpc_test.c | Actual RPC populated/empty snapshot, generation/type/instance negative selectors, malformed/version/application mismatch; peer/session authorization, no management-only connection pins. |
+| test/app/common_management_test.c | Production common client preserves RPC error/exception, empty outputs and allocation cleanup; forwards full stable key unchanged; malformed input invokes no RPC. |
+| test/observation/monitor_layout_test.c | Real renderer cells: hierarchy/STATE/elapsed, exact title/footer, long paths/scrollbars, missing roots, independent WOW/GUI nodes without UNBOUND, stable selection after reorder/removal, no stale confirmation. Add production input-dispatch cases for UP/DOWN/DEL/ESC and no-op missing roots. |
+| test/observation/verify-monitor-layout.ps1 | Repair stale src/interface IDL and missing common-rpc link dependencies before use, or replace with formal Ninja fixture target; all products/intermediates under build. Existing script is not a valid current build command. |
+| test/observation/verify-ntvwm-management.ps1 and verify-native-gui-routing.ps1 | Extend actual serial package checks to distinguish GUI target from carrier; native direct completion/reuse unchanged, two Console sessions cannot cross-control. |
 | tools/audit/Invoke-ProductVerification.ps1 plus existing lifecycle/RPC probes | Retain Console17/Window17, WOW frontiers, nested DOS/native both ways, loss/cleanup and version negatives; coherent eight-file package hash/publication. No parallel global-endpoint/Z product matrices. |
 
 Monitor fixture currently includes its production main.c, not a copied fake

@@ -51,7 +51,7 @@ audit. S1 build-only waiver does not apply to S2.
 Read cmdexec.c::cmdExec32/cmdCreateProcess, cmdmisc.c::cmdGetNextCmd and
 nt_event.c::nt_block_event_thread/nt_resume_event_thread/nt_process_suspend_event.
 The source order is now guarded by
-tests/observation/verify-dos-frontend-handoff-source.ps1; six assertions passed
+test/observation/verify-dos-frontend-handoff-source.ps1; six assertions passed
 on c39b9ca0c production source. This is a source-order test, not runtime proof.
 
 1. cmdExec32 calls nt_block_event_thread(0) before starting cmdCreateProcess.
@@ -103,7 +103,7 @@ No S2 runtime pass is claimed by the source guard.
 
 ## Build-selected Console surface inventory
 
-Run tests/observation/audit-dos-console-build-surface.ps1 against the S1 formal
+Run test/observation/audit-dos-console-build-surface.ps1 against the S1 formal
 build.ninja; add -Callsites for reproducible file/line candidates. The script
 removes comments/string literals, reads only graph-selected worker C files,
 and does not generate output outside build. It is not a preprocessor or call
@@ -339,7 +339,7 @@ it does not yet certify a transport or native handoff barrier.
 
 New-T310OriginalSoftpcNinja.ps1 adds the selected run16 object and a native
 console-frontend-test.exe target. The formal x86 cache was regenerated and
-both targets compiled/linked. tests/app/console_frontend_test.c ran in a real
+both targets compiled/linked. test/app/console_frontend_test.c ran in a real
 CREATE_NO_WINDOW Console using ProcessStartInfo (UseShellExecute=false,
 CreateNoWindow=true, redirected stdout/stderr, 15-second timeout). It passed
 actual A/B stream rows, moved ### cells and 0x2e attributes, cursor size and
@@ -403,7 +403,7 @@ failures do. Shared exchange code replaces the stream-only framing duplicate.
 Rectangle/cell readback, resize ownership, input and native handoff are still
 incomplete, not silently counted as covered by these seven operations.
 
-tests/app/console_client_test.c is built as console-client-test.exe in the
+test/app/console_client_test.c is built as console-client-test.exe in the
 formal graph. Its session/TakeFrontend binding is explicitly test-only; it
 exercises the production worker client, a real pipe and production frontend
 dispatcher against distinct Console screen buffers. It passes stream placement,
@@ -555,11 +555,11 @@ WOW32 `wkman.c` consumes that record's show state. No SW_HIDE is injected.
 Verification (MSVC 14.43.34808 Win32/x86 /MT; outputs exclusively below
 `build/M0-T423/S2/wow-console-side`):
 
-- `node tests/app/wow_console_startup_test.mjs`: passes source ordering,
+- `node test/app/wow_console_startup_test.mjs`: passes source ordering,
   WOW-only flag selection, separate guest startup state and retained DOS rule.
 - Formal graph's `obj/run16/entry.obj` compiler arguments, with only output
   redirected to the isolated run root: production main.c compiles; compile.log.
-- `cl /MT /W4 tests/app/wow_console_native_test.c`, with /Fo and /Fe inside
+- `cl /MT /W4 test/app/wow_console_native_test.c`, with /Fo and /Fe inside
   that root, linked /subsystem:console and user32.lib: native-build.log.
   Running the resulting wow-console-native.exe passes Console read/write,
   nonvisible Console and independent GUI ShowWindow visibility assertions.
@@ -731,7 +731,7 @@ failure path and make active-lease loss bounded without treating normal root
 completion/resident waiting as a fatal event.
 
 The dialog hypothesis is now runtime-proven. A read-only test-owned worker
-window snapshot (tests/observation/worker_window_snapshot.c, x86 /MT, object
+window snapshot (test/observation/worker_window_snapshot.c, x86 /MT, object
 and EXE below build/M0-T423/S2) enumerates the observer's explicitly named
 private desktop, filters windows to the verified worker PID and reads text
 with bounded SendMessageTimeout. It sends no input or close messages.
@@ -858,7 +858,7 @@ pending frontend wait with ERROR_ACCESS_DENIED and publishes no handles or
 generation. The fixture source contains the bounded waits and assertions;
 this is a native service test, not an RPC-client-death test.
 
-tests/app/base_client_rpc_first_test.c now also has --frontend-wait-parent
+test/app/base_client_rpc_first_test.c now also has --frontend-wait-parent
 and --frontend-wait-child. The parent starts the registered child before
 attaching presentation; the child announces its impending wait and calls the
 actual OpenNtBaseClientWaitFrontend generated RPC route. The parent observes
@@ -912,7 +912,7 @@ worker FIFO is not equivalent for a subsequent native child reading CONIN$.
 Read-only dumpbin exports of this machine's SysWOW64/kernel32.dll showed that
 WriteConsoleInputVDMW still exists (kernelbase lacks that named export).
 
-The new tests/app/console_prepend_native_test.c checks actual behavior, not
+The new test/app/console_prepend_native_test.c checks actual behavior, not
 symbol presence. Built with MSVC x86 /MT /W4 into
 build/M0-T423/S2/console-prepend-native.exe and run through the unswitched
 private-desktop observer, prefix m0-t423-s2-prepend-native, it seeded B,C via
@@ -1064,7 +1064,7 @@ rights. Root/client rundown closes retained references. Task waits and original
 exit-code queries remain per-launcher. No root ownership may be inferred from
 Console membership or parent PID alone.
 
-Native prerequisite evidence: `tests/app/frontend_capability_inheritance_test.c`
+Native prerequisite evidence: `test/app/frontend_capability_inheritance_test.c`
 was compiled MSVC x86 `/MT /W4` with explicit object/executable paths under
 `build/M0-T423/S2`. `O:/winnt/logs/m0-t423-s2-capability-inheritance.txt`
 records direct, real CMD and two nested CMD launches passing. Each descendant
@@ -1346,7 +1346,7 @@ the new pre-attachment fault injection, which remains a distinct test to add.
 
 ### Real RPC pre-attachment rundown verification
 
-`tests/app/base_client_rpc_first_test.c` now has two production-transport cases
+`test/app/base_client_rpc_first_test.c` now has two production-transport cases
 selected by `Verify-BasesrvProduct.mjs`. `--frontend-cancel-parent` submits an
 original command, registers its real worker and root, waits until the worker
 has connected, publishes RequestFrontend without attaching a pipe, and closes
@@ -1677,7 +1677,7 @@ the non-inherited job and passes PROC_THREAD_ATTRIBUTE_JOB_LIST atomically at
 process creation, retaining the job through existing wait/return cleanup. No
 mirror or broker protocol changes are required for this native pair.
 
-Added `tests/app/native_lifetime_pair_test.c`. Compile once with MSVC x86 /MT
+Added `test/app/native_lifetime_pair_test.c`. Compile once with MSVC x86 /MT
 to build/M0-T423/S2/native-lifetime-pair.obj; link the console test executable
 and the same object as GUI subsystem target with /entry:mainCRTStartup.
 Run `native-lifetime-pair-test.exe <absolute-run16> <absolute-target>`.
@@ -1725,7 +1725,7 @@ for this T; headless verification is sufficient. This supersedes the foreground
 gameplay gate for T423 only, not DOS/native/lifecycle or publication requirements.
 The proposal and active brief record this exception explicitly.
 
-Added tests/observation/observe-wow-frontiers.ps1: launches each original guest
+Added test/observation/observe-wow-frontiers.ps1: launches each original guest
 on the observer's unswitched private desktop, reads test-owned worker windows,
 records bounded outcomes, cleans package processes and verifies unchanged
 SYSTEM.INI. It neither sends input nor bypasses the existing modal. This is a
@@ -1773,7 +1773,7 @@ can remain until the next request/wake or final scope teardown; repeated request
 no longer accumulate all historical channels. Active entries remain untouched.
 There is no polling timer, new manager, worker termination or mirror change.
 
-Tracked `tests/app/frontend_scope_lifetime_test.c` links the actual production
+Tracked `test/app/frontend_scope_lifetime_test.c` links the actual production
 frontend_scope object with explicitly test-only broker/channel substitutes and
 real threads/events. One channel stays live while 33 short channels complete;
 each following admission must retire previous completions, and final teardown
@@ -1791,7 +1791,7 @@ handle race was removed. Tested source/artifact SHA-256 identities:
 | Input | SHA-256 |
 | --- | --- |
 | src/run16-exe/frontend_scope.c | 4E83F95D3F7D1DC50159E6ADFABEAC5B2027BE557E6E54AF9131AB2E146C114C |
-| tests/app/frontend_scope_lifetime_test.c | 9A7FA47A49C6B75E14CDA91E54A42FDBB6BFFB38E4A14C6EF363BFE66DC9B15C |
+| test/app/frontend_scope_lifetime_test.c | 9A7FA47A49C6B75E14CDA91E54A42FDBB6BFFB38E4A14C6EF363BFE66DC9B15C |
 | formal cache run16.exe | 2B8EE3B5A4FC828FFA779BC0926334E5FA498CC4B0D4EC917BB5FD737AC7A03B |
 | formal cache frontend-scope-lifetime-test.exe | D6408281552ABB43B9E4EBDBB1AF7976522E9889FE3094AE3AFBFA9511DB2778 |
 
@@ -1949,7 +1949,7 @@ describes bounded output and a native return/error; its
 documents the size bound and title lifetime. The adapter must delegate actual
 host behavior rather than synthesize title formatting, truncation or cleanup.
 Before binding this family, a new tracked native fixture checks the current
-host behavior independently: tests/app/console_title_native_test.c, formal
+host behavior independently: test/app/console_title_native_test.c, formal
 target console-title-native-test.exe, MSVC x86 /MT.
 
 Run the existing console-startup-observer with the explicit observer-only
@@ -2083,7 +2083,7 @@ output on failure, sequence advancement, null-output rejection and no-channel
 native routing. Invalid setter payload/flags are rejected before USER calls.
 They deliberately do not move or clip the owner's desktop pointer.
 
-`tests/app/console_pointer_dispatch_test.c` compiles the production dispatcher
+`test/app/console_pointer_dispatch_test.c` compiles the production dispatcher
 with only the four USER APIs substituted by test functions. Its formal target
 checks signed coordinates beyond SHORT, exact clip rectangle, null release and
 four native failure results. This is mock boundary evidence, not real pointer
@@ -2284,7 +2284,7 @@ ownership/input and full failure-matrix requirements still prevent S2 closure.
 Reused the unchanged test-only KMTST.COM from
 build/M0-T420/S25/keymouse-r12 with its manifest SHA-256
 E7AD00E9C0DB2E3113ACDFF83984078F42DC1267E9464A55F2FD301387BB6255;
-tests/observation/keymouse_capability.asm is unchanged since 49785e1b9.
+test/observation/keymouse_capability.asm is unchanged since 49785e1b9.
 This is an authored test probe, not modified product guest media.
 The native observer now logs failure stage/error and supports an opt-in
 MVDM_TEST_KEYMOUSE_SHARED_CONSOLE=1 path. Its original new-Console/AttachConsole
@@ -2405,7 +2405,7 @@ old separately failing AttachConsole test route. S2 remains open.
 
 ### Ordered input records and BIOS modifier release
 
-The production-channel fixture `tests/app/console_client_test.c` now writes
+The production-channel fixture `test/app/console_client_test.c` now writes
 seven native Console records: left press with Ctrl, focus loss, Ctrl release,
 left release, 80x50 resize, menu command and focus gain. It peeks the complete
 set, reads each record separately and checks exact contents/order plus an
@@ -2538,7 +2538,7 @@ the remaining per-layer abnormal-lifetime matrix.
 
 The installed x86 kernel32.dll exports GetConsoleKeyboardLayoutNameA/W.
 Export availability alone is insufficient: the retained x86 /MT fixture
-`tests/app/console_keyboard_layout_native_test.c` resolves both exact original
+`test/app/console_keyboard_layout_native_test.c` resolves both exact original
 signatures, queries an isolated attached Console, verifies buffer canaries,
 then detaches only itself and compares the thread-local query. It never
 changes a keyboard layout, foreground desktop, registry or product behavior.
@@ -2590,7 +2590,7 @@ event type is local-only and is not an admissible wire frame.
 | SetConsoleActiveScreenBuffer precedes palette publication | Mode, surface generation and palette ordering must survive transport; late chunks from a retired surface cannot repaint a new mode. |
 | Text return reselects original text surface | Keep ordered text/stream/control events and existing final-output barrier; graphics latest-frame coalescing must not discard text or lifecycle events. |
 
-`tests/observation/verify-dos-video-source-contract.ps1` passes 13 source
+`test/observation/verify-dos-video-source-contract.ps1` passes 13 source
 assertions covering producer bit depth, orientation, compression, palette
 table, original buffer/palette calls, write-lock/invalidation order, inclusive
 edges and the existing guest probe's mode13h-to-mode3 sequence. This is a
@@ -2677,7 +2677,7 @@ and documentation governance pass; this still does not close S2 or publish P.
 The selected original `nt_graph.c::graphicsResize` calls native
 CreateConsoleScreenBuffer with CONSOLE_GRAPHICS_BUFFER; current conapi does
 not intercept that call. Its successful VRAM probe does not prove allocation
-or frame publication. A checked-in `tests/app/console_graphics_native_test.c`
+or frame publication. A checked-in `test/app/console_graphics_native_test.c`
 now exercises the exact selected top-down BI_RGB/DIB_PAL_COLORS allocation
 for 1bpp and 8bpp, preceded by a native text-buffer control. Compile x86 /MT
 with host-compat/include and kernel32.lib; the formal graph generator adds
@@ -2745,7 +2745,7 @@ this backing for snapshots, rather than publishing potentially half-written
 pixels on the next call. This is explicit finite transport failure handling,
 not recovery of a guest task or a new display policy.
 
-`tests/app/console_bitmap_test.c` builds x86 /MT /W4 /WX with the provider,
+`test/app/console_bitmap_test.c` builds x86 /MT /W4 /WX with the provider,
 kernel32.lib and gdi32.lib. Objects, executable and final log are under
 build/M0-T423/S2; five successive runs pass, followed by the retained
 console-bitmap-test.log run. Checks cover both bit depths, padded rows and
@@ -2855,16 +2855,16 @@ Window rendering, and do not close S2 or deliver a production P.
 
 ### Real guest frame witness and unresolved text return
 
-Added tests/observation/video_frame_delivery.asm: an independently authored
+Added test/observation/video_frame_delivery.asm: an independently authored
 mode-13 DOS probe writes color indices 12h and 2Ah into the two 32,000-byte
 halves of A000h, waits 55 BIOS ticks, then selects mode 3, prints a marker and
 exits. Its default variant waits another 18 ticks after printing; NASM
 IMMEDIATE_EXIT preserves the no-dwell case. No original guest media changes.
 
 The formal graph has a test-only run16-video-observer.exe target. It executes
-the production receiver via tests/app/console_video_observed.c and logs only
+the production receiver via test/app/console_video_observed.c and logs only
 complete received frames plus text retirement. It is not selected by the
-product run16 target. tests/app/run16_package_observed.c redirects only that
+product run16 target. test/app/run16_package_observed.c redirects only that
 test translation unit's self-relative package discovery, permitting the test
 EXE to stay below build while consuming O:/winnt. It does not substitute
 authentication, guest execution, painter, protocol or frame validation.
@@ -2872,8 +2872,8 @@ This is instrumented frontend integration evidence, not a test of production
 launcher path discovery or final Window rendering.
 
 Reproducer: NASM -f bin -o build/M0-T423/S2/VFRAME.COM
-tests/observation/video_frame_delivery.asm; then
-tests/observation/verify-video-frame-delivery.ps1 with FormalBuild
+test/observation/video_frame_delivery.asm; then
+test/observation/verify-video-frame-delivery.ps1 with FormalBuild
 build/M0-T423/S1/restart-formal-x86, WowBuild
 build/M0-T423/S1/restart-wow-x86, Backup
 build/M0-T423/S2/baseline-db4ab61eb2db41b296d49d3ce6b8de6d,
@@ -3046,7 +3046,7 @@ unswitched. Logs under O:/winnt/logs use these exact prefixes:
 These are refreshed specific cases, not completion of the full root/middle/
 inner fault matrix. In particular they do not test every middle-layer victim.
 
-The checked-in tests/app/console_video_test.c now exercises production frame
+The checked-in test/app/console_video_test.c now exercises production frame
 dispatch with a 9x2, 1bpp frame: DWORD-padded rows, exact packed bytes/palette,
 an 8bpp-to-1bpp replacement hidden until its final chunk, TEXT retirement of
 both the completed frame and a partially received replacement, and rejection
@@ -3212,7 +3212,7 @@ Its close/logoff/shutdown policy instead consults worker-local state; that
 function is not a frontend input reader or a callback pointer to serialize.
 The launcher retains its wait while the target receives the native event.
 
-The checked-in tests/observation/verify-run16-dos-control.ps1 now has fresh
+The checked-in test/observation/verify-run16-dos-control.ps1 now has fresh
 candidate evidence: m0-t423-s2-control-owner-current-r2-c.txt and -break.txt
 under O:/winnt/logs. Each generated-control sidecar proves successful real
 event generation (0 and 1 respectively); guest VER/MEM text, zero remaining
@@ -3743,8 +3743,8 @@ infer the missing initialized count from the already incorrect request.
 The selected rung is a registered local correction to the retained original
 owner, not an independent reimplementation.
 
-Reproducer: tests/observation/verify-unused-key-return.ps1 extracts the exact
-production function and compiles tests/app/unused_key_return_test.c with MSVC
+Reproducer: test/observation/verify-unused-key-return.ps1 extracts the exact
+production function and compiles test/app/unused_key_return_test.c with MSVC
 x86 /MT. Its external history/write/cleanup functions are controlled fixtures,
 not a claim that the whole Console implementation is tested. The red run at
 build/M0-T423/S2/key-return-red fails requested=2 present=2 sent=3. The green
@@ -3815,7 +3815,7 @@ Question: can root-frontend channel shutdown join both pending pipe I/O and a
 native Console read, including peer EOF concurrent with owner cancellation,
 without leaked channel handles or leaving the input waiter asleep?
 
-tests/app/console_channel_lifetime_test.c compiles the production channel,
+test/app/console_channel_lifetime_test.c compiles the production channel,
 dispatcher, video backing and grid provider. Only the BaseSrv attach call is
 substituted to retain the peer pipe and assign the test generation; this does
 not prove authentication, broker task completion or real guest behavior.
@@ -3833,7 +3833,7 @@ rounds after one warmup round cover 51 channel lifetimes with fresh generations;
 the process handle count must match before and after the measured rounds.
 This does not claim that arbitrary scheduling interleavings are exhausted.
 
-Build: tests/observation/build-console-channel-lifetime.ps1 -BuildRoot
+Build: test/observation/build-console-channel-lifetime.ps1 -BuildRoot
 build/M0-T423/S2/channel-lifetime-r2, MSVC x86 /MT. The first link attempt
 omitted the existing grid implementation and failed; the reproducible builder
 now compiles that actual provider too, not a stub. Existing production compiler
@@ -3856,7 +3856,7 @@ entire broker/guest completion-race matrix or the physical pointer/focus gate.
 ### Current compiled Console owner reconciliation
 
 At production revision 94762fa70, reran
-tests/observation/audit-dos-console-build-surface.ps1 against
+test/observation/audit-dos-console-build-surface.ps1 against
 build/M0-T423/S1/restart-formal-x86/build.ninja with the installed MSVC x86
 dumpbin. The graph selects 411 distinct worker C units; the lexical inventory
 has 248 occurrences in 17 files and 88 spellings, including definitions and
@@ -3873,7 +3873,7 @@ proof of generic ReadFile/WriteFile routing or adapter fallback reachability.
 Below, original paths are under src/mvdm; client/compat/graphics denote the
 corresponding src/ntvdm-exe/win32 files. The receiver is
 src/run16-exe/console_frontend.c. The listed tests are checked-in under
-tests/app unless otherwise qualified. This reconciles the selected Console
+test/app unless otherwise qualified. This reconciles the selected Console
 surface without claiming the still-open physical/lifecycle acceptance rows.
 
 | Original caller / operation | Current owner and wire route | Assertion evidence / disposition |
@@ -3921,7 +3921,7 @@ inferred. No production source or deployed artifact changed in this audit.
 
 ### Normal DOS completion precedes launcher death/rundown
 
-Added two modes to tests/adapter-basesrv/base_service_reservation_test.c:
+Added two modes to test/adapter-basesrv/base_service_reservation_test.c:
 --launcher-completed-rundown and --launcher-completed-uncollected. Both use
 the existing original Check/Update/Get path, complete the second command with
 exit code 29 through GetNext, and require the original parent event signalled.
@@ -3965,7 +3965,7 @@ before-late-exit subcase, not untested topology combinations or S2 as a whole.
 
 Added -NestedDosChild to Verify-BrokerFinalLifecycle.ps1, requiring
 -DosNativeLoss and optionally -LauncherLoss. The authored
-tests/observation/dos-native-dos-loss.bat starts CMD /c run16 COMMAND, then
+test/observation/dos-native-dos-loss.bat starts CMD /c run16 COMMAND, then
 checks the native result, prints recovery markers and runs MEM. No original
 guest media is modified. The private observer holds input behind a gate until
 the nested COMMAND prompt and its exact launcher process are established.
@@ -4019,7 +4019,7 @@ fullscreen. No desktop focus or pointer mutation was performed in this work.
 ### Deterministic re-entry notification ordering reproducer
 
 The preceding causal candidate is now reproduced without scheduler timing or
-guest changes. tests/adapter-basesrv/base_service_reservation_test.c adds
+guest changes. test/adapter-basesrv/base_service_reservation_test.c adds
 --reenter-before-return and --reenter-after-return. Both consume the same
 second DOS command through original Check/Update/Get, increment the native
 re-entry count, complete that command with 29 using RETURN_ON_NO_COMMAND,
@@ -4242,7 +4242,7 @@ O:/winnt/logs; tests clean up retained survivors only after their assertions.
 | Guest keyboard/mouse | keymouse-observer / keymouse-guest | Existing authored KMTST and production observer return 0 after keyboard, modifier-release, mouse callback and normal return checks. No physical desktop interaction is certified. |
 | Headless WOW3 | wow-winmine / wow-sol / wow-write | All remain alive through the 16-second samples at the existing NETWORK.DRV modal. Observer timeout is an observation bound, not app completion or gameplay acceptance. |
 
-The native fixture source is tests/observation/run16_unpaired_native_test.c;
+The native fixture source is test/observation/run16_unpaired_native_test.c;
 build-run16-unpaired-native.ps1 builds x86 /MT CUI and GUI variants below build.
 Run each through console-startup-observer with MVDM_OBSERVER_PRIVATE_DESKTOP=1,
 TEST_RUNTIME_ROOT set to the package and UNPAIRED_NATIVE_REPORT to its assertion
@@ -4407,7 +4407,7 @@ stopped/joined normally. Across 85 cases, no owned-handle growth is allowed.
 Only broker attachment is substituted; no original guest or production file
 changes. The suspended child never executes guest or other application code.
 
-x86 /MT compilation succeeds via tests/observation/build-console-channel-lifetime.ps1
+x86 /MT compilation succeeds via test/observation/build-console-channel-lifetime.ps1
 under build/M0-T423/S2/channel-terminal-eof. Fixture SHA-256:
 2B800CC4203D08D43699CE6924A1FCACAD59C871B416364148BE882997816949.
 Two unswitched private-desktop runs, O:/winnt/logs/m0-t423-s2-channel-terminal-eof-a
@@ -4427,7 +4427,7 @@ Terminal. That gate stays open. This fixture never clips or moves the pointer.
 
 ### Guest progress after frontend loss: retained completion failure
 
-tests/observation/frontend_loss_noio.asm is an independently authored COM probe,
+test/observation/frontend_loss_noio.asm is an independently authored COM probe,
 not modified original media. It creates logs/NIOREADY, polls for logs/NIOGO,
 then creates logs/NIODONE and invokes DOS exit 7. It makes no Console input or
 output request. The native controller frontend_loss_noio_test.c creates GO
@@ -4541,7 +4541,7 @@ mistaken for this build lock.
 
 Reproducible checked-in tests:
 
-- tests/observation/verify-console-close-contract.ps1 takes Observer,
+- test/observation/verify-console-close-contract.ps1 takes Observer,
   BuildRoot and Prefix. It forces an unswitched private desktop, runs three
   native Console-client cases and the complete service fixture mode catalogue
   (24 including default, excluding reservation-child), checking actual PASS
@@ -4553,7 +4553,7 @@ Reproducible checked-in tests:
   the asynchronous process watch; it now waits for that actual cleanup with
   the same bounded deadline already used by sibling tests, without weakening
   the re-entry/wakeup assertions.
-- tests/observation/frontend_loss_noio_test.c plus the unchanged authored
+- test/observation/frontend_loss_noio_test.c plus the unchanged authored
   frontend_loss_noio.asm: the native controller captures the exact worker
   before ending the root. Abnormal root=91 closes the worker without any guest
   Console request. --normal holds the native target until the controller has
@@ -4658,7 +4658,7 @@ active; this evidence-only P neither admits S3 nor changes its exit standard.
 
 ### Nonzero DOS completion and batch-entry contrast
 
-Added tests/observation/verify-dos-nonzero-continue.ps1 and its
+Added test/observation/verify-dos-nonzero-continue.ps1 and its
 dos-nonzero-continue.bat. The runner assembles the existing independently
 authored dpmi_exec_child.asm without defines: tail " OK" prints its success
 marker and exits 7; absent tail prints its negative marker and exits 99.
@@ -4742,7 +4742,7 @@ This supersedes earlier physical-focus/clip stop conditions in this ledger.
 It is a waiver of observation, not a claim that foreground/clip behavior was
 physically demonstrated, and does not waive known defects or implementation.
 
-Rechecked tests/app/console_pointer_dispatch_test.c: it compiles the actual
+Rechecked test/app/console_pointer_dispatch_test.c: it compiles the actual
 production console_frontend.c dispatcher with test-only USER substitutions;
 signed coordinates, rectangle transport, NULL clip release and native error
 propagation are asserted without moving or clipping a pointer. Ninja -n for

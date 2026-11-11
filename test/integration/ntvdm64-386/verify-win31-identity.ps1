@@ -523,6 +523,6 @@ try {
  'Original Windows installation bytes verified unchanged'
 }
 } finally {
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  Remove-OwnedGuestProbeCopy $dest $task $source
 }

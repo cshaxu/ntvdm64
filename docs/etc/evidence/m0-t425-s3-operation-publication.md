@@ -213,7 +213,7 @@ Commands and observations (same declared cache/run roots):
 - `run-focused.ps1 -Run r005`: observer and actors terminate successfully;
   presentation 426/0, input return 688/0, text handoff 33/0, link ownership and
   leakage-negative controls pass. No runtime guest or physical RDP claim.
-- `tests/app/console_frame_failure_test.c` compiles the actual frontend with a
+- `test/app/console_frame_failure_test.c` compiles the actual frontend with a
   test-only thread-local HeapAlloc substitution, then runs the unchanged full
   channel fixture plus pair/triple import-failure cases. No product hook or
   replacement renderer. Initial direct x86 `/MT /std:c11` compile/link succeeds

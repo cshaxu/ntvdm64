@@ -15,7 +15,7 @@ Retain the sealed S3/S4 evidence and S4 package until reconciliation finishes.
 ## Console handoff coverage extension
 
 Source inspection found three existing branches in
-`tests/observation/console_startup_observer.c`: in-worker NTMON Delete/Y,
+`test/observation/console_startup_observer.c`: in-worker NTMON Delete/Y,
 external same-logon management RPC, and natural `exit` in window mode.
 The tracked `verify-console-caf-self-delete.ps1` previously asserted only the
 first. It now selects these branches with `-Mode SelfDelete`, `ExternalClose`
@@ -147,7 +147,7 @@ snapshot. After both stopped, serial build PID 28844 used the stable x86/x64
 Ninja trees and repository ccache. All 13 images built, and 1458 intermediate
 files were unchanged on the second build. Three image hashes differed from the
 prior published package after graph regeneration; the new complete set, not a
-mixture, was staged and tested. Build script: `tests/build/Test-FullComponentBuild.ps1`;
+mixture, was staged and tested. Build script: `test/build/Test-FullComponentBuild.ps1`;
 the exact run records are under `build/t448-closure/build-r3`.
 
 Background regression PID 17016 passed six frontend fixtures per architecture,

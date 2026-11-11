@@ -94,12 +94,12 @@ $nasm = (Get-Command nasm.exe -ErrorAction Stop).Source
 New-Item -ItemType Directory -Path $output | Out-Null
 # The private-desktop inspector only dismisses the identified, test-owned
 # missing serial-port dialogs. Other errors remain visible to the observer.
-. "$repo/tests/observation/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $output
+. "$repo/test/observation/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $output
 if ($WindowsProbeImage) {
     # An extended witness must retain the boot/ready record contract below.
     Copy-Item -LiteralPath $WindowsProbeImage -Destination "$output/W31CHECK.EXE"
 } else {
-    & $nasm -f bin -o "$output/W31CHECK.EXE" "$repo/tests/observation/win31_startup_contract.asm"
+    & $nasm -f bin -o "$output/W31CHECK.EXE" "$repo/test/observation/win31_startup_contract.asm"
     if ($LASTEXITCODE) { throw 'Failed to assemble Win16 startup witness' }
 }
 $probeBytes = [IO.File]::ReadAllBytes("$output/W31CHECK.EXE")
@@ -115,7 +115,7 @@ foreach ($field in @(@('@W31_BOOT_PATH@',$boot),@('@W31_READY_PATH@',$ready))) {
     [Array]::Copy($bytes,0,$probeBytes,$offset,$bytes.Length)
 }
 [IO.File]::WriteAllBytes("$output/W31CHECK.EXE",$probeBytes)
-& $nasm -f bin -o "$output/W31DOS.COM" "$repo/tests/observation/win31_dosonly_contract.asm"
+& $nasm -f bin -o "$output/W31DOS.COM" "$repo/test/observation/win31_dosonly_contract.asm"
 if ($LASTEXITCODE) { throw 'Failed to assemble DOSONLY witness' }
 $dosBytes = [IO.File]::ReadAllBytes("$output/W31DOS.COM")
 $dosImage = [Text.Encoding]::ASCII.GetString($dosBytes)
@@ -128,7 +128,7 @@ if ($dosPathBytes.Length -ge 128) { throw 'DOS result path exceeds fixed guest f
 [Array]::Clear($dosBytes,$dosOffset,128)
 [Array]::Copy($dosPathBytes,0,$dosBytes,$dosOffset,$dosPathBytes.Length)
 [IO.File]::WriteAllBytes("$output/W31DOS.COM",$dosBytes)
-. "$repo/tests/observation/isolated_package_cleanup.ps1"
+. "$repo/test/observation/isolated_package_cleanup.ps1"
 $winBytes = [IO.File]::ReadAllBytes($winIni)
 $configBytes = [IO.File]::ReadAllBytes($config)
 $autoBytes = [IO.File]::ReadAllBytes($autoexec)

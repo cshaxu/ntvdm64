@@ -68,7 +68,7 @@ mapping together. A zeroed SHAREDINFO or partial callback table is not an
 acceptable substitute. Existing native callback fixtures do not close these
 remaining real-guest requirements.
 
-Run `tests/observation/verify-wow-user-profile.ps1` from the repository.
+Run `test/observation/verify-wow-user-profile.ps1` from the repository.
 The check hashes both selected and deployed USER.EXE, parses the NE segment
 table, resolves symbols in the retained original map, checks actual instruction
 bytes, and enumerates all LOCALAPI mappings with their original function bodies
@@ -294,7 +294,7 @@ invisible message-only window and its class and destroys both before exit.
 
 Inputs and reproduction:
 
-- Source: tests/adapter-mvdm-host-out/wow/wow_user_private_words_probe.c,
+- Source: test/adapter-mvdm-host-out/wow/wow_user_private_words_probe.c,
   SHA-256 929C6AABC3A4D1F676A5B80F10ED753967B013101ED103D4277A88227634EFB0.
 - MSVC 14.43.34808 Hostx86/x86, `/MT /W3`, user32.lib, output
   build/M0-T420/S40/user-bitmap-r1/wow-user-private-words-probe-r3.exe,
@@ -933,7 +933,7 @@ or newly invented cleanup rule is selected. Allocation failure after a successfu
 font load still returns that successful result, exactly as the original does.
 It is not changed into an autonomous rollback policy.
 
-Added tests/adapter-mvdm-host-out/wow/wow_font_tracking_fixture.c. It compiles
+Added test/adapter-mvdm-host-out/wow/wow_font_tracking_fixture.c. It compiles
 the actual adapter and controls only font load/remove, drive type and allocation
 failure. Real path expansion, locking and list management execute. No host font
 is installed or removed. Build root: build/M0-T420/S40/font-tracking-r1,
@@ -1380,7 +1380,7 @@ remains open; this defect is not claimed as the current WRITE failure's cause.
 
 ### Complete USER input-table ABI gate
 
-Added tests/observation/verify-wow-user-callback-abi.ps1 and ran it against
+Added test/observation/verify-wow-user-callback-abi.ps1 and ran it against
 provider-formal-r5 after the window-callback repair. It reads the original
 PFNWOWHANDLERSIN declaration, checks exactly 21 unique direct assignments in
 W32Init, requires each declared type to be WINAPI, then inspects the formal
@@ -1399,7 +1399,7 @@ as a table pass. The repaired window callback is the only new calling-convention
 repair identified in this table sweep. The prior real stack-delta fixture
 remains the positive/negative execution evidence for that specific repair.
 
-Command: tests/observation/verify-wow-user-callback-abi.ps1 -BuildRoot
+Command: test/observation/verify-wow-user-callback-abi.ps1 -BuildRoot
 build/M0-T420/S40/provider-formal-r5. Full read-only result and object identities:
 O:/winnt/logs/s40-user-callback-abi.json. This gate does not prove argument
 meaning, callback body semantics/reachability, the twenty-slot output table,
@@ -1675,12 +1675,12 @@ resource consumption. This is source evidence only, not a passed bitmap
 slot, provider registration, or Win16 workload.
 
 The first source-reuse experiment now passes. Test-only
-`tests/observation/extract-wow-bitmap-header-fixture.ps1` pins the above
+`test/observation/extract-wow-bitmap-header-fixture.ps1` pins the above
 clres.c hash and mechanically extracts the original constants, OLDCURSOR,
 HowManyColors, TrulyMonochrome and CopyDibHdr without editing their bodies.
 Output stays in build/M0-T420/S40/bitmap-original-r1; it is not a production
 source selection or a new mirror file. The companion
-`tests/adapter-mvdm-host-out/wow/wow_original_bitmap_header_fixture.c`
+`test/adapter-mvdm-host-out/wow/wow_original_bitmap_header_fixture.c`
 supplies usercli.h-shaped declarations/BitmapWidth, a counted allocation
 binding and a diagnostic-only macro. MSVC 14.43 x86 /MT /Gz /W4 compilation
 succeeds (original signed-byte-pointer and assignment-condition warnings
@@ -1787,7 +1787,7 @@ The three-argument original interface and x86 stdcall are preserved.
 
 Build: MSVC 14.43 x86 /MT /Gz /W4 /WX, SDK 10.0.22621,
 user32.lib/gdi32.lib, build/M0-T420/S40/dde-original-r1. The original imported
-file and tests/adapter-mvdm-host-out/wow/wow_original_dde_free_fixture.c
+file and test/adapter-mvdm-host-out/wow/wow_original_dde_free_fixture.c
 compile without warnings. Native fixture exits zero:
 WOW_ORIGINAL_DDE_FREE_OK release override bitmap-ownership nested-dib null.
 It checks retaining data when release is clear, forced release, bitmap
@@ -1893,7 +1893,7 @@ DCs are released at return, while terminal shutdown releases the lock only
 after all calls finish. It is not a restart API or guest resource manager.
 
 MSVC x86 /MT /Gz /W4 compiles these two owners, the binding and
-tests/adapter-mvdm-host-out/wow/wow_bitmap_binding_fixture.c independently.
+test/adapter-mvdm-host-out/wow/wow_bitmap_binding_fixture.c independently.
 Build root: build/M0-T420/S40/bitmap-binding-r1, compile.log. Native exit zero:
 WOW_BITMAP_BINDING_OK nested=30 gdi-before=0 gdi-after=0.
 Tests check NULL context rejection, 30 nested entry/conversion/leave pairs,
@@ -1955,7 +1955,7 @@ calls; no raw guest caller has been enabled by this composition work.
 ### Positive native resource names and guest-span audit
 
 The binding fixture now embeds a synthetic host bitmap under integer ID 101
-and string name S40BITMAP. tests/observation/new-wow-bitmap-test-resource.ps1
+and string name S40BITMAP. test/observation/new-wow-bitmap-test-resource.ps1
 generates its 66-byte BMP strictly under the build root; the checked-in RC
 selects it twice. Neither the generator nor RC modifies historical guest media.
 Both original WOWLoadBitmapA name branches load successfully from the fixture
@@ -2157,7 +2157,7 @@ function applies ulClientDelta only inside the desktop range. Every call
 returns through its original RETF with correct EAX and restored stack depth.
 The existing clock/paging/native-backing tests pass in the same run.
 
-Runner: tests/observation/verify-wow-original-handle-validator.ps1. It pins
+Runner: test/observation/verify-wow-original-handle-validator.ps1. It pins
 USER.EXE SHA-256 before and after, bounds execution and requires both the
 ten-case marker and final CCPU boundary marker. The optional environment
 input is restored afterward. This is a real immutable guest function in a
@@ -2271,7 +2271,7 @@ closure replaces the simpler proposed public-registration wrapper plan.
 
 ### Original class client executable contract
 
-`tests/observation/extract-wow-class-registration-fixture.ps1` now hash-checks
+`test/observation/extract-wow-class-registration-fixture.ps1` now hash-checks
 the two sources above and original inc/ntsend.h
 (`B708F1FEE46E93735C4C931D556E16DAA9679E6352D72620904D18AD21396ABF`).
 It extracts the four complete original function bodies into the disposable
@@ -2280,7 +2280,7 @@ macros. This is a source test, not a new production mirror or provider.
 Generated function include SHA-256:
 `6B5AE594381B93717F9DBB78DB65AD2894CB92FB06B1F3B6992411F7A55270A1`.
 
-`tests/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c` compiles
+`test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c` compiles
 those bodies under MSVC 14.43.34808, SDK 10.0.22621.0, x86 `/MT /Gz /W4 /WX`.
 Only original ENDCALL(BOOL)'s ATOM return narrowing warning is suppressed
 around the extracted source. The fixture links the existing original
@@ -2295,7 +2295,7 @@ objects and hashes are:
 After running the extractor, the build command in an x86 MSVC environment is:
 
 ```text
-cl /nologo /MT /Gz /W4 /WX /Ibuild/M0-T420/S40/class-registration-r1 tests/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c /Fobuild/M0-T420/S40/class-registration-r1/fixture.obj /Febuild/M0-T420/S40/class-registration-r1/fixture.exe build/M0-T420/S40/provider-stdcall-r1/obj/adapter-win32/chartran.obj build/M0-T420/S40/provider-stdcall-r1/obj/adapter-win32/ntuser_rtl_compat.obj user32.lib ntdll.lib
+cl /nologo /MT /Gz /W4 /WX /Ibuild/M0-T420/S40/class-registration-r1 test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c /Fobuild/M0-T420/S40/class-registration-r1/fixture.obj /Febuild/M0-T420/S40/class-registration-r1/fixture.exe build/M0-T420/S40/provider-stdcall-r1/obj/adapter-win32/chartran.obj build/M0-T420/S40/provider-stdcall-r1/obj/adapter-win32/ntuser_rtl_compat.obj user32.lib ntdll.lib
 ```
 
 The isolated runtime executable is O:/winnt/tests/S40USER/class-registration.exe,
@@ -2425,7 +2425,7 @@ then process-public (CS_GLOBALCLASS), then the special/system fallbacks.
 The earlier assumption that public registration must substitute a real PE
 module handle was too broad and is superseded by this native experiment.
 
-`tests/adapter-mvdm-host-out/wow/wow_native_class_scope_fixture.c` uses real
+`test/adapter-mvdm-host-out/wow/wow_native_class_scope_fixture.c` uses real
 RegisterClassExA, GetClassInfoExA, CreateWindowExA, Get/SetClassLongA and
 UnregisterClassA, not a simulated class backend. It supplies synthetic packed
 WOW module/instance identities and native callback functions; creates only
@@ -4146,7 +4146,7 @@ not real Win16 instruction execution or a complete S40 acceptance result.
 
 ### Whole output-table composition checkpoint
 
-`tests/observation/verify-wow-output-composition.ps1` pins original client.c,
+`test/observation/verify-wow-output-composition.ps1` pins original client.c,
 extracts all 20 UserRegisterWowHandlers assignments, checks their field set
 against the selected original wowuserp.h, and reports exact decorated symbols
 and owners from the formal map. It deliberately reports symbol presence, not
@@ -5493,7 +5493,7 @@ continued unsuccessful search also runs outside the system atom table.
 This is original host source, not guest media or an adapter-introduced change.
 
 The pinned-source, symbolic-only verifier
-tests/observation/verify-wow-cleanup-bounds.ps1 reports entries=13,
+test/observation/verify-wow-cleanup-bounds.ps1 reports entries=13,
 OriginalIterationBound=52, FirstUnsafeProcedureIndex=13 and corrected bound=13.
 Source hash is DFB0FB8D81AFEB555B3631ADC5456F4CEB13142F2E954A6F2B22631C49142E5C.
 Log: build/M0-T420/S40/class-registration-r1/cleanup-bounds.log.
@@ -5650,7 +5650,7 @@ mutation, production deployment, full DOS regression, commit or push occurred.
 
 ### Repeatable original-owner body gate
 
-tests/observation/verify-wow-recovered-owner-bodies.ps1 now verifies pinned
+test/observation/verify-wow-recovered-owner-bodies.ps1 now verifies pinned
 OpenNT source hashes, original CRLF and complete AddAttachment, Recalc2,
 RecalcThreadAttachment and _RegisterClassEx bodies. It permits only the exact
 registered explicit-context signature/call substitutions. All four pass.
@@ -6542,7 +6542,7 @@ consumer requirement and source mapping, not runtime acceptance.
 ### Modern USER32 registration observation
 
 The isolated x86 test
-`tests/adapter-mvdm-host-out/wow/wow_user_registration_surface_fixture.c`
+`test/adapter-mvdm-host-out/wow/wow_user_registration_surface_fixture.c`
 loads the actual current `USER32.DLL`, resolves the historical export and
 passes zeroed original-shaped input/output records in its own process.  It
 reports:

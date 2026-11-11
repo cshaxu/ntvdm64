@@ -18,7 +18,7 @@ None of these source files alone identifies the current loaded guest owner.
 
 ## Controlled host-body finding
 
-`tests/observation/verify-rtc-bios-contract.py --build-root
+`test/observation/verify-rtc-bios-contract.py --build-root
 build/t478-s35/rtc-before` ran in owned background PID18308 with a 90-second
 compile and 15-second execution limit. It compiles the exact selected rtc_int
 body with its actual rtc_bios.h, using controlled CMOS/SAS/register/callback
@@ -126,7 +126,7 @@ image evidence are frozen in
 [RTC results](../../../artifacts/mvdm-audit/shard-3/rtc-s35-results.json).
 The independent COM programs were assembled, not original guest programs.
 
-Reproduce with `tests/observation/verify-ccpu-sign-flags-guest.ps1` using
+Reproduce with `test/observation/verify-ccpu-sign-flags-guest.ps1` using
 `-Workload RtcEntry` and then `-Workload RtcAlarm`, each with a fresh
 `-BuildRoot build/t478-s35/<unique-name>`,
 `-PackageRoot build/t478-s34/package-final`,

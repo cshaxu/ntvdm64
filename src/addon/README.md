@@ -11,8 +11,8 @@ Microsoft guest sources, installed systems and media are not build targets.
 | grp | grp.c → GRP.EXE | grp/BUILD.CMD |
 | hash | hash.c → HASH.EXE | hash/BUILD.CMD |
 | lnk | lnk.c → LNK.EXE | lnk/BUILD.CMD |
-| mouse101 | mouse101.asm → MOUSE101.DRV | tests/observation/build-win101-mouse-driver.ps1 |
-| mouse31 | mouse31.asm → MOUSE31.DRV | tests/observation/build-win31-mouse-driver.ps1 |
+| mouse101 | mouse101.asm → MOUSE101.DRV | test/observation/build-win101-mouse-driver.ps1 |
+| mouse31 | mouse31.asm → MOUSE31.DRV | test/observation/build-win31-mouse-driver.ps1 |
 | patch31 | patch31.c → patch31.exe | patch31/BUILD.CMD |
 | patch95 | patch95.c → patch95.exe | patch95/BUILD.CMD |
 | path95 | path95.c → path95.exe | path95/BUILD.CMD |

@@ -37,7 +37,7 @@ $build=(Join-Path $repo 'build')+'\'
 if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $log)){
     throw 'Require a fresh repository-build evidence directory'
 }
-. "$repo/tests/observation/isolated_package_cleanup.ps1"
+. "$repo/test/observation/isolated_package_cleanup.ps1"
 $runtime=$null
 try {
     $runtime=New-PhysicalRuntimeStage $sourceRuntime
@@ -154,13 +154,13 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
 try {
     if ($Suite -ne 'Control') {
         Invoke-Gate 'guest-media' {
-            & $Python "$repo/tests/observation/verify-guest-media.py" `
+            & $Python "$repo/test/observation/verify-guest-media.py" `
                 $runtime "$repo/assets/winnt-guest-manifest.json" *> "$log/guest-media.txt"
             if($LASTEXITCODE){throw 'Guest media contract failed; inspect guest-media.txt'}
         }
     }
     Invoke-Gate 'ntvdm-export-ordinals' {
-        & $Python "$repo/tests/observation/verify-ntvdm-export-ordinals.py" `
+        & $Python "$repo/test/observation/verify-ntvdm-export-ordinals.py" `
             (Join-Path $runtimeBinary 'ntvdm.exe') `
             "$repo/src/ntvdm-exe/ntvdm-export-ordinals.csv" *> "$log/ntvdm-export-ordinals.txt"
         if($LASTEXITCODE){throw 'NTVDM export ordinal contract failed; inspect ntvdm-export-ordinals.txt'}
@@ -179,7 +179,7 @@ try {
             # Never resize an inherited user's Console.
             $env:MVDM_OBSERVER_SHORT_HISTORY='1'
             Invoke-Gate 'wow-frontiers' {
-                & "$repo/tests/observation/observe-wow-frontiers.ps1" -Observer $observerPath -WindowObserver $WindowObserver -Prefix wow-restored -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -WaitTarget
+                & "$repo/test/observation/observe-wow-frontiers.ps1" -Observer $observerPath -WindowObserver $WindowObserver -Prefix wow-restored -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -WaitTarget
                 foreach($guest in @('winmine','sol','write')){
                     $current=Get-Content "$log/wow-restored-$guest-windows.txt" -Raw
                     $last=($current -split 'sample-ms=')[-1]
@@ -271,10 +271,10 @@ try {
             # product gate fail before it exercised any actual peer.
             $cases=@('client','bootstrap','startup-rejections',
                 'native-worker-failure','native-completed-worker-loss','monitor-rpc')
-            & "$repo/tests/observation/verify-s7-rpc-fixtures.ps1" -Observer $observerPath -PackageRoot $runtimeBinary -ReportPrefix "$log/rpc" -Cases $cases
+            & "$repo/test/observation/verify-s7-rpc-fixtures.ps1" -Observer $observerPath -PackageRoot $runtimeBinary -ReportPrefix "$log/rpc" -Cases $cases
         }
         Invoke-Gate 'native-gui' {
-            & "$repo/tests/observation/verify-native-gui-routing.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPrefix "$log/gui" -MonitorRpc $MonitorRpc -FullDeadlines:$FullDeadlines
+            & "$repo/test/observation/verify-native-gui-routing.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPrefix "$log/gui" -MonitorRpc $MonitorRpc -FullDeadlines:$FullDeadlines
         }
         Invoke-ShortRuntime {
             $env:MVDM_OBSERVER_SHORT_HISTORY='1'
@@ -318,16 +318,16 @@ try {
                     }
                 }
             }else{throw 'Control gate requires the retained Terminal observer'}
-            Invoke-Gate 'modern-edit-return' {& "$repo/tests/observation/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $sourceRuntime -ReportPath "$log/modern-edit.txt"}
-            Invoke-Gate 'cooked-return' {& "$repo/tests/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/cooked-return.txt"}
-            Invoke-Gate 'rapid-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/rapid.txt"}
-            Invoke-Gate 'interactive-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/interactive.txt"}
-            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc (Join-Path $runtimeBinary 'monitor-rpc-test.exe') -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
-            Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
+            Invoke-Gate 'modern-edit-return' {& "$repo/test/observation/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $sourceRuntime -ReportPath "$log/modern-edit.txt"}
+            Invoke-Gate 'cooked-return' {& "$repo/test/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/cooked-return.txt"}
+            Invoke-Gate 'rapid-relaunch' {& "$repo/test/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/rapid.txt"}
+            Invoke-Gate 'interactive-relaunch' {& "$repo/test/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/interactive.txt"}
+            Invoke-Gate 'session-isolation' {& "$repo/test/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc (Join-Path $runtimeBinary 'monitor-rpc-test.exe') -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
+            Invoke-Gate 'retirement-wiring' {& "$repo/test/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
-        Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window -WindowOwnedConsole:$WindowOwnedConsole -GuestPath ((Join-Path $env:WINDIR 'System32')+';'+$env:WINDIR)}
+        Invoke-Gate 'nested-window-handoff' {& "$repo/test/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window -WindowOwnedConsole:$WindowOwnedConsole -GuestPath ((Join-Path $env:WINDIR 'System32')+';'+$env:WINDIR)}
         if($Dos4gwFixtureRoot) {
-            Invoke-Gate 'dos4gw-nesticle' {& "$repo/tests/observation/verify-dos4gw-nesticle.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -FixtureRoot $Dos4gwFixtureRoot -ReportRoot "$log/dos4gw-nesticle"}
+            Invoke-Gate 'dos4gw-nesticle' {& "$repo/test/observation/verify-dos4gw-nesticle.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -FixtureRoot $Dos4gwFixtureRoot -ReportRoot "$log/dos4gw-nesticle"}
         } else {
             Write-Output 'SKIP dos4gw-nesticle: supply -Dos4gwFixtureRoot with the verified external fixtures'
         }

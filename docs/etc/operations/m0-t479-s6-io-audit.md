@@ -195,7 +195,7 @@ because MEM or a native shell runs. Win95 remains the subsequent S4 continuation
 
 ## Input-route calibration067 (not an input implementation)
 
-The isolated authored tests/observation/win31_vm_input_route.asm installs two
+The isolated authored test/observation/win31_vm_input_route.asm installs two
 observation-only callbacks: VKD PM API chains unchanged; V86 INT09 returns CF
 set so original handling continues. It never reads port60, consumes an event,
 changes a client frame or delivers a host input record. Original MS-DOS6 VMM
@@ -256,7 +256,7 @@ missing producer remains the implementation gap, rather than an assumed
 failure of an already connected queue.
 
 Reproduce the observation image with NASM `-f obj` on
-tests/observation/win31_vm_input_route.asm, then the existing Open Watcom linker
+test/observation/win31_vm_input_route.asm, then the existing Open Watcom linker
 with `format windows vxd static`, resident shared _LTEXT/_LDATA segments and
 `export input_route_ddb.1`. The exact response file is retained as
 build/t479-s6-livecmd/input-route068/input.lnk. Load it only in an isolated copy
@@ -268,7 +268,7 @@ change the meaning of this passive calibration.
 
 ## Native input receipt069--071: missing producer reproduced
 
-The authored tests/observation/win31_vm_input_child.c opens its report, records
+The authored test/observation/win31_vm_input_child.c opens its report, records
 its PID, switches its own Console input to raw mode and blocks in the real
 ReadConsoleInputW. It logs every returned key record and exits after Enter
 release. An independent30-second diagnostic deadline terminates a missing-input
@@ -1130,7 +1130,7 @@ empty. Thus the Shift residue and one malformed redirected command are not
 sufficient to reproduce119's stall. This is a contrast, not a repair or
 closure of119; its earlier two malformed commands and timing are not identical.
 
-The existing tests/observation/live_process_ip_snapshot.c was built as x64
+The existing test/observation/live_process_ip_snapshot.c was built as x64
 snapshot140.exe. It captured carrier4304 before/after DOS exit in stack143 and
 stack145, retaining every suspend/read/resume path. These are healthy-control
 stacks, not a blocked-process stack. No production cancellation change was

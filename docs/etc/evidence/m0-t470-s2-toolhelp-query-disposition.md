@@ -2,7 +2,7 @@
 
 ## Executable witness
 
-`tests/observation/win16_toolhelp_probe.asm` is an independently authored NE
+`test/observation/win16_toolhelp_probe.asm` is an independently authored NE
 program.  It imports the immutable original `TOOLHELP.DLL`, reports KERNEL
 version/mode, then calls these original exports:
 

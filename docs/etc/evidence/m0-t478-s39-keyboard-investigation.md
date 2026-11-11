@@ -24,7 +24,7 @@ The guest storage is directly mapped before the native conversion call.
 
 ## First actual guest probe
 
-Independently authored `tests/observation/win16_keyboard_probe.asm` uses
+Independently authored `test/observation/win16_keyboard_probe.asm` uses
 original KEYBOARD ordinals, KERNEL InitTask and USER InitApp. It runs via
 the existing isolated runner with Case keyboard. No original guest media,
 layout setting or desktop input is modified. Evidence is retained at

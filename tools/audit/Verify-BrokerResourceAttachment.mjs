@@ -10,15 +10,15 @@ fs.writeFileSync(environment, [
     'call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
     'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%RESOURCE_FIXTURE_CWD%"', '%*', ''
 ].join('\r\n'));
-const source = path.join(root, 'tests/broker/resource_attachment.c');
-const idl = path.join(root, 'tests/broker/resource_attachment.idl');
+const source = path.join(root, 'test/broker/resource_attachment.c');
+const idl = path.join(root, 'test/broker/resource_attachment.idl');
 const log = fs.openSync(path.join(build, 'build.log'), 'w');
 const securityInclude = `/I "${root}/src/broker"`;
 const ownerBuild=path.resolve('build/M0-T412/S3/product');
 const ownerGraph=fs.readFileSync(path.join(ownerBuild,'build.ninja'),'utf8');
 const registryFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry.obj:.*\r?\n  cflags = (.*)$/m)[1].replaceAll('$:',':');
 const commands = [
-    `cl.exe ${registryFlags} "${root}/tests/broker/resource_registration.c" /Foregistration.obj`,
+    `cl.exe ${registryFlags} "${root}/test/broker/resource_registration.c" /Foregistration.obj`,
     `midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . "${idl}"`,
     `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c "${source}" /Foserver.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',

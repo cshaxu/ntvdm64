@@ -50,7 +50,7 @@ Suballocator callback rollback remains the separate proposed S8.
 
 ## Focused verification
 
-`tests/observation/verify-xms-block-boundaries.ps1` compiles the actual selected
+`test/observation/verify-xms-block-boundaries.ps1` compiles the actual selected
 xmsblock.c with the product XMS flags and links original-mvdm-host-suballoc.lib.
 The fixture substitutes register storage and backing callbacks, not the
 allocation/reallocation logic. Unused move/query dependencies resolve only to
@@ -67,7 +67,7 @@ three tested original functions to provider.obj.
   composition failure, resolved by explicit fail-fast out-of-scope aliases.
   It is not recorded as a product defect or passing run.
 
-`tests/observation/verify-xms-block-guest.ps1` uses the existing private-desktop
+`test/observation/verify-xms-block-guest.ps1` uses the existing private-desktop
 observer and New-PhysicalRuntimeStage/owned cleanup. Original HIMEM is unmodified.
 The independently authored xms_block_boundaries.asm repeats 32 complete zero-size
 allocate/lock/unlock/query/equal-size/grow-to-1KB/equal-size/free lifecycles and

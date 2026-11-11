@@ -46,7 +46,7 @@ lifecycle package and is verified as a finite provider, never duplicated.
 
 ## S24 guest device witness
 
-`tests/observation/system_capability.asm` is a test-only DOS COM probe, built
+`test/observation/system_capability.asm` is a test-only DOS COM probe, built
 by `tools/build/Build-T420S24SystemGuestTest.ps1`. It uses guest BIOS ticks,
 CMOS/PIC/DMA port I/O and the selected ROM mapping; it installs no replacement
 device and changes no guest media. A bounded normal CPL3 instruction workload

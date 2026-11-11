@@ -28,7 +28,7 @@ synthetic port or a false successful transfer.
 
 ## Real guest witness
 
-`tests/observation/comms_capability.asm`, built by
+`test/observation/comms_capability.asm`, built by
 `tools/build/Build-T420S29CommsGuestTest.ps1`, is a test-only DOS COM image.
 It calls INT 14h functions 00h/03h and INT 17h functions 01h/02h.  It neither
 writes a byte to a serial/printer device nor provides a replacement provider.

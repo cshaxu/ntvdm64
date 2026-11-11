@@ -55,7 +55,7 @@ conversion.
 
 ## Endpoint and immutable-input evidence
 
-`tests/observation/verify-wow32-dynamic-host-surface.ps1` derives the complete
+`test/observation/verify-wow32-dynamic-host-surface.ps1` derives the complete
 15-name table from the original source and checks the x86 system-directory
 `WINSPOOL.DRV`; its retained T422 result is **15 required, 0 missing**.  This
 machine's inspected module has SHA-256

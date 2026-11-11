@@ -34,7 +34,7 @@ documented private-server boundary.
 
 ## Evidence
 
-`tests/observation/verify-wow-hard-error-decoder.ps1` builds the retained x86
+`test/observation/verify-wow-hard-error-decoder.ps1` builds the retained x86
 decoder fixture and passes five assertions:
 
 ```text

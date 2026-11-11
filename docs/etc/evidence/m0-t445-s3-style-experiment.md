@@ -15,12 +15,12 @@ No reference image or historical font becomes a runtime/build resource.
 - src/win16-style/layout.c: one geometry/hit-test owner.
 - src/win16-style/win16_style.c: same-thread HWND subclass, palette, caption,
   frame/buttons, local resource teardown and original system-command dispatch.
-- tests/app/win16_style_demo.c: standalone GUI; no arguments opens four
+- test/app/win16_style_demo.c: standalone GUI; no arguments opens four
   windows; --test <bitmap> creates a private desktop, runs assertions and
   PrintWindow-captures its own HWNDs. It never switches the user's desktop.
-- tests/observation/verify-win16-style.ps1: fresh build-owned x86/x64 Ninja
+- test/observation/verify-win16-style.ps1: fresh build-owned x86/x64 Ninja
   graphs, MSVC /MT /O2 /W4 /WX /utf-8, static archive and GUI-subsystem EXE.
-- tests/observation/compare-win16-style.ps1: explicit fixture-region pixel
+- test/observation/compare-win16-style.ps1: explicit fixture-region pixel
   inspection and nearest-neighbour detail sheet; not a generic visual scorer.
 
 The library has no thread, IPC, launch/task policy or product dependency.
@@ -138,7 +138,7 @@ modified. Selected SHA-256 identities:
 - VGA.DRV: 53312ED013BDA513C74E33659F4EE7D1B4F2B1CF1A06AED672432A8FBC4A820A
 - VGASYS.FON: 7BAEFA14EF8EF2355374D0B5061043DD5F4F8C33FF57680366E4A725F91646F8
 
-tests/observation/inspect-win31-frame-resources.ps1 decodes selected NE RT_BITMAP
+test/observation/inspect-win31-frame-resources.ps1 decodes selected NE RT_BITMAP
 records read-only, with bounded 4-bit CORE/INFO DIB support. Background r024
 returns zero and preserves offsets/dimensions and a 4x nearest-neighbour
 research sheet. OEM names are matched against src/mvdm/wow16/inc/windows.h.
@@ -341,7 +341,7 @@ or copied USER executable code are required for this public-API binding.
 
 The same layout now handles absent captions and zero/thin/sizeable borders;
 painting avoids inventing a caption on those windows. The existing 18-pixel OEM
-images and embedded font are unchanged. tests/app/win16_style_gallery.c adds a
+images and embedded font are unchanged. test/app/win16_style_gallery.c adds a
 19-entry selector to the standalone demo: 14 styled top-level form/state samples,
 then five explicitly labelled native reference samples for menus, scrollbars,
 child windows, MDI and ordinary host framing. The minimized host presentation
@@ -667,7 +667,7 @@ removes the GetSystemMenu call from WM_INITMENUPOPUP logging to avoid creating
 a private menu copy during observation. No PrintWindow, invalidation, hover or
 global input injection is used by the snapshot probes.
 
-`tests/app/native_menu_probe.c` is an independent negative control. Its link
+`test/app/native_menu_probe.c` is an independent negative control. Its link
 contains no win16-style object/archive, no subclass or custom frame procedure.
 It uses a native window, default procedure and three ordinary File-menu items.
 The bounded `--probe <absolute-build-bitmap> [mode]` entry opens only its own

@@ -193,7 +193,7 @@ never publish that diagnostic executable. In RealCommand mode, command admission
 and input BOP16--18 delegate to production; old keyboard diagnostics cannot
 return fabricated success for these requests.
 
-Compile tests/observation/win31_vm_unread_input_child.c as an ordinary native
+Compile test/observation/win31_vm_unread_input_child.c as an ordinary native
 CUI test executable. Run verify-win31-identity.ps1 with Continuation,
 RealCommand, UnreadInputImage and UnreadInputMode (sequence, repeat, function or
 extended), plus the usual addon/package/install/observer/output paths. Each

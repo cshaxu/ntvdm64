@@ -150,7 +150,7 @@ translation per CCPU desktop allocation, not a copied NT USER heap or an
 emulated server address space.
 
 The bounded arithmetic fixture
-[`verify-wow-client-view-translation-contract.ps1`](../../../tests/observation/verify-wow-client-view-translation-contract.ps1)
+[`verify-wow-client-view-translation-contract.ps1`](../../../test/observation/verify-wow-client-view-translation-contract.ps1)
 checks the positive relation, the existing zero-pair rejection and a
 32-bit-overflow negative control.  Its pass is deliberately only design
 evidence: it does not publish a desktop or execute USER.EXE.  S2 must replace
@@ -159,7 +159,7 @@ that fixture's model with the real B1 producer and the X01 guest witness.
 ## Reproduction
 
 ```powershell
-& .\tests\observation\verify-wow32-client-view-gap.ps1 `
+& .\test\observation\verify-wow32-client-view-gap.ps1 `
   -RepositoryRoot (Get-Location).Path
 ```
 

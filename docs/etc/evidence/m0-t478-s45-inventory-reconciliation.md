@@ -157,7 +157,7 @@ configuration boundary with an unrelated host installation dependency.
 the unpopulated WOW fallback and retained the original missing--a failure path.
 Its lifecycle fixture records DOS/WOW construction, spaces, session ID and
 rejection. Inspection confirms those assertions still exist at lines515-548 of
-tests/broker/original_server_lifecycle.c. That historical fixture explicitly
+test/broker/original_server_lifecycle.c. That historical fixture explicitly
 references O:/winnt and was not rerun or presented as fresh runtime evidence.
 S43's unchanged Full and real WOW startup cover the current normal path only.
 No claim is made for arbitrary registry templates, allocation failures or all
@@ -644,7 +644,7 @@ ForceDOS to the original per-command consumer. Neither repair is repeated.
 The old T231 direct fixture uses retired opennt-bop/runtime_command_misc APIs
 and is not current product coverage.
 
-New [tail fixture](../../../tests/mvdm-host/dos/command/command_tail_fixture.c)
+New [tail fixture](../../../test/mvdm-host/dos/command/command_tail_fixture.c)
 compiles the exact selected tail block extracted by the existing fixture
 Ninja generator. Comparison with the pinned OpenNT function proves the block
 identical after newline normalization. Five cases assert empty-tail spacing,
@@ -665,7 +665,7 @@ No overlong-tail or arbitrary advertised-capacity safety is claimed.
 All26 startup identities now have bounded dispositions; this is not a universal
 startup fault-path pass.1033 active inventory identities remain pending in the
 larger S45/T478 reconciliation. Product source and S43 release remain unchanged;
-only focused tests/build support/evidence changed. No product rebuild, new Full,
+only focused test/build support/evidence changed. No product rebuild, new Full,
 publication, O:/winnt write or push is claimed or required for these unchanged
 product inputs.
 
@@ -680,7 +680,7 @@ IDLE_disk; COMMAND uses its original real-mode sas_load expression. Register
 view/wrap semantics remain the next separate row, not inferred from names.
 
 All17 COMMAND entries match original order, header ordinals and product-map
-bindings. The new [actual-object fixture](../../../tests/mvdm-host/dos/command/command_service_fixture.c)
+bindings. The new [actual-object fixture](../../../test/mvdm-host/dos/command/command_service_fixture.c)
 links the current worker cmddisp.obj to distinct sentinel handlers. All17
 selectors invoke the expected sentinel once and return TRUE. It does not
 replace the dispatcher or execute real handlers; it proves routing only.
@@ -724,7 +724,7 @@ identically with pinned OpenNT bodies after newline normalization. Selected
 host_def sets LITTLEND; original c_main binds WORD and BYTE views to actual
 CCPU_GR storage with offsets0/0/1. No independent register model is introduced.
 
-The existing [bounded CCPU fixture](../../../tests/mvdm-host/ccpu_bounded_execution_fixture.c)
+The existing [bounded CCPU fixture](../../../test/mvdm-host/ccpu_bounded_execution_fixture.c)
 now checks upper EAX preservation through AX/AL/AH writes; IP narrowing, high
 EIP clearing on setIP and16-bit increment wrap; full32-bit EIP assignment; and
 original CF2 assignment with slots1..18 unchanged (the backing array has32

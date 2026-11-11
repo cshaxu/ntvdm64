@@ -62,7 +62,7 @@ preprocessing runs returned0. Every matching command emitted identical nonempty
 preprocessor text at identical logical source locations. Original spelling of
 macros is not compared to their expanded spelling; actual compiler output is.
 
-[The independent acceptance entrypoint](../../../tests/build/verify-t480-s2-preprocessor-equivalence.py)
+[The independent acceptance entrypoint](../../../test/build/verify-t480-s2-preprocessor-equivalence.py)
 derives the expected consumer set from the frozen build evidence and changed
 file set, rejects missing/duplicate/failed commands, compares command identities,
 location-sensitive fingerprints and line counts, and verifies the30 final source

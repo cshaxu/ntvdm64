@@ -36,7 +36,7 @@ sweep found no second one-cell pre-resize path in NTCON/NTW32/run16.
 ## Regression evidence
 
 The checked-in test extension is
-`tests/observation/console_terminal_observer.c` with
+`test/observation/console_terminal_observer.c` with
 `--s33-first-ver` and `--s33-first-dir`. It launches a real outer native
 CMD in 80×30 ConPTY, enters `run16 command`, waits seven seconds after the
 first command, then runs MEM and exits. It checks the *first* 80×28 cell

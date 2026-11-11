@@ -31,7 +31,7 @@ $sourceName = switch ($GuestRoute) {
     'graphics-vram' { 'video_graphics_vram.asm' }
     default { 'video_int10_writer.asm' }
 }
-$source = Join-Path $repository ('tests\observation\' + $sourceName)
+$source = Join-Path $repository ('test\observation\' + $sourceName)
 $output = Join-Path $build 'VIDTST.COM'
 $defines = @()
 if ($WindowHandshake) { $defines += '-DWINDOW_HANDSHAKE=1' }
@@ -44,7 +44,7 @@ if ($LASTEXITCODE -ne 0) {
     schema = 'm0.t420.s23.video-guest.v2'
     route = $GuestRoute
     windowHandshake = [bool]$WindowHandshake
-    source = 'tests/observation/' + $sourceName
+    source = 'test/observation/' + $sourceName
     output = 'VIDTST.COM'
     sha256 = (Get-FileHash -LiteralPath $output -Algorithm SHA256).Hash.ToLowerInvariant()
 } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 'manifest.json') -Encoding utf8

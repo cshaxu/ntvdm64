@@ -68,7 +68,7 @@ deciding whether a semantic correction is required.
 
 ## Executed local provider witness
 
-`tests/observation/verify-wow-winsock-provider.ps1` was run from the known
+`test/observation/verify-wow-winsock-provider.ps1` was run from the known
 desktop-capable 32-bit compiler-driver path, with an owned background probe in
 `build/t467-s1-native-provider-r6`.  It compiles
 `wow_winsock_provider_probe.c` against `ws2_32.lib` and confines all traffic

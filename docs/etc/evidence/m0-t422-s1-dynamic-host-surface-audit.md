@@ -43,6 +43,6 @@ gate remains T420 S20 evidence and is outside this audit.
 ## Reproduction
 
 ```powershell
-& .\tests\observation\verify-wow32-dynamic-host-surface.ps1 `
+& .\test\observation\verify-wow32-dynamic-host-surface.ps1 `
   -RepositoryRoot (Get-Location).Path
 ```

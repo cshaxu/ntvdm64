@@ -58,7 +58,7 @@ Raw evidence is O:/winnt/Logs2/t423-window-geometry-r135.txt through r137.txt,
 including .geometry.txt and per-line snapshots. r133 failed before input-ready
 and is not a passing geometry run; r134 passed the standard round trip.
 
-S13 research r1-r3 adds tests/observation/console_logical_geometry_probe.c,
+S13 research r1-r3 adds test/observation/console_logical_geometry_probe.c,
 built /MT x86 under build/M0-T423/S13/console-geometry-r1 through r3.
 The probe self-launches on a private desktop; it never switches the desktop,
 changes registry/guest/product files, or queries host display dimensions to

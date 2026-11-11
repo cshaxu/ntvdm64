@@ -87,7 +87,7 @@ No computer use, guest modification, new polling or timeout is admitted.
 External/guest limitations remain explicit non-passes. T closure waits for
 owner acceptance.
 
-S2 uses `tests/observation/verify-wow-module-alias-bounds.ps1` against the
+S2 uses `test/observation/verify-wow-module-alias-bounds.ps1` against the
 actual CCPU40 `wole2.c` production compile command. Its fixture proves
 exact/truncated/one-byte/unavailable alias output without substituting a
 provider. `original-external-memory-test.exe` remains the direct selected

@@ -80,7 +80,7 @@ loop or IPC channel. Its eventual production consumers are:
 
 The first implementation is an isolated experiment linked directly into an
 authored Win32 GUI test program. It builds and runs without run16, NTSRV, WOW32,
-either Hook, NTVDM, NTVWM or NTCON. Test source belongs under tests/, outputs
+either Hook, NTVDM, NTVWM or NTCON. Test source belongs under test/, outputs
 under build/; the demo is not a new shipped runtime component. Only after owner
 acceptance of experiment stability do the production consumers integrate it.
 

@@ -364,7 +364,7 @@ Verification inputs and commands:
   link passed. build.log and final map retained there. Sandbox Ninja stalled;
   only its verified PID 13268 was stopped, and the same graph ran successfully
   outside the restricted environment. No mapping/source fix was made for this.
-- Compile tests/adapter-mvdm-host-out/physical_mapping_observation_test.c with
+- Compile test/adapter-mvdm-host-out/physical_mapping_observation_test.c with
   MSVC x86 /TC /MT /W4 /WX, actual mapping.c, session.c and
   guest_memory_lease.c, includes src and softpc/include, kernel32.lib.
   Outputs remain in the run root. Repeat using mapping.c from dbb9c7ed0 as
@@ -399,7 +399,7 @@ Owner request: “我要的是咱们跑集成测试 比如mem.exe command.com ed
 programs, not the adapter fixture. No product source, EXE or guest media changed.
 Execution/document governance keeps this within the active S1 observation brief.
 
-The test-only tests/observation/mapping_workload_observer.c was compiled with
+The test-only test/observation/mapping_workload_observer.c was compiled with
 MSVC x86 /TC /MT /W4 /WX and kernel32.lib/user32.lib into
 build/M0-T406/S1/r002-workload-observation/mapping-workload-observer.exe.
 It creates a dedicated real Console, preserves ordinary product arguments and

@@ -49,7 +49,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/command_initialization_fixture.obj: cc `$root/tests/mvdm-host/command_initialization_fixture.c
+build obj/command_initialization_fixture.obj: cc `$root/test/mvdm-host/command_initialization_fixture.c
 build obj/cmd.obj: cc `$root/src/mvdm-host/dos/command/cmd.c
 build obj/cmddata.obj: cc `$root/src/mvdm-host/dos/command/cmddata.c
 build command_initialization_fixture.exe: link obj/command_initialization_fixture.obj obj/cmd.obj obj/cmddata.obj

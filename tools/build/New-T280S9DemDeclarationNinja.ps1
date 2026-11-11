@@ -23,7 +23,7 @@ rule syntax
   deps = msvc
   description = SYNTAX `$in
 
-build dem_storage_declarations: syntax `$root/tests/adapter-mvdm-host-out/win32/t280_s9_dem_declaration_fixture.c
+build dem_storage_declarations: syntax `$root/test/adapter-mvdm-host-out/win32/t280_s9_dem_declaration_fixture.c
 default dem_storage_declarations
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

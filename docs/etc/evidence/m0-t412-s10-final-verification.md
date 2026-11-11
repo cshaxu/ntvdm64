@@ -180,7 +180,7 @@ reduction**. Added mirror source includes restored original bodies; adapter
 counts include headers and finite transports, not 3453 lines of new guest
 algorithms. Conversely, moving code into a mirror does not make it original.
 The earlier [S6 deletion ledger](m0-t412-s6-removal-ledger.md) is a different,
-overlapping denominator: retired implementation plus obsolete tests/build
+overlapping denominator: retired implementation plus obsolete test/build
 wiring and README, 3282 deleted / 57 added, net -3225. Do not add the totals.
 The five removed BaseVDM implementation/header files total 1082 deleted lines;
 old app entry/declaration/shell files total 774 deleted lines in this interval.

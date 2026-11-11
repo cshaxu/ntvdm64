@@ -22,7 +22,7 @@ No second VRAM layout, guest-mode special case or new rendering engine.
 ## Evidence and limitations
 
 Task-owned runs are under build/t479-s9-display. The actual-provider fixture
-is tests/mvdm-host/cvidc_vector_binding_fixture.c, linked to production C-VID
+is test/mvdm-host/cvidc_vector_binding_fixture.c, linked to production C-VID
 providers through its existing fixture seams. Its existing /FORCE duplicate
 seam linker warnings remain; it supplements, not replaces, product testing.
 

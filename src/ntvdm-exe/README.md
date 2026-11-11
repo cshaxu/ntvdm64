@@ -198,7 +198,7 @@ thread produces these samples; the CPU consumer frees slots. At capacity it
 leaves records with the frontend, yields briefly and returns to the original
 alertable suspend/input wait. It does not discard motion/button edges, merge
 direction changes, enlarge the queue or change original IRQ timing. See
-tests/observation/verify-window-mouse-pressure.ps1 and the S11 evidence ledger.
+test/observation/verify-window-mouse-pressure.ps1 and the S11 evidence ledger.
 
 Original mouse IRQ cancellation flushes pending samples and button/delta
 state, but does not disconnect the frontend input source. The bridge retains

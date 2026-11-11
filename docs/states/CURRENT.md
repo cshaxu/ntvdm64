@@ -2,8 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T481 S17 is closed.
-T481 remains open. No next S is admitted by this closure.
+**No active M/T/S packet.** T481 remains open; S19 has completed its bounded
+cleanup and delivery verification. No next S is admitted by this closure.
+
+## S19 closure
+
+[Complete migration and delivery evidence](../etc/evidence/m0-t481-s19-test-root-cleanup.md):
+1,305 files moved into test, 1,646 total files after merging, no loss or collision.
+All source references are migrated; installed runtime tests directories retain
+their existing meaning. Nineteen root build/log artifacts were removed, output
+paths repaired, and governance now prevents their recurrence.
+Cached x86/x64 compilation and all 16 selected Full gates passed. Console17 and
+Window17 passed; missing external DOS4GW/NESticle is an explicit skip, not a pass.
+The coherent 11-image package 7773a9b4-e360-4469-962a-df26bb16faf4 is published and
+hash-verified in assets/release and O:/winnt/system32. Original guest, mirrors,
+winnt.zip and installed Windows configuration are unchanged.
+S19 P1 records the reviewed cleanup and preserved S18 research. Parallel
+win-multitask deletions and the new Win95 Setup proposal remain outside this P.
+
+## S18 research disposition
+
+Owner directed moving on from identity research. The [research and actual
+scheduling probe](../etc/evidence/m0-t481-s18-dos-program-identity-design.md)
+retain the observed PSP collision and wrong DIRECT waiter completion as unresolved,
+not display-only and not repaired. No product fix was implemented. Research
+material is preserved with the S19 migration; no product repair is claimed.
+The subsequent requested O:/WINDOWS refresh used released assets and the official
+dynamic WIN.CMD, updated MOUSE.DRV and verified installed hashes. No new runtime
+acceptance was claimed.
 
 ## S17 closure
 
@@ -172,11 +198,13 @@ diagnostic package remains available for the close investigation.
 
 ## Current Technical Baseline
 
-The published 11-image host package was hash-verified. The installed Win3.1
-addon selection depends on the selected profile. Win95 WIN.CMD points to the formal package. Original guest
-binaries remain immutable. See [S9 evidence](../etc/evidence/m0-t481-s9-softpc.md)
-for the 16 Full gates, skips, Win95 observer exit boundary and historical
-mirror-guard test limitation.
+Published 11-image package: 7773a9b4-e360-4469-962a-df26bb16faf4, verified in
+assets/release and O:/winnt/system32. S19 cached x86/x64 builds and all 16
+selected Full gates passed; external DOS4GW/NESticle remains a missing-fixture
+skip. See the [S19 delivery evidence](../etc/evidence/m0-t481-s19-test-root-cleanup.md).
+Installed Windows profiles/addons are unchanged by S19. Win95 exit code 1
+remains the owner-approved boundary; S18 identity mismatch remains unresolved.
+Original guest binaries and mirrored source are unchanged.
 
 ## Recent M0 Closures
 

@@ -24,7 +24,7 @@ host-product manifest.
 
 ## Focused verification
 
-`tests/component-integration/pif_hash_tool_test.ps1` passed against the
+`test/component-integration/pif_hash_tool_test.ps1` passed against the
 shipped tool copies. It verifies:
 
 - PIF create → show → update round trip, including standard, Windows

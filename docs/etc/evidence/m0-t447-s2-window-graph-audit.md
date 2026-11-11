@@ -94,9 +94,9 @@ references. This ordering constrains the graph transport and its tests.
 
 The existing desktop producer now writes the original WORD FNID_DESKTOP
 (0x029d) at WND offset 122. No new traversal or server algorithm is added.
-The checked-in tests/mvdm-host/wow_page_domain_fixture.c asserts that field,
+The checked-in test/mvdm-host/wow_page_domain_fixture.c asserts that field,
 neighbouring words, NULL root parent and WS_VISIBLE in real CCPU backing.
-It is exercised by tests/observation/verify-wow-task-lifecycle.ps1 with
+It is exercised by test/observation/verify-wow-task-lifecycle.ps1 with
 Case window-borrow, ProviderBuildRoot build/M0-T445/S6/provider,
 WorkerBuildRoot build/M0-T445/S6/r003 and BuildRoot
 build/M0-T447/S2/desktop-root/window-borrow.
@@ -1600,7 +1600,7 @@ and complete mutation wiring remain follow-up work, not runtime acceptance.
 Background delivery-r1/run.ps1 PID26380 supervised checks PID8976 with an
 1800-second deadline; runner.exit and checks.exit are0. Exact entrypoints:
 
-- tests/observation/verify-wow-mine-gameplay.ps1 with the sealed product-r2
+- test/observation/verify-wow-mine-gameplay.ps1 with the sealed product-r2
   package, retained S5 observer, provider/msvc-x86.cmd and WindowStyle
   Off/Win16/All. All three prove flag/counter change, F2 reset, opening a
   cell, WM_CLOSE and normal zero-status run16 completion. This preserves
@@ -2809,7 +2809,7 @@ the eleven foundation cases took587.8seconds in total. Supplemental terminal
 coverage passed in50.8seconds. Each case retains its own PID, start/deadline,
 stdout/stderr, link log and exit code; no build was truncated by a foreground
 tool observation deadline. Reproduction uses
-tests/observation/verify-wow-task-lifecycle.ps1 with the recorded Case,
+test/observation/verify-wow-task-lifecycle.ps1 with the recorded Case,
 ProviderBuildRoot=build/M0-T445/S6/provider,
 WorkerBuildRoot=build/M0-T445/S6/r003 and a fresh BuildRoot under build.
 
@@ -2971,7 +2971,7 @@ under build/M0-T445/S6; build exit0 in40.6s. Full group took612.9s, all11
 case exits0: window-borrow, window-reclaim, graph-snapshot, process-retirement,
 dialog-lifecycle, menu-resource, thunk-scope, menu-cleanup, native-send,
 native-nested, task-lifecycle. Entrypoint remains
-tests/observation/verify-wow-task-lifecycle.ps1 with -Case and the two build
+test/observation/verify-wow-task-lifecycle.ps1 with -Case and the two build
 roots; case evidence is beneath build/M0-T447/S2/graph-batch-r5/<case>.
 The empty failures pipeline produces no failures.json; individual exits and
 suite.exit=0, not that file's absence, establish the passing result.
@@ -3437,7 +3437,7 @@ The grouped runtime gate completed successfully under creation-delivery-r6:
 
 - r3's11 original boundary cases and hook guard plus r6's real CCPU native
   creation and native menu ownership cases pass (14 total). Reproduce through
-  tests/observation/verify-wow-task-lifecycle.ps1 with the recorded Case and
+  test/observation/verify-wow-task-lifecycle.ps1 with the recorded Case and
   provider/worker roots, and verify-wow-creation-boundaries.ps1 for hook/menu.
 - Ordinary isolated WINMINE, SOL and WRITE observations are retained under
   creation-apps-r6/frontiers. WRITE retains visible MSWRITE_MENU, MSWRITE_DOC
@@ -3642,7 +3642,7 @@ old backing. This calls for real native reuse acceptance, not another handle
 registry or a change to the original resolver.
 
 The checked-in graph-snapshot case now runs verify_native_slot_reuse in
-tests/mvdm-host/wow_page_domain_fixture.c. It projects a real STATIC HWND,
+test/mvdm-host/wow_page_domain_fixture.c. It projects a real STATIC HWND,
 borrows its CCPU WND, writes a sentinel WOW word, destroys the native window,
 and creates/destroys hidden windows until native USER returns the same slot
 with a different full handle. Both131072 attempts and30 seconds bound this
@@ -3941,7 +3941,7 @@ dependency group; do not bridge only one message or infer WRITE usability.
 This test-only continuation retains published runtime5edea33bb. The purpose
 is to distinguish a visible main window from actual deal/draw/close behavior;
 it does not close S2 or change the runtime. Entrypoints are
-`tests/observation/verify-wow-sol-gameplay.ps1` and its
+`test/observation/verify-wow-sol-gameplay.ps1` and its
 `wow_sol_gameplay_probe.c`. The runner compiles only the probe, uses a fresh
 owned physical stage and isolated desktop, and verifies Run16's actual exit
 before fixture cleanup. No guest memory access, patch, injected procedure,
@@ -4085,7 +4085,7 @@ directly rather than guessing from unrelocated far-call operands.
 
 Background `style-order-build-r1` (PID27516,2026-10-15T13:10:08Z) builds both
 Release/O2 widths and passes the extended actual-DLL attachment fixture.
-`tests/app/style_attachment.c:verify_creation_order` tests native negative
+`test/app/style_attachment.c:verify_creation_order` tests native negative
 space, no premature styled SIZE, preserved first-show client dimensions,
 repeat hide/show, unseen detach/destruction and destruction during first SIZE.
 Existing nested-Off, failed creation, initial minimized/maximized placement,
@@ -5000,7 +5000,7 @@ No guest or original mirror diff and no publication is claimed.
 
 observation-e-r5 now terminates exit0: worker/WOW32 incremental production
 builds and all12 boundary cases pass. Reproduce with
-tests/observation/verify-wow-task-lifecycle.ps1, ProviderBuildRoot
+test/observation/verify-wow-task-lifecycle.ps1, ProviderBuildRoot
 build/M0-T445/S6/provider, WorkerBuildRoot build/M0-T445/S6/r003, a fresh
 BuildRoot and each Case below. Production uses MSVC Win32/x86 /MT CCPU40;
 the selected generator/build logs and commands are retained in r5.

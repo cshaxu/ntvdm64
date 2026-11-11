@@ -53,7 +53,7 @@ will end.
   re-evaluation.
 - `src/basesrv/opennt/source/base_service.c`: epoch, worker start time,
   original DOS/WOW record projection, and retained-handle termination.
-- `tests/adapter-basesrv/base_service_reservation_test.c`: proves the actual
+- `test/adapter-basesrv/base_service_reservation_test.c`: proves the actual
   `MEM.EXE` original app-name projection, one-entry snapshot, non-zero start
   time, stale-epoch refusal, server-owned worker termination, and original
   worker-exit cleanup inside the established Check/Update/Get/ExitVDM

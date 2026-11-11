@@ -28,7 +28,7 @@ could therefore leave installed files without a usable completed record.
 Both now write that record inside the replacement transaction and mark
 success only afterwards. Compatibility backups must also be outside PATCH.
 The actual file operations are tested by
-`tests/component-integration/win95_launch_install_test.ps1 -OutputRoot
+`test/component-integration/win95_launch_install_test.ps1 -OutputRoot
 <fresh-repository-build-directory>` using independently authored fixtures,
 not a real guest installation. The successful `addon-install-r3` case covers
 compatibility installation, two backup refusals, menu installation, preservation

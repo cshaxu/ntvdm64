@@ -43,12 +43,12 @@ changed.
 
 ```powershell
 cmd /d /c "call \"...\\VsDevCmd.bat\" -arch=x64 -host_arch=x64 && cl ... src\\addon\\pif\\pif.c"
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\pif_hash_tool_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\pif_hash_tool_test.ps1 `
   -Pif build\M0-T437-S7\r001\PIF.EXE `
   -Hash build\M0-T437-S7\r001\HASH.EXE `
   -BuildRoot build\M0-T437-S7\r001\pif-hash `
   -ReleaseRoot assets\release
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win101_setup_cmd_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win101_setup_cmd_test.ps1 `
   -ToolRoot tools\win101-setup -BuildRoot <short-physical-test-root>
 ```
 

@@ -41,7 +41,7 @@ rule link
   description = LINK `$out
 
 build obj/vrmisc.obj: cc `$root/src/mvdm-host/vdmredir/vrmisc.c
-build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/t290_s3_vrmisc_fixture.c
+build obj/fixture.obj: cc `$root/test/mvdm-host/vdmredir/t290_s3_vrmisc_fixture.c
 build bin/t290-s3-vrmisc-fixture.exe: link obj/vrmisc.obj obj/fixture.obj
 default bin/t290-s3-vrmisc-fixture.exe
 "@

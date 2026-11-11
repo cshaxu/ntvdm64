@@ -91,7 +91,7 @@ except the bounded successor clarifications above.
 
 Run the checked-in entrypoint in an owned background job:
 
-`python tests/build/verify-t480-s4-reconciliation.py --output build/t480-s4/<fresh-directory>`
+`python test/build/verify-t480-s4-reconciliation.py --output build/t480-s4/<fresh-directory>`
 
 Prerequisites: this repository's Git revisions b35effafd, ae65e175b and511f23fc0,
 committed S1 build evidence, S2/S3 archives and current S3 release images. No

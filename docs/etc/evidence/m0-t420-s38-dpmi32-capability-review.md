@@ -48,7 +48,7 @@ under the existing -text mirror attributes; do not count that as code.
 Reviewed DPMI selection, checked debug copy, fatal PM publication, CPU debug
 event latch and INT21 pointer/FLAGS/packet/EXEC changes are functional
 repairs/composition, not added diagnostic hooks. The new event loggers and
-failure injection remain under tests/observation and diagnostic builders;
+failure injection remain under test/observation and diagnostic builders;
 the reviewed product owners contain no S38 trace/fopen/fprintf additions.
 This review does not authorize deleting necessary checked-copy behavior or
 CPU event state merely to lower line counts. Final upstream totals and
@@ -2108,7 +2108,7 @@ skip its bytes. A persistent fault therefore cannot be claimed recovered
 merely because Ignore was accepted. Dialog creation failure maps to Abort;
 DOS dialog-thread creation failure also terminates the VDM.
 
-Independent `tests/observation/dpmi_fatal_exception.asm` enters the unchanged
+Independent `test/observation/dpmi_fatal_exception.asm` enters the unchanged
 DOSX service, prints S38_FATAL_GP_READY, leaves the original exception-13
 handler installed and attempts to load DS=FFFFh. Any fallthrough exits 99,
 not success. NASM produced both client-frame variants under
@@ -2565,7 +2565,7 @@ change or passing verdict is made by this source review.
 
 ### Descriptor rejection and state preservation
 
-Independent `tests/observation/dpmi_descriptor_contract.asm` exercises
+Independent `test/observation/dpmi_descriptor_contract.asm` exercises
 original INT31/0000,0001,000B,000C. After allocating and reading an unused
 descriptor, it attempts to install a system descriptor and a descriptor
 whose DPL differs from the original. Both must return CF set, and a fresh
@@ -2773,7 +2773,7 @@ candidate `56ba3839...`: four real routes. Logs and identity summaries are
 `s38-int21-client32-high-r2-*`. Each requires both the common I/O marker and
 `S38_INT21_CLIENT32_STATE_OK`; high transcripts also report their chunk/EOF
 marker. Build inputs use NASM `-f bin -DCLIENT32=1`, plus `-DHIGH_BUFFER=1`
-for high memory, from `tests/observation/dpmi_int21_state.asm`.
+for high memory, from `test/observation/dpmi_int21_state.asm`.
 
 | Probe under build/M0-T420/S38/int21-client32-r2 | SHA256 |
 | --- | --- |
@@ -2787,7 +2787,7 @@ The earlier r1 counted only AX and is superseded by these full-EAX runs.
 
 ### Real INT31 memory-information verification
 
-`tests/observation/dpmi_memory_info.asm` invokes original INT31/0500
+`test/observation/dpmi_memory_info.asm` invokes original INT31/0500
 (`486/dxint31.asm::i31_GetFreeMem` -> BOP 53:0B ->
 `dpmimemr.c::DpmiGetMemoryInfo`). It checks a nonzero largest free block,
 MaxUnlocked=LargestFree/4096, FreeAddressSpace=FreePages and sufficient total
@@ -2808,7 +2808,7 @@ actual original write extent, not a newly implemented reserved-field policy.
 Invalid guest output spans and 32-bit EDI addressing remain separate boundary
 coverage; this positive test must not be cited as proving them.
 
-NASM `-f bin tests/observation/dpmi_memory_info.asm -o
+NASM `-f bin test/observation/dpmi_memory_info.asm -o
 build/M0-T420/S38/memory-info-r2/D38M.COM` yields SHA256
 `bc9d0587cb25a8fbb18837805646b994e17c576aa4ffb0f86c4e2b7dadb5d265`.
 The retained S38 runner's `-MemoryInfo` mode passes direct and twice-nested
@@ -2980,7 +2980,7 @@ Both direct and twice-nested routes pass for both variants on worker
 `s38-int21-state-r3-*`; both high transcripts additionally contain
 `S38_INT21_HIGH_BUFFER_CHUNKS_EOF_CLEANUP_OK`. No product source changed.
 
-`tests/observation/dpmi_int21_state.asm` is an independent 16-bit DPMI client.
+`test/observation/dpmi_int21_state.asm` is an independent 16-bit DPMI client.
 It uses original INT21 create-new (5B), write, seek, read, close and delete,
 then requires missing-file CF/AX=2 when opening the deleted path. Binary data
 including NUL and FFh is compared byte-for-byte. Every checked call must
@@ -2996,7 +2996,7 @@ is the unchanged `savestat.c`, byte-identical to pinned OpenNT, SHA256
 This is source attribution plus real caller behavior, not instruction-level
 trace proof of every internal branch or high-memory bounce-buffer coverage.
 
-Build with NASM `-f bin tests/observation/dpmi_int21_state.asm -o
+Build with NASM `-f bin test/observation/dpmi_int21_state.asm -o
 build/M0-T420/S38/int21-state-r2/D38F.COM`; probe SHA256 is
 `4d299574c8eefe4b48cc8a9141e604bae82ebf22131eb3b8ccfe513054c9282d`.
 `Verify-T420S38DpmiInterrupt.ps1 -Int21State` runs direct and twice-nested
@@ -3279,7 +3279,7 @@ tail through the actual guest BOP and CCPU binding. It does not prove malformed
 descriptor backing/paging failures or the independent status-query contract.
 The official O:/winnt worker remains unchanged; this artifact is isolated.
 
-`tests/mvdm-host/debug_register_binding_test.c` compiles the actual
+`test/mvdm-host/debug_register_binding_test.c` compiles the actual
 `dbg_dispatch.c` binding with the formal graph's x86 /MT cflags. Only its
 descriptor/memory/MOV_DR endpoints are mocked; unrelated dispatcher endpoints
 abort if called. `build/M0-T420/S38/debug-boundary-r1/build-r3.log` records
@@ -3500,7 +3500,7 @@ guest coverage, including 16/32-bit cases, before closure.
 
 ## Real 16-bit Interrupt And Fault Return
 
-The independent `tests/observation/dpmi_interrupt_return.asm` probe follows
+The independent `test/observation/dpmi_interrupt_return.asm` probe follows
 original `dpmi/486/dxint31.asm` vector contracts and the 16-bit fault frame in
 `dpmi32/dpmiint.c`. It uses INT 31h to install and restore software interrupt
 60h and divide-error handlers; it never modifies original guest code. The
@@ -3508,7 +3508,7 @@ divide handler advances the saved IP past the probe's own DIV instruction.
 Assertions check one handler invocation, restored SP, preserved AX and carry,
 and rejection of exception-vector number 11h by original DOSX.
 
-Build: NASM `-f bin tests/observation/dpmi_interrupt_return.asm -o
+Build: NASM `-f bin test/observation/dpmi_interrupt_return.asm -o
 build/M0-T420/S38/interrupt-guest-r1/D38I.COM`. The retained runner is
 `tools/audit/Verify-T420S38DpmiInterrupt.ps1`, using the S34 observer,
 that probe and `-LogPrefix s38-interrupt16-matrix-r1`. Both direct and
@@ -3687,7 +3687,7 @@ fatal branch and remaining service/coverage dispositions.
 
 ## VCD Guest Service And Special-slot Source Attribution
 
-The independent `tests/observation/dpmi_vcd_service.asm` enters DPMI,
+The independent `test/observation/dpmi_vcd_service.asm` enters DPMI,
 discovers VCD via INT2F/1684 and BX=0Eh, calls the returned original DOSX
 entry and asserts version 030Ah, a nine-bit port array and CF refusal for
 FFFFh. Original `486/dxfunc.asm::VCD_PM_Svc_Call` performs BOP 53:12 into

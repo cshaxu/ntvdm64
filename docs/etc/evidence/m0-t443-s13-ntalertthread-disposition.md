@@ -9,7 +9,7 @@ status predicate or a new fallback repair?
 
 `src/ntvdm-exe/win32/nt_thread_alert_compat.c`, the original SoftPC consumer
 `src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c`, and the existing focused
-fixture `tests/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c`.
+fixture `test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c`.
 
 ## Observation
 

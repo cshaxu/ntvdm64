@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T481 S19 test-root cleanup](evidence/m0-t481-s19-test-root-cleanup.md) records complete migration, reference repair, root hygiene and delivery checks.
+
+[T481 S18 DOS program identity design](evidence/m0-t481-s18-dos-program-identity-design.md) records the side-session reproduction, pure-host constraints, source ownership and unresolved identity proofs for owner review.
+
 [T481 S17 Win95 four-profile acceptance](evidence/m0-t481-s17-win95-four-profiles.md) records dynamic launcher changes, execution contracts, test results and remaining delivery boundaries.
 
 [T481 S15 dynamic Win3.1 launcher](evidence/m0-t481-s15-win31-dynamic-launch.md) records setup package changes and verification.
@@ -926,7 +930,7 @@ delivered single-worker/dual-Hook gates; see
 | [T422 S2 planning handoff](evidence/m0-t422-s2-planning-handoff.md) | M0 T422 S2 | Owner-revised preservation closure and complete C-item transfer. | Retain through T422 acceptance. |
 | [T422 S3 message/task checklist](evidence/m0-t422-s3-message-task-checklist.md) | M0 T422 S3 handoff | Incomplete message/callback/task work transferred to successor S1; no functional closure. | Retain through successor acceptance. |
 | [T422 S2 reproducible run evidence protocol](operations/m0-t422-s2-run-evidence-protocol.md) | M0 T422 S2 | Defines unique run identity, frozen source/artifact inputs, non-overwriting logs, causal controls and sealed milestone retention. | Retain through T422 acceptance and explicit evidence-retention review. |
-| [WOW client-view translation fixture](../../tests/observation/verify-wow-client-view-translation-contract.ps1) | M0 T422 S1 | Verifies the source-shaped client/server numeric relation, zero-pair rejection and overflow negative control; it is design evidence, not WOW16 acceptance. | Retain through S2 X01 closure. |
+| [WOW client-view translation fixture](../../test/observation/verify-wow-client-view-translation-contract.ps1) | M0 T422 S1 | Verifies the source-shaped client/server numeric relation, zero-pair rejection and overflow negative control; it is design evidence, not WOW16 acceptance. | Retain through S2 X01 closure. |
 | [T420 S43 debugger capability ledger](evidence/m0-t420-s43-debugger-capability-ledger.md) | M0 T420 S43 | Selected original `dbg` source/caller inventory, event-transport investigation and required debugger acceptance matrix. | Retain through T420 completion. |
 | [T420 S44 VDD capability ledger](evidence/m0-t420-s44-vdd-capability-ledger.md) | M0 T420 S44 | Selected original VDD owner/caller inventory, package-local shadow-registry binding and completed production-path/lifecycle evidence. | Retain through T420 completion. |
 | [T420 S45 static registry admission audit](evidence/m0-t420-s45-shadow-registry-admission-audit.md) | M0 T420 S45 | Actual worker import baseline, original-reader classification and same-shaped immutable-provider design. | Retain through T420 completion. |

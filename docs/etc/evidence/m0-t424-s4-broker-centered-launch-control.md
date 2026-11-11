@@ -161,14 +161,14 @@ and evidence are not overwritten.
 
 | Required invariant | Test source/entrypoint and assertions |
 | --- | --- |
-| Exact process ownership and removed edges | Add controlled service-launch fixture/probe under tests/app or tests/observation: record actual parent identity/generation for NTCON/NTVDM/NTW32; assert launcher only creates missing NTSRV, no direct frontend bootstrap or native launch/completion IPC remains. Static edge audit supplements, not replaces runtime. |
-| Bootstrap safety | Extend `tests/app/frontend_bootstrap_test.c` and frontend-scope lifetime tests: exact actual Console caller, service-issued creation identity, unrelated/old-generation/forged capability rejected; no arbitrary image/handle inheritance. |
+| Exact process ownership and removed edges | Add controlled service-launch fixture/probe under test/app or tests/observation: record actual parent identity/generation for NTCON/NTVDM/NTW32; assert launcher only creates missing NTSRV, no direct frontend bootstrap or native launch/completion IPC remains. Static edge audit supplements, not replaces runtime. |
+| Bootstrap safety | Extend `test/app/frontend_bootstrap_test.c` and frontend-scope lifetime tests: exact actual Console caller, service-issued creation identity, unrelated/old-generation/forged capability rejected; no arbitrary image/handle inheritance. |
 | Native direct result | Extend next-command/execution and service reservation fixtures: preflight/CreateProcess failure, actual nonzero exit, final I/O failure, completion RPC failure, launcher death and broker/worker loss; exactly one corresponding result, no unrelated record completion. |
-| DOS/native repeated launch and cooked return | `tests/observation/verify-frontend-relaunch.ps1`: same outer CMD, DOS -> native -> DOS, final cooked echo result19, original Console/cursor/input restoration barrier. |
-| Deep nested handoff | `tests/observation/verify-command-native-edit-return.ps1`: COMMAND -> CMD -> modern EDIT -> CMD -> DOS MEM and completion; preserve screen/title/geometry/input and parent-resume ordering. |
-| Broker-authoritative retirement | `tests/observation/verify-broker-retirement.ps1` plus focused deadline tests: frontend/worker loss for both kinds, pending startup, workerless10s cancellation, independent session survives, highest-priority control wakes blocked GetNext, broker death wakes all nonmonitor clients without polling. |
-| Independent native roots | `tests/observation/verify-ntw32-management.ps1 -TwoSessions`: exact authorized close and unaffected session input/result23, no cross-root reuse. |
-| Product regressions | Same Console17 and Window17 scripts/arguments as S3 evidence, guest output-gated 17/17 each; retained WINMINE/SOL/WRITE frontiers via `tests/observation/observe-wow-frontiers.ps1`, do not relabel known memory errors as usability passes. |
+| DOS/native repeated launch and cooked return | `test/observation/verify-frontend-relaunch.ps1`: same outer CMD, DOS -> native -> DOS, final cooked echo result19, original Console/cursor/input restoration barrier. |
+| Deep nested handoff | `test/observation/verify-command-native-edit-return.ps1`: COMMAND -> CMD -> modern EDIT -> CMD -> DOS MEM and completion; preserve screen/title/geometry/input and parent-resume ordering. |
+| Broker-authoritative retirement | `test/observation/verify-broker-retirement.ps1` plus focused deadline tests: frontend/worker loss for both kinds, pending startup, workerless10s cancellation, independent session survives, highest-priority control wakes blocked GetNext, broker death wakes all nonmonitor clients without polling. |
+| Independent native roots | `test/observation/verify-ntw32-management.ps1 -TwoSessions`: exact authorized close and unaffected session input/result23, no cross-root reuse. |
+| Product regressions | Same Console17 and Window17 scripts/arguments as S3 evidence, guest output-gated 17/17 each; retained WINMINE/SOL/WRITE frontiers via `test/observation/observe-wow-frontiers.ps1`, do not relabel known memory errors as usability passes. |
 | Wire coherence | Regenerate MIDL and rebuild affected x86 links together; real service rejects old interface, protocol and application version; no mixed-package registration. |
 | No mirror/lib/guest changes | Review `git diff -- src/mvdm src/non-mvdm/host lib` and guest/config identities, exact source/build graph, deletion of superseded clients and auth/ownership/lock/failure contract review. |
 | Delivery | Governance, relative links, `git diff --check`, eight-file tested/publication hash equality, recoverable S3 set, reviewed sequential P and clean pushed main. T remains open. |
@@ -317,7 +317,7 @@ passed with actual conventional-memory output at both DOS prompts, native VER,
 and the outer CMD's real exit 19:
 
 ```powershell
-tests/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/native-service-create-relaunch.txt')
+test/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/native-service-create-relaunch.txt')
 ```
 
 Exact candidate-owned processes were cleaned up; a later explicit `subst Z: /d`
@@ -387,8 +387,8 @@ old eight-second immediate-retirement expectation; no production Sleep or
 test success bypass is added.
 
 ```powershell
-tests/observation/verify-broker-retirement.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ProcessPackageRoot (Join-Path $repo 'build/M0-T424/S4/r001/runtime') -LogRoot (Join-Path $repo 'build/M0-T424/S4/r001') -LogPrefix retained-record-retirement
-tests/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/retained-record-relaunch.txt')
+test/observation/verify-broker-retirement.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ProcessPackageRoot (Join-Path $repo 'build/M0-T424/S4/r001/runtime') -LogRoot (Join-Path $repo 'build/M0-T424/S4/r001') -LogPrefix retained-record-retirement
+test/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/retained-record-relaunch.txt')
 ```
 
 The four latest fault cases pass. Same-outer-CMD relaunch also passes with
@@ -463,7 +463,7 @@ cmd.exe /c build\M0-T424\S2\r001\build-supplement.cmd
 # Copy only the eight candidate binaries into build/M0-T424/S4/r001/runtime.
 subst.exe Z: (Join-Path $repo 'build/M0-T424/S4/r001/runtime')
 try {
-    & tests/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/service-vdm-create-relaunch.txt')
+    & test/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/service-vdm-create-relaunch.txt')
 } finally { subst.exe Z: /d }
 ```
 
@@ -579,7 +579,7 @@ teardown wait 0, worker/frontend exit 0, no live participants or Console windows
 This is independent-Console lifecycle evidence, not the full S4 release gate.
 
 Exact probe: MSVC x86 /MT /O2 builds
-tests/observation/run16_new_console_lifecycle.c with object and executable
+test/observation/run16_new_console_lifecycle.c with object and executable
 outputs in build/M0-T424/S4/r001. With Z: mapped to its runtime candidate:
 
 ```powershell

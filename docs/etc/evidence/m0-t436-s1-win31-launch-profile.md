@@ -30,7 +30,7 @@ No drive mapping, helper or host/wire change is introduced.
 
 r001-profile stages four files and records six reference hashes before work;
 the owner-authorized PATCH directory receives exact staged copies.
-tests/component-integration/win31_launch_profile_test.ps1 with InstallRoot,
+test/component-integration/win31_launch_profile_test.ps1 with InstallRoot,
 ProfileDirectory and BeforeHashes verifies target/CWD, both /S arguments,
 NT profile paths, checksum, environment, no DOSX preload, PATH launcher and
 unchanged guest/default-profile hashes. Published-profile API checks pass.
@@ -259,7 +259,7 @@ ienabled is the original idle detector's flag, not CPU EFLAGS.IF: it must
 not be interpreted as proof of disabled guest interrupts. No CPU, timer,
 mouse, mirror or production-adapter repair follows from these observations.
 
-Entrypoint: tests/observation/observe-win31-enhanced.ps1, with PackageRoot
+Entrypoint: test/observation/observe-win31-enhanced.ps1, with PackageRoot
 O:/winnt, Pif O:/win31/PATCH/E386/PATCH/WIN31.PIF and build roots
 build/M0-T436/S1/r059-current-retail and r060-timer-evidence. Both use the
 exact published NTVDM map and read-only guest probe; r060 additionally uses
@@ -291,7 +291,7 @@ fallback is retained as r051 evidence, not the selected source path.
 r063 reconstructs exact candidate SHA256
 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8,
 and copies it only to the recoverable E386 installation. r065 runs
-tests/component-integration/win31_dosmgr_adaptation_test.ps1 with explicit
+test/component-integration/win31_dosmgr_adaptation_test.ps1 with explicit
 OriginalWin386/NtDos/BuildRoot: PASS exact output, single changed span,
 unchanged extent/outside bytes, resource/context manifest and safe rejection
 of an already modified input. This is construction/contract evidence only.

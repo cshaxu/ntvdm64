@@ -75,7 +75,7 @@ closuredf3a50c70. All new intermediate/evidence products are under S5 build/.
   NativeFrontend and NativeMonitor; run16-source-closure remains auditable.
   NTSRV/NTVDM, Hook32, VDMREDIR and separate WOW32 closure are rebuilt for changed
   dependency inputs. Unaffected native consumers are dependency-checked/relinked.
-- r009-abi: tests/observation/verify-native-launcher-abi.ps1 with NativeBuild
+- r009-abi: test/observation/verify-native-launcher-abi.ps1 with NativeBuild
   r002-native, X86Build build/M0-T427/S2/r001, PreviousLauncher S4 sealed run16,
   Hook64 S2 cache and fresh LogRoot. Both capture3462 and lifetime fixtures pass;
   original mutable environment/query/delete/clone/free/error tests pass both
@@ -160,7 +160,7 @@ r013 controlled negative sets Caps in that private shared table: real VER,
 one failed exact echo milestone, six key messages and zero Enter reproduce
 the r008 signature. Correct input supplies ver then exit and reports two Enter
 events, normal output and real exit0. Reproducible entrypoint is
-tests/observation/verify-owned-window-input-state.ps1 with RuntimeRoot
+test/observation/verify-owned-window-input-state.ps1 with RuntimeRoot
 r007-final-runtime, Observer r012-observer/console-startup-observer.exe and
 fresh build LogRoot. r014 reruns the entire Full suite using the corrected
 observer against the unchanged final product bytes. No longer timeout, injected
@@ -182,7 +182,7 @@ branch, preserving predicate and outer81, and enables existing optional NTVWM
 error evidence in a build-owned file. Success-path output/queue behavior is
 unchanged. r022 compares three unmodified twelve-round bursts per S4/S5
 package: all six pass. r023/r024 is a diagnostic-only launcher composition
-using tests/observation/launcher_receipt_probe.c: the unchanged production main
+using test/observation/launcher_receipt_probe.c: the unchanged production main
 and real providers, failure-only wrappers separating startup, receipt code/
 completion, retirement and restoration. It never supplies a receipt or changes
 Win32 last-error. The diagnostic image is not a publication input, and its

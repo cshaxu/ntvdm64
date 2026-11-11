@@ -7,7 +7,7 @@ param([Parameter(Mandatory)][string]$ProbePath,
       [Parameter(Mandatory)][string]$WowDll)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
-. "$repo/tests/observation/isolated_package_cleanup.ps1"
+. "$repo/test/observation/isolated_package_cleanup.ps1"
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path -LiteralPath $out)) { throw 'Require a fresh build-owned evidence directory' }
 $null=New-Item -ItemType Directory -Path $out

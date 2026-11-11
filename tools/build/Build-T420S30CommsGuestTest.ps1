@@ -17,9 +17,9 @@ if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build
 $nasm = Get-Command -Name $NasmExecutable -ErrorAction Stop
 New-Item -ItemType Directory -Path $build | Out-Null
 $fixtures = @(
-    @{ Source = 'tests\observation\comms_host_medium.asm'; Output = 'C30.COM' },
-    @{ Source = 'tests\observation\comms_loopback.asm'; Output = 'C31.COM' },
-    @{ Source = 'tests\observation\lpt_host_medium.asm'; Output = 'L30.COM' }
+    @{ Source = 'test\observation\comms_host_medium.asm'; Output = 'C30.COM' },
+    @{ Source = 'test\observation\comms_loopback.asm'; Output = 'C31.COM' },
+    @{ Source = 'test\observation\lpt_host_medium.asm'; Output = 'L30.COM' }
 )
 foreach ($fixture in $fixtures) {
     $source = Join-Path $repository $fixture.Source

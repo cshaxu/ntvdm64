@@ -62,7 +62,7 @@ Console capture contains both Windows-version lines from the first and third
 inner `cmd /c ver`; the intervening `cmd /c exit 37` result was checked by the
 batch before it returned zero. Evidence files are
 `build/M0-T423/S25/nested-fixed-r6.txt` and its `.console.txt` companion.
-The repository's existing `tests/app/native-console-nested.cmd` then passed
+The repository's existing `test/app/native-console-nested.cmd` then passed
 from the same isolated package: the outer CMD returned `0x17` (23), the
 captured screen displayed `INNER-NATIVE-RETURNED`, and the script itself
 checked both an inner exit code 37 and a redirected inner exit code 41.
@@ -96,7 +96,7 @@ A negative probe substituted a live but deliberately non-registering
 `exit=0x000005b4` (`ERROR_TIMEOUT`) after about 11.6 seconds including test
 setup, rather than hanging or starting a target. Raw report:
 `build/M0-T423/S25/protocol24-stuck-live.txt`. The fixture source is
-`tests/observation/ntw32_unregistered_worker.c`; it is not in any product
+`test/observation/ntw32_unregistered_worker.c`; it is not in any product
 link. The complete protocol-24 native candidate then returned 0 and showed
 the Windows version for `cmd /c ver`, and returned `0x17` with
 `INNER-NATIVE-RETURNED` for the repository's nested script. Raw reports are

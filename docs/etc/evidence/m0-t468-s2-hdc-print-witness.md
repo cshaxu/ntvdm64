@@ -6,7 +6,7 @@ input.
 
 ## Witness
 
-`tests/observation/verify-win16-print-probe.ps1` is the restored narrow
+`test/observation/verify-win16-print-probe.ps1` is the restored narrow
 successor to the former style-coupled generic hook runner.  It has no style
 parameter or UI automation.  It compiles the independently authored
 `win16_print_probe.asm`, stages a complete physical copy of the existing
@@ -53,7 +53,7 @@ profile mapping required by the original raw-spool body.  The distinction is
 intentional: provider availability does not authorize a new compatibility
 policy.
 
-`tests/observation/win16_raw_spool_probe.asm` and
+`test/observation/win16_raw_spool_probe.asm` and
 `verify-win16-raw-spool-profile.ps1` now verify that boundary through the
 actual immutable guest thunk rather than profile-file inspection alone.  The
 probe invokes original GDI `OpenJob` (240) with `FILE:` and writes its exact
@@ -97,7 +97,7 @@ admitted without widening the original owner boundary.
 
 ## PrintDlg default-data witness
 
-`tests/observation/win16_printdlg_default_probe.asm` calls original
+`test/observation/win16_printdlg_default_probe.asm` calls original
 `COMMDLG.PrintDlg` ordinal 20 with the documented `PD_RETURNDEFAULT` contract:
 the incoming `hDevMode` and `hDevNames` handles are null, so the original
 `WCD32PrintDlg` path obtains and converts default data without presenting a
@@ -120,7 +120,7 @@ separately in the [S3 retirement disposition](m0-t468-s3-printing-retirement.md)
 
 ## PrintDlg hook-cancellation witness
 
-`tests/observation/win16_printdlg_cancel_probe.asm` covers the distinct
+`test/observation/win16_printdlg_cancel_probe.asm` covers the distinct
 interactive cancellation contract without UI automation: it supplies a real
 16-bit `PD_ENABLEPRINTHOOK` callback through original
 `KERNEL.MakeProcInstance`.  On the original `WM_INITDIALOG` callback, the

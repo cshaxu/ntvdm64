@@ -73,7 +73,7 @@ try {
  $win="$dest/WIN.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($win))
  $text=[regex]::Replace($text,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\ONLY.PIF")
  [IO.File]::WriteAllBytes($win,$enc.GetBytes($text))
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  $stage=$null;$scope=$null;$process=$null
  try {
   $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity;$scope=New-IsolatedPackageScope $stage
@@ -93,6 +93,6 @@ try {
  foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Original changed: $($row.path)"}}
 } finally {
  $env:PATH=$savedPath
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  Remove-OwnedGuestProbeCopy $dest $task $copy.Source
 }

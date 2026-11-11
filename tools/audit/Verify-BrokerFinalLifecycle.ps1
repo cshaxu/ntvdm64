@@ -160,7 +160,7 @@ try {
         # checkout line-ending policy must not turn this authored test into
         # one multiline ECHO argument. No original guest media is changed.
         $batchName=if($NestedDosChild){'dos-native-dos-loss.bat'}else{'dos-native-loss.bat'}
-        $batch=Get-Content -LiteralPath (Join-Path $PSScriptRoot "../../tests/observation/$batchName") -Raw
+        $batch=Get-Content -LiteralPath (Join-Path $PSScriptRoot "../../test/observation/$batchName") -Raw
         [IO.File]::WriteAllText($fixture,($batch -replace '\r?\n',"`r`n"),[Text.Encoding]::ASCII)
         $target='COMMAND.COM /c '+$fixture
         if($NativeRoot){

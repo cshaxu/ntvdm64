@@ -142,7 +142,7 @@ the provider also safely rejected foreign/stale native handles rather than
 dereferencing them.  Per-receiver configured/absent/malformed acceptance is
 still required before S45 can close.
 
-`tests/observation/verify-s45-cpuenv-shadow.ps1` additionally deploys a
+`test/observation/verify-s45-cpuenv-shadow.ps1` additionally deploys a
 controlled `CpuEnv` fixture and runs real `MEM.EXE`.  Its required trace is
 `LOAD_OK → NT_OPEN_OK → NT_ENUM_OK → NT_ENUM_END → NT_CLOSE`, proving that
 the original `obj.vdm/ntvdm.c::CpuEnvInit` value-enumeration loop, rather than
@@ -215,7 +215,7 @@ names as finite `REG_SZ` values to the **unchanged original**
 are no matching public names; it does not create an empty synthetic registry
 key.  The existing original nine-bit clamp remains the final authority.
 
-`tests/observation/verify-s45-vcd-serial-discovery.ps1` builds a disposable
+`test/observation/verify-s45-vcd-serial-discovery.ps1` builds a disposable
 DOSX probe whose expected value is derived from the same public namespace at
 test time.  It passed direct and twice-nested `COMMAND.COM` routes on the
 fresh S45 x86 worker with `mask=0x4` (COM3), and recorded
@@ -225,7 +225,7 @@ evidence, not a COM I/O success claim; actual serial open/read/write remains
 owned by the unchanged original `nt_com.c` and its S30 hardware-medium ledger.
 
 The complementary test-only
-`tests/mvdm-host/s45_serial_discovery_absent_fixture.c` compiles the same
+`test/mvdm-host/s45_serial_discovery_absent_fixture.c` compiles the same
 product provider directly with an empty `QueryDosDeviceA` namespace.  It
 passed `S45_VCD_PUBLIC_SERIAL_ABSENT_OK`: `RegOpenKeyEx` returns
 `ERROR_FILE_NOT_FOUND` and publishes no key.  This mock proves the

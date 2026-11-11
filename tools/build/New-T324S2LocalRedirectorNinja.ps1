@@ -70,7 +70,7 @@ build obj/location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
 build obj/thread.obj: cc `$root/src/common/worker-thread/bridge.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
-build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/redirector_async_contract_fixture.c
+build obj/fixture.obj: cc `$root/test/mvdm-host/vdmredir/redirector_async_contract_fixture.c
 build bin/redirector-async-contract-fixture.exe: link obj/async.obj obj/guest-copy.obj obj/location.obj obj/session.obj obj/lease.obj obj/fixture.obj
 default obj/vrnmpipe.obj obj/vrputil.obj obj/vrdisp.obj obj/vrmisc.obj obj/vrmslot.obj obj/cmdredir.obj obj/ntstatus.obj bin/redirector-async-contract-fixture.exe
 "@

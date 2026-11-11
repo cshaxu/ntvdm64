@@ -90,7 +90,7 @@ before join. Original mirrors and the frontend/wire remain unchanged.
 
 - x86 affected build: build/M0-T429/S6-build.log through S6-build5.log,
   generated formal cache M0-T427/S2/r001, both workers plus VDMREDIR and fixtures.
-- tests/observation/verify-software-video-publisher.ps1:
+- test/observation/verify-software-video-publisher.ps1:
   S6/r007/results.txt passes latest-of200,20ms, unchanged idle, palette-only,
   final drain, resume, sticky failure including rejected reactivation,
   quiesced commit equality and50 handle-clean stop/join cycles.

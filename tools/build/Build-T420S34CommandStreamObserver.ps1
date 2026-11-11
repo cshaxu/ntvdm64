@@ -17,7 +17,7 @@ if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build
 $vs = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs)) { throw "Missing x86 build environment: $vs" }
 New-Item -ItemType Directory -Path $build | Out-Null
-$source = Join-Path $repository 'tests\observation\command_stream_observer.c'
+$source = Join-Path $repository 'test\observation\command_stream_observer.c'
 $output = Join-Path $build 'command-stream-observer.exe'
 $object = Join-Path $build 'command-stream-observer.obj'
 $command = 'call "{0}" -arch=x86 -host_arch=x86 >nul && cl.exe /nologo /TC /W4 /WX /O2 /Fo"{3}" "{1}" /link /out:"{2}" kernel32.lib' -f $vs, $source, $output, $object
@@ -25,7 +25,7 @@ $command = 'call "{0}" -arch=x86 -host_arch=x86 >nul && cl.exe /nologo /TC /W4 /
 if ($LASTEXITCODE -ne 0) { throw "S34 COMMAND stream observer failed: $LASTEXITCODE" }
 [ordered]@{
     schema = 'm0.t420.s34.command-stream-observer.v1'
-    source = 'tests/observation/command_stream_observer.c'
+    source = 'test/observation/command_stream_observer.c'
     outputs = @([ordered]@{ path = 'command-stream-observer.exe'; sha256 = (Get-FileHash -LiteralPath $output -Algorithm SHA256).Hash.ToLowerInvariant() })
 } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 'manifest.json') -Encoding utf8
 Write-Host "S34 COMMAND stream observer completed: $output"

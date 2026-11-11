@@ -10,17 +10,17 @@ is modified. The probe uses the unchanged eight-file package copied below build.
 
 ## Actual application-shadowing reproduction
 
-Test sources: [identity target](../../../tests/observation/application_search_identity_probe.c)
-and [baseline runner](../../../tests/observation/verify-application-search-baseline.ps1).
+Test sources: [identity target](../../../test/observation/application_search_identity_probe.c)
+and [baseline runner](../../../test/observation/verify-application-search-baseline.ps1).
 The target is windowless GUI code compiled x86 /MT /W4 /WX; it writes its
 actual GetModuleFileNameW path and exits 37. Real run16 --wait submits it
 through the production native route. This is not a model of SearchPath.
 
 Build: VsDevCmd.bat -arch=x86 -host_arch=x64, then cl /nologo /W4 /WX /MT
-/DUNICODE /D_UNICODE tests/observation/application_search_identity_probe.c,
+/DUNICODE /D_UNICODE test/observation/application_search_identity_probe.c,
 explicit /Fo and /Fe below build/M0-T427/S1/r001, /SUBSYSTEM:WINDOWS.
 
-Run: tests/observation/verify-application-search-baseline.ps1 -PackageRoot
+Run: test/observation/verify-application-search-baseline.ps1 -PackageRoot
 build/M0-T426/S3/r001/runtime -Probe build/M0-T427/S1/r001/search-identity.exe
 -RunRoot build/M0-T427/S1/r002. Results: r002/results.json. Both ordered PATH
 directories contain the same target; the package directory is absent from PATH

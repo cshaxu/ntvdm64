@@ -9,7 +9,7 @@ assert(fs.existsSync(archive),'Build the formal opennt-broker-owners target firs
 fs.mkdirSync(build,{recursive:true});
 const command=path.join(build,'compile.cmd');
 fs.writeFileSync(command,'@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\n'+
-    `cl.exe /nologo /MT /W4 /I "${root}/src/broker" "${root}/tests/broker/delivery_journal.c" "${archive}" /Fejournal.exe /link /map:journal.map\r\n`);
+    `cl.exe /nologo /MT /W4 /I "${root}/src/broker" "${root}/test/broker/delivery_journal.c" "${archive}" /Fejournal.exe /link /map:journal.map\r\n`);
 const compiled=spawnSync('cmd.exe',['/d','/c',`call "${command}"`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,encoding:'utf8',timeout:60000});
 fs.writeFileSync(path.join(build,'build.log'),compiled.stdout+compiled.stderr);
 assert.equal(compiled.status,0,'Build failed; see build.log');

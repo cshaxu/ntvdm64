@@ -55,8 +55,8 @@ The sibling source selection has no matching correction to adopt.
 
 ## Actual tests
 
-tests/observation/verify-dem-directory-reset.ps1 compiles the selected original
-demsrch.c through tests/mvdm-host/dem_directory_reset_test.c using production
+test/observation/verify-dem-directory-reset.ps1 compiles the selected original
+demsrch.c through test/mvdm-host/dem_directory_reset_test.c using production
 Ninja DEM flags, x86 /MT CCPU40. No private types/algorithm are copied.
 Existing fixture seams supply unrelated CPU/host closure; actual filesystem
 and monitor functions remain selected. The map pins FileFindOpen,
@@ -71,7 +71,7 @@ unrelated mutation return0; deleted remembered name returns80000006,
 STATUS_NO_MORE_FILES. That reproduces a retained limitation, not mutation
 tolerance. The original SupportReset assignment is not changed incidentally.
 
-tests/observation/verify-dem-fcb-guest.ps1 and dem_fcb_probe.asm exercise actual
+test/observation/verify-dem-fcb-guest.ps1 and dem_fcb_probe.asm exercise actual
 DOS INT21/11h/12h through S4. r009-guest passes: three distinct owned 8.3 names
 in a guest-written40-byte witness, FF at end and for missing pattern, outer
 COMMAND completion1. Elapsed7227ms; test COM SHA256:
@@ -102,8 +102,8 @@ limitation is outside this packet and unchanged.
 ## Reproduction and gate
 
 ```powershell
-./tests/observation/verify-dem-directory-reset.ps1 -OutputRoot build/M0-T430/S5/<fresh-provider-run>
-./tests/observation/verify-dem-fcb-guest.ps1 -RuntimeRoot build/M0-T430/S4/r006-runtime -Observer build/M0-T427/S4/r049/console-startup-observer.exe -OutputRoot build/M0-T430/S5/<fresh-guest-run>
+./test/observation/verify-dem-directory-reset.ps1 -OutputRoot build/M0-T430/S5/<fresh-provider-run>
+./test/observation/verify-dem-fcb-guest.ps1 -RuntimeRoot build/M0-T430/S4/r006-runtime -Observer build/M0-T427/S4/r049/console-startup-observer.exe -OutputRoot build/M0-T430/S5/<fresh-guest-run>
 ```
 
 Runners fail closed on assertions, timeout and absent/wrong witness. Only

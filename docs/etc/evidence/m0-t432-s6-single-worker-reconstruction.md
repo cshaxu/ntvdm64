@@ -568,7 +568,7 @@ Fix only the runner's test-variable lifetime: its version-negative gate saves
 the four incoming values and restores them in its own finally, including
 exception/nonzero paths and truly absent values. Incoming owner values are
 preserved, not stripped; guest, product search, protocol and assertions stay
-unchanged. tests/observation/test-product-version-environment.ps1 extracts and
+unchanged. test/observation/test-product-version-environment.ps1 extracts and
 executes the actual runner AST block with a finite fake Node boundary; all
 six absent/present x success/nonzero/exception cases pass, proving setup,
 restoration and failure propagation without a product process or endpoint.

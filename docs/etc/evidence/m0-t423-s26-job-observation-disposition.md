@@ -47,7 +47,7 @@ disconnect/PID-reuse tests. Adding those solely for a diagnostic stack would
 expand NTSRV state and the direct startup path without improving execution
 correctness. The owner-approved alternative in the S26 brief is therefore
 used: the untouched algorithm is retained as an isolated research fixture
-under `tests/observation/`, and removed from the NTSRV product-source tree.
+under `test/observation/`, and removed from the NTSRV product-source tree.
 
 Product contract after S26: one Win32Record list continues to hold only
 authenticated `Direct` entries. NTMON may report those requests and their

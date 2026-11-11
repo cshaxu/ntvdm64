@@ -27,7 +27,7 @@ observable contract.
 
 ## Focused build and fixture evidence
 
-`tests/adapter-mvdm-host-out/wow/wow_glyph_outline_rotation_fixture.c` links
+`test/adapter-mvdm-host-out/wow/wow_glyph_outline_rotation_fixture.c` links
 the actual facade source as x86 `/MT`.  With a 90-degree Arial font it proves:
 
 1. raw public rotated glyph output differs from the facade result;
@@ -35,7 +35,7 @@ the actual facade source as x86 `/MT`.  With a 90-degree Arial font it proves:
    font; and
 3. the caller's rotated `HFONT` remains selected after the call.
 
-`tests/observation/verify-wow-glyph-outline-rotation.ps1` is the checked-in
+`test/observation/verify-wow-glyph-outline-rotation.ps1` is the checked-in
 reproducible x86 build/run entry point.  Its recorded run
 `build/t456-s2/glyph-fixture-r3` emitted
 `WOW_GLYPH_OUTLINE_IGNORE_ROTATION_OK`; the input source SHA-256 was

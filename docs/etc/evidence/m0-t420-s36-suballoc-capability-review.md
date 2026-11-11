@@ -118,7 +118,7 @@ regression remain pending. S36 is not closed.
 
 ## Real DPMI entry probe: failed, not accepted
 
-Independent tests/observation/dpmi_suballoc.asm follows the 16-bit client
+Independent test/observation/dpmi_suballoc.asm follows the 16-bit client
 contract in original dpmi/dxfunc.asm (also present in 486/dxfunc.asm): query
 INT 2F/1687, allocate the requested host-data paragraphs, and far-call the
 returned entry with AX=0. Its subsequent workload uses INT 31/0501, 0503 and

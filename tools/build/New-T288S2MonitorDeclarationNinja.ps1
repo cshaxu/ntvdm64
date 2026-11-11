@@ -20,7 +20,7 @@ $build = Join-Path $root ("build/M0-T288/S2/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Missing MSVC: $vs" }
 if (!(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Ninja is required.' }
-$fixture = 'tests/ntvdm/monitor/t288_s2_sim32_declaration_fixture.c'
+$fixture = 'test/ntvdm/monitor/t288_s2_sim32_declaration_fixture.c'
 $source = 'src/mvdm-host/sim32/sim32.h'
 foreach ($path in @($fixture, $source)) {
     if (!(Test-Path -LiteralPath (Join-Path $root $path) -PathType Leaf) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid S2 input: $path" }

@@ -33,7 +33,7 @@ providers; malformed/present-but-unreadable shadow follows the original error
 path.  The binding never opens the Windows registry and does not emulate a
 provider.
 
-`tests/mvdm-host/fixtures/S44-ENTRY-HOOK-NTVDM.REG` selects the controlled x86
+`test/mvdm-host/fixtures/S44-ENTRY-HOOK-NTVDM.REG` selects the controlled x86
 `s44-entry-hook-vdd.dll`.  The real `O:\winnt` `run16 MEM.EXE` test loaded
 that value through the original loop, registered its original user hook in
 the VDD entry, and then recorded `CREATE`, `TERMINATE`, and `BLOCK`; `run16`

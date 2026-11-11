@@ -2034,7 +2034,7 @@ original worker. Completed cleanup is idempotent; absent/uninitialized PDLG,
 wrong class extent or deleted state cannot trigger allocation. Success checks
 the original cleared PDLG/dialog flag and CLEANEDUP bit, not worker return0.
 
-tests/adapter-mvdm-host-out/wow/wow_dialog_finalization_fixture.c links the
+test/adapter-mvdm-host-out/wow/wow_dialog_finalization_fixture.c links the
 actual boundary with explicit worker/scope doubles. Cases cover success,
 repeated cleanup, unsuccessful worker, borrow failure, uninitialized state,
 short extra storage and task-cleanup owner isolation. It is staged and unrun;
@@ -2292,7 +2292,7 @@ existing worker fail-fast owner for failed entry, unavailable service or failed
 restoration. No new scheduler, queue state or exception recovery policy is
 introduced. Native exceptions continue unwinding after successful restoration.
 
-tests/adapter-mvdm-host-out/wow/wow_dialog_call_fixture.c links the actual
+test/adapter-mvdm-host-out/wow/wow_dialog_call_fixture.c links the actual
 boundary and explicit scope/service doubles: success/error preservation,
 rejected entry without native call, missing service with balanced scope,
 native exception unwind, failed restoration and a subsequent successful call.
@@ -3593,7 +3593,7 @@ source inspection. The following continuation records its subsequent wiring.
 
 ### Creation unwind acceptance wiring and local reference review
 
-The existing `tests/observation/verify-wow-task-lifecycle.ps1` entry now accepts
+The existing `test/observation/verify-wow-task-lifecycle.ps1` entry now accepts
 `-Case native-creation -CreationUnwind`, with ProviderBuildRoot and
 WorkerBuildRoot pointing to the completed production dependency graphs and
 BuildRoot below build/M0-T447/S3. It must run under the owned background
@@ -3714,7 +3714,7 @@ are made in this wiring batch. Full private-precomp/body selection, related
 WND state and the previously recorded CPD obligations remain open.
 
 Acceptance is added to the existing real-CCPU mutation group in
-tests/mvdm-host/wow_page_domain_fixture.c, not another stand-alone fake owner.
+test/mvdm-host/wow_page_domain_fixture.c, not another stand-alone fake owner.
 verify-wow-task-lifecycle.ps1's window-borrow/window-reclaim/graph-snapshot/
 menu-resource rows now require WOW_CONTROL_NATIVE_RETURN_CCPU errors=0.
 The row invokes actual BeginPaint/EndPaint, native and custom SB_CTL targets,
@@ -4864,7 +4864,7 @@ is added. This closes a private-precomp declaration dependency only; these
 macros do not prove that cached parent PWND remains alive across callouts.
 That obligation remains with the retained-host relationship group.
 
-The native-creation runner was checked at tests/observation/
+The native-creation runner was checked at test/observation/
 verify-wow-task-lifecycle.ps1: it links the real CCPU session/page-domain
 fixture, explicitly excluding the parent stub for native-creation. Therefore
 its new backing/storage assertions can exercise the actual domain once the
@@ -6650,7 +6650,7 @@ r5 runner12320/Ninja25028 built incrementally from20:12:27.428 to
 | wow_default_window_binding_fixture | 30416 | default_window_binding_failures=0 |
 
 Logs: build/M0-T447/S3/call-boundaries-r2 through r5; r5 exit.txt is0.
-The test programs are tracked under tests/adapter-mvdm-host-out/wow and the
+The test programs are tracked under test/adapter-mvdm-host-out/wow and the
 tracked generator reproduces their source/link selection. Toolchain launcher
 and Ninja graph are retained beside the binaries. SHA256 of the tested EXEs:
 
@@ -6912,7 +6912,7 @@ relationship feature is not declared complete or delivered.
 ### Lifecycle verifier stale-object closure corrected
 
 Before starting the accumulated relationship regression group, reviewed its
-actual producer tests/observation/verify-wow-task-lifecycle.ps1. It extracts
+actual producer test/observation/verify-wow-task-lifecycle.ps1. It extracts
 all provider object paths from the selected DLL link command and archives
 them into provider.lib, but previously requested only task-lifecycle plus a
 few case-specific objects from Ninja. Other changed selected sources could
@@ -7775,7 +7775,7 @@ open. No build, test pass, product publication, commit or push is claimed.
 
 ### Original body cohort r4: duplicate import correction
 
-The owned background verifier is tests/observation/verify-wow-control-boundaries.ps1.
+The owned background verifier is test/observation/verify-wow-control-boundaries.ps1.
 It selects the full 24-unit admitted control/dialog compilation cohort and
 twelve supplemental fixture executables in one run, reusing
 build/M0-T447/S3/call-boundaries-x86. Failed compilation suppresses all fixture
@@ -9880,7 +9880,7 @@ Its assertions cover owned validation failure without native-storage fallback,
 absent/resource-only ownership, preserved errors across release, and original
 handled zero/error results. The creator/default/focus/modal cohort also passes.
 
-Command: tests/observation/verify-wow-control-boundaries.ps1 with EvidenceRoot
+Command: test/observation/verify-wow-control-boundaries.ps1 with EvidenceRoot
 build/M0-T447/S3/original-bodies-r35; shared build root remains
 build/M0-T447/S3/call-boundaries-x86. Exact source/build hashes and each child's
 stdout/stderr are retained in that evidence directory; the outer runner logs
@@ -10232,7 +10232,7 @@ publication were run during this audit.
 
 Question: does the admitted outgoing original GetCPD compose with all three
 original get/set bodies without the former algorithm-level test replacement?
-The background runner is tests/observation/verify-wow-control-boundaries.ps1,
+The background runner is test/observation/verify-wow-control-boundaries.ps1,
 using the retained build/M0-T447/S3/call-boundaries-x86 cache and distinct
 callproc-group-r38/r39 evidence directories. Both runs record source and graph
 SHA-256 inputs, stdout/stderr and exit.txt; adjacent runner logs retain PIDs.
@@ -10553,7 +10553,7 @@ Creator promotion/binding failures retire the already-created HWND and avoid
 destroying its attached menu twice. Original algorithms/resources stay owned
 by their original bodies. No guest or published artifact changed.
 
-Real-HWND probe: tests/observation/verify-wow-control-boundaries.ps1
+Real-HWND probe: test/observation/verify-wow-control-boundaries.ps1
 -DialogNativeOwnerResearch -EvidenceRoot build/M0-T447/S3/dialog-native-owner-r4.
 Outer PID29268, start2026-10-17T04:36:18.0488570Z, exit0; build exit0 in
 11.5212583s; probe PID39760, start04:36:31.4653138Z, exit0 in0.8343534s.
@@ -11358,7 +11358,7 @@ class subsequently passes9 resolutions/restorations and domain exit. All
 three case exits and aggregate exit are0; r18 completes the composite group.
 
 Class-address research receives a durable -ClassAddressResearch selector in
-tests/observation/verify-wow-control-boundaries.ps1. Explicit ANSI atom casts
+test/observation/verify-wow-control-boundaries.ps1. Explicit ANSI atom casts
 and cdecl main remove the probe's declaration warnings. class-address-r3 and
 the durable-entry r4 pass the same assertions. r4 supervisor40484 starts
 06:57:30Z; build28740 exits0 in0.1753547s, probe31212 exits0 in0.210714s.
@@ -13092,7 +13092,7 @@ The same supervisor admitted class-procedure PID36800 at
 2026-10-17T19:28:36.9753299Z; it remains the active frozen-core acceptance.
 
 Class-procedure then terminated1 before runtime at the real CCPU driver's
-compile, not the class fixture body: tests/mvdm-host/wow_page_domain_fixture.c
+compile, not the class fixture body: test/mvdm-host/wow_page_domain_fixture.c
 still contains seven old wow_window_native_proc references (632,639,643,790,
 954,1023,2928). Earlier removal sweep covered adapter fixtures but omitted
 this driver. Do not restore the deleted production gateway to satisfy tests.
@@ -13560,7 +13560,7 @@ requires its real original-modal child to exit0 first, then requires the
 unchanged dynamic-caption and same-runtime Off-peer/parent-retention markers;
 both pass with original-control callouts paints2/texts3/errors0.
 
-Removed tests/adapter-mvdm-host-out/wow/wow_user_task_dialog_lifecycle_fixture.c
+Removed test/adapter-mvdm-host-out/wow/wow_user_task_dialog_lifecycle_fixture.c
 and the no-longer-needed wow_native_model_registration.h. Removed the twelve
 numeric page-domain replacements, thirteen renamed original guest-call guards
 and competing test registered-input getter from this verifier. Actual original
@@ -13576,7 +13576,7 @@ parameter, guest edit, helper HWND, permissive duplicate linker flag or
 changed runtime failure policy was added. Its dedicated child scope now
 prints no modal-success marker when that case did not run a modal loop.
 
-Durable grouped entrypoint tests/observation/verify-wow-native-slot-group.ps1
+Durable grouped entrypoint test/observation/verify-wow-native-slot-group.ps1
 freezes current source/deleted-input inventory and actual ntvdm/WOW32/style
 artifact hashes, executes19 core cases plus graph-negative in order, records
 per-case PID/command/deadline/duration/exit and verifies source/artifact identity
@@ -14809,7 +14809,7 @@ release with list still open, second click closes and no capture remains.
 No old callback, menu, destruction or retirement assertion is removed.
 
 Reproducer: in an owned background process run
-tests/observation/verify-win16-hook-probe.ps1 with -Case controls,
+test/observation/verify-win16-hook-probe.ps1 with -Case controls,
 -Win16Style Off (then Win16, All), -PackageRoot pointing to the ZIP-derived
 P22 coherent13 package, -Observer pointing to the retained native
 frozen-print-observer-r1/observer.exe, and a fresh -BuildRoot under build/.

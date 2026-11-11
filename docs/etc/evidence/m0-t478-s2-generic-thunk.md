@@ -56,7 +56,7 @@ No publication or commit has occurred.
 
 The x86 worker target (533 steps) and WOW32 target (238 steps) completed with
 exit 0. The actual generated WOW32 object and assembled helper were linked
-into tests/observation/wow_generic_thunk_test.c, adapted from the retained
+into test/observation/wow_generic_thunk_test.c, adapted from the retained
 historical chain matrix without its obsolete EBX wrapper and with sufficient
 32-argument fixture storage. All 12 checks passed: zero/one argument, four
 source/destination convention flag combinations against both cdecl and
@@ -74,7 +74,7 @@ callee advertised by the guest as stdcall) completed three GEN1 records.
 Each recorded zero errors, 3 Pascal callbacks, 1 cdecl callback and 1 nested
 native entry after execution; the final record confirmed 3 resource releases.
 The same NE probe was used; only the native test calling convention changed.
-The retained runner is tests/observation/verify-wow-generic-call.ps1, using
+The retained runner is test/observation/verify-wow-generic-call.ps1, using
 explicit build root, compiler driver and observer arguments. No original guest
 was modified. Full product gate is still pending.
 

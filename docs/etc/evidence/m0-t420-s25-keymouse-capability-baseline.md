@@ -48,7 +48,7 @@ runtime package root.
 
 ## Procedure
 
-`tests/observation/keymouse_capability.asm` is a test-only DOS COM fixture;
+`test/observation/keymouse_capability.asm` is a test-only DOS COM fixture;
 `keymouse_capability_observer.c` injects actual Windows `KEY_EVENT` and
 `MOUSE_EVENT` records into the worker's own `CONIN$` handle.  It waits until
 the existing original mouse transition has enabled `ENABLE_MOUSE_INPUT` and

@@ -24,14 +24,14 @@ fs.writeFileSync(env,'@echo off\r\nset "classifier_cwd=%CD%"\r\ncall "C:\\Progra
 let commands=[
     `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`,
     `cl.exe ${flags} /we4013 /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER /Fo"${build}/client.obj" "${root}/src/non-mvdm/base/win32/client/vdm.c"`,
-    `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
+    `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/test/broker/original_classifier.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/path.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_classifier_path.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
     'link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map client.obj fixture.obj path.obj support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib'
 ];
 if(ownerBuild) commands=[
     `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`,
-    `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
+    `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/test/broker/original_classifier.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
     `link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`
 ];

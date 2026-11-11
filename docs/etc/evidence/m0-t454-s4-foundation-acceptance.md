@@ -15,7 +15,7 @@ manager, or a guest change?
   checked against both `assets/release` and `O:\winnt\system32`.
 - The current selected x86 production WOW32 and worker object graphs:
   `build/.ninja/msvc-x86-release/wow32` and `worker`.
-- `tests/observation/verify-wow-task-lifecycle.ps1` with
+- `test/observation/verify-wow-task-lifecycle.ps1` with
   `-Case window-borrow -RealDialogLifecycleOnly`, output rooted at
   `build/t454-s4/real-dialog-disposition-r1`.
 

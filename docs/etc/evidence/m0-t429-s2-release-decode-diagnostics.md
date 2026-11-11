@@ -34,7 +34,7 @@ are unchanged. S2/r002/runtime copies the sealed T428 S6/r002 package and replac
 only ntvdm.exe. It was initially isolated; the owner-requested early publication
 below subsequently installs this exact candidate without claiming P closure.
 
-`tests/observation/verify-decode-diagnostics.ps1 -BuildRoot <fresh-build-root>`
+`test/observation/verify-decode-diagnostics.ps1 -BuildRoot <fresh-build-root>`
 uses the exact selected CCPU flags and inspects actual normal and independently
 compiled diagnostic objects. It rejects normal diagnostic selection, absent or
 unexpected symbol references, and any change to the accepted diagnostic body.
@@ -103,7 +103,7 @@ The strengthened r006 diagnostic object has SHA256
 its manifest proves the unchanged accepted attribution body and 0/5 references.
 The earlier diagnostic hash above belongs to r001, not r006.
 
-`pwsh -File tests/observation/verify-service-fixtures.ps1 -Observer
+`pwsh -File test/observation/verify-service-fixtures.ps1 -Observer
 build/M0-T427/S4/r049/console-startup-observer.exe -Fixture
 build/M0-T427/S2/r001/basesrv-service-reservation-test.exe -LogRoot
 build/M0-T429/S2/r012 -Concurrency 4` passes all 29 retained production-archive
@@ -134,7 +134,7 @@ but Window is essentially unchanged and three samples do not establish a
 stable universal speedup. The proven release hot-loop cost is removed; the
 remaining Window delay is not explained by that cost alone.
 
-`powershell -File tests/observation/measure-worker-boundaries.ps1
+`powershell -File test/observation/measure-worker-boundaries.ps1
 -MeasuredWorker build/M0-T429/S2/r004/ntvdm-performance-observer.exe
 -MeasuredFrontend build/M0-T429/S2/r004/ntcon-performance-observer.exe
 -Observer build/M0-T429/S1/r012/console-startup-observer.exe

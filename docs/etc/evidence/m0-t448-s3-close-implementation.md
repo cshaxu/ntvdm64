@@ -286,7 +286,7 @@ cases: cmd PID 35804, command PID 24540, direct ntmon PID 14784. Each verifies
 self-NTMON confirmation, management close completion and visible input before
 Enter, including the active-buffer assertion. Run interval was
 2026-10-21 05:23:12 through 05:23:57 UTC. Exact reproducer is
-tests/observation/verify-console-caf-self-delete.ps1 with package-r7,
+test/observation/verify-console-caf-self-delete.ps1 with package-r7,
 the x64 console-startup-observer and handoff-pty harness; results are retained
 under build/t448-s3/delivery-r7c-caf. This proves those runs, not universal
 elimination of the historically intermittent defect.
@@ -473,7 +473,7 @@ exit and final Console return reuse it; no parallel cancellation implementation
 or background transport thread is added.
 
 Raw-wire version/authentication fixtures retain their intentional varied inputs
-through tests/broker/rpc_async_test.h, which calls the real generated stubs and
+through test/broker/rpc_async_test.h, which calls the real generated stubs and
 the production async completion mechanism. The raw-wire negatives are not
 replaced by a simulated service. The startup fault case establishes its exact
 owned service during setup, disconnects, suspends that service, and then tests
@@ -1490,7 +1490,7 @@ The native execution fixture now uses actual NTSRV-created NTCON, one request
 submission, authenticated execution-context plus frontend retention, and the
 real service Console-return operation. It no longer impersonates the frontend
 to attach a pipe. The removed local inactive-barrier assertion maps to
-tests/observation/ntvwm_presentation_test.c run_case(0/6): ERROR_NOT_READY on
+test/observation/ntvwm_presentation_test.c run_case(0/6): ERROR_NOT_READY on
 the first barrier, continued frame publication and a successful later barrier,
 with operation 38 (implicit activation) explicitly forbidden. This mapping
 still needs a fresh affected-fixture run; it is not new passing evidence.
@@ -1863,7 +1863,7 @@ instructions; retired wire value 38 remains reserved. NTSRV retains the live
 internal reservation, selection, result and lifecycle providers. One internal
 AttachFrontend wrapper now has only provider-test callers; migrate those to
 the real request entrypoint before removing that wrapper in the fixed cleanup
-group. The changed legacy tests/broker/service_client.c is not executed by r29;
+group. The changed legacy test/broker/service_client.c is not executed by r29;
 the current identity/wire fixtures supply this delivery's actual RPC evidence.
 No test result is attributed to either retired T412 runner.
 
@@ -2374,7 +2374,7 @@ service. These five shared-mechanism checks do not replace the existing
 operation-specific normal/admission/error/output tests or claim every RPC
 method's lifecycle proven. Those remain part of the full acceptance inventory.
 
-Rename the real-package runner to tests/observation/verify-client-rpc-wait.ps1;
+Rename the real-package runner to test/observation/verify-client-rpc-wait.ps1;
 old disposable deadline runners are invalid for this candidate. Full-component
 and second-incremental build r36 starts in background PID 28064. RPC controller
 36452 waits for that exact process and successful build result, then compiles
@@ -2931,7 +2931,7 @@ supplemental checks. The CAF check reports actual NTMON self-delete and active
 buffer echo before Enter. This covers the staged Console-scope change, not the
 remaining original natural/fatal exits or partial initialization.
 
-Independent `tests/observation/console_tsr_exit.asm` uses DOS INT 21h/AH=31h;
+Independent `test/observation/console_tsr_exit.asm` uses DOS INT 21h/AH=31h;
 it does not replace or patch any original guest. The temporary runner is
 `build/t448-s3/tsr-r43.ps1`. Initial PID 22328 failed before execution because
 the stage lacked a tests directory. After creating that directory, PID 25132
@@ -3044,7 +3044,7 @@ membership initialization retains resources for the existing request/dispatch
 path; a missing local stop_requested event is harmless, not an attempted
 SetEvent(NULL). No timeout, replay, new IPC or mirror change is introduced.
 
-Reproducible test: tests/observation/verify-ntvwm-close-priority.ps1 with
+Reproducible test: test/observation/verify-ntvwm-close-priority.ps1 with
 BuildRoot below build, CompilerWrapper for MSVC x64 and FontInclude naming the
 generated frontend-font directory. It compiles the actual main.c owner and
 production worker-base shutdown helper. Case 7 injects backend registration
@@ -3329,7 +3329,7 @@ faults. Four individual failures and one combined failure require every
 independent step to be attempted, the first error to survive, input restoration
 to remain independent, the presentation thread to be joined and retained
 resources to remain safely cleanable. No production or guest change is made.
-The permanent runner is tests/observation/verify-frontend-restoration.ps1.
+The permanent runner is test/observation/verify-frontend-restoration.ps1.
 
 Hidden r58 controller 31752 failed at 18:54:40.427 UTC before the new cases:
 stop-join's initial geometry setup returned error87, largest58x15, requested
@@ -3432,7 +3432,7 @@ remain explicitly pending for final S3 review, not silently certified here.
 
 The five changed mirror files retain LF and DIV-356 registration; delta versus
 P18 is +46/-8 (net +38), not a reduction. Owned product net growth is +117;
-tests/build net growth including the new 14-line verifier is +142. New tests
+test/build net growth including the new 14-line verifier is +142. New tests
 are correctness coverage; obsolete RPC removal is the identified reduction
 opportunity, not permission to delete their retained identity/rights coverage.
 Guest files and assets/winnt.zip remain unchanged.

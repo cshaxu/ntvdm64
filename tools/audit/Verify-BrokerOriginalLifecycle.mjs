@@ -58,7 +58,7 @@ let commands=[
     `cl.exe ${flags} ${includes} /Fo"${build}/config.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_config.c"`,
     `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/non-mvdm/base/win32/client/vdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/non-mvdm/base/win32/server/srvvdm.c"`,
-    `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
+    `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/test/broker/original_server_lifecycle.c"`,
     `cl.exe ${flags} /Fo"${build}/process.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_client_process.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/interactive.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_interactive.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/exports.obj" "${root}/src/non-mvdm/windows/core/ntuser/server/exports.c"`,
@@ -73,7 +73,7 @@ if(ownerBuild) {
     for(const name of ['opennt-base-client.lib','opennt-base-server.lib','opennt-base-bindings.lib'])
         assert(fs.existsSync(path.join(ownerBuild,name)),`Missing formal owner archive ${name}`);
     commands=[
-        `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
+        `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/test/broker/original_server_lifecycle.c"`,
         `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
         `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ];

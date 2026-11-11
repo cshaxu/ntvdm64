@@ -140,11 +140,11 @@ T430 remains open. Unrelated proposal and TODO changes remain excluded.
 From the repository in PowerShell7 with the installed x86 MSVC environment:
 
 ```powershell
-tests/observation/verify-redirector-async-publication.ps1 -OutputRoot build/<fresh-async>
-tests/observation/verify-redirector-oem-capacity.ps1 -OutputRoot build/<fresh-oem>
-tests/observation/verify-redirector-oem-capacity.ps1 -OutputRoot build/<fresh-provider> -OriginalProviders -BuildCache build/M0-T427/S2/r001
+test/observation/verify-redirector-async-publication.ps1 -OutputRoot build/<fresh-async>
+test/observation/verify-redirector-oem-capacity.ps1 -OutputRoot build/<fresh-oem>
+test/observation/verify-redirector-oem-capacity.ps1 -OutputRoot build/<fresh-provider> -OriginalProviders -BuildCache build/M0-T427/S2/r001
 tools/build/Build-T420S20VdmRedirGuestTests.ps1 -RepositoryRoot $PWD.Path -BuildRoot "$PWD/build/<fresh-guest>"
-tests/observation/verify-redirector-guest-boundary.ps1 -RuntimeRoot build/M0-T430/S4/r006-runtime -Observer build/M0-T430/S4/r024-guest-observer/terminal-observer.exe -GuestProbes build/M0-T430/S4/r014-guest-probes -OutputRoot build/<fresh-guest-run>
+test/observation/verify-redirector-guest-boundary.ps1 -RuntimeRoot build/M0-T430/S4/r006-runtime -Observer build/M0-T430/S4/r024-guest-observer/terminal-observer.exe -GuestProbes build/M0-T430/S4/r014-guest-probes -OutputRoot build/<fresh-guest-run>
 ```
 
 The original-provider fixture requires the existing dependency-selected host

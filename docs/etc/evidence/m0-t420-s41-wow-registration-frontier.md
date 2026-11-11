@@ -301,7 +301,7 @@ guest view contains only source-proven pre-publication data: `SHAREDINFO.psi`,
 `SHAREDINFO.aheList`, and `TEB+18h` self; client and object-producer fields
 remain zero.
 
-`tests/mvdm-host/wow_page_domain_fixture.c` now passes in the formal x86
+`test/mvdm-host/wow_page_domain_fixture.c` now passes in the formal x86
 composition (`wow-page-domain-test.exe`, exit 0).  It proves rejection before
 the session/protected-mode boundary, rejection while A20 wrapping is enabled,
 read-only translation at `7ffe0000h`, clock publication progress, DOSX GDT

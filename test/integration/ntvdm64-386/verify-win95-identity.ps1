@@ -184,7 +184,7 @@ $env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp
 if($ProductionComspecImage){$env:COMSPEC=$ProductionComspecImage}
 try {
 
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  $stage=$null;$scope=$null;$process=$null
  New-Item -ItemType Directory "$task/runtime"|Out-Null
  Copy-Item "$task/controller.exe" "$dest/PATCH/VMTEST.EXE"
@@ -293,7 +293,7 @@ try {
    }
   }
  } finally {
-  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  . "$repo/test/observation/isolated_package_cleanup.ps1"
   Remove-OwnedGuestProbeCopy $dest $task $source
  }
 }

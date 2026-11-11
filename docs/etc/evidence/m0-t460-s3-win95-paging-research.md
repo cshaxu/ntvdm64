@@ -35,10 +35,10 @@ evidence supplies that distinction. No disassembled implementation is imported.
 
 ## Verification and installation
 
-Independent producer: `tests/observation/build-win95-loader-probe.ps1` and
+Independent producer: `test/observation/build-win95-loader-probe.ps1` and
 `win95_loader_probe.c`. Runtime entry: `verify-win95-loader.ps1`, with
 `-AfterMigration -Paging Off` versus `-AfterMigration -Paging On`.
-`tests/component-integration/win95_paging_result_test.py --off <off-run>
+`test/component-integration/win95_paging_result_test.py --off <off-run>
 --on <on-run> --output <result>` asserts same input hashes, all six sizes,
 OLE32, Notepad and the self-child control.
 

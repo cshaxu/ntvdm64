@@ -303,7 +303,7 @@ The native service-local reservation discriminator is not a wire enum and stays
 local. Management RPC serialization is already declared by interface/service.idl;
 the service's local snapshot projection is not a second wire record.
 
-Extended tests/broker/vdm_payload.c asserts the six structure sizes and stream
+Extended test/broker/vdm_payload.c asserts the six structure sizes and stream
 offset, includes both owner and wrapper headers, and retains eleven operation
 and eight-field positive/negative cases. The formal graph now exposes the
 vdm-protocol-test.exe target with a separate test object (the first ad-hoc
@@ -381,7 +381,7 @@ Build passes: build/M0-T423/S12/interface-packets-build-r1.log. Actual target 37
 and protocol negatives pass in O:/winnt/Logs2/t423-s12-interface-packets-r1.log.
 The ordinary hidden Console fixture also passes cells/cursor/active-buffer,
 members/descendants, raw/cooked input, mouse pair and control negatives:
-tests/observation/verify-ntw32-console-state.ps1 -BuildRoot
+test/observation/verify-ntw32-console-state.ps1 -BuildRoot
 build/M0-T423/S12/interface-console-r1 -LogPath
 O:/winnt/Logs2/t423-s12-interface-console-r1.log. Its marker explicitly states
 product-wiring=pending. No publication or S12 closure.
@@ -469,7 +469,7 @@ from a second Take on a live route is deliberate duplicate-delivery rejection,
 not evidence of a missing release operation. A transient pipe failure must not
 be promoted to root death or silently trigger task replay.
 
-Extended tests/adapter-basesrv/base_service_reservation_test.c --native-worker
+Extended test/adapter-basesrv/base_service_reservation_test.c --native-worker
 now uses distinct launcher, worker and frontend process identities. It verifies
 root-context rundown leaves the same worker alive, removes its old capability,
 returns NOT_READY with cleared Take outputs, denies the old capability, and
@@ -603,7 +603,7 @@ pending: these results do not close the production gates above.
   parser or synthetic line editor is added. Authenticated product input and
   DOS/native pending-input handoff remain unconnected.
 
-Commands: tests/observation/verify-ntw32-console-state.ps1 with BuildRoot
+Commands: test/observation/verify-ntw32-console-state.ps1 with BuildRoot
 build/M0-T423/S12/hidden-console-r1 through r5 and LogPath
 O:/winnt/Logs2/t423-s12-hidden-console-r1.log through r5.log (r1 has only
 build.log). x86 /MT, no physical desktop interaction or package publication.
@@ -638,7 +638,7 @@ unchecked. Build roots: build/M0-T423/S12/console-state-r1 through r5.
 
 ### Attached Console and dispatch evidence
 
-Entrypoint: tests/observation/verify-ntw32-console-state.ps1, BuildRoot
+Entrypoint: test/observation/verify-ntw32-console-state.ps1, BuildRoot
 build/M0-T423/S12/console-state-r5, LogPath
 O:/winnt/Logs2/t423-s12-console-state-r5.log, using VS2022 BuildTools
 VsDevCmd -arch=x86 -host_arch=x64, cl /W4 /MT. Build log contains no warnings.
@@ -727,7 +727,7 @@ event restrictions, duplicate refusal, members, stale management epoch,
 unacknowledged-stop timeout without carrier kill and rundown. This local test
 did not prove transported event access rights.
 
-Real RPC test entrypoint: tests/observation/ntw32_channel_test.c, formal
+Real RPC test entrypoint: test/observation/ntw32_channel_test.c, formal
 ntw32-channel-test.exe with the absolute sibling ntw32.exe argument. It starts
 only its own sibling ntsrv.exe, refuses an existing broker, and uses a real
 ConPTY without touching the physical desktop. The fixture acts as the frontend
@@ -800,7 +800,7 @@ management snapshot and confirmed Console close. r2 failed because the test's
 environment fill overwrote its equals sign; the fixture, not product semantics,
 was corrected. r1 was the earlier attached-target launch checkpoint.
 
-Production entrypoint tests/observation/verify-native-root-console.ps1 selects
+Production entrypoint test/observation/verify-native-root-console.ps1 selects
 the formal build and private-desktop console-startup-observer.exe. Logs2
 t423-s12-native-root-r1 through r4 preserve these findings:
 
@@ -863,7 +863,7 @@ investigation; neither the case nor the remaining Window matrix is passed.
 NTMON now renders NTW32 PID, member count, state and local start time in its
 existing horizontally scrollable detail row. Native confirmation explicitly
 closes the Console session, rather than describing guest tasks. The unchanged
-DOS row/confirmation remains selected for DOS. tests/observation/
+DOS row/confirmation remains selected for DOS. test/observation/
 monitor_layout_test.c adds active/idle/closing/details/confirmation assertions;
 the x86 hidden-private-buffer fixture passes, retaining the existing 80x25,
 scrollbars, selection, colors and empty-state checks. Build log:
@@ -871,7 +871,7 @@ native-migration-input-r1/monitor-build.log; runtime:
 Logs2/t423-s12-monitor-layout-r1.stdout.log. Real NTMon interaction is pending.
 
 The next stricter real-guest concurrent-output check FAILS. Entrypoint:
-tests/observation/verify-native-guest-output.ps1 with Observer S11/input-r4,
+test/observation/verify-native-guest-output.ps1 with Observer S11/input-r4,
 PackageRoot Z:, ProcessPackageRoot S12/p, BuildRoot S12/concurrent-r1 and prefix
 t423-s12-concurrent-r1. The native target returns 37, but the visible snapshot
 contains NATIVE-BASE, NATIVE-DURING-DOS, DOS-INTERVAL and DOS-RESUMED, missing
@@ -924,7 +924,7 @@ Recent retained narrower evidence, independently reread:
 
 ### Can the ConPTY owner also access its real Console?
 
-Test source: tests/observation/conpty_owner_attach_test.c. Reuses current
+Test source: test/observation/conpty_owner_attach_test.c. Reuses current
 native_conpty.c and native_console_launch.c mechanics without changing them.
 MSVC x86 /MT /W4 /std:c11; sources/include are repository inputs; objects and
 test.exe reside in build/M0-T423/S12/owner-attach-r4. Runtime command:
@@ -966,7 +966,7 @@ channel; source presence is not runtime closure. The old frontend conversion
 must be removed at switchover, not kept as a parallel provider.
 
 Reproducer: MSVC x86 /MT /W4 /WX /std:c11 /Isrc, compiling
-tests/observation/ntw32_text_frame_test.c, src/ntw32-exe/text_frame.c and the
+test/observation/ntw32_text_frame_test.c, src/ntw32-exe/text_frame.c and the
 unchanged src/ntcon-exe/console_video.c, with /Fo and /Fe under
 build/M0-T423/S12/text-frame-r1. Run test.exe with the new log path
 O:/winnt/Logs2/t423-s12-text-frame-r1.log. Result: 46 checks, zero failures.
@@ -1097,7 +1097,7 @@ Native identity is an execution identity and does not require a frontend
 process or generation. No native admission RPC is selected yet: this is a
 production binding change with unit coverage, not connected NTW32 completion.
 
-Expanded tests/adapter-basesrv/base_reservation_test.c checks native creation,
+Expanded test/adapter-basesrv/base_reservation_test.c checks native creation,
 invalid kind/missing identity rejection, launcher generation, VDM-only refusal
 without consumption, typed claim, claimed-worker survival, wrong-generation
 reclaim/release and final registry emptiness. Existing DOS/WOW and stream/EOF
@@ -1127,7 +1127,7 @@ explicitly select DOS kind. Native management stop returns ERROR_NOT_READY
 until its real Console-close control is bound, never kills only the carrier
 and falsely reports session closure.
 
-Added --native-worker to tests/adapter-basesrv/base_service_reservation_test.c.
+Added --native-worker to test/adapter-basesrv/base_service_reservation_test.c.
 It tests wrong generation, duplicate reservation, prepare/claim, copied monitor
 identity, absent frontend and absent guest records, launcher disconnect, worker
 RPC disconnect, retained live watch, actual test-process death and final empty
@@ -1184,7 +1184,7 @@ The selected production NTW32 entry still needs migration to this RPC.
 
 This result supersedes the earlier first-create/concurrent-admission pending
 statement, not the remaining presentation and retirement gates. The reproducible
-case is tests/app/base_client_rpc_first_test.c --ntw32-public-startup. A fresh
+case is test/app/base_client_rpc_first_test.c --ntw32-public-startup. A fresh
 candidate broker and fixture-registered frontend/execution capability start two
 real run16.exe processes suspended, then resume both. No native worker exists
 before admission. Each public launcher selects/reserves/prepares/submits through
@@ -1208,7 +1208,7 @@ No new wire format or frontend font mapper was added. Geometry-change errors
 remain explicit; all local buffers and the capture lease are released on errors.
 This source is not yet called by the independent worker loop.
 
-tests/observation/ntw32_presentation_test.c adds a real active Console buffer
+test/observation/ntw32_presentation_test.c adds a real active Console buffer
 with a known Z cell, cursor at 3,2 and caller-provided font bytes. It captures
 and transmits to the existing production video receiver over a real named pipe,
 then asserts cell/cursor/font identity alongside retained transport negatives.
@@ -1700,7 +1700,7 @@ The full 17-case suites must be rerun on the final candidate before delivery.
 
 ## Actual surviving Console client and retirement workload
 
-tests/observation/ntw32_surviving_client_test.c is an ordinary native workload,
+test/observation/ntw32_surviving_client_test.c is an ordinary native workload,
 not a product helper/provider. The direct target starts a child on its real
 inherited Console and exits 37. The child waits on a pinned parent process
 handle, verifies 37, prints a prompt, reads `survivor` from the Console and
@@ -1754,12 +1754,12 @@ This finite binding uses the documented distinction between detaching and
 with actual host verification below rather than assuming the API call suffices.
 
 Build logs: build/M0-T423/S12/close-graph-r19.log, close-build-r19.log and
-close-build-r20.log. tests/observation/ntw32_close_test.c exercises the real
+close-build-r20.log. test/observation/ntw32_close_test.c exercises the real
 production close function with an attached test client: hidden window,
 CTRL_CLOSE_EVENT receipt, client exit, window disappearance and repeated-close
 ERROR_INVALID_HANDLE. O:/winnt/Logs2/t423-s12-close-r19.log passes.
 
-tests/observation/verify-ntw32-management.ps1 starts the ordinary candidate
+test/observation/verify-ntw32-management.ps1 starts the ordinary candidate
 run16 -> NTW32 -> CMD on a private desktop and invokes the same authenticated
 management RPC used by NTMON. It pins the worker and target process objects,
 waits for their exit and checks launcher completion. The management fixture now
@@ -2311,7 +2311,7 @@ pass; current candidate remains unpublished and the T/S remain open.
 ## Retired backend test cleanup r80
 
 Removed nineteen obsolete ConPTY/VT research/test sources and entry scripts
-from tests/observation after byte-identical recovery copies were verified in
+from test/observation after byte-identical recovery copies were verified in
 build/M0-T423/S12/retired-tests-r80. This includes uncommitted research, not just
 Git-recoverable baseline files. manifest.json records each SHA-256 and length;
 total saved content is 134506 bytes. Earlier S9/S11 references describe their
@@ -2413,7 +2413,7 @@ S7MOUSE.dll, MVDM_OBSERVER_MOUSE_RETIRE=1 and the named burst count:
   passes in 7547ms, callback-mask=7.
 
 Logs use t423-s12-retire-diagnostic-r84/r85/r86 in the same runtime log root.
-The independently authored tests/observation/window-mouse.asm gains optional
+The independently authored test/observation/window-mouse.asm gains optional
 diagnostic defines, while its default binary remains byte-identical:
 A60EDF938A866810CC3BD3D92800E72A5BEB73369C12580A14F1BEA8BA337E6A.
 Build: nasm -f bin with the above optional define and -o below

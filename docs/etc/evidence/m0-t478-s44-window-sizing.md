@@ -40,7 +40,7 @@ checkpoint; existing S43 release remains untouched.
 
 The diagnostic-only WOW32 build inserts read-only size observations around the
 existing DispatchClientMessage calls and after native creation. The recipe is
-`tests/observation/build-wow-sizing-diagnostic.ps1`; its two product-source
+`test/observation/build-wow-sizing-diagnostic.ps1`; its two product-source
 backups are restored byte-for-byte in finally. Its DLL is separately marked
 non-publishable. The ordinary WOW32 cache was subsequently rebuilt successfully
 from restored source; no production source or mirror difference is retained.

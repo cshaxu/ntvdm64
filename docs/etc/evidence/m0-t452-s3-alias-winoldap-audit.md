@@ -57,7 +57,7 @@ concurrency contract.
 
 ## Actual alias-owner evidence
 
-`tests/observation/verify-wow-module-alias-bounds.ps1` extracts the exact
+`test/observation/verify-wow-module-alias-bounds.ps1` extracts the exact
 production `wole2.c` CCPU40 command from
 `build/.ninja/msvc-x86-release`, recompiles that owner with the fixture, and
 runs it.  `build/t452-s3/alias-lifetime-r1/exit.txt` is `0`; the fixture

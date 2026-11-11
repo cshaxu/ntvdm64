@@ -69,7 +69,7 @@ actual exit and window assertions are unchanged. An x86 observer uses Sysnative
 for actual native64 CMD. No production protocol or runtime diagnostics added.
 
 Reproduction: set `MVDM_OBSERVER_SHORT_HISTORY=1`, run
-`tests/observation/verify-native-hook-chain.ps1` with RuntimeRoot
+`test/observation/verify-native-hook-chain.ps1` with RuntimeRoot
 `build/M0-T432/S3/r002-runtime`, Observer
 `build/M0-T432/S3/r001/console-startup-observer.exe`, NativeMachine x64,
 WindowObserver `build/M0-T432/S3/r001/worker-window-snapshot.exe` and fresh

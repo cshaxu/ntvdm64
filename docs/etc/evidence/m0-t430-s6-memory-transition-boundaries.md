@@ -39,7 +39,7 @@ protocol or scheduler. Existing commit/rollback semantics remain. Callers
 still must not retain a released lease pointer across slot reuse or epochs;
 this is not a concurrent lease API or stale-pointer generation scheme.
 
-`tests/session/guest_memory_lease_boundary_test.c` fails before the repair
+`test/session/guest_memory_lease_boundary_test.c` fails before the repair
 at line49/check5 (`build/M0-T430/S6/r001-lease-before/lease.exe`). Afterward,
 45 assertions pass: matching epochs, cross-context rejection with both
 providers unchanged, valid owner commit, forged/inaccessible pointers,
@@ -48,7 +48,7 @@ slots, rollback/reuse, teardown/no commit, repeated end and epoch rollover.
 The existing session-level lease test also passes unchanged.
 
 Reproduce using
-`tests/observation/verify-guest-memory-lease.ps1 -BuildRoot build/M0-T430/S6/<fresh>`.
+`test/observation/verify-guest-memory-lease.ps1 -BuildRoot build/M0-T430/S6/<fresh>`.
 `r006-lease-replay` retains build/result/source+binary identity for both tests.
 `r005-lease-replay` is a failed runner quoting attempt, not a product failure.
 
@@ -125,7 +125,7 @@ algorithms are not rewritten. No new SoftPC import is warranted by this proof.
 | Concurrent notification | Extract current complete atomic functions and actual local masks verbatim. Two real Windows producers raise distinct bits for4096 rounds;8192 raises, selective consumption preserves the other bit; timer clear preserves other notifications. This is adapter synchronization proof, not a guest IRQ throughput/SLA measurement. |
 
 Reproduce notification with
-`tests/observation/verify-ccpu-notification.ps1 -BuildRoot build/M0-T430/S6/<fresh>`.
+`test/observation/verify-ccpu-notification.ps1 -BuildRoot build/M0-T430/S6/<fresh>`.
 `r018-notification-final` passes and records source/extraction/fixture/EXE hashes.
 `r016-notification` passed the earlier fixture revision. Actual CPU/PIC
 `r022-cpu-replay` passes and retains source/EXE/linked-provider identities.
@@ -133,7 +133,7 @@ The first new PIC run crashed because the fixture omitted InitializeIcaLock;
 the worker's original initialization was not missing. Only test setup changed.
 
 Reproduce selected guest cases with
-`tests/observation/verify-memory-transition-guest.ps1 -RuntimeRoot
+`test/observation/verify-memory-transition-guest.ps1 -RuntimeRoot
 build/M0-T430/S6/r007-runtime -Observer
 build/M0-T427/S4/r049/console-startup-observer.exe -BuildRoot
 build/M0-T430/S6/<fresh> -Case <case>`.

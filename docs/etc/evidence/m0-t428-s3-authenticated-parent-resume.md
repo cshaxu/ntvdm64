@@ -56,7 +56,7 @@ changed, so protocol versions are unchanged. Candidate runtime is r003.
 | Contract | Exact entry/evidence | Result |
 | --- | --- | --- |
 | Origin and completion/negative checks | `--parent-resume-origin` in production-linked service fixture; r006 | Passed, including exact public resume consumption and duplicate rejection, wrong root, failed/missing origin, native selection and DOS no-op. Real pinned fixture processes; no global RPC endpoint. |
-| Retained service behavior | `tests/observation/verify-service-fixtures.ps1`, r006 | 23 cases passed, 4442ms. Native-command capability aliasing still asserted against worker-issued origin; old launcher-origin expectation corrected, not dropped. |
+| Retained service behavior | `test/observation/verify-service-fixtures.ps1`, r006 | 23 cases passed, 4442ms. Native-command capability aliasing still asserted against worker-issued origin; old launcher-origin expectation corrected, not dropped. |
 | Product matrix | `Invoke-ProductVerification.ps1 -Suite Product`, r004 | Passed Console17 (66956ms), Window17 (75194ms), three retained WOW frontiers (67399ms); total 215377ms. |
 | Native-to-DOS-to-native I/O | `verify-broker-io-handoff.ps1 -Case nested-console` and `-Case nested-window`, r012 | Both passed: fresh DOS banner, real MEM output, executed parent-return marker and exit23; Window additionally verifies CAF. |
 | Coherent publication | r008 `publish.ps1`, tested r004 manifest, r008 recovery/published manifests | Eight files published to O:/winnt/system32; hashes equal r003 candidate. Guest media/configuration untouched. |

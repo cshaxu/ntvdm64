@@ -30,7 +30,7 @@ fs.writeFileSync(path.join(build, 'build.ninja'), [
   'build obj/guest_memory_lease.obj: cc $root/src/session/guest_memory_lease.c',
   'build obj/session.obj: cc $root/src/session/session.c',
   'build obj/location.obj: cc $root/src/ntvdm-exe/softpc/mvdm_guest_location.c',
-  'build obj/fixture.obj: cc $root/tests/ntvdm/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c',
+  'build obj/fixture.obj: cc $root/test/adapter-mvdm-host-out/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c',
   'build dem_file_lifecycle_lease_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/fixture.obj',
   'default dem_file_lifecycle_lease_fixture.exe',
   ''

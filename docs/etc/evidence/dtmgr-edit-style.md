@@ -2,7 +2,7 @@
 
 Current naming: the owner renamed the component to `src/monitor-exe` and
 the product to `monitor.exe`. The current test entry is
-`tests/observation/verify-monitor-layout.ps1`; retained names/hashes below
+`test/observation/verify-monitor-layout.ps1`; retained names/hashes below
 identify historical dtmgr artifacts, not the renamed candidate.
 
 ## Request and boundary
@@ -45,7 +45,7 @@ character tables; matching layout follows the owner's explicit row allocation.
 
 ## Verification
 
-Run `powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/verify-dtmgr-layout.ps1`
+Run `powershell -NoProfile -ExecutionPolicy Bypass -File test/observation/verify-dtmgr-layout.ps1`
 from the repository. The script freshly generates the current RPC client and
 compiles/links dtmgr and its fixture using VS 2022 MSVC Win32/x86 /MT, /W4,
 /we4013 and SDK 10.0.22621.0. Outputs stay in

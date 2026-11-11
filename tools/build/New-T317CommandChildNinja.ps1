@@ -36,7 +36,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/command_process_compat_fixture.c
+build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/command_process_compat_fixture.c
 build obj/command_process_compat.obj: cc `$root/src/ntvdm-exe/win32/command_process_compat.c
 build command_process_compat_fixture.exe: link obj/fixture.obj obj/command_process_compat.obj
 build test: run command_process_compat_fixture.exe

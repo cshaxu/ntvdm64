@@ -8,7 +8,7 @@ function bodies. It uses the existing formal x86 CCPU40 graph's compiler flags,
 MSVC 2022, and a test-only declaration boundary. All generated files remain in
 `build/M0-T412/S1/base-owner`. No probe executable is published.
 
-The tracked `tests/broker/source_compile_probe.h` is NOT an admitted product
+The tracked `test/broker/source_compile_probe.h` is NOT an admitted product
 ABI or a CSR implementation. It supplies original-shaped NT declarations,
 replaces only the NT4 TEB request-thread accessor with an unresolved external,
 and leaves the excluded original RTL inline unresolved. The unused DFS include

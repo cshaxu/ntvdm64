@@ -229,8 +229,8 @@ No source import, mirror edit, guest edit or other-worktree change is needed.
 ### Reproducible P3 checks
 
 The service42 matrix adds --frontend-chains in
- tests/adapter-basesrv/base_service_fixture.c, selected by the production-archive
-reservation test and tests/observation/verify-service-fixtures.ps1. It exercises
+ test/adapter-basesrv/base_service_fixture.c, selected by the production-archive
+reservation test and test/observation/verify-service-fixtures.ps1. It exercises
 actual context acquisition/binding, resident native worker selection and frontend
 request admission for two independent chains, instance identities above 32 bits,
 both close orders, whole-host rundown, intermediate-host rundown, live upstream

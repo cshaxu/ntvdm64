@@ -42,6 +42,6 @@ not behavior.
 ## Reproduction
 
 ```powershell
-& .\tests\observation\verify-wow32-registration-surface.ps1 `
+& .\test\observation\verify-wow32-registration-surface.ps1 `
   -RepositoryRoot (Get-Location).Path
 ```

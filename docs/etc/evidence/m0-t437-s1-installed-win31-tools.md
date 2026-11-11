@@ -61,7 +61,7 @@ Fresh fixtures were copied from the existing recoverable Win31 input only:
   preparation produced candidate hashes, `KRNL386.ORIG`/`WIN386.ORIG`, the
   released driver, `CONFIG.NT`, `AUTOEXEC.NT`, and only
   `WINSTD.CMD/.PIF` plus `WIN386.CMD/.PIF`;
-- `tests/component-integration/win31_launch_profile_test.ps1` passed before
+- `test/component-integration/win31_launch_profile_test.ps1` passed before
   and after an idempotent second launch application;
 - a candidate-without-recovery fixture returned `1` and did not create
   `PATCH`;

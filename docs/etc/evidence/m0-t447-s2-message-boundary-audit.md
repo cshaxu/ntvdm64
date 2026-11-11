@@ -516,7 +516,7 @@ These are impact boundaries, not authorization to rewrite their algorithms.
 Preserve their numeric address and commit/discard contracts and include the
 existing DOS/redirector regressions when this shared dependency changes.
 
-Read tests/session/guest_memory_lease_test.c,
+Read test/session/guest_memory_lease_test.c,
 guest_memory_lease_boundary_test.c and the T335 callback-frame fixture.
 Existing tests cover ordinary hydrated WRITE, discard, overflow, invalid
 access, foreign/forged lease pointers, read/write failure, slot exhaustion,
@@ -1375,7 +1375,7 @@ and refresh, including callback refresh. Zero is valid; GetWindowLong failure
 is checked before writing the guest snapshot. It never relocates or aliases
 the numeric ID. This is project-owned code only, with no new mirror diff.
 
-`tests/mvdm-host/wow_page_domain_fixture.c` now creates an actual native child
+`test/mvdm-host/wow_page_domain_fixture.c` now creates an actual native child
 and checks initial 0x8123, updated 0xfedcba98 through callback publication,
 zero through refresh, and unchanged zero top-level menu field. The existing
 CCPU/SAS domain fixture runs these checks with real page-domain storage,
@@ -2878,7 +2878,7 @@ No fresh application launch, runtime edit or new acceptance pass in this review.
 
 ### Real Win16 CBT acceptance result
 
-Implemented independent tests/observation/win16_hook_probe.asm and
+Implemented independent test/observation/win16_hook_probe.asm and
 verify-win16-hook-probe.ps1. No original guest is built or modified. The
 probe imports the audited original APIs, uses current-task WH_CBT and
 MakeProcInstance, queries class names before creation callbacks finish,

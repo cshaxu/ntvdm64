@@ -16,7 +16,7 @@ already chosen a monochrome terminal presentation?
 - Published S21 baseline `9610f9e19`; no production source was changed.
 - `%SystemRoot%\System32\edit.exe`, file version 1.2.1.0.
 - New checked-in probe:
-  `tests/observation/ntw32_native_colour_probe.c`.
+  `test/observation/ntw32_native_colour_probe.c`.
 - Production NTW32 sources: `console_state.c`, `text_frame.c` and
   `presentation.c`; NTCON `window_frame.c`.
 

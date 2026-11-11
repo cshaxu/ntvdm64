@@ -9,7 +9,7 @@ observes the real modal dialog, closes it with `WM_CLOSE`, then verifies the
 parent is responsive again. No guest binary, guest source, or desktop/UI
 automation is used.
 
-`tests/observation/verify-wow-sol-options.ps1` has explicit ordinary and
+`test/observation/verify-wow-sol-options.ps1` has explicit ordinary and
 `-CaptureFault` modes. The latter retains debugger first-chance attribution;
 ordinary mode is the completion witness because a debugger is not normal host
 message delivery.

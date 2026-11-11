@@ -12,6 +12,11 @@ alone does not determine the test type. Test-only compiler seams are local to
 the owning test, while production integration and policy remain outside generic
 library units.
 
+Repository test sources have one root: `test/`. Do not recreate `tests/`.
+Compiler objects and diagnostic logs belong under their owned `build/` directory,
+not the repository root; specify compiler output paths explicitly. Installed
+runtime fixture directories such as `O:/winnt/tests` are a separate contract.
+
 ## T474 BaseSrv source boundary
 
 Shared BaseSrv clients, scope and copied transport live in common/base_srv;

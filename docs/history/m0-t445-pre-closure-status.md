@@ -26,7 +26,7 @@ See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 | Objective | Retain delivered20px renderer/menu/About fixes; restore W16Style demo geometry to20px proportions and remove the owner-retired title prefix from all styled windows, preserving original captions and policy propagation; verify and republish. |
 | Non-goals | No guest/mirror edits, new public option, RPC redesign, global theme mutation, NTCON styling, ntvdm.exe appearance owner or unrelated WOW recovery. |
 | Reference Baseline | Delivered/pushed S8 466d816bc, thirteen published images. Owner confirms activation, not complete visual acceptance. |
-| Files And ABI Surface | src/ntw16s-dll, src/nthook32-dll (both widths), src/wow32-dll, thin W16Style consumer as needed, tests/build/publication and documents; local DLL ABI only, no wire changes. |
+| Files And ABI Surface | src/ntw16s-dll, src/nthook32-dll (both widths), src/wow32-dll, thin W16Style consumer as needed, test/build/publication and documents; local DLL ABI only, no wire changes. |
 | Applicable Rules | All authorities; background owned build/tests; preserve unrelated changes; no security bypass. |
 | Verification | Original S8 gates plus20px raster/metrics checks, actual WINMINE hover and About window/process/call evidence; background probes, coherent thirteen-image publication, governance and review. |
 | Expected Markers |20px title/menu/controls and matching demo geometry; application captions unchanged with no generated prefix; actual attachment/propagation proved independently; no host menu overlay or guest/mirror diff. |
@@ -147,7 +147,7 @@ retains delivery and scope. S5 subsequently moved the accepted core into DLLs.
 | Objective | Measure host Console VT standard/256/RGB conversion and verify production capture, frame and Console/Window fidelity to the resulting indexed cells/palette. |
 | Non-goals | No query responder, environment mutation, RGB cell protocol, second VT parser/quantizer, ConPTY, guest/mirror change or lifecycle redesign. |
 | Reference Baseline | Owner-accepted `fb7650ce0`, release 0.0.444, protocol 45, S1 r115/r116/r119 gates. S2 admission at `781830378` has no product changes. |
-| Files And ABI Surface | Test sources/scripts under tests/, indexed evidence and governance; existing native capture/packer and frontend presentation owners, no ABI change. |
+| Files And ABI Surface | Test sources/scripts under test/, indexed evidence and governance; existing native capture/packer and frontend presentation owners, no ABI change. |
 | Applicable Rules | Execution/architecture/coding/document/source authorities; background builds/tests, owned processes, no subst or computer use. |
 | Verification | Real ordinary Console oracle; foreground/background standard/bright/256/RGB, reset, fragmented writes, VT on/off, custom palette, raw file/pipe bytes; production packing/decoding/Console projection and Window colours. Reuse unchanged S1 gates explicitly; production repairs trigger full delivery gates. |
 | Expected Markers | Input sequence, observed cells/palette, frame and presentation agree; RGB loss is attributed to the API boundary, not invented frontend loss. |

@@ -20,7 +20,7 @@ rule run
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
-build obj/fixture.obj: cc `$root/tests/ntvdm/softpc/t280_s20_mvdm_guest_location_fixture.c
+build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c
 build bounded_copy_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/fixture.obj
 build test: run bounded_copy_fixture.exe
 default bounded_copy_fixture.exe

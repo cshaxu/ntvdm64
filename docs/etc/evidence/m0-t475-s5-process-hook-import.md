@@ -206,7 +206,7 @@ legacy fixtures and the test-only Detours implementation remain outstanding.
 
 The startup-only Win31 Console trace now uses the shared C trampoline
 transaction; it preserves logging, original call/result and LastError.
-`tests/observation/verify-console-trace-c.ps1` exercised real interception,
+`test/observation/verify-console-trace-c.ps1` exercised real interception,
 log content, the original function and LastError under x86 and x64 MSVC
 (`build/t475-s5/console-trace.process`, exit 0). A test-only NTVDM relink
 using the actual product object archive and the C trace also succeeded
@@ -415,12 +415,12 @@ does not prove these declarations useless in other OpenNT configurations.
 
 | Former path | Git blob | Blob SHA-256 |
 | --- | --- | --- |
-| `tests/component-integration/fixtures/t198_s12_native_composed_ud_fixture.cc` | `8fdea05006f4acb2567e2d6d4c19e184ce9c699c` | `f92856c62d314a9e9304947d994fd08f59faaad01096b0673968716a66ebebd6` |
-| `tests/component-integration/fixtures/t198_s18_native_dem_lifecycle_fixture.cc` | `ae67876c1fb0073acc6d7f071a88f8232526c37d` | `23044fbde5f00d0a081be886de0f657f791aba39d2308f1904f8b80a7def704b` |
-| `tests/component-integration/fixtures/t198_s18_native_dta_search_fixture.cc` | `90934f35db0e247c46f100cb6734f4d215dccf33` | `df3899458699cbe3e129066b83306236a234bfebe9d2f0ee17b78f1cca0b064b` |
-| `tests/component-integration/fixtures/t198_s20_native_dem_load_dos_fixture.cc` | `94a64b7dd92badd5494fc9e67cdb9993c4a8451b` | `9088743c8ab1cb7b75cbc703011e2fbfa933b946c9e3df45ae0dec3659131bc1` |
-| `tests/component-integration/fixtures/t198_s23_ntio_preentry_request_fixture.cc` | `181247580486126c43f9add512cea9f234287473` | `ad63116e63ac4ddf257d74aa61ed4de4bb815e8e638307aa3e75703f10fcf26f` |
-| `tests/legacy/opennt-bop/dpmi/t257_s3_dpmi_startup_session_fixture.cc` | `bdb159dee6b899e793cdc57d8f6547da7a2a2c91` | `5200329f13d8f5a5d15350a01254fc24edeb1b70273961a11d7fe507bc5e0bc0` |
+| `test/component-integration/fixtures/t198_s12_native_composed_ud_fixture.cc` | `8fdea05006f4acb2567e2d6d4c19e184ce9c699c` | `f92856c62d314a9e9304947d994fd08f59faaad01096b0673968716a66ebebd6` |
+| `test/component-integration/fixtures/t198_s18_native_dem_lifecycle_fixture.cc` | `ae67876c1fb0073acc6d7f071a88f8232526c37d` | `23044fbde5f00d0a081be886de0f657f791aba39d2308f1904f8b80a7def704b` |
+| `test/component-integration/fixtures/t198_s18_native_dta_search_fixture.cc` | `90934f35db0e247c46f100cb6734f4d215dccf33` | `df3899458699cbe3e129066b83306236a234bfebe9d2f0ee17b78f1cca0b064b` |
+| `test/component-integration/fixtures/t198_s20_native_dem_load_dos_fixture.cc` | `94a64b7dd92badd5494fc9e67cdb9993c4a8451b` | `9088743c8ab1cb7b75cbc703011e2fbfa933b946c9e3df45ae0dec3659131bc1` |
+| `test/component-integration/fixtures/t198_s23_ntio_preentry_request_fixture.cc` | `181247580486126c43f9add512cea9f234287473` | `ad63116e63ac4ddf257d74aa61ed4de4bb815e8e638307aa3e75703f10fcf26f` |
+| `test/legacy/opennt-bop/dpmi/t257_s3_dpmi_startup_session_fixture.cc` | `bdb159dee6b899e793cdc57d8f6547da7a2a2c91` | `5200329f13d8f5a5d15350a01254fc24edeb1b70273961a11d7fe507bc5e0bc0` |
 | `artifacts/mvdm-audit/shard-3/forcedos-context-probe.cpp` | `1ff025d17b42a51efcc126a5491e904b1d80a52b` | `030602a205746ee0cc867a87fc537791c23942e8d3ae16e627e15e0b4102d873` |
 | `src/non-mvdm/public/internal/base/inc/byteordr.hxx` | `009f56c5e0998f8a1aa331bb90bf937ad47be8ec` | `65c4e21cd6afbad1110847bc8398916b373e0fe9e848846dda9f4fe39d9d7589` |
 | `src/non-mvdm/public/internal/base/inc/propmac.hxx` | `30facf4a91f293b4a4a765c4f5d4885a577dcc16` | `59cdc637b1f9d7db0706d0292b2e5a9146ba270ea20b3014f201a1f50a1c2a41` |
@@ -559,7 +559,7 @@ close and returned exit code 0. This probe does not edit or save a document.
 ## WRITE edit and save comparison
 
 The owner excludes DOS4GW/NESticle from this acceptance. The enhanced
-`tests/observation/verify-wow-write-lifecycle.ps1` uses a private desktop and
+`test/observation/verify-wow-write-lifecycle.ps1` uses a private desktop and
 fresh physical package stage. For each of two successive WRITE sessions it
 posts a distinctive text marker to the document, invokes Save, enters a
 unique path within that stage, checks the resulting file bytes for the marker,

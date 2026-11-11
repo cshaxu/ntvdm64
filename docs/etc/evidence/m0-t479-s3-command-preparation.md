@@ -61,7 +61,7 @@ Implementer and reviewer are the same authorized main session, with a separate
 post-implementation diff/ownership review. Reviewed failure paths preserve
 errors, close partial duplicates, abort only an uncommitted suspended child,
 and leave successful lifecycle management to the caller/NTSRV. No shared-library
-source was forked. Runtime/header changes: +227/-16, net +211 lines; tests/build
+source was forked. Runtime/header changes: +227/-16, net +211 lines; test/build
 changes: +292/-1, net +291. Documentation/evidence and release binaries are
 separate from those counts. Mirror delta is +0/-0; no guest rebuild occurred.
 

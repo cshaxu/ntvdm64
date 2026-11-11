@@ -20,7 +20,7 @@ socket registry or network policy was added.
 All cases used the published `build/t467-s3/package-r2` package, immutable
 archive-derived `WINSOCK.DLL`, `console-startup-observer.exe`, a marker-owned
 physical stage, and the disposable NE witness
-`tests/observation/win16_winsock_async_probe.asm`.  Each observer reported
+`test/observation/win16_winsock_async_probe.asm`.  Each observer reported
 `result=exited`; each final guest record had `startup=0` and `errors=0`.
 
 | Case | Guest assertion | Result |

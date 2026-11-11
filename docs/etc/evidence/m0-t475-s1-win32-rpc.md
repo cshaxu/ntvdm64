@@ -9,8 +9,8 @@ Local binding and async completion moved to lib-win32/rpc. The service's local
 peer process matching was separated from its authentication and authorization:
 NTSRV still performs those checks first, then calls the extracted Windows RPC
 locality, PID, and process-liveness mechanism. Errors and output clearing are
-unchanged. `tests/app/win32_rpc_peer_test.c` covers eight success and refusal
-cases; `tests/app/common_rpc_binding_test.c` covers 42 checks and cleanup.
+unchanged. `test/app/win32_rpc_peer_test.c` covers eight success and refusal
+cases; `test/app/common_rpc_binding_test.c` covers 42 checks and cleanup.
 
 The NXVM import manifest records 52 files, including 44 mechanical include
 prefix adjustments. The previous upstream SHA-256 is retained per changed
@@ -96,9 +96,9 @@ are relocated under process-hook without byte changes; all eight files match
 the previous commit. `lib-process-hook.lib` is independently selected;
 `nthook-context.lib` no longer embeds Detours. The x64 hook graph selects
 the same source closure. Product builds and dependency negative controls pass.
-`tests/app/win32_process_hook_test.cpp` passed seven payload-only, native-width,
+`test/app/win32_process_hook_test.cpp` passed seven payload-only, native-width,
 cross-width, error and zero-error cases. The x86 and x64
-`tests/component-integration/nthook_install_test.cpp` fixtures each passed 118
+`test/component-integration/nthook_install_test.cpp` fixtures each passed 118
 assertions including nested propagation and rollback. Fresh x86/x64 product
 builds succeeded; all ten staged inputs/outputs matched, the 63 guest files
 and 274 NTVDM exports passed. Background command, PID, timing, exit and logs
@@ -133,7 +133,7 @@ thread-pool wait registration and terminated with 0xC000070A. That is a test
 input/runner failure, not product evidence. The fixture was corrected to use
 valid owned wait objects; failure injection now tests registration and drain
 errors without submitting an invalid kernel wait to the thread pool.
-`tests/app/win32_process_observation_test.c` passed 16 checks including blocked
+`test/app/win32_process_observation_test.c` passed 16 checks including blocked
 callback drain; the injected-failure fixture passed three; the renamed process
 attributes fixture passed 36 and process-hook seven. The x86 and x64 production
 `native-observation-fixture.exe` and `dos-observation-fixture.exe` each passed

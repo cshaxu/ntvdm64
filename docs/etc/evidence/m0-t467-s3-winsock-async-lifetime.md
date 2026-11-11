@@ -38,7 +38,7 @@ provider, host-wide registry or callback thread was added.
 ## Executed evidence
 
 The independent disposable NE witness
-`tests/observation/win16_winsock_async_probe.asm` uses immutable original
+`test/observation/win16_winsock_async_probe.asm` uses immutable original
 `WINSOCK.DLL`, a task-owned hidden USER window and the original ordinal-103
 `WSAAsyncGetHostByName("localhost")` path.  It is staged only into a physical
 isolated package; no guest image is modified.

@@ -16,7 +16,7 @@ writeFileSync(msvc, [
 ].join("\r\n") + "\r\n", "ascii");
 
 const sources = [
-  "tests/mvdm-host/xms/xms_init_fixture.c",
+  "test/mvdm-host/xms/xms_init_fixture.c",
   "src/mvdm-host/xms.486/xms.c",
   "src/mvdm-host/xms.486/xmsmemr.c",
   "src/mvdm-host/suballoc/suballoc.c",

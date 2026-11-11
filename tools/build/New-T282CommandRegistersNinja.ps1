@@ -30,7 +30,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/fixture.obj: cc `$root/tests/ntvdm/softpc/t282_s10_command_registers_fixture.c
+build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/softpc/t282_s10_command_registers_fixture.c
 build obj/registers.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_command_registers.c
 build command_registers_fixture.exe: link obj/fixture.obj obj/registers.obj
 build test: run command_registers_fixture.exe

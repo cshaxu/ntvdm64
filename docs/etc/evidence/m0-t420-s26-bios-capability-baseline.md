@@ -39,7 +39,7 @@ added.
 
 ## Real guest witness
 
-`tests/observation/bios_capability.asm`, built by
+`test/observation/bios_capability.asm`, built by
 `tools/build/Build-T420S26BiosGuestTest.ps1`, is a test-only COM image.  It
 uses the original ROM vectors/BOP bytes and does not install a handler or
 modify media.  Through the deployed formal package it produced:

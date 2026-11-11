@@ -14,9 +14,9 @@ below supersedes the initial pending-acceptance disposition, not its evidence.
 
 | Group | Actual path / contract | Isolation and present wait disposition |
 | --- | --- | --- |
-| Service fixtures | tests/adapter-basesrv/base_service_reservation_test.c and base_service_fixture.c; production archive registration, capability negatives, release/resume, completion, rundown, WOW late result | In-process service, PID-qualified pipes, private Desktop; safe bounded concurrency, no global RPC endpoint. |
+| Service fixtures | test/adapter-basesrv/base_service_reservation_test.c and base_service_fixture.c; production archive registration, capability negatives, release/resume, completion, rundown, WOW late result | In-process service, PID-qualified pipes, private Desktop; safe bounded concurrency, no global RPC endpoint. |
 | Retirement policy | Same fixture --frontend-authority and ntsrv lifecycle.c | Two real ten-second waits replaced by explicit time at the existing decision owner; production wrappers still use GetTickCount64. |
-| Real retirement wiring | tests/observation/verify-broker-retirement.ps1 | Global endpoint, serial. Still repeats workerless and empty grace; not yet optimized. Must retain real shutdown/receipt acknowledgement separately from clock assertions. |
+| Real retirement wiring | test/observation/verify-broker-retirement.ps1 | Global endpoint, serial. Still repeats workerless and empty grace; not yet optimized. Must retain real shutdown/receipt acknowledgement separately from clock assertions. |
 | Product Console17/Window17 | tools/audit/Verify-CommandExitStatus.ps1 | Global endpoint, serial. Existing output/exit, nested guest, failure assertions retained. No coverage removed. |
 | Relaunch and cooked return | verify-frontend-rapid-relaunch.ps1, verify-frontend-rapid-interactive.ps1, verify-frontend-relaunch.ps1 | Global endpoint, serial; retained immediate launch ordering. Fixed input pacing remains under review. |
 | Independent sessions and nested handoff | verify-ntvwm-management.ps1, verify-broker-io-handoff.ps1 | Real broker/session separation and final output barriers; retain. |
@@ -30,7 +30,7 @@ worker scheduling or frontend behavior change is admitted.
 
 ## Implementation and measurements
 
-New tests/observation/verify-service-fixtures.ps1 replaces the disposable S8
+New test/observation/verify-service-fixtures.ps1 replaces the disposable S8
 serial driver with a tracked bounded runner. It owns each observer, uses exact
 process completion rather than pacing sleeps, requires actual zero fixture exit
 and PASS assertions, and records hashes, per-case time and total elapsed time.
@@ -57,7 +57,7 @@ Commands (PowerShell 7, private unswitched Desktop):
 
 ```powershell
 cmd.exe /d /c build\M0-T424\S2\r001\run-ninja-parallel.cmd basesrv-service-reservation-test.exe ntsrv.exe
-pwsh -NoProfile -File tests/observation/verify-service-fixtures.ps1 -Observer build/M0-T425/S6/r005/observer.exe -Fixture build/M0-T424/S2/r001/basesrv-service-reservation-test.exe -LogRoot build/M0-T425/S9/r006/service-parallel -Concurrency 4
+pwsh -NoProfile -File test/observation/verify-service-fixtures.ps1 -Observer build/M0-T425/S6/r005/observer.exe -Fixture build/M0-T424/S2/r001/basesrv-service-reservation-test.exe -LogRoot build/M0-T425/S9/r006/service-parallel -Concurrency 4
 powershell -ExecutionPolicy Bypass -File tools/governance/Verify-DocumentationGovernance.ps1
 git diff --check
 ```

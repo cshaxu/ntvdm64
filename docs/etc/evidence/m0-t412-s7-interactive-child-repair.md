@@ -122,7 +122,7 @@ four Ninja jobs as above. `formal-build.log`, `final-build.log`,
 `rpc-test-build.log` and `observer-build.log` retain build evidence.
 The formal VdmTib storage gate passes. The service reservation fixture passes.
 
-`tests/app/base_client_rpc_first_test.c --reservation-parent`, linked against
+`test/app/base_client_rpc_first_test.c --reservation-parent`, linked against
 the formal RPC client and real server, adds three consecutive no-command Gets.
 Before server ownership repair it failed at repeat 0 with STATUS_UNSUCCESSFUL,
 last-error 6, despite a successful server dispatch. After repair it passes and

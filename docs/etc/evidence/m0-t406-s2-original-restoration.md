@@ -498,7 +498,7 @@ the last/first words, then request an INT 67h/57h four-byte conventional
 copy from frame:3ffe to ordinary guest RAM. This reverse mapping avoids
 accidentally passing through contiguous logical backing.
 
-Built with `nasm -f bin tests/observation/ems_mapping_probe.asm -o
+Built with `nasm -f bin test/observation/ems_mapping_probe.asm -o
 build/M0-T406/S2/r002-dib-restoration/emsprobe-window.com`;
 probe SHA-256 bd1916921a4cccf7c7b3c1c5d77fb609cfc89029d8f7627e34f8dbddab05cd0c.
 The isolated Q: package EXE hash is the published
@@ -581,7 +581,7 @@ physical-page translation table, not this new cross-window access binding.
 
 ### Native placeholder experiment
 
-Added tests/observation/placeholder_alias_probe.c, a standalone Win32
+Added test/observation/placeholder_alias_probe.c, a standalone Win32
 mechanism test, not a new production provider. It uses the documented
 [VirtualAlloc2](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc2),
 MapViewOfFile3 and

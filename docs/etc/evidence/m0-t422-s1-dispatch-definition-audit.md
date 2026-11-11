@@ -46,7 +46,7 @@ table membership does not override it.
 ## Reproduction
 
 ```powershell
-& .\tests\observation\verify-wow32-dispatch-definition-closure.ps1 `
+& .\test\observation\verify-wow32-dispatch-definition-closure.ps1 `
   -RepositoryRoot (Get-Location).Path
 ```
 

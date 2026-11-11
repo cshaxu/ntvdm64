@@ -28,7 +28,7 @@ The checked-in command was run from the configured modern PowerShell runner
 against the sealed T464 package:
 
 ```powershell
-pwsh -NoProfile -File tests/observation/verify-win16-message-probe.ps1 `
+pwsh -NoProfile -File test/observation/verify-win16-message-probe.ps1 `
   -PackageRoot build/t464-s2/package-r5 `
   -Observer build/.ninja/msvc-x64-release/message-probes/console-startup-observer.exe `
   -CompilerDriver build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd `

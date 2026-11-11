@@ -33,7 +33,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/vdm_control_fixture.obj: cc `$root/tests/ntvdm/monitor/vdm_control_fixture.c
+build obj/vdm_control_fixture.obj: cc `$root/test/adapter-mvdm-host-out/monitor/vdm_control_fixture.c
 build obj/vdm_control.obj: cc `$root/src/ntvdm-exe/monitor/source/vdm_control.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c

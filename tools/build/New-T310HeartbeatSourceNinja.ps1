@@ -70,7 +70,7 @@ $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' l
 $graph.Add('rule run')
 $graph.Add('  command = $in')
 $graph.Add('build obj/nt_timer.obj: cc ' + (NinjaPath (Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_timer.c')))
-$graph.Add('build obj/softpc_delay_heartbeat_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/softpc_delay_heartbeat_fixture.c')))
+$graph.Add('build obj/softpc_delay_heartbeat_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/softpc_delay_heartbeat_fixture.c')))
 $graph.Add('build softpc-delay-heartbeat-fixture.exe: link obj/nt_timer.obj obj/softpc_delay_heartbeat_fixture.obj')
 $graph.Add('build verify: run softpc-delay-heartbeat-fixture.exe')
 $graph.Add('default verify')

@@ -58,7 +58,7 @@ $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $load=if($FirstDosBeforeSecond){"$dest\PATCH\B.PIF"}else{"$dest\PATCH\A.PIF $dest\PATCH\B.PIF"}
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$load")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY $([int][bool]$DosOnly)`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS $([int]($FirstExit -eq 'Dos'))`n%define FIRST_DOS_BEFORE_SECOND $([int][bool]$FirstDosBeforeSecond)`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$asm="%define MOUSE_MENU $([int][bool]$MouseMenu)`n%define DOSONLY $([int][bool]$DosOnly)`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS $([int]($FirstExit -eq 'Dos'))`n%define FIRST_DOS_BEFORE_SECOND $([int][bool]$FirstDosBeforeSecond)`n"+(Get-Content "$repo/test/observation/win31_startup_contract.asm" -Raw)
 $actions=Get-Content "$PSScriptRoot/editor-actions.inc" -Raw
 $asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
 $asm=$asm.Replace('code_end:',(Get-Content "$PSScriptRoot/editor-routines.inc" -Raw)+"`ncode_end:")
@@ -142,6 +142,6 @@ if($SaveWitness){
  ConvertTo-Json|Set-Content "$task/editor-result.json"
 Write-Output "PASS dual editor keyboard/menu/normal-exit; saved-content=$([bool]$SaveWitness); mouse-Exit=$([bool]$MouseMenu)"
 } finally {
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  Remove-OwnedGuestProbeCopy $dest $task $copy.Source
 }

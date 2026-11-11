@@ -31,13 +31,13 @@ is synchronous: no pointer, object table or stack `METADATA` survives
 
 ## Public-host capability witness
 
-`tests/adapter-mvdm-host-out/wow/wow_metafile_host_fixture.c` is intentionally
+`test/adapter-mvdm-host-out/wow/wow_metafile_host_fixture.c` is intentionally
 not an extraction of `wgmeta.c`. It proves the actual modern public APIs used
 by the retained original body are available and coherent: an x86 `/MT` run
 creates a classic metafile, gets and sets its bits, copies and reloads it,
 plays it into a bitmap, enumerates records, and confirms zero-bit restore and
 null playback fail. The checked-in entry
-`tests/observation/verify-wow-metafile-host.ps1` recorded at
+`test/observation/verify-wow-metafile-host.ps1` recorded at
 `build/t456-s3/metafile-host-r3`:
 
 ```

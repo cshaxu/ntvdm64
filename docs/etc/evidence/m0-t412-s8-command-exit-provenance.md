@@ -111,12 +111,12 @@ Build stdout/stderr stays in that build root.
 
 Retained checks:
 
-- `tests/app/command_exit_image_test.mjs COMMAND.COM original-tcode.asm`
+- `test/app/command_exit_image_test.mjs COMMAND.COM original-tcode.asm`
   (invoke with Node and the full input paths above): image/source proof.
 - `basesrv-service-reservation-test.exe`: first command result 7 is queried
   after its parent wakes; a distinct later task returns 0, not stale 7.
   Log `O:\winnt\logs\m0-t412-s8-service-reservation.txt` passes.
-- Build `tests/observation/console_startup_observer.c` with MSVC /W4 /MT,
+- Build `test/observation/console_startup_observer.c` with MSVC /W4 /MT,
   dbghelp.lib and user32.lib. The only observer change adds slash's set-1
   scan code 35h, enabling actual `cmd /c exit 7` keyboard input.
 - `tools/audit/Verify-CommandExitStatus.ps1 -Observer <build observer.exe>

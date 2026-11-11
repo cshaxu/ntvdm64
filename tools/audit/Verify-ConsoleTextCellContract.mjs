@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const read = name => fs.readFileSync(name, 'utf8').replaceAll('\r\n', '\n');
 const painter = read('src/mvdm-host/softpc.new/host/src/nt_cga.c');
 const adapter = read('src/ntvdm/win32/console_compat.c');
-const fixture = read('tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c');
+const fixture = read('test/adapter-mvdm-host-out/win32/console_input_contract_fixture.c');
 const graph = read(process.argv[2]);
 const flags = graph.match(/^host_cflags = (.*)$/m)?.[1];
 assert(flags?.includes('/DCPU_40_STYLE') && flags.includes('/DC_VID'));

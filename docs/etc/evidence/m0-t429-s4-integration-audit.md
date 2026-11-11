@@ -31,7 +31,7 @@ boundary before T closure. No S4 result is claimed at admission.
 | Preserve exact cells/fonts/attributes/cursor and failures | S3 r005 actual importer, public channel/commit/abort/EOF/handle tests, next-frame CP437/850 refresh; conversion fault is explicitly test-injected. All bodies and linked dependencies remain unchanged. |
 | Preserve complete product behavior | S3 r009 Console17/Window17 plus retained WOW frontiers and r011 deployed smoke; eight manifest hashes match S4. Fresh integration below supplements, rather than repeats/relabels, these passes. |
 | Preserve authentic shutdown/completion | S2 priority fixture/shared shutdown37, real close4, unexpected failure and isolation evidence; unchanged worker/common/service implementations. S4 separately exercises the real wiring with the new frontend. |
-| No production measurement/helper/ownership leak | Only S2 normal diagnostic-selection/close-ordering and S3 frame-local query changes are production diffs; wrappers stay under tests/build, not deployed. APP/RPC/I/O unchanged. |
+| No production measurement/helper/ownership leak | Only S2 normal diagnostic-selection/close-ordering and S3 frame-local query changes are production diffs; wrappers stay under test/build, not deployed. APP/RPC/I/O unchanged. |
 
 Incremental formal x86 graph check after S4 admission reports `ninja: no work
 to do` for all six EXEs. S3 r009's eight-file manifest, r010 publication,
@@ -80,7 +80,7 @@ therefore leak into a later Console-only Ctrl+Q fixture; observed prompt input
 also cannot stand in for its legacy fullscreen/paced input contract.
 r003 diagnoses the actual native API, not an assumed environment string.
 The reproducible `/MT /W4 /WX` x86 source/runner is now
-`tests/observation/observer_empty_environment_probe.c` and
+`test/observation/observer_empty_environment_probe.c` and
 `verify-observer-empty-environment.ps1 -BuildRoot build/M0-T429/S4/r005`:
 empty gives needed1/error0/read0, explicit removal gives needed0/error203/read0.
 Its sole temporary variable is owned/checked and deleted finally; this diagnostic

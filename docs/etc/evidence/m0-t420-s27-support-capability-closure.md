@@ -34,7 +34,7 @@ profile exclusion, rather than a fabricated environment workload.
 
 ## Real guest witness
 
-`tests/observation/support_capability.asm`, built by
+`test/observation/support_capability.asm`, built by
 `tools/build/Build-T420S27SupportGuestTest.ps1`, is a test-only COM image.  It
 does not install handlers, mutate media, or use a CPU30 path.  The formal
 deployment produced:

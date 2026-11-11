@@ -49,7 +49,7 @@ console-frame-failure-test.exe console-channel-lifetime-test.exe
 frontend-text-handoff-test.exe console-video-test.exe` succeeds. Existing C4996
 library warnings and previously present fixture warnings remain; no new warning
 is attributed to the production change. The new fixture compiles with `/W4 /WX`
-via `pwsh -File tests/observation/build-frame-codepage-test.ps1
+via `pwsh -File test/observation/build-frame-codepage-test.ps1
 -BuildRoot build/M0-T429/S3/r003`. r001 records its initial narrowing-constant
 warning, fixed without disabling warnings; r002 records missing fixture link
 dependencies, supplied from the actual cache. Neither failed attempt is a pass.

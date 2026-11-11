@@ -20,7 +20,7 @@ lifted unchanged into `service_internal.h`; the local VDM admission structure
 stays in `worker_registry.c`. Comments/includes/prototypes move with their
 implementation; the guarded USER hook definition moves to service core.
 
-`tests/component-integration/verify-ntsrv-service-separation.mjs` compares every
+`test/component-integration/verify-ntsrv-service-separation.mjs` compares every
 body and signature with the accepted commit, verifies eight exact state layouts,
 original/public contracts and one fixture provider. Its negative controls
 reject changed bodies/signatures, duplicate providers and missing modules.

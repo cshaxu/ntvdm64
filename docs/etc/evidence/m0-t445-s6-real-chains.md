@@ -115,7 +115,7 @@ not full-package acceptance or publication.
 
 ## Original WinExec guest-child probe
 
-The independently authored `tests/observation/win16_style_parent.asm` is a
+The independently authored `test/observation/win16_style_parent.asm` is a
 disposable NE test, not rebuilt/patched original media. It reuses the existing
 independent directory-probe header shape. Its imports are original KERNEL
 InitTask91, WinExec166 and USER InitApp5, verified against the selected mirror

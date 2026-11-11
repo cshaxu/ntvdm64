@@ -87,7 +87,7 @@ process itself returns zero when that report is a pass.
 
 ## INT 10 text-write and scroll witness
 
-`tests/observation/video_int10_writer.asm` is a test-only DOS COM fixture.
+`test/observation/video_int10_writer.asm` is a test-only DOS COM fixture.
 It invokes the selected worker's original INT 10 `AH=09h` attributed-write
 service, then `AH=06h` upward-scroll service over the same two-row rectangle,
 and finally uses `AH=0Eh` teletype for a post-scroll video marker. It does not
@@ -127,7 +127,7 @@ writer witness; the full matrix remains a separate S23 closure requirement.
 
 ## Direct C-VID text-memory witness
 
-`tests/observation/video_direct_vram.asm` is the complementary test-only DOS
+`test/observation/video_direct_vram.asm` is the complementary test-only DOS
 COM fixture.  It first asks the original INT 10 mode service for mode 3 so the
 selected original text update state is established.  It then writes directly
 to `B800:` with `REP STOSW`, reads every `VVVV` cell back through that same

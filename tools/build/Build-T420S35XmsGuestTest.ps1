@@ -21,21 +21,21 @@ if (!$build.StartsWith($buildBase + [IO.Path]::DirectorySeparatorChar,
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 $nasm = Get-Command -Name $NasmExecutable -ErrorAction Stop
 New-Item -ItemType Directory -Path $build | Out-Null
-$repeatText = [IO.File]::ReadAllText((Join-Path $repository 'tests\observation\xms_repeat.bat'))
+$repeatText = [IO.File]::ReadAllText((Join-Path $repository 'test\observation\xms_repeat.bat'))
 [IO.File]::WriteAllText((Join-Path $build 'R35.BAT'), ($repeatText -replace '\r?\n', "`r`n"), [Text.Encoding]::ASCII)
 $output = Join-Path $build 'X35.COM'
-& $nasm.Source -f bin -o $output (Join-Path $repository 'tests\observation\xms_capability.asm')
+& $nasm.Source -f bin -o $output (Join-Path $repository 'test\observation\xms_capability.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM S35 XMS fixture failed: $LASTEXITCODE" }
 $profileDefines = @('-DUMB_PROFILE')
 if (!$ReserveInt15) { $profileDefines += '-DDEFAULT_INT15' }
-& $nasm.Source -f bin @profileDefines -o (Join-Path $build 'U35.COM') (Join-Path $repository 'tests\observation\xms_capability.asm')
+& $nasm.Source -f bin @profileDefines -o (Join-Path $build 'U35.COM') (Join-Path $repository 'test\observation\xms_capability.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM S35 profile fixture failed: $LASTEXITCODE" }
 $driverDefines = @()
 if ($StartupFault) { $driverDefines += '-DSTARTUP_FAULT' }
-& $nasm.Source -f bin @driverDefines -o (Join-Path $build 'X35UMB.SYS') (Join-Path $repository 'tests\observation\xms_umb_driver.asm')
+& $nasm.Source -f bin @driverDefines -o (Join-Path $build 'X35UMB.SYS') (Join-Path $repository 'test\observation\xms_umb_driver.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM S35 UMB boot fixture failed: $LASTEXITCODE" }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\public\internal\windows\inc`" `"$repository\tests\observation\xms_profile_builder.c`" /Fo`"$build\profile.obj`" /Fe`"$build\profile.exe`""
+$compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\public\internal\windows\inc`" `"$repository\test\observation\xms_profile_builder.c`" /Fo`"$build\profile.obj`" /Fe`"$build\profile.exe`""
 cmd.exe /d /s /c $compile
 if ($LASTEXITCODE -ne 0) { throw "S35 profile builder failed: $LASTEXITCODE" }
 $profileArguments = @($build, $RuntimeTestRoot)
@@ -46,7 +46,7 @@ if (!$ReserveInt15) {
 if ($LASTEXITCODE -ne 0) { throw "S35 PIF generation failed: $LASTEXITCODE" }
 [ordered]@{
     schema = 'm0.t420.s35.xms-guest.v1'
-    source = 'tests/observation/xms_capability.asm'
+    source = 'test/observation/xms_capability.asm'
     int15ReservedKb = $(if ($ReserveInt15) {128} else {0})
     startupFault = [bool]$StartupFault
     lowDos = [bool]($LowDos -or $ReserveInt15)

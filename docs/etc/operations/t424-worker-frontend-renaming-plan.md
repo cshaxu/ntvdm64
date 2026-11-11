@@ -275,7 +275,7 @@ each row, with exact production callers, test cases and removed-line accounting.
   Check all current callers before removing APIs. Correct session_service.h's
   obsolete launcher-owned retire description. Preserve Console ownership,
   park/reuse, channel joins/cleanup and failure/restoration semantics.
-- [x] Retire tests/app/frontend_bootstrap_test.c's removed direct-bootstrap
+- [x] Retire test/app/frontend_bootstrap_test.c's removed direct-bootstrap
   calls and obsolete root registration. Map every assertion to retained broker
   bootstrap/scope fixtures before deletion; migrate missing coverage. Remove
   stale build/docs references and redundant test aliases only after preserving

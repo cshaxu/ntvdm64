@@ -78,7 +78,7 @@ advanced startup. The current proven failure is USER GetDesktopWindow at
 reads DOS IVT bytes 055A0016, followed by an invalid WND dereference. It is a
 missing host client-view publication, not evidence of a guest or CCPU bug.
 The exact r20 witness and instruction signatures are in the S42 ledger and
-`tests/observation/verify-wow-user-profile.ps1`. WOWInitTask is ordinal 011F;
+`test/observation/verify-wow-user-profile.ps1`. WOWInitTask is ordinal 011F;
 010F is DosWowInit. A 010F trace is not proof of task initialization.
 
 Outstanding work, each assigned below:
@@ -391,7 +391,7 @@ admission, update it during work and review every row before closure.
 
 Each stable row records:
 
-- Checked-in test source/script under tests/, exact entrypoint/case/arguments,
+- Checked-in test source/script under test/, exact entrypoint/case/arguments,
   prerequisites and expected assertions. Disposable experiments alone do not
   satisfy this deliverable. Tests accompany implementation in the repository.
 - Proof that the tested caller/provider is the selected production path,

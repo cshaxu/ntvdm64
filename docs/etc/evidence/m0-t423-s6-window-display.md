@@ -293,7 +293,7 @@ src/ntvdm-exe/presentation/window_keyboard.[ch], into frontend-exe under the
 same filenames. Only owner prefix/header guard and owner comments changed;
 no external OpenNT or shared-library source was edited. The old
 tests/ntvdm-presentation/window-keyboard-tests.c is now a standalone x86 fixture
-at tests/component-integration/frontend_window_keyboard_test.c. These are
+at test/component-integration/frontend_window_keyboard_test.c. These are
 project-owned presentation adapters, not original mirror code.
 
 Build/M0-T423/S6/keyboard-recovery-build.log records successful x86 compilation
@@ -734,14 +734,14 @@ boundary; this bounded reader reuses original state, rather than replacing font
 selection/loading or importing the old worker Window controller. Its production
 update caller is still pending, so archive selection is not runtime wiring.
 
-`tests/component-integration/softpc_text_video_test.c` links the actual copied
+`test/component-integration/softpc_text_video_test.c` links the actual copied
 reader with original-layout synthetic state. All eight primary/secondary bank
 selections, 1..32 scanlines, downloaded glyph mutation, 43/50 extents, split
 cursor and invalid/disabled/mode-changing refusal without mutation pass.
 Run `softpc-text-video-test.exe` from the formal x86 graph; report:
 `O:/winnt/logs/m0-t423-s6-text-source-unit.txt`. This is unit/mock evidence only.
 
-`tests/app/console_client_test.c` now uses the real worker publisher and
+`test/app/console_client_test.c` now uses the real worker publisher and
 frontend dispatcher over their pipe to verify a multi-chunk 80x50 dual-font
 frame, malformed-font rejection retaining the old frame, 43-row replacement
 and explicit retirement. Broker binding remains the fixture substitute.
@@ -1253,7 +1253,7 @@ markers to complete single-byte events. The original host consumer
 `nt_event.c::CalcNumberOfUnusedKeyEvents` uses this count to select the suffix
 of input history to return. The immutable guest is not the owner of this code.
 
-Reproducer: `tests/observation/verify-keyboard-buffer-count.ps1 -BuildRoot
+Reproducer: `test/observation/verify-keyboard-buffer-count.ps1 -BuildRoot
 O:/repos.hobby/ntvdm64/build/M0-T423/S6/keyboard-count-original` extracts the
 actual selected function, compiles MSVC x86 /MT and controls only ring state
 and reset. No guest or instruction executor is involved. Original source
@@ -1307,7 +1307,7 @@ actual failing run rather than infer success from another instrumented pass.
 
 ### Private keyboard-state observation
 
-The checked-in `tests/observation/keyba_observed.c` includes the selected
+The checked-in `test/observation/keyba_observed.c` includes the selected
 original keyba translation unit and wraps only its externally called unread
 counter. It snapshots markers, held count, output/pending state and scan data
 before calling that original counter/reset. The formal graph exposes a
@@ -1429,7 +1429,7 @@ original result; other port state fields are observations after its lock release
 Use the previous private-desktop nested-mem recipe, but set
 MVDM_TEST_KEYBOARD_REPORT to a fresh `.bin` path under O:/winnt/logs (CREATE_NEW
 rejects accidental evidence overwrite). After worker exit and cleanup, run
-tests/observation/Read-KeyboardObservation.ps1 -Path that-file. The decoder
+test/observation/Read-KeyboardObservation.ps1 -Path that-file. The decoder
 requires magic/version, exact mapped size, completed record kinds and zero
 overflow. It rejects the old text format in a negative check. The mapping stays
 process-owned until exit, so an explicit cleanup also preserves observations.
@@ -1466,7 +1466,7 @@ displace that valid make in the returned suffix. An ignored release before the
 unread make does not do so. This is a host input/history boundary, not guest
 code or a CPU-instruction conclusion.
 
-Reproducer: tests/observation/verify-keyboard-buffer-count.ps1 -HistoryBoundary
+Reproducer: test/observation/verify-keyboard-buffer-count.ps1 -HistoryBoundary
 -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T423/S6/keyboard-history-boundary.
 The fixture composes extracted actual host_key_up, keys_in_6805_buff and
 ReturnUnusedKeyEvents; it controls an unread single-byte M marker, raw history
@@ -1564,7 +1564,7 @@ No S6 publication or closure is claimed.
 
 ### Actual prepend callers and duplicate-release provenance
 
-The diagnostic worker additionally substitutes tests/observation/nt_event_observed.c,
+The diagnostic worker additionally substitutes test/observation/nt_event_observed.c,
 which includes the entire selected original nt_event.c and wraps only its
 WriteConsoleInputVDMW call. The wrapper executes the unchanged production
 prepend, preserves result/last-error, then copies caller, count, written count,
@@ -1643,7 +1643,7 @@ remain, avoiding a negative index for a subsequent pair. Normal even batches
 are unchanged. Mirror CRLF is restored; relative to HEAD nt_event.c is +21/-2,
 SHA-256 573EB3DBBC812206AA05E468963216AE2F4E88580164A550065A1D07EBCE42F3.
 
-Checked-in test tests/app/keyboard_bios_join_test.c composes extracted actual
+Checked-in test test/app/keyboard_bios_join_test.c composes extracted actual
 ReturnUnusedKeyEvents and ReturnBiosBufferKeys, controlling only BIOS memory,
 translation and Console sink. Run verify-keyboard-buffer-count.ps1 -BiosJoin
 -BuildRoot <repo>/build/M0-T423/S6/keyboard-bios-join-capacity. All fourteen
@@ -1751,7 +1751,7 @@ The actual count and ReturnUnusedKeyEvents bodies then return both raw records,
 incorrectly including consumed M. This complements the earlier zero-packet
 release counterexample: raw events can under-count or over-count device events.
 
-Command: tests/observation/verify-keyboard-buffer-count.ps1 -HistoryBoundary
+Command: test/observation/verify-keyboard-buffer-count.ps1 -HistoryBoundary
 -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T423/S6/keyboard-history-expanded-return.
 MSVC Win32/x86 /MT /W4 compilation succeeds. Eight controls pass; four
 preservation assertions fail (ignored release after make, captured duplicate
@@ -2028,7 +2028,7 @@ that a specific guest command produced it in a real run. Original cmd_to_6805
 send those through do_q_int. Direct cmd_to_8042 responses are distinct: its
 NTVDM branch clears output_full and must not be conflated with this case.
 
-Ran tests/observation/verify-keyboard-buffer-count.ps1 -HistoryBoundary with
+Ran test/observation/verify-keyboard-buffer-count.ps1 -HistoryBoundary with
 BuildRoot build/M0-T423/S6/keyboard-history-provenance-r1. MSVC x86 /MT builds;
 the test deliberately fails with eight controls passing and six preservation
 assertions failing (the four retained cases plus both new consumed-M replays).
@@ -2088,7 +2088,7 @@ fields are metadata slots for the required subsequent original-owner hooks,
 not an alternative device buffer. Serial overflow refuses admission without
 wrapping; expired origins cannot alias newly overwritten history records.
 
-tests/app/keyboard_origin_test.c passes four assertion groups: ignored/multiple
+test/app/keyboard_origin_test.c passes four assertion groups: ignored/multiple
 packet mapping and deduplication; modeled slot movement and zero provenance;
 more than two history wraps with exact oldest retained/first expired bounds;
 and invalid/nested dispatch, overflow and reset. The slot movement is explicitly

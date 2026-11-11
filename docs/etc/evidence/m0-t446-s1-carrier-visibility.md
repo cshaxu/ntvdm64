@@ -65,7 +65,7 @@ Documentation governance passes. The candidate package staged before this
 last main.c adjustment must be refreshed from worker/ntvwm.exe before any
 production run or publication.
 
-Reproducible entries: tests/observation/verify-ntvwm-carrier-guard.ps1 with
+Reproducible entries: test/observation/verify-ntvwm-carrier-guard.ps1 with
 BuildRoot and CompilerWrapper; verify-ntvwm-carrier-product.ps1 with a sealed
 PackageRoot, compiled Fixture and fresh BuildRoot (Negative for old release).
 The latter requires two actual Run16 requests with unchanged exit37 and the

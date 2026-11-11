@@ -11,7 +11,7 @@ cleanup as task destruction?
 
 - Selected original `src/mvdm/wow32/{wow32.c,wuman.c,wkman.c,wuser.c}`.
 - The pinned immutable USER profile and direct-reader checks in
-  [`verify-wow-user-profile.ps1`](../../../tests/observation/verify-wow-user-profile.ps1).
+  [`verify-wow-user-profile.ps1`](../../../test/observation/verify-wow-user-profile.ps1).
 - Current bounded page-domain transport,
   `src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c`.
 - Current provider registration and lifecycle carriers under `src/wow32-dll`.

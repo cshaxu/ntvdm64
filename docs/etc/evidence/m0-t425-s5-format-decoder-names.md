@@ -41,8 +41,8 @@ Win32/x86 /MT CCPU40 cache build/M0-T424/S2/r001.
 - [x] console-frame-failure-test.exe --private-desktop-full: exit=0, final
   fixture PASS; rollback/publication/channel/FIFO/cancellation/peer death and
   stable pending handle count 437. Mocked broker attachment is not guest proof.
-- [x] tests/observation/verify-worker-neutral-input.ps1: all seven cases pass.
-- [x] tests/component-integration/verify-frontend-link-ownership.ps1 passes,
+- [x] test/observation/verify-worker-neutral-input.ps1: all seven cases pass.
+- [x] test/component-integration/verify-frontend-link-ownership.ps1 passes,
   including deliberate dependency leakage negatives.
 - [x] Fresh Console17/Window17, retained lifecycle/EDIT/isolation, RPC11/GUI5,
   version negatives/WOW frontiers and strict DIR finish against selected set.
@@ -103,18 +103,18 @@ run Ninja against build/M0-T424/S2/r001 with targets product-programs,
 frontend-window-library-test.exe and console-frame-failure-test.exe. The
 existing dependency files select the changed caller/decoder/test closure.
 
-The linked decoder test is tests/component-integration/frontend_window_library_test.c;
+The linked decoder test is test/component-integration/frontend_window_library_test.c;
 it invokes frontend_window_decode_frame, including no-data/invalid lifecycle,
 monochrome top-down/padding, complete text, banks/styles and dual cursor cases.
 Its observer command uses --observation-timeout-ms 45000 and the private-desktop
 environment. The error/lifetime fixture entrypoint is
-tests/app/console_frame_failure_test.c --private-desktop-full <report>.
+test/app/console_frame_failure_test.c --private-desktop-full <report>.
 
 Retained product entrypoints are tools/audit/Verify-CommandExitStatus.ps1
 -OrdinaryFrontend (once per Console and Window), verify-command-native-edit-return,
 verify-frontend-relaunch, verify-ntvwm-management -TwoSessions,
 verify-broker-retirement, verify-s7-rpc-fixtures and verify-native-gui-routing
-under tests/observation, tools/audit/Verify-ProductVersions.mjs and
-tests/observation/observe-wow-frontiers.ps1 -WaitTarget. Run scripts and exact
+under test/observation, tools/audit/Verify-ProductVersions.mjs and
+test/observation/observe-wow-frontiers.ps1 -WaitTarget. Run scripts and exact
 arguments/report locations are retained in run-final.ps1/run-regressions.ps1
 under the declared S5 root. Only Z: is used temporarily and removed in finally.

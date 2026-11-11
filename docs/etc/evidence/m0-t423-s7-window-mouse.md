@@ -118,7 +118,7 @@ DOS integration and complete production regression gates are still open.
 
 ### Production-composition native mouse verification
 
-Extended the existing `tests/app/native_console_frontend_test.c`, linking the
+Extended the existing `test/app/native_console_frontend_test.c`, linking the
 actual frontend, Window library, hidden-Console backend/view/helper. On an
 unswitched private desktop it sends Window button messages, not global input.
 A separate native target uses ReadConsoleInputW on its real hidden Console:
@@ -172,7 +172,7 @@ production regression/publication remain open. No S7 closure or deployment.
 
 ### Executed original-algorithm fixture
 
-`tests/component-integration/verify-original-mouse-coordinates.cjs` extracts
+`test/component-integration/verify-original-mouse-coordinates.cjs` extracts
 the current mirror's unchanged TextScale, LimitCoordinates and
 EmulateCoordinates bodies into build-only generated source and compiles
 `original_mouse_coordinates_test.c` with MSVC x86 /MT /W4 /WX. It mocks only
@@ -183,7 +183,7 @@ bodies were also compared, after EOL normalization, with read-only
 The test itself depends only on the current repository, not that reference.
 
 Run from VsDevCmd `-arch=x86 -host_arch=x64`:
-`node tests/component-integration/verify-original-mouse-coordinates.cjs`.
+`node test/component-integration/verify-original-mouse-coordinates.cjs`.
 Evidence: `build/M0-T423/S7/original-coordinates/{build.log,test.log,result.json}`.
 Initial sandbox compiler spawn returned EPERM; authorized execution outside
 that sandbox succeeded, exit 0, 14 assertions. Source SHA-256:
@@ -334,7 +334,7 @@ resolve them against the repository root, not the build working directory):
 
 ```text
 cl /nologo /MT /std:c11 /W4 /WX /DCPU_40_STYLE /I <repo>/src
-  <repo>/tests/component-integration/softpc_relative_mouse_bridge_test.c
+  <repo>/test/component-integration/softpc_relative_mouse_bridge_test.c
   <repo>/src/ntvdm-exe/softpc/mvdm_softpc_mouse_input.c
   <repo>/src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c
   /Fe:relative-bridge.exe
@@ -543,7 +543,7 @@ publication gates remain open. O:/winnt has not been updated by this work.
 
 ### Production mouse adapter composed boundary fixture
 
-Added `tests/component-integration/softpc_relative_mouse_guest_test.c`.
+Added `test/component-integration/softpc_relative_mouse_guest_test.c`.
 It links the actual `mvdm_softpc_mouse_guest.c`, bridge and queue providers
 with unchanged extracted TextScale/LimitCoordinates/EmulateCoordinates bodies.
 Only memory reads, pointer show/hide, thread binding and ICA/IRQ notification
@@ -708,7 +708,7 @@ verification. No broad regression or live publication is inferred.
 ### Stationary Window route and recovered guest probes
 
 Migrated the reference's authored mouse-cursor-count.asm, mouse-cursor-video.asm
-and window-mouse.asm byte content into the existing tests/observation directory.
+and window-mouse.asm byte content into the existing test/observation directory.
 These are test programs, not replacements or patches for immutable guest media.
 NASM -f bin produced build/M0-T423/S7/*.com with SHA-256 respectively:
 11314D379848BE456ED0D01BF9E54C2D44896E674297E7BAF9179D21519F7662,
@@ -867,7 +867,7 @@ cursor integration, full inherited regression, seven-file publication and P.
 
 ### Real text cursor acceptance
 
-Added authored tests/observation/mouse-cursor-text.asm. It waits for a T key
+Added authored test/observation/mouse-cursor-text.asm. It waits for a T key
 after S7_TEXT_CURSOR_READY; the private-desktop observer sends public Console
 CAF, verifies the frontend Window, then sends the key there. The probe uses
 INT33 to select a software text mask, show it, move one cell and hide it,
@@ -913,14 +913,14 @@ no-input negative after the reset/set-position ordering correction.
 ### Nested, fault and independent WOW frontier retention
 
 Current candidate, unchanged after r20, passed
-tests/observation/verify-twelve-target-chain.ps1 with formal BuildRoot,
+test/observation/verify-twelve-target-chain.ps1 with formal BuildRoot,
 PackageRoot Q:/, EvidenceRoot build/M0-T423/S7/chains-r21, LogRoot
 O:/winnt/Logs2 and prefix m0-t423-s7-chains-r21. Both GGGWDWGGGDWD and
 GGGDDWGGGWWD have ordered ENTER/RETURN, direct results, actual character I/O,
 two distinct frontend groups and natural retirement. The summary records
 frontend identities 25904:2 / 6936:13 and 13908:38 / 2900:52 respectively.
 
-tests/observation/verify-frontend-lifetime.ps1 with observer-text.exe,
+test/observation/verify-frontend-lifetime.ps1 with observer-text.exe,
 PackageRoot Q:/, ProcessPackageRoot build/M0-T423/S7/p, EvidenceRoot
 build/M0-T423/S7/faults-r22, LogRoot O:/winnt/Logs2, prefix
 m0-t423-s7-faults-r22 and -ExpandedFaults -Window passed all five cases:
@@ -935,7 +935,7 @@ Windows command line. The test runner now passes ProcessStartInfo.ArgumentList
 entries and accepts a hash-checked physical package alias plus explicit LogRoot.
 This is a harness failure/correction, not a guest or product result.
 
-Corrected tests/observation/observe-wow-frontiers.ps1, observer-text.exe,
+Corrected test/observation/observe-wow-frontiers.ps1, observer-text.exe,
 worker-window-snapshot.exe, PackageRoot Q:/, physical S7/p and LogRoot Logs2
 completed prefix m0-t423-s7-wow-r24. Separate 4/8/12/16-second snapshots show
 WINMINE's localized main window (class/title UTF16 00C900A800C000D7), SOL's
@@ -955,7 +955,7 @@ original_mouse_text_cursor_test.c; this removes reliance on an untracked
 manually prepared header. Ordinary sandbox r25 could not spawn cl.exe (EPERM),
 so it provides no test pass. Scoped execution r26 passed text cursor masks,
 saved-position restoration, page offset and exclusion cases, plus all seventeen
-coordinate cases. Commands: node tests/component-integration/verify-original-mouse-coordinates.cjs
+coordinate cases. Commands: node test/component-integration/verify-original-mouse-coordinates.cjs
 build/M0-T423/S7/original-text-repro-r26 text-cursor and the same runner with
 build/M0-T423/S7/original-coordinates-repro-r26, in the x86 MSVC environment.
 These remain mocked algorithm tests, supplementary to the real guest results.

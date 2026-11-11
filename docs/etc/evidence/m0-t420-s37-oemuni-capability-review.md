@@ -757,7 +757,7 @@ retesting; no runtime media or user file was changed.
 Both direct and nested routes pass under `s37-env-caller-guest-r2`, including
 `S37_OEM_GUEST_COMMAND_ENV_OK` and the host-matched path. Probe SHA-256:
 `61dc69d0f54f37815b0c85484f73285b2954967c5fff6c51634da5ac5c308603`.
-NASM builds `tests/observation/oem_file_contract.asm` with `-f bin` to
+NASM builds `test/observation/oem_file_contract.asm` with `-f bin` to
 `build/M0-T420/S37/guest-env-r1/O37.COM`; only this independent probe is copied
 below runtime tests. Product source/artifacts are unchanged from 08977bd17
 and its formal x86/six-fixture/17-route verification. This step adds no mirror,

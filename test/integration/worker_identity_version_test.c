@@ -6,7 +6,7 @@
 #include <string.h>
 #include <rpc.h>
 #include "service.h"
-#include "../../tests/broker/rpc_async_test.h"
+#include "../../test/broker/rpc_async_test.h"
 #include "common/protocol/version.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 

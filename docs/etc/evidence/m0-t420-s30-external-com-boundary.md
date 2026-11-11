@@ -43,7 +43,7 @@ controlled CTS-capable medium contract.  Its verified route is
 `host_com_open → host_com_write → GetCharsFromDriver → host_com_read →
 host_com_close`; it emits
 `T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK`.  The source and runner are
-`tests/mvdm-host/nt_com_mock_fixture.c` and
+`test/mvdm-host/nt_com_mock_fixture.c` and
 `tools/audit/Verify-T420S30ComMock.ps1`; the r1 transcript is under the
 disposable build root.  This proves the original provider's success-side
 lifecycle without adding a product provider, driver or hardware simulation.

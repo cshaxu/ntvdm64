@@ -36,9 +36,9 @@ $sources = @(
     'src/common/worker-thread/bridge.c',
     'src/ntvdm-exe/win32/nt_thread_alert_compat.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c',
-    'tests/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
-    'tests/adapter-mvdm-host-out/thread_start_session_fixture.c',
-    'tests/ntvdm/softpc/softpc_event_thread_shutdown_fixture.c',
+    'test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
+    'test/adapter-mvdm-host-out/thread_start_session_fixture.c',
+    'test/adapter-mvdm-host-out/softpc/softpc_event_thread_shutdown_fixture.c',
     'src/lib-win32/thread/thread.c'
 )
 $graph = [Collections.Generic.List[string]]::new()

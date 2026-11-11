@@ -26,7 +26,7 @@ is never a production build, runtime test or complete dependency audit.
 
 ## Audit gates
 
-`tests/observation/verify-wow32-s1-formal-graph.ps1` is the reproducible
+`test/observation/verify-wow32-s1-formal-graph.ps1` is the reproducible
 composition inventory used by A02--A03. It pins the 77 selected original
 sources, 19 imported original owner objects, 21 target-local bindings, all ten
 original thunk-table dispositions, named dynamic dependencies and the

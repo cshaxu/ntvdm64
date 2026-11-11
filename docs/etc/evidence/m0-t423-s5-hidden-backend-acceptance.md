@@ -13,7 +13,7 @@ Review existing owners and tests before authoring more implementation.
 
 | Contract | Existing test to reuse | S5 evidence state |
 | --- | --- | --- |
-| Native output, cooked input, reuse, streams, EOF, Unicode environment, ordered input return | tests/app/native_console_host_test.c default | r3 component pass: real CMD 37/23, stream child 29, exact 604-record return before newer input |
+| Native output, cooked input, reuse, streams, EOF, Unicode environment, ordered input return | test/app/native_console_host_test.c default | r3 component pass: real CMD 37/23, stream child 29, exact 604-record return before newer input |
 | Raw/processed Ctrl+C, Ctrl+Alt+C, Ctrl+Break | native_console_host_test.c --control-input | r3 real hidden target results 42/43/44 pass |
 | Visible frontend controls to hidden target, default exit, suspended DOS I/O | native_console_frontend_test.c --controls | r3 private-Console component pass; suspended DOS binding is a fixture, not a live guest |
 | Completed result versus lost presentation | native_console_host_test.c --completion; native_console_frontend_test.c default | r3 preserves completed 37/0/259; live target survives error and later returns 41 |
@@ -64,7 +64,7 @@ uses the repaired checked-in test, rebuilt against unchanged production objects.
 All seventeen cases in r3 passed. Reproducer:
 
 ```powershell
-tests/component-integration/verify-frontend-transport-contracts.ps1 `
+test/component-integration/verify-frontend-transport-contracts.ps1 `
   -BuildRoot build/M0-T423/S1/restart-formal-x86 `
   -Observer build/M0-T423/S4/observer-modal.exe `
   -LogPrefix m0-t423-s5-expanded-contracts-r3 -ExpandedBackend
@@ -133,7 +133,7 @@ only the test fixture is compiled x86 /MT with user32.lib, under build/M0-T423/S
 The final strengthened all-five run passed with an explicit worker-exit check
 before any test cleanup, not just launcher/frontend retirement. Reproducer:
 map the fresh build/M0-T423/S5/p candidate to R: temporarily, then run
-tests/observation/verify-frontend-lifetime.ps1 with Observer
+test/observation/verify-frontend-lifetime.ps1 with Observer
 build/M0-T423/S4/observer-modal.exe, PackageRoot R:/, ProcessPackageRoot the
 physical candidate, EvidenceRoot build/M0-T423/S5/mixed-fault-retirement,
 LogPrefix m0-t423-s5-mixed-fault-retirement and ExpandedFaults. Remove the

@@ -88,7 +88,7 @@ real native delayed-render registration succeeded. The fixture observes cache
 calls and controlled metafile deletion, not actual later guest reclamation.
 
 A checked-in repeatable entrypoint is
-`tests/adapter-mvdm-host-out/wow/verify_clipboard_format_ownership.py`; it requires
+`test/adapter-mvdm-host-out/wow/verify_clipboard_format_ownership.py`; it requires
 a fresh build-root and the installed VS VsDevCmd.bat via --compiler-env.
 Its exact source/body/fixture hashes and exit statuses are recorded together.
 Supervisor2036 executed this entrypoint successfully: repeatable.exit0 and

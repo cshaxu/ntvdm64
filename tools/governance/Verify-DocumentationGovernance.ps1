@@ -10,6 +10,15 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 
 $ErrorActionPreference = 'Stop'
 $docs = (Resolve-Path -LiteralPath (Join-Path $RepositoryRoot 'docs')).Path
+# Source tests have one root; build products and logs never belong beside CMakeLists.
+if (Test-Path -LiteralPath (Join-Path $RepositoryRoot 'tests')) {
+    throw 'Use the canonical test directory, not tests.'
+}
+$rootDebris = @(Get-ChildItem -LiteralPath $RepositoryRoot -File | Where-Object {
+    $_.Extension -in @('.obj', '.pdb', '.ilk', '.exp', '.lib', '.log') -or
+    $_.Name -in @('report', 'stdout.txt', 'stderr.txt', 'report.console.txt')
+})
+if ($rootDebris.Count) { throw ('Repository-root build/log debris: ' + ($rootDebris.Name -join ', ')) }
 $requiredFiles = @('README.md', 'states/CURRENT.md', 'states/QUEUE.md', 'states/TODO.md')
 $requiredDirectories = @('rules', 'design', 'proposals', 'history', 'states', 'etc')
 $requiredRules = @('DOCUMENT.md', 'EXECUTION.md', 'ARCHITECTURE.md', 'CODING.md')

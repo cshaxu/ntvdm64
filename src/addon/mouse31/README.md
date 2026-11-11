@@ -7,7 +7,7 @@ Win3.1 enhanced mouse, real DOS child commands, child retirement and normal
 Windows exit are verified with the insignia-386 companion. Win95 desktop mouse
 is exercised; shutdown returns1 as in the companion-disabled baseline, and
 full Win95 VM lifecycle is not accepted. See the T479 S6 integration evidence.
-Build with tests/observation/build-win31-mouse-driver.ps1, a fresh absolute
+Build with test/observation/build-win31-mouse-driver.ps1, a fresh absolute
 BuildRoot below build/ and an explicit Python interpreter.
 
 ## Selected boundary
@@ -55,7 +55,7 @@ reference implementation for this enhanced-mode contract.
 ## Evidence and tests
 
 Read-only retail NE/export inspection:
-`tests/observation/audit-win31-mouse.py --driver <MOUSE.DRV> --output <build-json>`.
+`test/observation/audit-win31-mouse.py --driver <MOUSE.DRV> --output <build-json>`.
 Generated driver/probes belong below the active task build/ directory. Original
 guest binaries remain unchanged; tests select authored addons on recoverable
 installation copies. Enhanced mode loads the companion through SYSTEM.INI.

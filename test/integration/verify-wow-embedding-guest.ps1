@@ -1,7 +1,7 @@
 param([string]$PackageRoot,[string]$OutputRoot,[string]$Observer='build/t478-s24/observer.exe',[switch]$ExpectStall)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path;Set-Location $repo
-. "$repo/tests/observation/isolated_package_cleanup.ps1"
+. "$repo/test/observation/isolated_package_cleanup.ps1"
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Require fresh build evidence directory'}
 $null=New-Item -ItemType Directory $out

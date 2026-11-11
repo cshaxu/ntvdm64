@@ -42,7 +42,7 @@ rule link
   description = LINK `$out
 
 build obj/vrnetapi.obj: cc `$root/src/mvdm-host/vdmredir/vrnetapi.c
-build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/t290_s5_vrnetapi_local_fixture.c
+build obj/fixture.obj: cc `$root/test/mvdm-host/vdmredir/t290_s5_vrnetapi_local_fixture.c
 build bin/t290-s5-vrnetapi-local-fixture.exe: link obj/vrnetapi.obj obj/fixture.obj
 default bin/t290-s5-vrnetapi-local-fixture.exe
 "@

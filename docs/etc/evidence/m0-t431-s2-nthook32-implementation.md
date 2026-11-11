@@ -43,7 +43,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/build/New-T310Original
 ninja run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe VDMREDIR.dll nthook-install-test.exe nthook-gui-test.exe frontend-scope-lifetime-test.exe ntvwm-execution-lifetime-test.exe
 build/M0-T427/S2/r001/nthook-install-test.exe
 build/M0-T427/S2/r001/ntvwm-execution-lifetime-test.exe <fresh-build-report>
-tests/observation/verify-native-hook-chain.ps1 -RuntimeRoot build/M0-T431/S2/r004-runtime -Observer build/M0-T427/S4/r049/console-startup-observer.exe -WindowObserver build/M0-T427/S4/r049/worker-window-snapshot.exe -LogRoot <fresh-build-log>
+test/observation/verify-native-hook-chain.ps1 -RuntimeRoot build/M0-T431/S2/r004-runtime -Observer build/M0-T427/S4/r049/console-startup-observer.exe -WindowObserver build/M0-T427/S4/r049/worker-window-snapshot.exe -LogRoot <fresh-build-log>
 ```
 
 Run identities and actual results:

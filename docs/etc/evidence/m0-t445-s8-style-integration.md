@@ -42,8 +42,8 @@ is retained separately and never overwritten.
 | attachment-r008 | 17:35:14 /47012 /300s | /WX rejects possibly uninitialized SEH local in theme helper; initialized to E_FAIL. |
 | attachment-r009 | 17:36:08 /43108 /300s | Both widths pass extended List/Combo/tab-state/theme-enabled creation and30 lifetimes; GDI3/3 each. |
 
-Entrypoint: tests/observation/verify-style-attachment.ps1 -BuildRoot
-build/M0-T445/S8/style-cache. It builds both DLLs and tests/app/style_attachment.c
+Entrypoint: test/observation/verify-style-attachment.ps1 -BuildRoot
+build/M0-T445/S8/style-cache. It builds both DLLs and test/app/style_attachment.c
 with MSVC /MT /O2 /W4 /WX. These are focused mechanical tests, not visual or
 whole-product acceptance. The accepted standalone gallery and complete product
 gates have not yet been rerun for this candidate.
@@ -98,7 +98,7 @@ do not reinterpret the failed run as success.
 
 The owner restored the local desktop session after r032 again showed an empty
 visible DC clip, even with the owned test window on-screen. r033 reruns
-`tests/observation/verify-win16-style.ps1` with the active console session and
+`test/observation/verify-win16-style.ps1` with the active console session and
 passes both widths, including live list/combo/edit scroll pixels, native state,
 27 gallery cases and 80 attachment cycles (GDI54->54). The final fixture reports
 27261 checks. No desktop resolution, global theme or security setting changed.

@@ -41,11 +41,11 @@ $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
-    'tests/session/softpc_firmware_resource_fixture.c',
-    'tests/session/softpc_media_resource_fixture.c',
+    'test/session/softpc_firmware_resource_fixture.c',
+    'test/session/softpc_media_resource_fixture.c',
     'src/common/system_root.c',
     'src/common/guest_environment.c',
-    'tests/session/softpc_wow_boot_environment_fixture.c'
+    'test/session/softpc_wow_boot_environment_fixture.c'
 )
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')

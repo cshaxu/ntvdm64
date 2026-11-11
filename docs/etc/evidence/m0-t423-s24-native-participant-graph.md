@@ -156,7 +156,7 @@ member have been removed; the isolated Job fixture remains research evidence.
 The remaining presentation timer cannot be removed merely by waiting on the
 hidden Console input handle: that handle signals input, not arbitrary output
 buffer writes. A bounded x86 probe in
-`tests/observation/ntw32_console_winevent_probe.c` installed an out-of-context
+`test/observation/ntw32_console_winevent_probe.c` installed an out-of-context
 Console WinEvent hook with a message loop, wrote to the hidden Console via
 `WriteConsoleOutputCharacterW`, and moved its cursor. It received zero real
 Console update/caret notifications; a synthetic `NotifyWinEvent` reached the

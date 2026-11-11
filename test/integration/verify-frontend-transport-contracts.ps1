@@ -30,7 +30,7 @@ $cases=@(
     @{Name='console-client-test';Suffix='close-hang';Arg='--close-hang';Exit='c000013a';Witness='original-shape close callback'}
 )
 if($ExpandedBackend){
-    & (Join-Path $repo 'tests/observation/verify-ntvwm-console-state.ps1') `
+    & (Join-Path $repo 'test/observation/verify-ntvwm-console-state.ps1') `
         -BuildRoot ((Join-Path $BuildRoot ($LogPrefix+'-ntvwm-state')).Substring($repo.Length+1)) `
         -LogPath (Join-Path $LogRoot ($LogPrefix+'-ntvwm-state.log'))
     foreach($test in @('ntvwm-text-frame','ntvwm-presentation','frontend-text-handoff')) {

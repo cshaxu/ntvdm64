@@ -43,7 +43,7 @@ blocking/resume/completion likewise remain their respective worker semantics.
 Command, with absolute paths and unswitched private desktop:
 
 ```powershell
-tests/observation/verify-worker-neutral-input.ps1 `
+test/observation/verify-worker-neutral-input.ps1 `
   -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T424/S2/r001 `
   -Observer O:/repos.hobby/ntvdm64/build/M0-T424/S2/r001/observer.exe `
   -LogRoot O:/repos.hobby/ntvdm64/build/M0-T425/S4/r001/focused
@@ -66,7 +66,7 @@ contention, staging abort and multi-pending handoff. Only broker attachment is
 substituted; this cannot replace RPC or real guest proof. Stable final handle
 count439 has no permitted leak allowance.
 
-tests/component-integration/verify-frontend-link-ownership.ps1 with the current
+test/component-integration/verify-frontend-link-ownership.ps1 with the current
 absolute BuildRoot passes; link-ownership-r001.txt preserves the result and
 negative leakage controls. A fresh hash check confirms all 265 frozen S3
 source/generated inputs and all eight published product hashes still match.
@@ -114,19 +114,19 @@ lossy reimport of an already prepared Unicode grid.
 
 | Requirement / exact tracked entrypoint | Assertions inspected / authoritative result |
 | --- | --- |
-| tests/component-integration/frontend_window_mouse_test.c, dos_contract() | Signed extrema, source/geometry validation, atomic ENTER+MOVE, button/reset/LEAVE, failed sink preserves state; S4 focused mouse observer exit0. Despite historical test name there is no worker argument. |
-| tests/component-integration/frontend_window_keyboard_test.c --cooked | returned_dos_tests, delivery_tests, input_reset_tests and native_tests verify character-bearing make/break, cooked ab CRLF, dead keys/layout, stale source and failed sink. S4 keyboard exit0. |
-| tests/component-integration/frontend_window_controller_test.c | Real private Window X/CAF/AE, CAM capture release, source retirement, joined callbacks, independent instances, graphics/text display policy and cooked input assertions; S4 controller exit0. This is not physical RDP acceptance. |
-| tests/app/console_channel_lifetime_test.c, included by console_frame_failure_test.c --private-desktop-full | test_prepare_operation, test_standalone_text, test_failed_text_commit, test_projection_failure_pipe(FALSE/TRUE), test_logical_publication and pending cases: inactive/stale rejection, reserved kind rejected, old frame/grid/font retained before commit, terminal EOF after commit, snapshot contention, input Q ordered across all four handoffs, two pending requests/dedup/head-tail cancellation and timeout/death isolation. S4 full fixture exit0, handle439 equality. |
-| tests/observation/ntvwm_presentation_test.c --input-return and ordinary report | Real copied pipe/key return, reply failures and common decoder negatives; S4 688/0 and presentation426/0. Activation provider is substituted and explicitly not guest proof. |
-| tests/component-integration/verify-frontend-link-ownership.ps1 | Graph recursively checks no frontend-private source in launcher/workers, no helper/native backend in frontend, retired archives/control pipes absent; deliberate leakage negatives rejected. S4 PASS. |
+| test/component-integration/frontend_window_mouse_test.c, dos_contract() | Signed extrema, source/geometry validation, atomic ENTER+MOVE, button/reset/LEAVE, failed sink preserves state; S4 focused mouse observer exit0. Despite historical test name there is no worker argument. |
+| test/component-integration/frontend_window_keyboard_test.c --cooked | returned_dos_tests, delivery_tests, input_reset_tests and native_tests verify character-bearing make/break, cooked ab CRLF, dead keys/layout, stale source and failed sink. S4 keyboard exit0. |
+| test/component-integration/frontend_window_controller_test.c | Real private Window X/CAF/AE, CAM capture release, source retirement, joined callbacks, independent instances, graphics/text display policy and cooked input assertions; S4 controller exit0. This is not physical RDP acceptance. |
+| test/app/console_channel_lifetime_test.c, included by console_frame_failure_test.c --private-desktop-full | test_prepare_operation, test_standalone_text, test_failed_text_commit, test_projection_failure_pipe(FALSE/TRUE), test_logical_publication and pending cases: inactive/stale rejection, reserved kind rejected, old frame/grid/font retained before commit, terminal EOF after commit, snapshot contention, input Q ordered across all four handoffs, two pending requests/dedup/head-tail cancellation and timeout/death isolation. S4 full fixture exit0, handle439 equality. |
+| test/observation/ntvwm_presentation_test.c --input-return and ordinary report | Real copied pipe/key return, reply failures and common decoder negatives; S4 688/0 and presentation426/0. Activation provider is substituted and explicitly not guest proof. |
+| test/component-integration/verify-frontend-link-ownership.ps1 | Graph recursively checks no frontend-private source in launcher/workers, no helper/native backend in frontend, retired archives/control pipes absent; deliberate leakage negatives rejected. S4 PASS. |
 | tools/audit/Verify-CommandExitStatus.ps1 -OrdinaryFrontend | 17 routes each Console/Window, COMMAND/MEM/EDIT text and nested recovery, exit results, one root receiver, expected output after each command. Final selected S3 r004 summaries each17/zero mismatch; tests inspect output, not merely exit0. |
-| tests/observation/verify-command-native-edit-return.ps1 and verify-frontend-relaunch.ps1 | Actual modern EDIT CtrlQ -> CMD -> DOS MEM; outer native cooked return and relaunch. Selected S3 retained phase PASS. |
-| tests/observation/verify-ntvwm-management.ps1 -TwoSessions and verify-broker-retirement.ps1 | Independent session survives selected close; both workers' death and frontend loss return explicit direct failure and broker-ordered retirement. Selected S3 retained phase PASS. |
+| test/observation/verify-command-native-edit-return.ps1 and verify-frontend-relaunch.ps1 | Actual modern EDIT CtrlQ -> CMD -> DOS MEM; outer native cooked return and relaunch. Selected S3 retained phase PASS. |
+| test/observation/verify-ntvwm-management.ps1 -TwoSessions and verify-broker-retirement.ps1 | Independent session survives selected close; both workers' death and frontend loss return explicit direct failure and broker-ordered retirement. Selected S3 retained phase PASS. |
 | verify-s7-rpc-fixtures.ps1, verify-native-gui-routing.ps1, Verify-ProductVersions.mjs | RPC11 and GUI5, explicit wait37/default0, old app/protocol/interface rejection1306. Selected S3 rpc/versions phases terminate0. |
 | observe-wow-frontiers.ps1 and exact baseline signature review | Three separate observations retain WINMINE window and original SOL/WRITE error boundaries. No gameplay or SOL/WRITE functionality acceptance is invented. |
 
-Initial attempts to locate mouse/keyboard/controller fixtures under tests/app
+Initial attempts to locate mouse/keyboard/controller fixtures under test/app
 failed because their actual owner is tests/component-integration. The correct
 tracked sources above were subsequently read; the failed lookup is not a test
 failure or a reason to replace the fixtures.

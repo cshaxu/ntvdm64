@@ -31,7 +31,7 @@ input handle; multi-worker/session reuse is explicitly outside this S2 seam.
 
 ## Verification
 
-`tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c` now
+`test/adapter-mvdm-host-out/win32/console_input_contract_fixture.c` now
 places a public `T` record in `CONIN$`, returns a VDM `F` record, proves the
 private event is signalled, verifies `NOWAIT|NOREMOVE` observes `F` without
 consuming it, consumes `F`, observes that the private event resets, then

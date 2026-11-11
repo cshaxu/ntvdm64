@@ -32,7 +32,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/fixture.obj: cc `$root/tests/mvdm-support/t282_s11_oem_support_fixture.c
+build obj/fixture.obj: cc `$root/test/mvdm-host/t282_s11_oem_support_fixture.c
 build obj/process.obj: cc `$root/src/mvdm-support/oemuni/process.c
 build obj/file.obj: cc `$root/src/mvdm-support/oemuni/file.c
 build obj/opennt_support_rtl.obj: cc `$root/src/compat/opennt_support_rtl.c

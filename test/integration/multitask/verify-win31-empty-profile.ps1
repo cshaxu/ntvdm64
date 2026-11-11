@@ -31,5 +31,5 @@ try {
  'PASS empty INI profile writes and zero/nonzero Win16 file I/O'
 } finally {
  try {foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Source changed: $($row.path)"}}}
- finally {. "$repo/tests/observation/isolated_package_cleanup.ps1";Remove-OwnedGuestProbeCopy $dest $task $copy.Source}
+ finally {. "$repo/test/observation/isolated_package_cleanup.ps1";Remove-OwnedGuestProbeCopy $dest $task $copy.Source}
 }

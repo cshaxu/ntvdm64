@@ -57,7 +57,7 @@ same fixture and original bodies with the provider extracted from 3f14f47af:
 provider: 31 checks, zero failures. The runner accepts -ProviderSource for this
 replay; baseline bytes are obtained with git show and preserved byte-for-byte.
 
-The existing [binding shutdown fixture](../../../tests/mvdm-host/wow_registry_shutdown_fixture.c)
+The existing [binding shutdown fixture](../../../test/mvdm-host/wow_registry_shutdown_fixture.c)
 adds a non-1-token assertion. It links the actual selected WOW binding object
 and mock parent exports. The pre-fix object fails that assertion; the corrected
 object passes populated close, shutdown, stale rejection and non-reuse.

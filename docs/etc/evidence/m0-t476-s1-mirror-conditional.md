@@ -171,7 +171,7 @@ outside block comments. The C/H ledger records 3,562 hit arms, 35 unhit arms,
 and 4,007 previously excluded arms. Five unhit arms are nested under another
 unhit arm, leaving 30 outermost arms in 15 host C/H files. Those 30 exclusions
 were applied after preserving all prior `#line` and `#error` directives;
-`tests/audit/verify-t476-s1-exclusions.py` passed for all 30. The subsequent
+`test/audit/verify-t476-s1-exclusions.py` passed for all 30. The subsequent
 independent x86/x64 product build passed (`final-build/result-r3.json`, exit
 0), and a coherent build-owned candidate package was staged successfully.
 All 1,018 final-source preprocessing contexts matched the pre-exclusion

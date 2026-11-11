@@ -37,7 +37,7 @@ rule link
   description = LINK `$out
 
 build obj/vrinit.obj: cc `$root/src/mvdm-host/vdmredir/vrinit.c
-build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/t290_s3_vrinit_failure_fixture.c
+build obj/fixture.obj: cc `$root/test/mvdm-host/vdmredir/t290_s3_vrinit_failure_fixture.c
 build bin/t290-s3-vrinit-failure-fixture.exe: link obj/vrinit.obj obj/fixture.obj
 default bin/t290-s3-vrinit-failure-fixture.exe
 "@

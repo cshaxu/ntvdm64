@@ -24,7 +24,7 @@ in mirrors. Native30ms polling is out of scope and retained.
 
 ## Verification and retained failures
 
-Mechanical renames are confined to audited project-private source/tests/build
+Mechanical renames are confined to audited project-private source/test/build
 selection. The ownership verifier now rejects retired API names and misplaced
 frontend object edges, with negative controls. The final results below certify
 the same coherent input, rather than a mixture of earlier candidates.

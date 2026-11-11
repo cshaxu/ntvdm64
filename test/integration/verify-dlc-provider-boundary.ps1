@@ -4,11 +4,11 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path;Set-Location $repo
 $out=[IO.Path]::GetFullPath((Join-Path $repo $Output))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Require fresh build-owned output'}
 $null=New-Item -ItemType Directory -Force $out
-. "$repo/tests/observation/isolated_package_cleanup.ps1"
+. "$repo/test/observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$process=$null;$saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try{
- $source="$repo/tests/observation/vdmredir_dlc_probe.asm"
+ $source="$repo/test/observation/vdmredir_dlc_probe.asm"
  & nasm -f bin -o "$out/VDMDLC.COM" $source > "$out/assemble.txt" 2>&1
  if($LASTEXITCODE){throw 'Existing independent probe assembly failed'}
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path

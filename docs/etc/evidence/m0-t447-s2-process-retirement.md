@@ -57,11 +57,11 @@ build/M0-T447/S2/process-retirement; review deadline 18:00 local.
 The driver incrementally rebuilds the established MSVC x86 /MT CCPU40 worker
 and provider roots, then executes checked-in entrypoints:
 
-- tests/observation/verify-wow-user-session-binding.ps1: real peer thread,
+- test/observation/verify-wow-user-session-binding.ps1: real peer thread,
   active-peer rejection, task rejection, process rejection and retry while
   preserving session hooks/TLS/identity. Test-only lifecycle callbacks are
   explicitly not full-provider proof.
-- tests/observation/verify-wow-task-lifecycle.ps1 -Case process-retirement:
+- test/observation/verify-wow-task-lifecycle.ps1 -Case process-retirement:
   actual session/runtime/provider chain, original task registration/init/exit,
   live-task/object/class refusal, duplicate event closure, original event
   survival and borrowed host-control registration survival. Object/class

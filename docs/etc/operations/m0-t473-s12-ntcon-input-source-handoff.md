@@ -31,8 +31,8 @@ produced DOS and CMD success in 5/5 each. These are simulated-event,
 test-specific observations, not production-fix or physical-keyboard proof.
 
 Review the probe construction, worker identity, installed binary and symbol
-correspondence in `tests/observation/console_terminal_observer.c`,
-`tests/observation/caf_keyboard_probe_hook.c` and
+correspondence in `test/observation/console_terminal_observer.c`,
+`test/observation/caf_keyboard_probe_hook.c` and
 `build/t473-s11/caf-three-diagnosis/` before relying on the evidence. Working
 hypothesis: a Console key-down already delivered to the worker can outlive
 its source when the key-up arrives after Console → Window; inactive-source

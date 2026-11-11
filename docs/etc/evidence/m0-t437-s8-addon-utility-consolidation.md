@@ -30,12 +30,12 @@ byte contracts and verifies each complete candidate hash before replacement.
 
 ```powershell
 cmd /d /c "src\addon\win31-launch\BUILD.CMD build\M0-T437-S8\r001\PATCH386.EXE"
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\pif_hash_tool_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\pif_hash_tool_test.ps1 `
   -Pif assets\release\PIF.EXE -Hash assets\release\HASH.EXE `
   -BuildRoot build\t437s8\r3 -ReleaseRoot assets\release
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win101_setup_cmd_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win101_setup_cmd_test.ps1 `
   -ToolRoot tools\win101-setup -BuildRoot build\t437s8\r5
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win31_launch_profile_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win31_launch_profile_test.ps1 `
   -InstallRoot build\t437s8\r4 -ProfileDirectory build\t437s8\r4\PATCH
 ```
 

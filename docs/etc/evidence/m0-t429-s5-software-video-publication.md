@@ -130,7 +130,7 @@ lock serializes transport, and endpoint teardown cancels then joins before
 freeing that lock/context. Stop/worker-shutdown wins over dirty/timer waits.
 
 The pure production publisher fixture has a tracked reproducible runner:
-`tests/observation/verify-software-video-publisher.ps1 -BuildRoot
+`test/observation/verify-software-video-publisher.ps1 -BuildRoot
 build/M0-T429/S5/r013 -CompilerWrapper build/M0-T427/S4/r049/msvc-x86.cmd`.
 It passes the send/failure cases and50 create/stop/join cycles with exact handle
 count and borrowed shutdown handle retained. r008 also records20 repeated
@@ -211,7 +211,7 @@ SDK22621, x86 /MT and original CCPU40 remain selected.
 Reproducible focused publisher verification:
 
 ```powershell
-& tests/observation/verify-software-video-publisher.ps1 `
+& test/observation/verify-software-video-publisher.ps1 `
   -BuildRoot build/M0-T429/S5/r030 `
   -CompilerWrapper build/M0-T427/S4/r049/msvc-x86.cmd
 ```

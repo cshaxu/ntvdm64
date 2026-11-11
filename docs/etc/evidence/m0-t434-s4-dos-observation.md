@@ -54,7 +54,7 @@ notification, finite normal drain and cancellation/join. It neither selects
 tasks nor extracts guest pointers. The existing latest-frame publisher cannot
 be reused because replacing a pending CREATE with EXIT would lose history.
 
-tests/app/worker_task_observation_test.c exercises the actual shared module:
+test/app/worker_task_observation_test.c exercises the actual shared module:
 hold the consumer outside the queue lock, fill128 accepted facts, reject the
 next with a gap, release and prove129 accepted occurrences in exact order on
 a different thread. Drain cannot finish during pending publication; after all

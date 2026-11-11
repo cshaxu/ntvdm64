@@ -29,7 +29,7 @@ global allocation and returns the original API's zero failure result.
 
 ## Executable evidence
 
-`tests/observation/verify-wow-clipboard-transfer.ps1` used a private,
+`test/observation/verify-wow-clipboard-transfer.ps1` used a private,
 task-owned Win16 owner window and selected original `LoadLibraryEx32W`,
 `GetProcAddress32W`, and `CallProc32W` bridge calls.  It passed two consecutive
 isolated real runs (`transfer-r42`, `transfer-r43`) with these asserted phases:

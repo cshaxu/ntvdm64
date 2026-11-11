@@ -17,13 +17,13 @@ if (!$build.StartsWith($buildBase + [IO.Path]::DirectorySeparatorChar,
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 $nasm = Get-Command -Name $NasmExecutable -ErrorAction Stop
 New-Item -ItemType Directory -Path $build | Out-Null
-$source = Join-Path $repository 'tests\observation\support_capability.asm'
+$source = Join-Path $repository 'test\observation\support_capability.asm'
 $output = Join-Path $build 'SUPPORT.COM'
 & $nasm.Source -f bin -o $output $source
 if ($LASTEXITCODE -ne 0) { throw "NASM failed for S27 support fixture: $LASTEXITCODE" }
 [ordered]@{
     schema = 'm0.t420.s27.support-guest.v1'
-    source = 'tests/observation/support_capability.asm'
+    source = 'test/observation/support_capability.asm'
     output = 'SUPPORT.COM'
     sha256 = (Get-FileHash -LiteralPath $output -Algorithm SHA256).Hash.ToLowerInvariant()
 } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 'manifest.json') -Encoding utf8

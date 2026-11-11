@@ -18,8 +18,8 @@ $sources = @(
     'src/ntvdm-exe/monitor/source/vdm_control.c',
     'src/ntvdm-exe/monitor/mvdm_vdm_tib.c')
 $fixtures = @(
-    'tests/ntvdm/monitor/vdm_control_fixture.c',
-    'tests/ntvdm/monitor/vdm_tib_fixture.c')
+    'test/adapter-mvdm-host-out/monitor/vdm_control_fixture.c',
+    'test/adapter-mvdm-host-out/monitor/vdm_tib_fixture.c')
 foreach ($path in $sources + $fixtures) { if (!(Test-Path (Join-Path $root $path)) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid T308 input: $path" } }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'bin') | Out-Null
 $envFile = Join-Path $build 'msvc-mt.cmd'

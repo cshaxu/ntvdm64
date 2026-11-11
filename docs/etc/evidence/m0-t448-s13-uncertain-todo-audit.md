@@ -132,7 +132,7 @@ SHA-256 summaries, for later scratch disposition:
   observations; under the owner's rule they leave active TODO without a causal
   repair claim. The original guest limitation remains established and retained
   in TODO, not counted as fixed.
-* `tests/observation/verify-wow-write-frontier.ps1` checks four retained startup
+* `test/observation/verify-wow-write-frontier.ps1` checks four retained startup
   snapshots and explicitly does not test editing, saving or normal exit. No
   existing valid edit/exit witness was found by the S13 fixture inventory.
   The first queued WOW32 continuation proposal explicitly owns WRITE's normal

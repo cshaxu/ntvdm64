@@ -280,7 +280,7 @@ Owner follow-up: “我要的是咱们跑集成测试 比如mem.exe command.com 
 还有write.exe 看看是否有过命中”. Run these four deployed ordinary CLI
 workloads with bounded real-Console observation, automated welcome dismissal
 and command exit, PID-correlated mapping logs and test-owned process cleanup.
-Only a test harness may be added under tests/observation; its fresh build root
+Only a test harness may be added under test/observation; its fresh build root
 is build/M0-T406/S1/r002-workload-observation. No product change is needed.
 Four-program integration completed and repeated with Job PID tracking: MEM
 and COMMAND exit 0; EDIT reaches welcome/editor and accepts Esc before timed

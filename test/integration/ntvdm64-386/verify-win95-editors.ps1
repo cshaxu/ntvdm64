@@ -92,7 +92,7 @@ foreach($id in 'A','B'){
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU $([int][bool]($MouseMenu -or $GuestUserInput))`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n%define FIRST_DOS_BEFORE_SECOND 0`n"+(Get-Content "$repo/tests/observation/win31_startup_contract.asm" -Raw)
+$asm="%define MOUSE_MENU $([int][bool]($MouseMenu -or $GuestUserInput))`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n%define FIRST_DOS_BEFORE_SECOND 0`n"+(Get-Content "$repo/test/observation/win31_startup_contract.asm" -Raw)
 $actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
 $routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
 if($GuestUserInput){
@@ -350,7 +350,7 @@ $env:MVDM_CONTINUATION_TRACE="$task/trace.txt"
 
 try {
 
- . "$repo/tests/observation/isolated_package_cleanup.ps1"
+ . "$repo/test/observation/isolated_package_cleanup.ps1"
  $stage=$null;$scope=$null;$process=$null
  New-Item -ItemType Directory "$task/runtime"|Out-Null
  Copy-Item "$task/controller.exe" "$dest/PATCH/VMTEST.EXE"
@@ -475,7 +475,7 @@ try {
    }
   }
  } finally {
-  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  . "$repo/test/observation/isolated_package_cleanup.ps1"
   Remove-OwnedGuestProbeCopy $dest $task $source
  }
 }

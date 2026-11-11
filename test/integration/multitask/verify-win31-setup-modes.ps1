@@ -15,7 +15,7 @@ if(!$output.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordinal
 New-Item -ItemType Directory $output|Out-Null
 $savedPath=$env:PATH;$savedPause=$env:NTVDM_SETUP_TEST_NO_PAUSE
 $mouseTools=Join-Path $output 'mouse-tools'
-& "$repo/tests/observation/build-win101-mouse-window-probe.ps1" -BuildRoot ([IO.Path]::GetRelativePath($repo,$mouseTools))
+& "$repo/test/observation/build-win101-mouse-window-probe.ps1" -BuildRoot ([IO.Path]::GetRelativePath($repo,$mouseTools))
 $failures=@()
 foreach($mode in 0,1){
  $task=Join-Path $output "mode$mode"
@@ -84,7 +84,7 @@ foreach($mode in 0,1){
   $controller=Join-Path $task 'prompt-check.exe'
   $controllerOptions=@()
   if($DosReentry){$controllerOptions+= '-DW31_SCHEDULING_INTERACTIVE'}
-  & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
+  & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'Prompt controller assembly failed'}
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
    if($DosReentry -and $case -ne '386-dosonly0'){continue}
@@ -137,7 +137,7 @@ foreach($mode in 0,1){
   }
   if($DosReentry){continue}
   # Enhanced DOSONLY=1 schedules guest prompts with either payload selection.
-  & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
+  & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'Interactive controller assembly failed'}
   # Preserve the single-prompt source flags except for windowed/background.
   $description=& "$repo/assets/release/PIF.EXE" show $profile
@@ -146,7 +146,7 @@ foreach($mode in 0,1){
   $flags=([Convert]::ToUInt32($flagsLine.Matches[0].Groups[1].Value,16) -band (-bnot 8)) -bor 2
   $program="$dest\FULLKEY.COM"
   if(Test-Path $program){throw 'Fullscreen fixture path already in use'}
-  & nasm -f bin "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_fullscreen_key.asm" -o $program
+  & nasm -f bin "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_fullscreen_key.asm" -o $program
   if($LASTEXITCODE){throw 'Fullscreen guest fixture assembly failed'}
   & "$repo/assets/release/PIF.EXE" update $profile --arguments "/c $program" --w386-flags $flags
   if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt for Alt+Enter'}
@@ -173,13 +173,13 @@ foreach($mode in 0,1){
    foreach($path in $program,"$dest\PATCH\$id.RUN","$dest\PATCH\$id.END"){
     if(Test-Path $path){throw "Guest pair fixture already exists: $path"}
    }
-   & nasm -f bin "-DW31_INSTALL='$dest'" "-DROLE='$id'" "-DPEER='$peer'" "$repo/tests/observation/win31_dos_pair.asm" -o $program
+   & nasm -f bin "-DW31_INSTALL='$dest'" "-DROLE='$id'" "-DPEER='$peer'" "$repo/test/observation/win31_dos_pair.asm" -o $program
    if($LASTEXITCODE){throw 'DOS pair assembly failed'}
    & "$repo/assets/release/PIF.EXE" update $pif --title "S14 prompt $id" --w386-flags $flags --arguments "/c $program"
    if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt'}
   }
   $controller=Join-Path $task 'prompt-pair.exe'
-  & nasm -f bin -DW31_PROMPT_CHECK -DW31_PROMPT_PAIR "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o $controller
+  & nasm -f bin -DW31_PROMPT_CHECK -DW31_PROMPT_PAIR "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o $controller
   if($LASTEXITCODE){throw 'DOS pair controller assembly failed'}
   Select-LaunchProfile '386-dosonly1'
   $out=Join-Path $task '386-dosonly1-pair'
@@ -206,7 +206,7 @@ foreach($mode in 0,1){
    if(@(Get-ChildItem $copy.Source -Force -Recurse -File).Count -ne $copy.Original.Count){throw 'Source installation inventory changed'}
    foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Source installation changed: $($row.path)"}}
   } finally {
-   . "$repo/tests/observation/isolated_package_cleanup.ps1"
+   . "$repo/test/observation/isolated_package_cleanup.ps1"
    Remove-OwnedGuestProbeCopy $dest $task $copy.Source
   }
  }

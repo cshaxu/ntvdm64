@@ -89,7 +89,7 @@ manifest before S3 changes product paths.
 | Live DOS/WOW source and guest artifact/build inputs below `src/opennt/base/mvdm/{dos,wow16}` | `src/opennt-guest/` | Move only source and artifact inputs belonging to the guest. Original prebuilt artifacts remain default packaging inputs. |
 | Live OpenNT headers below `src/opennt/base/mvdm/inc`, SoftPC includes, and public/internal include trees | `opennt-bop/include`, `non-mvdm/include`, or `opennt-guest/include` | Split by original consumer/owner; host ABI declarations are published by `non-mvdm` to its declared consumers. |
 | Unreached full OpenNT source not named by the product manifest | `refs/opennt/` evidence input | Remove it from product source/build roots while retaining immutable original-source provenance. It is not a second runtime provider. |
-| `tests/bx-vdm/`, `tests/opennt/`, `tests/runner/`, and old machine-composition test paths | `tests/adapter-softpc`, `tests/opennt-bop`, `tests/opennt-host`, `tests/opennt-guest`, or `tests/app` | Move each test with the library/component under test. Retain historical task names only in fixture filenames and evidence. |
+| `tests/bx-vdm/`, `tests/opennt/`, `tests/runner/`, and old machine-composition test paths | `tests/adapter-softpc`, `tests/opennt-bop`, `test/opennt-host`, `tests/opennt-guest`, or `test/app` | Move each test with the library/component under test. Retain historical task names only in fixture filenames and evidence. |
 | `tools/build/*manifest*` and formal Ninja source lists | `tools/build/` | Keep tools in place; replace legacy paths, include roots, module names, fixture library lists, and final link order with target-component entries. |
 
 `src/bx-vdm/bop/shim/` is explicitly a mixed historical directory. Its name is

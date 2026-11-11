@@ -36,7 +36,7 @@ replacement.  Guest media and guest source remain unchanged.
 
 ## Executed evidence
 
-1. `tests/observation/verify-wow-hard-error-decoder.ps1` at
+1. `test/observation/verify-wow-hard-error-decoder.ps1` at
    `build/t464-s2/decoder-r11` passed all five source-slot/default/cancel
    assertions.
 2. The cached x64 host components, x86 original-SoftPC worker and versioned

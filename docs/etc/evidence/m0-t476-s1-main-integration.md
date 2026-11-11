@@ -15,7 +15,7 @@ mirror exclusions remain in force; no guest source or image was changed here.
 ## Main integration verification
 
 - Cached x86 product, NTVDM and WOW32 builds and x64 native product builds
-  passed from the merged source. `tests/audit/verify-t476-s1-exclusions.py`
+  passed from the merged source. `test/audit/verify-t476-s1-exclusions.py`
   passed for 30 recorded exclusions. Documentation governance passed.
 - The coherent candidate `9cbf91c3-9d92-4d7c-b007-7bde1d500219` passed the
   full selected product integration gate. This includes native and DOS command

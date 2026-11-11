@@ -8,7 +8,7 @@ startup-only research is not resumed and no new runtime capability is claimed.
 
 Input O:/win31/SYSTEM/MOUSE.DRV, Mouse8.20 SHA256
 B4F0B9DE8043071FA2B82B16373BF5188BBE8162C3EF24C8C3D1B01F86B96B07.
-`tests/observation/audit-win31-mouse.py --driver <input> --output
+`test/observation/audit-win31-mouse.py --driver <input> --output
 build/M0-T436/S2/r001-abi/retail-mouse.json` reads movable/fixed NE export
 bundles, segments, imports and names. It does not write the input, copy code
 or prove execution. NE expected Windows version030A, automatic data segment2,

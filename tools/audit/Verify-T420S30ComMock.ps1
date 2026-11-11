@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$fixture = Join-Path $repo 'tests\mvdm-host\nt_com_mock_fixture.c'
+$fixture = Join-Path $repo 'test\mvdm-host\nt_com_mock_fixture.c'
 $vsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $fixture -PathType Leaf)) {
     throw "Missing original nt_com mock fixture: $fixture"

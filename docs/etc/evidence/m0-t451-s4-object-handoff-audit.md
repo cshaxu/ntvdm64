@@ -87,7 +87,7 @@ published artifacts were byte-identical to `assets/release`:
 The established private-desktop WINMINE integration regression then passed
 from `build/t451-s4/winmine-r5`.  Its result records flag/counter, reset,
 open-cell, `WM_CLOSE`, and normal Run16 completion.  The run used the current
-standard observer built from `tests/observation/console_startup_observer.c`:
+standard observer built from `test/observation/console_startup_observer.c`:
 
 ```
 build/.ninja/msvc-x64-release/message-probes/console-startup-observer.exe

@@ -42,7 +42,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
+build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
 build obj/console_compat.obj: cc `$root/src/ntvdm-exe/win32/console_compat.c
 build obj/console_client.obj: cc `$root/src/ntvdm-exe/win32/console_client.c
 build obj/worker_client.obj: cc `$root/src/common/console/client.c

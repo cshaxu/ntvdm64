@@ -152,7 +152,7 @@ at the explicit768-line graphics limit rather than an inactive-union read.
 No shared-library edit or runtime publication has occurred. A minimal800-line
 capacity exception has been requested from the owner; it is not yet approved.
 
-r41 builds tests/component-integration/frontend_window_mouse_test.c together
+r41 builds test/component-integration/frontend_window_mouse_test.c together
 with the production window_mouse.c (/MT /TC /std:c11, src and NTCON include
 roots). Output is build/M0-T423/S13/mouse-r41/test.exe; log is
 O:/winnt/Logs2/t423-s13-mouse-r41-fixture.txt. Existing DOS/native/reset/failure
@@ -201,7 +201,7 @@ r46 and Window r47 regressions are running; publication remains the S12 set.
 Earlier complete regressions must be rerun for these changed production inputs.
 
 r46 Console and r47 Window have now each completed17/17 passing cases.
-r48 adds tests/observation/ntw32_mouse_probe.c, an ordinary native Console
+r48 adds test/observation/ntw32_mouse_probe.c, an ordinary native Console
 application launched by candidate run16. It requests80x50 and waits for real
 MOUSE_EVENT records. The existing private desktop observer uses WINDOW_INPUT,
 TEXT_CURSOR and S7MOUSE.dll to switch through CAF, then injects motion/press/
@@ -284,7 +284,7 @@ previous frontiers: WINMINE main window, SOL OOM, WRITE OOM. Physical play,
 foreground activation and clipping remain owner-waived, not proved by these
 background observations.
 
-New tests/observation/ntw32_geometry_handoff_probe.c is an ordinary Win32
+New test/observation/ntw32_geometry_handoff_probe.c is an ordinary Win32
 target, built by the formal ntw32-geometry-handoff-probe.exe target and copied
 only to candidate tests/GEOMH.EXE. It observes its inherited80x25 logical view,
 deliberately applies80x43 or80x50 with a200-row history prefix, and performs
@@ -380,7 +380,7 @@ retire1000 and latency200. r78 ordinary NTCON80x50 mouse target receives real
 motion before press and a release, with sink acknowledgment and exit0.
 These passed gates do not override the subsequent r79 failure.
 
-The new reusable tests/observation/verify-text-geometry-handoff.ps1 runs the
+The new reusable test/observation/verify-text-geometry-handoff.ps1 runs the
 formal ntw32-geometry-handoff-probe.exe and NASM-built GRID.COM from existing
 package tests/, in private desktops with a200-column observer buffer. It
 requires nine child completions, three history/size checks, actual guest/MEM/

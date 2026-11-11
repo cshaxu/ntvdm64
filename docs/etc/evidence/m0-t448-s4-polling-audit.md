@@ -160,7 +160,7 @@ the full coherent publication gates remain open.
 
 ## Q05 deterministic failure coverage
 
-`tests/app/ntvwm_close_events_test.c` includes the actual Console-state source
+`test/app/ntvwm_close_events_test.c` includes the actual Console-state source
 with only host API boundaries substituted. Eleven cases repeated16 times
 assert exact failure returns, detach/post/wait/unhook counts, preservation of
 WM_QUIT, restoration of a pre-existing callback TLS binding, and rejection of
@@ -215,7 +215,7 @@ partial displacement, full cancellation and borrowed-handle preservation.
 Console-client fixture compilation also passes. r13/controller27940's runner
 incorrectly expected zero from that client's intentional close callback; its
 actual result0x49 and PASS callback log match the established contract in
-tests/observation/verify-console-close-contract.ps1. Preserve r13 as a failed
+test/observation/verify-console-close-contract.ps1. Preserve r13 as a failed
 harness assertion, not a product regression or a silently rewritten pass.
 The corrected r14 uses that existing0x49 contract with fresh evidence.
 
@@ -362,13 +362,13 @@ No broad rewrite of original timers or private NT4 scheduling is authorized.
 
 | Scope | Tracked entrypoint and assertions | Boundary |
 | --- | --- | --- |
-| Q05 real close | `tests/observation/ntvwm_close_test.c`, no arguments: live-client CTRL_CLOSE delivery, exact window gone before return, child exit, empty carrier and repeated close rejection. | Real hidden Console; host scheduling is not exhaustively enumerated. |
-| Q05 failure ordering | `tests/app/ntvwm_close_events_test.c`, no arguments:176 checks of subscription/detach/post/wait failures, unrelated notifications, WM_QUIT and TLS cleanup. | Actual source with substituted host API edges; complements rather than replaces real close. |
-| Q07 capacity | `tests/component-integration/softpc_relative_mouse_bridge_test.c`, no arguments: full readiness reset, partial movement keeps slot occupied, real slot release/cancel signals, handoff preserves borrowed handle. | Real queue/bridge/event, mocked ICA/IRQ; full guest saturation is not directly injected. |
-| Q07 integration | `tests/app/console_client_test.c` plus existing `tests/observation/verify-console-close-contract.ps1`: borrowed readiness identity and close callback's deliberate0x49 result. DOS17 and CAF-three exercise the unchanged original input path. | Integrated ordinary input/exit, not every possible concurrent producer interleaving. |
-| Q06 capture | `tests/observation/ntvwm_presentation_test.c`, report path: repeated instability emits no publication, non-retry failure stops immediately, eventual real-buffer capture completes publication. | New fixture-specific acquisition injection plus real Console/named-pipe peer; r16 result pending. |
-| Lifecycle non-regression | `tests/observation/verify-console-caf-self-delete.ps1`, cmd/command/ntmon defaults: actual Delete/Y and both echo-before-Enter assertions. Existing service/RPC/owner tests retain stop/loss/error precedence. | Uses isolated owned processes; cleanup of a failing fixture is never counted as normal exit. |
-| Build/publication | `tests/build/Test-FullComponentBuild.ps1`:13 selected images and unchanged second-build intermediates; package manifest checked at both publication destinations. | Per-candidate hashes, not a claim that an old run covers later source. |
+| Q05 real close | `test/observation/ntvwm_close_test.c`, no arguments: live-client CTRL_CLOSE delivery, exact window gone before return, child exit, empty carrier and repeated close rejection. | Real hidden Console; host scheduling is not exhaustively enumerated. |
+| Q05 failure ordering | `test/app/ntvwm_close_events_test.c`, no arguments:176 checks of subscription/detach/post/wait failures, unrelated notifications, WM_QUIT and TLS cleanup. | Actual source with substituted host API edges; complements rather than replaces real close. |
+| Q07 capacity | `test/component-integration/softpc_relative_mouse_bridge_test.c`, no arguments: full readiness reset, partial movement keeps slot occupied, real slot release/cancel signals, handoff preserves borrowed handle. | Real queue/bridge/event, mocked ICA/IRQ; full guest saturation is not directly injected. |
+| Q07 integration | `test/app/console_client_test.c` plus existing `test/observation/verify-console-close-contract.ps1`: borrowed readiness identity and close callback's deliberate0x49 result. DOS17 and CAF-three exercise the unchanged original input path. | Integrated ordinary input/exit, not every possible concurrent producer interleaving. |
+| Q06 capture | `test/observation/ntvwm_presentation_test.c`, report path: repeated instability emits no publication, non-retry failure stops immediately, eventual real-buffer capture completes publication. | New fixture-specific acquisition injection plus real Console/named-pipe peer; r16 result pending. |
+| Lifecycle non-regression | `test/observation/verify-console-caf-self-delete.ps1`, cmd/command/ntmon defaults: actual Delete/Y and both echo-before-Enter assertions. Existing service/RPC/owner tests retain stop/loss/error precedence. | Uses isolated owned processes; cleanup of a failing fixture is never counted as normal exit. |
+| Build/publication | `test/build/Test-FullComponentBuild.ps1`:13 selected images and unchanged second-build intermediates; package manifest checked at both publication destinations. | Per-candidate hashes, not a claim that an old run covers later source. |
 
 The preceding r15 individual records and post-r15 recovery establish P1's
 delivered gates. r16 is a separate candidate for Q06; its in-progress output

@@ -10,7 +10,7 @@ WOW32 route can be called restored?
 ## Inputs and procedure
 
 The read-side ABI is hash-pinned by
-`tests/observation/verify-wow-user-profile.ps1`.  It verifies 49 instruction
+`test/observation/verify-wow-user-profile.ps1`.  It verifies 49 instruction
 patterns in the immutable `USER.EXE` and emits the corresponding offsets.
 The write side was inspected in the current worker page domain,
 `wuman.c::WU32NotifyWow`, the target-local registration/object bindings and
@@ -70,9 +70,9 @@ ordinary thunk and callback) on the final WRITE/WINMINE/SOL artifact set.
 ## Reproduction
 
 ```powershell
-& .\tests\observation\verify-wow-user-profile.ps1 `
+& .\test\observation\verify-wow-user-profile.ps1 `
     -RepositoryRoot (Get-Location).Path
-& .\tests\observation\verify-wow32-client-view-gap.ps1 `
+& .\test\observation\verify-wow32-client-view-gap.ps1 `
     -RepositoryRoot (Get-Location).Path
 rg -n 'mvdm_softpc_wow_page_domain_(set|clear)_client_desktop' src tests
 ```

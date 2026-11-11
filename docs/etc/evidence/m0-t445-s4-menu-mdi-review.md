@@ -184,7 +184,7 @@ binary derivation and metric/color adaptation in the scrollbar audit. The
 current executable is r254; this resolves the identified missing variant,
 not physical sizing acceptance or whole-S4 delivery.
 
-Delivery scope remains src/win16-style, the named standalone tests/observation
+Delivery scope remains src/win16-style, the named standalone test/observation
 scripts and T445 evidence/plan/status. Existing WOW proposal files and QUEUE
 changes are unrelated and must not be swept into a blanket commit. No build
 output, production image, mirror or guest change is included.
@@ -203,7 +203,7 @@ blankness remains the independent S7 question, not a repair claimed here.
 
 ## Candidate and procedure
 
-Background tests/observation/verify-win16-style.ps1 run at
+Background test/observation/verify-win16-style.ps1 run at
 build/M0-T445/S4/r052: MSVC x86/x64 /MT /O2 /W4 /WX, Ninja, standalone library
 and authored fixtures only. Runner PID35852 started 2026-10-12 13:38:59,
 180-second deadline, exit0. Both widths pass 27,261 retained checks plus

@@ -248,7 +248,7 @@ geometry. Existing owner-accepted mojibake is not a waiver of W04 OEM behavior.
 
 ## Mandatory executable tests for each implementation S
 
-Every implementation S delivers checked-in test source/scripts under tests/,
+Every implementation S delivers checked-in test source/scripts under test/,
 not only research notes, disposable build fixtures or a list of commands.
 Reuse and extend existing tests when valid. Generated binaries remain under
 build/ and runtime tests/logs under O:/winnt/tests and O:/winnt/logs.

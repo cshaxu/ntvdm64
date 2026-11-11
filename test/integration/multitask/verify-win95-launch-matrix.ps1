@@ -16,7 +16,7 @@ if(!$output.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordinal
 New-Item -ItemType Directory $output|Out-Null
 $mouseTools=Join-Path $output 'mouse-tools'
 if($schedule){
- & "$repo/tests/observation/build-win101-mouse-window-probe.ps1" -BuildRoot ([IO.Path]::GetRelativePath($repo,$mouseTools))
+ & "$repo/test/observation/build-win101-mouse-window-probe.ps1" -BuildRoot ([IO.Path]::GetRelativePath($repo,$mouseTools))
 }
 $rows=@();$savedPath=$env:PATH
 foreach($dos in 0,1){foreach($multitask in 0,1){
@@ -62,7 +62,7 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
     $controllerOptions=@();$route='cmd.exe'
     if(!$multitask){$expectedScheduling='blocking'}
    }
-   & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/tests/observation/win31_startup_contract.asm" -o "$task/controller.exe"
+   & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o "$task/controller.exe"
    if($LASTEXITCODE){throw 'Scheduling controller assembly failed'}
    $runtimeOptions=@{WindowsProbeImage="$task/controller.exe";Scheduling=$expectedScheduling;ScheduledRun16Command=$route;MouseProbeRoot=$mouseTools}
   }
@@ -88,7 +88,7 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
     ConvertTo-Json | Set-Content "$task/native-owner.json"
   }
   $rows|ConvertTo-Json -Depth 5|Set-Content "$output/matrix.json"
-  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  . "$repo/test/observation/isolated_package_cleanup.ps1"
   Remove-OwnedGuestProbeCopy $dest $task $copy.Source
  }
 }}

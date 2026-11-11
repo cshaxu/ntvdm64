@@ -37,7 +37,7 @@ deleted.
 ## Focused verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win101_setup_cmd_test.ps1 -ToolRoot tools\win101-setup -BuildRoot q
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win101_setup_cmd_test.ps1 -ToolRoot tools\win101-setup -BuildRoot q
 ```
 
 Passed. The disposable flat-media fixture proves first application, byte-for-

@@ -23,7 +23,7 @@ change. No guest or released add-on bytes changed.
 ## Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win31_launch_mouse_path_contract_test.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win31_launch_mouse_path_contract_test.ps1
 ```
 
 Passed. The test checks the preflight list, hash input, backup input, and

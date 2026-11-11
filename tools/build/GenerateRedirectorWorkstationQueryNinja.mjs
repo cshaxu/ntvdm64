@@ -65,7 +65,7 @@ const ninja = [
   "build obj/location.obj: cc $root/src/ntvdm-exe/softpc/mvdm_guest_location.c",
   "build obj/session.obj: cc $root/src/ntvdm-exe/session/session.c",
   "build obj/lease.obj: cc $root/src/ntvdm-exe/session/guest_memory_lease.c",
-  "build obj/fixture.obj: cc $root/tests/mvdm-host/vdmredir/redirector_guest_copy_fixture.c",
+  "build obj/fixture.obj: cc $root/test/mvdm-host/vdmredir/redirector_guest_copy_fixture.c",
   "build bin/redirector-guest-copy-fixture.exe: link obj/guest-copy.obj obj/location.obj obj/session.obj obj/lease.obj obj/fixture.obj",
   "default obj/vrnetapi.obj obj/vrremote.obj bin/redirector-guest-copy-fixture.exe",
   ""

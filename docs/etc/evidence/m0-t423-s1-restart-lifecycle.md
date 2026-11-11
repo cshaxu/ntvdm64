@@ -26,7 +26,7 @@ initial hashes and require the combined gate again.
 
 ## Tests and observed facts
 
-The existing `tests/observation/console_startup_observer.c` now supports
+The existing `test/observation/console_startup_observer.c` now supports
 MVDM_OBSERVER_PRIVATE_DESKTOP=1, without switching the input desktop. It
 records Console members after task completion. MVDM_OBSERVER_POST_EXIT_MS
 optionally delays this snapshot (at most 5000 ms), without killing the worker.
@@ -47,7 +47,7 @@ src/product-package/package_layout.c::app_package_layout_command_value_fits:
 the original command value includes the root twice and must fit 64 bytes.
 No attempt is made to modify guest or relax that guard.
 
-`tests/observation/run16_new_console_lifecycle.c` launches run16 on a private
+`test/observation/run16_new_console_lifecycle.c` launches run16 on a private
 desktop with CREATE_NEW_CONSOLE. It never attaches to that Console before
 the launcher exits. It observes exact child handles, waits five seconds for
 normal retirement and checks for remaining Console windows. Cleanup is after
@@ -214,7 +214,7 @@ restricts cleanup to exact package paths; it never broadens ownership merely
 because a process has a product filename. Both r2 cases complete their
 cleanup check. Reports and captures are under O:/winnt/logs with that prefix.
 
-Real native control-event test: `tests/observation/run16_control_event_test.c`,
+Real native control-event test: `test/observation/run16_control_event_test.c`,
 compiled x86 `/MT` with explicit `/Fo` and `/Fe` below `build/M0-T423/S1`.
 Run the fixture as `--run <run16.exe> <O:/winnt/logs/report> c` or `break`.
 It creates a private desktop/Console, launches an actual native child through
@@ -243,7 +243,7 @@ used. It requires the child to receive the event, finish cleanup and return
   17 cases (`O:/winnt/logs/t423-s1-dos17-control-r1-summary.json`);
   this is not a delivered P.
 - Direct DOS control events separately pass through
-  `tests/observation/verify-run16-dos-control.ps1 -Observer
+  `test/observation/verify-run16-dos-control.ps1 -Observer
   O:/winnt/tests/t423-s1-console-observer.exe -LogPrefix t423-s1-dos-control-r2`.
   The observer generates real C and Break events after the actual COMMAND
   prompt, then enters VER/MEM/EXIT. Both cases assert event generation,
@@ -285,7 +285,7 @@ used. It requires the child to receive the event, finish cleanup and return
   launcher identity; no production hook was restored. Environment is explicitly
   passed through non-shell process creation. The remaining historical default
   and barrier branches have not been revalidated and are not claimed here.
-- Combined dtmgr source passes `tests/observation/verify-dtmgr-layout.ps1
+- Combined dtmgr source passes `test/observation/verify-dtmgr-layout.ps1
   -BuildRoot build/M0-T423/S1/dtmgr-final-review`: frame, four arrows, colors,
   25 rows, overflow selection, horizontal extent, shrink, empty and confirmation.
   Formal incremental build recompiles/relinks only dtmgr; log:

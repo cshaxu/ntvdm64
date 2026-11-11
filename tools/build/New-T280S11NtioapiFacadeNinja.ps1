@@ -27,7 +27,7 @@ rule link
   description = LINK `$out
 
 build obj/ntioapi_facade.obj: cc `$root/src/ntvdm-exe/win32/ntioapi_facade.c
-build obj/ntioapi_fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/t280_s11_ntioapi_facade_fixture.c
+build obj/ntioapi_fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/t280_s11_ntioapi_facade_fixture.c
 build ntioapi_facade_fixture.exe: link obj/ntioapi_facade.obj obj/ntioapi_fixture.obj
 default ntioapi_facade_fixture.exe
 "@

@@ -559,7 +559,7 @@ FB3569B4DDCD34E17A3426B97F3E23C6C9371FF8F2E874A61FBD7D16B013F363,
 under O:/repos.external/OpenNT/windows/core/ntuser/client. These are historical
 comparison evidence, not imported code or proof of every Win3.1 behavior.
 
-horizontal_list_probe in tests/app/win16_style_scroll_api.c independently
+horizontal_list_probe in test/app/win16_style_scroll_api.c independently
 creates native lists on its private desktop. Both current host widths report:
 
 - Single-column requested position2: scrollbar position2, top item0.
@@ -749,7 +749,7 @@ removal remain checked. Pixel helpers now accept an explicit axis rather than
 inferring EDIT orientation from LISTBOX style bits.
 
 Full hidden runner PID44172, start2026-10-12 18:33:13 local, exits0. Command:
-tests/observation/verify-win16-style.ps1 -BuildRoot build/M0-T445/S4/r153.
+test/observation/verify-win16-style.ps1 -BuildRoot build/M0-T445/S4/r153.
 Both x86/x64 pass791,847 model checks, native API probes, retained list/Combo
 and multicolumn cases, new both-axis EDIT checks, and27,261 full gallery checks.
 GDI attachment baseline/final remains56/56. The x86 combined-popup screenshot
@@ -778,7 +778,7 @@ The comparison includes1008 ink pixels and asserts the top item stays0. It
 does not merely check a scrollbar value or a blank rectangle.
 
 Full hidden r154 runner PID3812, start2026-10-12 18:38:02 local, exit0, uses
-tests/observation/verify-win16-style.ps1 -BuildRoot build/M0-T445/S4/r154.
+test/observation/verify-win16-style.ps1 -BuildRoot build/M0-T445/S4/r154.
 Both widths pass the new pixel test, retained list/Combo/EDIT and model/API
 checks,27,261 full gallery assertions, and GDI56/56. x64 demo SHA-256:
 F2004C0C21BE3BFF9A65D890070A49F6036FB0867FE419D0F70DD325898BF886.
@@ -822,7 +822,7 @@ the unshortened26px. Correct the probe's source-derived sample rectangle, keep
 all578 samples and the assertion, and retain mismatch diagnostics.
 
 Full hidden r158 runner PID36868 start2026-10-12 18:47:00 local exits0 using
-tests/observation/verify-win16-style.ps1 -BuildRoot build/M0-T445/S4/r158.
+test/observation/verify-win16-style.ps1 -BuildRoot build/M0-T445/S4/r158.
 Both widths pass6 horizontal-list native boundaries, content/axis/pixel checks,
 the retained list/Combo/EDIT suites,791,847 model checks, native API probes,
 27,261 gallery assertions and GDI56/56. The x64 demo hash is
@@ -1516,7 +1516,7 @@ geometry. Do not rename these limitations as faithful original behavior.
 Owner requires the title, menus and controls to share24-pixel type and chooses
 scaled System bitmap appearance rather than a different scalable font. Current
 separate title stretch and stock menu/control fonts do not satisfy this.
-Existing tests/app/win31_font_probe.c demonstrates that public
+Existing test/app/win31_font_probe.c demonstrates that public
 AddFontMemResourceEx accepts a raw private FNT in this host. Its guest font
 bytes are not reused. The new build-owned feasibility probe rasterizes the
 host System's CP1252 characters32..255, scales each glyph with COLORONCOLOR
@@ -1565,7 +1565,7 @@ are copied. Composition uses public AddFontMemResourceEx instead of importing
 the private GDI font driver/loader. The existing standalone font probe already
 established this bounded loader boundary.
 
-New tests/app/win16_style_font.c independently constructs expected glyphs with
+New test/app/win16_style_font.c independently constructs expected glyphs with
 host System TextOut/StretchBlt and compares every output pixel and width. It
 also checks native EDIT24-row positioning/selection, shared handle references,
 repeat acquire/release and GDI non-growth in normal and logical96 contexts.
@@ -1929,7 +1929,7 @@ is96 pixels with System16; font24 alone retains96; explicitly resetting the
 same DLU value produces144; reverting to default font24 tabs produces96.
 This distinguishes default dynamic spacing from stored explicit pixels.
 
-The retained tests/app/win16_style_list_tabs.c extends the native oracle with
+The retained test/app/win16_style_list_tabs.c extends the native oracle with
 default16 versus default24 and two explicit stops versus one repeated interval.
 It is a native contract test, not a passing implementation test for currently
 rejected LBS_USETABSTOPS. The full runner includes its source in the manifest.
@@ -1989,7 +1989,7 @@ Reading opaque tab state, resetting unknown tabs or remapping arbitrary parent
 pixels is not implemented. A proposed adapter still must preserve callbacks,
 selection/focus/disabled semantics and the current palette without global state.
 
-The reproducible tests/app/win16_style_list_tabs.c now retains the four-state
+The reproducible test/app/win16_style_list_tabs.c now retains the four-state
 native color boundary, font/selection/top-index preservation and a final
 unchanged-tab-position assertion. Existing native tab arithmetic and styled
 single/multicolumn origin tests remain. The test is already selected by the
@@ -2215,7 +2215,7 @@ not as whole-S4 closure. The remaining audit rows above stay open.
 
 ### Clipboard fixture isolation boundary
 
-r245 adds tests/app/win16_style_edit_clipboard.c: native/styled single-line
+r245 adds test/app/win16_style_edit_clipboard.c: native/styled single-line
 and multiline EDIT copy, cut, paste, undo, read-only refusal and font restoration.
 Before any clipboard operation it creates a uniquely named private window
 station, binds the process, verifies its name and creates a private desktop.
@@ -2280,7 +2280,7 @@ Combo child installation also crosses synchronous callbacks before assigning
 its owner. This is a local lifetime/return-contract defect, not evidence of a
 new physical click-flicker cause.
 
-New tests/app/win16_style_control_lifetime.c uses an application subclass that
+New test/app/win16_style_control_lifetime.c uses an application subclass that
 removes/destroys the control attachment during WM_SETFONT. Against unchanged
 r247 x64 library, r248 build44180 (2026-10-13 00:28:47 local) exits0; private
 desktop probe47788 at00:29:09 exits1: removal occurs but installed=1. This
@@ -2383,7 +2383,7 @@ delegate unchanged. Screen painting uses the existing transient composition;
 WM_PRINTCLIENT restores the borrowed DC. No global color/theme is changed.
 
 Sample01 adds a labelled size box without a Tab stop or meaningless scrollbar
-range initialization. tests/app/win16_style_sizebox.c compares the three native
+range initialization. test/app/win16_style_sizebox.c compares the three native
 and styled forms, checks exact ink bounds, every painted/sentinel pixel and
 the parent command routes. The full runner builds/runs both modes for each
 width and includes the fixture in its source manifest. The test does not

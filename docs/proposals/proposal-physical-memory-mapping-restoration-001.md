@@ -59,7 +59,7 @@ restoration has two concrete consumer paths, not a generic mapping redesign:
 Current `VdmAddVirtualMemory` requires a prior
 `mvdm_softpc_physical_mapping_publish` record. The follow-up search of src,
 tests and tools found the explicit publication call in
-`tests/mvdm-host/ccpu_bounded_execution_fixture.c`, but no production caller;
+`test/mvdm-host/ccpu_bounded_execution_fixture.c`, but no production caller;
 the original-shaped WOW calls still pass `pvBits` directly. This is a
 source-visible integration gap to verify first, conditional on actual branch
 selection, not a demonstrated WRITE root cause. The existing fixture supplies

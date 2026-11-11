@@ -8,7 +8,7 @@ fs.mkdirSync(build,{recursive:true});
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "path_abi_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%path_abi_cwd%"\r\n%*\r\n');
 const log=fs.openSync(path.join(build,'build.log'),'w');
-const compile=spawnSync('cmd.exe',['/d','/c',`call "${env}" cl.exe /nologo /MT /W4 "${root}/tests/broker/path_name_abi.c" /Fepath-abi.exe /Fopath-abi.obj /link ntdll.lib`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
+const compile=spawnSync('cmd.exe',['/d','/c',`call "${env}" cl.exe /nologo /MT /W4 "${root}/test/broker/path_name_abi.c" /Fepath-abi.exe /Fopath-abi.obj /link ntdll.lib`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
 fs.closeSync(log);
 assert.equal(compile.status,0,'See build.log');
 const exe=path.join(build,'path-abi.exe'), image=fs.readFileSync(exe);

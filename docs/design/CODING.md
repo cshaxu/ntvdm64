@@ -180,7 +180,7 @@ OpenNT font files, which are not under `base/mvdm`. The extracted printer
 carrier is named monitor-adapter material, not a second original root.
 One physical tree may generate several libraries; a path move does not create
 a link edge. Production roots contain production inputs only; tests and
-examples stay under `tests/`; historical source comparison stays in the
+examples stay under `test/`; historical source comparison stays in the
 explicitly read-only external reference roots under `O:\repos.external`.
 `src.old/` is quarantined comparison material and never a source, build, link
 or runtime input.
@@ -450,7 +450,7 @@ and retain the original unavailable result. If a protocol-accurate mock,
 controlled peer, fake device endpoint, or fault-injection harness can be
 written without changing product behavior, it is mandatory test-only work.
 It must exercise the original guest caller, original provider, I/O or request
-boundary, failure, and cleanup. It belongs below `tests/` and its emitted
+boundary, failure, and cleanup. It belongs below `test/` and its emitted
 artifacts follow the normal `build/`/`O:\winnt\tests` rules; it must never be
 linked, copied, or selected as a product provider.
 

@@ -20,9 +20,9 @@ replacement BaseSrv state machine. No imported source was changed by this probe.
 
 Tracked inputs:
 
-- `tests/broker/resource_attachment.idl`: typed file/event attachments; no
+- `test/broker/resource_attachment.idl`: typed file/event attachments; no
   sender-local handle integer or guest pointer is a message field.
-- `tests/broker/resource_attachment.c`: two test-only process roles, a local
+- `test/broker/resource_attachment.c`: two test-only process roles, a local
   authenticated endpoint and finite resource assertions. The security callback
   checks the caller's impersonated AuthenticationId against the server's logon.
 - `tools/audit/Verify-BrokerResourceAttachment.mjs`: build and bounded owned-child

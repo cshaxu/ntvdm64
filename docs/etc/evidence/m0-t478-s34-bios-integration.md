@@ -41,7 +41,7 @@ synthetic clearing of ISR/device state, suppressed EOI or new retries. Those
 would add replacement semantics instead of correcting the original typo.
 No selected branch is restored or removed. Mirror raw EOL is preserved.
 
-Reproducer: launch `python tests/observation/verify-slave-bios-eoi.py
+Reproducer: launch `python test/observation/verify-slave-bios-eoi.py
 --build-root build/t478-s34/<fresh>` as an owned background process; it compiles
 the fixture with the current selected graph flags and links the current
 production archives, captures source/archive/EXE/map identity, and retains

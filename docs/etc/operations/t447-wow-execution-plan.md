@@ -250,7 +250,7 @@ none exposes a protected alias. Output is not already copied to the sender
 at early reply. This preserves the adopted modern USER contract, not NT4's
 early-copy/ordering guarantee. No runtime or guest source changes follow from
 this test/source-only checkpoint; P21 remains the published baseline.
-Reproduce with tests/observation/verify-wow-message-capture.ps1 -EvidenceRoot
+Reproduce with test/observation/verify-wow-message-capture.ps1 -EvidenceRoot
 <fresh-build-evidence-root>, as an owned hidden background job. The producer
 reuses the existing two strict native Release/MT targets, preserves default
 invocation and records host/source/graph/artifact identities. See the

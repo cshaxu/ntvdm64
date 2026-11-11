@@ -9,7 +9,7 @@ hash was rechecked.
 
 ## Measured project-owned stages
 
-`tests/observation/measure-worker-primitives.*` compiles the unmodified shared
+`test/observation/measure-worker-primitives.*` compiles the unmodified shared
 publisher and its DOS mouse queue with the x86 production flags.  Each
 publisher sample measures `offer` through the configured send callback after
 an idle publisher has been started.  The mouse result measures an immediate

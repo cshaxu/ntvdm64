@@ -22,8 +22,8 @@ No real keyboard producing those exact scans or user-visible crash is claimed.
 
 ## Actual-object verification
 
-Reuse the existing [fixture](../../../tests/mvdm-host/keycode_object_contract_fixture.c)
-and [runner](../../../tests/observation/verify-softpc-object-contract.ps1):
+Reuse the existing [fixture](../../../test/mvdm-host/keycode_object_contract_fixture.c)
+and [runner](../../../test/observation/verify-softpc-object-contract.ps1):
 Contract keycode, separate baseline/current directories under build/t478-s13.
 Both link the actual cached nt_keycd.obj and nt_input.obj. The unchanged normal
 suite passes 268322 assertions and observes 1184 recording callbacks. It covers

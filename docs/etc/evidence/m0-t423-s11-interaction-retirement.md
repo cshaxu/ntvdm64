@@ -242,7 +242,7 @@ console_compat.c without algorithm changes. Forty stack slots accommodate
 five eight-transition keys; validation precedes consumption, no carry queue.
 Original key history, dispatch, Sleep(10), IRQ delay and guest remain unchanged.
 
-tests/observation/verify-console-input-batch.ps1, BuildRoot
+test/observation/verify-console-input-batch.ps1, BuildRoot
 build/M0-T423/S11/input-r3, LogPath
 O:/winnt/Logs2/t423-s11-input-batch-r3.log passes controlled-queue assertions:
 1000 mouse records in 200 reads with exact order/buttons, mixed focus/key/
@@ -425,7 +425,7 @@ branch-owned backend/view list. Closing one branch no longer signals the
 frontend-wide cancellation event. Retained outer backends still drain replies.
 The design does not claim arbitrary sibling foreground selection is proved.
 
-Reproducible resource entrypoint: tests/observation/verify-conpty-launch.ps1,
+Reproducible resource entrypoint: test/observation/verify-conpty-launch.ps1,
 MSVC x86 /MT environment, BuildRoot build/M0-T423/S11/branch-resource-r3,
 LogPath O:/winnt/Logs2/t423-s11-branch-resource-r3.log. All stream-mask,
 negative-attachment, lifecycle/input, release/admission and new independent
@@ -492,7 +492,7 @@ launcher Console calls, private interfaces or modified Windows components?
 
 Inputs: current production native_conpty.c/native_console_launch.c; host
 conhost.exe file/product version 10.0.26100.1; new test-only
-tests/observation/conpty_cursor_handoff_test.c. No Microsoft code was imported.
+test/observation/conpty_cursor_handoff_test.c. No Microsoft code was imported.
 Microsoft's [CreatePseudoConsole documentation](https://learn.microsoft.com/en-us/windows/console/createpseudoconsole)
 describes startup cursor inheritance; its
 [ResizePseudoConsole documentation](https://learn.microsoft.com/en-us/windows/console/resizepseudoconsole)
@@ -504,7 +504,7 @@ includes newer deferred resynchronization machinery. That moving upstream
 source is comparison evidence, not proof that this installed host has it.
 
 Procedure: build x86 /MT with the normal VS2022 environment, then run
-tests/observation/verify-conpty-launch.ps1 with BuildRoot
+test/observation/verify-conpty-launch.ps1 with BuildRoot
 build/M0-T423/S11/cursor-resource-r2 and LogPath
 O:/winnt/Logs2/t423-s11-cursor-resource-r2.log. The test launches a disposable
 real Console client inside each PTY, establishes cursor (2,3), and attempts
@@ -560,7 +560,7 @@ No mirror, launcher, guest, shared library or Windows component was changed.
 The test uses the pinned, unmodified libvterm parser/screen callbacks, rather
 than implementing another VT parser or rewriting application output by name.
 
-Files: tests/observation/native_projection_test.c (test-only source-damage,
+Files: test/observation/native_projection_test.c (test-only source-damage,
 cursor and full-width-scroll mapping); conpty_screen_contract_test.c (real
 Windows native API controls); verify-native-projection.ps1 (reproducible
 x86 /MT build/run). None is a production provider or formal graph input.

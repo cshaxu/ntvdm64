@@ -121,10 +121,10 @@ Each implementation stage links exact production callers, tests, assertions,
 commands and evidence for its admitted change. Extend current reservation,
 worker/frontend control, common management, channel lifetime and frontend scope
 fixtures instead of copying service implementations into tests. Relevant
-existing sources include `tests/adapter-basesrv/base_service_reservation_test.c`,
-`tests/app/common_worker_control_test.c`, `tests/app/common_management_test.c`,
-`tests/app/console_channel_lifetime_test.c` and
-`tests/app/frontend_scope_lifetime_test.c`. Names are fixture starting points,
+existing sources include `test/adapter-basesrv/base_service_reservation_test.c`,
+`test/app/common_worker_control_test.c`, `test/app/common_management_test.c`,
+`test/app/console_channel_lifetime_test.c` and
+`test/app/frontend_scope_lifetime_test.c`. Names are fixture starting points,
 not claims that their current coverage proves this proposal.
 
 Cover concurrent startup, resident reuse, launch failure/rollback, launcher

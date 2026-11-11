@@ -26,7 +26,7 @@ a success.
 
 ## Real guest witness
 
-`tests/observation/dem_capability.asm`, built only by
+`test/observation/dem_capability.asm`, built only by
 `tools/build/Build-T420S33DemGuestTest.ps1`, is a DOS COM fixture.  It creates
 and deletes only `D33*.TMP` and `D33DIR` in the active disposable test
 directory.  It runs the following original INT 21h services:

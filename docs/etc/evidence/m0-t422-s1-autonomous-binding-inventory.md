@@ -12,7 +12,7 @@ This inventory reads the current `src/wow32-dll/sources` manifest and every
 selected `src/wow32-dll/source/*.c` file.  Line counts are physical current
 source lines; they do not count generated build files, headers, or the 77
 original `src/mvdm/wow32` bodies.  The original DLL link inventory is checked
-by `tests/observation/verify-wow32-s1-formal-graph.ps1`.
+by `test/observation/verify-wow32-s1-formal-graph.ps1`.
 
 The result is deliberately an ownership inventory, not a functional-pass
 claim.  A file can be a necessary standalone boundary and still be incomplete
@@ -99,7 +99,7 @@ $files = Get-ChildItem src/wow32-dll/source -Filter *.c -File
 $files.Count
 ($files | ForEach-Object { (Get-Content $_.FullName).Count } |
     Measure-Object -Sum).Sum
-& .\tests\observation\verify-wow32-s1-formal-graph.ps1 `
+& .\test\observation\verify-wow32-s1-formal-graph.ps1 `
     -RepositoryRoot (Get-Location).Path `
     -BuildRoot 'build/M0-T421/S4/wow32-ntvdd-r1'
 ```

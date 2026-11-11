@@ -14,7 +14,7 @@ acceptance and does not alter any guest file.
   `D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36`
   (77 active C inputs).
 - The pinned immutable USER profile is verified by
-  `tests/observation/verify-wow-user-profile.ps1`: PMODE32, 49 binary
+  `test/observation/verify-wow-user-profile.ps1`: PMODE32, 49 binary
   consumer checks, USER build identity `84000000`.
 
 ## Immutable Win16 media
@@ -52,8 +52,8 @@ acceptance is inferred from that fact.
 ## Reproduction
 
 ```powershell
-& .\tests\observation\verify-wow-user-profile.ps1 -RepositoryRoot (Get-Location).Path
-& .\tests\observation\verify-wow-output-composition.ps1 `
+& .\test\observation\verify-wow-user-profile.ps1 -RepositoryRoot (Get-Location).Path
+& .\test\observation\verify-wow-output-composition.ps1 `
   -BuildRoot 'build/M0-T421/S4/wow32-ntvdd-r1' -RequireLocalRegistration
 ```
 

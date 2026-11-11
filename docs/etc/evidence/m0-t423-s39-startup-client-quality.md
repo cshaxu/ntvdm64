@@ -89,7 +89,7 @@ Focused entrypoints and results:
   retirement barrier and broker-loss checks pass.
 - `console-channel-lifetime-test.exe --private-desktop-full s39-console-channel-lifetime.txt`:
   real Console handoff fixture passes, retaining its two park/resume checks.
-- `tests/component-integration/verify-frontend-link-ownership.ps1 -BuildRoot build/M0-T423/S39/r001`:
+- `test/component-integration/verify-frontend-link-ownership.ps1 -BuildRoot build/M0-T423/S39/r001`:
   passes with creation/rendering/helper/archive leakage negative controls.
 
 The first client-pipe test was denied by the execution sandbox (error 5);

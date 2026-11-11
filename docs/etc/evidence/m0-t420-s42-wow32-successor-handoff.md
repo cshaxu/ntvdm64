@@ -66,7 +66,7 @@ The provider consumes this fresh worker's ntvdm.lib, not a stale research lib.
 Focused current-source results: `WOW_PAGE_DOMAIN_LIFECYCLE_OK`,
 `WOW_ORIGINAL_USER_CLIENT_LAYOUT_OK wnd=176 desktop=100`, and
 `WOW_USER_TASK_LIFECYCLE errors=0`. The task fixture is rebuilt with
-`tests/observation/verify-wow-task-lifecycle.ps1` using the two fresh roots;
+`test/observation/verify-wow-task-lifecycle.ps1` using the two fresh roots;
 its output is `build/M0-T420/S42/handoff-task-fixture-r1`.
 `verify-wow-recovered-owner-bodies.ps1` verifies six original bodies after
 registered adaptations and four USER declaration spans byte-for-byte.

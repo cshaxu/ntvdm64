@@ -17,6 +17,6 @@ was killed by its watchdog.  Its stdout/stderr were empty.
 This is a Console/standard-handle integration difference, not evidence that
 the restored RTL/USER/NetLib owners regressed.  It is transferred to the
 existing Console/COMMAND integration work; no source-owner rollback is
-authorized.  The watchdog is retained under `tests/observation` for future
+authorized.  The watchdog is retained under `test/observation` for future
 bounded runs.
 

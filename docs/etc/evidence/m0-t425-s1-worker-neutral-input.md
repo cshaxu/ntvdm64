@@ -47,7 +47,7 @@ new lifecycle policy is introduced; worker-base connection ownership remains.
 Reproducible focused runner:
 
 ```powershell
-tests/observation/verify-worker-neutral-input.ps1 `
+test/observation/verify-worker-neutral-input.ps1 `
   -BuildRoot build/M0-T424/S2/r001 `
   -Observer build/M0-T424/S2/r001/observer.exe `
   -LogRoot build/M0-T425/S1/r001/focused-r003

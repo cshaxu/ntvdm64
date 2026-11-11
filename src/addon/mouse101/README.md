@@ -30,7 +30,7 @@ checksum defect are retained in the linked evidence, not in this driver.
 
 ## Build And Installation
 
-Run `tests/observation/build-win101-mouse-driver.ps1 -BuildRoot <fresh-build-root>`.
+Run `test/observation/build-win101-mouse-driver.ps1 -BuildRoot <fresh-build-root>`.
 Outputs MOUSE101.DRV and independent mock/real-provider COM probes. Guest
 objects never enter the native EXE build graph.
 
@@ -57,7 +57,7 @@ End Session. The minimal non-mirror host palette repair reuses the original
 VGA colour resolver; strict return acceptance requires zero launcher exit and
 ordered Windows-return, actual DOS MEM output and batch-continuation markers.
 
-`tests/observation/observe-win101-image.ps1 -BatchReturn -RequireNormalReturn`
+`test/observation/observe-win101-image.ps1 -BatchReturn -RequireNormalReturn`
 provides that strict gate, with the prepared image, mouse probe and selected
 worker roots supplied explicitly. FIFO input acknowledgement alone is not
 interaction proof. Fixed captures are diagnostic observations, not assertions.

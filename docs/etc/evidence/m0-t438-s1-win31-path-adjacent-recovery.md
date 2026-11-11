@@ -27,7 +27,7 @@ cmd /c src\addon\win31-launch\BUILD-PATH.CMD build\M0-T438\S1\r1\WIN31PATH.EXE
 Ran against a copied historical path fixture:
 
 ```text
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win31_path_recovery_test.ps1 \
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win31_path_recovery_test.ps1 \
   -InstallRoot build\M0-T438\S1\r2\path-fixture \
   -Apply tools\win31-path\APPLY.CMD \
   -Unapply tools\win31-path\UNAPPLY.CMD \

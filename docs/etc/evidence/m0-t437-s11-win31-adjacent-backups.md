@@ -27,9 +27,9 @@ profile files from `PATCH`; unknown owner content remains untouched.
 ## Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win31_launch_apply_recovery_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win31_launch_apply_recovery_test.ps1 `
   -ReferenceRoot build\t437s10\r1\i -BuildRoot build\s11\r3
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win31_launch_mouse_path_contract_test.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win31_launch_mouse_path_contract_test.ps1
 ```
 
 Both passed. The first fixture copied only required owner-tree inputs into

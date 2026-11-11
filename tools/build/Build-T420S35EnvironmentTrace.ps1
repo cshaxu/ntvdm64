@@ -100,7 +100,7 @@ $inputs | ForEach-Object { Get-FileHash (Join-Path $formal $_) } |
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 Push-Location $formal
 try {
-    $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $flags /Fo`"$object`" `"$repo\tests\observation\$traceSource`""
+    $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $flags /Fo`"$object`" `"$repo\test\observation\$traceSource`""
     cmd.exe /d /s /c $compile *> "$build\compile.log"
     if ($LASTEXITCODE) { throw "Compile failed; see $build\compile.log" }
     $dispatchObject = Join-Path $build 'observed-dispatch.obj'
@@ -111,7 +111,7 @@ try {
         if ($dispatchRow -lt 0) { throw 'Missing original dispatch owner' }
         $dispatchFlags = $graph[$dispatchRow + 1].Substring('  dpmi_cflags = '.Length).Replace('$:', ':')
         $dispatchFlags += ' /DDPMI_TRACE_XMEM_FAILURE /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
-        cmd.exe /d /s /c "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $dispatchFlags /Fo`"$dispatchObject`" `"$repo\tests\observation\dpmi_dispatch_trace.c`"" *> "$build\dispatch-compile.log"
+        cmd.exe /d /s /c "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $dispatchFlags /Fo`"$dispatchObject`" `"$repo\test\observation\dpmi_dispatch_trace.c`"" *> "$build\dispatch-compile.log"
         if ($LASTEXITCODE) { throw 'Dispatch trace compile failed' }
     }
     $members = ($commandObjects | ForEach-Object {

@@ -32,7 +32,7 @@ profile.
 
 ## Real guest witness
 
-`tests/observation/disks_capability.asm`, built by
+`test/observation/disks_capability.asm`, built by
 `tools/build/Build-T420S28DisksGuestTest.ps1`, is a test-only COM program.
 It invokes original INT 13h AH=00 for drive 80h and requires a carry-clear
 return before exiting through DOS.  It installs no handler and does not

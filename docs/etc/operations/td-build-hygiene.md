@@ -255,7 +255,7 @@ confirms only build/.ccache and build/.ninja, with no retained user exception.
 
 Owner supplement: continue this Td with all13 source-component builds and a
 second unchanged build, without clearing valid caches or running Git prune.
-Use tests/build/Test-FullComponentBuild.ps1 in an owned hidden background job;
+Use test/build/Test-FullComponentBuild.ps1 in an owned hidden background job;
 build/td-component-build belongs only to this supplement (40-minute total,
 25-minute per command,15-minute no-output and64MiB log budgets). Preserve
 component PE identities/hashes and intermediate timestamps before disposing
@@ -279,7 +279,7 @@ required. S4 does not resume automatically and receives no new P or closure.
 ## Owner-requested full-component supplement
 
 Source baseline f2af83fae156cd9ec9a3db8f71ade74ddf8ba2ea. Reproducible entry:
-tests/build/Test-FullComponentBuild.ps1, launched hidden with pwsh -NoProfile
+test/build/Test-FullComponentBuild.ps1, launched hidden with pwsh -NoProfile
 -ExecutionPolicy Bypass -File and -OutputRoot build/td-component-build/complete.
 The entry configures both existing Release/ccache presets, builds W16Style and
 wow32 (including worker), then the original x86 nthook32.dll/VDMREDIR.dll

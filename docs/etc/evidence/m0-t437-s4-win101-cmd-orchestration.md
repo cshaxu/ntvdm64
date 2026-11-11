@@ -10,7 +10,7 @@ original Setup own assembly of `WIN100.BIN`?
 - Released `MOUSE101.DRV`, `PIF.EXE`, and `HASH.EXE` from `assets/release/`.
 - The tracked payload in `tools/win101-setup/`.
 - Disposable flat-media fixtures created by
-  `tests/component-integration/win101_setup_cmd_test.ps1`.
+  `test/component-integration/win101_setup_cmd_test.ps1`.
 
 ## Procedure and observations
 
@@ -32,8 +32,8 @@ Focused commands:
 cmd /d /c "src\addon\pif\BUILD.CMD build\M0-T437\S4\r002\utilities\PIF.EXE"
 cmd /d /c "src\addon\hash\BUILD.CMD build\M0-T437\S4\r002\utilities\HASH.EXE"
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\build\Stage-AddonUtilityRelease.ps1 -PifBuild build\M0-T437\S4\r002\utilities\PIF.EXE -HashBuild build\M0-T437\S4\r002\utilities\HASH.EXE
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\pif_hash_tool_test.ps1 -Pif assets\release\PIF.EXE -Hash assets\release\HASH.EXE -BuildRoot build\M0-T437\S4\r002\pif-hash -ReleaseRoot assets\release
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win101_setup_cmd_test.ps1 -ToolRoot tools\win101-setup -BuildRoot q
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\pif_hash_tool_test.ps1 -Pif assets\release\PIF.EXE -Hash assets\release\HASH.EXE -BuildRoot build\M0-T437\S4\r002\pif-hash -ReleaseRoot assets\release
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win101_setup_cmd_test.ps1 -ToolRoot tools\win101-setup -BuildRoot q
 ```
 
 Both focused tests passed. The package test exercises a successful original

@@ -239,7 +239,7 @@ S44 must freeze the complete VDD manifest, recover missing original owners,
 and test registration, load, request/notification dispatch, resource ownership,
 unload and worker loss with selected real guest calls and a controlled native
 test VDD. Test failed load, invalid requests and repeated cleanup. A test DLL
-belongs under tests/build and must not become a product provider.
+belongs under test/build and must not become a product provider.
 
 S45 is the final T420 S. It first completes the shadow-registry receiver
 matrix below, then audits every preceding package disposition and transferred

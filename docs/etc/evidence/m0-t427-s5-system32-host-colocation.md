@@ -44,13 +44,13 @@ Formal VdmTib storage check passes.
 | --- | --- |
 | [common_system_root_test](../../../test/common/system_root_test.c), r006/root fixture/system32 with expected-root argument | Own-image parent root despite changed CWD/inherited root; joins, capacity/error clearing and invalid relatives pass. |
 | Cache guest-environment-test/application-search-test, fresh r006/search fixture | Bounded projection/host data; directory-first suffix/explicit/drive/empty/Unicode/capacity cases pass. |
-| [original_runtime_layout_test](../../../tests/observation/original_runtime_layout_test.mjs), r002/runtime | NTVDM in system32, no flat copy; unique original destinations and source/destination hashes. |
+| [original_runtime_layout_test](../../../test/observation/original_runtime_layout_test.mjs), r002/runtime | NTVDM in system32, no flat copy; unique original destinations and source/destination hashes. |
 | New-T310FirmwareResourceNinja r003/resources all-verify | Firmware/media, missing local DLL with CWD impostor, native fallback and WOW boot-environment ownership pass. |
-| [verify-native-host-root](../../../tests/observation/verify-native-host-root.ps1), r007, S4/r001/HROOT.EXE | Direct/DOS-native/nested DOS-native retain real host root/APIs; wrong inherited product root ignored. |
-| [verify-win16-directory-probe](../../../tests/observation/verify-win16-directory-probe.ps1), r008, S4/r001/DIRP.EXE | Actual guest Windows/System/kernel calls identify Z:/, Z:/SYSTEM and Z:/SYSTEM32/KRNL386.EXE. Original drive-root double separator normalized only by assertion. |
-| [verify-search-internal-handoff](../../../tests/observation/verify-search-internal-handoff.ps1), r009 | Internal COMMAND/native streams outside package CWD/PATH; DOS picks actual CWD native image with package absent from PATH. |
-| [verify-application-search](../../../tests/observation/verify-application-search.ps1), r010 | All 17 actual image/exit cases pass; no implicit EXE-directory priority. |
-| [verify-system32-package-staging](../../../tests/observation/verify-system32-package-staging.ps1), r014/r015 | Eight destinations; byte-exact overlay move/source preservation; conflicting overlays/mixed test layouts reject. r015 verifies the final stronger test-only mixed-copy guard and both live system32/flat-cache destination selection. |
+| [verify-native-host-root](../../../test/observation/verify-native-host-root.ps1), r007, S4/r001/HROOT.EXE | Direct/DOS-native/nested DOS-native retain real host root/APIs; wrong inherited product root ignored. |
+| [verify-win16-directory-probe](../../../test/observation/verify-win16-directory-probe.ps1), r008, S4/r001/DIRP.EXE | Actual guest Windows/System/kernel calls identify Z:/, Z:/SYSTEM and Z:/SYSTEM32/KRNL386.EXE. Original drive-root double separator normalized only by assertion. |
+| [verify-search-internal-handoff](../../../test/observation/verify-search-internal-handoff.ps1), r009 | Internal COMMAND/native streams outside package CWD/PATH; DOS picks actual CWD native image with package absent from PATH. |
+| [verify-application-search](../../../test/observation/verify-application-search.ps1), r010 | All 17 actual image/exit cases pass; no implicit EXE-directory priority. |
+| [verify-system32-package-staging](../../../test/observation/verify-system32-package-staging.ps1), r014/r015 | Eight destinations; byte-exact overlay move/source preservation; conflicting overlays/mixed test layouts reject. r015 verifies the final stronger test-only mixed-copy guard and both live system32/flat-cache destination selection. |
 | Invoke-ProductVerification final r012 | Console17/Window17 and three independent retained WOW frontiers pass; final eight hashes unchanged. |
 | r011/publish.ps1, r013/published-smoke.ps1 | Recoverable migration; eight published Console/Window COMMAND/MEM/EDIT.COM/native VER smoke cases pass; eight hashes and 46 other root/system32 media/config/user files unchanged. |
 

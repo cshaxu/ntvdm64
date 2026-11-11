@@ -39,7 +39,7 @@ could therefore never be a live product provider.
 1. `node tools/audit/Verify-T416S2WowCommandCarrier.mjs` passes: complete
    fallback absence, original parser, run16's original command construction
    call, and the exact `CreateProcessW` command-buffer handoff.
-2. `tests/broker/original_server_lifecycle.c` rebuilt in
+2. `test/broker/original_server_lifecycle.c` rebuilt in
    `build/M0-T416/S2/original-lifecycle-001`; direct approved local execution
    passed every row, including original DOS/WOW worker construction, package
    spaces, session ID and rejection. Its restricted runner received `EPERM`,

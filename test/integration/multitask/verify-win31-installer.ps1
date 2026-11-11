@@ -41,7 +41,7 @@ try {
   if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Source installation changed: $($row.path)"}
  }
  } finally {
-  . "$repo/tests/observation/isolated_package_cleanup.ps1"
+  . "$repo/test/observation/isolated_package_cleanup.ps1"
   Remove-OwnedGuestProbeCopy $dest $copy.Task $copy.Source
  }
 }

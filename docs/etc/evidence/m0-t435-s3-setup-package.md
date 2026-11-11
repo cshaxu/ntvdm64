@@ -106,7 +106,7 @@ all prior root-file hashes remain unchanged. No original Setup is rerun.
 r014-no-subst backs up and updates owner package scripts to physical paths.
 
 Reproducible fixture:
-`tests/component-integration/win101_launch_profile_test.ps1 -BuildRoot <fresh-short-build-root> -PifTemplate <reference-PIF> -SetverPath <SETVER>`.
+`test/component-integration/win101_launch_profile_test.ps1 -BuildRoot <fresh-short-build-root> -PifTemplate <reference-PIF> -SetverPath <SETVER>`.
 r015 exposes a fixture array-expression precedence error, not a product pass;
 parenthesizing the composed invalid path fixes the harness. r016 verifies
 supplied destination PIF/profile strings, PATH-relative launcher, three
@@ -164,7 +164,7 @@ original vdm.c's selected x86 classification branch maps this status to OS/2,
 which run16 rejects before broker submission. Public GetBinaryType returns
 DOS/type1. r028 lacked execute file rights; r029 had a probe uint literal error;
 neither is a pass. r027 process inventory was denied and is not lifecycle proof.
-The reproducible read-only probe is tests/observation/inspect-ne-classification.ps1
+The reproducible read-only probe is test/observation/inspect-ne-classification.ps1
 with explicit Image/BuildRoot. Classification is not changed; direct WOW
 execution of this application remains unverified, not an installer/PIF failure.
 

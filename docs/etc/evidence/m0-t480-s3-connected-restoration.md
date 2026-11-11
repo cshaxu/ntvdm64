@@ -38,14 +38,14 @@ output roots and the matching Visual Studio developer environment:
 
 - `python tools/audit/capture-t480-s3-objects.py <phase>` captures the three
   frozen S1 expression consumers before and after the exact restoration.
-- `python tests/build/verify-t480-s3-restoration.py build/t480-s3` checks those
+- `python test/build/verify-t480-s3-restoration.py build/t480-s3` checks those
   objects and the thirteen spelling consumer receipts.
-- `python tests/build/verify-t480-s3-time.py --output build/t480-s3/<fresh-name>`
+- `python test/build/verify-t480-s3-time.py --output build/t480-s3/<fresh-name>`
   builds the actual selected time source and runs the independent FILETIME
   calendar cases; it does not substitute a test implementation.
 - `python tools/audit/capture-t480-s3-environment.py x86 before` (and x64,
   after/final) captures the six Base client objects.
-- `python tests/build/verify-t480-s3-environment.py build/t480-s3 final` compares the
+- `python test/build/verify-t480-s3-environment.py build/t480-s3 final` compares the
   six before/after contracts, including actual source hashes.
 
 COFF timestamp, CodeView object-path records and compiler section checksums

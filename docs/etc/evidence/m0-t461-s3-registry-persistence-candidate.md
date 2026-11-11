@@ -12,7 +12,7 @@ No guest input and no Windows Registry key is written.
 
 ## Focused executable evidence
 
-`tests/mvdm-host/t461_registry_overlay_fixture.c` was rebuilt in
+`test/mvdm-host/t461_registry_overlay_fixture.c` was rebuilt in
 `build/t461-s3/registry-overlay-r1` and printed
 `T461_S3_REGISTRY_PERSISTENCE_OK`.  It proves baseline override/create,
 recursive-delete leaf tombstone, shutdown/restart reconstruction, a

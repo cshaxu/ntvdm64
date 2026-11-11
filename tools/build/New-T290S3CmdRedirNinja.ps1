@@ -42,7 +42,7 @@ rule link
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
-build obj/fixture.obj: cc `$root/tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c
+build obj/fixture.obj: cc `$root/test/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c
 build bin/t290-s3-cmdredir-fixture.exe: link obj/cmdredir.obj obj/guest_memory_lease.obj obj/session.obj obj/fixture.obj
 default bin/t290-s3-cmdredir-fixture.exe
 "@

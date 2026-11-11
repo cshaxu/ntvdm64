@@ -20,7 +20,7 @@ actual-provider proof; no production change or runtime improvement is claimed.
 
 ## Verification and disposition
 
-`tests/mvdm-host/keyboard_controller_pic_test.c` links the actual production
+`test/mvdm-host/keyboard_controller_pic_test.c` links the actual production
 keyba.obj and ica.obj. The fixture initializes original SAS/CCPU, PIC and
 keyboard, starts at the explicit guest-keyboard-ready boundary (DelayIrqLine
 cleared), then calls the original port/INTACK/EOI entrypoints. Test-only host
@@ -34,7 +34,7 @@ appended; the fixture follows that original ordering.
 Reproduce: build `keyboard-controller-pic-test.exe` with the formal Ninja
 graph using MSVC14.43/SDK22621 x86 /MT NTVDM CCPU40; then run
 `powershell -NoProfile -ExecutionPolicy Bypass -File
-tests/observation/verify-keyboard-controller-pic.ps1 -OutputRoot
+test/observation/verify-keyboard-controller-pic.ps1 -OutputRoot
 build/M0-T430/S3/<fresh-run>`. The runner verifies production symbol owners
 and selected compile profile, rejects non-build/sealed output, bounds only
 its own fixture to ten seconds and retains input hashes and complete output.

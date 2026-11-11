@@ -42,7 +42,7 @@ Retain published-wow-r1 as a verifier failure: the old S2 window reader
 reported the visible WINMINE window but lacked window-utf16 records required
 by the selected exact-title assertion. Its cleanup began with the observer
 still running; the ensuing launcher -1 is not a standalone failure verdict.
-R2 compiled current tests/observation/worker_window_snapshot.c x86 /MT as
+R2 compiled current test/observation/worker_window_snapshot.c x86 /MT as
 build/M0-T423/S9/publication-window-reader.exe and passed all three cases.
 No product binary or configuration changed between these two runs.
 
@@ -145,7 +145,7 @@ closing that window and direct completion 0. Current fixture SHA256 is
 40FB8EB0F02E1001E09C212F08F08986874B64EB63ACAA960B6453CDF9197EB7;
 gui-gate-observer is
 CBCCD0C5DDF20BC671B64974975FEC8909A5F7C06B806D94DB6383835BF94677.
-Sources are tests/observation/wow_shared_launch_test.c and
+Sources are test/observation/wow_shared_launch_test.c and
 console_startup_observer.c, compiled x86 /MT under build/M0-T423/S9.
 Run the fixture with R:/, the physical S9/p path, --async or --wait-first,
 then --dos-input; WOW_TEST_OBSERVER selects gui-gate-observer and
@@ -226,7 +226,7 @@ This agrees with nohelper-members-r1 and the two nohelper-chain-r1 chains;
 no new observer, helper or Job-based product membership mechanism is needed.
 
 Native-root refresh t423-s9-native-root-r1 passes six cases through
-tests/observation/verify-native-root-console.ps1: output (37), input (23),
+test/observation/verify-native-root-console.ps1: output (37), input (23),
 shell (0), nested native (23), interactive nested native (inner 37 / outer 23),
 and retained history (19). The reports and Console text are under Logs2.
 Input cases require executed markers, not echoed commands; history requires
@@ -303,7 +303,7 @@ no helper fallback or test exemption has been introduced.
 
 ## Real NTMon Console and Window input
 
-tests/observation/verify-native-monitor.ps1 now executes the actual staged
+test/observation/verify-native-monitor.ps1 now executes the actual staged
 ntmon.exe through run16 and the production ConPTY, not the layout fixture.
 The observer's explicit --observe-console-function-key accepts F1..F12 and
 uses Console INPUT_RECORDs or the existing private-desktop Window key route.
@@ -386,7 +386,7 @@ preserved markers and direct results DOS=0/native=37, no handoff trace enabled.
 Current footprint measurement against S8 closure 737ae267e (not a final
 delivery count): frontend tracked source adds 743/removes 889 lines; seven
 new project C/H files add 819 lines, net +673. This excludes README/import
-metadata/tests/build tooling and the external library. The separate pinned
+metadata/test/build tooling and the external library. The separate pinned
 libvterm archive is 80,024 bytes, not zero-cost project code. Mirror changes
 remain the owner-approved host_cpu.h +6 lines and mvdm README +1; opennt-host
 has no diff. Recompute after final cleanup rather than presenting these as
@@ -424,7 +424,7 @@ handling, distinguish encoder correctness from backend limitations. No wheel
 parity, production P or publication is claimed.
 
 Direct isolation now reproduces the same boundary. The independently authored
-tests/observation/conpty_wheel_probe.c links only the production ConPTY resource
+test/observation/conpty_wheel_probe.c links only the production ConPTY resource
 and launch bindings, never native_console_backend.c or its mouse encoder. It
 sends 77 literal bytes: SGR 64,64,65,66,66,67 at (7,4), then a Win32-input Z
 terminator. The child calls ReadConsoleInputW. Evidence:
@@ -610,7 +610,7 @@ retained-resource identity is a separate backend contract.
 The real native-child screen transaction fixture also passes:
 O:/winnt/Logs2/t423-s9-real-concurrent-r1.txt and its console.txt capture show
 NATIVE-BASE, DOS-INTERVAL and NATIVE-LATE in order, and direct native result 37.
-tests/app/native_console_frontend_test.c --concurrent uses the production
+test/app/native_console_frontend_test.c --concurrent uses the production
 frontend and an actual ConPTY child. Its DOS-side screen operation is authored
 by the fixture, not a real guest; real DOS plus simultaneous native output
 remains a separate required check. The expanded transport verifier now requires
@@ -694,7 +694,7 @@ character and palette attributes. The converter is moved from the view into
 the terminal owner, not duplicated. This does not claim to merge concurrent
 native output whose projected contents differ from the old Console snapshot.
 
-tests/observation/native_terminal_test.c --console-unicode adds 17 required
+test/observation/native_terminal_test.c --console-unicode adds 17 required
 assertions, selected by verify-native-terminal.ps1. The case produces actual
 UTF-8 terminal output containing combining accents, Chinese wide characters,
 a supplementary-plane emoji, precise RGB and bold/italic. It moves one line
@@ -813,12 +813,12 @@ production P, Window17 pass, or S9 closure.
 
 Question: can the existing fresh-only ntcon_terminal_seed_console be reused
 for DOS-to-native handoff on the retained parser? The checked-in
-tests/observation/native_terminal_test.c --live-seed-audit now exercises
+test/observation/native_terminal_test.c --live-seed-audit now exercises
 non-default RGB pen, disabled wrapping, saved cursor, repeated history import,
 split UTF-8 and split CSI against the unchanged production terminal source.
 This is an authored in-memory boundary diagnostic, not DOS runtime acceptance.
 
-Build using tests/observation/verify-native-terminal.ps1 with
+Build using test/observation/verify-native-terminal.ps1 with
 BuildRoot=build/M0-T423/S9/live-seed-audit-r2 and
 LogPath=O:/winnt/Logs2/t423-s9-live-seed-baseline-r2.log, then run its
 terminal-test.exe --live-seed-audit. Retained diagnostic output is
@@ -952,7 +952,7 @@ it still sees (11,4), writes SECOND and returns 37. This is an authored host
 boundary probe, not a DOS integration pass. It makes no guest or product change.
 The sentinel establishes input processing order rather than relying on sleep.
 
-Verification: tests/observation/verify-conpty-cursor-inheritance.ps1 with
+Verification: test/observation/verify-conpty-cursor-inheritance.ps1 with
 BuildRoot=build/M0-T423/S9/reused-cursor-r1 and
 LogPath=O:/winnt/Logs2/t423-s9-reused-cursor-r1.log. MSVC x86 /MT build and all
 three assertions pass, including REUSED-CURSOR local-moved=1 first=37 second=37
@@ -1093,7 +1093,7 @@ The immediate action is capability tests, not speculative product deletion.
 
 ## Real x86 lifetime probe
 
-Checked-in test: `tests/observation/conpty_lifecycle_test.c`. This authored
+Checked-in test: `test/observation/conpty_lifecycle_test.c`. This authored
 probe starts one leader and an inherited-Console leaf inside ConPTY; named
 events gate leaf completion. It never launches the product, guest, UI window
 or owner desktop. Cleanup owns only the exact probe processes/session.
@@ -1102,7 +1102,7 @@ Reproduction from the repo root: initialize VS2022 BuildTools VsDevCmd.bat
 with `-arch=x86 -host_arch=x64`, then run
 `cl /nologo /MT /W4 /Fo:build/M0-T423/S9/conpty-lifecycle.obj
 /Fe:build/M0-T423/S9/conpty-lifecycle.exe
-tests/observation/conpty_lifecycle_test.c`. All outputs remain below build.
+test/observation/conpty_lifecycle_test.c`. All outputs remain below build.
 Run the resulting executable without arguments, redirecting its report to a
 fresh O:/winnt/Logs2 path. Nonzero return fails the fixture. It requires the
 ReleasePseudoConsole export; absence is a failed capability, not a skip/pass.
@@ -1180,7 +1180,7 @@ The original sources compile unchanged with MSVC Win32/x86 /MT /std:c11
 `compile-r1.log` retains upstream signedness/narrowing warnings, not errors.
 There are no GUI/toolkit or POSIX runtime dependencies in this selected closure.
 
-Checked-in admission test `tests/observation/conpty_terminal_candidate_test.c`
+Checked-in admission test `test/observation/conpty_terminal_candidate_test.c`
 links those nine objects with /MT /std:c11 /W4. It passes 20 assertions in
 `t423-s9-terminal-candidate-r2.log`: one-byte input fragmentation, CJK width,
 combining character, RGB attributes, single cursor reply, alternate-screen
@@ -1289,7 +1289,7 @@ instead of a missing-font box. The test explicitly reports that limitation;
 combining-mark shaping and full Unicode visual fidelity remain open.
 
 Reproduce in the MSVC x86 developer environment with bundled pwsh:
-`tests/component-integration/verify-frontend-window-library.ps1 -BuildRoot build/M0-T423/S9/render-unicode-r1`.
+`test/component-integration/verify-frontend-window-library.ps1 -BuildRoot build/M0-T423/S9/render-unicode-r1`.
 Output is retained at O:/winnt/Logs2/t423-s9-render-unicode-r1.log. It passes
 the three added cases and the existing bitmap/frame and keyboard assertions,
 including DOS 43/50 rows, dual font and tall-glyph fallback. All 44 pinned
@@ -1355,7 +1355,7 @@ replacement of the current frontend launch mechanic, not an OpenNT mirror
 change. The old helper caller remains selected until backend migration is
 complete. This candidate is not yet a delivered production P.
 
-The checked-in tests/observation/conpty_launch_test.c calls this production
+The checked-in test/observation/conpty_launch_test.c calls this production
 entry with real x86 children and real ConPTY. Eight standard-stream masks
 assert exact Console/disk stream classification, actual redirected OUT/ERR
 bytes, actual target exit 37 and inherited capability operations. Another
@@ -1378,10 +1378,10 @@ Retained failures changed the implementation:
   only inside this modern frontend translation unit, not original mirrors.
 
 Reproduce from the MSVC x86 developer environment using bundled pwsh:
-`tests/observation/verify-conpty-launch.ps1 -BuildRoot build/M0-T423/S9/launch-r5 -LogPath O:/winnt/Logs2/t423-s9-conpty-launch-r5.log`.
+`test/observation/verify-conpty-launch.ps1 -BuildRoot build/M0-T423/S9/launch-r5 -LogPath O:/winnt/Logs2/t423-s9-conpty-launch-r5.log`.
 Use fresh run/log names; the script rejects overwriting retained evidence.
 The Win32/x86 /MT /W4 build is warning-free and all 12 cases pass. The
-existing tests/app/frontend_request_client_test.c also passes its six cases
+existing test/app/frontend_request_client_test.c also passes its six cases
 against the changed launch source: actual exit 37, rejection, version,
 contradictory reply, EOF and partial reply. Its build inputs are that test,
 native_console_launch.c, native_request_client.c and native_request_io.c,
@@ -1480,7 +1480,7 @@ does not synchronously write replies to ConPTY. take_replies transfers one
 owned byte block exactly once for a separate input-side drain. This is a
 production-owner candidate, not yet the formal frontend-selected provider.
 
-tests/observation/native_terminal_test.c verifies fragmented UTF-8/VT, CJK
+test/observation/native_terminal_test.c verifies fragmented UTF-8/VT, CJK
 width, combining characters, RGB, cursor/visibility, alternate screen,
 resize and one-time CPR reply consumption. Its real child then writes VT
 through its Console, the production ConPTY resource passes resulting output
@@ -1489,7 +1489,7 @@ and coordinates after natural EOF. The child returns 37. All 107 assertions
 pass, including per-byte feed checks; this is not 107 different capabilities.
 
 Reproduce in the x86 developer environment with bundled pwsh:
-`tests/observation/verify-native-terminal.ps1 -BuildRoot build/M0-T423/S9/terminal-r3 -LogPath O:/winnt/Logs2/t423-s9-native-terminal-r3.log`.
+`test/observation/verify-native-terminal.ps1 -BuildRoot build/M0-T423/S9/terminal-r3 -LogPath O:/winnt/Logs2/t423-s9-native-terminal-r3.log`.
 The script rebuilds the pinned source from the repository archive, builds the
 binding/fixture, checks process failure and requires its positive completion
 marker. The binding is /MT /W4 /std:c11 and warning-free. Unchanged upstream
@@ -1636,11 +1636,11 @@ External cancellation and the stable output-end event have duplicated local
 handles. Closing an ended physical ConPTY does not signal frontend cancellation.
 
 Reproduce with the x86 MSVC /MT environment and
-tests/observation/verify-native-terminal.ps1, BuildRoot
+test/observation/verify-native-terminal.ps1, BuildRoot
 build/M0-T423/S9/backend-r2 and LogPath
 O:/winnt/Logs2/t423-s9-backend-r2.log. The pinned unchanged libvterm closure
 is built first. The existing 183 terminal assertions pass. The new
-tests/observation/native_backend_test.c links the actual backend, resource,
+test/observation/native_backend_test.c links the actual backend, resource,
 terminal and launch sources. Two consecutive real native bursts each prove
 BACKEND-READY output through the parser, input key Z, left press/release and
 unpressed movement, actual exit 37, final-client EOF, zero occupancy, stable
@@ -1698,7 +1698,7 @@ Retired test protocol disposition is explicit:
 
 - Native helper request framing, process export/release acknowledgement,
   helper suspend/kill and hidden SCREEN_APPLY/CELLS_WRITE tests no longer
-  describe a product interface; tests/app/native_console_host_test.c is
+  describe a product interface; test/app/native_console_host_test.c is
   removed. The established native-console-host-test.exe gate target now builds
   the real ConPTY backend test, not a fake RPC service. No old helper-fault
   result is relabelled as a ConPTY-fault pass.
@@ -1942,7 +1942,7 @@ reads a blank old cell: cursor inheritance does not clone frontend screen
 contents into the Windows Console buffer.
 
 Reproducer after VsDevCmd -arch=x86 -host_arch=x64:
-tests/observation/verify-conpty-cursor-inheritance.ps1
+test/observation/verify-conpty-cursor-inheritance.ps1
 -BuildRoot build/M0-T423/S9/cursor-inherit-r2
 -LogPath O:/winnt/Logs2/t423-s9-cursor-inherit-r2.log.
 The script rebuilds pinned unchanged libvterm and checks both exact markers;
@@ -2050,7 +2050,7 @@ output reads. The observer session ended with chain failure, not a timeout
 assumed to mean termination. Exact failed-run PIDs were subsequently inspected
 and cleaned; cleanup is not lifecycle acceptance.
 
-tests/observation/conpty_admission_test.c now requires the newly launched child
+test/observation/conpty_admission_test.c now requires the newly launched child
 to write ADMISSION-OUTPUT-READY through WriteConsoleA, receive an x from the
 same production ConPTY input pipe, and exit 37. The earlier client stays alive.
 verify-conpty-launch.ps1, BuildRoot build/M0-T423/S9/admission-io-r1, records
@@ -2108,7 +2108,7 @@ has been added to production. Source references:
 
 ### Job membership is not a drop-in retirement predicate
 
-tests/observation/conpty_job_membership_test.c launches an authored real target
+test/observation/conpty_job_membership_test.c launches an authored real target
 through production native_conpty/native_console_launch. The target proves it
 has a Console, calls FreeConsole, proves it no longer has one, and remains alive
 on its exact finish event. The owner assigns only that target to a no-limit
@@ -2203,7 +2203,7 @@ It is removed from the driver, not relabelled as a passing product close.
 Resource ClosePseudoConsole and frontend-loss tests retain that independent
 lifecycle obligation; physical desktop observation retains its owner waiver.
 
-tests/observation/verify-twelve-target-chain.ps1 now asserts the admitted
+test/observation/verify-twelve-target-chain.ps1 now asserts the admitted
 retention policy, preserves all prior nesting/identity/direct-result/live-I/O
 and original DOS-record checks, then performs separately labelled fixture
 housekeeping on pinned, image-verified frontend processes. Housekeeping is
@@ -2222,7 +2222,7 @@ snapshot contains the positive retention/cancellation witness. This tests
 the revised policy without treating a timed sleep as descendant completion.
 
 The production resource suite was rebuilt and rerun independently:
-tests/observation/verify-conpty-launch.ps1 with
+test/observation/verify-conpty-launch.ps1 with
 BuildRoot=build/M0-T423/S9/persistent-resource-r1 and
 LogPath=O:/winnt/Logs2/t423-s9-persistent-resource-r1.log. All 13 launch/stream/
 failure cases, 11 lifecycle/input cases and two admission cases pass. In
@@ -2337,7 +2337,7 @@ housekeeping is not normal retirement evidence.
 All five Console cases pass at O:/winnt/Logs2/t423-s9-conpty-fault-r5-*: normal,
 frontend, launcher, worker and conpty. Every case includes unrelated-session
 survival and actual result 53, in addition to its own normal/error guest
-contract. Build source is tests/observation/frontend_loss_noio_test.c, MSVC
+contract. Build source is test/observation/frontend_loss_noio_test.c, MSVC
 x86 /MT /W4, build/M0-T423/S9/conpty-fault-r5/build.log. Reports/manifests use
 build/M0-T423/S9/conpty-fault-evidence-r5. Window matrix remains separately
 pending at this record point. The text-composition regression remains open.

@@ -12,12 +12,12 @@ $repository = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $build = [IO.Path]::GetFullPath($BuildRoot)
 $nasm = Get-Command -Name $NasmExecutable -ErrorAction Stop
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$source = Join-Path $repository 'tests\\observation\\s44_vdd_bop.asm'
+$source = Join-Path $repository 'test\\observation\\s44_vdd_bop.asm'
 $output = Join-Path $build 'S44BOP.COM'
 & $nasm.Source -f bin -o $output $source
 if ($LASTEXITCODE -ne 0) { throw 'NASM failed to build S44BOP.COM.' }
 @{
-    source = 'tests/observation/s44_vdd_bop.asm'
+    source = 'test/observation/s44_vdd_bop.asm'
     output = 'S44BOP.COM'
     sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash
 } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 's44-vdd-bop-manifest.json') -Encoding UTF8

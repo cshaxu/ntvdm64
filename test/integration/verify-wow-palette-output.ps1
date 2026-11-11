@@ -2,7 +2,7 @@ param([string]$Output='build/t478-s23/current')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path;Set-Location $repo
 $null=New-Item -ItemType Directory -Force $Output;$out=(Resolve-Path $Output).Path
-& python tests/observation/extract-wow-palette-thunk.py "$out/extracted"
+& python test/observation/extract-wow-palette-thunk.py "$out/extracted"
 if($LASTEXITCODE){throw 'Palette extraction failed'}
 Copy-Item "$out/extracted/*.inc" $out
 $driver='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'

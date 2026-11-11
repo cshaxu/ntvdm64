@@ -25,7 +25,7 @@ its guest image from its media-root `MOUSE.DRV`.
 ## Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\component-integration\win101_setup_cmd_test.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File test\component-integration\win101_setup_cmd_test.ps1 `
   -ToolRoot tools\win101-setup -BuildRoot build\t437s9\r1
 ```
 

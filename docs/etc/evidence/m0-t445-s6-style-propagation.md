@@ -22,7 +22,7 @@ is no added global environment variable.
 
 r002 PID5680 at08:59:31, deadline60s, exit0: both widths pass25 CLI cases plus
 native packet round trips for Off/Win16/All, absent Console capabilities and
-invalid policy values. Reproduce with tests/observation/verify-style-options.ps1
+invalid policy values. Reproduce with test/observation/verify-style-options.ps1
 and a fresh build-owned BuildRoot. This is not real child-chain acceptance.
 
 ## Service and WOW task binding work
@@ -178,9 +178,9 @@ display captions, prevents duplicate library installation/round-trip prefixes,
 and releases itself on destruction. The module owner must retain the DLL
 while any such subclass is live. No Hook or WOW consumer is connected yet.
 
-Reproducible entry: tests/observation/verify-title-marker.ps1 -BuildRoot
+Reproducible entry: test/observation/verify-title-marker.ps1 -BuildRoot
 build/M0-T445/S6/r017. It builds the real DLL and test in both widths, then
-runs tests/app/title_marker_test.c on a private desktop with a 15-second
+runs test/app/title_marker_test.c on a private desktop with a 15-second
 per-fixture bound. Build/test runs are hidden owned processes with a 120-second
 outer diagnostic deadline. No user desktop input or global settings change.
 
@@ -222,7 +222,7 @@ rolls back a returned modeless window; modal initialization failure ends its
 dialog before exposing a successful result. No process/thread enumeration,
 renderer installation, persistent GUI-thread hook or guest/mirror edit.
 
-Reproducible native fixture is tests/observation/verify-native-titles.ps1,
+Reproducible native fixture is test/observation/verify-native-titles.ps1,
 with WorkerBuildRoot=r003, Hook64BuildRoot=hook64, StyleBuildRoot=r017 under
 build/M0-T445/S6. It compiles the authored native_title_hook_test.cpp/.rc,
 injects the real production Hook into child processes, and asserts copied

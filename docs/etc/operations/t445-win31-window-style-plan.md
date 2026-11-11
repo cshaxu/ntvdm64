@@ -111,7 +111,7 @@ renderer is now S4. Repair system-menu double-click close through native
 non-client menu handling, including disabled-close and cancellation tests.
 
 - Library source remains src/win16-style. The authored Win32 API demo and tests
-  live under tests/app; build/test orchestration under tests/observation. Produce
+  live under test/app; build/test orchestration under test/observation. Produce
   executable, objects, logs and captured images only under build/M0-T445/S3.
 - Launch the demo directly, not with run16 and not by injecting into an unrelated
   application. Direct linking is deliberate: it isolates the UI from transport,
