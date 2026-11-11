@@ -2,30 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T481 S15 — dynamic Win3.1 setup launcher; verification complete, awaiting owner acceptance.**
+**No active M/T/S packet.** T481 S16 is closed with owner acceptance.
+T481 remains open; no next S is admitted by this closure.
 
-## Active Packet
+## S16 accepted closure
 
-| Field | Record |
-| --- | --- |
-| Candidate Proposal | [Guest multitask I/O completion](../proposals/proposal-guest-multitask-io-completion-001.md#remaining-s-sequence). |
-| Identifier Mode | M0 T481 S15, Ordinary Mode. |
-| Admission And Approval | Owner approved one WIN.CMD launcher, always-installed addon pair, runtime mode/DOSONLY selection and comment-based driver toggles. |
-| Objective | Install both drivers and one WIN.CMD; generate NT profiles and WIN.PIF at launch, toggle only the two owned SYSTEM.INI device entries. |
-| Non-goals | Deferred Win3.1 mouse transition investigation, Win95 matrix and mirror audit. |
-| Reference Baseline | S14 six scheduling contracts and all 14 matrix runs passed; unchanged published host package 092da729-caf9-4a89-8f2e-305e368faacf. |
-| Files And ABI Surface | tools/win31-setup, its package producer and affected integration tests; no runtime ABI change. |
-| Applicable Rules | Existing source, CMD-only patch-package, assets-only input, build and release rules. |
-| Verification | CMD round trip, six launcher selections, repeated switching, preservation/failure checks and affected Win3.1 runtime matrix. |
-| Expected Markers | Both addon hashes, one launcher/PIF, selected DOSONLY and mode, exactly two enabled/commented entries, preserved unrelated INI and guest binaries. |
-| Asset Needs | Released assets only for patch-package inputs. |
-| Reporting Requirements | Explicit generated-file changes, tests and delivery identities. |
-| Stop Conditions | Stop for a demonstrated semantic regression or unapproved guest modification. |
-| Exit Criteria | Verified package publication, tests, commit/push and owner acceptance. |
-| Original Owner Request | Close S14; admit S15 for setup patch actions to be specified; defer the mouse bug to later investigation. |
-| Similar-Issue Sweep | Review related setup tools only after the requested behavior is defined. |
+The owner accepted the EDIT.COM mouse corruption and persistent residue fixes.
+The optional atomic-transition change was declined after source review: cleanup
+can be visible during switching, but the old block no longer persists or
+accumulates. No new cross-layer presentation barrier was added.
+See the [S16 evidence and closure](../etc/evidence/m0-t481-s16-win31-mouse-transitions.md#final-verification-and-closure).
 
-## S15 progress
+Cached x86/x64 builds passed. Final Win3.1 generated-profile matrix: 14/14;
+Full: 16/16 selected gates. DOS4GW-NESTICLE was explicitly skipped for a
+missing external fixture, not reported as passed. Focused negative/fixed
+mouse controls passed. The complete 11-image package
+2fef3b20-3b5c-4466-b701-feb9ac9101c9 is hash-verified in assets/release and
+O:/winnt/system32. O:/w31 addon hashes match assets; no guest binary was
+changed and winnt.zip is untouched.
+
+Win31-setup retains the accepted S15 dynamic launcher. A final proposed
+VMD-key normalization was withdrawn: mouse=*vmd is a documented original
+Win3.1 setting, not an obsolete spelling. The mouse repair does not depend
+on forcing that key into device=. No unverified setup change is delivered.
+S16 source, tests, assets and evidence form the closure P delivery.
+
+## S15 accepted closure
 
 The owner-approved launcher is implemented in tools/win31-setup/WIN.CMD.
 Setup always installs both drivers and PIF.EXE; the installed WIN.CMD selects

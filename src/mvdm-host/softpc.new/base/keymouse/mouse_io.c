@@ -173,7 +173,7 @@ LOCAL word              saved_int71_offset;
 #define MAX_NR_VIDEO_MODES 0x7F
 
 #ifdef EGG
-LOCAL BOOL jap_mouse=FALSE;		/* flag if need to fake text cursor */
+#define jap_mouse (!is_it_text() && (sas_hw_at(vd_video_mode) != Currently_emulated_video_mode) && alpha_num_mode())
 IMPORT IU8 Currently_emulated_video_mode; /* as set in ega_set_mode() */
 #endif /* EGG */
 
@@ -1131,7 +1131,7 @@ void mouse_io_interrupt()
 	local_DX = getDX();
 
 #ifdef EGG
-        jap_mouse = ((sas_hw_at(vd_video_mode) != Currently_emulated_video_mode) && alpha_num_mode());
+        /* DIVERGENCE(MVDM-HOST-DIV-899): derive at every use; VDD restores bypass INT33. */
         if (jap_mouse)
                 note_trace0(MOUSE_VERBOSE, "In Japanese mode - will emulate textmouse");
 #endif /* EGG */
@@ -5157,96 +5157,43 @@ LOCAL void cursor_display IFN0()
 
 LOCAL void cursor_undisplay IFN0()
 {
-/* DIVERGENCE(MVDM-HOST-DIV-318): erase saved guest pixels even after route
-   retirement; Console has no save area unless Window drew one. */
-#line 5351
+/* DIVERGENCE(MVDM-HOST-DIV-900): the saved background, not current VGA/BIOS
+   state, owns restoration. Keep the original per-VM validity and restorers. */
 #ifndef NTVDM
-#line 5352
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
-#line 4886
-#line 5352
-	UTINY v_mode;
-
-	/* Check if Enhanced Mode wants to "see" cursor */
-	if ( cursor_EM_disabled )
-	   return;
-
-	v_mode = sas_hw_at(vd_video_mode);
-
-#ifdef	MOUSE_16_BIT
-#line 5361
-#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
-#endif	/* MOUSE_16_BIT */
-
-	/*
-	 *	Undisplay the representation of the current mouse status on
-	 *	the screen. This routine tolerates being called when the 
-	 *	cursor isn't actually being displayed
-	 */
-#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): undo only our original painter. */
-#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#endif
-#line 5375
-	{
-		if (save_area_in_use)
-		{
-			save_area_in_use = FALSE;
-
-#ifdef EGG
-        if (jap_mouse) {
-                /* If we forced an EGA cursor, we must undisplay the same.
-                 * Go direct 'cos the selection process gets confused below...
-                 */
-                EGA_graphics_cursor_undisplay();
-        } else
-#endif /* EGG */
-
-			if (in_text_mode())
-			{
-				if (text_cursor_type == MOUSE_TEXT_CURSOR_TYPE_SOFTWARE)
-				{
-					software_text_cursor_undisplay();
-				}
-				else
-				{
-					hardware_text_cursor_undisplay();
-				}
-			}
-			else
-			{
 #ifdef MOUSE_16_BIT
-#line 5403
-#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
-#else /* MOUSE_16_BIT */
-#ifdef EGG
-			if ((video_adapter == EGA  || video_adapter == VGA) && (v_mode > 6))
-			{
-#ifdef VGG
-				if (v_mode != 0x13)
-			    	EGA_graphics_cursor_undisplay();
-			  	else
-					VGA_graphics_cursor_undisplay();
-#else
-#line 5414
-#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
+#error Excluded unsupported MOUSE_16_BIT profile
 #endif
-			}
-			else
+    if (cursor_EM_disabled || !save_area_in_use)
+        return;
+    save_area_in_use = FALSE;
+    switch (saved_cursor_kind)
+    {
+    case MOUSE_SAVED_TEXT:
+        software_text_cursor_undisplay();
+        break;
+#ifdef EGG
+    case MOUSE_SAVED_EGA:
+        EGA_graphics_cursor_undisplay();
+        break;
+#ifdef VGG
+    case MOUSE_SAVED_VGA:
+        VGA_graphics_cursor_undisplay();
+        break;
+#else
+#error Excluded unsupported non-VGG profile
+#endif
 #endif
 #ifdef HERC
-#line 5420
-#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
-#line 5423
-#endif /* HERC */
-			    graphics_cursor_undisplay();
-#endif /* MOUSE_16_BIT */
-			}
-		}
-	}
+#error Excluded unsupported HERC profile
 #endif
-#line 5429
+    case MOUSE_SAVED_CGA:
+        graphics_cursor_undisplay();
+        break;
+    }
+#endif
 #endif
 #line 5430
 }
@@ -5335,7 +5282,7 @@ GLOBAL void software_text_cursor_display IFN0()
 		/*
 		 *	Save area text cursor will cover
 		 */
-		sas_loadw(text_address, &text_cursor_background);
+		sas_loadw(text_address, &text_cursor_background); saved_text_address = text_address; saved_cursor_kind = MOUSE_SAVED_TEXT;
 		save_area_in_use = TRUE;
 		point_copy(&cursor_area.top_left, &save_position);
 
@@ -5359,8 +5306,8 @@ GLOBAL void software_text_cursor_undisplay IFN0()
 	 */
 	MOUSE_BYTE_ADDRESS text_address;
 
-	text_address = 0xb8000 + sas_w_at(VID_ADDR) +
-		point_as_text_cell_address(&save_position);
+	/* DIVERGENCE(MVDM-HOST-DIV-900): keep the original VM-linear address across mode/page changes. */
+	text_address = saved_text_address;
 
 	/*
 	 *	Stuff restored data and alert gvi
@@ -5484,7 +5431,7 @@ LOCAL EGA_graphics_cursor_display IFN0()
 		/*
 		 *	Record save position and screen area
 		 */
-		save_area_in_use = TRUE;
+		save_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_EGA;
 		area_coerce_to_area(&save_area, &virtual_screen);
 		point_copy(&save_area.top_left, &save_position);
 
@@ -5749,7 +5696,7 @@ LOCAL VOID	VGA_graphics_cursor_display IFN0()
 		/*
 		 *	Record save position and screen area
 		 */
-		save_area_in_use = TRUE;
+		save_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_VGA;
 		area_coerce_to_area(&save_area, &virtual_screen);
 		point_copy(&save_area.top_left, &save_position);
 
@@ -5891,7 +5838,7 @@ LOCAL void graphics_cursor_display IFN0()
 		/*
 		 *	Record save position and screen area
 		 */
-		save_area_in_use = TRUE;
+		save_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_CGA;
 		point_copy(&save_area.top_left, &save_position);
 		area_coerce_to_area(&save_area, &virtual_screen);
 

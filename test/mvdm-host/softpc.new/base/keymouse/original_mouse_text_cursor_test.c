@@ -1,4 +1,4 @@
-/* Unchanged software text cursor bodies with bounded test memory/geometry.
+/* Production software text cursor bodies with bounded test memory/geometry.
  * This does not assert that NTVDM currently selects those bodies at runtime. */
 #include <assert.h>
 #include <stdint.h>
@@ -20,6 +20,9 @@ static MOUSE_AREA virtual_screen={{0,0},{640,200}},black_hole={{-16,-16},{-8,-8}
 static struct { uint16_t screen,cursor; } software_text_cursor={0xffff,0x7700};
 static uint16_t text_cursor_background,video_offset;
 static int save_area_in_use;
+static MOUSE_BYTE_ADDRESS saved_text_address;
+enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA };
+static int saved_cursor_kind;
 static uint16_t cells[8192];
 static unsigned writes;
 static void point_copy(const POINT_VALUE *a,POINT_VALUE *b) { *b=*a; }

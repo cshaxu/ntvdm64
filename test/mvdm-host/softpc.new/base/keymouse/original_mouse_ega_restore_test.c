@@ -25,6 +25,9 @@ static struct {point size,hot_spot; IU32 screen_lo[16],screen_hi[16],cursor_lo[1
 static IU32 ega_backgrnd_lo[16],ega_backgrnd_mid[16],ega_backgrnd_hi[16],planes[8192];
 static unsigned char *EGA_planes=(unsigned char *)planes;
 static int jap_mouse=1,save_area_in_use,change_mode_during_draw;
+static MOUSE_BYTE_ADDRESS saved_text_address;
+enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA };
+static int saved_cursor_kind;
 static void point_copy(const point*a,point*b){*b=*a;}
 static void point_translate(point*a,const point*b){a->x+=b->x;a->y+=b->y;}
 static void point_translate_back(point*a,const point*b){a->x-=b->x;a->y-=b->y;}
@@ -55,7 +58,7 @@ int main(void)
     black_hole = (MOUSE_AREA){{-20, -20}, {-10, -10}};
     change_mode_during_draw = 1;
     EGA_graphics_cursor_display();
-    assert(save_area_in_use && virtual_screen.bottom_right.y == 200 &&
+    assert(save_area_in_use && saved_cursor_kind == MOUSE_SAVED_EGA && virtual_screen.bottom_right.y == 200 &&
            cursor_status.position.y == 10 && jap_mouse == 0);
     change_mode_during_draw = 0;
     EGA_graphics_cursor_display();

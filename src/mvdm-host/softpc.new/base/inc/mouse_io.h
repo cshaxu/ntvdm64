@@ -935,6 +935,9 @@ typedef struct
 			windowed Enhanced Mode DOS box. This overrides
 			the cursor_flag variable.
  */
+/* DIVERGENCE(MVDM-HOST-DIV-900): provenance of the existing saved background. */
+typedef enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA } MOUSE_SAVED_KIND;
+#line 949
 typedef struct
    {
    MOUSE_CONTEXT     MM_IN_mouse_context;
@@ -1004,6 +1007,10 @@ typedef struct
 #endif /* HERC */
 #line 1013
    boolean           MM_IN_cursor_EM_disabled;
+   /* DIVERGENCE(MVDM-HOST-DIV-900): append metadata; retain existing instance-field offsets. */
+   MOUSE_BYTE_ADDRESS MM_IN_saved_text_address;
+   MOUSE_SAVED_KIND   MM_IN_saved_cursor_kind;
+#line 1014
    } MM_INSTANCE_DATA, **MM_INSTANCE_DATA_HANDLE;
 
 /*
@@ -1079,6 +1086,9 @@ IMPORT MM_INSTANCE_DATA_HANDLE mm_handle;
 #define text_cursor_background     ((*mm_handle)->MM_IN_text_cursor_background)
 #define graphics_cursor_background ((*mm_handle)->MM_IN_graphics_cursor_background)
 #define save_area_in_use           ((*mm_handle)->MM_IN_save_area_in_use)
+#define saved_text_address         ((*mm_handle)->MM_IN_saved_text_address)
+#define saved_cursor_kind          ((*mm_handle)->MM_IN_saved_cursor_kind)
+#line 1089
 #define save_position              ((*mm_handle)->MM_IN_save_position)
 #define save_area                  ((*mm_handle)->MM_IN_save_area)
 #define user_subroutine_critical   ((*mm_handle)->MM_IN_user_subroutine_critical)
