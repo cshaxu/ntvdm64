@@ -1372,3 +1372,7 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T481 S20 test reduction](evidence/m0-t481-s20-test-reduction.md): retired contracts, test classification, shared setup and verification.
 
 - [T481 S21 launch-tool consolidation](evidence/m0-t481-s21-launch-tool-consolidation.md): dynamic driver ownership, standalone retirement and final delivery checks.
+
+- [T482 DOS restart plan](operations/m0-t482-win95-dos-restart-plan.md): exact shutdown request, original-owner attribution and minimal repair acceptance.
+
+- [T482 DOS restart investigation](evidence/m0-t482-dos-restart-investigation.md): original contract, private-desktop dialog witness and attribution progress.

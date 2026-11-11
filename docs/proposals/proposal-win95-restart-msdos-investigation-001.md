@@ -2,9 +2,10 @@
 
 ## Status and owner request
 
-This is an unnumbered candidate at the front of the T queue. The owner asks
-why the Windows 95 shutdown option “Restart the computer in MS-DOS mode” does
-not work in this project. Admission remains separate from the active task.
+The owner has admitted this package; [Current](../states/CURRENT.md) owns
+its active packet. The owner additionally authorizes a minimal project-owned
+repair after attribution and requires clear root cause and complete delivery.
+Original guest modification remains outside scope.
 
 ## Objective
 
