@@ -2,10 +2,11 @@
 
 ## Status and owner request
 
-The owner has admitted this package; [Current](../states/CURRENT.md) owns
-its active packet. The owner additionally authorizes a minimal project-owned
-repair after attribution and requires clear root cause and complete delivery.
-Original guest modification remains outside scope.
+The owner closes this investigation and assigns the unresolved implementation
+and acceptance to the [Windows XP baseline upgrade](proposal-windows-xp-ntvdm-baseline-upgrade-001.md).
+See the [closure and evidence transfer](../history/m0-t482-closure.md).
+This is historical scope, not an active or separately queued task. No repair
+or successful restart-to-DOS acceptance is claimed.
 
 ## Objective
 

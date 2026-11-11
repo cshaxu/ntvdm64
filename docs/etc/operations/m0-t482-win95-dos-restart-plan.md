@@ -1,5 +1,11 @@
 # T482: Win95 restart into MS-DOS
 
+Owner disposition superseding earlier pending-scope notes: this investigation
+is closed and all unfinished capability/transition work is assigned to the
+[Windows XP baseline-upgrade package](../../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md).
+See [closure](../../history/m0-t482-closure.md). Historical observations below
+remain unchanged; the feature is not claimed repaired.
+
 Baseline 782854d6f, owner-approved next queue package. Original guest immutable.
 
 1. Reuse the existing private-desktop probe and installed Win95 copy builder.

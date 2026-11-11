@@ -2,63 +2,51 @@
 
 ## Current Work
 
-**Active: M0 T482 S1 — Win95 restart-to-DOS root cause and minimal repair.**
+**Active: M0 T483 S1 — project-wide implementation minimization: freeze and map owners.**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T482 S1, Ordinary Mode. |
-| Admission And Approval | Owner admits the next queued task, asks the agent to set a goal, establish a clear root cause and complete the repair. |
-| Objective | Reproduce Restart in MS-DOS mode, prove the requested transition and first failing owner, then repair the project-owned seam and demonstrate usable DOS return. |
-| Non-goals | No original guest modification/rebuild, unrelated CPU fixes, identity redesign or changes to Win31/Win101 setup. No Computer Use. |
-| Reference Baseline | 782854d6f; T481 closed; published package 7773a9b4-e360-4469-962a-df26bb16faf4. |
-| Files And ABI Surface | Existing private-desktop Win95 probes, reached shutdown/return host or addon seam; exact implementation scope follows source/trace attribution. |
-| Applicable Rules | Source-first recovery, minimal mirror diff, central NTSRV lifecycle, immutable guest, owned hidden background runs. |
-| Verification | Actual requested shutdown option, normal shutdown control, DOS input/commands and restart; focused regression and applicable Full; all production deliveries cached-built, published, committed and pushed. |
-| Expected Markers | Request identity, reached caller/provider, failure/control comparison, correct DOS interactive return and preserved lifecycle; no forced success or exit-code normalization. |
-| Asset Needs | Existing released assets and isolated copy of approved O:/WINDOWS; original media unchanged. |
-| Reporting Requirements | Root cause, minimal change, exact runtime evidence and unsupported boundaries; periodic progress. |
-| Stop Conditions | Guest mutation or unknown semantic replacement requires explicit owner review, not guessed fallback. |
-| Exit Criteria | Reproduced failure explained and repaired with positive/control coverage and complete delivery; an immutable boundary must be proved and reviewed, not reported as repaired. |
-| Original Owner Request | Admit a new T, set the goal autonomously, make root cause clear and fix thoroughly. |
-| Similar-Issue Sweep | Normal shutdown versus DOS return versus reboot, driver/DOSONLY state, caller identity, I/O and worker retirement. |
+| Identifier Mode | M0 T483 S1, Ordinary Mode. |
+| Admission And Approval | Owner closes T482 with transfer to the XP package and admits the next queued task; queue-first implementation-minimization review is admitted. |
+| Objective | Freeze a complete project-owned implementation/mirror/build inventory and independently map local semantic bodies to original owners or proved product-only requirements. |
+| Non-goals | No inventory-only closure of the whole T; no original guest edits, speculative CPU/backend activation, new generic frameworks or formatting churn. No Win95 LFN implementation in this task. |
+| Reference Baseline | 14967466b; single main worktree inspected; T482 investigation delivered and owner-closed with explicit transfer. |
+| Files And ABI Surface | All project-owned production bodies, mirror-embedded adaptations, declarations, build selections and prior owner audits; S1 establishes evidence without speculative product edits. |
+| Applicable Rules | Original OpenNT contracts and source policy; maximal justified reuse, minimal mirror/local code, preserved capabilities, NTSRV lifecycle ownership. |
+| Verification | Git/source/build identities; complete inventory reconciliation; caller/original-alternative/state/error/lifetime evidence; documentation governance and diff checks. Product changes in later S require applicable cached build, tests and publication. |
+| Expected Markers | Every owned production source accounted for; stable finding IDs, prior and independent judgments, real caller, original alternative, necessity proof and restore/delete/minimize/retain disposition. Uncertain findings remain explicit. |
+| Asset Needs | Existing pinned OpenNT/mirrors, selected build graphs, prior audit evidence and maintained probes; no new external acquisition implied. |
+| Reporting Requirements | File/owner coverage and outstanding counts; changes versus pinned originals and admission baseline separately; distinguish implementation, declarations, build, tests and docs. |
+| Stop Conditions | Actual source/ABI/scope expansion requires governance; no guessed equivalence, false success or deletion of proven fixes. |
+| Exit Criteria | S1 inventory covers every owned production source and records evidence-backed ownership decisions; no runtime/minimality claim from enumeration alone. |
+| Original Owner Request | Close the current T, transfer its unresolved issue to the Windows XP baseline-upgrade task, and admit the next T. |
+| Similar-Issue Sweep | All components, selected/unselected originals, dead duplicates, reference-only/test-only code, mirror-local policy and generated/build-selected providers. |
 
-Plan: [bounded investigation and acceptance](../etc/operations/m0-t482-win95-dos-restart-plan.md).
-Scratch: build/t482; owned processes and disposable guest copies only; 8-hour,
-20-GiB budget, review after 30 minutes without new evidence. Reuse historical
-successful probe/token paths before declaring any capability unavailable.
-
-## S1 Evidence Checkpoint
-
-Actual Win95 volume capability is 12-character components/no LFN. Localized
-Exit-to-DOS PIF and ASCII long paths fail before DEM CreateFileOem; short paths
-reach DEM and succeed. A short-PIF diagnostic reaches session-end notifications,
-but usable DOS return is not verified. Evidence is indexed under T482.
-A proper Win95 filesystem-provider addition is a scope expansion, not a minimal
-NTSRV exit fix; owner choice between design review and gap transfer is pending.
-P1 investigation is committed/pushed as 3508c115e. Additional companion-off
-controls also reach session-end notifications without verified DOS return;
-there is no evidence for a one-driver exit fix. The plan contains the bounded
-provider/transition decision brief. No implementation expansion is admitted.
-No product or original guest changes, publication, Full pass or repair claimed.
+Full scope, known examples, S1–S5 decomposition and mandatory acceptance:
+[implementation-minimization review](../proposals/proposal-original-source-implementation-minimization-review-001.md).
+S1 is newly admitted; the project-wide body/owner audit is not yet complete.
+The proposal's acceptance routes must be reconciled with actual maintained
+runners; historical counts cannot be silently substituted for current coverage.
 
 ## Current Technical Baseline
 
-Published package: 7773a9b4-e360-4469-962a-df26bb16faf4, all 11 images
-hash-verified in assets/release and O:/winnt/system32. S20 cached x86/x64
-builds and focused tests passed. S21 repeated cached builds, focused launcher
-tests and all 16 selected Full gates successfully. External
-DOS4GW/NESticle is a missing-fixture skip. S20 P1 is 843cae6b4.
-This closure changes Win95 tooling, tests and documentation; runtime, addons, original guest,
-winnt.zip and installed Windows configurations are unchanged.
+Published 11-image package remains 7773a9b4-e360-4469-962a-df26bb16faf4.
+T481 S21 cached x86/x64 builds and all 16 selected Full gates passed, with the
+external DOS4GW/NESticle fixture explicitly skipped. T482 added only independent
+diagnostics and governance/evidence; no new production release or Full pass.
+Original guest, installed Windows, release assets and winnt.zip are unchanged.
 
-The confirmed DOS program identity/wrong-waiter defect and approved Win95
-exit-code boundary are retained in [TODO](TODO.md), not declared repaired.
+The confirmed DOS identity/wrong-waiter defect and approved Win95 exit-code
+boundary remain in [TODO](TODO.md). Win95 restart-to-DOS now belongs to the
+[XP baseline-upgrade package](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md),
+including both the filename capability gap and unproved downstream DOS return.
 
 ## Recent M0 Closures
 
-- [T481](../history/m0-t481-closure.md): guest multitask delivery, launch profiles, mouse repairs and test cleanup; explicit retained boundaries.
+- [T482](../history/m0-t482-closure.md): owner-accepted investigation and complete transfer; feature not repaired.
+- [T481](../history/m0-t481-closure.md): guest multitask delivery and cleanup, with explicit boundaries.
 - [T480](../history/m0-t480-closure.md): adjacent mirror audit closure.
 - [T479](../history/m0-t479-closure.md): guest multitask transferred to T481.
 

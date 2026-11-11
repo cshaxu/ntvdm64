@@ -13,10 +13,10 @@ to the original contract, never change the original contract merely to fit
 local code. A semantic correction to original source requires a demonstrated
 original bug, a minimal repair and focused positive/negative proof.
 
-This is a queued candidate, not an active numeric task. Allocate its T number
-only at admission through CURRENT.md. It does not interrupt or replace the
-active package. The owner's queue request authorizes this proposal, not its
-implementation before admission.
+The owner has admitted this package through [Current](../states/CURRENT.md).
+Current owns the numeric task and one active S; this proposal retains the full
+project-wide scope and S decomposition. Admission is not an audit-completion
+claim and does not pre-authorize unrelated architectural changes.
 
 This candidate is an independent audit after
 [implementation of the existing DOS16 and WOW32 inventories](proposal-mvdm-whole-closure-recovery-001.md)

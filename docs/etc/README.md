@@ -1375,4 +1375,4 @@ the pinned source intersection, compatibility findings and generic-test plan.
 
 - [T482 DOS restart plan](operations/m0-t482-win95-dos-restart-plan.md): exact shutdown request, original-owner attribution and minimal repair acceptance.
 
-- [T482 DOS restart investigation](evidence/m0-t482-dos-restart-investigation.md): original contract, private-desktop dialog witness and attribution progress.
+- [T482 DOS restart investigation](evidence/m0-t482-dos-restart-investigation.md): original contract, private-desktop witnesses and owner-approved transfer of unresolved work.

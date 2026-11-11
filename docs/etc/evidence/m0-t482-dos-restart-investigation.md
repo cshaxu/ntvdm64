@@ -1,5 +1,11 @@
 # T482 DOS restart: bounded investigation
 
+Owner disposition superseding earlier pending-scope notes: this investigation
+is closed and all unfinished capability/transition work is assigned to the
+[Windows XP baseline-upgrade package](../../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md).
+See [closure](../../history/m0-t482-closure.md). Historical observations below
+remain unchanged; the feature is not claimed repaired.
+
 Baseline: 782854d6f; original Windows binaries and host publication unchanged.
 Owner authorizes pure-host/addon attribution and minimal repair, not guest patches.
 
