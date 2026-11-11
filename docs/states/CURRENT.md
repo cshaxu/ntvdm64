@@ -37,6 +37,10 @@ reach DEM and succeed. A short-PIF diagnostic reaches session-end notifications,
 but usable DOS return is not verified. Evidence is indexed under T482.
 A proper Win95 filesystem-provider addition is a scope expansion, not a minimal
 NTSRV exit fix; owner choice between design review and gap transfer is pending.
+P1 investigation is committed/pushed as 3508c115e. Additional companion-off
+controls also reach session-end notifications without verified DOS return;
+there is no evidence for a one-driver exit fix. The plan contains the bounded
+provider/transition decision brief. No implementation expansion is admitted.
 No product or original guest changes, publication, Full pass or repair claimed.
 
 ## Current Technical Baseline

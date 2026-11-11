@@ -210,3 +210,34 @@ The shared builder's default Menu and DosRestart selections both compile;
 final source receipt is build/t482/shared-dos2/build.json. Documentation
 governance and git diff --check pass. No production files, release assets,
 original guest binaries or installed configurations are part of this checkpoint.
+
+
+## Companion-off downstream controls
+
+Two independent private desktops and fresh package identities repeated the
+short-PIF experiment. The no-multitask copy retains only INSIGNIA's SYSTEM.INI
+entry; the no-drivers copy has neither companion entry. Both reach SHORT_EXEC
+success and both session-end notifications, but neither demonstrates DOS return
+within the observation period. The terminal states differ:
+
+| Case | CS/base/limit | IP | BDA video mode |
+| --- | --- | --- | --- |
+| both on (short2) | 0028 / 0 / FFFFFFFF | C00034CD | 1B |
+| NTVDM64 off | 03DF / 801485C0 / 313F | 093C | 1B |
+| both companions off | 0137 / 0 / FFFFFFFF | BFF03925 | 1B |
+
+Receipts are build/t482/short-no-multitask and short-no-drivers, including
+active-drivers.json, DOSRET.LOG, exact-map guest samples, and observer outcomes.
+Both owned-copy jobs complete cleanup, original installation hashes match,
+and Q98/Q99 are removed. Diagnostic job exit 0 means cleanup completed; each
+runtime outcome remains timeout, not a pass. Different samples do not establish
+a common deadlock or a precise failing instruction. These controls do not
+support fixing a companion's System_Exit handler as the sole remedy.
+
+Source review: NTVDM64 notification_close releases its notification IRQ;
+INSIGNIA asks original NIDDB for the reset body. compat95's README explicitly
+states it is not a complete DOS7 implementation and excludes full reboot/TSR
+history. This is relevant scope context, not proof that an omitted service
+caused the observed post-session-end state. No such service was fabricated.
+The bounded design/decision brief is in the indexed T482 plan. LFN-provider
+implementation and changing the closure outcome still await owner decision.
