@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "92714715fc0fce4cb33268f534e9e7d7d45ae612937249a2c2b2e2e013099947",
+  "archive_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -12,18 +12,18 @@
     "WINNT/SYSTEM32/CTL3DV2.DLL",
     "WINNT/SYSTEM32/FORCEDOS.EXE",
     "WINNT/SYSTEM32/LANMAN.DRV",
-    "WINNT/SYSTEM32/LZEXPAND.DLL",
+    "WINNT/SYSTEM/LZEXPAND.DLL",
     "WINNT/SYSTEM32/MCIOLE16.DLL",
-    "WINNT/SYSTEM32/MMSYSTEM.DLL",
+    "WINNT/SYSTEM/MMSYSTEM.DLL",
     "WINNT/SYSTEM32/NETAPI.DLL",
-    "WINNT/SYSTEM32/OLESVR.DLL",
+    "WINNT/SYSTEM/OLESVR.DLL",
     "WINNT/SYSTEM32/PMSPL.DLL",
     "WINNT/SYSTEM32/RASAPI16.DLL",
-    "WINNT/SYSTEM32/TIMER.DRV",
+    "WINNT/SYSTEM/TIMER.DRV",
     "WINNT/SYSTEM32/TOOLHELP.DLL",
     "WINNT/SYSTEM32/VCDEX.DLL",
     "WINNT/SYSTEM32/VDMEXTS.DLL",
-    "WINNT/SYSTEM32/VER.DLL",
+    "WINNT/SYSTEM/VER.DLL",
     "WINNT/SYSTEM32/WIN.COM",
     "WINNT/SYSTEM32/WIN87EM.DLL",
     "WINNT/SYSTEM32/WINHELP.EXE",
@@ -77,7 +77,7 @@
       "imports": []
     },
     {
-      "path": "WINNT/SYSTEM32/COMMDLG.DLL",
+      "path": "WINNT/SYSTEM/COMMDLG.DLL",
       "bytes": 32784,
       "sha256": "54a7981c5667bde19f0d703580d40a448a0bdec010feffa153004ef4870dc0d4",
       "source": "preserved-approved-baseline-zip",
@@ -274,7 +274,7 @@
       "imports": []
     },
     {
-      "path": "WINNT/SYSTEM32/OLECLI.DLL",
+      "path": "WINNT/SYSTEM/OLECLI.DLL",
       "bytes": 83456,
       "sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4",
       "source": "preserved-approved-baseline-zip",
@@ -351,7 +351,7 @@
       "imports": []
     },
     {
-      "path": "WINNT/SYSTEM32/WFWNET.DRV",
+      "path": "WINNT/SYSTEM/WFWNET.DRV",
       "bytes": 15744,
       "sha256": "4c321d43511f845ec1a95518507133d1cf4cf3993bae422037dba95ce6258cca",
       "source": "preserved-approved-baseline-zip",
@@ -400,7 +400,7 @@
       ]
     },
     {
-      "path": "WINNT/SYSTEM32/MMSYSTEM.DLL",
+      "path": "WINNT/SYSTEM/MMSYSTEM.DLL",
       "bytes": 86976,
       "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a",
       "source": "src\\mvdm\\wow16\\mmsystem\\MMSYSTEM.DLL",
@@ -413,7 +413,7 @@
       ]
     },
     {
-      "path": "WINNT/SYSTEM32/TIMER.DRV",
+      "path": "WINNT/SYSTEM/TIMER.DRV",
       "bytes": 4288,
       "sha256": "4567fa8b0a10a7b3de47c9366e0a1acfeaf55d1e12387e76c89bbf474b914e5d",
       "source": "src\\mvdm\\wow16\\timer\\TIMER.DRV",
@@ -438,7 +438,7 @@
       ]
     },
     {
-      "path": "WINNT/SYSTEM32/OLESVR.DLL",
+      "path": "WINNT/SYSTEM/OLESVR.DLL",
       "bytes": 24064,
       "sha256": "8bea5e9a9c49e84701f55e14312eb11bd04c1434c1ab59578c916a7db69aa3cc",
       "source": "src\\mvdm\\wow16\\ole\\server\\retail\\OLESVR.DLL",
@@ -509,7 +509,7 @@
       ]
     },
     {
-      "path": "WINNT/SYSTEM32/LZEXPAND.DLL",
+      "path": "WINNT/SYSTEM/LZEXPAND.DLL",
       "bytes": 9936,
       "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
       "source": "src\\mvdm\\bin86\\lzexpand.dll",
@@ -545,7 +545,7 @@
       ]
     },
     {
-      "path": "WINNT/SYSTEM32/VER.DLL",
+      "path": "WINNT/SYSTEM/VER.DLL",
       "bytes": 9008,
       "sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4",
       "source": "src\\mvdm\\bin86\\ver.dll",
@@ -761,5 +761,28 @@
       "sha256": "bc241d49e73a10471500bcfcda8302ef72fd7411f7b8dea92289b4244ea2c87e",
       "source": "artifacts/mvdm-audit/s13-r625-graftabl-archive.json"
     }
-  ]
+  ],
+  "layout": {
+    "policy": "owner-approved single-copy Win16 SYSTEM layout",
+    "previous_archive_sha256": "92714715fc0fce4cb33268f534e9e7d7d45ae612937249a2c2b2e2e013099947",
+    "relocated": {
+      "WINNT/SYSTEM32/COMMDLG.DLL": "WINNT/SYSTEM/COMMDLG.DLL",
+      "WINNT/SYSTEM32/LZEXPAND.DLL": "WINNT/SYSTEM/LZEXPAND.DLL",
+      "WINNT/SYSTEM32/MMSYSTEM.DLL": "WINNT/SYSTEM/MMSYSTEM.DLL",
+      "WINNT/SYSTEM32/OLECLI.DLL": "WINNT/SYSTEM/OLECLI.DLL",
+      "WINNT/SYSTEM32/OLESVR.DLL": "WINNT/SYSTEM/OLESVR.DLL",
+      "WINNT/SYSTEM32/TIMER.DRV": "WINNT/SYSTEM/TIMER.DRV",
+      "WINNT/SYSTEM32/VER.DLL": "WINNT/SYSTEM/VER.DLL",
+      "WINNT/SYSTEM32/WFWNET.DRV": "WINNT/SYSTEM/WFWNET.DRV"
+    },
+    "bootstrap_system32": [
+      "SYSTEM.DRV",
+      "KEYBOARD.DRV",
+      "MOUSE.DRV",
+      "VGA.DRV",
+      "SOUND.DRV",
+      "SHELL.DLL"
+    ],
+    "bootstrap_reason": "Original KRNL386 BootOrder searches core directory then Windows directory, not SYSTEM; WOWEXEC also imports SHELL. Keep these six files in SYSTEM32 without duplicates."
+  }
 }

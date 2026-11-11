@@ -41,8 +41,8 @@ try {
  Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
  Copy-Item "$root/MMTPROBE.DLL" "$tests/MMTPROBE.DLL"
  if($AppLocalMmsystem){
-  Copy-Item "$runtime/system32/MMSYSTEM.DLL" "$tests/MMSYSTEM.DLL"
-  if((Get-FileHash "$tests/MMSYSTEM.DLL").Hash -ne (Get-FileHash "$runtime/system32/MMSYSTEM.DLL").Hash){throw 'App-local immutable copy differs'}
+  Copy-Item "$runtime/system/MMSYSTEM.DLL" "$tests/MMSYSTEM.DLL"
+  if((Get-FileHash "$tests/MMSYSTEM.DLL").Hash -ne (Get-FileHash "$runtime/system/MMSYSTEM.DLL").Hash){throw 'App-local immutable copy differs'}
  }
 
  Get-FileHash $source,$PSCommandPath,$Observer,$LogonHelper,$assembler,"$root/$probe.EXE"|Export-Csv -NoTypeInformation "$root/inputs.csv"

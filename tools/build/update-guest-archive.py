@@ -20,6 +20,11 @@ REQUIRED = [
     "bin86/pmspl.dll", "bin86/ver.dll", "bin86/winhelp.exe",
     "bin86/i386/win87em.dll",
 ]
+SYSTEM_LIBRARIES = {
+    "COMMDLG.DLL", "LZEXPAND.DLL", "MMSYSTEM.DLL", "OLECLI.DLL",
+    "OLESVR.DLL", "TIMER.DRV", "VER.DLL", "WFWNET.DRV",
+}
+
 APPS = ["WINMINE.EXE", "SOL.EXE", "WRITE.EXE", "TASKMAN.EXE", "WINVER.EXE",
         "EDIT.COM", "QBASIC.EXE", "WINMINE.HLP", "SOL.HLP", "WRITE.HLP",
         "EDIT.HLP", "QBASIC.HLP"]
@@ -48,7 +53,7 @@ def main():
     additions = {}
     provenance = {}
     for source, target in [*(
-            (repo / "src/mvdm-guest" / name, "WINNT/SYSTEM32/" + Path(name).name.upper())
+            (repo / "src/mvdm-guest" / name, "WINNT/" + ("SYSTEM/" if Path(name).name.upper() in SYSTEM_LIBRARIES else "SYSTEM32/") + Path(name).name.upper())
             for name in REQUIRED), *((Path("O:/winnt") / name, "WINNT/" + name) for name in APPS)]:
         data = source.read_bytes()
         record = known[str(source.resolve()).lower()]

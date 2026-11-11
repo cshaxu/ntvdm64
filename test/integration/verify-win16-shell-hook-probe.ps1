@@ -55,8 +55,8 @@ try {
   Get-FileHash "$tests/s44-bop-vdd.dll","$repo/test/mvdm-host/s44_test_vdd.c"|Export-Csv -NoTypeInformation "$root/vdd-inputs.csv"
  }
  if($Case -eq 'media'){
-  Copy-Item "$runtime/system32/MMSYSTEM.DLL" "$tests/MMSYSTEM.DLL"
-  if((Get-FileHash "$tests/MMSYSTEM.DLL").Hash -ne (Get-FileHash "$runtime/system32/MMSYSTEM.DLL").Hash){throw 'Immutable MMSYSTEM copy differs'}
+  Copy-Item "$runtime/system/MMSYSTEM.DLL" "$tests/MMSYSTEM.DLL"
+  if((Get-FileHash "$tests/MMSYSTEM.DLL").Hash -ne (Get-FileHash "$runtime/system/MMSYSTEM.DLL").Hash){throw 'Immutable MMSYSTEM copy differs'}
   $wave=[IO.MemoryStream]::new();$writer=[IO.BinaryWriter]::new($wave)
   try {
    $writer.Write([Text.Encoding]::ASCII.GetBytes('RIFF'));$writer.Write([uint32]836)
