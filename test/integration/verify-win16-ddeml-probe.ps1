@@ -55,8 +55,6 @@ try {
  $info.EnvironmentVariables['TEMP']=$runtime;$info.EnvironmentVariables['TMP']=$runtime
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
  $info.EnvironmentVariables['MVDM_WOW_DISPATCH_TRACE_PATH']="$root/dispatch.txt"
- $info.EnvironmentVariables['MVDM_WOW_CALLBACK_FRAME_TRACE_PATH']="$root/callbacks.txt"
- $info.EnvironmentVariables['MVDM_WOW_CALLBACK_TRACE_PATH']="$root/wndproc.txt"
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"
  foreach($arg in @("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait',"$tests/$probe.EXE",'--observation-timeout-ms','45000')){$info.ArgumentList.Add($arg)}
  $process=[Diagnostics.Process]::Start($info);$null=$process.Handle

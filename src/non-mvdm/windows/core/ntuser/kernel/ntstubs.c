@@ -19,8 +19,7 @@
 #if DBG
 #error Excluded unsupported original DBG stub exception handler
 #else
-#line 152
-#define StubExceptionHandler()  EXCEPTION_EXECUTE_HANDLER
+#line 153
 #endif
 #line 154
 
@@ -65,16 +64,13 @@ BOOL NtUserSetWindowFNID(
 
 #line 7261
 #if defined(_X86_)
-#define DATAALIGN sizeof(BYTE)
-#define CHARALIGN sizeof(BYTE)
+#line 7264
 #else
 #line 7265
 #error Excluded unsupported original non-x86 class-registration alignment
 #line 7267
 #endif
 #line 7313
-#undef DATAALIGN
-#undef CHARALIGN
 #line 7315
 #line 8377
 #if 0

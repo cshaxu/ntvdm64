@@ -23,8 +23,7 @@
 #error Excluded unsupported original DEBUG DDE tracing
 #line 36
 #else
-#line 37
-#define TraceDdeMsg(m, h1, h2, c)
+#line 38
 #endif
 #line 39
 
@@ -34,9 +33,7 @@
 #error Excluded unsupported original DEBUG queue validation
 #line 114
 #else
-#line 115
-#define DebugValidateMLIST(pml)
-#define DebugValidateMLISTandQMSG(pml, pqmsg)
+#line 117
 #endif
 #line 118
 

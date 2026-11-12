@@ -31,8 +31,7 @@
 #line 39
 #error Excluded unsupported original TESTING handle-table verification
 #else
-#line 60
-#define CheckHandleTable()
+#line 61
 #endif // TESTING
 #line 293
 DWORD GetFullUserHandle(WORD wHandle)

@@ -20,6 +20,7 @@ try{
  $original="$repo/src/non-mvdm/windows/core/ntuser/kernel/input.c"
  $sources=@('wow_native_input_group_fixture','wow_native_input_focus_fixture','wow_input_membership_fixture')
  $inputs=@($PSCommandPath,$driver,$original,"$repo/src/wow32-dll/include/wow_input_group_bindings.h","$repo/src/wow32-dll/include/wow_task_order_bindings.h")
+ $inputs+="$repo/test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h"
  $inputs+=@($sources|ForEach-Object {"$repo/test/adapter-mvdm-host-out/wow/$_.c"})
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $flags='/nologo /c /MT /O2 /Gz /W4 /I"'+$repo+'/src/wow32-dll/include"'
@@ -33,8 +34,8 @@ try{
  }
  if((Get-Content "$root/wow_native_input_group_fixture.stdout.txt" -Raw) -notmatch 'WOW_NATIVE_INPUT_GROUP errors=0 .*naive_join_split=1 maintained_join=1 repeated=1'){throw 'Missing native group/counterexample witness'}
  if((Get-Content "$root/wow_native_input_focus_fixture.stdout.txt" -Raw) -notmatch 'WOW_NATIVE_INPUT_FOCUS errors=0 private_desktop=1 capture=1 callbacks=0'){throw 'Missing private native focus/capture/callback witness'}
- if((Get-Content "$root/wow_input_membership_fixture.stdout.txt" -Raw) -notmatch 'WOW_INPUT_MEMBERSHIP errors=0 .*queue_selection=1 allocation_failure=1 partial_failure=1'){throw 'Missing original grouping/allocation-path witness'}
+ if((Get-Content "$root/wow_input_membership_fixture.stdout.txt" -Raw) -notmatch 'WOW_INPUT_MEMBERSHIP errors=0 .*original_fixed_point=1 pre_tdb=1 explicit_edge=1 release=1 rejoin=1'){throw 'Missing original connected-group membership witness'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Input changed'}}
- 'Supplementary native services/original grouping, not production lifecycle, guest acceptance or universal NT4 foreground precedence. Keyboard fixture touches only its own thread tables; focus/capture fixture owns an invisible private desktop.'|Set-Content "$root/limits.txt"
+ 'Supplementary native services/original grouping, not production lifecycle, guest acceptance or universal NT4 foreground precedence. Group and focus/capture fixtures own invisible private desktops; queue sharing uses distinct caret owners, not the active desktop keyboard table.'|Set-Content "$root/limits.txt"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}

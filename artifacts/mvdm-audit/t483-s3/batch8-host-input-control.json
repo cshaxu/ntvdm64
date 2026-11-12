@@ -1,0 +1,15 @@
+{
+  "scope": "Independent host-only prerequisite controls; neither links project product code. No external input or visible window interaction.",
+  "session": "wtsState=0 station=WinSta0 threadDesktop=Default inputDesktop=Default",
+  "source": "#include <windows.h>\n#include <stdio.h>\nstatic void check(const char *label){BYTE in[256]={0},out[256]={0};BOOL s,g;in['Z']=0x80;s=SetKeyboardState(in);g=GetKeyboardState(out);printf(\"%s set=%d get=%d ownZ=%u key=%04x\\n\",label,s,g,out['Z'],(unsigned short)GetKeyState('Z'));ZeroMemory(in,sizeof(in));SetKeyboardState(in);}\nint main(void){MSG m;BYTE x[256];HWND w;char path[MAX_PATH];PeekMessage(&m,NULL,0,0,PM_NOREMOVE);GetModuleFileNameA(GetModuleHandleA(\"user32.dll\"),path,MAX_PATH);printf(\"user32=%s\\n\",path);check(\"initial\");GetKeyboardState(x);check(\"primed\");w=CreateWindowExA(0,\"STATIC\",\"owned-unshown-control\",WS_POPUP,0,0,1,1,NULL,NULL,GetModuleHandle(NULL),NULL);printf(\"window=%d\\n\",w!=NULL);check(\"unshown-window\");if(w)DestroyWindow(w);return 0;}\n",
+  "source_sha256": "4f1e184c7a6b7f2004aead54cf875d35afc9ebc5ebdf1b8bfe234958898d2989",
+  "x86": "user32=C:\\WINDOWS\\System32\\USER32.dll\ninitial set=1 get=1 ownZ=0 key=0000\nprimed set=1 get=1 ownZ=0 key=0000\nwindow=1\nunshown-window set=1 get=1 ownZ=0 key=0000\n",
+  "x64": "user32=C:\\WINDOWS\\System32\\USER32.dll\ninitial set=1 get=1 ownZ=0 key=0000\nprimed set=1 get=1 ownZ=0 key=0000\nwindow=1\nunshown-window set=1 get=1 ownZ=0 key=0000\n",
+  "interpretation": "Host-only controls pass when the execution context is usable; a later child-local sample associates zero readback with Screen-saver. A parent Default snapshot before compilation does not guarantee input desktop at execution. Original native services r5 fully passed; lifetime remains to run, no waiver or production bug inferred.",
+  "primary_reference": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setkeyboardstate",
+  "later_controls": {
+    "host_thread": "ownZ in=1 set=True get=True out=1\nownZ in=128 set=True get=True out=128\nownZ in=129 set=True get=True out=129\n\n",
+    "same_unmodified_executable": "user32=C:\\WINDOWS\\System32\\USER32.dll\ninitial set=1 get=1 ownZ=128 key=ff80\nprimed set=1 get=1 ownZ=128 key=ff80\nwindow=1\nunshown-window set=1 get=1 ownZ=128 key=ff80\n",
+    "same_process_failure_desktop": "explicitDesktop=0 set=1 get=1 Z=0 input=Screen-saver\nsetDesktop=1\nexplicitDesktop=1 set=1 get=1 Z=0 input=Screen-saver\n"
+  }
+}

@@ -1,0 +1,980 @@
+{
+  "method": "Actual selected MSVC preprocessing compared at original logical line numbers; exact unchanged statement anchors, not all-context proof. Existing function resets retained.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+      "current_sha256": "bf6e3410b3040c2b4075a9602138225101520eaa836ee7ba37cb6beb5cee09cc",
+      "anchors": [
+        {
+          "line": 295,
+          "text": "DWORD dwHandle;"
+        },
+        {
+          "line": 296,
+          "text": "PHE phe;"
+        },
+        {
+          "line": 319,
+          "text": "return(wHandle);"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "current_sha256": "60d175ef3364c1627999b79fef4450088fefd3a5a738df607b488bd568af72cc",
+      "anchors": [
+        {
+          "line": 5015,
+          "text": "void AddAttachment("
+        },
+        {
+          "line": 5016,
+          "text": "PTHREADINFO pti,"
+        },
+        {
+          "line": 5017,
+          "text": "PQ pqAttach,"
+        },
+        {
+          "line": 5018,
+          "text": "LPBOOL pfChanged)"
+        },
+        {
+          "line": 5020,
+          "text": "if (pti->pqAttach != pqAttach) {"
+        },
+        {
+          "line": 5035,
+          "text": "PQ pqDestroy = pti->pqAttach;"
+        },
+        {
+          "line": 5036,
+          "text": "pti->pqAttach = pqAttach;"
+        },
+        {
+          "line": 5039,
+          "text": "pqAttach->cThreads++;"
+        },
+        {
+          "line": 5044,
+          "text": "void Recalc2("
+        },
+        {
+          "line": 5047,
+          "text": "PATTACHINFO pai;"
+        },
+        {
+          "line": 5048,
+          "text": "PTHREADINFO pti;"
+        },
+        {
+          "line": 5049,
+          "text": "BOOL fChanged;"
+        },
+        {
+          "line": 5050,
+          "text": "PLIST_ENTRY pHead, pEntry;"
+        },
+        {
+          "line": 5056,
+          "text": "do {"
+        },
+        {
+          "line": 5064,
+          "text": "for (pEntry = pHead->Flink; pEntry != pHead; pEntry = pEntry->Flink) {"
+        },
+        {
+          "line": 5067,
+          "text": "if (pti->pqAttach == pqAttach) {"
+        },
+        {
+          "line": 5076,
+          "text": "if (pai->pti1 == pti || pai->pti2 == pti) {"
+        },
+        {
+          "line": 5077,
+          "text": "AddAttachment("
+        },
+        {
+          "line": 5078,
+          "text": "(pai->pti1 == pti) ? pai->pti2 : pai->pti1,"
+        },
+        {
+          "line": 5079,
+          "text": "pqAttach,"
+        },
+        {
+          "line": 5080,
+          "text": "&fChanged);"
+        },
+        {
+          "line": 5089,
+          "text": "PTHREADINFO ptiAttach;"
+        },
+        {
+          "line": 5090,
+          "text": "PLIST_ENTRY pHeadAttach, pEntryAttach;"
+        },
+        {
+          "line": 5092,
+          "text": "pHeadAttach = &pti->rpdesk->PtiList;"
+        },
+        {
+          "line": 5093,
+          "text": "for (pEntryAttach = pHeadAttach->Flink;"
+        },
+        {
+          "line": 5094,
+          "text": "pEntryAttach != pHeadAttach;"
+        },
+        {
+          "line": 5095,
+          "text": "pEntryAttach = pEntryAttach->Flink) {"
+        },
+        {
+          "line": 5099,
+          "text": "ptiAttach->ppi == pti->ppi) {"
+        },
+        {
+          "line": 5100,
+          "text": "AddAttachment(ptiAttach, pqAttach, &fChanged);"
+        },
+        {
+          "line": 5106,
+          "text": "} while (fChanged);"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current_sha256": "7bbb5a6b3837a733526297314a6bf97e09f7c6581ce2f3b67bda89ead497213c",
+      "anchors": [
+        {
+          "line": 6182,
+          "text": "pwnd->fnid |= fnid;"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current_sha256": "ed806802a7dfceefa0b7ca16891dcec93d8697f07cafd8adb7a99c35f381cf21",
+      "anchors": [
+        {
+          "line": 526,
+          "text": "void SetAppCompatFlags("
+        },
+        {
+          "line": 527,
+          "text": "PTHREADINFO pti)"
+        },
+        {
+          "line": 529,
+          "text": "DWORD dwFlags = 0;"
+        },
+        {
+          "line": 531,
+          "text": "WCHAR szKey[80];"
+        },
+        {
+          "line": 532,
+          "text": "WCHAR *pchStart, *pchEnd;"
+        },
+        {
+          "line": 533,
+          "text": "DWORD cb;"
+        },
+        {
+          "line": 534,
+          "text": "PUNICODE_STRING pstrAppName;"
+        },
+        {
+          "line": 544,
+          "text": "pti->dwCompatFlags = pti->ppi->dwCompatFlags;"
+        },
+        {
+          "line": 545,
+          "text": "pti->pClientInfo->dwCompatFlags = pti->dwCompatFlags;"
+        },
+        {
+          "line": 546,
+          "text": "return;"
+        },
+        {
+          "line": 557,
+          "text": "pstrAppName = pti->pstrAppName;"
+        },
+        {
+          "line": 558,
+          "text": "else"
+        },
+        {
+          "line": 560,
+          "text": "pchStart = pchEnd = pstrAppName->Buffer +"
+        },
+        {
+          "line": 561,
+          "text": "(pstrAppName->Length / sizeof(WCHAR));"
+        },
+        {
+          "line": 567,
+          "text": "if (pchEnd == pstrAppName->Buffer) {"
+        },
+        {
+          "line": 568,
+          "text": "pchEnd = pchStart;"
+        },
+        {
+          "line": 569,
+          "text": "break;"
+        },
+        {
+          "line": 573,
+          "text": "break;"
+        },
+        {
+          "line": 575,
+          "text": "pchEnd--;"
+        },
+        {
+          "line": 581,
+          "text": "pchStart = pchEnd;"
+        },
+        {
+          "line": 583,
+          "text": "while (pchStart != pstrAppName->Buffer) {"
+        },
+        {
+          "line": 585,
+          "text": "pchStart++;"
+        },
+        {
+          "line": 586,
+          "text": "break;"
+        },
+        {
+          "line": 589,
+          "text": "pchStart--;"
+        },
+        {
+          "line": 596,
+          "text": "cb = (pchEnd - pchStart) * sizeof(WCHAR);"
+        },
+        {
+          "line": 597,
+          "text": "if (cb >= sizeof(szKey))"
+        },
+        {
+          "line": 598,
+          "text": "cb = sizeof(szKey) - sizeof(WCHAR);"
+        },
+        {
+          "line": 600,
+          "text": "szKey[(cb / sizeof(WCHAR))] = 0;"
+        },
+        {
+          "line": 608,
+          "text": "UNICODE_STRING strHex;"
+        },
+        {
+          "line": 615,
+          "text": "RtlInitUnicodeString(&strHex, szHex);"
+        },
+        {
+          "line": 616,
+          "text": "RtlUnicodeStringToInteger(&strHex, 0, (PULONG)&dwFlags);"
+        },
+        {
+          "line": 619,
+          "text": "SACF_GotFlags:"
+        },
+        {
+          "line": 621,
+          "text": "pti->dwCompatFlags = dwFlags;"
+        },
+        {
+          "line": 622,
+          "text": "pti->pClientInfo->dwCompatFlags = dwFlags;"
+        },
+        {
+          "line": 624,
+          "text": "pti->ppi->dwCompatFlags = dwFlags;"
+        },
+        {
+          "line": 658,
+          "text": "NTSTATUS xxxInitTask("
+        },
+        {
+          "line": 659,
+          "text": "UINT dwExpWinVer,"
+        },
+        {
+          "line": 660,
+          "text": "PUNICODE_STRING pstrAppName,"
+        },
+        {
+          "line": 661,
+          "text": "DWORD hTaskWow,"
+        },
+        {
+          "line": 662,
+          "text": "DWORD dwHotkey,"
+        },
+        {
+          "line": 663,
+          "text": "DWORD idTask,"
+        },
+        {
+          "line": 664,
+          "text": "DWORD dwX,"
+        },
+        {
+          "line": 665,
+          "text": "DWORD dwY,"
+        },
+        {
+          "line": 666,
+          "text": "DWORD dwXSize,"
+        },
+        {
+          "line": 667,
+          "text": "DWORD dwYSize,"
+        },
+        {
+          "line": 670,
+          "text": "PTHREADINFO pti;"
+        },
+        {
+          "line": 671,
+          "text": "PTDB ptdb;"
+        },
+        {
+          "line": 672,
+          "text": "PPROCESSINFO ppi;"
+        },
+        {
+          "line": 673,
+          "text": "PWOWTHREADINFO pwti;"
+        },
+        {
+          "line": 678,
+          "text": "ppi = pti->ppi;"
+        },
+        {
+          "line": 688,
+          "text": "pti->pstrAppName->Buffer = (PWCHAR)(pti->pstrAppName + 1);"
+        },
+        {
+          "line": 697,
+          "text": "pti->pstrAppName->MaximumLength = pstrAppName->MaximumLength;"
+        },
+        {
+          "line": 698,
+          "text": "pti->pstrAppName->Length = pstrAppName->Length;"
+        },
+        {
+          "line": 699,
+          "text": "} else"
+        },
+        {
+          "line": 722,
+          "text": "if (dwHotkey != 0) {"
+        },
+        {
+          "line": 723,
+          "text": "ppi->dwHotkey = dwHotkey;"
+        },
+        {
+          "line": 729,
+          "text": "ppi->usi.cb = sizeof(ppi->usi);"
+        },
+        {
+          "line": 733,
+          "text": "} else {"
+        },
+        {
+          "line": 735,
+          "text": "ppi->usi.dwX = dwX;"
+        },
+        {
+          "line": 736,
+          "text": "ppi->usi.dwY = dwY;"
+        },
+        {
+          "line": 744,
+          "text": "} else {"
+        },
+        {
+          "line": 746,
+          "text": "ppi->usi.dwXSize = dwXSize;"
+        },
+        {
+          "line": 747,
+          "text": "ppi->usi.dwYSize = dwYSize;"
+        },
+        {
+          "line": 755,
+          "text": "pti->ptdb = ptdb;"
+        },
+        {
+          "line": 772,
+          "text": "if (idTask) {"
+        },
+        {
+          "line": 778,
+          "text": "if (idTask != (DWORD)-1) {"
+        },
+        {
+          "line": 780,
+          "text": "if (pwti->idTask == idTask) {"
+        },
+        {
+          "line": 781,
+          "text": "ptdb->pwti = pwti;"
+        },
+        {
+          "line": 782,
+          "text": "break;"
+        },
+        {
+          "line": 792,
+          "text": "pti->pClientInfo->dwTIFlags |= pti->TIF_flags;"
+        },
+        {
+          "line": 807,
+          "text": "ptdb->hTaskWow = hTaskWow;"
+        },
+        {
+          "line": 818,
+          "text": "pti->dwExpWinVer = dwExpWinVer;"
+        },
+        {
+          "line": 819,
+          "text": "pti->pClientInfo->dwExpWinVer = dwExpWinVer;"
+        },
+        {
+          "line": 832,
+          "text": "ptdb->nEvents = 0;"
+        },
+        {
+          "line": 833,
+          "text": "ptdb->pti = pti;"
+        },
+        {
+          "line": 836,
+          "text": "InsertTask(ppi, ptdb);"
+        },
+        {
+          "line": 838,
+          "text": "SetAppCompatFlags(pti);"
+        },
+        {
+          "line": 845,
+          "text": "ppi->pwpi->ptiScheduled = pti;"
+        },
+        {
+          "line": 846,
+          "text": "ppi->pwpi->CSLockCount = -1;"
+        },
+        {
+          "line": 848,
+          "text": "EnterWowCritSect(pti, ppi->pwpi);"
+        },
+        {
+          "line": 867,
+          "text": "void _ShowStartGlass("
+        },
+        {
+          "line": 870,
+          "text": "PPROCESSINFO ppi;"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "098f82dd1d23128af6b39196399e6b8d053195277b321482425f6ccce59b460f",
+      "anchors": [
+        {
+          "line": 223,
+          "text": "0"
+        },
+        {
+          "line": 310,
+          "text": "0"
+        },
+        {
+          "line": 395,
+          "text": "0"
+        },
+        {
+          "line": 478,
+          "text": "0"
+        },
+        {
+          "line": 544,
+          "text": "0"
+        },
+        {
+          "line": 597,
+          "text": "0"
+        },
+        {
+          "line": 897,
+          "text": "PBYTE      *ppbyte,"
+        },
+        {
+          "line": 898,
+          "text": "PUINT      pmax,"
+        },
+        {
+          "line": 901,
+          "text": "UINT i;"
+        },
+        {
+          "line": 902,
+          "text": "WORD msg;"
+        },
+        {
+          "line": 903,
+          "text": "UINT cbTable;"
+        },
+        {
+          "line": 906,
+          "text": "for (i = 0; (msg = pw[i]) != 0; i++) {"
+        },
+        {
+          "line": 907,
+          "text": "if (msg > *pmax)"
+        },
+        {
+          "line": 911,
+          "text": "cbTable = *pmax / 8 + 1;"
+        },
+        {
+          "line": 915,
+          "text": "for (i = 0; (msg = pw[i]) != 0; i++)"
+        },
+        {
+          "line": 916,
+          "text": "(*ppbyte)[msg / 8] |= (BYTE)(1 << (msg & 7));"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current_sha256": "714bdbbbde2d2f8244c5d7ab1a05fbe13518f2066dcf68d4d723fdc9f3fafa29",
+      "anchors": [
+        {
+          "line": 456,
+          "text": "switch(msg) {"
+        },
+        {
+          "line": 506,
+          "text": "dwUni = 0;"
+        },
+        {
+          "line": 509,
+          "text": "Status = RtlMultiByteToUnicodeN((LPWSTR)&dwUni, sizeof(dwUni),"
+        },
+        {
+          "line": 513,
+          "text": "} else {"
+        },
+        {
+          "line": 514,
+          "text": "int cwch;"
+        },
+        {
+          "line": 520,
+          "text": "cwch = MultiByteToWideChar(CodePage, 0,"
+        },
+        {
+          "line": 521,
+          "text": "(LPSTR)pWParam, 2,"
+        },
+        {
+          "line": 522,
+          "text": "(LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR));"
+        },
+        {
+          "line": 525,
+          "text": "if (cwch == 0) {"
+        },
+        {
+          "line": 544,
+          "text": "break;"
+        },
+        {
+          "line": 560,
+          "text": "PLARGE_ANSI_STRING plstr,"
+        },
+        {
+          "line": 561,
+          "text": "LPCSTR psz,"
+        },
+        {
+          "line": 562,
+          "text": "UINT cchLimit)"
+        },
+        {
+          "line": 564,
+          "text": "ULONG Length;"
+        },
+        {
+          "line": 566,
+          "text": "plstr->Buffer = (PSTR)psz;"
+        },
+        {
+          "line": 569,
+          "text": "Length = strlen( psz );"
+        },
+        {
+          "line": 572,
+          "text": "} else {"
+        },
+        {
+          "line": 573,
+          "text": "plstr->MaximumLength = 0;"
+        },
+        {
+          "line": 574,
+          "text": "plstr->Length = 0;"
+        },
+        {
+          "line": 588,
+          "text": "PLARGE_UNICODE_STRING plstr,"
+        },
+        {
+          "line": 589,
+          "text": "LPCWSTR psz,"
+        },
+        {
+          "line": 590,
+          "text": "UINT cchLimit)"
+        },
+        {
+          "line": 592,
+          "text": "ULONG Length;"
+        },
+        {
+          "line": 594,
+          "text": "plstr->Buffer = (PWSTR)psz;"
+        },
+        {
+          "line": 597,
+          "text": "Length = wcslen( psz ) * sizeof( WCHAR );"
+        },
+        {
+          "line": 600,
+          "text": "} else {"
+        },
+        {
+          "line": 601,
+          "text": "plstr->MaximumLength = 0;"
+        },
+        {
+          "line": 602,
+          "text": "plstr->Length = 0;"
+        },
+        {
+          "line": 49,
+          "text": "int"
+        },
+        {
+          "line": 50,
+          "text": "WCSToMBEx("
+        },
+        {
+          "line": 51,
+          "text": "WORD wCodePage,"
+        },
+        {
+          "line": 52,
+          "text": "LPCWSTR pUnicodeString,"
+        },
+        {
+          "line": 53,
+          "text": "int cchUnicodeString,"
+        },
+        {
+          "line": 54,
+          "text": "LPSTR *ppAnsiString,"
+        },
+        {
+          "line": 55,
+          "text": "int nAnsiChar,"
+        },
+        {
+          "line": 56,
+          "text": "BOOL bAllocateMem)"
+        },
+        {
+          "line": 58,
+          "text": "ULONG nCharsInAnsiString;"
+        },
+        {
+          "line": 63,
+          "text": "if (nAnsiChar == 0 || cchUnicodeString == 0) {"
+        },
+        {
+          "line": 74,
+          "text": "if (cchUnicodeString == -1) {"
+        },
+        {
+          "line": 75,
+          "text": "cchUnicodeString = (wcslen(pUnicodeString) + 1);"
+        },
+        {
+          "line": 76,
+          "text": "} else if (cchUnicodeString < -1) {"
+        },
+        {
+          "line": 86,
+          "text": "if (nAnsiChar == -1) {"
+        },
+        {
+          "line": 90,
+          "text": "nAnsiChar = cchUnicodeString * sizeof(USHORT);"
+        },
+        {
+          "line": 91,
+          "text": "} else if (nAnsiChar < -1) {"
+        },
+        {
+          "line": 95,
+          "text": "if (bAllocateMem) {"
+        },
+        {
+          "line": 101,
+          "text": "return 0;"
+        },
+        {
+          "line": 117,
+          "text": "NTSTATUS Status;"
+        },
+        {
+          "line": 119,
+          "text": "Status = RtlUnicodeToMultiByteN("
+        },
+        {
+          "line": 120,
+          "text": "(PCH)*ppAnsiString,"
+        },
+        {
+          "line": 121,
+          "text": "nAnsiChar,"
+        },
+        {
+          "line": 122,
+          "text": "&nCharsInAnsiString,"
+        },
+        {
+          "line": 123,
+          "text": "(PWCH)pUnicodeString,"
+        },
+        {
+          "line": 124,
+          "text": "cchUnicodeString * sizeof(WCHAR));"
+        },
+        {
+          "line": 136,
+          "text": "if (bAllocateMem) {"
+        },
+        {
+          "line": 142,
+          "text": "return (int)nCharsInAnsiString;"
+        },
+        {
+          "line": 144,
+          "text": "} else {"
+        },
+        {
+          "line": 169,
+          "text": "nCharsInAnsiString = WideCharToMultiByte("
+        },
+        {
+          "line": 170,
+          "text": "(UINT)wCodePage, 0,"
+        },
+        {
+          "line": 171,
+          "text": "(LPCWSTR)pUnicodeString,"
+        },
+        {
+          "line": 172,
+          "text": "cchUnicodeString,"
+        },
+        {
+          "line": 173,
+          "text": "(LPSTR)*ppAnsiString,"
+        },
+        {
+          "line": 174,
+          "text": "nAnsiChar,"
+        },
+        {
+          "line": 178,
+          "text": "if (nCharsInAnsiString == 0) {"
+        },
+        {
+          "line": 179,
+          "text": "if (bAllocateMem) {"
+        },
+        {
+          "line": 184,
+          "text": "return (int)nCharsInAnsiString;"
+        },
+        {
+          "line": 190,
+          "text": "int MBToWCSEx("
+        },
+        {
+          "line": 191,
+          "text": "WORD wCodePage,"
+        },
+        {
+          "line": 192,
+          "text": "LPCSTR pAnsiString,"
+        },
+        {
+          "line": 193,
+          "text": "int nAnsiChar,"
+        },
+        {
+          "line": 194,
+          "text": "LPWSTR *ppUnicodeString,"
+        },
+        {
+          "line": 195,
+          "text": "int cchUnicodeString,"
+        },
+        {
+          "line": 196,
+          "text": "BOOL bAllocateMem)"
+        },
+        {
+          "line": 198,
+          "text": "ULONG nBytesInUnicodeString;"
+        },
+        {
+          "line": 200,
+          "text": "if (nAnsiChar == 0 || cchUnicodeString == 0) {"
+        },
+        {
+          "line": 211,
+          "text": "if (nAnsiChar == -1) {"
+        },
+        {
+          "line": 213,
+          "text": "} else if (nAnsiChar < -1) {"
+        },
+        {
+          "line": 223,
+          "text": "if (cchUnicodeString == -1) {"
+        },
+        {
+          "line": 227,
+          "text": "cchUnicodeString = nAnsiChar;"
+        },
+        {
+          "line": 228,
+          "text": "} else if (cchUnicodeString < -1) {"
+        },
+        {
+          "line": 232,
+          "text": "if (bAllocateMem) {"
+        },
+        {
+          "line": 256,
+          "text": "if (bAllocateMem) {"
+        },
+        {
+          "line": 262,
+          "text": "return (int)(nBytesInUnicodeString / sizeof(WCHAR));"
+        },
+        {
+          "line": 264,
+          "text": "} else {"
+        },
+        {
+          "line": 268,
+          "text": "ULONG nCharsInUnicodeString;"
+        },
+        {
+          "line": 294,
+          "text": "nCharsInUnicodeString = MultiByteToWideChar("
+        },
+        {
+          "line": 295,
+          "text": "(UINT)wCodePage, 0,"
+        },
+        {
+          "line": 296,
+          "text": "(LPCSTR)pAnsiString,"
+        },
+        {
+          "line": 297,
+          "text": "(int)nAnsiChar,"
+        },
+        {
+          "line": 298,
+          "text": "(LPWSTR)*ppUnicodeString,"
+        },
+        {
+          "line": 299,
+          "text": "(int)cchUnicodeString);"
+        },
+        {
+          "line": 302,
+          "text": "if (nCharsInUnicodeString == 0) {"
+        },
+        {
+          "line": 303,
+          "text": "if (bAllocateMem) {"
+        },
+        {
+          "line": 308,
+          "text": "return (int)nCharsInUnicodeString;"
+        }
+      ]
+    }
+  ],
+  "final_line_corrections": {
+    "handles": "restore endif61",
+    "ntstubs": "restore endif153 and else7264",
+    "queue": "restore endif38 and117",
+    "server": "restore endif1259",
+    "chartran": "remove orphan reset363; retained FE_SB frame unchanged"
+  },
+  "selected_token_control": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "selected_tokens_equal_before_final_line_fix": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "selected_tokens_equal_before_final_line_fix": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "selected_tokens_equal_before_final_line_fix": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "selected_tokens_equal_before_final_line_fix": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "selected_tokens_equal_before_final_line_fix": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "selected_tokens_equal_before_final_line_fix": true
+    }
+  ]
+}

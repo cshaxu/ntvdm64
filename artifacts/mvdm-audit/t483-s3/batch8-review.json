@@ -1,0 +1,65 @@
+{
+  "baseline": "340158d35",
+  "entries": [
+    "T483-D2614",
+    "T483-D2897",
+    "T483-D2909",
+    "T483-D2914",
+    "T483-D2925",
+    "T483-D2954",
+    "T483-D2980"
+  ],
+  "files": [
+    "src/non-mvdm/windows/core/ntuser/client/handles.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+    "src/wow32-dll/source/wow_input_group_lifetime.c",
+    "src/wow32-dll/include/wow_input_group_bindings.h",
+    "test/adapter-mvdm-host-out/wow/wow_input_membership_fixture.c",
+    "test/observation/verify-native-input-services.ps1",
+    "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "src/non-mvdm/windows/core/ntuser/rtl/chartran.c"
+  ],
+  "status": "verified; pending publication and submission",
+  "implementation": [
+    "Remove test-only RecalcThreadAttachment and allocator field/provider/fixture cases; preserve product AddAttachment/Recalc2 fixed-point grouping and native plan lifetime.",
+    "Remove unused macro bodies; preserve original conditional scaffolding and existing function logical-line resets."
+  ],
+  "verification": {
+    "cached": "Final x86/x64 cached full build passed",
+    "lines": 225,
+    "native_services": "P10 native-r2 all three fixtures passed; see batch10-private-input-tests.json",
+    "input_lifetime": "P10 lifetime-r2 complete positive lifecycle and partial native failure passed on owned nonactive private desktop",
+    "independent_input": "Original fixed-point plus real USER caret/focus/capture passed; generic membership no longer uses keyboard-table proxy",
+    "desktop": "Prior parent Default snapshots and child Screen-saver controls are retained as historical evidence; accepted tests require no active desktop",
+    "full": "16 selected Full gates passed on initial P8 sealed candidate; DOS4GW external fixture absent, explicitly skipped",
+    "final_package": "build/t483-s3-p8-final/candidate; all11 normalized images equal tested P8 candidate, only parsed timestamps/package UUID excluded; six selected preprocessor token streams identical after final line fixes",
+    "governance": "Documentation governance and relative links passed; git diff --check passed.",
+    "host_control_after_recovery": "Unmodified x86 independent executable subsequently returned ownZ=128 for initial/primed/unshown-window cases. Current-host new thread returned1/128/129 correctly."
+  },
+  "next": "Private-desktop queue witnesses passed; publish final verified candidate, submit and close S3. No unlock prerequisite or waiver.",
+  "counter_review": [
+    "Retained AddAttachment/Recalc2 bodies and intervening original lines byte-identical to P7.",
+    "Entire native lifetime provider byte-identical after deleting only unused allocation function and assignment; real three-cutpoint failure behavior unchanged.",
+    "Every actual fixed-point, explicit edge, release and rejoin assertion retained byte-identically; only wrapper-specific allocation tests removed."
+  ],
+  "desktop_recheck": {
+    "utc": "2026-11-12T10:59:21.2091101Z",
+    "inputDesktop": "Screen-saver",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1104-2876-0_26.1104.2876.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "session": 2
+  },
+  "footprint": {
+    "added": 8,
+    "deleted": 122,
+    "net": -114,
+    "scope": "10 implementation/test files; git line counts, excludes governance/evidence/artifacts"
+  },
+  "desktop_recheck_after_resume": {
+    "utc": "2026-11-12T15:23:23.5499522Z",
+    "inputDesktop": "Default",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1104-2876-0_26.1104.2876.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "session": 2
+  }
+}

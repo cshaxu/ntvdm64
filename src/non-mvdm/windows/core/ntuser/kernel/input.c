@@ -171,54 +171,6 @@ void Recalc2(
     } while (fChanged);
 }
 
-/* DIVERGENCE(OPENNT-HOST-058): original queue selection; explicit thread
- * context is passed through to Recalc2. */
-#line 5110
-void RecalcThreadAttachment(PTHREADINFO ptiCurrent)
-{
-    PTHREADINFO pti;
-    PLIST_ENTRY pHead, pEntry;
-
-    /*
-     * For all threads, start an attach queue if a thread hasn't been
-     * attached yet.
-     */
-    pHead = &PtiCurrent()->rpdesk->PtiList;
-    for (pEntry = pHead->Flink; pEntry != pHead; pEntry = pEntry->Flink) {
-        pti = CONTAINING_RECORD(pEntry, THREADINFO, PtiLink);
-
-        /*
-         * If the thread does not have a queue yet, don't
-         * attach.
-         */
-        if (pti->pqAttach == NULL) {
-
-            /*
-             * Allocate a new queue for this thread if more than
-             * one thread references it.
-             */
-            if (pti->pq->cThreads > 1) {
-                pti->pqAttach = AllocQueue(NULL, NULL);
-
-                if (pti->pqAttach == NULL) {
-                    break;
-                }
-
-                pti->pqAttach->cThreads++;
-            } else {
-                pti->pqAttach = pti->pq;
-            }
-
-            /*
-             * Attach every thread that is directly or indirectly attached
-             * to this thread.
-             */
-            Recalc2(pti->pqAttach, ptiCurrent);
-        }
-    }
-}
-
-
 #line 58
 #if DBG
 #line 59

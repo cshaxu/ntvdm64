@@ -1382,3 +1382,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T483 S1 closure](evidence/m0-t483-s1-closure.md): bounded mirror audit and verified publication.
 
 - [T483 S2 closure](evidence/m0-t483-s2-closure.md): original restorations, line verification and three batch deliveries.
+
+- [T483 S3 closure](evidence/m0-t483-s3-closure.md): redundant additions removed and isolated queue tests repaired.

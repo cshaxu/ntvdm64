@@ -26,8 +26,6 @@
 #line 22
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))
 
-#line 363
-#define NWCH 2
 /**************************************************************************\
 * RtlMBMessageCharToWCS
 *

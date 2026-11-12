@@ -1,0 +1,92 @@
+{
+  "baseline": "340158d35",
+  "scope": "S3 remaining coupled diagnostic consumers; test-only, separate from P8 product batch",
+  "files": [
+    "test/integration/verify-win16-ddeml-probe.ps1",
+    "test/integration/verify-win16-message-probe.ps1",
+    "test/integration/verify-wow-clipboard-transfer.ps1",
+    "test/integration/verify-wow-idle-workers.ps1",
+    "test/integration/verify-wow-multi-dialog.ps1",
+    "test/integration/verify-wow-sol-options.ps1",
+    "test/integration/verify-wow-user-network-profile.ps1",
+    "test/integration/verify-wow-user-destruction.ps1",
+    "test/integration/verify-win16-multimedia-timer-probe.ps1"
+  ],
+  "new_register_entries": 0,
+  "status": "focused verification passed; delivery pending P8 controls",
+  "implementation": [
+    "Remove unused callback/frame/file trace settings; keep live CPU termination and WINDOW_TRACE diagnostics.",
+    "Add optional isolated Empty/WfwNet boot profile to existing real Win16 message runner; default Package unchanged.",
+    "Retire two obsolete flat-package/global-cleanup diagnostic runners after replacement actual message and real WINMINE witnesses. No product instrumentation added."
+  ],
+  "counter_review": [
+    {
+      "path": "test/integration/verify-win16-ddeml-probe.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "ca4f449885038466fa73a86753ad2b4a4c6bd4b5794e95f53b96888ef0401479"
+    },
+    {
+      "path": "test/integration/verify-win16-message-probe.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "63107be274c1a7ba83b09ad0ef19a181851c40f98659b0afb34ea4e845ef16d5"
+    },
+    {
+      "path": "test/integration/verify-wow-clipboard-transfer.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "979f67dcbc165f0e44d7ee28bdc1d9a201ba37ec4b79a2ce7d882ef46c83bbca"
+    },
+    {
+      "path": "test/integration/verify-wow-idle-workers.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "f7a6e683a97fb1e72c2e60a3545fa5742568e81ec0fa286a101b4ade83dd0b0c"
+    },
+    {
+      "path": "test/integration/verify-wow-multi-dialog.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "84d3daf1dca85b3944b18b79adeed64ffb11e55980d915f6e4f06db3f81ae709"
+    },
+    {
+      "path": "test/integration/verify-wow-sol-options.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "71b0c921a70cf3d3a6344f13dbdaf153fb229fd596db0df4e53d7fef01e9f2ce"
+    },
+    {
+      "path": "test/integration/verify-win16-multimedia-timer-probe.ps1",
+      "all_preexisting_failure_and_result_statements_retained": true,
+      "sha256": "040fce21a8009a157a3ba3df76276c551cc6ce1e15d9a8d9f7c9d9574e433d43"
+    },
+    {
+      "path": "test/integration/verify-win16-multimedia-timer-probe.ps1",
+      "change": "Remove FILE_TRACE setting only; CPU termination diagnostics still have live source consumers and remain untouched."
+    }
+  ],
+  "limits": [
+    "Guest self-reported destruction plus WINMINE closure are separate witnesses; not a claim to observe every original inner WINMINE callback.",
+    "The old absence-of-NETWORK.DRV failure log did not prove a selected network configuration. New test records configuration and executes real guest assertions; no claim of network connectivity.",
+    "P8 active desktop keyboard checks remain non-pass; this does not authorize publication or S3 closure."
+  ],
+  "evidence": {
+    "empty": "build/t483-s3-p9/network-empty/result.txt passed",
+    "wfwnet": "Sequential r2 passed actual Win16 message/destruction/normal task retirement, pinned WFWNET original media",
+    "mine": "passed actual flag/reset/open cell/WM_CLOSE/run16 completion",
+    "parse": "All seven retained runners parse; preexisting failure/result assertions preserved"
+  },
+  "retired_sources": [
+    {
+      "path": "test/integration/verify-wow-user-network-profile.ps1",
+      "baseline_sha256": "89ce85b26baf18c069c51d713508a8d848b835178614561f2858ef1f9cb4b10c",
+      "recoverable_from": "340158d35"
+    },
+    {
+      "path": "test/integration/verify-wow-user-destruction.ps1",
+      "baseline_sha256": "8ca205bb5ad7b9a4af18a8648d60ebc9fd1695dc922ab33962f13c8d7383e4ce",
+      "recoverable_from": "340158d35"
+    }
+  ],
+  "footprint": {
+    "added": 23,
+    "deleted": 683,
+    "net": -660,
+    "scope": "nine test scripts only, no production changes"
+  }
+}

@@ -21,14 +21,6 @@ struct wow_input_group_plan {
     wow_input_native_link *reserved;
 };
 
-static wow_task_order_queue *WINAPI label_allocate(wow_input_desktop *desktop)
-{
-    (void)desktop;
-    /* Production calls original Recalc2, not the private native-Q allocation
-     * strategy in RecalcThreadAttachment. Every label is already reserved. */
-    wow_user_native_call_failed("input-unplanned-label", ERROR_INVALID_STATE);
-}
-
 static void WINAPI label_release(wow_task_order_queue *label,
     wow_task_order_thread *thread)
 {
@@ -43,7 +35,6 @@ void WINAPI wow_input_group_initialize(wow_input_group_owner *owner,
 {
     ZeroMemory(owner, sizeof(*owner));
     owner->desktop = desktop;
-    desktop->allocate_queue = label_allocate;
     desktop->destroy_queue = label_release;
 }
 

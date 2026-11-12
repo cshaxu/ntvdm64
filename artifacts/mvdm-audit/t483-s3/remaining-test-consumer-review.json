@@ -1,0 +1,37 @@
+{
+  "scope": "Remaining S3 coupled diagnostic consumers; source review only, not implemented or admitted as a separate S.",
+  "obsolete_runners": [
+    {
+      "path": "test/integration/verify-wow-user-network-profile.ps1",
+      "findings": [
+        "No active build/test runner callers found.",
+        "Flat historical runtime layout, partial provider deployment and global process-name cleanup conflict with current sealed package isolation.",
+        "Assertions consume removed file/wndproc trace; absence of a failure log was not positive proof of network profile semantics."
+      ],
+      "required_action": "Retire obsolete deployment/trace harness only after maintaining explicit empty/WFWNET profile coverage in current isolated actual-guest runner; do not call WindowDispatch a successful inner callback proof."
+    },
+    {
+      "path": "test/integration/verify-wow-user-destruction.ps1",
+      "findings": [
+        "No active build/test runner callers found.",
+        "Historical diagnostics for callbacks, DPMI and CPU paths removed by current S3; old trace-based assertions no longer usable.",
+        "WindowDispatch is not enough to prove inner CallBack16 success when fallback exists."
+      ],
+      "required_action": "Use actual guest-reported destruction and exact task retirement, plus existing real WINMINE close/completion probe. Document separate witnesses rather than pretending all callback internals were observed in WINMINE."
+    }
+  ],
+  "unused_trace_settings": [
+    "verify-win16-ddeml-probe.ps1",
+    "verify-win16-message-probe.ps1",
+    "verify-win16-multimedia-timer-probe.ps1",
+    "verify-wow-clipboard-transfer.ps1",
+    "verify-wow-idle-workers.ps1",
+    "verify-wow-multi-dialog.ps1",
+    "verify-wow-sol-options.ps1"
+  ],
+  "constraints": [
+    "Remove only settings with no live consumers; preserve still-live WINDOW_TRACE and all functional assertions.",
+    "Do not add product diagnostics to preserve obsolete diagnostic tests.",
+    "No S3 closure until these dependencies are reconciled."
+  ]
+}

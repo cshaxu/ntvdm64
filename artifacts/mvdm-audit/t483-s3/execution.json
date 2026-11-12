@@ -910,57 +910,64 @@
     {
       "id": "T483-D2614",
       "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Remove dead empty macro in later partial-code cleanup, retaining original conditional framework/exclusion policy. Whole file remains required.",
-      "verification": "Search complete including translation unit for macro consumers, compile and compare selected tokens."
+      "verification": "Search complete including translation unit for macro consumers, compile and compare selected tokens.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2897",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "No production caller found; production commit explicitly uses AddAttachment/Recalc2, and queue allocator is terminal rejection. Remove test-only wrapper plus allocate_queue field/label_allocate/macro/declaration and queue_selection fixture cases after full symbol/build confirmation; keep original grouping tests and lifetime tests. Not a whole-file deletion.",
-      "verification": "For remediation: cached WOW build; input-membership original grouping, input-lifetime allocation/native failure and external-reference/retirement checks; no scratch pointer escape; source line/frame verification; whole-tree symbol check before test-only wrapper deletion."
+      "verification": "For remediation: cached WOW build; input-membership original grouping, input-lifetime allocation/native failure and external-reference/retirement checks; no scratch pointer escape; source line/frame verification; whole-tree symbol check before test-only wrapper deletion.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2909",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "StubExceptionHandler has no retained call in this subset. Remove unused macro and its orphan diagnostic frame together when reconciling original subset structure; this is partial cleanup, not whole-file deletion.",
-      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping."
+      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2914",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "DATAALIGN/CHARALIGN are defined and undefined around no retained class-registration body. Remove these unused macros and associated detached alignment frame with coherent subset reconciliation.",
-      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping."
+      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2925",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "TraceDdeMsg and DebugValidateMLIST macros have no retained calls in this subset. Remove unused definitions and reconcile their detached conditional scaffolding with original source-policy subset; partial cleanup only.",
-      "verification": "For remediation: cached WOW build; task-order initialization eight modes, long profile value, invalid source name, shared/separate startup; native input attachment failure/rollback, task retirement and multi-window lifecycle. Preserve no extra scheduler/queue registry."
+      "verification": "For remediation: cached WOW build; task-order initialization eight modes, long profile value, invalid source name, shared/separate startup; native input attachment failure/rollback, task retirement and multi-window lifecycle. Preserve no extra scheduler/queue registry.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2954",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "PAGE_SIZE definition belongs to omitted shared-section allocator and has no retained use. Remove unused definition with subset structure reconciliation; no whole-file deletion.",
-      "verification": "For remediation: cached WOW build; default-messages membership/repeated publication fixture and actual control/default dispatch; allocation-failure cleanup and no partial publication; all test/build selector consumers and diagnostic-line reconstruction."
+      "verification": "For remediation: cached WOW build; default-messages membership/repeated publication fixture and actual control/default dispatch; allocation-failure cleanup and no partial publication; all test/build selector consumers and diagnostic-line reconstruction.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2980",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Remove NWCH after confirming reverse converter remains unselected; preserve original excluded FE_SB boundary in its original location.",
-      "verification": "Check selected tokens and compile consumers after removal."
+      "verification": "Check selected tokens and compile consumers after removal.",
+      "evidence": "batch8-delivery.json"
     }
   ],
   "counts": {
     "assigned": 120,
-    "delivered": 113,
-    "remaining_unprocessed": 7
+    "delivered": 120,
+    "remaining_unprocessed": 0
   },
-  "coupled_cleanup": "P7 removes file-open/wndproc diagnostic providers, retains public ABI check, replaces Shell trace witness with independent guest task reports. Both report consumers updated atomically (11 logical files). Network/destruction and remaining dead trace settings still pending."
+  "coupled_cleanup": "Completed: unused diagnostic runners retired, maintained actual-guest probe profiles tested, dead trace settings removed, generic queue tests isolated on private desktops."
 }

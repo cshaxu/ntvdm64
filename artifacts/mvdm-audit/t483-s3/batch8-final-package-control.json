@@ -1,0 +1,291 @@
+{
+  "old_package": "1a97f3ad-5aad-4475-973c-e47828763de3",
+  "new_package": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+  "method": "Byte comparison after clearing only unique package GUID and PE-described COFF/EXPORT/DEBUG TimeDateStamp fields. No executable bytes or source-line literals normalized.",
+  "images": [
+    {
+      "image": "VCDEX.DLL",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          240,
+          244,
+          "COFF TimeDateStamp"
+        ],
+        [
+          6020,
+          6024,
+          "EXPORT TimeDateStamp"
+        ],
+        [
+          5964,
+          5968,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "F1335DFA21E91CF34DC873B1FFCEDF3F99DBAFE2E1C535CB719F1C779AD7A533",
+      "new_hash": "FEDD9E28112CD74C57040EFB8EF05566D753C9D5345B01A26E6B1C2CA2770DF0",
+      "normalized_hashes": [
+        "66720ee1a9392f8355da576180e7227c94dcb95d91c9606beb95dfd627fcbb65",
+        "66720ee1a9392f8355da576180e7227c94dcb95d91c9606beb95dfd627fcbb65"
+      ]
+    },
+    {
+      "image": "run16.exe",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          264,
+          268,
+          "COFF TimeDateStamp"
+        ],
+        [
+          211428,
+          211432,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "28FAAFB0C3ADD1B0CD3F8D7117A6D25ACA307462BAF72D94E1A98FF4360D6F6A",
+      "new_hash": "42C4F16E31CC1D58850F8E055C2E50D26610127491D77E5BB936B25B757149E1",
+      "normalized_hashes": [
+        "1505ba58b6fad83ecab4112dd7926af92dbb23d93c272e7c3837972793d52e61",
+        "1505ba58b6fad83ecab4112dd7926af92dbb23d93c272e7c3837972793d52e61"
+      ]
+    },
+    {
+      "image": "ntsrv.exe",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          248,
+          252,
+          "COFF TimeDateStamp"
+        ],
+        [
+          300084,
+          300088,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "4A591AC9754F47BA44B02914FE66CF00A8CC01C4083E4321903E50B870304EF4",
+      "new_hash": "FB95F33D9FFAE25E4681DE5A2046F7260780E7131C062A3D825A3C2936471519",
+      "normalized_hashes": [
+        "9bac7e9fe40b8f1d38643941a65af056d76120eb48fc1f2afdc0a4291cfc2659",
+        "9bac7e9fe40b8f1d38643941a65af056d76120eb48fc1f2afdc0a4291cfc2659"
+      ]
+    },
+    {
+      "image": "ntcon.exe",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          264,
+          268,
+          "COFF TimeDateStamp"
+        ],
+        [
+          250580,
+          250584,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "72E1F50432E6020CC5738DC13E097F580C51F643477D32D8DE526D2FD652C893",
+      "new_hash": "322118BFB4518E7795181D93246E457B80347BB8019B8D47DFA60E9513148DD4",
+      "normalized_hashes": [
+        "18302731088497558a1b4da42d726973eaf6219262b9a34ba535dd9d89b8fe33",
+        "18302731088497558a1b4da42d726973eaf6219262b9a34ba535dd9d89b8fe33"
+      ]
+    },
+    {
+      "image": "ntvdm.exe",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          296,
+          300,
+          "COFF TimeDateStamp"
+        ],
+        [
+          1796052,
+          1796056,
+          "EXPORT TimeDateStamp"
+        ],
+        [
+          1724348,
+          1724352,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "64D9597035957E55511BF7905BCE22AA1D16E6855AD32843B0BD368F5C393F62",
+      "new_hash": "AB70B1B670C58D76E119CE2F994098D7E87C72D043872874B1AA63D62C3CA9E9",
+      "normalized_hashes": [
+        "5233067781dea9154928e1bb01c1fe599891b17b1c3c7dd54b295c12d093f633",
+        "5233067781dea9154928e1bb01c1fe599891b17b1c3c7dd54b295c12d093f633"
+      ]
+    },
+    {
+      "image": "ntvwm.exe",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          248,
+          252,
+          "COFF TimeDateStamp"
+        ],
+        [
+          227252,
+          227256,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "203627DEEDA802018953C3318578D6F2DD26FC5A8B8699A366ACC4DF18DF3ED9",
+      "new_hash": "EF0261905D771F05D7E402BE4F9CD2BED872337DA813277FDCBE24F50B514D1F",
+      "normalized_hashes": [
+        "47743b3bbe6f0a30516ed5623f2e28af96c775e2f2289da9435f3a6e7f4f39e6",
+        "47743b3bbe6f0a30516ed5623f2e28af96c775e2f2289da9435f3a6e7f4f39e6"
+      ]
+    },
+    {
+      "image": "ntmon.exe",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          248,
+          252,
+          "COFF TimeDateStamp"
+        ],
+        [
+          148180,
+          148184,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "B7E3C054C81654221646F3A107D308D115488FC7A18417C0BCB1D24C5C58E06B",
+      "new_hash": "BE9D6EDC24FD33124C261C9678460CB4F6B0B89F2285366DA6B15512B55475E9",
+      "normalized_hashes": [
+        "371a49e1f634fa891143555e2583d8f70b76ca3641e59cb7aaf2782b6dcbce38",
+        "371a49e1f634fa891143555e2583d8f70b76ca3641e59cb7aaf2782b6dcbce38"
+      ]
+    },
+    {
+      "image": "WOW32.DLL",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          296,
+          300,
+          "COFF TimeDateStamp"
+        ],
+        [
+          635156,
+          635160,
+          "EXPORT TimeDateStamp"
+        ],
+        [
+          623348,
+          623352,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "C3888C88E1D493E53EEE1F192CFC56B393B9542EC9CEB2DF7EDA182C5F96E68F",
+      "new_hash": "B8F5CC17E596DE61B60D1AA6D0C9626128831C7DDD567E73F7B43239669D8CCF",
+      "normalized_hashes": [
+        "364e7b1027be24a4671c6dd633f336f8c6c4bfadf373d6fe313db122650aa4a4",
+        "364e7b1027be24a4671c6dd633f336f8c6c4bfadf373d6fe313db122650aa4a4"
+      ]
+    },
+    {
+      "image": "VDMREDIR.DLL",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          288,
+          292,
+          "COFF TimeDateStamp"
+        ],
+        [
+          193604,
+          193608,
+          "EXPORT TimeDateStamp"
+        ],
+        [
+          125028,
+          125032,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "1AD37E1B54913BA4922447A28C993587FF3B448BDA2E768657558D2C2A98A49A",
+      "new_hash": "354D118ED2430DF9952835D328E9851FF3A4EF166B5DE788F005A3D5DDD13635",
+      "normalized_hashes": [
+        "3a51172f4a0289f8ab1dc35e17488f519097c5a50e1305ed112ebfbfb0da38d4",
+        "3a51172f4a0289f8ab1dc35e17488f519097c5a50e1305ed112ebfbfb0da38d4"
+      ]
+    },
+    {
+      "image": "nthook32.dll",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          272,
+          276,
+          "COFF TimeDateStamp"
+        ],
+        [
+          203332,
+          203336,
+          "EXPORT TimeDateStamp"
+        ],
+        [
+          134228,
+          134232,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "C548B8063E59DF2992F064C296542A93A6E19BCAA063AB6F53070189321E8F8A",
+      "new_hash": "08AA4B4B2E7608A8561E81A114B535B6CEA104D50C74E057EE99AD7129379A88",
+      "normalized_hashes": [
+        "a8d1d9f34a088e3b02225fec1efa94ff2f12d05ed54aa92e66053d2561b51b47",
+        "a8d1d9f34a088e3b02225fec1efa94ff2f12d05ed54aa92e66053d2561b51b47"
+      ]
+    },
+    {
+      "image": "nthook64.dll",
+      "same": true,
+      "differing_bytes": 0,
+      "ignored_timestamp_fields": [
+        [
+          272,
+          276,
+          "COFF TimeDateStamp"
+        ],
+        [
+          243204,
+          243208,
+          "EXPORT TimeDateStamp"
+        ],
+        [
+          167844,
+          167848,
+          "DEBUG TimeDateStamp"
+        ]
+      ],
+      "old_hash": "37960AE0376DCD0F81E33B8AA4659AE1AB46DCC41177B3F521D875F24EDEF710",
+      "new_hash": "3EDF966B2B9982B86CB964D772AC546C67192F78276098C381E2755B67AF7FB5",
+      "normalized_hashes": [
+        "d651db21b0c056ea6cf2ec6caf6b5491b2ec06f3b18aefc07ee3a5fa8ba47b1e",
+        "d651db21b0c056ea6cf2ec6caf6b5491b2ec06f3b18aefc07ee3a5fa8ba47b1e"
+      ]
+    }
+  ],
+  "all_equal": true
+}

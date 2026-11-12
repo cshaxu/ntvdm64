@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "scope": "Test-only repair of generic input queue observation; no product changes",
+  "reason": "Keyboard-table prerequisite depended on active input desktop. Generic membership requires queue identity, not keyboard table API coverage.",
+  "implementation": "Shared actual USER caret-owner witness on nonactive private desktops; distinct hidden windows per phase; no SwitchDesktop, SetFocus, SendInput or user-thread attachment.",
+  "preserved": [
+    "original Recalc2 fixed-point grouping",
+    "positive and negative native queue sharing",
+    "duplicate attachment reference count",
+    "origin/middle/last retirement and rejoin",
+    "external duplicate reference",
+    "three allocation failures",
+    "third native attach failure exits 91",
+    "no scratch pointer escape; zero live allocations"
+  ],
+  "limits": [
+    "Does not claim keyboard-table API coverage",
+    "Explicit native failure callback is a test seam, not proof of production fail-fast",
+    "Earlier failed compile and premature null marker assertion remain in build evidence; corrected before accepted runs"
+  ],
+  "files": {
+    "test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h": "9e3b6807c3ae8534a11c17de5fb10cce2b0ae69206574674e4d066f657a4925e",
+    "test/adapter-mvdm-host-out/wow/wow_native_input_group_fixture.c": "e5d3d58d3da716634e63b4d6165f0e5efe9852825dc4874a1ffdbeaf0e573948",
+    "test/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c": "39051acf33b6913ef79d00820d9d9b809cd6c75bb61272e38f39337b2a386bc9",
+    "test/observation/verify-native-input-services.ps1": "ecfee84616b43fe18ccafb00ad05aa933c93719504eaa76868cca225a666859e",
+    "test/observation/verify-wow-input-lifetime.ps1": "037ea60ddba7f99d3a40f03722510ebde40ff1a7b8ab29752e7cc623bbffbfb0"
+  },
+  "results": {
+    "native-r2": {
+      "exit": 0,
+      "logs": {
+        "wow_native_input_group_fixture.stdout.txt": "middle_exit_remaining_shared=1\nmaintained=0 after_new_join_peer_shared=0 newcomer_shared=1\nmiddle_exit_remaining_shared=1\nmaintained=1 after_new_join_peer_shared=1 newcomer_shared=1\nduplicate_attach_after_one_detach_shared=1\nWOW_NATIVE_INPUT_GROUP errors=0 isolated=2 shared=1 self_reject=1 peer_exit=1 naive_join_split=1 maintained_join=1 repeated=1\n",
+        "wow_native_input_focus_fixture.stdout.txt": "attached_focus=1 attached_caret=1\nreverse=0 conflict_focus_owner=0 conflict_capture_owner=0 conflict_caret_owner=0\nreverse=1 conflict_focus_owner=0 conflict_capture_owner=0 conflict_caret_owner=0\nWOW_NATIVE_INPUT_FOCUS errors=0 private_desktop=1 capture=1 callbacks=0\n",
+        "wow_input_membership_fixture.stdout.txt": "WOW_INPUT_MEMBERSHIP errors=0 original_fixed_point=1 pre_tdb=1 explicit_edge=1 release=1 rejoin=1\n"
+      }
+    },
+    "lifetime-r2": {
+      "exit": 0,
+      "logs": {
+        "membership.stderr.txt": "INPUT_SCOPE owned_threads=1 private_desktop=1 send_input=0 hidden_windows=1\nINPUT_NATIVE_CONTROL private_caret=1 before_group=1\nINPUT_COMPONENT tid=31900 flags=00000002 group=1\nINPUT_NATIVE first=31900 second=35688 attach=1 result=1\nINPUT_COMPONENT tid=31900 flags=00000002 group=1\nINPUT_COMPONENT tid=35688 flags=00000002 group=1\nINPUT_COMPONENT tid=31900 flags=00000002 group=1\nINPUT_COMPONENT tid=35688 flags=00000002 group=1\nINPUT_CARET tid=35688 marker=0 window=00D016E6\nINPUT_NATIVE first=31900 second=35688 attach=0 result=1\nINPUT_CARET tid=35688 marker=0 window=02D916F2\nINPUT_CARET tid=35688 marker=0 window=00000000\nINPUT_NATIVE first=31900 second=35688 attach=1 result=1\nINPUT_COMPONENT tid=31900 flags=00000002 group=1\nINPUT_COMPONENT tid=35688 flags=00000002 group=1\nINPUT_NATIVE first=35688 second=10648 attach=1 result=1\nINPUT_NATIVE first=31900 second=10648 attach=1 result=1\nINPUT_COMPONENT tid=31900 flags=00000002 group=1\nINPUT_COMPONENT tid=35688 flags=00000002 group=1\nINPUT_COMPONENT tid=10648 flags=00000002 group=1\nINPUT_NATIVE first=31900 second=10648 attach=0 result=1\nINPUT_NATIVE first=31900 second=35688 attach=0 result=1\nINPUT_CARET tid=35688 marker=68 window=00AE0148\nINPUT_CARET tid=10648 marker=0 window=00AE0148\nINPUT_NATIVE first=10648 second=12276 attach=1 result=1\nINPUT_NATIVE first=35688 second=12276 attach=1 result=1\nINPUT_COMPONENT tid=35688 flags=00000002 group=1\nINPUT_COMPONENT tid=10648 flags=00000002 group=1\nINPUT_COMPONENT tid=12276 flags=00000002 group=1\nINPUT_CARET tid=35688 marker=69 window=01E400E8\nINPUT_CARET tid=10648 marker=0 window=01E400E8\nINPUT_CARET tid=12276 marker=0 window=01E400E8\nINPUT_COMPONENT tid=35688 flags=00000002 group=1\nINPUT_COMPONENT tid=10648 flags=00000002 group=1\nINPUT_COMPONENT tid=12276 flags=00000002 group=1\nINPUT_NATIVE first=35688 second=12276 attach=0 result=1\nINPUT_NATIVE first=35688 second=10648 attach=0 result=1\nINPUT_CARET tid=10648 marker=70 window=0500153E\nINPUT_CARET tid=12276 marker=0 window=0500153E\nINPUT_NATIVE first=10648 second=12276 attach=0 result=1\nWOW_INPUT_LIFETIME errors=0 original_components=1 private_native=1 allocation_failures=3 idempotent=1 external_reference=1 origin_exit=1 rejoin=1 middle_exit=1 last_exit=1 scratch_escape=0 live=0\n",
+        "terminal.stderr.txt": "INPUT_SCOPE owned_threads=1 private_desktop=1 send_input=0 hidden_windows=1\nINPUT_NATIVE_CONTROL private_caret=1 before_group=1\nINPUT_COMPONENT tid=14412 flags=00000002 group=1\nINPUT_NATIVE first=14412 second=5368 attach=1 result=1\nINPUT_COMPONENT tid=14412 flags=00000002 group=1\nINPUT_COMPONENT tid=5368 flags=00000002 group=1\nINPUT_COMPONENT tid=14412 flags=00000002 group=1\nINPUT_COMPONENT tid=5368 flags=00000002 group=1\nINPUT_CARET tid=5368 marker=0 window=011A158E\nINPUT_NATIVE first=5368 second=34156 attach=1 result=1\nINPUT_TERMINAL stage=input-native-attach error=5 attaches=3\n"
+      }
+    }
+  }
+}

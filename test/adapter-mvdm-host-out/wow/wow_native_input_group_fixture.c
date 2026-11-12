@@ -1,29 +1,31 @@
 #include <windows.h>
 #include <stdio.h>
+#include "wow_input_queue_witness.h"
 
-/* Read/write only this fixture's private USER keyboard-state tables.
+/* Observe real USER caret ownership on an owned nonactive desktop.
  * No SendInput, user-thread attachment, visible window or guest mutation. */
 typedef struct input_probe {
     HANDLE ready,request,reply,stop;
-    BYTE state[256];
+    HWND caret;
     BOOL ok;
 } input_probe;
 static unsigned errors;
+static HDESK desktop;
+static input_queue_witness witness;
 #define CHECK(x) do { if(!(x)){++errors;printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError());} } while(0)
 static DWORD WINAPI probe_thread(void *argument)
 {
     input_probe *probe=argument;
     HANDLE waits[2]={probe->stop,probe->request};
     MSG message;
-    BYTE state[256]={0};
+    probe->ok=SetThreadDesktop(desktop);
     PeekMessageW(&message,NULL,0,0,PM_NOREMOVE);
-    probe->ok=SetKeyboardState(state);
     SetEvent(probe->ready);
     for(;;) {
         DWORD result=WaitForMultipleObjects(2,waits,FALSE,5000);
         if(result==WAIT_OBJECT_0)return 0;
         if(result!=WAIT_OBJECT_0+1)return 2;
-        probe->ok=GetKeyboardState(probe->state);
+        probe->ok=input_witness_read(&probe->caret);
         SetEvent(probe->reply);
     }
 }
@@ -62,25 +64,23 @@ static void middle_exit(BOOL retain_membership)
     HANDLE middle_thread=start_probe(&middle,&middle_id);
     HANDLE peer_thread=start_probe(&peer,&peer_id);
     HANDLE newcomer_thread=NULL;
-    BYTE state[256]={0};
     BOOL first=FALSE,second=FALSE,repaired=FALSE,joined=FALSE;
-    CHECK(SetKeyboardState(state));
     first=AttachThreadInput(GetCurrentThreadId(),middle_id,TRUE);
     CHECK(first);if(!first)goto done;
     second=AttachThreadInput(middle_id,peer_id,TRUE);
     CHECK(second);if(!second)goto done;
-    state['D']=0x80;CHECK(SetKeyboardState(state));
-    CHECK(read_probe(&middle) && (middle.state['D']&0x80));
-    CHECK(read_probe(&peer) && (peer.state['D']&0x80));
+    CHECK(input_witness_set(&witness,'D'));
+    CHECK(read_probe(&middle) && (middle.caret==witness.windows['D'-'A']));
+    CHECK(read_probe(&peer) && (peer.caret==witness.windows['D'-'A']));
     SetEvent(middle.stop);
     if(WaitForSingleObject(middle_thread,3000)!=WAIT_OBJECT_0) {
         CHECK(FALSE);goto done;
     }
     first=second=FALSE; /* Both links refer to the now-exited middle thread. */
-    ZeroMemory(state,sizeof(state));state['E']=0x80;CHECK(SetKeyboardState(state));
+    CHECK(input_witness_set(&witness,'E'));
     CHECK(read_probe(&peer));
-    printf("middle_exit_remaining_shared=%u\n",(unsigned)!!(peer.state['E']&0x80));
-    CHECK(peer.state['E']&0x80);
+    printf("middle_exit_remaining_shared=%u\n",(unsigned)!!(peer.caret==witness.windows['E'-'A']));
+    CHECK(peer.caret==witness.windows['E'-'A']);
     if(retain_membership) {
         repaired=AttachThreadInput(GetCurrentThreadId(),peer_id,TRUE);
         CHECK(repaired);if(!repaired)goto done;
@@ -88,23 +88,23 @@ static void middle_exit(BOOL retain_membership)
     newcomer_thread=start_probe(&newcomer,&newcomer_id);
     joined=AttachThreadInput(GetCurrentThreadId(),newcomer_id,TRUE);
     CHECK(joined);if(!joined)goto done;
-    ZeroMemory(state,sizeof(state));state['G']=0x80;CHECK(SetKeyboardState(state));
+    CHECK(input_witness_set(&witness,'G'));
     CHECK(read_probe(&peer) && read_probe(&newcomer));
     printf("maintained=%u after_new_join_peer_shared=%u newcomer_shared=%u\n",
-        (unsigned)retain_membership,(unsigned)!!(peer.state['G']&0x80),(unsigned)!!(newcomer.state['G']&0x80));
+        (unsigned)retain_membership,(unsigned)!!(peer.caret==witness.windows['G'-'A']),(unsigned)!!(newcomer.caret==witness.windows['G'-'A']));
     /* Preserve the unsafe strategy as an expected negative mechanism case. */
-    CHECK(!!(peer.state['G']&0x80)==!!retain_membership && (newcomer.state['G']&0x80));
+    CHECK(!!(peer.caret==witness.windows['G'-'A'])==!!retain_membership && (newcomer.caret==witness.windows['G'-'A']));
     if(!repaired)repaired=AttachThreadInput(GetCurrentThreadId(),peer_id,TRUE);
     CHECK(repaired);if(!repaired)goto done;
-    ZeroMemory(state,sizeof(state));state['F']=0x80;CHECK(SetKeyboardState(state));
-    CHECK(read_probe(&peer) && (peer.state['F']&0x80));
-    CHECK(read_probe(&newcomer) && (newcomer.state['F']&0x80));
+    CHECK(input_witness_set(&witness,'F'));
+    CHECK(read_probe(&peer) && (peer.caret==witness.windows['F'-'A']));
+    CHECK(read_probe(&newcomer) && (newcomer.caret==witness.windows['F'-'A']));
 done:
     if(joined)CHECK(AttachThreadInput(GetCurrentThreadId(),newcomer_id,FALSE));
     if(repaired)CHECK(AttachThreadInput(GetCurrentThreadId(),peer_id,FALSE));
     if(second)CHECK(AttachThreadInput(middle_id,peer_id,FALSE));
     if(first)CHECK(AttachThreadInput(GetCurrentThreadId(),middle_id,FALSE));
-    ZeroMemory(state,sizeof(state));SetKeyboardState(state);
+    DestroyCaret();
     close_probe(&middle,middle_thread);close_probe(&peer,peer_thread);
     if(newcomer_thread)close_probe(&newcomer,newcomer_thread);
 }
@@ -114,24 +114,22 @@ static void repeated_attachment(void)
     input_probe peer;
     DWORD id;
     HANDLE thread=start_probe(&peer,&id);
-    BYTE state[256]={0};
     unsigned owned=0;
     BOOL result;
-    CHECK(SetKeyboardState(state));
     result=AttachThreadInput(GetCurrentThreadId(),id,TRUE);
     CHECK(result);if(!result)goto done;++owned;
     result=AttachThreadInput(GetCurrentThreadId(),id,TRUE);
     CHECK(result);if(!result)goto done;++owned;
     result=AttachThreadInput(GetCurrentThreadId(),id,FALSE);
     CHECK(result);if(!result)goto done;--owned;
-    state['J']=0x80;CHECK(SetKeyboardState(state));
+    CHECK(input_witness_set(&witness,'J'));
     CHECK(read_probe(&peer));
-    printf("duplicate_attach_after_one_detach_shared=%u\n",(unsigned)!!(peer.state['J']&0x80));
-    CHECK(peer.state['J']&0x80);
+    printf("duplicate_attach_after_one_detach_shared=%u\n",(unsigned)!!(peer.caret==witness.windows['J'-'A']));
+    CHECK(peer.caret==witness.windows['J'-'A']);
     result=AttachThreadInput(GetCurrentThreadId(),id,FALSE);
     CHECK(result);if(!result)goto done;--owned;
-    ZeroMemory(state,sizeof(state));state['K']=0x80;CHECK(SetKeyboardState(state));
-    CHECK(read_probe(&peer) && !(peer.state['K']&0x80));
+    CHECK(input_witness_set(&witness,'K'));
+    CHECK(read_probe(&peer) && !(peer.caret==witness.windows['K'-'A']));
     /* Original _AttachThreadInput rejects removal without a matching record.
      * A redundant cleanup must not be counted as an owned successful detach. */
     CHECK(!AttachThreadInput(GetCurrentThreadId(),id,FALSE));
@@ -139,18 +137,20 @@ done:
     while(owned) {
         CHECK(AttachThreadInput(GetCurrentThreadId(),id,FALSE));--owned;
     }
-    ZeroMemory(state,sizeof(state));SetKeyboardState(state);
+    DestroyCaret();
     close_probe(&peer,thread);
 }
 
-int __cdecl main(void)
+static DWORD WINAPI exercise(void *unused)
 {
     input_probe probe={0};
     HANDLE thread=NULL;
     DWORD id=0,exit_code=0;
-    BYTE state[256]={0},current[256];
+    HWND current = NULL;
     MSG message;
     BOOL attached=FALSE;
+    (void)unused;
+    if (!SetThreadDesktop(desktop)) return 99;
     probe.ready=CreateEventW(NULL,FALSE,FALSE,NULL);
     probe.request=CreateEventW(NULL,FALSE,FALSE,NULL);
     probe.reply=CreateEventW(NULL,FALSE,FALSE,NULL);
@@ -161,24 +161,17 @@ int __cdecl main(void)
     thread=CreateThread(NULL,0,probe_thread,&probe,0,&id);
     CHECK(thread!=NULL);if(!thread)goto done;
     CHECK(WaitForSingleObject(probe.ready,3000)==WAIT_OBJECT_0 && probe.ok);
-    state['A']=0x80;
-    CHECK(SetKeyboardState(state) && GetKeyboardState(current) && (current['A']&0x80));
-    CHECK(read_probe(&probe) && !(probe.state['A']&0x80));
+    CHECK(input_witness_set(&witness,'A') && input_witness_read(&current) && current==witness.windows[0]);
+    CHECK(read_probe(&probe) && !(probe.caret==witness.windows['A'-'A']));
     attached=AttachThreadInput(GetCurrentThreadId(),id,TRUE);
     CHECK(attached);if(!attached)goto done;
-    CHECK(GetKeyboardState(current));
-    printf("after_attach_a=%u\n",(unsigned)(current['A']&0x80));
-    CHECK(SetKeyboardState(state));
-    CHECK(read_probe(&probe) && (probe.state['A']&0x80));
+    CHECK(input_witness_set(&witness,'A'));
+    CHECK(read_probe(&probe) && (probe.caret==witness.windows['A'-'A']));
     CHECK(AttachThreadInput(GetCurrentThreadId(),id,FALSE));attached=FALSE;
-    ZeroMemory(state,sizeof(state));
-    CHECK(SetKeyboardState(state));
     CHECK(read_probe(&probe));
-    /* Use a different key after detach; no assumption about retained A state. */
-    CHECK(!(probe.state['B']&0x80));
-    state['B']=0x80;
-    CHECK(SetKeyboardState(state));
-    CHECK(read_probe(&probe) && !(probe.state['B']&0x80));
+    /* Distinct window after detach; no assumption about retained prior state. */
+    CHECK(input_witness_set(&witness,'B'));
+    CHECK(read_probe(&probe) && !(probe.caret==witness.windows['B'-'A']));
     CHECK(!AttachThreadInput(GetCurrentThreadId(),GetCurrentThreadId(),TRUE));
     attached=AttachThreadInput(GetCurrentThreadId(),id,TRUE);
     CHECK(attached);
@@ -190,13 +183,12 @@ int __cdecl main(void)
         if(waited==WAIT_OBJECT_0) {
             attached=FALSE; /* Native USER retires an exited thread's input links. */
             CHECK(!AttachThreadInput(GetCurrentThreadId(),id,TRUE));
-            ZeroMemory(state,sizeof(state));state['C']=0x80;
-            CHECK(SetKeyboardState(state) && GetKeyboardState(current) && (current['C']&0x80));
+            CHECK(input_witness_set(&witness,'C') && input_witness_read(&current) && current==witness.windows['C'-'A']);
         }
     }
 done:
     if(attached)CHECK(AttachThreadInput(GetCurrentThreadId(),id,FALSE));
-    ZeroMemory(state,sizeof(state));SetKeyboardState(state);
+    DestroyCaret();
     if(thread) {
         SetEvent(probe.stop);
         CHECK(WaitForSingleObject(thread,3000)==WAIT_OBJECT_0);
@@ -207,6 +199,23 @@ done:
     middle_exit(FALSE);
     middle_exit(TRUE);
     repeated_attachment();
+    input_witness_close(&witness);
     printf("WOW_NATIVE_INPUT_GROUP errors=%u isolated=2 shared=1 self_reject=1 peer_exit=1 naive_join_split=1 maintained_join=1 repeated=1\n",errors);
     return errors!=0;
+}
+
+int __cdecl main(void)
+{
+    WCHAR name[80];
+    HANDLE thread;
+    DWORD code = 99;
+    wsprintfW(name,L"WowInputGroup-%lu",GetCurrentProcessId());
+    desktop = CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);
+    if (!desktop) return 99;
+    thread = CreateThread(NULL,0,exercise,NULL,0,NULL);
+    if (!thread || WaitForSingleObject(thread,25000) != WAIT_OBJECT_0) return 99;
+    CHECK(GetExitCodeThread(thread,&code));
+    CloseHandle(thread);
+    CHECK(CloseDesktop(desktop));
+    return code || errors;
 }

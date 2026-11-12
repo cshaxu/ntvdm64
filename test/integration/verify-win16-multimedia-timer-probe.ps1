@@ -57,7 +57,6 @@ try {
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
  $info.EnvironmentVariables['MVDM_TERMINATE_VDM_REPORT_PATH']="$root/termination.txt"
  $info.EnvironmentVariables['MVDM_WOW_CALLBACK_CPU_TRACE_PATH']="$root/cpu.txt"
- $info.EnvironmentVariables['MVDM_WOW_FILE_TRACE_PATH']="$root/files.txt"
  $info.EnvironmentVariables['MVDM_WOW_DISPATCH_TRACE_PATH']="$root/dispatch.txt"
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"

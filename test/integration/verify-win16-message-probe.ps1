@@ -5,6 +5,7 @@ param(
  [Parameter(Mandatory)][string]$CompilerDriver,
  [Parameter(Mandatory)][string]$BuildRoot,
  [string]$Nasm='nasm.exe',
+ [ValidateSet('Package','Empty','WfwNet')][string]$NetworkDriver='Package',
  [switch]$NativeExtension,
  [switch]$ThreadClientView,
  [switch]$StructuredPayloads,
@@ -162,6 +163,23 @@ try{
  if($ReplyPayloadLifetime){Get-FileHash "$PSScriptRoot/../observation/wow_reply_payload_lifetime.h","$PSScriptRoot/../observation/wow_reply_payload_report.ps1"|Export-Csv -NoTypeInformation "$root/reply-source-inputs.csv"}
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime
+ if($NetworkDriver -ne 'Package'){
+  $profile=Join-Path $runtime 'system.ini'
+  $text=[Text.Encoding]::Latin1.GetString([IO.File]::ReadAllBytes($profile))
+  $boot=[regex]::new('(?ims)(^\[boot\][^\S\r\n]*\r?\n)(.*?)(?=^\[|\z)')
+  if($boot.Matches($text).Count -ne 1){throw 'Expected one package boot section'}
+  $value=if($NetworkDriver -eq 'WfwNet'){'wfwnet.drv'}else{''}
+  if($NetworkDriver -eq 'WfwNet' -and
+     (Get-FileHash "$runtime/system/WFWNET.DRV").Hash -ne '4C321D43511F845EC1A95518507133D1CF4CF3993BAE422037DBA95CE6258CCA'){
+   throw 'Network driver differs from pinned original media'
+  }
+  $text=$boot.Replace($text,[Text.RegularExpressions.MatchEvaluator]{param($m)
+   $body=[regex]::Replace($m.Groups[2].Value,'(?im)^network\.drv\s*=[^\r\n]*(?:\r?\n|$)','')
+   $m.Groups[1].Value+"network.drv=$value`r`n"+$body
+  })
+  [IO.File]::WriteAllBytes($profile,[Text.Encoding]::Latin1.GetBytes($text))
+  @{selection=$NetworkDriver;profileHash=(Get-FileHash $profile).Hash;scope='Fresh isolated runtime configuration; original guest bytes unchanged'}|ConvertTo-Json|Set-Content "$root/network-profile.json"
+ }
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
  if($ExternalNativePeer){$scope.Paths+=Join-Path $tests 'MSGPEER.EXE'}
  if($CrossWorkerCoordinator){$scope.Paths+=Join-Path $tests 'MSGXHOST.EXE'}
@@ -199,7 +217,6 @@ public static class WowMessageLogonEnvironment {
  $info.EnvironmentVariables['TEMP']=$runtime;$info.EnvironmentVariables['TMP']=$runtime
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/lifetime.txt"
- $info.EnvironmentVariables['MVDM_WOW_CALLBACK_FRAME_TRACE_PATH']="$root/lifetime.txt"
  if($TransactionDiagnosticManifest){
   $info.EnvironmentVariables['MVDM_TEST_MESSAGE_TRANSACTION']="$root/transaction"
   $info.EnvironmentVariables['MVDM_TEST_MESSAGE_PHASE']=$TransactionPhase

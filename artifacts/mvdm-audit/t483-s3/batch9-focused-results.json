@@ -1,0 +1,113 @@
+{
+  "product_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "FEDD9E28112CD74C57040EFB8EF05566D753C9D5345B01A26E6B1C2CA2770DF0",
+      "Machine": 332,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "9515269113BDA2BCF1EE4CF24586AF5E5819A2C45C59A5B569042D738830A3C8"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "42C4F16E31CC1D58850F8E055C2E50D26610127491D77E5BB936B25B757149E1",
+      "Machine": 34404,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "06C7F3A9A2B35CC3680B956DE1C78CF65F5EC7E725E5ECFB936CC1D907621FCB"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "FB95F33D9FFAE25E4681DE5A2046F7260780E7131C062A3D825A3C2936471519",
+      "Machine": 34404,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "30ACB10DF56A9A4CAD5752E33AD3203CDAD7B00DEFD6FBC62845C8314368E691"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "322118BFB4518E7795181D93246E457B80347BB8019B8D47DFA60E9513148DD4",
+      "Machine": 34404,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "EEE7460C1CDC7205E7C532CF0BA358FB99D6AAB1BD5DBC7703DBA2BA46A6BF9C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "AB70B1B670C58D76E119CE2F994098D7E87C72D043872874B1AA63D62C3CA9E9",
+      "Machine": 332,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "1A712C9C4FFE8676C95F078509994E292F93DDCA98F9EAD15F088FB45CA2F581"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "EF0261905D771F05D7E402BE4F9CD2BED872337DA813277FDCBE24F50B514D1F",
+      "Machine": 34404,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "DC270BF8B1D00642ADDCB1FFA00706759424CC6005CDBB539EC72A3DCD02436D"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "BE9D6EDC24FD33124C261C9678460CB4F6B0B89F2285366DA6B15512B55475E9",
+      "Machine": 34404,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "C5DF6F4E5AE410FCD156EB9B114613CB5F6BEFB3608523B4887434EA01D1C48F"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "B8F5CC17E596DE61B60D1AA6D0C9626128831C7DDD567E73F7B43239669D8CCF",
+      "Machine": 332,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "80431E8DE1FEB21A8D8BAFA70E48FE3A40AB7D6037A26FCA89CDB78BE9094F4B"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "354D118ED2430DF9952835D328E9851FF3A4EF166B5DE788F005A3D5DDD13635",
+      "Machine": 332,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "71B7E788BF0046F54761417596D865215B5FBDB93A710B474EEECE782081A8D1"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "08AA4B4B2E7608A8561E81A114B535B6CEA104D50C74E057EE99AD7129379A88",
+      "Machine": 332,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "45B88AA76C6173F7BEE8A5F04AF97B5B7648B271B03B6DA5D0CFFEFDA8242903"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "3EDF966B2B9982B86CB964D772AC546C67192F78276098C381E2755B67AF7FB5",
+      "Machine": 34404,
+      "PackageId": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+      "InputSha256": "91CF39D5602F39D6D5C9F8BAD02CE36CB3E1493642F838DFF0B87663FDA6911F"
+    }
+  ],
+  "cases": [
+    {
+      "case": "network-empty",
+      "result": "PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement",
+      "result_sha256": "14c8d4f2c51910684d3e00ed23c6259c095436cb2d70eb5439089a1584e3a046"
+    },
+    {
+      "case": "network-wfwnet-r2",
+      "result": "PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement",
+      "result_sha256": "14c8d4f2c51910684d3e00ed23c6259c095436cb2d70eb5439089a1584e3a046"
+    },
+    {
+      "case": "mine",
+      "result": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+      "result_sha256": "c3287d42c4deffb9ac68a6bee28ccf6258f354eeac3ba9bf7a82fd1b643a09f8"
+    }
+  ],
+  "limits": [
+    "Tests validate isolated actual guest behavior and real game close; not proof that every diagnostic event is preserved.",
+    "No runtime publication or commit claimed; P8 native keyboard controls await active input desktop."
+  ]
+}

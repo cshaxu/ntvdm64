@@ -183,6 +183,18 @@ that no desktop is available.  A `result=not-started` artifact is evidence of
 the wrong parent token, not a runtime verdict.  This is a launch rule only:
 tests remain isolated, background-owned, and may not use desktop automation.
 
+Generic input-queue membership/lifetime tests must use test-owned, nonactive
+private desktops and actual USER queue state (for example distinct caret-owner
+windows). They must not require RDP unlock, foreground activation or an active
+input-desktop keyboard table merely to observe queue association. Preserve
+positive and negative membership, detach, retirement and rejoin assertions;
+record the witness actually tested rather than claiming keyboard-table coverage.
+Tests specifically of keyboard-state APIs must establish their own prerequisite
+at execution time and distinguish prerequisite failures from product assertions.
+A parent desktop snapshot before compilation is insufficient. Do not switch the
+user desktop, suppress locking or ask the user to maintain desktop readiness for
+an otherwise isolatable generic test.
+
 ### Pre-blocking execution reconstruction
 
 This is a rule for **every task-affecting action** and every external

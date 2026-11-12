@@ -16,7 +16,7 @@ $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$process=$null
 $saved=@{}
-foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_DISPATCH_TRACE_PATH','MVDM_WOW_CALLBACK_FRAME_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
+foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_DISPATCH_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
  $source=if($SharedTasks){"$PSScriptRoot/../observation/wow_idle_tasks_probe.c"}else{"$PSScriptRoot/../observation/wow_idle_workers_probe.c"}
  & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX "/Fo$root/host.obj" "/Fe$root/IDLEHOST.EXE" $source *> "$root/compile.txt"
@@ -49,7 +49,6 @@ try {
  $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
  $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1';$env:MVDM_WOW_WINDOW_TRACE_PATH="$root/lifetime.txt"
  $env:MVDM_WOW_DISPATCH_TRACE_PATH="$root/dispatch.txt"
- $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root/callbacks.txt"
  $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
  $start.UseShellExecute=$false;$start.CreateNoWindow=$true
  # Shared tasks use explicit public launcher waits; a native Hook startup

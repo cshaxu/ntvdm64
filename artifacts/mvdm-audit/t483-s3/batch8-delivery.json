@@ -1,0 +1,234 @@
+{
+  "baseline": "340158d35",
+  "status": "verified and published; commit contains this record",
+  "entries": [
+    "T483-D2614",
+    "T483-D2897",
+    "T483-D2909",
+    "T483-D2914",
+    "T483-D2925",
+    "T483-D2954",
+    "T483-D2980"
+  ],
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "after_sha256": "bf6e3410b3040c2b4075a9602138225101520eaa836ee7ba37cb6beb5cee09cc"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "after_sha256": "60d175ef3364c1627999b79fef4450088fefd3a5a738df607b488bd568af72cc"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "after_sha256": "7bbb5a6b3837a733526297314a6bf97e09f7c6581ce2f3b67bda89ead497213c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "after_sha256": "ed806802a7dfceefa0b7ca16891dcec93d8697f07cafd8adb7a99c35f381cf21"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "after_sha256": "098f82dd1d23128af6b39196399e6b8d053195277b321482425f6ccce59b460f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "after_sha256": "714bdbbbde2d2f8244c5d7ab1a05fbe13518f2066dcf68d4d723fdc9f3fafa29"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_input_group_bindings.h",
+      "after_sha256": "352a9882c7f19cddbce0f70c42e3fe9dbb8e223a32f8699539bdb56a74339839"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_input_group_lifetime.c",
+      "after_sha256": "e5309240994d9be975a42d62adb591a919fa2b18544572e0be0aa11d18b36bd4"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c",
+      "after_sha256": "39051acf33b6913ef79d00820d9d9b809cd6c75bb61272e38f39337b2a386bc9"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_input_membership_fixture.c",
+      "after_sha256": "730f49f7c461940b7ed240360ccb6366158de91a86717e2f2c80bab5877bb294"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_native_input_group_fixture.c",
+      "after_sha256": "e5d3d58d3da716634e63b4d6165f0e5efe9852825dc4874a1ffdbeaf0e573948"
+    },
+    {
+      "path": "test/integration/verify-win16-ddeml-probe.ps1",
+      "after_sha256": "ca4f449885038466fa73a86753ad2b4a4c6bd4b5794e95f53b96888ef0401479"
+    },
+    {
+      "path": "test/integration/verify-win16-message-probe.ps1",
+      "after_sha256": "63107be274c1a7ba83b09ad0ef19a181851c40f98659b0afb34ea4e845ef16d5"
+    },
+    {
+      "path": "test/integration/verify-win16-multimedia-timer-probe.ps1",
+      "after_sha256": "040fce21a8009a157a3ba3df76276c551cc6ce1e15d9a8d9f7c9d9574e433d43"
+    },
+    {
+      "path": "test/integration/verify-wow-clipboard-transfer.ps1",
+      "after_sha256": "979f67dcbc165f0e44d7ee28bdc1d9a201ba37ec4b79a2ce7d882ef46c83bbca"
+    },
+    {
+      "path": "test/integration/verify-wow-idle-workers.ps1",
+      "after_sha256": "f7a6e683a97fb1e72c2e60a3545fa5742568e81ec0fa286a101b4ade83dd0b0c"
+    },
+    {
+      "path": "test/integration/verify-wow-multi-dialog.ps1",
+      "after_sha256": "84d3daf1dca85b3944b18b79adeed64ffb11e55980d915f6e4f06db3f81ae709"
+    },
+    {
+      "path": "test/integration/verify-wow-sol-options.ps1",
+      "after_sha256": "71b0c921a70cf3d3a6344f13dbdaf153fb229fd596db0df4e53d7fef01e9f2ce"
+    },
+    {
+      "path": "test/integration/verify-wow-user-destruction.ps1",
+      "after_sha256": null
+    },
+    {
+      "path": "test/integration/verify-wow-user-network-profile.ps1",
+      "after_sha256": null
+    },
+    {
+      "path": "test/observation/verify-native-input-services.ps1",
+      "after_sha256": "ecfee84616b43fe18ccafb00ad05aa933c93719504eaa76868cca225a666859e"
+    },
+    {
+      "path": "test/observation/verify-wow-input-lifetime.ps1",
+      "after_sha256": "037ea60ddba7f99d3a40f03722510ebde40ff1a7b8ab29752e7cc623bbffbfb0"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h",
+      "after_sha256": "9e3b6807c3ae8534a11c17de5fb10cce2b0ae69206574674e4d066f657a4925e"
+    }
+  ],
+  "cached_build": "final x86/x64 passed; build/t483-s3-p8-final candidate",
+  "original_line_anchors": 225,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 353359,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7241,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1189,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 182,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66924,
+        "CleanupMs": 570,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44531,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41154,
+        "CleanupMs": 493,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14179,
+        "CleanupMs": 577,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10612,
+        "CleanupMs": 498,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53306,
+        "CleanupMs": 602,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12049,
+        "CleanupMs": 560,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28381,
+        "CleanupMs": 579,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30384,
+        "CleanupMs": 598,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3550,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7550,
+        "CleanupMs": 552,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9992,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4903,
+        "CleanupMs": 515,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6728,
+        "CleanupMs": 590,
+        "Passed": true
+      }
+    ]
+  },
+  "package_control": "batch8-final-package-control.json",
+  "test_cleanup": "batch9-focused-results.json",
+  "input_test_repair": "batch10-private-input-tests.json",
+  "publication": {
+    "status": "published",
+    "package": "f3524088-d71f-4db1-bcbc-5b26e3a3aa0d",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "limitations": [
+    "DOS4GW/NESticle external fixture unavailable: skipped, not passed",
+    "Private caret witness verifies queue ownership, not keyboard-state API behavior",
+    "Failure callback is a test seam",
+    "Original guest and winnt.zip unchanged"
+  ],
+  "batch_reason": "P8 final 10 files plus coupled P9 retired diagnostic consumers and P10 test isolation repair completed atomically before delivery"
+}
