@@ -1,0 +1,856 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/dpmi32/dpmiint.c",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "current_sha256": "221d38bffcce263524289d52f52d471992536f7790b1cc0857a1d6da85acc106",
+  "review_complete": true,
+  "blocks": [
+    {
+      "index": 0,
+      "kind": "insert",
+      "original_start": 43,
+      "original_count": 0,
+      "current_start": 43,
+      "current_count": 6,
+      "classification": "registered"
+    },
+    {
+      "index": 1,
+      "kind": "insert",
+      "original_start": 51,
+      "original_count": 0,
+      "current_start": 57,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 2,
+      "kind": "delete",
+      "original_start": 68,
+      "original_count": 1,
+      "current_start": 75,
+      "current_count": 0,
+      "classification": "restored-format"
+    },
+    {
+      "index": 3,
+      "kind": "insert",
+      "original_start": 78,
+      "original_count": 0,
+      "current_start": 85,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 4,
+      "kind": "insert",
+      "original_start": 88,
+      "original_count": 0,
+      "current_start": 96,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 5,
+      "kind": "replace",
+      "original_start": 89,
+      "original_count": 18,
+      "current_start": 98,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 6,
+      "kind": "delete",
+      "original_start": 128,
+      "original_count": 1,
+      "current_start": 123,
+      "current_count": 0,
+      "classification": "restored-format"
+    },
+    {
+      "index": 7,
+      "kind": "insert",
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 133,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 8,
+      "kind": "insert",
+      "original_start": 176,
+      "original_count": 0,
+      "current_start": 172,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 9,
+      "kind": "replace",
+      "original_start": 232,
+      "original_count": 1,
+      "current_start": 229,
+      "current_count": 3,
+      "classification": "registered"
+    },
+    {
+      "index": 10,
+      "kind": "insert",
+      "original_start": 245,
+      "original_count": 0,
+      "current_start": 244,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 11,
+      "kind": "replace",
+      "original_start": 387,
+      "original_count": 1,
+      "current_start": 387,
+      "current_count": 1,
+      "classification": "registered"
+    },
+    {
+      "index": 12,
+      "kind": "replace",
+      "original_start": 389,
+      "original_count": 3,
+      "current_start": 389,
+      "current_count": 3,
+      "classification": "registered"
+    },
+    {
+      "index": 13,
+      "kind": "replace",
+      "original_start": 393,
+      "original_count": 2,
+      "current_start": 393,
+      "current_count": 33,
+      "classification": "registered"
+    },
+    {
+      "index": 14,
+      "kind": "insert",
+      "original_start": 397,
+      "original_count": 0,
+      "current_start": 428,
+      "current_count": 6,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 15,
+      "kind": "insert",
+      "original_start": 494,
+      "original_count": 0,
+      "current_start": 531,
+      "current_count": 5,
+      "classification": "registered"
+    },
+    {
+      "index": 16,
+      "kind": "insert",
+      "original_start": 495,
+      "original_count": 0,
+      "current_start": 537,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 17,
+      "kind": "insert",
+      "original_start": 521,
+      "original_count": 0,
+      "current_start": 564,
+      "current_count": 23,
+      "classification": "registered"
+    },
+    {
+      "index": 18,
+      "kind": "insert",
+      "original_start": 526,
+      "original_count": 0,
+      "current_start": 592,
+      "current_count": 8,
+      "classification": "registered"
+    },
+    {
+      "index": 19,
+      "kind": "replace",
+      "original_start": 529,
+      "original_count": 1,
+      "current_start": 603,
+      "current_count": 4,
+      "classification": "registered"
+    },
+    {
+      "index": 20,
+      "kind": "insert",
+      "original_start": 533,
+      "original_count": 0,
+      "current_start": 610,
+      "current_count": 3,
+      "classification": "registered"
+    },
+    {
+      "index": 21,
+      "kind": "replace",
+      "original_start": 540,
+      "original_count": 1,
+      "current_start": 620,
+      "current_count": 11,
+      "classification": "registered"
+    },
+    {
+      "index": 22,
+      "kind": "replace",
+      "original_start": 544,
+      "original_count": 1,
+      "current_start": 634,
+      "current_count": 9,
+      "classification": "registered"
+    },
+    {
+      "index": 23,
+      "kind": "replace",
+      "original_start": 547,
+      "original_count": 1,
+      "current_start": 645,
+      "current_count": 7,
+      "classification": "registered"
+    },
+    {
+      "index": 24,
+      "kind": "delete",
+      "original_start": 549,
+      "original_count": 3,
+      "current_start": 653,
+      "current_count": 0,
+      "classification": "registered"
+    },
+    {
+      "index": 25,
+      "kind": "delete",
+      "original_start": 557,
+      "original_count": 3,
+      "current_start": 658,
+      "current_count": 0,
+      "classification": "registered"
+    },
+    {
+      "index": 26,
+      "kind": "insert",
+      "original_start": 562,
+      "original_count": 0,
+      "current_start": 660,
+      "current_count": 8,
+      "classification": "registered"
+    },
+    {
+      "index": 27,
+      "kind": "insert",
+      "original_start": 564,
+      "original_count": 0,
+      "current_start": 670,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 28,
+      "kind": "replace",
+      "original_start": 565,
+      "original_count": 7,
+      "current_start": 672,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 29,
+      "kind": "insert",
+      "original_start": 573,
+      "original_count": 0,
+      "current_start": 675,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 30,
+      "kind": "insert",
+      "original_start": 607,
+      "original_count": 0,
+      "current_start": 710,
+      "current_count": 8,
+      "classification": "registered"
+    },
+    {
+      "index": 31,
+      "kind": "insert",
+      "original_start": 655,
+      "original_count": 0,
+      "current_start": 766,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 32,
+      "kind": "insert",
+      "original_start": 676,
+      "original_count": 0,
+      "current_start": 788,
+      "current_count": 1,
+      "classification": "registered"
+    },
+    {
+      "index": 33,
+      "kind": "insert",
+      "original_start": 686,
+      "original_count": 0,
+      "current_start": 799,
+      "current_count": 5,
+      "classification": "registered"
+    },
+    {
+      "index": 34,
+      "kind": "insert",
+      "original_start": 689,
+      "original_count": 0,
+      "current_start": 807,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 35,
+      "kind": "replace",
+      "original_start": 690,
+      "original_count": 26,
+      "current_start": 809,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 36,
+      "kind": "insert",
+      "original_start": 717,
+      "original_count": 0,
+      "current_start": 812,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 37,
+      "kind": "insert",
+      "original_start": 732,
+      "original_count": 0,
+      "current_start": 828,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 38,
+      "kind": "replace",
+      "original_start": 733,
+      "original_count": 1,
+      "current_start": 830,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 39,
+      "kind": "insert",
+      "original_start": 735,
+      "original_count": 0,
+      "current_start": 833,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 40,
+      "kind": "insert",
+      "original_start": 763,
+      "original_count": 0,
+      "current_start": 862,
+      "current_count": 4,
+      "classification": "registered"
+    },
+    {
+      "index": 41,
+      "kind": "insert",
+      "original_start": 767,
+      "original_count": 0,
+      "current_start": 870,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 42,
+      "kind": "insert",
+      "original_start": 788,
+      "original_count": 0,
+      "current_start": 892,
+      "current_count": 1,
+      "classification": "registered"
+    },
+    {
+      "index": 43,
+      "kind": "insert",
+      "original_start": 798,
+      "original_count": 0,
+      "current_start": 903,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 44,
+      "kind": "replace",
+      "original_start": 799,
+      "original_count": 22,
+      "current_start": 905,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 45,
+      "kind": "insert",
+      "original_start": 822,
+      "original_count": 0,
+      "current_start": 908,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 46,
+      "kind": "insert",
+      "original_start": 831,
+      "original_count": 0,
+      "current_start": 918,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 47,
+      "kind": "replace",
+      "original_start": 832,
+      "original_count": 1,
+      "current_start": 920,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 48,
+      "kind": "insert",
+      "original_start": 834,
+      "original_count": 0,
+      "current_start": 923,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 49,
+      "kind": "insert",
+      "original_start": 856,
+      "original_count": 0,
+      "current_start": 946,
+      "current_count": 4,
+      "classification": "registered"
+    },
+    {
+      "index": 50,
+      "kind": "insert",
+      "original_start": 862,
+      "original_count": 0,
+      "current_start": 956,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 51,
+      "kind": "insert",
+      "original_start": 890,
+      "original_count": 0,
+      "current_start": 985,
+      "current_count": 2,
+      "classification": "registered"
+    },
+    {
+      "index": 52,
+      "kind": "insert",
+      "original_start": 893,
+      "original_count": 0,
+      "current_start": 990,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 53,
+      "kind": "insert",
+      "original_start": 912,
+      "original_count": 0,
+      "current_start": 1010,
+      "current_count": 5,
+      "classification": "registered"
+    },
+    {
+      "index": 54,
+      "kind": "insert",
+      "original_start": 926,
+      "original_count": 0,
+      "current_start": 1029,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 55,
+      "kind": "insert",
+      "original_start": 935,
+      "original_count": 0,
+      "current_start": 1039,
+      "current_count": 7,
+      "classification": "registered"
+    },
+    {
+      "index": 56,
+      "kind": "insert",
+      "original_start": 961,
+      "original_count": 0,
+      "current_start": 1072,
+      "current_count": 7,
+      "classification": "registered"
+    },
+    {
+      "index": 57,
+      "kind": "insert",
+      "original_start": 963,
+      "original_count": 0,
+      "current_start": 1081,
+      "current_count": 5,
+      "classification": "registered"
+    },
+    {
+      "index": 58,
+      "kind": "replace",
+      "original_start": 964,
+      "original_count": 7,
+      "current_start": 1087,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 59,
+      "kind": "insert",
+      "original_start": 980,
+      "original_count": 0,
+      "current_start": 1098,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 60,
+      "kind": "insert",
+      "original_start": 997,
+      "original_count": 0,
+      "current_start": 1116,
+      "current_count": 2,
+      "classification": "registered"
+    },
+    {
+      "index": 61,
+      "kind": "insert",
+      "original_start": 1006,
+      "original_count": 0,
+      "current_start": 1127,
+      "current_count": 7,
+      "classification": "registered"
+    },
+    {
+      "index": 62,
+      "kind": "insert",
+      "original_start": 1008,
+      "original_count": 0,
+      "current_start": 1136,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 63,
+      "kind": "replace",
+      "original_start": 1057,
+      "original_count": 2,
+      "current_start": 1186,
+      "current_count": 4,
+      "classification": "registered"
+    },
+    {
+      "index": 64,
+      "kind": "insert",
+      "original_start": 1060,
+      "original_count": 0,
+      "current_start": 1191,
+      "current_count": 7,
+      "classification": "registered"
+    },
+    {
+      "index": 65,
+      "kind": "replace",
+      "original_start": 1109,
+      "original_count": 1,
+      "current_start": 1247,
+      "current_count": 5,
+      "classification": "registered"
+    },
+    {
+      "index": 66,
+      "kind": "replace",
+      "original_start": 1121,
+      "original_count": 1,
+      "current_start": 1263,
+      "current_count": 7,
+      "classification": "registered"
+    },
+    {
+      "index": 67,
+      "kind": "insert",
+      "original_start": 1129,
+      "original_count": 0,
+      "current_start": 1277,
+      "current_count": 11,
+      "classification": "registered"
+    },
+    {
+      "index": 68,
+      "kind": "insert",
+      "original_start": 1138,
+      "original_count": 0,
+      "current_start": 1297,
+      "current_count": 11,
+      "classification": "registered"
+    },
+    {
+      "index": 69,
+      "kind": "insert",
+      "original_start": 1144,
+      "original_count": 0,
+      "current_start": 1314,
+      "current_count": 8,
+      "classification": "registered"
+    },
+    {
+      "index": 70,
+      "kind": "insert",
+      "original_start": 1145,
+      "original_count": 0,
+      "current_start": 1323,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 71,
+      "kind": "insert",
+      "original_start": 1168,
+      "original_count": 0,
+      "current_start": 1347,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 72,
+      "kind": "insert",
+      "original_start": 1174,
+      "original_count": 0,
+      "current_start": 1354,
+      "current_count": 3,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 73,
+      "kind": "insert",
+      "original_start": 1175,
+      "original_count": 0,
+      "current_start": 1358,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 74,
+      "kind": "insert",
+      "original_start": 1202,
+      "original_count": 0,
+      "current_start": 1386,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 75,
+      "kind": "insert",
+      "original_start": 1208,
+      "original_count": 0,
+      "current_start": 1393,
+      "current_count": 3,
+      "classification": "excluded-branch"
+    },
+    {
+      "index": 76,
+      "kind": "insert",
+      "original_start": 1209,
+      "original_count": 0,
+      "current_start": 1397,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "index": 77,
+      "kind": "insert",
+      "original_start": 1238,
+      "original_count": 0,
+      "current_start": 1427,
+      "current_count": 33,
+      "classification": "registered"
+    },
+    {
+      "index": 78,
+      "kind": "insert",
+      "original_start": 1266,
+      "original_count": 0,
+      "current_start": 1488,
+      "current_count": 1,
+      "classification": "registered"
+    },
+    {
+      "index": 79,
+      "kind": "insert",
+      "original_start": 1267,
+      "original_count": 0,
+      "current_start": 1490,
+      "current_count": 11,
+      "classification": "registered"
+    },
+    {
+      "index": 80,
+      "kind": "replace",
+      "original_start": 1268,
+      "original_count": 1,
+      "current_start": 1502,
+      "current_count": 6,
+      "classification": "registered"
+    },
+    {
+      "index": 81,
+      "kind": "replace",
+      "original_start": 1270,
+      "original_count": 1,
+      "current_start": 1509,
+      "current_count": 29,
+      "classification": "registered"
+    },
+    {
+      "index": 82,
+      "kind": "replace",
+      "original_start": 1276,
+      "original_count": 1,
+      "current_start": 1543,
+      "current_count": 14,
+      "classification": "registered"
+    },
+    {
+      "index": 83,
+      "kind": "insert",
+      "original_start": 1282,
+      "original_count": 0,
+      "current_start": 1562,
+      "current_count": 19,
+      "classification": "registered"
+    },
+    {
+      "index": 84,
+      "kind": "insert",
+      "original_start": 1295,
+      "original_count": 0,
+      "current_start": 1594,
+      "current_count": 10,
+      "classification": "registered"
+    },
+    {
+      "index": 85,
+      "kind": "insert",
+      "original_start": 1298,
+      "original_count": 0,
+      "current_start": 1607,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    }
+  ],
+  "reading_status": "Complete initial and counter-review; no functional remediation.",
+  "confirmed_source_findings": [
+    {
+      "area": "DWORD IRET frame",
+      "evidence": "Original writes CS at +4 then overwrites it with flags at +4; current +8 matches EIP/CS/EFLAGS layout.",
+      "candidate_decision": "retain"
+    },
+    {
+      "area": "PushInt-specific frame changes",
+      "evidence": "OpenNT base/ntos/ke/x86/instemul.asm PushInt selects VDM_INT_32, checks new SP, preserves high EIP bits in DWORD CS slot, and loads full handler EIP. These local operations have exact source counterparts.",
+      "boundary": "Same function also performs destination CS/limit validation and virtual interrupt flag handling; matching selected operations does not establish complete CCPU equivalence."
+    },
+    {
+      "area": "INT2A LDT signature",
+      "evidence": "OpenNT trap.asm KiGetTickCount excludes VM and recognizes EAX=EBP=F0F0F0F1; NtSetLdtEntries result returned in EAX and nonzero status sets CF.",
+      "boundary": "Current uses NT_SUCCESS instead of exact zero; inspect actual provider return set before classifying behavioral difference."
+    },
+    {
+      "area": "diagnostic stack reads",
+      "evidence": "dpmiint.c materializes fault stack word arrays before calling report; mvdm_softpc_termination.c checks trace environment only inside report. Thus caller reads occur even when trace disabled.",
+      "candidate_decision": "Remove diagnostic-only arrays/loops/calls together, retaining actual frame operations; verify diagnostic consumers before final register."
+    }
+  ],
+  "pending": [
+    "Pending-evidence entries in diff-register drive further investigation; not confirmed repair instructions."
+  ],
+  "product_changes": "None",
+  "runtime_validation": "Not performed; source evidence only",
+  "dependency_counter_review": [
+    {
+      "topic": "INT2A return status",
+      "finding": "DpmiSetWowLdtEntry has only STATUS_SUCCESS and STATUS_INVALID_LDT_DESCRIPTOR returns. NT_SUCCESS and original exact-zero CF test agree for this actual return set. No repair is justified solely by spelling difference.",
+      "sources": [
+        "src/mvdm-host/dpmi32/dpmiselr.c:79",
+        "O:/repos.external/OpenNT/base/ntos/ke/x86/trap.asm:1650"
+      ]
+    },
+    {
+      "topic": "actual hook chain",
+      "finding": "EnableIntHooks installs DpmiSwIntHandler/DpmiFaultHandler; host_swint_hook returns SWIntHandler result; host_exint_hook invokes EXIntHandler after its monitor candidate falls through. False means normal CPU handling continues, not successful emulation.",
+      "sources": [
+        "src/mvdm-host/dpmi32/dpmiint.c:1345",
+        "src/mvdm-host/softpc.new/host/src/nt_inthk.c:179",
+        "src/mvdm-host/softpc.new/host/src/nt_inthk.c:554"
+      ]
+    },
+    {
+      "topic": "NULL mapping test boundary",
+      "finding": "dpmi_swint_selected_fixture explicitly expects a host exception for a resolvable selector with NULL alias, while rejecting unresolved selector without mutation. Thus passing fixture cannot establish graceful handling of every NULL alias. Preserve evidence as boundary; do not call it resolved.",
+      "sources": [
+        "test/mvdm-host/dpmi_swint_selected_fixture.c:238"
+      ]
+    },
+    {
+      "topic": "descriptor domains",
+      "finding": "SIM32 obtains numeric linear address through original CCPU selector resolution; DpmiEmulateInstruction independently reads size bit from Cpu40LdtShadowAddress without TI selection. Existing protected_segment adapter resolves GDT/LDT via selector_outside_GDT_LDT and read_descriptor_linear. Reusing it is a candidate, but its fault/reentry behavior must be reconciled before substituting.",
+      "sources": [
+        "src/mvdm-host/softpc.new/host/src/sim32.c:158",
+        "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c:28",
+        "src/mvdm-host/dpmi32/dpmiint.c:1523"
+      ]
+    },
+    {
+      "topic": "fixture scope",
+      "finding": "Selected fixture covers app/handler/stack widths independently, normal/expand-down/granular limit cases, and controlled return registers. It uses controlled memory/register boundaries and cannot establish real paging, destination descriptor validation or all NT4 virtual-flag semantics. No tests rerun.",
+      "sources": [
+        "test/mvdm-host/dpmi_swint_selected_fixture.c:157"
+      ]
+    }
+  ],
+  "meaning": "All diff blocks classified with actionable or explicit pending-evidence disposition; not repaired or fully equivalent.",
+  "registered_entries": 46,
+  "format_restoration": "Two missing original blank lines restored; non-whitespace bytes unchanged."
+}

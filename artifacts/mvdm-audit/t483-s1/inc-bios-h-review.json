@@ -1,0 +1,101 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+  "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+  "current_sha256": "0afbf13726fcd1bbb2dfeac33ac3465f465c327227e5cdeef771d9e89c982c53",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 186,
+      "original_count": 1
+    },
+    {
+      "original_start": 190,
+      "original_count": 1
+    },
+    {
+      "original_start": 200,
+      "original_count": 1
+    },
+    {
+      "original_start": 204,
+      "original_count": 3
+    },
+    {
+      "original_start": 216,
+      "original_count": 7
+    },
+    {
+      "original_start": 252,
+      "original_count": 1
+    },
+    {
+      "original_start": 295,
+      "original_count": 17
+    },
+    {
+      "original_start": 315,
+      "original_count": 5
+    },
+    {
+      "original_start": 323,
+      "original_count": 3
+    },
+    {
+      "original_start": 329,
+      "original_count": 2
+    },
+    {
+      "original_start": 334,
+      "original_count": 1
+    },
+    {
+      "original_start": 338,
+      "original_count": 3
+    },
+    {
+      "original_start": 344,
+      "original_count": 2
+    },
+    {
+      "original_start": 349,
+      "original_count": 1
+    },
+    {
+      "original_start": 353,
+      "original_count": 1
+    },
+    {
+      "original_start": 359,
+      "original_count": 1
+    },
+    {
+      "original_start": 364,
+      "original_count": 6
+    },
+    {
+      "original_start": 376,
+      "original_count": 2
+    },
+    {
+      "original_start": 394,
+      "original_count": 1
+    },
+    {
+      "original_start": 398,
+      "original_count": 1
+    },
+    {
+      "original_start": 402,
+      "original_count": 1
+    },
+    {
+      "original_start": 408,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "All differences are excluded declaration bodies: optional serial/device/network/SoftWindows/legacy DPMI interfaces, non-ANSI alternatives, non-NTVDM reboot and WDCTRL_BOP. No constant or retained declaration changes.",
+  "counter_review": "Complete original/current comparison after omitting line directives leaves only error replacements at original outer conditional boundaries. Nested NOVELL and old non-ANSI reboot conditions are wholly contained in their removed parents. The DPMI macro exclusion concerns these legacy declarations; it is not evidence that the separately implemented NTVDM DPMI service is disabled.",
+  "limits": "Source difference classification only, not universal header-context or diagnostic-coordinate certification; no new runtime/build result."
+}

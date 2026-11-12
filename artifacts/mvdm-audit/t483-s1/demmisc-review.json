@@ -1,0 +1,95 @@
+{
+  "path": "src/mvdm-host/dos/dem/demmisc.c",
+  "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+  "current_sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 20,
+      "original_count": 0,
+      "current_start": 20,
+      "current_count": 1,
+      "classification": "guest-state-declaration",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 25,
+      "original_count": 0,
+      "current_start": 26,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 530,
+      "original_count": 0,
+      "current_start": 532,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 531,
+      "original_count": 5,
+      "current_start": 534,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 537,
+      "original_count": 0,
+      "current_start": 537,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 609,
+      "original_count": 2,
+      "current_start": 610,
+      "current_count": 1,
+      "classification": "obsolete-pointer-extern",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 613,
+      "original_count": 1,
+      "current_start": 613,
+      "current_count": 4,
+      "classification": "reset-fd-access",
+      "disposition": "retain-with-failure-boundary"
+    },
+    {
+      "original_start": 615,
+      "original_count": 0,
+      "current_start": 618,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 626,
+      "original_count": 0,
+      "current_start": 630,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    }
+  ],
+  "initial_review": "Three substantive blocks; one DBG exclusion; remaining diagnostic-line scaffolding. Original program-entry notification is unchanged.",
+  "counter_review": "Keep shared FDAccess access instead of restoring an unbounded persistent pointer. Copy provider uses owner/epoch identity; no claim that this establishes guest VM identity or validates TerminateVDM failure handling.",
+  "call_chain": "guest dos/misc.asm HRDSVC SVC_DEMDISKRESET -> DEM dispatch -> demDiskReset -> HostFloppyReset/HostFdiskReset -> shared FDAccess write -> guest_memory_lease_copy",
+  "dependencies": [
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+    "src/mvdm-host/dos/dem/demdisp.c",
+    "src/mvdm-guest/dos/v86/doskrnl/dos/misc.asm",
+    "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c"
+  ],
+  "test_evidence": "Historic t230_s9_demmisc_direct_import_fixture checks reset with runtime_demmisc_bind_fd_access; not evidence of current numeric registration failure behavior. No test run.",
+  "limits": [
+    "No product edits, runtime or lifecycle-failure pass.",
+    "No claim to resolve known multi-VM task identity mismatch."
+  ]
+}

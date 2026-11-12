@@ -1,0 +1,160 @@
+{
+  "path": "src/mvdm-host/inc/softpc.h",
+  "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+  "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+  "review_complete": true,
+  "register_entries": 37,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 1,
+      "original_count": 0,
+      "current_start": 1,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 30,
+      "original_count": 0,
+      "current_start": 33,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 35,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 33,
+      "original_count": 0,
+      "current_start": 38,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 114,
+      "original_count": 1,
+      "current_start": 120,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 124,
+      "original_count": 1,
+      "current_start": 130,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 190,
+      "original_count": 1,
+      "current_start": 196,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 195,
+      "original_count": 0,
+      "current_start": 201,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 205,
+      "original_count": 1,
+      "current_start": 213,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 210,
+      "original_count": 0,
+      "current_start": 218,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 215,
+      "original_count": 3,
+      "current_start": 225,
+      "current_count": 3
+    },
+    {
+      "kind": "replace",
+      "original_start": 222,
+      "original_count": 1,
+      "current_start": 232,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 225,
+      "original_count": 0,
+      "current_start": 235,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 226,
+      "original_count": 300,
+      "current_start": 237,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 527,
+      "original_count": 0,
+      "current_start": 240,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 531,
+      "original_count": 0,
+      "current_start": 245,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 559,
+      "original_count": 9,
+      "current_start": 274,
+      "current_count": 9
+    },
+    {
+      "kind": "replace",
+      "original_start": 569,
+      "original_count": 9,
+      "current_start": 284,
+      "current_count": 9
+    },
+    {
+      "kind": "replace",
+      "original_start": 599,
+      "original_count": 4,
+      "current_start": 314,
+      "current_count": 4
+    },
+    {
+      "kind": "replace",
+      "original_start": 606,
+      "original_count": 4,
+      "current_start": 321,
+      "current_count": 4
+    },
+    {
+      "kind": "replace",
+      "original_start": 626,
+      "original_count": 1,
+      "current_start": 341,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "Explicit per-interface ABI; original parameter shapes retained.",
+  "counter_review": "WINAPI verified against nt_thred definitions; cdecl against worker build and CPU export declarations. Same-named declarations in excluded i386 branch are not the selected original counterpart.",
+  "excluded": "Historical i386 v86def/register interface and line scaffolding classified separately.",
+  "runtime_validation": "None; source unchanged."
+}

@@ -1,0 +1,37 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+  "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+  "current_sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+  "excluded": [
+    {
+      "original_start": 134,
+      "original_count": 1,
+      "current_start": 136,
+      "original": [
+        "    plb->fWin2App = (LOWORD(pwnd->ExpWinVer) < VER30);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "original_start": 697,
+      "original_count": 1,
+      "current_start": 700,
+      "original": [
+        "            if (!UserLocalFree((HANDLE)plb->iTabPixelPositions))"
+      ],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-125): HeapFree returns TRUE on success. */",
+        "            if (UserLocalFree((HANDLE)plb->iTabPixelPositions))"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "initial_review": "Full normalized diff: 1 original conditional-body exclusions; one UserLocalFree success predicate correction.",
+  "counter_review": "Original conditional boundaries retained; no unrelated algorithm rewrite. Exclusion classification does not prove complete macro-hit coverage; line offsets separately recorded. Do not invert the shared allocator macro: other callers require HeapFree Boolean semantics. Only this original failure/success predicate was wrong.",
+  "evidence": "Pinned OpenNT matching source; selected listbox provider cohort in New-T404S5Wow32ProviderNinja.ps1; usercli.h UserLocalFree -> HeapFree; test/observation/wow_reverse_construction_fixture.c native-tab ownership tests; verify-wow-reverse-construction.ps1 extracts actual LBSetTabStops",
+  "limits": "Source-only classification; no new test/build or product modification."
+}

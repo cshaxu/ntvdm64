@@ -1,0 +1,176 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+  "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+  "current_sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+  "excluded": [
+    {
+      "original_start": 23,
+      "original_count": 35,
+      "current_start": 25,
+      "current_count": 1,
+      "original": [
+        "/***************************************************************************\\",
+        "* FindCharsetBlock()",
+        "* Looks in the global array of CHARSETBLOCKs to find the CHARSETBLOCK for a",
+        "* given charset, or for the charset of a given hdc.",
+        "* Returns a pointer to the CHARSETBLOCK, or NULL if not found.",
+        "\\***************************************************************************/",
+        "",
+        "PCHARSETBLOCK FindCharsetBlock(HDC hDC, UINT iCharset)",
+        "{",
+        "    PCHARSETBLOCK pCS;",
+        "    UINT i;",
+        "",
+        "    if (gnCharset == 0) {",
+        "        return NULL;",
+        "    }",
+        "",
+        "    if (hDC != NULL) {",
+        "        iCharset = GetTextCharset(hDC);",
+        "    }",
+        "",
+        "    for (pCS = gpCharset, i = 0; i < gnCharset; pCS++, i++) {",
+        "        if (pCS->iCharset == iCharset) {",
+        "            return pCS;",
+        "        }",
+        "    }",
+        "    return NULL;",
+        "}",
+        "",
+        "EDITCHARSETPROC GetCharsetCallback(UINT iCharset) {",
+        "    PCHARSETBLOCK pCS;",
+        "    if (pCS = FindCharsetBlock(NULL, iCharset)) {",
+        "        return (EDITCHARSETPROC)(pCS->lpfnEditCall);",
+        "    }",
+        "    return NULL;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 318,
+      "original_count": 3,
+      "current_start": 289,
+      "current_count": 1,
+      "original": [
+        "    if( (ped->lpfnCharset = GetCharsetCallback(ped->charSet))) {",
+        "       return (BOOL)(* ped->lpfnCharset)(ped, EDITINTL_CREATE, HW(pwnd));",
+        "    } else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 375,
+      "original_count": 3,
+      "current_start": 347,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset) {",
+        "            (* ped->lpfnCharset)(ped, EDITINTL_DESTROY);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 425,
+      "original_count": 2,
+      "current_start": 398,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset)",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_SETPASSWORD, pwchar ? TRUE : FALSE);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 650,
+      "original_count": 3,
+      "current_start": 625,
+      "current_count": 1,
+      "original": [
+        "        if (!ped->fTrueType) {",
+        "            RIPMSG0(RIP_WARNING, \"ECSetFont: GetCharWidthInfo Failed\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+      ]
+    },
+    {
+      "original_start": 750,
+      "original_count": 20,
+      "current_start": 726,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset)",
+        "        //",
+        "        // clean out current one. Each LPK is responsible for cleaning",
+        "        // itself out. After this call there should be NO traces left in",
+        "        // the ped.",
+        "        //",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_SETFONT,",
+        "                              (TEXTMETRIC FAR *)NULL, (HWND)0, (HDC)NULL);",
+        "",
+        "    if (ped->charSet != TextMetrics.tmCharSet)",
+        "        {",
+        "        //",
+        "        // new charset, see if there is a helper available",
+        "        //",
+        "        ped->charSet = TextMetrics.tmCharSet;",
+        "        ped->lpfnCharset = GetCharsetCallback(TextMetrics.tmCharSet);",
+        "        }",
+        "    if( ped->lpfnCharset )",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_SETFONT,",
+        "                      (TEXTMETRIC FAR *)&TextMetrics, ped->hwnd, hdc);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "changes": [],
+  "logical_line_mismatches": [
+    {
+      "current": 26,
+      "original": 58,
+      "logical": 24
+    },
+    {
+      "current": 290,
+      "original": 321,
+      "logical": 319
+    },
+    {
+      "current": 348,
+      "original": 378,
+      "logical": 376
+    },
+    {
+      "current": 399,
+      "original": 427,
+      "logical": 426
+    },
+    {
+      "current": 626,
+      "original": 653,
+      "logical": 651
+    },
+    {
+      "current": 727,
+      "original": 770,
+      "logical": 751
+    }
+  ],
+  "initial_review": "Complete normalized comparison: 6 original conditional bodies replaced by #error with surrounding boundaries retained; all other source is original-exact.",
+  "counter_review": "Exclusion-only source classification is not proof of all supported branch hits. Diagnostic closing-boundary offsets are separately registered; no algorithm change inferred from those offsets.",
+  "evidence": "Pinned OpenNT edecrare.c; tools/build/New-T404S5Wow32ProviderNinja.ps1 EDIT controlBody cohort",
+  "limits": "Source audit only, no build/test or refreshed macro-hit claim. No source changes this batch."
+}

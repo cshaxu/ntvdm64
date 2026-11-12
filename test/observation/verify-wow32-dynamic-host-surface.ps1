@@ -48,11 +48,15 @@ Write-Output "WSOCK32 ordinal exports: $($wsockOrdinals.Count)"
 $spoolNames = @('EXTDEVICEMODE', 'DEVICEMODE', 'DEVICECAPABILITIES', 'OpenPrinterA', 'StartDocPrinterA', 'StartPagePrinter', 'EndPagePrinter', 'EndDocPrinter', 'ClosePrinter', 'WritePrinter', 'DeletePrinter', 'GetPrinterDriverDirectoryA', 'AddPrinterA', 'AddPrinterDriverA', 'AddPortExA')
 Assert-NamedExports -Name 'WINSPOOL.DRV' -Exports (Get-DumpbinText -Dumpbin $dumpbin -Path 'C:\Windows\SysWOW64\WINSPOOL.DRV') -Expected $spoolNames
 
-$mediaFiles = @('wmmedia.c', 'wmmedia1.c', 'wmmedia2.c') | ForEach-Object { Join-Path $wow32 $_ }
+$mediaFiles = @('wmmedia.c') | ForEach-Object { Join-Path $wow32 $_ }
 $mediaNames = @(Select-String -LiteralPath $mediaFiles -Pattern 'GET_MULTIMEDIA_API\(\s*"([^"]+)"' -AllMatches |
     ForEach-Object { $_.Matches | ForEach-Object { $_.Groups[1].Value } } | Sort-Object -Unique)
-if ($mediaNames.Count -ne 78) { throw "Expected 78 original WINMM lazy exports, found $($mediaNames.Count)." }
+# The other 76 names belonged to original literal-#if-0 bodies, not selected APIs.
+$expectedMediaNames = @('WOW32DriverCallback', 'WOW32ResolveMultiMediaHandle')
+if (@(Compare-Object $expectedMediaNames $mediaNames).Count) {
+    throw 'Selected original WINMM lazy-export names changed.'
+}
 Assert-NamedExports -Name 'WINMM.DLL' -Exports (Get-DumpbinText -Dumpbin $dumpbin -Path 'C:\Windows\SysWOW64\WINMM.DLL') -Expected $mediaNames
-Assert-NamedExports -Name 'OLETHK32.DLL' -Exports (Get-DumpbinText -Dumpbin $dumpbin -Path 'C:\Windows\SysWOW64\OLETHK32.DLL') -Expected @('ConvertObjDescriptor')
+# Local original OLE descriptor ownership is checked by verify-wow32-s1-formal-graph.ps1.
 
 Write-Output 'WOW32_DYNAMIC_HOST_SURFACE_OK'

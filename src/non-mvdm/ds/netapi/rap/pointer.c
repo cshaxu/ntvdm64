@@ -89,5 +89,3 @@ Return Value:
     return lastPointerOffset;
 
 } // RapLastPointerOffset
-
-

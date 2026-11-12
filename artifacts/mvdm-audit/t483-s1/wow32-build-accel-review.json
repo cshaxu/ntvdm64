@@ -1,0 +1,97 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/sources",
+    "original_sha256": "d24767ff50c4c7017e6fcf5f550e120db0f580f7c07c77cbe7e99e4432f52b36",
+    "before_sha256": "c9992900174cc1c5fa7fb97b93cfcd08ef4124976b2d30d47118b883b79fda68",
+    "current_sha256": "d24767ff50c4c7017e6fcf5f550e120db0f580f7c07c77cbe7e99e4432f52b36",
+    "changes": [],
+    "line_mismatches": [],
+    "initial_review": "Complete original comparison; no non-format content differences.",
+    "counter_review": "Raw and normalized identities kept distinct; line-map defects listed separately; not runtime acceptance."
+  },
+  {
+    "path": "src/mvdm-host/wow32/sz.src",
+    "original_sha256": "8f2489b4e39f39531f5ef69be267d27ea4e9868863017225c81b9f0d72b8d107",
+    "before_sha256": "96ac7b15ae050f16a16dc189e9049cd307c0ecb2c6cb930596037bab24cf7eda",
+    "current_sha256": "8f2489b4e39f39531f5ef69be267d27ea4e9868863017225c81b9f0d72b8d107",
+    "changes": [],
+    "line_mismatches": [],
+    "initial_review": "Complete original comparison; no non-format content differences.",
+    "counter_review": "Raw and normalized identities kept distinct; line-map defects listed separately; not runtime acceptance."
+  },
+  {
+    "path": "src/mvdm-host/wow32/thunkdll.txt",
+    "original_sha256": "e5323e63e53dfe15e3c4f03a18fda80086038194b661f4543c08165e37aa44e2",
+    "before_sha256": "21786dba0d6c2033da8c6a83af4a509bb254616759ab05f01facf079d25c8313",
+    "current_sha256": "e5323e63e53dfe15e3c4f03a18fda80086038194b661f4543c08165e37aa44e2",
+    "changes": [],
+    "line_mismatches": [],
+    "initial_review": "Complete original comparison; no non-format content differences.",
+    "counter_review": "Raw and normalized identities kept distinct; line-map defects listed separately; not runtime acceptance."
+  },
+  {
+    "path": "src/mvdm-host/wow32/waccel.c",
+    "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+    "before_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+    "current_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+    "changes": [
+      {
+        "original_start": 259,
+        "original_count": 1,
+        "current_start": 261,
+        "original": [
+          "    UINT    LastKeyIndex = 0xffffffff;"
+        ],
+        "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      },
+      {
+        "original_start": 280,
+        "original_count": 3,
+        "current_start": 285,
+        "original": [
+          "                 if ((lpAccel[i].fVirt & 0x80) && i < LastKeyIndex) {",
+          "                    LastKeyIndex = i;",
+          "                 }"
+        ],
+        "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      },
+      {
+        "original_start": 292,
+        "original_count": 5,
+        "current_start": 298,
+        "original": [
+          "            if (LastKeyIndex == 0xffffffff) {",
+          "                LOGDEBUG(LOG_ALWAYS, (\"WOW::CreateAccel32 : no LastKey found in 16-bit haccel\\n\"));",
+          "            } else if (LastKeyIndex < nElem16-1) {",
+          "                LOGDEBUG(LOG_ALWAYS, (\"WOW::CreateAccel32 : bogus LastKey flags ignored in 16-bit haccel\\n\"));",
+          "            }"
+        ],
+        "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      }
+    ],
+    "line_mismatches": [
+      [
+        286,
+        283,
+        281
+      ],
+      [
+        299,
+        297,
+        293
+      ]
+    ],
+    "initial_review": "All three differences are DBG LastKey diagnostic bodies; no selected accelerator behavior changed.",
+    "counter_review": "Raw and normalized identities kept distinct; line-map defects listed separately; not runtime acceptance."
+  },
+  {
+    "path": "src/mvdm-host/wow32/waccel.h",
+    "original_sha256": "3e004870d439167f62980d25f331bc26a06e267b0df1c34688ceddbc69de223e",
+    "before_sha256": "3e004870d439167f62980d25f331bc26a06e267b0df1c34688ceddbc69de223e",
+    "current_sha256": "3e004870d439167f62980d25f331bc26a06e267b0df1c34688ceddbc69de223e",
+    "changes": [],
+    "line_mismatches": [],
+    "initial_review": "Complete original comparison; no non-format content differences.",
+    "counter_review": "Raw and normalized identities kept distinct; line-map defects listed separately; not runtime acceptance."
+  }
+]

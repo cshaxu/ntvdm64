@@ -1,0 +1,115 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+  "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
+  "current_sha256": "0d85676fed97056a3d3d942976e130345bbcc27019db7894491c0440e04a0020",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 253,
+      "original_count": 1,
+      "current_normalized_start": 253,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 256,
+      "original_count": 1,
+      "current_normalized_start": 256,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 791,
+      "original_count": 21,
+      "current_normalized_start": 791,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 818,
+      "original_count": 1,
+      "current_normalized_start": 798,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ]
+    },
+    {
+      "kind": "insert",
+      "original_start": 949,
+      "original_count": 0,
+      "current_normalized_start": 929,
+      "current_lines": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-900): provenance of the existing saved background. */",
+        "typedef enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA } MOUSE_SAVED_KIND;"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 983,
+      "original_count": 1,
+      "current_normalized_start": 965,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 1011,
+      "original_count": 1,
+      "current_normalized_start": 993,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "insert",
+      "original_start": 1014,
+      "original_count": 0,
+      "current_normalized_start": 996,
+      "current_lines": [
+        "   /* DIVERGENCE(MVDM-HOST-DIV-900): append metadata; retain existing instance-field offsets. */",
+        "   MOUSE_BYTE_ADDRESS MM_IN_saved_text_address;",
+        "   MOUSE_SAVED_KIND   MM_IN_saved_cursor_kind;"
+      ]
+    },
+    {
+      "kind": "insert",
+      "original_start": 1089,
+      "original_count": 0,
+      "current_normalized_start": 1074,
+      "current_lines": [
+        "#define saved_text_address         ((*mm_handle)->MM_IN_saved_text_address)",
+        "#define saved_cursor_kind          ((*mm_handle)->MM_IN_saved_cursor_kind)"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 1115,
+      "original_count": 1,
+      "current_normalized_start": 1102,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 1142,
+      "original_count": 1,
+      "current_normalized_start": 1129,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Saved-background provenance enum, two appended instance fields and two access macros added; eight alternate-profile bodies excluded.",
+  "counter_review": "mouse_io.c captures saved_text_address and MOUSE_SAVED_TEXT with background at5285 before validity at5286; graphics saves set corresponding kinds. cursor_undisplay:5169-5195 uses existing validity and saved kind, text restorer:5310 uses saved address. Allocation uses sizeof(MM_INSTANCE_DATA):768. Retain shared per-instance provenance; not a second validity flag or state owner. Full VM-switch/remapping and all external restorer callers are not certified by header review.",
+  "limits": "Source-backed review only; no new compiler/runtime or complete VM transition proof."
+}

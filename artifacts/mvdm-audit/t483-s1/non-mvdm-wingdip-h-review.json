@@ -1,0 +1,51 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+  "original_sha256": "fc35d359bf23f905916980740c56199d3627eb55b9c223091a75a8e4e606dd4d",
+  "current_sha256": "141fef9bc2c676ac99dab67f861be20fbb5ef44447d676ce90bec91170c2476f",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 18,
+      "original_count": 1,
+      "current_start": 19,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 46,
+      "original_count": 1,
+      "current_start": 49,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 220,
+      "original_count": 1,
+      "current_start": 225,
+      "current_count": 1,
+      "original": [
+        "#define GFRI_FONTMETRICS    6L"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/wow32_provider_private.h",
+    "src/mvdm-host/wow32/wgdi.c",
+    "src/mvdm-host/wow32/wgfont.c"
+  ],
+  "limits": "Whole retained-source and original conditional-body comparison only; not universal include-context hit or ABI certification. No new build or runtime test."
+}

@@ -1,0 +1,68 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/makefile",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\makefile",
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "original_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "restored": true,
+      "bytes": 247
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/res.cmd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\res.cmd",
+      "before_sha256": "d5720195ccb33bedb59e859a6d71e1dc1e8c28aba98865c9c739d03760b7b1f5",
+      "after_sha256": "8c76221725812e8827b156e24272e932ff0312065ae871a6d60eb8cbb2ac9375",
+      "original_sha256": "8c76221725812e8827b156e24272e932ff0312065ae871a6d60eb8cbb2ac9375",
+      "restored": true,
+      "bytes": 148
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/resource.rc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\resource.rc",
+      "before_sha256": "4eb3027caff31636031d2af83b67e864f98083b4c9bbb88bceeb6b95642cf1e6",
+      "after_sha256": "fbf7f94838571ec486880de4574724fa883580c5ab2ac5eb4463d248c3205369",
+      "original_sha256": "fbf7f94838571ec486880de4574724fa883580c5ab2ac5eb4463d248c3205369",
+      "restored": true,
+      "bytes": 1249
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/softerr.ico",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\softerr.ico",
+      "before_sha256": "d27d263fb667946e4a5320cbebd1b6378659ae31d9f4744311fc581140756f67",
+      "after_sha256": "d27d263fb667946e4a5320cbebd1b6378659ae31d9f4744311fc581140756f67",
+      "original_sha256": "d27d263fb667946e4a5320cbebd1b6378659ae31d9f4744311fc581140756f67",
+      "restored": false,
+      "bytes": 766
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/softpc.def",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\softpc.def",
+      "before_sha256": "23772a6105b16a039e3980108081bdcf850d640afcf7c8f2fde5364931540343",
+      "after_sha256": "2dbbe115d93d9d2a25004868450b43568be3e14565fd08314d78e18f658f8ab7",
+      "original_sha256": "2dbbe115d93d9d2a25004868450b43568be3e14565fd08314d78e18f658f8ab7",
+      "restored": true,
+      "bytes": 205
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/softpc.ico",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\softpc.ico",
+      "before_sha256": "779a5e682dbecb23e9ea86f94be5591c53b1fe93497f7f0507ecbac4042ebe79",
+      "after_sha256": "779a5e682dbecb23e9ea86f94be5591c53b1fe93497f7f0507ecbac4042ebe79",
+      "original_sha256": "779a5e682dbecb23e9ea86f94be5591c53b1fe93497f7f0507ecbac4042ebe79",
+      "restored": false,
+      "bytes": 766
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/sources",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\sources",
+      "before_sha256": "eedc3b3c778e13cb4138eeabc42b56cbcc86c359960c9a4e48820d639b4d9e69",
+      "after_sha256": "559d13e3e33a0dc0da9c60e209017b1f3dc5b1806d0bee4ce928aa488a05b2f5",
+      "original_sha256": "559d13e3e33a0dc0da9c60e209017b1f3dc5b1806d0bee4ce928aa488a05b2f5",
+      "restored": true,
+      "bytes": 732
+    }
+  ],
+  "limits": "All seven files outside1060 C/H census; equality proves content restoration, not execution of historical build scripts or current package validation."
+}

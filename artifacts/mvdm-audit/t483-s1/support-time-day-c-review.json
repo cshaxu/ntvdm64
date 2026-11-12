@@ -1,0 +1,85 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+  "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+  "current_sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 42,
+      "original_count": 1
+    },
+    {
+      "original_start": 46,
+      "original_count": 6
+    },
+    {
+      "original_start": 90,
+      "original_count": 1
+    },
+    {
+      "original_start": 101,
+      "original_count": 5
+    },
+    {
+      "original_start": 114,
+      "original_count": 4
+    },
+    {
+      "original_start": 146,
+      "original_count": 1
+    },
+    {
+      "original_start": 164,
+      "original_count": 41
+    },
+    {
+      "original_start": 219,
+      "original_count": 5
+    },
+    {
+      "original_start": 229,
+      "original_count": 3
+    },
+    {
+      "original_start": 244,
+      "original_count": 16
+    },
+    {
+      "original_start": 286,
+      "original_count": 3
+    },
+    {
+      "original_start": 301,
+      "original_count": 16
+    },
+    {
+      "original_start": 346,
+      "original_count": 1
+    },
+    {
+      "original_start": 378,
+      "original_count": 13
+    },
+    {
+      "original_start": 399,
+      "original_count": 1
+    },
+    {
+      "original_start": 410,
+      "original_count": 82
+    },
+    {
+      "original_start": 508,
+      "original_count": 257
+    },
+    {
+      "original_start": 771,
+      "original_count": 30
+    }
+  ],
+  "initial_review": "18 excluded SCCSID/SEGMENTATION/XTSFD/non-ANSI/BSD/non-NTVDM bodies. All retained lines unchanged after omitting #line.",
+  "counter_review": "NT BIOS tick read/write and CMOS date/time/alarm operations remain original, including update-in-progress and overflow handling. Removed non-NT host timestamp helpers do not replace selected NT time ownership. Original unused declarations alone do not establish missing definitions or a new adaptation.",
+  "limits": "Source comparison only; no fresh time/alarm runtime test or universal diagnostic-line/configuration certification."
+}

@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+  "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+  "current_sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 6
+    },
+    {
+      "original_start": 35,
+      "original_count": 2912
+    }
+  ],
+  "initial_review": "Complete original/current comparison; excluded debug/platform bodies only.",
+  "counter_review": "Whole-boundary removal, including nested original branches, leaves exactly the original nonblank source after ignoring line/error directives. No selected debug algorithm or declaration adaptation remains.",
+  "limits": "Necessity audit only, not all-context exclusion or diagnostic-line certification. dasm.c retains a trailing EOF #line37 with no subsequent code; no runtime disassembler/debug acceptance claim."
+}

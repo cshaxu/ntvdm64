@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+  "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+  "current_sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 30,
+      "original_count": 1,
+      "current_start": 30,
+      "current_count": 2
+    }
+  ],
+  "limits": "No functional edit or fresh runtime pass. Not a blanket all-context branch-hit certification.",
+  "counter_review": "All textual differences enumerated; remaining differences consist only of listed selected declaration changes, excluded bodies and #line directives."
+}

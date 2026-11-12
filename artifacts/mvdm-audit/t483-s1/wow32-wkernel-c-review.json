@@ -1,0 +1,599 @@
+{
+  "path": "src/mvdm-host/wow32/wkernel.c",
+  "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+  "current_sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+  "changes": [
+    {
+      "original_start": 19,
+      "original_count": 0,
+      "current_start": 19,
+      "current_count": 15,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-297): the original USER16 call uses the bare",
+        " * SYSTEM.INI name.  Modern profile APIs map that name to host configuration",
+        " * even when passed an absolute package path.  The worker adapter gives this",
+        " * one original call a dynamically-created, session-owned copy of the selected",
+        " * immutable profile; it is deleted at worker teardown.  Arbitrary caller",
+        " * paths retain the original API. */",
+        "static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[MAX_PATH])",
+        "{",
+        "    if (filename != NULL && !_stricmp(filename, \"system.ini\") &&",
+        "        mvdm_softpc_profile_shadow_system_ini(path, MAX_PATH)) {",
+        "        return path;",
+        "    }",
+        "    return filename;",
+        "}"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 129,
+      "original_count": 0,
+      "current_start": 145,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    PSZ pszProfileFilename;"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 132,
+      "original_count": 0,
+      "current_start": 150,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    CHAR szPackageProfile[MAX_PATH];"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 139,
+      "original_count": 0,
+      "current_start": 159,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    pszProfileFilename = W32PrivateProfileFileName(pszFilename,",
+        "        szPackageProfile);",
+        ""
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 141,
+      "original_count": 1,
+      "current_start": 165,
+      "current_count": 1,
+      "original": [
+        "    strcpy(szLowercase, pszFilename);"
+      ],
+      "current": [
+        "    strcpy(szLowercase, pszProfileFilename);"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 162,
+      "original_count": 1,
+      "current_start": 186,
+      "current_count": 1,
+      "original": [
+        "             pszFilename"
+      ],
+      "current": [
+        "             pszProfileFilename"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 393,
+      "original_count": 0,
+      "current_start": 396,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    PSZ pszProfileFilename;"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 397,
+      "original_count": 0,
+      "current_start": 402,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    CHAR szPackageProfile[MAX_PATH];"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 404,
+      "original_count": 0,
+      "current_start": 411,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    pszProfileFilename = W32PrivateProfileFileName(pszFilename,",
+        "        szPackageProfile);"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 431,
+      "original_count": 1,
+      "current_start": 442,
+      "current_count": 1,
+      "original": [
+        "    strcpy(szLowercase, pszFilename);"
+      ],
+      "current": [
+        "    strcpy(szLowercase, pszProfileFilename);"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 461,
+      "original_count": 1,
+      "current_start": 472,
+      "current_count": 1,
+      "original": [
+        "        pszFilename));"
+      ],
+      "current": [
+        "        pszProfileFilename));"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 523,
+      "original_count": 1,
+      "current_start": 534,
+      "current_count": 1,
+      "original": [
+        "                    if (0 == GetPrivateProfileString(pszSection, pszKey, \"\", szBuf, sizeof szBuf, pszFilename)) {"
+      ],
+      "current": [
+        "                    if (0 == GetPrivateProfileString(pszSection, pszKey, \"\", szBuf, sizeof szBuf, pszProfileFilename)) {"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 717,
+      "original_count": 0,
+      "current_start": 669,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    PSZ pszProfileFilename;",
+        "    CHAR szPackageProfile[MAX_PATH];"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 724,
+      "original_count": 0,
+      "current_start": 679,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    pszProfileFilename = W32PrivateProfileFileName(psz4,",
+        "        szPackageProfile);",
+        ""
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 730,
+      "original_count": 1,
+      "current_start": 689,
+      "current_count": 1,
+      "original": [
+        "    psz4"
+      ],
+      "current": [
+        "    pszProfileFilename"
+      ],
+      "decision": "pending",
+      "change_plan": "Audit all profile read/write/int callsites and session shadow provider together. Prove need against original selected profile semantics, then consolidate resolution without silent fallback or divergent read/write identity; correct one-call-only comment. Do not remove working package isolation without replacement evidence.",
+      "evidence": "Bare case-insensitive system.ini routes to lazily copied temp file; all other paths unchanged. Provider holds delete-on-close handle, registers session teardown, returns false on failure; helper then returns original filename. WritePrivateProfileString uses same shadow and lowercase special-case comparisons now use changed filename.",
+      "missing_evidence": "Evidence modern INI mapping necessitates this exact workaround; intended persistence of app writes, explicit-path/bare-name consistency, original special-case matching and error semantics; no verified profile fixture found in this pass."
+    },
+    {
+      "original_start": 748,
+      "original_count": 0,
+      "current_start": 707,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    INT cch;"
+      ],
+      "decision": "pending",
+      "change_plan": "Preserve bounded guest-buffer access goal; verify original module/alias return and termination contract before declaring full-capacity flush minimal. Compare exact-fit, truncation, zero and failed provider behavior and untouched tail.",
+      "evidence": "Old flush uses strlen+1 and can overread nonterminated truncated output. Current code rejects nonpositive signed length, initializes first byte, keeps original providers, flushes cch bytes instead of actual written extent.",
+      "missing_evidence": "Selected ALLOC/FLUSH provider behavior on untouched tail, guest GetModuleFileName truncation/termination/return semantics versus modern host and task alias provider."
+    },
+    {
+      "original_start": 750,
+      "original_count": 1,
+      "current_start": 711,
+      "current_count": 13,
+      "original": [
+        "    ALLOCVDMPTR(parg16->f2, parg16->f3, psz2);"
+      ],
+      "current": [
+        "    cch = INT32(parg16->f3);",
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-450): the original final strlen-based flush",
+        "     * can exceed the only guest range this k49 caller supplied.  Keep the",
+        "     * original module/alias provider and result; zero-size has no writable",
+        "     * guest range, and every nonzero write/flush remains within cch. */",
+        "    if (cch <= 0) {",
+        "        FREEARGPTR(parg16);",
+        "        RETURN(0);",
+        "    }",
+        "",
+        "    ALLOCVDMPTR(parg16->f2, cch, psz2);",
+        "    psz2[0] = '\\0';"
+      ],
+      "decision": "pending",
+      "change_plan": "Preserve bounded guest-buffer access goal; verify original module/alias return and termination contract before declaring full-capacity flush minimal. Compare exact-fit, truncation, zero and failed provider behavior and untouched tail.",
+      "evidence": "Old flush uses strlen+1 and can overread nonterminated truncated output. Current code rejects nonpositive signed length, initializes first byte, keeps original providers, flushes cch bytes instead of actual written extent.",
+      "missing_evidence": "Selected ALLOC/FLUSH provider behavior on untouched tail, guest GetModuleFileName truncation/termination/return semantics versus modern host and task alias provider."
+    },
+    {
+      "original_start": 753,
+      "original_count": 1,
+      "current_start": 727,
+      "current_count": 1,
+      "original": [
+        "        ul = GetHtaskAliasProcessName(parg16->f1,psz2,INT32(parg16->f3));"
+      ],
+      "current": [
+        "        ul = GetHtaskAliasProcessName(parg16->f1, psz2, cch);"
+      ],
+      "decision": "pending",
+      "change_plan": "Preserve bounded guest-buffer access goal; verify original module/alias return and termination contract before declaring full-capacity flush minimal. Compare exact-fit, truncation, zero and failed provider behavior and untouched tail.",
+      "evidence": "Old flush uses strlen+1 and can overread nonterminated truncated output. Current code rejects nonpositive signed length, initializes first byte, keeps original providers, flushes cch bytes instead of actual written extent.",
+      "missing_evidence": "Selected ALLOC/FLUSH provider behavior on untouched tail, guest GetModuleFileName truncation/termination/return semantics versus modern host and task alias provider."
+    },
+    {
+      "original_start": 756,
+      "original_count": 1,
+      "current_start": 730,
+      "current_count": 1,
+      "original": [
+        "        ul = GETINT16(GetModuleFileName(hT, psz2, INT32(parg16->f3)));"
+      ],
+      "current": [
+        "        ul = GETINT16(GetModuleFileName(hT, psz2, cch));"
+      ],
+      "decision": "pending",
+      "change_plan": "Preserve bounded guest-buffer access goal; verify original module/alias return and termination contract before declaring full-capacity flush minimal. Compare exact-fit, truncation, zero and failed provider behavior and untouched tail.",
+      "evidence": "Old flush uses strlen+1 and can overread nonterminated truncated output. Current code rejects nonpositive signed length, initializes first byte, keeps original providers, flushes cch bytes instead of actual written extent.",
+      "missing_evidence": "Selected ALLOC/FLUSH provider behavior on untouched tail, guest GetModuleFileName truncation/termination/return semantics versus modern host and task alias provider."
+    },
+    {
+      "original_start": 759,
+      "original_count": 1,
+      "current_start": 733,
+      "current_count": 1,
+      "original": [
+        "    FLUSHVDMPTR(parg16->f2, strlen(psz2)+1, psz2);"
+      ],
+      "current": [
+        "    FLUSHVDMPTR(parg16->f2, cch, psz2);"
+      ],
+      "decision": "pending",
+      "change_plan": "Preserve bounded guest-buffer access goal; verify original module/alias return and termination contract before declaring full-capacity flush minimal. Compare exact-fit, truncation, zero and failed provider behavior and untouched tail.",
+      "evidence": "Old flush uses strlen+1 and can overread nonterminated truncated output. Current code rejects nonpositive signed length, initializes first byte, keeps original providers, flushes cch bytes instead of actual written extent.",
+      "missing_evidence": "Selected ALLOC/FLUSH provider behavior on untouched tail, guest GetModuleFileName truncation/termination/return semantics versus modern host and task alias provider."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 314,
+      "original_count": 3,
+      "current_start": 339,
+      "current_count": 1,
+      "original": [
+        "                if (IsDBCSLeadByte(pszDefault[n]) {",
+        "                    n++;",
+        "                }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 346,
+      "original_count": 25,
+      "current_start": 372,
+      "current_count": 1,
+      "original": [
+        "",
+        "    //",
+        "    // Make noise on the debugger if pszDefault has trailing blanks at",
+        "    // this point indicating that WOWCFEX_ZAPGPPSDEFBLANKS might need",
+        "    // to be turned on for this app.",
+        "    //",
+        "",
+        "    if ( ! (CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_ZAPGPPSDEFBLANKS) &&",
+        "        pszKey &&",
+        "        pszDefault &&",
+        "        ' ' == pszDefault[strlen(pszDefault) - 1]) {",
+        "",
+        "        char szMsg[256];",
+        "",
+        "        sprintf(szMsg,",
+        "                \"\\n\"",
+        "                \"WOW32 COMPATIBILITY ALERT: Task %.8s has trailing blanks in pszDefault to\\n\"",
+        "                \"Get[Private]ProfileString but WOWCFEX_ZAPGPPSDEFBLANKS (0x00000000 0x%08x)\\n\"",
+        "                \"is not enabled.  Try enabling this bit if you're having problems.\\n\"",
+        "                \"\\n\",",
+        "                ((PTDB)SEGPTR(CURRENTPTD()->htask16,0))->TDB_ModName,",
+        "                WOWCFEX_ZAPGPPSDEFBLANKS",
+        "                );",
+        "        OutputDebugString(szMsg);",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 505,
+      "original_count": 3,
+      "current_start": 517,
+      "current_count": 1,
+      "original": [
+        "                    if (IsDBCSLeadByte(pszDefault[n]) {",
+        "                        n++;",
+        "                    }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 557,
+      "original_count": 25,
+      "current_start": 570,
+      "current_count": 1,
+      "original": [
+        "",
+        "    //",
+        "    // Make noise on the debugger if pszDefault has trailing blanks at",
+        "    // this point indicating that WOWCFEX_ZAPGPPSDEFBLANKS might need",
+        "    // to be turned on for this app.",
+        "    //",
+        "",
+        "    if ( ! (cFlagsEx & WOWCFEX_ZAPGPPSDEFBLANKS) &&",
+        "        pszKey &&",
+        "        pszDefault &&",
+        "        ' ' == pszDefault[strlen(pszDefault) - 1]) {",
+        "",
+        "        char szMsg[256];",
+        "",
+        "        sprintf(szMsg,",
+        "                \"\\n\"",
+        "                \"WOW32 COMPATIBILITY ALERT: Task %.8s has trailing blanks in pszDefault to\\n\"",
+        "                \"Get[Private]ProfileString but WOWCFEX_ZAPGPPSDEFBLANKS (0x00000000 0x%08x)\\n\"",
+        "                \"is not enabled.  Try enabling this bit if you're having problems.\\n\"",
+        "                \"\\n\",",
+        "                ((PTDB)SEGPTR(CURRENTPTD()->htask16,0))->TDB_ModName,",
+        "                WOWCFEX_ZAPGPPSDEFBLANKS",
+        "                );",
+        "        OutputDebugString(szMsg);",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 592,
+      "original_count": 42,
+      "current_start": 584,
+      "current_count": 1,
+      "original": [
+        "",
+        "    //",
+        "    // Check for bad return on retrieving entire section by walking",
+        "    // the section making sure it's full of null-terminated strings",
+        "    // with an extra null at the end.  Also ensure that this all fits",
+        "    // within the buffer.",
+        "    //",
+        "",
+        "    if (!pszKey) {",
+        "        PSZ psz;",
+        "",
+        "        //",
+        "        // We don't want to complain if the poorly-formed buffer was the one",
+        "        // passed in as pszDefault by the caller.",
+        "        //",
+        "",
+        "        // Although the api docs clearly state that pszDefault should never",
+        "        // be null but win3.1 is nice enough to still deal with this. Delphi is",
+        "        // passing pszDefault as NULL and this following code causes an",
+        "        // assertion in WOW. So added the pszDefault check first.",
+        "        //",
+        "        // sudeepb 11-Sep-1995",
+        "",
+        "",
+        "        if (!pszDefault || strcmp(pszReturnBuffer, pszDefault)) {",
+        "",
+        "            psz = pszReturnBuffer;",
+        "",
+        "            while (psz < (pszReturnBuffer + ul + 2) && *psz) {",
+        "                psz += strlen(psz) + 1;",
+        "            }",
+        "",
+        "            WOW32ASSERTMSGF(",
+        "                psz < (pszReturnBuffer + ul + 2),",
+        "                (\"GetPrivateProfileString of entire section returns poorly formed buffer.\\n\"",
+        "                 \"pszReturnBuffer = %p, return value = %d\\n\",",
+        "                 pszReturnBuffer,",
+        "                 ul",
+        "                 ));",
+        "        }",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 340,
+      "original_line": 317,
+      "logical_line": 315
+    },
+    {
+      "current_line": 373,
+      "original_line": 371,
+      "logical_line": 347
+    },
+    {
+      "current_line": 415,
+      "original_line": 405,
+      "logical_line": 408
+    },
+    {
+      "current_line": 416,
+      "original_line": 406,
+      "logical_line": 409
+    },
+    {
+      "current_line": 417,
+      "original_line": 407,
+      "logical_line": 410
+    },
+    {
+      "current_line": 418,
+      "original_line": 408,
+      "logical_line": 411
+    },
+    {
+      "current_line": 419,
+      "original_line": 409,
+      "logical_line": 412
+    },
+    {
+      "current_line": 420,
+      "original_line": 410,
+      "logical_line": 413
+    },
+    {
+      "current_line": 421,
+      "original_line": 411,
+      "logical_line": 414
+    },
+    {
+      "current_line": 422,
+      "original_line": 412,
+      "logical_line": 415
+    },
+    {
+      "current_line": 423,
+      "original_line": 413,
+      "logical_line": 416
+    },
+    {
+      "current_line": 424,
+      "original_line": 414,
+      "logical_line": 417
+    },
+    {
+      "current_line": 425,
+      "original_line": 415,
+      "logical_line": 418
+    },
+    {
+      "current_line": 426,
+      "original_line": 416,
+      "logical_line": 419
+    },
+    {
+      "current_line": 427,
+      "original_line": 417,
+      "logical_line": 420
+    },
+    {
+      "current_line": 428,
+      "original_line": 418,
+      "logical_line": 421
+    },
+    {
+      "current_line": 429,
+      "original_line": 419,
+      "logical_line": 422
+    },
+    {
+      "current_line": 518,
+      "original_line": 508,
+      "logical_line": 506
+    },
+    {
+      "current_line": 571,
+      "original_line": 582,
+      "logical_line": 558
+    },
+    {
+      "current_line": 585,
+      "original_line": 634,
+      "logical_line": 593
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Classification complete, pending evidence is neither proven fault nor repair."
+}

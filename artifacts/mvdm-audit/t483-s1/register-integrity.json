@@ -1,0 +1,9 @@
+{
+  "register_sha256": "e148cb131f239f23979bce322d7aa51b1a5f2ba252b63541d1bae9b292f1b023",
+  "entries": 3042,
+  "unique_ids": 3042,
+  "directory_then_current_line_then_original_line_order": true,
+  "missing_required_fields": [],
+  "same_anchor_review": "Four same-anchor pairs inspected: each describes a separate range/concern (header reachability versus ordering, declaration versus diagnostic mapping, selected cohorts versus omitted prefix, retained scheduler versus unproved boundary). Not duplicate repairs; coupled entries must be implemented together.",
+  "id_policy": "IDs assigned after file classification. Preserve IDs through repair; do not renumber on deletion or reorder by old IDs. Line coordinates are audit-snapshot anchors; use path, original range, classification and evidence after source shifts."
+}

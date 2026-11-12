@@ -1015,5 +1015,3 @@ Return Value:
     return STATUS_SUCCESS;
 
 } // XsNetWkstaSetUID
-
-

@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+  "current_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+  "review_complete": false,
+  "findings": [
+    {
+      "current_start": 87,
+      "old_id": "MVDM-HOST-DIV-089",
+      "finding": "READ_POINTERS byte/word offset changes ULONG to IU32 under new CPU40+C_VID selection; string offset/count likewise changes. Not exclusion-only."
+    },
+    {
+      "current_start": 130,
+      "finding": "Original non-CPU40 Glue_writes declarations excluded."
+    }
+  ],
+  "caller_evidence": [
+    "base/video/ega_read.c:290-299 declares read_byte_ev_glue/read_word_ev_glue/read_str_fwd_ev_glue with IU32 and initializes Glue_reads",
+    "base/video/ega_read.c:816 and base/video/cga.c:1225 copy Glue_reads into read_pointers"
+  ],
+  "counter_review": "Matching added declarations alone is insufficient: must compare actual ev_glue definitions and original provider types before final retain/minimize recommendation. New selection guards may be separable from necessary type correction; no assumption that equal width means compatible C function-pointer types.",
+  "next_steps": [
+    "Read actual ev_glue read providers and original signatures",
+    "Account for complete file diff and original/nonselected boundaries",
+    "Register separate byte/word and string changes in physical order with caller/verification requirements"
+  ]
+}

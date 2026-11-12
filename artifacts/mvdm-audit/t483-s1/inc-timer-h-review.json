@@ -1,0 +1,39 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+  "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
+  "current_sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 80,
+      "original_count": 2,
+      "current_normalized_start": 80,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 91,
+      "original_count": 2,
+      "current_normalized_start": 90,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 102,
+      "original_count": 1,
+      "current_normalized_start": 100,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Three optional declaration bodies excluded: non-NTVDM timer2 sound, SWIN_MOUSE_OPTS setup and HUNTER count. Retained source exact.",
+  "counter_review": "Original NTVDM HostPpiState and no-argument timer setup, event, shutdown and alarm interfaces preserved. No timer period, IRQ dispatch or mouse scheduling change.",
+  "limits": "Source contract classification only; no new compiled-context or runtime acceptance."
+}

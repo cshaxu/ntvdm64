@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+  "original_sha256": "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+  "current_sha256": "9c66c2992f4504aacda2fbdd19e31a943a96974d81f37fecf804217b26eac2ca",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 18,
+      "original_count": 720
+    }
+  ],
+  "initial_review": "Entire original HFX body replaced by one error under retained outer HFX condition; other source exact.",
+  "counter_review": "Removed body includes redirector declarations, directory structures and HFX per-VM instance data; its exclusion alone does not remove NIDDB or the NTVDM redirector. Nested conditions properly belong to removed body. Trailing line739 then line711 directives occur after final endif, with no following substantive code; no universal line certification claimed.",
+  "limits": "Difference classification only; no new build/runtime pass. CHAIN2 complete layout equivalence pending; no product source changed."
+}

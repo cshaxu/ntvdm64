@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsdisp.c",
+  "original_sha256": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+  "current_sha256": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 48,
+      "original_count": 7,
+      "current_start": 50,
+      "current_count": 1,
+      "original": [
+        "",
+        "    if (iSvc >= XMS_LASTSVC){",
+        "\tprintf(\"XMS:Unimplemented SVC index %x\\n\",iSvc);",
+        "\tsetCF(1);",
+        "\treturn FALSE;",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 55,
+      "current": 51,
+      "logical": 49
+    }
+  ],
+  "limits": "Exclusion-only is body classification, not renewed configuration-hit proof. No backend activated or internal CPU changes authorized."
+}

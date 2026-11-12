@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+  "original_sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+  "current_sha256": "a1562069aaf6a9ff00bb6f8a7890dc00a58367a23407162d344f261252772f14",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 35,
+      "original_count": 190
+    }
+  ],
+  "initial_review": "Complete original/current comparison; excluded debug/platform bodies only.",
+  "counter_review": "Whole-boundary removal, including nested original branches, leaves exactly the original nonblank source after ignoring line/error directives. No selected debug algorithm or declaration adaptation remains.",
+  "limits": "Necessity audit only, not all-context exclusion or diagnostic-line certification. dasm.c retains a trailing EOF #line37 with no subsequent code; no runtime disassembler/debug acceptance claim."
+}

@@ -1,0 +1,50 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+  "original_sha256": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+  "current_sha256": "55bb0fb88eace961f768c45a6717cf06caeda5322a657154c4c44ec5c25aad0e",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 48,
+      "original_count": 1,
+      "current_start": 49,
+      "current_count": 1,
+      "original": [
+        "#include <monsim32.h>"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef MONITOR"
+    },
+    {
+      "original_start": 70,
+      "original_count": 12,
+      "current_start": 73,
+      "current_count": 1,
+      "original": [
+        "/* Sas/gmi Sim32 crossovers */",
+        "extern BOOL Sim32FlushVDMPointer ();",
+        "extern BOOL Sim32FreeVDMPointer ();",
+        "extern BOOL Sim32GetVDMMemory ();",
+        "extern BOOL Sim32SetVDMMemory ();",
+        "",
+        "/* Sim32 cpu crossovers */",
+        "extern VDMREG *EnterIdle();",
+        "extern void LeaveIdle();",
+        "",
+        "/* Sim32 cpu idle interrupt handler should only be called by the event manager */",
+        "extern void Sim32_cpu_stall();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#else   /*ANSI*/"
+    }
+  ],
+  "initial_review": "Only MONITOR monsim32 include and non-ANSI crossover declarations excluded.",
+  "counter_review": "All retained lines match original, including Sim32GetVDMPointer macro ignoring Size and duplicated sas map declarations after ANSI block. These are inherited contracts, not newly introduced local truncation or duplication; no functional redesign from this diff review.",
+  "limits": "Source-content classification only; no proof of universal context or pointer lifetime correctness."
+}

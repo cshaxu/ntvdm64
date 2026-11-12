@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+  "original_sha256": "c4c064dd442805e2942a799d8c90b46d6f26e4fbe5bba58799f53bbbebb42092",
+  "current_sha256": "2c822ac8f45912075a6ff869a5bee0ca62b0ebc6b6902408eff0af59dea6dd24",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 36,
+      "original_count": 3,
+      "replacement": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 42,
+      "original_count": 1,
+      "replacement": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Two excluded bodies: non-ANSI printer declarations and PS_FLUSHING notification. Remaining source exact.",
+  "counter_review": "Original printer initialization/post/status interfaces and BIOS printer address constants unchanged; no printer timing, flush or ownership policy added.",
+  "limits": "Source diff classification only; no new universal compiler-context, line-number or runtime proof."
+}

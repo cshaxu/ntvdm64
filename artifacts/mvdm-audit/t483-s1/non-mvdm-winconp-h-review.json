@@ -1,0 +1,50 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+  "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+  "current_sha256": "9541cdd461cf1417749f18633965b2086bb59b21851a50aef84aef72054bb9f9",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 5,
+      "original_count": 1,
+      "current_start": 6,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 20,
+      "original_count": 1,
+      "current_start": 23,
+      "current_count": 1,
+      "original": [
+        "#define GetConsoleKeyboardLayoutName  GetConsoleKeyboardLayoutNameW"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 88,
+      "original_count": 1,
+      "current_start": 94,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/winconp.h",
+    "src/mvdm-host/dos/command/cmdkeyb.c"
+  ],
+  "limits": "Whole retained-source and original conditional-body comparison only; not universal include-context hit or ABI certification. No new build or runtime test."
+}

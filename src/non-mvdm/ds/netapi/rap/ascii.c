@@ -92,5 +92,3 @@ Return Value:
     return actualNumber;
 
 } // RapAsciiToDecimal
-
-

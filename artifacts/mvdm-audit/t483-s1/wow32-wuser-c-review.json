@@ -1,0 +1,388 @@
+{
+  "path": "src/mvdm-host/wow32/wuser.c",
+  "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+  "current_sha256": "5974aa25b4052803af37efee3fab2a0a3c9f32ce8e3baa3fbfd1492c5bd23353",
+  "changes": [
+    {
+      "original_start": 19,
+      "original_count": 0,
+      "current_start": 19,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-295): bounded synchronous bitmap resource alias. */",
+        "#include \"wow_callback_frame_lease.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Live WU32LoadBitmap adaptation calls the declared bounded lease API.",
+      "change_plan": "Retain header dependency for live resource consumer."
+    },
+    {
+      "original_start": 1058,
+      "original_count": 0,
+      "current_start": 1055,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    HWND hwnd32;"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 1069,
+      "original_count": 3,
+      "current_start": 1068,
+      "current_count": 4,
+      "original": [
+        "    ul = GETHDC16(GetDC(",
+        "    HWND32(parg16->f1)",
+        "    ));"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */",
+        "    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));",
+        "    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }",
+        "    ul = GETHDC16(wow_native_GetDC(hwnd32));"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 1101,
+      "original_count": 1,
+      "current_start": 1102,
+      "current_count": 1,
+      "original": [
+        "        StoreDC(htask16, parg16->f1, (HAND16)ul);"
+      ],
+      "current": [
+        "        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 2110,
+      "original_count": 0,
+      "current_start": 2106,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    wow_callback_frame_lease resource = {0};"
+      ],
+      "decision": "retain",
+      "necessity": "Original GETMISCPTR performs demand loading; native bitmap provider needs stable readable bytes for the full resource size. Protected-address lease supplies bounded host data and normal release; original ul=0 preserves acquisition-failure return.",
+      "change_plan": "Retain demand-load-before-lease and null-resource behavior. Verify native provider does not retain the view; separately establish exception-safe release before adding any cleanup machinery."
+    },
+    {
+      "original_start": 2115,
+      "original_count": 0,
+      "current_start": 2113,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    /* Preserve original selector demand loading before acquiring the bytes. */",
+        "    if (pResData && !wow_callback_frame_acquire_protected_vp(",
+        "        FETCHDWORD(parg16->f3), FETCHDWORD(parg16->f4),",
+        "        GUEST_MEMORY_ACCESS_READ, &resource)) goto bitmap_cleanup;",
+        ""
+      ],
+      "decision": "retain",
+      "necessity": "Original GETMISCPTR performs demand loading; native bitmap provider needs stable readable bytes for the full resource size. Protected-address lease supplies bounded host data and normal release; original ul=0 preserves acquisition-failure return.",
+      "change_plan": "Retain demand-load-before-lease and null-resource behavior. Verify native provider does not retain the view; separately establish exception-safe release before adding any cleanup machinery."
+    },
+    {
+      "original_start": 2117,
+      "original_count": 1,
+      "current_start": 2121,
+      "current_count": 1,
+      "original": [
+        "                                     pResData,"
+      ],
+      "current": [
+        "                                     pResData ? resource.bytes : NULL,"
+      ],
+      "decision": "retain",
+      "necessity": "Original GETMISCPTR performs demand loading; native bitmap provider needs stable readable bytes for the full resource size. Protected-address lease supplies bounded host data and normal release; original ul=0 preserves acquisition-failure return.",
+      "change_plan": "Retain demand-load-before-lease and null-resource behavior. Verify native provider does not retain the view; separately establish exception-safe release before adding any cleanup machinery."
+    },
+    {
+      "original_start": 2120,
+      "original_count": 0,
+      "current_start": 2124,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "bitmap_cleanup:",
+        "    if (resource.lease) wow_callback_frame_release(&resource, 0);"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original GETMISCPTR performs demand loading; native bitmap provider needs stable readable bytes for the full resource size. Protected-address lease supplies bounded host data and normal release; original ul=0 preserves acquisition-failure return. Current release occurs only after normal provider return; provider exception/worker-retirement contract is not proven by success/oversize-rejection fixture.",
+      "change_plan": "Retain demand-load-before-lease and null-resource behavior. Verify native provider does not retain the view; separately establish exception-safe release before adding any cleanup machinery."
+    },
+    {
+      "original_start": 2923,
+      "original_count": 0,
+      "current_start": 2930,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-275): NT4 USER's sysmet.c::SetSysColor publishes",
+        " * every accepted colour into gpsi->argbSystem. The standalone worker has no",
+        " * writable NT USER shared section, so retain the original WU32SetSysColors",
+        " * call and, only after it succeeds, mirror the same accepted slots through",
+        " * the bounded worker page-domain carrier. */",
+        "extern int __cdecl mvdm_softpc_wow_page_domain_publish_system_color(",
+        "    unsigned long, unsigned long);",
+        ""
+      ],
+      "decision": "simplify",
+      "necessity": "This function is already declared with the same ABI in common/wow/page_domain.h. Local declaration duplicates the shared interface.",
+      "change_plan": "Replace local extern block with the existing common header include, retain source rationale externally and preserve original logical line positions. No additional wrapper."
+    },
+    {
+      "original_start": 2939,
+      "original_count": 1,
+      "current_start": 2955,
+      "current_count": 8,
+      "original": [
+        "        ) == FALSE) {"
+      ],
+      "current": [
+        "        ) != FALSE) {",
+        "        INT index;",
+        "",
+        "        for (index = 0; index < INT32(parg16->f1); ++index) {",
+        "            (void)mvdm_softpc_wow_page_domain_publish_system_color(",
+        "                (unsigned long)p2[index], (unsigned long)p3[index]);",
+        "        }",
+        "    } else {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original NT USER SetSysColor publishes its accepted rgb to gpsi, including possible SSCF_FORCESOLIDCOLOR normalization. This adaptation republishes input p3 after public SetSysColors, ignores publisher rejection, and assumes pointers remain valid after synchronous notifications. Existing publisher fixture alone does not establish these assumptions.",
+      "change_plan": "Trace public SetSysColors accepted-value and reentrancy contract. If input differs from accepted color, publish the authoritative accepted value through the same page-domain owner; retain no second color policy. Verify unavailable page-domain behavior and original non-i386 fallback separately."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 532,
+      "original_count": 11,
+      "current_start": 537,
+      "current_count": 1,
+      "original": [
+        "    ULONG ul;",
+        "    register PENABLEHARDWAREINPUT16 parg16;",
+        "",
+        "    GETARGPTR(pFrame, sizeof(ENABLEHARDWAREINPUT16), parg16);",
+        "",
+        "    ul = GETBOOL16(EnableHardwareInput(",
+        "    BOOL32(parg16->f1)",
+        "    ));",
+        "",
+        "    FREEARGPTR(parg16);",
+        "    RETURN(ul);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1908,
+      "original_count": 9,
+      "current_start": 1911,
+      "current_count": 1,
+      "original": [
+        "        if( n==0 ) {",
+        "            n=strlen(psz2);",
+        "        }",
+        "        if( ((wid == 0) || (hgt == 0)) ) {",
+        "            GetTextExtentPoint(hdc,psz2,n,&sz);",
+        "",
+        "            wid=sz.cx;",
+        "            hgt=sz.cy;",
+        "        }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2975,
+      "original_count": 27,
+      "current_start": 3001,
+      "current_count": 1,
+      "original": [
+        "// this is implemented locally now",
+        "",
+        "/*++",
+        "    HWND SetSysModalWindow(<hwnd>)",
+        "    HWND <hwnd>;",
+        "",
+        "    The %SetSysModalWindow% function makes the specified window a system-modal",
+        "    window.",
+        "",
+        "    <hwnd>",
+        "        Identifies the window to be made system modal.",
+        "",
+        "    The return value identifies the window that was previously the system-modal",
+        "    window.",
+        "",
+        "    If another window is made the active window (for example, the system-modal",
+        "    window creates a dialog box that becomes the active window), the active",
+        "    window becomes the system-modal window. When the original window becomes",
+        "    active again, it is system modal. To end the system-modal state, destroy the",
+        "    system-modal window.",
+        "--*/",
+        "",
+        "ULONG FASTCALL WU32SetSysModalWindow(PVDMFRAME pFrame)",
+        "{",
+        "    RETURN(0);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 3273,
+      "original_count": 95,
+      "current_start": 3276,
+      "current_count": 1,
+      "original": [
+        "// this function no longer thunked",
+        "ULONG FASTCALL WU32WinHelp(PVDMFRAME pFrame)",
+        "{",
+        "    ULONG ul;",
+        "    PSZ psz2;",
+        "    register PWINHELP16 parg16;",
+        "    DWORD dwCommand;",
+        "    DWORD dwData;",
+        "    UINT  cb;",
+        "    MULTIKEYHELP *lpmkey;",
+        "    PMULTIKEYHELP16 pmkey16;",
+        "    HELPWININFO     hwinfo;",
+        "    PHELPWININFO16  phwinfo16;",
+        "",
+        "    GETARGPTR(pFrame, sizeof(WINHELP16), parg16);",
+        "    GETPSZPTR(parg16->f2, psz2);",
+        "    dwCommand = WORD32(parg16->f3);",
+        "",
+        "    switch (dwCommand) {",
+        "        case HELP_KEY:",
+        "        case HELP_COMMAND:",
+        "        case HELP_PARTIALKEY:",
+        "            GETPSZPTR(parg16->f4, (PSZ)dwData);",
+        "            break;",
+        "",
+        "        case HELP_MULTIKEY:",
+        "            GETVDMPTR(parg16->f4, sizeof(MULTIKEYHELP16), pmkey16);",
+        "            cb = FETCHWORD(pmkey16->mkSize);",
+        "            FREEVDMPTR(pmkey16);",
+        "            GETVDMPTR(parg16->f4, cb, pmkey16);",
+        "",
+        "            //",
+        "            // It is my understanding that 'mkSize' is the total",
+        "            // data length and NOT just sizeof(MULTIKEYHELP)",
+        "            //",
+        "",
+        "            cb += sizeof(MULTIKEYHELP) - sizeof(MULTIKEYHELP16);",
+        "            lpmkey = (MULTIKEYHELP *)malloc_w(cb);",
+        "            if (lpmkey) {",
+        "                lpmkey->mkSize = cb;",
+        "                lpmkey->mkKeylist = pmkey16->mkKeylist;",
+        "                strcpy(lpmkey->szKeyphrase, pmkey16->szKeyphrase);",
+        "            }",
+        "            FREEVDMPTR(pmkey16);",
+        "            dwData = (DWORD)lpmkey;",
+        "            break;",
+        "",
+        "        case HELP_SETWINPOS:",
+        "            GETVDMPTR(parg16->f4, sizeof(HELPWININFO16), phwinfo16);",
+        "",
+        "            hwinfo.wStructSize = (int)(FETCHWORD(phwinfo16->wStructSize) +",
+        "                                 (sizeof(HELPWININFO) - sizeof(HELPWININFO16)));",
+        "            hwinfo.x           = (int)FETCHSHORT(phwinfo16->x);",
+        "            hwinfo.y           = (int)FETCHSHORT(phwinfo16->y);",
+        "            hwinfo.dx          = (int)FETCHSHORT(phwinfo16->dx);",
+        "            hwinfo.dy          = (int)FETCHSHORT(phwinfo16->dy);",
+        "            hwinfo.wMax        = (int)FETCHSHORT(phwinfo16->wMax);",
+        "            hwinfo.rgchMember[0] = (CHAR)phwinfo16->rgchMember[0];",
+        "            hwinfo.rgchMember[1] = (CHAR)phwinfo16->rgchMember[1];",
+        "",
+        "            FREEVDMPTR(phwinfo16);",
+        "            dwData = (DWORD)&hwinfo;",
+        "            break;",
+        "",
+        "        default:",
+        "            dwData = DWORD32(parg16->f4);",
+        "            break;",
+        "    }",
+        "",
+        "    ul = GETBOOL16(WinHelp(HWND32(parg16->f1), psz2, dwCommand, dwData));",
+        "",
+        "    switch (dwCommand) {",
+        "        case HELP_KEY:",
+        "        case HELP_COMMAND:",
+        "        case HELP_PARTIALKEY:",
+        "            FREEPSZPTR((PSZ)dwData);",
+        "            break;",
+        "",
+        "        case HELP_MULTIKEY:",
+        "            if (lpmkey)",
+        "                free_w(lpmkey);",
+        "            break;",
+        "",
+        "        case HELP_SETWINPOS:",
+        "            break;",
+        "",
+        "        default:",
+        "            break;",
+        "    }",
+        "",
+        "",
+        "    FREEPSZPTR(psz2);",
+        "    FREEARGPTR(parg16);",
+        "    RETURN(ul);",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 543,
+      "current": 538,
+      "logical": 533
+    },
+    {
+      "original": 1917,
+      "current": 1912,
+      "logical": 1909
+    },
+    {
+      "original": 2940,
+      "current": 2963,
+      "logical": 2947
+    },
+    {
+      "original": 3002,
+      "current": 3002,
+      "logical": 2976
+    },
+    {
+      "original": 3368,
+      "current": 3277,
+      "logical": 3274
+    }
+  ],
+  "evidence": "Original source and listed production providers/fixture bodies inspected.",
+  "limits": "No new runtime validation; pending findings remain unproved."
+}

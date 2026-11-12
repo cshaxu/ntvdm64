@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+  "original_sha256": "d70092a47d833c0ec3d859ebe7963feb374f5f0abb9288a03f9ffea7198b275f",
+  "current_sha256": "b62754aef01e5b60bf1f284f94021d7f457b641e26e35d44c1dcac7bc574803a",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 72,
+      "original_count": 1
+    },
+    {
+      "original_start": 134,
+      "original_count": 8
+    }
+  ],
+  "initial_review": "Two excluded bodies: HERC trace bit and non-ANSI trace declarations. Remaining source exact.",
+  "counter_review": "Original trace masks, ANSI interfaces and trace_file declaration unchanged; no logging behavior added. Matched substantive source logical lines agree with original.",
+  "logical_line_mismatches": [],
+  "limits": "Source-derived line counter, not compiler preprocessing or runtime evidence. No fixes implemented."
+}

@@ -71,8 +71,6 @@ SOURCES=vdmredir.rc \
         vrdlc5c.c   \
         vrdlcpst.c  \
         vrdlcbuf.c  \
-        vrdlcdbg.c  \
-        vrdebug.c   \
         vrdll.c
 
 C_DEFINES=-DVDMREDIR_DLL -DUNALIGNED_VDM_POINTERS $(C_DEFINES)

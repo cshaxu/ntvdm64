@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+  "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+  "current_sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 39,
+      "original_end": 44,
+      "current_error_line": 40
+    },
+    {
+      "original_start": 56,
+      "original_end": 124,
+      "current_error_line": 55
+    }
+  ],
+  "initial_review": "Conditional boundary-aware whole-file comparison: each #error replaces only its corresponding original branch body; all other nonblank text matches.",
+  "counter_review": "Preserved surrounding if/elif/else/endif checked while skipping nested conditions only inside removed bodies. No selected implementation or dispatch expression added or modified.",
+  "limits": "Ignores blank lines and #line directives; not a universal macro reachability proof or completed diagnostic-line audit.",
+  "runtime_validation": "None; no source changes."
+}

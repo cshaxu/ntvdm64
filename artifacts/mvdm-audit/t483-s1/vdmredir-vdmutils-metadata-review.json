@@ -1,0 +1,209 @@
+[
+  {
+    "sequence": "908",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vdmredir.res",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vdmredir.res",
+    "original_sha256": "3f91d0943570ecf4dded2471845ecb43b9b16bc7ff675658cf4cb948dc8e2031",
+    "before_sha256": "3f91d0943570ecf4dded2471845ecb43b9b16bc7ff675658cf4cb948dc8e2031",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "909",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrdisp.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrdisp.obj",
+    "original_sha256": "a1217efa68fae976c0d4a8a7d93f7b7a08d187951b500b3d529176e2d923430c",
+    "before_sha256": "a1217efa68fae976c0d4a8a7d93f7b7a08d187951b500b3d529176e2d923430c",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "910",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrinit.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrinit.obj",
+    "original_sha256": "1ea93d16df8762e3a32e9f0aaca18f57b2a47b376f5f2a8efe816b0728a2f90b",
+    "before_sha256": "1ea93d16df8762e3a32e9f0aaca18f57b2a47b376f5f2a8efe816b0728a2f90b",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "911",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrmisc.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrmisc.obj",
+    "original_sha256": "5a03324b69eef021f82ee3bc7e76386df02e890516a7e891fdd00cd5836c6fa5",
+    "before_sha256": "5a03324b69eef021f82ee3bc7e76386df02e890516a7e891fdd00cd5836c6fa5",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "912",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrmslot.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrmslot.obj",
+    "original_sha256": "a16032cb0686940f4ee524cf1d0951dfadc593046a58a87ab92b565cdd1c4145",
+    "before_sha256": "a16032cb0686940f4ee524cf1d0951dfadc593046a58a87ab92b565cdd1c4145",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "913",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrnetapi.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrnetapi.obj",
+    "original_sha256": "dc32b7234d04e93629c1f6b04e32aec33f3e83f172814364c5bfb506cc560915",
+    "before_sha256": "dc32b7234d04e93629c1f6b04e32aec33f3e83f172814364c5bfb506cc560915",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "914",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrnmpipe.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrnmpipe.obj",
+    "original_sha256": "6bb9fbf3879ebcc6a191e37bbbc7f2d7c9df538b82b2f67c9ca5653d6cb31b4a",
+    "before_sha256": "6bb9fbf3879ebcc6a191e37bbbc7f2d7c9df538b82b2f67c9ca5653d6cb31b4a",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "915",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrputil.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrputil.obj",
+    "original_sha256": "628b6347796228e28e8ec07f251c6e16c68af4e179b88dc04bef06b944037685",
+    "before_sha256": "628b6347796228e28e8ec07f251c6e16c68af4e179b88dc04bef06b944037685",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "916",
+    "path": "src/mvdm-host/vdmredir/obj/i386/vrremote.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\i386\\vrremote.obj",
+    "original_sha256": "cb5dbf16d6828d68cfe37f83cbdda10744689617cfa8569e353d8b863e79cb02",
+    "before_sha256": "cb5dbf16d6828d68cfe37f83cbdda10744689617cfa8569e353d8b863e79cb02",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "917",
+    "path": "src/mvdm-host/vdmutils/dirs",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\dirs",
+    "original_sha256": "d652fd66d5d1895035742edb718e4c0a51bb751da0f34ff770f8f11280e841c0",
+    "before_sha256": "442279a8e168ea6eb2a9f007fc66f0fdb1553c38ceb264bd255513e410dc60fb",
+    "disposition": "restored-format",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "918",
+    "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.exe",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\forcedos\\obj\\i386\\forcedos.exe",
+    "original_sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320",
+    "before_sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "919",
+    "path": "src/mvdm-host/vdmutils/graftabl/makefile",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\graftabl\\makefile",
+    "original_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+    "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+    "disposition": "restored-format",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "920",
+    "path": "src/mvdm-host/vdmutils/graftabl/obj/_objects.mac",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\graftabl\\obj\\_objects.mac",
+    "original_sha256": "ce3215a0ebceb9a6bfc260559dbd91c11babb984236c36cb41fe4ea84250bdb0",
+    "before_sha256": "081358a8c81ddea443ca5f8249a5a39467ea47ff04d48374bf388add8b251afc",
+    "disposition": "restored-format",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "921",
+    "path": "src/mvdm-host/vdmutils/graftabl/obj/i386/graftabl.com",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\graftabl\\obj\\i386\\graftabl.com",
+    "original_sha256": "bc241d49e73a10471500bcfcda8302ef72fd7411f7b8dea92289b4244ea2c87e",
+    "before_sha256": "bc241d49e73a10471500bcfcda8302ef72fd7411f7b8dea92289b4244ea2c87e",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "922",
+    "path": "src/mvdm-host/vdmutils/graftabl/obj/i386/graftabl.lib",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\graftabl\\obj\\i386\\graftabl.lib",
+    "original_sha256": "c9d0deaa8dc7a633917b68db88d7a5cea4387c800fc7ef9bbfc2e0042abe8907",
+    "before_sha256": "c9d0deaa8dc7a633917b68db88d7a5cea4387c800fc7ef9bbfc2e0042abe8907",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "923",
+    "path": "src/mvdm-host/vdmutils/graftabl/obj/i386/graftabl.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\graftabl\\obj\\i386\\graftabl.obj",
+    "original_sha256": "5186b4ff8e3309c74a609cebed9a700139991223fec0b9b602f89ed4711bdb4a",
+    "before_sha256": "5186b4ff8e3309c74a609cebed9a700139991223fec0b9b602f89ed4711bdb4a",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "924",
+    "path": "src/mvdm-host/vdmutils/graftabl/obj/i386/graftabl.pdb",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\graftabl\\obj\\i386\\graftabl.pdb",
+    "original_sha256": "17282848f02c69a7d527a280476ed838974f78042b8b1df4f446683bd9c42c2d",
+    "before_sha256": "17282848f02c69a7d527a280476ed838974f78042b8b1df4f446683bd9c42c2d",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "925",
+    "path": "src/mvdm-host/vdmutils/graftabl/obj/i386/graftabl.res",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\graftabl\\obj\\i386\\graftabl.res",
+    "original_sha256": "b30573e0ae03a9fb839a699806ad00405fb08c6cbb8e299167166ca299768e5c",
+    "before_sha256": "b30573e0ae03a9fb839a699806ad00405fb08c6cbb8e299167166ca299768e5c",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "926",
+    "path": "src/mvdm-host/vdmutils/pifedit/makefile",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\makefile",
+    "original_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+    "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+    "disposition": "restored-format",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "927",
+    "path": "src/mvdm-host/vdmutils/pifedit/pif.def",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pif.def",
+    "original_sha256": "79a710528daffa77faef458e590f2583a3f5954ae206b6b6f3eabed809441629",
+    "before_sha256": "2ad828170a191ece2f77d47cef118626f91bda0eabe2b6f15197e56ce960012b",
+    "disposition": "restored-format",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "928",
+    "path": "src/mvdm-host/vdmutils/pifedit/pifedit.ico",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifedit.ico",
+    "original_sha256": "5a6a3034f6132a48b7e4929d528ef6cc1a589cae62573af5c788d42bbde70e5e",
+    "before_sha256": "5a6a3034f6132a48b7e4929d528ef6cc1a589cae62573af5c788d42bbde70e5e",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "929",
+    "path": "src/mvdm-host/vdmutils/pifedit/pifedit.rcv",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifedit.rcv",
+    "original_sha256": "740822d23ee2f692f3de8517393c1060d8288b36262ba2769fce33017bfeeaa5",
+    "before_sha256": "7fc86ec685794bad0e70c6c55ba407927f7c5dd044b10767781a7ed101922fad",
+    "disposition": "restored-format",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  },
+  {
+    "sequence": "930",
+    "path": "src/mvdm-host/vdmutils/win/obj/i386/win.com",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmutils\\win\\obj\\i386\\win.com",
+    "original_sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf",
+    "before_sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf",
+    "disposition": "byte-identical",
+    "limits": "Raw identity/format review only, not proof that historical object is currently used."
+  }
+]

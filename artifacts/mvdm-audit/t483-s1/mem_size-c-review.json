@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+  "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+  "current_sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 17,
+      "original_end": 17,
+      "current_error_line": 18
+    },
+    {
+      "original_start": 21,
+      "original_end": 26,
+      "current_error_line": 24
+    }
+  ],
+  "changes": [],
+  "initial_review": "Whole-file boundary-aware diff comparison with explicit semantic exceptions.",
+  "counter_review": "Outside listed corrections and removed branch bodies, nonblank non-#line text equals original.",
+  "limits": "Not full diagnostic-line or all-profile reachability proof. No new test run."
+}

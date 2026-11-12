@@ -1,0 +1,239 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+  "current_sha256": "b667d09291a27bc607da80aa6765d3c0835051a5325880ba2368983804969c3a",
+  "status": "difference classification complete; corrective recommendations not implemented",
+  "retained_function": "_GetDlgItem full normalized body exactly original251-265",
+  "conditional_mapping": [
+    {
+      "current_line": 18,
+      "logical_line": 15,
+      "current": "#ifndef WOW",
+      "original": "#ifndef WOW"
+    },
+    {
+      "current_line": 21,
+      "logical_line": 17,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 25,
+      "logical_line": 19,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 29,
+      "logical_line": 119,
+      "current": "#else // WOW",
+      "original": "#else // WOW"
+    },
+    {
+      "current_line": 32,
+      "logical_line": 137,
+      "current": "#endif // !WOW",
+      "original": "#endif // !WOW"
+    },
+    {
+      "current_line": 53,
+      "logical_line": 313,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 57,
+      "logical_line": 322,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 61,
+      "logical_line": 1067,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 65,
+      "logical_line": 1076,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 70,
+      "logical_line": 304,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 74,
+      "logical_line": 307,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 77,
+      "logical_line": 309,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 81,
+      "logical_line": 435,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 85,
+      "logical_line": 442,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 88,
+      "logical_line": 460,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 92,
+      "logical_line": 719,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 96,
+      "logical_line": 726,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 99,
+      "logical_line": 728,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 103,
+      "logical_line": 776,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 107,
+      "logical_line": 779,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 110,
+      "logical_line": 781,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 114,
+      "logical_line": 795,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 118,
+      "logical_line": 802,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 121,
+      "logical_line": 804,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 125,
+      "logical_line": 835,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 128,
+      "logical_line": 837,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 131,
+      "logical_line": 839,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 135,
+      "logical_line": 890,
+      "current": "#ifndef WOW",
+      "original": "#ifndef WOW"
+    },
+    {
+      "current_line": 138,
+      "logical_line": 893,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 142,
+      "logical_line": 911,
+      "current": "#ifdef WOW",
+      "original": "#ifdef WOW"
+    },
+    {
+      "current_line": 145,
+      "logical_line": 913,
+      "current": "#else",
+      "original": "#else"
+    },
+    {
+      "current_line": 148,
+      "logical_line": 1062,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 153,
+      "logical_line": 519,
+      "current": "#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK",
+      "original": "#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK"
+    },
+    {
+      "current_line": 157,
+      "logical_line": 526,
+      "current": "#endif",
+      "original": "#endif"
+    },
+    {
+      "current_line": 161,
+      "logical_line": 752,
+      "current": "#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK",
+      "original": "#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK"
+    },
+    {
+      "current_line": 165,
+      "logical_line": 758,
+      "current": "#endif",
+      "original": "#endif"
+    }
+  ],
+  "initial_review": "Direct-child lookup is used by dlgmgr and _FindDlgItem. WOW compilation is original USER16 shared-source path, excluded for native control-client. Product generator selects this file with native control-client precomp.",
+  "counter_review": "Direct-child lookup must not gain recursive semantics or modern handle-table pointers. Detached conditionals originate inside omitted functions; matching directive text/line alone does not prove coherent owner structure. Source proof does not certify branch hits or actual diagnostic locations.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:480",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c:794,858",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c:770",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c:79-85",
+    "src/mvdm-host/wow32/wusercli.c:131",
+    "src/mvdm-host/wow32/wuhook.c:555",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:1028",
+    "src/wow32-dll/source/wow_user_borrow_scope.c:351"
+  ],
+  "limits": "Existing test source only; not rerun. No full eliminated API equivalence, expanded ABI or all-context preprocessing claim.",
+  "format_sites_restored": 2
+}

@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wsocktbl.h",
+  "original_sha256": "a16351b3392f882b17a406688cd03b27e3c9e58a358c14a75af925c2ee0923dc",
+  "current_sha256": "128f2f07c612caf322e7134a77d3f6f6a889e819d664f014f0ffd91511100c9a",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "extern INT iWinsockMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Complete comparison has only one original conditional body replaced; retained source exact.",
+  "limits": [
+    "No fixture execution or real spooler integration pass claimed.",
+    "Fixture models ClosePrinter ownership consumption on failure; real provider failure semantics and active-job cancellation are not established by these tests.",
+    "LF logical-line comparison is source-derived, not compiler verified."
+  ]
+}

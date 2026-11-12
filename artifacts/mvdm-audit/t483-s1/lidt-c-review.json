@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+  "original_sha256": "00305675f2235c4211471587a50a2f45c02bc93bc4faebcd857e4a96cc045fcb",
+  "current_sha256": "81462ebf2073e147232e34ca39a4b2f61a6b1a2a6f6b943c7b8d222ea79c8e66",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 42,
+      "original_count": 2,
+      "current_start": 42,
+      "current_count": 2
+    },
+    {
+      "original_start": 57,
+      "original_count": 2,
+      "current_start": 58,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete original/current textual difference inventory; all selected differences classified, exclusions separately recorded.",
+  "limits": "No functional remediation or fresh test; source necessity audit not all-context reachability certification."
+}

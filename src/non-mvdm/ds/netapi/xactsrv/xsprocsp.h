@@ -344,5 +344,3 @@ XsConvertServerEnumBuffer(
     );
 
 #endif // ndef _XSPROCSP_
-
-

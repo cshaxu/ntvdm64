@@ -364,4 +364,3 @@ NtQueryInformationPort(
 #line 357
 
 #endif  // _NTLPCAPI_
-

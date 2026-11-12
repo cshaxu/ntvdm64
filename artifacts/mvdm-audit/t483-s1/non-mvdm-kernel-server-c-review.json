@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "before_sha256": "fe20f5ad161583a82fd573e90d2f3305b63e253aba8231b8b0a1b0b6b6ed6728",
+  "current_sha256": "c037b36b1f76776d0c185a9c2c71f7613e4da8a2f794cd5599c1fd58052c336b",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_comparison": {
+    "InitWindowMsgTable": "exact",
+    "six_arrays": "selected contents exact after explicit literal-disabled/FE_IME removal; not compiler hit proof"
+  },
+  "evidence": [
+    "src/wow32-dll/source/wow_default_message_bindings.c",
+    "src/wow32-dll/include/wow_default_message_bindings.h",
+    "test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:609-610"
+  ],
+  "decisions": [
+    "Keep finite message-state facade and process heap allocation with HEAP_GENERATE_EXCEPTIONS. Original initializer assumes allocation success; production owner catches STATUS_NO_MEMORY and frees partial candidate tables before publishing. No shared kernel heap is recreated.",
+    "Dedicated production TU always defines WOW_ORIGINAL_DEFAULT_MESSAGES. Audit all test graph consumers, then remove unnecessary split selector wrappers around array fragments and matching build define as one group; retain actual original literal-disabled and FE_IME conditions. Do not leave arrays split by autonomous build policy.",
+    "Six retained message arrays match original selected content after explicit exclusion of literal #if0/FE_IME. Keep original membership and duplicates; native/default dispatch consumes these tables. No replacement membership algorithm.",
+    "Original maximum-message scan, allocation sizing, zeroing and bit population body exact. Product initializes seven table instances once, including separate combo-list membership from ListBox array. Keep algorithm and immutable publication.",
+    "Original InitMessageTables also initializes dialog, scrollbar, menu, desktop and static arrays. Current subset publishes only admitted five control slots plus default two tables. Trace all awmControl index consumers and original omitted wrapper/function tables before declaring remaining tables unnecessary; no native API equivalence by assumption.",
+    "PAGE_SIZE definition belongs to omitted shared-section allocator and has no retained use. Remove unused definition with subset structure reconciliation; no whole-file deletion.",
+    "Detached FE_IME/DEBUG/ANDREVA_DBG frames from omitted server globals/functions need original-owner placement. Retain real FE_IME/default-array and literal-disabled EDIT branch structures; reconcile logical lines without activating excluded startup code.",
+    "Omitted initialization combines message-box strings, OLE formats, font metrics/resource loading with private CSR/kernel USER creation, shared-section mapping and process/thread callouts. Private subsystem is an explicit stopping boundary, but separately reusable selected resource/format policies require caller mapping. Do not claim all omission equivalent to current host bootstrap.",
+    "Omitted class names/globals and pre-Button control tables require consumer mapping alongside current standard-class and control providers. Keep finite original membership where selected; do not import whole server initialization merely for symbol availability."
+  ],
+  "entries_added": 9,
+  "format_sites": 2,
+  "limits": [
+    "No fresh build/runtime.",
+    "Omitted table/resource consumer coverage pending."
+  ]
+}

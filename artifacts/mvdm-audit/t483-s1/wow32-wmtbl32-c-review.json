@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/wow32/wmtbl32.c",
+  "original_sha256": "8fb4f02963ceb0772e69749d703868273f942978fa6baf162e039065dd957bd6",
+  "current_sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 1321,
+      "original_count": 2,
+      "current_start": 1323,
+      "current_count": 1,
+      "original": [
+        "INT  iMsgMax  = NUMEL(aw32Msg);",
+        "PM32 paw32Msg = aw32Msg;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 1323,
+      "current": 1324,
+      "logical": 1322
+    }
+  ],
+  "evidence": "Full normalized diff only replaces original DEBUG or DEBUG_OR_WOWPROFILE bodies; retained dispatch table/prototypes/converter code exactly matches original.",
+  "limits": [
+    "No new build/runtime validation.",
+    "Exclusion-only classification does not certify all preprocessing contexts."
+  ]
+}

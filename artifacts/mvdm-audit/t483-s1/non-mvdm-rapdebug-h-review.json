@@ -1,0 +1,40 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+  "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+  "current_sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 53,
+      "original_count": 7,
+      "current_start": 55,
+      "current_count": 1,
+      "original": [
+        "",
+        "extern DWORD RappTrace;",
+        "",
+        "#define DEBUG if (TRUE)",
+        "",
+        "#define IF_DEBUG(Function) if (RappTrace & RAP_DEBUG_ ## Function)",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 60,
+      "current": 56,
+      "logical": 54
+    }
+  ],
+  "evidence": [
+    "src/non-mvdm/ds/netapi/rap/convert.c",
+    "src/non-mvdm/ds/netapi/rap/examine.c",
+    "src/non-mvdm/ds/netapi/netlib/time.c",
+    "src/compat/include/xactsrv_wksta_minimal.h"
+  ],
+  "limits": "All retained normalized source compared with original; no new build/runtime or complete include-context admission proof. Exclusion-only category does not certify diagnostic mapping."
+}

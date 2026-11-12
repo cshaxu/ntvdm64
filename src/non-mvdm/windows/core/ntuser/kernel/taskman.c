@@ -36,6 +36,13 @@ WakeWowTask(
 
 
 
+/***************************************************************************\
+* DirectedScheduleTask
+*
+* History:
+* 25-Jun-1992 mikeke    Created.
+\***************************************************************************/
+
 #line 574
 
 VOID DirectedScheduleTask(
@@ -130,6 +137,18 @@ VOID DirectedScheduleTask(
 
 /* DIVERGENCE(OPENNT-HOST-048): caller supplies original current process
  * explicitly; no fake PpiCurrent thread environment is constructed. */
+/***************************************************************************\
+* CurrentTaskLock
+*
+* Lock the current 16 bit task into the 16 bit scheduler
+*
+* Parameter:
+*   hlck    if NULL, lock the current 16 bit task and return a lock handle
+*           if valid lock handle, unlock the current task
+*
+* History:
+* 13-Apr-1992 jonpa      Created.
+\***************************************************************************/
 #line 728
 DWORD CurrentTaskLock(
     DWORD hlck,
@@ -157,6 +176,13 @@ DWORD CurrentTaskLock(
 #undef gpsi
 #define gpsi (ppi->shared)
 #define gpwtiFirst (ppi->shared->pwtiFirst)
+/***************************************************************************\
+* DestroyTask()
+*
+* History:
+* 02-27-91 MikeHar      Created.
+\***************************************************************************/
+
 #line 129
 void DestroyTask(
     PPROCESSINFO ppi,
@@ -247,6 +273,21 @@ void DestroyTask(
 
 /* DIVERGENCE(OPENNT-HOST-050): explicit current thread replaces PtiCurrent;
  * original wait/selection/message policy and UserYield ordering are retained. */
+/***************************************************************************\
+* xxxSleepTask
+*
+* This function puts this task to sleep and wakes the next (if any)
+* deserving task.
+*
+* BOOL   fInputIdle  - app is going idle, may do idle hooks
+* HANDLE hEvent      - if nonzero, WowExec's event (client side) for
+*                      virtual HW Interrupt HotPath.
+* History:
+* 02-27-91 MikeHar      Created.
+* 02-23-91 MattFe       rewrote
+* 12-17-93 Jonle        add wowexec hotpath for VirtualInterrupts
+\***************************************************************************/
+
 #line 234
 BOOL xxxSleepTask(
     BOOL   fInputIdle,
@@ -601,6 +642,13 @@ BOOL xxxUserYield(
  * thread lookup remains a required host operation under the USER lock. */
 #undef gpsi
 #define gpsi (ptiOld->ppi->shared)
+/***************************************************************************\
+* xxxDirectedYield
+*
+* History:
+* 09-17-92 JimA         Created.
+\***************************************************************************/
+
 #line 672
 void xxxDirectedYield(
     DWORD dwThreadId,
@@ -646,6 +694,21 @@ void xxxDirectedYield(
 
     xxxSleepTask(TRUE, NULL, ptiOld);
 }
+
+/***************************************************************************\
+* InsertTask
+*
+* This function removes a task from its old location and inserts
+* in the proper prioritized location
+*
+* Find a place for this task such that it must be inserted
+* after any task with greater or equal priority and must be
+* before any task with higher priorty.  The higher the priority
+* the less urgent the task.
+*
+* History:
+* 19-Nov-1993 mikeke    Created
+\***************************************************************************/
 
 #line 60
 void InsertTask(

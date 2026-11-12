@@ -1,0 +1,22 @@
+{
+  "path": "src/non-mvdm/base/win32/inc/base.h",
+  "original_sha256": "2df61cf7f17123235a340b6e802c4a998889db112cfd15399cec3cd107911cf7",
+  "current_sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 49,
+      "original_count": 1,
+      "current_start": 50,
+      "current_count": 1,
+      "original": [
+        "#define IF_DEBUG if (TRUE)"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "limits": "No new build/runtime or global configuration proof."
+}

@@ -1,0 +1,61 @@
+{
+  "path": "src/non-mvdm/base/win32/server/basesrv.h",
+  "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+  "current_sha256": "2f45f0da601a5fef3f73c8f7808b3c1bdb147501b205545dd1cc272306675625",
+  "changes": [
+    {
+      "original_start": 27,
+      "original_count": 0,
+      "current_start": 27,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(OPENNT-HOST-028): finite standalone VDM declaration binding.",
+        " * The original service translation unit and its algorithms are unchanged. */",
+        "#if defined(OPENNT_BASE_VDM_SERVER)",
+        "#include <base_server.h>",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Finite BaseSrv declaration binding supplies native types and authenticated request context. Actual native-service layout fixture asserts both local native layout and fixed wire widths. No CSR transport imported.",
+      "change_plan": "Keep one finite header owner. Forced include and explicit include are both present; audit earliest declaration use across original/export/test consumers before consolidating include delivery, rather than blindly removing one."
+    },
+    {
+      "original_start": 225,
+      "original_count": 1,
+      "current_start": 232,
+      "current_count": 3,
+      "original": [
+        "#include <ntdddfs.h>"
+      ],
+      "current": [
+        "#if !defined(OPENNT_BASE_VDM_SERVER)",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "simplify",
+      "necessity": "Selected VDM server has no DFS use; replacing ntdddfs.h with a newly invented negative-profile conditional adds a guard for an unsupported variant rather than preserving an original conditional.",
+      "change_plan": "Remove unused ntdddfs.h dependency and its invented negative-profile wrapper together; preserve original trailing position with #line if required. Do not add a stub DFS header or restore an unsupported server shell."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [
+    {
+      "original": 28,
+      "current": 34,
+      "logical": 34
+    },
+    {
+      "original": 29,
+      "current": 35,
+      "logical": 35
+    },
+    {
+      "original": 30,
+      "current": 36,
+      "logical": 36
+    }
+  ],
+  "limits": "No new build/runtime or global configuration proof."
+}

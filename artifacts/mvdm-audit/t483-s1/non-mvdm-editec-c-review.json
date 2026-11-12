@@ -1,0 +1,241 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+  "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+  "current_sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+  "excluded": [
+    {
+      "original_start": 310,
+      "original_count": 2,
+      "current_start": 312,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset)",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_SETMENU, GetSubMenu(hMenu,0));"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 351,
+      "original_count": 4,
+      "current_start": 355,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset) {",
+        "            if ((BOOL)(* ped->lpfnCharset)(ped,EDITINTL_PROCESSMENU,cmd))",
+        "                return ;",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 509,
+      "original_count": 8,
+      "current_start": 513,
+      "current_count": 1,
+      "original": [
+        "    else {",
+        "        //",
+        "        // Both MLGetLineWidth() and ECCchInWidth() should be clipping",
+        "        // nCount to avoid overflow.",
+        "        //",
+        "        if (nCount > MAXLINELENGTH)",
+        "            RIPMSG0(RIP_WARNING, \"ECTabTheTextOut: nCount > MAXLINELENGTH\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+      ]
+    },
+    {
+      "original_start": 1685,
+      "original_count": 3,
+      "current_start": 1685,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset) {",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_INSERTTEXT, 1);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1958,
+      "original_count": 2,
+      "current_start": 1959,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset)",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_INSERTTEXT, 2);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1966,
+      "original_count": 4,
+      "current_start": 1969,
+      "current_count": 1,
+      "original": [
+        "        // B#14640",
+        "        // We don't want to strip soft breaks or anything else from text",
+        "        // that was passed in by the caller. - karlst.",
+        "        MLStripCrCrLf(ped);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2033,
+      "original_count": 8,
+      "current_start": 2036,
+      "current_count": 1,
+      "original": [
+        "// win3.1 does limit single line edit controls to 32K (minus 3) but NT doesn't",
+        "",
+        "        if (ped->fSingle) {",
+        "            /*",
+        "             * Limit single line edit controls to 32K",
+        "             */",
+        "            cchLength = min(cchLength, (ICH)(0x7FFD/ped->cbChar));",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2331,
+      "original_count": 9,
+      "current_start": 2330,
+      "current_count": 1,
+      "original": [
+        "    case WM_STYLECHANGED:",
+        "    case WM_STYLECHANGING:",
+        "        if (!ped) {",
+        "            break;",
+        "        }",
+        "        if (ped->lpfnCharset) {",
+        "            return (*ped->lpfnCharset)(ped, EDITINTL_STYLECHANGE,",
+        "                    message, wParam, lParam);",
+        "        } else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2346,
+      "original_count": 9,
+      "current_start": 2340,
+      "current_count": 1,
+      "original": [
+        "    case WM_INPUTLANGCHANGEREQUEST:  // must add this msg to server.c gawEditWndProc[]",
+        "        if (!ped) {",
+        "            break;",
+        "        }",
+        "",
+        "        if (ped->lpfnCharset) {",
+        "            return (*ped->lpfnCharset)(ped,EDITINTL_INPUTLANGREQ, lParam);",
+        "        }",
+        "        break;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2359,
+      "original_count": 3,
+      "current_start": 2348,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset) {",
+        "            return (* ped->lpfnCharset)(ped, EDITINTL_INPUTLANGCHNG, wParam, lParam);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "original_start": 2906,
+      "original_count": 1,
+      "current_start": 2894,
+      "current_count": 2,
+      "original": [
+        "        return (HBRUSH)DefWindowProcWorker(pwndSend, message,"
+      ],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-103): bounded host-default color adapter. */",
+        "        return (HBRUSH)wow_edit_default_control_color(pwndSend, message,"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 313,
+      "original": 312,
+      "logical": 311
+    },
+    {
+      "current": 356,
+      "original": 355,
+      "logical": 352
+    },
+    {
+      "current": 514,
+      "original": 517,
+      "logical": 510
+    },
+    {
+      "current": 1686,
+      "original": 1688,
+      "logical": 1686
+    },
+    {
+      "current": 1960,
+      "original": 1960,
+      "logical": 1959
+    },
+    {
+      "current": 1970,
+      "original": 1970,
+      "logical": 1967
+    },
+    {
+      "current": 2037,
+      "original": 2041,
+      "logical": 2034
+    },
+    {
+      "current": 2331,
+      "original": 2340,
+      "logical": 2332
+    },
+    {
+      "current": 2341,
+      "original": 2355,
+      "logical": 2347
+    },
+    {
+      "current": 2349,
+      "original": 2362,
+      "logical": 2360
+    }
+  ],
+  "initial_review": "Complete normalized comparison: 10 original conditional bodies replaced by #error with surrounding boundaries retained; one ECGetControlBrush call adaptation.",
+  "counter_review": "Exclusion-only source classification is not proof of all supported branch hits. Diagnostic closing-boundary offsets are separately registered; no algorithm change inferred from those offsets. PWND-to-HWND native fallback is call-specific; restoring the original call name must not reinterpret other LPARAM contracts.",
+  "evidence": "Pinned OpenNT editec.c; tools/build/New-T404S5Wow32ProviderNinja.ps1 EDIT controlBody cohort",
+  "limits": "Source audit only, no build/test or refreshed macro-hit claim. No source changes this batch.",
+  "adapter_evidence": "Known creation facts preserve original worker; only WM_CTLCOLORSTATIC + ERROR_NOT_FOUND falls back to native after exact recipient and source borrows and PWND-to-HWND conversion. Other errors propagate. Fixture covers known/absent facts, source/recipient rejection, failure and exception; not complete real cross-thread behavior."
+}

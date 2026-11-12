@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/dos/dem/demioctl.c",
+  "original_sha256": "6f480bf758d071b1fd2f76a137f892b77d1ea8d2d8ffb4690d395aedf5f733fa",
+  "current_sha256": "6c0db6e312ca2800614fb9b9068a9c39a6ffca7531e1aaab00d64f95b35c4ddd",
+  "review_complete": true,
+  "nonexcluded_differences": 0,
+  "dbg_groups": 1,
+  "initial_review": "Only DBG bounds guard and diagnostic line scaffolding differ.",
+  "counter_review": "Guard rejects out-of-range IOCTL indexes, but was DBG-only in original. Release dispatch behavior is unchanged, not a removed release check.",
+  "verification": "Exact source-line projection equality outside DBG/#line; no new compiler or runtime claim."
+}

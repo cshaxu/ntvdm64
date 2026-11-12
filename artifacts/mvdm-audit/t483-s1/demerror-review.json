@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/dos/dem/demerror.c",
+  "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+  "current_sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+  "review_complete": true,
+  "nonexcluded_differences": 0,
+  "dbg_groups": 4,
+  "initial_review": "Four DBG groups replaced; no selected error/retry algorithm edits.",
+  "counter_review": "First excluded group contains an actual invalid-SVC guard as well as diagnostics, but the entire guard was DBG-only in original. Do not claim a removed release-path validation. All lines outside DBG groups and #line match exactly.",
+  "verification": "Source projection only; not new runtime or compiler evidence."
+}

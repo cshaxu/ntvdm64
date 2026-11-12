@@ -78,5 +78,3 @@ Revision History:
 #define REMSmb_NetUnsupportedApi_P NULL
 
 #endif // ndef _XSCONST_
-
-

@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+  "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+  "current_sha256": "f647f9b957beee5591d0693bcbeb8130f0064d684441c8ed4d28151bed652828",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 36,
+      "original_end": 36,
+      "current_error_line": 37
+    },
+    {
+      "original_start": 227,
+      "original_end": 236,
+      "current_error_line": 230
+    },
+    {
+      "original_start": 254,
+      "original_end": 255,
+      "current_error_line": 251
+    },
+    {
+      "original_start": 262,
+      "original_end": 264,
+      "current_error_line": 261
+    },
+    {
+      "original_start": 326,
+      "original_end": 327,
+      "current_error_line": 325
+    },
+    {
+      "original_start": 334,
+      "original_end": 336,
+      "current_error_line": 335
+    },
+    {
+      "original_start": 401,
+      "original_end": 402,
+      "current_error_line": 402
+    },
+    {
+      "original_start": 457,
+      "original_end": 459,
+      "current_error_line": 460
+    },
+    {
+      "original_start": 488,
+      "original_end": 497,
+      "current_error_line": 491
+    },
+    {
+      "original_start": 500,
+      "original_end": 504,
+      "current_error_line": 496
+    },
+    {
+      "original_start": 513,
+      "original_end": 513,
+      "current_error_line": 508
+    }
+  ],
+  "initial_review": "All removed bodies correspond to preserved original branch boundaries; remaining nonblank non-line text equals original.",
+  "counter_review": "No register accessor, interrupt delivery, privilege or stack algorithm changed outside excluded branch bodies. Do not treat this file as a new host-monitor implementation.",
+  "limits": "Text and branch-boundary proof; not new all-profile preprocessing, complete #line validation or runtime acceptance."
+}

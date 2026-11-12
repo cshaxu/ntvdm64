@@ -1,0 +1,107 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmi32.c",
+  "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+  "current_sha256": "bf3be6bf101d602980439845f1898e6b2b729cc2ae2acfcf1656d8d278ea5dce",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 26,
+      "original_count": 0,
+      "current_start": 26,
+      "current_count": 5,
+      "classification": "selected-adaptation"
+    },
+    {
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 34,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 101,
+      "original_count": 0,
+      "current_start": 107,
+      "current_count": 1,
+      "classification": "selected-adaptation"
+    },
+    {
+      "original_start": 102,
+      "original_count": 0,
+      "current_start": 109,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 103,
+      "original_count": 0,
+      "current_start": 111,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 104,
+      "original_count": 1,
+      "current_start": 113,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 106,
+      "original_count": 0,
+      "current_start": 116,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 247,
+      "original_count": 0,
+      "current_start": 258,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 248,
+      "original_count": 4,
+      "current_start": 260,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 253,
+      "original_count": 0,
+      "current_start": 263,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 289,
+      "original_count": 0,
+      "current_start": 300,
+      "current_count": 1,
+      "classification": "diagnostic-line"
+    },
+    {
+      "original_start": 297,
+      "original_count": 0,
+      "current_start": 309,
+      "current_count": 42,
+      "classification": "selected-adaptation"
+    }
+  ],
+  "initial_review": "All 12 lexical differences reviewed; DBG and kernel i386 exclusions separate from selected CPU40 additions.",
+  "counter_review": "Preserve descriptor-domain separation; remove three trace calls and header dependency; reconcile actual VOID accessor signature. Allocation failure return does not tell original guest that table publication failed.",
+  "dependencies": [
+    "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+    "src/mvdm-host/dpmi32/dpmiselr.c",
+    "src/mvdm-guest/dpmi/dxboot.asm"
+  ],
+  "limits": [
+    "No new runtime/build tests.",
+    "Allocation failure and repeated initialization equivalence not fully validated.",
+    "Substantive recommendations not implemented.",
+    "Generated declaration differs from implementation; do not repair only one declaration or change CCPU API speculatively."
+  ]
+}

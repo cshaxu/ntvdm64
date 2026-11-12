@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wstbl.h",
+  "original_sha256": "e05abe8a2fb397e299aba997e1928c3f74e00eecb23277b4c1c60f66480d439a",
+  "current_sha256": "8b83f7ee7f034df24996a7bc16874d5371b4186b07daf4daae8e6bac129cc136",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "extern INT iSoundMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Only original profiling declaration excluded; all retained text matches.",
+  "limits": [
+    "No tests run.",
+    "Source comparison is not all-context branch or compiler-line certification.",
+    "COPYDATA caller lifetime proof remains pending, not declared a bug or fully verified fix."
+  ]
+}

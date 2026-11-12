@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/inc/vrnmpipe.h",
+  "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+  "current_sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+  "review_complete": true,
+  "register_entries": 3,
+  "initial_review": [
+    "Store far guest addresses rather than persistent flat host pointers.",
+    "Comment claims state never enters adapter ABI, but shared async API carries request across DLL/worker boundary.",
+    "Opaque per-request state owns staging and session/epoch used by async completion."
+  ],
+  "counter_review": [
+    "Reverting LPWORD reintroduces leases surviving asynchronous I/O; same x86 field width does not make address domains interchangeable.",
+    "Comment correction must not create a token broker or second registry merely to satisfy inaccurate wording.",
+    "Observed release paths clear pointer and free staging; epoch check alone does not prove raw owner pointer cannot outlive allocation."
+  ],
+  "pending": [
+    "Owner allocation lifetime guarantee and synchronization across original async worker, session retirement and interrupt cleanup."
+  ],
+  "excluded": "DBG RequestType arm and line scaffolding separately classified.",
+  "runtime_validation": "None; header source unchanged."
+}

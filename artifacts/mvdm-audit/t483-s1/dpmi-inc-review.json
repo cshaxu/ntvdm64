@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/inc/dpmi.h",
+  "original_sha256": "3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154",
+  "current_sha256": "a56f3292d2d42a7e3feeb060f8ab106ed119f5674e5a30548c1d36a3d8233008",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "replace",
+      "original_start": 69,
+      "original_count": 3,
+      "current_start": 69,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 73,
+      "original_count": 0,
+      "current_start": 72,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 77,
+      "original_count": 0,
+      "current_start": 77,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "Original DBG branch removed behind unchanged condition; release DBGTRACE remains exactly original.",
+  "counter_review": "No change to selected macro semantics; original debug implementation is not a selected runtime repair target.",
+  "runtime_validation": "Source/build-graph review only; no runtime pass claimed.",
+  "disposition": "retain exclusion-only"
+}

@@ -1,0 +1,203 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+  "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+  "current_sha256": "7fbbcb04f579717b581c4153e88caa82190b98f4e894af9f9720998561f6e282",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 7,
+      "original_count": 1,
+      "current_start": 8,
+      "current_count": 1,
+      "original": [
+        "#include \"nt_hunt.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 15,
+      "original_count": 7,
+      "current_start": 18,
+      "current_count": 1,
+      "original": [
+        "    va_list ap;",
+        "    char buf[500];",
+        "",
+        "    va_start(ap,str);",
+        "    vsprintf(buf, str, ap);",
+        "    OutputString(buf);",
+        "    va_end(ap);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 33,
+      "original_count": 31,
+      "current_start": 32,
+      "current_count": 1,
+      "original": [
+        "    char StrSizeStr[2];",
+        "    int  StrSize;",
+        "    DWORD BytesWritten;",
+        "",
+        "    /*............................................ Connect to debug pipe */",
+        "",
+        "    if(pipe == NULL && getenv(\"PIPE\") != NULL)",
+        "    {",
+        "        pipe = CreateFile(getenv(\"PIPE\"),GENERIC_READ | GENERIC_WRITE,",
+        "                          FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,",
+        "                          OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,",
+        "                          NULL);",
+        "",
+        "        if(pipe == (HANDLE) -1)",
+        "            OutputDebugString(\"ntvdm : Failed to connect to debug pipe\\n\");",
+        "    }",
+        "",
+        "    /*.................................................... Output string */",
+        "",
+        "    if(pipe != NULL && pipe != (HANDLE) -1)",
+        "    {",
+        "        StrSize = strlen(str);",
+        "        StrSizeStr[0] = (char) (StrSize % 256);",
+        "        StrSizeStr[1] = (char) (StrSize / 256);",
+        "",
+        "        WriteFile(pipe, StrSizeStr, 2, &BytesWritten, NULL);",
+        "        WriteFile(pipe, str, StrSize, &BytesWritten, NULL);",
+        "    }",
+        "    else",
+        "        OutputDebugString(str);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 66,
+      "original_count": 2,
+      "current_start": 37,
+      "current_count": 1,
+      "original": [
+        "    if (TrapperDump != (HANDLE) -1)",
+        "        WriteFile(TrapperDump, str, strlen(str), &BytesWritten, NULL);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 79,
+      "original_count": 60,
+      "current_start": 51,
+      "current_count": 1,
+      "original": [
+        "",
+        "    char input_request[2];",
+        "    DWORD BytesWritten, BytesRead;",
+        "    int StringSize;",
+        "    UNALIGNED DWORD *addsig;",
+        "    char *inorout;",
+        "    IMPORT ULONG DbgPrompt(char *, char *, ULONG);",
+        "",
+        "    if(pipe != NULL && pipe != (HANDLE) -1)",
+        "    {",
+        "        input_request[0] = (char)0xff; input_request[1] = (char)0xff;",
+        "        WriteFile(pipe, input_request, 2, &BytesWritten, NULL);",
+        "",
+        "        ReadFile(pipe, str, 2, &BytesRead, NULL);",
+        "        StringSize = (str[0]&0xff) + ((str[1]&0xff)*256);",
+        "",
+        "        if(StringSize >= len)",
+        "            OutputDebugString(\"ntvdm : PIPE BUFFER OVERFLOW [FATAL]\\n\");",
+        "",
+        "        ReadFile(pipe, str, StringSize, &BytesRead, NULL);",
+        "    }",
+        "    else",
+        "    {",
+        "/* ",
+        "    We used to do this...",
+        "        DbgPrompt(\"\",str,len);",
+        "    but foozle dust now does this...",
+        "",
+        "    Call OutputDebugString with the following:",
+        "",
+        "     \"Message\" | 0xdefaced | len | inBuffer",
+        "",
+        "where \"Message\" is printed",
+        "      0xdefaced is a magic (DWORD) signature",
+        "      len is a byte length of,,,",
+        "      inBuffer which the reply to 'Message will appear in.",
+        "*/",
+        "        /* do this so we can add prompt passing if we wish */",
+        "        StringSize = strlen(\"\") + 1;",
+        "\tinorout = malloc(len + StringSize + 5);",
+        "        if (!inorout)",
+        "        {",
+        "            printf(\"\\nmemory allocation failure - getting input via kd\\n\");",
+        "            DbgPrompt(\"NTVDM>> \", str, len);",
+        "            return;",
+        "        }",
+        "\tstrcpy(inorout, \"\");",
+        "\taddsig = (PDWORD)&inorout[StringSize];",
+        "\t*addsig = INPUT_API_SIG;",
+        "\t*(inorout + StringSize+4) = (BYTE)len;",
+        "        *(inorout + StringSize+5) = (BYTE)0xff; // success flag",
+        "        OutputDebugString(inorout);",
+        "        // check for no debugger or debugger that can't speak foozle",
+        "        if (*(inorout + StringSize + 5) == 0xff)",
+        "            DbgPrompt(\"\", str, len);",
+        "        else",
+        "\t    strcpy(str, inorout + StringSize + 5);",
+        "        free(inorout);",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 147,
+      "original_count": 10,
+      "current_start": 62,
+      "current_count": 1,
+      "original": [
+        "    va_list ap;",
+        "    char buf[500];",
+        "",
+        "    if (getenv(\"TRACE\") == NULL)        //JonLu request to limit debugs",
+        "        return(0);",
+        "",
+        "    va_start(ap,str);",
+        "    vsprintf(buf, str, ap);",
+        "    va_end(ap);",
+        "    OutputString(buf);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 229,
+      "original_count": 1,
+      "current_start": 137,
+      "current_count": 1,
+      "original": [
+        "    OutputString((char *)buf);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Seven excluded bodies only: two HUNTER and five non-PROD; all retained source matches original.",
+  "counter_review": "Complete comparison proves debug pipe output/input, printf/fprintf diagnostics and fwrite logging removals are bounded by original HUNTER/non-PROD conditions. Remaining CRT-like wrappers, including fwrite buffer mutation, are inherited original code, not local functional changes; do not expand this diff-only review into unrelated original-internal repair.",
+  "evidence": "Full original/current source comparison; every changed body is bounded by original conditional directives. New-T310OriginalSoftpcNinja.ps1 baseCommonFlags selects CPU_40_STYLE/CCPU/PROD; target-specific overrides still require their own applicability evidence.",
+  "limits": "No new build/runtime result or universal configuration-hit proof. Original boundary comparison proves exclusion-only content, not diagnostic-line certification or product link reachability."
+}

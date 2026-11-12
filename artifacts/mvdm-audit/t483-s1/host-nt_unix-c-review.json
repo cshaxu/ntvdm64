@@ -1,0 +1,215 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+  "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+  "before_sha256": "6937966cf58120b3c40caf0f822abf7d7703112a35dc2d337e9517f9d69c5a02",
+  "current_sha256": "0515c189d0c17a8811ef96fbb1aca0fc49fc93c5c11e08d1af881a9bad2c557b",
+  "review_complete": true,
+  "register_entries": 8,
+  "changes": [
+    {
+      "original_start": 16,
+      "original_count": 0,
+      "current_start": 16,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"mvdm_softpc_firmware.h\""
+      ]
+    },
+    {
+      "original_start": 43,
+      "original_count": 4,
+      "current_start": 45,
+      "current_count": 0,
+      "original": [
+        "extern  char    *_sys_errlist[];",
+        "extern  int     _sys_nerr;",
+        "",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 69,
+      "original_count": 0,
+      "current_start": 68,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "const char *message;"
+      ]
+    },
+    {
+      "original_start": 70,
+      "original_count": 8,
+      "current_start": 70,
+      "current_count": 9,
+      "original": [
+        "if (error > (DWORD)_sys_nerr)",
+        "   {",
+        "   sprintf(buf, \"System error %d occurred in %s (line %d)\",",
+        "\t\t error, filename, line);",
+        "   return(buf);",
+        "   }",
+        "else",
+        "   return(_sys_errlist[error]);"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-033): the NT4 CRT exported _sys_errlist and",
+        " * _sys_nerr.  Modern UCRT no longer exposes that storage.  Keep this source",
+        " * function's same char* error-text contract through its public successor. */",
+        "message = strerror((int)error);",
+        "if (message != NULL)",
+        "   return((LPSTR)message);",
+        "sprintf(buf, \"System error %d occurred in %s (line %d)\",",
+        "\t error, filename, line);",
+        "return(buf);"
+      ]
+    },
+    {
+      "original_start": 173,
+      "original_count": 2,
+      "current_start": 178,
+      "current_count": 10,
+      "original": [
+        "    if (NowWaiting)                  // critical path do inline....",
+        "\tPulseEvent(IdleEvent);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-208): NT4 used PulseEvent only while the",
+        "     * original CPU thread was observed waiting.  PulseEvent is explicitly",
+        "     * unreliable on current Win32: an activity notification in the small",
+        "     * interval before NowWaiting becomes visible is lost, leaving the CPU",
+        "     * asleep despite IdleNoActivity having been cleared.  IdleEvent was",
+        "     * already created as the source's auto-reset event.  SetEvent preserves",
+        "     * the same one-waiter wake contract, while retaining one pending wake",
+        "     * until the CPU reaches its next original WaitForSingleObject call. */",
+        "    if (IdleEvent != NULL)",
+        "\tSetEvent(IdleEvent);"
+      ]
+    },
+    {
+      "original_start": 185,
+      "original_count": 0,
+      "current_start": 199,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DWORD wait_result;"
+      ]
+    },
+    {
+      "original_start": 217,
+      "original_count": 1,
+      "current_start": 233,
+      "current_count": 2,
+      "original": [
+        "    if (WaitForSingleObject(IdleEvent, idletime) == WAIT_FAILED) {"
+      ],
+      "current": [
+        "    wait_result = WaitForSingleObject(IdleEvent, idletime);",
+        "    if (wait_result == WAIT_FAILED) {"
+      ]
+    },
+    {
+      "original_start": 374,
+      "original_count": 30,
+      "current_start": 373,
+      "current_count": 7,
+      "original": [
+        "    char buffer[MAXPATHLEN];",
+        "    WIN32_FIND_DATA match;",
+        "    HANDLE gotit;",
+        "    static char sysdir[MAX_PATH];",
+        "    static int first = 1;",
+        "",
+        "    if (first)",
+        "    {",
+        "\tfirst = 0;",
+        "\tif (GetSystemDirectory(sysdir, MAXPATHLEN) == 0)",
+        "\t{",
+        "\t    sysdir[0] = '\\0';",
+        "\t    host_error(EG_SYS_MISSING_FILE, ERR_QUIT, file);",
+        "\t    return(NULL);",
+        "\t}",
+        "    }",
+        "",
+        "    if (sysdir[0] != '\\0')",
+        "    {",
+        "\tstrcpy(buffer, sysdir);",
+        "\tstrcat(buffer, \"\\\\\");",
+        "\tstrcat(buffer, file);",
+        "    }",
+        "",
+        "    if ((gotit = FindFirstFile(buffer, &match)) != (HANDLE)-1)",
+        "    {",
+        "\tFindClose(gotit);       // should check (BOOL) return & then ??",
+        "\tstrcpy(full_path, buffer);",
+        "\treturn (full_path);",
+        "    }"
+      ],
+      "current": [
+        "    /* DIVERGENCE: the NT4 system-directory resource assumption is not a",
+        "     * portable product boundary.  Preserve this original function's name,",
+        "     * parameters and host_error failure ordering; source the selected immutable",
+        "     * firmware directory from the currently bound session through the named",
+        "     * SoftPC adapter.  See MVDM-HOST-DIV-037. */",
+        "    if (mvdm_softpc_firmware_find_file(file, full_path, MAXPATHLEN))",
+        "        return(full_path);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 97,
+      "original_count": 2,
+      "current_start": 102,
+      "current_count": 1,
+      "original": [
+        "    if (IdleEvent == NULL)",
+        "\tprintf(\"NTVDM:Idlling Event creation failed. Err %d\\n\",GetLastError());"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 318,
+      "original_count": 24,
+      "current_start": 339,
+      "current_count": 1,
+      "original": [
+        "/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+        " * Host-specific equivalent of the Unix function localtime().",
+        " ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "",
+        "struct host_tm *host_localtime(clock)",
+        "long *clock;",
+        "{",
+        "    SYSTEMTIME now;",
+        "    SAVED struct host_tm host_now;",
+        "",
+        "    UNUSED(clock);",
+        "    GetLocalTime(&now);",
+        "    host_now.tm_sec = (int) now.wSecond;",
+        "    host_now.tm_min = (int) now.wMinute;",
+        "    host_now.tm_hour = (int) now.wHour;",
+        "    host_now.tm_mday = (int) now.wDay;",
+        "    host_now.tm_mon = (int) now.wMonth - 1;    // Unix has 0 based months,NT 1",
+        "    host_now.tm_year = (int) now.wYear;",
+        "    host_now.tm_wday = (int) now.wDayOfWeek;",
+        "",
+        "    host_now.tm_yday = (int) 0;     // the base doesn't require these.",
+        "    host_now.tm_isdst = (int) 0;",
+        "    return(&host_now);",
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Eight non-exclusion hunks: four retain, two simplify, two pending evidence.",
+  "counter_review": "Trace firmware failure distinction and unknown errno fallback; preserve bounded pending wake semantics. Wait temporary removable. One blank restored; no functional change.",
+  "limits": "Source review only; no functional remediation or new test pass."
+}

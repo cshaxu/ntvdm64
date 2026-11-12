@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+  "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+  "current_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 94,
+      "original_count": 5,
+      "current_start": 95,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define NEXT_LOCATION(base,type,byteCount)  \\",
+        "        (PVOID)(( (ULONG)( (PUCHAR)( &((type *)(base))->Buffer[0] ) ) + \\",
+        "        (byteCount) + 3) & ~3)",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 99,
+      "current": 96,
+      "logical": 95
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "test/mvdm-host/vdmredir/server_enum_test.c"
+  ],
+  "limits": "Complete retained-text comparison: original selected definitions unchanged. Bytewise/debug SMB and AMD64 alignment exclusions are not certified for every build context here. Native service x64 support does not imply these selected x86 Redirector headers support x64. No new compile/runtime."
+}

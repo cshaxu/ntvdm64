@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+  "original_sha256": "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+  "current_sha256": "fa65bdaae3f07dce263ff3c2307a51bd0520a4d3e1132860f86913562a4058fc",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 42,
+      "original_count": 3282
+    }
+  ],
+  "initial_review": "Complete original/current comparison; one excluded PIG or PROFILE body only.",
+  "counter_review": "Remaining nonblank source matches original exactly after excluding the complete body and line/error directives. profile.c non-PROFILE empty functions are original definitions, not project-added success stubs.",
+  "limits": "Necessity classification only; no universal profile-selection proof or diagnostic-line certification. No runtime test performed."
+}

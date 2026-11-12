@@ -1,0 +1,76 @@
+{
+  "path": "src/mvdm-host/inc/mvdm.h",
+  "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+  "current_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+  "review_complete": true,
+  "register_entries": 1,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 22,
+      "original_count": 0,
+      "current_start": 22,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 23,
+      "original_count": 12,
+      "current_start": 24,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 27,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 68,
+      "original_count": 0,
+      "current_start": 60,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 69,
+      "original_count": 1,
+      "current_start": 62,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 71,
+      "original_count": 0,
+      "current_start": 65,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 73,
+      "original_count": 1,
+      "current_start": 68,
+      "current_count": 7
+    },
+    {
+      "kind": "replace",
+      "original_start": 79,
+      "original_count": 4,
+      "current_start": 80,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 84,
+      "original_count": 0,
+      "current_start": 83,
+      "current_count": 2
+    }
+  ],
+  "initial_review": "Modern MSVC x86 _M_IX86 selects the byte-identical original x86 FETCH/STORE definitions without globally enabling historical i386.",
+  "counter_review": "Defining i386 globally would also select excluded kernel-VDM code. Using original UNALIGNED fallback instead is not proved superior and changes selected macro expressions. The retained x86 definitions are not a new accessor algorithm.",
+  "excluded": "H2INC typedefs, absent SDK MAKEWORD fallback, historical i386 and non-x86 access alternatives; line scaffolding kept.",
+  "runtime_validation": "None; source unchanged."
+}

@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_qev.h",
+      "sha256": "615b5fd2935a485aff2120a5455ceb558ab4c6baeb4806570d12eedc682980b5",
+      "bytes": 31
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_trc.h",
+      "sha256": "81c80fa61476745303c3cc7753c85ca876f2b33e269aca8d96db779135f7791f",
+      "bytes": 872
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostsync.h",
+      "sha256": "5a5a76337928c44407fecda48514ae50d18198ee1c7cef41f5c8fac9ead4329b",
+      "bytes": 583
+    }
+  ],
+  "limits": "Previously counted among471 exact files; no increment."
+}

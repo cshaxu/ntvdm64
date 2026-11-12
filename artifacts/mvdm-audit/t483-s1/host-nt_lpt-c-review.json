@@ -1,0 +1,210 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+  "original_sha256": "fba617ebdccda8f0cfae4541338d463352e7de3a3e97c3dcf7804fa7eed67ae8",
+  "current_sha256": "31d6e8c24e099ba16b2bc20b64e4bf3ce976f11a713177b3ba3fe3a790c2c73f",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 75,
+      "original_count": 0,
+      "current_start": 75,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "original_start": 372,
+      "original_count": 0,
+      "current_start": 383,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_setup_hardware_probe(\"lpt-status-enter\", (unsigned long)adapter, 0ul);"
+      ]
+    },
+    {
+      "original_start": 387,
+      "original_count": 0,
+      "current_start": 402,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_setup_hardware_probe(\"lpt-status-ioctl-enter\", (unsigned long)adapter, 0ul);"
+      ]
+    },
+    {
+      "original_start": 405,
+      "original_count": 0,
+      "current_start": 422,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_setup_hardware_probe(\"lpt-status-ioctl-leave\", (unsigned long)adapter,",
+        "        (unsigned long)PrinterStatus);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 76,
+      "original_count": 1,
+      "current_start": 78,
+      "current_count": 1,
+      "original": [
+        "#include \"trace.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 105,
+      "original_count": 4,
+      "current_start": 110,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define get_lpt_status(adap)\t\t(host_lpt[(adap)].port_status)",
+        "#define set_lpt_status(adap,val)\t(host_lpt[(adap)].port_status = (val))",
+        ""
+      ],
+      "current": [
+        "#error Non-MONITOR printer status provider is not supported"
+      ]
+    },
+    {
+      "original_start": 218,
+      "original_count": 1,
+      "current_start": 222,
+      "current_count": 1,
+      "original": [
+        "    fprintf(trace_file, \"Opening printer port %s (%d)\\n\",lptName,adapter);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 249,
+      "original_count": 1,
+      "current_start": 255,
+      "current_count": 1,
+      "original": [
+        "\tfprintf(trace_file, \"Failed to open printer port\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 335,
+      "original_count": 1,
+      "current_start": 343,
+      "current_count": 1,
+      "original": [
+        "\tfprintf(trace_file, \"Closing printer port (%d)\\n\",adapter);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 350,
+      "original_count": 1,
+      "current_start": 360,
+      "current_count": 1,
+      "original": [
+        "        fprintf(trace_file, \"Counter expired, closing LPT%d\\n\", adapter+1);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 379,
+      "original_count": 1,
+      "current_start": 393,
+      "current_count": 1,
+      "original": [
+        "\t    fprintf(trace_file, \"file open error %d\\n\", GetLastError());"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 398,
+      "original_count": 4,
+      "current_start": 416,
+      "current_count": 1,
+      "original": [
+        "       fprintf(trace_file,",
+        "               \"host_read_printer_status_port failed, error = %ld\\n\",",
+        "               GetLastError()",
+        "               );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 467,
+      "original_count": 1,
+      "current_start": 488,
+      "current_count": 1,
+      "original": [
+        "\t\tfprintf(trace_file, \"lpt write error %d\\n\", GetLastError());"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 523,
+      "original_count": 1,
+      "current_start": 546,
+      "current_count": 1,
+      "original": [
+        "\t    fprintf(trace_file, \"file open error %d\\n\", GetLastError());"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 588,
+      "original_count": 6,
+      "current_start": 614,
+      "current_count": 1,
+      "original": [
+        "GLOBAL boolean host_print_doc(int adapter)",
+        "{",
+        "    if(host_lpt[adapter].active) host_lpt_close(adapter);\t    /* Close printer port */",
+        "",
+        "    return(TRUE);",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 638,
+      "original_count": 1,
+      "current_start": 661,
+      "current_count": 1,
+      "original": [
+        "\t    fprintf(trace_file, \"file open error %d\\n\", GetLastError());"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete diff has four diagnostic-only insertions and twelve original excluded bodies; printer open/flush/IOCTL/status result otherwise original.",
+  "counter_review": "Trace provider restores GetLastError and only writes optional bounded log. Removing LPT callsites does not authorize deleting shared provider still used by nt_com/nt_bop/keybd_io/BIOS. No new printer correctness defect inferred from old unchanged implementation.",
+  "limits": "Classification complete, not functional remediation; source unchanged."
+}

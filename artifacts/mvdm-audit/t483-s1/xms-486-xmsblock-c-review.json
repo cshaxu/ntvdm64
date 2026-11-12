@@ -1,0 +1,798 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsblock.c",
+  "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+  "current_sha256": "37f752a43f5991315ce9eea8d706117b060736fe68dc69098215b81e71e5a1a3",
+  "changes": [
+    {
+      "original_start": 15,
+      "original_count": 0,
+      "current_start": 15,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#include \"mvdm_xms_memory.h\"",
+        "#include \"mvdm_softpc_guest_memory.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Zero-size allocation previously returned uninitialized BaseAddress; unchanged-size realloc previously returned uninitialized NewAddress. Initialize from original XMSInit pool base or caller existing base. New headers declare live mapped-memory seams.",
+      "change_plan": "Retain bounded initialization and declarations; preserve original SubAlloc policy. Existing xms_block_boundary fixture uses production body and original allocator; move functions are explicitly not covered there."
+    },
+    {
+      "original_start": 38,
+      "original_count": 1,
+      "current_start": 41,
+      "current_count": 3,
+      "original": [
+        "ULONG BaseAddress;"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-887): zero length owns no storage; use the",
+        " * original XMSInit pool base, not an uninitialized address for later resize. */",
+        "ULONG BaseAddress = 1024 * 1024 + 64 * 1024;"
+      ],
+      "decision": "retain",
+      "necessity": "Zero-size allocation previously returned uninitialized BaseAddress; unchanged-size realloc previously returned uninitialized NewAddress. Initialize from original XMSInit pool base or caller existing base. New headers declare live mapped-memory seams.",
+      "change_plan": "Retain bounded initialization and declarations; preserve original SubAlloc policy. Existing xms_block_boundary fixture uses production body and original allocator; move functions are explicitly not covered there."
+    },
+    {
+      "original_start": 130,
+      "original_count": 0,
+      "current_start": 135,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-887): unchanged size retains the original base. */",
+        "    NewAddress = BaseAddress;"
+      ],
+      "decision": "retain",
+      "necessity": "Zero-size allocation previously returned uninitialized BaseAddress; unchanged-size realloc previously returned uninitialized NewAddress. Initialize from original XMSInit pool base or caller existing base. New headers declare live mapped-memory seams.",
+      "change_plan": "Retain bounded initialization and declarations; preserve original SubAlloc policy. Existing xms_block_boundary fixture uses production body and original allocator; move functions are explicitly not covered there."
+    },
+    {
+      "original_start": 179,
+      "original_count": 2,
+      "current_start": 186,
+      "current_count": 4,
+      "original": [
+        "PBYTE\tpExtMoveInfo,pSrc,pDst;",
+        "ULONG\tcbTransfer,SoftpcBase, DstSegOff;"
+      ],
+      "current": [
+        "PBYTE pExtMoveInfo,pSrc,pDst;",
+        "ULONG cbTransfer,SoftpcBase, DstSegOff;",
+        "UCHAR MoveInfo[12];",
+        "ULONG MoveInfoAddress;"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original XMS policy remains but raw host-pointer copy is replaced with guest-memory access. xmsMoveBlock uses a 12-byte descriptor below SS:BP and forward-copy; xmsMoveMemory must retain overlap-safe SubAlloc relocation. Adapter requests session cancellation on memory failure; that is not itself proof of original AX/BL error delivery or cancellation ordering.",
+      "change_plan": "Retain candidate mapping seam pending full call proof. Verify descriptor boundary/A20 interpretation, count overflow, forward overlap versus relocation memmove, mapping/partial-write failures and cancellation before any subsequent success publication. Use existing memory owner; do not add alternate allocator or retry policy."
+    },
+    {
+      "original_start": 182,
+      "original_count": 1,
+      "current_start": 191,
+      "current_count": 13,
+      "original": [
+        "    pExtMoveInfo = (PBYTE) GetVDMAddr(getSS(),getBP());"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-077): preserve the original descriptor",
+        "     * interpretation and forward-copy contract.  The one unavailable raw",
+        "     * GetVDMAddr alias is materialized as a bounded local twelve-byte lease;",
+        "     * no descriptor parsing or XMS policy remains in the adapter. */",
+        "    MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();",
+        "    if (MoveInfoAddress < sizeof(MoveInfo) ||",
+        "        !mvdm_softpc_guest_memory_copy_from(",
+        "            MoveInfoAddress - sizeof(MoveInfo), MoveInfo, sizeof(MoveInfo))) {",
+        "        mvdm_xms_cancel_current_operation();",
+        "        return;",
+        "    }",
+        "",
+        "    pExtMoveInfo = MoveInfo + sizeof(MoveInfo);"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original XMS policy remains but raw host-pointer copy is replaced with guest-memory access. xmsMoveBlock uses a 12-byte descriptor below SS:BP and forward-copy; xmsMoveMemory must retain overlap-safe SubAlloc relocation. Adapter requests session cancellation on memory failure; that is not itself proof of original AX/BL error delivery or cancellation ordering.",
+      "change_plan": "Retain candidate mapping seam pending full call proof. Verify descriptor boundary/A20 interpretation, count overflow, forward overlap versus relocation memmove, mapping/partial-write failures and cancellation before any subsequent success publication. Use existing memory owner; do not add alternate allocator or retry policy."
+    },
+    {
+      "original_start": 185,
+      "original_count": 1,
+      "current_start": 207,
+      "current_count": 5,
+      "original": [
+        "    cbTransfer *= 2;\t\t\t\t\t// Get in bytes"
+      ],
+      "current": [
+        "    if (cbTransfer > ((ULONG)-1) / 2u) {",
+        "        mvdm_xms_cancel_current_operation();",
+        "        return;",
+        "    }",
+        "    cbTransfer *= 2;                    // Get in bytes"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original XMS policy remains but raw host-pointer copy is replaced with guest-memory access. xmsMoveBlock uses a 12-byte descriptor below SS:BP and forward-copy; xmsMoveMemory must retain overlap-safe SubAlloc relocation. Adapter requests session cancellation on memory failure; that is not itself proof of original AX/BL error delivery or cancellation ordering.",
+      "change_plan": "Retain candidate mapping seam pending full call proof. Verify descriptor boundary/A20 interpretation, count overflow, forward overlap versus relocation memmove, mapping/partial-write failures and cancellation before any subsequent success publication. Use existing memory owner; do not add alternate allocator or retry policy."
+    },
+    {
+      "original_start": 193,
+      "original_count": 1,
+      "current_start": 220,
+      "current_count": 0,
+      "original": [
+        ""
+      ],
+      "current": [],
+      "decision": "pending-evidence",
+      "necessity": "Original XMS policy remains but raw host-pointer copy is replaced with guest-memory access. xmsMoveBlock uses a 12-byte descriptor below SS:BP and forward-copy; xmsMoveMemory must retain overlap-safe SubAlloc relocation. Adapter requests session cancellation on memory failure; that is not itself proof of original AX/BL error delivery or cancellation ordering.",
+      "change_plan": "Retain candidate mapping seam pending full call proof. Verify descriptor boundary/A20 interpretation, count overflow, forward overlap versus relocation memmove, mapping/partial-write failures and cancellation before any subsequent success publication. Use existing memory owner; do not add alternate allocator or retry policy."
+    },
+    {
+      "original_start": 197,
+      "original_count": 11,
+      "current_start": 225,
+      "current_count": 7,
+      "original": [
+        "    SoftpcBase = (ULONG) GetVDMAddr (0,0);",
+        "    RtlCopyMemory((PVOID)((ULONG)pDst + SoftpcBase),",
+        "\t   (PVOID)((ULONG)pSrc + SoftpcBase),",
+        "\t   cbTransfer);",
+        "    // if we touched the intel memory, tell the emulator to flush its cache",
+        "    // WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment",
+        "    // address. In this case, we have no idea what the segment value is, all we",
+        "    // know is its \"linear address\".",
+        "    // BUGBUG verify whether we can ignore the case with pDst > 0x110000",
+        "    sas_overwrite_memory(pDst, cbTransfer);",
+        ""
+      ],
+      "current": [
+        "    mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);",
+        "    if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,",
+        "            (ULONG)pSrc, cbTransfer)) {",
+        "        mvdm_xms_cancel_current_operation();",
+        "        return;",
+        "    }",
+        "    mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original XMS policy remains but raw host-pointer copy is replaced with guest-memory access. xmsMoveBlock uses a 12-byte descriptor below SS:BP and forward-copy; xmsMoveMemory must retain overlap-safe SubAlloc relocation. Adapter requests session cancellation on memory failure; that is not itself proof of original AX/BL error delivery or cancellation ordering.",
+      "change_plan": "Retain candidate mapping seam pending full call proof. Verify descriptor boundary/A20 interpretation, count overflow, forward overlap versus relocation memmove, mapping/partial-write failures and cancellation before any subsequent success publication. Use existing memory owner; do not add alternate allocator or retry policy."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 195,
+      "original_count": 1,
+      "current_start": 222,
+      "current_count": 1,
+      "original": [
+        "    RtlCopyMemory (pDst,pSrc,cbTransfer);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-594: historical i386 XMS path is not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 39,
+      "current": 44,
+      "logical": 41
+    },
+    {
+      "original": 41,
+      "current": 46,
+      "logical": 43
+    },
+    {
+      "original": 42,
+      "current": 47,
+      "logical": 44
+    },
+    {
+      "original": 44,
+      "current": 49,
+      "logical": 46
+    },
+    {
+      "original": 45,
+      "current": 50,
+      "logical": 47
+    },
+    {
+      "original": 46,
+      "current": 51,
+      "logical": 48
+    },
+    {
+      "original": 47,
+      "current": 52,
+      "logical": 49
+    },
+    {
+      "original": 48,
+      "current": 53,
+      "logical": 50
+    },
+    {
+      "original": 49,
+      "current": 54,
+      "logical": 51
+    },
+    {
+      "original": 50,
+      "current": 55,
+      "logical": 52
+    },
+    {
+      "original": 51,
+      "current": 56,
+      "logical": 53
+    },
+    {
+      "original": 53,
+      "current": 58,
+      "logical": 55
+    },
+    {
+      "original": 54,
+      "current": 59,
+      "logical": 56
+    },
+    {
+      "original": 55,
+      "current": 60,
+      "logical": 57
+    },
+    {
+      "original": 56,
+      "current": 61,
+      "logical": 58
+    },
+    {
+      "original": 57,
+      "current": 62,
+      "logical": 59
+    },
+    {
+      "original": 58,
+      "current": 63,
+      "logical": 60
+    },
+    {
+      "original": 60,
+      "current": 65,
+      "logical": 62
+    },
+    {
+      "original": 61,
+      "current": 66,
+      "logical": 63
+    },
+    {
+      "original": 62,
+      "current": 67,
+      "logical": 64
+    },
+    {
+      "original": 63,
+      "current": 68,
+      "logical": 65
+    },
+    {
+      "original": 65,
+      "current": 70,
+      "logical": 67
+    },
+    {
+      "original": 66,
+      "current": 71,
+      "logical": 68
+    },
+    {
+      "original": 67,
+      "current": 72,
+      "logical": 69
+    },
+    {
+      "original": 68,
+      "current": 73,
+      "logical": 70
+    },
+    {
+      "original": 69,
+      "current": 74,
+      "logical": 71
+    },
+    {
+      "original": 70,
+      "current": 75,
+      "logical": 72
+    },
+    {
+      "original": 71,
+      "current": 76,
+      "logical": 73
+    },
+    {
+      "original": 72,
+      "current": 77,
+      "logical": 74
+    },
+    {
+      "original": 73,
+      "current": 78,
+      "logical": 75
+    },
+    {
+      "original": 74,
+      "current": 79,
+      "logical": 76
+    },
+    {
+      "original": 75,
+      "current": 80,
+      "logical": 77
+    },
+    {
+      "original": 76,
+      "current": 81,
+      "logical": 78
+    },
+    {
+      "original": 77,
+      "current": 82,
+      "logical": 79
+    },
+    {
+      "original": 79,
+      "current": 84,
+      "logical": 81
+    },
+    {
+      "original": 80,
+      "current": 85,
+      "logical": 82
+    },
+    {
+      "original": 81,
+      "current": 86,
+      "logical": 83
+    },
+    {
+      "original": 82,
+      "current": 87,
+      "logical": 84
+    },
+    {
+      "original": 83,
+      "current": 88,
+      "logical": 85
+    },
+    {
+      "original": 85,
+      "current": 90,
+      "logical": 87
+    },
+    {
+      "original": 86,
+      "current": 91,
+      "logical": 88
+    },
+    {
+      "original": 88,
+      "current": 93,
+      "logical": 90
+    },
+    {
+      "original": 89,
+      "current": 94,
+      "logical": 91
+    },
+    {
+      "original": 90,
+      "current": 95,
+      "logical": 92
+    },
+    {
+      "original": 91,
+      "current": 96,
+      "logical": 93
+    },
+    {
+      "original": 92,
+      "current": 97,
+      "logical": 94
+    },
+    {
+      "original": 94,
+      "current": 99,
+      "logical": 96
+    },
+    {
+      "original": 95,
+      "current": 100,
+      "logical": 97
+    },
+    {
+      "original": 96,
+      "current": 101,
+      "logical": 98
+    },
+    {
+      "original": 97,
+      "current": 102,
+      "logical": 99
+    },
+    {
+      "original": 98,
+      "current": 103,
+      "logical": 100
+    },
+    {
+      "original": 100,
+      "current": 105,
+      "logical": 102
+    },
+    {
+      "original": 101,
+      "current": 106,
+      "logical": 103
+    },
+    {
+      "original": 102,
+      "current": 107,
+      "logical": 104
+    },
+    {
+      "original": 104,
+      "current": 109,
+      "logical": 106
+    },
+    {
+      "original": 105,
+      "current": 110,
+      "logical": 107
+    },
+    {
+      "original": 106,
+      "current": 111,
+      "logical": 108
+    },
+    {
+      "original": 107,
+      "current": 112,
+      "logical": 109
+    },
+    {
+      "original": 108,
+      "current": 113,
+      "logical": 110
+    },
+    {
+      "original": 109,
+      "current": 114,
+      "logical": 111
+    },
+    {
+      "original": 110,
+      "current": 115,
+      "logical": 112
+    },
+    {
+      "original": 111,
+      "current": 116,
+      "logical": 113
+    },
+    {
+      "original": 112,
+      "current": 117,
+      "logical": 114
+    },
+    {
+      "original": 113,
+      "current": 118,
+      "logical": 115
+    },
+    {
+      "original": 114,
+      "current": 119,
+      "logical": 116
+    },
+    {
+      "original": 115,
+      "current": 120,
+      "logical": 117
+    },
+    {
+      "original": 116,
+      "current": 121,
+      "logical": 118
+    },
+    {
+      "original": 117,
+      "current": 122,
+      "logical": 119
+    },
+    {
+      "original": 119,
+      "current": 124,
+      "logical": 121
+    },
+    {
+      "original": 120,
+      "current": 125,
+      "logical": 122
+    },
+    {
+      "original": 121,
+      "current": 126,
+      "logical": 123
+    },
+    {
+      "original": 122,
+      "current": 127,
+      "logical": 124
+    },
+    {
+      "original": 123,
+      "current": 128,
+      "logical": 125
+    },
+    {
+      "original": 124,
+      "current": 129,
+      "logical": 126
+    },
+    {
+      "original": 125,
+      "current": 130,
+      "logical": 127
+    },
+    {
+      "original": 127,
+      "current": 132,
+      "logical": 129
+    },
+    {
+      "original": 128,
+      "current": 133,
+      "logical": 130
+    },
+    {
+      "original": 129,
+      "current": 134,
+      "logical": 131
+    },
+    {
+      "original": 130,
+      "current": 137,
+      "logical": 134
+    },
+    {
+      "original": 132,
+      "current": 139,
+      "logical": 136
+    },
+    {
+      "original": 133,
+      "current": 140,
+      "logical": 137
+    },
+    {
+      "original": 134,
+      "current": 141,
+      "logical": 138
+    },
+    {
+      "original": 135,
+      "current": 142,
+      "logical": 139
+    },
+    {
+      "original": 136,
+      "current": 143,
+      "logical": 140
+    },
+    {
+      "original": 137,
+      "current": 144,
+      "logical": 141
+    },
+    {
+      "original": 138,
+      "current": 145,
+      "logical": 142
+    },
+    {
+      "original": 139,
+      "current": 146,
+      "logical": 143
+    },
+    {
+      "original": 140,
+      "current": 147,
+      "logical": 144
+    },
+    {
+      "original": 141,
+      "current": 148,
+      "logical": 145
+    },
+    {
+      "original": 143,
+      "current": 150,
+      "logical": 147
+    },
+    {
+      "original": 144,
+      "current": 151,
+      "logical": 148
+    },
+    {
+      "original": 145,
+      "current": 152,
+      "logical": 149
+    },
+    {
+      "original": 146,
+      "current": 153,
+      "logical": 150
+    },
+    {
+      "original": 147,
+      "current": 154,
+      "logical": 151
+    },
+    {
+      "original": 148,
+      "current": 155,
+      "logical": 152
+    },
+    {
+      "original": 150,
+      "current": 157,
+      "logical": 154
+    },
+    {
+      "original": 151,
+      "current": 158,
+      "logical": 155
+    },
+    {
+      "original": 152,
+      "current": 159,
+      "logical": 156
+    },
+    {
+      "original": 153,
+      "current": 160,
+      "logical": 157
+    },
+    {
+      "original": 155,
+      "current": 162,
+      "logical": 159
+    },
+    {
+      "original": 156,
+      "current": 163,
+      "logical": 160
+    },
+    {
+      "original": 157,
+      "current": 164,
+      "logical": 161
+    },
+    {
+      "original": 158,
+      "current": 165,
+      "logical": 162
+    },
+    {
+      "original": 159,
+      "current": 166,
+      "logical": 163
+    },
+    {
+      "original": 160,
+      "current": 167,
+      "logical": 164
+    },
+    {
+      "original": 161,
+      "current": 168,
+      "logical": 165
+    },
+    {
+      "original": 162,
+      "current": 169,
+      "logical": 166
+    },
+    {
+      "original": 163,
+      "current": 170,
+      "logical": 167
+    },
+    {
+      "original": 164,
+      "current": 171,
+      "logical": 168
+    },
+    {
+      "original": 165,
+      "current": 172,
+      "logical": 169
+    },
+    {
+      "original": 166,
+      "current": 173,
+      "logical": 170
+    },
+    {
+      "original": 167,
+      "current": 174,
+      "logical": 171
+    },
+    {
+      "original": 168,
+      "current": 175,
+      "logical": 172
+    },
+    {
+      "original": 169,
+      "current": 176,
+      "logical": 173
+    },
+    {
+      "original": 170,
+      "current": 177,
+      "logical": 174
+    },
+    {
+      "original": 171,
+      "current": 178,
+      "logical": 175
+    },
+    {
+      "original": 172,
+      "current": 179,
+      "logical": 176
+    },
+    {
+      "original": 173,
+      "current": 180,
+      "logical": 177
+    },
+    {
+      "original": 174,
+      "current": 181,
+      "logical": 178
+    },
+    {
+      "original": 175,
+      "current": 182,
+      "logical": 179
+    },
+    {
+      "original": 177,
+      "current": 184,
+      "logical": 181
+    },
+    {
+      "original": 178,
+      "current": 185,
+      "logical": 182
+    },
+    {
+      "original": 194,
+      "current": 220,
+      "logical": 193
+    },
+    {
+      "original": 208,
+      "current": 232,
+      "logical": 204
+    }
+  ],
+  "limits": "Exclusion-only is body classification, not renewed configuration-hit proof. No backend activated or internal CPU changes authorized."
+}

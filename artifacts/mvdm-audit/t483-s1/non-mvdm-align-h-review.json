@@ -1,0 +1,46 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/align.h",
+  "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+  "current_sha256": "8422ea06d6d753127248f16b74fc6913d34ab1e77060171c67ca34389c713ffe",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 98,
+      "original_count": 3,
+      "current_start": 99,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define ALIGN_WORST             8",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 101,
+      "current": 100,
+      "logical": 99
+    },
+    {
+      "original": 103,
+      "current": 103,
+      "logical": 102
+    },
+    {
+      "original": 105,
+      "current": 104,
+      "logical": 103
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "test/mvdm-host/vdmredir/server_enum_test.c"
+  ],
+  "limits": "Complete retained-text comparison: original selected definitions unchanged. Bytewise/debug SMB and AMD64 alignment exclusions are not certified for every build context here. Native service x64 support does not imply these selected x86 Redirector headers support x64. No new compile/runtime."
+}

@@ -1,0 +1,166 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+  "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+  "current_sha256": "3fb8e1146b4bb74be98a60120e51d7929a77c8fd066699274258208c893f5808",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "file_sequence": "275",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_start": "614",
+      "current_count": "10",
+      "original_start": "652",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-474",
+      "classification": "shared-tlb-query",
+      "initial_review": "Expose original cache decision as hit/denial/miss without duplicating the TLB lookup.",
+      "counter_review": "Public xtrn2phy calls core with FALSE: old denial FALSE and normal miss walk preserved. Cache-only follows same FAST_TLB/associative selection and dirty-write eligibility, returning before page walk on miss. Caller monitor_translate distinguishes negative denial from zero miss. This does not certify overall monitor fault handling.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:614-725; host/src/nt_inthk.c:260-295; test/mvdm-host/ccpu_monitor_boundary_fixture.c:77-108",
+      "limits": "Source and fixture inspection only; no fresh build/run or complete monitor/reentry proof.",
+      "decision": "retain",
+      "change_plan": "Keep shared original translation core and tri-state cache query. Do not duplicate lookup or treat denied as miss; keep public BOOL wrapper. Review caller table prevalidation and accessed/dirty accounting in nt_inthk file audit.",
+      "related_callers": "monitor_translate; monitor_mark_access via original xtrn2phy; existing external translators; lin2phy cache population.",
+      "verification_required": "Existing cache-contract and duplicate-mapping fixtures cover hit/denial/miss, clean-write miss, stale TLB and ordinary external translation; preserve A/D, flush, read/write and supervisor/user controls when changing.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "275",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_start": "644",
+      "current_count": "7",
+      "original_start": "671",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-474",
+      "classification": "shared-tlb-query",
+      "initial_review": "Expose original cache decision as hit/denial/miss without duplicating the TLB lookup.",
+      "counter_review": "Public xtrn2phy calls core with FALSE: old denial FALSE and normal miss walk preserved. Cache-only follows same FAST_TLB/associative selection and dirty-write eligibility, returning before page walk on miss. Caller monitor_translate distinguishes negative denial from zero miss. This does not certify overall monitor fault handling.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:614-725; host/src/nt_inthk.c:260-295; test/mvdm-host/ccpu_monitor_boundary_fixture.c:77-108",
+      "limits": "Source and fixture inspection only; no fresh build/run or complete monitor/reentry proof.",
+      "decision": "retain",
+      "change_plan": "Keep shared original translation core and tri-state cache query. Do not duplicate lookup or treat denied as miss; keep public BOOL wrapper. Review caller table prevalidation and accessed/dirty accounting in nt_inthk file audit.",
+      "related_callers": "monitor_translate; monitor_mark_access via original xtrn2phy; existing external translators; lin2phy cache population.",
+      "verification_required": "Existing cache-contract and duplicate-mapping fixtures cover hit/denial/miss, clean-write miss, stale TLB and ordinary external translation; preserve A/D, flush, read/write and supervisor/user controls when changing.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "275",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_start": "712",
+      "current_count": "1",
+      "original_start": "728",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-474",
+      "classification": "shared-tlb-query",
+      "initial_review": "Expose original cache decision as hit/denial/miss without duplicating the TLB lookup.",
+      "counter_review": "Public xtrn2phy calls core with FALSE: old denial FALSE and normal miss walk preserved. Cache-only follows same FAST_TLB/associative selection and dirty-write eligibility, returning before page walk on miss. Caller monitor_translate distinguishes negative denial from zero miss. This does not certify overall monitor fault handling.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:614-725; host/src/nt_inthk.c:260-295; test/mvdm-host/ccpu_monitor_boundary_fixture.c:77-108",
+      "limits": "Source and fixture inspection only; no fresh build/run or complete monitor/reentry proof.",
+      "decision": "retain",
+      "change_plan": "Keep shared original translation core and tri-state cache query. Do not duplicate lookup or treat denied as miss; keep public BOOL wrapper. Review caller table prevalidation and accessed/dirty accounting in nt_inthk file audit.",
+      "related_callers": "monitor_translate; monitor_mark_access via original xtrn2phy; existing external translators; lin2phy cache population.",
+      "verification_required": "Existing cache-contract and duplicate-mapping fixtures cover hit/denial/miss, clean-write miss, stale TLB and ordinary external translation; preserve A/D, flush, read/write and supervisor/user controls when changing.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "275",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_start": "721",
+      "current_count": "1",
+      "original_start": "737",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-474",
+      "classification": "shared-tlb-query",
+      "initial_review": "Expose original cache decision as hit/denial/miss without duplicating the TLB lookup.",
+      "counter_review": "Public xtrn2phy calls core with FALSE: old denial FALSE and normal miss walk preserved. Cache-only follows same FAST_TLB/associative selection and dirty-write eligibility, returning before page walk on miss. Caller monitor_translate distinguishes negative denial from zero miss. This does not certify overall monitor fault handling.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:614-725; host/src/nt_inthk.c:260-295; test/mvdm-host/ccpu_monitor_boundary_fixture.c:77-108",
+      "limits": "Source and fixture inspection only; no fresh build/run or complete monitor/reentry proof.",
+      "decision": "retain",
+      "change_plan": "Keep shared original translation core and tri-state cache query. Do not duplicate lookup or treat denied as miss; keep public BOOL wrapper. Review caller table prevalidation and accessed/dirty accounting in nt_inthk file audit.",
+      "related_callers": "monitor_translate; monitor_mark_access via original xtrn2phy; existing external translators; lin2phy cache population.",
+      "verification_required": "Existing cache-contract and duplicate-mapping fixtures cover hit/denial/miss, clean-write miss, stale TLB and ordinary external translation; preserve A/D, flush, read/write and supervisor/user controls when changing.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 206,
+      "original_count": 20,
+      "current_start": 207,
+      "current_count": 2
+    },
+    {
+      "original_start": 276,
+      "original_count": 35,
+      "current_start": 262,
+      "current_count": 2
+    },
+    {
+      "original_start": 381,
+      "original_count": 1,
+      "current_start": 336,
+      "current_count": 2
+    },
+    {
+      "original_start": 450,
+      "original_count": 1,
+      "current_start": 409,
+      "current_count": 2
+    },
+    {
+      "original_start": 526,
+      "original_count": 3,
+      "current_start": 488,
+      "current_count": 2
+    },
+    {
+      "original_start": 536,
+      "original_count": 3,
+      "current_start": 498,
+      "current_count": 2
+    },
+    {
+      "original_start": 723,
+      "original_count": 1,
+      "current_start": 704,
+      "current_count": 2
+    },
+    {
+      "original_start": 763,
+      "original_count": 1,
+      "current_start": 750,
+      "current_count": 2
+    },
+    {
+      "original_start": 805,
+      "original_count": 3,
+      "current_start": 795,
+      "current_count": 2
+    },
+    {
+      "original_start": 815,
+      "original_count": 4,
+      "current_start": 805,
+      "current_count": 2
+    },
+    {
+      "original_start": 859,
+      "original_count": 94,
+      "current_start": 848,
+      "current_count": 2
+    }
+  ],
+  "limits": "All non-excluded textual changes classified. No universal branch reachability/full logical-line or runtime certification."
+}

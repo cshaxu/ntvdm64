@@ -1,0 +1,47 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/cmosnt.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\i386\\cmosnt.obj",
+      "sha256": "f33e1b8649662fc8dea4677183976840fdbaab09c0cf89bb56e079a467db5671",
+      "size": 55849,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/ica.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\i386\\ica.obj",
+      "sha256": "8f5c378de66092c984a33b93644a3233f98c6a3408c81efd44e6b57ae579d430",
+      "size": 47499,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/qevnt.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\i386\\qevnt.obj",
+      "sha256": "8c217bf584d6a24aef3aae698d266f630b5838c9f5dabdc3902c8c8ddfe53c93",
+      "size": 17006,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/rom.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\i386\\rom.obj",
+      "sha256": "343abad2146bae53d982f3143315a1286e55c172fa9e994fc92d6430f54777ca",
+      "size": 20311,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/system.lib",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\i386\\system.lib",
+      "sha256": "34e50363f2a3bad3c5aca07b3f0b4a5b05330231f87717396a5c4b781a73c69b",
+      "size": 337214,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/timer.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\i386\\timer.obj",
+      "sha256": "d242427c93aa9c558a35cb8698056283e14d1ffed7d70e9b6f7b55f1090fd3d8",
+      "size": 62993,
+      "identical": true
+    }
+  ],
+  "limits": "Historical identity only; no current build/runtime admission."
+}

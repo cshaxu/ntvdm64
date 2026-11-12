@@ -1,0 +1,679 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+  "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+  "current_sha256": "64b64c159b3965631f11e7823bf5b87f0d4831526c26726625edf9bb57464fe2",
+  "changes": [
+    {
+      "original_start": 14,
+      "original_count": 2,
+      "current_start": 14,
+      "current_count": 4,
+      "original": [
+        "#include \"precomp.h\"",
+        "#pragma hdrstop"
+      ],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-043/045): retain original menu resource clients",
+        " * and parsers. Other menu APIs and private USER environment are excluded. */",
+        "#define WOW_ORIGINAL_MENU_CLIENT",
+        "#include \"wow_menu_resource_bindings.h\""
+      ]
+    },
+    {
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 31,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-045): original menu parsers. The original",
+        " * TIF_16BIT predicate is an explicit invocation parameter, not fabricated",
+        " * private TEB state. Recursion carries the same value. */"
+      ]
+    },
+    {
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 37,
+      "current_count": 2,
+      "original": [
+        "    HMENU *phMenu)"
+      ],
+      "current": [
+        "    HMENU *phMenu,",
+        "    BOOL wow16)"
+      ]
+    },
+    {
+      "original_start": 71,
+      "original_count": 1,
+      "current_start": 79,
+      "current_count": 1,
+      "original": [
+        "                    && (GetClientInfo()->dwTIFlags & TIF_16BIT)) {"
+      ],
+      "current": [
+        "                    && wow16) {"
+      ]
+    },
+    {
+      "original_start": 108,
+      "original_count": 1,
+      "current_start": 118,
+      "current_count": 1,
+      "original": [
+        "                    (HMENU *)&menuId);"
+      ],
+      "current": [
+        "                    (HMENU *)&menuId, wow16);"
+      ]
+    },
+    {
+      "original_start": 320,
+      "original_count": 1,
+      "current_start": 340,
+      "current_count": 2,
+      "original": [
+        "    LPBYTE lpMenuTemplate)"
+      ],
+      "current": [
+        "    LPBYTE lpMenuTemplate,",
+        "    BOOL wow16)"
+      ]
+    },
+    {
+      "original_start": 330,
+      "original_count": 1,
+      "current_start": 352,
+      "current_count": 3,
+      "original": [
+        "    menuTemplateVersion = *((WORD *)lpMenuTemplate)++;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-045): modern C pointer advancement. */",
+        "    menuTemplateVersion = *(WORD *)lpMenuTemplate;",
+        "    lpMenuTemplate += sizeof(WORD);"
+      ]
+    },
+    {
+      "original_start": 335,
+      "original_count": 1,
+      "current_start": 360,
+      "current_count": 2,
+      "original": [
+        "    menuTemplateHeaderSize = *((WORD *)lpMenuTemplate)++;"
+      ],
+      "current": [
+        "    menuTemplateHeaderSize = *(WORD *)lpMenuTemplate;",
+        "    lpMenuTemplate += sizeof(WORD);"
+      ]
+    },
+    {
+      "original_start": 339,
+      "original_count": 1,
+      "current_start": 366,
+      "current_count": 1,
+      "original": [
+        "        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu);"
+      ],
+      "current": [
+        "        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu, wow16);"
+      ]
+    },
+    {
+      "original_start": 348,
+      "original_count": 29,
+      "current_start": 375,
+      "current_count": 0,
+      "original": [
+        "",
+        "/***************************************************************************\\",
+        "* SetMenu (API)",
+        "*",
+        "* Sets the menu for the hwnd.",
+        "*",
+        "* History:",
+        "* 10-Mar-1996 ChrisWil  Created.",
+        "\\***************************************************************************/",
+        "",
+        "BOOL SetMenu(",
+        "    HWND  hwnd,",
+        "    HMENU hmenu)",
+        "{",
+        "    return NtUserSetMenu(hwnd, hmenu, TRUE);",
+        "}",
+        "",
+        "/***************************************************************************\\",
+        "* LoadMenu (API)",
+        "*",
+        "* Loads the menu resource named by lpMenuName from the executable",
+        "* file associated by the module specified by the hInstance parameter. The",
+        "* menu is loaded only if it hasn't been previously loaded. Otherwise it",
+        "* retrieves a handle to the loaded resource. Returns NULL if unsuccessful.",
+        "*",
+        "* History:",
+        "* 04-05-91 ScottLu Fixed to work with client/server.",
+        "* 28-Sep-1990 mikeke from win30",
+        "\\***************************************************************************/"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 391,
+      "original_count": 1,
+      "current_start": 390,
+      "current_count": 2,
+      "original": [
+        "            hMenu = CreateMenuFromResource(p);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-045): WOW-only resource client. */",
+        "            hMenu = CreateMenuFromResource(p, TRUE);"
+      ]
+    },
+    {
+      "original_start": 677,
+      "original_count": 11,
+      "current_start": 445,
+      "current_count": 2,
+      "original": [
+        "BOOL ValidateMENUINFO(LPCMENUINFO lpmi, WORD wAPICode)",
+        "{",
+        "#define ERR_INVALID \"USER: MENUINFO: Invalid\"",
+        "#define ERR_SIZE \"Size cbSize: %04X\"",
+        "#define ERR_MASK \"Mask fMask: %04X\"",
+        "#define ERR_BRUSH \"Brush hbrBack: %04X\"",
+        "#define ERR_STYLE \"Style dwStyle: %08X\"",
+        "    if (!lpmi) {",
+        "        RIPMSG0( RIP_WARNING, ERR_INVALID );",
+        "        return FALSE;;",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported Memphis menu watermark profile",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 689,
+      "original_count": 67,
+      "current_start": 448,
+      "current_count": 0,
+      "original": [
+        "    if (lpmi->cbSize != sizeof(MENUINFO)) {",
+        "        RIPMSG1( RIP_WARNING, ERR_SIZE, lpmi->cbSize);",
+        "        return FALSE;;",
+        "    }",
+        "",
+        "    //",
+        "    // Validate fMask",
+        "    //",
+        "    if (lpmi->fMask & ~MIM_MASK) {",
+        "        RIPMSG1( RIP_WARNING, ERR_MASK, lpmi->fMask);",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    // No validation needed for MIIM_ID, MIIM_DATA",
+        "    if (wAPICode == MENUAPI_GET){",
+        "        return TRUE;",
+        "    }",
+        "",
+        "    if ((lpmi->fMask & MIM_STYLE) && (lpmi->dwStyle & ~MNS_VALID)) {",
+        "        RIPMSG1(RIP_WARNING, ERR_STYLE, lpmi->dwStyle);",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    if (lpmi->fMask & MIM_BACKGROUND) {",
+        "        if (lpmi->hbrBack  && !GdiValidateHandle((HBRUSH)lpmi->hbrBack)) {",
+        "            RIPMSG1(RIP_WARNING, ERR_BRUSH, lpmi->hbrBack);",
+        "            return(FALSE);",
+        "        }",
+        "    }",
+        "",
+        "    return(TRUE);",
+        "}",
+        "",
+        "BOOL GetMenuInfo(HMENU hMenu, LPMENUINFO lpmi)",
+        "{",
+        "    PMENU pMenu;",
+        "",
+        "    if (!lpmi) {",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    if (lpmi->cbSize != sizeof(MENUINFO)) {",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    pMenu = VALIDATEHMENU(hMenu);",
+        "",
+        "    if (lpmi->fMask & MIM_STYLE)",
+        "        lpmi->dwStyle = TestMF(pMenu, MFNOCHECK) ? MNS_NOCHECK : 0;",
+        "",
+        "    //Once Scrolling menus are in place",
+        "    //if (lpmi->fMask & MIM_MAXHEIGHT)",
+        "    //    lpmi->cyMax = MAKELONG(pMenu->cyMax, 0);",
+        "",
+        "    if (lpmi->fMask & MIM_BACKGROUND)",
+        "        lpmi->hbrBack = pMenu->hbrBack;",
+        "",
+        "    //if (lpmi->fMask & MIM_HELPID)",
+        "    //    lpmi->dwContextHelpID = pMenu->dwContextHelpID;",
+        "",
+        "    //if (lpmi->fMask & MIM_MENUDATA)",
+        "    //    lpmi->dwMenuData = pMenu->dwMenuData;",
+        "",
+        "    return(TRUE);",
+        "}",
+        "#endif // MEMPHIS_MENU_WATERMARKS",
+        ""
+      ],
+      "current": []
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 99,
+      "original_count": 3,
+      "current_start": 109,
+      "current_count": 1,
+      "original": [
+        "        mii.fMask = MIIM_ID | MIIM_STATE | MIIM_FTYPE;",
+        "        if ( lpmenuText )",
+        "            mii.fMask |= MIIM_STRING;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 143,
+      "original_count": 1,
+      "current_start": 155,
+      "current_count": 1,
+      "original": [
+        "        mii.hbmpItem = NULL;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 209,
+      "original_count": 1,
+      "current_start": 224,
+      "current_count": 1,
+      "original": [
+        "        mii.fMask = MIIM_ID | MIIM_STATE | MIIM_FTYPE ;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 236,
+      "original_count": 5,
+      "current_start": 255,
+      "current_count": 1,
+      "original": [
+        "        if ( lpMenuTemplate->mtString[0] ) {",
+        "            lpmenuText = lpMenuTemplate->mtString;",
+        "            mii.fMask |= MIIM_STRING;",
+        "        } else",
+        "            lpmenuText = NULL;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 284,
+      "original_count": 1,
+      "current_start": 303,
+      "current_count": 1,
+      "original": [
+        "        mii.hbmpItem = NULL;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 435,
+      "original_count": 239,
+      "current_start": 438,
+      "current_count": 1,
+      "original": [
+        "//-----------------------------------------------------------------------------",
+        "//  MIIOneWayConvert() -",
+        "//",
+        "//   converts a MENUITEMINFO95 or a new-MENUITEMINFO-with-old-flags to a new",
+        "//   MENUITEMINFO -- this way all internal code can assume one look for the",
+        "//   structure",
+        "//",
+        "//   returns TRUE if structure is a valid 95 or 96 size; FALSE otherwise",
+        "// History:",
+        "//  11-8-95 Ported from Nashville - jjk",
+        "//-----------------------------------------------------------------------------",
+        "BOOL MIIOneWayConvert(LPMENUITEMINFOW lpmiiIn, LPMENUITEMINFOW lpmiiOut)",
+        "{",
+        "    if (lpmiiIn->cbSize == sizeof(MENUITEMINFO))",
+        "        lpmiiOut->hbmpItem = lpmiiIn->hbmpItem;",
+        "    else if (lpmiiIn->cbSize == SIZEOFMENUITEMINFO95)",
+        "        lpmiiOut->hbmpItem = NULL;",
+        "    else",
+        "        return(FALSE);",
+        "",
+        "    lpmiiOut->cbSize        = sizeof(MENUITEMINFO);",
+        "    lpmiiOut->fMask         = lpmiiIn->fMask;",
+        "",
+        "    lpmiiOut->fState        = lpmiiIn->fState;",
+        "    lpmiiOut->wID           = lpmiiIn->wID;",
+        "    lpmiiOut->hSubMenu      = lpmiiIn->hSubMenu;",
+        "    lpmiiOut->hbmpChecked   = lpmiiIn->hbmpChecked;",
+        "    lpmiiOut->hbmpUnchecked = lpmiiIn->hbmpUnchecked;",
+        "    lpmiiOut->dwItemData    = lpmiiIn->dwItemData;",
+        "    lpmiiOut->dwTypeData    = lpmiiIn->dwTypeData;",
+        "    lpmiiOut->cch           = lpmiiIn->cch;",
+        "    lpmiiOut->fType         = lpmiiIn->fType;",
+        "",
+        "    if (lpmiiIn->fMask & MIIM_TYPE) {",
+        "        //",
+        "        // convert MFT_BITMAP     to MIIM_BITMAP",
+        "        //     and !MFT_NONSTRING to MIIM_STRING",
+        "        //",
+        "        // NOTE:  we leave MFT_BITMAP and MFT_STRING in the struct so the",
+        "        //        validation layer can see them and put up a warning saying",
+        "        //        'obsolete flags' -- they are not actually used anywhere;",
+        "        //        all internal code now keys off of MIIM_BITMAP and MIIM_STRING",
+        "        //",
+        "        if (lpmiiIn->fType & MFT_BITMAP) {",
+        "            lpmiiOut->fMask |= MIIM_BITMAP;",
+        "            lpmiiOut->hbmpItem = (HBITMAP)lpmiiIn->dwTypeData;",
+        "        } else if (!(lpmiiIn->fType & MFT_NONSTRING)) {",
+        "            lpmiiOut->fMask |= MIIM_STRING;",
+        "        }",
+        "",
+        "        lpmiiOut->fMask |= MIIM_FTYPE;",
+        "    }",
+        "",
+        "    return(TRUE);",
+        "}",
+        "",
+        "//-----------------------------------------------------------------------------",
+        "// ValidateMENUITEMINFO() -",
+        "//  Validates the MII structure.",
+        "//  Note: This does not validate the USER objects like HMENUs the way Nashville",
+        "//        does because these will be validated and locked in the Kernel.",
+        "//",
+        "// History:",
+        "//  12-8-95 Ported from Nashville - jjk",
+        "//-----------------------------------------------------------------------------",
+        "",
+        "BOOL ValidateMENUITEMINFO(LPMENUITEMINFOW lpmii, WORD wAPICode)",
+        "{",
+        "    MENUITEMINFO mii;",
+        "",
+        "#define  ERR_StrOld    \"USER: MENUITEMINFO: MFT_STRING obsolete; use MIIM_STRING instead\"",
+        "#define  ERR_BmpOld    \"USER: MENUITEMINFO: MFT_BITMAP obsolete; use MIIM_BITMAP instead\"",
+        "#define  ERR_Invalid   \"USER: MENUITEMINFO: Invalid %s\"",
+        "#define  ERR_Size      \"Invalid MENUITEMINFO Size cbSize: %04X\"",
+        "#define  ERR_Mask      \"Invalid MENUITEMINFO Mask fMask: %04X\"",
+        "#define  ERR_Type      \"Invalid MENUITEMINFO type Flags fType: %04X\"",
+        "#define  ERR_String    \"Invalid MENUITEMINFO String dwTypeData: %04X:%04X\"",
+        "#define  ERR_State     \"Invalid MENUITEMINFO State Flags fState: %04X\"",
+        "#define  ERR_Bitmap    \"Invalid MENUITEMINFO Bitmap: %04X\"",
+        "#define  ERR_Submenu   \"Invalid MENUITEMINFO Sub Menu: %04X\"",
+        "#define  ERR_CheckMark \"Invalid MENUITEMINFO Check Mark: %04X\"",
+        "",
+        "",
+        "    if (!lpmii) {",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    if (lpmii->cbSize != sizeof(MENUITEMINFO)) {",
+        "        RIPMSG1(RIP_WARNING, ERR_Size, lpmii->cbSize);",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    //",
+        "    // Validate fMask",
+        "    //",
+        "    if (lpmii->fMask & ~MIIM_MASK) {",
+        "        RIPMSG1(RIP_WARNING, ERR_Mask, lpmii->fMask);",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    // No validation needed for MIIM_ID, MIIM_DATA",
+        "    if (wAPICode == MENUAPI_GET)",
+        "        return TRUE;",
+        "",
+        "    if (lpmii->fMask & MIIM_FTYPE) {",
+        "#ifdef DEBUG",
+        "        if (lpmii->fType & MFT_BITMAP)",
+        "            ;//RIPMSG0(RIP_WARNING, ERR_BmpOld);",
+        "        if (lpmii->fType & MFT_STRING)",
+        "            ;//RIPMSG0(RIP_WARNING, ERR_StrOld);",
+        "#endif",
+        "",
+        "        if (lpmii->fType & ~MFT_MASK) {",
+        "            RIPMSG1(RIP_WARNING, ERR_Type, lpmii->fType);",
+        "            return FALSE;",
+        "        }",
+        "    }",
+        "",
+        "    if (lpmii->fMask & MIIM_STATE){",
+        "        if (lpmii->fState & ~MFS_MASK) {",
+        "            RIPMSG1(RIP_WARNING, ERR_State, lpmii->fState);",
+        "            return FALSE;",
+        "        }",
+        "    }",
+        "",
+        "",
+        "    if (lpmii->fMask & MIIM_CHECKMARKS) {",
+        "        if (lpmii->hbmpChecked && !GdiValidateHandle((HBITMAP)lpmii->hbmpChecked)) {",
+        "            RIPMSG1(RIP_WARNING, ERR_CheckMark, lpmii->hbmpChecked);",
+        "            return(FALSE);",
+        "        }",
+        "        if (lpmii->hbmpUnchecked && !GdiValidateHandle((HBITMAP)lpmii->hbmpUnchecked)) {",
+        "            RIPMSG1(RIP_WARNING, ERR_CheckMark, lpmii->hbmpUnchecked);",
+        "            return(FALSE);",
+        "        }",
+        "    }",
+        "",
+        "    if (lpmii->fMask & MIIM_SUBMENU) {",
+        "        if (lpmii->hSubMenu && !VALIDATEHMENU(lpmii->hSubMenu)) {",
+        "            RIPMSG1(RIP_WARNING, ERR_Submenu, lpmii->hSubMenu);",
+        "            return(FALSE);",
+        "        }",
+        "    }",
+        "",
+        "    if (lpmii->fMask & MIIM_STRING){",
+        "        if (!lpmii->dwTypeData) {",
+        " //TODO: This slows down stress way too much.. jjk",
+        "            ; //RIPMSG2(RIP_WARNING, ERR_String, HIWORD(lpmii->dwTypeData), LOWORD(lpmii->dwTypeData));",
+        "            return FALSE;",
+        "        }",
+        "    }",
+        "",
+        "    if (lpmii->fMask & MIIM_BITMAP) {",
+        "        HBITMAP hbmp = lpmii->hbmpItem;",
+        "        if ((hbmp != HBMMENU_CALLBACK) && (hbmp >= HBMMENU_MAX) && !GdiValidateHandle((HBITMAP)hbmp)) {",
+        "            RIPMSG1(RIP_WARNING, ERR_Bitmap, hbmp);",
+        "            return(FALSE);",
+        "        }",
+        "    }",
+        "",
+        "    mii;",
+        "    return(TRUE);",
+        "}",
+        "",
+        "BOOL GetMenuItemInfoInternal(HMENU hMenu, UINT uID, BOOL fByPosition,",
+        "    LPMENUITEMINFO lpInfo)",
+        "{",
+        "    PITEM pItem;",
+        "    PMENU pMenu;",
+        "",
+        "    if ( lpInfo->cbSize != sizeof (MENUITEMINFO)) {",
+        "        RIPERR0(ERROR_INVALID_PARAMETER, RIP_WARNING, \"GetMenuItemInfo, bad size\\n\");",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    pMenu = VALIDATEHMENU(hMenu);",
+        "",
+        "    if (pMenu == NULL)",
+        "        return FALSE;",
+        "",
+        "    // Find out where the item we are modifying is.",
+        "    pItem = MNLookUpItem(pMenu, uID, fByPosition, &pMenu);",
+        "",
+        "   if (pItem == NULL)",
+        "        return FALSE;",
+        "",
+        "    if (lpInfo->fMask & MIIM_STATE)",
+        "        lpInfo->fState = pItem->fState & MFS_MASK;",
+        "",
+        "    if (lpInfo->fMask & MIIM_ID)",
+        "        lpInfo->wID = pItem->wID;",
+        "",
+        "    if ( (lpInfo->fMask & MIIM_SUBMENU) && (pItem->spSubMenu) ) {",
+        "        lpInfo->hSubMenu = PtoH(REBASEPTR(pMenu, pItem->spSubMenu));",
+        "    } else {",
+        "        lpInfo->hSubMenu = NULL;",
+        "    }",
+        "",
+        "    if (lpInfo->fMask & MIIM_CHECKMARKS) {",
+        "            lpInfo->hbmpChecked  = pItem->hbmpChecked;",
+        "            lpInfo->hbmpUnchecked= pItem->hbmpUnchecked;",
+        "    }",
+        "",
+        "    if (lpInfo->fMask & MIIM_DATA) {",
+        "        lpInfo->dwItemData = pItem->dwItemData;",
+        "    }",
+        "",
+        "    if (lpInfo->fMask & MIIM_FTYPE) {",
+        "        lpInfo->fType = pItem->fType & MFT_MASK;",
+        "    }",
+        "",
+        "",
+        "    if ( lpInfo->fMask & MIIM_BITMAP) {",
+        "        if (pItem->hbmp) {",
+        "            lpInfo->hbmpItem = pItem->hbmp;",
+        "        }",
+        "    }",
+        "",
+        "    if ( lpInfo->fMask & MIIM_STRING) {",
+        "        if ((lpInfo->cch) && (pItem->lpstr)) {",
+        "            int cch;",
+        "",
+        "            cch = min(lpInfo->cch - 1, pItem->cch);",
+        "#if IS_ANSI",
+        "            cch = WCSToMB(REBASEPTR(pMenu, pItem->lpstr), pItem->cch,",
+        "                            &(lpInfo->dwTypeData), cch, FALSE);",
+        "            lpInfo->dwTypeData[cch] = '\\0';",
+        "#else",
+        "            wcsncpy(lpInfo->dwTypeData, (LPWSTR)REBASEPTR(pMenu, pItem->lpstr), cch);",
+        "            lpInfo->dwTypeData[cch] = 0;",
+        "#endif",
+        "            lpInfo->cch = cch;",
+        "        }",
+        "    }",
+        "",
+        "    return(TRUE);",
+        "",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported Memphis menu conversion profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original_line": 18,
+      "current_line": 20,
+      "logical_line": 20,
+      "text": "/***************************************************************************\\"
+    },
+    {
+      "original_line": 19,
+      "current_line": 21,
+      "logical_line": 21,
+      "text": "* MenuLoadWinTemplates"
+    },
+    {
+      "original_line": 20,
+      "current_line": 22,
+      "logical_line": 22,
+      "text": "*"
+    },
+    {
+      "original_line": 21,
+      "current_line": 23,
+      "logical_line": 23,
+      "text": "* Recursive routine that loads in the new style menu template and"
+    },
+    {
+      "original_line": 22,
+      "current_line": 24,
+      "logical_line": 24,
+      "text": "* builds the menu. Assumes that the menu template header has already been"
+    },
+    {
+      "original_line": 23,
+      "current_line": 25,
+      "logical_line": 25,
+      "text": "* read in and processed elsewhere..."
+    },
+    {
+      "original_line": 24,
+      "current_line": 26,
+      "logical_line": 26,
+      "text": "*"
+    },
+    {
+      "original_line": 25,
+      "current_line": 27,
+      "logical_line": 27,
+      "text": "* History:"
+    },
+    {
+      "original_line": 26,
+      "current_line": 28,
+      "logical_line": 28,
+      "text": "* 28-Sep-1990 mikeke     from win30"
+    },
+    {
+      "original_line": 27,
+      "current_line": 29,
+      "logical_line": 29,
+      "text": "\\***************************************************************************/"
+    },
+    {
+      "original_line": 102,
+      "current_line": 110,
+      "logical_line": 100,
+      "text": "#else"
+    },
+    {
+      "original_line": 241,
+      "current_line": 256,
+      "logical_line": 237,
+      "text": "#else"
+    },
+    {
+      "original_line": 674,
+      "current_line": 439,
+      "logical_line": 436,
+      "text": "#endif // MEMPHIS_MENUS"
+    }
+  ],
+  "evidence": [
+    "src/wow32-dll/include/wow_menu_parser_bindings.h",
+    "src/wow32-dll/include/wow_menu_resource_bindings.h",
+    "src/wow32-dll/source/wow_private_user_compat.c",
+    "test/adapter-mvdm-host-out/wow/wow_original_menu_resource_fixture.c"
+  ],
+  "limits": "Complete original/current source comparison and real Win16 resource invocation inspected. Fixture includes popup recursion, ownerdraw TRUE/FALSE, MENUEX, invalid version/flags and resource callback checks; not newly run and not arbitrary malformed-resource memory safety proof. Task-associated native menu binding lifetime is outside this body-equality conclusion."
+}

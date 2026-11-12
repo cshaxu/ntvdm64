@@ -1,0 +1,24 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+  "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+  "before_sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+  "current_sha256": "0f4f3b63034459ac1f0eb7c3e951348776512a7167f75733cc4c64da62a28cbd",
+  "status": "difference classification complete; functional remediation not implemented",
+  "selected_original_body_equal": true,
+  "decisions": [
+    "Retain finite base_interactive.h and this single reached export; modern host owns unrelated exports.",
+    "Retain original body and original failure/output ordering; no speculative rewrite of token query.",
+    "Retain admitted standalone scope binding, per-request bind/restore and fail-closed absent/wrong/SYSTEM checks; do not restore kernel station-list dependencies."
+  ],
+  "counter_review": [
+    "Do not import CSR/windowstation/Win32k internals solely to eliminate mirror diff.",
+    "Allocation failure returns original buffer-too-small status; this inherited behavior is not introduced by adaptation.",
+    "Scope is deliberately narrower than a general NT4 windowstation service; tests do not prove SYSTEM impersonation or exception unwinding."
+  ],
+  "entries_added": 3,
+  "format_sites": 2,
+  "limits": [
+    "No fresh build/runtime",
+    "SYSTEM impersonation and exceptional scope unwinding not certified"
+  ]
+}

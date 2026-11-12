@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+  "original_sha256": "c82ea948fafd97bbf2c99bf3ba681d485f9c38bef75493498a465b7f556fc1f2",
+  "current_sha256": "8ddd9738f9c3240ed9faea1b16c11218047ad0859ca8ab30fde75ad2bf136877",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 44,
+      "original_end": 47,
+      "current_error_line": 45
+    }
+  ],
+  "initial_review": "Only excluded K&R parameter declaration alternative.",
+  "counter_review": "Remaining nonblank non-line text exactly original; no change to selected instruction semantics. SPC486 exclusion is not admission to implement 486 behavior.",
+  "limits": "Text/conditional comparison only; no new all-profile compilation or line-mapping proof."
+}

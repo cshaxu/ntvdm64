@@ -1,0 +1,102 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+  "original_sha256": "4ae2c1d2c4a66dc63c9b2ddd673fcae067f2fbdab953dc8d96aecfcf03c262bc",
+  "current_sha256": "94ccb215daf9dbf46f802d64d4bd5e21e9cf02452077da93df143a08c3bf6fe8",
+  "review_complete": true,
+  "register_entries": 6,
+  "changes": [
+    {
+      "original_start": 26,
+      "original_count": 0,
+      "current_start": 26,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"mvdm_softpc_firmware.h\""
+      ]
+    },
+    {
+      "original_start": 69,
+      "original_count": 4,
+      "current_start": 71,
+      "current_count": 11,
+      "original": [
+        "       dw = GetSystemDirectory(pchFileName, MAX_PATH);",
+        "       if (!dw || *(pchFileName+dw-1) != achSlash[0])",
+        "           strcat(pchFileName, achSlash);",
+        "       strcat(pchFileName, bConfig ? achConfigNT : achAutoexecNT);"
+      ],
+      "current": [
+        "       /* DIVERGENCE(MVDM-HOST-DIV-157): The NT4 product defaulted to a",
+        "        * system-directory config.nt/autoexec.nt pair.  Those files are not",
+        "        * an installed modern-Windows contract.  Preserve the original PIF",
+        "        * override branch and caller-owned output buffer, but resolve the",
+        "        * no-PIF default from the immutable MVDM system root selected by app.",
+        "        * A missing selected file still returns the original bad-name result",
+        "        * and therefore follows cmdconf.c's existing fatal path. */",
+        "       if (!mvdm_softpc_system_find_file(",
+        "               bConfig ? achConfigNT : achAutoexecNT,",
+        "               pchFileName, MAX_PATH + 12))",
+        "           *pchFileName = '\\0';"
+      ]
+    },
+    {
+      "original_start": 76,
+      "original_count": 1,
+      "current_start": 86,
+      "current_count": 3,
+      "original": [
+        "       if (!dw || dw > MAX_PATH+12) {"
+      ],
+      "current": [
+        "       /* DIVERGENCE(MVDM-HOST-DIV-278): configuration consumers use ANSI. */",
+        "       if (!dw || dw > MAX_PATH+12 ||",
+        "           !mvdm_softpc_config_path_to_ansi(pchFileName, MAX_PATH+12)) {"
+      ]
+    },
+    {
+      "original_start": 79,
+      "original_count": 2,
+      "current_start": 92,
+      "current_count": 3,
+      "original": [
+        "       free(*ppch);",
+        "       *ppch = NULL;"
+      ],
+      "current": [
+        "       /* DIVERGENCE(MVDM-HOST-DIV-157): CCPU LIM initialization and DOS",
+        "        * boot both read this path. Retain it until the next PIF selection",
+        "        * (or process exit), rather than consuming it on the first read. */"
+      ]
+    },
+    {
+      "original_start": 133,
+      "original_count": 1,
+      "current_start": 148,
+      "current_count": 2,
+      "original": [
+        "        dw = GetWindowsDirectory(pathBuff, sizeof(pathBuff) - sizeof(achDef));"
+      ],
+      "current": [
+        "        dw = NtvdmGetWindowsDirectoryA(pathBuff,",
+        "            sizeof(pathBuff) - sizeof(achDef));"
+      ]
+    },
+    {
+      "original_start": 273,
+      "original_count": 0,
+      "current_start": 290,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "\t\t/* DIVERGENCE(MVDM-HOST-DIV-157): replace the retained paths. */",
+        "\t\tfree(pchConfigFile);",
+        "\t\tfree(pchAutoexecFile);"
+      ]
+    }
+  ],
+  "excluded_ranges": [],
+  "initial_review": "Six diff chunks, no exclusions. Selected roots, encoding and repeated-read lifetime are necessary; replacement scope needs caller-sequence proof.",
+  "counter_review": "Inspected full GetPIFData/ConfigFiles: same retained overrides serve LIM then boot. New frees cover only WNT extension replacement, so comment next PIF selection is broader than actual cleanup. Do not infer stale profile defect without config.c caller-sequence evidence. Tests are inspected, not rerun.",
+  "limits": "Retain5 pending1; no source edits."
+}

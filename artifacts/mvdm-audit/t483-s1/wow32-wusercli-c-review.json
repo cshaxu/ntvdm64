@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/wow32/wusercli.c",
+  "original_sha256": "96b363ee882839a61d232dfbe145346d6e4d7ec7bfbaa4c97c4e0500a39b51ed",
+  "current_sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 703,
+      "original_count": 1,
+      "current_start": 704,
+      "current_count": 1,
+      "original": [
+        "        GetKeyboardState( pb1 );"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "limits": "Exclusion-only means no other body difference, not renewed all-config reachability proof. Original HACK32 guarded keyboard call remains; host PMODE32 exclusion is not guest USER16 exclusion. Timer fixture covers wrapper only; no tests run."
+}

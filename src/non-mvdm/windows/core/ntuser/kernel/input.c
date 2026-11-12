@@ -49,6 +49,30 @@
 #define DUMPSUBPATHTAKEN(p, x)
 #endif
 #line 3327
+/***************************************************************************\
+* RecalcThreadAttachment
+* Recalc2
+* AddAttachment
+* CheckAttachment
+*
+* Runs through all the attachinfo fields for all threads and calculates
+* which threads share which queues. Puts calculated result in pqAttach
+* field in each threadinfo structure. This is a difficult problem
+* whose only solution in iterative. The basic algorithm is:
+*
+* 0. Find next unattached thread and attach a queue to it. If none, stop.
+* 1. Loop through all threads: If thread X assigned to this queue or any
+*    of X's attach requests assigned to this queue, assign X and all X's
+*    attachments to this queue. Remember if we ever attach a 16 bit thread.
+* 2. If thread X is a 16 bit thread and we've already attached another
+*    16 bit thread, assign X and all X's attachments to this queue.
+* 3. If any change found in 1-2, goto 1
+* 4. Goto 0
+*
+* 12-11-92 ScottLu      Created.
+* 01-Oct-1993 mikeke    Fixed to work with MWOWs
+\***************************************************************************/
+
 #line 5015
 void AddAttachment(
     PTHREADINFO pti,

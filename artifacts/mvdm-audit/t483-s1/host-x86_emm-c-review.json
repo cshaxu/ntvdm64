@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+  "original_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189",
+  "deleted_sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+  "deleted_bytes": 1841,
+  "status": "deleted",
+  "reason": "All executable content is excluded MONITOR LIM alternative. Current host compilation defines CCPU/CPU_40_STYLE and not MONITOR; no selected EMS implementation removed.",
+  "evidence": [
+    "Current release build.ninja cc_host rule and host_cflags",
+    "New-T310OriginalSoftpcNinja.ps1 reads host/src/sources at lines161/253",
+    "Full file content inspected; native monitor EMS body already #error"
+  ],
+  "references_updated": [
+    "src\\mvdm-host\\softpc.new\\host\\src\\sources",
+    "tools/audit/Export-T310WholeTreeAbiInventory.mjs",
+    "tools/audit/Export-T310WholeTreeCompilerWarningLedger.mjs"
+  ],
+  "limits": "Existing generated build graphs are stale until regeneration. No build/link/package validation performed yet; do not claim release completion. Historical evidence references retained.",
+  "deleted_source": "/*                      INSIGNIA MODULE SPECIFICATION\r\n                        -----------------------------\r\n\r\nMODULE NAME     : 'Lower layer' of Expanded Memory Manager\r\n\r\n        THIS PROGRAM SOURCE FILE  IS  SUPPLIED IN CONFIDENCE TO THE\r\n        CUSTOMER, THE CONTENTS  OR  DETAILS  OF  ITS OPERATION MUST\r\n        NOT BE DISCLOSED TO ANY  OTHER PARTIES  WITHOUT THE EXPRESS\r\n        AUTHORISATION FROM THE DIRECTORS OF INSIGNIA SOLUTIONS INC.\r\n\r\nDESIGNER        : Simon Frost\r\nDATE            : March '92\r\n\r\nPURPOSE         : NT specific code for EMS LIM rev 4.0\r\n                implementation.\r\n\r\nThe Following Routines are defined:\r\n                1. host_initialise_EM()\r\n                2. host_deinitialise_EM()\r\n                3. host_allocate_storage()\r\n                4. host_free_storage()\r\n                5. host_reallocate_storage()\r\n                6. host_map_page()\r\n                7. host_unmap_page()\r\n                8. host_alloc_page()\r\n                9. host_free_page()\r\n                10. host_copy_con_to_con()\r\n                11. host_copy_con_to_EM()\r\n                12. host_copy_EM_to_con()\r\n                13. host_copy_EM_to_EM()\r\n                14. host_exchg_con_to_con()\r\n                15. host_exchg_con_to_EM()\r\n                16. host_exchg_EM_to_EM()\r\n                17. host_get_access_key()\r\n\r\n=========================================================================\r\n*/\r\n#include <nt.h>\r\n#include <ntrtl.h>\r\n#include <nturtl.h>\r\n#include <windows.h>\r\n\r\n#include \"insignia.h\"\r\n#include \"host_def.h\"\r\n#include \"string.h\"\r\n#include \"stdlib.h\"\r\n\r\n#ifdef LIM\r\n#ifdef MONITOR  //x86 specific LIM functions\r\n#line 50\r\n#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.\r\n#endif /* MONITOR */\r\n#line 948\r\n#endif /* LIM */\r\n#line 53\r\n"
+}

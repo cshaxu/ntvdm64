@@ -1,0 +1,52 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+  "original_sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+  "current_sha256": "b395238663867747ea1032f19fcdb7ae919c7a859fd827c814abb70f2e1ee472",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 30,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 69,
+      "original_count": 1,
+      "current_start": 72,
+      "current_count": 1,
+      "original": [
+        "#define FAR"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 352,
+      "original_count": 1,
+      "current_start": 357,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/mvdm-host/vdmredir/vrdisp.c",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_com.c"
+  ],
+  "limits": "Whole retained source equals pinned original after exclusion-body and whitespace projection. Exclusion-only category does not certify all supported header contexts, runtime device capability or absence of line findings."
+}

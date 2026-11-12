@@ -1,0 +1,62 @@
+{
+  "path": "src/mvdm-host/wow32/wmmedia.h",
+  "original_sha256": "7b2e07ac7da3864922a65586539c19945344ed04df1d53d26e38119102a69801",
+  "current_sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 239,
+      "original_count": 31,
+      "current_start": 240,
+      "current_count": 1,
+      "original": [
+        "/* -----------------------------------------------------------------------",
+        " *",
+        " * MCI Command Thunks Debugging Functions and Macros",
+        " *",
+        " * ----------------------------------------------------------------------- */",
+        "typedef struct {",
+        "    UINT    uMsg;",
+        "    LPSTR   lpstMsgName;",
+        "} MCI_MESSAGE_NAMES;",
+        "",
+        "extern int                  mmDebugLevel;",
+        "extern int                  mmTraceWave;",
+        "extern int                  mmTraceMidi;",
+        "extern MCI_MESSAGE_NAMES    mciMessageNames[32];",
+        "",
+        "extern VOID wow32MciSetDebugLevel( VOID );",
+        "extern VOID wow32MciDebugOutput( LPSTR lpstrFormatStr, ... );",
+        "",
+        "#define dprintf( _x_ )                          wow32MciDebugOutput _x_",
+        "#define dprintf1( _x_ ) if (mmDebugLevel >= 1) {wow32MciDebugOutput _x_ ;} else",
+        "#define dprintf2( _x_ ) if (mmDebugLevel >= 2) {wow32MciDebugOutput _x_ ;} else",
+        "#define dprintf3( _x_ ) if (mmDebugLevel >= 3) {wow32MciDebugOutput _x_ ;} else",
+        "#define dprintf4( _x_ ) if (mmDebugLevel >= 4) {wow32MciDebugOutput _x_ ;} else",
+        "#define dprintf5( _x_ ) if (mmDebugLevel >= 5) {wow32MciDebugOutput _x_ ;} else",
+        "",
+        "#define trace_wave( _x_ ) if (mmTraceWave) {wow32MciDebugOutput _x_ ;} else",
+        "#define trace_midi( _x_ ) if (mmTraceMidi) {wow32MciDebugOutput _x_ ;} else",
+        "#define trace_aux( _x_ )  if (mmTraceAux)  {wow32MciDebugOutput _x_ ;} else",
+        "#define trace_joy( _x_ )  if (mmTraceJoy)  {wow32MciDebugOutput _x_ ;} else",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 270,
+      "current": 241,
+      "logical": 240
+    }
+  ],
+  "evidence": "Full normalized diff consists solely of original DEBUG/NEWALIAS/DBG conditional-body replacements; selected hash/list alias and multimedia declarations remain original.",
+  "limits": [
+    "Source classification, not new build/runtime validation.",
+    "Exclusion-only does not imply compiler-context or logical-line certification."
+  ]
+}

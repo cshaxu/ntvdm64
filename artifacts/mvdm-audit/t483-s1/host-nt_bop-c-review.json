@@ -1,0 +1,1049 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+  "review_complete": true,
+  "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+  "current_sha256": "38a144a701aff20dddd464c2024df3840925bbc3dcef82d925c4945bd8003484",
+  "verified_call_chains": [
+    "worker_lifecycle.c task_instruction -> ntvdm_wow_terminate_ticket -> W32TerminateTaskTicket -> original W32HungAppNotifyThread; ticket owner and failure gate are in wow_task_termination.c",
+    "nt_bop command bridge -> mvdm_vm_command_enter: services8/10, software VM bit, registered callback; advances IP and CALLF to guest callback. No registered callback returns0 for original path.",
+    "WOW page-domain enter sets CR3/PG and publishes client desktop; activation selects worker WOW GDT after W32Init. Real-mode withdrawal and reentry implementations exist."
+  ],
+  "register_entries": 24,
+  "changes": [
+    {
+      "original_start": 5,
+      "original_count": 0,
+      "current_start": 5,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include <stdint.h>"
+      ]
+    },
+    {
+      "original_start": 72,
+      "original_count": 0,
+      "current_start": 77,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\"",
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h\"",
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_firmware.h\""
+      ]
+    },
+    {
+      "original_start": 172,
+      "original_count": 0,
+      "current_start": 181,
+      "current_count": 13,
+      "original": [],
+      "current": [
+        "/* T449 S3: the broker selects an opaque management ticket; WOW32 resolves",
+        " * it against its live original TD mapping and owns the actual HTASK exit.",
+        " * This is intentionally a narrow loader bridge, not a second control path. */",
+        "DWORD ntvdm_wow_terminate_ticket(uint64_t ticket)",
+        "{",
+        "    typedef DWORD (WINAPI *terminate_ticket_fn)(uint64_t);",
+        "    terminate_ticket_fn terminate_ticket;",
+        "    if(!ticket || !hWOWDll)return ERROR_INVALID_STATE;",
+        "    terminate_ticket=(terminate_ticket_fn)GetProcAddress(hWOWDll,",
+        "        \"W32TerminateTaskTicket\");",
+        "    return terminate_ticket ? terminate_ticket(ticket) : ERROR_PROC_NOT_FOUND;",
+        "}",
+        ""
+      ]
+    },
+    {
+      "original_start": 176,
+      "original_count": 0,
+      "current_start": 199,
+      "current_count": 19,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),",
+        "        (unsigned long)getCR3(), getCS(), getIP(),",
+        "        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());",
+        "",
+        "    /* The immutable PMODE32 USER client reads NT's fixed shared-data linear",
+        "     * address after this BOP returns.  Standalone CPU40 has no NT page-table",
+        "     * owner, so bind the finite worker view before loading WOW32. */",
+        "    if (!mvdm_softpc_wow_page_domain_enter()) {",
+        "        mvdm_softpc_report_wow_stage(\"page-domain-enter-failed\",",
+        "            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+        "        TerminateVDM();",
+        "        return;",
+        "    }",
+        "    mvdm_softpc_report_wow_stage(\"page-domain-entered\",",
+        "        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+        "    mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),",
+        "        (unsigned long)getCR3(), getCS(), getIP(),",
+        "        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());",
+        ""
+      ]
+    },
+    {
+      "original_start": 178,
+      "original_count": 0,
+      "current_start": 221,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_wow_stage(\"load-begin\",",
+        "        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 183,
+      "original_count": 0,
+      "current_start": 231,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        mvdm_softpc_report_wow_stage(\"load-failed\",",
+        "            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 193,
+      "original_count": 0,
+      "current_start": 246,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        mvdm_softpc_report_wow_stage(\"init-export-missing\",",
+        "            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 198,
+      "original_count": 1,
+      "current_start": 254,
+      "current_count": 4,
+      "original": [
+        "    if ((WOWDispatchEntry = GetProcAddress(hWOWDll, \"W32Dispatch\")) == NULL)"
+      ],
+      "current": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-008: modern x86 MSVC rejects the historical",
+        "       implicit FARPROC-to-MYFARPROC conversion.  Preserve the original raw",
+        "       export address and call path; no WOW provider is enabled by this cast. */",
+        "    if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, \"W32Dispatch\")) == NULL)"
+      ]
+    },
+    {
+      "original_start": 203,
+      "original_count": 0,
+      "current_start": 265,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        mvdm_softpc_report_wow_stage(\"dispatch-export-missing\",",
+        "            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 244,
+      "original_count": 0,
+      "current_start": 315,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_wow_stage(\"init-begin\",",
+        "        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 249,
+      "original_count": 0,
+      "current_start": 325,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        mvdm_softpc_report_wow_stage(\"init-failed\",",
+        "            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 0,
+      "current_start": 331,
+      "current_count": 15,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_wow_stage(\"init-succeeded\",",
+        "        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+        "",
+        "    /* `W32Init` itself is native host code. Its successful return is the",
+        "     * first point at which immutable USER16 can safely consume the original",
+        "     * flat selector ABI. Switch only the worker descriptor view, leaving the",
+        "     * DOSX source GDT unchanged for real-mode withdrawal. */",
+        "    if (!mvdm_softpc_wow_page_domain_activate_wow_context()) {",
+        "        mvdm_softpc_report_wow_stage(\"activate-failed\",",
+        "            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+        "        TerminateVDM();",
+        "        return;",
+        "    }",
+        "    mvdm_softpc_report_wow_stage(\"activated\",",
+        "        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 257,
+      "original_count": 0,
+      "current_start": 352,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_wow_stage(\"dispatch-begin\",",
+        "        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 280,
+      "original_count": 0,
+      "current_start": 361,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* S42 observation only: the original dispatcher has returned and CPU",
+        "     * state remains entirely owned by the original BOP/CCPU sequence. */",
+        "    mvdm_softpc_report_wow_dispatch_return_state((unsigned long)getCR0(),",
+        "        (unsigned long)getCR3(), getCS(), getIP());"
+      ]
+    },
+    {
+      "original_start": 285,
+      "original_count": 4,
+      "current_start": 371,
+      "current_count": 7,
+      "original": [
+        "    XMSDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),",
+        "                                            1,",
+        "                                            FALSE",
+        "                                            )));"
+      ],
+      "current": [
+        "    ULONG service = (ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),",
+        "                                                 1,",
+        "                                                 FALSE));",
+        "",
+        "    mvdm_softpc_report_xms_service(service, getAX(), getBX(), getCX(),",
+        "        getDX(), getSS(), getBP());",
+        "    XMSDispatch(service);"
+      ]
+    },
+    {
+      "original_start": 322,
+      "original_count": 0,
+      "current_start": 414,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-871: admitted software-V86 bridge CALLF",
+        "     * owns its return IP; ordinary COMMAND dispatch remains below. */",
+        "    {",
+        "        extern int mvdm_vm_command_enter(uint32_t service);",
+        "        if (mvdm_vm_command_enter((uint32_t)Command)) return;",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 450,
+      "original_count": 0,
+      "current_start": 538,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */"
+      ]
+    },
+    {
+      "original_start": 452,
+      "original_count": 1,
+      "current_start": 542,
+      "current_count": 1,
+      "original": [
+        "                                               (UCHAR)(getMSW() & MSW_PE ? TRUE : FALSE)"
+      ],
+      "current": [
+        "                                               (UCHAR)((getMSW() & MSW_PE) && !getVM())"
+      ]
+    },
+    {
+      "original_start": 569,
+      "original_count": 1,
+      "current_start": 682,
+      "current_count": 13,
+      "original": [
+        "    CloseHandle(hVdmRedir);"
+      ],
+      "current": [
+        "    /* DIV-872: failed LoadLibrary resolution owns a module reference, not a",
+        "       kernel handle. Restore the original unloaded callback state. */",
+        "    VrDispatch = NULL;",
+        "    VrInitialized = DefaultVrInitialized;",
+        "    VrReadNamedPipe = NULL;",
+        "    VrWriteNamedPipe = NULL;",
+        "    VrIsNamedPipeName = NULL;",
+        "    VrIsNamedPipeHandle = NULL;",
+        "    VrAddOpenNamedPipeInfo = NULL;",
+        "    VrConvertLocalNtPipeName = NULL;",
+        "    VrRemoveOpenNamedPipeInfo = NULL;",
+        "    if (hVdmRedir != NULL) FreeLibrary(hVdmRedir);",
+        "    hVdmRedir = NULL;"
+      ]
+    },
+    {
+      "original_start": 593,
+      "original_count": 1,
+      "current_start": 718,
+      "current_count": 2,
+      "original": [
+        "    UCHAR uchMode = getMSW() & MSW_PE ? TRUE : FALSE;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */",
+        "    UCHAR uchMode = (UCHAR)((getMSW() & MSW_PE) && !getVM());"
+      ]
+    },
+    {
+      "original_start": 627,
+      "original_count": 0,
+      "current_start": 754,
+      "current_count": 16,
+      "original": [],
+      "current": [
+        "    unsigned long direct_access_cpu =",
+        "        ((unsigned long)getCS() << 16) | (unsigned long)getIP();",
+        "    unsigned long direct_access_stack_pointer =",
+        "        ((unsigned long)getSS() << 16) | (unsigned long)getSP();",
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-258): default-off scalar attribution. The",
+        "     * second value in direct-access-error-bop is CS:IP, not a stack word.",
+        "     * The original BOP hands the",
+        "     * unsupported-direct-access type to the host error UI; record that",
+        "     * already-decoded value so a hidden dialog cannot be mistaken for a",
+        "     * guest keyboard or hardware-probe hang. */",
+        "    mvdm_softpc_report_setup_hardware_probe(\"direct-access-error-bop\",",
+        "        (unsigned long)getAX(), direct_access_cpu);",
+        "    mvdm_softpc_report_setup_hardware_probe(\"direct-access-bop-enter\",",
+        "        direct_access_cpu,",
+        "        direct_access_stack_pointer);"
+      ]
+    },
+    {
+      "original_start": 628,
+      "original_count": 0,
+      "current_start": 772,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "    direct_access_cpu =",
+        "        ((unsigned long)getCS() << 16) | (unsigned long)getIP();",
+        "    direct_access_stack_pointer =",
+        "        ((unsigned long)getSS() << 16) | (unsigned long)getSP();",
+        "    mvdm_softpc_report_setup_hardware_probe(\"direct-access-bop-leave\",",
+        "        direct_access_cpu,",
+        "        direct_access_stack_pointer);"
+      ]
+    },
+    {
+      "original_start": 848,
+      "original_count": 1,
+      "current_start": 989,
+      "current_count": 3,
+      "original": [
+        "    if ((InitEntry = (MYFARPROC)GetProcAddress(hDll, pchInit)) == NULL){"
+      ],
+      "current": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-008: preserve the historical export address",
+        "       while making the intended FARPROC call shape explicit for modern x86. */",
+        "    if ((InitEntry = (FARPROC)GetProcAddress(hDll, pchInit)) == NULL){"
+      ]
+    },
+    {
+      "original_start": 867,
+      "original_count": 1,
+      "current_start": 1011,
+      "current_count": 2,
+      "original": [
+        "    if ((DispatchEntry = (MYFARPROC)GetProcAddress(hDll, pchDispatch)) == NULL){"
+      ],
+      "current": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-008: see the matching InitEntry conversion. */",
+        "    if ((DispatchEntry = (FARPROC)GetProcAddress(hDll, pchDispatch)) == NULL){"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 181,
+      "original_count": 1,
+      "current_start": 228,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 191,
+      "original_count": 1,
+      "current_start": 243,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 201,
+      "original_count": 1,
+      "current_start": 262,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 212,
+      "original_count": 1,
+      "current_start": 278,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 222,
+      "original_count": 1,
+      "current_start": 290,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 235,
+      "original_count": 1,
+      "current_start": 305,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 247,
+      "original_count": 1,
+      "current_start": 322,
+      "current_count": 1,
+      "original": [
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 259,
+      "original_count": 20,
+      "current_start": 358,
+      "current_count": 1,
+      "original": [
+        "    // Dispatch to WOW dispatcher",
+        "    {",
+        "\tstatic BYTE **AddressOfLocal;",
+        "\tBYTE *localSimulateContext = GLOBAL_SimulateContext;",
+        "",
+        "\tAddressOfLocal = &localSimulateContext;",
+        "",
+        "\t(*WOWDispatchEntry)();",
+        "",
+        "\tSET_GLOBAL_SimulateContext(localSimulateContext);",
+        "",
+        "\tif(AddressOfLocal != &localSimulateContext)",
+        "\t{",
+        "\t    //Thread switch detected via stack change, force CPU to",
+        "\t    //abort the current fragment, reseting GDP var's refering",
+        "\t    //to the host stack",
+        "",
+        "\t    setEIP(getEIP());",
+        "\t}",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 298,
+      "original_count": 1,
+      "current_start": 389,
+      "current_count": 1,
+      "original": [
+        "    force_yoda();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 358,
+      "original_count": 15,
+      "current_start": 458,
+      "current_count": 1,
+      "original": [
+        "ULONG DefaultVrError(VOID);",
+        "ULONG DefaultVrError() {",
+        "    printf(\"MS_bop_7: Error: function called without VDMREDIR loaded!\\n\");",
+        "    HostDebugBreak();",
+        "    return 0;",
+        "}",
+        "MYFARPROC VrDispatch = &DefaultVrError;",
+        "MYFARPROC VrInitialized = &DefaultVrInitialized;",
+        "MYFARPROC VrReadNamedPipe = &DefaultVrError;",
+        "MYFARPROC VrWriteNamedPipe = &DefaultVrError;",
+        "MYFARPROC VrIsNamedPipeName = &DefaultVrError;",
+        "MYFARPROC VrIsNamedPipeHandle = &DefaultVrError;",
+        "MYFARPROC VrAddOpenNamedPipeInfo = &DefaultVrError;",
+        "MYFARPROC VrConvertLocalNtPipeName = &DefaultVrError;",
+        "MYFARPROC VrRemoveOpenNamedPipeInfo = &DefaultVrError;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 469,
+      "original_count": 2,
+      "current_start": 560,
+      "current_count": 1,
+      "original": [
+        "    default:",
+        "        printf(\"MS_bop_7: BAD: VdmRedirLoadState=%d???\\n\", VdmRedirLoadState);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 492,
+      "original_count": 1,
+      "current_start": 584,
+      "current_count": 1,
+      "original": [
+        "    LPSTR funcName = \"\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 507,
+      "original_count": 1,
+      "current_start": 601,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrDispatch\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 513,
+      "original_count": 1,
+      "current_start": 609,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrInitialized\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 519,
+      "original_count": 1,
+      "current_start": 617,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrReadNamedPipe\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 525,
+      "original_count": 1,
+      "current_start": 625,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrWriteNamedPipe\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 531,
+      "original_count": 1,
+      "current_start": 633,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrIsNamedPipeName\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 537,
+      "original_count": 1,
+      "current_start": 641,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrIsNamedPipeHandle\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 543,
+      "original_count": 1,
+      "current_start": 649,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrAddOpenNamedPipeInfo\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 549,
+      "original_count": 1,
+      "current_start": 657,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrConvertLocalNtPipeName\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 555,
+      "original_count": 1,
+      "current_start": 665,
+      "current_count": 1,
+      "original": [
+        "            funcName = \"VrRemoveOpenNamedPipeInfo\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 566,
+      "original_count": 1,
+      "current_start": 678,
+      "current_count": 1,
+      "original": [
+        "        printf(\"MS_bop_7: Error: cannot locate entry point %s in VDMREDIR.DLL\\n\", funcName);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 648,
+      "original_count": 2,
+      "current_start": 801,
+      "current_count": 1,
+      "original": [
+        "        else",
+        "            printf(\"NTVDM:Idle control from VDD bop passed bad AX value (%d)\\n\", control);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 683,
+      "original_count": 17,
+      "current_start": 837,
+      "current_count": 1,
+      "original": [
+        "    extern VOID MonitorEndIretHook(VOID);",
+        "    half_word iret_index;",
+        "",
+        "",
+        "    // get iret index",
+        "    iret_index = *Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),",
+        "                                     1,",
+        "                                     (UCHAR)(getPE() ? TRUE : FALSE)",
+        "                                     );",
+        "",
+        "    // Tell ica that an iret bop has been called",
+        "    ica_iret_hook_called((int) iret_index);",
+        "",
+        "    //",
+        "    // Clean up stack, and resume normal code path",
+        "    //",
+        "    MonitorEndIretHook();"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor IRET BOP"
+      ]
+    },
+    {
+      "original_start": 723,
+      "original_count": 1,
+      "current_start": 864,
+      "current_count": 1,
+      "original": [
+        "       printf(\"Invalid notification bop\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 738,
+      "original_count": 9,
+      "current_start": 882,
+      "current_count": 1,
+      "original": [
+        "",
+        "    AddrIretBopTable = ( ((ULONG)getDS() << 16) | (ULONG)getDI() );",
+        "",
+        "#ifndef PROD",
+        "    if (getCX() != VDM_RM_IRETBOPSIZE) {",
+        "        OutputDebugString(\"NTVDM:spacing != VDM_RM_IRETBOPSIZE\\n\");",
+        "        DebugBreak();",
+        "        }",
+        "#endif"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 763,
+      "original_count": 1,
+      "current_start": 902,
+      "current_count": 1,
+      "original": [
+        "    setCF(1);"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor keyboard setup carry"
+      ]
+    },
+    {
+      "original_start": 898,
+      "original_count": 1,
+      "current_start": 1045,
+      "current_count": 1,
+      "original": [
+        "    printf(\"Invalid BOP Handle Passed to DeRegisterModule\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 919,
+      "original_count": 1,
+      "current_start": 1068,
+      "current_count": 1,
+      "original": [
+        "    printf(\"Invalid BOP Handle Passed to DispatchCall\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 932,
+      "original_count": 30,
+      "current_start": 1084,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * \"Safe\" version of LoadLibrary which preserves floating-point state",
+        " * across the load.  This is critical on x86 because the FP state being",
+        " * preserved is the 16-bit app's state.  MSVCRT.DLL is one offender which",
+        " * changes the Precision bits in its Dll init routine.",
+        " *",
+        " * On RISC, this is an alias for LoadLibrary",
+        " *",
+        " */",
+        "HINSTANCE SafeLoadLibrary(char *name)",
+        "{",
+        "    HINSTANCE hInst;",
+        "    BYTE FpuState[108];",
+        "",
+        "    // Save the 487 state",
+        "    _asm {",
+        "        lea    ecx, [FpuState]",
+        "        fsave  [ecx]",
+        "    }",
+        "",
+        "    hInst = LoadLibrary(name);",
+        "",
+        "    // Restore the 487 state",
+        "    _asm {",
+        "        lea    ecx, [FpuState]",
+        "        frstor [ecx]",
+        "    }",
+        "",
+        "    return hInst;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-601: unsupported hardware-host FPU save path"
+      ]
+    }
+  ],
+  "initial_review": "24 non-exclusion chunks and 30 exclusion bodies, reviewed in current line order. Functional and observation-only edits are separated; no source edits applied.",
+  "counter_review": "Necessary call/type/address/load ownership differs from removable logging. Existing test consumers prevent deleting diagnostics without coordinated assertion updates. Page-domain functional necessity is plausible from concrete callers but full original equivalence/minimality is not certified; marked pending evidence rather than unconditional retention. Exclusion-only bodies and line directives are not new runtime proof.",
+  "decisions": {
+    "5": {
+      "decision": "retain",
+      "classification": "fixed-width-interface-types",
+      "change_plan": "Keep stdint.h while uint64_t ticket and uint32_t command interfaces remain.",
+      "evidence": "Ticket/command interfaces explicitly use fixed-width integers.",
+      "related_callers": "worker_lifecycle.c; mvdm_vm_ingress.c",
+      "verification_required": "Compile selected product profiles; retain DOS/WOW startup and BOP failure tests. No tests run in this review.",
+      "missing_evidence": ""
+    },
+    "77": {
+      "decision": "simplify",
+      "classification": "include-dependency-scope",
+      "change_plan": "Delete unused mvdm_softpc_firmware.h include. Retain page-domain declaration; remove termination-report header only when all diagnostic calls are removed.",
+      "evidence": "No firmware header declaration is referenced in complete nt_bop.c; header has declarations only, no behavior mappings.",
+      "related_callers": "WOW page-domain and report providers",
+      "verification_required": "Compile selected product profiles; retain DOS/WOW startup and BOP failure tests. No tests run in this review.",
+      "missing_evidence": ""
+    },
+    "181": {
+      "decision": "retain",
+      "classification": "wow-task-termination-loader-bridge",
+      "change_plan": "Retain narrow ticket forwarding through the already loaded WOW module; keep ticket resolution and original hung-task handling in WOW32. Do not duplicate ticket state in mirror.",
+      "evidence": "worker_lifecycle task_instruction obtains service-issued identity and calls this bridge; W32TerminateTaskTicket resolves live ticket and invokes W32HungAppNotifyThread. Original nt_bop owns hWOWDll.",
+      "related_callers": "worker_lifecycle.c; wow_task_termination.c",
+      "verification_required": "WOW task targeted termination, stale ticket, busy handler, missing module/export; other tasks survive. No new runtime result.",
+      "missing_evidence": ""
+    },
+    "199": {
+      "decision": "pending-evidence",
+      "classification": "wow-page-domain-entry",
+      "change_plan": "Remove observation-only calls separately, but retain page-domain entry/failure behavior pending original NT shared-data mapping and minimality proof. Do not delete the functional call merely to restore mirror text.",
+      "evidence": "page_domain_enter requires session/PE, creates per-owner domain, sets CR3/PG, publishes client desktop; failure reaches TerminateVDM here.",
+      "related_callers": "mvdm_softpc_wow_page_domain.c; MS_bop_0",
+      "verification_required": "Cold/repeated WOW entry, failure cleanup, protected-real-protected transitions, descriptor/page ownership.",
+      "missing_evidence": "Original host mapping responsibility and smallest complete CCPU substitute not fully proven in this file review."
+    },
+    "254": {
+      "decision": "retain",
+      "classification": "wow-export-function-type",
+      "change_plan": "Retain MYFARPROC conversion to the actual destination type, preserving original export/call.",
+      "evidence": "WOWDispatchEntry declared MYFARPROC; GetProcAddress returns FARPROC. Original WOWInitEntry already uses same intended conversion.",
+      "related_callers": "W32Dispatch; WOWInitEntry",
+      "verification_required": "Compile with selected compiler diagnostics; WOW dispatch startup/callback regression.",
+      "missing_evidence": ""
+    },
+    "331": {
+      "decision": "pending-evidence",
+      "classification": "wow-page-domain-activation",
+      "change_plan": "Remove stage logging separately; retain activation/failure sequence until minimal descriptor-view substitution is proven.",
+      "evidence": "activate_wow_context requires active domain/PG/GDT, selects shadow WOW GDT; leave/reenter methods restore DOSX/WOW views. Called only after successful W32Init here.",
+      "related_callers": "WOW W32Init; page_domain leave/reenter",
+      "verification_required": "WOW init failure and success, real-mode withdrawal/reentry and selector usage.",
+      "missing_evidence": "Exact original descriptor obligations, failure cleanup and minimal implementation boundary need further proof."
+    },
+    "414": {
+      "decision": "retain",
+      "classification": "software-vm-command-interposition",
+      "change_plan": "Retain one command interception before original CmdDispatch; replace block-local extern with existing mvdm_vm_ingress.h declaration when cleaning includes, without changing ordering or adding another dispatch route.",
+      "evidence": "mvdm_vm_command_enter only accepts services8/10 with VM bit and registered callback; otherwise returns0. Selected callback owns IP advance and original CCPU CALLF; original CmdDispatch/IP advance remains fallback.",
+      "related_callers": "mvdm_vm_ingress.c; mvdm_vm_command_admit; CmdDispatch",
+      "verification_required": "Driver on/off, DOSONLY modes, services8/10 and ordinary services, CALLF failure and return IP; multi-VM launch.",
+      "missing_evidence": ""
+    },
+    "538": {
+      "decision": "retain",
+      "classification": "software-v86-address-mode",
+      "change_plan": "Retain explanation coupled to the following PE && !VM address-mode correction.",
+      "evidence": "Sim32 mode selects segmented protected versus real addressing; software V86 keeps PE set but uses real-mode segment bases.",
+      "related_callers": "MS_bop_7; Sim32pGetVDMPointer",
+      "verification_required": "Real/protected/software-V86 redirector BOP service decode; same selector number with differing real/protected bases.",
+      "missing_evidence": ""
+    },
+    "542": {
+      "decision": "retain",
+      "classification": "software-v86-address-mode",
+      "change_plan": "Retain PE && !VM; do not pass protected selector mode solely from PE.",
+      "evidence": "SIM32 receives explicit pm flag and resolves address accordingly; PE alone does not distinguish software V86.",
+      "related_callers": "MS_bop_7; sim32_effective_addr",
+      "verification_required": "Real/protected/software-V86 service-byte decode and paging controls.",
+      "missing_evidence": ""
+    },
+    "682": {
+      "decision": "retain",
+      "classification": "redirector-partial-load-cleanup",
+      "change_plan": "Retain callback reset, FreeLibrary and null module on failed resolution; retain original no-retry guest error behavior.",
+      "evidence": "SafeLoadLibrary returns module reference, not kernel handle; LoadVdmRedir publishes callbacks incrementally, VdmRedirLoaded only after all9 exports. Test fixture covers missing DLL, each missing export, actual detach and BOP no retry.",
+      "related_callers": "LoadVdmRedir; demfile/demhndl; redirector_loader_test.c",
+      "verification_required": "Run existing exact-source redirector loader fixture; verify nine partial failures, callbacks empty, unload once and no BOP retry.",
+      "missing_evidence": ""
+    },
+    "718": {
+      "decision": "retain",
+      "classification": "software-v86-address-mode",
+      "change_plan": "Retain PE && !VM for third-party service and RegisterModule string interpretation.",
+      "evidence": "MS_bop_8 passes same mode to service lookup and ISV_RegisterModule; software VM addresses use real segmentation.",
+      "related_callers": "MS_bop_8; ISV_RegisterModule; SIM32",
+      "verification_required": "Real/protected/V86 service and string lookup, invalid service, registration errors.",
+      "missing_evidence": ""
+    },
+    "989": {
+      "decision": "simplify",
+      "classification": "redundant-farproc-cast",
+      "change_plan": "Use GetProcAddress directly for FARPROC InitEntry; remove redundant FARPROC cast and associated adaptation comment. Do not restore original incompatible MYFARPROC cast.",
+      "evidence": "InitEntry is already FARPROC, same type as GetProcAddress return.",
+      "related_callers": "ISV_RegisterModule; third-party module init",
+      "verification_required": "Compile exact destination types; registration success/missing export and unload regression.",
+      "missing_evidence": ""
+    },
+    "1011": {
+      "decision": "simplify",
+      "classification": "redundant-farproc-cast",
+      "change_plan": "Use GetProcAddress directly for FARPROC DispatchEntry; remove redundant cast/comment, retain original call and table assignment.",
+      "evidence": "DispatchEntry is FARPROC and table field stores that call target.",
+      "related_callers": "ISV_RegisterModule; ISV_DispatchCall",
+      "verification_required": "Compile types; register/dispatch/deregister and missing-export cases.",
+      "missing_evidence": ""
+    },
+    "221": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "231": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "246": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "265": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "315": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "325": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "352": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "361": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "371": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "754": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    },
+    "772": {
+      "decision": "restore-original",
+      "classification": "observation-only-diagnostics",
+      "change_plan": "Remove this observation-only block and associated temporary values; preserve original dispatch/UI/failure ordering. Remove provider/declarations only after enumerating remaining callers. Replace dependent log assertions with equivalent exit/provider-marker assertions before deleting diagnostics; do not silently drop failure coverage.",
+      "evidence": "mvdm_softpc_termination.c report_* functions only append optional environment-selected logs and preserve GetLastError; no guest transition or returned success value. verify-wow-host-attach-failure.ps1 consumes stage records; softpc_observer_error_probe.c tests diagnostic error preservation.",
+      "related_callers": "mvdm_softpc_termination.c; observation fixtures; WOW attach-failure/destruction tests",
+      "verification_required": "Preserve original XMS service read/dispatch and direct-access UI; adjust diagnostic-dependent tests with equivalent assertions, then run relevant WOW/XMS/error cases.",
+      "missing_evidence": ""
+    }
+  },
+  "limits": "No functional changes or new runtime results. Page-domain pending evidence remains unresolved. Separate logical-line audit not performed."
+}

@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/wow32/wkmem.h",
+  "original_sha256": "313bd585b854ddfa21d8029814d78a5560aef3564179cef82e5819fbf64da524",
+  "current_sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 17,
+      "original_count": 2,
+      "current_start": 19,
+      "current_count": 1,
+      "original": [
+        "BOOL FASTCALL   WK32VirtualLock(PVDMFRAME pFrame);",
+        "BOOL FASTCALL   WK32VirtualUnLock(PVDMFRAME pFrame);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 19,
+      "current": 20,
+      "logical": 18
+    }
+  ],
+  "evidence": "Complete diff only replaces original conditional bodies; all remaining normalized source is exact. wkmem.c keeps original non-i386 allocation/free path; literal #if 0 VirtualLock declarations/bodies remain excluded; wktbl.h excludes only profiling count.",
+  "limits": [
+    "Audit classification only; no new runtime/build claim.",
+    "Exclusion-only is a source comparison category, not universal preprocessing certification."
+  ]
+}

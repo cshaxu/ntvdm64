@@ -1,0 +1,1983 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+  "current_sha256": "6d9c6f3225c11e25b3c24b6330465dc7c25318c48e38151ee692a64a5d78f6bb",
+  "review_complete": true,
+  "register_entries": 35,
+  "changes": [
+    {
+      "original_start": 88,
+      "original_count": 0,
+      "current_start": 90,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "",
+        "#ifdef NTVDM",
+        "/* DIVERGENCE(MVDM-HOST-DIV-317): metadata only; original scan bytes unchanged. */",
+        "#include \"mvdm_keyboard_history.h\"",
+        "extern mvdm_keyboard_history nt_keyboard_history;",
+        "extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOST-DIV-321) */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 108,
+      "original_count": 0,
+      "current_start": 119,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"xms.h\""
+      ]
+    },
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 151,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "/*",
+        " * DIVERGENCE(MVDM-HOST-DIV-461): output-data consumption and IRQ1's PIC",
+        " * acknowledgement are distinct hardware observations.  The original NT host",
+        " * path retired this one-slot latch from KbdEOIHook(), which loses a scan byte",
+        " * when a client acknowledges IRQ1 before reading port 60.  Advance the slot",
+        " * only after this byte has been both read and normally acknowledged.",
+        " */",
+        "LOCAL BOOL kbd_output_data_read = FALSE;",
+        "LOCAL BOOL kbd_output_irq_acknowledged = FALSE;"
+      ]
+    },
+    {
+      "original_start": 951,
+      "original_count": 0,
+      "current_start": 832,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "         nt_keyboard_history.device[buff_6805_out_ptr]=0; /* DIV-317: response, not user input. */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 956,
+      "original_count": 0,
+      "current_start": 841,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "        nt_keyboard_history.device[buff_6805_in_ptr]=nt_keyboard_history.active; /* DIV-317 */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 975,
+      "original_count": 0,
+      "current_start": 864,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "\tnt_keyboard_history.translated=nt_keyboard_history.device[buff_6805_out_ptr]; /* DIV-317 */",
+        "\tnt_keyboard_history.device[buff_6805_out_ptr]=0;"
+      ]
+    },
+    {
+      "original_start": 1010,
+      "original_count": 0,
+      "current_start": 903,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    mvdm_keyboard_history_clear_ring(&nt_keyboard_history); /* DIV-317 */"
+      ]
+    },
+    {
+      "original_start": 1080,
+      "original_count": 1,
+      "current_start": 975,
+      "current_count": 3,
+      "original": [
+        "\t    if(last_marker == 0)"
+      ],
+      "current": [
+        "\t    /* DIVERGENCE: MVDM-HOST-DIV-315: a complete single-byte key",
+        "\t     * counts independently of any preceding partial multibyte key. */",
+        "\t    if(last_marker == 0 || (key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK))"
+      ]
+    },
+    {
+      "original_start": 1082,
+      "original_count": 0,
+      "current_start": 980,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "\t\tif(last_marker) *part_key_transferred = TRUE;",
+        "\t\tlast_marker = 0;"
+      ]
+    },
+    {
+      "original_start": 1084,
+      "original_count": 1,
+      "current_start": 985,
+      "current_count": 2,
+      "original": [
+        "\t\t    keys_in_buffer++; /* one byte seq\t    else */"
+      ],
+      "current": [
+        "\t\t    keys_in_buffer++; /* one byte seq */",
+        "\t\telse"
+      ]
+    },
+    {
+      "original_start": 1119,
+      "original_count": 0,
+      "current_start": 1022,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "/* DIV-317: snapshot original live slots before keys_in_6805_buff resets them. */",
+        "GLOBAL unsigned PendingKeyboardHistory(void)",
+        "{",
+        "    return mvdm_keyboard_history_pending(&nt_keyboard_history,buff_6805_out_ptr,",
+        "        buff_6805_in_ptr,BUFF_6805_PMAX,scanning_discontinued ? held_event_count : 0,",
+        "        output_full && !kbd_output_data_read,pending_8042,waiting_for_upcode);",
+        "}",
+        ""
+      ]
+    },
+    {
+      "original_start": 1122,
+      "original_count": 0,
+      "current_start": 1034,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    int cancel_irq = output_full && nt_keyboard_history.output; /* DIV-321 */",
+        "    mvdm_keyboard_history_clear_device(&nt_keyboard_history); /* DIV-317 */"
+      ]
+    },
+    {
+      "original_start": 1156,
+      "original_count": 0,
+      "current_start": 1071,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    kbd_output_data_read = FALSE;",
+        "    kbd_output_irq_acknowledged = FALSE;"
+      ]
+    },
+    {
+      "original_start": 1163,
+      "original_count": 0,
+      "current_start": 1081,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIV-321: cancellation calls EOI; empty queues before it can refill. */",
+        "    mvdm_keyboard_reset_pending_irq(cancel_irq);"
+      ]
+    },
+    {
+      "original_start": 1356,
+      "original_count": 0,
+      "current_start": 1263,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "        nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 1411,
+      "original_count": 0,
+      "current_start": 1308,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "        nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 1895,
+      "original_count": 0,
+      "current_start": 1797,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "  kbd_output_data_read = FALSE;",
+        "  kbd_output_irq_acknowledged = FALSE;",
+        "  nt_keyboard_history.output=0; /* DIV-317: original port replacement. */"
+      ]
+    },
+    {
+      "original_start": 2158,
+      "original_count": 0,
+      "current_start": 2073,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "                        nt_keyboard_history.active=nt_keyboard_history.held[i]; /* DIV-317 */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 2169,
+      "original_count": 0,
+      "current_start": 2088,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "        nt_keyboard_history.active=0; /* DIV-317: later internal actions have no raw origin. */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 2204,
+      "original_count": 1,
+      "current_start": 2127,
+      "current_count": 1,
+      "original": [
+        "   if (bKbdEoiPending)"
+      ],
+      "current": [
+        "   if (bKbdEoiPending || kbd_output_irq_acknowledged)"
+      ]
+    },
+    {
+      "original_start": 2259,
+      "original_count": 0,
+      "current_start": 2184,
+      "current_count": 19,
+      "original": [],
+      "current": [
+        "   /* PIC reset cancellation is not a normal EOI.  The original hook did not",
+        "    * distinguish CallCount and consequently retired this old device slot.",
+        "    * Preserve that reset semantics explicitly: it must neither retain an",
+        "    * unread pre-reset byte as an early-normal-EOI slot nor manufacture a",
+        "    * second acknowledgement for it. */",
+        "   if (CallCount < 0) {",
+        "       bKbdEoiPending = FALSE;",
+        "       kbd_output_data_read = FALSE;",
+        "       kbd_output_irq_acknowledged = FALSE;",
+        "       output_full = FALSE;",
+        "       nt_keyboard_history.output=0;",
+        "       bForceDelayInts = TRUE;",
+        "       continue_output();",
+        "       bForceDelayInts = FALSE;",
+        "       if (!bBiosOwnsKbdHdw)",
+        "            HostReleaseKbd();",
+        "       return;",
+        "   }",
+        ""
+      ]
+    },
+    {
+      "original_start": 2265,
+      "original_count": 1,
+      "current_start": 2211,
+      "current_count": 0,
+      "original": [
+        "   output_full = FALSE;"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 2267,
+      "original_count": 0,
+      "current_start": 2212,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "   kbd_output_irq_acknowledged = TRUE;"
+      ]
+    },
+    {
+      "original_start": 2268,
+      "original_count": 3,
+      "current_start": 2214,
+      "current_count": 7,
+      "original": [
+        "   bForceDelayInts = TRUE;",
+        "   continue_output();",
+        "   bForceDelayInts = FALSE;"
+      ],
+      "current": [
+        "   if (!output_full || kbd_output_data_read) {",
+        "       output_full = FALSE;",
+        "       nt_keyboard_history.output=0; /* DIV-317: both slot observations retire this value. */",
+        "       bForceDelayInts = TRUE;",
+        "       continue_output();",
+        "       bForceDelayInts = FALSE;",
+        "   }"
+      ]
+    },
+    {
+      "original_start": 2281,
+      "original_count": 0,
+      "current_start": 2232,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "   nt_keyboard_history.output=nt_keyboard_history.translated; /* DIV-317 */",
+        "   nt_keyboard_history.translated=0;",
+        "   kbd_output_data_read = FALSE;",
+        "   kbd_output_irq_acknowledged = FALSE;"
+      ]
+    },
+    {
+      "original_start": 2511,
+      "original_count": 0,
+      "current_start": 2407,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\t\t\tcode_to_send=input_port_val; /* DIVERGENCE(MVDM-HOST-DIV-359) */"
+      ]
+    },
+    {
+      "original_start": 2567,
+      "original_count": 0,
+      "current_start": 2468,
+      "current_count": 13,
+      "original": [],
+      "current": [
+        "#error Unsupported excluded original configuration",
+        "#else /* CPU_30_STYLE */",
+        "\t\t\t\t/*",
+        "\t\t\t\t * DIVERGENCE(MVDM-HOST-DIV-146): the original CPU40",
+        "\t\t\t\t * controller branch reaches CCPU's private interrupt bitmap",
+        "\t\t\t\t * directly, then asks the historical host to wake that CPU.",
+        "\t\t\t\t * This composition keeps that bitmap private to c_main.c and",
+        "\t\t\t\t * retains the same CPU_HW_RESET event through the original",
+        "\t\t\t\t * public CCPU entrypoint.  c_cpu_interrupt performs the",
+        "\t\t\t\t * original bitmap update and clears quick mode for the",
+        "\t\t\t\t * selected single-session executor.",
+        "\t\t\t\t */"
+      ]
+    },
+    {
+      "original_start": 2568,
+      "original_count": 3,
+      "current_start": 2484,
+      "current_count": 0,
+      "original": [
+        "#else /* CPU_30_STYLE */",
+        "\t\t\t\tcpu_interrupt_map |= CPU_RESET_EXCEPTION_MASK;",
+        "\t\t\t\thost_cpu_interrupt();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 2601,
+      "original_count": 0,
+      "current_start": 2515,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        kbd_output_data_read = FALSE;",
+        "        kbd_output_irq_acknowledged = FALSE;"
+      ]
+    },
+    {
+      "original_start": 2602,
+      "original_count": 0,
+      "current_start": 2519,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "        nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */",
+        "        /* DIV-359: expose the controller reply through port 60/status,",
+        "         * without generating an IRQ or entering the scan-code queue. */",
+        "        output_contents = (char)code_to_send;",
+        "        kbd_status |= 1;"
+      ]
+    },
+    {
+      "original_start": 2647,
+      "original_count": 0,
+      "current_start": 2567,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "                        nt_keyboard_history.prefix=nt_keyboard_history.translated; /* DIV-317 */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 2756,
+      "original_count": 0,
+      "current_start": 2650,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "                nt_keyboard_history.translated=nt_keyboard_history.pending; /* DIV-317 */",
+        "                nt_keyboard_history.pending=0;",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 2790,
+      "original_count": 0,
+      "current_start": 2689,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    kbd_output_data_read = FALSE;",
+        "    kbd_output_irq_acknowledged = FALSE;"
+      ]
+    },
+    {
+      "original_start": 2854,
+      "original_count": 0,
+      "current_start": 2743,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "        /* Port 64 observes controller status; only port 60 consumes data. */",
+        "        kbd_output_data_read = TRUE;",
+        "        if (kbd_output_irq_acknowledged && output_full) {",
+        "            output_full = FALSE;",
+        "            nt_keyboard_history.output=0;",
+        "            bForceDelayInts = TRUE;",
+        "            continue_output();",
+        "            bForceDelayInts = FALSE;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 3222,
+      "original_count": 0,
+      "current_start": 2884,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "       kbd_output_data_read = FALSE;",
+        "       kbd_output_irq_acknowledged = FALSE;"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 47,
+      "original_count": 1,
+      "current_start": 48,
+      "current_count": 1,
+      "original": [
+        "static char SccsID[]=\"@(#)keyba.c\t1.57 06/22/95 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 51,
+      "original_count": 6,
+      "current_start": 54,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_PPI.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 84,
+      "original_count": 1,
+      "current_start": 85,
+      "current_count": 1,
+      "original": [
+        "#include \"ckmalloc.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 189,
+      "original_count": 2,
+      "current_start": 214,
+      "current_count": 1,
+      "original": [
+        "extern void send_to_real_kbd();",
+        "extern void wait_for_ack_from_kb();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 200,
+      "original_count": 1,
+      "current_start": 227,
+      "current_count": 1,
+      "original": [
+        "GLOBAL VOID ( *do_key_repeats_fn_ptr )();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 248,
+      "original_count": 3,
+      "current_start": 277,
+      "current_count": 1,
+      "original": [
+        "#define\tBUFF_6805_VMAX\t48",
+        "#define\tBUFF_6805_PMAX\t64",
+        "#define\tBUFF_6805_PMASK\t(BUFF_6805_PMAX - 1)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 256,
+      "original_count": 1,
+      "current_start": 286,
+      "current_count": 1,
+      "original": [
+        "static half_word *buff_6805=NULL;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 268,
+      "original_count": 4,
+      "current_start": 300,
+      "current_count": 1,
+      "original": [
+        "extern IBOOL HostDelayKbdInt IPT1(char, scancode);",
+        "extern IBOOL HostPendingKbdInt IPT1(char *,scancode);",
+        "extern void HostResetKdbInts IPT0();",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported GISP_CPU configuration"
+      ]
+    },
+    {
+      "original_start": 311,
+      "original_count": 13,
+      "current_start": 343,
+      "current_count": 1,
+      "original": [
+        "/* make arrays */",
+        "static int *make_sizes;",
+        "static half_word **make_arrays;",
+        "",
+        "/* break arrays */",
+        "static int *break_sizes;",
+        "static half_word **break_arrays;",
+        "",
+        "/* set 3 key states (eg. typematic, make/break, make only, typematic make/break) */",
+        "",
+        "static half_word *set_3_key_state;",
+        "static int *key_down_count;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 342,
+      "original_count": 3,
+      "current_start": 365,
+      "current_count": 1,
+      "original": [
+        "int scan_code_6805_size,key_set,repeat_delay_target,repeat_target,repeat_delay_count,repeat_count;",
+        "int typematic_key, input_port_val;",
+        "int typematic_key_valid,waiting_for_next_code, waiting_for_next_8042_code, num_lock_on;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 360,
+      "original_count": 1,
+      "current_start": 384,
+      "current_count": 1,
+      "original": [
+        "long reset_was_by_kbd = FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 365,
+      "original_count": 1,
+      "current_start": 391,
+      "current_count": 1,
+      "original": [
+        "LOCAL q_ev_handle       refillDelayedHandle = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 371,
+      "original_count": 13,
+      "current_start": 399,
+      "current_count": 1,
+      "original": [
+        "/*",
+        "** The Mac cannot cope with loads of global data. So declare these",
+        "** as pointers and load the tables up from a Mac resource.",
+        "*/",
+        "half_word *scan_codes_temp_area;",
+        "half_word *keytypes;",
+        "int       *set_1_make_sizes, *set_2_make_sizes, *set_3_make_sizes;",
+        "int       *set_1_break_sizes, *set_2_break_sizes, *set_3_break_sizes;",
+        "half_word *trans_8042, *set_3_reverse_lookup, *set_3_default_key_state, *most_set_2_make_codes;",
+        "half_word *most_set_3_make_codes, *set_1_extra_codes, *set_2_extra_codes, *set_3_extra_codes;",
+        "half_word *set_1_extra_bk_codes, *set_2_extra_bk_codes, *set_3_extra_bk_codes, *buff_overrun_6805;",
+        "half_word *most_set_1_make_codes;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 410,
+      "original_count": 1,
+      "current_start": 430,
+      "current_count": 1,
+      "original": [
+        "  0,0,0,0,0,0,6,0,0,6,  /* 50-59 */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 419,
+      "original_count": 1,
+      "current_start": 442,
+      "current_count": 1,
+      "original": [
+        "  0,0,0,0,0,0,0,6,1,6,  /* 100-109 */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 503,
+      "original_count": 2,
+      "current_start": 529,
+      "current_count": 1,
+      "original": [
+        "  0x50,0x51,0x28,0x53,0x1a,0x0d,0x56,0x57,0x3a,0x36,0x1c,0x1b,0x5c,0x2b,0x5e,0x5f,\t\t/* 50-5f */",
+        "  0x60,0x56,0x62,0x63,0x64,0x65,0x0e,0x67,0x68,0x4f,0x6a,0x4b,0x47,0x6d,0x6e,0x6f,\t\t/* 60-6f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 527,
+      "original_count": 1,
+      "current_start": 556,
+      "current_count": 1,
+      "original": [
+        "  0x00,0x00,0x29,0x2a,0x1b,0x0d,0x7a,0x7c,0x40,0x39,0x2b,0x1c,0x1d,0x00,0x7b,0x7d,\t\t/* 50-5f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 533,
+      "original_count": 1,
+      "current_start": 565,
+      "current_count": 1,
+      "original": [
+        "  0x63,0x68,0x62,0x61,0x66,0x60,0x5a,0x5f,0x00,0x6c,0x67,0x00,0x6a,0x65,0x64,0x00,\t\t/* 70-7f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 552,
+      "original_count": 1,
+      "current_start": 587,
+      "current_count": 1,
+      "original": [
+        "  0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x00,0x02,0x02,0x00,0x02,0x01,0x03,0x00,\t\t/* 30-3f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 559,
+      "original_count": 1,
+      "current_start": 597,
+      "current_count": 1,
+      "original": [
+        "  0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x01,0x00,0x03,0x00,0x03,0x00,\t\t/* 60-6f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 571,
+      "original_count": 1,
+      "current_start": 612,
+      "current_count": 1,
+      "original": [
+        "  0x2e,0x2f,0x30,0x31,0x32,0x33,0x34,0x35,0x00,0x36,0x1d,0x00,0x38,0x39,0x38,0x00,\t\t/* 30-3f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 578,
+      "original_count": 1,
+      "current_start": 622,
+      "current_count": 1,
+      "original": [
+        "  0x48,0x4c,0x50,0x52,0x37,0x49,0x4d,0x51,0x53,0x4a,0x4e,0x00,0x1c,0x00,0x01,0x00,\t\t/* 60-6f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 590,
+      "original_count": 1,
+      "current_start": 637,
+      "current_count": 1,
+      "original": [
+        "  0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x00,0x59,0x14,0x00,0x11,0x29,0x11,0x00,\t\t/* 30-3f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 597,
+      "original_count": 1,
+      "current_start": 647,
+      "current_count": 1,
+      "original": [
+        "  0x75,0x73,0x72,0x70,0x7c,0x7d,0x74,0x7a,0x71,0x7b,0x79,0x00,0x5a,0x00,0x76,0x00,\t\t/* 60-6f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 609,
+      "original_count": 1,
+      "current_start": 662,
+      "current_count": 1,
+      "original": [
+        "  0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x00,0x59,0x11,0x00,0x19,0x29,0x39,0x00,\t\t/* 30-3f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 616,
+      "original_count": 1,
+      "current_start": 672,
+      "current_count": 1,
+      "original": [
+        "  0x75,0x73,0x72,0x70,0x7e,0x7d,0x74,0x7a,0x71,0x84,0x7c,0x00,0x79,0x00,0x08,0x00,\t\t/* 60-6f */"
+      ],
+      "current": [
+        "#error Non-NTVDM keyboard table profile is not supported"
+      ]
+    },
+    {
+      "original_start": 705,
+      "original_count": 81,
+      "current_start": 764,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * This table 'secure_keytab' identifies certain characters which",
+        " * need special treatment by Secure SoftWindows.   The table is",
+        " * indexed by keycodes, as used by the ROM routine for the U.S. English",
+        " * keyboard.   These codes are defined in IBM Personal Computer AT",
+        " * Hardware Technical Reference, Section 5 System BIOS Keyboard",
+        " * Encoding and Usage.",
+        " *",
+        " * Characters requiring special treatment include Ctrl-Alt-DEL,",
+        " * Ctrl-C and the others, including keys which modify the Boot.",
+        " * Such keys require different treatment, but can be grouped into",
+        " * about 4 different ActionClasses.",
+        " * Any key which would generate an undesirable code has the action",
+        " * bit set, along with the ActionClass number.   Additionally the",
+        " * modifier keys are also tracked with this table.",
+        " */",
+        "",
+        "#define SEC_ACTCLASS\t0x07",
+        "/* Action Classes have to be sequential from 0,",
+        " * as they are used as an index into function",
+        " * tables 'down_class' and 'up_class'",
+        " */",
+        "#define SEC_CLASS_0\t0x00",
+        "#define SEC_CLASS_1\t0x01",
+        "#define SEC_CLASS_2\t0x02",
+        "#define SEC_CLASS_3\t0x03",
+        "#define SEC_CLASS_4\t0x04",
+        "#define SEC_CLASS_5\t0x05",
+        "#define SEC_CLASS_6\t0x06",
+        "#define SEC_CLASS_7\t0x07",
+        "#define SEC_ACTION\t0x08",
+        "#define SEC_CTRL_L\t0x10",
+        "#define SEC_CTRL_R\t0x20",
+        "#define SEC_ALT_L\t0x40",
+        "#define SEC_ALT_R\t0x80",
+        "#define SEC_MOD_MASK\t(SEC_CTRL_L|SEC_CTRL_R|SEC_ALT_L|SEC_ALT_R)",
+        "",
+        "LOCAL IU8 secure_keytab [] = {",
+        "\t0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\t/* 0-15 */",
+        "\t0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\t/* 16-31 */",
+        "\t0,0,0,0,0,0,0,0,0,0,0,0,        \t/* 32-43 */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 44(LShft) Boot Modifier. */",
+        "\t0,0,0,                          \t/* 45-47 */",
+        "\tSEC_ACTION|SEC_CLASS_2,         \t/* 48(\"C\") Used with Cntrl. */",
+        "\t0,0,0,0,0,0,0,0,                \t/* 49-56 */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 57(RShft) Boot Modifier. */",
+        "\tSEC_CTRL_L,0,SEC_ALT_L,0,       \t/* 58-61 */",
+        "\tSEC_ALT_R,0,SEC_CTRL_R,         \t/* 62-64 */",
+        "\t0,0,0,0,0,0,0,0,0,0,0,          \t/* 65-75 */",
+        "\tSEC_ACTION|SEC_CLASS_0,         \t/* 76(Delete) */",
+        "\t0,0,0,0,0,0,0,0,0,0,0,0,0,0,    \t/* 77-90 */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 91(KeyPad 7) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 92(KeyPad 4) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 93(KeyPad 1) */",
+        "\t0,0,                            \t/* 94-95 */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 96(KeyPad 8) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 97(KeyPad 5) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 98(KeyPad 2) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 99(KeyPad 0) */",
+        "\t0,                              \t/* 100 */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 101(KeyPad 9) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 102(KeyPad 6) */",
+        "\tSEC_ACTION|SEC_CLASS_1,         \t/* 103(KeyPad 3) */",
+        "\tSEC_ACTION|SEC_CLASS_0,         \t/* 104(KeyPad . DEL) */",
+        "\t0,0,0,0,0,0,0,                  \t/* 105-111 */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 112(F1) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 113(F2) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 114(F3) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 115(F4) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 116(F5) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 117(F6) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 118(F7) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 119(F8) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 120(F9) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 121(F10) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 122(F11) */",
+        "\tSEC_ACTION|SEC_CLASS_3,         \t/* 123(F12) */",
+        "\t0,0,                            \t/* 124-125 */",
+        "\tSEC_ACTION|SEC_CLASS_2,         \t/* 126(Break) */",
+        "\t0                               \t/* 127 */",
+        "};"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 800,
+      "original_count": 104,
+      "current_start": 782,
+      "current_count": 1,
+      "original": [
+        "/* Track the Modifier keys. */",
+        "LOCAL IU8 keys_down = 0;",
+        "",
+        "/* Track which key downs have been supressed. */",
+        "LOCAL IU8 keys_suppressed [0x80] = {0};",
+        "",
+        "/* Forward declarations keep compiler happy. */",
+        "LOCAL VOID filtered_host_key_down IPT1(int,key);",
+        "LOCAL VOID filtered_host_key_up IPT1(int,key);",
+        "",
+        "/* Here are the functions for handling special keys. */",
+        "LOCAL VOID filt_dwn_reboot IFN1(int, key)",
+        "{",
+        "\t/* The key is only nasty if Cntrl and Alt are down. */",
+        "\tif ((keys_down & (SEC_CTRL_L | SEC_CTRL_R)) != 0 &&",
+        "\t    (keys_down & (SEC_ALT_L  | SEC_ALT_R )) != 0 )",
+        "\t{",
+        "\t\tkeys_suppressed[key] = 1;",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_down(key);",
+        "\t}",
+        "}",
+        "LOCAL VOID filt_dwn_kpad_numerics IFN1(int, key)",
+        "{",
+        "\t/* The keys are only nasty if Alt is down. */",
+        "\tif ((keys_down & (SEC_CTRL_L | SEC_CTRL_R)) == 0 &&",
+        "\t    (keys_down & (SEC_ALT_L  | SEC_ALT_R )) != 0 )",
+        "\t{",
+        "\t\tkeys_suppressed[key] = 1;",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_down(key);",
+        "\t}",
+        "}",
+        "LOCAL VOID filt_dwn_breaks IFN1(int, key)",
+        "{",
+        "\t/*",
+        "\t * The keys are only nasty if Control is down.",
+        "\t * The upness of the Alt key is not checked as the",
+        "\t * typematic feature would allow ALT-CTRL-C to be held",
+        "\t * down, then ALT could be released to deliver a stream",
+        "\t * of CTRL-C.",
+        "\t */",
+        "\tif ((keys_down & (SEC_CTRL_L | SEC_CTRL_R)) != 0)",
+        "\t{",
+        "\t\tkeys_suppressed[key] = 1;",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_down(key);",
+        "\t}",
+        "}",
+        "LOCAL VOID filt_dwn_boot_mods IFN1(int, key)",
+        "{",
+        "\t/* The keys are only nasty if in Boot mode. */",
+        "\tif (!has_boot_finished())",
+        "\t{",
+        "\t\tkeys_suppressed[key] = 1;",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_down(key);",
+        "\t}",
+        "}",
+        "LOCAL VOID filt_dwn_supress_up IFN1(int, key)",
+        "{",
+        "\tif (keys_suppressed[key])",
+        "\t{",
+        "\t\t/* Key down was suppressed, do not forward key-up. */",
+        "\t\tkeys_suppressed[key] = 0;",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_up(key);",
+        "\t}",
+        "}",
+        "",
+        "/*",
+        " * The following function table is indexed by the Action Class,",
+        " * as defined in secure_keytab[].",
+        " */",
+        "LOCAL VOID (*down_class[]) IPT1(int, key) = {",
+        "\tfilt_dwn_reboot,",
+        "\tfilt_dwn_kpad_numerics,",
+        "\tfilt_dwn_breaks,",
+        "\tfilt_dwn_boot_mods,",
+        "\tfiltered_host_key_down,",
+        "\tfiltered_host_key_down,",
+        "\tfiltered_host_key_down,",
+        "\tfiltered_host_key_down",
+        "};",
+        "LOCAL VOID (*up_class[]) IPT1(int, key) = {",
+        "\tfilt_dwn_supress_up,",
+        "\tfilt_dwn_supress_up,",
+        "\tfilt_dwn_supress_up,",
+        "\tfilt_dwn_supress_up,",
+        "\tfiltered_host_key_up,",
+        "\tfiltered_host_key_up,",
+        "\tfiltered_host_key_up,",
+        "\tfiltered_host_key_up",
+        "};"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 998,
+      "original_count": 3,
+      "current_start": 891,
+      "current_count": 1,
+      "original": [
+        "\tif (buff_6805==NULL) {",
+        "\t\tcheck_malloc(buff_6805,BUFF_6805_PMAX,half_word);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1333,
+      "original_count": 18,
+      "current_start": 1255,
+      "current_count": 1,
+      "original": [
+        "{",
+        "\tIU8 keytab_entry;",
+        "\t/* Make a note of any modifier bits. */",
+        "\tkeytab_entry = secure_keytab[key];",
+        "\tkeys_down |= keytab_entry;",
+        "\t/* If any filtering action is required, go do it. */",
+        "\tif (config_inquire(C_SECURE, NULL) && (keytab_entry & SEC_ACTION) != 0)",
+        "\t{",
+        "\t\t/* The key may need filtering. */",
+        "\t\t(*down_class[keytab_entry & SEC_ACTCLASS])(key);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_down(key);",
+        "\t}",
+        "}",
+        "",
+        "LOCAL VOID filtered_host_key_down IFN1(int,key)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1379,
+      "original_count": 4,
+      "current_start": 1291,
+      "current_count": 1,
+      "original": [
+        "else",
+        "\t{",
+        "\tdo_host_key_down(key);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1388,
+      "original_count": 18,
+      "current_start": 1300,
+      "current_count": 1,
+      "original": [
+        "{",
+        "\tIU8 keytab_entry;",
+        "\t/* Make a note of any modifier bits. */",
+        "\tkeytab_entry = secure_keytab[key];",
+        "\tkeys_down &= SEC_MOD_MASK ^ keytab_entry;",
+        "\t/* If any filtering action is required, go do it. */",
+        "\tif (config_inquire(C_SECURE, NULL) && (keytab_entry & SEC_ACTION) != 0)",
+        "\t{",
+        "\t\t/* The key may need filtering. */",
+        "\t\t(*up_class[keytab_entry & SEC_ACTCLASS])(key);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tfiltered_host_key_up(key);",
+        "\t}",
+        "}",
+        "",
+        "LOCAL VOID filtered_host_key_up IFN1(int,key)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1423,
+      "original_count": 2,
+      "current_start": 1325,
+      "current_count": 1,
+      "original": [
+        "else",
+        "\t{"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1466,
+      "original_count": 7,
+      "current_start": 1370,
+      "current_count": 1,
+      "original": [
+        "\tkey_down_count[key]++;",
+        "        if (key_down_count[key]==1)",
+        "                {       /* first press */",
+        "                repeat_delay_count=0;",
+        "\t\trepeat_count=0;",
+        "                typematic_key_valid=FALSE;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1662,
+      "original_count": 9,
+      "current_start": 1563,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\tif (key!=126)",
+        "\t\t    {",
+        "\t\t    if ((key_set != 3) || (set_3_key_state[key] == 1) || (set_3_key_state[key] == 4))",
+        "\t\t\t    {",
+        "\t\t\t    typematic_key = key;",
+        "\t\t\t    typematic_key_valid = TRUE;",
+        "\t\t\t    }",
+        "\t\t    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1681,
+      "original_count": 1,
+      "current_start": 1578,
+      "current_count": 1,
+      "original": [
+        "\t\t} /* end of if first press */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1699,
+      "original_count": 1,
+      "current_start": 1598,
+      "current_count": 1,
+      "original": [
+        "\thost_check_demo_expire ();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1706,
+      "original_count": 1,
+      "current_start": 1607,
+      "current_count": 1,
+      "original": [
+        "\t\tsure_note_trace1( AT_KBD_VERBOSE, \"Ignored extra key up:%d\", key );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1714,
+      "original_count": 4,
+      "current_start": 1617,
+      "current_count": 1,
+      "original": [
+        "\t\tif ((key==typematic_key) && typematic_key_valid)",
+        "\t\t\t{",
+        "\t\t\ttypematic_key_valid=FALSE;",
+        "\t\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1898,
+      "original_count": 1,
+      "current_start": 1805,
+      "current_count": 1,
+      "original": [
+        "#define  AddTo6805BuffImm(code) add_to_6805_buff(code, IMMEDIATE_OUTPUT);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1950,
+      "original_count": 3,
+      "current_start": 1859,
+      "current_count": 1,
+      "original": [
+        "\t\t\tcmd_code &= 0x7;",
+        "\t\t\thost_kb_light_on (cmd_code);",
+        "\t\t\thost_kb_light_off ((~cmd_code)&0x7);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1958,
+      "original_count": 13,
+      "current_start": 1868,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif ((cmd_code & 0x80)==0)",
+        "\t\t\t{",
+        "\t\t\trepeat_delay_target = (1+((cmd_code>>5)&3))*BASE_DELAY_UNIT;",
+        "\t\t\tcmd_code &= 0x1f;",
+        "\t\t\tif (cmd_code<0xb) { repeat_target =0; }",
+        "\t\t\telse { if (cmd_code<0x11) { repeat_target =1; }",
+        "\t\t\telse { if (cmd_code<0x19) { repeat_target=(cmd_code-0x12)/3 +3;}",
+        "\t\t\telse { if (cmd_code<0x1e) { repeat_target=(cmd_code-0x1a)/2+6;}",
+        "\t\t\telse { repeat_target=(cmd_code-0x1e)+8;}}}}",
+        "                        AddTo6805BuffImm(ACK_CODE);",
+        "\t\t\t}",
+        "\t\t\tsure_note_trace2(AT_KBD_VERBOSE,\"Changing kbd rate/delay: rate = %d, dealy=%d \",repeat_target,repeat_delay_target);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2007,
+      "original_count": 3,
+      "current_start": 1909,
+      "current_count": 1,
+      "original": [
+        "\t\trepeat_delay_target=2*BASE_DELAY_UNIT;",
+        "\t\trepeat_target=DEFAULT_REPEAT_TARGET;",
+        "\t\ttypematic_key_valid=FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2025,
+      "original_count": 1,
+      "current_start": 1928,
+      "current_count": 1,
+      "original": [
+        "\t\ttypematic_key_valid=FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2063,
+      "original_count": 1,
+      "current_start": 1968,
+      "current_count": 1,
+      "original": [
+        "\t\ttypematic_key_valid=FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2093,
+      "original_count": 3,
+      "current_start": 2000,
+      "current_count": 1,
+      "original": [
+        "\t\trepeat_delay_target=2*BASE_DELAY_UNIT;",
+        "\t\trepeat_target=DEFAULT_REPEAT_TARGET;",
+        "\t\ttypematic_key_valid=FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2108,
+      "original_count": 1,
+      "current_start": 2016,
+      "current_count": 1,
+      "original": [
+        "\t\ttypematic_key_valid=FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2133,
+      "original_count": 1,
+      "current_start": 2043,
+      "current_count": 1,
+      "original": [
+        "\t\tAddTo6805BuffImm(ACK_CODE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2140,
+      "original_count": 3,
+      "current_start": 2053,
+      "current_count": 1,
+      "original": [
+        "\tdefault :",
+        "\t\t/* cmd to be sent on to real kbd */",
+        "\t\tsend_to_real_kbd(cmd_code);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2148,
+      "original_count": 1,
+      "current_start": 2062,
+      "current_count": 1,
+      "original": [
+        "\twaiting_for_next_code=FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2174,
+      "original_count": 4,
+      "current_start": 2098,
+      "current_count": 1,
+      "original": [
+        "if (free_6805_buff_size < BUFF_6805_VMAX) ",
+        "\t{",
+        "\tcodes_to_translate();",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2288,
+      "original_count": 72,
+      "current_start": 2245,
+      "current_count": 1,
+      "original": [
+        "",
+        "LOCAL VOID do_int IFN1(long,scancode)",
+        "{",
+        "\toutput_contents = (char)scancode;",
+        "\tkbd_status |= 1;\t\t\t/* Character now available! */",
+        "\tif (int_enabled)",
+        "\t{",
+        "\t\tsure_note_trace0(AT_KBD_VERBOSE,\"keyboard interrupting\");",
+        "\t\tica_hw_interrupt(KEYBOARD_INT_ADAPTER, KEYBOARD_INT_LINE, 1);",
+        "\t}",
+        "}",
+        "",
+        "LOCAL VOID do_q_int IFN1(char,scancode)",
+        "{",
+        "\toutput_full = TRUE;",
+        "",
+        "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+        "\tif (!HostDelayKbdInt(scancode))",
+        "\t{\t/* no host need to delay this kbd int, so generate one now. */",
+        "\t\tdo_int ((long) scancode);",
+        "\t}",
+        "",
+        "#else /* !IRET_HOOKS || !GISP_CPU */ ",
+        "",
+        "#ifdef DELAYED_INTS",
+        "\tdo_int ((long) scancode);",
+        "#else",
+        "\tadd_q_event_i( do_int, HOST_KEYBA_INST_DELAY, (long)scancode);",
+        "#endif\t/* DELAYED_INTS */",
+        "",
+        "#endif /* IRET_HOOKS && GISP_CPU */",
+        "}",
+        "",
+        "",
+        "/* typematic keyboard repeats */",
+        "",
+        "GLOBAL VOID do_key_repeats IFN0()",
+        "{",
+        "#ifndef REAL_KBD",
+        "",
+        "#ifdef JOKER",
+        "\t/* If there are characters available, tell Joker... */",
+        "\tif (kbd_status & 1)",
+        "\t\tdo_int((long)output_contents);",
+        "#endif",
+        "",
+        "if (typematic_key_valid)",
+        "\t{",
+        "\tif (repeat_count==repeat_target && repeat_delay_count==repeat_delay_target)",
+        "\t\t{",
+        "\t\tscan_code_6805_size=make_sizes[keytypes[typematic_key]];",
+        "\t\tscan_code_6805_array=make_arrays[typematic_key];",
+        "\t\tadd_codes_to_6805_buff(scan_code_6805_size,scan_code_6805_array);",
+        "\t\tcodes_to_translate ();",
+        "\t\trepeat_count=0;",
+        "\t\t}",
+        "\telse",
+        "\t\t{",
+        "\t\tif (repeat_delay_count==repeat_delay_target)",
+        "\t\t\t{",
+        "\t\t\trepeat_count++;",
+        "\t\t\t}",
+        "\t\telse",
+        "\t\t\t{",
+        "\t\t\trepeat_delay_count++;",
+        "\t\t\t}",
+        "\t\t}",
+        "\t}",
+        "#endif",
+        "",
+        "} /* end of do_key_repeats */",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM alternative"
+      ]
+    },
+    {
+      "original_start": 2427,
+      "original_count": 1,
+      "current_start": 2316,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t      sas_disable_20_bit_wrapping();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2439,
+      "original_count": 1,
+      "current_start": 2330,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t      sas_enable_20_bit_wrapping();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2444,
+      "original_count": 1,
+      "current_start": 2337,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t   host_error(EG_GATE_A20,ERR_QUIT | ERR_RESET | ERR_CONT,NULL);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2460,
+      "original_count": 1,
+      "current_start": 2355,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\top_port_remembered_bits=cmd_code & 0x2c;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2564,
+      "original_count": 1,
+      "current_start": 2463,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\treset_was_by_kbd = TRUE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2603,
+      "original_count": 7,
+      "current_start": 2527,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* Transfer 8042 command output to output buffer, overwriting value",
+        "\t   already in the buffer. */",
+        "",
+        "\t\toutput_contents = (char)code_to_send;",
+        "\t\tkbd_status |= 1;\t\t\t/* Character now available! */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2669,
+      "original_count": 38,
+      "current_start": 2595,
+      "current_count": 1,
+      "original": [
+        "/*",
+        "** Put a scan code into the 8042 single char buffer.",
+        "** Called from do_hunter() in hunter.c",
+        "*/",
+        "",
+        "#define HUNTER_REJECTED_CODES_LIMIT 100",
+        "",
+        "int hunter_codes_to_translate IFN1( half_word, scan_code )",
+        "{",
+        "\tLOCAL ULONG rejected_scan_codes = 0;",
+        "",
+        "\tsure_note_trace1(HUNTER_VERBOSE,\"Requesting scan=%d\",scan_code);",
+        "",
+        "\tif (!pending_8042 && !keyboard_interface_disabled && !output_full)",
+        "\t{",
+        "\t\tdo_q_int(scan_code);",
+        "\t\tsure_note_trace1( HUNTER_VERBOSE, \"Accepted scan=%d\", scan_code );",
+        "",
+        "\t\trejected_scan_codes = 0;",
+        "",
+        "\t\treturn( TRUE );",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tsure_note_trace0( HUNTER_VERBOSE, \"Rejected scan\" );",
+        "",
+        "\t\tif( rejected_scan_codes++ > HUNTER_REJECTED_CODES_LIMIT )",
+        "\t\t{",
+        "\t\t\tprintf( \"Application hung up - not reading scan codes\\n\" );",
+        "\t\t\tprintf( \"Trapper terminating\\n\" );",
+        "",
+        "\t\t\tterminate();",
+        "\t\t}",
+        "",
+        "\t\treturn( FALSE );",
+        "\t}",
+        "} /* end of hunter_codes_to_translate() */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2715,
+      "original_count": 1,
+      "current_start": 2607,
+      "current_count": 1,
+      "original": [
+        "GLOBAL INT"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2800,
+      "original_count": 17,
+      "current_start": 2703,
+      "current_count": 1,
+      "original": [
+        "/* allowRefill -- used in conjunction with the Delayed Quick Event",
+        "** below (kbd_inb from port 0x60 while the keyboard interface is",
+        "** enabled.) This is called 10ms after a dubious read from port 0x60",
+        "** and allows the port to be overwritten with the next scancode.",
+        "*/",
+        "",
+        "LOCAL VOID allowRefill IFN1(long, unusedParam)",
+        "{",
+        "\tUNUSED(unusedParam);",
+        "",
+        "\t/* Clear \"refillDelayedHandle\" so we know we're all clear... */",
+        "",
+        "\trefillDelayedHandle = 0;",
+        "",
+        "\t/* continue with filling the buffer... */",
+        "\tcontinue_output();",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2866,
+      "original_count": 65,
+      "current_start": 2766,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t{",
+        "\t\t*val=output_contents;",
+        "",
+        "\t\toutput_full = FALSE;",
+        "",
+        "\t\tkbd_status &= 0xfe;\t\t/* Mask out \"char avail\" bit */",
+        "",
+        "\t\t/* Other ports should really clear this IRQ as well, but... */",
+        "",
+        "#ifdef JOKER",
+        "\t\tica_clear_int(KEYBOARD_INT_ADAPTER, KEYBOARD_INT_LINE);",
+        "#endif\t/* JOKER */",
+        "",
+        "\t\t/* <tur 06-Jul-93> BCN 2040 Replace previous horrible hack with a better one!",
+        "\t\t**",
+        "\t\t** The following is to cope with programs that read this port more than once",
+        "\t\t** expecting the same value each time, while the keyboard interface is ENABLED.",
+        "\t\t** On a real PC, this port is filled via a serial connection, and so there's at",
+        "\t\t** least a few milliseconds before a new char arrives and the port is overwritten.",
+        "\t\t** SoftPC, however, doesn't have this delay; ideally, we'd like to",
+        "\t\t** refill the buffer immediately. However, if the keyboard interface is",
+        "\t\t** enabled, we should delay refilling the buffer for a few ms.",
+        "\t\t*/",
+        "",
+        "\t\tif (keyboard_interface_disabled) {\t\t/* We're in business */",
+        "",
+        "\t\t\t/* NB: We have always assumed that anyone reading this port with the",
+        "\t\t\t** Keyboard interface disabled will ONLY READ IT ONCE (like the BIOS.)",
+        "\t\t\t**",
+        "\t\t\t** Since this seems to work, let's just go ahead and refill the buffer.",
+        "\t\t\t** (If any problems show up, we'll just have to do a quick event as in",
+        "\t\t\t** the keyboard interface enabled case below.)",
+        "\t\t\t*/",
+        "",
+        "\t\t\t/* If there is an outstanding sloppy read quick event delete it */",
+        "\t\t\tif (refillDelayedHandle) {\t\t\t",
+        "\t\t\t\tdelete_q_event(refillDelayedHandle);",
+        "\t\t\t\trefillDelayedHandle = 0;",
+        "\t\t\t}",
+        "",
+        "\t\t\tcontinue_output();",
+        "",
+        "\t\t}",
+        "\t\telse {\t\t\t\t\t\t\t\t\t/* keyboard interface is enabled */",
+        "",
+        "\t\t\t/* Do not allow port 0x60 to be overwritten for a few milliseconds.",
+        "\t\t\t** Even 10 ms isn't as bad as the two whole timer ticks (100ms) which",
+        "\t\t\t** is what it was doing previously.",
+        "\t\t\t** Keyboard response for some games, including Windows, should now",
+        "\t\t\t** be a good bit better.",
+        "\t\t\t** The original code continued output after the second read of the port",
+        "\t\t\t** with the interface enabled, which seems to imply that no PC apps have",
+        "\t\t\t** been found which read the port more than twice while expecing the same",
+        "\t\t\t** value. However, we now allow for multipe reads of the port, while enabled.",
+        "\t\t\t** Under this circumstance the port will only be re-primed after the quick event",
+        "\t\t\t** from the first sloppy read has been processed.",
+        "\t\t\t*/",
+        "",
+        "\t\t\tif (!refillDelayedHandle) \t\t\t/* if we're not already delaying, delay! */",
+        "\t\t\t\trefillDelayedHandle = add_q_event_t(allowRefill, KBD_CONT_DELAY, 0);",
+        "",
+        "\t\t}",
+        "",
+        "\t}"
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM alternative"
+      ]
+    },
+    {
+      "original_start": 2970,
+      "original_count": 4,
+      "current_start": 2809,
+      "current_count": 1,
+      "original": [
+        "",
+        "\tif (free_6805_buff_size < BUFF_6805_VMAX)",
+        "\t\tcodes_to_translate();",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2988,
+      "original_count": 46,
+      "current_start": 2828,
+      "current_count": 1,
+      "original": [
+        "/* Nothing seems to call this. I've no idea why it's here ... Simion */",
+        "/* I have been assured that these functions are used by sun - gvdl */",
+        "",
+        "GLOBAL int status_6805_buffer IFN0()",
+        "{",
+        "\tint\tfree_space;",
+        "",
+        "\tfree_space = BUFF_6805_VMAX-",
+        "\t\t((buff_6805_in_ptr - buff_6805_out_ptr) & BUFF_6805_PMASK);",
+        "\tif (free_space<0) ",
+        "\t{",
+        "\t\tfree_space=0;",
+        "\t\tsure_note_trace0(AT_KBD_VERBOSE,\"Keyboard buffer full\");",
+        "\t}",
+        "\treturn(free_space);",
+        "}",
+        "",
+        "/*",
+        " * Name: read_6805_buffer_variables",
+        " *",
+        " * Purpose:\tTo allow the host to access the state of the 6805 buffer",
+        " *\t\tThis means eg. on Sun that cut/paste can be optimised.",
+        " *",
+        " * Output:\t*in_ptr - value of the 6805 start pointer.",
+        " * Output:\t*out_ptr - value of the 6805 end pointer.",
+        " * Output:\t*buf_size - value of the 6805 buffer size.",
+        " */",
+        "GLOBAL void read_6805_buffer_variables IFN3(",
+        "int\t*, in_ptr,",
+        "int\t*, out_ptr,",
+        "int\t*, buf_size)",
+        "{",
+        "\t*in_ptr = buff_6805_in_ptr;",
+        "\t*out_ptr = buff_6805_out_ptr;",
+        "\t*buf_size = BUFF_6805_PMASK;",
+        "}",
+        "",
+        "GLOBAL VOID insert_code_into_6805_buf IFN1(half_word,code)",
+        "{",
+        "\tsure_note_trace1(AT_KBD_VERBOSE,\"got real keyboard scan code : %#x\",code);",
+        "\tadd_codes_to_6805_buff(1,&code);",
+        "\tsure_note_trace1(AT_KBD_VERBOSE,\"new free buf size = %#x\",free_6805_buff_size);",
+        "\tif (code != 0xf0) {",
+        "\t\tcodes_to_translate();",
+        "\t}",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3037,
+      "original_count": 6,
+      "current_start": 2835,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3050,
+      "original_count": 2,
+      "current_start": 2846,
+      "current_count": 1,
+      "original": [
+        "\t/* Clear out any pending keyboard buffer (port 0x60) refill delays */",
+        "        refillDelayedHandle = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3056,
+      "original_count": 39,
+      "current_start": 2854,
+      "current_count": 1,
+      "original": [
+        "/*(",
+        " *======================= KbdHookAgain() ============================",
+        " * KbdHookAgain",
+        " *",
+        " * Purpose",
+        " *\tThis is the function that we tell the ica to call when a keybd",
+        " *\tinterrupt service routine IRETs.",
+        " *",
+        " * Input",
+        " *\tadapter_id\tThe adapter id for the line. (Note the caller doesn't",
+        " *\t\t\tknow what this is, he's just returning something",
+        " *\t\t\twe gave him earlier).",
+        " *",
+        " * Outputs",
+        " *\treturn\tTRUE if there are more interrupts to service, FALSE otherwise.",
+        " *",
+        " * Description",
+        " * \tCheck if we have a delayed scancode, if so then generate the kbd int",
+        " *\tand return TRUE, else return FALSE",
+        ")*/",
+        "",
+        "GLOBAL IBOOL\t\t",
+        "KbdHookAgain IFN1(IUM32, adapter)",
+        "{\tchar scancode;",
+        "",
+        "\tif (HostPendingKbdInt(&scancode))",
+        "\t{\t/* We have a host delayed scancode, so generate a kdb int. */",
+        "\t\tsure_note_trace0(AT_KBD_VERBOSE,\"callback with saved code\");",
+        "\t\toutput_full = TRUE;",
+        "\t\tdo_int ((long) scancode);",
+        "\t\treturn(TRUE);\t/* more to do */",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tsure_note_trace0(AT_KBD_VERBOSE,\"no saved data after IRET\");",
+        "\t\treturn(FALSE);",
+        "\t}",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported GISP_CPU configuration"
+      ]
+    },
+    {
+      "original_start": 3098,
+      "original_count": 104,
+      "current_start": 2861,
+      "current_count": 1,
+      "original": [
+        "",
+        "GLOBAL VOID AT_kbd_init IFN0()",
+        "{",
+        "\tint key,i;",
+        "\tSHORT videoAdapt;",
+        "",
+        "\tsure_note_trace0(AT_KBD_VERBOSE,\"AT Keyboard initialisation\");",
+        "",
+        "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+        "\t/*",
+        "\t * Remove any existing hook call-back, and re-instate it afresh.",
+        "\t * KbdHookAgain is what gets called on a keyboard int iret.",
+        "\t */",
+        "",
+        "\tIca_enable_hooking(KEYBOARD_INT_LINE, NULL, KEYBOARD_INT_ADAPTER);",
+        "\tIca_enable_hooking(KEYBOARD_INT_LINE, KbdHookAgain, KEYBOARD_INT_ADAPTER);",
+        "",
+        "\t/* Host routine to reset any internal data for IRET_HOOK delayed ints. */",
+        "\tHostResetKdbInts();",
+        "",
+        "#endif /* IRET_HOOKS && GISP_CPU */",
+        "",
+        "#ifdef\tmacintosh",
+        "\tif (!make_arrays)",
+        "\t{",
+        "\t\t/* Allocate the world and its mother. Why does something as \"simple\"",
+        "\t\t** as the keyboard require more global data than the video emulation?",
+        "\t\t** Just wondering.",
+        "\t\t*/",
+        "\t\tmake_arrays = (half_word **)host_malloc(134*sizeof(half_word *));",
+        "\t\tbreak_arrays = (half_word **)host_malloc(134*sizeof(half_word *));",
+        "\t\tset_3_key_state = (half_word *)host_malloc(127*sizeof(half_word));",
+        "\t\tkey_down_count = (int *)host_malloc(127*sizeof(int));",
+        "\t\tscan_codes_temp_area = (half_word *)host_malloc(300*sizeof(half_word));",
+        "\t}",
+        "#endif\t/* macintosh */",
+        "",
+        "\tvideoAdapt = (ULONG) config_inquire(C_GFX_ADAPTER, NULL);",
+        "",
+        "\tbuff_6805_out_ptr=0;",
+        "\tclear_buff_6805 ();",
+        "\tkey_set=DEFAULT_SCAN_CODE_SET;",
+        "\tcurrent_light_pattern=0;",
+        "#ifdef REAL_KBD",
+        "\tsend_to_real_kbd(0xf6); /* set default */",
+        "\twait_for_ack_from_kb();",
+        "#endif",
+        "\thost_kb_light_on (7);",
+        "",
+        "#ifndef REAL_KBD",
+        "\tfor (key=0;key<127;key++)",
+        "\t{",
+        "\t\tset_3_key_state [key] = set_3_default_key_state [key];",
+        "\t\tkey_down_count[key]=0;",
+        "\t}",
+        "\trepeat_delay_target=2*BASE_DELAY_UNIT;",
+        "\trepeat_target=DEFAULT_REPEAT_TARGET;",
+        "#endif",
+        "\ttypematic_key_valid = waiting_for_next_code = ",
+        "\t\twaiting_for_next_8042_code=FALSE;",
+        "\tshift_on = l_shift_on = r_shift_on=FALSE;",
+        "\tctrl_on = l_ctrl_on = r_ctrl_on=FALSE;",
+        "\talt_on = l_alt_on = r_alt_on=FALSE;",
+        "\twaiting_for_upcode=FALSE;",
+        "\tinput_port_val=0xbf;",
+        "\tif (videoAdapt == MDA || videoAdapt == HERCULES)",
+        "\t\tinput_port_val |= 0x40;",
+        "\tkbd_status = 0x10;",
+        "\tcmd_byte_8042=0x45;",
+        "\tkeyboard_disabled = keyboard_interface_disabled=FALSE;",
+        "\top_port_remembered_bits=0xc;",
+        "",
+        "#ifdef PM",
+        "\tif ( gate_a20_status )",
+        "\t{",
+        "                sas_enable_20_bit_wrapping();",
+        "                gate_a20_status = 0;",
+        "\t}",
+        "#endif",
+        "",
+        "\tpending_8042 = output_full = in_anomalous_state=FALSE;",
+        "\tint_enabled = translating=TRUE;",
+        "\tscanning_discontinued=FALSE;",
+        "\theld_event_count=0;",
+        "",
+        "\tio_define_inb(AT_KEYB_ADAPTOR, kbd_inb);",
+        "\tio_define_outb(AT_KEYB_ADAPTOR, kbd_outb);",
+        "",
+        "\tfor (i=KEYBA_PORT_START;i<=KEYBA_PORT_END;i+=2)",
+        "\t\tio_connect_port(i, AT_KEYB_ADAPTOR, IO_READ_WRITE);",
+        "",
+        "#ifndef REAL_KBD",
+        "\tinit_key_arrays();",
+        "#endif",
+        "",
+        "\thost_kb_light_off (5);",
+        "\tnum_lock_on = TRUE;",
+        "",
+        "\thost_key_down_fn_ptr = host_key_down;",
+        "\thost_key_up_fn_ptr = host_key_up;",
+        "\tdo_key_repeats_fn_ptr = do_key_repeats;",
+        "",
+        "} /* end of AT_kbd_init */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected"
+      ]
+    }
+  ],
+  "initial_review": "All normalized diff blocks classified in original/current line order. CPU30/CPU40 split considered jointly for reset entrypoint.",
+  "counter_review": "Retain EOI contract, direct replies, original public CCPU reset and live origin metadata. Legacy counter correction is superseded by production caller. Pending-slot metadata lacks proven live producer and remains unresolved.",
+  "limits": "Audit complete means all differences classified, not all pending evidence resolved or functional repairs implemented. No fresh runtime or full diagnostic-line proof."
+}

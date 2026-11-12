@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wspool.h",
+  "original_sha256": "11e570db87246262c46c166a845e514edb08e02f8b0b107dfae1cfa41a375075",
+  "current_sha256": "ef4c59e0e10a266f72e4bf4080ceb7429b17cf62b33086345d9c981eb761dc37",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 60,
+      "original_count": 1,
+      "current_start": 61,
+      "current_count": 1,
+      "original": [
+        "HINSTANCE SafeLoadLibrary(char *name);"
+      ],
+      "current": [
+        "#error Excluded unsupported i386 WOW header profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Complete comparison has only one original conditional body replaced; retained source exact.",
+  "limits": [
+    "No fixture execution or real spooler integration pass claimed.",
+    "Fixture models ClosePrinter ownership consumption on failure; real provider failure semantics and active-job cancellation are not established by these tests.",
+    "LF logical-line comparison is source-derived, not compiler verified."
+  ]
+}

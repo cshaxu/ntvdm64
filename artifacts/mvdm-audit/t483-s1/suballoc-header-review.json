@@ -1,0 +1,39 @@
+{
+  "path": "src/mvdm-host/inc/suballoc.h",
+  "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+  "current_sha256": "0911bd4472bcab75ba1e7d501fffb276a71226ac0cb5de5bd837f23b2c06bd8c",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 32,
+      "original_count": 0,
+      "current_start": 32,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 33,
+      "original_count": 0,
+      "current_start": 34,
+      "current_count": 5
+    },
+    {
+      "kind": "insert",
+      "original_start": 35,
+      "original_count": 0,
+      "current_start": 41,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 37,
+      "original_count": 0,
+      "current_start": 44,
+      "current_count": 2
+    }
+  ],
+  "initial_review": "Select original 4096-byte x86 commit granularity using MSVC _M_IX86; retain 65536-byte non-x86 alternative.",
+  "counter_review": "Global i386 definition would reactivate excluded monitor paths. Hardcoding 4096 would remove non-x86 fixture contract; moving identical policy to another component would not reduce complexity.",
+  "runtime_validation": "None; newline restoration only."
+}

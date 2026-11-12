@@ -1,0 +1,38 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.h",
+  "original": "O:/repos.external/OpenNT/base/mvdm/dpmi32/dpmiint.h",
+  "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+  "current_sha256": "8dc5e4ef730038d3ace25465b186e1c9d10f72c9a7fef4e73bf2cd788bee8c96",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 24,
+      "original_count": 0,
+      "current_start": 24,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 40,
+      "original_count": 5,
+      "current_start": 41,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 46,
+      "original_count": 0,
+      "current_start": 44,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "Entire header compared; selected non-i386 definitions and declarations are original. Only excluded kernel-VDM arm and diagnostic line directives remain.",
+  "counter_review": "The repeated ECX entry in original register tables is present in both originals/current; no new code diff, so this boundary audit does not repair it. Actual DPMI consumers use these tables; no kernel owner is reintroduced.",
+  "format_restoration": "Removed three-line local explanatory comment only; retained original condition and #line. No functional changes.",
+  "register_entries": 0,
+  "limitations": [
+    "No runtime or compile pass claimed.",
+    "Exclusion-only classification is not proof that all original internal logic is defect-free."
+  ]
+}

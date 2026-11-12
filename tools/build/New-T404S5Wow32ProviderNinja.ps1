@@ -33,8 +33,8 @@ function Get-SelectedWow32Sources([string]$Manifest) {
         }
     }
     $unique = @($selected | Select-Object -Unique)
-    if ($unique.Count -ne 77) {
-        throw "WOW32 provider must select exactly 77 C bodies; found $($unique.Count)."
+    if ($unique.Count -ne 72) {
+        throw "WOW32 provider must select exactly 72 C bodies; found $($unique.Count)."
     }
     return $unique
 }

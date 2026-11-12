@@ -1,0 +1,508 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+  "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+  "current_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+  "review_complete": true,
+  "register_entries": 21,
+  "changes": [
+    {
+      "original_start": 37,
+      "original_count": 0,
+      "current_start": 37,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-048): fm_c.h is",
+        " * the selected generated definition of CleanedREC, which this host carrier",
+        " * needs to name the original EIP member rather than treating the record as",
+        " * an untyped 32-bit word. */",
+        "#include \"fm_c.h\""
+      ]
+    },
+    {
+      "original_start": 39,
+      "original_count": 0,
+      "current_start": 44,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* The original CCPU40 disk/FDC controller uses this independent timing",
+        " * table.  It is not a SAS-memory global and therefore remains available in",
+        " * the CCPU profile. */"
+      ]
+    },
+    {
+      "original_start": 40,
+      "original_count": 2,
+      "current_start": 49,
+      "current_count": 8,
+      "original": [
+        "GLOBAL\thost_addr Start_of_M_area;",
+        "GLOBAL\tIHPE Length_of_M_area;"
+      ],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-030): CCPU SAS owns Start_of_M_area and",
+        " * Length_of_M_area in ccpusas4.c.  These two historical duplicate host",
+        " * definitions are unused by the selected CCPU path and collide at a modern",
+        " * static link. The unselected non-CCPU body is now marked by DIV-505. */",
+        "#ifndef CCPU",
+        "#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 72,
+      "original_count": 0,
+      "current_start": 90,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-356): original host initialization is complete;",
+        " * only now may service instructions enter its original cleanup callbacks. */",
+        "extern void NtvdmActivateLifecycle(void);"
+      ]
+    },
+    {
+      "original_start": 74,
+      "original_count": 0,
+      "current_start": 96,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "  NtvdmActivateLifecycle();"
+      ]
+    },
+    {
+      "original_start": 106,
+      "original_count": 0,
+      "current_start": 121,
+      "current_count": 12,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-153): BIOS BOP FE keeps the historical",
+        " * host_unsimulate public entry.  The selected CCPU40 implementation is the",
+        " * original c_cpu_unsimulate provider; publish the thin original-name bridge",
+        " * rather than inventing an alternate stop mechanism. */",
+        "#ifdef CCPU",
+        "extern void c_cpu_unsimulate(void);",
+        "void host_unsimulate()",
+        "{",
+        "    c_cpu_unsimulate();",
+        "}",
+        "#endif /* CCPU */"
+      ]
+    },
+    {
+      "original_start": 267,
+      "original_count": 2,
+      "current_start": 246,
+      "current_count": 0,
+      "original": [
+        "    BOOL *gdp_bool;",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 273,
+      "original_count": 1,
+      "current_start": 250,
+      "current_count": 0,
+      "original": [
+        "    /* is not an l-value, hence we can't take its address. */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 277,
+      "original_count": 1,
+      "current_start": 255,
+      "current_count": 3,
+      "original": [
+        "    nt_cpu_info.in_nano_cpu = (BOOL *) ((IHPE) GDP_PTR + 631);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the",
+        "     * private GDP carrier; avoid a historical hard-coded native offset. */",
+        "    nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;"
+      ]
+    },
+    {
+      "original_start": 286,
+      "original_count": 0,
+      "current_start": 265,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-048): the historical non-PROD assertion",
+        "     * compared against GdpOffsetFromName(), an undeclared NT4 packed-GDP",
+        "     * debug helper.  The selected GDP is now a generated native-width",
+        "     * carrier, so that numeric packed-offset comparison has no valid target.",
+        "     * The source-named field above is the single checked representation. */"
+      ]
+    },
+    {
+      "original_start": 287,
+      "original_count": 1,
+      "current_start": 271,
+      "current_count": 4,
+      "original": [
+        "    nt_cpu_info.universe = &GLOBAL_CurrentUniverse;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are",
+        "     * fixed 32-bit Intel values.  The original IUH spelling happened to be",
+        "     * identical to IU32 on NT4; state that source contract explicitly. */",
+        "    nt_cpu_info.universe = (IU32 *)&GLOBAL_CurrentUniverse;"
+      ]
+    },
+    {
+      "original_start": 291,
+      "original_count": 1,
+      "current_start": 278,
+      "current_count": 0,
+      "original": [
+        "    /* Horrible hack, part 2: as for InNanoCpu, so for stackIsBig. */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 295,
+      "original_count": 1,
+      "current_start": 283,
+      "current_count": 3,
+      "original": [
+        "    nt_cpu_info.stack_is_big = (BOOL *) ((IHPE) GDP_PTR + 4355);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather",
+        "     * than an architecture-specific byte offset into the old packed GDP. */",
+        "    nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;"
+      ]
+    },
+    {
+      "original_start": 304,
+      "original_count": 0,
+      "current_start": 293,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */"
+      ]
+    },
+    {
+      "original_start": 319,
+      "original_count": 2,
+      "current_start": 310,
+      "current_count": 2,
+      "original": [
+        "    nt_cpu_info.eip = &GLOBAL_CleanedRec;",
+        "    nt_cpu_info.flags = &GLOBAL_EFLAGS;"
+      ],
+      "current": [
+        "    nt_cpu_info.eip = &GLOBAL_CleanedRec.EIP;",
+        "    nt_cpu_info.flags = (IU32 *)&GLOBAL_EFLAGS;"
+      ]
+    },
+    {
+      "original_start": 322,
+      "original_count": 1,
+      "current_start": 313,
+      "current_count": 1,
+      "original": [
+        "    nt_cpu_info.cr0 = &GLOBAL_R_CR0;"
+      ],
+      "current": [
+        "    nt_cpu_info.cr0 = (IU32 *)&GLOBAL_R_CR0;"
+      ]
+    },
+    {
+      "original_start": 324,
+      "original_count": 2,
+      "current_start": 315,
+      "current_count": 2,
+      "original": [
+        "    initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, &GLOBAL_R_EAX,",
+        "                     &GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,"
+      ],
+      "current": [
+        "    initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, (IU32 *)&GLOBAL_R_EAX,",
+        "                     (IU32 *)&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,"
+      ]
+    },
+    {
+      "original_start": 327,
+      "original_count": 2,
+      "current_start": 318,
+      "current_count": 2,
+      "original": [
+        "    initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, &GLOBAL_R_EBX,",
+        "                     &GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,"
+      ],
+      "current": [
+        "    initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, (IU32 *)&GLOBAL_R_EBX,",
+        "                     (IU32 *)&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,"
+      ]
+    },
+    {
+      "original_start": 330,
+      "original_count": 2,
+      "current_start": 321,
+      "current_count": 2,
+      "original": [
+        "    initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, &GLOBAL_R_ECX,",
+        "                     &GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,"
+      ],
+      "current": [
+        "    initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, (IU32 *)&GLOBAL_R_ECX,",
+        "                     (IU32 *)&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,"
+      ]
+    },
+    {
+      "original_start": 333,
+      "original_count": 2,
+      "current_start": 324,
+      "current_count": 2,
+      "original": [
+        "    initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, &GLOBAL_R_EDX,",
+        "                     &GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,"
+      ],
+      "current": [
+        "    initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, (IU32 *)&GLOBAL_R_EDX,",
+        "                     (IU32 *)&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,"
+      ]
+    },
+    {
+      "original_start": 336,
+      "original_count": 6,
+      "current_start": 327,
+      "current_count": 6,
+      "original": [
+        "    initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, &GLOBAL_R_ESI,",
+        "                     &GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);",
+        "    initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, &GLOBAL_R_EDI,",
+        "                     &GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);",
+        "    initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, &GLOBAL_R_EBP,",
+        "                     &GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);"
+      ],
+      "current": [
+        "    initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, (IU32 *)&GLOBAL_R_ESI,",
+        "                     (IU32 *)&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);",
+        "    initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, (IU32 *)&GLOBAL_R_EDI,",
+        "                     (IU32 *)&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);",
+        "    initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, (IU32 *)&GLOBAL_R_EBP,",
+        "                     (IU32 *)&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 43,
+      "original_count": 3,
+      "current_start": 61,
+      "current_count": 1,
+      "original": [
+        "extern\tvoid\troute_on();",
+        "extern\tvoid\troute_on_fragment_no_interrupt_check();",
+        "extern\tvoid\tservice_int();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 49,
+      "original_count": 6,
+      "current_start": 68,
+      "current_count": 1,
+      "original": [
+        "extern word\tm_s_w;",
+        "word\t\tprotected_mode;",
+        "word\t\tgdt_limit;",
+        "long\t\tgdt_base;",
+        "word\t\tidt_limit;",
+        "long\t\tidt_base;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 61,
+      "original_count": 1,
+      "current_start": 78,
+      "current_count": 1,
+      "original": [
+        "    extern RTL_CRITICAL_SECTION IcaLock;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 87,
+      "original_count": 13,
+      "current_start": 113,
+      "current_count": 1,
+      "original": [
+        "    //",
+        "    // For Alpha AXP, set the arithmetic trap ignore bit since the code",
+        "    // generators are incapable of generating proper Alpha instructions",
+        "    // that follow trap shadow rules.",
+        "    //",
+        "    // N.B. In this mode all floating point arithmetic traps are ignored.",
+        "    //      Imprecise exceptions are not converted to precise exceptions",
+        "    //      and correct IEEE results are not stored in the destination",
+        "    //      registers of trapping instructions. Only the hardware FPCR",
+        "    //      status bits can be used to determine if any traps occurred.",
+        "    //",
+        "",
+        "    ((PSW_FPCR)&(NtCurrentTeb()->FpSoftwareStatusRegister))->ArithmeticTrapIgnore = 1;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 127,
+      "original_count": 8,
+      "current_start": 157,
+      "current_count": 1,
+      "original": [
+        "#ifdef CPU_40_STYLE",
+        "",
+        "    cpu_clearHwInt();",
+        "#else",
+        "    IMPORT void a3_cpu_clear_hw_int();",
+        "",
+        "    a3_cpu_clear_hw_int();",
+        "#endif /* CPU_40_STYLE */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 147,
+      "original_count": 49,
+      "current_start": 173,
+      "current_count": 1,
+      "original": [
+        "void host_cpu_init()",
+        "{",
+        "\thost_delays.com_delay = 10;",
+        "\thost_delays.keyba_delay = 8;",
+        "\thost_delays.timer_delay = 7;",
+        "\thost_delays.fdisk_delay_1 = 100;",
+        "\thost_delays.fdisk_delay_2 = 750;",
+        "\thost_delays.fla_delay = 0;",
+        "}",
+        "",
+        "void setSTATUS(word flags)",
+        "{",
+        "    setNT((flags >> 14) & 1);",
+        "    setIOPL((flags >> 12) & 3);",
+        "    setOF((flags >> 11) & 1);",
+        "    setDF((flags >> 10) & 1);",
+        "    setIF((flags >> 9) & 1);",
+        "    setTF((flags >> 8) & 1);",
+        "    setSF((flags >> 7) & 1);",
+        "    setZF((flags >> 6) & 1);",
+        "    setAF((flags >> 4) & 1);",
+        "    setPF((flags >> 2) & 1);",
+        "    setCF(flags & 1);",
+        "}",
+        "",
+        "/* ",
+        " * Do the Iret for the benefit of the Iret hooks.",
+        " * Unwind stack for flags, cs & ip.",
+        " * Seems too simple - does the CPU require more cleanup information???",
+        " * or will the unwinding bop sort it out??",
+        " */",
+        "VOID EmulatorEndIretHook()",
+        "{",
+        "    UNALIGNED word *sptr;",
+        "",
+        "    /* Stack points at CS:IP & Flags of interrupted instruction */",
+        "    sptr = (word *)Sim32GetVDMPointer( (getSS() << 16)|getSP(), 2, (UCHAR)(getPE() ? TRUE : FALSE));",
+        "    if (sptr)",
+        "    {",
+        "        setIP(*sptr++);",
+        "        setCS(*sptr++);",
+        "        setSTATUS(*sptr);",
+        "        setSP(getSP()+6);",
+        "    }",
+        "#ifndef PROD",
+        "    else",
+        "        printf(\"NTVDM extreme badness - can't get stack pointer %x:%x mode:%d\\n\",getSS(), getSP(), getPE());",
+        "#endif  /* PROD */",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported A3CPU configuration"
+      ]
+    },
+    {
+      "original_start": 275,
+      "original_count": 1,
+      "current_start": 252,
+      "current_count": 1,
+      "original": [
+        "    nt_cpu_info.in_nano_cpu = (BOOL *) ((IHPE) GDP_PTR + 1223);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 280,
+      "original_count": 5,
+      "current_start": 262,
+      "current_count": 1,
+      "original": [
+        "    gdp_bool = (BOOL *) ((IHPE) GDP_PTR + GdpOffsetFromName(\"InNanoCpu\"));",
+        "    if (nt_cpu_info.in_nano_cpu != gdp_bool) {",
+        "        always_trace0(\"InNanoCpu GDP offset will be wrong in PROD builds\");",
+        "    }",
+        "    nt_cpu_info.in_nano_cpu = gdp_bool;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 1,
+      "current_start": 280,
+      "current_count": 1,
+      "original": [
+        "    nt_cpu_info.stack_is_big = (BOOL *) ((IHPE) GDP_PTR + 7047);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 298,
+      "original_count": 5,
+      "current_start": 290,
+      "current_count": 1,
+      "original": [
+        "    gdp_bool = (BOOL *) ((IHPE) GDP_PTR + GdpOffsetFromName(\"stackIsBig\"));",
+        "    if (nt_cpu_info.stack_is_big != gdp_bool) {",
+        "        always_trace0(\"stackIsBig GDP offset will be wrong in PROD builds\");",
+        "    }",
+        "    nt_cpu_info.stack_is_big = gdp_bool;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "21 non-exclusion chunks and 10 excluded bodies. Duplicate SAS ownership, lifecycle activation, original CPU unsimulate bridge, and diagnostic register-descriptor adaptations separated.",
+  "counter_review": "ccpusas4.c owns the SAS globals; host_delays is independent and must remain. Lifecycle activation enters service cleanup only after original initialization. BIOS BOP FE needs public host_unsimulate routed to original CPU unsimulation. InitNtCpuInfo is called by config.c, but no nt_cpu_info consumer was found outside its defining file; generated GDP offsets differ from original hardcoded offsets, while selected IUH/IU32 widths and typedef compatibility need checking before retaining every cast. Do not interpret absence of source references as proof against debugger/export use.",
+  "evidence": "ccpusas4.c:139-140; worker_lifecycle.c NtvdmActivateLifecycle; bios.c BOP FE table; config.c InitNtCpuInfo; generated/x86/prod/gdpvar.h; cvidc/fm_c.h CleanedREC.EIP; host/inc/insignia.h IBOOL and IUH; full src nt_cpu_info search.",
+  "limits": "Pending descriptor necessity/type evidence explicitly recorded; classification is not completed repair."
+}

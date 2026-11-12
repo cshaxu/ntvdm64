@@ -1,0 +1,78 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+  "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+  "current_sha256": "c94e1b9631e79306d4570470870de71b76df8f4e22646fc9e0ea16619ae32d15",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 46,
+      "original_count": 0,
+      "current_start": 46,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"mvdm_softpc_firmware.h\""
+      ]
+    },
+    {
+      "original_start": 69,
+      "original_count": 0,
+      "current_start": 73,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        if (type == ROMS_REZ_ID)",
+        "            return maxsize <= 0 ? 0 : mvdm_softpc_firmware_read_embedded_rom(",
+        "                name, addr, (uint32_t)maxsize);"
+      ]
+    },
+    {
+      "original_start": 110,
+      "original_count": 2,
+      "current_start": 119,
+      "current_count": 0,
+      "original": [
+        "        type = 0; // To stop unreferenced formal parameter errors",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 137,
+      "original_count": 2,
+      "current_start": 144,
+      "current_count": 7,
+      "original": [
+        "                        /* Continuing => try to create a new file */",
+        "                        file_fd = _open(name,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);"
+      ],
+      "current": [
+        "                        /* Continuing => try the selected resource location.",
+        "                         * DIVERGENCE(MVDM-HOST-DIV-133): the original retry",
+        "                         * used the bare resource name, which redirects an",
+        "                         * already-resolved session resource into process CWD.",
+        "                         * Keep the original create/retry and error ordering,",
+        "                         * but retain the path returned by host_find_file. */",
+        "                        file_fd = _open(hff_ret,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 53,
+      "original_count": 1,
+      "current_start": 56,
+      "current_count": 1,
+      "original": [
+        "#define CMOS_FILE_NAME \"cmos.ram\""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Four non-exclusion chunks and one excluded CMOS name body. ROM read carrier is reached; write retry necessity requires caller evidence.",
+  "counter_review": "Read provider and host_find_file. Embedded copy is size checked and does not fall through to CWD. Corrected write branch is only half of original retry flow; NULL lookup still creates bare filename. Source search did not find a write caller, which is not proof of dead exported/link use. Do not widen unused write path speculatively.",
+  "limits": "Retain2 restore-original1 pending1; no source edits."
+}

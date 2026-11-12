@@ -1,0 +1,44 @@
+[
+  {
+    "path": "src/mvdm-host/inc/WOW.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\WOW.INC",
+    "before_sha256": "4774876050b2d6506699e41b65c9d1a38135cb6cc10e4acf54cf9216085a4370",
+    "after_sha256": "87c5a5a1a3f34873b9bb27ba21eef73a576589229a205ec6dec32ca8e8b5aebc",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/wowclip.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowclip.h",
+    "before_sha256": "c4649db7307c225fc168444db32b31f700d33c06d2741c26579b5eed3a0cd75a",
+    "after_sha256": "c4649db7307c225fc168444db32b31f700d33c06d2741c26579b5eed3a0cd75a",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/wowcmdlg.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowcmdlg.h",
+    "before_sha256": "bd464ea1d43a71077f515db474a4156f2bd3a4f9dc90136b8f36ea427128d75f",
+    "after_sha256": "bd464ea1d43a71077f515db474a4156f2bd3a4f9dc90136b8f36ea427128d75f",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/WOWCMDLG.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\WOWCMDLG.INC",
+    "before_sha256": "1ca2d3d7b5963695d02b8d97926ce772ae2ad758eecdb3b56f9bb9cafb427b3b",
+    "after_sha256": "19ce7bb243b18b97631949e8780e288bc702d320bcb01460c93754efa6813175",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/wowcmpat.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowcmpat.h",
+    "before_sha256": "0d0bab4df27031fdc35a39e7d3eb704b7f77ec25d981a215e30fb218aac9ee92",
+    "after_sha256": "0d0bab4df27031fdc35a39e7d3eb704b7f77ec25d981a215e30fb218aac9ee92",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/WOWCMPAT.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\WOWCMPAT.INC",
+    "before_sha256": "5d14d971b74d740a0c0cefe48137ee10d3e7a64e45ce447817154e5034c6e08d",
+    "after_sha256": "20cbcaadbd408c557c9116db02c889579d105d8a0b84816e8257d980a1987650",
+    "newline_restored": true
+  }
+]

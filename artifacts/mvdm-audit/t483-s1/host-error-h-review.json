@@ -1,0 +1,49 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+  "original_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+  "current_sha256": "6831c35fa7c81efec8c3beb0e1dd2eb95839a382d8938dc559dd7c04a2fdc469",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 261,
+      "original_count": 11,
+      "current_start": 262,
+      "current_count": 1,
+      "original": [
+        "",
+        "IMPORT ERRORFUNCS *working_error_funcs;",
+        "",
+        "#define host_error_conf(panel, num, opts, extra)\\",
+        "\t\t(*working_error_funcs->error_conf)(panel, num, opts, extra)",
+        "",
+        "#define host_error(num, opts, extra)\\",
+        "\t\t(*working_error_funcs->error)(num, opts, extra)",
+        "",
+        "#define host_error_ext(num, opts, data)\\",
+        "\t\t(*working_error_funcs->error_ext)(num, opts, data)"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#else"
+    },
+    {
+      "original_start": 311,
+      "original_count": 1,
+      "current_start": 305,
+      "current_count": 1,
+      "original": [
+        "void HostDebugBreak(void);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#ifndef PROD"
+    }
+  ],
+  "initial_review": "Only two excluded bodies: BUILDING_CPU_TOOL function-table dispatch alternative and non-PROD HostDebugBreak declaration.",
+  "counter_review": "All retained source matches original after #line removal, including the unusual host_error_conf replacement text and legacy ANSI function types. These inherited declarations are not new local patches and are not silently repaired during diff review.",
+  "limits": "Source difference classification, not universal context or runtime certification."
+}

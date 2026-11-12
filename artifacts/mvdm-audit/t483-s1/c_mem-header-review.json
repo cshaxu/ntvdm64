@@ -1,0 +1,37 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+  "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
+  "current_sha256": "e9f036f47e780525ca80d0a1af41823f998664b25209dc2d81c5198305fec8f6",
+  "review_complete": true,
+  "excluded_groups": [
+    {
+      "original_start": 26,
+      "original_end": 27,
+      "current_error_line": 27
+    },
+    {
+      "original_start": 30,
+      "original_end": 30,
+      "current_error_line": 32
+    },
+    {
+      "original_start": 38,
+      "original_end": 39,
+      "current_error_line": 44
+    },
+    {
+      "original_start": 42,
+      "original_end": 43,
+      "current_error_line": 49
+    },
+    {
+      "original_start": 55,
+      "original_end": 64,
+      "current_error_line": 64
+    }
+  ],
+  "register_entries": 0,
+  "initial_review": "All nonblank non-line text outside excluded bodies equals original; original outer conditional boundaries preserved.",
+  "counter_review": "No selected declarations/access macros changed. No fresh all-context reachability proof or logical-line certification claimed.",
+  "limits": "Selected forward-memory/read/write macros unchanged. Removed PIG/BACK_M bodies not runtime additions."
+}

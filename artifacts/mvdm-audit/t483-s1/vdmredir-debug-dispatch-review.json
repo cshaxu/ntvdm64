@@ -1,0 +1,73 @@
+[
+  {
+    "path": "src/mvdm-host/vdmredir/vrdebug.c",
+    "original_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea",
+    "current_sha256": "a46eab9b3724ff69d9ab345ebd9e303fc4f59b028121561e956982d125ccdb80",
+    "excluded_original_ranges_zero_based": [
+      [
+        181,
+        2371
+      ]
+    ],
+    "proof": "Complete original reconstruction by balanced body replacements matches current after omitting #line; all retained lines identical.",
+    "counter_review": "No other diff remains. Exclusion classification is not universal build-context or line-map certification.",
+    "limits": "No new compilation or runtime test.",
+    "status": "deleted",
+    "deleted_source": "/*++\n\nCopyright (c) 1991  Microsoft Corporation\n\nModule Name:\n\n    vrdebug.c\n\nAbstract:\n\n    Contains diagnostic/debugging routines for Vdm Redir:\n\n        VrDebugInit\n        VrDiagnosticEntryPoint\n        VrPrint\n        VrDumpRealMode16BitRegisters\n        VrDumpDosMemory\n        (ConvertFlagsToString)\n        (GetFlags)\n        (GrabDosData)\n        probe_parens\n        CategoryToIndex\n        GetRoutineDiagnosticInfo\n        MergeInfo\n        DoEntryDiagnostics\n        GetRegisterOrValue\n        VrDumpDosMemoryStructure\n        VrPauseBreak\n        VrErrorBreak\n\nAuthor:\n\n    Richard L Firth (rfirth) 13-Feb-1992\n\nNotes:\n\n    This module allows us to run NTVDM.EXE and breakpoint or dump info based\n    on an environment variable. Set the __VRDEBUG environment variable depending\n    on the level and type of diagnostics required from VdmRedir functions. See\n    vrdebug.h for more info\n\n    This is a convenient method of dynamically changing diagnostic/debug\n    information at run time without having to poke around in memory or start\n    up NTVDM under NTSD (especially since NTVDM is run by the loader and not\n    by typing NTVDM<return> at the command prompt. Changing diagnostic settings\n    requires that NTVDM be shut down, redefine the __VRDEBUG environment\n    variable(s) and start a dos app. Alternatively, start the dos app in a new\n    command session after setting the new __VRDEBUG environment variable(s)\n\n    Types of things which can be affected by values in environment string:\n\n        - Whether a routine breakpoints at entry (and goes into debugger)\n        - What functions or categories to diagnose\n        - What to dump at function entry:\n            x86 registers\n            DOS memory\n            DOS stack\n            DOS structures\n\n    Note that currently the order of things at function entry are predefined:\n\n        1. Display function's name\n        2. Display x86 registers\n        3. Dump DOS stack\n        4. Dump DOS memory\n        5. Dump DOS structure(s)    Currently only 1 structure\n        6. Break\n\n    Diagnostic information is set up once at NTVDM initialisation for this\n    session, so the environment information must have been already entered.\n    There can be 11 __VRDEBUG environment variables: __VRDEBUG and __VRDEBUG0\n    through __VRDEBUG9. Each string can contain several function/group\n    specifications of the form:\n\n        <function or group name>[(<diagnostic options>)]\n\n    The group names are predefined (add a new one if a new group of functions\n    is added to VdmRedir) and are currently:\n\n        MAILSLOT, NAMEPIPE, LANMAN, NETBIOS and DLC\n\n    Group names are case insensitive. Function names are case sensitive and\n    should be entered as they appear in the C code. However, if a case sensitive\n    search for a function name fails, a secondary case-insensitive search will\n    be made.\n\n    Diagnostic options are case insensitive and are performed in the order shown\n    above and are the following:\n\n        BREAK[()]\n            Break into the debugger (DbgBreakPoint) when the function is\n            entered\n\n        DISPLAYNAME[()]\n            Display the function name on entry\n\n        DUMPREGS[()]\n            Dump the x86 16-bit registers on entry to the function\n\n        DUMPSTACK[(<number>)]\n            Dump <number> of DOS stack words (or use DEFAULT_DUMP_STACK_LENGTH)\n            on entry to the function. This is just a special case of DUMPMEM,\n            with type set to 'W', and segment:offset set to ss:sp.\n\n        DUMPMEM[(<segment>, <offset>, <number>, <type>)]\n            Dump <number> and <type> of DOS memory (or use DEFAULT_DUMP_MEMORY_LENGTH\n            and DEFAULT_DUMP_MEMORY_TYPE) at <segment>:<offset>\n\n        DUMPSTRUCT[(<seg> <off> <descriptor>)]\n            Dump the structure addressed by <seg>:<off> (not necessarily segment\n            and offset registers, can be eg. ax:flags) and descriped by <descriptor>\n\n        INFO[()]\n            Filter for calls to VrPrint - display INFORMATION, WARNING and ERROR\n            messages\n\n        WARN[()]\n            Filter for calls to VrPrint - display WARNING and ERROR messages\n\n        ERROR[()]\n            Filter for calls to VrPrint - display ERROR messages only\n\n        ERRORBREAK[()]\n            Cause a break into debugger whenever BREAK_ON_ERROR/VrErrorBreak\n            called\n\n        PAUSEBREAK[()]\n            Cause a break into debuggger whenever BREAK_ON_PAUSE/VrPauseBreak\n            called\n\n    If an option appears without parentheses then its function is turned OFF\n    for this group or function.\n\n    Whitespace between an option and following parentheses is tolerated, but\n    should not be present.\n\n    If an option takes parameters then all required parameters must be present\n    or the option is ignored.\n\n    Where an option takes parameters, commas are tolerated between parameters\n    but are not necessary. Eg\n\n        dumpmem(ds si 32 B)\n\n    and\n\n        DUMPMEM ( ds, si, 32, b )\n\n    and\n\n        DumpMem (ds,si,32,B)\n\n    are treated as the same (, is just whitespace in this u-grammar).\n\n    Where register parameters are required, absolute hex values can be given.\n    Similarly, where a number parameter is required, a 16-bit register (any\n    register) definition can be substituted.\n\n    Function specifications take precedence over group specifications. So if the\n    same option is given for a group and a function that belongs to that group\n    then the options specified in the function entry are used. Any options\n    specified for the group but not negated by the function are used for the\n    function also.\n\n    When parsing the environment, if the syntax is violated, the current\n    description is skipped until the next description starts or the end of\n    the string is found. Eg:\n\n        mailslot(break() DLC(break()) DLC(dumpstruct(bx BBBBPPBBBB))\n                        ^                               ^\n                        1                               2\n\n    In this example, only DLC(break()) is parsed correctly, because there is\n    a missing right parenthesis at 1 and a missing offset register specification\n    at 2 (assumes bx is segment register, because that's the syntax)\n\nRevision History:\n\n--*/\n\n#line 181\n#if DBG\n#line 182\n#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.\n#endif // DBG\n#line 2373\n",
+    "reason": "Entire implementation excluded by DBG; no remaining C symbols. Generator reads sources and includes object in original-mvdm-redir.lib and VDMREDIR.dll; remove empty object entry.",
+    "references_updated": [
+      "src/mvdm-host/vdmredir/sources"
+    ],
+    "verification_required": "Regenerate Ninja and verify builds/link/package before delivery; existing generated graphs still stale."
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdebug.h",
+    "original_sha256": "1cc434fafa90e111f1726aa2444f24a04458da6efd2f218a80d48e03b4f3751b",
+    "current_sha256": "08020f482521dd762dc053c9d195febb2096e12c719772521d18e5a553d37e57",
+    "excluded_original_ranges_zero_based": [
+      [
+        70,
+        90
+      ],
+      [
+        580,
+        588
+      ]
+    ],
+    "proof": "Complete original reconstruction by balanced body replacements matches current after omitting #line; all retained lines identical.",
+    "counter_review": "No other diff remains. Exclusion classification is not universal build-context or line-map certification.",
+    "limits": "No new compilation or runtime test."
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdisp.c",
+    "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "current_sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
+    "excluded_original_ranges_zero_based": [
+      [
+        137,
+        142
+      ],
+      [
+        146,
+        148
+      ]
+    ],
+    "proof": "Complete original reconstruction by balanced body replacements matches current after omitting #line; all retained lines identical.",
+    "counter_review": "No other diff remains. Exclusion classification is not universal build-context or line-map certification.",
+    "limits": "No new compilation or runtime test."
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdlc.h",
+    "original_sha256": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+    "current_sha256": "63be1f8951611150544104f986831c8d2a49844c6a064e904661f517ff9b0579",
+    "excluded_original_ranges_zero_based": [
+      [
+        981,
+        987
+      ]
+    ],
+    "proof": "Complete original reconstruction by balanced body replacements matches current after omitting #line; all retained lines identical.",
+    "counter_review": "No other diff remains. Exclusion classification is not universal build-context or line-map certification.",
+    "limits": "No new compilation or runtime test."
+  }
+]

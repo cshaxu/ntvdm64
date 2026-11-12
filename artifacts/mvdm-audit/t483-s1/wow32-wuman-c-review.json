@@ -1,0 +1,138 @@
+{
+  "path": "src/mvdm-host/wow32/wuman.c",
+  "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+  "current_sha256": "326a90ca1cb9b02c5843d4df2da113a939a0fc978fccb97c4757dacd81c682a4",
+  "changes": [
+    {
+      "original_start": 16,
+      "original_count": 0,
+      "current_start": 16,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"common/wow/page_domain.h\""
+      ],
+      "decision": "retain",
+      "necessity": "USER16 PMODE32 receives addresses it dereferences through emulated guest paging. Publish existing worker page-domain shared-info/CSR storage rather than native gpsi or address of a host static byte; remove displaced duplicate host flag.",
+      "change_plan": "Retain guest-domain address publication and common declarations; original guest initialization ABI and flush sequence unchanged."
+    },
+    {
+      "original_start": 94,
+      "original_count": 1,
+      "current_start": 97,
+      "current_count": 0,
+      "original": [
+        "                static BYTE CallCsrFlag = 0;"
+      ],
+      "current": [],
+      "decision": "retain",
+      "necessity": "USER16 PMODE32 receives addresses it dereferences through emulated guest paging. Publish existing worker page-domain shared-info/CSR storage rather than native gpsi or address of a host static byte; remove displaced duplicate host flag.",
+      "change_plan": "Retain guest-domain address publication and common declarations; original guest initialization ABI and flush sequence unchanged."
+    },
+    {
+      "original_start": 122,
+      "original_count": 1,
+      "current_start": 125,
+      "current_count": 1,
+      "original": [
+        "                    *lpT = (BYTE *)gpsi;"
+      ],
+      "current": [
+        "                    *lpT = (BYTE *)mvdm_softpc_wow_page_domain_guest_shared_info();"
+      ],
+      "decision": "retain",
+      "necessity": "USER16 PMODE32 receives addresses it dereferences through emulated guest paging. Publish existing worker page-domain shared-info/CSR storage rather than native gpsi or address of a host static byte; remove displaced duplicate host flag.",
+      "change_plan": "Retain guest-domain address publication and common declarations; original guest initialization ABI and flush sequence unchanged."
+    },
+    {
+      "original_start": 129,
+      "original_count": 1,
+      "current_start": 132,
+      "current_count": 3,
+      "original": [
+        "                    *lpT = (LPSTR)&CallCsrFlag;"
+      ],
+      "current": [
+        "                    /* DIVERGENCE(MVDM-HOST-DIV-300): USER16 reads/writes",
+        "                     * this original flag through the worker's guest domain. */",
+        "                    *lpT = (LPSTR)mvdm_softpc_wow_page_domain_guest_csr_flag();"
+      ],
+      "decision": "retain",
+      "necessity": "USER16 PMODE32 receives addresses it dereferences through emulated guest paging. Publish existing worker page-domain shared-info/CSR storage rather than native gpsi or address of a host static byte; remove displaced duplicate host flag.",
+      "change_plan": "Retain guest-domain address publication and common declarations; original guest initialization ABI and flush sequence unchanged."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 100,
+      "original_count": 3,
+      "current_start": 104,
+      "current_count": 1,
+      "original": [
+        "                WORD wMsg;",
+        "                int i;",
+        "                PSZ pszFormat;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 146,
+      "original_count": 23,
+      "current_start": 154,
+      "current_count": 1,
+      "original": [
+        "                LOGDEBUG(LOG_TRACE, (\"WU32NotifyWow: got DefWindowProc bits, wMaxDWPMsg = 0x%x.\\n\", *pwMaxDWPMsg));",
+        "                LOGDEBUG(LOG_TRACE, (\"The following messages will be passed on to 32-bit DefWindowProc:\\n\"));",
+        "",
+        "#define FPASSTODWP32(msg) \\",
+        "    (pDWPBits[msg >> 3] & (1 << (msg & 7)))",
+        "",
+        "                wMsg = 0;",
+        "                i = 0;",
+        "",
+        "                while (wMsg <= *pwMaxDWPMsg) {",
+        "                    if (FPASSTODWP32(wMsg)) {",
+        "                        if ( i & 3 ) {",
+        "                            pszFormat = \", %s\";",
+        "                        } else {",
+        "                            pszFormat = \"\\n%s\";",
+        "                        }",
+        "                        LOGDEBUG(LOG_TRACE, (pszFormat, aw32Msg[wMsg].lpszW32));",
+        "                        i++;",
+        "                    }",
+        "                    wMsg++;",
+        "                }",
+        "",
+        "                LOGDEBUG(LOG_TRACE, (\"\\n\\n\"));"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 105,
+      "original": 103,
+      "logical": 101
+    },
+    {
+      "current": 155,
+      "original": 169,
+      "logical": 147
+    }
+  ],
+  "evidence": [
+    "Original guest wow16/user/init.c PMODE32 supplies output locations for shared info/CSR pointer; non-PMODE32 leaves them zero.",
+    "mvdm_softpc_wow_page_domain.c getters return existing active-domain guest addresses or zero, no second owner.",
+    "wow_user_registration_bridge.c rejects registration without shared info and ready client desktop.",
+    "wow_page_domain_fixture.c checks CSR guest address writable via xtrn2phy and inactive-domain getters zero; source inspected, not run."
+  ],
+  "limits": [
+    "Source-backed necessity, not a new runtime pass or proof of entire page-domain implementation.",
+    "Registration ordering and teardown concurrency require complete lifecycle validation.",
+    "Unused gpsi declaration remains after substitution; deletion recommendation recorded separately."
+  ]
+}

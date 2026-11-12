@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+  "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+  "current_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 45,
+      "original_end": 62,
+      "current_error_line": 45
+    }
+  ],
+  "changes": [],
+  "initial_review": "Whole-file boundary-aware diff comparison with explicit semantic exceptions.",
+  "counter_review": "Outside listed corrections and removed branch bodies, nonblank non-#line text equals original.",
+  "limits": "Not full diagnostic-line or all-profile reachability proof. No new test run."
+}

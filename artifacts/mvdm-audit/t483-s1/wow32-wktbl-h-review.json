@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/wow32/wktbl.h",
+  "original_sha256": "054dc8c4703bde7388d9131dd84c9d3d64913d42a4f251eb89088587a0c2347f",
+  "current_sha256": "292cbefc0c53e70039554d69d2b4ede507cc2c43e65f5cbd93e89537d1e11c0a",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "extern INT iKernelMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Complete diff only replaces original conditional bodies; all remaining normalized source is exact. wkmem.c keeps original non-i386 allocation/free path; literal #if 0 VirtualLock declarations/bodies remain excluded; wktbl.h excludes only profiling count.",
+  "limits": [
+    "Audit classification only; no new runtime/build claim.",
+    "Exclusion-only is a source comparison category, not universal preprocessing certification."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+  "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
+  "current_sha256": "22c9f6823505537bb4d01958de71628c8bc3f556c247236196cc6bc587234082",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 32,
+      "original_count": 6,
+      "current_normalized_start": 32,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Non-ANSI lock declarations excluded; retained source exact.",
+  "counter_review": "ANSI ownership, critical-region and host lock declarations unchanged, including hostname/stat and lock daemon interfaces. No lock implementation or error behavior changed.",
+  "limits": "Source-backed review only; no new compiler/runtime or complete VM transition proof."
+}

@@ -1,0 +1,638 @@
+{
+  "path": "src/mvdm-host/wow32/wumsg.c",
+  "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+  "current_sha256": "efd09d864475678d3b81d22bf029cbc4b95a69247c420cf783d5a7b0974ef81e",
+  "changes": [
+    {
+      "original_start": 16,
+      "original_count": 0,
+      "current_start": 16,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */",
+        "#include \"wow_message_lifetime.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Live finally blocks call the shared conversion finalizer; this header declares that dependency.",
+      "change_plan": "Retain declaration dependency while live cleanup callers remain."
+    },
+    {
+      "original_start": 27,
+      "original_count": 1,
+      "current_start": 30,
+      "current_count": 2,
+      "original": [
+        "BOOL fWhoCalled = FALSE;"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): private operation mode, not provenance. */",
+        "__declspec(thread) BOOL fWhoCalled = FALSE;"
+      ],
+      "decision": "retain",
+      "necessity": "fWhoCalled is read by original DDE converters as synchronous operation mode, not task identity. TLS matches native worker thread ownership; nested calls still require save/restore.",
+      "change_plan": "Retain matching TLS declaration/definition and scoped restoration; do not use it as asynchronous provenance."
+    },
+    {
+      "original_start": 75,
+      "original_count": 1,
+      "current_start": 80,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 83,
+      "original_count": 0,
+      "current_start": 90,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }"
+      ],
+      "decision": "retain",
+      "necessity": "getmsg16/ThunkMsg16 explicitly report conversion success. Dispatch/filter must not consume failed conversions; PostAppMessage permits successful HWND0 thread messages.",
+      "change_plan": "Retain explicit success guard; test conversion failure and valid HWND0 independently."
+    },
+    {
+      "original_start": 115,
+      "original_count": 0,
+      "current_start": 124,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 196,
+      "original_count": 1,
+      "current_start": 209,
+      "current_count": 2,
+      "original": [
+        "        MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "        MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 239,
+      "original_count": 0,
+      "current_start": 254,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        } __finally {",
+        "        wow_message_unwind16(&mpex);"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 240,
+      "original_count": 0,
+      "current_start": 258,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "}"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 321,
+      "original_count": 1,
+      "current_start": 341,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 352,
+      "original_count": 0,
+      "current_start": 374,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 431,
+      "original_count": 1,
+      "current_start": 457,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 491,
+      "original_count": 0,
+      "current_start": 519,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 573,
+      "original_count": 1,
+      "current_start": 605,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 602,
+      "original_count": 0,
+      "current_start": 636,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 646,
+      "original_count": 1,
+      "current_start": 684,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 674,
+      "original_count": 0,
+      "current_start": 714,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 713,
+      "original_count": 1,
+      "current_start": 757,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 720,
+      "original_count": 0,
+      "current_start": 766,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }"
+      ],
+      "decision": "retain",
+      "necessity": "getmsg16/ThunkMsg16 explicitly report conversion success. Dispatch/filter must not consume failed conversions; PostAppMessage permits successful HWND0 thread messages.",
+      "change_plan": "Retain explicit success guard; test conversion failure and valid HWND0 independently."
+    },
+    {
+      "original_start": 741,
+      "original_count": 0,
+      "current_start": 789,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 853,
+      "original_count": 1,
+      "current_start": 906,
+      "current_count": 7,
+      "original": [
+        "    ulReturn = putmsg16(vpMsg, &t1);"
+      ],
+      "current": [
+        "    { /* DIVERGENCE(MVDM-HOST-DIV-350): GetMessage consumed its own queue item. */",
+        "        BOOL savedThunkDDE = fThunkDDEmsg;",
+        "        __try {",
+        "            fThunkDDEmsg = TRUE;",
+        "            ulReturn = putmsg16(vpMsg, &t1);",
+        "        } __finally { fThunkDDEmsg = savedThunkDDE; }",
+        "    }"
+      ],
+      "decision": "retain",
+      "necessity": "GetMessage owns a removed queue item; PeekMessage removal depends on PM_REMOVE. Scoped restoration preserves an outer synchronous DDE conversion on normal and exceptional returns.",
+      "change_plan": "Retain operation-local selector save/restore; verify nested Get/PeekMessage with both PM_REMOVE states."
+    },
+    {
+      "original_start": 1160,
+      "original_count": 0,
+      "current_start": 1222,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-350): only this conversion owns the selector. */",
+        "        BOOL savedThunkDDE = fThunkDDEmsg;",
+        "        __try {"
+      ],
+      "decision": "retain",
+      "necessity": "GetMessage owns a removed queue item; PeekMessage removal depends on PM_REMOVE. Scoped restoration preserves an outer synchronous DDE conversion on normal and exceptional returns.",
+      "change_plan": "Retain operation-local selector save/restore; verify nested Get/PeekMessage with both PM_REMOVE states."
+    },
+    {
+      "original_start": 1169,
+      "original_count": 1,
+      "current_start": 1235,
+      "current_count": 1,
+      "original": [
+        "        fThunkDDEmsg = TRUE;"
+      ],
+      "current": [
+        "        } __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */"
+      ],
+      "decision": "retain",
+      "necessity": "GetMessage owns a removed queue item; PeekMessage removal depends on PM_REMOVE. Scoped restoration preserves an outer synchronous DDE conversion on normal and exceptional returns.",
+      "change_plan": "Retain operation-local selector save/restore; verify nested Get/PeekMessage with both PM_REMOVE states."
+    },
+    {
+      "original_start": 1306,
+      "original_count": 1,
+      "current_start": 1372,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 1325,
+      "original_count": 0,
+      "current_start": 1393,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIV-344: a successful thread conversion legitimately has HWND0. */",
+        "    if (!mpex.fThunkSucceeded) RETURN(0);"
+      ],
+      "decision": "retain",
+      "necessity": "getmsg16/ThunkMsg16 explicitly report conversion success. Dispatch/filter must not consume failed conversions; PostAppMessage permits successful HWND0 thread messages.",
+      "change_plan": "Retain explicit success guard; test conversion failure and valid HWND0 independently."
+    },
+    {
+      "original_start": 1333,
+      "original_count": 0,
+      "current_start": 1404,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 1396,
+      "original_count": 0,
+      "current_start": 1471,
+      "current_count": 19,
+      "original": [],
+      "current": [
+        "/* DIV-363: abandon only resources produced by this undelivered conversion. */",
+        "static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion)",
+        "{",
+        "    DWORD error = GetLastError();",
+        "    __try {",
+        "        if (mpex->ddePostPacked) {",
+        "            mpex->ddePostPacked = FALSE;",
+        "            FreeDDElParam(mpex->Parm16.WndProc.wMsg, mpex->lParam);",
+        "        }",
+        "    }",
+        "    __finally {",
+        "        __try {",
+        "            DDERollback32(conversion, mpex->Parm16.WndProc.hwnd,",
+        "                          mpex->Parm16.WndProc.wParam);",
+        "        }",
+        "        __finally { SetLastError(error); }",
+        "    }",
+        "}",
+        ""
+      ],
+      "decision": "pending-evidence",
+      "necessity": "DDE post acceptance transfers ownership; rejection must retire only newly produced packet/pairs. W32CancelDDEPost consumes packet flag and DDERollback32 consumes pair count, but helper tests do not execute full WU32PostMessage including private-message fallback and receiver/ACK reentrancy.",
+      "change_plan": "Keep candidate ownership changes pending full-call validation. Test accepted/rejected/throwing posts, ERROR_INVALID_PARAMETER private fallback, failed conversion, nested callbacks and ACK lifecycle; simplify duplicate cancellation calls only after proving exception coverage unchanged."
+    },
+    {
+      "original_start": 1404,
+      "original_count": 1,
+      "current_start": 1499,
+      "current_count": 4,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    DDECONVERSION postConversion = {0}; /* DIV-363: post-result ownership. */",
+        "    BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "DDE post acceptance transfers ownership; rejection must retire only newly produced packet/pairs. W32CancelDDEPost consumes packet flag and DDERollback32 consumes pair count, but helper tests do not execute full WU32PostMessage including private-message fallback and receiver/ACK reentrancy.",
+      "change_plan": "Keep candidate ownership changes pending full-call validation. Test accepted/rejected/throwing posts, ERROR_INVALID_PARAMETER private fallback, failed conversion, nested callbacks and ACK lifecycle; simplify duplicate cancellation calls only after proving exception coverage unchanged."
+    },
+    {
+      "original_start": 1406,
+      "original_count": 0,
+      "current_start": 1505,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "",
+        "    mpex.ddePostConversion = &postConversion;"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "DDE post acceptance transfers ownership; rejection must retire only newly produced packet/pairs. W32CancelDDEPost consumes packet flag and DDERollback32 consumes pair count, but helper tests do not execute full WU32PostMessage including private-message fallback and receiver/ACK reentrancy.",
+      "change_plan": "Keep candidate ownership changes pending full-call validation. Test accepted/rejected/throwing posts, ERROR_INVALID_PARAMETER private fallback, failed conversion, nested callbacks and ACK lifecycle; simplify duplicate cancellation calls only after proving exception coverage unchanged."
+    },
+    {
+      "original_start": 1466,
+      "original_count": 0,
+      "current_start": 1568,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "        if (l) {",
+        "            postConversion.Count = 0; /* Receiver/ACK owns transferred pairs. */",
+        "            mpex.ddePostPacked = FALSE;",
+        "        }",
+        "        else {",
+        "            W32CancelDDEPost(&mpex, &postConversion);",
+        "        }",
+        ""
+      ],
+      "decision": "pending-evidence",
+      "necessity": "DDE post acceptance transfers ownership; rejection must retire only newly produced packet/pairs. W32CancelDDEPost consumes packet flag and DDERollback32 consumes pair count, but helper tests do not execute full WU32PostMessage including private-message fallback and receiver/ACK reentrancy.",
+      "change_plan": "Keep candidate ownership changes pending full-call validation. Test accepted/rejected/throwing posts, ERROR_INVALID_PARAMETER private fallback, failed conversion, nested callbacks and ACK lifecycle; simplify duplicate cancellation calls only after proving exception coverage unchanged."
+    },
+    {
+      "original_start": 1492,
+      "original_count": 0,
+      "current_start": 1603,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        __try {",
+        "            __try { W32CancelDDEPost(&mpex, &postConversion); }",
+        "            __finally { wow_message_unwind16(&mpex); }",
+        "        }",
+        "        __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "DDE post acceptance transfers ownership; rejection must retire only newly produced packet/pairs. W32CancelDDEPost consumes packet flag and DDERollback32 consumes pair count, but helper tests do not execute full WU32PostMessage including private-message fallback and receiver/ACK reentrancy.",
+      "change_plan": "Keep candidate ownership changes pending full-call validation. Test accepted/rejected/throwing posts, ERROR_INVALID_PARAMETER private fallback, failed conversion, nested callbacks and ACK lifecycle; simplify duplicate cancellation calls only after proving exception coverage unchanged."
+    },
+    {
+      "original_start": 1691,
+      "original_count": 1,
+      "current_start": 1810,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 1763,
+      "original_count": 0,
+      "current_start": 1884,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 1809,
+      "original_count": 1,
+      "current_start": 1934,
+      "current_count": 3,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */",
+        "    __try {"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    },
+    {
+      "original_start": 1873,
+      "original_count": 0,
+      "current_start": 2001,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        __try { wow_message_unwind16(&mpex); }",
+        "        __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */",
+        "    }"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Per-call zero initialization and finally cleanup attach to real original USER message entrypoints. Existing helper fixtures do not prove every entrypoint normal output-unthunk, exception, task retirement and nested conversion ordering.",
+      "change_plan": "Trace each enclosing entrypoint through ThunkMsg16/getmsg16, native callback, normal unthunker and finalizer; keep original output conversion exactly once. Consolidate only where the same ownership contract is demonstrated; do not remove cleanup on helper-only evidence."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 848,
+      "original_count": 3,
+      "current_start": 902,
+      "current_count": 1,
+      "original": [
+        "    if (t1.message == WM_TIMER) {",
+        "        WOW32ASSERT(HIWORD(t1.wParam) == 0);",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1144,
+      "original_count": 3,
+      "current_start": 1207,
+      "current_count": 1,
+      "original": [
+        "    if (ul && t1.message == WM_TIMER) {",
+        "        WOW32ASSERT(HIWORD(t1.wParam) == 0);",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1909,
+      "original_count": 9,
+      "current_start": 2043,
+      "current_count": 1,
+      "original": [
+        "    ULONG ul;",
+        "    register PSETMESSAGEQUEUE16 parg16;",
+        "",
+        "    GETARGPTR(pFrame, sizeof(SETMESSAGEQUEUE16), parg16);",
+        "",
+        "    ul = GETBOOL16(SetMessageQueue(INT32(parg16->f1)));",
+        "",
+        "    FREEARGPTR(parg16);",
+        "    RETURN(ul);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 31,
+      "current": 35,
+      "logical": 32
+    },
+    {
+      "original": 84,
+      "current": 92,
+      "logical": 85
+    },
+    {
+      "original": 721,
+      "current": 768,
+      "logical": 722
+    },
+    {
+      "original": 851,
+      "current": 903,
+      "logical": 849
+    },
+    {
+      "original": 1147,
+      "current": 1208,
+      "logical": 1145
+    },
+    {
+      "original": 1918,
+      "current": 2044,
+      "logical": 1910
+    }
+  ],
+  "evidence": "Original comparison; actual shared lifetime and DDE rollback bodies; fixture extraction and assertions inspected.",
+  "limits": "No new runtime or compile proof; pending rows are not confirmed repairs."
+}

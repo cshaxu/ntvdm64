@@ -21,9 +21,7 @@ mvdm_guest_location current_pdb_location;
 
 /** SFT Chain Head **/
 
-/* DIVERGENCE MVDM-HOST-DIV-007: never retain the native pointer returned by
- * GetVDMAddr.  The adapter reconstructs bounded SFT/JFT shadows from this
- * original numeric location for each VDD operation. */
+
 mvdm_guest_location sft_head_location;
 #line 19
 

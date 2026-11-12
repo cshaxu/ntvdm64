@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+  "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+  "current_sha256": "4a7fc8597739224b19d4d33e422b77ee4efcfac5e7b13f0c1f97fcabcdde7b1b",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 23,
+      "original_count": 2
+    },
+    {
+      "original_start": 31,
+      "original_count": 3
+    },
+    {
+      "original_start": 76,
+      "original_count": 7
+    }
+  ],
+  "initial_review": "Three excluded bodies: non-V7VGA plane-size fallback, HUNTER declarations and non-C_VID/non-A2CPU port-definition alternative. All remaining source exactly original.",
+  "counter_review": "Checked selected128KiB plane size and counter-bank-dependent display span, chain4 bank calculation and font constants: no changes. Empty Cpu_define_outb under C_VID/A2CPU is the original port-code routing contract, not a new success stub or lost I/O operation.",
+  "limits": "Source necessity classification only; no new port/bank runtime or compiler acceptance."
+}

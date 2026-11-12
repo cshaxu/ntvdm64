@@ -1,0 +1,38 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+  "original_sha256": "41494b9f44e53863d31527ca082dfc286f34e2b4cace556baf501274d3eba061",
+  "current_sha256": "2aa7fbd0e80148afe38753c5078f0911c823120b96064416c3e89657f9314bbd",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 25,
+      "original_count": 0,
+      "current_start": 25,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 47,
+      "original_count": 0,
+      "current_start": 50,
+      "current_count": 11
+    },
+    {
+      "kind": "insert",
+      "original_start": 56,
+      "original_count": 0,
+      "current_start": 70,
+      "current_count": 2
+    }
+  ],
+  "initial_review": "Full file and original guest consumer inspected; untouched DPMI hook enable/disable bodies remain original.",
+  "counter_review": "Remove diagnostics; keep reached endpoint declaration and return protocol. Provider slot ownership remains explicit pending evidence, not proof of a reproduced collision.",
+  "dependencies": [
+    "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "src/mvdm-guest/wow16/kernel31/wow16cal.asm",
+    "test/mvdm-host/dpmi/fast_bop_mode_fixture.c"
+  ],
+  "runtime_validation": "No tests run; original guest unchanged."
+}

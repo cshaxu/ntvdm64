@@ -1,0 +1,83 @@
+{
+  "path": "src/mvdm-host/dos/dem/demgset.c",
+  "original_sha256": "19c5999308a479cc9c0fcb30d23e8301d9a835408417aa965b85523dfb8a1653",
+  "current_sha256": "1f930d4789e17af0c87fc29f4e8ff2045b15d1099e7a5c099e63751e5686694b",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 28,
+      "original_count": 0,
+      "current_start": 28,
+      "current_count": 3,
+      "classification": "adapter-declarations",
+      "disposition": "minimize-header"
+    },
+    {
+      "original_start": 40,
+      "original_count": 2,
+      "current_start": 43,
+      "current_count": 1,
+      "classification": "obsolete-pointer-extern",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 561,
+      "original_count": 8,
+      "current_start": 563,
+      "current_count": 41,
+      "classification": "numeric-state-registration",
+      "disposition": "retain-and-minimize"
+    },
+    {
+      "original_start": 659,
+      "original_count": 0,
+      "current_start": 694,
+      "current_count": 2,
+      "classification": "explanatory-comment-and-line"
+    },
+    {
+      "original_start": 661,
+      "original_count": 1,
+      "current_start": 698,
+      "current_count": 1,
+      "classification": "filesystem-padding",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 737,
+      "original_count": 1,
+      "current_start": 774,
+      "current_count": 1,
+      "classification": "dpb-sentinel",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 989,
+      "original_count": 1,
+      "current_start": 1026,
+      "current_count": 1,
+      "classification": "dpb-link",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1006,
+      "original_count": 1,
+      "current_start": 1043,
+      "current_count": 1,
+      "classification": "dpb-final-sentinel",
+      "disposition": "retain"
+    }
+  ],
+  "initial_review": "All seven substantive diff blocks classified in source order; comment/line block separate.",
+  "counter_review": "Keep wrong-field padding correction and numeric DPB links; narrow headers and redundant local setter check. Directory registration failure is deferred to query and not proven completely reported.",
+  "dependencies": [
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+    "src/ntvdm-exe/softpc/mvdm_vm_notification.c",
+    "src/common/wow/registry.h",
+    "src/mvdm-host/dos/dem/demdasd.h"
+  ],
+  "limits": [
+    "No runtime testing.",
+    "Numeric globals do not establish per-VM program identity."
+  ]
+}

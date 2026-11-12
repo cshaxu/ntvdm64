@@ -1,0 +1,76 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+  "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+  "before_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+  "current_sha256": "eed4db1318fa3a07b24ff2e6a6bdc5022812ef39aa30af592b6180664fc9a8cf",
+  "initial_review": "Complete header compared: selected declarations and six LOCAL macros original-exact; unrelated global declarations removed; callback variables supplied through single registered table; DBG and RC frames displaced; WX86 retained excluded.",
+  "counter_review": "Restore original framework order without adding global storage or duplicating callback registration. No whole-file deletion: original LOCAL macros retain WOW instance/DS ABI. Functionality unchanged by comment recovery.",
+  "items": [
+    [
+      "extern CONST BOOLEAN",
+      22,
+      21,
+      "retain",
+      "Omit unrelated USER process/server globals (wheel, module, windowstation, resource callbacks, user heap and send dispatch array). Selected context/services own those boundaries, not this header.",
+      "Keep finite declaration subset; do not reintroduce full USER process globals.",
+      "Compile actual EDIT/dialog consumers and verify no duplicate state definitions."
+    ],
+    [
+      "extern WCHAR szOneChar",
+      44,
+      3,
+      "retain",
+      "Retained gabThunkMessage and szOneChar remain declarations; original clglobal.c is their definition owner. Omitted USER name constants have no demonstrated need in this selected header.",
+      "Keep reached declarations at original positions; do not clone definitions into adapters.",
+      "Provider link/symbol ownership check."
+    ],
+    [
+      "/*\n * WOW HACK",
+      48,
+      30,
+      "retain",
+      "Remaining omitted globals belong to broader USER resources, critical sections, caches and system class metadata; they are not EDIT memory callback state.",
+      "Keep subset and existing bounded owners rather than reviving USER-wide caches.",
+      "Actual provider compile/link plus check all selected header consumers."
+    ],
+    [
+      "#if DBG",
+      18,
+      3,
+      "restore original",
+      "DBG exclusion framework is displaced after memory macros. Original frame belongs near the include guard; moving it did not recover original structure.",
+      "Move retained DBG/#error frame to original order before declarations; preserve excluded body.",
+      "Verify original structural order and logical lines across real supported include contexts."
+    ],
+    [
+      "#ifndef RC_INVOKED",
+      85,
+      7,
+      "restore original",
+      "Original LHND/LMHtoP RC_INVOKED frame is moved after LOCAL macros. Definitions unchanged but source structure needlessly differs.",
+      "Restore this complete frame before original WOW HACK/LOCAL macros, preserving RC conditional and definitions.",
+      "Preprocess original EDIT/dialog includes, verify macro expansion/RC exclusion and original logical positions."
+    ],
+    [
+      "#if DBG",
+      117,
+      16,
+      "retain",
+      "Callback externs replaced by macros selecting the existing registered PFNWOWHANDLERSIN table. Restoring extern lines while names expand to table expressions is invalid and would duplicate registration ownership.",
+      "Retain omission; keep original LOCAL argument order and hInstance/DS/realloc pointer contracts through wow_edit_memory_bindings.h.",
+      "Memory callback fixture plus dialog EDIT DS acquisition/release; registration table failure and lifecycle checks."
+    ],
+    [
+      "#ifdef WX86",
+      135,
+      7,
+      "correct",
+      "WX86 exclusion is retained; closing #endif logical mapping is not restored before the shortened body ends. Include-guard ending mapping also needs original position.",
+      "Restore original logical positions at WX86 and include-guard closing directives; retain #error body.",
+      "Compiler diagnostic map comparison against original header; no branch activation."
+    ]
+  ],
+  "format_sites": 5,
+  "token_identity_without_line_directives": true,
+  "limits": "No functional/source-structure correction applied; branch context/compiled line evidence not refreshed."
+}

@@ -112,7 +112,6 @@ GLOBAL VOID RegainRegenMemory(VOID)
 }
 
 
-
 #line 115
 #ifdef X86GFX
 #line 116

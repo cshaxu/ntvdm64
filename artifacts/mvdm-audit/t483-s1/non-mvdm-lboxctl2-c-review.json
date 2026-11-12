@@ -1,0 +1,39 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+  "original_sha256": "a99c9ef3b6a7a07b219ddda18ff2fb6a8a11c42f5378e5f77e10e336ad7d1744",
+  "current_sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+  "excluded": [
+    {
+      "original_start": 1149,
+      "original_count": 10,
+      "current_start": 1151,
+      "original": [
+        "    if (sEvt >= LBN_SETFOCUS && plb->fWin2App) {",
+        "",
+        "        /*",
+        "         * Don't send new 3.0 notification codes to the 2.x apps.  Excel is a",
+        "         * hose bag and can't take these because they only expect LBN_SELCHANGE",
+        "         * and LBN_DOUBLECLK msgs in their Fonts dialog box and they die if they",
+        "         * get other LBN_msgs.",
+        "         */",
+        "        return;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "changes": [],
+  "logical_line_mismatches": [
+    {
+      "current": 1152,
+      "original": 1159,
+      "logical": 1150
+    }
+  ],
+  "initial_review": "Full normalized diff: 1 original conditional-body exclusions; all retained code exact.",
+  "counter_review": "Original conditional boundaries retained; no unrelated algorithm rewrite. Exclusion classification does not prove complete macro-hit coverage; line offsets separately recorded.",
+  "evidence": "Pinned OpenNT matching source; selected listbox provider cohort in New-T404S5Wow32ProviderNinja.ps1",
+  "limits": "Source-only classification; no new test/build or product modification."
+}

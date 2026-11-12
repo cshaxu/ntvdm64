@@ -1,0 +1,31 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+  "status": "in-progress; not counted complete",
+  "current_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+  "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+  "initial_review": [
+    "Selected original _GetWindowLong owns local control/dialog extra-word policy.",
+    "Product try_get_long rejects negative indices before original getter; original control zero/error is treated handled, not native fallback.",
+    "DWL_DLGPROC and DWL_MSGRESULT use native GetWindowLongA/W through wow_dialog_host_get; DWL_USER remains local retained state.",
+    "Modern USER owns native dialog procedure and A/W opaque tokens; do not restore private NT4 CPD layout just for mirror similarity."
+  ],
+  "counter_review": [
+    "Need complete original diff and setter/dialog dispatch ownership crosscheck before confirming all slots.",
+    "Model original CPD path remains in alternate build; simplify only after all fixture contexts identified.",
+    "Native owner probe checks token restoration rather than token-bit equality; source inspection is not a fresh execution pass."
+  ],
+  "evidence": [
+    "src/wow32-dll/source/wow_window_client_access_bindings.c:70-104",
+    "src/wow32-dll/source/wow_dialog_procedure_bindings.c:9-17",
+    "src/wow32-dll/include/control-client/precomp.h:70-80",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:587",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c:145-165"
+  ],
+  "remaining": [
+    "Complete per-range original comparison, scope/lifetime and dialog setter pairing.",
+    "Register retain versus simplification versus unproved boundaries in line order."
+  ],
+  "limits": [
+    "No source mutation or new build/runtime result."
+  ]
+}

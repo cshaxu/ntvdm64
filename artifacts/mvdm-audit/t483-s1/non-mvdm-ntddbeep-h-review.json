@@ -1,0 +1,40 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+  "original_sha256": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a",
+  "current_sha256": "614f80ea9f69baecd162d7c727fe85054774974f13610dc94f7ea16d2d990ed5",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 30,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 67,
+      "original_count": 1,
+      "current_start": 70,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/mvdm-host/vdmredir/vrdisp.c",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_com.c"
+  ],
+  "limits": "Whole retained source equals pinned original after exclusion-body and whitespace projection. Exclusion-only category does not certify all supported header contexts, runtime device capability or absence of line findings."
+}

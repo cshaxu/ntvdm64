@@ -1,0 +1,251 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "current_sha256": "1a6887b53aa44994bf6f8a1d2d877cf54427617a7d5948053f438c076ffe24a7",
+  "status": "difference classification complete; product edits not implemented",
+  "diff_ranges": [
+    {
+      "kind": "replace",
+      "original_start": 15,
+      "original_count": 4,
+      "current_start": 15,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 22,
+      "original_count": 0,
+      "current_start": 20,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 23,
+      "original_count": 2,
+      "current_start": 22,
+      "current_count": 6
+    },
+    {
+      "kind": "replace",
+      "original_start": 26,
+      "original_count": 85,
+      "current_start": 29,
+      "current_count": 3
+    },
+    {
+      "kind": "delete",
+      "original_start": 157,
+      "original_count": 415,
+      "current_start": 78,
+      "current_count": 0
+    },
+    {
+      "kind": "insert",
+      "original_start": 578,
+      "original_count": 0,
+      "current_start": 84,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 601,
+      "original_count": 0,
+      "current_start": 108,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 602,
+      "original_count": 7,
+      "current_start": 110,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 610,
+      "original_count": 0,
+      "current_start": 114,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 618,
+      "original_count": 0,
+      "current_start": 123,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 631,
+      "original_count": 0,
+      "current_start": 137,
+      "current_count": 5
+    },
+    {
+      "kind": "replace",
+      "original_start": 634,
+      "original_count": 62,
+      "current_start": 145,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 701,
+      "original_count": 0,
+      "current_start": 151,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 802,
+      "original_count": 0,
+      "current_start": 253,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 803,
+      "original_count": 1,
+      "current_start": 255,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 805,
+      "original_count": 0,
+      "current_start": 258,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 807,
+      "original_count": 0,
+      "current_start": 261,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 846,
+      "original_count": 205,
+      "current_start": 301,
+      "current_count": 3
+    },
+    {
+      "kind": "replace",
+      "original_start": 1089,
+      "original_count": 298,
+      "current_start": 342,
+      "current_count": 1
+    },
+    {
+      "kind": "delete",
+      "original_start": 1389,
+      "original_count": 58,
+      "current_start": 345,
+      "current_count": 0
+    },
+    {
+      "kind": "replace",
+      "original_start": 1449,
+      "original_count": 19,
+      "current_start": 347,
+      "current_count": 5
+    },
+    {
+      "kind": "replace",
+      "original_start": 1469,
+      "original_count": 9,
+      "current_start": 353,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1480,
+      "original_count": 6,
+      "current_start": 356,
+      "current_count": 9
+    },
+    {
+      "kind": "replace",
+      "original_start": 1487,
+      "original_count": 1,
+      "current_start": 366,
+      "current_count": 9
+    },
+    {
+      "kind": "replace",
+      "original_start": 1489,
+      "original_count": 7,
+      "current_start": 376,
+      "current_count": 10
+    },
+    {
+      "kind": "replace",
+      "original_start": 1497,
+      "original_count": 7,
+      "current_start": 387,
+      "current_count": 10
+    },
+    {
+      "kind": "insert",
+      "original_start": 1505,
+      "original_count": 0,
+      "current_start": 398,
+      "current_count": 49
+    },
+    {
+      "kind": "replace",
+      "original_start": 1506,
+      "original_count": 1,
+      "current_start": 448,
+      "current_count": 156
+    },
+    {
+      "kind": "replace",
+      "original_start": 1508,
+      "original_count": 9,
+      "current_start": 605,
+      "current_count": 3
+    },
+    {
+      "kind": "replace",
+      "original_start": 1518,
+      "original_count": 8,
+      "current_start": 609,
+      "current_count": 5
+    },
+    {
+      "kind": "replace",
+      "original_start": 1527,
+      "original_count": 3,
+      "current_start": 615,
+      "current_count": 8
+    },
+    {
+      "kind": "delete",
+      "original_start": 1531,
+      "original_count": 54,
+      "current_start": 624,
+      "current_count": 0
+    }
+  ],
+  "retained_functions": {
+    "GetClassInfo": "full normalized body exact",
+    "StringDuplicate": "full normalized body exact",
+    "InitClsMenuName": "ANSI body original except two LocalFree calls at capture failure; Unicode arm explicitly excluded",
+    "RegisterClassExWOW": "ANSI body original; Unicode arm explicitly excluded; #line introduces blank differences only",
+    "UnregisterClass": "full normalized body exact"
+  },
+  "initial_review": "Actual product client.c WOW_ORIGINAL_CLASS_CLIENT includes bindings then ntcftxt.h. Task version and module version remain distinct. Original class menu ownership transfers on successful registration and returns only on successful unregister.",
+  "counter_review": "Cleanup fix is necessary independently of native registration backend: failed menu capture returns before caller cleanup. Resource IDs do not enter failing capture branch. Fixture source provides original-versus-mirror expectations, not a new run. Native publication rollback must preserve single menu owner; broader binding audit remains separate.",
+  "evidence": [
+    "src/non-mvdm/windows/core/ntuser/client/client.c:154-172",
+    "src/wow32-dll/include/wow_class_client_bindings.h",
+    "src/wow32-dll/source/wow_class_client_bindings.c:25-79,264-288",
+    "src/non-mvdm/windows/core/ntuser/inc/ntsend.h:COPYLPSTRIDW",
+    "test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c:209-238",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:681-682"
+  ],
+  "tests_inspected": "Class fixture checks style/version/brush/instance validation, menu allocation/capture failure1 and2, failed registration, refused unregister, later successful unregister, native duplicate registration and live-window rejection. Controlled backend and task-version inputs; no fresh runtime results.",
+  "limits": "ANSI source-body comparison only, not Unicode support, all branch-context proof or actual diagnostic certification. Omitted API family reuse remains pending."
+}

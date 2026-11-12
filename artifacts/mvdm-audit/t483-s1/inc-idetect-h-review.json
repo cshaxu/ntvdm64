@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+  "original_sha256": "204aa44f2d86e2a38eccbfc0bfbcf838252b101b2b085992cc9fbf744d41b799",
+  "current_sha256": "9ecccbd0516e7d7aca4fd7d60f09edb4a8a7d3ab9e077b166c470b5fcd656228",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 12,
+      "original_count": 3,
+      "current_normalized_start": 12,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 46,
+      "original_count": 3,
+      "current_normalized_start": 44,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two non-NTVDM idle declaration/macro bodies excluded. Remaining source exact.",
+  "counter_review": "Retained NTVDM idle macros and tick/keyboard-poll entrypoints remain original; this is not removal of runtime idle detection or introduction of polling.",
+  "limits": "Source-backed classification only; no new compiled-preprocessor or runtime acceptance. Historical intent not assumed."
+}

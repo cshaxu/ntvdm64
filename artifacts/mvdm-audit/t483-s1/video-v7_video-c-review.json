@@ -1,0 +1,121 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+  "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+  "current_sha256": "a06d4ce01a61573a3e7ca53ab2cc8dce09c8b06c54bab46d5a679c9d56a4a849",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 46,
+      "original_count": 0,
+      "current_start": 46,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#if defined(NTVDM) && !defined(X86GFX)",
+        "#include \"mouse_io.h\"",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 285,
+      "original_count": 1,
+      "current_start": 289,
+      "current_count": 4,
+      "original": [
+        "\tif (is_bad_vid_mode(getBL()) && !is_v7vga_mode(getBL()))"
+      ],
+      "current": [
+        "\t/* DIVERGENCE(VIDEO7-PRESERVE-MODE): SoftPC T70 S10 validates the mode,",
+        "\t * not BL's preserve-memory flag; retain that flag for screen clearing. */",
+        "\tvideo_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */",
+        "\tif (is_bad_vid_mode(video_mode) && !is_v7vga_mode(video_mode))"
+      ]
+    },
+    {
+      "original_start": 287,
+      "original_count": 2,
+      "current_start": 295,
+      "current_count": 0,
+      "original": [
+        "",
+        "\tvideo_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 456,
+      "original_count": 0,
+      "current_start": 467,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "#if defined(NTVDM) && !defined(X86GFX)",
+        "    /* DIVERGENCE(VIDEO7-MOUSE-MODE): match the standard EGA mode path: INT33 and the host mouse bridge",
+        "     * must observe the actual Video 7 extent after an extended mode set. */",
+        "    mouse_video_mode_changed(video_mode);",
+        "#endif"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 49,
+      "original_count": 6,
+      "current_start": 54,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"VIDEO_BIOS_VGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 280,
+      "original_count": 1,
+      "current_start": 283,
+      "current_count": 1,
+      "original": [
+        "\ttrace(\"setting video mode\", DUMP_REG);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 447,
+      "original_count": 2,
+      "current_start": 456,
+      "current_count": 1,
+      "original": [
+        "   \t\tsas_fillsw_16(video_pc_low_regen, clr_char,",
+        "\t\t\t\t \t(video_pc_high_regen - video_pc_low_regen)/ 2 + 1);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 457,
+      "original_count": 1,
+      "current_start": 475,
+      "current_count": 1,
+      "original": [
+        "    trace(\"end of video set mode\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete file comparison: four non-exclusion chunks forming two behavioral changes plus their declaration/move; four excluded conditional bodies.",
+  "counter_review": "Mode normalization before validation leaves BL unchanged: ega_info still takes bit7 from BL and screen clearing uses get_EGA_no_clear. Mouse notification reuses the same provider and ordering as original standard EGA mode setup, after palette enable; no second mouse state is introduced. Provider virtual-instance adaptation and runtime transition correctness are not proved anew by this call-site review.",
+  "evidence": "v7_video.c:289-295 normalized validation; :322 unchanged BL bit7 storage; :446 clearing gate; :467-471 notification. ega_vide.c:1272-1279 original equivalent notification. base/keymouse/mouse_io.c:1523-1566 updates current mode, extents and EGA defaults via existing provider.",
+  "limits": "Runtime transitions not rerun; provider adaptation is independently reviewed. No product edits."
+}

@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/wow32/wres16.c",
+  "original_sha256": "24324d4b95b7c5ac102e9751872af1db779efc0cff223b32aa066034cb874ae9",
+  "current_sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 42,
+      "original_count": 35,
+      "current_start": 44,
+      "current_count": 1,
+      "original": [
+        "",
+        "typedef struct _RTINFO {    /* rt */",
+        "    LPSTR lpType;       // predefined resource type",
+        "    PSZ   pszName;      // name of type",
+        "} RTINFO, *PRTINFO;",
+        "",
+        "RTINFO artInfo[] = {",
+        "   {RT_CURSOR,      \"CURSOR\"},",
+        "   {RT_BITMAP,      \"BITMAP\"},",
+        "   {RT_ICON,        \"ICON\"},",
+        "   {RT_MENU,        \"MENU\"},",
+        "   {RT_DIALOG,      \"DIALOG\"},",
+        "   {RT_STRING,      \"STRING\"},",
+        "   {RT_FONTDIR,     \"FONTDIR\"},",
+        "   {RT_FONT,        \"FONT\"},",
+        "   {RT_ACCELERATOR, \"ACCELERATOR\"},",
+        "   {RT_RCDATA,      \"RCDATA\"},",
+        "   {RT_MESSAGETABLE,\"MESSAGETABLE\"},",
+        "   {RT_GROUP_CURSOR,\"CURSOR DIRECTORY\"},",
+        "   {RT_GROUP_ICON,  \"ICON DIRECTORY\"},",
+        "};",
+        "",
+        "PSZ GetResourceType(LPSZ lpszType)",
+        "{",
+        "    INT i;",
+        "    register PRTINFO prt;",
+        "",
+        "    if (HIWORD(lpszType) != 0)",
+        "    return lpszType;",
+        "    for (prt=artInfo,i=NUMEL(artInfo); i>0; i--,prt++)",
+        "    if (prt->lpType == lpszType)",
+        "        return prt->pszName;",
+        "    return \"UNKNOWN\";",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 45,
+      "original": 77,
+      "logical": 43
+    }
+  ],
+  "evidence": "Only DEBUG resource-name helper body excluded; all retained original source matches.",
+  "limits": [
+    "No new fixture execution or integration pass.",
+    "Cached HWND is not an independent native-handle generation token; native-handle reuse/lifetime remains owned by acquisition/release adapters.",
+    "LF source mapping is not compiler certification."
+  ]
+}

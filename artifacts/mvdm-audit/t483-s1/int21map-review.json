@@ -1,0 +1,465 @@
+{
+  "path": "src/mvdm-host/dpmi32/int21map.c",
+  "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+  "current_sha256": "0aaef2ba8f555513a69f4627483281a96312d026a9680f4232c7f0b1952feb88",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "replace",
+      "original_start": 125,
+      "original_count": 1,
+      "current_start": 125,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 136,
+      "original_count": 1,
+      "current_start": 136,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 139,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 140,
+      "original_count": 0,
+      "current_start": 142,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 196,
+      "original_count": 1,
+      "current_start": 199,
+      "current_count": 5
+    },
+    {
+      "kind": "insert",
+      "original_start": 199,
+      "original_count": 0,
+      "current_start": 206,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 201,
+      "original_count": 0,
+      "current_start": 209,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 202,
+      "original_count": 3,
+      "current_start": 211,
+      "current_count": 5
+    },
+    {
+      "kind": "replace",
+      "original_start": 206,
+      "original_count": 5,
+      "current_start": 217,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 235,
+      "original_count": 0,
+      "current_start": 242,
+      "current_count": 4
+    },
+    {
+      "kind": "insert",
+      "original_start": 236,
+      "original_count": 0,
+      "current_start": 247,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 241,
+      "original_count": 0,
+      "current_start": 253,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 242,
+      "original_count": 0,
+      "current_start": 256,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 426,
+      "original_count": 0,
+      "current_start": 442,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 427,
+      "original_count": 12,
+      "current_start": 444,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 440,
+      "original_count": 0,
+      "current_start": 447,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1080,
+      "original_count": 0,
+      "current_start": 1088,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 1081,
+      "original_count": 0,
+      "current_start": 1092,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1090,
+      "original_count": 1,
+      "current_start": 1102,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 1373,
+      "original_count": 0,
+      "current_start": 1387,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1374,
+      "original_count": 1,
+      "current_start": 1389,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1376,
+      "original_count": 0,
+      "current_start": 1392,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1454,
+      "original_count": 16,
+      "current_start": 1471,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1471,
+      "original_count": 0,
+      "current_start": 1474,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1494,
+      "original_count": 20,
+      "current_start": 1498,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1515,
+      "original_count": 0,
+      "current_start": 1501,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1539,
+      "original_count": 21,
+      "current_start": 1526,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1561,
+      "original_count": 0,
+      "current_start": 1529,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1590,
+      "original_count": 0,
+      "current_start": 1559,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 1591,
+      "original_count": 0,
+      "current_start": 1563,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1642,
+      "original_count": 0,
+      "current_start": 1615,
+      "current_count": 4
+    },
+    {
+      "kind": "insert",
+      "original_start": 1721,
+      "original_count": 0,
+      "current_start": 1698,
+      "current_count": 4
+    },
+    {
+      "kind": "insert",
+      "original_start": 1725,
+      "original_count": 0,
+      "current_start": 1706,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2002,
+      "original_count": 0,
+      "current_start": 1984,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2003,
+      "original_count": 1,
+      "current_start": 1986,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2005,
+      "original_count": 0,
+      "current_start": 1989,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2159,
+      "original_count": 0,
+      "current_start": 2144,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2160,
+      "original_count": 1,
+      "current_start": 2146,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2162,
+      "original_count": 0,
+      "current_start": 2149,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2205,
+      "original_count": 0,
+      "current_start": 2193,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2206,
+      "original_count": 1,
+      "current_start": 2195,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2208,
+      "original_count": 0,
+      "current_start": 2198,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2295,
+      "original_count": 0,
+      "current_start": 2286,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2296,
+      "original_count": 1,
+      "current_start": 2288,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2298,
+      "original_count": 0,
+      "current_start": 2291,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2325,
+      "original_count": 0,
+      "current_start": 2319,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2326,
+      "original_count": 3,
+      "current_start": 2321,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2330,
+      "original_count": 0,
+      "current_start": 2324,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2394,
+      "original_count": 0,
+      "current_start": 2389,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2395,
+      "original_count": 4,
+      "current_start": 2391,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2400,
+      "original_count": 0,
+      "current_start": 2394,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2615,
+      "original_count": 0,
+      "current_start": 2610,
+      "current_count": 3
+    },
+    {
+      "kind": "replace",
+      "original_start": 2658,
+      "original_count": 1,
+      "current_start": 2656,
+      "current_count": 4
+    },
+    {
+      "kind": "replace",
+      "original_start": 2660,
+      "original_count": 1,
+      "current_start": 2661,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2662,
+      "original_count": 0,
+      "current_start": 2663,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2663,
+      "original_count": 1,
+      "current_start": 2665,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 2665,
+      "original_count": 0,
+      "current_start": 2668,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2690,
+      "original_count": 0,
+      "current_start": 2694,
+      "current_count": 8
+    },
+    {
+      "kind": "insert",
+      "original_start": 2697,
+      "original_count": 0,
+      "current_start": 2709,
+      "current_count": 7
+    },
+    {
+      "kind": "insert",
+      "original_start": 2830,
+      "original_count": 0,
+      "current_start": 2849,
+      "current_count": 3
+    },
+    {
+      "kind": "replace",
+      "original_start": 2831,
+      "original_count": 1,
+      "current_start": 2853,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 2836,
+      "original_count": 0,
+      "current_start": 2858,
+      "current_count": 1
+    }
+  ],
+  "findings": [
+    {
+      "topic": "IOCTL packet size",
+      "source": "src/mvdm-guest/dos/v86/inc/ioctl.inc:142; src/mvdm-host/dos/dem/demdasd.h:111",
+      "finding": "Original A_FORMATPACKET has optional FP_TRACKCOUNT when bit1 set; MID is 2+4+11+8=25 bytes and ACCESSCTRL is two bytes. Added packet lengths have source basis; whole dispatch predicate still needs truth-table review."
+    },
+    {
+      "topic": "32-bit track parameter selector",
+      "source": "int21map.c current 2849-2853",
+      "finding": "Existing copy is 13 bytes, while 32-bit selector is at offset 13 in original client parameter block. Reading selector from copied buffer is outside copied extent; change to original ParameterBlock addresses the correct owner."
+    },
+    {
+      "topic": "raw input ZF",
+      "source": "int21map.c NoTranslation",
+      "finding": "Added code captures ZF after mode/segment restore and restores it after DpmiSimulateIretCF only for AH06/DLFF or AX0C06/DLFF. Need trace restore/helper and original DOS return flags before final retention."
+    }
+  ],
+  "pending": [
+    "Registered dbcs and load-result evidence gaps remain open; audit completion is not repair completion."
+  ],
+  "runtime_validation": "No execution; no source changes.",
+  "meaning": "All 62 lexical blocks classified; 17 substantive ranges registered, remaining excluded branches and line scaffolding.",
+  "counter_review": "AH59 original ES:DI and BX are explicit; restore helper only restores segments/stack; IRET helper restores all old status except CF. IOCTL byte predicate retains 40/41/42/60/61/62/68 and adds exactly 46/47/66/67. DOSX dosex4 copies four words; failed-load and mapping lifetime equivalence remains pending."
+}

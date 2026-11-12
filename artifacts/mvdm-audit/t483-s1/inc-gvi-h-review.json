@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+  "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+  "current_sha256": "82c9e8daa81bb393466e4123c33371a61cdc8cdecbb52c51d0115d91a91d2dcd",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 288,
+      "original_count": 0,
+      "current_start": 273,
+      "current_count": 2
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 59,
+      "original_count": 1
+    },
+    {
+      "original_start": 65,
+      "original_count": 26
+    },
+    {
+      "original_start": 137,
+      "original_count": 3
+    },
+    {
+      "original_start": 159,
+      "original_count": 4
+    },
+    {
+      "original_start": 185,
+      "original_count": 1
+    },
+    {
+      "original_start": 282,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Six excluded profile/layout bodies and one added CHAIN2 display-address macro. Other selected source exact.",
+  "counter_review": "Macro maps offsets 0,1,2,3,4 to 0,1,2,3,8 and preserves low two lane bits. Current nt_cga.c:235,291-300 consumes it and gathers cells at eight-byte stride; gfx_updt.c uses it for text/dirty/cursor reads. This is coupled to the local plane representation, not an independently removable helper. Existing C-VID vector fixture covers generated reads/writes but does not directly exercise this macro. Complete selected renderer address-unit and bank/wrap equivalence remains unproved; preserve pending evidence.",
+  "limits": "Difference classification only; no new build/runtime pass. CHAIN2 complete layout equivalence pending; no product source changed."
+}

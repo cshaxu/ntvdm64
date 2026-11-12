@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+  "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+  "current_sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 17,
+      "original_count": 1
+    },
+    {
+      "original_start": 21,
+      "original_count": 6
+    },
+    {
+      "original_start": 47,
+      "original_count": 146
+    }
+  ],
+  "initial_review": "Whole original/current file compared; only SCCSID, SEGMENTATION and non-PROD bodies replaced.",
+  "counter_review": "After removing the three complete excluded bodies and line/error directives, every remaining nonblank source line matches original. Original nested ANSI/DELTA bodies belong to the removed non-PROD body, not selected changes.",
+  "limits": "No all-context exclusion or diagnostic-line certification. Trailing #line49 follows #line194 at EOF with no remaining code; does not change an executable statement. No runtime backtrace acceptance claim."
+}

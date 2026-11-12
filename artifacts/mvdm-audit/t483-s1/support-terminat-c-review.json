@@ -1,0 +1,215 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+  "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+  "current_sha256": "0b55f0aec8c42f623f329b985533a71c615cf6a493eddb32fa941b7ed679c869",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "original_start": 55,
+      "original_count": 0,
+      "current_start": 57,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-356): standalone service permission precedes cleanup. */",
+        "IMPORT VOID ntvdm_worker_lifecycle_authorize_exit IPT0();"
+      ]
+    },
+    {
+      "original_start": 60,
+      "original_count": 0,
+      "current_start": 65,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-356): preserve the original cleanup thread/order. */",
+        "\tntvdm_worker_lifecycle_authorize_exit();"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 33,
+      "original_count": 1,
+      "current_start": 34,
+      "current_count": 1,
+      "original": [
+        "#include \"novell.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 36,
+      "original_count": 2,
+      "current_start": 39,
+      "current_count": 1,
+      "original": [
+        "#include HostHwVgaH",
+        "#include \"hwvga.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 40,
+      "original_count": 1,
+      "current_start": 44,
+      "current_count": 1,
+      "original": [
+        "#include \"host_lic.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 45,
+      "original_count": 6,
+      "current_start": 51,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 70,
+      "original_count": 1,
+      "current_start": 80,
+      "current_count": 1,
+      "original": [
+        "\tWinTerm();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 74,
+      "original_count": 1,
+      "current_start": 86,
+      "current_count": 1,
+      "original": [
+        "\tsb_term();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 78,
+      "original_count": 3,
+      "current_start": 92,
+      "current_count": 1,
+      "original": [
+        "\t/* Get back to window if we are full screen */",
+        "\tif( hostIsFullScreen( ) )",
+        "\t\tdisableFullScreenVideo( FALSE );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 85,
+      "original_count": 3,
+      "current_start": 99,
+      "current_count": 1,
+      "original": [
+        "\t/* PC_CONFIG style host_lpt_close() and",
+        "\thost_com_close() calls should be added",
+        "\tin here */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 104,
+      "original_count": 1,
+      "current_start": 120,
+      "current_count": 1,
+      "original": [
+        "\thost_timer_shutdown(); /* Stop the timer */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 113,
+      "original_count": 1,
+      "current_start": 131,
+      "current_count": 1,
+      "original": [
+        "\tconfig_activate(C_FLOPPY_B_DEVICE, FALSE);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 116,
+      "original_count": 1,
+      "current_start": 136,
+      "current_count": 1,
+      "original": [
+        "\tconfig_activate(C_SLAVEPC_DEVICE, FALSE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 123,
+      "original_count": 1,
+      "current_start": 145,
+      "current_count": 1,
+      "original": [
+        "\tcpu_terminate();"
+      ],
+      "current": [
+        "#error Excluded original CPU_30_STYLE branch"
+      ]
+    },
+    {
+      "original_start": 127,
+      "original_count": 1,
+      "current_start": 151,
+      "current_count": 1,
+      "original": [
+        "\tnet_term();\t/* Shutdown network */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 131,
+      "original_count": 1,
+      "current_start": 157,
+      "current_count": 1,
+      "original": [
+        "\t(*license_exit)(); /* Shutdown licensing system */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Two lifecycle admission additions; original cleanup ordering unchanged.",
+  "counter_review": "Gate precedes non-atomic repeated-terminate guard so competing callers cannot execute exit(0) during owner cleanup. Worker lifecycle owns permission and same-thread reentry; host_applClose gate alone would be too late for devices already destroyed.",
+  "limits": "No new product changes or runtime claims."
+}

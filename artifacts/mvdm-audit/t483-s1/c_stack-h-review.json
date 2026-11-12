@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+  "original_sha256": "323384e4437fa1bba94994f6cd5a762bc74c9d35eb03d6966ac8df235e165f75",
+  "current_sha256": "7c210c32a6ca46a4c9f3dbbfd19089d142c77f4b9a257b0361526ffdf7f75fe9",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 87,
+      "original_end": 92,
+      "current_error_line": 88
+    },
+    {
+      "original_start": 103,
+      "original_end": 108,
+      "current_error_line": 101
+    }
+  ],
+  "limits": "Boundary-aware comparison proves retained nonblank/non-line text unchanged. No new all-context reachability, runtime or full logical-line certification."
+}

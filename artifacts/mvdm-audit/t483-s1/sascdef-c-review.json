@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+  "original_sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+  "current_sha256": "65d4463dee377d22a2f4aad5db849e27a60e88a2fe5ae0e597dea92f0c89ce9d",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "430",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+      "current_start": "131",
+      "current_count": "6",
+      "original_start": "131",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-060",
+      "classification": "typed-null-vector-slot",
+      "initial_review": "Null slot uses its declared function-pointer type rather than unprototyped void function pointer.",
+      "counter_review": "Generated sas4gen.h declares void(IU32,IU32); initializer remains NULL and preserves vector position. Runtime binding later installs c_sas_overwrite_memory; no substitute success function is added.",
+      "disposition": "retain",
+      "evidence": "sascdef.c:131-136; src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h:54,114; mvdm_cvidc_vector_binding.c:89",
+      "limits": "Source/fixture review only; no fresh build/test or complete branch/line certification.",
+      "decision": "retain",
+      "change_plan": "Retain typed null cast and slot order. Do not delete slot or move runtime binding into initializer.",
+      "related_callers": "cSasPtrs initialization; mvdm_cvidc_vector_binding.c:89; generated sas4gen.h:54,114",
+      "verification_required": "Selected build/layout and existing actual SAS/C-VID vector binding fixture, including slot installation before use.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [],
+  "counter_review": "Every whole-file textual difference classified; excluded bodies separately enumerated.",
+  "limits": "No functional remediation or fresh runtime verification."
+}

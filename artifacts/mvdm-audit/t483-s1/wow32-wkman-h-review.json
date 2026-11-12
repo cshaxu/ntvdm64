@@ -1,0 +1,91 @@
+{
+  "path": "src/mvdm-host/wow32/wkman.h",
+  "original_sha256": "730ec4dee5b07377c8533a82596ba9a9934ce74af355603aa6bad2637ad3bc8c",
+  "current_sha256": "a345740677c25158c65fd520c54ba87c6c3176c9594407e683442cb91313fea2",
+  "changes": [
+    {
+      "original_start": 1,
+      "original_count": 0,
+      "current_start": 1,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40",
+        " * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,",
+        " * implementation and ownership are unchanged; no stack-incompatible aliases. */"
+      ],
+      "decision": "retain",
+      "evidence": "File-level existing divergence notice documents the explicit worker-export calling convention; no executable effect. Kept with the ABI declaration evidence, not a new product repair.",
+      "change_plan": "Retain the existing ABI provenance notice with its registered declaration changes; no functional repair required."
+    },
+    {
+      "original_start": 57,
+      "original_count": 1,
+      "current_start": 61,
+      "current_count": 1,
+      "original": [
+        "DWORD   W32HungAppNotifyThread(UINT hKillUniqueID);"
+      ],
+      "current": [
+        "DWORD WINAPI W32HungAppNotifyThread(UINT hKillUniqueID);"
+      ],
+      "decision": "retain",
+      "evidence": "W32Thread and W32HungAppNotifyThread are native thread entries; W32EndTask definition is APIENTRY. WOW32 provider builds original code with /Gz; explicit WINAPI preserves callback ABI for callers independent of default compiler convention. wow_task_termination.c also declares WINAPI.",
+      "change_plan": "Retain explicit calling convention at the existing ABI declaration; preserve parameter types and original implementation, without aliases or a package-wide /Gd switch."
+    },
+    {
+      "original_start": 59,
+      "original_count": 1,
+      "current_start": 64,
+      "current_count": 1,
+      "original": [
+        "DWORD   W32Thread(LPVOID vpInitialSSSP);"
+      ],
+      "current": [
+        "DWORD WINAPI W32Thread(LPVOID vpInitialSSSP);"
+      ],
+      "decision": "retain",
+      "evidence": "W32Thread and W32HungAppNotifyThread are native thread entries; W32EndTask definition is APIENTRY. WOW32 provider builds original code with /Gz; explicit WINAPI preserves callback ABI for callers independent of default compiler convention. wow_task_termination.c also declares WINAPI.",
+      "change_plan": "Retain explicit calling convention at the existing ABI declaration; preserve parameter types and original implementation, without aliases or a package-wide /Gd switch."
+    },
+    {
+      "original_start": 61,
+      "original_count": 1,
+      "current_start": 67,
+      "current_count": 1,
+      "original": [
+        "VOID    W32EndTask(VOID);"
+      ],
+      "current": [
+        "VOID WINAPI W32EndTask(VOID);"
+      ],
+      "decision": "retain",
+      "evidence": "W32Thread and W32HungAppNotifyThread are native thread entries; W32EndTask definition is APIENTRY. WOW32 provider builds original code with /Gz; explicit WINAPI preserves callback ABI for callers independent of default compiler convention. wow_task_termination.c also declares WINAPI.",
+      "change_plan": "Retain explicit calling convention at the existing ABI declaration; preserve parameter types and original implementation, without aliases or a package-wide /Gd switch."
+    },
+    {
+      "original_start": 78,
+      "original_count": 2,
+      "current_start": 85,
+      "current_count": 2,
+      "original": [
+        "HANDLE  RegisterWOWIdle(void);",
+        "VOID BlockWOWIdle(BOOL Blocking);"
+      ],
+      "current": [
+        "HANDLE  __cdecl RegisterWOWIdle(void);",
+        "VOID __cdecl BlockWOWIdle(BOOL Blocking);"
+      ],
+      "decision": "retain",
+      "evidence": "nt_eoi.c implements RegisterWOWIdle/BlockWOWIdle as ordinary C exports; WOW32 generator uses /Gz. Explicit __cdecl prevents caller/callee stack-cleanup mismatch; original event and VDM_WOWBLOCKED state implementation remains unchanged.",
+      "change_plan": "Retain explicit calling convention at the existing ABI declaration; preserve parameter types and original implementation, without aliases or a package-wide /Gd switch."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "evidence": "Complete declaration diff traced to original definitions and selected /Gz generator.",
+  "limits": [
+    "Audit classification only; no new runtime/build claim.",
+    "Exclusion-only is a source comparison category, not universal preprocessing certification."
+  ]
+}

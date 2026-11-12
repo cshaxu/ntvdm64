@@ -1,0 +1,866 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+  "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+  "current_sha256": "49b235efd0b6ccb1c226f63e17b5838c5ed441487bc68340f4d3b03179117474",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 309,
+      "original_count": 1,
+      "current_start": 149,
+      "current_count": 2,
+      "original": [
+        "extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);"
+      ],
+      "current": [
+        "/* DIVERGENCE MVDM-HOST-DIV-074: match the original glue body's IU16 word value. */",
+        "extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU16, eaVal, IU32, count);"
+      ]
+    },
+    {
+      "original_start": 312,
+      "original_count": 0,
+      "current_start": 154,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE MVDM-HOST-DIV-088: use the original C-video selector body's",
+        " * exact no-argument contract rather than an implicit host-int call. */",
+        "extern void setWritePointers IPT0();"
+      ]
+    },
+    {
+      "original_start": 331,
+      "original_count": 4,
+      "current_start": 179,
+      "current_count": 6,
+      "original": [
+        "IMPORT VOID ega_copy_b_write();",
+        "IMPORT VOID ega_mode0_chn_b_write();",
+        "IMPORT VOID ega_mode1_chn_b_write();",
+        "IMPORT VOID ega_mode2_chn_b_write();"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-136): preserve the original writer table order,",
+        " * with the exact original provider parameter contracts. */",
+        "IMPORT VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);",
+        "IMPORT VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+        "IMPORT VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+        "IMPORT VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);"
+      ]
+    },
+    {
+      "original_start": 336,
+      "original_count": 4,
+      "current_start": 186,
+      "current_count": 4,
+      "original": [
+        "IMPORT VOID ega_copy_w_write();",
+        "IMPORT VOID ega_mode0_chn_w_write();",
+        "IMPORT VOID ega_mode1_chn_w_write();",
+        "IMPORT VOID ega_mode2_chn_w_write();"
+      ],
+      "current": [
+        "IMPORT VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);",
+        "IMPORT VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+        "IMPORT VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+        "IMPORT VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 62,
+      "original_count": 1,
+      "current_start": 63,
+      "current_count": 1,
+      "original": [
+        "extern WRT_POINTERS dump_writes;"
+      ],
+      "current": [
+        "#error Unsupported excluded EGA diagnostics configuration"
+      ]
+    },
+    {
+      "original_start": 75,
+      "original_count": 6,
+      "current_start": 78,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 91,
+      "original_count": 0,
+      "current_start": 96,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 92,
+      "original_count": 8,
+      "current_start": 98,
+      "current_count": 0,
+      "original": [
+        "WRT_POINTERS *mode_chain_handler_table[] =",
+        "{",
+        "\t&mode_table.nch.mode_0[0],",
+        "\t&mode_table.nch.mode_1[0],",
+        "\t&mode_table.nch.mode_2[0],",
+        "#ifdef VGG",
+        "\t&mode_table.nch.mode_3[0],",
+        "#endif"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 101,
+      "original_count": 6,
+      "current_start": 99,
+      "current_count": 0,
+      "original": [
+        "\t&mode_table.nch.mode_0[0],\t\t/* This should be chain 2 eventually */",
+        "\t&mode_table.nch.mode_1[0],\t\t/* This should be chain 2 eventually */",
+        "\t&mode_table.nch.mode_2[0],\t\t/* This should be chain 2 eventually */",
+        "#ifdef VGG",
+        "\t&mode_table.nch.mode_3[0],\t\t/* This should be chain 2 eventually */",
+        "#endif"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 108,
+      "original_count": 15,
+      "current_start": 100,
+      "current_count": 0,
+      "original": [
+        "#ifdef VGG",
+        "\t&mode_table.ch4.mode_0[0],",
+        "\t&mode_table.ch4.mode_1[0],",
+        "\t&mode_table.ch4.mode_2[0],",
+        "\t&mode_table.ch4.mode_3[0],",
+        "#endif /* VGG */",
+        "};",
+        "\t",
+        "#ifndef EGATEST",
+        "IMPORT VOID glue_b_write IPT2(UTINY *, addr, ULONG, val);",
+        "IMPORT VOID glue_w_write IPT2(UTINY *, addr, ULONG, val);",
+        "IMPORT VOID glue_b_fill IPT3(UTINY *, laddr, UTINY *, haddr, ULONG, val);",
+        "IMPORT VOID glue_w_fill IPT3(UTINY *, laddr, UTINY *, haddr, ULONG, val);",
+        "IMPORT VOID glue_b_move IPT4(UTINY *, laddr, UTINY *, haddr, UTINY *, src, UTINY, src_type);",
+        "IMPORT VOID glue_w_move IPT3(UTINY *, laddr, UTINY *, haddr, UTINY *, src);"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 124,
+      "original_count": 11,
+      "current_start": 101,
+      "current_count": 0,
+      "original": [
+        "#ifndef GISP_CPU",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "IMPORT VOID _glue_b_write IPT2(UTINY *, addr, ULONG, val);",
+        "IMPORT VOID _glue_w_write IPT2(UTINY *, addr, ULONG, val);",
+        "IMPORT VOID _glue_b_fill IPT3(UTINY *, laddr, UTINY *, haddr, ULONG, val);",
+        "IMPORT VOID _glue_w_fill IPT3(UTINY *, laddr, UTINY *, haddr, ULONG, val);",
+        "IMPORT VOID _glue_b_fwd_move IPT0();",
+        "IMPORT VOID _glue_b_bwd_move IPT0();",
+        "IMPORT VOID _glue_w_fwd_move IPT0();",
+        "IMPORT VOID _glue_w_bwd_move IPT0();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 136,
+      "original_count": 4,
+      "current_start": 102,
+      "current_count": 0,
+      "original": [
+        "GLOBAL WRT_POINTERS Glue_writes =",
+        "{",
+        "\t_glue_b_write,",
+        "\t_glue_w_write"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 141,
+      "original_count": 8,
+      "current_start": 103,
+      "current_count": 0,
+      "original": [
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_glue_b_fill,",
+        "\t_glue_w_fill,",
+        "\t_glue_b_fwd_move,",
+        "\t_glue_b_bwd_move,",
+        "\t_glue_w_fwd_move,",
+        "\t_glue_w_bwd_move"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 150,
+      "original_count": 1,
+      "current_start": 104,
+      "current_count": 0,
+      "original": [
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 152,
+      "original_count": 1,
+      "current_start": 105,
+      "current_count": 0,
+      "original": [
+        "};"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 154,
+      "original_count": 3,
+      "current_start": 106,
+      "current_count": 0,
+      "original": [
+        "GLOBAL WRT_POINTERS C_vid_writes;",
+        "#endif /* C_VID */",
+        "#else"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 158,
+      "original_count": 7,
+      "current_start": 107,
+      "current_count": 0,
+      "original": [
+        "#ifdef A_VID",
+        "IMPORT VOID _glue_b_write();",
+        "IMPORT VOID _glue_w_write();",
+        "IMPORT VOID _glue_b_fill();",
+        "IMPORT VOID _glue_w_fill();",
+        "IMPORT VOID _glue_b_move();",
+        "IMPORT VOID _glue_w_move();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 166,
+      "original_count": 9,
+      "current_start": 108,
+      "current_count": 0,
+      "original": [
+        "GLOBAL MEM_HANDLERS Glue_writes =",
+        "{",
+        "\t_glue_b_write,",
+        "\t_glue_w_write,",
+        "\t_glue_b_fill,",
+        "\t_glue_w_fill,",
+        "\t_glue_b_move,",
+        "\t_glue_w_move,",
+        "};"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 176,
+      "original_count": 1,
+      "current_start": 109,
+      "current_count": 0,
+      "original": [
+        "GLOBAL WRT_POINTERS A_vid_writes;"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 178,
+      "original_count": 1,
+      "current_start": 110,
+      "current_count": 0,
+      "original": [
+        "#else"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 180,
+      "original_count": 9,
+      "current_start": 111,
+      "current_count": 0,
+      "original": [
+        "GLOBAL MEM_HANDLERS Glue_writes =",
+        "{",
+        "\tglue_b_write,",
+        "\tglue_w_write,",
+        "\tglue_b_fill,",
+        "\tglue_w_fill,",
+        "\tglue_b_move,",
+        "\tglue_w_move,",
+        "};"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 190,
+      "original_count": 5,
+      "current_start": 112,
+      "current_count": 0,
+      "original": [
+        "GLOBAL WRT_POINTERS C_vid_writes;",
+        "#endif /* C_VID */",
+        "#endif /* A3CPU */",
+        "#endif /* GISP_CPU */",
+        "#endif /* EGATEST */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 196,
+      "original_count": 8,
+      "current_start": 113,
+      "current_count": 0,
+      "original": [
+        "IMPORT VOID _simple_b_write();",
+        "IMPORT VOID _simple_w_write();",
+        "IMPORT VOID _simple_b_fill();",
+        "IMPORT VOID _simple_w_fill();",
+        "IMPORT VOID _simple_bf_move();",
+        "IMPORT VOID _simple_wf_move();",
+        "IMPORT VOID _simple_bb_move();",
+        "IMPORT VOID _simple_wb_move();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 205,
+      "original_count": 12,
+      "current_start": 114,
+      "current_count": 0,
+      "original": [
+        "WRT_POINTERS simple_writes =",
+        "{",
+        "\t_simple_b_write,",
+        "\t_simple_w_write",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_simple_b_fill,",
+        "\t_simple_w_fill,",
+        "\t_simple_bf_move,",
+        "\t_simple_bb_move,",
+        "\t_simple_wf_move,",
+        "\t_simple_wb_move"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 218,
+      "original_count": 2,
+      "current_start": 115,
+      "current_count": 0,
+      "original": [
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 221,
+      "original_count": 8,
+      "current_start": 116,
+      "current_count": 0,
+      "original": [
+        "IMPORT VOID _dt0_bw_nch();",
+        "IMPORT VOID _dt0_ww_nch();",
+        "IMPORT VOID _dt0_bf_nch();",
+        "IMPORT VOID _dt0_wf_nch();",
+        "IMPORT VOID _vid_md0_bfm_0_8();",
+        "IMPORT VOID _vid_md0_bbm_0_8();",
+        "IMPORT VOID _vid_md0_wfm_0_8();",
+        "IMPORT VOID _vid_md0_wbm_0_8();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 230,
+      "original_count": 8,
+      "current_start": 117,
+      "current_count": 0,
+      "original": [
+        "IMPORT VOID _dt2_bw_nch();",
+        "IMPORT VOID _dt2_ww_nch();",
+        "IMPORT VOID _dt2_bf_nch();",
+        "IMPORT VOID _dt2_wf_nch();",
+        "IMPORT VOID _vid_md2_bfm_0_8();",
+        "IMPORT VOID _vid_md2_bbm_0_8();",
+        "IMPORT VOID _vid_md2_wfm_0_8();",
+        "IMPORT VOID _vid_md2_wbm_0_8();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 239,
+      "original_count": 8,
+      "current_start": 118,
+      "current_count": 0,
+      "original": [
+        "IMPORT VOID _dt3_bw_nch();",
+        "IMPORT VOID _dt3_ww_nch();",
+        "IMPORT VOID _dt3_bf_nch();",
+        "IMPORT VOID _dt3_wf_nch();",
+        "IMPORT VOID _vid_md3_bfm_0_8();",
+        "IMPORT VOID _vid_md3_bbm_0_8();",
+        "IMPORT VOID _vid_md3_wfm_0_8();",
+        "IMPORT VOID _vid_md3_wbm_0_8();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 248,
+      "original_count": 4,
+      "current_start": 119,
+      "current_count": 0,
+      "original": [
+        "WRT_POINTERS dth_md0_writes =",
+        "{",
+        "\t_dt0_bw_nch,",
+        "\t_dt0_ww_nch"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 253,
+      "original_count": 8,
+      "current_start": 120,
+      "current_count": 0,
+      "original": [
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_dt0_bf_nch,",
+        "\t_dt0_wf_nch,",
+        "\t_vid_md0_bfm_0_8,",
+        "\t_vid_md0_bbm_0_8,",
+        "\t_vid_md0_wfm_0_8,",
+        "\t_vid_md0_wbm_0_8"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 262,
+      "original_count": 1,
+      "current_start": 121,
+      "current_count": 0,
+      "original": [
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 264,
+      "original_count": 1,
+      "current_start": 122,
+      "current_count": 0,
+      "original": [
+        "};"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 266,
+      "original_count": 4,
+      "current_start": 123,
+      "current_count": 0,
+      "original": [
+        "WRT_POINTERS dth_md2_writes =",
+        "{",
+        "\t_dt2_bw_nch,",
+        "\t_dt2_ww_nch"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 271,
+      "original_count": 9,
+      "current_start": 124,
+      "current_count": 0,
+      "original": [
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_dt2_bf_nch,",
+        "\t_dt2_wf_nch,",
+        "\t_vid_md2_bfm_0_8,",
+        "\t_vid_md2_bbm_0_8,",
+        "\t_vid_md2_wfm_0_8,",
+        "\t_vid_md2_wbm_0_8",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 281,
+      "original_count": 1,
+      "current_start": 125,
+      "current_count": 0,
+      "original": [
+        "};"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 283,
+      "original_count": 4,
+      "current_start": 126,
+      "current_count": 0,
+      "original": [
+        "WRT_POINTERS dth_md3_writes =",
+        "{",
+        "\t_dt3_bw_nch,",
+        "\t_dt3_ww_nch"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 288,
+      "original_count": 8,
+      "current_start": 127,
+      "current_count": 0,
+      "original": [
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_dt3_bf_nch,",
+        "\t_dt3_wf_nch,",
+        "\t_vid_md3_bfm_0_8,",
+        "\t_vid_md3_bbm_0_8,",
+        "\t_vid_md3_wfm_0_8,",
+        "\t_vid_md3_wbm_0_8"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 297,
+      "original_count": 1,
+      "current_start": 128,
+      "current_count": 0,
+      "original": [
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 299,
+      "original_count": 1,
+      "current_start": 129,
+      "current_count": 10,
+      "original": [
+        "};"
+      ],
+      "current": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 322,
+      "original_count": 2,
+      "current_start": 169,
+      "current_count": 1,
+      "original": [
+        "/* no glue required */",
+        "MEM_HANDLERS Glue_writes = { 0, 0, 0, 0, 0, 0 };"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 352,
+      "original_count": 4,
+      "current_start": 205,
+      "current_count": 1,
+      "original": [
+        "\t0x00000000,0xff000000,0x00ff0000,0xffff0000,",
+        "\t0x0000ff00,0xff00ff00,0x00ffff00,0xffffff00,",
+        "\t0x000000ff,0xff0000ff,0x00ff00ff,0xffff00ff,",
+        "\t0x0000ffff,0xff00ffff,0x00ffffff,0xffffffff"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 372,
+      "original_count": 6,
+      "current_start": 224,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 386,
+      "original_count": 56,
+      "current_start": 241,
+      "current_count": 1,
+      "original": [
+        "#ifndef GISP_CPU",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "",
+        "\tC_vid_writes.b_write = handler->b_write;",
+        "\tC_vid_writes.w_write = handler->w_write;",
+        "\tC_vid_writes.b_fill = handler->b_fill;",
+        "\tC_vid_writes.w_fill = handler->w_fill;",
+        "\tC_vid_writes.b_fwd_move = handler->b_fwd_move;",
+        "\tC_vid_writes.b_bwd_move = handler->b_bwd_move;",
+        "\tC_vid_writes.w_fwd_move = handler->w_fwd_move;",
+        "\tC_vid_writes.w_bwd_move = handler->w_bwd_move;",
+        "",
+        "#else",
+        "\tUNUSED(handler);",
+        "#endif /* C_VID */",
+        "#else",
+        "#ifdef C_VID",
+        "",
+        "\tC_vid_writes.b_write = handler->b_write;",
+        "\tC_vid_writes.w_write = handler->w_write;",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "",
+        "\tC_vid_writes.b_fill = handler->b_fill;",
+        "\tC_vid_writes.w_fill = handler->w_fill;",
+        "\tC_vid_writes.b_fwd_move = handler->b_fwd_move;",
+        "\tC_vid_writes.b_bwd_move = handler->b_bwd_move;",
+        "\tC_vid_writes.w_fwd_move = handler->w_fwd_move;",
+        "\tC_vid_writes.w_bwd_move = handler->w_bwd_move;",
+        "",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "",
+        "#else",
+        "",
+        "\tA_vid_writes = *handler;",
+        "",
+        "#if\t0",
+        "\tA_vid_writes.b_write = handler->b_write;",
+        "\tA_vid_writes.w_write = handler->w_write;",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "",
+        "\tA_vid_writes.b_fill = handler->b_fill;",
+        "\tA_vid_writes.w_fill = handler->w_fill;",
+        "\tA_vid_writes.b_fwd_move = handler->b_fwd_move;",
+        "\tA_vid_writes.b_bwd_move = handler->b_bwd_move;",
+        "\tA_vid_writes.w_fwd_move = handler->w_fwd_move;",
+        "\tA_vid_writes.w_bwd_move = handler->w_bwd_move;",
+        "",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "#endif\t/* 0 */",
+        "",
+        "#endif /* C_VID */",
+        "#endif /* A3CPU */",
+        "#endif /* GISP_CPU */ "
+      ],
+      "current": [
+        "#error Non-CPU40 video glue is not supported"
+      ]
+    },
+    {
+      "original_start": 447,
+      "original_count": 6,
+      "current_start": 250,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 479,
+      "original_count": 3,
+      "current_start": 285,
+      "current_count": 1,
+      "original": [
+        "",
+        "\tGlue_set_vid_wrt_ptrs(handler);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 485,
+      "original_count": 1,
+      "current_start": 291,
+      "current_count": 1,
+      "original": [
+        "\tdump_writes = handler;"
+      ],
+      "current": [
+        "#error Unsupported excluded EGA diagnostics configuration"
+      ]
+    },
+    {
+      "original_start": 488,
+      "original_count": 1,
+      "current_start": 296,
+      "current_count": 1,
+      "original": [
+        "\tgmi_define_mem(VIDEO,(*handler));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 492,
+      "original_count": 6,
+      "current_start": 302,
+      "current_count": 6,
+      "original": [
+        "#ifdef C_VID",
+        "\tCpu_set_vid_wrt_ptrs( &Glue_writes );\t",
+        "\tGlue_set_vid_wrt_ptrs( handler );",
+        "#else",
+        "\tCpu_set_vid_wrt_ptrs( handler );\t",
+        "#endif /* C_VID */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 542,
+      "original_count": 1,
+      "current_start": 359,
+      "current_count": 1,
+      "original": [
+        "\tLOCAL WRT_POINTERS *last_handler;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 730,
+      "original_count": 1,
+      "current_start": 552,
+      "current_count": 1,
+      "original": [
+        "\tmode_and_chain = (EGA_CPU.chain * 3) + EGA_CPU.write_mode;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 820,
+      "original_count": 23,
+      "current_start": 647,
+      "current_count": 1,
+      "original": [
+        "",
+        "#if defined(EGA_DUMP) || defined(EGA_STAT)",
+        "\t\tdump_writes = handler;",
+        "#else",
+        "\t\t/* Tell the glue code about the new write routines */",
+        "",
+        "#ifdef EGATEST",
+        "\t\tgmi_redefine_mem(VIDEO,(*handler));",
+        "#else",
+        "#ifndef GISP_CPU",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "\t\tGlue_set_vid_wrt_ptrs( handler );",
+        "#else",
+        "\t\tCpu_set_vid_wrt_ptrs( handler );\t",
+        "#endif /* C_VID */",
+        "#else",
+        "\t\tGlue_set_vid_wrt_ptrs( handler );",
+        "#endif /* A3CPU */",
+        "#endif /* GISP_CPU */",
+        "#endif /* EGATEST */",
+        "#endif",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 846,
+      "original_count": 1,
+      "current_start": 653,
+      "current_count": 1,
+      "original": [
+        "\t\tlast_handler = handler;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Four prototype adaptations; retained write-handler table order and runtime bodies unchanged. Original non-CPU40 body91-300 is one excluded outer range despite fragmented text opcodes.",
+  "counter_review": "ev_glue fill_word_ev_glue definition takes IU16, not original erroneous IU8 declaration. setWritePointers is void(void). All eight byte/word providers in egawrtm0.c/egwrtm12.c take ULONG value and ULONG offset. These changes align callers/table signatures; original stub() and CPU40 zero-initialized table are inherited, not new fake implementations.",
+  "limits": "Excluded original91-300 is grouped by outer conditional, not independent deleted providers. No fresh runtime or diagnostic-line certification."
+}

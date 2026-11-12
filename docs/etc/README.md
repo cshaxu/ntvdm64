@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T483 mirror register migration](operations/m0-t483-mirror-register.md) defines the owner-requested review order and successor exception register.
+
 [T481 S19 test-root cleanup](evidence/m0-t481-s19-test-root-cleanup.md) records complete migration, reference repair, root hygiene and delivery checks.
 
 [T481 S18 DOS program identity design](evidence/m0-t481-s18-dos-program-identity-design.md) records the side-session reproduction, pure-host constraints, source ownership and unresolved identity proofs for owner review.
@@ -1376,3 +1378,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T482 DOS restart plan](operations/m0-t482-win95-dos-restart-plan.md): exact shutdown request, original-owner attribution and minimal repair acceptance.
 
 - [T482 DOS restart investigation](evidence/m0-t482-dos-restart-investigation.md): original contract, private-desktop witnesses and owner-approved transfer of unresolved work.
+
+- [T483 S1 closure](evidence/m0-t483-s1-closure.md): bounded mirror audit and verified publication.

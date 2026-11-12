@@ -1,0 +1,56 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+  "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+  "current_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 1507,
+      "original_count": 1,
+      "current_start": 1509,
+      "original": [
+        "    RECT rclistboxInvalid;"
+      ],
+      "current": "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.",
+      "outer": "#if 0"
+    },
+    {
+      "original_start": 1749,
+      "original_count": 14,
+      "current_start": 1754,
+      "original": [
+        "//",
+        "// we don't have sys modal windows.",
+        "//",
+        "    if (pwndSysModal) {",
+        "",
+        "        /*",
+        "         * If this combo is in a system modal dialog box, we need to explicitly",
+        "         * call update window otherwise we won't automatically send paint",
+        "         * messages to the toplevel listbox window.  This is especially",
+        "         * noticeable in the File Open/Save sys modal dlgs which are put up at",
+        "         * ExitWindows time.",
+        "         */",
+        "        UpdateWindow(hwndList);",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.",
+      "outer": "#ifdef LATER"
+    }
+  ],
+  "line_mismatches": [
+    {
+      "current_line": 1755,
+      "logical_line": 1750,
+      "original_line": 1763,
+      "text": "#endif"
+    }
+  ],
+  "initial_review": "Entire normalized source differs only by bodies of original literal#if0 and LATER. Original combo algorithm and declarations unchanged.",
+  "counter_review": "Exclusion-only classification does not prove every retained branch hit. LATER refers to original system-modal-window handling absent in selected host model; do not restore it as a modern native-modal workaround. Source-derived closing directive mismatch is distinct from algorithm correctness.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: original combo selected in control-client group",
+    "src/wow32-dll/include/control-client/precomp.h: bounded modern control bindings"
+  ],
+  "limits": "Source comparison, not a new preprocessing/build/runtime result. No claim of all retained-branch hits or full combo lifecycle acceptance."
+}

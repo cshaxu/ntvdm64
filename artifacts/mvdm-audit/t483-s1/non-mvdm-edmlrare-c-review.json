@@ -1,0 +1,32 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+  "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
+  "current_sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
+  "excluded": [
+    {
+      "original_start": 400,
+      "original_count": 4,
+      "current_start": 402,
+      "original": [
+        "    /*",
+        "     * Extra parameter specified interim character mode",
+        "     */",
+        "    MLEnsureCaretVisible(ped,NULL);"
+      ],
+      "current": "#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.",
+      "opening": "#ifdef KOREA",
+      "closing": "#else"
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 403,
+      "original": 404,
+      "logical": 401
+    }
+  ],
+  "initial_review": "Complete normalized comparison: 1 original conditional bodies replaced by #error; all retained code and conditional boundaries original-exact.",
+  "counter_review": "KOREA alternate caret/insertion calls and SUPPORT_LPK callbacks are excluded profile bodies, not removed generic functionality. NEVER undo block remains under original exclusion. No functional diff or whole-file deletion justified. Exclusion classification does not establish all-context reachability or correct diagnostic directives.",
+  "evidence": "Pinned OpenNT matching file; tools/build/New-T404S5Wow32ProviderNinja.ps1 EDIT provider cohort",
+  "limits": "Source comparison only; no new compiler or runtime evidence."
+}

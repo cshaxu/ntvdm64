@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/obj/i386/ios.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\support\\obj\\i386\\ios.obj",
+      "sha256": "8d08c071cad18b61a8ff7e6da51841bc2e8e2c02ce365c239f7c4c67c5248cc1",
+      "size": 32143,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/obj/i386/main.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\support\\obj\\i386\\main.obj",
+      "sha256": "3fd0a4f044a8cb0715afa4c9b6fa2d6de6e171a0fb63a744f95ea7dd9b4800fe",
+      "size": 13752,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/obj/i386/support.lib",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\support\\obj\\i386\\support.lib",
+      "sha256": "7ac5624984ab69c33d6565395265fa5806cfec0e35c85c9ac714d65dc8c6883d",
+      "size": 99338,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/obj/i386/terminat.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\support\\obj\\i386\\terminat.obj",
+      "sha256": "cbf8f2967a6f48ab4d7ba971fe479b491950cdeee3b59678d27af46344e4ad17",
+      "size": 11871,
+      "identical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/obj/i386/xt.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\support\\obj\\i386\\xt.obj",
+      "sha256": "d63d03843e2662df8065383c6e6176fc33175e4eb2eac4de063eaf85dcc03405",
+      "size": 11078,
+      "identical": true
+    }
+  ],
+  "limits": "No current link/runtime admission inferred."
+}

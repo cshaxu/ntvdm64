@@ -28,4 +28,3 @@
 #define CD_WX86APP      0x08000000
 
 #endif      // ifndef _WOWCMNDG_H_
-

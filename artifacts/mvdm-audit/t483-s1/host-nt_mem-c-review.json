@@ -1,0 +1,490 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+  "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+  "current_sha256": "8f4ccdd0447f4c9d10d9a7752ca67c3a6a977a791b296289034ff4a30e910a77",
+  "review_complete": true,
+  "register_entries": 7,
+  "changes": [
+    {
+      "original_start": 24,
+      "original_count": 0,
+      "current_start": 24,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */",
+        "#include <stdio.h>",
+        ""
+      ]
+    },
+    {
+      "original_start": 42,
+      "original_count": 0,
+      "current_start": 46,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#include \"mvdm_softpc_physical_mapping.h\"",
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 0,
+      "current_start": 261,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-035): prepare the unavailable CCPU page",
+        "     * binding storage before success; original add/remove need no protocol. */",
+        "    if (!mvdm_softpc_physical_mapping_initialize(intelMem, MaxIntelMemorySize)) {",
+        "        FreeIntelMemory();",
+        "        return((IU8 *) NULL);",
+        "    }",
+        ""
+      ]
+    },
+    {
+      "original_start": 286,
+      "original_count": 0,
+      "current_start": 305,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-035): retire bindings before their backing. */",
+        "    mvdm_softpc_physical_mapping_release();"
+      ]
+    },
+    {
+      "original_start": 935,
+      "original_count": 0,
+      "current_start": 965,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    NTSTATUS status;"
+      ]
+    },
+    {
+      "original_start": 957,
+      "original_count": 1,
+      "current_start": 989,
+      "current_count": 3,
+      "original": [
+        "    if (VdmAllocateVirtualMemory(IntelAddress,Size,FALSE) != STATUS_SUCCESS)"
+      ],
+      "current": [
+        "    status = VdmAllocateVirtualMemory(IntelAddress,Size,FALSE);",
+        "    if (status != STATUS_SUCCESS) {",
+        "        mvdm_softpc_report_virtual_memory_failure((unsigned long)status);"
+      ]
+    },
+    {
+      "original_start": 959,
+      "original_count": 0,
+      "current_start": 994,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    }"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 25,
+      "original_count": 2,
+      "current_start": 29,
+      "current_count": 1,
+      "original": [
+        "#define DEBUG_MEM YES_PLEASE",
+        "//#define DEBUG_MEM_DUMP 1"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 47,
+      "original_count": 4,
+      "current_start": 55,
+      "current_count": 1,
+      "original": [
+        "#define LOCAL",
+        "",
+        "GLOBAL VOID DumpAllocationHeaders IFN1();",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 173,
+      "original_count": 2,
+      "current_start": 180,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:InitIntelMemory(%lx [%dK])\\n\",",
+        "\t   MaxIntelMemorySize, MaxIntelMemorySize/ONE_K);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 205,
+      "original_count": 1,
+      "current_start": 213,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:Commitment granularity is %lx\\n\", commitGran);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 284,
+      "original_count": 1,
+      "current_start": 302,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:FreeIntelMemory\\n\");"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 324,
+      "original_count": 1,
+      "current_start": 347,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:SetWOWforceIncrAlloc, WOWforceIncrAlloc: %X\\n\", WOWforceIncrAlloc);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 364,
+      "original_count": 2,
+      "current_start": 389,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmAllocateVirtualMemory(%lx [%dK],%s)\\n\",",
+        "\t   Size, Size/ONE_K, Commit ? \"COMMIT\" : \"DONOT_COMMIT\");"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 383,
+      "original_count": 1,
+      "current_start": 409,
+      "current_count": 1,
+      "original": [
+        "    printf(\"\\nNTVDM:VdmAllocateVirtualMemory, using increasing linear address strategy.\\n\");"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 446,
+      "original_count": 7,
+      "current_start": 474,
+      "current_count": 1,
+      "original": [
+        "    printf(\" => alloc %lxh, commit %lxh\\n\",",
+        "        ((ULONG) (IHPE)headerPtr->address) - (ULONG)intelMem,",
+        "        ((ULONG) (IHPE)commitAddr) - (ULONG)intelMem);",
+        "",
+        "#ifdef DEBUG_MEM_DUMP",
+        "    DumpAllocationHeaders(\"after allocate\");",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 477,
+      "original_count": 1,
+      "current_start": 501,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmCommitVirtualMemory(%lxh,%lxh)\\n\",INTELAddress, Size);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 513,
+      "original_count": 1,
+      "current_start": 539,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmDeCommitVirtualMemory(%lxh,%lxh)\\n\",INTELAddress, Size);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 557,
+      "original_count": 1,
+      "current_start": 585,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmFreeVirtualMemory(%lxh)\\n\",INTELAddress);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 645,
+      "original_count": 3,
+      "current_start": 675,
+      "current_count": 1,
+      "original": [
+        "#ifdef DEBUG_MEM_DUMP",
+        "    DumpAllocationHeaders(\"after free\");",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 701,
+      "original_count": 2,
+      "current_start": 731,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmQueryFreeVirtualMemory() Total %lx [%dK], Largest %lx[%dK]\\n\",",
+        "\t    *FreeBytes, *FreeBytes/ONE_K, *LargestFreeBlock, *LargestFreeBlock/ONE_K);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 741,
+      "original_count": 2,
+      "current_start": 772,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmReallocateVirtualMemory(%lx [%dK] at %lx)\\n\",",
+        "\t   NewSize, NewSize/ONE_K, INTELOriginalAddress);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 888,
+      "original_count": 4,
+      "current_start": 920,
+      "current_count": 1,
+      "original": [
+        "    printf(\"to %lx\\n\", *INTELNewAddress);",
+        "#ifdef DEBUG_MEM_DUMP",
+        "    DumpAllocationHeaders(\"after realloc\");",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 937,
+      "original_count": 2,
+      "current_start": 969,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmAddVirtualMemory (%lx [%dK]) at %lx)\\n\",",
+        "\t   Size, Size/ONE_K, HostAddress);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 974,
+      "original_count": 4,
+      "current_start": 1012,
+      "current_count": 1,
+      "original": [
+        "#ifdef DEBUG_MEM_DUMP",
+        "    DumpAllocationHeaders(\"after Add\");",
+        "#endif",
+        "    printf(\"NTVDM:VdmAddVirtualMemory => *IntelAddress=%lx\\n\", *IntelAddress);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 999,
+      "original_count": 4,
+      "current_start": 1036,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:VdmRemoveVirtualMemory at %lx)\\n\", IntelAddress);",
+        "#ifdef DEBUG_MEM_DUMP",
+        "    DumpAllocationHeaders(\"before remove\");",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1025,
+      "original_count": 3,
+      "current_start": 1061,
+      "current_count": 1,
+      "original": [
+        "    if (Size==0) {",
+        "        printf(\"NTVDM:VdmRemoveVirtualMemory WARNING, Size==0\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1035,
+      "original_count": 3,
+      "current_start": 1071,
+      "current_count": 1,
+      "original": [
+        "#ifdef DEBUG_MEM_DUMP",
+        "        DumpAllocationHeaders(\"after remove (now calling free)\");",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1080,
+      "original_count": 4,
+      "current_start": 1116,
+      "current_count": 1,
+      "original": [
+        "    if (prevHeader)",
+        "        assert0(newHeader > prevHeader, \"prevHeader invalid\");",
+        "    if (nextHeader)",
+        "        assert0(newHeader < nextHeader, \"nextHeader invalid\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1300,
+      "original_count": 3,
+      "current_start": 1335,
+      "current_count": 1,
+      "original": [
+        "    printf(\"NTVDM:Exclusive range to %s %lx+%lx is %lx+%lx\\n\",",
+        "    Commit ? \"COMMIT\" : \"DECOMMIT\", chunkHeader->address,chunkHeader->size,",
+        "    *allocAddr, *allocSize);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1351,
+      "original_count": 6,
+      "current_start": 1386,
+      "current_count": 1,
+      "original": [
+        "",
+        "    /* Check for sensible parameters. */",
+        "    if (prevAllocLastAddr)",
+        "        assert0(address > prevAllocLastAddr, \"address out of range\");",
+        "    if (nextAllocFirstAddr)",
+        "        assert0(address < nextAllocFirstAddr, \"address out of range\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1371,
+      "original_count": 1,
+      "current_start": 1403,
+      "current_count": 1,
+      "original": [
+        "    lastPage = currentAllocLastPage+1;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1413,
+      "original_count": 40,
+      "current_start": 1448,
+      "current_count": 1,
+      "original": [
+        "",
+        "",
+        "/*",
+        "=========================== Dump Header Linked List ===========================",
+        "PURPOSE:",
+        "\tDump the headers linked list controlling allocated blocks",
+        "",
+        "",
+        "INPUT:\t    None",
+        "OUTPUT:     Via printf",
+        "",
+        "================================================================================",
+        "*/",
+        "",
+        "GLOBAL VOID DumpAllocationHeaders IFN1(char*, where)",
+        "{",
+        "",
+        "    SECTION_HEADER  *headerPtr; /* Pointer for searching through linked list. */",
+        "",
+        "    /* Dump headers */",
+        "    printf(\"NTVDM: Dump Allocation Headers %s\\n\", where);",
+        "    printf(\"ptr        address   status size     (k)     commit\\n\");",
+        "",
+        "    for(headerPtr = &headerTable[0] ;",
+        "\theaderPtr != NULL ;",
+        "\theaderPtr = headerPtr->next)",
+        "    {",
+        "\tprintf(\"%08lxh: %08lxh [%s] %08lxh (%05dK)%s%s\\n\",",
+        "               headerPtr,",
+        "\t       headerPtr->address - intelMem,",
+        "\t       SECTION_IS_FREE(headerPtr) ? \"FREE\" : \"USED\",",
+        "\t       headerPtr->size, headerPtr->size / ONE_K,",
+        "\t       headerPtr->flags & HDR_COMMITTED_FLAG ? \" COMMITTED\" : \"\",",
+        "\t       headerPtr->flags & HDR_REMAP_FLAG ? \" REMAPPED\" : \"\");",
+        "    }",
+        "",
+        "    printf(\"\\n\");",
+        "}",
+        "",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "All seven non-exclusion diff hunks inspected; allocation algorithm unchanged except preallocated physical-binding lifecycle and optional failure tracing. stdio still declares reachable printf in addHeaderEntry.",
+  "counter_review": "Initialize allocates slots before original void VdmSetPhysRecStructs can run; failure releases both reserved native regions before success. Release precedes backing free. Shared mapping implementation/teardown proof is a separate provider concern, not grounds to remove necessary mirror seam. Trace does not change original STATUS_NO_MEMORY result.",
+  "limits": "Retain3, simplify1, delete3. No functional changes; excluded bodies boundary-checked, not universal configuration/line-number certification."
+}

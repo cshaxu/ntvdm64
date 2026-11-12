@@ -1,0 +1,807 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+  "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+  "current_sha256": "96f8b75b64c64dd68595d8e87c853770abbec97ac224bb7c9e1f6b4a5100d5a4",
+  "review_complete": true,
+  "register_entries": 21,
+  "changes": [
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "61",
+      "current_count": "2",
+      "original_start": "64",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "provider-includes",
+      "initial_review": "Added EMM and host headers supply historical host boundary declarations.",
+      "counter_review": "Direct host_sas prototypes are separate; no EMM-named call found. Macro-expanded dependencies must be checked before declaring either header redundant.",
+      "disposition": "pending",
+      "evidence": "ccpusas4.c includes and host calls; base/inc/emm.h; base/inc/host.h",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "pending",
+      "change_plan": "Trace selected preprocessed declarations for these two includes; remove only a proved redundant include, retain an actual owner declaration.",
+      "related_callers": "c_sas_init/term; scratch host_free; biosDoInst host_simulate",
+      "verification_required": "Compare preprocessed dependencies and cached selected build after removal.",
+      "missing_evidence": "Exact selected macro-expanded declaration dependency for both includes.",
+      "implementation_status": "pending-evidence",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "63",
+      "current_count": "1",
+      "original_start": "64",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "physical-mapping-declaration",
+      "initial_review": "Header declares external physical and EMS alias lookup.",
+      "counter_review": "Required by the added c_GetPhyAdd seam, whose full equivalence is pending.",
+      "disposition": "pending",
+      "evidence": "mvdm_softpc_physical_mapping.h/.c",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "pending",
+      "change_plan": "Keep declaration paired with the mapping decision below; do not remove independently.",
+      "related_callers": "c_GetPhyAdd",
+      "verification_required": "Mapping lifecycle and selected x86 build.",
+      "missing_evidence": "Same pending mapping proof as c_GetPhyAdd.",
+      "implementation_status": "pending-evidence",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "64",
+      "current_count": "1",
+      "original_start": "64",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "diagnostic-header",
+      "initial_review": "Header supports added write-store trace hooks.",
+      "counter_review": "All uses in this file are the five trace calls; required host and mapping declarations are separate.",
+      "disposition": "delete",
+      "evidence": "ccpusas4.c five trace sites; mvdm_softpc_termination.c:1219",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "delete",
+      "change_plan": "Remove header together with all five trace sites, without changing stores.",
+      "related_callers": "phy_w8/phy_w16/phy_w32 write paths",
+      "verification_required": "Compare executable store behavior and run affected memory fixtures.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "66",
+      "current_count": "2",
+      "original_start": "64",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "typed-host-sas-declarations",
+      "initial_review": "Declare original pointer-returning host allocation and teardown functions.",
+      "counter_review": "Provider sim32.c returns UTINY*; implicit integer declaration is not an equivalent ABI.",
+      "disposition": "retain",
+      "evidence": "host/src/sim32.c:60-61,358,386",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Keep typed declarations; consolidation only through an established shared owner header if justified later.",
+      "related_callers": "c_sas_init; c_sas_term; host/src/sim32.c:358,386",
+      "verification_required": "Compile selected provider/caller signatures; allocation and normal teardown regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "781",
+      "current_count": "3",
+      "original_start": "793",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "diagnostic-store-hook",
+      "initial_review": "Added conditional reporting in normal SAS stores.",
+      "counter_review": "Reporter only formats diagnostic store details; it is not the original memory-write operation.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_termination.c:1219; ccpusas4.c store bodies",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "delete",
+      "change_plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "related_callers": "Original SAS byte/word/dword stores; termination diagnostic reporter",
+      "verification_required": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "833",
+      "current_count": "4",
+      "original_start": "841",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "diagnostic-store-hook",
+      "initial_review": "Added conditional reporting in normal SAS stores.",
+      "counter_review": "Reporter only formats diagnostic store details; it is not the original memory-write operation.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_termination.c:1219; ccpusas4.c store bodies",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "delete",
+      "change_plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "related_callers": "Original SAS byte/word/dword stores; termination diagnostic reporter",
+      "verification_required": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "847",
+      "current_count": "3",
+      "original_start": "851",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "diagnostic-store-hook",
+      "initial_review": "Added conditional reporting in normal SAS stores.",
+      "counter_review": "Reporter only formats diagnostic store details; it is not the original memory-write operation.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_termination.c:1219; ccpusas4.c store bodies",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "delete",
+      "change_plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "related_callers": "Original SAS byte/word/dword stores; termination diagnostic reporter",
+      "verification_required": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "915",
+      "current_count": "4",
+      "original_start": "915",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "diagnostic-store-hook",
+      "initial_review": "Added conditional reporting in normal SAS stores.",
+      "counter_review": "Reporter only formats diagnostic store details; it is not the original memory-write operation.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_termination.c:1219; ccpusas4.c store bodies",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "delete",
+      "change_plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "related_callers": "Original SAS byte/word/dword stores; termination diagnostic reporter",
+      "verification_required": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "933",
+      "current_count": "3",
+      "original_start": "929",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "diagnostic-store-hook",
+      "initial_review": "Added conditional reporting in normal SAS stores.",
+      "counter_review": "Reporter only formats diagnostic store details; it is not the original memory-write operation.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_termination.c:1219; ccpusas4.c store bodies",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "delete",
+      "change_plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "related_callers": "Original SAS byte/word/dword stores; termination diagnostic reporter",
+      "verification_required": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1319",
+      "current_count": "1",
+      "original_start": "1312",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "physical-mapping-seam",
+      "initial_review": "Translate EMS aliases then resolve externally bound physical pages before ordinary RAM calculation.",
+      "counter_review": "Adapter has session-owned aliases/page slots and normal-backing removal. Tests exercise map/remap/unmap and resolve, but do not prove original NT4 mapping lifetime or all CCPU pointer consumers.",
+      "disposition": "pending",
+      "evidence": "mvdm_softpc_physical_mapping.c:199-292; test/adapter-mvdm-host-out/physical_mapping_observation_test.c; test/mvdm-host/original_external_memory_test.c",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "pending",
+      "change_plan": "Audit original VdmMapDosMemory/VdmSetPhysRecStructs contract against selected producers; retain single lookup path unless an equivalent original provider is composable. Avoid speculative removal.",
+      "related_callers": "c_GetPhyAdd; original nt_mem physical binding; EMS mapping; session teardown",
+      "verification_required": "Adapter map/remap/unmap/teardown; actual external-memory fixture; CCPU cross-page and alias consumers; stale pointer lifetime.",
+      "missing_evidence": "Complete original mapping dependency comparison and pointer lifetime across remap/reentry.",
+      "implementation_status": "pending-evidence",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1321",
+      "current_count": "11",
+      "original_start": "1313",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-036,MVDM-HOST-DIV-097",
+      "classification": "physical-mapping-seam",
+      "initial_review": "Translate EMS aliases then resolve externally bound physical pages before ordinary RAM calculation.",
+      "counter_review": "Adapter has session-owned aliases/page slots and normal-backing removal. Tests exercise map/remap/unmap and resolve, but do not prove original NT4 mapping lifetime or all CCPU pointer consumers.",
+      "disposition": "pending",
+      "evidence": "mvdm_softpc_physical_mapping.c:199-292; test/adapter-mvdm-host-out/physical_mapping_observation_test.c; test/mvdm-host/original_external_memory_test.c",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "pending",
+      "change_plan": "Audit original VdmMapDosMemory/VdmSetPhysRecStructs contract against selected producers; retain single lookup path unless an equivalent original provider is composable. Avoid speculative removal.",
+      "related_callers": "c_GetPhyAdd; original nt_mem physical binding; EMS mapping; session teardown",
+      "verification_required": "Adapter map/remap/unmap/teardown; actual external-memory fixture; CCPU cross-page and alias consumers; stale pointer lifetime.",
+      "missing_evidence": "Complete original mapping dependency comparison and pointer lifetime across remap/reentry.",
+      "implementation_status": "pending-evidence",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1602",
+      "current_count": "1",
+      "original_start": "1580",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-891",
+      "classification": "bios-page-user-access",
+      "initial_review": "Set user access only for CPL3 instead of inverted original condition.",
+      "counter_review": "PG_U selects user permissions in xtrn2phy; other CPLs remain supervisor. Read/write flags and VM A/D request remain unchanged.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:668-763; docs/etc/evidence/m0-t481-s3-closure.md (historical 90-check contrast)",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain all six matching corrections; do not restore inverted access or add per-guest special cases.",
+      "related_callers": "bios_read_byte/word/double; bios_write_byte/word/double; xtrn2phy",
+      "verification_required": "90-check protected-page positive/negative fixture plus software V86 and ordinary reads/writes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1667",
+      "current_count": "1",
+      "original_start": "1645",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-891",
+      "classification": "bios-page-user-access",
+      "initial_review": "Set user access only for CPL3 instead of inverted original condition.",
+      "counter_review": "PG_U selects user permissions in xtrn2phy; other CPLs remain supervisor. Read/write flags and VM A/D request remain unchanged.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:668-763; docs/etc/evidence/m0-t481-s3-closure.md (historical 90-check contrast)",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain all six matching corrections; do not restore inverted access or add per-guest special cases.",
+      "related_callers": "bios_read_byte/word/double; bios_write_byte/word/double; xtrn2phy",
+      "verification_required": "90-check protected-page positive/negative fixture plus software V86 and ordinary reads/writes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1695",
+      "current_count": "1",
+      "original_start": "1673",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-894",
+      "classification": "bios-fallback-width",
+      "initial_review": "Preserve requested 16/32-bit result instead of truncating to IU8.",
+      "counter_review": "Both protected-selector and ROM virtualisation fallbacks return full-width biosDoInst result; direct mapped reads already return that width.",
+      "disposition": "retain",
+      "evidence": "test/mvdm-host/ccpu_bios_width_test.c; docs/etc/evidence/m0-t481-s9-softpc.md",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain matching IU16/IU32 casts in both branches.",
+      "related_callers": "bios_read_word/double; c_sas_w_at/c_sas_dw_at; biosDoInst",
+      "verification_required": "Existing extracted-body width fixture covers protected/V86 fallback and mapped controls; actual guest fallback remains separate coverage.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1701",
+      "current_count": "1",
+      "original_start": "1679",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "bios-fallback-width",
+      "initial_review": "Preserve requested 16/32-bit result instead of truncating to IU8.",
+      "counter_review": "Both protected-selector and ROM virtualisation fallbacks return full-width biosDoInst result; direct mapped reads already return that width.",
+      "disposition": "retain",
+      "evidence": "test/mvdm-host/ccpu_bios_width_test.c; docs/etc/evidence/m0-t481-s9-softpc.md",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain matching IU16/IU32 casts in both branches.",
+      "related_callers": "bios_read_word/double; c_sas_w_at/c_sas_dw_at; biosDoInst",
+      "verification_required": "Existing extracted-body width fixture covers protected/V86 fallback and mapped controls; actual guest fallback remains separate coverage.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1731",
+      "current_count": "1",
+      "original_start": "1709",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-891",
+      "classification": "bios-page-user-access",
+      "initial_review": "Set user access only for CPL3 instead of inverted original condition.",
+      "counter_review": "PG_U selects user permissions in xtrn2phy; other CPLs remain supervisor. Read/write flags and VM A/D request remain unchanged.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:668-763; docs/etc/evidence/m0-t481-s3-closure.md (historical 90-check contrast)",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain all six matching corrections; do not restore inverted access or add per-guest special cases.",
+      "related_callers": "bios_read_byte/word/double; bios_write_byte/word/double; xtrn2phy",
+      "verification_required": "90-check protected-page positive/negative fixture plus software V86 and ordinary reads/writes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1759",
+      "current_count": "1",
+      "original_start": "1737",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "bios-fallback-width",
+      "initial_review": "Preserve requested 16/32-bit result instead of truncating to IU8.",
+      "counter_review": "Both protected-selector and ROM virtualisation fallbacks return full-width biosDoInst result; direct mapped reads already return that width.",
+      "disposition": "retain",
+      "evidence": "test/mvdm-host/ccpu_bios_width_test.c; docs/etc/evidence/m0-t481-s9-softpc.md",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain matching IU16/IU32 casts in both branches.",
+      "related_callers": "bios_read_word/double; c_sas_w_at/c_sas_dw_at; biosDoInst",
+      "verification_required": "Existing extracted-body width fixture covers protected/V86 fallback and mapped controls; actual guest fallback remains separate coverage.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1765",
+      "current_count": "1",
+      "original_start": "1743",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "bios-fallback-width",
+      "initial_review": "Preserve requested 16/32-bit result instead of truncating to IU8.",
+      "counter_review": "Both protected-selector and ROM virtualisation fallbacks return full-width biosDoInst result; direct mapped reads already return that width.",
+      "disposition": "retain",
+      "evidence": "test/mvdm-host/ccpu_bios_width_test.c; docs/etc/evidence/m0-t481-s9-softpc.md",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain matching IU16/IU32 casts in both branches.",
+      "related_callers": "bios_read_word/double; c_sas_w_at/c_sas_dw_at; biosDoInst",
+      "verification_required": "Existing extracted-body width fixture covers protected/V86 fallback and mapped controls; actual guest fallback remains separate coverage.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1796",
+      "current_count": "1",
+      "original_start": "1774",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-891",
+      "classification": "bios-page-user-access",
+      "initial_review": "Set user access only for CPL3 instead of inverted original condition.",
+      "counter_review": "PG_U selects user permissions in xtrn2phy; other CPLs remain supervisor. Read/write flags and VM A/D request remain unchanged.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:668-763; docs/etc/evidence/m0-t481-s3-closure.md (historical 90-check contrast)",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain all six matching corrections; do not restore inverted access or add per-guest special cases.",
+      "related_callers": "bios_read_byte/word/double; bios_write_byte/word/double; xtrn2phy",
+      "verification_required": "90-check protected-page positive/negative fixture plus software V86 and ordinary reads/writes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1860",
+      "current_count": "1",
+      "original_start": "1838",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-891",
+      "classification": "bios-page-user-access",
+      "initial_review": "Set user access only for CPL3 instead of inverted original condition.",
+      "counter_review": "PG_U selects user permissions in xtrn2phy; other CPLs remain supervisor. Read/write flags and VM A/D request remain unchanged.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:668-763; docs/etc/evidence/m0-t481-s3-closure.md (historical 90-check contrast)",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain all six matching corrections; do not restore inverted access or add per-guest special cases.",
+      "related_callers": "bios_read_byte/word/double; bios_write_byte/word/double; xtrn2phy",
+      "verification_required": "90-check protected-page positive/negative fixture plus software V86 and ordinary reads/writes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "292",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_start": "1924",
+      "current_count": "1",
+      "original_start": "1902",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-891",
+      "classification": "bios-page-user-access",
+      "initial_review": "Set user access only for CPL3 instead of inverted original condition.",
+      "counter_review": "PG_U selects user permissions in xtrn2phy; other CPLs remain supervisor. Read/write flags and VM A/D request remain unchanged.",
+      "disposition": "retain",
+      "evidence": "c_tlb.c:668-763; docs/etc/evidence/m0-t481-s3-closure.md (historical 90-check contrast)",
+      "limits": "Source/fixture inspection only; no new build or runtime pass; not a full conditional-hit or logical-line certification.",
+      "decision": "retain",
+      "change_plan": "Retain all six matching corrections; do not restore inverted access or add per-guest special cases.",
+      "related_callers": "bios_read_byte/word/double; bios_write_byte/word/double; xtrn2phy",
+      "verification_required": "90-check protected-page positive/negative fixture plus software V86 and ordinary reads/writes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 26,
+      "original_count": 6,
+      "current_start": 26,
+      "current_count": 2
+    },
+    {
+      "original_start": 137,
+      "original_count": 1,
+      "current_start": 142,
+      "current_count": 2
+    },
+    {
+      "original_start": 249,
+      "original_count": 7,
+      "current_start": 257,
+      "current_count": 2
+    },
+    {
+      "original_start": 259,
+      "original_count": 24,
+      "current_start": 263,
+      "current_count": 2
+    },
+    {
+      "original_start": 385,
+      "original_count": 1,
+      "current_start": 368,
+      "current_count": 2
+    },
+    {
+      "original_start": 400,
+      "original_count": 1,
+      "current_start": 386,
+      "current_count": 2
+    },
+    {
+      "original_start": 1280,
+      "original_count": 4,
+      "current_start": 1288,
+      "current_count": 2
+    },
+    {
+      "original_start": 1314,
+      "original_count": 2,
+      "current_start": 1333,
+      "current_count": 2
+    },
+    {
+      "original_start": 1432,
+      "original_count": 2,
+      "current_start": 1453,
+      "current_count": 2
+    },
+    {
+      "original_start": 1944,
+      "original_count": 1,
+      "current_start": 1966,
+      "current_count": 2
+    }
+  ],
+  "all_text_opcodes": [
+    {
+      "original_start": 26,
+      "original_count": 6,
+      "current_start": 26,
+      "current_count": 2
+    },
+    {
+      "original_start": 33,
+      "original_count": 0,
+      "current_start": 29,
+      "current_count": 1
+    },
+    {
+      "original_start": 64,
+      "original_count": 0,
+      "current_start": 61,
+      "current_count": 7
+    },
+    {
+      "original_start": 66,
+      "original_count": 0,
+      "current_start": 70,
+      "current_count": 1
+    },
+    {
+      "original_start": 137,
+      "original_count": 1,
+      "current_start": 142,
+      "current_count": 2
+    },
+    {
+      "original_start": 139,
+      "original_count": 0,
+      "current_start": 145,
+      "current_count": 1
+    },
+    {
+      "original_start": 246,
+      "original_count": 0,
+      "current_start": 253,
+      "current_count": 1
+    },
+    {
+      "original_start": 249,
+      "original_count": 7,
+      "current_start": 257,
+      "current_count": 2
+    },
+    {
+      "original_start": 257,
+      "original_count": 0,
+      "current_start": 260,
+      "current_count": 1
+    },
+    {
+      "original_start": 259,
+      "original_count": 24,
+      "current_start": 263,
+      "current_count": 2
+    },
+    {
+      "original_start": 284,
+      "original_count": 0,
+      "current_start": 266,
+      "current_count": 1
+    },
+    {
+      "original_start": 385,
+      "original_count": 1,
+      "current_start": 368,
+      "current_count": 2
+    },
+    {
+      "original_start": 387,
+      "original_count": 0,
+      "current_start": 371,
+      "current_count": 1
+    },
+    {
+      "original_start": 389,
+      "original_count": 0,
+      "current_start": 374,
+      "current_count": 1
+    },
+    {
+      "original_start": 400,
+      "original_count": 1,
+      "current_start": 386,
+      "current_count": 2
+    },
+    {
+      "original_start": 402,
+      "original_count": 0,
+      "current_start": 389,
+      "current_count": 1
+    },
+    {
+      "original_start": 793,
+      "original_count": 0,
+      "current_start": 781,
+      "current_count": 3
+    },
+    {
+      "original_start": 794,
+      "original_count": 0,
+      "current_start": 785,
+      "current_count": 1
+    },
+    {
+      "original_start": 841,
+      "original_count": 0,
+      "current_start": 833,
+      "current_count": 4
+    },
+    {
+      "original_start": 851,
+      "original_count": 0,
+      "current_start": 847,
+      "current_count": 3
+    },
+    {
+      "original_start": 852,
+      "original_count": 0,
+      "current_start": 851,
+      "current_count": 1
+    },
+    {
+      "original_start": 915,
+      "original_count": 0,
+      "current_start": 915,
+      "current_count": 4
+    },
+    {
+      "original_start": 929,
+      "original_count": 0,
+      "current_start": 933,
+      "current_count": 3
+    },
+    {
+      "original_start": 930,
+      "original_count": 0,
+      "current_start": 937,
+      "current_count": 1
+    },
+    {
+      "original_start": 1280,
+      "original_count": 4,
+      "current_start": 1288,
+      "current_count": 2
+    },
+    {
+      "original_start": 1285,
+      "original_count": 0,
+      "current_start": 1291,
+      "current_count": 1
+    },
+    {
+      "original_start": 1312,
+      "original_count": 0,
+      "current_start": 1319,
+      "current_count": 1
+    },
+    {
+      "original_start": 1313,
+      "original_count": 0,
+      "current_start": 1321,
+      "current_count": 11
+    },
+    {
+      "original_start": 1314,
+      "original_count": 2,
+      "current_start": 1333,
+      "current_count": 2
+    },
+    {
+      "original_start": 1317,
+      "original_count": 0,
+      "current_start": 1336,
+      "current_count": 1
+    },
+    {
+      "original_start": 1319,
+      "original_count": 0,
+      "current_start": 1339,
+      "current_count": 1
+    },
+    {
+      "original_start": 1432,
+      "original_count": 2,
+      "current_start": 1453,
+      "current_count": 2
+    },
+    {
+      "original_start": 1435,
+      "original_count": 0,
+      "current_start": 1456,
+      "current_count": 1
+    },
+    {
+      "original_start": 1580,
+      "original_count": 1,
+      "current_start": 1602,
+      "current_count": 1
+    },
+    {
+      "original_start": 1645,
+      "original_count": 1,
+      "current_start": 1667,
+      "current_count": 1
+    },
+    {
+      "original_start": 1673,
+      "original_count": 1,
+      "current_start": 1695,
+      "current_count": 1
+    },
+    {
+      "original_start": 1679,
+      "original_count": 1,
+      "current_start": 1701,
+      "current_count": 1
+    },
+    {
+      "original_start": 1709,
+      "original_count": 1,
+      "current_start": 1731,
+      "current_count": 1
+    },
+    {
+      "original_start": 1737,
+      "original_count": 1,
+      "current_start": 1759,
+      "current_count": 1
+    },
+    {
+      "original_start": 1743,
+      "original_count": 1,
+      "current_start": 1765,
+      "current_count": 1
+    },
+    {
+      "original_start": 1774,
+      "original_count": 1,
+      "current_start": 1796,
+      "current_count": 1
+    },
+    {
+      "original_start": 1838,
+      "original_count": 1,
+      "current_start": 1860,
+      "current_count": 1
+    },
+    {
+      "original_start": 1902,
+      "original_count": 1,
+      "current_start": 1924,
+      "current_count": 1
+    },
+    {
+      "original_start": 1944,
+      "original_count": 1,
+      "current_start": 1966,
+      "current_count": 2
+    },
+    {
+      "original_start": 1946,
+      "original_count": 0,
+      "current_start": 1969,
+      "current_count": 1
+    }
+  ],
+  "format_restoration": "Original Length_of_M_area declaration spacing/comment restored; no executable tokens changed.",
+  "limits": "Necessity classification complete including pending findings; no functional correction implemented, no new runtime verification, no blanket reachability/line certification."
+}

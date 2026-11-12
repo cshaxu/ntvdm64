@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/inc/wowfax.h",
+  "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+  "current_sha256": "d69b551c2389ebe9f07d07a6e9b9072ba106e904aa4425a99b0313e177c114bc",
+  "review_complete": true,
+  "register_entries": 0,
+  "initial_review": "Differences confined to excluded conditional bodies and line scaffolding; all content outside these bodies equals original.",
+  "counter_review": "Keep selected original structs, constants and packing. Do not infer functional damage from removed nonselected debug/guest-declaration fallback bodies.",
+  "excluded_conditions": [
+    "#if  defined(_WOWFAX16_)",
+    "#ifdef DEBUG",
+    "#ifndef _DEF_WOW32_"
+  ],
+  "evidence": "Whole-file normalized comparison after omitting only named excluded groups and #line; WOW32 precomp/wow32.h establishes selected declaration context.",
+  "limits": "Not a fresh compiler/preprocessor run or all-context reachability proof.",
+  "runtime_validation": "None; source unchanged."
+}

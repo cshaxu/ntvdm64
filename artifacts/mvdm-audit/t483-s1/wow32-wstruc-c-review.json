@@ -1,0 +1,221 @@
+{
+  "path": "src/mvdm-host/wow32/wstruc.c",
+  "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+  "current_sha256": "de82d10775e90274f9fd2fa0aec330f564c65b730abb892ab97a23b947091ffc",
+  "changes": [
+    {
+      "original_start": 761,
+      "original_count": 1,
+      "current_start": 708,
+      "current_count": 1,
+      "original": [
+        "    } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES ||"
+      ],
+      "current": [
+        "    } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES || message == WM_COPYDATA || /* DIVERGENCE(MVDM-HOST-DIV-344). */"
+      ],
+      "decision": "pending",
+      "necessity": "WM_COPYDATA contains guest pointer-bearing data and cannot pass through the default scalar MSG conversion; routes through existing ThunkMsg16.",
+      "change_plan": "Validate getmsg16 -> ThunkMsg16 -> native filter/dispatch -> caller cleanup as one ownership chain; preserve conversion, consolidate only proven redundant steps.",
+      "missing_evidence": "Actual getmsg16 caller integration for modified COPYDATA/filter return and native buffer lifetime; existing COPYDATA fixture stubs putmsg16 and is not full MSG round-trip proof."
+    },
+    {
+      "original_start": 783,
+      "original_count": 1,
+      "current_start": 730,
+      "current_count": 2,
+      "original": [
+        "            WI32DDEDeleteInitiator((HAND16) FETCHWORD(pmsg16->wParam));"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-353): consume only ThunkMsg16's token. */",
+        "            UnThunkWMMsg16(lpmpex);"
+      ],
+      "decision": "retain",
+      "necessity": "UnThunkWMMsg16 consumes only the successfully acquired DDE initiator token and clears it first; direct deletion by current guest wParam could delete another active nested initiator.",
+      "change_plan": "Retain coupled original-owner conversion adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 792,
+      "original_count": 0,
+      "current_start": 741,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-344): no converter was required on this path. */",
+        "    lpmpex->fThunkSucceeded = TRUE;"
+      ],
+      "decision": "retain",
+      "necessity": "Non-thunked scalar/timer path must explicitly report success to CallMsgFilter/DispatchMessage consumers; converted path retains ThunkMsg16 success authority.",
+      "change_plan": "Retain coupled original-owner conversion adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 864,
+      "original_count": 1,
+      "current_start": 816,
+      "current_count": 1,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIV-353: its DDE publication bits are call-private. */"
+      ],
+      "decision": "retain",
+      "necessity": "Zero-initialize per-call WM32MSGPARAMEX so DDE publication bits start clear; original converter fills message operands; no persistent parallel state introduced.",
+      "change_plan": "Retain coupled original-owner conversion adaptation.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 303,
+      "original_count": 56,
+      "current_start": 305,
+      "current_count": 1,
+      "original": [
+        "//",
+        "// Allocate and fill a 32bit DropFileStruct based on a 16bit one.",
+        "// 16 bit structure is not freed.",
+        "//",
+        "BOOL getdropfilestruct16(HAND16 hand16, PHANDLE phand32)",
+        "{",
+        "    PDROPFILESTRUCT16  lpdfs16;",
+        "    LPDROPFILESTRUCT   lpdfs32;",
+        "    VPVOID vp;",
+        "    INT cb;",
+        "",
+        "    vp = GlobalLock16(hand16, &cb);",
+        "",
+        "    if (vp) {",
+        "",
+        "        GETMISCPTR(vp, lpdfs16);",
+        "",
+        "        *phand32 = GlobalAlloc(GMEM_DDESHARE,",
+        "                               cb-sizeof(DROPFILESTRUCT16)+",
+        "                               sizeof(DROPFILESTRUCT));",
+        "",
+        "        if (*phand32) {",
+        "",
+        "            lpdfs32 = GlobalLock(*phand32);",
+        "",
+        "            lpdfs32->pFiles = sizeof(DROPFILESTRUCT);",
+        "            lpdfs32->pt.x = lpdfs16->x;",
+        "            lpdfs32->pt.y = lpdfs16->y;",
+        "            lpdfs32->fNC  = lpdfs16->fNC;",
+        "            lpdfs32->fWide = FALSE;",
+        "",
+        "            RtlCopyMemory((LPBYTE)lpdfs32+lpdfs32->pFiles,",
+        "                          (LPBYTE)lpdfs16+lpdfs16->pFiles,",
+        "                          cb-sizeof(DROPFILESTRUCT16));",
+        "",
+        "            FREEMISCPTR(lpdfs16);",
+        "            GlobalUnlock16(hand16);",
+        "",
+        "            GlobalUnlock(*phand32);",
+        "",
+        "            return TRUE;",
+        "",
+        "        } else {",
+        "",
+        "            FREEMISCPTR(lpdfs16);",
+        "            GlobalUnlock16(hand16);",
+        "",
+        "            return FALSE;",
+        "        }",
+        "    } else {",
+        "        *phand32 = NULL;",
+        "    }",
+        "",
+        "    return FALSE;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 430,
+      "original_count": 3,
+      "current_start": 380,
+      "current_count": 1,
+      "original": [
+        "    if (!(nEntries > 1) && !(nBitCount == 24)) {",
+        "        LOGDEBUG(LOG_ALWAYS, (\"WOW::GetBMI16Size:bad BitCount:a-craigj\\n\"));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 735,
+      "original_count": 7,
+      "current_start": 686,
+      "current_count": 1,
+      "original": [
+        "    if (HIWORD(wParam) &&",
+        "        !(message==WM_TIMER || message==WM_COMMAND || message==WM_DROPFILES ||",
+        "          (message >= WM_DDE_FIRST && message <= WM_DDE_LAST))) {",
+        "",
+        "        LOGDEBUG(LOG_ALWAYS,(\"WOW: getmsg16 - losing HIWORD(wParam)!\"));",
+        "        WOW32ASSERT(FALSE);",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 956,
+      "original_count": 10,
+      "current_start": 909,
+      "current_count": 1,
+      "original": [
+        "    //",
+        "    // can't do it this way, an app can have an unitialized lfFaceName",
+        "    // that's a looong stream of non-null chars, in which case we blow",
+        "    // out our stack.",
+        "    //",
+        "",
+        "    p1 = lplf->lfFaceName;",
+        "    p2 = plf16->lfFaceName;",
+        "",
+        "    while (*p1++ = *p2++);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 306,
+      "original": 359,
+      "logical": 304
+    },
+    {
+      "current": 381,
+      "original": 433,
+      "logical": 431
+    },
+    {
+      "current": 687,
+      "original": 742,
+      "logical": 736
+    },
+    {
+      "current": 910,
+      "original": 966,
+      "logical": 957
+    }
+  ],
+  "evidence": "wumsg.c CallMsgFilter/DispatchMessage consume getmsg16 success; wmsg16.c UnThunkWMMsg16 clears active initiator token before delete; putmsg16 invokes existing table converter with its own frame. COPYDATA fixture has a putmsg16 test double.",
+  "limits": [
+    "No tests run.",
+    "Source comparison is not all-context branch or compiler-line certification.",
+    "COPYDATA caller lifetime proof remains pending, not declared a bug or fully verified fix."
+  ]
+}

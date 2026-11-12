@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/wow32/wsext.c",
+  "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+  "current_sha256": "d42930eb6d473d54a129ea496ab1694a305dda76b4d2a513cc72283abb593ec7",
+  "changes": [
+    {
+      "original_start": 239,
+      "original_count": 1,
+      "current_start": 239,
+      "current_count": 5,
+      "original": [
+        "    if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn) ) {"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-462): the original test accidentally",
+        "       observes the non-null WSAIsBlocking entrypoint, so an initialized",
+        "       provider can never unhook.  Preserve the original provider predicate",
+        "       and only reject an actual blocking call. */",
+        "    if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn)( ) ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Original checked nonnull WSAIsBlocking entrypoint rather than invoking it. Restore intended provider predicate consistent with adjacent WSASetBlockingHook; unhook succeeds only outside actual blocking call.",
+      "change_plan": "Retain invocation correction; preserve initialization and WSAEINPROGRESS errors.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 616,
+      "original_count": 0,
+      "current_start": 621,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "    // DIVERGENCE(MVDM-HOST-DIV-463): Retire async database requests before their task-owned 16-bit",
+        "    // buffers disappear.  wsdata owns the global context list and performs",
+        "    // the provider cancellation after retiring matching entries.",
+        "    //",
+        "",
+        "    WWS32CancelAsyncRequestsForTask( data->ThreadSerialNumber );",
+        "",
+        "    //"
+      ],
+      "decision": "pending",
+      "necessity": "Invoke existing async-list owner retirement before freeing task guest buffers; caller uses captured data ThreadSerialNumber after clearing TLS.",
+      "change_plan": "Keep retirement before guest-buffer release; resolve wsdata cancellation/provider lifetime proof as a single cleanup chain. Do not remove caller separately from context owner.",
+      "missing_evidence": "wsdata.c pending provider cancellation error contracts and explicit-cancel/rundown interleavings; full cleanup/late completion integration."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "evidence": "wsext adjacent WSASetBlockingHook invokes same predicate; verify-win16-winsock-probe.ps1 checks baseline unhook rejection versus fixed restore/close/free/cleanup markers. Cleanup calls wsdata before GlobalUnlockFree16; wsdata-winsock rundown audit remains pending.",
+  "limits": [
+    "No tests executed or historical results promoted to current pass.",
+    "Source-derived line comparison is not compiler validation."
+  ]
+}

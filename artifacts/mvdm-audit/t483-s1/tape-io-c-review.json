@@ -1,0 +1,346 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+  "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+  "current_sha256": "21e57d47e0147d30cb43424eb56506a64e09f48a3088e39bedab964f9e30c249",
+  "review_complete": true,
+  "register_entries": 5,
+  "excluded_ranges": [
+    {
+      "original_start": 20,
+      "original_count": 6,
+      "current_start": 20,
+      "current_count": 2
+    },
+    {
+      "original_start": 89,
+      "original_count": 2,
+      "current_start": 98,
+      "current_count": 2
+    },
+    {
+      "original_start": 101,
+      "original_count": 1,
+      "current_start": 114,
+      "current_count": 2
+    },
+    {
+      "original_start": 119,
+      "original_count": 1,
+      "current_start": 138,
+      "current_count": 2
+    },
+    {
+      "original_start": 129,
+      "original_count": 1,
+      "current_start": 150,
+      "current_count": 2
+    },
+    {
+      "original_start": 144,
+      "original_count": 12,
+      "current_start": 168,
+      "current_count": 2
+    },
+    {
+      "original_start": 188,
+      "original_count": 3,
+      "current_start": 204,
+      "current_count": 1
+    },
+    {
+      "original_start": 202,
+      "original_count": 2,
+      "current_start": 217,
+      "current_count": 2
+    },
+    {
+      "original_start": 267,
+      "original_count": 2,
+      "current_start": 283,
+      "current_count": 2
+    },
+    {
+      "original_start": 276,
+      "original_count": 2,
+      "current_start": 293,
+      "current_count": 2
+    },
+    {
+      "original_start": 287,
+      "original_count": 6,
+      "current_start": 306,
+      "current_count": 2
+    },
+    {
+      "original_start": 304,
+      "original_count": 8,
+      "current_start": 321,
+      "current_count": 2
+    }
+  ],
+  "line_only_ranges": [
+    {
+      "original_start": 31,
+      "original_count": 0,
+      "current_start": 27,
+      "current_count": 1
+    },
+    {
+      "original_start": 52,
+      "original_count": 0,
+      "current_start": 54,
+      "current_count": 1
+    },
+    {
+      "original_start": 73,
+      "original_count": 0,
+      "current_start": 78,
+      "current_count": 1
+    },
+    {
+      "original_start": 76,
+      "original_count": 0,
+      "current_start": 82,
+      "current_count": 1
+    },
+    {
+      "original_start": 83,
+      "original_count": 0,
+      "current_start": 90,
+      "current_count": 1
+    },
+    {
+      "original_start": 86,
+      "original_count": 0,
+      "current_start": 94,
+      "current_count": 1
+    },
+    {
+      "original_start": 92,
+      "original_count": 0,
+      "current_start": 101,
+      "current_count": 1
+    },
+    {
+      "original_start": 95,
+      "original_count": 0,
+      "current_start": 105,
+      "current_count": 1
+    },
+    {
+      "original_start": 96,
+      "original_count": 0,
+      "current_start": 107,
+      "current_count": 1
+    },
+    {
+      "original_start": 100,
+      "original_count": 0,
+      "current_start": 112,
+      "current_count": 1
+    },
+    {
+      "original_start": 103,
+      "original_count": 0,
+      "current_start": 117,
+      "current_count": 1
+    },
+    {
+      "original_start": 118,
+      "original_count": 0,
+      "current_start": 136,
+      "current_count": 1
+    },
+    {
+      "original_start": 121,
+      "original_count": 0,
+      "current_start": 141,
+      "current_count": 1
+    },
+    {
+      "original_start": 131,
+      "original_count": 0,
+      "current_start": 153,
+      "current_count": 1
+    },
+    {
+      "original_start": 143,
+      "original_count": 0,
+      "current_start": 166,
+      "current_count": 1
+    },
+    {
+      "original_start": 157,
+      "original_count": 0,
+      "current_start": 171,
+      "current_count": 1
+    },
+    {
+      "original_start": 163,
+      "original_count": 0,
+      "current_start": 178,
+      "current_count": 1
+    },
+    {
+      "original_start": 192,
+      "original_count": 0,
+      "current_start": 206,
+      "current_count": 1
+    },
+    {
+      "original_start": 205,
+      "original_count": 0,
+      "current_start": 220,
+      "current_count": 1
+    },
+    {
+      "original_start": 270,
+      "original_count": 0,
+      "current_start": 286,
+      "current_count": 1
+    },
+    {
+      "original_start": 279,
+      "original_count": 0,
+      "current_start": 296,
+      "current_count": 1
+    },
+    {
+      "original_start": 286,
+      "original_count": 0,
+      "current_start": 304,
+      "current_count": 1
+    },
+    {
+      "original_start": 294,
+      "original_count": 0,
+      "current_start": 309,
+      "current_count": 1
+    },
+    {
+      "original_start": 303,
+      "original_count": 0,
+      "current_start": 319,
+      "current_count": 1
+    },
+    {
+      "original_start": 313,
+      "original_count": 0,
+      "current_start": 324,
+      "current_count": 1
+    }
+  ],
+  "changes": [
+    {
+      "file_sequence": "209",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_start": "37",
+      "current_count": "4",
+      "original_start": "40",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-085",
+      "classification": "original-XMS-declaration",
+      "initial_review": "Existing original NTVDM INT15 memory-copy path calls xmsDisableA20Wrapping/xmsEnableA20Wrapping; include supplies exact original VOID(void) declarations.",
+      "counter_review": "Selected xms.486 provider updates both SAS wrapping and pHimemA20State. Direct SAS substitution would omit HIMEM state. Directory name does not mean a separately selected 486 CPU; generator explicitly builds this XMS family.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-host/xms.486/xms.h:136-137; src/mvdm-host/xms.486/xmsa20.c:61-104; tools/build/New-T310OriginalSoftpcNinja.ps1:105,217,726,1068",
+      "limits": "Source/selected-build inspection only; no new runtime or diagnostic-line verification.",
+      "decision": "retain",
+      "change_plan": "Retain original xms.h include and existing XMS-mediated call sequence; no added helper or direct SAS alternative.",
+      "related_callers": "cassette_io INT15 block move -> xms.486/xmsa20.c -> SAS A20 and pHimemA20State; New-T310OriginalSoftpcNinja xms source/include selection.",
+      "verification_required": "Compile tape_io with selected original declarations; existing XMS/A20 and INT15 block-copy regression with initial wrapping on/off and preserved HIMEM state.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "209",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_start": "51",
+      "current_count": "1",
+      "original_start": "50",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "default-off-setup-diagnostic",
+      "initial_review": "Setup diagnostic dependency, AH/AL snapshots and enter/leave calls do not drive original INT15 switch or output register calculation.",
+      "counter_review": "Shared reporter only records environment-selected diagnostics and restores last error. Remove local snapshots with both calls; preserve all original early returns, waits, events, XMS transitions and device-state operations.",
+      "disposition": "delete",
+      "evidence": "src/mvdm-host/softpc.new/base/bios/tape_io.c; src/ntvdm-exe/softpc/mvdm_softpc_termination.c:101; original tape_io.c",
+      "limits": "Source/selected-build inspection only; no new runtime or diagnostic-line verification.",
+      "decision": "delete",
+      "change_plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "related_callers": "BIOS BOP15 cassette_io; mvdm_softpc_report_setup_hardware_probe shared by equipment, keyboard, COM/LPT and nt_bop.",
+      "verification_required": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "209",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_start": "74",
+      "current_count": "2",
+      "original_start": "71",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "default-off-setup-diagnostic",
+      "initial_review": "Setup diagnostic dependency, AH/AL snapshots and enter/leave calls do not drive original INT15 switch or output register calculation.",
+      "counter_review": "Shared reporter only records environment-selected diagnostics and restores last error. Remove local snapshots with both calls; preserve all original early returns, waits, events, XMS transitions and device-state operations.",
+      "disposition": "delete",
+      "evidence": "src/mvdm-host/softpc.new/base/bios/tape_io.c; src/ntvdm-exe/softpc/mvdm_softpc_termination.c:101; original tape_io.c",
+      "limits": "Source/selected-build inspection only; no new runtime or diagnostic-line verification.",
+      "decision": "delete",
+      "change_plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "related_callers": "BIOS BOP15 cassette_io; mvdm_softpc_report_setup_hardware_probe shared by equipment, keyboard, COM/LPT and nt_bop.",
+      "verification_required": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "209",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_start": "121",
+      "current_count": "3",
+      "original_start": "106",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "default-off-setup-diagnostic",
+      "initial_review": "Setup diagnostic dependency, AH/AL snapshots and enter/leave calls do not drive original INT15 switch or output register calculation.",
+      "counter_review": "Shared reporter only records environment-selected diagnostics and restores last error. Remove local snapshots with both calls; preserve all original early returns, waits, events, XMS transitions and device-state operations.",
+      "disposition": "delete",
+      "evidence": "src/mvdm-host/softpc.new/base/bios/tape_io.c; src/ntvdm-exe/softpc/mvdm_softpc_termination.c:101; original tape_io.c",
+      "limits": "Source/selected-build inspection only; no new runtime or diagnostic-line verification.",
+      "decision": "delete",
+      "change_plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "related_callers": "BIOS BOP15 cassette_io; mvdm_softpc_report_setup_hardware_probe shared by equipment, keyboard, COM/LPT and nt_bop.",
+      "verification_required": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "209",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_start": "336",
+      "current_count": "3",
+      "original_start": "324",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "default-off-setup-diagnostic",
+      "initial_review": "Setup diagnostic dependency, AH/AL snapshots and enter/leave calls do not drive original INT15 switch or output register calculation.",
+      "counter_review": "Shared reporter only records environment-selected diagnostics and restores last error. Remove local snapshots with both calls; preserve all original early returns, waits, events, XMS transitions and device-state operations.",
+      "disposition": "delete",
+      "evidence": "src/mvdm-host/softpc.new/base/bios/tape_io.c; src/ntvdm-exe/softpc/mvdm_softpc_termination.c:101; original tape_io.c",
+      "limits": "Source/selected-build inspection only; no new runtime or diagnostic-line verification.",
+      "decision": "delete",
+      "change_plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "related_callers": "BIOS BOP15 cassette_io; mvdm_softpc_report_setup_hardware_probe shared by equipment, keyboard, COM/LPT and nt_bop.",
+      "verification_required": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "limits": "No fresh runtime verification. Excluded-body entries are classified separately from five actual additions; #line mapping is not claimed fully verified."
+}

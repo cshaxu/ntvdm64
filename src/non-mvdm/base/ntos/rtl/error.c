@@ -186,4 +186,3 @@ Return Value:
 
     return ERROR_MR_MID_NOT_FOUND;
 }
-

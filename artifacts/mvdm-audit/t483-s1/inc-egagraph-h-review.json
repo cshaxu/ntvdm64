@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+  "original_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+  "current_sha256": "5b8c4c54ee5ba5432180cd66ff2cfc74ab14baa9a65876d4039e0f506bf88f5d",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 20,
+      "original_count": 8
+    },
+    {
+      "original_start": 46,
+      "original_count": 1
+    },
+    {
+      "original_start": 95,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Three excluded alternatives: opposite DISPLAY_STATE bit order, non-VGG nine-bit screen_split member, non-V7VGA get_screen_split expression. Complete remaining source is original.",
+  "counter_review": "Compared selected BIT_ORDER2 bitfields, VGG ten-bit split state and V7VGA multiply_vert_by_two expression. They are unchanged, as are palette/font/underline/regen-pointer fields and accessors. No new font-bank state, screen geometry or second rendering path is introduced by this header diff.",
+  "limits": "Source difference classification only; no new compiler layout or graphical-runtime verification."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "src/mvdm-host/inc/DPMI.INC",
+    "before": "ff03d97b04b194d520854e52a5fc0fe92039adf2252bdd7c333cc0d6a26471ee",
+    "after": "9e1ee5a80452668b6ec2e5fcdd0ed2686fddff26da7ff03bab63d0d3c08ee381",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/ENUMAPIS.INC",
+    "before": "9145a4db7c69b7f567d684cf041b816e8f20d610e68f97ac5580d2c49bb14564",
+    "after": "2c0712fd64213997b99b8fada9e8a253547efc7937dd0e7cae3469cd6ff580db",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/exterr.h",
+    "before": "b2ac4a77324abed1774e2cd8f2a88276e45b63f2321ba4579b499f36846aeb54",
+    "after": "b2ac4a77324abed1774e2cd8f2a88276e45b63f2321ba4579b499f36846aeb54",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/intapi.h",
+    "before": "4a4ea44f62a4f9e86793e82808ce19afc7afc493678568fdcf38fb1597a2910f",
+    "after": "4a4ea44f62a4f9e86793e82808ce19afc7afc493678568fdcf38fb1597a2910f",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/intmac.inc",
+    "before": "aeb3a87fa8ef9a65498c0b5703c174e070cc02b6f20cad790689f18d863f4f4b",
+    "after": "2980d43394c76f17966aa9aa2775b2fc7b87e093ab94e1249b9fbc1295f83485",
+    "newline_restored": true
+  }
+]

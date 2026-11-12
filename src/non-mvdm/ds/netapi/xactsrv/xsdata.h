@@ -75,5 +75,3 @@ extern XS_API_TABLE_ENTRY XsApiTable[];
 #endif // ndef _XSDATA_
 
 
-
-

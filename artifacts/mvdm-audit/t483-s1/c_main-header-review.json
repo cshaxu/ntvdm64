@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+  "original_sha256": "c900712ad3c01e1e6ea6ee3b3ce597bf67f0ae1392576a8f60413af78a4742b6",
+  "current_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+  "review_complete": true,
+  "excluded_groups": [
+    {
+      "original_start": 129,
+      "original_end": 129,
+      "current_error_line": 131
+    },
+    {
+      "original_start": 168,
+      "original_end": 176,
+      "current_error_line": 173
+    },
+    {
+      "original_start": 220,
+      "original_end": 223,
+      "current_error_line": 218
+    }
+  ],
+  "register_entries": 0,
+  "initial_review": "All nonblank non-line text outside excluded bodies equals original; original outer conditional boundaries preserved.",
+  "counter_review": "No selected declarations/access macros changed. No fresh all-context reachability proof or logical-line certification claimed.",
+  "limits": "c_main.h has a trailing #line 217 after #line 226, followed only by blank text; no later tokens in this file. It does not alter caller line restoration after include. Not a runtime delta."
+}

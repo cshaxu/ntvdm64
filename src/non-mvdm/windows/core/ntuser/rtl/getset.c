@@ -20,6 +20,16 @@
 #line 15
 DWORD GetWindowData(PWND, int, BOOL);
 
+/***************************************************************************\
+* _GetWindowLong (supports GetWindowLongA/W API)
+*
+* Return a window long.  Positive index values return application window longs
+* while negative index values return system window longs.  The negative
+* indices are published in WINDOWS.H.
+*
+* History:
+* 11-26-90 darrinm      Wrote.
+\***************************************************************************/
 #line 28
 DWORD _GetWindowLong(
     PWND pwnd,

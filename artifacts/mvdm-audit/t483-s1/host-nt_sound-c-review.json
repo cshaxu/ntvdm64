@@ -1,0 +1,38 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+  "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+  "current_sha256": "10a19075d285cd629b0d283f40eadabb07ca96070209bf2633d0539aa4042927",
+  "before_sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 8,
+      "original_count": 0,
+      "current_start": 8,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "void host_ica_lock(void);",
+        "void host_ica_unlock(void);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 139,
+      "original_count": 1,
+      "current_start": 144,
+      "current_count": 1,
+      "original": [
+        "\tprintf(\"NTVDM: OpenBeepDevice Status=%lx\\n\",Status);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Two exact void lock declarations are required by original InitSound shutdown, host_enable_timer2_sound and host_sound_heartbeat calls; provider nt_eoi.c uses IcaLock critical section.",
+  "counter_review": "Canonical nt_eoi.h also declares VDMVIRTUALICA VirtualIca[] and other IRQ interfaces; importing that dependency closure solely for two prototypes is not a simplification. Prototypes match provider; no sound state, timing, error or close behavior changed. Removed inaccurate added monitor-only commentary; no claim of original transitive declaration provenance.",
+  "limits": "Source-only review; no new build or sound runtime test. Exclusion comparison is not universal configuration or logical-line certification."
+}

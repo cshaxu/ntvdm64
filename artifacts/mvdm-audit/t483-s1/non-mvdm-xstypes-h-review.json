@@ -1,0 +1,22 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+  "original_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+  "current_sha256": "12e60822cae0d06af26bb740113d0020111cdad4adf194f504a9640213723cf9",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 48,
+      "original_count": 1,
+      "current_start": 49,
+      "current_count": 1,
+      "original": [
+        "    DWORD ReferenceHistory[4];"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "limits": "Retained normalized declarations exact; no universal build-context or runtime claim. Diagnostic ReferenceHistory exclusion is distinct from selected request layout."
+}

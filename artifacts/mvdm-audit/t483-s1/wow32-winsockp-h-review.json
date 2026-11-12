@@ -1,0 +1,97 @@
+{
+  "path": "src/mvdm-host/wow32/winsockp.h",
+  "original_sha256": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1",
+  "current_sha256": "f5cdf5ec898dd41c4c9657543b4d1c295be1dc6fa88ec5d5d525a7770510ba4e",
+  "changes": [
+    {
+      "original_start": 72,
+      "original_count": 0,
+      "current_start": 72,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "/* MVDM-HOST-DIV-882: task retirement and provider cancellation share ownership. */",
+        "#define WWS32_ASYNC_RETIRED         0x01",
+        "#define WWS32_ASYNC_CANCEL_STARTED  0x02",
+        "#define WWS32_ASYNC_CANCEL_ACTIVE   0x04",
+        "#define WWS32_ASYNC_COMPLETED       0x08",
+        ""
+      ],
+      "decision": "pending",
+      "change_plan": "Retain task-qualified request identity pending joint wsdata/wsext review. Audit four rundown bits and public cancellation/removal with task retirement as one ownership state machine; remove redundant flags/interfaces only after proving interleavings.",
+      "evidence": "Six async producers initialize owner serial and rundown state; public cancel looks up handle by serial; task cleanup retires then cancels outside list lock. Completion marks completed during active cancel, otherwise releases retired context. Existing fixture covers six cancel results, reentrant completion, late completion, unrelated task and no retry.",
+      "missing_evidence": "Real provider terminal meaning for WSAEALREADY/WSAEINVAL; public cancel versus rundown/completion interleavings; task serial lifetime/reuse and minimal state proof. Fixture uses provider/service doubles."
+    },
+    {
+      "original_start": 76,
+      "original_count": 0,
+      "current_start": 82,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    DWORD ThreadSerialNumber;",
+        "    DWORD RundownState;"
+      ],
+      "decision": "pending",
+      "change_plan": "Retain task-qualified request identity pending joint wsdata/wsext review. Audit four rundown bits and public cancellation/removal with task retirement as one ownership state machine; remove redundant flags/interfaces only after proving interleavings.",
+      "evidence": "Six async producers initialize owner serial and rundown state; public cancel looks up handle by serial; task cleanup retires then cancels outside list lock. Completion marks completed during active cancel, otherwise releases retired context. Existing fixture covers six cancel results, reentrant completion, late completion, unrelated task and no retry.",
+      "missing_evidence": "Real provider terminal meaning for WSAEALREADY/WSAEINVAL; public cancel versus rundown/completion interleavings; task serial lifetime/reuse and minimal state proof. Fixture uses provider/service doubles."
+    },
+    {
+      "original_start": 164,
+      "original_count": 0,
+      "current_start": 173,
+      "current_count": 18,
+      "original": [],
+      "current": [
+        "BOOL",
+        "WWS32FindAsyncTaskHandle32 (",
+        "    IN HAND16 AsyncTaskHandle16,",
+        "    IN DWORD ThreadSerialNumber,",
+        "    OUT HANDLE *AsyncTaskHandle32",
+        "    );",
+        "",
+        "PWINSOCK_ASYNC_CONTEXT_BLOCK",
+        "WWS32FindAndRemoveAsyncContext16 (",
+        "    IN HAND16 AsyncTaskHandle16,",
+        "    IN DWORD ThreadSerialNumber",
+        "    );",
+        "",
+        "VOID",
+        "WWS32CancelAsyncRequestsForTask(",
+        "    IN DWORD ThreadSerialNumber",
+        "    );",
+        ""
+      ],
+      "decision": "pending",
+      "change_plan": "Retain task-qualified request identity pending joint wsdata/wsext review. Audit four rundown bits and public cancellation/removal with task retirement as one ownership state machine; remove redundant flags/interfaces only after proving interleavings.",
+      "evidence": "Six async producers initialize owner serial and rundown state; public cancel looks up handle by serial; task cleanup retires then cancels outside list lock. Completion marks completed during active cancel, otherwise releases retired context. Existing fixture covers six cancel results, reentrant completion, late completion, unrelated task and no retry.",
+      "missing_evidence": "Real provider terminal meaning for WSAEALREADY/WSAEINVAL; public cancel versus rundown/completion interleavings; task serial lifetime/reuse and minimal state proof. Fixture uses provider/service doubles."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [
+    {
+      "current_line": 78,
+      "original_line": 72,
+      "logical_line": 78
+    },
+    {
+      "current_line": 79,
+      "original_line": 73,
+      "logical_line": 79
+    },
+    {
+      "current_line": 80,
+      "original_line": 74,
+      "logical_line": 80
+    },
+    {
+      "current_line": 81,
+      "original_line": 75,
+      "logical_line": 81
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Audit classifications; no functional repair or test execution."
+}

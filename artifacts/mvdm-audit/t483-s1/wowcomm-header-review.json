@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/inc/wowcomm.h",
+  "original_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+  "current_sha256": "cef10f25b960f47d9f13961918f8e7e0720528dcc461144dea934047fdb5d422",
+  "review_complete": true,
+  "register_entries": 0,
+  "initial_review": "Only original #ifndef UNALIGNED fallback definition replaced with #error; selected declarations and layout unchanged.",
+  "counter_review": "Header is consumed through WOW32 wucomm.h with SDK declarations. Do not introduce a new local UNALIGNED definition merely to bypass an unsupported-profile guard.",
+  "evidence": "Normalized line-by-line comparison: sole change at physical/original line 18; surrounding #ifndef/#endif unchanged.",
+  "limits": "Source comparison only; no new all-context preprocessing or compilation claim.",
+  "runtime_validation": "None; header unchanged."
+}

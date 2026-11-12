@@ -1,0 +1,40 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+  "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+  "before_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+  "current_sha256": "29c7d945c05f0c0c69fd320504fefb88c82be71b600c77d2f6f06a4c839394c2",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep finite precomp and retained WND view; never overlay modern USER private object layout.",
+    "Guard or eliminate unused GetWindowData declaration with selector simplification after reconciling model fixture provider; restore original parameter names when declaration retained.",
+    "Keep native DWL_DLGPROC getter paired with native setter and callback dispatch; preserve A/W opaque token behavior.",
+    "Keep MSGRESULT native and DWL_USER local, paired with kernel/getset setter; avoid duplicate result cache.",
+    "Preserve EDIT zero-index lookaside and original private-index refusals; no fallback to native extra bytes after handled zero/error.",
+    "Keep public negative indices outside private getter; no restore of private NT4 server procedure tables for this leaf.",
+    "Map omitted GetWindowData/MapServerToClientPfn/MapClientNeuterToClientPfn contracts to existing public getter owner, especially WOW words, parent/owner and A/W procedures. Retain native boundary where justified; ask owner on genuine policy tradeoffs."
+  ],
+  "counter_review": [
+    "Native HWND validity alone does not authorize dereferencing local retained state.",
+    "Do not import original server/client mapper solely to satisfy unused declaration.",
+    "Restoring NT4 private CPD storage would create competing procedure authority. Model alternate branch need not dictate production owner.",
+    "Different slots have different owners; unifying them by name alone is incorrect.",
+    "Fixture uses synthetic state; lifetime safety also depends on surrounding borrow scope, not this body alone.",
+    "This proves private scope, not completeness of all public GWL/WOW mappings.",
+    "Scope guard does not prove outside public path implements every required original contract."
+  ],
+  "evidence": [
+    "src/wow32-dll/source/wow_window_client_access_bindings.c:70-104;src/wow32-dll/include/control-client/precomp.h:70-80",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_getset_fixture.c;tools/build/New-T447S3CallBoundaryNinja.ps1",
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c:104-121;dlgbegin.c:625;dlgmgr.c:607;src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c:71-86;test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_getset_fixture.c:104-161;src/wow32-dll/source/wow_window_client_access_bindings.c",
+    "src/wow32-dll/source/wow_window_client_access_bindings.c:87-104;tools/build/New-T404S5Wow32ProviderNinja.ps1:587",
+    "OpenNT/windows/core/ntuser/rtl/getset.c:170 onward;public GetWindowLong/WOW callers"
+  ],
+  "entries_added": 7,
+  "format_sites": 1,
+  "limits": [
+    "No fresh build/runtime.",
+    "Public getter closure remains pending; private scope established."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+  "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+  "before_sha256": "56f7e0030282e8d7c5d1ebcae4c2e8bd52572e4145653e71f813864ec46b1cb6",
+  "current_sha256": "39d741144fab4e0e53dd2ac30cdd63ed84ef93c7bd55a4ef7e5790a956d70d16",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_comparison": {
+    "FastGetProfileIntW": "exact",
+    "FastGetProfileStringW": "exact"
+  },
+  "evidence": [
+    "src/wow32-dll/include/wow_task_profile_bindings.h",
+    "src/wow32-dll/source/wow_task_profile_binding.c",
+    "src/wow32-dll/source/wow_edit_entry_bindings.c:51-52",
+    "test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/queue.c:124",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:674"
+  ],
+  "decisions": [
+    "Retain finite profile facade with original ntregapi enum/layout, heap quota substitute and native value query/close. Selected retained routines do not require private precomp/kernel process state.",
+    "Retain omission of global registry-map/user-impersonation cache for the two admitted sections. Original OpenCacheKeyEx depends on PEPROCESS, gpepSystem/gpepCSRSS and ClientOpenKey. Existing boundary opens PMAP_COMPAT machine 64-bit view and PMAP_DESKTOP current worker user read-only; no registry mutation or second cache.",
+    "Integer reader body exact. EDIT callers use fixed 40-WCHAR internal buffer and known defaults; preserve original decimal conversion/default contract rather than replacing with private parser.",
+    "String reader body exact, including required-size return on truncated query, default including terminator and null-default zero result. Production task adapter bounds capacity and fallback; fixture source checks real query/truncation and handle balance. Keep this original algorithm.",
+    "Omitted DWORD and key-enumeration readers may contain reusable selected-client policy. Inventory reached calls beyond the two current consumers before confirming omission; lack of a selected provider is not proof no requirement exists.",
+    "Omitted resource-ID readers, writers, binary value readers and UT wrappers require caller mapping. Current worker-user identity and read-only PMAP_COMPAT avoid private impersonation, but this does not establish equivalence for arbitrary per-user or write consumers. Trace before restoring or deleting policy.",
+    "FE_SB fragment originally belongs inside omitted map initializer; DEBUG fragments belong inside omitted value routines. Reconcile these detached frames with approved subset structure and original logical locations without reintroducing private registry subsystem. Selected readers retain their own original logical-line anchors."
+  ],
+  "entries_added": 7,
+  "format_sites": 2,
+  "limits": [
+    "No fresh build/test.",
+    "Omitted APIs remain pending caller closure.",
+    "Fixture existing-key provider differs from production only in opening path; no full registry coverage claim."
+  ]
+}

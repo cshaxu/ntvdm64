@@ -1,0 +1,874 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+  "current_sha256": "bf532d8564a218a05b527eaab8aa783b8bb2898f4476763f188436f207cf6f0d",
+  "review_complete": true,
+  "register_entries": 8,
+  "changes": [
+    {
+      "original_start": 90,
+      "original_count": 0,
+      "current_start": 91,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-325): default-off Win3.1 Setup diagnosis.  This",
+        " * observes the already-decoded idle request; it neither changes keyboard",
+        " * ownership nor alters the original wait policy. */",
+        "#include \"mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "original_start": 756,
+      "original_count": 0,
+      "current_start": 687,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-325): only the explicit Win3.1",
+        "                 * Setup trace records a key after the original BIOS buffer",
+        "                 * commit.  It cannot affect delivery, ownership or IRQs. */",
+        "                mvdm_softpc_report_setup_hardware_probe(\"keyboard-buffer-put\",",
+        "                    (unsigned long)s, (unsigned long)v);"
+      ]
+    },
+    {
+      "original_start": 1496,
+      "original_count": 0,
+      "current_start": 1446,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "   /* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */",
+        "   mvdm_softpc_report_setup_hardware_probe(\"keyboard-bop-enter\",",
+        "       (unsigned long)getAH(), (unsigned long)getAL());"
+      ]
+    },
+    {
+      "original_start": 1522,
+      "original_count": 0,
+      "current_start": 1475,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "       mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-enter\",",
+        "           (unsigned long)getAH(), (unsigned long)getAL());"
+      ]
+    },
+    {
+      "original_start": 1523,
+      "original_count": 0,
+      "current_start": 1479,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "       mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-leave\",",
+        "           (unsigned long)getAH(), (unsigned long)getAL());"
+      ]
+    },
+    {
+      "original_start": 1919,
+      "original_count": 1,
+      "current_start": 1575,
+      "current_count": 9,
+      "original": [
+        "   pkio_table = (word *) effective_addr(getCS(), getSI());"
+      ],
+      "current": [
+        "   /*",
+        "    * DIVERGENCE(MVDM-HOST-DIV-059): effective_addr is a fixed-width guest",
+        "    * physical number, not a host pointer.  The original function already",
+        "    * uses Start_of_M_area as the selected SoftPC SAS backing store below;",
+        "    * use that same native-width backing path for every table pointer rather",
+        "    * than converting the guest number directly to a host address.",
+        "    */",
+        "   phy_base   = effective_addr(getCS(), getSI());",
+        "   pkio_table = (word *)(Start_of_M_area + phy_base);"
+      ]
+    },
+    {
+      "original_start": 1922,
+      "original_count": 1,
+      "current_start": 1586,
+      "current_count": 1,
+      "original": [
+        "    sas_loadw((sys_addr)(pkio_table + 12), &w);"
+      ],
+      "current": [
+        "    sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);"
+      ]
+    },
+    {
+      "original_start": 1993,
+      "original_count": 2,
+      "current_start": 1659,
+      "current_count": 4,
+      "original": [
+        "   stream_io_buffer = (half_word *)effective_addr(*pkio_table++, 0);",
+        "   stream_io_dirty_count_ptr = (word *)effective_addr(KbdSeg, *pkio_table++);"
+      ],
+      "current": [
+        "    stream_io_buffer = (half_word *)(Start_of_M_area +",
+        "        effective_addr(*pkio_table++, 0));",
+        "    stream_io_dirty_count_ptr = (word *)(Start_of_M_area +",
+        "        effective_addr(KbdSeg, *pkio_table++));"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 50,
+      "original_count": 1,
+      "current_start": 51,
+      "current_count": 1,
+      "original": [
+        "static char SccsID[]=\"@(#)keybd_io.c\t1.35 06/27/95 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 54,
+      "original_count": 6,
+      "current_start": 57,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_BIOS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 85,
+      "original_count": 1,
+      "current_start": 85,
+      "current_count": 1,
+      "original": [
+        "#include \"trace.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 169,
+      "original_count": 15,
+      "current_start": 176,
+      "current_count": 1,
+      "original": [
+        "/* If we are GISP_SVGA the segments will be variables anyway */",
+        "#define int15_seg  RCPU_INT15_SEGMENT",
+        "LOCAL word\tint15_off = RCPU_INT15_OFFSET;",
+        "",
+        "#define int1b_seg  KEYBOARD_BREAK_INT_SEGMENT",
+        "LOCAL word   int1b_off = KEYBOARD_BREAK_INT_OFFSET;",
+        "",
+        "#define int05_seg  PRINT_SCREEN_INT_SEGMENT",
+        "LOCAL word  int05_off =\tPRINT_SCREEN_INT_OFFSET;",
+        "",
+        "#define rcpu_nop_segment  RCPU_NOP_SEGMENT",
+        "LOCAL word  rcpu_nop_offset  = RCPU_NOP_OFFSET;",
+        "",
+        "#define rcpu_poll_segment  RCPU_POLL_SEGMENT",
+        "LOCAL word rcpu_poll_offset  = RCPU_POLL_OFFSET;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 187,
+      "original_count": 1,
+      "current_start": 183,
+      "current_count": 1,
+      "original": [
+        "IMPORT VOID  HostAllowKbdInt();  /* Allow keybd Ints without an IRET */"
+      ],
+      "current": [
+        "#error Excluded unsupported GISP_CPU configuration"
+      ]
+    },
+    {
+      "original_start": 238,
+      "original_count": 1,
+      "current_start": 236,
+      "current_count": 1,
+      "original": [
+        "#define FREEKBDHDW()\t/* Nothing for conventional SoftPC */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 7,
+      "current_start": 252,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* For GISPSVGA the segs will already be variables */",
+        "#define\trcpu_int1C_seg = USER_TIMER_INT_SEGMENT;",
+        "GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;",
+        "",
+        "#define\trcpu_int4A_seg = RCPU_INT4A_SEGMENT;",
+        "GLOBAL word rcpu_int4A_off = RCPU_INT4A_OFFSET;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 549,
+      "original_count": 8,
+      "current_start": 545,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t** We do update an emulation of the keyboard lights but we don't",
+        "\t** want to do it via send_data and switching back to 16-bit.",
+        "\t** We call the host routines directly.",
+        "\t*/",
+        "\thost_kb_light_on (indicators);",
+        "\thost_kb_light_off ((~indicators)&0x7);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 559,
+      "original_count": 23,
+      "current_start": 550,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\tsend_data(LED_CMD);",
+        "",
+        "\t\t\t/* set kb flag up with new status\t*/",
+        "\t\t\tvar_kb_flag_2 = (sas_hw_at_no_check(kb_flag_2) & 0xf8) | indicators;",
+        "\t\t\tsas_store_no_check(kb_flag_2, var_kb_flag_2);",
+        "",
+        "\t\t\t/* check error from previous send_data()\t*/",
+        "\t\t\tif( (var_kb_flag_2 & KB_ERR) == 0)",
+        "\t\t\t{",
+        "\t\t\t\t/* No error\t*/",
+        "\t\t\t\tsend_data(indicators);",
+        "",
+        "\t\t\t\t/* test for error\t*/",
+        "\t\t\t\tif(sas_hw_at_no_check(kb_flag_2) & KB_ERR) {",
+        "\t\t\t\t\t/* error!\t*/",
+        "\t\t\t\t\tnote_trace0(BIOS_KB_VERBOSE,\"got error sending change LEDs command\");",
+        "\t\t\t\t\tsend_data(KB_ENABLE);",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "\t\t\telse",
+        "\t\t\t\t/* error!\t*/",
+        "\t\t\t\tsend_data(KB_ENABLE);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 639,
+      "original_count": 17,
+      "current_start": 610,
+      "current_count": 1,
+      "original": [
+        "",
+        "LOCAL VOID INT15 IFN0()",
+        "{",
+        "\tword\tsaveCS, saveIP;",
+        "",
+        "\tsaveCS = getCS();",
+        "\tsaveIP = getIP();",
+        "",
+        "\tsetCS(int15_seg);",
+        "\tsetIP(int15_off);",
+        "",
+        "\thost_simulate();",
+        "",
+        "\tsetCS(saveCS);",
+        "\tsetIP(saveIP);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 665,
+      "original_count": 3,
+      "current_start": 623,
+      "current_count": 1,
+      "original": [
+        "#define BEEP(message)           always_trace0(message);         \\",
+        "\t\t\t\thost_alarm(250000L);\t\t\\",
+        "\t\t\t\tK26A()"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 701,
+      "original_count": 30,
+      "current_start": 660,
+      "current_count": 1,
+      "original": [
+        "",
+        "LOCAL VOID PutInBufferFunc IFN2(half_word, s, half_word, v)",
+        "{",
+        "\tword\tbuffer_head, buffer_tail, buffer_ptr;",
+        "",
+        "\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\tbuffer_ptr = inc_buffer_ptr(/* from: */buffer_tail);",
+        "",
+        "\tif (buffer_ptr == buffer_head) {",
+        "\t\tBEEP(\"BIOS keyboard buffer overflow\");",
+        "\t}",
+        "\telse {",
+        "\t\tsas_store_no_check(BIOS_VAR_START + buffer_tail, v);",
+        "\t\tsas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);",
+        "\t\tsas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);",
+        "",
+        "\t\toutb(0x20, 0x20);",
+        "\t\tsetAX(0x9102);",
+        "\t\tINT15();",
+        "",
+        "\t\toutb(KEYBA_STATUS_CMD, ENA_KBD);",
+        "\t\tsas_store (kb_flag_3, sas_hw_at(kb_flag_3) & ~(LC_E0 + LC_E1));",
+        "\t\tsetIF(0);",
+        "\t}",
+        "",
+        "\texit_from_kbd_int();",
+        "}",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 772,
+      "original_count": 1,
+      "current_start": 711,
+      "current_count": 1,
+      "original": [
+        "#define PUT_IN_BUFFER(s, v)\t\tPutInBufferFunc(s,v); return"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 783,
+      "original_count": 1,
+      "current_start": 724,
+      "current_count": 1,
+      "original": [
+        "\t\tPutInBufferFunc(s, v);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 810,
+      "original_count": 1,
+      "current_start": 755,
+      "current_count": 1,
+      "original": [
+        "\t\tHostAllowKbdInt();\t/* Allow a keypress to generate an interrupt */ "
+      ],
+      "current": [
+        "#error Excluded unsupported GISP_CPU configuration"
+      ]
+    },
+    {
+      "original_start": 830,
+      "original_count": 1,
+      "current_start": 777,
+      "current_count": 1,
+      "original": [
+        "static int re_entry_level=0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 839,
+      "original_count": 3,
+      "current_start": 788,
+      "current_count": 1,
+      "original": [
+        "\t--re_entry_level;",
+        "\tif( re_entry_level >= 4 )",
+        "\t\talways_trace1(\"ERROR: KBD INT bad exit level %d\", re_entry_level);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 876,
+      "original_count": 4,
+      "current_start": 825,
+      "current_count": 1,
+      "original": [
+        "\t++re_entry_level;",
+        "\tif( re_entry_level > 4 ){",
+        "\t\talways_trace1(\"ERROR: KBD BIOS re-entered at level %d\\n\", re_entry_level-1);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1179,
+      "original_count": 1,
+      "current_start": 1127,
+      "current_count": 1,
+      "original": [
+        "                        reboot();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1504,
+      "original_count": 4,
+      "current_start": 1459,
+      "current_count": 1,
+      "original": [
+        "       if (!WaitKbdHdw(0)) {",
+        "           TryKbdInt();",
+        "           HostReleaseKbd();",
+        "\t   }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1535,
+      "original_count": 306,
+      "current_start": 1495,
+      "current_count": 1,
+      "original": [
+        "void keyboard_io()",
+        "{",
+        "    /*",
+        "     * Request to keyboard.  The AH register holds the type of request:",
+        "     *",
+        "     * AH == 0          Read an character from the queue - wait if no",
+        "     *                  character available.  Return character in AL",
+        "     *                  and the scan code in AH.",
+        "     *",
+        "     * AH == 1          Determine if there is a character in the queue.",
+        "     *                  Set ZF = 0 if there is a character and return",
+        "     *                  it in AX (but leave it in the queue).",
+        "     *",
+        "     * AH == 2          Return shift state in AL.",
+        "     *",
+        "     * For AH = 0 to 2, the value returned in AH is zero. This correction",
+        "     * made in r2.69.",
+        "     *",
+        "     * NB : The order of reference/increment of buffer_head is critical to",
+        "     *      ensure we do not upset put_in_buffer().",
+        "     *",
+        "     *",
+        "     * XT-SFD BIOS Extended functions:",
+        "     *",
+        "     * AH == 5          Place ASCII char/scan code pair (CL / CH)",
+        "     *                  into tail of keyboard buffer. Return 0 in",
+        "     *                  AL if successful, 1 if buffer already full.",
+        "     *",
+        "     * AH == 0x10       Extended read for enhanced keyboard.",
+        "     *",
+        "     * AH == 0x11       Extended function 1 for enhanced keyboard.",
+        "     *",
+        "     * AH == 0x12       Extended shift status. AL contains kb_flag,",
+        "     *                  AH has bits for left/right Alt and Ctrl keys",
+        "     *                  from kb_flag_1 and kb_flag_3.",
+        "     */",
+        "    word \tbuffer_head,\t/* local copy of BIOS data area variable*/",
+        "    \t\tbuffer_tail,\t/* local copy of BIOS data area variable*/",
+        "\t\tbuffer_ptr;\t/* pointer into BIOS keyboard buffer    */",
+        "",
+        "#define INT16H_DEC  0x12    /* AH decremented by this if invalid command */",
+        "",
+        "    word \tCS_save,\t/* CS before recursive CPU call\t\t*/",
+        "    \t\tIP_save;\t/* IP before recursive CPU call\t\t*/",
+        "    half_word\tdata,\t\t/* byte conyaining typamatic data\t*/",
+        "\t\tstatus1,\t/* temp variables used for storing\t*/",
+        "\t\tstatus2;\t/* status in funtion 0x12\t\t*/",
+        "",
+        "    INT\t\tfunc_index;     /* func_index == AH */",
+        "",
+        "",
+        "    setZF(0);",
+        "    func_index = (INT)getAH();",
+        "",
+        "    note_trace1( BIOS_KB_VERBOSE, \"Keyboard BIOS func 0x%x\", func_index);",
+        "",
+        "",
+        "    switch (func_index) {",
+        "",
+        "    case  0x00:\t\t\t/* Read next char in Kbd buffer */",
+        "",
+        "\t/*",
+        "\t * The AT emulation of the BIOS uses a recursive CPU to handle",
+        "\t * the HW interrrupts, so there is no need to set the Zero Flag",
+        "\t * and return to our CPU (see original xt version )",
+        "\t */",
+        "        buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "        buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\tif (buffer_tail == buffer_head)",
+        "\t{",
+        "\t\tIDLE_waitio();",
+        "",
+        "\t\tsetAX(0x9002);",
+        "\t\tINT15();\t/* call int 15h  - wait function\t*/",
+        "\t}",
+        "",
+        "\tdo",
+        "\t{",
+        "\t\tcheck_indicators(0);\t/* see if LED's need updating\t*/",
+        "",
+        "\t\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\t\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\t\tif (buffer_tail == buffer_head)",
+        "\t\t{",
+        "\t\t\tCS_save = getCS();",
+        "\t\t\tIP_save = getIP();",
+        "",
+        "\t\t\t/* wait for character in buffer\t\t*/",
+        "",
+        "        \t\tdo {",
+        "\t\t\t\tIDLE_poll();",
+        "",
+        "\t       \t\t\tsetCS(rcpu_poll_segment);",
+        "\t       \t\t\tsetIP(rcpu_poll_offset);",
+        "                                host_simulate();",
+        "\t\t\t\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\t\t\t\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\t\t       \t} while (buffer_tail == buffer_head);",
+        "",
+        "",
+        "\t\t       \tsetCS(CS_save);",
+        "\t\t       \tsetIP(IP_save);",
+        "\t\t}",
+        "",
+        "\t       \tsetAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));",
+        "",
+        "        \tbuffer_head = inc_buffer_ptr(/* from: */buffer_head);",
+        "\t        sas_storew_no_check(BIOS_KB_BUFFER_HEAD, buffer_head);",
+        "",
+        "\t\ttranslate_std();\t/*translate scan_code pairs\t\t\t*/",
+        "\t}",
+        "\twhile (getCF());\t\t/* if CF set throw code away and start again\t*/",
+        "",
+        "\tsetIF(1);",
+        "",
+        "\tIDLE_init();",
+        "",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x01:\t\t\t\t/* Set ZF to reflect char availability in Kbd buffer */",
+        "",
+        "\tdo",
+        "\t{",
+        "\t\tcheck_indicators(1);\t\t/* see if LED's need updating\t\t*/",
+        "\t\t\t\t\t\t/* and issue an   out 20h,20h\t\t*/",
+        "",
+        "\t\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\t\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\t       \tsetAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));",
+        "",
+        "\t\tif (buffer_tail == buffer_head)",
+        "\t\t{",
+        "\t\t\t/* buffer empty - set flag and return */",
+        "\t\t\tIDLE_poll();",
+        "",
+        "\t\t\tsetZF(1);",
+        "\t\t\tbreak;",
+        "\t\t}",
+        "\t\telse",
+        "\t\t\tIDLE_init();",
+        "",
+        "\t\ttranslate_std();\t/* translate scan_code pairs, returns CF if throwaway */",
+        "\t\tif(getCF())",
+        "\t\t{",
+        "\t\t\t/* throw code away by incrementing pointer\t*/",
+        "\t        \tbuffer_head = inc_buffer_ptr(/* from: */buffer_head);",
+        "\t\t        sas_storew_no_check(BIOS_KB_BUFFER_HEAD, buffer_head);",
+        "\t\t}",
+        "\t}",
+        "\twhile (getCF());\t\t/* if CF set -  start again\t*/",
+        "\tsetIF(1);",
+        "",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x02:\t\t\t\t/* AL := Current Shift Status (really \"kb_flag\") */",
+        "",
+        "        setAH(0);",
+        "        setAL(sas_hw_at_no_check(kb_flag));",
+        "",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x03:\t\t\t\t/* Alter typematic rate */",
+        "",
+        "    \t/* check for correct values in registers\t\t*/",
+        "    \tif( (getAL() == 5) && !(getBX() & 0xfce0) )",
+        "    \t{",
+        "\t\tnote_trace1(BIOS_KB_VERBOSE, \"\\talter typematic rate (BX %#x)\\n\", getBX());",
+        "",
+        "    \t\tsend_data(KB_TYPA_RD);",
+        "    \t\tdata = (getBH() << 5) | getBL();",
+        "    \t\tsend_data(data);",
+        "    \t}",
+        "",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x05:\t\t\t\t/* Place ASCII + ScanCode in Kbd Buffer */",
+        "",
+        "\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "        /*",
+        "         * check for sufficient space - if no set AL",
+        "         */",
+        "",
+        "        buffer_ptr = inc_buffer_ptr(/*from:*/buffer_tail);",
+        "",
+        "        if( buffer_head == buffer_ptr )",
+        "             setAL( 1 );",
+        "        else {",
+        "            /*",
+        "    \t     * load CX into buffer and update buffer_tail",
+        "    \t     */",
+        "    \t    sas_storew_no_check(BIOS_VAR_START + buffer_tail, getCX() );",
+        "    \t    sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);",
+        "            setAL( 0 );",
+        "        }",
+        "        setAH( 0 );",
+        "\tsetIF(1);",
+        "",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x10:\t\t\t\t/* Extended ASCII Read */",
+        "",
+        "\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\tif (buffer_tail == buffer_head)",
+        "\t{",
+        "\t\tIDLE_waitio();",
+        "",
+        "\t\tsetAX(0x9002);",
+        "\t\tINT15();\t/* call int 15h  - wait function */",
+        "\t}",
+        "\tcheck_indicators(0);\t/* see if LED's need updating */",
+        "",
+        "\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\tif (buffer_tail == buffer_head)",
+        "\t{",
+        "\t\tCS_save = getCS();",
+        "\t\tIP_save = getIP();",
+        "",
+        "\t\t/* wait for character in buffer\t\t*/",
+        "        \twhile (buffer_tail == buffer_head)",
+        "       \t\t{",
+        "\t\t\tIDLE_poll();",
+        "",
+        "       \t\t\tsetCS(rcpu_poll_segment);",
+        "       \t\t\tsetIP(rcpu_poll_offset);",
+        "                        host_simulate();",
+        "\t\t\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\t\t\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "\t       \t}",
+        "",
+        "\t\tIDLE_init();",
+        "",
+        "\t       \tsetCS(CS_save);",
+        "\t       \tsetIP(IP_save);",
+        "\t}",
+        "",
+        "\tsetAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));\t/* Pickup the \"current\" scancode/char pair */",
+        "",
+        "       \tbuffer_head = inc_buffer_ptr(/* from: */buffer_head);",
+        "        sas_storew_no_check(BIOS_KB_BUFFER_HEAD, buffer_head);",
+        "",
+        "\ttranslate_ext();\t\t/* translate scan_code pairs\t*/",
+        "",
+        "\tsetIF(1);",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x11:\t\t\t\t/* Extended ASCII Status\t*/",
+        "",
+        "\tcheck_indicators(1);\t\t/* see if LED's need updating\t*/",
+        "\t\t\t\t\t/* and issue an   out 20h,20h\t*/",
+        "",
+        "\tbuffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+        "\tbuffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+        "",
+        "\tsetAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));",
+        "",
+        "\tif (buffer_tail == buffer_head)\t/* No keys pressed */",
+        "\t{",
+        "\t\tsetZF(1);",
+        "\t\tIDLE_poll();",
+        "\t}",
+        "\telse \t\t\t\t/* Keystrokes available! */",
+        "\t{",
+        "\t\ttranslate_ext();\t/* translate scan_code pairs\t*/",
+        "\t\tIDLE_init();",
+        "\t}",
+        "",
+        "\tsetIF(1);",
+        "\tbreak;",
+        "",
+        "",
+        "    case 0x12:\t\t\t\t/* Extended Shift Status */",
+        "",
+        "        status1 = sas_hw_at_no_check(kb_flag_1) & SYS_SHIFT;\t/* only leave SYS KEY\t*/",
+        "        status1 <<= 5;\t\t\t\t\t\t/* move to bit 7\t*/",
+        "        status2 = sas_hw_at_no_check(kb_flag_1) & 0x73;\t\t/* remove SYS_SHIFT, HOLD,",
+        "    \t\t\t \t\t\t\t\t   STATE and INS_SHIFT  */",
+        "        status1 |= status2;\t\t\t\t\t/* merge\t\t*/",
+        "        status2 = sas_hw_at_no_check(kb_flag_3) & 0x0C;\t\t/* remove LC_E0 & LC_E1 */",
+        "        status1 |= status2;\t\t\t\t\t/* merge\t\t*/",
+        "        setAH( status1 );",
+        "        setAL( sas_hw_at_no_check(kb_flag) );",
+        "",
+        "\tbreak;",
+        "",
+        "",
+        "    default:",
+        "        setAH((func_index - INT16H_DEC));",
+        "\tbreak;",
+        "    }",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1844,
+      "original_count": 6,
+      "current_start": 1501,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 1890,
+      "original_count": 1,
+      "current_start": 1545,
+      "current_count": 1,
+      "original": [
+        "\tica_iret_hook_control(ICA_MASTER, CPU_KB_INT, TRUE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1997,
+      "original_count": 3,
+      "current_start": 1667,
+      "current_count": 1,
+      "original": [
+        "   if (*pkio_table != getAX()) {",
+        "       always_trace0(\"ERROR: KbdVectorTable!\");",
+        "       }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2005,
+      "original_count": 19,
+      "current_start": 1675,
+      "current_count": 1,
+      "original": [
+        "",
+        "     /* kbd bios callout optimization */",
+        "    sas_loadw(0x15*4,     &sp_int15_handler_off);",
+        "    sas_loadw(0x15*4 + 2, &sp_int15_handler_seg);",
+        "",
+        "     /* timer hardware interrupt optimizations */",
+        "    sas_loadw(0x08*4,     &TimerInt08Off);",
+        "    sas_loadw(0x08*4 + 2, &TimerInt08Seg);",
+        "    sas_loadw(0x1C*4,     &TimerInt1COff);",
+        "    sas_loadw(0x1C*4 + 2, &TimerInt1CSeg);",
+        "",
+        "    sas_loadw(0x13 * 4, &int13h_vector_off);",
+        "    sas_loadw(0x13 * 4 + 2, &int13h_vector_seg);",
+        "    int13h_caller_seg = KbdSeg;",
+        "    dr_type_seg = KbdSeg;",
+        "    sas_loadw((sys_addr)(pkio_table + 27), &int13h_caller_off);",
+        "    sas_loadw((sys_addr)(pkio_table + 22), &dr_type_off);",
+        "    dr_type_addr = effective_addr(dr_type_seg, dr_type_off);",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded non-MONITOR keyboard initialization"
+      ]
+    },
+    {
+      "original_start": 2051,
+      "original_count": 1,
+      "current_start": 1705,
+      "current_count": 1,
+      "original": [
+        "       printf(\"NTVDM: UpdateKbdInt15 Nuking I15 offsets\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "All full-file differences classified; excluded bodies separate from diagnostics and pointer conversions.",
+  "counter_review": "Diagnostics recommended for removal; native pointer adaptation retained; original numeric guest fields remain numeric. One empty line restored.",
+  "limits": "Not a complete build-context, line-mapping or runtime certification."
+}

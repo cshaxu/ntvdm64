@@ -1,0 +1,1733 @@
+{
+  "path": "src/mvdm-host/wow32/wgdi31.c",
+  "original_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+  "current_sha256": "a8506e1732948134d112501c2fc7910b7aa3c00bc8ca506adfebe6935af87fc3",
+  "changes": [
+    {
+      "original_start": 347,
+      "original_count": 1,
+      "current_start": 347,
+      "current_count": 4,
+      "original": [
+        "        putkerningpairs16 (FETCHDWORD(parg16->f3), parg16->f2, lpkrnpair);"
+      ],
+      "current": [
+        "        /* MVDM-HOST-DIV-877: only returned pairs contain native output. */",
+        "        if (ul) {",
+        "            putkerningpairs16 (FETCHDWORD(parg16->f3), ul, lpkrnpair);",
+        "        }"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain copy of only native returned elements, not requested capacity; preserve original allocator, query mode and result.",
+      "evidence": "GetKerningPairs fills returned count; modified code skips copy on zero and still frees buffer. wow_font_output_test.c uses real GDI with sentinel tail and controlled failure/query cases."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 821,
+      "original_count": 6,
+      "current_start": 826,
+      "current_count": 1,
+      "original": [
+        "",
+        "ULONG FASTCALL WG32SetMetaFileBitsBetter(PVDMFRAME pFrame)",
+        "{",
+        "    return(WG32SetMetaFileBits(pFrame));",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 351,
+      "original_line": 348,
+      "logical_line": 351
+    },
+    {
+      "current_line": 352,
+      "original_line": 349,
+      "logical_line": 352
+    },
+    {
+      "current_line": 354,
+      "original_line": 351,
+      "logical_line": 354
+    },
+    {
+      "current_line": 355,
+      "original_line": 352,
+      "logical_line": 355
+    },
+    {
+      "current_line": 356,
+      "original_line": 353,
+      "logical_line": 356
+    },
+    {
+      "current_line": 359,
+      "original_line": 356,
+      "logical_line": 359
+    },
+    {
+      "current_line": 360,
+      "original_line": 357,
+      "logical_line": 360
+    },
+    {
+      "current_line": 361,
+      "original_line": 358,
+      "logical_line": 361
+    },
+    {
+      "current_line": 362,
+      "original_line": 359,
+      "logical_line": 362
+    },
+    {
+      "current_line": 363,
+      "original_line": 360,
+      "logical_line": 363
+    },
+    {
+      "current_line": 364,
+      "original_line": 361,
+      "logical_line": 364
+    },
+    {
+      "current_line": 365,
+      "original_line": 362,
+      "logical_line": 365
+    },
+    {
+      "current_line": 366,
+      "original_line": 363,
+      "logical_line": 366
+    },
+    {
+      "current_line": 368,
+      "original_line": 365,
+      "logical_line": 368
+    },
+    {
+      "current_line": 370,
+      "original_line": 367,
+      "logical_line": 370
+    },
+    {
+      "current_line": 372,
+      "original_line": 369,
+      "logical_line": 372
+    },
+    {
+      "current_line": 374,
+      "original_line": 371,
+      "logical_line": 374
+    },
+    {
+      "current_line": 375,
+      "original_line": 372,
+      "logical_line": 375
+    },
+    {
+      "current_line": 376,
+      "original_line": 373,
+      "logical_line": 376
+    },
+    {
+      "current_line": 377,
+      "original_line": 374,
+      "logical_line": 377
+    },
+    {
+      "current_line": 378,
+      "original_line": 375,
+      "logical_line": 378
+    },
+    {
+      "current_line": 379,
+      "original_line": 376,
+      "logical_line": 379
+    },
+    {
+      "current_line": 380,
+      "original_line": 377,
+      "logical_line": 380
+    },
+    {
+      "current_line": 381,
+      "original_line": 378,
+      "logical_line": 381
+    },
+    {
+      "current_line": 382,
+      "original_line": 379,
+      "logical_line": 382
+    },
+    {
+      "current_line": 385,
+      "original_line": 382,
+      "logical_line": 385
+    },
+    {
+      "current_line": 387,
+      "original_line": 384,
+      "logical_line": 387
+    },
+    {
+      "current_line": 388,
+      "original_line": 385,
+      "logical_line": 388
+    },
+    {
+      "current_line": 389,
+      "original_line": 386,
+      "logical_line": 389
+    },
+    {
+      "current_line": 390,
+      "original_line": 387,
+      "logical_line": 390
+    },
+    {
+      "current_line": 391,
+      "original_line": 388,
+      "logical_line": 391
+    },
+    {
+      "current_line": 392,
+      "original_line": 389,
+      "logical_line": 392
+    },
+    {
+      "current_line": 393,
+      "original_line": 390,
+      "logical_line": 393
+    },
+    {
+      "current_line": 394,
+      "original_line": 391,
+      "logical_line": 394
+    },
+    {
+      "current_line": 396,
+      "original_line": 393,
+      "logical_line": 396
+    },
+    {
+      "current_line": 398,
+      "original_line": 395,
+      "logical_line": 398
+    },
+    {
+      "current_line": 399,
+      "original_line": 396,
+      "logical_line": 399
+    },
+    {
+      "current_line": 402,
+      "original_line": 399,
+      "logical_line": 402
+    },
+    {
+      "current_line": 403,
+      "original_line": 400,
+      "logical_line": 403
+    },
+    {
+      "current_line": 404,
+      "original_line": 401,
+      "logical_line": 404
+    },
+    {
+      "current_line": 405,
+      "original_line": 402,
+      "logical_line": 405
+    },
+    {
+      "current_line": 406,
+      "original_line": 403,
+      "logical_line": 406
+    },
+    {
+      "current_line": 408,
+      "original_line": 405,
+      "logical_line": 408
+    },
+    {
+      "current_line": 410,
+      "original_line": 407,
+      "logical_line": 410
+    },
+    {
+      "current_line": 412,
+      "original_line": 409,
+      "logical_line": 412
+    },
+    {
+      "current_line": 414,
+      "original_line": 411,
+      "logical_line": 414
+    },
+    {
+      "current_line": 416,
+      "original_line": 413,
+      "logical_line": 416
+    },
+    {
+      "current_line": 417,
+      "original_line": 414,
+      "logical_line": 417
+    },
+    {
+      "current_line": 422,
+      "original_line": 419,
+      "logical_line": 422
+    },
+    {
+      "current_line": 423,
+      "original_line": 420,
+      "logical_line": 423
+    },
+    {
+      "current_line": 424,
+      "original_line": 421,
+      "logical_line": 424
+    },
+    {
+      "current_line": 425,
+      "original_line": 422,
+      "logical_line": 425
+    },
+    {
+      "current_line": 426,
+      "original_line": 423,
+      "logical_line": 426
+    },
+    {
+      "current_line": 427,
+      "original_line": 424,
+      "logical_line": 427
+    },
+    {
+      "current_line": 428,
+      "original_line": 425,
+      "logical_line": 428
+    },
+    {
+      "current_line": 429,
+      "original_line": 426,
+      "logical_line": 429
+    },
+    {
+      "current_line": 430,
+      "original_line": 427,
+      "logical_line": 430
+    },
+    {
+      "current_line": 431,
+      "original_line": 428,
+      "logical_line": 431
+    },
+    {
+      "current_line": 432,
+      "original_line": 429,
+      "logical_line": 432
+    },
+    {
+      "current_line": 433,
+      "original_line": 430,
+      "logical_line": 433
+    },
+    {
+      "current_line": 434,
+      "original_line": 431,
+      "logical_line": 434
+    },
+    {
+      "current_line": 435,
+      "original_line": 432,
+      "logical_line": 435
+    },
+    {
+      "current_line": 436,
+      "original_line": 433,
+      "logical_line": 436
+    },
+    {
+      "current_line": 437,
+      "original_line": 434,
+      "logical_line": 437
+    },
+    {
+      "current_line": 438,
+      "original_line": 435,
+      "logical_line": 438
+    },
+    {
+      "current_line": 439,
+      "original_line": 436,
+      "logical_line": 439
+    },
+    {
+      "current_line": 440,
+      "original_line": 437,
+      "logical_line": 440
+    },
+    {
+      "current_line": 441,
+      "original_line": 438,
+      "logical_line": 441
+    },
+    {
+      "current_line": 442,
+      "original_line": 439,
+      "logical_line": 442
+    },
+    {
+      "current_line": 443,
+      "original_line": 440,
+      "logical_line": 443
+    },
+    {
+      "current_line": 446,
+      "original_line": 443,
+      "logical_line": 446
+    },
+    {
+      "current_line": 447,
+      "original_line": 444,
+      "logical_line": 447
+    },
+    {
+      "current_line": 448,
+      "original_line": 445,
+      "logical_line": 448
+    },
+    {
+      "current_line": 449,
+      "original_line": 446,
+      "logical_line": 449
+    },
+    {
+      "current_line": 450,
+      "original_line": 447,
+      "logical_line": 450
+    },
+    {
+      "current_line": 451,
+      "original_line": 448,
+      "logical_line": 451
+    },
+    {
+      "current_line": 452,
+      "original_line": 449,
+      "logical_line": 452
+    },
+    {
+      "current_line": 453,
+      "original_line": 450,
+      "logical_line": 453
+    },
+    {
+      "current_line": 454,
+      "original_line": 451,
+      "logical_line": 454
+    },
+    {
+      "current_line": 455,
+      "original_line": 452,
+      "logical_line": 455
+    },
+    {
+      "current_line": 456,
+      "original_line": 453,
+      "logical_line": 456
+    },
+    {
+      "current_line": 457,
+      "original_line": 454,
+      "logical_line": 457
+    },
+    {
+      "current_line": 459,
+      "original_line": 456,
+      "logical_line": 459
+    },
+    {
+      "current_line": 460,
+      "original_line": 457,
+      "logical_line": 460
+    },
+    {
+      "current_line": 462,
+      "original_line": 459,
+      "logical_line": 462
+    },
+    {
+      "current_line": 464,
+      "original_line": 461,
+      "logical_line": 464
+    },
+    {
+      "current_line": 465,
+      "original_line": 462,
+      "logical_line": 465
+    },
+    {
+      "current_line": 466,
+      "original_line": 463,
+      "logical_line": 466
+    },
+    {
+      "current_line": 467,
+      "original_line": 464,
+      "logical_line": 467
+    },
+    {
+      "current_line": 468,
+      "original_line": 465,
+      "logical_line": 468
+    },
+    {
+      "current_line": 469,
+      "original_line": 466,
+      "logical_line": 469
+    },
+    {
+      "current_line": 470,
+      "original_line": 467,
+      "logical_line": 470
+    },
+    {
+      "current_line": 471,
+      "original_line": 468,
+      "logical_line": 471
+    },
+    {
+      "current_line": 472,
+      "original_line": 469,
+      "logical_line": 472
+    },
+    {
+      "current_line": 473,
+      "original_line": 470,
+      "logical_line": 473
+    },
+    {
+      "current_line": 474,
+      "original_line": 471,
+      "logical_line": 474
+    },
+    {
+      "current_line": 475,
+      "original_line": 472,
+      "logical_line": 475
+    },
+    {
+      "current_line": 476,
+      "original_line": 473,
+      "logical_line": 476
+    },
+    {
+      "current_line": 477,
+      "original_line": 474,
+      "logical_line": 477
+    },
+    {
+      "current_line": 478,
+      "original_line": 475,
+      "logical_line": 478
+    },
+    {
+      "current_line": 479,
+      "original_line": 476,
+      "logical_line": 479
+    },
+    {
+      "current_line": 480,
+      "original_line": 477,
+      "logical_line": 480
+    },
+    {
+      "current_line": 482,
+      "original_line": 479,
+      "logical_line": 482
+    },
+    {
+      "current_line": 483,
+      "original_line": 480,
+      "logical_line": 483
+    },
+    {
+      "current_line": 484,
+      "original_line": 481,
+      "logical_line": 484
+    },
+    {
+      "current_line": 485,
+      "original_line": 482,
+      "logical_line": 485
+    },
+    {
+      "current_line": 487,
+      "original_line": 484,
+      "logical_line": 487
+    },
+    {
+      "current_line": 488,
+      "original_line": 485,
+      "logical_line": 488
+    },
+    {
+      "current_line": 489,
+      "original_line": 486,
+      "logical_line": 489
+    },
+    {
+      "current_line": 490,
+      "original_line": 487,
+      "logical_line": 490
+    },
+    {
+      "current_line": 492,
+      "original_line": 489,
+      "logical_line": 492
+    },
+    {
+      "current_line": 493,
+      "original_line": 490,
+      "logical_line": 493
+    },
+    {
+      "current_line": 494,
+      "original_line": 491,
+      "logical_line": 494
+    },
+    {
+      "current_line": 496,
+      "original_line": 493,
+      "logical_line": 496
+    },
+    {
+      "current_line": 498,
+      "original_line": 495,
+      "logical_line": 498
+    },
+    {
+      "current_line": 500,
+      "original_line": 497,
+      "logical_line": 500
+    },
+    {
+      "current_line": 501,
+      "original_line": 498,
+      "logical_line": 501
+    },
+    {
+      "current_line": 504,
+      "original_line": 501,
+      "logical_line": 504
+    },
+    {
+      "current_line": 505,
+      "original_line": 502,
+      "logical_line": 505
+    },
+    {
+      "current_line": 506,
+      "original_line": 503,
+      "logical_line": 506
+    },
+    {
+      "current_line": 507,
+      "original_line": 504,
+      "logical_line": 507
+    },
+    {
+      "current_line": 508,
+      "original_line": 505,
+      "logical_line": 508
+    },
+    {
+      "current_line": 510,
+      "original_line": 507,
+      "logical_line": 510
+    },
+    {
+      "current_line": 512,
+      "original_line": 509,
+      "logical_line": 512
+    },
+    {
+      "current_line": 514,
+      "original_line": 511,
+      "logical_line": 514
+    },
+    {
+      "current_line": 516,
+      "original_line": 513,
+      "logical_line": 516
+    },
+    {
+      "current_line": 518,
+      "original_line": 515,
+      "logical_line": 518
+    },
+    {
+      "current_line": 519,
+      "original_line": 516,
+      "logical_line": 519
+    },
+    {
+      "current_line": 522,
+      "original_line": 519,
+      "logical_line": 522
+    },
+    {
+      "current_line": 523,
+      "original_line": 520,
+      "logical_line": 523
+    },
+    {
+      "current_line": 524,
+      "original_line": 521,
+      "logical_line": 524
+    },
+    {
+      "current_line": 525,
+      "original_line": 522,
+      "logical_line": 525
+    },
+    {
+      "current_line": 526,
+      "original_line": 523,
+      "logical_line": 526
+    },
+    {
+      "current_line": 528,
+      "original_line": 525,
+      "logical_line": 528
+    },
+    {
+      "current_line": 530,
+      "original_line": 527,
+      "logical_line": 530
+    },
+    {
+      "current_line": 532,
+      "original_line": 529,
+      "logical_line": 532
+    },
+    {
+      "current_line": 534,
+      "original_line": 531,
+      "logical_line": 534
+    },
+    {
+      "current_line": 536,
+      "original_line": 533,
+      "logical_line": 536
+    },
+    {
+      "current_line": 537,
+      "original_line": 534,
+      "logical_line": 537
+    },
+    {
+      "current_line": 540,
+      "original_line": 537,
+      "logical_line": 540
+    },
+    {
+      "current_line": 541,
+      "original_line": 538,
+      "logical_line": 541
+    },
+    {
+      "current_line": 542,
+      "original_line": 539,
+      "logical_line": 542
+    },
+    {
+      "current_line": 543,
+      "original_line": 540,
+      "logical_line": 543
+    },
+    {
+      "current_line": 544,
+      "original_line": 541,
+      "logical_line": 544
+    },
+    {
+      "current_line": 546,
+      "original_line": 543,
+      "logical_line": 546
+    },
+    {
+      "current_line": 548,
+      "original_line": 545,
+      "logical_line": 548
+    },
+    {
+      "current_line": 550,
+      "original_line": 547,
+      "logical_line": 550
+    },
+    {
+      "current_line": 552,
+      "original_line": 549,
+      "logical_line": 552
+    },
+    {
+      "current_line": 554,
+      "original_line": 551,
+      "logical_line": 554
+    },
+    {
+      "current_line": 555,
+      "original_line": 552,
+      "logical_line": 555
+    },
+    {
+      "current_line": 558,
+      "original_line": 555,
+      "logical_line": 558
+    },
+    {
+      "current_line": 559,
+      "original_line": 556,
+      "logical_line": 559
+    },
+    {
+      "current_line": 560,
+      "original_line": 557,
+      "logical_line": 560
+    },
+    {
+      "current_line": 561,
+      "original_line": 558,
+      "logical_line": 561
+    },
+    {
+      "current_line": 562,
+      "original_line": 559,
+      "logical_line": 562
+    },
+    {
+      "current_line": 564,
+      "original_line": 561,
+      "logical_line": 564
+    },
+    {
+      "current_line": 566,
+      "original_line": 563,
+      "logical_line": 566
+    },
+    {
+      "current_line": 568,
+      "original_line": 565,
+      "logical_line": 568
+    },
+    {
+      "current_line": 570,
+      "original_line": 567,
+      "logical_line": 570
+    },
+    {
+      "current_line": 572,
+      "original_line": 569,
+      "logical_line": 572
+    },
+    {
+      "current_line": 573,
+      "original_line": 570,
+      "logical_line": 573
+    },
+    {
+      "current_line": 576,
+      "original_line": 573,
+      "logical_line": 576
+    },
+    {
+      "current_line": 577,
+      "original_line": 574,
+      "logical_line": 577
+    },
+    {
+      "current_line": 578,
+      "original_line": 575,
+      "logical_line": 578
+    },
+    {
+      "current_line": 579,
+      "original_line": 576,
+      "logical_line": 579
+    },
+    {
+      "current_line": 581,
+      "original_line": 578,
+      "logical_line": 581
+    },
+    {
+      "current_line": 583,
+      "original_line": 580,
+      "logical_line": 583
+    },
+    {
+      "current_line": 584,
+      "original_line": 581,
+      "logical_line": 584
+    },
+    {
+      "current_line": 585,
+      "original_line": 582,
+      "logical_line": 585
+    },
+    {
+      "current_line": 587,
+      "original_line": 584,
+      "logical_line": 587
+    },
+    {
+      "current_line": 589,
+      "original_line": 586,
+      "logical_line": 589
+    },
+    {
+      "current_line": 590,
+      "original_line": 587,
+      "logical_line": 590
+    },
+    {
+      "current_line": 591,
+      "original_line": 588,
+      "logical_line": 591
+    },
+    {
+      "current_line": 594,
+      "original_line": 591,
+      "logical_line": 594
+    },
+    {
+      "current_line": 595,
+      "original_line": 592,
+      "logical_line": 595
+    },
+    {
+      "current_line": 596,
+      "original_line": 593,
+      "logical_line": 596
+    },
+    {
+      "current_line": 597,
+      "original_line": 594,
+      "logical_line": 597
+    },
+    {
+      "current_line": 598,
+      "original_line": 595,
+      "logical_line": 598
+    },
+    {
+      "current_line": 599,
+      "original_line": 596,
+      "logical_line": 599
+    },
+    {
+      "current_line": 601,
+      "original_line": 598,
+      "logical_line": 601
+    },
+    {
+      "current_line": 603,
+      "original_line": 600,
+      "logical_line": 603
+    },
+    {
+      "current_line": 604,
+      "original_line": 601,
+      "logical_line": 604
+    },
+    {
+      "current_line": 605,
+      "original_line": 602,
+      "logical_line": 605
+    },
+    {
+      "current_line": 607,
+      "original_line": 604,
+      "logical_line": 607
+    },
+    {
+      "current_line": 608,
+      "original_line": 605,
+      "logical_line": 608
+    },
+    {
+      "current_line": 609,
+      "original_line": 606,
+      "logical_line": 609
+    },
+    {
+      "current_line": 610,
+      "original_line": 607,
+      "logical_line": 610
+    },
+    {
+      "current_line": 611,
+      "original_line": 608,
+      "logical_line": 611
+    },
+    {
+      "current_line": 612,
+      "original_line": 609,
+      "logical_line": 612
+    },
+    {
+      "current_line": 613,
+      "original_line": 610,
+      "logical_line": 613
+    },
+    {
+      "current_line": 615,
+      "original_line": 612,
+      "logical_line": 615
+    },
+    {
+      "current_line": 617,
+      "original_line": 614,
+      "logical_line": 617
+    },
+    {
+      "current_line": 618,
+      "original_line": 615,
+      "logical_line": 618
+    },
+    {
+      "current_line": 621,
+      "original_line": 618,
+      "logical_line": 621
+    },
+    {
+      "current_line": 622,
+      "original_line": 619,
+      "logical_line": 622
+    },
+    {
+      "current_line": 623,
+      "original_line": 620,
+      "logical_line": 623
+    },
+    {
+      "current_line": 624,
+      "original_line": 621,
+      "logical_line": 624
+    },
+    {
+      "current_line": 625,
+      "original_line": 622,
+      "logical_line": 625
+    },
+    {
+      "current_line": 626,
+      "original_line": 623,
+      "logical_line": 626
+    },
+    {
+      "current_line": 628,
+      "original_line": 625,
+      "logical_line": 628
+    },
+    {
+      "current_line": 630,
+      "original_line": 627,
+      "logical_line": 630
+    },
+    {
+      "current_line": 631,
+      "original_line": 628,
+      "logical_line": 631
+    },
+    {
+      "current_line": 632,
+      "original_line": 629,
+      "logical_line": 632
+    },
+    {
+      "current_line": 634,
+      "original_line": 631,
+      "logical_line": 634
+    },
+    {
+      "current_line": 635,
+      "original_line": 632,
+      "logical_line": 635
+    },
+    {
+      "current_line": 636,
+      "original_line": 633,
+      "logical_line": 636
+    },
+    {
+      "current_line": 637,
+      "original_line": 634,
+      "logical_line": 637
+    },
+    {
+      "current_line": 639,
+      "original_line": 636,
+      "logical_line": 639
+    },
+    {
+      "current_line": 640,
+      "original_line": 637,
+      "logical_line": 640
+    },
+    {
+      "current_line": 641,
+      "original_line": 638,
+      "logical_line": 641
+    },
+    {
+      "current_line": 643,
+      "original_line": 640,
+      "logical_line": 643
+    },
+    {
+      "current_line": 645,
+      "original_line": 642,
+      "logical_line": 645
+    },
+    {
+      "current_line": 646,
+      "original_line": 643,
+      "logical_line": 646
+    },
+    {
+      "current_line": 649,
+      "original_line": 646,
+      "logical_line": 649
+    },
+    {
+      "current_line": 650,
+      "original_line": 647,
+      "logical_line": 650
+    },
+    {
+      "current_line": 651,
+      "original_line": 648,
+      "logical_line": 651
+    },
+    {
+      "current_line": 652,
+      "original_line": 649,
+      "logical_line": 652
+    },
+    {
+      "current_line": 653,
+      "original_line": 650,
+      "logical_line": 653
+    },
+    {
+      "current_line": 654,
+      "original_line": 651,
+      "logical_line": 654
+    },
+    {
+      "current_line": 656,
+      "original_line": 653,
+      "logical_line": 656
+    },
+    {
+      "current_line": 658,
+      "original_line": 655,
+      "logical_line": 658
+    },
+    {
+      "current_line": 659,
+      "original_line": 656,
+      "logical_line": 659
+    },
+    {
+      "current_line": 660,
+      "original_line": 657,
+      "logical_line": 660
+    },
+    {
+      "current_line": 662,
+      "original_line": 659,
+      "logical_line": 662
+    },
+    {
+      "current_line": 663,
+      "original_line": 660,
+      "logical_line": 663
+    },
+    {
+      "current_line": 664,
+      "original_line": 661,
+      "logical_line": 664
+    },
+    {
+      "current_line": 665,
+      "original_line": 662,
+      "logical_line": 665
+    },
+    {
+      "current_line": 667,
+      "original_line": 664,
+      "logical_line": 667
+    },
+    {
+      "current_line": 668,
+      "original_line": 665,
+      "logical_line": 668
+    },
+    {
+      "current_line": 669,
+      "original_line": 666,
+      "logical_line": 669
+    },
+    {
+      "current_line": 671,
+      "original_line": 668,
+      "logical_line": 671
+    },
+    {
+      "current_line": 673,
+      "original_line": 670,
+      "logical_line": 673
+    },
+    {
+      "current_line": 674,
+      "original_line": 671,
+      "logical_line": 674
+    },
+    {
+      "current_line": 677,
+      "original_line": 674,
+      "logical_line": 677
+    },
+    {
+      "current_line": 678,
+      "original_line": 675,
+      "logical_line": 678
+    },
+    {
+      "current_line": 679,
+      "original_line": 676,
+      "logical_line": 679
+    },
+    {
+      "current_line": 680,
+      "original_line": 677,
+      "logical_line": 680
+    },
+    {
+      "current_line": 681,
+      "original_line": 678,
+      "logical_line": 681
+    },
+    {
+      "current_line": 683,
+      "original_line": 680,
+      "logical_line": 683
+    },
+    {
+      "current_line": 685,
+      "original_line": 682,
+      "logical_line": 685
+    },
+    {
+      "current_line": 687,
+      "original_line": 684,
+      "logical_line": 687
+    },
+    {
+      "current_line": 688,
+      "original_line": 685,
+      "logical_line": 688
+    },
+    {
+      "current_line": 689,
+      "original_line": 686,
+      "logical_line": 689
+    },
+    {
+      "current_line": 690,
+      "original_line": 687,
+      "logical_line": 690
+    },
+    {
+      "current_line": 692,
+      "original_line": 689,
+      "logical_line": 692
+    },
+    {
+      "current_line": 694,
+      "original_line": 691,
+      "logical_line": 694
+    },
+    {
+      "current_line": 696,
+      "original_line": 693,
+      "logical_line": 696
+    },
+    {
+      "current_line": 698,
+      "original_line": 695,
+      "logical_line": 698
+    },
+    {
+      "current_line": 699,
+      "original_line": 696,
+      "logical_line": 699
+    },
+    {
+      "current_line": 702,
+      "original_line": 699,
+      "logical_line": 702
+    },
+    {
+      "current_line": 703,
+      "original_line": 700,
+      "logical_line": 703
+    },
+    {
+      "current_line": 704,
+      "original_line": 701,
+      "logical_line": 704
+    },
+    {
+      "current_line": 705,
+      "original_line": 702,
+      "logical_line": 705
+    },
+    {
+      "current_line": 706,
+      "original_line": 703,
+      "logical_line": 706
+    },
+    {
+      "current_line": 707,
+      "original_line": 704,
+      "logical_line": 707
+    },
+    {
+      "current_line": 709,
+      "original_line": 706,
+      "logical_line": 709
+    },
+    {
+      "current_line": 711,
+      "original_line": 708,
+      "logical_line": 711
+    },
+    {
+      "current_line": 712,
+      "original_line": 709,
+      "logical_line": 712
+    },
+    {
+      "current_line": 713,
+      "original_line": 710,
+      "logical_line": 713
+    },
+    {
+      "current_line": 715,
+      "original_line": 712,
+      "logical_line": 715
+    },
+    {
+      "current_line": 716,
+      "original_line": 713,
+      "logical_line": 716
+    },
+    {
+      "current_line": 717,
+      "original_line": 714,
+      "logical_line": 717
+    },
+    {
+      "current_line": 718,
+      "original_line": 715,
+      "logical_line": 718
+    },
+    {
+      "current_line": 719,
+      "original_line": 716,
+      "logical_line": 719
+    },
+    {
+      "current_line": 720,
+      "original_line": 717,
+      "logical_line": 720
+    },
+    {
+      "current_line": 721,
+      "original_line": 718,
+      "logical_line": 721
+    },
+    {
+      "current_line": 722,
+      "original_line": 719,
+      "logical_line": 722
+    },
+    {
+      "current_line": 723,
+      "original_line": 720,
+      "logical_line": 723
+    },
+    {
+      "current_line": 725,
+      "original_line": 722,
+      "logical_line": 725
+    },
+    {
+      "current_line": 727,
+      "original_line": 724,
+      "logical_line": 727
+    },
+    {
+      "current_line": 728,
+      "original_line": 725,
+      "logical_line": 728
+    },
+    {
+      "current_line": 731,
+      "original_line": 728,
+      "logical_line": 731
+    },
+    {
+      "current_line": 732,
+      "original_line": 729,
+      "logical_line": 732
+    },
+    {
+      "current_line": 733,
+      "original_line": 730,
+      "logical_line": 733
+    },
+    {
+      "current_line": 734,
+      "original_line": 731,
+      "logical_line": 734
+    },
+    {
+      "current_line": 735,
+      "original_line": 732,
+      "logical_line": 735
+    },
+    {
+      "current_line": 736,
+      "original_line": 733,
+      "logical_line": 736
+    },
+    {
+      "current_line": 738,
+      "original_line": 735,
+      "logical_line": 738
+    },
+    {
+      "current_line": 740,
+      "original_line": 737,
+      "logical_line": 740
+    },
+    {
+      "current_line": 741,
+      "original_line": 738,
+      "logical_line": 741
+    },
+    {
+      "current_line": 742,
+      "original_line": 739,
+      "logical_line": 742
+    },
+    {
+      "current_line": 744,
+      "original_line": 741,
+      "logical_line": 744
+    },
+    {
+      "current_line": 745,
+      "original_line": 742,
+      "logical_line": 745
+    },
+    {
+      "current_line": 746,
+      "original_line": 743,
+      "logical_line": 746
+    },
+    {
+      "current_line": 747,
+      "original_line": 744,
+      "logical_line": 747
+    },
+    {
+      "current_line": 748,
+      "original_line": 745,
+      "logical_line": 748
+    },
+    {
+      "current_line": 749,
+      "original_line": 746,
+      "logical_line": 749
+    },
+    {
+      "current_line": 750,
+      "original_line": 747,
+      "logical_line": 750
+    },
+    {
+      "current_line": 751,
+      "original_line": 748,
+      "logical_line": 751
+    },
+    {
+      "current_line": 752,
+      "original_line": 749,
+      "logical_line": 752
+    },
+    {
+      "current_line": 754,
+      "original_line": 751,
+      "logical_line": 754
+    },
+    {
+      "current_line": 756,
+      "original_line": 753,
+      "logical_line": 756
+    },
+    {
+      "current_line": 757,
+      "original_line": 754,
+      "logical_line": 757
+    },
+    {
+      "current_line": 760,
+      "original_line": 757,
+      "logical_line": 760
+    },
+    {
+      "current_line": 761,
+      "original_line": 758,
+      "logical_line": 761
+    },
+    {
+      "current_line": 762,
+      "original_line": 759,
+      "logical_line": 762
+    },
+    {
+      "current_line": 763,
+      "original_line": 760,
+      "logical_line": 763
+    },
+    {
+      "current_line": 765,
+      "original_line": 762,
+      "logical_line": 765
+    },
+    {
+      "current_line": 767,
+      "original_line": 764,
+      "logical_line": 767
+    },
+    {
+      "current_line": 769,
+      "original_line": 766,
+      "logical_line": 769
+    },
+    {
+      "current_line": 771,
+      "original_line": 768,
+      "logical_line": 771
+    },
+    {
+      "current_line": 773,
+      "original_line": 770,
+      "logical_line": 773
+    },
+    {
+      "current_line": 774,
+      "original_line": 771,
+      "logical_line": 774
+    },
+    {
+      "current_line": 777,
+      "original_line": 774,
+      "logical_line": 777
+    },
+    {
+      "current_line": 778,
+      "original_line": 775,
+      "logical_line": 778
+    },
+    {
+      "current_line": 779,
+      "original_line": 776,
+      "logical_line": 779
+    },
+    {
+      "current_line": 780,
+      "original_line": 777,
+      "logical_line": 780
+    },
+    {
+      "current_line": 781,
+      "original_line": 778,
+      "logical_line": 781
+    },
+    {
+      "current_line": 782,
+      "original_line": 779,
+      "logical_line": 782
+    },
+    {
+      "current_line": 784,
+      "original_line": 781,
+      "logical_line": 784
+    },
+    {
+      "current_line": 786,
+      "original_line": 783,
+      "logical_line": 786
+    },
+    {
+      "current_line": 787,
+      "original_line": 784,
+      "logical_line": 787
+    },
+    {
+      "current_line": 788,
+      "original_line": 785,
+      "logical_line": 788
+    },
+    {
+      "current_line": 790,
+      "original_line": 787,
+      "logical_line": 790
+    },
+    {
+      "current_line": 791,
+      "original_line": 788,
+      "logical_line": 791
+    },
+    {
+      "current_line": 792,
+      "original_line": 789,
+      "logical_line": 792
+    },
+    {
+      "current_line": 793,
+      "original_line": 790,
+      "logical_line": 793
+    },
+    {
+      "current_line": 794,
+      "original_line": 791,
+      "logical_line": 794
+    },
+    {
+      "current_line": 795,
+      "original_line": 792,
+      "logical_line": 795
+    },
+    {
+      "current_line": 796,
+      "original_line": 793,
+      "logical_line": 796
+    },
+    {
+      "current_line": 798,
+      "original_line": 795,
+      "logical_line": 798
+    },
+    {
+      "current_line": 800,
+      "original_line": 797,
+      "logical_line": 800
+    },
+    {
+      "current_line": 801,
+      "original_line": 798,
+      "logical_line": 801
+    },
+    {
+      "current_line": 804,
+      "original_line": 801,
+      "logical_line": 804
+    },
+    {
+      "current_line": 805,
+      "original_line": 802,
+      "logical_line": 805
+    },
+    {
+      "current_line": 806,
+      "original_line": 803,
+      "logical_line": 806
+    },
+    {
+      "current_line": 807,
+      "original_line": 804,
+      "logical_line": 807
+    },
+    {
+      "current_line": 808,
+      "original_line": 805,
+      "logical_line": 808
+    },
+    {
+      "current_line": 810,
+      "original_line": 807,
+      "logical_line": 810
+    },
+    {
+      "current_line": 811,
+      "original_line": 808,
+      "logical_line": 811
+    },
+    {
+      "current_line": 813,
+      "original_line": 810,
+      "logical_line": 813
+    },
+    {
+      "current_line": 814,
+      "original_line": 811,
+      "logical_line": 814
+    },
+    {
+      "current_line": 815,
+      "original_line": 812,
+      "logical_line": 815
+    },
+    {
+      "current_line": 817,
+      "original_line": 814,
+      "logical_line": 817
+    },
+    {
+      "current_line": 819,
+      "original_line": 816,
+      "logical_line": 819
+    },
+    {
+      "current_line": 820,
+      "original_line": 817,
+      "logical_line": 820
+    },
+    {
+      "current_line": 827,
+      "original_line": 827,
+      "logical_line": 822
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Diff classification, not new runtime validation."
+}

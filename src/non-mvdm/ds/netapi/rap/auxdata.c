@@ -194,5 +194,3 @@ Return Value:
     }
 
 } // RapAuxDataCount
-
-

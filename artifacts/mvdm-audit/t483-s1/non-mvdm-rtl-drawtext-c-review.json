@@ -1,0 +1,48 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+  "before_sha256": "a62ed13562045c87e524f29590eec28376eeb526fb80e407b8943df275d09204",
+  "current_sha256": "87b683c3972700d1980b68ea4fd2b46f40c12419d51624422659ef6629a29665",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep target-private precomp for selected original text functions and finite native GDI/allocation leaves.",
+    "Keep original system-font and MM_TEXT predicate.",
+    "Keep original selected parser including trailing terminator and packed count contract.",
+    "Reconcile all drawing/string contexts then simplify redundant mnemonic selector and restore original function order; keep needed fixture exclusions until providers compose.",
+    "Keep per-call scratch instead of shared static array; retain single parser/output path.",
+    "Keep negative/null/overflow refusal, SIZE_T arithmetic and >=255 heap threshold.",
+    "Keep one finally cleanup for heap buffer and saved background, preserving LastError and propagating exception.",
+    "Trace reached native text measurement failure contract before changing original unchecked size use; do not silently add generic fallback.",
+    "Identify the reached text-layout owner and its contract. A modern Win32 DrawText boundary may be correct and minimal; retain it when justified. Restore original logic only for required MVDM semantics not supplied by that boundary; ask owner about genuine architectural tradeoffs. Reconcile detached conditions separately."
+  ],
+  "counter_review": [
+    "Native leaves do not establish equivalence of omitted DrawText engine.",
+    "Do not replace predicate with unconditional fast-font assumption.",
+    "Returned count packing and source lookahead remain original; do not claim arbitrary nonterminated spans safe.",
+    "Unconditional inclusion without fixture dependency changes is not equivalent.",
+    "Injected reentry is mechanism evidence, not proof of observed native GDI callback in production.",
+    "Do not collapse capacity to original off-by-one; size arithmetic is x86 relevant.",
+    "No exception swallowing or second drawing path; cleanup callback failures themselves not proven covered.",
+    "Existing fixture always supplies successful extent, so cannot prove failure behavior safe; no runtime defect asserted.",
+    "Cannot treat modern DrawText availability or absent direct call as proof of equivalence; exclude FE profile separately."
+  ],
+  "evidence": [
+    "src/wow32-dll/include/control-drawing/precomp.h;tools/build/New-T404S5Wow32ProviderNinja.ps1:615-620",
+    "src/non-mvdm/windows/core/ntuser/client/drawtext.c:59",
+    "test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c;src/non-mvdm/windows/core/ntuser/rtl/text.c:35",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1:104-108,127",
+    "test/adapter-mvdm-host-out/wow/wow_mnemonic_drawing_fixture.c:35-51,101-103",
+    "drawtext.c GetPrefixCount final store;wow_mnemonic_drawing_fixture.c:104-128",
+    "wow_mnemonic_drawing_fixture.c:113-124;src/wow32-dll/source/ntuser_rtl_compat.c",
+    "PSMTextOut extent calls;wow_mnemonic_drawing_fixture.c:62-67",
+    "OpenNT/windows/core/ntuser/rtl/drawtext.c;selected client DrawText consumers"
+  ],
+  "entries_added": 9,
+  "format_sites": 4,
+  "limits": [
+    "No fresh build/runtime.",
+    "Production reentry not established by injected fixture.",
+    "Omitted engine and measurement failures remain pending."
+  ],
+  "owner_boundary_clarification": "Modern Win32 can be the correct MVDM closure boundary. Omission is not a defect; assess reached contracts, ownership and minimality. Owner decides legitimate policy tradeoffs before implementation."
+}

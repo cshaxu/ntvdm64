@@ -1,0 +1,575 @@
+{
+  "path": "src/mvdm-host/wow32/wdde.c",
+  "original_sha256": "859efd3356f46b646af8373112297212de2016de9a2587af580d6d99b64df6aa",
+  "current_sha256": "d46ec86968c0892dab8f2afdb910b7bfa08764d33b0852d903650b3be424b742",
+  "changes": [
+    {
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "VOID WI32DDEAddInitiator (HAND16 Initiator)"
+      ],
+      "current": [
+        "BOOL WI32DDEAddInitiator (HAND16 Initiator)"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain BOOL publication result and matching callers so failed INITIATE node allocation is not later treated as successful ownership.",
+      "evidence": "WI32DDEAddInitiator returns TRUE only after linked-list insertion and FALSE on allocation failure. wmsg16 and wmdisp32 use actual publication state for deletion.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 54,
+      "original_count": 0,
+      "current_start": 54,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        return (TRUE);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain BOOL publication result and matching callers so failed INITIATE node allocation is not later treated as successful ownership.",
+      "evidence": "WI32DDEAddInitiator returns TRUE only after linked-list insertion and FALSE on allocation failure. wmsg16 and wmdisp32 use actual publication state for deletion.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 63,
+      "original_count": 0,
+      "current_start": 65,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        return (FALSE);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain BOOL publication result and matching callers so failed INITIATE node allocation is not later treated as successful ownership.",
+      "evidence": "WI32DDEAddInitiator returns TRUE only after linked-list insertion and FALSE on allocation failure. wmsg16 and wmdisp32 use actual publication state for deletion.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 236,
+      "original_count": 1,
+      "current_start": 240,
+      "current_count": 1,
+      "original": [
+        "HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo)"
+      ],
+      "current": [
+        "HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo, PDDECONVERSION pConversion)"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 243,
+      "original_count": 0,
+      "current_start": 247,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    BOOL fFailed = FALSE;"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 328,
+      "original_count": 1,
+      "current_start": 334,
+      "current_count": 5,
+      "original": [
+        "                    DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hDib16, hDib32, pDdeInfo);"
+      ],
+      "current": [
+        "                    if (!hDib16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                        (HAND16)hDib16, hDib32, pDdeInfo)) {",
+        "                        if (hDib16) GlobalUnlockFree16(GlobalLock16(hDib16, NULL));",
+        "                        fFailed = TRUE;",
+        "                    }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 384,
+      "original_count": 1,
+      "current_start": 395,
+      "current_count": 5,
+      "original": [
+        "                            DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);"
+      ],
+      "current": [
+        "                            if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                                (HAND16)hMF16, hMF32, pDdeInfo)) {",
+        "                                if (hMF16) GlobalUnlockFree16(GlobalLock16(hMF16, NULL));",
+        "                                fFailed = TRUE;",
+        "                            }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 408,
+      "original_count": 1,
+      "current_start": 424,
+      "current_count": 5,
+      "original": [
+        "                            DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMeta16, hMeta32, pDdeInfo);"
+      ],
+      "current": [
+        "                            if (!DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                                (HAND16)hMeta16, hMeta32, pDdeInfo)) {",
+        "                                GlobalUnlockFree16(GlobalLock16(hMeta16, NULL));",
+        "                                fFailed = TRUE;",
+        "                            }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 410,
+      "original_count": 1,
+      "current_start": 431,
+      "current_count": 1,
+      "original": [
+        "                            if (hMF32) {"
+      ],
+      "current": [
+        "                            if (!fFailed && hMF32) {"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 413,
+      "original_count": 1,
+      "current_start": 434,
+      "current_count": 5,
+      "original": [
+        "                                DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);"
+      ],
+      "current": [
+        "                                if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                                    (HAND16)hMF16, hMF32, pDdeInfo)) {",
+        "                                    if (hMF16) GlobalUnlockFree16(GlobalLock16(hMF16, NULL));",
+        "                                    fFailed = TRUE;",
+        "                                }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 421,
+      "original_count": 0,
+      "current_start": 447,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                        }",
+        "                        else {",
+        "                            fFailed = TRUE;"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 438,
+      "original_count": 0,
+      "current_start": 468,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "    if (fFailed) {",
+        "        DDERollback16(pConversion, To_hwnd, From_hwnd);",
+        "        if (h16) GlobalUnlockFree16(GlobalLock16(h16, NULL));",
+        "        return (0);",
+        "    }",
+        ""
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 449,
+      "original_count": 1,
+      "current_start": 486,
+      "current_count": 1,
+      "original": [
+        "HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo)"
+      ],
+      "current": [
+        "HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo, PDDECONVERSION pConversion)"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 456,
+      "original_count": 0,
+      "current_start": 493,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    BOOL fFailed = FALSE;"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 535,
+      "original_count": 1,
+      "current_start": 574,
+      "current_count": 5,
+      "original": [
+        "                    DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hDib16, hDib32, pDdeInfo);"
+      ],
+      "current": [
+        "                    if (!hDib32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                        (HAND16)hDib16, hDib32, pDdeInfo)) {",
+        "                        if (hDib32) GlobalFree(hDib32);",
+        "                        fFailed = TRUE;",
+        "                    }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 586,
+      "original_count": 0,
+      "current_start": 630,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                            /* The mark callback below may reenter guest code.  Do",
+        "                             * not dereference this flat guest view after it. */",
+        "                            hMF16 = FETCHWORD(lpMemMeta16->hMF);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain hMF16 read before DDETrackhandle can reenter guest; do not re-resolve by an unrelated memory API. Keep failure gate for subsequent conversion.",
+      "evidence": "DDETrackhandle calls DDEAddhandle -> W32MarkDDEHandle -> CallBack16, a real guest reentry boundary; original later lpMemMeta16 dereference can outlive that flat view.",
+      "missing_evidence": "Runtime segment-relocation validation remains part of future repair verification, not a claimed test here."
+    },
+    {
+      "original_start": 589,
+      "original_count": 1,
+      "current_start": 637,
+      "current_count": 5,
+      "original": [
+        "                            DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMeta16, hMeta32, pDdeInfo);"
+      ],
+      "current": [
+        "                            if (!DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                                (HAND16)hMeta16, hMeta32, pDdeInfo)) {",
+        "                                GlobalFree(hMeta32);",
+        "                                fFailed = TRUE;",
+        "                            }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 591,
+      "original_count": 3,
+      "current_start": 644,
+      "current_count": 1,
+      "original": [
+        "                            hMF16 = FETCHWORD(lpMemMeta16->hMF);",
+        "",
+        "                            if (hMF16) {"
+      ],
+      "current": [
+        "                            if (!fFailed && hMF16) {"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain hMF16 read before DDETrackhandle can reenter guest; do not re-resolve by an unrelated memory API. Keep failure gate for subsequent conversion.",
+      "evidence": "DDETrackhandle calls DDEAddhandle -> W32MarkDDEHandle -> CallBack16, a real guest reentry boundary; original later lpMemMeta16 dereference can outlive that flat view.",
+      "missing_evidence": "Runtime segment-relocation validation remains part of future repair verification, not a claimed test here."
+    },
+    {
+      "original_start": 596,
+      "original_count": 1,
+      "current_start": 648,
+      "current_count": 5,
+      "original": [
+        "                                DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);"
+      ],
+      "current": [
+        "                                if (!hMF32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,",
+        "                                                    (HAND16)hMF16, hMF32, pDdeInfo)) {",
+        "                                    if (hMF32) DeleteMetaFile(hMF32);",
+        "                                    fFailed = TRUE;",
+        "                                }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 599,
+      "original_count": 1,
+      "current_start": 656,
+      "current_count": 3,
+      "original": [
+        "                            lpMemMeta32->hMF = (HMETAFILE) hMF32;"
+      ],
+      "current": [
+        "                            if (!fFailed) {",
+        "                                lpMemMeta32->hMF = (HMETAFILE) hMF32;",
+        "                            }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 616,
+      "original_count": 0,
+      "current_start": 677,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    if (fFailed) {",
+        "        DDERollback32(pConversion, To_hwnd, From_hwnd);",
+        "        if (h32) GlobalFree(h32);",
+        "        return (NULL);",
+        "    }"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep conversion failure tracking pending joint audit of DDECopyhData16/32 and their wmsg16/wmdisp32 owners. Prove every created subobject is either transferred or rolled back exactly once, with original allocator and type-specific release.",
+      "evidence": "Copy helpers now receive call-local DDECONVERSION, propagate failed alias/subobject creation, gate later operations and roll back before freeing outer packet. Callers initialize conversion and track outer pair.",
+      "missing_evidence": "All DIB/METAFILEPICT/metafile allocation and lock failure boundaries, reentry between alias publication and tracking, and exception unwinding; service-double tests do not prove complete guest conversion behavior."
+    },
+    {
+      "original_start": 653,
+      "original_count": 1,
+      "current_start": 720,
+      "current_count": 5,
+      "original": [
+        "            W32MarkDDEHandle (hMem16);"
+      ],
+      "current": [
+        "            if (!W32MarkDDEHandle(hMem16)) {",
+        "                /* DIV-354: wrapper rejection occurred before original guest entry. */",
+        "                DDEDeletehandle(hMem16, hMem32);",
+        "                return (FALSE);",
+        "            }"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain callback admission return propagation through W32MarkDDEHandle and remove newly published alias when admission fails. Keep guest callback result distinct from native admission status.",
+      "evidence": "W32MarkDDEHandle returns CallBack16 BOOL, not vp guest return. Fixture rejects mark before entry and separately checks guest zero result is still successful admission.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 668,
+      "original_count": 0,
+      "current_start": 740,
+      "current_count": 75,
+      "original": [],
+      "current": [
+        "VOID DDEBeginConversion(PDDECONVERSION pConversion)",
+        "{",
+        "    pConversion->Count = 0;",
+        "}",
+        "",
+        "",
+        "BOOL DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd,",
+        "                    HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo)",
+        "{",
+        "    DDECONVERSIONPAIR *pPair;",
+        "",
+        "    if (pConversion->Count == DDE_CONVERSION_MAX_PAIRS) {",
+        "        WOW32ASSERT(FALSE);",
+        "        return (FALSE);",
+        "    }",
+        "",
+        "    if (!DDEAddhandle(To_hwnd, From_hwnd, hMem16, hMem32, pDdeInfo)) {",
+        "        return (FALSE);",
+        "    }",
+        "",
+        "    pPair = &pConversion->Pair[pConversion->Count++];",
+        "    pPair->h16 = hMem16;",
+        "    pPair->h32 = hMem32;",
+        "    pPair->Flags = pDdeInfo->Flags;",
+        "    return (TRUE);",
+        "}",
+        "",
+        "",
+        "VOID DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)",
+        "{",
+        "    DDECONVERSIONPAIR *pPair;",
+        "",
+        "    while (pConversion->Count) {",
+        "        pPair = &pConversion->Pair[--pConversion->Count];",
+        "        if (DDEFindPair32(To_hwnd, From_hwnd, pPair->h16) == pPair->h32) {",
+        "            W32UnMarkDDEHandle(pPair->h16);",
+        "            if (DDEDeletehandle(pPair->h16, pPair->h32)) {",
+        "                GlobalUnlockFree16(GlobalLock16(pPair->h16, NULL));",
+        "            }",
+        "        }",
+        "    }",
+        "}",
+        "",
+        "",
+        "VOID DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)",
+        "{",
+        "    DDECONVERSIONPAIR *pPair;",
+        "",
+        "    while (pConversion->Count) {",
+        "        pPair = &pConversion->Pair[--pConversion->Count];",
+        "        if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16 &&",
+        "                DDEDeletehandle(pPair->h16, pPair->h32)) {",
+        "            /* DIVERGENCE(MVDM-HOST-DIV-363): the original HDDE list is the",
+        "             * sole alias authority.  A failed post must not clear a shared",
+        "             * guest arena mark while another live pair still names it. */",
+        "            if (!DDEFindNode16(pPair->h16)) {",
+        "                W32UnMarkDDEHandle(pPair->h16);",
+        "                /* DIVERGENCE(MVDM-HOST-DIV-363): WM_DDE_EXECUTE may create",
+        "                 * a unique 16-bit alias which the normal ACK path frees.",
+        "                 * A rejected post has no ACK, so retire only that alias. */",
+        "                if (pPair->Flags & DDE_EXECUTE_FREE_H16) {",
+        "                    GlobalUnlockFree16(GlobalLock16(pPair->h16, NULL));",
+        "                }",
+        "            }",
+        "            if (pPair->Flags & DDE_METAFILE) {",
+        "                DeleteMetaFile(pPair->h32);",
+        "            }",
+        "            else {",
+        "                GlobalFree(pPair->h32);",
+        "            }",
+        "        }",
+        "    }",
+        "}",
+        "",
+        ""
+      ],
+      "decision": "pending",
+      "change_plan": "Audit DDEBeginConversion/Track/Rollback16/Rollback32 as one ownership unit. Retain original HDDE list as authority; prove bounded pair capacity, publication-before-mark reentry, and both rollback directions. Simplify duplicate bookkeeping only if rollback can still identify this conversion without affecting peers.",
+      "evidence": "Track appends local pair only after DDEAddhandle returns from guest mark. Rollback16 unmarks before deleting, while Rollback32 deletes then checks remaining h16 peers. DDE alias fixture tests shared-peer rollback32, EXECUTE alias release and failed post packet cleanup; no complete mirror conversion/reentry proof.",
+      "missing_evidence": "Publication-to-track exceptional escape; rollback16 shared alias and reentrant deletion/reuse; exact max-pair bound across every format; mark/unmark failure behavior. No confirmed runtime failure claimed."
+    },
+    {
+      "original_start": 677,
+      "original_count": 0,
+      "current_start": 825,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-351): the absent pair also includes an empty list. */",
+        "    if (!phTemp1) return (FALSE);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain early FALSE on empty list; same absent-node contract as original traversal, without dereferencing NULL.",
+      "evidence": "Original immediately dereferences first node; failed/partial conversion may publish none. Existing alias/COPYDATA fixtures exercise empty or repeated cleanup.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 818,
+      "original_count": 1,
+      "current_start": 969,
+      "current_count": 1,
+      "original": [
+        "VOID W32MarkDDEHandle (HAND16 hMem16)"
+      ],
+      "current": [
+        "BOOL W32MarkDDEHandle (HAND16 hMem16)"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain callback admission return propagation through W32MarkDDEHandle and remove newly published alias when admission fails. Keep guest callback result distinct from native admission status.",
+      "evidence": "W32MarkDDEHandle returns CallBack16 BOOL, not vp guest return. Fixture rejects mark before entry and separately checks guest zero result is still successful admission.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 825,
+      "original_count": 1,
+      "current_start": 976,
+      "current_count": 1,
+      "original": [
+        "    CallBack16(RET_WOWDDEFREEHANDLE, &Parm16, 0, &vp);"
+      ],
+      "current": [
+        "    return CallBack16(RET_WOWDDEFREEHANDLE, &Parm16, 0, &vp);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain callback admission return propagation through W32MarkDDEHandle and remove newly published alias when admission fails. Keep guest callback result distinct from native admission status.",
+      "evidence": "W32MarkDDEHandle returns CallBack16 BOOL, not vp guest return. Fixture rejects mark before entry and separately checks guest zero result is still successful admission.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 988,
+      "original_count": 0,
+      "current_start": 1139,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: not an embedded payload. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain COPYDATA_HEADER provenance filter with both header publication sites; preserve original list and HWND/data matching.",
+      "evidence": "Same original COPYDATA list stores header and embedded data. wmsg16/wmdisp32 tag header nodes; lookup must not interpret a payload node as COPYDATASTRUCT. Lifetime fixture covers nested header/payload conversion.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1008,
+      "original_count": 0,
+      "current_start": 1161,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: same original list. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain COPYDATA_HEADER provenance filter with both header publication sites; preserve original list and HWND/data matching.",
+      "evidence": "Same original COPYDATA list stores header and embedded data. wmsg16/wmdisp32 tag header nodes; lookup must not interpret a payload node as COPYDATASTRUCT. Lifetime fixture covers nested header/payload conversion.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1029,
+      "original_count": 0,
+      "current_start": 1184,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-344): rollback may have no published node. */",
+        "    if (!pTemp1) return FALSE;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain early FALSE on empty list; same absent-node contract as original traversal, without dereferencing NULL.",
+      "evidence": "Original immediately dereferences first node; failed/partial conversion may publish none. Existing alias/COPYDATA fixtures exercise empty or repeated cleanup.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "line_basis": "LF only, not form-feed",
+  "limits": "All diff chunks classified; pending is not confirmed bug, repair or runtime proof."
+}

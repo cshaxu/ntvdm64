@@ -1,9 +1,20 @@
+/*++ build version: 0002    // increment this if a change has global effects
+
+/****************************** Module Header ******************************\
+* Module Name: user.h
+*
+* Copyright (c) 1985-95, Microsoft Corporation
+*
+* This header file contains stuff shared by all the modules of the USER.DLL.
+*
+* History:
+* 09-18-90 DarrinM      Created.
+* 04-27-91 DarrinM      Merged in USERCALL.H, removed some dead wood.
+\***************************************************************************/
+
 #ifndef _USER_
 #define _USER_
-/* Copyright (c) Microsoft Corporation. Original USER object type subset.
- * DIVERGENCE(OPENNT-HOST-063): retain the unchanged selected type constants
- * for original handtabl.c ownership classification; client-view layouts are
- * separately opt-in below. No native modern USER layout is assumed. */
+
 #ifndef OPENNT_USER_OBJECT_TYPES_SUBSET_H
 #define OPENNT_USER_OBJECT_TYPES_SUBSET_H
 /* OPENNT-HOST-074: original process class-table indices used by comboini.c. */
@@ -437,26 +448,38 @@ typedef struct tagCOMMON_WNDCLASS
 
 #line 1323
 typedef struct tagCLS {
-#line 1325
+    /* NOTE: The order of the following fields is assumed. */
     struct tagCLS *pclsNext;
     ATOM        atomClassName;
-    WORD        fnid;
-    PVOID       hheapDesktop;
-    struct tagDESKTOP *rpdeskParent;
-    struct tagDCE *pdce;
-    int         cWndReferenceCount;
-    DWORD       flags;
-    LPSTR       lpszClientAnsiMenuName;
-    LPWSTR      lpszClientUnicodeMenuName;
-#line 1342
+    WORD        fnid;               // record window proc used by this hwnd
+                                    // access through GETFNID
+    PVOID       hheapDesktop;       /* Allocation source */
+    struct tagDESKTOP *rpdeskParent;/* Parent desktop */
+    struct tagDCE *pdce;            /* PDCE to DC associated with class */
+    int         cWndReferenceCount; /* The number of windows registered
+                                       with this class */
+    DWORD       flags;              /* internal class flags */
+    LPSTR       lpszClientAnsiMenuName;     /* string or resource ID */
+    LPWSTR      lpszClientUnicodeMenuName;  /* string or resource ID */
+
+    /*
+     * These DWORDs are used by WOW only.  See wow32\walias.c for the WC
+     * structure definition.
+     */
     DWORD       adwWOW[2];
-    DWORD       hTaskWow;
-    struct tagCALLPROCDATA *spcpdFirst;
-    struct tagCLS *pclsBase;
-    struct tagCLS *pclsClone;
-    PROC        lpfnWorker;
-#line 1351
+                                    /* LATER: No one uses dwExpWinVer. wow? */
+    DWORD       hTaskWow;           /* LATER: is wow using this? */
+    struct tagCALLPROCDATA *spcpdFirst;      /* Pointer to first CallProcData element (or 0) */
+    struct tagCLS *pclsBase;        /* Pointer to base class */
+    struct tagCLS *pclsClone;       /* Pointer to clone class list */
+
+    PROC        lpfnWorker;         /* Client side worker proc */
+
     COMMON_WNDCLASS;
+    /*
+     * WARNING:
+     * CFOFFSET expects COMMON_WNDCLASS to be last fields in CLS
+     */
 } CLS, *LPCLS, **PPCLS;
 #endif
 

@@ -1,0 +1,256 @@
+{
+  "path": "src/mvdm-host/wow32/wparam.c",
+  "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+  "current_sha256": "0131ce3113859ab30c69ce29d9977252c9f856ac04f7a70d7a5d45cab06230ff",
+  "changes": [
+    {
+      "original_start": 93,
+      "original_count": 0,
+      "current_start": 95,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-347): NULL is never a mapped input. */",
+        "    if (!lParam) return 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Zero native input must not match another entry whose GetPModeVDMPointer refresh fails with NULL; preserve zero as no mapping.",
+      "change_plan": "Retain existing same-owner map repair; no new state machine or map.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 192,
+      "original_count": 0,
+      "current_start": 198,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    BOOL updated = FALSE;",
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-347): preserve the nonzero map invariant. */",
+        "    if (!dwPtr32 || !dwPtr16) return NULL;"
+      ],
+      "decision": "retain",
+      "necessity": "Reject zero native/guest pairs before insertion, and track whether existing-node refresh succeeded.",
+      "change_plan": "Retain existing same-owner map repair; no new state machine or map.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 200,
+      "original_count": 1,
+      "current_start": 212,
+      "current_count": 16,
+      "original": [
+        "        ParamMapUpdateNode(dwPtr32, PARAM_32, lpn); // just update the node "
+      ],
+      "current": [
+        "        /* DIV-347: keep the pin across segment-fault callbacks, but unwind it. */",
+        "        __try {",
+        "            updated = ParamMapUpdateNode(dwPtr32, PARAM_32, lpn) != NULL;",
+        "        } __finally {",
+        "            if (AbnormalTermination()) {",
+        "                DWORD error = GetLastError();",
+        "                DeleteParamMap(dwPtr16, PARAM_16, NULL);",
+        "                SetLastError(error);",
+        "            }",
+        "        }",
+        "        if (!updated) {",
+        "            DWORD error = GetLastError();",
+        "            DeleteParamMap(dwPtr16, PARAM_16, NULL);",
+        "            SetLastError(error);",
+        "            return NULL;",
+        "        }"
+      ],
+      "decision": "retain",
+      "necessity": "Original increments reference before potentially reentrant GetPModeVDMPointer; retain the pin while updating, undo only this increment on false return or SEH, preserve LastError and propagate exception.",
+      "change_plan": "Retain existing same-owner map repair; no new state machine or map.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 291,
+      "original_count": 0,
+      "current_start": 293,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-347): failed refresh must not publish NULL. */",
+        "    if (!pv) return NULL;"
+      ],
+      "decision": "retain",
+      "necessity": "Failed refresh returns NULL without replacing cached valid address or adding a NULL alias.",
+      "change_plan": "Retain existing same-owner map repair; no new state machine or map.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 51,
+      "original_count": 1,
+      "current_start": 52,
+      "current_count": 1,
+      "original": [
+        "  DWORD cbExtra;     // buffer size"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 209,
+      "original_count": 1,
+      "current_start": 238,
+      "current_count": 1,
+      "original": [
+        "            lpn->cbExtra = 0;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 221,
+      "original_count": 32,
+      "current_start": 252,
+      "current_count": 1,
+      "original": [
+        "",
+        "PVOID AddParamMapEx(DWORD dwPtr16, DWORD cbExtra)",
+        "{",
+        "    LPPARAMNODE lpn;",
+        "    FINDPARAM fp;",
+        "",
+        "    // see if it's there already",
+        "    if (FindParamMap(&fp, dwPtr16, PARAM_16)) {",
+        "        lpn = fp.lpNode;",
+        "        if (lpn->cbExtra == cbExtra) {",
+        "            ++lpn->dwRefCount;",
+        "        }",
+        "        else {",
+        "            WOW32ASSERTMSG(FALSE, (\"\\nWOW32: AddParamEx misused. Please contact VadimB or DOSWOW alias\\n\"));",
+        "            lpn = NULL;",
+        "        }",
+        "    }",
+        "    else { ",
+        "        if (NULL != (lpn = CacheBlockAllocate(&gParamMap.blkCache, sizeof(*lpn) + cbExtra))) {",
+        "            lpn->dwPtr32 = (DWORD)(PVOID)(lpn+1);",
+        "            lpn->dwPtr16 = dwPtr16;",
+        "            lpn->pNext   = gParamMap.pHead;",
+        "            lpn->dwRefCount = 1;",
+        "            lpn->cbExtra = cbExtra;",
+        "            lpn->htask16 = CURRENTPTD()->htask16;",
+        "            gParamMap.pHead = lpn;",
+        "        }",
+        "    }",
+        "",
+        "    return lpn ? (PVOID)lpn->dwPtr32 : NULL;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 285,
+      "original_count": 4,
+      "current_start": 288,
+      "current_count": 1,
+      "original": [
+        "    else ",
+        "    if (0 < lpn->cbExtra) {",
+        "        return (PVOID)lpn->dwPtr32;",
+        "    }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 337,
+      "original_count": 1,
+      "current_start": 343,
+      "current_count": 1,
+      "original": [
+        "                *pfFreePtr = !!lpn->cbExtra;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 463,
+      "original_count": 7,
+      "current_start": 472,
+      "current_count": 1,
+      "original": [
+        "#define LINK_WORKLIST(pc, pNew, pLast) \\",
+        "if (NULL == pLast) { \\",
+        "    pc->pCacheHead = pNew; \\",
+        "} \\",
+        "else { \\",
+        "    pLast->pNext = pNew; \\",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 531,
+      "original_count": 2,
+      "current_start": 539,
+      "current_count": 1,
+      "original": [
+        "                pbh->pNext = pc->pCacheHead;",
+        "                pc->pCacheHead = pbh;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 558,
+      "original_count": 23,
+      "current_start": 568,
+      "current_count": 1,
+      "original": [
+        "        PBLKHEADER pbhf = pc->pCacheHead;",
+        "        PBLKHEADER pbhLast = NULL;",
+        "        ",
+        "        // remove from the list of working nodes",
+        "        while (NULL != pbhf && pbhf != pbh) {",
+        "            pbhLast = pbhf;",
+        "            pbhf = pbhf->pNext;",
+        "        }",
+        "",
+        "        if (NULL != pbhf) {",
+        "",
+        "            // link in pbh->pNext into a worklist",
+        "",
+        "            LINK_WORKLIST(pc, pbh->pNext, pbhLast); ",
+        "        } ",
+        "        else {",
+        "            LOGDEBUG(LOG_ALWAYS, (\"Alert! CacheBlockFree - invalid ptr\\n\"));",
+        "            return;",
+        "        }",
+        "        ",
+        "        pbhf = pc->pCacheFree;",
+        "        pbhLast = NULL;",
+        "        "
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Original FindParamMap/AddParamMap/ParamMapUpdateNode/DeleteParamMap compared as a group. wmsg16.c consumes AddParamMap for text conversion; verify-wow-parameter-map.ps1 extracts actual owner bodies; fixture covers NULL pair/lookup, failed refresh, SEH rollback, nested borrow, relocation aliases and task purge.",
+  "limits": [
+    "Audit classification only; no new test execution or full guest integration pass.",
+    "Source-derived LF logical-line mismatches require compiler verification.",
+    "Existing exclusions are inventoried, not newly certified across all build contexts.",
+    "Fixture simulates guest pointer refresh and nested borrow; task deletion during refresh is not proved by its later task-purge case. No new claim of whole-map thread safety."
+  ]
+}

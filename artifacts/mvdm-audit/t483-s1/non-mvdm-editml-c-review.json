@@ -1,0 +1,346 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+  "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+  "current_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+  "excluded": [
+    {
+      "original_start": 33,
+      "original_count": 4,
+      "current_start": 35,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset) {",
+        "        return (* ped->lpfnCharset)(ped, EDITINTL_MLGETLINEWIDTH,",
+        "                hdc, lpstr, nCnt);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 518,
+      "original_count": 4,
+      "current_start": 520,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset) {",
+        "        xOffset = (int)(* ped->lpfnCharset(ped, EDITINTL_MLICHTOXY, hdc,",
+        "                iline, pLineStart, cch);",
+        "    } else {"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 532,
+      "original_count": 1,
+      "current_start": 534,
+      "current_count": 1,
+      "original": [
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 572,
+      "original_count": 3,
+      "current_start": 577,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset) {",
+        "        return (ICH)(* ped->lpfnCharset)(ped, EDITINTL_MLMOUSETOICH, hdc, mousePt);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1393,
+      "original_count": 7,
+      "current_start": 1399,
+      "current_count": 1,
+      "original": [
+        "                if (ped->lpfnCharset) {",
+        "                    ichLineEnd = ichLineStart +",
+        "                        (ICH)(* ped->lpfnCharset)(ped, EDITINTL_CCHINWIDTH,",
+        "                                hdc, (LPSTR)(ptext+ichLineStart * ped->cbChar),",
+        "                                ichCRLF - ichLineStart,",
+        "                                ped->rcFmt.right-ped->rcFmt.left, TRUE);",
+        "                } else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1482,
+      "original_count": 6,
+      "current_start": 1484,
+      "current_count": 1,
+      "original": [
+        "        if (!ISDELIMETERAW((*(ptext + (ichLineEnd - 1)*ped->cbChar))) && ISDELIMETERAW((*(ptext + ichLineEnd*ped->cbChar)))) #ERROR",
+        "",
+        "            if ((*(ptext + ichLineEnd - 1) != ' ' &&",
+        "                        *(ptext + ichLineEnd - 1) != VK_TAB) &&",
+        "                        (*(ptext + ichLineEnd) == ' ' ||",
+        "                        *(ptext + ichLineEnd) == VK_TAB))"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1746,
+      "original_count": 1,
+      "current_start": 1745,
+      "current_count": 1,
+      "original": [
+        "            if (GetDlgItem(ped->hwndParent, IDCANCEL))"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2346,
+      "original_count": 9,
+      "current_start": 2348,
+      "current_count": 1,
+      "original": [
+        "    if (!ped->fAutoVScroll) {",
+        "",
+        "        /*",
+        "         * Empty the undo buffer if this edit control limits the amount of text",
+        "         * the user can add to the window rect. This is so that we can undo this",
+        "         * operation if doing in causes us to exceed the window boundaries.",
+        "         */",
+        "        ECEmptyUndo(ped);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: UNDO_CLEANUP branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2753,
+      "original_count": 9,
+      "current_start": 2750,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset)",
+        "            //",
+        "            // tell intl dll's so drawing will know of the change and do any",
+        "            // updates BEFORE the ScrollDC and InvalidateRect.",
+        "            //",
+        "            fUp = (BOOL)(* ped->lpfnCharset)(ped, EDITINTL_MLSCROLL, hdc, dx,",
+        "                           dy, (RECT FAR *)&rc, (RECT FAR *)&rcUpdate,",
+        "                           fVertical, newPos, cmd, (SCROLLINFO  FAR *)&si);",
+        "        else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2824,
+      "original_count": 3,
+      "current_start": 2816,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset)",
+        "            bDoCaret = (UINT)(* ped->lpfnCharset)(ped, EDITINTL_SETFOCUS, hdc);",
+        "        else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2846,
+      "original_count": 1,
+      "current_start": 2838,
+      "current_count": 1,
+      "original": [
+        "    MLEnsureCaretVisible(ped);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2898,
+      "original_count": 3,
+      "current_start": 2893,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset)",
+        "            bKillCaret = (UINT)(* ped->lpfnCharset)(ped, EDITINTL_SETFOCUS, (HDC)NULL);",
+        "        else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3118,
+      "original_count": 21,
+      "current_start": 3114,
+      "current_count": 1,
+      "original": [
+        "    case WM_KEYUP:",
+        "    case WM_SYSKEYUP:",
+        "        //",
+        "          // if an intl LPK is present, give it first crack at the keys",
+        "          // if it returns zero, dont process. Note that we DONT give it",
+        "          // WM_CHAR messages.  It's not supposed to be to build strings",
+        "          // but to process control keys.",
+        "          //",
+        "          // keyup msgs : didn't process here before, always jump to ECDefWndProc).",
+        "          // syskeydown : only show LPK if NOT for combo box",
+        "          // keydown    : if LPK says reject, dont process. if this screws",
+        "          //          something cause the lpk processes something it",
+        "          //              shouldn't, its the lpk's problem, not edit's.",
+        "          //",
+        "          if (ped->lpfnCharset) {",
+        "                if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,",
+        "                    wParam, lParam) == 0) {",
+        "                    break;",
+        "                }",
+        "        }",
+        "        goto PassToDefaultWindowProc;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3148,
+      "original_count": 6,
+      "current_start": 3127,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset) {",
+        "            if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,",
+        "                    wParam, lParam) == 0) {",
+        "                break;",
+        "            }",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3165,
+      "original_count": 6,
+      "current_start": 3142,
+      "current_count": 1,
+      "original": [
+        "        if (ped->lpfnCharset) {",
+        "            if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,",
+        "                    wParam, lParam) == 0) {",
+        "                break;",
+        "            }",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3598,
+      "original_count": 7,
+      "current_start": 3573,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset) {",
+        "        HideCaret(ped->hwnd);",
+        "        (* ped->lpfnCharset)(ped, EDITINTL_MLDRAWTEXT, hdc, ichStart, ichEnd);",
+        "        ShowCaret(ped->hwnd);",
+        "        MLSetCaretPosition(ped, hdc);",
+        "        return ;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "changes": [],
+  "logical_line_mismatches": [
+    {
+      "current": 36,
+      "original": 37,
+      "logical": 34
+    },
+    {
+      "current": 521,
+      "original": 522,
+      "logical": 519
+    },
+    {
+      "current": 578,
+      "original": 575,
+      "logical": 573
+    },
+    {
+      "current": 1400,
+      "original": 1400,
+      "logical": 1394
+    },
+    {
+      "current": 1485,
+      "original": 1488,
+      "logical": 1483
+    },
+    {
+      "current": 2349,
+      "original": 2355,
+      "logical": 2347
+    },
+    {
+      "current": 2751,
+      "original": 2762,
+      "logical": 2754
+    },
+    {
+      "current": 2817,
+      "original": 2827,
+      "logical": 2825
+    },
+    {
+      "current": 2894,
+      "original": 2901,
+      "logical": 2899
+    },
+    {
+      "current": 3115,
+      "original": 3139,
+      "logical": 3119
+    },
+    {
+      "current": 3128,
+      "original": 3154,
+      "logical": 3149
+    },
+    {
+      "current": 3143,
+      "original": 3171,
+      "logical": 3166
+    },
+    {
+      "current": 3574,
+      "original": 3605,
+      "logical": 3599
+    }
+  ],
+  "initial_review": "Complete normalized comparison: 16 original conditional bodies replaced by #error with surrounding boundaries retained; all other source is original-exact.",
+  "counter_review": "Exclusion-only source classification is not proof of all supported branch hits. Diagnostic closing-boundary offsets are separately registered; no algorithm change inferred from those offsets.",
+  "evidence": "Pinned OpenNT editml.c; tools/build/New-T404S5Wow32ProviderNinja.ps1 EDIT controlBody cohort",
+  "limits": "Source audit only, no build/test or refreshed macro-hit claim. No source changes this batch."
+}

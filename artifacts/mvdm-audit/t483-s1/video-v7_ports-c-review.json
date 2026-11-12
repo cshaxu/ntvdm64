@@ -1,0 +1,62 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+  "original_sha256": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+  "current_sha256": "9eec47fab4481684b32dbdb34ed9c10766ff64c292078e52f704f5189d50c1a2",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "original_start": 235,
+      "original_count": 1,
+      "current_start": 232,
+      "current_count": 3,
+      "original": [
+        "\t\t\tif (value&0x80!=old_value&0x80) {"
+      ],
+      "current": [
+        "\t\t\t/* DIVERGENCE(VIDEO7-POINTER-ENABLE): match the SoftPC",
+        "\t\t\t * precedence correction for the pointer enable transition. */",
+        "\t\t\tif ((value & 0x80) != (old_value & 0x80)) {"
+      ]
+    },
+    {
+      "original_start": 670,
+      "original_count": 1,
+      "current_start": 670,
+      "current_count": 1,
+      "original": [
+        "\t\tif (get_seq_chain4_mode() && get_chain4_mode())"
+      ],
+      "current": [
+        "\t\tif (get_256_colour_mode() && get_seq_chain4_mode())"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 43,
+      "original_count": 6,
+      "current_start": 44,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */ ",
+        "#include \"SOFTPC_VGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two functional deltas: pointer-enable comparison precedence and pointer-X halving predicate; one conditional exclusion.",
+  "counter_review": "C equality binds tighter than bitwise &: old expression parses value & (0x80 != old_value) & 0x80 and is always zero for byte values. Parenthesized comparison restores intended draw/clear transition. Coordinate predicate change is separate and not proved by precedence evidence.",
+  "truth_table": {
+    "pairs": 65536,
+    "old_true": 0,
+    "corrected_true": 32768
+  },
+  "limits": "Coordinate predicate remains pending evidence; no new device test."
+}

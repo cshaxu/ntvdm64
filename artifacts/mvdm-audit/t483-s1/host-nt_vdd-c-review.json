@@ -1,0 +1,205 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+  "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+  "current_sha256": "dd8d1716f5ba87960158367b2aabe5e9b486a5a50f95ebf6f716207380b3674a",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 41,
+      "original_count": 9,
+      "current_start": 42,
+      "current_count": 1,
+      "original": [
+        "/* MS bop grabbing stuff */",
+        "GLOBAL half_word get_MS_bop_index ();",
+        "GLOBAL void free_MS_bop_index ();",
+        "GLOBAL void ms_bop ();",
+        "LOCAL void ms_not_a_bop ();",
+        "",
+        "/* IO slot grabbers */",
+        "GLOBAL half_word io_get_spare_slot ();",
+        "GLOBAL void io_release_spare_slot ();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "preceding_original": [
+        "GLOBAL void io_release_spare_slot (half_word);",
+        "#else"
+      ]
+    },
+    {
+      "original_start": 82,
+      "original_count": 5,
+      "current_start": 78,
+      "current_count": 1,
+      "original": [
+        "    printf (\"AH=%x, This is not a valid value for an MS BOP\\n\", getAH());",
+        "    illegal_bop();",
+        "#ifdef YODA",
+        "    force_yoda ();",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ],
+      "preceding_original": [
+        "{",
+        "#ifndef PROD"
+      ]
+    },
+    {
+      "original_start": 220,
+      "original_count": 1,
+      "current_start": 214,
+      "current_count": 1,
+      "original": [
+        "extern BOOLEAN MonitorVddConnectPrinter(WORD Adapter, HANDLE hVdd, BOOLEAN Connect);"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "",
+        "#ifdef MONITOR"
+      ]
+    },
+    {
+      "original_start": 279,
+      "original_count": 1,
+      "current_start": 275,
+      "current_count": 1,
+      "original": [
+        "   WORD \t     lptAdapter = 0;"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "   PVDD_IO_PORTRANGE pPRange;",
+        "#ifdef MONITOR"
+      ]
+    },
+    {
+      "original_start": 331,
+      "original_count": 12,
+      "current_start": 329,
+      "current_count": 1,
+      "original": [
+        "\t    // watch out for lpt ports",
+        "\t    // note that the vdd must hook every port assoicated with",
+        "\t    // the lpt. Just imanging that the vdd traps the control",
+        "\t    // port while leaves the rest for softpc-- we are going",
+        "\t    // to screw up badly and so does the vdd.",
+        "\t    // QUESTION: How can we enforece this????",
+        "\t      if (w >= LPT1_PORT_START && w < LPT1_PORT_END)",
+        "\t\tlptAdapter |= 1;",
+        "\t      else if (w >= LPT2_PORT_START && w < LPT2_PORT_END)",
+        "\t\tlptAdapter |= 2;",
+        "\t      else if (w >= LPT3_PORT_START && w < LPT3_PORT_END)",
+        "\t\tlptAdapter |= 4;"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "            {",
+        "#ifdef MONITOR"
+      ]
+    },
+    {
+      "original_start": 373,
+      "original_count": 8,
+      "current_start": 362,
+      "current_count": 1,
+      "original": [
+        "// i/o ports are hooked successfully, stop printer status port",
+        "// kernel emulation if the they are in the hooked range",
+        "      if (lptAdapter & 1)",
+        "\tMonitorVddConnectPrinter(0, hVdd, TRUE);",
+        "      if (lptAdapter & 2)",
+        "\tMonitorVddConnectPrinter(1, hVdd, TRUE);",
+        "      if (lptAdapter & 4)",
+        "\tMonitorVddConnectPrinter(2, hVdd, TRUE);"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "",
+        "#ifdef MONITOR"
+      ]
+    },
+    {
+      "original_start": 411,
+      "original_count": 1,
+      "current_start": 395,
+      "current_count": 1,
+      "original": [
+        "   WORD \t     lptAdapter = 0;"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "    WORD wAdapter;",
+        "#ifdef MONITOR"
+      ]
+    },
+    {
+      "original_start": 426,
+      "original_count": 12,
+      "current_start": 412,
+      "current_count": 1,
+      "original": [
+        "\t    // watch out for lpt status ports",
+        "\t    // note that the vdd must unhook every port assoicated with",
+        "\t    // the lpt. Just imanging that the vdd traps the control",
+        "\t    // port while leaves the rest for softpc-- we are going",
+        "\t    // to screw up badly and so does the vdd.",
+        "\t    // QUESTION: How can we enforece this????",
+        "\t      if (w >= LPT1_PORT_START && w < LPT1_PORT_END)",
+        "\t\tlptAdapter |= 1;",
+        "\t      else if (w >= LPT2_PORT_START && w < LPT2_PORT_END)",
+        "\t\tlptAdapter |= 2;",
+        "\t      else if (w >= LPT3_PORT_START && w < LPT3_PORT_END)",
+        "\t\tlptAdapter |= 4;"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "            {",
+        "#ifdef MONITOR"
+      ]
+    },
+    {
+      "original_start": 445,
+      "original_count": 8,
+      "current_start": 422,
+      "current_count": 1,
+      "original": [
+        "// i/o ports are Unhooked successfully, resume printer status port",
+        "// kernel emulation if the they are in the hooked range",
+        "      if (lptAdapter & 1)",
+        "\tMonitorVddConnectPrinter(0, hVdd, FALSE);",
+        "      if (lptAdapter & 2)",
+        "\tMonitorVddConnectPrinter(1, hVdd, FALSE);",
+        "      if (lptAdapter & 4)",
+        "\tMonitorVddConnectPrinter(2, hVdd, FALSE);"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ],
+      "preceding_original": [
+        "",
+        "#ifdef MONITOR"
+      ]
+    }
+  ],
+  "initial_review": "Nine original conditional bodies replaced by #error; balanced-boundary reconstruction equals complete current source after omitting #line only.",
+  "counter_review": "Exclusions remove alternative MS-BOP declarations/debug handling and hardware monitor printer-port connection bookkeeping. Retained VDD I/O hook installation/removal code is original, not a newly authored callback lifecycle. Source identity is not universal build-context or logical-line certification.",
+  "limits": "No source edit or new runtime/build verification; no whole-file deletion warranted by exclusion-only classification."
+}

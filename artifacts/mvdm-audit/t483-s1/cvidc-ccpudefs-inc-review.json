@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+  "original_sha256": "de75d67c7168f04ae82715b4dd56663093589d3fdd36bd828c6267bd6d041a6d",
+  "current_sha256": "77f41a44151efd8569e0a362ff26da66d20e6f164f05101d67e13f28fd211c55",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "497",
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+      "current_start": "1",
+      "current_count": "1",
+      "original_start": "1",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "retired-profile-build-flag",
+      "initial_review": "Remove CPU_30_STYLE from historical C-VID define list while retaining selected CCPU40 profile.",
+      "counter_review": "Source policy explicitly prohibits CPU_30_STYLE hardware monitor selection; no other define changed. Historical make metadata alone does not establish present product build flags.",
+      "disposition": "retain",
+      "evidence": "cvidc/ccpudefs.inc:1; docs/etc/operations/policy/source-policy.md CPU_30_STYLE exclusion",
+      "limits": "Non-C/H metadata, not proof of current build selection.",
+      "decision": "retain",
+      "change_plan": "Keep retired flag removed; do not reintroduce kernel V86 selection for CCPU.",
+      "related_callers": "Historical cvidc build metadata; modern build profile separately owned.",
+      "verification_required": "Retired-profile policy gate and selected build flag audit when changing build composition.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [],
+  "counter_review": "Whole-file original comparison; header remaining substantive source identical outside excluded bodies. Metadata has only the recorded retired flag deletion.",
+  "limits": "No new runtime/build result or blanket exclusion/line proof."
+}

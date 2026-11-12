@@ -459,5 +459,3 @@ static BOOL sbFirstCall = TRUE;
     return TRUE;
 #line 457
 }
-
-

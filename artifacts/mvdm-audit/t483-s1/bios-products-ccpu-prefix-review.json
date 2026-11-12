@@ -1,0 +1,245 @@
+[
+  {
+    "sequence": 211,
+    "path": "src/mvdm-host/softpc.new/base/bios/obj/i386/bios.lib",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\bios\\obj\\i386\\bios.lib",
+    "original_sha256": "d9971e9962f2d0e3c51e45c8ec36930110d257be72c5554849fa8bc770eb96eb",
+    "current_sha256": "d9971e9962f2d0e3c51e45c8ec36930110d257be72c5554849fa8bc770eb96eb",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 212,
+    "path": "src/mvdm-host/softpc.new/base/bios/obj/i386/bios.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\bios\\obj\\i386\\bios.obj",
+    "original_sha256": "a7e41b4490a7e70c20880aa0535512f9c9694f20f7d5d933fa141493914e1312",
+    "current_sha256": "a7e41b4490a7e70c20880aa0535512f9c9694f20f7d5d933fa141493914e1312",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 213,
+    "path": "src/mvdm-host/softpc.new/base/bios/obj/i386/virtual.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\bios\\obj\\i386\\virtual.obj",
+    "original_sha256": "b1f6f4a8977d8708c025d20ff8acff884ed0ae3e244f2f38c3a2862a2486d458",
+    "current_sha256": "b1f6f4a8977d8708c025d20ff8acff884ed0ae3e244f2f38c3a2862a2486d458",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 214,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aaa.c",
+    "original_sha256": "43583535e19a181d7a4c665c5fba5c00109eb1079b65d462f2b8a3d92ce2c052",
+    "current_sha256": "43583535e19a181d7a4c665c5fba5c00109eb1079b65d462f2b8a3d92ce2c052",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 215,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aaa.h",
+    "original_sha256": "178d5b808502ab7072c902fe936c9b46ae8387626e393ddcd07e219a69211c40",
+    "current_sha256": "178d5b808502ab7072c902fe936c9b46ae8387626e393ddcd07e219a69211c40",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 216,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aad.c",
+    "original_sha256": "7f6216d39411838509402cc45a93741ee4e0142c1fc36a0dc7682f126c447cde",
+    "current_sha256": "7f6216d39411838509402cc45a93741ee4e0142c1fc36a0dc7682f126c447cde",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 217,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aad.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aad.h",
+    "original_sha256": "e8b3075138c54719631226cfb78c478c1c684cfca70271937eac7a16438fec6c",
+    "current_sha256": "e8b3075138c54719631226cfb78c478c1c684cfca70271937eac7a16438fec6c",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 218,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aam.c",
+    "original_sha256": "fda0622e61bc039dad01cf0594389af7e9ffdc678719b107f90a5e1607d893ee",
+    "current_sha256": "fda0622e61bc039dad01cf0594389af7e9ffdc678719b107f90a5e1607d893ee",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 219,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aam.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aam.h",
+    "original_sha256": "55e4a6504152bb790cbc35c4e33a06f1c368fc4f22ff7f1ef13172d1a87d9fde",
+    "current_sha256": "55e4a6504152bb790cbc35c4e33a06f1c368fc4f22ff7f1ef13172d1a87d9fde",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 220,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aas.c",
+    "original_sha256": "f58060b5f0732ca174b1124b2622aaafa9d7341774cd71427509f2548ace4672",
+    "current_sha256": "f58060b5f0732ca174b1124b2622aaafa9d7341774cd71427509f2548ace4672",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 221,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/aas.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aas.h",
+    "original_sha256": "630638a02fd5bb74b1154e63b5bf16321144c054406724ae9ff3490345f615fe",
+    "current_sha256": "630638a02fd5bb74b1154e63b5bf16321144c054406724ae9ff3490345f615fe",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 222,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/adc.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\adc.c",
+    "original_sha256": "f9cb50e05aa3198c03e670556a6b8a849105c9ffbc6ea22dcc41dcfb2875c56b",
+    "current_sha256": "f9cb50e05aa3198c03e670556a6b8a849105c9ffbc6ea22dcc41dcfb2875c56b",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 223,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/adc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\adc.h",
+    "original_sha256": "ebc8f79a0edab6590c40de2c6216731e540c739f723508fcd2db75103f839e14",
+    "current_sha256": "ebc8f79a0edab6590c40de2c6216731e540c739f723508fcd2db75103f839e14",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 224,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/add.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\add.c",
+    "original_sha256": "6bbfc3cacd07b66ef1d5c882a45aa88431404571538ef2134f6b0f081e5c3c11",
+    "current_sha256": "6bbfc3cacd07b66ef1d5c882a45aa88431404571538ef2134f6b0f081e5c3c11",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 225,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/add.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\add.h",
+    "original_sha256": "5d6bb2d73cadea179111243737d0dc29526aaddbd0d84f6fb784cbeb2706314e",
+    "current_sha256": "5d6bb2d73cadea179111243737d0dc29526aaddbd0d84f6fb784cbeb2706314e",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 226,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/and.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\and.c",
+    "original_sha256": "2973105fbfc70afd2a1f6846e1358c5c781538974e2dde72576286de95d1c489",
+    "current_sha256": "2973105fbfc70afd2a1f6846e1358c5c781538974e2dde72576286de95d1c489",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 227,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/and.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\and.h",
+    "original_sha256": "9294bc9f62d29a89c95ca3bd98083128966b15e0996b994f180ff98e269c239f",
+    "current_sha256": "9294bc9f62d29a89c95ca3bd98083128966b15e0996b994f180ff98e269c239f",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 228,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/arpl.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\arpl.c",
+    "original_sha256": "676f5413ca79b4d5ff4656a6ca960fdc290445d37ac21358040788db9e113c0a",
+    "current_sha256": "676f5413ca79b4d5ff4656a6ca960fdc290445d37ac21358040788db9e113c0a",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 229,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/arpl.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\arpl.h",
+    "original_sha256": "b8fdf1df2307b98630612afc79c5580bbd4161ac292c4e8f20493db1bc411411",
+    "current_sha256": "b8fdf1df2307b98630612afc79c5580bbd4161ac292c4e8f20493db1bc411411",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 230,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bound.c",
+    "original_sha256": "c82ea948fafd97bbf2c99bf3ba681d485f9c38bef75493498a465b7f556fc1f2",
+    "current_sha256": "8ddd9738f9c3240ed9faea1b16c11218047ad0859ca8ab30fde75ad2bf136877",
+    "byte_identical": false,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 231,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bound.h",
+    "original_sha256": "f805f2137d16bfb4b4777c5fe8835d0a53e83657210db0fbe1d52ee700c5b221",
+    "current_sha256": "f805f2137d16bfb4b4777c5fe8835d0a53e83657210db0fbe1d52ee700c5b221",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 232,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bsf.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bsf.c",
+    "original_sha256": "229e244bdb8d904ee6e2e390c36a8f5c7bccef6aa8fb2bc832b7d91f723b1fd0",
+    "current_sha256": "229e244bdb8d904ee6e2e390c36a8f5c7bccef6aa8fb2bc832b7d91f723b1fd0",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 233,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bsf.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bsf.h",
+    "original_sha256": "2ed4c0b5cf6aa1f34f583fd84ecd2c4cd20dbe0e3606d904326619323d196531",
+    "current_sha256": "2ed4c0b5cf6aa1f34f583fd84ecd2c4cd20dbe0e3606d904326619323d196531",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 234,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bsr.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bsr.c",
+    "original_sha256": "d277ee7bc0ffddfaf980eefe097d8f1b9d201fcc79bfd3774fc342f50041eaed",
+    "current_sha256": "d277ee7bc0ffddfaf980eefe097d8f1b9d201fcc79bfd3774fc342f50041eaed",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 235,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bsr.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bsr.h",
+    "original_sha256": "2895f7eabc1b44b4b902a9f83c6cd78d4f659b334dce1c44002eed45c71d7325",
+    "current_sha256": "2895f7eabc1b44b4b902a9f83c6cd78d4f659b334dce1c44002eed45c71d7325",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 236,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bswap.c",
+    "original_sha256": "d6e833e572222ce68fd989348de0bfd68030d0016a2a2d7379cf3473ad852f39",
+    "current_sha256": "5859c6f4480ab7db9d4a0f2cead39649478a9e28a490ce97df6a4d0ed0525c27",
+    "byte_identical": false,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  },
+  {
+    "sequence": 237,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bswap.h",
+    "original_sha256": "e3a8af0917fbe1324ebcfec90f899dd5bf463884911662fdba8fd9cc60d0208a",
+    "current_sha256": "e3a8af0917fbe1324ebcfec90f899dd5bf463884911662fdba8fd9cc60d0208a",
+    "byte_identical": true,
+    "scope": "Mirror diff audit only; identical files do not imply branch reachability audit."
+  }
+]

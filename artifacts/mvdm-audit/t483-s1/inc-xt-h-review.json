@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+  "original_sha256": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+  "current_sha256": "a544eb63955017bb06606cc4f554f910a442d39a17e68b013b7f8ced7a58833d",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 32,
+      "original_count": 2
+    },
+    {
+      "original_start": 42,
+      "original_count": 1
+    },
+    {
+      "original_start": 50,
+      "original_count": 1
+    },
+    {
+      "original_start": 74,
+      "original_count": 18
+    },
+    {
+      "original_start": 96,
+      "original_count": 7
+    }
+  ],
+  "initial_review": "Five excluded fallback/platform bodies; original CCPU declarations retained.",
+  "counter_review": "Cpu_find_dcache_entry FALSE macro is original CCPU source. CPU30 helpers and A2CPU macro remain excluded. Original empty line after pf_table restored; selected tokens unchanged.",
+  "limits": "Complete retained nonblank source comparison, excluding recorded original bodies and #line/#error. Not universal configuration or diagnostic-line certification."
+}

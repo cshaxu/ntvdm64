@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+  "original_sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+  "current_sha256": "c4824481efbd33a6db998ca8e96928820136c86daa0fa4e7b543feb4b7776ff5",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 4,
+      "original_count": 526,
+      "current_start": 6
+    }
+  ],
+  "initial_review": "All original implementation is inside SLAVEPC: serial-link remote floppy controller/client packet construction, DMA commands, data transfer and remote flags. Original lines4-529 are replaced by one error directive.",
+  "counter_review": "Counter-review balanced all original nested conditions and matched the outer SLAVEPC boundary and both preceding includes exactly. This remote IBM-PC peripheral protocol is not the selected emulated FDC or NTSRV RPC path. No selected implementation or return semantics changed; no nested excluded structure retained.",
+  "limits": "Source comparison only; no new build/runtime result. Whole-translation-unit removal is not performed by this necessity audit."
+}

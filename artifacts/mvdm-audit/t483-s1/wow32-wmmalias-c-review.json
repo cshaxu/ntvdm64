@@ -1,0 +1,259 @@
+{
+  "path": "src/mvdm-host/wow32/wmmalias.c",
+  "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+  "current_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 26,
+      "original_count": 1,
+      "current_start": 27,
+      "current_count": 1,
+      "original": [
+        "INT nAliases;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 33,
+      "original_count": 1,
+      "current_start": 36,
+      "current_count": 1,
+      "original": [
+        "extern  BOOL fSkipLog;          // TRUE to temporarily skip certain logging"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 150,
+      "original_count": 49,
+      "current_start": 155,
+      "current_count": 1,
+      "original": [
+        "        // If we don't have an alias table yet, allocate one",
+        "",
+        "        if (!phi->pphmAlias) {",
+        "            if (!(phi->pphmAlias = malloc_w(ALIAS_SLOTS*sizeof(PHMAP)))) {",
+        "                LOGDEBUG(0,(\"    FindHMap32 ERROR: cannot allocate alias table\\n\"));",
+        "                return NULL;",
+        "            }",
+        "            RtlZeroMemory(phi->pphmAlias, ALIAS_SLOTS*sizeof(PHMAP));",
+        "            phi->nAliasEntries = ALIAS_SLOTS;",
+        "        }",
+        "",
+        "        // If the current hint is in use, then look for the next free one",
+        "",
+        "        if (phi->pphmAlias[phi->iAliasHint] &&",
+        "            !((INT)phi->pphmAlias[phi->iAliasHint]&1)) {",
+        "",
+        "            INT i;",
+        "            LOGDEBUG(13,(\"    FindHMap32: alias hint failed, scanning...\\n\"));",
+        "            for (i=phi->iAliasHint+1; i<phi->nAliasEntries; i++) {",
+        "                if (!phi->pphmAlias[i] || ((INT)phi->pphmAlias[i]&1))",
+        "                    goto Break;",
+        "            }",
+        "            for (i=0; i<phi->iAliasHint; i++) {",
+        "                if (!phi->pphmAlias[i] || ((INT)phi->pphmAlias[i]&1))",
+        "                    goto Break;",
+        "            }",
+        "          Break:",
+        "            phi->iAliasHint = i;",
+        "",
+        "            // If we've exhausted all the slots in the existing table, grow it",
+        "",
+        "            if (phi->pphmAlias[i] && !((INT)phi->pphmAlias[i]&1)) {",
+        "                PPHMAP p;",
+        "",
+        "                if (phi->nAliasEntries >= (1<<(16-RES_BITS))) {",
+        "                    LOGDEBUG(0,(\"    FindHMap32 ERROR: at 16-bit handle limit\\n\"));",
+        "                    return NULL;",
+        "                }",
+        "                LOGDEBUG(1,(\"    FindHMap32: growing handle alias array\\n\"));",
+        "                if (!(p = realloc(phi->pphmAlias, (phi->nAliasEntries+ALIAS_SLOTS)*sizeof(PHMAP)))) {",
+        "                    LOGDEBUG(0,(\"    FindHMap32 ERROR: cannot grow alias table\\n\"));",
+        "                    return NULL;",
+        "                }",
+        "                phi->pphmAlias = p;",
+        "                RtlZeroMemory(phi->pphmAlias+phi->nAliasEntries, ALIAS_SLOTS*sizeof(PHMAP));",
+        "                phi->iAliasHint = phi->nAliasEntries;",
+        "                phi->nAliasEntries += ALIAS_SLOTS;",
+        "            }",
+        "        }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 208,
+      "original_count": 11,
+      "current_start": 167,
+      "current_count": 1,
+      "original": [
+        "        // Record the new list entry in the alias table",
+        "",
+        "        phm->h16 = (HAND16)(++phi->iAliasHint << RES_BITS);",
+        "        if (phi->iAliasHint >= phi->nAliasEntries)",
+        "            phi->iAliasHint = 0;",
+        "",
+        "        // New entries can simply be inserted at the head of the list,",
+        "        // because their position in the list has no relationship to the aliases",
+        "",
+        "        phm->phmNext = phi->pphmHash[iHash];",
+        "        phi->pphmHash[iHash] = phm;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 221,
+      "original_count": 5,
+      "current_start": 172,
+      "current_count": 1,
+      "original": [
+        "        nAliases++;",
+        "        if (iList > iLargestListSlot) {",
+        "            iLargestListSlot = iList;",
+        "            LOGDEBUG(1,(\"    FindHMap32: largest list slot is now %d\\n\", iLargestListSlot));",
+        "        }"
+      ],
+      "current": [
+        "#error DEBUG WOW alias accounting is not supported"
+      ]
+    },
+    {
+      "original_start": 241,
+      "original_count": 4,
+      "current_start": 191,
+      "current_count": 1,
+      "original": [
+        "        if (!fSkipLog) {",
+        "            LOGDEBUG(7,(\"    Adding %s alias %04x for %08lx\\n\",",
+        "                GetHMapNameM(phi, iClass), phm->h16, h32));",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 249,
+      "original_count": 1,
+      "current_start": 198,
+      "current_count": 1,
+      "original": [
+        "        phi->pphmAlias[(phm->h16>>RES_BITS)-1] = phm;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 290,
+      "original_count": 12,
+      "current_start": 241,
+      "current_count": 1,
+      "original": [
+        "    // Verify the handle is within range",
+        "    WOW32ASSERT((INT)h16 <= phi->nAliasEntries);",
+        "",
+        "    // This can happen if we haven't allocated any aliases yet",
+        "    if (!phi->pphmAlias)",
+        "        return NULL;",
+        "",
+        "    phm = phi->pphmAlias[h16-1];",
+        "    if ((INT)phm & 1) {",
+        "        (INT)phm &= ~1;",
+        "        LOGDEBUG(0,(\"    FindHMap16 WARNING: defunct alias %04x reused\\n\", h16<<RES_BITS));",
+        "            }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 325,
+      "original_count": 4,
+      "current_start": 268,
+      "current_count": 1,
+      "original": [
+        "    if (!fSkipLog) {",
+        "        LOGDEBUG(9,(\"    Found %s %08lx for alias %04x\\n\",",
+        "            GetHMapNameM(phi, phm->iClass), phm->h32, h16<<RES_BITS));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 352,
+      "original_count": 11,
+      "current_start": 294,
+      "current_count": 1,
+      "original": [
+        "        // We don't want to totally zap the alias' hmap pointer yet, because",
+        "        // if we're dealing with an app that is using cached handles after",
+        "        // it has technically freed them, we want to try to reassociate their",
+        "        // handle with a new 32-bit handle.  So we'll just set the low bit",
+        "        // of the alias hmap pointer and leave the hint index alone;  we will",
+        "        // still try to reuse entries with the low bit set however.",
+        "        //",
+        "        // phi->iAliasHint = (h16>>RES_BITS)-1;",
+        "        // phi->pphmAlias[phi->iAliasHint] = NULL;",
+        "",
+        "        (INT)phi->pphmAlias[(h16>>RES_BITS)-1] |= 1;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 199,
+      "current": 156,
+      "logical": 151
+    },
+    {
+      "original": 219,
+      "current": 168,
+      "logical": 209
+    },
+    {
+      "original": 226,
+      "current": 173,
+      "logical": 222
+    },
+    {
+      "original": 245,
+      "current": 192,
+      "logical": 242
+    },
+    {
+      "original": 302,
+      "current": 242,
+      "logical": 291
+    },
+    {
+      "original": 329,
+      "current": 269,
+      "logical": 326
+    },
+    {
+      "original": 363,
+      "current": 295,
+      "logical": 353
+    }
+  ],
+  "evidence": "Full normalized diff consists solely of original DEBUG/NEWALIAS/DBG conditional-body replacements; selected hash/list alias and multimedia declarations remain original.",
+  "limits": [
+    "Source classification, not new build/runtime validation.",
+    "Exclusion-only does not imply compiler-context or logical-line certification."
+  ]
+}

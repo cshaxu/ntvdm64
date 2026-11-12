@@ -1018,9 +1018,8 @@ void nt_key_down_action(PKEY_EVENT_RECORD KeyEvent)
 
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
-    if(ATcode) {
+    if(ATcode)
        (*host_key_down_fn_ptr)(ATcode);
-    }
 
 #line 946
 }
@@ -1035,9 +1034,8 @@ void nt_key_up_action(PKEY_EVENT_RECORD KeyEvent)
 
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
-    if(ATcode) {
+    if(ATcode)
        (*host_key_up_fn_ptr)(ATcode);
-    }
 
 #line 961
 }
@@ -1055,7 +1053,6 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     int LastMouseInx;
     POINT mouse_pos;
     UCHAR mouse_button_left, mouse_button_right;
-
 
 #line 977
     host_ica_lock();
@@ -1487,10 +1484,8 @@ BOOL CntrlHandler(ULONG CtrlType)
 
 #line 1410
 	if (sc.ScreenState == STREAM_IO)
-	    {
 #line 1411
 	    stream_io_update();
-	    }
 #line 1412
 	else {
 #ifdef X86GFX

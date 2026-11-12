@@ -1,0 +1,48 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+  "original_sha256": "887703f1d48d16ed578ffc33789cf126697b206a62219f5ca41aef795c414ecb",
+  "current_sha256": "c701f04ba695104c18d969e34474d38b61221db12e45a4f84e3efe104104dc13",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "504",
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+      "current_start": "641",
+      "current_count": "14",
+      "original_start": "641",
+      "original_count": "17",
+      "old_ids": "",
+      "classification": "generated-provider-signatures",
+      "initial_review": "Thirteen marker declarations now match actual original generated IUH(IUH,IUH,IUH,IUH) definitions; four duplicate declarations removed.",
+      "counter_review": "All thirteen names independently matched in both selected and original sevid001.c. Original marker tables use these wrappers; guest address/count live in generated scratch registers, not the misleading old formal parameters.",
+      "disposition": "retain",
+      "evidence": "evidfunc.h:641-654; original and current cvidc/sevid001.c marker definitions; evidfunc.c:835-862",
+      "limits": "Source signature proof only; no fresh build or runtime marker validation.",
+      "decision": "retain",
+      "change_plan": "Retain corrected return/four-argument prototypes and duplicate removal; do not add wrappers or convert scratch-register ABI into guessed C parameters.",
+      "related_callers": "simple_mark_evid, cga_mark_evid, unchained_mark_evid, chain4_mark_evid; generated marker wrappers.",
+      "verification_required": "Selected compile and actual C-VID marker fixture preserve byte/word/dword/string scratch inputs and outputs.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "provider_names": [
+    "S_2126_SimpleMark",
+    "S_2127_CGAMarkByte",
+    "S_2128_CGAMarkWord",
+    "S_2129_CGAMarkDword",
+    "S_2130_CGAMarkString",
+    "S_2131_UnchainedMarkByte",
+    "S_2132_UnchainedMarkWord",
+    "S_2133_UnchainedMarkDword",
+    "S_2134_UnchainedMarkString",
+    "S_2135_Chain4MarkByte",
+    "S_2136_Chain4MarkWord",
+    "S_2137_Chain4MarkDword",
+    "S_2138_Chain4MarkString"
+  ],
+  "counter_review": "All modified prototypes compared individually with original and current definitions.",
+  "limits": "Source signature proof only; no fresh build or runtime marker validation."
+}

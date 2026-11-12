@@ -1,0 +1,62 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+  "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+  "current_sha256": "d993fbfce54cfc3cf05fff55e59ce9331499491fe04035e7d6317a4be3f67735",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 37,
+      "original_count": 5,
+      "current_start": 38,
+      "current_count": 1,
+      "original": [
+        "#ifdef _WIN32",
+        "#define FAR",
+        "#else",
+        "#define FAR _far",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 54,
+      "original_count": 1,
+      "current_start": 53,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 686,
+      "original_count": 1,
+      "current_start": 687,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 42,
+      "current": 39,
+      "logical": 38
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/mvdm-host/vdmredir/vrdisp.c",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_com.c"
+  ],
+  "limits": "Whole retained source equals pinned original after exclusion-body and whitespace projection. Exclusion-only category does not certify all supported header contexts, runtime device capability or absence of line findings."
+}

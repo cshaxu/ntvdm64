@@ -1,0 +1,2665 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "current_sha256": "22fb57843f0dc34d940797b016b3da7f1a635cdfe4249fa015df49b39a7d86d3",
+  "review_complete": false,
+  "changes": [
+    {
+      "original_start": 109,
+      "original_count": 0,
+      "current_start": 107,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h\" /* DIVERGENCE(MVDM-HOST-DIV-318) */"
+      ]
+    },
+    {
+      "original_start": 163,
+      "original_count": 2,
+      "current_start": 119,
+      "current_count": 5,
+      "original": [
+        "IMPORT void host_x_range(word *,word *,word *,word *);",
+        "IMPORT void host_y_range(word *,word *,word *,word *);"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-058): match the original call operands' scalar",
+        " * type at the host range boundary; the paired host definitions are adjusted",
+        " * to the same unchanged four-pointer contract. */",
+        "IMPORT void host_x_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);",
+        "IMPORT void host_y_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);"
+      ]
+    },
+    {
+      "original_start": 215,
+      "original_count": 1,
+      "current_start": 176,
+      "current_count": 1,
+      "original": [
+        "LOCAL BOOL jap_mouse=FALSE;\t\t/* flag if need to fake text cursor */"
+      ],
+      "current": [
+        "#define jap_mouse (!is_it_text() && (sas_hw_at(vd_video_mode) != Currently_emulated_video_mode) && alpha_num_mode())"
+      ]
+    },
+    {
+      "original_start": 1218,
+      "original_count": 1,
+      "current_start": 1134,
+      "current_count": 1,
+      "original": [
+        "        jap_mouse = ((sas_hw_at(vd_video_mode) != Currently_emulated_video_mode) && alpha_num_mode());"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-899): derive at every use; VDD restores bypass INT33. */"
+      ]
+    },
+    {
+      "original_start": 1703,
+      "original_count": 0,
+      "current_start": 1527,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-467: video changes bypass mouse BOP dispatch. */",
+        "    virtual_swap_instance();"
+      ]
+    },
+    {
+      "original_start": 2382,
+      "original_count": 0,
+      "current_start": 2238,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): keep the original drawing position in",
+        "   step with the NT IRQ owner's already-confined position. */",
+        "point_copy(&cursor_status.position, &cursor_position);"
+      ]
+    },
+    {
+      "original_start": 2641,
+      "original_count": 0,
+      "current_start": 2371,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): non-MONITOR cursor_display is route-gated. */"
+      ]
+    },
+    {
+      "original_start": 2642,
+      "original_count": 0,
+      "current_start": 2375,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)"
+      ]
+    },
+    {
+      "original_start": 2656,
+      "original_count": 1,
+      "current_start": 2393,
+      "current_count": 3,
+      "original": [
+        "#endif /*NTVDM*/"
+      ],
+      "current": [
+        "#endif",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 2660,
+      "original_count": 0,
+      "current_start": 2400,
+      "current_count": 17,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): a second IRQ may arrive while the",
+        " * virtualized PIC EOI executes. Keep each callback's saved words on its",
+        " * own guest stack, ahead of the existing INT2 return address. */",
+        "LOCAL void mouse_callback_push IFN1(word, value)",
+        "{",
+        "    setSP(getSP() - 2);",
+        "    sas_storew(effective_addr(getSS(), getSP()), value);",
+        "}",
+        "",
+        "LOCAL word mouse_callback_pop IFN0()",
+        "{",
+        "    word value;",
+        "    sas_loadw(effective_addr(getSS(), getSP()), &value);",
+        "    setSP(getSP() + 2);",
+        "    return value;",
+        "}",
+        ""
+      ]
+    },
+    {
+      "original_start": 2662,
+      "original_count": 0,
+      "current_start": 2419,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    MOUSE_CALL_MASK condition_mask;"
+      ]
+    },
+    {
+      "original_start": 2674,
+      "original_count": 9,
+      "current_start": 2434,
+      "current_count": 10,
+      "original": [
+        "\tsetAX(saved_AX);",
+        "\tsetBX(saved_BX);",
+        "\tsetCX(saved_CX);",
+        "\tsetDX(saved_DX);",
+        "\tsetSI(saved_SI);",
+        "\tsetDI(saved_DI);",
+        "\tsetES(saved_ES);",
+        "\tsetBP(saved_BP);",
+        "\tsetDS(saved_DS);"
+      ],
+      "current": [
+        "    condition_mask = mouse_callback_pop();",
+        "    setDS(mouse_callback_pop());",
+        "    setBP(mouse_callback_pop());",
+        "    setES(mouse_callback_pop());",
+        "    setDI(mouse_callback_pop());",
+        "    setSI(mouse_callback_pop());",
+        "    setDX(mouse_callback_pop());",
+        "    setCX(mouse_callback_pop());",
+        "    setBX(mouse_callback_pop());",
+        "    setAX(mouse_callback_pop());"
+      ]
+    },
+    {
+      "original_start": 2688,
+      "original_count": 1,
+      "current_start": 2449,
+      "current_count": 1,
+      "original": [
+        "\tif (last_condition_mask & MOUSE_CALL_MASK_POSITION_BIT)"
+      ],
+      "current": [
+        "\tif (condition_mask & MOUSE_CALL_MASK_POSITION_BIT)"
+      ]
+    },
+    {
+      "original_start": 2950,
+      "original_count": 0,
+      "current_start": 2716,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): CCPU ROM BOP BD does not maintain a",
+        "   guest show count; retain the original C owner without MONITOR. */"
+      ]
+    },
+    {
+      "original_start": 2951,
+      "original_count": 0,
+      "current_start": 2721,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)"
+      ]
+    },
+    {
+      "original_start": 2969,
+      "original_count": 1,
+      "current_start": 2743,
+      "current_count": 3,
+      "original": [
+        "#endif /* NTVDM */"
+      ],
+      "current": [
+        "#endif",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 2996,
+      "original_count": 0,
+      "current_start": 2775,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): pair the non-MONITOR C-owned show count. */"
+      ]
+    },
+    {
+      "original_start": 2997,
+      "original_count": 0,
+      "current_start": 2779,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)"
+      ]
+    },
+    {
+      "original_start": 3007,
+      "original_count": 0,
+      "current_start": 2794,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 3053,
+      "original_count": 0,
+      "current_start": 2844,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): Window uses original guest positioning,",
+        "   not the Console host-pointer warp. */",
+        "    if (!mvdm_softpc_mouse_route_active()) {"
+      ]
+    },
+    {
+      "original_start": 3077,
+      "original_count": 0,
+      "current_start": 2873,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    }",
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-318): synchronize the NT relative counter",
+        "       before the original base owner updates and paints the guest position. */",
+        "    host_mouse_set_position((USHORT)*cursor_x_ptr,(USHORT)*cursor_y_ptr);"
+      ]
+    },
+    {
+      "original_start": 3310,
+      "original_count": 0,
+      "current_start": 3113,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): retain shape even before Window selection. */"
+      ]
+    },
+    {
+      "original_start": 3311,
+      "original_count": 0,
+      "current_start": 3117,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)"
+      ]
+    },
+    {
+      "original_start": 3316,
+      "original_count": 5,
+      "current_start": 3127,
+      "current_count": 3,
+      "original": [
+        "\tif (host_mouse_installed())",
+        "\t{",
+        "\t\thost_mouse_set_graphics(hot_spot_x_ptr, hot_spot_y_ptr, bitmap_address);",
+        "\t}",
+        "\telse"
+      ],
+      "current": [
+        "#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): no host-arrow shape provider. */",
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 3371,
+      "original_count": 1,
+      "current_start": 3181,
+      "current_count": 3,
+      "original": [
+        "#endif /* NTVDM */"
+      ],
+      "current": [
+        "#endif",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 3702,
+      "original_count": 0,
+      "current_start": 3504,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\tIS32\t\t\ti;"
+      ]
+    },
+    {
+      "original_start": 3721,
+      "original_count": 0,
+      "current_start": 3527,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-357): match the existing restore checksum",
+        "\t * over exactly the cookie and context bytes written to the guest. */",
+        "\tfor (i = 0; i < MOUSE_CONTEXT_MAGIC_SIZE; i++)",
+        "\t\tcs += (IU8)mouse_context_magic[i];",
+        "\tfor (i = 0; i < sizeof(MOUSE_CONTEXT); i++)",
+        "\t\tcs += ((IU8 *)&mouse_context)[i];"
+      ]
+    },
+    {
+      "original_start": 5227,
+      "original_count": 0,
+      "current_start": 5008,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): restore original geometry only for Window. */"
+      ]
+    },
+    {
+      "original_start": 5228,
+      "original_count": 0,
+      "current_start": 5012,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)",
+        "#ifdef NTVDM",
+        "    if (!mvdm_softpc_mouse_route_active()) return;",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5238,
+      "original_count": 3,
+      "current_start": 5030,
+      "current_count": 3,
+      "original": [
+        "\tif (host_mouse_in_use())",
+        "\t\thost_mouse_set_position(cursor_status.position.x * mouse_gear.x * mouse_sens.x / 800,",
+        "\t\t\t\t\t\t\t\tcursor_status.position.y * mouse_gear.y * mouse_sens.y / 800);"
+      ],
+      "current": [
+        "#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): Window never warps host pointer. */",
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5242,
+      "original_count": 0,
+      "current_start": 5034,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5250,
+      "original_count": 0,
+      "current_start": 5045,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): original software painter for Window only. */"
+      ]
+    },
+    {
+      "original_start": 5251,
+      "original_count": 0,
+      "current_start": 5049,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)"
+      ]
+    },
+    {
+      "original_start": 5252,
+      "original_count": 0,
+      "current_start": 5055,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "    if (!mvdm_softpc_mouse_route_active()) return;",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5301,
+      "original_count": 11,
+      "current_start": 5110,
+      "current_count": 3,
+      "original": [
+        "\t\tif (host_mouse_installed())",
+        "\t\t{",
+        "\t\t\tif ( cursor_position.x >= black_hole.top_left.x &&",
+        "\t\t\t\t\tcursor_position.x <= black_hole.bottom_right.x &&",
+        "\t\t\t\t\tcursor_position.y >= black_hole.top_left.y &&",
+        "\t\t\t\t\tcursor_position.y <= black_hole.bottom_right.y )",
+        "\t\t\t\thost_mouse_cursor_undisplay();",
+        "\t\t\telse",
+        "\t\t\t\thost_mouse_cursor_display();",
+        "\t\t}",
+        "\t\telse"
+      ],
+      "current": [
+        "#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): bypass the Console host arrow. */",
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5343,
+      "original_count": 1,
+      "current_start": 5149,
+      "current_count": 3,
+      "original": [
+        "#endif /* !NTVDM */"
+      ],
+      "current": [
+        "#endif",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5351,
+      "original_count": 0,
+      "current_start": 5160,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-900): the saved background, not current VGA/BIOS",
+        "   state, owns restoration. Keep the original per-VM validity and restorers. */"
+      ]
+    },
+    {
+      "original_start": 5352,
+      "original_count": 28,
+      "current_start": 5163,
+      "current_count": 14,
+      "original": [
+        "\tUTINY v_mode;",
+        "",
+        "\t/* Check if Enhanced Mode wants to \"see\" cursor */",
+        "\tif ( cursor_EM_disabled )",
+        "\t   return;",
+        "",
+        "\tv_mode = sas_hw_at(vd_video_mode);",
+        "",
+        "#ifdef\tMOUSE_16_BIT",
+        "\tif (is_graphics_mode)",
+        "\t\treturn;",
+        "#endif\t/* MOUSE_16_BIT */",
+        "",
+        "\t/*",
+        "\t *\tUndisplay the representation of the current mouse status on",
+        "\t *\tthe screen. This routine tolerates being called when the ",
+        "\t *\tcursor isn't actually being displayed",
+        "\t */",
+        "\tif (host_mouse_in_use())",
+        "\t{",
+        "\t\thost_mouse_cursor_undisplay();",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tif (save_area_in_use)",
+        "\t\t{",
+        "\t\t\tsave_area_in_use = FALSE;",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM mouse profile",
+        "#else",
+        "#if !defined(MONITOR)",
+        "#ifdef MOUSE_16_BIT",
+        "#error Excluded unsupported MOUSE_16_BIT profile",
+        "#endif",
+        "    if (cursor_EM_disabled || !save_area_in_use)",
+        "        return;",
+        "    save_area_in_use = FALSE;",
+        "    switch (saved_cursor_kind)",
+        "    {",
+        "    case MOUSE_SAVED_TEXT:",
+        "        software_text_cursor_undisplay();",
+        "        break;"
+      ]
+    },
+    {
+      "original_start": 5381,
+      "original_count": 27,
+      "current_start": 5178,
+      "current_count": 3,
+      "original": [
+        "        if (jap_mouse) {",
+        "                /* If we forced an EGA cursor, we must undisplay the same.",
+        "                 * Go direct 'cos the selection process gets confused below...",
+        "                 */",
+        "                EGA_graphics_cursor_undisplay();",
+        "        } else",
+        "#endif /* EGG */",
+        "",
+        "\t\t\tif (in_text_mode())",
+        "\t\t\t{",
+        "\t\t\t\tif (text_cursor_type == MOUSE_TEXT_CURSOR_TYPE_SOFTWARE)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tsoftware_text_cursor_undisplay();",
+        "\t\t\t\t}",
+        "\t\t\t\telse",
+        "\t\t\t\t{",
+        "\t\t\t\t\thardware_text_cursor_undisplay();",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "\t\t\telse",
+        "\t\t\t{",
+        "#ifdef MOUSE_16_BIT",
+        "\t\t\t\tmouse16bHidePointer( );",
+        "#else /* MOUSE_16_BIT */",
+        "#ifdef EGG",
+        "\t\t\tif ((video_adapter == EGA  || video_adapter == VGA) && (v_mode > 6))",
+        "\t\t\t{"
+      ],
+      "current": [
+        "    case MOUSE_SAVED_EGA:",
+        "        EGA_graphics_cursor_undisplay();",
+        "        break;"
+      ]
+    },
+    {
+      "original_start": 5409,
+      "original_count": 4,
+      "current_start": 5182,
+      "current_count": 3,
+      "original": [
+        "\t\t\t\tif (v_mode != 0x13)",
+        "\t\t\t    \tEGA_graphics_cursor_undisplay();",
+        "\t\t\t  \telse",
+        "\t\t\t\t\tVGA_graphics_cursor_undisplay();"
+      ],
+      "current": [
+        "    case MOUSE_SAVED_VGA:",
+        "        VGA_graphics_cursor_undisplay();",
+        "        break;"
+      ]
+    },
+    {
+      "original_start": 5416,
+      "original_count": 2,
+      "current_start": 5188,
+      "current_count": 0,
+      "original": [
+        "\t\t\t}",
+        "\t\t\telse"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 5420,
+      "original_count": 10,
+      "current_start": 5190,
+      "current_count": 8,
+      "original": [
+        "\t\t\t  if (video_adapter == HERCULES)",
+        "\t\t\t    HERC_graphics_cursor_undisplay();",
+        "\t\t\t  else",
+        "#endif /* HERC */",
+        "\t\t\t    graphics_cursor_undisplay();",
+        "#endif /* MOUSE_16_BIT */",
+        "\t\t\t}",
+        "\t\t}",
+        "\t}",
+        "#endif /* !NTVDM */"
+      ],
+      "current": [
+        "#error Excluded unsupported HERC profile",
+        "#endif",
+        "    case MOUSE_SAVED_CGA:",
+        "        graphics_cursor_undisplay();",
+        "        break;",
+        "    }",
+        "#endif",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 5434,
+      "original_count": 0,
+      "current_start": 5203,
+      "current_count": 11,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner route edges reuse the original",
+        "   drawing operations without fabricating movement or guest callbacks. */",
+        "GLOBAL void mouse_pointer_route_changed IFN1(int,active)",
+        "{",
+        "    /* DIVERGENCE MVDM-HOST-DIV-467: route changes also bypass mouse BOPs. */",
+        "    virtual_swap_instance();",
+        "    if (active) cursor_update();",
+        "    if (active && cursor_flag == MOUSE_CURSOR_DISPLAYED) cursor_display();",
+        "    if (!active) cursor_undisplay();",
+        "}"
+      ]
+    },
+    {
+      "original_start": 5502,
+      "original_count": 1,
+      "current_start": 5285,
+      "current_count": 1,
+      "original": [
+        "\t\tsas_loadw(text_address, &text_cursor_background);"
+      ],
+      "current": [
+        "\t\tsas_loadw(text_address, &text_cursor_background); saved_text_address = text_address; saved_cursor_kind = MOUSE_SAVED_TEXT;"
+      ]
+    },
+    {
+      "original_start": 5526,
+      "original_count": 2,
+      "current_start": 5309,
+      "current_count": 2,
+      "original": [
+        "\ttext_address = 0xb8000 + sas_w_at(VID_ADDR) +",
+        "\t\tpoint_as_text_cell_address(&save_position);"
+      ],
+      "current": [
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-900): keep the original VM-linear address across mode/page changes. */",
+        "\ttext_address = saved_text_address;"
+      ]
+    },
+    {
+      "original_start": 5624,
+      "original_count": 0,
+      "current_start": 5408,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        boolean scaled_mouse = jap_mouse;"
+      ]
+    },
+    {
+      "original_start": 5625,
+      "original_count": 1,
+      "current_start": 5410,
+      "current_count": 1,
+      "original": [
+        "        if (jap_mouse) {"
+      ],
+      "current": [
+        "        if (scaled_mouse) {"
+      ]
+    },
+    {
+      "original_start": 5649,
+      "original_count": 1,
+      "current_start": 5434,
+      "current_count": 1,
+      "original": [
+        "\t\tsave_area_in_use = TRUE;"
+      ],
+      "current": [
+        "\t\tsave_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_EGA;"
+      ]
+    },
+    {
+      "original_start": 5781,
+      "original_count": 5,
+      "current_start": 5568,
+      "current_count": 0,
+      "original": [
+        "                if (jap_mouse) {",
+        "                        /* put things back how they should be */",
+        "                        cursor_status.position.y = saved_cursor_pos;",
+        "                        virtual_screen.bottom_right.y = saved_bottom_right;",
+        "                }"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 5787,
+      "original_count": 0,
+      "current_start": 5569,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-893): restore temporary coordinates even",
+        "         * when the cursor lies outside the screen or in the exclusion area. */",
+        "        if (scaled_mouse) {",
+        "                cursor_status.position.y = saved_cursor_pos;",
+        "                virtual_screen.bottom_right.y = saved_bottom_right;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 5907,
+      "original_count": 1,
+      "current_start": 5699,
+      "current_count": 1,
+      "original": [
+        "\t\tsave_area_in_use = TRUE;"
+      ],
+      "current": [
+        "\t\tsave_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_VGA;"
+      ]
+    },
+    {
+      "original_start": 6046,
+      "original_count": 1,
+      "current_start": 5841,
+      "current_count": 1,
+      "original": [
+        "\t\tsave_area_in_use = TRUE;"
+      ],
+      "current": [
+        "\t\tsave_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_CGA;"
+      ]
+    },
+    {
+      "original_start": 6609,
+      "original_count": 0,
+      "current_start": 6149,
+      "current_count": 12,
+      "original": [],
+      "current": [
+        "    /* Preserve this invocation before a virtualized EOI can reenter it. */",
+        "    mouse_callback_push(getAX());",
+        "    mouse_callback_push(getBX());",
+        "    mouse_callback_push(getCX());",
+        "    mouse_callback_push(getDX());",
+        "    mouse_callback_push(getSI());",
+        "    mouse_callback_push(getDI());",
+        "    mouse_callback_push(getES());",
+        "    mouse_callback_push(getBP());",
+        "    mouse_callback_push(getDS());",
+        "    mouse_callback_push(condition_mask);",
+        ""
+      ]
+    },
+    {
+      "original_start": 6619,
+      "original_count": 5,
+      "current_start": 6171,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t *\tSet CS:IP to point to the user subroutine. Adjust the IP by",
+        "\t *\t HOST_BOP_IP_FUDGE, since the CPU emulator will increment IP by",
+        "\t *\t HOST_BOP_IP_FUDGE for the BOP instruction before proceeding",
+        "\t */"
+      ],
+      "current": [
+        "\t/* Set CS:IP to the registered user subroutine. */"
+      ]
+    },
+    {
+      "original_start": 6626,
+      "original_count": 0,
+      "current_start": 6177,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported original CPU30 mouse callback",
+        "#else /* !CPU_30_STYLE */",
+        "#if defined(CPU_40_STYLE)",
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-222): CPU40's CCPU starts at live EIP.",
+        "\t * An INT 33h callback registered by EDIT points at ordinary guest code,",
+        "\t * not at a BOP marker: its two preceding bytes decode as ADD, while its",
+        "\t * registered entry begins PUSH ES; PUSH DS.  Enter the direct callback at",
+        "\t * that entry.  Keep HOST_BOP_IP_FUDGE for its other, actual BOP callers. */"
+      ]
+    },
+    {
+      "original_start": 6627,
+      "original_count": 2,
+      "current_start": 6187,
+      "current_count": 4,
+      "original": [
+        "#else /* !CPU_30_STYLE */",
+        "\tsetIP(offset + HOST_BOP_IP_FUDGE);"
+      ],
+      "current": [
+        "#else",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 6631,
+      "original_count": 6,
+      "current_start": 6195,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t *\tPut parameters into the registers, saving the previous contents",
+        "\t *\tto be restored in the second part of the mouse hardware ",
+        "\t *\tinterrupt service routine",
+        "\t */",
+        "\tsaved_AX = getAX();"
+      ],
+      "current": [
+        "\t/* Set callback parameters; INT2 restores the saved stack frame. */"
+      ]
+    },
+    {
+      "original_start": 6638,
+      "original_count": 1,
+      "current_start": 6197,
+      "current_count": 0,
+      "original": [
+        "\tsaved_BX = getBX();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 6640,
+      "original_count": 1,
+      "current_start": 6198,
+      "current_count": 0,
+      "original": [
+        "\tsaved_CX = getCX();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 6642,
+      "original_count": 1,
+      "current_start": 6199,
+      "current_count": 0,
+      "original": [
+        "\tsaved_DX = getDX();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 6644,
+      "original_count": 1,
+      "current_start": 6200,
+      "current_count": 0,
+      "original": [
+        "\tsaved_SI = getSI();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 6646,
+      "original_count": 1,
+      "current_start": 6201,
+      "current_count": 0,
+      "original": [
+        "\tsaved_DI = getDI();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 6648,
+      "original_count": 11,
+      "current_start": 6202,
+      "current_count": 0,
+      "original": [
+        "\tsaved_ES = getES();",
+        "\tsaved_BP = getBP();",
+        "\tsaved_DS = getDS();",
+        "",
+        "\t/*",
+        "\t *\tSave the condition mask so that the second part of the mouse",
+        "\t *\thardware interrupt service routine can determine whether the",
+        "\t *\tcursor has changed position",
+        "\t */",
+        "",
+        "\tlast_condition_mask = condition_mask;"
+      ],
+      "current": []
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 60,
+      "original_count": 6,
+      "current_start": 61,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_MOUSE.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 111,
+      "original_count": 49,
+      "current_start": 112,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * We're running with real ROMs on the monitor and so all the hard coded ROM",
+        " * addresses defined below don't work. Pick up the real addresses of this stuff",
+        " * which is now resident in the driver and put it into the MOUSE_ tokens which",
+        " * have been magically changed into variables.",
+        " */",
+        "#undef MOUSE_INT1_SEGMENT",
+        "#undef MOUSE_INT1_OFFSET",
+        "#undef MOUSE_INT2_SEGMENT",
+        "#undef MOUSE_INT2_OFFSET",
+        "#undef MOUSE_IO_INTERRUPT_OFFSET",
+        "#undef MOUSE_IO_INTERRUPT_SEGMENT",
+        "#undef MOUSE_VIDEO_IO_OFFSET",
+        "#undef MOUSE_VIDEO_IO_SEGMENT",
+        "#undef MOUSE_COPYRIGHT_SEGMENT",
+        "#undef MOUSE_COPYRIGHT_OFFSET",
+        "#undef MOUSE_VERSION_SEGMENT",
+        "#undef MOUSE_VERSION_OFFSET",
+        "#undef VIDEO_IO_SEGMENT",
+        "#undef VIDEO_IO_RE_ENTRY",
+        "",
+        "LOCAL word   MOUSE_INT1_SEGMENT, MOUSE_INT1_OFFSET,",
+        "             MOUSE_IO_INTERRUPT_OFFSET, MOUSE_IO_INTERRUPT_SEGMENT,",
+        "             MOUSE_VIDEO_IO_SEGMENT, MOUSE_VIDEO_IO_OFFSET,",
+        "             MOUSE_COPYRIGHT_SEGMENT, MOUSE_COPYRIGHT_OFFSET,",
+        "             MOUSE_VERSION_SEGMENT, MOUSE_VERSION_OFFSET,",
+        "             MOUSE_INT2_SEGMENT, MOUSE_INT2_OFFSET,",
+        "             VIDEO_IO_SEGMENT,  VIDEO_IO_RE_ENTRY;",
+        "",
+        "/* @ACW */",
+        "word DRAW_FS_POINTER_OFFSET; /* holds segment:offset for the Intel code which */",
+        "word DRAW_FS_POINTER_SEGMENT;/* draws the fullscreen mouse cursor */",
+        "word POINTER_ON_OFFSET;",
+        "word POINTER_ON_SEGMENT;",
+        "word POINTER_OFF_OFFSET;",
+        "word POINTER_OFF_SEGMENT;",
+        "WORD F0_OFFSET,F0_SEGMENT;",
+        "word F9_OFFSET,F9_SEGMENT;",
+        "word CP_X_O,CP_Y_O;",
+        "word CP_X_S,CP_Y_S;",
+        "word savedtextsegment,savedtextoffset;",
+        "word button_off,button_seg;",
+        "",
+        "static word mouseINBsegment, mouseINBoffset;",
+        "static word mouseOUTBsegment, mouseOUTBoffset;",
+        "static word mouseOUTWsegment, mouseOUTWoffset;",
+        "sys_addr mouseCFsysaddr;",
+        "sys_addr conditional_off_sysaddr;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 176,
+      "original_count": 3,
+      "current_start": 137,
+      "current_count": 1,
+      "original": [
+        "#include HostHwVgaH",
+        "#include \"hwvga.h\"",
+        "#include \"mouse16b.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 192,
+      "original_count": 4,
+      "current_start": 154,
+      "current_count": 1,
+      "original": [
+        "",
+        "IMPORT VOID (**get_outb_ptr())();",
+        "#define\tOUTB(port, val) (**get_outb_ptr(port))(port, val)",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 475,
+      "original_count": 2,
+      "current_start": 437,
+      "current_count": 1,
+      "original": [
+        "LOCAL void HERC_graphics_cursor_display IPT0();",
+        "LOCAL void HERC_graphics_cursor_undisplay IPT0();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 939,
+      "original_count": 4,
+      "current_start": 903,
+      "current_count": 1,
+      "original": [
+        "   HERC_graphics_virtual_screen.top_left.x = 0;",
+        "   HERC_graphics_virtual_screen.top_left.y = 0;",
+        "   HERC_graphics_virtual_screen.bottom_right.x = 720;",
+        "   HERC_graphics_virtual_screen.bottom_right.y = 350;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 985,
+      "original_count": 54,
+      "current_start": 950,
+      "current_count": 1,
+      "original": [
+        "        /*",
+        "         * Get addresses of stuff usually in ROM from driver",
+        "         * To minimise changes, MOUSE... tokens are now variables and",
+        "         * not defines.",
+        "         */",
+        "",
+        "        block_offset = effective_addr(getCS(), getBX());",
+        "",
+        "        sas_loadw(block_offset, &MOUSE_IO_INTERRUPT_OFFSET);",
+        "        sas_loadw(block_offset+2, &MOUSE_IO_INTERRUPT_SEGMENT);",
+        "        sas_loadw(block_offset+4, &MOUSE_VIDEO_IO_OFFSET);",
+        "        sas_loadw(block_offset+6, &MOUSE_VIDEO_IO_SEGMENT);",
+        "        sas_loadw(block_offset+8, &MOUSE_INT1_OFFSET);",
+        "        sas_loadw(block_offset+10, &MOUSE_INT1_SEGMENT);",
+        "        sas_loadw(block_offset+12, &MOUSE_VERSION_OFFSET);",
+        "        sas_loadw(block_offset+14, &MOUSE_VERSION_SEGMENT);",
+        "        sas_loadw(block_offset+16, &MOUSE_COPYRIGHT_OFFSET);",
+        "        sas_loadw(block_offset+18, &MOUSE_COPYRIGHT_SEGMENT);",
+        "        sas_loadw(block_offset+20, &VIDEO_IO_RE_ENTRY);",
+        "        sas_loadw(block_offset+22, &VIDEO_IO_SEGMENT);",
+        "        sas_loadw(block_offset+24, &MOUSE_INT2_OFFSET);",
+        "        sas_loadw(block_offset+26, &MOUSE_INT2_SEGMENT);",
+        "        sas_loadw(block_offset+28, &DRAW_FS_POINTER_OFFSET);",
+        "        sas_loadw(block_offset+30, &DRAW_FS_POINTER_SEGMENT);",
+        "        sas_loadw(block_offset+32, &F0_OFFSET);",
+        "        sas_loadw(block_offset+34, &F0_SEGMENT);",
+        "        sas_loadw(block_offset+36, &POINTER_ON_OFFSET);",
+        "        sas_loadw(block_offset+38, &POINTER_ON_SEGMENT);",
+        "        sas_loadw(block_offset+40, &POINTER_OFF_OFFSET);",
+        "        sas_loadw(block_offset+42, &POINTER_OFF_SEGMENT);",
+        "        sas_loadw(block_offset+44, &F9_OFFSET);",
+        "        sas_loadw(block_offset+46, &F9_SEGMENT);",
+        "        sas_loadw(block_offset+48, &CP_X_O);",
+        "        sas_loadw(block_offset+50, &CP_X_S);",
+        "        sas_loadw(block_offset+52, &CP_Y_O);",
+        "        sas_loadw(block_offset+54, &CP_Y_S);",
+        "        sas_loadw(block_offset+56, &mouseINBoffset);",
+        "        sas_loadw(block_offset+58, &mouseINBsegment);",
+        "        sas_loadw(block_offset+60, &mouseOUTBoffset);",
+        "        sas_loadw(block_offset+62, &mouseOUTBsegment);",
+        "        sas_loadw(block_offset+64, &mouseOUTWoffset);",
+        "        sas_loadw(block_offset+66, &mouseOUTWsegment);",
+        "        sas_loadw(block_offset+68, &savedtextoffset);",
+        "        sas_loadw(block_offset+70, &savedtextsegment);",
+        "        sas_loadw(block_offset+72, &o);",
+        "        sas_loadw(block_offset+74, &s);",
+        "        sas_loadw(block_offset+76, &button_off);",
+        "        sas_loadw(block_offset+78, &button_seg);",
+        "",
+        "        mouseCFsysaddr = effective_addr(s,o);",
+        "\tsas_loadw(block_offset+80, &o);",
+        "\tsas_loadw(block_offset+82, &s);",
+        "\tconditional_off_sysaddr = effective_addr(s, o);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1059,
+      "original_count": 5,
+      "current_start": 974,
+      "current_count": 1,
+      "original": [
+        "\tsas_loadw (int_addr(MOUSE_VEC) + 0, &saved_int0A_offset);",
+        "\tsas_loadw (int_addr(MOUSE_VEC) + 2, &saved_int0A_segment);",
+        "\tsas_storew(int_addr(MOUSE_VEC), MOUSE_INT1_OFFSET);",
+        "\tsas_storew(int_addr(MOUSE_VEC) + 2, MOUSE_INT1_SEGMENT);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1087,
+      "original_count": 5,
+      "current_start": 1001,
+      "current_count": 1,
+      "original": [
+        "\t/* Read offset of INT 33 procedure from MOUSE.COM */",
+        "\tsas_loadw(effective_addr(getCS(), OFF_HOOK_POSN), &hook_offset);",
+        "",
+        "\tsas_storew(int_addr(0x33), hook_offset);",
+        "\tsas_storew(int_addr(0x33) + 2, getCS());"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1095,
+      "original_count": 4,
+      "current_start": 1008,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t *\tCall 16-bit mouse driver initialisation routine",
+        "\t */",
+        "\tmouse16bInstall( );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1132,
+      "original_count": 1,
+      "current_start": 1045,
+      "current_count": 1,
+      "original": [
+        "\tsas_storedw(int_addr(0x10), mouseIOData.mouse_video_io );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1136,
+      "original_count": 1,
+      "current_start": 1051,
+      "current_count": 1,
+      "original": [
+        "        int10_chained = FALSE;          // make it initialized"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1327,
+      "original_count": 40,
+      "current_start": 1244,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " *\tfunction\t:\tmouse16bCheckConditionalOff ",
+        " *",
+        " *\tpurpose\t\t:\tMake the 16 bit driver check the conditional",
+        " *\t\t\t\toff area and either draw or hide the pointer",
+        " *\t\t\t\tappropriately. This function is only called",
+        " *\t\t\t\twhen the cursor flag is set to",
+        " *\t\t\t\tMOUSE_CURSOR_DISPLAYED.",
+        " *",
+        " *\tinputs\t\t:\tnone",
+        " *\toutputs\t\t:\tnone",
+        " *\treturns\t\t:\tvoid",
+        " *\tglobals\t\t:\tcursor_flag is decremented if the pointer has",
+        " *\t\t\t\tto be hidden",
+        " *\t",
+        " *\t",
+        " */",
+        "LOCAL void mouse16bCheckConditionalOff IFN0()",
+        "{",
+        "\t/* If the mouse has moved into the conditional",
+        "\t** off area (the black hole) then the mouse",
+        "\t** must be hidden and the cursor flag",
+        "\t** decremented, otherwise the mouse is drawn",
+        "\t** in its new position.",
+        "\t*/",
+        "\tif ((cursor_position.x >=",
+        "\t\tblack_hole.top_left.x) &&",
+        "\t\t(cursor_position.x <=",
+        "\t\tblack_hole.bottom_right.x) &&",
+        "\t\t(cursor_position.y >=",
+        "\t\tblack_hole.top_left.y) &&",
+        "\t\t(cursor_position.y <=",
+        "\t\tblack_hole.bottom_right.y))",
+        "\t{",
+        "\t\tcursor_flag--;",
+        "\t\tmouse16bHidePointer();",
+        "\t}",
+        "\telse",
+        "\t\tmouse16bDrawPointer( &cursor_status );",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1372,
+      "original_count": 10,
+      "current_start": 1253,
+      "current_count": 1,
+      "original": [
+        "\tif (video_adapter == HERCULES){",
+        "\t\tif (get_cga_mode() == GRAPHICS){",
+        "\t\t\tvirtual_screen.bottom_right.x = 720;",
+        "\t\t\tvirtual_screen.bottom_right.y = 348;",
+        "\t\t}else{",
+        "\t\t\tvirtual_screen.bottom_right.x = 640;",
+        "\t\t\tvirtual_screen.bottom_right.y = 348;",
+        "\t\t}",
+        "\t\treturn;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1524,
+      "original_count": 54,
+      "current_start": 1399,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define inb(a,b) doINB(a,b)",
+        "#undef  OUTB",
+        "#define OUTB(a,b) doOUTB(a,b)",
+        "#define outw(a,b) doOUTW(a,b)",
+        "",
+        "static void doINB IFN2(word, port, byte, *value)",
+        "{",
+        "word savedIP=getIP(), savedCS=getCS();",
+        "word savedAX=getAX(), savedDX=getDX();",
+        "",
+        "setDX(port);",
+        "setCS(mouseINBsegment);",
+        "setIP(mouseINBoffset);",
+        "host_simulate();",
+        "setCS(savedCS);",
+        "setIP(savedIP);",
+        "*value=getAL();",
+        "setAX(savedAX);",
+        "setDX(savedDX);",
+        "}",
+        "",
+        "static void doOUTB IFN2(word, port, byte, value)",
+        "{",
+        "word savedIP=getIP(), savedCS=getCS();",
+        "word savedAX=getAX(), savedDX=getDX();",
+        "",
+        "setDX(port);",
+        "setAL(value);",
+        "setCS(mouseOUTBsegment);",
+        "setIP(mouseOUTBoffset);",
+        "host_simulate();",
+        "setCS(savedCS);",
+        "setIP(savedIP);",
+        "setAX(savedAX);",
+        "setDX(savedDX);",
+        "}",
+        "",
+        "static void doOUTW IFN2(word, port, word, value)",
+        "{",
+        "word savedIP=getIP(), savedCS=getCS();",
+        "word savedAX=getAX(), savedDX=getDX();",
+        "",
+        "setDX(port);",
+        "setAX(value);",
+        "setCS(mouseOUTWsegment);",
+        "setIP(mouseOUTWoffset);",
+        "host_simulate();",
+        "setCS(savedCS);",
+        "setIP(savedIP);",
+        "setAX(savedAX);",
+        "setDX(savedDX);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1725,
+      "original_count": 8,
+      "current_start": 1555,
+      "current_count": 1,
+      "original": [
+        "#ifdef V7VGA\t\t/* suret */",
+        "\t\tif( (getAH()) == 0x6F )",
+        "\t\t\tparms_addr = find_mode_table(getBL(),&temp_word);\t",
+        "\t\telse",
+        "\t\t\tparms_addr = find_mode_table(getAL(),&temp_word);",
+        "#else",
+        "\t\tparms_addr = find_mode_table(getAL(),&temp_word);",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1742,
+      "original_count": 1,
+      "current_start": 1568,
+      "current_count": 1,
+      "original": [
+        "    sas_store(conditional_off_sysaddr, 0);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1760,
+      "original_count": 1,
+      "current_start": 1589,
+      "current_count": 1,
+      "original": [
+        "extern void host_call_bios_mode_change();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1766,
+      "original_count": 1,
+      "current_start": 1597,
+      "current_count": 1,
+      "original": [
+        "\tif (mouse_video_function == MOUSE_VIDEO_SET_MODE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1782,
+      "original_count": 1,
+      "current_start": 1615,
+      "current_count": 1,
+      "original": [
+        "\t\tif (is_bad_vid_mode(current_video_mode))"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1806,
+      "original_count": 1,
+      "current_start": 1641,
+      "current_count": 1,
+      "original": [
+        "        sas_store(mouseCFsysaddr,(half_word)MOUSE_CURSOR_DEFAULT);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1814,
+      "original_count": 1,
+      "current_start": 1651,
+      "current_count": 1,
+      "original": [
+        "        host_call_bios_mode_change();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1818,
+      "original_count": 5,
+      "current_start": 1657,
+      "current_count": 1,
+      "original": [
+        "\t\t/* Remember whether in text or graphics mode for",
+        "\t\t** later use.",
+        "\t\t*/",
+        "\t\tis_graphics_mode = ((current_video_mode > 3) &&",
+        "\t\t\t(current_video_mode != 7));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1860,
+      "original_count": 10,
+      "current_start": 1698,
+      "current_count": 1,
+      "original": [
+        "    else if (mouse_video_function == MOUSE_VIDEO_LOAD_FONT)",
+        "    {",
+        "                note_trace0(MOUSE_VERBOSE, \"mouse_video_io:load_font()\");",
+        "",
+        "        /*",
+        "         * Call the host to tell it to adjust the mouse buffer selected",
+        "         * if the number of lines on the screen have changed.",
+        "         */",
+        "        host_check_mouse_buffer();",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2020,
+      "original_count": 1,
+      "current_start": 1852,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\toutw(EGA_AC_INDEX_DATA,first+(sas_hw_at(sauce++) << 8));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2027,
+      "original_count": 1,
+      "current_start": 1861,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\toutb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);\t/* re-enable video */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2099,
+      "original_count": 2,
+      "current_start": 1935,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\t\toutw(EGA_AC_INDEX_DATA,sas_hw_at(set_def+2)+(sas_hw_at(set_def+3)<<8));\t/* Using 'secret' that attrib. chip responds to it's port+1 */",
+        "\t\t\t\t\t\t\toutb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);    /* re-enable video */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2183,
+      "original_count": 1,
+      "current_start": 2022,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tif( hostIsFullScreen( ) )"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2192,
+      "original_count": 1,
+      "current_start": 2033,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tif( hostIsFullScreen( ) )"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2208,
+      "original_count": 1,
+      "current_start": 2051,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tif( hostIsFullScreen( ) )"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2214,
+      "original_count": 1,
+      "current_start": 2059,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tif( hostIsFullScreen( ) )"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2218,
+      "original_count": 2,
+      "current_start": 2065,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t/* Video bios chain done from 16 bit */",
+        "\t\t\t\t/* NULL */;\t"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2229,
+      "original_count": 1,
+      "current_start": 2078,
+      "current_count": 1,
+      "original": [
+        "\t\t\tbreak;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2233,
+      "original_count": 1,
+      "current_start": 2084,
+      "current_count": 1,
+      "original": [
+        "\tsetCF( 1 );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2239,
+      "original_count": 3,
+      "current_start": 2092,
+      "current_count": 1,
+      "original": [
+        "#undef inb",
+        "#undef OUTB",
+        "#undef outw"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2351,
+      "original_count": 2,
+      "current_start": 2205,
+      "current_count": 1,
+      "original": [
+        "\tMOUSE_VECTOR mouse_movement;",
+        "\tMOUSE_INPORT_DATA inport_event;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2438,
+      "original_count": 121,
+      "current_start": 2300,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t *\tTerminate the mouse hardware interrupt",
+        "\t */",
+        "\toutb(ICA0_PORT_0, END_INTERRUPT);",
+        "",
+        "\t/*",
+        "\t *\tGet the mouse InPort input event frame",
+        "\t */",
+        "\tinport_get_event(&inport_event);",
+        "",
+        "\tnote_trace3(MOUSE_VERBOSE,",
+        "\t            \"mouse_int1:InPort status=0x%x,data1=%d,data2=%d\",",
+        "\t            inport_event.status,",
+        "\t            inport_event.data_x, inport_event.data_y);",
+        "",
+        "\t/*",
+        "\t *\tUpdate button status and transition information and fill in",
+        "\t *\tbutton bits in the event mask",
+        "\t */",
+        "\tcursor_status.button_status = 0;",
+        "\tcondition_mask = 0;",
+        "",
+        "\tswitch(inport_event.status & MOUSE_INPORT_STATUS_B1_TRANSITION_MASK)",
+        "\t{",
+        "\tcase MOUSE_INPORT_STATUS_B1_RELEASED:",
+        "\t\tcondition_mask |= MOUSE_CALL_MASK_LEFT_RELEASE_BIT;",
+        "\t\tpoint_copy(&cursor_status.position,",
+        "\t\t    &button_transitions[MOUSE_LEFT_BUTTON].release_position);",
+        "\t\tbutton_transitions[MOUSE_LEFT_BUTTON].release_count++;",
+        "\tcase MOUSE_INPORT_STATUS_B1_UP:",
+        "\t\tbreak;",
+        "",
+        "\tcase MOUSE_INPORT_STATUS_B1_PRESSED:",
+        "\t\tcondition_mask |= MOUSE_CALL_MASK_LEFT_PRESS_BIT;",
+        "\t\tpoint_copy(&cursor_status.position,",
+        "\t\t    &button_transitions[MOUSE_LEFT_BUTTON].press_position);",
+        "\t\tbutton_transitions[MOUSE_LEFT_BUTTON].press_count++;",
+        "\tcase MOUSE_INPORT_STATUS_B1_DOWN:",
+        "\t\tcursor_status.button_status |= MOUSE_LEFT_BUTTON_DOWN_BIT;",
+        "\t\tbreak;",
+        "\t}",
+        "",
+        "\tswitch(inport_event.status & MOUSE_INPORT_STATUS_B3_TRANSITION_MASK)",
+        "\t{",
+        "\tcase MOUSE_INPORT_STATUS_B3_RELEASED:",
+        "\t\tcondition_mask |= MOUSE_CALL_MASK_RIGHT_RELEASE_BIT;",
+        "\t\tpoint_copy(&cursor_status.position,",
+        "\t\t    &button_transitions[MOUSE_RIGHT_BUTTON].release_position);",
+        "\t\tbutton_transitions[MOUSE_RIGHT_BUTTON].release_count++;",
+        "\tcase MOUSE_INPORT_STATUS_B3_UP:",
+        "\t\tbreak;",
+        "",
+        "\tcase MOUSE_INPORT_STATUS_B3_PRESSED:",
+        "\t\tcondition_mask |= MOUSE_CALL_MASK_RIGHT_PRESS_BIT;",
+        "\t\tpoint_copy(&cursor_status.position,",
+        "\t\t    &button_transitions[MOUSE_RIGHT_BUTTON].press_position);",
+        "\t\tbutton_transitions[MOUSE_RIGHT_BUTTON].press_count++;",
+        "\tcase MOUSE_INPORT_STATUS_B3_DOWN:",
+        "\t\tcursor_status.button_status |= MOUSE_RIGHT_BUTTON_DOWN_BIT;",
+        "\t\tbreak;",
+        "\t}",
+        "",
+        "\t/*",
+        "\t *\tUpdate position information and fill in position bit in the",
+        "\t *\tevent mask",
+        "\t */",
+        "\tif (inport_event.data_x != 0 || inport_event.data_y != 0)",
+        "\t{",
+        "\t\tcondition_mask |= MOUSE_CALL_MASK_POSITION_BIT;",
+        "",
+        "\t\t\tpoint_set(&mouse_movement, ",
+        "\t\t\t\t\tinport_event.data_x, inport_event.data_y);",
+        "\t\t\t",
+        "\t\t\tpoint_translate(&mouse_raw_motion, &mouse_movement);",
+        "",
+        "\t\t\t/*",
+        "\t\t\t *\tAdjust for sensitivity",
+        "\t\t\t */",
+        "\t\t\tmouse_movement.x = (MOUSE_SCALAR)(((IS32)mouse_movement.x * (IS32)mouse_sens_val.x) / MOUSE_SENS_MULT);",
+        "\t\t\tmouse_movement.y = (MOUSE_SCALAR)(((IS32)mouse_movement.y * (IS32)mouse_sens_val.y) / MOUSE_SENS_MULT);",
+        "",
+        "\t\t\t/*",
+        "\t\t\t * NB. !!!",
+        "\t\t\t * We ought to apply the acceleration curve here",
+        "\t\t\t * and not the double speed set up. However mouse",
+        "\t\t\t * interrupts and mouse display are probably not",
+        "\t\t\t * fast enough anyway to make it worth while adding",
+        "\t\t\t * the acceleration fine tuning. ",
+        "\t\t\t */",
+        "",
+        "\t\t\t/*",
+        "\t\t\t *\tDo speed doubling",
+        "\t\t\t */",
+        "\t\t\tif (    (scalar_absolute(mouse_movement.x) > double_speed_threshold)",
+        "\t\t\t     || (scalar_absolute(mouse_movement.y) > double_speed_threshold))",
+        "\t\t\t\tvector_scale(&mouse_movement, MOUSE_DOUBLE_SPEED_SCALE);",
+        "",
+        "\t\t\t/*",
+        "\t\t\t *\tUpdate the user mouse motion counters",
+        "\t\t\t */",
+        "\t\t\tpoint_translate(&mouse_motion, &mouse_movement);",
+        "",
+        "\t\t\t/*",
+        "\t\t\t *\tConvert the movement from a mouse Mickey count vector",
+        "\t\t\t *\tto a virtual screen coordinate vector, using the",
+        "\t\t\t *\tprevious remainder and saving the new remainder",
+        "\t\t\t */",
+        "\t\t\tvector_scale(&mouse_movement, MOUSE_RATIO_SCALE_FACTOR);",
+        "\t\t\tpoint_translate(&mouse_movement, &cursor_fractional_position);",
+        "\t\t\tpoint_copy(&mouse_movement, &cursor_fractional_position);",
+        "\t\t\tvector_divide_by_vector(&mouse_movement, &mouse_gear);",
+        "\t\t\tvector_mod_by_vector(&cursor_fractional_position, &mouse_gear);",
+        "",
+        "\t\t/*",
+        "\t\t *\tUpdate the absolute cursor position and the windowed",
+        "\t\t *\tand gridded screen cursor position",
+        "\t\t */",
+        "\t\tpoint_translate(&cursor_position, &mouse_movement);",
+        "\t\tcursor_update();",
+        "\t}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2590,
+      "original_count": 20,
+      "current_start": 2335,
+      "current_count": 1,
+      "original": [
+        "",
+        "\tif (alt_found){",
+        "\t\ti--;\t/* Adjust for extra inc */",
+        "\t\tif (condition_mask & alt_user_subroutine_call_mask[i]){",
+        "\t\t\tif (!user_subroutine_critical){",
+        "\t\t\t    user_subroutine_critical = TRUE;",
+        "\t\t\t    jump_to_user_subroutine(condition_mask, alt_user_subroutine_segment[i], alt_user_subroutine_offset[i]);",
+        "\t\t\t}",
+        "\t\t\treturn;",
+        "\t\t}",
+        "\t}else{",
+        "\t\tif (condition_mask & user_subroutine_call_mask){",
+        "\t\t\tif (!user_subroutine_critical){",
+        "\t\t\t\tuser_subroutine_critical = TRUE;",
+        "\t\t\t\tjump_to_user_subroutine(condition_mask, user_subroutine_segment, user_subroutine_offset);",
+        "\t\t\t}",
+        "\t\t\treturn;",
+        "\t\t}",
+        "\t}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2649,
+      "original_count": 3,
+      "current_start": 2387,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif (is_graphics_mode)",
+        "\t\t\t\tmouse16bCheckConditionalOff();",
+        "\t\t\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2671,
+      "original_count": 1,
+      "current_start": 2430,
+      "current_count": 1,
+      "original": [
+        "\tuser_subroutine_critical = FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2692,
+      "original_count": 3,
+      "current_start": 2454,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif (is_graphics_mode)",
+        "\t\t\t\tmouse16bCheckConditionalOff();",
+        "\t\t\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2809,
+      "original_count": 1,
+      "current_start": 2572,
+      "current_count": 1,
+      "original": [
+        "    sas_store(mouseCFsysaddr, MOUSE_CURSOR_DEFAULT);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2892,
+      "original_count": 1,
+      "current_start": 2657,
+      "current_count": 1,
+      "original": [
+        "    sas_store(conditional_off_sysaddr, 0);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2962,
+      "original_count": 3,
+      "current_start": 2737,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif (is_graphics_mode)",
+        "\t\t\t\tmouse16bShowPointer(&cursor_status);",
+        "\t\t\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2972,
+      "original_count": 1,
+      "current_start": 2750,
+      "current_count": 1,
+      "original": [
+        "    host_show_pointer();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2999,
+      "original_count": 3,
+      "current_start": 2786,
+      "current_count": 1,
+      "original": [
+        "\t\tif (is_graphics_mode)",
+        "\t\t\tmouse16bHidePointer();",
+        "\t\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3008,
+      "original_count": 1,
+      "current_start": 2798,
+      "current_count": 1,
+      "original": [
+        "    host_hide_pointer();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3313,
+      "original_count": 1,
+      "current_start": 3124,
+      "current_count": 1,
+      "original": [
+        "\tmouse16bSetBitmap( hot_spot_x_ptr , hot_spot_y_ptr , bitmap_address );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3390,
+      "original_count": 11,
+      "current_start": 3204,
+      "current_count": 1,
+      "original": [
+        "\tif (io_verbose & MOUSE_VERBOSE)",
+        "\t{",
+        "\t\tfprintf(trace_file, \"mouse_io:set_text(type=%d,\",",
+        "\t\t\t*text_cursor_type_ptr);",
+        "\t\tif (*text_cursor_type_ptr == MOUSE_TEXT_CURSOR_TYPE_SOFTWARE)",
+        "\t\t\tfprintf(trace_file, \"screen=0x%x,cursor=0x%x)\\n\",",
+        "\t\t\t\t*parameter1_ptr, *parameter2_ptr);",
+        "\t\telse",
+        "\t\t\tfprintf(trace_file, \"start=%d,stop=%d)\\n\",",
+        "\t\t\t\t*parameter1_ptr, *parameter2_ptr);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3645,
+      "original_count": 10,
+      "current_start": 3452,
+      "current_count": 1,
+      "original": [
+        "\tif (is_graphics_mode)",
+        "\t{",
+        "\t\tif ((cursor_position.x >= black_hole.top_left.x) &&",
+        "\t\t\t(cursor_position.x <= black_hole.bottom_right.x) &&",
+        "\t\t\t(cursor_position.y >= black_hole.top_left.y) &&",
+        "\t\t\t(cursor_position.y <= black_hole.bottom_right.y))",
+        "\t\t\tif (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)",
+        "\t\t\t\tmouse16bHidePointer();",
+        "\t}",
+        "\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3661,
+      "original_count": 3,
+      "current_start": 3463,
+      "current_count": 1,
+      "original": [
+        "",
+        "    sas_store(conditional_off_sysaddr, 1);",
+        "    host_mouse_conditional_off_enabled();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3703,
+      "original_count": 5,
+      "current_start": 3508,
+      "current_count": 1,
+      "original": [
+        "",
+        "    /* real CF resides in 16 bit code */",
+        "    int             saved_cursor_flag = cursor_flag;",
+        "    IS8             copyCF;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3715,
+      "original_count": 2,
+      "current_start": 3519,
+      "current_count": 1,
+      "original": [
+        "    sas_load(mouseCFsysaddr, &copyCF);",
+        "    cursor_flag = (int)copyCF;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3734,
+      "original_count": 1,
+      "current_start": 3548,
+      "current_count": 1,
+      "original": [
+        "    cursor_flag = saved_cursor_flag;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3794,
+      "original_count": 4,
+      "current_start": 3610,
+      "current_count": 1,
+      "original": [
+        "        /* real CF resides in 16 Bit code:  */",
+        "        sas_store(mouseCFsysaddr, (half_word)cursor_flag);",
+        "        if (cursor_flag )",
+        "            cursor_flag = MOUSE_CURSOR_DEFAULT;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3805,
+      "original_count": 1,
+      "current_start": 3621,
+      "current_count": 1,
+      "original": [
+        "\t\tprintf (\"mouse_io.c: invalid call to restore context.\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4016,
+      "original_count": 1,
+      "current_start": 3834,
+      "current_count": 1,
+      "original": [
+        "\t\tfprintf(trace_file, \"mouse_io: Bad page requested\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4050,
+      "original_count": 2,
+      "current_start": 3870,
+      "current_count": 1,
+      "original": [
+        "\tword\t\tcurrent_int0A_offset, current_int0A_segment;",
+        "\tword\t\tcurrent_int10_offset, current_int10_segment;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4067,
+      "original_count": 8,
+      "current_start": 3889,
+      "current_count": 1,
+      "original": [
+        "\t\tsas_loadw (int_addr(MOUSE_VEC) + 0, &current_int0A_offset);",
+        "\t\tsas_loadw (int_addr(MOUSE_VEC) + 2, &current_int0A_segment);",
+        "\t\tsas_loadw (int_addr(0x10) + 0, &current_int10_offset);",
+        "\t\tsas_loadw (int_addr(0x10) + 2, &current_int10_segment);",
+        "\t\tfailed = current_int0A_offset  != MOUSE_INT1_OFFSET ||",
+        "\t\t\t current_int0A_segment != MOUSE_INT1_SEGMENT ||",
+        "\t\t\t current_int10_offset  != MOUSE_VIDEO_IO_OFFSET ||",
+        "\t\t\t current_int10_segment != MOUSE_VIDEO_IO_SEGMENT;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4095,
+      "original_count": 4,
+      "current_start": 3913,
+      "current_count": 1,
+      "original": [
+        "\t\tsas_storew (int_addr(MOUSE_VEC) + 0, saved_int0A_offset);",
+        "\t\tsas_storew (int_addr(MOUSE_VEC) + 2, saved_int0A_segment);",
+        "\t\tsas_storew (int_addr(0x10) + 0, saved_int10_offset);",
+        "\t\tsas_storew (int_addr(0x10) + 2, saved_int10_segment);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4151,
+      "original_count": 4,
+      "current_start": 3969,
+      "current_count": 1,
+      "original": [
+        "\tsas_loadw (int_addr(MOUSE_VEC) + 0, &saved_int0A_offset);",
+        "\tsas_loadw (int_addr(MOUSE_VEC) + 2, &saved_int0A_segment);",
+        "\tsas_storew(int_addr(MOUSE_VEC), MOUSE_INT1_OFFSET);",
+        "\tsas_storew(int_addr(MOUSE_VEC) + 2, MOUSE_INT1_SEGMENT);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4172,
+      "original_count": 13,
+      "current_start": 3990,
+      "current_count": 1,
+      "original": [
+        "\t/* Read offset of INT 33 procedure from MOUSE.COM */",
+        "\tsas_loadw(effective_addr(getCS(), OFF_HOOK_POSN), &hook_offset);",
+        "",
+        "\tsas_storew(int_addr(0x33), hook_offset);",
+        "\tsas_storew(int_addr(0x33) + 2, getCS());",
+        "",
+        "\t/*",
+        "\t *\tMouse video io user interrupt",
+        "\t */",
+        "\tsas_loadw (int_addr(0x10) + 0, &saved_int10_offset);",
+        "\tsas_loadw (int_addr(0x10) + 2, &saved_int10_segment);",
+        "\tsas_storew(int_addr(0x10), MOUSE_VIDEO_IO_OFFSET);",
+        "\tsas_storew(int_addr(0x10) + 2, MOUSE_VIDEO_IO_SEGMENT);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4281,
+      "original_count": 3,
+      "current_start": 4090,
+      "current_count": 1,
+      "original": [
+        "\tget_screen_size();",
+        "\t*m3 = virtual_screen.bottom_right.x - 1;",
+        "\t*m4 = virtual_screen.bottom_right.y - 1;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4376,
+      "original_count": 3,
+      "current_start": 4186,
+      "current_count": 1,
+      "original": [
+        "      /* Remember whether in text or graphics mode for later use. */",
+        "      is_graphics_mode = ((current_video_mode > 3) &&",
+        "                          (current_video_mode != 7));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5051,
+      "original_count": 8,
+      "current_start": 4862,
+      "current_count": 1,
+      "original": [
+        "\tint function = *m1;",
+        "",
+        "\tUNUSED(m2);",
+        "\tUNUSED(m3);",
+        "\tUNUSED(m4);",
+        "",
+        "\tfprintf(trace_file, ",
+        "\t\t\"mouse_io:unrecognised function(fn=%d)\\n\", function);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5155,
+      "original_count": 30,
+      "current_start": 4963,
+      "current_count": 1,
+      "original": [
+        "LOCAL MOUSE_BIT_ADDRESS point_as_HERC_graphics_cell_address IFN1(MOUSE_POINT *,point_ptr)",
+        "{",
+        "\tIMPORT half_word herc_page;",
+        "",
+        "\t/*",
+        "\t *\tReturn the bit offset of the pixel in the graphics mode regen",
+        "\t *\tbuffer (0, 1, 2, 3) bank corresponding to the virtual screen ",
+        "\t *\tposition \"*point_ptr\"",
+        "\t */",
+        "\tIS32 bit_address;",
+        "",
+        "\t/*",
+        "\t *\tGet offset contributions for the cursor's row and column",
+        "\t */",
+        "\tbit_address = ((IS32)720 * (point_ptr->y / 4)) + point_ptr->x;",
+        "",
+        "\t/*",
+        "\t *\tAdjust for current video page - note that for 100% correct emulation,",
+        "\t *\twe should read location 40:49 (the BIOS video mode)... hercules ",
+        "\t *\tapplications put a 6 here to indicate page 0 and a 5 for page 1.",
+        "\t *\tTo avoid a performance penalty the global herc_page is used instead;",
+        "\t *\tthis will have the side effect of making application which try to",
+        "\t *\tset the mouse pointer to the non-displayed page not succeed in doing so.",
+        "\t */",
+        "\tif (herc_page != 0){",
+        "\t\tbit_address += 0x8000L * 8L;",
+        "\t}",
+        "",
+        "\treturn(bit_address);",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5265,
+      "original_count": 2,
+      "current_start": 5073,
+      "current_count": 1,
+      "original": [
+        "\tif (is_graphics_mode)",
+        "\t\treturn;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5299,
+      "original_count": 1,
+      "current_start": 5108,
+      "current_count": 1,
+      "original": [
+        "\tmouse16bShowPointer( );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5322,
+      "original_count": 1,
+      "current_start": 5128,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tEGA_graphics_cursor_display();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5328,
+      "original_count": 3,
+      "current_start": 5135,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif (video_adapter == HERCULES)",
+        "\t\t\t\tHERC_graphics_cursor_display();",
+        "\t\t\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 5414,
+      "original_count": 1,
+      "current_start": 5186,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tEGA_graphics_cursor_undisplay();"
+      ],
+      "current": [
+        "#error Excluded unsupported non-VGG profile"
+      ]
+    },
+    {
+      "original_start": 5604,
+      "original_count": 4,
+      "current_start": 5390,
+      "current_count": 1,
+      "original": [
+        "#ifndef PROD",
+        "\tif (io_verbose & MOUSE_VERBOSE)",
+        "\t    fprintf(trace_file, \"oops - EGA graphics display cursor\\n\");",
+        "#endif /* PROD */"
+      ],
+      "current": [
+        "#error Excluded unsupported REAL_VGA configuration"
+      ]
+    },
+    {
+      "original_start": 5795,
+      "original_count": 4,
+      "current_start": 5586,
+      "current_count": 1,
+      "original": [
+        "#ifndef PROD",
+        "\tif (io_verbose & MOUSE_VERBOSE)",
+        "\t    fprintf(trace_file, \"oops - EGA graphics undisplay cursor\\n\");",
+        "#endif /* PROD */"
+      ],
+      "current": [
+        "#error Excluded unsupported REAL_VGA configuration"
+      ]
+    },
+    {
+      "original_start": 5878,
+      "original_count": 4,
+      "current_start": 5672,
+      "current_count": 1,
+      "original": [
+        "#ifndef PROD",
+        "\tif (io_verbose & MOUSE_VERBOSE)",
+        "\t    fprintf(trace_file, \"oops - VGA graphics display cursor\\n\");",
+        "#endif /* PROD */"
+      ],
+      "current": [
+        "#error Excluded unsupported REAL_VGA configuration"
+      ]
+    },
+    {
+      "original_start": 5965,
+      "original_count": 4,
+      "current_start": 5760,
+      "current_count": 1,
+      "original": [
+        "#ifndef PROD",
+        "\tif (io_verbose & MOUSE_VERBOSE)",
+        "\t    fprintf(trace_file, \"oops - VGA graphics undisplay cursor\\n\");",
+        "#endif /* PROD */"
+      ],
+      "current": [
+        "#error Excluded unsupported REAL_VGA configuration"
+      ]
+    },
+    {
+      "original_start": 6158,
+      "original_count": 151,
+      "current_start": 5954,
+      "current_count": 1,
+      "original": [
+        "LOCAL void HERC_graphics_cursor_display IFN0()",
+        "{",
+        "\t/*",
+        "\t *\tDisplay a representation of the current mouse status on",
+        "\t *\tthe screen using the graphics cursor, provided the",
+        "\t *\tcursor overlaps the virtual screen and lies completely",
+        "\t *\toutside the conditional off area",
+        "\t */",
+        "\tint scan_line_mod;",
+        "\tMOUSE_BIT_ADDRESS bit_shift;",
+        "\tIS32 byte_offset;",
+        "\tsys_addr byte_address;",
+        "\tIU32 strip;",
+        "\tint line, line_max;",
+        "\tint byte_min, byte_max;",
+        "",
+        "\t/*",
+        "\t *\tGet area cursor will cover on screen",
+        "\t */",
+        "\tpoint_copy(&cursor_status.position, &save_area.top_left);",
+        "\tpoint_copy(&cursor_status.position, &save_area.bottom_right);",
+        "\tpoint_translate(&save_area.bottom_right, &graphics_cursor.size);",
+        "\tpoint_translate_back(&save_area.top_left, &graphics_cursor.hot_spot);",
+        "\tpoint_translate_back(&save_area.bottom_right, &graphics_cursor.hot_spot);",
+        "",
+        "\tif (    area_is_intersected_by_area(&HERC_graphics_virtual_screen, &save_area)",
+        "\t    && !area_is_intersected_by_area(&black_hole, &save_area))",
+        "\t{",
+        "\t\t/*",
+        "\t\t *\tRecord save position and screen area",
+        "\t\t */",
+        "\t\tsave_area_in_use = TRUE;",
+        "\t\tpoint_copy(&save_area.top_left, &save_position);",
+        "\t\tarea_coerce_to_area(&save_area, &HERC_graphics_virtual_screen);",
+        "",
+        "\t\t/*",
+        "\t\t *\tGet cursor byte offset relative to the start of the ",
+        "\t\t *\teven or odd bank, and bit shift to apply",
+        "\t\t */",
+        "\t\tscan_line_mod = save_area.top_left.y % 4;",
+        "\t\tbyte_offset = point_as_HERC_graphics_cell_address(&save_position);",
+        "\t\tbit_shift = byte_offset & 7;",
+        "\t\tbyte_offset >>= 3;",
+        "",
+        "\t\t/*",
+        "\t\t *\tGet range of cursor lines that need to be displayed",
+        "\t\t */",
+        "\t\tline = save_area.top_left.y - save_position.y;",
+        "\t\tline_max = area_depth(&save_area);",
+        "",
+        "\t\t/*",
+        "\t\t *\tGet range of bytes that need to be displayed",
+        "\t\t */",
+        "\t\tbyte_min = 0;",
+        "\t\tbyte_max = 2;",
+        "\t\tif (save_position.x < 0)",
+        "\t\t\tbyte_min += (7 - save_position.x) / 8;",
+        "\t\telse if (area_width(&save_area) < MOUSE_GRAPHICS_CURSOR_WIDTH)",
+        "\t\t\tbyte_max -= (8 + MOUSE_GRAPHICS_CURSOR_WIDTH - area_width(&save_area)) / 8;",
+        "",
+        "\t\twhile (line < line_max)",
+        "\t\t{",
+        "\t\t\tswitch (scan_line_mod){",
+        "\t\t\tcase 0:",
+        "\t\t\t\tscan_line_mod++;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x0000 + byte_offset;",
+        "\t\t\t\tbreak;",
+        "\t\t\tcase 1:",
+        "\t\t\t\tscan_line_mod++;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x2000 + byte_offset;",
+        "\t\t\t\tbreak;",
+        "\t\t\tcase 2:",
+        "\t\t\t\tscan_line_mod++;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x4000 + byte_offset;",
+        "\t\t\t\tbreak;",
+        "\t\t\tcase 3:",
+        "\t\t\t\tscan_line_mod=0;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x6000 + byte_offset;",
+        "\t\t\t\tbyte_offset += 720 / 8;",
+        "\t\t\t\tbreak;",
+        "\t\t\t}",
+        "",
+        "\t\t\tif (bit_shift)",
+        "\t\t\t{",
+        "\t\t\t\t/*",
+        "\t\t\t\t *\tGet save area",
+        "\t\t\t\t */",
+        "\t\t\t\tstrip =  (IU32)sas_hw_at(byte_address) << 16;",
+        "\t\t\t\tstrip |= (unsigned short)sas_hw_at(byte_address+1) << 8;",
+        "\t\t\t\tstrip |= sas_hw_at(byte_address+2);",
+        "\t\t\t\tgraphics_cursor_background[line] = ",
+        "\t\t\t\t\t\tstrip >> (8 - bit_shift);",
+        "",
+        "\t\t\t\t/*",
+        "\t\t\t\t *\tOverlay cursor line",
+        "\t\t\t\t */",
+        "\t\t\t\tstrip &= (SHIFT_VAL >> bit_shift);",
+        "\t\t\t\tstrip |= (IU32)((graphics_cursor_background[line] &",
+        "\t\t\t\t    graphics_cursor.screen[line]) ^",
+        "\t\t\t\t    graphics_cursor.cursor[line]) ",
+        "\t\t\t\t\t\t<< (8 - bit_shift);",
+        "",
+        "\t\t\t\t/*",
+        "\t\t\t\t *\tStash cursor line and alert gvi",
+        "\t\t\t\t */",
+        "\t\t\t\tif (byte_min <= 0 && byte_max >= 0)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tsas_store(byte_address, strip >> 16);",
+        "\t\t\t\t}",
+        "\t\t\t\tif (byte_min <= 1 && byte_max >= 1)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tsas_store(byte_address+1, strip >> 8);",
+        "\t\t\t\t}",
+        "\t\t\t\tif (byte_min <= 2 && byte_max >= 2)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tsas_store(byte_address+2, strip);",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "\t\t\telse",
+        "\t\t\t{",
+        "\t\t\t\t/*",
+        "\t\t\t\t *\tGet save area",
+        "\t\t\t\t */",
+        "\t\t\t\tgraphics_cursor_background[line] = (sas_hw_at(byte_address) << 8) + ",
+        "\t\t\t\t\t\t\t\t    sas_hw_at(byte_address+1);",
+        "",
+        "\t\t\t\t/*",
+        "\t\t\t\t *\tGet overlaid cursor line",
+        "\t\t\t\t */",
+        "\t\t\t\tstrip = (graphics_cursor_background[line] & ",
+        "\t\t\t\t    graphics_cursor.screen[line]) ^",
+        "\t\t\t\t    graphics_cursor.cursor[line];",
+        "",
+        "\t\t\t\t/*",
+        "\t\t\t\t *\tStash cursor line and alert gvi",
+        "\t\t\t\t */",
+        "\t\t\t\tif (byte_min <= 0 && byte_max >= 0)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tsas_store(byte_address, strip >> 8);",
+        "\t\t\t\t}",
+        "\t\t\t\tif (byte_min <= 1 && byte_max >= 1)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tsas_store(byte_address+1, strip);",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "\t\t\tline++;",
+        "\t\t}",
+        "\t}",
+        "}",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 6417,
+      "original_count": 112,
+      "current_start": 6066,
+      "current_count": 1,
+      "original": [
+        "",
+        "LOCAL void HERC_graphics_cursor_undisplay IFN0()",
+        "{",
+        "\t/*",
+        "\t *\tRemove the graphics cursor representation of the mouse",
+        "\t *\tstatus",
+        "\t */",
+        "\tint scan_line_mod;",
+        "\tMOUSE_BIT_ADDRESS bit_shift;",
+        "\tIS32 byte_offset;",
+        "\tsys_addr byte_address;",
+        "\tIU32 strip;",
+        "\tint line, line_max;",
+        "\tint byte_min, byte_max;",
+        "",
+        "\t/*",
+        "\t *\tGet cursor byte offset relative to the start of the ",
+        "\t *\teven or odd bank, and bit shift to apply",
+        "\t */",
+        "\tscan_line_mod = save_area.top_left.y % 4;",
+        "\tbyte_offset = point_as_HERC_graphics_cell_address(&save_position);",
+        "\tbit_shift = byte_offset & 7;",
+        "\tbyte_offset >>= 3;",
+        "",
+        "\t/*",
+        "\t *\tGet range of cursor lines that need to be displayed",
+        "\t */",
+        "\tline = save_area.top_left.y - save_position.y;",
+        "\tline_max = area_depth(&save_area);",
+        "",
+        "\t/*",
+        "\t *\tGet range of bytes that need to be displayed",
+        "\t */",
+        "\tbyte_min = 0;",
+        "\tbyte_max = 2;",
+        "\tif (save_position.x < 0)",
+        "\t\tbyte_min += (7 - save_position.x) / 8;",
+        "\telse if (area_width(&save_area) < MOUSE_GRAPHICS_CURSOR_WIDTH)",
+        "\t\tbyte_max -= (8 + MOUSE_GRAPHICS_CURSOR_WIDTH - area_width(&save_area)) / 8;",
+        "",
+        "\twhile(line < line_max)",
+        "\t{",
+        "\t\t\tswitch (scan_line_mod){",
+        "\t\t\tcase 0:",
+        "\t\t\t\tscan_line_mod++;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x0000 + byte_offset;",
+        "\t\t\t\tbreak;",
+        "\t\t\tcase 1:",
+        "\t\t\t\tscan_line_mod++;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x2000 + byte_offset;",
+        "\t\t\t\tbreak;",
+        "\t\t\tcase 2:",
+        "\t\t\t\tscan_line_mod++;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x4000 + byte_offset;",
+        "\t\t\t\tbreak;",
+        "\t\t\tcase 3:",
+        "\t\t\t\tscan_line_mod=0;",
+        "\t\t\t\tbyte_address = gvi_pc_low_regen + 0x6000 + byte_offset;",
+        "\t\t\t\tbyte_offset += 720 / 8;",
+        "\t\t\t\tbreak;",
+        "\t\t\t}",
+        "",
+        "\t\tif (bit_shift)",
+        "\t\t{",
+        "\t\t\t/*",
+        "\t\t\t *\tGet cursor line",
+        "\t\t\t */",
+        "\t\t\tstrip =  (IU32)sas_hw_at(byte_address) << 16;",
+        "\t\t\tstrip |= (unsigned short)sas_hw_at(byte_address+1) << 8;",
+        "\t\t\tstrip |= sas_hw_at(byte_address+2);",
+        "",
+        "\t\t\t/*",
+        "\t\t\t *\tOverlay save area",
+        "\t\t\t */",
+        "\t\t\tstrip &= (SHIFT_VAL >> bit_shift);",
+        "\t\t\tstrip |= (IU32)graphics_cursor_background[line]",
+        "\t\t\t\t\t<< (8 - bit_shift);",
+        "",
+        "\t\t\t/*",
+        "\t\t\t *\tStash cursor line and alert gvi",
+        "\t\t\t */",
+        "\t\t\tif (byte_min <= 0 && byte_max >= 0)",
+        "\t\t\t{",
+        "\t\t\t\tsas_store(byte_address, strip >> 16);",
+        "\t\t\t}",
+        "\t\t\tif (byte_min <= 1 && byte_max >= 1)",
+        "\t\t\t{",
+        "\t\t\t\tsas_store(byte_address+1, strip >> 8);",
+        "\t\t\t}",
+        "\t\t\tif (byte_min <= 2 && byte_max >= 2)",
+        "\t\t\t{",
+        "\t\t\t\tsas_store(byte_address+2, strip);",
+        "\t\t\t}",
+        "\t\t}",
+        "\t\telse",
+        "\t\t{",
+        "\t\t\t/*",
+        "\t\t\t *\tStash save area",
+        "\t\t\t */",
+        "\t\t\tstrip = graphics_cursor_background[line];",
+        "\t\t\tif (byte_min <= 0 && byte_max >= 0)",
+        "\t\t\t{",
+        "\t\t\t\tsas_store(byte_address, strip >> 8);",
+        "\t\t\t}",
+        "\t\t\tif (byte_min <= 1 && byte_max >= 1)",
+        "\t\t\t{",
+        "\t\t\t\tsas_store(byte_address+1, strip);",
+        "\t\t\t}",
+        "\t\t}",
+        "\t\tline++;",
+        "\t}",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "decision": "retain",
+      "area": "DIV-058 range declarations",
+      "evidence": "mouse_io.h MOUSE_SCALAR is short; range callers pass MOUSE_SCALAR members; nt_mouse.c:1922/1940 definitions match. Original word pointer declarations mismatch signed scalar object type.",
+      "verification": "Compile caller/provider together; minimum/maximum and negative-coordinate range semantics."
+    },
+    {
+      "decision": "retain",
+      "area": "DIV-357 context checksum",
+      "evidence": "Original restore sums cookie and all MOUSE_CONTEXT bytes; original save leaves cs zero. Added save sum follows exact bytes written and low-byte comparison.",
+      "verification": "Save/restore roundtrip, altered cookie/data rejection, guest buffer boundaries; no fresh pass claimed."
+    },
+    {
+      "decision": "retain-with-boundary",
+      "area": "DIV-318 callback frame",
+      "evidence": "jump_to_user_subroutine pushes AX BX CX DX SI DI ES BP DS mask before far return address; mouse_int2 pops exact reverse order. Original bios1.asm:418/bios4.asm:747 mouse_int2 BOP then IRET requires SP restored before IRET.",
+      "counter_review": "Guest stack storage separates nested invocation frames whereas original per-VM single save area does not. Additional 20-byte stack requirement and exceptional/nonreturning callback paths require explicit verification; not solved merely by balanced source pushes/pops.",
+      "verification": "Nested callbacks same VM and distinct VMs, register/mask/SP roundtrip, interrupted callback, segmented stack boundaries. Do not modify ROM."
+    },
+    {
+      "decision": "pending-evidence",
+      "area": "old saved register fields",
+      "evidence": "MM_IN_saved_AX..DS and last_condition_mask remain in mouse_io.h; only last_condition_mask initialization found in mouse_io.c after stack conversion.",
+      "change_plan": "Check complete selected references and MM_INSTANCE_DATA size/layout consumer before removing old fields/macros; do not add a second host save stack or silently alter NIDDB layout."
+    }
+  ],
+  "remaining": [
+    "Complete route/display ownership and MONITOR conditional restoration review.",
+    "Review saved background provenance, mode/page changes, per-VM selection and route edge ordering.",
+    "Review current-mode derived jap_mouse and unconditional temporary-coordinate restoration.",
+    "Register all 63 non-exclusion diff blocks in file line order only after completing counter-review."
+  ]
+}

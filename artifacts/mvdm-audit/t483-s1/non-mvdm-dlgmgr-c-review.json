@@ -1,0 +1,913 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+  "before_sha256": "3d3e824d2c517eecb87dc66e7dfbabf8f20884dbb08d3020d77443bd784267e8",
+  "current_sha256": "666f70f14c30aeb6d45e7214c337aafbf4a8565ec6085cd73515dee426096bf1",
+  "functions": [
+    {
+      "name": "DialogBox2",
+      "original_start": 989,
+      "original_end": 1164,
+      "current_start": 31,
+      "current_end": 219,
+      "changes": [
+        {
+          "function": "DialogBox2",
+          "original_start": 1033,
+          "original_count": 0,
+          "current_start": 75,
+          "current_count": 2,
+          "original": [],
+          "current": [
+            "    /* DIVERGENCE(OPENNT-HOST-080): cancellation can release retained PDLG. */",
+            "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+          ]
+        },
+        {
+          "function": "DialogBox2",
+          "original_start": 1053,
+          "original_count": 0,
+          "current_start": 98,
+          "current_count": 2,
+          "original": [],
+          "current": [
+            "            /* DIVERGENCE(OPENNT-HOST-080): queue/dispatch can retire this HWND. */",
+            "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+          ]
+        },
+        {
+          "function": "DialogBox2",
+          "original_start": 1057,
+          "original_count": 8,
+          "current_start": 107,
+          "current_count": 1,
+          "original": [
+            "                if (pwnd == gspwndSysModal) {",
+            "                    /*",
+            "                     * Make this a topmost window",
+            "                     */",
+            "                    NtUserSetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,",
+            "                               SWP_NOSIZE | SWP_NOMOVE |",
+            "                               SWP_NOREDRAW | SWP_NOACTIVATE);",
+            "                }"
+          ],
+          "current": [
+            "#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register."
+          ]
+        },
+        {
+          "function": "DialogBox2",
+          "original_start": 1068,
+          "original_count": 0,
+          "current_start": 113,
+          "current_count": 2,
+          "original": [],
+          "current": [
+            "                /* DIVERGENCE(OPENNT-HOST-080): no update to a destroyed/reused HWND. */",
+            "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+          ]
+        },
+        {
+          "function": "DialogBox2",
+          "original_start": 1099,
+          "original_count": 0,
+          "current_start": 147,
+          "current_count": 2,
+          "original": [],
+          "current": [
+            "            /* DIVERGENCE(OPENNT-HOST-080): PeekMessage can run sent callbacks. */",
+            "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+          ]
+        },
+        {
+          "function": "DialogBox2",
+          "original_start": 1124,
+          "original_count": 1,
+          "current_start": 175,
+          "current_count": 2,
+          "original": [
+            "        if (!RevalidateHwnd(hwnd)) {"
+          ],
+          "current": [
+            "        /* DIVERGENCE(OPENNT-HOST-080): callback identity may remain borrowed. */",
+            "        if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {"
+          ]
+        },
+        {
+          "function": "DialogBox2",
+          "original_start": 1138,
+          "original_count": 1,
+          "current_start": 191,
+          "current_count": 2,
+          "original": [
+            "    if (!RevalidateHwnd(hwnd)) {"
+          ],
+          "current": [
+            "    /* DIVERGENCE(OPENNT-HOST-080): never destroy a replacement numeric HWND. */",
+            "    if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "InternalDialogBox",
+      "original_start": 1177,
+      "original_end": 1283,
+      "current_start": 222,
+      "current_end": 330,
+      "changes": [
+        {
+          "function": "InternalDialogBox",
+          "original_start": 1187,
+          "original_count": 1,
+          "current_start": 232,
+          "current_count": 2,
+          "original": [
+            "    BOOL fDisabled;"
+          ],
+          "current": [
+            "    /* DIVERGENCE(OPENNT-HOST-080): no owner means no prior disabled state. */",
+            "    BOOL fDisabled = FALSE;"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetParentDialog",
+      "original_start": 41,
+      "original_end": 72,
+      "current_start": 353,
+      "current_end": 384,
+      "changes": []
+    },
+    {
+      "name": "xxxSaveDlgFocus",
+      "original_start": 81,
+      "original_end": 95,
+      "current_start": 394,
+      "current_end": 408,
+      "changes": []
+    },
+    {
+      "name": "xxxRestoreDlgFocus",
+      "original_start": 108,
+      "original_end": 131,
+      "current_start": 411,
+      "current_end": 447,
+      "changes": [
+        {
+          "function": "xxxRestoreDlgFocus",
+          "original_start": 113,
+          "original_count": 0,
+          "current_start": 416,
+          "current_count": 2,
+          "original": [],
+          "current": [
+            "    /* DIVERGENCE(OPENNT-HOST-119): retain the saved target across callbacks. */",
+            "    PWND pwndFocusSave;"
+          ]
+        },
+        {
+          "function": "xxxRestoreDlgFocus",
+          "original_start": 123,
+          "original_count": 2,
+          "current_start": 429,
+          "current_count": 11,
+          "original": [
+            "            xxxCheckDefPushButton(pwnd, hwndFocus, hwndFocusSave);",
+            "            fRestored = (NtUserSetFocus(hwndFocusSave) != NULL);"
+          ],
+          "current": [
+            "            pwndFocusSave = ValidateHwnd(hwndFocusSave);",
+            "            if (pwndFocusSave) {",
+            "                xxxCheckDefPushButton(pwnd, hwndFocus, hwndFocusSave);",
+            "                /* DIVERGENCE(OPENNT-HOST-119): no focus to a retired identity. */",
+            "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return FALSE;",
+            "                if (!TestWF(pwndFocusSave, WFDESTROYED) && !(pwndFocusSave->fnid & FNID_STATUS_BITS)) {",
+            "                    fRestored = (NtUserSetFocus(hwndFocusSave) != NULL);",
+            "                    /* DIVERGENCE(OPENNT-HOST-119): SetFocus can free dialog data. */",
+            "                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;",
+            "                }",
+            "            }"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DlgSetFocus",
+      "original_start": 140,
+      "original_end": 148,
+      "current_start": 456,
+      "current_end": 473,
+      "changes": [
+        {
+          "function": "DlgSetFocus",
+          "original_start": 143,
+          "original_count": 0,
+          "current_start": 459,
+          "current_count": 3,
+          "original": [],
+          "current": [
+            "    /* DIVERGENCE(OPENNT-HOST-119): pin exact identity before native callbacks. */",
+            "    PWND pwnd = ValidateHwnd(hwnd);",
+            "    if (!pwnd) return;"
+          ]
+        },
+        {
+          "function": "DlgSetFocus",
+          "original_start": 144,
+          "original_count": 0,
+          "current_start": 464,
+          "current_count": 2,
+          "original": [],
+          "current": [
+            "        /* DIVERGENCE(OPENNT-HOST-119): query may destroy/reuse its HWND. */",
+            "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;"
+          ]
+        },
+        {
+          "function": "DlgSetFocus",
+          "original_start": 146,
+          "original_count": 1,
+          "current_start": 469,
+          "current_count": 2,
+          "original": [
+            ""
+          ],
+          "current": [
+            "    /* DIVERGENCE(OPENNT-HOST-119): selection may also destroy the target. */",
+            "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ValidateDialogPwnd",
+      "original_start": 180,
+      "original_end": 234,
+      "current_start": 491,
+      "current_end": 552,
+      "changes": [
+        {
+          "function": "ValidateDialogPwnd",
+          "original_start": 209,
+          "original_count": 0,
+          "current_start": 520,
+          "current_count": 6,
+          "original": [],
+          "current": [
+            "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+            "    /* DIVERGENCE(OPENNT-HOST-121): initialize public native procedure storage",
+            "     * on this HWND before publishing the original behavior-only PDLG. */",
+            "    if (!wow_dialog_host_initialize(HW(pwnd)))",
+            "        return FALSE;",
+            "#endif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DefDlgProcWorker",
+      "original_start": 446,
+      "original_end": 940,
+      "current_start": 561,
+      "current_end": 1091,
+      "changes": [
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 474,
+          "original_count": 1,
+          "current_start": 589,
+          "current_count": 8,
+          "original": [
+            "    if (((PDIALOG)pwnd)->resultWP != 0)"
+          ],
+          "current": [
+            "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+            "    if (message == WM_NOTIFYFORMAT)",
+            "        return wow_dialog_host_notify(hwnd, message, wParam, lParam, fAnsi);",
+            "    if (message != WM_FINALDESTROY &&",
+            "            wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi) != 0)",
+            "#else",
+            "#error Unsupported excluded original configuration",
+            "#endif"
+          ]
+        },
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 482,
+          "original_count": 2,
+          "current_start": 606,
+          "current_count": 6,
+          "original": [
+            "    if (PDLG(pwnd)->lpfnDlg != NULL) {",
+            "        result = (PDLG(pwnd)->lpfnDlg)(hwnd, message, wParam, lParam);"
+          ],
+          "current": [
+            "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+            "    if (wow_dialog_host_get(hwnd, DWL_DLGPROC, fAnsi) != 0) {",
+            "        result = wow_dialog_host_call(hwnd, message, wParam, lParam, fAnsi);",
+            "#else",
+            "#error Unsupported excluded original configuration",
+            "#endif"
+          ]
+        },
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 648,
+          "original_count": 0,
+          "current_start": 778,
+          "current_count": 3,
+          "original": [],
+          "current": [
+            "                /* DIVERGENCE(OPENNT-HOST-119): failure may mean nested destruction. */",
+            "                if (TestWF(pwndT1, WFDESTROYED) || (pwndT1->fnid & FNID_STATUS_BITS)) break;",
+            ""
+          ]
+        },
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 735,
+          "original_count": 1,
+          "current_start": 869,
+          "current_count": 3,
+          "original": [
+            "                PDLG(pwndT1)->result = wParam;"
+          ],
+          "current": [
+            "                /* DIVERGENCE(OPENNT-HOST-119): helper callbacks can free PDLG. */",
+            "                if (!TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS))",
+            "                    PDLG(pwndT1)->result = wParam;"
+          ]
+        },
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 811,
+          "original_count": 1,
+          "current_start": 948,
+          "current_count": 5,
+          "original": [
+            "            xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));"
+          ],
+          "current": [
+            "            /* DIVERGENCE(OPENNT-HOST-119): retain locks/unlocks, not stale work. */",
+            "            if (!TestWF(pwndTop, WFDESTROYED) && !(pwndTop->fnid & FNID_STATUS_BITS) &&",
+            "                    !TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS) &&",
+            "                    !TestWF(pwndT2, WFDESTROYED) && !(pwndT2->fnid & FNID_STATUS_BITS))",
+            "                xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));"
+          ]
+        },
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 884,
+          "original_count": 2,
+          "current_start": 1026,
+          "current_count": 3,
+          "original": [
+            "            if (lParam == NF_QUERY)",
+            "                return((PDLG(pwnd)->flags & DLGF_ANSI ) ? NFR_ANSI : NFR_UNICODE);"
+          ],
+          "current": [
+            "#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+            "#error Unsupported excluded original configuration",
+            "#endif"
+          ]
+        },
+        {
+          "function": "DefDlgProcWorker",
+          "original_start": 937,
+          "original_count": 1,
+          "current_start": 1082,
+          "current_count": 5,
+          "original": [
+            "        return ((PDIALOG)pwnd)->resultWP;"
+          ],
+          "current": [
+            "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+            "        return wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi);",
+            "#else",
+            "#error Unsupported excluded original configuration",
+            "#endif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DefDlgProcW",
+      "original_start": 952,
+      "original_end": 965,
+      "current_start": 1103,
+      "current_end": 1116,
+      "changes": []
+    },
+    {
+      "name": "DefDlgProcA",
+      "original_start": 967,
+      "original_end": 980,
+      "current_start": 1118,
+      "current_end": 1131,
+      "changes": []
+    },
+    {
+      "name": "RepositionRect",
+      "original_start": 1293,
+      "original_end": 1331,
+      "current_start": 1143,
+      "current_end": 1181,
+      "changes": []
+    },
+    {
+      "name": "MapDialogRect",
+      "original_start": 1339,
+      "original_end": 1361,
+      "current_start": 1190,
+      "current_end": 1212,
+      "changes": []
+    }
+  ],
+  "changes": [
+    {
+      "function": "DialogBox2",
+      "original_start": 1033,
+      "original_count": 0,
+      "current_start": 75,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): cancellation can release retained PDLG. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+      ]
+    },
+    {
+      "function": "DialogBox2",
+      "original_start": 1053,
+      "original_count": 0,
+      "current_start": 98,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-080): queue/dispatch can retire this HWND. */",
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+      ]
+    },
+    {
+      "function": "DialogBox2",
+      "original_start": 1068,
+      "original_count": 0,
+      "current_start": 113,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-080): no update to a destroyed/reused HWND. */",
+        "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+      ]
+    },
+    {
+      "function": "DialogBox2",
+      "original_start": 1099,
+      "original_count": 0,
+      "current_start": 147,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-080): PeekMessage can run sent callbacks. */",
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+      ]
+    },
+    {
+      "function": "DialogBox2",
+      "original_start": 1124,
+      "original_count": 1,
+      "current_start": 175,
+      "current_count": 2,
+      "original": [
+        "        if (!RevalidateHwnd(hwnd)) {"
+      ],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-080): callback identity may remain borrowed. */",
+        "        if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {"
+      ]
+    },
+    {
+      "function": "DialogBox2",
+      "original_start": 1138,
+      "original_count": 1,
+      "current_start": 191,
+      "current_count": 2,
+      "original": [
+        "    if (!RevalidateHwnd(hwnd)) {"
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): never destroy a replacement numeric HWND. */",
+        "    if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {"
+      ]
+    },
+    {
+      "function": "InternalDialogBox",
+      "original_start": 1187,
+      "original_count": 1,
+      "current_start": 232,
+      "current_count": 2,
+      "original": [
+        "    BOOL fDisabled;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): no owner means no prior disabled state. */",
+        "    BOOL fDisabled = FALSE;"
+      ]
+    },
+    {
+      "function": "xxxRestoreDlgFocus",
+      "original_start": 113,
+      "original_count": 0,
+      "current_start": 416,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): retain the saved target across callbacks. */",
+        "    PWND pwndFocusSave;"
+      ]
+    },
+    {
+      "function": "xxxRestoreDlgFocus",
+      "original_start": 123,
+      "original_count": 2,
+      "current_start": 429,
+      "current_count": 11,
+      "original": [
+        "            xxxCheckDefPushButton(pwnd, hwndFocus, hwndFocusSave);",
+        "            fRestored = (NtUserSetFocus(hwndFocusSave) != NULL);"
+      ],
+      "current": [
+        "            pwndFocusSave = ValidateHwnd(hwndFocusSave);",
+        "            if (pwndFocusSave) {",
+        "                xxxCheckDefPushButton(pwnd, hwndFocus, hwndFocusSave);",
+        "                /* DIVERGENCE(OPENNT-HOST-119): no focus to a retired identity. */",
+        "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return FALSE;",
+        "                if (!TestWF(pwndFocusSave, WFDESTROYED) && !(pwndFocusSave->fnid & FNID_STATUS_BITS)) {",
+        "                    fRestored = (NtUserSetFocus(hwndFocusSave) != NULL);",
+        "                    /* DIVERGENCE(OPENNT-HOST-119): SetFocus can free dialog data. */",
+        "                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;",
+        "                }",
+        "            }"
+      ]
+    },
+    {
+      "function": "DlgSetFocus",
+      "original_start": 143,
+      "original_count": 0,
+      "current_start": 459,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): pin exact identity before native callbacks. */",
+        "    PWND pwnd = ValidateHwnd(hwnd);",
+        "    if (!pwnd) return;"
+      ]
+    },
+    {
+      "function": "DlgSetFocus",
+      "original_start": 144,
+      "original_count": 0,
+      "current_start": 464,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): query may destroy/reuse its HWND. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;"
+      ]
+    },
+    {
+      "function": "DlgSetFocus",
+      "original_start": 146,
+      "original_count": 1,
+      "current_start": 469,
+      "current_count": 2,
+      "original": [
+        ""
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): selection may also destroy the target. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;"
+      ]
+    },
+    {
+      "function": "ValidateDialogPwnd",
+      "original_start": 209,
+      "original_count": 0,
+      "current_start": 520,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    /* DIVERGENCE(OPENNT-HOST-121): initialize public native procedure storage",
+        "     * on this HWND before publishing the original behavior-only PDLG. */",
+        "    if (!wow_dialog_host_initialize(HW(pwnd)))",
+        "        return FALSE;",
+        "#endif"
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 474,
+      "original_count": 1,
+      "current_start": 589,
+      "current_count": 8,
+      "original": [
+        "    if (((PDIALOG)pwnd)->resultWP != 0)"
+      ],
+      "current": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    if (message == WM_NOTIFYFORMAT)",
+        "        return wow_dialog_host_notify(hwnd, message, wParam, lParam, fAnsi);",
+        "    if (message != WM_FINALDESTROY &&",
+        "            wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi) != 0)",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 482,
+      "original_count": 2,
+      "current_start": 606,
+      "current_count": 6,
+      "original": [
+        "    if (PDLG(pwnd)->lpfnDlg != NULL) {",
+        "        result = (PDLG(pwnd)->lpfnDlg)(hwnd, message, wParam, lParam);"
+      ],
+      "current": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    if (wow_dialog_host_get(hwnd, DWL_DLGPROC, fAnsi) != 0) {",
+        "        result = wow_dialog_host_call(hwnd, message, wParam, lParam, fAnsi);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 648,
+      "original_count": 0,
+      "current_start": 778,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): failure may mean nested destruction. */",
+        "                if (TestWF(pwndT1, WFDESTROYED) || (pwndT1->fnid & FNID_STATUS_BITS)) break;",
+        ""
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 735,
+      "original_count": 1,
+      "current_start": 869,
+      "current_count": 3,
+      "original": [
+        "                PDLG(pwndT1)->result = wParam;"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): helper callbacks can free PDLG. */",
+        "                if (!TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS))",
+        "                    PDLG(pwndT1)->result = wParam;"
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 811,
+      "original_count": 1,
+      "current_start": 948,
+      "current_count": 5,
+      "original": [
+        "            xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));"
+      ],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-119): retain locks/unlocks, not stale work. */",
+        "            if (!TestWF(pwndTop, WFDESTROYED) && !(pwndTop->fnid & FNID_STATUS_BITS) &&",
+        "                    !TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS) &&",
+        "                    !TestWF(pwndT2, WFDESTROYED) && !(pwndT2->fnid & FNID_STATUS_BITS))",
+        "                xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));"
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 884,
+      "original_count": 2,
+      "current_start": 1026,
+      "current_count": 3,
+      "original": [
+        "            if (lParam == NF_QUERY)",
+        "                return((PDLG(pwnd)->flags & DLGF_ANSI ) ? NFR_ANSI : NFR_UNICODE);"
+      ],
+      "current": [
+        "#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 937,
+      "original_count": 1,
+      "current_start": 1082,
+      "current_count": 5,
+      "original": [
+        "        return ((PDIALOG)pwnd)->resultWP;"
+      ],
+      "current": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "        return wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "function": "DialogBox2",
+      "original_start": 1057,
+      "original_count": 8,
+      "current_start": 107,
+      "current_count": 1,
+      "original": [
+        "                if (pwnd == gspwndSysModal) {",
+        "                    /*",
+        "                     * Make this a topmost window",
+        "                     */",
+        "                    NtUserSetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,",
+        "                               SWP_NOSIZE | SWP_NOMOVE |",
+        "                               SWP_NOREDRAW | SWP_NOACTIVATE);",
+        "                }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "source_derived_function_line_mismatches": [
+    {
+      "function": "DialogBox2",
+      "current_line": 78,
+      "original_line": 1034,
+      "logical_line": 1036
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 79,
+      "original_line": 1035,
+      "logical_line": 1037
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 80,
+      "original_line": 1036,
+      "logical_line": 1038
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 81,
+      "original_line": 1037,
+      "logical_line": 1039
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 150,
+      "original_line": 1100,
+      "logical_line": 1102
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 151,
+      "original_line": 1101,
+      "logical_line": 1103
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 152,
+      "original_line": 1102,
+      "logical_line": 1104
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 153,
+      "original_line": 1103,
+      "logical_line": 1105
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 154,
+      "original_line": 1104,
+      "logical_line": 1106
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 177,
+      "original_line": 1125,
+      "logical_line": 1126
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 178,
+      "original_line": 1126,
+      "logical_line": 1127
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 179,
+      "original_line": 1127,
+      "logical_line": 1128
+    },
+    {
+      "function": "DialogBox2",
+      "current_line": 180,
+      "original_line": 1128,
+      "logical_line": 1129
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "current_line": 872,
+      "original_line": 736,
+      "logical_line": 738
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "current_line": 873,
+      "original_line": 737,
+      "logical_line": 739
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "current_line": 874,
+      "original_line": 738,
+      "logical_line": 740
+    }
+  ],
+  "format_restorations": [
+    {
+      "function": "DialogBox2",
+      "original_start": 983,
+      "original_end": 987
+    },
+    {
+      "function": "GetParentDialog",
+      "original_start": 27,
+      "original_end": 39
+    },
+    {
+      "function": "xxxSaveDlgFocus",
+      "original_start": 74,
+      "original_end": 79
+    },
+    {
+      "function": "DlgSetFocus",
+      "original_start": 134,
+      "original_end": 138
+    },
+    {
+      "function": "ValidateDialogPwnd",
+      "original_start": 165,
+      "original_end": 178
+    },
+    {
+      "function": "DefDlgProcWorker",
+      "original_start": 440,
+      "original_end": 444
+    },
+    {
+      "function": "DefDlgProcW",
+      "original_start": 943,
+      "original_end": 950
+    },
+    {
+      "function": "RepositionRect",
+      "original_start": 1285,
+      "original_end": 1292
+    },
+    {
+      "function": "MapDialogRect",
+      "original_start": 1333,
+      "original_end": 1337
+    },
+    {
+      "reason": "Remove obsolete production staging sentence"
+    },
+    {
+      "reason": "Remove redundant EOF blank lines"
+    }
+  ],
+  "initial_review": "Original functions reordered into modal and manager cohorts; retained focus/default-dialog code uses one existing WND/PDLG and native procedure/result owner. fDisabled initialization removes undefined no-owner value.",
+  "counter_review": "Borrow preserves allocation, not native HWND identity. Fixture state retirement is not actual handle-reuse proof. Native-owner probe proves real A/W slot behavior in its subject, not full original ValidateDialogPwnd initialization failure/reentry. Omitted numeric and check-button helpers do not justify importing full USER.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: control-body-dlgmgr /WOW_ORIGINAL_DIALOG_MANAGER",
+    "src/wow32-dll/source/wow_dialog_creation_binding.c: common task/borrow/context scope",
+    "src/wow32-dll/source/wow_dialog_finalization_binding.c: original manager dispatch and cleanup",
+    "src/wow32-dll/source/wow_dialog_procedure_bindings.c: single native procedure/MSGRESULT owner",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c: modal return,WM_QUIT and retirement",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c: focus,DM_SETDEFID,WM_NEXTDLGCTL retirement",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c: real native A/W/result/notify/cleanup"
+  ],
+  "limits": "Source/fixture inspection only; no new build/runtime result. Functional fixes not applied. Reordered functions compared independently to avoid treating moves as replacements. Source-derived line mapping not compiler verified; report does not assert every retained branch hit."
+}

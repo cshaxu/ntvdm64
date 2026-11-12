@@ -1,0 +1,24 @@
+{
+  "process": {
+    "reason": "Preserved deleted wmmedia2 historical path without broken live link",
+    "started": "2026-11-11T22:53:33.4827769-08:00",
+    "pid": 33192
+  },
+  "exit_code": 0,
+  "output": "Documentation governance verification passed.\nDocumentation relative-link verification passed.\n",
+  "checks": [
+    "documentation governance",
+    "documentation relative links",
+    "git diff --check"
+  ],
+  "repairs": [
+    "Two mojibake punctuation sequences corrected in CURRENT.md",
+    "Historical wmmedia2.c path kept as text after approved file deletion; broken live link removed"
+  ],
+  "limits": "Governance verifies documentation and register structure; build, runtime and publication evidence are in delivery-verification.json. Legacy aliases remain auxiliary candidates.",
+  "final_closure_checks": {
+    "exit_code": 0,
+    "output": "Documentation governance verification passed.\nDocumentation relative-link verification passed.\n",
+    "staged_diff_check": "passed"
+  }
+}

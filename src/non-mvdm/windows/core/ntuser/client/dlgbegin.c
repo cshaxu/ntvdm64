@@ -10,8 +10,7 @@
 
 /* DIVERGENCE(OPENNT-HOST-081): complete original client creator unit.
  * Private precomp binds the admitted dialog/control dependency group.
- * No template, font, shared-DS or creation algorithm is replaced here.
- * Staged only; not yet selected by the production build. */
+ * No template, font, shared-DS or creation algorithm is replaced here. */
 #line 11
 #include "precomp.h"
 #pragma hdrstop
@@ -1035,4 +1034,3 @@ CreateDialogReturn:
 
     return hwnd;
 }
-

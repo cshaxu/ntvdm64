@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+  "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+  "current_sha256": "1c5660ad0dbb88ccb808f155093b3821fbd91816a71d11f3de8e46d8ae2d05f6",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 50,
+      "original_count": 2,
+      "current_start": 50,
+      "current_count": 2
+    },
+    {
+      "original_start": 71,
+      "original_count": 9,
+      "current_start": 72,
+      "current_count": 2
+    },
+    {
+      "original_start": 149,
+      "original_count": 4,
+      "current_start": 145,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Every textual difference enumerated; selected change is only listed IRET stack installation, if any. Remaining changes are excluded bodies and line directives.",
+  "limits": "Necessity audit only; no new build/run or all-context branch-hit certification."
+}

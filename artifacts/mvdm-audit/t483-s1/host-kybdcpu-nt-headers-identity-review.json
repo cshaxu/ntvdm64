@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/kybdcpu.gi",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_cga.h",
+      "sha256": "8e92a1b59d9737f1753ccba9f22d17af6c6a3dd2f518a414957123afb69ce57e",
+      "bytes": 499
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_cgalt.h",
+      "sha256": "d2257e6ea428f4dcc19bf7b86c8c3c5029446acef194516cf553e0957a36b09a",
+      "bytes": 3565
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+      "sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+      "bytes": 2227
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_det.h",
+      "sha256": "839be6a786ad7de62c13cda1548e19eacd9a9ab6ace95e207d1009caf4502326",
+      "bytes": 624
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_ega.h",
+      "sha256": "d60c53fef1c7403cfb534c45bae48a9524ea4dd218adc48b68f7183b35461e7e",
+      "bytes": 486
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_egalt.h",
+      "sha256": "8b2fda045350ff2747e9ff9da471acde3d8e1b2cd76beaf4d97746a45926a5f4",
+      "bytes": 2456
+    }
+  ],
+  "limits": "kybdcpu.gi outside C/H census; other six files already included in471 identical count."
+}

@@ -1,0 +1,41 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+  "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292",
+  "current_sha256": "8460b74a7ff1e6d654c5d5561ab325dfdd46f3eb1cb3bdd572c76fbdcb2f0177",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 31,
+      "original_end": 35,
+      "current_error_line": 33
+    },
+    {
+      "original_start": 261,
+      "original_end": 307,
+      "current_error_line": 261
+    },
+    {
+      "original_start": 342,
+      "original_end": 342,
+      "current_error_line": 299
+    },
+    {
+      "original_start": 348,
+      "original_end": 385,
+      "current_error_line": 307
+    },
+    {
+      "original_start": 461,
+      "original_end": 461,
+      "current_error_line": 386
+    },
+    {
+      "original_start": 639,
+      "original_end": 676,
+      "current_error_line": 566
+    }
+  ],
+  "limits": "Boundary-aware comparison proves retained nonblank/non-line text unchanged. No new all-context reachability, runtime or full logical-line certification."
+}

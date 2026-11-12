@@ -1,0 +1,294 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+  "original_sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d",
+  "current_sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 26,
+      "original_count": 6,
+      "current_start": 27,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"VIDEO_BIOS_VGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ],
+      "original_guard": "#ifdef SEGMENTATION"
+    },
+    {
+      "original_start": 68,
+      "original_count": 1,
+      "current_start": 66,
+      "current_count": 1,
+      "original": [
+        "#include \"trace.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifndef PROD"
+    },
+    {
+      "original_start": 146,
+      "original_count": 8,
+      "current_start": 146,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* load the required DAC in */",
+        "\tdac = host_load_vga_dac (table);",
+        "",
+        "\t/* check it worked */",
+        "\tif (!dac)",
+        "\t\treturn;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef\tmacintosh"
+    },
+    {
+      "original_start": 181,
+      "original_count": 4,
+      "current_start": 177,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* and dump the DAC back into the heap */",
+        "\thost_dump_vga_dac ();",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef\tmacintosh"
+    },
+    {
+      "original_start": 252,
+      "original_count": 4,
+      "current_start": 247,
+      "current_count": 1,
+      "original": [
+        "\tregister sys_addr screen_offset;",
+        "",
+        "\tscreen_offset = video_pc_low_regen+8*row*sas_w_at_no_check(VID_COLS)+pixcol;",
+        "\tsas_store(screen_offset, colour); /* WOW - that's easy!! */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef REAL_VGA"
+    },
+    {
+      "original_start": 286,
+      "original_count": 15,
+      "current_start": 281,
+      "current_count": 1,
+      "original": [
+        "\t/* Not done for back M */",
+        "\tdest = video_pc_low_regen+sas_loadw(VID_ADDR)+",
+        "\t\trow*col_incr*char_height+col;",
+        "\tsource = dest+lines*col_incr;",
+        "\tfor(i=0;i<rowsdiff-lines;i++)",
+        "\t{",
+        "\t\tmemcpy_16(dest,source,colsdiff);",
+        "\t\tsource += col_incr;",
+        "\t\tdest += col_incr;",
+        "\t}",
+        "\twhile(lines--)",
+        "\t{",
+        "\t\tmemset_16(dest,attr,colsdiff);",
+        "\t\tdest += col_incr;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef REAL_VGA"
+    },
+    {
+      "original_start": 339,
+      "original_count": 16,
+      "current_start": 323,
+      "current_count": 1,
+      "original": [
+        "\t/* Not done for back M */",
+        "\tdest = video_pc_low_regen+sas_loadw(VID_ADDR)+",
+        "\t\trow*col_incr*char_height+col;",
+        "\tdest += (rowsdiff-1)*col_incr;",
+        "\tsource = dest-lines*col_incr;",
+        "\tfor(i=0;i<rowsdiff-lines;i++)",
+        "\t{",
+        "\t\tmemcpy_16(dest,source,colsdiff);",
+        "\t\tsource -= col_incr;",
+        "\t\tdest -= col_incr;",
+        "\t}",
+        "\twhile(lines--)",
+        "\t{",
+        "\t\tmemset_16(dest,attr,colsdiff);",
+        "\t\tdest -= col_incr;",
+        "\t}"
+      ],
+      "current": [
+        "#error Excluded unsupported REAL_VGA configuration"
+      ],
+      "original_guard": "#ifdef REAL_VGA"
+    },
+    {
+      "original_start": 395,
+      "original_count": 1,
+      "current_start": 367,
+      "current_count": 1,
+      "original": [
+        "\tscreen = video_pc_low_regen+row*scan_length*char_height+8*col;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef REAL_VGA"
+    },
+    {
+      "original_start": 422,
+      "original_count": 1,
+      "current_start": 397,
+      "current_count": 1,
+      "original": [
+        "\tscreen = video_pc_low_regen+8*row*sas_w_at_no_check(VID_COLS)+pixcol;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef REAL_VGA"
+    },
+    {
+      "original_start": 670,
+      "original_count": 1,
+      "current_start": 648,
+      "current_count": 1,
+      "original": [
+        "\tIMPORT word vga1b_seg, vga1b_off;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ],
+      "original_guard": "#if defined(NTVDM) && defined(X86GFX)"
+    },
+    {
+      "original_start": 677,
+      "original_count": 1,
+      "current_start": 657,
+      "current_count": 1,
+      "original": [
+        "\tif ( (video_adapter != VGA) && (video_adapter != HERCULES))"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: HERC alternative is not selected; see mirror register."
+      ],
+      "original_guard": "#else"
+    },
+    {
+      "original_start": 686,
+      "original_count": 2,
+      "current_start": 668,
+      "current_count": 1,
+      "original": [
+        "     if( video_adapter == VGA)",
+        "     {"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef HERC "
+    },
+    {
+      "original_start": 702,
+      "original_count": 2,
+      "current_start": 685,
+      "current_count": 1,
+      "original": [
+        "\tsas_storew(buf, vga1b_off);",
+        "\tsas_storew(buf+2, vga1b_seg);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ],
+      "original_guard": "#if defined(NTVDM) && defined(X86GFX)"
+    },
+    {
+      "original_start": 740,
+      "original_count": 2,
+      "current_start": 725,
+      "current_count": 1,
+      "original": [
+        "\tsas_storew(buf+0x27,vd_mode_table[video_mode].ncols);",
+        "\tsas_store(buf+0x29, vd_mode_table[video_mode].npages);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ],
+      "original_guard": "#else"
+    },
+    {
+      "original_start": 767,
+      "original_count": 37,
+      "current_start": 753,
+      "current_count": 1,
+      "original": [
+        "       } /* if VGA */",
+        "    if( video_adapter == HERCULES)",
+        "     {",
+        "\tvideo_mode = sas_hw_at(vd_video_mode);",
+        "\tsas_storew(buf,INT10_1B_DATA);",
+        "\tsas_storew(buf+2,EGA_SEG);",
+        "\tsas_store(buf+0x4, video_mode);\t\t\t\t/* Current video mode */",
+        "\tsas_storew(buf+5,sas_w_at(VID_COLS)); \t\t\t/* Cols on screen */",
+        "\tsas_storew(buf+7,sas_w_at(VID_LEN));  \t\t\t/* Size of screen */",
+        "\tsas_storew(buf+9,sas_w_at(VID_ADDR)); \t\t\t/* Address of screen */",
+        "\tsas_move_bytes_forward(VID_CURPOS,buf+0xB,16);\t    \t/* Cursor positions */",
+        "\tsas_store(buf+0x1b, HERC_CURS_START+HERC_CURS_HEIGHT);  /* Cursor end line */",
+        "\tsas_store(buf+0x1c, HERC_CURS_START);\t\t   \t/* Cursor start line */",
+        "\tsas_store(buf+0x1D, sas_hw_at(vd_current_page));\t",
+        "\tsas_storew(buf+0x1E,sas_w_at(VID_INDEX));",
+        "\tsas_store(buf+0x20, sas_hw_at(vd_crt_mode));",
+        "\tsas_store(buf+0x21, sas_hw_at(vd_crt_palette));",
+        "\tsas_store(buf+0x22, sas_hw_at(vd_rows_on_screen)+1);",
+        "\tsas_storew(buf+0x23, 14);\t\t\t\t/* char height is 14 */",
+        "\tsas_store(buf+0x25,0x01 );\t/* 01=MDA with monochrome display as Active display */",
+        "\tsas_store(buf+0x26, 0);\t\t/* Inactive display (none) */",
+        "",
+        "\tvd_mode_table[video_mode].ncols= 2;\t\t\t/* Black & White 2 colors */",
+        "\tsas_storew(buf+0x27,vd_mode_table[video_mode].ncols);",
+        "\tvd_mode_table[video_mode].npages= 2;\t\t\t/* support 2 pages  */",
+        "\tsas_store(buf+0x29, vd_mode_table[video_mode].npages);",
+        "",
+        "\tsas_store(buf+0x2A, get_scanlines());",
+        "",
+        "\tsas_store(buf+0x2B,0x00);\t/* Primary Font select always 0 */",
+        "\tsas_store(buf+0x2C,0x00);\t/* Secondary Font select always 0 */",
+        "",
+        "",
+        "\tsas_store(buf+0x2D, 0x30);\t/* MDA with Monochrome Display */",
+        "\tsas_store(buf+0x31, 0);\t\t/* 64KB video memory */",
+        "\tsetAX(0x1B); /* We did it! */",
+        "       } /* if HERCULES */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifdef HERC "
+    }
+  ],
+  "initial_review": "Full source comparison contains only fifteen original conditional bodies replaced by #error: segmentation, debug, Macintosh DAC storage, REAL_VGA memory access, X86GFX, Hercules and non-V7 alternatives.",
+  "counter_review": "Every changed body begins immediately after its original conditional boundary and ends at its original alternative/end. All remaining source lines match exactly after omitting #line. Selected VGA palette, pixel/scroll and INT10 state reporting implementations are unchanged; no new runtime defect or repair is inferred.",
+  "limits": "Exclusion-only content classification, not universal build-context or diagnostic-line certification."
+}

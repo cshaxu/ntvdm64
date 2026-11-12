@@ -1,13 +1,21 @@
+/*++ BUILD Version: 0001    // Increment this if a change has global effects
+
+/****************************** Module Header ******************************\
+* Module Name: usercli.h
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* Typedefs, defines, and prototypes that are used exclusively by the User
+* client-side DLL.
+*
+* History:
+* 04-27-91 DarrinM      Created from PROTO.H, MACRO.H and STRTABLE.H
+\***************************************************************************/
+
 #line 15
 #ifndef _USERCLI_
 #define _USERCLI_
-/* Copyright (c) 1985-91, Microsoft Corporation.
- * Original windows/core/ntuser/client/usercli.h declaration subset.
- * DIVERGENCE(OPENNT-HOST-072/074): retain original EDIT state, validation,
- * initialization macros and lookaside declarations;
- * private precompiled environment and unrelated USER declarations excluded.
- * The consuming facade supplies the original WND/ICH and Windows ABI types.
- */
+
 #ifndef OPENNT_USERCLI_LOOKASIDE_SUBSET_H
 #define OPENNT_USERCLI_LOOKASIDE_SUBSET_H
 
@@ -179,23 +187,46 @@ void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
 
 typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
 
-/* DIVERGENCE(OPENNT-HOST-074): original registration extent, distinct from
- * the four-byte PED field in EDITWND. Retain the original constant. */
+#line 570
 /* Window extra bytes */
 #define CBEDITEXTRA 6
 
-/* OPENNT-HOST-074: original EDIT allocation, limit and key-modifier
- * declarations from usercli.h; values are consumed by unchanged bodies. */
+/*
+ * NOTE: Text handle is sized as multiple of this constant
+ *       (should be power of 2).
+ */
 #define CCHALLOCEXTRA   0x20
+
+/* Maximum width in pixels for a line/rectangle */
+
 #define MAXPIXELWIDTH   30000
+
 #define MAXCLIPENDPOS   32764
+
+/* Limit multiline edit controls to at most 1024 characters on a single line.
+ * We will force a wrap if the user exceeds this limit.
+ */
+
 #define MAXLINELENGTH   1024
+
+/*
+ * Allow an initial maximum of 30000 characters in all edit controls since
+ * some apps will run into unsigned problems otherwise.  If apps know about
+ * the 64K limit, they can set the limit themselves.
+ */
 #define MAXTEXT         30000
+
+/*
+ * Key modifiers which have been pressed.  Code in KeyDownHandler and
+ * CharHandler depend on these exact values.
+ */
 #define NONEDOWN   0 /* Neither shift nor control down */
 #define CTRLDOWN   1 /* Control key only down */
 #define SHFTDOWN   2 /* Shift key only down */
 #define SHCTDOWN   3 /* Shift and control keys down = CTRLDOWN + SHFTDOWN */
 #define NOMODIFY   4 /* Neither shift nor control down */
+
+#line 617
 #define UNDO_NONE   0  /* We can't undo the last operation. */
 #define UNDO_INSERT 1  /* We can undo the user's insertion of characters */
 #define UNDO_DELETE 2  /* We can undo the user's deletion of characters */
@@ -1246,4 +1277,3 @@ typedef struct tagMDIWND {
 #line 2671
 #endif // FE_SB
 #line 2672
-

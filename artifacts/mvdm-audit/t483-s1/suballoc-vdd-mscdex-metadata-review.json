@@ -1,0 +1,115 @@
+{
+  "entries": [
+    {
+      "sequence": "860",
+      "path": "src/mvdm-host/suballoc/suballoc.txt",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\suballoc.txt",
+      "original_sha256": "5f8ef01da1307cb393db9c2e6dbaa505d2dc14abc2625d0cafa39695c12c6cf7",
+      "before_sha256": "f79dc8b36a2b7e99af71e92f9a910c8301e05b799f5c383d5a9cc7d66fdeab01",
+      "current_sha256": "5f8ef01da1307cb393db9c2e6dbaa505d2dc14abc2625d0cafa39695c12c6cf7",
+      "bytes": 7258,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "861",
+      "path": "src/mvdm-host/suballoc/obj/_objects.mac",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\suballoc\\obj\\_objects.mac",
+      "original_sha256": "d4bb0b4f285aa32979f67755665be35dcc17c7bdd7a0ccaa968a5ca72dc89d9d",
+      "before_sha256": "d64376fae75796b93cb3230429258381c2e97e768a01765de4d33d114e2ca051",
+      "current_sha256": "d4bb0b4f285aa32979f67755665be35dcc17c7bdd7a0ccaa968a5ca72dc89d9d",
+      "bytes": 306,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "862",
+      "path": "src/mvdm-host/suballoc/obj/i386/suballoc.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\suballoc\\obj\\i386\\suballoc.obj",
+      "original_sha256": "92b4e62c7ab84e413b4590ea3148b87804cd675d8d6cbc85dffb74edbd2801b9",
+      "before_sha256": "92b4e62c7ab84e413b4590ea3148b87804cd675d8d6cbc85dffb74edbd2801b9",
+      "current_sha256": "92b4e62c7ab84e413b4590ea3148b87804cd675d8d6cbc85dffb74edbd2801b9",
+      "bytes": 23800,
+      "restored_newlines": false
+    },
+    {
+      "sequence": "863",
+      "path": "src/mvdm-host/vdd/dirs",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\dirs",
+      "original_sha256": "5afd3a3a4afbe0e9a35ff2759d46fab6b2201611073bea6af8656848a4f2a14b",
+      "before_sha256": "a4589ec7df1b1b8c7b8600d242bd7114cdcc78547a98ee45741dbc527acafdd9",
+      "current_sha256": "5afd3a3a4afbe0e9a35ff2759d46fab6b2201611073bea6af8656848a4f2a14b",
+      "bytes": 439,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "864",
+      "path": "src/mvdm-host/vdd/vddserv.doc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\vddserv.doc",
+      "original_sha256": "4202f2f705a5b9cc552ad437bc76fdd4d7d389d2f9e40fd25665eb6518a699ba",
+      "before_sha256": "25e5f116d6dd0ea2c91c73b4253e0788329092df55ae5c23ce16b8d8428bbf4b",
+      "current_sha256": "4202f2f705a5b9cc552ad437bc76fdd4d7d389d2f9e40fd25665eb6518a699ba",
+      "bytes": 24775,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "865",
+      "path": "src/mvdm-host/vdd/samples/dirs",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\dirs",
+      "original_sha256": "7f2feae05f890842834ed5951e73351dc50771ea37c3e4aad5b5cbbf336bac82",
+      "before_sha256": "147c074970968e7a9759c7b64bec43c0173600827e53ce92725e536add8cc544",
+      "current_sha256": "7f2feae05f890842834ed5951e73351dc50771ea37c3e4aad5b5cbbf336bac82",
+      "bytes": 561,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "866",
+      "path": "src/mvdm-host/vdd/samples/readme",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\readme",
+      "original_sha256": "8aa70f6151632d7c74d7f1786a9d3f9a172176ba36934b294c7016c0e388c9bc",
+      "before_sha256": "f268b1fde588d9275f62b1a10c55e75221a59d97c3209f96785073a2523cf8cf",
+      "current_sha256": "8aa70f6151632d7c74d7f1786a9d3f9a172176ba36934b294c7016c0e388c9bc",
+      "bytes": 684,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "867",
+      "path": "src/mvdm-host/vdd/samples/mscdex/dirs",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\dirs",
+      "original_sha256": "ec53b38ff1e577c7e52643395580b18f3600469a6426cd480ae79b454364a718",
+      "before_sha256": "a00762f7c4fb64253d6c64e49523803b66cddf0c5ff870c55a52ce85c2386841",
+      "current_sha256": "ec53b38ff1e577c7e52643395580b18f3600469a6426cd480ae79b454364a718",
+      "bytes": 432,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "868",
+      "path": "src/mvdm-host/vdd/samples/mscdex/readme.txt",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\readme.txt",
+      "original_sha256": "0a640502ca6e2bd5ac12984c67fb5b4d5b51531bec6908604a574a14debd8994",
+      "before_sha256": "54272ae508c68e0968bbe0ca46c0fb192cfc697057864461063ee9521b13a740",
+      "current_sha256": "0a640502ca6e2bd5ac12984c67fb5b4d5b51531bec6908604a574a14debd8994",
+      "bytes": 649,
+      "restored_newlines": true
+    },
+    {
+      "sequence": "869",
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/makefile",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\makefile",
+      "original_sha256": "b6eda631fac82bdc1f658af98d33d2928e6aed045b282013eaf2f57123671495",
+      "before_sha256": "b6eda631fac82bdc1f658af98d33d2928e6aed045b282013eaf2f57123671495",
+      "current_sha256": "b6eda631fac82bdc1f658af98d33d2928e6aed045b282013eaf2f57123671495",
+      "bytes": 317,
+      "restored_newlines": false
+    },
+    {
+      "sequence": "870",
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/mscdex.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\mscdex.h",
+      "original_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+      "before_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+      "current_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+      "bytes": 7792,
+      "restored_newlines": false
+    }
+  ],
+  "limits": "Eight newline-only restorations; two identical non-C/H artifacts; mscdex.h byte identity rechecked. No runtime/build proof."
+}

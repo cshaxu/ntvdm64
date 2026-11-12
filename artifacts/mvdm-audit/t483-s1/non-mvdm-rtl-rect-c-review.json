@@ -1,0 +1,31 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+  "original_sha256": "7eb718ce4671ba8f1f50f891f61d4bb1ef2a1ebef5f55c09dd145310ed496354",
+  "before_sha256": "2761eb922e6de3cde93a7a6ff8e8543d8ede7065055af9e2e85196de5c7ec199",
+  "current_sha256": "86b92bf8f78ffc3a049dd1d0e96351f160b3f05a35dbf701bee9db2b10e42c82",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Consider using windows.h directly for this RECT-only unit instead of the shared dialog-state precomp, after verifying actual compile context; do not create another standalone component.",
+    "Keep complete original CopyInflateRect leaf and APIENTRY contract.",
+    "Keep ordinary SetRect/IsRectEmpty/PtInRect/OffsetRect/InflateRect/IntersectRect/UnionRect/EqualRect/SubtractRect/CopyRect/SetRectEmpty at public Win32 boundary; do not duplicate entire original library.",
+    "Keep omitted CopyOffsetRect unused; restore only if an admitted caller actually requires it."
+  ],
+  "counter_review": [
+    "Shared include is build convenience, not runtime defect; avoid moving equivalent complexity into a new facade.",
+    "Replacing with two calls adds work without needed benefit; current tiny leaf has no private host state.",
+    "This is a justified host boundary, not proof for invalid-pointer or signed-overflow inputs; no new exceptional-input promises.",
+    "Absence scoped to current source; future caller admission must revisit, not add speculative provider now."
+  ],
+  "evidence": [
+    "src/wow32-dll/include/control-state/precomp.h;tools/build/New-T404S5Wow32ProviderNinja.ps1:572",
+    "src/non-mvdm/windows/core/ntuser/client/combo.c:1864;editsl.c:821;lboxrare.c:529;test/adapter-mvdm-host-out/wow/wow_edit_drawing_fixture.c:88-91",
+    "OpenNT rect.c public routines;src/wow32-dll/include/control-client/precomp.h;control-state/precomp.h",
+    "Whole src/test C/H symbol search;original rect.c CopyOffsetRect"
+  ],
+  "entries_added": 4,
+  "format_sites": 2,
+  "limits": [
+    "No fresh build/runtime.",
+    "Native boundary accepted for reached RECT operations, not undefined inputs."
+  ]
+}

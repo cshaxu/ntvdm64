@@ -1,0 +1,79 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+  "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+  "before_sha256": "188cf5ee53e4c32e591fac8e4aea93b09de736789328ed921423e590e8763e17",
+  "current_sha256": "652b76dc69f0d1cf4b4ad60602962b9088d71da85992af0ac57c628e0ffde062",
+  "retained_body_exact_except_one_table_access": true,
+  "initial_review": "Entire file compared: retained GetFullUserHandle body differs solely at table entry address; all DDEML allocation/cleanup manager functions omitted; TESTING frame retained excluded.",
+  "counter_review": "Shared published identity is not native HWND or cleanup ownership. Preserve low-word fallback. Dead empty macro can be removed later; TLS simplification requires full context evidence and must not increase mirror diff.",
+  "items": [
+    [
+      "/* DIVERGENCE",
+      23,
+      2,
+      "retain",
+      "Original precomp/PCH omitted because this function subset is textually included under a bounded binding with PHE and metadata definitions.",
+      "Keep include ownership in wow_user_object_bindings.c; do not pull full USER/DDE precomp into the binding.",
+      "Compile actual including translation unit and fixture."
+    ],
+    [
+      "#ifdef TESTING",
+      26,
+      12,
+      "retain",
+      "DDEML allocator globals and GROW_COUNT are unrelated to GetFullUserHandle, which uses shared USER metadata.",
+      "Retain omitted allocator state; do not create a second handle table.",
+      "Verify full-handle consumers still use published metadata and not cleanup ownership."
+    ],
+    [
+      "#define CheckHandleTable()",
+      60,
+      1,
+      "delete",
+      "Empty CheckHandleTable macro survives only for omitted DDEML functions; retained GetFullUserHandle never invokes it.",
+      "Remove dead empty macro in later partial-code cleanup, retaining original conditional framework/exclusion policy. Whole file remains required.",
+      "Search complete including translation unit for macro consumers, compile and compare selected tokens."
+    ],
+    [
+      "DWORD GetFullUserHandle",
+      62,
+      231,
+      "retain",
+      "Omitted Create/Destroy/Get/Set/ValidateCHandle, PciiFromHandle and ApplyFunctionToObjects manage DDEML client objects, not shared USER handle completion.",
+      "Keep finite GetFullUserHandle subset; no allocator/iteration callback import.",
+      "Retain direct registered callback tests and distinguish public HWND conversion from internal token."
+    ],
+    [
+      "phe = WowSharedHandleEntry",
+      302,
+      1,
+      "pending evidence",
+      "Single table-address substitution is necessary for copied shared metadata; original bound/type/uniqueness/fallback algorithm remains exact. Current accessor ignores index and uses a TLS pointer set around a non-reentrant call.",
+      "Keep copied-row boundary now. Audit whether caller-owned row can be supplied through a smaller existing facade without new mirror signature/algorithm or table-sized copy; compare total code before proposing TLS removal.",
+      "Test zero/ffff, absent/non-window/window entries, generation reuse, metadata failure and no cleanup owner; verify no reentrant operation is introduced."
+    ],
+    [
+      "return(wHandle);",
+      322,
+      33,
+      "retain",
+      "BestSetLastDDEMLError traverses omitted DDEML instance allocation table and has no dependency from retained completion function.",
+      "Keep omitted error-broadcast manager; preserve original low-word fallback exactly.",
+      "Do not replace fallback with zero or IsWindow; existing retirement/metadata fixture cases remain relevant."
+    ],
+    [
+      "#endif // TESTING",
+      59,
+      3,
+      "correct",
+      "Shortened TESTING body leaves its #else/closing directive source-derived logical positions needing explicit verification/restoration.",
+      "Restore original #line at retained conditional boundaries without enabling TESTING or importing its manager.",
+      "Compare compiler diagnostic mapping against original positions in actual include context."
+    ]
+  ],
+  "format_restorations": [
+    "Original complete module header restored"
+  ],
+  "evidence": "wow_user_object_bindings.c copied-row scope; wow_user_registration_bridge.c registered_full_handle; walias.h FULLHWND32; test/mvdm-host/wow_page_domain_fixture.c; test/adapter-mvdm-host-out/wow/wow_process_retirement_fixture.c",
+  "limits": "Fixture assertions inspected, not run. Source-derived conditional line correction not yet applied."
+}

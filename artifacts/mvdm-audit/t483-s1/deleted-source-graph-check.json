@@ -1,0 +1,27 @@
+{
+  "deleted_sources": [
+    "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+    "src/mvdm-host/vdmredir/vrdebug.c",
+    "src/mvdm-host/vdmredir/vrdlcdbg.c",
+    "src/mvdm-host/wow32/wmmedia1.c",
+    "src/mvdm-host/wow32/wmmedia2.c",
+    "src/mvdm-host/wow32/wmmstru1.c",
+    "src/mvdm-host/wow32/wmmstru2.c",
+    "src/mvdm-host/wow32/wmmstruc.c"
+  ],
+  "graphs_scanned": [
+    "build\\.ninja\\msvc-x64-release\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\hook\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\launcher\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\monitor\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\service\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\worker\\build.ninja",
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja",
+    "build\\.ninja\\msvc-x86-release\\build.ninja",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja"
+  ],
+  "remaining_source_path_hits": [],
+  "method": "Exact deleted repository-relative C path in regenerated Ninja graphs; supplements successful cached links, not proof of every historical reference."
+}

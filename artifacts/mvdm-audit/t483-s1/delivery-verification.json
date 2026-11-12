@@ -1,0 +1,92 @@
+{
+  "cached_build_exit": 0,
+  "structural_exit": 0,
+  "package": "6ace4e9a-48ea-48ac-abd9-94e966b67c78",
+  "images": [
+    {
+      "name": "VCDEX.DLL",
+      "current_input_sha256": "FB8588B3C96803FCBF70DB2050E5FA865D685D8F2A773AAFDC1DA72D839A011C",
+      "published_input_sha256": "23AE87A2FC40D7D802C2BC612197BF9F9B529BB30CC289DF4C3ECD54D7DF5D0C",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "run16.exe",
+      "current_input_sha256": "3A18FC06EDD6FD4413C4CC8BEC99058F2ACE984AB631DB59AD94D2BDEEAC1805",
+      "published_input_sha256": "4888A1D66AEF8EB199DADBFA6D0166F3F73B49CF40628890B672125336880F9F",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "current_input_sha256": "F58712C9BB2A16B7E390A7BA02FA691CA0B546FF21304AB8CB5F7B35440EA634",
+      "published_input_sha256": "68E96CA26F78677C644814C79C0AF97D0A722E7F106D4ED10C2FD981A779BF02",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "ntcon.exe",
+      "current_input_sha256": "3F50E60261CFDDC0BD6CEDC72EFA8233DFF41BE76A43E081A67D45AD1ECFF5E6",
+      "published_input_sha256": "69D8F5121F1F434D40B0738C3EB9B4364308AE292F77B687F91E91461FC62D32",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "current_input_sha256": "16A448C4EA69EF628D713D71680B8DD69F20A0006D7613CE4EDC2B8B297031A9",
+      "published_input_sha256": "59171F189E16079F145E8091894869EBC84037058D570E1E7852C688E4770D46",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "current_input_sha256": "32D9C387D07362AC74180F5DEAAC2EF1214BA5C9D9B18F5C390BE3279F8608C2",
+      "published_input_sha256": "8DD8AF86B08233EC6388C4FE39FD3366CDC86F6A4C33DD96A504CC33CD201C98",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "ntmon.exe",
+      "current_input_sha256": "C5DF6F4E5AE410FCD156EB9B114613CB5F6BEFB3608523B4887434EA01D1C48F",
+      "published_input_sha256": "C5DF6F4E5AE410FCD156EB9B114613CB5F6BEFB3608523B4887434EA01D1C48F",
+      "raw_build_input_identical": true,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "current_input_sha256": "0B312448B48F94007BE6D0F642F5034A7F162A07EB4CAEE8CF692846A3DD2A9D",
+      "published_input_sha256": "6FB4984C78A773DC7854EA6E030FDDAF25B16821A86542B17604605C299BE1DE",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "current_input_sha256": "455BA6DAEAD69E40AA90374B4058BF105ACBC7A8C6DA495816C86CC9C6EF7BC6",
+      "published_input_sha256": "A6F46385EC925A57886BD34CC734730706586D4CC7272CBA9BB698AF48C86391",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "nthook32.dll",
+      "current_input_sha256": "F94FB7E1AD84328BF42218C02B08AA03BD5D45FC2B99E966CED09052B17FF586",
+      "published_input_sha256": "431A27962AAFB8F8C80F944CB084DACAF0CE4ED2795D11DCC558510B477BF90E",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    },
+    {
+      "name": "nthook64.dll",
+      "current_input_sha256": "ABD8F8EB77B2645A72B49723BA81D55236E205B213A847FD46CECDA1C66A6E5E",
+      "published_input_sha256": "5E062274D9175C1F30C2347D821FEF768DA72A77DD50A13AE57D2C5C35F52D31",
+      "raw_build_input_identical": false,
+      "candidate_manifest_hash_verified": true
+    }
+  ],
+  "full_status": "passed: 16 selected Full gates; external DOS4GW/NESticle fixture explicitly skipped",
+  "publication": "11 images published and SHA-256 verified at assets/release and O:/winnt/system32",
+  "test_changes": "Replace stale system OLETHK32 requirement with selected thoputil/binding link checks; check two selected WINMM lazy exports rather than dormant original names.",
+  "preserved_unrelated_changes": [
+    "docs/states/QUEUE.md",
+    "docs/proposals/proposal-win203-setup-installation-001.md"
+  ],
+  "source_changes_since_build": "Only test/governance/evidence changes; no product code changed after cached build."
+}

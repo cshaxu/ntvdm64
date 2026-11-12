@@ -17,6 +17,17 @@
 #include "precomp.h"
 #pragma hdrstop
 
+/***************************************************************************\
+* xxxSetWindowLong (API)
+*
+* Set a window long.  Positive index values set application window longs
+* while negative index values set system window longs.  The negative
+* indices are published in WINDOWS.H.
+*
+* History:
+* 26-Nov-1990 DarrinM   Wrote.
+\***************************************************************************/
+
 #line 256
 DWORD xxxSetWindowLong(
     PWND  pwnd,

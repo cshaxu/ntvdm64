@@ -1,0 +1,229 @@
+{
+  "path": "src/mvdm-host/wow32/wudlg.c",
+  "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+  "current_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+  "changes": [
+    {
+      "original_start": 16,
+      "original_count": 0,
+      "current_start": 16,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */",
+        "#include \"wow_message_lifetime.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Header supplies existing shared original-converter finalizer declarations.",
+      "change_plan": "Retain required declaration dependency while finalizers remain.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 29,
+      "original_count": 1,
+      "current_start": 32,
+      "current_count": 4,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before construction. */",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Per-call zeroed conversion and shared finalization protect partial construction; completed is set only after successful callback and original output conversion, not the shared error label.",
+      "change_plan": "Validate complete dialog conversion/callback/output/finalizer interval with task retirement, reentrant release and failed callback; retain one original converter owner, consolidate only proven redundant cleanup.",
+      "missing_evidence": "Actual W32DialogFunc and WU32IsDialogMessage failure/exception integration. Located alias/subclass fixtures substitute W32DialogFunc; ABI check proves signature only."
+    },
+    {
+      "original_start": 86,
+      "original_count": 0,
+      "current_start": 96,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        wm32mpex.fFree = TRUE; /* DIV-344: same synchronous contract as WndProc. */"
+      ],
+      "decision": "pending",
+      "necessity": "Per-call zeroed conversion and shared finalization protect partial construction; completed is set only after successful callback and original output conversion, not the shared error label.",
+      "change_plan": "Validate complete dialog conversion/callback/output/finalizer interval with task retirement, reentrant release and failed callback; retain one original converter owner, consolidate only proven redundant cleanup.",
+      "missing_evidence": "Actual W32DialogFunc and WU32IsDialogMessage failure/exception integration. Located alias/subclass fixtures substitute W32DialogFunc; ABI check proves signature only."
+    },
+    {
+      "original_start": 152,
+      "original_count": 0,
+      "current_start": 165,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = TRUE; /* DIV-349: not the shared failure-return label. */"
+      ],
+      "decision": "pending",
+      "necessity": "Per-call zeroed conversion and shared finalization protect partial construction; completed is set only after successful callback and original output conversion, not the shared error label.",
+      "change_plan": "Validate complete dialog conversion/callback/output/finalizer interval with task retirement, reentrant release and failed callback; retain one original converter owner, consolidate only proven redundant cleanup.",
+      "missing_evidence": "Actual W32DialogFunc and WU32IsDialogMessage failure/exception integration. Located alias/subclass fixtures substitute W32DialogFunc; ABI check proves signature only."
+    },
+    {
+      "original_start": 161,
+      "original_count": 0,
+      "current_start": 176,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Per-call zeroed conversion and shared finalization protect partial construction; completed is set only after successful callback and original output conversion, not the shared error label.",
+      "change_plan": "Validate complete dialog conversion/callback/output/finalizer interval with task retirement, reentrant release and failed callback; retain one original converter owner, consolidate only proven redundant cleanup.",
+      "missing_evidence": "Actual W32DialogFunc and WU32IsDialogMessage failure/exception integration. Located alias/subclass fixtures substitute W32DialogFunc; ABI check proves signature only."
+    },
+    {
+      "original_start": 1077,
+      "original_count": 1,
+      "current_start": 1098,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Per-call zeroed conversion and shared finalization protect partial construction; completed is set only after successful callback and original output conversion, not the shared error label.",
+      "change_plan": "Validate complete dialog conversion/callback/output/finalizer interval with task retirement, reentrant release and failed callback; retain one original converter owner, consolidate only proven redundant cleanup.",
+      "missing_evidence": "Actual W32DialogFunc and WU32IsDialogMessage failure/exception integration. Located alias/subclass fixtures substitute W32DialogFunc; ABI check proves signature only."
+    },
+    {
+      "original_start": 1090,
+      "original_count": 0,
+      "current_start": 1113,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }"
+      ],
+      "decision": "retain",
+      "necessity": "Reject failed ThunkMsg16 conversion before native IsDialogMessage; HWND0 is not failure authority.",
+      "change_plan": "Retain explicit success check coupled with ThunkMsg16.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1116,
+      "original_count": 0,
+      "current_start": 1141,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Per-call zeroed conversion and shared finalization protect partial construction; completed is set only after successful callback and original output conversion, not the shared error label.",
+      "change_plan": "Validate complete dialog conversion/callback/output/finalizer interval with task retirement, reentrant release and failed callback; retain one original converter owner, consolidate only proven redundant cleanup.",
+      "missing_evidence": "Actual W32DialogFunc and WU32IsDialogMessage failure/exception integration. Located alias/subclass fixtures substitute W32DialogFunc; ABI check proves signature only."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 33,
+      "original_count": 2,
+      "current_start": 41,
+      "current_count": 1,
+      "original": [
+        "    extern INT fWMsgProfRT;",
+        "    DWORD dwTics;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 77,
+      "original_count": 1,
+      "current_start": 86,
+      "current_count": 1,
+      "original": [
+        "        dwTics = GetWOWTicDiff(0L);"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 93,
+      "original_count": 3,
+      "current_start": 106,
+      "current_count": 1,
+      "original": [
+        "        if( !fWMsgProfRT ) {  // only if not round trip profiling",
+        "            aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 119,
+      "original_count": 3,
+      "current_start": 132,
+      "current_count": 1,
+      "original": [
+        "        if( !fWMsgProfRT ) {  // only if not round trip profiling",
+        "            dwTics = GetWOWTicDiff(0L);",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 143,
+      "original_count": 2,
+      "current_start": 156,
+      "current_count": 1,
+      "original": [
+        "        aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);",
+        "        aw32Msg[uMsg].cCalls++;   // increment # times message passed"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 42,
+      "original": 35,
+      "logical": 34
+    },
+    {
+      "current": 107,
+      "original": 96,
+      "logical": 94
+    },
+    {
+      "current": 133,
+      "original": 122,
+      "logical": 120
+    },
+    {
+      "current": 157,
+      "original": 145,
+      "logical": 144
+    }
+  ],
+  "evidence": "W32DialogFunc original error/output path read in full; shared wow_message_lifetime owner previously inspected; ThunkMsg16 owns fThunkSucceeded. Alias/subclass fixtures stub dialog function; callback ABI verifier checks symbol shape.",
+  "limits": [
+    "No tests executed; helper/ABI proof is not whole dialog lifetime proof.",
+    "LF line mapping source-derived only."
+  ]
+}

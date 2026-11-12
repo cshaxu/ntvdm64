@@ -2368,5 +2368,3 @@ Return Value:
     return NERR_Success;
 
 } // RapConvertSingleEntry
-
-

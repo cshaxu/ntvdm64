@@ -1,0 +1,33 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "before_sha256": "b0de135fbac7f436aaed675dae3aaf20be944b59998aebed5622b3fa188eca73",
+  "current_sha256": "f0649cedb6a6327c699e44f964d7b171ab5938360ee7fa44d51e9ae025fd18ba",
+  "status": "difference classification complete; functional remediation not implemented",
+  "evidence": [
+    "src/wow32-dll/include/wow_cleanup_bindings.h:56-60",
+    "src/wow32-dll/include/wow_task_order_bindings.h:180-237",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:299-335",
+    "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c:262-270",
+    "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c"
+  ],
+  "decisions": [
+    "Retain original object-definition control flags for handtabl object metadata and cleanup ownership selection. No private object layout imported; exact numeric flags remain original owner declarations.",
+    "Local flags-only selector shares _USERK_ guard with scheduler inlines. Current known consumers use isolated cleanup versus task-order contexts; audit all actual include paths and order before removing selector or changing guard. A flags-only first include suppresses later full inline admission in same TU; no runtime defect is asserted without such a caller.",
+    "Original pseudo-event close transitions preserved: sentinel ON becomes OFF; actual referenced event is signaled/released then cleared. Host maps reference release to CloseHandle on independently owned handle; do not close borrowed caller handle. Existing task waiter teardown owns lifetime.",
+    "Original CSLockCount/owner algorithm retained with client_context handoff before assigning next owner. Production callback exchanges debug and guest callback/version projection under runtime ownership; this is missing host-boundary work, not a replacement scheduler.",
+    "Client view suspension occurs before owner clear/count decrement, allowing callback to validate previous owner. Preserve this ordering and terminal unbind special handling in existing lifecycle provider; no duplicate projection owner.",
+    "Conditional host presence permits model-only execution without client view transfer. Confirm production invariant host and client_context are installed for every admitted scheduler thread, and decide whether a single boundary assertion can replace silent optionality. Do not remove guard solely because production initialization normally sets it; include fixture composition.",
+    "Detached DEBUG/DBG/MSDWP/FE_IME/MEMPHIS and other frames retain empty selected branches from omitted declarations. Reconcile original owning boundaries, retain necessary _USERK_ and scheduler MSDWP framing, and repair logical anchors. Do not reintroduce unavailable private structures or use product-only absence to discard valid fixture declarations.",
+    "INIT/SET/RESET_PSEUDO_EVENT and broader wait helpers omitted while close retained. Map actual shared-WOW idle waiter creation/signal/reset/delete ownership and check SetEvent/CloseHandle failures in selected adapter. Original assertions are disabled in facade; model event tests are not full failure proof.",
+    "Large omitted header includes kernel probes/objects, USER state layouts, declarations and small inline policies. Private kernel objects are stopping boundaries; selected process/thread/view facades replace only named shapes. Reconcile declarations with actual selected consumers and original layouts rather than treating all omitted declarations as semantically irrelevant or importing full header."
+  ],
+  "entries_added": 9,
+  "format_sites": 1,
+  "limits": [
+    "No fresh build/preprocessor/runtime.",
+    "Broad omitted declaration closure pending.",
+    "Optional host guard and include ordering not proven defective."
+  ]
+}

@@ -266,7 +266,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
            Delay = 1000;
            }
 
-
 #line 257
 #ifdef MONITOR
 #line 258
@@ -332,10 +331,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 
 
 
-/*
- * QuickEvent call back function
- *
- */
 #line 332
 #ifndef MONITOR
 #line 333
@@ -521,5 +516,5 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
 #line 522
 #error Excluded unsupported monitor IRET table
 #line 545
-#endif
+#endif /* MONITOR */
 #line 546

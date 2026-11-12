@@ -1,0 +1,500 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+  "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+  "current_sha256": "896f3a004fc74d626e4010479ecc710db1847ee86a2955f7c4c822070d687494",
+  "changes": [
+    {
+      "original_start": 227,
+      "original_count": 0,
+      "current_start": 227,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-117): color callbacks may destroy this control. */",
+        "    if (!pbutn->spwnd) return NULL;"
+      ]
+    },
+    {
+      "original_start": 265,
+      "original_count": 0,
+      "current_start": 270,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    HWND hwnd;",
+        "",
+        "    /* DIVERGENCE(OPENNT-HOST-117): IsVisible(NULL) is TRUE in the original. */",
+        "    if (!pwnd) return NULL;",
+        "    hwnd = HWq(pwnd);"
+      ]
+    },
+    {
+      "original_start": 271,
+      "original_count": 1,
+      "current_start": 282,
+      "current_count": 1,
+      "original": [
+        "        hdc = NtUserGetDC(HWq(pwnd));"
+      ],
+      "current": [
+        "        hdc = NtUserGetDC(hwnd);"
+      ]
+    },
+    {
+      "original_start": 273,
+      "original_count": 0,
+      "current_start": 284,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): unwind a DC after color destruction. */",
+        "        if (!pbutn->spwnd) { ReleaseDC(hwnd, hdc); return NULL; }"
+      ]
+    },
+    {
+      "original_start": 291,
+      "original_count": 1,
+      "current_start": 305,
+      "current_count": 2,
+      "original": [
+        "    HDC hdc)"
+      ],
+      "current": [
+        "    HDC hdc,",
+        "    HWND hwnd) /* DIVERGENCE(OPENNT-HOST-117): captured before any callout. */"
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 2,
+      "current_start": 310,
+      "current_count": 0,
+      "original": [
+        "    PWND pwnd = pbutn->spwnd;",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 304,
+      "original_count": 1,
+      "current_start": 321,
+      "current_count": 2,
+      "original": [
+        "    ReleaseDC(HWq(pwnd), hdc);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-117): cleanup cannot dereference cleared spwnd. */",
+        "    ReleaseDC(hwnd, hdc);"
+      ]
+    },
+    {
+      "original_start": 583,
+      "original_count": 0,
+      "current_start": 602,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-117): a preceding callback may have destroyed it. */",
+        "    if (!pwnd) return FALSE;",
+        ""
+      ]
+    },
+    {
+      "original_start": 587,
+      "original_count": 0,
+      "current_start": 610,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): capture changes can call application code. */",
+        "        if (!pbutn->spwnd) return FALSE;"
+      ]
+    },
+    {
+      "original_start": 597,
+      "original_count": 0,
+      "current_start": 623,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "        /* DIVERGENCE(OPENNT-HOST-117): focus notification may destroy it. */",
+        "        if (!pbutn->spwnd) return FALSE;"
+      ]
+    },
+    {
+      "original_start": 616,
+      "original_count": 0,
+      "current_start": 646,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(OPENNT-HOST-117): retained storage is not a live control. */",
+        "    if (pwnd->fnid & FNID_STATUS_BITS) return;"
+      ]
+    },
+    {
+      "original_start": 649,
+      "original_count": 0,
+      "current_start": 683,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-117): no capture operation on a destroyed control. */",
+        "    if (!pwnd) return;",
+        ""
+      ]
+    },
+    {
+      "original_start": 653,
+      "original_count": 0,
+      "current_start": 691,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): no more behavior after logical cleanup. */",
+        "        if (!pbutn->spwnd) return;"
+      ]
+    },
+    {
+      "original_start": 663,
+      "original_count": 0,
+      "current_start": 704,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-117): painting can call the parent. */",
+        "                if (!pbutn->spwnd) return;"
+      ]
+    },
+    {
+      "original_start": 672,
+      "original_count": 0,
+      "current_start": 716,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                        /* DIVERGENCE(OPENNT-HOST-117): preserve lock pairing. */",
+        "                        if (!pbutn->spwnd) { ThreadUnlock(&tlpwndT); return; }"
+      ]
+    },
+    {
+      "original_start": 674,
+      "original_count": 0,
+      "current_start": 721,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(OPENNT-HOST-117): either radio call may destroy. */",
+        "                    if (!pbutn->spwnd) { ThreadUnlock(&tlpwndT); return; }"
+      ]
+    },
+    {
+      "original_start": 678,
+      "original_count": 1,
+      "current_start": 728,
+      "current_count": 2,
+      "original": [
+        "                } while (pwndT != pwnd);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-117): callback may remove the group. */",
+        "                } while (pwndT && pwndT != pwnd);"
+      ]
+    },
+    {
+      "original_start": 688,
+      "original_count": 0,
+      "current_start": 740,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): capture notification may destroy it. */",
+        "        if (!pbutn->spwnd) return;"
+      ]
+    },
+    {
+      "original_start": 726,
+      "original_count": 0,
+      "current_start": 781,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(OPENNT-HOST-117): BS_USERBUTTON notifies before drawing text. */",
+        "    if (!pwnd) return;"
+      ]
+    },
+    {
+      "original_start": 1180,
+      "original_count": 0,
+      "current_start": 1239,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-117): caller still owns EndPaint/ReleaseDC. */",
+        "    if (!pbutn->spwnd) return;",
+        ""
+      ]
+    },
+    {
+      "original_start": 1369,
+      "original_count": 1,
+      "current_start": 1432,
+      "current_count": 1,
+      "original": [
+        "            BNReleaseDC(pbutn, hdc);"
+      ],
+      "current": [
+        "            BNReleaseDC(pbutn, hdc, hwnd);"
+      ]
+    },
+    {
+      "original_start": 1464,
+      "original_count": 0,
+      "current_start": 1527,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): BN_CLICKED can destroy during focus loss. */",
+        "        if (!pbutn->spwnd) break;"
+      ]
+    },
+    {
+      "original_start": 1468,
+      "original_count": 1,
+      "current_start": 1534,
+      "current_count": 1,
+      "original": [
+        "            BNReleaseDC(pbutn, hdc);"
+      ],
+      "current": [
+        "            BNReleaseDC(pbutn, hdc, hwnd);"
+      ]
+    },
+    {
+      "original_start": 1473,
+      "original_count": 0,
+      "current_start": 1539,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "        /* DIVERGENCE(OPENNT-HOST-117): avoid invalidating a reused HWND. */",
+        "        if (!pbutn->spwnd) break;"
+      ]
+    },
+    {
+      "original_start": 1572,
+      "original_count": 0,
+      "current_start": 1642,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): stop synthetic clicks after teardown. */",
+        "        if (!pbutn->spwnd) break;"
+      ]
+    },
+    {
+      "original_start": 1573,
+      "original_count": 0,
+      "current_start": 1646,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): no key-path fallthrough after teardown. */",
+        "        if (!pbutn->spwnd) break;"
+      ]
+    },
+    {
+      "original_start": 1611,
+      "original_count": 0,
+      "current_start": 1687,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): do not default-dispatch a destroyed control. */",
+        "        if (!pbutn->spwnd) break;",
+        ""
+      ]
+    },
+    {
+      "original_start": 1643,
+      "original_count": 1,
+      "current_start": 1723,
+      "current_count": 1,
+      "original": [
+        "            BNReleaseDC(pbutn, hdc);"
+      ],
+      "current": [
+        "            BNReleaseDC(pbutn, hdc, hwnd);"
+      ]
+    },
+    {
+      "original_start": 1689,
+      "original_count": 1,
+      "current_start": 1769,
+      "current_count": 1,
+      "original": [
+        "                    BNReleaseDC(pbutn, hdc);"
+      ],
+      "current": [
+        "                    BNReleaseDC(pbutn, hdc, hwnd);"
+      ]
+    },
+    {
+      "original_start": 1698,
+      "original_count": 0,
+      "current_start": 1778,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "        /* DIVERGENCE(OPENNT-HOST-117): native style calls may notify. */",
+        "        if (!pbutn->spwnd) break;"
+      ]
+    },
+    {
+      "original_start": 1722,
+      "original_count": 1,
+      "current_start": 1806,
+      "current_count": 1,
+      "original": [
+        "                BNReleaseDC(pbutn, hdc);"
+      ],
+      "current": [
+        "                BNReleaseDC(pbutn, hdc, hwnd);"
+      ]
+    },
+    {
+      "original_start": 1726,
+      "original_count": 0,
+      "current_start": 1810,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-117): group background painting may notify. */",
+        "        if (!pbutn->spwnd) break;"
+      ]
+    },
+    {
+      "original_start": 1738,
+      "original_count": 1,
+      "current_start": 1825,
+      "current_count": 1,
+      "original": [
+        "            BNReleaseDC(pbutn, hdc);"
+      ],
+      "current": [
+        "            BNReleaseDC(pbutn, hdc, hwnd);"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 246,
+      "original_count": 2,
+      "current_start": 251,
+      "current_count": 1,
+      "original": [
+        "    if (TestWF(pwnd,WEFRTLREADING))",
+        "        SetTextAlign(hdc, TA_RTLREADING | GetTextAlign(hdc));"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 296,
+      "original_count": 2,
+      "current_start": 312,
+      "current_count": 1,
+      "original": [
+        "    if (TestWF(pwnd,WEFRTLREADING))",
+        "        SetTextAlign(hdc, GetTextAlign(hdc) & ~TA_RTLREADING);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original_line": 228,
+      "current_line": 230,
+      "logical_line": 230,
+      "text": "    /*"
+    },
+    {
+      "original_line": 229,
+      "current_line": 231,
+      "logical_line": 231,
+      "text": "     * Select in the user's font if set, and save the old font so that we can"
+    },
+    {
+      "original_line": 230,
+      "current_line": 232,
+      "logical_line": 232,
+      "text": "     * restore it when we release the dc."
+    },
+    {
+      "original_line": 231,
+      "current_line": 233,
+      "logical_line": 233,
+      "text": "     */"
+    },
+    {
+      "original_line": 248,
+      "current_line": 252,
+      "logical_line": 247,
+      "text": "#endif"
+    },
+    {
+      "original_line": 298,
+      "current_line": 313,
+      "logical_line": 297,
+      "text": "#endif"
+    },
+    {
+      "original_line": 1474,
+      "current_line": 1543,
+      "logical_line": 1477,
+      "text": "        /*"
+    },
+    {
+      "original_line": 1475,
+      "current_line": 1544,
+      "logical_line": 1478,
+      "text": "         * Since the bold border around the defpushbutton is done by"
+    },
+    {
+      "original_line": 1476,
+      "current_line": 1545,
+      "logical_line": 1479,
+      "text": "         * someone else, we need to invalidate the rect so that the"
+    },
+    {
+      "original_line": 1477,
+      "current_line": 1546,
+      "logical_line": 1480,
+      "text": "         * focus rect is repainted properly."
+    },
+    {
+      "original_line": 1478,
+      "current_line": 1547,
+      "logical_line": 1481,
+      "text": "         */"
+    }
+  ],
+  "evidence": [
+    "src/wow32-dll/source/wow_button_lifetime.c",
+    "src/wow32-dll/source/wow_edit_entry_bindings.c",
+    "src/wow32-dll/include/control-client/precomp.h",
+    "test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_button_dc_fixture.c",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1"
+  ],
+  "limits": "Source-based paired original/adapter audit. Existing lifetime fixture uses boundary doubles and checks deferred free/reentry/exception resources; DC fixture tests actual original DC routines with color callback double. Neither proves every callback site or radio sibling teardown. No new build/runtime result or assertion that the original NT kernel lifetime system is defective."
+}

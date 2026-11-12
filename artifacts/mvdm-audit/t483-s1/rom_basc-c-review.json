@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+  "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+  "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 17,
+      "original_end": 22,
+      "current_error_line": 17
+    }
+  ],
+  "changes": [],
+  "initial_review": "Whole-file boundary-aware diff comparison with explicit semantic exceptions.",
+  "counter_review": "Outside listed corrections and removed branch bodies, nonblank non-#line text equals original.",
+  "limits": "Not full diagnostic-line or all-profile reachability proof. No new test run."
+}

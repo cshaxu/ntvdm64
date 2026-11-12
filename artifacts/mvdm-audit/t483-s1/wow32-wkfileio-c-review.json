@@ -1,0 +1,828 @@
+{
+  "path": "src/mvdm-host/wow32/wkfileio.c",
+  "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+  "current_sha256": "2cfa2632a5af55df41c059509bc52011ac5eb29179ce6ac3a7a31b9ac536df50",
+  "changes": [
+    {
+      "original_start": 17,
+      "original_count": 0,
+      "current_start": 17,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-340): owned observation declarations only. */",
+        "#include \"wow_user_thunk_scope.h\""
+      ],
+      "decision": "delete",
+      "change_plan": "Remove trace call and diagnostic-only include; remove exclusive trace provider/declaration after checking observation consumers. Retain other functions in wow_user_thunk_scope and original failure return/LastError.",
+      "evidence": "wow_user_trace_file_open_failure only writes environment-selected diagnostic file and restores LastError; no functional result is consumed."
+    },
+    {
+      "original_start": 699,
+      "original_count": 0,
+      "current_start": 706,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "            /* DIV-874: failed view no longer owns the closed mapping. */",
+        "            pCache->hMappedFileObject = 0;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain failed-map handle reset and saved-next full-list cache traversal; preserve original fixed nodes and release routine.",
+      "evidence": "Failed MapView closes mapping; reset prevents later duplicate close. FreeMapFileCache can move node to head; saved next and non-NULL condition include tail. Existing wow_file_cache_test uses real mappings and failure controls."
+    },
+    {
+      "original_start": 714,
+      "original_count": 1,
+      "current_start": 723,
+      "current_count": 1,
+      "original": [
+        "    PHMAPPEDFILEALIAS pCache;"
+      ],
+      "current": [
+        "    PHMAPPEDFILEALIAS pCache, next;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain failed-map handle reset and saved-next full-list cache traversal; preserve original fixed nodes and release routine.",
+      "evidence": "Failed MapView closes mapping; reset prevents later duplicate close. FreeMapFileCache can move node to head; saved next and non-NULL condition include tail. Existing wow_file_cache_test uses real mappings and failure controls."
+    },
+    {
+      "original_start": 725,
+      "original_count": 1,
+      "current_start": 734,
+      "current_count": 3,
+      "original": [
+        "    while ( (pCache->hpfNext !=0) ) {"
+      ],
+      "current": [
+        "    /* DIV-874: include the tail; freeing promotes nodes to the head. */",
+        "    while (pCache != 0) {",
+        "        next = pCache->hpfNext;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain failed-map handle reset and saved-next full-list cache traversal; preserve original fixed nodes and release routine.",
+      "evidence": "Failed MapView closes mapping; reset prevents later duplicate close. FreeMapFileCache can move node to head; saved next and non-NULL condition include tail. Existing wow_file_cache_test uses real mappings and failure controls."
+    },
+    {
+      "original_start": 729,
+      "original_count": 1,
+      "current_start": 740,
+      "current_count": 1,
+      "original": [
+        "        pCache = pCache->hpfNext;"
+      ],
+      "current": [
+        "        pCache = next;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain failed-map handle reset and saved-next full-list cache traversal; preserve original fixed nodes and release routine.",
+      "evidence": "Failed MapView closes mapping; reset prevents later duplicate close. FreeMapFileCache can move node to head; saved next and non-NULL condition include tail. Existing wow_file_cache_test uses real mappings and failure controls."
+    },
+    {
+      "original_start": 1511,
+      "original_count": 0,
+      "current_start": 1523,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-340): preserve the selected open failure. */",
+        "        wow_user_trace_file_open_failure(pszPath, lpFileName, wAccess,",
+        "            GetLastError());"
+      ],
+      "decision": "delete",
+      "change_plan": "Remove trace call and diagnostic-only include; remove exclusive trace provider/declaration after checking observation consumers. Retain other functions in wow_user_thunk_scope and original failure return/LastError.",
+      "evidence": "wow_user_trace_file_open_failure only writes environment-selected diagnostic file and restores LastError; no functional result is consumed."
+    },
+    {
+      "original_start": 1902,
+      "original_count": 1,
+      "current_start": 1918,
+      "current_count": 6,
+      "original": [
+        "    PSTR                    pszPath, lpFileName;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-451): the original trailing-separator",
+        "     * rejection bypasses NormalizeDosPath, whose normal path initializes",
+        "     * these cleanup values.  Keep that original error precedence, but make",
+        "     * the skipped cleanup ownership explicit rather than reading/freeing",
+        "     * indeterminate stack data. */",
+        "    PSTR                    pszPath, lpFileName = NULL;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain NULL/FALSE initialization before trailing-separator rejection; keep original short-circuit order and ERROR_PATH_NOT_FOUND, do not force NormalizeDosPath on rejected paths.",
+      "evidence": "Trailing separator short-circuits NormalizeDosPath; original later reads ItsANamedPipe and may free uninitialized lpFileName. Explicit empty ownership makes skipped acquisition safe."
+    },
+    {
+      "original_start": 1904,
+      "original_count": 1,
+      "current_start": 1926,
+      "current_count": 1,
+      "original": [
+        "    BOOL                    ItsANamedPipe;"
+      ],
+      "current": [
+        "    BOOL                    ItsANamedPipe = FALSE;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain NULL/FALSE initialization before trailing-separator rejection; keep original short-circuit order and ERROR_PATH_NOT_FOUND, do not force NormalizeDosPath on rejected paths.",
+      "evidence": "Trailing separator short-circuits NormalizeDosPath; original later reads ItsANamedPipe and may free uninitialized lpFileName. Explicit empty ownership makes skipped acquisition safe."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 39,
+      "original_count": 2,
+      "current_start": 44,
+      "current_count": 1,
+      "original": [
+        "INT fileiolevel = 12;",
+        "INT fileoclevel = 8;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 556,
+      "original_count": 2,
+      "current_start": 563,
+      "current_count": 1,
+      "original": [
+        "        FREEVDMPTR(pDst);",
+        "        GETVDMPTR(parg16->lpBuf, dwBytesRead, pDst);"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 852,
+      "original_count": 3,
+      "current_start": 865,
+      "current_count": 1,
+      "original": [
+        "    #error \"Win32 values not DOS compatible\"",
+        "#",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 45,
+      "original_line": 41,
+      "logical_line": 40
+    },
+    {
+      "current_line": 564,
+      "original_line": 558,
+      "logical_line": 557
+    },
+    {
+      "current_line": 708,
+      "original_line": 699,
+      "logical_line": 701
+    },
+    {
+      "current_line": 709,
+      "original_line": 700,
+      "logical_line": 702
+    },
+    {
+      "current_line": 710,
+      "original_line": 701,
+      "logical_line": 703
+    },
+    {
+      "current_line": 711,
+      "original_line": 702,
+      "logical_line": 704
+    },
+    {
+      "current_line": 713,
+      "original_line": 704,
+      "logical_line": 706
+    },
+    {
+      "current_line": 714,
+      "original_line": 705,
+      "logical_line": 707
+    },
+    {
+      "current_line": 715,
+      "original_line": 706,
+      "logical_line": 708
+    },
+    {
+      "current_line": 716,
+      "original_line": 707,
+      "logical_line": 709
+    },
+    {
+      "current_line": 717,
+      "original_line": 708,
+      "logical_line": 710
+    },
+    {
+      "current_line": 718,
+      "original_line": 709,
+      "logical_line": 711
+    },
+    {
+      "current_line": 719,
+      "original_line": 710,
+      "logical_line": 712
+    },
+    {
+      "current_line": 721,
+      "original_line": 712,
+      "logical_line": 714
+    },
+    {
+      "current_line": 722,
+      "original_line": 713,
+      "logical_line": 715
+    },
+    {
+      "current_line": 725,
+      "original_line": 716,
+      "logical_line": 718
+    },
+    {
+      "current_line": 726,
+      "original_line": 717,
+      "logical_line": 719
+    },
+    {
+      "current_line": 727,
+      "original_line": 718,
+      "logical_line": 720
+    },
+    {
+      "current_line": 729,
+      "original_line": 720,
+      "logical_line": 722
+    },
+    {
+      "current_line": 730,
+      "original_line": 721,
+      "logical_line": 723
+    },
+    {
+      "current_line": 732,
+      "original_line": 723,
+      "logical_line": 725
+    },
+    {
+      "current_line": 737,
+      "original_line": 726,
+      "logical_line": 730
+    },
+    {
+      "current_line": 738,
+      "original_line": 727,
+      "logical_line": 731
+    },
+    {
+      "current_line": 739,
+      "original_line": 728,
+      "logical_line": 732
+    },
+    {
+      "current_line": 741,
+      "original_line": 730,
+      "logical_line": 734
+    },
+    {
+      "current_line": 742,
+      "original_line": 731,
+      "logical_line": 735
+    },
+    {
+      "current_line": 745,
+      "original_line": 734,
+      "logical_line": 738
+    },
+    {
+      "current_line": 746,
+      "original_line": 735,
+      "logical_line": 739
+    },
+    {
+      "current_line": 747,
+      "original_line": 736,
+      "logical_line": 740
+    },
+    {
+      "current_line": 748,
+      "original_line": 737,
+      "logical_line": 741
+    },
+    {
+      "current_line": 749,
+      "original_line": 738,
+      "logical_line": 742
+    },
+    {
+      "current_line": 750,
+      "original_line": 739,
+      "logical_line": 743
+    },
+    {
+      "current_line": 751,
+      "original_line": 740,
+      "logical_line": 744
+    },
+    {
+      "current_line": 752,
+      "original_line": 741,
+      "logical_line": 745
+    },
+    {
+      "current_line": 753,
+      "original_line": 742,
+      "logical_line": 746
+    },
+    {
+      "current_line": 754,
+      "original_line": 743,
+      "logical_line": 747
+    },
+    {
+      "current_line": 755,
+      "original_line": 744,
+      "logical_line": 748
+    },
+    {
+      "current_line": 756,
+      "original_line": 745,
+      "logical_line": 749
+    },
+    {
+      "current_line": 757,
+      "original_line": 746,
+      "logical_line": 750
+    },
+    {
+      "current_line": 758,
+      "original_line": 747,
+      "logical_line": 751
+    },
+    {
+      "current_line": 759,
+      "original_line": 748,
+      "logical_line": 752
+    },
+    {
+      "current_line": 760,
+      "original_line": 749,
+      "logical_line": 753
+    },
+    {
+      "current_line": 762,
+      "original_line": 751,
+      "logical_line": 755
+    },
+    {
+      "current_line": 763,
+      "original_line": 752,
+      "logical_line": 756
+    },
+    {
+      "current_line": 764,
+      "original_line": 753,
+      "logical_line": 757
+    },
+    {
+      "current_line": 765,
+      "original_line": 754,
+      "logical_line": 758
+    },
+    {
+      "current_line": 766,
+      "original_line": 755,
+      "logical_line": 759
+    },
+    {
+      "current_line": 767,
+      "original_line": 756,
+      "logical_line": 760
+    },
+    {
+      "current_line": 768,
+      "original_line": 757,
+      "logical_line": 761
+    },
+    {
+      "current_line": 769,
+      "original_line": 758,
+      "logical_line": 762
+    },
+    {
+      "current_line": 771,
+      "original_line": 760,
+      "logical_line": 764
+    },
+    {
+      "current_line": 773,
+      "original_line": 762,
+      "logical_line": 766
+    },
+    {
+      "current_line": 775,
+      "original_line": 764,
+      "logical_line": 768
+    },
+    {
+      "current_line": 776,
+      "original_line": 765,
+      "logical_line": 769
+    },
+    {
+      "current_line": 777,
+      "original_line": 766,
+      "logical_line": 770
+    },
+    {
+      "current_line": 778,
+      "original_line": 767,
+      "logical_line": 771
+    },
+    {
+      "current_line": 779,
+      "original_line": 768,
+      "logical_line": 772
+    },
+    {
+      "current_line": 781,
+      "original_line": 770,
+      "logical_line": 774
+    },
+    {
+      "current_line": 783,
+      "original_line": 772,
+      "logical_line": 776
+    },
+    {
+      "current_line": 784,
+      "original_line": 773,
+      "logical_line": 777
+    },
+    {
+      "current_line": 785,
+      "original_line": 774,
+      "logical_line": 778
+    },
+    {
+      "current_line": 786,
+      "original_line": 775,
+      "logical_line": 779
+    },
+    {
+      "current_line": 788,
+      "original_line": 777,
+      "logical_line": 781
+    },
+    {
+      "current_line": 790,
+      "original_line": 779,
+      "logical_line": 783
+    },
+    {
+      "current_line": 791,
+      "original_line": 780,
+      "logical_line": 784
+    },
+    {
+      "current_line": 792,
+      "original_line": 781,
+      "logical_line": 785
+    },
+    {
+      "current_line": 793,
+      "original_line": 782,
+      "logical_line": 786
+    },
+    {
+      "current_line": 794,
+      "original_line": 783,
+      "logical_line": 787
+    },
+    {
+      "current_line": 795,
+      "original_line": 784,
+      "logical_line": 788
+    },
+    {
+      "current_line": 796,
+      "original_line": 785,
+      "logical_line": 789
+    },
+    {
+      "current_line": 797,
+      "original_line": 786,
+      "logical_line": 790
+    },
+    {
+      "current_line": 799,
+      "original_line": 788,
+      "logical_line": 792
+    },
+    {
+      "current_line": 800,
+      "original_line": 789,
+      "logical_line": 793
+    },
+    {
+      "current_line": 801,
+      "original_line": 790,
+      "logical_line": 794
+    },
+    {
+      "current_line": 802,
+      "original_line": 791,
+      "logical_line": 795
+    },
+    {
+      "current_line": 803,
+      "original_line": 792,
+      "logical_line": 796
+    },
+    {
+      "current_line": 804,
+      "original_line": 793,
+      "logical_line": 797
+    },
+    {
+      "current_line": 805,
+      "original_line": 794,
+      "logical_line": 798
+    },
+    {
+      "current_line": 806,
+      "original_line": 795,
+      "logical_line": 799
+    },
+    {
+      "current_line": 807,
+      "original_line": 796,
+      "logical_line": 800
+    },
+    {
+      "current_line": 808,
+      "original_line": 797,
+      "logical_line": 801
+    },
+    {
+      "current_line": 809,
+      "original_line": 798,
+      "logical_line": 802
+    },
+    {
+      "current_line": 810,
+      "original_line": 799,
+      "logical_line": 803
+    },
+    {
+      "current_line": 811,
+      "original_line": 800,
+      "logical_line": 804
+    },
+    {
+      "current_line": 812,
+      "original_line": 801,
+      "logical_line": 805
+    },
+    {
+      "current_line": 813,
+      "original_line": 802,
+      "logical_line": 806
+    },
+    {
+      "current_line": 814,
+      "original_line": 803,
+      "logical_line": 807
+    },
+    {
+      "current_line": 815,
+      "original_line": 804,
+      "logical_line": 808
+    },
+    {
+      "current_line": 816,
+      "original_line": 805,
+      "logical_line": 809
+    },
+    {
+      "current_line": 817,
+      "original_line": 806,
+      "logical_line": 810
+    },
+    {
+      "current_line": 818,
+      "original_line": 807,
+      "logical_line": 811
+    },
+    {
+      "current_line": 819,
+      "original_line": 808,
+      "logical_line": 812
+    },
+    {
+      "current_line": 820,
+      "original_line": 809,
+      "logical_line": 813
+    },
+    {
+      "current_line": 821,
+      "original_line": 810,
+      "logical_line": 814
+    },
+    {
+      "current_line": 822,
+      "original_line": 811,
+      "logical_line": 815
+    },
+    {
+      "current_line": 823,
+      "original_line": 812,
+      "logical_line": 816
+    },
+    {
+      "current_line": 824,
+      "original_line": 813,
+      "logical_line": 817
+    },
+    {
+      "current_line": 825,
+      "original_line": 814,
+      "logical_line": 818
+    },
+    {
+      "current_line": 826,
+      "original_line": 815,
+      "logical_line": 819
+    },
+    {
+      "current_line": 827,
+      "original_line": 816,
+      "logical_line": 820
+    },
+    {
+      "current_line": 829,
+      "original_line": 818,
+      "logical_line": 822
+    },
+    {
+      "current_line": 830,
+      "original_line": 819,
+      "logical_line": 823
+    },
+    {
+      "current_line": 831,
+      "original_line": 820,
+      "logical_line": 824
+    },
+    {
+      "current_line": 832,
+      "original_line": 821,
+      "logical_line": 825
+    },
+    {
+      "current_line": 833,
+      "original_line": 822,
+      "logical_line": 826
+    },
+    {
+      "current_line": 836,
+      "original_line": 825,
+      "logical_line": 829
+    },
+    {
+      "current_line": 837,
+      "original_line": 826,
+      "logical_line": 830
+    },
+    {
+      "current_line": 838,
+      "original_line": 827,
+      "logical_line": 831
+    },
+    {
+      "current_line": 839,
+      "original_line": 828,
+      "logical_line": 832
+    },
+    {
+      "current_line": 840,
+      "original_line": 829,
+      "logical_line": 833
+    },
+    {
+      "current_line": 841,
+      "original_line": 830,
+      "logical_line": 834
+    },
+    {
+      "current_line": 842,
+      "original_line": 831,
+      "logical_line": 835
+    },
+    {
+      "current_line": 843,
+      "original_line": 832,
+      "logical_line": 836
+    },
+    {
+      "current_line": 844,
+      "original_line": 833,
+      "logical_line": 837
+    },
+    {
+      "current_line": 845,
+      "original_line": 834,
+      "logical_line": 838
+    },
+    {
+      "current_line": 846,
+      "original_line": 835,
+      "logical_line": 839
+    },
+    {
+      "current_line": 847,
+      "original_line": 836,
+      "logical_line": 840
+    },
+    {
+      "current_line": 848,
+      "original_line": 837,
+      "logical_line": 841
+    },
+    {
+      "current_line": 849,
+      "original_line": 838,
+      "logical_line": 842
+    },
+    {
+      "current_line": 850,
+      "original_line": 839,
+      "logical_line": 843
+    },
+    {
+      "current_line": 851,
+      "original_line": 840,
+      "logical_line": 844
+    },
+    {
+      "current_line": 852,
+      "original_line": 841,
+      "logical_line": 845
+    },
+    {
+      "current_line": 853,
+      "original_line": 842,
+      "logical_line": 846
+    },
+    {
+      "current_line": 855,
+      "original_line": 844,
+      "logical_line": 848
+    },
+    {
+      "current_line": 856,
+      "original_line": 845,
+      "logical_line": 849
+    },
+    {
+      "current_line": 857,
+      "original_line": 846,
+      "logical_line": 850
+    },
+    {
+      "current_line": 858,
+      "original_line": 847,
+      "logical_line": 851
+    },
+    {
+      "current_line": 859,
+      "original_line": 848,
+      "logical_line": 852
+    },
+    {
+      "current_line": 860,
+      "original_line": 849,
+      "logical_line": 853
+    },
+    {
+      "current_line": 866,
+      "original_line": 855,
+      "logical_line": 853
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Audit classification; no functional remediation."
+}

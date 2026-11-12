@@ -1,0 +1,96 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+  "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+  "current_sha256": "a8b584a6fe3d8e3a2e433e9ce04d27ed2455bfafc52f4ff6c6b08b5faec2d939",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "file_sequence": "271",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_start": "28",
+      "current_count": "1",
+      "original_start": "28",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-303",
+      "classification": "diagnostic-only",
+      "initial_review": "Default-off code-segment-load observer and its header do not implement architectural segment loading.",
+      "counter_review": "Only product use of report_wow_code_segment_load is this hook; observation probe also calls it. Default-off does not make mirror intrusion necessary.",
+      "disposition": "delete",
+      "evidence": "c_seg.c:28,103-107; ntvdm-exe/softpc/mvdm_softpc_termination.c:943; include/mvdm_softpc_termination.h:167; test/observation/softpc_observer_error_probe.c:82",
+      "limits": "Source-backed recommendation; historical bootstrap trace not fresh run nor proof of lifetime restriction. No product changes.",
+      "decision": "delete",
+      "change_plan": "Delete report hook/comment and sole-use termination include as one change; remove its provider/declaration if no other caller remains and adjust observer-only test, retaining normal segment coverage.",
+      "related_callers": "c_seg.c:28,103-107; ntvdm-exe/softpc/mvdm_softpc_termination.c:943; include/mvdm_softpc_termination.h:167; test/observation/softpc_observer_error_probe.c:82",
+      "verification_required": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "271",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_start": "102",
+      "current_count": "7",
+      "original_start": "97",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-303",
+      "classification": "diagnostic-only",
+      "initial_review": "Default-off code-segment-load observer and its header do not implement architectural segment loading.",
+      "counter_review": "Only product use of report_wow_code_segment_load is this hook; observation probe also calls it. Default-off does not make mirror intrusion necessary.",
+      "disposition": "delete",
+      "evidence": "c_seg.c:28,103-107; ntvdm-exe/softpc/mvdm_softpc_termination.c:943; include/mvdm_softpc_termination.h:167; test/observation/softpc_observer_error_probe.c:82",
+      "limits": "Source-backed recommendation; historical bootstrap trace not fresh run nor proof of lifetime restriction. No product changes.",
+      "decision": "delete",
+      "change_plan": "Delete report hook/comment and sole-use termination include as one change; remove its provider/declaration if no other caller remains and adjust observer-only test, retaining normal segment coverage.",
+      "related_callers": "c_seg.c:28,103-107; ntvdm-exe/softpc/mvdm_softpc_termination.c:943; include/mvdm_softpc_termination.h:167; test/observation/softpc_observer_error_probe.c:82",
+      "verification_required": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "271",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_start": "261",
+      "current_count": "21",
+      "original_start": "246",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-227",
+      "classification": "unbounded-bootstrap-selector-bypass",
+      "initial_review": "Generic protected data-segment load bypasses descriptor lookup and all original type/access/presence checks for selector0040 with no bootstrap lifetime or owner guard.",
+      "counter_review": "T407 S14 evidence supports an early FSTI bootstrap requirement, not this permanent bypass. Current branch applies after publication and to unrelated protected guests. pmdefs.inc distinguishes non-WOW SEL_BIOSDATA40 from WOW B8; fixed40 compatibility cannot be justified by symbolic name alone.",
+      "disposition": "correct",
+      "evidence": "c_seg.c:260-280,299-355; docs/etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md; mvdm-guest/dpmi/dxstrt.asm:805,885; dxboot.asm:1748; pmdefs.inc:345,415",
+      "limits": "Source-backed recommendation; historical bootstrap trace not fresh run nor proof of lifetime restriction. No product changes.",
+      "decision": "correct",
+      "change_plan": "Remove unconditional selector exception from generic load_data_seg after locating and restoring required bootstrap state at its original initialization owner. Preserve real FSTI startup; do not guess descriptor publication, mutate immutable guest code, add another execution path or broaden exemption. Initialization mechanism must be designed from original caller evidence before implementation.",
+      "related_callers": "c_seg.c:260-280,299-355; docs/etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md; mvdm-guest/dpmi/dxstrt.asm:805,885; dxboot.asm:1748; pmdefs.inc:345,415",
+      "verification_required": "Early immutable DOSX FSTI continuation positive; valid changed base/limit at0040 honored after publication; missing/not-present/wrong-type/privilege-invalid0040 fault; unrelated guest protected-mode and VM/real-mode controls. Selected DOS/WOW/Win3.x regression before publishing.",
+      "missing_evidence": "Exact original bootstrap owner and minimal equivalent initialization binding must be established before removing compatibility branch; missing evidence does not negate proven unbounded bypass.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 78,
+      "original_count": 1,
+      "current_start": 81,
+      "current_count": 2
+    },
+    {
+      "original_start": 117,
+      "original_count": 1,
+      "current_start": 130,
+      "current_count": 2
+    },
+    {
+      "original_start": 306,
+      "original_count": 1,
+      "current_start": 343,
+      "current_count": 2
+    }
+  ],
+  "limits": "All non-excluded deltas classified. No all-context reachability/full logical-line or runtime certification."
+}

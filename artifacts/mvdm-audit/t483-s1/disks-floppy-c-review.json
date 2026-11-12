@@ -1,0 +1,123 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+  "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+  "current_sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 103,
+      "original_count": 6,
+      "current_start": 103
+    },
+    {
+      "original_start": 672,
+      "original_count": 2,
+      "current_start": 669
+    },
+    {
+      "original_start": 862,
+      "original_count": 6,
+      "current_start": 860
+    },
+    {
+      "original_start": 1054,
+      "original_count": 2,
+      "current_start": 1049
+    },
+    {
+      "original_start": 1202,
+      "original_count": 4,
+      "current_start": 1198
+    },
+    {
+      "original_start": 1262,
+      "original_count": 1,
+      "current_start": 1257
+    },
+    {
+      "original_start": 1302,
+      "original_count": 1,
+      "current_start": 1299
+    },
+    {
+      "original_start": 1469,
+      "original_count": 2,
+      "current_start": 1468
+    },
+    {
+      "original_start": 1510,
+      "original_count": 5,
+      "current_start": 1510
+    },
+    {
+      "original_start": 1532,
+      "original_count": 5,
+      "current_start": 1530
+    },
+    {
+      "original_start": 1553,
+      "original_count": 5,
+      "current_start": 1549
+    },
+    {
+      "original_start": 1623,
+      "original_count": 58,
+      "current_start": 1617
+    },
+    {
+      "original_start": 2015,
+      "original_count": 7,
+      "current_start": 1956
+    },
+    {
+      "original_start": 2445,
+      "original_count": 25,
+      "current_start": 2382
+    },
+    {
+      "original_start": 2506,
+      "original_count": 2,
+      "current_start": 2421
+    },
+    {
+      "original_start": 2562,
+      "original_count": 2,
+      "current_start": 2478
+    },
+    {
+      "original_start": 2718,
+      "original_count": 2,
+      "current_start": 2635
+    },
+    {
+      "original_start": 2962,
+      "original_count": 2,
+      "current_start": 2880
+    },
+    {
+      "original_start": 2984,
+      "original_count": 2,
+      "current_start": 2903
+    },
+    {
+      "original_start": 2995,
+      "original_count": 15,
+      "current_start": 2915
+    },
+    {
+      "original_start": 3021,
+      "original_count": 14,
+      "current_start": 2930
+    },
+    {
+      "original_start": 3236,
+      "original_count": 6,
+      "current_start": 3134
+    }
+  ],
+  "initial_review": "Complete original/current diff reviewed in physical line order:22 excluded bodies.",
+  "counter_review": "Every removed range checked against original immediate conditional boundaries; every replacement is line/error directives only. Retained NTVDM drive/media and recursive CPU/interrupt paths match original; excluded non-NTVDM/JOKER alternatives are not selected-code adaptations.",
+  "limits": "No fresh floppy runtime acceptance, universal exclusion-context or diagnostic-line certification."
+}

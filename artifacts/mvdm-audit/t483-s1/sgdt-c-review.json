@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+  "original_sha256": "b4af0fcc8d824d8fc3c2e7d40659844e66e45ee5026ffc17b43d150e513d41fc",
+  "current_sha256": "a67b1f8ceabd37a47eee75415555f0e2c2bc6daac3b700037f5268e2bbf6f15f",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 42,
+      "original_count": 2,
+      "current_start": 42,
+      "current_count": 2
+    },
+    {
+      "original_start": 64,
+      "original_count": 2,
+      "current_start": 65,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Every whole-file textual difference classified; excluded bodies separately enumerated.",
+  "limits": "No functional remediation or fresh runtime verification."
+}

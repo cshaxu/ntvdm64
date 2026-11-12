@@ -1,0 +1,29 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+  "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+  "current_sha256": "6c6b5f99d2e19ec21b2987646d6a22c4daed3896597c5cbce7a99442a1342427",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 67,
+      "original_count": 7
+    },
+    {
+      "original_start": 84,
+      "original_count": 1
+    },
+    {
+      "original_start": 92,
+      "original_count": 13
+    },
+    {
+      "original_start": 131,
+      "original_count": 2
+    }
+  ],
+  "initial_review": "Four excluded bodies: two IRET_HOOKS interface groups, GISP GetInstructionPointer declaration and PIG NPX setters. All remaining source exactly original after removing line directives.",
+  "counter_review": "Complete reverse comparison preserves original getEIP alias, GetStackPointer and all remaining CCPU interfaces. IRET_HOOKS removal includes its nested CCPU/A3 selection; this optional interface must not be conflated with ordinary CCPU IRET instruction semantics. PIG exclusion does not itself prove surrounding non-CCPU branch supported or require further deletion.",
+  "limits": "Necessity/source difference review only; no new include-context, instruction regression or full conditional reachability certification."
+}

@@ -1,0 +1,5255 @@
+{
+  "path": "src\\mvdm-host\\vdmredir\\vrmslot.c",
+  "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+  "current_sha256": "9fe36a96396cdc776db8b58e0b5c189104f030f733163052566ec09c0015c726",
+  "excluded_bodies": [
+    {
+      "original_start": 116,
+      "original_count": 1,
+      "current_start": 117,
+      "original": [
+        "#define VR_BREAKPOINT()                 DbgBreakPoint()"
+      ],
+      "current": "#error Unsupported excluded original configuration"
+    },
+    {
+      "original_start": 229,
+      "original_count": 4,
+      "current_start": 234,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrDeleteMailslot(Handle=%#04x, PDB=%#04x)\\n\", Handle16, DosPdb);",
+        "//    VR_BREAKPOINT();",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 307,
+      "original_count": 4,
+      "current_start": 313,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrGetMailslotInfo(Handle=%#04x)\\n\", getBX());",
+        "//    VR_BREAKPOINT();",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 385,
+      "original_count": 4,
+      "current_start": 392,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrMakeMailslot\\n\");",
+        "//    VR_BREAKPOINT();",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 411,
+      "original_count": 3,
+      "current_start": 419,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrMakeMailslot: lpName=%s\\n\", lpName);",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 463,
+      "original_count": 7,
+      "current_start": 473,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"Before CreateMailslot: Name=%s, MsgSize=%d, MslotSize=%d\\n\",",
+        "                 LocalMailslot,",
+        "                 (DWORD)getBX(),",
+        "                 (DWORD)getCX()",
+        "                 );",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 481,
+      "original_count": 5,
+      "current_start": 489,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"Error: CreateMailslot failed: GetLastError()=%d\\n\",",
+        "                 GetLastError()",
+        "                 );",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 493,
+      "original_count": 3,
+      "current_start": 501,
+      "original": [
+        "        IF_DEBUG(MAILSLOT) {",
+        "            DbgPrint(\"VrMakeMailslot: Handle32=%#08x\\n\", Handle32);",
+        "        }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 525,
+      "original_count": 5,
+      "current_start": 535,
+      "original": [
+        "            IF_DEBUG(MAILSLOT) {",
+        "                DbgPrint(\"Error: VrMakeMailslot: GetMailslotInfo(%#08x) failed!\\n\",",
+        "                         Handle32",
+        "                         );",
+        "            }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 582,
+      "original_count": 6,
+      "current_start": 592,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"Error: file %s line %d: VrPeekMailslot unsupported function\\n\",",
+        "                 __FILE__,",
+        "                 __LINE__",
+        "                 );",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 628,
+      "original_count": 4,
+      "current_start": 637,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrReadMailslot(Handle=%#04x)\\n\", getBX());",
+        "//    VR_BREAKPOINT();",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 650,
+      "original_count": 3,
+      "current_start": 660,
+      "original": [
+        "            IF_DEBUG(MAILSLOT) {",
+        "                DbgPrint(\"VrReadMailslot: reading Handle=%#08x\\n\", Handle);",
+        "            }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 666,
+      "original_count": 7,
+      "current_start": 678,
+      "original": [
+        "                IF_DEBUG(MAILSLOT) {",
+        "                    DbgPrint(\"VrReadMailslot: read %d bytes @ %#08x. MessageSize=%d\\n\",",
+        "                             BytesRead,",
+        "                             POINTER_FROM_WORDS(getES(), getDI()),",
+        "                             ptr->MessageSize",
+        "                             );",
+        "                }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 695,
+      "original_count": 3,
+      "current_start": 705,
+      "original": [
+        "                IF_DEBUG(MAILSLOT) {",
+        "                    DbgPrint(\"VrReadMailslot: NextSize=%d\\n\", NextSize);",
+        "                }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 751,
+      "original_count": 4,
+      "current_start": 763,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrWriteMailslot(%s)\\n\", Name);",
+        "//    VR_BREAKPOINT();",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 760,
+      "original_count": 3,
+      "current_start": 773,
+      "original": [
+        "        IF_DEBUG(MAILSLOT) {",
+        "            DbgPrint(\"Error: VrWriteMailslot: %s is not a mailslot\\n\", Name);",
+        "        }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 785,
+      "original_count": 3,
+      "current_start": 800,
+      "original": [
+        "        IF_DEBUG(MAILSLOT) {",
+        "            DbgPrint(\"Error: VrWriteMailslot: CreateFile failed:%d\\n\", GetLastError());",
+        "        }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 804,
+      "original_count": 9,
+      "current_start": 821,
+      "original": [
+        "        IF_DEBUG(MAILSLOT) {",
+        "            DbgPrint(\"VrWriteMailslot: setting timeout to %d returns %d\\n\",",
+        "                     READ_DWORD(&StructurePointer->DWMS_Timeout),",
+        "                     Ok",
+        "                     );",
+        "        }",
+        "        if (!Ok) {",
+        "            DbgPrint(\"Timeout error=%d\\n\", GetLastError());",
+        "        }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 825,
+      "original_count": 3,
+      "current_start": 838,
+      "original": [
+        "            IF_DEBUG(MAILSLOT) {",
+        "                DbgPrint(\"Error: VrWriteMailslot: WriteFile failed:%d\\n\", GetLastError());",
+        "            }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 833,
+      "original_count": 6,
+      "current_start": 848,
+      "original": [
+        "            IF_DEBUG(MAILSLOT) {",
+        "                DbgPrint(\"VrWriteMailslot: %d bytes written from %#08x\\n\",",
+        "                         BytesWritten,",
+        "                         READ_FAR_POINTER(&StructurePointer->DWMS_Buffer)",
+        "                         );",
+        "            }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 880,
+      "original_count": 3,
+      "current_start": 894,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrTerminateMailslots(%04x)\\n\", DosPdb);",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 926,
+      "original_count": 1,
+      "current_start": 942,
+      "original": [
+        "    LPSTR   OriginalName = Name;"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 946,
+      "original_count": 3,
+      "current_start": 965,
+      "original": [
+        "                IF_DEBUG(MAILSLOT) {",
+        "                    DbgPrint(\"VrpIsMailslotName - returning FALSE for %s\\n\", OriginalName);",
+        "                }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 966,
+      "original_count": 3,
+      "current_start": 987,
+      "original": [
+        "                IF_DEBUG(MAILSLOT) {",
+        "                    DbgPrint(\"VrpIsMailslotName - returning TRUE for %s\\n\", OriginalName);",
+        "                }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 977,
+      "original_count": 3,
+      "current_start": 1000,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrpIsMailslotName - returning FALSE for %s\\n\", OriginalName);",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1026,
+      "original_count": 3,
+      "current_start": 1051,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrpMakeLocalMailslotName: lpBuffer=%s\\n\", lpBuffer);",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1133,
+      "original_count": 12,
+      "current_start": 1160,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        if (ptr == NULL) {",
+        "            DbgPrint(\"Error: VrpUnlinkMailslotStructure: can't find mailslot. Handle=%#04x\\n\",",
+        "                     Handle16",
+        "                     );",
+        "        } else {",
+        "            DbgPrint(\"VrpUnlinkMailslotStructure: removed structure %#08x, handle=%d\\n\",",
+        "                     ptr,",
+        "                     Handle16",
+        "                     );",
+        "        }",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1191,
+      "original_count": 12,
+      "current_start": 1211,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        if (ptr == NULL) {",
+        "            DbgPrint(\"Error: VrpMapMailslotHandle16: can't find mailslot. Handle=%#04x\\n\",",
+        "                     Handle16",
+        "                     );",
+        "        } else {",
+        "            DbgPrint(\"VrpMapMailslotHandle16: found handle %d, mailslot=%s\\n\",",
+        "                     Handle16,",
+        "                     ptr->Name",
+        "                     );",
+        "        }",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1248,
+      "original_count": 9,
+      "current_start": 1261,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        if (ptr == NULL) {",
+        "            DbgPrint(\"Error: VrpMapMailslotName: can't find mailslot. Name=%s\\n\",",
+        "                     Name",
+        "                     );",
+        "        } else {",
+        "            DbgPrint(\"VrpMapMailslotName: found %s\\n\", Name);",
+        "        }",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1294,
+      "original_count": 5,
+      "current_start": 1303,
+      "original": [
+        "    BOOL    Ok;",
+        "",
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrpRemoveProcessMailslots\\n\");",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1311,
+      "original_count": 9,
+      "current_start": 1320,
+      "original": [
+        "            IF_DEBUG(MAILSLOT) {",
+        "                DbgPrint(\"VrpRemoveProcessMailslots: Freeing struct @%#08x. Handle=%d, Pdb=%04x\\n\",",
+        "                         ptr,",
+        "                         ptr->Handle16,",
+        "                         ptr->DosPdb",
+        "                         );",
+        "            }",
+        "",
+        "            Ok ="
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1325,
+      "original_count": 9,
+      "current_start": 1330,
+      "original": [
+        "            if (!Ok) {",
+        "                IF_DEBUG(MAILSLOT) {",
+        "                    DbgPrint(\"Error: VrpRemoveProcessMailslots: CloseHandle(%#08x) \"",
+        "                             \"returns %u\\n\",",
+        "                             ptr->Handle32,",
+        "                             GetLastError()",
+        "                             );",
+        "                }",
+        "            }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1450,
+      "original_count": 7,
+      "current_start": 1451,
+      "original": [
+        "            IF_DEBUG(MAILSLOT) {",
+        "                DbgPrint(\"VrpAllocateHandle16: returning handle %d, map=%#08x, i=%d\\n\",",
+        "                         Handle16,",
+        "                         Handle16Bitmap[i],",
+        "                         i",
+        "                         );",
+        "            }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1468,
+      "original_count": 4,
+      "current_start": 1467,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"Error: VrpAllocateHandle16: can't allocate new handle\\n\");",
+        "        DbgBreakPoint();",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1515,
+      "original_count": 6,
+      "current_start": 1515,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        if (Handle16/BITSIN(DWORD) > sizeof(Handle16Bitmap)/sizeof(Handle16Bitmap[0])) {",
+        "            DbgPrint(\"Error: VrpFreeHandle16: out of range handle: %d\\n\", Handle16);",
+        "            DbgBreakPoint();",
+        "        }",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1526,
+      "original_count": 3,
+      "current_start": 1525,
+      "original": [
+        "    IF_DEBUG(MAILSLOT) {",
+        "        DbgPrint(\"VrpFreeHandle16: map=%#08x\\n\", Handle16Bitmap[Handle16/BITSIN(DWORD)]);",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "retained_nonblank_line_mismatches": [
+    [
+      232,
+      228,
+      226,
+      "#if DBG"
+    ],
+    [
+      236,
+      233,
+      231,
+      "#endif"
+    ],
+    [
+      239,
+      235,
+      233,
+      "    if (!(ptr = VrpMapMailslotHandle16(Handle16))) {"
+    ],
+    [
+      240,
+      236,
+      234,
+      "        SET_ERROR(ERROR_INVALID_HANDLE);"
+    ],
+    [
+      241,
+      237,
+      235,
+      "    } else {"
+    ],
+    [
+      242,
+      238,
+      236,
+      "        if (ptr->DosPdb != DosPdb) {"
+    ],
+    [
+      243,
+      239,
+      237,
+      "            SET_ERROR(ERROR_INVALID_HANDLE);"
+    ],
+    [
+      244,
+      240,
+      238,
+      "        } else {"
+    ],
+    [
+      245,
+      241,
+      239,
+      "            if (!CloseHandle(ptr->Handle32)) {"
+    ],
+    [
+      246,
+      242,
+      240,
+      "                SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      247,
+      243,
+      241,
+      "            } else {"
+    ],
+    [
+      249,
+      245,
+      243,
+      "                //"
+    ],
+    [
+      250,
+      246,
+      244,
+      "                // phew! succeeded in deleting the mailslot. Unlink and free"
+    ],
+    [
+      251,
+      247,
+      245,
+      "                // the VR_MAILSLOT_INFO structure and de-allocate the 16-bit"
+    ],
+    [
+      252,
+      248,
+      246,
+      "                // handle"
+    ],
+    [
+      253,
+      249,
+      247,
+      "                //"
+    ],
+    [
+      255,
+      251,
+      249,
+      "                VrpUnlinkMailslotStructure(Handle16);"
+    ],
+    [
+      256,
+      252,
+      250,
+      "                VrpFreeHandle16(Handle16);"
+    ],
+    [
+      258,
+      254,
+      252,
+      "                //"
+    ],
+    [
+      259,
+      255,
+      253,
+      "                // Return some info in various registers for DOS"
+    ],
+    [
+      260,
+      256,
+      254,
+      "                //"
+    ],
+    [
+      262,
+      258,
+      256,
+      "                setES(ptr->BufferAddress.Selector);"
+    ],
+    [
+      263,
+      259,
+      257,
+      "                setDI(ptr->BufferAddress.Offset);"
+    ],
+    [
+      264,
+      260,
+      258,
+      "                setDX(ptr->Selector);"
+    ],
+    [
+      266,
+      262,
+      260,
+      "                //"
+    ],
+    [
+      267,
+      263,
+      261,
+      "                // now repatriate the structure"
+    ],
+    [
+      268,
+      264,
+      262,
+      "                //"
+    ],
+    [
+      270,
+      266,
+      264,
+      "                VrpFreeMailslotStructure(ptr);"
+    ],
+    [
+      272,
+      268,
+      266,
+      "                //"
+    ],
+    [
+      273,
+      269,
+      267,
+      "                // 'return' success indication"
+    ],
+    [
+      274,
+      270,
+      268,
+      "                //"
+    ],
+    [
+      276,
+      272,
+      270,
+      "                setCF(0);"
+    ],
+    [
+      277,
+      273,
+      271,
+      "            }"
+    ],
+    [
+      278,
+      274,
+      272,
+      "        }"
+    ],
+    [
+      279,
+      275,
+      273,
+      "    }"
+    ],
+    [
+      280,
+      276,
+      274,
+      "}"
+    ],
+    [
+      284,
+      280,
+      278,
+      "VOID"
+    ],
+    [
+      285,
+      281,
+      279,
+      "VrGetMailslotInfo("
+    ],
+    [
+      286,
+      282,
+      280,
+      "    VOID"
+    ],
+    [
+      287,
+      283,
+      281,
+      "    )"
+    ],
+    [
+      289,
+      285,
+      283,
+      "/*++"
+    ],
+    [
+      291,
+      287,
+      285,
+      "Routine Description:"
+    ],
+    [
+      293,
+      289,
+      287,
+      "    Performs DosMailslotInfo request on behalf of VDM redir"
+    ],
+    [
+      295,
+      291,
+      289,
+      "Arguments:"
+    ],
+    [
+      297,
+      293,
+      291,
+      "    None. All arguments are extracted from 16-bit context descriptor"
+    ],
+    [
+      299,
+      295,
+      293,
+      "Return Value:"
+    ],
+    [
+      301,
+      297,
+      295,
+      "    None. Returns values in VDM Ax and Flags registers"
+    ],
+    [
+      303,
+      299,
+      297,
+      "--*/"
+    ],
+    [
+      305,
+      301,
+      299,
+      "{"
+    ],
+    [
+      306,
+      302,
+      300,
+      "    PVR_MAILSLOT_INFO   ptr;"
+    ],
+    [
+      307,
+      303,
+      301,
+      "    DWORD   MaxMessageSize, NextSize, MessageCount;"
+    ],
+    [
+      308,
+      304,
+      302,
+      "    BOOL    Ok;"
+    ],
+    [
+      311,
+      306,
+      303,
+      "#if DBG"
+    ],
+    [
+      315,
+      311,
+      308,
+      "#endif"
+    ],
+    [
+      318,
+      313,
+      310,
+      "    if ((ptr = VrpMapMailslotHandle16(getBX())) == NULL) {"
+    ],
+    [
+      319,
+      314,
+      311,
+      "        SET_ERROR(ERROR_INVALID_HANDLE);"
+    ],
+    [
+      320,
+      315,
+      312,
+      "    } else {"
+    ],
+    [
+      321,
+      316,
+      313,
+      "        Ok = GetMailslotInfo(ptr->Handle32,"
+    ],
+    [
+      322,
+      317,
+      314,
+      "                                &MaxMessageSize,"
+    ],
+    [
+      323,
+      318,
+      315,
+      "                                &NextSize,"
+    ],
+    [
+      324,
+      319,
+      316,
+      "                                &MessageCount,"
+    ],
+    [
+      325,
+      320,
+      317,
+      "                                NULL            // lpReadTimeout"
+    ],
+    [
+      326,
+      321,
+      318,
+      "                                );"
+    ],
+    [
+      327,
+      322,
+      319,
+      "        if (!Ok) {"
+    ],
+    [
+      328,
+      323,
+      320,
+      "            SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      329,
+      324,
+      321,
+      "        } else {"
+    ],
+    [
+      331,
+      326,
+      323,
+      "            //"
+    ],
+    [
+      332,
+      327,
+      324,
+      "            // fill in the VDM registers with the required info"
+    ],
+    [
+      333,
+      328,
+      325,
+      "            //"
+    ],
+    [
+      335,
+      330,
+      327,
+      "            setAX((WORD)MaxMessageSize);"
+    ],
+    [
+      336,
+      331,
+      328,
+      "            setBX((WORD)MaxMessageSize);"
+    ],
+    [
+      337,
+      332,
+      329,
+      "            if (NextSize == MAILSLOT_NO_MESSAGE) {"
+    ],
+    [
+      338,
+      333,
+      330,
+      "                setCX(0);"
+    ],
+    [
+      339,
+      334,
+      331,
+      "            } else {"
+    ],
+    [
+      340,
+      335,
+      332,
+      "                setCX((WORD)NextSize);"
+    ],
+    [
+      341,
+      336,
+      333,
+      "            }"
+    ],
+    [
+      343,
+      338,
+      335,
+      "            //"
+    ],
+    [
+      344,
+      339,
+      336,
+      "            // we don't support priorities, just return 0"
+    ],
+    [
+      345,
+      340,
+      337,
+      "            //"
+    ],
+    [
+      347,
+      342,
+      339,
+      "            setDX(0);"
+    ],
+    [
+      348,
+      343,
+      340,
+      "            setSI((WORD)MessageCount);"
+    ],
+    [
+      349,
+      344,
+      341,
+      "            setCF(0);"
+    ],
+    [
+      350,
+      345,
+      342,
+      "        }"
+    ],
+    [
+      351,
+      346,
+      343,
+      "    }"
+    ],
+    [
+      352,
+      347,
+      344,
+      "}"
+    ],
+    [
+      356,
+      351,
+      348,
+      "VOID"
+    ],
+    [
+      357,
+      352,
+      349,
+      "VrMakeMailslot("
+    ],
+    [
+      358,
+      353,
+      350,
+      "    VOID"
+    ],
+    [
+      359,
+      354,
+      351,
+      "    )"
+    ],
+    [
+      361,
+      356,
+      353,
+      "/*++"
+    ],
+    [
+      363,
+      358,
+      355,
+      "Routine Description:"
+    ],
+    [
+      365,
+      360,
+      357,
+      "    Performs DosMakeMailslot request on behalf of VDM redir. This routine"
+    ],
+    [
+      366,
+      361,
+      358,
+      "    creates a local mailslot. If the mailslot name argument designates a"
+    ],
+    [
+      367,
+      362,
+      359,
+      "    remote mailslot name then this call will fail"
+    ],
+    [
+      369,
+      364,
+      361,
+      "Arguments:"
+    ],
+    [
+      371,
+      366,
+      363,
+      "    None. All arguments are extracted from 16-bit context descriptor"
+    ],
+    [
+      373,
+      368,
+      365,
+      "Return Value:"
+    ],
+    [
+      375,
+      370,
+      367,
+      "    None. Returns values in VDM Ax and Flags registers"
+    ],
+    [
+      377,
+      372,
+      369,
+      "--*/"
+    ],
+    [
+      379,
+      374,
+      371,
+      "{"
+    ],
+    [
+      380,
+      375,
+      372,
+      "    PVR_MAILSLOT_INFO   ptr;"
+    ],
+    [
+      381,
+      376,
+      373,
+      "    WORD    Handle16;"
+    ],
+    [
+      382,
+      377,
+      374,
+      "    HANDLE  Handle32;"
+    ],
+    [
+      383,
+      378,
+      375,
+      "    DWORD   NameLength;"
+    ],
+    [
+      384,
+      379,
+      376,
+      "    LPSTR   lpName;"
+    ],
+    [
+      385,
+      380,
+      377,
+      "    CHAR    LocalMailslot[LOCAL_MAILSLOT_NAMELEN+1];"
+    ],
+    [
+      386,
+      381,
+      378,
+      "    BOOL    Ok;"
+    ],
+    [
+      390,
+      384,
+      380,
+      "#if DBG"
+    ],
+    [
+      394,
+      389,
+      385,
+      "#endif"
+    ],
+    [
+      397,
+      391,
+      387,
+      "    //"
+    ],
+    [
+      398,
+      392,
+      388,
+      "    // grab the next 16-bit handle value. This pre-allocates the handle. If we"
+    ],
+    [
+      399,
+      393,
+      389,
+      "    // cannot allocate a handle return a path not found error. If we should"
+    ],
+    [
+      400,
+      394,
+      390,
+      "    // fail anywhere along the line after this we must free up the handle"
+    ],
+    [
+      401,
+      395,
+      391,
+      "    //"
+    ],
+    [
+      403,
+      397,
+      393,
+      "    if ((Handle16 = VrpAllocateHandle16()) == 0) {"
+    ],
+    [
+      404,
+      398,
+      394,
+      "        SET_ERROR(ERROR_PATH_NOT_FOUND);    // all handles used!"
+    ],
+    [
+      405,
+      399,
+      395,
+      "        return;"
+    ],
+    [
+      406,
+      400,
+      396,
+      "    }"
+    ],
+    [
+      408,
+      402,
+      398,
+      "    //"
+    ],
+    [
+      409,
+      403,
+      399,
+      "    // get the pointer to the mailslot name from the VDM registers then"
+    ],
+    [
+      410,
+      404,
+      400,
+      "    // compute the significant length for the name"
+    ],
+    [
+      411,
+      405,
+      401,
+      "    //"
+    ],
+    [
+      413,
+      407,
+      403,
+      "    lpName = LPSTR_FROM_WORDS(getDS(), getSI());"
+    ],
+    [
+      414,
+      408,
+      404,
+      "    NameLength = strlen(lpName);"
+    ],
+    [
+      417,
+      410,
+      406,
+      "#if DBG"
+    ],
+    [
+      421,
+      414,
+      410,
+      "#endif"
+    ],
+    [
+      424,
+      416,
+      412,
+      "    //"
+    ],
+    [
+      425,
+      417,
+      413,
+      "    // if the name length is less than the prefix length (\\MAILSLOT\\) may as"
+    ],
+    [
+      426,
+      418,
+      414,
+      "    // well return an invalid name error here - can't be proper mailslot name"
+    ],
+    [
+      427,
+      419,
+      415,
+      "    //"
+    ],
+    [
+      429,
+      421,
+      417,
+      "    if (NameLength <= MAILSLOT_PREFIX_LENGTH) {"
+    ],
+    [
+      430,
+      422,
+      418,
+      "        SET_ERROR(ERROR_PATH_NOT_FOUND);"
+    ],
+    [
+      431,
+      423,
+      419,
+      "        VrpFreeHandle16(Handle16);"
+    ],
+    [
+      432,
+      424,
+      420,
+      "        return;"
+    ],
+    [
+      433,
+      425,
+      421,
+      "    }"
+    ],
+    [
+      435,
+      427,
+      423,
+      "    //"
+    ],
+    [
+      436,
+      428,
+      424,
+      "    // NameLength is length of local mailslot name after \\MAILSLOT\\. We"
+    ],
+    [
+      437,
+      429,
+      425,
+      "    // only store this info if the mailslot actually turns out to be"
+    ],
+    [
+      438,
+      430,
+      426,
+      "    // local"
+    ],
+    [
+      439,
+      431,
+      427,
+      "    //"
+    ],
+    [
+      441,
+      433,
+      429,
+      "    NameLength -= MAILSLOT_PREFIX_LENGTH;"
+    ],
+    [
+      443,
+      435,
+      431,
+      "    //"
+    ],
+    [
+      444,
+      436,
+      432,
+      "    // grab a structure in which to store the info. If we can't get one(!)"
+    ],
+    [
+      445,
+      437,
+      433,
+      "    // return a path not found error (Do we have a better one that the app"
+    ],
+    [
+      446,
+      438,
+      434,
+      "    // might be expecting?). We need a structure large enough to hold the"
+    ],
+    [
+      447,
+      439,
+      435,
+      "    // significant part of the mailslot name too"
+    ],
+    [
+      448,
+      440,
+      436,
+      "    //"
+    ],
+    [
+      450,
+      442,
+      438,
+      "    if ((ptr = VrpAllocateMailslotStructure(NameLength)) == NULL) {"
+    ],
+    [
+      451,
+      443,
+      439,
+      "        SET_ERROR(ERROR_PATH_NOT_FOUND);    // mon dieu! sacre fromage! etc..."
+    ],
+    [
+      452,
+      444,
+      440,
+      "        VrpFreeHandle16(Handle16);"
+    ],
+    [
+      453,
+      445,
+      441,
+      "        return;"
+    ],
+    [
+      454,
+      446,
+      442,
+      "    }"
+    ],
+    [
+      456,
+      448,
+      444,
+      "    //"
+    ],
+    [
+      457,
+      449,
+      445,
+      "    // convert the DOS namespace mailslot name to a local mailslot name"
+    ],
+    [
+      458,
+      450,
+      446,
+      "    // (\\MAILSLOT\\name => \\\\.\\MAILSLOT\\name)"
+    ],
+    [
+      459,
+      451,
+      447,
+      "    //"
+    ],
+    [
+      461,
+      453,
+      449,
+      "    VrpMakeLocalMailslotName(LocalMailslot, lpName);"
+    ],
+    [
+      463,
+      455,
+      451,
+      "    //"
+    ],
+    [
+      464,
+      456,
+      452,
+      "    // create the mailslot. If this fails free up the structure and handle"
+    ],
+    [
+      465,
+      457,
+      453,
+      "    // already allocated. Note: at this point we may have a proper mailslot"
+    ],
+    [
+      466,
+      458,
+      454,
+      "    // name or we could have any old garbage. We trust that CreateMailslot"
+    ],
+    [
+      467,
+      459,
+      455,
+      "    // will sort the wheat from the oatbran"
+    ],
+    [
+      468,
+      460,
+      456,
+      "    //"
+    ],
+    [
+      471,
+      462,
+      458,
+      "#if DBG"
+    ],
+    [
+      475,
+      470,
+      466,
+      "#endif"
+    ],
+    [
+      478,
+      472,
+      468,
+      "    Handle32 = CreateMailslot(LocalMailslot,"
+    ],
+    [
+      479,
+      473,
+      469,
+      "                                (DWORD)getBX(),     // nMaxMessageSize"
+    ],
+    [
+      480,
+      474,
+      470,
+      "                                0,                  // lReadTimeout"
+    ],
+    [
+      481,
+      475,
+      471,
+      "                                NULL                // security descriptor"
+    ],
+    [
+      482,
+      476,
+      472,
+      "                                );"
+    ],
+    [
+      483,
+      477,
+      473,
+      "    if (Handle32 == HANDLE_FUNCTION_FAILED) {"
+    ],
+    [
+      484,
+      478,
+      474,
+      "        SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      487,
+      480,
+      476,
+      "#if DBG"
+    ],
+    [
+      491,
+      486,
+      482,
+      "#endif"
+    ],
+    [
+      494,
+      488,
+      484,
+      "        VrpFreeMailslotStructure(ptr);"
+    ],
+    [
+      495,
+      489,
+      485,
+      "        VrpFreeHandle16(Handle16);"
+    ],
+    [
+      496,
+      490,
+      486,
+      "    } else {"
+    ],
+    [
+      499,
+      492,
+      488,
+      "#if DBG"
+    ],
+    [
+      503,
+      496,
+      492,
+      "#endif"
+    ],
+    [
+      506,
+      498,
+      494,
+      "        //"
+    ],
+    [
+      507,
+      499,
+      495,
+      "        // mailslot created - fill in the VR_MAILSLOT_INFO structure -"
+    ],
+    [
+      508,
+      500,
+      496,
+      "        // containing mailslot info for Dos app - and link it into the"
+    ],
+    [
+      509,
+      501,
+      497,
+      "        // list of structures. Return an arbitrary (but unique!) 16-bit"
+    ],
+    [
+      510,
+      502,
+      498,
+      "        // handle"
+    ],
+    [
+      511,
+      503,
+      499,
+      "        //"
+    ],
+    [
+      513,
+      505,
+      501,
+      "        ptr->DosPdb = getAX();"
+    ],
+    [
+      514,
+      506,
+      502,
+      "        ptr->Handle16 = Handle16;"
+    ],
+    [
+      515,
+      507,
+      503,
+      "        ptr->Handle32 = Handle32;"
+    ],
+    [
+      516,
+      508,
+      504,
+      "        ptr->BufferAddress.Offset = getDI();"
+    ],
+    [
+      517,
+      509,
+      505,
+      "        ptr->BufferAddress.Selector = getES();"
+    ],
+    [
+      518,
+      510,
+      506,
+      "        ptr->Selector = getDX();    // prot mode selector for Win3"
+    ],
+    [
+      520,
+      512,
+      508,
+      "        //"
+    ],
+    [
+      521,
+      513,
+      509,
+      "        // find the true message size from the info API"
+    ],
+    [
+      522,
+      514,
+      510,
+      "        //"
+    ],
+    [
+      524,
+      516,
+      512,
+      "        Ok = GetMailslotInfo(Handle32,"
+    ],
+    [
+      525,
+      517,
+      513,
+      "                                &ptr->MessageSize,"
+    ],
+    [
+      526,
+      518,
+      514,
+      "                                NULL,           // lpNextSize"
+    ],
+    [
+      527,
+      519,
+      515,
+      "                                NULL,           // lpMessageCount"
+    ],
+    [
+      528,
+      520,
+      516,
+      "                                NULL            // lpReadTimeout"
+    ],
+    [
+      529,
+      521,
+      517,
+      "                                );"
+    ],
+    [
+      530,
+      522,
+      518,
+      "        if (!Ok) {"
+    ],
+    [
+      533,
+      524,
+      520,
+      "#if DBG"
+    ],
+    [
+      537,
+      530,
+      526,
+      "#endif"
+    ],
+    [
+      540,
+      532,
+      528,
+      "            ptr->MessageSize = getCX();"
+    ],
+    [
+      541,
+      533,
+      529,
+      "        }"
+    ],
+    [
+      543,
+      535,
+      531,
+      "        //"
+    ],
+    [
+      544,
+      536,
+      532,
+      "        // copy the name of the mailslot after \\MAILSLOT\\ to the structure."
+    ],
+    [
+      545,
+      537,
+      533,
+      "        // We compare this when a mailslot write is requested (because"
+    ],
+    [
+      546,
+      538,
+      534,
+      "        // DosWriteMailslot passes in a name; we have to write locally"
+    ],
+    [
+      547,
+      539,
+      535,
+      "        // using a handle, so we must convert the name of a local mailslot"
+    ],
+    [
+      548,
+      540,
+      536,
+      "        // to an already open handle). Check NameLength first before doing"
+    ],
+    [
+      549,
+      541,
+      537,
+      "        // strcmp"
+    ],
+    [
+      550,
+      542,
+      538,
+      "        //"
+    ],
+    [
+      552,
+      544,
+      540,
+      "        ptr->NameLength = NameLength;"
+    ],
+    [
+      553,
+      545,
+      541,
+      "        strcpy(ptr->Name, lpName + MAILSLOT_PREFIX_LENGTH);"
+    ],
+    [
+      554,
+      546,
+      542,
+      "        VrpLinkMailslotStructure(ptr);"
+    ],
+    [
+      555,
+      547,
+      543,
+      "        setAX(Handle16);"
+    ],
+    [
+      556,
+      548,
+      544,
+      "        setCF(0);"
+    ],
+    [
+      557,
+      549,
+      545,
+      "    }"
+    ],
+    [
+      558,
+      550,
+      546,
+      "}"
+    ],
+    [
+      562,
+      554,
+      550,
+      "VOID"
+    ],
+    [
+      563,
+      555,
+      551,
+      "VrPeekMailslot("
+    ],
+    [
+      564,
+      556,
+      552,
+      "    VOID"
+    ],
+    [
+      565,
+      557,
+      553,
+      "    )"
+    ],
+    [
+      567,
+      559,
+      555,
+      "/*++"
+    ],
+    [
+      569,
+      561,
+      557,
+      "Routine Description:"
+    ],
+    [
+      571,
+      563,
+      559,
+      "    Performs DosPeekMailslot request on behalf of VDM redir."
+    ],
+    [
+      573,
+      565,
+      561,
+      "    Note: we are not supporting Peeks of NT mailslots (the Win32 Mailslot API"
+    ],
+    [
+      574,
+      566,
+      562,
+      "    does not support mailslot peek). This routine is left here as a place"
+    ],
+    [
+      575,
+      567,
+      563,
+      "    holder should we want to descend to the NT level to implement mailslots"
+    ],
+    [
+      576,
+      568,
+      564,
+      "    (which do allow peeks)"
+    ],
+    [
+      578,
+      570,
+      566,
+      "Arguments:"
+    ],
+    [
+      580,
+      572,
+      568,
+      "    None. All arguments are extracted from 16-bit context descriptor"
+    ],
+    [
+      582,
+      574,
+      570,
+      "Return Value:"
+    ],
+    [
+      584,
+      576,
+      572,
+      "    None. Returns values in VDM Ax and Flags registers"
+    ],
+    [
+      586,
+      578,
+      574,
+      "--*/"
+    ],
+    [
+      588,
+      580,
+      576,
+      "{"
+    ],
+    [
+      590,
+      581,
+      576,
+      "#if DBG"
+    ],
+    [
+      594,
+      588,
+      583,
+      "#endif"
+    ],
+    [
+      597,
+      590,
+      585,
+      "    //"
+    ],
+    [
+      598,
+      591,
+      586,
+      "    // return not supported error instead of ERROR_INVALID_FUNCTION"
+    ],
+    [
+      599,
+      592,
+      587,
+      "    //"
+    ],
+    [
+      601,
+      594,
+      589,
+      "    SET_ERROR(ERROR_NOT_SUPPORTED);"
+    ],
+    [
+      602,
+      595,
+      590,
+      "}"
+    ],
+    [
+      606,
+      599,
+      594,
+      "VOID"
+    ],
+    [
+      607,
+      600,
+      595,
+      "VrReadMailslot("
+    ],
+    [
+      608,
+      601,
+      596,
+      "    VOID"
+    ],
+    [
+      609,
+      602,
+      597,
+      "    )"
+    ],
+    [
+      611,
+      604,
+      599,
+      "/*++"
+    ],
+    [
+      613,
+      606,
+      601,
+      "Routine Description:"
+    ],
+    [
+      615,
+      608,
+      603,
+      "    Performs DosReadMailslot request on behalf of VDM redir"
+    ],
+    [
+      617,
+      610,
+      605,
+      "Arguments:"
+    ],
+    [
+      619,
+      612,
+      607,
+      "    None. All arguments are extracted from 16-bit context descriptor"
+    ],
+    [
+      621,
+      614,
+      609,
+      "Return Value:"
+    ],
+    [
+      623,
+      616,
+      611,
+      "    None. Returns values in VDM Ax and Flags registers"
+    ],
+    [
+      625,
+      618,
+      613,
+      "--*/"
+    ],
+    [
+      627,
+      620,
+      615,
+      "{"
+    ],
+    [
+      628,
+      621,
+      616,
+      "    PVR_MAILSLOT_INFO   ptr;"
+    ],
+    [
+      629,
+      622,
+      617,
+      "    HANDLE  Handle;"
+    ],
+    [
+      630,
+      623,
+      618,
+      "    DWORD   BytesRead;"
+    ],
+    [
+      631,
+      624,
+      619,
+      "    DWORD   NextSize;"
+    ],
+    [
+      632,
+      625,
+      620,
+      "    BOOL    Ok;"
+    ],
+    [
+      635,
+      627,
+      621,
+      "#if DBG"
+    ],
+    [
+      639,
+      632,
+      626,
+      "#endif"
+    ],
+    [
+      642,
+      634,
+      628,
+      "    if ((ptr = VrpMapMailslotHandle16(getBX())) == NULL) {"
+    ],
+    [
+      643,
+      635,
+      629,
+      "        SET_ERROR(ERROR_INVALID_HANDLE);"
+    ],
+    [
+      644,
+      636,
+      630,
+      "    } else {"
+    ],
+    [
+      646,
+      638,
+      632,
+      "        //"
+    ],
+    [
+      647,
+      639,
+      633,
+      "        // the NT API won't allow us to specify the read timeout on each read"
+    ],
+    [
+      648,
+      640,
+      634,
+      "        // call, so we have to change it with SetMailslotInfo before we can"
+    ],
+    [
+      649,
+      641,
+      635,
+      "        // do the read"
+    ],
+    [
+      650,
+      642,
+      636,
+      "        //"
+    ],
+    [
+      652,
+      644,
+      638,
+      "        Handle = ptr->Handle32;"
+    ],
+    [
+      653,
+      645,
+      639,
+      "        if (!SetMailslotInfo(Handle, MAKE_DWORD(getDX(), getCX()))) {"
+    ],
+    [
+      654,
+      646,
+      640,
+      "            SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      655,
+      647,
+      641,
+      "        } else {"
+    ],
+    [
+      658,
+      649,
+      643,
+      "#if DBG"
+    ],
+    [
+      662,
+      653,
+      647,
+      "#endif"
+    ],
+    [
+      665,
+      655,
+      649,
+      "            Ok = ReadFile(Handle,"
+    ],
+    [
+      666,
+      656,
+      650,
+      "                            POINTER_FROM_WORDS(getES(), getDI()),"
+    ],
+    [
+      667,
+      657,
+      651,
+      "                            ptr->MessageSize,"
+    ],
+    [
+      668,
+      658,
+      652,
+      "                            &BytesRead,"
+    ],
+    [
+      669,
+      659,
+      653,
+      "                            NULL            // not overlapped"
+    ],
+    [
+      670,
+      660,
+      654,
+      "                            );"
+    ],
+    [
+      671,
+      661,
+      655,
+      "            if (!Ok) {"
+    ],
+    [
+      672,
+      662,
+      656,
+      "                SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      673,
+      663,
+      657,
+      "            } else {"
+    ],
+    [
+      676,
+      665,
+      659,
+      "#if DBG"
+    ],
+    [
+      680,
+      673,
+      667,
+      "#endif"
+    ],
+    [
+      683,
+      675,
+      669,
+      "                setAX((WORD)BytesRead);"
+    ],
+    [
+      685,
+      677,
+      671,
+      "                //"
+    ],
+    [
+      686,
+      678,
+      672,
+      "                // we need to return also the NextSize and NextPriority info"
+    ],
+    [
+      687,
+      679,
+      673,
+      "                //"
+    ],
+    [
+      689,
+      681,
+      675,
+      "                NextSize = MAILSLOT_NO_MESSAGE;"
+    ],
+    [
+      690,
+      682,
+      676,
+      "                Ok = GetMailslotInfo(Handle,"
+    ],
+    [
+      691,
+      683,
+      677,
+      "                                        NULL,           // lpMaxMessageSize"
+    ],
+    [
+      692,
+      684,
+      678,
+      "                                        &NextSize,"
+    ],
+    [
+      693,
+      685,
+      679,
+      "                                        NULL,           // lpMessageCount"
+    ],
+    [
+      694,
+      686,
+      680,
+      "                                        NULL            // lpReadTimeout"
+    ],
+    [
+      695,
+      687,
+      681,
+      "                                        );"
+    ],
+    [
+      696,
+      688,
+      682,
+      "                if (NextSize == MAILSLOT_NO_MESSAGE) {"
+    ],
+    [
+      697,
+      689,
+      683,
+      "                    setCX(0);"
+    ],
+    [
+      698,
+      690,
+      684,
+      "                } else {"
+    ],
+    [
+      699,
+      691,
+      685,
+      "                    setCX((WORD)NextSize);"
+    ],
+    [
+      700,
+      692,
+      686,
+      "                }"
+    ],
+    [
+      703,
+      694,
+      688,
+      "#if DBG"
+    ],
+    [
+      707,
+      698,
+      692,
+      "#endif"
+    ],
+    [
+      710,
+      700,
+      694,
+      "                //"
+    ],
+    [
+      711,
+      701,
+      695,
+      "                // we don't support priorities, just return 0"
+    ],
+    [
+      712,
+      702,
+      696,
+      "                //"
+    ],
+    [
+      714,
+      704,
+      698,
+      "                setDX(0);"
+    ],
+    [
+      715,
+      705,
+      699,
+      "                setCF(0);"
+    ],
+    [
+      716,
+      706,
+      700,
+      "            }"
+    ],
+    [
+      717,
+      707,
+      701,
+      "        }"
+    ],
+    [
+      718,
+      708,
+      702,
+      "    }"
+    ],
+    [
+      719,
+      709,
+      703,
+      "}"
+    ],
+    [
+      723,
+      713,
+      707,
+      "VOID"
+    ],
+    [
+      724,
+      714,
+      708,
+      "VrWriteMailslot("
+    ],
+    [
+      725,
+      715,
+      709,
+      "    VOID"
+    ],
+    [
+      726,
+      716,
+      710,
+      "    )"
+    ],
+    [
+      728,
+      718,
+      712,
+      "/*++"
+    ],
+    [
+      730,
+      720,
+      714,
+      "Routine Description:"
+    ],
+    [
+      732,
+      722,
+      716,
+      "    Performs DosWriteMailslot request on behalf of VDM redir"
+    ],
+    [
+      734,
+      724,
+      718,
+      "Arguments:"
+    ],
+    [
+      736,
+      726,
+      720,
+      "    None. All arguments are extracted from 16-bit context descriptor"
+    ],
+    [
+      738,
+      728,
+      722,
+      "Return Value:"
+    ],
+    [
+      740,
+      730,
+      724,
+      "    None. Returns values in VDM Ax and Flags registers"
+    ],
+    [
+      742,
+      732,
+      726,
+      "--*/"
+    ],
+    [
+      744,
+      734,
+      728,
+      "{"
+    ],
+    [
+      745,
+      735,
+      729,
+      "    LPSTR   Name;"
+    ],
+    [
+      746,
+      736,
+      730,
+      "    HANDLE  Handle;"
+    ],
+    [
+      747,
+      737,
+      731,
+      "    BOOL    Ok;"
+    ],
+    [
+      748,
+      738,
+      732,
+      "    DWORD   BytesWritten;"
+    ],
+    [
+      749,
+      739,
+      733,
+      "    CHAR    LocalMailslotName[LOCAL_MAILSLOT_NAMELEN+1];"
+    ],
+    [
+      750,
+      740,
+      734,
+      "    struct  DosWriteMailslotStruct* StructurePointer;"
+    ],
+    [
+      752,
+      742,
+      736,
+      "    //"
+    ],
+    [
+      753,
+      743,
+      737,
+      "    // search for the local mailslot based on the name. If not found assume"
+    ],
+    [
+      754,
+      744,
+      738,
+      "    // it is a remote handle and try to open it. Return failure if cannot"
+    ],
+    [
+      755,
+      745,
+      739,
+      "    // open"
+    ],
+    [
+      756,
+      746,
+      740,
+      "    //"
+    ],
+    [
+      758,
+      748,
+      742,
+      "    Name = LPSTR_FROM_WORDS(getDS(), getSI());"
+    ],
+    [
+      761,
+      750,
+      743,
+      "#if DBG"
+    ],
+    [
+      765,
+      755,
+      748,
+      "#endif"
+    ],
+    [
+      768,
+      757,
+      750,
+      "    if (!VrpIsMailslotName(Name)) {"
+    ],
+    [
+      771,
+      759,
+      752,
+      "#if DBG"
+    ],
+    [
+      775,
+      763,
+      756,
+      "#endif"
+    ],
+    [
+      778,
+      765,
+      758,
+      "        SET_ERROR(ERROR_PATH_NOT_FOUND);"
+    ],
+    [
+      779,
+      766,
+      759,
+      "    }"
+    ],
+    [
+      780,
+      767,
+      760,
+      "    if (!IS_ASCII_PATH_SEPARATOR(Name[1])) {"
+    ],
+    [
+      781,
+      768,
+      761,
+      "        strcpy(LocalMailslotName, LOCAL_MAILSLOT_PREFIX);"
+    ],
+    [
+      782,
+      769,
+      762,
+      "        strcat(LocalMailslotName, Name);"
+    ],
+    [
+      783,
+      770,
+      763,
+      "        Name = LocalMailslotName;"
+    ],
+    [
+      784,
+      771,
+      764,
+      "    }"
+    ],
+    [
+      786,
+      773,
+      766,
+      "    Handle = CreateFile(Name,"
+    ],
+    [
+      787,
+      774,
+      767,
+      "                        GENERIC_WRITE,"
+    ],
+    [
+      788,
+      775,
+      768,
+      "                        FILE_SHARE_WRITE | FILE_SHARE_READ,"
+    ],
+    [
+      789,
+      776,
+      769,
+      "                        NULL,               // lpSecurityAttributes"
+    ],
+    [
+      790,
+      777,
+      770,
+      "                        OPEN_EXISTING,"
+    ],
+    [
+      791,
+      778,
+      771,
+      "                        FILE_ATTRIBUTE_NORMAL,"
+    ],
+    [
+      792,
+      779,
+      772,
+      "                        NULL                // hTemplateFile"
+    ],
+    [
+      793,
+      780,
+      773,
+      "                        );"
+    ],
+    [
+      794,
+      781,
+      774,
+      "    if (Handle == HANDLE_FUNCTION_FAILED) {"
+    ],
+    [
+      795,
+      782,
+      775,
+      "        SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      798,
+      784,
+      777,
+      "#if DBG"
+    ],
+    [
+      802,
+      788,
+      781,
+      "#endif"
+    ],
+    [
+      805,
+      790,
+      783,
+      "    } else {"
+    ],
+    [
+      807,
+      792,
+      785,
+      "        //"
+    ],
+    [
+      808,
+      793,
+      786,
+      "        // we have a handle to an open mailslot - either local or remote. Get"
+    ],
+    [
+      809,
+      794,
+      787,
+      "        // the caller's timeout and buffer pointer from the"
+    ],
+    [
+      810,
+      795,
+      788,
+      "        // DosWriteMailslotStruct at es:di"
+    ],
+    [
+      811,
+      796,
+      789,
+      "        //"
+    ],
+    [
+      813,
+      798,
+      791,
+      "        StructurePointer = (struct DosWriteMailslotStruct*)"
+    ],
+    [
+      814,
+      799,
+      792,
+      "                                POINTER_FROM_WORDS(getES(), getDI());"
+    ],
+    [
+      816,
+      801,
+      794,
+      "        Ok = SetMailslotInfo(Handle, READ_DWORD(&StructurePointer->DWMS_Timeout));"
+    ],
+    [
+      819,
+      803,
+      796,
+      "#if DBG"
+    ],
+    [
+      823,
+      813,
+      806,
+      "#endif"
+    ],
+    [
+      826,
+      815,
+      808,
+      "        Ok = WriteFile(Handle,"
+    ],
+    [
+      827,
+      816,
+      809,
+      "                        READ_FAR_POINTER(&StructurePointer->DWMS_Buffer),"
+    ],
+    [
+      828,
+      817,
+      810,
+      "                        (DWORD)getCX(),"
+    ],
+    [
+      829,
+      818,
+      811,
+      "                        &BytesWritten,"
+    ],
+    [
+      830,
+      819,
+      812,
+      "                        NULL            // lpOverlapped"
+    ],
+    [
+      831,
+      820,
+      813,
+      "                        );"
+    ],
+    [
+      832,
+      821,
+      814,
+      "        if (!Ok) {"
+    ],
+    [
+      833,
+      822,
+      815,
+      "            SET_ERROR(VrpMapLastError());"
+    ],
+    [
+      836,
+      824,
+      817,
+      "#if DBG"
+    ],
+    [
+      840,
+      828,
+      821,
+      "#endif"
+    ],
+    [
+      843,
+      830,
+      823,
+      "        } else {"
+    ],
+    [
+      846,
+      832,
+      825,
+      "#if DBG"
+    ],
+    [
+      850,
+      839,
+      832,
+      "#endif"
+    ],
+    [
+      853,
+      841,
+      834,
+      "            setCF(0);"
+    ],
+    [
+      854,
+      842,
+      835,
+      "        }"
+    ],
+    [
+      855,
+      843,
+      836,
+      "        CloseHandle(Handle);"
+    ],
+    [
+      856,
+      844,
+      837,
+      "    }"
+    ],
+    [
+      857,
+      845,
+      838,
+      "}"
+    ],
+    [
+      861,
+      849,
+      842,
+      "VOID"
+    ],
+    [
+      862,
+      850,
+      843,
+      "VrTerminateMailslots("
+    ],
+    [
+      863,
+      851,
+      844,
+      "    IN WORD DosPdb"
+    ],
+    [
+      864,
+      852,
+      845,
+      "    )"
+    ],
+    [
+      866,
+      854,
+      847,
+      "/*++"
+    ],
+    [
+      868,
+      856,
+      849,
+      "Routine Description:"
+    ],
+    [
+      870,
+      858,
+      851,
+      "    If a Dos app created some mailslots and then terminates, then we need to"
+    ],
+    [
+      871,
+      859,
+      852,
+      "    delete the mailslots on its behalf. The main reason is that Dos process"
+    ],
+    [
+      872,
+      860,
+      853,
+      "    termination cleanup is limited mainly to file handles. Mailslot handles"
+    ],
+    [
+      873,
+      861,
+      854,
+      "    are not part of the file handle set so don't get closed for a terminating"
+    ],
+    [
+      874,
+      862,
+      855,
+      "    app. Control is passed here via the redir receiving a NetResetEnvironment"
+    ],
+    [
+      875,
+      863,
+      856,
+      "    call when Dos decides the app is closing. The redir BOPs here and we"
+    ],
+    [
+      876,
+      864,
+      857,
+      "    clean up the mailslot mess"
+    ],
+    [
+      878,
+      866,
+      859,
+      "    Assumes single-threadedness"
+    ],
+    [
+      880,
+      868,
+      861,
+      "Arguments:"
+    ],
+    [
+      882,
+      870,
+      863,
+      "    DosPdb  - 16-bit (segment) identifier of terminating DOS process"
+    ],
+    [
+      884,
+      872,
+      865,
+      "Return Value:"
+    ],
+    [
+      886,
+      874,
+      867,
+      "    None. Returns values in VDM Ax and Flags registers"
+    ],
+    [
+      888,
+      876,
+      869,
+      "--*/"
+    ],
+    [
+      890,
+      878,
+      871,
+      "{"
+    ],
+    [
+      892,
+      879,
+      871,
+      "#if DBG"
+    ],
+    [
+      896,
+      883,
+      875,
+      "#endif"
+    ],
+    [
+      899,
+      885,
+      877,
+      "    VrpRemoveProcessMailslots(DosPdb);"
+    ],
+    [
+      900,
+      886,
+      878,
+      "}"
+    ],
+    [
+      904,
+      890,
+      882,
+      "//"
+    ],
+    [
+      905,
+      891,
+      883,
+      "// private utilities"
+    ],
+    [
+      906,
+      892,
+      884,
+      "//"
+    ],
+    [
+      908,
+      894,
+      886,
+      "PRIVATE"
+    ],
+    [
+      909,
+      895,
+      887,
+      "BOOL"
+    ],
+    [
+      910,
+      896,
+      888,
+      "VrpIsMailslotName("
+    ],
+    [
+      911,
+      897,
+      889,
+      "    IN LPSTR Name"
+    ],
+    [
+      912,
+      898,
+      890,
+      "    )"
+    ],
+    [
+      914,
+      900,
+      892,
+      "/*++"
+    ],
+    [
+      916,
+      902,
+      894,
+      "Routine Description:"
+    ],
+    [
+      918,
+      904,
+      896,
+      "    Checks if a string designates a mailslot. As criteria for the decision"
+    ],
+    [
+      919,
+      905,
+      897,
+      "    we use:"
+    ],
+    [
+      921,
+      907,
+      899,
+      "        \\\\computername\\MAILSLOT\\..."
+    ],
+    [
+      922,
+      908,
+      900,
+      "        \\MAILSLOT\\..."
+    ],
+    [
+      924,
+      910,
+      902,
+      "Arguments:"
+    ],
+    [
+      926,
+      912,
+      904,
+      "    Name    - to check for (Dos) mailslot syntax"
+    ],
+    [
+      928,
+      914,
+      906,
+      "Return Value:"
+    ],
+    [
+      930,
+      916,
+      908,
+      "    BOOL"
+    ],
+    [
+      931,
+      917,
+      909,
+      "        TRUE    - Name refers to (local or remote) mailslot"
+    ],
+    [
+      932,
+      918,
+      910,
+      "        FALSE   - Name doesn't look like mailslot name"
+    ],
+    [
+      934,
+      920,
+      912,
+      "--*/"
+    ],
+    [
+      936,
+      922,
+      914,
+      "{"
+    ],
+    [
+      937,
+      923,
+      915,
+      "    int     CharCount;"
+    ],
+    [
+      940,
+      925,
+      916,
+      "#if DBG"
+    ],
+    [
+      943,
+      927,
+      918,
+      "#endif"
+    ],
+    [
+      946,
+      929,
+      920,
+      "    if (IS_ASCII_PATH_SEPARATOR(*Name)) {"
+    ],
+    [
+      947,
+      930,
+      921,
+      "        ++Name;"
+    ],
+    [
+      948,
+      931,
+      922,
+      "        if (IS_ASCII_PATH_SEPARATOR(*Name)) {"
+    ],
+    [
+      949,
+      932,
+      923,
+      "            ++Name;"
+    ],
+    [
+      950,
+      933,
+      924,
+      "            CharCount = 0;"
+    ],
+    [
+      951,
+      934,
+      925,
+      "            while (*Name && !IS_ASCII_PATH_SEPARATOR(*Name)) {"
+    ],
+    [
+      952,
+      935,
+      926,
+      "                ++Name;"
+    ],
+    [
+      953,
+      936,
+      927,
+      "                ++CharCount;"
+    ],
+    [
+      954,
+      937,
+      928,
+      "            }"
+    ],
+    [
+      955,
+      938,
+      929,
+      "            if (!CharCount || !*Name) {"
+    ],
+    [
+      957,
+      940,
+      931,
+      "                //"
+    ],
+    [
+      958,
+      941,
+      932,
+      "                // Name is \\\\ or \\\\\\ or just \\\\name, none of which I understand,"
+    ],
+    [
+      959,
+      942,
+      933,
+      "                // so its not a valid mailslot name - fail it"
+    ],
+    [
+      960,
+      943,
+      934,
+      "                //"
+    ],
+    [
+      963,
+      945,
+      936,
+      "#if DBG"
+    ],
+    [
+      967,
+      949,
+      940,
+      "#endif"
+    ],
+    [
+      970,
+      951,
+      942,
+      "                return FALSE;"
+    ],
+    [
+      971,
+      952,
+      943,
+      "            }"
+    ],
+    [
+      972,
+      953,
+      944,
+      "            ++Name;"
+    ],
+    [
+      973,
+      954,
+      945,
+      "        }"
+    ],
+    [
+      975,
+      956,
+      947,
+      "        //"
+    ],
+    [
+      976,
+      957,
+      948,
+      "        // We are at <something> (after \\ or \\\\<name>\\). Check if <something>"
+    ],
+    [
+      977,
+      958,
+      949,
+      "        // is [Mm][Aa][Ii][Ll][Ss][Ll][Oo][Tt][\\\\/]"
+    ],
+    [
+      978,
+      959,
+      950,
+      "        //"
+    ],
+    [
+      980,
+      961,
+      952,
+      "        if (!_strnicmp(Name, \"MAILSLOT\", 8)) {"
+    ],
+    [
+      981,
+      962,
+      953,
+      "            Name += 8;"
+    ],
+    [
+      982,
+      963,
+      954,
+      "            if (IS_ASCII_PATH_SEPARATOR(*Name)) {"
+    ],
+    [
+      985,
+      965,
+      956,
+      "#if DBG"
+    ],
+    [
+      989,
+      969,
+      960,
+      "#endif"
+    ],
+    [
+      992,
+      971,
+      962,
+      "                return TRUE;"
+    ],
+    [
+      993,
+      972,
+      963,
+      "            }"
+    ],
+    [
+      994,
+      973,
+      964,
+      "        }"
+    ],
+    [
+      995,
+      974,
+      965,
+      "    }"
+    ],
+    [
+      998,
+      976,
+      967,
+      "#if DBG"
+    ],
+    [
+      1002,
+      980,
+      971,
+      "#endif"
+    ],
+    [
+      1005,
+      982,
+      973,
+      "    return FALSE;"
+    ],
+    [
+      1006,
+      983,
+      974,
+      "}"
+    ],
+    [
+      1010,
+      987,
+      978,
+      "PRIVATE"
+    ],
+    [
+      1011,
+      988,
+      979,
+      "VOID"
+    ],
+    [
+      1012,
+      989,
+      980,
+      "VrpMakeLocalMailslotName("
+    ],
+    [
+      1013,
+      990,
+      981,
+      "    IN LPSTR lpBuffer,"
+    ],
+    [
+      1014,
+      991,
+      982,
+      "    IN LPSTR lpName"
+    ],
+    [
+      1015,
+      992,
+      983,
+      "    )"
+    ],
+    [
+      1017,
+      994,
+      985,
+      "/*++"
+    ],
+    [
+      1019,
+      996,
+      987,
+      "Routine Description:"
+    ],
+    [
+      1021,
+      998,
+      989,
+      "    Converts a local DOS mailslot name of the form \\MAILSLOT\\<name> to a local"
+    ],
+    [
+      1022,
+      999,
+      990,
+      "    NT/Win32 mailslot name of the form \\\\.\\MAILSLOT\\<name>"
+    ],
+    [
+      1024,
+      1001,
+      992,
+      "Arguments:"
+    ],
+    [
+      1026,
+      1003,
+      994,
+      "    lpBuffer    - pointer to ASCIZ buffer where local NT mailslot name will"
+    ],
+    [
+      1027,
+      1004,
+      995,
+      "                  be returned"
+    ],
+    [
+      1028,
+      1005,
+      996,
+      "    lpName      - pointer to ASCIZ Dos mailslot name"
+    ],
+    [
+      1030,
+      1007,
+      998,
+      "    NOTE: It is assumed that the buffer @ lpBuffer is large enough to hold the"
+    ],
+    [
+      1031,
+      1008,
+      999,
+      "    composite name and that Unicode support (or conversion) is NOT REQUIRED"
+    ],
+    [
+      1032,
+      1009,
+      1000,
+      "    since we are supporting Dos which will only use ASCIZ (or at worst DBCS)"
+    ],
+    [
+      1033,
+      1010,
+      1001,
+      "    strings"
+    ],
+    [
+      1035,
+      1012,
+      1003,
+      "Return Value:"
+    ],
+    [
+      1037,
+      1014,
+      1005,
+      "    return-value - Description of conditions needed to return value. - or -"
+    ],
+    [
+      1038,
+      1015,
+      1006,
+      "    None."
+    ],
+    [
+      1040,
+      1017,
+      1008,
+      "--*/"
+    ],
+    [
+      1042,
+      1019,
+      1010,
+      "{"
+    ],
+    [
+      1043,
+      1020,
+      1011,
+      "    if (!_strnicmp(lpName, MAILSLOT_PREFIX, MAILSLOT_PREFIX_LENGTH)) {"
+    ],
+    [
+      1044,
+      1021,
+      1012,
+      "        strcpy(lpBuffer, LOCAL_MAILSLOT_PREFIX);"
+    ],
+    [
+      1045,
+      1022,
+      1013,
+      "        strcat(lpBuffer, lpName);"
+    ],
+    [
+      1046,
+      1023,
+      1014,
+      "    }"
+    ],
+    [
+      1049,
+      1025,
+      1015,
+      "#if DBG"
+    ],
+    [
+      1053,
+      1029,
+      1019,
+      "#endif"
+    ],
+    [
+      1056,
+      1031,
+      1021,
+      "}"
+    ],
+    [
+      1060,
+      1035,
+      1025,
+      "//"
+    ],
+    [
+      1061,
+      1036,
+      1026,
+      "// private mailslot list and list manipulators"
+    ],
+    [
+      1062,
+      1037,
+      1027,
+      "//"
+    ],
+    [
+      1064,
+      1039,
+      1029,
+      "PRIVATE"
+    ],
+    [
+      1065,
+      1040,
+      1030,
+      "PVR_MAILSLOT_INFO   MailslotInfoList    = NULL;"
+    ],
+    [
+      1067,
+      1042,
+      1032,
+      "PRIVATE"
+    ],
+    [
+      1068,
+      1043,
+      1033,
+      "PVR_MAILSLOT_INFO   LastMailslotInfo    = NULL;"
+    ],
+    [
+      1072,
+      1047,
+      1037,
+      "PRIVATE"
+    ],
+    [
+      1073,
+      1048,
+      1038,
+      "VOID"
+    ],
+    [
+      1074,
+      1049,
+      1039,
+      "VrpLinkMailslotStructure("
+    ],
+    [
+      1075,
+      1050,
+      1040,
+      "    IN PVR_MAILSLOT_INFO MailslotInfo"
+    ],
+    [
+      1076,
+      1051,
+      1041,
+      "    )"
+    ],
+    [
+      1078,
+      1053,
+      1043,
+      "/*++"
+    ],
+    [
+      1080,
+      1055,
+      1045,
+      "Routine Description:"
+    ],
+    [
+      1082,
+      1057,
+      1047,
+      "    Adds a VR_MAILSLOT_INFO structure to the end of MailslotInfoList. Points"
+    ],
+    [
+      1083,
+      1058,
+      1048,
+      "    LastMailslotInfo at this structure"
+    ],
+    [
+      1085,
+      1060,
+      1050,
+      "    Notes:"
+    ],
+    [
+      1087,
+      1062,
+      1052,
+      "        Assumes that if LastMailslotInfo is NULL then there is nothing in"
+    ],
+    [
+      1088,
+      1063,
+      1053,
+      "        the list (ie MailslotInfoList is also NULL)"
+    ],
+    [
+      1090,
+      1065,
+      1055,
+      "Arguments:"
+    ],
+    [
+      1092,
+      1067,
+      1057,
+      "    MailslotInfo    - pointer to VR_MAILSLOT_INFO stucture to add"
+    ],
+    [
+      1094,
+      1069,
+      1059,
+      "Return Value:"
+    ],
+    [
+      1096,
+      1071,
+      1061,
+      "    None."
+    ],
+    [
+      1098,
+      1073,
+      1063,
+      "--*/"
+    ],
+    [
+      1100,
+      1075,
+      1065,
+      "{"
+    ],
+    [
+      1101,
+      1076,
+      1066,
+      "    if (!LastMailslotInfo) {"
+    ],
+    [
+      1102,
+      1077,
+      1067,
+      "        MailslotInfoList = MailslotInfo;"
+    ],
+    [
+      1103,
+      1078,
+      1068,
+      "    } else {"
+    ],
+    [
+      1104,
+      1079,
+      1069,
+      "        LastMailslotInfo->Next = MailslotInfo;"
+    ],
+    [
+      1105,
+      1080,
+      1070,
+      "    }"
+    ],
+    [
+      1106,
+      1081,
+      1071,
+      "    LastMailslotInfo = MailslotInfo;"
+    ],
+    [
+      1107,
+      1082,
+      1072,
+      "    MailslotInfo->Next = NULL;"
+    ],
+    [
+      1108,
+      1083,
+      1073,
+      "}"
+    ],
+    [
+      1112,
+      1087,
+      1077,
+      "PRIVATE"
+    ],
+    [
+      1113,
+      1088,
+      1078,
+      "PVR_MAILSLOT_INFO"
+    ],
+    [
+      1114,
+      1089,
+      1079,
+      "VrpUnlinkMailslotStructure("
+    ],
+    [
+      1115,
+      1090,
+      1080,
+      "    IN WORD Handle16"
+    ],
+    [
+      1116,
+      1091,
+      1081,
+      "    )"
+    ],
+    [
+      1118,
+      1093,
+      1083,
+      "/*++"
+    ],
+    [
+      1120,
+      1095,
+      1085,
+      "Routine Description:"
+    ],
+    [
+      1122,
+      1097,
+      1087,
+      "    Removes a VR_MAILSLOT_INFO structure from the list at MailslotInfoList."
+    ],
+    [
+      1123,
+      1098,
+      1088,
+      "    The structure to remove is identified by the 32-bit handle"
+    ],
+    [
+      1125,
+      1100,
+      1090,
+      "Arguments:"
+    ],
+    [
+      1127,
+      1102,
+      1092,
+      "    Handle16    - 16-bit handle of open mailslot to search for"
+    ],
+    [
+      1129,
+      1104,
+      1094,
+      "Return Value:"
+    ],
+    [
+      1131,
+      1106,
+      1096,
+      "    PVR_MAILSLOT_INFO"
+    ],
+    [
+      1132,
+      1107,
+      1097,
+      "        Success - pointer to removed VR_MAILSLOT_INFO structure"
+    ],
+    [
+      1133,
+      1108,
+      1098,
+      "        Failure - NULL"
+    ],
+    [
+      1135,
+      1110,
+      1100,
+      "--*/"
+    ],
+    [
+      1137,
+      1112,
+      1102,
+      "{"
+    ],
+    [
+      1138,
+      1113,
+      1103,
+      "    PVR_MAILSLOT_INFO   ptr, previous = NULL;"
+    ],
+    [
+      1140,
+      1115,
+      1105,
+      "    for (ptr = MailslotInfoList; ptr; ) {"
+    ],
+    [
+      1141,
+      1116,
+      1106,
+      "        if (ptr->Handle16 == Handle16) {"
+    ],
+    [
+      1142,
+      1117,
+      1107,
+      "            if (!previous) {"
+    ],
+    [
+      1143,
+      1118,
+      1108,
+      "                MailslotInfoList = ptr->Next;"
+    ],
+    [
+      1144,
+      1119,
+      1109,
+      "            } else {"
+    ],
+    [
+      1145,
+      1120,
+      1110,
+      "                previous->Next = ptr->Next;"
+    ],
+    [
+      1146,
+      1121,
+      1111,
+      "            }"
+    ],
+    [
+      1147,
+      1122,
+      1112,
+      "            if (LastMailslotInfo == ptr) {"
+    ],
+    [
+      1148,
+      1123,
+      1113,
+      "                LastMailslotInfo = previous;"
+    ],
+    [
+      1149,
+      1124,
+      1114,
+      "            }"
+    ],
+    [
+      1150,
+      1125,
+      1115,
+      "            break;"
+    ],
+    [
+      1151,
+      1126,
+      1116,
+      "        } else {"
+    ],
+    [
+      1152,
+      1127,
+      1117,
+      "            previous = ptr;"
+    ],
+    [
+      1153,
+      1128,
+      1118,
+      "            ptr = ptr->Next;"
+    ],
+    [
+      1154,
+      1129,
+      1119,
+      "        }"
+    ],
+    [
+      1155,
+      1130,
+      1120,
+      "    }"
+    ],
+    [
+      1158,
+      1132,
+      1120,
+      "#if DBG"
+    ],
+    [
+      1162,
+      1145,
+      1133,
+      "#endif"
+    ],
+    [
+      1165,
+      1147,
+      1135,
+      "    return ptr;"
+    ],
+    [
+      1166,
+      1148,
+      1136,
+      "}"
+    ],
+    [
+      1170,
+      1152,
+      1140,
+      "PRIVATE"
+    ],
+    [
+      1171,
+      1153,
+      1141,
+      "PVR_MAILSLOT_INFO"
+    ],
+    [
+      1172,
+      1154,
+      1142,
+      "VrpMapMailslotHandle16("
+    ],
+    [
+      1173,
+      1155,
+      1143,
+      "    IN WORD Handle16"
+    ],
+    [
+      1174,
+      1156,
+      1144,
+      "    )"
+    ],
+    [
+      1176,
+      1158,
+      1146,
+      "/*++"
+    ],
+    [
+      1178,
+      1160,
+      1148,
+      "Routine Description:"
+    ],
+    [
+      1180,
+      1162,
+      1150,
+      "    Searches the list of VR_MAILSLOT_INFO structures looking for the one"
+    ],
+    [
+      1181,
+      1163,
+      1151,
+      "    containing Handle16. If found, returns pointer to structure else NULL"
+    ],
+    [
+      1183,
+      1165,
+      1153,
+      "    Notes:"
+    ],
+    [
+      1185,
+      1167,
+      1155,
+      "        This routine assumes that Handle16 is unique and >1 mailslot structure"
+    ],
+    [
+      1186,
+      1168,
+      1156,
+      "        cannot simultaneously exist with this handle"
+    ],
+    [
+      1188,
+      1170,
+      1158,
+      "Arguments:"
+    ],
+    [
+      1190,
+      1172,
+      1160,
+      "    Handle16    - Unique 16-bit handle to search for"
+    ],
+    [
+      1192,
+      1174,
+      1162,
+      "Return Value:"
+    ],
+    [
+      1194,
+      1176,
+      1164,
+      "    PVR_MAILSLOT_INFO"
+    ],
+    [
+      1195,
+      1177,
+      1165,
+      "        Success - pointer to located structure"
+    ],
+    [
+      1196,
+      1178,
+      1166,
+      "        Failure - NULL"
+    ],
+    [
+      1197,
+      1179,
+      1167,
+      "--*/"
+    ],
+    [
+      1199,
+      1181,
+      1169,
+      "{"
+    ],
+    [
+      1200,
+      1182,
+      1170,
+      "    PVR_MAILSLOT_INFO   ptr;"
+    ],
+    [
+      1202,
+      1184,
+      1172,
+      "    for (ptr = MailslotInfoList; ptr; ptr = ptr->Next) {"
+    ],
+    [
+      1203,
+      1185,
+      1173,
+      "        if (ptr->Handle16 == Handle16) {"
+    ],
+    [
+      1204,
+      1186,
+      1174,
+      "            break;"
+    ],
+    [
+      1205,
+      1187,
+      1175,
+      "        }"
+    ],
+    [
+      1206,
+      1188,
+      1176,
+      "    }"
+    ],
+    [
+      1209,
+      1190,
+      1177,
+      "#if DBG"
+    ],
+    [
+      1213,
+      1203,
+      1190,
+      "#endif"
+    ],
+    [
+      1216,
+      1205,
+      1192,
+      "    return ptr;"
+    ],
+    [
+      1217,
+      1206,
+      1193,
+      "}"
+    ],
+    [
+      1221,
+      1210,
+      1197,
+      "PRIVATE"
+    ],
+    [
+      1222,
+      1211,
+      1198,
+      "PVR_MAILSLOT_INFO"
+    ],
+    [
+      1223,
+      1212,
+      1199,
+      "VrpMapMailslotName("
+    ],
+    [
+      1224,
+      1213,
+      1200,
+      "    IN LPSTR Name"
+    ],
+    [
+      1225,
+      1214,
+      1201,
+      "    )"
+    ],
+    [
+      1227,
+      1216,
+      1203,
+      "/*++"
+    ],
+    [
+      1229,
+      1218,
+      1205,
+      "Routine Description:"
+    ],
+    [
+      1231,
+      1220,
+      1207,
+      "    Searches for a VR_MAILSLOT_INFO structure in MailslotInfoList by name"
+    ],
+    [
+      1233,
+      1222,
+      1209,
+      "Arguments:"
+    ],
+    [
+      1235,
+      1224,
+      1211,
+      "    Name    - of mailslot to search for. Full name, including \\MAILSLOT\\"
+    ],
+    [
+      1237,
+      1226,
+      1213,
+      "Return Value:"
+    ],
+    [
+      1239,
+      1228,
+      1215,
+      "    PVR_MAILSLOT_INFO"
+    ],
+    [
+      1240,
+      1229,
+      1216,
+      "        Success - pointer to structure containing Name"
+    ],
+    [
+      1241,
+      1230,
+      1217,
+      "        Failure - NULL"
+    ],
+    [
+      1243,
+      1232,
+      1219,
+      "--*/"
+    ],
+    [
+      1245,
+      1234,
+      1221,
+      "{"
+    ],
+    [
+      1246,
+      1235,
+      1222,
+      "    PVR_MAILSLOT_INFO   ptr;"
+    ],
+    [
+      1247,
+      1236,
+      1223,
+      "    DWORD   NameLength;"
+    ],
+    [
+      1249,
+      1238,
+      1225,
+      "    NameLength = strlen(Name) - MAILSLOT_PREFIX_LENGTH;"
+    ],
+    [
+      1250,
+      1239,
+      1226,
+      "    for (ptr = MailslotInfoList; ptr; ptr = ptr->Next) {"
+    ],
+    [
+      1251,
+      1240,
+      1227,
+      "        if (ptr->NameLength == NameLength) {"
+    ],
+    [
+      1252,
+      1241,
+      1228,
+      "            if (!_stricmp(ptr->Name, Name)) {"
+    ],
+    [
+      1253,
+      1242,
+      1229,
+      "                break;"
+    ],
+    [
+      1254,
+      1243,
+      1230,
+      "            }"
+    ],
+    [
+      1255,
+      1244,
+      1231,
+      "        }"
+    ],
+    [
+      1256,
+      1245,
+      1232,
+      "    }"
+    ],
+    [
+      1259,
+      1247,
+      1233,
+      "#if DBG"
+    ],
+    [
+      1263,
+      1257,
+      1243,
+      "#endif"
+    ],
+    [
+      1266,
+      1259,
+      1245,
+      "    return ptr;"
+    ],
+    [
+      1267,
+      1260,
+      1246,
+      "}"
+    ],
+    [
+      1271,
+      1264,
+      1250,
+      "PRIVATE"
+    ],
+    [
+      1272,
+      1265,
+      1251,
+      "VOID"
+    ],
+    [
+      1273,
+      1266,
+      1252,
+      "VrpRemoveProcessMailslots("
+    ],
+    [
+      1274,
+      1267,
+      1253,
+      "    IN WORD DosPdb"
+    ],
+    [
+      1275,
+      1268,
+      1254,
+      "    )"
+    ],
+    [
+      1277,
+      1270,
+      1256,
+      "/*++"
+    ],
+    [
+      1279,
+      1272,
+      1258,
+      "Routine Description:"
+    ],
+    [
+      1281,
+      1274,
+      1260,
+      "    Searches for a VR_MAILSLOT_INFO structure in MailslotInfoList by PDB"
+    ],
+    [
+      1282,
+      1275,
+      1261,
+      "    then deletes it if found."
+    ],
+    [
+      1284,
+      1277,
+      1263,
+      "    Unfortunately, this routine is munged from a couple others"
+    ],
+    [
+      1286,
+      1279,
+      1265,
+      "Arguments:"
+    ],
+    [
+      1288,
+      1281,
+      1267,
+      "    DosPdb  - PID of terminating Dos app. Kill all mailslots belonging to"
+    ],
+    [
+      1289,
+      1282,
+      1268,
+      "              this app"
+    ],
+    [
+      1291,
+      1284,
+      1270,
+      "Return Value:"
+    ],
+    [
+      1293,
+      1286,
+      1272,
+      "    None."
+    ],
+    [
+      1295,
+      1288,
+      1274,
+      "--*/"
+    ],
+    [
+      1297,
+      1290,
+      1276,
+      "{"
+    ],
+    [
+      1298,
+      1291,
+      1277,
+      "    PVR_MAILSLOT_INFO   ptr, previous = NULL, next;"
+    ],
+    [
+      1301,
+      1293,
+      1278,
+      "#if DBG"
+    ],
+    [
+      1305,
+      1299,
+      1284,
+      "#endif"
+    ],
+    [
+      1308,
+      1301,
+      1286,
+      "    //"
+    ],
+    [
+      1309,
+      1302,
+      1287,
+      "    // usual type of thing - grovel through list of mailslot structures, if"
+    ],
+    [
+      1310,
+      1303,
+      1288,
+      "    // one belongs to our dos process then remove it from the list, close"
+    ],
+    [
+      1311,
+      1304,
+      1289,
+      "    // the mailslot and free the structure"
+    ],
+    [
+      1312,
+      1305,
+      1290,
+      "    //"
+    ],
+    [
+      1314,
+      1307,
+      1292,
+      "    for (ptr = MailslotInfoList; ptr; ) {"
+    ],
+    [
+      1315,
+      1308,
+      1293,
+      "        if (ptr->DosPdb == DosPdb) {"
+    ],
+    [
+      1318,
+      1310,
+      1295,
+      "#if DBG"
+    ],
+    [
+      1322,
+      1320,
+      1305,
+      "#endif"
+    ],
+    [
+      1325,
+      1322,
+      1307,
+      "            CloseHandle(ptr->Handle32);"
+    ],
+    [
+      1328,
+      1324,
+      1309,
+      "#if DBG"
+    ],
+    [
+      1332,
+      1334,
+      1319,
+      "#endif"
+    ],
+    [
+      1335,
+      1336,
+      1321,
+      "            //"
+    ],
+    [
+      1336,
+      1337,
+      1322,
+      "            // remove mailslot structure from list"
+    ],
+    [
+      1337,
+      1338,
+      1323,
+      "            //"
+    ],
+    [
+      1339,
+      1340,
+      1325,
+      "            if (!previous) {"
+    ],
+    [
+      1340,
+      1341,
+      1326,
+      "                MailslotInfoList = ptr->Next;"
+    ],
+    [
+      1341,
+      1342,
+      1327,
+      "            } else {"
+    ],
+    [
+      1342,
+      1343,
+      1328,
+      "                previous->Next = ptr->Next;"
+    ],
+    [
+      1343,
+      1344,
+      1329,
+      "            }"
+    ],
+    [
+      1344,
+      1345,
+      1330,
+      "            if (LastMailslotInfo == ptr) {"
+    ],
+    [
+      1345,
+      1346,
+      1331,
+      "                LastMailslotInfo = previous;"
+    ],
+    [
+      1346,
+      1347,
+      1332,
+      "            }"
+    ],
+    [
+      1348,
+      1349,
+      1334,
+      "            //"
+    ],
+    [
+      1349,
+      1350,
+      1335,
+      "            // free up the 16-bit handle allocation"
+    ],
+    [
+      1350,
+      1351,
+      1336,
+      "            //"
+    ],
+    [
+      1352,
+      1353,
+      1338,
+      "            VrpFreeHandle16(ptr->Handle16);"
+    ],
+    [
+      1354,
+      1355,
+      1340,
+      "            //"
+    ],
+    [
+      1355,
+      1356,
+      1341,
+      "            // and repatriate the structure"
+    ],
+    [
+      1356,
+      1357,
+      1342,
+      "            //"
+    ],
+    [
+      1358,
+      1359,
+      1344,
+      "            next = ptr->Next;"
+    ],
+    [
+      1359,
+      1360,
+      1345,
+      "            VrpFreeMailslotStructure(ptr);"
+    ],
+    [
+      1360,
+      1361,
+      1346,
+      "            ptr = next;"
+    ],
+    [
+      1361,
+      1362,
+      1347,
+      "        } else {"
+    ],
+    [
+      1362,
+      1363,
+      1348,
+      "            previous = ptr;"
+    ],
+    [
+      1363,
+      1364,
+      1349,
+      "            ptr = ptr->Next;"
+    ],
+    [
+      1364,
+      1365,
+      1350,
+      "        }"
+    ],
+    [
+      1365,
+      1366,
+      1351,
+      "    }"
+    ],
+    [
+      1366,
+      1367,
+      1352,
+      "}"
+    ],
+    [
+      1370,
+      1371,
+      1356,
+      "//"
+    ],
+    [
+      1371,
+      1372,
+      1357,
+      "// 16-bit handle allocators"
+    ],
+    [
+      1372,
+      1373,
+      1358,
+      "//"
+    ],
+    [
+      1374,
+      1375,
+      1360,
+      "PRIVATE"
+    ],
+    [
+      1375,
+      1376,
+      1361,
+      "DWORD   Handle16Bitmap[MAX_16BIT_HANDLES/BITSIN(DWORD)];"
+    ],
+    [
+      1377,
+      1378,
+      1363,
+      "PRIVATE"
+    ],
+    [
+      1378,
+      1379,
+      1364,
+      "WORD"
+    ],
+    [
+      1379,
+      1380,
+      1365,
+      "VrpAllocateHandle16("
+    ],
+    [
+      1380,
+      1381,
+      1366,
+      "    VOID"
+    ],
+    [
+      1381,
+      1382,
+      1367,
+      "    )"
+    ],
+    [
+      1383,
+      1384,
+      1369,
+      "/*++"
+    ],
+    [
+      1385,
+      1386,
+      1371,
+      "Routine Description:"
+    ],
+    [
+      1387,
+      1388,
+      1373,
+      "    Allocates the next free 16-bit handle. This is based on a bitmap: the"
+    ],
+    [
+      1388,
+      1389,
+      1374,
+      "    ordinal number of the next available 0 bit in the map indicates the next"
+    ],
+    [
+      1389,
+      1390,
+      1375,
+      "    16-bit handle value."
+    ],
+    [
+      1391,
+      1392,
+      1377,
+      "    Notes:"
+    ],
+    [
+      1393,
+      1394,
+      1379,
+      "        The 16-bit handle is an arbitrary but unique number. We don't expect"
+    ],
+    [
+      1394,
+      1395,
+      1380,
+      "        there to be too many TSR mailslots and 1 or 2 DWORDs should suffice"
+    ],
+    [
+      1395,
+      1396,
+      1381,
+      "        even the most demanding local mailslot user."
+    ],
+    [
+      1397,
+      1398,
+      1383,
+      "        The handles are returned starting at 1. Therefore bit 0 in the map"
+    ],
+    [
+      1398,
+      1399,
+      1384,
+      "        corresponds to handle 1; bit 0 in Handle16Bitmap[1] corresponds to"
+    ],
+    [
+      1399,
+      1400,
+      1385,
+      "        handle 33, etc."
+    ],
+    [
+      1401,
+      1402,
+      1387,
+      "        Nothing assumed about byte order, only bits in DWORD (which is"
+    ],
+    [
+      1402,
+      1403,
+      1388,
+      "        universal, methinks)"
+    ],
+    [
+      1404,
+      1405,
+      1390,
+      "Arguments:"
+    ],
+    [
+      1406,
+      1407,
+      1392,
+      "    None."
+    ],
+    [
+      1408,
+      1409,
+      1394,
+      "Return Value:"
+    ],
+    [
+      1410,
+      1411,
+      1396,
+      "    WORD"
+    ],
+    [
+      1411,
+      1412,
+      1397,
+      "        Success - 16-bit handle value in range 1 <= Handle <= 32"
+    ],
+    [
+      1412,
+      1413,
+      1398,
+      "        Failure - 0"
+    ],
+    [
+      1414,
+      1415,
+      1400,
+      "--*/"
+    ],
+    [
+      1416,
+      1417,
+      1402,
+      "{"
+    ],
+    [
+      1417,
+      1418,
+      1403,
+      "    int     i;"
+    ],
+    [
+      1418,
+      1419,
+      1404,
+      "    DWORD   map;"
+    ],
+    [
+      1419,
+      1420,
+      1405,
+      "    WORD    Handle16 = 1;"
+    ],
+    [
+      1421,
+      1422,
+      1407,
+      "    //"
+    ],
+    [
+      1422,
+      1423,
+      1408,
+      "    // this 'kind of' assumes that the bitmap is stored as DWORDs. Its"
+    ],
+    [
+      1423,
+      1424,
+      1409,
+      "    // actually more explicit, so don't change the type or MAX_16BIT_HANDLES"
+    ],
+    [
+      1424,
+      1425,
+      1410,
+      "    // without checking this code first"
+    ],
+    [
+      1425,
+      1426,
+      1411,
+      "    //"
+    ],
+    [
+      1427,
+      1428,
+      1413,
+      "    for (i=0; i<sizeof(Handle16Bitmap)/sizeof(Handle16Bitmap[0]); ++i) {"
+    ],
+    [
+      1428,
+      1429,
+      1414,
+      "        map = Handle16Bitmap[i];"
+    ],
+    [
+      1430,
+      1431,
+      1416,
+      "        //"
+    ],
+    [
+      1431,
+      1432,
+      1417,
+      "        // if this entry in the bitmap is already full, skip to the next one"
+    ],
+    [
+      1432,
+      1433,
+      1418,
+      "        // (if there is one, that is)"
+    ],
+    [
+      1433,
+      1434,
+      1419,
+      "        //"
+    ],
+    [
+      1435,
+      1436,
+      1421,
+      "        if (map == -1) {"
+    ],
+    [
+      1436,
+      1437,
+      1422,
+      "            Handle16 += BITSIN(DWORD);"
+    ],
+    [
+      1437,
+      1438,
+      1423,
+      "            continue;"
+    ],
+    [
+      1438,
+      1439,
+      1424,
+      "        } else {"
+    ],
+    [
+      1439,
+      1440,
+      1425,
+      "            int j;"
+    ],
+    [
+      1441,
+      1442,
+      1427,
+      "            //"
+    ],
+    [
+      1442,
+      1443,
+      1428,
+      "            // use BFI method to find next available slot"
+    ],
+    [
+      1443,
+      1444,
+      1429,
+      "            //"
+    ],
+    [
+      1445,
+      1446,
+      1431,
+      "            for (j=1, Handle16=1; map & j; ++Handle16, j <<= 1);"
+    ],
+    [
+      1446,
+      1447,
+      1432,
+      "            Handle16Bitmap[i] |= j;"
+    ],
+    [
+      1449,
+      1449,
+      1433,
+      "#if DBG"
+    ],
+    [
+      1453,
+      1457,
+      1441,
+      "#endif"
+    ],
+    [
+      1456,
+      1459,
+      1443,
+      "            return Handle16;"
+    ],
+    [
+      1457,
+      1460,
+      1444,
+      "        }"
+    ],
+    [
+      1458,
+      1461,
+      1445,
+      "    }"
+    ],
+    [
+      1460,
+      1463,
+      1447,
+      "    //"
+    ],
+    [
+      1461,
+      1464,
+      1448,
+      "    // no free handles found. Since handles start at 1, use 0 to indicate error"
+    ],
+    [
+      1462,
+      1465,
+      1449,
+      "    //"
+    ],
+    [
+      1465,
+      1467,
+      1451,
+      "#if DBG"
+    ],
+    [
+      1469,
+      1472,
+      1456,
+      "#endif"
+    ],
+    [
+      1472,
+      1474,
+      1458,
+      "    return 0;"
+    ],
+    [
+      1473,
+      1475,
+      1459,
+      "}"
+    ],
+    [
+      1477,
+      1479,
+      1463,
+      "PRIVATE"
+    ],
+    [
+      1478,
+      1480,
+      1464,
+      "VOID"
+    ],
+    [
+      1479,
+      1481,
+      1465,
+      "VrpFreeHandle16("
+    ],
+    [
+      1480,
+      1482,
+      1466,
+      "    IN WORD Handle16"
+    ],
+    [
+      1481,
+      1483,
+      1467,
+      "    )"
+    ],
+    [
+      1483,
+      1485,
+      1469,
+      "/*++"
+    ],
+    [
+      1485,
+      1487,
+      1471,
+      "Routine Description:"
+    ],
+    [
+      1487,
+      1489,
+      1473,
+      "    Free a 16-bit handle. Reset the corresponding bit in the bitmap"
+    ],
+    [
+      1489,
+      1491,
+      1475,
+      "    Notes:"
+    ],
+    [
+      1491,
+      1493,
+      1477,
+      "        This routine assumes that the Handle16 parameter is a valid 16-bit"
+    ],
+    [
+      1492,
+      1494,
+      1478,
+      "        Handle value, as generated by VrpAllocate16BitHandle"
+    ],
+    [
+      1494,
+      1496,
+      1480,
+      "Arguments:"
+    ],
+    [
+      1496,
+      1498,
+      1482,
+      "    Handle16    - number of bit to reset"
+    ],
+    [
+      1498,
+      1500,
+      1484,
+      "Return Value:"
+    ],
+    [
+      1500,
+      1502,
+      1486,
+      "    None."
+    ],
+    [
+      1502,
+      1504,
+      1488,
+      "--*/"
+    ],
+    [
+      1504,
+      1506,
+      1490,
+      "{"
+    ],
+    [
+      1505,
+      1507,
+      1491,
+      "    //"
+    ],
+    [
+      1506,
+      1508,
+      1492,
+      "    // remember: we allocated the handle value as the next free bit + 1, so"
+    ],
+    [
+      1507,
+      1509,
+      1493,
+      "    // we started the handles at 1, not 0"
+    ],
+    [
+      1508,
+      1510,
+      1494,
+      "    //"
+    ],
+    [
+      1510,
+      1512,
+      1496,
+      "    --Handle16;"
+    ],
+    [
+      1513,
+      1514,
+      1497,
+      "#if DBG"
+    ],
+    [
+      1517,
+      1521,
+      1504,
+      "#endif"
+    ],
+    [
+      1520,
+      1523,
+      1506,
+      "    Handle16Bitmap[Handle16/BITSIN(DWORD)] &= ~(1 << Handle16 % BITSIN(DWORD));"
+    ],
+    [
+      1523,
+      1525,
+      1508,
+      "#if DBG"
+    ],
+    [
+      1527,
+      1529,
+      1512,
+      "#endif"
+    ],
+    [
+      1530,
+      1531,
+      1514,
+      "}"
+    ]
+  ],
+  "initial_review": "Complete diff contains only original conditional body exclusions and #line; selected mailslot operations remain original.",
+  "counter_review": "Every replacement bounded by original directives. No added adapter or failure behavior; retained line mismatches listed separately.",
+  "limits": "Source audit only; no new runtime validation."
+}

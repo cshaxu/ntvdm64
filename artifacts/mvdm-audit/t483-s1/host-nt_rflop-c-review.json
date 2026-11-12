@@ -1,0 +1,969 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+  "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+  "current_sha256": "e2eed1044f2c04b9db60165dd753ee726b1e7b1efd58f7336e0a6ec270cebe52",
+  "review_complete": true,
+  "register_entries": 21,
+  "changes": [
+    {
+      "original_start": 29,
+      "original_count": 1,
+      "current_start": 29,
+      "current_count": 1,
+      "original": [
+        "#include \"ntdddisk.h\""
+      ],
+      "current": [
+        ""
+      ]
+    },
+    {
+      "original_start": 34,
+      "original_count": 0,
+      "current_start": 34,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "#include <mvdm_guest_location.h>",
+        "#include <mvdm_command_guest_state.h>",
+        "/* DIV-871: bind the original void/cdecl FDC worker to its caller session. */",
+        "#include \"compat/include/thread_start_compat.h\"",
+        "#undef CreateThread"
+      ]
+    },
+    {
+      "original_start": 245,
+      "original_count": 1,
+      "current_start": 230,
+      "current_count": 8,
+      "original": [
+        "extern USHORT * pusCurrentPDB;"
+      ],
+      "current": [
+        "/* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to",
+        " * the DOS current-PDB value.  Read that scalar through the session lease. */",
+        "extern mvdm_guest_location current_pdb_location;",
+        "",
+        "static BOOL nt_rflop_current_pdb(PUSHORT currentPdb)",
+        "{",
+        "    return mvdm_guest_location_read_u16(&current_pdb_location, currentPdb);",
+        "}"
+      ]
+    },
+    {
+      "original_start": 514,
+      "original_count": 0,
+      "current_start": 417,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    WORD  fd_access;"
+      ]
+    },
+    {
+      "original_start": 515,
+      "original_count": 1,
+      "current_start": 419,
+      "current_count": 3,
+      "original": [
+        "    if (pFDAccess && *pFDAccess) {"
+      ],
+      "current": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-111: read the SCS counter through a fresh",
+        "     * session lease instead of dereferencing a retained guest alias. */",
+        "    if (mvdm_command_guest_state_read_fd_access(&fd_access) && fd_access) {"
+      ]
+    },
+    {
+      "original_start": 715,
+      "original_count": 0,
+      "current_start": 622,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 716,
+      "original_count": 1,
+      "current_start": 624,
+      "current_count": 3,
+      "original": [
+        "    fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);"
+      ],
+      "current": [
+        "    if (!nt_rflop_current_pdb(&currentPdb))",
+        "\treturn 0;",
+        "    fd = get_drive_handle(drive, currentPdb, FALSE);"
+      ]
+    },
+    {
+      "original_start": 731,
+      "original_count": 0,
+      "current_start": 642,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 732,
+      "original_count": 1,
+      "current_start": 644,
+      "current_count": 3,
+      "original": [
+        "    fd = get_drive_handle(drive, *pusCurrentPDB, TRUE);"
+      ],
+      "current": [
+        "    if (!nt_rflop_current_pdb(&currentPdb))",
+        "\treturn 0;",
+        "    fd = get_drive_handle(drive, currentPdb, TRUE);"
+      ]
+    },
+    {
+      "original_start": 749,
+      "original_count": 0,
+      "current_start": 664,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 754,
+      "original_count": 1,
+      "current_start": 671,
+      "current_count": 3,
+      "original": [
+        "    fd = get_drive_handle(drive, *pusCurrentPDB,TRUE);"
+      ],
+      "current": [
+        "    if (!nt_rflop_current_pdb(&currentPdb))",
+        "\treturn FALSE;",
+        "    fd = get_drive_handle(drive, currentPdb,TRUE);"
+      ]
+    },
+    {
+      "original_start": 775,
+      "original_count": 0,
+      "current_start": 695,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 776,
+      "original_count": 1,
+      "current_start": 697,
+      "current_count": 3,
+      "original": [
+        "    fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);"
+      ],
+      "current": [
+        "    if (!nt_rflop_current_pdb(&currentPdb))",
+        "\treturn FALSE;",
+        "    fd = get_drive_handle(drive, currentPdb, FALSE);"
+      ]
+    },
+    {
+      "original_start": 841,
+      "original_count": 2,
+      "current_start": 765,
+      "current_count": 11,
+      "original": [
+        "\t    (*(pFDAccess))++;",
+        "\t    break;"
+      ],
+      "current": [
+        "\t\t    /* DIVERGENCE MVDM-HOST-DIV-111: preserve the original increment",
+        "\t\t     * while keeping the guest location session-scoped. */",
+        "\t\t    if (!mvdm_command_guest_state_add_fd_access(1u)) {",
+        "\t\t\tCloseHandle(flp->diskette_fd);",
+        "\t\t\tflp->diskette_fd = INVALID_HANDLE_VALUE;",
+        "\t\t\tflp->auto_locked = FALSE;",
+        "\t\t\tflp->owner_pdb = 0;",
+        "\t\t\tfloppy_open_count--;",
+        "\t\t\treturn INVALID_HANDLE_VALUE;",
+        "\t\t    }",
+        "\t\t    break;"
+      ]
+    },
+    {
+      "original_start": 892,
+      "original_count": 1,
+      "current_start": 827,
+      "current_count": 4,
+      "original": [
+        "\t(*(pFDAccess))--;"
+      ],
+      "current": [
+        "\t/* DIVERGENCE MVDM-HOST-DIV-111: preserve the original decrement through",
+        "\t * the registered scalar rather than a durable process pointer. */",
+        "\tif (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))",
+        "\t    return FALSE;"
+      ]
+    },
+    {
+      "original_start": 989,
+      "original_count": 0,
+      "current_start": 928,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\tUSHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 1037,
+      "original_count": 1,
+      "current_start": 978,
+      "current_count": 3,
+      "original": [
+        "\t\tget_drive_handle(drive, *pusCurrentPDB, auto_lock);"
+      ],
+      "current": [
+        "\t\tif (!nt_rflop_current_pdb(&currentPdb))",
+        "\t\t    return FAILURE;",
+        "\t\tget_drive_handle(drive, currentPdb, auto_lock);"
+      ]
+    },
+    {
+      "original_start": 1042,
+      "original_count": 2,
+      "current_start": 986,
+      "current_count": 2,
+      "original": [
+        "\t\t    fdc_parms.owner_pdb = *pusCurrentPDB;",
+        "\t\t    fdc_thread_handle = CreateThread(NULL,"
+      ],
+      "current": [
+        "\t\t    fdc_parms.owner_pdb = currentPdb;",
+        "\t\t    fdc_thread_handle = opennt_create_void_cdecl_parameter_thread(NULL,"
+      ]
+    },
+    {
+      "original_start": 1045,
+      "original_count": 1,
+      "current_start": 989,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t   (LPTHREAD_START_ROUTINE)fdc_thread,"
+      ],
+      "current": [
+        "\t\t\t\t\t   (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)fdc_thread,"
+      ]
+    },
+    {
+      "original_start": 1339,
+      "original_count": 0,
+      "current_start": 1234,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\tUSHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 1351,
+      "original_count": 1,
+      "current_start": 1248,
+      "current_count": 3,
+      "original": [
+        "\tget_drive_handle(drive, *pusCurrentPDB, FALSE);"
+      ],
+      "current": [
+        "\tif (!nt_rflop_current_pdb(&currentPdb))",
+        "\t    return TRUE;",
+        "\tget_drive_handle(drive, currentPdb, FALSE);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 91,
+      "original_count": 7,
+      "current_start": 98,
+      "current_count": 1,
+      "original": [
+        "#define BREAK_ON_AND\t    0x01",
+        "#define BREAK_ON_OR\t    0x02",
+        "#define BREAK_ON_XOR\t    0x03",
+        "",
+        "UTINY\tbreak_cylinder = 0xff;",
+        "UTINY\tbreak_head = 0xff;",
+        "UTINY\tbreak_sector = 0xff;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 101,
+      "original_count": 22,
+      "current_start": 104,
+      "current_count": 1,
+      "original": [
+        "DWORD\trflop_dbg = 0;",
+        "",
+        "#define RFLOP_READ\t0x01",
+        "#define RFLOP_WRITE\t0x02",
+        "#define RFLOP_FORMAT\t0x04",
+        "#define RFLOP_SEEK\t0x08",
+        "#define RFLOP_READID\t0x10",
+        "#define RFLOP_RESET\t0x20",
+        "#define RFLOP_SPECIFY\t0x40",
+        "#define RFLOP_READTRACK 0x80",
+        "#define RFLOP_RECAL\t0x100",
+        "#define RFLOP_SENSEDRV\t0x200",
+        "#define RFLOP_RATE\t0x1000",
+        "#define RFLOP_CHANGE\t0x2000",
+        "#define RFLOP_DRIVE_ON\t0x4000",
+        "#define RFLOP_DRIVE_OFF 0x8000",
+        "#define RFLOP_OPEN\t0x10000",
+        "#define RFLOP_CLOSE\t0x20000",
+        "#define RFLOP_GUESS_MEDIA 0x40000",
+        "",
+        "#define RFLOP_BREAK\t0x80000000",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 215,
+      "original_count": 1,
+      "current_start": 199,
+      "current_count": 1,
+      "original": [
+        "VOID nt_rflop_break(VOID);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 248,
+      "original_count": 1,
+      "current_start": 241,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void host_floppy_eject IFN1(UTINY, drive)"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 35,
+      "current_start": 288,
+      "current_count": 1,
+      "original": [
+        " CHAR *cmd_name [] =",
+        "{",
+        "\t\"Invalid command (00)\",\t\t/* 00 */",
+        "\t\"Invalid command (01)\",\t\t/* 01 */",
+        "\t\"Read a Track\",\t\t\t/* 02 */",
+        "\t\"Specify\",\t\t\t/* 03 */",
+        "\t\"Sense Drive Status\",\t\t/* 04 */",
+        "\t\"Write Data\",\t\t\t/* 05 */",
+        "\t\"Read Data\",\t\t\t/* 06 */",
+        "\t\"Recalibrate\",\t\t\t/* 07 */",
+        "\t\"Sense Interrupt Status\",\t/* 08 */",
+        "\t\"Write Deleted Data\",\t\t/* 09 */",
+        "\t\"Read ID\",\t\t\t/* 0A */",
+        "\t\"Invalid Command (0B)\",\t\t/* 0B */",
+        "\t\"Read Deleted Data\",\t\t/* 0C */",
+        "\t\"Format a Track\",\t\t/* 0D */",
+        "\t\"Invalid Command (0E)\",\t\t/* 0E */",
+        "\t\"Seek\",\t\t\t\t/* 0F */",
+        "\t\"Invalid Command (10)\",\t\t/* 10 */",
+        "\t\"Scan Equal\",\t\t\t/* 11 */",
+        "\t\"Invalid Command (12)\",\t\t/* 12 */",
+        "\t\"Invalid Command (13)\",\t\t/* 13 */",
+        "\t\"Invalid Command (14)\",\t\t/* 14 */",
+        "\t\"Invalid Command (15)\",\t\t/* 15 */",
+        "\t\"Invalid Command (16)\",\t\t/* 16 */",
+        "\t\"Invalid Command (17)\",\t\t/* 17 */",
+        "\t\"Invalid Command (18)\",\t\t/* 18 */",
+        "\t\"Scan Low or Equal\",\t\t/* 19 */",
+        "\t\"Invalid Command (1A)\",\t\t/* 1A */",
+        "\t\"Invalid Command (1B)\",\t\t/* 1B */",
+        "\t\"Invalid Command (1C)\",\t\t/* 1C */",
+        "\t\"Scan High or Equal\",\t\t/* 1D */",
+        "\t\"Invalid Command (1E)\",\t\t/* 1E */",
+        "\t\"Invalid Command (1F)\",\t\t/* 1F */",
+        "};"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 394,
+      "original_count": 1,
+      "current_start": 357,
+      "current_count": 1,
+      "original": [
+        "\t\thost_floppy_eject(drive);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 417,
+      "original_count": 30,
+      "current_start": 382,
+      "current_count": 1,
+      "original": [
+        "\tUTINY           cmos_byte;",
+        "\tUTINY drive \t= hostID - C_FLOPPY_A_DEVICE;",
+        "\tFLP flp \t= &floppy_data[drive];",
+        "",
+        "\tif(!strcmp(vals->string,\"\"))",
+        "\t\treturn(C_CONFIG_OP_OK);",
+        "",
+        "\tstrcpy(flp->device_name, host_expand_environment_vars(vals->string));",
+        "",
+        "\tif(!host_validate_pathname(flp->device_name))",
+        "\t{",
+        "\t\tstrcpy(err, host_strerror(errno));",
+        "\t\tflp->device_name[0] = '\\0';",
+        "\t\treturn( EG_MISSING_FILE );",
+        "\t}",
+        "\tif(!host_file_is_char_dev(flp->device_name))",
+        "\t{",
+        "\t\tflp->device_name[0] = '\\0';",
+        "\t\treturn( EG_NOT_CHAR_DEV );",
+        "\t}",
+        "",
+        "\t/* Check the CMOS RAM values */",
+        "\tcmos_read_byte(CMOS_DISKETTE, &cmos_byte);",
+        "\tif (drive == 0)",
+        "\t\tcmos_byte >>= 4;",
+        "",
+        "\tcmos_byte &= 0xf;       /* compare nibble value only */",
+        "\tflp->drive_type = host_rflop_drive_type(drive);",
+        "\tif (cmos_byte != flp->drive_type)",
+        "\t\tvals->rebootReqd = TRUE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 457,
+      "original_count": 6,
+      "current_start": 395,
+      "current_count": 1,
+      "original": [
+        "\tFLP flp = &floppy_data[hostID - C_FLOPPY_A_DEVICE];",
+        "",
+        "\tif (apply) ",
+        "\t{",
+        "\t\tnt_gfi_rdiskette_term(flp);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 469,
+      "original_count": 34,
+      "current_start": 404,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void host_floppy_eject IFN1(UTINY, drive)",
+        "{",
+        "\tCHAR           *ebuf;",
+        "\tFLP             flp = &floppy_data[drive];",
+        "\tBOOL            device_was_closed = FALSE;",
+        "",
+        "\t/* open the device */",
+        "\tif (flp->diskette_fd == INVALID_HANDLE_VALUE)",
+        "\t{",
+        "\t\tdevice_was_closed = TRUE;",
+        "\t\t(void) nt_rdiskette_open_drive(drive);",
+        "\t}",
+        "",
+        "\t/* Do the ioctl, put your ioctl here ",
+        "",
+        "\tif (ioctl(flp->diskette_fd, SMFDEJECT) < 0)",
+        "\t{",
+        "\t\tebuf = host_strerror(errno);",
+        "\t\tassert1(NO, \"host_eject_floppy: %s\", ebuf);",
+        "\t}*/",
+        "",
+        "\t/* Close the device if it wasn't open */",
+        "",
+        "\tif (device_was_closed)",
+        "\t{",
+        "\t\tnt_gfi_rdiskette_term(flp);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\t/* Line change ONLY if device was actively open */",
+        "\t\tflp->change_line_state = TRUE;",
+        "\t}",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 884,
+      "original_count": 3,
+      "current_start": 819,
+      "current_count": 1,
+      "original": [
+        "    if (rflop_dbg & RFLOP_CLOSE)",
+        "\tsprintf(dump_buf, \"Close drive %C: handle\\n\", drive + 'A');",
+        "\tOutputDebugString(dump_buf);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1078,
+      "original_count": 5,
+      "current_start": 1023,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_SPECIFY) {",
+        "\t\t    OutputDebugString(\"Specify\\n\");",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1090,
+      "original_count": 2,
+      "current_start": 1033,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_SENSEDRV)",
+        "\t\t    OutputDebugString(\"Sense Drive Status\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1108,
+      "original_count": 2,
+      "current_start": 1052,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_RECAL)",
+        "\t\t    OutputDebugString(\"Recalibrate\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1127,
+      "original_count": 6,
+      "current_start": 1072,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_SEEK) {",
+        "\t\t    sprintf(dump_buf, \"Seek: D C = %d %d \\n\", D, C);",
+        "\t\t    OutputDebugString(dump_buf);",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1149,
+      "original_count": 3,
+      "current_start": 1091,
+      "current_count": 1,
+      "original": [
+        "\t\tsprintf(dump_buf, \"Receive unsupported command: command = %d\\n\",",
+        "\t\t\t  get_type_cmd(command_block));",
+        "\t\tOutputDebugString(dump_buf);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1163,
+      "original_count": 7,
+      "current_start": 1105,
+      "current_count": 1,
+      "original": [
+        "\tif (io_verbose & GFI_VERBOSE) {",
+        "\t\tfprintf(trace_file,",
+        "\t\t    \"FDC: results %02x %02x %02x %02x %02x %02x %02x\\n\\n\",",
+        "\t\t    result_block[0], result_block[1], result_block[2],",
+        "\t\t    result_block[3], result_block[4], result_block[5],",
+        "\t\t    result_block[6]);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1187,
+      "original_count": 6,
+      "current_start": 1125,
+      "current_count": 1,
+      "original": [
+        "\tif (rflop_dbg & RFLOP_DRIVE_ON) {",
+        "\t    sprintf(dump_buf, \"drive on: drive = %d\\n\", drive);",
+        "\t    OutputDebugString(dump_buf);",
+        "\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\tnt_rflop_break();",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1217,
+      "original_count": 6,
+      "current_start": 1152,
+      "current_count": 1,
+      "original": [
+        "\tif (rflop_dbg & RFLOP_DRIVE_OFF) {",
+        "\t    sprintf(dump_buf, \"drive off: drive = %d\\n\", drive);",
+        "\t    OutputDebugString(dump_buf);",
+        "\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\tnt_rflop_break();",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1263,
+      "original_count": 36,
+      "current_start": 1195,
+      "current_count": 1,
+      "original": [
+        "\tFLP flp = &floppy_data[drive];",
+        "",
+        "\tswitch (rate)",
+        "\t{",
+        "\t\t/* 2.88M high-density floppies */",
+        "\t\tcase DCR_RATE_1000:",
+        "",
+        "\t\t\tflp->density_state = DENSITY_EXTENDED;",
+        "\t\t\tset_floppy_parms (flp);",
+        "\t\t\tbreak;",
+        "",
+        "\t\t/* 1.2M or 1.44M high-density floppies */",
+        "\t\tcase DCR_RATE_500:",
+        "",
+        "\t\t\tflp->density_state = DENSITY_HIGH;",
+        "\t\t\tset_floppy_parms (flp);",
+        "\t\t\tbreak;",
+        "",
+        "\t\t/* 360K or 720K low-density floppies */",
+        "\t\tcase DCR_RATE_250:",
+        "\t\tcase DCR_RATE_300:",
+        "",
+        "\t\t\tflp->density_state = DENSITY_LOW;",
+        "\t\t\tset_floppy_parms (flp);",
+        "\t\t\tbreak;",
+        "",
+        "\t\t/* crapola density passed */",
+        "\t\tdefault:",
+        "",
+        "\t\t\treturn FAILURE;",
+        "\t}",
+        "\tnote_trace2 (GFI_VERBOSE, \"FDC: Set rate %0x => density %d\",",
+        "\t\trate, flp->density_state);",
+        "\t/* read floppy's boot sector */",
+        "\t/* to determine the real density */",
+        "//\tguess_media_density (drive);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1301,
+      "original_count": 6,
+      "current_start": 1200,
+      "current_count": 1,
+      "original": [
+        "\tif (rflop_dbg & RFLOP_RATE) {",
+        "\t    sprintf(dump_buf, \"set rate: rate = %d\\n\", rate);",
+        "\t    OutputDebugString(dump_buf);",
+        "\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\tnt_rflop_break();",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1355,
+      "original_count": 6,
+      "current_start": 1256,
+      "current_count": 1,
+      "original": [
+        "\tif (rflop_dbg & RFLOP_CHANGE) {",
+        "\t    sprintf(dump_buf, \"Check Change Line: line = %d\\n\", flp->change_line_state);",
+        "\t    OutputDebugString(dump_buf);",
+        "\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\tnt_rflop_break();",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1416,
+      "original_count": 5,
+      "current_start": 1314,
+      "current_count": 1,
+      "original": [
+        "\tif (rflop_dbg & RFLOP_RESET) {",
+        "\t    OutputDebugString(\"reset\\n\");",
+        "\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\tnt_rflop_break();",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1509,
+      "original_count": 3,
+      "current_start": 1405,
+      "current_count": 1,
+      "original": [
+        "\t\tsprintf(dump_buf, \"density mismatch: %d <-> %d\\n\", density_state,",
+        "\t\t\tflp->media_density);",
+        "\t\tOutputDebugString(dump_buf);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1529,
+      "original_count": 2,
+      "current_start": 1425,
+      "current_count": 1,
+      "original": [
+        "\t    if (transfer_size > BS_DISK_BUFFER_SIZE)",
+        "\t\talways_trace2(\"FDC: transfer size ( %d ) greater than disk buffer size %d\\n\", transfer_size, BS_DISK_BUFFER_SIZE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1542,
+      "original_count": 9,
+      "current_start": 1439,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\tif (!dos_compatible (flp, C, H, S, N)) {",
+        "\t\t\tnote_trace0 (GFI_VERBOSE,",
+        "\t\t\t\t     \"Refused: not DOS compatible\");",
+        "\t\t}",
+        "\t\tif (density_state != flp->media_density) {",
+        "\t\t\tnote_trace0 (GFI_VERBOSE,",
+        "\t\t\t\t     \"Refused: density mismatch\");",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1567,
+      "original_count": 7,
+      "current_start": 1458,
+      "current_count": 1,
+      "original": [
+        "\t    if (rflop_dbg & (RFLOP_READ | RFLOP_WRITE)) {",
+        "\t\t sprintf(dump_buf, \"Read/Write Sector: start offset = 0x%lx\\n\",",
+        "\t\t\t  transfer_start);",
+        "\t\t OutputDebugString(dump_buf);",
+        "\t\t sprintf(dump_buf, \"Read/Write Sector: size = 0x%x bytes\\n\", transfer_size);",
+        "\t\t OutputDebugString(dump_buf);",
+        "\t    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1582,
+      "original_count": 7,
+      "current_start": 1469,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_READ) {",
+        "\t\t    sprintf(dump_buf, \"Read Sectors: C H R N = %d %d %d %d\\n\",",
+        "\t\t\t     C, H, S, N);",
+        "\t\t    OutputDebugString(dump_buf);",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1641,
+      "original_count": 7,
+      "current_start": 1524,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_WRITE) {",
+        "\t\t    sprintf(dump_buf, \"Write Sectors: C H R N = %d %d %d %d\\n\",",
+        "\t\t\t     C, H, S, N);",
+        "\t\t    OutputDebugString(dump_buf);",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1705,
+      "original_count": 5,
+      "current_start": 1584,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_READTRACK) {",
+        "\t\t    OutputDebugString(\"Read Tracks\\n\");",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1726,
+      "original_count": 7,
+      "current_start": 1603,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_FORMAT) {",
+        "\t\t    sprintf(dump_buf, \"Format Track: C H Media = %d %d %d \\n\",",
+        "\t\t\t      flp->last_seek, H, flp->flop_type + density_state);",
+        "\t\t    OutputDebugString(dump_buf);",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1794,
+      "original_count": 7,
+      "current_start": 1667,
+      "current_count": 1,
+      "original": [
+        "\t\tif (rflop_dbg & RFLOP_READID) {",
+        "\t\t    sprintf(dump_buf, \"Read ID: C H R N = %d %d %d %d\\n\",",
+        "\t\t\t     C, H, flp->R, flp->N);",
+        "\t\t    OutputDebugString(dump_buf);",
+        "\t\t    if (rflop_dbg & RFLOP_BREAK)",
+        "\t\t\tnt_rflop_break();",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1923,
+      "original_count": 6,
+      "current_start": 1792,
+      "current_count": 1,
+      "original": [
+        "\tnote_trace1 (GFI_VERBOSE, \"guess_media_density %d\",",
+        "\t\tflp->media_density);",
+        "\tif (flp->media_density != density_state) {",
+        "\t\tnote_trace0 (GFI_VERBOSE,",
+        "\t\t\t\"media & controller densities are incompatible!\\n\");",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1998,
+      "original_count": 4,
+      "current_start": 1864,
+      "current_count": 1,
+      "original": [
+        "VOID nt_rflop_break(VOID)",
+        "{",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2014,
+      "original_count": 4,
+      "current_start": 1879,
+      "current_count": 1,
+      "original": [
+        "    if (flp->C == break_cylinder &&",
+        "\tflp->H == break_head &&",
+        "\tflp->R == break_sector)",
+        "\tnt_rflop_break();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete diff classified: native SDK disk types, session-bound FDC thread, numeric guest PDB/counter leases, rollback and close-failure bookkeeping.",
+  "counter_review": "Original void/cdecl fdc_thread cannot be safely cast to Win32 DWORD/stdcall entry; bounded common bridge retains typed ABI. Guest counter update is modular and same-registration read/write, not atomic against guest. Close failure after native handle retirement skips host bookkeeping; caller heartbeat/close-all ignore result. No physical floppy acceptance claimed.",
+  "decision_counts": {
+    "retain": 18,
+    "simplify": 1,
+    "pending-evidence": 1,
+    "correct": 1
+  },
+  "limits": "No source edits; matched hardware failure not reproduced, bookkeeping defect follows source ordering."
+}

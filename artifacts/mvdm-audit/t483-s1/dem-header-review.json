@@ -1,0 +1,135 @@
+{
+  "path": "src/mvdm-host/dos/dem/dem.h",
+  "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+  "current_sha256": "4d4644c0ec8155197f8bac143a7b2569487dcc4a644db5a3496149647a878089",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 24,
+      "original_count": 2,
+      "current_start": 24,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 28,
+      "original_count": 3,
+      "current_start": 30,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 33,
+      "original_count": 3,
+      "current_start": 36,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 45,
+      "original_count": 3,
+      "current_start": 49,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 56,
+      "original_count": 1,
+      "current_start": 61,
+      "current_count": 1,
+      "classification": "inactive-include",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 58,
+      "original_count": 2,
+      "current_start": 63,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 65,
+      "original_count": 2,
+      "current_start": 72,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 75,
+      "original_count": 3,
+      "current_start": 84,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 80,
+      "original_count": 3,
+      "current_start": 90,
+      "current_count": 4,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 117,
+      "original_count": 0,
+      "current_start": 128,
+      "current_count": 1,
+      "classification": "numeric-location-type",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 122,
+      "original_count": 1,
+      "current_start": 134,
+      "current_count": 4,
+      "classification": "dta-cell-location",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 130,
+      "original_count": 4,
+      "current_start": 145,
+      "current_count": 11,
+      "classification": "pdb-sft-error-locations",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 241,
+      "original_count": 3,
+      "current_start": 263,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 245,
+      "original_count": 0,
+      "current_start": 266,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 249,
+      "original_count": 0,
+      "current_start": 271,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    }
+  ],
+  "initial_review": "Four selected-code difference groups classified in ascending line order.",
+  "counter_review": "Actual callers checked; persistent descriptors retain original numeric locations but do not establish VM identity or SFT shadow lifetime.",
+  "consumers": [
+    "demgset.c",
+    "demsrch.c",
+    "demfcb.c",
+    "demfile.c",
+    "demhndl.c",
+    "softpc.new/host/src/nt_fdisk.c",
+    "softpc.new/host/src/nt_rflop.c"
+  ],
+  "historical_include_evidence": "artifacts/mvdm-audit/s13-r1233-ntdddisk-preprocess.json",
+  "format_only_change": "Removed incorrect SFT bounded-shadow comment; declarations and #line unchanged.",
+  "limitations": [
+    "No new runtime or compiler run.",
+    "SFT direct pointer lifetime not proved safe by this declaration review.",
+    "Multi-VM program identity remains a separate known defect."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+  "original_sha256": "619a9be301eb3a4ca8632d2f2459413e8285c4796e3de35e20aba2488aa7a0b9",
+  "current_sha256": "75ca6d2140e8457aad992d8e52dd2b9241dbf3720a3f13186306feef6261f43c",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 36,
+      "original_count": 15,
+      "current_normalized_start": 36,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "One HUNTER diagnostic declaration body excluded; retained source exact.",
+  "counter_review": "ACK/RESEND/BAT constants, keyboard port handlers, host key callbacks and initialization interfaces unchanged. This header does not change EOI or key consumption state.",
+  "limits": "Source-backed review only; no new compiler/runtime or complete VM transition proof."
+}

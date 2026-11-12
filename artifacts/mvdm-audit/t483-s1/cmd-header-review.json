@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/dos/command/cmd.h",
+  "sha256": "94c1dced55b52c582322558cce2d72cae2a069fd437c72e48beb90caa5893cde",
+  "process_id": 13400,
+  "exit_code": 0,
+  "selected_toolchain": "MSVC x86 14.43.34808, Windows SDK 10.0.22621.0; flags from current worker Ninja",
+  "assertions_each": 10,
+  "variants": [
+    "current",
+    "original packing placement with other adaptations preserved"
+  ],
+  "sizes": {
+    "PARAMBLOCK": 14,
+    "SCSINFO": 207,
+    "STD_HANDLES": 12,
+    "PIPE_INPUT": 68,
+    "PIPE_OUTPUT": 24,
+    "REDIRCOMPLETE_INFO": 44,
+    "VDMENVBLK": 12
+  },
+  "offsets": {
+    "PIPE_INPUT.CriticalSection": 44,
+    "PIPE_OUTPUT.Buffer": 20
+  },
+  "disposition": "recommend restore original packing; retain removal of obsolete pointer declarations",
+  "limits": "Source review and compile assertions only. Type alignment itself differs. No runtime claim or product mutation."
+}

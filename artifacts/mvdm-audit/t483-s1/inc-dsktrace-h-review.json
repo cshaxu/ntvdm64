@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+  "original_sha256": "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082",
+  "current_sha256": "9707c22d111a49e09235fd4287bdeca02e31840f5635961d4da2528c1aee817b",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 88,
+      "original_count": 12
+    },
+    {
+      "original_start": 110,
+      "original_count": 7
+    }
+  ],
+  "initial_review": "Two excluded non-PROD bodies: dt0-dt5 tracing macros and trace declarations (including nested ANSI alternative). Remaining flags, trace handles and production macros exactly original.",
+  "counter_review": "Complete reverse comparison confirms production semicolon macros and their non-evaluation of arguments are original, not newly disabled disk operations. Final line101 directive follows line118 but no source tokens follow; record EOF-coordinate caveat without claiming full line certification. No selected I/O state or error path changes.",
+  "limits": "Source difference classification only; EOF line-directive caveat recorded. No new compiler/runtime acceptance."
+}

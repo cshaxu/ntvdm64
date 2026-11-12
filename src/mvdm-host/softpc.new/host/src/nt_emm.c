@@ -915,4 +915,3 @@ void host_get_access_key(unsigned short access_key[2])
 #endif /* MONITOR */
 	
 #endif /* LIM */
-

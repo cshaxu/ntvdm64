@@ -1,0 +1,62 @@
+{
+  "path": "src/mvdm-host/dpmi32/data.c",
+  "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+  "current_sha256": "7e1161e8dcff68b40405d04301b995bd6d8b029715cac5c0ae667bbb52e327a8",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 111,
+      "original_count": 2,
+      "current_start": 111,
+      "current_count": 2,
+      "classification": "excluded-debug"
+    },
+    {
+      "original_start": 114,
+      "original_count": 0,
+      "current_start": 114,
+      "current_count": 1,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 116,
+      "original_count": 0,
+      "current_start": 117,
+      "current_count": 1,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 137,
+      "original_count": 0,
+      "current_start": 139,
+      "current_count": 63,
+      "classification": "cpu40-adaptation"
+    },
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 203,
+      "current_count": 2,
+      "classification": "conditional-or-line-scaffolding"
+    }
+  ],
+  "initial_review": "Entire added CPU40 group traced to actual writers/readers; DBG exclusion separate.",
+  "counter_review": "Remove domain-selection function whose only product caller clears TI; preserve actual GDT/LDT separation, guest-readable PM stack state and final relocated IDT decoding. Moving identical code to shim alone is not minimization.",
+  "dependencies": [
+    "src/mvdm-host/dpmi32/dpmi32.c",
+    "src/mvdm-host/dpmi32/dpmiint.c",
+    "src/mvdm-host/dpmi32/dpmiselr.c",
+    "src/mvdm-host/dpmi32/modesw.c",
+    "src/mvdm-guest/dpmi/dxboot.asm",
+    "src/mvdm-guest/dpmi/pmdefs.inc",
+    "src/mvdm-guest/dpmi/gendefs.inc"
+  ],
+  "test_evidence": "Inspected test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c assertions for layout, domain selection, absent/moved/undersized IDT and LDT publication. Tests not executed; synthetic LDT helper usage is not product reachability.",
+  "build_evidence": "Existing build/.ninja/msvc-x86-release/worker/build.ninja selects CPU_40_STYLE and CCPU; no fresh build claimed.",
+  "limits": [
+    "IDT backing lifetime/mapping, callback reentry and mode-entry failure delivery not completely verified.",
+    "Data globals are process-level; not a new per-VM identity system.",
+    "Historical DIV-223 description of single LDT binding is stale relative to separated current domains; identifiers retained as traceability inputs.",
+    "Recommendations not implemented; no source edits in data.c."
+  ]
+}

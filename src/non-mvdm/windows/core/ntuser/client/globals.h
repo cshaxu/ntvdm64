@@ -1,14 +1,21 @@
-/* Copyright (c) 1985-93, Microsoft Corporation.
- * Original windows/core/ntuser/client/globals.h true subset.
- * DIVERGENCE(OPENNT-HOST-075): retain reached EDIT memory macros only;
- * callback storage is supplied by the existing WOW registration binding. */
+/****************************** Module Header ******************************\
+* Module Name: globals.h
+*
+* Copyright (c) 1985-93, Microsoft Corporation
+*
+* This module contains all of USER.DLL's global variables.  These are all
+* instance-specific, i.e. each client has his own copy of these.  In general,
+* there shouldn't be much reason to create instance globals.
+*
+* History:
+* 10-18-90 DarrinM      Created.
+\***************************************************************************/
+
 #ifndef _GLOBALS_
 #define _GLOBALS_
 
-/* OPENNT-HOST-092: original declaration; definition remains in clglobal.c. */
 #line 43
 extern CONST BOOLEAN gabThunkMessage[];
-/* OPENNT-HOST-117: original clglobal.c owns the sizing exemplar. */
 #line 47
 extern WCHAR szOneChar[];
 
@@ -43,6 +50,12 @@ extern WCHAR szOneChar[];
 #endif
 #line 21
 
+/*
+ * LATER: client-side user needs to use moveable memory objects for
+ * WOW compatibility (at least until/if/when we copy all the edit control
+ * code into 16-bit space);  that's also why we can't just party with
+ * handles like LMHtoP does... -JeffPar
+ */
 #line 85
 #ifndef RC_INVOKED       // RC can't handle #pragmas
 #line 86
@@ -61,5 +74,5 @@ extern WCHAR szOneChar[];
 #endif
 #line 142
 
-#endif
+#endif // ndef _GLOBALS_
 #line 145

@@ -266,5 +266,3 @@ Return Value:
 } // XsCopyBufToTBuf
 
 #endif // def UNICODE
-
-

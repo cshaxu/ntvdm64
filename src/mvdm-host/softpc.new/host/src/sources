@@ -85,7 +85,6 @@ SOURCES=                sim32.c         \
                         nt_pif.c        \
                         nt_fulsc.c      \
                         nt_emm.c        \
-                        x86_emm.c       \
                         nt_eoi.c        \
                         nt_vdd.c        \
                         nt_sec.c        \

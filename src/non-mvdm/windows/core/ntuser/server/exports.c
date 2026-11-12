@@ -1,9 +1,26 @@
-/* Copyright 1985-91, Microsoft Corporation.
- * DIVERGENCE(OPENNT-HOST-030): true subset of original winsrv exports.c.
- * Only the BaseSrv-reached token query helper is retained; precomp.h and the
- * remaining winsrv/USER product are excluded. The sole private predicate is
- * bound to the admitted standalone interactive logon scope. */
+/**************************** Module Header ********************************\
+* Module Name: exports.c
+*
+* Copyright 1985-91, Microsoft Corporation
+*
+* Routines exported from winsrv.dll
+*
+* History:
+* 03-04-95 JimA                Created.
+\***************************************************************************/
 #include <base_interactive.h>
+
+/***************************************************************************\
+* _UserTestTokenForInteractive
+*
+* Returns TRUE if the token passed represents an interactive user logged
+* on by winlogon, otherwise FALSE
+*
+* The token handle passed must have TOKEN_QUERY access.
+*
+* History:
+* 05-06-92 Davidc       Created
+\***************************************************************************/
 
 #line 102
 NTSTATUS

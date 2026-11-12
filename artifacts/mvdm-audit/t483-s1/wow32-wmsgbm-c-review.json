@@ -1,0 +1,51 @@
+{
+  "path": "src/mvdm-host/wow32/wmsgbm.c",
+  "original_sha256": "d7ef837d592221481c988ccb2e164faff9d7a0b6349b59e1bbc3841323a98692",
+  "current_sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 20,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "",
+        "MSGINFO amiBM[] = {",
+        "   {OLDBM_GETCHECK, \"BM_GETCHECK\"},             // 0x0400",
+        "   {OLDBM_SETCHECK, \"BM_SETCHECK\"},             // 0x0401",
+        "   {OLDBM_GETSTATE, \"BM_GETSTATE\"},             // 0x0402",
+        "   {OLDBM_SETSTATE, \"BM_SETSTATE\"},             // 0x0403",
+        "   {OLDBM_SETSTYLE, \"BM_SETSTYLE\"},             // 0x0404",
+        "};",
+        "",
+        "PSZ GetBMMsgName(WORD wMsg)",
+        "{",
+        "    INT i;",
+        "    register PMSGINFO pmi;",
+        "",
+        "    for (pmi=amiBM,i=NUMEL(amiBM); i>0; i--,pmi++)",
+        "        if ((WORD)pmi->uMsg == wMsg)",
+        "        return pmi->pszMsgName;",
+        "    return GetWMMsgName(wMsg);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 42,
+      "current": 25,
+      "logical": 23
+    }
+  ],
+  "evidence": "Complete normalized diff only excludes original DEBUG bodies; selected source unchanged.",
+  "limits": [
+    "Audit only, no functional repair or new build/runtime pass.",
+    "Excluded-body comparison is not universal preprocessing proof."
+  ]
+}

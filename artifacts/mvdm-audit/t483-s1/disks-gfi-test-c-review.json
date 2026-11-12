@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+  "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+  "current_sha256": "ad0a3b57e944e56546161145b89d1608d1f77070e8813188678f41ca18d75f93",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 4,
+      "original_count": 35,
+      "current_start": 5
+    },
+    {
+      "original_start": 43,
+      "original_count": 233,
+      "current_start": 12
+    }
+  ],
+  "initial_review": "Two excluded non-PROD bodies: debug provenance/platform declarations at original4-38 and diagnostic floppy-server functions at43-275. All remaining includes and outer conditional structure match original.",
+  "counter_review": "Separately balanced nested SCCSID/SEGMENTATION within first excluded body and compared entire remaining source exactly. The original pseudo-server prints calls and returns success; it is diagnostic-only, unlike the selected empty-drive provider reviewed previously. No project-added success stub or altered production FDC error behavior survives here. gfi.c diagnostic callers are likewise non-PROD-excluded.",
+  "limits": "No fresh compile/runtime evidence; this audit does not authorize whole-file deletion or revive non-PROD configuration."
+}

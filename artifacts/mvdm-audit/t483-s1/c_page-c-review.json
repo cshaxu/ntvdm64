@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+  "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+  "current_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "265",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "current_start": "30",
+      "current_count": "4",
+      "original_start": "30",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-082",
+      "classification": "provider-declaration",
+      "initial_review": "Use original yoda.h PROD check_D no-op macro instead of implicit external function.",
+      "counter_review": "No paging/access/debug algorithm is replaced; same original macro owns selected PROD behavior.",
+      "disposition": "retain",
+      "evidence": "base/inc/yoda.h:34-40; c_page.c:569,605,635,665",
+      "limits": "Source comparison only; no fresh preprocessing/build/runtime or full line certification.",
+      "decision": "retain",
+      "change_plan": "Retain provider include; do not add a substitute check_D stub.",
+      "related_callers": "base/inc/yoda.h:34-40; c_page.c:569,605,635,665",
+      "verification_required": "Selected CCPU compile and macro binding checks; existing memory fixtures unchanged.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_groups": [
+    {
+      "original_start": 70,
+      "original_end": 72,
+      "current_error_line": 77
+    },
+    {
+      "original_start": 678,
+      "original_end": 854,
+      "current_error_line": 686
+    }
+  ],
+  "limits": "Outer boundaries and all remaining nonblank/non-line text compared with original, except explicitly registered include. No universal reachability or full line proof."
+}

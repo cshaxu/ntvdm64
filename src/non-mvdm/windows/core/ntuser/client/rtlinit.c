@@ -262,7 +262,16 @@ void FreeLookasideEntry(
  * are excluded. The existing worker TLS/heap boundary supplies resources. */
 #include "wow_user_capture_bindings.h"
 
-#line 30
+#line 21
+/**************************************************************************\
+* RtlCaptureAnsiString
+*
+* Converts a NULL-terminated ANSI string into a counted
+* unicode string.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
+
 BOOL RtlCaptureAnsiString(
     PIN_STRING pstr,
     LPCSTR psz,

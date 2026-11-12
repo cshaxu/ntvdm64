@@ -1,0 +1,247 @@
+{
+  "path": "src/mvdm-host/wow32/wuclass.c",
+  "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+  "current_sha256": "25165d4311060229d4792ff598b1bc66971b9f369777df28df0131117f4736ce",
+  "changes": [
+    {
+      "original_start": 271,
+      "original_count": 0,
+      "current_start": 271,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                BOOL procedureIsGuest;"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    },
+    {
+      "original_start": 272,
+      "original_count": 1,
+      "current_start": 274,
+      "current_count": 5,
+      "original": [
+        "                dwProc32 = GetClassLong(hwnd, iOffset);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-339): decoded entry is not a native CPD. */",
+        "                dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    },
+    {
+      "original_start": 274,
+      "original_count": 2,
+      "current_start": 282,
+      "current_count": 10,
+      "original": [
+        "                if ( dwProc32 & WNDPROC_WOW ) {",
+        "                    if ( HIWORD(dwProc32) == WNDPROC_HANDLE ) {"
+      ],
+      "current": [
+        "                if ( (dwProc32 & WNDPROC_WOW)",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                     && (procedureIsGuest || HIWORD(dwProc32) == WNDPROC_HANDLE)",
+        "#endif",
+        "                   ) {",
+        "                    if ( HIWORD(dwProc32) == WNDPROC_HANDLE",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                         && !procedureIsGuest",
+        "#endif",
+        "                       ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    },
+    {
+      "original_start": 720,
+      "original_count": 0,
+      "current_start": 741,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                BOOL previousIsGuest;",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    },
+    {
+      "original_start": 730,
+      "original_count": 1,
+      "current_start": 755,
+      "current_count": 7,
+      "original": [
+        "                    dwWndProc32Old = SetClassLong(HWND32(parg16->f1), GCL_WNDPROC, (LONG)dwWndProc32New);"
+      ],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                    /* DIVERGENCE(MVDM-HOST-DIV-339): explicit native origin. */",
+        "                    dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, dwWndProc32New, FALSE, &previousIsGuest);",
+        "                    if (!dwWndProc32Old) break;",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    },
+    {
+      "original_start": 753,
+      "original_count": 1,
+      "current_start": 786,
+      "current_count": 7,
+      "original": [
+        "                    dwWndProc32Old = SetClassLong(HWND32(parg16->f1), GCL_WNDPROC, l | WNDPROC_WOW );"
+      ],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                    /* DIVERGENCE(MVDM-HOST-DIV-339): explicit guest origin. */",
+        "                    dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, l | WNDPROC_WOW, TRUE, &previousIsGuest);",
+        "                    if (!dwWndProc32Old) break;",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    },
+    {
+      "original_start": 757,
+      "original_count": 2,
+      "current_start": 798,
+      "current_count": 10,
+      "original": [
+        "                if ( dwWndProc32Old & WNDPROC_WOW ) {",
+        "                    if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE ) {"
+      ],
+      "current": [
+        "                if ( (dwWndProc32Old & WNDPROC_WOW)",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                     && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)",
+        "#endif",
+        "                   ) {",
+        "                    if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                         && !previousIsGuest",
+        "#endif",
+        "                       ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit procedure origin separates decoded guest addresses from native procedure/CPD values with colliding high bits. Getter and both setter branches preserve origin; setter failure stops before publishing guest class words.",
+      "change_plan": "Retain typed getter/setter and origin checks as a coupled change with wow_user_private_access and class-procedure exchange; retain original thunk encoding/return conversion."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 155,
+      "original_count": 6,
+      "current_start": 157,
+      "current_count": 1,
+      "original": [
+        "        if (parg16->f1 ||",
+        "            !(pwc16->vpfnWndProc = GetThunkWindowProc((DWORD)t3.lpfnWndProc, pszClass, NULL, NULL))) {",
+        "",
+        "            pwc = FindClass16(pszClass, (HINST16)parg16->f1);",
+        "            STOREDWORD(pwc16->vpfnWndProc,   pwc->vpfnWndProc);",
+        "        }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1040,
+      "original_count": 2,
+      "current_start": 1094,
+      "current_count": 1,
+      "original": [
+        "    if (!_stricmp(pszClass, \"Edit\"))",
+        "    pszClass = \"WOWEdit\";"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 158,
+      "original": 161,
+      "logical": 156
+    },
+    {
+      "current": 292,
+      "original": 276,
+      "logical": 284
+    },
+    {
+      "current": 293,
+      "original": 277,
+      "logical": 285
+    },
+    {
+      "current": 294,
+      "original": 278,
+      "logical": 286
+    },
+    {
+      "current": 295,
+      "original": 279,
+      "logical": 287
+    },
+    {
+      "current": 296,
+      "original": 280,
+      "logical": 288
+    },
+    {
+      "current": 745,
+      "original": 721,
+      "logical": 724
+    },
+    {
+      "current": 808,
+      "original": 759,
+      "logical": 767
+    },
+    {
+      "current": 809,
+      "original": 760,
+      "logical": 768
+    },
+    {
+      "current": 810,
+      "original": 761,
+      "logical": 769
+    },
+    {
+      "current": 1095,
+      "original": 1042,
+      "logical": 1041
+    }
+  ],
+  "evidence": [
+    "wow_user_private_access.c reads class target origin or decodes native entry; set routes owned class through exchange and rejects guest install on unowned native class.",
+    "wow_typed_procedure_callers.c links actual WU32 class/window getter/setter bodies and tests encoded 0xffff0004 origin collision without guest execution.",
+    "Original WNDPROC_WOW/WNDPROC_HANDLE and selector restoration retained; added previousIsGuest avoids misreading guest target as native CPD."
+  ],
+  "limits": [
+    "No current build/test execution.",
+    "Actual native/guest class callback, failure atomicity and concurrency need integration; typed-caller fixture is not arbitrary guest execution.",
+    "Compile selector coverage is not recertified here; source conditional structure preserved.",
+    "LF diagnostic-line findings require compiler confirmation."
+  ]
+}

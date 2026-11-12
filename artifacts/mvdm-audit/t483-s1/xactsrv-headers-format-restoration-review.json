@@ -1,0 +1,36 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/wkstadef.h",
+      "before_sha256": "79b7d37e93d0f1d650cdc0d88becc0b960740e9e5c22f5c7e9ec9f32d1d3f97f",
+      "original_and_after_sha256": "4f3bacc8b97586e3f0a32e6738480335382a6876d552598b9b900546480eb7b4"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "before_sha256": "dd594532c0618ab4acdc637baddf131c0ff0b95bc736cfbc821408c4317e2b9d",
+      "original_and_after_sha256": "ca80cdb6c115f513166145531225e4eb6710b9d4e87e5a99655d0fb5bef779e8"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "before_sha256": "c3a93b3c394b2adb6ae7e8198f6eb5bfe93c73414a85d9dca6e44ef5e7635aff",
+      "original_and_after_sha256": "a671c7fb4d1e9c5bbdb71d6fc4afe0324081038053392d599942c95813ce6d5c"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "before_sha256": "56133720faa919da85c129aa1f3c601ee504b8005f5a523b93440cbbc1426bbf",
+      "original_and_after_sha256": "8198c378c9df3f318aff2914e95a530ef90c6fca92d1939714c851628b069743"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "before_sha256": "8daf8b94feade0b0518b66d4f477901d3b02274d657f78103ca9be6fd07eaa6b",
+      "original_and_after_sha256": "c6179ce7662c012a345aed4278b94b59c50ceaf396eceb7f768b62ce454f2b7c"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "before_sha256": "85aa47902c2ab59bd5ba00dbcee169a2c11dc9c408034a5e0333322b76172c81",
+      "original_and_after_sha256": "f9f997ec6f9fbdc8160c775718c605bcaa5aa374d94ac5c94387ccd7fb4e7465"
+    }
+  ],
+  "method": "Compare every byte after CRLF/LF normalization and terminal newline removal, then restore full original byte stream and compare exact bytes.",
+  "limits": "No all-context macro-hit or runtime claim."
+}

@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/wow32/wmmedia2.c",
+  "original_sha256": "4a2a6e5e6c6e7172cb3fea4bb9035a18c7c5a292618b9eb507b71ae9f7d76856",
+  "deleted_current_sha256": "077191aa635f549fea29d453a9bf83a2bf6a0cf9b336a5d90ea72456f7193b82",
+  "deleted_current_bytes": 1190,
+  "original_disabled_range": [
+    39,
+    3382
+  ],
+  "decision": "delete",
+  "evidence": "Original substantive body is wholly enclosed by literal #if 0 at LF lines 39-3382; no content follows except whitespace. Current file has one #error placeholder and no active function body. Selected manifest nevertheless compiles this empty carrier.",
+  "change_plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
+  "implementation_status": "implemented-validation-pending",
+  "limits": [
+    "No regenerated product graph or link/runtime result claimed.",
+    "Dynamic-host-surface fixture already expects 78 WINMM names but active wmmedia.c contains only 2 matching textual entries; this pre-existing test expectation remains unvalidated, not silently weakened."
+  ]
+}

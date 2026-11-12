@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
+  "original_sha256": "59a01bea1d8b7960f22093a61b4e0b1554393406b339dd182ef5dff5b9e88bfc",
+  "current_sha256": "0893c9a73e82ee97d393381e8fb43010159f2c5f7eddca9ff593235d76acc412",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 77,
+      "original_count": 3
+    }
+  ],
+  "initial_review": "One non-NTVDM declaration body excluded; remaining source exact.",
+  "counter_review": "Original NTVDM host_nls_get_msg_no_check alias, message catalog IDs, configuration entry layout and buffer-length interface unchanged. No replacement message lookup or fallback added.",
+  "limits": "Source difference classification only; no new universal build-context, diagnostic-line or runtime certification."
+}

@@ -1,0 +1,29 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+  "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+  "current_sha256": "b5915770a1bdae5f8afc8aaad950f07b064156e08f1b05601d8e125cca972497",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 28,
+      "original_count": 6
+    },
+    {
+      "original_start": 37,
+      "original_count": 1
+    },
+    {
+      "original_start": 56,
+      "original_count": 10
+    },
+    {
+      "original_start": 75,
+      "original_count": 9443
+    }
+  ],
+  "initial_review": "Complete original/current difference review; excluded platform/debug bodies only.",
+  "counter_review": "Boundary-aware comparison leaves exact original nonblank code after removing excluded bodies and line/error directives. Production trace no-op/UNUSED and force_yoda empty provider are original behavior, not project success stubs. Retained CPU40 declarations/global trace state unchanged.",
+  "limits": "No universal build-context/exclusion proof or fresh runtime result; this is mirror-diff necessity classification only."
+}

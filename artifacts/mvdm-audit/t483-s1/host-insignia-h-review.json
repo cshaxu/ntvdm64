@@ -1,0 +1,116 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+  "original_sha256": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+  "current_sha256": "b46f9008fbcf6f8a54a35c04eaa8a17fc84a80ff053180bf71a01fbf111cc9d1",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 38,
+      "original_count": 1,
+      "current_start": 39,
+      "current_count": 1,
+      "original": [
+        "typedef char            CHAR;           /* Used as a text character */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */"
+    },
+    {
+      "original_start": 44,
+      "original_count": 2,
+      "current_start": 47,
+      "current_count": 1,
+      "original": [
+        "typedef short           SHORT;          /* 16-bit signed integer */",
+        "//typedef long            LONG;           /* 32-bit signed integer */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */"
+    },
+    {
+      "original_start": 51,
+      "original_count": 8,
+      "current_start": 55,
+      "current_count": 1,
+      "original": [
+        "typedef unsigned char   UCHAR;          /*  8-bit unsigned integer */",
+        "typedef unsigned short  USHORT;         /* 16-bit unsigned integer */",
+        "//typedef unsigned long   ULONG;          /* 32-bit unsigned integer */",
+        "typedef unsigned short  WORD;           /* 16-bit unsigned integer */",
+        "typedef unsigned long   DWORD;          /* 32-bit unsigned integer */",
+        "",
+        "typedef float           FLOAT;          /* 32-bit floating point */",
+        "//typedef double          DOUBLE;         /* 64-bit floating point */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */"
+    },
+    {
+      "original_start": 88,
+      "original_count": 2,
+      "current_start": 87,
+      "current_count": 1,
+      "original": [
+        "#define FALSE           ((BOOL) 0)      /* Boolean falsehood value */",
+        "#define TRUE            (!FALSE)        /* Boolean truth value */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#ifndef FALSE"
+    },
+    {
+      "original_start": 95,
+      "original_count": 2,
+      "current_start": 95,
+      "current_count": 1,
+      "original": [
+        "//typedef int INT;",
+        "typedef unsigned int UINT;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#if !defined(_WINDOWS_) && !defined(NT_INCLUDED)   /* Types already defined by windows */"
+    },
+    {
+      "original_start": 100,
+      "original_count": 1,
+      "current_start": 101,
+      "current_count": 1,
+      "original": [
+        "#define NULL            (0L)    /* Null pointer value */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#ifndef NULL"
+    },
+    {
+      "original_start": 105,
+      "original_count": 3,
+      "current_start": 108,
+      "current_count": 1,
+      "original": [
+        "#if !defined(_WINDOWS_) \t\t\t  /* Types already defined by windows */",
+        "typedef int BOOL;\t/* only defined in windows */",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#ifdef NT_INCLUDED"
+    }
+  ],
+  "initial_review": "Seven conditional-body exclusions: fallback Windows scalar types/constants and NT_INCLUDED BOOL alternative. No other source delta.",
+  "counter_review": "Full retained source exactly matches pinned original after #line removal. IU32/ISH/IUH/IHPE widths and ANSI prototype macros are inherited, not local adaptations. Their host suitability is not inferred from byte identity; this diff-only review does not redesign those types. NT_INCLUDED BOOL exclusion removes its nested _WINDOWS_ branch as one outer body.",
+  "limits": "Not a claim of universal build-context, pointer-width suitability or runtime certification."
+}

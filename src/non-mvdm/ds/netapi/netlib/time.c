@@ -960,5 +960,3 @@ Return Value:
     strncpy(Buffer, czTimeString, numChars);
 }
 
-
-

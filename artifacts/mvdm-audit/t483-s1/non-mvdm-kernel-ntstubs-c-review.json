@@ -1,0 +1,1220 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "before_sha256": "05cf0e041f89c44e168ef85c66ef82433967edaa0690bd2c3e8ff898634b0b91",
+  "current_sha256": "82acc421f66a2e71b1fb18494b78f69f38ebf0054d504743cdeeb1b4c20aea81",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_comparison": {
+    "NtUserSetWindowFNID": "exact; receive macros differ"
+  },
+  "evidence": [
+    "src/wow32-dll/include/wow_edit_state_bindings.h:14-23",
+    "src/wow32-dll/source/wow_window_client_state_bindings.c:162-175",
+    "test/adapter-mvdm-host-out/wow/wow_edit_state_fixture.c:431-435,528-535",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:562"
+  ],
+  "decisions": [
+    "Retain scoped EDIT state facade instead of private USER receive shell. BEGINRECV_HWND resolves an enrolled borrowed window; caller owns task/runtime scope. Original EnterCrit/LeaveCrit cannot manipulate modern USER private state. Keep signature and local FNID algorithm.",
+    "Original NtUserSetWindowFNID body is exact. Facade initializes retval to FALSE whereas original macro leaves it uninitialized when FNID already set. Fixture asserts rejection for repeated EDIT and changed BUTTON and permits repeated CLEANEDUP. Retain deterministic rejection; do not call modern native FNID on retained old WND.",
+    "StubExceptionHandler has no retained call in this subset. Remove unused macro and its orphan diagnostic frame together when reconciling original subset structure; this is partial cleanup, not whole-file deletion.",
+    "DATAALIGN/CHARALIGN are defined and undefined around no retained class-registration body. Remove these unused macros and associated detached alignment frame with coherent subset reconciliation.",
+    "Detached NEVER, FE_IME, DEBUG/DBG, MEMPHIS and x86 alignment frames survive outside omitted functions, often with empty selected bodies. Reconstruct source-policy-compliant retained subset structure from original owner ranges; do not activate omitted private server code. Preserve logical line 6170 for the retained function.",
+    "Omitted receive stubs cover desktop/window-station, messages, menus, clipboard, controls, input, painting, WOW cleanup and thread state. Private probes/locks are not composable wholesale; classify reached client edges against existing original client/native bindings before asserting every omitted wrapper policy is redundant. Definition inventory is evidence indexing, not body equivalence.",
+    "Omitted post-FNID wrappers include style/thread state, window creation, class registration, properties, keyboard and scrollbar policy. Compare reached original client callers and current bounded providers, including structure conversion and failure semantics; native API availability alone is insufficient.",
+    "Omitted MESSAGECALL and hook marshalling use private window locks, probing and CALLPROC. Compare selected original message converters, actual callback ownership and exceptional copyback before accepting whole omission; do not copy NT4 syscall numbers or create a second dispatcher.",
+    "Input-language acceptance and media-change notification omitted. Separate guest-visible charset/keyboard policy from host-system event ownership; establish selected caller coverage before deciding restore or retain omission."
+  ],
+  "entries_added": 9,
+  "format_sites": 1,
+  "omitted_definition_index": [
+    {
+      "line": 302,
+      "declaration": "BOOL NtUserHardErrorControl("
+    },
+    {
+      "line": 314,
+      "declaration": "VOID NtUserSetDebugErrorLevel("
+    },
+    {
+      "line": 325,
+      "declaration": "BOOL NtUserRegisterLogonProcess("
+    },
+    {
+      "line": 337,
+      "declaration": "BOOL NtUserGetObjectInformation("
+    },
+    {
+      "line": 378,
+      "declaration": "BOOL NtUserSetObjectInformation("
+    },
+    {
+      "line": 407,
+      "declaration": "NTSTATUS NtUserConsoleControl("
+    },
+    {
+      "line": 522,
+      "declaration": "HWINSTA NtUserCreateWindowStation("
+    },
+    {
+      "line": 696,
+      "declaration": "HWINSTA NtUserOpenWindowStation("
+    },
+    {
+      "line": 776,
+      "declaration": "BOOL NtUserCloseWindowStation("
+    },
+    {
+      "line": 799,
+      "declaration": "BOOL NtUserSetProcessWindowStation("
+    },
+    {
+      "line": 810,
+      "declaration": "HWINSTA NtUserGetProcessWindowStation("
+    },
+    {
+      "line": 821,
+      "declaration": "HDESK NtUserCreateDesktop("
+    },
+    {
+      "line": 869,
+      "declaration": "HDESK NtUserOpenDesktop("
+    },
+    {
+      "line": 884,
+      "declaration": "HDESK NtUserOpenInputDesktop("
+    },
+    {
+      "line": 940,
+      "declaration": "HDESK NtUserResolveDesktop("
+    },
+    {
+      "line": 1007,
+      "declaration": "BOOL NtUserCloseDesktop("
+    },
+    {
+      "line": 1018,
+      "declaration": "BOOL NtUserSetThreadDesktop("
+    },
+    {
+      "line": 1039,
+      "declaration": "HDESK NtUserGetThreadDesktop("
+    },
+    {
+      "line": 1051,
+      "declaration": "BOOL NtUserSwitchDesktop("
+    },
+    {
+      "line": 1081,
+      "declaration": "NTSTATUS NtUserInitializeClientPfnArrays("
+    },
+    {
+      "line": 1109,
+      "declaration": "BOOL NtUserWaitForMsgAndEvent("
+    },
+    {
+      "line": 1120,
+      "declaration": "HWND NtUserWOWFindWindow("
+    },
+    {
+      "line": 1158,
+      "declaration": "DWORD NtUserDragObject("
+    },
+    {
+      "line": 1199,
+      "declaration": "BOOL NtUserGetIconInfo("
+    },
+    {
+      "line": 1250,
+      "declaration": "BOOL NtUserGetIconSize("
+    },
+    {
+      "line": 1285,
+      "declaration": "BOOL NtUserDrawIconEx("
+    },
+    {
+      "line": 1340,
+      "declaration": "HANDLE NtUserDeferWindowPos("
+    },
+    {
+      "line": 1444,
+      "declaration": "BOOL NtUserEndDeferWindowPosEx("
+    },
+    {
+      "line": 1467,
+      "declaration": "BOOL NtUserGetMessage("
+    },
+    {
+      "line": 1498,
+      "declaration": "BOOL NtUserMoveWindow("
+    },
+    {
+      "line": 1581,
+      "declaration": "BOOL NtUserDeleteObject("
+    },
+    {
+      "line": 1601,
+      "declaration": "int NtUserTranslateAccelerator("
+    },
+    {
+      "line": 1650,
+      "declaration": "LONG NtUserSetClassLong("
+    },
+    {
+      "line": 1696,
+      "declaration": "BOOL NtUserSetKeyboardState("
+    },
+    {
+      "line": 1716,
+      "declaration": "BOOL NtUserSetWindowPos("
+    },
+    {
+      "line": 1852,
+      "declaration": "BOOL NtUserSetShellWindowEx("
+    },
+    {
+      "line": 1880,
+      "declaration": "BOOL NtUserSystemParametersInfo("
+    },
+    {
+      "line": 2137,
+      "declaration": "BOOL NtUserUpdatePerUserSystemParameters("
+    },
+    {
+      "line": 2148,
+      "declaration": "DWORD NtUserDdeInitialize("
+    },
+    {
+      "line": 2183,
+      "declaration": "DWORD NtUserUpdateInstance("
+    },
+    {
+      "line": 2205,
+      "declaration": "DWORD NtUserEvent("
+    },
+    {
+      "line": 2226,
+      "declaration": "BOOL NtUserFillWindow("
+    },
+    {
+      "line": 2260,
+      "declaration": "HANDLE NtUserGetInputEvent("
+    },
+    {
+      "line": 2272,
+      "declaration": "PCLS NtUserGetWOWClass("
+    },
+    {
+      "line": 2305,
+      "declaration": "UINT NtUserGetInternalWindowPos("
+    },
+    {
+      "line": 2341,
+      "declaration": "NTSTATUS NtUserInitTask("
+    },
+    {
+      "line": 2394,
+      "declaration": "BOOL NtUserPostThreadMessage("
+    },
+    {
+      "line": 2434,
+      "declaration": "BOOL NtUserRegisterTasklist("
+    },
+    {
+      "line": 2452,
+      "declaration": "BOOL NtUserSetClipboardData("
+    },
+    {
+      "line": 2480,
+      "declaration": "HANDLE NtUserConvertMemHandle("
+    },
+    {
+      "line": 2503,
+      "declaration": "NTSTATUS NtUserCreateLocalMemHandle("
+    },
+    {
+      "line": 2543,
+      "declaration": "HHOOK NtUserSetWindowsHookEx("
+    },
+    {
+      "line": 2581,
+      "declaration": "BOOL NtUserSetInternalWindowPos("
+    },
+    {
+      "line": 2617,
+      "declaration": "BOOL NtUserChangeClipboardChain("
+    },
+    {
+      "line": 2646,
+      "declaration": "DWORD NtUserCheckMenuItem("
+    },
+    {
+      "line": 2668,
+      "declaration": "HWND NtUserChildWindowFromPointEx("
+    },
+    {
+      "line": 2688,
+      "declaration": "BOOL NtUserClipCursor("
+    },
+    {
+      "line": 2713,
+      "declaration": "HACCEL NtUserCreateAcceleratorTable("
+    },
+    {
+      "line": 2741,
+      "declaration": "BOOL NtUserDeleteMenu("
+    },
+    {
+      "line": 2774,
+      "declaration": "BOOL NtUserDestroyAcceleratorTable("
+    },
+    {
+      "line": 2795,
+      "declaration": "BOOL NtUserDestroyCursor("
+    },
+    {
+      "line": 2812,
+      "declaration": "HANDLE NtUserGetClipboardData("
+    },
+    {
+      "line": 2854,
+      "declaration": "BOOL NtUserDestroyMenu("
+    },
+    {
+      "line": 2870,
+      "declaration": "BOOL NtUserDestroyWindow("
+    },
+    {
+      "line": 2887,
+      "declaration": "LONG NtUserDispatchMessage("
+    },
+    {
+      "line": 2909,
+      "declaration": "BOOL NtUserEnableMenuItem("
+    },
+    {
+      "line": 2931,
+      "declaration": "BOOL NtUserAttachThreadInput("
+    },
+    {
+      "line": 2960,
+      "declaration": "BOOL NtUserGetWindowPlacement("
+    },
+    {
+      "line": 2987,
+      "declaration": "BOOL NtUserSetWindowPlacement("
+    },
+    {
+      "line": 3027,
+      "declaration": "BOOL NtUserLockWindowUpdate("
+    },
+    {
+      "line": 3045,
+      "declaration": "BOOL NtUserGetClipCursor("
+    },
+    {
+      "line": 3065,
+      "declaration": "BOOL NtUserEnableScrollBar("
+    },
+    {
+      "line": 3085,
+      "declaration": "BOOL NtUserDdeSetQualityOfService("
+    },
+    {
+      "line": 3131,
+      "declaration": "BOOL NtUserDdeGetQualityOfService("
+    },
+    {
+      "line": 3176,
+      "declaration": "DWORD NtUserGetMenuIndex("
+    },
+    {
+      "line": 3204,
+      "declaration": "DWORD NtUserCallNoParam("
+    },
+    {
+      "line": 3220,
+      "declaration": "DWORD NtUserBreak(void)"
+    },
+    {
+      "line": 3232,
+      "declaration": "DWORD NtUserCallNoParamTranslate("
+    },
+    {
+      "line": 3249,
+      "declaration": "DWORD NtUserCallOneParam("
+    },
+    {
+      "line": 3266,
+      "declaration": "DWORD NtUserCallOneParamTranslate("
+    },
+    {
+      "line": 3284,
+      "declaration": "DWORD NtUserCallHwnd("
+    },
+    {
+      "line": 3307,
+      "declaration": "DWORD NtUserCallHwndLock("
+    },
+    {
+      "line": 3331,
+      "declaration": "DWORD NtUserCallHwndOpt("
+    },
+    {
+      "line": 3352,
+      "declaration": "DWORD NtUserCallTwoParam("
+    },
+    {
+      "line": 3370,
+      "declaration": "DWORD NtUserCallHwndParam("
+    },
+    {
+      "line": 3394,
+      "declaration": "DWORD NtUserCallHwndParamLock("
+    },
+    {
+      "line": 3419,
+      "declaration": "BOOL NtUserThunkedMenuItemInfo("
+    },
+    {
+      "line": 3495,
+      "declaration": "BOOL NtUserThunkedMenuInfo("
+    },
+    {
+      "line": 3530,
+      "declaration": "BOOL NtUserCheckMenuRadioItem("
+    },
+    {
+      "line": 3554,
+      "declaration": "BOOL NtUserSetMenuDefaultItem("
+    },
+    {
+      "line": 3574,
+      "declaration": "BOOL NtUserSetMenuContextHelpId("
+    },
+    {
+      "line": 3592,
+      "declaration": "BOOL NtUserInitBrushes("
+    },
+    {
+      "line": 3616,
+      "declaration": "BOOL NtUserDrawAnimatedRects("
+    },
+    {
+      "line": 3661,
+      "declaration": "BOOL NtUserDrawCaption("
+    },
+    {
+      "line": 3692,
+      "declaration": "BOOL NtUserPaintDesktop("
+    },
+    {
+      "line": 3711,
+      "declaration": "SHORT NtUserGetAsyncKeyState("
+    },
+    {
+      "line": 3752,
+      "declaration": "HBRUSH NtUserGetControlBrush("
+    },
+    {
+      "line": 3775,
+      "declaration": "HBRUSH NtUserGetControlColor("
+    },
+    {
+      "line": 3809,
+      "declaration": "HMENU NtUserEndMenu(VOID)"
+    },
+    {
+      "line": 3826,
+      "declaration": "int NtUserCountClipboardFormats("
+    },
+    {
+      "line": 3846,
+      "declaration": "UINT NtUserGetCaretBlinkTime("
+    },
+    {
+      "line": 3864,
+      "declaration": "HWND NtUserGetClipboardOwner("
+    },
+    {
+      "line": 3884,
+      "declaration": "HWND NtUserGetClipboardViewer("
+    },
+    {
+      "line": 3904,
+      "declaration": "UINT NtUserGetDoubleClickTime("
+    },
+    {
+      "line": 3922,
+      "declaration": "HWND NtUserGetForegroundWindow("
+    },
+    {
+      "line": 3942,
+      "declaration": "HWND NtUserGetOpenClipboardWindow("
+    },
+    {
+      "line": 3962,
+      "declaration": "int NtUserGetPriorityClipboardFormat("
+    },
+    {
+      "line": 3989,
+      "declaration": "HMENU NtUserGetSystemMenu("
+    },
+    {
+      "line": 4008,
+      "declaration": "BOOL NtUserGetUpdateRect("
+    },
+    {
+      "line": 4041,
+      "declaration": "BOOL NtUserHideCaret("
+    },
+    {
+      "line": 4056,
+      "declaration": "BOOL NtUserHiliteMenuItem("
+    },
+    {
+      "line": 4092,
+      "declaration": "BOOL NtUserInvalidateRect("
+    },
+    {
+      "line": 4130,
+      "declaration": "BOOL NtUserIsClipboardFormatAvailable("
+    },
+    {
+      "line": 4150,
+      "declaration": "BOOL NtUserKillTimer("
+    },
+    {
+      "line": 4168,
+      "declaration": "HWND NtUserMinMaximize("
+    },
+    {
+      "line": 4192,
+      "declaration": "BOOL NtUserOpenClipboard("
+    },
+    {
+      "line": 4223,
+      "declaration": "BOOL NtUserPeekMessage("
+    },
+    {
+      "line": 4261,
+      "declaration": "BOOL NtUserPostMessage("
+    },
+    {
+      "line": 4302,
+      "declaration": "BOOL NtUserSendNotifyMessage("
+    },
+    {
+      "line": 4348,
+      "declaration": "BOOL NtUserSendMessageCallback("
+    },
+    {
+      "line": 4382,
+      "declaration": "BOOL NtUserRegisterHotKey("
+    },
+    {
+      "line": 4404,
+      "declaration": "BOOL NtUserRemoveMenu("
+    },
+    {
+      "line": 4437,
+      "declaration": "BOOL NtUserScrollWindowEx("
+    },
+    {
+      "line": 4493,
+      "declaration": "HWND NtUserSetActiveWindow("
+    },
+    {
+      "line": 4514,
+      "declaration": "HWND NtUserSetCapture("
+    },
+    {
+      "line": 4535,
+      "declaration": "WORD NtUserSetClassWord("
+    },
+    {
+      "line": 4557,
+      "declaration": "HWND NtUserSetClipboardViewer("
+    },
+    {
+      "line": 4578,
+      "declaration": "HCURSOR NtUserSetCursor("
+    },
+    {
+      "line": 4594,
+      "declaration": "HWND NtUserSetFocus("
+    },
+    {
+      "line": 4615,
+      "declaration": "BOOL NtUserSetMenu("
+    },
+    {
+      "line": 4647,
+      "declaration": "HWND NtUserSetParent("
+    },
+    {
+      "line": 4678,
+      "declaration": "int NtUserSetScrollInfo("
+    },
+    {
+      "line": 4715,
+      "declaration": "BOOL NtUserSetSysColors("
+    },
+    {
+      "line": 4749,
+      "declaration": "UINT NtUserSetTimer("
+    },
+    {
+      "line": 4771,
+      "declaration": "LONG NtUserSetWindowLong("
+    },
+    {
+      "line": 4795,
+      "declaration": "WORD NtUserSetWindowWord("
+    },
+    {
+      "line": 4817,
+      "declaration": "HHOOK NtUserSetWindowsHookAW("
+    },
+    {
+      "line": 4833,
+      "declaration": "BOOL NtUserShowCaret("
+    },
+    {
+      "line": 4849,
+      "declaration": "BOOL NtUserShowScrollBar("
+    },
+    {
+      "line": 4874,
+      "declaration": "BOOL NtUserShowWindowAsync("
+    },
+    {
+      "line": 4899,
+      "declaration": "BOOL NtUserShowWindow("
+    },
+    {
+      "line": 4936,
+      "declaration": "BOOL NtUserTrackMouseEvent("
+    },
+    {
+      "line": 4970,
+      "declaration": "BOOL NtUserTrackPopupMenuEx("
+    },
+    {
+      "line": 5022,
+      "declaration": "BOOL NtUserTranslateMessage("
+    },
+    {
+      "line": 5049,
+      "declaration": "BOOL NtUserUnhookWindowsHookEx("
+    },
+    {
+      "line": 5065,
+      "declaration": "BOOL NtUserUnregisterHotKey("
+    },
+    {
+      "line": 5083,
+      "declaration": "BOOL NtUserValidateRect("
+    },
+    {
+      "line": 5117,
+      "declaration": "DWORD NtUserWaitForInputIdle("
+    },
+    {
+      "line": 5133,
+      "declaration": "HWND NtUserWindowFromPoint("
+    },
+    {
+      "line": 5146,
+      "declaration": "HDC NtUserBeginPaint("
+    },
+    {
+      "line": 5177,
+      "declaration": "BOOL NtUserCreateCaret("
+    },
+    {
+      "line": 5202,
+      "declaration": "BOOL NtUserEndPaint("
+    },
+    {
+      "line": 5230,
+      "declaration": "int NtUserExcludeUpdateRgn("
+    },
+    {
+      "line": 5248,
+      "declaration": "HDC NtUserGetDC("
+    },
+    {
+      "line": 5264,
+      "declaration": "HDC NtUserGetDCEx("
+    },
+    {
+      "line": 5284,
+      "declaration": "HDC NtUserGetWindowDC("
+    },
+    {
+      "line": 5299,
+      "declaration": "int NtUserGetUpdateRgn("
+    },
+    {
+      "line": 5322,
+      "declaration": "BOOL NtUserRedrawWindow("
+    },
+    {
+      "line": 5362,
+      "declaration": "BOOL NtUserInvalidateRgn("
+    },
+    {
+      "line": 5385,
+      "declaration": "int NtUserSetWindowRgn("
+    },
+    {
+      "line": 5408,
+      "declaration": "BOOL NtUserScrollDC("
+    },
+    {
+      "line": 5455,
+      "declaration": "int NtUserInternalGetWindowText("
+    },
+    {
+      "line": 5490,
+      "declaration": "int NtUserToUnicodeEx("
+    },
+    {
+      "line": 5528,
+      "declaration": "BOOL NtUserYieldTask("
+    },
+    {
+      "line": 5565,
+      "declaration": "BOOL NtUserWaitMessage("
+    },
+    {
+      "line": 5576,
+      "declaration": "UINT NtUserLockWindowStation("
+    },
+    {
+      "line": 5596,
+      "declaration": "BOOL NtUserUnlockWindowStation("
+    },
+    {
+      "line": 5616,
+      "declaration": "UINT NtUserSetWindowStationUser("
+    },
+    {
+      "line": 5649,
+      "declaration": "BOOL NtUserSetLogonNotifyWindow("
+    },
+    {
+      "line": 5676,
+      "declaration": "BOOL NtUserSetSystemCursor("
+    },
+    {
+      "line": 5694,
+      "declaration": "HCURSOR NtUserGetCursorInfo("
+    },
+    {
+      "line": 5727,
+      "declaration": "BOOL NtUserSetCursorContents("
+    },
+    {
+      "line": 5745,
+      "declaration": "HCURSOR NtUserFindExistingCursorIcon("
+    },
+    {
+      "line": 5800,
+      "declaration": "BOOL NtUserSetCursorIconData("
+    },
+    {
+      "line": 5845,
+      "declaration": "BOOL NtUserWOWCleanup("
+    },
+    {
+      "line": 5863,
+      "declaration": "BOOL NtUserGetMenuItemRect("
+    },
+    {
+      "line": 5908,
+      "declaration": "int NtUserMenuItemFromPoint("
+    },
+    {
+      "line": 5940,
+      "declaration": "BOOL NtUserGetCaretPos("
+    },
+    {
+      "line": 5967,
+      "declaration": "BOOL NtUserDefSetText("
+    },
+    {
+      "line": 6006,
+      "declaration": "NTSTATUS NtUserQueryInformationThread("
+    },
+    {
+      "line": 6050,
+      "declaration": "NTSTATUS NtUserSetInformationThread("
+    },
+    {
+      "line": 6076,
+      "declaration": "BOOL NtUserNotifyProcessCreate("
+    },
+    {
+      "line": 6096,
+      "declaration": "NTSTATUS NtUserSoundSentry("
+    },
+    {
+      "line": 6108,
+      "declaration": "NTSTATUS NtUserTestForInteractiveUser("
+    },
+    {
+      "line": 6129,
+      "declaration": "BOOL NtUserSetConsoleReserveKeys("
+    },
+    {
+      "line": 6148,
+      "declaration": "DWORD NtUserGetUserStartupInfoFlags("
+    },
+    {
+      "line": 6159,
+      "declaration": "VOID NtUserSetUserStartupInfoFlags("
+    },
+    {
+      "line": 6170,
+      "declaration": "BOOL NtUserSetWindowFNID("
+    },
+    {
+      "line": 6190,
+      "declaration": "VOID NtUserAlterWindowStyle("
+    },
+    {
+      "line": 6203,
+      "declaration": "VOID NtUserSetThreadState("
+    },
+    {
+      "line": 6224,
+      "declaration": "DWORD NtUserGetThreadState("
+    },
+    {
+      "line": 6285,
+      "declaration": "DWORD NtUserGetListboxString("
+    },
+    {
+      "line": 6362,
+      "declaration": "HWND NtUserCreateWindowEx("
+    },
+    {
+      "line": 6487,
+      "declaration": "NTSTATUS NtUserBuildHwndList("
+    },
+    {
+      "line": 6578,
+      "declaration": "NTSTATUS NtUserBuildPropList("
+    },
+    {
+      "line": 6606,
+      "declaration": "NTSTATUS NtUserBuildNameList("
+    },
+    {
+      "line": 6652,
+      "declaration": "HKL NtUserActivateKeyboardLayout("
+    },
+    {
+      "line": 6667,
+      "declaration": "HKL NtUserLoadKeyboardLayoutEx("
+    },
+    {
+      "line": 6714,
+      "declaration": "BOOL NtUserUnloadKeyboardLayout("
+    },
+    {
+      "line": 6727,
+      "declaration": "BOOL NtUserSetSystemMenu("
+    },
+    {
+      "line": 6755,
+      "declaration": "BOOL NtUserDragDetect("
+    },
+    {
+      "line": 6774,
+      "declaration": "UINT NtUserSetSystemTimer("
+    },
+    {
+      "line": 6798,
+      "declaration": "BOOL NtUserQuerySendMessage("
+    },
+    {
+      "line": 6819,
+      "declaration": "VOID NtUserkeybd_event("
+    },
+    {
+      "line": 6837,
+      "declaration": "VOID NtUsermouse_event("
+    },
+    {
+      "line": 6857,
+      "declaration": "BOOL NtUserImpersonateDdeClientWindow("
+    },
+    {
+      "line": 6887,
+      "declaration": "DWORD NtUserGetCPD("
+    },
+    {
+      "line": 6910,
+      "declaration": "int NtUserCopyAcceleratorTable("
+    },
+    {
+      "line": 6950,
+      "declaration": "HWND NtUserFindWindowEx("
+    },
+    {
+      "line": 7005,
+      "declaration": "BOOL NtUserGetClassInfo("
+    },
+    {
+      "line": 7053,
+      "declaration": "int NtUserGetClassName("
+    },
+    {
+      "line": 7091,
+      "declaration": "int NtUserGetClipboardFormatName("
+    },
+    {
+      "line": 7120,
+      "declaration": "int NtUserGetKeyNameText("
+    },
+    {
+      "line": 7149,
+      "declaration": "BOOL NtUserGetKeyboardLayoutName("
+    },
+    {
+      "line": 7176,
+      "declaration": "UINT NtUserGetKeyboardLayoutList("
+    },
+    {
+      "line": 7204,
+      "declaration": "NTSTATUS NtUserGetStats("
+    },
+    {
+      "line": 7222,
+      "declaration": "UINT NtUserMapVirtualKeyEx("
+    },
+    {
+      "line": 7252,
+      "declaration": "ATOM NtUserRegisterClassExWOW("
+    },
+    {
+      "line": 7318,
+      "declaration": "UINT NtUserRegisterClipboardFormat("
+    },
+    {
+      "line": 7348,
+      "declaration": "UINT NtUserRegisterWindowMessage("
+    },
+    {
+      "line": 7379,
+      "declaration": "HANDLE NtUserRemoveProp("
+    },
+    {
+      "line": 7397,
+      "declaration": "BOOL NtUserSetProp("
+    },
+    {
+      "line": 7420,
+      "declaration": "BOOL NtUserUnregisterClass("
+    },
+    {
+      "line": 7460,
+      "declaration": "SHORT NtUserVkKeyScanEx("
+    },
+    {
+      "line": 7489,
+      "declaration": "NTSTATUS NtUserEnumDisplayDevices("
+    },
+    {
+      "line": 7568,
+      "declaration": "BOOL NtUserCallMsgFilter("
+    },
+    {
+      "line": 7595,
+      "declaration": "int NtUserDrawMenuBarTemp("
+    },
+    {
+      "line": 7641,
+      "declaration": "BOOL NtUserDrawCaptionTemp("
+    },
+    {
+      "line": 7713,
+      "declaration": "BOOL NtUserGetKeyboardState("
+    },
+    {
+      "line": 7744,
+      "declaration": "SHORT NtUserGetKeyState("
+    },
+    {
+      "line": 7793,
+      "declaration": "HANDLE NtUserQueryWindow("
+    },
+    {
+      "line": 7863,
+      "declaration": "BOOL NtUserSBGetParms("
+    },
+    {
+      "line": 7902,
+      "declaration": "VOID NtUserPlayEventSound("
+    },
+    {
+      "line": 7929,
+      "declaration": "BOOL NtUserBitBltSysBmp("
+    },
+    {
+      "line": 7955,
+      "declaration": "HPALETTE NtUserSelectPalette("
+    },
+    {
+      "line": 7971,
+      "declaration": "MESSAGECALL(DWORD)"
+    },
+    {
+      "line": 7987,
+      "declaration": "MESSAGECALL(OPTOUTLPDWORDOPTOUTLPDWORD)"
+    },
+    {
+      "line": 8025,
+      "declaration": "MESSAGECALL(INOUTNEXTMENU)"
+    },
+    {
+      "line": 8061,
+      "declaration": "MESSAGECALL(DWORDOPTINLPMSG)"
+    },
+    {
+      "line": 8097,
+      "declaration": "MESSAGECALL(COPYGLOBALDATA)"
+    },
+    {
+      "line": 8133,
+      "declaration": "MESSAGECALL(COPYDATA)"
+    },
+    {
+      "line": 8175,
+      "declaration": "MESSAGECALL(SENTDDEMSG)"
+    },
+    {
+      "line": 8220,
+      "declaration": "MESSAGECALL(DDEINIT)"
+    },
+    {
+      "line": 8303,
+      "declaration": "MESSAGECALL(INPAINTCLIPBRD)"
+    },
+    {
+      "line": 8340,
+      "declaration": "MESSAGECALL(INSIZECLIPBRD)"
+    },
+    {
+      "line": 8381,
+      "declaration": "MESSAGECALL(FULLSCREEN)"
+    },
+    {
+      "line": 8413,
+      "declaration": "MESSAGECALL(INOUTDRAG)"
+    },
+    {
+      "line": 8449,
+      "declaration": "MESSAGECALL(GETTEXTLENGTHS)"
+    },
+    {
+      "line": 8472,
+      "declaration": "MESSAGECALL(INLPCREATESTRUCT)"
+    },
+    {
+      "line": 8528,
+      "declaration": "LONG NtUserfnINLPMDICREATESTRUCT("
+    },
+    {
+      "line": 8597,
+      "declaration": "MESSAGECALL(INOUTLPSCROLLINFO)"
+    },
+    {
+      "line": 8633,
+      "declaration": "MESSAGECALL(INOUTLPPOINT5)"
+    },
+    {
+      "line": 8669,
+      "declaration": "MESSAGECALL(INSTRING)"
+    },
+    {
+      "line": 8728,
+      "declaration": "MESSAGECALL(INSTRINGNULL)"
+    },
+    {
+      "line": 8773,
+      "declaration": "MESSAGECALL(INDEVICECHANGE)"
+    },
+    {
+      "line": 8814,
+      "declaration": "MESSAGECALL(INOUTNCCALCSIZE)"
+    },
+    {
+      "line": 8870,
+      "declaration": "MESSAGECALL(INOUTSTYLECHANGE)"
+    },
+    {
+      "line": 8906,
+      "declaration": "MESSAGECALL(INOUTLPRECT)"
+    },
+    {
+      "line": 8942,
+      "declaration": "MESSAGECALL(OUTLPSCROLLINFO)"
+    },
+    {
+      "line": 8976,
+      "declaration": "MESSAGECALL(OUTLPRECT)"
+    },
+    {
+      "line": 9010,
+      "declaration": "MESSAGECALL(INLPCOMPAREITEMSTRUCT)"
+    },
+    {
+      "line": 9043,
+      "declaration": "MESSAGECALL(INLPDELETEITEMSTRUCT)"
+    },
+    {
+      "line": 9076,
+      "declaration": "MESSAGECALL(INLPHLPSTRUCT)"
+    },
+    {
+      "line": 9113,
+      "declaration": "MESSAGECALL(INLPHELPINFOSTRUCT)"
+    },
+    {
+      "line": 9150,
+      "declaration": "MESSAGECALL(INLPDRAWITEMSTRUCT)"
+    },
+    {
+      "line": 9183,
+      "declaration": "MESSAGECALL(INOUTLPMEASUREITEMSTRUCT)"
+    },
+    {
+      "line": 9219,
+      "declaration": "MESSAGECALL(OUTSTRING)"
+    },
+    {
+      "line": 9262,
+      "declaration": "MESSAGECALL(OUTDWORDINDWORD)"
+    },
+    {
+      "line": 9289,
+      "declaration": "MESSAGECALL(INCNTOUTSTRING)"
+    },
+    {
+      "line": 9336,
+      "declaration": "MESSAGECALL(INCNTOUTSTRINGNULL)"
+    },
+    {
+      "line": 9379,
+      "declaration": "MESSAGECALL(POUTLPINT)"
+    },
+    {
+      "line": 9419,
+      "declaration": "MESSAGECALL(POPTINLPUINT)"
+    },
+    {
+      "line": 9460,
+      "declaration": "MESSAGECALL(INOUTLPWINDOWPOS)"
+    },
+    {
+      "line": 9496,
+      "declaration": "MESSAGECALL(INLPWINDOWPOS)"
+    },
+    {
+      "line": 9533,
+      "declaration": "DWORD NtUserfnHkINLPCBTCREATESTRUCT("
+    },
+    {
+      "line": 9596,
+      "declaration": "DWORD NtUserfnHkINLPRECT("
+    },
+    {
+      "line": 9628,
+      "declaration": "DWORD NtUserfnHkINDWORD("
+    },
+    {
+      "line": 9649,
+      "declaration": "DWORD NtUserfnHkINLPMSG("
+    },
+    {
+      "line": 9681,
+      "declaration": "DWORD NtUserfnHkINLPDEBUGHOOKSTRUCT("
+    },
+    {
+      "line": 9713,
+      "declaration": "DWORD NtUserfnHkOPTINLPEVENTMSG("
+    },
+    {
+      "line": 9756,
+      "declaration": "DWORD NtUserfnHkINLPMOUSEHOOKSTRUCT("
+    },
+    {
+      "line": 9788,
+      "declaration": "DWORD NtUserfnHkINLPCBTACTIVATESTRUCT("
+    },
+    {
+      "line": 9830,
+      "declaration": "BOOL NtUserECQueryInputLangChange("
+    },
+    {
+      "line": 9922,
+      "declaration": "NTSTATUS NtUserGetMediaChangeEvents("
+    },
+    {
+      "line": 9995,
+      "declaration": "HIMC NtUserCreateInputContext("
+    },
+    {
+      "line": 10014,
+      "declaration": "BOOL NtUserDestroyInputContext("
+    },
+    {
+      "line": 10030,
+      "declaration": "HIMC NtUserAssociateInputContext("
+    },
+    {
+      "line": 10047,
+      "declaration": "BOOL NtUserUpdateInputContext("
+    },
+    {
+      "line": 10065,
+      "declaration": "DWORD NtUserQueryInputContext("
+    },
+    {
+      "line": 10091,
+      "declaration": "NTSTATUS NtUserBuildHimcList("
+    },
+    {
+      "line": 10135,
+      "declaration": "BOOL NtUserGetImeInfoEx("
+    },
+    {
+      "line": 10158,
+      "declaration": "BOOL NtUserSetImeInfoEx("
+    },
+    {
+      "line": 10181,
+      "declaration": "BOOL NtUserGetImeHotKey("
+    },
+    {
+      "line": 10203,
+      "declaration": "BOOL NtUserSetImeHotKey("
+    },
+    {
+      "line": 10216,
+      "declaration": "BOOL NtUserSetImeOwnerWindow("
+    },
+    {
+      "line": 10274,
+      "declaration": "VOID NtUserSetThreadLayoutHandles("
+    }
+  ],
+  "limits": [
+    "Definition index is not an equivalence proof.",
+    "No fresh build/runtime.",
+    "Partial deletions planned only."
+  ]
+}

@@ -28,8 +28,16 @@
 
 #line 363
 #define NWCH 2
+/**************************************************************************\
+* RtlMBMessageCharToWCS
+*
+* Converts a Multibyte character to a Wide character; in place
+* Returns the number of characters converted or zero if failure
+*
+* 11-Feb-1992  JohnC    Created
+* 13-Jan-1993  IanJa    Translate 2 characters (Publisher posts these!)
+\**************************************************************************/
 #line 441
-/* DIVERGENCE(OPENNT-HOST-119): restore the original message converter. */
 BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 {
     DWORD dwUni;
@@ -114,7 +122,14 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
     return TRUE;
 }
 
-/* DIVERGENCE(OPENNT-HOST-118): recover unchanged companion ANSI constructor. */
+/**************************************************************************\
+* RtlInitLargeAnsiString
+*
+* Captures a large ANSI string in the same manner as
+* RtlInitAnsiString.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
 #line 559
 VOID RtlInitLargeAnsiString(
     PLARGE_ANSI_STRING plstr,
@@ -135,8 +150,14 @@ VOID RtlInitLargeAnsiString(
     }
 }
 
-/* DIVERGENCE(OPENNT-HOST-105): restore this complete original leaf from
- * the same source unit; the previously selected conversion subset omitted it. */
+/**************************************************************************\
+* RtlInitLargeUnicodeString
+*
+* Captures a large unicode string in the same manner as
+* RtlInitUnicodeString.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
 #line 587
 VOID RtlInitLargeUnicodeString(
     PLARGE_UNICODE_STRING plstr,

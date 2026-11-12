@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/profile.h",
+  "original_sha256": "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+  "current_sha256": "194f48ae5230f988148da4c75d5ae87b303e6c4967f46e5ca11fac573f928c53",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 246,
+      "original_count": 2,
+      "replacement": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "One non-NTVDM no-op critical-section macro alternative excluded; remaining source exact.",
+  "counter_review": "NTVDM HostEnterProfCritSec/HostLeaveProfCritSec declarations remain original. This header diff neither enables profiling nor establishes that optional profiling functions are linked.",
+  "limits": "Source diff classification only; no new universal compiler-context, line-number or runtime proof."
+}

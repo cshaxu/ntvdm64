@@ -1,0 +1,65 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsmemr.c",
+  "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+  "current_sha256": "aa83a34124d03d20a7979a79f7729a4d3c452ab9f4fb423b0e76ba3e56d37a44",
+  "changes": [
+    {
+      "original_start": 25,
+      "original_count": 0,
+      "current_start": 25,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "#ifdef CPU_40_STYLE",
+        "/* DIVERGENCE MVDM-HOST-DIV-271: retain mapped, bounded CPU40 movement. */",
+        "#include \"mvdm_xms_memory.h\"",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Selected CPU40 xmsMoveMemory uses the declared bounded memory seam; this is a real XMS build member despite directory suffix.",
+      "change_plan": "Retain required declaration; no CPU/backend selection change."
+    },
+    {
+      "original_start": 145,
+      "original_count": 21,
+      "current_start": 150,
+      "current_count": 5,
+      "original": [
+        "    ULONG SoftpcBase;",
+        "    ",
+        "    //",
+        "    // Get the linear address of the beginning of Intel memory",
+        "    //",
+        "    SoftpcBase = (ULONG) GetVDMAddr(0,0);",
+        "    ",
+        "    //",
+        "    // Move the memory",
+        "    //",
+        "    RtlMoveMemory(",
+        "        (PVOID)((ULONG)Destination + SoftpcBase),",
+        "        (PVOID)((ULONG)Source + SoftpcBase),",
+        "        Count",
+        "        );",
+        "",
+        "    // WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment",
+        "    // address. In this case, we have no idea what the segment value is, all we",
+        "    // know is its \"linear address\".",
+        "",
+        "    sas_overwrite_memory((PBYTE)Destination, Count);"
+      ],
+      "current": [
+        "#ifdef CPU_40_STYLE",
+        "    mvdm_xms_move_memory(Destination, Source, Count);",
+        "#else",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#endif"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original XMS policy remains but raw host-pointer copy is replaced with guest-memory access. xmsMoveBlock uses a 12-byte descriptor below SS:BP and forward-copy; xmsMoveMemory must retain overlap-safe SubAlloc relocation. Adapter requests session cancellation on memory failure; that is not itself proof of original AX/BL error delivery or cancellation ordering.",
+      "change_plan": "Retain candidate mapping seam pending full call proof. Verify descriptor boundary/A20 interpretation, count overflow, forward overlap versus relocation memmove, mapping/partial-write failures and cancellation before any subsequent success publication. Use existing memory owner; do not add alternate allocator or retry policy."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "limits": "Exclusion-only is body classification, not renewed configuration-hit proof. No backend activated or internal CPU changes authorized."
+}

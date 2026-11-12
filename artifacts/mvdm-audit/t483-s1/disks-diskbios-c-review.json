@@ -1,0 +1,53 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+  "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+  "current_sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 19,
+      "original_count": 1
+    },
+    {
+      "original_start": 23,
+      "original_count": 6
+    },
+    {
+      "original_start": 109,
+      "original_count": 4
+    },
+    {
+      "original_start": 366,
+      "original_count": 195
+    },
+    {
+      "original_start": 570,
+      "original_count": 1
+    },
+    {
+      "original_start": 599,
+      "original_count": 25
+    },
+    {
+      "original_start": 631,
+      "original_count": 1
+    },
+    {
+      "original_start": 643,
+      "original_count": 15
+    },
+    {
+      "original_start": 712,
+      "original_count": 5
+    },
+    {
+      "original_start": 1246,
+      "original_count": 228
+    }
+  ],
+  "initial_review": "Complete original/current difference classification; ten excluded bodies.",
+  "counter_review": "Boundary-aware remaining-source comparison is exact after removing excluded bodies and line/error directives. Original ANSI disk dispatch, BIOS handlers and attach/detach remain unchanged. Excluded WDCTRL_BOP is distinct from retained ordinary disk BIOS.",
+  "limits": "No universal exclusion/build-profile proof or disk runtime acceptance. Trailing EOF #line1195 follows #line1475 without following code; no executable statement affected."
+}

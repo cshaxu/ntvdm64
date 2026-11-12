@@ -1,0 +1,391 @@
+{
+  "path": "src/mvdm-host/dos/dem/demsrch.c",
+  "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+  "current_sha256": "626330bb01b34df705e815d3f7deb00ef85c77d2257743c43a07b160b6612f65",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 22,
+      "original_count": 0,
+      "current_start": 22,
+      "current_count": 1,
+      "classification": "restart-hint-declaration",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 23,
+      "original_count": 0,
+      "current_start": 24,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 59,
+      "original_count": 0,
+      "current_start": 61,
+      "current_count": 4,
+      "classification": "restart-hint-state",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 240,
+      "original_count": 0,
+      "current_start": 246,
+      "current_count": 13,
+      "classification": "dta-acquisition-helper",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 244,
+      "original_count": 0,
+      "current_start": 263,
+      "current_count": 1,
+      "classification": "first-dta-lease",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 246,
+      "original_count": 0,
+      "current_start": 266,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 248,
+      "original_count": 2,
+      "current_start": 269,
+      "current_count": 6,
+      "classification": "first-dta-acquisition",
+      "disposition": "retain-with-boundary"
+    },
+    {
+      "original_start": 251,
+      "original_count": 0,
+      "current_start": 276,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 253,
+      "original_count": 0,
+      "current_start": 279,
+      "current_count": 6,
+      "classification": "first-dta-commit",
+      "disposition": "correct-error-preservation"
+    },
+    {
+      "original_start": 283,
+      "original_count": 12,
+      "current_start": 315,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 296,
+      "original_count": 0,
+      "current_start": 318,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 410,
+      "original_count": 0,
+      "current_start": 433,
+      "current_count": 1,
+      "classification": "next-dta-lease",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 411,
+      "original_count": 2,
+      "current_start": 435,
+      "current_count": 6,
+      "classification": "next-dta-acquisition",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 414,
+      "original_count": 0,
+      "current_start": 442,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 416,
+      "original_count": 0,
+      "current_start": 445,
+      "current_count": 4,
+      "classification": "next-dta-commit",
+      "disposition": "retain-with-boundary"
+    },
+    {
+      "original_start": 448,
+      "original_count": 4,
+      "current_start": 481,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 453,
+      "original_count": 0,
+      "current_start": 484,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 521,
+      "original_count": 4,
+      "current_start": 553,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 526,
+      "original_count": 0,
+      "current_start": 556,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 622,
+      "original_count": 4,
+      "current_start": 653,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 627,
+      "original_count": 0,
+      "current_start": 656,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1120,
+      "original_count": 9,
+      "current_start": 1150,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1130,
+      "original_count": 0,
+      "current_start": 1153,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1156,
+      "original_count": 4,
+      "current_start": 1180,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1161,
+      "original_count": 0,
+      "current_start": 1183,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1199,
+      "original_count": 0,
+      "current_start": 1222,
+      "current_count": 12,
+      "classification": "reclamation-status",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1200,
+      "original_count": 0,
+      "current_start": 1235,
+      "current_count": 2,
+      "classification": "capture-successor",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1327,
+      "original_count": 0,
+      "current_start": 1364,
+      "current_count": 9,
+      "classification": "missing-anchor-restart",
+      "disposition": "retain-with-accepted-boundary"
+    },
+    {
+      "original_start": 1328,
+      "original_count": 4,
+      "current_start": 1374,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1333,
+      "original_count": 0,
+      "current_start": 1377,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1444,
+      "original_count": 4,
+      "current_start": 1489,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1449,
+      "original_count": 0,
+      "current_start": 1492,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1548,
+      "original_count": 4,
+      "current_start": 1592,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1553,
+      "original_count": 0,
+      "current_start": 1595,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2067,
+      "original_count": 4,
+      "current_start": 2110,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2072,
+      "original_count": 0,
+      "current_start": 2113,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2159,
+      "original_count": 4,
+      "current_start": 2201,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2164,
+      "original_count": 0,
+      "current_start": 2204,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2198,
+      "original_count": 0,
+      "current_start": 2239,
+      "current_count": 1,
+      "classification": "heartbeat-pdb-local",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2199,
+      "original_count": 0,
+      "current_start": 2241,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2205,
+      "original_count": 1,
+      "current_start": 2248,
+      "current_count": 4,
+      "classification": "heartbeat-pdb-read",
+      "disposition": "retain-with-boundary"
+    },
+    {
+      "original_start": 2335,
+      "original_count": 0,
+      "current_start": 2381,
+      "current_count": 1,
+      "classification": "entry-pdb-local",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2336,
+      "original_count": 1,
+      "current_start": 2383,
+      "current_count": 3,
+      "classification": "entry-pdb-read",
+      "disposition": "correct-failure-attribution"
+    },
+    {
+      "original_start": 2342,
+      "original_count": 0,
+      "current_start": 2391,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2347,
+      "original_count": 1,
+      "current_start": 2397,
+      "current_count": 1,
+      "classification": "entry-pdb-assignment",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 2384,
+      "original_count": 0,
+      "current_start": 2434,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    }
+  ],
+  "initial_review": "All differences classified in source order: scoped DTA/current-PDB access and bounded directory restart; original termination hook/list cleanup unchanged.",
+  "counter_review": "Keep existing accepted successor recovery without claiming complete indexed restart. Error propagation at FindFirst cleanup and AddFFindEntry mapping failure requires correction. PSP-only ownership remains a known boundary.",
+  "dependencies": [
+    "src/ntvdm-exe/session/dem_restart_hint.h",
+    "src/ntvdm-exe/monitor/source/vdm_control.c",
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c"
+  ],
+  "historical_evidence": "docs/etc/evidence/m0-t478-s5-directory-restart.md pins pre-format current hash cb60c06af4075c049d66639ee42c6ea9c57d7019c5651f3f3f97fc8bb5890241 and records 115 assertions plus guest pressure/FCB checks. Inspected source test/mvdm-host/dem_directory_reset_test.c; no new run claimed.",
+  "format_restoration": "Restore original FCB pointer-comparison layout at original lines 606-607; same line count, nonwhitespace bytes and directives. Not registered as retained diff.",
+  "limits": [
+    "No arbitrary mutation/index reuse or indexed speed guarantee.",
+    "Original PSP-only search list and VDD termination association unchanged.",
+    "Snapshot writeback reentry/failure recovery not fully proved.",
+    "No substantive product edits or new test/build/release."
+  ]
+}

@@ -1175,7 +1175,6 @@ VOID WU32ICBStoreHandle(WORD wFormat, HMEM16 hMem16)
             }
         }
     }
-
 #line 1071
 }
 

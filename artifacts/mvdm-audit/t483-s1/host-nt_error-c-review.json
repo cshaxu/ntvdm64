@@ -1,0 +1,219 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+  "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+  "current_sha256": "2ec6ec34a48bc5772cd7c6b8a0dd1c594cc2e979934cca6e63aeb96cca96e521",
+  "review_complete": true,
+  "register_entries": 9,
+  "changes": [
+    {
+      "original_start": 86,
+      "original_count": 1,
+      "current_start": 86,
+      "current_count": 1,
+      "original": [
+        "DWORD ErrorDialogBoxThread(VOID *pv);"
+      ],
+      "current": [
+        "DWORD WINAPI ErrorDialogBoxThread(VOID *pv);"
+      ]
+    },
+    {
+      "original_start": 88,
+      "original_count": 1,
+      "current_start": 88,
+      "current_count": 5,
+      "original": [
+        "LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam);"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-066): preserve the worker/dialog sequence and",
+        " * original x86 local carriers, but spell public Win32 callback signatures",
+        " * exactly. The SoftPC BOOL macro does not match WNDENUMPROC. */",
+        "INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,",
+        "                                   LPARAM lParam);"
+      ]
+    },
+    {
+      "original_start": 494,
+      "original_count": 1,
+      "current_start": 503,
+      "current_count": 3,
+      "original": [
+        "BOOL CALLBACK GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)"
+      ],
+      "current": [
+        "/* The SoftPC host headers redefine BOOL as UINT.  WNDENUMPROC, however,",
+        " * retains the public Win32 signed BOOL return representation. */",
+        "int __stdcall GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)"
+      ]
+    },
+    {
+      "original_start": 545,
+      "original_count": 1,
+      "current_start": 557,
+      "current_count": 1,
+      "original": [
+        "        EnumWindows((WNDENUMPROC)GetThreadTopLevelWindow,(LPARAM)&hWndApp);"
+      ],
+      "current": [
+        "        EnumWindows(GetThreadTopLevelWindow, (LPARAM)&hWndApp);"
+      ]
+    },
+    {
+      "original_start": 648,
+      "original_count": 1,
+      "current_start": 660,
+      "current_count": 2,
+      "original": [
+        "DWORD ErrorDialogBoxThread(VOID *pv)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-SOFTPC-PATCH-003): see the source-shaped declaration above. */",
+        "DWORD WINAPI ErrorDialogBoxThread(VOID *pv)"
+      ]
+    },
+    {
+      "original_start": 686,
+      "original_count": 1,
+      "current_start": 700,
+      "current_count": 1,
+      "original": [
+        "                           (DLGPROC) ErrorDialogEvents,"
+      ],
+      "current": [
+        "                           ErrorDialogEvents,"
+      ]
+    },
+    {
+      "original_start": 698,
+      "original_count": 1,
+      "current_start": 712,
+      "current_count": 1,
+      "original": [
+        "       pedgi->dwReply = i;"
+      ],
+      "current": [
+        "       pedgi->dwReply = (DWORD)i;"
+      ]
+    },
+    {
+      "original_start": 709,
+      "original_count": 1,
+      "current_start": 723,
+      "current_count": 2,
+      "original": [
+        "LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam)"
+      ],
+      "current": [
+        "INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,",
+        "                                   LPARAM lParam)"
+      ]
+    },
+    {
+      "original_start": 715,
+      "original_count": 1,
+      "current_start": 731,
+      "current_count": 1,
+      "original": [
+        "    LONG  l;"
+      ],
+      "current": [
+        "    LRESULT l;"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 105,
+      "original_count": 1,
+      "current_start": 111,
+      "current_count": 1,
+      "original": [
+        "#undef host_error_ext"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 113,
+      "original_count": 1,
+      "current_start": 121,
+      "current_count": 1,
+      "original": [
+        "#undef host_error"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 149,
+      "original_count": 2,
+      "current_start": 159,
+      "current_count": 1,
+      "original": [
+        "    sprintf(Msg,\"NTVDM:ErrNo %#x, %s:%d\\n\", OSErrno, Filename, Lineno);",
+        "    OutputDebugString(Msg);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 195,
+      "original_count": 4,
+      "current_start": 206,
+      "current_count": 1,
+      "original": [
+        "    OutputDebugString(message);",
+        "    if (extra_char) {",
+        "        OutputDebugString(\"\\n\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 615,
+      "original_count": 3,
+      "current_start": 628,
+      "current_count": 1,
+      "original": [
+        "        printf(\"CreateThread(ErrorDialogBoxThread) GLE=%d\\n\", GetLastError());",
+        "        printf(\"NTVDM:<%s>\\n<%s>\\n\", edgi.Title, edgi.message );",
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1158,
+      "original_count": 11,
+      "current_start": 1175,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " *  HostDebugBreak",
+        " *",
+        " *  Raises a breakpoint by creating an access violation",
+        " *  to give us a chance to get into a user mode debugger",
+        " *",
+        " */",
+        "void HostDebugBreak(void)",
+        "{",
+        "  DbgBreakPoint();",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Nine callback/type adaptation chunks; six excluded bodies. No added dialog policy or termination state machine.",
+  "counter_review": "CreateThread requires WINAPI start routine; DialogBoxParam expects INT_PTR CALLBACK with UINT/WPARAM/LPARAM; EnumWindows expects signed Win32 BOOL while insignia.h redefines BOOL as UINT. Correct callback declarations allow removing masking casts. SendDlgItemMessage result belongs in LRESULT. Explicit (DWORD)i on assignment adds no conversion beyond original assignment to DWORD; restore that line. These signature fixes do not modernize inherited DWORD HWND and SetWindowLong/DWL_USER pointer storage; do not claim complete x64 readiness.",
+  "evidence": "nt_error.c CreateThread/ErrorDialogBoxThread, DialogBoxParam/ErrorDialogEvents, EnumWindows/GetThreadTopLevelWindow and SendDlgItemMessage; insignia.h:111 BOOL macro; original pedgi->dwReply DWORD destination.",
+  "limits": "Eight retain decisions; one restore-original recommendation; no source modifications."
+}

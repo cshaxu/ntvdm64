@@ -1,0 +1,63 @@
+{
+  "scope": "Fixed host .c/.h census, file-order.csv; current bytes compared to pinned paths. Not whole build or runtime proof.",
+  "total": 1060,
+  "counts": {
+    "different": 561,
+    "identical": 491,
+    "deleted": 8
+  },
+  "ledger_hash_mismatches": [],
+  "pending_file_rows": [],
+  "register_rows": 3042,
+  "decision_counts": {
+    "retain": 1767,
+    "restore-original": 70,
+    "minimize": 35,
+    "pending-evidence": 429,
+    "delete": 120,
+    "correct": 207,
+    "pending": 295,
+    "simplify": 82,
+    "restore": 2,
+    "restore original": 4,
+    "pending evidence": 31
+  },
+  "implementation_status_counts": {
+    "not-required": 1737,
+    "not-implemented": 1197,
+    "pending-evidence": 61,
+    "not-required-for-return-type; arity-investigation-pending": 1,
+    "not-required-for-prototype": 1,
+    "not-required-for-guard": 1,
+    "not-required-for-header": 3,
+    "not-required-for-signature; removal-pending-package-evidence": 1,
+    "unresolved": 6,
+    "not-required; listed-boundaries-unverified": 23,
+    "implemented-validation-pending": 11
+  },
+  "missing_execution_fields": [],
+  "remaining": [
+    "Recompute lexical blocks with established counting method",
+    "Reconcile legacy exception coverage and mixed decision semantics",
+    "Categorized next-action report; no functional repair claim"
+  ],
+  "normalized_decision_counts": {
+    "retain": 1767,
+    "restore-original": 76,
+    "delete": 120,
+    "minimize": 117,
+    "correct": 207,
+    "pending-evidence": 755
+  },
+  "classification_note": "Counts group existing synonymous labels only; do not certify resolution of mixed findings or legacy coverage.",
+  "context_fields_completed": [
+    "src/non-mvdm/base/ntos/rtl/environ.c",
+    "src/non-mvdm/base/ntos/rtl/error.c",
+    "src/non-mvdm/base/win32/server/basesrv.h",
+    "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+    "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/public/internal/base/inc/vdm.h",
+    "src/non-mvdm/public/internal/base/inc/vdmapi.h"
+  ]
+}

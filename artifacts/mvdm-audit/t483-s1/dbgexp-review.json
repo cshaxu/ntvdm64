@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/inc/dbgexp.h",
+  "original_sha256": "a915256a7a3796424ba8eb7ea2a257864a3986633752c870fe34762f3737ce95",
+  "current_sha256": "b523619de8441c1f51361e848c4bbf5a76e0bec6464b28a11c8241788f328a47",
+  "review_complete": true,
+  "register_entries": 3,
+  "initial_review": "Three cdecl export declarations required by mixed worker/WOW32 defaults.",
+  "counter_review": "No whole-file convention override or stack-incompatible alias; x64 convention unification does not remove x86 requirement.",
+  "annotation": "Leading divergence explanation documents actual ABI change; not an independent functional difference.",
+  "runtime_validation": "No new run; source unchanged."
+}

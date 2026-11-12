@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_reset.h",
+  "original_sha256": "91e93365fc76a16fea422918dc0bfb32499f27cd9c84998268a9368eb367c7f3",
+  "current_sha256": "acdf0c2329ec0b2f63387ead6c988d459765b34a23212570294565b2ee394ef4",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 5,
+      "original_count": 1,
+      "current_start": 7,
+      "current_count": 1,
+      "original": [
+        "extern\tVOID InitDetect(VOID);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef X86GFX"
+    }
+  ],
+  "initial_review": "Only X86GFX InitDetect declaration excluded; other reset/startup declarations unchanged.",
+  "counter_review": "Full comparison confirms original conditional frame retained and all other source lines exact after omitting #line. No new defaults or initialization semantics introduced.",
+  "limits": "Content comparison only, not universal build context or runtime certification."
+}

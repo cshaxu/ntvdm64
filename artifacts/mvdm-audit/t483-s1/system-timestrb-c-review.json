@@ -1,0 +1,105 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+  "original_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7",
+  "current_sha256": "8d3472bba03117e0378be943bdcaaf32403e418e828bc59737c43eb1608d1f39",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 32,
+      "original_count": 6,
+      "current_start": 33,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_SUPPORT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 57,
+      "original_count": 2,
+      "current_start": 60,
+      "current_count": 1,
+      "original": [
+        "#include <stdio.h>",
+        "#include \"hunter.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 78,
+      "original_count": 1,
+      "current_start": 82,
+      "current_count": 1,
+      "original": [
+        "\ttime_tick();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 82,
+      "original_count": 1,
+      "current_start": 88,
+      "current_count": 1,
+      "original": [
+        "        do_hunter();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 87,
+      "original_count": 10,
+      "current_start": 96,
+      "current_count": 1,
+      "original": [
+        "#ifndef\tREAL_TIMER",
+        "\t/* Update the real time clock */",
+        "\trtc_tick();",
+        "#endif\t/* REAL_TIMER */",
+        "",
+        "        dispatch_tic_event();",
+        "",
+        "#if defined(CPU_40_STYLE)",
+        "\tica_check_stale_iret_hook();",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 117,
+      "original_count": 1,
+      "current_start": 120,
+      "current_count": 1,
+      "original": [
+        "\tdump_tick();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Six excluded bodies; retained time_strobe exact.",
+  "counter_review": "Original video-enable transition refresh and VIDEO_COUNT_LIMIT delayed screen clearing preserved. Empty dummy_alarm is original. No newly added polling loop, refresh cadence or host timer dispatch.",
+  "limits": "Full source-difference classification only; no new runtime result, universal build-context proof or complete diagnostic-line certification."
+}

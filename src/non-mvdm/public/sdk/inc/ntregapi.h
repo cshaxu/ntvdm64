@@ -1,6 +1,24 @@
-/* Copyright Microsoft Corporation. Original ntregapi.h true subset.
- * DIVERGENCE(OPENNT-HOST-056): only the native value-query ABI reached by
- * the admitted USER compatibility reader, no registry service implementation. */
+/*++ BUILD Version: 0009    // Increment this if a change has global effects
+
+Copyright (c) 1991-1999  Microsoft Corporation
+
+Module Name:
+
+    ntregapi.h
+
+Abstract:
+
+    This module contains the registration apis and related structures,
+    in the forms for use with the Nt api set (as opposed to the win api set).
+
+Author:
+
+    Bryan M. Willman (bryanwi) 26-Aug-1991
+
+Revision History:
+
+--*/
+
 #line 22
 #ifndef _NTREGAPI_
 #define _NTREGAPI_

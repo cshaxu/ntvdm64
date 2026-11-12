@@ -1,0 +1,93 @@
+[
+  {
+    "path": "src/mvdm-host/inc/vdmtb.inc",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\inc\\vdmtb.inc",
+    "before_sha256": "a8eca8516a5d445f6db42eff65773d710f9e2320fff52889e6f0c4b2ffdfa665",
+    "after_sha256": "ebbd61c06b36da2c64b15ae7647aff22f9f0090be8c4676cbf4434548e154ace",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/VDMTIB.INC",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\inc\\VDMTIB.INC",
+    "before_sha256": "dde3f2a15509f7dd6083b64cdeaad4002fa35442baaa884517cdee2676db0ad6",
+    "after_sha256": "0ad51b2faa863f5885f9b1326b24f8038d3bee01c04af11b059b4ca98c254661",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/VDMTIB.INC.old",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VDMTIB.INC.old",
+    "before_sha256": "64ad09e2e517abe4afff9d3e0e2c98305b3ad90b27a13a599a16632f7adffb9d",
+    "after_sha256": "675ceec6e626a6c05a1bae513d3712a1c216bffbe483fec6b86e06b17e8f11d7",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/vint.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vint.h",
+    "before_sha256": "e88cc5f8624a4a899095a4f1794c697754c71aeb7e480d20d51fd6a976d612d1",
+    "after_sha256": "e88cc5f8624a4a899095a4f1794c697754c71aeb7e480d20d51fd6a976d612d1",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/VINT.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VINT.INC",
+    "before_sha256": "5c02ff27488fc2535f714209cd8f15daa2fd49db64d931844c23a6a2bb9cb580",
+    "after_sha256": "2ba06b3eea9a8ec96236d96ff7d996274b3feb5ac456524d6a9e8bd6a44541c7",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/vrdefld.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrdefld.h",
+    "before_sha256": "e15089bf59f6f69fb39c2bc35d79d40da4b5ad2c9ed9401e955607ff5692b9ba",
+    "after_sha256": "e15089bf59f6f69fb39c2bc35d79d40da4b5ad2c9ed9401e955607ff5692b9ba",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/VRDEFLD.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VRDEFLD.INC",
+    "before_sha256": "ee8d916043969d6e7f10081cd7bff0ea7555747c6041996ebaafcb62039a9b93",
+    "after_sha256": "8a1a7d7bd9c7c14739a469da3ea25ade85da77354ead01886780963119edb843",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/vrdlctab.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrdlctab.h",
+    "before_sha256": "bb57645d83b7285f14632914ee44d64f34b3c129b18fc59505b98c141a9cba2d",
+    "after_sha256": "bb57645d83b7285f14632914ee44d64f34b3c129b18fc59505b98c141a9cba2d",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/VRDLCTAB.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VRDLCTAB.INC",
+    "before_sha256": "428b5c8c801e325a2c14693c4f7964dd60f3128cb61f303a5fba4d2c36547b82",
+    "after_sha256": "9c0c853347ff8cffc7d729eee61ae856f26bc21de466ca7237dbf5d825e12c09",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/vrinit.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrinit.h",
+    "before_sha256": "13fa0aa17ea85c2e9d0a48ffa72626c46cc1c53decad3dc4edcbdd1fa7034939",
+    "after_sha256": "13fa0aa17ea85c2e9d0a48ffa72626c46cc1c53decad3dc4edcbdd1fa7034939",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/vrmisc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrmisc.h",
+    "before_sha256": "6dc036cec6c090484a85b21bd9fb51a7ebd263ce4186150f8d7ea1ba70598475",
+    "after_sha256": "6dc036cec6c090484a85b21bd9fb51a7ebd263ce4186150f8d7ea1ba70598475",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/vrmslot.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrmslot.h",
+    "before_sha256": "e3d8c1536f579ffe5751a2567ad24a662a76f7926a4ded696ac3c990fdcfc661",
+    "after_sha256": "e3d8c1536f579ffe5751a2567ad24a662a76f7926a4ded696ac3c990fdcfc661",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/vrnetapi.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrnetapi.h",
+    "before_sha256": "fc1888ed1f18406fcb42c683dc414b22c08815e749576db9fa86afc60b416445",
+    "after_sha256": "fc1888ed1f18406fcb42c683dc414b22c08815e749576db9fa86afc60b416445",
+    "newline_restored": false
+  }
+]

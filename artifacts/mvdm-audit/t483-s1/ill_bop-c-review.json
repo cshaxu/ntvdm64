@@ -1,0 +1,38 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+  "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+  "current_sha256": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 18,
+      "original_end": 18,
+      "current_error_line": 19
+    },
+    {
+      "original_start": 22,
+      "original_end": 27,
+      "current_error_line": 25
+    },
+    {
+      "original_start": 50,
+      "original_end": 55,
+      "current_error_line": 54
+    },
+    {
+      "original_start": 59,
+      "original_end": 59,
+      "current_error_line": 61
+    },
+    {
+      "original_start": 65,
+      "original_end": 152,
+      "current_error_line": 69
+    }
+  ],
+  "initial_review": "Conditional boundary-aware whole-file comparison: each #error replaces only its corresponding original branch body; all other nonblank text matches.",
+  "counter_review": "Preserved surrounding if/elif/else/endif checked while skipping nested conditions only inside removed bodies. No selected implementation or dispatch expression added or modified.",
+  "limits": "Ignores blank lines and #line directives; not a universal macro reachability proof or completed diagnostic-line audit.",
+  "runtime_validation": "None; no source changes."
+}

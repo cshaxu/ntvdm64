@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+  "original_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+  "current_sha256": "0b2dc7885e54f445f4950e324f9b51def42b0037d5c72b1c589693ca94683e2e",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 22,
+      "original_count": 1
+    },
+    {
+      "original_start": 26,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Two excluded declaration bodies under GEN_DRVR/CDROM and GEN_DRVR. Retained source exact.",
+  "counter_review": "Original init_gen_drivers and gen_driver_io declarations alone are removed; original outer conditions and notice retained. This header does not introduce a replacement device provider.",
+  "limits": "Source comparison only; no new build-context or runtime certification. No source changes."
+}

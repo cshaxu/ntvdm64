@@ -47,5 +47,3 @@ Revision History:
 //
 
 #define XS_ENUM_DRIVES TEXT("ABC")
-
-

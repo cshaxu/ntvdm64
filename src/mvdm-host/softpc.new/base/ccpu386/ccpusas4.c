@@ -137,8 +137,7 @@ LOCAL void bios_write_word   IPT2(LIN_ADDR, linAddr, IU16, value);
 LOCAL void bios_write_double IPT2(LIN_ADDR, linAddr, IU32, value);
 
 GLOBAL IU8 *Start_of_M_area = NULL;
-GLOBAL PHY_ADDR Length_of_M_area = 0; /* DIVERGENCE(MVDM-HOST-DIV-055):
-                                        guest physical byte count; see sas.h. */
+GLOBAL PHY_ADDR  Length_of_M_area = 0;
 #ifdef BACK_M
 #line 137
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.

@@ -40,6 +40,15 @@ DWORD GetCPD(
 }
 #endif
 
+/***************************************************************************\
+* DefWindowProcWorker
+*
+* Handles any messages that can be dealt with wholly on the client and
+* passes the rest to the server.
+*
+* 03-31-92 DarrinM      Created.
+\***************************************************************************/
+
 /* OPENNT-HOST-089: complete original client default-window algorithm. */
 #if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
 #include "precomp.h"

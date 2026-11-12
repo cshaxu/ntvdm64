@@ -1,0 +1,51 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+  "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+  "current_sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 23,
+      "original_count": 1,
+      "current_normalized_start": 23,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 47,
+      "original_count": 1,
+      "current_normalized_start": 47,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 50,
+      "original_count": 1,
+      "current_normalized_start": 50,
+      "current_lines": [
+        "/* DIVERGENCE MVDM-HOST-DIV-090: bind the exact original host_def.h provider",
+        " * carrier; `ULONG *` only happened to match `unsigned int *` on NT4. */",
+        "IMPORT VOID memset4 IPT3( unsigned int, data, unsigned int *, laddr,",
+        "\tunsigned int, count );"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 56,
+      "original_count": 6,
+      "current_normalized_start": 59,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "memset4 declaration changed to unsigned-int data/pointer/count matching original host provider; PC_CONFIG, SUSPEND and SETUID_ROOT bodies excluded.",
+  "counter_review": "Original host/inc/host_def.h:186-191 and host/src/copy_fnc.c:173-178 both declare unsigned int parameters. Current provider preserves that signature and four-byte-item count. ega_vide.c:1996,2044 passes unsigned int pointer. Keep exact declaration. Existing comment about types matching on NT4 is not independently established and should not be used as proof: equal widths do not establish C type compatibility.",
+  "limits": "Source contract/diff review only; no new compiler, runtime or universal line certification."
+}

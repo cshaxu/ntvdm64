@@ -1,0 +1,28 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+  "original_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+  "current_sha256": "2fd1270833ea0b825ab7443799b5cd86620d5146fed8034566dc5b2febddc059",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 46,
+      "original_count": 1,
+      "current_start": 47,
+      "current_count": 1,
+      "original": [
+        "#include <nturtl.h>"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/non-mvdm/ds/netapi/rap/convert.c",
+    "src/non-mvdm/ds/netapi/rap/examine.c",
+    "src/non-mvdm/ds/netapi/netlib/time.c",
+    "src/compat/include/xactsrv_wksta_minimal.h"
+  ],
+  "limits": "All retained normalized source compared with original; no new build/runtime or complete include-context admission proof. Exclusion-only category does not certify diagnostic mapping."
+}

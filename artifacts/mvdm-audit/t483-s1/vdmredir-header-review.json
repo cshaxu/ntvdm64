@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/inc/vdmredir.h",
+  "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+  "current_sha256": "63b125295473d5ff442ae62afdc700460455b3eff0dc53872d6135983891d8a2",
+  "review_complete": true,
+  "initial_review": "Only excluded DBG/i386/UNALIGNED bodies and line scaffolding differ; selected original bytewise access macros and out-of-line pointer declarations unchanged.",
+  "counter_review": "Do not replace selected bytewise access with new x86 shortcuts as a diff minimization task. Existing original choice is not new implementation.",
+  "evidence": "Full normalized diff reviewed; explicit-condition source projection equal for DBG=0,i386 undefined,UNALIGNED_VDM_POINTERS undefined,include guard initially undefined.",
+  "limits": "Projection is not preprocessing/compiler verification or proof of all possible include contexts.",
+  "register_entries": 0,
+  "runtime_validation": "No new test; no functional edit."
+}

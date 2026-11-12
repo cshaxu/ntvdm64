@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/dpmi32/dpmimemr.c",
+  "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+  "current_sha256": "08b23286a0a97e25818f930eeb45650879bbe375df438fc8907405386ab1afbc",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 64,
+      "original_count": 0,
+      "current_start": 64,
+      "current_count": 11
+    },
+    {
+      "kind": "insert",
+      "original_start": 113,
+      "original_count": 0,
+      "current_start": 124,
+      "current_count": 7
+    },
+    {
+      "kind": "insert",
+      "original_start": 165,
+      "original_count": 0,
+      "current_start": 183,
+      "current_count": 8
+    },
+    {
+      "kind": "replace",
+      "original_start": 242,
+      "original_count": 7,
+      "current_start": 268,
+      "current_count": 7
+    },
+    {
+      "kind": "insert",
+      "original_start": 261,
+      "original_count": 0,
+      "current_start": 287,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 277,
+      "original_count": 0,
+      "current_start": 304,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "All differences and four paired memory operations reviewed.",
+  "counter_review": "Retain shared-XMS ownership; remove overwritten generic query and simplify unreachable duplicated fallback in later implementation. Generic allocator must remain available to initial reservation.",
+  "format_restoration": "Restored original multiline query call and removed added blank before final line directive; whitespace-stripped bytes identical.",
+  "runtime_validation": "Not run; recommendations only."
+}

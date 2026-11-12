@@ -1,0 +1,142 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+  "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
+  "current_sha256": "b4fd00016aa5b964901fe1dfdbbf4b360c88ff4c89f745949842ff75f458f11d",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 35,
+      "original_count": 0,
+      "current_start": 35,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 38,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 37,
+      "original_count": 1,
+      "current_start": 40,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 39,
+      "original_count": 0,
+      "current_start": 42,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 74,
+      "original_count": 0,
+      "current_start": 78,
+      "current_count": 87
+    },
+    {
+      "kind": "insert",
+      "original_start": 104,
+      "original_count": 0,
+      "current_start": 195,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 112,
+      "original_count": 0,
+      "current_start": 205,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 113,
+      "original_count": 0,
+      "current_start": 208,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 147,
+      "original_count": 0,
+      "current_start": 244,
+      "current_count": 6
+    },
+    {
+      "kind": "insert",
+      "original_start": 148,
+      "original_count": 0,
+      "current_start": 251,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 158,
+      "original_count": 0,
+      "current_start": 262,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 159,
+      "original_count": 1,
+      "current_start": 264,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 161,
+      "original_count": 0,
+      "current_start": 266,
+      "current_count": 45
+    },
+    {
+      "kind": "insert",
+      "original_start": 164,
+      "original_count": 0,
+      "current_start": 314,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 165,
+      "original_count": 3,
+      "current_start": 316,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 169,
+      "original_count": 0,
+      "current_start": 319,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 174,
+      "original_count": 6,
+      "current_start": 325,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 182,
+      "original_count": 0,
+      "current_start": 328,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "18 lexical blocks inspected; selected changes classified separately from excluded DBG/i386 and line scaffolding.",
+  "counter_review": "Original kernel masks selector low bits, permits omitted zero entry, checks present base/limit and type/DPL. Local fixed-table provider retains these rules. Batch alignment precludes TI=1 despite comment. Avoid generalizing kernel equivalence to missing shadow, ownership or bounds.",
+  "dependencies": [
+    "O:/repos.external/OpenNT/base/ntos/ps/x86/psldt.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+    "test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c"
+  ],
+  "runtime_validation": "No tests run. Original guest and functional code unchanged."
+}

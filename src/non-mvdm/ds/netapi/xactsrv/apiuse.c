@@ -35,7 +35,6 @@ STATIC const LPDESC Desc16_use_info_0 = REM16_use_info_0;
 STATIC const LPDESC Desc32_use_info_0 = REM32_use_info_0;
 STATIC const LPDESC Desc16_use_info_1 = REM16_use_info_1;
 STATIC const LPDESC Desc32_use_info_1 = REM32_use_info_1;
-
 #line 38
 
 

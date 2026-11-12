@@ -17,4 +17,3 @@ extern int APIENTRY SetStretchBltModeWOW(HDC hdc,int iMode);
 extern UINT APIENTRY SetTextAlignWOW(HDC hdc,UINT iMode);
 extern DWORD APIENTRY GetGlyphOutlineWow( HDC, UINT, UINT, LPGLYPHMETRICS, DWORD, LPVOID, CONST MAT2* );
 
-

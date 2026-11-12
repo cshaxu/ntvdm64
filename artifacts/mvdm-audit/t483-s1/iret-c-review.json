@@ -1,0 +1,41 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+  "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+  "current_sha256": "49bf538b29c800c726798b056f0e0fdfe7a87a023f638430299e6e3b68b89917",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "348",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "current_start": "315",
+      "current_count": "1",
+      "original_start": "316",
+      "original_count": "4",
+      "old_ids": "",
+      "classification": "target-stack-width",
+      "initial_review": "Outer IRET must install the new stack pointer using the loaded SS size rather than operand size.",
+      "counter_review": "Frame extraction still uses original operand size. load_SS_cache precedes set_current_SP, whose original implementation selects GET_SS_AR_X. Existing target validation and failures occur before this installation. Thus this reuses the source owner instead of adding another width rule.",
+      "disposition": "retain",
+      "evidence": "iret.c:299-318; c_stack.c:140-152; test/mvdm-host/ccpu_stack_transition_test.c:137-195; docs/etc/evidence/m0-t430-s2-softpc-repair-gate.md",
+      "limits": "Source and existing fixture inspection; historical 36-case report is not a fresh run or complete IRET certification.",
+      "decision": "retain",
+      "change_plan": "Keep the single original set_current_SP call after load_SS_cache; retain frame-width extraction, validation, flags and privilege ordering.",
+      "related_callers": "IRET LOWER_PRIVILEGE; load_SS_cache; set_current_SP; matching CALLF and RETF fixes.",
+      "verification_required": "Existing 16/32 operand x 16/32 target stack positive cases and invalid SS/code-limit negatives; preserve same-level and software V86 returns.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 105,
+      "original_count": 5,
+      "current_start": 105,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Every textual difference enumerated; selected change is only listed IRET stack installation, if any. Remaining changes are excluded bodies and line directives.",
+  "limits": "Necessity audit only; no new build/run or all-context branch-hit certification."
+}

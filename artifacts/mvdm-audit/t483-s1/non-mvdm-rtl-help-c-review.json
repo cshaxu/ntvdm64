@@ -1,0 +1,33 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+  "original_sha256": "7ffe7d97c36f1aa6ab119eb7f0c9ca70fd8eb57cbefe322e40d0c5df041be16f",
+  "current_sha256": "d56c1550a4e1969665434b9acf8e8c339c0771a0c26e5887fc0b33ec24bfaf2b",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep explicit retained-view and binding headers instead of original enclosing RTL environment.",
+    "Keep original child-parent versus popup-owner traversal and desktop stopping semantics.",
+    "Keep public native context-help property as source and read the pinned retained generation; no private NT4 atom lookup or fresh HWND resolve inside ancestor loop.",
+    "Trace context-help mutation through existing observation refresh and ancestor generation lifetime; retain current boundary unless a stale-value path is proved.",
+    "Map omitted FIsParentDude/EnumPwndDlgChildProc to selected help hit-test owner; retain native dialog hit testing if it owns the boundary and meets reached contracts. Do not restore unused enumeration automatically."
+  ],
+  "counter_review": [
+    "Do not delete whole source; original inheritance is used.",
+    "Do not replace ancestry traversal with one native window query. Model fixture is not native lifecycle proof.",
+    "Public API is correct property boundary; snapshot refresh/retirement timing is separate from value ownership.",
+    "Navigation stub supplies values directly and does not test refresh after SetWindowContextHelpId; this is a bounded evidence gap, not an asserted bug.",
+    "No selected definition/call found in scoped sources; absence alone does not establish complete context-help feature behavior."
+  ],
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:140;src/non-mvdm/windows/core/ntuser/client/combo.c:1071",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c:180-201",
+    "src/wow32-dll/source/wow_user_object_bindings.c:432;src/wow32-dll/source/wow_window_client_state_bindings.c:208-236",
+    "wow_user_object_bindings.c capture_window;wow_window_client_state_bindings.c context_help;navigation fixture",
+    "OpenNT/windows/core/ntuser/rtl/help.c:12,55;COMBO WM_HELP caller"
+  ],
+  "entries_added": 5,
+  "format_sites": 0,
+  "limits": [
+    "No fresh build/runtime.",
+    "Snapshot refresh and help hit-test coverage remain pending."
+  ]
+}

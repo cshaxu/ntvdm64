@@ -1,0 +1,205 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+  "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+  "current_sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 39,
+      "original_count": 1,
+      "current_start": 40,
+      "current_count": 1,
+      "original": [
+        "LOCAL IBOOL verboseGetenv;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 43,
+      "original_count": 37,
+      "current_start": 46,
+      "current_count": 1,
+      "original": [
+        "LOCAL void badGetenv IFN3(char *, name, char *, type_name, char *, value)",
+        "{",
+        "\tprintf(\"Bad getenv(\\\"%s\\\") %s value \\\"%s\\\"\", name, type_name, value);",
+        "}",
+        "",
+        "",
+        "LOCAL void setupVerboseGetenv IFN0()",
+        "{",
+        "\tSAVED IBOOL firstGetenv = TRUE;",
+        "\tchar *env;",
+        "\tchar *how = \"Defaulting\";",
+        "",
+        "\tif (firstGetenv)",
+        "\t{",
+        "#ifdef\tPROD",
+        "\t\tverboseGetenv = FALSE;",
+        "#else\t/* PROD */",
+        "\t\tverboseGetenv = TRUE;",
+        "#endif\t/* PROD */",
+        "\t\tenv = host_getenv(\"VERBOSE_GETENV\");",
+        "\t\tif (env)",
+        "\t\t{",
+        "\t\t\tif (strcmp(env, \"FALSE\") == 0)",
+        "\t\t\t\tverboseGetenv = FALSE;",
+        "\t\t\telse if (strcmp(env, \"TRUE\") == 0)",
+        "\t\t\t\tverboseGetenv = TRUE;",
+        "\t\t\telse",
+        "\t\t\t\tbadGetenv(\"VERBOSE_GETENV\", \"IBOOL\", env);",
+        "\t\t\thow = \"Setting\";",
+        "\t\t}",
+        "#ifndef\tPROD",
+        "\t\tprintf(\"%10s %25s IBOOL value \\\"%s\\\"\\n\",",
+        "\t\t\t      how, \"VERBOSE_GETENV\", verboseGetenv ? \"TRUE\": \"FALSE\");",
+        "#endif\t/* PROD */",
+        "\t\tfirstGetenv = FALSE;",
+        "\t}",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected"
+      ]
+    },
+    {
+      "original_start": 89,
+      "original_count": 2,
+      "current_start": 58,
+      "current_count": 1,
+      "original": [
+        "        char *how = \"Defaulting\";",
+        "        setupVerboseGetenv();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 100,
+      "original_count": 9,
+      "current_start": 70,
+      "current_count": 1,
+      "original": [
+        "                if (strcmp(env, \"FALSE\") == 0)",
+        "\t\t\tvalue = FALSE;",
+        "\t\telse if (strcmp(env, \"TRUE\") == 0)",
+        "                        value = TRUE;",
+        "",
+        "\t\telse",
+        "                        badGetenv(name, \"IBOOL\", env);",
+        "",
+        "                how = \"Setting\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 114,
+      "original_count": 5,
+      "current_start": 78,
+      "current_count": 1,
+      "original": [
+        "\tif (verboseGetenv)",
+        "\t{",
+        "\t\tprintf(\"%10s %25s IBOOL value \\\"%s\\\"\\n\",",
+        "\t\t       how, name, value ? \"TRUE\": \"FALSE\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 131,
+      "original_count": 2,
+      "current_start": 93,
+      "current_count": 1,
+      "original": [
+        "        char *how = \"Defaulting\";",
+        "        setupVerboseGetenv();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 143,
+      "original_count": 1,
+      "current_start": 106,
+      "current_count": 1,
+      "original": [
+        "                how = \"Setting\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 148,
+      "original_count": 4,
+      "current_start": 113,
+      "current_count": 1,
+      "original": [
+        "\tif (verboseGetenv)",
+        "\t{",
+        "\t\tprintf(\"%10s %25s ISM32 value \\\"%d\\\"\\n\", how, name, value);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 163,
+      "original_count": 2,
+      "current_start": 127,
+      "current_count": 1,
+      "original": [
+        "        char *how = \"Defaulting\";",
+        "        setupVerboseGetenv();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 173,
+      "original_count": 1,
+      "current_start": 138,
+      "current_count": 1,
+      "original": [
+        "                how = \"Setting\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 178,
+      "original_count": 7,
+      "current_start": 145,
+      "current_count": 1,
+      "original": [
+        "\tif (verboseGetenv)",
+        "\t{",
+        "\t\tif (value)",
+        "\t\t\tprintf(\"%10s %25s char* value \\\"%s\\\"\\n\", how, name, value);",
+        "\t\telse",
+        "\t\t\tprintf(\"%10s %25s char* with no value\\n\", how, name, value);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Eleven excluded non-NTVDM bodies; retained source matches original.",
+  "counter_review": "NT boolean conversion remains case-insensitive TRUE comparison, integer conversion retains strtol/default-on-no-conversion, strings retain host_getenv pointer. No new parsing or ownership policy.",
+  "limits": "Classification complete; pending-evidence is not repaired or proven necessary. No new build/runtime/context certification."
+}

@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/inc/wowmmed.h",
+  "original_sha256": "8416869d9f2a35a41e10187f0f27fa35198b750e5474cc5e281d30ba9f2918b9",
+  "current_sha256": "cdbdd00ae2096fcc194072629312f105895e2b353ba999c9e276cc24991e095c",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": 13,
+  "initial_review": "Differences confined to excluded SDK fallback or NULLSTRUCT declaration groups; all other source exactly original.",
+  "counter_review": "No callback signature, multimedia parameter layout or selected constant changed. Exclusion is not evidence of removed runtime functionality.",
+  "evidence": "Whole-file projected equality removing only named conditional bodies and #line directives.",
+  "excluded_conditions": [
+    "#ifdef NULLSTRUCT",
+    "#ifndef _INC_MMSYSTEM"
+  ],
+  "limits": "Source projection only, not a new preprocessing/build result or universal include-context proof.",
+  "runtime_validation": "None; header unchanged."
+}

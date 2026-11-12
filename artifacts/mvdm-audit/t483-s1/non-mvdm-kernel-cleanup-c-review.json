@@ -1,0 +1,233 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+  "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+  "before_sha256": "f233bda073e53e44e91c1eeae4c78b4afe0e238e17f476ab3f79f985b241ce40",
+  "current_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+  "status": "difference classification complete; no functional remediation",
+  "evidence": [
+    "src/wow32-dll/include/wow_cleanup_bindings.h",
+    "src/wow32-dll/source/wow_cleanup_bindings.c:1-135",
+    "src/wow32-dll/source/wow_class_words_binding.c:392-399",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:1601-1710",
+    "src/wow32-dll/source/wow_user_registration_bridge.c:343-367",
+    "src/mvdm-host/wow32/wuser.c:3327-3358",
+    "test/adapter-mvdm-host-out/wow/wow_cleanup_fixture.c",
+    "src/wow32-dll/source/wow_standard_class_bindings.c:47-78",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:653"
+  ],
+  "hunks": [
+    {
+      "tag": "replace",
+      "original_start": 13,
+      "original_count": 26,
+      "current_start": 13,
+      "current_count": 6,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 43,
+      "original_count": 0,
+      "current_start": 23,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 76,
+      "original_count": 1,
+      "current_start": 57,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 105,
+      "original_count": 1,
+      "current_start": 86,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 114,
+      "original_count": 1,
+      "current_start": 97,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 182,
+      "original_count": 1,
+      "current_start": 165,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 186,
+      "original_count": 1,
+      "current_start": 169,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 227,
+      "original_count": 1,
+      "current_start": 212,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 229,
+      "original_count": 0,
+      "current_start": 214,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 232,
+      "original_count": 1,
+      "current_start": 218,
+      "current_count": 2,
+      "decision": "excluded"
+    },
+    {
+      "tag": "insert",
+      "original_start": 234,
+      "original_count": 0,
+      "current_start": 221,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 255,
+      "original_count": 1,
+      "current_start": 243,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 265,
+      "original_count": 1,
+      "current_start": 253,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 271,
+      "original_count": 1,
+      "current_start": 261,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 305,
+      "original_count": 1,
+      "current_start": 297,
+      "current_count": 2,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 310,
+      "original_count": 0,
+      "current_start": 303,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 315,
+      "original_count": 1,
+      "current_start": 309,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 340,
+      "original_count": 1,
+      "current_start": 334,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 342,
+      "original_count": 1,
+      "current_start": 336,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 346,
+      "original_count": 2,
+      "current_start": 342,
+      "current_count": 4,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 360,
+      "original_count": 1,
+      "current_start": 358,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 385,
+      "original_count": 1,
+      "current_start": 383,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 389,
+      "original_count": 1,
+      "current_start": 389,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 408,
+      "original_count": 1,
+      "current_start": 408,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 457,
+      "original_count": 0,
+      "current_start": 459,
+      "current_count": 2,
+      "decision": "retain"
+    }
+  ],
+  "registered": 26,
+  "format_sites": 1,
+  "counter_review": [
+    "ModuleUnload uses ne_cseg USHORT, not arbitrary DWORD count: do not introduce speculative huge-count mitigation without reachable caller evidence.",
+    "Original selection and traversal are retained; only storage mutation and failure boundaries adapt.",
+    "Native cleanup views are serialized under runtime entry in both production callers; cleanup-only tree builds do not prove all broader object membership invariants.",
+    "Fixture includes standard atom at index19 to exercise safe fallback outside 13-entry PROC table; no fresh execution.",
+    "Original ClientDied is private client/server-port exception helper, not NTSRV lifecycle coordinator."
+  ],
+  "remaining_limits": [
+    "Original diagnostic lines need mapping check, not blanket proof from #line presence.",
+    "Standard restore procedure context invariance needs explicit proof."
+  ]
+}

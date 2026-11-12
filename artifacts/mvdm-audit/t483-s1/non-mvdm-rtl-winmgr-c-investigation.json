@@ -1,0 +1,33 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+  "status": "in-progress; not counted complete",
+  "current_sha256": "7d1f0f4331109602568c7182111482227bdb446597c906c0f69d4932b54523c4",
+  "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+  "body_comparison": {
+    "NeedsWindowEdge": true,
+    "GetWindowBorders": true,
+    "GetTopLevelWindow": true,
+    "IsVisible": true,
+    "_IsDescendant": true,
+    "_FChildVisible": true
+  },
+  "findings": [
+    "Dual compilation selects original geometry separately from retained view predicates.",
+    "Default-proc entry pushes scoped context then finally restores it. Direct listbox GetWindowBorders caller requires surrounding-scope audit; no failure asserted.",
+    "Original edge/visibility/ancestry rules have product callers and model fixtures.",
+    "Omitted nonclient/geometry helpers need native-boundary owner classification, not automatic restoration."
+  ],
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:607",
+    "src/wow32-dll/source/wow_default_window_bindings.c:79-101",
+    "src/non-mvdm/windows/core/ntuser/client/lboxrare.c:527",
+    "test/adapter-mvdm-host-out/wow/wow_default_borders_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_edit_view_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c"
+  ],
+  "limits": [
+    "Attempted comment restoration failed token-preservation assertion before writing; source unchanged.",
+    "Need complete source/structure check and register entries.",
+    "No new build/runtime."
+  ]
+}

@@ -560,20 +560,20 @@ BOOL get_fdisk_handle(PFDISKDATA fdisk_data, USHORT pdb, BOOL auto_lock)
 					   0
 					   );
 	if (fdisk_data->fdisk_fd != INVALID_HANDLE_VALUE) {
-		    fdisk_data->auto_locked = auto_lock;
-		    fdisk_data->owner_pdb = pdb;
-		    fdisk_open_count++;
-		    /* DIVERGENCE MVDM-HOST-DIV-111: acquire the SCS counter only for
-		     * this update; do not publish a durable host pointer. */
-		    if (!mvdm_command_guest_state_add_fd_access(1u)) {
-			CloseHandle(fdisk_data->fdisk_fd);
-			fdisk_data->fdisk_fd = INVALID_HANDLE_VALUE;
-			fdisk_data->auto_locked = FALSE;
-			fdisk_data->owner_pdb = 0;
-			fdisk_open_count--;
-			return FALSE;
-		    }
-		    break;
+	    fdisk_data->auto_locked = auto_lock;
+	    fdisk_data->owner_pdb = pdb;
+	    fdisk_open_count++;
+	    /* DIVERGENCE MVDM-HOST-DIV-111: acquire the SCS counter only for
+	     * this update; do not publish a durable host pointer. */
+	    if (!mvdm_command_guest_state_add_fd_access(1u)) {
+		CloseHandle(fdisk_data->fdisk_fd);
+		fdisk_data->fdisk_fd = INVALID_HANDLE_VALUE;
+		fdisk_data->auto_locked = FALSE;
+		fdisk_data->owner_pdb = 0;
+		fdisk_open_count--;
+		return FALSE;
+	    }
+	    break;
 #line 538
 	}
 	else {

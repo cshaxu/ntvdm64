@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "status": "in-progress; not counted complete",
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "current_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+  "exact_original_bodies": {
+    "DrawFrame": true,
+    "DrawPushButton": true
+  },
+  "initial_review": [
+    "Actual callers: editml.c:1639, editsl.c:1899, btnctl.c:1202/1209. Whole-file deletion not appropriate.",
+    "Formal drawing compile enables WOW_ORIGINAL_BUTTON_DRAWING; fixture also selects it.",
+    "Brush initializer publishes complete borrowed system brushes and owned process-lifetime gray brush only on successful creation.",
+    "Native PolyPatBlt facade forwards original operation and rectangle list. Original DrawFrame returns TRUE regardless of service return."
+  ],
+  "counter_review": [
+    "Fixture forces FALSE service result yet expects TRUE, proving intended original return behavior; not real raster validation.",
+    "Original FillRect/DrawEdge omitted and native USER calls supply them. Native API presence and geometry stubs do not establish original monochrome/diagonal/brush semantics.",
+    "Omitted original glyph/frame/mapping helpers and detached WINDOWS_ME frame require explicit owner/structure disposition.",
+    "Header claims unselected despite actual formal graph; restore original header/comments without changing tokens."
+  ],
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:612-613",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1:112-114",
+    "src/wow32-dll/include/control-drawing/precomp.h",
+    "src/wow32-dll/source/wow_edit_drawing_bindings.c",
+    "src/wow32-dll/source/wow_edit_native_bindings.c:157",
+    "test/adapter-mvdm-host-out/wow/wow_edit_drawing_fixture.c"
+  ],
+  "remaining": [
+    "Complete ordered register entries and original comment restoration.",
+    "Record omitted drawing owner equivalence as pending, not proved unnecessary."
+  ],
+  "limits": [
+    "First extraction assertion rejected comparison because name appeared at earlier call site; corrected to anchored function definition.",
+    "No source changes, build, tests or release."
+  ]
+}

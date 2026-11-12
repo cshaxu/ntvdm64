@@ -1,0 +1,16 @@
+{
+  "path": "src/mvdm-host/inc/wowmmcb.h",
+  "original_sha256": "c4135b71b57c210150d6083b6eb179ac256e164a1b58a475b4c4f9395dc3cf89",
+  "current_sha256": "ee8d6eb100c3f729627aae8cbd7f84f3bbed6df3ebfac7b5ccd300a6963e2d40",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": 1,
+  "initial_review": "Differences confined to excluded SDK fallback or NULLSTRUCT declaration groups; all other source exactly original.",
+  "counter_review": "No callback signature, multimedia parameter layout or selected constant changed. Exclusion is not evidence of removed runtime functionality.",
+  "evidence": "Whole-file projected equality removing only named conditional bodies and #line directives.",
+  "excluded_conditions": [
+    "#ifndef UNALIGNED"
+  ],
+  "limits": "Source projection only, not a new preprocessing/build result or universal include-context proof.",
+  "runtime_validation": "None; header unchanged."
+}

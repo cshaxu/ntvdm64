@@ -1,0 +1,895 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "current_sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+  "review_complete": true,
+  "register_entries": 1,
+  "initial_review": "Whole-file diff contains only excluded original bodies, #error and #line; no added/changed selected runtime expression.",
+  "counter_review": "Original CPU40 virtual_swap_instance wrappers and BOP FD/FE bindings remain original; their existence is not evidence of a newly invented monitor. Current runtime validity still depends on their selected providers, outside this file diff.",
+  "excluded_ranges": [
+    {
+      "original_start": 20,
+      "original_count": 1,
+      "current_start": 20,
+      "current_count": 2
+    },
+    {
+      "original_start": 24,
+      "original_count": 6,
+      "current_start": 26,
+      "current_count": 7
+    },
+    {
+      "original_start": 53,
+      "original_count": 1,
+      "current_start": 57,
+      "current_count": 2
+    },
+    {
+      "original_start": 64,
+      "original_count": 1,
+      "current_start": 70,
+      "current_count": 2
+    },
+    {
+      "original_start": 71,
+      "original_count": 1,
+      "current_start": 79,
+      "current_count": 2
+    },
+    {
+      "original_start": 85,
+      "original_count": 2,
+      "current_start": 95,
+      "current_count": 2
+    },
+    {
+      "original_start": 91,
+      "original_count": 2,
+      "current_start": 102,
+      "current_count": 2
+    },
+    {
+      "original_start": 96,
+      "original_count": 3,
+      "current_start": 108,
+      "current_count": 2
+    },
+    {
+      "original_start": 102,
+      "original_count": 1,
+      "current_start": 114,
+      "current_count": 2
+    },
+    {
+      "original_start": 106,
+      "original_count": 1,
+      "current_start": 120,
+      "current_count": 2
+    },
+    {
+      "original_start": 110,
+      "original_count": 2,
+      "current_start": 126,
+      "current_count": 2
+    },
+    {
+      "original_start": 125,
+      "original_count": 1,
+      "current_start": 142,
+      "current_count": 2
+    },
+    {
+      "original_start": 130,
+      "original_count": 1,
+      "current_start": 150,
+      "current_count": 2
+    },
+    {
+      "original_start": 135,
+      "original_count": 1,
+      "current_start": 158,
+      "current_count": 2
+    },
+    {
+      "original_start": 144,
+      "original_count": 1,
+      "current_start": 170,
+      "current_count": 2
+    },
+    {
+      "original_start": 170,
+      "original_count": 1,
+      "current_start": 198,
+      "current_count": 2
+    },
+    {
+      "original_start": 179,
+      "original_count": 1,
+      "current_start": 209,
+      "current_count": 2
+    },
+    {
+      "original_start": 185,
+      "original_count": 1,
+      "current_start": 218,
+      "current_count": 2
+    },
+    {
+      "original_start": 192,
+      "original_count": 1,
+      "current_start": 228,
+      "current_count": 2
+    },
+    {
+      "original_start": 202,
+      "original_count": 2,
+      "current_start": 241,
+      "current_count": 2
+    },
+    {
+      "original_start": 210,
+      "original_count": 2,
+      "current_start": 251,
+      "current_count": 2
+    },
+    {
+      "original_start": 217,
+      "original_count": 4,
+      "current_start": 260,
+      "current_count": 2
+    },
+    {
+      "original_start": 228,
+      "original_count": 20,
+      "current_start": 271,
+      "current_count": 12
+    },
+    {
+      "original_start": 267,
+      "original_count": 1,
+      "current_start": 304,
+      "current_count": 2
+    },
+    {
+      "original_start": 276,
+      "original_count": 3,
+      "current_start": 315,
+      "current_count": 2
+    },
+    {
+      "original_start": 310,
+      "original_count": 29,
+      "current_start": 351,
+      "current_count": 2
+    },
+    {
+      "original_start": 344,
+      "original_count": 1,
+      "current_start": 359,
+      "current_count": 2
+    },
+    {
+      "original_start": 350,
+      "original_count": 1,
+      "current_start": 368,
+      "current_count": 2
+    },
+    {
+      "original_start": 359,
+      "original_count": 3,
+      "current_start": 380,
+      "current_count": 2
+    },
+    {
+      "original_start": 364,
+      "original_count": 2,
+      "current_start": 385,
+      "current_count": 2
+    },
+    {
+      "original_start": 371,
+      "original_count": 1,
+      "current_start": 394,
+      "current_count": 2
+    },
+    {
+      "original_start": 376,
+      "original_count": 1,
+      "current_start": 402,
+      "current_count": 2
+    },
+    {
+      "original_start": 383,
+      "original_count": 1,
+      "current_start": 412,
+      "current_count": 2
+    },
+    {
+      "original_start": 391,
+      "original_count": 1,
+      "current_start": 423,
+      "current_count": 2
+    },
+    {
+      "original_start": 401,
+      "original_count": 2,
+      "current_start": 435,
+      "current_count": 2
+    },
+    {
+      "original_start": 436,
+      "original_count": 3,
+      "current_start": 472,
+      "current_count": 2
+    },
+    {
+      "original_start": 442,
+      "original_count": 3,
+      "current_start": 478,
+      "current_count": 2
+    },
+    {
+      "original_start": 455,
+      "original_count": 4,
+      "current_start": 492,
+      "current_count": 2
+    },
+    {
+      "original_start": 466,
+      "original_count": 2,
+      "current_start": 503,
+      "current_count": 2
+    },
+    {
+      "original_start": 473,
+      "original_count": 1,
+      "current_start": 512,
+      "current_count": 2
+    },
+    {
+      "original_start": 478,
+      "original_count": 1,
+      "current_start": 520,
+      "current_count": 2
+    },
+    {
+      "original_start": 484,
+      "original_count": 4,
+      "current_start": 529,
+      "current_count": 2
+    },
+    {
+      "original_start": 496,
+      "original_count": 2,
+      "current_start": 541,
+      "current_count": 2
+    },
+    {
+      "original_start": 506,
+      "original_count": 2,
+      "current_start": 553,
+      "current_count": 2
+    },
+    {
+      "original_start": 515,
+      "original_count": 3,
+      "current_start": 564,
+      "current_count": 2
+    },
+    {
+      "original_start": 525,
+      "original_count": 4,
+      "current_start": 575,
+      "current_count": 2
+    },
+    {
+      "original_start": 539,
+      "original_count": 1,
+      "current_start": 589,
+      "current_count": 2
+    },
+    {
+      "original_start": 567,
+      "original_count": 7,
+      "current_start": 619,
+      "current_count": 2
+    },
+    {
+      "original_start": 582,
+      "original_count": 2,
+      "current_start": 630,
+      "current_count": 2
+    },
+    {
+      "original_start": 591,
+      "original_count": 3,
+      "current_start": 641,
+      "current_count": 2
+    },
+    {
+      "original_start": 634,
+      "original_count": 2,
+      "current_start": 685,
+      "current_count": 2
+    },
+    {
+      "original_start": 647,
+      "original_count": 1,
+      "current_start": 700,
+      "current_count": 2
+    },
+    {
+      "original_start": 652,
+      "original_count": 5,
+      "current_start": 707,
+      "current_count": 6
+    },
+    {
+      "original_start": 660,
+      "original_count": 11,
+      "current_start": 717,
+      "current_count": 2
+    },
+    {
+      "original_start": 682,
+      "original_count": 205,
+      "current_start": 732,
+      "current_count": 2
+    }
+  ],
+  "line_only_ranges": [
+    {
+      "original_start": 22,
+      "original_count": 0,
+      "current_start": 23,
+      "current_count": 1
+    },
+    {
+      "original_start": 31,
+      "original_count": 0,
+      "current_start": 34,
+      "current_count": 1
+    },
+    {
+      "original_start": 55,
+      "original_count": 0,
+      "current_start": 60,
+      "current_count": 1
+    },
+    {
+      "original_start": 66,
+      "original_count": 0,
+      "current_start": 73,
+      "current_count": 1
+    },
+    {
+      "original_start": 73,
+      "original_count": 0,
+      "current_start": 82,
+      "current_count": 1
+    },
+    {
+      "original_start": 88,
+      "original_count": 0,
+      "current_start": 98,
+      "current_count": 1
+    },
+    {
+      "original_start": 94,
+      "original_count": 0,
+      "current_start": 105,
+      "current_count": 1
+    },
+    {
+      "original_start": 100,
+      "original_count": 0,
+      "current_start": 111,
+      "current_count": 1
+    },
+    {
+      "original_start": 104,
+      "original_count": 0,
+      "current_start": 117,
+      "current_count": 1
+    },
+    {
+      "original_start": 108,
+      "original_count": 0,
+      "current_start": 123,
+      "current_count": 1
+    },
+    {
+      "original_start": 113,
+      "original_count": 0,
+      "current_start": 129,
+      "current_count": 1
+    },
+    {
+      "original_start": 127,
+      "original_count": 0,
+      "current_start": 145,
+      "current_count": 1
+    },
+    {
+      "original_start": 129,
+      "original_count": 0,
+      "current_start": 148,
+      "current_count": 1
+    },
+    {
+      "original_start": 132,
+      "original_count": 0,
+      "current_start": 153,
+      "current_count": 1
+    },
+    {
+      "original_start": 134,
+      "original_count": 0,
+      "current_start": 156,
+      "current_count": 1
+    },
+    {
+      "original_start": 137,
+      "original_count": 0,
+      "current_start": 161,
+      "current_count": 1
+    },
+    {
+      "original_start": 139,
+      "original_count": 0,
+      "current_start": 164,
+      "current_count": 1
+    },
+    {
+      "original_start": 146,
+      "original_count": 0,
+      "current_start": 173,
+      "current_count": 1
+    },
+    {
+      "original_start": 172,
+      "original_count": 0,
+      "current_start": 201,
+      "current_count": 1
+    },
+    {
+      "original_start": 181,
+      "original_count": 0,
+      "current_start": 212,
+      "current_count": 1
+    },
+    {
+      "original_start": 183,
+      "original_count": 0,
+      "current_start": 215,
+      "current_count": 1
+    },
+    {
+      "original_start": 187,
+      "original_count": 0,
+      "current_start": 221,
+      "current_count": 1
+    },
+    {
+      "original_start": 189,
+      "original_count": 0,
+      "current_start": 224,
+      "current_count": 1
+    },
+    {
+      "original_start": 194,
+      "original_count": 0,
+      "current_start": 231,
+      "current_count": 1
+    },
+    {
+      "original_start": 196,
+      "original_count": 0,
+      "current_start": 234,
+      "current_count": 1
+    },
+    {
+      "original_start": 205,
+      "original_count": 0,
+      "current_start": 244,
+      "current_count": 1
+    },
+    {
+      "original_start": 208,
+      "original_count": 0,
+      "current_start": 248,
+      "current_count": 1
+    },
+    {
+      "original_start": 213,
+      "original_count": 0,
+      "current_start": 254,
+      "current_count": 1
+    },
+    {
+      "original_start": 216,
+      "original_count": 0,
+      "current_start": 258,
+      "current_count": 1
+    },
+    {
+      "original_start": 222,
+      "original_count": 0,
+      "current_start": 263,
+      "current_count": 1
+    },
+    {
+      "original_start": 227,
+      "original_count": 0,
+      "current_start": 269,
+      "current_count": 1
+    },
+    {
+      "original_start": 249,
+      "original_count": 0,
+      "current_start": 284,
+      "current_count": 1
+    },
+    {
+      "original_start": 262,
+      "original_count": 0,
+      "current_start": 298,
+      "current_count": 1
+    },
+    {
+      "original_start": 269,
+      "original_count": 0,
+      "current_start": 307,
+      "current_count": 1
+    },
+    {
+      "original_start": 280,
+      "original_count": 0,
+      "current_start": 318,
+      "current_count": 1
+    },
+    {
+      "original_start": 284,
+      "original_count": 0,
+      "current_start": 323,
+      "current_count": 1
+    },
+    {
+      "original_start": 288,
+      "original_count": 0,
+      "current_start": 328,
+      "current_count": 1
+    },
+    {
+      "original_start": 340,
+      "original_count": 0,
+      "current_start": 354,
+      "current_count": 1
+    },
+    {
+      "original_start": 346,
+      "original_count": 0,
+      "current_start": 362,
+      "current_count": 1
+    },
+    {
+      "original_start": 348,
+      "original_count": 0,
+      "current_start": 365,
+      "current_count": 1
+    },
+    {
+      "original_start": 352,
+      "original_count": 0,
+      "current_start": 371,
+      "current_count": 1
+    },
+    {
+      "original_start": 354,
+      "original_count": 0,
+      "current_start": 374,
+      "current_count": 1
+    },
+    {
+      "original_start": 363,
+      "original_count": 0,
+      "current_start": 383,
+      "current_count": 1
+    },
+    {
+      "original_start": 367,
+      "original_count": 0,
+      "current_start": 388,
+      "current_count": 1
+    },
+    {
+      "original_start": 370,
+      "original_count": 0,
+      "current_start": 392,
+      "current_count": 1
+    },
+    {
+      "original_start": 373,
+      "original_count": 0,
+      "current_start": 397,
+      "current_count": 1
+    },
+    {
+      "original_start": 375,
+      "original_count": 0,
+      "current_start": 400,
+      "current_count": 1
+    },
+    {
+      "original_start": 378,
+      "original_count": 0,
+      "current_start": 405,
+      "current_count": 1
+    },
+    {
+      "original_start": 380,
+      "original_count": 0,
+      "current_start": 408,
+      "current_count": 1
+    },
+    {
+      "original_start": 385,
+      "original_count": 0,
+      "current_start": 415,
+      "current_count": 1
+    },
+    {
+      "original_start": 387,
+      "original_count": 0,
+      "current_start": 418,
+      "current_count": 1
+    },
+    {
+      "original_start": 393,
+      "original_count": 0,
+      "current_start": 426,
+      "current_count": 1
+    },
+    {
+      "original_start": 404,
+      "original_count": 0,
+      "current_start": 438,
+      "current_count": 1
+    },
+    {
+      "original_start": 407,
+      "original_count": 0,
+      "current_start": 442,
+      "current_count": 1
+    },
+    {
+      "original_start": 440,
+      "original_count": 0,
+      "current_start": 475,
+      "current_count": 1
+    },
+    {
+      "original_start": 446,
+      "original_count": 0,
+      "current_start": 481,
+      "current_count": 1
+    },
+    {
+      "original_start": 451,
+      "original_count": 0,
+      "current_start": 487,
+      "current_count": 1
+    },
+    {
+      "original_start": 460,
+      "original_count": 0,
+      "current_start": 495,
+      "current_count": 1
+    },
+    {
+      "original_start": 465,
+      "original_count": 0,
+      "current_start": 501,
+      "current_count": 1
+    },
+    {
+      "original_start": 469,
+      "original_count": 0,
+      "current_start": 506,
+      "current_count": 1
+    },
+    {
+      "original_start": 472,
+      "original_count": 0,
+      "current_start": 510,
+      "current_count": 1
+    },
+    {
+      "original_start": 475,
+      "original_count": 0,
+      "current_start": 515,
+      "current_count": 1
+    },
+    {
+      "original_start": 477,
+      "original_count": 0,
+      "current_start": 518,
+      "current_count": 1
+    },
+    {
+      "original_start": 480,
+      "original_count": 0,
+      "current_start": 523,
+      "current_count": 1
+    },
+    {
+      "original_start": 482,
+      "original_count": 0,
+      "current_start": 526,
+      "current_count": 1
+    },
+    {
+      "original_start": 489,
+      "original_count": 0,
+      "current_start": 532,
+      "current_count": 1
+    },
+    {
+      "original_start": 494,
+      "original_count": 0,
+      "current_start": 538,
+      "current_count": 1
+    },
+    {
+      "original_start": 499,
+      "original_count": 0,
+      "current_start": 544,
+      "current_count": 1
+    },
+    {
+      "original_start": 504,
+      "original_count": 0,
+      "current_start": 550,
+      "current_count": 1
+    },
+    {
+      "original_start": 509,
+      "original_count": 0,
+      "current_start": 556,
+      "current_count": 1
+    },
+    {
+      "original_start": 512,
+      "original_count": 0,
+      "current_start": 560,
+      "current_count": 1
+    },
+    {
+      "original_start": 519,
+      "original_count": 0,
+      "current_start": 567,
+      "current_count": 1
+    },
+    {
+      "original_start": 523,
+      "original_count": 0,
+      "current_start": 572,
+      "current_count": 1
+    },
+    {
+      "original_start": 530,
+      "original_count": 0,
+      "current_start": 578,
+      "current_count": 1
+    },
+    {
+      "original_start": 535,
+      "original_count": 0,
+      "current_start": 584,
+      "current_count": 1
+    },
+    {
+      "original_start": 541,
+      "original_count": 0,
+      "current_start": 592,
+      "current_count": 1
+    },
+    {
+      "original_start": 575,
+      "original_count": 0,
+      "current_start": 622,
+      "current_count": 1
+    },
+    {
+      "original_start": 585,
+      "original_count": 0,
+      "current_start": 633,
+      "current_count": 1
+    },
+    {
+      "original_start": 588,
+      "original_count": 0,
+      "current_start": 637,
+      "current_count": 1
+    },
+    {
+      "original_start": 595,
+      "original_count": 0,
+      "current_start": 644,
+      "current_count": 1
+    },
+    {
+      "original_start": 599,
+      "original_count": 0,
+      "current_start": 649,
+      "current_count": 1
+    },
+    {
+      "original_start": 637,
+      "original_count": 0,
+      "current_start": 688,
+      "current_count": 1
+    },
+    {
+      "original_start": 640,
+      "original_count": 0,
+      "current_start": 692,
+      "current_count": 1
+    },
+    {
+      "original_start": 649,
+      "original_count": 0,
+      "current_start": 703,
+      "current_count": 1
+    },
+    {
+      "original_start": 658,
+      "original_count": 0,
+      "current_start": 714,
+      "current_count": 1
+    },
+    {
+      "original_start": 672,
+      "original_count": 0,
+      "current_start": 720,
+      "current_count": 1
+    },
+    {
+      "original_start": 678,
+      "original_count": 0,
+      "current_start": 727,
+      "current_count": 1
+    },
+    {
+      "original_start": 888,
+      "original_count": 0,
+      "current_start": 735,
+      "current_count": 1
+    }
+  ],
+  "limits": "Text comparison proves no non-exclusion code edits, not reachability across all configurations. Existing trailing #line 630 after original line 677 is not an exact structural line mapping; it precedes blanks and excluded non-PROD code, so no selected instruction is shown to acquire a different diagnostic line. Line-directive cleanup needs separate exact-line review.",
+  "runtime_validation": "None; source unchanged.",
+  "line_directive_action": {
+    "file_sequence": "195",
+    "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+    "current_start": "727",
+    "current_count": "1",
+    "original_start": "678",
+    "original_count": "0",
+    "old_ids": "",
+    "classification": "stale-line-directive",
+    "initial_review": "An added #line 630 follows the original line 677 MAC_LIKE endif; it moves following structural lines backwards.",
+    "counter_review": "The next body is excluded non-PROD and resets to original line 682, so this is not evidence of a runtime defect; still not exact original structural line mapping.",
+    "disposition": "correct",
+    "evidence": "artifacts/mvdm-audit/t483-s1/bios-c-review.json",
+    "limits": "Source-line issue only; no build/runtime equivalence claimed.",
+    "decision": "correct",
+    "change_plan": "Remove the stale standalone #line 630 after the BIOS array MAC_LIKE endif. Preserve existing #line 672 and subsequent #line 682/888; verify retained logical lines against original.",
+    "related_callers": "BIOS BOP vector declaration; compiler diagnostic/source mapping only.",
+    "verification_required": "Whole-file original/current retained logical-line comparison; confirm selected tokens and generated code unchanged.",
+    "missing_evidence": "",
+    "implementation_status": "not-implemented",
+    "execution_detail_status": "specified"
+  }
+}

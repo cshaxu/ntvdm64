@@ -1,0 +1,40 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+  "original_sha256": "3bec21c4bb3caef0798208693a89012df6005c6a330f0f670f974a1ce821fca2",
+  "current_sha256": "00a301aee092b9e191de116445c9b3fd21a059893b2ee0e99a963dd7ea24c008",
+  "retained_body_normalized_exact": true,
+  "initial_review": "Full normalized file diff consists of preamble/instance API omission, bounded include replacement, and copy API omission; FreeDDEData and its original documentation unchanged.",
+  "counter_review": "Raw-data release ownership stays original; no alternate destructor. Blanket rationale about copy helpers is too broad: independently composable GDI copies may be reusable elsewhere, but are not dependencies here.",
+  "items": [
+    [
+      10,
+      3,
+      10,
+      "retain",
+      "Original DDEMLDB/precomp/PCH replaced by bounded declarations and public Global/GDI leaves. FreeDDEData body is exact and remains ownership authority.",
+      "Retain minimal include seam; do not introduce adapter release policy or pull full DDEML instance subsystem.",
+      "Compile actual x86 WOW provider; check DDE_DATA WORD/WORD/DWORD layout and /Gz signature."
+    ],
+    [
+      15,
+      438,
+      10,
+      "retain",
+      "Omitted DdeCreateDataHandle/InternalCreateDataHandle/Add/Get/Free/InternalFree/ApplyFree manage DDEML instance handles and locks; reached WUMSG calls only the retained raw-data destructor.",
+      "Keep finite subset; do not restore a second DDEML handle manager for these raw-data callback consumers.",
+      "Verify pfnFreeDDEData registration and raw-data call sites; preserve exclusion of EXECUTE data and release/ignore/global-object flags."
+    ],
+    [
+      569,
+      145,
+      129,
+      "pending evidence",
+      "CopyBitmap/CopyPalette/CopyDDEData are omitted and not dependencies of FreeDDEData. CopyBitmap and CopyPalette have finite public GDI dependencies, so the header claim that all copy APIs require the excluded USER subsystem is overly broad.",
+      "Keep omitted functions for current destructor slice. Before wider copy-code minimization, compare existing copy owners with these original helpers and their failure/ownership contracts; correct blanket provenance rationale. No import justified solely by common names.",
+      "Check GDI select/unselect and error cleanup, palette allocation and failure, recursive DIB/metafile copy rollback; prove real caller need before import."
+    ]
+  ],
+  "evidence": "Pinned OpenNT hdata.c; src/wow32-dll/include/wow_dde_data_bindings.h; wow_user_registration_bridge.c output->pfnFreeDDEData; src/mvdm-host/wow32/wumsg.c two callback consumers; tools/build/New-T404S5Wow32ProviderNinja.ps1; test/adapter-mvdm-host-out/wow/wow_original_dde_free_fixture.c",
+  "fixture_coverage": "Release false preserves/unlocks outer; ignore overrides; bitmap/palette global-object flag; DIB nested frees; metafile/enhanced and display variants; null input. Fixture uses real GDI/global handles.",
+  "limits": "No fresh runtime/build. No malformed truncated DDE_DATA, nested GlobalLock failure or cross-process transfer proof. Do not infer those cases from positive format coverage."
+}

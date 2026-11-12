@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+  "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+  "current_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 63,
+      "original_count": 1,
+      "current_normalized_start": 63,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 67,
+      "original_count": 1,
+      "current_normalized_start": 67,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 71,
+      "original_count": 1,
+      "current_normalized_start": 71,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "delete",
+      "original_start": 77,
+      "original_count": 1,
+      "current_normalized_start": 77,
+      "current_lines": []
+    },
+    {
+      "kind": "replace",
+      "original_start": 79,
+      "original_count": 13,
+      "current_normalized_start": 78,
+      "current_lines": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-146): the historical combined CCPU build defined",
+        " * CPU_30_STYLE even when it selected CPU_40_STYLE, solely to keep this ICA",
+        " * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired",
+        " * in this product; the unselected non-CCPU body is now marked by DIV-506. */",
+        "#if !defined(CCPU)",
+        "#error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.",
+        "#endif /* 3.0 CPU or CCPU */",
+        "#endif /* CPU_30_STYLE */"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 141,
+      "original_count": 64,
+      "current_normalized_start": 135,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 209,
+      "original_count": 32,
+      "current_normalized_start": 140,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 244,
+      "original_count": 10,
+      "current_normalized_start": 144,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Added non-CCPU guard inside original non-CPU30 boundary suppresses obsolete interrupt-map definitions; six other profile bodies excluded.",
+  "counter_review": "Original/current cpuint_c.h:37 define CPU_HW_INT=2; original ica.h:81 instead defines macro CPU_HW_INT=0, a map bit number. Current nt_cpu.c:143 passes CPU_HW_INT to cpu_interrupt and c_main.c dispatches enum. Restoring the macro into CCPU context is not equivalent. Retain separation without re-enabling CPU30. The comment about historical combined-build intent is not independently proved and is not the basis for retention.",
+  "limits": "Source-backed classification only; no new compiled-preprocessor or runtime acceptance. Historical intent not assumed."
+}

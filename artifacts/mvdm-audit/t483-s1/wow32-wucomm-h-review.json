@@ -1,0 +1,52 @@
+{
+  "path": "src/mvdm-host/wow32/wucomm.h",
+  "original_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b",
+  "current_sha256": "a35cc588a1844c80f5818cc8ddcdde8f6dba64815d13393cb5cb6d6ad66512c2",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 257,
+      "original_count": 21,
+      "current_start": 258,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define COMMDEBUG(lpszformat) LOGDEBUG(1, lpszformat)",
+        "",
+        "// for watching the modem events",
+        "#define DEBUGWATCHMODEMEVENTS(dwE, dwM, dwS, pcE16, pcM16) {    \\",
+        "    if(dwS) {                                                   \\",
+        "        if((dwE != (DWORD)pcE16) || (dwM != (DWORD)pcM16)) {    \\",
+        "            dwE = (DWORD)pcE16;                                 \\",
+        "            dwM = (DWORD)pcM16;                                 \\",
+        "            COMMDEBUG((\"\\nEvt:0x%4X  MSR:0x%2X\\n\", dwE, dwM));  \\",
+        "        }                                                       \\",
+        "        else {                                                  \\",
+        "         COMMDEBUG((\".\"));                                      \\",
+        "        }                                                       \\",
+        "    }                                                           \\",
+        "}",
+        "",
+        "// prototype for real-time debug output",
+        "void CommIODebug(ULONG fhCommIO, HANDLE hCommIO, LPSZ lpsz, ULONG cb, LPSZ lpszFile);",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 259,
+      "original": 278,
+      "logical": 258
+    }
+  ],
+  "evidence": "Only DEBUG communication diagnostics macro/prototype body excluded; retained source identical.",
+  "limits": [
+    "No tests executed; helper/ABI proof is not whole dialog lifetime proof.",
+    "LF line mapping source-derived only."
+  ]
+}

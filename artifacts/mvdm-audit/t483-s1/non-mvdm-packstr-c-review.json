@@ -1,0 +1,60 @@
+{
+  "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+  "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+  "current_sha256": "4c64d1e89174576f85c08c165e9b01d67f0b8b83fe955ccab54a3f41198187a4",
+  "changes": [
+    {
+      "original_start": 49,
+      "original_count": 1,
+      "current_start": 49,
+      "current_count": 1,
+      "decision": "simplify",
+      "necessity": "Selected function uses no RPC/MIDL allocator; rpc.h replaces original rpcutil.h.",
+      "counter_review": "Original selected NetpCopyStringToBuffer body is exact, called by xlatesvc.c from apisvc.c. Removing invented wrappers preserves finite subset; no need to restore unused enum allocator.",
+      "change_plan": "Remove residual RPC include after declaration-closure check.",
+      "verification_required": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+    },
+    {
+      "original_start": 60,
+      "original_count": 96,
+      "current_start": 60,
+      "current_count": 5,
+      "decision": "simplify",
+      "necessity": "Invented MVDM_XACTSRV_PACKSTR_COPY_ONLY wrapper surrounds an originally unconditional omitted function.",
+      "counter_review": "Original selected NetpCopyStringToBuffer body is exact, called by xlatesvc.c from apisvc.c. Removing invented wrappers preserves finite subset; no need to restore unused enum allocator.",
+      "change_plan": "Remove invented conditional/error wrapper and synchronized build macro definition, keeping selected original function and accurate #line.",
+      "verification_required": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+    },
+    {
+      "original_start": 286,
+      "original_count": 121,
+      "current_start": 195,
+      "current_count": 5,
+      "decision": "simplify",
+      "necessity": "Invented MVDM_XACTSRV_PACKSTR_COPY_ONLY wrapper surrounds an originally unconditional omitted function.",
+      "counter_review": "Original selected NetpCopyStringToBuffer body is exact, called by xlatesvc.c from apisvc.c. Removing invented wrappers preserves finite subset; no need to restore unused enum allocator.",
+      "change_plan": "Remove invented conditional/error wrapper and synchronized build macro definition, keeping selected original function and accurate #line.",
+      "verification_required": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+    },
+    {
+      "original_start": 409,
+      "original_count": 261,
+      "current_start": 202,
+      "current_count": 5,
+      "decision": "simplify",
+      "necessity": "Invented MVDM_XACTSRV_PACKSTR_COPY_ONLY wrapper surrounds an originally unconditional omitted function.",
+      "counter_review": "Original selected NetpCopyStringToBuffer body is exact, called by xlatesvc.c from apisvc.c. Removing invented wrappers preserves finite subset; no need to restore unused enum allocator.",
+      "change_plan": "Remove invented conditional/error wrapper and synchronized build macro definition, keeping selected original function and accurate #line.",
+      "verification_required": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+    "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "src/mvdm-host/vdmredir/vrnetapi.c"
+  ],
+  "limits": "Whole-file normalized comparison and source call review only; no new build/runtime or universal macro-hit proof."
+}

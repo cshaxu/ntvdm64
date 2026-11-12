@@ -1,0 +1,38 @@
+{
+  "path": "src/mvdm-host/wow32/wmtbl32.h",
+  "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
+  "current_sha256": "f3634dc1bf55e7441f3108f56775a0ff986ed34e5b41197b7dbe68ed9ee6f24d",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 26,
+      "original_count": 1,
+      "current_start": 27,
+      "current_count": 1,
+      "original": [
+        "extern INT iMsgMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    },
+    {
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 34,
+      "current_count": 1,
+      "original": [
+        "#define WM32UNDOCUMENTED WM32Undocumented"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Full normalized diff only replaces original DEBUG or DEBUG_OR_WOWPROFILE bodies; retained dispatch table/prototypes/converter code exactly matches original.",
+  "limits": [
+    "No new build/runtime validation.",
+    "Exclusion-only classification does not certify all preprocessing contexts."
+  ]
+}

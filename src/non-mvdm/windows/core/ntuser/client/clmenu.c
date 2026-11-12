@@ -16,6 +16,18 @@
 #define WOW_ORIGINAL_MENU_CLIENT
 #include "wow_menu_resource_bindings.h"
 
+
+/***************************************************************************\
+* MenuLoadWinTemplates
+*
+* Recursive routine that loads in the new style menu template and
+* builds the menu. Assumes that the menu template header has already been
+* read in and processed elsewhere...
+*
+* History:
+* 28-Sep-1990 mikeke     from win30
+\***************************************************************************/
+
 /* DIVERGENCE(OPENNT-HOST-045): original menu parsers. The original
  * TIF_16BIT predicate is an explicit invocation parameter, not fabricated
  * private TEB state. Recursion carries the same value. */

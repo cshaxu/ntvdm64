@@ -1,0 +1,51 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+  "current_sha256": "02ed31f896cf0cb543d35352c12e00013b126db89faeacddbd9a32abfb8c525f",
+  "changes": [
+    {
+      "original_start": 10,
+      "original_count": 2,
+      "current_start": 10,
+      "current_count": 5,
+      "original": [
+        "#include \"precomp.h\"",
+        "#pragma hdrstop"
+      ],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-035): original scaling owner retained;",
+        " * the consuming USER bitmap binding supplies its finite declarations. */",
+        "#ifndef WOW_BITMAP_FIXTURE_BINDINGS",
+        "#include \"wow_bitmap_bindings.h\"",
+        "#endif"
+      ]
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [
+    {
+      "original_line": 13,
+      "current_line": 16,
+      "logical_line": 16,
+      "text": "/*"
+    },
+    {
+      "original_line": 14,
+      "current_line": 17,
+      "logical_line": 17,
+      "text": " * Constants."
+    },
+    {
+      "original_line": 15,
+      "current_line": 18,
+      "logical_line": 18,
+      "text": " */"
+    }
+  ],
+  "evidence": [
+    "src/wow32-dll/include/wow_bitmap_bindings.h",
+    "test/adapter-mvdm-host-out/wow/wow_original_bitmap_header_fixture.c",
+    "test/observation/verify-wow-bitmap-bindings.ps1"
+  ],
+  "limits": "All scaling algorithm source matches original after include adaptation. Fixture directly includes this original scaling file with boundary definitions; its pass is not newly executed, and header/resource conversion tests do not exhaust every scaling format/dimension. No full private USER precomp dependency closure imported."
+}

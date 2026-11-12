@@ -413,8 +413,6 @@ GLOBAL VOID config( VOID )
            init_lim_configuration_data(&lim_config_data))
             lim_config_data.initialized = TRUE;
 
-
-
 #endif
 
         //
@@ -460,6 +458,8 @@ GLOBAL VOID config( VOID )
 #line 530
 
 	sas_init(vdmMemorySize*ONEKB);
+
+
 #ifdef CPU_40_STYLE
 
         /* sas_init has initialised Gdp, so now we can set up the pointers */

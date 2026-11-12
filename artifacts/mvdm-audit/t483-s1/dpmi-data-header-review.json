@@ -1,0 +1,80 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmidata.h",
+  "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+  "current_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 5
+    },
+    {
+      "original_start": 33,
+      "original_count": 11,
+      "current_start": 37,
+      "current_count": 5
+    },
+    {
+      "original_start": 45,
+      "original_count": 1,
+      "current_start": 43,
+      "current_count": 1
+    },
+    {
+      "original_start": 47,
+      "original_count": 0,
+      "current_start": 45,
+      "current_count": 3
+    },
+    {
+      "original_start": 48,
+      "original_count": 0,
+      "current_start": 49,
+      "current_count": 1
+    },
+    {
+      "original_start": 58,
+      "original_count": 24,
+      "current_start": 60,
+      "current_count": 7
+    },
+    {
+      "original_start": 196,
+      "original_count": 0,
+      "current_start": 181,
+      "current_count": 1
+    },
+    {
+      "original_start": 197,
+      "original_count": 1,
+      "current_start": 183,
+      "current_count": 2
+    },
+    {
+      "original_start": 199,
+      "original_count": 0,
+      "current_start": 186,
+      "current_count": 1
+    },
+    {
+      "original_start": 242,
+      "original_count": 0,
+      "current_start": 230,
+      "current_count": 6
+    }
+  ],
+  "initial_review": "Whole header diff includes i386/DBG exclusions, two CPU40 dispatch selections, public descriptor provider and mode-entry declaration.",
+  "counter_review": "Real original debug-register service is selectively reused. Do not infer kernel VDM activation from directory i386. Public descriptor owner is intentional; unchanged remaining declarations are original.",
+  "evidence": [
+    "src/mvdm-host/dpmi32/precomp.h",
+    "src/mvdm-host/dpmi32/i386/dpmi386.c",
+    "src/ntvdm-exe/debugger/source/dbg_registers.c",
+    "artifacts/mvdm-audit/s13-r1302-condition-batch.json"
+  ],
+  "limits": [
+    "Declaration/mapping decisions only; callee full semantics not certified here.",
+    "No new runtime or compile run; no product source changes."
+  ]
+}

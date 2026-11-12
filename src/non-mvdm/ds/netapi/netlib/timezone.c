@@ -81,5 +81,3 @@ NetpLocalTimeZoneOffset(
     return(bias);
 
 } // NetpLocalTimeZoneOffset
-
-

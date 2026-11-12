@@ -1,0 +1,125 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+  "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+  "current_sha256": "460fb69e94a9a3aa81cf2e622118f912c92694736970217c899a947b1758b4a8",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 46,
+      "original_count": 1,
+      "current_start": 47,
+      "current_count": 1,
+      "original": [
+        "void DisplayPortAccessError(int PortOffset, BOOL ReadAccess, BOOL PortOpen);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 92,
+      "original_count": 2,
+      "current_start": 95,
+      "current_count": 1,
+      "original": [
+        "    if( FileH== NULL)",
+        "        DisplayPortAccessError(port & 0x7, TRUE, FALSE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 162,
+      "original_count": 2,
+      "current_start": 166,
+      "current_count": 1,
+      "original": [
+        "    if(Invalid_port_access)",
+        "        DisplayPortAccessError(port & 0x7, TRUE, TRUE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 188,
+      "original_count": 2,
+      "current_start": 193,
+      "current_count": 1,
+      "original": [
+        "    if(FileH == NULL)",
+        "        DisplayPortAccessError(port & 0x7, FALSE, FALSE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 251,
+      "original_count": 2,
+      "current_start": 257,
+      "current_count": 1,
+      "original": [
+        "    if(Invalid_port_access)",
+        "        DisplayPortAccessError(port & 0x7, FALSE, TRUE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 401,
+      "original_count": 37,
+      "current_start": 408,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " *  user warnings are not needed here, return errors and let the",
+        " *  app handle it. message boxes are also not permitted, because",
+        " *  it can kill WOW. 20-Feb-1993 Jonle",
+        " */",
+        "void DisplayPortAccessError(int PortOffset, BOOL ReadAccess, BOOL PortOpen)",
+        "{",
+        "    static char *PortInError;",
+        "    static char ErrorMessage[250];",
+        "    int rtn;",
+        "",
+        "    // Identify port in error",
+        "",
+        "    switch(PortOffset)",
+        "    {",
+        "\tcase RS232_TX_RX:   PortInError = ReadAccess ? \"RX\" : \"TX\" ; break;",
+        "\tcase RS232_IER:     PortInError = \"IER\" ; break;",
+        "\tcase RS232_IIR:     PortInError = \"IIR\" ; break;",
+        "\tcase RS232_MCR:     PortInError = \"MCR\" ; break;",
+        "\tcase RS232_LSR:     PortInError = \"LSR\" ; break;",
+        "\tcase RS232_MSR:     PortInError = \"MSR\" ; break;",
+        "\tcase RS232_LCR:     PortInError = \"LCR\" ; break;",
+        "\tcase RS232_SCRATCH: PortInError = \"Scratch\" ; break;",
+        "\tdefault:\t    PortInError = \"Unidentified\"; break;",
+        "    }",
+        "",
+        "    //Construct Error message",
+        "",
+        "    sprintf(ErrorMessage, \"The Application attempted to %s the %s register\",",
+        "\t    ReadAccess ? \"read\" : \"write\", PortInError);",
+        "",
+        "    if(!PortOpen)",
+        "\tstrcat(ErrorMessage,\", however the comm port has not yet been opened\");",
+        "",
+        "    //Display message box",
+        "    printf(\"WOW Communication Port Access Error\\n%s\\n\",ErrorMessage);",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete source comparison finds six #ifndef PROD bodies replaced by #error only: diagnostic prototype, four diagnostic call sites, and diagnostic implementation.",
+  "counter_review": "GetCommHandle fallback to original com_inb/com_outb, WOW register dispatch, baud/LCR synchronization and native communication error handling remain original. Removed diagnostics print port-access warnings; no operational port I/O was removed. Identity comparison does not certify all build contexts, logical-line mapping or real serial hardware.",
+  "limits": "No source change, new runtime/build test or whole-file deletion."
+}

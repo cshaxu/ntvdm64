@@ -1,0 +1,102 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+  "original_sha256": "80ddf84cdde4d7e5544210a489a103b2850a38f9f3a285199eb07ac8de4e7779",
+  "current_sha256": "26b15b12d4ca1162af6ca5881385e2435c81241bbcd868bd0e1755fa46786ba9",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 36,
+      "original_count": 7
+    },
+    {
+      "original_start": 58,
+      "original_count": 10
+    },
+    {
+      "original_start": 71,
+      "original_count": 22
+    },
+    {
+      "original_start": 106,
+      "original_count": 8
+    },
+    {
+      "original_start": 133,
+      "original_count": 12
+    },
+    {
+      "original_start": 161,
+      "original_count": 11
+    },
+    {
+      "original_start": 186,
+      "original_count": 1
+    },
+    {
+      "original_start": 194,
+      "original_count": 17
+    },
+    {
+      "original_start": 229,
+      "original_count": 13
+    },
+    {
+      "original_start": 245,
+      "original_count": 31
+    },
+    {
+      "original_start": 284,
+      "original_count": 1
+    },
+    {
+      "original_start": 304,
+      "original_count": 11
+    },
+    {
+      "original_start": 324,
+      "original_count": 1
+    },
+    {
+      "original_start": 346,
+      "original_count": 2
+    },
+    {
+      "original_start": 355,
+      "original_count": 2
+    },
+    {
+      "original_start": 371,
+      "original_count": 4
+    },
+    {
+      "original_start": 398,
+      "original_count": 1
+    },
+    {
+      "original_start": 417,
+      "original_count": 1
+    },
+    {
+      "original_start": 421,
+      "original_count": 7
+    },
+    {
+      "original_start": 431,
+      "original_count": 6
+    },
+    {
+      "original_start": 444,
+      "original_count": 3
+    }
+  ],
+  "initial_review": "Twenty-one excluded bodies; all remaining source exact after omitting line directives. Alternate endian/bit order, FIFO, non-NTVDM parity names, autoflush, short trace, two-port, IRET-hook and termios alternatives removed.",
+  "counter_review": "Selected UART register layouts, NTVDM parity constants, four-port mapping and serial callbacks remain original. Source-matched non-directive lines retain original logical coordinates; anomalous line280/319/352/358 directives are superseded before such source or occur at EOF. This does not certify preprocessor-directive diagnostics or every compiled context.",
+  "line_check": {
+    "matched_nonblank_non_directive_lines": 122,
+    "mismatches": [],
+    "method": "Logical line counter over local directives; exact SequenceMatcher source chunks against pinned original. Not compiler-generated diagnostics."
+  },
+  "limits": "No new compilation/runtime proof or physical COM acceptance. Directive-line anomalies noted, not repaired."
+}

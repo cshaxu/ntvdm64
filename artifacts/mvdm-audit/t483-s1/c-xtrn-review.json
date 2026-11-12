@@ -1,0 +1,61 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+  "original_sha256": "e114d6d858f5eafe2d7a4e8af560831d95f190ecf07209d91255f1140680943e",
+  "current_sha256": "643b6f1f66588c8560815906507424e68de59178f82ca164e4546a9f228ac889",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "file_sequence": "283",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "current_start": "59",
+      "current_count": "3",
+      "original_start": "56",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-348",
+      "classification": "interface-exception-cleanup",
+      "initial_review": "SEH can leave call_cpu_function without reaching its old trailing interface_active reset; finally preserves cleanup on ordinary and abnormal paths.",
+      "counter_review": "A stale active flag routes later CPU faults to abandoned interface_abort. Guest fault longjmp and ordinary return still reset active; SEH propagates rather than fabricating success. Original single global frame remains a separate reentry limitation, not repaired by finally.",
+      "disposition": "retain",
+      "evidence": "c_xtrn.c:54-112; c_xcptn.c:236,301,588; test/mvdm-host/wow_callback_abort_ccpu_fixture.c:98-108",
+      "limits": "Source and fixture inspection only; no fresh run, universal reachability or full logical-line proof.",
+      "decision": "retain",
+      "change_plan": "Keep try/finally around original call body; preserve interface_error return for guest fault and allow native exception propagation. Do not create a second interface state machine.",
+      "related_callers": "c_xtrn.c:54-112; c_xcptn.c:236,301,588; test/mvdm-host/wow_callback_abort_ccpu_fixture.c:98-108",
+      "verification_required": "Existing actual-source callback-abort fixture: native SEH clears active, next guest fault returns13, next normal call succeeds. Real WOW callback abort and parent resumption; nested reentry not inferred from these controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "283",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "current_start": "84",
+      "current_count": "3",
+      "original_start": "78",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-348",
+      "classification": "interface-exception-cleanup",
+      "initial_review": "SEH can leave call_cpu_function without reaching its old trailing interface_active reset; finally preserves cleanup on ordinary and abnormal paths.",
+      "counter_review": "A stale active flag routes later CPU faults to abandoned interface_abort. Guest fault longjmp and ordinary return still reset active; SEH propagates rather than fabricating success. Original single global frame remains a separate reentry limitation, not repaired by finally.",
+      "disposition": "retain",
+      "evidence": "c_xtrn.c:54-112; c_xcptn.c:236,301,588; test/mvdm-host/wow_callback_abort_ccpu_fixture.c:98-108",
+      "limits": "Source and fixture inspection only; no fresh run, universal reachability or full logical-line proof.",
+      "decision": "retain",
+      "change_plan": "Keep try/finally around original call body; preserve interface_error return for guest fault and allow native exception propagation. Do not create a second interface state machine.",
+      "related_callers": "c_xtrn.c:54-112; c_xcptn.c:236,301,588; test/mvdm-host/wow_callback_abort_ccpu_fixture.c:98-108",
+      "verification_required": "Existing actual-source callback-abort fixture: native SEH clears active, next guest fault returns13, next normal call succeeds. Real WOW callback abort and parent resumption; nested reentry not inferred from these controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 23,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 2
+    }
+  ]
+}

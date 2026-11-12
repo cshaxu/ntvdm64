@@ -5,6 +5,17 @@
 *
 * HANDLES.C - Data handle manager
 *
+*
+* This module allows a 32 bit value to be converted into a handle that
+* can be validated with a high probability of correctness.
+*
+* A handle array is kept which contains the 32 bit data associated with
+* it, and a copy of the correect handle value. The handle itself is
+* composed of a combination of the index into the array for the associated
+* data, the instance value, a type value and a DDEML instance value.
+*
+* The HIWORD of a handle is guarenteed not to be 0.
+*
 * History:
 * 10-28-91 Sanfords Created
 \***************************************************************************/

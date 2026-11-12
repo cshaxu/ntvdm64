@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsa20.c",
+  "original_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b",
+  "current_sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 68,
+      "original_count": 12,
+      "current_start": 69,
+      "current_count": 1,
+      "original": [
+        "      // HimemA20State) doesn't contain instruction",
+        "      // doesn't contain instruction",
+        "#ifdef MIPS",
+        "\tSim32FlushVDMPointer",
+        "\t (",
+        "\t  (((ULONG)pHimemA20State >> 4) << 16) | ((ULONG)pHimemA20State & 0xF),",
+        "\t  1,",
+        "\t  pHimemA20State,",
+        "\t  FALSE",
+        "\t );",
+        "",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 92,
+      "original_count": 12,
+      "current_start": 84,
+      "current_count": 1,
+      "original": [
+        "      // HimemA20State) doesn't contain instruction",
+        "      // doesn't contain instruction",
+        "#ifdef MIPS",
+        "\tSim32FlushVDMPointer",
+        "\t (",
+        "\t  (((ULONG)pHimemA20State >> 4) << 16) | ((ULONG)pHimemA20State & 0xF),",
+        "\t  1,",
+        "\t  pHimemA20State,",
+        "\t  FALSE",
+        "\t );",
+        "",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 80,
+      "current": 70,
+      "logical": 69
+    },
+    {
+      "original": 104,
+      "current": 85,
+      "logical": 93
+    }
+  ],
+  "limits": "Exclusion-only is body classification, not renewed configuration-hit proof. No backend activated or internal CPU changes authorized."
+}

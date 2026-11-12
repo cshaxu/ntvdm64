@@ -1,0 +1,174 @@
+{
+  "path": "src/mvdm-host/inc/wow.h",
+  "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+  "current_sha256": "a6aa5375704bd870fb85ecc0be7c03d975f5efad1ba51bb3d39d5174682ea3e8",
+  "review_complete": true,
+  "register_entries": 1,
+  "blocks": [
+    {
+      "kind": "replace",
+      "original_start": 27,
+      "original_count": 1,
+      "current_start": 27,
+      "current_count": 5
+    },
+    {
+      "kind": "insert",
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 33,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 30,
+      "original_count": 8,
+      "current_start": 35,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 39,
+      "original_count": 1,
+      "current_start": 38,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 58,
+      "original_count": 0,
+      "current_start": 57,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 59,
+      "original_count": 2,
+      "current_start": 59,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 62,
+      "original_count": 0,
+      "current_start": 62,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 67,
+      "original_count": 0,
+      "current_start": 68,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 68,
+      "original_count": 5,
+      "current_start": 70,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 74,
+      "original_count": 0,
+      "current_start": 73,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 80,
+      "original_count": 0,
+      "current_start": 80,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1212,
+      "original_count": 0,
+      "current_start": 1213,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1213,
+      "original_count": 1,
+      "current_start": 1215,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1215,
+      "original_count": 0,
+      "current_start": 1218,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1244,
+      "original_count": 1,
+      "current_start": 1248,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1246,
+      "original_count": 0,
+      "current_start": 1251,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1253,
+      "original_count": 0,
+      "current_start": 1259,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1280,
+      "original_count": 1,
+      "current_start": 1287,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1282,
+      "original_count": 0,
+      "current_start": 1290,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1292,
+      "original_count": 0,
+      "current_start": 1301,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1323,
+      "original_count": 1,
+      "current_start": 1333,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1325,
+      "original_count": 0,
+      "current_start": 1336,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1334,
+      "original_count": 0,
+      "current_start": 1346,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "Selected precomp.h defines _WOWNT32_ before wow32.h includes wow.h; removed physical include supplied no selected declarations.",
+  "counter_review": "Restoring a header whose body is suppressed adds dependency without restoring logic. This does not prove the upstream suppression itself minimal; precomp/compat declaration ownership must be audited at their file positions.",
+  "excluded": "i386/NOLOG/DEBUG/missing WM_USER/non-WIN31 alternatives and line scaffolding; selected definitions unchanged.",
+  "runtime_validation": "None; no source edits."
+}

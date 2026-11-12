@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+  "original_sha256": "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+  "current_sha256": "6ee720b91a5697745e224313655cd514dac4887b1088a5af70ad705f4d0c0206",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 98,
+      "original_count": 2,
+      "current_start": 99,
+      "current_count": 1,
+      "original": [
+        "#define DEFAULTXMSLMT\t     0\t      /* kilobytes ; ntvdm will choose it",
+        "\t\t\t\t\t intelligently. sudeepb 26-Sep-1992*/"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#else"
+    }
+  ],
+  "initial_review": "Only non-NTVDM DEFAULTXMSLMT fallback excluded; selected NTVDM 0xffff sentinel remains original.",
+  "counter_review": "Full comparison confirms original conditional frame retained and all other source lines exact after omitting #line. No new defaults or initialization semantics introduced.",
+  "limits": "Content comparison only, not universal build context or runtime certification."
+}

@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+  "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+  "current_sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
+  "excluded": [
+    {
+      "original_start": 73,
+      "original_count": 4,
+      "current_start": 75,
+      "current_count": 1,
+      "original": [
+        "    if (ped->lpfnCharset)",
+        "        (int)(* ped->lpfnCharset)(ped, EDITINTL_CREATEMLSL);",
+        "",
+        "    if (ped->format != ES_LEFT && !ped->lpfnCharset)"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "changes": [],
+  "logical_line_mismatches": [
+    {
+      "current": 76,
+      "original": 77,
+      "logical": 74
+    }
+  ],
+  "initial_review": "Complete normalized comparison: 1 original conditional bodies replaced by #error with surrounding boundaries retained; all other source is original-exact.",
+  "counter_review": "Exclusion-only source classification is not proof of all supported branch hits. Diagnostic closing-boundary offsets are separately registered; no algorithm change inferred from those offsets.",
+  "evidence": "Pinned OpenNT edmlonce.c; tools/build/New-T404S5Wow32ProviderNinja.ps1 EDIT controlBody cohort",
+  "limits": "Source audit only, no build/test or refreshed macro-hit claim. No source changes this batch."
+}

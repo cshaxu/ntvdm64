@@ -1,0 +1,69 @@
+{
+  "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+  "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+  "current_sha256": "ea3a19b4cda1177297e2ec5d60d03bdc737aa38773698e81ed8755f6d5c67cf1",
+  "changes": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 22,
+      "current_count": 2,
+      "original": [
+        "#include <zwapi.h>"
+      ],
+      "current": [
+        "#include \"environapi.h\"",
+        "#include \"zwapi.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Private symbol declarations select imported original environment algorithms instead of colliding with modern NTDLL exports; finite Zw declarations provide native-size host VM boundary.",
+      "change_plan": "Retain environapi dependency. Quoted zwapi include selects finite compat carrier; verify actual include resolution before treating delimiter change as removable style. No new environment algorithm."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 27,
+      "original_count": 5,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "#pragma alloc_text(INIT,RtlCreateEnvironment          )",
+        "#pragma alloc_text(INIT,RtlDestroyEnvironment         )",
+        "#pragma alloc_text(INIT,RtlSetCurrentEnvironment      )",
+        "#pragma alloc_text(INIT,RtlQueryEnvironmentVariable_U )",
+        "#pragma alloc_text(INIT,RtlSetEnvironmentVariable     )"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 289,
+      "original_count": 4,
+      "current_start": 292,
+      "current_count": 1,
+      "original": [
+        "        if (*p == UNICODE_NULL)",
+        "            DbgPrint( \"RTL: QEV - Empty Environment being searched: %08x\\n\", p);",
+        "        else if ((UCHAR)((*p) >> 8) != '\\0')",
+        "            DbgPrint( \"RTL: QEV - Possible ANSI Environment being searched: %08x\\n\", p);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 32,
+      "current": 32,
+      "logical": 28
+    },
+    {
+      "original": 293,
+      "current": 293,
+      "logical": 290
+    }
+  ],
+  "limits": "Source review only; error.c builds use NTOS_KERNEL_RUNTIME to exclude diagnostic prints, not kernel execution. Original error table unchanged."
+}

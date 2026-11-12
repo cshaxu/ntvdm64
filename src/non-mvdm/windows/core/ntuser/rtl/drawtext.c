@@ -1,18 +1,68 @@
-/* Copyright (c) 1985-91, Microsoft Corporation.
- * Original windows/core/ntuser drawtext.c function subset.
- * DIVERGENCE(OPENNT-HOST-097): unrelated text engines excluded;
- * selected function body unchanged. See the S3 source ledger.
- */
+/****************************** Module Header ******************************\
+* Module Name: drawtext.c
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* This module contains common text drawing functions.
+*
+* History:
+* 02-12-92 mikeke   Moved Drawtext to the client side
+\***************************************************************************/
 #include "precomp.h"
 
+/***************************************************************************\
+*
+* IsSysFontAndDefaultMode()
+*
+* Returns TRUE if font selected into DC is the system font AND the current
+* mapping mode of the DC is MM_TEXT (Default mode); else returns FALSE. This
+* is called by interrupt time code so it needs to be in the fixed code
+* segment.
+*
+* History:
+* 07-Jul-95 BradG   Ported from Win95
+\***************************************************************************/
 #line 1971
 BOOL IsSysFontAndDefaultMode(HDC hdc)
 {
     return((UserGetHFONT(hdc) == ghFontSys) && (UserGetMapMode(hdc) == MM_TEXT));
 }
 
-/* DIVERGENCE(OPENNT-HOST-110): additional unchanged original body;
- * unrelated text engines remain excluded. */
+/***************************************************************************\
+* GetPrefixCount
+*
+* This routine returns the count of accelerator mnemonics and the
+* character location (starting at 0) of the character to underline.
+* A single CH_PREFIX character will be striped and the following character
+* underlined, all double CH_PREFIX character sequences will be replaced by
+* a single CH_PREFIX (this is done by PSMTextOut). This routine is used
+* to determine the actual character length of the string that will be
+* printed, and the location the underline should be placed. Only
+* cch characters from the input string will be processed. If the lpstrCopy
+* parameter is non-NULL, this routine will make a printable copy of the
+* string with all single prefix characters removed and all double prefix
+* characters collapsed to a single character. If copying, a maximum
+* character count must be specified which will limit the number of
+* characters copied.
+*
+* The location of the single CH_PREFIX is returned in the low order
+* word, and the count of CH_PREFIX characters that will be striped
+* from the string during printing is in the hi order word. If the
+* high order word is 0, the low order word is meaningless. If there
+* were no single prefix characters (i.e. nothing to underline), the
+* low order word will be -1 (to distinguish from location 0).
+*
+* These routines assume that there is only one single CH_PREFIX character
+* in the string.
+*
+* WARNING! this rountine returns information in BYTE count not CHAR count
+* (so it can easily be passed onto GreExtTextOutW which takes byte
+* counts as well)
+*
+* History:
+* 11-13-90 JimA         Ported to NT
+* 30-Nov-1992 mikeke    Client side version
+\***************************************************************************/
 #line 761
 LONG GetPrefixCount(
     LPCWSTR lpstr,
@@ -92,6 +142,17 @@ LONG GetPrefixCount(
 }
 
 #ifdef WOW_ORIGINAL_MNEMONIC_DRAWING
+/***************************************************************************\
+* PSMTextOut
+*
+* Outputs the text and puts and _ below the character with an &
+* before it. Note that this routine isn't used for menus since menus
+* have their own special one so that it is specialized and faster...
+*
+* History:
+* 11-13-90 JimA         Ported to NT.
+* 30-Nov-1992 mikeke    Client side version
+\***************************************************************************/
 #line 1867
 void PSMTextOut(
     HDC hdc,

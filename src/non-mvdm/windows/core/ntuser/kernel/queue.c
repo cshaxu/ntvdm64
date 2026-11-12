@@ -40,6 +40,14 @@
 #endif
 #line 118
 
+/***************************************************************************\
+* SetAppCompatFlags
+*
+*
+* History:
+* 03-23-92 JimA     Created.
+\***************************************************************************/
+
 #line 526
 void SetAppCompatFlags(
     PTHREADINFO pti)
@@ -145,6 +153,16 @@ SACF_GotFlags:
     pti->ppi->W32PF_Flags |= W32PF_HAVECOMPATFLAGS;
 
 }
+
+/***************************************************************************\
+* xxxInitTask -- called by WOW startup for each app
+*
+*
+*
+* History:
+* 02-21-91 MikeHar  Created.
+* 02-23-92 MattFe   Altered for WOW
+\***************************************************************************/
 
 #line 658
 NTSTATUS xxxInitTask(
@@ -350,6 +368,15 @@ NTSTATUS xxxInitTask(
 
     return STATUS_SUCCESS;
 }
+
+/***************************************************************************\
+* _ShowStartGlass
+*
+* This routine is called by WOW when first starting or when starting an
+* additional WOW app.
+*
+* 12-07-92 ScottLu      Created.
+\***************************************************************************/
 
 #line 867
 void _ShowStartGlass(

@@ -1,0 +1,29 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "status": "source-body evidence; final register classification pending",
+  "current_sha256": "9b2c8b3e68218c69f6cd9449aa1185bbeb1e6bbae4f9a36f31e833092b0adf32",
+  "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+  "comparison": "Five function bodies compared after selecting non-WOW alternatives and removing comments, whitespace and #line. No source changes. Not compiler or runtime proof.",
+  "selected_original_body_equal": {
+    "_IsChild": true,
+    "_IsWindowVisible": true,
+    "_ClientToScreen": true,
+    "_GetClientRect": true,
+    "_ScreenToClient": true
+  },
+  "dead_macro_candidates": [
+    "ClientSharedInfo",
+    "ServerInfo",
+    "LPPOINTWOW",
+    "NORMALIZEDSHORTVALUE",
+    "WOWlstrlenA",
+    "WOWRtlCopyMemory",
+    "DESKTOPVALIDATE"
+  ],
+  "remaining_review": [
+    "Map omitted handle/menu/window service owners and bounded host contracts.",
+    "Register unused desktop validation macro and detached optimize pragmas as minimization candidates, not functional fixes.",
+    "Reconcile original comments, source order and diagnostic line scaffolding."
+  ],
+  "fixture": "test/adapter-mvdm-host-out/wow/wow_edit_view_fixture.c; synthetic graph, coordinates and old minimized rectangle contract; no fresh execution or production lifetime proof."
+}

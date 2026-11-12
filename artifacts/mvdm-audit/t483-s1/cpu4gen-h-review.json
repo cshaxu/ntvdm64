@@ -1,0 +1,1590 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+  "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+  "current_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+  "review_complete": true,
+  "register_entries": 13,
+  "changes": [
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "566",
+      "current_count": "5",
+      "original_start": "778",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "579",
+      "current_count": "1",
+      "original_start": "791",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "588",
+      "current_count": "1",
+      "original_start": "804",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "597",
+      "current_count": "1",
+      "original_start": "817",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1218",
+      "current_count": "5",
+      "original_start": "1714",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1231",
+      "current_count": "1",
+      "original_start": "1727",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1240",
+      "current_count": "1",
+      "original_start": "1740",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1249",
+      "current_count": "1",
+      "original_start": "1753",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1258",
+      "current_count": "1",
+      "original_start": "1766",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1267",
+      "current_count": "1",
+      "original_start": "1779",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1276",
+      "current_count": "1",
+      "original_start": "1792",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1285",
+      "current_count": "1",
+      "original_start": "1805",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "311",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_start": "1294",
+      "current_count": "1",
+      "original_start": "1818",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "provider-return-type",
+      "initial_review": "Generated declaration disagreed with the selected original c_reg.c definition.",
+      "counter_review": "All four segment setters and nine flag getters are defined as GLOBAL ISM32 in c_reg.c. Aligning declarations with that provider preserves implementation and avoids incompatible cross-translation-unit types; do not change provider to fit generated header.",
+      "disposition": "retain",
+      "evidence": "softpc.new/base/ccpu386/c_reg.c:742-789,1128-1181; corresponding original OpenNT definitions; cpu4gen.h declarations",
+      "limits": "Source signature comparison only; no new build or runtime result. Exclusion classification is separate from full branch reachability certification.",
+      "decision": "retain",
+      "change_plan": "Keep ISM32 return carrier matching original selected implementation; do not introduce wrappers or casts at each caller.",
+      "related_callers": "CCPU c_setCS/SS/DS/ES and c_getCF/PF/AF/ZF/SF/TF/IF/DF/OF users through cpu4gen.h; c_reg.c provider.",
+      "verification_required": "Selected builds must accept identical caller/provider prototypes; segment error return and flag value tests preserve signed carrier and values.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 191,
+      "original_count": 7,
+      "current_start": 191,
+      "current_count": 2
+    },
+    {
+      "original_start": 204,
+      "original_count": 7,
+      "current_start": 200,
+      "current_count": 2
+    },
+    {
+      "original_start": 217,
+      "original_count": 7,
+      "current_start": 209,
+      "current_count": 2
+    },
+    {
+      "original_start": 230,
+      "original_count": 7,
+      "current_start": 218,
+      "current_count": 2
+    },
+    {
+      "original_start": 243,
+      "original_count": 7,
+      "current_start": 227,
+      "current_count": 2
+    },
+    {
+      "original_start": 256,
+      "original_count": 7,
+      "current_start": 236,
+      "current_count": 2
+    },
+    {
+      "original_start": 269,
+      "original_count": 7,
+      "current_start": 245,
+      "current_count": 2
+    },
+    {
+      "original_start": 282,
+      "original_count": 7,
+      "current_start": 254,
+      "current_count": 2
+    },
+    {
+      "original_start": 295,
+      "original_count": 7,
+      "current_start": 263,
+      "current_count": 2
+    },
+    {
+      "original_start": 308,
+      "original_count": 7,
+      "current_start": 272,
+      "current_count": 2
+    },
+    {
+      "original_start": 321,
+      "original_count": 7,
+      "current_start": 281,
+      "current_count": 2
+    },
+    {
+      "original_start": 334,
+      "original_count": 7,
+      "current_start": 290,
+      "current_count": 2
+    },
+    {
+      "original_start": 347,
+      "original_count": 7,
+      "current_start": 299,
+      "current_count": 2
+    },
+    {
+      "original_start": 360,
+      "original_count": 7,
+      "current_start": 308,
+      "current_count": 2
+    },
+    {
+      "original_start": 373,
+      "original_count": 7,
+      "current_start": 317,
+      "current_count": 2
+    },
+    {
+      "original_start": 386,
+      "original_count": 7,
+      "current_start": 326,
+      "current_count": 2
+    },
+    {
+      "original_start": 399,
+      "original_count": 9,
+      "current_start": 335,
+      "current_count": 2
+    },
+    {
+      "original_start": 414,
+      "original_count": 9,
+      "current_start": 344,
+      "current_count": 2
+    },
+    {
+      "original_start": 429,
+      "original_count": 9,
+      "current_start": 353,
+      "current_count": 2
+    },
+    {
+      "original_start": 444,
+      "original_count": 9,
+      "current_start": 362,
+      "current_count": 2
+    },
+    {
+      "original_start": 459,
+      "original_count": 9,
+      "current_start": 371,
+      "current_count": 2
+    },
+    {
+      "original_start": 474,
+      "original_count": 9,
+      "current_start": 380,
+      "current_count": 2
+    },
+    {
+      "original_start": 489,
+      "original_count": 9,
+      "current_start": 389,
+      "current_count": 2
+    },
+    {
+      "original_start": 504,
+      "original_count": 9,
+      "current_start": 398,
+      "current_count": 2
+    },
+    {
+      "original_start": 519,
+      "original_count": 9,
+      "current_start": 407,
+      "current_count": 2
+    },
+    {
+      "original_start": 534,
+      "original_count": 9,
+      "current_start": 416,
+      "current_count": 2
+    },
+    {
+      "original_start": 549,
+      "original_count": 9,
+      "current_start": 425,
+      "current_count": 2
+    },
+    {
+      "original_start": 564,
+      "original_count": 9,
+      "current_start": 434,
+      "current_count": 2
+    },
+    {
+      "original_start": 579,
+      "original_count": 9,
+      "current_start": 443,
+      "current_count": 2
+    },
+    {
+      "original_start": 594,
+      "original_count": 9,
+      "current_start": 452,
+      "current_count": 2
+    },
+    {
+      "original_start": 609,
+      "original_count": 9,
+      "current_start": 461,
+      "current_count": 2
+    },
+    {
+      "original_start": 624,
+      "original_count": 9,
+      "current_start": 470,
+      "current_count": 2
+    },
+    {
+      "original_start": 639,
+      "original_count": 9,
+      "current_start": 479,
+      "current_count": 2
+    },
+    {
+      "original_start": 654,
+      "original_count": 9,
+      "current_start": 488,
+      "current_count": 2
+    },
+    {
+      "original_start": 669,
+      "original_count": 9,
+      "current_start": 497,
+      "current_count": 2
+    },
+    {
+      "original_start": 684,
+      "original_count": 9,
+      "current_start": 506,
+      "current_count": 2
+    },
+    {
+      "original_start": 699,
+      "original_count": 7,
+      "current_start": 515,
+      "current_count": 2
+    },
+    {
+      "original_start": 712,
+      "original_count": 7,
+      "current_start": 524,
+      "current_count": 2
+    },
+    {
+      "original_start": 725,
+      "original_count": 9,
+      "current_start": 533,
+      "current_count": 2
+    },
+    {
+      "original_start": 740,
+      "original_count": 9,
+      "current_start": 542,
+      "current_count": 2
+    },
+    {
+      "original_start": 755,
+      "original_count": 7,
+      "current_start": 551,
+      "current_count": 2
+    },
+    {
+      "original_start": 768,
+      "original_count": 7,
+      "current_start": 560,
+      "current_count": 2
+    },
+    {
+      "original_start": 781,
+      "original_count": 7,
+      "current_start": 573,
+      "current_count": 2
+    },
+    {
+      "original_start": 794,
+      "original_count": 7,
+      "current_start": 582,
+      "current_count": 2
+    },
+    {
+      "original_start": 807,
+      "original_count": 7,
+      "current_start": 591,
+      "current_count": 2
+    },
+    {
+      "original_start": 820,
+      "original_count": 7,
+      "current_start": 600,
+      "current_count": 2
+    },
+    {
+      "original_start": 833,
+      "original_count": 7,
+      "current_start": 609,
+      "current_count": 2
+    },
+    {
+      "original_start": 846,
+      "original_count": 7,
+      "current_start": 618,
+      "current_count": 2
+    },
+    {
+      "original_start": 859,
+      "original_count": 7,
+      "current_start": 627,
+      "current_count": 2
+    },
+    {
+      "original_start": 872,
+      "original_count": 7,
+      "current_start": 636,
+      "current_count": 2
+    },
+    {
+      "original_start": 885,
+      "original_count": 7,
+      "current_start": 645,
+      "current_count": 2
+    },
+    {
+      "original_start": 898,
+      "original_count": 7,
+      "current_start": 654,
+      "current_count": 2
+    },
+    {
+      "original_start": 911,
+      "original_count": 7,
+      "current_start": 663,
+      "current_count": 2
+    },
+    {
+      "original_start": 924,
+      "original_count": 7,
+      "current_start": 672,
+      "current_count": 2
+    },
+    {
+      "original_start": 937,
+      "original_count": 7,
+      "current_start": 681,
+      "current_count": 2
+    },
+    {
+      "original_start": 950,
+      "original_count": 7,
+      "current_start": 690,
+      "current_count": 2
+    },
+    {
+      "original_start": 963,
+      "original_count": 7,
+      "current_start": 699,
+      "current_count": 2
+    },
+    {
+      "original_start": 976,
+      "original_count": 7,
+      "current_start": 708,
+      "current_count": 2
+    },
+    {
+      "original_start": 989,
+      "original_count": 7,
+      "current_start": 717,
+      "current_count": 2
+    },
+    {
+      "original_start": 1002,
+      "original_count": 7,
+      "current_start": 726,
+      "current_count": 2
+    },
+    {
+      "original_start": 1015,
+      "original_count": 7,
+      "current_start": 735,
+      "current_count": 2
+    },
+    {
+      "original_start": 1028,
+      "original_count": 7,
+      "current_start": 744,
+      "current_count": 2
+    },
+    {
+      "original_start": 1041,
+      "original_count": 7,
+      "current_start": 753,
+      "current_count": 2
+    },
+    {
+      "original_start": 1054,
+      "original_count": 7,
+      "current_start": 762,
+      "current_count": 2
+    },
+    {
+      "original_start": 1067,
+      "original_count": 7,
+      "current_start": 771,
+      "current_count": 2
+    },
+    {
+      "original_start": 1080,
+      "original_count": 7,
+      "current_start": 780,
+      "current_count": 2
+    },
+    {
+      "original_start": 1093,
+      "original_count": 7,
+      "current_start": 789,
+      "current_count": 2
+    },
+    {
+      "original_start": 1106,
+      "original_count": 7,
+      "current_start": 798,
+      "current_count": 2
+    },
+    {
+      "original_start": 1119,
+      "original_count": 7,
+      "current_start": 807,
+      "current_count": 2
+    },
+    {
+      "original_start": 1132,
+      "original_count": 7,
+      "current_start": 816,
+      "current_count": 2
+    },
+    {
+      "original_start": 1145,
+      "original_count": 7,
+      "current_start": 825,
+      "current_count": 2
+    },
+    {
+      "original_start": 1158,
+      "original_count": 7,
+      "current_start": 834,
+      "current_count": 2
+    },
+    {
+      "original_start": 1171,
+      "original_count": 7,
+      "current_start": 843,
+      "current_count": 2
+    },
+    {
+      "original_start": 1184,
+      "original_count": 7,
+      "current_start": 852,
+      "current_count": 2
+    },
+    {
+      "original_start": 1197,
+      "original_count": 7,
+      "current_start": 861,
+      "current_count": 2
+    },
+    {
+      "original_start": 1210,
+      "original_count": 7,
+      "current_start": 870,
+      "current_count": 2
+    },
+    {
+      "original_start": 1223,
+      "original_count": 7,
+      "current_start": 879,
+      "current_count": 2
+    },
+    {
+      "original_start": 1236,
+      "original_count": 7,
+      "current_start": 888,
+      "current_count": 2
+    },
+    {
+      "original_start": 1249,
+      "original_count": 7,
+      "current_start": 897,
+      "current_count": 2
+    },
+    {
+      "original_start": 1262,
+      "original_count": 7,
+      "current_start": 906,
+      "current_count": 2
+    },
+    {
+      "original_start": 1275,
+      "original_count": 7,
+      "current_start": 915,
+      "current_count": 2
+    },
+    {
+      "original_start": 1288,
+      "original_count": 7,
+      "current_start": 924,
+      "current_count": 2
+    },
+    {
+      "original_start": 1301,
+      "original_count": 7,
+      "current_start": 933,
+      "current_count": 2
+    },
+    {
+      "original_start": 1314,
+      "original_count": 7,
+      "current_start": 942,
+      "current_count": 2
+    },
+    {
+      "original_start": 1327,
+      "original_count": 7,
+      "current_start": 951,
+      "current_count": 2
+    },
+    {
+      "original_start": 1340,
+      "original_count": 7,
+      "current_start": 960,
+      "current_count": 2
+    },
+    {
+      "original_start": 1353,
+      "original_count": 7,
+      "current_start": 969,
+      "current_count": 2
+    },
+    {
+      "original_start": 1366,
+      "original_count": 7,
+      "current_start": 978,
+      "current_count": 2
+    },
+    {
+      "original_start": 1379,
+      "original_count": 7,
+      "current_start": 987,
+      "current_count": 2
+    },
+    {
+      "original_start": 1392,
+      "original_count": 7,
+      "current_start": 996,
+      "current_count": 2
+    },
+    {
+      "original_start": 1405,
+      "original_count": 7,
+      "current_start": 1005,
+      "current_count": 2
+    },
+    {
+      "original_start": 1418,
+      "original_count": 7,
+      "current_start": 1014,
+      "current_count": 2
+    },
+    {
+      "original_start": 1431,
+      "original_count": 7,
+      "current_start": 1023,
+      "current_count": 2
+    },
+    {
+      "original_start": 1444,
+      "original_count": 7,
+      "current_start": 1032,
+      "current_count": 2
+    },
+    {
+      "original_start": 1457,
+      "original_count": 7,
+      "current_start": 1041,
+      "current_count": 2
+    },
+    {
+      "original_start": 1470,
+      "original_count": 7,
+      "current_start": 1050,
+      "current_count": 2
+    },
+    {
+      "original_start": 1483,
+      "original_count": 7,
+      "current_start": 1059,
+      "current_count": 2
+    },
+    {
+      "original_start": 1496,
+      "original_count": 7,
+      "current_start": 1068,
+      "current_count": 2
+    },
+    {
+      "original_start": 1509,
+      "original_count": 7,
+      "current_start": 1077,
+      "current_count": 2
+    },
+    {
+      "original_start": 1522,
+      "original_count": 7,
+      "current_start": 1086,
+      "current_count": 2
+    },
+    {
+      "original_start": 1535,
+      "original_count": 7,
+      "current_start": 1095,
+      "current_count": 2
+    },
+    {
+      "original_start": 1548,
+      "original_count": 7,
+      "current_start": 1104,
+      "current_count": 2
+    },
+    {
+      "original_start": 1561,
+      "original_count": 7,
+      "current_start": 1113,
+      "current_count": 2
+    },
+    {
+      "original_start": 1574,
+      "original_count": 7,
+      "current_start": 1122,
+      "current_count": 2
+    },
+    {
+      "original_start": 1587,
+      "original_count": 7,
+      "current_start": 1131,
+      "current_count": 2
+    },
+    {
+      "original_start": 1600,
+      "original_count": 7,
+      "current_start": 1140,
+      "current_count": 2
+    },
+    {
+      "original_start": 1613,
+      "original_count": 7,
+      "current_start": 1149,
+      "current_count": 2
+    },
+    {
+      "original_start": 1626,
+      "original_count": 7,
+      "current_start": 1158,
+      "current_count": 2
+    },
+    {
+      "original_start": 1639,
+      "original_count": 7,
+      "current_start": 1167,
+      "current_count": 2
+    },
+    {
+      "original_start": 1652,
+      "original_count": 7,
+      "current_start": 1176,
+      "current_count": 2
+    },
+    {
+      "original_start": 1665,
+      "original_count": 7,
+      "current_start": 1185,
+      "current_count": 2
+    },
+    {
+      "original_start": 1678,
+      "original_count": 7,
+      "current_start": 1194,
+      "current_count": 2
+    },
+    {
+      "original_start": 1691,
+      "original_count": 7,
+      "current_start": 1203,
+      "current_count": 2
+    },
+    {
+      "original_start": 1704,
+      "original_count": 7,
+      "current_start": 1212,
+      "current_count": 2
+    },
+    {
+      "original_start": 1717,
+      "original_count": 7,
+      "current_start": 1225,
+      "current_count": 2
+    },
+    {
+      "original_start": 1730,
+      "original_count": 7,
+      "current_start": 1234,
+      "current_count": 2
+    },
+    {
+      "original_start": 1743,
+      "original_count": 7,
+      "current_start": 1243,
+      "current_count": 2
+    },
+    {
+      "original_start": 1756,
+      "original_count": 7,
+      "current_start": 1252,
+      "current_count": 2
+    },
+    {
+      "original_start": 1769,
+      "original_count": 7,
+      "current_start": 1261,
+      "current_count": 2
+    },
+    {
+      "original_start": 1782,
+      "original_count": 7,
+      "current_start": 1270,
+      "current_count": 2
+    },
+    {
+      "original_start": 1795,
+      "original_count": 7,
+      "current_start": 1279,
+      "current_count": 2
+    },
+    {
+      "original_start": 1808,
+      "original_count": 7,
+      "current_start": 1288,
+      "current_count": 2
+    },
+    {
+      "original_start": 1821,
+      "original_count": 7,
+      "current_start": 1297,
+      "current_count": 2
+    },
+    {
+      "original_start": 1834,
+      "original_count": 7,
+      "current_start": 1306,
+      "current_count": 2
+    },
+    {
+      "original_start": 1847,
+      "original_count": 7,
+      "current_start": 1315,
+      "current_count": 2
+    },
+    {
+      "original_start": 1860,
+      "original_count": 7,
+      "current_start": 1324,
+      "current_count": 2
+    },
+    {
+      "original_start": 1873,
+      "original_count": 7,
+      "current_start": 1333,
+      "current_count": 2
+    },
+    {
+      "original_start": 1886,
+      "original_count": 7,
+      "current_start": 1342,
+      "current_count": 2
+    },
+    {
+      "original_start": 1899,
+      "original_count": 7,
+      "current_start": 1351,
+      "current_count": 2
+    },
+    {
+      "original_start": 1912,
+      "original_count": 7,
+      "current_start": 1360,
+      "current_count": 2
+    },
+    {
+      "original_start": 1925,
+      "original_count": 7,
+      "current_start": 1369,
+      "current_count": 2
+    },
+    {
+      "original_start": 1938,
+      "original_count": 7,
+      "current_start": 1378,
+      "current_count": 2
+    },
+    {
+      "original_start": 1951,
+      "original_count": 7,
+      "current_start": 1387,
+      "current_count": 2
+    },
+    {
+      "original_start": 1964,
+      "original_count": 7,
+      "current_start": 1396,
+      "current_count": 2
+    },
+    {
+      "original_start": 1977,
+      "original_count": 7,
+      "current_start": 1405,
+      "current_count": 2
+    },
+    {
+      "original_start": 1990,
+      "original_count": 7,
+      "current_start": 1414,
+      "current_count": 2
+    },
+    {
+      "original_start": 2003,
+      "original_count": 7,
+      "current_start": 1423,
+      "current_count": 2
+    },
+    {
+      "original_start": 2016,
+      "original_count": 7,
+      "current_start": 1432,
+      "current_count": 2
+    },
+    {
+      "original_start": 2029,
+      "original_count": 7,
+      "current_start": 1441,
+      "current_count": 2
+    },
+    {
+      "original_start": 2042,
+      "original_count": 7,
+      "current_start": 1450,
+      "current_count": 2
+    },
+    {
+      "original_start": 2055,
+      "original_count": 7,
+      "current_start": 1459,
+      "current_count": 2
+    },
+    {
+      "original_start": 2068,
+      "original_count": 7,
+      "current_start": 1468,
+      "current_count": 2
+    },
+    {
+      "original_start": 2081,
+      "original_count": 7,
+      "current_start": 1477,
+      "current_count": 2
+    },
+    {
+      "original_start": 2094,
+      "original_count": 7,
+      "current_start": 1486,
+      "current_count": 2
+    },
+    {
+      "original_start": 2107,
+      "original_count": 7,
+      "current_start": 1495,
+      "current_count": 2
+    },
+    {
+      "original_start": 2120,
+      "original_count": 7,
+      "current_start": 1504,
+      "current_count": 2
+    },
+    {
+      "original_start": 2133,
+      "original_count": 7,
+      "current_start": 1513,
+      "current_count": 2
+    },
+    {
+      "original_start": 2146,
+      "original_count": 7,
+      "current_start": 1522,
+      "current_count": 2
+    },
+    {
+      "original_start": 2159,
+      "original_count": 7,
+      "current_start": 1531,
+      "current_count": 2
+    },
+    {
+      "original_start": 2172,
+      "original_count": 7,
+      "current_start": 1540,
+      "current_count": 2
+    },
+    {
+      "original_start": 2185,
+      "original_count": 7,
+      "current_start": 1549,
+      "current_count": 2
+    },
+    {
+      "original_start": 2198,
+      "original_count": 7,
+      "current_start": 1558,
+      "current_count": 2
+    },
+    {
+      "original_start": 2211,
+      "original_count": 7,
+      "current_start": 1567,
+      "current_count": 2
+    },
+    {
+      "original_start": 2224,
+      "original_count": 7,
+      "current_start": 1576,
+      "current_count": 2
+    },
+    {
+      "original_start": 2237,
+      "original_count": 7,
+      "current_start": 1585,
+      "current_count": 2
+    },
+    {
+      "original_start": 2250,
+      "original_count": 7,
+      "current_start": 1594,
+      "current_count": 2
+    },
+    {
+      "original_start": 2329,
+      "original_count": 7,
+      "current_start": 1669,
+      "current_count": 2
+    },
+    {
+      "original_start": 2342,
+      "original_count": 7,
+      "current_start": 1678,
+      "current_count": 2
+    },
+    {
+      "original_start": 2355,
+      "original_count": 7,
+      "current_start": 1687,
+      "current_count": 2
+    },
+    {
+      "original_start": 2368,
+      "original_count": 7,
+      "current_start": 1696,
+      "current_count": 2
+    },
+    {
+      "original_start": 2381,
+      "original_count": 7,
+      "current_start": 1705,
+      "current_count": 2
+    },
+    {
+      "original_start": 2394,
+      "original_count": 7,
+      "current_start": 1714,
+      "current_count": 2
+    },
+    {
+      "original_start": 2407,
+      "original_count": 7,
+      "current_start": 1723,
+      "current_count": 2
+    },
+    {
+      "original_start": 2420,
+      "original_count": 7,
+      "current_start": 1732,
+      "current_count": 2
+    },
+    {
+      "original_start": 2433,
+      "original_count": 7,
+      "current_start": 1741,
+      "current_count": 2
+    },
+    {
+      "original_start": 2446,
+      "original_count": 7,
+      "current_start": 1750,
+      "current_count": 2
+    },
+    {
+      "original_start": 2459,
+      "original_count": 7,
+      "current_start": 1759,
+      "current_count": 2
+    },
+    {
+      "original_start": 2472,
+      "original_count": 7,
+      "current_start": 1768,
+      "current_count": 2
+    },
+    {
+      "original_start": 2485,
+      "original_count": 7,
+      "current_start": 1777,
+      "current_count": 2
+    },
+    {
+      "original_start": 2498,
+      "original_count": 7,
+      "current_start": 1786,
+      "current_count": 2
+    },
+    {
+      "original_start": 2511,
+      "original_count": 7,
+      "current_start": 1795,
+      "current_count": 2
+    },
+    {
+      "original_start": 2524,
+      "original_count": 7,
+      "current_start": 1804,
+      "current_count": 2
+    },
+    {
+      "original_start": 2537,
+      "original_count": 7,
+      "current_start": 1813,
+      "current_count": 2
+    },
+    {
+      "original_start": 2550,
+      "original_count": 7,
+      "current_start": 1822,
+      "current_count": 2
+    },
+    {
+      "original_start": 2563,
+      "original_count": 7,
+      "current_start": 1831,
+      "current_count": 2
+    },
+    {
+      "original_start": 2576,
+      "original_count": 7,
+      "current_start": 1840,
+      "current_count": 2
+    },
+    {
+      "original_start": 2589,
+      "original_count": 7,
+      "current_start": 1849,
+      "current_count": 2
+    },
+    {
+      "original_start": 2602,
+      "original_count": 7,
+      "current_start": 1858,
+      "current_count": 2
+    },
+    {
+      "original_start": 2615,
+      "original_count": 7,
+      "current_start": 1867,
+      "current_count": 2
+    },
+    {
+      "original_start": 2628,
+      "original_count": 7,
+      "current_start": 1876,
+      "current_count": 2
+    },
+    {
+      "original_start": 2641,
+      "original_count": 7,
+      "current_start": 1885,
+      "current_count": 2
+    },
+    {
+      "original_start": 2654,
+      "original_count": 7,
+      "current_start": 1894,
+      "current_count": 2
+    },
+    {
+      "original_start": 2667,
+      "original_count": 7,
+      "current_start": 1903,
+      "current_count": 2
+    },
+    {
+      "original_start": 2680,
+      "original_count": 7,
+      "current_start": 1912,
+      "current_count": 2
+    },
+    {
+      "original_start": 2693,
+      "original_count": 7,
+      "current_start": 1921,
+      "current_count": 2
+    },
+    {
+      "original_start": 2706,
+      "original_count": 7,
+      "current_start": 1930,
+      "current_count": 2
+    },
+    {
+      "original_start": 2719,
+      "original_count": 7,
+      "current_start": 1939,
+      "current_count": 2
+    },
+    {
+      "original_start": 2732,
+      "original_count": 7,
+      "current_start": 1948,
+      "current_count": 2
+    },
+    {
+      "original_start": 2745,
+      "original_count": 7,
+      "current_start": 1957,
+      "current_count": 2
+    },
+    {
+      "original_start": 2758,
+      "original_count": 7,
+      "current_start": 1966,
+      "current_count": 2
+    },
+    {
+      "original_start": 2771,
+      "original_count": 7,
+      "current_start": 1975,
+      "current_count": 2
+    },
+    {
+      "original_start": 2784,
+      "original_count": 7,
+      "current_start": 1984,
+      "current_count": 2
+    },
+    {
+      "original_start": 2797,
+      "original_count": 7,
+      "current_start": 1993,
+      "current_count": 2
+    },
+    {
+      "original_start": 2810,
+      "original_count": 7,
+      "current_start": 2002,
+      "current_count": 2
+    },
+    {
+      "original_start": 2823,
+      "original_count": 7,
+      "current_start": 2011,
+      "current_count": 2
+    },
+    {
+      "original_start": 2836,
+      "original_count": 7,
+      "current_start": 2020,
+      "current_count": 2
+    },
+    {
+      "original_start": 2849,
+      "original_count": 7,
+      "current_start": 2029,
+      "current_count": 2
+    },
+    {
+      "original_start": 2862,
+      "original_count": 7,
+      "current_start": 2038,
+      "current_count": 2
+    },
+    {
+      "original_start": 2875,
+      "original_count": 7,
+      "current_start": 2047,
+      "current_count": 2
+    },
+    {
+      "original_start": 2888,
+      "original_count": 7,
+      "current_start": 2056,
+      "current_count": 2
+    },
+    {
+      "original_start": 2901,
+      "original_count": 7,
+      "current_start": 2065,
+      "current_count": 2
+    },
+    {
+      "original_start": 2914,
+      "original_count": 7,
+      "current_start": 2074,
+      "current_count": 2
+    },
+    {
+      "original_start": 2927,
+      "original_count": 7,
+      "current_start": 2083,
+      "current_count": 2
+    },
+    {
+      "original_start": 2940,
+      "original_count": 7,
+      "current_start": 2092,
+      "current_count": 2
+    },
+    {
+      "original_start": 2953,
+      "original_count": 7,
+      "current_start": 2101,
+      "current_count": 2
+    },
+    {
+      "original_start": 2966,
+      "original_count": 7,
+      "current_start": 2110,
+      "current_count": 2
+    },
+    {
+      "original_start": 2979,
+      "original_count": 7,
+      "current_start": 2119,
+      "current_count": 2
+    },
+    {
+      "original_start": 2991,
+      "original_count": 7,
+      "current_start": 2127,
+      "current_count": 2
+    },
+    {
+      "original_start": 3004,
+      "original_count": 7,
+      "current_start": 2136,
+      "current_count": 2
+    },
+    {
+      "original_start": 3016,
+      "original_count": 7,
+      "current_start": 2144,
+      "current_count": 2
+    },
+    {
+      "original_start": 3028,
+      "original_count": 7,
+      "current_start": 2152,
+      "current_count": 2
+    },
+    {
+      "original_start": 3040,
+      "original_count": 7,
+      "current_start": 2160,
+      "current_count": 2
+    },
+    {
+      "original_start": 3052,
+      "original_count": 7,
+      "current_start": 2168,
+      "current_count": 2
+    },
+    {
+      "original_start": 3064,
+      "original_count": 7,
+      "current_start": 2176,
+      "current_count": 2
+    },
+    {
+      "original_start": 3076,
+      "original_count": 7,
+      "current_start": 2184,
+      "current_count": 2
+    }
+  ],
+  "limits": "No functional edit or fresh runtime pass. Not a blanket all-context branch-hit certification.",
+  "counter_review": "All textual differences enumerated; remaining differences consist only of listed selected declaration changes, excluded bodies and #line directives.",
+  "line_boundary_note": "Trailing #line 1758 differs from original physical position but precedes only final comment, no declaration or executable token. No runtime diagnostic equivalence claim is needed for that comment; other logical-line placement not globally certified."
+}

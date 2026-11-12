@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+  "original_sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+  "current_sha256": "d731e0f766148d434fc90c408d539a06247c733193269281c73422e671054616",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 70,
+      "original_count": 2,
+      "current_start": 71,
+      "current_count": 1,
+      "original": [
+        "",
+        "#include <sys/param.h>"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#else   /* !NTVDM */"
+    }
+  ],
+  "initial_review": "Non-NTVDM sys/param.h alternative excluded. Windows type-name shielding, CRT includes and nt_extra include are unchanged original code.",
+  "counter_review": "Full normalized comparison confirms one complete original conditional body replacement only. No local implementation or ABI change; exclusion classification does not prove all include contexts or line mappings.",
+  "limits": "No new build or runtime verification."
+}

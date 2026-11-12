@@ -1,0 +1,509 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.h",
+  "original_sha256": "06148a93a63faf7fc5480e4c9f80c98ddfe6e2a0a782eafe6a6fd1ccdd46de27",
+  "current_sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "#define DEBUG 1"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 26,
+      "original_count": 2,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "     #define PMODE32",
+        "     #define FASTCALL _fastcall"
+      ],
+      "current": [
+        "#error i386 kernel WOW profile is not supported"
+      ]
+    },
+    {
+      "original_start": 96,
+      "original_count": 3,
+      "current_start": 104,
+      "current_count": 1,
+      "original": [
+        "#ifndef WOWPROFILE",
+        "#define WOWPROFILE   // DEBUG => WOWPROFILE",
+        "#endif // !WOWPROFILE"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 102,
+      "original_count": 3,
+      "current_start": 111,
+      "current_count": 1,
+      "original": [
+        "#ifndef DEBUG_OR_WOWPROFILE",
+        "#define DEBUG_OR_WOWPROFILE",
+        "#endif"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    },
+    {
+      "original_start": 119,
+      "original_count": 4,
+      "current_start": 129,
+      "current_count": 1,
+      "original": [
+        "    LPSZ    lpszW32;    // function name (DEBUG version only)",
+        "    INT     cbArgs;     // # of bytes of arguments (DEBUG version only)",
+        "    DWORD   cCalls;     // # of times this API called",
+        "    DWORD   cTics;      // sum total # of tics ellapsed for all invocations"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    },
+    {
+      "original_start": 133,
+      "original_count": 2,
+      "current_start": 143,
+      "current_count": 1,
+      "original": [
+        "    LPSZ    lpszW32;    // Table Name (DEBUG version only)",
+        "    INT *lpiFunMax;     // Pointer # of table entries (DEBUG version only)"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    },
+    {
+      "original_start": 142,
+      "original_count": 2,
+      "current_start": 154,
+      "current_count": 1,
+      "original": [
+        "#define  W32FUN(fn,name,mod,size)   fn,name,size,0L,0L",
+        "#define  W32MSGFUN(fn,name)         fn,name,0L,0L"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    },
+    {
+      "original_start": 152,
+      "original_count": 1,
+      "current_start": 167,
+      "current_count": 1,
+      "original": [
+        "#define W32TAB(fn,name,size)    fn,name,&size"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    },
+    {
+      "original_start": 266,
+      "original_count": 3,
+      "current_start": 285,
+      "current_count": 1,
+      "original": [
+        "extern UCHAR  gszAssert[256]; // Buffer for assertion text (could be eliminated with restructuring)",
+        "int _cdecl sprintf_gszAssert(PSZ pszFmt, ...);",
+        "extern HANDLE hfLog;        // log file handle, if any"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 272,
+      "original_count": 2,
+      "current_start": 292,
+      "current_count": 1,
+      "original": [
+        "extern INT    iLogLevel;    // logging level;  0 implies none",
+        "extern INT    fDebugWait;   // Single Step; 0 = No Single Step"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 277,
+      "original_count": 2,
+      "current_start": 299,
+      "current_count": 1,
+      "original": [
+        "extern INT    fLogFilter;   // Filter Catagories of Functions",
+        "extern WORD   fLogTaskFilter;   // Filter Specific TaskID only"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 281,
+      "original_count": 1,
+      "current_start": 304,
+      "current_count": 1,
+      "original": [
+        "extern PX86CONTEXT pIntelRegisters; // x86 Only - Pointer to Intel Register Block"
+      ],
+      "current": [
+        "#error i386 kernel WOW profile is not supported"
+      ]
+    },
+    {
+      "original_start": 285,
+      "original_count": 5,
+      "current_start": 311,
+      "current_count": 1,
+      "original": [
+        "extern INT    iReqLogLevel;         // Current Output LogLevel",
+        "extern INT    iCircBuffer;          // Current Buffer",
+        "extern CHAR   achTmp[CIRC_BUFFERS][TMP_LINE_LEN];    // Circular Buffer",
+        "extern WORD   awfLogFunctionFilter[FILTER_FUNCTION_MAX]; // Specific Filter API Array",
+        "extern INT    iLogFuncFiltIndex;        // Index Into Specific Array for Debugger Extensions"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 359,
+      "original_count": 58,
+      "current_start": 384,
+      "current_count": 1,
+      "original": [
+        "#undef  MODNAME",
+        "#define MODNAME(module)     static char szModule[] = __FILE__",
+        "",
+        "int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel);",
+        "",
+        "#define WOW32ASSERT(exp)                                                     \\",
+        "{                                                                            \\",
+        "    if (!(exp))                                                              \\",
+        "    {                                                                        \\",
+        "        DoAssert(NULL, szModule, __LINE__, LOG_ALWAYS);                      \\",
+        "    }                                                                        \\",
+        "}",
+        "",
+        "#define WOW32VERIFY(exp)    WOW32ASSERT(exp)",
+        "",
+        "#define WOW32ASSERTMSG(exp,msg)                                              \\",
+        "{                                                                            \\",
+        "    if (!(exp)) {                                                            \\",
+        "        DoAssert(msg, szModule, __LINE__, LOG_ALWAYS);                       \\",
+        "    }                                                                        \\",
+        "}",
+        "",
+        "#define WOW32ASSERTMSGF(exp, printf_args)                                    \\",
+        "(                                                                            \\",
+        "    (!(exp)) ? (                                                             \\",
+        "        sprintf_gszAssert printf_args,                                       \\",
+        "        DoAssert(gszAssert, szModule, __LINE__, LOG_ALWAYS)                  \\",
+        "    ) : 0                                                                    \\",
+        ")",
+        "",
+        "#define WOW32WARNMSG(exp,msg)                                                \\",
+        "{                                                                            \\",
+        "    if (!(exp)) {                                                            \\",
+        "        LOGDEBUG(LOG_ALWAYS, (\"%s\", (msg)));                                 \\",
+        "    }                                                                        \\",
+        "}",
+        "",
+        "#define WOW32WARNMSGF(exp, printf_args)                                      \\",
+        "{                                                                            \\",
+        "    if (!(exp)) {                                                            \\",
+        "        LOGDEBUG(LOG_ALWAYS, printf_args);                                   \\",
+        "    }                                                                        \\",
+        "}",
+        "",
+        "#define WOW32APIWARN(exp,msg)                                                \\",
+        "{                                                                            \\",
+        "    if (!(exp)) {                                                            \\",
+        "        LOGDEBUG(1,(\"    WOW32 WARNING: %s failed\", (msg)));                 \\",
+        "        if (flOptions & OPT_FAKESUCCESS) {                                   \\",
+        "            LOGDEBUG(1,(\" (but returning fake success)\\n\"));                 \\",
+        "            (ULONG)exp = TRUE;                                               \\",
+        "        }                                                                    \\",
+        "        else {                                                               \\",
+        "            LOGDEBUG(1,(\"\\n\"));                                              \\",
+        "        }                                                                    \\",
+        "    }                                                                        \\",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 432,
+      "original_count": 1,
+      "current_start": 404,
+      "current_count": 1,
+      "original": [
+        "#define LOGARGS(l,v)    logargs(l,v)"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 438,
+      "original_count": 1,
+      "current_start": 414,
+      "current_count": 1,
+      "original": [
+        "#define LOGRETURN(l,v,r)    logreturn(l,v,r)"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 461,
+      "original_count": 3,
+      "current_start": 440,
+      "current_count": 1,
+      "original": [
+        "#define UNREFERENCED_PARAMETER(P)          (P)",
+        "#define DBG_UNREFERENCED_PARAMETER(P)      (P)",
+        "#define DBG_UNREFERENCED_LOCAL_VARIABLE(V) (V)"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 508,
+      "original_count": 2,
+      "current_start": 488,
+      "current_count": 1,
+      "original": [
+        "#define VDMSTACK()      ((USHORT)pIntelRegisters->SegSs << 16 | (USHORT)pIntelRegisters->Esp)",
+        "#define SETVDMSTACK(vp)      pIntelRegisters->SegSs = HIW(vp); pIntelRegisters->Esp = LOW(vp);"
+      ],
+      "current": [
+        "#error Native x86 WOW stack profile is not supported"
+      ]
+    },
+    {
+      "original_start": 517,
+      "original_count": 1,
+      "current_start": 499,
+      "current_count": 1,
+      "original": [
+        "#define INTEL_MEMORY_BASE (0)"
+      ],
+      "current": [
+        "#error Native x86 WOW stack profile is not supported"
+      ]
+    },
+    {
+      "original_start": 538,
+      "original_count": 2,
+      "current_start": 523,
+      "current_count": 1,
+      "original": [
+        "    PVOID FASTCALL GetPModeVDMPointerAssert(DWORD Address, DWORD Count);",
+        "    #define GetPModeVDMPointer(vp, count) GetPModeVDMPointerAssert((vp), (count))"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 592,
+      "original_count": 3,
+      "current_start": 580,
+      "current_count": 1,
+      "original": [
+        "static CHAR *pszLogNull = \"<null>\";",
+        "#undef  GETPSZPTR",
+        "#define GETPSZPTR(vp,p)         {GETOPTPTR(vp,0,p);  LOGDEBUG(11,(\"        String @%08lx: \\\"%.80s\\\"\\n\",(FETCHDWORD(vp)),p ? p : pszLogNull));}"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 608,
+      "original_count": 8,
+      "current_start": 597,
+      "current_count": 1,
+      "original": [
+        "#define FREEARGPTR(p)       p=NULL",
+        "#define FREEOPTPTR(p)       p=NULL",
+        "#define FREESTRPTR(p)       p=NULL",
+        "#define FREEPSZPTR(p)       p=NULL",
+        "#define FREEPSZIDPTR(p)     p=NULL",
+        "#define FREEMISCPTR(p)      p=NULL",
+        "#define FREEVDMPTR(p)       p=NULL",
+        "#define FREEOPTPTR(p)       p=NULL"
+      ],
+      "current": [
+        "#error DEBUG WOW pointer cleanup profile is not supported"
+      ]
+    },
+    {
+      "original_start": 639,
+      "original_count": 4,
+      "current_start": 624,
+      "current_count": 1,
+      "original": [
+        "VOID    logprintf(PSZ psz, ...);",
+        "VOID    logargs(INT iLog, PVDMFRAME pFrame);",
+        "VOID    logreturn(INT iLog, PVDMFRAME pFrame, ULONG ulReturn);",
+        "BOOL    checkloging(register PVDMFRAME pFrame);"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    },
+    {
+      "original_start": 646,
+      "original_count": 2,
+      "current_start": 631,
+      "current_count": 1,
+      "original": [
+        "DWORD   GetWOWTicDiff(DWORD dwPrevCount);",
+        "INT     GetFuncId(DWORD iFun);"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    },
+    {
+      "original_start": 659,
+      "original_count": 8,
+      "current_start": 646,
+      "current_count": 1,
+      "original": [
+        "    ULONG FASTCALL   WOW32NopAPI(PVDMFRAME pFrame);",
+        "    ULONG FASTCALL   WOW32LocalAPI(PVDMFRAME pFrame);",
+        "    ULONG FASTCALL   WK32WowPartyByNumber(PVDMFRAME pFrame);",
+        "",
+        "    #define LOCALAPI              WOW32LocalAPI",
+        "    #define NOPAPI                WOW32NopAPI",
+        "    #define UNIMPLEMENTEDAPI      WOW32UnimplementedAPI",
+        "    #define WK32WOWPARTYBYNUMBER  WK32WowPartyByNumber"
+      ],
+      "current": [
+        "#error DEBUG WOW32 profile is not supported"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 28,
+      "current": 32,
+      "logical": 27
+    },
+    {
+      "original": 99,
+      "current": 105,
+      "logical": 97
+    },
+    {
+      "original": 105,
+      "current": 112,
+      "logical": 103
+    },
+    {
+      "original": 123,
+      "current": 130,
+      "logical": 120
+    },
+    {
+      "original": 135,
+      "current": 144,
+      "logical": 134
+    },
+    {
+      "original": 144,
+      "current": 155,
+      "logical": 143
+    },
+    {
+      "original": 269,
+      "current": 286,
+      "logical": 267
+    },
+    {
+      "original": 274,
+      "current": 293,
+      "logical": 273
+    },
+    {
+      "original": 279,
+      "current": 300,
+      "logical": 278
+    },
+    {
+      "original": 290,
+      "current": 312,
+      "logical": 286
+    },
+    {
+      "original": 417,
+      "current": 385,
+      "logical": 360
+    },
+    {
+      "original": 464,
+      "current": 441,
+      "logical": 462
+    },
+    {
+      "original": 510,
+      "current": 489,
+      "logical": 509
+    },
+    {
+      "original": 540,
+      "current": 524,
+      "logical": 539
+    },
+    {
+      "original": 595,
+      "current": 581,
+      "logical": 593
+    },
+    {
+      "original": 616,
+      "current": 598,
+      "logical": 609
+    },
+    {
+      "original": 643,
+      "current": 625,
+      "logical": 640
+    },
+    {
+      "original": 648,
+      "current": 632,
+      "logical": 647
+    },
+    {
+      "original": 667,
+      "current": 647,
+      "logical": 660
+    }
+  ],
+  "evidence": "All25 normalized differences replace original DEBUG/profiling/architecture conditional bodies; retained declarations/macros match original.",
+  "limits": [
+    "No new build/runtime pass.",
+    "DEF is outside fixed C/H census; exclusion-only does not certify all build contexts."
+  ]
+}

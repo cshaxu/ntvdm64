@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.def",
+  "original_sha256": "0df4286cc384d667dd95bf00b84d81f4afb6536a4fc387a5546b8e74b2f321b4",
+  "current_sha256": "2b0dca9f3f81a10c66429e4a13ecb55ee7b91a5e4ed9b76c384aedbdbabe7a56",
+  "changes": [
+    {
+      "original_start": 10,
+      "original_count": 0,
+      "current_start": 10,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    W32TerminateTaskTicket"
+      ],
+      "decision": "retain",
+      "evidence": "nt_bop.c ntvdm_wow_terminate_ticket resolves W32TerminateTaskTicket by name and calls WINAPI uint64 ticket ABI; wow_task_termination.c maps server-authorized ticket to live HTASK and invokes original hung-task owner.",
+      "change_plan": "Retain named export as narrow loader boundary; keep ticket/lifecycle semantics in existing owners. Do not expose another unvalidated raw HTASK management route."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "evidence": "nt_bop.c ntvdm_wow_terminate_ticket resolves W32TerminateTaskTicket by name and calls WINAPI uint64 ticket ABI; wow_task_termination.c maps server-authorized ticket to live HTASK and invokes original hung-task owner.",
+  "limits": [
+    "No new build/runtime pass.",
+    "DEF is outside fixed C/H census; exclusion-only does not certify all build contexts."
+  ]
+}

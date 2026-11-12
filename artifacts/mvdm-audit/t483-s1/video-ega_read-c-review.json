@@ -1,0 +1,757 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+  "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+  "current_sha256": "14b1be5d756ff06c3578f5f12a111595afff50a5ea3aa9fa39df6c4e983011f8",
+  "review_complete": true,
+  "register_entries": 2,
+  "exclusion_only": false,
+  "changes": [
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 138,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-067): the selected C_VID function has an",
+        " * original `void (IUH)` shape; do not use an implicit C declaration. */",
+        "IMPORT void setReadPointers IPT1(IUH, readset);"
+      ]
+    },
+    {
+      "original_start": 382,
+      "original_count": 3,
+      "current_start": 288,
+      "current_count": 5,
+      "original": [
+        "extern read_byte_ev_glue IPT1(IU32, eaOff);",
+        "extern read_word_ev_glue IPT1(IU32, eaOff);",
+        "extern read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);"
+      ],
+      "current": [
+        "/* DIVERGENCE MVDM-HOST-DIV-089: retain the concrete original C-video read",
+        " * glue contracts instead of implicit host-int declarations. */",
+        "extern IU32 read_byte_ev_glue IPT1(IU32, eaOff);",
+        "extern IU32 read_word_ev_glue IPT1(IU32, eaOff);",
+        "extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 151,
+      "original_count": 6,
+      "current_start": 155,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 160,
+      "original_count": 1,
+      "current_start": 166,
+      "current_count": 1,
+      "original": [
+        "#define\tchange_read_pointers(ptr)\tdump_change_read_pointers(&ptr)"
+      ],
+      "current": [
+        "#error Unsupported excluded EGA diagnostics configuration"
+      ]
+    },
+    {
+      "original_start": 163,
+      "original_count": 1,
+      "current_start": 171,
+      "current_count": 1,
+      "original": [
+        "#define\tchange_read_pointers(ptr)\tread_pointers = ptr"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 195,
+      "original_count": 149,
+      "current_start": 207,
+      "current_count": 1,
+      "original": [
+        "#ifndef EGATEST",
+        "#ifndef A3CPU",
+        "#ifndef JOKER",
+        "READ_POINTERS Glue_reads =",
+        "{",
+        "\tglue_b_read,",
+        "\tglue_w_read",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\tglue_str_read",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "#endif /* JOKER */",
+        "#endif /* A3CPU */",
+        "#endif /* EGATEST */",
+        "",
+        "READ_POINTERS\tsimple_reads =",
+        "{",
+        "\t_simple_b_read,",
+        "\t_simple_w_read",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_simple_str_read",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "READ_POINTERS\tpointers_RAM_off =",
+        "{",
+        "\t_rd_ram_dsbld_byte,",
+        "\t_rd_ram_dsbld_word",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_rd_ram_dsbld_string",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "READ_POINTERS\tpointers_mode0_nch =",
+        "{",
+        "\t_rdm0_byte_nch,",
+        "\t_rdm0_word_nch",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_rdm0_string_nch",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "#ifdef VGG",
+        "READ_POINTERS\tpointers_mode0_ch4 =",
+        "{",
+        "\t_rdm0_byte_ch4,",
+        "\t_rdm0_word_ch4",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_rdm0_string_ch4",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "#endif",
+        "",
+        "READ_POINTERS\tpointers_mode1_nch =",
+        "{",
+        "\t_rdm1_byte_nch,",
+        "\t_rdm1_word_nch",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_rdm1_string_nch",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "#ifdef VGG",
+        "READ_POINTERS\tpointers_mode1_ch4 =",
+        "{",
+        "\t_rdm1_byte_ch4,",
+        "\t_rdm1_word_ch4",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_rdm1_string_ch4",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "#endif",
+        "",
+        "#ifdef A_VID",
+        "extern IU32 _ch2_md0_byte_read_glue();",
+        "extern IU32 _ch2_md0_word_read_glue();",
+        "extern void _ch2_md0_str_read_glue();",
+        "",
+        "extern IU32 _ch2_md1_byte_read_glue();",
+        "extern IU32 _ch2_md1_word_read_glue();",
+        "extern void _ch2_md1_str_read_glue();",
+        "",
+        "READ_POINTERS\tpointers_mode0_ch2 =",
+        "{",
+        "\t_ch2_md0_byte_read_glue,",
+        "\t_ch2_md0_word_read_glue",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_ch2_md0_str_read_glue",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "READ_POINTERS\tpointers_mode1_ch2 =",
+        "{",
+        "\t_ch2_md1_byte_read_glue,",
+        "\t_ch2_md1_word_read_glue",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_ch2_md1_str_read_glue",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "#else\t\t\t/* AVID */",
+        "",
+        "extern void rdm0_string_ch2 IPT3(UTINY *, dest, ULONG, offset, ULONG, count );",
+        "extern void rdm1_string_ch2 IPT3(UTINY *, dest, ULONG, offset, ULONG, count );",
+        "extern IU32 rdm0_byte_ch2 IPT1(ULONG, offset );",
+        "extern IU32 rdm1_byte_ch2 IPT1(ULONG, offset );",
+        "extern IU32 rdm0_word_ch2 IPT1(ULONG, offset );",
+        "extern IU32 rdm1_word_ch2 IPT1(ULONG, offset );",
+        "",
+        "READ_POINTERS\tpointers_mode0_ch2 =",
+        "{",
+        "\trdm0_byte_ch2,",
+        "\trdm0_word_ch2",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\trdm0_string_ch2",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "READ_POINTERS\tpointers_mode1_ch2 =",
+        "{",
+        "\trdm1_byte_ch2,",
+        "\trdm1_word_ch2",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\trdm1_string_ch2",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};",
+        "",
+        "#endif /* A_VID */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 346,
+      "original_count": 11,
+      "current_start": 210,
+      "current_count": 0,
+      "original": [
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "GLOBAL READ_POINTERS C_vid_reads;",
+        "#endif /* C_VID */",
+        "#else",
+        "#ifdef C_VID",
+        "GLOBAL READ_POINTERS C_vid_reads;",
+        "#else",
+        "GLOBAL READ_POINTERS A_vid_reads;",
+        "#endif /* A_VID */",
+        "#endif /* A3CPU */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 358,
+      "original_count": 5,
+      "current_start": 211,
+      "current_count": 0,
+      "original": [
+        "#ifndef GISP_CPU",
+        "#if (defined(A_VID) && defined(A2CPU) && !defined(A3CPU)) || (defined(A3CPU) && defined(C_VID))",
+        "extern IU32 _glue_b_read();",
+        "extern IU32 _glue_w_read();",
+        "extern void _glue_str_read();"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 364,
+      "original_count": 4,
+      "current_start": 212,
+      "current_count": 0,
+      "original": [
+        "READ_POINTERS Glue_reads =",
+        "{",
+        "\t_glue_b_read,",
+        "\t_glue_w_read"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 369,
+      "original_count": 4,
+      "current_start": 213,
+      "current_count": 0,
+      "original": [
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\t_glue_str_read",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 374,
+      "original_count": 3,
+      "current_start": 214,
+      "current_count": 68,
+      "original": [
+        "};",
+        "#endif",
+        "#endif /* GISP_CPU */"
+      ],
+      "current": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 392,
+      "original_count": 1,
+      "current_start": 302,
+      "current_count": 1,
+      "original": [
+        "READ_POINTERS Glue_reads = { 0, 0, 0 };"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 505,
+      "original_count": 1,
+      "current_start": 421,
+      "current_count": 1,
+      "original": [
+        "        *dest-- = *(planes + offset);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 589,
+      "original_count": 2,
+      "current_start": 510,
+      "current_count": 1,
+      "original": [
+        "#define\tPLUS -",
+        "#define\tMINUS +"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 645,
+      "original_count": 6,
+      "current_start": 568,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 658,
+      "original_count": 34,
+      "current_start": 584,
+      "current_count": 1,
+      "original": [
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "",
+        "\tC_vid_reads.b_read = handler->b_read;",
+        "\tC_vid_reads.w_read = handler->w_read;",
+        "\tC_vid_reads.str_read = handler->str_read;",
+        "",
+        "#else",
+        "\tUNUSED(handler);",
+        "#endif",
+        "#else\t\t\t\t\t/* A3CPU */",
+        "#ifdef C_VID",
+        "",
+        "\tC_vid_reads.b_read = handler->b_read;",
+        "\tC_vid_reads.w_read = handler->w_read;",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\tC_vid_reads.str_read = handler->str_read;",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "",
+        "#else",
+        "",
+        "\tA_vid_reads = *handler;",
+        "",
+        "#if\t0",
+        "\tA_vid_reads.b_read = handler->b_read;",
+        "\tA_vid_reads.w_read = handler->w_read;",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\tA_vid_reads.str_read = handler->str_read;",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "#endif\t/* 0 */",
+        "",
+        "#endif\t/* C_VID */",
+        "#endif\t/* A3CPU */"
+      ],
+      "current": [
+        "#error Non-CPU40 video glue is not supported"
+      ]
+    },
+    {
+      "original_start": 697,
+      "original_count": 6,
+      "current_start": 593,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 718,
+      "original_count": 1,
+      "current_start": 616,
+      "current_count": 1,
+      "original": [
+        " \t\t\tsetVideoread_shift_count(( 3 - getVideoread_mapped_plane() ) << 3);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 766,
+      "original_count": 18,
+      "current_start": 668,
+      "current_count": 1,
+      "original": [
+        "",
+        "#ifndef GISP_CPU\t",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "\t\tGlue_set_vid_rd_ptrs( &pointers_RAM_off );",
+        "#else",
+        "\t\tCpu_set_vid_rd_ptrs( &pointers_RAM_off );",
+        "#endif /* C_VID */",
+        "#else",
+        "\t\tGlue_set_vid_rd_ptrs( &pointers_RAM_off );",
+        "#endif /* A3CPU */",
+        "#endif /* GISP_CPU */",
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\tsetVideofwd_str_read_addr(_rd_ram_dsbld_fwd_string_lge);",
+        "\t\tsetVideofwd_str_read_addr(_rd_ram_dsbld_bwd_string_lge);",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 803,
+      "original_count": 6,
+      "current_start": 690,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\t\tread_ptrs = &pointers_mode0_nch;",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\t\t\tsetVideofwd_str_read_addr(_rdm0_fwd_string_nch_lge);",
+        "\t\t\t\tsetVideobwd_str_read_addr(_rdm0_bwd_string_nch_lge);",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 816,
+      "original_count": 5,
+      "current_start": 700,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\t\tread_ptrs = &pointers_mode0_ch2;",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\t\t\tstring_read_ptr = rdm0_string_ch2;",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 831,
+      "original_count": 7,
+      "current_start": 713,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\t\tread_ptrs = &pointers_mode0_ch4;",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\t\t\tsetVideofwd_str_read_addr(_rdm0_fwd_string_ch4_lge);",
+        "\t\t\t\tsetVideobwd_str_read_addr(_rdm0_bwd_string_ch4_lge);",
+        "#endif",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 856,
+      "original_count": 6,
+      "current_start": 735,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\t\tread_ptrs = &pointers_mode1_nch;",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\t\t\tsetVideofwd_str_read_addr(_rdm1_fwd_string_nch_lge);",
+        "\t\t\t\tsetVideobwd_str_read_addr(_rdm1_bwd_string_nch_lge);",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 879,
+      "original_count": 6,
+      "current_start": 755,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\t\tread_ptrs = &pointers_mode1_ch2;",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\t\t\tstring_read_ptr = rdm1_string_ch2;",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 897,
+      "original_count": 6,
+      "current_start": 770,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t\t\tread_ptrs = &pointers_mode1_ch4;",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\t\t\t\tsetVideofwd_str_read_addr(_rdm1_fwd_string_ch4_lge);",
+        "\t\t\t\tsetVideobwd_str_read_addr(_rdm1_bwd_string_ch4_lge);",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 913,
+      "original_count": 11,
+      "current_start": 784,
+      "current_count": 1,
+      "original": [
+        "#ifndef GISP_CPU",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "\tGlue_set_vid_rd_ptrs( read_ptrs );",
+        "#else",
+        "\tCpu_set_vid_rd_ptrs( read_ptrs );",
+        "#endif /* C_VID */",
+        "#else",
+        "\tGlue_set_vid_rd_ptrs( read_ptrs );",
+        "#endif /* A3CPU */",
+        "#endif /* GISP_CPU */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 938,
+      "original_count": 5,
+      "current_start": 801,
+      "current_count": 1,
+      "original": [
+        "",
+        "#ifndef\tNO_STRING_OPERATIONS ",
+        "\tsetVideofwd_str_read_addr(_rd_ram_dsbld_fwd_string_lge);",
+        "\tsetVideobwd_str_read_addr(_rd_ram_dsbld_bwd_string_lge);",
+        "#endif\t/* NO_STRING_OPERATIONS */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 950,
+      "original_count": 1,
+      "current_start": 811,
+      "current_count": 1,
+      "original": [
+        "\tdump_read_pointers_init();"
+      ],
+      "current": [
+        "#error Unsupported excluded EGA diagnostics configuration"
+      ]
+    },
+    {
+      "original_start": 958,
+      "original_count": 12,
+      "current_start": 822,
+      "current_count": 1,
+      "original": [
+        "#ifndef GISP_CPU",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "\tCpu_set_vid_rd_ptrs( &Glue_reads );",
+        "\tGlue_set_vid_rd_ptrs( &pointers_mode0_nch );",
+        "#else",
+        "\tCpu_set_vid_rd_ptrs( &pointers_mode0_nch );",
+        "#endif\t/* C_VID */",
+        "#else\t/* A3CPU */",
+        "\tGlue_set_vid_rd_ptrs( &pointers_mode0_nch );",
+        "#endif\t/* A3CPU */",
+        "#endif /* GISP_CPU */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 984,
+      "original_count": 12,
+      "current_start": 839,
+      "current_count": 1,
+      "original": [
+        "",
+        "#ifndef GISP_CPU",
+        "#ifdef A3CPU",
+        "#ifdef C_VID",
+        "\tGlue_set_vid_rd_ptrs( &simple_reads );",
+        "#else",
+        "\tCpu_set_vid_rd_ptrs( &simple_reads );",
+        "#endif /* C_VID */",
+        "#else",
+        "\tGlue_set_vid_rd_ptrs( &simple_reads );",
+        "#endif /* A3CPU */",
+        "#endif /* GISP_CPU */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Two provider prototype adaptations; non-CPU40 original195-377 is one excluded outer body, not separate missing live definitions.",
+  "counter_review": "Original C_VID READ_POINTERS Glue_reads remains and uses existing ev_glue byte/word/string functions. IU32/IU32/void declarations match definitions; SetReadPointers remaps to void(IUH). Current removed A3CPU/GISP/other table alternatives are inside excluded non-CPU40 body. Do not reconstruct them as active providers.",
+  "limits": "Text opcode chunks may split one outer excluded body; original195-377 explicitly checked for ega_read. No new build/runtime or line certification."
+}

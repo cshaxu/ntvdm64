@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+  "original_sha256": "872a056f63921a5b3d1c924e35f19eea1660fe7481e25a174e875c0f12959b98",
+  "before_sha256": "a4ac66f3566cbb16886e6a1202f08717828122bcf250fadf8cbb11ab1ee3b39b",
+  "current_sha256": "21dd9a99480d39a40e82f6d5c8a722a07185189855f58cdbc8541f5efaf21189",
+  "initial_review": "Entire PaintRect function is original-exact, not a function subset. Only omitted pragma and replaced comments/extra EOF existed. Five original btnctl callers require this drawing owner.",
+  "counter_review": "Native APIs and GetControlColor binding do not justify deleting the original coordinate/brush-origin algorithm. Existing button DC fixture rejects PaintRect and therefore is not coverage of this body; edit drawing fixture refers to a different draw.c. No runtime pass inferred.",
+  "format_restorations": [
+    "Original module header and copyright wording",
+    "Original PaintRect history comment",
+    "Original trailing blank count"
+  ],
+  "token_identity_without_line_directives": true,
+  "remaining_diff": "Original #pragma hdrstop omitted; retained existing project #line directives.",
+  "evidence": [
+    "src/non-mvdm/windows/core/ntuser/client/btnctl.c five PaintRect call sites",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1 controlBody draw",
+    "test/adapter-mvdm-host-out/wow/wow_button_dc_unreached.c PaintRect REJECT stub"
+  ],
+  "limits": "Source-only review. Pragma restoration and real build/diagnostic checks deferred; no functional repairs."
+}

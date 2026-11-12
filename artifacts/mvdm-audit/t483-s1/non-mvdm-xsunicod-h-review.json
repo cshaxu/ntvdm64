@@ -1,0 +1,50 @@
+{
+  "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+  "original_sha256": "9c9f23b07297d1292cbc1e3da1ed05956f767f684977a825fc4eb08bcba5295f",
+  "current_sha256": "317b926ef3b1889648a136beb8ccc4ab3fd83c2df4d4f0d2a669911387d213a0",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 66,
+      "original_count": 17,
+      "current_start": 68,
+      "current_count": 1,
+      "original": [
+        "",
+        "//",
+        "// XsDupStrToStr - used instead of strdup so that XsDupStrToTStr macros",
+        "//                 end up allocating memory from the same place, which",
+        "//                 can be freed with NetpMemoryFree.",
+        "//",
+        "",
+        "LPSTR",
+        "XsDupStrToStr(",
+        "    IN LPSTR Src",
+        "    );",
+        "",
+        "#define XsDupStrToTStr( src ) (LPTSTR)XsDupStrToStr( src )",
+        "#define XsDupTStrToStr( src ) XsDupStrToStr( (LPSTR)src )",
+        "#define XsCopyTBufToBuf( dest, src, size ) RtlCopyMemory( dest, src, size )",
+        "#define XsCopyBufToTBuf( dest, src, size ) RtlCopyMemory( dest, src, size )",
+        ""
+      ],
+      "current": [
+        "#error ANSI xactsrv conversion profile is not supported"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 83,
+      "current": 69,
+      "logical": 67
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/mvdm-host/vdmredir/vrdisp.c",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_com.c"
+  ],
+  "limits": "Whole retained source equals pinned original after exclusion-body and whitespace projection. Exclusion-only category does not certify all supported header contexts, runtime device capability or absence of line findings."
+}

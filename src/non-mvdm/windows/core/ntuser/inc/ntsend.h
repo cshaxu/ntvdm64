@@ -12,6 +12,9 @@
  * capture/cleanup macros reached by GetClassWOWWords and ANSI class clients. Other call families
  * and thread-connection macros are excluded. */
 
+/*
+ * Use this macro if you don't need to access shared memory.
+ */
 #line 27
 #define BEGINCALL()       \
     {                     \
@@ -70,6 +73,9 @@ cleanup:
 #line 249
 #define CLEANUPLPWSTR(instr)
 
+/*
+ * Type-neutral macros
+ */
 #line 254
 #ifdef UNICODE
 #line 257

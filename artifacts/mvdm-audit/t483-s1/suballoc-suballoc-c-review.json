@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/suballoc/suballoc.c",
+  "original_sha256": "b06496e16d551f2bbac37d896b61857c6569eda8c98fb3d26dbf574e594148e0",
+  "current_sha256": "dde9cb4e50aca817922649a8d6a7816f53b1c331a0fa7ed6055be23202871b32",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 330,
+      "original_count": 6,
+      "current_start": 332,
+      "current_count": 1,
+      "original": [
+        "        {",
+        "            char Buffer[80];",
+        "            ",
+        "            sprintf(Buffer, \"SAAllocate: Allocating at address %lx\\n\", *Address);",
+        "            OutputDebugString(Buffer);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Only difference is literal #if0 allocation-address diagnostic block replaced by #error; all retained source exact.",
+  "counter_review": "Removed body formats address and calls OutputDebugString after allocation; original #if0 never selected it. SA allocation/free, bitmap updates, ownership and failure returns unchanged. Not a runtime validation of inherited allocator.",
+  "limits": "No source edits or new compile/runtime results; line scaffolding not universally certified."
+}

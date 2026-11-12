@@ -1,8 +1,16 @@
-/* Copyright (c) Microsoft Corporation.
- * Original windows/core/ntuser/client/wow.c true subset.
- * DIVERGENCE(OPENNT-HOST-108): retain only the unchanged _GetDlgItem
- * direct-child lookup. Other WOW client services have separate owners.
- * Standalone precomp supplies the retained, same-address WND graph. */
+/****************************** Module Header ******************************\
+* Module Name: wow.c
+*
+* Copyright (c) 1985-92, Microsoft Corporation
+*
+* This module contains shared code between USER32 and USER16
+* No New CODE should be added to this file, unless its shared
+* with USER16.
+*
+* History:
+* 29-DEC-93 NanduriR      shared user32/user16 code.
+\***************************************************************************/
+
 #line 14
 #include "precomp.h"
 
@@ -156,4 +164,3 @@ PWND _GetDlgItem(
 #line 758
 #endif
 #line 759
-

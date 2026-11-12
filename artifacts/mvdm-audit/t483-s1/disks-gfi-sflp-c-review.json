@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+  "original_sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+  "current_sha256": "300702c4444d999a399614467b0b19f07f9be9e3553cc03cada6affdae353ab9",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 19,
+      "original_count": 755,
+      "current_start": 21
+    }
+  ],
+  "initial_review": "One excluded SLAVEPC body, original19-773: FLA-to-remote IBM8272A controller adapter, command metadata, serial remote controller calls and DMA packet transfer. Original includes, provenance header and outer condition remain.",
+  "counter_review": "Balanced every original nested conditional to verify the outer body ends only at774. Full retained-text comparison is exact after removing error/line directives. Remote-controller transport does not replace selected local FDC emulation or NTSRV request protocol. Inner debug/platform conditions are correctly consumed by the excluded outer body.",
+  "limits": "Source necessity audit only; no new runtime/build evidence. Whole-file retention/deletion policy is not changed by this review."
+}

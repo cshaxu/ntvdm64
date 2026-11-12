@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/inc/wowkbd.h",
+  "original_sha256": "ecff4d47c62f462aa0cea48d5cb0c8c0b658e33d89dbb6f47899df2228a414cf",
+  "current_sha256": "86f533eb464f1bae992b8f6410ed6d9789d49d9bb74fa77e7477cef9ac48d6ef",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": 1,
+  "initial_review": "All differences are excluded NULLSTRUCT empty-argument structs and #line scaffolding; remaining source exactly original.",
+  "counter_review": "No selected parameter structure or packing changed; restoring empty structs is not a functional repair for the selected non-NULLSTRUCT profile.",
+  "evidence": "Whole-file equality after omitting precisely #ifdef NULLSTRUCT bodies and #line directives; original/retained group counts agree.",
+  "limits": "Source comparison, not new compiler or all-context reachability verification.",
+  "runtime_validation": "None; header unchanged."
+}

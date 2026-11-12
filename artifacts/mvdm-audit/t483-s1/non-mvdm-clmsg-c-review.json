@@ -1,0 +1,644 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "before_sha256": "b4934bf910a7914ee9f30e043a952d0f0e8a604c3a7476c87a3134ef74cfc539",
+  "current_sha256": "e8a0639ec579b21823d536369408c12160220219d60e6aaed0fdd089d7530fc0",
+  "changes": [
+    {
+      "original_start": 11,
+      "original_count": 0,
+      "current_start": 12,
+      "current_count": 6,
+      "original_preview": [],
+      "current": [
+        "#ifdef DEBUG",
+        "#error Unsupported original DEBUG branch",
+        "#endif",
+        "/* DIVERGENCE(OPENNT-HOST-120): complete original GetCPD, separate selection.",
+        " * Remaining clmsg bodies outside admitted default/GetCPD slices are omitted. */",
+        "#if defined(WOW_ORIGINAL_CLIENT_CPD)"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 14,
+      "original_count": 0,
+      "current_start": 24,
+      "current_count": 8,
+      "original_preview": [],
+      "current": [
+        "/***********************************************************************\\",
+        "* GetCPD",
+        "*",
+        "* This function calls the server to allocate a CPD structure.",
+        "*",
+        "* History:",
+        "* 11-15-94 JimA         Created.",
+        "\\***********************************************************************/"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 15,
+      "original_count": 10,
+      "current_start": 34,
+      "current_count": 7,
+      "original_preview": [
+        "#define fnINDESTROYCLIPBRD      fnDWORD",
+        "#define fnOUTDWORDDWORD         fnDWORD",
+        "",
+        "#define MSGFN(func) fn ## func"
+      ],
+      "current": [
+        "DWORD GetCPD(",
+        "    PVOID pWndOrCls,",
+        "    DWORD options,",
+        "    DWORD dwData)",
+        "{",
+        "    return NtUserGetCPD(HW(pWndOrCls), options, dwData);",
+        "}"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 26,
+      "original_count": 519,
+      "current_start": 42,
+      "current_count": 0,
+      "original_preview": [
+        "",
+        "/***************************************************************************\\",
+        "* These are client side thunks for server side window procs. This is being",
+        "* done so that when an app gets a wndproc via GetWindowLong, GetClassLong,"
+      ],
+      "current": [],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 554,
+      "original_count": 0,
+      "current_start": 51,
+      "current_count": 6,
+      "original_preview": [],
+      "current": [
+        "",
+        "/* OPENNT-HOST-089: complete original client default-window algorithm. */",
+        "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+        "#include \"precomp.h\"",
+        "#pragma hdrstop",
+        "#include \"wow_default_window_bindings.h\""
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 566,
+      "original_count": 0,
+      "current_start": 70,
+      "current_count": 1,
+      "original_preview": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 567,
+      "original_count": 3,
+      "current_start": 74,
+      "current_count": 1,
+      "original_preview": [
+        "    HWND hwndDefIme;",
+        "    PWND pwndDefIme;",
+        "    PIMEUI pimeui;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 573,
+      "original_count": 4,
+      "current_start": 80,
+      "current_count": 1,
+      "original_preview": [
+        "    if (!gfTurboDWP) {",
+        "        return CsSendMessage(hwnd, message, wParam, lParam, 0L,",
+        "                FNID_DEFWINDOWPROC, fAnsi);",
+        "    } else {"
+      ],
+      "current": [
+        "#error Excluded unsupported original DEBUG default-window path"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 579,
+      "original_count": 1,
+      "current_start": 83,
+      "current_count": 1,
+      "original_preview": [
+        ""
+      ],
+      "current": [
+        "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 647,
+      "original_count": 0,
+      "current_start": 152,
+      "current_count": 3,
+      "original_preview": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-089): a WM_MOVE callback can destroy the",
+        "         * native window; retained copied WND storage does not pin its HWND. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 905,
+      "original_count": 0,
+      "current_start": 414,
+      "current_count": 1,
+      "original_preview": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 906,
+      "original_count": 302,
+      "current_start": 418,
+      "current_count": 1,
+      "original_preview": [
+        "    case WM_IME_KEYDOWN:",
+        "        if (fAnsi)",
+        "            PostMessageA(hwnd, WM_KEYDOWN, wParam, lParam);",
+        "        else"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1210,
+      "original_count": 0,
+      "current_start": 421,
+      "current_count": 1,
+      "original_preview": [],
+      "current": [
+        "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1214,
+      "original_count": 0,
+      "current_start": 427,
+      "current_count": 1,
+      "original_preview": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1215,
+      "original_count": 1,
+      "current_start": 431,
+      "current_count": 1,
+      "original_preview": [
+        "    } // gfTurboDWP"
+      ],
+      "current": [
+        "#error Excluded unsupported original DEBUG default-window close"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1217,
+      "original_count": 458,
+      "current_start": 433,
+      "current_count": 1,
+      "original_preview": [
+        "}",
+        "",
+        "",
+        "/***************************************************************************\\"
+      ],
+      "current": [
+        "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1678,
+      "original_count": 0,
+      "current_start": 439,
+      "current_count": 3,
+      "original_preview": [],
+      "current": [
+        "#if 0",
+        "#error Excluded original disabled WMCTLCOLOR handler",
+        "#endif"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1679,
+      "original_count": 7,
+      "current_start": 445,
+      "current_count": 0,
+      "original_preview": [
+        "/******************************Public*Routine******************************\\",
+        "*",
+        "*",
+        "* History:"
+      ],
+      "current": [],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1687,
+      "original_count": 12,
+      "current_start": 447,
+      "current_count": 3,
+      "original_preview": [
+        "LONG fnKERNELONLY(",
+        "    HWND hwnd,",
+        "    UINT msg,",
+        "    DWORD wParam,"
+      ],
+      "current": [
+        "#ifdef FE_IME // SendMessageWorker()",
+        "#error Excluded unsupported original FE_IME branch",
+        "#endif // FE_IME"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1700,
+      "original_count": 2,
+      "current_start": 453,
+      "current_count": 0,
+      "original_preview": [
+        "    return 0L;",
+        "}"
+      ],
+      "current": [],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1703,
+      "original_count": 18,
+      "current_start": 455,
+      "current_count": 2,
+      "original_preview": [
+        "/***************************************************************************\\",
+        "* DispatchMessageWorker",
+        "*",
+        "* Handles any messages that can be dealt with wholly on the client and"
+      ],
+      "current": [
+        "#ifdef FE_SB // SendMessageWorker()",
+        "#error Unsupported FE_SB original branch"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1723,
+      "original_count": 54,
+      "current_start": 462,
+      "current_count": 0,
+      "original_preview": [
+        "    /*",
+        "     * Prevent apps from setting hi 16 bits so we can use them internally.",
+        "     */",
+        "    if (pmsg->message & RESERVED_MSG_BITS) {"
+      ],
+      "current": [],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1778,
+      "original_count": 74,
+      "current_start": 464,
+      "current_count": 1,
+      "original_preview": [
+        "        if (fAnsi) {",
+        "            /*",
+        "             * Setup DBCS Messaging for WM_CHAR...",
+        "             */"
+      ],
+      "current": [
+        "#error Unsupported FE_SB original branch"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1854,
+      "original_count": 3,
+      "current_start": 469,
+      "current_count": 4,
+      "original_preview": [
+        "    pmsg->wParam = wParamSaved;",
+        "    return lRet;",
+        "}"
+      ],
+      "current": [
+        "#ifdef FE_SB // SendMessageWorker()",
+        "#error Unsupported FE_SB original branch",
+        "#else",
+        "#endif // FE_SB"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1858,
+      "original_count": 9,
+      "current_start": 478,
+      "current_count": 4,
+      "original_preview": [
+        "/***************************************************************************\\",
+        "* GetMessageTime (API)",
+        "*",
+        "* This API returns the time when the last message was read from"
+      ],
+      "current": [
+        "#ifdef FE_SB // SendMessageWorker()",
+        "#error Unsupported FE_SB original branch",
+        "#else",
+        "#endif // FE_SB"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1868,
+      "original_count": 4,
+      "current_start": 487,
+      "current_count": 4,
+      "original_preview": [
+        "LONG GetMessageTime(VOID)",
+        "{",
+        "    return (LONG)NtUserGetThreadState(UserThreadStateMessageTime);",
+        "}"
+      ],
+      "current": [
+        "#ifdef FE_SB // DispatchMessageWorker()",
+        "#error Unsupported FE_SB original branch",
+        "#else",
+        "#endif // FE_SB"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1873,
+      "original_count": 6,
+      "current_start": 496,
+      "current_count": 4,
+      "original_preview": [
+        "/***************************************************************************\\",
+        "* GetMessageExtraInfo (API)",
+        "*",
+        "* History:"
+      ],
+      "current": [
+        "#ifdef FE_SB // DispatchMessageWorker()",
+        "#error Unsupported FE_SB original branch",
+        "#else",
+        "#endif // FE_SB"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1880,
+      "original_count": 9,
+      "current_start": 505,
+      "current_count": 14,
+      "original_preview": [
+        "LONG GetMessageExtraInfo(VOID)",
+        "{",
+        "    return (LONG)NtUserGetThreadState(UserThreadStateExtraInfo);",
+        "}"
+      ],
+      "current": [
+        "#ifndef LATER",
+        "#ifdef FE_SB // SendMessageWorker()",
+        "#error Excluded unsupported original FE_SB branch",
+        "#else",
+        "#endif // FE_SB",
+        "#ifdef FE_SB // SendMessageWorker()",
+        "#error Excluded unsupported original FE_SB branch",
+        "#else",
+        "#endif // FE_SB",
+        "#ifdef FE_SB // SendMessageWorker()",
+        "#error Excluded unsupported original FE_SB branch",
+        "#else",
+        "#endif // FE_SB",
+        "#endif /* !LATER */"
+      ],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    },
+    {
+      "original_start": 1891,
+      "original_count": 33,
+      "current_start": 534,
+      "current_count": 0,
+      "original_preview": [
+        "",
+        "/***********************************************************************\\",
+        "* InSendMessage (API)",
+        "*"
+      ],
+      "current": [],
+      "note": "Sequential diff only: moved GetCPD is separately verified against original1916-1922; not a replacement of the preceding original function."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "current_line": 14,
+      "logical_line": 24,
+      "frame": [
+        12,
+        23,
+        "#ifdef DEBUG"
+      ],
+      "body": "#error Unsupported original DEBUG branch"
+    },
+    {
+      "current_line": 74,
+      "logical_line": 567,
+      "frame": [
+        72,
+        566,
+        "#ifdef FE_IME"
+      ],
+      "body": "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+    },
+    {
+      "current_line": 80,
+      "logical_line": 573,
+      "frame": [
+        78,
+        572,
+        "#ifdef DEBUG"
+      ],
+      "body": "#error Excluded unsupported original DEBUG default-window path"
+    },
+    {
+      "current_line": 418,
+      "logical_line": 906,
+      "frame": [
+        416,
+        905,
+        "#if defined(FE_IME) // DefWindowProcWorker()"
+      ],
+      "body": "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+    },
+    {
+      "current_line": 431,
+      "logical_line": 1215,
+      "frame": [
+        429,
+        1214,
+        "#ifdef DEBUG"
+      ],
+      "body": "#error Excluded unsupported original DEBUG default-window close"
+    },
+    {
+      "current_line": 441,
+      "logical_line": 1651,
+      "frame": [
+        439,
+        1650,
+        "#if 0"
+      ],
+      "body": "#error Excluded original disabled WMCTLCOLOR handler"
+    },
+    {
+      "current_line": 449,
+      "logical_line": 328,
+      "frame": [
+        447,
+        327,
+        "#ifdef FE_IME // SendMessageWorker()"
+      ],
+      "body": "#error Excluded unsupported original FE_IME branch"
+    },
+    {
+      "current_line": 457,
+      "logical_line": 271,
+      "frame": [
+        455,
+        270,
+        "#ifdef FE_SB // SendMessageWorker()"
+      ],
+      "body": "#error Unsupported FE_SB original branch"
+    },
+    {
+      "current_line": 464,
+      "logical_line": 1720,
+      "frame": [
+        462,
+        1719,
+        "#ifdef FE_SB // DispatchMessageWorker()"
+      ],
+      "body": "#error Unsupported FE_SB original branch"
+    },
+    {
+      "current_line": 471,
+      "logical_line": 332,
+      "frame": [
+        469,
+        331,
+        "#ifdef FE_SB // SendMessageWorker()"
+      ],
+      "body": "#error Unsupported FE_SB original branch"
+    },
+    {
+      "current_line": 480,
+      "logical_line": 454,
+      "frame": [
+        478,
+        453,
+        "#ifdef FE_SB // SendMessageWorker()"
+      ],
+      "body": "#error Unsupported FE_SB original branch"
+    },
+    {
+      "current_line": 489,
+      "logical_line": 1778,
+      "frame": [
+        487,
+        1777,
+        "#ifdef FE_SB // DispatchMessageWorker()"
+      ],
+      "body": "#error Unsupported FE_SB original branch"
+    },
+    {
+      "current_line": 498,
+      "logical_line": 1804,
+      "frame": [
+        496,
+        1803,
+        "#ifdef FE_SB // DispatchMessageWorker()"
+      ],
+      "body": "#error Unsupported FE_SB original branch"
+    },
+    {
+      "current_line": 510,
+      "logical_line": 401,
+      "frame": [
+        508,
+        400,
+        "#ifdef FE_SB // SendMessageWorker()"
+      ],
+      "body": "#error Excluded unsupported original FE_SB branch"
+    },
+    {
+      "current_line": 518,
+      "logical_line": 417,
+      "frame": [
+        516,
+        416,
+        "#ifdef FE_SB // SendMessageWorker()"
+      ],
+      "body": "#error Excluded unsupported original FE_SB branch"
+    },
+    {
+      "current_line": 526,
+      "logical_line": 434,
+      "frame": [
+        524,
+        433,
+        "#ifdef FE_SB // SendMessageWorker()"
+      ],
+      "body": "#error Excluded unsupported original FE_SB branch"
+    }
+  ],
+  "selected_function_proof": {
+    "GetCPD": "Exact original1916-1922 body.",
+    "DefWindowProcWorker": "All nonblank lines in original555-565,580-904,1210-1213,1217 occur unchanged at their original logical lines; FE_IME/DEBUG bodies excluded, plus explicit added post-WM_MOVE destruction guard.",
+    "missing_original_selected_lines": []
+  },
+  "initial_review": "Retain original default algorithm and finite binding. GetCPD is source-identical but product call sites lie in disabled alternatives; production object is removable, distinct from the still-used native NtUserGetCPD binding.",
+  "counter_review": "Do not equate copied WND allocation lifetime with live HWND. WM_MOVE can retire the exact binding, so removing the guard is unsafe. Whole-file deletion is invalid: default client remains a product provider. Orphan FE_SB/LATER/FE_IME frames do not prove original enclosing function structure restored.",
+  "format_restoration": "Original DefWindowProcWorker documentation546-553 restored; no executable/preprocessor token changed.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: default-client and client-callproc objects",
+    "src/wow32-dll/include/control-client/precomp.h: WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+    "src/non-mvdm/windows/core/ntuser/rtl/getset.c: GetCPD call in alternative branch",
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c: GetCPD call in alternative branch",
+    "src/wow32-dll/source/wow_default_window_bindings.c: exact borrowed allocation/name lock/TLS restoration",
+    "src/wow32-dll/source/wow_window_words_binding.c: retirement sets WFDESTROYED",
+    "src/wow32-dll/source/wow_default_native_bindings.c: bounded service operation",
+    "test/adapter-mvdm-host-out/wow/wow_default_original_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_default_window_binding_fixture.c"
+  ],
+  "limits": "Source comparison and test-source inspection only; fixtures were not run. Full original remainder is deliberately outside admitted USER slice, not proved unreachable in original NT. Orphan conditional and source diagnostic mapping need policy-context repair; no native USER or guest acceptance claimed."
+}

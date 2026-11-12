@@ -1,0 +1,46 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "before_sha256": "d9a3a1fd5a8a00b0af2a3a673115c10d458730370b85f53bab6cabd516d9ac81",
+  "current_sha256": "90cbe1e5d20b4284820193b242da8af753dbc976e056ea74f3c0c45812efaf64",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_comparison": {
+    "AddAttachment": "exact",
+    "Recalc2": "exact body; explicit current-thread signature",
+    "RecalcThreadAttachment": "only forwarded current-thread argument differs in body"
+  },
+  "evidence": [
+    "src/wow32-dll/include/wow_input_group_bindings.h",
+    "src/wow32-dll/source/wow_input_group_lifetime.c:25-47,85-219",
+    "test/adapter-mvdm-host-out/wow/wow_input_membership_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:670"
+  ],
+  "decisions": [
+    "Keep finite caller-owned thread/desktop/edge/queue binding; no private kernel input queue engine.",
+    "Detached MARKPATH/DBG/DEBUG/NEVER/SYSMODALWINDOWS/FE_IME/disabled frames span omitted functions; restore coherent original subset placement. Remove duplicate no-op instrumentation macros if no retained callers, without activating excluded code.",
+    "AddAttachment body exact; replaces provisional label and releases prior reference, increments new count once. Existing plan owns scratch storage; do not add another membership state machine.",
+    "Only Recalc2 signature adds explicit current-thread; original fixed-point body exact. Keep original same-process WOW grouping plus explicit attachment edges.",
+    "No production caller found; production commit explicitly uses AddAttachment/Recalc2, and queue allocator is terminal rejection. Remove test-only wrapper plus allocate_queue field/label_allocate/macro/declaration and queue_selection fixture cases after full symbol/build confirmation; keep original grouping tests and lifetime tests. Not a whole-file deletion.",
+    "Retained alignment assertion lost its defining context: src search finds only this condition/message. Remove with omitted key-state owner or restore exact original constant if owner retained; do not treat undefined-as-zero success as proof.",
+    "Omitted wait/get-message and foreground checks: map public native queue boundary versus original callback/wake/filter contracts before saying all code unnecessary.",
+    "Omitted dispatch/post/quit/thread-post/message-position policy: trace current selected public/native paths and cross-task behavior; restore reusable gaps without private queue engine.",
+    "Omitted mouse-move coalescing, foreground activation and wake recipients: compare selected native input responsibilities and original WOW-specific policy.",
+    "Omitted key-state allocation/update and event posting: identify actual queue/keyboard state owner, allocation lifetime and reference assumptions; assertion alone not coverage.",
+    "Omitted activation/hover/tracking operations require native API/callback policy mapping; do not infer equivalence solely from modern USER allocation ownership.",
+    "Omitted system message extraction/skip/key-state and screensaver checks: separate host-system services from guest-visible message ordering, hook and translation behavior.",
+    "Large xxxScanSysQueue omission includes input filtering/hook/dispatch logic. Map actual message boundary and selected original conversions before declaring full semantic coverage.",
+    "IdleTimerProc/WakeInputIdle/SleepInputIdle omission: map original taskman/queue event owner and approved waits; no new polling or unrelated timeout policy.",
+    "RedistributeInput/CancelInputState/CheckTransferState/AttachToQueue/ReattachThreads omitted. Actual modern AttachThreadInput owns focus/capture/key queues, but scratch grouping and native clique differ from original Q storage. Establish finite behavioral coverage and compare complexity before adding/removing state.",
+    "Original _AttachThreadInput validates self/desktop/flags and directed reference counts; current owned links use undirected pair membership. Compare real admitted callers and external native references; fixture external-reference case is relevant but not whole API equivalence.",
+    "_SetMessageExtraInfo omission: identify actual native queue extra-info binding and return semantics; no need to reintroduce private PQ solely for storage."
+  ],
+  "entries_added": 17,
+  "format_sites": 1,
+  "limits": [
+    "No fresh compilation/runtime.",
+    "Pure-host queue ownership does not prove all original queue behavior equivalent.",
+    "Test-only wrapper deletion is partial-code remediation, not owner-authorized immediate whole-file deletion.",
+    "Missing key-state macro evidence is source search only."
+  ]
+}

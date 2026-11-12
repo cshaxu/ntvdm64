@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/makefile",
+  "original_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+  "current_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [],
+  "counter_review": "Complete original/current textual difference inventory; all selected differences classified, exclusions separately recorded.",
+  "limits": "No functional remediation or fresh test; source necessity audit not all-context reachability certification."
+}

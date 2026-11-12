@@ -392,6 +392,7 @@ GLOBAL CPU int host_com_open(int adapter)
     com_int_data(adapter, &current->controller, &current->line);
 
     /*::::::::::::::::::::::::::::::: Enable IRET hooks for comms interrupt */
+
 #ifdef MONITOR
 #line 389
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
@@ -717,6 +718,7 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 	current->XOFFEvent = current->RXEvent = current->EvtHandle = NULL;
 
 	/*.......................... Disable IRET hooks for comms interrupt */
+
 #ifdef MONITOR
 #line 713
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected

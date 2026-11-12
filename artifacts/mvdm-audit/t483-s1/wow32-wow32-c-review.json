@@ -1,0 +1,1693 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "current_sha256": "2eee8be1de79beb1349feef69903e926ea8504f9606ad89b2a8df4902620fc0d",
+  "changes": [
+    {
+      "original_start": 22,
+      "original_count": 0,
+      "current_start": 22,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-296): native private USER aliases retain their",
+        " * storage across original thunk calls, including reentry and exception unwind. */",
+        "#include \"wow_user_thunk_scope.h\""
+      ],
+      "decision": "retain",
+      "classification": "scoped-user-alias-borrow",
+      "change_plan": "Retain shared wow_user_invoke_thunk boundary for live native USER aliases and finally restoration; remove provider-internal optional trace separately with diagnostic callers, not the borrow boundary.",
+      "evidence": "Provider borrows aliases, invokes original thunk, restores operation modes and releases in finally. Original W32Dispatch/W32TryCall own exception policy.",
+      "verification_required": "Thunk-scope and nested callback/exception tests; no new trace subsystem.",
+      "missing_evidence": "No new runtime pass; provider minimization is deferred."
+    },
+    {
+      "original_start": 33,
+      "original_count": 0,
+      "current_start": 37,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include <ntlpcapi.h>"
+      ],
+      "decision": "pending",
+      "classification": "sdk-include",
+      "change_plan": "Prove which selected declaration requires ntlpcapi.h; remove include if preprocessed dependency closure shows none, otherwise document exact declaration owner.",
+      "evidence": "Direct scan finds no LPC/port invocation in selected wow32.c; include-only absence of direct calls is not proof no transitive type dependency.",
+      "verification_required": "Selected TU preprocess and compile without include; no other header changes.",
+      "missing_evidence": "Transitive type/macro dependency not yet proved."
+    },
+    {
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 42,
+      "current_count": 10,
+      "original": [],
+      "current": [
+        "#include \"common/wow/page_domain.h\"",
+        "#include \"common/wow/fast_bop.h\"",
+        "/* This selected original read path retains its query/fallback body while",
+        " * using the worker-local NTVDM.REG/system snapshot facade. */",
+        "#include <common/wow/registry.h>",
+        "/* This TU needs only the Win32 registry-reader redirection. */",
+        "#undef NtOpenKey",
+        "#undef NtEnumerateValueKey",
+        "#undef NtQueryValueKey",
+        "#undef NtClose"
+      ],
+      "decision": "pending",
+      "classification": "shared-provider-includes",
+      "change_plan": "Keep page-domain/fast-BOP declarations with their callers. Audit registry redirection and four Nt* undefs against actual precomp macro state; remove redundant undefs only after selected preprocessing proof.",
+      "evidence": "Shared read facade redirects Reg* APIs. This TU uses registry readers and original directory providers; native Nt* redirection necessity not established solely by include text.",
+      "verification_required": "Selected preprocessing; registry reader failure and normal startup; CPU40 declarations.",
+      "missing_evidence": "Exact macro origin and declaration closure remain pending."
+    },
+    {
+      "original_start": 159,
+      "original_count": 3,
+      "current_start": 179,
+      "current_count": 0,
+      "original": [
+        "extern PVOID GdiQueryTable();",
+        "extern PVOID gpGdiHandleInfo;",
+        ""
+      ],
+      "current": [],
+      "decision": "retain",
+      "classification": "retired-private-gdi-table",
+      "change_plan": "Retain removal of unavailable private GdiQueryTable and gpGdiHandleInfo initialization; current GDI32/GDI16 alias provider already owns conversion. Do not restore a second alias authority.",
+      "evidence": "Original private GDI table was consumed by old walias logic; prior walias review identifies common alias provider as selected replacement. Initialization would recreate obsolete private-host dependency.",
+      "verification_required": "Shared GDI alias lifetime and WOW startup regression; unresolved old symbol scan.",
+      "missing_evidence": "Source chain reviewed; no new link/runtime claim."
+    },
+    {
+      "original_start": 249,
+      "original_count": 6,
+      "current_start": 253,
+      "current_count": 0,
+      "original": [
+        "",
+        "        //",
+        "        // setup the GDI table for handle conversion",
+        "        //",
+        "",
+        "        gpGdiHandleInfo = GdiQueryTable();"
+      ],
+      "current": [],
+      "decision": "retain",
+      "classification": "retired-private-gdi-table",
+      "change_plan": "Retain removal of unavailable private GdiQueryTable and gpGdiHandleInfo initialization; current GDI32/GDI16 alias provider already owns conversion. Do not restore a second alias authority.",
+      "evidence": "Original private GDI table was consumed by old walias logic; prior walias review identifies common alias provider as selected replacement. Initialization would recreate obsolete private-host dependency.",
+      "verification_required": "Shared GDI alias lifetime and WOW startup regression; unresolved old symbol scan.",
+      "missing_evidence": "Source chain reviewed; no new link/runtime claim."
+    },
+    {
+      "original_start": 462,
+      "original_count": 1,
+      "current_start": 461,
+      "current_count": 1,
+      "original": [
+        "    HKEY  WowKey;"
+      ],
+      "current": [
+        "    HKEY  WowKey = NULL;"
+      ],
+      "decision": "retain",
+      "classification": "optional-registry-handle",
+      "change_plan": "Retain NULL initialization and conditional close while separately correcting open-error policy; never close an unacquired key.",
+      "evidence": "WowKey reaches WK32InitWowIsKnownDLL, whose null case uses existing missing-value result; close only follows valid handle.",
+      "verification_required": "Missing key and valid reader-handle lifecycle test.",
+      "missing_evidence": "Does not justify swallowing arbitrary registry errors."
+    },
+    {
+      "original_start": 468,
+      "original_count": 2,
+      "current_start": 468,
+      "current_count": 0,
+      "original": [
+        "    DWORD cb;",
+        "    DWORD dwType;"
+      ],
+      "current": [],
+      "decision": "restore",
+      "classification": "original-thunknls-reader",
+      "change_plan": "Restore original cb/dwType locals and RegQueryValueEx ThunkNLS condition through existing registry facade; remove artificial DEBUG split around this live query. Keep original LCID default only when value missing/wrong type/read fails as original policy specifies; handle absent key through same result path.",
+      "evidence": "Pinned original reads ThunkNLS outside DEBUG, then defaults if query fails or type differs. Current code deletes query and both locals, unconditionally taking default for selected release build.",
+      "verification_required": "Fixture explicit REG_DWORD 0/1 overrides LCID; absent/wrong-type defaults; valid/missing WowKey and no host mutation.",
+      "missing_evidence": "Shared registry projection must expose requested value consistently; no functional restore applied."
+    },
+    {
+      "original_start": 503,
+      "original_count": 1,
+      "current_start": 504,
+      "current_count": 8,
+      "original": [
+        "        GetSystemDirectory(szBuf, sizeof szBuf);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-259): preserve the original directory",
+        "         * publication and short-name normalization, but source only its",
+        "         * directory spelling from the current worker's selected MVDM media.",
+        "         * Modern GetSystemDirectory/GetWindowsDirectory identify the host OS,",
+        "         * not this standalone product package. */",
+        "        if (!NtvdmGetSystemDirectoryA(szBuf, sizeof szBuf)) {",
+        "            return FALSE;",
+        "        }"
+      ],
+      "decision": "retain",
+      "classification": "worker-media-directory",
+      "change_plan": "Retain worker-selected system/windows directory providers, original short-name normalization and false result on lookup failure; do not query modern host OS directories for guest package.",
+      "evidence": "mvdm_softpc_firmware.c provides selected MVDM directory spelling; same APIs are used by DEM/COMMAND. Original publishing remains in wow32.c.",
+      "verification_required": "Package root override, short-name behavior, missing path and normal WOW startup.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 509,
+      "original_count": 1,
+      "current_start": 518,
+      "current_count": 3,
+      "original": [
+        "        GetWindowsDirectory(szBuf, sizeof szBuf);"
+      ],
+      "current": [
+        "        if (!NtvdmGetWindowsDirectoryA(szBuf, sizeof szBuf)) {",
+        "            return FALSE;",
+        "        }"
+      ],
+      "decision": "retain",
+      "classification": "worker-media-directory",
+      "change_plan": "Retain worker-selected system/windows directory providers, original short-name normalization and false result on lookup failure; do not query modern host OS directories for guest package.",
+      "evidence": "mvdm_softpc_firmware.c provides selected MVDM directory spelling; same APIs are used by DEM/COMMAND. Original publishing remains in wow32.c.",
+      "verification_required": "Package root override, short-name behavior, missing path and normal WOW startup.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 581,
+      "original_count": 3,
+      "current_start": 593,
+      "current_count": 8,
+      "original": [
+        "             ) != 0){",
+        "        LOGDEBUG(0,(\"    W32INIT ERROR: Registry Opening failed\\n\"));",
+        "        return FALSE;"
+      ],
+      "current": [
+        "             ) != 0) {",
+        "#ifdef DEBUG",
+        "#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected",
+        "#else",
+        "        /* An absent section denotes the original empty-KnownDLL configuration.",
+        "         * The worker-local facade never creates or mutates host state. */",
+        "        WowKey = NULL;",
+        "#endif"
+      ],
+      "decision": "correct",
+      "classification": "registry-open-error-policy",
+      "change_plan": "Distinguish explicitly supported absent key from other open errors; preserve original failure for non-absence rather than treating every error as empty configuration. Reuse existing reader result; no second registry path.",
+      "evidence": "Original nonzero RegOpenKeyEx returns FALSE; current non-DEBUG branch sets NULL for every nonzero result, not only missing key as comment says.",
+      "verification_required": "Missing key permitted baseline; access/invalid-data/provider errors propagate; startup/cleanup remains owned by existing path.",
+      "missing_evidence": "Exact facade error set needs fault-injection validation."
+    },
+    {
+      "original_start": 590,
+      "original_count": 7,
+      "current_start": 611,
+      "current_count": 5,
+      "original": [
+        "    cb = sizeof(fThunkStrRtns);",
+        "    if (RegQueryValueEx(WowKey,",
+        "            \"ThunkNLS\",",
+        "            NULL,",
+        "            &dwType,",
+        "            (LPBYTE) &fThunkStrRtns,",
+        "            &cb) || dwType != REG_DWORD) {"
+      ],
+      "current": [
+        "#ifdef DEBUG",
+        "#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected",
+        "#else",
+        "    {",
+        "#endif"
+      ],
+      "decision": "restore",
+      "classification": "original-thunknls-reader",
+      "change_plan": "Restore original cb/dwType locals and RegQueryValueEx ThunkNLS condition through existing registry facade; remove artificial DEBUG split around this live query. Keep original LCID default only when value missing/wrong type/read fails as original policy specifies; handle absent key through same result path.",
+      "evidence": "Pinned original reads ThunkNLS outside DEBUG, then defaults if query fails or type differs. Current code deletes query and both locals, unconditionally taking default for selected release build.",
+      "verification_required": "Fixture explicit REG_DWORD 0/1 overrides LCID; absent/wrong-type defaults; valid/missing WowKey and no host mutation.",
+      "missing_evidence": "Shared registry projection must expose requested value consistently; no functional restore applied."
+    },
+    {
+      "original_start": 681,
+      "original_count": 2,
+      "current_start": 648,
+      "current_count": 3,
+      "original": [
+        "    RegCloseKey (WowKey);",
+        ""
+      ],
+      "current": [
+        "    if (WowKey != NULL) {",
+        "        RegCloseKey (WowKey);",
+        "    }"
+      ],
+      "decision": "retain",
+      "classification": "optional-registry-handle",
+      "change_plan": "Retain NULL initialization and conditional close while separately correcting open-error policy; never close an unacquired key.",
+      "evidence": "WowKey reaches WK32InitWowIsKnownDLL, whose null case uses existing missing-value result; close only follows valid handle.",
+      "verification_required": "Missing key and valid reader-handle lifecycle test.",
+      "missing_evidence": "Does not justify swallowing arbitrary registry errors."
+    },
+    {
+      "original_start": 957,
+      "original_count": 2,
+      "current_start": 854,
+      "current_count": 5,
+      "original": [
+        "    VPVOID vpCurrentStack;",
+        "    register PTD ptd;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-337): a handled exception must complete",
+        "     * CallBack16's deferred CPU-stack pop, but not before a stack exists. */",
+        "    BOOL fStackEstablished = FALSE;",
+        "    VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too",
+        "    register PTD ptd = NULL;"
+      ],
+      "decision": "pending",
+      "classification": "dispatch-exception-frame",
+      "change_plan": "Retain initialization/established guard pending full frame semantics; verify filter temporarily exposes entry frame then restores pending callback frame, and only handled-exception body commits deferred stack restoration. Do not merge filter and unwind phases.",
+      "evidence": "wow_user_dispatch_exception calls original W32Exception, changes task->vpStack only during filter and restores in finally; handler SETVDMSTACK runs only if established. Native modal error UI can reenter a different task.",
+      "verification_required": "verify-wow-dispatch-exception and actual nested CallBack16 failure, continue-search/continue-execution, pre-setup exception and task retirement while modal.",
+      "missing_evidence": "Whole-chain reentry/task lifetime and original stack equivalence remain unproved here."
+    },
+    {
+      "original_start": 991,
+      "original_count": 0,
+      "current_start": 896,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        fStackEstablished = TRUE;                 // DIV-337"
+      ],
+      "decision": "pending",
+      "classification": "dispatch-exception-frame",
+      "change_plan": "Retain initialization/established guard pending full frame semantics; verify filter temporarily exposes entry frame then restores pending callback frame, and only handled-exception body commits deferred stack restoration. Do not merge filter and unwind phases.",
+      "evidence": "wow_user_dispatch_exception calls original W32Exception, changes task->vpStack only during filter and restores in finally; handler SETVDMSTACK runs only if established. Native modal error UI can reenter a different task.",
+      "verification_required": "verify-wow-dispatch-exception and actual nested CallBack16 failure, continue-search/continue-execution, pre-setup exception and task retirement while modal.",
+      "missing_evidence": "Whole-chain reentry/task lifetime and original stack equivalence remain unproved here."
+    },
+    {
+      "original_start": 1026,
+      "original_count": 1,
+      "current_start": 936,
+      "current_count": 1,
+      "original": [
+        "        ulReturn = (*((LPFNW32)iFun))(pFrame);      // Dispatch to Thunk"
+      ],
+      "current": [
+        "        ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296"
+      ],
+      "decision": "retain",
+      "classification": "scoped-user-alias-borrow",
+      "change_plan": "Retain shared wow_user_invoke_thunk boundary for live native USER aliases and finally restoration; remove provider-internal optional trace separately with diagnostic callers, not the borrow boundary.",
+      "evidence": "Provider borrows aliases, invokes original thunk, restores operation modes and releases in finally. Original W32Dispatch/W32TryCall own exception policy.",
+      "verification_required": "Thunk-scope and nested callback/exception tests; no new trace subsystem.",
+      "missing_evidence": "No new runtime pass; provider minimization is deferred."
+    },
+    {
+      "original_start": 1066,
+      "original_count": 2,
+      "current_start": 969,
+      "current_count": 7,
+      "original": [
+        "    } except (W32Exception(GetExceptionCode(), GetExceptionInformation())) {",
+        ""
+      ],
+      "current": [
+        "    } except (wow_user_dispatch_exception(GetExceptionCode(),",
+        "            GetExceptionInformation(), ptd, vpCurrentStack, fStackEstablished)) { // DIV-348",
+        "        /* DIV-337: neither continue-search nor continue-execution comes here. */",
+        "        if (fStackEstablished) { // DIVERGENCE(MVDM-HOST-DIV-348)",
+        "            ptd->vpStack = vpCurrentStack;",
+        "            SETVDMSTACK(ptd->vpStack);",
+        "        }"
+      ],
+      "decision": "pending",
+      "classification": "dispatch-exception-frame",
+      "change_plan": "Retain initialization/established guard pending full frame semantics; verify filter temporarily exposes entry frame then restores pending callback frame, and only handled-exception body commits deferred stack restoration. Do not merge filter and unwind phases.",
+      "evidence": "wow_user_dispatch_exception calls original W32Exception, changes task->vpStack only during filter and restores in finally; handler SETVDMSTACK runs only if established. Native modal error UI can reenter a different task.",
+      "verification_required": "verify-wow-dispatch-exception and actual nested CallBack16 failure, continue-search/continue-execution, pre-setup exception and task retirement while modal.",
+      "missing_evidence": "Whole-chain reentry/task lifetime and original stack equivalence remain unproved here."
+    },
+    {
+      "original_start": 1144,
+      "original_count": 1,
+      "current_start": 1011,
+      "current_count": 1,
+      "original": [
+        "        ulReturn = (*lpfnW32)(pFrame);      // Dispatch to Thunk"
+      ],
+      "current": [
+        "        ulReturn = wow_user_invoke_thunk(lpfnW32, pFrame); // DIV-296"
+      ],
+      "decision": "retain",
+      "classification": "scoped-user-alias-borrow",
+      "change_plan": "Retain shared wow_user_invoke_thunk boundary for live native USER aliases and finally restoration; remove provider-internal optional trace separately with diagnostic callers, not the borrow boundary.",
+      "evidence": "Provider borrows aliases, invokes original thunk, restores operation modes and releases in finally. Original W32Dispatch/W32TryCall own exception policy.",
+      "verification_required": "Thunk-scope and nested callback/exception tests; no new trace subsystem.",
+      "missing_evidence": "No new runtime pass; provider minimization is deferred."
+    },
+    {
+      "original_start": 1873,
+      "original_count": 1,
+      "current_start": 1597,
+      "current_count": 8,
+      "original": [
+        "    return 0;"
+      ],
+      "current": [
+        "#if defined(CPU_40_STYLE)",
+        "    UNREFERENCED_PARAMETER(pFrame);",
+        "    return mvdm_softpc_fast_bop_dispatch_offset();",
+        "#elif FASTBOPPING",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#else",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#endif"
+      ],
+      "decision": "pending",
+      "classification": "cpu40-wow-guest-boundary",
+      "change_plan": "Review dedicated CPU40 dispatch/callback endpoints and guest-linear flat table as one call chain with original PMODE32 requester. Preserve no host-address exposure, prove initialization/selector update/retirement and simplify only after original-versus-selected semantic evidence.",
+      "evidence": "Fast-BOP provider reserves selector and fixed offsets then redirects original CALLF to BOP; offsets return zero before setup. Page-domain table allocated in guest memory from descriptor bases, then updated separately; original non-fast path returned zero.",
+      "verification_required": "Existing fast-BOP/page-domain fixtures plus original guest initialization and callbacks; failed setup, LDT remap/table update, shutdown and repeated startup.",
+      "missing_evidence": "Necessity/equivalence of entire selected CPU40 path not established by these wrappers alone; no hardware monitor assumption."
+    },
+    {
+      "original_start": 1882,
+      "original_count": 1,
+      "current_start": 1619,
+      "current_count": 8,
+      "original": [
+        "    return( 0L );"
+      ],
+      "current": [
+        "#if defined(CPU_40_STYLE)",
+        "    UNREFERENCED_PARAMETER(pFrame);",
+        "    return mvdm_softpc_fast_bop_callback_offset();",
+        "#elif FASTBOPPING",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#else",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#endif"
+      ],
+      "decision": "pending",
+      "classification": "cpu40-wow-guest-boundary",
+      "change_plan": "Review dedicated CPU40 dispatch/callback endpoints and guest-linear flat table as one call chain with original PMODE32 requester. Preserve no host-address exposure, prove initialization/selector update/retirement and simplify only after original-versus-selected semantic evidence.",
+      "evidence": "Fast-BOP provider reserves selector and fixed offsets then redirects original CALLF to BOP; offsets return zero before setup. Page-domain table allocated in guest memory from descriptor bases, then updated separately; original non-fast path returned zero.",
+      "verification_required": "Existing fast-BOP/page-domain fixtures plus original guest initialization and callbacks; failed setup, LDT remap/table update, shutdown and repeated startup.",
+      "missing_evidence": "Necessity/equivalence of entire selected CPU40 path not established by these wrappers alone; no hardware monitor assumption."
+    },
+    {
+      "original_start": 1913,
+      "original_count": 1,
+      "current_start": 1666,
+      "current_count": 10,
+      "original": [
+        "    return 0;"
+      ],
+      "current": [
+        "#if defined(CPU_40_STYLE)",
+        "    /* Original PMODE32 KRNL386 asks for this table before taking its",
+        "     * WOW-specific selector publication path.  Return the same table shape,",
+        "     * but in worker guest memory rather than leaking a host array address. */",
+        "    return mvdm_softpc_wow_page_domain_flat_address_array(FlatAddress);",
+        "#elif FASTBOPPING",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#else",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#endif"
+      ],
+      "decision": "pending",
+      "classification": "cpu40-wow-guest-boundary",
+      "change_plan": "Review dedicated CPU40 dispatch/callback endpoints and guest-linear flat table as one call chain with original PMODE32 requester. Preserve no host-address exposure, prove initialization/selector update/retirement and simplify only after original-versus-selected semantic evidence.",
+      "evidence": "Fast-BOP provider reserves selector and fixed offsets then redirects original CALLF to BOP; offsets return zero before setup. Page-domain table allocated in guest memory from descriptor bases, then updated separately; original non-fast path returned zero.",
+      "verification_required": "Existing fast-BOP/page-domain fixtures plus original guest initialization and callbacks; failed setup, LDT remap/table update, shutdown and repeated startup.",
+      "missing_evidence": "Necessity/equivalence of entire selected CPU40 path not established by these wrappers alone; no hardware monitor assumption."
+    },
+    {
+      "original_start": 2311,
+      "original_count": 0,
+      "current_start": 1750,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    DWORD exit_code;",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-356): parent owns whole-worker exit permission. */",
+        "    extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authority",
+      "change_plan": "Retain shared NtvdmAuthorizeExit before original task-record retirement and ExitProcess; preserve EXIT_FAILURE unless shared owner reports service loss.",
+      "evidence": "Same worker_lifecycle authority audited at wkman.c requests NTSRV exit, waits owned controls and quiesces frontends; WOW must not independently kill connected worker.",
+      "verification_required": "Startup/fatal worker exit and NTSRV disconnect; individual task termination remains separate.",
+      "missing_evidence": "No new runtime result."
+    },
+    {
+      "original_start": 2320,
+      "original_count": 0,
+      "current_start": 1763,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */",
+        "    exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authority",
+      "change_plan": "Retain shared NtvdmAuthorizeExit before original task-record retirement and ExitProcess; preserve EXIT_FAILURE unless shared owner reports service loss.",
+      "evidence": "Same worker_lifecycle authority audited at wkman.c requests NTSRV exit, waits owned controls and quiesces frontends; WOW must not independently kill connected worker.",
+      "verification_required": "Startup/fatal worker exit and NTSRV disconnect; individual task termination remains separate.",
+      "missing_evidence": "No new runtime result."
+    },
+    {
+      "original_start": 2321,
+      "original_count": 1,
+      "current_start": 1767,
+      "current_count": 1,
+      "original": [
+        "    ExitProcess(EXIT_FAILURE);"
+      ],
+      "current": [
+        "    ExitProcess(exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authority",
+      "change_plan": "Retain shared NtvdmAuthorizeExit before original task-record retirement and ExitProcess; preserve EXIT_FAILURE unless shared owner reports service loss.",
+      "evidence": "Same worker_lifecycle authority audited at wkman.c requests NTSRV exit, waits owned controls and quiesces frontends; WOW must not independently kill connected worker.",
+      "verification_required": "Startup/fatal worker exit and NTSRV disconnect; individual task termination remains separate.",
+      "missing_evidence": "No new runtime result."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 54,
+      "original_count": 4,
+      "current_start": 72,
+      "current_count": 1,
+      "original": [
+        "CHAR    szLogFile[128];",
+        "int     fLog = 0;",
+        "HANDLE  hfLog = NULL;",
+        "UCHAR   gszAssert[256];"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 68,
+      "original_count": 2,
+      "current_start": 86,
+      "current_count": 1,
+      "original": [
+        "INT     iLogLevel = 0;           // logging level;  0 implies none",
+        "INT     fDebugWait = 0 ;         // Single Step, 0 = No single step"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 75,
+      "original_count": 2,
+      "current_start": 95,
+      "current_count": 1,
+      "original": [
+        "INT     fLogFilter = -1;            // Logging Code Fiters",
+        "WORD    fLogTaskFilter = (WORD)-1;  // Filter Logging for Specific TaskID"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 79,
+      "original_count": 1,
+      "current_start": 101,
+      "current_count": 1,
+      "original": [
+        "PX86CONTEXT pIntelRegisters = 0; // x86 Only - Pointer to Intel Register Block"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected"
+      ]
+    },
+    {
+      "original_start": 83,
+      "original_count": 8,
+      "current_start": 107,
+      "current_count": 1,
+      "original": [
+        "BOOL    fSkipLog = 0;           // TRUE to temporarily skip certain logging",
+        "INT     iReqLogLevel = 0;                       // Current Output LogLevel",
+        "INT     iCircBuffer = CIRC_BUFFERS-1;           // Current Buffer",
+        "CHAR    achTmp[CIRC_BUFFERS][TMP_LINE_LEN] = {\" \"};      // Circular Buffer",
+        "CHAR    *pachTmp = &achTmp[0][0];",
+        "WORD    awfLogFunctionFilter[FILTER_FUNCTION_MAX] = {0xffff,0,0,0,0,0,0,0,0,0}; // Specific Filter API Array",
+        "PWORD   pawfLogFunctionFilter = awfLogFunctionFilter;",
+        "INT     iLogFuncFiltIndex = 0;                  // Index Into Specific Array for Debugger Extensions"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 163,
+      "original_count": 17,
+      "current_start": 181,
+      "current_count": 1,
+      "original": [
+        "",
+        "extern PVOID WowpLockPrefixTable;",
+        "",
+        "IMAGE_LOAD_CONFIG_DIRECTORY _load_config_used = {",
+        "    0,                          // Reserved",
+        "    0,                          // Reserved",
+        "    0,                          // Reserved",
+        "    0,                          // Reserved",
+        "    0,                          // GlobalFlagsClear",
+        "    0,                          // GlobalFlagsSet",
+        "    0,                          // CriticalSectionTimeout (milliseconds)",
+        "    0,                          // DeCommitFreeBlockThreshold",
+        "    0,                          // DeCommitTotalFreeThreshold",
+        "    &WowpLockPrefixTable,       // LockPrefixTable, defined in FASTWOW.ASM",
+        "    0, 0, 0, 0, 0, 0, 0         // Reserved",
+        "};",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 464,
+      "original_count": 3,
+      "current_start": 464,
+      "current_count": 1,
+      "original": [
+        "    CHAR WOWCmdLine[REGISTRY_BUFFER_SIZE];",
+        "    PCHAR pWOWCmdLine;",
+        "    ULONG WOWCmdLineSize = REGISTRY_BUFFER_SIZE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected"
+      ]
+    },
+    {
+      "original_start": 474,
+      "original_count": 1,
+      "current_start": 474,
+      "current_count": 1,
+      "original": [
+        "    pIntelRegisters = getIntelRegistersPointer();  // X86 Only, get pointer to Register Context Block"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 612,
+      "original_count": 60,
+      "current_start": 636,
+      "current_count": 1,
+      "original": [
+        "",
+        "    if (RegQueryValueEx (WowKey,",
+        "             \"wowcmdline\",",
+        "             NULL,",
+        "             &dwType,",
+        "             (LPBYTE)&WOWCmdLine,",
+        "             &WOWCmdLineSize) != 0){",
+        "        RegCloseKey (WowKey);",
+        "        LOGDEBUG(0,(\"    W32INIT ERROR: WOWCMDLINE not found in registry\\n\"));",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    pWOWCmdLine = (PCHAR)((PBYTE)WOWCmdLine + WOWCmdLineSize + 1);",
+        "",
+        "    WOWCmdLineSize = REGISTRY_BUFFER_SIZE - WOWCmdLineSize -1;",
+        "",
+        "    if (WOWCmdLineSize < (REGISTRY_BUFFER_SIZE  / 2)){",
+        "        LOGDEBUG(0,(\"    W32INIT ERROR: Registry Buffer too small\\n\"));",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    if (ExpandEnvironmentStrings ((LPCSTR)WOWCmdLine, (LPSTR)pWOWCmdLine, WOWCmdLineSize) >",
+        "            WOWCmdLineSize) {",
+        "        LOGDEBUG(0,(\"    W32INIT ERROR: Registry Buffer too small\\n\"));",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    // Find Debug Info",
+        "    while (*pWOWCmdLine) {",
+        "        if (*pWOWCmdLine == '-' || *pWOWCmdLine == '/') {",
+        "         //   c = (char)tolower(*++pWOWCmdLine);",
+        "            switch(*++pWOWCmdLine) {",
+        "            case 'd':",
+        "            case 'D':",
+        "                flOptions |= OPT_DEBUG;",
+        "                break;",
+        "            case 'n':",
+        "            case 'N':",
+        "                flOptions |= OPT_BREAKONNEWTASK;",
+        "                break;",
+        "            case 'l':",
+        "            case 'L':",
+        "                iLogLevel = atoi(++pWOWCmdLine);",
+        "                break;",
+        "            default:",
+        "                break;",
+        "            }",
+        "",
+        "        }",
+        "        pWOWCmdLine++;",
+        "    }",
+        "",
+        "    if (iLogLevel > 0) {",
+        "        if (!(flOptions & OPT_DEBUG))",
+        "            if (!(OPENLOG()))",
+        "                iLogLevel = 0;",
+        "    }",
+        "    else",
+        "        iLogLevel = 0;",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 727,
+      "original_count": 17,
+      "current_start": 698,
+      "current_count": 1,
+      "original": [
+        "",
+        "#ifdef i386",
+        "    if (IsDebuggerAttached()) {",
+        "        if (GetProfileInt(\"WOWDebug\", \"debugbreaks\", 0))",
+        "            *pNtVDMState |= VDM_BREAK_DEBUGGER;",
+        "",
+        "        if (GetProfileInt(\"WOWDebug\", \"exceptions\", 0))",
+        "            *pNtVDMState |= VDM_BREAK_EXCEPTIONS;",
+        "    }",
+        "#endif",
+        "",
+        "",
+        "    if (IsDebuggerAttached() && (flOptions & OPT_BREAKONNEWTASK)) {",
+        "        OutputDebugString(\"\\nW32Init - Initialization Complete, Set any Breakpoints Now, type g to continue\\n\\n\");",
+        "        DbgBreakPoint();",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 774,
+      "original_count": 3,
+      "current_start": 732,
+      "current_count": 1,
+      "original": [
+        "PA32 awThunkTables[] = {",
+        "    {W32TAB(aw32WOW,     \"All     \", cAPIThunks)}",
+        "};"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 780,
+      "original_count": 3,
+      "current_start": 739,
+      "current_count": 1,
+      "original": [
+        "INT   iThunkTableMax = NUMEL(awThunkTables);",
+        "PPA32 pawThunkTables = awThunkTables;",
+        "INT   iFuncId = 0;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 801,
+      "original_count": 10,
+      "current_start": 761,
+      "current_count": 1,
+      "original": [
+        "    INT  iFun;",
+        "",
+        "    iFun = pFrame->wCallID;",
+        "",
+        "    WOW32ASSERTMSGF (FALSE, (\"WOW32 Error - %s: Function %i %s not implemented\\n\",",
+        "        GetModName(iFun),",
+        "        GetOrdinal(iFun),",
+        "        aw32WOW[iFun].lpszW32",
+        "        ));",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 819,
+      "original_count": 51,
+      "current_start": 774,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* WOW32NopAPI - Thunk to do nothing - checked build only.",
+        " *",
+        " * All Function tables point here for APIs which should do nothing.",
+        " *",
+        " * ENTRY",
+        " *",
+        " * EXIT",
+        " *",
+        " */",
+        "",
+        "ULONG FASTCALL WOW32NopAPI(PVDMFRAME pFrame)",
+        "{",
+        "    INT iFun;",
+        "",
+        "    iFun = pFrame->wCallID;",
+        "",
+        "    LOGDEBUG(4,(\"%s: Function %i %s is NOP'd\\n\", GetModName(iFun), GetOrdinal(iFun), aw32WOW[iFun].lpszW32));",
+        "",
+        "    return FALSE;",
+        "}",
+        "",
+        "",
+        "/* WOW32LocalAPI - ERROR Should Have Been Handled in 16 BIT",
+        " *                Checked build only",
+        " *",
+        " * All Function tables point here for Local API Error Messages",
+        " *",
+        " * ENTRY",
+        " *  Module startup registers:",
+        " *",
+        " * EXIT",
+        " *",
+        " *",
+        " */",
+        "",
+        "ULONG FASTCALL WOW32LocalAPI(PVDMFRAME pFrame)",
+        "{",
+        "    INT  iFun;",
+        "",
+        "    iFun = pFrame->wCallID;",
+        "",
+        "    WOW32ASSERTMSGF (FALSE, (\"Error - %s: Function %i %s should be handled by 16-bit code\\n\",",
+        "        GetModName(iFun),",
+        "        GetOrdinal(iFun),",
+        "        aw32WOW[iFun].lpszW32",
+        "        ));",
+        "",
+        "    return FALSE;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 880,
+      "original_count": 14,
+      "current_start": 788,
+      "current_count": 1,
+      "original": [
+        "    //",
+        "    // On checked builds do not patch calls to the three special",
+        "    // thunks above, since many entries will point to each one,",
+        "    // the routines could not easily distinguish which 16-bit",
+        "    // entrypoint was called.",
+        "    //",
+        "",
+        "    if (flOptions & OPT_DONTPATCHCODE ||",
+        "        aw32WOW[iFun].lpfnW32 == WOW32UnimplementedAPI ||",
+        "        aw32WOW[iFun].lpfnW32 == WOW32NopAPI ||",
+        "        aw32WOW[iFun].lpfnW32 == WOW32LocalAPI ) {",
+        "",
+        "        return aw32WOW[iFun].lpfnW32;",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 961,
+      "original_count": 1,
+      "current_start": 863,
+      "current_count": 1,
+      "original": [
+        "    INT iFunT;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 965,
+      "original_count": 1,
+      "current_start": 869,
+      "current_count": 1,
+      "original": [
+        " DWORD  dwTics;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 998,
+      "original_count": 2,
+      "current_start": 906,
+      "current_count": 1,
+      "original": [
+        "        iFuncId = 0; // initialize 'cause GetFuncId checks for this.",
+        "        iFunT = iFuncId = ISFUNCID(iFun) ?  iFun : GetFuncId(iFun) ;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 1005,
+      "original_count": 5,
+      "current_start": 915,
+      "current_count": 1,
+      "original": [
+        "            if (cAPIThunks && iFunT >= cAPIThunks) {",
+        "                LOGDEBUG(LOG_ALWAYS,(\"W32Dispatch: Task %04x thunked to function %d, cAPIThunks = %d.\\n\",",
+        "                         iWOWTaskCur, iFunT, cAPIThunks));",
+        "                WOW32ASSERT(FALSE);",
+        "            }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1018,
+      "original_count": 1,
+      "current_start": 927,
+      "current_count": 1,
+      "original": [
+        "        dwTics = GetWOWTicDiff(0L);"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 1029,
+      "original_count": 1,
+      "current_start": 940,
+      "current_count": 1,
+      "original": [
+        "        iFuncId = iFunT;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 1033,
+      "original_count": 5,
+      "current_start": 946,
+      "current_count": 1,
+      "original": [
+        "        dwTics = GetWOWTicDiff(dwTics);",
+        "        iFun = iFunT;",
+        "        // add time ellapsed for call to total",
+        "        aw32WOW[iFun].cTics += dwTics;",
+        "        aw32WOW[iFun].cCalls++; // inc # times this API called"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 1048,
+      "original_count": 12,
+      "current_start": 960,
+      "current_count": 1,
+      "original": [
+        "        // If OPT_DEBUGRETURN is set, diddle the RetID as approp.",
+        "",
+        "        if (flOptions & OPT_DEBUGRETURN) {",
+        "            if (pFrame->wRetID == RET_RETURN) {",
+        "                pFrame->wRetID =  RET_DEBUGRETURN;",
+        "                flOptions &= ~OPT_DEBUGRETURN;",
+        "            }",
+        "        }",
+        "        // Put the current logging level where 16-bit code can get it",
+        "        // Use ROMBIOS Hard DISK information as a safe address",
+        "        *(PBYTE)GetVDMAddr(0x0040,0x0042) = (BYTE)(iLogLevel/10+'0');",
+        "        *(PBYTE)GetVDMAddr(0x0040,0x0043) = (BYTE)(iLogLevel%10+'0');"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1078,
+      "original_count": 46,
+      "current_start": 988,
+      "current_count": 1,
+      "original": [
+        "",
+        "INT",
+        "W32FilterException(",
+        "    INT ExceptionCode,",
+        "    PEXCEPTION_POINTERS ExceptionInformation",
+        "    )",
+        "",
+        "/* W32FilterException - Filter WOW32 thread exceptions",
+        " *",
+        " * ENTRY",
+        " *",
+        " *    ExceptionCode - Indicate type of exception",
+        " *",
+        " *    ExceptionInformation - Supplies a pointer to ExceptionInformation",
+        " *                           structure.",
+        " *",
+        " * EXIT",
+        " *",
+        " *    return exception disposition value.",
+        " */",
+        "",
+        "{",
+        "    extern BOOLEAN IsW32WorkerException(VOID);",
+        "    extern VOID W32SetExceptionContext(PCONTEXT);",
+        "",
+        "    INT Disposition = EXCEPTION_CONTINUE_SEARCH;",
+        "",
+        "    if ((ExceptionCode != EXCEPTION_WOW32_ASSERTION) &&",
+        "        IsW32WorkerException()) {",
+        "",
+        "        Disposition = W32Exception(ExceptionCode, ExceptionInformation);",
+        "        if (Disposition == EXCEPTION_EXECUTE_HANDLER) {",
+        "",
+        "            //",
+        "            // if this is the exception we want to handle, change its",
+        "            // context to the point where we can safely fail the api and",
+        "            // return exception disposition as continue execution.",
+        "            //",
+        "",
+        "            W32SetExceptionContext(ExceptionInformation->ContextRecord);",
+        "            Disposition = EXCEPTION_CONTINUE_EXECUTION;",
+        "        }",
+        "    }",
+        "    return(Disposition);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported NO_W32TRYCALL WOW profile"
+      ]
+    },
+    {
+      "original_start": 1517,
+      "original_count": 122,
+      "current_start": 1387,
+      "current_count": 1,
+      "original": [
+        "VOID StartDebuggerForWow(VOID)",
+        "/*++",
+        "",
+        "Routine Description:",
+        "",
+        "    This routine checks to see if there's a debugger attached to WOW.  If not,",
+        "    it attempts to spawn one with a command to attach to WOW.  If the system",
+        "    was booted with /DEBUG in boot.ini (kernel debugger enabled), we'll run",
+        "    \"ntsd -d\" otherwise we'll run \"ntsd\".",
+        "",
+        "Arguments:",
+        "",
+        "    None.",
+        "",
+        "Return Value:",
+        "",
+        "    None.",
+        "",
+        "--*/",
+        "{",
+        "    BOOL fKernelDebuggerEnabled, b;",
+        "    NTSTATUS Status;",
+        "    SYSTEM_KERNEL_DEBUGGER_INFORMATION KernelDebuggerInformation;",
+        "    ULONG ulReturnLength;",
+        "    SECURITY_ATTRIBUTES sa;",
+        "    STARTUPINFO StartupInfo;",
+        "    PROCESS_INFORMATION ProcessInformation;",
+        "    CHAR szCmdLine[256];",
+        "    HANDLE hEvent;",
+        "",
+        "    //",
+        "    // Are we being run under a debugger ?",
+        "    //",
+        "",
+        "    if (IsDebuggerAttached()) {",
+        "",
+        "        //",
+        "        // No need to start one.",
+        "        //",
+        "",
+        "        return;",
+        "    }",
+        "",
+        "",
+        "    //",
+        "    // Is the kernel debugger enabled?",
+        "    //",
+        "",
+        "    Status = NtQuerySystemInformation(",
+        "                 SystemKernelDebuggerInformation,",
+        "                 &KernelDebuggerInformation,",
+        "                 sizeof(KernelDebuggerInformation),",
+        "                 &ulReturnLength",
+        "                 );",
+        "",
+        "    if (NT_SUCCESS(Status) &&",
+        "        (ulReturnLength >= sizeof(KernelDebuggerInformation))) {",
+        "",
+        "        fKernelDebuggerEnabled = KernelDebuggerInformation.KernelDebuggerEnabled;",
+        "",
+        "    } else {",
+        "",
+        "        fKernelDebuggerEnabled = FALSE;",
+        "        LOGDEBUG(0,(\"StartDebuggerForWow: NtQuerySystemInformation(kdinfo) returns 0x%8.8x, return length 0x%08x.\\n\",",
+        "                    Status, ulReturnLength));",
+        "",
+        "    }",
+        "",
+        "    //",
+        "    // Create an event for NTSD to signal once it has fully connected",
+        "    // and is ready for the exception.  We force the handle to be inherited.",
+        "    //",
+        "",
+        "    sa.nLength = sizeof(sa);",
+        "    sa.lpSecurityDescriptor = NULL;",
+        "    sa.bInheritHandle = TRUE;",
+        "    hEvent = CreateEvent(&sa, TRUE, FALSE, NULL);",
+        "",
+        "    //",
+        "    // Build debugger command line.",
+        "    //",
+        "",
+        "    wsprintf(szCmdLine, \"ntsd %s -p %lu -e %lu -g\",",
+        "            fKernelDebuggerEnabled ? \"-d\" : \"\",",
+        "            GetCurrentProcessId(),",
+        "            hEvent",
+        "            );",
+        "",
+        "    RtlZeroMemory(&StartupInfo,sizeof(StartupInfo));",
+        "    StartupInfo.cb = sizeof(StartupInfo);",
+        "",
+        "    b = CreateProcess(",
+        "            NULL,",
+        "            szCmdLine,",
+        "            NULL,",
+        "            NULL,",
+        "            TRUE,             // fInheritHandles",
+        "            CREATE_DEFAULT_ERROR_MODE,",
+        "            NULL,",
+        "            NULL,",
+        "            &StartupInfo,",
+        "            &ProcessInformation",
+        "            );",
+        "",
+        "    if (b) {",
+        "        CloseHandle(ProcessInformation.hProcess);",
+        "        CloseHandle(ProcessInformation.hThread);",
+        "",
+        "        if (hEvent) {",
+        "",
+        "            //",
+        "            // Wait for debugger to initialize.",
+        "            //",
+        "",
+        "            WaitForSingleObject(hEvent, INFINITE);",
+        "        }",
+        "    }",
+        "",
+        "    CloseHandle(hEvent);",
+        "",
+        "    return;",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1753,
+      "original_count": 1,
+      "current_start": 1505,
+      "current_count": 1,
+      "original": [
+        "    ,  DWORD Count"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1774,
+      "original_count": 1,
+      "current_start": 1528,
+      "current_count": 1,
+      "original": [
+        "    void *vp;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1822,
+      "original_count": 38,
+      "current_start": 1578,
+      "current_count": 1,
+      "original": [
+        "    if (vp = GetPModeVDMPointerMacro(Address, Count)) {",
+        "",
+        "#ifdef _X86_",
+        "        //",
+        "        // Check the selector limit on x86 only and return NULL if",
+        "        // the limit is too small.",
+        "        //",
+        "",
+        "        if (SelectorLimit &&",
+        "            (Address & 0xFFFF) + Count > SelectorLimit[Address >> 19] + 1)",
+        "        {",
+        "            WOW32ASSERTMSGF (FALSE, (\"WOW32 limit check assertion: %04x:%04x size %x is beyond limit %x.\\n\",",
+        "                Address >> 16,",
+        "                Address & 0xFFFF,",
+        "                Count,",
+        "                SelectorLimit[Address >> 19]",
+        "                ));",
+        "",
+        "            return vp;",
+        "        }",
+        "#endif",
+        "",
+        "#if 0 // this code is a paranoid check, only useful when debugging GetPModeVDMPointer.",
+        "        if (vp != Sim32GetVDMPointer(Address, Count, TRUE)) {",
+        "            LOGDEBUG(LOG_ALWAYS,",
+        "                (\"GetPModeVDMPointer: GetPModeVDMPointerMacro(%x) returns %x, Sim32 returns %x!\\n\",",
+        "                 Address, vp, Sim32GetVDMPointer(Address, Count, TRUE)));",
+        "            vp =  Sim32GetVDMPointer(Address, Count, TRUE);",
+        "        }",
+        "#endif",
+        "",
+        "        return vp;",
+        "",
+        "    } else {",
+        "",
+        "        return NULL;",
+        "",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1871,
+      "original_count": 1,
+      "current_start": 1594,
+      "current_count": 1,
+      "original": [
+        "    return (ULONG)WOWBopEntry;"
+      ],
+      "current": [
+        "#error Excluded unsupported FASTBOPPING host profile"
+      ]
+    },
+    {
+      "original_start": 1880,
+      "original_count": 1,
+      "current_start": 1616,
+      "current_count": 1,
+      "original": [
+        "    return (ULONG)FastWOWCallbackRet;"
+      ],
+      "current": [
+        "#error Excluded unsupported FASTBOPPING host profile"
+      ]
+    },
+    {
+      "original_start": 1902,
+      "original_count": 1,
+      "current_start": 1652,
+      "current_count": 1,
+      "original": [
+        "    fKernelCSIPFixed = TRUE;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1911,
+      "original_count": 1,
+      "current_start": 1663,
+      "current_count": 1,
+      "original": [
+        "    return (ULONG)FlatAddress;"
+      ],
+      "current": [
+        "#error Excluded unsupported FASTBOPPING host profile"
+      ]
+    },
+    {
+      "original_start": 1919,
+      "original_count": 331,
+      "current_start": 1686,
+      "current_count": 1,
+      "original": [
+        "",
+        "/*",
+        " * DoAssert - do an assertion.  called after the expression has been evaluted",
+        " *",
+        " * Input:",
+        " *",
+        " *",
+        " * Note if the requested log level is not what we want we don't output",
+        " *  but we always output to the circular buffer - just in case.",
+        " *",
+        " *",
+        " */",
+        "int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel)",
+        "{",
+        "    INT savefloptions;",
+        "",
+        "    //",
+        "    // Start a debugger for WOW if there isn't already one.",
+        "    //",
+        "    // Until now StartDebuggerForWow was started by",
+        "    // the exception filter, which meant asserts on a",
+        "    // checked build got the debugger but the user didn't see",
+        "    // the assertion text on the debugger screen because",
+        "    // logprintf was called before the debugger attached.",
+        "    // -- DaveHart 31-Jan-95",
+        "    //",
+        "",
+        "    StartDebuggerForWow();",
+        "",
+        "    savefloptions = flOptions;",
+        "    flOptions |= OPT_DEBUG;         // *always* print the message",
+        "",
+        "    //",
+        "    // szAssert is NULL for bare-bones WOW32ASSERT()",
+        "    //",
+        "",
+        "    if (szAssert == NULL) {",
+        "        LOGDEBUG(loglevel, (\"WOW32 assertion failure: %s line %d\\n\", szModule, line));",
+        "    } else {",
+        "        LOGDEBUG(loglevel, (\"%s\", szAssert));",
+        "    }",
+        "",
+        "    flOptions = savefloptions;",
+        "",
+        "    if (IsDebuggerAttached()) {",
+        "",
+        "        DbgBreakPoint();",
+        "",
+        "    } else {",
+        "",
+        "        DWORD dw = SetErrorMode(0);",
+        "",
+        "        RaiseException(EXCEPTION_WOW32_ASSERTION, 0, 0, NULL);",
+        "",
+        "        SetErrorMode(dw);",
+        "",
+        "    }",
+        "",
+        "    return 0;",
+        "}",
+        "",
+        "",
+        "",
+        "/*",
+        " * sprintf_gszAssert",
+        " *",
+        " * Used by WOW32ASSERTMSGF to format the assertion text into",
+        " * a global buffer, gszAssert.  There is probably a better way.",
+        " *",
+        " * DaveHart 15-Jun-95.",
+        " *",
+        " */",
+        "int _cdecl sprintf_gszAssert(PSZ pszFmt, ...)",
+        "{",
+        "    va_list VarArgs;",
+        "",
+        "    va_start(VarArgs, pszFmt);",
+        "",
+        "    return vsprintf(gszAssert, pszFmt, VarArgs);",
+        "}",
+        "",
+        "",
+        "",
+        "/*",
+        " * logprintf - format log print routine",
+        " *",
+        " * Input:",
+        " * iReqLogLevel - Requested Logging Level",
+        " *",
+        " * Note if the requested log level is not what we want we don't output",
+        " *  but we always output to the circular buffer - just in case.",
+        " *",
+        " *",
+        " */",
+        "VOID logprintf(PSZ pszFmt, ...)",
+        "{",
+        "    DWORD   lpBytesWritten;",
+        "    int     len;",
+        "    char    text[1024];",
+        "    va_list arglist;",
+        "",
+        "    va_start(arglist, pszFmt);",
+        "    len = vsprintf(text, pszFmt, arglist);",
+        "",
+        "    // fLog states (set by !wow32.logfile debugger extension):",
+        "    //    0 -> no logging;",
+        "    //    1 -> log to file",
+        "    //    2 -> create log file",
+        "    //    3 -> close log file",
+        "    if(fLog > 1) {",
+        "        if(fLog == 2) {",
+        "            if((hfLog = CreateFile(szLogFile,",
+        "                                   GENERIC_WRITE,",
+        "                                   FILE_SHARE_WRITE,",
+        "                                   NULL,",
+        "                                   CREATE_ALWAYS,",
+        "                                   FILE_ATTRIBUTE_NORMAL,",
+        "                                   NULL)) != INVALID_HANDLE_VALUE) {",
+        "                fLog = 1;",
+        "            }",
+        "            else {",
+        "                hfLog = NULL;",
+        "                fLog  = 0;",
+        "                OutputDebugString(\"Couldn't open log file!\\n\");",
+        "            }",
+        "        }",
+        "        else {",
+        "            FlushFileBuffers(hfLog);",
+        "            CloseHandle(hfLog);",
+        "            hfLog = NULL;",
+        "            fLog  = 0;",
+        "        }",
+        "    }",
+        "",
+        "    if ( len > TMP_LINE_LEN-1 ) {",
+        "        text[TMP_LINE_LEN-2] = '\\n';",
+        "        text[TMP_LINE_LEN-1] = '\\0';        /* Truncate to 128 */",
+        "    }",
+        "",
+        "    IFLOG(iReqLogLevel) {",
+        "        // write to file?",
+        "        if (fLog) {",
+        "            WriteFile(hfLog, text, len, &lpBytesWritten, NULL);",
+        "        }",
+        "        // write to terminal?",
+        "        else if (flOptions & OPT_DEBUG) {",
+        "            OutputDebugString(text);",
+        "        }",
+        "    }",
+        "",
+        "    strcpy(&achTmp[iCircBuffer][0], text);",
+        "    if (--iCircBuffer < 0 ) {",
+        "        iCircBuffer = CIRC_BUFFERS-1;",
+        "    }",
+        "}",
+        "",
+        "/*",
+        " *  checkloging - Some Functions we don't want to log",
+        " *",
+        " *  Entry",
+        " *   fLogFilter = Filter for Specific Modules - Kernel, User, GDI etc.",
+        " *   fLogTaskFilter = Filter for specific TaskID",
+        " *",
+        " *  Exit: TRUE - OK to LOG Event",
+        " *        FALSE - Don't Log Event",
+        " *",
+        " */",
+        "BOOL checkloging(register PVDMFRAME pFrame)",
+        "{",
+        "    INT i;",
+        "    BOOL bReturn;",
+        "    INT iFun = GetFuncId(pFrame->wCallID);",
+        "    PTABLEOFFSETS pto = &tableoffsets;",
+        "",
+        "",
+        "    // Filter on Specific Call IDs",
+        "",
+        "    if (awfLogFunctionFilter[0] != 0xffff) {",
+        "        INT nOrdinal;",
+        "",
+        "        nOrdinal = GetOrdinal(iFun);",
+        "",
+        "        bReturn = FALSE;",
+        "        for (i=0; i < FILTER_FUNCTION_MAX ; i++) {",
+        "            if (awfLogFunctionFilter[i] == nOrdinal) {",
+        "                bReturn = TRUE;",
+        "                break;",
+        "            }",
+        "        }",
+        "    } else {",
+        "        bReturn = TRUE;",
+        "    }",
+        "",
+        "    // Do not LOG Internal Kernel Calls below level 20",
+        "    if (iLogLevel < 20 ) {",
+        "        if((iFun == FUN_WOWOUTPUTDEBUGSTRING) ||",
+        "         ((iFun < pto->user) && (iFun >= FUN_WOWINITTASK)))",
+        "",
+        "            bReturn = FALSE;",
+        "    }",
+        "",
+        "    // LOG Only Specific TaskID",
+        "",
+        "    if (fLogTaskFilter != 0xffff) {",
+        "        if (fLogTaskFilter != pFrame->wTDB) {",
+        "            bReturn = FALSE;",
+        "        }",
+        "    }",
+        "",
+        "    // LOG Filter On Modules USER/GDI/Kernel etc.",
+        "",
+        "    switch (ModFromCallID(iFun)) {",
+        "",
+        "    case MOD_KERNEL:",
+        "        if ((fLogFilter & FILTER_KERNEL) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_USER:",
+        "        if ((fLogFilter & FILTER_USER) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_GDI:",
+        "        if ((fLogFilter & FILTER_GDI) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_KEYBOARD:",
+        "        if ((fLogFilter & FILTER_KEYBOARD) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_SOUND:",
+        "        if ((fLogFilter & FILTER_SOUND) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_MMEDIA:",
+        "        if ((fLogFilter & FILTER_MMEDIA) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_WINSOCK:",
+        "        if ((fLogFilter & FILTER_WINSOCK) == 0 )",
+        "            bReturn = FALSE;",
+        "        break;",
+        "    case MOD_COMMDLG:",
+        "        if ((fLogFilter & FILTER_COMMDLG) == 0 ) {",
+        "            bReturn = FALSE;",
+        "        }",
+        "        break;",
+        "    default:",
+        "        break;",
+        "    }",
+        "    return (bReturn);",
+        "}",
+        "",
+        "",
+        "/*",
+        " * Argument Logging For Tracing API Calls",
+        " *",
+        " *",
+        " */",
+        "VOID logargs(INT iLog, register PVDMFRAME pFrame)",
+        "{",
+        "    register PBYTE pbArgs;",
+        "    INT iFun;",
+        "    INT cbArgs;",
+        "",
+        "    if (checkloging(pFrame)) {",
+        "        iFun = GetFuncId(pFrame->wCallID);",
+        "        cbArgs = aw32WOW[iFun].cbArgs; // Get Number of Parameters",
+        "",
+        "        if ((fLogFilter & FILTER_VERBOSE) == 0 ) {",
+        "          LOGDEBUG(iLog,(\"%s(\", aw32WOW[iFun].lpszW32));",
+        "        } else {",
+        "          LOGDEBUG(iLog,(\"%04X %08X %04X %s:%s(\",pFrame->wTDB, pFrame->vpCSIP,pFrame->wAppDS, GetModName(iFun), aw32WOW[iFun].lpszW32));",
+        "        }",
+        "",
+        "        GETARGPTR(pFrame, cbArgs, pbArgs);",
+        "        pbArgs += cbArgs;",
+        "",
+        "        //",
+        "        // Log the function arguments a word at a time.",
+        "        // The first iteration of the while loop is unrolled so",
+        "        // that the main loop doesn't have to figure out whether",
+        "        // or not to print a comma.",
+        "        //",
+        "",
+        "        if (cbArgs > 0) {",
+        "",
+        "            pbArgs -= sizeof(WORD);",
+        "            cbArgs -= sizeof(WORD);",
+        "            LOGDEBUG(iLog,(\"%04x\", *(PWORD16)pbArgs));",
+        "",
+        "            while (cbArgs > 0) {",
+        "",
+        "                pbArgs -= sizeof(WORD);",
+        "                cbArgs -= sizeof(WORD);",
+        "                LOGDEBUG(iLog,(\",%04x\", *(PWORD16)pbArgs));",
+        "",
+        "            }",
+        "        }",
+        "",
+        "        FREEARGPTR(pbArgs);",
+        "        LOGDEBUG(iLog,(\")\\n\"));",
+        "",
+        "        if (fDebugWait != 0) {",
+        "            DbgPrint(\"WOWSingle Step\\n\");",
+        "            DbgBreakPoint();",
+        "        }",
+        "    }",
+        "}",
+        "",
+        "",
+        "/*",
+        " * logreturn - Log Return Values From Call",
+        " *",
+        " * Entry",
+        " *",
+        " * Exit - None",
+        " */",
+        "VOID logreturn(INT iLog, register PVDMFRAME pFrame, ULONG ulReturn)",
+        "{",
+        "    INT iFun;",
+        "",
+        "        if (checkloging(pFrame)) {",
+        "         iFun = GetFuncId(pFrame->wCallID);",
+        "         if ((fLogFilter & FILTER_VERBOSE) == 0 ) {",
+        "           LOGDEBUG(iLog,(\"%s: %lx\\n\", aw32WOW[iFun].lpszW32, ulReturn));",
+        "         } else {",
+        "           LOGDEBUG(iLog,(\"%04X %08X %04X %s:%s: %lx\\n\", pFrame->wTDB, pFrame->vpCSIP, pFrame->wAppDS, GetModName(iFun), aw32WOW[iFun].lpszW32, ulReturn));",
+        "         }",
+        "        }",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 2328,
+      "original_count": 48,
+      "current_start": 1775,
+      "current_count": 1,
+      "original": [
+        "DWORD GetWOWTicDiff(DWORD dwPrevCount) {",
+        "/*",
+        " * Returns difference between a previous Tick count & the current tick count",
+        " *",
+        " * NOTE: Tick counts are in unspecified units  (PerfFreq is in MHz)",
+        " */",
+        "    DWORD          dwDiff;",
+        "    LARGE_INTEGER  PerfCount, PerfFreq;",
+        "",
+        "    NtQueryPerformanceCounter(&PerfCount, &PerfFreq);",
+        "",
+        "    /* if ticks carried into high dword (assuming carry was only one) */",
+        "    if( dwPrevCount > PerfCount.LowPart ) {",
+        "        /* (0xFFFFFFFF - (dwPrevCount - LowPart)) + 1L caused compiler to",
+        "           optimize in an arithmetic overflow, so we do it in two steps",
+        "           to fool Mr. compiler",
+        "         */",
+        "        dwDiff = (dwPrevCount - PerfCount.LowPart) - 1L;",
+        "        dwDiff = ((DWORD)0xFFFFFFFF) - dwDiff;",
+        "    }",
+        "    else {",
+        "        dwDiff = PerfCount.LowPart - dwPrevCount;",
+        "    }",
+        "",
+        "    return(dwDiff);",
+        "",
+        "}",
+        "",
+        "INT GetFuncId(DWORD iFun)",
+        "{",
+        "    INT i;",
+        "",
+        "    if (iFuncId == 0) {",
+        "        if (!ISFUNCID(iFun)) {",
+        "            for (i = 0; i < cAPIThunks; i++) {",
+        "                 if (aw32WOW[i].lpfnW32 == (LPFNW32)iFun)  {",
+        "                     iFun = i;",
+        "                     break;",
+        "                 }",
+        "            }",
+        "        }",
+        "    }",
+        "    else {",
+        "        iFun = iFuncId;",
+        "    }",
+        "",
+        "    return iFun;",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 38,
+      "current": 54,
+      "logical": 48
+    }
+  ],
+  "limits": [
+    "No functional repair/build/runtime pass.",
+    "CPU40 and exception complete equivalence remain pending; ThunkNLS restoration is a concrete source-backed action."
+  ]
+}

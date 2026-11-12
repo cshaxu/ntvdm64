@@ -1,0 +1,291 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+  "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+  "before_sha256": "37bea65b2e6d5093aaea4545346178a507c28d7c9ec27d089fa36dcfba3abb4a",
+  "current_sha256": "241dc4b0b78500f5d33e4ad81768cfff37697096a2e27bdc169e850eea9e1994",
+  "review_complete": true,
+  "register_entries": 7,
+  "changes": [
+    {
+      "original_start": 51,
+      "original_count": 0,
+      "current_start": 53,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-356): authorization also covers direct host close. */",
+        "extern void ntvdm_worker_lifecycle_authorize_exit(void);",
+        "#include <intrin.h>"
+      ]
+    },
+    {
+      "original_start": 86,
+      "original_count": 0,
+      "current_start": 97,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-147): NT4 may reach host_terminate directly and",
+        " * then rely on ExitProcess to destroy outstanding SoftPC workers. The app",
+        " * terminates only the current session, so retain one source-owned close cohort",
+        " * for both the ordinary terminate() route and the direct-reset route. */",
+        "static BOOL HostApplicationClosed = FALSE;",
+        "static BOOL HostApplicationStarted = FALSE;",
+        ""
+      ]
+    },
+    {
+      "original_start": 141,
+      "original_count": 3,
+      "current_start": 159,
+      "current_count": 4,
+      "original": [
+        "    if (sc.ScreenState == FULLSCREEN)\t// initialised in ConsoleInit()",
+        "\tIDLE_ctl(FALSE);",
+        "    else"
+      ],
+      "current": [
+        "#ifdef X86GFX",
+        "#error X86GFX fullscreen idle path is not supported",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 175,
+      "original_count": 0,
+      "current_start": 196,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "    /* A fresh original host start owns a fresh close cohort. */",
+        "    HostApplicationClosed = FALSE;",
+        "    HostApplicationStarted = TRUE;"
+      ]
+    },
+    {
+      "original_start": 287,
+      "original_count": 0,
+      "current_start": 318,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "  /* DIVERGENCE(MVDM-HOST-DIV-356): before any original host resource release. */",
+        "  ntvdm_worker_lifecycle_authorize_exit();",
+        "  if (!HostApplicationStarted || HostApplicationClosed)",
+        "      return;",
+        "  HostApplicationClosed = TRUE;"
+      ]
+    },
+    {
+      "original_start": 323,
+      "original_count": 0,
+      "current_start": 361,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-356): direct entries precede ExitVDM retirement. */",
+        "    ntvdm_worker_lifecycle_authorize_exit();",
+        "",
+        "    mvdm_softpc_report_termination(\"host-terminate\", _ReturnAddress());"
+      ]
+    },
+    {
+      "original_start": 347,
+      "original_count": 0,
+      "current_start": 390,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_termination(\"terminate-vdm\", _ReturnAddress());",
+        ""
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 23,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "#include <ntddvdeo.h>"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 71,
+      "original_count": 1,
+      "current_start": 81,
+      "current_count": 1,
+      "original": [
+        "extern VOID AddTempIVTFixups(VOID);"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor IVT declarations"
+      ]
+    },
+    {
+      "original_start": 99,
+      "original_count": 1,
+      "current_start": 119,
+      "current_count": 1,
+      "original": [
+        "    InitDetect();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 114,
+      "original_count": 9,
+      "current_start": 136,
+      "current_count": 1,
+      "original": [
+        "    /* Borrow the end of this routine to add temp code that hooks certain",
+        "     * Ints back to the VDM and not into the native BIOS. These will only",
+        "     * be active for the DOSEM initialisation ie until keyboard.sys can",
+        "     * come along and do it properly. We must do this though as some real",
+        "     * BIOS' can hang on certain initialisation functions. eg Dec 486/50",
+        "     * will hang on printer init as it is waiting for a responce from a ",
+        "     * 'private' port.",
+        "     */",
+        "    AddTempIVTFixups();"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 133,
+      "original_count": 1,
+      "current_start": 149,
+      "current_count": 1,
+      "original": [
+        "    WaitIcaLockFullyInitialized();"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor ICA initialization wait"
+      ]
+    },
+    {
+      "original_start": 139,
+      "original_count": 1,
+      "current_start": 157,
+      "current_count": 1,
+      "original": [
+        "    IDLE_ctl(FALSE);\t/* makes Trapper too slow */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 2,
+      "current_start": 331,
+      "current_count": 1,
+      "original": [
+        "  if (sc.ScreenBufHandle)",
+        "      CloseHandle(sc.ScreenBufHandle);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 325,
+      "original_count": 2,
+      "current_start": 368,
+      "current_count": 1,
+      "original": [
+        "    if (TrapperDump != (HANDLE) -1)",
+        "\tCloseHandle(TrapperDump);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 360,
+      "original_count": 62,
+      "current_start": 408,
+      "current_count": 1,
+      "original": [
+        "void",
+        "manager_files_init()",
+        "{",
+        "",
+        "\tassert0(NO,\"manager_files_init stubbed\\n\");",
+        "}",
+        "",
+        "",
+        "#ifndef PROD",
+        "/*",
+        " * =========================================================================",
+        " *",
+        " * FUNCTION\t\t: host_symb_debug_init",
+        " *",
+        " * PURPOSE\t\t: Does nothing",
+        " *",
+        " * RETURNED STATUS\t: None.",
+        " *",
+        " * DESCRIPTION\t: Called from main.c.",
+        " *",
+        " *",
+        " * =======================================================================",
+        " */",
+        "",
+        "void",
+        "host_symb_debug_init IFN1(char *, name)",
+        "{",
+        "}",
+        "#endif\t\t\t\t/* nPROD */",
+        "",
+        "",
+        "void",
+        "host_supply_dfa_filename IFN1(char *, filename)",
+        "",
+        "{",
+        "}",
+        "",
+        "static BOOL bool_dummy_func() {}",
+        "static SHORT short_dummy_func() {}",
+        "static VOID void_dummy_func() {}",
+        "",
+        "",
+        "ERRORFUNCS dummy_error_funcs =",
+        "{",
+        "",
+        "        short_dummy_func,",
+        "        short_dummy_func,",
+        "        short_dummy_func",
+        "",
+        "};",
+        "",
+        "KEYBDFUNCS dummy_keybd_funcs =",
+        "{",
+        "",
+        "        void_dummy_func,",
+        "        void_dummy_func,",
+        "        void_dummy_func,",
+        "        void_dummy_func,",
+        "        void_dummy_func,",
+        "        void_dummy_func",
+        "",
+        "};"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Seven functional/declaration chunks classified; two original blank lines restored. Original resource-close sequence unchanged.",
+  "counter_review": "Read lifecycle authorization and direct session escape: direct close permission is necessary, not duplicate dead code. Same-thread authorization is supported; other thread waits for terminal owner. Close guard does not prove join success; prior nt_event finding remains. Diagnostics are append-only and error-preserving.",
+  "format_restored_sites": 2,
+  "limits": "Retain2 simplify2 delete1 pending2; source-only review."
+}

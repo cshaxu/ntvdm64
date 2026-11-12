@@ -1424,7 +1424,6 @@ ica_intack IFN1(IU32 *, hook_address)
 
 #if defined(NTVDM)
 
-
 #ifdef MONITOR
 #line 1767
 #error Excluded unsupported monitor PIC IRET hook

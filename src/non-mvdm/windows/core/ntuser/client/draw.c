@@ -1,9 +1,27 @@
-/* Copyright (c) 1985-91, Microsoft Corporation.
- * DIVERGENCE(OPENNT-HOST-114): original function subset; bodies unchanged.
- * See the T447 S3 source ledger for resource/call boundary ownership. */
+
+/****************************** Module Header ******************************\
+* Module Name: draw.c
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* This module contains the DrawFrameControl API
+*
+* History:
+* 12-12-93  FritzS  Ported from Chicago
+\***************************************************************************/
+
 #line 13
 #include "precomp.h"
-#line 24
+#line 15
+
+/***************************************************************************\
+* PaintRect
+*
+* History:
+* 11-15-90 DarrinM  Ported from Win 3.0 sources.
+* 01-21-91 IanJa    Prefix '_' denoting exported function (although not API)
+* 12-12-94 JerrySh  Copied from server - make sure to keep in sync
+\***************************************************************************/
 
 BOOL PaintRect(
     HWND hwndBrush,
@@ -56,4 +74,3 @@ BOOL PaintRect(
 
     return TRUE;
 }
-

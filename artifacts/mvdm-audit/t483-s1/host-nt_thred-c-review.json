@@ -1,0 +1,53 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+  "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+  "current_sha256": "4bc1a569804cff7202e33a699cca49b55dea43c46eb10477929c6056fc1cbf58",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 28,
+      "original_count": 0,
+      "current_start": 28,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-100): these selected CCPU provider declarations",
+        " * existed in the original package but were not inherited by this re-rooted",
+        " * host source.  ntthread.h also requires executor-private jmp_buf carriers;",
+        " * retain only the two original void contracts used here. */",
+        "void ccpu386newthread(void);",
+        "void ccpu386exitthread(void);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 99,
+      "original_count": 1,
+      "current_start": 107,
+      "current_count": 1,
+      "original": [
+        "        cpu_createthread(Thread);"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 159,
+      "original_count": 1,
+      "current_start": 169,
+      "current_count": 1,
+      "original": [
+        "    cpu_exitthread();"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    }
+  ],
+  "initial_review": "Retain explicit void/no-argument CCPU thread declarations. Original and selected ntthread.c implement both providers; original calls in host_CreateThread and host_ExitThread are unchanged and WOW wkman.c consumes these exported entrypoints.",
+  "counter_review": "Including ntthread.h requires jmp_buf declarations for unrelated simulation interfaces. Two exact provider prototypes are a smaller boundary than importing executor-private declarations. newthread merely flags later registration in child context; it must not be moved into a new thread wrapper. exitthread releases current TLS state. Neither operation was introduced by this diff. Original aggregate/transitive include history is not independently established here and is not used as necessity evidence.",
+  "limits": "Source-only diff audit; no new thread/runtime test or universal conditional/line-number certification. Existing original thread ABI and ordinary-return cleanup behavior are not new adaptations and are outside this diff review."
+}

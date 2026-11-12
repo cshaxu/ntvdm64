@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+  "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+  "current_sha256": "c82031be6b27b472780c58209a474e589387d52e243b78e62a8f14c0e2780232",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 31,
+      "original_count": 1
+    },
+    {
+      "original_start": 35,
+      "original_count": 6
+    },
+    {
+      "original_start": 77,
+      "original_count": 1
+    },
+    {
+      "original_start": 122,
+      "original_count": 4
+    },
+    {
+      "original_start": 146,
+      "original_count": 4
+    },
+    {
+      "original_start": 157,
+      "original_count": 9
+    },
+    {
+      "original_start": 189,
+      "original_count": 4
+    },
+    {
+      "original_start": 223,
+      "original_count": 4
+    },
+    {
+      "original_start": 236,
+      "original_count": 3
+    },
+    {
+      "original_start": 268,
+      "original_count": 3
+    },
+    {
+      "original_start": 283,
+      "original_count": 3
+    },
+    {
+      "original_start": 290,
+      "original_count": 3
+    },
+    {
+      "original_start": 300,
+      "original_count": 4
+    },
+    {
+      "original_start": 317,
+      "original_count": 4
+    },
+    {
+      "original_start": 340,
+      "original_count": 6
+    },
+    {
+      "original_start": 376,
+      "original_count": 6
+    },
+    {
+      "original_start": 390,
+      "original_count": 4
+    },
+    {
+      "original_start": 405,
+      "original_count": 4
+    },
+    {
+      "original_start": 412,
+      "original_count": 4
+    }
+  ],
+  "initial_review": "19 excluded SCCSID/SEGMENTATION/non-PROD/KIPPER bodies; all remaining nonblank source matches original.",
+  "counter_review": "Bus/Inport mouse port registration, status latch, signed delta clamp, hold-bit PIC clear, mode reset and initialization interrupt bursts are original. Windows-specific initialization comments and loadsainterrupts behavior are inherited, not local product workarounds. Do not confuse this device with INT33 cursor rendering in mouse_io.c.",
+  "limits": "No universal build-context or diagnostic-line certification and no runtime test executed."
+}

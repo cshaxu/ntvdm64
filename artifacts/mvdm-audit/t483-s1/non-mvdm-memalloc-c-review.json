@@ -1,0 +1,164 @@
+{
+  "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+  "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+  "current_sha256": "36a7fa520a0716564345cd4549ca74536a507052215dd5fd544a22e9c9dea1e2",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 3,
+      "original_count": 1,
+      "current_start": 4,
+      "current_count": 1,
+      "original": [
+        "    #define WIN32"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 72,
+      "original_count": 1,
+      "current_start": 76,
+      "current_count": 1,
+      "original": [
+        "#include <stdlib.h>     // free(), malloc(), realloc()."
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 118,
+      "original_count": 8,
+      "current_start": 124,
+      "current_count": 1,
+      "original": [
+        "#ifndef CDEBUG",
+        "    NewAddress = RtlAllocateHeap(",
+        "                RtlProcessHeap( ), 0,              // heap handle",
+        "                Size ));                        // bytes wanted",
+        "#else // def CDEBUG",
+        "    NetpAssert( Size == (DWORD) (size_t) Size );",
+        "    NewAddress = malloc( (size_t) Size ));",
+        "#endif // def CDEBUG"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 168,
+      "original_count": 10,
+      "current_start": 169,
+      "current_count": 1,
+      "original": [
+        "#ifndef CDEBUG",
+        "    if (Address == NULL) {",
+        "        return;",
+        "    }",
+        "    RtlFreeHeap(",
+        "                RtlProcessHeap( ), 0,              // heap handle",
+        "                Address);                       // addr of alloc'ed space.",
+        "#else // def CDEBUG",
+        "    free( Address );",
+        "#endif // def CDEBUG"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 239,
+      "original_count": 1,
+      "current_start": 233,
+      "current_count": 1,
+      "original": [
+        "        hOldMem = LocalHandle( (LPSTR) OldAddress);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-136: notdef branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 257,
+      "original_count": 25,
+      "current_start": 254,
+      "current_count": 1,
+      "original": [
+        "",
+        "        DWORD OldSize;",
+        "",
+        "        // Need size of old area to continue...",
+        "        OldSize = RtlSizeHeap(",
+        "                RtlProcessHeap( ), 0,              // heap handle",
+        "                OldAddress);                    // \"base\" address",
+        "        if (OldSize == NewSize) {",
+        "            NewAddress = OldAddress;            // Another special case.",
+        "        } else {",
+        "",
+        "            // Normal case (something into something else).  Alloc new area.",
+        "            NewAddress = NetpMemoryAllocate(NewSize);",
+        "            if (NewAddress != NULL) {",
+        "",
+        "                // Copy lesser of old and new sizes.",
+        "                NetpMoveMemory(",
+        "                        NewAddress,             // dest",
+        "                        OldAddress,             // src",
+        "                        (NewSize < OldSize) ? NewSize : OldSize);   // len",
+        "",
+        "                NetpMemoryFree(OldAddress);",
+        "            }",
+        "        }",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 283,
+      "original_count": 4,
+      "current_start": 257,
+      "current_count": 1,
+      "original": [
+        "",
+        "        NetpAssert(NewSize == (DWORD)(size_t)NewSize);",
+        "        NewAddress = realloc( OldAddress, NewSize );",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 126,
+      "current": 125,
+      "logical": 119
+    },
+    {
+      "original": 178,
+      "current": 170,
+      "logical": 169
+    },
+    {
+      "original": 282,
+      "current": 255,
+      "logical": 258
+    },
+    {
+      "original": 287,
+      "current": 258,
+      "logical": 284
+    }
+  ],
+  "evidence": [
+    "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+    "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "src/mvdm-host/vdmredir/vrnetapi.c"
+  ],
+  "limits": "Whole-file normalized comparison and source call review only; no new build/runtime or universal macro-hit proof."
+}

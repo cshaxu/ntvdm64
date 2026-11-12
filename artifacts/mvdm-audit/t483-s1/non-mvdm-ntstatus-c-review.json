@@ -1,0 +1,28 @@
+{
+  "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+  "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+  "current_sha256": "a07a7fd2127ca6068ccdc31c9c079e1a0208d703eee6d5524a9416923750ede9",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 197,
+      "original_count": 1,
+      "current_start": 199,
+      "current_count": 1,
+      "original": [
+        "            DbgPrint( \"   Unmapped NT status is \" FORMAT_NTSTATUS \"\\n\", NtStatus);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+    "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "src/mvdm-host/vdmredir/vrnetapi.c"
+  ],
+  "limits": "Whole-file normalized comparison and source call review only; no new build/runtime or universal macro-hit proof."
+}

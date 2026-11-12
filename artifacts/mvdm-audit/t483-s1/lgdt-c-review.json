@@ -1,0 +1,36 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+  "original_sha256": "9a5d97d05b20a1c3e6a7e065168c1965bdcdee061fd9ca683f55896d4edf1f2c",
+  "current_sha256": "ebd809c4e812b38567818e46087fa18597ef93b3a1af186d07654e8a5983f778",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 41,
+      "original_count": 2,
+      "current_start": 41,
+      "current_count": 2
+    },
+    {
+      "original_start": 48,
+      "original_count": 1,
+      "current_start": 49,
+      "current_count": 2
+    },
+    {
+      "original_start": 59,
+      "original_count": 2,
+      "current_start": 62,
+      "current_count": 2
+    },
+    {
+      "original_start": 66,
+      "original_count": 1,
+      "current_start": 70,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete original/current textual difference inventory; all selected differences classified, exclusions separately recorded.",
+  "limits": "No functional remediation or fresh test; source necessity audit not all-context reachability certification."
+}

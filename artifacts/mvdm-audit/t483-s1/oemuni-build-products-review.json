@@ -1,0 +1,50 @@
+[
+  {
+    "sequence": 189,
+    "path": "src/mvdm-host/oemuni/sources",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\sources",
+    "original_sha256": "d13b166c78ee7dc593d46b20b0cfcccfb862f28135d253a5327aaf55ef2a26ed",
+    "current_sha256": "492cfebdc4cd0b6a5b26f4993f75019a0d71f7ad23776f9bb39f102aaa30a522",
+    "decision": "Historical UMTYPE/UMTEST/UMAPPL/UMLIBS deletion is unnecessary for selected Ninja source parsing; recommend original restoration, not applied."
+  },
+  {
+    "sequence": 190,
+    "path": "src/mvdm-host/oemuni/obj/_objects.mac",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\oemuni\\obj\\_objects.mac",
+    "original_sha256": "c5e265b9b66971949e40567d55727eb923a2c53de9aacb529df24c03d563f79f",
+    "current_sha256": "c5e265b9b66971949e40567d55727eb923a2c53de9aacb529df24c03d563f79f",
+    "decision": "Original bytes retained/restored; historical object is evidence, not product link input."
+  },
+  {
+    "sequence": 191,
+    "path": "src/mvdm-host/oemuni/obj/i386/file.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\oemuni\\obj\\i386\\file.obj",
+    "original_sha256": "cb04f400411340cd0ff44719d4eedab4e550522d8412a89fa92a79f0f61dc3f2",
+    "current_sha256": "cb04f400411340cd0ff44719d4eedab4e550522d8412a89fa92a79f0f61dc3f2",
+    "decision": "Original bytes retained/restored; historical object is evidence, not product link input."
+  },
+  {
+    "sequence": 192,
+    "path": "src/mvdm-host/oemuni/obj/i386/process.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\oemuni\\obj\\i386\\process.obj",
+    "original_sha256": "b2704b0af5387f717011e90e592957ff6061219c392260957ebc842bbd5b870e",
+    "current_sha256": "b2704b0af5387f717011e90e592957ff6061219c392260957ebc842bbd5b870e",
+    "decision": "Original bytes retained/restored; historical object is evidence, not product link input."
+  },
+  {
+    "sequence": 193,
+    "path": "src/mvdm-host/softpc.new/dirs",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\dirs",
+    "original_sha256": "4e2fd6c6df6f60da146ea3e9c71a4984e345911bbf0813e6cfec54b2306c0e4a",
+    "current_sha256": "4e2fd6c6df6f60da146ea3e9c71a4984e345911bbf0813e6cfec54b2306c0e4a",
+    "decision": "Original bytes retained/restored; historical object is evidence, not product link input."
+  },
+  {
+    "sequence": 194,
+    "path": "src/mvdm-host/softpc.new/base/dirs",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dirs",
+    "original_sha256": "4324bd4e10b617faf08b6f9da81f754daf16c3875db6f2c45246c66ac841d1d1",
+    "current_sha256": "4324bd4e10b617faf08b6f9da81f754daf16c3875db6f2c45246c66ac841d1d1",
+    "decision": "Original bytes retained/restored; historical object is evidence, not product link input."
+  }
+]

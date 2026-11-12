@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+  "original_sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87",
+  "current_sha256": "fe830c74945f250bc59bca2804fa094a74121ce544edd3bd523041bef5ac2d10",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 6,
+      "original_count": 1,
+      "current_start": 7,
+      "current_count": 0,
+      "original": [
+        "extern WORD *pFDAccess;"
+      ],
+      "current": []
+    }
+  ],
+  "excluded_ranges": [],
+  "initial_review": "Only local delta deletes raw guest FDAccess pointer declaration.",
+  "counter_review": "Original disk/floppy providers dereferenced shared raw pointer. Current nt_fdisk/nt_rflop use guest-state read/add accessors, so restoring extern would resurrect an interface without a current provider. Retain deletion, but do not treat this as proving accessor concurrency or mapping correctness. Historical test/integration fixture still references pFDAccess and requires runner applicability reconciliation.",
+  "evidence": "nt_fdisk.c:514/:568 modular decrement/increment accessors; nt_rflop.c:421/:767/:829 read/add; mvdm_command_guest_state.c:296-337 guest-memory-lease copies. test/integration/fixtures/t231_s3_command_misc_registration_fixture.c:73 still asserts old pointer.",
+  "limits": "No production edits; historical fixture applicability unresolved, not passed."
+}

@@ -1,0 +1,161 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+  "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+  "current_sha256": "2da1daa4fa1cc16433a74d8edfa678f89acc7fdaacffc534e453dcc9cab1163c",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 78,
+      "original_count": 19,
+      "current_start": 79,
+      "current_count": 1,
+      "original": [
+        "/* Debug stuff. */",
+        "#define FullScreenTrace0(s) \\",
+        "\tif (FullScreenDebug) always_trace0(s)",
+        "#define FullScreenTrace1(s ,p0) \\",
+        "\tif (FullScreenDebug) always_trace1(s, p0)",
+        "#define FullScreenTrace2(s, p0, p1) \\",
+        "\tif (FullScreenDebug) always_trace2(s, p0, p1)",
+        "#define FullScreenTrace3(s, p0, p1, p2) \\",
+        "\tif (FullScreenDebug) always_trace3(s, p0, p1, p2)",
+        "#define FullScreenTrace4(s, p0, p1, p2, p3) \\",
+        "\tif (FullScreenDebug) always_trace4(s, p0, p1, p2, p3)",
+        "#define FullScreenTrace5(s, p0, p1, p2, p3, p4) \\",
+        "\tif (FullScreenDebug) always_trace5(s, p0, p1, p2, p3, p4)",
+        "#define FullScreenTrace6(s, p0, p1, p2, p3, p4, p5) \\",
+        "\tif (FullScreenDebug) always_trace6(s, p0, p1, p2, p3, p4, p5)",
+        "#define FullScreenTrace7(s, p0, p1, p2, p3, p4, p5, p6) \\",
+        "\tif (FullScreenDebug) always_trace7(s, p0, p1, p2, p3, p4, p5, p6)",
+        "#define FullScreenTrace8(s, p0, p1, p2, p3, p4, p5, p6, p7) \\",
+        "\tif (FullScreenDebug) always_trace7(s, p0, p1, p2, p3, p4, p5, p6, p7)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifndef PROD"
+    },
+    {
+      "original_start": 138,
+      "original_count": 3,
+      "current_start": 125,
+      "current_count": 1,
+      "original": [
+        "IMPORT HANDLE hStartHardwareEvent;",
+        "IMPORT HANDLE hEndHardwareEvent;",
+        "IMPORT PVIDEO_HARDWARE_STATE_HEADER videoState;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef X86GFX"
+    },
+    {
+      "original_start": 150,
+      "original_count": 1,
+      "current_start": 138,
+      "current_count": 1,
+      "original": [
+        "IMPORT UTINY FullScreenDebug;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register."
+      ],
+      "original_guard": "#ifndef PROD"
+    },
+    {
+      "original_start": 157,
+      "original_count": 2,
+      "current_start": 148,
+      "current_count": 1,
+      "original": [
+        "extern DWORD mouse_buffer_width;",
+        "extern DWORD mouse_buffer_height;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef X86GFX"
+    },
+    {
+      "original_start": 198,
+      "original_count": 47,
+      "current_start": 191,
+      "current_count": 1,
+      "original": [
+        "#define CPI_FILENAME_LENGTH\t9",
+        "#define CPI_FILENAME\t\t\"\\\\ega.cpi\"",
+        "#define CPI_SIGNATURE_LENGTH\t8",
+        "#define CPI_SIGNATURE_NT\t\"\\xFF\"\"FONT.NT\"",
+        "#define CPI_SIGNATURE_DOS\t\"\\xFF\"\"FONT   \"",
+        "",
+        "#pragma pack(1)",
+        "typedef struct _CPIFILEHEADER {",
+        "",
+        "    CHAR    Signature[8];\t\t// \"\\xFF\"\"FONT.NT\" for nt ega.cpi",
+        "\t\t\t\t\t// \"\\xFF\"\"FONT   \" for dos ega.cpi",
+        "    BYTE    Reserved[8];",
+        "    WORD    NumberOfPointers;",
+        "    BYTE    TypeOfPointer;",
+        "    DWORD   OffsetToCodePageHeader;",
+        "} CPIFILEHEADER, * PCPIFILEHEADER;",
+        "",
+        "typedef struct _CPICODEPAGEHEADER{",
+        "    WORD    NumberOfCodePages;",
+        "} CPICODEPAGEHEADER, *PCPICODEPAGEHEADER;",
+        "",
+        "typedef struct _CPICODEPAGEENTRY {",
+        "    WORD    HeaderSize;",
+        "    DWORD   OffsetToNextCodePageEntry;",
+        "    WORD    DeviceType;",
+        "    CHAR    DevieSubTypeID[8];",
+        "    WORD    CodePageID;",
+        "    BYTE    Reserved[6];",
+        "    DWORD   OffsetToFontHeader; \t// absolute for DOS CPI",
+        "\t\t\t\t\t// relative for NT CPI",
+        "}  CPICODEPAGEENTRY, *PCPICODEPAGEENTRY;",
+        "",
+        "typedef struct _CPIFONTHEADER {",
+        "    WORD    Reserved;",
+        "    WORD    NumberOfFonts;",
+        "    WORD    LengthOfFontData;",
+        "} CPIFONTHEADER, *PCPIFONTHEADER;",
+        "",
+        "typedef struct _CPIFONTDATA{",
+        "    BYTE    FontHeight;",
+        "    BYTE    FontWidth;",
+        "    WORD    AspectRatio;",
+        "    WORD    NumberOfCharacters;",
+        "} CPIFONTDATA, *PCPIFONTDATA;",
+        "#pragma pack()",
+        "",
+        "IMPORT BOOL LoadCPIFont(UINT, WORD, WORD);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef X86GFX"
+    },
+    {
+      "original_start": 249,
+      "original_count": 4,
+      "current_start": 199,
+      "current_count": 1,
+      "original": [
+        "VOID locateNativeBIOSfonts(VOID);",
+        "VOID GetROMsMapped(VOID);",
+        "VOID LoseRegenMemory(VOID);",
+        "VOID RegainRegenMemory(VOID);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-584: hardware X86GFX declarations are not selected"
+      ],
+      "original_guard": "#ifdef X86GFX"
+    }
+  ],
+  "initial_review": "Six full conditional exclusions: debug trace macros/debug variable; X86GFX hardware events/video state, mouse buffers, CPI font declarations and native BIOS/regen mapping interfaces.",
+  "counter_review": "All retained definitions/declarations match fixed original after #line removal. CPI packed structures are removed together with their enclosing X86GFX body, not replaced with a new font format. No changes to retained screen-state constants or function contracts; exclusions alone do not establish runtime full-screen behavior.",
+  "limits": "Content classification only; no new universal-context or runtime certification."
+}

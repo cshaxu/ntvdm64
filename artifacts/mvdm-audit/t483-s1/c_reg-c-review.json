@@ -1,0 +1,54 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+  "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
+  "current_sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "269",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "current_start": "39",
+      "current_count": "4",
+      "original_start": "39",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-082",
+      "classification": "provider-declaration",
+      "initial_review": "Declare existing variadic printf through its standard owner header; original call and argument order unchanged.",
+      "counter_review": "No new formatter or diagnostics introduced; C variadic ABI must use correct declaration.",
+      "disposition": "retain",
+      "evidence": "c_reg.c:1748 original printf diagnostic; standard stdio.h variadic prototype",
+      "limits": "Source comparison only; no fresh preprocessing/build/runtime or full line certification.",
+      "decision": "retain",
+      "change_plan": "Retain stdio.h; do not change original diagnostic merely to remove the include.",
+      "related_callers": "c_reg.c:1748 original printf diagnostic; standard stdio.h variadic prototype",
+      "verification_required": "Selected compile with prototype checks; original register API behavior preserved.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_groups": [
+    {
+      "original_start": 40,
+      "original_end": 50,
+      "current_error_line": 45
+    },
+    {
+      "original_start": 1210,
+      "original_end": 1250,
+      "current_error_line": 1209
+    },
+    {
+      "original_start": 1418,
+      "original_end": 1428,
+      "current_error_line": 1380
+    },
+    {
+      "original_start": 1556,
+      "original_end": 1614,
+      "current_error_line": 1511
+    }
+  ],
+  "limits": "Outer boundaries and all remaining nonblank/non-line text compared with original, except explicitly registered include. No universal reachability or full line proof."
+}

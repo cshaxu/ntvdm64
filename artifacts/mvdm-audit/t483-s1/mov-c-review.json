@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+  "original_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
+  "current_sha256": "58fe3be87395df048bd97772a752acf75352c026278ad827aaca990888583f9b",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 94,
+      "original_count": 2,
+      "current_start": 95,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete original/current textual difference inventory; all selected differences classified, exclusions separately recorded.",
+  "limits": "No functional remediation or fresh test; source necessity audit not all-context reachability certification."
+}

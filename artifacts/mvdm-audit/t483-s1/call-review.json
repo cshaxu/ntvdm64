@@ -1,0 +1,502 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+  "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+  "current_sha256": "4200e6d474e51b9e4c37234c4b6605d6c8118ba234f06199b73ef1997e7343f9",
+  "review_complete": true,
+  "register_entries": 7,
+  "changes": [
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "29",
+      "current_count": "4",
+      "original_start": "29",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-310",
+      "classification": "fast-bop-boundary",
+      "initial_review": "Fast BOP provider headers are coupled to pending redirect design; do not decide their necessity independently.",
+      "counter_review": "CCPU cannot execute native host CS:IP. Adapter reserves present LDT identity and matches selector/offset; lookup precedes PE/VM guard, inline read uses usr_chk_byte plus direct SAS pointer, and in_C is restored only on normal bop return. These require bounded proof, not an assertion of wrong behavior.",
+      "disposition": "pending-evidence",
+      "evidence": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve pending path until original endpoint protocol, selector reservation/retirement, instruction-limit/paging access and abnormal return state are proven. Then retain only minimal CALLF-to-original-BOP seam; remove duplicate diagnostics, avoid guest rewrite or second dispatcher.",
+      "related_callers": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "verification_required": "Actual inline/WOW/FE endpoints, wrong selector/offset fallback, PE/VM modes, page/segment-boundary inline byte, descriptor reuse, normal and abnormal BOP return with in_C and parent simulation frame checks.",
+      "missing_evidence": "Complete current endpoint lifetime and fetch/fault/reentry equivalence; historical ledger contains experimental failures and superseded proposals, not blanket acceptance.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "33",
+      "current_count": "1",
+      "original_start": "29",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-305",
+      "classification": "diagnostic-only",
+      "initial_review": "Termination header is used for default-off far-call attempt diagnostic.",
+      "counter_review": "Observer follows decoded target but precedes validation; removing observation must not alter actual far-call validation.",
+      "disposition": "delete",
+      "evidence": "call.c mvdm_softpc_report_wow_far_call_attempt; test/mvdm-host/ccpu_bounded_execution_fixture.c:875-908",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "delete",
+      "change_plan": "Delete attempt report and sole-use termination header; reconcile observer provider/test separately and preserve original CALLF control flow.",
+      "related_callers": "call.c mvdm_softpc_report_wow_far_call_attempt; test/mvdm-host/ccpu_bounded_execution_fixture.c:875-908",
+      "verification_required": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "34",
+      "current_count": "3",
+      "original_start": "29",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-310",
+      "classification": "fast-bop-boundary",
+      "initial_review": "Fast BOP adapter and in_C declaration support same pending dispatch path.",
+      "counter_review": "CCPU cannot execute native host CS:IP. Adapter reserves present LDT identity and matches selector/offset; lookup precedes PE/VM guard, inline read uses usr_chk_byte plus direct SAS pointer, and in_C is restored only on normal bop return. These require bounded proof, not an assertion of wrong behavior.",
+      "disposition": "pending-evidence",
+      "evidence": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve pending path until original endpoint protocol, selector reservation/retirement, instruction-limit/paging access and abnormal return state are proven. Then retain only minimal CALLF-to-original-BOP seam; remove duplicate diagnostics, avoid guest rewrite or second dispatcher.",
+      "related_callers": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "verification_required": "Actual inline/WOW/FE endpoints, wrong selector/offset fallback, PE/VM modes, page/segment-boundary inline byte, descriptor reuse, normal and abnormal BOP return with in_C and parent simulation frame checks.",
+      "missing_evidence": "Complete current endpoint lifetime and fetch/fault/reentry equivalence; historical ledger contains experimental failures and superseded proposals, not blanket acceptance.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "86",
+      "current_count": "1",
+      "original_start": "76",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-310",
+      "classification": "fast-bop-boundary",
+      "initial_review": "Dispatch-kind local belongs to pending Fast BOP path.",
+      "counter_review": "CCPU cannot execute native host CS:IP. Adapter reserves present LDT identity and matches selector/offset; lookup precedes PE/VM guard, inline read uses usr_chk_byte plus direct SAS pointer, and in_C is restored only on normal bop return. These require bounded proof, not an assertion of wrong behavior.",
+      "disposition": "pending-evidence",
+      "evidence": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve pending path until original endpoint protocol, selector reservation/retirement, instruction-limit/paging access and abnormal return state are proven. Then retain only minimal CALLF-to-original-BOP seam; remove duplicate diagnostics, avoid guest rewrite or second dispatcher.",
+      "related_callers": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "verification_required": "Actual inline/WOW/FE endpoints, wrong selector/offset fallback, PE/VM modes, page/segment-boundary inline byte, descriptor reuse, normal and abnormal BOP return with in_C and parent simulation frame checks.",
+      "missing_evidence": "Complete current endpoint lifetime and fetch/fault/reentry equivalence; historical ledger contains experimental failures and superseded proposals, not blanket acceptance.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "93",
+      "current_count": "31",
+      "original_start": "81",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-310",
+      "classification": "fast-bop-boundary",
+      "initial_review": "Fast BOP recognizes registered host endpoint identity before guest descriptor validation; inline/WOW/return endpoints have distinct protocols.",
+      "counter_review": "CCPU cannot execute native host CS:IP. Adapter reserves present LDT identity and matches selector/offset; lookup precedes PE/VM guard, inline read uses usr_chk_byte plus direct SAS pointer, and in_C is restored only on normal bop return. These require bounded proof, not an assertion of wrong behavior.",
+      "disposition": "pending-evidence",
+      "evidence": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve pending path until original endpoint protocol, selector reservation/retirement, instruction-limit/paging access and abnormal return state are proven. Then retain only minimal CALLF-to-original-BOP seam; remove duplicate diagnostics, avoid guest rewrite or second dispatcher.",
+      "related_callers": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c; docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md E37/E38; original FBOP and WOW16FastVector/FastWOWCbRet protocol",
+      "verification_required": "Actual inline/WOW/FE endpoints, wrong selector/offset fallback, PE/VM modes, page/segment-boundary inline byte, descriptor reuse, normal and abnormal BOP return with in_C and parent simulation frame checks.",
+      "missing_evidence": "Complete current endpoint lifetime and fetch/fault/reentry equivalence; historical ledger contains experimental failures and superseded proposals, not blanket acceptance.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "124",
+      "current_count": "12",
+      "original_start": "81",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-305",
+      "classification": "diagnostic-only",
+      "initial_review": "Default-off far-call attempt observation does not validate or execute the call.",
+      "counter_review": "Observer follows decoded target but precedes validation; removing observation must not alter actual far-call validation.",
+      "disposition": "delete",
+      "evidence": "call.c mvdm_softpc_report_wow_far_call_attempt; test/mvdm-host/ccpu_bounded_execution_fixture.c:875-908",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "delete",
+      "change_plan": "Delete attempt report and sole-use termination header; reconcile observer provider/test separately and preserve original CALLF control flow.",
+      "related_callers": "call.c mvdm_softpc_report_wow_far_call_attempt; test/mvdm-host/ccpu_bounded_execution_fixture.c:875-908",
+      "verification_required": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "285",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_start": "255",
+      "current_count": "1",
+      "original_start": "201",
+      "original_count": "4",
+      "old_ids": "MVDM-HOST-DIV-327",
+      "classification": "stack-address-width",
+      "initial_review": "Use newly loaded SS stack-address width for SP/ESP, rather than CALL operand width.",
+      "counter_review": "Original set_current_SP reads GET_SS_AR_X. This is existing original helper reuse, not a new stack implementation; operand size still governs frame data.",
+      "disposition": "retain",
+      "evidence": "c_stack.c:140-155; docs/etc/evidence/m0-t430-s2-softpc-repair-gate.md; original call.c load_SS_cache -> SP update",
+      "limits": "Source/historical evidence only; no fresh runtime or full line/reachability certification.",
+      "decision": "retain",
+      "change_plan": "Retain set_current_SP(new_sp) after load_SS_cache and apply same contract consistently with ret.c/iret.c in their own reviews.",
+      "related_callers": "c_stack.c:140-155; docs/etc/evidence/m0-t430-s2-softpc-repair-gate.md; original call.c load_SS_cache -> SP update",
+      "verification_required": "CALL/RETF/IRET operand16/32 x SS16/32, fault before stack commit, return control; historical matching SoftPC patch is provenance not fresh pass.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "textual_inventory": [
+    {
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 29,
+      "current_count": 8,
+      "original_text": [],
+      "current_text": [
+        "#include <bios.h>",
+        "#include <c_page.h>",
+        "#include <ccpusas4.h>",
+        "#include <sas.h>",
+        "#include \"mvdm_softpc_termination.h\"",
+        "#include \"mvdm_softpc_fast_bop.h\"",
+        "",
+        "IMPORT ISM32 in_C;"
+      ]
+    },
+    {
+      "original_start": 40,
+      "original_count": 0,
+      "current_start": 48,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 40"
+      ]
+    },
+    {
+      "original_start": 47,
+      "original_count": 2,
+      "current_start": 56,
+      "current_count": 2,
+      "original_text": [
+        "   (op1)",
+        "   IU32 op1[2];"
+      ],
+      "current_text": [
+        "#line 47",
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 50,
+      "original_count": 0,
+      "current_start": 59,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 50"
+      ]
+    },
+    {
+      "original_start": 76,
+      "original_count": 0,
+      "current_start": 86,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "   ISM32 fast_bop_kind;"
+      ]
+    },
+    {
+      "original_start": 78,
+      "original_count": 0,
+      "current_start": 89,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 78"
+      ]
+    },
+    {
+      "original_start": 81,
+      "original_count": 0,
+      "current_start": 93,
+      "current_count": 44,
+      "original_text": [],
+      "current_text": [
+        "   /* DIVERGENCE(MVDM-HOST-DIV-310): the native x86 monitor's FastLeavePm is",
+        "    * a host CS:IP, not a guest descriptor.  Its CALLF return address names",
+        "    * the following BOP-number byte; FastLeavePm consumes that return frame",
+        "    * and raises the corresponding BOP event.  CCPU has no monitor context or",
+        "    * frame to exchange, so consume the same byte through its normal paged",
+        "    * instruction-read path, advance past it, and use the original dispatcher.",
+        "    * In particular, this is not a synthetic C4 C4 guest instruction. */",
+        "   fast_bop_kind = mvdm_softpc_fast_bop_redirect((unsigned short)new_cs,",
+        "                                               (unsigned long)new_ip);",
+        "   if (GET_PE() && !GET_VM() && fast_bop_kind)",
+        "      {",
+        "      IU8 fast_bop_number;",
+        "",
+        "      /* WOWBopEntry and FastWOWCallbackRet have no inline BOP byte.",
+        "       * Their saved return IP already points at the original continuation. */",
+        "      if (fast_bop_kind == MVDM_FAST_BOP_INLINE)",
+        "         {",
+        "         fast_bop_number = *Sas.SasPtrToPhysAddrByte(",
+        "             usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) & SasWrapMask);",
+        "         SET_EIP((GET_EIP() + 1u) &",
+        "             (GET_CS_AR_X() ? 0xffffffffu : 0xffffu));",
+        "         }",
+        "      else",
+        "         fast_bop_number = fast_bop_kind == MVDM_FAST_BOP_WOW ? 0x51 : 0xfe;",
+        "      if (fast_bop_number == 0xfe)",
+        "         c_cpu_unsimulate();",
+        "      in_C = 1;",
+        "      bop(fast_bop_number);",
+        "      in_C = 0;",
+        "      return;",
+        "      }",
+        "",
+        "   /* DIVERGENCE(MVDM-HOST-DIV-305): default-off frontier witness for the",
+        "    * original indirect WndProc call.  The adapter sees only the decoded",
+        "    * target and cannot affect validation, stack handling or execution. */",
+        "   mvdm_softpc_report_wow_far_call_attempt((unsigned short)new_cs,",
+        "                                           (unsigned long)new_ip,",
+        "                                           (unsigned short)GET_CS_SELECTOR(),",
+        "                                           (unsigned long)GET_EIP(),",
+        "                                           (unsigned short)GET_LDT_SELECTOR(),",
+        "                                           (unsigned long)GET_LDT_BASE(),",
+        "                                           (unsigned long)GET_LDT_LIMIT());",
+        "",
+        "#line 81"
+      ]
+    },
+    {
+      "original_start": 89,
+      "original_count": 5,
+      "current_start": 145,
+      "current_count": 2,
+      "original_text": [
+        "",
+        "      /* do ip limit checking */",
+        "      if ( new_ip > GET_CS_LIMIT() )",
+        "\t GP((IU16)0, FAULT_CALLF_RM_CS_LIMIT);",
+        ""
+      ],
+      "current_text": [
+        "#line 89",
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 95,
+      "original_count": 0,
+      "current_start": 148,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 95"
+      ]
+    },
+    {
+      "original_start": 103,
+      "original_count": 0,
+      "current_start": 157,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 103"
+      ]
+    },
+    {
+      "original_start": 200,
+      "original_count": 4,
+      "current_start": 255,
+      "current_count": 1,
+      "original_text": [
+        "\t if ( GET_OPERAND_SIZE() == USE16 )",
+        "\t    SET_SP(new_sp);",
+        "\t else",
+        "\t    SET_ESP(new_sp);"
+      ],
+      "current_text": [
+        "\t set_current_SP(new_sp);"
+      ]
+    },
+    {
+      "original_start": 220,
+      "original_count": 0,
+      "current_start": 272,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 220"
+      ]
+    },
+    {
+      "original_start": 258,
+      "original_count": 4,
+      "current_start": 311,
+      "current_count": 2,
+      "original_text": [
+        "",
+        "   if ( offset > GET_CS_LIMIT() )",
+        "      GP((IU16)0, FAULT_CALLN_RM_CS_LIMIT);",
+        ""
+      ],
+      "current_text": [
+        "#line 258",
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 263,
+      "original_count": 0,
+      "current_start": 314,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 263"
+      ]
+    },
+    {
+      "original_start": 270,
+      "original_count": 0,
+      "current_start": 322,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 270"
+      ]
+    },
+    {
+      "original_start": 271,
+      "original_count": 7,
+      "current_start": 324,
+      "current_count": 2,
+      "original_text": [
+        "",
+        "   if ( GET_PE() == 1 && GET_VM() == 0 )",
+        "      {",
+        "      if ( offset > GET_CS_LIMIT() )",
+        "\t GP((IU16)0, FAULT_CALLN_PM_CS_LIMIT);",
+        "      }",
+        ""
+      ],
+      "current_text": [
+        "#line 271",
+        "#error Optional CCPU protected-mode limit profile is not supported"
+      ]
+    },
+    {
+      "original_start": 279,
+      "original_count": 0,
+      "current_start": 327,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 279"
+      ]
+    },
+    {
+      "original_start": 290,
+      "original_count": 0,
+      "current_start": 339,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 290"
+      ]
+    },
+    {
+      "original_start": 321,
+      "original_count": 4,
+      "current_start": 371,
+      "current_count": 2,
+      "original_text": [
+        "",
+        "   if ( new_dest > GET_CS_LIMIT() )",
+        "      GP((IU16)0, FAULT_CALLR_RM_CS_LIMIT);",
+        ""
+      ],
+      "current_text": [
+        "#line 321",
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 326,
+      "original_count": 0,
+      "current_start": 374,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 326"
+      ]
+    },
+    {
+      "original_start": 333,
+      "original_count": 0,
+      "current_start": 382,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 333"
+      ]
+    },
+    {
+      "original_start": 334,
+      "original_count": 7,
+      "current_start": 384,
+      "current_count": 2,
+      "original_text": [
+        "",
+        "   if ( GET_PE() == 1 && GET_VM() == 0 )",
+        "      {",
+        "      if ( new_dest > GET_CS_LIMIT() )",
+        "\t GP((IU16)0, FAULT_CALLR_PM_CS_LIMIT);",
+        "      }",
+        ""
+      ],
+      "current_text": [
+        "#line 334",
+        "#error Optional CCPU protected-mode limit profile is not supported"
+      ]
+    },
+    {
+      "original_start": 342,
+      "original_count": 0,
+      "current_start": 387,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 342"
+      ]
+    },
+    {
+      "original_start": 353,
+      "original_count": 0,
+      "current_start": 399,
+      "current_count": 1,
+      "original_text": [],
+      "current_text": [
+        "#line 353"
+      ]
+    }
+  ],
+  "limits": "Classified all functional deltas; excluded K&R and optional limit-check bodies retained under existing policy. No full logical-line or all-context certification."
+}

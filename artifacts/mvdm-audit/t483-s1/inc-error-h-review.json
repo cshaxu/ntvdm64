@@ -1,0 +1,19 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+  "original_sha256": "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+  "current_sha256": "29a32c1af04baf69723844b01fdbbdb8902db3837fdb701a4f641685fd779d05",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    "retained relocated copyright notice"
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 5,
+      "original_count": 415
+    }
+  ],
+  "initial_review": "Original NTVDM host error header include remains exact; alternate non-NTVDM error framework is excluded. Original copyright notice from removed body is preserved at file head.",
+  "counter_review": "Notice text matches original line154; retain attribution rather than remove it as cosmetic noise. No additional error provider, enum or runtime routing. This is not strictly exclusion-only because the notice was relocated.",
+  "limits": "Source comparison only; no new build-context or runtime certification. No source changes."
+}

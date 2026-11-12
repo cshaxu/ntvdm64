@@ -1,0 +1,37 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+  "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+  "current_sha256": "148d566184091358be4b40f6438dcc1f80965f2e571a8c86fabd02c1fc40d16e",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 75,
+      "original_count": 1
+    },
+    {
+      "original_start": 139,
+      "original_count": 1
+    },
+    {
+      "original_start": 182,
+      "original_count": 1
+    },
+    {
+      "original_start": 198,
+      "original_count": 2
+    },
+    {
+      "original_start": 207,
+      "original_count": 1
+    },
+    {
+      "original_start": 240,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Six excluded alternate video-profile definitions; all remaining source exact after omitting line directives.",
+  "counter_review": "Original EGG BIOS row address, VGG function-table size, V7VGA mode bounds and mode predicates retained. Original chain2 BIOS write callback declarations unchanged. Exclusions remove non-EGG/non-VGG/non-V7 alternatives; they do not alter current mode geometry, pixel interpretation or text cursor behavior.",
+  "limits": "Source comparison only; no universal compiler-context or runtime/diagnostic-line certification."
+}

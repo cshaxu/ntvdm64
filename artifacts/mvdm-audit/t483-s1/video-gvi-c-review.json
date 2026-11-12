@@ -1,0 +1,274 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+  "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+  "current_sha256": "fde48eaad3255332867c1560cf5a38e8f7f23df3e009691d93b93f870c893d68",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 42,
+      "original_count": 6,
+      "current_start": 43,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_BIOS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 70,
+      "original_count": 1,
+      "current_start": 68,
+      "current_count": 1,
+      "original": [
+        "#include \"herc.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 158,
+      "original_count": 6,
+      "current_start": 158,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 178,
+      "original_count": 3,
+      "current_start": 175,
+      "current_count": 1,
+      "original": [
+        "        case MDA:",
+        "            mda_term();",
+        "            break;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 184,
+      "original_count": 1,
+      "current_start": 181,
+      "current_count": 1,
+      "original": [
+        "\tcase CGA_MONO: "
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 199,
+      "original_count": 3,
+      "current_start": 198,
+      "current_count": 1,
+      "original": [
+        "\tcase HERCULES:",
+        "\t    herc_term();",
+        "\t    break;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 205,
+      "original_count": 2,
+      "current_start": 204,
+      "current_count": 1,
+      "original": [
+        "            fprintf(trace_file, \"gvi_term: invalid video adaptor: %d\\n\",",
+        "                    video_adapter);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 219,
+      "original_count": 1,
+      "current_start": 219,
+      "current_count": 1,
+      "original": [
+        "    case CGA_MONO:  "
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 225,
+      "original_count": 4,
+      "current_start": 227,
+      "current_count": 1,
+      "original": [
+        "    case HERCULES:",
+        "\tscreen_height = HERC_HEIGHT;",
+        "\tvideo_adapter = v_adapter;",
+        "\tbreak;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 248,
+      "original_count": 6,
+      "current_start": 249,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t *\tGORE variables must be set up before doing any other",
+        "\t *\tgraphics.",
+        "\t */",
+        "",
+        "    init_gore_update();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 259,
+      "original_count": 3,
+      "current_start": 257,
+      "current_count": 1,
+      "original": [
+        "    case MDA:",
+        "        mda_init();",
+        "        break;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 265,
+      "original_count": 1,
+      "current_start": 263,
+      "current_count": 1,
+      "original": [
+        "    case CGA_MONO:  "
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 270,
+      "original_count": 3,
+      "current_start": 270,
+      "current_count": 1,
+      "original": [
+        "    case HERCULES:",
+        "\therc_init();",
+        "\tbreak;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 294,
+      "original_count": 1,
+      "current_start": 295,
+      "current_count": 1,
+      "original": [
+        "\tdump_init(host_getenv( \"EGA_DUMP_FILE\" ), video_adapter);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 303,
+      "original_count": 3,
+      "current_start": 306,
+      "current_count": 1,
+      "original": [
+        "    case MDA:",
+        "        mda_term();",
+        "        break;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 309,
+      "original_count": 1,
+      "current_start": 312,
+      "current_count": 1,
+      "original": [
+        "    case CGA_MONO:  "
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 314,
+      "original_count": 3,
+      "current_start": 319,
+      "current_count": 1,
+      "original": [
+        "    case HERCULES:",
+        "\therc_term();",
+        "\tbreak;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 332,
+      "original_count": 2,
+      "current_start": 337,
+      "current_count": 1,
+      "original": [
+        "        fprintf(trace_file, \"gvi_term: invalid video adaptor: %d\\n\",",
+        "                video_adapter);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 339,
+      "original_count": 1,
+      "current_start": 345,
+      "current_count": 1,
+      "original": [
+        "    term_gore_update();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "19 excluded bodies only; all remaining source exact.",
+  "counter_review": "No local runtime implementation delta outside conditional exclusion; original display-state carrier retained. No new current-context or diagnostic-line proof claimed.",
+  "limits": "Classification complete; functional remediation not performed; pending evidence remains explicit."
+}

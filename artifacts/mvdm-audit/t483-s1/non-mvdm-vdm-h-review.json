@@ -1,0 +1,119 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+  "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+  "current_sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 94,
+      "original_count": 3,
+      "current_start": 95,
+      "current_count": 1,
+      "original": [
+        "#define VDM_PM_IRETBOPSEG  0x147",
+        "#define VDM_PM_IRETBOPOFF  0x6",
+        "#define VDM_PM_IRETBOPSIZE 8"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 110,
+      "original_count": 4,
+      "current_start": 112,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define  FIXED_NTVDMSTATE_LINEAR    VdmFixedStateLinear",
+        "#define  FIXED_NTVDMSTATE_SIZE      4",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 118,
+      "original_count": 1,
+      "current_start": 118,
+      "current_count": 1,
+      "original": [
+        "#define  FIXED_NTVDMSTATE_SEGMENT   0x60"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 170,
+      "original_count": 1,
+      "current_start": 174,
+      "current_count": 1,
+      "original": [
+        "#define INITIAL_VDM_TIB_FLAGS (VDM_USE_DBG_VDMEVENT | VDM_BREAK_DEBUGGER | VDM_TRACE_HISTORY)"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 211,
+      "original_count": 12,
+      "current_start": 219,
+      "current_count": 1,
+      "original": [
+        "typedef struct _VdmPmStackInfo {        /* VDMTIB */",
+        "    USHORT LockCount;",
+        "    USHORT Flags;",
+        "    USHORT SsSelector;",
+        "    USHORT SaveSsSelector;",
+        "    ULONG  SaveEsp;",
+        "    ULONG  SaveEip;",
+        "    ULONG  DosxIntIret;",
+        "    ULONG  DosxIntIretD;",
+        "    ULONG  DosxFaultIret;",
+        "    ULONG  DosxFaultIretD;",
+        "} VDM_PMSTACKINFO, *PVDM_PMSTACKINFO;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 97,
+      "current": 96,
+      "logical": 95
+    },
+    {
+      "original": 114,
+      "current": 113,
+      "logical": 111
+    },
+    {
+      "original": 116,
+      "current": 115,
+      "logical": 113
+    },
+    {
+      "original": 117,
+      "current": 116,
+      "logical": 114
+    },
+    {
+      "original": 223,
+      "current": 220,
+      "logical": 212
+    }
+  ],
+  "evidence": [
+    "src/compat/include/vdmapi.h",
+    "src/ntsrv-exe/main.c",
+    "src/common/base_srv/base_client.h",
+    "src/common/base_srv/base_command.c",
+    "src/mvdm-host/dos/command/cmd.h"
+  ],
+  "limits": "Whole retained-source comparison; no new build/runtime or universal context proof. Exclusion-only classification does not admit retired monitor profiles."
+}

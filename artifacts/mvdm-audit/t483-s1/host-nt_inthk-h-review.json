@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+  "original_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+  "before_sha256": "e276fa74fa087403cce2a77553414531ffa95d0ad30afb81111e83ac73655ef1",
+  "current_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+  "review_complete": true,
+  "register_entries": 0,
+  "decision": "restored-format",
+  "proof": "Exact original bytes restored after ordered nonblank/non-#line comparison. Declaration at original31 and all conditional guards identical.",
+  "callers": "dpmiint.c:1350/:1389; provider nt_inthk.c:208",
+  "limits": "No functional change; original compiler diagnostic line positions restored. No new build/runtime claim."
+}

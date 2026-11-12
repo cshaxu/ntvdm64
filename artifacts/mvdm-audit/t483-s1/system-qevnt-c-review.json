@@ -1,0 +1,64 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+  "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+  "current_sha256": "452d8e54e122c04f5ce1b574453b20ee8c8d3cebdb31469e5f1a475a0a45dfeb",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 112,
+      "original_count": 4,
+      "current_start": 115,
+      "current_count": 1,
+      "original": [
+        "     if (sizeof(QEVHANDLE) > sizeof(ULONGLONG)) {",
+        "         DbgPrint(\"sizeof(QEVHANDLE) > sizeof(ULONGLONG)\\n\");",
+        "         DbgBreakPoint();",
+        "         }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 207,
+      "original_count": 10,
+      "current_start": 212,
+      "current_count": 1,
+      "original": [
+        "        /*",
+        "         *  On X86 dispatch immediately, as x86 has no efficient way",
+        "         *  to acheive usec granularity.",
+        "         */",
+        "",
+        "        (*func)(param);",
+        "",
+        "        return (q_ev_handle)1;",
+        "",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported quick-event hardware monitor path"
+      ]
+    },
+    {
+      "original_start": 534,
+      "original_count": 4,
+      "current_start": 538,
+      "current_count": 1,
+      "original": [
+        "     if (DisableQuickTickRecal) {",
+        "         qevUsecPerIJC = DEFAULT_IJCTIME * qevJumpRestart;",
+        "         return;",
+        "         }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete comparison after formatting restoration: only excluded branches remain.",
+  "counter_review": "Non-MONITOR timed queue allocation, sorted insertion, callbacks, deletion and instruction-count calibration remain original. Immediate MONITOR dispatch excluded; original caller-lock comment preserved once. Original allocation-failure handle value is inherited, not a local successful stub.",
+  "limits": "Source comparison only; not fresh runtime evidence or universal configuration/line certification."
+}

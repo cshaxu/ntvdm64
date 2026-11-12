@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+  "original_sha256": "b14316fbd29fee3d582cd88c0b869e46ea01c41964fc1a4bfca87742db2a09cb",
+  "current_sha256": "6c87e963d683f71bcdd8869a2324a158a94c3c05992d14b726af019ce6559ded",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 27,
+      "original_count": 1
+    },
+    {
+      "original_start": 61,
+      "original_count": 1
+    },
+    {
+      "original_start": 73,
+      "original_count": 6
+    }
+  ],
+  "initial_review": "Three excluded bodies: missing SUCCESS fallback, missing NULL fallback and serial-terminal UI declarations. Remaining error codes, generic host code, control_bop_array and public declarations are exact original.",
+  "counter_review": "Whole-file diff checked independently: no new error values, dispatch slots, function pointer signature or control-BOP policy. Missing-provider contexts fail compilation rather than gaining new numeric definitions. Serial UI compound condition is preserved; no selected dispatch implementation removed by this header diff.",
+  "limits": "Source classification only; not fresh supported-includer or runtime verification. No further exclusions or product changes."
+}

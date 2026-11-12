@@ -1,0 +1,73 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+  "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+  "current_sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 1,
+      "current_start": 25
+    },
+    {
+      "original_start": 28,
+      "original_count": 6,
+      "current_start": 31
+    },
+    {
+      "original_start": 153,
+      "original_count": 2,
+      "current_start": 153
+    },
+    {
+      "original_start": 160,
+      "original_count": 2,
+      "current_start": 161
+    },
+    {
+      "original_start": 167,
+      "original_count": 2,
+      "current_start": 169
+    },
+    {
+      "original_start": 174,
+      "original_count": 2,
+      "current_start": 177
+    },
+    {
+      "original_start": 181,
+      "original_count": 2,
+      "current_start": 186
+    },
+    {
+      "original_start": 188,
+      "original_count": 2,
+      "current_start": 194
+    },
+    {
+      "original_start": 203,
+      "original_count": 2,
+      "current_start": 210
+    },
+    {
+      "original_start": 210,
+      "original_count": 2,
+      "current_start": 218
+    },
+    {
+      "original_start": 217,
+      "original_count": 2,
+      "current_start": 226
+    },
+    {
+      "original_start": 223,
+      "original_count": 4,
+      "current_start": 233
+    }
+  ],
+  "initial_review": "Twelve excluded bodies: SCCSID, SEGMENTATION and ten non-PROD diagnostic branches. All retained functions, vector assignments and status writes match the original.",
+  "counter_review": "Checked complete source independently of diff grouping. gfi_empty_active installs the original empty-drive vector; general commands fail while recalibrate returns completed equipment-error status. Motor on/off and reset success are original absent-drive interface semantics, not project-added success stubs. Density fails, drive type is NULL and change is TRUE as in original. Removed default only printed a diagnostic, not an error policy.",
+  "limits": "Source necessity review, not new FDC acceptance or universal compile-context certification. Existing error/line directives retained; no functional changes."
+}

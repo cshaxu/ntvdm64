@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/dfa.gi",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\dfa.gi",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_bop.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_bop.h",
+      "sha256": "3ab20d68c49dca4e7d8190c3fdc687b85012fe8c97678bed026a2fa21a07b0aa",
+      "bytes": 1037
+    }
+  ],
+  "limits": "dfa.gi outside C/H census; host_bop.h already counted among471 identical files."
+}

@@ -1,0 +1,55 @@
+{
+  "sequence": 858,
+  "path": "src/mvdm-host/suballoc/suballcp.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\suballcp.h",
+  "original_sha256": "25451aa0c293f3950107e81d81507e692e3db7b089655ceac320e4f3779fadb2",
+  "before_sha256": "a03be40c18d75f3b361b428da8ddbae452898eddd11859154b327e7e238439e2",
+  "current_sha256": "a03be40c18d75f3b361b428da8ddbae452898eddd11859154b327e7e238439e2",
+  "review_complete": true,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 49,
+      "original_count": 1,
+      "current_start": 50,
+      "current_count": 1,
+      "original": [
+        "#define ASSERT_STEPTHROUGH DbgBreakPoint()"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 58,
+      "original_count": 5,
+      "current_start": 62,
+      "current_count": 1,
+      "original": [
+        "//",
+        "// signature is \"SubA\"",
+        "//",
+        "#define INIT_SUBALLOC_SIGNATURE(p) p->Signature = (ULONG)0x41627553",
+        "#define ASSERT_SUBALLOC(p) ASSERT((p->Signature == (ULONG)0x41627553))"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 131,
+      "original_count": 1,
+      "current_start": 135,
+      "current_count": 1,
+      "original": [
+        "    ULONG Signature;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Three complete excluded bodies only: literal #if0 assertion trap, DBG signature macros, DBG signature field; remaining source exact.",
+  "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+  "limits": "No new build/runtime result."
+}

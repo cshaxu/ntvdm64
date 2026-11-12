@@ -180,5 +180,3 @@ Return Value:
     return descCopy;
 
 } // RapParmNumDescriptor
-
-

@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+  "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+  "current_sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 1
+    },
+    {
+      "original_start": 47,
+      "original_count": 1
+    },
+    {
+      "original_start": 51,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Three excluded definitions only: lint UNUSED expression at24, fallback TRUE at47 and FALSE at51. Entire remaining source matches original after removing line directives.",
+  "counter_review": "Checked complete original/current macro definitions, including both ANSI and non-ANSI IPT/IFN families and storage/type aliases. These are unchanged; original empty non-lint UNUSED was not introduced locally. TRUE/FALSE guards now reject missing-provider contexts rather than redefine values; no new value or ABI substitution. This is exclusion classification, not certification of every includer.",
+  "limits": "No fresh build/include-context or universal line-number certification. Supported-context exclusion evidence remains governed by existing branch audit; no further branch deletion authorized."
+}

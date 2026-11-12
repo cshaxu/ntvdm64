@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+  "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
+  "current_sha256": "e6a3ef4be58abf41e5c3ad4fb37b5368ff3c5a555257d45b37a89f650316c2c6",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 34,
+      "original_count": 3,
+      "current_normalized_start": 34,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Non-ANSI PPI declarations excluded; retained source exact.",
+  "counter_review": "Original ANSI ppi_init, ppi_inb and ppi_outb declarations unchanged; no port behavior or provider change.",
+  "limits": "Source-backed review only; no new compiler/runtime or complete VM transition proof."
+}

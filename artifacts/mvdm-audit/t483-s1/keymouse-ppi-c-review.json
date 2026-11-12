@@ -1,0 +1,37 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+  "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+  "current_sha256": "1abc1fbba8149dc19343b5971f6b3db5cbab1c9c12eb32cdaabe210a2dc1c359",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 18,
+      "original_count": 1
+    },
+    {
+      "original_start": 22,
+      "original_count": 6
+    },
+    {
+      "original_start": 44,
+      "original_count": 1
+    },
+    {
+      "original_start": 70,
+      "original_count": 1
+    },
+    {
+      "original_start": 137,
+      "original_count": 11
+    },
+    {
+      "original_start": 182,
+      "original_count": 6
+    }
+  ],
+  "initial_review": "Six excluded SCCSID/SEGMENTATION/non-PROD/non-NTVDM bodies; all other lines identical after removing #line.",
+  "counter_review": "PPI port masking, refresh/output toggle, gate edge transitions and NTVDM HostPpiState after timer_gate are original. Excluded alternate speaker callbacks do not remove the selected NT sound notification. No local device algorithm adaptation.",
+  "limits": "Source comparison only; not complete build-context, line-number or runtime certification."
+}

@@ -404,5 +404,3 @@ Return Value:
     return;
 
 } // RapExamineDescriptor
-
-

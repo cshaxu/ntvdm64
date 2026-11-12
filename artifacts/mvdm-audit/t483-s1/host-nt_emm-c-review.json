@@ -1,0 +1,265 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+  "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+  "before_sha256": "74d0431fc3675fe70968cc076253865717b6d2e4c2b9b7a1e86eab926ce2a1fd",
+  "current_sha256": "035b3ce8157587e58c1dc64b01e60da69e2c5b6a6f0a864fd80bfd1ea3fda351",
+  "review_complete": true,
+  "register_entries": 7,
+  "changes": [
+    {
+      "original_start": 60,
+      "original_count": 0,
+      "current_start": 60,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-096): the original calls NT4 kernel-VDM page",
+        " * alias services.  Keep those exact public calls and page-number ABI, but",
+        " * bind their user-mode replacement through the selected SoftPC adapter. */",
+        "#include \"mvdm_softpc_physical_mapping.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-267): kernel VDM supplied contiguous host aliases",
+        " * for EMS windows. CCPU40 resolves every guest byte but intentionally does",
+        " * not publish a span pointer. Keep the original fast macros for ordinary RAM;",
+        " * the smallest bounded lease binding covers only an alias-backed span. */",
+        "#include \"mvdm_softpc_guest_memory.h\""
+      ]
+    },
+    {
+      "original_start": 128,
+      "original_count": 0,
+      "current_start": 131,
+      "current_count": 74,
+      "original": [],
+      "current": [
+        "",
+        "static int em_loads(sys_addr from, unsigned char *to, int length)",
+        "{",
+        "    uint32_t count;",
+        "    sys_addr guest_from;",
+        "    int result;",
+        "",
+        "    if (length < 0) return FAILURE;",
+        "    count = (uint32_t)length;",
+        "    guest_from = from;",
+        "#ifdef BACK_M",
+        "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.",
+        "#endif",
+        "    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {",
+        "        EM_loads(from, to, length);",
+        "        return SUCCESS;",
+        "    }",
+        "    ",
+        "    result = mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ?",
+        "        SUCCESS : FAILURE;",
+        "    ",
+        "    return result;",
+        "}",
+        "",
+        "static int em_stores(sys_addr to, unsigned char *from, int length)",
+        "{",
+        "    uint32_t count;",
+        "    sys_addr guest_to;",
+        "    int result;",
+        "",
+        "    if (length < 0) return FAILURE;",
+        "    count = (uint32_t)length;",
+        "    guest_to = to;",
+        "#ifdef BACK_M",
+        "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.",
+        "#endif",
+        "    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {",
+        "        EM_stores(to, from, length);",
+        "        return SUCCESS;",
+        "    }",
+        "    sas_overwrite_memory(guest_to, count);",
+        "    ",
+        "    result = mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ?",
+        "        SUCCESS : FAILURE;",
+        "    ",
+        "    return result;",
+        "}",
+        "",
+        "static int em_moves(sys_addr from, sys_addr to, int length)",
+        "{",
+        "    uint32_t count;",
+        "    sys_addr guest_from;",
+        "    sys_addr guest_to;",
+        "    int result;",
+        "",
+        "    if (length < 0) return FAILURE;",
+        "    count = (uint32_t)length;",
+        "    guest_from = from;",
+        "    guest_to = to;",
+        "#ifdef BACK_M",
+        "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.",
+        "#endif",
+        "    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&",
+        "        !mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {",
+        "        EM_moves(from, to, length);",
+        "        return SUCCESS;",
+        "    }",
+        "    sas_overwrite_memory(guest_to, count);",
+        "    ",
+        "    result = mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ?",
+        "        SUCCESS : FAILURE;",
+        "    ",
+        "    return result;",
+        "}"
+      ]
+    },
+    {
+      "original_start": 588,
+      "original_count": 1,
+      "current_start": 674,
+      "current_count": 2,
+      "original": [
+        "\tEM_moves(from, to, length);"
+      ],
+      "current": [
+        "\tif (em_moves(from, to, length) != SUCCESS)",
+        "\t\treturn(FAILURE);"
+      ]
+    },
+    {
+      "original_start": 612,
+      "original_count": 1,
+      "current_start": 700,
+      "current_count": 2,
+      "original": [
+        "\tEM_loads(from, to, length);"
+      ],
+      "current": [
+        "\tif (em_loads(from, to, length) != SUCCESS)",
+        "\t\treturn(FAILURE);"
+      ]
+    },
+    {
+      "original_start": 636,
+      "original_count": 1,
+      "current_start": 726,
+      "current_count": 2,
+      "original": [
+        "\tEM_stores(to, from, length);"
+      ],
+      "current": [
+        "\tif (em_stores(to, from, length) != SUCCESS)",
+        "\t\treturn(FAILURE);"
+      ]
+    },
+    {
+      "original_start": 708,
+      "original_count": 3,
+      "current_start": 800,
+      "current_count": 6,
+      "original": [
+        "\tEM_loads(from, pointer, length);    /* source -> temp */",
+        "\tEM_moves(to, from, length);\t    /* dst -> source */",
+        "\tEM_stores(to, pointer, length);     /* temp -> dst */"
+      ],
+      "current": [
+        "\tif (em_loads(from, pointer, length) != SUCCESS ||    /* source -> temp */",
+        "\t\tem_moves(to, from, length) != SUCCESS ||\t    /* dst -> source */",
+        "\t\tem_stores(to, pointer, length) != SUCCESS) {     /* temp -> dst */",
+        "\t\tfree(temp);",
+        "\t\treturn(FAILURE);",
+        "\t}"
+      ]
+    },
+    {
+      "original_start": 741,
+      "original_count": 2,
+      "current_start": 837,
+      "current_count": 5,
+      "original": [
+        "\tEM_loads(from, pointer, length);",
+        "\tEM_stores(from, to, length);"
+      ],
+      "current": [
+        "\tif (em_loads(from, pointer, length) != SUCCESS ||",
+        "\t\tem_stores(from, to, length) != SUCCESS) {",
+        "\t\tfree(temp);",
+        "\t\treturn(FAILURE);",
+        "\t}"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 102,
+      "original_count": 11,
+      "current_start": 113,
+      "current_count": 1,
+      "original": [
+        "#define\tEM_host_address(offset) (EM_host_base_address + EM_size - offset)",
+        "#define\tEM_loads(from, to, length) memcpy(to - (length) + 1, get_byte_addr(from) - (length) + 1, length)",
+        "#define\tEM_stores(to, from, length) \\",
+        "\tsas_overwrite_memory(to, length); \\",
+        "\tCopyMemory(get_byte_addr(to) - (length) + 1, from - (length) + 1, length)",
+        "#define\tEM_moves(from,to,length) \\",
+        "\tsas_overwrite_memory(to, length); \\",
+        "\tMoveMemory(get_byte_addr(to) - (length) + 1, get_byte_addr(from) - (length) + 1, length)",
+        "#define\tEM_memcpy(to, from, length) \\",
+        "\tMoveMemory((to) - (length) + 1, (from) - (length) + 1, length)",
+        "#define\tEM_pointer(ptr, length) (ptr + length - 1)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 161,
+      "original_count": 2,
+      "current_start": 243,
+      "current_count": 1,
+      "original": [
+        "\t    printf(\"Couldn't allocate virtual memory for EMM, error code = %lx\\n\",",
+        "\t\t    status);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 167,
+      "original_count": 1,
+      "current_start": 250,
+      "current_count": 1,
+      "original": [
+        "\tprintf(\"EMM base address = %lx\\n\", ((sys_addr)EM_base_address);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 359,
+      "original_count": 2,
+      "current_start": 444,
+      "current_count": 1,
+      "original": [
+        "\tprintf(\"host_map_page, segment=%x, EMpage=%x, Dospage=%x, VdmPage=%x\\n\",",
+        "\t\tsegment, EM_page_no, DosIntelPageNo, VdmIntelPageNo);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 405,
+      "original_count": 2,
+      "current_start": 491,
+      "current_count": 1,
+      "original": [
+        "\tprintf(\"host_unmap_page, segment=%x, EMpage=%x, Dospage=%x, VdmPage=%x\\n\",",
+        "\t\tsegment, EM_page_no, DosIntelPageNo, VdmIntelPageNo);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Seven substantive chunks: physical-map/lease includes, three copy wrappers in one inserted block, five failure-propagating call-site chunks. Five original excluded bodies. Restored one extra EOF blank line.",
+  "counter_review": "Original EM macros dereference one contiguous native pointer; independently mapped EMS pages require alias-aware access. Existing fixture checks four-byte cross-window copy both directions. Current guest-memory move selects direction from numeric guest addresses, not backing aliases; different guest spans may alias overlapping storage, so full memmove equivalence is unproved. Preserve failure propagation and temp cleanup; do not restore unchecked contiguous access. No rollback guarantee should be inferred from exchange FAILURE after partial write.",
+  "evidence": "nt_emm.c EM_loads/stores/moves and host_copy/exchg; physical_mapping_span_is_aliased checks session-owned alias records; guest_memory_copy_from/to acquire/release chunked leases; guest_memory_move direction uses destination/source numeric difference; original_external_memory_test.c:152-167 covers cross-window copy, not overlapping backing aliases.",
+  "limits": "Only EOF blank restored; wrapper overlap unresolved, not reported as proven defect or repaired."
+}

@@ -1,0 +1,581 @@
+{
+  "path": "src/mvdm-host/wow32/wcall16.c",
+  "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+  "current_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+  "changes": [
+    {
+      "original_start": 17,
+      "original_count": 0,
+      "current_start": 17,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-304): default-off callback observation only. */",
+        "#include \"wow_callback_frame_lease.h\""
+      ],
+      "decision": "correct",
+      "change_plan": "Keep header for functional control capture/restore, replace inaccurate diagnostic-only comment with actual dependency description; remove trace declarations only with their exclusive provider/callers.",
+      "evidence": "Header declares both wow_callback_control and trace; capture/restore are live below.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 515,
+      "original_count": 1,
+      "current_start": 489,
+      "current_count": 3,
+      "original": [
+        "    CallBack16(RET_WOWCALLBACK16, &Parm16, (VPPROC)vpFn, &vp);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-343): rejected admission did not call guest. */",
+        "    if (!CallBack16(RET_WOWCALLBACK16, &Parm16, (VPPROC)vpFn, &vp))",
+        "        return 0;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain explicit failure propagation from callback admission; preserve original argument validation and output-store order.",
+      "evidence": "WOWCallback16/Ex now return rejection from public CallBack16 wrapper; rejection fixture checks zero/FALSE, original cbArgs store and invalid-size behavior.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 575,
+      "original_count": 3,
+      "current_start": 535,
+      "current_count": 3,
+      "original": [
+        "    CallBack16(RET_WOWCALLBACK16, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);",
+        "",
+        "    return TRUE;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-343): preserve the original argument/store",
+        "     * order, but propagate the now-fallible execution admission. */",
+        "    return CallBack16(RET_WOWCALLBACK16, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain explicit failure propagation from callback admission; preserve original argument validation and output-store order.",
+      "evidence": "WOWCallback16/Ex now return rejection from public CallBack16 wrapper; rejection fixture checks zero/FALSE, original cbArgs store and invalid-size behavior.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 581,
+      "original_count": 1,
+      "current_start": 541,
+      "current_count": 3,
+      "original": [
+        "BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-343): admit execution before original frame access;",
+        " * keep same-unit callers on the public-shaped entry and this body intact. */",
+        "BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain renamed original body behind one public callback admission wrapper; audit wrapper lifetime policy with its own component, do not bypass same-unit callers.",
+      "evidence": "Public CallBack16 enters callback/resource cleanup scope, invokes original body, and leaves in finally. Renaming prevents original same-unit calls bypassing admission.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 651,
+      "original_count": 0,
+      "current_start": 555,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    VDMFRAME callerFrame;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain two-field caller snapshot before second protected-mode resolver; keep original resolver and never copy whole snapshot back to guest.",
+      "evidence": "Only wTDB/wLocalBP read from caller after second mapping. CBFRAMEPTR uses GetPModeVDMPointer; selected FREEVDMPTR is empty. Fixture exercises resolver boundary but explicitly does not prove physical relocation.",
+      "missing_evidence": "Real fault-in/reentrant segment movement runtime proof beyond service-double fixture."
+    },
+    {
+      "original_start": 652,
+      "original_count": 0,
+      "current_start": 558,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-348): progress of this original frame only. */",
+        "    VPVOID callerStack, callerCallbackStack;",
+        "    DWORD callerInit, error;",
+        "    wow_callback_control control = {0};"
+      ],
+      "decision": "pending",
+      "change_plan": "Review control capture, exception recovery and outer callback scope as one lifetime boundary. Retain pending proof; eliminate redundant fields only after checking asynchronous teardown and nested native/guest callbacks.",
+      "evidence": "Capture saves CS/IP/PE/VM/CPL; restore checks live worker then reloads current CS/SS descriptors and caller SP/IP. Finally restores TD stack fields only on successful restore and preserves LastError; no CR3/cache/device rollback.",
+      "missing_evidence": "Complete first-pass exception UI reentry, terminal teardown and failure-during-restoration semantics against original ownership. Existing abort/CCPU fixtures are not full WOW lifecycle proof."
+    },
+    {
+      "original_start": 665,
+      "original_count": 0,
+      "current_start": 582,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "    // DIV-348: first-pass error UI can schedule even before preparation.",
+        "    callerStack = ptd->vpStack;",
+        "    callerCallbackStack = ptd->vpCBStack;",
+        "    callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;",
+        "    wow_callback_control_capture(&control);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "change_plan": "Review control capture, exception recovery and outer callback scope as one lifetime boundary. Retain pending proof; eliminate redundant fields only after checking asynchronous teardown and nested native/guest callbacks.",
+      "evidence": "Capture saves CS/IP/PE/VM/CPL; restore checks live worker then reloads current CS/SS descriptors and caller SP/IP. Finally restores TD stack fields only on successful restore and preserves LastError; no CR3/cache/device rollback.",
+      "missing_evidence": "Complete first-pass exception UI reentry, terminal teardown and failure-during-restoration semantics against original ownership. Existing abort/CCPU fixtures are not full WOW lifecycle proof."
+    },
+    {
+      "original_start": 666,
+      "original_count": 0,
+      "current_start": 590,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-178): snapshot the only caller fields used",
+        "     * below before the second original resolution can fault in a segment.",
+        "     * Consume the original FlatAddress result, never retranslate through SAS;",
+        "     * do not write this snapshot back over guest changes made by WOW16Done. */",
+        "    callerFrame.wTDB = pFrame->wTDB;",
+        "    callerFrame.wLocalBP = pFrame->wLocalBP;",
+        "    FREEVDMPTR(pFrame);",
+        "    pFrame = &callerFrame;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain two-field caller snapshot before second protected-mode resolver; keep original resolver and never copy whole snapshot back to guest.",
+      "evidence": "Only wTDB/wLocalBP read from caller after second mapping. CBFRAMEPTR uses GetPModeVDMPointer; selected FREEVDMPTR is empty. Fixture exercises resolver boundary but explicitly does not prove physical relocation.",
+      "missing_evidence": "Real fault-in/reentrant segment movement runtime proof beyond service-double fixture."
+    },
+    {
+      "original_start": 683,
+      "original_count": 1,
+      "current_start": 616,
+      "current_count": 1,
+      "original": [
+        "    GETFRAMEPTR(ptd->vpCBStack, (PVDMFRAME)pCBFrame);"
+      ],
+      "current": [
+        "    pCBFrame = CBFRAMEPTR(ptd->vpCBStack);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain typed assignment replacing nonportable cast-lvalue GETFRAMEPTR use; no second guest address translation mechanism.",
+      "evidence": "FRAMEPTR/CBFRAMEPTR share GetPModeVDMPointer(vp,0), differ only pointer type.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 757,
+      "original_count": 0,
+      "current_start": 660,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    wow_callback_frame_trace(\"before\", (DWORD)iRetID, ptd->vpStack,",
+        "        ptd->vpCBStack, 0, pFrame->wTDB,",
+        "        (DWORD)vpfnProc, pParm16 ? pParm16->WndProc.wMsg : 0,",
+        "        pParm16 ? pParm16->WndProc.lParam : 0);"
+      ],
+      "decision": "delete",
+      "change_plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
+      "evidence": "Trace observes already computed frame values; original host_simulate/frame state sequence does not depend on its result.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 780,
+      "original_count": 0,
+      "current_start": 692,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original",
+        "     * stack selection and before the original CCPU reentry.  It copies no",
+        "     * guest state and does not alter the callback protocol. */",
+        "    wow_callback_frame_trace(\"simulate\", (DWORD)iRetID, ptd->vpStack,",
+        "        ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,",
+        "        pParm16 ? pParm16->WndProc.wMsg : 0,",
+        "        pParm16 ? pParm16->WndProc.lParam : 0);"
+      ],
+      "decision": "delete",
+      "change_plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
+      "evidence": "Trace observes already computed frame values; original host_simulate/frame state sequence does not depend on its result.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 787,
+      "original_count": 0,
+      "current_start": 708,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    wow_callback_frame_trace(\"after\", (DWORD)iRetID, ptd->vpStack,",
+        "        ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,",
+        "        pParm16 ? pParm16->WndProc.wMsg : 0,",
+        "        pParm16 ? pParm16->WndProc.lParam : 0);",
+        ""
+      ],
+      "decision": "delete",
+      "change_plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
+      "evidence": "Trace observes already computed frame values; original host_simulate/frame state sequence does not depend on its result.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 791,
+      "original_count": 1,
+      "current_start": 717,
+      "current_count": 1,
+      "original": [
+        "    GETFRAMEPTR(ptd->vpCBStack, (PVDMFRAME)pCBFrame);"
+      ],
+      "current": [
+        "    pCBFrame = CBFRAMEPTR(ptd->vpCBStack);"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain typed assignment replacing nonportable cast-lvalue GETFRAMEPTR use; no second guest address translation mechanism.",
+      "evidence": "FRAMEPTR/CBFRAMEPTR share GetPModeVDMPointer(vp,0), differ only pointer type.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 818,
+      "original_count": 0,
+      "current_start": 744,
+      "current_count": 13,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        if (AbnormalTermination()) {",
+        "            error = GetLastError();",
+        "            if (wow_callback_control_restore(&control, callerStack)) {",
+        "                ptd->vpStack = callerStack;",
+        "                ptd->vpCBStack = callerCallbackStack;",
+        "                /* SignalProc deliberately reinitializes teardown callbacks. */",
+        "                if (!(ptd->dwFlags & TDF_IGNOREINPUT))",
+        "                    ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;",
+        "            }",
+        "            SetLastError(error);",
+        "        }",
+        "    }"
+      ],
+      "decision": "pending",
+      "change_plan": "Review control capture, exception recovery and outer callback scope as one lifetime boundary. Retain pending proof; eliminate redundant fields only after checking asynchronous teardown and nested native/guest callbacks.",
+      "evidence": "Capture saves CS/IP/PE/VM/CPL; restore checks live worker then reloads current CS/SS descriptors and caller SP/IP. Finally restores TD stack fields only on successful restore and preserves LastError; no CR3/cache/device rollback.",
+      "missing_evidence": "Complete first-pass exception UI reentry, terminal teardown and failure-during-restoration semantics against original ownership. Existing abort/CCPU fixtures are not full WOW lifecycle proof."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 92,
+      "original_count": 33,
+      "current_start": 96,
+      "current_count": 1,
+      "original": [
+        "",
+        "VPVOID LocalLock16(HANDLE hMem)",
+        "{",
+        "    PARM16 Parm16;",
+        "    VPVOID vp = 0;",
+        "",
+        "    if (HIWORD(hMem) == 0) {",
+        "        WOW32ASSERT(HIWORD(hMem) != 0);",
+        "        return (VPVOID)0;",
+        "    }",
+        "",
+        "    Parm16.WndProc.lParam = (LONG)hMem;",
+        "    CallBack16(RET_LOCALLOCK, &Parm16, 0, &vp);",
+        "",
+        "    return vp;",
+        "}",
+        "",
+        "BOOL LocalUnlock16(HANDLE hMem)",
+        "{",
+        "    PARM16 Parm16;",
+        "    VPVOID vp = FALSE;",
+        "",
+        "    if (HIWORD(hMem) == 0) {",
+        "        WOW32ASSERT(HIWORD(hMem));",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    Parm16.WndProc.lParam = (LONG)hMem;",
+        "    CallBack16(RET_LOCALUNLOCK, &Parm16, 0, &vp);",
+        "",
+        "    return (BOOL)vp;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 530,
+      "original_count": 21,
+      "current_start": 509,
+      "current_count": 1,
+      "original": [
+        "    static BOOL fFirstTime = TRUE;",
+        "",
+        "    if (fFirstTime) {",
+        "",
+        "        //",
+        "        // Ensure that wownt32.h's definition of WCB16_MAX_CBARGS",
+        "        // matches wow.h's definition of PARMWCB16.",
+        "        //",
+        "",
+        "        WOW32ASSERT( WCB16_MAX_CBARGS == sizeof(PARMWCB16) );",
+        "",
+        "        //",
+        "        // If the PARMWCB16 structure is smaller than the PARM16",
+        "        // union, we should increase the size of PARMWCB16 and",
+        "        // WCB16_MAX_CBARG to allow the use of the extra bytes.",
+        "        //",
+        "",
+        "        WOW32ASSERT( sizeof(PARMWCB16) == sizeof(PARM16) );",
+        "",
+        "        fFirstTime = FALSE;",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 584,
+      "original_count": 63,
+      "current_start": 549,
+      "current_count": 1,
+      "original": [
+        "    static PSZ apszCallBacks[] = {",
+        "    \"ERROR:RETURN\",         // RET_RETURN       (not a callback!)",
+        "    \"ERROR:DEBUGRETURN\",    // RET_DEBUGRETURN  (not a callback!)",
+        "    \"DEBUG\",                // RET_DEBUG",
+        "    \"WNDPROC\",              // RET_WNDPROC",
+        "    \"ENUMFONTPROC\",         // RET_ENUMFONTPROC",
+        "    \"ENUMWINDOWPROC\",       // RET_ENUMWINDOWPROC",
+        "    \"LOCALALLOC\",           // RET_LOCALALLOC",
+        "    \"LOCALREALLOC\",         // RET_LOCALREALLOC",
+        "    \"LOCALLOCK\",            // RET_LOCALLOCK",
+        "    \"LOCALUNLOCK\",          // RET_LOCALUNLOCK",
+        "    \"LOCALSIZE\",            // RET_LOCALSIZE",
+        "    \"LOCALFREE\",            // RET_LOCALFREE",
+        "    \"GLOBALALLOCLOCK\",      // RET_GLOBALALLOCLOCK",
+        "    \"GLOBALLOCK\",           // RET_GLOBALLOCK",
+        "    \"GLOBALUNLOCK\",         // RET_GLOBALUNLOCK",
+        "    \"GLOBALUNLOCKFREE\",     // RET_GLOBALUNLOCKFREE",
+        "    \"FINDRESOURCE\",         // RET_FINDRESOURCE",
+        "    \"LOADRESOURCE\",         // RET_LOADRESOURCE",
+        "    \"FREERESOURCE\",         // RET_FREERESOURCE",
+        "    \"LOCKRESOURCE\",         // RET_LOCKRESOURCE",
+        "    \"UNLOCKRESOURCE\",       // RET_UNLOCKRESOURCE",
+        "    \"SIZEOFRESOURCE\",       // RET_SIZEOFRESOURCE",
+        "    \"LOCKSEGMENT\",          // RET_LOCKSEGMENT",
+        "    \"UNLOCKSEGMENT\",        // RET_UNLOCKSEGMENT",
+        "    \"ENUMMETAFILEPROC\",     // RET_ENUMMETAFILEPROC",
+        "    \"TASKSTARTED    \",      // RET_TASKSTARTED",
+        "    \"HOOKPROC\",             // RET_HOOKPROC",
+        "    \"SUBCLASSPROC\",         // RET_SUBCLASSPROC",
+        "    \"LINEDDAPROC\",          // RET_LINEDDAPROC",
+        "    \"GRAYSTRINGPROC\",       // RET_GRAYSTRINGPROC",
+        "    \"FORCETASKEXIT\",        // RET_FORCETASKEXIT",
+        "    \"SETCURDIR\",            // RET_SETCURDIR",
+        "    \"ENUMOBJPROC\",          // RET_ENUMOBJPROC",
+        "    \"SETCURSORICONFLAG\",    // RET_SETCURSORICONFLAG",
+        "    \"SETABORTPROC\",         // RET_SETABORTPROC",
+        "    \"ENUMPROPSPROC\",        // RET_ENUMPROPSPROC",
+        "    \"FORCESEGMENTFAULT\",    // RET_FORCESEGMENTFAULT",
+        "    \"UNUSEDFUNC\",           // ",
+        "    \"UNUSEDFUNC\",           // ",
+        "    \"UNUSEDFUNC\",           // ",
+        "    \"UNUSEDFUNC\",           // ",
+        "    \"UNUSEDFUNC\",           // ",
+        "    \"GETEXEPTR\",            // RET_GETEXEPTR",
+        "    \"UNUSEDFUNC\",           //",
+        "    \"FORCETASKFAULT\",       // RET_FORCETASKFAULT",
+        "    \"GETEXPWINVER\",         // RET_GETEXPWINVER",
+        "    \"GETCURDIR\",            // RET_GETCURDIR",
+        "    \"GETDOSPDB\",            // RET_GETDOSPDB",
+        "    \"GETDOSSFT\",            // RET_GETDOSSFT",
+        "    \"FOREGROUNDIDLE\",       // RET_FOREGROUNDIDLE",
+        "    \"WINSOCKBLOCKHOOK\",     // RET_WINSOCKBLOCKHOOK",
+        "    \"WOWDDEFREEHANDLE\",     // RET_WOWDDEFREEHANDLE",
+        "    \"CHANGESELECTOR\",       // RET_CHANGESELECTOR",
+        "    \"GETMODULEFILENAME\",    // RET_GETMODULEFILENAME",
+        "    \"WORDBREAKPROC\",        // RET_WORDBREAKPROC",
+        "    \"WINEXEC\",              // RET_WINEXEC",
+        "    \"WOWCALLBACK16\",        // RET_WOWCALLBACK16",
+        "    \"GETDIBSIZE\",           // RET_GETDIBSIZE",
+        "    \"GETDIBFLAGS\",          // RET_GETDIBFLAGS",
+        "    \"SETDIBSEL\",            // RET_SETDIBSEL",
+        "    \"FREEDIBSEL\"            // RET_FREEDIBSEL",
+        "    };"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 653,
+      "original_count": 0,
+      "current_start": 564,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 657,
+      "original_count": 1,
+      "current_start": 572,
+      "current_count": 1,
+      "original": [
+        "    VPVOID   vpStackT, vpCBStackT;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 690,
+      "original_count": 4,
+      "current_start": 625,
+      "current_count": 1,
+      "original": [
+        "    // Save",
+        "",
+        "    vpStackT = ptd->vpStack;",
+        "    vpCBStackT = ptd->vpCBStack;"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 721,
+      "original_count": 34,
+      "current_start": 656,
+      "current_count": 1,
+      "original": [
+        "    if (iRetID == RET_WNDPROC) {",
+        "        LOGDEBUG(9,(\"%04X          Calling WIN16 WNDPROC(%08lx:%04x,%04x,%04x,%04x,%04x)\\n\",",
+        "            pFrame->wTDB,",
+        "            vpfnProc,",
+        "            pParm16->WndProc.hwnd,",
+        "            pParm16->WndProc.wMsg,",
+        "            pParm16->WndProc.wParam,",
+        "            HIWORD(pParm16->WndProc.lParam),",
+        "            LOWORD(pParm16->WndProc.lParam)",
+        "           )",
+        "        );",
+        "",
+        "    } else if (iRetID == RET_HOOKPROC) {",
+        "        LOGDEBUG(9,(\"%04X         Calling WIN16 HOOKPROC(%08lx: %04x,%04x,%04x,%04x)\\n\",",
+        "            pFrame->wTDB,",
+        "            vpfnProc,",
+        "            pParm16->HookProc.nCode,",
+        "            pParm16->HookProc.wParam,",
+        "            HIWORD(pParm16->HookProc.lParam),",
+        "            LOWORD(pParm16->HookProc.lParam)",
+        "            )",
+        "        );",
+        "",
+        "",
+        "    } else {",
+        "        LOGDEBUG(9,(\"%04X         Calling WIN16 %s(%04x,%04x,%04x)\\n\",",
+        "            pFrame->wTDB,",
+        "            apszCallBacks[iRetID],",
+        "            pParm16->WndProc.wParam,",
+        "            HIWORD(pParm16->WndProc.lParam),",
+        "            LOWORD(pParm16->WndProc.lParam)",
+        "           )",
+        "        );",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 764,
+      "original_count": 1,
+      "current_start": 673,
+      "current_count": 1,
+      "original": [
+        "    SETFASTVDMSTACK(ptd->vpCBStack);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 774,
+      "original_count": 3,
+      "current_start": 686,
+      "current_count": 1,
+      "original": [
+        "    CurrentMonitorTeb = NtCurrentTeb();",
+        "    FastWOWCallbackCall();",
+        "    // fastbop code refreshes ptd->vpStack"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 97,
+      "original_line": 125,
+      "logical_line": 93
+    },
+    {
+      "current_line": 510,
+      "original_line": 551,
+      "logical_line": 531
+    },
+    {
+      "current_line": 550,
+      "original_line": 647,
+      "logical_line": 585
+    },
+    {
+      "current_line": 562,
+      "original_line": 652,
+      "logical_line": 656
+    },
+    {
+      "current_line": 565,
+      "original_line": 653,
+      "logical_line": 654
+    },
+    {
+      "current_line": 599,
+      "original_line": 667,
+      "logical_line": 675
+    },
+    {
+      "current_line": 626,
+      "original_line": 694,
+      "logical_line": 691
+    },
+    {
+      "current_line": 657,
+      "original_line": 755,
+      "logical_line": 722
+    },
+    {
+      "current_line": 687,
+      "original_line": 777,
+      "logical_line": 775
+    },
+    {
+      "current_line": 689,
+      "original_line": 778,
+      "logical_line": 771
+    },
+    {
+      "current_line": 706,
+      "original_line": 785,
+      "logical_line": 780
+    }
+  ],
+  "line_basis": "LF physical lines; no form-feed splitting; source derivation only",
+  "limits": "Classification complete, functional remediation not implemented; no build/test/release."
+}

@@ -22,7 +22,7 @@ function Get-ActiveWowSources([string]$path) {
 
 $wowRoot = Join-Path $root 'src/mvdm-host/wow32'
 $sources = @(Get-ActiveWowSources (Join-Path $wowRoot 'sources'))
-if ($sources.Count -ne 77) { throw "Expected 77 selected WOW32 sources, found $($sources.Count)." }
+if ($sources.Count -ne 72) { throw "Expected 72 selected WOW32 sources, found $($sources.Count)." }
 
 $manifest = [IO.File]::ReadAllText((Join-Path $wowRoot 'sources'))
 if ($manifest -notmatch '(?m)^\s*wow32\.rc\s*$') {
@@ -134,12 +134,22 @@ $dynamic = [ordered]@{
     'WINSPOOL.DRV' = 'wgprnset.c,wgdi.c,wow32fax.c,wspool.c'
     'WINMM.DLL' = 'wmmedia.c'
     'WSOCK32.DLL' = 'wsext.c'
-    'OLETHK32.DLL' = 'wuclip.c'
 }
 foreach ($module in $dynamic.Keys) {
     if (!(Select-String -LiteralPath (Get-ChildItem $wowRoot -Filter '*.c' | Select-Object -ExpandProperty FullName) -SimpleMatch $module -Quiet)) {
         throw "Missing admitted dynamic dependency observation: $module"
     }
+}
+
+# Descriptor conversion is a selected original object, not a system DLL dependency.
+foreach ($object in @('obj/opennt-ole/thoputil.obj', 'obj/wow32-dll/wow_ole_descriptor_binding.obj')) {
+    if ($link -notmatch ('(?:^|\s)' + [regex]::Escape($object) + '(?:\s|$)')) {
+        throw "Formal WOW32 link omits descriptor conversion owner: $object"
+    }
+}
+$clipboard = [IO.File]::ReadAllText((Join-Path $wowRoot 'wuclip.c'))
+if ($clipboard -notmatch 'return\s+wow_ole_convert_descriptor\(hMem,\s*flag\)') {
+    throw 'Original clipboard caller no longer selects the admitted local descriptor owner.'
 }
 
 $forms = 'GETARGPTR','GETVDMPTR','ALLOCVDMPTR','GETOPTPTR','GETMISCPTR',

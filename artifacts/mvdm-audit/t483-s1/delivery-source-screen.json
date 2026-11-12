@@ -1,0 +1,894 @@
+{
+  "method": "Lexical screening against HEAD: preserves string/character literals and punctuation; removes comments and whitespace. Not a preprocessor equivalence proof, macro whitespace and __LINE__ still require build evidence.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "head_sha256": "0ef34fb0c6093e8ba6aedb40f470e726a1f85cb2f2ca7831b8ad4e5bfdbf0cae",
+      "current_sha256": "a6eb69955f73173320abcf87718ca44037f82f770aa8bc1f10f714a6a3e500cc",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 308,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "head_sha256": "cb5e75063ceb75996d0d87caf77aff7acbde81a7e13f44f8c70db4e8c5ef42eb",
+      "current_sha256": "05a7ad498ba6c7033ddda06151f76a21d3db2fcec2b8c1f3217df049246a7475",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "head_sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f",
+      "current_sha256": "4d4644c0ec8155197f8bac143a7b2569487dcc4a644db5a3496149647a878089",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "head_sha256": "e2089f9585db09abb1e6171fcf5b890c9a7879c0c0a2d806514c9f12c3b4b778",
+      "current_sha256": "37ec01d26791e6908c72dbd2d1ad82b9d499d3e438012737c2d2913b1f9d0fd5",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "head_sha256": "f745ab10656cd51c9f4e1011f243308936dcb834361debe997d744c9ee11e011",
+      "current_sha256": "dcb304d187e706bd187d802c9a672f02f04b4457c4c0e1ae28cd559c9e08aba6",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "head_sha256": "cb60c06af4075c049d66639ee42c6ea9c57d7019c5651f3f3f97fc8bb5890241",
+      "current_sha256": "626330bb01b34df705e815d3f7deb00ef85c77d2257743c43a07b160b6612f65",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "head_sha256": "e4b2b0e4218424923d3b409f89a6f2dad2d92dc4894ec57ddb1585d261df1865",
+      "current_sha256": "221d38bffcce263524289d52f52d471992536f7790b1cc0857a1d6da85acc106",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "head_sha256": "93ff578e59baa0d11ead3cf1d246c2fb89e50ffbb876e1bdca4b14fb52568a33",
+      "current_sha256": "8dc5e4ef730038d3ace25465b186e1c9d10f72c9a7fef4e73bf2cd788bee8c96",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "head_sha256": "5102e5e1a0bac15ed2cacc4d5e6c276ee33f03e456562a0c0465f55e52e1459f",
+      "current_sha256": "08b23286a0a97e25818f930eeb45650879bbe375df438fc8907405386ab1afbc",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "head_sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+      "current_sha256": "0911bd4472bcab75ba1e7d501fffb276a71226ac0cb5de5bd837f23b2c06bd8c",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "head_sha256": "3b7dc7625d2133ba9ac3ea53086d40033f033ce771bf979039ea18c089dfa7cd",
+      "current_sha256": "96f8b75b64c64dd68595d8e87c853770abbec97ac224bb7c9e1f6b4a5100d5a4",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "head_sha256": "2feb3af8dc8fdf3d4ce7aa262c121b0fb80357a69bb266f8d1e1006709bac29b",
+      "current_sha256": "a96f3121f03c3c649283ca6c40683fae6f44109a82bb053cfd66985066cb2d94",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "head_sha256": "bb73a0e5372d743dbe11afb7c8a54a91b75c2b3a268b8831458c8340d1723d80",
+      "current_sha256": "a544eb63955017bb06606cc4f554f910a442d39a17e68b013b7f8ced7a58833d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "head_sha256": "a76d355979d37e86d883a5e70eec89703c3b79882231eeb5173f7b3511f1c94a",
+      "current_sha256": "6d9c6f3225c11e25b3c24b6330465dc7c25318c48e38151ee692a64a5d78f6bb",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "head_sha256": "bd01f4657e1a4babe02673ee2b531e0c4d6f6b70bc51835b35fa5205fc9265f4",
+      "current_sha256": "bf532d8564a218a05b527eaab8aa783b8bb2898f4476763f188436f207cf6f0d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "head_sha256": "193d9b780feb1557cd029ff2d5c265e9540d3b16339072ab92e08869d5b77fd0",
+      "current_sha256": "6d8e7a439f2ed06c28bc425d98d81774eba203155cbee85c3d2c719e476ae684",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "head_sha256": "46a79ea063d4a8d89524b013c7a8d2efa168740cc0f0c93148b8e98c4141a6f3",
+      "current_sha256": "ffcdef5635a766ed7668fc3ddf35bce54e5a621b2c4304ab682bc072d1b92b34",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "head_sha256": "041241876357e6eb62f9890b322ae088e9add530785663841ff6a6fc6efa5832",
+      "current_sha256": "452d8e54e122c04f5ce1b574453b20ee8c8d3cebdb31469e5f1a475a0a45dfeb",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 555,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "head_sha256": "e276fa74fa087403cce2a77553414531ffa95d0ad30afb81111e83ac73655ef1",
+      "current_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 35,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "head_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+      "current_sha256": "a3f817ac690972406ad396f0ccae141500b0f25fc914196f7bf498b0d1708f5d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "head_sha256": "230f41939cd9567887dfbe5764eb8f566c18850812e261f87807155881f8c881",
+      "current_sha256": "d7efc6a77b661c9e9930b47528d2a22ade0bc0ab178973513a17b039031116ea",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "head_sha256": "74d0431fc3675fe70968cc076253865717b6d2e4c2b9b7a1e86eab926ce2a1fd",
+      "current_sha256": "035b3ce8157587e58c1dc64b01e60da69e2c5b6a6f0a864fd80bfd1ea3fda351",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "head_sha256": "8a914b356bece9f0f12dbd262da7b550d5893d4e6b8e29d4974967f2c8042223",
+      "current_sha256": "d91eed0392b581f653e29156d0b317a073cdcf74b70ea808e2f6b0287c9d925b",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "head_sha256": "748837ce7df95a272d888aeb5ed6816ddde50970f711d6ee3a61ea9e33fd88ed",
+      "current_sha256": "2939208de94608e4fdb441a585ecf14d3783e0de268d6530cfda752674b7aabd",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 2874,
+      "excluding_line_directives_tokens_equal": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "head_sha256": "06c3981b2cd467926496c6d71fa8e238d4ff689e591f68130041309f46a0466f",
+      "current_sha256": "5082e858a1615a569d626e709cf85f10b2a248390a087471ea14dcb78a281855",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "head_sha256": "1e445387cc8a794f325dafa1caa00ef63a789101619eef4c6f6fbcf63299ffd7",
+      "current_sha256": "e99fdb2599ed2482489db99797eb9943d3f53a8b046607016dd00791e6201aae",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "head_sha256": "bd46d5bc6ff98c32a30ce08632423326b855664b8b9f44090ca32111e94a6876",
+      "current_sha256": "e775e4149d1613c5caac6a2b700d3dd7639a4c6c47d47838a42b93a942bcda60",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 2733,
+      "excluding_line_directives_tokens_equal": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "head_sha256": "37bea65b2e6d5093aaea4545346178a507c28d7c9ec27d089fa36dcfba3abb4a",
+      "current_sha256": "241dc4b0b78500f5d33e4ad81768cfff37697096a2e27bdc169e850eea9e1994",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "head_sha256": "c07036b22cbd67a0aa6d65a9f81a235df5d862f40d87ce6a1b3afba32132db65",
+      "current_sha256": "880d12ef557ce3d6fa0a2c1adcef1140e750f358bc28198b3cfe6dbbe6e067f8",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "head_sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+      "current_sha256": "10a19075d285cd629b0d283f40eadabb07ca96070209bf2633d0539aa4042927",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "head_sha256": "86965b6eecbc017d3860b52722bc8680db266260db554a58cbb63bf487e8840e",
+      "current_sha256": "fc5a3fbcfac77e4337602b94f2d5c6ad69ae95417b8b8ba4e2362510891c8069",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "head_sha256": "6937966cf58120b3c40caf0f822abf7d7703112a35dc2d337e9517f9d69c5a02",
+      "current_sha256": "0515c189d0c17a8811ef96fbb1aca0fc49fc93c5c11e08d1af881a9bad2c557b",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "head_sha256": "20ada4729cbe0b891d3621870d826eb7dd0819fda3b4aaf8c17baf9d37f79204",
+      "current_sha256": "60faec3d636e135103ebbdf462bef29eccb888e82dc248fecb3e7b3ae19121c6",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "head_sha256": "f727e75b675462ff383c59c92534f6925be7648b28cb364922839cbf592d6a82",
+      "current_sha256": "6227c01ce8498598440c10b92bf07b0f1f645aaf387d4942c2b8d59b5df78b4c",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "head_sha256": "79d61d0a443d31a4465f80effe2db49bfe7ee879a649e19ec534b5aafc7c5886",
+      "current_sha256": "9b41c3d3946930541379f736fbf104386d77596395a7532d958da23a0a1ab46d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "head_sha256": "1bbed0c19ef908b0e2a3145f8b47e8936597d39e06ed9282bd0058499d75f439",
+      "current_sha256": "02a23c7a1d10e4364765635380011c37caf32fda037eff74ba80144f158bab38",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.h",
+      "head_sha256": "3c2d51ea38651fa3c9c4c1c03ddfb7db9b42a22e28b9e27050d5a87946f7532a",
+      "current_sha256": "179794837a8610488218e5e48768d4d79f3d160bb952c92b172d12f6807984d2",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "head_sha256": "496a59b4158f1b808dace2c316edab60e941cb9febc699c2d5e39730387e0a09",
+      "current_sha256": "24abe31f5b78589aabd8fb2391b33e160b28f5c6eb9be36e9b63b6aaf7a00a30",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "head_sha256": "035605347876f41df21917a6aa40e3f42e2fee5735a6e07dbf3cfed2dae0ba48",
+      "current_sha256": "bdd8063027620aa30f749cb8b50dc148f7466305678d619bdeb2d2946ebafbda",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "head_sha256": "6e60356dc9395c548ed7487a4c16dbdc95915fee15220f60af08f996a576360a",
+      "current_sha256": "2d71a1326faf18978f0d691e779ed7ef3723b3a1fdd41cc19b721776cd168fe1",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "head_sha256": "62bf79c38fef56c60916ae36d4ea719b06a06873c88ea7cc361d41143cb0fcc0",
+      "current_sha256": "36a7fa520a0716564345cd4549ca74536a507052215dd5fd544a22e9c9dea1e2",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "head_sha256": "8f793e4ef97e20cd9ed0e1ef35c39a94ef2745e4cf0122af182d56a61cf2baad",
+      "current_sha256": "4c64d1e89174576f85c08c165e9b01d67f0b8b83fe955ccab54a3f41198187a4",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "head_sha256": "3bb6a749645e12987155abf762c3e9e5a22c42732f535069de6e12dfed572ddd",
+      "current_sha256": "9ffc9d6f042f5c2d58069e2d53b4bbe8bb73c08888f79edfd532ab679ddbdf82",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+      "head_sha256": "818f074accc11b29894677ecb8ec14e704714d9172d9206dff9fa5243550592d",
+      "current_sha256": "df5bb7a708e9fa774ac4ff562edfba5fb0ae1671c3f25e686f69012573782247",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/ascii.c",
+      "head_sha256": "c43323bba2693270bd8d93b46667ae5accd1a8b7fd1179532754b161944f8b44",
+      "current_sha256": "1a5567fff519c4a161d27f02f9a86d1fedba60d0eb68d850f91e8a7c1bc33583",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+      "head_sha256": "ce5ee4242a63c0b07fe9d63806e367de021f14dadc2b5c1c61ab7acf3f53790d",
+      "current_sha256": "65ac082a9d1e00efea57cd6c93b8680662693389c22f0e75457f050413e60869",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "head_sha256": "686fd07ff9b29e16e5600f24166aeb5f4ced4e0081f1555557c52e57523e94b1",
+      "current_sha256": "8ec3e57c97586a761f4411268765eca936610056d191a08e1d552ef9b4d8a338",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/examine.c",
+      "head_sha256": "56c341ea262a24f805465c3ad515c4e94f60b4ee3db5e26108e438f0d5ee301f",
+      "current_sha256": "88d15c5f6c7bb222f6bce5c6eefa9ddec7ab23e6da95af297c9806200e955d56",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+      "head_sha256": "1eba4a6355ccdf4305ae357f854802a931940e18fe9dcbdc242d63d9501cefb1",
+      "current_sha256": "a90b7473a7126de00406a26554ca6648bd1a4ea061fda21d70e2c8319cce2db7",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/pointer.c",
+      "head_sha256": "23b5cb3d30828748fa40913e4f6bc3ef52da09d2d05e6ae5f26c2ee3858232eb",
+      "current_sha256": "f25a86eb907a969cd30f201fcd304ad28c92e84b6d66117e53ec5ae4d19f452d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "head_sha256": "74cb6b9ce935f6624903c7472740088baada906ba1edd53a20ccf85d2c5e43c9",
+      "current_sha256": "b8a2677d4140e82eb197a1d16076603bf34ba661a7006fa8ac23fa1c0618e6e6",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 1,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "head_sha256": "254ede065d17e7f21f9dc32ecaeef12259d184f3ab3f60f7007acadce6d57081",
+      "current_sha256": "ece6f49317fa93615658c2a410215a91b33a2d765ecbb35517858cfea4f53d04",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "head_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+      "current_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "head_sha256": "4cf4b9f7f29f423310e2012a5f5ddafc901a683a1cb834862777c9ad105bea29",
+      "current_sha256": "b2cf945c8f00a8ef9364ed6d1e53560e231bdd8bf8d92ecdfd47ffb6f2c3c6eb",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "head_sha256": "c298b92adae3e807e006b3fa279da957f511fd2ee24d0a0c497d1ee47cc27752",
+      "current_sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/wkstadef.h",
+      "head_sha256": "79b7d37e93d0f1d650cdc0d88becc0b960740e9e5c22f5c7e9ec9f32d1d3f97f",
+      "current_sha256": "4f3bacc8b97586e3f0a32e6738480335382a6876d552598b9b900546480eb7b4",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "head_sha256": "dd594532c0618ab4acdc637baddf131c0ff0b95bc736cfbc821408c4317e2b9d",
+      "current_sha256": "ca80cdb6c115f513166145531225e4eb6710b9d4e87e5a99655d0fb5bef779e8",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "head_sha256": "c3a93b3c394b2adb6ae7e8198f6eb5bfe93c73414a85d9dca6e44ef5e7635aff",
+      "current_sha256": "a671c7fb4d1e9c5bbdb71d6fc4afe0324081038053392d599942c95813ce6d5c",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "head_sha256": "56133720faa919da85c129aa1f3c601ee504b8005f5a523b93440cbbc1426bbf",
+      "current_sha256": "8198c378c9df3f318aff2914e95a530ef90c6fca92d1939714c851628b069743",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "head_sha256": "8daf8b94feade0b0518b66d4f477901d3b02274d657f78103ca9be6fd07eaa6b",
+      "current_sha256": "c6179ce7662c012a345aed4278b94b59c50ceaf396eceb7f768b62ce454f2b7c",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "head_sha256": "85aa47902c2ab59bd5ba00dbcee169a2c11dc9c408034a5e0333322b76172c81",
+      "current_sha256": "f9f997ec6f9fbdc8160c775718c605bcaa5aa374d94ac5c94387ccd7fb4e7465",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "head_sha256": "271c3f9eda9f43493a98cef1f113bd65d3512f13d62e232b567d6e16d695e525",
+      "current_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "head_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "current_sha256": "9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "head_sha256": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
+      "current_sha256": "317b926ef3b1889648a136beb8ccc4ab3fd83c2df4d4f0d2a669911387d213a0",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "head_sha256": "a177edfb7bfa754e95c09d992870ccfa57e9a606a10995a30eb4206116643118",
+      "current_sha256": "692490979bcfdd0b3db5043bd76eeb835f6c3bf91d6a5602f753808fa4c922a2",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "head_sha256": "92c3ad8d3b8113edd7b4e8282294f5d1269a6ce25c98a50602422cf116666424",
+      "current_sha256": "ce25c125139070ba30b2a99d670bdac09ff614c14a08ce5ef0cce2d99b43a52c",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowshlp.h",
+      "head_sha256": "a4dad22d1108694dba2faf293ceaa1298f480a170b03f1e10d7b06920fe779eb",
+      "current_sha256": "ea9d93fc5c49166cd408baf8e64755ee1ebb7d99db971a0b99fb23232e00e0b5",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "head_sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
+      "current_sha256": "141fef9bc2c676ac99dab67f861be20fbb5ef44447d676ce90bec91170c2476f",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
+      "head_sha256": "67ec4dccd8245891a3ba7f4e64fdf38bd8b39a02ea00ec13a96d7ebae3210c07",
+      "current_sha256": "ee7cd9c9d24c8907540d06545b44acf92e17645c5e24b5ff87db8d70dd6835d8",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "head_sha256": "edafef9f825bbcc4000195c3fcbd63d6dd65d753271770bf6e5480a83b7879b1",
+      "current_sha256": "1292581db79cae5901247ab9c00a4d6c9fad18ebb1a257e2031ebaa1ab744c5a",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "head_sha256": "fae4c43815b02d7d637b1d771f0befa010f1062719ee4cf65989e642747d60c3",
+      "current_sha256": "f6485bceee1254acaab8d16d2f039c1a19cda1bb98c98c12bc02a905775e1f39",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "head_sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+      "current_sha256": "f6a3e397e878eccf05b5126b3c68cbfefb33cda2e058adf239da2bff6c74b7f8",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "head_sha256": "1963ec663153b7c3005d73c05a58194dd4d021acbcd437dd5d6c58d1356dfc90",
+      "current_sha256": "496fb34c9ba1f61e6ab5b67fd09c75b72447e6b8054e237b05328184975e1595",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "head_sha256": "c4f7765e4bbdd596fdd89833d5a806c77efc01e9d8377e438488aace376e6a9f",
+      "current_sha256": "8031c5a98f46dbbc7cbff3911e78d25c0c0cd37992908dc154139286110b56f2",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "head_sha256": "4672e4cdfdd11cbdcc581e2e8e3f33740dee039e25ccb06f68cadb9e9d5805b9",
+      "current_sha256": "da0261ce3f737d328794b5a49977d3c10f5297808591f38fa4dd9c365958c9d9",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "head_sha256": "6502c08cf8d3c162f80be6816e8e93250d7e2993ee1884bb9a63e9c08756d9e3",
+      "current_sha256": "9971cf7edcf795e260fa6b7d6bfc0b8e9c2e59b6521ab2ab2467453ef12dd101",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "head_sha256": "7f78d307471884e2eb1fa60b39670d988261f02b3c0b6f8065fd63024db5f6ee",
+      "current_sha256": "fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 207,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "head_sha256": "1a2c9db520aef67ade59a6a3e0b0627e5e22b8ccf584f24cdc73b815eebb5576",
+      "current_sha256": "02ed31f896cf0cb543d35352c12e00013b126db89faeacddbd9a32abfb8c525f",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "head_sha256": "0e072d983c0b8f233acb472248ed6b49c2060efbf7676f5a8e23d978eca7f931",
+      "current_sha256": "000d27dd967cd4d48ffcd36462a68817a086ceffae60e5af629171b6042d6689",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "head_sha256": "c19d75256bc8521b87e277b32e0caff9c4e7517dbfd4e28384be28e05ed5494b",
+      "current_sha256": "52acb9321a7cdaba603b0e943101b72f913ee9421ffc110fa2cc23a6e2fd405b",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "head_sha256": "092c8a21de74f7998a269811a66f1064f4bf8ce8eac5123a2b33dc305456f79f",
+      "current_sha256": "64b64c159b3965631f11e7823bf5b87f0d4831526c26726625edf9bb57464fe2",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "head_sha256": "b4934bf910a7914ee9f30e043a952d0f0e8a604c3a7476c87a3134ef74cfc539",
+      "current_sha256": "e8a0639ec579b21823d536369408c12160220219d60e6aaed0fdd089d7530fc0",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "head_sha256": "337cba5953c23f321bd44224f9f3e1ef67c0d09a403805344a3669d21b486ca4",
+      "current_sha256": "1a2f5087bd4ed7e44732b7fb55b7e67c311da6216c924e82772c97b5e1317841",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "head_sha256": "83b39c438d16306c1f8871585211466b37a11982158e6aee5eef1347b98cf94a",
+      "current_sha256": "09b5a77268835e633f174cba5bb6715d7dc9158374bd05f3ea3ac4a77133b838",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "head_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+      "current_sha256": "2f87ed304c936c0794c55c3d28289d4493c9982c162eb39629f9056d2f8058aa",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "head_sha256": "3d3e824d2c517eecb87dc66e7dfbabf8f20884dbb08d3020d77443bd784267e8",
+      "current_sha256": "666f70f14c30aeb6d45e7214c337aafbf4a8565ec6085cd73515dee426096bf1",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "head_sha256": "77852da033b4b60555f0fb825bb7caa17e94139019f7a3fa35a568548cbdb294",
+      "current_sha256": "5ea993fe4a0ad0cc0fbb76dd867f37e9b8d03de52e066759afa74be37eaa516b",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "head_sha256": "ed2559bf93da5964d35de20fe2aed18e009810561f0b59d111778fc8b155de27",
+      "current_sha256": "da9e6e52ec1d74194c9f00c009367136d511bb6331fd923de2a85f6d5cda3500",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "head_sha256": "67c9d0b3e2c68d3144db9953ef89d548808a240eaf88c21e65e5cbe6cab614f4",
+      "current_sha256": "23eb85a4c7240d9d80f73526b0ac23f9ca9c7cf7c5bae061456e5f67f2f09d6e",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "head_sha256": "a4ac66f3566cbb16886e6a1202f08717828122bcf250fadf8cbb11ab1ee3b39b",
+      "current_sha256": "21dd9a99480d39a40e82f6d5c8a722a07185189855f58cdbc8541f5efaf21189",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 8,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "head_sha256": "5f55f632b250d765c26b392bdadcd66ad4a93cdfa3a3a74f57fe2866856184c4",
+      "current_sha256": "d85831391e232a313068b51b88b69b62f1f3d0d6ceb2a773391d4ac0e65889c4",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 8,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "head_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+      "current_sha256": "eed4db1318fa3a07b24ff2e6a6bdc5022812ef39aa30af592b6180664fc9a8cf",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "head_sha256": "188cf5ee53e4c32e591fac8e4aea93b09de736789328ed921423e590e8763e17",
+      "current_sha256": "652b76dc69f0d1cf4b4ad60602962b9088d71da85992af0ac57c628e0ffde062",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "head_sha256": "8814fe1cef49b3914c612703f4b136c41d8b9f73ab2e1f083018dadcd6242217",
+      "current_sha256": "17d55282c3f42fcfc50a908b0e948f6945aa1cc7344a4a35249ea662c8a5dffa",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "head_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+      "current_sha256": "e165f243722d982c5a19024ae3fff82747889bcfb34c63105043e08fe7d4a9f1",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 763,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "head_sha256": "4396ac612dd316ae7393891b93a379118f4a60b6e7051206224ae6ec0cae9b0f",
+      "current_sha256": "824db6b7c91862bf6d8bd3bf389a0b803f8256816e340fde1d8f510eceebf941",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 1069,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "head_sha256": "95d079adb6003257491878a40822c0c52a994217d5e21dce11b93f4ba838430c",
+      "current_sha256": "d448bfc238cb8f6143b4bc52bc2c3ee714f7a2f1fcbd7082bfa4ddebd4667789",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "head_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
+      "current_sha256": "b667d09291a27bc607da80aa6765d3c0835051a5325880ba2368983804969c3a",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "head_sha256": "18d5fd5f09417d33e0ee3f4be294707ec1bee76c7bd3e3b63c97beaafa22cc6a",
+      "current_sha256": "c4c28b08767e4c6d7b9cee385bb9d3a377aff17abc4c62efc5fa968df8a0e109",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "head_sha256": "a8ed6fea183399990c012e81ba1ce9aa3ac798f9d60edaf4f5c8766c85ed14a6",
+      "current_sha256": "f530803eb199eb4af04d4ec3330c854b710f48b8d8b9dac51167c134ad71c9cf",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 1879,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "head_sha256": "f233bda073e53e44e91c1eeae4c78b4afe0e238e17f476ab3f79f985b241ce40",
+      "current_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "head_sha256": "b42d5c29b94789df14fddcf2960a657d216a41d350908c8d496dd864ef05e284",
+      "current_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "head_sha256": "c341f93751ac817fdedb508b94ab242f81fdffd0ffca1bc21a24fe6cc89ea3c0",
+      "current_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "head_sha256": "d4e1283fd8b5297a8957a9ed13e8622504eaf16763aace581a8c5b78e9b6891e",
+      "current_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+      "comment_whitespace_insensitive_tokens_equal": false,
+      "first_difference": 1,
+      "excluding_line_directives_tokens_equal": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "head_sha256": "d9a3a1fd5a8a00b0af2a3a673115c10d458730370b85f53bab6cabd516d9ac81",
+      "current_sha256": "90cbe1e5d20b4284820193b242da8af753dbc976e056ea74f3c0c45812efaf64",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "head_sha256": "05cf0e041f89c44e168ef85c66ef82433967edaa0690bd2c3e8ff898634b0b91",
+      "current_sha256": "82acc421f66a2e71b1fb18494b78f69f38ebf0054d504743cdeeb1b4c20aea81",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "head_sha256": "56f7e0030282e8d7c5d1ebcae4c2e8bd52572e4145653e71f813864ec46b1cb6",
+      "current_sha256": "39d741144fab4e0e53dd2ac30cdd63ed84ef93c7bd55a4ef7e5790a956d70d16",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "head_sha256": "3b51de6759d2a5ce8ccd59d0e8c07f68a1bd4de1cace151b1ec51cc346470570",
+      "current_sha256": "283f8a76c15b219f4991da8aea36bd0f2f647e977fed9eefd2f3a55420bd53ec",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "head_sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+      "current_sha256": "278332285649e2c535998c94b467f9e0cfd3f7341a97e5fb7a8710f8d02a235d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "head_sha256": "fe20f5ad161583a82fd573e90d2f3305b63e253aba8231b8b0a1b0b6b6ed6728",
+      "current_sha256": "c037b36b1f76776d0c185a9c2c71f7613e4da8a2f794cd5599c1fd58052c336b",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "head_sha256": "30e622392ea164fc3fd523c945bb3f0905d2cba39adcf6155d3350282d70d71b",
+      "current_sha256": "43017662af7ff1aa112895f9a948e878976e701d4fdbfc4567033dc3aa6c8c46",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "head_sha256": "b0de135fbac7f436aaed675dae3aaf20be944b59998aebed5622b3fa188eca73",
+      "current_sha256": "f0649cedb6a6327c699e44f964d7b171ab5938360ee7fa44d51e9ae025fd18ba",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "head_sha256": "9f6cc2803fb6d93b867fc60c2f0f6e95eaa564550ece59f3923bb83e834f67c7",
+      "current_sha256": "c23b952a6cd68c3048048c4437026f91ba5223c89313c77cbe507abcdb0f4d8f",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "head_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+      "current_sha256": "435d0563d50fcfaf5947e509cf3f76269e319cf3e98ab447ea3176029a11fca8",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "head_sha256": "a62ed13562045c87e524f29590eec28376eeb526fb80e407b8943df275d09204",
+      "current_sha256": "87b683c3972700d1980b68ea4fd2b46f40c12419d51624422659ef6629a29665",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "head_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+      "current_sha256": "29c7d945c05f0c0c69fd320504fefb88c82be71b600c77d2f6f06a4c839394c2",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "head_sha256": "4aec687f5be9cc634850811600e3c8c407de8d52f86d19fa41790f6f32b65a2c",
+      "current_sha256": "16fe6ac52ac0365b94a37272a8c80cd47a1edfd0042c9f076cb94c0ad1c427e4",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+      "head_sha256": "2761eb922e6de3cde93a7a6ff8e8543d8ede7065055af9e2e85196de5c7ec199",
+      "current_sha256": "86b92bf8f78ffc3a049dd1d0e96351f160b3f05a35dbf701bee9db2b10e42c82",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "head_sha256": "b6539c0df34096ed6a3a2935f2d905ff01acb0d02586218c97c40f764a33ef53",
+      "current_sha256": "f4b570b778fc22b1f42ab7e4327183e87aab99c9630d197f1a0bba760089857d",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "head_sha256": "7d1f0f4331109602568c7182111482227bdb446597c906c0f69d4932b54523c4",
+      "current_sha256": "d637c432294c5f9cfdb96b6fdab6b707f5ac8cca9f7209b4df99def8397dd63a",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "head_sha256": "9b2c8b3e68218c69f6cd9449aa1185bbeb1e6bbae4f9a36f31e833092b0adf32",
+      "current_sha256": "5eaaa777528408dc354e978d2731473e9df64b51bb743e8360b4a8a6fd21c6d3",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "head_sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+      "current_sha256": "0f4f3b63034459ac1f0eb7c3e951348776512a7167f75733cc4c64da62a28cbd",
+      "comment_whitespace_insensitive_tokens_equal": true,
+      "first_difference": null
+    }
+  ],
+  "equal": 109,
+  "different": [
+    "src/mvdm-host/dos/command/cmdexec.c",
+    "src/mvdm-host/softpc.new/base/system/qevnt.c",
+    "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+    "src/non-mvdm/public/sdk/inc/ptypes32.h",
+    "src/non-mvdm/windows/core/ntuser/client/draw.c",
+    "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+    "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+    "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c"
+  ],
+  "limits": "No preprocessor or runtime equivalence claim; #line and same-shaped redundant brace restorations require build validation.",
+  "reviewed_remaining_token_differences": {
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": "Three redundant single-statement brace pairs removed to match original shape; predicates and calls unchanged.",
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "Three redundant brace pairs around existing calc_update calls removed; calls, order and software_update_completed unchanged."
+  },
+  "build_verification": "build/t483-s1-delivery/cached-r2.process.json; initial graph failed on deleted x86_emm.c, explicit CMake regeneration now running. No success claim."
+}

@@ -19,6 +19,17 @@
 #define ObReferenceObjectByHandle(handle, access, type, mode, out, info) \
     (wow_task_reference_event(handle, out) ? (NTSTATUS)0 : (NTSTATUS)0xC0000001)
 
+/***************************************************************************\
+* xxxRegisterUserHungAppHandlers
+*
+* This routine simply records the WOW callback address for notification of
+* "hung" wow apps.
+*
+* History:
+* 01-Apr-1992 jonpa      Created.
+* Added saving and duping of wowexc event handle
+\***************************************************************************/
+
 #line 508
 BOOL xxxRegisterUserHungAppHandlers(
     PFNW32ET pfnW32EndTask,

@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdkeyb.c",
+  "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+  "current_sha256": "d32313ee4993bf12135d62241eb2261188bd0696bf15846db73f80285fa0758a",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 17,
+      "original_count": 0,
+      "current_start": 17,
+      "current_count": 3
+    },
+    {
+      "kind": "replace",
+      "original_start": 165,
+      "original_count": 1,
+      "current_start": 168,
+      "current_count": 2
+    }
+  ],
+  "conditional_groups": 0,
+  "old_record_correction": "DIV-114 LPBYTE/tail checks are not present in current source; historical description is not a current necessity finding.",
+  "initial_review": "Both complete diff blocks reviewed; directory lookup and registry projection are product boundaries.",
+  "counter_review": "Common registry header supplies all used facade calls; broader NTVDM shadow header can be reduced without moving implementation. Original keyboard packet assembly and layout caching remain unchanged.",
+  "dependencies": [
+    "src/common/wow/registry.h",
+    "src/ntvdm-exe/softpc/include/mvdm_shadow_registry.h",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c"
+  ],
+  "runtime_validation": "Not run; audit recommendations only."
+}

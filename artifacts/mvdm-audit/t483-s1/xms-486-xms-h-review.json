@@ -1,0 +1,125 @@
+{
+  "path": "src/mvdm-host/xms.486/xms.h",
+  "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+  "current_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 23,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "#define SIGNALS"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile"
+      ]
+    },
+    {
+      "original_start": 27,
+      "original_count": 2,
+      "current_start": 30,
+      "current_count": 1,
+      "original": [
+        "#define OS2",
+        "#define SIGNALS"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 32,
+      "original_count": 2,
+      "current_start": 36,
+      "current_count": 1,
+      "original": [
+        "#define OS2",
+        "#define FLAT_32"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 44,
+      "original_count": 2,
+      "current_start": 50,
+      "current_count": 1,
+      "original": [
+        "#define WIN",
+        "#define API16"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile"
+      ]
+    },
+    {
+      "original_start": 63,
+      "original_count": 1,
+      "current_start": 70,
+      "current_count": 1,
+      "original": [
+        "#define NOALIGN_32"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 73,
+      "original_count": 2,
+      "current_start": 82,
+      "current_count": 1,
+      "original": [
+        "#include <conio.h>",
+        "#include <signal.h>"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile"
+      ]
+    },
+    {
+      "original_start": 78,
+      "original_count": 2,
+      "current_start": 88,
+      "current_count": 1,
+      "original": [
+        "#include <excpt.h>",
+        "#define XCPT_SIGNAL\t0xC0010003"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 29,
+      "current": 31,
+      "logical": 28
+    },
+    {
+      "original": 34,
+      "current": 37,
+      "logical": 33
+    },
+    {
+      "original": 46,
+      "current": 51,
+      "logical": 45
+    },
+    {
+      "original": 75,
+      "current": 83,
+      "logical": 74
+    },
+    {
+      "original": 80,
+      "current": 89,
+      "logical": 79
+    }
+  ],
+  "limits": "Exclusion-only is body classification, not renewed configuration-hit proof. No backend activated or internal CPU changes authorized."
+}

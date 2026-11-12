@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/inc/wowinfo.h",
+  "original_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+  "current_sha256": "e577d1884d282e6383e9f58928a76b12fc61eeb973c355fb89211fd060bb3a21",
+  "review_complete": true,
+  "register_entries": 0,
+  "initial_review": "Differences confined to excluded conditional bodies and line scaffolding; all content outside these bodies equals original.",
+  "counter_review": "Keep selected original structs, constants and packing. Do not infer functional damage from removed nonselected debug/guest-declaration fallback bodies.",
+  "excluded_conditions": [
+    "#ifndef UNALIGNED"
+  ],
+  "evidence": "Whole-file normalized comparison after omitting only named excluded groups and #line; WOW32 precomp/wow32.h establishes selected declaration context.",
+  "limits": "Not a fresh compiler/preprocessor run or all-context reachability proof.",
+  "runtime_validation": "None; source unchanged."
+}

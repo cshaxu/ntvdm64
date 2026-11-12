@@ -1,0 +1,172 @@
+{
+  "path": "src/mvdm-host/dpmi32/modesw.c",
+  "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+  "current_sha256": "7dd7d5fe43e2ba7ced3855e36df2bdbebd26603cf637439d7a6fc59c4ecee280",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 26,
+      "original_count": 0,
+      "current_start": 26,
+      "current_count": 5
+    },
+    {
+      "kind": "insert",
+      "original_start": 27,
+      "original_count": 0,
+      "current_start": 32,
+      "current_count": 153
+    },
+    {
+      "kind": "insert",
+      "original_start": 49,
+      "original_count": 0,
+      "current_start": 207,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 50,
+      "original_count": 2,
+      "current_start": 209,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 53,
+      "original_count": 0,
+      "current_start": 212,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 64,
+      "original_count": 0,
+      "current_start": 224,
+      "current_count": 17
+    },
+    {
+      "kind": "replace",
+      "original_start": 66,
+      "original_count": 2,
+      "current_start": 243,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 69,
+      "original_count": 4,
+      "current_start": 245,
+      "current_count": 12
+    },
+    {
+      "kind": "insert",
+      "original_start": 74,
+      "original_count": 0,
+      "current_start": 258,
+      "current_count": 4
+    },
+    {
+      "kind": "insert",
+      "original_start": 76,
+      "original_count": 0,
+      "current_start": 264,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 97,
+      "original_count": 0,
+      "current_start": 286,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 98,
+      "original_count": 2,
+      "current_start": 288,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 101,
+      "original_count": 0,
+      "current_start": 291,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 113,
+      "original_count": 0,
+      "current_start": 304,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 114,
+      "original_count": 0,
+      "current_start": 306,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 119,
+      "original_count": 0,
+      "current_start": 312,
+      "current_count": 14
+    },
+    {
+      "kind": "insert",
+      "original_start": 120,
+      "original_count": 0,
+      "current_start": 327,
+      "current_count": 5
+    }
+  ],
+  "initial_findings": [
+    "Diagnostic dependency plus functional page-domain and fast-BOP dependencies are mixed.",
+    "Local CCPU index constants and externs duplicate source-owned declarations.",
+    "53:01 captures original DS, ESP, SS, EIP, CS frame before setters mutate segment caches.",
+    "GDT installation precedes IDT validation; failed lookup returns to caller after partial table mutation.",
+    "NT clearing and PE-before-segment-load order have source rationale; protected setter failures are not handled.",
+    "Restore active WOW page domain after protected frame installation.",
+    "Mode report only consumes diagnostic register values.",
+    "BOP FD consumes a five-word real continuation unlike 53:01 and helper transitions.",
+    "BOP FD mode-state report is diagnostic.",
+    "Clear PE before loading DOSX real CS; keep CPL and RM_BIT coherent.",
+    "Full six-segment pseudo-descriptor refresh replaces original SS-limit-only workaround.",
+    "Helper real-mode report is diagnostic.",
+    "Fast-BOP gate must follow changed PE.",
+    "Temporary protected CS/SS carriers precede caller frame restoration.",
+    "Helper restores active WOW paging/GDT after PE transition.",
+    "Protected helper mode report is diagnostic."
+  ],
+  "pending": [
+    "Exact guest-visible failure owner and whether failed IDT is reachable under supported publication sequence.",
+    "Supported invalid-frame contract, restart state and exact error delivery authority.",
+    "Per-segment continuation requirements and equivalence of broad refresh versus original SS-only workaround.",
+    "Which callers require temporary CS/SS before restore and how failed carrier loading is delivered."
+  ],
+  "runtime_validation": "Source and existing fixture inspection only; no build/runtime run; no modesw.c change.",
+  "register_entries": 16,
+  "counter_review": [
+    "Removing reports must not remove mode synchronization or page-domain operations.",
+    "Segment indices 0..5 match CCPU use; moving declarations alone is not an algorithm simplification.",
+    "Original i386/dpmi386.c reads offsets 0,2,6,8,12. CCPU setters execute descriptor loads rather than passive context writes.",
+    "pm_entry_contract_fixture invalid-IDT case counts register writes but does not check gdt; its pass cannot prove unchanged state.",
+    "c_xtrn.c catches CPU exceptions and returns interface_error; passive original CONTEXT stores do not share that failure contract. Mock setters cannot prove delivery.",
+    "Provider returns 1 when inactive and otherwise fails only if PE=0. This path has set PE; paging/GDT restoration is not redundant.",
+    "No transition or return value depends on the report.",
+    "Original dpmi386.c uses offsets 0,2,4,6,8; load_data_seg/load_stack_seg update base/selector in real mode but leave attribute cache, so pseudo refresh is not duplicate setter work.",
+    "Keep the preceding guest continuation loads.",
+    "c_setCS calls load_code_seg and validates protected selectors when PE=1; original DOSX real CS is not guaranteed a valid protected selector.",
+    "load_pseudo_descr changes limit, R/W/E/C/X/DPL, not base. It is necessary for some transitions but reset/IRET usage alone does not prove this helper requires all six resets.",
+    "Keep cache refresh pending its own semantic review.",
+    "Provider updates RM_BIT through SAS only after fast selector allocation; original dpmi386.c publishes same mode bit for guest gate.",
+    "int21map callers restore state later; source c_setCS/SS validates now and returns interface_error. Comment rationale is not proof every call needs both carriers.",
+    "Failure return cannot be inferred merely from discarded status; provider has no other false return.",
+    "Do not remove page-domain restore with report."
+  ],
+  "excluded_structure": "i386 kernel-VDM branches and line scaffolding separately excluded; no substantive code claimed there."
+}

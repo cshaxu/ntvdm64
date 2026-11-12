@@ -1,0 +1,3521 @@
+{
+  "file_sequence": 257,
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+  "current_sha256": "d4dc6eb55974a786fbef1148a1c3a4952d3edf0918ea8da22aacc73a2638ed60",
+  "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+  "review_complete": true,
+  "status": "necessity-classification complete; recommendations not implemented",
+  "procedure": "Read current and pinned original differences; inspect actual production callers and existing fixture source. No build or test run and no product edits.",
+  "findings": [
+    {
+      "current_range": [
+        279,
+        315
+      ],
+      "decision": "minimize",
+      "finding": "Preserve atomic event-map operations; take-event CAS loop can be replaced with an InterlockedAnd of the complemented mask, returning whether any selected bit existed in the returned old value.",
+      "counter_review": "Both linearize consumption at one atomic operation; unrelated bits survive, concurrent same-bit raises before consumption coalesce and those after it survive. Existing early FALSE may linearize at its snapshot; atomic AND may linearize later without changing the contract. This does not turn the bit map into a counted-event queue.",
+      "change_plan": "Replace only c_cpu_take_event body with old-value mask test around InterlockedAnd; retain snapshot/raise/clear semantics and all consumer ordering. Recommendation only.",
+      "callers": "HALT SIGALRM; normal RESET/SIGALRM/SAD/IRQ; protected STI IRQ; restored-context RESET.",
+      "verification": "test/observation/verify-ccpu-notification.ps1 extracts actual production helpers. Existing fixture exercises separate concurrent raises but waits for both before consumption: add concurrent raise/consume controls and same-bit before/after ordering when implementing."
+    },
+    {
+      "current_range": [
+        555,
+        620
+      ],
+      "decision": "pending-evidence",
+      "finding": "Debug and IRQ helper entries are production-connected, not unused hardware-V86 remnants.",
+      "evidence": [
+        "src/mvdm-host/softpc.new/host/src/nt_inthk.c:435,469,485,542",
+        "src/ntvdm-exe/debugger/source/dbg_registers.c:111,185"
+      ],
+      "missing_evidence": "Complete protected exception resume/RF/debug pending/IRQ ordering comparison against original CPU operations and actual context switching. No conclusion that all monitor semantics are justified."
+    },
+    {
+      "current_range": [
+        4018,
+        4024
+      ],
+      "decision": "pending-evidence",
+      "finding": "Wake carrier retains wake until HALT waits; worker creates it at begin and closes at cleanup. Startup and shutdown comments alone do not prove all producers have stopped.",
+      "evidence": [
+        "src/ntvdm-exe/softpc/mvdm_softpc_ccpu_wait.c",
+        "src/ntvdm-exe/softpc/mvdm_standalone_worker.c:81-99,137-151,227-230",
+        "src/mvdm-host/softpc.new/host/src/nt_reset.c:313-324",
+        "src/mvdm-host/softpc.new/host/src/nt_timer.c:327-333"
+      ],
+      "missing_evidence": "host_applClose calls nt_remove_event_thread and TerminateHeartBeat, but TerminateHeartBeat waits 10000ms without inspecting result (and skips wait on same thread). Need prove all paths reaching worker wait_end have stopped producers, or identify minimal existing lifetime-owner repair. No claim of proven use-after-close; no new timeout or retry authorized."
+    },
+    {
+      "current_range": [
+        4437,
+        4458
+      ],
+      "decision": "pending-evidence",
+      "finding": "Mixed diff contains substantive signed ica_intack rejection guard and shared IRQ dispatch as well as an excluded non-NTVDM branch. Must not drop the entire diff merely because it contains #error.",
+      "missing_evidence": "Finish PIC rejection contract and shared tail equivalence; register separately from exclusions."
+    },
+    {
+      "current_range": [
+        845,
+        849
+      ],
+      "decision": "retain",
+      "finding": "ccpu386ThrdExptnPtr returns jmp_buf pointer; dereferencing supplies the array object required by setjmp. Same correction applies to simulation frame.",
+      "evidence": [
+        "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c:233-258"
+      ],
+      "counter_review": "Provider can return NULL on BADID or absent TLS; retaining correct setjmp type does not prove failure handling. Null-frame policy belongs to provider/consumer contract and remains unresolved."
+    },
+    {
+      "current_range": [
+        910,
+        935
+      ],
+      "decision": "delete",
+      "finding": "Instruction trace hooks include fixed selector/IP filters and are gated by MVDM_CCPU_DECODE_DIAGNOSTICS; not CPU execution semantics.",
+      "change_plan": "Remove entire instruction diagnostic block and its sole-use termination header/comment at 245-249; reconcile diagnostic providers and diagnostic build selector uses before deleting shared definitions. Preserve original instruction dispatch.",
+      "verification": "Selected product preprocessed tokens and compiled image comparison; remove or adapt diagnostic-only fixture assumptions rather than delete runtime coverage."
+    },
+    {
+      "current_range": [
+        4480,
+        4499
+      ],
+      "decision": "pending-evidence",
+      "finding": "Production task exchange calls restore-debug-context under lock; it defers exception delivery to NEXT_INST. Fixture tests breakpoint-before-execution, pending trap, RF suppression, no breakpoint, and RESET priority.",
+      "evidence": [
+        "src/ntvdm-exe/debugger/source/dbg_registers.c:97-115",
+        "test/mvdm-host/ccpu_monitor_boundary_fixture.c:148-175; cases109-112,117"
+      ],
+      "missing_evidence": "Full context switch and exceptional unwind semantics across real WOW task scheduling, including pending latch cancellation at c_cpu_continue. Existing fixture source is not a new passing run."
+    },
+    {
+      "current_range": [
+        4851,
+        4879
+      ],
+      "decision": "retain",
+      "finding": "Saved frame pointer lets abnormal SEH unwind retire only its own top simulation frame; normal FE path already pops and must not pop its parent twice.",
+      "evidence": [
+        "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c:126-201,204-232",
+        "test/mvdm-host/wow_callback_abort_ccpu_fixture.c"
+      ],
+      "change_plan": "Keep same frame identity through setjmp and finally; do not replace with unconditional level decrement or global reset. Track NULL-return provider contract separately.",
+      "verification": "Ordinary nested FE, abnormal callback abort, parent resume and preserved last error. No fresh execution."
+    }
+  ],
+  "remaining": [],
+  "complete_textual_delta_inventory": [
+    {
+      "original_start": 26,
+      "original_count": 1,
+      "current_start": 26,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "#include  <Cpu_c.h>\t/* Intel pointer manipulation macros */"
+      ],
+      "current_text": [
+        "#line 26",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 38,
+      "original_count": 0,
+      "current_start": 40,
+      "current_count": 4,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-072): publish the existing owner headers whose",
+        " * declarations the historical executor previously inferred implicitly. */",
+        "#include <c_addr.h>\t/* C CPU address calculation contract */",
+        "#line 38"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 41,
+      "original_count": 0,
+      "current_start": 47,
+      "current_count": 2,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#include <c_seg.h>\t/* Segment-cache and pseudo-descriptor contract */",
+        "#line 41"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 52,
+      "original_count": 0,
+      "current_start": 60,
+      "current_count": 3,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#include <ica.h>",
+        "#include <timer.h>",
+        "#include <mvdm_softpc_ccpu_wait.h>"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 53,
+      "original_count": 0,
+      "current_start": 64,
+      "current_count": 5,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "extern void force_yoda(void);",
+        "extern void TakeNpxExceptionInt(void);",
+        "extern void EDL_fast_bop(ULONG immed);",
+        "",
+        "#line 53"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 156,
+      "original_count": 6,
+      "current_start": 173,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "#include  <bswap.h>\t/*     ...     */",
+        "#include  <cmpxchg.h>\t/*     ...     */",
+        "#include  <invd.h>\t/*     ...     */",
+        "#include  <invlpg.h>\t/*     ...     */",
+        "#include  <wbinvd.h>\t/*     ...     */",
+        "#include  <xadd.h>\t/*     ...     */"
+      ],
+      "current_text": [
+        "#line 156",
+        "#error Unsupported excluded original configuration",
+        "#line 162"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 198,
+      "original_count": 5,
+      "current_start": 213,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "",
+        "#define L_OFF 3",
+        "#define H_OFF 2",
+        "#define X_OFF 2",
+        ""
+      ],
+      "current_text": [
+        "#line 198",
+        "#error Unsupported excluded original configuration",
+        "#line 203"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 209,
+      "original_count": 2,
+      "current_start": 223,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t/* for raising NPX interrupt */",
+        "#define IRQ5_SLAVE_PIC\t5"
+      ],
+      "current_text": [
+        "#line 209",
+        "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+        "#line 211"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 222,
+      "original_count": 1,
+      "current_start": 239,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "#define CPU_HW_NPX_INT_MASK         \t(1 << 16)"
+      ],
+      "current_text": [
+        "#line 222",
+        "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 226,
+      "original_count": 0,
+      "current_start": 245,
+      "current_count": 6,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#ifdef NTVDM",
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\"",
+        "/* DIVERGENCE: MVDM-HOST-DIV-325. Coarse worker diagnostics remain available;",
+        " * per-instruction attribution is selected only by the diagnostic build. */",
+        "#endif",
+        "#line 226"
+      ],
+      "review_disposition": "delete"
+    },
+    {
+      "original_start": 227,
+      "original_count": 1,
+      "current_start": 252,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "extern IU32\tcpu_interrupt_map ;"
+      ],
+      "current_text": [
+        "#line 227",
+        "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 229,
+      "original_count": 1,
+      "current_start": 255,
+      "current_count": 2,
+      "contains_error": false,
+      "original_text": [
+        "LOCAL IUM32\tcpu_interrupt_map = 0;"
+      ],
+      "current_text": [
+        "#line 229",
+        "LOCAL volatile IUM32\tcpu_interrupt_map = 0;"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 251,
+      "original_count": 1,
+      "current_start": 279,
+      "current_count": 37,
+      "contains_error": false,
+      "original_text": [
+        "\tcpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "\tInterlockedAnd((volatile LONG *)&cpu_interrupt_map,",
+        "\t\t~(LONG)CPU_SIGALRM_EXCEPTION_MASK);",
+        "}",
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-214): CPU40 receives timer, reset, host-I/O and",
+        " * PIC notifications from host threads.  The original 32-bit source used",
+        " * ordinary read/modify/write operations on this shared bit map, which can",
+        " * lose an unrelated notification on current preemptive hosts.  Keep the",
+        " * original event bits and their consumers, but make snapshot, raise and",
+        " * consume atomic.  This is not a PIC, BIOS, or guest-state replacement. */",
+        "LOCAL IUM32 c_cpu_event_snapshot IFN0()",
+        "{",
+        "   return (IUM32)InterlockedCompareExchange(",
+        "      (volatile LONG *)&cpu_interrupt_map, 0, 0);",
+        "}",
+        "",
+        "LOCAL VOID c_cpu_raise_event IFN1(IUM32, mask)",
+        "{",
+        "   InterlockedOr((volatile LONG *)&cpu_interrupt_map, (LONG)mask);",
+        "}",
+        "",
+        "LOCAL IBOOL c_cpu_take_event IFN1(IUM32, mask)",
+        "{",
+        "   IUM32 observed;",
+        "   IUM32 desired;",
+        "",
+        "   do {",
+        "      observed = c_cpu_event_snapshot();",
+        "      if (!(observed & mask))",
+        "         return FALSE;",
+        "      desired = observed & ~mask;",
+        "   } while ((IUM32)InterlockedCompareExchange(",
+        "      (volatile LONG *)&cpu_interrupt_map, (LONG)desired,",
+        "      (LONG)observed) != observed);",
+        "",
+        "   return TRUE;",
+        "#line 252"
+      ],
+      "review_disposition": "minimize"
+    },
+    {
+      "original_start": 283,
+      "original_count": 21,
+      "current_start": 347,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "",
+        "/* We must delay the actual synch (i.e. the c_cpu_unsimulate)",
+        " * until after processing any trap/breakpoint stuff.",
+        " */",
+        "#define\tPIG_SYNCH(action)\t\t\t\\",
+        "\tSYNCH_TICK();\t\t\t\t\\",
+        "\tif (ccpu_pig_enabled)\t\t\t\\",
+        "\t{\t\t\t\t\t\\",
+        "\t\tpig_cpu_action = (action);\t\\",
+        "\t\tquick_mode = FALSE;\t\t\\",
+        "\t\tpig_synch_required = TRUE;\t\\",
+        "\t\tCANCEL_HOST_IP();\t\t\\",
+        "\t}",
+        "\t",
+        "",
+        "LOCAL IBOOL pig_synch_required = FALSE; /* This indicates that the current",
+        "\t\t\t\t\t * instruction needs a pig synch,",
+        "\t\t\t\t\t * and after trap/breakpoint",
+        "\t\t\t\t\t * processing we must return to",
+        "\t\t\t\t\t * the pigger.",
+        "\t\t\t\t\t */"
+      ],
+      "current_text": [
+        "#line 283",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 304"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 331,
+      "original_count": 4,
+      "current_start": 378,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "LOCAL int prefix_length = 0;",
+        "#define\tCHECK_PREFIX_LENGTH()\t\t\t\t\\",
+        "\tif (++prefix_length >= MAX_INTEL_PREFIX)\t\\",
+        "\t\tInt6();"
+      ],
+      "current_text": [
+        "#line 331",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 335"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 474,
+      "original_count": 22,
+      "current_start": 521,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "",
+        "#define SYNCH_TICK()\t\t\t\t\t\\",
+        "\t{\t\t\t\t\t\t\\",
+        "\t\tPigSynchCount += 1;\t\t\t\\",
+        "\t\tif (cpu_heartbeat != 0)\t\t\t\\",
+        "\t\t{\t\t\t\t\t\\",
+        "\t\t\tif ((--cpu_heartbeat) == 0)\t\\",
+        "\t\t\t{\t\t\t\t\\",
+        "\t\t\t\tdispatch_q_event();\t\\",
+        "\t\t\t\tquick_mode = FALSE;\t\\",
+        "\t\t\t}\t\t\t\t\\",
+        "\t\t}\t\t\t\t\t\\",
+        "\t}",
+        "",
+        "#define QUICK_EVENT_TICK()\t/* Nothing */",
+        "",
+        "GLOBAL void SynchTick IFN0()",
+        "{",
+        "\tquick_mode = FALSE;",
+        "\tSYNCH_TICK();",
+        "}",
+        ""
+      ],
+      "current_text": [
+        "#line 474",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.",
+        "#line 496"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 513,
+      "original_count": 23,
+      "current_start": 542,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "",
+        "extern IBOOL qEventsToDo;",
+        "extern IBOOL checkForQEvent IPT0();",
+        "",
+        "#define SYNCH_TICK()",
+        "",
+        "#define QUICK_EVENT_TICK() \t\t\t\t\\",
+        "\t{\t\t\t\t\t\t\\",
+        "\t\tif (qEventsToDo)\t\t\t\\",
+        "\t\t{\t\t\t\t\t\\",
+        "\t\t\tif (checkForQEvent())\t\t\\",
+        "\t\t\t{\t\t\t\t\\",
+        "\t\t\t\tdispatch_q_event();\t\\",
+        "\t\t\t\tquick_mode = FALSE;\t\\",
+        "\t\t\t}\t\t\t\t\\",
+        "\t\t}\t\t\t\t\t\\",
+        "\t}",
+        "",
+        "#ifdef host_timer_event",
+        "#undef host_timer_event",
+        "#endif",
+        "",
+        "#define host_timer_event()"
+      ],
+      "current_text": [
+        "#line 513",
+        "#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.",
+        "#line 536"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 539,
+      "original_count": 5,
+      "current_start": 549,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "extern int ica_intack IPT0();",
+        "extern int VectorBase8259Slave IPT0();",
+        "#if !defined(PROD)",
+        "IMPORT IBOOL sf_debug_char_waiting();",
+        "#endif\t/* !PROD */"
+      ],
+      "current_text": [
+        "#line 539",
+        "#error Excluded unsupported SFELLOW configuration",
+        "#line 544"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 545,
+      "original_count": 0,
+      "current_start": 553,
+      "current_count": 68,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#line 545",
+        "",
+        "#if defined(NTVDM) && !defined(SFELLOW)",
+        "static BOOL debug_context_resume_check;",
+        "/* DIVERGENCE(MVDM-HOST-DIV-476): a monitor-emulated debug-register write",
+        " * must leave fast execution just as CPU40's original MOV DR instruction does. */",
+        "GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)",
+        "{",
+        "   MOV_DR(index, value);",
+        "   quick_mode = FALSE;",
+        "   /* Handled exceptions resume at NEXT_INST, after the usual inter-",
+        "    * instruction check. Check the newly armed execution breakpoint now. */",
+        "   CCPU_save_EIP = GET_EIP();",
+        "   if (nr_inst_break && GET_RF() == 0) {",
+        "      check_for_inst_exception(GET_CS_BASE() + GET_EIP());",
+        "      if (debug_exception_pending) {",
+        "         doing_contributory = FALSE;",
+        "         Int1_f();",
+        "      }",
+        "   }",
+        "}",
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-478): update the shared execution bank through",
+        " * CPU40's debug provider and leave the fast instruction path. */",
+        "GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)",
+        "{",
+        "   IU32 index;",
+        "   for (index = 0; index != 4; ++index) MOV_DR(index, registers[index]);",
+        "   MOV_DR(6, registers[4]);",
+        "   MOV_DR(7, registers[5]);",
+        "   quick_mode = FALSE;",
+        "}",
+        "",
+        "/* A task restore resumes at NEXT_INST, after the normal boundary checks. */",
+        "GLOBAL VOID ccpu_restore_debug_context IFN2(const IU32 *, registers, BOOL, pending)",
+        "{",
+        "   ccpu_apply_debug_context(registers);",
+        "   debug_exception_pending = pending;",
+        "   debug_context_resume_check = TRUE;",
+        "}",
+        "",
+        "static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)",
+        "{",
+        "   extern BOOL host_hwint_hook IPT1(IS32, int_no);",
+        "   cpu_hw_interrupt_number = (IU16)vector;",
+        "   EXT = EXTERNAL;",
+        "   SYNCH_TICK();",
+        "   if (!host_hwint_hook(vector))",
+        "      do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);",
+        "   CCPU_save_EIP = GET_EIP();",
+        "}",
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-475): a handled protected STI completes its",
+        " * fault before delivering the same CPU-owned external interrupt path. */",
+        "GLOBAL VOID ccpu_monitor_dispatch_irq IFN0()",
+        "{",
+        "   IU32 hook_address = 0;",
+        "   IS32 vector;",
+        "   if (!c_cpu_take_event(CPU_HW_INT_MASK)) return;",
+        "   vector = ica_intack(&hook_address);",
+        "   if (vector == -1) return;",
+        "   doing_contributory = FALSE;",
+        "   /* Normal NEXT_INST saves the completed instruction before dispatch; a",
+        "    * fault while constructing the interrupt frame must see the same EIP. */",
+        "   CCPU_save_EIP = GET_EIP();",
+        "   ccpu_dispatch_accepted_irq(vector);",
+        "}",
+        "#endif"
+      ],
+      "review_disposition": "split-five-registered-items"
+    },
+    {
+      "original_start": 593,
+      "original_count": 4,
+      "current_start": 670,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "#define SETUP_HOST_IP(x)\t\t\t\t\t\t\t\\",
+        "   ip_phy_addr = usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) & SasWrapMask;\t\\",
+        "   x = Sas.SasPtrToPhysAddrByte(ip_phy_addr);\t\t\t\t\t\\",
+        "   pg_end = AddCpuPtrLS8(CeilingIntelPageLS8(x), 1);"
+      ],
+      "current_text": [
+        "#line 593",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 597"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 600,
+      "original_count": 6,
+      "current_start": 677,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "#define SETUP_HOST_IP(x)\t\t\t\t\t\t\t\\",
+        "   ip_phy_addr = usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) &\t\t\\",
+        "\t\t    SasWrapMask;\t\t\t\t\t\t\\",
+        "   x = &CCPU_M[-ip_phy_addr];\t\t\t\t\t\t\t\\",
+        "   ip_phy_addr = (ip_phy_addr & ~0xfff) + 0x1000;\t\t\t\t\\",
+        "   pg_end = &CCPU_M[-ip_phy_addr];"
+      ],
+      "current_text": [
+        "#line 600",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.",
+        "#line 606"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 631,
+      "original_count": 5,
+      "current_start": 706,
+      "current_count": 5,
+      "contains_error": true,
+      "original_text": [
+        "/*",
+        " * memory-mapped I/O information. Counts number of memory-mapped inputs and",
+        " * outputs since the last pig synch.",
+        " */",
+        "GLOBAL\tstruct pig_mmio_info\tpig_mmio_info;"
+      ],
+      "current_text": [
+        "#line 631",
+        "#error Excluded unsupported PIG configuration",
+        "#line 637",
+        "#endif /* PIG && SFELLOW */",
+        "#line 638"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 637,
+      "original_count": 2,
+      "current_start": 712,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "#endif /* PIG && SFELLOW */",
+        ""
+      ],
+      "current_text": [
+        "#line 639"
+      ],
+      "review_disposition": "excluded-body-fragment",
+      "paired_opcode": 21
+    },
+    {
+      "original_start": 762,
+      "original_count": 4,
+      "current_start": 836,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "   pig_synch_required = FALSE;",
+        "#if defined(SFELLOW)",
+        "   pig_mmio_info.flags &= ~(MM_INPUT_OCCURRED | MM_OUTPUT_OCCURRED);",
+        "#endif\t/* SFELLOW */"
+      ],
+      "current_text": [
+        "#line 762",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 766"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 770,
+      "original_count": 1,
+      "current_start": 845,
+      "current_count": 5,
+      "contains_error": false,
+      "original_text": [
+        "   setjmp(ccpu386ThrdExptnPtr());"
+      ],
+      "current_text": [
+        "   /* DIVERGENCE(MVDM-HOST-DIV-073): the helper returns jmp_buf *, while",
+        "    * modern setjmp requires the referred-to jmp_buf array object. */",
+        "#line 770",
+        "   setjmp(*ccpu386ThrdExptnPtr());",
+        "#line 771"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 772,
+      "original_count": 1,
+      "current_start": 851,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "   setjmp(next_inst[simulate_level-1]);"
+      ],
+      "current_text": [
+        "#line 772",
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 776,
+      "original_count": 6,
+      "current_start": 856,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "   /* If we have taken a fault the EDL Cpu will have checked on",
+        "    * the resulting transfer of control.",
+        "    */",
+        "   if (took_absolute_toc || took_relative_jump)",
+        "\t   goto CHECK_INTERRUPT;",
+        "   quick_mode = TRUE;"
+      ],
+      "current_text": [
+        "#line 776",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.",
+        "#line 782"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 794,
+      "original_count": 1,
+      "current_start": 873,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "   /* We do not want to do check_I() in both CPUs */"
+      ],
+      "current_text": [
+        "#line 794",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 804,
+      "original_count": 2,
+      "current_start": 885,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "   save_last_inst_details(NULL);",
+        "   prefix_length = 0;"
+      ],
+      "current_text": [
+        "#line 804",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 806"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 827,
+      "original_count": 0,
+      "current_start": 910,
+      "current_count": 26,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "/* DIVERGENCE: MVDM-HOST-DIV-325. Do not charge normal guest execution for",
+        " * project trace observers, even when their runtime trace paths are unset. */",
+        "#if defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)",
+        "   mvdm_softpc_report_nt_transition(getCS(), getEIP(), getEFLAGS(),",
+        "      getSS(), getESP());",
+        "   if (getCS() == 0x00c7u && getEIP() >= 0x4f6au &&",
+        "       getEIP() < 0x4f88u)",
+        "      mvdm_softpc_report_wow_allocsel_instruction(getCS(), getEIP(),",
+        "         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());",
+        "   if ((getCS() == 0x00c7u && getEIP() >= 0x4f88u &&",
+        "       getEIP() < 0x4fa4u) ||",
+        "       (getCS() == 0x01c7u && getEIP() >= 0x3947u &&",
+        "       getEIP() < 0x3a60u))",
+        "      mvdm_softpc_report_wow_setdescriptor_instruction(getCS(), getEIP(),",
+        "         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());",
+        "   if (getCS() == 0x021fu && (getEIP() == 0x2c26u ||",
+        "       getEIP() == 0x2d3du))",
+        "      mvdm_softpc_report_wow_getsel_instruction(getCS(), getEIP(), getAX(),",
+        "         getCX(), getSI(), getDS(), getEFLAGS());",
+        "   if (getCS() == 0x021fu && getEIP() >= 0x3482u &&",
+        "       getEIP() < 0x3492u)",
+        "      mvdm_softpc_report_wow_longptradd_instruction(getCS(), getEIP(),",
+        "         getAX(), getBX(), getCX(), getDX(), getSS(), getESP());",
+        "#endif",
+        "",
+        "#line 827"
+      ],
+      "review_disposition": "delete"
+    },
+    {
+      "original_start": 1098,
+      "original_count": 7,
+      "current_start": 1208,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t    note_486_instruction(\"INVLPG\");",
+        "",
+        "\t    if ( GET_CPL() != 0 )",
+        "\t       GP((IU16)0, FAULT_CCPU_INVLPG_ACCESS);",
+        "\t    D_Mm(0);",
+        "\t    F_Mm(0);",
+        "\t    INVLPG(ops[0].sng);"
+      ],
+      "current_text": [
+        "#line 1098",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1105"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1223,
+      "original_count": 5,
+      "current_start": 1332,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"INVD\");",
+        "",
+        "\t if ( GET_CPL() != 0 )",
+        "\t    GP((IU16)0, FAULT_CCPU_INVD_ACCESS);",
+        "\t INVD();"
+      ],
+      "current_text": [
+        "#line 1223",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1228"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1237,
+      "original_count": 5,
+      "current_start": 1347,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"WBINVD\");",
+        "",
+        "\t if ( GET_CPL() != 0 )",
+        "\t    GP((IU16)0, FAULT_CCPU_WBIND_ACCESS);",
+        "\t WBINVD();"
+      ],
+      "current_text": [
+        "#line 1237",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1242"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1250,
+      "original_count": 3,
+      "current_start": 1360,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t SET_EIP(CCPU_save_EIP);",
+        "\t CANCEL_HOST_IP();",
+        "\t PIG_SYNCH(CHECK_NO_EXEC);"
+      ],
+      "current_text": [
+        "#line 1250",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 1253"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1404,
+      "original_count": 1,
+      "current_start": 1515,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\tgoto TYPE39;"
+      ],
+      "current_text": [
+        "#line 1404",
+        "#error Unsupported excluded original configuration"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1476,
+      "original_count": 1,
+      "current_start": 1589,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\tgoto TYPE01;"
+      ],
+      "current_text": [
+        "#line 1476",
+        "#error Unsupported excluded original configuration"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1527,
+      "original_count": 9,
+      "current_start": 1643,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"CMPXCHG Eb Gb\");",
+        "",
+        "\t modRM = GET_INST_BYTE(p);",
+        "\t D_Eb(0, RW0, PG_W);",
+        "\t D_Gb(1);",
+        "\t F_Eb(0);",
+        "\t F_Gb(1);",
+        "\t CMPXCHG8(&ops[0].sng, ops[1].sng);",
+        "\t P_Eb(0);"
+      ],
+      "current_text": [
+        "#line 1527",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1536"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1545,
+      "original_count": 21,
+      "current_start": 1658,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"CMPXCHG Ev Gv\");",
+        "",
+        "\t modRM = GET_INST_BYTE(p);",
+        "\t if ( GET_OPERAND_SIZE() == USE16 )",
+        "\t    {",
+        "\t    D_Ew(0, RW0, PG_W);",
+        "\t    D_Gw(1);",
+        "\t    F_Ew(0);",
+        "\t    F_Gw(1);",
+        "\t    CMPXCHG16(&ops[0].sng, ops[1].sng);",
+        "\t    P_Ew(0);",
+        "\t    }",
+        "\t else   /* USE32 */",
+        "\t    {",
+        "\t    D_Ed(0, RW0, PG_W);",
+        "\t    D_Gd(1);",
+        "\t    F_Ed(0);",
+        "\t    F_Gd(1);",
+        "\t    CMPXCHG32(&ops[0].sng, ops[1].sng);",
+        "\t    P_Ed(0);",
+        "\t    }"
+      ],
+      "current_text": [
+        "#line 1545",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1566"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1574,
+      "original_count": 1,
+      "current_start": 1671,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE01;"
+      ],
+      "current_text": [
+        "#line 1574",
+        "#error Unsupported excluded original configuration"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1644,
+      "original_count": 1,
+      "current_start": 1744,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\t goto TYPE01;"
+      ],
+      "current_text": [
+        "#line 1644",
+        "#error Unsupported excluded original configuration"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1706,
+      "original_count": 10,
+      "current_start": 1810,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"XADD Eb Gb\");",
+        "",
+        "\t modRM = GET_INST_BYTE(p);",
+        "\t D_Eb(0, RW0, PG_W);",
+        "\t D_Gb(1);",
+        "\t F_Eb(0);",
+        "\t F_Gb(1);",
+        "\t XADD(&ops[0].sng, &ops[1].sng, 8);",
+        "\t P_Eb(0);",
+        "\t P_Gb(1);"
+      ],
+      "current_text": [
+        "#line 1706",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1716"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1725,
+      "original_count": 23,
+      "current_start": 1825,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"XADD Ev Gv\");",
+        "",
+        "\t modRM = GET_INST_BYTE(p);",
+        "\t if ( GET_OPERAND_SIZE() == USE16 )",
+        "\t    {",
+        "\t    D_Ew(0, RW0, PG_W);",
+        "\t    D_Gw(1);",
+        "\t    F_Ew(0);",
+        "\t    F_Gw(1);",
+        "\t    XADD(&ops[0].sng, &ops[1].sng, 16);",
+        "\t    P_Ew(0);",
+        "\t    P_Gw(1);",
+        "\t    }",
+        "\t else   /* USE32 */",
+        "\t    {",
+        "\t    D_Ed(0, RW0, PG_W);",
+        "\t    D_Gd(1);",
+        "\t    F_Ed(0);",
+        "\t    F_Gd(1);",
+        "\t    XADD(&ops[0].sng, &ops[1].sng, 32);",
+        "\t    P_Ed(0);",
+        "\t    P_Gd(1);",
+        "\t    }"
+      ],
+      "current_text": [
+        "#line 1725",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1748"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 1764,
+      "original_count": 16,
+      "current_start": 1847,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t note_486_instruction(\"BSWAP Hv\");",
+        "",
+        "\t if ( GET_OPERAND_SIZE() == USE16 )",
+        "\t    {",
+        "\t    D_Hd(0);\t\t/* BSWAP 16 bit reads 32 bit & writes 16 */",
+        "\t    F_Hd(0);\t\t/* so getting EAX -> EAX' -> AX */",
+        "\t    BSWAP(&ops[0].sng);",
+        "\t    P_Hw(0);",
+        "\t    }",
+        "\t else   /* USE32 */",
+        "\t    {",
+        "\t    D_Hd(0);",
+        "\t    F_Hd(0);",
+        "\t    BSWAP(&ops[0].sng);",
+        "\t    P_Hd(0);",
+        "\t    }"
+      ],
+      "current_text": [
+        "#line 1764",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 1780"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2200,
+      "original_count": 1,
+      "current_start": 2272,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 2200",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2241,
+      "original_count": 1,
+      "current_start": 2315,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 2241",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2264,
+      "original_count": 1,
+      "current_start": 2340,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 2264",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2305,
+      "original_count": 1,
+      "current_start": 2383,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 2305",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2318,
+      "original_count": 43,
+      "current_start": 2398,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      if ((opcode != 0xeb) && (ops[0].sng == 3))",
+        "      {",
+        "\t/* Convert the EDL cpu super-instructions",
+        "\t *",
+        "\t *\tJcc\t.+03",
+        "\t *\tJMPN\tdst",
+        "\t *",
+        "\t * into",
+        "\t *",
+        "\t *\tJcc'\tdest",
+        "\t */",
+        "\t int offset_in_page = DiffCpuPtrsLS8(FloorIntelPageLS8(p), p);",
+        "",
+        "\t if ((GET_CS_AR_X() == 0)",
+        "\t     && (offset_in_page != 0)",
+        "\t     && (offset_in_page <= 0xFFD)",
+        "\t     && (*p == 0xe9)) ",
+        "\t {",
+        "\t\t p_start = p;",
+        "\t\t (void)GET_INST_BYTE(p);",
+        "\t\t switch (opcode)",
+        "\t\t {",
+        "\t\t case 0x70:   /* T2 JO   Jb */   inst32 = JNO;    goto TYPE0F80;",
+        "\t\t case 0x71:   /* T2 JNO  Jb */   inst32 = JO;     goto TYPE0F80;",
+        "\t\t case 0x72:   /* T2 JB   Jb */   inst32 = JNB;    goto TYPE0F80;",
+        "\t\t case 0x73:   /* T2 JNB  Jb */   inst32 = JB;     goto TYPE0F80;",
+        "\t\t case 0x74:   /* T2 JZ   Jb */   inst32 = JNZ;    goto TYPE0F80;",
+        "\t\t case 0x75:   /* T2 JNZ  Jb */   inst32 = JZ;     goto TYPE0F80;",
+        "\t\t case 0x76:   /* T2 JBE  Jb */   inst32 = JNBE;   goto TYPE0F80;",
+        "\t\t case 0x77:   /* T2 JNBE Jb */   inst32 = JBE;    goto TYPE0F80;",
+        "\t\t case 0x78:   /* T2 JS   Jb */   inst32 = JNS;    goto TYPE0F80;",
+        "\t\t case 0x79:   /* T2 JNS  Jb */   inst32 = JS;     goto TYPE0F80;",
+        "\t\t case 0x7a:   /* T2 JP   Jb */   inst32 = JNP;    goto TYPE0F80;",
+        "\t\t case 0x7b:   /* T2 JNP  Jb */   inst32 = JP;     goto TYPE0F80;",
+        "\t\t case 0x7c:   /* T2 JL   Jb */   inst32 = JNL;    goto TYPE0F80;",
+        "\t\t case 0x7d:   /* T2 JNL  Jb */   inst32 = JL;     goto TYPE0F80;",
+        "\t\t case 0x7e:   /* T2 JLE  Jb */   inst32 = JNLE;   goto TYPE0F80;",
+        "\t\t case 0x7f:   /* T2 JNLE Jb */   inst32 = JLE;    goto TYPE0F80;",
+        "\t\t default:",
+        "\t\t\t break;",
+        "\t\t }",
+        "\t }",
+        "      }"
+      ],
+      "current_text": [
+        "#line 2318",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 2361"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2366,
+      "original_count": 20,
+      "current_start": 2407,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      if (single_instruction_delay && !took_relative_jump)",
+        "      {",
+        "\t if (single_instruction_delay_enable)",
+        "\t {",
+        "\t    save_last_xcptn_details(\"STI/POPF blindspot\\n\", 0, 0, 0, 0, 0);",
+        "\t    PIG_SYNCH(CHECK_NO_EXEC);",
+        "         }",
+        "\t else",
+        "\t {",
+        "\t    save_last_xcptn_details(\"STI/POPF problem\\n\", 0, 0, 0, 0, 0);",
+        "\t }",
+        "\t break;",
+        "      }",
+        "#ifdef SYNCH_BOTH_WAYS",
+        "      took_relative_jump = TRUE;",
+        "#endif\t/* SYNCH_BOTH_WAYS */",
+        "      if (took_relative_jump)",
+        "      {",
+        "\t PIG_SYNCH(CHECK_ALL);",
+        "      }"
+      ],
+      "current_text": [
+        "#line 2366",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 2386"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2832,
+      "original_count": 4,
+      "current_start": 2857,
+      "current_count": 5,
+      "contains_error": true,
+      "original_text": [
+        "      if (getIF()==1 && oldIF==0)",
+        "      {",
+        "          /* locally update IP - interrupts are supressed after POPF */",
+        "          UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 2832",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 2846",
+        "#endif /* PIG */",
+        "#line 2847"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 2837,
+      "original_count": 11,
+      "current_start": 2863,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t  /* We need to pig sync one instr *after* an POPF that enabled",
+        "\t   * interrupts, because the A4CPU might need to take a H/W interrupt",
+        "\t   */",
+        "",
+        "\t  single_instruction_delay = TRUE;",
+        "\t  PIG_SYNCH(CHECK_ALL);",
+        "",
+        "          goto NEXT_INST;",
+        "      }",
+        "#endif /* PIG */",
+        ""
+      ],
+      "current_text": [
+        "#line 2848"
+      ],
+      "review_disposition": "excluded-body-fragment",
+      "paired_opcode": 49
+    },
+    {
+      "original_start": 3317,
+      "original_count": 6,
+      "current_start": 3333,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "          if (immed == 0xfe)",
+        "\t     SET_EIP(CCPU_save_EIP);",
+        "\t  else",
+        "\t     UPDATE_INTEL_IP(p);",
+        "\t  CANCEL_HOST_IP();",
+        "\t  PIG_SYNCH(CHECK_NO_EXEC);\t/* Everything checkable up to this point */"
+      ],
+      "current_text": [
+        "#line 3317",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 3323"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3330,
+      "original_count": 9,
+      "current_start": 3344,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t\t  case 0x03fe:",
+        "\t\t\t    SfdelayUSecs();",
+        "\t\t\t    break;",
+        "\t\t  case 0x05fe:",
+        "\t\t\t    SfsasTouchBop();",
+        "\t\t\t    break;",
+        "\t\t  case 0x06fe:",
+        "\t\t\t    SfscatterGatherSasTouch();",
+        "\t\t\t    break;"
+      ],
+      "current_text": [
+        "#line 3330",
+        "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+        "#line 3339"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3502,
+      "original_count": 9,
+      "current_start": 3512,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      /* If the destination is going to page fault, or need",
+        "       * accessing, then the EDL CPU will do so before issuing",
+        "       * the pig synch. We use the dasm386 decode to prefetch",
+        "       * a single instruction which mimics the EDL Cpu's behaviour",
+        "       * when close to a page boundary.",
+        "       */",
+        "      prefetch_1_instruction();\t/* Will PF if destination not present */",
+        "      ccpu_synch_count++;",
+        "      c_cpu_unsimulate();"
+      ],
+      "current_text": [
+        "#line 3502",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 3511"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3675,
+      "original_count": 4,
+      "current_start": 3681,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t/* Must get npx registers from test CPU",
+        "\t * This is lazily done for efficiency.",
+        "\t */",
+        "\tc_checkCpuNpxRegisters();"
+      ],
+      "current_text": [
+        "#line 3675",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 3679"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3703,
+      "original_count": 20,
+      "current_start": 3710,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      if (single_instruction_delay && !took_relative_jump)",
+        "      {",
+        "\t if (single_instruction_delay_enable)",
+        "\t {",
+        "\t    save_last_xcptn_details(\"STI/POPF blindspot\\n\", 0, 0, 0, 0, 0);",
+        "\t    PIG_SYNCH(CHECK_NO_EXEC);",
+        "         }",
+        "\t else",
+        "\t {",
+        "\t    save_last_xcptn_details(\"STI/POPF problem\\n\", 0, 0, 0, 0, 0);",
+        "\t }",
+        "\t break;",
+        "      }",
+        "#ifdef SYNCH_BOTH_WAYS",
+        "      took_relative_jump = TRUE;",
+        "#endif\t/* SYNCH_BOTH_WAYS */",
+        "      if (took_relative_jump)",
+        "      {",
+        "\t PIG_SYNCH(CHECK_ALL);",
+        "      }"
+      ],
+      "current_text": [
+        "#line 3703",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 3723"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3750,
+      "original_count": 1,
+      "current_start": 3741,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3750",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3767,
+      "original_count": 1,
+      "current_start": 3760,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\t UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3767",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3779,
+      "original_count": 1,
+      "current_start": 3774,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\t UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3779",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3795,
+      "original_count": 10,
+      "current_start": 3792,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);",
+        "      if (ops[0].sng == 0x60)",
+        "         {",
+        "\t      /* This may be a change of A20 wrap status */",
+        "\t      PIG_SYNCH(CHECK_NO_A20);",
+        "         }",
+        "      else",
+        "         {",
+        "         PIG_SYNCH(CHECK_ALL);",
+        "         }"
+      ],
+      "current_text": [
+        "#line 3795",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 3805"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3830,
+      "original_count": 1,
+      "current_start": 3821,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3830",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3878,
+      "original_count": 1,
+      "current_start": 3871,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3878",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3895,
+      "original_count": 1,
+      "current_start": 3890,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\t UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3895",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3907,
+      "original_count": 1,
+      "current_start": 3904,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\t UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3907",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3923,
+      "original_count": 1,
+      "current_start": 3922,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3923",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3949,
+      "original_count": 1,
+      "current_start": 3950,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      UPDATE_INTEL_IP(p);"
+      ],
+      "current_text": [
+        "#line 3949",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 3987,
+      "original_count": 1,
+      "current_start": 3990,
+      "current_count": 4,
+      "contains_error": false,
+      "original_text": [
+        "\t if ( cpu_interrupt_map & CPU_RESET_EXCEPTION_MASK )"
+      ],
+      "current_text": [
+        "\t /* DIVERGENCE(MVDM-HOST-DIV-214): atomically observe only, as in",
+        "\t  * the original HALT path; the normal RESET handler consumes it. */",
+        "\t if ( c_cpu_event_snapshot() & CPU_RESET_EXCEPTION_MASK )",
+        "#line 3988"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 3991,
+      "original_count": 1,
+      "current_start": 3997,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t if ( GET_IF() && cpu_interrupt_map & CPU_HW_INT_MASK )"
+      ],
+      "current_text": [
+        "\t if ( GET_IF() && (c_cpu_event_snapshot() & CPU_HW_INT_MASK) )"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 3995,
+      "original_count": 1,
+      "current_start": 4001,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t if (cpu_interrupt_map & CPU_SIGALRM_EXCEPTION_MASK)"
+      ],
+      "current_text": [
+        "\t if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 3997,
+      "original_count": 1,
+      "current_start": 4003,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t    cpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "#line 3998"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4002,
+      "original_count": 5,
+      "current_start": 4008,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\t if (cpu_interrupt_map & CPU_SAD_EXCEPTION_MASK)",
+        "\t    {",
+        "\t    cpu_interrupt_map &= ~CPU_SAD_EXCEPTION_MASK;",
+        "\t    force_yoda();",
+        "\t    }"
+      ],
+      "current_text": [
+        "#line 4002",
+        "#error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register.",
+        "#line 4007"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4011,
+      "original_count": 0,
+      "current_start": 4017,
+      "current_count": 9,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "",
+        "\t /* DIVERGENCE(MVDM-HOST-DIV-330): original CCPU leaves a ring-0 HLT",
+        "\t  * in a pure host polling loop.  The standalone host already raises the",
+        "\t  * original CCPU event bits for timer, PIC, reset and host-I/O work; its",
+        "\t  * process-local carrier retains one wake until this HLT waiter arrives.",
+        "\t  * Do not replace the event map, interrupt ordering or quick-event work. */",
+        "\t if (c_cpu_event_snapshot() == 0 && c_cpu_q_ev_get_count() == 0)",
+        "\t    mvdm_softpc_ccpu_wait_for_event();",
+        "#line 4011"
+      ],
+      "review_disposition": "pending-evidence"
+    },
+    {
+      "original_start": 4197,
+      "original_count": 5,
+      "current_start": 4212,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      /* We need to pig sync one instr *after* an STI that enabled",
+        "       * interrupts, because the A4CPU might need to take a H/W interrupt",
+        "       */",
+        "      single_instruction_delay = TRUE;",
+        "      PIG_SYNCH(CHECK_ALL);"
+      ],
+      "current_text": [
+        "#line 4197",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 4202"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4326,
+      "original_count": 1,
+      "current_start": 4340,
+      "current_count": 3,
+      "contains_error": false,
+      "original_text": [
+        "   if ( quick_mode && GET_DR(DR_DSR) == 0 )"
+      ],
+      "current_text": [
+        "   /* DIVERGENCE: MVDM-HOST-DIV-282: only a new match schedules delivery. */",
+        "   if ( quick_mode && !debug_exception_pending )",
+        "#line 4327"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4330,
+      "original_count": 1,
+      "current_start": 4346,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        " CHECK_INTERRUPT:"
+      ],
+      "current_text": [
+        "#line 4330",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4336,
+      "original_count": 1,
+      "current_start": 4354,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "   if (took_absolute_toc || took_relative_jump)"
+      ],
+      "current_text": [
+        "#line 4336",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4338,
+      "original_count": 1,
+      "current_start": 4357,
+      "current_count": 2,
+      "contains_error": false,
+      "original_text": [
+        "   if (cpu_interrupt_map & CPU_RESET_EXCEPTION_MASK)"
+      ],
+      "current_text": [
+        "   if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))",
+        "#line 4339"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4340,
+      "original_count": 1,
+      "current_start": 4360,
+      "current_count": 4,
+      "contains_error": false,
+      "original_text": [
+        "      cpu_interrupt_map &= ~CPU_RESET_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "#if defined(NTVDM) && !defined(SFELLOW)",
+        "CPU_RESTORED_RESET:",
+        "#endif",
+        "#line 4341"
+      ],
+      "review_disposition": "pending-evidence"
+    },
+    {
+      "original_start": 4354,
+      "original_count": 1,
+      "current_start": 4377,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "   if (took_absolute_toc || took_relative_jump)"
+      ],
+      "current_text": [
+        "#line 4354",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4356,
+      "original_count": 1,
+      "current_start": 4380,
+      "current_count": 2,
+      "contains_error": false,
+      "original_text": [
+        "   if (cpu_interrupt_map & CPU_SIGALRM_EXCEPTION_MASK)"
+      ],
+      "current_text": [
+        "   if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))",
+        "#line 4357"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4358,
+      "original_count": 1,
+      "current_start": 4383,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "      cpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "#line 4359"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4362,
+      "original_count": 1,
+      "current_start": 4387,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "   if (cpu_interrupt_map & CPU_SAD_EXCEPTION_MASK)"
+      ],
+      "current_text": [
+        "   if (c_cpu_take_event(CPU_SAD_EXCEPTION_MASK))"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4364,
+      "original_count": 1,
+      "current_start": 4389,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "      cpu_interrupt_map &= ~CPU_SAD_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "#line 4365"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4382,
+      "original_count": 3,
+      "current_start": 4407,
+      "current_count": 2,
+      "contains_error": false,
+      "original_text": [
+        "   if ( GET_DR(DR_DSR) &",
+        "\t(DSR_BT_MASK | DSR_B3_MASK | DSR_B2_MASK | DSR_B1_MASK |",
+        "\t DSR_B0_MASK) )"
+      ],
+      "current_text": [
+        "   if ( debug_exception_pending ) /* MVDM-HOST-DIV-282 */",
+        "#line 4385"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4393,
+      "original_count": 1,
+      "current_start": 4417,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "      if ( GET_DR(DR_DSR) )"
+      ],
+      "current_text": [
+        "      if ( debug_exception_pending ) /* MVDM-HOST-DIV-282 */"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4400,
+      "original_count": 1,
+      "current_start": 4424,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "   if (took_absolute_toc || took_relative_jump)"
+      ],
+      "current_text": [
+        "#line 4400",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4403,
+      "original_count": 1,
+      "current_start": 4429,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "   if (GET_IF() && (cpu_interrupt_map & CPU_HW_INT_MASK))"
+      ],
+      "current_text": [
+        "   if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4412,
+      "original_count": 0,
+      "current_start": 4438,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "\t IS32 acknowledged_interrupt;"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4413,
+      "original_count": 6,
+      "current_start": 4440,
+      "current_count": 20,
+      "contains_error": true,
+      "original_text": [
+        "\t cpu_hw_interrupt_number = ica_intack(&hook_address);",
+        "\t cpu_interrupt_map &= ~CPU_HW_INT_MASK;",
+        "\t EXT = EXTERNAL;",
+        "\t SYNCH_TICK();",
+        "\t do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);",
+        "\t CCPU_save_EIP = GET_EIP();   /* to reflect IP change */"
+      ],
+      "current_text": [
+        "\t acknowledged_interrupt = ica_intack(&hook_address);",
+        "\t /* DIVERGENCE(MVDM-HOST-DIV-221): the source PIC explicitly returns -1",
+        "\t  * when a host-thread notification becomes stale before CCPU accepts it.",
+        "\t  * The historical x86 monitor prevented that race outside this CCPU body;",
+        "\t  * a modern user-mode session can reach it.  Preserve the original",
+        "\t  * acknowledge and all real-interrupt mechanics, but do not narrow its",
+        "\t  * signed rejection sentinel into the original IU16 vector and dispatch",
+        "\t  * a fabricated INT FF. */",
+        "\t if (acknowledged_interrupt != -1)",
+        "\t {",
+        "\t     /* The host monitor and normal CPU path share this accepted-IRQ",
+        "\t      * tail, including callback and saved-instruction bookkeeping. */",
+        "#ifdef NTVDM",
+        "\t     ccpu_dispatch_accepted_irq(acknowledged_interrupt);",
+        "#else",
+        "#line 4413",
+        "#error Excluded unsupported non-NTVDM CCPU interrupt dispatch",
+        "#endif",
+        "\t }",
+        "#line 4419"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4421,
+      "original_count": 21,
+      "current_start": 4462,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "   if (GET_IF() && (cpu_interrupt_map & (CPU_HW_INT_MASK | CPU_HW_NPX_INT_MASK)))",
+        "      {",
+        "\t/* service any pending real H/W interrupt first */",
+        "      \tif (cpu_interrupt_map & CPU_HW_INT_MASK)",
+        "      \t{",
+        "\t\t cpu_hw_interrupt_number = ica_intack();",
+        "\t\t cpu_interrupt_map &= ~CPU_HW_INT_MASK;",
+        "\t\t EXT = EXTERNAL;",
+        "\t\t do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);",
+        "\t\t CCPU_save_EIP = GET_EIP();   /* to reflect IP change */",
+        "\t}",
+        "\telse",
+        "      \tif (cpu_interrupt_map & CPU_HW_NPX_INT_MASK)",
+        "      \t{",
+        "\t\t cpu_hw_interrupt_number = IRQ5_SLAVE_PIC + VectorBase8259Slave();",
+        "\t\t cpu_interrupt_map &= ~CPU_HW_NPX_INT_MASK;",
+        "\t\t EXT = EXTERNAL;",
+        "\t\t do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);",
+        "\t\t CCPU_save_EIP = GET_EIP();   /* to reflect IP change */",
+        "\t}",
+        "      }"
+      ],
+      "current_text": [
+        "#line 4421",
+        "#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.",
+        "#line 4442"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4445,
+      "original_count": 41,
+      "current_start": 4469,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "   if ( pig_synch_required )",
+        "      {",
+        "      if (IgnoringThisSynchPoint(GET_CS_SELECTOR(), GET_EIP()))",
+        "      {",
+        "      \tpig_synch_required = FALSE;",
+        "      }",
+        "      else",
+        "      {",
+        "      /* If the destination is going to page fault, or need",
+        "       * accessing, then the EDL CPU will do so before issuing",
+        "       * the pig synch. We use the dasm386 decode to prefetch",
+        "       * a single instruction which mimics the EDL Cpu's behaviour",
+        "       * when close to a page boundary.",
+        "       */",
+        "      prefetch_1_instruction();\t/* Will PF if destination not present */",
+        "#if defined(SFELLOW)",
+        "      /*",
+        "       * Check for occurrence of memory-mapped input.",
+        "       * This initial crude implementation just leaves the entire synch",
+        "       * section unchecked.",
+        "       */",
+        "      if ( pig_mmio_info.flags & MM_INPUT_OCCURRED )",
+        "      {",
+        "         pig_cpu_action = CHECK_NONE;\t/* cos' its effects are unknown */",
+        "#if COLLECT_MMIO_STATS",
+        "         if ( ++pig_mmio_info.mm_input_section_count == 0 )",
+        "            pig_mmio_info.flags |= MM_INPUT_SECTION_COUNT_WRAPPED;",
+        "#endif\t/* COLLECT_MMIO_STATS */",
+        "      }",
+        "      if ( pig_mmio_info.flags & MM_OUTPUT_OCCURRED )",
+        "      {",
+        "#if COLLECT_MMIO_STATS",
+        "         if ( ++pig_mmio_info.mm_output_section_count == 0 )",
+        "            pig_mmio_info.flags |= MM_OUTPUT_SECTION_COUNT_WRAPPED;",
+        "#endif\t/* COLLECT_MMIO_STATS */",
+        "      }",
+        "#endif\t/* SFELLOW */",
+        "      ccpu_synch_count++;",
+        "      c_cpu_unsimulate();",
+        "      }",
+        "      }"
+      ],
+      "current_text": [
+        "#line 4445",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 4486"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4492,
+      "original_count": 0,
+      "current_start": 4480,
+      "current_count": 20,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#if defined(NTVDM) && !defined(SFELLOW)",
+        "   /* A restored task enters here without the normal inter-instruction",
+        "    * checks. Deliver its pending trap or execution breakpoint before it",
+        "    * executes, using the same CPU-owned checks as that path. */",
+        "   if (debug_context_resume_check) {",
+        "      /* RESET has priority over debug delivery in the normal boundary. */",
+        "      if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))",
+        "         goto CPU_RESTORED_RESET;",
+        "      debug_context_resume_check = FALSE;",
+        "      if (debug_exception_pending)",
+        "         Int1_t();",
+        "      if (nr_inst_break && GET_RF() == 0) {",
+        "         check_for_inst_exception(GET_CS_BASE() + GET_EIP());",
+        "         if (debug_exception_pending)",
+        "            Int1_f();",
+        "      }",
+        "   }",
+        "#endif",
+        "",
+        "#line 4492"
+      ],
+      "review_disposition": "pending-evidence"
+    },
+    {
+      "original_start": 4493,
+      "original_count": 4,
+      "current_start": 4501,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "\tif (sf_debug_char_waiting())",
+        "\t{",
+        "\t   force_yoda();",
+        "\t}"
+      ],
+      "current_text": [
+        "#line 4493",
+        "#error Unsupported excluded original configuration",
+        "#line 4497"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4524,
+      "original_count": 1,
+      "current_start": 4534,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "   if ( cpu_interrupt_map == 0 &&"
+      ],
+      "current_text": [
+        "   if ( c_cpu_event_snapshot() == 0 &&"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4528,
+      "original_count": 1,
+      "current_start": 4538,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "\t&& !pig_synch_required"
+      ],
+      "current_text": [
+        "#line 4528",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4639,
+      "original_count": 1,
+      "current_start": 4651,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      return *IncCpuPtrLS8(*q);"
+      ],
+      "current_text": [
+        "#line 4639",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4642,
+      "original_count": 1,
+      "current_start": 4655,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      return *(*q)--;"
+      ],
+      "current_text": [
+        "#line 4642",
+        "#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4658,
+      "original_count": 1,
+      "current_start": 4673,
+      "current_count": 5,
+      "contains_error": true,
+      "original_text": [
+        "      SAVED char default_flags[] = \"faults accessed\";"
+      ],
+      "current_text": [
+        "#line 4658",
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+        "#line 4682",
+        "#endif\t/* PIG */",
+        "#line 4683"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4660,
+      "original_count": 24,
+      "current_start": 4679,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "      if (first)",
+        "      {",
+        "\tchar *s = getenv(\"FLAGS_IGNORE_DEFAULT\");",
+        "\tif (s)",
+        "\t  set_flags_ignore(s);",
+        "\telse",
+        "\t  set_flags_ignore(default_flags);",
+        "\tsingle_instruction_delay_enable = FALSE;",
+        "\ts = getenv(\"SINGLE_INSTRUCTION_BLIND_SPOT\");",
+        "\tif (s)",
+        "\t{",
+        "\t    if (strcmp(s, \"TRUE\") == 0)",
+        "\t       single_instruction_delay_enable = TRUE;",
+        "\t    else if (strcmp(s, \"FALSE\") == 0)",
+        "\t       single_instruction_delay_enable = FALSE;",
+        "\t    else",
+        "\t       printf(\"*** Ignoring getenv(\\\"SINGLE_INSTRUCTION_BLIND_SPOT\\\") value\\n\");",
+        "\t    printf(\"STI/POPF %s cause a blind spot after next conditional\\n\",",
+        "\t\t   single_instruction_delay_enable ? \"will\": \"will not\");",
+        "        }",
+        "\tfirst = FALSE;",
+        "      }",
+        "#endif\t/* PIG */",
+        ""
+      ],
+      "current_text": [
+        "#line 4684"
+      ],
+      "review_disposition": "excluded-body-fragment",
+      "paired_opcode": 97
+    },
+    {
+      "original_start": 4710,
+      "original_count": 1,
+      "current_start": 4707,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t cpu_interrupt_map |= CPU_RESET_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "\t c_cpu_raise_event(CPU_RESET_EXCEPTION_MASK);"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4713,
+      "original_count": 1,
+      "current_start": 4710,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t cpu_interrupt_map |= CPU_SIGALRM_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "\t c_cpu_raise_event(CPU_SIGALRM_EXCEPTION_MASK);"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4716,
+      "original_count": 1,
+      "current_start": 4713,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t cpu_interrupt_map |= CPU_SIGIO_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "\t c_cpu_raise_event(CPU_SIGIO_EXCEPTION_MASK);"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4719,
+      "original_count": 1,
+      "current_start": 4716,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t cpu_interrupt_map |= CPU_HW_INT_MASK;"
+      ],
+      "current_text": [
+        "\t c_cpu_raise_event(CPU_HW_INT_MASK);"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4722,
+      "original_count": 1,
+      "current_start": 4719,
+      "current_count": 1,
+      "contains_error": false,
+      "original_text": [
+        "\t cpu_interrupt_map |= CPU_SAD_EXCEPTION_MASK;"
+      ],
+      "current_text": [
+        "\t c_cpu_raise_event(CPU_SAD_EXCEPTION_MASK);"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4726,
+      "original_count": 0,
+      "current_start": 4723,
+      "current_count": 2,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "      mvdm_softpc_ccpu_wait_signal();",
+        "#line 4726"
+      ],
+      "review_disposition": "pending-evidence"
+    },
+    {
+      "original_start": 4739,
+      "original_count": 1,
+      "current_start": 4739,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      SET_AC(0);"
+      ],
+      "current_text": [
+        "#line 4739",
+        "#error Excluded unsupported SPC486 profile"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4774,
+      "original_count": 2,
+      "current_start": 4777,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      SET_CD(1);",
+        "      SET_NW(1);"
+      ],
+      "current_text": [
+        "#line 4774",
+        "#error Excluded unsupported SPC486 profile",
+        "#line 4776"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4783,
+      "original_count": 0,
+      "current_start": 4788,
+      "current_count": 5,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "      debug_exception_pending = FALSE; /* MVDM-HOST-DIV-282: reset. */",
+        "#if defined(NTVDM) && !defined(SFELLOW)",
+        "      debug_context_resume_check = FALSE;",
+        "#endif",
+        "#line 4783"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4801,
+      "original_count": 1,
+      "current_start": 4812,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      SET_EDX(0x0000E401);\t/* Give component ID : revision ID */"
+      ],
+      "current_text": [
+        "#line 4801",
+        "#error Excluded unsupported SPC486 profile"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4813,
+      "original_count": 2,
+      "current_start": 4828,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      if (!config_inquire(C_SWITCHNPX, NULL))",
+        "\t      disableNpx = TRUE;"
+      ],
+      "current_text": [
+        "#line 4813",
+        "#error Unsupported excluded original configuration",
+        "#line 4815"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4833,
+      "original_count": 0,
+      "current_start": 4851,
+      "current_count": 4,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#ifdef NTVDM",
+        "      jmp_buf *frame; /* DIVERGENCE(MVDM-HOST-DIV-348): native frame identity. */",
+        "#endif",
+        "#line 4833"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4839,
+      "original_count": 1,
+      "current_start": 4861,
+      "current_count": 4,
+      "contains_error": false,
+      "original_text": [
+        "      if ( setjmp(ccpu386SimulatePtr()) == 0)"
+      ],
+      "current_text": [
+        "      frame = ccpu386SimulatePtr();",
+        "      __try {",
+        "      if ( setjmp(*frame) == 0)",
+        "#line 4840"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4841,
+      "original_count": 1,
+      "current_start": 4866,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )"
+      ],
+      "current_text": [
+        "#line 4841",
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4847,
+      "original_count": 0,
+      "current_start": 4874,
+      "current_count": 6,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "#ifdef NTVDM",
+        "      } __finally {",
+        "         if (AbnormalTermination()) ccpu386AbandonSimulate(frame);",
+        "      }",
+        "#endif",
+        "#line 4847"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4855,
+      "original_count": 0,
+      "current_start": 4888,
+      "current_count": 4,
+      "contains_error": false,
+      "original_text": [],
+      "current_text": [
+        "      /* DIVERGENCE: MVDM-HOST-DIV-282: all callers finish exception entry.",
+        "       * Consume/cancel the pending event, retaining architectural DR6. */",
+        "      debug_exception_pending = FALSE;",
+        "#line 4855"
+      ],
+      "review_disposition": "retain"
+    },
+    {
+      "original_start": 4858,
+      "original_count": 1,
+      "current_start": 4896,
+      "current_count": 2,
+      "contains_error": true,
+      "original_text": [
+        "      longjmp(next_inst[simulate_level-1], 1);"
+      ],
+      "current_text": [
+        "#line 4858",
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4873,
+      "original_count": 13,
+      "current_start": 4913,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "      if (simulate_level == 0)",
+        "         {",
+        "\t fprintf(stderr, \"host_unsimulate() - already at base of stack!\\n\");",
+        "#ifndef\tPROD",
+        "\t force_yoda();",
+        "#endif\t/* PROD */\t ",
+        "\t }",
+        "      else",
+        "\t {",
+        "\t /* Return to previous context */",
+        "\t in_C = 1;",
+        "\t longjmp(longjmp_env_stack[--simulate_level], 1);",
+        "\t }"
+      ],
+      "current_text": [
+        "#line 4873",
+        "#error Unsupported excluded original configuration",
+        "#line 4886"
+      ],
+      "review_disposition": "excluded-body"
+    },
+    {
+      "original_start": 4890,
+      "original_count": 31,
+      "current_start": 4921,
+      "current_count": 3,
+      "contains_error": true,
+      "original_text": [
+        "   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/",
+        "   /* To push an interrupt frame in response to an external interrupt.   */",
+        "   /* Called from CPU under test, just before it processes the interrupt */",
+        "   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/",
+        "   GLOBAL VOID",
+        "   c_pig_interrupt",
+        "   IFN1(",
+        "\t   IU8, vector",
+        "       )",
+        "",
+        "      {",
+        "      if (simulate_level >= FRAMES)",
+        "\t fprintf(stderr, \"Stack overflow in c_do_interrupt()!\\n\");",
+        "",
+        "      /* Save current context and invoke a new CPU level */",
+        "#ifdef NTVDM",
+        "      if ( setjmp(ccpu386SimulatePtr()) == 0)",
+        "#else",
+        "      if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )",
+        "#endif",
+        "\t {",
+        "\t in_C = 0;",
+        "\t EXT = EXTERNAL;",
+        "",
+        "         /* Reset default mode */",
+        "         SET_OPERAND_SIZE(GET_CS_AR_X());",
+        "         SET_ADDRESS_SIZE(GET_CS_AR_X());",
+        "",
+        "\t do_intrupt((IU16)vector, FALSE, FALSE, (IU16)0);",
+        "\t }",
+        "      }"
+      ],
+      "current_text": [
+        "#line 4890",
+        "#error DIVERGENCE MVDM-HOST-DIV-499: PIG comparison profile is not selected; see mirror register.",
+        "#line 4921"
+      ],
+      "review_disposition": "excluded-body"
+    }
+  ],
+  "inventory_limit": "Every nonblank/non-line textual opcode recorded, including mixed #error edits; this is an inventory, not proof each exclusion is justified. Original/current hash binds ranges.",
+  "register_entries": 44,
+  "changes": [
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "40",
+      "current_count": "4",
+      "original_start": "38",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-072",
+      "classification": "decl",
+      "initial_review": "Original executor calls need typed provider contracts rather than implicit C declarations.",
+      "counter_review": "The header/declaration introduces no replacement algorithm; c_seg supplies reset pseudo-descriptor calls, ICA/timer supply existing IRQ/tick contracts.",
+      "disposition": "retain",
+      "evidence": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain typed declarations; do not import unrelated provider bodies. Check c_addr transitive macro expansion before removing its include.",
+      "related_callers": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.",
+      "verification_required": "Selected x86 compile with declaration diagnostics; check complete macro expansion and link providers.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "47",
+      "current_count": "2",
+      "original_start": "41",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "decl",
+      "initial_review": "Original executor calls need typed provider contracts rather than implicit C declarations.",
+      "counter_review": "The header/declaration introduces no replacement algorithm; c_seg supplies reset pseudo-descriptor calls, ICA/timer supply existing IRQ/tick contracts.",
+      "disposition": "retain",
+      "evidence": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain typed declarations; do not import unrelated provider bodies. Check c_addr transitive macro expansion before removing its include.",
+      "related_callers": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.",
+      "verification_required": "Selected x86 compile with declaration diagnostics; check complete macro expansion and link providers.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "60",
+      "current_count": "3",
+      "original_start": "52",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "decl",
+      "initial_review": "Original executor calls need typed provider contracts rather than implicit C declarations.",
+      "counter_review": "The header/declaration introduces no replacement algorithm; c_seg supplies reset pseudo-descriptor calls, ICA/timer supply existing IRQ/tick contracts.",
+      "disposition": "retain",
+      "evidence": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain typed declarations; do not import unrelated provider bodies. Check c_addr transitive macro expansion before removing its include.",
+      "related_callers": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.",
+      "verification_required": "Selected x86 compile with declaration diagnostics; check complete macro expansion and link providers.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "64",
+      "current_count": "5",
+      "original_start": "53",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "decl",
+      "initial_review": "Original executor calls need typed provider contracts rather than implicit C declarations.",
+      "counter_review": "The header/declaration introduces no replacement algorithm; c_seg supplies reset pseudo-descriptor calls, ICA/timer supply existing IRQ/tick contracts.",
+      "disposition": "retain",
+      "evidence": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain typed declarations; do not import unrelated provider bodies. Check c_addr transitive macro expansion before removing its include.",
+      "related_callers": "c_main decode macros/reset; c_addr/c_seg, ICA/timer, force_yoda/TakeNpxExceptionInt/EDL_fast_bop providers.",
+      "verification_required": "Selected x86 compile with declaration diagnostics; check complete macro expansion and link providers.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "245",
+      "current_count": "6",
+      "original_start": "226",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "diagnostic",
+      "initial_review": "Added per-instruction reporting and fixed selector/IP filters are diagnostics, not original execution semantics.",
+      "counter_review": "Default-off gating limits runtime cost but does not justify permanent mirror footprint; shared providers may have other consumers.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_report_* and MVDM_CCPU_DECODE_DIAGNOSTICS build selection.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "delete",
+      "change_plan": "Remove current 910-935 block and sole-use 245-249 diagnostic include/comment together. Reconcile selector/provider references before removing shared definitions.",
+      "related_callers": "mvdm_softpc_report_* and MVDM_CCPU_DECODE_DIAGNOSTICS build selection.",
+      "verification_required": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "255",
+      "current_count": "2",
+      "original_start": "229",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "279",
+      "current_count": "37",
+      "original_start": "251",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-214",
+      "classification": "consume",
+      "initial_review": "Atomic event consumption is necessary but the CAS retry loop can be one InterlockedAnd old-value mask test.",
+      "counter_review": "Consumption linearizes at the atomic clear; unrelated bits survive; raises after clear survive. Early no-bit return can linearize at its snapshot. No guarantee of counting repeated same-bit raises exists.",
+      "disposition": "minimize",
+      "evidence": "Every c_cpu_take_event consumer in this file; test/observation/verify-ccpu-notification.ps1.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "minimize",
+      "change_plan": "Replace only c_cpu_take_event loop with InterlockedAnd(&map,~mask) old-value mask test; retain snapshot/raise/clear helpers.",
+      "related_callers": "Every c_cpu_take_event consumer in this file; test/observation/verify-ccpu-notification.ps1.",
+      "verification_required": "Extend extracted-helper fixture to concurrent consumption and same-bit before/after controls; selected build and relevant HALT/IRQ tests.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "555",
+      "current_count": "19",
+      "original_start": "545",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-476",
+      "classification": "monitor",
+      "initial_review": "Production protected #GP dispatch calls these debug/IRQ helpers; they are not unused hardware-V86 code.",
+      "counter_review": "nt_inthk gates installed DPMI fault owner, CPL!=0 and !VM. Reachability is not proof NT4 protected semantics and exception ordering are equivalent.",
+      "disposition": "pending-evidence",
+      "evidence": "nt_inthk.c:431-542; c_main MOV_DR and normal IRQ dispatch; debugger context restore.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve for now; compare handled MOV DR/STI completion with original CPU boundary, RF and contributory faults before deciding retain or consolidation.",
+      "related_callers": "nt_inthk.c:431-542; c_main MOV_DR and normal IRQ dispatch; debugger context restore.",
+      "verification_required": "ccpu_monitor_boundary_fixture protected DR/STI and IRQ-frame-fault cases; real DPMI/WOW callback ordering.",
+      "missing_evidence": "Full original protected-monitor equivalence and reentrant exception/resume ordering not established by this file review.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "575",
+      "current_count": "10",
+      "original_start": "545",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-478",
+      "classification": "debugapply",
+      "initial_review": "Context application uses original MOV_DR provider and exits quick mode so decoded breakpoint metadata updates with register values.",
+      "counter_review": "Replacing this with raw CCPU_DR writes would bypass derived match state. This helper does not itself deliver exceptions under debugger lock.",
+      "disposition": "retain",
+      "evidence": "dbg_registers.c:111,185; c_debug matcher metadata; c_ctrl MOV_DR.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Keep one MOV_DR-based application helper shared by ThreadSetDebugContext and restore; no parallel raw-register implementation.",
+      "related_callers": "dbg_registers.c:111,185; c_debug matcher metadata; c_ctrl MOV_DR.",
+      "verification_required": "debug_register_binding_test and actual CCPU broadcast/context cases; no fresh run claimed.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "586",
+      "current_count": "7",
+      "original_start": "545",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "debugrestore",
+      "initial_review": "Task restore enters NEXT_INST past ordinary instruction-boundary checks, so explicitly staged checking has a real caller.",
+      "counter_review": "Fixture cases109-112/117 cover execution hit, pending trap, RF suppression, disabled breakpoint and reset priority; fixture inspection is not real task lifecycle proof.",
+      "disposition": "pending-evidence",
+      "evidence": "dbg_registers.c:97-115; NEXT_INST; c_cpu_continue; c_cpu_reset.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Keep pending flag/reset label/restore latch together until full task-switch and exception-return semantics are verified. Consider shared original check block only if entry ordering remains identical.",
+      "related_callers": "dbg_registers.c:97-115; NEXT_INST; c_cpu_continue; c_cpu_reset.",
+      "verification_required": "ccpu_monitor_boundary_fixture restored_debug_execution plus real WOW task switch/unwind.",
+      "missing_evidence": "Pending-event cancellation and exception delivery across actual task switch/reentry remain unproved.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "594",
+      "current_count": "10",
+      "original_start": "545",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "irqtail",
+      "initial_review": "Factoring accepted IRQ tail serves normal CPU IRQ and handled STI.",
+      "counter_review": "Original tail sets vector, EXT, ticks, dispatches and saves EIP. New host_hwint_hook adds behavior rather than mere extraction.",
+      "disposition": "pending-evidence",
+      "evidence": "normal IRQ at4440; protected STI helper; host_hwint_hook.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Keep vector rejection separate; audit host_hwint_hook policy and its handled/fallback EIP effects before approving common tail as original-equivalent.",
+      "related_callers": "normal IRQ at4440; protected STI helper; host_hwint_hook.",
+      "verification_required": "Accepted/rejected IRQ, host-hook handled/fallback and interrupt-frame fault tests.",
+      "missing_evidence": "Complete host_hwint_hook justification belongs to its source review; extraction alone is insufficient proof.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "605",
+      "current_count": "16",
+      "original_start": "545",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-475",
+      "classification": "monitor",
+      "initial_review": "Production protected #GP dispatch calls these debug/IRQ helpers; they are not unused hardware-V86 code.",
+      "counter_review": "nt_inthk gates installed DPMI fault owner, CPL!=0 and !VM. Reachability is not proof NT4 protected semantics and exception ordering are equivalent.",
+      "disposition": "pending-evidence",
+      "evidence": "nt_inthk.c:431-542; c_main MOV_DR and normal IRQ dispatch; debugger context restore.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve for now; compare handled MOV DR/STI completion with original CPU boundary, RF and contributory faults before deciding retain or consolidation.",
+      "related_callers": "nt_inthk.c:431-542; c_main MOV_DR and normal IRQ dispatch; debugger context restore.",
+      "verification_required": "ccpu_monitor_boundary_fixture protected DR/STI and IRQ-frame-fault cases; real DPMI/WOW callback ordering.",
+      "missing_evidence": "Full original protected-monitor equivalence and reentrant exception/resume ordering not established by this file review.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "845",
+      "current_count": "5",
+      "original_start": "770",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-073",
+      "classification": "jmp",
+      "initial_review": "Provider returns jmp_buf pointer; setjmp requires referred-to array object.",
+      "counter_review": "Null provider failure remains possible and is not solved by type correction; do not claim complete failure handling.",
+      "disposition": "retain",
+      "evidence": "ntthread.c ccpu386ThrdExptnPtr/ccpu386SimulatePtr; c_cpu_simulate.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Keep dereference and saved frame identity; provider-null failure policy must be handled consistently with ntthread review, without retry or fake resume.",
+      "related_callers": "ntthread.c ccpu386ThrdExptnPtr/ccpu386SimulatePtr; c_cpu_simulate.",
+      "verification_required": "Selected compile; nested simulation, FE and abnormal unwind; provider failure contract check.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "910",
+      "current_count": "26",
+      "original_start": "827",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "diagnostic",
+      "initial_review": "Added per-instruction reporting and fixed selector/IP filters are diagnostics, not original execution semantics.",
+      "counter_review": "Default-off gating limits runtime cost but does not justify permanent mirror footprint; shared providers may have other consumers.",
+      "disposition": "delete",
+      "evidence": "mvdm_softpc_report_* and MVDM_CCPU_DECODE_DIAGNOSTICS build selection.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "delete",
+      "change_plan": "Remove current 910-935 block and sole-use 245-249 diagnostic include/comment together. Reconcile selector/provider references before removing shared definitions.",
+      "related_callers": "mvdm_softpc_report_* and MVDM_CCPU_DECODE_DIAGNOSTICS build selection.",
+      "verification_required": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "3990",
+      "current_count": "4",
+      "original_start": "3987",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-214",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "3997",
+      "current_count": "1",
+      "original_start": "3991",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4001",
+      "current_count": "1",
+      "original_start": "3995",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4003",
+      "current_count": "1",
+      "original_start": "3997",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4017",
+      "current_count": "9",
+      "original_start": "4011",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-330",
+      "classification": "wait",
+      "initial_review": "Event-driven HLT wait avoids polling and uses existing event-map authority; notification signals after publishing bits.",
+      "counter_review": "Worker creates event before execution. host_applClose calls TerminateHeartBeat, but that function ignores a 10000ms wait result; comments alone do not prove all producers stopped before CloseHandle.",
+      "disposition": "pending-evidence",
+      "evidence": "mvdm_softpc_ccpu_wait.c; standalone_worker.c:81-99,148; nt_reset.c:313-324; nt_timer.c:327-333.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve current behavior until lifetime and failure ownership is proved; trace every producer stop and abnormal escape. Do not add a second state machine, polling or timeouts.",
+      "related_callers": "mvdm_softpc_ccpu_wait.c; standalone_worker.c:81-99,148; nt_reset.c:313-324; nt_timer.c:327-333.",
+      "verification_required": "HALT/reset and signal-before-wait tests; real stop/join ordering and wait failure propagation.",
+      "missing_evidence": "All producer retirement paths and ignored wait failure consequences remain unproved; no use-after-close claim is made.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4340",
+      "current_count": "3",
+      "original_start": "4326",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "debugpending",
+      "initial_review": "Sticky DR6 bits are architectural status, not a fresh exception event. Pending latch separates new match from status retained after delivery.",
+      "counter_review": "Same bit can trigger again; clearing DR6 to avoid repetition would change guest-visible status. Reset/continue consumption is coupled to c_debug and TSS producer.",
+      "disposition": "retain",
+      "evidence": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain latch checks and reset/cancel writes with c_debug/c_tsksw; restored context path has separate pending review.",
+      "related_callers": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.",
+      "verification_required": "ccpu_debug_match_test plus real CCPU fault/trap consumption, RF and reset controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4357",
+      "current_count": "2",
+      "original_start": "4338",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4360",
+      "current_count": "4",
+      "original_start": "4340",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "debugrestore",
+      "initial_review": "Task restore enters NEXT_INST past ordinary instruction-boundary checks, so explicitly staged checking has a real caller.",
+      "counter_review": "Fixture cases109-112/117 cover execution hit, pending trap, RF suppression, disabled breakpoint and reset priority; fixture inspection is not real task lifecycle proof.",
+      "disposition": "pending-evidence",
+      "evidence": "dbg_registers.c:97-115; NEXT_INST; c_cpu_continue; c_cpu_reset.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Keep pending flag/reset label/restore latch together until full task-switch and exception-return semantics are verified. Consider shared original check block only if entry ordering remains identical.",
+      "related_callers": "dbg_registers.c:97-115; NEXT_INST; c_cpu_continue; c_cpu_reset.",
+      "verification_required": "ccpu_monitor_boundary_fixture restored_debug_execution plus real WOW task switch/unwind.",
+      "missing_evidence": "Pending-event cancellation and exception delivery across actual task switch/reentry remain unproved.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4380",
+      "current_count": "2",
+      "original_start": "4356",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4383",
+      "current_count": "1",
+      "original_start": "4358",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4387",
+      "current_count": "1",
+      "original_start": "4362",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4389",
+      "current_count": "1",
+      "original_start": "4364",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4407",
+      "current_count": "2",
+      "original_start": "4382",
+      "original_count": "3",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "debugpending",
+      "initial_review": "Sticky DR6 bits are architectural status, not a fresh exception event. Pending latch separates new match from status retained after delivery.",
+      "counter_review": "Same bit can trigger again; clearing DR6 to avoid repetition would change guest-visible status. Reset/continue consumption is coupled to c_debug and TSS producer.",
+      "disposition": "retain",
+      "evidence": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain latch checks and reset/cancel writes with c_debug/c_tsksw; restored context path has separate pending review.",
+      "related_callers": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.",
+      "verification_required": "ccpu_debug_match_test plus real CCPU fault/trap consumption, RF and reset controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4417",
+      "current_count": "1",
+      "original_start": "4393",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "debugpending",
+      "initial_review": "Sticky DR6 bits are architectural status, not a fresh exception event. Pending latch separates new match from status retained after delivery.",
+      "counter_review": "Same bit can trigger again; clearing DR6 to avoid repetition would change guest-visible status. Reset/continue consumption is coupled to c_debug and TSS producer.",
+      "disposition": "retain",
+      "evidence": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain latch checks and reset/cancel writes with c_debug/c_tsksw; restored context path has separate pending review.",
+      "related_callers": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.",
+      "verification_required": "ccpu_debug_match_test plus real CCPU fault/trap consumption, RF and reset controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4429",
+      "current_count": "1",
+      "original_start": "4403",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4438",
+      "current_count": "1",
+      "original_start": "4412",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "irqreject",
+      "initial_review": "ica_intack is signed and returns ICA_INTACK_REJECT when master/slave accepts no IRQ; narrowing and dispatching it is invalid.",
+      "counter_review": "Reject guard preserves real vectors. Shared tail has separately pending host-hook semantics, not approved by this guard.",
+      "disposition": "retain",
+      "evidence": "base/system/ica.c:1317 onward; c_main accepted IRQ tail.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain signed acknowledged_interrupt and rejection guard; keep guard before narrowing. Do not dispatch rejected notification as vector FF.",
+      "related_callers": "base/system/ica.c:1317 onward; c_main accepted IRQ tail.",
+      "verification_required": "PIC rejection/no fabricated interrupt and real IRQ controls; monitor boundary IRQ-frame case.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4440",
+      "current_count": "20",
+      "original_start": "4413",
+      "original_count": "6",
+      "old_ids": "MVDM-HOST-DIV-221",
+      "classification": "irqreject",
+      "initial_review": "ica_intack is signed and returns ICA_INTACK_REJECT when master/slave accepts no IRQ; narrowing and dispatching it is invalid.",
+      "counter_review": "Reject guard preserves real vectors. Shared tail has separately pending host-hook semantics, not approved by this guard.",
+      "disposition": "retain",
+      "evidence": "base/system/ica.c:1317 onward; c_main accepted IRQ tail.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain signed acknowledged_interrupt and rejection guard; keep guard before narrowing. Do not dispatch rejected notification as vector FF.",
+      "related_callers": "base/system/ica.c:1317 onward; c_main accepted IRQ tail.",
+      "verification_required": "PIC rejection/no fabricated interrupt and real IRQ controls; monitor boundary IRQ-frame case.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4480",
+      "current_count": "20",
+      "original_start": "4492",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "debugrestore",
+      "initial_review": "Task restore enters NEXT_INST past ordinary instruction-boundary checks, so explicitly staged checking has a real caller.",
+      "counter_review": "Fixture cases109-112/117 cover execution hit, pending trap, RF suppression, disabled breakpoint and reset priority; fixture inspection is not real task lifecycle proof.",
+      "disposition": "pending-evidence",
+      "evidence": "dbg_registers.c:97-115; NEXT_INST; c_cpu_continue; c_cpu_reset.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Keep pending flag/reset label/restore latch together until full task-switch and exception-return semantics are verified. Consider shared original check block only if entry ordering remains identical.",
+      "related_callers": "dbg_registers.c:97-115; NEXT_INST; c_cpu_continue; c_cpu_reset.",
+      "verification_required": "ccpu_monitor_boundary_fixture restored_debug_execution plus real WOW task switch/unwind.",
+      "missing_evidence": "Pending-event cancellation and exception delivery across actual task switch/reentry remain unproved.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4534",
+      "current_count": "1",
+      "original_start": "4524",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4707",
+      "current_count": "1",
+      "original_start": "4710",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4710",
+      "current_count": "1",
+      "original_start": "4713",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4713",
+      "current_count": "1",
+      "original_start": "4716",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4716",
+      "current_count": "1",
+      "original_start": "4719",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4719",
+      "current_count": "1",
+      "original_start": "4722",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "atomic",
+      "initial_review": "Shared event bits need atomic snapshot/raise/consume to prevent unrelated producer bits being lost by ordinary read-modify-write.",
+      "counter_review": "Preserve coalescing bit semantics and reset/timer/debug/IRQ ordering; this is not a counted queue. HALT observes reset rather than consumes it.",
+      "disposition": "retain",
+      "evidence": "c_cpu_interrupt producers; HALT and main instruction boundary.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain atomic access and original consumer order. Keep removed ordinary clears removed because take-event already clears atomically.",
+      "related_callers": "c_cpu_interrupt producers; HALT and main instruction boundary.",
+      "verification_required": "Production-extracted notification fixture; concurrent raise/consume and same-bit ordering; HALT/reset regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4723",
+      "current_count": "2",
+      "original_start": "4726",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "wait",
+      "initial_review": "Event-driven HLT wait avoids polling and uses existing event-map authority; notification signals after publishing bits.",
+      "counter_review": "Worker creates event before execution. host_applClose calls TerminateHeartBeat, but that function ignores a 10000ms wait result; comments alone do not prove all producers stopped before CloseHandle.",
+      "disposition": "pending-evidence",
+      "evidence": "mvdm_softpc_ccpu_wait.c; standalone_worker.c:81-99,148; nt_reset.c:313-324; nt_timer.c:327-333.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "pending-evidence",
+      "change_plan": "Preserve current behavior until lifetime and failure ownership is proved; trace every producer stop and abnormal escape. Do not add a second state machine, polling or timeouts.",
+      "related_callers": "mvdm_softpc_ccpu_wait.c; standalone_worker.c:81-99,148; nt_reset.c:313-324; nt_timer.c:327-333.",
+      "verification_required": "HALT/reset and signal-before-wait tests; real stop/join ordering and wait failure propagation.",
+      "missing_evidence": "All producer retirement paths and ignored wait failure consequences remain unproved; no use-after-close claim is made.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4788",
+      "current_count": "5",
+      "original_start": "4783",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "debugpending",
+      "initial_review": "Sticky DR6 bits are architectural status, not a fresh exception event. Pending latch separates new match from status retained after delivery.",
+      "counter_review": "Same bit can trigger again; clearing DR6 to avoid repetition would change guest-visible status. Reset/continue consumption is coupled to c_debug and TSS producer.",
+      "disposition": "retain",
+      "evidence": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain latch checks and reset/cancel writes with c_debug/c_tsksw; restored context path has separate pending review.",
+      "related_callers": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.",
+      "verification_required": "ccpu_debug_match_test plus real CCPU fault/trap consumption, RF and reset controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4851",
+      "current_count": "4",
+      "original_start": "4833",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-348",
+      "classification": "unwind",
+      "initial_review": "Abnormal SEH unwind must retire precisely its own simulation frame to avoid later longjmp into an unwound frame.",
+      "counter_review": "ntthread.c:189 compares saved pointer to current top; normal FE already pops. Unconditional decrement would corrupt parent.",
+      "disposition": "retain",
+      "evidence": "ntthread.c:126-232; wow_callback_abort_ccpu_fixture.c.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Keep saved frame and finally/AbnormalTermination guard with ccpu386AbandonSimulate; retain LastError behavior.",
+      "related_callers": "ntthread.c:126-232; wow_callback_abort_ccpu_fixture.c.",
+      "verification_required": "Normal nested FE, abnormal callback abort, parent resumption and LastError preservation.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4861",
+      "current_count": "4",
+      "original_start": "4839",
+      "original_count": "1",
+      "old_ids": "",
+      "classification": "jmp",
+      "initial_review": "Provider returns jmp_buf pointer; setjmp requires referred-to array object.",
+      "counter_review": "Null provider failure remains possible and is not solved by type correction; do not claim complete failure handling.",
+      "disposition": "retain",
+      "evidence": "ntthread.c ccpu386ThrdExptnPtr/ccpu386SimulatePtr; c_cpu_simulate.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Keep dereference and saved frame identity; provider-null failure policy must be handled consistently with ntthread review, without retry or fake resume.",
+      "related_callers": "ntthread.c ccpu386ThrdExptnPtr/ccpu386SimulatePtr; c_cpu_simulate.",
+      "verification_required": "Selected compile; nested simulation, FE and abnormal unwind; provider failure contract check.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4874",
+      "current_count": "6",
+      "original_start": "4847",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "unwind",
+      "initial_review": "Abnormal SEH unwind must retire precisely its own simulation frame to avoid later longjmp into an unwound frame.",
+      "counter_review": "ntthread.c:189 compares saved pointer to current top; normal FE already pops. Unconditional decrement would corrupt parent.",
+      "disposition": "retain",
+      "evidence": "ntthread.c:126-232; wow_callback_abort_ccpu_fixture.c.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Keep saved frame and finally/AbnormalTermination guard with ccpu386AbandonSimulate; retain LastError behavior.",
+      "related_callers": "ntthread.c:126-232; wow_callback_abort_ccpu_fixture.c.",
+      "verification_required": "Normal nested FE, abnormal callback abort, parent resumption and LastError preservation.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "257",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_start": "4888",
+      "current_count": "4",
+      "original_start": "4855",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "debugpending",
+      "initial_review": "Sticky DR6 bits are architectural status, not a fresh exception event. Pending latch separates new match from status retained after delivery.",
+      "counter_review": "Same bit can trigger again; clearing DR6 to avoid repetition would change guest-visible status. Reset/continue consumption is coupled to c_debug and TSS producer.",
+      "disposition": "retain",
+      "evidence": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.; artifacts/mvdm-audit/t483-s1/c-main-review.json",
+      "limits": "Source/fixture inspection only; no fresh build or execution; exclusion and full logical-line proof are not claimed.",
+      "decision": "retain",
+      "change_plan": "Retain latch checks and reset/cancel writes with c_debug/c_tsksw; restored context path has separate pending review.",
+      "related_callers": "c_debug match producers; c_tsksw T-bit; Int1_t/Int1_f and c_cpu_continue.",
+      "verification_required": "ccpu_debug_match_test plus real CCPU fault/trap consumption, RF and reset controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "limits": "Complete textual delta classification, not universal branch reachability or full diagnostic-line certification. Excluded-only bodies retained under existing policy; no claim of new preprocessing proof. Pending rows remain unresolved."
+}

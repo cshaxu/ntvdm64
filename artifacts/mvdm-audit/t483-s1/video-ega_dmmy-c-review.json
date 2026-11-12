@@ -1,0 +1,31 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+  "original_sha256": "4f7aaa63fb26f4fb556ea90183149cee7dfd048b954922ae335e17ae3cafc40d",
+  "current_sha256": "93c6a1d8ea22ce7db09710b570f1856333e7ab4b56c292fac79103732c3e0909",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 27,
+      "original_count": 6,
+      "current_start": 28,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    }
+  ],
+  "initial_review": "One excluded SEGMENTATION include; remaining source exact.",
+  "counter_review": "get_ega_switch_setting dummy returning zero is explicitly present in original source; not an added successful stub. No new linker fallback.",
+  "limits": "Full source comparison; no fresh build/runtime or universal condition/line certification."
+}

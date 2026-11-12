@@ -10,9 +10,16 @@
 
 /* DIVERGENCE(OPENNT-HOST-080): complete original EndDialog body.
  * Same dialog state/owner as the original creator and modal manager;
- * private precomp is supplied by the consuming group. Not yet selected. */
+ * private precomp is supplied by the consuming group. */
 #line 11
 #include "precomp.h"
+
+/***************************************************************************\
+* EndDialog
+*
+* History:
+* 11-Dec-1990 mikeke  ported from win30
+\***************************************************************************/
 
 #line 22
 BOOL EndDialog(
@@ -164,4 +171,3 @@ BOOL EndDialog(
 
     return TRUE;
 }
-

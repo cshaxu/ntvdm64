@@ -1,0 +1,53 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+  "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+  "current_sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 47,
+      "original_count": 1,
+      "current_error_line": 48
+    },
+    {
+      "original_start": 51,
+      "original_count": 6,
+      "current_error_line": 54
+    },
+    {
+      "original_start": 169,
+      "original_count": 1,
+      "current_error_line": 169
+    },
+    {
+      "original_start": 181,
+      "original_count": 12,
+      "current_error_line": 185
+    },
+    {
+      "original_start": 437,
+      "original_count": 5,
+      "current_error_line": 432
+    },
+    {
+      "original_start": 713,
+      "original_count": 2,
+      "current_error_line": 706
+    },
+    {
+      "original_start": 819,
+      "original_count": 75,
+      "current_error_line": 813
+    },
+    {
+      "original_start": 1132,
+      "original_count": 6,
+      "current_error_line": 1054
+    }
+  ],
+  "initial_review": "Whole-file original/current diff inspected; eight excluded conditional bodies only.",
+  "counter_review": "All removed ranges have original conditional boundaries and replacement-only line/error directives. Non-NTVDM automatic FDC execution is excluded separately; selected NTVDM adapter, command/interrupt and bit-order implementation remain original, with no new success path.",
+  "limits": "No runtime floppy acceptance or all-context exclusion/line certification; source necessity classification only."
+}

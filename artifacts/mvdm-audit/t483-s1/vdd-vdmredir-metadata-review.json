@@ -1,0 +1,98 @@
+[
+  {
+    "sequence": 876,
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.dll",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\obj\\i386\\vcdex.dll",
+    "before_sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde",
+    "after_sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde",
+    "disposition": "byte-identical"
+  },
+  {
+    "sequence": 877,
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.exp",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\obj\\i386\\vcdex.exp",
+    "before_sha256": "e933d2e099afa6c99ae5754681fc600134bfa16f563c53c90583a4326d51ab3b",
+    "after_sha256": "e933d2e099afa6c99ae5754681fc600134bfa16f563c53c90583a4326d51ab3b",
+    "disposition": "byte-identical"
+  },
+  {
+    "sequence": 878,
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.res",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\obj\\i386\\vcdex.res",
+    "before_sha256": "ab0712d231660bc96a5ee1db2ce92fdd4ab87b75c408c39c840de1499b7c03ba",
+    "after_sha256": "ab0712d231660bc96a5ee1db2ce92fdd4ab87b75c408c39c840de1499b7c03ba",
+    "disposition": "byte-identical"
+  },
+  {
+    "sequence": 879,
+    "path": "src/mvdm-host/vdd/samples/sample1/dirs",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\sample1\\dirs",
+    "before_sha256": "54d2351230f193c918611406659cc4efbb7a7557be75872aed87919225f80e4e",
+    "after_sha256": "593d9fe6acf01c72c4e37679047eeaeb380a6c7ff3ba79f1119a376b336377fd",
+    "disposition": "restored-format"
+  },
+  {
+    "sequence": 880,
+    "path": "src/mvdm-host/vdd/samples/sample2/dirs",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\sample2\\dirs",
+    "before_sha256": "c40171f46ab8678f90177ee4d6f8f7b14f83d000762a246784443ffac9403da2",
+    "after_sha256": "08e9969b369d95f8ab8a52274e3b26fdafc95612ad20affa7916fee5959ed8a4",
+    "disposition": "restored-format"
+  },
+  {
+    "sequence": 881,
+    "path": "src/mvdm-host/vdmdbg/vdmdbg.txt",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmdbg\\vdmdbg.txt",
+    "before_sha256": "ced20d1a69fe8c4bdbac5f7487fe3878de8f7bddc7b779b01d973d8325c4df0f",
+    "after_sha256": "a4070771c906841890d675d6a450fe44f4f291f4be6f85ebe0481d86be768208",
+    "disposition": "restored-format"
+  },
+  {
+    "sequence": 882,
+    "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.dll",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\i386\\vdmexts.dll",
+    "before_sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170",
+    "after_sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170",
+    "disposition": "byte-identical"
+  },
+  {
+    "sequence": 883,
+    "path": "src/mvdm-host/vdmredir/dlstruct.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\dlstruct.h",
+    "before_sha256": "c98f6c2e38ca0392ea2a1afd24a5044262203f0f756ca9e94e0a0a4d1b23dcf8",
+    "after_sha256": "c98f6c2e38ca0392ea2a1afd24a5044262203f0f756ca9e94e0a0a4d1b23dcf8",
+    "disposition": "byte-identical"
+  },
+  {
+    "sequence": 884,
+    "path": "src/mvdm-host/vdmredir/makefile",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\makefile",
+    "before_sha256": "a9ff6c2655490c44be181f1ee96023c2bfd737e7e663da366a83b26241498d09",
+    "after_sha256": "0c2eeef094591cbe480fe75fc00cb55546be67c7b51a07715f61e57b364d6328",
+    "disposition": "restored-format"
+  },
+  {
+    "sequence": 885,
+    "path": "src/mvdm-host/vdmredir/sources",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\sources",
+    "before_sha256": "993b6719d20d48736483f2c1ede029e8cc918606850bc27ad43ba596731b53a6",
+    "after_sha256": "e0d3977b7f2030c94f4d6f25dbe8f8381fae3563a99205bb1480978608517229",
+    "disposition": "restored-format"
+  },
+  {
+    "sequence": 886,
+    "path": "src/mvdm-host/vdmredir/vdmredir.def",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vdmredir.def",
+    "before_sha256": "718f3ed81c6ace141a4a7c73689d8b883545050d93139735ee79708501bdcfb2",
+    "after_sha256": "745bc145be4614b9999e8388c010e35f2cbec24278d38437406a044faf51db25",
+    "disposition": "restored-format"
+  },
+  {
+    "sequence": 887,
+    "path": "src/mvdm-host/vdmredir/vdmredir.rc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vdmredir.rc",
+    "before_sha256": "1f8809530293c24277274d4f8cb0e66bb66b7cd1594cbf0a11393c50e8e491e9",
+    "after_sha256": "92794973e7f1561c10c6c2c0bd60a04bdcaab742abb2438940df5a35ee5c34d4",
+    "disposition": "restored-format"
+  }
+]

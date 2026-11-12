@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_munge.c",
+  "original_sha256": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061",
+  "current_sha256": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [],
+  "initial_review": "Raw byte identity rechecked against pinned original; no diff to register.",
+  "counter_review": "Identity is not proof all internal compile branches execute; no such claim made.",
+  "limits": "No source edits or new runtime validation."
+}

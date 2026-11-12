@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/wow32/wstruc.h",
+  "original_sha256": "1e54905079db411f6bc17583a8943e4f8f5c870129ff7d5814f87d8a41be6a7c",
+  "current_sha256": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 296,
+      "original_count": 1,
+      "current_start": 297,
+      "current_count": 1,
+      "original": [
+        "BOOL   getdropfilestruct16(HAND16 hand16, PHANDLE phand32);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Complete LF comparison: only original conditional-body replacements; all retained source identical. Original conditional declaration exclusion only.",
+  "limits": [
+    "Source-derived mapping only; not compiler certification or a new all-context reachability proof.",
+    "No build/tests run."
+  ]
+}

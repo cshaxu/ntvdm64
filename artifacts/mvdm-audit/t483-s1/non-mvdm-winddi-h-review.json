@@ -1,0 +1,77 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+  "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+  "current_sha256": "9572d77cf8c9b94cd999b18d20e0a77597e1b3dd13285864bb05328f0a0fab9f",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 2366,
+      "original_count": 40,
+      "current_start": 2367,
+      "current_count": 1,
+      "original": [
+        "",
+        "    typedef struct _FLOATOBJ",
+        "    {",
+        "        ULONG ul1;",
+        "        ULONG ul2;",
+        "    } FLOATOBJ, *PFLOATOBJ;",
+        "",
+        "    VOID  FLOATOBJ_SetFloat(PFLOATOBJ,FLOAT);",
+        "    VOID  FLOATOBJ_SetLong(PFLOATOBJ,LONG);",
+        "",
+        "    LONG  FLOATOBJ_GetFloat(PFLOATOBJ);",
+        "    LONG  FLOATOBJ_GetLong(PFLOATOBJ);",
+        "",
+        "    VOID  FLOATOBJ_AddFloat(PFLOATOBJ,FLOAT);",
+        "    VOID  FLOATOBJ_AddLong(PFLOATOBJ,LONG);",
+        "    VOID  FLOATOBJ_Add(PFLOATOBJ,PFLOATOBJ);",
+        "",
+        "    VOID  FLOATOBJ_SubFloat(PFLOATOBJ,FLOAT);",
+        "    VOID  FLOATOBJ_SubLong(PFLOATOBJ,LONG);",
+        "    VOID  FLOATOBJ_Sub(PFLOATOBJ,PFLOATOBJ);",
+        "",
+        "    VOID  FLOATOBJ_MulFloat(PFLOATOBJ,FLOAT);",
+        "    VOID  FLOATOBJ_MulLong(PFLOATOBJ,LONG);",
+        "    VOID  FLOATOBJ_Mul(PFLOATOBJ,PFLOATOBJ);",
+        "",
+        "    VOID  FLOATOBJ_DivFloat(PFLOATOBJ,FLOAT);",
+        "    VOID  FLOATOBJ_DivLong(PFLOATOBJ,LONG);",
+        "    VOID  FLOATOBJ_Div(PFLOATOBJ,PFLOATOBJ);",
+        "",
+        "    VOID  FLOATOBJ_Neg(PFLOATOBJ);",
+        "",
+        "    BOOL  FLOATOBJ_EqualLong(PFLOATOBJ,LONG);",
+        "    BOOL  FLOATOBJ_GreaterThanLong(PFLOATOBJ,LONG);",
+        "    BOOL  FLOATOBJ_LessThanLong(PFLOATOBJ,LONG);",
+        "",
+        "    BOOL  FLOATOBJ_Equal(PFLOATOBJ,PFLOATOBJ);",
+        "    BOOL  FLOATOBJ_GreaterThan(PFLOATOBJ,PFLOATOBJ);",
+        "    BOOL  FLOATOBJ_LessThan(PFLOATOBJ,PFLOATOBJ);",
+        "",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original_line": 2406,
+      "current_line": 2368,
+      "logical_line": 2367,
+      "text": "#else"
+    },
+    {
+      "original_line": 2408,
+      "current_line": 2370,
+      "logical_line": 2369,
+      "text": "    // any platform that has support for floats in the kernel"
+    }
+  ],
+  "evidence": [
+    "src/mvdm-host/wow32/wow32fax.c"
+  ],
+  "limits": "Whole retained-source and original conditional-body comparison only; not universal include-context hit or ABI certification. No new build or runtime test. The excluded _X86_ FLOATOBJ interface does not prove the project lacks x86 targets; consumer-specific macro contexts require separate compilation evidence."
+}

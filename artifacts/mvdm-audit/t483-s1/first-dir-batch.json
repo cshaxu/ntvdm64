@@ -1,0 +1,39 @@
+{
+  "head": "0fef12d013b72a5a2a768fb7ab7f1b6b4a9affdb",
+  "mode": "single agent; initial review then counter-review; mirror-only, no product edits",
+  "records": [
+    {
+      "sequence": 6,
+      "path": "src/mvdm-host/README.md",
+      "current_sha256": "eb0ef00a8406d215b2fc0d64414de52d8650767e2ad56f2570484117394ea130",
+      "disposition": "not-original-source",
+      "initial_review": "Project divergence ledger, not a mirror file.",
+      "second_review": "Keep as provenance support; no source-diff necessity claim."
+    },
+    {
+      "sequence": 7,
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "current_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+      "disposition": "retain-provisional-evidence-followup",
+      "initial_review": "35 original i386 conditional groups preserved; selected content matches original after removing #line and the unused ntdbg.h include. 57 lexical blocks are not 57 semantic changes.",
+      "second_review": "Hardware register-context branch is distinct from CCPU. Current graph selects original dbg.c without i386. Historical include suppression evidence matches current source hash. Verify complete include-context and diagnostic mapping before final per-file closure.",
+      "evidence": [
+        "artifacts/mvdm-audit/s13-r1227-ntdbg-unselected.json",
+        "docs/etc/evidence/m0-t420-s43-debugger-capability-ledger.md",
+        "build/.ninja/msvc-x86-release/worker/build.ninja"
+      ]
+    },
+    {
+      "sequence": 10,
+      "path": "src/mvdm-host/dbg/obj/i386/dbg.obj",
+      "current_sha256": "bf85927d05a1c0d61b274ca87a0b99102f9d7c971969db33db3e1d4e07a727c4",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dbg\\obj\\i386\\dbg.obj",
+      "original_sha256": "bf85927d05a1c0d61b274ca87a0b99102f9d7c971969db33db3e1d4e07a727c4",
+      "disposition": "no-diff",
+      "initial_review": "Compared complete byte streams, then CRLF/LF-normalized streams.",
+      "second_review": "No changed content after newline normalization.",
+      "source_pin_verified": true
+    }
+  ],
+  "limits": "No new compile or runtime results. Provisional rows are not completed file audits."
+}

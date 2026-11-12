@@ -116,5 +116,3 @@ XsCopyBufToTBuf(
     }
 
 #endif // ndef _XSUNICOD_
-
-

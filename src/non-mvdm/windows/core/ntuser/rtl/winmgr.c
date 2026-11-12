@@ -1,12 +1,17 @@
-/* Copyright (c) Microsoft Corporation.
- * Original windows/core/ntuser/rtl/winmgr.c true subset.
- * DIVERGENCE(OPENNT-HOST-078): retain required client-view bodies unchanged;
- * target-private precomp replaces the original build environment.
- * Unselected until the complete EDIT dependency group is wired. */
+/****************************** Module Header ******************************\
+* Module Name: winmgr.c
+*
+* Copyright (c) 1985-92, Microsoft Corporation
+*
+* This module contains routines common to client and kernel.
+*
+* History:
+* 02-20-92 DarrinM      Pulled functions from user\server.
+* 11-11-94 JimA         Separated from client.
+\***************************************************************************/
 #include "precomp.h"
 
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
-/* OPENNT-HOST-108: original style/version predicate, unchanged. */
 #line 613
 BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
 {
@@ -36,9 +41,19 @@ BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
 #endif
 
 #if defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
-/* OPENNT-HOST-091: unchanged original border arithmetic. */
 #include "wow_default_window_bindings.h"
 #define gpsi (&wow_default_current->server)
+/***************************************************************************\
+*
+*  Function:       GetWindowBorders
+*
+*  Synopsis:       Calculates # of borders around window
+*
+*  Algorithm:      Calculate # of window borders and # of client borders
+*
+*   This routine is ported from Chicago wmclient.c -- FritzS
+*
+\***************************************************************************/
 #line 501
 int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 {
@@ -80,7 +95,12 @@ int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 #endif
 
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
-/* OPENNT-HOST-106: original traversal, no fresh HWND sampling. */
+/***************************************************************************\
+* GetTopLevelWindow
+*
+* History:
+* 10-19-90 darrinm      Ported from Win 3.0 sources.
+\***************************************************************************/
 #line 703
 PWND GetTopLevelWindow(
     PWND pwnd)
@@ -93,6 +113,14 @@ PWND GetTopLevelWindow(
     return pwnd;
 }
 
+/***************************************************************************\
+* IsVisible
+*
+* Return whether or not a given window can be drawn in or not.
+*
+* History:
+* 07-22-91 darrinm      Translated from Win 3.1 ASM code.
+\***************************************************************************/
 #line 456
 BOOL IsVisible(
     PWND pwnd)
@@ -126,7 +154,18 @@ BOOL IsVisible(
     return TRUE;
 }
 
-/* OPENNT-HOST-106: original graph predicate used by Tab traversal. */
+/***************************************************************************\
+* IsDescendant
+*
+* Internal version if IsChild that is a bit faster and ignores the WFCHILD
+* business.
+*
+* Returns TRUE if pwndChild == pwndParent (IsChild doesn't).
+*
+* History:
+* 07-22-91 darrinm      Translated from Win 3.1 ASM code.
+* 03-03-94 Johnl        Moved from server
+\***************************************************************************/
 #line 432
 BOOL _IsDescendant(
     PWND pwndParent,

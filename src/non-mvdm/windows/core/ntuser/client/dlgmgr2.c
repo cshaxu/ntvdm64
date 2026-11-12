@@ -8,11 +8,21 @@
 * 12-Feb-1991 mikeke    Added Revalidation code
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-108): retain unchanged default-button workers
- * and descendant lookup; omit the separate IsDialogMessage A/W cohort.
+/* DIVERGENCE(OPENNT-HOST-108): retain original default-button workers
+ * and descendant lookup; IsDialogMessage A/W has an explicit cohort.
  * The standalone precomp binds existing scoped native calls and WND graph. */
 #line 11
 #include "precomp.h"
+
+/***************************************************************************\
+* xxxRemoveDefaultButton
+*
+* Scan through all the controls in the dialog box and remove the default
+* button style from any button that has it.  This is done since at times we
+* do not know who has the default button.
+*
+* History:
+\***************************************************************************/
 
 #line 24
 void xxxRemoveDefaultButton(
@@ -247,6 +257,13 @@ SetNewDefault:
 
 /* DIVERGENCE(OPENNT-HOST-119): recover the original keyboard cohort separately. */
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+/***************************************************************************\
+* IsDialogMessage (API)
+*
+* History:
+\***************************************************************************/
+
+
 #line 213
 BOOL IsDialogMessageA(
     HWND hwndDlg,
@@ -296,7 +313,9 @@ BOOL IsDialogMessageA(
 #line 248
         bRet = IsDialogMessageW(hwndDlg, lpmsg);
     } __finally {
-        /* Restore the original ANSI char. */
+    /*
+     * Restore the original ANSI char.
+     */
         lpmsg->wParam = wParamSaved;
     }
 #line 254
@@ -737,6 +756,15 @@ ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */
     return TRUE;
 }
 #endif
+
+/***************************************************************************\
+*
+* FindDlgItem32()
+*
+* Given a dialog, finds the window with the given ID anywhere w/in the
+* descendant chain.
+*
+\***************************************************************************/
 
 #line 645
 PWND _FindDlgItem(PWND pwndParent, DWORD id)

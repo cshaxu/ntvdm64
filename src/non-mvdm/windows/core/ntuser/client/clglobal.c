@@ -41,7 +41,7 @@ WCHAR awchSlashStar[] = L"\\*";
 CHAR achSlashStar[] = "\\*";
 #line 52
 WCHAR szOneChar[] = TEXT("0");
-WCHAR szSLASHSTARDOTSTAR[] = TEXT("\\*");
+WCHAR szSLASHSTARDOTSTAR[] = TEXT("\\*");  /* This is a single "\"  */
 
 #line 148
 CONST BOOLEAN gabThunkMessage[] = {
@@ -1223,4 +1223,3 @@ C_ASSERT(sizeof(gabThunkMessage) / sizeof(gabThunkMessage[0]) == WM_USER);
 #error Excluded unsupported USER WX86-global profile
 #endif
 #line 1317
-

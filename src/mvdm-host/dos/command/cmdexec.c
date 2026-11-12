@@ -115,12 +115,6 @@ BOOL IsWowAppRunnable(LPSTR lpAppName)
     // Look for the file name in the registry
     //
 
-    /* DIVERGENCE(MVDM-HOST-DIV-112): the source buffer remains the same
-     * twelve-byte ANSI registry value, but RegQueryValueEx has always
-     * required its data argument to be an LPBYTE.  State that ABI exactly
-     * on both host widths instead of relying on the old x86 char-array
-     * compatibility. */
-#line 83
     lError = RegQueryValueEx( hKey,
                               szModName,
                               0,
@@ -408,8 +402,6 @@ VOID cmdCreateProcess ( VOID )
 #line 323
     ANSI_STRING Env_A;
 
-    /* Default-off phase evidence only: preserve the original worker body and
-     * establish whether execution reaches its first source statement. */
 
 #line 324
 

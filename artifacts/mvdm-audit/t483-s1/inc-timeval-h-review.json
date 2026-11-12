@@ -1,0 +1,39 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+  "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+  "current_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 39,
+      "original_count": 11,
+      "current_normalized_start": 39,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 57,
+      "original_count": 1,
+      "current_normalized_start": 47,
+      "current_lines": [
+        "extern long host_time IPT1(long *, tloc);"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 61,
+      "original_count": 2,
+      "current_normalized_start": 51,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "host_time declaration changed from time_t to long; two non-NTVDM bodies excluded.",
+  "counter_review": "Original nt_unix.c:348-352 and current:346-350 implement long host_time(long*) using GetTickCount/1000 and ignore tloc. Declaration now agrees. Search src/test C/H finds only declaration and definition, no caller: runtime necessity/removal must be evaluated at provider package, not inferred from a type correction. host_localtime remains unchanged and is not proof of shared time_t semantics.",
+  "limits": "Source contract classification only; no new compiled-context or runtime acceptance."
+}

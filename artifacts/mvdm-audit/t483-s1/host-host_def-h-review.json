@@ -1,0 +1,101 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+  "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+  "current_sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 16,
+      "original_count": 0,
+      "current_start": 16,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include <stdlib.h>"
+      ]
+    },
+    {
+      "original_start": 40,
+      "original_count": 1,
+      "current_start": 42,
+      "current_count": 5,
+      "original": [
+        "#define CpuH \"cpu.h\""
+      ],
+      "current": [
+        "#if defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-551) */",
+        "#define CpuH \"cpu4.h\"",
+        "#else",
+        "#error Excluded non-CPU40 MONITOR CPU interface",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 91,
+      "original_count": 0,
+      "current_start": 101,
+      "current_count": 10,
+      "original": [],
+      "current": [
+        "/*",
+        " * DIVERGENCE(MVDM-HOST-DIV-057): non-MONITOR controller sources select",
+        " * cpu4.h, which does not carry the original host_simulate declaration even",
+        " * though keyboard, mouse, BIOS and storage sources invoke the same source",
+        " * entrypoint.  Keep the original void/no-argument contract visible to both",
+        " * host architectures; its selected implementation remains the existing",
+        " * SoftPC/CCPU path.",
+        " */",
+        "extern void host_simulate(void);",
+        ""
+      ]
+    },
+    {
+      "original_start": 141,
+      "original_count": 1,
+      "current_start": 165,
+      "current_count": 6,
+      "original": [
+        "#define CPU_30_STYLE"
+      ],
+      "current": [
+        "/*",
+        " * DIVERGENCE(MVDM-HOST-DIV-044): the selected product compiles only the",
+        " * original CCPU40 software-executor route.  CPU_30_STYLE selects the separate",
+        " * NT4 kernel-VDM V86 monitor contract, which this non-invasive product cannot",
+        " * provide; it must never be selected implicitly by a common host header.",
+        " */"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 132,
+      "original_count": 1,
+      "current_start": 155,
+      "current_count": 1,
+      "original": [
+        "#define RB_MODE \"r\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 221,
+      "original_count": 1,
+      "current_start": 252,
+      "current_count": 1,
+      "original": [
+        "HINSTANCE SafeLoadLibrary(char *name);"
+      ],
+      "current": [
+        "#error Excluded unsupported i386 host library loader"
+      ]
+    }
+  ],
+  "initial_review": "Four non-exclusion chunks: stdlib declarations, CpuH selection under MONITOR, shared host_simulate declaration, removal of implicit CPU30 define plus explanatory notice. Two pure exclusions for HUNTER and historical i386 loader.",
+  "counter_review": "host_malloc/calloc/free/getenv aliases need typed CRT declarations; a common include matches their common ownership. nt_cpu.c defines void host_simulate() and calls cpu_simulate; declaration creates no new execution route. video.c per-TU MONITOR selection is for NTIO setup, not a different CPU, so cpu4.h remains necessary. CPU30 and hardware MONITOR are separate axes: original host_cpu.h CPU30 branch includes software reg layouts as well as a MONITOR subbranch. Keep CPU30 disabled but correct blanket historical explanation.",
+  "evidence": "host_def.h:83-86 allocator/env aliases; nt_cpu.c:103-120 original recursive CPU entry; base/inc/cpu4.h generated CCPU interface; tools/build/New-T310OriginalSoftpcNinja.ps1:983-997 local video.c MONITOR/X86GFX configuration; original host_cpu.h:17-112 CPU30 includes MONITOR and endian reg alternatives.",
+  "limits": "Recommended explanation correction not applied; no functional remediation."
+}

@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+  "original_sha256": "5a6cb5699c84e6a25fc984aa9c5a4ee50cb22d4408ba3df57cd0cd95e41f23b0",
+  "current_sha256": "21e9496ff93586b7f696bad8a6015027dcc2592a09e8d38b4abedb76a4e6aa72",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 90,
+      "original_count": 4,
+      "current_start": 90,
+      "current_count": 2
+    }
+  ],
+  "limits": "Necessity audit only, not all-context reachability/logical-line certification; no functionality changed or tests run.",
+  "counter_review": "Complete original/current textual comparison; all remaining changes are enumerated declarations/conversion corrections or excluded bodies/#line directives."
+}

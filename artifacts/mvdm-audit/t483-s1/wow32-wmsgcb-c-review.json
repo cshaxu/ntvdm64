@@ -1,0 +1,169 @@
+{
+  "path": "src/mvdm-host/wow32/wmsgcb.c",
+  "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+  "current_sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+  "changes": [
+    {
+      "original_start": 17,
+      "original_count": 0,
+      "current_start": 17,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"wow_message_lifetime.h\" /* DIVERGENCE(MVDM-HOST-DIV-347) */"
+      ],
+      "decision": "retain",
+      "evidence": "CB_DIR now records ACTIVE/MAPPED/native lease per call and unthunks using original OLDCB_DIR identity, not mutable native uMsg/lParam or current W32CheckThunkParamFlag. Old CB_DIR switch cleanup removed to avoid a second release path. wow_message_lifetime.h supplies the ownership flags.",
+      "change_plan": "Retain captured CB_DIR acquisition and single original-message cleanup route. Preserve optional-map fallback and original mapping provider; do not restore ambient flag-based release. Verify null map input and native-filter mutation through parameter-map fixture."
+    },
+    {
+      "original_start": 137,
+      "original_count": 0,
+      "current_start": 103,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-347): optional map acquisition. */",
+        "                lpmpex->MsgBuffer->text.flags = 0;"
+      ],
+      "decision": "retain",
+      "evidence": "CB_DIR now records ACTIVE/MAPPED/native lease per call and unthunks using original OLDCB_DIR identity, not mutable native uMsg/lParam or current W32CheckThunkParamFlag. Old CB_DIR switch cleanup removed to avoid a second release path. wow_message_lifetime.h supplies the ownership flags.",
+      "change_plan": "Retain captured CB_DIR acquisition and single original-message cleanup route. Preserve optional-map fallback and original mapping provider; do not restore ambient flag-based release. Verify null map input and native-filter mutation through parameter-map fixture."
+    },
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 107,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                lpmpex->MsgBuffer->text.native = lpmpex->lParam;",
+        "                if (lpmpex->lParam) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;"
+      ],
+      "decision": "retain",
+      "evidence": "CB_DIR now records ACTIVE/MAPPED/native lease per call and unthunks using original OLDCB_DIR identity, not mutable native uMsg/lParam or current W32CheckThunkParamFlag. Old CB_DIR switch cleanup removed to avoid a second release path. wow_message_lifetime.h supplies the ownership flags.",
+      "change_plan": "Retain captured CB_DIR acquisition and single original-message cleanup route. Preserve optional-map fallback and original mapping provider; do not restore ambient flag-based release. Verify null map input and native-filter mutation through parameter-map fixture."
+    },
+    {
+      "original_start": 140,
+      "original_count": 1,
+      "current_start": 112,
+      "current_count": 2,
+      "original": [
+        "                    AddParamMap(lpmpex->lParam, lpmpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "                    if (AddParamMap(lpmpex->lParam, lpmpex->Parm16.WndProc.lParam))",
+        "                        lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;"
+      ],
+      "decision": "retain",
+      "evidence": "CB_DIR now records ACTIVE/MAPPED/native lease per call and unthunks using original OLDCB_DIR identity, not mutable native uMsg/lParam or current W32CheckThunkParamFlag. Old CB_DIR switch cleanup removed to avoid a second release path. wow_message_lifetime.h supplies the ownership flags.",
+      "change_plan": "Retain captured CB_DIR acquisition and single original-message cleanup route. Preserve optional-map fallback and original mapping provider; do not restore ambient flag-based release. Verify null map input and native-filter mutation through parameter-map fixture."
+    },
+    {
+      "original_start": 155,
+      "original_count": 0,
+      "current_start": 129,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "    /* DIV-347: native filters may replace uMsg/lParam, not our acquisition. */",
+        "    if (lpmpex->Parm16.WndProc.wMsg == OLDCB_DIR) {",
+        "        DWORD owned = lpmpex->MsgBuffer->text.flags;",
+        "        lpmpex->MsgBuffer->text.flags = 0;",
+        "        if (owned & WOW_TEXT_MAPPED)",
+        "            DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, NULL);",
+        "        if (owned & WOW_TEXT_ACTIVE) FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);",
+        "        return;",
+        "    }"
+      ],
+      "decision": "retain",
+      "evidence": "CB_DIR now records ACTIVE/MAPPED/native lease per call and unthunks using original OLDCB_DIR identity, not mutable native uMsg/lParam or current W32CheckThunkParamFlag. Old CB_DIR switch cleanup removed to avoid a second release path. wow_message_lifetime.h supplies the ownership flags.",
+      "change_plan": "Retain captured CB_DIR acquisition and single original-message cleanup route. Preserve optional-map fallback and original mapping provider; do not restore ambient flag-based release. Verify null map input and native-filter mutation through parameter-map fixture."
+    },
+    {
+      "original_start": 184,
+      "original_count": 8,
+      "current_start": 169,
+      "current_count": 0,
+      "original": [
+        "        case CB_DIR:",
+        "            if (W32CheckThunkParamFlag()) {",
+        "                DeleteParamMap(lpmpex->lParam, PARAM_32, NULL);",
+        "            }",
+        "",
+        "            FREEPSZPTR((LPSZ)lpmpex->lParam);",
+        "            break;",
+        ""
+      ],
+      "current": [],
+      "decision": "retain",
+      "evidence": "CB_DIR now records ACTIVE/MAPPED/native lease per call and unthunks using original OLDCB_DIR identity, not mutable native uMsg/lParam or current W32CheckThunkParamFlag. Old CB_DIR switch cleanup removed to avoid a second release path. wow_message_lifetime.h supplies the ownership flags.",
+      "change_plan": "Retain captured CB_DIR acquisition and single original-message cleanup route. Preserve optional-map fallback and original mapping provider; do not restore ambient flag-based release. Verify null map input and native-filter mutation through parameter-map fixture."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 40,
+      "current_start": 26,
+      "current_count": 1,
+      "original": [
+        "",
+        "MSGINFO amiCB[] = {",
+        "   {OLDCB_GETEDITSEL,       \"CB_GETEDITSEL\"},       // 0x0400",
+        "   {OLDCB_LIMITTEXT,        \"CB_LIMITTEXT\"},        // 0x0401",
+        "   {OLDCB_SETEDITSEL,       \"CB_SETEDITSEL\"},       // 0x0402",
+        "   {OLDCB_ADDSTRING,        \"CB_ADDSTRING\"},        // 0x0403",
+        "   {OLDCB_DELETESTRING,     \"CB_DELETESTRING\"},     // 0x0404",
+        "   {OLDCB_DIR,          \"CB_DIR\"},          // 0x0405",
+        "   {OLDCB_GETCOUNT,     \"CB_GETCOUNT\"},         // 0x0406",
+        "   {OLDCB_GETCURSEL,        \"CB_GETCURSEL\"},        // 0x0407",
+        "   {OLDCB_GETLBTEXT,        \"CB_GETLBTEXT\"},        // 0x0408",
+        "   {OLDCB_GETLBTEXTLEN,     \"CB_GETLBTEXTLEN\"},     // 0x0409",
+        "   {OLDCB_INSERTSTRING,     \"CB_INSERTSTRING\"},     // 0x040A",
+        "   {OLDCB_RESETCONTENT,     \"CB_RESETCONTENT\"},     // 0x040B",
+        "   {OLDCB_FINDSTRING,       \"CB_FINDSTRING\"},       // 0x040C",
+        "   {OLDCB_SELECTSTRING,     \"CB_SELECTSTRING\"},     // 0x040D",
+        "   {OLDCB_SETCURSEL,        \"CB_SETCURSEL\"},        // 0x040E",
+        "   {OLDCB_SHOWDROPDOWN,     \"CB_SHOWDROPDOWN\"},     // 0x040F",
+        "   {OLDCB_GETITEMDATA,      \"CB_GETITEMDATA\"},      // 0x0410",
+        "   {OLDCB_SETITEMDATA,      \"CB_SETITEMDATA\"},      // 0x0411",
+        "   {OLDCB_GETDROPPEDCONTROLRECT,\"CB_GETDROPPEDCONTROLRECT\"},    // 0x0412",
+        "   {OLDCB_SETITEMHEIGHT,    \"CB_SETITEMHEIGHT\"},        // 0x0413",
+        "   {OLDCB_GETITEMHEIGHT,    \"CB_GETITEMHEIGHT\"},        // 0x0414",
+        "   {OLDCB_SETEXTENDEDUI,    \"CB_SETEXTENDEDUI\"},        // 0x0415",
+        "   {OLDCB_GETEXTENDEDUI,    \"CB_GETEXTENDEDUI\"},        // 0x0416",
+        "   {OLDCB_GETDROPPEDSTATE,  \"CB_GETDROPPEDSTATE\"},      // 0x0417",
+        "   {OLDCB_FINDSTRINGEXACT,  \"CB_FINDSTRINGEXACT\"},      // 0x0418",
+        "};",
+        "",
+        "PSZ GetCBMsgName(WORD wMsg)",
+        "{",
+        "    INT i;",
+        "    register PMSGINFO pmi;",
+        "",
+        "    for (pmi=amiCB,i=NUMEL(amiCB); i>0; i--,pmi++)",
+        "        if ((WORD)pmi->uMsg == wMsg)",
+        "        return pmi->pszMsgName;",
+        "    return GetWMMsgName(wMsg);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 62,
+      "current": 27,
+      "logical": 23
+    }
+  ],
+  "evidence": "Full source diff audited against original converter and concrete definitions.",
+  "limits": [
+    "Audit classification, not product repair or runtime pass."
+  ]
+}

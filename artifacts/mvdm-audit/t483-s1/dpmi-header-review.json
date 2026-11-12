@@ -1,0 +1,85 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+  "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+  "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 26,
+      "original_count": 2,
+      "current_start": 26,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 29,
+      "current_count": 1,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 30,
+      "original_count": 9,
+      "current_start": 31,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 40,
+      "original_count": 0,
+      "current_start": 34,
+      "current_count": 1,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 53,
+      "original_count": 0,
+      "current_start": 48,
+      "current_count": 1,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 54,
+      "original_count": 4,
+      "current_start": 50,
+      "current_count": 2,
+      "classification": "excluded-branch"
+    },
+    {
+      "original_start": 59,
+      "original_count": 0,
+      "current_start": 53,
+      "current_count": 1,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 120,
+      "original_count": 0,
+      "current_start": 115,
+      "current_count": 16,
+      "classification": "selected-declarations"
+    },
+    {
+      "original_start": 121,
+      "original_count": 0,
+      "current_start": 132,
+      "current_count": 2,
+      "classification": "conditional-or-line-scaffolding"
+    },
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 151,
+      "current_count": 8,
+      "classification": "selected-declarations"
+    }
+  ],
+  "initial_review": "All added declarations and three excluded bodies classified; original selected selector macros unchanged.",
+  "counter_review": "One helper declaration can be removed only with its definition and constant product caller. Other declarations have real consumers; body correctness is not inferred from signature agreement.",
+  "limits": [
+    "No functional changes implemented.",
+    "Existing data.c/modesw failure and mapping questions remain separate pending evidence.",
+    "No fresh compile/test run."
+  ]
+}

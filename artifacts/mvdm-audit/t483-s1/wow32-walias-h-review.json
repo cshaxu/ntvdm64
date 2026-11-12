@@ -1,0 +1,227 @@
+{
+  "path": "src/mvdm-host/wow32/walias.h",
+  "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+  "current_sha256": "a70043dc23477361031e427f555a11abff2218a74878258981110b70e35d4fdd",
+  "changes": [
+    {
+      "original_start": 20,
+      "original_count": 0,
+      "current_start": 20,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-341): original GDI table's existing carrier. */",
+        "#include \"common/wow/gdi_alias.h\""
+      ],
+      "decision": "retain",
+      "change_plan": "Retain shared GDI alias-provider boundary; the original private GDI table and handle arithmetic are not available as a modern host contract.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 189,
+      "original_count": 2,
+      "current_start": 181,
+      "current_count": 4,
+      "original": [
+        "#define GDI32(h16)                 (HANDLE) hConvert16to32(h16)",
+        "#define GDI16(h32)                 (HAND16) (((DWORD) (h32)) << 2)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-341): conversion and FREE* retire the same alias;",
+        " * modern GDI remains the real resource/type/lifetime authority. */",
+        "#define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))",
+        "#define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain shared GDI alias-provider boundary; the original private GDI table and handle arithmetic are not available as a modern host contract.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 196,
+      "original_count": 1,
+      "current_start": 191,
+      "current_count": 1,
+      "original": [
+        "#define FREEHDC16(hdc16)"
+      ],
+      "current": [
+        "#define FREEHDC16(hdc16)           mvdm_wow_gdi_handle_retire((HAND16)(hdc16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 200,
+      "original_count": 1,
+      "current_start": 195,
+      "current_count": 1,
+      "original": [
+        "#define FREEHFONT16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHFONT16(hobj16)        mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 208,
+      "original_count": 1,
+      "current_start": 203,
+      "current_count": 1,
+      "original": [
+        "#define FREEHRGN16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHRGN16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 212,
+      "original_count": 1,
+      "current_start": 207,
+      "current_count": 1,
+      "original": [
+        "#define FREEHBITMAP16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHBITMAP16(hobj16)      mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 216,
+      "original_count": 1,
+      "current_start": 211,
+      "current_count": 1,
+      "original": [
+        "#define FREEHBRUSH16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHBRUSH16(hobj16)       mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 220,
+      "original_count": 1,
+      "current_start": 215,
+      "current_count": 1,
+      "original": [
+        "#define FREEHPALETTE16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHPALETTE16(hobj16)     mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 224,
+      "original_count": 1,
+      "current_start": 219,
+      "current_count": 1,
+      "original": [
+        "#define FREEHPEN16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHPEN16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 228,
+      "original_count": 1,
+      "current_start": 223,
+      "current_count": 1,
+      "original": [
+        "#define FREEHOBJ16(hobj16)"
+      ],
+      "current": [
+        "#define FREEHOBJ16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep retirement at existing FREE* boundaries pending complete deletion-path review; inspect successful DIB/DC special deletion branches and temporary/shared handle owners before changing macros.",
+      "missing_evidence": "Whether special DIB cleanup already retires aliases; real GDI reuse and shared-handle lifetime coverage."
+    },
+    {
+      "original_start": 343,
+      "original_count": 0,
+      "current_start": 338,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-344): synchronous COPYDATA release keys. */",
+        "    struct { DWORD header, data, flags; } copydata;",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-347): call progress, no union size change. */",
+        "    struct { DWORD flags, native; } text;",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-353): original INITIATE node publication. */",
+        "    struct { DWORD active, initiator; } ddeinit;"
+      ],
+      "decision": "pending",
+      "change_plan": "Preserve call-owned COPYDATA/text/DDE INITIATE release keys while reviewing handlers as one group. Prove union capacity/alignment and remove only state redundant with original ownership records; do not replace with ambient state.",
+      "missing_evidence": "Selected-target layout proof; complete callback/exception/reentry lifetime comparison against original handlers; text and DDE coverage beyond source inspection."
+    },
+    {
+      "original_start": 361,
+      "original_count": 0,
+      "current_start": 363,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-344): NULL HWND can be a valid thread message. */",
+        "    BOOL fThunkSucceeded;",
+        "    /* DIV-363: optional owner supplied only by WU32PostMessage. */",
+        "    PVOID ddePostConversion;",
+        "    BOOL ddePostPacked;"
+      ],
+      "decision": "pending",
+      "change_plan": "Retain explicit conversion-success distinction from HWND and scoped DDE post ownership for now. Audit every MSGPARAMEX construction/initialization and thunk/unthunk caller before considering packing or removal.",
+      "missing_evidence": "All construction sites initialize optional fields; original/selected ABI layout consumers; exceptional return ownership coverage. DDE fixture alone does not establish all message behavior."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 109,
+      "original_count": 15,
+      "current_start": 113,
+      "current_count": 1,
+      "original": [
+        "",
+        "//",
+        "// Check for task aliases that will cause us to fault if we dereference the NULL",
+        "// pointer returned by SEGPTR(htask16,0).",
+        "//",
+        "",
+        "#define THREADID32(htask16)                                                   \\",
+        "        ((htask16)                                                            \\",
+        "             ? (ISTASKALIAS(htask16)                                          \\",
+        "                    ? (WOW32ASSERTMSGF(FALSE,                                 \\",
+        "                           (\"WOW32 ERROR %s line %d Task alias \"              \\",
+        "                            \"to THREADID32, use HTASK32 instead.\\n\",          \\",
+        "                            szModule, __LINE__)), 0)                          \\",
+        "                    : ((PTDB)SEGPTR((htask16),0))->TDB_ThreadID)              \\",
+        "             : 0)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected"
+      ]
+    }
+  ],
+  "line_number_basis": "Physical LF lines, CRLF normalized for comparison; form-feed is not a newline. No new diagnostic-line correctness claim.",
+  "initial_review": "All non-line-directive chunks classified; DEBUG THREADID32 excluded body retains original conditional framework.",
+  "counter_review": "Alias provider necessity does not certify every retirement path. Message fields have callers but full ownership/layout minimality remains pending. Do not delete this live header.",
+  "limits": "No product edits/build/test. Earlier reports using str.splitlines may count form-feed as a line; their source-derived line mismatch totals require revalidation before implementation, not compiler-proven errors."
+}

@@ -1,0 +1,279 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+  "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+  "current_sha256": "000d27dd967cd4d48ffcd36462a68817a086ceffae60e5af629171b6042d6689",
+  "changes": [
+    {
+      "original_start": 18,
+      "original_count": 0,
+      "current_start": 18,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-092): original control wheel state and complete A/W message table.",
+        " * Bind scalar declarations without importing USER global state/precomp. */",
+        "#include <windows.h>"
+      ]
+    },
+    {
+      "original_start": 19,
+      "original_count": 5,
+      "current_start": 23,
+      "current_count": 0,
+      "original": [
+        "#include \"precomp.h\"",
+        "#pragma hdrstop",
+        "",
+        "",
+        "// Debug globals"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 37,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* OPENNT-HOST-092: original directory-list operands. Keep one process",
+        " * definition in the original global owner, not per-adapter copies. */"
+      ]
+    },
+    {
+      "original_start": 38,
+      "original_count": 14,
+      "current_start": 43,
+      "current_count": 0,
+      "original": [
+        "",
+        "PSERVERINFO gpsi;",
+        "SHAREDINFO gSharedInfo;",
+        "HMODULE hmodUser;               // USER.DLL's hmodule",
+        "",
+        "BOOL gfServerProcess;           // USER is linked on the CSR server side",
+        "BOOL gfSystemInitialized;       // System has been initialized",
+        "",
+        "ACCESS_MASK gamWinSta;          // ACCESS_MASK for the current WindowStation",
+        "",
+        "PVOID pUserHeap;",
+        "",
+        "WCHAR szUSER32[] = TEXT(\"USER32\");",
+        "WCHAR szNull[2] = { TEXT('\\0'), TEXT('\\015') };"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 54,
+      "original_count": 4,
+      "current_start": 45,
+      "current_count": 0,
+      "original": [
+        "WCHAR szAttr[]   = TEXT(\"ASHR\");   /* Archive, System, Hidden, Read only */",
+        "WCHAR szAM[10];",
+        "WCHAR szPM[10];",
+        "LPWSTR pTimeTagArray[] = { szAM, szPM };"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 59,
+      "original_count": 89,
+      "current_start": 47,
+      "current_count": 0,
+      "original": [
+        "RECT rcScreen;",
+        "",
+        "/* Maps MessageBox type to number of buttons in the MessageBox */",
+        "BYTE mpTypeCcmd[] = { 1, 2, 3, 3, 2, 2 };",
+        "",
+        "/* Maps MessageBox type to index into SEBbuttons array */",
+        "BYTE mpTypeIich[] = { 0, 2, 5, 12, 9, 16 };",
+        "",
+        "/*",
+        " * NOTE: There is one-to-one mapping between the elements of arrays",
+        " *       SEBbuttons[] and rgReturn[]. So, any change in one array must",
+        " *       be done in the other also;",
+        " */",
+        "unsigned int SEBbuttons[] = {",
+        "    SEB_OK, SEB_HELP,",
+        "    SEB_OK, SEB_CANCEL, SEB_HELP,",
+        "    SEB_ABORT, SEB_RETRY, SEB_IGNORE, SEB_HELP,",
+        "    SEB_YES, SEB_NO, SEB_HELP,",
+        "    SEB_YES, SEB_NO, SEB_CANCEL, SEB_HELP,",
+        "    SEB_RETRY, SEB_CANCEL, SEB_HELP",
+        "};",
+        "",
+        "BYTE rgReturn[] = {",
+        "    IDOK, IDHELP,",
+        "    IDOK, IDCANCEL, IDHELP,",
+        "    IDABORT, IDRETRY, IDIGNORE, IDHELP,",
+        "    IDYES, IDNO, IDHELP,",
+        "    IDYES, IDNO, IDCANCEL, IDHELP,",
+        "    IDRETRY, IDCANCEL, IDHELP,",
+        "};",
+        "",
+        "WCHAR szERROR[10];",
+        "",
+        "ATOM atomBwlProp;",
+        "ATOM atomMsgBoxCallback;",
+        "",
+        "CRITICAL_SECTION gcsLookaside;",
+        "CRITICAL_SECTION gcsHdc;",
+        "CRITICAL_SECTION gcsClipboard;",
+        "",
+        "HDC    ghdcBits2 = NULL;",
+        "HDC    ghdcGray = NULL;",
+        "HFONT  ghFontSys = NULL;",
+        "HBRUSH ghbrWindowText = NULL;",
+        "int    gcxGray;",
+        "int    gcyGray;",
+        "PCHAR  gpOemToAnsi;",
+        "PCHAR  gpAnsiToOem;",
+        "",
+        "",
+        "/*",
+        " * These are the resource call procedure addresses. If WOW is running,",
+        " * it makes a call to set all these up to point to it. If it isn't",
+        " * running, it defaults to the values you see below.",
+        " *",
+        " * On the server there is an equivalent structure. The one on the server",
+        " * is used for DOSWIN32.",
+        " */",
+        "RESCALLS rescalls = {",
+        "    NULL, // Assigned dynamically - _declspec (PFNFINDA)FindResourceExA,",
+        "    NULL, // Assigned dynamically - _declspec (PFNFINDW)FindResourceExW,",
+        "    NULL, // Assigned dynamically - _declspec (PFNLOAD)LoadResource,",
+        "    (PFNLOCK)_LockResource,",
+        "    (PFNUNLOCK)_UnlockResource,",
+        "    (PFNFREE)_FreeResource,",
+        "    NULL, // Assigned dynamically - _declspec (PFNSIZEOF)SizeofResource",
+        "};",
+        "PRESCALLS prescalls = &rescalls;",
+        "",
+        "PFNLALLOC pfnLocalAlloc             = (PFNLALLOC)DispatchLocalAlloc;",
+        "PFNLREALLOC pfnLocalReAlloc         = (PFNLREALLOC)DispatchLocalReAlloc;",
+        "PFNLLOCK pfnLocalLock               = (PFNLLOCK)DispatchLocalLock;",
+        "PFNLUNLOCK pfnLocalUnlock           = (PFNUNLOCK)DispatchLocalUnlock;",
+        "PFNLSIZE pfnLocalSize               = (PFNLSIZE)DispatchLocalSize;",
+        "PFNLFREE pfnLocalFree               = (PFNLFREE)DispatchLocalFree;",
+        "PFNGETEXPWINVER pfnGetExpWinVer     = RtlGetExpWinVer;",
+        "PFNINITDLGCB pfnInitDlgCallback     = NULL;",
+        "PFN16GALLOC pfn16GlobalAlloc        = NULL;",
+        "PFN16GFREE pfn16GlobalFree          = NULL;",
+        "PFNEMPTYCB pfnWowEmptyClipBoard     = NULL;",
+        "PFNWOWWNDPROCEX  pfnWowWndProcEx    = NULL;",
+        "PFNWOWSETFAKEDIALOGCLASS  pfnWowSetFakeDialogClass    = NULL;",
+        "PFNWOWEDITNEXTWORD   pfnWowEditNextWord = NULL;",
+        "PFNWOWCBSTOREHANDLE pfnWowCBStoreHandle = NULL;",
+        "",
+        "/*",
+        " * If TRUE, the message contains data that must be thunked",
+        " * ANSI->Unicode or Unicode->ANSI",
+        " */"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 1308,
+      "original_count": 0,
+      "current_start": 1218,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "C_ASSERT(sizeof(gabThunkMessage) / sizeof(gabThunkMessage[0]) == WM_USER);"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 25,
+      "original_count": 1,
+      "current_start": 25,
+      "current_count": 1,
+      "original": [
+        "INT gbCheckHandleLevel=0;"
+      ],
+      "current": [
+        "#error Excluded unsupported USER debug-global profile"
+      ]
+    },
+    {
+      "original_start": 450,
+      "original_count": 1,
+      "current_start": 351,
+      "current_count": 1,
+      "original": [
+        "    TRUE,     // WM_IME_COMPOSITION  0x010F"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 475,
+      "original_count": 2,
+      "current_start": 380,
+      "current_count": 1,
+      "original": [
+        "    FALSE,    // WM_MENURBUTTONUP    0x0122",
+        "    FALSE,    // 0x0123-0x0127"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 878,
+      "original_count": 1,
+      "current_start": 786,
+      "current_count": 1,
+      "original": [
+        "    TRUE,     // WM_IME_CHAR         0x0286"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1310,
+      "original_count": 6,
+      "current_start": 1223,
+      "current_count": 1,
+      "original": [
+        "",
+        "/*",
+        " *  Client Global variables for Wx86.",
+        " *",
+        " */",
+        "PFNWX86HOOKCALLBACK pfnWx86HookCallBack=NULL;"
+      ],
+      "current": [
+        "#error Excluded unsupported USER WX86-global profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original_line": 477,
+      "current_line": 381,
+      "logical_line": 476,
+      "text": "#else"
+    },
+    {
+      "original_line": 1316,
+      "current_line": 1224,
+      "logical_line": 1311,
+      "text": "#endif"
+    }
+  ],
+  "evidence": [
+    "src/non-mvdm/windows/core/ntuser/client/editec.c",
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+    "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+    "test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1"
+  ],
+  "limits": "Whole table/source comparison and real consumers/build recipe inspected; fixture checks representative message flags, not every entry or guest behavior. Source equality proves selected initializer content, not current compilation selection or runtime pass. No new build/runtime evidence."
+}

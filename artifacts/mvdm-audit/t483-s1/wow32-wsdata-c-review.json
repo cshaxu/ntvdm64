@@ -1,0 +1,725 @@
+{
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+  "current_sha256": "01441093111cbc6d9af499e16b05d8367a869ea1cb19e238b975bc781b94f8de",
+  "changes": [
+    {
+      "original_start": 326,
+      "original_count": 1,
+      "current_start": 326,
+      "current_count": 1,
+      "original": [
+        "    if ( context == NULL ) {"
+      ],
+      "current": [
+        "    if ( buffer32 == NULL ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Second allocation must test buffer32, not the already allocated context; original exit frees both partial resources and returns WSAENOBUFS.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 338,
+      "original_count": 0,
+      "current_start": 338,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    context->ThreadSerialNumber = WWS32ThreadSerialNumber;",
+        "    context->RundownState = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Initialize new request owner serial and rundown flags before publication in existing context list; task serial originates in WSA startup and rundown consumes that serial.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 430,
+      "original_count": 1,
+      "current_start": 433,
+      "current_count": 1,
+      "original": [
+        "    if ( context == NULL ) {"
+      ],
+      "current": [
+        "    if ( buffer32 == NULL ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Second allocation must test buffer32, not the already allocated context; original exit frees both partial resources and returns WSAENOBUFS.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 442,
+      "original_count": 0,
+      "current_start": 445,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    context->ThreadSerialNumber = WWS32ThreadSerialNumber;",
+        "    context->RundownState = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Initialize new request owner serial and rundown flags before publication in existing context list; task serial originates in WSA startup and rundown consumes that serial.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 513,
+      "original_count": 1,
+      "current_start": 519,
+      "current_count": 6,
+      "original": [
+        "    ASSERT( context != NULL );"
+      ],
+      "current": [
+        "    if ( context == NULL ) {",
+        "        // A successful cancel or task rundown detaches the context before",
+        "        // asking WSOCK32 to stop it.  A completion already queued by the",
+        "        // provider is therefore stale and must not touch freed guest memory.",
+        "        return TRUE;",
+        "    }"
+      ],
+      "decision": "retain",
+      "necessity": "Completion can legitimately find no context after successful cancellation; stop before accessing guest buffer instead of relying on ASSERT.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 890,
+      "original_count": 1,
+      "current_start": 902,
+      "current_count": 1,
+      "original": [
+        "    if ( context == NULL ) {"
+      ],
+      "current": [
+        "    if ( buffer32 == NULL ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Second allocation must test buffer32, not the already allocated context; original exit frees both partial resources and returns WSAENOBUFS.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 902,
+      "original_count": 0,
+      "current_start": 914,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    context->ThreadSerialNumber = WWS32ThreadSerialNumber;",
+        "    context->RundownState = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Initialize new request owner serial and rundown flags before publication in existing context list; task serial originates in WSA startup and rundown consumes that serial.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 991,
+      "original_count": 1,
+      "current_start": 1006,
+      "current_count": 1,
+      "original": [
+        "    if ( context == NULL ) {"
+      ],
+      "current": [
+        "    if ( buffer32 == NULL ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Second allocation must test buffer32, not the already allocated context; original exit frees both partial resources and returns WSAENOBUFS.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1003,
+      "original_count": 0,
+      "current_start": 1018,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    context->ThreadSerialNumber = WWS32ThreadSerialNumber;",
+        "    context->RundownState = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Initialize new request owner serial and rundown flags before publication in existing context list; task serial originates in WSA startup and rundown consumes that serial.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1073,
+      "original_count": 1,
+      "current_start": 1091,
+      "current_count": 3,
+      "original": [
+        "    ASSERT( context != NULL );"
+      ],
+      "current": [
+        "    if ( context == NULL ) {",
+        "        return TRUE;",
+        "    }"
+      ],
+      "decision": "retain",
+      "necessity": "Completion can legitimately find no context after successful cancellation; stop before accessing guest buffer instead of relying on ASSERT.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1385,
+      "original_count": 1,
+      "current_start": 1406,
+      "current_count": 1,
+      "original": [
+        "    if ( context == NULL ) {"
+      ],
+      "current": [
+        "    if ( buffer32 == NULL ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Second allocation must test buffer32, not the already allocated context; original exit frees both partial resources and returns WSAENOBUFS.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1397,
+      "original_count": 0,
+      "current_start": 1418,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    context->ThreadSerialNumber = WWS32ThreadSerialNumber;",
+        "    context->RundownState = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Initialize new request owner serial and rundown flags before publication in existing context list; task serial originates in WSA startup and rundown consumes that serial.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1491,
+      "original_count": 1,
+      "current_start": 1515,
+      "current_count": 1,
+      "original": [
+        "    if ( context == NULL ) {"
+      ],
+      "current": [
+        "    if ( buffer32 == NULL ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Second allocation must test buffer32, not the already allocated context; original exit frees both partial resources and returns WSAENOBUFS.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1503,
+      "original_count": 0,
+      "current_start": 1527,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    context->ThreadSerialNumber = WWS32ThreadSerialNumber;",
+        "    context->RundownState = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Initialize new request owner serial and rundown flags before publication in existing context list; task serial originates in WSA startup and rundown consumes that serial.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1576,
+      "original_count": 1,
+      "current_start": 1603,
+      "current_count": 3,
+      "original": [
+        "    ASSERT( context != NULL );"
+      ],
+      "current": [
+        "    if ( context == NULL ) {",
+        "        return TRUE;",
+        "    }"
+      ],
+      "decision": "retain",
+      "necessity": "Completion can legitimately find no context after successful cancellation; stop before accessing guest buffer instead of relying on ASSERT.",
+      "change_plan": "Retain existing same-owner change.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1775,
+      "original_count": 0,
+      "current_start": 1805,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-463): the selected source leaves this",
+        "       mapped WINSOCK operation as WSAEINVAL, although it already owns the",
+        "       native request identity in the existing async-context list. */"
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    },
+    {
+      "original_start": 1777,
+      "original_count": 0,
+      "current_start": 1811,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    HANDLE asyncTaskHandle32;",
+        "    HAND16 asyncTaskHandle16;",
+        "    PWINSOCK_ASYNC_CONTEXT_BLOCK context;"
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    },
+    {
+      "original_start": 1784,
+      "original_count": 0,
+      "current_start": 1822,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    asyncTaskHandle16 = GETWORD16( parg16->hAsyncTaskHandle );"
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    },
+    {
+      "original_start": 1785,
+      "original_count": 2,
+      "current_start": 1825,
+      "current_count": 14,
+      "original": [
+        "    //ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(",
+        "    //                    ));"
+      ],
+      "current": [
+        "    if ( !WWS32FindAsyncTaskHandle32(",
+        "              asyncTaskHandle16,",
+        "              WWS32ThreadSerialNumber,",
+        "              &asyncTaskHandle32",
+        "              ) ) {",
+        "",
+        "        FREEARGPTR(parg16);",
+        "        SetLastError( WSAEINVAL );",
+        "        RETURN((ULONG)SOCKET_ERROR);",
+        "    }",
+        "",
+        "    ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(",
+        "                        asyncTaskHandle32",
+        "                        ));"
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    },
+    {
+      "original_start": 1790,
+      "original_count": 2,
+      "current_start": 1843,
+      "current_count": 13,
+      "original": [
+        "    ul = (ULONG) SOCKET_ERROR;",
+        "    SetLastError( WSAEINVAL );"
+      ],
+      "current": [
+        "    if ( ul == NO_ERROR ) {",
+        "        // WSOCK32 has accepted the cancellation.  Remove the matching",
+        "        // context before a queued post can reach the task's guest buffer.",
+        "        // A completion that won the race has already removed and released it.",
+        "        context = WWS32FindAndRemoveAsyncContext16(",
+        "                      asyncTaskHandle16,",
+        "                      WWS32ThreadSerialNumber",
+        "                      );",
+        "        if ( context != NULL ) {",
+        "            free_w( context->Buffer32 );",
+        "            free_w( (PVOID)context );",
+        "        }",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    },
+    {
+      "original_start": 1796,
+      "original_count": 0,
+      "current_start": 1861,
+      "current_count": 139,
+      "original": [],
+      "current": [
+        "",
+        "\f",
+        "BOOL",
+        "WWS32FindAsyncTaskHandle32 (",
+        "    IN HAND16 AsyncTaskHandle16,",
+        "    IN DWORD ThreadSerialNumber,",
+        "    OUT HANDLE *AsyncTaskHandle32",
+        "    )",
+        "{",
+        "    PWINSOCK_ASYNC_CONTEXT_BLOCK context;",
+        "    PLIST_ENTRY listEntry;",
+        "    BOOL found;",
+        "",
+        "    found = FALSE;",
+        "    RtlEnterCriticalSection( &WWS32CriticalSection );",
+        "",
+        "    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;",
+        "          listEntry != &WWS32AsyncContextBlockListHead;",
+        "          listEntry = listEntry->Flink ) {",
+        "",
+        "        context = CONTAINING_RECORD(",
+        "                      listEntry,",
+        "                      WINSOCK_ASYNC_CONTEXT_BLOCK,",
+        "                      ContextBlockListEntry",
+        "                      );",
+        "",
+        "        if ( context->AsyncTaskHandle16 == AsyncTaskHandle16 &&",
+        "             context->ThreadSerialNumber == ThreadSerialNumber ) {",
+        "",
+        "            *AsyncTaskHandle32 = context->AsyncTaskHandle32;",
+        "            found = TRUE;",
+        "            break;",
+        "        }",
+        "    }",
+        "",
+        "    RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "",
+        "    return found;",
+        "",
+        "} // WWS32FindAsyncTaskHandle32",
+        "",
+        "\f",
+        "PWINSOCK_ASYNC_CONTEXT_BLOCK",
+        "WWS32FindAndRemoveAsyncContext16 (",
+        "    IN HAND16 AsyncTaskHandle16,",
+        "    IN DWORD ThreadSerialNumber",
+        "    )",
+        "{",
+        "    PWINSOCK_ASYNC_CONTEXT_BLOCK context;",
+        "    PLIST_ENTRY listEntry;",
+        "",
+        "    RtlEnterCriticalSection( &WWS32CriticalSection );",
+        "",
+        "    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;",
+        "          listEntry != &WWS32AsyncContextBlockListHead;",
+        "          listEntry = listEntry->Flink ) {",
+        "",
+        "        context = CONTAINING_RECORD(",
+        "                      listEntry,",
+        "                      WINSOCK_ASYNC_CONTEXT_BLOCK,",
+        "                      ContextBlockListEntry",
+        "                      );",
+        "",
+        "        if ( context->AsyncTaskHandle16 == AsyncTaskHandle16 &&",
+        "             context->ThreadSerialNumber == ThreadSerialNumber ) {",
+        "",
+        "            RemoveEntryList( &context->ContextBlockListEntry );",
+        "            RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "            return context;",
+        "        }",
+        "    }",
+        "",
+        "    RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "    return NULL;",
+        "",
+        "} // WWS32FindAndRemoveAsyncContext16",
+        "",
+        "\f",
+        "VOID",
+        "WWS32CancelAsyncRequestsForTask(",
+        "    IN DWORD ThreadSerialNumber",
+        "    )",
+        "{",
+        "    PWINSOCK_ASYNC_CONTEXT_BLOCK context;",
+        "    PLIST_ENTRY listEntry;",
+        "    INT result;",
+        "    INT error;",
+        "    BOOL release;",
+        "",
+        "    /* MVDM-HOST-DIV-882: retire guest ownership before calling the provider.",
+        "       Keep native buffers discoverable until cancellation or completion proves",
+        "       the provider is finished. No list lock is held across cancellation. */",
+        "    RtlEnterCriticalSection( &WWS32CriticalSection );",
+        "    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;",
+        "          listEntry != &WWS32AsyncContextBlockListHead;",
+        "          listEntry = listEntry->Flink ) {",
+        "        context = CONTAINING_RECORD(listEntry, WINSOCK_ASYNC_CONTEXT_BLOCK,",
+        "                                    ContextBlockListEntry);",
+        "        if ( context->ThreadSerialNumber == ThreadSerialNumber ) {",
+        "            context->RundownState |= WWS32_ASYNC_RETIRED;",
+        "        }",
+        "    }",
+        "    RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "",
+        "    for (;;) {",
+        "        context = NULL;",
+        "        RtlEnterCriticalSection( &WWS32CriticalSection );",
+        "        for ( listEntry = WWS32AsyncContextBlockListHead.Flink;",
+        "              listEntry != &WWS32AsyncContextBlockListHead;",
+        "              listEntry = listEntry->Flink ) {",
+        "            PWINSOCK_ASYNC_CONTEXT_BLOCK candidate;",
+        "            candidate = CONTAINING_RECORD(listEntry, WINSOCK_ASYNC_CONTEXT_BLOCK,",
+        "                                          ContextBlockListEntry);",
+        "            if ( candidate->ThreadSerialNumber == ThreadSerialNumber &&",
+        "                 !(candidate->RundownState & WWS32_ASYNC_CANCEL_STARTED) ) {",
+        "                context = candidate;",
+        "                context->RundownState |= WWS32_ASYNC_CANCEL_STARTED |",
+        "                                         WWS32_ASYNC_CANCEL_ACTIVE;",
+        "                break;",
+        "            }",
+        "        }",
+        "        RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "        if ( context == NULL ) break;",
+        "",
+        "        result = (*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(context->AsyncTaskHandle32);",
+        "        error = result == 0 ? 0 : (*wsockapis[WOW_WSAGETLASTERROR].lpfn)();",
+        "",
+        "        RtlEnterCriticalSection( &WWS32CriticalSection );",
+        "        context->RundownState &= ~WWS32_ASYNC_CANCEL_ACTIVE;",
+        "        release = result == 0 || error == WSAEALREADY || error == WSAEINVAL ||",
+        "                  (context->RundownState & WWS32_ASYNC_COMPLETED);",
+        "        if ( release ) RemoveEntryList( &context->ContextBlockListEntry );",
+        "        RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "        if ( release ) {",
+        "            free_w( context->Buffer32 );",
+        "            free_w( (PVOID)context );",
+        "        }",
+        "    }",
+        "} // WWS32CancelAsyncRequestsForTask"
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    },
+    {
+      "original_start": 1824,
+      "original_count": 0,
+      "current_start": 2029,
+      "current_count": 15,
+      "original": [],
+      "current": [
+        "            /* MVDM-HOST-DIV-882: a retired task cannot receive this result.",
+        "               A reentrant completion leaves release to its active canceler. */",
+        "            if ( context->RundownState & WWS32_ASYNC_RETIRED ) {",
+        "                if ( context->RundownState & WWS32_ASYNC_CANCEL_ACTIVE ) {",
+        "                    context->RundownState |= WWS32_ASYNC_COMPLETED;",
+        "                    RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "                } else {",
+        "                    RemoveEntryList( &context->ContextBlockListEntry );",
+        "                    RtlLeaveCriticalSection( &WWS32CriticalSection );",
+        "                    free_w( context->Buffer32 );",
+        "                    free_w( (PVOID)context );",
+        "                }",
+        "                return NULL;",
+        "            }",
+        ""
+      ],
+      "decision": "pending",
+      "necessity": "Existing context list now supports real cancellation, task-owner lookup and retired-completion suppression. Rundown keeps native buffer until provider termination evidence and uses CANCEL_ACTIVE to defer reentrant release.",
+      "change_plan": "Audit cancellation/lookup/removal/completion as one transaction with wsext cleanup and winsockp layout. Reuse one existing list/owner; consolidate duplicate lookup loops only after preserving lifetime. Establish terminal native ownership evidence before freeing; validate explicit-cancel/retirement races and recycled handles. Do not restore WSAEINVAL stub or add polling.",
+      "missing_evidence": "Real provider cancellation-error contract (especially WSAEALREADY/WSAEINVAL), normal explicit-cancel versus task-rundown interleavings, handle reuse between separate lookups, and publication-versus-completion ordering. Controlled fixture assumes terminal-error meanings and does not prove them."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [
+    {
+      "current": 2045,
+      "original": 1825,
+      "logical": 1840
+    },
+    {
+      "current": 2046,
+      "original": 1826,
+      "logical": 1841
+    },
+    {
+      "current": 2047,
+      "original": 1827,
+      "logical": 1842
+    },
+    {
+      "current": 2048,
+      "original": 1828,
+      "logical": 1843
+    },
+    {
+      "current": 2050,
+      "original": 1830,
+      "logical": 1845
+    },
+    {
+      "current": 2051,
+      "original": 1831,
+      "logical": 1846
+    },
+    {
+      "current": 2053,
+      "original": 1833,
+      "logical": 1848
+    },
+    {
+      "current": 2054,
+      "original": 1834,
+      "logical": 1849
+    },
+    {
+      "current": 2055,
+      "original": 1835,
+      "logical": 1850
+    },
+    {
+      "current": 2057,
+      "original": 1837,
+      "logical": 1852
+    },
+    {
+      "current": 2058,
+      "original": 1838,
+      "logical": 1853
+    },
+    {
+      "current": 2059,
+      "original": 1839,
+      "logical": 1854
+    },
+    {
+      "current": 2061,
+      "original": 1841,
+      "logical": 1856
+    },
+    {
+      "current": 2063,
+      "original": 1843,
+      "logical": 1858
+    },
+    {
+      "current": 2065,
+      "original": 1845,
+      "logical": 1860
+    },
+    {
+      "current": 2068,
+      "original": 1848,
+      "logical": 1863
+    },
+    {
+      "current": 2069,
+      "original": 1849,
+      "logical": 1864
+    },
+    {
+      "current": 2070,
+      "original": 1850,
+      "logical": 1865
+    },
+    {
+      "current": 2071,
+      "original": 1851,
+      "logical": 1866
+    },
+    {
+      "current": 2072,
+      "original": 1852,
+      "logical": 1867
+    },
+    {
+      "current": 2073,
+      "original": 1853,
+      "logical": 1868
+    },
+    {
+      "current": 2075,
+      "original": 1855,
+      "logical": 1870
+    },
+    {
+      "current": 2076,
+      "original": 1856,
+      "logical": 1871
+    },
+    {
+      "current": 2078,
+      "original": 1858,
+      "logical": 1873
+    },
+    {
+      "current": 2080,
+      "original": 1860,
+      "logical": 1875
+    },
+    {
+      "current": 2082,
+      "original": 1862,
+      "logical": 1877
+    },
+    {
+      "current": 2084,
+      "original": 1864,
+      "logical": 1879
+    },
+    {
+      "current": 2085,
+      "original": 1865,
+      "logical": 1880
+    },
+    {
+      "current": 2086,
+      "original": 1866,
+      "logical": 1881
+    },
+    {
+      "current": 2087,
+      "original": 1867,
+      "logical": 1882
+    },
+    {
+      "current": 2089,
+      "original": 1869,
+      "logical": 1884
+    },
+    {
+      "current": 2090,
+      "original": 1870,
+      "logical": 1885
+    },
+    {
+      "current": 2091,
+      "original": 1871,
+      "logical": 1886
+    },
+    {
+      "current": 2093,
+      "original": 1873,
+      "logical": 1888
+    },
+    {
+      "current": 2095,
+      "original": 1875,
+      "logical": 1890
+    }
+  ],
+  "evidence": [
+    "wsext.c initializes thread serial and invokes WWS32CancelAsyncRequestsForTask before freeing guest thread buffers.",
+    "winsockp.h owns extended context layout and rundown flags.",
+    "test/integration/wow_winsock_rundown_test.c uses extracted rundown/completion bodies, six provider results and reentrant/sibling/late completion; marks buffers inactive for 0/WSAEALREADY/WSAEINVAL itself.",
+    "Original host/protocol/service async constructors, post routines and list ownership compared in complete wsdata diff."
+  ],
+  "limits": [
+    "Fixture source inspected, not run; no current full provider or guest verification.",
+    "Local OpenNT wsock32 search located async callers/docs but did not establish WSACancelAsyncRequest implementation contract.",
+    "Pending lifecycle rows are unproved boundaries, not asserted reproducible failures.",
+    "Diagnostic mapping source-derived only."
+  ]
+}

@@ -407,5 +407,3 @@ typedef struct _WKSTA_16_USER_LOGOFF_REQUEST_1 {
 #include <packoff.h>
 
 #endif // ndef _XSDEF16_
-
-

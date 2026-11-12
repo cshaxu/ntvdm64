@@ -1,0 +1,88 @@
+{
+  "path": "src/mvdm-host/dos/dem/dem.c",
+  "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+  "current_sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 9,
+      "original_count": 0,
+      "current_start": 9,
+      "current_count": 1,
+      "classification": "package-directory"
+    },
+    {
+      "original_start": 21,
+      "original_count": 0,
+      "current_start": 22,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 27,
+      "original_count": 0,
+      "current_start": 29,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 28,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 30,
+      "original_count": 0,
+      "current_start": 34,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 43,
+      "original_count": 0,
+      "current_start": 48,
+      "current_count": 6,
+      "classification": "package-directory"
+    },
+    {
+      "original_start": 44,
+      "original_count": 1,
+      "current_start": 55,
+      "current_count": 1,
+      "classification": "package-directory"
+    },
+    {
+      "original_start": 66,
+      "original_count": 0,
+      "current_start": 77,
+      "current_count": 1,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 67,
+      "original_count": 4,
+      "current_start": 79,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 72,
+      "original_count": 2,
+      "current_start": 82,
+      "current_count": 1,
+      "classification": "DBG-exclusion"
+    }
+  ],
+  "initial_review": "Only functional change substitutes package system directory, with explicit include.",
+  "counter_review": "Actual consumer loads guest system images from package; original zero/length checks already adequate for adapter result. Retain. No other selected original body changed.",
+  "dependencies": [
+    "src/mvdm-host/dos/dem/demmisc.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c"
+  ],
+  "limitations": [
+    "No runtime validation.",
+    "Excluded DBG code not counted as semantic diff."
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+  "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+  "before_sha256": "86965b6eecbc017d3860b52722bc8680db266260db554a58cbb63bf487e8840e",
+  "current_sha256": "fc5a3fbcfac77e4337602b94f2d5c6ad69ae95417b8b8ba4e2362510891c8069",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 180,
+      "original_count": 0,
+      "current_start": 183,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-159): declaration-only adapter seam for the",
+        " * fixed-container exception identity report below. */",
+        "#include \"mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "original_start": 517,
+      "original_count": 0,
+      "current_start": 538,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    ULONG remainder;"
+      ]
+    },
+    {
+      "original_start": 523,
+      "original_count": 1,
+      "current_start": 547,
+      "current_count": 5,
+      "original": [
+        "                                        &time->tv_usec);"
+      ],
+      "current": [
+        "                                        &remainder);",
+        "        /* DIVERGENCE(MVDM-HOST-DIV-050): the original host_timeval field is",
+        "         * signed IS32 while the preserved NTDLL ABI requires PULONG.  The",
+        "         * remainder is strictly below the positive divisor. */",
+        "        time->tv_usec = (IS32)remainder;"
+      ]
+    },
+    {
+      "original_start": 843,
+      "original_count": 1,
+      "current_start": 829,
+      "current_count": 5,
+      "original": [
+        "     if (status == STATUS_ALERTED)  {"
+      ],
+      "current": [
+        "     /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter",
+        "      * wakes this alertable wait through QueueUserAPC.  Modern user-mode",
+        "      * wait completion is STATUS_USER_APC rather than NT4's private",
+        "      * STATUS_ALERTED; both mean the original heartbeat must terminate. */",
+        "     if (status == STATUS_ALERTED || status == STATUS_USER_APC)  {"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 163,
+      "original_count": 2,
+      "current_start": 165,
+      "current_count": 1,
+      "original": [
+        "#include \"trace.h\"",
+        "#include \"host_trc.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 242,
+      "original_count": 1,
+      "current_start": 255,
+      "current_count": 1,
+      "original": [
+        "HANDLE SuspendEventObjects[2];"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor timer switch state"
+      ]
+    },
+    {
+      "original_start": 391,
+      "original_count": 7,
+      "current_start": 408,
+      "current_count": 1,
+      "original": [
+        "        /*  Don't do timer tick while in fullscreen switch code. */",
+        "        if (NoTicks)",
+        "            return;",
+        "",
+        "        /* Do console calls related to fullscreen switching. */",
+        "        CheckForFullscreenSwitch();",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 428,
+      "original_count": 1,
+      "current_start": 445,
+      "current_count": 1,
+      "original": [
+        "    CheckForYodaEvents();"
+      ],
+      "current": [
+        "#error Excluded unsupported YODA configuration"
+      ]
+    },
+    {
+      "original_start": 572,
+      "original_count": 6,
+      "current_start": 603,
+      "current_count": 1,
+      "original": [
+        "      //",
+        "      // On x86 we have to force the creation of the critsect lock semaphore",
+        "      // When the heartbeat thread start running the cpu thread holds the",
+        "      // ica lock forcing contention (and creation). See ConsoleInit.",
+        "      //",
+        "      host_ica_lock();   // take ica lock to force creation of critsect"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor timer lock setup"
+      ]
+    },
+    {
+      "original_start": 597,
+      "original_count": 9,
+      "current_start": 626,
+      "current_count": 1,
+      "original": [
+        "      SuspendEventObjects[0] = hHBSuspendEvent;",
+        "",
+        "      /* Get the switching event handle. */",
+        "      if (!VDMForWOW)  {",
+        "          SuspendEventObjects[1] = GetDetectEvent();",
+        "          }",
+        "      else {",
+        "          SuspendEventObjects[1] = INVALID_HANDLE_VALUE;",
+        "          }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 609,
+      "original_count": 1,
+      "current_start": 634,
+      "current_count": 1,
+      "original": [
+        "      host_ica_unlock();"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor timer lock release"
+      ]
+    },
+    {
+      "original_start": 624,
+      "original_count": 1,
+      "current_start": 651,
+      "current_count": 1,
+      "original": [
+        "int TimerCount = 20;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 631,
+      "original_count": 1,
+      "current_start": 660,
+      "current_count": 1,
+      "original": [
+        "    int\t\t  count = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 713,
+      "original_count": 5,
+      "current_start": 744,
+      "current_count": 1,
+      "original": [
+        "       if (++count >= TimerCount)",
+        "       {",
+        "           time_tick();",
+        "           count = 0;",
+        "       }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 769,
+      "original_count": 50,
+      "current_start": 800,
+      "current_count": 1,
+      "original": [
+        "",
+        "RewaitSuspend:",
+        "     status = NtWaitForMultipleObjects(VDMForWOW ? 1 : 2,",
+        "                                       SuspendEventObjects,",
+        "                                       WaitAny,",
+        "                                       TRUE,",
+        "                                       &liDelay);",
+        "",
+        "                // delay time has expired",
+        "     if (status == STATUS_TIMEOUT) {",
+        "         return status;",
+        "         }",
+        "",
+        "#ifdef X86GFX   // screen switch event",
+        "     if (status == 1)  {",
+        "         DoHandShake();",
+        "         liDelay.QuadPart = -10;",
+        "         goto RewaitSuspend;",
+        "         }",
+        "#endif",
+        "",
+        "           // suspend event",
+        "     if (!status)  {",
+        "         SuspendEventObjects[0] = hHBResumeEvent;",
+        "         ica_hw_interrupt_cancel(ICA_MASTER,CPU_TIMER_INT);",
+        "         host_DelayHwInterrupt(CPU_TIMER_INT, 0, 0xFFFFFFFF);",
+        "",
+        "RewaitResume:",
+        "         status = NtWaitForMultipleObjects(VDMForWOW ? 1 : 2,",
+        "                                           SuspendEventObjects,",
+        "                                           WaitAny,",
+        "                                           TRUE,",
+        "                                           NULL);",
+        "",
+        "                    // resume event",
+        "         if (!status) {",
+        "             SuspendEventObjects[0] = hHBSuspendEvent;",
+        "             return status;",
+        "             }",
+        "",
+        "",
+        "#ifdef X86GFX       // screen switch event",
+        "         if (status == 1)  {",
+        "             DoHandShake();",
+        "             goto RewaitResume;",
+        "             }",
+        "#endif",
+        "         }",
+        "",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported monitor heartbeat wait"
+      ]
+    }
+  ],
+  "initial_review": "Four substantive hunks: delete unused include; retain two coupled remainder ABI hunks; APC fallback exit needs evidence.",
+  "counter_review": "Original native alert is preferred by current adapter; existing fixtures do not prove fallback heartbeat cleanup. Restore five whitespace/comment sites; scheduling/IRQ executable code unchanged.",
+  "limits": "No functional correction or runtime validation; pending disposition is unresolved."
+}

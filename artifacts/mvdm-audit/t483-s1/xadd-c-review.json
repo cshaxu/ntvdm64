@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+  "original_sha256": "80d97ce7d9b57b24c6b498b72def5e847ca39642545bd841f0fbae5725c702e2",
+  "current_sha256": "35b58fb6e017ed57d710db9bcb925c39d0a1fa5d22ea7536dfb592da7d469046",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 37,
+      "original_count": 22,
+      "current_start": 38,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete textual comparison; non-excluded differences explicitly classified. No selected instruction algorithm changed in the four C files.",
+  "limits": "Necessity audit only; not full branch/line certification or new runtime validation."
+}

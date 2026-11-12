@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+  "original_sha256": "014e568b4f4ae57d54b8afc4502c890cd19ef1a698273561d9627b1b9c9ec10a",
+  "before_sha256": "5f55f632b250d765c26b392bdadcd66ad4a93cdfa3a3a74f57fe2866856184c4",
+  "current_sha256": "d85831391e232a313068b51b88b69b62f1f3d0d6ceb2a773391d4ac0e65889c4",
+  "retained_function": "TabTextOut",
+  "retained_body_normalized_exact": true,
+  "token_identity_without_line_directives": true,
+  "format_restorations": [
+    "Original module header",
+    "Original tabbed text helper documentation"
+  ],
+  "initial_review": "Only TabTextOut retained; its full body is original-exact. Real listbox caller and client provider build exist.",
+  "counter_review": "Public wrapper omissions are not proven unnecessary merely because helper is sufficient for listbox. Public WOW thunk uses native tab APIs; restoring wrappers requires context/ANSI conversion proof.",
+  "evidence": "tools/build/New-T404S5Wow32ProviderNinja.ps1 client/rtl text providers; lboxctl2.c TabTextOut caller; src/wow32-dll/include/control-drawing/precomp.h; test/adapter-mvdm-host-out/wow/wow_edit_native_fixture.c tab checks; src/mvdm-host/wow32/wutext.c public native tab APIs",
+  "decisions": [
+    [
+      13,
+      1,
+      "restore original",
+      "Original #pragma hdrstop omitted.",
+      "Confirm actual compiler/PCH context then restore pragma with original line mapping.",
+      "Compile actual client text provider and compare unchanged executable tokens/diagnostics."
+    ],
+    [
+      15,
+      139,
+      "pending evidence",
+      "Original IsMetaFile/DrawTextExA/DrawTextW/DrawTextA and their private defines omitted; current selected TabTextOut does not use them. This does not prove public text engine delegation is minimal.",
+      "Trace actual DrawTextExW and ANSI conversion owners, current native boundaries, DT_MODIFYSTRING buffers and codepage contract; decide reusable package closure before restoring any wrappers.",
+      "Compare DBCS counts, negative length, tab-stop flags, DT_MODIFYSTRING ownership and failure paths; native modern parity alone is not original equivalence."
+    ],
+    [
+      355,
+      97,
+      "pending evidence",
+      "Original TabbedTextOutA/W and GetTabbedTextExtentA/W wrappers omitted while WOW public thunks call native APIs; internal listbox uses retained TabTextOut.",
+      "Audit whether public tab APIs can share the retained original owner under an existing wow_edit_context borrow; preserve codepage conversion and guest return packing. Do not introduce a second context or copy the algorithm.",
+      "Verify public callers outside control callbacks, font/mapping capture, A/W conversion, trailing tabs, negative/right-aligned tab stops and inverted viewport. Current fixture only covers direct helper and simple positive stops."
+    ]
+  ],
+  "limits": "No product rewrite/build/test. Fixture compares helper with modern GDI for null/empty/invalid count, leading/trailing/repeated tabs, positive custom stops and draw/extent agreement; not all original semantics."
+}

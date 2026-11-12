@@ -1,0 +1,438 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/main.c",
+  "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+  "current_sha256": "6d8e7a439f2ed06c28bc425d98d81774eba203155cbee85c3d2c719e476ae684",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "original_start": 50,
+      "original_count": 0,
+      "current_start": 52,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-162): selected CCPU40/C-VID sources retain their",
+        " * original tables but not the historical generated pre-config binder. */",
+        "#include \"mvdm_cvidc_vector_binding.h\""
+      ]
+    },
+    {
+      "original_start": 54,
+      "original_count": 2,
+      "current_start": 60,
+      "current_count": 11,
+      "original": [
+        "#ifndef CPU_40_STYLE\t/* defined in CpuH */",
+        "extern\tvoid\thost_start_cpu();\t/* Start up the Intel emulation */"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-083): CPU_40_STYLE selects the same original",
+        " * host startup provider but hid its declaration, while the NT DOS-emulation",
+        " * and mouse providers have no selected public declaration carrier. Publish",
+        " * their exact existing contracts without changing startup order. */",
+        "#ifndef CPU_40_STYLE",
+        "#error Excluded unsupported non-CPU40 host startup profile",
+        "#else",
+        "extern void host_start_cpu(void);"
+      ]
+    },
+    {
+      "original_start": 57,
+      "original_count": 0,
+      "current_start": 73,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "extern int InitialiseDosEmulation(int argc, char **argv);",
+        "extern void mouse_driver_initialisation(void);"
+      ]
+    },
+    {
+      "original_start": 187,
+      "original_count": 0,
+      "current_start": 216,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "",
+        "  /* DIVERGENCE(MVDM-HOST-DIV-162): config() can initialise EGA before the",
+        "   * original later setup_vga_globals() hook. Bind the selected original",
+        "   * C-VID vector table before that first controller call. */",
+        "  mvdm_cvidc_bind_video_vector();"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 44,
+      "original_count": 1,
+      "current_start": 45,
+      "current_count": 1,
+      "original": [
+        "#include \"debug.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 66,
+      "original_count": 1,
+      "current_start": 86,
+      "current_count": 1,
+      "original": [
+        "extern void host_applInit();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 70,
+      "original_count": 1,
+      "current_start": 93,
+      "current_count": 1,
+      "original": [
+        "extern int screen_init;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 76,
+      "original_count": 2,
+      "current_start": 101,
+      "current_count": 1,
+      "original": [
+        "GLOBAL IBOOL Running_SoftWindows = TRUE;",
+        "GLOBAL CHAR *SPC_Product_Name = \"SoftWindows\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 87,
+      "original_count": 3,
+      "current_start": 113,
+      "current_count": 1,
+      "original": [
+        "#ifndef ProcCommonCommLineArgs",
+        "extern VOID ProcCommonCommLineArgs IPT2(LONG, argc, CHAR, *argv[]);",
+        "#endif /* ProcCommonCommLineArgs */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 97,
+      "original_count": 1,
+      "current_start": 123,
+      "current_count": 1,
+      "original": [
+        "INT      main IFN2(INT, argc, CHAR **, argv)"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 103,
+      "original_count": 1,
+      "current_start": 131,
+      "current_count": 1,
+      "original": [
+        "  IMPORT ULONG Gdp;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 107,
+      "original_count": 2,
+      "current_start": 137,
+      "current_count": 1,
+      "original": [
+        "\tchar * sys_config_filename;",
+        "\tErrData err_data;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 112,
+      "original_count": 4,
+      "current_start": 143,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* make sure the real and effective UIDs are OK */",
+        "\thost_init_uid ();",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 119,
+      "original_count": 3,
+      "current_start": 149,
+      "current_count": 1,
+      "original": [
+        "",
+        "\ttrace_init();\t\t/* set up the trace file */",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 137,
+      "original_count": 1,
+      "current_start": 167,
+      "current_count": 1,
+      "original": [
+        "  setupEnv(argc,argv);\t/* set up Unix run-time environment */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 141,
+      "original_count": 1,
+      "current_start": 174,
+      "current_count": 1,
+      "original": [
+        "  host_set_yoda_ints();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 145,
+      "original_count": 1,
+      "current_start": 180,
+      "current_count": 1,
+      "original": [
+        "  err_data.string_1 = err_data.string_2 = err_data.string_3 = \"\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 149,
+      "original_count": 1,
+      "current_start": 186,
+      "current_count": 1,
+      "original": [
+        "  ProcCommonCommLineArgs(argc,argv);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 154,
+      "original_count": 12,
+      "current_start": 193,
+      "current_count": 1,
+      "original": [
+        "  /* Now that error panels are available, Validate SoftWindows Integrity. */",
+        "  sys_config_filename = host_expand_environment_vars(SYSTEM_CONFIG);",
+        "  if (!host_validate_swin_integrity(sys_config_filename))",
+        "  {",
+        "#ifdef PROD",
+        "    err_data.string_3 = sys_config_filename;",
+        "    (VOID) host_error_ext(EG_SYS_INSECURE, ERR_QUIT, &err_data);",
+        "    exit(1);",
+        "#else",
+        "    always_trace1(\"Secure Mode ERROR:\\\"%s\\\" is insecure.\", sys_config_filename);",
+        "#endif",
+        "  }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 168,
+      "original_count": 5,
+      "current_start": 198,
+      "current_count": 1,
+      "original": [
+        "  {",
+        "\textern void parse_lc_options IPT2(int *,pargc, char ***,pargv);",
+        "",
+        "  \tparse_lc_options(&argc,&argv);",
+        "  }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 178,
+      "original_count": 1,
+      "current_start": 206,
+      "current_count": 1,
+      "original": [
+        "  io_verbose = FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 211,
+      "original_count": 5,
+      "current_start": 248,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * Stick this after config as Gdp must be set up. 4.0 calls ProfileInit from",
+        " * sas_init() to ensure everything included.",
+        " */",
+        "  ProfileInit();"
+      ],
+      "current": [
+        "#error Excluded unsupported non-CPU40 profiling startup"
+      ]
+    },
+    {
+      "original_start": 227,
+      "original_count": 13,
+      "current_start": 262,
+      "current_count": 1,
+      "original": [
+        "",
+        "/******************************************************************",
+        " *\t\t\t\t\t\t\t\t  *",
+        " * Bit of a liberty being taken here.\t\t\t\t  *",
+        " * Hunter and noProd versions can set NPX and GFX adapter from\t  *",
+        " * environment vars, this can cause the old cmos to disagree\t  *",
+        " * with the new config structure.\t\t\t\t  *",
+        " * This function call updates the cmos.\t\t\t\t  *",
+        " *\t\t\t\t\t\t\t\t  *",
+        " ******************************************************************/",
+        "",
+        "  cmos_equip_update();",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 249,
+      "original_count": 13,
+      "current_start": 275,
+      "current_count": 1,
+      "original": [
+        "",
+        "  if (host_getenv(\"YODA\") != NULL)",
+        "  {",
+        "    force_yoda();",
+        "  }",
+        "",
+        "/*",
+        " * Look for environment variable TOFF, when set no timer interrupts",
+        " *------------------------------------------------------------------*/",
+        "",
+        "  if( host_getenv(\"TOFF\") != NULL )",
+        "    axe_ticks( -1 );\t\t/* lives in base:timer.c */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 265,
+      "original_count": 3,
+      "current_start": 282,
+      "current_count": 1,
+      "original": [
+        "  /* We have to go here to ensure that config doesn't undo any of the",
+        "  lovely patching that we do to the ROMs */",
+        "  gispROMInit( );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 282,
+      "original_count": 1,
+      "current_start": 299,
+      "current_count": 1,
+      "original": [
+        "\tsetupHwVGAGlobals( );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 286,
+      "original_count": 2,
+      "current_start": 305,
+      "current_count": 1,
+      "original": [
+        "\tif (screen_init == 0)",
+        "\t{"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 1,
+      "current_start": 313,
+      "current_count": 1,
+      "original": [
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 297,
+      "original_count": 1,
+      "current_start": 320,
+      "current_count": 1,
+      "original": [
+        "  host_susp_q_init();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 336,
+      "original_count": 1,
+      "current_start": 362,
+      "current_count": 1,
+      "original": [
+        "\thfx_driver_initialisation();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Complete source-order diff classification; provider prototypes retained, early binder necessity pending specific call-chain evidence.",
+  "counter_review": "Repeated binder calls alone do not prove redundancy. Restore two surplus blank lines; no executable edits.",
+  "limits": "Classification complete, functional repair and pending evidence not complete."
+}

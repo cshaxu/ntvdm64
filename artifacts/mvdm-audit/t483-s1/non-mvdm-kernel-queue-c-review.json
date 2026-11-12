@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+  "before_sha256": "3b51de6759d2a5ce8ccd59d0e8c07f68a1bd4de1cace151b1ec51cc346470570",
+  "current_sha256": "283f8a76c15b219f4991da8aea36bd0f2f647e977fed9eefd2f3a55420bd53ec",
+  "status": "difference classification complete; functional remediation not implemented",
+  "evidence": [
+    "src/wow32-dll/include/wow_task_init_bindings.h",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:340-370,565-615",
+    "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c:700-810",
+    "src/wow32-dll/source/wow_task_profile_binding.c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:676"
+  ],
+  "decisions": [
+    "Finite task-init facade preserves original TDB/process/client state algorithm. Private kernel globals become owner-shared fields and actual thread/process arguments; no second scheduler is introduced by these signature changes.",
+    "TraceDdeMsg and DebugValidateMLIST macros have no retained calls in this subset. Remove unused definitions and reconcile their detached conditional scaffolding with original source-policy subset; partial cleanup only.",
+    "Kernel ETHREAD/PEB dereference replaced by process imagePathName. Necessary boundary shape, but verify all direct SetAppCompatFlags callers supply initialized terminated fallback when pstrAppName is absent. Successful xxxInitTask supplies pstrAppName; that does not prove standalone fallback reachability or initialization.",
+    "Keep WCHAR-count fix: original passes sizeof(szHex)=160 as cch for WCHAR[80]; current divides by element size. Profile fixture explicitly rejects capacity above80 and exercises long truncated data; restoring original byte count reintroduces overpromised capacity.",
+    "Explicit currentThread replaces private PtiCurrent, and _ShowStartGlass receives same process. Caller holds runtime ownership, prepares input plan before initialization and releases plan in finally. Preserve original order of name allocation, TDB setup, flags, InsertTask and EnterWowCritSect.",
+    "Explicit currentProcess replaces PtiCurrent()->ppi only; original first-call/repeated-call foreground flag rules retained. Keep this semantic owner separate from the presentation provider.",
+    "CalcStartCursorHide is omitted and production start_cursor ignores timeout. Original updates process start-glass state/deadline list and calls UpdateCursorImage. Identify approved no-presentation boundary and all flag consumers; fixture callback ordering is not production cursor behavior. Recover only if required, without kernel presentation state or new timer framework.",
+    "Reattach callback returns BOOL but original caller ignores it. Production rejects missing/current-task or journal state with FALSE, otherwise commits preallocated native input plan. Prove those rejection branches impossible at this call or propagate terminal failure through existing owner; no silent successful initialization after failed attachment.",
+    "Production journal_hooked always FALSE, justified by unavailable modern public query. Verify selected guest hook registration cannot create journal state needing preserved queue attachment. If supported hook state exists, bind its actual owner rather than introduce a second registry or assume FALSE.",
+    "Omitted process-start/console notification code includes startup synchronization and inherited state. Map actual NTSRV/worker startup and USER lifecycle consumers; do not import private desktop/process authority wholesale or assume native API use covers all retained startup behavior.",
+    "Omitted thread/queue allocation and teardown depend on private PQ/desktop/kernel references. Existing lifecycle rollback releases name after TDB allocation failure and unhooks observers; compare all failure points and starting-list/flags ownership, plus terminal native resource ordering, before declaring equivalence.",
+    "Omitted message allocation, quit/post/event extraction and queue status require mapping to current message bridge/native USER. Identify retained guest-visible order/filter/wake policies, not merely absence of private Q structures.",
+    "Omitted xxxSleepThread/wake/idle/process-lifetime group includes synchronous receive, task yield, lock release and death/APC handling. Compare real host_ops wait/receive and message bridge against original order; no new polling or timeout. Existing task-order fixture is not complete native teardown proof.",
+    "Omitted Query/SetInformationThread and ConsoleControl contain mixed WOW and host-system policies. Inventory selected call cases before deciding finite source recovery versus native ownership; preserve explicit unsupported cases.",
+    "Trailing DEBUG/DBG/LOCK_MOUSE_CODE/FE_IME frames are detached from omitted functions and some contain empty selected alternatives. Reconcile at original owning boundaries, retaining the real DEBUG exclusion within xxxInitTask and necessary original logical lines; do not activate omitted code."
+  ],
+  "entries_added": 15,
+  "format_sites": 3,
+  "limits": [
+    "No fresh build/runtime.",
+    "No-op start cursor and journal query boundary unresolved.",
+    "Original omitted-function coverage remains pending."
+  ]
+}

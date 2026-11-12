@@ -1,0 +1,147 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+  "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+  "before_sha256": "ed2559bf93da5964d35de20fe2aed18e009810561f0b59d111778fc8b155de27",
+  "current_sha256": "da9e6e52ec1d74194c9f00c009367136d511bb6331fd923de2a85f6d5cda3500",
+  "functions": [
+    {
+      "name": "UT_PrevGroupItem",
+      "original_start": 22,
+      "current_start": 29,
+      "changes": []
+    },
+    {
+      "name": "UT_NextGroupItem",
+      "original_start": 50,
+      "current_start": 57,
+      "changes": []
+    },
+    {
+      "name": "_GetNextDlgGroupItem",
+      "original_start": 427,
+      "current_start": 81,
+      "changes": []
+    },
+    {
+      "name": "_PrevControl",
+      "original_start": 78,
+      "current_start": 113,
+      "changes": []
+    },
+    {
+      "name": "_GetChildControl",
+      "original_start": 125,
+      "current_start": 162,
+      "changes": []
+    },
+    {
+      "name": "_NextSibblingOrAncestor",
+      "original_start": 151,
+      "current_start": 190,
+      "changes": [
+        {
+          "original_start": 155,
+          "original": [
+            "    PWND pwndNext;"
+          ],
+          "current_start": 196,
+          "current": [
+            "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+          ]
+        },
+        {
+          "original_start": 176,
+          "original": [
+            "    pwndNext ="
+          ],
+          "current_start": 220,
+          "current": [
+            "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+          ]
+        },
+        {
+          "original_start": 183,
+          "original": [
+            "    if ((pwndNext != pwndParent) || !TestWF(pwndParent, WEFCONTROLPARENT)) {",
+            "        // Code looping through the controls in a dialog might go into an infinite",
+            "        //  loop because of this (i.e., xxxRemoveDefaultButton, _GetNextDlgTabItem,..)",
+            "        // We've walked up the parent chain but will never walk down the child chain again",
+            "        //  because there is a NON WS_EX_CONTROLPARENT parent window somewhere in the chain.",
+            "        RIPMSG0 (RIP_ERROR, \"_NextSibblingOrAncestor: Non WS_EX_CONTROLPARENT window in parent chain\");",
+            "    }",
+            "    return pwndNext;"
+          ],
+          "current_start": 231,
+          "current": [
+            "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_NextControl",
+      "original_start": 207,
+      "current_start": 252,
+      "changes": []
+    },
+    {
+      "name": "_GetNextDlgTabItem",
+      "original_start": 336,
+      "current_start": 345,
+      "changes": []
+    }
+  ],
+  "function_line_mismatches": [
+    {
+      "function": "_NextSibblingOrAncestor",
+      "current_line": 232,
+      "original_line": 191,
+      "logical_line": 184
+    }
+  ],
+  "format_restorations": [
+    {
+      "reason": "Remove obsolete not-selected statement"
+    },
+    {
+      "function": "UT_PrevGroupItem",
+      "original_start": 16,
+      "original_end": 20
+    },
+    {
+      "function": "UT_NextGroupItem",
+      "original_start": 44,
+      "original_end": 48
+    },
+    {
+      "function": "_PrevControl",
+      "original_start": 73,
+      "original_end": 77
+    },
+    {
+      "function": "_GetChildControl",
+      "original_start": 116,
+      "original_end": 123
+    },
+    {
+      "function": "_NextSibblingOrAncestor",
+      "original_start": 139,
+      "original_end": 150
+    },
+    {
+      "function": "_NextControl",
+      "original_start": 193,
+      "original_end": 206
+    }
+  ],
+  "initial_review": "Eight original navigation functions retained; seven body-exact and one contains only three DEBUG exclusions. Original public HWND wrappers omitted and group helper moved before its caller closure.",
+  "counter_review": "Internal WND traversal and public native HWND discovery are separate current entry contexts, not proof of necessary permanent algorithm duplication. Original wrappers are small and call retained owners; publication of full native/guest identities and foreign-window coverage must be preserved if unified.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: dlgmgrc original control body",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c: original keyboard and default-button consumers",
+    "src/wow32-dll/source/wow_user_discovery.c: native public group/tab discovery plus shared graph publication",
+    "src/mvdm-host/wow32/wudlg.c: public WU32GetNextDlgGroupItem/TabItem",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c: retained original functions over explicit graph"
+  ],
+  "limits": "Source-only audit; no new build/test pass. Fixture graph does not prove cross-thread/foreign HWND equivalence or every supported branch hit. Public-wrapper reuse remains pending evidence, not approved functional replacement."
+}

@@ -1,0 +1,31 @@
+{
+  "path": "src/mvdm-host/wow32/wheap.c",
+  "original_sha256": "be3af89da01d5a6f296a47b7e505e2d6598b4c4e1a5cb35e76dab3ac839848de",
+  "current_sha256": "087f929d0cbaa781849d4021ca6d9ed5afa5c0711b85b1c162102252108806cd",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 36,
+      "original_count": 3,
+      "current_start": 38,
+      "current_count": 1,
+      "original": [
+        "    if (pv == (PVOID)NULL) {",
+        "        LOGDEBUG(0, (\"malloc_w_small: HeapAlloc failed\\n\"));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 39,
+      "original_line": 39,
+      "logical_line": 37
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Audit classifications; no functional repair or test execution."
+}

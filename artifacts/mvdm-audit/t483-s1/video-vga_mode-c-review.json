@@ -1,0 +1,424 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+  "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+  "current_sha256": "dd014193d8f213dffa82a328b72a3a560af874693180b3e198366770c24f1e70",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "original_start": 473,
+      "original_count": 1,
+      "current_start": 487,
+      "current_count": 6,
+      "original": [
+        "\tif( get_chain4_mode() )"
+      ],
+      "current": [
+        "\t/* Packed V7 scanout keeps byte units when CPU chain4 is disabled. */",
+        "\tif( get_chain4_mode()",
+        "#ifdef V7VGA",
+        "\t\t|| (get_256_colour_mode() && get_seq_chain4_mode())",
+        "#endif",
+        "\t)"
+      ]
+    },
+    {
+      "original_start": 478,
+      "original_count": 1,
+      "current_start": 498,
+      "current_count": 1,
+      "original": [
+        "\t\tif( get_memory_chained() )"
+      ],
+      "current": [
+        "\t\tif( get_memory_chained() && !get_256_colour_mode() )"
+      ]
+    },
+    {
+      "original_start": 505,
+      "original_count": 1,
+      "current_start": 525,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif ( get_memory_chained() )"
+      ],
+      "current": [
+        "\t\t\tif ( get_memory_chained() && !get_256_colour_mode() )"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 114,
+      "original_count": 1,
+      "current_start": 115,
+      "current_count": 1,
+      "original": [
+        "#include\t\"gore.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 124,
+      "original_count": 2,
+      "current_start": 127,
+      "current_count": 1,
+      "original": [
+        "#include HostHwVgaH",
+        "#include \"hwvga.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 135,
+      "original_count": 6,
+      "current_start": 140,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #define specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_VGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 195,
+      "original_count": 1,
+      "current_start": 198,
+      "current_count": 1,
+      "original": [
+        "\t    extern void mon_text_update();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 209,
+      "original_count": 32,
+      "current_start": 214,
+      "current_count": 1,
+      "original": [
+        "\t{",
+        "\t    extern void mon_text_update(void);",
+        "",
+        "\t    switch (mode)",
+        "\t    {",
+        "\t    case EGA_TEXT_40_SP_WR:",
+        "\t    case EGA_TEXT_80_SP_WR:",
+        "\t    case CGA_TEXT_40_SP_WR:",
+        "\t    case CGA_TEXT_80_SP_WR:",
+        "\t    case EGA_TEXT_40_SP:",
+        "\t    case EGA_TEXT_80_SP:",
+        "\t    case CGA_TEXT_40_SP:",
+        "\t    case CGA_TEXT_80_SP:",
+        "\t    case EGA_TEXT_40_WR:",
+        "\t    case EGA_TEXT_80_WR:",
+        "\t    case EGA_TEXT_40:",
+        "\t    case EGA_TEXT_80:",
+        "\t    case CGA_TEXT_40_WR:",
+        "\t    case CGA_TEXT_80_WR:",
+        "\t    case CGA_TEXT_40:",
+        "\t    case CGA_TEXT_80:",
+        "\t    case TEXT_40_FUN:",
+        "\t    case TEXT_80_FUN:",
+        "\t\tset_gfx_update_routines(mon_text_update, SIMPLE_MARKING,",
+        "\t\t\t\t\tTEXT_SCROLL);",
+        "\t\treturn;",
+        "\t    default:",
+        "\t\tbreak;",
+        "\t}",
+        "",
+        "\t}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 2,
+      "current_start": 229,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = TEXT;",
+        "\t\t\tset_gfx_update_routines( mon_text_update, SIMPLE_MARKING, NO_SCROLL );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 265,
+      "original_count": 2,
+      "current_start": 245,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = TEXT;",
+        "\t\t\tset_gfx_update_routines( mon_text_update, SIMPLE_MARKING, NO_SCROLL );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 276,
+      "original_count": 2,
+      "current_start": 259,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = TEXT;",
+        "\t\t\tset_gfx_update_routines( mon_text_update, SIMPLE_MARKING, NO_SCROLL );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 292,
+      "original_count": 7,
+      "current_start": 278,
+      "current_count": 1,
+      "original": [
+        "#ifdef GISP_SVGA",
+        "\t\t\tvideoInfo.modeType = TEXT;",
+        "\t\t\tset_gfx_update_routines( mon_text_update, SIMPLE_MARKING, TEXT_SCROLL );",
+        "#else /* GISP_SVGA */",
+        "\t\t\tset_gfx_update_routines( ega_text_update, SIMPLE_MARKING, TEXT_SCROLL );",
+        "#endif /* GISP_SVGA */",
+        "\t\t\thost_update_fonts();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 305,
+      "original_count": 1,
+      "current_start": 288,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = TEXT;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 314,
+      "original_count": 1,
+      "current_start": 299,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = TEXT;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 323,
+      "original_count": 2,
+      "current_start": 310,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 2;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 331,
+      "original_count": 2,
+      "current_start": 320,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 4;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 341,
+      "original_count": 2,
+      "current_start": 332,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 4;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 351,
+      "original_count": 2,
+      "current_start": 344,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 4;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 355,
+      "original_count": 4,
+      "current_start": 350,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif (get_256_colour_mode())",
+        "\t\t\t    set_gfx_update_routines( process_object_list, EGA_GRAPHICS_MARKING, VGA_GRAPH_SCROLL );",
+        "\t\t\telse",
+        "\t\t\t    set_gfx_update_routines( process_object_list, EGA_GRAPHICS_MARKING, EGA_GRAPH_SCROLL );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 371,
+      "original_count": 2,
+      "current_start": 367,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 4;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 382,
+      "original_count": 1,
+      "current_start": 380,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 396,
+      "original_count": 1,
+      "current_start": 396,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = TEXT;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 405,
+      "original_count": 1,
+      "current_start": 407,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 413,
+      "original_count": 2,
+      "current_start": 417,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 4;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 424,
+      "original_count": 2,
+      "current_start": 430,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tvideoInfo.numPlanes = 4;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 429,
+      "original_count": 1,
+      "current_start": 437,
+      "current_count": 1,
+      "original": [
+        "\t\t\tset_gfx_update_routines( process_object_list, EGA_GRAPHICS_MARKING, NO_SCROLL );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 437,
+      "original_count": 1,
+      "current_start": 448,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = UNIMP;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 444,
+      "original_count": 1,
+      "current_start": 457,
+      "current_count": 1,
+      "original": [
+        "\t\t\tvideoInfo.modeType = UNIMP;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 544,
+      "original_count": 1,
+      "current_start": 565,
+      "current_count": 1,
+      "original": [
+        "\t\tmode = DUMMY_FUN;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Full comparison: three scanout stride/wrap predicate changes; 26 excluded bodies. PCDisplay chain4 follows sequencer CPU memory-mode writes; sequential chain4 is a separate V7 register bit.",
+  "counter_review": "Distinguishing display scanout from CPU access is plausible but does not prove the new factors. The !256 guards also affect non-V7 modes. v7_ports register FC updates sequential chain state but its immediate routine update remains guarded by CPU chain4; determine enclosing mode-recalculation before alleging stale stride. Existing sequential-mode wrap bypass also means the first edit does not justify the third.",
+  "evidence": "vga_mode.c:487-534 choose_vga_display_mode stride and wrap; :354/:383 selects VGA graph update by colour256. vga_prts.c:1133-1162 CPU chain4 state; :1624 actual offset in plane bytes. v7_ports.c:400-418 sequential bits and guarded update. gvi.h:203-204 recalc macro, :278-285 independent chain fields. gfx_updt.c consumes offset in several scaled layouts.",
+  "limits": "All three functional chunks remain pending evidence; classification complete is not correctness certification."
+}

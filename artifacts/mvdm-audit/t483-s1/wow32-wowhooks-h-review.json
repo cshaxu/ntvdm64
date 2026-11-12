@@ -1,0 +1,40 @@
+{
+  "path": "src/mvdm-host/wow32/wowhooks.h",
+  "original_sha256": "82e539d3278858b018a742c1890862471bca2f2e7166c663fbebba0c02e20dc3",
+  "current_sha256": "24163a7b3a5ee861b1ed3c79724eabcfa694ea8945f8b74ee153be4c617afa6d",
+  "changes": [
+    {
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 36,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): original private context, scoped by entry. */",
+        "extern __declspec(thread) HOOKPARAMS vHookParams;",
+        "extern __declspec(thread) INT viCurrentHookStateDataIndex;"
+      ],
+      "decision": "retain",
+      "necessity": "TLS declarations/definitions match; original DefHookProc context remains owned by wowhooks.c, saved/restored by WU32StdHookProc per entry. Header supplies actual wrapper consumer; shared lifetime header supplies selected finalizers.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/wow32-dll/source/wow_hook_callback.c: entry saves/restores TLS context; invokes original dispatcher inside task/borrow/enrollment scope.",
+    "src/wow32-dll/source/wow_message_lifetime.c: captured-key release; stack restoration checks live worker and current TD/HTASK.",
+    "src/mvdm-host/wow32/wmdisp32.c WM32Create sets lpfnM32 itself, including direct CBT caller; no missing selector assumed.",
+    "test/adapter-mvdm-host-out/wow/wow_hook_callback_fixture.c substitutes original dispatcher: wrapper proof only.",
+    "test/observation/wow_copydata_lifetime_fixture.c and verify-wow-copydata-lifetime.ps1 extract actual CallWnd/MsgFilter functions; inspect nested/failed/conversion/selector cases.",
+    "test/observation/wow_message_construction_fixture.c cbt_transactions exercises actual CBT with callback exception/FALSE and success; stack cases test helper with TD changes."
+  ],
+  "limits": [
+    "Sources/fixture coverage inspected; no new execution or full guest integration result.",
+    "Pending rows are missing proof, not established runtime defects.",
+    "Only mirror diff reviewed; unrelated original hook algorithms not rewritten.",
+    "LF source diagnostic map is not compiler validation."
+  ]
+}

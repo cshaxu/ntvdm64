@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/wow32/wutbl.h",
+  "original_sha256": "22d88170a6047c25a31a5165d1fa079e0d6bf4ecf94f123b2544ee95bdb644f2",
+  "current_sha256": "cf01d59ab4dd25a74d67d00522ea859e5fa80fa575921671f9845c8e1da656d3",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 23,
+      "original_count": 1,
+      "current_start": 25,
+      "current_count": 1,
+      "original": [
+        "extern INT iUserMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "limits": "Exclusion-only means no other body difference, not renewed all-config reachability proof. Original HACK32 guarded keyboard call remains; host PMODE32 exclusion is not guest USER16 exclusion. Timer fixture covers wrapper only; no tests run."
+}

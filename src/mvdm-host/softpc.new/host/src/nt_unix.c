@@ -237,6 +237,7 @@ void host_release_timeslice(void)
 	Sleep(0);
         }
     NowWaiting = FALSE;
+
 #ifndef MONITOR
 #line 224
     if (idletime) {

@@ -1,0 +1,225 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+  "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+  "before_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+  "current_sha256": "2f87ed304c936c0794c55c3d28289d4493c9982c162eb39629f9056d2f8058aa",
+  "changes": [
+    {
+      "original_start": 11,
+      "original_count": 0,
+      "current_start": 11,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-080): complete original EndDialog body.",
+        " * Same dialog state/owner as the original creator and modal manager;",
+        " * private precomp is supplied by the consuming group. */"
+      ]
+    },
+    {
+      "original_start": 12,
+      "original_count": 2,
+      "current_start": 16,
+      "current_count": 0,
+      "original": [
+        "#pragma hdrstop",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 45,
+      "original_count": 0,
+      "current_start": 51,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(OPENNT-HOST-080): validation can destroy retained state. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))",
+        "        return FALSE;"
+      ]
+    },
+    {
+      "original_start": 72,
+      "original_count": 0,
+      "current_start": 83,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): owner-enable can release this PDLG. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))",
+        "        return FALSE;"
+      ]
+    },
+    {
+      "original_start": 91,
+      "original_count": 0,
+      "current_start": 106,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): end committed; do not hide a reused HWND. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))",
+        "        return TRUE;"
+      ]
+    },
+    {
+      "original_start": 95,
+      "original_count": 0,
+      "current_start": 114,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): hide callbacks may complete destruction. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))",
+        "        return TRUE;",
+        ""
+      ]
+    },
+    {
+      "original_start": 171,
+      "original_count": 0,
+      "current_start": 166,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-080): activation may retire the exact dialog. */",
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))",
+        "        return TRUE;"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 36,
+      "current_count": 1,
+      "original": [
+        "    HWND hwndOldSysModal;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 96,
+      "original_count": 19,
+      "current_start": 121,
+      "current_count": 1,
+      "original": [
+        "",
+        "    /*",
+        "     * If this guy was sysmodal, set the sysmodal flag to previous guy so we",
+        "     * won't have a hidden sysmodal window that will screw things",
+        "     * up royally...",
+        "     */",
+        "    if (pwnd == gspwndSysModal) {",
+        "        hwndOldSysModal = PDLG(pwnd)->hwndSysModalSave;",
+        "        if (hwndOldSysModal && !IsWindow(hwndOldSysModal))",
+        "            hwndOldSysModal = NULL;",
+        "",
+        "        SetSysModalWindow(hwndOldSysModal);",
+        "",
+        "        // If there was a previous system modal window, we want to",
+        "        // activate it instead of this window's owner.",
+        "        //",
+        "        if (hwndOldSysModal)",
+        "            hwndOwner = hwndOldSysModal;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 144,
+      "original_count": 17,
+      "current_start": 154,
+      "current_count": 1,
+      "original": [
+        "",
+        "    /*",
+        "     * If this guy was sysmodal, set the sysmodal flag to previous guy so we",
+        "     * won't have a hidden sysmodal window that will screw things",
+        "     * up royally...",
+        "     * See comments for Bug #134; SANKAR -- 08-25-89 --;",
+        "     */",
+        "    if (pwnd == gspwndSysModal) {",
+        "",
+        "        /*",
+        "         * Check if the previous Sysmodal guy is still valid?",
+        "         */",
+        "        hwndOldSysModal = PDLG(pwnd)->hwndSysModalSave;",
+        "        if (hwndOldSysModal && !IsWindow(hwndOldSysModal))",
+        "            hwndOldSysModal = NULL;",
+        "        SetSysModalWindow(hwndOldSysModal);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "line_mismatches": [
+    {
+      "current_line": 17,
+      "original_line": 15,
+      "logical_line": 13,
+      "text": "/***************************************************************************\\"
+    },
+    {
+      "current_line": 18,
+      "original_line": 16,
+      "logical_line": 14,
+      "text": "* EndDialog"
+    },
+    {
+      "current_line": 19,
+      "original_line": 17,
+      "logical_line": 15,
+      "text": "*"
+    },
+    {
+      "current_line": 20,
+      "original_line": 18,
+      "logical_line": 16,
+      "text": "* History:"
+    },
+    {
+      "current_line": 21,
+      "original_line": 19,
+      "logical_line": 17,
+      "text": "* 11-Dec-1990 mikeke  ported from win30"
+    },
+    {
+      "current_line": 22,
+      "original_line": 20,
+      "logical_line": 18,
+      "text": "\\***************************************************************************/"
+    },
+    {
+      "current_line": 122,
+      "original_line": 115,
+      "logical_line": 97,
+      "text": "#endif"
+    },
+    {
+      "current_line": 155,
+      "original_line": 161,
+      "logical_line": 145,
+      "text": "#endif"
+    }
+  ],
+  "initial_review": "Original EndDialog result/enable/focus/hide/activation/wake sequence retained; additional exact-instance checks stop after callback retirement.",
+  "counter_review": "FALSE before result commit and TRUE after commit are intentionally distinct. Returning TRUE after committed-end retirement must not post to a reused HWND. Existing fixture checks this while retaining valid native HWND and retiring original WND, but is not real handle-reuse or guest acceptance.",
+  "evidence": [
+    "src/wow32-dll/source/wow_dialog_finalization_binding.c: existing task/borrow/graph and original end call",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: dlgend production object",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_end_original_fixture.c: 8 normal combinations,2 invalid cases,15 retirement cases",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c: modal wake and destruction ordering"
+  ],
+  "limits": "Source/fixture review only, no new test run. Source-derived line issues are not compiler-tested. No claim that all unchanged original branches have runtime evidence.",
+  "format_restoration": "Restore original EndDialog history comment, remove obsolete not-selected phrase and extra EOF blank line."
+}

@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/inc/wowsnd.h",
+  "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+  "current_sha256": "551d5b47d4fbc2f02fb1499cefc1bb6a6a515acf43949b2648d23dc04a159223",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": 7,
+  "initial_review": "All differences are NULLSTRUCT empty parameter declaration exclusions and diagnostic line directives.",
+  "counter_review": "Retained source and logical line numbers exactly match the original after removing only NULLSTRUCT groups. No selected thunk layout or runtime code changes.",
+  "evidence": "Whole-file text and logical-line projection equality; each current excluded body contains exactly one #error.",
+  "excluded_conditions": [
+    "#ifdef NULLSTRUCT"
+  ],
+  "groups": [
+    {
+      "physical_start": 43,
+      "original_line": 42,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 55,
+      "original_line": 53,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 62,
+      "original_line": 59,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 69,
+      "original_line": 65,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 125,
+      "original_line": 120,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 132,
+      "original_line": 126,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 139,
+      "original_line": 132,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "limits": "Source comparison, not new compiler execution or proof of all supported include contexts.",
+  "runtime_validation": "None; header unchanged."
+}

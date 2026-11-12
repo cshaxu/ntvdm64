@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+  "original_sha256": "aa692f4f8680b717ab51489055c0c7578d0498f8af0702d17c4a0c56b165a88e",
+  "current_sha256": "e364c078c6bd4ecc16780795bcd8eedfa02ff479ed977b5d39089687a2d71871",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "251",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "current_start": "18",
+      "current_count": "3",
+      "original_start": "18",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "debug-event-versus-sticky-status",
+      "initial_review": "Explicit pending-event latch is set at original enabled data/instruction breakpoint matches; DR6 status alone persists after delivery and cannot identify a new hit.",
+      "counter_review": "Secondary DR6 bit updates are dominated by initial match. c_main consumes pending status, clears on exception continuation/reset; TSS T-bit also produces it. Existing matcher fixture models consumption and is not complete exception delivery proof.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c:4341,4407,4890; c_tsksw.c:511; test/mvdm-host/ccpu_debug_match_test.c; docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md",
+      "limits": "Source and existing fixture inspection only; no fresh execution. Consumer files receive their own full review later.",
+      "decision": "retain",
+      "change_plan": "Keep definition/header and both match writes as one coupled repair with c_main/c_tsksw consumers. Do not replace with clearing DR6 or checking sticky DR6 bits. Review consumer reset/context/exception ordering in their own file entries.",
+      "related_callers": "check_for_data_exception/check_for_inst_exception -> c_main instruction dispatch and Int1 entry; c_tsksw T-bit; debug context restore/reset.",
+      "verification_required": "Existing ccpu_debug_match_test, ccpu_halt_reset_test and debug_register_binding_test; verify no-hit after consumption, same-bit new hit, RF/TF, fault cancellation, context restoration and reset with actual consumers.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [],
+  "limits": "Difference classification only; excluded ranges do not assert universal reachability or full logical-line proof."
+}

@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+  "original_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+  "current_sha256": "0b3bed6358f116366f2a0f25b76f2a53b3d7fe6053142c0f4f52b10300512a1e",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 17,
+      "original_count": 1,
+      "current_start": 18,
+      "current_count": 1,
+      "original": [
+        "static char SccsID[]=\"@(#)dummy_int.c\t1.4 08/10/92 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 21,
+      "original_count": 6,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_BIOS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two excluded bodies: SCCSID string and SEGMENTATION include. Remaining source exact.",
+  "counter_review": "Original dummy_int is an empty BIOS dummy-interrupt implementation; do not misclassify its inherited empty body as a new successful stub.",
+  "limits": "Complete source-difference classification only; no fresh build/runtime or universal configuration/diagnostic-line certification."
+}

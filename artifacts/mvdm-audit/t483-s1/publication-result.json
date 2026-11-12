@@ -1,0 +1,10 @@
+{
+  "status": "published",
+  "package": "6ace4e9a-48ea-48ac-abd9-94e966b67c78",
+  "images": 11,
+  "destinations": [
+    "O:\\winnt\\system32",
+    "O:\\repos.hobby\\ntvdm64\\assets\\release"
+  ],
+  "hashVerified": true
+}

@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+  "original_sha256": "5e2aab7a7bed12022ba136337f8ce289ba3155f2df7d1ad2c42ca8cd065ccfef",
+  "current_sha256": "e63ff95995c8fafd6e6fc49768b10ba5781e1c7b8a1f1720ce8682a4f4497c05",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 47,
+      "original_count": 3,
+      "current_start": 47,
+      "current_count": 2
+    },
+    {
+      "original_start": 70,
+      "original_count": 3,
+      "current_start": 70,
+      "current_count": 2
+    },
+    {
+      "original_start": 93,
+      "original_count": 3,
+      "current_start": 93,
+      "current_count": 2
+    },
+    {
+      "original_start": 116,
+      "original_count": 3,
+      "current_start": 116,
+      "current_count": 2
+    },
+    {
+      "original_start": 139,
+      "original_count": 3,
+      "current_start": 139,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete original/current textual difference inventory; all selected differences classified, exclusions separately recorded.",
+  "limits": "No functional remediation or fresh test; source necessity audit not all-context reachability certification."
+}

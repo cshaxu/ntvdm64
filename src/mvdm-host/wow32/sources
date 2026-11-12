@@ -94,11 +94,6 @@ SOURCES= \
     wcuricon.c  \
     wsubcls.c   \
     wmmedia.c   \
-    wmmedia1.c  \
-    wmmedia2.c  \
-    wmmstruc.c  \
-    wmmstru1.c  \
-    wmmstru2.c  \
     wmmalias.c  \
     walloc16.c  \
     waccel.c    \

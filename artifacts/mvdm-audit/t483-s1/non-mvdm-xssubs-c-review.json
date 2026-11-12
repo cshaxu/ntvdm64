@@ -1,0 +1,26 @@
+{
+  "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+  "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+  "current_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+  "changes": [
+    {
+      "original_start": 25,
+      "original_count": 1,
+      "current_start": 25,
+      "current_count": 1,
+      "decision": "retain",
+      "necessity": "Shared finite declaration header replaces NT4 server aggregate; all RAP packing/enumeration or Unicode conversion routines and comments remain original.",
+      "counter_review": "Original aggregate includes srv.sys/authentication product dependencies not needed by local converters. Keep one shared header; do not rewrite original helpers or import full server. Fixture only proves controlled handler/converter integration, not live network service."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+    "test/observation/verify-redirector-server-enum.ps1",
+    "test/observation/verify-redirector-oem-capacity.ps1"
+  ],
+  "limits": "Complete file equality after substituting only include name; no new build/runtime or all-branch-hit proof."
+}

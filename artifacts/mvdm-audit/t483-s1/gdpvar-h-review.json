@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+  "original_sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+  "current_sha256": "aeb5eb926407637f2fbd972638ec357663312c0602859f7577de6cc2854e195c",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 2,
+      "original_count": 1855,
+      "current_start": 2,
+      "current_count": 3
+    }
+  ],
+  "limits": "Necessity audit only, not all-context reachability/logical-line certification; no functionality changed or tests run.",
+  "counter_review": "Complete original/current textual comparison; all remaining changes are enumerated declarations/conversion corrections or excluded bodies/#line directives."
+}

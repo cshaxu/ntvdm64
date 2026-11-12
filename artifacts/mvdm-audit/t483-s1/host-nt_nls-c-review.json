@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+  "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+  "current_sha256": "e0147d7a5ac0c5863a24ea061c35c7b74a489d6a906320e1c4b4bbd3f10b42ea",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 41,
+      "original_count": 1,
+      "current_start": 42,
+      "current_count": 1,
+      "original": [
+        "char szFrozenString[32];"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 100,
+      "original_count": 6,
+      "current_start": 103,
+      "current_count": 1,
+      "original": [
+        "\t ||",
+        "\t!LoadString(GetModuleHandle(NULL),",
+        "\t\t    IDS_BURRRR,",
+        "\t\t    szFrozenString,",
+        "\t\t    sizeof(szFrozenString)/sizeof(CHAR)",
+        "\t\t    )"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete normalized source comparison: 2 excluded original conditional bodies only; retained source exact.",
+  "counter_review": "X86GFX frozen string declaration/load excluded together; remaining NLS strings, fallback and resource-failure behavior original. Boundary checks do not certify universal build contexts or logical line numbers.",
+  "limits": "No source edits or new runtime validation."
+}

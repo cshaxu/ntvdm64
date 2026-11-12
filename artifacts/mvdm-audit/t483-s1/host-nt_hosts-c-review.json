@@ -1,0 +1,187 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+  "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+  "current_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+  "review_complete": true,
+  "register_entries": 5,
+  "changes": [
+    {
+      "original_start": 110,
+      "original_count": 1,
+      "current_start": 114,
+      "current_count": 7,
+      "original": [
+        "\tmode |= (ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);"
+      ],
+      "current": [
+        "\tmode |= ENABLE_WINDOW_INPUT;",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-263): standalone text mode remains in",
+        "       STREAM_IO, unlike the original Console Server transition that enabled",
+        "       mouse input later. Public Console QuickEdit otherwise consumes physical",
+        "       clicks before this unchanged original event worker can read them. */",
+        "    mode |= (ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);",
+        "    mode &= ~ENABLE_QUICK_EDIT_MODE;"
+      ]
+    },
+    {
+      "original_start": 156,
+      "original_count": 0,
+      "current_start": 167,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "DWORD console_mode;",
+        "HANDLE inherited_handle;",
+        "HANDLE inherited_error;"
+      ]
+    },
+    {
+      "original_start": 176,
+      "original_count": 1,
+      "current_start": 191,
+      "current_count": 9,
+      "original": [
+        "    if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR)"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-272): NT4 Console character handles retained",
+        "       their Console identity after BaseSrv duplicated them into the worker.",
+        "       A modern ConPTY duplicate can remain FILE_TYPE_CHAR yet no longer be",
+        "       usable by the original console-mode calls.  Preserve the original",
+        "       redirected-input fallback, but select it from the actual Console",
+        "       contract rather than an output-type proxy.  The DOS record retains",
+        "       its separately duplicated input/output streams. */",
+        "    if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR ||",
+        "       !GetConsoleMode(sc.InputHandle, &console_mode))"
+      ]
+    },
+    {
+      "original_start": 196,
+      "original_count": 0,
+      "current_start": 220,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "       inherited_handle = sc.OutputHandle;",
+        "       inherited_error = GetStdHandle(STD_ERROR_HANDLE);"
+      ]
+    },
+    {
+      "original_start": 209,
+      "original_count": 0,
+      "current_start": 236,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "          /* BaseSrv has separately duplicated stdout/stderr into the DOS",
+        "             record.  Once this host has replaced its process startup stream",
+        "             with CONOUT$, release the superseded inherited handle so it",
+        "             cannot retain a host pipe write end past COMMAND cleanup. */",
+        "          CloseHandle(inherited_handle);",
+        "          if (inherited_error != inherited_handle &&",
+        "              inherited_error != NULL && inherited_error != INVALID_HANDLE_VALUE)",
+        "             CloseHandle(inherited_error);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 29,
+      "original_count": 1,
+      "current_start": 30,
+      "current_count": 1,
+      "original": [
+        "#include \"nt_hunt.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 63,
+      "original_count": 1,
+      "current_start": 66,
+      "current_count": 1,
+      "original": [
+        "void HunterMenuMake(void);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 222,
+      "original_count": 1,
+      "current_start": 259,
+      "current_count": 1,
+      "original": [
+        "    HunterMenuMake();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 295,
+      "original_count": 48,
+      "current_start": 334,
+      "current_count": 1,
+      "original": [
+        "void HunterMenuMake(void)",
+        "{",
+        "HMENU hTest,hTrapperPopup,hMainPopup,hErrorPopup;",
+        "static BOOL  bTrapperMenuFlag=FALSE;",
+        "",
+        "if(!bTrapperMenuFlag)",
+        "   {",
+        "   /*========================================================================",
+        "   The Menus have been drawn once already. Need to delete these and reappend",
+        "   them to the Console menu for the new output buffer. Isn't Console just such",
+        "   a bore?",
+        "   ========================================================================*/",
+        "",
+        "   DestroyMenu(hTrapperPopup);",
+        "   DestroyMenu(hMainPopup);",
+        "   DestroyMenu(hErrorPopup);",
+        "   }",
+        "",
+        "hTrapperPopup = CreateMenu();",
+        "hMainPopup    = CreateMenu();",
+        "hErrorPopup   = CreateMenu();",
+        "",
+        "AppendMenu(hMainPopup,MF_STRING,IDM_MFAST,\"&Fast forward\");",
+        "AppendMenu(hMainPopup,MF_STRING,IDM_MNEXT,\"&Next screen\");",
+        "AppendMenu(hMainPopup,MF_STRING,IDM_MPREV,\"&Prev screen\");",
+        "AppendMenu(hMainPopup,MF_STRING,IDM_MSHOW,\"&Show screen\");",
+        "AppendMenu(hMainPopup,MF_STRING,IDM_MCONT,\"&Continue\");",
+        "AppendMenu(hMainPopup,MF_STRING,IDM_MABOR,\"&Abort\");",
+        "",
+        "AppendMenu(hErrorPopup,MF_STRING,IDM_EFLIP,\"&Flip screen\");",
+        "AppendMenu(hErrorPopup,MF_STRING,IDM_ENEXT,\"&Next error\");",
+        "AppendMenu(hErrorPopup,MF_STRING,IDM_EPREV,\"&Prev error\");",
+        "AppendMenu(hErrorPopup,MF_STRING,IDM_EALL,\"&All errors\");",
+        "AppendMenu(hErrorPopup,MF_STRING,IDM_ECLEA,\"&Clear errors\");",
+        "",
+        "AppendMenu(hTrapperPopup,MF_POPUP,hMainPopup,\"&Main\");",
+        "AppendMenu(hTrapperPopup,MF_POPUP,hErrorPopup,\"&Error\");",
+        "",
+        "/* if graphics mode, then use sc.ScreenBuffer */ ",
+        "",
+        "/* hTest = ConsoleMenuControl(sc.ScreenBuffer,IDM_TRAPPER,IDM_ECLEA); */",
+        "",
+        "/* else text mode, then use sc.OutputHandle */",
+        "hTest = ConsoleMenuControl(sc.OutputHandle,IDM_TRAPPER,IDM_ECLEA);",
+        "",
+        "AppendMenu(hTest,MF_POPUP,hTrapperPopup,\"&Trapper\");",
+        "bTrapperMenuFlag=TRUE; /* draw the trapper menu just once */",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Five substantive chunks and four HUNTER exclusions; no formatting-only changes. Original console setup retained with QuickEdit policy, real console-capability check and inherited output cleanup.",
+  "counter_review": "QuickEdit disabling is paired with EXTENDED_FLAGS and saved original mode restored by nt_event. GetConsoleMode may now be remote and fail for transport reasons, not just non-console handles. Output cleanup prevents held pipe writers, but stdout/stderr equality alone does not prove non-aliasing with retained stdin or other owners.",
+  "limits": "Three retain, two pending; no source changes. Four exclusions replace original HUNTER include/declaration/call/function."
+}

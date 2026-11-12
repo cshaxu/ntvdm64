@@ -1,0 +1,57 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+  "before_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+  "current_sha256": "e165f243722d982c5a19024ae3fff82747889bcfb34c63105043e08fe7d4a9f1",
+  "initial_review": "Whole diff shows original lookaside retained with four DBG exclusions and fragmented selectors; ordinary ANSI capture moved to alternative and remains exact; large capture omitted.",
+  "counter_review": "Do not mistake moved ANSI capture for newly authored algorithm. Simplify composition without changing allocation/TLS lifetime. Large-capture reuse lacks caller proof.",
+  "items": [
+    [
+      14,
+      134,
+      14,
+      "simplify",
+      "Original capture precedes lookaside; project moved it after lookaside under an exclusive selector and replaced private precomp with bounded bindings.",
+      "Restore original function order and coherent per-owner selection; retain separate actual capture/lookaside object contexts and bounded includes.",
+      "Build both real objects and inspect symbol identity; compare selected original tokens and diagnostic positions."
+    ],
+    [
+      95,
+      52,
+      14,
+      "pending evidence",
+      "RtlCaptureLargeAnsiString omitted; ordinary RtlCaptureAnsiString is exact. Large capture has a wider length descriptor and cannot be substituted by ordinary capture.",
+      "Trace retained LARGE_STRING callers against current conversion owners; restore original large capture only if it displaces a proved duplicate with matching lifetime and buffer contract.",
+      "Large length/forced allocation/TLS/failure cleanup evidence before admission."
+    ],
+    [
+      172,
+      40,
+      43,
+      "retain",
+      "AllocateFromZone and FreeToZone macros retain original pointer-list operations; no second allocator algorithm.",
+      "Keep macros and original lookaside state definitions; bounded heap/critical-section bindings supply unavailable process environment.",
+      "Existing lookaside fixture plus original selected control callers; no guest-memory allocation claim."
+    ],
+    [
+      319,
+      46,
+      190,
+      "simplify",
+      "Original DBG counters excluded, but project closes/reopens outer selector around each DEBUG group inside allocation/free functions.",
+      "Coalesce whole original functions under their owner selector, preserve original DBG frames with #error, and restore diagnostic boundaries.",
+      "Actual product and fixture contexts; verify unchanged non-debug allocation/free tokens and original logical lines."
+    ],
+    [
+      30,
+      56,
+      275,
+      "retain",
+      "RtlCaptureAnsiString full normalized body is exact. Heap/TLS scratch and NTDLL conversion supplied by existing binding.",
+      "Retain original capture and failure cleanup semantics; do not allocate a second scratch owner or read native TEB layout.",
+      "wow_user_capture_fixture: NULL/short/forced/long limits and thread-local scratch; malformed/failure injection remains separate coverage."
+    ]
+  ],
+  "format_restoration": "Original ANSI capture function documentation",
+  "limits": "No functional changes or fresh tests; line placement requires compiler verification."
+}

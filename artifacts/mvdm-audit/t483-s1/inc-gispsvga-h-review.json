@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+  "original_sha256": "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+  "current_sha256": "5afbb02100a36baaf90731d50752fab72ac733092d84e7127688f4bbe42fce12",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 5
+    }
+  ],
+  "initial_review": "One excluded GISP_SVGA declaration body; remaining source exact.",
+  "counter_review": "Original romMessageAddress and gispROMInit declarations only; no selected renderer, frame transfer or mouse callback changed.",
+  "limits": "Source comparison only; no new universal build-context or runtime certification."
+}

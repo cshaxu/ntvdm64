@@ -431,4 +431,3 @@ GdiConsoleTextOut(
                      ((CharSet) == GB2312_CHARSET)      ? TRUE : FALSE )
 
 #endif /* _WINGDIP_ */
-

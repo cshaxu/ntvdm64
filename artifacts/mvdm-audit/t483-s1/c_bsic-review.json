@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+  "original_sha256": "5a7e4cefa28c674ad3047741cf8f78c9882f3c2362af09ae3a3dc0df336eed17",
+  "current_sha256": "a645bafef7279059c8657d6650d421073d0dede1e07415cdc8b5800bfb0b6c29",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "249",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "current_start": "99",
+      "current_count": "3",
+      "original_start": "99",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "CCPU-internal-function-declaration",
+      "initial_review": "c_getEFLAGS already defined by original c_bsic.c and called from c_intr.c; internal header now declares its IU32 return.",
+      "counter_review": "cpu4gen.h also declares it, but importing the generated public macro surface into internal CPU code would broaden header coupling. Exact prototype in existing internal header is bounded.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c:128; c_intr.c:245,319; cpu4gen.h:1155",
+      "limits": "Source and existing fixture inspection only; no fresh execution. Consumer files receive their own full review later.",
+      "decision": "retain",
+      "change_plan": "Keep exact IMPORT IU32 c_getEFLAGS IPT0 declaration; no replacement implementation or public-header import.",
+      "related_callers": "c_bsic.c::c_getEFLAGS; c_intr.c flags capture; cpu4gen.h separate public interface.",
+      "verification_required": "Compile internal callers with prototype checks and preserve flags values; no algorithm modification.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [],
+  "limits": "Difference classification only; excluded ranges do not assert universal reachability or full logical-line proof."
+}

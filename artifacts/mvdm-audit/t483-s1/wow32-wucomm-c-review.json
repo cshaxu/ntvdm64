@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/wow32/wucomm.c",
+  "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+  "current_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 1701,
+      "original_count": 5,
+      "current_start": 1703,
+      "current_count": 1,
+      "original": [
+        "        if (fTimeOut) {",
+        "            LOGDEBUG(LOG_ALWAYS,",
+        "                (\"WOW DeletePortTabEntry: Comm writer thread for port %d refused\\n\"",
+        "                 \"    to die when asked nicely.\\n\", (int)pWOWPort->idComDev));",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 2533,
+      "original_count": 3,
+      "current_start": 2534,
+      "current_count": 1,
+      "original": [
+        "            if (pwp->pchWriteHead >= pwp->pchWriteBuf + pwp->cbWriteBuf) {",
+        "                WOW32ASSERT(pwp->pchWriteHead == pwp->pchWriteBuf + pwp->cbWriteBuf);",
+        "            }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 1704,
+      "original": 1706,
+      "logical": 1702
+    },
+    {
+      "current": 2535,
+      "original": 2536,
+      "logical": 2534
+    }
+  ],
+  "evidence": "Complete LF comparison: only two DEBUG diagnostics removed (writer thread timeout log and write-buffer assertion); all remaining serial-port implementation unchanged.",
+  "limits": [
+    "No serial hardware/runtime verification; source-only diff audit.",
+    "LF diagnostic mapping is not compiler-certified."
+  ]
+}

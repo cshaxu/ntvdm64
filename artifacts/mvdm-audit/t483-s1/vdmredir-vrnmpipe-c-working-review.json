@@ -1,0 +1,1627 @@
+{
+  "file_sequence": 904,
+  "path": "src\\mvdm-host\\vdmredir\\vrnmpipe.c",
+  "status": "in-progress-not-counted",
+  "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+  "current_sha256": "f727e75b675462ff383c59c92534f6925be7648b28cb364922839cbf592d6a82",
+  "all_diff_chunks_without_line_directives": [
+    {
+      "original_start": 138,
+      "original_count": 2,
+      "current_start": 138,
+      "original": [
+        "",
+        "#include <stdio.h>"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat",
+        " * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the",
+        " * mirror; enter the Redirector adapter only at the guest-memory lifetime",
+        " * seam. */",
+        "#include \"common/redirector/async.h\""
+      ]
+    },
+    {
+      "original_start": 247,
+      "original_count": 2,
+      "current_start": 252,
+      "original": [
+        "VOID DumpOpenPipeList(VOID);",
+        "VOID DumpRequestQueue(VOID);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 311,
+      "original_count": 9,
+      "current_start": 317,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrGetNamedPipeInfo(0x%08x, %d, %04x:%04x, %d)\\n\",",
+        "                 HANDLE_FROM_WORDS(getBP(), getBX()),",
+        "                 getDX(),",
+        "                 getDS(),",
+        "                 getSI(),",
+        "                 getCX()",
+        "                 );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 388,
+      "original_count": 5,
+      "current_start": 388,
+      "original": [
+        "",
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrGetNamedPipeInfo: Error: can't map handle 0x%08x\\n\", Handle);",
+        "        }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 399,
+      "original_count": 20,
+      "current_start": 397,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        if (getCF()) {",
+        "            DbgPrint(\"VrGetNamedPipeInfo: returning ERROR: %d\\n\", getAX());",
+        "        } else {",
+        "            DbgPrint(\"VrGetNamedPipeInfo: returning OK. PIPEINFO:\\n\"",
+        "                     \"cbOut     %04x\\n\"",
+        "                     \"cbIn      %04x\\n\"",
+        "                     \"cbMaxInst %02x\\n\"",
+        "                     \"cbCurInst %02x\\n\"",
+        "                     \"cbName    %02x\\n\"",
+        "                     \"szName    %s\\n\",",
+        "                     READ_WORD(&PipeInfo->cbOut),",
+        "                     READ_WORD(&PipeInfo->cbIn),",
+        "                     READ_BYTE(&PipeInfo->cbMaxInst),",
+        "                     READ_BYTE(&PipeInfo->cbCurInst),",
+        "                     READ_BYTE(&PipeInfo->cbName),",
+        "                     READ_BYTE(&PipeInfo->szName)",
+        "                     );",
+        "        }",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 469,
+      "original_count": 3,
+      "current_start": 450,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrGetNamedPipeHandleState\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 554,
+      "original_count": 3,
+      "current_start": 535,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrSetNamedPipeHandleState(0x%08x, %04x)\\n\", Handle, getCX());",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 585,
+      "original_count": 5,
+      "current_start": 566,
+      "original": [
+        "",
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"Error: VrSetNamedPipeHandleState: returning %d\\n\", GetLastError());",
+        "        }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 643,
+      "original_count": 8,
+      "current_start": 622,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrPeekNamedPipe(0x%08x, %04x:%04x, %d)\\n\",",
+        "                 HANDLE_FROM_WORDS(getBP(), getBX()),",
+        "                 getDS(),",
+        "                 getSI(),",
+        "                 getCX()",
+        "                 );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 698,
+      "original_count": 7,
+      "current_start": 672,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrPeekNamedPipe: Ok: %d bytes peeked, %d avail, %d left in message\\n\",",
+        "                     BytesRead,",
+        "                     BytesAvailable,",
+        "                     BytesLeftInMessage",
+        "                     );",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 711,
+      "original_count": 3,
+      "current_start": 681,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrPeekNamedPipe: Error %d\\n\", getAX());",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 778,
+      "original_count": 11,
+      "current_start": 748,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrTransactNamedPipe(0x%08x, TxLen=%d, TxBuf=%04x:%04x, RxLen=%d, RxBuf=%04x:%04x)\\n\",",
+        "                 HANDLE_FROM_WORDS(getBP(), getBX()),",
+        "                 getCX(),",
+        "                 getDS(),",
+        "                 getSI(),",
+        "                 getDX(),",
+        "                 getES(),",
+        "                 getDI()",
+        "                 );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 812,
+      "original_count": 0,
+      "current_start": 773,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-277): modern TransactNamedPipe rejects",
+        "         * lpBytesRead when an OVERLAPPED is supplied.  The original next",
+        "         * step already retrieves the authoritative count from the completed",
+        "         * OVERLAPPED request. */"
+      ]
+    },
+    {
+      "original_start": 817,
+      "original_count": 1,
+      "current_start": 783,
+      "original": [
+        "                               &BytesRead,"
+      ],
+      "current": [
+        "                               NULL,"
+      ]
+    },
+    {
+      "original_start": 824,
+      "original_count": 3,
+      "current_start": 791,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrTransactNamedPipe: Ok, Waiting on hEvent...\\n\");",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 836,
+      "original_count": 1,
+      "current_start": 802,
+      "original": [
+        "            GetOverlappedResult(Handle, &pipeio.Overlapped, &BytesRead, TRUE);"
+      ],
+      "current": [
+        "            /* A signalled OVERLAPPED event only says that the operation has",
+        "             * completed.  Modern named-pipe completion can still fail (for",
+        "             * example a peer disconnect); preserve the original result path,",
+        "             * but do not publish an uninitialised/zero byte count as success. */",
+        "            Ok = GetOverlappedResult(Handle, &pipeio.Overlapped, &BytesRead, TRUE);",
+        "            if (!Ok) {",
+        "                Error = GetLastError();",
+        "            }",
+        "        }",
+        "        if (Error == NO_ERROR || Error == ERROR_MORE_DATA) {"
+      ]
+    },
+    {
+      "original_start": 839,
+      "original_count": 3,
+      "current_start": 815,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"WaitForSingleObject completed. BytesRead=%d\\n\", BytesRead);",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 862,
+      "original_count": 3,
+      "current_start": 838,
+      "original": [
+        "                IF_DEBUG(NAMEPIPE) {",
+        "                    DbgPrint(\"VrTransactNamedPipe: Wait timed out: closing handle %08x\\n\", Handle);",
+        "                }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 874,
+      "original_count": 3,
+      "current_start": 850,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrTransactNamedPipe: Error: %d\\n\", getAX());",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 943,
+      "original_count": 3,
+      "current_start": 919,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrCallNamedPipe(%s)\\n\", (LPSTR)READ_FAR_POINTER(&StructurePointer->lpPipeName));",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 960,
+      "original_count": 3,
+      "current_start": 936,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrCallNamedPipe: Error: CallNamedPipe returns %u\\n\", getAX());",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 970,
+      "original_count": 3,
+      "current_start": 946,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrCallNamedPipe: Ok\\n\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1020,
+      "original_count": 6,
+      "current_start": 996,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrWaitNamedPipe(%s, %d)\\n\",",
+        "                    LPSTR_FROM_WORDS(getDS(), getDX()),",
+        "                    DWORD_FROM_WORDS(getBX(), getCX())",
+        "                    );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1036,
+      "original_count": 3,
+      "current_start": 1009,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"WaitNamedPipe returns TRUE\\n\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1091,
+      "original_count": 3,
+      "current_start": 1064,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrNetHandleGetInfo\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1178,
+      "original_count": 4,
+      "current_start": 1151,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrNetHandleGetInfo\\n\");",
+        "        DbgBreakPoint();",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1303,
+      "original_count": 7,
+      "current_start": 1274,
+      "original": [
+        "    // StructurePointer is 32-bit flat pointer to structure in DOS memory",
+        "    // containing request parameters",
+        "    //",
+        "",
+        "    PDOS_ASYNC_NAMED_PIPE_STRUCT StructurePointer;",
+        "",
+        "    //"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 1346,
+      "original_count": 3,
+      "current_start": 1311,
+      "original": [
+        "    StructurePointer = (PDOS_ASYNC_NAMED_PIPE_STRUCT)POINTER_FROM_WORDS(getDS(), getSI());",
+        "    length = READ_WORD(&StructurePointer->BufferLength);",
+        "    buffer = READ_FAR_POINTER(&StructurePointer->lpBuffer);"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 1351,
+      "original_count": 39,
+      "current_start": 1314,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(   \"\\n\"",
+        "                    \"VrReadWriteAsyncNmPipe (%04x) [%s]:\\n\"",
+        "                    \"DOS_READ_ASYNC_NAMED_PIPE_STRUCT @ %08x:\\n\"",
+        "                    \"32-bit named pipe handle . . . . %08x\\n\"",
+        "                    \"Address of returned bytes read . %04x:%04x\\n\"",
+        "                    \"Size of caller's buffer. . . . . %04x\\n\"",
+        "                    \"Address of caller's buffer . . . %04x:%04x\\n\"",
+        "                    \"Address of returned error code . %04x:%04x\\n\"",
+        "                    \"Address of ANR . . . . . . . . . %04x:%04x\\n\"",
+        "                    \"Named pipe handle. . . . . . . . %04x\\n\"",
+        "                    \"Address of caller's semaphore. . %04x:%04x\\n\"",
+        "                    \"\\n\",",
+        "                    (DWORD)getAX(), // type of read/write request",
+        "                    Type == ANP_READ",
+        "                        ? \"READ\"",
+        "                        : Type == ANP_WRITE",
+        "                            ? \"WRITE\"",
+        "                            : Type == ANP_READ2",
+        "                                ? \"READ2\"",
+        "                                : Type == ANP_WRITE2",
+        "                                    ? \"WRITE2\"",
+        "                                    : \"?????\",",
+        "                    StructurePointer,",
+        "                    Handle,",
+        "                    (DWORD)GET_SELECTOR(&StructurePointer->lpBytesRead),",
+        "                    (DWORD)GET_OFFSET(&StructurePointer->lpBytesRead),",
+        "                    (DWORD)StructurePointer->BufferLength,",
+        "                    (DWORD)GET_SELECTOR(&StructurePointer->lpBuffer),",
+        "                    (DWORD)GET_OFFSET(&StructurePointer->lpBuffer),",
+        "                    (DWORD)GET_SELECTOR(&StructurePointer->lpErrorCode),",
+        "                    (DWORD)GET_OFFSET(&StructurePointer->lpErrorCode),",
+        "                    (DWORD)GET_SELECTOR(&StructurePointer->lpANR),",
+        "                    (DWORD)GET_OFFSET(&StructurePointer->lpANR),",
+        "                    (DWORD)StructurePointer->PipeHandle,",
+        "                    (DWORD)GET_SELECTOR(&StructurePointer->lpSemaphore),",
+        "                    (DWORD)GET_OFFSET(&StructurePointer->lpSemaphore)",
+        "                    );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1400,
+      "original_count": 3,
+      "current_start": 1327,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: Handle 0x%08x is invalid\\n\", Handle);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1421,
+      "original_count": 5,
+      "current_start": 1348,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrReadWriteAsyncNmPipe: Error: Couldn't create something-to-do event: %d\\n\",",
+        "                            GetLastError()",
+        "                            );",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1450,
+      "original_count": 5,
+      "current_start": 1375,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrReadWriteAsyncNmPipe: Error: Couldn't create thread: %d\\n\",",
+        "                            GetLastError()",
+        "                            );",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1472,
+      "original_count": 3,
+      "current_start": 1395,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: Error: Couldn't allocate structure\\n\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1482,
+      "original_count": 0,
+      "current_start": 1404,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-167): LocalAlloc does not promise a zeroed",
+        "     * private field. The overlay uses this member solely as ownership state. */",
+        "    pAsyncInfo->PrivateAsyncState = NULL;"
+      ]
+    },
+    {
+      "original_start": 1496,
+      "original_count": 3,
+      "current_start": 1423,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: Error: Couldn't create event: %d\\n\", GetLastError());",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1519,
+      "original_count": 16,
+      "current_start": 1445,
+      "original": [
+        "    pAsyncInfo->Buffer = (DWORD)StructurePointer->lpBuffer;",
+        "    pAsyncInfo->pBytesTransferred = READ_FAR_POINTER(&StructurePointer->lpBytesRead);",
+        "    pAsyncInfo->pErrorCode = READ_FAR_POINTER(&StructurePointer->lpErrorCode);",
+        "    pAsyncInfo->ANR = READ_DWORD(&StructurePointer->lpANR);",
+        "",
+        "    //",
+        "    // if this is an AsyncNmPipe2 call then it has an associated semaphore",
+        "    // handle. Earlier versions don't have a semaphore",
+        "    //",
+        "",
+        "    if (Type == ANP_READ2 || Type == ANP_WRITE2) {",
+        "        pAsyncInfo->Type2 = TRUE;",
+        "        pAsyncInfo->Semaphore = READ_DWORD(&StructurePointer->lpSemaphore);",
+        "    } else {",
+        "        pAsyncInfo->Type2 = FALSE;",
+        "        pAsyncInfo->Semaphore = (DWORD)NULL;"
+      ],
+      "current": [
+        "    if (!mvdm_redirector_async_prepare(pAsyncInfo, getDS(), getSI(), Type,",
+        "            &buffer, &length)) {",
+        "        CloseHandle(hEvent);",
+        "        LocalFree(pAsyncInfo);",
+        "        SET_ERROR(ERROR_INVALID_ADDRESS);",
+        "        return;"
+      ]
+    },
+    {
+      "original_start": 1538,
+      "original_count": 1,
+      "current_start": 1456,
+      "original": [
+        "    pAsyncInfo->RequestType = Type;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1561,
+      "original_count": 8,
+      "current_start": 1481,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: ReadFile(%x, %x, %d, ...): %d\\n\",",
+        "                     Handle,",
+        "                     buffer,",
+        "                     length,",
+        "                     ok",
+        "                     );",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1580,
+      "original_count": 8,
+      "current_start": 1495,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: WriteFile(%x, %x, %d, ...): %d\\n\",",
+        "                     Handle,",
+        "                     buffer,",
+        "                     length,",
+        "                     ok",
+        "                     );",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1607,
+      "original_count": 3,
+      "current_start": 1517,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: Error: IO operation returns %d\\n\", error);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1614,
+      "original_count": 0,
+      "current_start": 1523,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_release(pAsyncInfo);"
+      ]
+    },
+    {
+      "original_start": 1619,
+      "original_count": 5,
+      "current_start": 1531,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadWriteAsyncNmPipe: IO operation started: returns %s\\n\",",
+        "                     error == ERROR_IO_PENDING ? \"ERROR_IO_PENDING\" : \"NO_ERROR\"",
+        "                     );",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1630,
+      "original_count": 3,
+      "current_start": 1540,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrReadWriteAsyncNmPipe: returning CF=%d, AX=%d\\n\", getCF(), getAX());",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1669,
+      "original_count": 0,
+      "current_start": 1578,
+      "original": [],
+      "current": [
+        "    mvdm_redirector_async_trace(\"interrupt-enter\");",
+        ""
+      ]
+    },
+    {
+      "original_start": 1670,
+      "original_count": 3,
+      "current_start": 1582,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrNmPipeInterrupt\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1683,
+      "original_count": 0,
+      "current_start": 1594,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_trace(\"interrupt-empty\");"
+      ]
+    },
+    {
+      "original_start": 1685,
+      "original_count": 5,
+      "current_start": 1598,
+      "original": [
+        "",
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrNmPipeInterrupt - nothing to do\\n\");",
+        "        }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1699,
+      "original_count": 0,
+      "current_start": 1610,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_trace(\"interrupt-dispose\");"
+      ]
+    },
+    {
+      "original_start": 1719,
+      "original_count": 0,
+      "current_start": 1632,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_release(pAsyncInfo);"
+      ]
+    },
+    {
+      "original_start": 1720,
+      "original_count": 0,
+      "current_start": 1635,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_trace(\"interrupt-callback-ready\");"
+      ]
+    },
+    {
+      "original_start": 1722,
+      "original_count": 9,
+      "current_start": 1639,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrNmPipeInterrupt: Setting DOS Registers:\\n\"",
+        "                     \"DS:SI=%04x:%04x, ES:DI=%04x:%04x, CX:BX=%04x:%04x, AL=%02x\\n\",",
+        "                     getDS(), getSI(),",
+        "                     getES(), getDI(),",
+        "                     getCX(), getBX(),",
+        "                     getAL()",
+        "                     );",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1769,
+      "original_count": 3,
+      "current_start": 1680,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrTerminateNamedPipes\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1773,
+      "original_count": 0,
+      "current_start": 1683,
+      "original": [],
+      "current": [
+        ""
+      ]
+    },
+    {
+      "original_start": 1853,
+      "original_count": 3,
+      "current_start": 1765,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrAsyncNamedPipeThread: *** Started ***\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1877,
+      "original_count": 3,
+      "current_start": 1789,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrpAsyncNmPipeThread: event #%d fired\\n\", index);",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1888,
+      "original_count": 7,
+      "current_start": 1800,
+      "original": [
+        "            else {",
+        "                IF_DEBUG(NAMEPIPE) {",
+        "                    DbgPrint(\"VrpAsyncNmPipeThread: Couldn't find request for handle 0x%08x\\n\",",
+        "                                eventList[index]",
+        "                                );",
+        "                }",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1904,
+      "original_count": 6,
+      "current_start": 1812,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrpAsyncNmPipeThread: Error: WaitForMultipleObjects returns %d (%d)\\n\",",
+        "                            index,",
+        "                            GetLastError()",
+        "                            );",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1915,
+      "original_count": 5,
+      "current_start": 1820,
+      "original": [
+        "        else {",
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrpAsyncNmPipeThread: Something-to-do event fired\\n\");",
+        "            }",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1925,
+      "original_count": 3,
+      "current_start": 1828,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpAsyncNmPipeThread: *** Terminated ***\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1964,
+      "original_count": 3,
+      "current_start": 1867,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpSnapshotEventList\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1979,
+      "original_count": 3,
+      "current_start": 1882,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpSnapshotEventList: returning %d events\\n\", count);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2020,
+      "original_count": 3,
+      "current_start": 1923,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpSearchForRequestByEventHandle(0x%08x)\\n\", EventHandle);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2035,
+      "original_count": 16,
+      "current_start": 1938,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpLocateAsyncRequestByEventHandle returning 0x%08x: Request is %s\\n\",",
+        "                 ptr,",
+        "                 !ptr",
+        "                    ? \"NO REQUEST!!\"",
+        "                    : ptr->RequestType == ANP_READ",
+        "                        ? \"READ\"",
+        "                        : ptr->RequestType == ANP_WRITE",
+        "                            ? \"WRITE\"",
+        "                            : ptr->RequestType == ANP_READ2",
+        "                                ? \"READ2\"",
+        "                                : ptr->RequestType == ANP_WRITE2",
+        "                                    ? \"WRITE2\"",
+        "                                    : \"UNKNOWN REQUEST!!\"",
+        "                 );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2092,
+      "original_count": 4,
+      "current_start": 1981,
+      "original": [
+        "#if DBG",
+        "",
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpCompleteAsyncRequest(0x%08x)\\n\", pAsyncInfo);"
+      ],
+      "current": [
+        "    if (!mvdm_redirector_async_completion_begin(pAsyncInfo)) {",
+        "        VrpDequeueAsyncRequest(pAsyncInfo);",
+        "        CloseHandle(pAsyncInfo->Overlapped.hEvent);",
+        "        mvdm_redirector_async_release(pAsyncInfo);",
+        "        LocalFree(pAsyncInfo);",
+        "        return;"
+      ]
+    },
+    {
+      "original_start": 2098,
+      "original_count": 0,
+      "current_start": 1989,
+      "original": [],
+      "current": [
+        "#if DBG",
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2111,
+      "original_count": 2,
+      "current_start": 2006,
+      "original": [
+        "    WRITE_WORD(pAsyncInfo->pErrorCode, error);",
+        "    WRITE_WORD(pAsyncInfo->pBytesTransferred, bytesTransferred);"
+      ],
+      "current": [
+        "    if (!mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error)) {",
+        "        /* DIVERGENCE(MVDM-HOST-DIV-167): guest memory may have disappeared",
+        "         * with its session while host I/O was completing. Do not publish a",
+        "         * stale completion or keep an alias past that event. */",
+        "        VrpDequeueAsyncRequest(pAsyncInfo);",
+        "        CloseHandle(pAsyncInfo->Overlapped.hEvent);",
+        "        mvdm_redirector_async_completion_end(pAsyncInfo);",
+        "        mvdm_redirector_async_release(pAsyncInfo);",
+        "        LocalFree(pAsyncInfo);",
+        "        return;",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 2115,
+      "original_count": 8,
+      "current_start": 2020,
+      "original": [
+        "",
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpCompleteAsyncRequest: error=%d, bytesTransferred=%d\\n\",",
+        "                    error,",
+        "                    bytesTransferred",
+        "                    );",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2134,
+      "original_count": 8,
+      "current_start": 2034,
+      "original": [
+        "",
+        "        PDOS_ASYNC_NAMED_PIPE_INFO ptr;",
+        "",
+        "        ptr = VrpDequeueAsyncRequest(pAsyncInfo);",
+        "        if (ptr != pAsyncInfo) {",
+        "            DbgPrint(\"*** Error: incorrect request packet dequeued ***\\n\");",
+        "            DbgBreakPoint();",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2149,
+      "original_count": 0,
+      "current_start": 2044,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_completion_end(pAsyncInfo);",
+        "        mvdm_redirector_async_release(pAsyncInfo);"
+      ]
+    },
+    {
+      "original_start": 2158,
+      "original_count": 3,
+      "current_start": 2057,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrpCompleteAsyncRequest: *** INTERRUPTING VDM ***\\n\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2164,
+      "original_count": 0,
+      "current_start": 2062,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_trace(\"completion-queued\");"
+      ]
+    },
+    {
+      "original_start": 2165,
+      "original_count": 0,
+      "current_start": 2065,
+      "original": [],
+      "current": [
+        "        mvdm_redirector_async_trace(\"completion-raised\");",
+        "        mvdm_redirector_async_completion_end(pAsyncInfo);"
+      ]
+    },
+    {
+      "original_start": 2195,
+      "original_count": 3,
+      "current_start": 2099,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpQueueAsyncRequest\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2254,
+      "original_count": 3,
+      "current_start": 2158,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpDequeueAsyncRequest(0x%08x)\\n\", pAsyncInfo);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2285,
+      "original_count": 3,
+      "current_start": 2189,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpDequeueAsyncRequest returning %08x\\n\", ptr);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2325,
+      "original_count": 3,
+      "current_start": 2229,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpFindCompletedRequest\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2339,
+      "original_count": 16,
+      "current_start": 2243,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpFindCompletedRequest returning 0x%08x: Request is %s\\n\",",
+        "                 ptr,",
+        "                 !ptr",
+        "                    ? \"NO REQUEST!!\"",
+        "                    : ptr->RequestType == ANP_READ",
+        "                        ? \"READ\"",
+        "                        : ptr->RequestType == ANP_WRITE",
+        "                            ? \"WRITE\"",
+        "                            : ptr->RequestType == ANP_READ2",
+        "                                ? \"READ2\"",
+        "                                : ptr->RequestType == ANP_WRITE2",
+        "                                    ? \"WRITE2\"",
+        "                                    : \"UNKNOWN REQUEST!!\"",
+        "                 );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2397,
+      "original_count": 3,
+      "current_start": 2288,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrAddOpenNamedPipeInfo\\n\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2405,
+      "original_count": 3,
+      "current_start": 2296,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"Adding %s as named pipe\\n\", lpFileName);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2420,
+      "original_count": 3,
+      "current_start": 2311,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrAddOpenNamedPipeInfo: Error: not named pipe: %s\\n\", lpFileName);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2462,
+      "original_count": 15,
+      "current_start": 2353,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrRemoveOpenNamedPipeInfo\\n\");",
+        "    }",
+        "",
+        "    if (!VrpRemoveOpenNamedPipeInfo(Handle)) {",
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"Handle 0x%08x is not a named pipe\\n\", Handle);",
+        "        }",
+        "        return FALSE;",
+        "    } else {",
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrRemoveOpenNamedPipeInfo - Handle 0x%08x has been removed\\n\", Handle);",
+        "        }",
+        "        return TRUE;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2525,
+      "original_count": 3,
+      "current_start": 2405,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrReadNamePipe(0x%08x, %x, %d)\\n\", Handle, Buffer, Buflen);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2551,
+      "original_count": 1,
+      "current_start": 2430,
+      "original": [
+        "    success = ReadFile(Handle, Buffer, Buflen, BytesRead, &pipeio.Overlapped);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-276): NT4 accepted an output count together",
+        "     * with OVERLAPPED.  Modern ReadFile requires it to be NULL; the original",
+        "     * next step already obtains the authoritative count from",
+        "     * GetOverlappedResult. */",
+        "    success = ReadFile(Handle, Buffer, Buflen, NULL, &pipeio.Overlapped);"
+      ]
+    },
+    {
+      "original_start": 2565,
+      "original_count": 3,
+      "current_start": 2450,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrReadNamedPipe: ReadFile failed: %d\\n\", GetLastError());",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2629,
+      "original_count": 3,
+      "current_start": 2514,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadNamePipe: Error: Returning %d\\n\", error);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2639,
+      "original_count": 3,
+      "current_start": 2524,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrReadNamePipe: Ok: %d bytes read from pipe\\n\", *BytesRead);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2693,
+      "original_count": 3,
+      "current_start": 2578,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrWriteNamePipe(0x%08x, %x, %d)\\n\", Handle, Buffer, Buflen);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2742,
+      "original_count": 3,
+      "current_start": 2627,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrWriteNamePipe: Error: Returning %d\\n\", error);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2755,
+      "original_count": 7,
+      "current_start": 2640,
+      "original": [
+        "",
+        "    else {",
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrWriteNamePipe: Ok: %d bytes written to pipe\\n\", *BytesWritten);",
+        "        }",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2817,
+      "original_count": 1,
+      "current_start": 2698,
+      "original": [
+        "    LPSTR   OriginalName = Name;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2837,
+      "original_count": 3,
+      "current_start": 2720,
+      "original": [
+        "                IF_DEBUG(NAMEPIPE) {",
+        "                    DbgPrint(\"VrIsNamedPipeName - returning FALSE for %s\\n\", OriginalName);",
+        "                }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2856,
+      "original_count": 3,
+      "current_start": 2739,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrIsNamedPipeName - returning FALSE for %s\\n\", OriginalName);",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2875,
+      "original_count": 3,
+      "current_start": 2758,
+      "original": [
+        "                IF_DEBUG(NAMEPIPE) {",
+        "                    DbgPrint(\"VrIsNamedPipeName - returning TRUE for %s\\n\", OriginalName);",
+        "                }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2886,
+      "original_count": 3,
+      "current_start": 2769,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrIsNamedPipeName - returning FALSE for %s\\n\", OriginalName);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3024,
+      "original_count": 3,
+      "current_start": 2907,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrConvertLocalNtPipeName - returning %s\\n\", Buffer);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3105,
+      "original_count": 3,
+      "current_start": 2988,
+      "original": [
+        "        IF_DEBUG(NAMEPIPE) {",
+        "            DbgPrint(\"VrpAddOpenNamedPipeInfo: couldn't allocate structure - returning FALSE\\n\");",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3134,
+      "original_count": 7,
+      "current_start": 3017,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpAddOpenNamedPipeInfo - adding structure @ %08x, Handle=0x%08x, Name=%s\\n\",",
+        "            PipeInfo,",
+        "            PipeInfo->Handle,",
+        "            PipeInfo->Name",
+        "            );",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3220,
+      "original_count": 5,
+      "current_start": 3099,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpRemoveOpenNamedPipeInfo(0x%08x)\\n\", Handle);",
+        "        DumpOpenPipeList();",
+        "        DumpRequestQueue();",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3239,
+      "original_count": 7,
+      "current_start": 3116,
+      "original": [
+        "            IF_DEBUG(NAMEPIPE) {",
+        "                DbgPrint(\"VrpRemoveOpenNamedPipeInfo - freeing structure @ %08x, Handle=0x%08x, Name=%s\\n\",",
+        "                    ptr,",
+        "                    ptr->Handle,",
+        "                    ptr->Name",
+        "                    );",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3257,
+      "original_count": 3,
+      "current_start": 3130,
+      "original": [
+        "    IF_DEBUG(NAMEPIPE) {",
+        "        DbgPrint(\"VrpRemoveOpenNamedPipeInfo: Can't find 0x%08x in list\\n\", Handle);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3345,
+      "original_count": 102,
+      "current_start": 3218,
+      "original": [
+        "VOID DumpOpenPipeList()",
+        "{",
+        "    POPEN_NAMED_PIPE_INFO ptr = OpenNamedPipeInfoList;",
+        "",
+        "    DbgPrint(\"DumpOpenPipeList\\n\");",
+        "",
+        "    if (!ptr) {",
+        "        DbgPrint(\"DumpOpenPipeList: no open named pipe structures\\n\");",
+        "    } else {",
+        "        while (ptr) {",
+        "            DbgPrint(\"\\n\"",
+        "                     \"OPEN_NAMED_PIPE_INFO structure @%08x:\\n\"",
+        "                     \"Next. . . . . . . . . . %08x\\n\"",
+        "                     \"Handle. . . . . . . . . %08x\\n\"",
+        "                     \"NameLength. . . . . . . %d\\n\"",
+        "                     \"DosPdb. . . . . . . . . %04x\\n\"",
+        "                     \"Name. . . . . . . . . . %s\\n\",",
+        "                     ptr,",
+        "                     ptr->Next,",
+        "                     ptr->Handle,",
+        "                     ptr->NameLength,",
+        "                     ptr->DosPdb,",
+        "                     ptr->Name",
+        "                     );",
+        "            ptr = ptr->Next;",
+        "        }",
+        "        DbgPrint(\"\\n\");",
+        "    }",
+        "}",
+        "",
+        "VOID DumpRequestQueue()",
+        "{",
+        "    PDOS_ASYNC_NAMED_PIPE_INFO ptr;",
+        "",
+        "    DbgPrint(\"DumpRequestQueue\\n\");",
+        "",
+        "    EnterCriticalSection(&VrNmpRequestQueueCritSec);",
+        "    ptr = RequestQueueHead;",
+        "    if (!ptr) {",
+        "        DbgPrint(\"DumpRequestQueue: no request packets queued\\n\");",
+        "    } else {",
+        "        for (; ptr; ptr = ptr->Next) {",
+        "",
+        "            //",
+        "            // NT (308c) can't handle all this being put on the stack - gets",
+        "            // fault in KdpCopyDataToStack",
+        "            //",
+        "",
+        "            DbgPrint(\"\\n\"",
+        "                     \"DOS_ASYNC_NAMED_PIPE_INFO structure @%08x:\\n\"",
+        "                     \"Next. . . . . . . . . . %08x\\n\"",
+        "                     \"Overlapped.Internal . . %08x\\n\"",
+        "                     \"Overlapped.InternalHigh %08x\\n\"",
+        "                     \"Overlapped.Offset . . . %08x\\n\"",
+        "                     \"Overlapped.OffsetHigh . %08x\\n\"",
+        "                     \"Overlapped.hEvent . . . %08x\\n\",",
+        "                     ptr,",
+        "                     ptr->Next,",
+        "                     ptr->Overlapped.Internal,",
+        "                     ptr->Overlapped.InternalHigh,",
+        "                     ptr->Overlapped.Offset,",
+        "                     ptr->Overlapped.OffsetHigh,",
+        "                     ptr->Overlapped.hEvent",
+        "                     );",
+        "            DbgPrint(\"Type2 . . . . . . . . . %d\\n\"",
+        "                     \"Completed . . . . . . . %d\\n\"",
+        "                     \"Handle. . . . . . . . . %08x\\n\"",
+        "                     \"Buffer. . . . . . . . . %04x:%04x\\n\"",
+        "                     \"BytesTransferred. . . . %d\\n\"",
+        "                     \"pBytesTransferred . . . %08x\\n\"",
+        "                     \"pErrorCode. . . . . . . %08x\\n\"",
+        "                     \"ANR . . . . . . . . . . %04x:%04x\\n\"",
+        "                     \"Semaphore . . . . . . . %04x:%04x\\n\"",
+        "                     \"RequestType . . . . . . %04x [%s]\\n\",",
+        "                     ptr->Type2,",
+        "                     ptr->Completed,",
+        "                     ptr->Handle,",
+        "                     HIWORD(ptr->Buffer),",
+        "                     LOWORD(ptr->Buffer),",
+        "                     ptr->BytesTransferred,",
+        "                     ptr->pBytesTransferred,",
+        "                     ptr->pErrorCode,",
+        "                     HIWORD(ptr->ANR),",
+        "                     LOWORD(ptr->ANR),",
+        "                     HIWORD(ptr->Semaphore),",
+        "                     LOWORD(ptr->Semaphore),",
+        "                     ptr->RequestType,",
+        "                     ptr->RequestType == ANP_READ",
+        "                        ? \"READ\"",
+        "                        : ptr->RequestType == ANP_READ2",
+        "                            ? \"READ2\"",
+        "                            : ptr->RequestType == ANP_WRITE",
+        "                                ? \"WRITE\"",
+        "                                : ptr->RequestType == ANP_WRITE2",
+        "                                    ? \"WRITE2\"",
+        "                                    : \"*** UNKNOWN REQUEST ***\"",
+        "                    );",
+        "        }",
+        "        DbgPrint(\"\\n\");",
+        "    }",
+        "    LeaveCriticalSection(&VrNmpRequestQueueCritSec);",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "topic": "Completion/request ownership",
+      "evidence": [
+        "VrpCompleteAsyncRequest calls completion_end(request) after VrRaiseInterrupt",
+        "VrNmPipeInterrupt dequeues/releases/frees same request",
+        "session_thread_bind_owned_source sets TLS and binding counters; no mutex in that function",
+        "VrRaiseInterrupt locks interrupt counters; that lock is not held by caller around later completion_end",
+        "Publication fixture exercises begin/end sequentially"
+      ],
+      "decision": "pending",
+      "next": "Trace registered session thread hooks and actual ICA/CPU scheduling protection before classifying race; if unprotected, retire request-dependent state before publication while retaining necessary thread binding through interrupt call."
+    },
+    {
+      "topic": "Diagnostics",
+      "decision": "delete recommendation, not applied",
+      "evidence": "New trace calls write environment-selected diagnostic file; not required for transfer, queue or IRQ semantics.",
+      "next": "Register each mirror call for removal with provider/API/export and diagnostic consumers as one coupled cleanup."
+    },
+    {
+      "topic": "Guest buffer lifetime",
+      "decision": "retain in principle; full review pending",
+      "evidence": "Async prepare stages writes and records bounded guest locations; completion commits read payload before error/count.",
+      "next": "Check begin failure, copy failure, no callback and callback disposal, cancellation ordering and allocation errors."
+    },
+    {
+      "topic": "Overlapped changes",
+      "decision": "pending",
+      "next": "Verify actual NULL byte-count requirement and preserve completion failure status; do not rely on comment claiming modern API rejects non-NULL."
+    }
+  ],
+  "limits": "File not marked reviewed; no product change, no build/runtime claim. Full diff registration and counter-review remain."
+}

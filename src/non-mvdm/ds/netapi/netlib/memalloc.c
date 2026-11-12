@@ -270,5 +270,3 @@ Return Value:
     return (NewAddress);
 
 } // NetpMemoryReallocate
-
-

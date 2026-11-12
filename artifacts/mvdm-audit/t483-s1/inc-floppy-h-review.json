@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+  "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+  "current_sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 193,
+      "original_count": 3
+    },
+    {
+      "original_start": 479,
+      "original_count": 3
+    },
+    {
+      "original_start": 503,
+      "original_count": 13
+    },
+    {
+      "original_start": 528,
+      "original_count": 3
+    },
+    {
+      "original_start": 544,
+      "original_count": 5
+    }
+  ],
+  "initial_review": "Five excluded bodies: non-NTVDM rate cycling and four non-ANSI declaration groups. Retained source exact.",
+  "counter_review": "NTVDM next_rate skipping RS_1000 is original, not a project workaround. BIOS rate/status constants, controller structures and ANSI interfaces remain unchanged.",
+  "limits": "Source comparison only; no new build-context or runtime certification. No source changes."
+}

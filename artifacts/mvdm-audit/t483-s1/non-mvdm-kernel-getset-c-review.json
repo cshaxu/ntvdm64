@@ -1,0 +1,40 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+  "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+  "before_sha256": "c341f93751ac817fdedb508b94ab242f81fdffd0ffca1bc21a24fe6cc89ea3c0",
+  "current_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+  "status": "difference classification complete; functional remediation not implemented",
+  "retained_body_comparison": "Token-exact after selecting original DWL_MSGRESULT branch and excluding DEBUG/FE_IME bodies; production intentionally selects native result slot.",
+  "evidence": [
+    "src/wow32-dll/include/control-client/precomp.h:63-88",
+    "src/wow32-dll/source/wow_window_client_access_bindings.c:14-34,61-65,95-126",
+    "src/wow32-dll/source/wow_window_client_state_bindings.c:263-282",
+    "src/wow32-dll/source/wow_dialog_procedure_bindings.c:9-17",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_getset_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c:145-203",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:595-597"
+  ],
+  "decisions": [
+    "Keep selected subset provenance and original include line mapping; precomp resolves to explicit control-client cohort.",
+    "Omitted DefSetText includes desktop-heap storage and ANSI conversion. Map selected text-setting/WM_SETTEXT owner before asserting all original text policy redundant; do not recreate private desktop heap.",
+    "FCallerOk private system/CSRSS/Winlogon checks replaced by exact retained local-state ownership. Only enrolled local controls enter this subset; resource-only views cannot authorize access.",
+    "Omitted _SetWindowWord has dialog reserved-byte, button-state and low-word style compatibility. Trace actual WOW SetWindowWord callers and current adapters, restore reusable policy if replacement differs; no blanket deletion conclusion.",
+    "Keep original selected definition line anchor after restored documentation.",
+    "Production DWL_MSGRESULT must use wow_dialog_host_set/native slot consumed by native callbacks. Retain original branch for baseline fixtures; no duplicate result cache.",
+    "Keep line mapping after storage seam.",
+    "Omitted xxxSetWindowData covers userdata/style/menu/instance/procedure/parent operations. Current selected continuation handles only GWL_STYLE; other negatives route outside private-access edge. Verify each original CPD/zombie/owner behavior against actual native procedure and identity paths, not generic modern USER equivalence.",
+    "Omitted FindPCPD is original reusable list search, but current native CPD objects have no readable original private layout. Trace actual token owner and lifetime; do not add a second CPD cache to restore this body.",
+    "Omitted GetCPD uses original HMAllocObject and class-linked lifetime; native token provider is modern USER. Confirm reuse/encoding/lifetime/failure semantics for all selected client callers before claiming complete equivalence.",
+    "Omit MapClientToServerPfn private client/server procedure table mapping from current local control subset; no private USER server callable address may be synthesized.",
+    "Four DEBUG fragments were detached from omitted GetCPD and appended after xxxSetWindowLong. Reconcile original containing subset structure and line anchors; do not preserve orphan fragments as if owner body remained.",
+    "Unused dwCPDType is already original; do not add mirror diff solely to remove an inherited unused variable."
+  ],
+  "register_entries_added": 13,
+  "format_sites": 1,
+  "limits": [
+    "Fixture sources reviewed, not executed.",
+    "Local ownership predicate is not a general replacement for system/logon authority.",
+    "Unchanged original index arithmetic is not a new diff defect; no unrelated repair admitted.",
+    "Omitted CPD and word-set policies remain explicitly pending evidence."
+  ]
+}

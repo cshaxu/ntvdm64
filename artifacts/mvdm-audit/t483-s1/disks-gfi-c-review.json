@@ -1,0 +1,83 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+  "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+  "current_sha256": "1c465622c09e1072dc1ab8f49edd366afbfc0419fd376ad7ea4bb19ebc68bcd8",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 30,
+      "original_count": 1,
+      "current_start": 31
+    },
+    {
+      "original_start": 34,
+      "original_count": 6,
+      "current_start": 37
+    },
+    {
+      "original_start": 156,
+      "original_count": 2,
+      "current_start": 161
+    },
+    {
+      "original_start": 188,
+      "original_count": 2,
+      "current_start": 194
+    },
+    {
+      "original_start": 202,
+      "original_count": 2,
+      "current_start": 209
+    },
+    {
+      "original_start": 221,
+      "original_count": 2,
+      "current_start": 229
+    },
+    {
+      "original_start": 249,
+      "original_count": 2,
+      "current_start": 258
+    },
+    {
+      "original_start": 264,
+      "original_count": 2,
+      "current_start": 274
+    },
+    {
+      "original_start": 278,
+      "original_count": 2,
+      "current_start": 289
+    },
+    {
+      "original_start": 295,
+      "original_count": 3,
+      "current_start": 307
+    },
+    {
+      "original_start": 307,
+      "original_count": 5,
+      "current_start": 319
+    },
+    {
+      "original_start": 321,
+      "original_count": 2,
+      "current_start": 331
+    },
+    {
+      "original_start": 332,
+      "original_count": 20,
+      "current_start": 343
+    },
+    {
+      "original_start": 358,
+      "original_count": 6,
+      "current_start": 352
+    }
+  ],
+  "initial_review": "Fourteen removed conditional bodies: SCCSID, two SEGMENTATION includes, seven non-PROD tracing calls, four SLAVEPC routing bodies; no retained implementation changes.",
+  "counter_review": "Independently mapped error locations via logical line directives to original conditional boundaries, then compared all remaining nonblank lines exactly. Original real-diskette routing, function table, error returns and empty-drive initialization remain unchanged. Nested FLOPPY_B belongs to removed SLAVEPC body, not a lost selected alternative.",
+  "limits": "Source necessity review only; no fresh compilation/runtime tests or complete diagnostic-line certification. No functional repair implemented."
+}

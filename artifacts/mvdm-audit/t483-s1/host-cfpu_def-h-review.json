@@ -1,0 +1,270 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+  "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+  "current_sha256": "bf45e4fd68d706510fe773b2b9a319f7a745e268df61b62ed2e44b23d77a203f",
+  "review_complete": true,
+  "register_entries": 15,
+  "changes": [
+    {
+      "original_start": 18,
+      "original_count": 0,
+      "current_start": 18,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* T59 host ABI: word and bitfield order must match the selected host",
+        " * byte order. The CCPU arithmetic and Intel-memory conversion remain unchanged. */"
+      ]
+    },
+    {
+      "original_start": 19,
+      "original_count": 0,
+      "current_start": 22,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef LITTLEND",
+        "IU32\tmant:23;",
+        "IU32\texp:8;"
+      ]
+    },
+    {
+      "original_start": 20,
+      "original_count": 2,
+      "current_start": 29,
+      "current_count": 3,
+      "original": [
+        "IU32\texp:8;",
+        "IU32\tmant:23;"
+      ],
+      "current": [
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 25,
+      "original_count": 1,
+      "current_start": 37,
+      "current_count": 2,
+      "original": [
+        "IU32 \tsign:1;"
+      ],
+      "current": [
+        "#ifdef LITTLEND",
+        "IU32\tmant_hi:20;"
+      ]
+    },
+    {
+      "original_start": 27,
+      "original_count": 1,
+      "current_start": 43,
+      "current_count": 4,
+      "original": [
+        "IU32\tmant_hi:20;"
+      ],
+      "current": [
+        "IU32\tsign:1;",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 31,
+      "original_count": 0,
+      "current_start": 52,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#ifdef LITTLEND",
+        "IU16\texp:15;"
+      ]
+    },
+    {
+      "original_start": 32,
+      "original_count": 1,
+      "current_start": 57,
+      "current_count": 3,
+      "original": [
+        "IU16\texp:15;"
+      ],
+      "current": [
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 38,
+      "original_count": 0,
+      "current_start": 67,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#ifdef LITTLEND",
+        "IU32\tmant_lo;"
+      ]
+    },
+    {
+      "original_start": 39,
+      "original_count": 1,
+      "current_start": 72,
+      "current_count": 3,
+      "original": [
+        "IU32\tmant_lo;"
+      ],
+      "current": [
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 44,
+      "original_count": 0,
+      "current_start": 81,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef LITTLEND",
+        "/* fpu.c's little-endian BCD tables initialize low word before high word. */",
+        "IU32 low_word;"
+      ]
+    },
+    {
+      "original_start": 45,
+      "original_count": 1,
+      "current_start": 87,
+      "current_count": 3,
+      "original": [
+        "IU32 low_word;"
+      ],
+      "current": [
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 55,
+      "original_count": 0,
+      "current_start": 101,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#ifdef LITTLEND",
+        "IU32\tmant_lo;"
+      ]
+    },
+    {
+      "original_start": 56,
+      "original_count": 1,
+      "current_start": 106,
+      "current_count": 3,
+      "original": [
+        "IU32\tmant_lo;"
+      ],
+      "current": [
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 128,
+      "original_count": 3,
+      "current_start": 160,
+      "current_count": 3,
+      "original": [
+        "#define HostGetOverflowException()\t(_controlfp(0, 0) & _EM_OVERFLOW)",
+        "#define HostGetUnderflowException()\t(_controlfp(0, 0) & _EM_UNDERFLOW)",
+        "#define HostGetPrecisionException()\t(_controlfp(0, 0) & _EM_INEXACT)"
+      ],
+      "current": [
+        "#define HostGetOverflowException()\t(_statusfp() & _EM_OVERFLOW)",
+        "#define HostGetUnderflowException()\t(_statusfp() & _EM_UNDERFLOW)",
+        "#define HostGetPrecisionException()\t(_statusfp() & _EM_INEXACT)"
+      ]
+    },
+    {
+      "original_start": 132,
+      "original_count": 1,
+      "current_start": 164,
+      "current_count": 1,
+      "original": [
+        "#define HostClearExceptions()\t\t((VOID)_controlfp(0, _MCW_EM))"
+      ],
+      "current": [
+        "#define HostClearExceptions()\t\t((VOID)_clear87(), (VOID)_control87(MCW_EM, MCW_EM))"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 69,
+      "original_count": 26,
+      "current_start": 125,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* Format for double precision on bigendian host */",
+        "#define HOST_R64_BYTE_0 0",
+        "#define HOST_R64_BYTE_1 1",
+        "#define HOST_R64_BYTE_2 2",
+        "#define HOST_R64_BYTE_3 3",
+        "#define HOST_R64_BYTE_4 4",
+        "#define HOST_R64_BYTE_5 5",
+        "#define HOST_R64_BYTE_6 6",
+        "#define HOST_R64_BYTE_7 7",
+        "",
+        "/* Format for internal representation of an R80 on bigendian host */",
+        "/* This reflects the struct { IU64 mant; IU16 sign_exp } format of FP80 */",
+        "#define HOST_R80_BYTE_0 8",
+        "#define HOST_R80_BYTE_1 9",
+        "#define HOST_R80_BYTE_2 0",
+        "#define HOST_R80_BYTE_3 1",
+        "#define HOST_R80_BYTE_4 2",
+        "#define HOST_R80_BYTE_5 3",
+        "#define HOST_R80_BYTE_6 4",
+        "#define HOST_R80_BYTE_7 5",
+        "#define HOST_R80_BYTE_8 6",
+        "#define HOST_R80_BYTE_9 7",
+        "",
+        "#define NPX_LOW_32_BITS  1",
+        "#define NPX_HIGH_32_BITS 0"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 187,
+      "original_count": 12,
+      "current_start": 220,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define HostGetOverflowException()      (fpgetsticky() & FP_X_OFL)",
+        "#define HostGetUnderflowException()     (fpgetsticky() & FP_X_UFL)",
+        "#define HostGetPrecisionException()     (fpgetsticky() & FP_X_IMP)",
+        "",
+        "#define HostClearExceptions()           ((VOID)fpsetsticky(FP_X_CLEAR))",
+        "",
+        "#define HostSetRoundToNearest()         ((VOID)fpsetround(FP_RN))",
+        "#define HostSetRoundDown()              ((VOID)fpsetround(FP_RM))",
+        "#define HostSetRoundUp()                ((VOID)fpsetround(FP_RP))",
+        "#define HostSetRoundToZero()            ((VOID)fpsetround(FP_RZ))",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Fifteen non-exclusion chunks: six little-endian structure layout adaptations with their conditional fragments/comments, exception status read, and clear/mask behavior. Two original platform bodies excluded.",
+  "counter_review": "Original structures are big-endian layouts despite existing little-endian byte-copy macros. Preserve required host representation, not arithmetic rewrites. Layout fixture checks fields and offsets but is only inspected here. PostCheckOUP needs occurred exceptions, not enabled/masked state: status read is necessary and local SDK EM/SW OUP bit values agree. Clear macro additionally changes exception mask; guest mask handling in PostCheckOUP supports masked host execution but does not by itself establish x87/SSE status coverage or host-thread environment ownership.",
+  "evidence": "cfpu_def.h FP32/FP64HI/FP80SE/FP64/FPU_I64/FP80 layouts; test/mvdm-host/x87_layout_fixture.c field, size and offset assertions. fpu.c:1814-1843 PostCheckOUP reads host status then applies NpxControl guest masks; repeated HostClearExceptions calls before arithmetic. Windows Kits 10.0.22621.0/ucrt/float.h:123-140 SW/EM OUP values agree, :351 MCW_EM alias.",
+  "limits": "Clear/mask remains unresolved; no product edits or fresh runtime results."
+}

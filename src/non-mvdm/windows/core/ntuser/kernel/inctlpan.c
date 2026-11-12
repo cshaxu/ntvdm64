@@ -1,7 +1,25 @@
-/* Copyright (c) 1985-95, Microsoft Corporation.
- * DIVERGENCE(OPENNT-HOST-113): original read-only sysBmpStyles data only;
+/***************************************************************************\
+*
+*  INCTLPAN.C
+*
+*  Copyright (c) 1985-95, Microsoft Corporation
+*
+*  Init Routines which are also used by Control Panel
+*
+*  -- Scalable Window Frame Support
+*
+*  exports from this module:
+*   > SetCaretBlinkTime -- API called internally (kinda) by control panel
+*   > SetKeyboardSpeed  -- called by LoadWindows & SystemParametersInfo
+*   > SetMinMaxInfo     -- called by LoadWindows & SystemParemetersInfo
+*   > SetWindowMetrics  -- called by LoadWindows & SystemParametersInfo
+*
+\***************************************************************************/
+
+/* DIVERGENCE(OPENNT-HOST-113): original read-only sysBmpStyles data only;
  * external linkage supplies the bounded button resource carrier. No kernel
  * factory, caption cache or system-settings behavior is imported. */
+#line 19
 #include "precomp.h"
 
 #line 25

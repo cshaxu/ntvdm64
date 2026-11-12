@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+  "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+  "current_sha256": "d983a6294001ed8409399b04ca735da2cdf1bc64223584500b5b2ff13a64e72f",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 38
+    },
+    {
+      "original_start": 66,
+      "original_count": 17
+    }
+  ],
+  "initial_review": "Two excluded bodies: outer BIGEND and LITTLEND/BIT_ORDER1 equipment layouts. Remaining source exact.",
+  "counter_review": "Checked original outer BIGEND nesting is discarded as one body, while LITTLEND/BIT_ORDER2 EQUIPMENT_WORD layout, BIOS offset and device constants remain exact. No field reorder or additional selected layout.",
+  "limits": "Source difference classification only; not new universal build-context, diagnostic-line or runtime certification. No product source changed."
+}

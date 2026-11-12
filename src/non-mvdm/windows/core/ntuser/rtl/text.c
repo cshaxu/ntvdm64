@@ -1,9 +1,28 @@
-/* Copyright (c) 1985-95, Microsoft Corporation.
- * Original windows/core/ntuser/rtl/text.c PSMGetTextExtent.
- * DIVERGENCE(OPENNT-HOST-112): retain prefix/extent logic; repair temporary
- * capacity using the sibling PSMTextOut allocation pattern and finally free.
- * Full provenance and pending acceptance are in the S3 source ledger. */
+/****************************** Module Header ******************************\
+* Module Name: text.c
+*
+* Copyright (c) 1985-95, Microsoft Corporation
+*
+* This module contains the MessageBox API and related functions.
+*
+* History:
+* 10-01-90 EricK        Created.
+* 11-20-90 DarrinM      Merged in User text APIs.
+* 02-07-91 DarrinM      Removed TextOut, ExtTextOut, and GetTextExtentPoint stubs.
+\***************************************************************************/
 #include "precomp.h"
+/***************************************************************************\
+* PSMGetTextExtent
+*
+* NOTE: This routine should only be called with the system font since having
+* to realize a new font would cause memory to move...
+*
+* LATER: Can't this be eliminated altogether?  Nothing should be moving
+*        anymore.
+*
+* History:
+* 11-13-90  JimA        Ported.
+\***************************************************************************/
 #line 27
 
 BOOL PSMGetTextExtent(
@@ -44,7 +63,9 @@ BOOL PSMGetTextExtent(
         if (pchOut != szTemp) UserRtlFreeMem(pchOut);
         SetLastError(error);
     }
-    /* Original callers and return contract do not propagate GDI's BOOL. */
+    /*
+     * IanJa everyone seems to ignore the ret val
+     */
 #line 48
     return TRUE;
 }

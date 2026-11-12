@@ -1,0 +1,40 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+  "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+  "current_sha256": "3bc140cb9a26bfc6aba200b33c50e576f28fdca9811f8336fd6963a5e7bb0181",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 23,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 0,
+      "original": [
+        "void WaitIcaLockFullyInitialized(VOID);"
+      ],
+      "current": []
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 34,
+      "original_count": 4,
+      "current_start": 36,
+      "current_count": 1,
+      "original": [
+        "extern ULONG iretHookActive;",
+        "extern ULONG iretHookMask;",
+        "extern ULONG AddrIretBopTable;  // seg:offset",
+        "extern IU32 host_iret_bop_table_addr(IU32 line);"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    }
+  ],
+  "initial_review": "One non-exclusion deletion of obsolete WaitIcaLockFullyInitialized declaration; one MONITOR IRET-hook declaration exclusion.",
+  "counter_review": "Original wait implementation is MONITOR-only polling of LockCount/LockSemaphore. Current provider is explicitly excluded and repository source/test search finds no caller. Current nt_reset initializes and enters IcaLock before event-thread startup. Retain deletion; do not remove InitializeIcaLock or actual lock/unlock APIs, and do not claim whole concurrency correctness from declaration removal.",
+  "evidence": "Original nt_eoi.c:382-404 monitor wait and Sleep loop; current nt_eoi.c:376 initialization and following excluded MONITOR body; nt_reset.c:289-294 initialize/lock then event-thread start. Source/test search: no WaitIcaLockFullyInitialized reference except removed baseline.",
+  "limits": "No new product edits or runtime evidence."
+}

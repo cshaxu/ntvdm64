@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+  "original_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+  "current_sha256": "46626c141240eb45934df272e3c174e3173e32412f4c19891056acdb2d33a716",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 21,
+      "original_count": 1,
+      "current_start": 22,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 905,
+      "original_count": 1,
+      "current_start": 908,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/mvdm-host/vdmredir/vrdlc.h",
+    "src/mvdm-host/vdmredir/vrdlc.c"
+  ],
+  "limits": "Complete source comparison and source-derived line mapping only. No new build/runtime result or universal include-context hit proof."
+}

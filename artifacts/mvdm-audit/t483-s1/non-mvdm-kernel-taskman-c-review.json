@@ -1,0 +1,36 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+  "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+  "before_sha256": "30e622392ea164fc3fd523c945bb3f0905d2cba39adcf6155d3350282d70d71b",
+  "current_sha256": "43017662af7ff1aa112895f9a948e878976e701d4fdbfc4567033dc3aa6c8c46",
+  "status": "difference classification complete; functional remediation not implemented",
+  "evidence": [
+    "src/wow32-dll/include/wow_task_order_bindings.h:110-148,180-260",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:848-870,1148-1188",
+    "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c:275-325",
+    "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c:378-451"
+  ],
+  "decisions": [
+    "Finite explicit process/thread facade retains original per-process WOW scheduling authority. Host lock/event/death/receive operations stay in existing lifecycle binding; no kernel thread objects or separate task selector.",
+    "Function moved before DestroyTask, CurrentTaskLock moved before it, and InsertTask moved to EOF to accommodate ambient gpsi macro bindings. Restore original function order with minimal explicit per-function shared-owner expression or facade binding, preserving all bodies and original logical lines. Verify source-order/macros rather than treating moved text as duplicated algorithms.",
+    "Explicit PPROCESSINFO replaces PpiCurrent only. Preserve complemented original TDB lock token and nesting; x86 local pointer carrier is not cross-process identity. Existing lock fixture must remain.",
+    "gpsi/gpwtiFirst rebound by preprocessor position for DestroyTask and subsequent SleepTask, then gpsi rebound to ptiOld for DirectedYield. Prefer smallest source-local owner expression in affected functions if it removes ordering coupling without new runtime state. Coordinate facade declarations, preserve single shared event counter.",
+    "Original unlink/free/waiter/event decrement and active-owner release retained. Modern event reference/free mapping owns actual handle lifetime. Wake next event-bearing task is notification, not permission to run guest; readiness remains enforced in SleepTask.",
+    "CurrentThread parameter replaces PtiCurrent; caller forwards through UserYield/DirectedYield. Keep original wait/receive/death ordering, event accounting and EnterWowCritSect owner. Native host wait must preserve alert/death semantics; fixture doubles are not full kernel equivalence.",
+    "Readiness filter prevents selecting a native stack suspended inside a host call even with pending TDB events. Existing scope stack belongs to native call/callback and restores previous frame. Fixture exercises skipping unready higher-priority task without consuming its events.",
+    "Idle hook requires ready continuation; otherwise guest callback can enter suspended native frame. Preserve readiness at this separate guest-entry edge; it is not redundant with selecting another task.",
+    "WOWEXEC hardware-event self-selection also requires ready continuation. Keep pending wake flag until ready; no artificial IRQ/event injection. Dedicated readiness/hardware combination coverage should accompany future simplification.",
+    "Task-locked self-wake must not mark suspended native continuation runnable. Fixture checks selected owner and task lock remain but no task event is fabricated.",
+    "Final loop guard requires both selected task and ready top scope after nested callback. Native-return owner sets ready then yields/reacquires before popping; selection alone does not prove native continuation returned.",
+    "Explicit currentThread and SleepTask forwarding preserve directed target lookup/priority algorithm. Thread lookup belongs existing lifecycle owner, not ambient Windows TEB. Validate cross-task and obsolete target behavior in directed fixture.",
+    "Original remove-and-reinsert priority algorithm retained, including equal-priority tail placement. Do not replace with another task queue or reorder by task IDs.",
+    "Full host wait/receive/death/APC/lock facade equivalence and allocation-failure recovery require production-path evidence beyond source fixture. Readiness tests directly toggle frame readiness; lifecycle tests exercise nested scopes, but no fresh end-to-end timing/death proof is claimed. Review event signaling failures and exceptional native return in existing owner without adding blanket recovery."
+  ],
+  "entries_added": 14,
+  "format_sites": 6,
+  "limits": [
+    "No fresh build/runtime.",
+    "Full native wait/death/failure proof pending.",
+    "Readiness scopes are existing native stack ownership, not task IDs."
+  ]
+}

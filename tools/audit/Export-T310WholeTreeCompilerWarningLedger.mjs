@@ -19,7 +19,7 @@ function clusterFor(relative) {
   const pathName = relative.replace(/^src\/mvdm-host\//, '');
   const hostSourceClusters = new Map([
     ['nt_cprgs.c', 'SPC-CCPU-ACCESS-TABLE'], ['nt_cpu.c', 'SPC-CCPU-ACCESS-TABLE'], ['cpucstbs.c', 'SPC-CCPU-ACCESS-TABLE'],
-    ['nt_mem.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['nt_sas.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['nt_emm.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['x86_emm.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['nt_umb.c', 'SPC-MEMORY-MAPPING-BINDINGS'],
+    ['nt_mem.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['nt_sas.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['nt_emm.c', 'SPC-MEMORY-MAPPING-BINDINGS'], ['nt_umb.c', 'SPC-MEMORY-MAPPING-BINDINGS'],
     ['nt_eoi.c', 'SPC-HOST-SYSTEM-INTERRUPT-BINDINGS'], ['nt_timer.c', 'SPC-HOST-SYSTEM-INTERRUPT-BINDINGS'], ['nt_inthk.c', 'SPC-HOST-SYSTEM-INTERRUPT-BINDINGS'], ['nt_reset.c', 'SPC-HOST-SYSTEM-INTERRUPT-BINDINGS'],
     ['nt_ega.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_vga.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_cga.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_graph.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_aorc.c', 'SPC-HOST-VIDEO-BINDINGS'],
     ['nt_keycd.c', 'SPC-HOST-INPUT-BINDINGS'], ['nt_input.c', 'SPC-HOST-INPUT-BINDINGS'], ['nt_mouse.c', 'SPC-HOST-INPUT-BINDINGS'], ['nt_msscs.c', 'SPC-HOST-INPUT-BINDINGS'], ['nt_sound.c', 'SPC-HOST-INPUT-BINDINGS'],

@@ -1,0 +1,33 @@
+{
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+  "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+  "current_sha256": "b2cf945c8f00a8ef9364ed6d1e53560e231bdd8bf8d92ecdfd47ffb6f2c3c6eb",
+  "changes": [
+    {
+      "original_start": 28,
+      "original_count": 1,
+      "current_start": 28,
+      "current_count": 1,
+      "original": [
+        "#include \"XactSrvP.h\""
+      ],
+      "current": [
+        "#include \"xactsrv_wksta_minimal.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Finite shared declaration boundary replaces original aggregate requiring srvfsctl, ntmsv1_0 and XactSrv2 server internals; selected local NetAPI handlers retain original bodies.",
+      "counter_review": "Real vrnetapi calls service/use/workstation handlers. One shared header avoids duplicated declarations or replacement handlers; its autonomous macro audit remains separate.",
+      "change_plan": "Retain finite shared include; no functional repair required.",
+      "verification_required": "Selected VDMREDIR build; handler success/invalid-level/short-buffer/provider-error cases. No dedicated named handler fixture found in inspected test source; no run claimed."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "O:/repos.external/OpenNT/ds/netapi/xactsrv/xactsrvp.h",
+    "src/mvdm-host/vdmredir/vrnetapi.c",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1"
+  ],
+  "limits": "Complete normalized diff/caller review only; no new build/runtime or all-context admission proof."
+}

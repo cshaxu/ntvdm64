@@ -1,0 +1,16 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+  "original_sha256": "f89ead8f38886fd2be66d322bec8adf2e1be56108e35ef95f89063082da973f9",
+  "current_sha256": "50e62c347f220ef41e863e4b47d011e09303abffd6b30fc2b5d8b52c00fc45fb",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_groups": [
+    {
+      "original_start": 200,
+      "original_end": 222,
+      "current_error_line": 202
+    }
+  ],
+  "limits": "Outer boundaries and all remaining nonblank/non-line text compared with original, except explicitly registered include. No universal reachability or full line proof."
+}

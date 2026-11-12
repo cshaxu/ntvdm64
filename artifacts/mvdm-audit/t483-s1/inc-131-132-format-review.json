@@ -1,0 +1,14 @@
+[
+  {
+    "path": "src/mvdm-host/inc/SOFTPC.INC",
+    "before_sha256": "32b068a29194bc72e744865d2272d4e04cb51267f39ac33afbe1cd3f845bfa20",
+    "after_sha256": "525702d6bc5a320a1b112dee068ddfff32f23a62d64f1b177bf2f0295975ded7",
+    "change": "restore original CRLF; normalized content unchanged"
+  },
+  {
+    "path": "src/mvdm-host/inc/suballoc.h",
+    "before_sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+    "after_sha256": "0911bd4472bcab75ba1e7d501fffb276a71226ac0cb5de5bd837f23b2c06bd8c",
+    "change": "restore original CRLF; normalized content unchanged"
+  }
+]

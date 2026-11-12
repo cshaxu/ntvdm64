@@ -1,0 +1,1776 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+  "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+  "current_sha256": "ffcdef5635a766ed7668fc3ddf35bce54e5a621b2c4304ab682bc072d1b92b34",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "original_start": 868,
+      "original_count": 0,
+      "current_start": 838,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "    IU8 canceled;\t\t/* Device ownership retired by ICW1 reset */",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 891,
+      "original_count": 0,
+      "current_start": 863,
+      "current_count": 10,
+      "original": [],
+      "current": [
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-460): ICW1 retires the PIC's pending",
+        "\t * and in-service ownership, but the original standalone reset did not",
+        "\t * notify the NT device EOI gates. Snapshot before clearing, then send",
+        "\t * their existing cancellation notification while the ICA critical section",
+        "\t * excludes a heartbeat/device race. A callback can publish a new request;",
+        "\t * that request is deliberately not part of this retired snapshot. */",
+        "#ifdef NTVDM",
+        "\thost_ica_lock();",
+        "\tcanceled = asp->ica_irr | asp->ica_isr;",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 908,
+      "original_count": 0,
+      "current_start": 891,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "#ifdef NTVDM",
+        "\tfor (i = 0; i < 8; ++i)",
+        "\t    if (canceled & (1 << i))",
+        "\t\thost_EOI_hook(i + (adapter << 3), -1);",
+        "\thost_ica_unlock();",
+        "#endif",
+        ""
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 133,
+      "original_count": 1,
+      "current_start": 134,
+      "current_count": 1,
+      "original": [
+        "LOCAL char SccsID[]=\"@(#)ica.c\t1.38 10/19/95 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 137,
+      "original_count": 6,
+      "current_start": 140,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_ICA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 149,
+      "original_count": 3,
+      "current_start": 149,
+      "current_count": 1,
+      "original": [
+        "#if defined(CPU_40_STYLE) || defined(GISP_CPU)",
+        "#define HOOKED_IRETS    /* switch on IRET hooks */",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 167,
+      "original_count": 1,
+      "current_start": 168,
+      "current_count": 1,
+      "original": [
+        "extern void host_sigio_event IPT0();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 177,
+      "original_count": 8,
+      "current_start": 180,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " *  Table of function pointers to access PIC routines",
+        " */",
+        "void (*ica_inb_func) IPT2(io_addr, port, IU8 *, value);",
+        "void (*ica_outb_func) IPT2(io_addr, port, IU8, value);",
+        "void (*ica_hw_interrupt_func) IPT3(IU32, adapter, IU32, line_no,",
+        "\tIS32, call_count);",
+        "void (*ica_clear_int_func) IPT2(IU32, adapter, IU32, line_no);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 192,
+      "original_count": 1,
+      "current_start": 190,
+      "current_count": 1,
+      "original": [
+        "char icamsgbuf[132];\t/* Text buffer for debug messages */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 235,
+      "original_count": 2,
+      "current_start": 235,
+      "current_count": 1,
+      "original": [
+        "extern  ULONG iretHookMask;",
+        "extern  ULONG iretHookActive;"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 277,
+      "original_count": 26,
+      "current_start": 278,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* regular SoftPC definitions for ica */",
+        "ADAPTER_STATE adapter_state[2];",
+        "",
+        "/* iret hook related defines */",
+        "#ifdef PROD",
+        "#define host_valid_iret_hook()\t(TRUE)",
+        "#else\t\t/* allow disabling of iret hooks whilst debugging */",
+        "#define host_valid_iret_hook()\t(iretHooksEnabled)",
+        "#endif",
+        "#define host_bop_style_iret_hooks()\t(FALSE)",
+        "#define host_iret_bop_table_addr(line)\t(0)",
+        "",
+        "/* crit section style locks only available on NT */",
+        "#define host_ica_lock()",
+        "#define host_ica_unlock()",
+        "#define host_ica_real_locks() (FALSE)",
+        "",
+        "/* macro'ise simplistic ica lock scheme */",
+        "",
+        "LOCAL IUM8      ica_lock;",
+        "",
+        "#define ica_lock_set(x) ica_lock = x",
+        "#define\tica_lock_inc()\tica_lock++",
+        "#define ica_lock_dec()  ica_lock--",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM alternative"
+      ]
+    },
+    {
+      "original_start": 306,
+      "original_count": 3,
+      "current_start": 284,
+      "current_count": 1,
+      "original": [
+        "LOCAL IBOOL  iretHooksEnabled = FALSE;",
+        "LOCAL IU16 iretHookMask = 0;    /* No interrupts hooked by default */",
+        "LOCAL IU16 iretHookActive = 0;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 368,
+      "original_count": 1,
+      "current_start": 346,
+      "current_count": 1,
+      "original": [
+        "extern IU32 ica_iret_hook_needed IPT1(IU32, line);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 372,
+      "original_count": 11,
+      "current_start": 353,
+      "current_count": 1,
+      "original": [
+        "void",
+        "SWPIC_init_funcptrs IFN0()",
+        "{",
+        "\t/*",
+        "\t *  initialize PIC access functions for SW [emulated] PIC",
+        "\t */",
+        "\tica_inb_func\t\t\t= SWPIC_inb;",
+        "\tica_outb_func\t\t\t= SWPIC_outb;",
+        "\tica_hw_interrupt_func\t\t= SWPIC_hw_interrupt;",
+        "\tica_clear_int_func\t\t= SWPIC_clear_int;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 432,
+      "original_count": 5,
+      "current_start": 405,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & ICA_VERBOSE)",
+        "    {",
+        "\tsprintf(icamsgbuf, \"**** CPU END-OF-INT %c (%d) ****\", (adapter == ICA_MASTER? 'M': 'S'), *line);",
+        "\ttrace(icamsgbuf, DUMP_NONE);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 486,
+      "original_count": 1,
+      "current_start": 457,
+      "current_count": 1,
+      "original": [
+        "    iret_hook_mask = (IU8)((iretHookActive | DelayIrqLine) >> (adapter << 3));"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor PIC interrupt ownership"
+      ]
+    },
+    {
+      "original_start": 492,
+      "original_count": 2,
+      "current_start": 466,
+      "current_count": 1,
+      "original": [
+        "    /* if iret hooks are not being used, iretHookActive will always be 0 */",
+        "    iret_hook_mask = (IU8)(iretHookActive >> (adapter << 3));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 583,
+      "original_count": 1,
+      "current_start": 559,
+      "current_count": 1,
+      "original": [
+        "        line1 = 7;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 601,
+      "original_count": 9,
+      "current_start": 580,
+      "current_count": 1,
+      "original": [
+        "\t/* allow some recursion within hooked ISRs */",
+        "\tif (asp->isr_depth[line1] >= MAX_ISR_DEPTH)",
+        "\t{",
+        "\t\t/* disable further interrupts on this line */",
+        "\t\tiretHookActive |= 1 << ((adapter << 3) + line1);",
+        "",
+        "\t\t/* reached maximum ISR recursion - don't do interrupt */",
+        "\t\treturn((IS32)-1);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 633,
+      "original_count": 5,
+      "current_start": 606,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & ICA_VERBOSE)",
+        "    {",
+        "        sprintf(icamsgbuf, \"**** CPU INTACK %c (%d) ****\", (adapter == ICA_MASTER? 'M': 'S'), line1 + asp->ica_base);",
+        "        trace(icamsgbuf, DUMP_NONE);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 660,
+      "original_count": 5,
+      "current_start": 631,
+      "current_count": 1,
+      "original": [
+        "\tif ((io_verbose & ICA_VERBOSE) && (asp->ica_int_line != line))",
+        "\t{",
+        "\t    sprintf(icamsgbuf,\"******* INT LINE ALREADY HIGH %c line=%d ****\", (adapter == ICA_MASTER? 'M': 'S'), asp->ica_int_line);",
+        "\t    trace(icamsgbuf, DUMP_NONE);\t",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 681,
+      "original_count": 5,
+      "current_start": 650,
+      "current_count": 1,
+      "original": [
+        "        if (io_verbose & ICA_VERBOSE)",
+        "        {",
+        "            sprintf(icamsgbuf, \"**** CPU INTERRUPT (%x) ****\", line);",
+        "            trace(icamsgbuf, DUMP_NONE);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 693,
+      "original_count": 1,
+      "current_start": 660,
+      "current_count": 1,
+      "original": [
+        "\tcpu_int_delay = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 699,
+      "original_count": 1,
+      "current_start": 669,
+      "current_count": 1,
+      "original": [
+        "        host_cpu_interrupt();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 711,
+      "original_count": 5,
+      "current_start": 683,
+      "current_count": 1,
+      "original": [
+        "        if (io_verbose & ICA_VERBOSE)",
+        "        {",
+        "            sprintf(icamsgbuf, \"**** SLAVE ICA INTERRUPT (%x) ****\", line);",
+        "            trace(icamsgbuf, DUMP_NONE);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 746,
+      "original_count": 1,
+      "current_start": 716,
+      "current_count": 1,
+      "original": [
+        "    char *reg_name;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 756,
+      "original_count": 6,
+      "current_start": 728,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & ICA_VERBOSE)",
+        "        if ((port != ICA_PORT_0) && (port != ICA_PORT_1))",
+        "\t{",
+        "\t    sprintf(icamsgbuf, \"ica_inb: bad port (%x)\", port);",
+        "\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 786,
+      "original_count": 5,
+      "current_start": 755,
+      "current_count": 1,
+      "original": [
+        "        if (io_verbose & ICA_VERBOSE)",
+        "\t{",
+        "\t    sprintf(icamsgbuf, \"ica_inb: responding to Poll with %x\", *value);",
+        "\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 807,
+      "original_count": 1,
+      "current_start": 774,
+      "current_count": 1,
+      "original": [
+        "\t\treg_name = \"ISR\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 814,
+      "original_count": 1,
+      "current_start": 783,
+      "current_count": 1,
+      "original": [
+        "\t\treg_name = \"IRR\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 821,
+      "original_count": 1,
+      "current_start": 792,
+      "current_count": 1,
+      "original": [
+        "\t    reg_name = \"IMR\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 826,
+      "original_count": 5,
+      "current_start": 799,
+      "current_count": 1,
+      "original": [
+        "\tif (io_verbose & ICA_VERBOSE)",
+        "\t{",
+        "\t    sprintf(icamsgbuf, \"ica_inb: delivered %s value %x\", reg_name, *value);",
+        "\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 876,
+      "original_count": 5,
+      "current_start": 851,
+      "current_count": 1,
+      "original": [
+        "\tif (io_verbose & ICA_VERBOSE)",
+        "\t{",
+        "\t    sprintf(icamsgbuf, \"ica_outb: bad port (%x)\", port);",
+        "\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 909,
+      "original_count": 2,
+      "current_start": 901,
+      "current_count": 1,
+      "original": [
+        "        if (io_verbose & ICA_VERBOSE)",
+        "\t    trace(\"ica_outb: ICW1 detected, initialisation begins\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 935,
+      "original_count": 5,
+      "current_start": 928,
+      "current_count": 1,
+      "original": [
+        "            if (io_verbose & ICA_VERBOSE)",
+        "\t    {",
+        "\t        sprintf(icamsgbuf, \"ica_outb: new %c IMR: %x\", (adapter == ICA_MASTER? 'M': 'S'), value);",
+        "\t        trace(icamsgbuf, DUMP_NONE);",
+        "\t    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 968,
+      "original_count": 2,
+      "current_start": 959,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    trace(\"ica_outb: Clear Rotate in Auto EOI\",DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 976,
+      "original_count": 2,
+      "current_start": 968,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    trace(\"ica_outb: Non-specific EOI\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 988,
+      "original_count": 5,
+      "current_start": 981,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t{",
+        "\t\t    sprintf(icamsgbuf, \"ica_outb: Specific EOI, line %d\", line);",
+        "\t\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1000,
+      "original_count": 2,
+      "current_start": 991,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    trace(\"ica_outb: Set Rotate in Auto EOI\",DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1008,
+      "original_count": 2,
+      "current_start": 1000,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    trace(\"ica_outb: Rotate on Non-specific EOI\",DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1017,
+      "original_count": 5,
+      "current_start": 1010,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t{",
+        "\t\t    sprintf(icamsgbuf, \"ica_outb: Set Priority, line %d\", value & 0x07);",
+        "\t\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1028,
+      "original_count": 5,
+      "current_start": 1019,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t{",
+        "\t\t    sprintf(icamsgbuf, \"ica_outb: Rotate on specific EOI, line %d\", line);",
+        "\t\t    trace(icamsgbuf, DUMP_NONE);",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1045,
+      "original_count": 5,
+      "current_start": 1034,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    if (asp->ica_mode & ICA_SMM)",
+        "\t\t\ttrace(\"ica_outb: Special Mask Mode set\", DUMP_NONE);",
+        "\t\t    else",
+        "\t\t\ttrace(\"ica_outb: Special Mask Mode unset\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1057,
+      "original_count": 2,
+      "current_start": 1044,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    trace(\"ica_outb: Poll detected!\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1066,
+      "original_count": 5,
+      "current_start": 1054,
+      "current_count": 1,
+      "original": [
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t    if (asp->ica_mode & ICA_RIS)",
+        "\t\t\ttrace(\"ica_outb: ISR selected\", DUMP_NONE);",
+        "\t\t    else",
+        "\t\t\ttrace(\"ica_outb: IRR selected\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1081,
+      "original_count": 3,
+      "current_start": 1067,
+      "current_count": 1,
+      "original": [
+        "\t    sprintf(icamsgbuf, \"ica_outb: bad port (%x) while awaiting ICW2\",",
+        "\t\t\t (unsigned)port);",
+        "\t    trace(icamsgbuf, DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1090,
+      "original_count": 5,
+      "current_start": 1076,
+      "current_count": 1,
+      "original": [
+        "\t    if (io_verbose & ICA_VERBOSE)",
+        "\t    {",
+        "\t\tsprintf(icamsgbuf, \"ica_outb: vector base set to %x\", asp->ica_base);",
+        "\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1111,
+      "original_count": 3,
+      "current_start": 1095,
+      "current_count": 1,
+      "original": [
+        "\t    sprintf(icamsgbuf, \"ica_outb: bad port (%x) while awaiting ICW3\",",
+        "\t\t\t (unsigned)port);",
+        "\t    trace(icamsgbuf, DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1120,
+      "original_count": 5,
+      "current_start": 1104,
+      "current_count": 1,
+      "original": [
+        "\t    if (io_verbose & ICA_VERBOSE)",
+        "\t    {",
+        "\t\tsprintf(icamsgbuf, \"ica_outb: slave register set to %x\", asp->ica_ssr);",
+        "\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1138,
+      "original_count": 3,
+      "current_start": 1120,
+      "current_count": 1,
+      "original": [
+        "\t    sprintf(icamsgbuf, \"ica_outb: bad port (%x) while awaiting ICW4\",",
+        "\t\t\t (unsigned)port);",
+        "\t    trace(icamsgbuf, DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1148,
+      "original_count": 14,
+      "current_start": 1130,
+      "current_count": 1,
+      "original": [
+        "\t    if (io_verbose & ICA_VERBOSE)",
+        "\t    {",
+        "\t\tsprintf(icamsgbuf, \"ica_outb: IC4 value %x\", value);",
+        "\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t    }",
+        "\t    /*",
+        "\t     * Check the mode bits for sensible values",
+        "\t     */",
+        "\t    if (!(asp->ica_mode & ICA_MPM))",
+        "\t\ttrace(\"ica_outb: attempt to set up 8080 mode!\", DUMP_NONE);",
+        "",
+        "\t    if ((asp->ica_mode & ICA_BUF) && !(asp->ica_mode & ICA_MS)",
+        "\t\t\t\t     && !(asp->ica_mode & ICA_SINGL))",
+        "\t\ttrace(\"ica_outb: attempt to set up slave mode!\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1169,
+      "original_count": 3,
+      "current_start": 1140,
+      "current_count": 1,
+      "original": [
+        "\tsprintf(icamsgbuf, \"ica_outb: bad port/value (%x/%x) while awaiting ICW1\",",
+        "\t\t     (unsigned)port, value);",
+        "\ttrace(icamsgbuf, DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1177,
+      "original_count": 1,
+      "current_start": 1148,
+      "current_count": 1,
+      "original": [
+        "\ttrace(\"ica_outb: impossible error, programmer brain-dead\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1202,
+      "original_count": 23,
+      "current_start": 1175,
+      "current_count": 1,
+      "original": [
+        "    SAVED char *linename[2][8] =",
+        "    {",
+        "        {",
+        "            \"IRQ  0 TIMER\",",
+        "            \"IRQ  1 KEYBOARD\",",
+        "            \"IRQ  2 SLAVE_ICA\",",
+        "            \"IRQ  3 COM2\",",
+        "            \"IRQ  4 COM1\",",
+        "            \"IRQ  5 PARALLEL2\",",
+        "            \"IRQ  6 DISKETTE\",",
+        "            \"IRQ  7 PARALLEL1\"",
+        "        },",
+        "        {",
+        "            \"IRQ  8 REALTIME CLOCK\",",
+        "            \"IRQ  9 MOUSE\",",
+        "            \"IRQ 10 SOFTNODE\",",
+        "            \"IRQ 11 SOUND DRIVER\",",
+        "            \"IRQ 12 ASPI\",",
+        "            \"IRQ 13 COPROCESSOR\",",
+        "            \"IRQ 14 FIXED DISK\",",
+        "            \"IRQ 15 reserved\"",
+        "        }",
+        "    };"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1240,
+      "original_count": 6,
+      "current_start": 1193,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & ICA_VERBOSE_LOCK)",
+        "    {",
+        "\tif(adapter>1 || line_no>7)",
+        "\t\tprintf(\"**** H/W INTERRUPT (%sx%d) [%d:%d] ****\\n\",",
+        "\t\t       linename[adapter][line_no], call_count,adapter,line_no);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1263,
+      "original_count": 6,
+      "current_start": 1213,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & ICA_VERBOSE)",
+        "    {",
+        "\tsprintf(icamsgbuf, \"**** H/W INTERRUPT (%sx%d) ****\",",
+        "\t\t\t linename[adapter][line_no], call_count);",
+        "\ttrace(icamsgbuf, DUMP_NONE);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1286,
+      "original_count": 15,
+      "current_start": 1233,
+      "current_count": 1,
+      "original": [
+        "    if (!host_ica_real_locks())",
+        "    {",
+        "\tif (ica_lock_inc())",
+        "\t{",
+        "#ifndef PROD",
+        "\t\tif (io_verbose & ICA_VERBOSE_LOCK)",
+        "\t\t{",
+        "\t\t\tsprintf(icamsgbuf, \"*\");",
+        "\t\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t\t}",
+        "#endif",
+        "\t\tica_lock_dec();",
+        "\t\treturn;",
+        "\t}",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected"
+      ]
+    },
+    {
+      "original_start": 1304,
+      "original_count": 17,
+      "current_start": 1240,
+      "current_count": 1,
+      "original": [
+        "    depth = asp->isr_depth[line_no];",
+        "    if (depth > 0)",
+        "    {",
+        "\tprogress = &asp->isr_progress[line_no][depth];",
+        "\t*progress += 1;\t\t/* move progress along */",
+        "\tif ((*progress - *(progress - 1)) > MAX_INTR_DELTA_FOR_LOST_HOOK)",
+        "\t{",
+        "\t\tasp->isr_time_decay[line_no][asp->isr_depth[line_no]] = 0;",
+        "\t\t--asp->isr_depth[line_no];\t/* reduce depth */",
+        "",
+        "\t\t/* clear CPU side stack */",
+        "\t\tif (!host_bop_style_iret_hooks())",
+        "\t\t\tPurgeLostIretHookLine(((adapter << 3) + line_no) + 1, depth - 1);",
+        "\t\t/* permit intrs on this line */",
+        "\t\tiretHookActive &= ~(1 << ((adapter << 3) + line_no));",
+        "\t}",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1372,
+      "original_count": 5,
+      "current_start": 1294,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & ICA_VERBOSE)",
+        "    {",
+        "\tsprintf(icamsgbuf, \"**** ICA_CLEAR_INT, line %d ****\", line_no);",
+        "\ttrace(icamsgbuf, DUMP_NONE);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1400,
+      "original_count": 2,
+      "current_start": 1320,
+      "current_count": 1,
+      "original": [
+        "GLOBAL IS32",
+        "ica_intack IFN0()"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1450,
+      "original_count": 11,
+      "current_start": 1371,
+      "current_count": 1,
+      "original": [
+        "\t/* do callback processing for action interrupt */",
+        "\tasp = &adapter_state[ICA_SLAVE];",
+        "\tif (asp->callback_fn[line] != NO_ICA_CALLBACK)",
+        "\t{",
+        "\t    /* invoke callback function */",
+        "\t    (*asp->callback_fn[line])(asp->callback_parm[line]);",
+        "\t    /* clear callback state reject intack call */",
+        "\t    asp->callback_fn[line] = NO_ICA_CALLBACK;",
+        "\t    host_ica_unlock();",
+        "\t    return ICA_INTACK_REJECT;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1471,
+      "original_count": 10,
+      "current_start": 1385,
+      "current_count": 1,
+      "original": [
+        "\t/* do callback processing for action interrupt */",
+        "\tif (asp->callback_fn[line] != NO_ICA_CALLBACK)",
+        "\t{",
+        "\t    /* invoke callback function */",
+        "\t    (*asp->callback_fn[line])(asp->callback_parm[line]);",
+        "\t    /* clear callback state & return reject */",
+        "\t    asp->callback_fn[line] = NO_ICA_CALLBACK;",
+        "\t    host_ica_unlock();",
+        "\t    return ICA_INTACK_REJECT;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1490,
+      "original_count": 4,
+      "current_start": 1397,
+      "current_count": 1,
+      "original": [
+        "    *hook_address = host_iret_bop_table_addr(line);",
+        "    if (*hook_address) {",
+        "        iretHookActive |= 1 << line;",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor PIC IRET address"
+      ]
+    },
+    {
+      "original_start": 1500,
+      "original_count": 22,
+      "current_start": 1407,
+      "current_count": 1,
+      "original": [
+        "#ifdef HOOKED_IRETS",
+        "    /* check whether IRET Hook required for interrupt on this line.",
+        "     * If IRET trapping mechanism is via bops on stack then this may",
+        "     * also be conditional on the current state of the emulated hardware.",
+        "     * This is checked via a host call (or define).",
+        "     */",
+        "    if (host_valid_iret_hook())",
+        "    {",
+        "\t*hook_address = ica_iret_hook_needed(line);",
+        "",
+        "#ifdef CPU_40_STYLE",
+        "\tif (*hook_address != 0)",
+        "\t{",
+        "\t\t\tIU32 al = line >= 8 ? line - 8 : line; /* line no. within adapter */",
+        "",
+        "\t    /* about to do iret hooked interrupt so increase depth */",
+        "\t    asp->isr_depth[al]++;",
+        "\t    asp->isr_progress[al][asp->isr_depth[al]] = asp->isr_progress[al][asp->isr_depth[al]-1];",
+        "\t}",
+        "#endif\t/* CPU_40_STYLE */",
+        "    }",
+        "#endif  /* HOOKED_IRETS */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1531,
+      "original_count": 229,
+      "current_start": 1419,
+      "current_count": 1,
+      "original": [
+        "#ifdef CPU_40_STYLE",
+        "",
+        "/*(",
+        " ======================= Asynchronous Access to the ICA ==========================",
+        "",
+        "\tPotential asynchronous interrupt sources, in descending order of priority",
+        "\tso that the higher priority interrupt gets raised first (saves a bit of work)",
+        "\tThese things will share the CPU_SIGIO_EVENT callback from the CPU, and may have",
+        "\ttheir own specific routine to be called (which presumably includes ica_hw_interrupt,",
+        "\tbut doesn't need to do so).",
+        "",
+        "=========================================================================",
+        ")*/",
+        "typedef struct {",
+        "\tIU32\tadapter;",
+        "\tIU32\tline_no;",
+        "\tvoid\t(*interrupt) IPT0();",
+        "\tIBOOL\tpending;",
+        "} ICA_ASYNC_HANDLER;",
+        "",
+        "#define ICA_IMPOSSIBLE_LINE\t100",
+        "",
+        "/* Make this a GLOBAL variable so that the C compilers can't optimise",
+        " * accesses to it.",
+        " */",
+        "GLOBAL ICA_ASYNC_HANDLER async_handlers[] = {",
+        "",
+        "#ifdef NOVELL",
+        "\t{ ICA_SLAVE, \tNETWORK_INT,\thost_sigio_event },",
+        "#endif /* NOVELL */",
+        "",
+        "#ifdef SWIN_HAW",
+        "\t{ ICA_SLAVE,\tSWIN_HAW_INT,\t0 },",
+        "#endif /* SWIN_HAW */",
+        "",
+        "#ifdef ASPI",
+        "\t{ ICA_SLAVE,\tASPI_INT,\t0 },",
+        "#endif /* ASPI */",
+        "",
+        "\t{ 0, ICA_IMPOSSIBLE_LINE, 0}",
+        "};",
+        "\t",
+        "/*(",
+        "======================= ica_async_hw_interrupt ==========================",
+        "",
+        "PURPOSE: Simplified interface to replace ica_hw_interrupt() when triggered",
+        "\tby truly asynchronous host facilties such as signal handlers. This",
+        "\troutine remembers the need for an interrupt on the appropriate line,",
+        "\tnotifies the CPU that a SIGIO event has occurred, and issues the",
+        "\tnecessary ica_hw_interrupt calls during the ica_sigio_event callback.",
+        "",
+        "INPUT: adapter: IU32. master/slave.",
+        "       line: IU32. IRQ line interrupt will appear on.",
+        "       call_count: IU32. number of interrupts (must be 1).",
+        "",
+        "=========================================================================",
+        ")*/",
+        "",
+        "GLOBAL void ica_async_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)",
+        "{",
+        "\tICA_ASYNC_HANDLER *iahp;",
+        "\t",
+        "#ifndef PROD",
+        "\tif (call_count != 1) {",
+        "\t\talways_trace3(\"ica_async_interrupt(%s, %d, %d): call_count must be 1\",",
+        "\t\t\tadapter? \"MASTER\":\"SLAVE\", line_no, call_count);",
+        "\t}",
+        "#endif /* !PROD */",
+        "",
+        "\tfor (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {",
+        "\t\tif (iahp->adapter == adapter && iahp->line_no == line_no) {",
+        "\t\t",
+        "\t\t\t/* This is as near to an atomic action as we can easily arrange,",
+        "\t\t\t * though there is a minute possibility of missing an interrupt",
+        "\t\t\t * if it is called between the test and the store in the ica_sigio_event",
+        "\t\t\t * handler below.",
+        "\t\t\t */",
+        "\t\t\tif (!iahp->pending) {",
+        "\t\t\t\tiahp->pending = TRUE;\t\t\t\t/* set the flag */",
+        "\t\t\t\tcpu_interrupt(CPU_SIGIO_EVENT, 0);\t/* inform the CPU */",
+        "\t\t\t}",
+        "\t\t\treturn;",
+        "\t\t}",
+        "\t}",
+        "\talways_trace2(\"Unexpected ica_async_interrupt(%d, %d)\", adapter, line_no);",
+        "}",
+        "",
+        "/*(",
+        " ========================== ica_sigio_event ==========================",
+        "",
+        "PURPOSE: Called by the CPU in response to cpu_interrupt(CPU_SIGIO_EVENT,0)",
+        "\tat a point when it is possible to make calls to the ICA hardware",
+        "\temulation without suffering from race conditions etc.",
+        "",
+        "=========================================================================",
+        ")*/",
+        "",
+        "GLOBAL void ica_sigio_event IFN0()",
+        "{",
+        "\tICA_ASYNC_HANDLER *iahp;",
+        "\t",
+        "\tfor (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {",
+        "\t\t/* This is as near to an atomic action as we can easily arrange,",
+        "\t\t * though there is a minute possibility of missing an interrupt...",
+        "\t\t */",
+        "\t\tif (iahp->pending) {",
+        "\t\t\tiahp->pending = FALSE;\t\t\t/* clear the flag */",
+        "\t\t\tif (iahp->interrupt) {",
+        "\t\t\t\t(*(iahp->interrupt))();\t\t/* call special handler */",
+        "\t\t\t} else {",
+        "\t\t\t\tica_hw_interrupt(iahp->adapter, iahp->line_no, 1);",
+        "\t\t\t}",
+        "\t\t}",
+        "\t}",
+        "\t",
+        "}",
+        "",
+        "LOCAL void ica_sigio_init IFN0()",
+        "{",
+        "\tICA_ASYNC_HANDLER *iahp;",
+        "\t",
+        "\tfor (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {",
+        "\t\tiahp->pending = FALSE;",
+        "\t}",
+        "}",
+        "",
+        "/*(",
+        " =========================== action_interrupt ==========================",
+        "",
+        "PURPOSE: Associate an action with an interrupt on the line. When the CPU",
+        "\t is next able to process an interrupt on the requested line, the",
+        "\t callback function will be executed. That callback can then call",
+        "\t the relevant hardware interrupt interface once it has performed",
+        "\t the rest of the associated emulation.",
+        "",
+        "INPUT: adapter: IU32. master/slave.",
+        "       line: IU32. IRQ line interrupt will appear on.",
+        "       func: callback function address to callback when line available.",
+        "       parm: IU32. parameter to pass to above fn.",
+        "",
+        "OUTPUT: Returns false (failure) if action_int already pending on that line",
+        "\totherwise true (success).",
+        "",
+        "=========================================================================",
+        ")*/",
+        "GLOBAL IBOOL",
+        "action_interrupt IFN4(IU32, adapter, IU32, line, ICA_CALLBACK, func, IU32, parm)",
+        "{",
+        "\tADAPTER_STATE *asp = &adapter_state[adapter];",
+        "",
+        "\thost_ica_lock();\t/* real lock if available */",
+        "",
+        "\tline &= 7;",
+        "",
+        "\t/* check if callback already outstanding on this line */",
+        "\tif (asp->callback_fn[line] != NO_ICA_CALLBACK)",
+        "\t{",
+        "#ifndef PROD",
+        "\t\tif (io_verbose & ICA_VERBOSE)",
+        "\t\t{",
+        "\t\t\tsprintf(icamsgbuf, \"action_interrupt called before line %d cleared\", line);",
+        "\t\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t\t}",
+        "#endif\t/* PROD */",
+        "\t\thost_ica_unlock();\t/* real unlock if available */",
+        "\t\treturn(FALSE);",
+        "\t}",
+        "",
+        "\t/* store callback information */",
+        "\tasp->callback_fn[line] = func;",
+        "\tasp->callback_parm[line] = parm;",
+        "",
+        "\t/* set interrupt request bit */",
+        "\tasp->ica_irr |= (1 << line);",
+        "\tasp->ica_count[line]++;",
+        "",
+        "\t/* make apparent interrupt visible to apps */",
+        "\tasp->ica_isr |= (1 << line);",
+        "",
+        "\t/* get cpu attention for this int. (i.e. get intack called a.s.a.p) */",
+        "\thost_set_hw_int();",
+        "",
+        "\thost_ica_unlock();\t/* real unlock */",
+        "}",
+        "",
+        "/*(",
+        " ======================== cancel_action_interrupt =======================",
+        "",
+        "PURPOSE: Associate an action with an interrupt on the line. When the CPU",
+        "\t is next able to process an interrupt on the requested line, the",
+        "\t callback function will be executed. That callback can then call",
+        "\t the relevant hardware interrupt interface once it has performed",
+        "\t the rest of the associated emulation.",
+        "",
+        "INPUT: adapter: IU32. master/slave.",
+        "       line: IU32. IRQ line to cancel interrupt action",
+        "",
+        "OUTPUT: None.",
+        "",
+        "=========================================================================",
+        ")*/",
+        "GLOBAL void",
+        "cancel_action_interrupt IFN2(IU32, adapter, IU32, line)",
+        "{",
+        "\tADAPTER_STATE *asp = &adapter_state[adapter];",
+        "",
+        "\thost_ica_lock();\t/* real lock if available */",
+        "",
+        "\t/* remove visibility of interrupt request. */",
+        "\tasp->ica_isr &= ~(1 << line);",
+        "",
+        "\t/* irr & count should be cleared by intack, but possible this fn.",
+        "\t * has been called before the callback has been executed.",
+        "\t */",
+        "\tif (asp->callback_fn[line] != NO_ICA_CALLBACK)",
+        "\t{",
+        "\t\tasp->ica_irr &= ~(1 << line);",
+        "\t\tasp->ica_count[line] = 0;",
+        "\t}",
+        "",
+        "\t/* clear callback information */",
+        "\tasp->callback_fn[line] = NO_ICA_CALLBACK;",
+        "\tasp->callback_parm[line] = 0;",
+        "",
+        "\thost_ica_unlock();\t/* remove real lock */",
+        "",
+        "}",
+        "#endif  /* CPU_40_STYLE */",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM PIC profile"
+      ]
+    },
+    {
+      "original_start": 1767,
+      "original_count": 30,
+      "current_start": 1429,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " *  Assumes caller has ica lock",
+        " */",
+        "",
+        "GLOBAL void",
+        "ica_iret_hook_called IFN1(IU32, abs_line)",
+        "{",
+        "     int i;",
+        "     IU32 adapter = abs_line >> 3;",
+        "",
+        "     iretHookActive &= ~(1 << abs_line);",
+        "     if ((i = ica_scan_irr(adapter)) & 0x80)",
+        "          ica_interrupt_cpu(adapter, i & 0x07);",
+        "}",
+        "",
+        "",
+        "GLOBAL void",
+        "ica_iret_hook_control IFN3(IU32, adapter, IU32, line, IBOOL, enable)",
+        "{",
+        "      int mask = 1 << (line + (adapter << 3));",
+        "",
+        "      host_ica_lock();",
+        "",
+        "      if (enable)",
+        "          iretHookMask |= mask;",
+        "      else",
+        "          iretHookMask &= ~mask;",
+        "",
+        "      host_ica_unlock();",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor PIC IRET hook"
+      ]
+    },
+    {
+      "original_start": 1814,
+      "original_count": 176,
+      "current_start": 1451,
+      "current_count": 1,
+      "original": [
+        "#ifndef  GISP_CPU           /* GISP has own version of this routine */",
+        "",
+        "GLOBAL IU32 ica_iret_hook_needed IFN1(IU32, line)",
+        "{",
+        "\tIU16 ireq_mask = 1 << line;",
+        "",
+        "#ifndef PROD",
+        "\tif (line < 0 || line > 15)",
+        "\t{",
+        "\t\t/* Line is out of range */",
+        "\t\tsprintf(icamsgbuf, \"**** ICA IRET HOOK IMPOSSIBLE line %d ****\", line);",
+        "\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t\treturn 0;",
+        "\t}",
+        "#endif",
+        "",
+        "\t/* does this line require iret hooks */",
+        "\tif (!(iretHookMask & ireq_mask))",
+        "\t\t/* Line not hooked. */",
+        "\t\treturn 0;",
+        "",
+        "\t/* if iret hooks implemented via bops, check bop table addresses ok */ ",
+        "        if (host_bop_style_iret_hooks()) {",
+        "            iretHookActive |= ireq_mask;",
+        "            return(host_iret_bop_table_addr(line));",
+        "            }",
+        "        else  {",
+        "            return(line + 1);",
+        "            }",
+        "}",
+        "#endif\t/* GISP_CPU */",
+        "",
+        "GLOBAL void",
+        "ica_iret_hook_control IFN3(IU32, adapter, IU32, line, IBOOL, enable)",
+        "{",
+        "\tint mask = 1 << (line + (adapter << 3));",
+        "",
+        "\tif (enable)",
+        "\t\tiretHookMask |= mask;",
+        "\telse",
+        "\t\tiretHookMask &= ~mask;",
+        "}",
+        "",
+        "",
+        "GLOBAL void",
+        "ica_iret_hook_called IFN1(IU32, abs_line)",
+        "{",
+        "\tADAPTER_STATE *asp;",
+        "\tIU32 adapter = abs_line >> 3;",
+        "\tIU32 line = abs_line - (adapter <<3);",
+        "\tIU8 i;",
+        "",
+        "#ifndef PROD",
+        "\tif (io_verbose & ICA_VERBOSE)",
+        "\t{",
+        "\t\tsprintf(icamsgbuf, \"**** ICA IRET HOOK, line %d ****\", line);",
+        "\t\ttrace(icamsgbuf, DUMP_NONE);",
+        "\t}",
+        "#endif",
+        "",
+        "#ifdef CPU_40_STYLE",
+        "\tasp = &adapter_state[adapter];",
+        "\tasp->isr_time_decay[line][asp->isr_depth[line]] = 0;",
+        "\tasp->isr_depth[line]--;",
+        "",
+        "\t/* back to base stack level so restart first level recursion counter */",
+        "\tif (asp->isr_depth[line] == 0)",
+        "\t\tasp->isr_progress[line][1] = 0;",
+        "",
+        "\t/* enable interrupts on this line */",
+        "\tif (asp->isr_depth[line] < MAX_ISR_DEPTH)",
+        "\t\tiretHookActive &= ~(1 << abs_line);",
+        "#else",
+        "\tUNUSED(asp);\t/* anti warning */",
+        "\tiretHookActive &= ~(1 << abs_line);",
+        "#endif\t/* CPU_40_STYLE */",
+        "",
+        "",
+        "\tif ((i = ica_scan_irr(adapter)) & 0x80)",
+        "\t\tica_interrupt_cpu(adapter, i & 0x07);",
+        "}",
+        "",
+        "",
+        "#if defined(CPU_40_STYLE)",
+        "#define HOWOFTEN\t18\t/* approx once per second */",
+        "#define MAXAGE\t\t8\t/* passes before purge */",
+        "GLOBAL void",
+        "ica_check_stale_iret_hook IFN0()",
+        "{",
+        "\tSAVED int howoften = 18;",
+        "\tint line, depth, loop;",
+        "\tADAPTER_STATE *asp;",
+        "\tIS32 *cpdelay;",
+        "",
+        "\thowoften --;",
+        "\tif (howoften == 0)",
+        "\t{",
+        "\t\thowoften = 18;",
+        "",
+        "\t\thost_ica_lock();",
+        "\t\tasp = &adapter_state[0];",
+        "\t\tfor (line = 0; line < 8; line++)",
+        "\t\t{",
+        "\t\t    if (iretHookMask & (1 << line))",
+        "\t\t    {",
+        "\t\t\tfor (depth = 0; depth < asp->isr_depth[line]; depth++)",
+        "\t\t\t{",
+        "\t\t\t\tasp->isr_time_decay[line][depth]++;",
+        "\t\t\t\tif (asp->isr_time_decay[line][depth] == MAXAGE)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tasp->isr_time_decay[line][depth] = 0;",
+        "\t\t\t\t\tif (depth == 0 && asp->ica_count[line] == 0)",
+        "\t\t\t\t\t\tcontinue;\t/* line idle */",
+        "",
+        "\t\t\t\t\tcpdelay = &asp->isr_time_decay[line][depth];",
+        "\t\t\t\t\t/* lose hook data for this depth */",
+        "\t\t\t\t\tloop = depth;",
+        "\t\t\t\t\twhile(loop <= asp->isr_depth[line])",
+        "\t\t\t\t\t{",
+        "\t\t\t\t\t\tloop ++;",
+        "\t\t\t\t\t\t*cpdelay = *(cpdelay + 1);",
+        "\t\t\t\t\t\tcpdelay++;",
+        "\t\t\t\t\t}",
+        "\t\t\t\t\tasp->isr_depth[line]--;",
+        "",
+        "\t\t\t\t\t/* fix cpu side */",
+        "\t\t\t\t\tPurgeLostIretHookLine(line + 1, depth);",
+        "",
+        "\t\t\t\t\t/* permit intrs on this line */",
+        "\t\t\t\t\tiretHookActive &= ~(1 << line);",
+        "",
+        "\t\t\t\t\tbreak;\t/* one hook at a time */",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "\t\t    }",
+        "\t\t}",
+        "\t\tasp = &adapter_state[1];",
+        "\t\tfor (line = 0; line < 8; line++)",
+        "\t\t{",
+        "\t\t    if (iretHookMask & (0x10 << line))",
+        "\t\t    {",
+        "\t\t\tfor (depth = 0; depth < asp->isr_depth[line]; depth++)",
+        "\t\t\t{",
+        "\t\t\t\tasp->isr_time_decay[line][depth]++;",
+        "\t\t\t\tif (asp->isr_time_decay[line][depth] == MAXAGE)",
+        "\t\t\t\t{",
+        "\t\t\t\t\tasp->isr_time_decay[line][depth] = 0;",
+        "\t\t\t\t\tif (depth == 0 && asp->ica_count[line] == 0)",
+        "\t\t\t\t\t\tcontinue;\t/* line idle */",
+        "",
+        "\t\t\t\t\tcpdelay = &asp->isr_time_decay[line][depth];",
+        "\t\t\t\t\t/* lose hook data for this depth */",
+        "\t\t\t\t\tloop = depth;",
+        "\t\t\t\t\twhile(loop <= asp->isr_depth[line])",
+        "\t\t\t\t\t{",
+        "\t\t\t\t\t\tloop ++;",
+        "\t\t\t\t\t\t*cpdelay = *(cpdelay + 1);",
+        "\t\t\t\t\t\tcpdelay++;",
+        "\t\t\t\t\t}",
+        "\t\t\t\t\tasp->isr_depth[line]--;",
+        "",
+        "\t\t\t\t\t/* fix cpu side */",
+        "\t\t\t\t\tPurgeLostIretHookLine(line + 9, depth);",
+        "",
+        "\t\t\t\t\t/* permit intrs on this line */",
+        "\t\t\t\t\tiretHookActive &= ~(1 << (8 + line));",
+        "",
+        "\t\t\t\t\tbreak;\t/* one hook at a time */",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "\t\t    }",
+        "\t\t}",
+        "\t\thost_ica_unlock();",
+        "\t}",
+        "}",
+        "#endif  /* CPU_40_STYLE */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1994,
+      "original_count": 6,
+      "current_start": 1458,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 2011,
+      "original_count": 8,
+      "current_start": 1472,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* POST leaves some int lines masked out (including comms and lpt lines) */",
+        "/* The setting of the bits is spread out throughout the real POST code",
+        " * but is collected into one place here. I think that this will not cause",
+        " * any problems but it is conceivable that it will harm other OS's than",
+        " * DOS (eg OS/2 or coherent etc.)",
+        " */",
+        "#define INIT0_OCW1      (IU8)0xb8"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2042,
+      "original_count": 2,
+      "current_start": 1498,
+      "current_count": 1,
+      "original": [
+        "    io_define_inb(ICA0_ADAPTOR, ica_inb_func);",
+        "    io_define_outb(ICA0_ADAPTOR, ica_outb_func);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2053,
+      "original_count": 18,
+      "current_start": 1510,
+      "current_count": 1,
+      "original": [
+        "",
+        "#ifdef CPU_40_STYLE",
+        "    for (i = 0; i < 8; i++)",
+        "    {",
+        "\tadapter_state[ICA_MASTER].callback_fn[i] = NO_ICA_CALLBACK;",
+        "\tadapter_state[ICA_MASTER].isr_depth[i] = 0;",
+        "    }",
+        "",
+        "    ica_sigio_init();",
+        "",
+        "#endif  /* CPU_40_STYLE */",
+        "",
+        "",
+        "#ifdef HOOKED_IRETS",
+        "    /* on iret-hooked, non NT ports, enable iret hooks */",
+        "    iretHooksEnabled = TRUE;",
+        "#endif",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2088,
+      "original_count": 1,
+      "current_start": 1530,
+      "current_count": 1,
+      "original": [
+        "#define INIT1_OCW1\t(IU8)0x8d"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2090,
+      "original_count": 1,
+      "current_start": 1533,
+      "current_count": 1,
+      "original": [
+        "#define INIT1_OCW1\t(IU8)0x9d\t"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2117,
+      "original_count": 2,
+      "current_start": 1562,
+      "current_count": 1,
+      "original": [
+        "    io_define_inb(ICA1_ADAPTOR, ica_inb_func);",
+        "    io_define_outb(ICA1_ADAPTOR, ica_outb_func);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2127,
+      "original_count": 5,
+      "current_start": 1573,
+      "current_count": 1,
+      "original": [
+        "    for (i = 0; i < 8; i++)",
+        "    {",
+        "\tadapter_state[ICA_SLAVE].callback_fn[i] = NO_ICA_CALLBACK;",
+        "\tadapter_state[ICA_SLAVE].isr_depth[i] = 0;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2138,
+      "original_count": 105,
+      "current_start": 1583,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following functions are used for DEBUG purposes only.",
+        " */",
+        "LOCAL void",
+        "ica_print_int IFN2(char *, str, IS32, val)",
+        "{",
+        "    printf(\"%-20s 0x%02X\\n\", str, val);",
+        "}",
+        "",
+        "LOCAL void",
+        "ica_print_str IFN2(char *, str, char *, val)",
+        "{",
+        "    printf(\"%-20s %s\\n\", str, val);",
+        "}",
+        "",
+        "GLOBAL void",
+        "ica_dump IFN1(IU32, adapter)",
+        "{",
+        "    ADAPTER_STATE *asp = &adapter_state[adapter];",
+        "    char buff[80];",
+        "    int i;",
+        "",
+        "    if (adapter == ICA_MASTER)",
+        "        printf(\"MASTER 8259A State:\\n\\n\");",
+        "    else",
+        "        printf(\"SLAVE  8259A State:\\n\\n\");",
+        "",
+        "    ica_print_str(\"ica_master\", (asp->ica_master ? \"Master\" : \"Slave\"));",
+        "    ica_print_int(\"ica_irr\", asp->ica_irr);",
+        "    ica_print_int(\"ica_isr\", asp->ica_isr);",
+        "    ica_print_int(\"ica_imr\", asp->ica_imr);",
+        "    ica_print_int(\"ica_ssr\", asp->ica_ssr);",
+        "    ica_print_int(\"ica_base\", asp->ica_base);",
+        "    ica_print_int(\"ica_hipri\", asp->ica_hipri);",
+        "    ica_print_int(\"ica_mode\", asp->ica_mode);",
+        "    printf(\"%-20s %8d%8d%8d%8d%8d%8d%8d%8d\\n\", \"ica_count\",",
+        "\t\tasp->ica_count[0], asp->ica_count[1], asp->ica_count[2], asp->ica_count[3],",
+        "\t\tasp->ica_count[4], asp->ica_count[5], asp->ica_count[6], asp->ica_count[7]);",
+        "    ica_print_int(\"ica_int_line\", asp->ica_int_line);",
+        "    ica_print_str(\"ica_cpu_int\", (asp->ica_cpu_int ? \"TRUE\" : \"FALSE\"));",
+        "",
+        "#if defined(CPU_40_STYLE) && !defined(NTVDM)",
+        "    printf(\"%-20s %8d%8d%8d%8d%8d%8d%8d%8d\\n\", \"callback_parm\",",
+        "                asp->callback_parm[0], asp->callback_parm[1], asp->callback_parm[2], asp->callback_parm[3],",
+        "                asp->callback_parm[4], asp->callback_parm[5], asp->callback_parm[6], asp->callback_parm[7]);",
+        "    printf(\"%-20s %8p%8p%8p%8p%8p%8p%8p%8p\\n\", \"callback_fn\",",
+        "                asp->callback_fn[0], asp->callback_fn[1], asp->callback_fn[2], asp->callback_fn[3],",
+        "                asp->callback_fn[4], asp->callback_fn[5], asp->callback_fn[6], asp->callback_fn[7]);",
+        "    printf(\"%-20s %8d%8d%8d%8d%8d%8d%8d%8d\\n\", \"isr_depth\",",
+        "                asp->isr_depth[0], asp->isr_depth[1], asp->isr_depth[2], asp->isr_depth[3],",
+        "                asp->isr_depth[4], asp->isr_depth[5], asp->isr_depth[6], asp->isr_depth[7]);",
+        "    for (i=0; i<(MAX_ISR_DEPTH + 1); i++)",
+        "    {",
+        "\t    int j;",
+        "\t    int progress[8];",
+        "\t    IBOOL some_progress = FALSE;",
+        "\t    ",
+        "\t    for (j = 0; j < 8; j++)",
+        "\t    {",
+        "\t\t    if (asp->isr_depth[j] >= i)",
+        "\t\t    {",
+        "\t\t\t    some_progress = TRUE;",
+        "\t\t\t    progress[j] = asp->isr_progress[j][i];",
+        "\t\t    }",
+        "\t\t    else",
+        "\t\t    {",
+        "\t\t\t    progress[j] = 0;",
+        "\t\t    }",
+        "\t    }",
+        "\t    sprintf (buff, \"isr_progress[%d]\", i);",
+        "\t    printf(\"%-20s %8d%8d%8d%8d%8d%8d%8d%8d\\n\", buff,",
+        "\t\t   progress[0], progress[1], progress[2], progress[3],",
+        "\t\t   progress[4], progress[5], progress[6], progress[7]);",
+        "\t    if (!some_progress)",
+        "\t\t    break;",
+        "    }",
+        "    for (i=0; i<MAX_ISR_DEPTH; i++)",
+        "    {",
+        "\t    int j;",
+        "\t    int decay[8];",
+        "\t    IBOOL some_decay = FALSE;",
+        "\t    ",
+        "\t    for (j = 0; j < 8; j++)",
+        "\t    {",
+        "\t\t    if (asp->isr_depth[j] >= i)",
+        "\t\t    {",
+        "\t\t\t    decay[j] = asp->isr_time_decay[j][i];",
+        "\t\t\t    some_decay = TRUE;",
+        "\t\t    }",
+        "\t\t    else",
+        "\t\t    {",
+        "\t\t\t    decay[j] = 0;",
+        "\t\t    }",
+        "\t    }",
+        "\t    sprintf (buff, \"isr_time_decay[%d]\", i);",
+        "\t    printf(\"%-20s %8d%8d%8d%8d%8d%8d%8d%8d\\n\", buff,",
+        "\t\t   decay[0], decay[1], decay[2], decay[3],",
+        "\t\t   decay[4], decay[5], decay[6], decay[7]);",
+        "\t    if (!some_decay)",
+        "\t\t    break;",
+        "    }",
+        "#endif /* CPU_40_STYLE && !NTVDM */",
+        "",
+        "    printf(\"\\n\\n\");",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Three DIV460 additions implement ICW1 cancellation snapshot, device notifications and locking; original initialization assignments retained.",
+  "counter_review": "IRR and ISR both lose ownership during ICW1. Original SWPIC_clear_int already uses -1 cancellation, distinct from normal EOI. Recursive IcaLock protects reset/callback against device producers. Notifications after reset preserve same-line callback requeue; union prevents duplicate cancellation when IRR and ISR share a bit. Reset remains controller-local.",
+  "evidence": "nt_eoi.c:204 cancellation dispatcher and :366 Rtl critical section; timer.c:1896 clears EoiPending/EoiIntsPending on negative count; nt_mouse.c:2041 flushes canceled mouse events; keyba.c:2172 distinguishes cancellation from early EOI; cmosnt.c:344 RTC callback. test/mvdm-host/pic_reset_eoi_test.c exercises master/slave, IRR/ISR, repeat, requeue, AEOI empty state, real RTC/mouse hooks; keyboard_controller_pic_test.c covers keyboard cancellation.",
+  "limits": "Source/test inspection only, not a fresh run. Fixture directly seeds some PIC states and stubs host dispatch/delay. AEOI test checks empty reset rather than end-to-end interrupt delivery. Cross-IRQ callback requeue into another still-pending cancellation bit is not covered; actual callback fanout must be checked before claiming arbitrary callback safety."
+}

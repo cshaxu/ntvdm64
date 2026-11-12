@@ -1,0 +1,352 @@
+{
+  "path": "src/mvdm-host/wow32/wole2.c",
+  "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+  "current_sha256": "78d49c329057a5869be53c7e0c153668927f60607b30a11c07b93ad5465b093e",
+  "changes": [
+    {
+      "original_start": 18,
+      "original_count": 0,
+      "current_start": 18,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "#ifndef STATUS_INFO_LENGTH_MISMATCH",
+        "#define STATUS_INFO_LENGTH_MISMATCH ((NTSTATUS)0xC0000004L)",
+        "#endif"
+      ],
+      "decision": "pending",
+      "evidence": "Local #ifndef STATUS_INFO_LENGTH_MISMATCH duplicates an SDK status constant to support the new size probe; exact preprocessed declaration source has not been established.",
+      "change_plan": "Check selected SDK/precomp status declarations and move missing status declaration into the existing compatibility declaration owner if required; remove TU-local conditional fallback only when shared declaration proven available.",
+      "verification_required": "Selected WOW32 preprocessing and compile; constant identity and no duplicate status policy.",
+      "missing_evidence": "Selected macro declaration evidence."
+    },
+    {
+      "original_start": 309,
+      "original_count": 1,
+      "current_start": 321,
+      "current_count": 2,
+      "original": [
+        "    UCHAR LargeBuffer1[16*1024];        // 16K should be plenty"
+      ],
+      "current": [
+        "    PVOID   ProcessBuffer;",
+        "    ULONG   ProcessBufferSize;"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 313,
+      "original_count": 0,
+      "current_start": 327,
+      "current_count": 11,
+      "original": [],
+      "current": [
+        "    ULONG NextEntryOffset;",
+        "    UINT    cch;",
+        "",
+        "    ProcessBuffer = NULL;",
+        "    ProcessBufferSize = 0;",
+        "",
+        "    if ( cNameBufferSize == 0 || lpNameBuffer == NULL ) {",
+        "        return( 0 );",
+        "    }",
+        "",
+        "    lpNameBuffer[0] = '\\0';"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 319,
+      "original_count": 2,
+      "current_start": 345,
+      "current_count": 19,
+      "original": [
+        "    if ( cNameBufferSize == 0 || lpNameBuffer == NULL ) {",
+        "        return( 0 );"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-450): retain the original process-list",
+        "     * observation and ANSI conversion, but replace its fixed 16 KiB stack",
+        "     * snapshot and unbounded strcpy with one transient, exact-size query and",
+        "     * a caller-bounded copy.  A changing process list is an unavailable",
+        "     * observation, not a polling/retry protocol. */",
+        "    status = NtQuerySystemInformation(",
+        "                SystemProcessInformation,",
+        "                NULL,",
+        "                0,",
+        "                &ProcessBufferSize",
+        "                );",
+        "",
+        "    if (status != STATUS_INFO_LENGTH_MISMATCH || ProcessBufferSize == 0) {",
+        "        return(0);",
+        "    }",
+        "",
+        "    ProcessBuffer = malloc_w(ProcessBufferSize);",
+        "    if (ProcessBuffer == NULL) {",
+        "        return(0);"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 325,
+      "original_count": 2,
+      "current_start": 370,
+      "current_count": 2,
+      "original": [
+        "                LargeBuffer1,",
+        "                sizeof(LargeBuffer1),"
+      ],
+      "current": [
+        "                ProcessBuffer,",
+        "                ProcessBufferSize,"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 331,
+      "original_count": 1,
+      "current_start": 376,
+      "current_count": 2,
+      "original": [
+        "        return( 0 );"
+      ],
+      "current": [
+        "        free_w(ProcessBuffer);",
+        "        return(0);"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 339,
+      "original_count": 1,
+      "current_start": 386,
+      "current_count": 1,
+      "original": [
+        "    ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)LargeBuffer1;"
+      ],
+      "current": [
+        "    ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)ProcessBuffer;"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 342,
+      "original_count": 0,
+      "current_start": 389,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "        if (ProcessBufferSize < sizeof(*ProcessInfo) ||",
+        "            TotalOffset > ProcessBufferSize - sizeof(*ProcessInfo)) {",
+        "            break;",
+        "        }"
+      ],
+      "decision": "retain",
+      "evidence": "Traversal checks header fits allocation and next offset stays within remaining allocation. Buffer size bounds addition and next iteration validates header. Original process-list algorithm and alias thread/process identity checks remain.",
+      "change_plan": "Retain finite snapshot traversal bounds and existing PID selection; no retry loop or second process-identity cache. If minimizing bounds, first prove returned byte length and record-layout contract.",
+      "verification_required": "Large list and record-end bounds; exact selected SYSTEM_PROCESS_INFORMATION layout; changing-list second-query failure returns unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 345,
+      "original_count": 1,
+      "current_start": 397,
+      "current_count": 2,
+      "original": [
+        "                RtlUnicodeStringToAnsiString(&pname,(PUNICODE_STRING)&ProcessInfo->ImageName,TRUE);"
+      ],
+      "current": [
+        "                status = RtlUnicodeStringToAnsiString(",
+        "                    &pname, (PUNICODE_STRING)&ProcessInfo->ImageName, TRUE);"
+      ],
+      "decision": "retain",
+      "evidence": "Original writes pname.Buffer[cNameBufferSize-1] regardless of allocated name size then strcpy. Current min(name length, capacity-1) bounds destination without touching source outside conversion length. Failed conversion returns empty result through common release.",
+      "change_plan": "Retain conversion status check and caller-bounded copy using ANSI_STRING.Length, NUL terminate caller storage, release successful conversion and process buffer. Do not restore write into converted source at caller-sized index.",
+      "verification_required": "Actual-owner fixture full buffer, four-byte truncation, one-byte result and invalid alias; add conversion-failure witness when revising.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 347,
+      "original_count": 10,
+      "current_start": 400,
+      "current_count": 10,
+      "original": [
+        "                //",
+        "                // Truncate the name to make it fit",
+        "                //",
+        "                pname.Buffer[cNameBufferSize-1] = '\\0';",
+        "",
+        "                strcpy( lpNameBuffer, pname.Buffer );",
+        "",
+        "                RtlFreeAnsiString( &pname );",
+        "",
+        "                return( strlen(lpNameBuffer) );"
+      ],
+      "current": [
+        "                if (NT_SUCCESS(status)) {",
+        "                    cch = min((UINT)pname.Length, cNameBufferSize - 1);",
+        "                    if (cch) {",
+        "                        RtlCopyMemory(lpNameBuffer, pname.Buffer, cch);",
+        "                    }",
+        "                    lpNameBuffer[cch] = '\\0';",
+        "                    RtlFreeAnsiString(&pname);",
+        "                    free_w(ProcessBuffer);",
+        "                    return(cch);",
+        "                }"
+      ],
+      "decision": "retain",
+      "evidence": "Original writes pname.Buffer[cNameBufferSize-1] regardless of allocated name size then strcpy. Current min(name length, capacity-1) bounds destination without touching source outside conversion length. Failed conversion returns empty result through common release.",
+      "change_plan": "Retain conversion status check and caller-bounded copy using ANSI_STRING.Length, NUL terminate caller storage, release successful conversion and process buffer. Do not restore write into converted source at caller-sized index.",
+      "verification_required": "Actual-owner fixture full buffer, four-byte truncation, one-byte result and invalid alias; add conversion-failure witness when revising.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 361,
+      "original_count": 1,
+      "current_start": 415,
+      "current_count": 2,
+      "original": [
+        "                return( 0 );"
+      ],
+      "current": [
+        "                free_w(ProcessBuffer);",
+        "                return(0);"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 363,
+      "original_count": 0,
+      "current_start": 419,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "            free_w(ProcessBuffer);",
+        "            return(0);"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 364,
+      "original_count": 1,
+      "current_start": 424,
+      "current_count": 3,
+      "original": [
+        "        if (ProcessInfo->NextEntryOffset == 0) {"
+      ],
+      "current": [
+        "        NextEntryOffset = ProcessInfo->NextEntryOffset;",
+        "        if (NextEntryOffset == 0 ||",
+        "            NextEntryOffset > ProcessBufferSize - TotalOffset) {"
+      ],
+      "decision": "retain",
+      "evidence": "Traversal checks header fits allocation and next offset stays within remaining allocation. Buffer size bounds addition and next iteration validates header. Original process-list algorithm and alias thread/process identity checks remain.",
+      "change_plan": "Retain finite snapshot traversal bounds and existing PID selection; no retry loop or second process-identity cache. If minimizing bounds, first prove returned byte length and record-layout contract.",
+      "verification_required": "Large list and record-end bounds; exact selected SYSTEM_PROCESS_INFORMATION layout; changing-list second-query failure returns unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 367,
+      "original_count": 2,
+      "current_start": 430,
+      "current_count": 2,
+      "original": [
+        "        TotalOffset += ProcessInfo->NextEntryOffset;",
+        "        ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)&LargeBuffer1[TotalOffset];"
+      ],
+      "current": [
+        "        TotalOffset += NextEntryOffset;",
+        "        ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)((PBYTE)ProcessBuffer + TotalOffset);"
+      ],
+      "decision": "retain",
+      "evidence": "Traversal checks header fits allocation and next offset stays within remaining allocation. Buffer size bounds addition and next iteration validates header. Original process-list algorithm and alias thread/process identity checks remain.",
+      "change_plan": "Retain finite snapshot traversal bounds and existing PID selection; no retry loop or second process-identity cache. If minimizing bounds, first prove returned byte length and record-layout contract.",
+      "verification_required": "Large list and record-end bounds; exact selected SYSTEM_PROCESS_INFORMATION layout; changing-list second-query failure returns unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    },
+    {
+      "original_start": 370,
+      "original_count": 1,
+      "current_start": 433,
+      "current_count": 2,
+      "original": [
+        "    return( 0 );"
+      ],
+      "current": [
+        "    free_w(ProcessBuffer);",
+        "    return(0);"
+      ],
+      "decision": "retain",
+      "evidence": "Original fixed 16 KiB stack snapshot could fail on modern process counts. New transient allocation uses queried size; a changing list that makes second query fail returns zero after release. Buffer is released on match, missing name, conversion failure and no match.",
+      "change_plan": "Retain one size query and one allocated snapshot query with matched frees on each return, early caller validation and empty output. Preserve no-retry semantics and existing GetHtaskAlias identity owner.",
+      "verification_required": "Real-owner alias fixture, allocation/query failures and list growth between calls; no leaks and empty unavailable result.",
+      "missing_evidence": "No new build/runtime pass. Existing fixture links actual wole2 object and ntdll, but does not inject every query/conversion failure."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 91,
+      "original_count": 1,
+      "current_start": 99,
+      "current_count": 1,
+      "original": [
+        "        DbgPrint(\"WOW32: Could not get open thread handle\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 116,
+      "original_count": 2,
+      "current_start": 127,
+      "current_count": 1,
+      "original": [
+        "        DbgPrint(\"WOW32: Could not close thread handle\\n\");",
+        "        DbgBreakPoint();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "limits": [
+    "Audit classification only; no fresh test/build result.",
+    "Exact snapshot ABI and failure injection not newly verified."
+  ]
+}

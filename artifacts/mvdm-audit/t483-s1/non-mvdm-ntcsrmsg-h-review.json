@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+  "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+  "current_sha256": "1292581db79cae5901247ab9c00a4d6c9fad18ebb1a257e2031ebaa1ab744c5a",
+  "changes": [
+    {
+      "original_start": 100,
+      "original_count": 2,
+      "current_start": 100,
+      "current_count": 4,
+      "original": [
+        "    PULONG MessagePointerOffsets;   // Offsets within CSR_API_MSG of pointers",
+        "    PULONG CapturePointerOffsets;   // Offsets within CaptureBuffer of pointers"
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-066): process-local capture metadata only;",
+        "     * ULONG_PTR is the identical original ULONG carrier in x86 builds. */",
+        "    PULONG_PTR MessagePointerOffsets; // Offsets within CSR_API_MSG of pointers",
+        "    PULONG_PTR CapturePointerOffsets; // Offsets within CaptureBuffer of pointers"
+      ]
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/non-mvdm/base/ntdll/csrutil.c",
+    "src/common/base_srv/base_capture.h",
+    "src/common/base_srv/base_rpc_client_launch.c",
+    "src/common/base_srv/base_payload.c",
+    "test/adapter-basesrv/native_capture_test.c",
+    "test/observation/verify-native-launcher-abi.ps1"
+  ],
+  "limits": "Complete source comparison and source-derived line mapping only. No new build/runtime result or universal include-context hit proof. Native capture fixture covers message pointer tables/counts1..9 and alignment, but does not exercise nonzero capture-pointer counts or CSR cross-process port relocation; this adaptation is process-local only."
+}

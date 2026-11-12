@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/dos/dem/demmsg.c",
+  "original_sha256": "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+  "current_sha256": "adcb4b21a626d5d7429e65d3fea69b19196b70a450d7dd379abbf52e5965e0ac",
+  "review_complete": true,
+  "nonexcluded_differences": 0,
+  "dbg_groups": 1,
+  "initial_review": "Original entire implementation is within #if DBG. Current retains original outer guard and excludes its body.",
+  "counter_review": "No selected message implementation removed: dem.h keeps original release demPrintMsg(x) empty macro. No runtime message capability restoration is justified by this diff.",
+  "verification": "Exact outside-DBG/#line source projection; demmsg.h original bytes verified; no build or runtime claim."
+}

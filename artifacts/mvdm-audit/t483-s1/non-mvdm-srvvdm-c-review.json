@@ -1,0 +1,342 @@
+{
+  "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+  "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+  "current_sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+  "changes": [
+    {
+      "original_start": 28,
+      "original_count": 0,
+      "current_start": 28,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE(OPENNT-HOST-068): PID/TID and wait-receipt numeric carriers",
+        " * convert through ULONG_PTR on both native widths. Parent bit-zero tagging",
+        " * masks that carrier without narrowing a native pointer. This TU's native",
+        " * build binds NULL to integer zero; original scheduling and cleanup remain. */"
+      ],
+      "decision": "retain",
+      "necessity": "Local divergence explanation identifies numeric-carrier native-width adaptation and NULL build binding; original source notice is preserved.",
+      "counter_review": "Documentation is not proof of runtime reachability; each conversion and completion change is separately reviewed below.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "No runtime claim from this comment; verify corresponding native build bindings when changes are implemented.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 272,
+      "original_count": 1,
+      "current_start": 278,
+      "current_count": 3,
+      "original": [
+        "                (b->VDMState & RETURN_ON_NO_COMMAND && b->VDMState & ASKING_FOR_SECOND_TIME))"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-064): retain early native completion across the command wait reset. */",
+        "                (b->VDMState & RETURN_ON_NO_COMMAND &&",
+        "                 (b->VDMState & ASKING_FOR_SECOND_TIME || pConsoleRecord->ReenterCompletionPending)))"
+      ],
+      "decision": "retain",
+      "necessity": "Record-local completion latch preserves an early reenter decrement across original GetNext event reset; initialized, set and consumed under original DOS critical section. Event state alone loses this notification.",
+      "counter_review": "Five actual service fixture modes cover before/after return, nested return, pending command and before increment, including consumed-latch non-reuse. A coalesced notification is not per-request identity and does not solve non-LIFO DOS completion.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Run base_service_reservation_test --reenter-before-return/--reenter-after-return/--reenter-nested-return/--reenter-pending-command/--reenter-before-increment when changed; retain exact exit code=29 and later unsignalled wait assertions.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 274,
+      "original_count": 0,
+      "current_start": 283,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                pConsoleRecord->ReenterCompletionPending = FALSE;"
+      ],
+      "decision": "retain",
+      "necessity": "Record-local completion latch preserves an early reenter decrement across original GetNext event reset; initialized, set and consumed under original DOS critical section. Event state alone loses this notification.",
+      "counter_review": "Five actual service fixture modes cover before/after return, nested return, pending command and before increment, including consumed-latch non-reuse. A coalesced notification is not per-request identity and does not solve non-LIFO DOS completion.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Run base_service_reservation_test --reenter-before-return/--reenter-after-return/--reenter-nested-return/--reenter-pending-command/--reenter-before-increment when changed; retain exact exit code=29 and later unsignalled wait assertions.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 629,
+      "original_count": 1,
+      "current_start": 640,
+      "current_count": 1,
+      "original": [
+        "    Status = CsrLockProcessByClientId((HANDLE)dwWowExecProcessId, &Process);"
+      ],
+      "current": [
+        "    Status = CsrLockProcessByClientId((HANDLE)(ULONG_PTR)dwWowExecProcessId, &Process);"
+      ],
+      "decision": "retain",
+      "necessity": "DWORD process ID is numeric data; ULONG_PTR bridge to original HANDLE-shaped ClientId argument avoids direct pointer-width conversion while retaining original lookup.",
+      "counter_review": "Process ID is not an opaque transported native handle. Do not introduce a surrogate mapping solely to avoid this cast.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Native x86/x64 build and original WOW process registration lookup controls.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 845,
+      "original_count": 2,
+      "current_start": 856,
+      "current_count": 2,
+      "original": [
+        "                                (DWORD)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,",
+        "                                (DWORD)TargetHandle, 0x04);"
+      ],
+      "current": [
+        "                                (DWORD)(ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,",
+        "                                (DWORD)(ULONG_PTR)TargetHandle, 0x04);"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit ULONG_PTR bridge documents native-to-original numeric callback argument conversion; does not widen original DWORD callback ABI.",
+      "counter_review": "Selected service_core.c initializes UserNotifyProcessCreate NULL and inspected source has no assignment enabling it. These casts are compile-boundary changes, not proof of a live notification path or arbitrary 64-bit handle preservation.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "x86/x64 native ABI build; any future callback admission must prove TargetHandle numeric receipt contract before narrowing. Do not claim current runtime callback coverage.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 862,
+      "original_count": 1,
+      "current_start": 873,
+      "current_count": 1,
+      "original": [
+        "                        Status = CsrLockProcessByClientId((HANDLE)dwProcessId, &Process);"
+      ],
+      "current": [
+        "                        Status = CsrLockProcessByClientId((HANDLE)(ULONG_PTR)dwProcessId, &Process);"
+      ],
+      "decision": "retain",
+      "necessity": "DWORD process ID is numeric data; ULONG_PTR bridge to original HANDLE-shaped ClientId argument avoids direct pointer-width conversion while retaining original lookup.",
+      "counter_review": "Process ID is not an opaque transported native handle. Do not introduce a surrogate mapping solely to avoid this cast.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Native x86/x64 build and original WOW process registration lookup controls.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1269,
+      "original_count": 0,
+      "current_start": 1280,
+      "current_count": 37,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-031): CheckDOS readiness alone does not prove a",
+        " * pending GetNextVDMCommand wait.  The original record and lock remain the",
+        " * sole state owners. */",
+        "BOOL",
+        "BaseSrvDOSWorkerWaitPending(",
+        "    IN HANDLE ConsoleHandle,",
+        "    OUT PBOOL ConsoleRecordExists",
+        "    )",
+        "{",
+        "    NTSTATUS Status;",
+        "    PCONSOLERECORD pConsoleRecord;",
+        "    EVENT_BASIC_INFORMATION EventInformation;",
+        "    BOOL Pending = FALSE;",
+        "",
+        "    if (!ConsoleRecordExists)",
+        "        return FALSE;",
+        "    *ConsoleRecordExists = FALSE;",
+        "",
+        "    Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);",
+        "    ASSERT(NT_SUCCESS(Status));",
+        "    Status = BaseSrvGetConsoleRecord(ConsoleHandle,&pConsoleRecord);",
+        "    if (NT_SUCCESS(Status)) {",
+        "        *ConsoleRecordExists = TRUE;",
+        "        if (pConsoleRecord->hWaitForVDMDup) {",
+        "            Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup,",
+        "                                  EventBasicInformation,",
+        "                                  &EventInformation,",
+        "                                  sizeof(EventInformation),",
+        "                                  NULL);",
+        "            Pending = NT_SUCCESS(Status) && !EventInformation.EventState;",
+        "        }",
+        "    }",
+        "    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);",
+        "    return Pending;",
+        "}",
+        "",
+        ""
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Original CheckDOS VDM_READY cannot distinguish a resident busy COMMAND from an armed command wait. Query uses original lock/record/event and real OpenNtBaseServiceCheck caller chooses reuse versus separate worker.",
+      "counter_review": "NtQueryEvent failure is collapsed into FALSE with ConsoleRecordExists TRUE, so caller allocates separately rather than reporting failure. Query and subsequent CheckVDM are separate critical sections; atomic admission is not proved by the snapshot.",
+      "change_plan": "Keep owner-local query pending evidence. If query failure is reachable, return explicit status through existing caller error path; if admission can race, compose query and reservation under existing authoritative locking rather than add duplicate readiness state.",
+      "verification_required": "Existing reservation fixture pending/not-pending checks; add bounded query-failure and concurrent query/reservation controls only if implementation changes. No polling or second lifecycle state.",
+      "missing_evidence": "Need actual query-failure contract and service dispatch concurrency proof across query-to-CheckVDM; current fixtures prove ordinary pending/not-pending and rundown states, not those boundaries."
+    },
+    {
+      "original_start": 1511,
+      "original_count": 2,
+      "current_start": 1560,
+      "current_count": 2,
+      "original": [
+        "                                (DWORD)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,",
+        "                                (DWORD)TargetHandle, 0x04);"
+      ],
+      "current": [
+        "                                (DWORD)(ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,",
+        "                                (DWORD)(ULONG_PTR)TargetHandle, 0x04);"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit ULONG_PTR bridge documents native-to-original numeric callback argument conversion; does not widen original DWORD callback ABI.",
+      "counter_review": "Selected service_core.c initializes UserNotifyProcessCreate NULL and inspected source has no assignment enabling it. These casts are compile-boundary changes, not proof of a live notification path or arbitrary 64-bit handle preservation.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "x86/x64 native ABI build; any future callback admission must prove TargetHandle numeric receipt contract before narrowing. Do not claim current runtime callback coverage.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1832,
+      "original_count": 1,
+      "current_start": 1881,
+      "current_count": 1,
+      "original": [
+        "            if (pDOSRecord->hWaitForParent == (HANDLE)((DWORD)b->hParent & ~0x1)) {"
+      ],
+      "current": [
+        "            if (pDOSRecord->hWaitForParent == (HANDLE)((ULONG_PTR)b->hParent & ~(ULONG_PTR)0x1)) {"
+      ],
+      "decision": "retain",
+      "necessity": "Clear original parent bit-zero tag at native pointer width before comparing original wait handle; DWORD mask would truncate native carrier on x64.",
+      "counter_review": "Retains original tagged-parent lookup and exit-code ownership; does not replace request matching with a new identifier or fix existing last-BUSY completion selection.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Native-width parent receipt/tag fixture and reservation exact-waiter exit-code tests on both widths.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 2179,
+      "original_count": 0,
+      "current_start": 2228,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    pConsoleRecord->ReenterCompletionPending = FALSE; // DIVERGENCE(OPENNT-HOST-064): record-local notification lifetime."
+      ],
+      "decision": "retain",
+      "necessity": "Record-local completion latch preserves an early reenter decrement across original GetNext event reset; initialized, set and consumed under original DOS critical section. Event state alone loses this notification.",
+      "counter_review": "Five actual service fixture modes cover before/after return, nested return, pending command and before increment, including consumed-latch non-reuse. A coalesced notification is not per-request identity and does not solve non-LIFO DOS completion.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Run base_service_reservation_test --reenter-before-return/--reenter-after-return/--reenter-nested-return/--reenter-pending-command/--reenter-before-increment when changed; retain exact exit code=29 and later unsignalled wait assertions.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 2551,
+      "original_count": 0,
+      "current_start": 2581,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        pConsoleRecord->ReenterCompletionPending = TRUE; // DIVERGENCE(OPENNT-HOST-064): the next eligible Get consumes this notification."
+      ],
+      "decision": "retain",
+      "necessity": "Record-local completion latch preserves an early reenter decrement across original GetNext event reset; initialized, set and consumed under original DOS critical section. Event state alone loses this notification.",
+      "counter_review": "Five actual service fixture modes cover before/after return, nested return, pending command and before increment, including consumed-latch non-reuse. A coalesced notification is not per-request identity and does not solve non-LIFO DOS completion.",
+      "change_plan": "Keep this bounded adaptation; no functional edit in S1.",
+      "verification_required": "Run base_service_reservation_test --reenter-before-return/--reenter-after-return/--reenter-nested-return/--reenter-pending-command/--reenter-before-increment when changed; retain exact exit code=29 and later unsignalled wait assertions.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 2427,
+      "original_count": 25,
+      "current_start": 2480,
+      "current_count": 1,
+      "original": [
+        "",
+        "ULONG",
+        "BaseSrvGetWOWRecordByHandle(",
+        "    HANDLE hParent,",
+        "    OUT PWOWRECORD *pRecord",
+        "    )",
+        "{",
+        "    PWOWRECORD pWOWRecord;",
+        "",
+        "    if(WOWHead == NULL)",
+        "        return STATUS_INVALID_PARAMETER;",
+        "",
+        "    pWOWRecord = WOWHead->WOWRecord;",
+        "",
+        "    while (pWOWRecord){",
+        "        if (pWOWRecord->hWaitForParentServer == hParent){",
+        "            *pRecord = pWOWRecord;",
+        "            return STATUS_SUCCESS;",
+        "            }",
+        "        else",
+        "            pWOWRecord = pWOWRecord->WOWRecordNext;",
+        "    }",
+        "    return STATUS_INVALID_PARAMETER;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: NOT_NEEDED branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2604,
+      "original_count": 1,
+      "current_start": 2637,
+      "current_count": 1,
+      "original": [
+        "            DbgPrint( \"BASESRV: WOW is in inconsistent state. Contact DOS Team\\n\");"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2622,
+      "original_count": 1,
+      "current_start": 2657,
+      "current_count": 1,
+      "original": [
+        "            DbgPrint( \"BASESRV: DOS is in inconsistent state. Contact DOS Team\\n\");"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 29,
+      "current": 34,
+      "logical": 34
+    },
+    {
+      "original": 30,
+      "current": 35,
+      "logical": 35
+    },
+    {
+      "original": 31,
+      "current": 36,
+      "logical": 36
+    },
+    {
+      "original": 32,
+      "current": 37,
+      "logical": 37
+    },
+    {
+      "original": 33,
+      "current": 38,
+      "logical": 38
+    },
+    {
+      "original": 2452,
+      "current": 2481,
+      "logical": 2428
+    }
+  ],
+  "evidence": [
+    "src/ntsrv-exe/opennt/source/base_service.c:OpenNtBaseServiceCheck/OpenNtBaseServiceReenter",
+    "src/ntsrv-exe/opennt/source/service_core.c:UserNotifyProcessCreate",
+    "src/non-mvdm/base/win32/server/srvvdm.h:CONSOLERECORD",
+    "test/adapter-basesrv/base_service_reservation_test.c:2389-2500"
+  ],
+  "limits": "Source and test-body audit only; no new compiler/runtime result. Unchanged last-VDM_BUSY completion selection is outside this mirror-diff chunk and remains a separate known identity limitation."
+}

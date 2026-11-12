@@ -1,0 +1,46 @@
+{
+  "path": "src/mvdm-host/wow32/wreldc.c",
+  "original_sha256": "f4ede08ef2d6bc949cd2500c75af546ec68c0e017abecc1a6c624f7c1b5a0d20",
+  "current_sha256": "3c6a944e5052c2d65950f7512a7c2796277ec1ee5c6b14c3dfe25a81c07c55f2",
+  "changes": [
+    {
+      "original_start": 170,
+      "original_count": 1,
+      "current_start": 170,
+      "current_count": 1,
+      "original": [
+        "BOOL StoreDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16)"
+      ],
+      "current": [
+        "BOOL StoreDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16, HWND hwnd32)"
+      ],
+      "decision": "retain",
+      "necessity": "Cache the exact native HWND used to acquire DC, rather than resolving the 16-bit alias again. Original cache owns release; this adds no parallel cache.",
+      "change_plan": "Retain four-argument StoreDC declaration, definition and all three acquisition callers as one change."
+    },
+    {
+      "original_start": 227,
+      "original_count": 1,
+      "current_start": 228,
+      "current_count": 2,
+      "original": [
+        "        lpT->hwnd32 = HWND32(hwnd16);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-455): retain acquisition generation. */",
+        "        lpT->hwnd32 = hwnd32;"
+      ],
+      "decision": "retain",
+      "necessity": "Cache the exact native HWND used to acquire DC, rather than resolving the 16-bit alias again. Original cache owns release; this adds no parallel cache.",
+      "change_plan": "Retain four-argument StoreDC declaration, definition and all three acquisition callers as one change."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "evidence": "wuser.c WU32GetDC, wuser31.c WU32GetDCEx, wuwind.c WU32GetWindowDC pass acquired hwnd32. ReleaseCachedDCs/FreeCachedDCs use cached hwnd32. wow_page_domain_fixture.c checks stored original native handle in destruction/reuse scenario.",
+  "limits": [
+    "No new fixture execution or integration pass.",
+    "Cached HWND is not an independent native-handle generation token; native-handle reuse/lifetime remains owned by acquisition/release adapters.",
+    "LF source mapping is not compiler certification."
+  ]
+}

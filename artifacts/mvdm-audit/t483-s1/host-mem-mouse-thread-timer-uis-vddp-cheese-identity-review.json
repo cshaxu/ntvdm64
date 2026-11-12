@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mem.h",
+      "sha256": "3bc1805a7d900f3b4a4718dafdb130f9fa089ef29b3839ec62be9fe7851c7e3d",
+      "bytes": 1066
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mouse.h",
+      "sha256": "bb80ed237120b9def63e41f25bbbe19d6e89512944270eb492b2d4c11546e2aa",
+      "bytes": 1195
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_thred.h",
+      "sha256": "9907ef3c8a402afda59dd15d25ddc0ba02eed85ebabc73f108dbf448382fc695",
+      "bytes": 1083
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_timer.h",
+      "sha256": "647d2d1963a32b4406f646afc12f928d53004d38c1df74b2644c9efa1a4f9455",
+      "bytes": 686
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_uis.h",
+      "sha256": "fc00f8c6ffff9c57f5f0b203c102709dd8a456cd2644df1dfeb5b5155b81c71e",
+      "bytes": 4062
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_vddp.h",
+      "sha256": "92c8ea5d3764c20679f9c58d77e316c65f092cca2913114e47d590ecfb459912",
+      "bytes": 821
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ntcheese.h",
+      "sha256": "c10f8e844e9d57f33abf5b57092ef0ce2dae35e9e8c4b642c3be5312b264ca3e",
+      "bytes": 686
+    }
+  ],
+  "limits": "Already included in identical-file count; no increment."
+}

@@ -1,0 +1,257 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+  "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+  "current_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 215,
+      "original_count": 1,
+      "current_start": 208,
+      "current_count": 1,
+      "original": [
+        "#include \"..\\..\\..\\..\\inc\\vdm.h\""
+      ],
+      "current": [
+        "#include <vdm.h>"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 192,
+      "original_count": 2,
+      "current_start": 193,
+      "current_count": 1,
+      "original": [
+        "        LOCAL void idle_kybd_poll();",
+        "        LOCAL void idle_tick();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 203,
+      "original_count": 11,
+      "current_start": 205,
+      "current_count": 1,
+      "original": [
+        "int idle_no_video;",
+        "int idle_no_comlpt;",
+        "int idle_no_disk;",
+        "",
+        "static int i_counter = 0;",
+        "static int nCharPollsPerTick = 0;",
+        "static int ienabled = 0;",
+        "static int minConsecutiveTicks = 12;",
+        "static int minFailedPolls = 10;",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 250,
+      "original_count": 33,
+      "current_start": 245,
+      "current_count": 1,
+      "original": [
+        "#ifdef SMEG",
+        "#include \"smeg_head.h\"",
+        "",
+        "GLOBAL LONG dummy_long_1, dummy_long_2;",
+        "GLOBAL BOOL system_has_idled = FALSE;",
+        "#endif",
+        "",
+        "",
+        "LOCAL void my_host_release_timeslice()",
+        "{",
+        "#ifdef SMEG",
+        "    /*",
+        "     * Set marker and waste time (SIGPROF screws up",
+        "     * host_release_timeslice)",
+        "     */",
+        "",
+        "    LONG i;",
+        "",
+        "    smeg_set(SMEG_IN_IDLE);",
+        "",
+        "    system_has_idled = TRUE;",
+        "",
+        "    for (i = 0; i < 100000; i++)",
+        "\t\tdummy_long_1 += dummy_long_2;",
+        "",
+        "    smeg_clear(SMEG_IN_IDLE);",
+        "#else",
+        "    host_release_timeslice();",
+        "#endif",
+        "",
+        "    /* re-count polls in next tick */",
+        "    nCharPollsPerTick = 0;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 319,
+      "original_count": 14,
+      "current_start": 284,
+      "current_count": 1,
+      "original": [
+        "LOCAL void idle_kybd_poll()",
+        "{",
+        "\t/* go idle if enough consecutive PC timer interrupts",
+        "\t * have elapsed during which time unsuccessful polling has",
+        "\t * occurred at a large enough rate for each tick.",
+        "\t */",
+        "\tif (i_counter >= minConsecutiveTicks)",
+        "\t{",
+        "\t\tmy_host_release_timeslice();",
+        "\t}",
+        "",
+        "\t/* another unsuccessful poll ! */",
+        "\tnCharPollsPerTick++;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 357,
+      "original_count": 5,
+      "current_start": 311,
+      "current_count": 1,
+      "original": [
+        "    if(*pNtVDMState & VDM_IDLEACTIVITY)",
+        "       {",
+        "       *pNtVDMState &= ~ VDM_IDLEACTIVITY;",
+        "       IdleNoActivity = 0;",
+        "       }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 395,
+      "original_count": 24,
+      "current_start": 347,
+      "current_count": 1,
+      "original": [
+        "LOCAL void idle_tick()",
+        "{",
+        "\tif (idle_no_video && idle_no_disk && idle_no_comlpt)",
+        "\t{",
+        "\t\t/* no graphics or comms/lpt activity has occurred...",
+        "\t\t * see whether enough polling of kybd has occurred",
+        "\t\t * to kick off the idling counter.",
+        "\t\t */",
+        "\t\tif (nCharPollsPerTick >= minFailedPolls)",
+        "\t\t\ti_counter++;",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\ti_counter = 0;",
+        "\t}",
+        "",
+        "\t/* set flags and zero poll counter for next time period",
+        "\t */",
+        "\tidle_no_video = 1;",
+        "\tidle_no_disk = 1;",
+        "\tidle_no_comlpt = 1;",
+        "",
+        "\tnCharPollsPerTick = 0;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 435,
+      "original_count": 2,
+      "current_start": 366,
+      "current_count": 1,
+      "original": [
+        "\tif (!ienabled)",
+        "            return;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 445,
+      "original_count": 1,
+      "current_start": 377,
+      "current_count": 1,
+      "original": [
+        "\t\t*pNtVDMState &= ~VDM_IDLEACTIVITY;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 451,
+      "original_count": 1,
+      "current_start": 385,
+      "current_count": 1,
+      "original": [
+        "\t\tmy_host_release_timeslice();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 462,
+      "original_count": 3,
+      "current_start": 398,
+      "current_count": 1,
+      "original": [
+        "\t\tidle_no_video = 1;",
+        "\t\tidle_no_disk = 1;",
+        "\t\tidle_no_comlpt = 1;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 495,
+      "original_count": 1,
+      "current_start": 431,
+      "current_count": 1,
+      "original": [
+        "    ienabled = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 503,
+      "original_count": 1,
+      "current_start": 442,
+      "current_count": 1,
+      "original": [
+        "\tienabled = flag;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "One include-path adaptation; 12 excluded bodies; all remaining runtime logic original.",
+  "counter_review": "Original relative include resolves outside current retained tree. Current public internal base vdm.h is available in selected include roots. Retain relocation instead of duplicate historical header; no idle heuristic or state ownership changed.",
+  "evidence": "src/non-mvdm/public/internal/base/inc/vdm.h; existing build Ninja include roots list that directory; original idetect.c relative path is ../../../../inc/vdm.h.",
+  "limits": "Existing generated build graph and source inspected; no fresh compile/include trace or idle runtime result."
+}

@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wparam.h",
+  "original_sha256": "3861f621ac54295bc90b357a66a6d36ecba10878c4a1b5fcd49d37f95ae8351f",
+  "current_sha256": "b667bafe7e4af4c42cd0d9d4113d1836f4c0bf7b0bf18bb930868d504750979c",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 70,
+      "original_count": 1,
+      "current_start": 72,
+      "current_count": 1,
+      "original": [
+        "\tPBLKHEADER pCacheHead;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Complete LF-normalized comparison has only original conditional-body exclusions; remaining source is identical.",
+  "limits": [
+    "Audit classification only; no new test execution or full guest integration pass.",
+    "Source-derived LF logical-line mismatches require compiler verification.",
+    "Existing exclusions are inventoried, not newly certified across all build contexts."
+  ]
+}

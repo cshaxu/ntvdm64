@@ -1,0 +1,293 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+  "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+  "before_sha256": "230f41939cd9567887dfbe5764eb8f566c18850812e261f87807155881f8c881",
+  "current_sha256": "d7efc6a77b661c9e9930b47528d2a22ade0bc0ab178973513a17b039031116ea",
+  "review_complete": true,
+  "register_entries": 9,
+  "changes": [
+    {
+      "original_start": 33,
+      "original_count": 0,
+      "current_start": 33,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "original_start": 346,
+      "original_count": 0,
+      "current_start": 349,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_setup_hardware_probe(\"com-open-enter\", (unsigned long)adapter, 0ul);"
+      ]
+    },
+    {
+      "original_start": 354,
+      "original_count": 0,
+      "current_start": 359,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    mvdm_softpc_report_setup_hardware_probe(\"com-open-leave\", (unsigned long)adapter,",
+        "        current->handle == (HANDLE)-1 ? GetLastError() : ERROR_SUCCESS);"
+      ]
+    },
+    {
+      "original_start": 1081,
+      "original_count": 0,
+      "current_start": 1065,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "\t    {",
+        "\t    DWORD baud_rate = (DWORD)arg;"
+      ]
+    },
+    {
+      "original_start": 1082,
+      "original_count": 1,
+      "current_start": 1068,
+      "current_count": 1,
+      "original": [
+        "\t    if (!FastCommSetBaudRate(current->handle, arg))"
+      ],
+      "current": [
+        "\t    if (!FastCommSetBaudRate(current->handle, baud_rate))"
+      ]
+    },
+    {
+      "original_start": 1084,
+      "original_count": 1,
+      "current_start": 1071,
+      "current_count": 1,
+      "original": [
+        "\t\tsprintf(BaudRateStr, \"(%d)\", arg);"
+      ],
+      "current": [
+        "\t\tsprintf(BaudRateStr, \"(%lu)\", baud_rate);"
+      ]
+    },
+    {
+      "original_start": 1086,
+      "original_count": 1,
+      "current_start": 1073,
+      "current_count": 1,
+      "original": [
+        "\t\talways_trace1(\"set BAUD failed - SetBaudRate:%d\", arg);"
+      ],
+      "current": [
+        "\t\talways_trace1(\"set BAUD failed - SetBaudRate:%lu\", baud_rate);"
+      ]
+    },
+    {
+      "original_start": 1088,
+      "original_count": 1,
+      "current_start": 1075,
+      "current_count": 1,
+      "original": [
+        "\t    current->ComStates.BaudRate = (DWORD)arg;"
+      ],
+      "current": [
+        "\t    current->ComStates.BaudRate = baud_rate;"
+      ]
+    },
+    {
+      "original_start": 1091,
+      "original_count": 0,
+      "current_start": 1078,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\t    }"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 57,
+      "original_count": 2,
+      "current_start": 60,
+      "current_count": 1,
+      "original": [
+        "GLOBAL boolean host_com_suspend(int adapter);",
+        "GLOBAL boolean host_com_resume(int adapter);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 389,
+      "original_count": 1,
+      "current_start": 398,
+      "current_count": 1,
+      "original": [
+        "    ica_iret_hook_control(current->controller, current->line, TRUE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected"
+      ]
+    },
+    {
+      "original_start": 713,
+      "original_count": 1,
+      "current_start": 724,
+      "current_count": 1,
+      "original": [
+        "\tica_iret_hook_control(current->controller, current->line, FALSE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected"
+      ]
+    },
+    {
+      "original_start": 744,
+      "original_count": 33,
+      "current_start": 758,
+      "current_count": 1,
+      "original": [
+        "GLOBAL CPU UTINY host_com_read_char( int adapter, FIFORXDATA * buffer, UTINY count)",
+        "{",
+        "    CURRENT_ADAPTER();",
+        "    UCHAR host_error;",
+        "    RXBUFCHARTYPE CharType;",
+        "    UTINY RetCount = count;",
+        "   /* if xoff is in progress, don't read nothing */",
+        "   if (!current->XOFFInProgress) {",
+        "\twhile (count) {",
+        "\t    CharType = GetCharacterTypeInBuffer(current);",
+        "\t    if (CharType == RXCHAR || CharType == CHARINERROR) {",
+        "\t\tbuffer->error = 0;",
+        "\t\tGetCharFromRXBuffer(current, CharType, &buffer->data, &host_error);",
+        "\t\tif (!host_error)",
+        "\t\t    buffer->error = MapHostToBaseError(host_error);",
+        "\t\tbuffer++;",
+        "\t\tcount--;",
+        "\t    }",
+        "\t    else",
+        "\t\tbreak;",
+        "\t}",
+        "    }",
+        "      /* Tell comms idle system that there has been comms activity */",
+        "    IDLE_comlpt();",
+        "    current->SuspendTickCounter = current->SuspendTimeoutTicks;",
+        "    return (RetCount - count);",
+        "",
+        "}",
+        "GLOBAL CPU void host_com_fifo_char_read(int adapter)",
+        "{",
+        "    CURRENT_ADAPTER();",
+        "    current->CharReadFromUART = TRUE;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 971,
+      "original_count": 2,
+      "current_start": 955,
+      "current_count": 1,
+      "original": [
+        "    if(error)",
+        "\talways_trace2(\"host_com_write error, adapter %d,%d\\n\",adapter,error);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1746,
+      "original_count": 1,
+      "current_start": 1737,
+      "current_count": 1,
+      "original": [
+        "\t    always_trace2(\"host_com_write error, adapter %d,%d\\n\", adapter, error);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1769,
+      "original_count": 2,
+      "current_start": 1762,
+      "current_count": 1,
+      "original": [
+        "\tif(error)",
+        "\t    always_trace2(\"host_com_write error, adapter %d,%d\\n\",adapter,error);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1791,
+      "original_count": 2,
+      "current_start": 1785,
+      "current_count": 1,
+      "original": [
+        "\t    always_trace2(\"host_com_write error, adapter %d,%d\\n\",adapter,",
+        "\t\t\t  error);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2172,
+      "original_count": 34,
+      "current_start": 2167,
+      "current_count": 1,
+      "original": [
+        "void host_com_state(int adapter)",
+        "{",
+        "",
+        "    CURRENT_ADAPTER();",
+        "",
+        "    printf(\"Adapter          %d\\n\\n\",adapter);",
+        "    printf(\"RX in control    %s\\n\", current->RX_in_Control ? \"TRUE\" : \"FALSE\");",
+        "    printf(\"XOFFInProgress   %s\\n\", current->XOFFInProgress ? \"TRUE\" : \"FALSE\");",
+        "",
+        "    printf(\"Head buffer ptr  %xh\\n\",current->head_inx);",
+        "    printf(\"Tail buffer ptr  %xh\\n\",current->tail_inx);",
+        "    printf(\"Bytes in buffer  %d\\n\",current->bytes_in_rxbuf);",
+        "",
+        "    printf(\"Bytes in TX buf  %d\\n\",current->no_tx_chars);",
+        "    printf(\"TX buf threshold %d\\n\",current->tx_threshold);",
+        "    printf(\"TX threshold max %d\\n\",current->max_tx_threshold);",
+        "    printf(\"TX flush count   %d\\n\",current->tx_flush_count);",
+        "    printf(\"TX timer count   %d\\n\",current->tx_heart_beat_count);",
+        "",
+        "    if(current->AdapterLock.DebugInfo)",
+        "    {",
+        "\tprintf(\"Adapter CS count %d\\n\",current->AdapterLock.DebugInfo->ContentionCount);",
+        "\tprintf(\"Data CS count    %d\\n\",current->CSEvent.DebugInfo->ContentionCount);",
+        "    }",
+        "",
+        "    printf(\"Bytes RX to date %d\\n\",byte_count);",
+        "    printf(\"Last read size   %d\\n\",lastread);",
+        "    printf(\"Avg read size    %d\\n\",byte_count && readcount ? byte_count/readcount : 0);",
+        "    printf(\"Zero reads       %d\\n\",zeroreads);",
+        "",
+        "    zeroreads = readcount = byte_count=0;",
+        "",
+        "    com_reg_dump();",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Nine substantive chunks:3 diagnostic additions and6 baud adaptation fragments; restored2 deleted blank lines.",
+  "counter_review": "Optional setup logging preserves last-error but owns no serial state. com.c computes115200/nonzero divisor within int; FastCommSetBaudRate still takes int and converts to ULONG. Remove added DWORD local/scope; retain original argument flow and fix long formatting with %ld, not original %d.",
+  "evidence": "com.c set_baud_rate; nt_ntfun.c FastCommSetBaudRate(HANDLE,int); nt_com.h; termination.c report_setup_hardware_probe. nt_com_mock_fixture currently ignores baud parameter and needs a forwarding assertion.",
+  "limits": "Two deleted blank lines restored; functional recommendations not implemented."
+}

@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+  "original_sha256": "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+  "current_sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 41,
+      "original_count": 1,
+      "current_start": 42,
+      "current_count": 1,
+      "original": [
+        "extern char szFrozenString[];"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef X86GFX"
+    }
+  ],
+  "initial_review": "X86GFX frozen-string declaration excluded for this header profile; remaining resource definitions and declarations unchanged.",
+  "counter_review": "Full normalized comparison confirms one complete original conditional body replacement only. No local implementation or ABI change; exclusion classification does not prove all include contexts or line mappings.",
+  "limits": "No new build or runtime verification."
+}

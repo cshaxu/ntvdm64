@@ -1,0 +1,52 @@
+{
+  "path": "src/mvdm-host/inc/memapi.h",
+  "original_sha256": "0e72109252dbec2a9c79b54d28d0c2bda0967644dd9d1d1d2d789e8fd8aa8c99",
+  "current_sha256": "ac1802fea4b33b75d8276b387244abd1ada7b045f3f4ae51cd6fd23a54726a2d",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 1,
+      "original_count": 0,
+      "current_start": 1,
+      "current_count": 4
+    },
+    {
+      "kind": "replace",
+      "original_start": 27,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 34,
+      "original_count": 1,
+      "current_start": 39,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 64,
+      "original_count": 1,
+      "current_start": 70,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 71,
+      "original_count": 1,
+      "current_start": 78,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 77,
+      "original_count": 1,
+      "current_start": 85,
+      "current_count": 2
+    }
+  ],
+  "scope": "five cdecl declarations; explanatory comment and line scaffolding",
+  "runtime_validation": "None; source review only"
+}

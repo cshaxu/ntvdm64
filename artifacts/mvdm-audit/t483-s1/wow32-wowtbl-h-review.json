@@ -1,0 +1,45 @@
+{
+  "path": "src/mvdm-host/wow32/wowtbl.h",
+  "original_sha256": "343409d8adc9c2f013fbc3c44c2c1f611556321832c95037ef7f90f7e439fe01",
+  "current_sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 45,
+      "original_count": 13,
+      "current_start": 47,
+      "current_count": 1,
+      "original": [
+        "",
+        "extern PSZ apszModNames[];",
+        "extern INT nModNames;",
+        "extern INT cAPIThunks;",
+        "",
+        "",
+        "",
+        "INT ModFromCallID(INT iFun);",
+        "PSZ GetModName(INT iFun);",
+        "INT GetOrdinal(INT iFun);",
+        "INT TableOffsetFromName(PSZ szTab);",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 48,
+      "original": 58,
+      "logical": 46
+    }
+  ],
+  "evidence": "Complete LF-normalized comparison has only original conditional-body exclusions; remaining source is identical.",
+  "limits": [
+    "Audit classification only; no new test execution or full guest integration pass.",
+    "Source-derived LF logical-line mismatches require compiler verification.",
+    "Existing exclusions are inventoried, not newly certified across all build contexts."
+  ]
+}

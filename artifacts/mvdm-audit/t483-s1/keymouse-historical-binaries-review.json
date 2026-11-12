@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/obj/i386/keyba.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\keymouse\\obj\\i386\\keyba.obj",
+    "sha256": "dca0845d1334c38fd213ac36350e111361ba09d6026fae27dd8c58d93f41921c",
+    "size": 72560,
+    "byte_identical": true,
+    "role": "Historical supplemental binary, not audited as production build input."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/obj/i386/keymouse.lib",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\keymouse\\obj\\i386\\keymouse.lib",
+    "sha256": "4867340273529e9c9b7ab147f8fa0a6c87e430cbe05e940b40010a22588f5624",
+    "size": 353278,
+    "byte_identical": true,
+    "role": "Historical supplemental binary, not audited as production build input."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/obj/i386/mouse.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\keymouse\\obj\\i386\\mouse.obj",
+    "sha256": "861ca9fc1b14ecafc69f879929e8ff14834b78e200d9a774ac4e58ed1f138941",
+    "size": 20826,
+    "byte_identical": true,
+    "role": "Historical supplemental binary, not audited as production build input."
+  }
+]

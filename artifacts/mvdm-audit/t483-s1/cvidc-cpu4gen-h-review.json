@@ -1,0 +1,1057 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+  "original_sha256": "c7775bb2a65b0c398b3d326b17bbc183526b7ba19736942f0db5d77dd6625127",
+  "current_sha256": "e0102639b6c90695353f3568592c29876e08c984f9d4996af89acd7630522435",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 187,
+      "original_count": 1,
+      "current_error_line": 188
+    },
+    {
+      "original_start": 200,
+      "original_count": 1,
+      "current_error_line": 204
+    },
+    {
+      "original_start": 213,
+      "original_count": 1,
+      "current_error_line": 220
+    },
+    {
+      "original_start": 226,
+      "original_count": 1,
+      "current_error_line": 236
+    },
+    {
+      "original_start": 239,
+      "original_count": 1,
+      "current_error_line": 252
+    },
+    {
+      "original_start": 252,
+      "original_count": 1,
+      "current_error_line": 268
+    },
+    {
+      "original_start": 265,
+      "original_count": 1,
+      "current_error_line": 284
+    },
+    {
+      "original_start": 278,
+      "original_count": 1,
+      "current_error_line": 300
+    },
+    {
+      "original_start": 291,
+      "original_count": 1,
+      "current_error_line": 316
+    },
+    {
+      "original_start": 304,
+      "original_count": 1,
+      "current_error_line": 332
+    },
+    {
+      "original_start": 317,
+      "original_count": 1,
+      "current_error_line": 348
+    },
+    {
+      "original_start": 330,
+      "original_count": 1,
+      "current_error_line": 364
+    },
+    {
+      "original_start": 343,
+      "original_count": 1,
+      "current_error_line": 380
+    },
+    {
+      "original_start": 356,
+      "original_count": 1,
+      "current_error_line": 396
+    },
+    {
+      "original_start": 369,
+      "original_count": 1,
+      "current_error_line": 412
+    },
+    {
+      "original_start": 382,
+      "original_count": 1,
+      "current_error_line": 428
+    },
+    {
+      "original_start": 395,
+      "original_count": 1,
+      "current_error_line": 444
+    },
+    {
+      "original_start": 408,
+      "original_count": 1,
+      "current_error_line": 460
+    },
+    {
+      "original_start": 421,
+      "original_count": 1,
+      "current_error_line": 476
+    },
+    {
+      "original_start": 434,
+      "original_count": 1,
+      "current_error_line": 492
+    },
+    {
+      "original_start": 447,
+      "original_count": 1,
+      "current_error_line": 508
+    },
+    {
+      "original_start": 460,
+      "original_count": 1,
+      "current_error_line": 524
+    },
+    {
+      "original_start": 473,
+      "original_count": 1,
+      "current_error_line": 540
+    },
+    {
+      "original_start": 486,
+      "original_count": 1,
+      "current_error_line": 556
+    },
+    {
+      "original_start": 499,
+      "original_count": 1,
+      "current_error_line": 572
+    },
+    {
+      "original_start": 512,
+      "original_count": 1,
+      "current_error_line": 588
+    },
+    {
+      "original_start": 525,
+      "original_count": 1,
+      "current_error_line": 604
+    },
+    {
+      "original_start": 538,
+      "original_count": 1,
+      "current_error_line": 620
+    },
+    {
+      "original_start": 551,
+      "original_count": 1,
+      "current_error_line": 636
+    },
+    {
+      "original_start": 564,
+      "original_count": 1,
+      "current_error_line": 652
+    },
+    {
+      "original_start": 577,
+      "original_count": 1,
+      "current_error_line": 668
+    },
+    {
+      "original_start": 590,
+      "original_count": 1,
+      "current_error_line": 684
+    },
+    {
+      "original_start": 603,
+      "original_count": 1,
+      "current_error_line": 700
+    },
+    {
+      "original_start": 616,
+      "original_count": 1,
+      "current_error_line": 716
+    },
+    {
+      "original_start": 629,
+      "original_count": 1,
+      "current_error_line": 732
+    },
+    {
+      "original_start": 642,
+      "original_count": 1,
+      "current_error_line": 748
+    },
+    {
+      "original_start": 655,
+      "original_count": 1,
+      "current_error_line": 764
+    },
+    {
+      "original_start": 668,
+      "original_count": 1,
+      "current_error_line": 780
+    },
+    {
+      "original_start": 681,
+      "original_count": 1,
+      "current_error_line": 796
+    },
+    {
+      "original_start": 694,
+      "original_count": 1,
+      "current_error_line": 812
+    },
+    {
+      "original_start": 707,
+      "original_count": 1,
+      "current_error_line": 828
+    },
+    {
+      "original_start": 720,
+      "original_count": 1,
+      "current_error_line": 844
+    },
+    {
+      "original_start": 733,
+      "original_count": 1,
+      "current_error_line": 860
+    },
+    {
+      "original_start": 746,
+      "original_count": 1,
+      "current_error_line": 876
+    },
+    {
+      "original_start": 759,
+      "original_count": 1,
+      "current_error_line": 892
+    },
+    {
+      "original_start": 772,
+      "original_count": 1,
+      "current_error_line": 908
+    },
+    {
+      "original_start": 785,
+      "original_count": 1,
+      "current_error_line": 924
+    },
+    {
+      "original_start": 798,
+      "original_count": 1,
+      "current_error_line": 940
+    },
+    {
+      "original_start": 811,
+      "original_count": 1,
+      "current_error_line": 956
+    },
+    {
+      "original_start": 824,
+      "original_count": 1,
+      "current_error_line": 972
+    },
+    {
+      "original_start": 837,
+      "original_count": 1,
+      "current_error_line": 988
+    },
+    {
+      "original_start": 850,
+      "original_count": 1,
+      "current_error_line": 1004
+    },
+    {
+      "original_start": 863,
+      "original_count": 1,
+      "current_error_line": 1020
+    },
+    {
+      "original_start": 876,
+      "original_count": 1,
+      "current_error_line": 1036
+    },
+    {
+      "original_start": 889,
+      "original_count": 1,
+      "current_error_line": 1052
+    },
+    {
+      "original_start": 902,
+      "original_count": 1,
+      "current_error_line": 1068
+    },
+    {
+      "original_start": 915,
+      "original_count": 1,
+      "current_error_line": 1084
+    },
+    {
+      "original_start": 928,
+      "original_count": 1,
+      "current_error_line": 1100
+    },
+    {
+      "original_start": 941,
+      "original_count": 1,
+      "current_error_line": 1116
+    },
+    {
+      "original_start": 954,
+      "original_count": 1,
+      "current_error_line": 1132
+    },
+    {
+      "original_start": 967,
+      "original_count": 1,
+      "current_error_line": 1148
+    },
+    {
+      "original_start": 980,
+      "original_count": 1,
+      "current_error_line": 1164
+    },
+    {
+      "original_start": 993,
+      "original_count": 1,
+      "current_error_line": 1180
+    },
+    {
+      "original_start": 1006,
+      "original_count": 1,
+      "current_error_line": 1196
+    },
+    {
+      "original_start": 1019,
+      "original_count": 1,
+      "current_error_line": 1212
+    },
+    {
+      "original_start": 1032,
+      "original_count": 1,
+      "current_error_line": 1228
+    },
+    {
+      "original_start": 1045,
+      "original_count": 1,
+      "current_error_line": 1244
+    },
+    {
+      "original_start": 1058,
+      "original_count": 1,
+      "current_error_line": 1260
+    },
+    {
+      "original_start": 1071,
+      "original_count": 1,
+      "current_error_line": 1276
+    },
+    {
+      "original_start": 1084,
+      "original_count": 1,
+      "current_error_line": 1292
+    },
+    {
+      "original_start": 1097,
+      "original_count": 1,
+      "current_error_line": 1308
+    },
+    {
+      "original_start": 1110,
+      "original_count": 1,
+      "current_error_line": 1324
+    },
+    {
+      "original_start": 1123,
+      "original_count": 1,
+      "current_error_line": 1340
+    },
+    {
+      "original_start": 1136,
+      "original_count": 1,
+      "current_error_line": 1356
+    },
+    {
+      "original_start": 1149,
+      "original_count": 1,
+      "current_error_line": 1372
+    },
+    {
+      "original_start": 1162,
+      "original_count": 1,
+      "current_error_line": 1388
+    },
+    {
+      "original_start": 1175,
+      "original_count": 1,
+      "current_error_line": 1404
+    },
+    {
+      "original_start": 1188,
+      "original_count": 1,
+      "current_error_line": 1420
+    },
+    {
+      "original_start": 1201,
+      "original_count": 1,
+      "current_error_line": 1436
+    },
+    {
+      "original_start": 1214,
+      "original_count": 1,
+      "current_error_line": 1452
+    },
+    {
+      "original_start": 1227,
+      "original_count": 1,
+      "current_error_line": 1468
+    },
+    {
+      "original_start": 1240,
+      "original_count": 1,
+      "current_error_line": 1484
+    },
+    {
+      "original_start": 1253,
+      "original_count": 1,
+      "current_error_line": 1500
+    },
+    {
+      "original_start": 1266,
+      "original_count": 1,
+      "current_error_line": 1516
+    },
+    {
+      "original_start": 1279,
+      "original_count": 1,
+      "current_error_line": 1532
+    },
+    {
+      "original_start": 1292,
+      "original_count": 1,
+      "current_error_line": 1548
+    },
+    {
+      "original_start": 1305,
+      "original_count": 1,
+      "current_error_line": 1564
+    },
+    {
+      "original_start": 1318,
+      "original_count": 1,
+      "current_error_line": 1580
+    },
+    {
+      "original_start": 1331,
+      "original_count": 1,
+      "current_error_line": 1596
+    },
+    {
+      "original_start": 1344,
+      "original_count": 1,
+      "current_error_line": 1612
+    },
+    {
+      "original_start": 1357,
+      "original_count": 1,
+      "current_error_line": 1628
+    },
+    {
+      "original_start": 1370,
+      "original_count": 1,
+      "current_error_line": 1644
+    },
+    {
+      "original_start": 1383,
+      "original_count": 1,
+      "current_error_line": 1660
+    },
+    {
+      "original_start": 1396,
+      "original_count": 1,
+      "current_error_line": 1676
+    },
+    {
+      "original_start": 1409,
+      "original_count": 1,
+      "current_error_line": 1692
+    },
+    {
+      "original_start": 1422,
+      "original_count": 1,
+      "current_error_line": 1708
+    },
+    {
+      "original_start": 1435,
+      "original_count": 1,
+      "current_error_line": 1724
+    },
+    {
+      "original_start": 1448,
+      "original_count": 1,
+      "current_error_line": 1740
+    },
+    {
+      "original_start": 1461,
+      "original_count": 1,
+      "current_error_line": 1756
+    },
+    {
+      "original_start": 1474,
+      "original_count": 1,
+      "current_error_line": 1772
+    },
+    {
+      "original_start": 1487,
+      "original_count": 1,
+      "current_error_line": 1788
+    },
+    {
+      "original_start": 1500,
+      "original_count": 1,
+      "current_error_line": 1804
+    },
+    {
+      "original_start": 1513,
+      "original_count": 1,
+      "current_error_line": 1820
+    },
+    {
+      "original_start": 1526,
+      "original_count": 1,
+      "current_error_line": 1836
+    },
+    {
+      "original_start": 1539,
+      "original_count": 1,
+      "current_error_line": 1852
+    },
+    {
+      "original_start": 1552,
+      "original_count": 1,
+      "current_error_line": 1868
+    },
+    {
+      "original_start": 1565,
+      "original_count": 1,
+      "current_error_line": 1884
+    },
+    {
+      "original_start": 1578,
+      "original_count": 1,
+      "current_error_line": 1900
+    },
+    {
+      "original_start": 1591,
+      "original_count": 1,
+      "current_error_line": 1916
+    },
+    {
+      "original_start": 1604,
+      "original_count": 1,
+      "current_error_line": 1932
+    },
+    {
+      "original_start": 1617,
+      "original_count": 1,
+      "current_error_line": 1948
+    },
+    {
+      "original_start": 1630,
+      "original_count": 1,
+      "current_error_line": 1964
+    },
+    {
+      "original_start": 1643,
+      "original_count": 1,
+      "current_error_line": 1980
+    },
+    {
+      "original_start": 1656,
+      "original_count": 1,
+      "current_error_line": 1996
+    },
+    {
+      "original_start": 1669,
+      "original_count": 1,
+      "current_error_line": 2012
+    },
+    {
+      "original_start": 1682,
+      "original_count": 1,
+      "current_error_line": 2028
+    },
+    {
+      "original_start": 1695,
+      "original_count": 1,
+      "current_error_line": 2044
+    },
+    {
+      "original_start": 1708,
+      "original_count": 1,
+      "current_error_line": 2060
+    },
+    {
+      "original_start": 1721,
+      "original_count": 1,
+      "current_error_line": 2076
+    },
+    {
+      "original_start": 1734,
+      "original_count": 1,
+      "current_error_line": 2092
+    },
+    {
+      "original_start": 1747,
+      "original_count": 1,
+      "current_error_line": 2108
+    },
+    {
+      "original_start": 1760,
+      "original_count": 1,
+      "current_error_line": 2124
+    },
+    {
+      "original_start": 1773,
+      "original_count": 1,
+      "current_error_line": 2140
+    },
+    {
+      "original_start": 1786,
+      "original_count": 1,
+      "current_error_line": 2156
+    },
+    {
+      "original_start": 1799,
+      "original_count": 1,
+      "current_error_line": 2172
+    },
+    {
+      "original_start": 1812,
+      "original_count": 1,
+      "current_error_line": 2188
+    },
+    {
+      "original_start": 1825,
+      "original_count": 1,
+      "current_error_line": 2204
+    },
+    {
+      "original_start": 1838,
+      "original_count": 1,
+      "current_error_line": 2220
+    },
+    {
+      "original_start": 1851,
+      "original_count": 1,
+      "current_error_line": 2236
+    },
+    {
+      "original_start": 1864,
+      "original_count": 1,
+      "current_error_line": 2252
+    },
+    {
+      "original_start": 1877,
+      "original_count": 1,
+      "current_error_line": 2268
+    },
+    {
+      "original_start": 1890,
+      "original_count": 1,
+      "current_error_line": 2284
+    },
+    {
+      "original_start": 1903,
+      "original_count": 1,
+      "current_error_line": 2300
+    },
+    {
+      "original_start": 1916,
+      "original_count": 1,
+      "current_error_line": 2316
+    },
+    {
+      "original_start": 1929,
+      "original_count": 1,
+      "current_error_line": 2332
+    },
+    {
+      "original_start": 1942,
+      "original_count": 1,
+      "current_error_line": 2348
+    },
+    {
+      "original_start": 1955,
+      "original_count": 1,
+      "current_error_line": 2364
+    },
+    {
+      "original_start": 1968,
+      "original_count": 1,
+      "current_error_line": 2380
+    },
+    {
+      "original_start": 1981,
+      "original_count": 1,
+      "current_error_line": 2396
+    },
+    {
+      "original_start": 1994,
+      "original_count": 1,
+      "current_error_line": 2412
+    },
+    {
+      "original_start": 2007,
+      "original_count": 1,
+      "current_error_line": 2428
+    },
+    {
+      "original_start": 2020,
+      "original_count": 1,
+      "current_error_line": 2444
+    },
+    {
+      "original_start": 2033,
+      "original_count": 1,
+      "current_error_line": 2460
+    },
+    {
+      "original_start": 2046,
+      "original_count": 1,
+      "current_error_line": 2476
+    },
+    {
+      "original_start": 2059,
+      "original_count": 1,
+      "current_error_line": 2492
+    },
+    {
+      "original_start": 2072,
+      "original_count": 1,
+      "current_error_line": 2508
+    },
+    {
+      "original_start": 2085,
+      "original_count": 1,
+      "current_error_line": 2524
+    },
+    {
+      "original_start": 2098,
+      "original_count": 1,
+      "current_error_line": 2540
+    },
+    {
+      "original_start": 2111,
+      "original_count": 1,
+      "current_error_line": 2556
+    },
+    {
+      "original_start": 2124,
+      "original_count": 1,
+      "current_error_line": 2572
+    },
+    {
+      "original_start": 2137,
+      "original_count": 1,
+      "current_error_line": 2588
+    },
+    {
+      "original_start": 2150,
+      "original_count": 1,
+      "current_error_line": 2604
+    },
+    {
+      "original_start": 2163,
+      "original_count": 1,
+      "current_error_line": 2620
+    },
+    {
+      "original_start": 2176,
+      "original_count": 1,
+      "current_error_line": 2636
+    },
+    {
+      "original_start": 2251,
+      "original_count": 1,
+      "current_error_line": 2714
+    },
+    {
+      "original_start": 2264,
+      "original_count": 1,
+      "current_error_line": 2730
+    },
+    {
+      "original_start": 2277,
+      "original_count": 1,
+      "current_error_line": 2746
+    },
+    {
+      "original_start": 2290,
+      "original_count": 1,
+      "current_error_line": 2762
+    },
+    {
+      "original_start": 2303,
+      "original_count": 1,
+      "current_error_line": 2778
+    },
+    {
+      "original_start": 2316,
+      "original_count": 1,
+      "current_error_line": 2794
+    },
+    {
+      "original_start": 2329,
+      "original_count": 1,
+      "current_error_line": 2810
+    },
+    {
+      "original_start": 2342,
+      "original_count": 1,
+      "current_error_line": 2826
+    },
+    {
+      "original_start": 2355,
+      "original_count": 1,
+      "current_error_line": 2842
+    },
+    {
+      "original_start": 2368,
+      "original_count": 1,
+      "current_error_line": 2858
+    },
+    {
+      "original_start": 2381,
+      "original_count": 1,
+      "current_error_line": 2874
+    },
+    {
+      "original_start": 2394,
+      "original_count": 1,
+      "current_error_line": 2890
+    },
+    {
+      "original_start": 2407,
+      "original_count": 1,
+      "current_error_line": 2906
+    },
+    {
+      "original_start": 2420,
+      "original_count": 1,
+      "current_error_line": 2922
+    },
+    {
+      "original_start": 2433,
+      "original_count": 1,
+      "current_error_line": 2938
+    },
+    {
+      "original_start": 2446,
+      "original_count": 1,
+      "current_error_line": 2954
+    },
+    {
+      "original_start": 2459,
+      "original_count": 1,
+      "current_error_line": 2970
+    },
+    {
+      "original_start": 2472,
+      "original_count": 1,
+      "current_error_line": 2986
+    },
+    {
+      "original_start": 2485,
+      "original_count": 1,
+      "current_error_line": 3002
+    },
+    {
+      "original_start": 2498,
+      "original_count": 1,
+      "current_error_line": 3018
+    },
+    {
+      "original_start": 2511,
+      "original_count": 1,
+      "current_error_line": 3034
+    },
+    {
+      "original_start": 2524,
+      "original_count": 1,
+      "current_error_line": 3050
+    },
+    {
+      "original_start": 2537,
+      "original_count": 1,
+      "current_error_line": 3066
+    },
+    {
+      "original_start": 2550,
+      "original_count": 1,
+      "current_error_line": 3082
+    },
+    {
+      "original_start": 2563,
+      "original_count": 1,
+      "current_error_line": 3098
+    },
+    {
+      "original_start": 2576,
+      "original_count": 1,
+      "current_error_line": 3114
+    },
+    {
+      "original_start": 2589,
+      "original_count": 1,
+      "current_error_line": 3130
+    },
+    {
+      "original_start": 2602,
+      "original_count": 1,
+      "current_error_line": 3146
+    },
+    {
+      "original_start": 2615,
+      "original_count": 1,
+      "current_error_line": 3162
+    },
+    {
+      "original_start": 2628,
+      "original_count": 1,
+      "current_error_line": 3178
+    },
+    {
+      "original_start": 2641,
+      "original_count": 1,
+      "current_error_line": 3194
+    },
+    {
+      "original_start": 2654,
+      "original_count": 1,
+      "current_error_line": 3210
+    },
+    {
+      "original_start": 2667,
+      "original_count": 1,
+      "current_error_line": 3226
+    },
+    {
+      "original_start": 2680,
+      "original_count": 1,
+      "current_error_line": 3242
+    },
+    {
+      "original_start": 2693,
+      "original_count": 1,
+      "current_error_line": 3258
+    },
+    {
+      "original_start": 2706,
+      "original_count": 1,
+      "current_error_line": 3274
+    },
+    {
+      "original_start": 2719,
+      "original_count": 1,
+      "current_error_line": 3290
+    },
+    {
+      "original_start": 2732,
+      "original_count": 1,
+      "current_error_line": 3306
+    },
+    {
+      "original_start": 2745,
+      "original_count": 1,
+      "current_error_line": 3322
+    },
+    {
+      "original_start": 2758,
+      "original_count": 1,
+      "current_error_line": 3338
+    },
+    {
+      "original_start": 2771,
+      "original_count": 1,
+      "current_error_line": 3354
+    },
+    {
+      "original_start": 2784,
+      "original_count": 1,
+      "current_error_line": 3370
+    },
+    {
+      "original_start": 2797,
+      "original_count": 1,
+      "current_error_line": 3386
+    },
+    {
+      "original_start": 2810,
+      "original_count": 1,
+      "current_error_line": 3402
+    },
+    {
+      "original_start": 2823,
+      "original_count": 1,
+      "current_error_line": 3418
+    },
+    {
+      "original_start": 2836,
+      "original_count": 1,
+      "current_error_line": 3434
+    },
+    {
+      "original_start": 2849,
+      "original_count": 1,
+      "current_error_line": 3450
+    },
+    {
+      "original_start": 2862,
+      "original_count": 1,
+      "current_error_line": 3466
+    },
+    {
+      "original_start": 2875,
+      "original_count": 1,
+      "current_error_line": 3482
+    },
+    {
+      "original_start": 2888,
+      "original_count": 1,
+      "current_error_line": 3498
+    },
+    {
+      "original_start": 2900,
+      "original_count": 1,
+      "current_error_line": 3513
+    },
+    {
+      "original_start": 2913,
+      "original_count": 1,
+      "current_error_line": 3529
+    },
+    {
+      "original_start": 2925,
+      "original_count": 1,
+      "current_error_line": 3544
+    },
+    {
+      "original_start": 2937,
+      "original_count": 1,
+      "current_error_line": 3559
+    },
+    {
+      "original_start": 2949,
+      "original_count": 1,
+      "current_error_line": 3574
+    }
+  ],
+  "counter_review": "Whole-file original comparison; header remaining substantive source identical outside excluded bodies. Metadata has only the recorded retired flag deletion.",
+  "limits": "No new runtime/build result or blanket exclusion/line proof."
+}

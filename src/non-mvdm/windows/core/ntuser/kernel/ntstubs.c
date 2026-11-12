@@ -1,6 +1,16 @@
-/* Copyright (c) Microsoft Corporation.
- * Original windows/core/ntuser/kernel/ntstubs.c true subset.
- * DIVERGENCE(OPENNT-HOST-076): retain NtUserSetWindowFNID unchanged;
+/****************************** Module Header ******************************\
+* Module Name: ntstubs.c
+*
+* Copyright (c) 1985-95, Microsoft Corporation
+*
+* Kernel-mode stubs
+*
+* History:
+* 03-16-95 JimA             Created.
+* 08-12-96 jparsons         Added lparam validate for WM_NCCREATE [51986]
+\***************************************************************************/
+
+/* DIVERGENCE(OPENNT-HOST-076): retain NtUserSetWindowFNID unchanged;
  * scoped original EDITWND storage replaces the unavailable receive shell. */
 #define WOW_ORIGINAL_EDIT_STATE
 #include "wow_edit_state_bindings.h"

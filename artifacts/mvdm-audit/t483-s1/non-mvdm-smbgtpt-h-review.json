@@ -1,0 +1,843 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+  "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+  "current_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 84,
+      "original_count": 4,
+      "current_start": 88,
+      "current_count": 1,
+      "original": [
+        "#define SmbGetUshort(SrcAddress) (USHORT)(          \\",
+        "            ( ( (PUCHAR)(SrcAddress) )[0]       ) | \\",
+        "            ( ( (PUCHAR)(SrcAddress) )[1] <<  8 )   \\",
+        "            )"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 90,
+      "original_count": 4,
+      "current_start": 93,
+      "current_count": 1,
+      "original": [
+        "#define SmbGetUshort(SrcAddress) (USHORT)(                  \\",
+        "            ( ( (PUCHAR)(SrcAddress ## S) )[0]       ) |    \\",
+        "            ( ( (PUCHAR)(SrcAddress ## S) )[1] <<  8 )      \\",
+        "            )"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 97,
+      "original_count": 6,
+      "current_start": 99,
+      "current_count": 1,
+      "original": [
+        "",
+        "USHORT",
+        "SmbGetUshort (",
+        "    IN PSMB_USHORT SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 133,
+      "original_count": 1,
+      "current_start": 134,
+      "current_count": 1,
+      "original": [
+        "#define SmbGetAlignedUshort(SrcAddress) *(SrcAddress ## S)"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 137,
+      "original_count": 6,
+      "current_start": 140,
+      "current_count": 1,
+      "original": [
+        "",
+        "USHORT",
+        "SmbGetAlignedUshort (",
+        "    IN PUSHORT SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 179,
+      "original_count": 4,
+      "current_start": 182,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutUshort(DestAddress,Value) {                   \\",
+        "            ( (PUCHAR)(DestAddress) )[0] = BYTE_0(Value);   \\",
+        "            ( (PUCHAR)(DestAddress) )[1] = BYTE_1(Value);   \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 185,
+      "original_count": 4,
+      "current_start": 187,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutUshort(DestAddress,Value) {                       \\",
+        "            ( (PUCHAR)(DestAddress ## S) )[0] = BYTE_0(Value);  \\",
+        "            ( (PUCHAR)(DestAddress ## S) )[1] = BYTE_1(Value);  \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 192,
+      "original_count": 7,
+      "current_start": 193,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbPutUshort (",
+        "    OUT PSMB_USHORT DestAddress,",
+        "    IN USHORT Value",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 234,
+      "original_count": 1,
+      "current_start": 233,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutAlignedUshort(DestAddress,Value) *(DestAddress ## S) = (Value)"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 238,
+      "original_count": 7,
+      "current_start": 239,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbPutAlignedUshort (",
+        "    OUT PUSHORT DestAddress,",
+        "    IN USHORT Value",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 280,
+      "original_count": 4,
+      "current_start": 280,
+      "current_count": 1,
+      "original": [
+        "#define SmbMoveUshort(DestAddress,SrcAddress) {                         \\",
+        "            ( (PUCHAR)(DestAddress) )[0] = ( (PUCHAR)(SrcAddress) )[0]; \\",
+        "            ( (PUCHAR)(DestAddress) )[1] = ( (PUCHAR)(SrcAddress) )[1]; \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 286,
+      "original_count": 4,
+      "current_start": 285,
+      "current_count": 1,
+      "original": [
+        "#define SmbMoveUshort(DestAddress,SrcAddress) {                                     \\",
+        "            ( (PUCHAR)(DestAddress ## S) )[0] = ( (PUCHAR)(SrcAddress ## S) )[0];   \\",
+        "            ( (PUCHAR)(DestAddress ## S) )[1] = ( (PUCHAR)(SrcAddress ## S) )[1];   \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 7,
+      "current_start": 291,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbMoveUshort (",
+        "    OUT PSMB_USHORT DestAddress,",
+        "    IN PSMB_USHORT SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 330,
+      "original_count": 6,
+      "current_start": 327,
+      "current_count": 1,
+      "original": [
+        "#define SmbGetUlong(SrcAddress) (ULONG)(                \\",
+        "            ( ( (PUCHAR)(SrcAddress) )[0]       ) |     \\",
+        "            ( ( (PUCHAR)(SrcAddress) )[1] <<  8 ) |     \\",
+        "            ( ( (PUCHAR)(SrcAddress) )[2] << 16 ) |     \\",
+        "            ( ( (PUCHAR)(SrcAddress) )[3] << 24 )       \\",
+        "            )"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 338,
+      "original_count": 6,
+      "current_start": 332,
+      "current_count": 1,
+      "original": [
+        "#define SmbGetUlong(SrcAddress) (ULONG)(                    \\",
+        "            ( ( (PUCHAR)(SrcAddress ## L) )[0]       ) |    \\",
+        "            ( ( (PUCHAR)(SrcAddress ## L) )[1] <<  8 ) |    \\",
+        "            ( ( (PUCHAR)(SrcAddress ## L) )[2] << 16 ) |    \\",
+        "            ( ( (PUCHAR)(SrcAddress ## L) )[3] << 24 )      \\",
+        "            )"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 347,
+      "original_count": 6,
+      "current_start": 338,
+      "current_count": 1,
+      "original": [
+        "",
+        "ULONG",
+        "SmbGetUlong (",
+        "    IN PSMB_ULONG SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 383,
+      "original_count": 1,
+      "current_start": 373,
+      "current_count": 1,
+      "original": [
+        "#define SmbGetAlignedUlong(SrcAddress) *(SrcAddress ## L)"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 387,
+      "original_count": 6,
+      "current_start": 379,
+      "current_count": 1,
+      "original": [
+        "",
+        "ULONG",
+        "SmbGetAlignedUlong (",
+        "    IN PULONG SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 427,
+      "original_count": 6,
+      "current_start": 419,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutUlong(DestAddress,Value) {                    \\",
+        "            ( (PUCHAR)(DestAddress) )[0] = BYTE_0(Value);   \\",
+        "            ( (PUCHAR)(DestAddress) )[1] = BYTE_1(Value);   \\",
+        "            ( (PUCHAR)(DestAddress) )[2] = BYTE_2(Value);   \\",
+        "            ( (PUCHAR)(DestAddress) )[3] = BYTE_3(Value);   \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 435,
+      "original_count": 6,
+      "current_start": 424,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutUlong(DestAddress,Value) {                        \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[0] = BYTE_0(Value);  \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[1] = BYTE_1(Value);  \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[2] = BYTE_2(Value);  \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[3] = BYTE_3(Value);  \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 444,
+      "original_count": 7,
+      "current_start": 430,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbPutUlong (",
+        "    OUT PSMB_ULONG DestAddress,",
+        "    IN ULONG Value",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 486,
+      "original_count": 1,
+      "current_start": 470,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutAlignedUlong(DestAddress,Value) *(DestAddress ## L) = (Value)"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 490,
+      "original_count": 7,
+      "current_start": 476,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbPutAlignedUlong (",
+        "    OUT PULONG DestAddress,",
+        "    IN ULONG Value",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 532,
+      "original_count": 6,
+      "current_start": 517,
+      "current_count": 1,
+      "original": [
+        "#define SmbMoveUlong(DestAddress,SrcAddress) {                          \\",
+        "            ( (PUCHAR)(DestAddress) )[0] = ( (PUCHAR)(SrcAddress) )[0]; \\",
+        "            ( (PUCHAR)(DestAddress) )[1] = ( (PUCHAR)(SrcAddress) )[1]; \\",
+        "            ( (PUCHAR)(DestAddress) )[2] = ( (PUCHAR)(SrcAddress) )[2]; \\",
+        "            ( (PUCHAR)(DestAddress) )[3] = ( (PUCHAR)(SrcAddress) )[3]; \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 540,
+      "original_count": 6,
+      "current_start": 522,
+      "current_count": 1,
+      "original": [
+        "#define SmbMoveUlong(DestAddress,SrcAddress) {                                      \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[0] = ( (PUCHAR)(SrcAddress ## L) )[0];   \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[1] = ( (PUCHAR)(SrcAddress ## L) )[1];   \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[2] = ( (PUCHAR)(SrcAddress ## L) )[2];   \\",
+        "            ( (PUCHAR)(DestAddress ## L) )[3] = ( (PUCHAR)(SrcAddress ## L) )[3];   \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB debug field-name profile is not supported"
+      ]
+    },
+    {
+      "original_start": 549,
+      "original_count": 7,
+      "current_start": 528,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbMoveUlong (",
+        "    OUT PSMB_ULONG DestAddress,",
+        "    IN PSMB_ULONG SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 591,
+      "original_count": 4,
+      "current_start": 568,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutDate(DestAddress,Value) {                                     \\",
+        "            ( (PUCHAR)&(DestAddress)->Ushort )[0] = BYTE_0((Value).Ushort); \\",
+        "            ( (PUCHAR)&(DestAddress)->Ushort )[1] = BYTE_1((Value).Ushort); \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 598,
+      "original_count": 7,
+      "current_start": 574,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbPutDate (",
+        "    OUT PSMB_DATE DestAddress,",
+        "    IN SMB_DATE Value",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 645,
+      "original_count": 4,
+      "current_start": 619,
+      "current_count": 1,
+      "original": [
+        "#define SmbMoveDate(DestAddress,SrcAddress)                         \\",
+        "            (DestAddress)->Ushort =                                 \\",
+        "                ( ( (PUCHAR)&(SrcAddress)->Ushort )[0]       ) |    \\",
+        "                ( ( (PUCHAR)&(SrcAddress)->Ushort )[1] <<  8 )"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 652,
+      "original_count": 7,
+      "current_start": 625,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbMoveDate (",
+        "    OUT PSMB_DATE DestAddress,",
+        "    IN PSMB_DATE SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 687,
+      "original_count": 4,
+      "current_start": 658,
+      "current_count": 1,
+      "original": [
+        "#define SmbZeroDate(Date) {                     \\",
+        "            ( (PUCHAR)&(Date)->Ushort )[0] = 0; \\",
+        "            ( (PUCHAR)&(Date)->Ushort )[1] = 0; \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 694,
+      "original_count": 6,
+      "current_start": 664,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbZeroDate (",
+        "    IN PSMB_DATE Date",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 728,
+      "original_count": 6,
+      "current_start": 696,
+      "current_count": 1,
+      "original": [
+        "",
+        "BOOLEAN",
+        "SmbIsDateZero (",
+        "    IN PSMB_DATE Date",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 769,
+      "original_count": 4,
+      "current_start": 736,
+      "current_count": 1,
+      "original": [
+        "#define SmbPutTime(DestAddress,Value) {                                     \\",
+        "            ( (PUCHAR)&(DestAddress)->Ushort )[0] = BYTE_0((Value).Ushort); \\",
+        "            ( (PUCHAR)&(DestAddress)->Ushort )[1] = BYTE_1((Value).Ushort); \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 776,
+      "original_count": 7,
+      "current_start": 742,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbPutTime (",
+        "    OUT PSMB_TIME DestAddress,",
+        "    IN SMB_TIME Value",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 823,
+      "original_count": 4,
+      "current_start": 787,
+      "current_count": 1,
+      "original": [
+        "#define SmbMoveTime(DestAddress,SrcAddress)                         \\",
+        "            (DestAddress)->Ushort =                                 \\",
+        "                ( ( (PUCHAR)&(SrcAddress)->Ushort )[0]       ) |    \\",
+        "                ( ( (PUCHAR)&(SrcAddress)->Ushort )[1] <<  8 )"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 830,
+      "original_count": 7,
+      "current_start": 793,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbMoveTime (",
+        "    OUT PSMB_TIME DestAddress,",
+        "    IN PSMB_TIME SrcAddress",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 865,
+      "original_count": 4,
+      "current_start": 826,
+      "current_count": 1,
+      "original": [
+        "#define SmbZeroTime(Time) {                     \\",
+        "            ( (PUCHAR)&(Time)->Ushort )[0] = 0; \\",
+        "            ( (PUCHAR)&(Time)->Ushort )[1] = 0; \\",
+        "        }"
+      ],
+      "current": [
+        "#error SMB bytewise alignment profile is not supported"
+      ]
+    },
+    {
+      "original_start": 872,
+      "original_count": 6,
+      "current_start": 832,
+      "current_count": 1,
+      "original": [
+        "",
+        "VOID",
+        "SmbZeroTime (",
+        "    IN PSMB_TIME Time",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    },
+    {
+      "original_start": 907,
+      "original_count": 6,
+      "current_start": 865,
+      "current_count": 1,
+      "original": [
+        "",
+        "BOOLEAN",
+        "SmbIsTimeZero (",
+        "    IN PSMB_TIME Time",
+        "    );",
+        ""
+      ],
+      "current": [
+        "#error SMB debug get/put profile is not supported"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 88,
+      "current": 89,
+      "logical": 85
+    },
+    {
+      "original": 94,
+      "current": 94,
+      "logical": 91
+    },
+    {
+      "original": 103,
+      "current": 100,
+      "logical": 98
+    },
+    {
+      "original": 143,
+      "current": 141,
+      "logical": 138
+    },
+    {
+      "original": 183,
+      "current": 183,
+      "logical": 180
+    },
+    {
+      "original": 189,
+      "current": 188,
+      "logical": 186
+    },
+    {
+      "original": 199,
+      "current": 194,
+      "logical": 193
+    },
+    {
+      "original": 245,
+      "current": 240,
+      "logical": 239
+    },
+    {
+      "original": 284,
+      "current": 281,
+      "logical": 281
+    },
+    {
+      "original": 290,
+      "current": 286,
+      "logical": 287
+    },
+    {
+      "original": 300,
+      "current": 292,
+      "logical": 294
+    },
+    {
+      "original": 336,
+      "current": 328,
+      "logical": 331
+    },
+    {
+      "original": 344,
+      "current": 333,
+      "logical": 339
+    },
+    {
+      "original": 353,
+      "current": 339,
+      "logical": 348
+    },
+    {
+      "original": 393,
+      "current": 380,
+      "logical": 388
+    },
+    {
+      "original": 433,
+      "current": 420,
+      "logical": 428
+    },
+    {
+      "original": 441,
+      "current": 425,
+      "logical": 436
+    },
+    {
+      "original": 451,
+      "current": 431,
+      "logical": 445
+    },
+    {
+      "original": 497,
+      "current": 477,
+      "logical": 491
+    },
+    {
+      "original": 538,
+      "current": 518,
+      "logical": 533
+    },
+    {
+      "original": 546,
+      "current": 523,
+      "logical": 541
+    },
+    {
+      "original": 556,
+      "current": 529,
+      "logical": 550
+    },
+    {
+      "original": 595,
+      "current": 569,
+      "logical": 592
+    },
+    {
+      "original": 605,
+      "current": 575,
+      "logical": 599
+    },
+    {
+      "original": 649,
+      "current": 620,
+      "logical": 646
+    },
+    {
+      "original": 659,
+      "current": 626,
+      "logical": 653
+    },
+    {
+      "original": 691,
+      "current": 659,
+      "logical": 688
+    },
+    {
+      "original": 700,
+      "current": 665,
+      "logical": 695
+    },
+    {
+      "original": 734,
+      "current": 697,
+      "logical": 729
+    },
+    {
+      "original": 773,
+      "current": 737,
+      "logical": 770
+    },
+    {
+      "original": 783,
+      "current": 743,
+      "logical": 777
+    },
+    {
+      "original": 827,
+      "current": 788,
+      "logical": 824
+    },
+    {
+      "original": 837,
+      "current": 794,
+      "logical": 831
+    },
+    {
+      "original": 869,
+      "current": 827,
+      "logical": 866
+    },
+    {
+      "original": 878,
+      "current": 833,
+      "logical": 873
+    },
+    {
+      "original": 913,
+      "current": 866,
+      "logical": 908
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "test/mvdm-host/vdmredir/server_enum_test.c"
+  ],
+  "limits": "Complete retained-text comparison: original selected definitions unchanged. Bytewise/debug SMB and AMD64 alignment exclusions are not certified for every build context here. Native service x64 support does not imply these selected x86 Redirector headers support x64. No new compile/runtime."
+}

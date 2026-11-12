@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+  "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+  "current_sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 24,
+      "original_count": 5,
+      "current_start": 24,
+      "current_count": 9
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 120,
+      "original_count": 1
+    },
+    {
+      "original_start": 169,
+      "original_count": 2
+    },
+    {
+      "original_start": 264,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Five marking callback return types changed boolean to void; three platform-only bodies excluded.",
+  "counter_review": "Original gfx_updt.c:3438-3547 CGA/EGA providers return VOID; original assignments at3626-3659 cast them to boolean callbacks. Current callers in ega_vide.c/vga_vide.c discard marking results, while scroll results remain boolean. Retain return-type correction. Countercheck: original simple_update returns boolean and current version VOID; zero-argument simple_update and two-argument cga_mark_string assigned to three-argument mark_wfill still require provider/arity audit. This header correction alone does not prove complete callback type safety.",
+  "limits": "Source review; no new compilation/runtime or universal branch-reachability certification. Callback arity closure explicitly unproved for gfx_upd.h."
+}

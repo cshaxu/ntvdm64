@@ -1,0 +1,49 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+  "original_sha256": "4de067c013b25120a09ec7d7a0bb5f0fe16eaba59b665aadbcf891cdfba0caef",
+  "current_sha256": "466d69a12cfd774f5ea373d0a3065dcc12022ac18ae9bddd372217e9349071b7",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "original_start": 409,
+      "original_count": 1,
+      "current_start": 409,
+      "current_count": 1,
+      "original": [
+        ""
+      ],
+      "current": [
+        "/* DIV-873: table extent is not an index; retain the original unmapped result. */"
+      ]
+    },
+    {
+      "original_start": 419,
+      "original_count": 1,
+      "current_start": 419,
+      "current_count": 1,
+      "original": [
+        "        return  KeyEvent->wVirtualScanCode > sizeof(Scan1ToKeynum)"
+      ],
+      "current": [
+        "        return  KeyEvent->wVirtualScanCode >= sizeof(Scan1ToKeynum)"
+      ]
+    },
+    {
+      "original_start": 428,
+      "original_count": 1,
+      "current_start": 428,
+      "current_count": 1,
+      "original": [
+        "        return  KeyEvent->wVirtualScanCode > sizeof(Scan1ToKeynumExtended)"
+      ],
+      "current": [
+        "        return  KeyEvent->wVirtualScanCode >= sizeof(Scan1ToKeynumExtended)"
+      ]
+    }
+  ],
+  "excluded_ranges": [],
+  "initial_review": "Complete source differs only by boundary rationale and two > to >= fixes; both BYTE table extents are invalid indices.",
+  "counter_review": "nt_event key-down/up callers ignore zero. Existing real-object fixture covers WORD scans, unchanged records and exact-bound negative sentinel; historical result is not a new runtime pass. Table bytes unchanged. Local rationale belongs to retained functional correction, not unrelated formatting.",
+  "limits": "Classification complete, not functional remediation; source unchanged."
+}

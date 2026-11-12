@@ -1,0 +1,861 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+  "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+  "before_sha256": "8814fe1cef49b3914c612703f4b136c41d8b9f73ab2e1f083018dadcd6242217",
+  "current_sha256": "17d55282c3f42fcfc50a908b0e948f6945aa1cc7344a4a35249ea662c8a5dffa",
+  "changes": [
+    {
+      "original_start": 13,
+      "original_count": 1,
+      "current_start": 13,
+      "current_count": 0,
+      "original": [
+        "#pragma hdrstop"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 15,
+      "original_count": 0,
+      "current_start": 14,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#ifdef WOW_ORIGINAL_STATE_DRAWING"
+      ]
+    },
+    {
+      "original_start": 16,
+      "original_count": 19,
+      "current_start": 17,
+      "current_count": 0,
+      "original": [
+        "#define SRCSTENCIL          0x00B8074AL",
+        "#define SRCINVSTENCIL       0x00E20746L",
+        "",
+        "void BltColor(HDC hdc, HBRUSH hbr, HDC hdcSrce,int xO, int yO,",
+        "       int cx, int cy, int xO1, int yO1, BOOL fInvert);",
+        "",
+        "/***************************************************************************\\",
+        "*",
+        "*  BitBltSysBmp()",
+        "*",
+        "*  From Chicago -- client *only* for now.",
+        "\\***************************************************************************/",
+        "BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)",
+        "{",
+        "    POEMBITMAPINFO pOem = oemInfo.bm + i;",
+        "    return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));",
+        "}",
+        "",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 95,
+      "original_count": 0,
+      "current_start": 77,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-116): release even on callback exception. */",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 209,
+      "original_count": 0,
+      "current_start": 194,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_STATE_DRAWING */"
+      ]
+    },
+    {
+      "original_start": 218,
+      "original_count": 0,
+      "current_start": 201,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#ifdef WOW_ORIGINAL_STATE_DRAWING"
+      ]
+    },
+    {
+      "original_start": 251,
+      "original_count": 0,
+      "current_start": 236,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_STATE_DRAWING */"
+      ]
+    },
+    {
+      "original_start": 258,
+      "original_count": 0,
+      "current_start": 243,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#ifdef WOW_ORIGINAL_STATE_DRAWING"
+      ]
+    },
+    {
+      "original_start": 295,
+      "original_count": 0,
+      "current_start": 282,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "                /* OPENNT-HOST-116: failed selection does not transfer ownership. */",
+        "                if (!hbmGray || hbmGray == HGDI_ERROR) {",
+        "                    DeleteObject(hbmpT);",
+        "                    fResult = FALSE;",
+        "                    goto CDS_Leave;",
+        "                }"
+      ]
+    },
+    {
+      "original_start": 423,
+      "original_count": 1,
+      "current_start": 417,
+      "current_count": 1,
+      "original": [
+        "        PolyData.cx        = cy;"
+      ],
+      "current": [
+        "        PolyData.cy        = cy; /* OPENNT-HOST-116: initialize height. */"
+      ]
+    },
+    {
+      "original_start": 486,
+      "original_count": 2,
+      "current_start": 480,
+      "current_count": 4,
+      "original": [
+        "",
+        "    RtlLeaveCriticalSection(&gcsHdc);"
+      ],
+      "current": [
+        "    ; /* DIVERGENCE(OPENNT-HOST-116): label precedes the try-block end. */",
+        "    } __finally {",
+        "        RtlLeaveCriticalSection(&gcsHdc);",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 491,
+      "original_count": 0,
+      "current_start": 489,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 492,
+      "original_count": 2,
+      "current_start": 491,
+      "current_count": 13,
+      "original": [
+        "BOOL DrawStateW(HDC hDC, HBRUSH hBrush, DRAWSTATEPROC func,",
+        "    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags) {"
+      ],
+      "current": [
+        "#ifdef WOW_ORIGINAL_BUTTON_ATLAS",
+        "/***************************************************************************\\",
+        "*",
+        "*  BitBltSysBmp()",
+        "*",
+        "*  From Chicago -- client *only* for now.",
+        "\\***************************************************************************/",
+        "BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)",
+        "{",
+        "    POEMBITMAPINFO pOem = oemInfo.bm + i;",
+        "    return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));",
+        "}",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 495,
+      "original_count": 35,
+      "current_start": 506,
+      "current_count": 3,
+      "original": [
+        "// No thunk until we set up the server-side for handling client or server-side",
+        "//  callbacks.  We can then decide whether to make a common client/server drawing",
+        "//  routine.",
+        "",
+        "    return ClientDrawState(hDC, hBrush, func,",
+        "             lParam, wParam, x, y, cx, cy, wFlags);",
+        "}",
+        "",
+        "BOOL DrawStateA(HDC hDC, HBRUSH hBrush, DRAWSTATEPROC func,",
+        "    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags) {",
+        "",
+        "    LPARAM lpwstr = lParam;",
+        "    BOOL bRet;",
+        "",
+        "// No thunk until we set up the server-side for handling client or server-side",
+        "//  callbacks.  We can then decide whether to make a common client/server drawing",
+        "//  routine.",
+        "",
+        "    if (((wFlags & DST_TYPEMASK) == DST_TEXT) ||",
+        "        ((wFlags & DST_TYPEMASK) == DST_PREFIXTEXT)) {",
+        "",
+        "        if (!MBToWCS((LPSTR)lParam, wParam ? wParam : -1, &(LPWSTR)lpwstr, -1, TRUE))",
+        "            return FALSE;",
+        "    }",
+        "",
+        "    bRet = ClientDrawState(hDC, hBrush, func,",
+        "             lpwstr, wParam, x, y, cx, cy, wFlags);",
+        "",
+        "    if (((wFlags & DST_TYPEMASK) == DST_TEXT) ||",
+        "        ((wFlags & DST_TYPEMASK) == DST_PREFIXTEXT)) {",
+        "        UserLocalFree((HANDLE)lpwstr);",
+        "    }",
+        "    return bRet;",
+        "}",
+        ""
+      ],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-117): Button-only object reuses the helper above;",
+        " * the existing drawing object remains the sole BltColor definition. */",
+        "#ifndef WOW_ORIGINAL_BUTTON_BLIT_ONLY"
+      ]
+    },
+    {
+      "original_start": 589,
+      "original_count": 0,
+      "current_start": 569,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 210,
+      "original_count": 7,
+      "current_start": 198,
+      "current_count": 1,
+      "original": [
+        "      // into DrawState.",
+        "      //",
+        "      // FritzS",
+        "            if ((uFlags & DST_GRAYSTRING) && SELECTOROF(qfnCallBack)) {",
+        "                uFlags &= ~DST_TYPEMASK;",
+        "                uFlags |= DST_COMPLEX;",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 5,
+      "current_start": 240,
+      "current_count": 1,
+      "original": [
+        "            if (!SELECTOROF(qfnCallBack)) {",
+        "                DebugErr(DBF_ERROR, \"DrawState: invalid callback for DST_COMPLEX\");",
+        "                fResult = FALSE;",
+        "                goto CDS_Leave;",
+        "            }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 17,
+      "original": 35,
+      "logical": 73
+    },
+    {
+      "current": 18,
+      "original": 36,
+      "logical": 74
+    },
+    {
+      "current": 19,
+      "original": 37,
+      "logical": 75
+    },
+    {
+      "current": 20,
+      "original": 38,
+      "logical": 76
+    },
+    {
+      "current": 21,
+      "original": 39,
+      "logical": 77
+    },
+    {
+      "current": 22,
+      "original": 40,
+      "logical": 78
+    },
+    {
+      "current": 23,
+      "original": 41,
+      "logical": 79
+    },
+    {
+      "current": 24,
+      "original": 42,
+      "logical": 80
+    },
+    {
+      "current": 25,
+      "original": 43,
+      "logical": 81
+    },
+    {
+      "current": 26,
+      "original": 44,
+      "logical": 82
+    },
+    {
+      "current": 27,
+      "original": 45,
+      "logical": 83
+    },
+    {
+      "current": 28,
+      "original": 46,
+      "logical": 84
+    },
+    {
+      "current": 29,
+      "original": 47,
+      "logical": 85
+    },
+    {
+      "current": 30,
+      "original": 48,
+      "logical": 86
+    },
+    {
+      "current": 31,
+      "original": 49,
+      "logical": 87
+    },
+    {
+      "current": 32,
+      "original": 50,
+      "logical": 88
+    },
+    {
+      "current": 33,
+      "original": 51,
+      "logical": 89
+    },
+    {
+      "current": 34,
+      "original": 52,
+      "logical": 90
+    },
+    {
+      "current": 35,
+      "original": 53,
+      "logical": 91
+    },
+    {
+      "current": 36,
+      "original": 54,
+      "logical": 92
+    },
+    {
+      "current": 37,
+      "original": 55,
+      "logical": 93
+    },
+    {
+      "current": 38,
+      "original": 56,
+      "logical": 94
+    },
+    {
+      "current": 39,
+      "original": 57,
+      "logical": 95
+    },
+    {
+      "current": 40,
+      "original": 58,
+      "logical": 96
+    },
+    {
+      "current": 41,
+      "original": 59,
+      "logical": 97
+    },
+    {
+      "current": 42,
+      "original": 60,
+      "logical": 98
+    },
+    {
+      "current": 43,
+      "original": 61,
+      "logical": 99
+    },
+    {
+      "current": 44,
+      "original": 62,
+      "logical": 100
+    },
+    {
+      "current": 45,
+      "original": 63,
+      "logical": 101
+    },
+    {
+      "current": 46,
+      "original": 64,
+      "logical": 102
+    },
+    {
+      "current": 47,
+      "original": 65,
+      "logical": 103
+    },
+    {
+      "current": 48,
+      "original": 66,
+      "logical": 104
+    },
+    {
+      "current": 49,
+      "original": 67,
+      "logical": 105
+    },
+    {
+      "current": 50,
+      "original": 68,
+      "logical": 106
+    },
+    {
+      "current": 51,
+      "original": 69,
+      "logical": 107
+    },
+    {
+      "current": 52,
+      "original": 70,
+      "logical": 108
+    },
+    {
+      "current": 53,
+      "original": 71,
+      "logical": 109
+    },
+    {
+      "current": 54,
+      "original": 72,
+      "logical": 110
+    },
+    {
+      "current": 55,
+      "original": 73,
+      "logical": 111
+    },
+    {
+      "current": 56,
+      "original": 74,
+      "logical": 112
+    },
+    {
+      "current": 57,
+      "original": 75,
+      "logical": 113
+    },
+    {
+      "current": 58,
+      "original": 76,
+      "logical": 114
+    },
+    {
+      "current": 59,
+      "original": 77,
+      "logical": 115
+    },
+    {
+      "current": 60,
+      "original": 78,
+      "logical": 116
+    },
+    {
+      "current": 61,
+      "original": 79,
+      "logical": 117
+    },
+    {
+      "current": 62,
+      "original": 80,
+      "logical": 118
+    },
+    {
+      "current": 63,
+      "original": 81,
+      "logical": 119
+    },
+    {
+      "current": 64,
+      "original": 82,
+      "logical": 120
+    },
+    {
+      "current": 65,
+      "original": 83,
+      "logical": 121
+    },
+    {
+      "current": 66,
+      "original": 84,
+      "logical": 122
+    },
+    {
+      "current": 67,
+      "original": 85,
+      "logical": 123
+    },
+    {
+      "current": 68,
+      "original": 86,
+      "logical": 124
+    },
+    {
+      "current": 69,
+      "original": 87,
+      "logical": 125
+    },
+    {
+      "current": 70,
+      "original": 88,
+      "logical": 126
+    },
+    {
+      "current": 71,
+      "original": 89,
+      "logical": 127
+    },
+    {
+      "current": 72,
+      "original": 90,
+      "logical": 128
+    },
+    {
+      "current": 74,
+      "original": 92,
+      "logical": 130
+    },
+    {
+      "current": 76,
+      "original": 94,
+      "logical": 132
+    },
+    {
+      "current": 80,
+      "original": 96,
+      "logical": 136
+    },
+    {
+      "current": 81,
+      "original": 97,
+      "logical": 137
+    },
+    {
+      "current": 82,
+      "original": 98,
+      "logical": 138
+    },
+    {
+      "current": 83,
+      "original": 99,
+      "logical": 139
+    },
+    {
+      "current": 84,
+      "original": 100,
+      "logical": 140
+    },
+    {
+      "current": 199,
+      "original": 217,
+      "logical": 211
+    },
+    {
+      "current": 241,
+      "original": 257,
+      "logical": 253
+    },
+    {
+      "current": 510,
+      "original": 530,
+      "logical": 536
+    },
+    {
+      "current": 511,
+      "original": 531,
+      "logical": 537
+    },
+    {
+      "current": 512,
+      "original": 532,
+      "logical": 538
+    },
+    {
+      "current": 513,
+      "original": 533,
+      "logical": 539
+    },
+    {
+      "current": 514,
+      "original": 534,
+      "logical": 540
+    },
+    {
+      "current": 516,
+      "original": 536,
+      "logical": 542
+    },
+    {
+      "current": 517,
+      "original": 537,
+      "logical": 543
+    },
+    {
+      "current": 518,
+      "original": 538,
+      "logical": 544
+    },
+    {
+      "current": 519,
+      "original": 539,
+      "logical": 545
+    },
+    {
+      "current": 520,
+      "original": 540,
+      "logical": 546
+    },
+    {
+      "current": 521,
+      "original": 541,
+      "logical": 547
+    },
+    {
+      "current": 522,
+      "original": 542,
+      "logical": 548
+    },
+    {
+      "current": 523,
+      "original": 543,
+      "logical": 549
+    },
+    {
+      "current": 524,
+      "original": 544,
+      "logical": 550
+    },
+    {
+      "current": 525,
+      "original": 545,
+      "logical": 551
+    },
+    {
+      "current": 526,
+      "original": 546,
+      "logical": 552
+    },
+    {
+      "current": 527,
+      "original": 547,
+      "logical": 553
+    },
+    {
+      "current": 528,
+      "original": 548,
+      "logical": 554
+    },
+    {
+      "current": 529,
+      "original": 549,
+      "logical": 555
+    },
+    {
+      "current": 530,
+      "original": 550,
+      "logical": 556
+    },
+    {
+      "current": 531,
+      "original": 551,
+      "logical": 557
+    },
+    {
+      "current": 533,
+      "original": 553,
+      "logical": 559
+    },
+    {
+      "current": 534,
+      "original": 554,
+      "logical": 560
+    },
+    {
+      "current": 536,
+      "original": 556,
+      "logical": 562
+    },
+    {
+      "current": 537,
+      "original": 557,
+      "logical": 563
+    },
+    {
+      "current": 538,
+      "original": 558,
+      "logical": 564
+    },
+    {
+      "current": 539,
+      "original": 559,
+      "logical": 565
+    },
+    {
+      "current": 541,
+      "original": 561,
+      "logical": 567
+    },
+    {
+      "current": 542,
+      "original": 562,
+      "logical": 568
+    },
+    {
+      "current": 543,
+      "original": 563,
+      "logical": 569
+    },
+    {
+      "current": 544,
+      "original": 564,
+      "logical": 570
+    },
+    {
+      "current": 545,
+      "original": 565,
+      "logical": 571
+    },
+    {
+      "current": 546,
+      "original": 566,
+      "logical": 572
+    },
+    {
+      "current": 547,
+      "original": 567,
+      "logical": 573
+    },
+    {
+      "current": 548,
+      "original": 568,
+      "logical": 574
+    },
+    {
+      "current": 549,
+      "original": 569,
+      "logical": 575
+    },
+    {
+      "current": 551,
+      "original": 571,
+      "logical": 577
+    },
+    {
+      "current": 553,
+      "original": 573,
+      "logical": 579
+    },
+    {
+      "current": 554,
+      "original": 574,
+      "logical": 580
+    },
+    {
+      "current": 555,
+      "original": 575,
+      "logical": 581
+    },
+    {
+      "current": 557,
+      "original": 577,
+      "logical": 583
+    },
+    {
+      "current": 559,
+      "original": 579,
+      "logical": 585
+    },
+    {
+      "current": 560,
+      "original": 580,
+      "logical": 586
+    },
+    {
+      "current": 561,
+      "original": 581,
+      "logical": 587
+    },
+    {
+      "current": 562,
+      "original": 582,
+      "logical": 588
+    },
+    {
+      "current": 563,
+      "original": 583,
+      "logical": 589
+    },
+    {
+      "current": 565,
+      "original": 585,
+      "logical": 591
+    },
+    {
+      "current": 566,
+      "original": 586,
+      "logical": 592
+    },
+    {
+      "current": 567,
+      "original": 587,
+      "logical": 593
+    },
+    {
+      "current": 568,
+      "original": 588,
+      "logical": 594
+    }
+  ],
+  "format_sites": 6,
+  "initial_review": "Full comparison including moved BitBltSysBmp and BltColor: original rendering retained; height, failed bitmap selection and exception-unlock corrections necessary; two provider contexts explicit.",
+  "counter_review": "Outer context restores viewport on exceptional unwind and destroys owned scratch resources; callback-selected bitmaps remain borrowed. Existing fixture covers nested/exception paths and height, not failed scratch selection. Public A/W wrapper reuse remains unproved.",
+  "evidence": "Pinned OpenNT mngrayc.c; wow_control_draw_state.c; control-draw-state/precomp.h; New-T404S5Wow32ProviderNinja.ps1 two mngrayc objects; wow_control_draw_state_fixture.c",
+  "limits": "Logical line list includes moved comments/helpers and needs function-aware compiler validation; not all listed offsets are runtime semantics. No new tests or functional changes."
+}

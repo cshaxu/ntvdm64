@@ -1,0 +1,132 @@
+{
+  "path": "src/mvdm-host/dpmi32/xmem.c",
+  "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+  "current_sha256": "14d221508789b51e026bd93e2b75669424d4eef0866fd8cea76b4c68d88d2220",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 92,
+      "original_count": 0,
+      "current_start": 92,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 93,
+      "original_count": 1,
+      "current_start": 94,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 95,
+      "original_count": 0,
+      "current_start": 97,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 161,
+      "original_count": 0,
+      "current_start": 164,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 162,
+      "original_count": 1,
+      "current_start": 166,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 164,
+      "original_count": 0,
+      "current_start": 169,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 197,
+      "original_count": 1,
+      "current_start": 203,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 210,
+      "original_count": 1,
+      "current_start": 216,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 212,
+      "original_count": 0,
+      "current_start": 220,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 213,
+      "original_count": 1,
+      "current_start": 222,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 215,
+      "original_count": 0,
+      "current_start": 225,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 271,
+      "original_count": 0,
+      "current_start": 282,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 272,
+      "original_count": 1,
+      "current_start": 284,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 274,
+      "original_count": 0,
+      "current_start": 287,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 323,
+      "original_count": 0,
+      "current_start": 337,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 324,
+      "original_count": 1,
+      "current_start": 339,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 326,
+      "original_count": 0,
+      "current_start": 342,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "BOOL DpmiReallocateVirtualMemory false must set CF and leave existing XMEM block metadata unchanged.",
+  "counter_review": "NT_SUCCESS(FALSE) is true, so reverting this change would take success path with BlockAddress still zero. Allocate/free remain NTSTATUS; do not convert those paths.",
+  "disposition": "retain",
+  "runtime_validation": "None. No product source change.",
+  "scope": "All differences classified; original excluded diagnostic bodies remain separately classified."
+}

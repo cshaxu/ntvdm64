@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+  "original_sha256": "9f54d1ed5c7074ba753b31daf28a42231598107e9a779381e94b91a25218e8f7",
+  "current_sha256": "e5116de0bc34641a431956bbb3dfaf06b7d5ba21ea8675715af0a425be639e23",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 60,
+      "original_count": 2,
+      "current_start": 62,
+      "current_count": 1,
+      "original": [
+        "void nt_kb_light_off IFN1(half_word, kyLight) {}",
+        "void nt_kb_restore(void) {}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Complete normalized comparison has one excluded NOTUSEDNOTUSED body only: two unused keyboard no-op functions.",
+  "counter_review": "Original conditional boundary and remaining entire source match. KEYBDFUNCS entries still use original nt_kb_prepare/nt_kb_light_on; toggle-key synchronization unchanged. No runtime semantic adaptation to register.",
+  "limits": "No source edit or runtime test. Exclusion-only source identity classification is not a fresh all-context compilation certificate."
+}

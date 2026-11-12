@@ -1,0 +1,41 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+  "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+  "current_sha256": "ce6df65f98751c65d9f1e662c3b065b22903548e9a8331b900102d80fc81ca60",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 23,
+      "original_count": 6
+    },
+    {
+      "original_start": 60,
+      "original_count": 10
+    },
+    {
+      "original_start": 84,
+      "original_count": 2
+    },
+    {
+      "original_start": 92,
+      "original_count": 150
+    },
+    {
+      "original_start": 249,
+      "original_count": 211
+    },
+    {
+      "original_start": 469,
+      "original_count": 23
+    },
+    {
+      "original_start": 497,
+      "original_count": 61
+    }
+  ],
+  "initial_review": "Complete original/current difference review; excluded platform/debug bodies only.",
+  "counter_review": "Boundary-aware comparison leaves exact original nonblank code after removing excluded bodies and line/error directives. Production trace no-op/UNUSED and force_yoda empty provider are original behavior, not project success stubs. Retained CPU40 declarations/global trace state unchanged.",
+  "limits": "No universal build-context/exclusion proof or fresh runtime result; this is mirror-diff necessity classification only."
+}

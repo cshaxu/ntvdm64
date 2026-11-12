@@ -1,0 +1,469 @@
+{
+  "path": "src/mvdm-host/wow32/wcommdlg.c",
+  "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+  "current_sha256": "2ee34b92c91450d654f867e68ba792cc8ad3f9981850579b5e305381eaf533b0",
+  "changes": [
+    {
+      "original_start": 24,
+      "original_count": 0,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"wow_message_lifetime.h\" /* DIVERGENCE(MVDM-HOST-DIV-349): call-owned share message. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain shared message-lifetime dependency and allocation-key capture/release in SHAREVIOLATION; use original malloc16/free16, existing scratch and original copy order.",
+      "evidence": "WM32msgSHAREVIOLATION is included in construction fixture transaction table; wow_message_heap32 records key before putstr16, release consumes key once; common-dialog owner now zero-initialized and unwinds.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 494,
+      "original_count": 1,
+      "current_start": 302,
+      "current_count": 1,
+      "original": [
+        "            if (!(*plParamNew = malloc16(cb))) {"
+      ],
+      "current": [
+        "            if (!(*plParamNew = wow_message_heap32(lpwm32mpex, malloc16(cb)))) { /* DIV-349 */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain shared message-lifetime dependency and allocation-key capture/release in SHAREVIOLATION; use original malloc16/free16, existing scratch and original copy order.",
+      "evidence": "WM32msgSHAREVIOLATION is included in construction fixture transaction table; wow_message_heap32 records key before putstr16, release consumes key once; common-dialog owner now zero-initialized and unwinds.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 501,
+      "original_count": 1,
+      "current_start": 309,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) *plParamNew);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: consume once. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain shared message-lifetime dependency and allocation-key capture/release in SHAREVIOLATION; use original malloc16/free16, existing scratch and original copy order.",
+      "evidence": "WM32msgSHAREVIOLATION is included in construction fixture transaction table; wow_message_heap32 records key before putstr16, release consumes key once; common-dialog owner now zero-initialized and unwinds.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 548,
+      "original_count": 1,
+      "current_start": 356,
+      "current_count": 2,
+      "original": [
+        "WCD32DialogProc("
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */",
+        "WowOriginalDialogProc("
+      ],
+      "decision": "retain",
+      "change_plan": "Retain original body behind existing native callback scope, with original public callback name provided by wow_common_dialog_callback.c. Keep FindReplace WM_DESTROY resource-only path separate from application callback admission.",
+      "evidence": "invoke_dialog enters task and borrow scopes, publishes window state, invokes original and leaves scopes. FindReplace original WM_DESTROY frees template/context/strings without calling guest hook. Callback fixture stubs original bodies; not full dialog acceptance.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 580,
+      "original_count": 1,
+      "current_start": 391,
+      "current_count": 2,
+      "original": [
+        "WCD32PrintSetupDialogProc("
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */",
+        "WowOriginalPrintSetupDialogProc("
+      ],
+      "decision": "retain",
+      "change_plan": "Retain original body behind existing native callback scope, with original public callback name provided by wow_common_dialog_callback.c. Keep FindReplace WM_DESTROY resource-only path separate from application callback admission.",
+      "evidence": "invoke_dialog enters task and borrow scopes, publishes window state, invokes original and leaves scopes. FindReplace original WM_DESTROY frees template/context/strings without calling guest hook. Callback fixture stubs original bodies; not full dialog acceptance.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 650,
+      "original_count": 1,
+      "current_start": 464,
+      "current_count": 1,
+      "original": [
+        "    WM32MSGPARAMEX  wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX  wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-349): actual common-dialog conversion owner. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain zero initialization of actual per-call message owner for partial-construction unwind; no parallel allocation map.",
+      "evidence": "WM32msgSHAREVIOLATION is included in construction fixture transaction table; wow_message_heap32 records key before putstr16, release consumes key once; common-dialog owner now zero-initialized and unwinds.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 653,
+      "original_count": 0,
+      "current_start": 467,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    wow_message_stack stack;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "change_plan": "Review stack enter/commit/leave and outer native callback scopes as one group; preserve intentional filtered-return commit and original output-conversion order. Simplify only after normal, rejected callback and exception paths prove equivalent.",
+      "evidence": "Scope restores only failed/abnormal live matching task stack. Normal and intentionally filtered completion commit; finally releases captured resources and restores stack on failure. Existing script checks filtered marker text; wrapper fixture uses stub original body.",
+      "missing_evidence": "Full original WCD32CommonDialogProc fault/reentry witness, including failure before/after hook, copyback, cleanup and task teardown. Structural marker check is insufficient."
+    },
+    {
+      "original_start": 770,
+      "original_count": 0,
+      "current_start": 580,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                stack.completed = TRUE; /* DIV-349: intentionally filtered, not failed. */"
+      ],
+      "decision": "pending",
+      "change_plan": "Review stack enter/commit/leave and outer native callback scopes as one group; preserve intentional filtered-return commit and original output-conversion order. Simplify only after normal, rejected callback and exception paths prove equivalent.",
+      "evidence": "Scope restores only failed/abnormal live matching task stack. Normal and intentionally filtered completion commit; finally releases captured resources and restores stack on failure. Existing script checks filtered marker text; wrapper fixture uses stub original body.",
+      "missing_evidence": "Full original WCD32CommonDialogProc fault/reentry witness, including failure before/after hook, copyback, cleanup and task teardown. Structural marker check is insufficient."
+    },
+    {
+      "original_start": 788,
+      "original_count": 0,
+      "current_start": 600,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        wm32mpex.fFree = TRUE; /* DIV-349: synchronous callback, not a DDE transfer. */"
+      ],
+      "decision": "pending",
+      "change_plan": "Verify synchronous common-dialog message selection against shared converter fFree contract before treating TRUE as universally safe; retain until full selected converter/transfer analysis.",
+      "evidence": "Ordinary W32WndProc also initializes fFree TRUE; wmdisp32 DDE/CopyData branches can change ownership. Common-dialog selection feeds pfnThunkMsg, and original field was uninitialized.",
+      "missing_evidence": "Complete common-dialog selected-message ownership proof, including COPYDATA/DDE or evidence those paths cannot be selected."
+    },
+    {
+      "original_start": 834,
+      "original_count": 0,
+      "current_start": 648,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = TRUE; /* DIV-349: after original callback/output conversion. */"
+      ],
+      "decision": "pending",
+      "change_plan": "Review stack enter/commit/leave and outer native callback scopes as one group; preserve intentional filtered-return commit and original output-conversion order. Simplify only after normal, rejected callback and exception paths prove equivalent.",
+      "evidence": "Scope restores only failed/abnormal live matching task stack. Normal and intentionally filtered completion commit; finally releases captured resources and restores stack on failure. Existing script checks filtered marker text; wrapper fixture uses stub original body.",
+      "missing_evidence": "Full original WCD32CommonDialogProc fault/reentry witness, including failure before/after hook, copyback, cleanup and task teardown. Structural marker check is insufficient."
+    },
+    {
+      "original_start": 845,
+      "original_count": 0,
+      "current_start": 661,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ],
+      "decision": "pending",
+      "change_plan": "Review stack enter/commit/leave and outer native callback scopes as one group; preserve intentional filtered-return commit and original output-conversion order. Simplify only after normal, rejected callback and exception paths prove equivalent.",
+      "evidence": "Scope restores only failed/abnormal live matching task stack. Normal and intentionally filtered completion commit; finally releases captured resources and restores stack on failure. Existing script checks filtered marker text; wrapper fixture uses stub original body.",
+      "missing_evidence": "Full original WCD32CommonDialogProc fault/reentry witness, including failure before/after hook, copyback, cleanup and task teardown. Structural marker check is insufficient."
+    },
+    {
+      "original_start": 2379,
+      "original_count": 1,
+      "current_start": 2201,
+      "current_count": 2,
+      "original": [
+        "WCD32FindReplaceDialogProc("
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-335): preserve original resource-only destroy branch. */",
+        "WowOriginalFindReplaceDialogProc("
+      ],
+      "decision": "retain",
+      "change_plan": "Retain original body behind existing native callback scope, with original public callback name provided by wow_common_dialog_callback.c. Keep FindReplace WM_DESTROY resource-only path separate from application callback admission.",
+      "evidence": "invoke_dialog enters task and borrow scopes, publishes window state, invokes original and leaves scopes. FindReplace original WM_DESTROY frees template/context/strings without calling guest hook. Callback fixture stubs original bodies; not full dialog acceptance.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 35,
+      "original_count": 198,
+      "current_start": 38,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define WCDDUMPFINDREPLACE16(p16) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {               \\",
+        "        LOGDEBUG(0, (\"FINDREPLACE16:\\n\")); \\",
+        "        LOGDEBUG(0, (\"\\tlStructSize      = %lx\\n\",(p16)->lStructSize)); \\",
+        "        LOGDEBUG(0, (\"\\thwndOwner        = %x\\n\",(p16)->hwndOwner));   \\",
+        "        LOGDEBUG(0, (\"\\thInstance        = %x\\n\",(p16)->hInstance));         \\",
+        "        LOGDEBUG(0, (\"\\tFlags            = %x\\n\",(p16)->Flags));       \\",
+        "        LOGDEBUG(0, (\"\\tlpstrFindWhat    = %lx\\n\",(p16)->lpstrFindWhat)); \\",
+        "        LOGDEBUG(0, (\"\\tlpstrReplaceWith = %lx\\n\",(p16)->lpstrReplaceWith)); \\",
+        "        LOGDEBUG(0, (\"\\twFindWhatLen     = %x\\n\",(p16)->wFindWhatLen));   \\",
+        "        LOGDEBUG(0, (\"\\twReplaceWithLen  = %x\\n\",(p16)->wReplaceWithLen));   \\",
+        "        LOGDEBUG(0, (\"\\tlCustData     = %lx\\n\",(p16)->lCustData));   \\",
+        "        LOGDEBUG(0, (\"\\tlpfnHook      = %lx\\n\",(p16)->lpfnHook));    \\",
+        "        LOGDEBUG(0, (\"\\tlpTemplateName= %lx\\n\",(p16)->lpTemplateName)); \\",
+        "    }",
+        "",
+        "#define WCDDUMPFINDREPLACE32(p32) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {               \\",
+        "        LOGDEBUG(0, (\"FINDREPLACE32:\\n\")); \\",
+        "        LOGDEBUG(0, (\"\\tlStructSize      = %lx\\n\",(p32)->lStructSize)); \\",
+        "        LOGDEBUG(0, (\"\\thwndOwner        = %x\\n\",(p32)->hwndOwner));   \\",
+        "        LOGDEBUG(0, (\"\\thInstance        = %x\\n\",(p32)->hInstance));         \\",
+        "        LOGDEBUG(0, (\"\\tFlags            = %x\\n\",(p32)->Flags));       \\",
+        "        LOGDEBUG(0, (\"\\tlpstrFindWhat    = %s\\n\",(p32)->lpstrFindWhat)); \\",
+        "        LOGDEBUG(0, (\"\\tlpstrReplaceWith = %s\\n\",(p32)->lpstrReplaceWith)); \\",
+        "        LOGDEBUG(0, (\"\\twFindWhatLen     = %x\\n\",(p32)->wFindWhatLen));   \\",
+        "        LOGDEBUG(0, (\"\\twReplaceWithLen  = %x\\n\",(p32)->wReplaceWithLen));   \\",
+        "        LOGDEBUG(0, (\"\\tlCustData     = %lx\\n\",(p32)->lCustData));   \\",
+        "        LOGDEBUG(0, (\"\\tlpfnHook      = %lx\\n\",(p32)->lpfnHook));    \\",
+        "        LOGDEBUG(0, (\"\\tlpTemplateName= %lx\\n\",(p32)->lpTemplateName)); \\",
+        "    }",
+        "",
+        "#define WCDDUMPCHOOSEFONTDATA16(p16) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {               \\",
+        "        LOGDEBUG(10, (\"CHOOSEFONT16:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize   = %lx\\n\",(p16)->lStructSize)); \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner     = %lx\\n\",(p16)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thDC           = %lx\\n\",(p16)->hDC));         \\",
+        "        LOGDEBUG(10, (\"\\tlpLogFont     = %lx\\n\",(p16)->lpLogFont));   \\",
+        "        LOGDEBUG(10, (\"\\tiPointSize    = %x\\n\",(p16)->iPointSize));   \\",
+        "        LOGDEBUG(10, (\"\\tiFlags        = %lx\\n\",(p16)->Flags));       \\",
+        "        LOGDEBUG(10, (\"\\trbgColors     = %lx\\n\",(p16)->rgbColors));   \\",
+        "        LOGDEBUG(10, (\"\\tlCustData     = %lx\\n\",(p16)->lCustData));   \\",
+        "        LOGDEBUG(10, (\"\\tlpfnHook      = %lx\\n\",(p16)->lpfnHook));    \\",
+        "        LOGDEBUG(10, (\"\\tlpTemplateName= %lx\\n\",(p16)->lpTemplateName)); \\",
+        "        LOGDEBUG(10, (\"\\thInstance     = %lx\\n\",(p16)->hInstance));    \\",
+        "        LOGDEBUG(10, (\"\\tlpszStyle     = %lx\\n\",(p16)->lpszStyle));   \\",
+        "        LOGDEBUG(10, (\"\\tnFontType     = %x\\n\",(p16)->nFontType));    \\",
+        "        LOGDEBUG(10, (\"\\tnSizeMin      = %x\\n\",(p16)->nSizeMin));     \\",
+        "        LOGDEBUG(10, (\"\\tnSizeMax      = %x\\n\",(p16)->nSizeMax));     \\",
+        "    }",
+        "",
+        "#define WCDDUMPCHOOSEFONTDATA32(p32) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {               \\",
+        "        LOGDEBUG(10, (\"CHOOSEFONT32:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize   = %lx\\n\",(p32)->lStructSize)); \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner     = %lx\\n\",(p32)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thDC           = %lx\\n\",(p32)->hDC));         \\",
+        "        LOGDEBUG(10, (\"\\tlpLogFont     = %lx\\n\",(p32)->lpLogFont));   \\",
+        "        LOGDEBUG(10, (\"\\tiPointSize    = %lx\\n\",(p32)->iPointSize));   \\",
+        "        LOGDEBUG(10, (\"\\tiFlags        = %lx\\n\",(p32)->Flags));       \\",
+        "        LOGDEBUG(10, (\"\\trbgColors     = %lx\\n\",(p32)->rgbColors));   \\",
+        "        LOGDEBUG(10, (\"\\tlCustData     = %lx\\n\",(p32)->lCustData));   \\",
+        "        LOGDEBUG(10, (\"\\tlpfnHook      = %lx\\n\",(p32)->lpfnHook));    \\",
+        "        LOGDEBUG(10, (\"\\tlpTemplateName= %lx\\n\",(p32)->lpTemplateName)); \\",
+        "        LOGDEBUG(10, (\"\\thInstance     = %lx\\n\",(p32)->hInstance));    \\",
+        "        LOGDEBUG(10, (\"\\tlpszStyle     = %lx\\n\",(p32)->lpszStyle));   \\",
+        "        LOGDEBUG(10, (\"\\tnFontType     = %x\\n\",(p32)->nFontType));    \\",
+        "        LOGDEBUG(10, (\"\\tnSizeMin      = %lx\\n\",(p32)->nSizeMin));     \\",
+        "        LOGDEBUG(10, (\"\\tnSizeMax      = %lx\\n\",(p32)->nSizeMax));     \\",
+        "    }",
+        "",
+        "#define WCDDUMPOPENFILENAME16(p16) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {  \\",
+        "        LOGDEBUG(10, (\"OPENFILENAME16:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize      = %x\\n\",(p16)->lStructSize));  \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner        = %lx\\n\",(p16)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thInstance        = %lx\\n\",(p16)->hInstance));   \\",
+        "        LOGDEBUG(10, (\"\\tlpstrFilter      = %lx\\n\",(p16)->lpstrFilter));     \\",
+        "        LOGDEBUG(10, (\"\\tlpstrCustomFilter= %lx\\n\",(p16)->lpstrCustomFilter)); \\",
+        "        LOGDEBUG(10, (\"\\tnMaxCustFilter   = %lx\\n\",(p16)->nMaxCustFilter));    \\",
+        "        LOGDEBUG(10, (\"\\tnFilterIndex     = %lx\\n\",(p16)->nFilterIndex));      \\",
+        "        LOGDEBUG(10, (\"\\tlpstrFile        = %lx\\n\",(p16)->lpstrFile));         \\",
+        "        LOGDEBUG(10, (\"\\tnMaxFile         = %lx\\n\",(p16)->nMaxFile));          \\",
+        "        LOGDEBUG(10, (\"\\tlpstrFileTitle   = %lx\\n\",(p16)->lpstrFileTitle));    \\",
+        "        LOGDEBUG(10, (\"\\tnMaxFileTitle    = %lx\\n\",(p16)->nMaxFileTitle));     \\",
+        "        LOGDEBUG(10, (\"\\tlpstrInitialDir  = %lx\\n\",(p16)->lpstrInitialDir));   \\",
+        "        LOGDEBUG(10, (\"\\tlpstrTitle       = %lx\\n\",(p16)->lpstrTitle));        \\",
+        "        LOGDEBUG(10, (\"\\tFlags            = %lx\\n\",(p16)->Flags));             \\",
+        "        LOGDEBUG(10, (\"\\tnFileOffset      = %lx\\n\",(p16)->nFileOffset));       \\",
+        "        LOGDEBUG(10, (\"\\tnFileExtension   = %lx\\n\",(p16)->nFileExtension));    \\",
+        "        LOGDEBUG(10, (\"\\tlpstrDefExt      = %lx\\n\",(p16)->lpstrDefExt));       \\",
+        "        LOGDEBUG(10, (\"\\tlCustData        = %lx\\n\",(p16)->lCustData));         \\",
+        "        LOGDEBUG(10, (\"\\tlpfnHook         = %lx\\n\",(p16)->lpfnHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpTemplateName   = %lx\\n\",(p16)->lpTemplateName));    \\",
+        "    }",
+        "",
+        "#define WCDDUMPOPENFILENAME32(p32) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {  \\",
+        "        LOGDEBUG(10, (\"OPENFILENAME32:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize      = %x\\n\",(p32)->lStructSize));  \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner        = %lx\\n\",(p32)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thInstance        = %lx\\n\",(p32)->hInstance));   \\",
+        "        LOGDEBUG(10, (\"\\tlpstrFilter      = %s\\n\",(p32)->lpstrFilter)); \\",
+        "        LOGDEBUG(10, (\"\\tlpstrCustomFilter= %s\\n\",(p32)->lpstrCustomFilter));   \\",
+        "        LOGDEBUG(10, (\"\\tnMaxCustFilter   = %lx\\n\",(p32)->nMaxCustFilter));      \\",
+        "        LOGDEBUG(10, (\"\\tnFilterIndex     = %lx\\n\",(p32)->nFilterIndex));        \\",
+        "        LOGDEBUG(10, (\"\\tlpstrFile        = %s\\n\",(p32)->lpstrFile));           \\",
+        "        LOGDEBUG(10, (\"\\tnMaxFile         = %lx\\n\",(p32)->nMaxFile));            \\",
+        "        LOGDEBUG(10, (\"\\tlpstrFileTitle   = %s\\n\",(p32)->lpstrFileTitle));      \\",
+        "        LOGDEBUG(10, (\"\\tnMaxFileTitle    = %lx\\n\",(p32)->nMaxFileTitle));       \\",
+        "        LOGDEBUG(10, (\"\\tlpstrInitialDir  = %s\\n\",(p32)->lpstrInitialDir));     \\",
+        "        LOGDEBUG(10, (\"\\tlpstrTitle       = %s\\n\",(p32)->lpstrTitle));          \\",
+        "        LOGDEBUG(10, (\"\\tFlags            = %lx\\n\",(p32)->Flags));               \\",
+        "        LOGDEBUG(10, (\"\\tnFileOffset      = %lx\\n\",(p32)->nFileOffset));         \\",
+        "        LOGDEBUG(10, (\"\\tnFileExtension   = %lx\\n\",(p32)->nFileExtension));      \\",
+        "        LOGDEBUG(10, (\"\\tlpstrDefExt      = %s\\n\",(p32)->lpstrDefExt));         \\",
+        "        LOGDEBUG(10, (\"\\tlCustData        = %lx\\n\",(p32)->lCustData));           \\",
+        "        LOGDEBUG(10, (\"\\tlpfnHook         = %lx\\n\",(p32)->lpfnHook));            \\",
+        "        LOGDEBUG(10, (\"\\tlpTemplateName   = %lx\\n\",(p32)->lpTemplateName));      \\",
+        "    }",
+        "",
+        "#define WCDDUMPPRINTDLGDATA16(p16) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {  \\",
+        "        LOGDEBUG(10, (\"PRINTDLGDATA16:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize      = %x\\n\",(p16)->lStructSize));  \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner        = %lx\\n\",(p16)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thDevMode         = %lx\\n\",(p16)->hDevMode));   \\",
+        "        LOGDEBUG(10, (\"\\thDevNames        = %lx\\n\",(p16)->hDevNames));     \\",
+        "        LOGDEBUG(10, (\"\\thDC              = %lx\\n\",(p16)->hDC)); \\",
+        "        LOGDEBUG(10, (\"\\tFlags            = %lx\\n\",(p16)->Flags));             \\",
+        "        LOGDEBUG(10, (\"\\tnFromPage        = %d\\n\",(p16)->nFromPage));       \\",
+        "        LOGDEBUG(10, (\"\\tnToPage          = %d\\n\",(p16)->nToPage));    \\",
+        "        LOGDEBUG(10, (\"\\tnMinPage         = %d\\n\",(p16)->nMinPage));       \\",
+        "        LOGDEBUG(10, (\"\\tnMaxPage         = %d\\n\",(p16)->nMaxPage));       \\",
+        "        LOGDEBUG(10, (\"\\tnCopies          = %d\\n\",(p16)->nCopies));       \\",
+        "        LOGDEBUG(10, (\"\\thInstance        = %lx\\n\",(p16)->hInstance));       \\",
+        "        LOGDEBUG(10, (\"\\tlCustData        = %lx\\n\",(p16)->lCustData));         \\",
+        "        LOGDEBUG(10, (\"\\tlpfnPrintHook    = %lx\\n\",(p16)->lpfnPrintHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpfnSetupHook    = %lx\\n\",(p16)->lpfnSetupHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpPrintTemplateName = %lx\\n\",(p16)->lpPrintTemplateName));    \\",
+        "        LOGDEBUG(10, (\"\\tlpSetupTemplateName = %lx\\n\",(p16)->lpSetupTemplateName));    \\",
+        "        LOGDEBUG(10, (\"\\thPrintTemplate   = %lx\\n\",(p16)->hPrintTemplate));            \\",
+        "        LOGDEBUG(10, (\"\\thSetupTemplate   = %lx\\n\",(p16)->hSetupTemplate));            \\",
+        "    }",
+        "",
+        "#define WCDDUMPPRINTDLGDATA32(p32) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {  \\",
+        "        LOGDEBUG(10, (\"PRINTDLGDATA32:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize      = %x\\n\",(p32)->lStructSize));  \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner        = %lx\\n\",(p32)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thDevMode         = %lx\\n\",(p32)->hDevMode));   \\",
+        "        LOGDEBUG(10, (\"\\thDevNames        = %lx\\n\",(p32)->hDevNames));     \\",
+        "        LOGDEBUG(10, (\"\\thDC              = %lx\\n\",(p32)->hDC)); \\",
+        "        LOGDEBUG(10, (\"\\tFlags            = %lx\\n\",(p32)->Flags));             \\",
+        "        LOGDEBUG(10, (\"\\tnFromPage        = %d\\n\",(p32)->nFromPage));       \\",
+        "        LOGDEBUG(10, (\"\\tnToPage          = %d\\n\",(p32)->nToPage));    \\",
+        "        LOGDEBUG(10, (\"\\tnMinPage         = %d\\n\",(p32)->nMinPage));       \\",
+        "        LOGDEBUG(10, (\"\\tnMaxPage         = %d\\n\",(p32)->nMaxPage));       \\",
+        "        LOGDEBUG(10, (\"\\tnCopies          = %d\\n\",(p32)->nCopies));       \\",
+        "        LOGDEBUG(10, (\"\\thInstance        = %lx\\n\",(p32)->hInstance));       \\",
+        "        LOGDEBUG(10, (\"\\tlCustData        = %lx\\n\",(p32)->lCustData));         \\",
+        "        LOGDEBUG(10, (\"\\tlpfnPrintHook    = %lx\\n\",(p32)->lpfnPrintHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpfnSetupHook    = %lx\\n\",(p32)->lpfnSetupHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpPrintTemplateName = %lx\\n\",(p32)->lpPrintTemplateName));    \\",
+        "        LOGDEBUG(10, (\"\\tlpSetupTemplateName = %lx\\n\",(p32)->lpSetupTemplateName));    \\",
+        "        LOGDEBUG(10, (\"\\thPrintTemplate   = %lx\\n\",(p32)->hPrintTemplate));            \\",
+        "        LOGDEBUG(10, (\"\\thSetupTemplate   = %lx\\n\",(p32)->hSetupTemplate));            \\",
+        "    }",
+        "",
+        "#define WCDDUMPCHOOSECOLORDATA16(p16) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {  \\",
+        "        LOGDEBUG(10, (\"CHOOSECOLORDATA16:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize      = %x\\n\",(p16)->lStructSize));  \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner        = %lx\\n\",(p16)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thInstance        = %lx\\n\",(p16)->hInstance));       \\",
+        "        LOGDEBUG(10, (\"\\trgbResult        = %lx\\n\",(p16)->rgbResult));   \\",
+        "        LOGDEBUG(10, (\"\\tlpCustColors     = %lx\\n\",(p16)->lpCustColors));     \\",
+        "        LOGDEBUG(10, (\"\\tFlags            = %lx\\n\",(p16)->Flags));             \\",
+        "        LOGDEBUG(10, (\"\\tlCustData        = %lx\\n\",(p16)->lCustData));         \\",
+        "        LOGDEBUG(10, (\"\\tlpfnHook         = %lx\\n\",(p16)->lpfnHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpTemplateName = %lx\\n\",(p16)->lpTemplateName));    \\",
+        "    }",
+        "#define WCDDUMPCHOOSECOLORDATA32(p32) \\",
+        "    if (fLogFilter & FILTER_COMMDLG) {  \\",
+        "        LOGDEBUG(10, (\"CHOOSECOLORDATA32:\\n\")); \\",
+        "        LOGDEBUG(10, (\"\\tlStructSize      = %x\\n\",(p32)->lStructSize));  \\",
+        "        LOGDEBUG(10, (\"\\thwndOwner        = %lx\\n\",(p32)->hwndOwner));   \\",
+        "        LOGDEBUG(10, (\"\\thInstance        = %lx\\n\",(p32)->hInstance));       \\",
+        "        LOGDEBUG(10, (\"\\trgbResult        = %lx\\n\",(p32)->rgbResult));   \\",
+        "        LOGDEBUG(10, (\"\\tlpCustColors     = %lx\\n\",(p32)->lpCustColors));     \\",
+        "        LOGDEBUG(10, (\"\\tFlags            = %lx\\n\",(p32)->Flags));             \\",
+        "        LOGDEBUG(10, (\"\\tlCustData        = %lx\\n\",(p32)->lCustData));         \\",
+        "        LOGDEBUG(10, (\"\\tlpfnHook         = %lx\\n\",(p32)->lpfnHook));          \\",
+        "        LOGDEBUG(10, (\"\\tlpTemplateName = %lx\\n\",(p32)->lpTemplateName));    \\",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 673,
+      "original_count": 12,
+      "current_start": 493,
+      "current_count": 1,
+      "original": [
+        "    if (pCTD==NULL) {",
+        "        LOGDEBUG(0,(\"    WCD32OpenFileDialog ERROR: pCTD==NULL\\n\"));",
+        "        goto Error;",
+        "    }",
+        "",
+        "    // If pCTD->vpfnHook is NULL, then something is broken;  we",
+        "    // certainly can't continue because we don't know what 16-bit func to call",
+        "",
+        "    if (!vpfnHook) {",
+        "        LOGDEBUG(0,(\"    WCD32OpenFileDialog ERROR: no hook proc for message %04x Dlg = %08lx\\n\", uMsg, hdlg ));",
+        "        goto Error;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 39,
+      "original_line": 233,
+      "logical_line": 36
+    },
+    {
+      "current_line": 471,
+      "original_line": 654,
+      "logical_line": 657
+    },
+    {
+      "current_line": 472,
+      "original_line": 655,
+      "logical_line": 658
+    },
+    {
+      "current_line": 473,
+      "original_line": 656,
+      "logical_line": 659
+    },
+    {
+      "current_line": 476,
+      "original_line": 659,
+      "logical_line": 662
+    },
+    {
+      "current_line": 477,
+      "original_line": 660,
+      "logical_line": 663
+    },
+    {
+      "current_line": 494,
+      "original_line": 685,
+      "logical_line": 674
+    }
+  ],
+  "line_basis": "LF only; form-feed not counted as newline",
+  "limits": "Audit classification, not implemented repair or tested release."
+}

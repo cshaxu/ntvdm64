@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+  "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+  "current_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 144,
+      "original_count": 5,
+      "current_start": 145,
+      "current_count": 1,
+      "original": [
+        "",
+        "extern DWORD NetlibpTrace;",
+        "",
+        "#define IF_DEBUG(Function) if (NetlibpTrace & NETLIB_DEBUG_ ## Function)",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 149,
+      "current": 146,
+      "logical": 145
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+    "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1"
+  ],
+  "limits": "Complete normalized diff proves retained declarations/debug-release macros unchanged. This is not all-context macro-hit certification, nor evidence that optional debug/C++ profiles are supported. No new build or runtime test."
+}

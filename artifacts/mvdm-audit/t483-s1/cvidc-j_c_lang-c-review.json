@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+  "original_sha256": "a6e112c6cf3250e2b7f5e75551cec34e2b0e9f1c9f268f05ce1a8f41b60e5923",
+  "current_sha256": "edc62d53627bd206341910d43b7345c5c72a44018002e97a9aae79cd44dc7096",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "509",
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+      "current_start": "3",
+      "current_count": "3",
+      "original_start": "3",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-076",
+      "classification": "provider-declaration",
+      "initial_review": "Original mask diagnostics need the standard printf variadic declaration.",
+      "counter_review": "Verified actual call sites and original provider signature. No new diagnostic behavior or failure policy is introduced by the declaration.",
+      "disposition": "retain",
+      "evidence": "j_c_lang.c:57,63; j_c_lang.h:35; ev_glue.c:99; sevid000.c:731,736",
+      "limits": "Source verification only; no fresh compile/runtime result.",
+      "decision": "retain",
+      "change_plan": "Keep matching standard/provider declaration; no wrapper or duplicate error implementation.",
+      "related_callers": "Original mask helper and generated C-VID rule error sites.",
+      "verification_required": "Selected compilation checks prototypes; invalid-rule diagnostics and normal rule fixture preserve existing behavior.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [],
+  "limits": "Necessity review only; no full line/exclusion certification or runtime claim."
+}

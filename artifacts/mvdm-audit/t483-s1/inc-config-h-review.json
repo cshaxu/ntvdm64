@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+  "original_sha256": "6c12b5c1bd7102c46d3e5b86795dcce8610e7b9adaead907ba031e9f9bf40034",
+  "current_sha256": "1167d3a042b9c2692d09d96bdd947ce88ebecca9b13958a2fac22e4e281c6a74",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 84,
+      "original_count": 3
+    },
+    {
+      "original_start": 270,
+      "original_count": 1
+    },
+    {
+      "original_start": 411,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Three excluded bodies: Macintosh printer/plotter/datacomm defaults, non-NTVDM non-Macintosh C_CMOS definition, SWITCHNPX Npx_enabled declaration. All other source exact after omitting line directives.",
+  "counter_review": "Full-file reverse comparison shows no renumbered selected configuration IDs, altered structures or changed public prototypes. Original non-Macintosh C_DEVICE_DEFAULT alternative remains. Excluding optional SWITCHNPX declaration is not evidence that selected CCPU x87 emulation is disabled; no such implementation change occurs here.",
+  "limits": "Source difference classification, no new build/context/runtime acceptance. Existing exclusion policy not expanded."
+}

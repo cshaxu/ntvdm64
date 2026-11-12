@@ -1,0 +1,90 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+  "original_sha256": "f23f9cf86756ca99f3204d505baa1d1197446851065f1849814647f5c4cdc6f3",
+  "current_sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 78,
+      "original_count": 1,
+      "current_start": 80,
+      "current_count": 1,
+      "original": [
+        "    BOOL\tRegistered;\t\t  /* TRUE when are registered to the console */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef X86GFX"
+    },
+    {
+      "original_start": 116,
+      "original_count": 5,
+      "current_start": 120,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define SCALE(value) (value)",
+        "#define UNSCALE(value) (value)",
+        "#define MAX_SCALE(value) (value)",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_guard": "#else   /* BIGWIN */"
+    },
+    {
+      "original_start": 393,
+      "original_count": 20,
+      "current_start": 395,
+      "current_count": 1,
+      "original": [
+        "void nt_cga_med_frozen_std(int offset, int screen_x, int screen_y, int len,",
+        "\t\t\t   int height);",
+        "void nt_cga_hi_frozen_std(int offset, int screen_x, int screen_y, int len,",
+        "\t\t\t  int height);",
+        "void nt_ega_lo_frozen_std(int offset, int screen_x, int screen_y,",
+        "                          int width, int height);",
+        "void nt_ega_med_frozen_std(int offset, int screen_x, int screen_y,",
+        "                           int width, int height);",
+        "void nt_ega_hi_frozen_std(int offset, int screen_x, int screen_y,",
+        "                          int width, int height);",
+        "void nt_vga_frozen_std(int offset, int screen_x, int screen_y,",
+        "                       int width, int height);",
+        "void nt_vga_frozen_pack_std(int offset, int screen_x, int screen_y,",
+        "                       int width, int height);",
+        "void nt_vga_med_frozen_std(int offset, int screen_x, int screen_y,",
+        "                           int width, int height);",
+        "void nt_vga_hi_frozen_std(int offset, int screen_x, int screen_y,",
+        "                          int width, int height);",
+        "void nt_dummy_frozen(int offset, int screen_x, int screen_y, int len,",
+        "\t\t     int height);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef MONITOR"
+    },
+    {
+      "original_start": 443,
+      "original_count": 3,
+      "current_start": 428,
+      "current_count": 1,
+      "original": [
+        "IMPORT void select_frozen_routines IFN0();",
+        "half_word get_vga_DAC_rd_addr(void);",
+        "void resetNowCur(void);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register."
+      ],
+      "original_guard": "#ifdef MONITOR"
+    }
+  ],
+  "initial_review": "Four conditional-body exclusions: X86GFX console registration member, identity scaling alternative, MONITOR frozen-render declarations, and MONITOR frozen-selection/DAC/cursor declarations.",
+  "counter_review": "Full retained content matches original after #line removal. No additional rendering API or changed selected field type. Removal of conditional struct member is an exclusion-profile layout consequence, not proof that every includer uses a consistent profile; do not conflate content identity with cross-TU ABI validation.",
+  "limits": "No fresh build, runtime or universal cross-TU profile validation."
+}

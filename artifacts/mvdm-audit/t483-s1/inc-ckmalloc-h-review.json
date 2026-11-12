@@ -1,0 +1,35 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+  "original_sha256": "49d55eba11bc663e678544a40536d1a799261c1cf67eb25b779a8c23465c81e3",
+  "current_sha256": "c1bd3ef5697fe2c07433170407a2141b287168f5b7c4e7bd22fcd5bf0623f9d1",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "589",
+      "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+      "current_start": "22",
+      "current_count": "5",
+      "original_start": "22",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "allocator-declaration",
+      "initial_review": "stdlib.h supplies standard allocator declarations; host_def.h:83-84 maps host_malloc/calloc to CRT and MemoryH at141 is memory.h.",
+      "counter_review": "Removing only inserted lines reproduces complete original file. Allocation retry/error macros remain original. Actual check_malloc callers exist in fpu.c:1298, rom.c:194 and cga.c:1266; include makes declaration local instead of relying on incidental include order.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-host/softpc.new/host/inc/host_def.h:83-84,141;artifacts/mvdm-audit/t483-s1/inc-ckmalloc-h-review.json",
+      "limits": "Source necessity proof, not fresh compiler/runtime validation. Historical comment about old CRT exposure not independently proved and not relied upon.",
+      "decision": "retain",
+      "change_plan": "Keep stdlib.h and restored original line coordinate. No allocator/retry-policy rewrite.",
+      "related_callers": "fpu.c check_malloc; rom.c check_malloc; cga.c check_malloc",
+      "verification_required": "No repair required; preserve allocator prototype compile checks if declaration changes.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [],
+  "initial_review": "stdlib.h supplies standard allocator declarations; host_def.h:83-84 maps host_malloc/calloc to CRT and MemoryH at141 is memory.h.",
+  "counter_review": "Removing only inserted lines reproduces complete original file. Allocation retry/error macros remain original. Actual check_malloc callers exist in fpu.c:1298, rom.c:194 and cga.c:1266; include makes declaration local instead of relying on incidental include order.",
+  "limits": "Source necessity proof, not fresh compiler/runtime validation. Historical comment about old CRT exposure not independently proved and not relied upon."
+}

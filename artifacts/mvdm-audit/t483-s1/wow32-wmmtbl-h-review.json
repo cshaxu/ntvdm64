@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/wow32/wmmtbl.h",
+  "original_sha256": "c35252b376c0f6132df8439f19ef66c780a2cf3bb39720b62c0d1d8b6f2069e4",
+  "current_sha256": "dd57825df62f5ff0a0280ec10cacbbed4cf4645cd15f2086d65ab36ef3467f07",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "extern INT iMMEDMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Complete normalized diff replaces only original DEBUG cleanup macros or DEBUG_OR_WOWPROFILE count declaration; all remaining source matches pinned original.",
+  "limits": [
+    "Exclusion-only comparison, not universal context certification.",
+    "Line pairs source-derived LF positions, not compiler verification."
+  ]
+}

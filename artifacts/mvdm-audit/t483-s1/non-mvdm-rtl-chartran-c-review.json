@@ -1,0 +1,61 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "status": "difference classification complete; functional remediation not implemented",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "current_sha256": "c23b952a6cd68c3048048c4437026f91ba5223c89313c77cbe507abcdb0f4d8f",
+  "selected_profile": {
+    "_USERK_": false,
+    "FE_SB": false,
+    "FE_IME": false,
+    "DEBUG": false
+  },
+  "comparison_method": "Read complete files; explicitly select only the four named conditionals, reject unknown ifdef names; extract balanced function bodies; remove comments and whitespace. Source comparison, not preprocessing or runtime proof.",
+  "selected_bodies_equal": [
+    "RtlMBMessageWParamCharToWCS",
+    "RtlInitLargeAnsiString",
+    "RtlInitLargeUnicodeString",
+    "WCSToMBEx",
+    "MBToWCSEx"
+  ],
+  "initial_review": [
+    "Original five conversion/constructor algorithms retained under stated profile. Do not replace with a new conversion implementation.",
+    "Private CLIENTINFO codepage access replaced with current HKL locale query; original client/client.c ToAsciiEx uses same locale query but that alone does not prove equivalence to cached CLIENTINFO producer.",
+    "Finite allocator facade uses LocalAlloc/LocalFree and native ACP provider; conversion bodies preserve original failure/free behavior.",
+    "NWCH has no selected use after reverse message converter omission; candidate partial cleanup, not whole-file deletion.",
+    "Retained functions reordered and reverse converter absent; detached exclusion structures remain at end."
+  ],
+  "counter_review": [
+    "Selected body equality excludes macro/provider behavior; cannot claim entire semantics equal.",
+    "Whole src/test/tools search finds RtlWCSMessageWParamCharToMB only in retained conditional comments. Absence is source evidence, not complete export/build consumer proof.",
+    "Native layout query preserves LastError and rejects out-of-WORD codepages; dynamic layout changes and original codepage producer still require explicit comparison."
+  ],
+  "evidence": [
+    "src/compat/include/wow_char_conversion_abi.h",
+    "src/wow32-dll/source/ntuser_rtl_compat.c",
+    "src/wow32-dll/include/control-client/default-precomp.h",
+    "src/wow32-dll/include/wow_bitmap_bindings.h",
+    "src/wow32-dll/include/wow_class_client_bindings.h",
+    "src/wow32-dll/include/wow_menu_resource_bindings.h",
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "OpenNT/windows/core/ntuser/client/client.c:940-960"
+  ],
+  "remaining": [
+    "Registered pending evidence remains unresolved; classification is not remediation."
+  ],
+  "limits": [
+    "No compilation, runtime test or publication in this step.",
+    "No source edit; no increment to reviewed-file count."
+  ],
+  "decisions": [
+    "Keep finite char conversion ABI facade; do not import private CLIENTINFO or kernel allocation dependencies.",
+    "Compare original CLIENTINFO codepage producer with current layout query including layout switches and fallback before retaining or replacing provider.",
+    "Remove NWCH after confirming reverse converter remains unselected; preserve original excluded FE_SB boundary in its original location.",
+    "Keep original selected converter and message switch; no command/message-name workaround.",
+    "Keep both original constructors including byte limits and borrowed buffer ownership.",
+    "Keep original WCSToMBEx and MBToWCSEx with shared LocalAlloc/LocalFree facade.",
+    "Reconcile original RtlWCSMessageWParamCharToMB against selected export/message consumers before deciding omission is complete.",
+    "Restore original retained function order and place excluded conditional frames at original owning boundaries; remove detached empty debris only under mirror policy and repair logical anchors."
+  ],
+  "entries_added": 8,
+  "format_sites": 3
+}

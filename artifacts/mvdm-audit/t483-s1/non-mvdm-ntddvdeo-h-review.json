@@ -1,0 +1,118 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+  "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+  "current_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 30,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1519,
+      "original_count": 61,
+      "current_start": 1522,
+      "current_count": 1,
+      "original": [
+        "",
+        "typedef struct _COORD {",
+        "    SHORT X;",
+        "    SHORT Y;",
+        "} COORD, *PCOORD;",
+        "",
+        "typedef struct _CHAR_INFO {",
+        "    union {",
+        "        WCHAR UnicodeChar;",
+        "        CHAR   AsciiChar;",
+        "    } Char;",
+        "    USHORT Attributes;",
+        "} CHAR_INFO, *PCHAR_INFO;",
+        "",
+        "//",
+        "// Attributes flags:",
+        "//",
+        "",
+        "#define FOREGROUND_BLUE      0x0001 // text color contains blue.",
+        "#define FOREGROUND_GREEN     0x0002 // text color contains green.",
+        "#define FOREGROUND_RED       0x0004 // text color contains red.",
+        "#define FOREGROUND_INTENSITY 0x0008 // text color is intensified.",
+        "#define BACKGROUND_BLUE      0x0010 // background color contains blue.",
+        "#define BACKGROUND_GREEN     0x0020 // background color contains green.",
+        "#define BACKGROUND_RED       0x0040 // background color contains red.",
+        "#define BACKGROUND_INTENSITY 0x0080 // background color is intensified.",
+        "#define COMMON_LVB_LEADING_BYTE    0x0100 // Leading Byte of DBCS",
+        "#define COMMON_LVB_TRAILING_BYTE   0x0200 // Trailing Byte of DBCS",
+        "#define COMMON_LVB_GRID_HORIZONTAL 0x0400 // DBCS: Grid attribute: top horizontal.",
+        "#define COMMON_LVB_GRID_LVERTICAL  0x0800 // DBCS: Grid attribute: left vertical.",
+        "#define COMMON_LVB_GRID_RVERTICAL  0x1000 // DBCS: Grid attribute: right vertical.",
+        "#define COMMON_LVB_REVERSE_VIDEO   0x4000 // DBCS: Reverse fore/back ground attribute.",
+        "#define COMMON_LVB_UNDERSCORE      0x8000 // DBCS: Underscore.",
+        "",
+        "#define COMMON_LVB_SBCSDBCS        0x0300 // SBCS or DBCS flag.",
+        "",
+        "",
+        "",
+        "//",
+        "// Share of conapi.h",
+        "//",
+        "#define CHAR_TYPE_SBCS     0   // Displayed SBCS character",
+        "#define CHAR_TYPE_LEADING  2   // Displayed leading byte of DBCS",
+        "#define CHAR_TYPE_TRAILING 3   // Displayed trailing byte of DBCS",
+        "",
+        "",
+        "//",
+        "// Share of foncache.h",
+        "//",
+        "#define BITMAP_BITS_BYTE_ALIGN   8 // BYTE align is 8 bit",
+        "#define BITMAP_BITS_WORD_ALIGN  16 // WORD align is 16 bit",
+        "#define BITMAP_ARRAY_BYTE  3       // BYTE array is 8 bit  (shift count = 3)",
+        "",
+        "#define BITMAP_PLANES      1",
+        "#define BITMAP_BITS_PIXEL  1",
+        "",
+        "",
+        "#define BYTE_ALIGN  sizeof(UCHAR)",
+        "#define WORD_ALIGN  sizeof(USHORT)",
+        "",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1682,
+      "original_count": 1,
+      "current_start": 1627,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 1580,
+      "current": 1523,
+      "logical": 1520
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/mvdm-host/vdmredir/vrdisp.c",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_com.c"
+  ],
+  "limits": "Whole retained source equals pinned original after exclusion-body and whitespace projection. Exclusion-only category does not certify all supported header contexts, runtime device capability or absence of line findings."
+}

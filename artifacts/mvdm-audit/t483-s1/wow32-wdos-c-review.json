@@ -1,0 +1,74 @@
+{
+  "path": "src/mvdm-host/wow32/wdos.c",
+  "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+  "current_sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+  "changes": [
+    {
+      "original_start": 15,
+      "original_count": 1,
+      "current_start": 15,
+      "current_count": 2,
+      "original": [
+        "ULONG demClientErrorEx (HANDLE hFile, CHAR chDrive, BOOL bSetRegs);"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-294): use the shared worker ABI declaration. */",
+        "#include \"demexp.h\""
+      ],
+      "decision": "retain",
+      "change_plan": "Retain shared demexp.h declaration; do not restore local implicit calling-convention prototype. Keep worker implementation and argument/error behavior unchanged.",
+      "evidence": "Shared declaration explicitly __cdecl; original WOW calls demClientErrorEx at two drive-error sites; demerror.c is worker implementation. This is declaration consolidation, not alternate error handling."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 741,
+      "original_count": 29,
+      "current_start": 745,
+      "current_count": 1,
+      "original": [
+        "/* The following routine will probably never be used because we allow",
+        "   WOW apps to set a local time within the WOW. So we really want apps",
+        "   that read the time with int21 to go down to DOS where this local time",
+        "   is kept. But if we ever want to return the win32 time, then this",
+        "   routine will do it. */",
+        "/* WK32GetCurrentTime - Emulate DOS Get current Time call",
+        " *",
+        " *",
+        " * Entry -",
+        " *",
+        " * Exit",
+        " *    return value is packed with time information",
+        " *",
+        " */",
+        "ULONG FASTCALL WK32GetCurrentTime(PVDMFRAME pFrame)",
+        "{",
+        "    SYSTEMTIME systemtime;",
+        "",
+        "    UNREFERENCED_PARAMETER(pFrame);",
+        "",
+        "    GetLocalTime(&systemtime);",
+        "",
+        "    return ((DWORD) (systemtime.wHour   << 24 |",
+        "                     systemtime.wMinute << 16 |",
+        "                     systemtime.wSecond << 8  |",
+        "                     systemtime.wMilliseconds/10",
+        "                     ));",
+        "",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 746,
+      "original_line": 770,
+      "logical_line": 742
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Classification only, no product modification."
+}

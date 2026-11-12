@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+  "original_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+  "current_sha256": "f351453f515087eec402ce1fbcf028526c158a7f472fe6c530165331c57f831f",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 31,
+      "original_count": 324
+    }
+  ],
+  "initial_review": "Complete original/current comparison; one excluded PIG or PROFILE body only.",
+  "counter_review": "Remaining nonblank source matches original exactly after excluding the complete body and line/error directives. profile.c non-PROFILE empty functions are original definitions, not project-added success stubs.",
+  "limits": "Necessity classification only; no universal profile-selection proof or diagnostic-line certification. No runtime test performed."
+}

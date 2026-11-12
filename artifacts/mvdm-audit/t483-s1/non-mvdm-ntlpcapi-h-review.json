@@ -1,0 +1,90 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+  "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+  "current_sha256": "f6a3e397e878eccf05b5126b3c68cbfefb33cda2e058adf239da2bff6c74b7f8",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 30,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 45,
+      "original_count": 3,
+      "current_start": 48,
+      "current_count": 1,
+      "original": [
+        "#define LPC_CLIENT_ID CLIENT_ID64",
+        "#define LPC_SIZE_T ULONGLONG",
+        "#define LPC_PVOID ULONGLONG"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 132,
+      "original_count": 2,
+      "current_start": 136,
+      "current_count": 1,
+      "original": [
+        "#undef PORT_MAXIMUM_MESSAGE_LENGTH",
+        "#define PORT_MAXIMUM_MESSAGE_LENGTH 512"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 338,
+      "original_count": 1,
+      "current_start": 343,
+      "current_count": 1,
+      "original": [
+        ",   PortDumpInformation"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 355,
+      "original_count": 1,
+      "current_start": 362,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original_line": 48,
+      "current_line": 49,
+      "logical_line": 46,
+      "text": "#else"
+    },
+    {
+      "original_line": 134,
+      "current_line": 137,
+      "logical_line": 133,
+      "text": "#endif"
+    }
+  ],
+  "evidence": [
+    "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "src/common/base_srv/base_rpc_client_launch.c"
+  ],
+  "limits": "Five original conditional bodies excluded: C++ wrappers, USE_LPC6432 type/size alternatives, DEVL enumeration member. All retained declarations exact; no all-context macro-hit or native LPC wire ABI claim. No new build/runtime verification."
+}

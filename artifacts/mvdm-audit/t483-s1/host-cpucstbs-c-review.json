@@ -1,0 +1,53 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+  "original_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb",
+  "current_sha256": "8aa6950c9a7694c8adcb50b304e411121595278e699ad1bb233f4d417dc49a2d",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 3,
+      "original_count": 28,
+      "current_start": 4,
+      "current_count": 1,
+      "original": [
+        "",
+        "#include <nt.h>",
+        "#include <ntrtl.h>",
+        "#include <nturtl.h>",
+        "#include <windows.h>",
+        "",
+        "#include \"insignia.h\"",
+        "#include \"host_def.h\"",
+        "#include \"xt.h\"",
+        "#include \"ica.h\"",
+        "",
+        "void\tnpx_interrupt_line_waggled()",
+        "{",
+        "    ica_hw_interrupt(1, 5, 1);",
+        "}",
+        "",
+        "// MIPS interface from CPU cacheflush request",
+        "void cacheflush(long base_addr, long length)",
+        "{",
+        "    // should check return, but what is correct action (Exit??) if failure?",
+        "    NtFlushInstructionCache(GetCurrentProcess(), (PVOID) base_addr, length);",
+        "}",
+        "",
+        "void host_sigio_event()",
+        "{",
+        "}",
+        "",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "One A3CPU body excluded inside original !MONITOR frame; no retained-source difference.",
+  "counter_review": "Complete comparison proves npx interrupt stub, MIPS instruction-cache flush and empty sigio hook all belonged to original A3CPU branch; no CCPU behavior was added or replaced. Source exclusion classification is not proof that an empty carrier should remain in build.",
+  "evidence": "Full original/current source comparison; every changed body is bounded by original conditional directives. New-T310OriginalSoftpcNinja.ps1 baseCommonFlags selects CPU_40_STYLE/CCPU/PROD; target-specific overrides still require their own applicability evidence.",
+  "limits": "No new build/runtime result or universal configuration-hit proof. Original boundary comparison proves exclusion-only content, not diagnostic-line certification or product link reachability."
+}

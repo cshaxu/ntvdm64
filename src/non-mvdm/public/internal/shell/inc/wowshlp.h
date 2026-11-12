@@ -28,4 +28,3 @@ HINSTANCE APIENTRY WOWShellExecute(
    LPFNWOWSHELLEXECCB lpfnWowShellExecCB);
 
 
-

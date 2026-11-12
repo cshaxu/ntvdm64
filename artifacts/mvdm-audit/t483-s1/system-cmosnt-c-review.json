@@ -1,0 +1,45 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+  "original_sha256": "00156a734520b5d59442bf9d6127f4e722a7a697f9be33f34feecf4aef06d850",
+  "current_sha256": "3e94187916877a0ad20baebcd63cdc089034b0b047e3ac97263f4b9a26f39a80",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 456,
+      "original_count": 7,
+      "current_start": 458,
+      "current_count": 1,
+      "original": [
+        "\tif (host_runtime_inquire(C_FLOPPY_SERVER) == GFI_SLAVE_SERVER)",
+        "\t{",
+        "\t\tnum_flops =",
+        "\t\t\t(*(CHAR *) config_inquire(C_SLAVEPC_DEVICE, NULL))",
+        "\t\t\t? 1:0;",
+        "\t}",
+        "\telse"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 469,
+      "original_count": 3,
+      "current_start": 468,
+      "current_count": 1,
+      "original": [
+        "\t\tnum_flops +=",
+        "\t\t\t(*(CHAR *) config_inquire(C_FLOPPY_B_DEVICE, NULL))",
+        "\t\t\t? 1:0;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two excluded bodies: SLAVEPC equipment branch and FLOPPY_B count increment. Remaining source exact.",
+  "counter_review": "Original equipment construction and CMOS port/timer handling unchanged. Selected local floppy A count is original, not a newly invented fallback. This does not independently prove universal build-context exclusion.",
+  "limits": "Complete source-difference classification only; no fresh build/runtime or universal configuration/diagnostic-line certification."
+}

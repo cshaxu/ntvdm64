@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/wow32/wkbtbl.h",
+  "original_sha256": "416aa19bd74bfdf5b5b4bb7ae849fee56e9ecc378f47eea9f70ed252d8db8cc6",
+  "current_sha256": "87fc3f1fdb63425861abbeea075a5cec5872b16bf023062a76678543262dabd6",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 22,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "extern INT iKeyboardMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "line_basis": "LF only",
+  "limits": "Classification complete, pending evidence is neither proven fault nor repair."
+}

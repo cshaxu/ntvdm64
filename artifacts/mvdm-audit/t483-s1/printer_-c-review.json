@@ -1,0 +1,136 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+  "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+  "current_sha256": "3ccf4236b39535ed37c16dfccddd2d0a36436d94d6585ea50ad6938356ab1b52",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "file_sequence": "487",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_start": "64",
+      "current_count": "1",
+      "original_start": "63",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-printer-diagnostic",
+      "initial_review": "Added header or scalar-only INT17 entry/exit report supports default-off Setup diagnostics.",
+      "counter_review": "Reporter only checks trace configuration and appends a bounded log; original printer selection, status, IO and early return are outside report. Removing these four additions leaves only excluded-branch differences from original.",
+      "disposition": "delete",
+      "evidence": "printer_.c:64,110-112,136,210; ntvdm-exe/softpc/mvdm_softpc_termination.c:101-135",
+      "limits": "Source inspection only, no printer hardware/runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "related_callers": "printer_io; printer_bop_openclose; shared setup hardware reporter.",
+      "verification_required": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "487",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_start": "110",
+      "current_count": "3",
+      "original_start": "103",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-printer-diagnostic",
+      "initial_review": "Added header or scalar-only INT17 entry/exit report supports default-off Setup diagnostics.",
+      "counter_review": "Reporter only checks trace configuration and appends a bounded log; original printer selection, status, IO and early return are outside report. Removing these four additions leaves only excluded-branch differences from original.",
+      "disposition": "delete",
+      "evidence": "printer_.c:64,110-112,136,210; ntvdm-exe/softpc/mvdm_softpc_termination.c:101-135",
+      "limits": "Source inspection only, no printer hardware/runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "related_callers": "printer_io; printer_bop_openclose; shared setup hardware reporter.",
+      "verification_required": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "487",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_start": "136",
+      "current_count": "1",
+      "original_start": "126",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-printer-diagnostic",
+      "initial_review": "Added header or scalar-only INT17 entry/exit report supports default-off Setup diagnostics.",
+      "counter_review": "Reporter only checks trace configuration and appends a bounded log; original printer selection, status, IO and early return are outside report. Removing these four additions leaves only excluded-branch differences from original.",
+      "disposition": "delete",
+      "evidence": "printer_.c:64,110-112,136,210; ntvdm-exe/softpc/mvdm_softpc_termination.c:101-135",
+      "limits": "Source inspection only, no printer hardware/runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "related_callers": "printer_io; printer_bop_openclose; shared setup hardware reporter.",
+      "verification_required": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "487",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_start": "210",
+      "current_count": "1",
+      "original_start": "198",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-printer-diagnostic",
+      "initial_review": "Added header or scalar-only INT17 entry/exit report supports default-off Setup diagnostics.",
+      "counter_review": "Reporter only checks trace configuration and appends a bounded log; original printer selection, status, IO and early return are outside report. Removing these four additions leaves only excluded-branch differences from original.",
+      "disposition": "delete",
+      "evidence": "printer_.c:64,110-112,136,210; ntvdm-exe/softpc/mvdm_softpc_termination.c:101-135",
+      "limits": "Source inspection only, no printer hardware/runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "related_callers": "printer_io; printer_bop_openclose; shared setup hardware reporter.",
+      "verification_required": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 1,
+      "current_error_line": 25
+    },
+    {
+      "original_start": 28,
+      "original_count": 6,
+      "current_error_line": 30
+    },
+    {
+      "original_start": 46,
+      "original_count": 1,
+      "current_error_line": 46
+    },
+    {
+      "original_start": 65,
+      "original_count": 1,
+      "current_error_line": 69
+    },
+    {
+      "original_start": 87,
+      "original_count": 1,
+      "current_error_line": 93
+    },
+    {
+      "original_start": 116,
+      "original_count": 4,
+      "current_error_line": 128
+    },
+    {
+      "original_start": 201,
+      "original_count": 22,
+      "current_error_line": 216
+    }
+  ],
+  "counter_review": "After excluding exactly four diagnostic additions, boundary-aware original comparison matches every remaining substantive source line.",
+  "limits": "No functional change, build, runtime or complete line/context certification."
+}

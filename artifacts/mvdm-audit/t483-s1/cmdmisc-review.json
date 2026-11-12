@@ -1,0 +1,297 @@
+{
+  "path": "src/mvdm-host/dos/command/cmdmisc.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+  "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+  "current_sha256": "05a7ad498ba6c7033ddda06151f76a21d3db2fcec2b8c1f3217df049246a7475",
+  "review_complete": true,
+  "meaning": "All differences classified, including necessary corrections and unresolved failure boundaries; not a clean bill of health.",
+  "blocks": [
+    {
+      "original_start": 11,
+      "original_count": 0,
+      "current_start": 11,
+      "current_count": 8,
+      "classification": "headers",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 20,
+      "original_count": 2,
+      "current_start": 28,
+      "current_count": 6,
+      "classification": "headers",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 41,
+      "current_count": 12,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 34,
+      "original_count": 1,
+      "current_start": 58,
+      "current_count": 8,
+      "classification": "host-directory-capacity",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 67,
+      "current_count": 2,
+      "classification": "exec-path-snapshot",
+      "disposition": "retain-with-contract-boundary"
+    },
+    {
+      "original_start": 41,
+      "original_count": 0,
+      "current_start": 74,
+      "current_count": 1,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "original_start": 47,
+      "original_count": 2,
+      "current_start": 81,
+      "current_count": 17,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 52,
+      "original_count": 2,
+      "current_start": 101,
+      "current_count": 2,
+      "classification": "exec-path-snapshot",
+      "disposition": "retain-with-contract-boundary"
+    },
+    {
+      "original_start": 74,
+      "original_count": 1,
+      "current_start": 123,
+      "current_count": 1,
+      "classification": "pif-environment",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 235,
+      "original_count": 3,
+      "current_start": 284,
+      "current_count": 7,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 247,
+      "original_count": 1,
+      "current_start": 300,
+      "current_count": 8,
+      "classification": "pif-environment",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 257,
+      "original_count": 0,
+      "current_start": 317,
+      "current_count": 1,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "original_start": 284,
+      "original_count": 0,
+      "current_start": 345,
+      "current_count": 23,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 285,
+      "original_count": 0,
+      "current_start": 369,
+      "current_count": 1,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "original_start": 290,
+      "original_count": 2,
+      "current_start": 375,
+      "current_count": 11,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 294,
+      "original_count": 0,
+      "current_start": 388,
+      "current_count": 1,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "original_start": 332,
+      "original_count": 2,
+      "current_start": 427,
+      "current_count": 9,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 335,
+      "original_count": 5,
+      "current_start": 437,
+      "current_count": 10,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 361,
+      "original_count": 1,
+      "current_start": 468,
+      "current_count": 12,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 410,
+      "original_count": 1,
+      "current_start": 528,
+      "current_count": 6,
+      "classification": "wow-root-projection",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 419,
+      "original_count": 0,
+      "current_start": 542,
+      "current_count": 27,
+      "classification": "wow-environment-resize",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 458,
+      "original_count": 4,
+      "current_start": 608,
+      "current_count": 11,
+      "classification": "wow-command-marker",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 505,
+      "original_count": 1,
+      "current_start": 662,
+      "current_count": 8,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 510,
+      "original_count": 1,
+      "current_start": 674,
+      "current_count": 6,
+      "classification": "guest-access-and-failure",
+      "disposition": "requires-correction"
+    },
+    {
+      "original_start": 532,
+      "original_count": 1,
+      "current_start": 701,
+      "current_count": 3,
+      "classification": "current-directory-copy",
+      "disposition": "retain-and-minimize"
+    },
+    {
+      "original_start": 540,
+      "original_count": 1,
+      "current_start": 711,
+      "current_count": 9,
+      "classification": "current-directory-copy",
+      "disposition": "retain-and-minimize"
+    },
+    {
+      "original_start": 559,
+      "original_count": 1,
+      "current_start": 738,
+      "current_count": 1,
+      "classification": "current-directory-copy",
+      "disposition": "retain-and-minimize"
+    },
+    {
+      "original_start": 564,
+      "original_count": 1,
+      "current_start": 743,
+      "current_count": 10,
+      "classification": "current-directory-copy",
+      "disposition": "retain-and-minimize"
+    },
+    {
+      "original_start": 574,
+      "original_count": 1,
+      "current_start": 762,
+      "current_count": 9,
+      "classification": "current-directory-copy",
+      "disposition": "retain-and-minimize"
+    },
+    {
+      "original_start": 594,
+      "original_count": 7,
+      "current_start": 790,
+      "current_count": 12,
+      "classification": "scs-registration",
+      "disposition": "retain-with-failure-boundary"
+    },
+    {
+      "original_start": 638,
+      "original_count": 2,
+      "current_start": 839,
+      "current_count": 11,
+      "classification": "comspec-copy",
+      "disposition": "requires-contract-review"
+    },
+    {
+      "original_start": 643,
+      "original_count": 1,
+      "current_start": 853,
+      "current_count": 11,
+      "classification": "comspec-copy",
+      "disposition": "requires-contract-review"
+    },
+    {
+      "original_start": 656,
+      "original_count": 0,
+      "current_start": 876,
+      "current_count": 1,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "original_start": 657,
+      "original_count": 56,
+      "current_start": 878,
+      "current_count": 2,
+      "classification": "excluded-CHECK_IT_LATER"
+    },
+    {
+      "original_start": 714,
+      "original_count": 0,
+      "current_start": 881,
+      "current_count": 1,
+      "classification": "line-scaffolding-only"
+    }
+  ],
+  "source_proof": {
+    "resize": "src/mvdm-guest/dos/v86/cmd/command/tcode.asm:557 onward; carry means AX requested environment bytes, not error code",
+    "exec_path": "comequ.asm EXECPATHLEN=273 and tcode.asm stores that capacity",
+    "comspec": "src/mvdm-host/dos/command/cmddata.c lpszComSpec[64+8]",
+    "oem_result": "src/mvdm-host/oemuni/process.c GetEnvironmentVariableOem returns OemString.Length after successful bounded conversion",
+    "redirection": "cmdredir.c cmdCheckStandardHandles allocates record; cmdmisc retains original DWORD pointer store"
+  },
+  "format_restoration": "Removed only stale DIV-108 resource-mapping comment; retained #line and executable tokens.",
+  "limits": [
+    "No new runtime tests.",
+    "CF/error failure paths require correction; no speculative retry added.",
+    "Malformed guest lengths and SCS-registration failure delivery are not proved handled.",
+    "No guest source or binary changed."
+  ]
+}

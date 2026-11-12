@@ -1,0 +1,355 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+  "before_sha256": "337cba5953c23f321bd44224f9f3e1ef67c0d09a403805344a3669d21b486ca4",
+  "current_sha256": "1a2f5087bd4ed7e44732b7fb55b7e67c311da6216c924e82772c97b5e1317841",
+  "functions": [
+    {
+      "name": "SkipIDorString",
+      "original_start": 418,
+      "original_end": 427,
+      "current_start": 30,
+      "current_end": 39,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "GetSizeDialogTemplate",
+      "original_start": 438,
+      "original_end": 552,
+      "current_start": 51,
+      "current_end": 165,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "DialogBoxIndirectParamAorW",
+      "original_start": 593,
+      "original_end": 623,
+      "current_start": 168,
+      "current_end": 198,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "WOWFindResourceExWCover",
+      "original_start": 3923,
+      "original_end": 3946,
+      "current_start": 223,
+      "current_end": 246,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "HowManyColors",
+      "original_start": 2991,
+      "original_end": 3018,
+      "current_start": 281,
+      "current_end": 308,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "TrulyMonochrome",
+      "original_start": 3299,
+      "original_end": 3331,
+      "current_start": 319,
+      "current_end": 351,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "ChangeDibColors",
+      "original_start": 3029,
+      "original_end": 3122,
+      "current_start": 363,
+      "current_end": 456,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "CopyDibHdr",
+      "original_start": 3355,
+      "original_end": 3467,
+      "current_start": 481,
+      "current_end": 597,
+      "identical_ignoring_line_directives": false,
+      "diff": [
+        "--- \n",
+        "+++ \n",
+        "@@ -84,6 +84,8 @@\n",
+        "             Fake.rgb[0]              = RESCLR_BLACK;",
+        "             Fake.rgb[1]              = RESCLR_WHITE;",
+        "+            /* DIVERGENCE(OPENNT-HOST-034): capture input bits before",
+        "+             * redirecting upbih, which upOldIcoCur aliases, to local Fake. */",
+        "+            *lplpBits                = upOldIcoCur->abBitmap;",
+        "             upbih                    = (LPBITMAPINFOHEADER)&Fake;",
+        "-            *lplpBits                = upOldIcoCur->abBitmap;",
+        "             Fake.rgb[2]              = *((LPDWORD)*lplpBits);  // For LR_LOADTRANSPARENT",
+        " "
+      ]
+    },
+    {
+      "name": "Convert1BppToMonoBitmap",
+      "original_start": 1513,
+      "original_end": 1554,
+      "current_start": 614,
+      "current_end": 655,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "CreateScreenBitmap",
+      "original_start": 1565,
+      "original_end": 1719,
+      "current_start": 667,
+      "current_end": 816,
+      "identical_ignoring_line_directives": false,
+      "diff": [
+        "--- \n",
+        "+++ \n",
+        "@@ -108,22 +108,9 @@\n",
+        "                 dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;",
+        " ",
+        "+#endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */",
+        " #if 0 // We use to do the dib-section create, but this breaks icons",
+        "-      // when they are made public (can't make a dibsection public). So",
+        "-      // we now wil create this as a real-dib.",
+        "-      //",
+        "-                {",
+        "-                DWORD dwDummy;",
+        "-",
+        "-                dib4Vga.bi.biWidth    =  cx;",
+        "-                dib4Vga.bi.biHeight   = -cy;     // top-down DIB (like a DDB)",
+        "-",
+        "-                hbm = CreateDIBSection(hdcScreen,",
+        "-                                       (LPBITMAPINFO)&dib4Vga,",
+        "-                                       DIB_RGB_COLORS,",
+        "-                                       (LPVOID)&dwDummy,",
+        "-                                       0,",
+        "-                                       0);",
+        "-                }",
+        "+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.",
+        " #else",
+        "+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)",
+        " ",
+        "                 dib1Vga.bi.biWidth  = cx;",
+        "@@ -137,4 +124,6 @@\n",
+        "                                      DIB_RGB_COLORS);",
+        " #endif",
+        "+#endif",
+        "+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)",
+        "             }",
+        "         }"
+      ]
+    },
+    {
+      "name": "BitmapFromDIB",
+      "original_start": 2792,
+      "original_end": 2983,
+      "current_start": 828,
+      "current_end": 1019,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "ConvertDIBBitmap",
+      "original_start": 3488,
+      "original_end": 3609,
+      "current_start": 1041,
+      "current_end": 1162,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    },
+    {
+      "name": "WOWLoadBitmapA",
+      "original_start": 3954,
+      "original_end": 3986,
+      "current_start": 1174,
+      "current_end": 1206,
+      "identical_ignoring_line_directives": true,
+      "diff": []
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "current_line": 780,
+      "logical_line": 1675,
+      "frame": [
+        778,
+        1674,
+        "#if 0 // We use to do the dib-section create, but this breaks icons"
+      ],
+      "body": "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+    },
+    {
+      "current_line": 1213,
+      "logical_line": 1481,
+      "frame": [
+        1211,
+        1480,
+        "#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT."
+      ],
+      "body": "#error Excluded original disabled cursor branch"
+    },
+    {
+      "current_line": 1221,
+      "logical_line": 2299,
+      "frame": [
+        1219,
+        2298,
+        "#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT."
+      ],
+      "body": "#error Excluded original disabled image branch"
+    },
+    {
+      "current_line": 1229,
+      "logical_line": 2625,
+      "frame": [
+        1227,
+        2624,
+        "#if 0"
+      ],
+      "body": "#error Excluded original disabled icon-loading branch"
+    },
+    {
+      "current_line": 1239,
+      "logical_line": 3752,
+      "frame": [
+        1237,
+        3751,
+        "#if 0 //CHRISWIL: Not in Win95"
+      ],
+      "body": "#error Excluded original disabled image-matching branch"
+    },
+    {
+      "current_line": 1250,
+      "logical_line": 4517,
+      "frame": [
+        1248,
+        4516,
+        "#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT."
+      ],
+      "body": "#error Excluded original disabled image-copy branch"
+    },
+    {
+      "current_line": 1258,
+      "logical_line": 4575,
+      "frame": [
+        1256,
+        4574,
+        "#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT."
+      ],
+      "body": "#error Excluded original disabled directory branch"
+    },
+    {
+      "current_line": 1266,
+      "logical_line": 2641,
+      "frame": [
+        1264,
+        2640,
+        "#ifdef LATER // SanfordS"
+      ],
+      "body": "#error Excluded unsupported original LATER branch"
+    },
+    {
+      "current_line": 1275,
+      "logical_line": 882,
+      "frame": [
+        1273,
+        881,
+        "#ifdef DEBUG"
+      ],
+      "body": "#error Unsupported DEBUG original branch"
+    },
+    {
+      "current_line": 1283,
+      "logical_line": 3902,
+      "frame": [
+        1281,
+        3901,
+        "#ifdef DEBUG"
+      ],
+      "body": "#error Unsupported DEBUG original branch"
+    }
+  ],
+  "source_derived_function_line_mismatches": [],
+  "format_restorations": [
+    {
+      "function": "SkipIDorString",
+      "original_start": 411,
+      "original_count": 6
+    },
+    {
+      "function": "GetSizeDialogTemplate",
+      "original_start": 429,
+      "original_count": 8
+    },
+    {
+      "function": "WOWFindResourceExWCover",
+      "original_start": 3915,
+      "original_count": 7
+    },
+    {
+      "function": "HowManyColors",
+      "original_start": 2985,
+      "original_count": 5
+    },
+    {
+      "function": "TrulyMonochrome",
+      "original_start": 3291,
+      "original_count": 7
+    },
+    {
+      "function": "ChangeDibColors",
+      "original_start": 3020,
+      "original_count": 8
+    },
+    {
+      "function": "CopyDibHdr",
+      "original_start": 3333,
+      "original_count": 21
+    },
+    {
+      "function": "Convert1BppToMonoBitmap",
+      "original_start": 1499,
+      "original_count": 13
+    },
+    {
+      "function": "CreateScreenBitmap",
+      "original_start": 1556,
+      "original_count": 8
+    },
+    {
+      "function": "BitmapFromDIB",
+      "original_start": 2783,
+      "original_count": 8
+    },
+    {
+      "function": "ConvertDIBBitmap",
+      "original_start": 3469,
+      "original_count": 18
+    },
+    {
+      "function": "WOWLoadBitmapA",
+      "original_start": 3948,
+      "original_count": 5
+    },
+    {
+      "reason": "Remove obsolete not-product-selected comment; two real product objects are selected."
+    }
+  ],
+  "initial_review": "Two product translation contexts retain dialog walker/modal entry and bitmap/resource closure. Eleven of thirteen function bodies exact; legacy bitmap pointer-order fix and selection/exclusion scaffolding account for other function differences.",
+  "counter_review": "Do not restore old pointer alias order merely to match original. Keep finite USER bindings, no import of omitted unrelated resource families. BMR_BITMAP has no retained use. Detached conditional guards and moved constants require source/context mapping reconciliation; no blanket line-correct claim.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: clres.obj and dialog-template.obj",
+    "src/wow32-dll/source/wow_bitmap_bindings.c: scoped DC/lock/TLS and finally cleanup",
+    "src/wow32-dll/include/wow_bitmap_bindings.h: finite native services and zero-dimension LoadBmp contract",
+    "src/wow32-dll/source/wow_dialog_creation_binding.c: task/borrow/context scope and original modal entry",
+    "src/wow32-dll/include/wow_menu_resource_bindings.h: W32FindResource Unicode/ANSI boundary",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_template_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_original_bitmap_header_fixture.c: old-format input-address equality/negative-original route",
+    "test/adapter-mvdm-host-out/wow/wow_bitmap_binding_failure_fixture.c"
+  ],
+  "limits": "Source and fixture inspection only; no tests/build run. Function-exactness excludes #line and does not prove all modern bindings equivalent or malformed arbitrary resources safe. Source-derived line analysis is not compiler-verified. Full original USER resource functions omitted by admitted slice are not claimed unreachable in original NT."
+}

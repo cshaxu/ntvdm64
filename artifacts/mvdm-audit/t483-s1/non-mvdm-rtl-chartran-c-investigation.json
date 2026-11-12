@@ -1,0 +1,51 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "status": "in-progress; not included in completed-file count",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "current_sha256": "9f6cc2803fb6d93b867fc60c2f0f6e95eaa564550ece59f3923bb83e834f67c7",
+  "selected_profile": {
+    "_USERK_": false,
+    "FE_SB": false,
+    "FE_IME": false,
+    "DEBUG": false
+  },
+  "comparison_method": "Read complete files; explicitly select only the four named conditionals, reject unknown ifdef names; extract balanced function bodies; remove comments and whitespace. Source comparison, not preprocessing or runtime proof.",
+  "selected_bodies_equal": [
+    "RtlMBMessageWParamCharToWCS",
+    "RtlInitLargeAnsiString",
+    "RtlInitLargeUnicodeString",
+    "WCSToMBEx",
+    "MBToWCSEx"
+  ],
+  "initial_review": [
+    "Original five conversion/constructor algorithms retained under stated profile. Do not replace with a new conversion implementation.",
+    "Private CLIENTINFO codepage access replaced with current HKL locale query; original client/client.c ToAsciiEx uses same locale query but that alone does not prove equivalence to cached CLIENTINFO producer.",
+    "Finite allocator facade uses LocalAlloc/LocalFree and native ACP provider; conversion bodies preserve original failure/free behavior.",
+    "NWCH has no selected use after reverse message converter omission; candidate partial cleanup, not whole-file deletion.",
+    "Retained functions reordered and reverse converter absent; detached exclusion structures remain at end."
+  ],
+  "counter_review": [
+    "Selected body equality excludes macro/provider behavior; cannot claim entire semantics equal.",
+    "Whole src/test/tools search finds RtlWCSMessageWParamCharToMB only in retained conditional comments. Absence is source evidence, not complete export/build consumer proof.",
+    "Native layout query preserves LastError and rejects out-of-WORD codepages; dynamic layout changes and original codepage producer still require explicit comparison."
+  ],
+  "evidence": [
+    "src/compat/include/wow_char_conversion_abi.h",
+    "src/wow32-dll/source/ntuser_rtl_compat.c",
+    "src/wow32-dll/include/control-client/default-precomp.h",
+    "src/wow32-dll/include/wow_bitmap_bindings.h",
+    "src/wow32-dll/include/wow_class_client_bindings.h",
+    "src/wow32-dll/include/wow_menu_resource_bindings.h",
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "OpenNT/windows/core/ntuser/client/client.c:940-960"
+  ],
+  "remaining": [
+    "Complete caller allocation/free ownership mapping and existing fixture inspection.",
+    "Register ordered decisions including original structure/line and omitted reverse converter boundary.",
+    "Restore only proved missing original comments if appropriate; no functional edits authorized."
+  ],
+  "limits": [
+    "No compilation, runtime test or publication in this step.",
+    "No source edit; no increment to reviewed-file count."
+  ]
+}

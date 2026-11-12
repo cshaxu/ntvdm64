@@ -1,0 +1,98 @@
+{
+  "path": "src/mvdm-host/vdmredir/vrnetb.c",
+  "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+  "current_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+  "excluded_bodies": [
+    {
+      "original_start": 135,
+      "original_count": 8,
+      "current_start": 137,
+      "original": [
+        "    IF_DEBUG(NETBIOS) {",
+        "        DBGPRINT(\"VrNetbios5c: NCB @ %04x:%04x Command=%02x pncbw=%08x\\n\",",
+        "                 es,",
+        "                 bx,",
+        "                 pncb->ncb_command,",
+        "                 pncbw",
+        "                 );",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 314,
+      "original_count": 11,
+      "current_start": 312,
+      "original": [
+        "",
+        "    IF_DEBUG(NETBIOS) {",
+        "        DBGPRINT(\"Netbios32Post: NCB @ %04x:%04x Command=%02x ANR=%08x. pncbw @ %08x\\n\",",
+        "                 pncbw->ncb_es,",
+        "                 pncbw->ncb_bx,",
+        "                 pncbw->ncb_command,",
+        "                 READ_DWORD(&pdosNcb->ncb_post),",
+        "                 pncbw",
+        "                 );",
+        "    }",
+        ""
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 385,
+      "original_count": 3,
+      "current_start": 376,
+      "original": [
+        "    IF_DEBUG(NETBIOS) {",
+        "        DBGPRINT(\"Netbios5cInterrupt\\n\");",
+        "    }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 406,
+      "original_count": 8,
+      "current_start": 398,
+      "original": [
+        "        IF_DEBUG(NETBIOS) {",
+        "            DBGPRINT(\"Netbios5cInterrupt returning pncbw: %lx, 16-bit NCB: %04x:%04x Command=%02x\\n\",",
+        "                     pncbw,",
+        "                     pncbw->ncb_es,",
+        "                     pncbw->ncb_bx,",
+        "                     pncbw->ncb_command",
+        "                     );",
+        "        }"
+      ],
+      "current": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "retained_nonblank_line_mismatches": [
+    [
+      138,
+      143,
+      136,
+      "#endif"
+    ],
+    [
+      313,
+      325,
+      315,
+      "#endif"
+    ],
+    [
+      377,
+      388,
+      386,
+      "#endif"
+    ],
+    [
+      399,
+      414,
+      407,
+      "#endif"
+    ]
+  ],
+  "initial_review": "Only four original DBG logging bodies removed; NetBIOS NCB execution, post callback and interrupt completion code retained exactly.",
+  "counter_review": "Verified complete equal ranges and original branch boundaries; no extra functional diff. Line mismatch is independently registered, not runtime failure.",
+  "limits": "No new network/runtime or compile acceptance."
+}

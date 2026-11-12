@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+  "original_sha256": "d7a32e28259b5c25146a9e83feeae102be6815d937209a23c5ccf292aa1c0dac",
+  "current_sha256": "d2f2078dc4c3f8281418b11502da7b27e79ba9de8e179d1c174629e098d641da",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 9,
+      "original_count": 4
+    }
+  ],
+  "initial_review": "Single non-ANSI alternative replaces four unprototyped declarations. Selected ANSI signatures and READ_STATE layout are unchanged.",
+  "counter_review": "Full-file reverse comparison preserves ega_need_read_op(int), three void lifecycle/update prototypes, ULONG mode and two UTINY compare/mask fields. No new read state, colour conversion or dispatch policy; the historical non-ANSI declaration removal is the entire non-line diff.",
+  "limits": "Source difference classification only; no new compile/runtime pass."
+}

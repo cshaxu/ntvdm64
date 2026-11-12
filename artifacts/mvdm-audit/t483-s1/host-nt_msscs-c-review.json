@@ -1,0 +1,396 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+  "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+  "current_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+  "review_complete": true,
+  "register_entries": 13,
+  "changes": [
+    {
+      "original_start": 33,
+      "original_count": 0,
+      "current_start": 33,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"nt_pif.h\""
+      ]
+    },
+    {
+      "original_start": 40,
+      "original_count": 0,
+      "current_start": 42,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "",
+        "#include \"mvdm_softpc_firmware.h\"",
+        "#include \"ntvdm-exe/softpc/include/mvdm_shadow_registry.h\"",
+        "",
+        "/* DIVERGENCE(MVDM-HOST-DIV-084): `emm_mngr.c` is a selected original DOS",
+        " * owner but no selected public header carries its page-frame initializer.",
+        " * Publish its exact original boolean/LIM configuration contract here; the",
+        " * function and its EMS page-frame behavior remain in the original package. */",
+        "extern boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data);"
+      ]
+    },
+    {
+      "original_start": 120,
+      "original_count": 1,
+      "current_start": 133,
+      "current_count": 1,
+      "original": [
+        "              (PCHAR)&fVirtualInt,"
+      ],
+      "current": [
+        "              (host_addr)&fVirtualInt,"
+      ]
+    },
+    {
+      "original_start": 123,
+      "original_count": 0,
+      "current_start": 136,
+      "current_count": 8,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-039): in the original build, `i386` selected",
+        "     * NT's kernel-V86 monitor while the non-i386 body selected the software",
+        "     * CCPU machine.  This product deliberately selects CPU_40_STYLE on an",
+        "     * x86 host, so preserve the original software-CPU state transition based",
+        "     * on the machine owner rather than host ISA.  MIPS_BIT_MASK here names",
+        "     * the historical FSTI/FCLI fallback selector; it does not enable MIPS",
+        "     * guest code or a second CPU.",
+        "     */"
+      ]
+    },
+    {
+      "original_start": 124,
+      "original_count": 1,
+      "current_start": 145,
+      "current_count": 2,
+      "original": [
+        "    fVirtualInt |=  MIPS_BIT_MASK;"
+      ],
+      "current": [
+        "#ifdef CPU_40_STYLE",
+        "    fVirtualInt |= MIPS_BIT_MASK;"
+      ]
+    },
+    {
+      "original_start": 126,
+      "original_count": 1,
+      "current_start": 149,
+      "current_count": 1,
+      "original": [
+        "    fVirtualInt &=  ~MIPS_BIT_MASK;"
+      ],
+      "current": [
+        "#error Excluded unsupported non-CPU40 virtual interrupt state"
+      ]
+    },
+    {
+      "original_start": 128,
+      "original_count": 0,
+      "current_start": 151,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif /* i386 */"
+      ]
+    },
+    {
+      "original_start": 169,
+      "original_count": 3,
+      "current_start": 198,
+      "current_count": 6,
+      "original": [
+        "     dw = GetSystemDirectory(buffer, sizeof(buffer));",
+        "     if (!dw || dw >= sizeof(buffer)) {",
+        "         host_error(EG_OWNUP, ERR_QUIT, \"NTVDM:InitialiseDosEmulation fails\");"
+      ],
+      "current": [
+        "     /* DIVERGENCE: MVDM-HOST-DIV-038. The original location is the NT4",
+        "      * system directory. The original session owns a selected immutable DOS",
+        "      * system root instead; retain the following original file/size/read/SAS",
+        "      * and CS:IP sequence unchanged. */",
+        "     if (!mvdm_softpc_system_find_file(\"ntio.sys\", buffer, sizeof(buffer))) {",
+        "         host_error(EG_OWNUP, ERR_QUIT, \"ntio.sys\");"
+      ]
+    },
+    {
+      "original_start": 173,
+      "original_count": 0,
+      "current_start": 206,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "         return (-1);"
+      ]
+    },
+    {
+      "original_start": 174,
+      "original_count": 2,
+      "current_start": 209,
+      "current_count": 0,
+      "original": [
+        "",
+        "     strcat(buffer, \"\\\\ntio.sys\");"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 260,
+      "original_count": 53,
+      "current_start": 298,
+      "current_count": 11,
+      "original": [
+        "   HANDLE hFile, hFind;",
+        "   WIN32_FIND_DATA wfd;",
+        "   char *pchIOSYS    =\"C:\\\\IO.SYS\";",
+        "   char *pchMSDOSSYS =\"C:\\\\MSDOS.SYS\";",
+        "",
+        "",
+        "   hFind = FindFirstFile(pchMSDOSSYS, &wfd);",
+        "   if (hFind == INVALID_HANDLE_VALUE) {",
+        "       hFind = FindFirstFile(\"C:\\\\IBMDOS.SYS\", &wfd);",
+        "       }",
+        "",
+        "   if (hFind != INVALID_HANDLE_VALUE) {",
+        "       FindClose(hFind);",
+        "       }",
+        "   else {",
+        "       hFile = CreateFile(pchMSDOSSYS,",
+        "                          0,",
+        "                          FILE_SHARE_READ | FILE_SHARE_WRITE,",
+        "                          NULL,",
+        "                          CREATE_NEW,",
+        "                          FILE_ATTRIBUTE_HIDDEN |",
+        "                          FILE_ATTRIBUTE_SYSTEM |",
+        "                          FILE_ATTRIBUTE_READONLY,",
+        "                          0);",
+        "       if (hFile != INVALID_HANDLE_VALUE) { // not much we can do if fails",
+        "           CloseHandle(hFile);",
+        "           }",
+        "",
+        "       }",
+        "",
+        "   hFind = FindFirstFile(pchIOSYS, &wfd);",
+        "   if (hFind == INVALID_HANDLE_VALUE) {",
+        "       hFind = FindFirstFile(\"C:\\\\IBMBIO.SYS\", &wfd);",
+        "       }",
+        "",
+        "   if (hFind != INVALID_HANDLE_VALUE) {",
+        "       FindClose(hFind);",
+        "       }",
+        "   else {",
+        "       hFile = CreateFile(pchIOSYS,",
+        "                          0,",
+        "                          FILE_SHARE_READ | FILE_SHARE_WRITE,",
+        "                          NULL,",
+        "                          CREATE_NEW,",
+        "                          FILE_ATTRIBUTE_HIDDEN |",
+        "                          FILE_ATTRIBUTE_SYSTEM |",
+        "                          FILE_ATTRIBUTE_READONLY,",
+        "                          0);",
+        "       if (hFile != INVALID_HANDLE_VALUE) { // not much we can do if fails",
+        "           CloseHandle(hFile);",
+        "           }",
+        "",
+        "       }"
+      ],
+      "current": [
+        "#if defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)",
+        "   /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session",
+        "    * call site and void completion contract, but do not create Brief's",
+        "    * installation-only C:\\\\MSDOS.SYS/C:\\\\IO.SYS placeholders on an admitted",
+        "    * real host drive. The selected adapter records this explicit product",
+        "    * disposition; the original source body remains below as mirror evidence. */",
+        "   mvdm_softpc_prepare_system_file_compatibility();",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 346,
+      "original_count": 1,
+      "current_start": 343,
+      "current_count": 2,
+      "original": [
+        "    char config_sys_pathname[MAX_PATH];"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-278): match GetPIFConfigFiles' output contract. */",
+        "    char config_sys_pathname[MAX_PATH+12];"
+      ]
+    },
+    {
+      "original_start": 648,
+      "original_count": 9,
+      "current_start": 650,
+      "current_count": 5,
+      "original": [
+        "    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,",
+        "                       pKeyName,",
+        "\t\t       0,",
+        "\t\t       KEY_QUERY_VALUE,",
+        "\t\t       &VDDKey",
+        "\t\t     ) != ERROR_SUCCESS){",
+        "        RcErrorDialogBox(ED_REGVDD, pKeyName, NULL);",
+        "        return;",
+        "    }"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-148): retain the original open/query/close",
+        "     * sequence. Its local include returns a private layered handle: NTVDM.REG",
+        "     * overrides the admitted read-only HKLM snapshot, never a native handle. */",
+        "    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, pKeyName, 0, KEY_READ, &VDDKey) !=",
+        "        ERROR_SUCCESS) return;"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 87,
+      "original_count": 2,
+      "current_start": 100,
+      "current_count": 1,
+      "original": [
+        "        printf(\"NTVDM:DBGInit fails\\n\");",
+        "        HostDebugBreak();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 139,
+      "original_count": 2,
+      "current_start": 168,
+      "current_count": 1,
+      "original": [
+        "    if (TlsDirectError == 0xFFFFFFFF)",
+        "        printf(\"NTVDM: TlsDirectError==0xFFFFFFFF GLE=%ld\\n\", GetLastError);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 190,
+      "original_count": 1,
+      "current_start": 225,
+      "current_count": 1,
+      "original": [
+        "         printf(\"NTVDM:Fatal Error, Invalid file or missing - %s\\n\",buffer);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 207,
+      "original_count": 1,
+      "current_start": 244,
+      "current_count": 1,
+      "original": [
+        "          printf(\"NTVDM:Fatal Error, Read file error - %s\\n\",buffer);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 553,
+      "original_count": 2,
+      "current_start": 553,
+      "current_count": 1,
+      "original": [
+        "    printf(\"base segment=%x, backfill =%lx; altreg sets=%d\\n\",",
+        "\t   base_segment, lim_data->backfill, total_altreg_sets);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 594,
+      "original_count": 1,
+      "current_start": 595,
+      "current_count": 1,
+      "original": [
+        "\tprintf(\"couldn't find primary page frame\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 627,
+      "original_count": 3,
+      "current_start": 630,
+      "current_count": 1,
+      "original": [
+        "    printf(\"page frames:\\n\");",
+        "    for (i = 0; i < total_phys_pages; i++)",
+        "\tprintf(\"page number %d, segment %x\\n\",i, page_table[i]);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1076,
+      "original_count": 33,
+      "current_start": 1077,
+      "current_count": 1,
+      "original": [
+        "",
+        "    if( !fIsRedirection && sc.ScreenState==FULLSCREEN )",
+        "    {",
+        "\thalf_word mode = 3,",
+        "\t\t  lines = 0;",
+        "",
+        "        //",
+        "        // WORD 6 and other apps cause this code path to be followed",
+        "        // on application startup. now if line==0, SelectMouseBuffer",
+        "        // causes a 640 x 200 buffer to be selected. This is not",
+        "        // correct if the app is in a 43 or 50 text line mode.",
+        "        // Therefore, since the BIOS data area location 40:84 holds",
+        "        // the number of rows - 1 at this point (if the app uses int 10h",
+        "        // function 11 to change mode) then pick up the correct value",
+        "        // from here. Andy!",
+        "",
+        "        if(sc.ModeType == TEXT)",
+        "        { ",
+        "           sas_load(0x484,&lines);",
+        "",
+        "           //",
+        "           // The value is pulled from the BIOS data area.",
+        "           // This is one less than the number of rows. So ",
+        "           // increment to give SelectMouseBuffer what it ",
+        "           // expects. Let this function do the necessary",
+        "           // handling of non 25, 43 and 50 values.",
+        "           //",
+        "           ",
+        "           lines++;",
+        "        }",
+        "",
+        "        SelectMouseBuffer(mode, lines);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete diff: declarations/ABI, software-CPU interrupt selector, selected NTIO root, suppressed boot-file writes, config buffer capacity and layered VDD registry read. No guest changes.",
+  "counter_review": "Current prepare_system_file_compatibility is empty, not a recorded operation. RegOpenKeyEx binds through common/wow/registry.h to open_section; current wrapper ignores access, so KEY_READ is not required by it. Silent open failure also hides allocation failures, unlike original dialog. Original CPU selector structure and explanatory text need coupled review; do not enable hardware V86.",
+  "decision_counts": {
+    "retain": 7,
+    "pending-evidence": 5,
+    "simplify": 1
+  },
+  "limits": "CPU selector pieces include excluded alternative but are registered jointly as semantic structure. No source edits; unresolved details remain pending."
+}

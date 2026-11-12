@@ -1,0 +1,971 @@
+{
+  "path": "src/mvdm-host/wow32/wspool.c",
+  "original_sha256": "c76bec31ae9020ea0173c20d42986f36e6888a315a5d27e91e5cbf2579cb2ad8",
+  "current_sha256": "5e7055d8927343c2f9c7009cbefbf05e37087085023efc910edc7d4eddfb0935",
+  "changes": [
+    {
+      "original_start": 96,
+      "original_count": 0,
+      "current_start": 96,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "                // MVDM-HOST-DIV-880: no caller owns a failed carrier.",
+        "                if (!ul) {",
+        "                    (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);",
+        "                }"
+      ],
+      "decision": "retain",
+      "necessity": "Close acquired native printer when StartDoc fails or guest carrier creation fails; preserve saved original error/result instead of publishing an unowned handle.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 99,
+      "original_count": 0,
+      "current_start": 103,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);"
+      ],
+      "decision": "retain",
+      "necessity": "Close acquired native printer when StartDoc fails or guest carrier creation fails; preserve saved original error/result instead of publishing an unowned handle.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 230,
+      "original_count": 1,
+      "current_start": 235,
+      "current_count": 0,
+      "original": [
+        "    HAND16  h16 = 0;"
+      ],
+      "current": [],
+      "decision": "retain",
+      "necessity": "Remove unused h16 local; no caller or result depends on it.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 236,
+      "original_count": 0,
+      "current_start": 240,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    // MVDM-HOST-DIV-880: publish only an initialized carrier.",
+        "    if (!hnd) {",
+        "        return 0;",
+        "    }"
+      ],
+      "decision": "retain",
+      "necessity": "Only publish carrier after allocation, lock and mapping succeed; unlock acquired lock and free failed carrier, return zero. Original returned an uninitialized carrier on failed mapping/lock.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 244,
+      "original_count": 0,
+      "current_start": 252,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            return (LOWORD(hnd));"
+      ],
+      "decision": "retain",
+      "necessity": "Only publish carrier after allocation, lock and mapping succeed; unlock acquired lock and free failed carrier, return zero. Original returned an uninitialized carrier on failed mapping/lock.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 245,
+      "original_count": 0,
+      "current_start": 254,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        LocalUnlock16(hnd);"
+      ],
+      "decision": "retain",
+      "necessity": "Only publish carrier after allocation, lock and mapping succeed; unlock acquired lock and free failed carrier, return zero. Original returned an uninitialized carrier on failed mapping/lock.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 250,
+      "original_count": 1,
+      "current_start": 260,
+      "current_count": 2,
+      "original": [
+        "    return (LOWORD(hnd));"
+      ],
+      "current": [
+        "    LocalFree16(hnd);",
+        "    return 0;"
+      ],
+      "decision": "retain",
+      "necessity": "Only publish carrier after allocation, lock and mapping succeed; unlock acquired lock and free failed carrier, return zero. Original returned an uninitialized carrier on failed mapping/lock.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    },
+    {
+      "original_start": 257,
+      "original_count": 1,
+      "current_start": 268,
+      "current_count": 1,
+      "original": [
+        "    HANDLE  h32;"
+      ],
+      "current": [
+        "    HANDLE  h32 = NULL; // MVDM-HOST-DIV-880: failed lock has no handle."
+      ],
+      "decision": "retain",
+      "necessity": "Initialize native printer result to NULL so failed carrier lock/map cannot return an indeterminate handle to printing callers.",
+      "change_plan": "Retain original-owner repair and its paired cleanup; no second handle map."
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [
+    {
+      "current": 100,
+      "original": 96,
+      "logical": 100
+    },
+    {
+      "current": 101,
+      "original": 97,
+      "logical": 101
+    },
+    {
+      "current": 102,
+      "original": 98,
+      "logical": 102
+    },
+    {
+      "current": 104,
+      "original": 99,
+      "logical": 104
+    },
+    {
+      "current": 106,
+      "original": 101,
+      "logical": 106
+    },
+    {
+      "current": 107,
+      "original": 102,
+      "logical": 107
+    },
+    {
+      "current": 108,
+      "original": 103,
+      "logical": 108
+    },
+    {
+      "current": 109,
+      "original": 104,
+      "logical": 109
+    },
+    {
+      "current": 110,
+      "original": 105,
+      "logical": 110
+    },
+    {
+      "current": 112,
+      "original": 107,
+      "logical": 112
+    },
+    {
+      "current": 114,
+      "original": 109,
+      "logical": 114
+    },
+    {
+      "current": 115,
+      "original": 110,
+      "logical": 115
+    },
+    {
+      "current": 116,
+      "original": 111,
+      "logical": 116
+    },
+    {
+      "current": 118,
+      "original": 113,
+      "logical": 118
+    },
+    {
+      "current": 119,
+      "original": 114,
+      "logical": 119
+    },
+    {
+      "current": 120,
+      "original": 115,
+      "logical": 120
+    },
+    {
+      "current": 121,
+      "original": 116,
+      "logical": 121
+    },
+    {
+      "current": 122,
+      "original": 117,
+      "logical": 122
+    },
+    {
+      "current": 125,
+      "original": 120,
+      "logical": 125
+    },
+    {
+      "current": 126,
+      "original": 121,
+      "logical": 126
+    },
+    {
+      "current": 127,
+      "original": 122,
+      "logical": 127
+    },
+    {
+      "current": 128,
+      "original": 123,
+      "logical": 128
+    },
+    {
+      "current": 130,
+      "original": 125,
+      "logical": 130
+    },
+    {
+      "current": 132,
+      "original": 127,
+      "logical": 132
+    },
+    {
+      "current": 133,
+      "original": 128,
+      "logical": 133
+    },
+    {
+      "current": 134,
+      "original": 129,
+      "logical": 134
+    },
+    {
+      "current": 136,
+      "original": 131,
+      "logical": 136
+    },
+    {
+      "current": 138,
+      "original": 133,
+      "logical": 138
+    },
+    {
+      "current": 139,
+      "original": 134,
+      "logical": 139
+    },
+    {
+      "current": 140,
+      "original": 135,
+      "logical": 140
+    },
+    {
+      "current": 143,
+      "original": 138,
+      "logical": 143
+    },
+    {
+      "current": 144,
+      "original": 139,
+      "logical": 144
+    },
+    {
+      "current": 145,
+      "original": 140,
+      "logical": 145
+    },
+    {
+      "current": 146,
+      "original": 141,
+      "logical": 146
+    },
+    {
+      "current": 148,
+      "original": 143,
+      "logical": 148
+    },
+    {
+      "current": 150,
+      "original": 145,
+      "logical": 150
+    },
+    {
+      "current": 151,
+      "original": 146,
+      "logical": 151
+    },
+    {
+      "current": 152,
+      "original": 147,
+      "logical": 152
+    },
+    {
+      "current": 154,
+      "original": 149,
+      "logical": 154
+    },
+    {
+      "current": 156,
+      "original": 151,
+      "logical": 156
+    },
+    {
+      "current": 157,
+      "original": 152,
+      "logical": 157
+    },
+    {
+      "current": 158,
+      "original": 153,
+      "logical": 158
+    },
+    {
+      "current": 161,
+      "original": 156,
+      "logical": 161
+    },
+    {
+      "current": 162,
+      "original": 157,
+      "logical": 162
+    },
+    {
+      "current": 163,
+      "original": 158,
+      "logical": 163
+    },
+    {
+      "current": 164,
+      "original": 159,
+      "logical": 164
+    },
+    {
+      "current": 166,
+      "original": 161,
+      "logical": 166
+    },
+    {
+      "current": 168,
+      "original": 163,
+      "logical": 168
+    },
+    {
+      "current": 170,
+      "original": 165,
+      "logical": 170
+    },
+    {
+      "current": 171,
+      "original": 166,
+      "logical": 171
+    },
+    {
+      "current": 173,
+      "original": 168,
+      "logical": 173
+    },
+    {
+      "current": 174,
+      "original": 169,
+      "logical": 174
+    },
+    {
+      "current": 175,
+      "original": 170,
+      "logical": 175
+    },
+    {
+      "current": 177,
+      "original": 172,
+      "logical": 177
+    },
+    {
+      "current": 178,
+      "original": 173,
+      "logical": 178
+    },
+    {
+      "current": 179,
+      "original": 174,
+      "logical": 179
+    },
+    {
+      "current": 181,
+      "original": 176,
+      "logical": 181
+    },
+    {
+      "current": 183,
+      "original": 178,
+      "logical": 183
+    },
+    {
+      "current": 184,
+      "original": 179,
+      "logical": 184
+    },
+    {
+      "current": 185,
+      "original": 180,
+      "logical": 185
+    },
+    {
+      "current": 188,
+      "original": 183,
+      "logical": 188
+    },
+    {
+      "current": 189,
+      "original": 184,
+      "logical": 189
+    },
+    {
+      "current": 190,
+      "original": 185,
+      "logical": 190
+    },
+    {
+      "current": 191,
+      "original": 186,
+      "logical": 191
+    },
+    {
+      "current": 192,
+      "original": 187,
+      "logical": 192
+    },
+    {
+      "current": 193,
+      "original": 188,
+      "logical": 193
+    },
+    {
+      "current": 195,
+      "original": 190,
+      "logical": 195
+    },
+    {
+      "current": 196,
+      "original": 191,
+      "logical": 196
+    },
+    {
+      "current": 198,
+      "original": 193,
+      "logical": 198
+    },
+    {
+      "current": 199,
+      "original": 194,
+      "logical": 199
+    },
+    {
+      "current": 200,
+      "original": 195,
+      "logical": 200
+    },
+    {
+      "current": 201,
+      "original": 196,
+      "logical": 201
+    },
+    {
+      "current": 202,
+      "original": 197,
+      "logical": 202
+    },
+    {
+      "current": 203,
+      "original": 198,
+      "logical": 203
+    },
+    {
+      "current": 204,
+      "original": 199,
+      "logical": 204
+    },
+    {
+      "current": 206,
+      "original": 201,
+      "logical": 206
+    },
+    {
+      "current": 208,
+      "original": 203,
+      "logical": 208
+    },
+    {
+      "current": 209,
+      "original": 204,
+      "logical": 209
+    },
+    {
+      "current": 210,
+      "original": 205,
+      "logical": 210
+    },
+    {
+      "current": 211,
+      "original": 206,
+      "logical": 211
+    },
+    {
+      "current": 214,
+      "original": 209,
+      "logical": 214
+    },
+    {
+      "current": 215,
+      "original": 210,
+      "logical": 215
+    },
+    {
+      "current": 216,
+      "original": 211,
+      "logical": 216
+    },
+    {
+      "current": 217,
+      "original": 212,
+      "logical": 217
+    },
+    {
+      "current": 219,
+      "original": 214,
+      "logical": 219
+    },
+    {
+      "current": 221,
+      "original": 216,
+      "logical": 221
+    },
+    {
+      "current": 222,
+      "original": 217,
+      "logical": 222
+    },
+    {
+      "current": 223,
+      "original": 218,
+      "logical": 223
+    },
+    {
+      "current": 225,
+      "original": 220,
+      "logical": 225
+    },
+    {
+      "current": 227,
+      "original": 222,
+      "logical": 227
+    },
+    {
+      "current": 228,
+      "original": 223,
+      "logical": 228
+    },
+    {
+      "current": 229,
+      "original": 224,
+      "logical": 229
+    },
+    {
+      "current": 232,
+      "original": 227,
+      "logical": 232
+    },
+    {
+      "current": 233,
+      "original": 228,
+      "logical": 233
+    },
+    {
+      "current": 234,
+      "original": 229,
+      "logical": 234
+    },
+    {
+      "current": 235,
+      "original": 231,
+      "logical": 235
+    },
+    {
+      "current": 236,
+      "original": 232,
+      "logical": 236
+    },
+    {
+      "current": 238,
+      "original": 234,
+      "logical": 238
+    },
+    {
+      "current": 244,
+      "original": 236,
+      "logical": 244
+    },
+    {
+      "current": 246,
+      "original": 238,
+      "logical": 246
+    },
+    {
+      "current": 247,
+      "original": 239,
+      "logical": 247
+    },
+    {
+      "current": 248,
+      "original": 240,
+      "logical": 248
+    },
+    {
+      "current": 249,
+      "original": 241,
+      "logical": 249
+    },
+    {
+      "current": 250,
+      "original": 242,
+      "logical": 250
+    },
+    {
+      "current": 251,
+      "original": 243,
+      "logical": 251
+    },
+    {
+      "current": 253,
+      "original": 244,
+      "logical": 253
+    },
+    {
+      "current": 255,
+      "original": 245,
+      "logical": 255
+    },
+    {
+      "current": 256,
+      "original": 246,
+      "logical": 256
+    },
+    {
+      "current": 257,
+      "original": 247,
+      "logical": 257
+    },
+    {
+      "current": 258,
+      "original": 248,
+      "logical": 258
+    },
+    {
+      "current": 262,
+      "original": 251,
+      "logical": 262
+    },
+    {
+      "current": 265,
+      "original": 254,
+      "logical": 265
+    },
+    {
+      "current": 266,
+      "original": 255,
+      "logical": 266
+    },
+    {
+      "current": 267,
+      "original": 256,
+      "logical": 267
+    },
+    {
+      "current": 269,
+      "original": 258,
+      "logical": 269
+    },
+    {
+      "current": 271,
+      "original": 260,
+      "logical": 271
+    },
+    {
+      "current": 272,
+      "original": 261,
+      "logical": 272
+    },
+    {
+      "current": 273,
+      "original": 262,
+      "logical": 273
+    },
+    {
+      "current": 275,
+      "original": 264,
+      "logical": 275
+    },
+    {
+      "current": 276,
+      "original": 265,
+      "logical": 276
+    },
+    {
+      "current": 277,
+      "original": 266,
+      "logical": 277
+    },
+    {
+      "current": 278,
+      "original": 267,
+      "logical": 278
+    },
+    {
+      "current": 279,
+      "original": 268,
+      "logical": 279
+    },
+    {
+      "current": 280,
+      "original": 269,
+      "logical": 280
+    },
+    {
+      "current": 282,
+      "original": 271,
+      "logical": 282
+    },
+    {
+      "current": 283,
+      "original": 272,
+      "logical": 283
+    },
+    {
+      "current": 286,
+      "original": 275,
+      "logical": 286
+    },
+    {
+      "current": 287,
+      "original": 276,
+      "logical": 287
+    },
+    {
+      "current": 288,
+      "original": 277,
+      "logical": 288
+    },
+    {
+      "current": 289,
+      "original": 278,
+      "logical": 289
+    },
+    {
+      "current": 292,
+      "original": 281,
+      "logical": 292
+    },
+    {
+      "current": 293,
+      "original": 282,
+      "logical": 293
+    },
+    {
+      "current": 294,
+      "original": 283,
+      "logical": 294
+    },
+    {
+      "current": 295,
+      "original": 284,
+      "logical": 295
+    },
+    {
+      "current": 296,
+      "original": 285,
+      "logical": 296
+    },
+    {
+      "current": 297,
+      "original": 286,
+      "logical": 297
+    },
+    {
+      "current": 299,
+      "original": 288,
+      "logical": 299
+    },
+    {
+      "current": 300,
+      "original": 289,
+      "logical": 300
+    },
+    {
+      "current": 302,
+      "original": 291,
+      "logical": 302
+    },
+    {
+      "current": 304,
+      "original": 293,
+      "logical": 304
+    },
+    {
+      "current": 305,
+      "original": 294,
+      "logical": 305
+    },
+    {
+      "current": 306,
+      "original": 295,
+      "logical": 306
+    },
+    {
+      "current": 307,
+      "original": 296,
+      "logical": 307
+    },
+    {
+      "current": 308,
+      "original": 297,
+      "logical": 308
+    },
+    {
+      "current": 309,
+      "original": 298,
+      "logical": 309
+    },
+    {
+      "current": 310,
+      "original": 299,
+      "logical": 310
+    },
+    {
+      "current": 311,
+      "original": 300,
+      "logical": 311
+    },
+    {
+      "current": 313,
+      "original": 302,
+      "logical": 313
+    },
+    {
+      "current": 314,
+      "original": 303,
+      "logical": 314
+    },
+    {
+      "current": 315,
+      "original": 304,
+      "logical": 315
+    },
+    {
+      "current": 316,
+      "original": 305,
+      "logical": 316
+    },
+    {
+      "current": 317,
+      "original": 306,
+      "logical": 317
+    },
+    {
+      "current": 319,
+      "original": 308,
+      "logical": 319
+    },
+    {
+      "current": 320,
+      "original": 309,
+      "logical": 320
+    },
+    {
+      "current": 321,
+      "original": 310,
+      "logical": 321
+    },
+    {
+      "current": 322,
+      "original": 311,
+      "logical": 322
+    },
+    {
+      "current": 323,
+      "original": 312,
+      "logical": 323
+    },
+    {
+      "current": 324,
+      "original": 313,
+      "logical": 324
+    },
+    {
+      "current": 325,
+      "original": 314,
+      "logical": 325
+    },
+    {
+      "current": 326,
+      "original": 315,
+      "logical": 326
+    },
+    {
+      "current": 328,
+      "original": 317,
+      "logical": 328
+    },
+    {
+      "current": 329,
+      "original": 318,
+      "logical": 329
+    },
+    {
+      "current": 331,
+      "original": 320,
+      "logical": 331
+    },
+    {
+      "current": 332,
+      "original": 321,
+      "logical": 332
+    },
+    {
+      "current": 333,
+      "original": 322,
+      "logical": 333
+    },
+    {
+      "current": 334,
+      "original": 323,
+      "logical": 334
+    },
+    {
+      "current": 336,
+      "original": 325,
+      "logical": 336
+    },
+    {
+      "current": 337,
+      "original": 326,
+      "logical": 337
+    }
+  ],
+  "evidence": "WG32OpenJob/GetPrn16/Prn32 and page/write/close/delete callers compared; test/integration/wow_spool_failure_test.c covers open/start/allocation/lock/map failures and close precedence with controlled providers.",
+  "limits": [
+    "No fixture execution or real spooler integration pass claimed.",
+    "Fixture models ClosePrinter ownership consumption on failure; real provider failure semantics and active-job cancellation are not established by these tests.",
+    "LF logical-line comparison is source-derived, not compiler verified."
+  ]
+}

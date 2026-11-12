@@ -1,0 +1,69 @@
+{
+  "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+  "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+  "current_sha256": "61dd2c2b28e2095cec941b91f4ddd0434f3872d92e8e7260dfa89580990c5a3f",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "insert",
+      "original_start": 30,
+      "original_count": 0,
+      "current_start": 30,
+      "current_count": 8
+    },
+    {
+      "kind": "replace",
+      "original_start": 32,
+      "original_count": 310,
+      "current_start": 40,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 366,
+      "original_count": 0,
+      "current_start": 65,
+      "current_count": 3
+    },
+    {
+      "kind": "insert",
+      "original_start": 367,
+      "original_count": 0,
+      "current_start": 69,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 369,
+      "original_count": 4,
+      "current_start": 72,
+      "current_count": 8
+    },
+    {
+      "kind": "replace",
+      "original_start": 374,
+      "original_count": 1,
+      "current_start": 81,
+      "current_count": 2
+    }
+  ],
+  "register_entries": 5,
+  "initial_review": [
+    "CPU40 needs declarations for bounded register copy and original-shaped ThreadSetDebugContext binding.",
+    "Removed process-LDT, kernel-VDM mode and native fast-BOP/pointer implementations are not selected CPU40 providers.",
+    "Six-DWORD local buffer gives synchronous copied data lifetime for DR0..3/6/7.",
+    "Copied read is necessary, but helper performs descriptor/page preflight then a separate copy operation.",
+    "NULL copy failure follows original reset-all-debug-registers plus CF=1 failure path."
+  ],
+  "counter_review": [
+    "This is a mirror selection guard, not propagation into a new autonomous selector.",
+    "53:01/FD now bind modesw; descriptors bind dpmiselr; FastBOP binds dpmimscr; selected pointer provider is separate. Directory i386 is not sufficient grounds to delete retained debug service.",
+    "Original SIM32 size argument does not guarantee readable 24-byte extent. Removing copy would reintroduce unchecked direct dereference.",
+    "debug_register_binding_test uses substituted descriptor/memory services; it proves range decisions but not real page access or remapping equivalence.",
+    "ThreadSetDebugContext receives only valid copied array or original zero array. Original reset behavior is preserved; provider broadcast correctness is separate from this guard."
+  ],
+  "pending": [
+    "Mapping/privilege consistency and exception ownership across preflight, descriptor read and final copy."
+  ],
+  "runtime_validation": "None; no source edits; excluded non-CPU40 branch and line scaffolding separately classified."
+}

@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/sources",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sources",
+  "original_sha256": "a6c0b2b3dc29151d6a760335d607114835490b1d2fe67e04e5f5c68865dab7e7",
+  "current_sha256": "b2827e313d252627b3ea61f8909ebb2e84b5156f99d92076e8e16f46c16ab528",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 101,
+      "original_count": 1,
+      "current_start": 101,
+      "current_count": 1,
+      "original": [
+        "PPC_SOURCES=nt_aorc.c"
+      ],
+      "current": [
+        "PPC_SOURCES="
+      ]
+    }
+  ],
+  "excluded_ranges": [],
+  "initial_review": "Only textual difference is empty PPC_SOURCES instead of nt_aorc.c, which no longer exists. Existing provenance records test-only non-product removal. Historical manifest must not name deleted source.",
+  "counter_review": "Keep needed original implementation and registered source disposition; restoration of removed duplicate storage or deleted source reference is not diff minimization without preserving selected ownership.",
+  "limits": "Non-C/H metadata outside1060 census; no new build test."
+}

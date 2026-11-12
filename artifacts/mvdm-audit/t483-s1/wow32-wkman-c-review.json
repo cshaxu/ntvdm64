@@ -1,0 +1,994 @@
+{
+  "path": "src/mvdm-host/wow32/wkman.c",
+  "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+  "current_sha256": "915e49c909fc9160ad03b11bc02aa62948b88efaec57e441c2b15c4db3c73762",
+  "changes": [
+    {
+      "original_start": 25,
+      "original_count": 0,
+      "current_start": 25,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"wow_task_termination.h\""
+      ],
+      "decision": "pending",
+      "classification": "task-management-binding",
+      "change_plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "evidence": "wow_task_termination_bind can return RPC, missing-ticket or heap-allocation failure; W32Thread casts away that result then publishes the thread. Retire/fail look up HTASK and use server ticket; W32DestroyTask retains original ExitVDM and cleanup, then retires before WK32DeleteTask. Cancel paths leave original task live.",
+      "verification_required": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task.",
+      "missing_evidence": "Failure propagation route and concurrent ticket/HTASK reuse are not runtime-verified in this review."
+    },
+    {
+      "original_start": 26,
+      "original_count": 0,
+      "current_start": 28,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-356): parent authorizes whole-worker cleanup. */",
+        "extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 28,
+      "original_count": 0,
+      "current_start": 33,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "#if !defined(_X86_)",
+        "#define MVDM_WOW32_RESTORE_X86_FOR_VDMDBG",
+        "#define _X86_",
+        "#endif"
+      ],
+      "decision": "pending",
+      "classification": "sdk-declaration-selection",
+      "change_plan": "Check generated per-TU macros and preprocessed declarations to decide whether temporary _X86_ selection can be removed. Retain required x86 VDMCONTEXT declarations; separately prove ntseapi.h removal has no selected declarations before restoring/removing include changes.",
+      "evidence": "vdmdbg.h uses _X86_ to alias CONTEXT/LDT_ENTRY and excludes the alternate body. wkman scopes and restores the macro around that header; no hardware monitor code is enabled by this local include alone. Current diff also removes ntseapi.h.",
+      "verification_required": "Preprocess supported WOW target contexts, compare VDMCONTEXT/LDT_ENTRY layout and compile callers without redundant selector if proven.",
+      "missing_evidence": "Exact macro origin and preprocessed include dependency closure have not been established here."
+    },
+    {
+      "original_start": 29,
+      "original_count": 1,
+      "current_start": 39,
+      "current_count": 4,
+      "original": [
+        "#include <ntseapi.h>"
+      ],
+      "current": [
+        "#ifdef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG",
+        "#undef _X86_",
+        "#undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG",
+        "#endif"
+      ],
+      "decision": "pending",
+      "classification": "sdk-declaration-selection",
+      "change_plan": "Check generated per-TU macros and preprocessed declarations to decide whether temporary _X86_ selection can be removed. Retain required x86 VDMCONTEXT declarations; separately prove ntseapi.h removal has no selected declarations before restoring/removing include changes.",
+      "evidence": "vdmdbg.h uses _X86_ to alias CONTEXT/LDT_ENTRY and excludes the alternate body. wkman scopes and restores the macro around that header; no hardware monitor code is enabled by this local include alone. Current diff also removes ntseapi.h.",
+      "verification_required": "Preprocess supported WOW target contexts, compare VDMCONTEXT/LDT_ENTRY layout and compile callers without redundant selector if proven.",
+      "missing_evidence": "Exact macro origin and preprocessed include dependency closure have not been established here."
+    },
+    {
+      "original_start": 31,
+      "original_count": 0,
+      "current_start": 45,
+      "current_count": 10,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle-owned thread idle observer. */",
+        "#include \"wow_idle_hook_binding.h\"",
+        "/* Keep this completed registry-reader family isolated from the uncompleted",
+        " * original registry writer families selected for their later owner packets. */",
+        "#include <common/wow/registry.h>",
+        "/* Keep thread-handle teardown on the original NT close call. */",
+        "#undef NtOpenKey",
+        "#undef NtEnumerateValueKey",
+        "#undef NtQueryValueKey",
+        "#undef NtClose"
+      ],
+      "decision": "pending",
+      "classification": "shared-provider-includes",
+      "change_plan": "Retain idle-provider declaration with its callers. Review registry macro/include block jointly with precomp and registry provider: keep one selected read projection, remove redundant undef directives only after proving include state; keep native NtClose for the original thread handle.",
+      "evidence": "This TU reads setup names, compatibility flags and KnownDLLs through RegOpenKeyEx/RegQueryValueEx/RegCloseKey. common/wow/registry.h redirects the complete reader names; current NtClose(hThread) remains native, not registry close. No selected NtOpenKey/NtEnumerateValueKey/NtQueryValueKey call is present.",
+      "verification_required": "Registry shutdown fixture and selected preprocessing; valid/missing reader keys, native thread handle close and read-only projection ownership.",
+      "missing_evidence": "Necessity of all four undef directives and exact precomp macro sources needs preprocessing evidence."
+    },
+    {
+      "original_start": 330,
+      "original_count": 0,
+      "current_start": 319,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-319): acknowledge the original no-op,",
+        "             * distinct from a failed task which never reached InitTask. */",
+        "            wow_user_notify_startup_noop(VDMInfo.iTask);"
+      ],
+      "decision": "pending",
+      "classification": "startup-acknowledgement",
+      "change_plan": "Retain acknowledgement for the original shared-WOWEXEC no-op request; audit propagation of OpenNtBaseClientWowStarted failure rather than only setting LastError and unconditionally proceeding to ExitVDM.",
+      "evidence": "Original skips execution of a duplicate shared wowexec and calls ExitVDM. Added helper reports started for the exact VDMInfo.iTask; provider returns void and on RPC error only sets LastError. This is distinct from failed InitTask.",
+      "verification_required": "Duplicate shared WOWEXEC successful acknowledgement and RPC-failure tests; verify launcher completes with the correct result and no fabricated successful start.",
+      "missing_evidence": "No fault-injection proof of acknowledgement failure handling."
+    },
+    {
+      "original_start": 560,
+      "original_count": 0,
+      "current_start": 557,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        DWORD exit_code;"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 563,
+      "original_count": 0,
+      "current_start": 562,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */",
+        "        exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 564,
+      "original_count": 1,
+      "current_start": 566,
+      "current_count": 1,
+      "original": [
+        "        ExitProcess(EXIT_FAILURE);"
+      ],
+      "current": [
+        "        ExitProcess(exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 715,
+      "original_count": 1,
+      "current_start": 708,
+      "current_count": 2,
+      "original": [
+        "LRESULT CALLBACK WK32ForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-336): scope native idle entry before guest access. */",
+        "LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)"
+      ],
+      "decision": "retain",
+      "classification": "idle-hook-lifecycle",
+      "change_plan": "Retain original idle body behind scoped callback entry and lifecycle-owned per-thread hook. Keep TD hIdleHook as borrowed registration intent, with one owning unhook path; do not restore global installation or double-unhook.",
+      "evidence": "wow_user_task_lifecycle installs WH_FOREGROUNDIDLE for each task native thread and owns retirement/unhook. wow_idle_hook_binding checks original TD registration intent and scopes entry before calling WowOriginalForegroundIdleHook. Focused idle fixture covers registration, dispatch, reentry and hook chain; integration idle-worker/dialog fixtures exist.",
+      "verification_required": "Idle fixture plus multi-task idle/retirement integration and failed observer initialization; confirm borrowed intent clears independently of owned hook.",
+      "missing_evidence": "Fixture sources examined; no new runtime pass claimed."
+    },
+    {
+      "original_start": 764,
+      "original_count": 4,
+      "current_start": 759,
+      "current_count": 3,
+      "original": [
+        "        ptd->hIdleHook = SetWindowsHookEx(WH_FOREGROUNDIDLE,",
+        "                                          WK32ForegroundIdleHook,",
+        "                                          hmodWOW32,",
+        "                                          0);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-338): all WOW task threads are observed;",
+        "         * this TD borrows its observer as the original registration intent. */",
+        "        ptd->hIdleHook = wow_user_idle_hook_for_current();"
+      ],
+      "decision": "retain",
+      "classification": "idle-hook-lifecycle",
+      "change_plan": "Retain original idle body behind scoped callback entry and lifecycle-owned per-thread hook. Keep TD hIdleHook as borrowed registration intent, with one owning unhook path; do not restore global installation or double-unhook.",
+      "evidence": "wow_user_task_lifecycle installs WH_FOREGROUNDIDLE for each task native thread and owns retirement/unhook. wow_idle_hook_binding checks original TD registration intent and scopes entry before calling WowOriginalForegroundIdleHook. Focused idle fixture covers registration, dispatch, reentry and hook chain; integration idle-worker/dialog fixtures exist.",
+      "verification_required": "Idle fixture plus multi-task idle/retirement integration and failed observer initialization; confirm borrowed intent clears independently of owned hook.",
+      "missing_evidence": "Fixture sources examined; no new runtime pass claimed."
+    },
+    {
+      "original_start": 1081,
+      "original_count": 0,
+      "current_start": 1087,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-449): W32Thread is the original point at",
+        "         * which this live 16-bit task owns both its exact BaseSrv iTask and",
+        "         * HTASK.  Keep management identity binding beside that hand-off;",
+        "         * InitTask intentionally receives zero for a separate WOW VDM. */",
+        "        if (td.VDMInfoiTaskID != (UINT)-1 && td.VDMInfoiTaskID != 0)",
+        "            (void)wow_task_termination_bind(td.VDMInfoiTaskID,td.htask16);"
+      ],
+      "decision": "correct",
+      "classification": "task-management-binding",
+      "change_plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "evidence": "wow_task_termination_bind can return RPC, missing-ticket or heap-allocation failure; W32Thread casts away that result then publishes the thread. Retire/fail look up HTASK and use server ticket; W32DestroyTask retains original ExitVDM and cleanup, then retires before WK32DeleteTask. Cancel paths leave original task live.",
+      "verification_required": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task.",
+      "missing_evidence": "Failure propagation route and concurrent ticket/HTASK reuse are not runtime-verified in this review."
+    },
+    {
+      "original_start": 1449,
+      "original_count": 1,
+      "current_start": 1482,
+      "current_count": 2,
+      "original": [
+        "VOID W32FreeTask( PTD ptd )"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-334): retire native windows before resource cleanup. */",
+        "VOID WowOriginalFreeTask( PTD ptd )"
+      ],
+      "decision": "retain",
+      "classification": "task-resource-cleanup-boundary",
+      "change_plan": "Retain original W32FreeTask body under renamed entry and the public wrapper that prepares native USER task exit first. Keep native window retirement before original resource destruction, including incomplete-startup/remote-task paths.",
+      "evidence": "wow_task_cleanup_entry.c public W32FreeTask calls wow_user_task_prepare_exit and explicit failure handler before WowOriginalFreeTask; normal SG_EXIT has earlier cleanup but fallback paths may omit it. Original resource cleanup remains in wkman.",
+      "verification_required": "Task cleanup fixture, normal SG_EXIT, startup failure and remote/hung-task destruction; ordering proof for native windows versus original guest resources.",
+      "missing_evidence": "No full runtime cleanup result produced in this audit."
+    },
+    {
+      "original_start": 1512,
+      "original_count": 1,
+      "current_start": 1547,
+      "current_count": 2,
+      "original": [
+        "        UnhookWindowsHookEx(ptd->hIdleHook);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle retires the borrowed",
+        "         * observer; this original branch withdraws only the task's intent. */"
+      ],
+      "decision": "retain",
+      "classification": "idle-hook-lifecycle",
+      "change_plan": "Retain original idle body behind scoped callback entry and lifecycle-owned per-thread hook. Keep TD hIdleHook as borrowed registration intent, with one owning unhook path; do not restore global installation or double-unhook.",
+      "evidence": "wow_user_task_lifecycle installs WH_FOREGROUNDIDLE for each task native thread and owns retirement/unhook. wow_idle_hook_binding checks original TD registration intent and scopes entry before calling WowOriginalForegroundIdleHook. Focused idle fixture covers registration, dispatch, reentry and hook chain; integration idle-worker/dialog fixtures exist.",
+      "verification_required": "Idle fixture plus multi-task idle/retirement integration and failed observer initialization; confirm borrowed intent clears independently of owned hook.",
+      "missing_evidence": "Fixture sources examined; no new runtime pass claimed."
+    },
+    {
+      "original_start": 1720,
+      "original_count": 0,
+      "current_start": 1749,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-449): the original task owner has completed",
+        "     * its cleanup. Retire only the project-owned management binding now; it",
+        "     * never owns, selects, or alters the original task destruction path. */",
+        "    wow_task_termination_retire(ptd->htask16);",
+        ""
+      ],
+      "decision": "pending",
+      "classification": "task-management-binding",
+      "change_plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "evidence": "wow_task_termination_bind can return RPC, missing-ticket or heap-allocation failure; W32Thread casts away that result then publishes the thread. Retire/fail look up HTASK and use server ticket; W32DestroyTask retains original ExitVDM and cleanup, then retires before WK32DeleteTask. Cancel paths leave original task live.",
+      "verification_required": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task.",
+      "missing_evidence": "Failure propagation route and concurrent ticket/HTASK reuse are not runtime-verified in this review."
+    },
+    {
+      "original_start": 2910,
+      "original_count": 0,
+      "current_start": 2934,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                 /* DIVERGENCE(MVDM-HOST-DIV-449): original user cancellation",
+        "                  * leaves this exact task live; reopen only its ticket. */",
+        "                 wow_task_termination_fail((USHORT)htaskKill);"
+      ],
+      "decision": "pending",
+      "classification": "task-management-binding",
+      "change_plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "evidence": "wow_task_termination_bind can return RPC, missing-ticket or heap-allocation failure; W32Thread casts away that result then publishes the thread. Retire/fail look up HTASK and use server ticket; W32DestroyTask retains original ExitVDM and cleanup, then retires before WK32DeleteTask. Cancel paths leave original task live.",
+      "verification_required": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task.",
+      "missing_evidence": "Failure propagation route and concurrent ticket/HTASK reuse are not runtime-verified in this review."
+    },
+    {
+      "original_start": 2977,
+      "original_count": 0,
+      "current_start": 3005,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                 /* DIVERGENCE(MVDM-HOST-DIV-449): the original task remains",
+        "                  * live after cancel, so an explicit later close may retry. */",
+        "                 wow_task_termination_fail((USHORT)htaskKill);"
+      ],
+      "decision": "pending",
+      "classification": "task-management-binding",
+      "change_plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "evidence": "wow_task_termination_bind can return RPC, missing-ticket or heap-allocation failure; W32Thread casts away that result then publishes the thread. Retire/fail look up HTASK and use server ticket; W32DestroyTask retains original ExitVDM and cleanup, then retires before WK32DeleteTask. Cancel paths leave original task live.",
+      "verification_required": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task.",
+      "missing_evidence": "Failure propagation route and concurrent ticket/HTASK reuse are not runtime-verified in this review."
+    },
+    {
+      "original_start": 2982,
+      "original_count": 2,
+      "current_start": 3014,
+      "current_count": 6,
+      "original": [
+        "            ExitVDM(WOWVDM, ALL_TASKS);",
+        "            ExitProcess(0);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-356): retain the hung-process exit code. */",
+        "            {",
+        "                DWORD exit_code = NtvdmAuthorizeExit(0);",
+        "                ExitVDM(WOWVDM, ALL_TASKS);",
+        "                ExitProcess(exit_code);",
+        "            }"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 2991,
+      "original_count": 0,
+      "current_start": 3028,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-449): no original cleanup will retire a",
+        "         * still-published binding on this path. Reopen only that ticket. */",
+        "        wow_task_termination_fail((USHORT)htaskKill);"
+      ],
+      "decision": "pending",
+      "classification": "task-management-binding",
+      "change_plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "evidence": "wow_task_termination_bind can return RPC, missing-ticket or heap-allocation failure; W32Thread casts away that result then publishes the thread. Retire/fail look up HTASK and use server ticket; W32DestroyTask retains original ExitVDM and cleanup, then retires before WK32DeleteTask. Cancel paths leave original task live.",
+      "verification_required": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task.",
+      "missing_evidence": "Failure propagation route and concurrent ticket/HTASK reuse are not runtime-verified in this review."
+    },
+    {
+      "original_start": 3581,
+      "original_count": 1,
+      "current_start": 3622,
+      "current_count": 1,
+      "original": [
+        "    lRegError = RegQueryValueEx("
+      ],
+      "current": [
+        "    lRegError = hKeyWow ? RegQueryValueEx("
+      ],
+      "decision": "retain",
+      "classification": "registry-absent-key-boundary",
+      "change_plan": "Retain null-handle-to-not-found conversion and unchanged original KnownDLL parsing/error branch; do not issue a projection query with a nonexistent key or add an independent default KnownDLL list.",
+      "evidence": "WK32InitWowIsKnownDLL still accepts only successful REG_SZ results. Null hKeyWow now selects ERROR_FILE_NOT_FOUND and the existing logging/no-list path; valid handles still use the same query and parser.",
+      "verification_required": "Registry shutdown/reader fixture with valid, absent and wrong-type KnownDLLs; compare original non-null query behavior.",
+      "missing_evidence": "Source-backed local change; no new runtime pass."
+    },
+    {
+      "original_start": 3588,
+      "original_count": 1,
+      "current_start": 3629,
+      "current_count": 1,
+      "original": [
+        "                    );"
+      ],
+      "current": [
+        "                    ) : ERROR_FILE_NOT_FOUND;"
+      ],
+      "decision": "retain",
+      "classification": "registry-absent-key-boundary",
+      "change_plan": "Retain null-handle-to-not-found conversion and unchanged original KnownDLL parsing/error branch; do not issue a projection query with a nonexistent key or add an independent default KnownDLL list.",
+      "evidence": "WK32InitWowIsKnownDLL still accepts only successful REG_SZ results. Null hKeyWow now selects ERROR_FILE_NOT_FOUND and the existing logging/no-list path; valid handles still use the same query and parser.",
+      "verification_required": "Registry shutdown/reader fixture with valid, absent and wrong-type KnownDLLs; compare original non-null query behavior.",
+      "missing_evidence": "Source-backed local change; no new runtime pass."
+    },
+    {
+      "original_start": 4351,
+      "original_count": 0,
+      "current_start": 4392,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DWORD exit_code;"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 4362,
+      "original_count": 0,
+      "current_start": 4405,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-356): retain no guest alias across the wait. */",
+        "    exit_code = parg16->wExitCode;",
+        "    FREEARGPTR(parg16);",
+        "    exit_code = NtvdmAuthorizeExit(exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 4363,
+      "original_count": 1,
+      "current_start": 4411,
+      "current_count": 1,
+      "original": [
+        "    ExitProcess(parg16->wExitCode);"
+      ],
+      "current": [
+        "    ExitProcess(exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 4382,
+      "original_count": 0,
+      "current_start": 4430,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DWORD exit_code;"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 4396,
+      "original_count": 0,
+      "current_start": 4446,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-356): retain no guest alias across the wait. */",
+        "    exit_code = parg16->f1;",
+        "    FREEARGPTR(parg16);",
+        "    exit_code = NtvdmAuthorizeExit(exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    },
+    {
+      "original_start": 4397,
+      "original_count": 1,
+      "current_start": 4452,
+      "current_count": 1,
+      "original": [
+        "    ExitProcess(parg16->f1);"
+      ],
+      "current": [
+        "    ExitProcess(exit_code);"
+      ],
+      "decision": "retain",
+      "classification": "worker-exit-authorization",
+      "change_plan": "Retain calls to the shared worker exit authority before original whole-process teardown; retain copied scalar exit code and FREEARGPTR before the wait. Do not duplicate coordination in WOW or restore uncoordinated ExitProcess.",
+      "evidence": "NtvdmAuthorizeExit delegates to ntvdm_worker_lifecycle_authorize_exit: request NTSRV exit, wait server/worker controls and quiesce local frontends. Existing failure/zero/guest exit codes are carried through, with server-loss ERROR_INVALID_HANDLE. Individual-task ExitVDM remains original.",
+      "verification_required": "Whole-worker normal/fatal/hung exit, disconnect and concurrent exit regression; verify task-only exit does not invoke worker exit authorization.",
+      "missing_evidence": "No new runtime pass; provider concurrency/error-path minimization is outside this mirror-only file classification."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 159,
+      "original_count": 41,
+      "current_start": 185,
+      "current_count": 1,
+      "original": [
+        "PBYTE pb1;",
+        "PBYTE pb2;",
+        "register PKERNELTRACE16 parg16;",
+        "",
+        " // Check Filtering - Trace Correct TaskID and Kernel Tracing Enabled",
+        "",
+        "    if (((WORD)(pFrame->wTDB & fLogTaskFilter) == pFrame->wTDB) &&",
+        "        ((fLogFilter & FILTER_KERNEL16) != 0 )) {",
+        "",
+        "        GETARGPTR(pFrame, sizeof(KERNELTRACE16), parg16);",
+        "        GETVDMPTR(parg16->lpRoutineName, 50, pb1);",
+        "        GETVDMPTR(parg16->lpUserArgs, parg16->cParms, pb2);",
+        "        if ((fLogFilter & FILTER_VERBOSE) == 0 ) {",
+        "          LOGDEBUG(12, (\"%s(\", pb1));",
+        "        } else {",
+        "          LOGDEBUG(12, (\"%04X %08X %04X %s:%s(\",pFrame->wTDB, pb2, pFrame->wAppDS, (LPSZ)\"Kernel16\", pb1));",
+        "        }",
+        "",
+        "        pb2 += 2*sizeof(WORD);              // point past callers CS:IP",
+        "",
+        "        pb2 += parg16->cParms;",
+        "",
+        "        while (parg16->cParms > 0) {",
+        "        pb2 -= sizeof(WORD);",
+        "        parg16->cParms -= sizeof(WORD);",
+        "        LOGDEBUG(12,( \"%04x\", *(PWORD)pb2));",
+        "        if (parg16->cParms > 0) {",
+        "            LOGDEBUG(12,( \",\"));",
+        "        }",
+        "    }",
+        "",
+        "    LOGDEBUG(12,( \")\\n\"));",
+        "    if (fDebugWait != 0) {",
+        "        DbgPrint(\"WOWSingle Step\\n\");",
+        "        DbgBreakPoint();",
+        "    }",
+        "",
+        "    FREEVDMPTR(pb1);",
+        "    FREEVDMPTR(pb2);",
+        "    FREEARGPTR(parg16);",
+        " }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 541,
+      "original_count": 1,
+      "current_start": 535,
+      "current_count": 1,
+      "original": [
+        "    vpStack = FASTVDMSTACK();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 582,
+      "original_count": 13,
+      "current_start": 585,
+      "current_count": 1,
+      "original": [
+        "    {",
+        "        char szModName[9];",
+        "",
+        "        RtlCopyMemory(szModName, ((PTDB)SEGPTR(pFrame->wTDB,0))->TDB_ModName, 8);",
+        "        szModName[8] = 0;",
+        "",
+        "        LOGDEBUG( hThread ? LOG_IMPORTANT : LOG_ALWAYS,",
+        "            (\"\\nWK32WOWInitTask: %s task %04x %s\\n\",",
+        "                hThread ? \"created\" : \"ERROR failed to create\",",
+        "                pFrame->wTDB,",
+        "                szModName",
+        "            ));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 824,
+      "original_count": 0,
+      "current_start": 820,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 863,
+      "original_count": 1,
+      "current_start": 864,
+      "current_count": 1,
+      "original": [
+        "            vpStack = FASTVDMSTACK();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 875,
+      "original_count": 2,
+      "current_start": 879,
+      "current_count": 1,
+      "original": [
+        "        CurrentMonitorTeb = NtCurrentTeb();",
+        "        FastWOWCallbackCall();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1124,
+      "original_count": 1,
+      "current_start": 1138,
+      "current_count": 1,
+      "original": [
+        "    SETFASTVDMSTACK((VPVOID)vpInitialSSSP);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1161,
+      "original_count": 10,
+      "current_start": 1179,
+      "current_count": 1,
+      "original": [
+        "    // BUGBUG: HACK ALERT",
+        "    // This code has been added to aid in debugging a problem that only",
+        "    // seems to occur on MIPS chk",
+        "    // What appears to be happening is that the SS:SP is set correctly",
+        "    // above, but sometime later, perhaps during the \"BlockWOWIdle\" call,",
+        "    // the emulator's flat stack pointer ends up getting reset to WOWEXEC's",
+        "    // stack. The SETVDMSTACK call below will reset the values we want so",
+        "    // that the user can continue normally.",
+        "    WOW32ASSERTMSG(LOWORD(vpInitialSSSP)==getSP(), \"WOW32: W32Thread Error - SP is invalid!\\n\");",
+        "    SETVDMSTACK(vpInitialSSSP);"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1174,
+      "original_count": 4,
+      "current_start": 1186,
+      "current_count": 1,
+      "original": [
+        "    {",
+        "    extern INT W32FilterException(INT, PEXCEPTION_POINTERS);",
+        "    }",
+        "    try {"
+      ],
+      "current": [
+        "#error Excluded unsupported NO_W32TRYCALL WOW profile"
+      ]
+    },
+    {
+      "original_start": 1180,
+      "original_count": 2,
+      "current_start": 1192,
+      "current_count": 1,
+      "original": [
+        "        CurrentMonitorTeb = NtCurrentTeb();",
+        "        FastWOWCallbackCall();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1188,
+      "original_count": 3,
+      "current_start": 1203,
+      "current_count": 1,
+      "original": [
+        "    } except (W32FilterException(GetExceptionCode(),",
+        "                                 GetExceptionInformation())) {",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported NO_W32TRYCALL WOW profile"
+      ]
+    },
+    {
+      "original_start": 1198,
+      "original_count": 1,
+      "current_start": 1214,
+      "current_count": 1,
+      "original": [
+        "    WOW32ASSERTMSG(FALSE, \"WOW32: W32Thread Error - Too many unsimulate calls\\n\");"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1282,
+      "original_count": 2,
+      "current_start": 1302,
+      "current_count": 1,
+      "original": [
+        "        DbgPrint(\"NTVDM: Could not get thread information\\n\");",
+        "        DbgBreakPoint();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1306,
+      "original_count": 2,
+      "current_start": 1329,
+      "current_count": 1,
+      "original": [
+        "        DbgPrint(\"NTVDM: Could not get open thread handle\\n\");",
+        "        DbgBreakPoint();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1317,
+      "original_count": 2,
+      "current_start": 1343,
+      "current_count": 1,
+      "original": [
+        "        DbgPrint(\"NTVDM: Could not close thread handle\\n\");",
+        "        DbgBreakPoint();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1342,
+      "original_count": 5,
+      "current_start": 1370,
+      "current_count": 1,
+      "original": [
+        "    {",
+        "        extern DWORD    saveebp32;",
+        "",
+        "        dwPrevEBP = saveebp32;",
+        "    }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1367,
+      "original_count": 5,
+      "current_start": 1394,
+      "current_count": 1,
+      "original": [
+        "",
+        "    vpStack = MAKELONG( LOWORD(vcRemote.Esp), LOWORD(vcRemote.SegSs) );",
+        "",
+        "    SETFASTVDMSTACK( vpStack );",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1410,
+      "original_count": 2,
+      "current_start": 1437,
+      "current_count": 1,
+      "original": [
+        "    CurrentMonitorTeb = NtCurrentTeb();",
+        "    FastWOWCallbackCall();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1423,
+      "original_count": 1,
+      "current_start": 1453,
+      "current_count": 1,
+      "original": [
+        "    WOW32ASSERTMSG(FALSE, \"WOW32: W32RemoteThread Error - Too many unsimulate calls\");"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1578,
+      "original_count": 12,
+      "current_start": 1616,
+      "current_count": 1,
+      "original": [
+        "    {",
+        "        extern DWORD saveip16;",
+        "        extern DWORD savecs16;",
+        "        VPVOID       vpStack;",
+        "",
+        "        vcRemote.Eip   = saveip16;",
+        "        vcRemote.SegCs = savecs16;",
+        "        vpStack = FASTVDMSTACK();",
+        "",
+        "        vcRemote.SegSs = HIWORD(vpStack);",
+        "        vcRemote.Esp   = LOWORD(vpStack);",
+        "    }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1631,
+      "original_count": 5,
+      "current_start": 1662,
+      "current_count": 1,
+      "original": [
+        "        {",
+        "            extern DWORD    saveebp32;",
+        "",
+        "            saveebp32 = dwPrevEBP;",
+        "        }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1803,
+      "original_count": 1,
+      "current_start": 1840,
+      "current_count": 1,
+      "original": [
+        "    GETVDMPTR(parg16->lpwCmdShow, sizeof(WORD), pwCmdShow);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2452,
+      "original_count": 19,
+      "current_start": 2491,
+      "current_count": 1,
+      "original": [
+        "    if ( !(flOptions & OPT_DEBUG) ) {",
+        "        OutputDebugString(psz1);",
+        "    } else {",
+        "        INT  length;",
+        "        char text[TMP_LINE_LEN];",
+        "        PSZ  pszTemp;",
+        "",
+        "        length = strlen(psz1);",
+        "        if ( length > TMP_LINE_LEN-1 ) {",
+        "            strncpy( text, psz1, TMP_LINE_LEN );",
+        "            text[TMP_LINE_LEN-2] = '\\n';",
+        "            text[TMP_LINE_LEN-1] = '\\0';",
+        "            pszTemp = text;",
+        "        } else {",
+        "            pszTemp = psz1;",
+        "        }",
+        "",
+        "        LOGDEBUG(LOG_ALWAYS, (\"%s\", pszTemp));     // in debug version",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 4411,
+      "original_count": 67,
+      "current_start": 4467,
+      "current_count": 1,
+      "original": [
+        "",
+        "ULONG FASTCALL WK32WowPartyByNumber(PVDMFRAME pFrame)",
+        "{",
+        "    PWOWPARTYBYNUMBER16 parg16;",
+        "    PSZ psz;",
+        "    ULONG ulRet = 0;",
+        "",
+        "    GETARGPTR(pFrame, sizeof(*parg16), parg16);",
+        "    GETPSZPTR(parg16->psz, psz);",
+        "",
+        "    switch (parg16->dw) {",
+        "",
+        "        case 0:  // Access violation",
+        "            *(char *)0xa0000000 = 0;",
+        "            break;",
+        "",
+        "        case 1:  // Stack overflow",
+        "            {",
+        "                char EatStack[2048];",
+        "",
+        "                strcpy(EatStack, psz);",
+        "                WK32WowPartyByNumber(pFrame);",
+        "                strcpy(EatStack, psz);",
+        "            }",
+        "            break;",
+        "",
+        "        case 2:  // Datatype misalignment",
+        "            {",
+        "                DWORD adw[2];",
+        "                PDWORD pdw = (void *)((char *)adw + 2);",
+        "",
+        "                *pdw = (DWORD)-1;",
+        "",
+        "                //",
+        "                // On some platforms the above will just work (hardware or",
+        "                // emulation), so we force it with RaiseException.",
+        "                //",
+        "                RaiseException((DWORD)EXCEPTION_DATATYPE_MISALIGNMENT,",
+        "                               0, 0, NULL);",
+        "            }",
+        "            break;",
+        "",
+        "        case 3:  // Integer divide by zero",
+        "            ulRet = 1 / (parg16->dw - 3);",
+        "            break;",
+        "",
+        "        case 4:  // Other exception",
+        "            RaiseException((DWORD)EXCEPTION_ARRAY_BOUNDS_EXCEEDED,",
+        "                           EXCEPTION_NONCONTINUABLE, 0, NULL);",
+        "            break;",
+        "",
+        "        default:",
+        "            {",
+        "                char szMsg[255];",
+        "",
+        "                wsprintf(szMsg, \"WOW Unhandled Party By Number (%d, '%s')\", parg16->dw, psz);",
+        "",
+        "                MessageBeep(0);",
+        "                MessageBox(NULL, szMsg, \"WK32WowPartyByNumber\", MB_OK | MB_ICONEXCLAMATION);",
+        "            }",
+        "    }",
+        "",
+        "    FREEPSZPTR(psz);",
+        "    FREEARGPTR(parg16);",
+        "    return ulRet;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 1721,
+      "current": 1755,
+      "logical": 1726
+    }
+  ],
+  "limits": [
+    "Complete normalized diff classification; not functional remediation or runtime validation.",
+    "Exclusion-body accounting does not newly certify all supported preprocessing contexts.",
+    "Temporary _X86_ selection and removed ntseapi include remain pending context proof."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+  "original_sha256": "5147fce6825d1f7e8d69298e4da617f0fe414150963cff391ee53c856a0f5b2a",
+  "before_sha256": "4aec687f5be9cc634850811600e3c8c407de8d52f86d19fa41790f6f32b65a2c",
+  "current_sha256": "16fe6ac52ac0365b94a37272a8c80cd47a1edfd0042c9f076cb94c0ad1c427e4",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep finite LARGE_STRING layout admission and standard host declarations; no native private USER object layout.",
+    "Keep all three original bodies and their distinct count/termination contracts.",
+    "Map original RtlGetExpWinVer behavior to active expected-version owner; preserve default3.10, major1 mapping and malformed-image handling where required. Retain host boundary if already satisfied.",
+    "Confirm no admitted ANSI caller needs strncpycch contract; retain omission if unused, otherwise compose existing minimal owner with correct count semantics."
+  ],
+  "counter_review": [
+    "Selector must remain scoped; full USER header import adds unrelated dependencies.",
+    "wcsncpycch may omit terminator on full buffer and counts terminator when copied; do not replace with superficially similar safe-string API.",
+    "No direct call in scoped USER/WOW search does not establish all version compatibility ownership.",
+    "Search absence not a complete export/dependency proof; do not add unused mirror body simply for symmetry."
+  ],
+  "evidence": [
+    "src/compat/include/opennt_user_multipass.h;tools/build/New-T404S5Wow32ProviderNinja.ps1:139",
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c:316-317,777;dlgbegin.c:112;test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c",
+    "OpenNT/windows/core/ntuser/rtl/random.c:28-68;selected WOW expected-version providers",
+    "OpenNT/windows/core/ntuser/rtl/random.c:184-197;selected formal/fixture graphs"
+  ],
+  "entries_added": 4,
+  "format_sites": 4,
+  "limits": [
+    "No fresh build/runtime.",
+    "Omitted version and ANSI closure pending."
+  ]
+}

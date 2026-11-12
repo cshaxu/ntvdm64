@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+  "original_sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+  "current_sha256": "8a6e9ee2a17b879c88b829f1555b32ab4444d19d548047329b95e2e97afa0a23",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 22,
+      "original_count": 37
+    }
+  ],
+  "initial_review": "One excluded outer GISP_SVGA body; all remaining source exact.",
+  "counter_review": "Original body describes host-ROM INT10/INT42 entries, optional BIOS IRET hook offset and LIM buffer query. It is not the selected CCPU VGA renderer. Nested include guard/IRET conditional removed inside excluded outer body; original notice and boundary retained.",
+  "limits": "Source comparison only; no new universal build-context or runtime certification."
+}

@@ -1,8 +1,15 @@
-/* Copyright (c) Microsoft Corporation.
- * Original windows/core/ntuser/rtl/wow.c true subset.
- * DIVERGENCE(OPENNT-HOST-078): retain required client-view bodies unchanged;
- * target-private precomp replaces the original build environment.
- * Unselected until the complete EDIT dependency group is wired. */
+/****************************** Module Header ******************************\
+* Module Name: wow.c
+*
+* Copyright (c) 1985-92, Microsoft Corporation
+*
+* This module contains shared code between USER32 and USER16
+* No New CODE should be added to this file, unless its shared
+* with USER16.
+*
+* History:
+* 29-DEC-93 NanduriR      shared user32/user16 code.
+\***************************************************************************/
 #include "precomp.h"
 
 #line 15
@@ -71,7 +78,15 @@
 #line 679
 
 
-/* OPENNT-HOST-106: complete original relationship/coordinate leaves. */
+/***************************************************************************\
+* _IsChild (API)
+*
+*
+*
+* History:
+* 11-07-90 darrinm      Translated from Win 3.0 ASM code.
+\***************************************************************************/
+
 #line 682
 BOOL _IsChild(
     PWND pwndParent,
@@ -92,6 +107,15 @@ BOOL _IsChild(
     return FALSE;
 }
 
+/***************************************************************************\
+* _ClientToScreen (API)
+*
+* Map a point from client to screen-relative coordinates.
+*
+* History:
+* 11-12-90 darrinm      Translated from Win 3.0 ASM code.
+\***************************************************************************/
+
 #line 749
 BOOL _ClientToScreen(
     PWND pwnd,
@@ -103,6 +127,15 @@ BOOL _ClientToScreen(
     return TRUE;
 }
 
+/***************************************************************************\
+* _ScreenToClient (API)
+*
+* Map a point from screen to client-relative coordinates.
+*
+* History:
+* 11-12-90 darrinm      Translated from Win 3.0 ASM code.
+\***************************************************************************/
+
 #line 836
 BOOL _ScreenToClient(
     PWND pwnd,
@@ -113,6 +146,19 @@ BOOL _ScreenToClient(
 
     return TRUE;
 }
+
+/***************************************************************************\
+* _IsWindowVisible (API)
+*
+* IsWindowVisible returns the TRUEVIS state of a window, rather than just
+* the state of its WFVISIBLE flag.  According to this routine, a window is
+* considered visible when it and all the windows on its parent chain are
+* visible (WFVISIBLE flag set).  A special case hack was put in that causes
+* any icon window being dragged to be considered as visible.
+*
+* History:
+* 11-12-90 darrinm      Ported.
+\***************************************************************************/
 
 #line 716
 BOOL _IsWindowVisible(
@@ -137,6 +183,15 @@ BOOL _IsWindowVisible(
 
     return TRUE;
 }
+
+/***************************************************************************\
+* _GetClientRect (API)
+*
+*
+*
+* History:
+* 26-Oct-1990 DarrinM   Implemented.
+\***************************************************************************/
 
 #line 769
 BOOL _GetClientRect(

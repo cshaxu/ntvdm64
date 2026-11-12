@@ -1,0 +1,29 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+  "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
+  "current_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 23,
+      "original_count": 1
+    },
+    {
+      "original_start": 28,
+      "original_count": 16
+    },
+    {
+      "original_start": 72,
+      "original_count": 2
+    },
+    {
+      "original_start": 101,
+      "original_count": 11
+    }
+  ],
+  "initial_review": "Four excluded bodies: two HUNTER declarations, BIT_ORDER1 ATTRIBUTE layout, and CGA-only VGLOBS fallback. Retained BIT_ORDER2 layout, CGA constants, functions and accessors are original.",
+  "counter_review": "Complete retained-source equality after removing line directives and replacing only original bodies. Opposite bit-order union is not silently reused; original BIT_ORDER2 field ordering remains. CGA-only fallback is conditional on all EGG/A_VID/C_VID being absent, not the selected common video globals owner. No additional state/layout implementation introduced.",
+  "limits": "Necessity/source comparison only; no fresh layout compiler probe or runtime acceptance. Existing exclusions are not broadened."
+}

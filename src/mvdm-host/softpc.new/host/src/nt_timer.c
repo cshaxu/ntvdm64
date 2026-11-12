@@ -258,10 +258,6 @@ BOOL   bUpdateRtc;
 
 
 
-
-
-
-
 #line 247
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: NT timer initialise ::::::::::::::::::::::::::::*/
@@ -610,7 +606,6 @@ DWORD HeartBeatThread(PVOID pv)
 #line 578
 
 
-
        //
        // Set our priority above normal, and wait for signal to
        // start heartbeat pulses.
@@ -633,13 +628,13 @@ DWORD HeartBeatThread(PVOID pv)
 #endif
 #line 607
 
-
 #line 608
 #ifdef MONITOR
 #line 609
 #error Excluded unsupported monitor timer lock release
 #endif
 #line 612
+
       dwRet = Win32_host_timer();
 
       }
@@ -804,7 +799,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 #line 769
 #error Excluded unsupported monitor heartbeat wait
 #line 819
-#else
+#else          // ndef MONITOR
 #line 820
 //
 // On Risc platforms we only have to deal with the

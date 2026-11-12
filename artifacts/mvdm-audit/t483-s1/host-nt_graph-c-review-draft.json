@@ -1,0 +1,864 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+  "current_sha256": "bd46d5bc6ff98c32a30ce08632423326b855664b8b9f44090ca32111e94a6876",
+  "review_complete": false,
+  "changes": [
+    {
+      "original_start": 55,
+      "original_count": 0,
+      "current_start": 57,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-314): copied text for the independent frontend. */",
+        "#include \"ntvdm-exe/win32/console_text.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-322): CCPU software fullscreen route adapter. */",
+        "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): original CCPU cursor refresh owner. */"
+      ]
+    },
+    {
+      "original_start": 57,
+      "original_count": 0,
+      "current_start": 65,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/win32/console_graphics.h\""
+      ]
+    },
+    {
+      "original_start": 81,
+      "original_count": 0,
+      "current_start": 93,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "#ifdef V7VGA",
+        "/* DIVERGENCE(VIDEO7-DAC-WIDTH): SoftPC selects 6- or 8-bit DAC components. */",
+        "extern int DAC_data_bits;",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif",
+        ""
+      ]
+    },
+    {
+      "original_start": 84,
+      "original_count": 0,
+      "current_start": 105,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-314): only the original update-start callback",
+        " * establishes a completed refresh; a timer check alone is not a repaint. */",
+        "static BOOL presentation_updated = FALSE;"
+      ]
+    },
+    {
+      "original_start": 761,
+      "original_count": 2,
+      "current_start": 729,
+      "current_count": 2,
+      "original": [
+        "    if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears",
+        "        return;"
+      ],
+      "current": [
+        "#if !defined(X86GFX) && !defined(CCPU)",
+        "#error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected"
+      ]
+    },
+    {
+      "original_start": 764,
+      "original_count": 0,
+      "current_start": 733,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif /* !X86GFX */"
+      ]
+    },
+    {
+      "original_start": 796,
+      "original_count": 0,
+      "current_start": 765,
+      "current_count": 12,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-314): publish the original painter's completed",
+        "   grid and consume its update notification. Mouse flushes occur between",
+        "   timer ticks; a tick must not discard that real update. */",
+        "static void publish_text_update(void)",
+        "{",
+        "    if (sc.ModeType == TEXT && presentation_updated) {",
+        "        presentation_updated = FALSE;",
+        "        if (!NtvdmConsoleUpdateText(sc.ColPalette))",
+        "            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);",
+        "    }",
+        "}",
+        ""
+      ]
+    },
+    {
+      "original_start": 800,
+      "original_count": 0,
+      "current_start": 782,
+      "current_count": 24,
+      "original": [],
+      "current": [
+        "",
+        "#if defined(CCPU) && defined(X86GFX)",
+        "#error Unsupported excluded original configuration",
+        "#endif",
+        "",
+        "#if defined(CCPU) && !defined(X86GFX)",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-326): local painter, copied async delivery. */",
+        "    if (sc.ScreenState == FULLSCREEN) {",
+        "        /* The standalone host deliberately compiles its original host sources",
+        "         * without X86GFX: VGA is software state presented by NTCON, not an",
+        "         * old physical-Console renderer.  A completed graphics paint must",
+        "         * therefore notify that copied source at the same original",
+        "         * host_flush_screen boundary.  Do not send it through the text helper:",
+        "         * that helper correctly ignores GRAPHICS and would otherwise swallow",
+        "         * this completed paint. */",
+        "        if (sc.ModeType == GRAPHICS) {",
+        "            if (ntvdm_console_graphics_flush() < 0)",
+        "                DisplayErrorTerm(EHS_FUNC_FAILED, GetLastError(), __FILE__, __LINE__);",
+        "            return;",
+        "        }",
+        "        mvdm_softpc_text_video_flush(publish_text_update);return;",
+        "    }",
+        "#endif",
+        ""
+      ]
+    },
+    {
+      "original_start": 805,
+      "original_count": 0,
+      "current_start": 817,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        {"
+      ]
+    },
+    {
+      "original_start": 806,
+      "original_count": 0,
+      "current_start": 820,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-314): preserve the notification until",
+        "               the video owner publishes; do not perform transport in an IRQ. */",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 826,
+      "original_count": 1,
+      "current_start": 844,
+      "current_count": 19,
+      "original": [
+        ""
+      ],
+      "current": [
+        "    /* DIV-314: a mode-selection tick is not a completed software paint.",
+        "       Retain pending cursor/frame changes until palette and cells are ready. */",
+        "    BOOL software_update_completed = FALSE;",
+        "#if defined(CCPU) && !defined(X86GFX)",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-314): COMMAND can return to guest code",
+        "       between blocking and its next command BOP. A pending CPU timer tick",
+        "       must not publish to the released channel. Keep dirty/cursor/mode state",
+        "       until original resume clears this bit after reacquiring the frontend.",
+        "       The final pre-release paint runs before this original bit is set. */",
+        "    if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-322): software route, not hardware takeover. */",
+        "    if (!mvdm_softpc_text_video_sync_route())",
+        "        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);",
+        "#endif",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video",
+        "       transition; a separate frontend cannot render stream-only VGA state. */",
+        "#if !defined(CCPU) || defined(X86GFX)",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 830,
+      "original_count": 0,
+      "current_start": 868,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-314): copy configuration without",
+        "               forcing the original stream-to-video transition. */",
+        "            if (!NtvdmConsoleUpdateTextConfiguration(sc.ColPalette))",
+        "                DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+      ]
+    },
+    {
+      "original_start": 878,
+      "original_count": 0,
+      "current_start": 925,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                    {"
+      ]
+    },
+    {
+      "original_start": 879,
+      "original_count": 0,
+      "current_start": 928,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                    }"
+      ]
+    },
+    {
+      "original_start": 888,
+      "original_count": 0,
+      "current_start": 939,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                software_update_completed = TRUE;"
+      ]
+    },
+    {
+      "original_start": 905,
+      "original_count": 0,
+      "current_start": 962,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                {"
+      ]
+    },
+    {
+      "original_start": 906,
+      "original_count": 0,
+      "current_start": 965,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                }"
+      ]
+    },
+    {
+      "original_start": 907,
+      "original_count": 0,
+      "current_start": 967,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            software_update_completed = TRUE;"
+      ]
+    },
+    {
+      "original_start": 910,
+      "original_count": 0,
+      "current_start": 972,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-314): Window consumers receive a completed",
+        "       copy, never the mutable original painter or EGA storage. */",
+        "    if (software_update_completed) publish_text_update();"
+      ]
+    },
+    {
+      "original_start": 918,
+      "original_count": 0,
+      "current_start": 984,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "   /* DIVERGENCE(VIDEO7-POINTER-UPDATE): keep pointer and original body",
+        "    * painting in one source-owned update until the matching end. */",
+        "   extern void ntvdm_console_graphics_begin_update(void);",
+        "   ntvdm_console_graphics_begin_update();",
+        "   /* DIVERGENCE(MVDM-HOST-DIV-314): original painter began an update. */",
+        "   presentation_updated = TRUE;"
+      ]
+    },
+    {
+      "original_start": 925,
+      "original_count": 1,
+      "current_start": 998,
+      "current_count": 12,
+      "original": [
+        "void nt_end_update(void) {   }"
+      ],
+      "current": [
+        "void nt_end_update(void) {",
+        "   extern void ntvdm_console_graphics_end_update(void);",
+        "#ifdef V7VGA",
+        "   /* The host removes the overlay before every body update.  The original",
+        "    * partial painter redraws only when the dirty lines intersect the cursor,",
+        "    * so restore it here as well when those lines are elsewhere.  draw_v7ptr",
+        "    * consults the controller's enable bit and original position registers. */",
+        "   extern void draw_v7ptr(void);",
+        "   draw_v7ptr();",
+        "#endif",
+        "   ntvdm_console_graphics_end_update();",
+        "}"
+      ]
+    },
+    {
+      "original_start": 1081,
+      "original_count": 0,
+      "current_start": 1170,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-314/322): actual VGA cursor movement is a",
+        "       publication even without changed cells; Window owns its host caret. */",
+        "    presentation_updated = TRUE;",
+        "    if (sc.ScreenState == FULLSCREEN) return;",
+        ""
+      ]
+    },
+    {
+      "original_start": 1108,
+      "original_count": 0,
+      "current_start": 1203,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-314): register-only shape/visibility change. */",
+        "    presentation_updated = TRUE;"
+      ]
+    },
+    {
+      "original_start": 1119,
+      "original_count": 0,
+      "current_start": 1217,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    CursorResizeNeeded = FALSE;",
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-322): clear the consumed software notification",
+        "       even when no host Console caret operation is applicable. */"
+      ]
+    },
+    {
+      "original_start": 1120,
+      "original_count": 2,
+      "current_start": 1223,
+      "current_count": 0,
+      "original": [
+        "",
+        "    CursorResizeNeeded = FALSE;"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 1277,
+      "original_count": 1,
+      "current_start": 1380,
+      "current_count": 1,
+      "original": [
+        "                if (get_seq_chain4_mode() && get_chain4_mode())"
+      ],
+      "current": [
+        "                if (get_seq_chain4_mode())"
+      ]
+    },
+    {
+      "original_start": 1575,
+      "original_count": 0,
+      "current_start": 1651,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "#ifdef V7VGA",
+        "    /* DIVERGENCE(VIDEO7-PACKED-SURFACE): SoftPC's selected packed",
+        "     * painter emits one pixel per byte, without VGA pixel doubling. */",
+        "    if (paint_screen == nt_paint_funcs->v7vga_hi_graph)",
+        "        width = get_bytes_per_line();",
+        "#endif",
+        ""
+      ]
+    },
+    {
+      "original_start": 1650,
+      "original_count": 3,
+      "current_start": 1735,
+      "current_count": 6,
+      "original": [
+        "                vga_color[i].peRed = (BYTE) (DAC[ind].red * 4);",
+        "                vga_color[i].peGreen = (BYTE) (DAC[ind].green * 4);",
+        "                vga_color[i].peBlue = (BYTE) (DAC[ind].blue * 4);"
+      ],
+      "current": [
+        "                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ?",
+        "                    DAC[ind].red : DAC[ind].red * 4);",
+        "                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ?",
+        "                    DAC[ind].green : DAC[ind].green * 4);",
+        "                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?",
+        "                    DAC[ind].blue : DAC[ind].blue * 4);"
+      ]
+    },
+    {
+      "original_start": 1710,
+      "original_count": 3,
+      "current_start": 1799,
+      "current_count": 6,
+      "original": [
+        "                vga_color[i].peRed = (BYTE) (DAC[ind].red * 4);",
+        "                vga_color[i].peGreen = (BYTE) (DAC[ind].green * 4);",
+        "                vga_color[i].peBlue = (BYTE) (DAC[ind].blue * 4);"
+      ],
+      "current": [
+        "                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ?",
+        "                    DAC[ind].red : DAC[ind].red * 4);",
+        "                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ?",
+        "                    DAC[ind].green : DAC[ind].green * 4);",
+        "                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?",
+        "                    DAC[ind].blue : DAC[ind].blue * 4);"
+      ]
+    },
+    {
+      "original_start": 1718,
+      "original_count": 0,
+      "current_start": 1811,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-314): retain resolved text colours even",
+        "           when the original graphics palette handle is later retired. */",
+        "        if (sc.ModeType == TEXT) NtvdmConsoleTextColours(vga_color);"
+      ]
+    },
+    {
+      "original_start": 2067,
+      "original_count": 2,
+      "current_start": 2171,
+      "current_count": 3,
+      "original": [
+        "        if (sc.ScreenState == FULLSCREEN)",
+        "            return;"
+      ],
+      "current": [
+        "#ifdef X86GFX",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 31,
+      "original_count": 1,
+      "current_start": 32,
+      "current_count": 1,
+      "original": [
+        "#include <ntddvdeo.h>"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 214,
+      "original_count": 50,
+      "current_start": 256,
+      "current_count": 1,
+      "original": [
+        "static PAINTFUNCS std_frozen_paint_funcs =",
+        "{",
+        "        nt_dummy_frozen,",
+        "        nt_cga_med_frozen_std,",
+        "        nt_cga_hi_frozen_std,",
+        "        nt_dummy_frozen,",
+        "        nt_ega_lo_frozen_std,",
+        "        nt_ega_med_frozen_std,",
+        "        nt_ega_hi_frozen_std,",
+        "        nt_vga_frozen_std,",
+        "        nt_vga_med_frozen_std,",
+        "        nt_vga_hi_frozen_std,",
+        "#ifdef V7VGA",
+        "        nt_dummy_frozen,",
+        "#endif /* V7VGA */",
+        "};",
+        "",
+        "static PAINTFUNCS big_frozen_paint_funcs =",
+        "{",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "#ifdef V7VGA",
+        "        nt_dummy_frozen,",
+        "#endif /* V7VGA */",
+        "};",
+        "",
+        "static PAINTFUNCS huge_frozen_paint_funcs =",
+        "{",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "        nt_dummy_frozen,",
+        "#ifdef V7VGA",
+        "        nt_dummy_frozen,",
+        "#endif /* V7VGA */",
+        "};"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 291,
+      "original_count": 11,
+      "current_start": 287,
+      "current_count": 1,
+      "original": [
+        "static INITFUNCS frozen_init_funcs =",
+        "{",
+        "        nt_init_text,",
+        "        nt_init_cga_colour_med_graph,",
+        "        nt_init_cga_colour_hi_graph,",
+        "        nt_init_text,",
+        "        nt_init_ega_lo_graph,",
+        "        nt_init_ega_med_graph,",
+        "        nt_init_ega_hi_graph,",
+        "        nt_init_vga_hi_graph,",
+        "};"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 563,
+      "original_count": 7,
+      "current_start": 552,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t\t/*",
+        "\t\t * Make sure a buffer is selected next time SelectMouseBuffer",
+        "\t\t * is called.",
+        "\t\t */",
+        "\t\tmouse_buffer_width = 0;",
+        "\t\tmouse_buffer_height = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 596,
+      "original_count": 1,
+      "current_start": 582,
+      "current_count": 1,
+      "original": [
+        "    sc.Registered = FALSE;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 617,
+      "original_count": 1,
+      "current_start": 605,
+      "current_count": 1,
+      "original": [
+        "    if(!video_copy) video_copy = (byte *) host_malloc(0x8000);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 660,
+      "original_count": 25,
+      "current_start": 650,
+      "current_count": 1,
+      "original": [
+        "/* The mouse calls this func when it sees a mode change. If we're windowed",
+        " * we pass it off to the softpc bios (who may want to switch to fullscreen).",
+        " * If we're fullscreen we do nothing as the native bios will take care of",
+        " * everything.",
+        " */",
+        "void host_call_bios_mode_change(void)",
+        "{",
+        "    extern void ega_video_io();",
+        "    half_word mode;",
+        "",
+        "    if (sc.ScreenState == WINDOWED)",
+        "    {",
+        "\tega_video_io();",
+        "    }",
+        "    else",
+        "    {",
+        "",
+        "\t/*",
+        "\t * We have a fullscreen mode change so we need to change the mouse",
+        "\t * buffer so that we get mouse coordinates of the correct resolution.",
+        "\t */",
+        "\tmode = getAL();",
+        "\tSelectMouseBuffer(mode, 0);",
+        "    }",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 783,
+      "original_count": 6,
+      "current_start": 755,
+      "current_count": 1,
+      "original": [
+        "    /*",
+        "    ** Called during a mode change...",
+        "    ** Trash video copy so future updates will know what has changed.",
+        "    ** Alternatively mon_text_update() could listen to dirty_flag.",
+        "    */",
+        "    memfill( 0xff, &video_copy[ 0 ], &video_copy[ 0x7fff ] ); /* Tim Oct 92 */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 803,
+      "original_count": 1,
+      "current_start": 814,
+      "current_count": 1,
+      "original": [
+        "        if (sc.ScreenState == WINDOWED)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 876,
+      "original_count": 1,
+      "current_start": 922,
+      "current_count": 1,
+      "original": [
+        "                    if (sc.ScreenState == WINDOWED)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 903,
+      "original_count": 1,
+      "current_start": 959,
+      "current_count": 1,
+      "original": [
+        "                if (sc.ScreenState == WINDOWED)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1288,
+      "original_count": 6,
+      "current_start": 1394,
+      "current_count": 1,
+      "original": [
+        "                        if (nt_paint_funcs == &std_frozen_paint_funcs)",
+        "                            if (Frozen256Packed)     //2 possible frozen formats",
+        "                                paint_screen = nt_vga_frozen_pack_std;",
+        "                            else",
+        "                                paint_screen = nt_paint_funcs->vga_graph;",
+        "                        else"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1345,
+      "original_count": 26,
+      "current_start": 1449,
+      "current_count": 1,
+      "original": [
+        "    /*",
+        "     * Display a message for the user if changing from a text mode to a",
+        "     * graphics mode while windowed. This is because graphics modes must be",
+        "     * run full-screen.",
+        "     */",
+        "     {",
+        "        /*",
+        "        ** Tim August 92. Do not want to do a TextToGraphics() during a",
+        "        ** full-screen to windowed transition. Otherwise the display gets",
+        "        ** set back to full-screen!",
+        "        */",
+        "        extern int BlockModeChange; /* Tim August 92, in nt_fulsc.c */",
+        "        if ((BlockModeChange == 0) &&",
+        "            (sc.ScreenState == WINDOWED) &&",
+        "            (oldModeType == TEXT) &&",
+        "            (sc.ModeType == GRAPHICS))",
+        "        {",
+        "            TextToGraphics();",
+        "        }",
+        "        else",
+        "        {",
+        "",
+        "            /* No call to TextToGraphics() */",
+        "            check_win_size(height);",
+        "        }",
+        "     }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1480,
+      "original_count": 11,
+      "current_start": 1563,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void select_frozen_routines(void)",
+        "{",
+        "    if (get_screen_scale() == 2)",
+        "\tnt_paint_funcs = &std_frozen_paint_funcs;",
+        "    else if (get_screen_scale() == 3)",
+        "\tnt_paint_funcs = &big_frozen_paint_funcs;",
+        "    else",
+        "\tnt_paint_funcs = &huge_frozen_paint_funcs;",
+        "",
+        "    nt_init_funcs = &frozen_init_funcs;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1892,
+      "original_count": 1,
+      "current_start": 1991,
+      "current_count": 1,
+      "original": [
+        "\t//fprintf(trace_file, \"newW: %d.%d at %d.%d\\n\", h, w, top, left);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1912,
+      "original_count": 1,
+      "current_start": 2013,
+      "current_count": 1,
+      "original": [
+        "\t//fprintf(trace_file, \"newB: %d.%d\\n\", h, w);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1966,
+      "original_count": 4,
+      "current_start": 2069,
+      "current_count": 1,
+      "original": [
+        "\t//fprintf(trace_file, \"resz: %d.%d\\n\", h, w);",
+        "\t//fprintf(trace_file, \"oldW: %d.%d\\n\", oldW.Y, oldW.X);",
+        "\t//fprintf(trace_file, \"maxW: %d.%d\\n\", bufferInfo.dwMaximumWindowSize.Y, bufferInfo.dwMaximumWindowSize.X);",
+        "\t//fprintf(trace_file, \"oldB: %d.%d\\n\", oldB.Y, oldB.X);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1993,
+      "original_count": 1,
+      "current_start": 2096,
+      "current_count": 1,
+      "original": [
+        "\t\t//fprintf(trace_file, \"maxW: %d.%d\\n\", bufferInfo.dwMaximumWindowSize.Y, bufferInfo.dwMaximumWindowSize.X);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2281,
+      "original_count": 1,
+      "current_start": 2389,
+      "current_count": 1,
+      "original": [
+        "    fprintf(trace_file, \"WARNING - nt_mode_select_changed\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2289,
+      "original_count": 1,
+      "current_start": 2399,
+      "current_count": 1,
+      "original": [
+        "    fprintf(trace_file, \"WARNING - nt_color_select_changed\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "status": "Superseded by host-nt_graph-c-review.json",
+  "verified_evidence": [
+    {
+      "area": "text publication authority",
+      "evidence": "nt_start_update sets presentation_updated; cursor position/shape also set it. publish_text_update consumes it only for TEXT. nt_graphics_tick distinguishes completed update from mode-settle ticks; block flag prevents normal ticks publishing after release.",
+      "remaining": "Finish all caller paths, pure brace/comment restorations and per-chunk decisions before counting file reviewed."
+    },
+    {
+      "area": "publication pause/rearm",
+      "evidence": "ntvdm_console_video_async delegates worker_base_publication_active. FALSE waits for claimed send and force-drains pending copy/source; TRUE re-enables admission. nt_graphics_tick calls text_video_sync_route which sets active based on software surface, so nt_event mode-settle call can rearm after prior pause. Format/retirement ntvdm_console_publish_video(NULL or TEXT_CONFIGURATION) separately drains again.",
+      "remaining": "Determine which final text/graphics paths actually hit the later drain before channel release. Rearm is proven source behavior; unsafe final release remains unproved."
+    },
+    {
+      "area": "V7 pointer frame ownership",
+      "evidence": "graphics_begin_update increments depth then removes overlay; capture declines while depth nonzero. nt_end_update redraws original draw_v7ptr then graphics_end_update decrements depth and signals dirty. This prevents copied snapshots of intermediate pointer/body updates.",
+      "remaining": "Audit nested updates and error propagation: end_update discards signal_dirty result; publication error is latched in publisher, so must trace next observer before classifying lost error."
+    },
+    {
+      "area": "V7 palette and packed format",
+      "evidence": "v7_ports sets DAC_data_bits=6 or8; nt_graph palette now uses raw components for8 and times4 for6. Packed painter selection removes get_chain4_mode check and derives width from bytes_per_line.",
+      "remaining": "Prove selector/stride against actual painter and enabled V7 modes; do not infer correctness from DAC change or name alone."
+    }
+  ],
+  "evidence_files": {
+    "src\\worker-base\\publication.c": "927db3974bbf74b4ae2620d1dede8ab224b4ca72267ed39c54a409e417acace3",
+    "src\\ntvdm-exe\\win32\\console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src\\ntvdm-exe\\win32\\console_graphics.c": "671b2aa747ab1eecf8001dc29c369b0deacde8119ee93f6383af4f3b1743667f",
+    "src\\ntvdm-exe\\softpc\\mvdm_softpc_text_video.c": "2d54f503f438b5975a439e44b2123a6853df349b769c2af0d7545acd39ccf9de",
+    "src\\mvdm-host\\softpc.new\\base\\video\\v7_ports.c": "9eec47fab4481684b32dbdb34ed9c10766ff64c292078e52f704f5189d50c1a2"
+  }
+}

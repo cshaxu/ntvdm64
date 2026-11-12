@@ -1,13 +1,34 @@
-/* Copyright (c) 1985-1996, Microsoft Corporation.
- * Original windows/core/ntuser/rtl/draw.c true subset.
- * DIVERGENCE(OPENNT-HOST-077): retain the required original body unchanged;
- * target-private precomp replaces the unavailable original build environment.
- * Unselected until the complete original EDIT dependency group is wired. */
+/****************************** Module Header ******************************\
+* Module Name: draw.c
+*
+* Copyright (c) 1985-1996, Microsoft Corporation
+*
+* This module contains common drawing functions.
+*
+* History:
+* 12-Feb-1992 MikeKe    Moved Drawtext to the client side
+\***************************************************************************/
 #include "precomp.h"
 
-/* DIVERGENCE(OPENNT-HOST-111): additional unchanged original drawing body.
- * Select only with the complete scoped button resource environment. */
 #ifdef WOW_ORIGINAL_BUTTON_DRAWING
+/***************************************************************************\
+* DrawPushButton
+*
+* Draws a push style button in the given state.  Adjusts passed in rectangle
+* if desired.
+*
+* Algorithm:
+*    Depending on the state we either draw
+*             * raised edge   (undepressed)
+*             * sunken edge with extra shadow (depressed)
+*     If it is an option push button (a push button that is
+*             really a check button or a radio button like buttons
+*             in tool bars), and it is checked, then we draw it
+*             depressed with a different fill in the middle.
+*
+* History:
+* 05-Feb-19 Laurabu     Created.
+\***************************************************************************/
 #line 1004
 VOID DrawPushButton(
     HDC    hdc,
@@ -67,6 +88,11 @@ VOID DrawPushButton(
 }
 #endif
 
+/***************************************************************************\
+* DrawFrame
+*
+* History:
+\***************************************************************************/
 #line 1067
 BOOL DrawFrame(
     HDC   hdc,

@@ -145,10 +145,6 @@ q_event_init(
 }
 
 
-
-/*
- *  Caller must hold ica lock
- */
 #ifndef MONITOR
 
 #line 148
@@ -210,12 +206,12 @@ add_q_event_t(
       long param
       )
 {
+
 #ifdef MONITOR
 #line 207
 #error Excluded unsupported quick-event hardware monitor path
-#else
-#line 217
-
+#else  /* MONITOR */
+#line 218
 
         QEVHANDLE   qevHandle;
         PLIST_ENTRY Next;
@@ -449,7 +445,6 @@ delete_q_event(
 #endif
 #line 445
 }
-
 
 
 

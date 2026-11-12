@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/dos/dem/demfcb.c",
+  "original_sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670",
+  "current_sha256": "c2c6aad56b3d96860dbc74430757240b4dcb10192f8ef5e54a1ebcbdd6ebccdb",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 451,
+      "original_count": 0,
+      "current_start": 451,
+      "current_count": 3
+    },
+    {
+      "original_start": 463,
+      "original_count": 2,
+      "current_start": 466,
+      "current_count": 13
+    },
+    {
+      "original_start": 473,
+      "original_count": 2,
+      "current_start": 487,
+      "current_count": 2
+    },
+    {
+      "original_start": 478,
+      "original_count": 2,
+      "current_start": 492,
+      "current_count": 1
+    },
+    {
+      "original_start": 492,
+      "original_count": 0,
+      "current_start": 505,
+      "current_count": 3
+    },
+    {
+      "original_start": 506,
+      "original_count": 0,
+      "current_start": 522,
+      "current_count": 7
+    }
+  ],
+  "initial_review": "All changes confined to demFCBIO DTA lease lifecycle; preceding/following file functions unchanged.",
+  "counter_review": "Guest file-read writes require prefilled snapshot for partial read; file-write only reads snapshot. All acquired normal branches release. Read error preservation across release is unproved and specifically registered, not called a reproduced defect.",
+  "dependencies": [
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+    "src/ntvdm-exe/session/guest_memory_lease.c",
+    "src/mvdm-host/dos/dem/demerror.c"
+  ],
+  "limitations": [
+    "No runtime test.",
+    "Release ownership failure handling is not proved equivalent to original no-op/free interface."
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+  "current_sha256": "d0398deed9adc5b874d62bd94d94e93c53347454a678b934257c3a669c0be309",
+  "review_complete": true,
+  "register_entries": 11,
+  "changes": [
+    {
+      "original_start": 32,
+      "original_count": 0,
+      "current_start": 32,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 38,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef CPU_40_STYLE",
+        "#include \"mvdm_softpc_effective_address.h\"",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 148,
+      "original_count": 1,
+      "current_start": 156,
+      "current_count": 3,
+      "original": [
+        "UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-488): let the CPU40 DPMI decoder use the same",
+        " * numeric address as its SIM32 alias without walking the descriptor twice. */",
+        "UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)"
+      ]
+    },
+    {
+      "original_start": 156,
+      "original_count": 0,
+      "current_start": 168,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        if (linear) *linear = (ULONG)iaddr;"
+      ]
+    },
+    {
+      "original_start": 163,
+      "original_count": 0,
+      "current_start": 179,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "}",
+        "",
+        "UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)",
+        "{",
+        "        return Sim32pGetVDMPointerWithLinear(addr, pm, NULL);"
+      ]
+    },
+    {
+      "original_start": 229,
+      "original_count": 2,
+      "current_start": 251,
+      "current_count": 3,
+      "original": [
+        "    double_word descr_addr;",
+        "    DESCR entry;"
+      ],
+      "current": [
+        "#ifndef CPU_40_STYLE",
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 239,
+      "original_count": 1,
+      "current_start": 264,
+      "current_count": 8,
+      "original": [
+        "    else"
+      ],
+      "current": [
+        "#ifdef CPU_40_STYLE",
+        "    /*",
+        "     * DIVERGENCE(MVDM-HOST-DIV-177): CPU40 CCPU keeps descriptor decoding",
+        "     * in its CPU_DESCR implementation, whereas this historical SIM32 body",
+        "     * uses the CPU30 DESCR carrier. Preserve SIM32's numeric result and",
+        "     * invalid-selector sentinel through the checked adapter, which uses the",
+        "     * original CPU40 GDT/LDT descriptor walker rather than recreating CPU30.",
+        "     */"
+      ]
+    },
+    {
+      "original_start": 241,
+      "original_count": 10,
+      "current_start": 273,
+      "current_count": 3,
+      "original": [
+        "\tif ( selector_outside_table(seg, &descr_addr) == 1 )",
+        "\t{",
+        "\t/*",
+        "\tThis should not happen, but is a check the real effective_addr",
+        "\tincludes. Return error -1.",
+        "\t*/",
+        "#ifndef PROD",
+        "        printf(\"NTVDM:sim32:effective addr: Error for addr %#x (seg %#x)\\n\",addr, seg);",
+        "        HostDebugBreak();",
+        "#endif"
+      ],
+      "current": [
+        "        IU32 linear;",
+        "",
+        "        if (!mvdm_softpc_protected_address(seg, off, &linear))"
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 6,
+      "current_start": 277,
+      "current_count": 1,
+      "original": [
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t    read_descriptor(descr_addr, &entry);",
+        "\t    return entry.base + off;",
+        "\t}"
+      ],
+      "current": [
+        "        return (sys_addr)linear;"
+      ]
+    },
+    {
+      "original_start": 259,
+      "original_count": 0,
+      "current_start": 279,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#else",
+        "#error Non-CPU40 SIM32 descriptor path is not supported",
+        "#endif /* CPU_40_STYLE */"
+      ]
+    },
+    {
+      "original_start": 437,
+      "original_count": 1,
+      "current_start": 371,
+      "current_count": 6,
+      "original": [
+        "       exit(0);"
+      ],
+      "current": [
+        "       /* DIVERGENCE(MVDM-HOST-DIV-147): the original selected CCPU40",
+        "        * allocation failure exits its dedicated process.  Bound product",
+        "        * execution instead escapes through the session; an unbound caller",
+        "        * receives the source-shaped allocation failure below. */",
+        "       (void)mvdm_softpc_terminate_current_session(0u, 0u);",
+        "       return(NULL);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 322,
+      "original_count": 99,
+      "current_start": 349,
+      "current_count": 1,
+      "original": [
+        "",
+        "LOCAL sys_addr current_sas_size =0;\t\t/* A local Length_of_M_area */",
+        "",
+        "GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)",
+        "{",
+        "\tUTINY *rez;",
+        "\tDWORD M_plus_type_size;",
+        "",
+        "        /* allocate 16 MEG of virtual memory */",
+        "        if (!reserve_for_sas)",
+        "        {",
+        "                if (!(reserve_for_sas = (UTINY *)VirtualAlloc ((void *)NULL, SIXTEENMEG,",
+        "                        MEM_RESERVE, PAGE_READWRITE)))",
+        "                {",
+        "#ifndef PROD",
+        "                        printf (\"NTVDM:Failed to reserve 16 Meg virtual memory for sas\\n\");",
+        "#endif",
+        "                        exit (0);",
+        "                }",
+        "        }",
+        "",
+        "\t/* now commit to our size */",
+        "\tM_plus_type_size = size + NOWRAP_PROTECTION +",
+        "\t\t\t   ((size + NOWRAP_PROTECTION) >> 12);",
+        "\trez = (UTINY *)VirtualAlloc ((void *) reserve_for_sas,",
+        "\t\t\t\t     M_plus_type_size,",
+        "\t\t\t\t     MEM_COMMIT,",
+        "\t\t\t\t     PAGE_READWRITE);",
+        "\tif (rez)",
+        "\t\tLength_of_M_area = current_sas_size = size;",
+        "\treturn (rez);",
+        "",
+        "}",
+        "",
+        "",
+        "GLOBAL UTINY *host_sas_term()",
+        "{",
+        "        if (!reserve_for_sas)",
+        "                return (NULL);",
+        "",
+        "        /* deallocate the reserves */",
+        "        VirtualFree (reserve_for_sas, SIXTEENMEG, MEM_RELEASE);",
+        "",
+        "        /* null out reserve pointer */",
+        "        reserve_for_sas = NULL;",
+        "",
+        "        Length_of_M_area = current_sas_size = 0;",
+        "",
+        "        return (NULL);",
+        "}",
+        "",
+        "GLOBAL UTINY *sas_alter_size IFN1(sys_addr, new)",
+        "{",
+        "        UTINY *tmp;",
+        "        if (!reserve_for_sas)",
+        "        {",
+        "#ifndef PROD",
+        "                printf (\"NTVDM:Sas trying to alter size before reserve setup\\n\");",
+        "#endif ",
+        "                return (NULL);",
+        "        }",
+        "",
+        "        /* if we are already at the right size return success */",
+        "        if (new == current_sas_size)",
+        "        {",
+        "                return (reserve_for_sas);",
+        "        }",
+        "",
+        "        if (new > current_sas_size)",
+        "        {",
+        "                /* move to end of current commited area */",
+        "                tmp = reserve_for_sas + current_sas_size;",
+        "                if (!VirtualAlloc ((void *)tmp, (DWORD)(new - current_sas_size), MEM_COMMIT, ",
+        "                        PAGE_READWRITE))",
+        "                {",
+        "                        printf (\"NTVDM:Virtual Allocate for resize from %d to %d FAILED!\\n\",",
+        "                                current_sas_size, new);",
+        "                        return (NULL);",
+        "                }",
+        "        }",
+        "        else",
+        "        {",
+        "                /* move to the place where sas needs to end */",
+        "                tmp = reserve_for_sas + new;",
+        "",
+        "                /* now decommit the unneeded memory */",
+        "                if (!VirtualFree ((void *)tmp, (DWORD)(current_sas_size - new), MEM_DECOMMIT)) ",
+        "                {",
+        "                        printf (\"NTVDM:Virtual Allocate for resize from %d to %d FAILED!\\n\",",
+        "                                current_sas_size, new);",
+        "                        return (NULL);",
+        "                }",
+        "        }",
+        "        Length_of_M_area = current_sas_size = new; ",
+        "        return (reserve_for_sas);",
+        "}",
+        "",
+        "",
+        ""
+      ],
+      "current": [
+        "#error Non-CPU40 SIM32 memory provider is not supported"
+      ]
+    },
+    {
+      "original_start": 434,
+      "original_count": 1,
+      "current_start": 368,
+      "current_count": 1,
+      "original": [
+        "       printf (\"NTVDM:Failed to allocate virtual memory for sas\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "11 hunks: retain6; simplify4 added selection scaffolds; pending1 early failure escape.",
+  "counter_review": "Single shared conversion and retained VDD ABI confirmed; added selectors distinguished from original branches; early failure cleanup not proved.",
+  "limits": "Source-only classification; no functional remediation or runtime pass."
+}

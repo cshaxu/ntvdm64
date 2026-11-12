@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/dos/dem/demdasd.c",
+  "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+  "current_sha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+  "review_complete": true,
+  "nonexcluded_differences": 0,
+  "dbg_groups": 4,
+  "proof": "Remove the four non-nested DBG groups and #line directives from both files: all remaining lines exactly equal.",
+  "counter_review": "No disk algorithm, buffer ownership or failure flow changes outside excluded DBG bodies. This is source projection, not new preprocessor/build/runtime evidence."
+}

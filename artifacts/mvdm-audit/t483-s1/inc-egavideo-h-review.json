@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+  "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+  "current_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 53,
+      "original_count": 8
+    },
+    {
+      "original_start": 102,
+      "original_count": 3
+    },
+    {
+      "original_start": 108,
+      "original_count": 1
+    }
+  ],
+  "initial_review": "Three excluded bodies: original literal if0 font-location block, non-ANSI prototypes and MSWDVR declaration. Entire remaining source exact.",
+  "counter_review": "Checked BIOS-data offsets, mode-table constants, font-load mode, VGA flag masks, scanline enumeration and ANSI/V7VGA interfaces against original. No geometry, font loading or guest-memory access policy changed. Literal if0 was already inactive upstream; exclusion does not remove a previously selected font provider.",
+  "limits": "Source difference classification only; no fresh compiler/runtime acceptance or universal line certification."
+}

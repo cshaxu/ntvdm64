@@ -1,0 +1,77 @@
+{
+  "path": "src/mvdm-host/wow32/wgmeta.c",
+  "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
+  "current_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 278,
+      "original_count": 2,
+      "current_start": 279,
+      "current_count": 1,
+      "original": [
+        "        GlobalUnlockFree16(vp);",
+        "        ul = TRUE;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 531,
+      "original_count": 31,
+      "current_start": 535,
+      "current_count": 1,
+      "original": [
+        "",
+        "ULONG FASTCALL WG32GetMetaFileBits(PVDMFRAME pFrame)",
+        "{",
+        "    ULONG ul = 0;",
+        "    register PGETMETAFILEBITS16 parg16;",
+        "",
+        "    GETARGPTR(pFrame, sizeof(GETMETAFILEBITS16), parg16);",
+        "",
+        "    if (GlobalLock16(parg16->f1,NULL))",
+        "    {",
+        "        GlobalUnlock16(parg16->f1);",
+        "        ul = parg16->f1;",
+        "    }",
+        "",
+        "    FREEARGPTR(parg16);",
+        "    RETURN(ul);",
+        "}",
+        "",
+        "ULONG FASTCALL WG32SetMetaFileBits(PVDMFRAME pFrame)",
+        "{",
+        "    ULONG ul;",
+        "    register PSETMETAFILEBITS16 parg16;",
+        "",
+        "    GETARGPTR(pFrame, sizeof(SETMETAFILEBITS16), parg16);",
+        "",
+        "    ul = parg16->f1;",
+        "",
+        "    FREEARGPTR(parg16);",
+        "    RETURN(ul);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current_line": 280,
+      "original_line": 280,
+      "logical_line": 279
+    },
+    {
+      "current_line": 536,
+      "original_line": 562,
+      "logical_line": 532
+    }
+  ],
+  "line_basis": "LF only",
+  "limits": "Diff classification, not new runtime validation."
+}

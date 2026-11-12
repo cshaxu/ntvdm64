@@ -1,0 +1,859 @@
+{
+  "path": "src/mvdm-host/wow32/wowhooks.c",
+  "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+  "current_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+  "changes": [
+    {
+      "original_start": 13,
+      "original_count": 0,
+      "current_start": 13,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */",
+        "#include \"wow_message_lifetime.h\""
+      ],
+      "decision": "retain",
+      "necessity": "TLS declarations/definitions match; original DefHookProc context remains owned by wowhooks.c, saved/restored by WU32StdHookProc per entry. Header supplies actual wrapper consumer; shared lifetime header supplies selected finalizers.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 78,
+      "original_count": 1,
+      "current_start": 81,
+      "current_count": 2,
+      "original": [
+        "HOOKPARAMS vHookParams = {0, 0, 0};"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): callbacks restore their native-thread context. */",
+        "__declspec(thread) HOOKPARAMS vHookParams = {0, 0, 0};"
+      ],
+      "decision": "retain",
+      "necessity": "TLS declarations/definitions match; original DefHookProc context remains owned by wowhooks.c, saved/restored by WU32StdHookProc per entry. Header supplies actual wrapper consumer; shared lifetime header supplies selected finalizers.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 80,
+      "original_count": 1,
+      "current_start": 84,
+      "current_count": 1,
+      "original": [
+        "INT viCurrentHookStateDataIndex = 0;"
+      ],
+      "current": [
+        "__declspec(thread) INT viCurrentHookStateDataIndex = 0;"
+      ],
+      "decision": "retain",
+      "necessity": "TLS declarations/definitions match; original DefHookProc context remains owned by wowhooks.c, saved/restored by WU32StdHookProc per entry. Header supplies actual wrapper consumer; shared lifetime header supplies selected finalizers.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 458,
+      "original_count": 1,
+      "current_start": 463,
+      "current_count": 2,
+      "original": [
+        "LONG APIENTRY WU32StdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-332): original stubs enter the scoped host wrapper. */",
+        "LONG APIENTRY WowOriginalStdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)"
+      ],
+      "decision": "pending",
+      "necessity": "Rename preserves original dispatcher behind WU32StdHookProc; all original stubs retain wrapper entry, which establishes task/borrow scope and HWND enrollment before conversion.",
+      "change_plan": "Keep seam provisionally; audit wrapper with original dispatcher and native hook fixtures before considering inline/merge or restoration. Do not bypass task/alias ownership.",
+      "missing_evidence": "End-to-end proof of wrapper failure/veto and reentrant task retirement; wrapper fixture substitutes original dispatcher."
+    },
+    {
+      "original_start": 570,
+      "original_count": 1,
+      "current_start": 577,
+      "current_count": 1,
+      "original": [
+        "    VPVOID      vp;"
+      ],
+      "current": [
+        "    VPVOID      vp = 0;"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 573,
+      "original_count": 1,
+      "current_start": 580,
+      "current_count": 5,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before converter/CWP stack. */",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 593,
+      "original_count": 0,
+      "current_start": 605,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        wm32mpex.fFree = TRUE; /* DIV-344: callback owns newly constructed input. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 596,
+      "original_count": 0,
+      "current_start": 610,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            return FALSE; /* DIV-344: never expose a partial conversion. */"
+      ],
+      "decision": "retain",
+      "necessity": "Do not enter guest callback with failed conversion or missing CWP stack allocation; enclosing finalizer owns partial resources.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 600,
+      "original_count": 0,
+      "current_start": 616,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    if (!vp) return FALSE; /* DIV-344: converted input remains frame-owned. */"
+      ],
+      "decision": "retain",
+      "necessity": "Do not enter guest callback with failed conversion or missing CWP stack allocation; enclosing finalizer owns partial resources.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 615,
+      "original_count": 1,
+      "current_start": 633,
+      "current_count": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn); /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 633,
+      "original_count": 0,
+      "current_start": 648,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    vp = 0; /* DIV-344: finalizer consumes only this frame's remaining stack. */",
+        "    stack.completed = fCallback; /* DIV-349: do not change the original hook result. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 635,
+      "original_count": 0,
+      "current_start": 653,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */",
+        "        if (vp) stackfree16(vp);",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 658,
+      "original_count": 1,
+      "current_start": 683,
+      "current_count": 5,
+      "original": [
+        "    WM32MSGPARAMEX       wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX       wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-349): actual independent CREATE owner. */",
+        "    wow_message_stack stack;",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 701,
+      "original_count": 0,
+      "current_start": 731,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            wm32mpex.fFree = TRUE; /* DIV-349: same synchronous ownership as WndProc. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 786,
+      "original_count": 1,
+      "current_start": 818,
+      "current_count": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn); /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 837,
+      "original_count": 0,
+      "current_start": 869,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349: all original output conversion has returned. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 838,
+      "original_count": 0,
+      "current_start": 872,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349 */",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 884,
+      "original_count": 1,
+      "current_start": 924,
+      "current_count": 1,
+      "original": [
+        "    VPVOID vp;"
+      ],
+      "current": [
+        "    VPVOID vp = 0;"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 887,
+      "original_count": 1,
+      "current_start": 927,
+      "current_count": 3,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): converter stack owner. */",
+        "    BOOL fCallback;"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 890,
+      "original_count": 6,
+      "current_start": 933,
+      "current_count": 14,
+      "original": [
+        "    HWND hwnd32;",
+        "    MSGPARAMEX mpex;",
+        "    BOOL fUseOld;",
+        "    static MSG msgSave;",
+        "    static int cRecurse = 0;",
+        "    static PARM16 Parm16Save;"
+      ],
+      "current": [
+        "    HWND hwnd32 = NULL; /* DIV-344: only successful conversion selects it. */",
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    /* DIV-344: preserve original same-message reuse across nested DIFFERENT",
+        "     * messages too; no second recursion table or persistent owner is added. */",
+        "    BOOL fUseOld = TRUE;",
+        "    static __declspec(thread) MSG msgSave;",
+        "    static __declspec(thread) int cRecurse = 0;",
+        "    static __declspec(thread) PARM16 Parm16Save;",
+        "    MSG savedMsg = msgSave;",
+        "    int savedRecurse = cRecurse;",
+        "    PARM16 savedParm = Parm16Save;",
+        "    BOOL savedThunkDDE = fThunkDDEmsg; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Retains original same-message pointer reuse, isolates native threads and snapshots outer msgSave/cRecurse/Parm16Save for different-message recursion; restores entering DDE selector.",
+      "change_plan": "Retain original recursion algorithm; validate scoped restoration and simplify only if an equivalent single owner is proven.",
+      "missing_evidence": "Full integration of nested different/same-message hooks and task retirement beyond extracted COPYDATA fixture."
+    },
+    {
+      "original_start": 926,
+      "original_count": 0,
+      "current_start": 978,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            return FALSE; /* DIV-344: never expose a partial conversion. */"
+      ],
+      "decision": "retain",
+      "necessity": "Do not enter guest callback with failed conversion or missing CWP stack allocation; enclosing finalizer owns partial resources.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1009,
+      "original_count": 1,
+      "current_start": 1063,
+      "current_count": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn); /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1063,
+      "original_count": 1,
+      "current_start": 1117,
+      "current_count": 5,
+      "original": [
+        "        if (!hwnd32)"
+      ],
+      "current": [
+        "        /* DIV-344: the native filter returns a MSG, not ownership of a newly",
+        "         * allocated COPYDATA buffer. Keep only an existing active native pair;",
+        "         * the old absent-pair branch dereferenced NULL, not a supported transfer. */",
+        "        if (!mpex.fThunkSucceeded ||",
+        "                (mpex.Parm16.WndProc.wMsg == WM_COPYDATA && mpex.MsgBuffer->copydata.flags))"
+      ],
+      "decision": "pending",
+      "necessity": "Filter cannot return newly allocated COPYDATA memory which its finalizer immediately releases; existing borrowed pair remains eligible. Added fThunkSucceeded avoids treating HWND0 as failure.",
+      "change_plan": "Validate ownership transfer at native filter return; keep rejection until justified same-owner alternative is proven. Do not expose a released buffer.",
+      "missing_evidence": "Contract and full original/modern filter comparison for hook-mutated COPYDATA with newly allocated versus existing native pair."
+    },
+    {
+      "original_start": 1097,
+      "original_count": 1,
+      "current_start": 1156,
+      "current_count": 1,
+      "original": [
+        "        free16(vp);"
+      ],
+      "current": [
+        "        wow_message_free16(&vp, FALSE); /* DIV-349: consume before a reentrant free. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1102,
+      "original_count": 0,
+      "current_start": 1161,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1103,
+      "original_count": 0,
+      "current_start": 1164,
+      "current_count": 17,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: each cleanup owns its edge. */",
+        "        __try {",
+        "        __try { if (vp && !fUseOld) wow_message_free16(&vp, FALSE); }",
+        "        __finally {",
+        "        msgSave = savedMsg;",
+        "        cRecurse = savedRecurse;",
+        "        Parm16Save = savedParm;",
+        "        __try { wow_message_unwind16(&mpex); }",
+        "        __finally { wow_message_unwind32(&wm32mpex); }",
+        "        }",
+        "        } __finally {",
+        "            BOOL stackAbnormal = abnormal || AbnormalTermination(); /* DIV-350: original scope. */",
+        "            __try { wow_message_stack_leave(&stack, stackAbnormal); }",
+        "            __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */",
+        "        }",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1123,
+      "original_count": 0,
+      "current_start": 1202,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): EVENTMSG stack transaction. */",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1151,
+      "original_count": 1,
+      "current_start": 1235,
+      "current_count": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn); /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1181,
+      "original_count": 0,
+      "current_start": 1265,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349: preserve original result. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1182,
+      "original_count": 0,
+      "current_start": 1268,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    } __finally { wow_message_stack_leave(&stack, FALSE); } /* DIV-349: completed is authoritative. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1230,
+      "original_count": 0,
+      "current_start": 1318,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): MOUSEHOOK stack transaction. */",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1243,
+      "original_count": 1,
+      "current_start": 1336,
+      "current_count": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn); /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1249,
+      "original_count": 0,
+      "current_start": 1342,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349: after original output conversion. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1250,
+      "original_count": 0,
+      "current_start": 1345,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    } __finally { wow_message_stack_leave(&stack, FALSE); } /* DIV-349: completed is authoritative. */"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1439,
+      "original_count": 1,
+      "current_start": 1536,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1452,
+      "original_count": 0,
+      "current_start": 1551,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) return FALSE; /* DIV-344: HWND0 is not status. */"
+      ],
+      "decision": "retain",
+      "necessity": "ThunkMsg16 explicitly separates conversion success from HWND: NULL HWND may represent a valid thread message. Reject failed conversion before native dispatch; preserve valid NULL HWND.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1468,
+      "original_count": 0,
+      "current_start": 1569,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1485,
+      "original_count": 1,
+      "current_start": 1590,
+      "current_count": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1550,
+      "original_count": 0,
+      "current_start": 1657,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            if (!mpex.fThunkSucceeded) return FALSE; /* DIV-344: reject before native. */"
+      ],
+      "decision": "retain",
+      "necessity": "ThunkMsg16 explicitly separates conversion success from HWND: NULL HWND may represent a valid thread message. Reject failed conversion before native dispatch; preserve valid NULL HWND.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1682,
+      "original_count": 0,
+      "current_start": 1791,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1724,
+      "original_count": 1,
+      "current_start": 1837,
+      "current_count": 3,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    BOOL savedThunkDDE = fThunkDDEmsg; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    },
+    {
+      "original_start": 1746,
+      "original_count": 0,
+      "current_start": 1862,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) { FREEVDMPTR(pMsg16); return FALSE; }"
+      ],
+      "decision": "retain",
+      "necessity": "ThunkMsg16 explicitly separates conversion success from HWND: NULL HWND may represent a valid thread message. Reject failed conversion before native dispatch; preserve valid NULL HWND.",
+      "change_plan": "Retain the existing same-owner adaptation.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 1781,
+      "original_count": 0,
+      "current_start": 1899,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        __try { wow_message_unwind16(&mpex); }",
+        "        __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */",
+        "    }"
+      ],
+      "decision": "pending",
+      "necessity": "Call-owned zero initialization, original converter finalization and callback-stack restoration on failed/abnormal return. Normal output unthunk remains original; common finalizer releases captured keys rather than replaying output.",
+      "change_plan": "Review this complete hook transaction with wow_message_lifetime and original converter; preserve exactly-once release and task-safe stack restore, then consolidate only proven duplicate cleanup. Include callback FALSE, exception and normal output cases.",
+      "missing_evidence": "Integrated abnormal output conversion, throwing/reentrant cleanup and retired/reused task behavior for this hook family; extracted fixtures are partial."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 618,
+      "original_count": 6,
+      "current_start": 637,
+      "current_count": 1,
+      "original": [
+        "    GETMISCPTR(vp, pCwpStruct16);",
+        "",
+        "    if (pCwpStruct16->message != wm32mpex.Parm16.WndProc.wMsg)",
+        "        LOGDEBUG(LOG_ALWAYS,(\"ThunkCallWndProcHook: IN message != OUT message\"));",
+        "",
+        "    FREEVDMPTR(pCwpStruct16);"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1160,
+      "original_count": 3,
+      "current_start": 1245,
+      "current_count": 1,
+      "original": [
+        "            if (MessageNeedsThunking(lpEventMsg->message)) {",
+        "                LOGDEBUG(LOG_ALWAYS, (\"ThunkJournalHook: Playing back unexpected message 0x%x\", lpEventMsg->message));",
+        "            }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 85,
+      "original": 81,
+      "logical": 82
+    },
+    {
+      "current": 89,
+      "original": 85,
+      "logical": 86
+    },
+    {
+      "current": 90,
+      "original": 86,
+      "logical": 87
+    },
+    {
+      "current": 91,
+      "original": 87,
+      "logical": 88
+    },
+    {
+      "current": 92,
+      "original": 88,
+      "logical": 89
+    },
+    {
+      "current": 93,
+      "original": 89,
+      "logical": 90
+    },
+    {
+      "current": 94,
+      "original": 90,
+      "logical": 91
+    },
+    {
+      "current": 95,
+      "original": 91,
+      "logical": 92
+    },
+    {
+      "current": 96,
+      "original": 92,
+      "logical": 93
+    },
+    {
+      "current": 638,
+      "original": 624,
+      "logical": 619
+    },
+    {
+      "current": 732,
+      "original": 701,
+      "logical": 702
+    },
+    {
+      "current": 733,
+      "original": 702,
+      "logical": 703
+    },
+    {
+      "current": 734,
+      "original": 703,
+      "logical": 704
+    },
+    {
+      "current": 1246,
+      "original": 1163,
+      "logical": 1161
+    },
+    {
+      "current": 1659,
+      "original": 1551,
+      "logical": 1552
+    },
+    {
+      "current": 1660,
+      "original": 1552,
+      "logical": 1553
+    },
+    {
+      "current": 1661,
+      "original": 1553,
+      "logical": 1554
+    }
+  ],
+  "evidence": [
+    "src/wow32-dll/source/wow_hook_callback.c: entry saves/restores TLS context; invokes original dispatcher inside task/borrow/enrollment scope.",
+    "src/wow32-dll/source/wow_message_lifetime.c: captured-key release; stack restoration checks live worker and current TD/HTASK.",
+    "src/mvdm-host/wow32/wmdisp32.c WM32Create sets lpfnM32 itself, including direct CBT caller; no missing selector assumed.",
+    "test/adapter-mvdm-host-out/wow/wow_hook_callback_fixture.c substitutes original dispatcher: wrapper proof only.",
+    "test/observation/wow_copydata_lifetime_fixture.c and verify-wow-copydata-lifetime.ps1 extract actual CallWnd/MsgFilter functions; inspect nested/failed/conversion/selector cases.",
+    "test/observation/wow_message_construction_fixture.c cbt_transactions exercises actual CBT with callback exception/FALSE and success; stack cases test helper with TD changes."
+  ],
+  "limits": [
+    "Sources/fixture coverage inspected; no new execution or full guest integration result.",
+    "Pending rows are missing proof, not established runtime defects.",
+    "Only mirror diff reviewed; unrelated original hook algorithms not rewritten.",
+    "LF source diagnostic map is not compiler validation."
+  ]
+}

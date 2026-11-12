@@ -1,0 +1,128 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/data.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\data.obj",
+    "before_sha256": "11658d3d7c99daaeda3d50d41bdb1be5b71608d7a719faf8be5b2a55ad84724b",
+    "after_sha256": "11658d3d7c99daaeda3d50d41bdb1be5b71608d7a719faf8be5b2a55ad84724b",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/debug.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\debug.obj",
+    "before_sha256": "bfc6c08c8fbf5784d5fdf03acca283b2ba8624a6a8b85c4617e672495a242396",
+    "after_sha256": "bfc6c08c8fbf5784d5fdf03acca283b2ba8624a6a8b85c4617e672495a242396",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/dpmiint.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\dpmiint.obj",
+    "before_sha256": "9e9e96e607e9759e04b8a1995bc26667f84f244720f00c68d6fbfef5597f2b8b",
+    "after_sha256": "9e9e96e607e9759e04b8a1995bc26667f84f244720f00c68d6fbfef5597f2b8b",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/precomp.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\precomp.obj",
+    "before_sha256": "0587d84509b3c4298bc0b1a1f7c81b883ce1aa97fdba89c20aff9406c0f3d97a",
+    "after_sha256": "0587d84509b3c4298bc0b1a1f7c81b883ce1aa97fdba89c20aff9406c0f3d97a",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/precomp.pch",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\precomp.pch",
+    "before_sha256": "bf124ae1585aa556c7254d91ec3207776e8596e09f5fd722ca1a469688f96b64",
+    "after_sha256": "bf124ae1585aa556c7254d91ec3207776e8596e09f5fd722ca1a469688f96b64",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/register.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\register.obj",
+    "before_sha256": "d18f1f0c7eb3700ee18ef88e8b47ea3c3aec917a3c6844612c6968a8b8380c34",
+    "after_sha256": "d18f1f0c7eb3700ee18ef88e8b47ea3c3aec917a3c6844612c6968a8b8380c34",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/obj/i386/stack.obj",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\stack.obj",
+    "before_sha256": "7c0829751efeac2bbe4612376f98b3f714f6818e5e720072a31212c0bde25454",
+    "after_sha256": "7c0829751efeac2bbe4612376f98b3f714f6818e5e720072a31212c0bde25454",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/fax/dummy.hlp",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\dummy.hlp",
+    "before_sha256": "624187783b0840215f6e9d9f2f55577bb243c9aa623d78affe46b2ca5f496a16",
+    "after_sha256": "12f99f53144294750fe8713d580eda286f4bd95cd9c840db8ab957def8040028",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/fax/dummy.ppd",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\dummy.ppd",
+    "before_sha256": "624187783b0840215f6e9d9f2f55577bb243c9aa623d78affe46b2ca5f496a16",
+    "after_sha256": "12f99f53144294750fe8713d580eda286f4bd95cd9c840db8ab957def8040028",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/fax/printer.inf",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\printer.inf",
+    "before_sha256": "c64cc3163a83d257b51325f87ab5076f471eff324029a8d7efad6ef23cc81df6",
+    "after_sha256": "c3f15c09d4556009e6484e1c08d01d8405c9b1080f3b963c31f5955443de6949",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/apistruc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\apistruc.h",
+    "before_sha256": "a22deeb37fcb53b76084c84a3681a959e43e6d9f1e19e2f681fd933c66eece9c",
+    "after_sha256": "a22deeb37fcb53b76084c84a3681a959e43e6d9f1e19e2f681fd933c66eece9c",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/APISTRUC.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\APISTRUC.INC",
+    "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/bop.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\bop.h",
+    "before_sha256": "7b16c577f3c478ac0df9e982d727a1469352727d970b5889688880026cce97a0",
+    "after_sha256": "7b16c577f3c478ac0df9e982d727a1469352727d970b5889688880026cce97a0",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/BOP.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\BOP.INC",
+    "before_sha256": "6d81fce580cd187856d3544f720d794832fead9addfe97ac06b1e7f658b98efc",
+    "after_sha256": "a3705f225c47e53dc4e106c7362366477f2f06c33cb9bf52515ca1299556f669",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/cmdsvc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\cmdsvc.h",
+    "before_sha256": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624",
+    "after_sha256": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/CMDSVC.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\CMDSVC.INC",
+    "before_sha256": "edb4565de156452d69f500624cb300458abec6bb4b8c2610a253e4e64a59cec2",
+    "after_sha256": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/curdir.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\curdir.h",
+    "before_sha256": "8fb302f406591989abe2cf93880a84a100e694be745e42d79ce674503c5e6f9f",
+    "after_sha256": "8fb302f406591989abe2cf93880a84a100e694be745e42d79ce674503c5e6f9f",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/CURDIR.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\CURDIR.INC",
+    "before_sha256": "f508eaa68aa10d2e11a8c6cc825f068cd0a165013407f14b08b469527fd4d4a0",
+    "after_sha256": "8490c9aa0702bc17b6f73483837159934aa8c8f353df5402b71812ea87d63762",
+    "newline_restored": true
+  }
+]

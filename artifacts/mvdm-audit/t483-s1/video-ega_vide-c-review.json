@@ -1,0 +1,751 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+  "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+  "current_sha256": "e18573faa00606dd8926ac310232e2b20fb090b7160b90f669d76893ed97dad6",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "original_start": 743,
+      "original_count": 0,
+      "current_start": 712,
+      "current_count": 15,
+      "original": [],
+      "current": [
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-890): BIOS port writes are virtualised",
+        "\t * in software V86; read the same VM's CRTC, not physical PCDisplay. */",
+        "\telse if (video_adapter == VGA && getVM())",
+        "\t{",
+        "\t\thalf_word index, low, overflow, control;",
+        "\t\tio_addr port = sas_w_at_no_check(VID_INDEX);",
+        "\t\tinb(port, &index);",
+        "\t\toutb(port, 0x12); inb(port + 1, &low);",
+        "\t\toutb(port, 7); inb(port + 1, &overflow);",
+        "\t\toutb(port, 0x17); inb(port + 1, &control);",
+        "\t\toutb(port, index);",
+        "\t\tscan_lines = low | ((overflow & 2) << 7) | ((overflow & 0x40) << 3);",
+        "\t\t/* Preserve get_screen_height's V7 retrace multiplier and +1. */",
+        "\t\tscan_lines = ((scan_lines + 1) << ((control >> 2) & 1)) + 1;",
+        "\t}"
+      ]
+    },
+    {
+      "original_start": 2043,
+      "original_count": 1,
+      "current_start": 1996,
+      "current_count": 1,
+      "original": [
+        "\t\tmemset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );"
+      ],
+      "current": [
+        "\t\tmemset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );"
+      ]
+    },
+    {
+      "original_start": 2090,
+      "original_count": 1,
+      "current_start": 2044,
+      "current_count": 1,
+      "original": [
+        "\t\tmemset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );"
+      ],
+      "current": [
+        "\t\tmemset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 115,
+      "original_count": 1,
+      "current_start": 116,
+      "current_count": 1,
+      "original": [
+        "#include \"trace.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 120,
+      "original_count": 2,
+      "current_start": 123,
+      "current_count": 1,
+      "original": [
+        "#include HostHwVgaH",
+        "#include \"hwvga.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 131,
+      "original_count": 2,
+      "current_start": 135,
+      "current_count": 1,
+      "original": [
+        "/* Loads font from PC's BIOS into video memory */",
+        "IMPORT void loadNativeBIOSfont IPT1( int, lines );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 159,
+      "original_count": 4,
+      "current_start": 164,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void ega_set_mode(),ega_char_gen();",
+        "static void ega_set_palette(),ega_alt_sel();",
+        "GLOBAL void ega_set_cursor_mode();",
+        "static void ega_emul_set_palette();"
+      ],
+      "current": [
+        "#error Unsupported excluded non-ANSI EGA declarations"
+      ]
+    },
+    {
+      "original_start": 251,
+      "original_count": 40,
+      "current_start": 255,
+      "current_count": 1,
+      "original": [
+        "",
+        "UTINY\tvga_cursor8_end[17][17] = {",
+        "\t/*00*/\t0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ",
+        "\t/*01*/\t0x01, 0x01, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*02*/\t0x02, 0x02, 0x02, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*03*/\t0x03, 0x03, 0x03, 0x03, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*04*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*05*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*06*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x06, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*07*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*08*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*09*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*10*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*11*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*12*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*13*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*14*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*15*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t/*16*/\t0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, ",
+        "\t};",
+        "",
+        "UTINY\tvga_cursor16_end[17][17] = {",
+        "\t/*00*/\t0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ",
+        "\t/*01*/\t0x01, 0x01, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*02*/\t0x02, 0x02, 0x02, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*03*/\t0x03, 0x03, 0x03, 0x03, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*04*/\t0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*05*/\t0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*06*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*07*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*08*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*09*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*10*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*11*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*12*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*13*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, ",
+        "\t/*14*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, ",
+        "\t/*15*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, ",
+        "\t/*16*/\t0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, ",
+        "\t};"
+      ],
+      "current": [
+        "#error Unsupported excluded cursor-table configuration"
+      ]
+    },
+    {
+      "original_start": 296,
+      "original_count": 6,
+      "current_start": 263,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"VIDEO_BIOS_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 458,
+      "original_count": 1,
+      "current_start": 427,
+      "current_count": 1,
+      "original": [
+        "\tdo_outb(EGA_SEQ_INDEX,0,0);\t/* Reset - turn off Sequencer */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 621,
+      "original_count": 2,
+      "current_start": 592,
+      "current_count": 1,
+      "original": [
+        "    video_pc_low_regen = vd_mode_table[video_mode].start_addr;",
+        "    video_pc_high_regen = vd_mode_table[video_mode].end_addr;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 673,
+      "original_count": 2,
+      "current_start": 645,
+      "current_count": 1,
+      "original": [
+        "\tloadNativeBIOSfont( 25 );",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 677,
+      "original_count": 8,
+      "current_start": 650,
+      "current_count": 1,
+      "original": [
+        "\tif( hostIsFullScreen( ) )",
+        "\t{",
+        "\t\tloadFontToVGA( table , count , char_off , font_no , nbytes );",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tloadFontToEmulation( table , count , char_off , font_no , nbytes );",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 763,
+      "original_count": 1,
+      "current_start": 749,
+      "current_count": 1,
+      "original": [
+        "    do_outb(EGA_CRTC_INDEX,9,height-1); /* Character height */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 930,
+      "original_count": 1,
+      "current_start": 918,
+      "current_count": 1,
+      "original": [
+        "\tvga_card_w_ch_set(char_addr, screen_off, colour, nchs, scan_length, char_height);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 995,
+      "original_count": 1,
+      "current_start": 985,
+      "current_count": 1,
+      "original": [
+        "\tvga_card_w_ch_xor(char_addr, screen_off, colour, nchs, scan_length, char_height);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1012,
+      "original_count": 1,
+      "current_start": 1004,
+      "current_count": 1,
+      "original": [
+        "\ttrace(\"setting video mode\", DUMP_REG);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1016,
+      "original_count": 25,
+      "current_start": 1010,
+      "current_count": 1,
+      "original": [
+        "\t/* Try and catch mode changes early */",
+        "",
+        "\t/* Are we in the ROMS at the BOP 10 ? */",
+        "\tif( getCS( ) == EgaROMSegment )",
+        "\t{",
+        "\t\tif( videoModeIs( getAL( ) , GRAPH ) )",
+        "\t\t{",
+        "\t\t\t/* Seem to have got a video mode int 10 */",
+        "\t\t\tvideoInfo.modeType = GRAPH;",
+        "\t\t\tif( !hostEasyMode( ) )",
+        "\t\t\t{",
+        "\t\t\t\tvideoInfo.forcedFullScreen = TRUE;",
+        "",
+        "\t\t\t\t/* point IP at the JMP to host roms */",
+        "\t\t\t\tsetIP( 0x820 );",
+        "",
+        "\t\t\t\t/* and return, to let the host bios do the change */",
+        "\t\t\t\treturn;",
+        "\t\t\t}",
+        "",
+        "",
+        "\t\t}",
+        "",
+        "\t\t/* Not in the vga roms so carry on */",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1125,
+      "original_count": 15,
+      "current_start": 1097,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t * If the video mode has actually changed, then call",
+        "\t * host_mswin_disable().",
+        "\t */",
+        "\tif (Currently_emulated_video_mode != video_mode)",
+        "\t{",
+        "#ifdef CPU_40_STYLE",
+        "\t\tif (!getPE())",
+        "\t\t{",
+        "\t\t\thost_mswin_disable();",
+        "\t\t}",
+        "#else",
+        "\t\thost_mswin_disable();",
+        "#endif /* CPU_40_STYLE */",
+        "\t}"
+      ],
+      "current": [
+        "#error Unsupported excluded MSWDVR video configuration"
+      ]
+    },
+    {
+      "original_start": 1145,
+      "original_count": 15,
+      "current_start": 1105,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t** Tim August 92. MicroSoft.",
+        "\t** Give host a chance to do a zany non-standard mode change.",
+        "\t** For Microsoft NT this is a transition to full-screen ie. the",
+        "\t** real PC's video BIOS and graphics board.",
+        "\t**",
+        "\t** Return value of TRUE means host has done the mode change for",
+        "\t** us, so no need to continue.",
+        "\t*/",
+        "\t{",
+        "\t\textern BOOL hostModeChange IPT0();",
+        "",
+        "\t\tif( hostModeChange() )",
+        "\t\t\treturn;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1306,
+      "original_count": 2,
+      "current_start": 1254,
+      "current_count": 1,
+      "original": [
+        "    \t    sas_fillsw_16(video_pc_low_regen, vd_mode_table[video_mode].clear_char,",
+        "\t\t\t\t (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1333,
+      "original_count": 1,
+      "current_start": 1283,
+      "current_count": 1,
+      "original": [
+        "    trace(\"end of video set mode\", DUMP_NONE);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1397,
+      "original_count": 1,
+      "current_start": 1349,
+      "current_count": 1,
+      "original": [
+        "\t   \tend   = vga_cursor16_end[end][saved_start]];"
+      ],
+      "current": [
+        "#error Unsupported excluded cursor-table configuration"
+      ]
+    },
+    {
+      "original_start": 1409,
+      "original_count": 1,
+      "current_start": 1364,
+      "current_count": 1,
+      "original": [
+        "\t   \tend   = vga_cursor8_end[end][saved_start]];"
+      ],
+      "current": [
+        "#error Unsupported excluded cursor-table configuration"
+      ]
+    },
+    {
+      "original_start": 1591,
+      "original_count": 2,
+      "current_start": 1549,
+      "current_count": 1,
+      "original": [
+        "\t\t\tassert1(FALSE,\"Bad set palette submode %#x\",getAL());",
+        "\t\t\tsetAL(0);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1612,
+      "original_count": 6,
+      "current_start": 1571,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif( getBH()==0x16 )",
+        "\t\t\t\tloadNativeBIOSfont( 25 );",
+        "\t\t\telse if( getBH()==0x14 )",
+        "\t\t\t\tloadNativeBIOSfont( 28 );",
+        "\t\t\telse",
+        "\t\t\t\tloadNativeBIOSfont( 50 );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1627,
+      "original_count": 1,
+      "current_start": 1583,
+      "current_count": 1,
+      "original": [
+        "\t\t\tloadNativeBIOSfont( 28 );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1637,
+      "original_count": 1,
+      "current_start": 1595,
+      "current_count": 1,
+      "original": [
+        "\t\t\tloadNativeBIOSfont( 50 );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1648,
+      "original_count": 1,
+      "current_start": 1608,
+      "current_count": 1,
+      "original": [
+        "\t\t\tloadNativeBIOSfont( 25 );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1663,
+      "original_count": 2,
+      "current_start": 1625,
+      "current_count": 1,
+      "original": [
+        "\t\t\tsas_storew_no_check(EGA_FONT_INT*4,nativeFontAddresses[F8x14].off);",
+        "\t\t\tsas_storew_no_check(EGA_FONT_INT*4+2,nativeFontAddresses[F8x14].seg);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1673,
+      "original_count": 2,
+      "current_start": 1637,
+      "current_count": 1,
+      "original": [
+        "\t\t\tsas_storew_no_check(EGA_FONT_INT*4,nativeFontAddresses[F8x8pt1].off);",
+        "\t\t\tsas_storew_no_check(EGA_FONT_INT*4+2,nativeFontAddresses[F8x8pt1].seg);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1684,
+      "original_count": 2,
+      "current_start": 1650,
+      "current_count": 1,
+      "original": [
+        "\t\t\tsas_storew_no_check(EGA_FONT_INT*4,nativeFontAddresses[F8x16].off);",
+        "\t\t\tsas_storew_no_check(EGA_FONT_INT*4+2,nativeFontAddresses[F8x16].seg);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1708,
+      "original_count": 29,
+      "current_start": 1676,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* ntdetect.com gets the font info from real card on NT boot. VDM reads it into",
+        " * array 'nativeFontAddresses'. Return these fonts as Insignia ROM not loaded.",
+        " */",
+        "\t\t\t\tcase 2:",
+        "\t\t\t\t\tsetBP(nativeFontAddresses[F8x14].off);",
+        "\t\t\t\t\tsetES(nativeFontAddresses[F8x14].seg);",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tcase 3:",
+        "\t\t\t\t\tsetBP(nativeFontAddresses[F8x8pt1].off);",
+        "\t\t\t\t\tsetES(nativeFontAddresses[F8x8pt1].seg);",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tcase 4:",
+        "\t\t\t\t\tsetBP(nativeFontAddresses[F8x8pt2].off);",
+        "\t\t\t\t\tsetES(nativeFontAddresses[F8x8pt2].seg);",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tcase 5:",
+        "\t\t\t\t\tsetBP(nativeFontAddresses[F9x14].off);",
+        "\t\t\t\t\tsetES(nativeFontAddresses[F9x14].seg);",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tcase 6:",
+        "\t\t\t\t\tsetBP(nativeFontAddresses[F8x16].off);",
+        "\t\t\t\t\tsetES(nativeFontAddresses[F8x16].seg);",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tcase 7:",
+        "\t\t\t\t\tsetBP(nativeFontAddresses[F9x16].off);",
+        "\t\t\t\t\tsetES(nativeFontAddresses[F9x16].seg);",
+        "\t\t\t\t\tbreak;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1848,
+      "original_count": 1,
+      "current_start": 1791,
+      "current_count": 1,
+      "original": [
+        "    sas_store_no_check(ega_info,0x60); /* Clear on mode change, 256K, EGA active, emulate cursor */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1856,
+      "original_count": 1,
+      "current_start": 1801,
+      "current_count": 1,
+      "original": [
+        "\tsas_store_no_check(ega_info, 0x60);   /* Clear on mode change, 256K, EGA active, emulate cursor */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1895,
+      "original_count": 1,
+      "current_start": 1843,
+      "current_count": 1,
+      "original": [
+        "#define check_video_func(AH)\t(AH >= 0 && AH < EGA_FUNC_SIZE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2004,
+      "original_count": 1,
+      "current_start": 1954,
+      "current_count": 1,
+      "original": [
+        "\tvga_card_w_dot(screen_off, pixmask, colour);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2022,
+      "original_count": 1,
+      "current_start": 1974,
+      "current_count": 1,
+      "original": [
+        "\tvga_card_scroll_up(source, dest, rowsdiff, colsdiff, lines, attr, col_incr);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2066,
+      "original_count": 3,
+      "current_start": 2021,
+      "current_count": 1,
+      "original": [
+        "\tdest += rowsdiff*col_incr-1; /* Last byte in destination */",
+        "\tsource = dest-lines*col_incr;",
+        "\tvga_card_scroll_down(source, dest, rowsdiff, colsdiff, lines, attr, col_incr);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2143,
+      "original_count": 1,
+      "current_start": 2099,
+      "current_count": 1,
+      "original": [
+        "\tvga_card_read_ch(screen_off, sas_w_at_no_check(VID_COLS), char_height, the_char);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2156,
+      "original_count": 1,
+      "current_start": 2114,
+      "current_count": 1,
+      "original": [
+        "\textern half_word vga_card_read_dot();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2193,
+      "original_count": 1,
+      "current_start": 2153,
+      "current_count": 1,
+      "original": [
+        "\tval = vga_card_read_dot(screen_off, shift);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2267,
+      "original_count": 55,
+      "current_start": 2230,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t* Tim August 92, Microsoft.",
+        "\t* Make text modes (0-3) use our mode parameters in KEYBOARD.SYS",
+        "\t* Three entries in table: 40x25, 80x25 & 80x25 mono",
+        "\t* Make that 4 - add font load mode B. We have to be defensive in",
+        "\t* case of dubious values from cards or m/c. (Pro II/EISA, Olivetti MP)",
+        "\t* Table order: 40x25, 80x25, mono, font",
+        "\t*/",
+        "\t{",
+        "\t\textern word babyModeTable;",
+        "\t\textern UTINY tempbabymode[];",
+        "",
+        "\t\tif(babyModeTable == 0)    /* ntio not loaded - use temp table */",
+        "\t\t{",
+        "\t\t    if (!soft_reset)       /* be absolutely sure about this */",
+        "\t\t    {",
+        "\t\t\t/* magic location:good until 16 bit code is running */",
+        "\t\t\tsas_stores(0x41000, tempbabymode, 2 * EGA_PARMS_SIZE);",
+        "\t\t\tif (mode == 0xb)",
+        "\t\t\t    params_addr = 0x41000 + EGA_PARMS_SIZE;",
+        "\t\t\telse",
+        "\t\t\t    params_addr = 0x41000;  /* if not mode 3 tough */",
+        "\t\t\treturn params_addr;",
+        "\t\t    }",
+        "#ifndef PROD",
+        "\t\t    else",
+        "\t\t\tprintf(\"NTVDM:video window parm table not loaded but system initialised\\n\");",
+        "#endif",
+        "\t\t}",
+        "\t\tif(babyModeTable > 0)",
+        "\t\t{",
+        "\t\t    if (get_VGA_lines() == S350 && mode < 4)",
+        "\t\t    {",
+        "\t\t\tif (mode < 2)",
+        "\t\t\t    params_addr = babyModeTable + 4*EGA_PARMS_SIZE;",
+        "\t\t\telse",
+        "\t\t\t    params_addr = babyModeTable + 5*EGA_PARMS_SIZE;",
+        "\t\t    }",
+        "\t\t    else",
+        "\t\t    {",
+        "\t\t\tif (mode < 4)",
+        "\t\t\t{",
+        "\t\t\t    mode = mode/2;",
+        "\t\t\t\tparams_addr = babyModeTable + mode*EGA_PARMS_SIZE;",
+        "\t\t\t}",
+        "\t\t\telse",
+        "\t\t\t{",
+        "\t\t\t    if (mode == 0xb)",
+        "\t\t\t\tparams_addr = babyModeTable + 3 * EGA_PARMS_SIZE;",
+        "\t\t\t    else if (mode == 7)\t/* skip first 2 table entries */",
+        "\t\t\t\tparams_addr = babyModeTable + 2 * EGA_PARMS_SIZE;",
+        "\t\t\t}",
+        "\t\t    }",
+        "\t\t}",
+        "\t}"
+      ],
+      "current": [
+        "#error X86GFX EGA mode table path is not supported"
+      ]
+    }
+  ],
+  "initial_review": "One VM-local CRTC input correction and two memset4 pointer-type corrections; 40 excluded bodies.",
+  "counter_review": "Original ios inb/outb enters c_IOVirtualised->biosDoInst for getVM(), while get_screen_height reads physical PCDisplay. Thus same original port path must supply VDE for VM-local BIOS recalculation. Added expression matches original VGA +1, vertical multiplier and caller +1; restores saved CRTC index. memset4 actually accepts unsigned int*, not ULONG*; Windows equal width does not make the C pointer types identical.",
+  "limits": "Source and retained evidence report inspection, no new runtime pass. General PM/reentrancy boundaries not proved."
+}

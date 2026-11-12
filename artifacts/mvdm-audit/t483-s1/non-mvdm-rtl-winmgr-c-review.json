@@ -1,0 +1,27 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+  "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+  "before_sha256": "7d1f0f4331109602568c7182111482227bdb446597c906c0f69d4932b54523c4",
+  "current_sha256": "d637c432294c5f9cfdb96b6fdab6b707f5ac8cca9f7209b4df99def8397dd63a",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep retained local WND and direct REBASE bindings; original traversal uses stable local graph.",
+    "Reconcile separate geometry/view compilations and restore original function order where feasible; simplify selector only without duplicate symbols or new dispatch.",
+    "Keep scoped border metrics for default proc and direct control invocation; no fallback global.",
+    "Keep original style/version edge precedence, visibility/minimized ancestor, descendant and top-level/child traversal.",
+    "Map omitted hit-test, map-points, client-rect, popup, sizebox and icon services to actual host owners. Retain native boundaries when contracts suffice; seek owner decision for policy tradeoffs."
+  ],
+  "counter_review": [
+    "No modern USER private pointer overlay.",
+    "Blind macro removal changes link/context requirements.",
+    "Source establishes intended scope; not a fresh reentry runtime pass.",
+    "Do not substitute native IsWindowVisible solely by name; caller contract matters.",
+    "Omission alone not defect; avoid restoring private native window manager closure."
+  ],
+  "entries_added": 5,
+  "format_sites": 5,
+  "limits": [
+    "No fresh build/runtime.",
+    "Original omission ownership remains pending."
+  ]
+}

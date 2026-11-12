@@ -1,0 +1,1519 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+  "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+  "current_sha256": "3038e0ec4ac649040b7a269ae0e46904e088ca2d90fdd30bddfeca7067739150",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 35,
+      "original_count": 1,
+      "current_start": 36,
+      "current_count": 1,
+      "original": [
+        "static char SccsID[]=\"@(#)timer.c\t1.41 05/31/95 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 39,
+      "original_count": 6,
+      "current_start": 42,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_SUPPORT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 74,
+      "original_count": 1,
+      "current_start": 75,
+      "current_count": 1,
+      "original": [
+        "#include <stdlib.h>"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 78,
+      "original_count": 1,
+      "current_start": 81,
+      "current_count": 1,
+      "original": [
+        "#include \"hunter.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 114,
+      "original_count": 2,
+      "current_start": 119,
+      "current_count": 1,
+      "original": [
+        "static unsigned long ticksPerIdealInterval;",
+        "static  int     ticks_blocked = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 119,
+      "original_count": 1,
+      "current_start": 126,
+      "current_count": 1,
+      "original": [
+        "static char buf[80];  /* Used for tracing messages */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 123,
+      "original_count": 1,
+      "current_start": 132,
+      "current_count": 1,
+      "original": [
+        "word timer_batch_count;\t\t/* Batch update when PC tick occurs */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 247,
+      "original_count": 6,
+      "current_start": 258,
+      "current_count": 1,
+      "original": [
+        "\tunsigned long lastTicks;",
+        "\tlong\t\tmicrotick;",
+        "\tlong \t\ttimeFrig;",
+        "\tword\t\tsaveCount;",
+        "\tint\t\tguessesPerHostTick;\t/* How often per host tick are we forced to guess? */",
+        "\tint\t\tguessesSoFar;\t\t/* How many times have we guessed so far? */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 370,
+      "original_count": 2,
+      "current_start": 379,
+      "current_count": 1,
+      "original": [
+        "LOCAL void updateCount IPT3(unsigned long, ticks, unsigned long *, wrap,",
+        "\tstruct host_timeval *, now);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 380,
+      "original_count": 2,
+      "current_start": 391,
+      "current_count": 1,
+      "original": [
+        "LOCAL unsigned long guess IPT0();",
+        "LOCAL void throwaway IPT0();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 384,
+      "original_count": 1,
+      "current_start": 397,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void IdealTimeInit IPT0();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 391,
+      "original_count": 2,
+      "current_start": 407,
+      "current_count": 1,
+      "original": [
+        "LOCAL void getHostSysTime IPT1(struct host_timeval *, t);",
+        "LOCAL void checktimelock IPT0();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 398,
+      "original_count": 9,
+      "current_start": 416,
+      "current_count": 1,
+      "original": [
+        "LOCAL void setLastWrap IPT2(unsigned int, nclocks, struct host_timeval *, now);",
+        "LOCAL void timer_generate_int IPT1(long, n);",
+        "LOCAL void timer_multiple_ints IPT1(long, n);",
+        "",
+        "#define MAX_BACK_SECS 15",
+        "LOCAL IU32 max_backlog = 0;     /* max # of ints allowed to queue up */",
+        "IBOOL active_int_event = FALSE; /* current quick_event for timer queue */",
+        "IU32 more_timer_mult = 0;\t/* additions to timer int queue */",
+        "IU32 timer_multiple_delay = 0;  /* us delay to next timer queue elem */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 425,
+      "original_count": 3,
+      "current_start": 438,
+      "current_count": 1,
+      "original": [
+        "ULONG NtTicTesting = 0;   /* tracing specific to NT port */",
+        "ULONG TicsGenerated;",
+        "ULONG TicsReceived;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 439,
+      "original_count": 35,
+      "current_start": 453,
+      "current_count": 1,
+      "original": [
+        "",
+        "static int timelock;\t\t/* locks out time_tick if set */",
+        "static int needtick;\t\t/* causes time_tick() to be called if set */",
+        "",
+        "/*",
+        " * Data for the hack to make sure that windows in standard mode doesn't get two timer",
+        " * ticks too close together.",
+        " */",
+        "",
+        "LOCAL BOOL\thack_active=FALSE;\t\t\t/* This boolean indicates that we are spacing",
+        "\t\t\t\t\t\t\t   timer interrupts out by discarding timer ticks.",
+        "\t\t\t\t\t\t\t   It is set when we see a protected mode tick */",
+        "LOCAL BOOL\ttoo_soon_after_previous=FALSE;\t\t/* This boolean is set on when an interrupt is",
+        "\t\t\t\t\t\t\t   generated... a quick event is requested to",
+        "\t\t\t\t\t\t\t   clear it again after a \"fixed\" number of",
+        "\t\t\t\t\t\t\t   instructions */",
+        "LOCAL BOOL\tticks_lost_this_time=FALSE;\t\t/* This boolean is set if any interrupts were",
+        "\t\t\t\t\t\t\t   required to be generated while too_soon_after_previous",
+        "\t\t\t\t\t\t\t   was TRUE - if it's TRUE when too_soon_after_previous",
+        "\t\t\t\t\t\t\t   is being set to FALSE, we generate an immediate",
+        "\t\t\t\t\t\t\t   interrupt to get the best responsiveness */",
+        "LOCAL ULONG\treal_mode_ticks_in_a_row = 0;\t\t/* A count of the number of real mode ticks in a row...",
+        "\t\t\t\t\t\t\t   this is used to disable the hack again when we have",
+        "\t\t\t\t\t\t\t   left protected mode for a good while */",
+        "LOCAL ULONG\tinstrs_per_tick = 37000;\t\t/* Nominal (as timed on the reference machine - a SPARC 1+) */",
+        "LOCAL ULONG\tadj_instrs_per_tick = 0;\t\t/* The estimated number of Intel instructions being emulated",
+        "\t\t\t\t\t\t\t   each 20th of a second */",
+        "LOCAL ULONG\tn_rm_instrs_before_full_speed = 3000000;/* Nominal number of instructions to be emulated in real mode",
+        "\t\t\t\t\t\t\t   before we're convinced that we're staying back in real mode */",
+        "LOCAL ULONG\tadj_n_real_mode_ticks_before_full_speed = 0;/* The value which real_mode_ticks_in_a_row must reach",
+        "\t\t\t\t\t\t\t   before the hack is disabled */",
+        "#ifndef PROD",
+        "LOCAL ULONG\tticks_ignored = 0;\t\t\t/* For information purposes only. */",
+        "#endif",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 477,
+      "original_count": 3,
+      "current_start": 460,
+      "current_count": 1,
+      "original": [
+        "",
+        "",
+        "GLOBAL int DoTimerChangeTracing = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 483,
+      "original_count": 6,
+      "current_start": 467,
+      "current_count": 1,
+      "original": [
+        "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+        "extern IBOOL HostDelayTimerInt IPT1(int, numberInts);",
+        "extern IBOOL HostPendingTimerInt IPT0();",
+        "extern void HostResetTimerInts IPT0();",
+        "",
+        "#endif /* IRET_HOOKS && GISP_CPU */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 525,
+      "original_count": 9,
+      "current_start": 507,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t * initialise stuff for PM timer hack",
+        "\t */",
+        "\ttoo_soon_after_previous\t\t= FALSE;",
+        "\tif (adj_n_real_mode_ticks_before_full_speed == 0){",
+        "\t\tHOST_TIMER_DELAY_SIZE=25000;",
+        "\t\tadj_instrs_per_tick = host_speed (instrs_per_tick);",
+        "\t\tadj_n_real_mode_ticks_before_full_speed = n_rm_instrs_before_full_speed / adj_instrs_per_tick;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 545,
+      "original_count": 2,
+      "current_start": 522,
+      "current_count": 1,
+      "original": [
+        "    /* this is done in Nt's host heartbeat */",
+        "    IDLE_tick();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 555,
+      "original_count": 9,
+      "current_start": 534,
+      "current_count": 1,
+      "original": [
+        "    /* protect ourselves from shafting a timer-channel in midst-program",
+        "     * ... the lock is controlled by timer_inb(),_outb() and _gate()",
+        "     */",
+        "",
+        "    if (timelock == LOCKED)",
+        "    {",
+        "\tneedtick = ~0;",
+        "\treturn;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 610,
+      "original_count": 1,
+      "current_start": 584,
+      "current_count": 1,
+      "original": [
+        "    timelock = LOCKED;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 615,
+      "original_count": 5,
+      "current_start": 591,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & TIMER_VERBOSE)",
+        "    {",
+        "        sprintf(buf, \"timer_gate() - sending %d to port 0x%x\", value, port);",
+        "        trace(buf, DUMP_REG);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 625,
+      "original_count": 1,
+      "current_start": 600,
+      "current_count": 1,
+      "original": [
+        "    checktimelock();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 635,
+      "original_count": 1,
+      "current_start": 612,
+      "current_count": 1,
+      "original": [
+        "    timelock = LOCKED;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 672,
+      "original_count": 5,
+      "current_start": 651,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & TIMER_VERBOSE)",
+        "    {",
+        "        sprintf(buf, \"timer_inb() - Returning %d(0x%x) for port 0x%x\", *value, *value, port);",
+        "        trace(buf, DUMP_REG);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 681,
+      "original_count": 1,
+      "current_start": 659,
+      "current_count": 1,
+      "original": [
+        "    checktimelock();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 696,
+      "original_count": 1,
+      "current_start": 676,
+      "current_count": 1,
+      "original": [
+        "    timelock = LOCKED;"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 705,
+      "original_count": 5,
+      "current_start": 687,
+      "current_count": 1,
+      "original": [
+        "    if (io_verbose & TIMER_VERBOSE)",
+        "    {",
+        "\tsprintf(buf, \"timer_outb() - Value %d to port 0x%x\", value, port);",
+        "        trace(buf, DUMP_REG);",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 715,
+      "original_count": 1,
+      "current_start": 696,
+      "current_count": 1,
+      "original": [
+        "    checktimelock();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 728,
+      "original_count": 4,
+      "current_start": 711,
+      "current_count": 1,
+      "original": [
+        "GLOBAL ULONG get_DOS_ticks IFN0()",
+        "{",
+        "\treturn( timers[0].Count );",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 770,
+      "original_count": 15,
+      "current_start": 753,
+      "current_count": 1,
+      "original": [
+        "/* check whether a time lock (set while application io is being serviced)",
+        " * has blocked out an alarm signal ... call time_tick() to catch up if so",
+        " * ... (time_tick() sets timelock = ~0, and just returns, if it sees the time",
+        " * lock set",
+        " */",
+        "",
+        "LOCAL void checktimelock IFN0()",
+        "{",
+        "\ttimelock = UNLOCKED;",
+        "\tif (needtick)",
+        "\t{",
+        "\t\tneedtick = 0;",
+        "\t\ttime_tick();",
+        "\t}",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 925,
+      "original_count": 2,
+      "current_start": 897,
+      "current_count": 1,
+      "original": [
+        "\t\t\tpcu->microtick = 0;",
+        "\t\t\tpcu->saveCount = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 991,
+      "original_count": 1,
+      "current_start": 965,
+      "current_count": 1,
+      "original": [
+        "        IU32 maxback;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1026,
+      "original_count": 10,
+      "current_start": 1002,
+      "current_count": 1,
+      "original": [
+        "\t\t/* how many interrupts in MAX_BACK_SECS seconds? */",
+        "\t\tmaxback = (1193180 * MAX_BACK_SECS) / modulo;",
+        "",
+        "\t\tif (maxback > max_backlog)",
+        "\t\t{",
+        "#ifndef PROD",
+        "\t\t\tfprintf(trace_file, \"setting max backlog to %d\\n\", maxback);",
+        "#endif",
+        "\t\t\tmax_backlog = maxback;",
+        "                }"
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM timer profile"
+      ]
+    },
+    {
+      "original_start": 1041,
+      "original_count": 4,
+      "current_start": 1012,
+      "current_count": 1,
+      "original": [
+        "\tif (NtTicTesting)  {",
+        "\t    printf(\"Timer %d modulo=%lu %dHz\\n\",",
+        "\t\t    pcu-timers, modulo, 1193180/modulo);",
+        "\t    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1068,
+      "original_count": 4,
+      "current_start": 1039,
+      "current_count": 1,
+      "original": [
+        "\tif(pcu->bcd == BCD)",
+        "\t\tcountread = bin_to_bcd(pcu->Count);",
+        "\telse",
+        "\t\tcountread = pcu->Count;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1286,
+      "original_count": 1,
+      "current_start": 1257,
+      "current_count": 1,
+      "original": [
+        "\tint ch;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1301,
+      "original_count": 9,
+      "current_start": 1274,
+      "current_count": 1,
+      "original": [
+        "\tif (pcu==&timers[0])",
+        "\t\tch = 0;",
+        "\tif (pcu==&timers[1])",
+        "\t\tch = 1;",
+        "\tif (pcu==&timers[2])",
+        "\t\tch = 2;",
+        "\tsprintf(buf,\"ch.%d waveform:delay %d lo %d hi %d lohi %d repeat %d\\n\",",
+        "\t\tch,delay,lowclocks,hiclocks,lohi,repeat);",
+        "\ttrace(buf,0);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1324,
+      "original_count": 3,
+      "current_start": 1292,
+      "current_count": 1,
+      "original": [
+        "\t/* Initialise lastTicks before referencing it in updateCount() */",
+        "\t/* Makes Norton SYSINFO version 5.0 work on fast (HP) machines */",
+        "\tpcu->lastTicks = 0 ;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1647,
+      "original_count": 10,
+      "current_start": 1616,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t * Output state of timer if tracing.",
+        "\t * Currently dumpCounter has no effect, so just leave this in",
+        "\t * case anyone wants to implement it properly.",
+        "\t */",
+        "",
+        "\tif (io_verbose & TIMER_VERBOSE)",
+        "\t{",
+        "\t\tdumpCounter();",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1738,
+      "original_count": 45,
+      "current_start": 1701,
+      "current_count": 1,
+      "original": [
+        "/* calculate the number of 8253 clocks elapsed since counter was last",
+        " * activated",
+        " */",
+        "",
+        "LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)",
+        "{",
+        "    struct host_timeval *first;",
+        "    register unsigned long usec_val, nclocks;",
+        "    register unsigned int secs;",
+        "",
+        "    first = &pcu->activationTime;",
+        "    (*pcu->getTime)(now);",
+        "",
+        "    /* calculate #.usecs elapsed */",
+        "",
+        "    secs = (int)(now->tv_sec - first->tv_sec);",
+        "    switch (secs)",
+        "    {",
+        "    case 0:  usec_val = now->tv_usec - first->tv_usec;",
+        "#ifndef PROD",
+        "\t    if (io_verbose & TIMER_VERBOSE)",
+        "\t\t    if ( usec_val == 0 )",
+        "\t        \ttrace(\"clocksSinceCounterActivated() == 0 !\", 0);",
+        "#endif",
+        "\t     nclocks  = (usec_val * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;",
+        "             break;",
+        "",
+        "    case 1:  usec_val = 1000000L + now->tv_usec - first->tv_usec;",
+        "\t     nclocks  = (usec_val * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;",
+        "             break;",
+        "",
+        "    default:",
+        "\t     nclocks   = ((now->tv_usec - first->tv_usec) * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;",
+        "\t     nclocks  += secs * (1000000L * TIMER_CLOCK_DENOM / TIMER_CLOCK_NUMER);",
+        "#ifndef PROD",
+        "\t    if (io_verbose & TIMER_VERBOSE) {",
+        "\t\tsprintf(buf, \"timer[%d]: %d seconds have passed!\", pcu-timers, secs);",
+        "\t\ttrace(buf, DUMP_NONE);",
+        "\t    }",
+        "#endif",
+        "\t     break;",
+        "    }",
+        "    return nclocks;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM timer profile"
+      ]
+    },
+    {
+      "original_start": 1789,
+      "original_count": 2,
+      "current_start": 1711,
+      "current_count": 1,
+      "original": [
+        "    unsigned long nticks;",
+        "    struct host_timeval now;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1804,
+      "original_count": 2,
+      "current_start": 1728,
+      "current_count": 1,
+      "original": [
+        "\t\tnticks = clocksSinceCounterActivated(&now);",
+        "\t\tupdateCount(nticks, &wrap,&now);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1817,
+      "original_count": 1,
+      "current_start": 1743,
+      "current_count": 1,
+      "original": [
+        "\t\t\ttimer_batch_count = wrap;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1830,
+      "original_count": 2,
+      "current_start": 1758,
+      "current_count": 1,
+      "original": [
+        "\t\tnticks = clocksSinceCounterActivated(&now);",
+        "\t\tupdateCount(nticks, &wrap,&now);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1843,
+      "original_count": 3,
+      "current_start": 1773,
+      "current_count": 1,
+      "original": [
+        "\t\tif (pcu == &timers[0]){",
+        "\t\t\ttimer_batch_count = wrap;",
+        "\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1853,
+      "original_count": 96,
+      "current_start": 1784,
+      "current_count": 1,
+      "original": [
+        "#ifndef DELAYED_INTS",
+        "/*",
+        " *\ttimer_no_longer_too_soon() - this is the function invoked by the quick event manager",
+        " *\t\"HOST_TIMER_TOOLONG_DELAY\" instructions after a hardware interrupt is generated. It",
+        " *\tclears the variable \"too_soon_after_previous\" to allow more interrupts to be",
+        " *\tgenerated and kicks off an immediate one if any have been suppressed this time.",
+        " */",
+        "LOCAL void timer_no_longer_too_soon IFN1(long, dummy)",
+        "{",
+        "\tUNUSED(dummy);",
+        "",
+        "\ttoo_soon_after_previous = FALSE;",
+        "\tif (ticks_lost_this_time){",
+        "\t\t/* At least one tick was suppressed... so send another one immediately */",
+        "\t\ttimer_generate_int (1);",
+        "\t}",
+        "}",
+        "",
+        "/*",
+        " *\ttimer_generate_int() -The routine to generate a single timer hardware interrupt (and to",
+        " *\tschedule a quick event timer call on itself to have the remaining pending interrupts",
+        " *\tgenerated at a later time).",
+        " *",
+        " */",
+        "LOCAL void timer_generate_int IFN1(long, n)",
+        "{",
+        "#if !(defined(GISP_CPU) || defined(CPU_40_STYLE))",
+        "\tif (getPE()){",
+        "\t\t/* Prot mode tick... */",
+        "#ifndef PROD",
+        "\t\tif (!hack_active){",
+        "\t\t\tSAVED BOOL first=TRUE;",
+        "",
+        "\t\t\talways_trace0 (\"PM timer Hack activated.\");",
+        "\t\t\tif (first){",
+        "\t\t\t\talways_trace1 (\"Min # instrs between interrupts = %d\", HOST_TIMER_TOOLONG_DELAY);",
+        "\t\t\t\talways_trace1 (\"        Nominal instrs_per_tick = %d\", instrs_per_tick);",
+        "\t\t\t\talways_trace1 (\"       adjusted instrs_per_tick = %d\", adj_instrs_per_tick);",
+        "\t\t\t\talways_trace1 (\"  # rm instrs before full speed = %d\", n_rm_instrs_before_full_speed);",
+        "\t\t\t\talways_trace1 (\"     rm ticks before full speed = %d\", adj_n_real_mode_ticks_before_full_speed);",
+        "\t\t\t\tfirst = FALSE;",
+        "\t\t\t}",
+        "\t\t}",
+        "#endif",
+        "\t\thack_active = TRUE;",
+        "\t\treal_mode_ticks_in_a_row = 0;",
+        "",
+        "\t}else{",
+        "\t\t/* Real Mode Tick... */",
+        "\t\tif (hack_active){",
+        "\t\t\treal_mode_ticks_in_a_row++;",
+        "\t\t\tif (real_mode_ticks_in_a_row >= adj_n_real_mode_ticks_before_full_speed){",
+        "\t\t\t\thack_active = FALSE;",
+        "\t\t\t\talways_trace0 (\"PM timer Hack deactivated.\");",
+        "\t\t\t}",
+        "\t\t}",
+        "\t}",
+        "#endif\t/* ! (GISP_CPU||CPU_40_STYLE) */",
+        "",
+        "\tif (hack_active){",
+        "\t\tif (!too_soon_after_previous){",
+        "\t\t\tica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);",
+        "\t\t\ttoo_soon_after_previous = TRUE;",
+        "\t\t\tticks_lost_this_time = FALSE;",
+        "\t\t\tadd_q_event_i(timer_no_longer_too_soon,HOST_TIMER_TOOLONG_DELAY,0);",
+        "\t\t}else{",
+        "\t\t\tticks_lost_this_time = TRUE;",
+        "#ifndef PROD",
+        "\t\t\tticks_ignored++;",
+        "\t\t\tif (!(ticks_ignored & 0xFF)){",
+        "\t\t\t\talways_trace0 (\"another 256 ticks lost!\");",
+        "\t\t\t}",
+        "#endif",
+        "\t\t}",
+        "\t}else{",
+        "#ifndef GISP_CPU ",
+        "\t\tica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);",
+        "\t}",
+        "}",
+        "#else /* GISP_CPU */",
+        "#if defined(IRET_HOOKS)",
+        "\t\tif (!HostDelayTimerInt(n))",
+        "\t\t{\t/* no host need to delay this timer int, so generate one now. */",
+        "\t\t\tica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);",
+        "\t\t}",
+        "",
+        "#else /* !IRET_HOOKS */ ",
+        "\t\t/* GISP_CPU doesn't use quick events so use ica_hw_interrupt(,,n). */",
+        "\t\tica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, n);",
+        "#endif /* IRET_HOOKS */",
+        "\t}",
+        "}",
+        "#endif /* GISP_CPU */",
+        "",
+        "#endif /* DELAYED_INTS */",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM timer profile"
+      ]
+    },
+    {
+      "original_start": 2096,
+      "original_count": 39,
+      "current_start": 1937,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * Handle a cranked up timer where multiple interrupts are",
+        " * required per tick. Schedule 'n' ints over a tick. Period",
+        " * stored in quick event argument rather than in global.",
+        " */",
+        "LOCAL void timer_multiple_ints IFN1(long, num_ints)",
+        "{",
+        "\t/* generate timer int */",
+        "\ttimer_generate_int(1);",
+        "",
+        "\t/* one less to do */",
+        "\tnum_ints --;",
+        "",
+        "\t/* any more arrived whilst we were q_ expiring? */",
+        "\tnum_ints += more_timer_mult;",
+        "\tmore_timer_mult = 0;",
+        "",
+        "\t/* throw away ints that are going to take more than MAX_BACK_SECS",
+        "\t * to clear up. (!!!!)",
+        "\t */",
+        "\tif (num_ints > max_backlog)",
+        "\t{",
+        "\t\tnum_ints = max_backlog;",
+        "\t}",
+        "",
+        "\t/* schedule next int (if required) */",
+        "\tif (num_ints == 0)",
+        "\t{",
+        "\t\tactive_int_event = FALSE;",
+        "\t\t /* 1.193180 usecs per clock */",
+        "\t\tmax_backlog = (1193180 * MAX_BACK_SECS) / timers[0].initialCount;",
+        "\t}",
+        "\telse\t/* more work to do */",
+        "\t{",
+        "\t\t/* set new quick_ev off - delay determined by timer wrap rate */",
+        "\t\tadd_q_event_t(timer_multiple_ints, timer_multiple_delay, num_ints);",
+        "\t}",
+        "\t",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2143,
+      "original_count": 2,
+      "current_start": 1949,
+      "current_count": 1,
+      "original": [
+        "static\tpig_factor  = 0;",
+        "static  time_factor = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2148,
+      "original_count": 1,
+      "current_start": 1956,
+      "current_count": 1,
+      "original": [
+        "extern\tIBOOL ccpu_pig_enabled;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2152,
+      "original_count": 22,
+      "current_start": 1962,
+      "current_count": 1,
+      "original": [
+        "    if ( time_factor == 0 )",
+        "    {",
+        "\tchar *env;",
+        "",
+        " \tenv = host_getenv(\"TIMER_FACTOR\");",
+        "       \tif ( env )",
+        "       \t\ttime_factor = atoi(env);",
+        "       \tif ( time_factor == 0 )",
+        "       \t\ttime_factor = 1;",
+        "#ifdef PIG",
+        "\tif ( pig_factor == 0 )",
+        "\t{",
+        " \t\tenv = host_getenv(\"PIG_TIMER_FACTOR\");",
+        "\t       \tif ( env )",
+        "       \t\t\tpig_factor = atoi(env);",
+        "\t       \tif ( pig_factor == 0 )",
+        "       \t\t\tpig_factor = 10;",
+        "\t}",
+        "#else",
+        "\tpig_factor = 1;",
+        "#endif",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected"
+      ]
+    },
+    {
+      "original_start": 2179,
+      "original_count": 6,
+      "current_start": 1971,
+      "current_count": 1,
+      "original": [
+        "#ifdef PIG",
+        "\t\tif ( ccpu_pig_enabled ) {",
+        "\t\t\tticks_blocked = pig_factor-1;",
+        "\t\t} else",
+        "#endif",
+        "\t\t\tticks_blocked = time_factor-1;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected"
+      ]
+    },
+    {
+      "original_start": 2189,
+      "original_count": 2,
+      "current_start": 1979,
+      "current_count": 1,
+      "original": [
+        "\t\t\tica_hw_interrupt_delay(ICA_MASTER,CPU_TIMER_INT, n,",
+        "\t\t\t\tHOST_TIMER_INT_DELAY);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2204,
+      "original_count": 29,
+      "current_start": 1998,
+      "current_count": 1,
+      "original": [
+        "",
+        "",
+        "\t\t\t/* if we've got a quick event running, add to its workload */",
+        "\t\t\tif (active_int_event)",
+        "\t\t\t{",
+        "\t\t\t\t/* spread interrupts through system tick */",
+        "\t\t\t\tint_delay = SYSTEM_TICK_INTV / (n + 1);",
+        "\t\t\t\tif (int_delay < timer_multiple_delay)",
+        "\t\t\t\t\ttimer_multiple_delay = int_delay;",
+        "\t\t\t\tmore_timer_mult += n;",
+        "\t\t\t}",
+        "\t\t\telse",
+        "\t\t\t{",
+        "\t\t\t\t/* ensure multiple delay restarts at sensible speed */",
+        "\t\t\t\ttimer_multiple_delay = SYSTEM_TICK_INTV >> 1;",
+        "\t\t\t\tif (n == 1)",
+        "\t\t\t\t{",
+        "\t\t\t\t\ttimer_generate_int(1);",
+        "\t\t\t\t}",
+        "\t\t\t\telse",
+        "\t\t\t\t{",
+        "\t\t\t\t\t/* spread interrupts through system tick */",
+        "\t\t\t\t\ttimer_generate_int(1);",
+        "\t\t\t\t\ttimer_multiple_delay = SYSTEM_TICK_INTV / n;",
+        "\t\t\t\t\tactive_int_event = TRUE;",
+        "\t\t\t\t\tadd_q_event_t(timer_multiple_ints, timer_multiple_delay, n-1);",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2347,
+      "original_count": 104,
+      "current_start": 2117,
+      "current_count": 1,
+      "original": [
+        "LOCAL void updateCount IFN3(unsigned long, ticks, unsigned long *, wrap,",
+        "\tstruct host_timeval *, now)",
+        "{",
+        "\tunsigned long modulo = pcu->initialCount;",
+        "",
+        "\t/*",
+        "\t * PCLABS version 4.2 uses counter 2 (the sound channel) to",
+        "\t * time around 45 ms on a 8MHz 286. On SoftPC we cannot",
+        "\t * guarantee to go that fast, and so we must wind the tick",
+        "\t * rate down to ensure that the counter does not wrap. How much",
+        "\t * we wind down the tick rate is host dependent. The object is",
+        "\t * to get the test finishing in less than",
+        "\t * host_timer_2_frig_factor/18 secs.",
+        "\t *",
+        "\t * host_timer_2_frig_factor is now redundant. 28/4/93 niall.",
+        "\t */",
+        "",
+        "\tif (pcu == &timers[2]) {",
+        "\t\t/*",
+        "\t\t * PMINFO uses ~counter, so one tick becomes 0.",
+        "\t\t * 2 ticks is just as good. Avoid guessing (frig_factor!).",
+        "\t\t */",
+        "\t\tif ((ticks - pcu->lastTicks) == 0)",
+        "\t\t\tticks = 2;",
+        "\t}",
+        "",
+        "\t/* if the counter has been read too quickly after its last",
+        "\t * access, then the host may not show any visible change in",
+        "\t * host time ... in which case we just guess at a suitable",
+        "\t * number of elapsed ticks.",
+        "\t */",
+        "",
+        "\tif ((long)(ticks - pcu->lastTicks) <= 0){",
+        "\t\tticks = guess();",
+        "\t}else{",
+        "\t\tthrowaway();",
+        "\t\tpcu->lastTicks = ticks;",
+        "\t}",
+        "",
+        "\t/* the counter holds some count down value ...",
+        "\t * if the number of 8253 clocks elapsed exceeds this amount",
+        "\t * then the counter must have wrapped",
+        "\t */",
+        "",
+        "\tif ( ticks < modulo ) {",
+        "\t\t*wrap = 0;",
+        "\t} else {",
+        "\t\t*wrap = 1;",
+        "\t\tticks -= modulo;",
+        "",
+        "\t\tif ( pcu->m == INT_ON_TERMINALCOUNT )",
+        "\t\t\tmodulo = 0x10000L;",
+        "",
+        "\t\tif ( ticks >= modulo ) {",
+        "\t\t\t*wrap += ticks/modulo;",
+        "\t\t\tticks %= modulo;",
+        "",
+        "#ifndef PROD",
+        "\t\t\tif (io_verbose & TIMER_VERBOSE)",
+        "\t\t\t    if ( pcu->m == INT_ON_TERMINALCOUNT ) {",
+        "\t\t\t\tsprintf(buf, \"%lx wraps for timer[%d]\", *wrap, pcu-timers);",
+        "\t\t\t        trace(buf, DUMP_NONE);",
+        "\t\t\t}",
+        "#endif",
+        "\t\t}",
+        "\t}",
+        "",
+        "\t/* calculate new counter value */",
+        "\tpcu->Count = (word)(modulo-ticks);",
+        "",
+        "\t/* calculate time at which last wrap point occurred, and",
+        " \t * use this to stamp the counter",
+        "\t */",
+        "",
+        "\tif (*wrap)",
+        "\t\tsetLastWrap((unsigned int)(modulo-pcu->Count),now);",
+        "",
+        "}",
+        "",
+        "",
+        "",
+        "/* calculate time for last wrap around of counter, and use this",
+        " * to mark counter activation time.",
+        " */",
+        "",
+        "LOCAL void setLastWrap IFN2(unsigned int, nclocks, struct host_timeval *, now)",
+        "{",
+        "\tstruct host_timeval *stamp;",
+        "\tunsigned long usecs;",
+        "",
+        "\tstamp  = &pcu->activationTime;",
+        "\t*stamp = *now;",
+        "\tusecs  = ((unsigned long)nclocks * TIMER_CLOCK_NUMER) / TIMER_CLOCK_DENOM;",
+        "",
+        "\tif (stamp->tv_usec < usecs)",
+        "\t{",
+        "\t\tstamp->tv_sec--;",
+        "\t\tstamp->tv_usec += 1000000L;",
+        "\t}",
+        "\tstamp->tv_usec -= usecs;",
+        "",
+        "\tpcu->lastTicks = nclocks;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM alternative"
+      ]
+    },
+    {
+      "original_start": 2456,
+      "original_count": 77,
+      "current_start": 2126,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * If the host timer gives the same result as last time it was called,",
+        " * we must give the illusion that time has passed.",
+        " * The algorithm uesd is to keep track of how often we have to guess",
+        " * between host timer ticks, and to assume that guesses should be evenly",
+        " * distributed between host ticks, ie. the time between two guesses should be:",
+        " * \tGuess ticks = hosttickinterval/nguesses",
+        " * If we find that the total guessed time is getting dangerously near to being the time",
+        " * between two host ticks, we start reducing the guess tick interval so as to avoid",
+        " * guessing a total time that is too large.",
+        " * ",
+        " * From observation, applications use the timer in both coarse and fine 'modes'.",
+        " * The coarse mode is the hardware interrupt handler and then in between ",
+        " * interrupts, the timer is polled to detect time passing (hence guess below).",
+        " * The fine mode polling does not commence until some portion of the tick time",
+        " * has elapsed - probably as the coarse int handler will consume some of the",
+        " * time. If guess() bases its timefrig over the whole tick, then given the",
+        " * above behaviour, a polling counter can reach tick end time before the int",
+        " * is delivered. This can fool applications (e.g. Win 3.1 VTD) into having",
+        " * time pass at the wrong rate (approx double for Win 3.1). By calculating",
+        " * the timefrig on most (7/8) of the tick period, this problem is avoided.",
+        " */",
+        "",
+        "LOCAL unsigned long guess IFN0()",
+        "{",
+        "\tif (!pcu->microtick)",
+        "\t{",
+        "\t\tpcu->saveCount = pcu->Count;",
+        "\t\tpcu->timeFrig = ((ticksPerIdealInterval * 7) >> 3) / pcu->guessesPerHostTick;\t   /* guesses over 7/8 of tick */",
+        "#ifndef PROD",
+        "\t\tif (io_verbose & TIMER_VERBOSE) {",
+        "\t\t\tsprintf(buf, \"guess init timer[%d]: timeFrig = %lx\", pcu-timers, pcu->timeFrig);",
+        "\t\t        trace(buf, DUMP_NONE);",
+        "\t\t}",
+        "#endif",
+        "\t}",
+        "\tif(pcu->guessesSoFar++ > pcu->guessesPerHostTick)",
+        "\t{",
+        "\t/*",
+        "\t * PC Program is reading the timer more often than in the last timer tick, so need to",
+        "\t * decay timeFrig to avoid too much 'time' passing between host ticks",
+        "\t */",
+        "\t\tpcu->timeFrig = (pcu->timeFrig >> 1) + 1;",
+        "#ifndef PROD",
+        "\t\tif (io_verbose & TIMER_VERBOSE) {",
+        "\t\t\tsprintf(buf, \"guess decay: timeFrig = %lx\", pcu->timeFrig);",
+        "\t\t        trace(buf, DUMP_NONE);",
+        "\t\t}",
+        "#endif",
+        "\t}",
+        "\tpcu->microtick += pcu->timeFrig;",
+        "\treturn (pcu->microtick + pcu->lastTicks);",
+        "}",
+        "",
+        "",
+        "/*",
+        " * After a few (maybe none) guesses, the host timer has finally ticked.",
+        " * Try and work out a good frig factor for the next few guesses, based",
+        " * on the number of guesses we had to make.",
+        " */",
+        "LOCAL void throwaway IFN0()",
+        "{",
+        "\tpcu->guessesPerHostTick = (pcu->guessesPerHostTick + pcu->guessesSoFar)>>1;",
+        "\tpcu->guessesSoFar = 2;\t\t/* Handy to count from 2! */",
+        "\tif (!pcu->microtick)",
+        "\t\treturn;",
+        "#ifndef PROD",
+        "    if (io_verbose & TIMER_VERBOSE)",
+        "    {",
+        "        sprintf(buf, \"throwaway: guessesPerHostTick = %d\", (int)pcu->guessesPerHostTick);",
+        "        trace(buf, DUMP_NONE);",
+        "    }",
+        "#endif",
+        "\tpcu->Count = pcu->saveCount;",
+        "\tpcu->microtick = 0;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM timer profile"
+      ]
+    },
+    {
+      "original_start": 2615,
+      "original_count": 32,
+      "current_start": 2212,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* get current host system time ... used for time-stamping and",
+        " * querying during io from Intel application",
+        " */",
+        "",
+        "LOCAL void getHostSysTime IFN1(struct host_timeval *, t)",
+        "{",
+        "\tstruct host_timezone dummy;",
+        " \thost_gettimeofday(t, &dummy);",
+        "",
+        "\t/*",
+        "\t * check that we haven't gone back in time.",
+        "\t */",
+        "",
+        "\tif (t->tv_sec < idealtime.tv_sec ||",
+        "\t (t->tv_usec < idealtime.tv_usec && t->tv_sec == idealtime.tv_sec))",
+        "\t{",
+        "\t\t/*",
+        "\t\t * The real time has fallen behind the ideal time.",
+        "\t\t * This should never happen... If it does we must",
+        "\t\t * stay at the ideal time.",
+        "\t\t */",
+        "",
+        "#ifndef\tPROD",
+        "#ifndef\tPIG",
+        "\t\tsprintf(buf,\"TIME WARP!!\");",
+        "\t\ttrace(buf,0);",
+        "#endif",
+        "#endif",
+        "\t\t*t = idealtime;",
+        "\t}",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported non-NTVDM timer profile"
+      ]
+    },
+    {
+      "original_start": 2658,
+      "original_count": 5,
+      "current_start": 2227,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "\t * No need to axe ticks if timers are disabled by toff2 (if",
+        "\t * ticks_blocked is negative)",
+        "\t */",
+        "\tif (ticks_blocked >=0)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2671,
+      "original_count": 6,
+      "current_start": 2239,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 2680,
+      "original_count": 8,
+      "current_start": 2246,
+      "current_count": 1,
+      "original": [
+        "",
+        "GLOBAL void IdealTimeInit IFN0()",
+        "{",
+        "",
+        "    extern IU32 Q_timer_restart_val;",
+        "",
+        "    idealInterval = Q_timer_restart_val;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2697,
+      "original_count": 2,
+      "current_start": 2260,
+      "current_count": 1,
+      "original": [
+        "    getHostSysTime(&idealtime);",
+        "\tticksPerIdealInterval = (idealInterval * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2712,
+      "original_count": 3,
+      "current_start": 2277,
+      "current_count": 1,
+      "original": [
+        "\ttimers[0].getTime = getIdealTime;       /* Use the 'ideal' time for timer 0, ie. calls to time_tick */",
+        "\ttimers[1].getTime = getHostSysTime;     /* We don't really expect anyone to use timer 1 */",
+        "\ttimers[2].getTime = getHostSysTime;     /* Use real host time for timer 2 */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2723,
+      "original_count": 2,
+      "current_start": 2289,
+      "current_count": 1,
+      "original": [
+        "\tp->guessesPerHostTick = p->guessesSoFar = 2;\t\t/* Handy to count from 2! */",
+        "\tp->timeFrig = ticksPerIdealInterval / p->guessesPerHostTick;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2729,
+      "original_count": 39,
+      "current_start": 2298,
+      "current_count": 1,
+      "original": [
+        "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+        "/*(",
+        " *======================= TimerHookAgain() ============================",
+        " * TimerHookAgain",
+        " *",
+        " * Purpose",
+        " *\tThis is the function that we tell the ica to call when a timer",
+        " *\tinterrupt service routine IRETs.",
+        " *",
+        " * Input",
+        " *\tadapter_id\tThe adapter id for the line. (Note the caller doesn't",
+        " *\t\t\tknow what this is, he's just returning something",
+        " *\t\t\twe gave him earlier).",
+        " *",
+        " * Outputs",
+        " *\treturn\tTRUE if there are more interrupts to service, FALSE otherwise.",
+        " *",
+        " * Description",
+        " * \tCheck if we have a delayed interrupt, if so then generate the timer int",
+        " *\tand return TRUE, else return FALSE",
+        ")*/",
+        "",
+        "GLOBAL IBOOL\t\t",
+        "TimerHookAgain IFN1(IUM32, adapter)",
+        "{\tchar scancode;",
+        "",
+        "\tif (HostPendingTimerInt())",
+        "\t{\t/* We have a host delayed interrupt, so generate a timer int. */",
+        "\t\tsure_note_trace0(TIMER_VERBOSE,\"callback with delayed timer int.\");",
+        "\t\tica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);",
+        "\t\treturn(TRUE);\t/* more to do */",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\treturn(FALSE);",
+        "\t}",
+        "}",
+        "",
+        "#endif /* IRET_HOOKS && GISP_CPU */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2794,
+      "original_count": 2,
+      "current_start": 2328,
+      "current_count": 1,
+      "original": [
+        "    timelock = UNLOCKED;",
+        "    needtick = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2807,
+      "original_count": 21,
+      "current_start": 2344,
+      "current_count": 1,
+      "original": [
+        "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+        "\t/*",
+        "\t * Remove any existing hook call-back, and re-instate it afresh.",
+        "\t * TimerHookAgain is what gets called on a timer int iret.",
+        "\t */",
+        "",
+        "\tIca_enable_hooking(CPU_TIMER_INT, NULL, ICA_MASTER);",
+        "\tIca_enable_hooking(CPU_TIMER_INT, TimerHookAgain, ICA_MASTER);",
+        "",
+        "\t/* Host routine to reset any internal data for IRET_HOOK delayed ints. */",
+        "\tHostResetTimerInts();",
+        "",
+        "#endif /* IRET_HOOKS && GISP_CPU */",
+        "",
+        "",
+        "\tactive_int_event = FALSE; /* clear any cranked timer state */",
+        "\tmore_timer_mult = 0;",
+        "",
+        "#if defined(CPU_40_STYLE)",
+        "        ica_iret_hook_control(ICA_MASTER, CPU_TIMER_INT, TRUE);",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2851,
+      "original_count": 30,
+      "current_start": 2371,
+      "current_count": 1,
+      "original": [
+        "#ifndef\tPROD",
+        "",
+        "/*",
+        " * Debugging code....",
+        " * This code has no effect.  It is left here in case anyone wants to",
+        " * expand it in future.",
+        " */",
+        "",
+        "dumpCounter IFN0()",
+        "{",
+        "\tstatic char *modes[] =",
+        "\t{\t\"int on tc\",",
+        "\t\t\"prog one shot\",",
+        "\t\t\"rate gen\",",
+        "\t\t\"squarewave gen\",",
+        "\t\t\"sw trig strobe\",",
+        "\t\t\"hw trig strobe\"",
+        "\t};",
+        "",
+        "\tstatic char *as[] =",
+        "\t{\t\"binary\",",
+        "\t\t\"bcd\"",
+        "\t};",
+        "",
+        "\tchar *p, *q;",
+        "",
+        "\tp = modes[pcu->m];",
+        "\tq = as[pcu->bcd];",
+        "}",
+        "#endif /* nPROD */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "67 excluded bodies; all retained timer code exact.",
+  "counter_review": "NT timer programming, EoiPending/EoiIntsPending, negative-count cancellation, delay pacing and hooks are original. Local PIC reset change invokes this existing contract; it did not introduce a second timer implementation. Non-NT, debug, synchronous timers and documentation alternatives removed.",
+  "limits": "Full source-difference classification only; no new runtime result, universal build-context proof or complete diagnostic-line certification."
+}

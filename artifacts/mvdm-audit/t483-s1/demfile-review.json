@@ -1,0 +1,228 @@
+{
+  "path": "src/mvdm-host/dos/dem/demfile.c",
+  "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+  "current_sha256": "d13771510c93234bf4a08b8b889d2df542775a6205c846264f281c259ed03c38",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 23,
+      "original_count": 2,
+      "current_start": 23,
+      "current_count": 2,
+      "classification": "sft-extern-removal",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 29,
+      "original_count": 0,
+      "current_start": 29,
+      "current_count": 44,
+      "classification": "three-shared-adapters",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 158,
+      "original_count": 1,
+      "current_start": 202,
+      "current_count": 3,
+      "classification": "open-path-buffer",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 164,
+      "original_count": 1,
+      "current_start": 210,
+      "current_count": 2,
+      "classification": "open-path-capture",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 167,
+      "original_count": 4,
+      "current_start": 214,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 172,
+      "original_count": 0,
+      "current_start": 217,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 421,
+      "original_count": 4,
+      "current_start": 467,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 426,
+      "original_count": 0,
+      "current_start": 470,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 470,
+      "original_count": 4,
+      "current_start": 515,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 475,
+      "original_count": 0,
+      "current_start": 518,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 533,
+      "original_count": 4,
+      "current_start": 577,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 538,
+      "original_count": 0,
+      "current_start": 580,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 600,
+      "original_count": 0,
+      "current_start": 643,
+      "current_count": 2,
+      "classification": "create-path-buffer",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 604,
+      "original_count": 1,
+      "current_start": 649,
+      "current_count": 3,
+      "classification": "create-path-capture",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 627,
+      "original_count": 4,
+      "current_start": 674,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 632,
+      "original_count": 0,
+      "current_start": 677,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 807,
+      "original_count": 4,
+      "current_start": 853,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 812,
+      "original_count": 0,
+      "current_start": 856,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 910,
+      "original_count": 0,
+      "current_start": 955,
+      "current_count": 2,
+      "classification": "local-sft-head",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 914,
+      "original_count": 3,
+      "current_start": 961,
+      "current_count": 2,
+      "classification": "allocate-current-pdb",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 922,
+      "original_count": 0,
+      "current_start": 968,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 947,
+      "original_count": 1,
+      "current_start": 994,
+      "current_count": 3,
+      "classification": "allocate-sft-lookup",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 993,
+      "original_count": 0,
+      "current_start": 1042,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 1039,
+      "original_count": 4,
+      "current_start": 1089,
+      "current_count": 4,
+      "classification": "deassociate-current-pdb",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1109,
+      "original_count": 3,
+      "current_start": 1159,
+      "current_count": 2,
+      "classification": "retrieve-current-pdb",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 1114,
+      "original_count": 0,
+      "current_start": 1163,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 1131,
+      "original_count": 1,
+      "current_start": 1181,
+      "current_count": 3,
+      "classification": "retrieve-sft-head",
+      "disposition": "retain-with-boundaries"
+    },
+    {
+      "original_start": 1134,
+      "original_count": 0,
+      "current_start": 1186,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    }
+  ],
+  "initial_review": "All selected-code blocks and six DBG exclusions classified in line order.",
+  "counter_review": "Path copying owns transient text, but bounds are new constraints. PDB/SFT address lookup does not turn existing direct-pointer VDD API into lease-based API. Preserve original named-pipe allocation/free contract.",
+  "dependencies": [
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+    "src/mvdm-host/dos/dem/demgset.c",
+    "src/mvdm-host/wow32/wkfileio.c"
+  ],
+  "limits": [
+    "No runtime evidence added.",
+    "MAX_PATH and segment-boundary coverage unresolved.",
+    "SFT mapping lifetime remains explicit boundary; no second state machine added."
+  ]
+}

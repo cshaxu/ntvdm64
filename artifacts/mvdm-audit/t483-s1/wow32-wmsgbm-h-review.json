@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/wow32/wmsgbm.h",
+  "original_sha256": "3cc1b146978c625e2850ef427128a7bc84acb5205b4c6901d6310845bf04a6b2",
+  "current_sha256": "335941f4ec8178aec2a738672a583a9ce90a2bb6473912bcd138dfb9a99f70ef",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 26,
+      "original_count": 1,
+      "current_start": 28,
+      "current_count": 1,
+      "original": [
+        "#define BM_CLICK        0x00F5     // user\\server\\usersrv.h"
+      ],
+      "current": [
+        "#error Excluded unsupported missing BM_CLICK SDK profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Only original missing-BM_CLICK fallback body replaced; retained declarations unchanged.",
+  "limits": [
+    "Audit classification, not product repair or runtime pass."
+  ]
+}

@@ -11,8 +11,7 @@
 
 /* DIVERGENCE(OPENNT-HOST-080): complete original modal manager slice.
  * The group private precomp binds window identity/state, creation, navigation
- * and native leaves. Other manager families are not selected by this slice.
- * This staged unit is not yet part of the production graph. */
+ * and native leaves. Other manager families are not selected by this slice. */
 #line 12
 #include "precomp.h"
 
@@ -21,6 +20,12 @@
     ((BOOL)NtUserQueryWindow(hwnd, WindowIsForegroundThread))
 #define IsCurrentThreadForeground() \
     ((BOOL)NtUserGetThreadState(UserThreadStateIsForeground))
+
+/***************************************************************************\
+* DialogBox2
+*
+* History:
+\***************************************************************************/
 
 #line 989
 int PASCAL DialogBox2(
@@ -330,6 +335,20 @@ int InternalDialogBox(
 #if defined(WOW_ORIGINAL_DIALOG_MANAGER)
 LOOKASIDE DialogLookaside;
 
+/***************************************************************************\
+*
+* GetParentDialog()
+*
+* Gets top level window, not a control parent.  If not a dialog, then use
+* "highest" control parent guy.
+*
+* BOGUS
+* Need a way to mark a window as a dialog.  If it ever comes into
+* DefDlgProc(), set an internal flag.  Will be used by thunking and
+* CallDlgProc() optimizations also!
+*
+\***************************************************************************/
+
 #line 41
 PWND GetParentDialog(PWND pwndDialog)
 {
@@ -363,6 +382,13 @@ PWND GetParentDialog(PWND pwndDialog)
 
     return(pwndParent);
 }
+
+/***************************************************************************\
+* xxxSaveDlgFocus
+*
+* History:
+* 02-18-92 JimA             Ported from Win31 sources
+\***************************************************************************/
 
 #line 81
 BOOL xxxSaveDlgFocus(
@@ -420,6 +446,12 @@ BOOL xxxRestoreDlgFocus(
     return fRestored;
 }
 
+/***************************************************************************\
+* DlgSetFocus
+*
+* History:
+\***************************************************************************/
+
 #line 140
 void DlgSetFocus(
     HWND hwnd)
@@ -439,6 +471,21 @@ void DlgSetFocus(
 #line 147
     NtUserSetFocus(hwnd);
 }
+
+/***************************************************************************\
+* ValidateDialogPwnd
+*
+* Under Win3, DLGWINDOWEXTRA is 30 bytes. We cannot change that for 16 bit
+* compatibility reasons. Problem is there is no way to tell if a given
+* 16 bit window depends on byte count. If there was, this would be easy.
+* The only way to tell is when a window is about to be used as a dialog
+* window. This window may be of the class DIALOGCLASS, but again it may
+* not!! So we keep dialog window words at 30 bytes, and allocate another
+* structure for the real dialog structure fields. Problem is that this
+* structure has to be created lazily! And that's what we're doing here.
+*
+* 05-21-91 ScottLu      Created.
+\***************************************************************************/
 
 #line 180
 BOOL ValidateDialogPwnd(
@@ -503,6 +550,12 @@ BOOL ValidateDialogPwnd(
 
     return TRUE;
 }
+
+/***************************************************************************\
+* DefDlgProc
+*
+* History:
+\***************************************************************************/
 
 #line 446
 LONG DefDlgProcWorker(
@@ -1037,6 +1090,15 @@ CallDWP:
         return result;
 }
 
+/***************************************************************************\
+* DefDlgProc
+*
+* Translates the message, calls DefDlgProc on server side.  DefDlgProc
+* is the default WindowProc for dialogs (NOT the dialog's dialog proc)
+*
+* 04-11-91 ScottLu Created.
+\***************************************************************************/
+
 #line 952
 LONG WINAPI DefDlgProcW(
     HWND hwnd,
@@ -1067,6 +1129,15 @@ LONG WINAPI DefDlgProcA(
 
     return DefDlgProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
+
+/***************************************************************************\
+**
+**  RepositionRect()
+**
+**  Used to ensure that toplevel dialogs are still visible within the
+**  desktop area after they've resized.
+**
+\***************************************************************************/
 
 #line 1293
 void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle)
@@ -1109,6 +1180,12 @@ UseScreenRect:
         OffsetRect(lprc, lprcClip->left - lprc->left, 0);
 }
 
+/***************************************************************************\
+* MapDialogRect
+*
+* History:
+\***************************************************************************/
+
 #line 1339
 BOOL MapDialogRect(
     HWND hwnd,
@@ -1134,5 +1211,3 @@ BOOL MapDialogRect(
     return TRUE;
 }
 #endif
-
-

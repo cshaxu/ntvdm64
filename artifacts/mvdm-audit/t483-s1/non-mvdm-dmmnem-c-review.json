@@ -1,0 +1,316 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+  "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+  "before_sha256": "67c9d0b3e2c68d3144db9953ef89d548808a240eaf88c21e65e5cbe6cab614f4",
+  "current_sha256": "23eb85a4c7240d9d80f73526b0ac23f9ca9c7cf7c5bae061456e5f67f2f09d6e",
+  "changes": [
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 139,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): storage retention is not HWND liveness. */",
+        "        if (TestWF(pwndT, WFDESTROYED) || (pwndT->fnid & FNID_STATUS_BITS)) {",
+        "            ThreadUnlock(&tlpwndStart);",
+        "            return NULL;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 141,
+      "original_count": 0,
+      "current_start": 148,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-119): text retrieval can destroy its source. */",
+        "            if (TestWF(pwndT, WFDESTROYED) || (pwndT->fnid & FNID_STATUS_BITS)) {",
+        "                ThreadUnlock(&tlpwndStart);",
+        "                return NULL;",
+        "            }"
+      ]
+    },
+    {
+      "original_start": 168,
+      "original_count": 0,
+      "current_start": 181,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): same guard on the global search leg. */",
+        "        if (!pwnd || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "            ThreadUnlock(&tlpwnd);",
+        "            return NULL;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 171,
+      "original_count": 0,
+      "current_start": 190,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-119): do not return a dead text source. */",
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                ThreadUnlock(&tlpwnd);",
+        "                return NULL;",
+        "            }"
+      ]
+    },
+    {
+      "original_start": 226,
+      "original_count": 0,
+      "current_start": 251,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): no focus/click after query destruction. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "            ThreadUnlock(&tlpwnd);",
+        "            return NULL;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 251,
+      "original_count": 0,
+      "current_start": 282,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-119): also validate the static-label target. */",
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                ThreadUnlock(&tlpwnd);",
+        "                return NULL;",
+        "            }"
+      ]
+    },
+    {
+      "original_start": 264,
+      "original_count": 0,
+      "current_start": 301,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): ordinary focus may destroy too. */",
+        "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                    ThreadUnlock(&tlpwnd);",
+        "                    return NULL;",
+        "                }"
+      ]
+    },
+    {
+      "original_start": 275,
+      "original_count": 0,
+      "current_start": 318,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(OPENNT-HOST-119): flashing can destroy the button. */",
+        "                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                        ThreadUnlock(&tlpwnd);",
+        "                        return NULL;",
+        "                    }"
+      ]
+    },
+    {
+      "original_start": 292,
+      "original_count": 0,
+      "current_start": 341,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(OPENNT-HOST-119): no stale parent notification. */",
+        "                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                        ThreadUnlock(&tlpwnd);",
+        "                        return NULL;",
+        "                    }"
+      ]
+    },
+    {
+      "original_start": 311,
+      "original_count": 0,
+      "current_start": 366,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(OPENNT-HOST-119): focus can destroy BUTN. */",
+        "                    wow_button_scope buttonScope;"
+      ]
+    },
+    {
+      "original_start": 313,
+      "original_count": 0,
+      "current_start": 371,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                    if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd);",
+        "                    __try {"
+      ]
+    },
+    {
+      "original_start": 321,
+      "original_count": 1,
+      "current_start": 382,
+      "current_count": 2,
+      "original": [
+        ""
+      ],
+      "current": [
+        "                    /* DIVERGENCE(OPENNT-HOST-119): restore before releasing BUTN. */",
+        "                    } __finally {"
+      ]
+    },
+    {
+      "original_start": 324,
+      "original_count": 0,
+      "current_start": 387,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "                    }",
+        "                        if (fIsNTButton) wow_button_scope_leave(&buttonScope);",
+        "                    }",
+        "                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                        ThreadUnlock(&tlpwnd);",
+        "                        return NULL;"
+      ]
+    },
+    {
+      "original_start": 336,
+      "original_count": 1,
+      "current_start": 406,
+      "current_count": 2,
+      "original": [
+        "            return pwnd;"
+      ],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-119): click may destroy before returning. */",
+        "            return (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) ? NULL : pwnd;"
+      ]
+    },
+    {
+      "original_start": 356,
+      "original_count": 0,
+      "current_start": 428,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): exhausted search previously returned garbage. */",
+        "    return NULL;"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 45,
+      "original_count": 1,
+      "current_start": 47,
+      "current_count": 1,
+      "original": [
+        "                || chc == CH_KANJI2 || chc == CH_KANJI3"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 56,
+      "original_count": 7,
+      "current_start": 61,
+      "current_count": 1,
+      "original": [
+        "",
+        "                    /*",
+        "                     * If we are looking for kanji accelerators, we can't stop",
+        "                     * on the first accelerator character found since there may",
+        "                     * be many of them in the same string.",
+        "                     */",
+        "                    continue;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 280,
+      "original_count": 4,
+      "current_start": 330,
+      "current_count": 1,
+      "original": [
+        "// JimA - 2/19/92",
+        "// There oughta be a better way of doing this...",
+        "                    for (i = 0; i < 10000; i++)",
+        "                        ;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 62,
+      "original": 63,
+      "logical": 57
+    },
+    {
+      "current": 257,
+      "original": 227,
+      "logical": 232
+    },
+    {
+      "current": 258,
+      "original": 228,
+      "logical": 233
+    },
+    {
+      "current": 259,
+      "original": 229,
+      "logical": 234
+    },
+    {
+      "current": 324,
+      "original": 276,
+      "logical": 281
+    },
+    {
+      "current": 325,
+      "original": 277,
+      "logical": 282
+    },
+    {
+      "current": 326,
+      "original": 278,
+      "logical": 283
+    },
+    {
+      "current": 331,
+      "original": 284,
+      "logical": 281
+    },
+    {
+      "current": 347,
+      "original": 293,
+      "logical": 298
+    },
+    {
+      "current": 348,
+      "original": 294,
+      "logical": 299
+    },
+    {
+      "current": 349,
+      "original": 295,
+      "logical": 300
+    }
+  ],
+  "initial_review": "Full normalized file compared with pinned original; original mnemonic matching/traversal retained, three excluded bodies and callback identity/retention changes audited in line order.",
+  "counter_review": "Scope reuses button lifetime owner; destroy+exception actually present in mnemonic fixture (unlike a mere filter exception). Post-unlock WND read depends on enclosing borrow, not ThreadUnlock retention. Exhaustion NULL is defined return but not exercised by current fixture. No whole-file deletion justified.",
+  "evidence": "Original OpenNT dmmnem.c; tools/build/New-T404S5Wow32ProviderNinja.ps1 original control cohort; test/adapter-mvdm-host-out/wow/wow_dialog_mnemonic_lifetime_fixture.c; src/wow32-dll/source/wow_button_lifetime.c; dlgmgr2.c IsDialogMessage consumer",
+  "limits": "Existing fixture source inspected, not executed. Global/static-label/exhaustion coverage incomplete; real native HWND reuse and parent retirement not proved. No functional changes implemented."
+}

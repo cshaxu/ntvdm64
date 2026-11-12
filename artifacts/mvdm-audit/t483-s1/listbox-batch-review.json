@@ -1,0 +1,36 @@
+[
+  {
+    "file": "lb1",
+    "byte_identical": true
+  },
+  {
+    "file": "lboxctl1",
+    "byte_identical": true
+  },
+  {
+    "file": "lboxctl2",
+    "exclusions": 1,
+    "other": 0,
+    "line_offsets": 1
+  },
+  {
+    "file": "lboxctl3",
+    "exclusions": 4,
+    "other": 0,
+    "line_offsets": 2
+  },
+  {
+    "file": "lboxmult",
+    "byte_identical": true
+  },
+  {
+    "file": "lboxrare",
+    "exclusions": 1,
+    "other": 1,
+    "line_offsets": 0
+  },
+  {
+    "file": "lboxvar",
+    "byte_identical": true
+  }
+]

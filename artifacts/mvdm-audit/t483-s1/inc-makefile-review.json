@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/inc/makefile",
+  "original_sha256": "22619f4bdd9be2f377ab919997527aa9797dfdb0e10d5082ebf424cddf7280d9",
+  "current_sha256": "47d85cddbd856fc6e677c0920f062e2c034a694f049b6c36a97b4d11473158bb",
+  "review_complete": true,
+  "blocks": [
+    {
+      "kind": "replace",
+      "original_start": 44,
+      "original_count": 1,
+      "current_start": 44,
+      "current_count": 1
+    },
+    {
+      "kind": "delete",
+      "original_start": 113,
+      "original_count": 2,
+      "current_start": 113,
+      "current_count": 0
+    }
+  ],
+  "scope": "build metadata outside C/H count",
+  "runtime_validation": "None; source review only"
+}

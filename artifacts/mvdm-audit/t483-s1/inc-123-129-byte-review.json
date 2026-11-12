@@ -1,0 +1,51 @@
+[
+  {
+    "path": "src/mvdm-host/inc/MVDM.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\MVDM.INC",
+    "before_sha256": "3a8f94947a075fe54df3d7174c864ca541ae9893c0ead258d269bc09bb291aac",
+    "after_sha256": "514ce47685c836b3518242601f863befda40a47d472eac988780a678226794ed",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/netb.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\netb.h",
+    "before_sha256": "b2c047364573bf22ac28a507509942c5a4ba27b20523f3f30e87f5a7f8145872",
+    "after_sha256": "b2c047364573bf22ac28a507509942c5a4ba27b20523f3f30e87f5a7f8145872",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/oemuni.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\oemuni.h",
+    "before_sha256": "26c8509048272de86ed1b93f5af837434e90d8ecbc8a878d915c419be2d2bafb",
+    "after_sha256": "26c8509048272de86ed1b93f5af837434e90d8ecbc8a878d915c419be2d2bafb",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/rdrexp.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\rdrexp.h",
+    "before_sha256": "5a40a916b423d7758625f9e82ea938c0334e71710cb491c91d373aff44f9a098",
+    "after_sha256": "5a40a916b423d7758625f9e82ea938c0334e71710cb491c91d373aff44f9a098",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/rdrsvc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\rdrsvc.h",
+    "before_sha256": "c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e",
+    "after_sha256": "c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/RDRSVC.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\RDRSVC.INC",
+    "before_sha256": "07ff33115b68406ff4b927632b4cc368ef25b462f71723a9b6260f22eaebf0a6",
+    "after_sha256": "2c85bce46d4e9655fdf5c3bd18ace18b57d79160d9d85d1aefaa5cfb02c143ce",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/sharewow.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\sharewow.h",
+    "before_sha256": "6773774b049eed89820cf10c2354b95537e7d67c8e700566da14658dfa3a84a8",
+    "after_sha256": "6773774b049eed89820cf10c2354b95537e7d67c8e700566da14658dfa3a84a8",
+    "newline_restored": false
+  }
+]

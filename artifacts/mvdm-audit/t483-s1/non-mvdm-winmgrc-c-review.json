@@ -1,0 +1,48 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+  "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+  "current_sha256": "d448bfc238cb8f6143b4bc52bc2c3ee714f7a2f1fcbd7082bfa4ddebd4667789",
+  "status": "difference classification complete; functional actions not implemented",
+  "original_functions": [
+    "GetWindowWord",
+    "FChildVisible",
+    "AdjustWindowRectEx",
+    "GetClassNameW",
+    "GetFocus",
+    "GetCapture",
+    "AnyPopup",
+    "GetInputState",
+    "MapWindowPoints",
+    "GetLastActivePopup",
+    "GetWindowThreadProcessId",
+    "GetScrollPos",
+    "GetScrollRange",
+    "GetScrollInfo",
+    "GetActiveWindow",
+    "GetCursor",
+    "IsMenu",
+    "GetAppCompatFlags",
+    "IsWindowUnicode",
+    "TestWindowProcess",
+    "IsHungAppWindow",
+    "PtiCurrent",
+    "_AdjustWindowRectEx"
+  ],
+  "retained_function_comparison": {
+    "FChildVisible": "full normalized body identical; original line52",
+    "_AdjustWindowRectEx": "full normalized body identical; original line550"
+  },
+  "initial_review": "Actual product generator selects control-body-winmgrc with WOW_ORIGINAL_EDIT_CLIENT. edslrare calls FChildVisible; dlgbegin calls _AdjustWindowRectEx. Original algorithms retained; private precomp provides client graph, metrics and task version.",
+  "counter_review": "Native HWND graph validation and lifetime still belong to existing bindings. Geometry fixtures use synthetic graph/context and do not prove full native dialog creation. Removed wrappers cannot all be called unnecessary merely because public APIs exist. No new runtime validation.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:480",
+    "src/non-mvdm/windows/core/ntuser/client/edslrare.c:181",
+    "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c:469",
+    "test/adapter-mvdm-host-out/wow/wow_edit_view_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c:130",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1:144"
+  ],
+  "verification_scope": "Existing fixture source inspected, not rerun: child visibility ignores own visibility, parent visibility, invalid HWND; geometry covers pre4/4 expected version, menu, caption, thick frame, client edge, toolwindow. No claim complete fixture/lifetime coverage.",
+  "format_sites_restored": 3,
+  "limits": "Omitted function necessity and exact include simplification remain pending; source comparison is not build or branch-hit proof."
+}

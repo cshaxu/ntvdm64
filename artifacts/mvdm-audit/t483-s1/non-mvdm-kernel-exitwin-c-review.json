@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+  "before_sha256": "b42d5c29b94789df14fddcf2960a657d216a41d350908c8d496dd864ef05e284",
+  "current_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+  "status": "difference classification complete; functional changes not implemented",
+  "registration_body": "Token-exact after replacing original PpiCurrent() with explicit currentProcess.",
+  "evidence": [
+    "src/wow32-dll/source/wow_task_event_binding.c",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:462-482,1830-1870",
+    "src/wow32-dll/include/wow_task_order_bindings.h",
+    "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c:648-689",
+    "test/adapter-mvdm-host-out/wow/wow_process_retirement_fixture.c:175-230",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:679"
+  ],
+  "registered": 13,
+  "format_sites": 1,
+  "review_findings": [
+    "Finite heap/event/process bindings replace private USER precomp; selected original registration order retained. Keep bounded facade, not kernel object engine.",
+    "Keep original definition line anchor after restored original function documentation.",
+    "Keep explicit currentProcess argument; original PpiCurrent lookup replaced by caller-owned serialized process.",
+    "Keep explicit process assignment; remaining registration body matches original token-for-token.",
+    "LATER frame detached from omitted InitiateShutdown at EOF. Reconcile owning subset/omission and diagnostic mapping; do not imply empty retained branch preserves shutdown logic.",
+    "Omit OPTIONMASK/private windowstation shutdown globals and RtlZeroHeap prototype with their unavailable Winlogon/kernel owners; none needed by retained registration.",
+    "Keep NotifyLogon outside selected subset: dispatches to private Winlogon windowstations/LUID identities, no current caller. Do not route guest task exit into machine logoff.",
+    "Keep InitiateShutdown outside subset: kernel EPROCESS/ETHREAD, privileges, windowstation locks and Winlogon authority. Not an alternative to NTSRV task lifecycle.",
+    "Keep EndShutdown outside subset: system clipboard/atom/font/desktop-heap cleanup and Winlogon completion, not worker task retirement.",
+    "Compare omitted xxxClientShutdown2 application WM_QUERYENDSESSION/WM_ENDSESSION and timer policy against selected WOW shutdown callers before claiming redundant; private whole-host teardown exclusion alone does not prove this local policy unnecessary.",
+    "Trace omitted xxxClientShutdown receiving WM_CLIENTSHUTDOWN versus current native window/default message dispatch; preserve reusable guest-visible shutdown semantics if a real gap is found.",
+    "Event adapter maps all failures to generic unsuccessful status and does not always set LastError. Establish caller error contract and minimal faithful mapping before adding error plumbing; event type rejection is intentional finite-boundary validation.",
+    "Shared head belongs to owner->shared; production has one registration guarded by owner->registered and runtime lock. Disposal closes duplicate and zeros entire owning carrier; fixture multi-process list has fixture-owned teardown. Do not infer product supports shared multi-owner head."
+  ],
+  "limits": [
+    "No fresh tests/build.",
+    "Original ObReferenceObjectByHandle uses NULL object type; facade explicitly rejects non-events rather than assuming original type validation.",
+    "No full original WM_CLIENTSHUTDOWN policy equivalence claimed."
+  ]
+}

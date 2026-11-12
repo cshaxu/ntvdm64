@@ -1,0 +1,102 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+  "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+  "current_sha256": "216f3a4503ec8bfb4f35cba328d15231eb892357310baa426228d6313dc2ab94",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 26,
+      "original_count": 1,
+      "current_normalized_start": 26,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 47,
+      "original_count": 2,
+      "current_normalized_start": 47,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 313,
+      "original_count": 4,
+      "current_normalized_start": 312,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 362,
+      "original_count": 1,
+      "current_normalized_start": 358,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 395,
+      "original_count": 17,
+      "current_normalized_start": 391,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 414,
+      "original_count": 27,
+      "current_normalized_start": 394,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 483,
+      "original_count": 15,
+      "current_normalized_start": 437,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 522,
+      "original_count": 15,
+      "current_normalized_start": 462,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 556,
+      "original_count": 2,
+      "current_normalized_start": 482,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 565,
+      "original_count": 2,
+      "current_normalized_start": 490,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Ten alternate I/O-profile bodies excluded. Remaining source exact.",
+  "counter_review": "Selected 64K port space, NTVDM adapter indices/spares, connect-port result type and function-pointer tables unchanged. SFELLOW/HERC/MAC68K alternatives and null SoundBlaster declarations excluded; selected device dispatch is not replaced.",
+  "limits": "Source-backed classification only; no new compiled-preprocessor or runtime acceptance. Historical intent not assumed."
+}

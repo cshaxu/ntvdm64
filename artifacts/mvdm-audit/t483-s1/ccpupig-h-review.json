@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.h",
+  "original_sha256": "73b2e7ceda4cb3ba83343b1fe07a428dccab76a196b2d7c3951c37962be1e1db",
+  "current_sha256": "8983ef54b45a03ebffef1bb78661d3a81c33ce4819e138be263eae66feddd225",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 14,
+      "original_end": 166,
+      "current_error_line": 15
+    }
+  ],
+  "limits": "Necessity classification only; PIG body removal preserves outer boundary. No new reachability or full logical-line proof."
+}

@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/dos/dem/demdasd.h",
+  "original_sha256": "de5bd5e437c17a34af71999e6e6e7c0e749d9d9da61bc5cc8420c0406e1a2c35",
+  "current_sha256": "0c4bf7f6944b778b0ea1b1126a16f81b8d71edcd078098b857dae6ba41b6035c",
+  "review_complete": true,
+  "difference_count": 1,
+  "initial_review": "Packed DPB far link represented as DWORD.",
+  "counter_review": "Original demgset uses casted numeric far addresses at original lines 737/989/1006; current uses integer stores. No host dereference found. x86 width alone does not justify change, guest-value type and fewer casts justify retaining coupled adaptation.",
+  "limitations": [
+    "No new tests.",
+    "Do not extend this decision to native A_BDS.Next pointer in same header."
+  ]
+}

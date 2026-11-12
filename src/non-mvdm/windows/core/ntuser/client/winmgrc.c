@@ -1,12 +1,26 @@
-/* Copyright (c) Microsoft Corporation.
- * Original windows/core/ntuser/client/winmgrc.c true subset.
- * DIVERGENCE(OPENNT-HOST-078): retain required client-view bodies unchanged;
- * target-private precomp replaces the original build environment.
- * Unselected until the complete EDIT dependency group is wired. */
+/****************************** Module Header ******************************\
+* Module Name: winmgrc.c
+*
+* Copyright (c) 1985-1996, Microsoft Corporation
+*
+* This module contains
+*
+* History:
+* 20-Feb-1992 DarrinM   Pulled functions from user\server.
+\***************************************************************************/
+
 #include "precomp.h"
 
 #ifdef WOW_ORIGINAL_EDIT_CLIENT
-/* OPENNT-HOST-108: original dialog geometry, unchanged. */
+/***************************************************************************\
+* _AdjustWindowRectEx (API)
+*
+*
+*
+* History:
+* 10-24-90 darrinm      Ported from Win 3.0.
+\***************************************************************************/
+
 #line 550
 BOOL _AdjustWindowRectEx(
     LPRECT lprc,
@@ -74,4 +88,3 @@ BOOL FChildVisible(
 
     return (_FChildVisible(pwnd));
 }
-

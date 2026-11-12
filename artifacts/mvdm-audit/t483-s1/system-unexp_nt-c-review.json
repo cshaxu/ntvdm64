@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+  "original_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e",
+  "current_sha256": "e5ad6ab2ba6b642c9e1648f2533c0ca06d9fbdbae07db0f299dd4087dd956ecd",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 18,
+      "original_count": 1,
+      "current_start": 19,
+      "current_count": 1,
+      "original": [
+        "static char SccsID[]=\"@(#)unexp_int.c\t1.8 06/15/95 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 22,
+      "original_count": 6,
+      "current_start": 25,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_ERROR.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two excluded bodies, SCCSID and SEGMENTATION; remaining complete source exact.",
+  "counter_review": "Original unexpected_int reads master/slave ISR, masks unexpected hardware lines while preserving cascade line 2, sends EOIs and records BIOS interrupt cause. No local forced IRQ, mask workaround or new successful stub.",
+  "limits": "Full source-difference classification only; no new runtime result, universal build-context proof or complete diagnostic-line certification."
+}

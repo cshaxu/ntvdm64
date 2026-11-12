@@ -1,7 +1,21 @@
 /*++
+
 Copyright (c) 1990  Microsoft Corporation
-Module Name: vdm.c
-Abstract: Selected Base-client VDM environment and command routines.
+
+Module Name:
+
+    vdm.c
+
+Abstract:
+
+    This module implements Win32 APIs for VDMs
+
+Author:
+
+    Sudeepb Bharati (sudeepb) 04-Sep-1991
+
+Revision History:
+
 --*/
 
 /* DIVERGENCE(OPENNT-HOST-014): true source subset of original

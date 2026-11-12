@@ -1,0 +1,122 @@
+{
+  "path": "src/mvdm-host/dos/dem/demdisp.c",
+  "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+  "current_sha256": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 13,
+      "original_count": 0,
+      "current_start": 13,
+      "current_count": 1,
+      "classification": "fast-io-decline"
+    },
+    {
+      "original_start": 14,
+      "original_count": 0,
+      "current_start": 15,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 15,
+      "original_count": 77,
+      "current_start": 17,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 93,
+      "original_count": 0,
+      "current_start": 20,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 165,
+      "original_count": 2,
+      "current_start": 93,
+      "current_count": 2,
+      "classification": "fast-io-decline"
+    },
+    {
+      "original_start": 189,
+      "original_count": 0,
+      "current_start": 117,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 190,
+      "original_count": 9,
+      "current_start": 119,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 200,
+      "original_count": 0,
+      "current_start": 122,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 202,
+      "original_count": 0,
+      "current_start": 125,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 203,
+      "original_count": 2,
+      "current_start": 127,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 206,
+      "original_count": 0,
+      "current_start": 130,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 217,
+      "original_count": 0,
+      "current_start": 142,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 218,
+      "original_count": 8,
+      "current_start": 144,
+      "current_count": 2,
+      "classification": "DBG-exclusion"
+    },
+    {
+      "original_start": 227,
+      "original_count": 0,
+      "current_start": 147,
+      "current_count": 1,
+      "classification": "line-scaffolding"
+    },
+    {
+      "original_start": 241,
+      "original_count": 0,
+      "current_start": 162,
+      "current_count": 11,
+      "classification": "fast-io-decline"
+    }
+  ],
+  "initial_review": "Three selected-code blocks form one shared fast-I/O decline; four DBG exclusions separate.",
+  "counter_review": "CF fallback is explicit in both original guest call sites. Common unsupported handler clears CF and cannot substitute. No second I/O implementation needed.",
+  "evidence": [
+    "src/mvdm-guest/dos/v86/doskrnl/dos/handle.asm:462",
+    "src/mvdm-guest/dos/v86/doskrnl/dos/handle.asm:486",
+    "O:/repos.external/OpenNT/base/ntos/vdm/x86/rdwr.c:50",
+    "test/mvdm-host/dos/Verify-T409FastIoFallback.ps1"
+  ],
+  "test_limit": "Verifier only checks source patterns and has old build-script reference; not executed or promoted to runtime evidence."
+}

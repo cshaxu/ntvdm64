@@ -429,4 +429,3 @@ PWND xxxGotoNextMnem(
     return NULL;
 #line 356
 }
-

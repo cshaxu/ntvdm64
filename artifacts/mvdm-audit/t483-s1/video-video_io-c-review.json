@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+  "original_sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86",
+  "current_sha256": "aec73147e8fb5112ff538409ae1d319c4b58294eea436fcd365f0c5a444ba913",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 20,
+      "original_count": 6,
+      "current_start": 21,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"VIDEO_BIOS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    }
+  ],
+  "initial_review": "Only difference is original Macintosh segmentation include body replaced by #error.",
+  "counter_review": "Full retained source comparison is exact after #line removal. Original AH bounds check, stream disable condition, IDLE_video and function table dispatch are unchanged. This is not a new dispatcher or a local behavioral patch.",
+  "limits": "Content classification; no fresh runtime or universal build-context certification."
+}

@@ -1,0 +1,242 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+  "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+  "current_sha256": "8a914b356bece9f0f12dbd262da7b550d5893d4e6b8e29d4974967f2c8042223",
+  "review_complete": false,
+  "changes": [
+    {
+      "original_start": 39,
+      "original_count": 4,
+      "current_start": 40,
+      "current_count": 0,
+      "original": [
+        "// from monitor.lib",
+        "HANDLE ThreadLookUp(PVOID);",
+        "extern PVOID CurrentMonitorTeb;",
+        ""
+      ],
+      "current": []
+    },
+    {
+      "original_start": 52,
+      "original_count": 3,
+      "current_start": 51,
+      "current_count": 1,
+      "original": [
+        "ULONG iretHookActive=0;",
+        "ULONG iretHookMask  =0;",
+        "ULONG AddrIretBopTable=0;  // seg:offset"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 202,
+      "original_count": 1,
+      "current_start": 210,
+      "current_count": 1,
+      "original": [
+        "         DbgPrint(\"ntvdm.Eoi_hook: Invalid IrqLine=%lx\\n\", (ULONG)IrqLine);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 235,
+      "original_count": 2,
+      "current_start": 245,
+      "current_count": 1,
+      "original": [
+        "   NTSTATUS status;",
+        "   VDMDELAYINTSDATA DelayIntsData;"
+      ],
+      "current": [
+        "#error Excluded unsupported delayed-interrupt monitor declarations"
+      ]
+    },
+    {
+      "original_start": 257,
+      "original_count": 0,
+      "current_start": 269,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        ""
+      ]
+    },
+    {
+      "original_start": 258,
+      "original_count": 19,
+      "current_start": 273,
+      "current_count": 1,
+      "original": [
+        "",
+        "       //",
+        "       // Set Kernel timer for this IrqLine",
+        "       //",
+        "       DelayIntsData.Delay        = Delay;",
+        "       DelayIntsData.DelayIrqLine = IrqLineNum;",
+        "       DelayIntsData.hThread      = ThreadLookUp(CurrentMonitorTeb);",
+        "       if (DelayIntsData.hThread) {",
+        "           status = NtVdmControl(VdmDelayInterrupt, &DelayIntsData);",
+        "           if (!NT_SUCCESS(status))  {",
+        "#if DBG",
+        "               DbgPrint(\"NtVdmControl.VdmDelayInterrupt status=%lx\\n\",status);",
+        "#endif",
+        "               host_ica_unlock();",
+        "               return FALSE;",
+        "               }",
+        "",
+        "           }",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported delayed-interrupt monitor dispatch"
+      ]
+    },
+    {
+      "original_start": 332,
+      "original_count": 0,
+      "current_start": 335,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "/*",
+        " * QuickEvent call back function",
+        " *",
+        " */"
+      ]
+    },
+    {
+      "original_start": 382,
+      "original_count": 22,
+      "current_start": 393,
+      "current_count": 1,
+      "original": [
+        "//",
+        "// Force creation of the LazyCreate LockSemaphore",
+        "// for the ica lock.",
+        "// It is assumed that:",
+        "//    the cpu thread Owns the critsect",
+        "//    the HeartBeat Thread will wait on the critsect creating contention",
+        "//",
+        "// This is done by polling for a lock count greater than zero",
+        "// and verifying that the lock semaphore has been created.",
+        "// If these conditions are not met we will end up polling infinitely.",
+        "// Sounds dangerous but it is okay, since we will either get a",
+        "// CreateSemaphore or a timeout(deadlock) error from the rtl critical",
+        "// section code, which will result in an exception.",
+        "//",
+        "VOID WaitIcaLockFullyInitialized(VOID)",
+        "{",
+        "   DWORD Delay = 0;",
+        "",
+        "   do {",
+        "      Sleep(Delay++);",
+        "   } while (IcaLock.LockCount < 1 || !IcaLock.LockSemaphore);",
+        "}"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 416,
+      "original_count": 1,
+      "current_start": 408,
+      "current_count": 9,
+      "original": [
+        "    ica_eoi(Adapter, Line, 0);"
+      ],
+      "current": [
+        "    IS32 pic_line;",
+        "",
+        "    if (Line == 0) {",
+        "        return;",
+        "    }",
+        "",
+        "    pic_line = (IS32)*Line;",
+        "    ica_eoi((IU32)Adapter, &pic_line, 0);",
+        "    *Line = (int)pic_line;"
+      ]
+    },
+    {
+      "original_start": 459,
+      "original_count": 1,
+      "current_start": 461,
+      "current_count": 1,
+      "original": [
+        "    iretHookActive = 0;"
+      ],
+      "current": [
+        "#error Excluded original conditional branch"
+      ]
+    },
+    {
+      "original_start": 501,
+      "original_count": 9,
+      "current_start": 505,
+      "current_count": 1,
+      "original": [
+        "",
+        "     //",
+        "     // on x86 we may get multiple bits set",
+        "     // so check both slave and master",
+        "     //",
+        "    UndelayIrqLine = 0;",
+        "",
+        "    if (!ica_restart_interrupts(ICA_SLAVE))",
+        "        ica_restart_interrupts(ICA_MASTER);"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor interrupt restart"
+      ]
+    },
+    {
+      "original_start": 522,
+      "original_count": 24,
+      "current_start": 522,
+      "current_count": 2,
+      "original": [
+        "extern IU16 getMSW(void);",
+        "",
+        "IU32 host_iret_bop_table_addr(IU32 line)",
+        "{",
+        "    ULONG AddrBopTable, IretBopSize;",
+        "",
+        "    ASSERT(line <= 15);",
+        "",
+        "    if (!(iretHookMask & (1 << line))) {",
+        "        return 0;",
+        "        }",
+        "",
+        "    if (getMSW() & 1) {",
+        "\tAddrBopTable = (VDM_PM_IRETBOPSEG << 16) | VDM_PM_IRETBOPOFF;",
+        "\tIretBopSize = VDM_PM_IRETBOPSIZE;",
+        "    }",
+        "    else {",
+        "\tAddrBopTable = AddrIretBopTable;",
+        "\tIretBopSize = VDM_RM_IRETBOPSIZE;",
+        "    }",
+        "    return AddrBopTable + IretBopSize * line;",
+        "",
+        "}",
+        "#endif /* MONITOR */"
+      ],
+      "current": [
+        "#error Excluded unsupported monitor IRET table",
+        "#endif"
+      ]
+    }
+  ],
+  "verified_findings": [
+    "Monitor lookup declarations only used by excluded MONITOR delayed-interrupt branch.",
+    "SoftPcEoi public int* ABI differs from ica_eoi IS32*=long*; temporary avoids incompatible pointer use. vrinit.c supplies non-null local int for slave/master nonspecific EOI.",
+    "NULL early return is newly introduced and has no demonstrated caller requirement; recommend deleting guard while retaining typed temporary.",
+    "Duplicate QuickEvent comment and changed endif comment are formatting candidates; no changes performed yet."
+  ],
+  "remaining": "Complete exact whitespace/comment restoration and register final line ranges; preserve original physical bytes. No runtime tests performed.",
+  "status": "Superseded by host-nt_eoi-c-review.json"
+}

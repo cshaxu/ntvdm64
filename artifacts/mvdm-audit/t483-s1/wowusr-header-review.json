@@ -1,0 +1,305 @@
+{
+  "path": "src/mvdm-host/inc/wowusr.h",
+  "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+  "current_sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": 41,
+  "initial_review": "All differences are NULLSTRUCT empty parameter declaration exclusions and diagnostic line directives.",
+  "counter_review": "Retained source and logical line numbers exactly match the original after removing only NULLSTRUCT groups. No selected thunk layout or runtime code changes.",
+  "evidence": "Whole-file text and logical-line projection equality; each current excluded body contains exactly one #error.",
+  "excluded_conditions": [
+    "#ifdef NULLSTRUCT"
+  ],
+  "groups": [
+    {
+      "physical_start": 530,
+      "original_line": 529,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 674,
+      "original_line": 672,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 729,
+      "original_line": 726,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 809,
+      "original_line": 805,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 816,
+      "original_line": 811,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 930,
+      "original_line": 924,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 993,
+      "original_line": 986,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1104,
+      "original_line": 1096,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1132,
+      "original_line": 1123,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1156,
+      "original_line": 1146,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1230,
+      "original_line": 1219,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1252,
+      "original_line": 1240,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1284,
+      "original_line": 1271,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1296,
+      "original_line": 1282,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1303,
+      "original_line": 1288,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1359,
+      "original_line": 1343,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1366,
+      "original_line": 1349,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1398,
+      "original_line": 1380,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1415,
+      "original_line": 1396,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1422,
+      "original_line": 1402,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1429,
+      "original_line": 1408,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1463,
+      "original_line": 1441,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1475,
+      "original_line": 1452,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1488,
+      "original_line": 1464,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1528,
+      "original_line": 1503,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1580,
+      "original_line": 1554,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1587,
+      "original_line": 1560,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1662,
+      "original_line": 1634,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1694,
+      "original_line": 1665,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1701,
+      "original_line": 1671,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1819,
+      "original_line": 1788,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1839,
+      "original_line": 1807,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1858,
+      "original_line": 1825,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1959,
+      "original_line": 1925,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 1986,
+      "original_line": 1951,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 2176,
+      "original_line": 2140,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 2308,
+      "original_line": 2271,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 2334,
+      "original_line": 2296,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 2863,
+      "original_line": 2824,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 2882,
+      "original_line": 2842,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "physical_start": 2927,
+      "original_line": 2886,
+      "body": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "limits": "Source comparison, not new compiler execution or proof of all supported include contexts.",
+  "runtime_validation": "None; header unchanged."
+}

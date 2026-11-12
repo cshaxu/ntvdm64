@@ -1,0 +1,248 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+  "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+  "current_sha256": "408dfbee8fb31878424df9a20a24e6a69847d006eedb6e948d93872c387c9ac8",
+  "review_complete": true,
+  "register_entries": 2,
+  "excluded_groups": [
+    {
+      "original_start": 22,
+      "original_end": 27,
+      "current_error_line": 23
+    },
+    {
+      "original_start": 76,
+      "original_end": 76,
+      "current_error_line": 75
+    },
+    {
+      "original_start": 83,
+      "original_end": 83,
+      "current_error_line": 83
+    },
+    {
+      "original_start": 87,
+      "original_end": 87,
+      "current_error_line": 89
+    },
+    {
+      "original_start": 99,
+      "original_end": 99,
+      "current_error_line": 103
+    },
+    {
+      "original_start": 105,
+      "original_end": 105,
+      "current_error_line": 110
+    },
+    {
+      "original_start": 109,
+      "original_end": 109,
+      "current_error_line": 116
+    },
+    {
+      "original_start": 113,
+      "original_end": 114,
+      "current_error_line": 122
+    },
+    {
+      "original_start": 118,
+      "original_end": 118,
+      "current_error_line": 129
+    },
+    {
+      "original_start": 155,
+      "original_end": 155,
+      "current_error_line": 167
+    },
+    {
+      "original_start": 200,
+      "original_end": 209,
+      "current_error_line": 214
+    },
+    {
+      "original_start": 301,
+      "original_end": 318,
+      "current_error_line": 310
+    },
+    {
+      "original_start": 324,
+      "original_end": 328,
+      "current_error_line": 320
+    },
+    {
+      "original_start": 340,
+      "original_end": 340,
+      "current_error_line": 337
+    },
+    {
+      "original_start": 357,
+      "original_end": 357,
+      "current_error_line": 357
+    },
+    {
+      "original_start": 386,
+      "original_end": 506,
+      "current_error_line": 389
+    },
+    {
+      "original_start": 512,
+      "original_end": 516,
+      "current_error_line": 398
+    },
+    {
+      "original_start": 647,
+      "original_end": 647,
+      "current_error_line": 540
+    },
+    {
+      "original_start": 704,
+      "original_end": 705,
+      "current_error_line": 604
+    },
+    {
+      "original_start": 722,
+      "original_end": 763,
+      "current_error_line": 625
+    },
+    {
+      "original_start": 770,
+      "original_end": 770,
+      "current_error_line": 635
+    },
+    {
+      "original_start": 777,
+      "original_end": 777,
+      "current_error_line": 643
+    },
+    {
+      "original_start": 791,
+      "original_end": 797,
+      "current_error_line": 657
+    },
+    {
+      "original_start": 813,
+      "original_end": 813,
+      "current_error_line": 676
+    },
+    {
+      "original_start": 826,
+      "original_end": 826,
+      "current_error_line": 691
+    },
+    {
+      "original_start": 844,
+      "original_end": 849,
+      "current_error_line": 710
+    },
+    {
+      "original_start": 861,
+      "original_end": 866,
+      "current_error_line": 724
+    },
+    {
+      "original_start": 871,
+      "original_end": 872,
+      "current_error_line": 732
+    },
+    {
+      "original_start": 887,
+      "original_end": 887,
+      "current_error_line": 750
+    },
+    {
+      "original_start": 891,
+      "original_end": 983,
+      "current_error_line": 755
+    },
+    {
+      "original_start": 991,
+      "original_end": 991,
+      "current_error_line": 767
+    },
+    {
+      "original_start": 1001,
+      "original_end": 1001,
+      "current_error_line": 779
+    },
+    {
+      "original_start": 1018,
+      "original_end": 1018,
+      "current_error_line": 798
+    },
+    {
+      "original_start": 1022,
+      "original_end": 1023,
+      "current_error_line": 803
+    },
+    {
+      "original_start": 1027,
+      "original_end": 1028,
+      "current_error_line": 810
+    },
+    {
+      "original_start": 1033,
+      "original_end": 1061,
+      "current_error_line": 818
+    },
+    {
+      "original_start": 1071,
+      "original_end": 1071,
+      "current_error_line": 831
+    },
+    {
+      "original_start": 1094,
+      "original_end": 1094,
+      "current_error_line": 856
+    }
+  ],
+  "changes": [
+    {
+      "file_sequence": "204",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_start": "507",
+      "current_count": "4",
+      "original_start": "620",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-265",
+      "classification": "CPU40-direct-continuation",
+      "initial_review": "Original DOSX pushes enrm50 or publishes enrm45 as direct IRET/far-jump continuations; CPU40 condition removes historical -2 adjustment at these two sites only.",
+      "counter_review": "This is a semantic local condition, not an original excluded body. Preserve producer/consumer contract; historical P14 build was not runtime coverage of either continuation, explicitly recorded there.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-guest/dpmi/dxutil.asm:621,664,725,747; src/mvdm-host/softpc.new/host/inc/host_def.h:99; docs/etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md",
+      "limits": "Source and historical evidence review; no new execution or universal diagnostic-line verification.",
+      "decision": "retain",
+      "change_plan": "Keep direct-target CPU40 entry while retaining original surrounding stack/register/reset handling. Do not reinstate HOST_BOP_IP_FUDGE merely to reduce diff; validate both continuations before any alternative.",
+      "related_callers": "src/mvdm-guest/dpmi/dxutil.asm enrm45/enrm50 -> CMOS shutdown codes 9/0A -> reset.c saved IP/jump target -> CPU40 instruction entry.",
+      "verification_required": "Observe both DOSX continuation paths at exact producer addresses, verify restored registers/stack and instruction entry; distinguish source proof from historical build-only evidence.",
+      "missing_evidence": "No new runtime witness of the two exact continuations in this audit.",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "204",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_start": "578",
+      "current_count": "4",
+      "original_start": "684",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-265",
+      "classification": "CPU40-direct-continuation",
+      "initial_review": "Original DOSX pushes enrm50 or publishes enrm45 as direct IRET/far-jump continuations; CPU40 condition removes historical -2 adjustment at these two sites only.",
+      "counter_review": "This is a semantic local condition, not an original excluded body. Preserve producer/consumer contract; historical P14 build was not runtime coverage of either continuation, explicitly recorded there.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-guest/dpmi/dxutil.asm:621,664,725,747; src/mvdm-host/softpc.new/host/inc/host_def.h:99; docs/etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md",
+      "limits": "Source and historical evidence review; no new execution or universal diagnostic-line verification.",
+      "decision": "retain",
+      "change_plan": "Keep direct-target CPU40 entry while retaining original surrounding stack/register/reset handling. Do not reinstate HOST_BOP_IP_FUDGE merely to reduce diff; validate both continuations before any alternative.",
+      "related_callers": "src/mvdm-guest/dpmi/dxutil.asm enrm45/enrm50 -> CMOS shutdown codes 9/0A -> reset.c saved IP/jump target -> CPU40 instruction entry.",
+      "verification_required": "Observe both DOSX continuation paths at exact producer addresses, verify restored registers/stack and instruction entry; distinguish source proof from historical build-only evidence.",
+      "missing_evidence": "No new runtime witness of the two exact continuations in this audit.",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "initial_review": "Whole-file boundary-aware diff comparison with explicit semantic exceptions.",
+  "counter_review": "Outside listed corrections and removed branch bodies, nonblank non-#line text equals original.",
+  "limits": "Not full diagnostic-line or all-profile reachability proof. No new test run."
+}

@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+  "original_sha256": "02318c7bd61ead65d6d2c97b3980a7acc573d7b6fd951371fbfac157fec397f1",
+  "current_sha256": "586fef62de0d56e81d1c2d675be00f7738f71226c4f1a7e770efe76255e8a6ed",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 37,
+      "original_count": 85,
+      "current_start": 38,
+      "current_count": 2
+    }
+  ],
+  "limits": "No functional edit or fresh runtime pass. Not a blanket all-context branch-hit certification.",
+  "counter_review": "All textual differences enumerated; remaining differences consist only of listed selected declaration changes, excluded bodies and #line directives."
+}

@@ -13,6 +13,17 @@
 #define WOW_ORIGINAL_PROFILE
 #include "wow_task_profile_bindings.h"
 
+/*****************************************************************************\
+* FastGetProfileIntW()
+*
+* Implements a fast version of the standard API using predefined registry
+* section indecies (PMAP_) that reference lazy-opened, cached registry
+* handles.  FastCloseProfileUserMapping() should be called to clean up
+* cached entries when fast profile calls are completed.
+*
+* History:
+* 02-Dec-1993 SanfordS  Created.
+\*****************************************************************************/
 #line 548
 UINT FastGetProfileIntW(
     UINT    idSection,
@@ -47,6 +58,19 @@ UINT FastGetProfileIntW(
     return ReturnValue;
 }
 
+/*****************************************************************************\
+* FastGetProfileStringW()
+*
+* Implements a fast version of the standard API using predefined registry
+* section indecies (PMAP_) that reference lazy-opened, cached registry
+* handles.  FastCloseProfileUserMapping() should be called to clean up
+* cached entries when fast profile calls are completed.
+*
+* This api does NOT implement the NULL lpKeyName feature of the real API.
+*
+* History:
+* 02-Dec-1993 SanfordS  Created.
+\*****************************************************************************/
 #line 444
 DWORD FastGetProfileStringW(
     UINT    idSection,

@@ -1,0 +1,110 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+  "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+  "current_sha256": "9d659d4faec311c4a7d794a65a1667dd4cc479d67f4dc680c284cf3bbefe7378",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "original_start": 115,
+      "original_count": 0,
+      "current_start": 100,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-064): select the original in-source fill loop. */"
+      ]
+    },
+    {
+      "original_start": 116,
+      "original_count": 0,
+      "current_start": 103,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported original constant-false fill branch",
+        "#else"
+      ]
+    },
+    {
+      "original_start": 118,
+      "original_count": 5,
+      "current_start": 109,
+      "current_count": 0,
+      "original": [
+        "#else",
+        "                count = h_addr4 - l_addr4;",
+        "                RtlFillMemoryUlong(l_addr4, count, data4);",
+        "                l_addr = (unsigned char *)l_addr4;",
+        "                l_addr += count;"
+      ],
+      "current": []
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 19,
+      "original_count": 4,
+      "current_start": 20,
+      "current_count": 1,
+      "original": [
+        "register int loop;",
+        "      for(loop = 0; loop < len; loop++)",
+        "         *dest-- = *src--;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 60,
+      "original_count": 19,
+      "current_start": 62,
+      "current_count": 1,
+      "original": [
+        "\tunsigned int data4;",
+        "\tunsigned char *l_addr = l_addr_in;",
+        "\tunsigned char *h_addr = h_addr_in;",
+        "\tunsigned int *l_addr4,*h_addr4;",
+        "",
+        "\tl_addr4 = (unsigned int *)(((unsigned int)l_addr+3) & (~3));",
+        "\th_addr4 = (unsigned int *)(((unsigned int)h_addr+1) & (~3));",
+        "\tif(h_addr4 > l_addr4)",
+        "        {",
+        "                data4 = data*0x01010101;   // 0x61 * 0x01010101 = 0x61616161",
+        "                for(;(unsigned int *)l_addr < l_addr4;l_addr++)",
+        "                    *l_addr = data;",
+        "                do {",
+        "                    *l_addr4++ = data4;",
+        "                  } while (h_addr4 > l_addr4);",
+        "",
+        "\t\tl_addr = (unsigned char *)l_addr4;",
+        "\t}",
+        "        for(;l_addr <= h_addr;l_addr++)*l_addr = data;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 181,
+      "original_count": 4,
+      "current_start": 169,
+      "current_count": 1,
+      "original": [
+        "        while( count -- )",
+        "        {",
+        "                *laddr++ = data;",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Three coupled non-exclusion chunks select the original in-source DWORD fill loop in fwd_word_fill; three literal-if-zero excluded bodies. Retained source otherwise matches original after removing line directives.",
+  "counter_review": "Do not mechanically restore the original selected Rtl branch: h_addr4-l_addr4 is a count of unsigned-int elements, whereas RtlFillMemoryUlong length and l_addr byte advancement require bytes. Current original loop writes each DWORD and derives the tail pointer from the advanced DWORD pointer. memset4 in this same original file explicitly documents and applies count<<2 for Rtl. This supports retaining the loop selection, not a new provider. The preserved original if-zero frame has an added else carrying the selected loop; this is substantive adaptation, not exclusion-only.",
+  "evidence": "Original copy_fnc.c:115-123 versus current100-110; original/current memset4 byte-count comment and count<<2. host/inc/host_def.h declaration; base/video/gfx_updt.c fwd_word_fill call sites. test/mvdm-host/original_external_memory_test.c:81-101 covers offsets4..7 and lengths0..32, guards and digest0x91153575; New-T310OriginalSoftpcNinja.ps1:2186-2187 links the memory fixture.",
+  "limits": "Source-level unit proof; no build/runtime rerun. Historical 132-case matching claim not independently rerun. gfx_updt source call sites do not alone prove selected production reachability. Existing pointer casts/alignment and unusual short-tail behavior are inherited, not newly repaired here. README reference to compat/source/opennt_support_rtl.c is stale (path absent); not evidence of a current provider."
+}

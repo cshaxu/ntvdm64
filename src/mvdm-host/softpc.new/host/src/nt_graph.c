@@ -814,12 +814,8 @@ void nt_flush_screen(void)
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 801
-        {
 #line 805
             (void)(*update_alg.calc_update)();
-            /* DIVERGENCE(MVDM-HOST-DIV-314): preserve the notification until
-               the video owner publishes; do not perform transport in an IRQ. */
-        }
 #line 806
 }
 
@@ -922,10 +918,8 @@ void nt_graphics_tick(void)
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 878
-                    {
 #line 878
                         (void)(*update_alg.calc_update)();
-                    }
 
 #line 880
                 ega_tick_delay = EGA_TICK_DELAY;
@@ -959,10 +953,8 @@ void nt_graphics_tick(void)
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 905
-                {
 #line 905
                     (void)(*update_alg.calc_update)();
-                }
 
             software_update_completed = TRUE;
 #line 907

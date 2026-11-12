@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+  "original_sha256": "2d3351d8d4920d4691fd4035d6db11b97ab5ea3d15d10b0cac1403e68f9212cd",
+  "current_sha256": "cbdd6cf16eedcd56132f4a8b353dc0a93143786e5cc0f3ee55ef2b4278f3fdcd",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 117,
+      "original_count": 1,
+      "current_start": 117,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete textual comparison; non-excluded differences explicitly classified. No selected instruction algorithm changed in the four C files.",
+  "limits": "Necessity audit only; not full branch/line certification or new runtime validation."
+}

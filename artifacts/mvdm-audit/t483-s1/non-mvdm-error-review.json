@@ -1,0 +1,47 @@
+{
+  "path": "src/non-mvdm/base/ntos/rtl/error.c",
+  "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+  "current_sha256": "02a23c7a1d10e4364765635380011c37caf32fda037eff74ba80144f158bab38",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 27,
+      "original_count": 1,
+      "current_start": 29,
+      "current_count": 1,
+      "original": [
+        "#pragma alloc_text(PAGE, RtlNtStatusToDosError)"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 176,
+      "original_count": 8,
+      "current_start": 183,
+      "current_count": 1,
+      "original": [
+        "    DbgPrint(\"RTL: RtlNtStatusToDosError(0x%lx): No Valid Win32 Error Mapping\\n\",Status);",
+        "    DbgPrint(\"RTL: Edit ntos\\\\rtl\\\\generr.c to correct the problem\\n\");",
+        "    DbgPrint(\"RTL: ERROR_MR_MID_NOT_FOUND is being returned\\n\");",
+        "",
+        "#if DBG",
+        "    DbgBreakPoint();",
+        "#endif // DBG",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 184,
+      "current": 184,
+      "logical": 177
+    }
+  ],
+  "limits": "Source review only; error.c builds use NTOS_KERNEL_RUNTIME to exclude diagnostic prints, not kernel execution. Original error table unchanged."
+}

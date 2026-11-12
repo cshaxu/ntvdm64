@@ -1,0 +1,448 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+  "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+  "current_sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 16,
+      "original_count": 1,
+      "current_error_line": 17
+    },
+    {
+      "original_start": 20,
+      "original_count": 6,
+      "current_error_line": 23
+    },
+    {
+      "original_start": 34,
+      "original_count": 1,
+      "current_error_line": 40
+    },
+    {
+      "original_start": 59,
+      "original_count": 1,
+      "current_error_line": 68
+    },
+    {
+      "original_start": 91,
+      "original_count": 6,
+      "current_error_line": 102
+    },
+    {
+      "original_start": 115,
+      "original_count": 4,
+      "current_error_line": 128
+    },
+    {
+      "original_start": 130,
+      "original_count": 1,
+      "current_error_line": 142
+    },
+    {
+      "original_start": 135,
+      "original_count": 6,
+      "current_error_line": 149
+    },
+    {
+      "original_start": 167,
+      "original_count": 1,
+      "current_error_line": 178
+    },
+    {
+      "original_start": 236,
+      "original_count": 2,
+      "current_error_line": 249
+    },
+    {
+      "original_start": 246,
+      "original_count": 1,
+      "current_error_line": 260
+    },
+    {
+      "original_start": 250,
+      "original_count": 2,
+      "current_error_line": 266
+    },
+    {
+      "original_start": 272,
+      "original_count": 1,
+      "current_error_line": 289
+    },
+    {
+      "original_start": 301,
+      "original_count": 1,
+      "current_error_line": 320
+    },
+    {
+      "original_start": 407,
+      "original_count": 5,
+      "current_error_line": 428
+    },
+    {
+      "original_start": 442,
+      "original_count": 1,
+      "current_error_line": 465
+    },
+    {
+      "original_start": 449,
+      "original_count": 2,
+      "current_error_line": 474
+    },
+    {
+      "original_start": 466,
+      "original_count": 1,
+      "current_error_line": 492
+    },
+    {
+      "original_start": 475,
+      "original_count": 18,
+      "current_error_line": 502
+    },
+    {
+      "original_start": 539,
+      "original_count": 9,
+      "current_error_line": 569
+    },
+    {
+      "original_start": 572,
+      "original_count": 5,
+      "current_error_line": 596
+    },
+    {
+      "original_start": 613,
+      "original_count": 17,
+      "current_error_line": 636
+    },
+    {
+      "original_start": 638,
+      "original_count": 30,
+      "current_error_line": 648
+    },
+    {
+      "original_start": 678,
+      "original_count": 6,
+      "current_error_line": 661
+    },
+    {
+      "original_start": 689,
+      "original_count": 7,
+      "current_error_line": 669
+    },
+    {
+      "original_start": 698,
+      "original_count": 10,
+      "current_error_line": 674
+    },
+    {
+      "original_start": 717,
+      "original_count": 6,
+      "current_error_line": 686
+    },
+    {
+      "original_start": 725,
+      "original_count": 9,
+      "current_error_line": 691
+    },
+    {
+      "original_start": 748,
+      "original_count": 6,
+      "current_error_line": 708
+    },
+    {
+      "original_start": 756,
+      "original_count": 9,
+      "current_error_line": 713
+    },
+    {
+      "original_start": 783,
+      "original_count": 6,
+      "current_error_line": 734
+    },
+    {
+      "original_start": 791,
+      "original_count": 9,
+      "current_error_line": 739
+    },
+    {
+      "original_start": 806,
+      "original_count": 6,
+      "current_error_line": 748
+    },
+    {
+      "original_start": 814,
+      "original_count": 9,
+      "current_error_line": 753
+    },
+    {
+      "original_start": 836,
+      "original_count": 1,
+      "current_error_line": 769
+    },
+    {
+      "original_start": 840,
+      "original_count": 11,
+      "current_error_line": 775
+    },
+    {
+      "original_start": 853,
+      "original_count": 25,
+      "current_error_line": 780
+    },
+    {
+      "original_start": 884,
+      "original_count": 20,
+      "current_error_line": 789
+    },
+    {
+      "original_start": 949,
+      "original_count": 6,
+      "current_error_line": 838
+    },
+    {
+      "original_start": 957,
+      "original_count": 9,
+      "current_error_line": 843
+    },
+    {
+      "original_start": 979,
+      "original_count": 11,
+      "current_error_line": 859
+    },
+    {
+      "original_start": 1010,
+      "original_count": 6,
+      "current_error_line": 882
+    },
+    {
+      "original_start": 1035,
+      "original_count": 9,
+      "current_error_line": 904
+    },
+    {
+      "original_start": 1049,
+      "original_count": 6,
+      "current_error_line": 912
+    },
+    {
+      "original_start": 1057,
+      "original_count": 1,
+      "current_error_line": 917
+    },
+    {
+      "original_start": 1072,
+      "original_count": 1,
+      "current_error_line": 934
+    },
+    {
+      "original_start": 1076,
+      "original_count": 7,
+      "current_error_line": 940
+    },
+    {
+      "original_start": 1085,
+      "original_count": 10,
+      "current_error_line": 945
+    },
+    {
+      "original_start": 1147,
+      "original_count": 1,
+      "current_error_line": 1000
+    },
+    {
+      "original_start": 1151,
+      "original_count": 6,
+      "current_error_line": 1006
+    },
+    {
+      "original_start": 1159,
+      "original_count": 9,
+      "current_error_line": 1011
+    },
+    {
+      "original_start": 1172,
+      "original_count": 27,
+      "current_error_line": 1018
+    },
+    {
+      "original_start": 1205,
+      "original_count": 6,
+      "current_error_line": 1053
+    },
+    {
+      "original_start": 1213,
+      "original_count": 9,
+      "current_error_line": 1058
+    },
+    {
+      "original_start": 1253,
+      "original_count": 6,
+      "current_error_line": 1093
+    },
+    {
+      "original_start": 1261,
+      "original_count": 9,
+      "current_error_line": 1098
+    },
+    {
+      "original_start": 1275,
+      "original_count": 6,
+      "current_error_line": 1106
+    },
+    {
+      "original_start": 1298,
+      "original_count": 9,
+      "current_error_line": 1126
+    },
+    {
+      "original_start": 1315,
+      "original_count": 6,
+      "current_error_line": 1137
+    },
+    {
+      "original_start": 1323,
+      "original_count": 9,
+      "current_error_line": 1142
+    },
+    {
+      "original_start": 1340,
+      "original_count": 6,
+      "current_error_line": 1153
+    },
+    {
+      "original_start": 1348,
+      "original_count": 9,
+      "current_error_line": 1158
+    },
+    {
+      "original_start": 1393,
+      "original_count": 114,
+      "current_error_line": 1197
+    },
+    {
+      "original_start": 1525,
+      "original_count": 26,
+      "current_error_line": 1329
+    },
+    {
+      "original_start": 1565,
+      "original_count": 12,
+      "current_error_line": 1346
+    },
+    {
+      "original_start": 1581,
+      "original_count": 14,
+      "current_error_line": 1352
+    },
+    {
+      "original_start": 1638,
+      "original_count": 20,
+      "current_error_line": 1399
+    },
+    {
+      "original_start": 1677,
+      "original_count": 6,
+      "current_error_line": 1421
+    },
+    {
+      "original_start": 1927,
+      "original_count": 22,
+      "current_error_line": 1670
+    },
+    {
+      "original_start": 2004,
+      "original_count": 26,
+      "current_error_line": 1727
+    },
+    {
+      "original_start": 2073,
+      "original_count": 1,
+      "current_error_line": 1774
+    },
+    {
+      "original_start": 2083,
+      "original_count": 1,
+      "current_error_line": 1786
+    },
+    {
+      "original_start": 2092,
+      "original_count": 1,
+      "current_error_line": 1797
+    },
+    {
+      "original_start": 2103,
+      "original_count": 1,
+      "current_error_line": 1810
+    },
+    {
+      "original_start": 2113,
+      "original_count": 1,
+      "current_error_line": 1822
+    },
+    {
+      "original_start": 2122,
+      "original_count": 1,
+      "current_error_line": 1833
+    },
+    {
+      "original_start": 2417,
+      "original_count": 18,
+      "current_error_line": 2129
+    },
+    {
+      "original_start": 2466,
+      "original_count": 6,
+      "current_error_line": 2163
+    },
+    {
+      "original_start": 2544,
+      "original_count": 7,
+      "current_error_line": 2243
+    },
+    {
+      "original_start": 2573,
+      "original_count": 14,
+      "current_error_line": 2274
+    },
+    {
+      "original_start": 2591,
+      "original_count": 1,
+      "current_error_line": 2282
+    },
+    {
+      "original_start": 2594,
+      "original_count": 1,
+      "current_error_line": 2287
+    },
+    {
+      "original_start": 2640,
+      "original_count": 2,
+      "current_error_line": 2335
+    },
+    {
+      "original_start": 2657,
+      "original_count": 2,
+      "current_error_line": 2353
+    },
+    {
+      "original_start": 2681,
+      "original_count": 3,
+      "current_error_line": 2379
+    },
+    {
+      "original_start": 2756,
+      "original_count": 34,
+      "current_error_line": 2454
+    },
+    {
+      "original_start": 2800,
+      "original_count": 453,
+      "current_error_line": 2467
+    }
+  ],
+  "initial_review": "Whole file compared against original, using conditional boundaries instead of diff opcode alignment.",
+  "counter_review": "All remaining nonblank non-line-directive source lines match exactly. FIFO timeout removal is wholly inside an excluded branch, not a selected algorithm replacement. Mixed opcodes preserve original remaining boundary statements.",
+  "limits": "This proves exclusion-only difference classification, not correctness of every exclusion across build contexts, logical-line certification, or serial-device runtime acceptance."
+}

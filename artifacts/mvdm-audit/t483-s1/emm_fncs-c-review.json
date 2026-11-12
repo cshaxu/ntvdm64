@@ -1,0 +1,128 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+  "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
+  "current_sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 5,
+      "original_end": 8,
+      "current_error_line": 7
+    },
+    {
+      "original_start": 71,
+      "original_end": 76,
+      "current_error_line": 72
+    },
+    {
+      "original_start": 96,
+      "original_end": 96,
+      "current_error_line": 99
+    },
+    {
+      "original_start": 104,
+      "original_end": 104,
+      "current_error_line": 109
+    },
+    {
+      "original_start": 114,
+      "original_end": 114,
+      "current_error_line": 121
+    },
+    {
+      "original_start": 132,
+      "original_end": 135,
+      "current_error_line": 141
+    },
+    {
+      "original_start": 139,
+      "original_end": 140,
+      "current_error_line": 147
+    },
+    {
+      "original_start": 179,
+      "original_end": 180,
+      "current_error_line": 188
+    },
+    {
+      "original_start": 215,
+      "original_end": 216,
+      "current_error_line": 225
+    },
+    {
+      "original_start": 221,
+      "original_end": 256,
+      "current_error_line": 232
+    },
+    {
+      "original_start": 262,
+      "original_end": 262,
+      "current_error_line": 240
+    },
+    {
+      "original_start": 294,
+      "original_end": 296,
+      "current_error_line": 274
+    },
+    {
+      "original_start": 301,
+      "original_end": 303,
+      "current_error_line": 281
+    },
+    {
+      "original_start": 322,
+      "original_end": 327,
+      "current_error_line": 302
+    },
+    {
+      "original_start": 354,
+      "original_end": 364,
+      "current_error_line": 336
+    },
+    {
+      "original_start": 368,
+      "original_end": 372,
+      "current_error_line": 342
+    },
+    {
+      "original_start": 384,
+      "original_end": 434,
+      "current_error_line": 356
+    },
+    {
+      "original_start": 467,
+      "original_end": 467,
+      "current_error_line": 392
+    },
+    {
+      "original_start": 475,
+      "original_end": 480,
+      "current_error_line": 402
+    },
+    {
+      "original_start": 2333,
+      "original_end": 2333,
+      "current_error_line": 2262
+    },
+    {
+      "original_start": 2567,
+      "original_end": 2663,
+      "current_error_line": 2498
+    },
+    {
+      "original_start": 2786,
+      "original_end": 2786,
+      "current_error_line": 2623
+    },
+    {
+      "original_start": 2793,
+      "original_end": 2831,
+      "current_error_line": 2632
+    }
+  ],
+  "initial_review": "Conditional boundary-aware whole-file comparison: each #error replaces only its corresponding original branch body; all other nonblank text matches.",
+  "counter_review": "Preserved surrounding if/elif/else/endif checked while skipping nested conditions only inside removed bodies. No selected implementation or dispatch expression added or modified.",
+  "limits": "Ignores blank lines and #line directives; not a universal macro reachability proof or completed diagnostic-line audit.",
+  "runtime_validation": "None; no source changes."
+}

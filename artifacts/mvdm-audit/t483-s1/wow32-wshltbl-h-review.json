@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/wow32/wshltbl.h",
+  "original_sha256": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d",
+  "current_sha256": "9c59d43c215d182bcf9edbeebe4f963db44d9d63c43464f25a6e4faf1a365247",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 24,
+      "original_count": 1,
+      "current_start": 26,
+      "current_count": 1,
+      "original": [
+        "extern INT iShellMax;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": "Only original profiling declaration body excluded; all retained source matches.",
+  "limits": [
+    "No tests executed or historical results promoted to current pass.",
+    "Source-derived line comparison is not compiler validation."
+  ]
+}

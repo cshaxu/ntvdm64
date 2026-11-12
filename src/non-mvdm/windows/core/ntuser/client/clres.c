@@ -15,9 +15,16 @@
 /* DIVERGENCE(OPENNT-HOST-079): retain the original template-size walker
  * and modal entry as an isolated source selection. The complete dialog
  * producer/manager supplies the private precomp environment; no alternate
- * parser or native-modal fallback is introduced. Not yet product-selected. */
+ * parser or native-modal fallback is introduced. */
 #line 13
 #include "precomp.h"
+
+/***************************************************************************\
+* SkipIDorString
+*
+* Skips string (or ID) and returns the next aligned WORD.
+*
+\***************************************************************************/
 
 #line 418
 PBYTE SkipIDorString(
@@ -30,6 +37,15 @@ PBYTE SkipIDorString(
 
     return pb;
 }
+
+/***************************************************************************\
+* GetSizeDialogTemplate
+*
+* This gets called by thank produced stubs. It returns the size of a
+* dialog template.
+*
+* 07-Apr-1991 ScottLu   Created.
+\***************************************************************************/
 
 #line 438
 DWORD GetSizeDialogTemplate(
@@ -195,6 +211,14 @@ int WINAPI DialogBoxIndirectParamAorW(
 #include "wow_menu_resource_bindings.h"
 #define WCSToMB(text, count, output, capacity, allocate) \
     WCSToMBEx(0, text, count, output, capacity, allocate)
+/***************************************************************************\
+* WOWFindResourceExWCover
+*
+* The WOW FindResource routines expect an ansi string so we have to
+* convert the calling string IFF it is not an ID
+*
+\***************************************************************************/
+
 #line 3923
 HANDLE WOWFindResourceExWCover(
     HANDLE  hmod,
@@ -247,6 +271,12 @@ typedef struct _OLDCURSOR {
 } OLDCURSOR, *POLDCURSOR;
 typedef OLDCURSOR UNALIGNED *UPOLDCURSOR;
 
+/***************************************************************************\
+* HowManyColors
+*
+*
+\***************************************************************************/
+
 #line 2991
 DWORD HowManyColors(
     IN  UPBITMAPINFOHEADER upbih,
@@ -276,6 +306,14 @@ DWORD HowManyColors(
 
 #undef upbch
 }
+
+/***************************************************************************\
+* TrulyMonochrome
+*
+* Checks to see if a DIB colro table is truly monochrome.  ie: the color
+* table has black & white entries only.
+*
+\***************************************************************************/
 
 #line 3299
 BOOL TrulyMonochrome(
@@ -311,6 +349,15 @@ BOOL TrulyMonochrome(
 
     return FALSE;
 }
+
+/***************************************************************************\
+* ChangeDibColors
+*
+* Given a DIB, processes LR_MONOCHROME, LR_LOADTRANSPARENT and
+* LR_LOADMAP3DCOLORS flags on the given header and colortable.
+*
+*
+\***************************************************************************/
 
 #line 3029
 VOID ChangeDibColors(
@@ -407,6 +454,28 @@ ChangeColor:
         }
     }
 }
+
+/***************************************************************************\
+* CopyDibHdr
+*
+* Copies and converts a DIB resource header
+*
+* Handles conversion of OLDICON, OLDCURSOR and BITMAPCOREHEADER
+* structures to BITMAPINFOHEADER headers.
+*
+* Note: fSingleHeightMasks is set for OLDICON and OLDCURSOR formats.
+*       This identifies that a monochrome AND/Color mask
+*       is NOT double height as it is in the newer formats.
+*
+* NOTE:  On the off chance that LR_LOADTRANSPARENT is used, we want to
+*     copy a DWORD of the bits.  Since DIB bits are DWORD aligned, we know
+*     at least a DWORD is there, even if the thing is a 1x1 mono bmp.
+*
+* The returned buffer is allocated in this function and needs to be
+* freed by the caller.
+*
+* 22-Oct-1995 SanfordS  Revised
+\***************************************************************************/
 
 #line 3355
 LPBITMAPINFOHEADER CopyDibHdr(
@@ -527,6 +596,20 @@ LPBITMAPINFOHEADER CopyDibHdr(
 
 }
 
+/***************************************************************************\
+* Convert1BppToMonoBitmap
+*
+* This routine converts a 1bpp bitmap to a true monochrome surface.  This
+* is done for bitmaps which need to do foreground/background color matching
+* at output time.  Otherwise, a 1bpp will just match to its palette.
+*
+* NOTE: This routine deletes the original bitmap if successful.  If failure
+*       we'll return the original bitmap.
+*
+* History:
+* 17-Apr-1996 ChrisWil  Created
+\***************************************************************************/
+
 #line 1513
 HBITMAP Convert1BppToMonoBitmap(
     HDC     hdcSrc,
@@ -570,6 +653,15 @@ HBITMAP Convert1BppToMonoBitmap(
 
     return hbmMono;
 }
+
+/***************************************************************************\
+* CreateScreenBitmap
+*
+* This routine creates a screen bitmap.  We use the CreateDIBitmap call
+* to do compatible color-matching with Win95.  Also, note that this
+* routine takes in WORD aligned bits.
+*
+\***************************************************************************/
 
 #line 1565
 HBITMAP CreateScreenBitmap(
@@ -722,6 +814,15 @@ HBITMAP CreateScreenBitmap(
 
     return hbm;
 }
+
+/***************************************************************************\
+* BitmapFromDIB
+*
+* Creates a bitmap-handle from a DIB-Spec.  This function supports the
+* LR_CREATEDIBSECTION flag, sets proper color depth, and stretches the
+* DIBs as requested.
+*
+\***************************************************************************/
 
 #line 2792
 HBITMAP BitmapFromDIB(
@@ -917,6 +1018,25 @@ HBITMAP BitmapFromDIB(
     return hbmpNew;
 }
 
+/***************************************************************************\
+* ConvertDIBBitmap
+*
+* This takes a BITMAPCOREHEADER, OLDICON, OLDCURSOR or BITMAPINFOHEADER DIB
+* specification and creates a physical object from it.
+* Handles Color fixups, DIB sections, color depth, and stretching options.
+*
+* Passes back: (if lplpbih is not NULL)
+*   lplpbih = copy of given header converted to BITMAPINFOHEADER form.
+*   lplpBits = pointer to next mask bits, or NULL if no second mask.
+*   Caller must free lplpbih returned.
+*
+* If lplpBits is not NULL and points to a non-NULL value, it supplies
+* the location of the DIB bits allowing the header to be from a different
+* location.
+*
+* 04-Oct-1995 SanfordS  Recreated.
+\***************************************************************************/
+
 #line 3488
 HBITMAP ConvertDIBBitmap(
     IN  UPBITMAPINFOHEADER           upbih,
@@ -1043,6 +1163,12 @@ HBITMAP ConvertDIBBitmap(
 
 
 /* DIVERGENCE(OPENNT-HOST-033): other original resource owners omitted. */
+
+/***************************************************************************\
+* WOWLoadBitmapA
+*
+*
+\***************************************************************************/
 
 #line 3954
 HBITMAP WOWLoadBitmapA(

@@ -46,6 +46,7 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
+
 #line 50
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #line 51

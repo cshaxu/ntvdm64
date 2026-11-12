@@ -1,0 +1,13 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+  "before_sha256": "7f78d307471884e2eb1fa60b39670d988261f02b3c0b6f8065fd63024db5f6ee",
+  "after_sha256": "fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b",
+  "original_sha256": "fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b",
+  "logical_line_mismatches": [],
+  "decision": "restored-original-bytes",
+  "evidence": [
+    "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "src/mvdm-host/softpc.new/host/src/nt_wcom.c"
+  ],
+  "limits": "No runtime or branch-hit claim; exact byte restoration and source-derived identity-line proof."
+}

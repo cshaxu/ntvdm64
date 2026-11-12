@@ -1,0 +1,31 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+  "original_sha256": "d2dae26e4766c2567225cb6bfc8147b4e80955b4ca49dcaf97b6193e7067a8e2",
+  "before_sha256": "b6539c0df34096ed6a3a2935f2d905ff01acb0d02586218c97c40f764a33ef53",
+  "current_sha256": "f4b570b778fc22b1f42ab7e4327183e87aab99c9630d197f1a0bba760089857d",
+  "status": "difference classification complete; no functional remediation required by these entries",
+  "decisions": [
+    "Keep original mnemonic-aware extent algorithm with shared native GDI and allocation bindings; no second text engine.",
+    "Keep checked inputs and dynamically sized cch+1 scratch at length>=255; preserve zero size on invalid/allocation failure.",
+    "Keep one finally freeing heap scratch and preserving leaf LastError; let exception propagate.",
+    "Keep original unprefixed/prefixed measurement selection and TRUE return after GDI invocation; do not casually propagate native BOOL."
+  ],
+  "counter_review": [
+    "No need to import native GDI implementation into MVDM closure.",
+    "Do not restore fixed capacity based on historical comment; reached callers accept variable length. No truncating second path needed.",
+    "Injected exception proves cleanup mechanism, not frequency in production; native FALSE remains original behavior.",
+    "Changing FALSE propagation alone would not fix callers; genuine native extent failure behavior requires whole caller chain, not mirror-only fallback."
+  ],
+  "evidence": [
+    "src/wow32-dll/include/control-drawing/precomp.h;btnctl.c:461,865;mngrayc.c:220",
+    "test/adapter-mvdm-host-out/wow/wow_text_measure_failure_fixture.c:53-80;wow_control_string_fixture.c mnemonic_extent_contract",
+    "wow_text_measure_failure_fixture.c:68-73;src/wow32-dll/source/ntuser_rtl_compat.c",
+    "btnctl.c:407,436,444,461,488,865;mngrayc.c:220;wow_text_measure_failure_fixture.c:47"
+  ],
+  "entries_added": 4,
+  "format_sites": 3,
+  "limits": [
+    "No fresh build/runtime.",
+    "Existing fixture scope is mechanics, not complete guest acceptance."
+  ]
+}

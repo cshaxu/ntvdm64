@@ -143,6 +143,7 @@ host_reset()
     // on x86 needed now, for fullscreen switch notification.
     //
     ResumeThread(ThreadInfo.HeartBeat.Handle);
+
 #ifdef MONITOR
 #line 133
 #error Excluded unsupported monitor ICA initialization wait
@@ -272,6 +273,7 @@ void  host_applInit(int argc,char *argv[])
     }
     else if (StreamIoSwitchOn)
 	    enable_stream_io();
+
     /*
      * Get a handle to the main thread so it can be suspended during
      * hand-shaking.

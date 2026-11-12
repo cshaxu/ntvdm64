@@ -1,0 +1,175 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+  "original_sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+  "before_sha256": "06c3981b2cd467926496c6d71fa8e238d4ff689e591f68130041309f46a0466f",
+  "current_sha256": "5082e858a1615a569d626e709cf85f10b2a248390a087471ea14dcb78a281855",
+  "review_complete": true,
+  "register_entries": 12,
+  "changes": [
+    {
+      "original_start": 6,
+      "original_count": 1,
+      "current_start": 6,
+      "current_count": 1,
+      "original": [
+        "#include <ntdddisk.h>"
+      ],
+      "current": [
+        ""
+      ]
+    },
+    {
+      "original_start": 10,
+      "original_count": 0,
+      "current_start": 11,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#include <mvdm_guest_location.h>",
+        "#include <mvdm_command_guest_state.h>"
+      ]
+    },
+    {
+      "original_start": 233,
+      "original_count": 1,
+      "current_start": 237,
+      "current_count": 3,
+      "original": [
+        "WORD\t    * pFDAccess = 0;"
+      ],
+      "current": [
+        "/* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to",
+        " * the DOS current-PDB value.  Read that scalar through the session lease. */",
+        "extern mvdm_guest_location current_pdb_location;"
+      ]
+    },
+    {
+      "original_start": 235,
+      "original_count": 1,
+      "current_start": 242,
+      "current_count": 4,
+      "original": [
+        "extern\t    USHORT * pusCurrentPDB;"
+      ],
+      "current": [
+        "static BOOL nt_fdisk_current_pdb(PUSHORT currentPdb)",
+        "{",
+        "    return mvdm_guest_location_read_u16(&current_pdb_location, currentPdb);",
+        "}"
+      ]
+    },
+    {
+      "original_start": 402,
+      "original_count": 0,
+      "current_start": 413,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT  currentPdb;"
+      ]
+    },
+    {
+      "original_start": 405,
+      "original_count": 1,
+      "current_start": 418,
+      "current_count": 3,
+      "original": [
+        "    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE))"
+      ],
+      "current": [
+        "    if (!nt_fdisk_current_pdb(&currentPdb))",
+        "\treturn 0;",
+        "    if (get_fdisk_handle(fdisk_data, currentPdb, FALSE))"
+      ]
+    },
+    {
+      "original_start": 422,
+      "original_count": 0,
+      "current_start": 438,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT  currentPdb;"
+      ]
+    },
+    {
+      "original_start": 426,
+      "original_count": 1,
+      "current_start": 444,
+      "current_count": 3,
+      "original": [
+        "    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, TRUE)) {"
+      ],
+      "current": [
+        "    if (!nt_fdisk_current_pdb(&currentPdb))",
+        "\treturn 0;",
+        "    if (get_fdisk_handle(fdisk_data, currentPdb, TRUE)) {"
+      ]
+    },
+    {
+      "original_start": 447,
+      "original_count": 0,
+      "current_start": 468,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    USHORT currentPdb;"
+      ]
+    },
+    {
+      "original_start": 451,
+      "original_count": 1,
+      "current_start": 474,
+      "current_count": 3,
+      "original": [
+        "    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE)) {"
+      ],
+      "current": [
+        "    if (!nt_fdisk_current_pdb(&currentPdb))",
+        "\treturn FALSE;",
+        "    if (get_fdisk_handle(fdisk_data, currentPdb, FALSE)) {"
+      ]
+    },
+    {
+      "original_start": 486,
+      "original_count": 1,
+      "current_start": 512,
+      "current_count": 4,
+      "original": [
+        "\t(*(pFDAccess))--;"
+      ],
+      "current": [
+        "\t/* DIVERGENCE MVDM-HOST-DIV-111: update the original SCS word through its",
+        "\t * session-owned numeric location, preserving unsigned 16-bit wrap. */",
+        "\tif (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))",
+        "\t    return FALSE;"
+      ]
+    },
+    {
+      "original_start": 536,
+      "original_count": 1,
+      "current_start": 566,
+      "current_count": 10,
+      "original": [
+        "\t    (*(pFDAccess))++;"
+      ],
+      "current": [
+        "\t    /* DIVERGENCE MVDM-HOST-DIV-111: acquire the SCS counter only for",
+        "\t     * this update; do not publish a durable host pointer. */",
+        "\t    if (!mvdm_command_guest_state_add_fd_access(1u)) {",
+        "\t\tCloseHandle(fdisk_data->fdisk_fd);",
+        "\t\tfdisk_data->fdisk_fd = INVALID_HANDLE_VALUE;",
+        "\t\tfdisk_data->auto_locked = FALSE;",
+        "\t\tfdisk_data->owner_pdb = 0;",
+        "\t\tfdisk_open_count--;",
+        "\t\treturn FALSE;",
+        "\t    }"
+      ]
+    }
+  ],
+  "excluded_ranges": [],
+  "initial_review": "Complete 12-chunk review: original disk algorithm retained; numeric guest-location/SCS counter boundary replaces durable pointers. Restored indentation at one site.",
+  "counter_review": "Trace demSetDTALocation through fresh scalar lease; same-epoch SCS updates preserve modular uint16 arithmetic. Close failure newly skips host count decrement after handle retirement; acquisition rollback is required. Local current-PDB wrapper adds no policy. Original missing returns and DWORD buffer carrier are not introduced by these differences.",
+  "evidence": "Fresh scalar provider and SCS epoch copy inspected; t394_s4_command_scalar_state_fixture tests wrapping/expired state. Existing t236 fixture requires explicit disposable volume and does not initialize current numeric scalar ownership.",
+  "limits": "Ten retain, one wrapper simplification and one close failure correction; recommendations only, no functional implementation."
+}

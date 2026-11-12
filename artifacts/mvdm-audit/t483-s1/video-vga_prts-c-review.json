@@ -1,0 +1,948 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+  "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+  "current_sha256": "1cdb3c5b166953b8e75c9169e9ab8230c7576a4c17065c70da8851282f801b6c",
+  "review_complete": true,
+  "register_entries": 9,
+  "changes": [
+    {
+      "original_start": 371,
+      "original_count": 0,
+      "current_start": 371,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-067): declare original same-package EGA helpers",
+        " * at their consumers; historical C accepted implicit declarations. */",
+        "IMPORT void set_index_state IPT0();",
+        "IMPORT boolean in_index_state IPT0();",
+        ""
+      ]
+    },
+    {
+      "original_start": 583,
+      "original_count": 1,
+      "current_start": 591,
+      "current_count": 1,
+      "original": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,"
+      ],
+      "current": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,"
+      ]
+    },
+    {
+      "original_start": 593,
+      "original_count": 1,
+      "current_start": 601,
+      "current_count": 1,
+      "original": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,"
+      ],
+      "current": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,"
+      ]
+    },
+    {
+      "original_start": 603,
+      "original_count": 1,
+      "current_start": 611,
+      "current_count": 1,
+      "original": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,"
+      ],
+      "current": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,"
+      ]
+    },
+    {
+      "original_start": 613,
+      "original_count": 1,
+      "current_start": 621,
+      "current_count": 1,
+      "original": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,"
+      ],
+      "current": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,"
+      ]
+    },
+    {
+      "original_start": 627,
+      "original_count": 1,
+      "current_start": 635,
+      "current_count": 1,
+      "original": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,"
+      ],
+      "current": [
+        "\t\thost_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,"
+      ]
+    },
+    {
+      "original_start": 630,
+      "original_count": 0,
+      "current_start": 638,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "",
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-358): VGA CRTC bit 5 disables the cursor",
+        "\t * independently of its scan-line geometry. */",
+        "\tif (crt_controller.cursor_start.as_bfld.cursor_off)",
+        "\t\tset_cursor_visible(FALSE);"
+      ]
+    },
+    {
+      "original_start": 1411,
+      "original_count": 11,
+      "current_start": 1445,
+      "current_count": 2,
+      "original": [
+        "\t\t\t\t\t\tif (crt_controller.cursor_start.as_bfld.cursor_off)",
+        "\t\t\t\t\t\t\tset_cursor_visible(FALSE);",
+        "\t\t\t\t\t\telse",
+        "\t\t\t\t\t\t\tset_cursor_visible(TRUE);",
+        "",
+        "\t\t\t\t\t\tif (crt_controller.cursor_start.as_bfld.cursor_start != ",
+        "\t\t\t\t\t\t\t((CURSOR_START*)&new)->as_bfld.cursor_start)",
+        "\t\t\t\t\t\t{",
+        "\t\t\t\t\t\t\tcrt_controller.cursor_start.as.abyte = value;",
+        "\t\t\t\t\t\t}",
+        ""
+      ],
+      "current": [
+        "\t\t\t\t\t\t/* DIV-358: retain bit-only writes as well as geometry. */",
+        "\t\t\t\t\t\tcrt_controller.cursor_start.as.abyte = value;"
+      ]
+    },
+    {
+      "original_start": 2122,
+      "original_count": 0,
+      "current_start": 2149,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 372,
+      "original_count": 1,
+      "current_start": 379,
+      "current_count": 1,
+      "original": [
+        "#include \"hwvgaio.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 384,
+      "original_count": 6,
+      "current_start": 393,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */ ",
+        "#include \"SOFTPC_VGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 564,
+      "original_count": 1,
+      "current_start": 571,
+      "current_count": 1,
+      "original": [
+        "LOCAL VOID\tdo_new_cursor IFN0()"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 702,
+      "original_count": 1,
+      "current_start": 717,
+      "current_count": 1,
+      "original": [
+        "\tCpu_define_outb(EGA_GC_ADAP_INDEX,_vga_gc_outb_index);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 860,
+      "original_count": 1,
+      "current_start": 877,
+      "current_count": 1,
+      "original": [
+        "\tset_screen_limit(0x8000);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 870,
+      "original_count": 1,
+      "current_start": 889,
+      "current_count": 1,
+      "original": [
+        "\tset_screen_split(511);\t/* make sure there is no split screen to start with ! */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1016,
+      "original_count": 6,
+      "current_start": 1037,
+      "current_count": 1,
+      "original": [
+        "\tif (value > 4)",
+        "\t{",
+        "\t\t/* a bad port index value, so ignore any data sent to it */",
+        "\t\tio_redefine_outb(EGA_SEQ_ADAP_DATA,vga_seq_dummy_outb);",
+        "\t\treturn;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1226,
+      "original_count": 1,
+      "current_start": 1245,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1235,
+      "original_count": 1,
+      "current_start": 1256,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1254,
+      "original_count": 1,
+      "current_start": 1277,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1263,
+      "original_count": 1,
+      "current_start": 1288,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1272,
+      "original_count": 1,
+      "current_start": 1299,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1281,
+      "original_count": 1,
+      "current_start": 1310,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1290,
+      "original_count": 1,
+      "current_start": 1321,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tif (crtc_0_7_protect == FALSE)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1346,
+      "original_count": 1,
+      "current_start": 1379,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tcrt_controller.crtc_overflow.as.abyte = value;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2157,
+      "original_count": 5,
+      "current_start": 2187,
+      "current_count": 1,
+      "original": [
+        "#ifdef C_VID",
+        "\tGlue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);",
+        "#else",
+        "\tCpu_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);\t",
+        "#endif /* C_VID */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2198,
+      "original_count": 4,
+      "current_start": 2230,
+      "current_count": 1,
+      "original": [
+        "\t\twrite_state.bp = 0;",
+        "\t\tsetVideowrstate(EGA_CPU.ega_state.mode_0.lookup);",
+        "\t\tEGA_CPU.fun_or_protection = (graphics_controller.data_rotate.as.abyte != 0);",
+        "\t\tega_write_routines_update(BIT_PROT);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2208,
+      "original_count": 4,
+      "current_start": 2240,
+      "current_count": 1,
+      "original": [
+        "#ifndef A2CPU",
+        "\t\t/* Alter the function table used by assembler ega_gc_index */",
+        "\t\tega_gc_regs_cpu[8] = FAST_FUNC_ADDR(_ega_gc_outb_mask_ff);",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2217,
+      "original_count": 1,
+      "current_start": 2249,
+      "current_count": 1,
+      "original": [
+        "\t\tCpu_define_outb(EGA_GC_ADAP_DATA,_ega_gc_outb_mask_ff);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2248,
+      "original_count": 4,
+      "current_start": 2283,
+      "current_count": 1,
+      "original": [
+        "\t\twrite_state.bp = 1;",
+        "\t\tsetVideowrstate(EGA_CPU.ega_state.mode_0.lookup);",
+        "\t\tEGA_CPU.fun_or_protection = TRUE;",
+        "\t\tega_write_routines_update(BIT_PROT);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2258,
+      "original_count": 4,
+      "current_start": 2293,
+      "current_count": 1,
+      "original": [
+        "#ifndef A2CPU",
+        "\t\t/* Alter the function table used by assembler ega_gc_index */",
+        "\t\tega_gc_regs_cpu[8] = FAST_FUNC_ADDR(_ega_gc_outb_mask);",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2267,
+      "original_count": 1,
+      "current_start": 2302,
+      "current_count": 1,
+      "original": [
+        "\t\tCpu_define_outb(EGA_GC_ADAP_DATA,_ega_gc_outb_mask);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2347,
+      "original_count": 5,
+      "current_start": 2385,
+      "current_count": 1,
+      "original": [
+        "#define IPSTAT1_STATE_0\t\t(4)\t\t\t/* End of state 0, ms */",
+        "#define IPSTAT1_STATE_1\t\t(IPSTAT1_STATE_0 + 9)\t/* End of state 1, ms */",
+        "#define IPSTAT1_STATE_2\t\t(IPSTAT1_STATE_1 + 4)\t/* End of state 2, ms */",
+        "#define IPSTAT1_STATE_3\t\t(IPSTAT1_STATE_2 + 3)\t/* End of state 3, ms */",
+        "#define IPSTAT1_CYCLE_TIME\tIPSTAT1_STATE_3\t\t/* Cycle time, ms */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2363,
+      "original_count": 13,
+      "current_start": 2400,
+      "current_count": 1,
+      "original": [
+        "/* Silly programs (especially editors) that are concerned that they might ",
+        " * be running on CGA's will read this port like crazy before each screen",
+        " * access. This frig catches the common case:",
+        " *     in",
+        " *     test al,80",
+        " *     j{e,ne} back to the in",
+        " * and moves IP to beyond the test. So far this hasn't broken anything(!!)",
+        " * but has made good speedups in a variety of apps.",
+        " */",
+        "   sys_addr off;",
+        "   word cs, ip;",
+        "   ULONG dwat;",
+        "   IMPORT word getCS(), getIP();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2383,
+      "original_count": 11,
+      "current_start": 2411,
+      "current_count": 1,
+      "original": [
+        "    cs = getCS();",
+        "    ip = getIP();",
+        "    off = (cs << 4) + ip;",
+        "    dwat = sas_dw_at(off);",
+        "    if (dwat == 0xfb7401a8 || dwat == 0xfb7501a8)",
+        "    {",
+        "\tip += 4;",
+        "\tsetIP(ip);",
+        "\t*value = 5;\t/* anything really */",
+        "    \treturn;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2401,
+      "original_count": 1,
+      "current_start": 2422,
+      "current_count": 1,
+      "original": [
+        "    set_index_state();\t/* Initialize the Attribute register flip-flop (EGA tech ref, p 56) */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2409,
+      "original_count": 1,
+      "current_start": 2432,
+      "current_count": 1,
+      "original": [
+        "   CurrTime = host_get_count_ms();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2425,
+      "original_count": 3,
+      "current_start": 2450,
+      "current_count": 1,
+      "original": [
+        "",
+        "    cycles = host_get_time_ms() % IPSTAT1_CYCLE_TIME;",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2455,
+      "original_count": 100,
+      "current_start": 2481,
+      "current_count": 1,
+      "original": [
+        "",
+        "GLOBAL VOID\tvga_ipstat1_inb IFN2(io_addr,port,half_word *,value)",
+        "{",
+        "",
+        "\t/*",
+        "\t * The whole of this routine has been nicked from the cga without modification",
+        "\t * The s_lengths array should probably be altered for the ega timings, and somewhere",
+        "\t * an interrupt should be fired off.",
+        "\t */",
+        "",
+        "\tSAVED TINY sub_state = 0;\t/* sub state for ega state 2 */",
+        "",
+        "     SAVED ULONG gmfudge = 17; /* Random number seed for pseudo-random",
+        "\t\t\t\t\t\tbitstream generator to give the state",
+        "\t\t\t\t\t\tlengths below that 'genuine' feel to",
+        "\t\t\t\t\t\tprogs that require it! */",
+        "     FAST ULONG h;",
+        "",
+        "    /*",
+        "     * relative 'lengths' of each state. State 2 is *3 as it has 3 sub states",
+        "     */",
+        "",
+        "\tSAVED TINY s_lengths[] = { 8, 18, 8, 6 };",
+        "",
+        "",
+        "#ifdef PROD",
+        "\tUNUSED(port);",
+        "#endif",
+        "    note_entrance2(\"vga_ipstat1_inb(%x,%x)\", port, value);",
+        "",
+        "#ifdef V7VGA",
+        "\tattribute_controller.address.as_bfld.index_state = 0;",
+        "#else",
+        "    set_index_state();\t/* Initialize the Attribute register flip-flop (EGA tech ref, p 56) */",
+        "#endif /* V7VGA */",
+        "",
+        "    vga_ip0_state_count --;\t/* attempt relative 'timings' */",
+        "    switch (vga_ip0_state) {",
+        "",
+        "    case 0:",
+        "\tif (vga_ip0_state_count == 0) {\t/* change to next state ? */",
+        "            h = gmfudge << 1;",
+        "            gmfudge = (h&0x80000000) ^ (gmfudge & 0x80000000)? h|1 : h;",
+        "\t    vga_ip0_state_count = s_lengths[1] + (gmfudge & 3);",
+        "\t    vga_ip0_state = 1;",
+        "\t}",
+        "\tinput_status_register_zero.as_bfld.crt_interrupt = 0;\t/* = !VS */",
+        "\t*value = 0x05;",
+        "\tbreak;",
+        "",
+        "    case 1:",
+        "\tif (vga_ip0_state_count == 0) {\t/* change to next state ? */",
+        "            h = gmfudge << 1;",
+        "            gmfudge = (h&0x80000000) ^ (gmfudge & 0x80000000)? h|1 : h;",
+        "\t    vga_ip0_state_count = s_lengths[2] + (gmfudge & 3);",
+        "\t    vga_ip0_state = 2;",
+        "\t    sub_state = 2;",
+        "\t}",
+        "\tswitch (sub_state) {\t/* cycle through 0,0,1 sequence */",
+        "\tcase 0:\t\t/* to represent DE toggling */",
+        "\t    *value = 0x04;",
+        "\t    sub_state = 1;",
+        "\t    break;",
+        "\tcase 1:",
+        "\t    *value = 0x04;",
+        "\t    sub_state = 2;",
+        "\t    break;",
+        "\tcase 2:",
+        "\t    *value = 0x05;",
+        "\t    sub_state = 0;",
+        "\t    break;",
+        "        }",
+        "\tinput_status_register_zero.as_bfld.crt_interrupt = 0;\t/* = !VS */",
+        "\tbreak;",
+        "",
+        "    case 2:",
+        "\tif (vga_ip0_state_count == 0) {\t/* change to next state ? */",
+        "            h = gmfudge << 1;",
+        "            gmfudge = (h&0x80000000) ^ (gmfudge & 0x80000000)? h|1 : h;",
+        "\t    vga_ip0_state_count = s_lengths[3] + (gmfudge & 3);",
+        "\t    vga_ip0_state = 3;",
+        "\t}",
+        "\t*value = 0x05;",
+        "\tinput_status_register_zero.as_bfld.crt_interrupt = 0;\t/* = !VS */",
+        "\tbreak;",
+        "",
+        "    case 3:",
+        "\tif (vga_ip0_state_count == 0) {\t/* wrap back to first state */",
+        "            h = gmfudge << 1;",
+        "            gmfudge = (h&0x80000000) ^ (gmfudge & 0x80000000)? h|1 : h;",
+        "\t    vga_ip0_state_count = s_lengths[0] + (gmfudge & 3);",
+        "\t    vga_ip0_state = 0;",
+        "\t}",
+        "\tinput_status_register_zero.as_bfld.crt_interrupt = 1;\t/* = !VS */",
+        "\t*value = 0x0d;",
+        "\tbreak;",
+        "    }",
+        "    note_entrance1(\"returning %x\",*value);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 2624,
+      "original_count": 1,
+      "current_start": 2555,
+      "current_count": 1,
+      "original": [
+        "\tif ( in_index_state() ) {"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2651,
+      "original_count": 1,
+      "current_start": 2584,
+      "current_count": 1,
+      "original": [
+        "\t\tattribute_controller.address.as.abyte = value;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3001,
+      "original_count": 8,
+      "current_start": 2943,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * There is no way of obtaining the DAC read address via a port access",
+        " * (that we know of). Thus save/restore stuff etc needs this interface.",
+        " */",
+        "half_word get_vga_DAC_rd_addr()",
+        "{",
+        "    return DAC_rd_addr;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3063,
+      "original_count": 203,
+      "current_start": 3001,
+      "current_count": 1,
+      "original": [
+        "/*(",
+        " *\tfunction\t:\tmapRealIOPorts( )",
+        " *",
+        " *\tpurpose\t\t:\tmapping of real io functions for HW",
+        " *\t\t\t\tvga on ccpu",
+        " *",
+        " *\tinputs\t\t:\tnone",
+        " *\toutputs\t\t:\tnone",
+        " *\treturns\t\t:\tvoid",
+        " *\tglobals\t\t:\tnone",
+        " *\t",
+        " *\t",
+        ")*/",
+        "",
+        "void",
+        "mapRealIOPorts IFN0( )",
+        "{",
+        "\talways_trace0(\"mapping vga ports to _real_ IN/OUT\");",
+        "\t/*",
+        "\t * Define sequencer's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_SEQ_ADAP_INDEX, hostRealOUTB );",
+        "\tio_define_outb(EGA_SEQ_ADAP_DATA, hostRealOUTB );",
+        "        io_define_inb(EGA_SEQ_ADAP_INDEX, hostRealINB );",
+        "        io_define_inb(EGA_SEQ_ADAP_DATA, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define CRTC's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_CRTC_ADAPTOR, hostRealOUTB );",
+        "\tio_define_inb(EGA_CRTC_ADAPTOR, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define Graphics Controller's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_GC_ADAP_INDEX, hostRealOUTB );",
+        "\tCpu_define_outb(EGA_GC_ADAP_INDEX, NULL );",
+        "",
+        "\tio_define_outb(EGA_GC_ADAP_DATA, hostRealOUTB );",
+        "\tCpu_define_outb(EGA_GC_ADAP_DATA,NULL);",
+        "",
+        "\tio_define_inb(EGA_GC_ADAP_INDEX, hostRealINB );",
+        "\tio_define_inb(EGA_GC_ADAP_DATA, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define Attribute controller's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_AC_ADAPTOR, hostRealOUTB );",
+        "\tio_define_inb(EGA_AC_ADAPTOR, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define Miscellaneous register's port",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_MISC_ADAPTOR, hostRealOUTB );",
+        "\tio_define_inb(EGA_MISC_ADAPTOR, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define Feature controller's port",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_FEAT_ADAPTOR, hostRealOUTB );",
+        "\tio_define_inb(EGA_FEAT_ADAPTOR, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define Input Status Register 0 port",
+        "\t */",
+        "",
+        "\tio_define_inb(EGA_IPSTAT0_ADAPTOR, hostRealINB );",
+        "",
+        "\t/*",
+        "\t * Define Input Status Register 1 port",
+        "\t */",
+        "",
+        "\tio_define_inb(EGA_IPSTAT1_ADAPTOR, hostRealINB );",
+        "",
+        "        /*",
+        "         * Define VGA DAC register port",
+        "         */",
+        "        io_define_inb(VGA_DAC_INDEX_PORT, hostRealINB );",
+        "        io_define_outb(VGA_DAC_INDEX_PORT, hostRealOUTB );",
+        "        io_define_inb(VGA_DAC_DATA_PORT, hostRealINB );",
+        "        io_define_outb(VGA_DAC_DATA_PORT, hostRealOUTB );",
+        "",
+        "}",
+        "",
+        "",
+        "/*(",
+        " *\tfunction\t:\tmapEmulatedIOPorts( )",
+        " *",
+        " *\tpurpose\t\t:\tmapping of emulated io functions for HW",
+        " *\t\t\t\tvga on ccpu",
+        " *",
+        " *\tinputs\t\t:\tnone",
+        " *\toutputs\t\t:\tnone",
+        " *\treturns\t\t:\tvoid",
+        " *\tglobals\t\t:\tnone",
+        " *\t",
+        " *\t",
+        ")*/",
+        "",
+        "void",
+        "mapEmulatedIOPorts IFN0( )",
+        "{",
+        "\talways_trace0( \"Mapping vga ports to Emulation\" ); ",
+        "",
+        "\t/*",
+        "\t * Define sequencer's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_SEQ_ADAP_INDEX,vga_seq_outb_index);",
+        "\tio_define_outb(EGA_SEQ_ADAP_DATA,ega_seq_reset);",
+        "        io_define_inb(EGA_SEQ_ADAP_INDEX,vga_seq_inb);",
+        "        io_define_inb(EGA_SEQ_ADAP_DATA,vga_seq_inb);",
+        "\tio_connect_port(EGA_SEQ_INDEX,EGA_SEQ_ADAP_INDEX,IO_READ_WRITE);",
+        "\tio_connect_port(EGA_SEQ_DATA,EGA_SEQ_ADAP_DATA,IO_READ_WRITE);",
+        "",
+        "\t/*",
+        "\t * Define CRTC's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_CRTC_ADAPTOR,vga_crtc_outb);",
+        "\tio_define_inb(EGA_CRTC_ADAPTOR,vga_crtc_inb);",
+        "\tio_connect_port(EGA_CRTC_INDEX,EGA_CRTC_ADAPTOR,IO_READ_WRITE);",
+        "\tio_connect_port(EGA_CRTC_DATA,EGA_CRTC_ADAPTOR,IO_READ_WRITE);",
+        "",
+        "\t/*",
+        "\t * Define Graphics Controller's ports",
+        "\t */",
+        "",
+        "\tvga_gc_outb_index_addr = (UTINY *) &graphics_controller.address;",
+        "",
+        "\tio_define_outb(EGA_GC_ADAP_INDEX,vga_gc_outb_index);",
+        "\tCpu_define_outb(EGA_GC_ADAP_INDEX,_vga_gc_outb_index);",
+        "",
+        "\tio_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);",
+        "\tCpu_define_outb(EGA_GC_ADAP_DATA,NULL);",
+        "",
+        "\tio_define_inb(EGA_GC_ADAP_INDEX,vga_gc_inb);",
+        "\tio_define_inb(EGA_GC_ADAP_DATA,vga_gc_inb);",
+        "",
+        "\tio_connect_port(EGA_GC_INDEX,EGA_GC_ADAP_INDEX,IO_READ_WRITE);",
+        "\tio_connect_port(EGA_GC_DATA,EGA_GC_ADAP_DATA,IO_READ_WRITE);",
+        "",
+        "\t/*",
+        "\t * Define Attribute controller's ports",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_AC_ADAPTOR,vga_ac_outb);",
+        "\tio_define_inb(EGA_AC_ADAPTOR,vga_ac_inb);",
+        "\tio_connect_port(EGA_AC_INDEX_DATA,EGA_AC_ADAPTOR,IO_READ_WRITE);",
+        "\tio_connect_port(EGA_AC_SECRET,EGA_AC_ADAPTOR,IO_READ);",
+        "",
+        "\t/*",
+        "\t * Define Miscellaneous register's port",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_MISC_ADAPTOR,vga_misc_outb);",
+        "\tio_define_inb(EGA_MISC_ADAPTOR,vga_misc_inb);",
+        "\tio_connect_port(EGA_MISC_REG,EGA_MISC_ADAPTOR,IO_WRITE);",
+        "\tio_connect_port(VGA_MISC_READ_REG,EGA_MISC_ADAPTOR,IO_READ);",
+        "",
+        "\t/*",
+        "\t * Define Feature controller's port",
+        "\t */",
+        "",
+        "\tio_define_outb(EGA_FEAT_ADAPTOR,vga_feat_outb);",
+        "\tio_define_inb(EGA_FEAT_ADAPTOR,vga_feat_inb);",
+        "\tio_connect_port(EGA_FEAT_REG,EGA_FEAT_ADAPTOR,IO_WRITE);",
+        "\tio_connect_port(VGA_FEAT_READ_REG,EGA_FEAT_ADAPTOR,IO_READ);",
+        "",
+        "\t/*",
+        "\t * Define Input Status Register 0 port",
+        "\t */",
+        "",
+        "\tio_define_inb(EGA_IPSTAT0_ADAPTOR,vga_ipstat0_inb);",
+        "\tio_connect_port(EGA_IPSTAT0_REG,EGA_IPSTAT0_ADAPTOR,IO_READ);",
+        "",
+        "\t/*",
+        "\t * Define Input Status Register 1 port",
+        "\t */",
+        "",
+        "\tio_define_inb(EGA_IPSTAT1_ADAPTOR,vga_ipstat1_inb);",
+        "\tio_connect_port(EGA_IPSTAT1_REG,EGA_IPSTAT1_ADAPTOR,IO_READ);",
+        "",
+        "        /*",
+        "         * Define VGA DAC register port",
+        "         */",
+        "        io_define_inb(VGA_DAC_INDEX_PORT,vga_dac_inb);",
+        "        io_define_outb(VGA_DAC_INDEX_PORT,vga_dac_outb);",
+        "        io_connect_port(VGA_DAC_MASK,VGA_DAC_INDEX_PORT,IO_READ_WRITE);",
+        "        io_connect_port(VGA_DAC_RADDR,VGA_DAC_INDEX_PORT,IO_READ_WRITE);",
+        "        io_connect_port(VGA_DAC_WADDR,VGA_DAC_INDEX_PORT,IO_READ_WRITE);",
+        "        io_define_inb(VGA_DAC_DATA_PORT,vga_dac_data_inb);",
+        "        io_define_outb(VGA_DAC_DATA_PORT,vga_dac_data_outb);",
+        "        io_connect_port(VGA_DAC_DATA,VGA_DAC_DATA_PORT,IO_READ_WRITE);",
+        "",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3270,
+      "original_count": 43,
+      "current_start": 3009,
+      "current_count": 1,
+      "original": [
+        "",
+        "/* Get line compare value */",
+        "",
+        "LONG vga_get_line_compare  IFN0()",
+        "",
+        "    {",
+        "    LONG\t\treturn_value;",
+        "",
+        "    return_value = crt_controller.line_compare;",
+        "    if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 != 0)",
+        "\treturn_value += 0x100;",
+        "    return (return_value);",
+        "    }\t\t\t/* ega_get_line_compare */",
+        "",
+        "/* Get maximum scan lines value */",
+        "",
+        "LONG vga_get_max_scan_lines  IFN0()",
+        "",
+        "    {",
+        "    return (crt_controller.maximum_scan_line.as_bfld.maximum_scan_line);",
+        "    }\t\t\t/* ega_get_max_scan_lines */",
+        "",
+        "/* Set line compare value */",
+        "",
+        "VOID vga_set_line_compare  IFN1(LONG,lcomp_val)",
+        "",
+        "/* lcomp_val ----> new value for line compare */",
+        "",
+        "    {",
+        "    CRTC_OVERFLOW\tnew_overflow;",
+        "",
+        "    new_overflow.as.abyte = crt_controller.crtc_overflow.as.abyte;",
+        "    if (lcomp_val >= 0x100)",
+        "\tnew_overflow.as_bfld.line_compare_bit_8 = 1;",
+        "    else",
+        "\tnew_overflow.as_bfld.line_compare_bit_8 = 0;",
+        "",
+        "    outb(EGA_CRTC_INDEX, 7);",
+        "    outb(EGA_CRTC_DATA, new_overflow.as.abyte);",
+        "    outb(EGA_CRTC_INDEX, 24);",
+        "    outb(EGA_CRTC_DATA, lcomp_val & 0xff);",
+        "    }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Nine non-exclusion chunks: two declaration additions, five cursor callback argument changes, final visibility override, and unconditional cursor-start register storage; 34 excluded chunks.",
+  "counter_review": "Original handler could discard bit5-only writes and do_new_cursor geometry branches overwrite visibility. Retain register storage and final hide override. However current nt_cursor_size_changed explicitly ignores both arguments, so five modified arguments are not required for this host fix. Preserve callback calls and visibility fix while restoring arguments; do not claim an unselected host provider has equivalent needs.",
+  "evidence": "vga_prts.c:571-650 do_new_cursor; :1439-1450 CRTC A storage; vgaports.h:74-84 separates 5-bit scanline and bit5 off. gfx_upd.h:212-214 dispatch; nt_reset.c:203 selects nt_video_funcs; nt_graph.c:354 callback and :1198 ignores lo/hi. ega_prts.c:1074/1097 typed helper definitions; ega_writ.c:235 Glue_set_vid_wrt_ptrs definition.",
+  "limits": "Five functional argument restorations recommended, not applied; no runtime claims."
+}

@@ -1,0 +1,113 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+  "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+  "current_sha256": "aa27cf44088c5331ebc5ab5f40254920cbfb321c10482bc024b289a9dd2a3412",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 218,
+      "original_count": 6,
+      "current_error_line": 219
+    },
+    {
+      "original_start": 382,
+      "original_count": 15,
+      "current_error_line": 380
+    },
+    {
+      "original_start": 1501,
+      "original_count": 1,
+      "current_error_line": 1487
+    },
+    {
+      "original_start": 1517,
+      "original_count": 19,
+      "current_error_line": 1505
+    },
+    {
+      "original_start": 1539,
+      "original_count": 1,
+      "current_error_line": 1511
+    },
+    {
+      "original_start": 1550,
+      "original_count": 2,
+      "current_error_line": 1524
+    },
+    {
+      "original_start": 1555,
+      "original_count": 1,
+      "current_error_line": 1530
+    },
+    {
+      "original_start": 1583,
+      "original_count": 1,
+      "current_error_line": 1562
+    },
+    {
+      "original_start": 1642,
+      "original_count": 1,
+      "current_error_line": 1623
+    },
+    {
+      "original_start": 1648,
+      "original_count": 2,
+      "current_error_line": 1631
+    },
+    {
+      "original_start": 1660,
+      "original_count": 2,
+      "current_error_line": 1645
+    },
+    {
+      "original_start": 1714,
+      "original_count": 1,
+      "current_error_line": 1700
+    },
+    {
+      "original_start": 1721,
+      "original_count": 1,
+      "current_error_line": 1709
+    },
+    {
+      "original_start": 1742,
+      "original_count": 1,
+      "current_error_line": 1732
+    },
+    {
+      "original_start": 1749,
+      "original_count": 1,
+      "current_error_line": 1741
+    },
+    {
+      "original_start": 1777,
+      "original_count": 1,
+      "current_error_line": 1771
+    },
+    {
+      "original_start": 1784,
+      "original_count": 1,
+      "current_error_line": 1780
+    },
+    {
+      "original_start": 1797,
+      "original_count": 1,
+      "current_error_line": 1795
+    },
+    {
+      "original_start": 1804,
+      "original_count": 1,
+      "current_error_line": 1804
+    },
+    {
+      "original_start": 1846,
+      "original_count": 14,
+      "current_error_line": 1849
+    }
+  ],
+  "initial_review": "Complete original/current diff; each removed body checked against immediate original conditional boundaries.",
+  "counter_review": "Every replacement contains only line/error directives; additions outside replacements are line directives. ANSI declarations and selected controller transfer/state logic remain original; BIGEND, JOKER, REAL_ROM, Macintosh and debug bodies are classified as exclusions, not new I/O logic.",
+  "limits": "No all-context exclusion or diagnostic-line certification and no new disk runtime validation."
+}

@@ -1,0 +1,41 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+  "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+  "current_sha256": "e1e43eba1db580fd62d1e5b979559a93349691153c90659dfcc4144dc2c82ae4",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "418",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "current_start": "207",
+      "current_count": "2",
+      "original_start": "208",
+      "original_count": "4",
+      "old_ids": "",
+      "classification": "target-stack-width",
+      "initial_review": "Outer RETF installs SP/ESP according to newly loaded SS width, not instruction operand size.",
+      "counter_review": "Original tpop operand width and immediate adjustment remain unchanged; set_current_SP uses GET_SS_AR_X after load_SS_cache. Common original helper avoids duplicating width logic.",
+      "disposition": "retain",
+      "evidence": "ret.c:175-225; c_stack.c:140-152; test/mvdm-host/ccpu_stack_transition_test.c:137-195; docs/etc/evidence/m0-t430-s2-softpc-repair-gate.md",
+      "limits": "Source/fixture review only; no fresh build/test or complete branch/line certification.",
+      "decision": "retain",
+      "change_plan": "Retain helper call; preserve validation before state commit and post-return byte_change_SP adjustment.",
+      "related_callers": "RETF LOWER_PRIVILEGE; load_SS_cache; set_current_SP; byte_change_SP",
+      "verification_required": "Existing stack-transition fixture operand/stack width cross-product, immediate adjustments, invalid SS and code-limit negatives; same-level controls.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 87,
+      "original_count": 5,
+      "current_start": 87,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Every whole-file textual difference classified; excluded bodies separately enumerated.",
+  "limits": "No functional remediation or fresh runtime verification."
+}

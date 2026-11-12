@@ -1,3 +1,13 @@
+/**************************************************************************\
+* Module Name: server.c
+*
+* Server support routines for the CSR stuff.  This basically performs the
+* startup/initialization for USER.
+*
+* Copyright (c) Microsoft Corp.  1990-1996 All Rights Reserved
+*
+\**************************************************************************/
+
 /* DIVERGENCE(OPENNT-HOST-090): retain original message tables/initializer;
  * omit the unrelated USER server. SharedAlloc binds their local storage. */
 #line 53
@@ -398,6 +408,22 @@ CONST WORD gawDefWindowSpecMsgs[] = {
 #line 597
     0
 };
+
+/***************************************************************************\
+* InitWindowMsgTables
+*
+* This function generates a bit-array lookup table from a list of messages.
+* The lookup table is used to determine whether the message needs to be
+* passed over to the server for handling or whether it can be handled
+* directly on the client.
+*
+* LATER: Some memory (a couple hundred bytes per process) could be saved
+*        by putting this in the shared read-only heap.
+*
+*
+* 27-Mar-1992 DarrinM   Created.
+* 06-Dec-1993 MikeKe    Added support for all of our window procs.
+\***************************************************************************/
 
 #line 896
 VOID InitWindowMsgTable(

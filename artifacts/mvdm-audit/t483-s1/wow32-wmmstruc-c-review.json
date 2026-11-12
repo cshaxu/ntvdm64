@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/wow32/wmmstruc.c",
+  "original_sha256": "af5f3e85909f195c283d4c2d275b07b995e44e448e0decb2ee6fb06764fa1cc4",
+  "current_sha256": "992629a1e93a0b558b1b5d052b855f96f56367ff138ac40494153ab977881221",
+  "decision": "delete",
+  "evidence": "Original substantive body entirely within literal #if 0 at LF 33-762, empty tail. Current source only precomp include, notices and excluded placeholder; no active converter body.",
+  "deleted_current_bytes": 1030,
+  "original_disabled_range": [
+    33,
+    762
+  ],
+  "implementation_status": "implemented-validation-pending"
+}

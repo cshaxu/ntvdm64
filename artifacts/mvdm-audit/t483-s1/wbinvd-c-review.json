@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+  "original_sha256": "61cc2d303ac4935f8dc024ead2c3020201a10d3a5b08403f65f0b130bb2a537d",
+  "current_sha256": "20771f7ca8afcd24dad998d17b0ad8c2113d7bd772f10210a7c730c3521660a0",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 35,
+      "original_count": 10,
+      "current_start": 36,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Complete textual comparison; non-excluded differences explicitly classified. No selected instruction algorithm changed in the four C files.",
+  "limits": "Necessity audit only; not full branch/line certification or new runtime validation."
+}

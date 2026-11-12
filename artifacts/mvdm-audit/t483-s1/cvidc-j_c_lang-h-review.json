@@ -1,0 +1,40 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+  "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+  "current_sha256": "f1fc8c6dbf5df7731ea2e28756dbfb16e504d58b81d8df4de4124d842f67eb3c",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "file_sequence": "510",
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "current_start": "35",
+      "current_count": "2",
+      "original_start": "35",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "provider-declaration",
+      "initial_review": "Generated rules call CrulesRuntimeError; ev_glue defines void(char *), so callers need its actual prototype.",
+      "counter_review": "Verified actual call sites and original provider signature. No new diagnostic behavior or failure policy is introduced by the declaration.",
+      "disposition": "retain",
+      "evidence": "j_c_lang.c:57,63; j_c_lang.h:35; ev_glue.c:99; sevid000.c:731,736",
+      "limits": "Source verification only; no fresh compile/runtime result.",
+      "decision": "retain",
+      "change_plan": "Keep matching standard/provider declaration; no wrapper or duplicate error implementation.",
+      "related_callers": "Original mask helper and generated C-VID rule error sites.",
+      "verification_required": "Selected compilation checks prototypes; invalid-rule diagnostics and normal rule fixture preserve existing behavior.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 43,
+      "original_count": 5,
+      "current_start": 47,
+      "current_count": 2
+    }
+  ],
+  "limits": "Necessity review only; no full line/exclusion certification or runtime claim."
+}

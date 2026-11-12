@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+  "original_sha256": "012bcdd28b9d105a6d4bf9c01bbdfa8ccf855910cb00119ba7b1c45884237f7f",
+  "current_sha256": "75392cd3538f20f0651e2e8bbd5c18942745f080cf035c6f7efefcdef8623f3d",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 29,
+      "original_count": 1,
+      "current_normalized_start": 29,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 37,
+      "original_count": 1,
+      "current_normalized_start": 37,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two alternate path-separator definitions excluded; retained source exact.",
+  "counter_review": "Original NTVDM backslash separator and user-supplied PATHSEP_CHAR outer guard unchanged. No new path normalization or host filesystem behavior.",
+  "limits": "Source contract classification only; no new compiled-context or runtime acceptance."
+}

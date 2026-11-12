@@ -1,0 +1,62 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+  "original_sha256": "b33dea4aa66b7713b651b259a37d7f993802f40c042514122b73580baec4f0df",
+  "current_sha256": "ad4c7aeb3dd736b89ae9d673057ab9169a41159e3ed4c223d81a96ee950eb2a8",
+  "excluded": [
+    {
+      "original_start": 53,
+      "original_count": 2,
+      "current_start": 55,
+      "original": [
+        "    if (ped->lpfnCharset)",
+        "        (int)(* ped->lpfnCharset)(ped, EDITINTL_CREATEMLSL);"
+      ],
+      "current": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "opening": "#ifdef SUPPORT_LPK",
+      "closing": "#endif"
+    },
+    {
+      "original_start": 123,
+      "original_count": 6,
+      "current_start": 127,
+      "original": [
+        "",
+        "        /*",
+        "         * Now send a backspace to deleted and save it in the undo buffer...",
+        "         */",
+        "        SLCharHandler(pped, VK_BACK);",
+        "        fUpdate = TRUE;"
+      ],
+      "current": "#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.",
+      "opening": "#ifdef NEVER",
+      "closing": "#else"
+    },
+    {
+      "original_start": 157,
+      "original_count": 1,
+      "current_start": 160,
+      "original": [
+        "        SLInsertText(ped, hDeletedText, cchDeleted, NULL);"
+      ],
+      "current": "#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.",
+      "opening": "#ifdef KOREA",
+      "closing": "#else"
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 56,
+      "original": 55,
+      "logical": 54
+    },
+    {
+      "current": 128,
+      "original": 129,
+      "logical": 124
+    }
+  ],
+  "initial_review": "Complete normalized comparison: 3 original conditional bodies replaced by #error; all retained code and conditional boundaries original-exact.",
+  "counter_review": "KOREA alternate caret/insertion calls and SUPPORT_LPK callbacks are excluded profile bodies, not removed generic functionality. NEVER undo block remains under original exclusion. No functional diff or whole-file deletion justified. Exclusion classification does not establish all-context reachability or correct diagnostic directives.",
+  "evidence": "Pinned OpenNT matching file; tools/build/New-T404S5Wow32ProviderNinja.ps1 EDIT provider cohort",
+  "limits": "Source comparison only; no new compiler or runtime evidence."
+}

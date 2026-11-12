@@ -1,0 +1,148 @@
+{
+  "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+  "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+  "current_sha256": "8ec3e57c97586a761f4411268765eca936610056d191a08e1d552ef9b4d8a338",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 369,
+      "original_count": 3,
+      "current_start": 370,
+      "current_count": 1,
+      "original": [
+        "                        NetpCopyWStrToStrDBCS(",
+        "                                (LPSTR) OutStructure,       // dest",
+        "                                (LPWSTR) InStructure);      // src"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 648,
+      "original_count": 8,
+      "current_start": 650,
+      "current_count": 1,
+      "original": [
+        "                    if( outUNICODE )",
+        "                    {",
+        "                        stringSize = STRLEN( (LPTSTR) stringPtr );",
+        "                    }",
+        "                    else",
+        "                    {",
+        "                        stringSize = NetpUnicodeToDBCSLen( stringPtr ) + 1;",
+        "                    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 753,
+      "original_count": 2,
+      "current_start": 751,
+      "current_count": 1,
+      "original": [
+        "                        NetpCopyWStrToStrDBCS( (LPSTR)*StringLocation,",
+        "                            (LPTSTR)stringPtr );"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1091,
+      "original_count": 1,
+      "current_start": 1091,
+      "current_count": 1,
+      "original": [
+        "                            stringSize = NetpUnicodeToDBCSLen( stringPtr )+1;"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1177,
+      "original_count": 2,
+      "current_start": 1180,
+      "current_count": 1,
+      "original": [
+        "                            NetpCopyWStrToStrDBCS( Source,",
+        "                                (LPTSTR)stringPtr );"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1270,
+      "original_count": 8,
+      "current_start": 1275,
+      "current_count": 1,
+      "original": [
+        "                    if( outUNICODE )",
+        "                    {",
+        "                        stringLength = STRLEN( (LPTSTR)stringPtr ) + 1;",
+        "                    }",
+        "                    else",
+        "                    {",
+        "                        stringLength = NetpUnicodeToDBCSLen( stringPtr ) + 1;",
+        "                    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1418,
+      "original_count": 2,
+      "current_start": 1419,
+      "current_count": 1,
+      "original": [
+        "                            NetpCopyWStrToStrDBCS( (LPSTR)*StringLocation,",
+        "                                stringPtr );"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 372,
+      "current": 371,
+      "logical": 370
+    },
+    {
+      "original": 656,
+      "current": 651,
+      "logical": 649
+    },
+    {
+      "original": 755,
+      "current": 752,
+      "logical": 754
+    },
+    {
+      "original": 1179,
+      "current": 1181,
+      "logical": 1178
+    },
+    {
+      "original": 1278,
+      "current": 1276,
+      "logical": 1271
+    },
+    {
+      "original": 1420,
+      "current": 1420,
+      "logical": 1419
+    }
+  ],
+  "evidence": [
+    "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "src/non-mvdm/ds/netapi/rap/convert.c"
+  ],
+  "limits": "Seven DBCS original bodies excluded; every retained normalized line matches original. No new runtime or all-context branch-hit evidence; this is exclusion-only diff classification, not certification of DBCS capability."
+}

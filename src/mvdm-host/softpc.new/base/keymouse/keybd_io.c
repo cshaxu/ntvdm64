@@ -1620,6 +1620,7 @@ void kb_setup_vectors(void)
    int10_seg    = KbdSeg;
    int10_caller = *pkio_table++;
    int10_vector = *pkio_table++;
+
    /*
    ** Address of data in keyboard.sys, Tim August 92.
    **

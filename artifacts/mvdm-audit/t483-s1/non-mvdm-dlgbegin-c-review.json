@@ -1,0 +1,305 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+  "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+  "before_sha256": "83b39c438d16306c1f8871585211466b37a11982158e6aee5eef1347b98cf94a",
+  "current_sha256": "09b5a77268835e633f174cba5bb6715d7dc9158374bd05f3ea3ac4a77133b838",
+  "changes": [
+    {
+      "original_start": 11,
+      "original_count": 0,
+      "current_start": 11,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-081): complete original client creator unit.",
+        " * Private precomp binds the admitted dialog/control dependency group.",
+        " * No template, font, shared-DS or creation algorithm is replaced here. */"
+      ]
+    },
+    {
+      "original_start": 189,
+      "original_count": 0,
+      "current_start": 193,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-081): retain child identity across notifications. */",
+        "    PWND pwndChild;"
+      ]
+    },
+    {
+      "original_start": 203,
+      "original_count": 0,
+      "current_start": 210,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-081): allocation has not transferred to PDLG yet. */",
+        "    HANDLE hEditDS;"
+      ]
+    },
+    {
+      "original_start": 562,
+      "original_count": 1,
+      "current_start": 573,
+      "current_count": 9,
+      "original": [
+        "    if (pwnd == NULL || !ValidateDialogPwnd(pwnd))"
+      ],
+      "current": [
+        "    if (pwnd == NULL || !ValidateDialogPwnd(pwnd)) {",
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "        /* DIVERGENCE(OPENNT-HOST-121): failed native/original promotion must",
+        "         * retire the already-created HWND; its menu is now window-owned. */",
+        "        if (pwnd != NULL) {",
+        "            NtUserDestroyWindow(hwnd);",
+        "            hMenu = NULL;",
+        "        }",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 564,
+      "original_count": 0,
+      "current_start": 584,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    }"
+      ]
+    },
+    {
+      "original_start": 600,
+      "original_count": 1,
+      "current_start": 622,
+      "current_count": 13,
+      "original": [
+        "    PDLG(pwnd)->lpfnDlg = lpfnDialog;"
+      ],
+      "current": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    /* DIVERGENCE(OPENNT-HOST-121): no competing procedure in original PDLG. */",
+        "    SetLastError(0);",
+        "    wow_dialog_host_set(hwnd, DWL_DLGPROC, (LONG)lpfnDialog,",
+        "        (fSCDLGFlags & SCDLG_ANSI) != 0);",
+        "    if (GetLastError()) {",
+        "        NtUserDestroyWindow(hwnd);",
+        "        hMenu = NULL; /* DestroyWindow owns its attached menu. */",
+        "        goto DeleteFontAndMenuAndFail;",
+        "    }",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 607,
+      "original_count": 2,
+      "current_start": 643,
+      "current_count": 3,
+      "original": [
+        "    if (fSCDLGFlags & SCDLG_ANSI)",
+        "        PDLG(pwnd)->flags |= DLGF_ANSI;"
+      ],
+      "current": [
+        "#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 645,
+      "original_count": 0,
+      "current_start": 685,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-081): resources already belong to PDLG. */",
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+      ]
+    },
+    {
+      "original_start": 750,
+      "original_count": 1,
+      "current_start": 793,
+      "current_count": 8,
+      "original": [
+        "                PDLG(pwnd)->hData = GetEditDS();"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-081): GlobalNotify may destroy the",
+        "                 * destination while the guest allocator is making room. */",
+        "                hEditDS = GetEditDS();",
+        "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {",
+        "                    if (hEditDS) ReleaseEditDS(hEditDS);",
+        "                    goto CreateDialogReturn;",
+        "                }",
+        "                PDLG(pwnd)->hData = hEditDS;"
+      ]
+    },
+    {
+      "original_start": 823,
+      "original_count": 0,
+      "current_start": 874,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-081): child creation can destroy its parent. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+      ]
+    },
+    {
+      "original_start": 838,
+      "original_count": 0,
+      "current_start": 892,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "            pwndChild = ValidateHwnd(hwnd2);",
+        "            if (!pwndChild) goto NoCreate;"
+      ]
+    },
+    {
+      "original_start": 848,
+      "original_count": 0,
+      "current_start": 905,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-081): never query a reused child. */",
+        "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;",
+        "                if (TestWF(pwndChild, WFDESTROYED) || (pwndChild->fnid & FNID_STATUS_BITS)) goto NoCreate;"
+      ]
+    },
+    {
+      "original_start": 853,
+      "original_count": 1,
+      "current_start": 914,
+      "current_count": 5,
+      "original": [
+        "            if (SendMessage(hwnd2, WM_GETDLGCODE, 0, 0L) & DLGC_DEFPUSHBUTTON) {"
+      ],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-081): query may release the result owner. */",
+        "            fSuccess = SendMessage(hwnd2, WM_GETDLGCODE, 0, 0L) & DLGC_DEFPUSHBUTTON;",
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;",
+        "            if (TestWF(pwndChild, WFDESTROYED) || (pwndChild->fnid & FNID_STATUS_BITS)) goto NoCreate;",
+        "            if (fSuccess) {"
+      ]
+    },
+    {
+      "original_start": 879,
+      "original_count": 0,
+      "current_start": 945,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-081): preserve the post-init legacy return. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CheckDialogAfterInit;"
+      ]
+    },
+    {
+      "original_start": 903,
+      "original_count": 1,
+      "current_start": 972,
+      "current_count": 4,
+      "original": [
+        "                xxxCheckDefPushButton(pwnd, hwndEditFirst, hwndNewFocus);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-081): focus callbacks may destroy. */",
+        "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CheckDialogAfterInit;",
+        "                if (!pwndT || (!TestWF(pwndT, WFDESTROYED) && !(pwndT->fnid & FNID_STATUS_BITS)))",
+        "                    xxxCheckDefPushButton(pwnd, hwndEditFirst, hwndNewFocus);"
+      ]
+    },
+    {
+      "original_start": 908,
+      "original_count": 1,
+      "current_start": 982,
+      "current_count": 3,
+      "original": [
+        "    if (!IsWindow(hwnd))"
+      ],
+      "current": [
+        "CheckDialogAfterInit:",
+        "    /* DIVERGENCE(OPENNT-HOST-081): IsWindow alone can see a replacement. */",
+        "    if (!IsWindow(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))"
+      ]
+    },
+    {
+      "original_start": 926,
+      "original_count": 1,
+      "current_start": 1003,
+      "current_count": 2,
+      "original": [
+        "        if (!IsWindow(hwnd))"
+      ],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-081): foreground callbacks can retire root. */",
+        "        if (!IsWindow(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))"
+      ]
+    },
+    {
+      "original_start": 935,
+      "original_count": 0,
+      "current_start": 1014,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-081): do not update a retired/reused HWND. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+      ]
+    },
+    {
+      "original_start": 946,
+      "original_count": 1,
+      "current_start": 1028,
+      "current_count": 3,
+      "original": [
+        "    if (!(fSCDLGFlags & SCDLG_NOREVALIDATE) && !RevalidateHwnd(hwnd)) {"
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-081): retain the original explicit WOW exemption. */",
+        "    if (!(fSCDLGFlags & SCDLG_NOREVALIDATE) &&",
+        "            (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))) {"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 283,
+      "original_count": 3,
+      "current_start": 295,
+      "current_count": 1,
+      "original": [
+        "        if (dt.style != (dt.style & (DS_VALID31 | DS_3DLOOK | 0xffff0000))) {",
+        "            RIPMSG1(RIP_WARNING, \"CreateDialog: stripping invalid bits %lX\", dt.style);",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+      ]
+    }
+  ],
+  "line_mismatches": [
+    {
+      "current_line": 296,
+      "original_line": 286,
+      "logical_line": 284,
+      "text": "#endif // DEBUG"
+    }
+  ],
+  "initial_review": "Original creator algorithm retained; changes integrate native dialog-procedure owner and explicit lifetime checks after synchronous callbacks. Separate temporary edit DS prevents transferring to retired PDLG.",
+  "counter_review": "Retained allocation is not a live native HWND. Existing creator fixture models valid native handles with retired original state and covers legacy/NOREVALIDATE return distinctions, but does not inject ValidateHwnd/ValidateDialogPwnd or host-set failure. Do not equate that fixture with complete creation-failure proof.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: control-body-dlgbegin",
+    "src/wow32-dll/source/wow_dialog_creation_binding.c: task/borrow/context surrounding InternalCreateDialog",
+    "src/wow32-dll/source/wow_dialog_procedure_bindings.c: native procedure storage",
+    "src/wow32-dll/source/wow_user_borrow_scope.c: exact binding retention",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_creator_lifetime_fixture.c: normal plus root/child retirement, legacy and exemption matrix",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c: native A/W procedure ownership"
+  ],
+  "format_restoration": "Removed obsolete staging sentence and extra EOF blank line; no executable or preprocessor token change.",
+  "limits": "Source/fixture inspection only; no new build/runtime pass. Pending failure ownership is not a confirmed product defect. All functional remediation remains unapplied."
+}

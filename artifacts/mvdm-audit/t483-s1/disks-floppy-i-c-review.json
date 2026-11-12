@@ -1,0 +1,58 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+  "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+  "current_sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 34,
+      "original_count": 6,
+      "current_start": 34
+    },
+    {
+      "original_start": 67,
+      "original_count": 225,
+      "current_start": 64
+    },
+    {
+      "original_start": 309,
+      "original_count": 2,
+      "current_start": 84
+    },
+    {
+      "original_start": 337,
+      "original_count": 1,
+      "current_start": 113
+    },
+    {
+      "original_start": 360,
+      "original_count": 2,
+      "current_start": 138
+    },
+    {
+      "original_start": 403,
+      "original_count": 2,
+      "current_start": 182
+    },
+    {
+      "original_start": 418,
+      "original_count": 6,
+      "current_start": 198
+    },
+    {
+      "original_start": 434,
+      "original_count": 1,
+      "current_start": 212
+    },
+    {
+      "original_start": 476,
+      "original_count": 18,
+      "current_start": 257
+    }
+  ],
+  "initial_review": "Complete diff: nine excluded platform/debug/non-NTVDM bodies.",
+  "counter_review": "All deleted ranges match original conditional boundaries; replacements/additions are only error/line directives. Retained NTVDM BIOS entry, interrupt and initialization source is unchanged; non-NTVDM setup is not an alternative project implementation.",
+  "limits": "Source necessity audit only; no new floppy runtime acceptance or universal condition/line certification."
+}

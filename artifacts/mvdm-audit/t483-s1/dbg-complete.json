@@ -1,0 +1,16 @@
+{
+  "checked_retained_nonblank_lines": 986,
+  "mismatches": [],
+  "method": "Source projection of explicitly reviewed i386 alternatives; not a compiler or runtime test.",
+  "path": "src/mvdm-host/dbg/dbg.c",
+  "excluded_i386_groups": 35,
+  "non_excluded_code_diffs": 1,
+  "lexical_diff_blocks": 57,
+  "decision": "retain",
+  "completed_differing_source_files": 1,
+  "total_host_c_h_files": 1060,
+  "identical_host_c_h_files": 471,
+  "differing_host_c_h_files": 589,
+  "total_lexical_diff_blocks": 9636,
+  "semantic_total": "not-yet-classified-globally"
+}

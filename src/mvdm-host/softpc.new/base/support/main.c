@@ -269,8 +269,6 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 
   cpu_init();
 
-
-
 #line 248
 #ifndef PROD
 #line 249

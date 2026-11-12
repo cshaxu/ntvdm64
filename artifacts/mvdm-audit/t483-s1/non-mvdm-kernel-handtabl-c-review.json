@@ -1,0 +1,42 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "current_sha256": "e4a6190ec6c46a3b5b52c8b1d04db74c9bb772cbbded15cd7debc88685ae9eaf",
+  "status": "difference classification complete; functional remediation not implemented",
+  "selected_table_token_exact": true,
+  "evidence": [
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/userk.h:8-11",
+    "src/wow32-dll/include/wow_user_object_bindings.h",
+    "src/wow32-dll/source/wow_user_object_bindings.c:696-759",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:439,1830-1870",
+    "src/wow32-dll/source/wow_menu_client_bindings.c:350-371",
+    "test/adapter-mvdm-host-out/wow/wow_cleanup_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_process_retirement_fixture.c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:651"
+  ],
+  "decisions": [
+    "Keep finite SDK/original object-flag declarations; private precomp allocation engine is not a dependency of this constant table.",
+    "All selected gabObjectCreateFlags entries token-match original; original FE_IME body excluded. Keep sole original table consumed by _WOWCleanup, not a duplicate autonomous table.",
+    "Detached DEBUG_LOCKS/DEBUG/TRACE_OBJECT_ALLOCS/FE_IME/#if0 fragments no longer enclose their original declarations/functions. Reconcile each original owner and omitted-function decision; preserve only coherent subset conditional structure, with correct #line. Do not enable unsupported branches.",
+    "Omit lock-tracking global and HANDLEPAGE allocator globals: native USER owns handle allocation and uniqueness, current companion view does not allocate native handles.",
+    "Omit kernel pool-tag table and private allocator/lock prototypes alongside unavailable allocator; object ownership flags remain selected.",
+    "Omit HMInitHandleTable/HMGrowHandleTable private shared-section/free-page allocator. Do not replace native USER identity generation with another allocator merely to import original code.",
+    "HMAllocObject contains ownership/quota/projection initialization beyond allocation. Compare those selected behaviors against native publication and existing page-domain owner; restore only reusable policy with finite callers, never second handle namespace.",
+    "HMFreeObject/HMMarkObjectDestroy/HMDestroyObject original generation and deferred-release rules need mapping to current borrow/retire owners. Confirm reference deferral and native failure ordering before saying fully superseded.",
+    "Original lock/reference operations mix unavailable object pointers with reusable deferred-destruction ordering. Map selected borrow scopes and cleanup paths; retain unsupported debug exclusion but do not infer release equivalence from absent calls.",
+    "HMDestroyUnlockedObject dispatches multiple types. Production cleanup binds wow_menu_client_cleanup, unlike fixture which releases cursor/accelerator too. Audit actual published type set; if other process-owned types enter it, route existing type owners coherently. Do not claim production multi-type cleanup from fixture doubles.",
+    "HMChangeOwnerThread/DestroyThreadsObjects transfer ownership and retire thread resources. Compare task retirement, terminal HWND observer and outstanding borrows; no whole kernel thread engine import.",
+    "DestroyProcessesObjects/MarkThreadsObjects preserve already-destroying objects and prevent dangling owner pointers. Map last-owner dispose refusal, borrowed table entries and terminal owners before deciding restoration/minimization.",
+    "Omit HMGetStats kernel NtGlobalFlag/EPROCESS/table-statistics service from selected flags-only carrier; not needed to classify task cleanup ownership.",
+    "Omit KernelPtoH private pool-pointer conversion; native HWND identities and guest numeric projections use existing explicit boundary, not native kernel object pointers."
+  ],
+  "entries_added": 14,
+  "format_edits": 0,
+  "limits": [
+    "Original allocator cannot own modern USER object pointers.",
+    "Lifecycle fragments may contain reusable policy: not all omissions proven necessary.",
+    "Fixture resource types and production menu-only destruction boundary must not be conflated.",
+    "Detached conditional fragments are structural remediation, not evidence their omitted owner was false in every compilation."
+  ]
+}

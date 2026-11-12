@@ -1,0 +1,35 @@
+{
+  "path": "src/mvdm-host/dos/command/cmdredir.c",
+  "original_sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49",
+  "current_sha256": "7c3a22d851015e69897fa55bd6e5b56add6b9d90c9598e7b7bd5e265243648e1",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 15,
+      "original_count": 0,
+      "current_start": 15,
+      "current_count": 13
+    },
+    {
+      "original_start": 385,
+      "original_count": 1,
+      "current_start": 398,
+      "current_count": 1
+    },
+    {
+      "original_start": 511,
+      "original_count": 1,
+      "current_start": 524,
+      "current_count": 1
+    }
+  ],
+  "initial_review": "Three blocks form one coupled typed thread-entry adaptation.",
+  "counter_review": "Original callbacks terminate explicitly, so do not claim normal return ABI caused an observed failure. Binding and terminal unbinding remain actual responsibilities. Pipe algorithms unchanged.",
+  "dependencies": [
+    "src/compat/include/thread_start_compat.h",
+    "src/common/worker-thread/bridge.c",
+    "test/adapter-mvdm-host-out/thread_start_session_fixture.c",
+    "test/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c"
+  ],
+  "validation": "No tests rerun or new runtime pass claimed; test coverage inspected only."
+}

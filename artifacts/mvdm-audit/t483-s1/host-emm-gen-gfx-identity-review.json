@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_emm.h",
+      "sha256": "312ec4dc503633fe7d57acf0327f2a51d10a62dc955fa9b0f933ffc83bda785c",
+      "bytes": 1135
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_gen.h",
+      "sha256": "d86cd3c505d643531dafaa548e66fbb42ba13c37e3c632a214a69b4f2f86f557",
+      "bytes": 2445
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_gfx.h",
+      "sha256": "cd3bbfc35d47737b392ad7db4e1d8652157695158f645ec56f08aeb8288947e3",
+      "bytes": 420
+    }
+  ],
+  "limits": "Already included in471 identical C/H files; no count increment."
+}

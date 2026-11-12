@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+  "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1",
+  "current_sha256": "5887ccb0be62271c5d5869ece416c55aafadf4bf75730ca1d9f1ce8b9d4a742e",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 43,
+      "original_count": 3
+    },
+    {
+      "original_start": 53,
+      "original_count": 16
+    }
+  ],
+  "initial_review": "Two excluded non-PROD debugger bodies; PROD no-op macros are original.",
+  "counter_review": "Original check_I/check_D/force_yoda macros retained. Nested MSWDVR_DEBUG removed with the excluded outer body, not activated.",
+  "limits": "Complete retained nonblank source comparison, excluding recorded original bodies and #line/#error. Not universal configuration or diagnostic-line certification."
+}

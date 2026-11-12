@@ -70,8 +70,7 @@ HANDLE  hFile;
 LONG    lLoc;
 USHORT  usDX,usCX;
 
-
-    hFile = GETHANDLE(getAX(), getBP());
+    hFile = GETHANDLE (getAX(),getBP());
 
 #line 53
     if (hFile == 0) {

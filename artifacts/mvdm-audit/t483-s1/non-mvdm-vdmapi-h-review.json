@@ -1,0 +1,110 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+  "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+  "current_sha256": "692490979bcfdd0b3db5043bd76eeb835f6c3bf91d6a5602f753808fa4c922a2",
+  "changes": [
+    {
+      "original_start": 1,
+      "original_count": 0,
+      "current_start": 1,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-ABI-001): the original header is retained byte-for-byte",
+        " * below this guard.  The modern broker and Base VDM adapter can both include",
+        " * this declaration carrier in one translation unit, while upstream provides",
+        " * no multiple-inclusion protection. */",
+        "#ifndef MVDM_OPENNT_VDMAPI_H",
+        "#define MVDM_OPENNT_VDMAPI_H",
+        ""
+      ],
+      "decision": "simplify",
+      "necessity": "Multiple inclusion needs protection, but compat/include/vdmapi.h already supplies a guarded sole declaration-forwarder. Current mirror guard duplicates that ownership while ntsrv/main.c still includes mirror directly.",
+      "counter_review": "Cannot remove mirror guard alone: first route direct original-path consumers through existing compat facade and verify include search/order across BaseClient/BaseSrv/WOW/COMMAND. Do not duplicate original declarations or create another facade.",
+      "change_plan": "Consolidate all product include routes through existing guarded compat/include/vdmapi.h, remove mirror-added guard/comment/end marker and restore original file bytes if complete include-context verification permits.",
+      "verification_required": "Actual supported native/worker build contexts, repeated/transitive include compile checks, ABI declaration equality; preserve original command length and flags. No new tests run."
+    },
+    {
+      "original_start": 142,
+      "original_count": 0,
+      "current_start": 151,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#endif /* MVDM_OPENNT_VDMAPI_H */",
+        ""
+      ],
+      "decision": "simplify",
+      "necessity": "Multiple inclusion needs protection, but compat/include/vdmapi.h already supplies a guarded sole declaration-forwarder. Current mirror guard duplicates that ownership while ntsrv/main.c still includes mirror directly.",
+      "counter_review": "Cannot remove mirror guard alone: first route direct original-path consumers through existing compat facade and verify include search/order across BaseClient/BaseSrv/WOW/COMMAND. Do not duplicate original declarations or create another facade.",
+      "change_plan": "Consolidate all product include routes through existing guarded compat/include/vdmapi.h, remove mirror-added guard/comment/end marker and restore original file bytes if complete include-context verification permits.",
+      "verification_required": "Actual supported native/worker build contexts, repeated/transitive include compile checks, ABI declaration equality; preserve original command length and flags. No new tests run."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [
+    {
+      "original": 1,
+      "current": 8,
+      "logical": 8
+    },
+    {
+      "original": 3,
+      "current": 10,
+      "logical": 10
+    },
+    {
+      "original": 5,
+      "current": 12,
+      "logical": 12
+    },
+    {
+      "original": 7,
+      "current": 14,
+      "logical": 14
+    },
+    {
+      "original": 9,
+      "current": 16,
+      "logical": 16
+    },
+    {
+      "original": 11,
+      "current": 18,
+      "logical": 18
+    },
+    {
+      "original": 13,
+      "current": 20,
+      "logical": 20
+    },
+    {
+      "original": 15,
+      "current": 22,
+      "logical": 22
+    },
+    {
+      "original": 17,
+      "current": 24,
+      "logical": 24
+    },
+    {
+      "original": 19,
+      "current": 26,
+      "logical": 26
+    },
+    {
+      "original": 21,
+      "current": 28,
+      "logical": 28
+    }
+  ],
+  "evidence": [
+    "src/compat/include/vdmapi.h",
+    "src/ntsrv-exe/main.c",
+    "src/common/base_srv/base_client.h",
+    "src/common/base_srv/base_command.c",
+    "src/mvdm-host/dos/command/cmd.h"
+  ],
+  "limits": "Whole retained-source comparison; no new build/runtime or universal context proof. Exclusion-only classification does not admit retired monitor profiles."
+}

@@ -1,0 +1,14 @@
+{
+  "restored_byte_identical_files": [
+    "src/non-mvdm/ds/netapi/netlib/time.c",
+    "src/non-mvdm/ds/netapi/netlib/timezone.c",
+    "src/non-mvdm/ds/netapi/rap/ascii.c",
+    "src/non-mvdm/ds/netapi/rap/auxdata.c",
+    "src/non-mvdm/ds/netapi/rap/examine.c",
+    "src/non-mvdm/ds/netapi/rap/parmnum.c",
+    "src/non-mvdm/ds/netapi/rap/pointer.c",
+    "src/non-mvdm/ds/netapi/rap/strucsiz.c"
+  ],
+  "proof": "Whole normalized source and non-comment-token equality before restoration; whole-file original byte equality after. strucsiz original comments/blank lines and no-longer-needed #line restored together.",
+  "limits": "Not a universal branch-hit certification or runtime test."
+}

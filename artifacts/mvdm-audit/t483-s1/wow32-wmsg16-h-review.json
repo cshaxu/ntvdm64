@@ -1,0 +1,47 @@
+{
+  "path": "src/mvdm-host/wow32/wmsg16.h",
+  "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
+  "current_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 25,
+      "original_count": 4,
+      "current_start": 27,
+      "current_count": 1,
+      "original": [
+        "typedef struct _MSGINFO {   /* mi */",
+        "    UINT uMsg;                  // 0x0001 in the high word means \"undocumented\"",
+        "    PSZ  pszMsgName;            // 0x0002 in the high word means \"win32-specific\"",
+        "} MSGINFO, *PMSGINFO;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected"
+      ]
+    },
+    {
+      "original_start": 35,
+      "original_count": 1,
+      "current_start": 37,
+      "current_count": 1,
+      "original": [
+        "PSZ     GetWMMsgName(UINT uMsg);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 29,
+      "current": 28,
+      "logical": 26
+    }
+  ],
+  "evidence": "Complete normalized diff only excludes original DEBUG bodies; selected source unchanged.",
+  "limits": [
+    "Audit only, no functional repair or new build/runtime pass.",
+    "Excluded-body comparison is not universal preprocessing proof."
+  ]
+}

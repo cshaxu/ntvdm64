@@ -1,0 +1,54 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+  "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+  "current_sha256": "c240ca9190ba7c14ac0e5e75e1c8e0a63cfee93221a9f7f601740316aa0878e5",
+  "review_complete": true,
+  "register_entries": 1,
+  "changes": [
+    {
+      "original_start": 58,
+      "original_count": 1,
+      "current_start": 64,
+      "current_count": 4,
+      "original": [
+        "extern PointerAttachedWindowed;"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-099): original aggregate headers supplied this",
+        " * Boolean external type implicitly.  Its provider is nt_event.c; make the",
+        " * exact existing BOOL contract visible to modern C. */",
+        "extern BOOL PointerAttachedWindowed;"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 19,
+      "original_count": 1,
+      "current_start": 21,
+      "current_count": 1,
+      "original": [
+        "void CheckForYodaEvents(void);"
+      ],
+      "current": [
+        "#error Excluded unsupported YODA configuration"
+      ]
+    },
+    {
+      "original_start": 47,
+      "original_count": 1,
+      "current_start": 52,
+      "current_count": 1,
+      "original": [
+        "IMPORT VOID SelectMouseBuffer(half_word mode, half_word lines);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "One typed external-variable declaration replaces original implicit-int declaration; two YODA/X86GFX declaration exclusions.",
+  "counter_review": "Provider BOOL type matches the corrected declaration, but current repository references are only definition and later uses in nt_event.c. A public header declaration is unnecessary for these uses. Prefer deleting declaration and its local notice over maintaining an unused typed interface; preserve definition and behavior. Do not infer variable itself is dead merely from absence of external references.",
+  "evidence": "nt_event.c:190 BOOL definition, :651/:654 same-TU uses after definition; repository C/H search finds only these and nt_event.h:67. Original header implicit-int declaration at58.",
+  "limits": "Deletion recommendation not implemented; no runtime claim."
+}

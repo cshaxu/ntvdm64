@@ -1,0 +1,98 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+  "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+  "current_sha256": "81e29a78112c13ea9fe9d285a9c03025cf876e076e98160c074dc01025f5dd71",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 113,
+      "original_count": 3,
+      "current_start": 114,
+      "current_count": 1,
+      "original": [
+        "",
+        "#include <netdebug.h>           // NetpAssert().",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 120,
+      "original_count": 1,
+      "current_start": 121,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 203,
+      "original_count": 10,
+      "current_start": 206,
+      "current_count": 1,
+      "original": [
+        "",
+        "// Note that C6 version doesn't allow 32-bit Size, hence the",
+        "// assertion.  Replace this macro with another if this is a problem.",
+        "",
+        "#define NetpMoveMemory(Dest,Src,Size)                                   \\",
+        "                {                                                       \\",
+        "                    NetpAssert( (Size) == (DWORD) (size_t) (Size));     \\",
+        "                    (void) memcpy( (Dest), (Src), (size_t) (Size) );    \\",
+        "                }",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 394,
+      "original_count": 1,
+      "current_start": 391,
+      "current_count": 1,
+      "original": [
+        "#define UNUSED(x)               { (x) = (x); }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 560,
+      "original_count": 1,
+      "current_start": 560,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 116,
+      "current": 115,
+      "logical": 114
+    },
+    {
+      "original": 213,
+      "current": 207,
+      "logical": 204
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+    "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1"
+  ],
+  "limits": "Complete normalized diff proves retained declarations/debug-release macros unchanged. This is not all-context macro-hit certification, nor evidence that optional debug/C++ profiles are supported. No new build or runtime test."
+}

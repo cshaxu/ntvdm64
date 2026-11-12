@@ -1,0 +1,283 @@
+{
+  "path": "src/mvdm-host/dos/dem/demhndl.c",
+  "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+  "current_sha256": "dcb304d187e706bd187d802c9a672f02f04b4457c4c0e1ae28cd559c9e08aba6",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 28,
+      "original_count": 0,
+      "current_start": 28,
+      "current_count": 21,
+      "classification": "extended-error-record",
+      "disposition": "retain-with-error-boundary",
+      "initial_review": "One named-pipe caller writes the original four packed fields via registered numeric location.",
+      "counter_review": "Helper failure has no Win32 LastError contract; caller then enters generic ambient-error handling."
+    },
+    {
+      "original_start": 45,
+      "original_count": 0,
+      "current_start": 66,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 53,
+      "original_count": 0,
+      "current_start": 75,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 123,
+      "original_count": 0,
+      "current_start": 146,
+      "current_count": 3,
+      "classification": "read-lease-state",
+      "disposition": "retain",
+      "initial_review": "Local descriptor, lease and active guard cover acquisition and exits.",
+      "counter_review": "Guard avoids releasing unacquired lease; no duplicate persistent state."
+    },
+    {
+      "original_start": 124,
+      "original_count": 0,
+      "current_start": 150,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 127,
+      "original_count": 1,
+      "current_start": 154,
+      "current_count": 12,
+      "classification": "read-buffer-acquisition",
+      "disposition": "retain-and-minimize",
+      "initial_review": "Bounded session buffer replaces direct guest alias for synchronous I/O.",
+      "counter_review": "lease_acquire always preloads bytes even for WRITE access: short-read suffix is not uninitialized. Local nonnull setter cannot fail; remove redundant test in later correction."
+    },
+    {
+      "original_start": 135,
+      "original_count": 0,
+      "current_start": 173,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 171,
+      "original_count": 4,
+      "current_start": 210,
+      "current_count": 3,
+      "classification": "named-pipe-extended-error",
+      "disposition": "correct-failure-contract",
+      "initial_review": "Same extended-error field order; acquire or commit failure goes to readFailureExit.",
+      "counter_review": "VrReadNamedPipe treats MORE_DATA as success, not discarded partial failure. New helper failure must establish meaningful error for demClientError."
+    },
+    {
+      "original_start": 189,
+      "original_count": 1,
+      "current_start": 227,
+      "current_count": 4,
+      "classification": "read-file-offset-type",
+      "disposition": "retain",
+      "initial_review": "LONG matches SetFilePointer output pointer declaration.",
+      "counter_review": "Same four-byte zero; no seek-policy change."
+    },
+    {
+      "original_start": 208,
+      "original_count": 4,
+      "current_start": 249,
+      "current_count": 4,
+      "classification": "read-failure-release",
+      "disposition": "review-original-flush-semantics",
+      "initial_review": "Release before original broken-pipe and demClientError logic.",
+      "counter_review": "Original flushes on failure; new release FALSE discards changes. Observable partial failure not reproduced. Cleanup has no explicit LastError preservation contract."
+    },
+    {
+      "original_start": 223,
+      "original_count": 4,
+      "current_start": 264,
+      "current_count": 9,
+      "classification": "read-success-commit",
+      "disposition": "retain-with-boundaries",
+      "initial_review": "Commit before CF/AX success; failed commit returns INVALID_ADDRESS.",
+      "counter_review": "Initial snapshot preserves short-read suffix. Full-buffer commit across guest reentry/mapping changes is not proven alias-equivalent."
+    },
+    {
+      "original_start": 261,
+      "original_count": 0,
+      "current_start": 307,
+      "current_count": 2,
+      "classification": "write-lease-state",
+      "disposition": "retain",
+      "initial_review": "Local lease supports write cleanup.",
+      "counter_review": "No persistent VM state added."
+    },
+    {
+      "original_start": 262,
+      "original_count": 0,
+      "current_start": 310,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 263,
+      "original_count": 1,
+      "current_start": 312,
+      "current_count": 10,
+      "classification": "write-buffer-acquisition",
+      "disposition": "retain-and-minimize",
+      "initial_review": "Acquire guest snapshot for synchronous host write.",
+      "counter_review": "Nonnull local real-mode setter check is redundant; actual acquisition failure is meaningful. Nested mapping equivalence unproved."
+    },
+    {
+      "original_start": 272,
+      "original_count": 0,
+      "current_start": 330,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 289,
+      "original_count": 1,
+      "current_start": 348,
+      "current_count": 4,
+      "classification": "write-file-offset-type",
+      "disposition": "retain",
+      "initial_review": "LONG matches SetFilePointer pointer type.",
+      "counter_review": "Same width and zero value; original seek computation unchanged."
+    },
+    {
+      "original_start": 296,
+      "original_count": 2,
+      "current_start": 358,
+      "current_count": 2,
+      "classification": "seek-error-cleanup",
+      "disposition": "retain-with-error-boundary",
+      "initial_review": "Route seek failure through lease cleanup.",
+      "counter_review": "Lifetime cleanup needed; original error must survive release."
+    },
+    {
+      "original_start": 305,
+      "original_count": 2,
+      "current_start": 367,
+      "current_count": 2,
+      "classification": "truncate-error-cleanup",
+      "disposition": "retain-with-error-boundary",
+      "initial_review": "Route SetEndOfFile failure through shared cleanup.",
+      "counter_review": "Original CX=0 operation retained; preserve LastError through cleanup."
+    },
+    {
+      "original_start": 308,
+      "original_count": 0,
+      "current_start": 370,
+      "current_count": 2,
+      "classification": "truncate-success-cleanup",
+      "disposition": "retain",
+      "initial_review": "Release read-only snapshot before CF=0.",
+      "counter_review": "No guest commit needed for truncate."
+    },
+    {
+      "original_start": 322,
+      "original_count": 0,
+      "current_start": 386,
+      "current_count": 2,
+      "classification": "disk-full-cleanup",
+      "disposition": "retain",
+      "initial_review": "Release before original CF=0 AX=0 disk-full result.",
+      "counter_review": "Original error already captured; success-with-zero is original DOS policy."
+    },
+    {
+      "original_start": 330,
+      "original_count": 0,
+      "current_start": 396,
+      "current_count": 2,
+      "classification": "write-failure-cleanup",
+      "disposition": "retain-with-error-boundary",
+      "initial_review": "Release before demClientError.",
+      "counter_review": "Original error is ambient; save/restore around cleanup recommended, not implemented."
+    },
+    {
+      "original_start": 335,
+      "original_count": 0,
+      "current_start": 403,
+      "current_count": 2,
+      "classification": "write-success-cleanup",
+      "disposition": "retain",
+      "initial_review": "Release read-only snapshot before CF/AX success.",
+      "counter_review": "No writeback needed; retirement failure not newly proved safe."
+    },
+    {
+      "original_start": 369,
+      "original_count": 0,
+      "current_start": 439,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 370,
+      "original_count": 3,
+      "current_start": 441,
+      "current_count": 2,
+      "classification": "excluded-constant-guard",
+      "disposition": "exclusion-only",
+      "initial_review": "Original file-position constants guard retained.",
+      "counter_review": "No selected-code change."
+    },
+    {
+      "original_start": 374,
+      "original_count": 0,
+      "current_start": 444,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 528,
+      "original_count": 0,
+      "current_start": 599,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    },
+    {
+      "original_start": 529,
+      "original_count": 18,
+      "current_start": 601,
+      "current_count": 2,
+      "classification": "excluded-debug",
+      "disposition": "exclusion-only",
+      "initial_review": "DBG-only commit diagnostics excluded.",
+      "counter_review": "Original release ignores FlushFileBuffers result; not a newly removed release error check."
+    },
+    {
+      "original_start": 548,
+      "original_count": 0,
+      "current_start": 604,
+      "current_count": 1,
+      "classification": "diagnostic-line",
+      "disposition": "retain"
+    }
+  ],
+  "initial_review": "Entire file and all differences reviewed in source order.",
+  "counter_review": "Retain scoped buffers and API type correction. Do not infer uninitialized short-read suffix. Recommend minimizing redundant setter guards and resolving original failure-publication/error contracts.",
+  "format_restoration": "demClose blank line and GETHANDLE spacing restored. Token sequence and directives unchanged; retained #line 53. No format-only register entry.",
+  "dependencies": [
+    "src/ntvdm-exe/session/guest_memory_lease.c",
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+    "src/mvdm-host/dos/dem/demerror.c",
+    "src/mvdm-host/vdmredir/vrnmpipe.c"
+  ],
+  "test_evidence": "Inspected T230 five-byte read/write and invalid-handle assertions; host-continuation demRead trace wrapper. Not proof of partial-failure or cleanup LastError behavior. No tests executed.",
+  "limits": [
+    "Full-extent commit and mapping/reentry equivalence unproved.",
+    "Partial failure and cleanup error risks are source findings, not reproduced product failures.",
+    "No build, release or product repair claimed."
+  ]
+}

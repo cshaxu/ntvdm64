@@ -1,0 +1,73 @@
+{
+  "path": "src/mvdm-host/wow32/wmdisp32.h",
+  "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+  "current_sha256": "6652508bea431d3a115a5e68ad7e7d749089df58ba631f3a0e4482980cfbe187",
+  "changes": [
+    {
+      "original_start": 45,
+      "original_count": 1,
+      "current_start": 45,
+      "current_count": 4,
+      "original": [
+        "    DWORD dwTmp[2];"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-345): final slots own nested MDI title/struct. */",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-349): otherwise slot1 captures heap ownership;",
+        "     * COPYDATA retains its original separate progress/slot contract. */",
+        "    DWORD dwTmp[4];"
+      ],
+      "decision": "pending",
+      "change_plan": "Keep four slots until the owning converter audit proves an equally small representation preserves simultaneous outer/nested keys. Verify every constructor initializes required slots and every release uses its message family contract; do not restore two slots while selected code indexes slots2/3.",
+      "evidence": "dwTmp[2]/[3] have real uses: WM32Create retains nested MDI title/record, SizeClipBoard retains stable handle, DDE initiation retains initiator/publication. wow_message_release32 consumes corresponding slots. This is a host conversion record, not a new guest structure.",
+      "verification_required": "Construction/COPYDATA/parameter-map/DDE fixtures and all direct CBT/hook callers; sizeof/offset compile checks if representation changes.",
+      "missing_evidence": "Complete constructor/ABI layout and nested release equivalence still needs evidence."
+    },
+    {
+      "original_start": 59,
+      "original_count": 1,
+      "current_start": 64,
+      "current_count": 2,
+      "original": [
+        "extern  BOOL fThunkDDEmsg;"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): matches the operation-private TLS owner. */",
+        "extern  __declspec(thread) BOOL fThunkDDEmsg;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain matching TLS declaration; keep scoped restoration at operation callers; no parallel mode state or global shared flag.",
+      "evidence": "TLS extern matches wmdisp32.c definition. wumsg.c/wowhooks.c and callback scope save/restore operation-specific fThunkDDEmsg; restoring global declaration would conflict with selected provider and cross-thread isolation.",
+      "verification_required": "Hook/thunk-scope and queue-mode fixtures, cross-thread and nested operations.",
+      "missing_evidence": "No new runtime run; source contract checked."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 53,
+      "original_count": 3,
+      "current_start": 59,
+      "current_count": 1,
+      "original": [
+        "    LPSZ    lpszW32;    // message name (DEBUG version only)",
+        "    DWORD   cCalls;     // # times the message has been passed",
+        "    DWORD   cTics;      // sum total of thunk tics"
+      ],
+      "current": [
+        "#error WOW profiling is not supported"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 56,
+      "current": 60,
+      "logical": 54
+    }
+  ],
+  "evidence": "Complete header diff linked to prior complete converter audit and actual scratch/TLS consumers.",
+  "limits": [
+    "Source classification, not new build/runtime validation.",
+    "Exclusion-only does not imply compiler-context or logical-line certification."
+  ]
+}

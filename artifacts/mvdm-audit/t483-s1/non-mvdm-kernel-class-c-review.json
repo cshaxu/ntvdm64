@@ -1,0 +1,160 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+  "current_sha256": "eeddb9850d34aa19b3fdeb5054e463f2e196f72c5acd0a3dfa0feca244cba61e",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_token_identity": {
+    "_RegisterClassEx": true,
+    "_InnerGetClassPtr": true,
+    "GetClassPtr": true
+  },
+  "unregister_body_difference": "Only fallible DestroyClass propagation excluding comments/#line.",
+  "evidence": [
+    "src/wow32-dll/source/wow_class_client_bindings.c:243-289",
+    "src/wow32-dll/source/wow_class_words_binding.c:507-567",
+    "src/wow32-dll/include/wow_class_register_bindings.h",
+    "src/wow32-dll/include/wow_class_remove_bindings.h",
+    "src/wow32-dll/include/wow_class_lookup_bindings.h",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:659-684",
+    "test/adapter-mvdm-host-out/wow/wow_class_server_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c:225-289"
+  ],
+  "raw_hunks": [
+    {
+      "tag": "replace",
+      "original_start": 15,
+      "original_count": 2,
+      "current_start": 15,
+      "current_count": 8,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 18,
+      "original_count": 62,
+      "current_start": 24,
+      "current_count": 1,
+      "decision": "pending"
+    },
+    {
+      "tag": "replace",
+      "original_start": 86,
+      "original_count": 1,
+      "current_start": 31,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 132,
+      "original_count": 0,
+      "current_start": 79,
+      "current_count": 4,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 133,
+      "original_count": 367,
+      "current_start": 84,
+      "current_count": 1,
+      "decision": "pending"
+    },
+    {
+      "tag": "replace",
+      "original_start": 503,
+      "original_count": 1,
+      "current_start": 88,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 555,
+      "original_count": 1,
+      "current_start": 142,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 557,
+      "original_count": 0,
+      "current_start": 146,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 559,
+      "original_count": 0,
+      "current_start": 149,
+      "current_count": 3,
+      "decision": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 560,
+      "original_count": 331,
+      "current_start": 153,
+      "current_count": 1,
+      "decision": "pending"
+    },
+    {
+      "tag": "insert",
+      "original_start": 930,
+      "original_count": 0,
+      "current_start": 193,
+      "current_count": 1,
+      "decision": "retain"
+    },
+    {
+      "tag": "delete",
+      "original_start": 976,
+      "original_count": 98,
+      "current_start": 240,
+      "current_count": 0,
+      "decision": "pending"
+    },
+    {
+      "tag": "delete",
+      "original_start": 1075,
+      "original_count": 93,
+      "current_start": 241,
+      "current_count": 0,
+      "decision": "pending"
+    },
+    {
+      "tag": "replace",
+      "original_start": 1170,
+      "original_count": 11,
+      "current_start": 243,
+      "current_count": 6,
+      "decision": "correct"
+    },
+    {
+      "tag": "replace",
+      "original_start": 1182,
+      "original_count": 14,
+      "current_start": 250,
+      "current_count": 8,
+      "decision": "correct"
+    },
+    {
+      "tag": "delete",
+      "original_start": 1197,
+      "original_count": 432,
+      "current_start": 259,
+      "current_count": 0,
+      "decision": "pending"
+    }
+  ],
+  "register_entries_added": 16,
+  "format_edits": 0,
+  "limits": [
+    "Fixtures inspected, not rerun.",
+    "No-op CheckCritIn does not prove caller lock coverage.",
+    "publish_completed_class ignores destroy_native failure on projection rollback; coupled autonomous review needed.",
+    "Facade adwWOW[2] controls retained sizeof copy; stale original comment mentioning five is not layout evidence."
+  ]
+}

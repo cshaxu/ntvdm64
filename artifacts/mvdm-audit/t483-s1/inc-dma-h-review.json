@@ -1,0 +1,29 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+  "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+  "current_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 139,
+      "original_count": 15
+    },
+    {
+      "original_start": 175,
+      "original_count": 12
+    },
+    {
+      "original_start": 217,
+      "original_count": 9
+    },
+    {
+      "original_start": 341,
+      "original_count": 17
+    }
+  ],
+  "initial_review": "Four excluded unions: BIT_ORDER1 command/mode/status and BIGEND DMA_ADDRESS. All retained constants, register models, interfaces and opposite-order unions exactly original.",
+  "counter_review": "Whole-file reverse comparison confirms BIT_ORDER2 field order and LITTLEND address byte/word order were not rewritten or packed differently. Removed alternatives are complete original conditional bodies, not parts of selected DMA state. No new transfer logic, address translation or endian shim.",
+  "limits": "Source diff classification only; no new compiler layout probe or DMA runtime validation."
+}

@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+  "original_sha256": "0454f3a15e286a17a61cd6d4ad8cc0ec42267e2cb50624b366b136962e3f855e",
+  "current_sha256": "90ba81b32ef32db13b347cead10479129f32fee68d42c68eed65574ae9977730",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 115,
+      "original_count": 1,
+      "current_start": 115,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Every whole-file textual difference classified; excluded bodies separately enumerated.",
+  "limits": "No functional remediation or fresh runtime verification."
+}

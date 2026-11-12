@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+  "original_sha256": "d6e833e572222ce68fd989348de0bfd68030d0016a2a2d7379cf3473ad852f39",
+  "current_sha256": "5859c6f4480ab7db9d4a0f2cead39649478a9e28a490ce97df6a4d0ed0525c27",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": [
+    {
+      "original_start": 37,
+      "original_end": 63,
+      "current_error_line": 38
+    }
+  ],
+  "initial_review": "Only excluded SPC486 BSWAP implementation.",
+  "counter_review": "Remaining nonblank non-line text exactly original; no change to selected instruction semantics. SPC486 exclusion is not admission to implement 486 behavior.",
+  "limits": "Text/conditional comparison only; no new all-profile compilation or line-mapping proof."
+}

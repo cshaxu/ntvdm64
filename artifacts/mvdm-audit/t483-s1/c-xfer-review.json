@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+  "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+  "current_sha256": "b893efbe26b944614bce4cb5a5991d21b37fde1c92e564defc447347d27f87d9",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "file_sequence": "281",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "current_start": "26",
+      "current_count": "2",
+      "original_start": "26",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-306",
+      "classification": "diagnostic-only",
+      "initial_review": "Far-call validation reporting is observation after original table-bound check, not architectural validation.",
+      "counter_review": "Default-off observer still adds mirror coupling; only report/header need removal, not original validation.",
+      "disposition": "delete",
+      "evidence": "c_xfer.c:26,209-214; mvdm_softpc_report_wow_far_call_validation provider",
+      "limits": "Source and fixture inspection only; no fresh run, universal reachability or full logical-line proof.",
+      "decision": "delete",
+      "change_plan": "Remove validation report and sole-use termination header together; reconcile shared provider/declaration and observation-only probe references. Preserve original switch and descriptor checks.",
+      "related_callers": "c_xfer.c:26,209-214; mvdm_softpc_report_wow_far_call_validation provider",
+      "verification_required": "Product token/image comparison excluding diagnostics and original far-call validation tests.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "281",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "current_start": "29",
+      "current_count": "2",
+      "original_start": "27",
+      "original_count": "0",
+      "old_ids": "",
+      "classification": "header-necessity",
+      "initial_review": "Added c_tlb.h has no directly named translator/cache call in this file.",
+      "counter_review": "Text search is insufficient to prove no transitive macro declaration dependency; do not delete based on zero textual calls alone.",
+      "disposition": "pending-evidence",
+      "evidence": "c_xfer.c include/use search; original c_xfer.c and c_tlb.h",
+      "limits": "Source and fixture inspection only; no fresh run, universal reachability or full logical-line proof.",
+      "decision": "pending-evidence",
+      "change_plan": "Check selected preprocessor declaration/macro use with and without include; restore original include set if dependency absent, otherwise document actual dependency.",
+      "related_callers": "c_xfer.c include/use search; original c_xfer.c and c_tlb.h",
+      "verification_required": "Selected preprocessing/build comparison and actual macro dependency proof.",
+      "missing_evidence": "Selected expanded dependency/compile control for added c_tlb.h is absent.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "281",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "current_start": "209",
+      "current_count": "6",
+      "original_start": "217",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-306",
+      "classification": "diagnostic-only",
+      "initial_review": "Far-call validation reporting is observation after original table-bound check, not architectural validation.",
+      "counter_review": "Default-off observer still adds mirror coupling; only report/header need removal, not original validation.",
+      "disposition": "delete",
+      "evidence": "c_xfer.c:26,209-214; mvdm_softpc_report_wow_far_call_validation provider",
+      "limits": "Source and fixture inspection only; no fresh run, universal reachability or full logical-line proof.",
+      "decision": "delete",
+      "change_plan": "Remove validation report and sole-use termination header together; reconcile shared provider/declaration and observation-only probe references. Preserve original switch and descriptor checks.",
+      "related_callers": "c_xfer.c:26,209-214; mvdm_softpc_report_wow_far_call_validation provider",
+      "verification_required": "Product token/image comparison excluding diagnostics and original far-call validation tests.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 144,
+      "original_count": 4,
+      "current_start": 148,
+      "current_count": 2
+    },
+    {
+      "original_start": 157,
+      "original_count": 16,
+      "current_start": 161,
+      "current_count": 2
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+  "original_sha256": "d7085b215a923dc8df3a9dd44bdc3739d3035ac2fe8978f282b6a3cafd97b68b",
+  "current_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 191,
+      "original_count": 2,
+      "current_normalized_start": 191,
+      "current_lines": [
+        "#error Excluded unsupported FIFO_ON configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 210,
+      "original_count": 2,
+      "current_normalized_start": 209,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Two excluded declaration bodies: NTVDM/FIFO_ON and PS_FLUSHING. All remaining source exact.",
+  "counter_review": "Ordinary host_com_read/write/open/close and remaining handshake/event declarations unchanged. Excluding FIFO and autoflush declarations does not itself prove physical COM runtime coverage or eliminate ordinary receive support.",
+  "limits": "Source contract/diff review only; no new compiler, runtime or universal line certification."
+}

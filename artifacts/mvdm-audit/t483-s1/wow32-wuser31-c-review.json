@@ -1,0 +1,176 @@
+{
+  "path": "src/mvdm-host/wow32/wuser31.c",
+  "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+  "current_sha256": "7f709e732b386efe708a28fcf705f429a137ccff2968d786a0efe9d72748a6dc",
+  "changes": [
+    {
+      "original_start": 15,
+      "original_count": 0,
+      "current_start": 15,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"wow_user_object_bindings.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 115,
+      "original_count": 0,
+      "current_start": 117,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    HWND hwnd32;"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 120,
+      "original_count": 1,
+      "current_start": 124,
+      "current_count": 4,
+      "original": [
+        "    ul = GETHDC16(GetDCEx(HWND32(parg16->f1),"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */",
+        "    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));",
+        "    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }",
+        "    ul = GETHDC16(wow_native_GetDCEx(hwnd32,"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 125,
+      "original_count": 1,
+      "current_start": 133,
+      "current_count": 1,
+      "original": [
+        "        StoreDC(htask16, parg16->f1, (HAND16)ul);"
+      ],
+      "current": [
+        "        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    },
+    {
+      "original_start": 149,
+      "original_count": 1,
+      "current_start": 157,
+      "current_count": 6,
+      "original": [
+        "    ul = GETHWND16(GetOpenClipboardWindow());"
+      ],
+      "current": [
+        "    UNREFERENCED_PARAMETER(pFrame);",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-454): public USER may return a foreign native",
+        "     * HWND. Reuse only an exact current worker or shared-view publication;",
+        "     * never truncate an unrelated native identity. */",
+        "    ul = GETHWND16(wow_user_window_public_guest_handle(",
+        "            GetOpenClipboardWindow()));"
+      ],
+      "decision": "retain",
+      "necessity": "Retain explicit native-window acquisition and cache the exact acquired HWND with original task/guest/DC identity. Failed nonzero guest HWND must not become desktop HWND0. Public clipboard HWND must be translated through existing publication rather than truncated.",
+      "change_plan": "Keep existing common object-binding and StoreDC authority. Preserve original GetDC compatibility flags and release paths; do not add another handle map."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 458,
+      "original_count": 6,
+      "current_start": 474,
+      "current_count": 1,
+      "original": [
+        "        {",
+        "            DWORD dwSaveOptions = flOptions;",
+        "            flOptions |= OPT_DEBUG;",
+        "            LOGDEBUG(0, (\"WARNING SystemParametersInfo case %d not pre-thunked in WOW!\\n\", parg16->f1));",
+        "            flOptions = dwSaveOptions;",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 664,
+      "original_count": 6,
+      "current_start": 678,
+      "current_count": 1,
+      "original": [
+        "        {",
+        "            DWORD dwSaveOptions = flOptions;",
+        "            flOptions |= OPT_DEBUG;",
+        "            LOGDEBUG(0, (\"WARNING SystemParametersInfo case %d not post-thunked in WOW!\\n\", parg16->f1));",
+        "            flOptions = dwSaveOptions;",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 739,
+      "original_count": 5,
+      "current_start": 750,
+      "current_count": 1,
+      "original": [
+        "",
+        "    ul = GETUINT16(GetFreeSystemResources(",
+        "    WORD32(parg16->f1)",
+        "    ));",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 761,
+      "original_count": 3,
+      "current_start": 771,
+      "current_count": 1,
+      "original": [
+        "    UNREFERENCED_PARAMETER(pFrame);",
+        "",
+        "    LOGDEBUG(0, (\"WOW : WU32GetQueueStatus() (Win 3.1) : contact ChandanC\"));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 464,
+      "current": 475,
+      "logical": 459
+    },
+    {
+      "original": 670,
+      "current": 679,
+      "logical": 665
+    },
+    {
+      "original": 744,
+      "current": 751,
+      "logical": 740
+    },
+    {
+      "original": 764,
+      "current": 772,
+      "logical": 762
+    }
+  ],
+  "evidence": "Original source and listed production providers/fixture bodies inspected.",
+  "limits": "No new runtime validation; pending findings remain unproved."
+}

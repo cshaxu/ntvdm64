@@ -146,6 +146,6 @@ VOID
 APIENTRY
 RegisterWowExec(
     IN HANDLE   hwndWowExec
-    );
+);
 
 #endif /* MVDM_OPENNT_VDMAPI_H */

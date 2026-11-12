@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/makefile",
+  "original_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+  "current_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [],
+  "limits": "Necessity review only; no full line/exclusion certification or runtime claim."
+}

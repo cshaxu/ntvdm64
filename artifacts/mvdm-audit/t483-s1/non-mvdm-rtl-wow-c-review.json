@@ -1,0 +1,30 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+  "before_sha256": "9b2c8b3e68218c69f6cd9449aa1185bbeb1e6bbae4f9a36f31e833092b0adf32",
+  "current_sha256": "5eaaa777528408dc354e978d2731473e9df64b51bb743e8360b4a8a6fd21c6d3",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep bounded precomp/local WND view bindings, without restoring shared desktop memory.",
+    "Remove unused shared-info, string/layout and DESKTOPVALIDATE definitions; reconcile original branch/line scaffolding and compile retained view consumers.",
+    "Keep these original leaves and scoped view ownership; do not replace by similarly named APIs without caller contract comparison.",
+    "Map each omitted service to actual consumers and native owner; retain justified boundaries, seek owner choice only for genuine policy tradeoffs.",
+    "Restore original retained-function order and reconcile diagnostic #line without changing bodies or enabling WOW16.",
+    "Remove ineffectual detached optimize pair with the omitted carrier and reconcile excluded original condition frames under current policy."
+  ],
+  "counter_review": [
+    "Native HWND cannot be used as an NT4 PWND.",
+    "Their private expressions are not runtime paths just because definitions exist.",
+    "Synthetic fixture does not prove production view lifetime.",
+    "Omission can be the correct modern USER boundary; not a defect by itself.",
+    "Body equality does not certify all diagnostic line coordinates.",
+    "Do not activate private validation to justify dead scaffolding."
+  ],
+  "entries_added": 6,
+  "format_sites": 7,
+  "limits": [
+    "Omitted service owners pending",
+    "No fresh build/runtime",
+    "Line scaffolding requires reconciliation"
+  ]
+}

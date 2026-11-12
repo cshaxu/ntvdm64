@@ -1,0 +1,93 @@
+{
+  "entries": [
+    {
+      "sequence": 53,
+      "path": "src/mvdm-host/dos/dem/dosdef.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dosdef.h",
+      "original_sha256": "82522742f0111cac59feadaba4c1216c39d72c9ac77473fb0061ad29e5b8a8a0",
+      "previous_sha256": "82522742f0111cac59feadaba4c1216c39d72c9ac77473fb0061ad29e5b8a8a0",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 54,
+      "path": "src/mvdm-host/dos/dem/makefile",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\makefile",
+      "original_sha256": "047a26e6fcfa2238cb3ad2c41d78c0a535727e3fb8c2624395f6fc40faf01439",
+      "previous_sha256": "df67c1aa21e02fc5c238b1c07fc9deffa2821253ba818e2298720a48c923e5b7",
+      "restored_newlines": true
+    },
+    {
+      "sequence": 55,
+      "path": "src/mvdm-host/dos/dem/sources",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\sources",
+      "original_sha256": "3f29e2e85499831847f03fc91fd246c668c5bd7d1c20eed8724c9a873e22d818",
+      "previous_sha256": "db6168ddcb0406c72f84eda6529129076238434b9bc8e02e5a7ec1cbf11ca59b",
+      "restored_newlines": true
+    },
+    {
+      "sequence": 56,
+      "path": "src/mvdm-host/dos/dem/obj/i386/dem.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\i386\\dem.obj",
+      "original_sha256": "e408f6ab59f8d5db7fc667216428a9962b596bb6f00a9c7d3ab5302b9a03f8b6",
+      "previous_sha256": "e408f6ab59f8d5db7fc667216428a9962b596bb6f00a9c7d3ab5302b9a03f8b6",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 57,
+      "path": "src/mvdm-host/dos/dem/obj/i386/demdasd.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\i386\\demdasd.obj",
+      "original_sha256": "d2fb6148cca01dc6ec58a85388c62973f7c31341f14d8e89b58099a2863ce34b",
+      "previous_sha256": "d2fb6148cca01dc6ec58a85388c62973f7c31341f14d8e89b58099a2863ce34b",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 58,
+      "path": "src/mvdm-host/dos/dem/obj/i386/demdata.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\i386\\demdata.obj",
+      "original_sha256": "dfa9a045e1852cb9572a57480d500066c2bd84707c63dd568a72246faf4e5562",
+      "previous_sha256": "dfa9a045e1852cb9572a57480d500066c2bd84707c63dd568a72246faf4e5562",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 59,
+      "path": "src/mvdm-host/dos/dem/obj/i386/demdisp.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\i386\\demdisp.obj",
+      "original_sha256": "5b4483a90ed3f9d39612f4f0bcecb4a43d41ba506f9bc23f3f5402fc64f99a69",
+      "previous_sha256": "5b4483a90ed3f9d39612f4f0bcecb4a43d41ba506f9bc23f3f5402fc64f99a69",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 60,
+      "path": "src/mvdm-host/dos/dem/obj/i386/demmsg.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\i386\\demmsg.obj",
+      "original_sha256": "d6e54daccf72b42708bde3adc2b3dc828494ca61d4969a3ef9fd45b470f0ed6f",
+      "previous_sha256": "d6e54daccf72b42708bde3adc2b3dc828494ca61d4969a3ef9fd45b470f0ed6f",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 61,
+      "path": "src/mvdm-host/dos/dem/obj/i386/demsrch.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\i386\\demsrch.obj",
+      "original_sha256": "f7b4d41bb7f06947aa7031acabaed6a0f9bb1a8e9e39b76f2c9693f24db0ed75",
+      "previous_sha256": "f7b4d41bb7f06947aa7031acabaed6a0f9bb1a8e9e39b76f2c9693f24db0ed75",
+      "restored_newlines": false
+    },
+    {
+      "sequence": 62,
+      "path": "src/mvdm-host/dos/test/test.bat",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\test\\test.bat",
+      "original_sha256": "90ee88ee2f64859d8ec7a32e50e90c29b1dc610aae48e5e00c50ff19c4df64c3",
+      "previous_sha256": "7e46acbe50dda1528f91f19e202a58aef569547100a19f3461a43d6ba37bfc2a",
+      "restored_newlines": true
+    },
+    {
+      "sequence": 63,
+      "path": "src/mvdm-host/dpmi32/buffer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\buffer.c",
+      "original_sha256": "6123c2acefa990be5bf87600a232a32feb1b7435ea0c2f346aa174b56ca37abc",
+      "previous_sha256": "6123c2acefa990be5bf87600a232a32feb1b7435ea0c2f346aa174b56ca37abc",
+      "restored_newlines": false
+    }
+  ],
+  "limits": "Historical object files compared only; not build/runtime dependencies or newly produced artifacts. No C/H census changes."
+}

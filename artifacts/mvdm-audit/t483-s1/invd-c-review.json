@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+  "original_sha256": "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e",
+  "current_sha256": "0cb68c9ac8a34815fd07d71fcf7df5fab7c6fdf11701d1efe6f12e19f376324d",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 35,
+      "original_count": 10,
+      "current_start": 36,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Every textual difference enumerated; selected change is only listed IRET stack installation, if any. Remaining changes are excluded bodies and line directives.",
+  "limits": "Necessity audit only; no new build/run or all-context branch-hit certification."
+}

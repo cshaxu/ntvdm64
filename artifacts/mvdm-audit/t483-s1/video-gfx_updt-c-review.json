@@ -1,0 +1,2594 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+  "current_sha256": "c2d1f583e2f56f2ba4675acb0cd98d336ec635a68c8d00cebd2f2596816994c9",
+  "review_complete": true,
+  "register_entries": 77,
+  "exclusion_only": false,
+  "changes": [
+    {
+      "original_start": 99,
+      "original_count": 0,
+      "current_start": 101,
+      "current_count": 7,
+      "original": [],
+      "current": [
+        "",
+        "/* DIVERGENCE MVDM-HOST-DIV-087: retain the original host display update call",
+        " * with the exact selected nt_graph.c parameter contract.  The split source",
+        " * layout has no public declaration carrier for this same-package provider. */",
+        "IMPORT void host_stream_io_update IPT2(half_word *, buffer, word, count);",
+        "/* DIVERGENCE MVDM-HOST-DIV-088: selected C-video marker selector. */",
+        "IMPORT void setMarkPointers IPT1(IUH, markset);"
+      ]
+    },
+    {
+      "original_start": 213,
+      "original_count": 1,
+      "current_start": 197,
+      "current_count": 3,
+      "original": [
+        "\tLOCAL boolean simple_update IPT0();"
+      ],
+      "current": [
+        "\t/* DIVERGENCE(MVDM-HOST-DIV-135): selected marking dispatch is void; see",
+        "\t * gfx_upd.h.  Original callers use only its dirty-state side effect. */",
+        "\tLOCAL VOID simple_update IPT0();"
+      ]
+    },
+    {
+      "original_start": 549,
+      "original_count": 2,
+      "current_start": 551,
+      "current_count": 2,
+      "original": [
+        "\t\tfrom = (IU32 *) &planes[(offset<<1)];",
+        "\t\tfor(j=0;j<shorts_per_line;j++)"
+      ],
+      "current": [
+        "\t\tfrom = (IU32 *) &planes[(offset<<2)];",
+        "\t\tfor(j=0;j<shorts_per_line;j++,from+=2)"
+      ]
+    },
+    {
+      "original_start": 552,
+      "original_count": 1,
+      "current_start": 554,
+      "current_count": 1,
+      "original": [
+        "\t\t\tif(*to++ != get_char_attr(from++))"
+      ],
+      "current": [
+        "\t\t\tif(*to++ != get_char_attr(from))"
+      ]
+    },
+    {
+      "original_start": 554,
+      "original_count": 2,
+      "current_start": 556,
+      "current_count": 2,
+      "original": [
+        "\t\t\t\tto--;from--;",
+        "\t\t\t\tfor(k=shorts_per_line-1-j;*(to+k) == get_char_attr(from+k);k--)"
+      ],
+      "current": [
+        "\t\t\t\tto--;",
+        "\t\t\t\tfor(k=shorts_per_line-1-j;*(to+k) == get_char_attr(from+(k<<1));k--)"
+      ]
+    },
+    {
+      "original_start": 596,
+      "original_count": 1,
+      "current_start": 600,
+      "current_count": 1,
+      "original": [
+        "\t\tfrom = (USHORT *)get_screen_ptr(get_dirty_offset(i)+get_dirty_start(i));"
+      ],
+      "current": [
+        "\t\tfrom = (USHORT *)get_chain2_screen_ptr(get_dirty_offset(i)+get_dirty_start(i));"
+      ]
+    },
+    {
+      "original_start": 601,
+      "original_count": 1,
+      "current_start": 605,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom += 2;\t\t\t/* skip over the planes 2,3 */"
+      ],
+      "current": [
+        "\t\t\tfrom += 4;\t\t\t/* skip over the planes 2,3 */"
+      ]
+    },
+    {
+      "original_start": 635,
+      "original_count": 1,
+      "current_start": 641,
+      "current_count": 1,
+      "original": [
+        "LOCAL\tboolean simple_update IFN0()"
+      ],
+      "current": [
+        "LOCAL\tVOID simple_update IFN0()"
+      ]
+    },
+    {
+      "original_start": 638,
+      "original_count": 1,
+      "current_start": 645,
+      "current_count": 0,
+      "original": [
+        "\treturn( FALSE );"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 671,
+      "original_count": 5,
+      "current_start": 677,
+      "current_count": 5,
+      "original": [
+        "\t(T_mark_byte)simple_update,",
+        "\t(T_mark_word)simple_update,",
+        "\t(T_mark_fill)simple_update,",
+        "\t(T_mark_wfill)simple_update,",
+        "\t(T_mark_string)simple_update,"
+      ],
+      "current": [
+        "\tsimple_update,",
+        "\tsimple_update,",
+        "\tsimple_update,",
+        "\tsimple_update,",
+        "\tsimple_update,"
+      ]
+    },
+    {
+      "original_start": 704,
+      "original_count": 5,
+      "current_start": 710,
+      "current_count": 5,
+      "original": [
+        "    update_alg.mark_byte = (T_mark_byte)simple_update;",
+        "    update_alg.mark_word = (T_mark_word)simple_update;",
+        "    update_alg.mark_fill = (T_mark_fill)simple_update;",
+        "    update_alg.mark_wfill = (T_mark_wfill)simple_update;",
+        "    update_alg.mark_string = (T_mark_string)simple_update;"
+      ],
+      "current": [
+        "    update_alg.mark_byte = simple_update;",
+        "    update_alg.mark_word = simple_update;",
+        "    update_alg.mark_fill = simple_update;",
+        "    update_alg.mark_wfill = simple_update;",
+        "    update_alg.mark_string = simple_update;"
+      ]
+    },
+    {
+      "original_start": 772,
+      "original_count": 1,
+      "current_start": 780,
+      "current_count": 1,
+      "original": [
+        "\tfrom = (USHORT *) get_screen_ptr(screen_start);"
+      ],
+      "current": [
+        "\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      ]
+    },
+    {
+      "original_start": 790,
+      "original_count": 1,
+      "current_start": 798,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 794,
+      "original_count": 1,
+      "current_start": 802,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom = (USHORT * ) get_screen_ptr(0);"
+      ],
+      "current": [
+        "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(0);"
+      ]
+    },
+    {
+      "original_start": 800,
+      "original_count": 1,
+      "current_start": 808,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 820,
+      "original_count": 1,
+      "current_start": 828,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom = (USHORT * ) get_screen_ptr(screen_start);"
+      ],
+      "current": [
+        "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(screen_start);"
+      ]
+    },
+    {
+      "original_start": 826,
+      "original_count": 1,
+      "current_start": 834,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 840,
+      "original_count": 1,
+      "current_start": 848,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom = (USHORT * ) get_screen_ptr(0);"
+      ],
+      "current": [
+        "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(0);"
+      ]
+    },
+    {
+      "original_start": 846,
+      "original_count": 1,
+      "current_start": 854,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 870,
+      "original_count": 1,
+      "current_start": 878,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\t\tget_screen_ptr(screen_start), 0,"
+      ],
+      "current": [
+        "\t\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,"
+      ]
+    },
+    {
+      "original_start": 874,
+      "original_count": 1,
+      "current_start": 882,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tget_screen_ptr(0), wrap_line, split_line, 0 );"
+      ],
+      "current": [
+        "\t\t\t\t\t\tget_chain2_screen_ptr(0), wrap_line, split_line, 0 );"
+      ]
+    },
+    {
+      "original_start": 877,
+      "original_count": 1,
+      "current_start": 885,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tget_screen_ptr(0), split_line, lines_per_screen, 0 );"
+      ],
+      "current": [
+        "\t\t\t\t\t\tget_chain2_screen_ptr(0), split_line, lines_per_screen, 0 );"
+      ]
+    },
+    {
+      "original_start": 889,
+      "original_count": 1,
+      "current_start": 897,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tget_screen_ptr(screen_start), 0, split_line, screen_start );"
+      ],
+      "current": [
+        "\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0, split_line, screen_start );"
+      ]
+    },
+    {
+      "original_start": 891,
+      "original_count": 1,
+      "current_start": 899,
+      "current_count": 1,
+      "original": [
+        "\t\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_screen_ptr(0),"
+      ],
+      "current": [
+        "\t\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_chain2_screen_ptr(0),"
+      ]
+    },
+    {
+      "original_start": 931,
+      "original_count": 1,
+      "current_start": 939,
+      "current_count": 1,
+      "original": [
+        "\tfrom = (USHORT *) get_screen_ptr(screen_start);"
+      ],
+      "current": [
+        "\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      ]
+    },
+    {
+      "original_start": 946,
+      "original_count": 1,
+      "current_start": 954,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 959,
+      "original_count": 1,
+      "current_start": 967,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom = (USHORT *) get_screen_ptr(0);"
+      ],
+      "current": [
+        "\t\t\tfrom = (USHORT *) get_chain2_screen_ptr(0);"
+      ]
+    },
+    {
+      "original_start": 964,
+      "original_count": 1,
+      "current_start": 972,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 984,
+      "original_count": 1,
+      "current_start": 992,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tget_screen_ptr(screen_start) , 0, split_line, screen_start );"
+      ],
+      "current": [
+        "\t\t\t\t\tget_chain2_screen_ptr(screen_start) , 0, split_line, screen_start );"
+      ]
+    },
+    {
+      "original_start": 986,
+      "original_count": 1,
+      "current_start": 994,
+      "current_count": 1,
+      "original": [
+        "\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_screen_ptr(0),"
+      ],
+      "current": [
+        "\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_chain2_screen_ptr(0),"
+      ]
+    },
+    {
+      "original_start": 1021,
+      "original_count": 1,
+      "current_start": 1029,
+      "current_count": 1,
+      "original": [
+        "\t\tfrom = (USHORT *) get_screen_ptr(screen_start);"
+      ],
+      "current": [
+        "\t\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      ]
+    },
+    {
+      "original_start": 1026,
+      "original_count": 1,
+      "current_start": 1034,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 1080,
+      "original_count": 1,
+      "current_start": 1088,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tget_screen_ptr(screen_start), 0,"
+      ],
+      "current": [
+        "\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,"
+      ]
+    },
+    {
+      "original_start": 1083,
+      "original_count": 1,
+      "current_start": 1091,
+      "current_count": 1,
+      "original": [
+        "\t\t\tnext1 = ega_text_find_dirty_lines( video_copy, get_screen_ptr(0),"
+      ],
+      "current": [
+        "\t\t\tnext1 = ega_text_find_dirty_lines( video_copy, get_chain2_screen_ptr(0),"
+      ]
+    },
+    {
+      "original_start": 1095,
+      "original_count": 1,
+      "current_start": 1103,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tget_screen_ptr(screen_start), 0,"
+      ],
+      "current": [
+        "\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,"
+      ]
+    },
+    {
+      "original_start": 1130,
+      "original_count": 1,
+      "current_start": 1138,
+      "current_count": 1,
+      "original": [
+        "\t\tfrom = (USHORT *) get_screen_ptr(screen_start);"
+      ],
+      "current": [
+        "\t\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      ]
+    },
+    {
+      "original_start": 1135,
+      "original_count": 1,
+      "current_start": 1143,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom += 2;\t\t/* planes 2,3 interleaved */"
+      ],
+      "current": [
+        "\t\t\tfrom += 4;\t\t/* planes 2,3 interleaved */"
+      ]
+    },
+    {
+      "original_start": 1152,
+      "original_count": 1,
+      "current_start": 1160,
+      "current_count": 1,
+      "original": [
+        "\t\t\tget_screen_ptr(screen_start), 0, lines_per_screen, screen_start);"
+      ],
+      "current": [
+        "\t\t\tget_chain2_screen_ptr(screen_start), 0, lines_per_screen, screen_start);"
+      ]
+    },
+    {
+      "original_start": 1169,
+      "original_count": 1,
+      "current_start": 1177,
+      "current_count": 1,
+      "original": [
+        "\t\tattr = *(get_screen_ptr(dirty_curs_offs + 1));"
+      ],
+      "current": [
+        "\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));"
+      ]
+    },
+    {
+      "original_start": 1446,
+      "original_count": 1,
+      "current_start": 1456,
+      "current_count": 1,
+      "original": [
+        "\tfrom = (USHORT *) get_screen_ptr(0);"
+      ],
+      "current": [
+        "\tfrom = (USHORT *) get_chain2_screen_ptr(0);"
+      ]
+    },
+    {
+      "original_start": 1457,
+      "original_count": 1,
+      "current_start": 1467,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 1495,
+      "original_count": 1,
+      "current_start": 1505,
+      "current_count": 1,
+      "original": [
+        "\t\t    from = (USHORT *)get_screen_ptr((start_line *"
+      ],
+      "current": [
+        "\t\t    from = (USHORT *)get_chain2_screen_ptr((start_line *"
+      ]
+    },
+    {
+      "original_start": 1506,
+      "original_count": 1,
+      "current_start": 1516,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tfor(k=j-1;*(to+k)== *(from+(k<<1));k--)"
+      ],
+      "current": [
+        "\t\t\t\t\t\tfor(k=j-1;*(to+k)== *(from+(k<<2));k--)"
+      ]
+    },
+    {
+      "original_start": 1525,
+      "original_count": 1,
+      "current_start": 1535,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 1530,
+      "original_count": 1,
+      "current_start": 1540,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tfrom += l << 1;"
+      ],
+      "current": [
+        "\t\t\t\t\t\tfrom += l << 2;"
+      ]
+    },
+    {
+      "original_start": 1536,
+      "original_count": 1,
+      "current_start": 1546,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 1542,
+      "original_count": 1,
+      "current_start": 1552,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom = (USHORT *) get_screen_ptr((start_line * SCAN_LINE_LENGTH + ODD_OFFSET) << 1);"
+      ],
+      "current": [
+        "\t\t\tfrom = (USHORT *) get_chain2_screen_ptr((start_line * SCAN_LINE_LENGTH + ODD_OFFSET) << 1);"
+      ]
+    },
+    {
+      "original_start": 1551,
+      "original_count": 1,
+      "current_start": 1561,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tfor(k=j-1;*(to+k)== *(from+(k<<1));k--)"
+      ],
+      "current": [
+        "\t\t\t\t\t\tfor(k=j-1;*(to+k)== *(from+(k<<2));k--)"
+      ]
+    },
+    {
+      "original_start": 1568,
+      "original_count": 1,
+      "current_start": 1578,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 1573,
+      "original_count": 1,
+      "current_start": 1583,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\t\tfrom += l << 1;"
+      ],
+      "current": [
+        "\t\t\t\t\t\tfrom += l << 2;"
+      ]
+    },
+    {
+      "original_start": 1579,
+      "original_count": 1,
+      "current_start": 1589,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tfrom += 2;"
+      ],
+      "current": [
+        "\t\t\t\t\tfrom += 4;"
+      ]
+    },
+    {
+      "original_start": 2398,
+      "original_count": 3,
+      "current_start": 2413,
+      "current_count": 3,
+      "original": [
+        "\t    top_left_ptr = (short *) get_screen_ptr((start - gvi_pc_low_regen)<<1);",
+        "        top_right_ptr    = top_left_ptr + width - 2;",
+        "\t    bottom_right_ptr = top_right_ptr + bpl * (height - 1);"
+      ],
+      "current": [
+        "\t    top_left_ptr = (short *) get_chain2_screen_ptr((start - gvi_pc_low_regen)<<1);",
+        "        top_right_ptr    = top_left_ptr + 2 * (width - 2);",
+        "\t    bottom_right_ptr = top_right_ptr + 2 * bpl * (height - 1);"
+      ]
+    },
+    {
+      "original_start": 2408,
+      "original_count": 2,
+      "current_start": 2423,
+      "current_count": 2,
+      "original": [
+        "\t\t        top_right_ptr -= 2;\t/* yes go to bottom of next */",
+        "\t\t        bottom_right_ptr -= 2;"
+      ],
+      "current": [
+        "\t\t        top_right_ptr -= 4;\t/* yes go to bottom of next */",
+        "\t\t        bottom_right_ptr -= 4;"
+      ]
+    },
+    {
+      "original_start": 2415,
+      "original_count": 1,
+      "current_start": 2430,
+      "current_count": 1,
+      "original": [
+        "\t\t        ptr -= bpl;\t/* skipping interleaved planes */"
+      ],
+      "current": [
+        "\t\t        ptr -= 2 * bpl;\t/* skipping interleaved planes */"
+      ]
+    },
+    {
+      "original_start": 2418,
+      "original_count": 1,
+      "current_start": 2433,
+      "current_count": 1,
+      "original": [
+        "\t    width = (int)(top_right_ptr - top_left_ptr + 2) << 1;"
+      ],
+      "current": [
+        "\t    width = (int)(top_right_ptr - top_left_ptr + 4);"
+      ]
+    },
+    {
+      "original_start": 2475,
+      "original_count": 2,
+      "current_start": 2492,
+      "current_count": 2,
+      "original": [
+        "\tdest = get_screen_ptr((start - gvi_pc_low_regen)<<1);",
+        "\tsrc = dest + lines * bpl * 2;"
+      ],
+      "current": [
+        "\tdest = get_chain2_screen_ptr((start - gvi_pc_low_regen)<<1);",
+        "\tsrc = dest + lines * bpl * 4;"
+      ]
+    },
+    {
+      "original_start": 2487,
+      "original_count": 2,
+      "current_start": 2504,
+      "current_count": 2,
+      "original": [
+        "\t\t\td_ptr += 2;\t\t\t/* skip FONT and plane 3 */",
+        "\t\t\ts_ptr += 2;"
+      ],
+      "current": [
+        "\t\t\td_ptr += 4;\t\t\t/* skip FONT and plane 3 */",
+        "\t\t\ts_ptr += 4;"
+      ]
+    },
+    {
+      "original_start": 2491,
+      "original_count": 2,
+      "current_start": 2508,
+      "current_count": 2,
+      "original": [
+        "\t\tdest += bpl * 2;",
+        "\t\tsrc += bpl * 2;"
+      ],
+      "current": [
+        "\t\tdest += bpl * 4;",
+        "\t\tsrc += bpl * 4;"
+      ]
+    },
+    {
+      "original_start": 2511,
+      "original_count": 1,
+      "current_start": 2531,
+      "current_count": 1,
+      "original": [
+        "\t\t\td_ptr += 2;"
+      ],
+      "current": [
+        "\t\t\td_ptr += 4;"
+      ]
+    },
+    {
+      "original_start": 2514,
+      "original_count": 1,
+      "current_start": 2534,
+      "current_count": 1,
+      "original": [
+        "\t\tdest += bpl * 2;"
+      ],
+      "current": [
+        "\t\tdest += bpl * 4;"
+      ]
+    },
+    {
+      "original_start": 2612,
+      "original_count": 2,
+      "current_start": 2632,
+      "current_count": 2,
+      "original": [
+        "\tdest = get_screen_ptr((start - gvi_pc_low_regen)<<1) + (height-1) * bpl * 2;",
+        "\tsrc = dest - lines * bpl * 2;"
+      ],
+      "current": [
+        "\tdest = get_chain2_screen_ptr((start - gvi_pc_low_regen)<<1) + (height-1) * bpl * 4;",
+        "\tsrc = dest - lines * bpl * 4;"
+      ]
+    },
+    {
+      "original_start": 2624,
+      "original_count": 2,
+      "current_start": 2644,
+      "current_count": 2,
+      "original": [
+        "\t\t\td_ptr += 2;",
+        "\t\t\ts_ptr += 2;"
+      ],
+      "current": [
+        "\t\t\td_ptr += 4;",
+        "\t\t\ts_ptr += 4;"
+      ]
+    },
+    {
+      "original_start": 2628,
+      "original_count": 2,
+      "current_start": 2648,
+      "current_count": 2,
+      "original": [
+        "\t\tdest -= bpl * 2;",
+        "\t\tsrc -= bpl * 2;"
+      ],
+      "current": [
+        "\t\tdest -= bpl * 4;",
+        "\t\tsrc -= bpl * 4;"
+      ]
+    },
+    {
+      "original_start": 2648,
+      "original_count": 1,
+      "current_start": 2671,
+      "current_count": 1,
+      "original": [
+        "\t\t\td_ptr += 2;"
+      ],
+      "current": [
+        "\t\t\td_ptr += 4;"
+      ]
+    },
+    {
+      "original_start": 2651,
+      "original_count": 1,
+      "current_start": 2674,
+      "current_count": 1,
+      "original": [
+        "\t\tdest -= bpl * 2;"
+      ],
+      "current": [
+        "\t\tdest -= bpl * 4;"
+      ]
+    },
+    {
+      "original_start": 3609,
+      "original_count": 5,
+      "current_start": 3563,
+      "current_count": 5,
+      "original": [
+        "\t\t\tupdate_alg.mark_byte = (T_mark_byte)simple_update;",
+        "\t\t\tupdate_alg.mark_word = (T_mark_word)simple_update;",
+        "\t\t\tupdate_alg.mark_fill = (T_mark_fill)simple_update;",
+        "\t\t\tupdate_alg.mark_wfill = (T_mark_wfill)simple_update;",
+        "\t\t\tupdate_alg.mark_string = (T_mark_string)simple_update;"
+      ],
+      "current": [
+        "\t\t\tupdate_alg.mark_byte = simple_update;",
+        "\t\t\tupdate_alg.mark_word = simple_update;",
+        "\t\t\tupdate_alg.mark_fill = simple_update;",
+        "\t\t\tupdate_alg.mark_wfill = simple_update;",
+        "\t\t\tupdate_alg.mark_string = simple_update;"
+      ]
+    },
+    {
+      "original_start": 3626,
+      "original_count": 5,
+      "current_start": 3580,
+      "current_count": 5,
+      "original": [
+        "\t\t\tupdate_alg.mark_byte = (boolean(*)())cga_mark_byte;",
+        "\t\t\tupdate_alg.mark_word = (boolean(*)())cga_mark_word;",
+        "\t\t\tupdate_alg.mark_fill = (boolean(*)())cga_mark_string;",
+        "\t\t\tupdate_alg.mark_wfill = (boolean(*)())cga_mark_string;",
+        "\t\t\tupdate_alg.mark_string = (boolean(*)())cga_mark_string;"
+      ],
+      "current": [
+        "\t\t\tupdate_alg.mark_byte = cga_mark_byte;",
+        "\t\t\tupdate_alg.mark_word = cga_mark_word;",
+        "\t\t\tupdate_alg.mark_fill = cga_mark_string;",
+        "\t\t\tupdate_alg.mark_wfill = cga_mark_string;",
+        "\t\t\tupdate_alg.mark_string = cga_mark_string;"
+      ]
+    },
+    {
+      "original_start": 3655,
+      "original_count": 5,
+      "current_start": 3604,
+      "current_count": 5,
+      "original": [
+        "\t\t\tupdate_alg.mark_byte = (boolean(*)())ega_mark_byte;",
+        "\t\t\tupdate_alg.mark_word = (boolean(*)())ega_mark_word;",
+        "\t\t\tupdate_alg.mark_fill = (boolean(*)())ega_mark_string;",
+        "\t\t\tupdate_alg.mark_wfill = (boolean(*)())ega_mark_wfill;",
+        "\t\t\tupdate_alg.mark_string = (boolean(*)())ega_mark_string;"
+      ],
+      "current": [
+        "\t\t\tupdate_alg.mark_byte = ega_mark_byte;",
+        "\t\t\tupdate_alg.mark_word = ega_mark_word;",
+        "\t\t\tupdate_alg.mark_fill = ega_mark_string;",
+        "\t\t\tupdate_alg.mark_wfill = ega_mark_wfill;",
+        "\t\t\tupdate_alg.mark_string = ega_mark_string;"
+      ]
+    },
+    {
+      "original_start": 3682,
+      "original_count": 1,
+      "current_start": 3631,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tassert0( NO, \"CHAIN2 in graphics mode !!\" );"
+      ],
+      "current": [
+        "\t\t\t\t\tSetMarkPointers(4); /* SoftPC T88/T99 CHAIN2 EGA bitmap. */"
+      ]
+    },
+    {
+      "original_start": 4083,
+      "original_count": 5,
+      "current_start": 3825,
+      "current_count": 5,
+      "original": [
+        "    update_alg.mark_byte \t= (T_mark_byte)simple_update;",
+        "    update_alg.mark_word\t= (T_mark_word)simple_update;",
+        "    update_alg.mark_fill \t= (T_mark_fill)simple_update;",
+        "    update_alg.mark_wfill \t= (T_mark_wfill)simple_update;",
+        "    update_alg.mark_string \t= (T_mark_string)simple_update;"
+      ],
+      "current": [
+        "    update_alg.mark_byte \t= simple_update;",
+        "    update_alg.mark_word\t= simple_update;",
+        "    update_alg.mark_fill \t= simple_update;",
+        "    update_alg.mark_wfill \t= simple_update;",
+        "    update_alg.mark_string \t= simple_update;"
+      ]
+    },
+    {
+      "original_start": 4739,
+      "original_count": 1,
+      "current_start": 4024,
+      "current_count": 1,
+      "original": [
+        "    from = (unsigned short *) get_screen_ptr(screen_start);"
+      ],
+      "current": [
+        "    from = (unsigned short *) get_chain2_screen_ptr(screen_start);"
+      ]
+    },
+    {
+      "original_start": 4746,
+      "original_count": 1,
+      "current_start": 4031,
+      "current_count": 1,
+      "original": [
+        "\t    from += 2;\t\t/* planes 2,3 interleaved */"
+      ],
+      "current": [
+        "\t    from += 4;\t\t/* planes 2,3 interleaved */"
+      ]
+    },
+    {
+      "original_start": 4763,
+      "original_count": 1,
+      "current_start": 4048,
+      "current_count": 1,
+      "original": [
+        "\t\t    wfrom = from + k*2;"
+      ],
+      "current": [
+        "\t\t    wfrom = from + k*4;"
+      ]
+    },
+    {
+      "original_start": 4766,
+      "original_count": 1,
+      "current_start": 4051,
+      "current_count": 1,
+      "original": [
+        "\t\t    for(;*wto== *wfrom;k--,wto--,wfrom-=2){};"
+      ],
+      "current": [
+        "\t\t    for(;*wto== *wfrom;k--,wto--,wfrom-=4){};"
+      ]
+    },
+    {
+      "original_start": 4788,
+      "original_count": 1,
+      "current_start": 4073,
+      "current_count": 1,
+      "original": [
+        "\t\t\tfrom+=2;"
+      ],
+      "current": [
+        "\t\t\tfrom+=4;"
+      ]
+    },
+    {
+      "original_start": 4794,
+      "original_count": 1,
+      "current_start": 4079,
+      "current_count": 1,
+      "original": [
+        "\t\t    to++; from +=2;"
+      ],
+      "current": [
+        "\t\t    to++; from +=4;"
+      ]
+    },
+    {
+      "original_start": 4814,
+      "original_count": 1,
+      "current_start": 4099,
+      "current_count": 1,
+      "original": [
+        "\t\tattr = *(get_screen_ptr(dirty_curs_offs + 1));"
+      ],
+      "current": [
+        "\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 94,
+      "original_count": 1,
+      "current_start": 95,
+      "current_count": 1,
+      "original": [
+        "#include \"gore.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 116,
+      "original_count": 6,
+      "current_start": 127,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 127,
+      "original_count": 2,
+      "current_start": 135,
+      "current_count": 1,
+      "original": [
+        "#define\tinit_dirty_recs()\t\t{ dirty_next = 0 ; if (io_verbose & EGA_DISPLAY_VERBOSE) \\",
+        "\t\t\t\t\t\ttrace(\"--- start collecting update records ---\\n\",0); }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 142,
+      "original_count": 13,
+      "current_start": 151,
+      "current_count": 1,
+      "original": [
+        "#define\tadd_dirty_rec(line,st,len,off,fr)\t{\tif (io_verbose & EGA_DISPLAY_VERBOSE) {\\",
+        "\t\t\t\t\t\t\tchar\ttrace_string[80]; \\",
+        "\t\t\t\t\t\t\tsprintf(trace_string,\"dirty[%d]line_no %d, start %d end %d\", \\",
+        "\t\t\t\t\t\t\t\t\t\t\tdirty_next,(line),(st),(st)+(len));\\",
+        "\t\t\t\t\t\t\ttrace(trace_string,0); \\",
+        "\t\t\t\t\t\t} \\",
+        "\t\t\t\t\t\tdirty[dirty_next].line_no = (line); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].start = (st); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].end = (st) + (len); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].video_copy_offset = (off); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].v7frig = (fr); \\",
+        "\t\t\t\t\t\tdirty_next++; \\",
+        "\t\t\t\t\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 157,
+      "original_count": 21,
+      "current_start": 156,
+      "current_count": 1,
+      "original": [
+        "#if\tdefined(PROD) || (!defined(EGG))",
+        "#define\tadd_dirty_rec(line,st,len,off)\t{\tdirty[dirty_next].line_no = (line); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].start = (st); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].end = (st) + (len); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].video_copy_offset = (off); \\",
+        "\t\t\t\t\t\tdirty_next++; \\",
+        "\t\t\t\t\t}",
+        "#else",
+        "#define\tadd_dirty_rec(line,st,len,off)\t{\tif (io_verbose & EGA_DISPLAY_VERBOSE) {\\",
+        "\t\t\t\t\t\t\tchar\ttrace_string[80]; \\",
+        "\t\t\t\t\t\t\tsprintf(trace_string,\"dirty[%d]line_no %d, start %d end %d\", \\",
+        "\t\t\t\t\t\t\t\t\t\t\tdirty_next,(line),(st),(st)+(len));\\",
+        "\t\t\t\t\t\t\ttrace(trace_string,0); \\",
+        "\t\t\t\t\t\t} \\",
+        "\t\t\t\t\t\tdirty[dirty_next].line_no = (line); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].start = (st); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].end = (st) + (len); \\",
+        "\t\t\t\t\t\tdirty[dirty_next].video_copy_offset = (off); \\",
+        "\t\t\t\t\t\tdirty_next++; \\",
+        "\t\t\t\t\t}",
+        "#endif"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 187,
+      "original_count": 1,
+      "current_start": 168,
+      "current_count": 1,
+      "original": [
+        "#define\tSET_VGLOBS_MARK_STRING(func)\t\t/*nothing*/"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 198,
+      "original_count": 3,
+      "current_start": 183,
+      "current_count": 1,
+      "original": [
+        "#define ALIGN_SCREEN_START(start) if (start & 3L) \\",
+        "\t{ file_id; printf(\"Start of screen not 4-byte aligned\"); newline; \\",
+        "\tstart &= ~3L; }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 217,
+      "original_count": 2,
+      "current_start": 205,
+      "current_count": 1,
+      "original": [
+        "\tboolean mon_text_scroll_up IPT6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour);",
+        "\tboolean mon_text_scroll_down IPT6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 234,
+      "original_count": 4,
+      "current_start": 223,
+      "current_count": 1,
+      "original": [
+        "",
+        "IMPORT BOOL HostUpdatedVGA IPT0();\t/* Called from vga_graph_update() */",
+        "IMPORT BOOL HostUpdatedEGA IPT0();\t/* ega_graph_update() */",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 258,
+      "original_count": 1,
+      "current_start": 247,
+      "current_count": 1,
+      "original": [
+        "static\tDIRTY_PARTS\tdirty[480];"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 261,
+      "original_count": 1,
+      "current_start": 252,
+      "current_count": 1,
+      "original": [
+        "static\tDIRTY_PARTS\tdirty[350];"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 264,
+      "original_count": 1,
+      "current_start": 257,
+      "current_count": 1,
+      "original": [
+        "DIRTY_PARTS\t*dirty;\t/* NB. Allocated as 350*4*sizeof(int) in applInit(). */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 300,
+      "original_count": 2,
+      "current_start": 295,
+      "current_count": 1,
+      "original": [
+        "\t\tadd_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,",
+        "\t\t              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 425,
+      "original_count": 2,
+      "current_start": 421,
+      "current_count": 1,
+      "original": [
+        "\t\tadd_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,",
+        "\t\t              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 502,
+      "original_count": 4,
+      "current_start": 499,
+      "current_count": 1,
+      "original": [
+        "\t\tif (cur_end > cur_start)",
+        "\t\t\t(*paint_screen)((dirty_vc_offset<<2) + cur_start,",
+        "\t\t\tcur_start<<3, first_line, cur_end-cur_start,",
+        "\t\t\tlast_line-first_line+1);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 516,
+      "original_count": 1,
+      "current_start": 512,
+      "current_count": 1,
+      "original": [
+        "\t\tj =  &video_copy[ i->video_copy_offset+(i->start>>2)];"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 523,
+      "original_count": 1,
+      "current_start": 521,
+      "current_count": 1,
+      "original": [
+        "#define get_char_attr(unsigned_long_ptr)     ((*(unsigned_long_ptr)) >> 16)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 531,
+      "original_count": 1,
+      "current_start": 532,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 569,
+      "original_count": 1,
+      "current_start": 572,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\tadd_dirty_rec(cur_y,j<<2,(k<<1)+2,screen_start+(offset<<1));"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 609,
+      "original_count": 1,
+      "current_start": 614,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 743,
+      "original_count": 1,
+      "current_start": 750,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 1179,
+      "original_count": 1,
+      "current_start": 1188,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 1792,
+      "original_count": 1,
+      "current_start": 1803,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 2295,
+      "original_count": 1,
+      "current_start": 2308,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 2385,
+      "original_count": 2,
+      "current_start": 2400,
+      "current_count": 1,
+      "original": [
+        "        if (terminal_type != TERMINAL_TYPE_DUMB)",
+        "        {"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2420,
+      "original_count": 1,
+      "current_start": 2436,
+      "current_count": 1,
+      "original": [
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2498,
+      "original_count": 1,
+      "current_start": 2516,
+      "current_count": 1,
+      "original": [
+        "\tdata = (' ' << 8) | attr;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2635,
+      "original_count": 1,
+      "current_start": 2656,
+      "current_count": 1,
+      "original": [
+        "\tdata = (' ' << 8) | attr;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2709,
+      "original_count": 2,
+      "current_start": 2733,
+      "current_count": 1,
+      "original": [
+        "        if (terminal_type != TERMINAL_TYPE_DUMB)",
+        "        {"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 2744,
+      "original_count": 1,
+      "current_start": 2769,
+      "current_count": 1,
+      "original": [
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3246,
+      "original_count": 6,
+      "current_start": 3273,
+      "current_count": 1,
+      "original": [
+        "#if\t\tdefined(JOKER) && !defined(PROD)",
+        "#include \"SOFTPC_GRAPHICS.seg\"",
+        "#undef\tSEGMENTATION\t\t/* HeeHee! */",
+        "#else",
+        "#include \"SOFTPC_EGA.seg\"",
+        "#endif\t/* DEV JOKER variants */"
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3313,
+      "original_count": 1,
+      "current_start": 3337,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3337,
+      "original_count": 92,
+      "current_start": 3363,
+      "current_count": 1,
+      "original": [
+        "",
+        "#ifdef GORE_PIG",
+        "GLOBAL UTINY gore_copy[0x80000];\t/* Big enough for enormous Super7 VGA modes */",
+        "#endif /* GORE_PIG */",
+        "",
+        "LOCAL VOID",
+        "gore_mark_byte_nch IFN0()",
+        "{",
+        "#ifdef GORE_PIG",
+        "\tgore_copy[(Ead >> 2) + (v7_write_bank << 16)] = gd.gd_b_wrt.mark_type;",
+        "#endif /* GORE_PIG */",
+        "",
+        "\t(*gu_handler.b_wrt)(( Ead >> 2 ) + ( v7_write_bank << 16 ));",
+        "}",
+        "",
+        "LOCAL VOID",
+        "gore_mark_word_nch IFN0()",
+        "{",
+        "#ifdef GORE_PIG",
+        "\tgore_copy[(Ead >> 2 ) + 1 + (v7_write_bank << 16)] =",
+        "\t\t\tgore_copy[(Ead >> 2) + (v7_write_bank << 16)] = gd.gd_w_wrt.mark_type;",
+        "#endif /* GORE_PIG */",
+        "",
+        "\t(*gu_handler.w_wrt)(( Ead >> 2 ) + ( v7_write_bank << 16 ));",
+        "}",
+        "",
+        "LOCAL VOID",
+        "gore_mark_string_nch IFN0()",
+        "{",
+        "\tULONG temp =  ( Ead >> 2 ) + ( v7_write_bank << 16 );",
+        "",
+        "#ifdef GORE_PIG",
+        "\tmemfill( gd.gd_b_str.mark_type, &gore_copy[temp], &gore_copy[temp+V3-1] );",
+        "#endif /* GORE_PIG */",
+        "",
+        "\t(*gu_handler.b_str)( temp, temp + V3 - 1, V3 );",
+        "}",
+        "",
+        "LOCAL VOID",
+        "gore_mark_byte_ch4 IFN0()",
+        "{",
+        "\tULONG temp =  Ead + ( v7_write_bank << 16 );",
+        "",
+        "#ifdef GORE_PIG",
+        "\tif( temp < gd.dirty_low )",
+        "\t\tgd.dirty_low = temp;",
+        "",
+        "\tif( temp > gd.dirty_high )",
+        "\t\tgd.dirty_high = temp;",
+        "",
+        "\tgore_copy[temp] = gd.gd_b_wrt.mark_type;",
+        "#endif /* GORE_PIG */",
+        "",
+        "\t(*gu_handler.b_wrt)( temp );",
+        "}",
+        "",
+        "LOCAL VOID",
+        "gore_mark_word_ch4 IFN0()",
+        "{",
+        "\tULONG temp =  Ead + ( v7_write_bank << 16 );",
+        "",
+        "#ifdef GORE_PIG",
+        "\tif( temp < gd.dirty_low )",
+        "\t\tgd.dirty_low = temp;",
+        "",
+        "\tif(( temp + 1 ) > gd.dirty_high )",
+        "\t\tgd.dirty_high = temp + 1;",
+        "",
+        "\tgore_copy[temp + 1] = gore_copy[temp] = gd.gd_w_wrt.mark_type;",
+        "#endif /* GORE_PIG */",
+        "",
+        "\t(*gu_handler.w_wrt)( Ead + ( v7_write_bank << 16 ));",
+        "}",
+        "",
+        "LOCAL VOID",
+        "gore_mark_string_ch4 IFN0()",
+        "{",
+        "\tULONG temp =  Ead + ( v7_write_bank << 16 );",
+        "\tULONG temp2 =  temp + V3 - 1;",
+        "",
+        "#ifdef GORE_PIG",
+        "\tif( temp < gd.dirty_low )",
+        "\t\tgd.dirty_low = temp;",
+        "",
+        "\tif( temp2 > gd.dirty_high )",
+        "\t\tgd.dirty_high = temp2;",
+        "",
+        "\tmemfill( gd.gd_b_str.mark_type, &gore_copy[temp], &gore_copy[temp2] );",
+        "#endif /* GORE_PIG */",
+        "",
+        "\t(*gu_handler.b_str)( temp, temp2, V3 );",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3480,
+      "original_count": 1,
+      "current_start": 3417,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3486,
+      "original_count": 1,
+      "current_start": 3425,
+      "current_count": 1,
+      "original": [
+        "\t(*gu_handler.b_wrt)( off_in );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3505,
+      "original_count": 1,
+      "current_start": 3447,
+      "current_count": 1,
+      "original": [
+        "\t(*gu_handler.w_wrt)( addr );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3527,
+      "original_count": 1,
+      "current_start": 3472,
+      "current_count": 1,
+      "original": [
+        "\t(*gu_handler.w_fill)( laddr, haddr, haddr - laddr + 1, col );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3550,
+      "original_count": 1,
+      "current_start": 3498,
+      "current_count": 1,
+      "original": [
+        "\t(*gu_handler.b_str)( laddr, haddr, haddr - laddr + 1 );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3570,
+      "original_count": 1,
+      "current_start": 3522,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3577,
+      "original_count": 1,
+      "current_start": 3531,
+      "current_count": 1,
+      "original": [
+        "\t(*gu_handler.b_str)( 0, get_screen_length(), get_screen_length() );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3581,
+      "original_count": 7,
+      "current_start": 3537,
+      "current_count": 1,
+      "original": [
+        "\t/*",
+        "         * This is to stop the VGA globals pointer being",
+        "         * dereferenced before it is set up in main.c.",
+        "         */",
+        "",
+        "        if (VGLOBS)",
+        "                VGLOBS->dirty_flag = 1000000L;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3596,
+      "original_count": 1,
+      "current_start": 3549,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3616,
+      "original_count": 4,
+      "current_start": 3571,
+      "current_count": 1,
+      "original": [
+        "\t\t\tsetVideomark_byte(FAST_FUNC_ADDR(_simple_mark_sml));",
+        "\t\t\tsetVideomark_word(FAST_FUNC_ADDR(_simple_mark_sml));",
+        "",
+        "\t\t\tSET_VGLOBS_MARK_STRING(_simple_mark_lge);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3633,
+      "original_count": 4,
+      "current_start": 3588,
+      "current_count": 1,
+      "original": [
+        "\t\t\tsetVideomark_byte(FAST_FUNC_ADDR(_cga_mark_byte));",
+        "\t\t\tsetVideomark_word(FAST_FUNC_ADDR(_cga_mark_word));",
+        "",
+        "\t\t\tSET_VGLOBS_MARK_STRING(_cga_mark_string);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3645,
+      "original_count": 8,
+      "current_start": 3600,
+      "current_count": 1,
+      "original": [
+        "\t\t\treset_gore_ptrs();",
+        "\t\t\tgd.curr_line_diff = get_bytes_per_line();",
+        "\t\t\tgd.max_vis_addr = get_screen_length() - 1 + ( v7_write_bank << 16 );",
+        "#ifdef\tVGG",
+        "\t\t\tgd.shift_count = get_256_colour_mode() ? 0 : 3;",
+        "#else",
+        "\t\t\tgd.shift_count = 3;",
+        "#endif\t/* VGG */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3665,
+      "original_count": 4,
+      "current_start": 3615,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tsetVideomark_byte(gore_mark_byte_nch);",
+        "\t\t\t\t\tsetVideomark_word(gore_mark_word_nch);",
+        "",
+        "\t\t\t\t\tSET_VGLOBS_MARK_STRING(gore_mark_string_nch);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3671,
+      "original_count": 4,
+      "current_start": 3620,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tsetVideomark_byte(FAST_FUNC_ADDR(_mark_byte_nch));",
+        "\t\t\t\t\tsetVideomark_word(FAST_FUNC_ADDR(_mark_word_nch));",
+        "",
+        "\t\t\t\t\tSET_VGLOBS_MARK_STRING(_mark_string_nch);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3689,
+      "original_count": 4,
+      "current_start": 3639,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tsetVideomark_byte(gore_mark_byte_ch4);",
+        "\t\t\t\t\tsetVideomark_word(gore_mark_word_ch4);",
+        "",
+        "\t\t\t\t\tSET_VGLOBS_MARK_STRING(gore_mark_string_ch4);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3695,
+      "original_count": 4,
+      "current_start": 3643,
+      "current_count": 1,
+      "original": [
+        "\t\t\t\t\tsetVideomark_byte(FAST_FUNC_ADDR(_mark_byte_ch4));",
+        "\t\t\t\t\tsetVideomark_word(FAST_FUNC_ADDR(_mark_word_ch4));",
+        "",
+        "\t\t\t\t\tSET_VGLOBS_MARK_STRING(_mark_string_ch4);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3717,
+      "original_count": 1,
+      "current_start": 3670,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 3732,
+      "original_count": 2,
+      "current_start": 3687,
+      "current_count": 1,
+      "original": [
+        "\t\t\tupdate_alg.scroll_up = mon_text_scroll_up;",
+        "\t\t\tupdate_alg.scroll_down = mon_text_scroll_down;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3796,
+      "original_count": 5,
+      "current_start": 3757,
+      "current_count": 1,
+      "original": [
+        "    IU32 offset;",
+        "",
+        "    offset = (y * 2 * get_chars_per_line()) + (x << 1);",
+        "    offset += get_screen_start()<<1;\t/* Because screen start is in WORDS */",
+        "    vga_card_place_cursor((word)offset);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 3819,
+      "original_count": 221,
+      "current_start": 3778,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define DIRTY ((unsigned char)-1)",
+        "",
+        "void     herc_update_screen IFN0()",
+        "{",
+        "    register int    i, j, k, offs, y;",
+        "    register USHORT *from, *to;",
+        "    int        lines_per_screen = get_screen_length() / get_bytes_per_line();\t",
+        "    /* lines of text on screen */",
+        "    half_word       begin[349], end[348];",
+        "",
+        "    if(( getVideodirty_total() == 0 ) || get_display_disabled())",
+        "\t\treturn;",
+        "",
+        "    host_start_update();",
+        "",
+        "    if (get_cga_mode() == TEXT)",
+        "    {",
+        "\t/*",
+        "\t * arbitrary limit over which we just repaint the whole screen in one operation, assuming",
+        "\t * this is more efficient than working out large minimum rectangles. This value should be",
+        "\t * tuned at some future point. ",
+        "\t */",
+        "\tto = (USHORT *) &video_copy[get_screen_start()];",
+        "\tfrom = (USHORT *) get_screen_ptr((get_screen_start() << 1));",
+        "",
+        "\tif (getVideodirty_total() > 1500)",
+        "\t{",
+        "\t    for (i = get_screen_length() >> 1; i > 0; i--)",
+        "\t\t*to++ = *from++;",
+        "",
+        "\t\toffs = 0;",
+        "\t\ty = 0;",
+        "",
+        "\t\tfor( i = 0; i < lines_per_screen; i++ )",
+        "\t\t{",
+        "\t\t    (*paint_screen) (offs, 0, y, get_bytes_per_line() );",
+        "\t\t\toffs += get_bytes_per_line();",
+        "\t\t\ty += get_host_char_height();",
+        "\t\t}",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t    /*",
+        "\t     * step through row/cols looking for a dirty bit then look for the last clear dirty bit,",
+        "\t     * and draw the line of text ",
+        "\t     */",
+        "\t    register int    ints_per_line = get_bytes_per_line() >> 1;",
+        "",
+        "\t    for (i = 0, offs = 0; i < lines_per_screen; i++, offs += get_bytes_per_line())",
+        "\t    {",
+        "\t\tfor (j = 0; j < ints_per_line; j++)",
+        "\t\t{",
+        "\t\t    if (*to++ != *from++)",
+        "\t\t    {",
+        "\t\t\tto--;",
+        "\t\t\tfrom--;",
+        "\t\t\tfor (k = ints_per_line - 1 - j; *(to + k) == *(from + k); k--)",
+        "\t\t\t    ;",
+        "",
+        "\t\t\t(*paint_screen) (offs + (j << 1), j * get_pix_char_width(),",
+        "\t\t\t\t\t\t\ti * get_host_char_height() , (k << 1) + 2 );",
+        "",
+        "\t\t\tfor (k = j; k < ints_per_line; k++)",
+        "\t\t\t    *to++ = *from++;",
+        "\t\t\tbreak;\t\t\t /* onto next line */",
+        "\t\t    }",
+        "\t\t}",
+        "\t    }",
+        "\t}\t\t\t\t\t /* end else getVideodirty_total() > 1500  */",
+        "",
+        "\tremove_old_cursor();",
+        "",
+        "\tif (is_cursor_visible())",
+        "\t{",
+        "\t\thalf_word attr;",
+        "",
+        "\t\tdirty_curs_x = get_cur_x();",
+        "\t\tdirty_curs_y = get_cur_y();",
+        "",
+        "\t\tdirty_curs_offs = dirty_curs_y * get_bytes_per_line() + (dirty_curs_x << 1);",
+        "\t\tattr = *(get_screen_ptr(dirty_curs_offs + 1));",
+        "",
+        "\t\thost_paint_cursor( dirty_curs_x, dirty_curs_y, attr );",
+        "\t}",
+        "    }",
+        "    else\t\t\t\t\t /* GRAPHICS  MODE */",
+        "    {",
+        "",
+        "\tto = (USHORT *) &video_copy[0];",
+        "\tfrom = (USHORT *) get_screen_ptr(get_screen_start());",
+        "",
+        "\t/*",
+        "\t * arbitrary limit over which we just repaint the whole screen in one operation, assuming",
+        "\t * this is more efficient than working out large minimum rectangles. This value should be",
+        "\t * tuned at some future point. ",
+        "\t */",
+        "",
+        "\tif (getVideodirty_total() > 8000)",
+        "\t{",
+        "\t    for (i = 16384; i > 0; i--)",
+        "\t\t*to++ = *from++;",
+        "\t    (*paint_screen) (0, 0, 90, 348);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t    for (i = 0; i < 348; i += 4)\t /* bank 0 */",
+        "\t    {",
+        "\t\tbegin[i] = DIRTY;",
+        "\t\tfor (j = 0; j < 45; j++)",
+        "\t\t{",
+        "\t\t    if (*to++ != *from++)",
+        "\t\t    {",
+        "\t\t\tto--;",
+        "\t\t\tfrom--;",
+        "\t\t\tfor (k = 44 - j; *(to + k) == *(from + k); k--)",
+        "\t\t\t    ;",
+        "\t\t\tbegin[i] = j;",
+        "\t\t\tend[i] = j + k;",
+        "\t\t\tfor (k = j; k < 45; k++)",
+        "\t\t\t    *to++ = *from++;",
+        "\t\t\tbreak;\t\t\t /* onto next scan line */",
+        "\t\t    }",
+        "\t\t}",
+        "\t    }",
+        "",
+        "\t    to += 181;",
+        "\t    from += 181;\t\t\t /* skip over the gap */",
+        "",
+        "\t    for (i = 1; i < 349; i += 4)\t /* bank 1 */",
+        "\t    {",
+        "\t\tbegin[i] = DIRTY;",
+        "\t\tfor (j = 0; j < 45; j++)",
+        "\t\t{",
+        "\t\t    if (*to++ != *from++)",
+        "\t\t    {",
+        "\t\t\tto--;",
+        "\t\t\tfrom--;",
+        "\t\t\tfor (k = 44 - j; *(to + k) == *(from + k); k--)",
+        "\t\t\t    ;",
+        "\t\t\tbegin[i] = j;",
+        "\t\t\tend[i] = j + k;",
+        "\t\t\tfor (k = j; k < 45; k++)",
+        "\t\t\t    *to++ = *from++;",
+        "\t\t\tbreak;\t\t\t /* onto next scan line */",
+        "\t\t    }",
+        "\t\t}",
+        "\t    }",
+        "",
+        "\t    to += 181;",
+        "\t    from += 181;\t\t\t /* skip over the gap */",
+        "",
+        "\t    for (i = 2; i < 348; i += 4)\t /* bank 2 */",
+        "\t    {",
+        "\t\tbegin[i] = DIRTY;",
+        "\t\tfor (j = 0; j < 45; j++)",
+        "\t\t{",
+        "\t\t    if (*to++ != *from++)",
+        "\t\t    {",
+        "\t\t\tto--;",
+        "\t\t\tfrom--;",
+        "\t\t\tfor (k = 44 - j; *(to + k) == *(from + k); k--)",
+        "\t\t\t    ;",
+        "\t\t\tbegin[i] = j;",
+        "\t\t\tend[i] = j + k;",
+        "\t\t\tfor (k = j; k < 45; k++)",
+        "\t\t\t    *to++ = *from++;",
+        "\t\t\tbreak;\t\t\t /* onto next scan line */",
+        "\t\t    }",
+        "\t\t}",
+        "\t    }",
+        "",
+        "\t    to += 181;",
+        "\t    from += 181;\t\t\t /* skip over the gap */",
+        "",
+        "\t    for (i = 3; i < 349; i += 4)\t /* bank 3 */",
+        "\t    {",
+        "\t\tbegin[i] = DIRTY;",
+        "\t\tfor (j = 0; j < 45; j++)",
+        "\t\t{",
+        "\t\t    if (*to++ != *from++)",
+        "\t\t    {",
+        "\t\t\tto--;",
+        "\t\t\tfrom--;",
+        "\t\t\tfor (k = 44 - j; *(to + k) == *(from + k); k--)",
+        "\t\t\t    ;",
+        "\t\t\tbegin[i] = j;",
+        "\t\t\tend[i] = j + k;",
+        "\t\t\tfor (k = j; k < 45; k++)",
+        "\t\t\t    *to++ = *from++;",
+        "\t\t\tbreak;\t\t\t /* onto next scan line */",
+        "\t\t    }",
+        "\t\t}",
+        "\t    }",
+        "",
+        "\t    begin[348] = DIRTY;\t\t\t /* end marker */",
+        "\t    for (i = 0; i < 348; i++)",
+        "\t    {",
+        "\t\tregister int    beginx, endx, beginy;",
+        "\t\tif (begin[i] != DIRTY)\t\t /* a dirty scan line */",
+        "\t\t{",
+        "\t\t    beginy = i;",
+        "\t\t    beginx = begin[i];",
+        "\t\t    endx = end[i];",
+        "\t\t    while (begin[++i] != DIRTY)",
+        "\t\t    {",
+        "\t\t\tif (begin[i] < beginx)",
+        "\t\t\t    beginx = begin[i];",
+        "\t\t\tif (end[i] > endx)",
+        "\t\t\t    endx = end[i];",
+        "\t\t    }",
+        "\t\t    (*paint_screen) (beginy, 2 * beginx, 2 * (endx - beginx + 1), i - beginy);",
+        "\t\t}",
+        "\t    }",
+        "\t}\t\t\t\t\t /* end else (getVideodirty_total() > 8000) */",
+        "    }",
+        "",
+        "    setVideodirty_total(0);",
+        "",
+        "    host_end_update();",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 4045,
+      "original_count": 1,
+      "current_start": 3786,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_EGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 4131,
+      "original_count": 1,
+      "current_start": 3874,
+      "current_count": 1,
+      "original": [
+        "#include \"SOFTPC_GRAPHICS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 4144,
+      "original_count": 468,
+      "current_start": 3889,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * Update the window to look like the regen buffer says it should",
+        " * and with no help from dirty_total.",
+        " */",
+        "",
+        "static int now_cur_x = -1, now_cur_y = -1;",
+        "/*",
+        " * Reset the static cursor variables:",
+        " */",
+        "GLOBAL void resetNowCur()",
+        "{",
+        "\tnow_cur_x = -1;",
+        "\tnow_cur_y = -1;",
+        "}",
+        "",
+        "void mon_text_update()",
+        "{",
+        "",
+        "    register int i;\t/* Loop counters\t\t*/",
+        "    register int j,k;",
+        "    register unsigned long *from,*to;",
+        "    register int ints_per_line = get_offset_per_line()>>2;",
+        "    int lines_per_screen;",
+        "    int\tlen,x,screen_start;",
+        "    unsigned short *wfrom;",
+        "    unsigned short *wto;",
+        "    int dwords_to_compare;",
+        "",
+        "    /*::::::::::::::::::::::::::::::::::::::::::::::: Is the display disable */",
+        "",
+        "    if(get_display_disabled()) return;",
+        "",
+        "    /*::::::::::::::::::::::::::::::::: get screen size and location details */",
+        "",
+        "    screen_start=get_screen_start()<<1;",
+        "    ALIGN_SCREEN_START(screen_start);",
+        "",
+        "    to = (unsigned long *)&video_copy[screen_start];",
+        "    from = (unsigned long *) get_screen_ptr(screen_start);",
+        "",
+        "    /*::::::::::::::::::::::::::::::::::::::::::: Check for buffer overflows */",
+        "",
+        "#ifndef PROD",
+        "    if(((int)to) & 3)\t\tprintf(\"Video copy not aligned on DWORD\\n\");",
+        "    if(get_screen_length() & 3) printf(\"Screen size incorrect\\n\");",
+        "#endif",
+        "",
+        "    /*::::::::::::::::::::::::::::::::::::::::::::::: Has the screen changed */",
+        "",
+        "#ifndef CPU_40_STYLE",
+        "#if defined(NTVDM)",
+        "    if( VGLOBS && VGLOBS->dirty_flag >= 1000000L ){",
+        "#else",
+        "    if( VGLOBS && VGLOBS->dirtyTotal >= 1000000L ){",
+        "#endif",
+        "",
+        "#else",
+        "    if(getVideodirty_total() >= 1000000L ){",
+        "#endif",
+        "",
+        "\t/*",
+        "\t** screen_refresh_required() has requested a complete screen",
+        "\t** repaint by setting the dirtyTotal.",
+        "\t**",
+        "\t** When switching between display pages video copy and display",
+        "\t** memory could be the same so our normal partial update algorithm",
+        "\t** gets confused.",
+        "\t** This scheme updates video copy and then forces a complete",
+        "\t** repaint.",
+        "\t** Another option would have been to splat video copy and then go",
+        "\t** through the partial update code below, but this is quicker.",
+        "\t** ",
+        "\t** Tim Jan 93.",
+        "\t*/",
+        "\tsetVideodirty_total(0);",
+        "",
+        "\t/*",
+        "\t** Copy the screen data to our video copy.",
+        "\t*/",
+        "\tdwords_to_compare = get_screen_length() / 4;",
+        "\t_asm",
+        "\t{",
+        "\t\tpush esi\t//Save orginal values of registers used by the",
+        "\t\tpush edi\t//complier",
+        "\t\tpush ecx",
+        "",
+        "\t\tmov edi,to\t//Ptr to video copy",
+        "\t\tmov esi,from\t//Ptr to intel video memory",
+        "",
+        "\t\tmov ecx,dwords_to_compare",
+        "\t\trep movsd\t//Move screen data to video copy.",
+        "",
+        "\t\tpop ecx",
+        "\t\tpop edi",
+        "\t\tpop esi",
+        "\t}",
+        "",
+        "\t/*",
+        "\t** Re-paint the whole screen.",
+        "\t** Set up rectangle dimension globals here for paint_text_rect(),",
+        "\t** instead of calling add_to_rect().",
+        "\t*/",
+        "        if (get_offset_per_line() == 0)    /* showing up in stress */",
+        "            lines_per_screen = 25;",
+        "        else",
+        "\t    lines_per_screen = get_screen_length()/get_offset_per_line();",
+        "\tRectTop = 0;",
+        "\tRectLeft = 0;",
+        "\tRectBottom = lines_per_screen - 1;",
+        "\tRectRight = (ints_per_line<<1) - 1;",
+        "\tRectDefined = TRUE;",
+        "\thost_start_update();",
+        "\tpaint_text_rect(screen_start);",
+        "\thost_end_update();",
+        "",
+        "    }else{",
+        "",
+        "      /*",
+        "      ** Normal partial screen update.",
+        "      */",
+        "",
+        "      dwords_to_compare = get_screen_length() / 4;",
+        "",
+        "      _asm",
+        "      {",
+        "\tpush esi\t//Save orginal values of registers used by the",
+        "\tpush edi\t//complier",
+        "\tpush ecx",
+        "",
+        "\tmov esi,to\t//Ptr to screen copy",
+        "\tmov edi,from\t//Ptr to intel video memory",
+        "",
+        "\tmov ecx,dwords_to_compare",
+        "\trepe cmpsd\t//Compare screen buffers",
+        "",
+        "\tmov dwords_to_compare,ecx",
+        "//\tmov to,esi",
+        "//\tmov from,edi",
+        "",
+        "\tpop ecx",
+        "\tpop edi",
+        "\tpop esi",
+        "      }",
+        "",
+        "      /*::::::::::::::::::::::: Repaint parts of the screen that have changed */",
+        "",
+        "",
+        "      if (get_offset_per_line() == 0)    /* showing up in stress */",
+        "          lines_per_screen = 25;",
+        "      else",
+        "          lines_per_screen = get_screen_length()/get_offset_per_line();",
+        "",
+        "      if(dwords_to_compare)",
+        "      {",
+        "\t   host_start_update();",
+        "\t   /* Screen changed, calculate position of first variation */",
+        "",
+        "\t   init_text_rect();",
+        "",
+        "\t   for(i=0;i<lines_per_screen;i++)",
+        "\t   {",
+        "\t    for(j=0;j<ints_per_line;j++)",
+        "\t    {",
+        "\t\tif(*to++ != *from++)",
+        "\t\t{",
+        "\t\t    to--;from--;",
+        "\t\t    for(k=ints_per_line-1-j;*(to+k)== *(from+k);k--){};",
+        "\t\t    /*",
+        "\t\t     * Note: For text mode there is one char for every word.",
+        "\t\t     * no of bytes into screen=line*bytes_per_line + ints_into_line*4",
+        "\t\t     * x_coord=width_of_one_char*(no_of_ints_into_line*2)",
+        "\t\t     * y_coord=height_of_one_char*2*line",
+        "\t\t     * length=no_of_ints*4+4     the plus 4 is to counteract the k--",
+        "\t\t     * The host y co-ords are doubled",
+        "\t\t     */",
+        "",
+        "\t\t    /* one or more ints of data are now selected ",
+        "\t\t       but refine difference to words (i.e. characters),",
+        "\t\t       to avoid a glitch on the screen when typing in to",
+        " \t\t       a dumb terminal  */",
+        "",
+        "\t\t    len    = (k<<2) + 4;",
+        "\t\t    x\t   = (j<<1);",
+        "",
+        "\t\t    wfrom = (unsigned short *)from;",
+        "\t\t    wto   = (unsigned short *)to;",
+        "\t\t    if (*wfrom == *wto)",
+        "\t\t    {",
+        "\t\t\tx++;",
+        "\t\t\tlen -= 2;",
+        "\t\t    }",
+        "\t\t    wfrom += (k<<1) + 1;",
+        "\t\t    wto   += (k<<1) + 1;",
+        "\t\t    if (*wfrom == *wto)",
+        "\t\t    {",
+        "\t\t\tlen -= 2;",
+        "\t\t    }",
+        "",
+        "\t\t    add_to_rect(screen_start, x, i, len/2);",
+        "",
+        "\t\t    /*.............................. transfer data painted to video copy */",
+        "",
+        "\t\t    for(k=j;k<ints_per_line;k++)",
+        "\t\t\t*to++ = *from++;",
+        "",
+        "\t\t    break;\t/* onto next line */",
+        "\t\t}",
+        "\t    }",
+        "\t  }",
+        "",
+        "\t  /* End of screen, flush any outstanding text update rectangles */",
+        "\t  paint_text_rect(screen_start);",
+        "",
+        "\t  host_end_update();",
+        "",
+        "     } /* End of partial screen update */",
+        "",
+        "    } /* End of if dirtyTotal stuff, which selects full or partial repaint */",
+        "",
+        "",
+        "    /*:::::::::::::::::::::::::::::::::::::: Does the cursor need repainting */",
+        "",
+        "    if(is_cursor_visible())",
+        "    {",
+        "\thalf_word attr;",
+        "",
+        "\tdirty_curs_x = get_cur_x();",
+        "\tdirty_curs_y = get_cur_y();",
+        "",
+        "\tif(dirty_curs_x == now_cur_x && dirty_curs_y == now_cur_y)",
+        "\t{",
+        "\t    host_end_update();",
+        "\t    return;",
+        "\t}",
+        "",
+        "\tnow_cur_x = dirty_curs_x;",
+        "\tnow_cur_y = dirty_curs_y;",
+        "\tdirty_curs_offs = screen_start+dirty_curs_y * get_offset_per_line() + (dirty_curs_x<<1);",
+        "",
+        "\tif(dirty_curs_offs < 0x8001)\t/* no lookup in possible gap */",
+        "\t    attr = *(get_screen_ptr(dirty_curs_offs + 1));",
+        "\telse",
+        "\t    attr = 0;\t/* will be off screen anyway */",
+        "",
+        "\thost_paint_cursor(dirty_curs_x, dirty_curs_y, attr);",
+        "    }",
+        "",
+        "}",
+        "",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "",
+        "boolean mon_text_scroll_up IFN6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour)",
+        "{",
+        "    short blank_word, *ptr, *top_left_ptr,*top_right_ptr, *bottom_right_ptr;",
+        "    unsigned short dummy;",
+        "    unsigned char *p;",
+        "    int words_per_line;",
+        "\tint i,tlx,tly;",
+        "\tint bpl = 2*get_chars_per_line();",
+        "\tlong start_offset;",
+        "\tregister half_word *src,*dest;",
+        "\tboolean result;",
+        "",
+        "#if !defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR))",
+        "\tif ( getVM() )",
+        "\t   return FALSE;   /* Don't optimise in V86 Mode */",
+        "#endif",
+        "\t/*",
+        "\t * The colour we fill with for colour text displays is controlled by",
+        "\t * bits 4-6 of attr, with bit 7 turning on blinking (which we don't support)",
+        "\t */",
+        "\tcolour = ((half_word)attr>>4) & 7;",
+        "",
+        "/*",
+        " * Reduce the width of the rectangle if any right hand area is completely ",
+        " * blank.",
+        " *",
+        " * Don't reduce the size of the scrolling region for a dumb terminal.",
+        " * Dumb terminal uses line feeds to scroll up, but only if the whole",
+        " * screen is to be scrolled.  Reducing the scroll region causes",
+        " * the whole region to be redrawn.",
+        " */",
+        "",
+        "\t/* originally dummy was char [2] */",
+        "\t/* unfortunately doing (short) *dummy */",
+        "\t/* causes a bus error on M88K */",
+        "\tp = (unsigned char *) &dummy;",
+        "\tp [0] = ' ';",
+        "\tp [1] = attr;",
+        "\tblank_word = dummy;",
+        "",
+        "\twords_per_line   = get_chars_per_line();",
+        "\ttop_left_ptr     = (short *) get_screen_ptr(start - gvi_pc_low_regen);",
+        "        top_right_ptr    = top_left_ptr + (width >> 1) - 1;",
+        "\tbottom_right_ptr = top_right_ptr + words_per_line * (height - 1);",
+        "\tptr = bottom_right_ptr;",
+        "\tif (width > 2) /* dont want to get a zero rectangle for safetys sake */",
+        "\t{",
+        "\t    while (*ptr == blank_word)",
+        "\t    {",
+        "\t        if (ptr == top_right_ptr) \t/* reached top of column? */",
+        "\t        {",
+        "\t\t    top_right_ptr--;\t/* yes go to bottom of next */",
+        "\t\t    bottom_right_ptr--;",
+        "\t\t    if (top_right_ptr == top_left_ptr)",
+        "\t\t\tbreak;",
+        "\t\t    ptr = bottom_right_ptr;",
+        "\t        }",
+        "\t        else",
+        "\t\t    ptr -= words_per_line;",
+        "\t    }",
+        "\t}",
+        "\twidth = (int)(top_right_ptr - top_left_ptr + 1) << 1;",
+        "",
+        "\t/* do the host stuff */",
+        "\tstart_offset = start - get_screen_start()*2 - gvi_pc_low_regen;",
+        "\ttlx = (int)(start_offset%get_bytes_per_line())*get_pix_char_width()/2;",
+        "\ttly = (int)(start_offset/get_bytes_per_line())*get_host_char_height(); ",
+        "\tresult = host_scroll_up(tlx,tly,tlx+width/2*get_pix_char_width()-1,",
+        "\t\t\t\ttly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);",
+        "",
+        "\tif(!result)",
+        "\t\treturn FALSE;",
+        "",
+        "",
+        "\tadjust_cursor( UP, tlx, tly, width >> 1, height, lines, bpl );",
+        "",
+        "\t/* Scroll up the video_copy */",
+        "\tdest = video_copy + start-gvi_pc_low_regen;",
+        "\tsrc = dest + lines * bpl;",
+        "",
+        "\tif(width == bpl)",
+        "\t{",
+        "\t\t/* Can do the whole thing in one go */",
+        "\t\tmemcpy(dest,src,width*(height-lines));",
+        "\t\tfwd_word_fill( (' '<<8) | (half_word)attr, dest+width*(height-lines),width*lines/2);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\t/* Not scrolling whole width of screen, so do each line seperatly */",
+        "\t\tfor(i=0;i<height-lines;i++)",
+        "\t\t{",
+        "\t\t\tmemcpy(dest,src,width);",
+        "\t\t\tdest += bpl;",
+        "\t\t\tsrc += bpl;",
+        "\t\t}",
+        "",
+        "\t\t/* Fill exposed area of video copy */",
+        "",
+        "\t\tfor(i=0;i<lines;i++)",
+        "\t\t{",
+        "\t\t\tfwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);",
+        "\t\t\tdest += bpl;",
+        "\t\t}",
+        "\t}",
+        "",
+        "\t/* Update video buffer */",
+        "",
+        "\tdest = get_screen_ptr(start - gvi_pc_low_regen);",
+        "\tsrc = dest + lines * bpl;",
+        "\tfor(i=0;i<height-lines;i++)",
+        "\t{",
+        "\t\tmemcpy(dest,src,width);",
+        "\t\tdest += bpl;",
+        "\t\tsrc += bpl;",
+        "\t}",
+        "",
+        "\t/* Fill exposed area of buffer */",
+        "",
+        "\tfor(i=0;i<lines;i++)",
+        "\t{",
+        "\t\tfwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);",
+        "\t\tdest += bpl;",
+        "\t}",
+        "",
+        "\thost_scroll_complete();",
+        "",
+        "\treturn TRUE;",
+        "}",
+        "",
+        "boolean mon_text_scroll_down IFN6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour)",
+        "{",
+        "\tint i,tlx,tly;",
+        "\tint bpl = 2*get_chars_per_line();",
+        "\tlong start_offset;",
+        "\tregister half_word *src,*dest;",
+        "\tboolean result;",
+        "",
+        "#if !defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR))",
+        "\tif ( getVM() )",
+        "\t   return FALSE;   /* Don't optimise in V86 Mode */",
+        "#endif",
+        "",
+        "\t/*",
+        "\t * The colour we fill with for colour text displays is controlled by",
+        "\t * bits 4-6 of attr, with bit 7 turning on blinking (which we don't support)",
+        "\t */",
+        "\tcolour = ((half_word)attr>>4) & 7;",
+        "",
+        "",
+        "\t/* do the host stuff */",
+        "\tstart_offset = start - get_screen_start() * 2 - gvi_pc_low_regen;",
+        "\ttlx = (int)(start_offset%get_bytes_per_line())*get_pix_char_width()/2;",
+        "\ttly = (int)(start_offset/get_bytes_per_line())*get_host_char_height();",
+        "\tresult = host_scroll_down(tlx,tly,tlx+width/2*get_pix_char_width()-1,",
+        "\t\t\ttly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);",
+        "",
+        "\tif(!result)",
+        "\t\treturn FALSE;",
+        "",
+        "\tadjust_cursor( DOWN, tlx, tly, width >> 1, height, lines, bpl );",
+        "",
+        "\t/* Scroll down the video_copy */",
+        "",
+        "\tif(width == bpl)",
+        "\t{",
+        "\t\t/* Can do the whole thing in one go */",
+        "\t\tsrc = video_copy + start - gvi_pc_low_regen;",
+        "\t\tdest = src + lines * bpl;",
+        "\t\tmemcpy(dest,src,width*(height-lines));",
+        "\t\tfwd_word_fill( (' '<<8) | (half_word)attr, src,width*lines/2);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\t/* Not scrolling whole width of screen, so do each line seperatly */",
+        "\t\tdest = video_copy + start-gvi_pc_low_regen + (height-1) * bpl;",
+        "\t\tsrc = dest - lines * bpl;",
+        "\t\tfor(i=0;i<height-lines;i++)",
+        "\t\t{",
+        "\t\t\tmemcpy(dest,src,width);",
+        "\t\t\tdest -= bpl;",
+        "\t\t\tsrc -= bpl;",
+        "\t\t}",
+        "",
+        "\t\t/* Fill exposed area of video copy */",
+        "",
+        "\t\tfor(i=0;i<lines;i++)",
+        "\t\t{",
+        "\t\t\tfwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);",
+        "\t\t\tdest -= bpl;",
+        "\t\t}",
+        "\t}",
+        "",
+        "\t/* Update video buffer */",
+        "",
+        "\tdest = get_screen_ptr(start - gvi_pc_low_regen) + (height-1) * bpl;",
+        "\tsrc = dest - lines * bpl;",
+        "\tfor(i=0;i<height-lines;i++)",
+        "\t{",
+        "\t\tmemcpy(dest,src,width);",
+        "\t\tdest -= bpl;",
+        "\t\tsrc -= bpl;",
+        "\t}",
+        "",
+        "\t/* Fill exposed area of buffer */",
+        "",
+        "\tfor(i=0;i<lines;i++)",
+        "\t{",
+        "\t\tfwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);",
+        "\t\tdest -= bpl;",
+        "\t}",
+        "",
+        "\thost_scroll_complete();",
+        "",
+        "\treturn TRUE;",
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 4690,
+      "original_count": 1,
+      "current_start": 3970,
+      "current_count": 1,
+      "original": [
+        "    int offset = RectTop * get_offset_per_line() + (RectLeft<<1);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 4704,
+      "original_count": 1,
+      "current_start": 3987,
+      "current_count": 1,
+      "original": [
+        "\t\t   RectLeft, RectTop,\t\t\t\t/* Screen X,Y */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 4830,
+      "original_count": 4,
+      "current_start": 4120,
+      "current_count": 1,
+      "original": [
+        "    if (sas_w_at_no_check(stream_io_bios_busy_sysaddr)) {",
+        "        return;",
+        "",
+        "    }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "initial_review": "Complete diff classified into declarations, marker typing and CHAIN2 display/scroll/cursor address changes.",
+  "counter_review": "Void return alignment alone does not fix simple_update(void) assigned to one/two-argument marker slots. CHAIN2 view stride must agree across comparison, copied screen, dirty regions, scroll and cursor attribute reads; generic EVID rule tests do not establish every display consumer.",
+  "limits": "Classification complete; functional remediation not performed; pending evidence remains explicit."
+}

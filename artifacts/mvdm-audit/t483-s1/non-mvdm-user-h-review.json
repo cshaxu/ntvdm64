@@ -1,0 +1,1962 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+  "current_sha256": "f530803eb199eb4af04d4ec3330c854b710f48b8d8b9dac51167c134ad71c9cf",
+  "status": "difference classification complete; functional actions not implemented",
+  "macros": [
+    {
+      "name": "_USER_",
+      "current_line": 16,
+      "original_matches": [
+        16
+      ]
+    },
+    {
+      "name": "OPENNT_USER_OBJECT_TYPES_SUBSET_H",
+      "current_line": 19,
+      "original_matches": []
+    },
+    {
+      "name": "ICLS_EDIT",
+      "current_line": 21,
+      "original_matches": [
+        175
+      ]
+    },
+    {
+      "name": "ICLS_COMBOLISTBOX",
+      "current_line": 22,
+      "original_matches": [
+        189
+      ]
+    },
+    {
+      "name": "ICLS_COMBOBOX",
+      "current_line": 23,
+      "original_matches": [
+        179
+      ]
+    },
+    {
+      "name": "DIALOGCLASS",
+      "current_line": 24,
+      "original_matches": [
+        128
+      ]
+    },
+    {
+      "name": "CODEBIT",
+      "current_line": 25,
+      "original_matches": [
+        158
+      ]
+    },
+    {
+      "name": "IDSYS_LBSEARCH",
+      "current_line": 28,
+      "original_matches": [
+        142
+      ]
+    },
+    {
+      "name": "IDSYS_SCROLL",
+      "current_line": 29,
+      "original_matches": [
+        144
+      ]
+    },
+    {
+      "name": "IDSYS_CARET",
+      "current_line": 30,
+      "original_matches": [
+        147
+      ]
+    },
+    {
+      "name": "SYS_ALTERNATE",
+      "current_line": 31,
+      "original_matches": [
+        1893
+      ]
+    },
+    {
+      "name": "DF3DLOOK",
+      "current_line": 33,
+      "original_matches": [
+        1852
+      ]
+    },
+    {
+      "name": "DFCONTROL",
+      "current_line": 34,
+      "original_matches": [
+        1856
+      ]
+    },
+    {
+      "name": "DFNOFAILCREATE",
+      "current_line": 35,
+      "original_matches": [
+        1853
+      ]
+    },
+    {
+      "name": "MultDiv",
+      "current_line": 36,
+      "original_matches": [
+        467
+      ]
+    },
+    {
+      "name": "XPixFromXDU",
+      "current_line": 37,
+      "original_matches": [
+        2324
+      ]
+    },
+    {
+      "name": "YPixFromYDU",
+      "current_line": 38,
+      "original_matches": [
+        2325
+      ]
+    },
+    {
+      "name": "MaskWF",
+      "current_line": 39,
+      "original_matches": [
+        1924
+      ]
+    },
+    {
+      "name": "UTCHAR",
+      "current_line": 44,
+      "original_matches": [
+        44
+      ]
+    },
+    {
+      "name": "UTCHAR",
+      "current_line": 47,
+      "original_matches": [
+        46
+      ]
+    },
+    {
+      "name": "CHARSTOBYTES",
+      "current_line": 53,
+      "original_matches": [
+        118
+      ]
+    },
+    {
+      "name": "CHARSTOBYTES",
+      "current_line": 56,
+      "original_matches": [
+        121
+      ]
+    },
+    {
+      "name": "DF_SHIFT0",
+      "current_line": 69,
+      "original_matches": [
+        558
+      ]
+    },
+    {
+      "name": "DF_SHIFT1",
+      "current_line": 70,
+      "original_matches": [
+        559
+      ]
+    },
+    {
+      "name": "DF_SHIFT2",
+      "current_line": 71,
+      "original_matches": [
+        560
+      ]
+    },
+    {
+      "name": "DF_SHIFT3",
+      "current_line": 72,
+      "original_matches": [
+        561
+      ]
+    },
+    {
+      "name": "DF_PATCOPY",
+      "current_line": 73,
+      "original_matches": [
+        562
+      ]
+    },
+    {
+      "name": "DF_PATINVERT",
+      "current_line": 74,
+      "original_matches": [
+        563
+      ]
+    },
+    {
+      "name": "DF_SHIFTMASK",
+      "current_line": 75,
+      "original_matches": [
+        564
+      ]
+    },
+    {
+      "name": "DF_ROPMASK",
+      "current_line": 76,
+      "original_matches": [
+        565
+      ]
+    },
+    {
+      "name": "DF_HBRMASK",
+      "current_line": 77,
+      "original_matches": [
+        566
+      ]
+    },
+    {
+      "name": "DF_SCROLLBAR",
+      "current_line": 79,
+      "original_matches": [
+        568
+      ]
+    },
+    {
+      "name": "DF_BACKGROUND",
+      "current_line": 80,
+      "original_matches": [
+        569
+      ]
+    },
+    {
+      "name": "DF_ACTIVECAPTION",
+      "current_line": 81,
+      "original_matches": [
+        570
+      ]
+    },
+    {
+      "name": "DF_INACTIVECAPTION",
+      "current_line": 82,
+      "original_matches": [
+        571
+      ]
+    },
+    {
+      "name": "DF_MENU",
+      "current_line": 83,
+      "original_matches": [
+        572
+      ]
+    },
+    {
+      "name": "DF_WINDOW",
+      "current_line": 84,
+      "original_matches": [
+        573
+      ]
+    },
+    {
+      "name": "DF_WINDOWFRAME",
+      "current_line": 85,
+      "original_matches": [
+        574
+      ]
+    },
+    {
+      "name": "DF_MENUTEXT",
+      "current_line": 86,
+      "original_matches": [
+        575
+      ]
+    },
+    {
+      "name": "DF_WINDOWTEXT",
+      "current_line": 87,
+      "original_matches": [
+        576
+      ]
+    },
+    {
+      "name": "DF_CAPTIONTEXT",
+      "current_line": 88,
+      "original_matches": [
+        577
+      ]
+    },
+    {
+      "name": "DF_ACTIVEBORDER",
+      "current_line": 89,
+      "original_matches": [
+        578
+      ]
+    },
+    {
+      "name": "DF_INACTIVEBORDER",
+      "current_line": 90,
+      "original_matches": [
+        579
+      ]
+    },
+    {
+      "name": "DF_APPWORKSPACE",
+      "current_line": 91,
+      "original_matches": [
+        580
+      ]
+    },
+    {
+      "name": "DF_3DSHADOW",
+      "current_line": 92,
+      "original_matches": [
+        581
+      ]
+    },
+    {
+      "name": "DF_3DFACE",
+      "current_line": 93,
+      "original_matches": [
+        582
+      ]
+    },
+    {
+      "name": "DF_GRAY",
+      "current_line": 94,
+      "original_matches": [
+        583
+      ]
+    },
+    {
+      "name": "TYPE_FREE",
+      "current_line": 95,
+      "original_matches": [
+        777
+      ]
+    },
+    {
+      "name": "TYPE_WINDOW",
+      "current_line": 96,
+      "original_matches": [
+        778
+      ]
+    },
+    {
+      "name": "TYPE_MENU",
+      "current_line": 97,
+      "original_matches": [
+        779
+      ]
+    },
+    {
+      "name": "TYPE_CURSOR",
+      "current_line": 98,
+      "original_matches": [
+        780
+      ]
+    },
+    {
+      "name": "TYPE_SETWINDOWPOS",
+      "current_line": 99,
+      "original_matches": [
+        781
+      ]
+    },
+    {
+      "name": "TYPE_HOOK",
+      "current_line": 100,
+      "original_matches": [
+        782
+      ]
+    },
+    {
+      "name": "TYPE_THREADINFO",
+      "current_line": 101,
+      "original_matches": [
+        783
+      ]
+    },
+    {
+      "name": "TYPE_CLIPDATA",
+      "current_line": 102,
+      "original_matches": [
+        784
+      ]
+    },
+    {
+      "name": "TYPE_CALLPROC",
+      "current_line": 103,
+      "original_matches": [
+        785
+      ]
+    },
+    {
+      "name": "TYPE_ACCELTABLE",
+      "current_line": 104,
+      "original_matches": [
+        786
+      ]
+    },
+    {
+      "name": "TYPE_DDEACCESS",
+      "current_line": 105,
+      "original_matches": [
+        787
+      ]
+    },
+    {
+      "name": "TYPE_DDECONV",
+      "current_line": 106,
+      "original_matches": [
+        788
+      ]
+    },
+    {
+      "name": "TYPE_DDEXACT",
+      "current_line": 107,
+      "original_matches": [
+        789
+      ]
+    },
+    {
+      "name": "TYPE_ZOMBIE",
+      "current_line": 108,
+      "original_matches": [
+        790
+      ]
+    },
+    {
+      "name": "TYPE_KBDLAYOUT",
+      "current_line": 109,
+      "original_matches": [
+        791
+      ]
+    },
+    {
+      "name": "TYPE_KBDFILE",
+      "current_line": 110,
+      "original_matches": [
+        792
+      ]
+    },
+    {
+      "name": "TYPE_CTYPES",
+      "current_line": 117,
+      "original_matches": [
+        797
+      ]
+    },
+    {
+      "name": "TYPE_GENERIC",
+      "current_line": 120,
+      "original_matches": [
+        799
+      ]
+    },
+    {
+      "name": "FNID_SCROLLBAR",
+      "current_line": 123,
+      "original_matches": [
+        645
+      ]
+    },
+    {
+      "name": "FNID_START",
+      "current_line": 125,
+      "original_matches": [
+        642
+      ]
+    },
+    {
+      "name": "FNID_ICONTITLE",
+      "current_line": 126,
+      "original_matches": [
+        646
+      ]
+    },
+    {
+      "name": "FNID_MENU",
+      "current_line": 127,
+      "original_matches": [
+        647
+      ]
+    },
+    {
+      "name": "FNID_DESKTOP",
+      "current_line": 128,
+      "original_matches": [
+        648
+      ]
+    },
+    {
+      "name": "FNID_BUTTON",
+      "current_line": 129,
+      "original_matches": [
+        654
+      ]
+    },
+    {
+      "name": "FNID_COMBOBOX",
+      "current_line": 130,
+      "original_matches": [
+        655
+      ]
+    },
+    {
+      "name": "FNID_COMBOLISTBOX",
+      "current_line": 131,
+      "original_matches": [
+        656
+      ]
+    },
+    {
+      "name": "FNID_DIALOG",
+      "current_line": 132,
+      "original_matches": [
+        657
+      ]
+    },
+    {
+      "name": "FNID_EDIT",
+      "current_line": 133,
+      "original_matches": [
+        658
+      ]
+    },
+    {
+      "name": "FNID_LISTBOX",
+      "current_line": 134,
+      "original_matches": [
+        659
+      ]
+    },
+    {
+      "name": "FNID_MDICLIENT",
+      "current_line": 135,
+      "original_matches": [
+        660
+      ]
+    },
+    {
+      "name": "FNID_STATIC",
+      "current_line": 136,
+      "original_matches": [
+        661
+      ]
+    },
+    {
+      "name": "FNID_CALLWINDOWPROC",
+      "current_line": 137,
+      "original_matches": [
+        690
+      ]
+    },
+    {
+      "name": "FNID_DEFWINDOWPROC",
+      "current_line": 139,
+      "original_matches": [
+        649
+      ]
+    },
+    {
+      "name": "CPD_ANSI_TO_UNICODE",
+      "current_line": 140,
+      "original_matches": [
+        1231
+      ]
+    },
+    {
+      "name": "CPD_UNICODE_TO_ANSI",
+      "current_line": 141,
+      "original_matches": [
+        1232
+      ]
+    },
+    {
+      "name": "CPD_WND",
+      "current_line": 142,
+      "original_matches": [
+        1236
+      ]
+    },
+    {
+      "name": "CPD_DIALOG",
+      "current_line": 144,
+      "original_matches": [
+        1237
+      ]
+    },
+    {
+      "name": "FNID_SWITCH",
+      "current_line": 145,
+      "original_matches": [
+        692
+      ]
+    },
+    {
+      "name": "FNID_CLEANEDUP_BIT",
+      "current_line": 147,
+      "original_matches": [
+        710
+      ]
+    },
+    {
+      "name": "FNID_DELETED_BIT",
+      "current_line": 148,
+      "original_matches": [
+        711
+      ]
+    },
+    {
+      "name": "FNID_STATUS_BITS",
+      "current_line": 149,
+      "original_matches": [
+        712
+      ]
+    },
+    {
+      "name": "GETFNID",
+      "current_line": 150,
+      "original_matches": [
+        717
+      ]
+    },
+    {
+      "name": "Is400Compat",
+      "current_line": 152,
+      "original_matches": [
+        348
+      ]
+    },
+    {
+      "name": "Is310Compat",
+      "current_line": 153,
+      "original_matches": [
+        349
+      ]
+    },
+    {
+      "name": "WFWIN31COMPAT",
+      "current_line": 154,
+      "original_matches": [
+        1722
+      ]
+    },
+    {
+      "name": "WFDIALOGWINDOW",
+      "current_line": 156,
+      "original_matches": [
+        1715
+      ]
+    },
+    {
+      "name": "WFALWAYSSENDNCPAINT",
+      "current_line": 157,
+      "original_matches": [
+        1723
+      ]
+    },
+    {
+      "name": "WFANSICREATOR",
+      "current_line": 158,
+      "original_matches": [
+        1729
+      ]
+    },
+    {
+      "name": "WFDESTROYED",
+      "current_line": 160,
+      "original_matches": [
+        1731
+      ]
+    },
+    {
+      "name": "WFOLDUI",
+      "current_line": 161,
+      "original_matches": [
+        1735
+      ]
+    },
+    {
+      "name": "WFWIN40COMPAT",
+      "current_line": 162,
+      "original_matches": [
+        1739
+      ]
+    },
+    {
+      "name": "OPENNT_USER_LARGE_STRING_LAYOUT_H",
+      "current_line": 168,
+      "original_matches": []
+    },
+    {
+      "name": "WS_EX_ANSICREATOR",
+      "current_line": 171,
+      "original_matches": [
+        591
+      ]
+    },
+    {
+      "name": "OPENNT_USER_CLIENT_VIEW_LAYOUT_H",
+      "current_line": 200,
+      "original_matches": []
+    },
+    {
+      "name": "WFMPRESENT",
+      "current_line": 204,
+      "original_matches": [
+        1695
+      ]
+    },
+    {
+      "name": "WFVPRESENT",
+      "current_line": 205,
+      "original_matches": [
+        1696
+      ]
+    },
+    {
+      "name": "WFHPRESENT",
+      "current_line": 206,
+      "original_matches": [
+        1697
+      ]
+    },
+    {
+      "name": "WFCPRESENT",
+      "current_line": 207,
+      "original_matches": [
+        1698
+      ]
+    },
+    {
+      "name": "WFFRAMEON",
+      "current_line": 208,
+      "original_matches": [
+        1701
+      ]
+    },
+    {
+      "name": "WEFDLGMODALFRAME",
+      "current_line": 210,
+      "original_matches": [
+        1747
+      ]
+    },
+    {
+      "name": "WEFDRAGOBJECT",
+      "current_line": 211,
+      "original_matches": [
+        1748
+      ]
+    },
+    {
+      "name": "WEFRIGHT",
+      "current_line": 212,
+      "original_matches": [
+        1761
+      ]
+    },
+    {
+      "name": "WEFCONTROLPARENT",
+      "current_line": 213,
+      "original_matches": [
+        1765
+      ]
+    },
+    {
+      "name": "WFMAXBOX",
+      "current_line": 214,
+      "original_matches": [
+        1776
+      ]
+    },
+    {
+      "name": "WFMINBOX",
+      "current_line": 215,
+      "original_matches": [
+        1778
+      ]
+    },
+    {
+      "name": "WFSYSMENU",
+      "current_line": 216,
+      "original_matches": [
+        1781
+      ]
+    },
+    {
+      "name": "WEFWINDOWEDGE",
+      "current_line": 219,
+      "original_matches": [
+        1755
+      ]
+    },
+    {
+      "name": "WEFCLIENTEDGE",
+      "current_line": 220,
+      "original_matches": [
+        1756
+      ]
+    },
+    {
+      "name": "WEFEDGEMASK",
+      "current_line": 221,
+      "original_matches": [
+        1757
+      ]
+    },
+    {
+      "name": "QF_DIALOGACTIVE",
+      "current_line": 223,
+      "original_matches": [
+        2358
+      ]
+    },
+    {
+      "name": "WFSIZEBOX",
+      "current_line": 224,
+      "original_matches": [
+        1780
+      ]
+    },
+    {
+      "name": "WFHSCROLL",
+      "current_line": 225,
+      "original_matches": [
+        1782
+      ]
+    },
+    {
+      "name": "WFVSCROLL",
+      "current_line": 226,
+      "original_matches": [
+        1783
+      ]
+    },
+    {
+      "name": "WFBORDER",
+      "current_line": 227,
+      "original_matches": [
+        1786
+      ]
+    },
+    {
+      "name": "WFTILED",
+      "current_line": 228,
+      "original_matches": [
+        1790
+      ]
+    },
+    {
+      "name": "WFDISABLED",
+      "current_line": 229,
+      "original_matches": [
+        1794
+      ]
+    },
+    {
+      "name": "WFICONICPOPUP",
+      "current_line": 230,
+      "original_matches": [
+        1800
+      ]
+    },
+    {
+      "name": "CBFDROPDOWN",
+      "current_line": 231,
+      "original_matches": [
+        1828
+      ]
+    },
+    {
+      "name": "CBFDROPDOWNLIST",
+      "current_line": 232,
+      "original_matches": [
+        1829
+      ]
+    },
+    {
+      "name": "CBFOWNERDRAWFIXED",
+      "current_line": 233,
+      "original_matches": [
+        1835
+      ]
+    },
+    {
+      "name": "CBFOWNERDRAWVAR",
+      "current_line": 234,
+      "original_matches": [
+        1836
+      ]
+    },
+    {
+      "name": "CBFOWNERDRAW",
+      "current_line": 235,
+      "original_matches": [
+        1837
+      ]
+    },
+    {
+      "name": "CBFAUTOHSCROLL",
+      "current_line": 236,
+      "original_matches": [
+        1839
+      ]
+    },
+    {
+      "name": "CBFOEMCONVERT",
+      "current_line": 237,
+      "original_matches": [
+        1840
+      ]
+    },
+    {
+      "name": "CBFSORT",
+      "current_line": 238,
+      "original_matches": [
+        1841
+      ]
+    },
+    {
+      "name": "CBFHASSTRINGS",
+      "current_line": 239,
+      "original_matches": [
+        1842
+      ]
+    },
+    {
+      "name": "CBFNOINTEGRALHEIGHT",
+      "current_line": 240,
+      "original_matches": [
+        1843
+      ]
+    },
+    {
+      "name": "CBFDISABLENOSCROLL",
+      "current_line": 241,
+      "original_matches": [
+        1844
+      ]
+    },
+    {
+      "name": "CBFUPPERCASE",
+      "current_line": 242,
+      "original_matches": [
+        1847
+      ]
+    },
+    {
+      "name": "CBFLOWERCASE",
+      "current_line": 243,
+      "original_matches": [
+        1848
+      ]
+    },
+    {
+      "name": "EFMULTILINE",
+      "current_line": 244,
+      "original_matches": [
+        1859
+      ]
+    },
+    {
+      "name": "EFPASSWORD",
+      "current_line": 245,
+      "original_matches": [
+        1862
+      ]
+    },
+    {
+      "name": "EFREADONLY",
+      "current_line": 246,
+      "original_matches": [
+        1868
+      ]
+    },
+    {
+      "name": "EFWANTRETURN",
+      "current_line": 247,
+      "original_matches": [
+        1869
+      ]
+    },
+    {
+      "name": "EFNUMBER",
+      "current_line": 248,
+      "original_matches": [
+        1870
+      ]
+    },
+    {
+      "name": "WFGROUP",
+      "current_line": 251,
+      "original_matches": [
+        1779
+      ]
+    },
+    {
+      "name": "WFVISIBLE",
+      "current_line": 252,
+      "original_matches": [
+        1795
+      ]
+    },
+    {
+      "name": "WFMINIMIZED",
+      "current_line": 253,
+      "original_matches": [
+        1796
+      ]
+    },
+    {
+      "name": "WFCHILD",
+      "current_line": 254,
+      "original_matches": [
+        1797
+      ]
+    },
+    {
+      "name": "WFPOPUP",
+      "current_line": 255,
+      "original_matches": [
+        1798
+      ]
+    },
+    {
+      "name": "WFTYPEMASK",
+      "current_line": 256,
+      "original_matches": [
+        1799
+      ]
+    },
+    {
+      "name": "TestwndChild",
+      "current_line": 257,
+      "original_matches": [
+        1927
+      ]
+    },
+    {
+      "name": "GetWindowCreator",
+      "current_line": 259,
+      "original_matches": [
+        1935
+      ]
+    },
+    {
+      "name": "TestwndIPopup",
+      "current_line": 260,
+      "original_matches": [
+        1928
+      ]
+    },
+    {
+      "name": "TestwndTiled",
+      "current_line": 261,
+      "original_matches": [
+        1929
+      ]
+    },
+    {
+      "name": "TestwndNIPopup",
+      "current_line": 262,
+      "original_matches": [
+        1930
+      ]
+    },
+    {
+      "name": "TestwndPopup",
+      "current_line": 263,
+      "original_matches": [
+        1931
+      ]
+    },
+    {
+      "name": "STATEOFFSET",
+      "current_line": 266,
+      "original_matches": [
+        1909
+      ]
+    },
+    {
+      "name": "TestWF",
+      "current_line": 267,
+      "original_matches": [
+        1921
+      ]
+    },
+    {
+      "name": "SetWF",
+      "current_line": 268,
+      "original_matches": [
+        1922
+      ]
+    },
+    {
+      "name": "ClrWF",
+      "current_line": 269,
+      "original_matches": [
+        1923
+      ]
+    },
+    {
+      "name": "OPENNT_USER_DIALOG_LAYOUT_H",
+      "current_line": 490,
+      "original_matches": []
+    },
+    {
+      "name": "PDLG",
+      "current_line": 514,
+      "original_matches": [
+        2168
+      ]
+    },
+    {
+      "name": "DLGF_ANSI",
+      "current_line": 519,
+      "original_matches": [
+        2173
+      ]
+    },
+    {
+      "name": "OPENNT_DIALOG_GETSET_CPD_LAYOUT_H",
+      "current_line": 524,
+      "original_matches": []
+    },
+    {
+      "name": "CPDHANDLE_HI",
+      "current_line": 525,
+      "original_matches": [
+        1240
+      ]
+    },
+    {
+      "name": "MAKE_CPDHANDLE",
+      "current_line": 526,
+      "original_matches": [
+        1241
+      ]
+    },
+    {
+      "name": "ISCPDTAG",
+      "current_line": 527,
+      "original_matches": [
+        1242
+      ]
+    },
+    {
+      "name": "OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H",
+      "current_line": 539,
+      "original_matches": []
+    },
+    {
+      "name": "OPENNT_BUTTON_FLAGS_H",
+      "current_line": 558,
+      "original_matches": []
+    },
+    {
+      "name": "BFTYPEMASK",
+      "current_line": 559,
+      "original_matches": [
+        1804
+      ]
+    },
+    {
+      "name": "WFTABSTOP",
+      "current_line": 561,
+      "original_matches": [
+        1777
+      ]
+    },
+    {
+      "name": "BFRIGHTBUTTON",
+      "current_line": 562,
+      "original_matches": [
+        1806
+      ]
+    },
+    {
+      "name": "BFICON",
+      "current_line": 563,
+      "original_matches": [
+        1807
+      ]
+    },
+    {
+      "name": "BFBITMAP",
+      "current_line": 564,
+      "original_matches": [
+        1808
+      ]
+    },
+    {
+      "name": "BFIMAGEMASK",
+      "current_line": 565,
+      "original_matches": [
+        1809
+      ]
+    },
+    {
+      "name": "BFLEFT",
+      "current_line": 566,
+      "original_matches": [
+        1811
+      ]
+    },
+    {
+      "name": "BFRIGHT",
+      "current_line": 567,
+      "original_matches": [
+        1812
+      ]
+    },
+    {
+      "name": "BFCENTER",
+      "current_line": 568,
+      "original_matches": [
+        1813
+      ]
+    },
+    {
+      "name": "BFHORZMASK",
+      "current_line": 569,
+      "original_matches": [
+        1814
+      ]
+    },
+    {
+      "name": "BFTOP",
+      "current_line": 570,
+      "original_matches": [
+        1815
+      ]
+    },
+    {
+      "name": "BFBOTTOM",
+      "current_line": 571,
+      "original_matches": [
+        1816
+      ]
+    },
+    {
+      "name": "BFVCENTER",
+      "current_line": 572,
+      "original_matches": [
+        1817
+      ]
+    },
+    {
+      "name": "BFVERTMASK",
+      "current_line": 573,
+      "original_matches": [
+        1818
+      ]
+    },
+    {
+      "name": "BFALIGNMASK",
+      "current_line": 574,
+      "original_matches": [
+        1819
+      ]
+    },
+    {
+      "name": "BFPUSHLIKE",
+      "current_line": 575,
+      "original_matches": [
+        1821
+      ]
+    },
+    {
+      "name": "BFMULTILINE",
+      "current_line": 576,
+      "original_matches": [
+        1822
+      ]
+    },
+    {
+      "name": "BFNOTIFY",
+      "current_line": 577,
+      "original_matches": [
+        1823
+      ]
+    },
+    {
+      "name": "BFFLAT",
+      "current_line": 578,
+      "original_matches": [
+        1824
+      ]
+    },
+    {
+      "name": "DOBI_CHECK",
+      "current_line": 579,
+      "original_matches": [
+        820
+      ]
+    },
+    {
+      "name": "DOBI_DOWN",
+      "current_line": 580,
+      "original_matches": [
+        821
+      ]
+    },
+    {
+      "name": "DOBI_CHECKDOWN",
+      "current_line": 581,
+      "original_matches": [
+        822
+      ]
+    },
+    {
+      "name": "OPENNT_BUTTON_RESOURCE_LAYOUT_H",
+      "current_line": 585,
+      "original_matches": []
+    },
+    {
+      "name": "OBI_RADIOMASK",
+      "current_line": 595,
+      "original_matches": [
+        883
+      ]
+    },
+    {
+      "name": "OBI_CHECK",
+      "current_line": 596,
+      "original_matches": [
+        884
+      ]
+    },
+    {
+      "name": "OBI_CHECK_C",
+      "current_line": 597,
+      "original_matches": [
+        885
+      ]
+    },
+    {
+      "name": "OBI_CHECK_D",
+      "current_line": 598,
+      "original_matches": [
+        886
+      ]
+    },
+    {
+      "name": "OBI_CHECK_CD",
+      "current_line": 599,
+      "original_matches": [
+        887
+      ]
+    },
+    {
+      "name": "OBI_CHECK_CDI",
+      "current_line": 600,
+      "original_matches": [
+        888
+      ]
+    },
+    {
+      "name": "OBI_RADIO",
+      "current_line": 601,
+      "original_matches": [
+        889
+      ]
+    },
+    {
+      "name": "OBI_RADIO_C",
+      "current_line": 602,
+      "original_matches": [
+        890
+      ]
+    },
+    {
+      "name": "OBI_RADIO_D",
+      "current_line": 603,
+      "original_matches": [
+        891
+      ]
+    },
+    {
+      "name": "OBI_RADIO_CD",
+      "current_line": 604,
+      "original_matches": [
+        892
+      ]
+    },
+    {
+      "name": "OBI_RADIO_CDI",
+      "current_line": 605,
+      "original_matches": [
+        893
+      ]
+    },
+    {
+      "name": "OBI_3STATE",
+      "current_line": 606,
+      "original_matches": [
+        894
+      ]
+    },
+    {
+      "name": "OBI_3STATE_C",
+      "current_line": 607,
+      "original_matches": [
+        895
+      ]
+    },
+    {
+      "name": "OBI_3STATE_D",
+      "current_line": 608,
+      "original_matches": [
+        896
+      ]
+    },
+    {
+      "name": "OBI_3STATE_CD",
+      "current_line": 609,
+      "original_matches": [
+        897
+      ]
+    },
+    {
+      "name": "OBI_3STATE_CDI",
+      "current_line": 610,
+      "original_matches": [
+        898
+      ]
+    },
+    {
+      "name": "OBI_COUNT",
+      "current_line": 611,
+      "original_matches": [
+        899
+      ]
+    },
+    {
+      "name": "OPENNT_CLIENT_HANDLES_H",
+      "current_line": 618,
+      "original_matches": []
+    },
+    {
+      "name": "PtoH",
+      "current_line": 619,
+      "original_matches": [
+        1215
+      ]
+    },
+    {
+      "name": "PtoHq",
+      "current_line": 620,
+      "original_matches": [
+        1220
+      ]
+    },
+    {
+      "name": "HW",
+      "current_line": 621,
+      "original_matches": [
+        1223
+      ]
+    },
+    {
+      "name": "HWq",
+      "current_line": 622,
+      "original_matches": [
+        1224
+      ]
+    }
+  ],
+  "named_structures": [
+    {
+      "name": "_WNDMSG",
+      "current_line": 60,
+      "original_line": 1053,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_LARGE_STRING",
+      "current_line": 174,
+      "original_line": 266,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_LARGE_ANSI_STRING",
+      "current_line": 181,
+      "original_line": 273,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_LARGE_UNICODE_STRING",
+      "current_line": 188,
+      "original_line": 280,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_HEAD",
+      "current_line": 271,
+      "original_line": 1127,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_SHROBJHEAD",
+      "current_line": 276,
+      "original_line": 1132,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_THROBJHEAD",
+      "current_line": 282,
+      "original_line": 1138,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_PROCOBJHEAD",
+      "current_line": 287,
+      "original_line": 1143,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "tagITEM",
+      "current_line": 296,
+      "original_line": 1958,
+      "token_equal": false,
+      "difference": "original profile fields replaced by #error"
+    },
+    {
+      "name": "tagMENU",
+      "current_line": 332,
+      "original_line": 1992,
+      "token_equal": false,
+      "difference": "original profile fields replaced by #error"
+    },
+    {
+      "name": "tagWND",
+      "current_line": 357,
+      "original_line": 1388,
+      "token_equal": false,
+      "difference": "original profile fields replaced by #error"
+    },
+    {
+      "name": "tagDESKTOPINFO",
+      "current_line": 412,
+      "original_line": 1599,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "tagCOMMON_WNDCLASS",
+      "current_line": 434,
+      "original_line": 1289,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "tagCLS",
+      "current_line": 450,
+      "original_line": 1323,
+      "token_equal": false,
+      "difference": "pointer tag changed and PCLS alias omitted"
+    },
+    {
+      "name": "_DLG",
+      "current_line": 492,
+      "original_line": 2146,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_DIALOG",
+      "current_line": 506,
+      "original_line": 2160,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "_CALLPROCDATA",
+      "current_line": 529,
+      "original_line": 1247,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "tagBUTN",
+      "current_line": 541,
+      "original_line": 2396,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "tagBUTNWND",
+      "current_line": 548,
+      "original_line": 2403,
+      "token_equal": true,
+      "difference": null
+    },
+    {
+      "name": "tagOEMBITMAPINFO",
+      "current_line": 588,
+      "original_line": 802,
+      "token_equal": true,
+      "difference": null
+    }
+  ],
+  "summary": {
+    "macros": 212,
+    "original_token_identical_macros": 203,
+    "new_guards": 9,
+    "named_structures": 20,
+    "token_equal_structures": 16
+  },
+  "initial_review": "Original flag operands and pointer-access expressions retained; split include groups compose separately selected object types, client layouts, counted strings and control declarations. CLS contains a distinct incomplete pointer tag and omits PCLS supplied by facade.",
+  "counter_review": "Same pointer width does not make tagCALLPROCDATA and _CALLPROCDATA the same C type. Scope-local PCLS aliases elsewhere are different representations; do not reintroduce conflicting aliases globally. Existing view-layout static assertions establish intended sizes, not proof of current compiled output or all field ownership. FNID size assertion has lost original END/ARRAY_SIZE operands in current source; a non-hit is not equivalent checking. Full omitted declaration need remains unresolved.",
+  "pending_action": {
+    "decision": "restore-original",
+    "target": "CLS.spcpdFirst",
+    "plan": "Forward-declare original struct _CALLPROCDATA and PCALLPROCDATA in appropriate original cohort before CLS; restore PCALLPROCDATA field spelling. Preserve separate cleanup/class-query PCLS representations. Verify client-view plus dialog-getset include order and original108-byte CLS/field offsets.",
+    "limits": "No observed runtime fault attributed; spcpdFirst has no other textual use in inspected current USER/wow32 source. Not yet implemented."
+  },
+  "evidence": [
+    "src/wow32-dll/include/wow_user_client_view_layout.h",
+    "src/compat/include/opennt_user_multipass.h",
+    "src/wow32-dll/include/wow_class_query_bindings.h",
+    "src/wow32-dll/include/wow_class_register_bindings.h",
+    "src/wow32-dll/include/wow_cleanup_bindings.h",
+    "src/wow32-dll/include/wow_edit_call_bindings.h:4-6,35-40",
+    "src/wow32-dll/include/wow_dialog_state_bindings.h:4-7",
+    "src/wow32-dll/source/wow_control_extent_bindings.c:1-35",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c",
+    "test/mvdm-host/wow_page_domain_fixture.c"
+  ],
+  "format_sites_restored": 2,
+  "limits": "All difference groups classified. Source token/field identity is not expanded ABI, include-context coverage, compiler diagnostic or runtime proof. Pending necessity of omitted ranges remains explicit.",
+  "diff_ranges": [
+    {
+      "kind": "replace",
+      "original_start": 18,
+      "original_count": 25,
+      "current_start": 18,
+      "current_count": 24
+    },
+    {
+      "kind": "insert",
+      "original_start": 44,
+      "original_count": 0,
+      "current_start": 43,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 46,
+      "original_count": 0,
+      "current_start": 46,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 48,
+      "original_count": 62,
+      "current_start": 49,
+      "current_count": 2
+    },
+    {
+      "kind": "replace",
+      "original_start": 111,
+      "original_count": 7,
+      "current_start": 52,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 120,
+      "original_count": 1,
+      "current_start": 55,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 123,
+      "original_count": 346,
+      "current_start": 58,
+      "current_count": 8
+    },
+    {
+      "kind": "replace",
+      "original_start": 471,
+      "original_count": 87,
+      "current_start": 68,
+      "current_count": 1
+    },
+    {
+      "kind": "delete",
+      "original_start": 584,
+      "original_count": 193,
+      "current_start": 95,
+      "current_count": 0
+    },
+    {
+      "kind": "insert",
+      "original_start": 793,
+      "original_count": 0,
+      "current_start": 111,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 794,
+      "original_count": 2,
+      "current_start": 113,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 797,
+      "original_count": 0,
+      "current_start": 116,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 799,
+      "original_count": 0,
+      "current_start": 119,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 800,
+      "original_count": 0,
+      "current_start": 121,
+      "current_count": 43
+    },
+    {
+      "kind": "replace",
+      "original_start": 801,
+      "original_count": 8,
+      "current_start": 165,
+      "current_count": 15
+    },
+    {
+      "kind": "replace",
+      "original_start": 810,
+      "original_count": 5,
+      "current_start": 181,
+      "current_count": 6
+    },
+    {
+      "kind": "replace",
+      "original_start": 816,
+      "original_count": 3,
+      "current_start": 188,
+      "current_count": 7
+    },
+    {
+      "kind": "replace",
+      "original_start": 820,
+      "original_count": 307,
+      "current_start": 196,
+      "current_count": 75
+    },
+    {
+      "kind": "replace",
+      "original_start": 1149,
+      "original_count": 5,
+      "current_start": 293,
+      "current_count": 25
+    },
+    {
+      "kind": "replace",
+      "original_start": 1155,
+      "original_count": 1,
+      "current_start": 319,
+      "current_count": 11
+    },
+    {
+      "kind": "replace",
+      "original_start": 1157,
+      "original_count": 18,
+      "current_start": 331,
+      "current_count": 10
+    },
+    {
+      "kind": "replace",
+      "original_start": 1176,
+      "original_count": 10,
+      "current_start": 342,
+      "current_count": 11
+    },
+    {
+      "kind": "replace",
+      "original_start": 1187,
+      "original_count": 6,
+      "current_start": 354,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1194,
+      "original_count": 194,
+      "current_start": 356,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1429,
+      "original_count": 0,
+      "current_start": 398,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1430,
+      "original_count": 1,
+      "current_start": 400,
+      "current_count": 2
+    },
+    {
+      "kind": "insert",
+      "original_start": 1432,
+      "original_count": 0,
+      "current_start": 403,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1439,
+      "original_count": 160,
+      "current_start": 411,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 1616,
+      "original_count": 3,
+      "current_start": 429,
+      "current_count": 19
+    },
+    {
+      "kind": "replace",
+      "original_start": 1620,
+      "original_count": 9,
+      "current_start": 449,
+      "current_count": 15
+    },
+    {
+      "kind": "replace",
+      "original_start": 1630,
+      "original_count": 13,
+      "current_start": 465,
+      "current_count": 10
+    },
+    {
+      "kind": "replace",
+      "original_start": 1644,
+      "original_count": 8,
+      "current_start": 476,
+      "current_count": 1
+    },
+    {
+      "kind": "insert",
+      "original_start": 1653,
+      "original_count": 0,
+      "current_start": 478,
+      "current_count": 7
+    },
+    {
+      "kind": "replace",
+      "original_start": 1654,
+      "original_count": 492,
+      "current_start": 486,
+      "current_count": 6
+    },
+    {
+      "kind": "insert",
+      "original_start": 2174,
+      "original_count": 0,
+      "current_start": 520,
+      "current_count": 1
+    },
+    {
+      "kind": "replace",
+      "original_start": 2175,
+      "original_count": 27,
+      "current_start": 522,
+      "current_count": 13
+    },
+    {
+      "kind": "delete",
+      "original_start": 2203,
+      "original_count": 4,
+      "current_start": 536,
+      "current_count": 0
+    },
+    {
+      "kind": "replace",
+      "original_start": 2208,
+      "original_count": 188,
+      "current_start": 537,
+      "current_count": 4
+    },
+    {
+      "kind": "delete",
+      "original_start": 2407,
+      "original_count": 25,
+      "current_start": 552,
+      "current_count": 0
+    },
+    {
+      "kind": "replace",
+      "original_start": 2434,
+      "original_count": 5,
+      "current_start": 554,
+      "current_count": 29
+    },
+    {
+      "kind": "replace",
+      "original_start": 2440,
+      "original_count": 9,
+      "current_start": 584,
+      "current_count": 29
+    },
+    {
+      "kind": "replace",
+      "original_start": 2450,
+      "original_count": 1,
+      "current_start": 614,
+      "current_count": 10
+    },
+    {
+      "kind": "replace",
+      "original_start": 2452,
+      "original_count": 10,
+      "current_start": 625,
+      "current_count": 157
+    },
+    {
+      "kind": "replace",
+      "original_start": 2463,
+      "original_count": 2,
+      "current_start": 783,
+      "current_count": 1
+    },
+    {
+      "kind": "delete",
+      "original_start": 2466,
+      "original_count": 176,
+      "current_start": 785,
+      "current_count": 0
+    }
+  ]
+}

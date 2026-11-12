@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/wow32/wmmstruc.h",
+  "original_sha256": "8c8c764f500c47689f5d97c485e8d81c6361130c6ce744a3dbe8d2d26c1eaf5b",
+  "current_sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 113,
+      "original_count": 11,
+      "current_start": 114,
+      "current_count": 1,
+      "original": [
+        "#define FREEMMTIME(p)       p=NULL",
+        "#define FREEWAVEHDR(p)      p=NULL",
+        "#define FREEWAVEOUTCAPS(p)  p=NULL",
+        "#define FREEWAVEINCAPS(p)   p=NULL",
+        "#define FREEMIDIHDR(p)      p=NULL",
+        "#define FREEAUXCAPS(p)      p=NULL",
+        "#define FREETIMECAPS(p)     p=NULL",
+        "#define FREEMIDIINCAPS(p)   p=NULL",
+        "#define FREEMIDIOUTCAPS(p)  p=NULL",
+        "#define FREEJOYCAPS(p)      p=NULL",
+        "#define FREEJOYINFO(p)      p=NULL"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 124,
+      "current": 115,
+      "logical": 114
+    }
+  ],
+  "evidence": "Complete normalized diff replaces only original DEBUG cleanup macros or DEBUG_OR_WOWPROFILE count declaration; all remaining source matches pinned original.",
+  "limits": [
+    "Exclusion-only comparison, not universal context certification.",
+    "Line pairs source-derived LF positions, not compiler verification."
+  ]
+}

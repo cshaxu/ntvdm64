@@ -260,7 +260,10 @@ Return Value:
     //
     // Get the information on memory
     //
-    Status = VdmQueryFreeVirtualMemory(&TotalFree, &LargestFree);
+    Status = VdmQueryFreeVirtualMemory(
+                &TotalFree,
+                &LargestFree
+                );
 
 #if defined(CPU_40_STYLE)
     /* See MVDM-HOST-DIV-224: report the actual shared XMS pool. */
@@ -298,6 +301,5 @@ Return Value:
     GlobalMemoryStatus(&MemStatus);
 
     MemInfo->PageFileSize = MemStatus.dwTotalPageFile / 4096;
-
 #line 277
 }

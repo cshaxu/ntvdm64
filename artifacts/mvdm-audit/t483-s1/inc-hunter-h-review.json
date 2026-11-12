@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+  "original_sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
+  "current_sha256": "3ffb9e2b20d8632ef6c57787f9e99ddba1a9b33505e344f9ec1b2b9908001b64",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 18,
+      "original_count": 596
+    }
+  ],
+  "initial_review": "One complete outer HUNTER body excluded; retained notice and conditional boundary exact.",
+  "counter_review": "Original body supplies screen-dump/image-comparison debug structures and hooks, not runtime rendering or mouse input. Nested conditions discarded with the outer body. No inferred all-context compilation proof from this source comparison.",
+  "limits": "Source difference classification only; no new universal build-context, diagnostic-line or runtime certification."
+}

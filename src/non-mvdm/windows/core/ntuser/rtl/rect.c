@@ -1,9 +1,22 @@
-/* Copyright (c) 1985-91, Microsoft Corporation.
- * Original windows/core/ntuser/rtl/rect.c true subset.
- * DIVERGENCE(OPENNT-HOST-077): retain the required original body unchanged;
- * target-private precomp replaces the unavailable original build environment.
- * Unselected until the complete original EDIT dependency group is wired. */
+/****************************** Module Header ******************************\
+* Module Name: rect.c
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* This module contains the various rectangle manipulation APIs.
+*
+* History:
+* 10-20-90 DarrinM      Grabbed 'C' rect routines from Portable PM.
+\***************************************************************************/
 #include "precomp.h"
+/************************************************************************\
+* CopyInflateRect (API)
+*
+* This function copies the rect from prcSrc to prcDst, and inflates it.
+*
+* History:
+* 12-16-93  FritzS
+\************************************************************************/
 #line 45
 
 BOOL APIENTRY CopyInflateRect(

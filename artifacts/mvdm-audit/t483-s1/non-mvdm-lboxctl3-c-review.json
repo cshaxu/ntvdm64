@@ -1,0 +1,73 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+  "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+  "current_sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078",
+  "excluded": [
+    {
+      "original_start": 503,
+      "original_count": 3,
+      "current_start": 504,
+      "original": [
+        "                PostMessage(hwndLB, wDirMsg, attrib &",
+        "                        ~(DDL_DIRECTORY | DDL_DRIVES | DDL_POSTMSGS),",
+        "                        (LONG)lpszPathSpecClient);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 529,
+      "original_count": 4,
+      "current_start": 531,
+      "original": [
+        "            /*",
+        "             * Strip out just the subdirectory and drive bits.",
+        "             */",
+        "            attrib &= (DDL_DIRECTORY | DDL_DRIVES);"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 897,
+      "original_count": 1,
+      "current_start": 899,
+      "original": [
+        "    CharToOem(lhszFileSpec, lhszFileSpec);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 1145,
+      "original_count": 1,
+      "current_start": 1149,
+      "original": [
+        "    OemToChar(lpBuffer, lpBuffer);"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "changes": [],
+  "logical_line_mismatches": [
+    {
+      "current": 505,
+      "original": 506,
+      "logical": 504
+    },
+    {
+      "current": 532,
+      "original": 533,
+      "logical": 530
+    }
+  ],
+  "initial_review": "Full normalized diff: 4 original conditional-body exclusions; all retained code exact.",
+  "counter_review": "Original conditional boundaries retained; no unrelated algorithm rewrite. Exclusion classification does not prove complete macro-hit coverage; line offsets separately recorded.",
+  "evidence": "Pinned OpenNT matching source; selected listbox provider cohort in New-T404S5Wow32ProviderNinja.ps1",
+  "limits": "Source-only classification; no new test/build or product modification."
+}

@@ -1,0 +1,123 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+  "current_sha256": "da3698180fe42634cce3dbf83367cfa468f9a6cb66e028e5dcd7ea144c5666f7",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 70,
+      "original_count": 1,
+      "current_error_line": 70
+    },
+    {
+      "original_start": 74,
+      "original_count": 6,
+      "current_error_line": 74
+    },
+    {
+      "original_start": 90,
+      "original_count": 3,
+      "current_error_line": 91
+    },
+    {
+      "original_start": 112,
+      "original_count": 1,
+      "current_error_line": 114
+    },
+    {
+      "original_start": 213,
+      "original_count": 2,
+      "current_error_line": 221
+    },
+    {
+      "original_start": 254,
+      "original_count": 9,
+      "current_error_line": 264
+    },
+    {
+      "original_start": 301,
+      "original_count": 12,
+      "current_error_line": 305
+    },
+    {
+      "original_start": 369,
+      "original_count": 2,
+      "current_error_line": 367
+    },
+    {
+      "original_start": 380,
+      "original_count": 2,
+      "current_error_line": 381
+    },
+    {
+      "original_start": 409,
+      "original_count": 6,
+      "current_error_line": 412
+    },
+    {
+      "original_start": 460,
+      "original_count": 1,
+      "current_error_line": 462
+    },
+    {
+      "original_start": 494,
+      "original_count": 4,
+      "current_error_line": 501
+    },
+    {
+      "original_start": 522,
+      "original_count": 8,
+      "current_error_line": 532
+    },
+    {
+      "original_start": 547,
+      "original_count": 1,
+      "current_error_line": 553
+    },
+    {
+      "original_start": 558,
+      "original_count": 1,
+      "current_error_line": 569
+    },
+    {
+      "original_start": 589,
+      "original_count": 3,
+      "current_error_line": 604
+    },
+    {
+      "original_start": 651,
+      "original_count": 1,
+      "current_error_line": 668
+    },
+    {
+      "original_start": 657,
+      "original_count": 2,
+      "current_error_line": 678
+    },
+    {
+      "original_start": 668,
+      "original_count": 6,
+      "current_error_line": 691
+    },
+    {
+      "original_start": 735,
+      "original_count": 2,
+      "current_error_line": 762
+    },
+    {
+      "original_start": 793,
+      "original_count": 2,
+      "current_error_line": 828
+    },
+    {
+      "original_start": 802,
+      "original_count": 34,
+      "current_error_line": 841
+    }
+  ],
+  "initial_review": "Complete original/current comparison.",
+  "counter_review": "Conditional-boundary comparison proves all remaining nonblank, non-line-directive source matches original; no printer algorithm rewrite.",
+  "limits": "No runtime printer acceptance or universal exclusion/line certification; necessity classification only."
+}

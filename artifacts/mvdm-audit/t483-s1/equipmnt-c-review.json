@@ -1,0 +1,53 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+  "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+  "current_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "file_sequence": "200",
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "current_start": "47",
+      "current_count": "1",
+      "original_start": "47",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "default-off-diagnostic-hook",
+      "initial_review": "Added include and setup hardware log call observe EQUIP_FLAG after original sas_loadw; no contribution to original setAX result.",
+      "counter_review": "Provider reads trace-path environment and writes a bounded file stream, preserving last error. Removing this caller cannot change the BIOS equipment word or AX calculation; do not delete shared provider while other callers remain.",
+      "disposition": "delete",
+      "evidence": "src/mvdm-host/softpc.new/base/bios/equipmnt.c; src/mvdm-host/softpc.new/base/bios/bios.c; src/ntvdm-exe/softpc/mvdm_softpc_termination.c:101; shared-callsite rg inventory",
+      "limits": "Source proof of diagnostic-only dependence; no runtime test or deletion performed.",
+      "decision": "delete",
+      "change_plan": "Delete equipment-only diagnostic include and report call/comment; restore original sas_loadw -> setAX sequence. Remove now-unneeded line carriers only with original logical-line verification. Remove shared provider only after all other callers are separately accounted for.",
+      "related_callers": "BIOS BOP 11 -> equipment; src/ntvdm-exe/softpc/mvdm_softpc_termination.c::mvdm_softpc_report_setup_hardware_probe; other callsites in keyboard, COM/LPT, tape_io and nt_bop remain independently audited.",
+      "verification_required": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "200",
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "current_start": "55",
+      "current_count": "5",
+      "original_start": "53",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "default-off-diagnostic-hook",
+      "initial_review": "Added include and setup hardware log call observe EQUIP_FLAG after original sas_loadw; no contribution to original setAX result.",
+      "counter_review": "Provider reads trace-path environment and writes a bounded file stream, preserving last error. Removing this caller cannot change the BIOS equipment word or AX calculation; do not delete shared provider while other callers remain.",
+      "disposition": "delete",
+      "evidence": "src/mvdm-host/softpc.new/base/bios/equipmnt.c; src/mvdm-host/softpc.new/base/bios/bios.c; src/ntvdm-exe/softpc/mvdm_softpc_termination.c:101; shared-callsite rg inventory",
+      "limits": "Source proof of diagnostic-only dependence; no runtime test or deletion performed.",
+      "decision": "delete",
+      "change_plan": "Delete equipment-only diagnostic include and report call/comment; restore original sas_loadw -> setAX sequence. Remove now-unneeded line carriers only with original logical-line verification. Remove shared provider only after all other callers are separately accounted for.",
+      "related_callers": "BIOS BOP 11 -> equipment; src/ntvdm-exe/softpc/mvdm_softpc_termination.c::mvdm_softpc_report_setup_hardware_probe; other callsites in keyboard, COM/LPT, tape_io and nt_bop remain independently audited.",
+      "verification_required": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ]
+}

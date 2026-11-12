@@ -1,0 +1,53 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+  "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+  "current_sha256": "e60bcda62151ea735f3d18d731a2d6da3be70c06fcb4c8c849943fa68f75292c",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 82,
+      "original_count": 1,
+      "current_start": 83,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 99,
+      "original_count": 1,
+      "current_start": 102,
+      "current_count": 1,
+      "original": [
+        "#define MAKE_STR_FUNCTION(s)    s##f"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 296,
+      "original_count": 1,
+      "current_start": 302,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/vdmapi.h",
+    "src/ntsrv-exe/main.c",
+    "src/common/base_srv/base_client.h",
+    "src/common/base_srv/base_command.c",
+    "src/mvdm-host/dos/command/cmd.h"
+  ],
+  "limits": "Whole retained-source comparison; no new build/runtime or universal context proof. Exclusion-only classification does not admit retired monitor profiles."
+}

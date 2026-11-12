@@ -1,0 +1,30 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+  "current_sha256": "3e527cd8f999ffe76ed21f32980ba0b1b54fff5759dd982594414f52e52ce17f",
+  "status": "difference classification complete; functional remediation not implemented",
+  "decisions": [
+    "Keep scoped retained-view definitions; omit private NT kernel/USER includes and declarations already supplied by selected SDK/facades.",
+    "Keep explicit rejection of unsupported _USERK_, DBG, FE_SB and historical profiles; do not enable kernel build merely to select same-address macros.",
+    "Keep direct REBASE access for local retained pointers; never apply NT4 desktop-offset arithmetic to modern USER objects.",
+    "Clarify that selected user-mode branch deliberately uses original same-address formulas; preserve original conditional skeleton and accurately anchor replacement lines. Reconcile redundant REBASE variants and historical definitions only after all consumers are enumerated."
+  ],
+  "counter_review": [
+    "Original header full import would cross host ownership boundary; omitted SDK declarations need not be copied back.",
+    "Kernel macro spelling is not evidence of hardware/kernel execution requirement.",
+    "Ownership/lifetime is established by projection and borrows, not by identity macro; do not introduce raw native pointer overlay.",
+    "Moving definitions back under _USERK_ would select forbidden dependencies; do not pretend current branch is byte-identical original subset. No functional branch activation authorized."
+  ],
+  "evidence": [
+    "src/non-mvdm/windows/core/ntuser/rtl/help.c:14-16;src/wow32-dll/include/wow_default_window_bindings.h:59",
+    "userrtl.h conditional frames;wow_user_client_view_layout.h",
+    "src/wow32-dll/source/wow_window_client_state_bindings.c:129;wow_window_words_binding.c:347-349,651-653",
+    "userrtl.h:68-92;help.c;rtl/winmgr.c;rtl/wow.c;wow_default_window_bindings.h"
+  ],
+  "entries_added": 4,
+  "format_sites": 0,
+  "limits": [
+    "No fresh build or include-context probe.",
+    "Not an unchanged original branch: same-address definitions deliberately moved."
+  ]
+}

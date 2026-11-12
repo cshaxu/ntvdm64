@@ -1,0 +1,125 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+  "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+  "current_sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "kind": "replace",
+      "original_start": 46,
+      "original_count": 11,
+      "current_normalized_start": 46,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register."
+      ]
+    },
+    {
+      "kind": "insert",
+      "original_start": 95,
+      "original_count": 0,
+      "current_normalized_start": 85,
+      "current_lines": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-092): publish the external physical-range",
+        " * wrapper's fixed-width address/length contract for its original callers.",
+        " * In the selected C-VID profile the wrapper dispatches through the SAS",
+        " * vector to the CCPU provider; see MVDM-HOST-DIV-189. */",
+        "extern void sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, len);",
+        ""
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 109,
+      "original_count": 1,
+      "current_normalized_start": 105,
+      "current_lines": [
+        "extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 111,
+      "original_count": 160,
+      "current_normalized_start": 107,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-616: unsupported non-CPU40 SAS interface"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 297,
+      "original_count": 7,
+      "current_normalized_start": 134,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 371,
+      "original_count": 2,
+      "current_normalized_start": 202,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 462,
+      "original_count": 1,
+      "current_normalized_start": 292,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 706,
+      "original_count": 1,
+      "current_normalized_start": 536,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 711,
+      "original_count": 1,
+      "current_normalized_start": 541,
+      "current_lines": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 731,
+      "original_count": 253,
+      "current_normalized_start": 561,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 1032,
+      "original_count": 25,
+      "current_normalized_start": 610,
+      "current_lines": [
+        "#error Excluded unsupported BACK_M configuration"
+      ]
+    },
+    {
+      "kind": "replace",
+      "original_start": 1060,
+      "original_count": 9,
+      "current_normalized_start": 614,
+      "current_lines": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Two substantive differences: physical-range overwrite wrapper declaration and Length_of_M_area provider-compatible type. Ten excluded profile bodies; remaining source unchanged.",
+  "counter_review": "Generated sas4gen.h:752-762 omits overwrite declaration for CCPU, so the added declaration is not redundant in that context. Original-shaped accessfn.c:1581-1583 dispatches through Sas; mvdm_cvidc_vector_binding.c:89 binds c_sas_overwrite_memory. Original ccpusas4.c:135 and current:140 both define Length_of_M_area as PHY_ADDR, unlike original header IHPE. Keep provider contract, not host pointer width. No new memory owner or replacement algorithm introduced.",
+  "limits": "Source/interface proof; no new build/runtime, physical mapping or all-context compiler proof."
+}

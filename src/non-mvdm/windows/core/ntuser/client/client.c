@@ -176,6 +176,17 @@ RegisterClassWOWA(
 #include "wow_window_dispatch_bindings.h"
 #define WNDPROC_WOW WOW_WINDOW_PROC_TAG
 
+/***************************************************************************\
+* DispatchMessage
+*
+* !!! Warning if this function becomes more complicated then look at the
+* server code for WrapCallProc
+*
+* pwnd is threadlocked in the kernel and thus always valid.
+*
+* 19-Aug-1992 mikeke   created
+\***************************************************************************/
+
 #line 2383
 LONG DispatchClientMessage(
     PWND pwnd,

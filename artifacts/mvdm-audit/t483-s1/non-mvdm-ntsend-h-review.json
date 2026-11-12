@@ -1,0 +1,131 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+  "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+  "current_sha256": "c4c28b08767e4c6d7b9cee385bb9d3a377aff17abc4c62efc5fa968df8a0e109",
+  "status": "difference classification complete; semantic remediation not implemented",
+  "macro_matches": [
+    {
+      "name": "BEGINCALL",
+      "current_line": 19,
+      "original_matches": [
+        27
+      ]
+    },
+    {
+      "name": "ERRORTRAP",
+      "current_line": 25,
+      "original_matches": [
+        35
+      ]
+    },
+    {
+      "name": "ENDCALL",
+      "current_line": 34,
+      "original_matches": [
+        47
+      ]
+    },
+    {
+      "name": "MSGERROR",
+      "current_line": 39,
+      "original_matches": [
+        55
+      ]
+    },
+    {
+      "name": "MSGERRORCODE",
+      "current_line": 42,
+      "original_matches": [
+        56
+      ]
+    },
+    {
+      "name": "COPYLPSTRIDW",
+      "current_line": 47,
+      "original_matches": [
+        91
+      ]
+    },
+    {
+      "name": "COPYLPWSTRID",
+      "current_line": 63,
+      "original_matches": [
+        196
+      ]
+    },
+    {
+      "name": "CLEANUPLPWSTR",
+      "current_line": 74,
+      "original_matches": [
+        249
+      ]
+    },
+    {
+      "name": "COPYLPTSTRID",
+      "current_line": 82,
+      "original_matches": [
+        257
+      ]
+    },
+    {
+      "name": "FIRSTCOPYLPTSTRID",
+      "current_line": 84,
+      "original_matches": [
+        261
+      ]
+    },
+    {
+      "name": "CLEANUPLPTSTR",
+      "current_line": 86,
+      "original_matches": [
+        268
+      ]
+    },
+    {
+      "name": "COPYLPTSTRID",
+      "current_line": 90,
+      "original_matches": [
+        273
+      ]
+    },
+    {
+      "name": "FIRSTCOPYLPTSTRID",
+      "current_line": 92,
+      "original_matches": [
+        277
+      ]
+    },
+    {
+      "name": "CLEANUPLPTSTR",
+      "current_line": 94,
+      "original_matches": [
+        284
+      ]
+    },
+    {
+      "name": "FIRSTCOPYLPSTRW",
+      "current_line": 100,
+      "original_matches": [
+        136
+      ]
+    },
+    {
+      "name": "CLEANUPLPSTRW",
+      "current_line": 105,
+      "original_matches": [
+        184
+      ]
+    }
+  ],
+  "initial_review": "All16 retained macro definitions are byte-identical after newline normalization to an original definition; original UNICODE alternatives preserved. Actual users include ANSI class client, private dialog get/set and GetClassWOWWords.",
+  "counter_review": "Alias spelling is semantic: FIRSTCOPYLPTSTRID intentionally maps to forced-heap COPYLPSTRIDW, unlike FIRSTCOPYLPSTRW. Macro existence does not prove complete caller closure. No native TEB/thread-connection implementation should be restored without binding proof.",
+  "evidence": [
+    "src/wow32-dll/include/wow_class_client_bindings.h:30",
+    "src/wow32-dll/include/control-client/precomp.h:79",
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c:275-292",
+    "test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c:232-238",
+    "test/adapter-mvdm-host-out/wow/dialog-getset/precomp.h:13"
+  ],
+  "limits": "Source comparison only; no fresh build, expansion/layout, branch-hit or runtime proof. Omitted macro family reuse pending.",
+  "format_sites_restored": 2
+}

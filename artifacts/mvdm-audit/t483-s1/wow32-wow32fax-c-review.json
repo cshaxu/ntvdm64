@@ -1,0 +1,973 @@
+{
+  "path": "src/mvdm-host/wow32/wow32fax.c",
+  "original_sha256": "855ac6c5d6d6ca97cc78802994784e8612e5eb6197533790466664bf0e892700",
+  "current_sha256": "22b1487d1377ef4d2f51bc30c0b871320641f9436d903672e3a6c919619d9722",
+  "changes": [
+    {
+      "original_start": 105,
+      "original_count": 2,
+      "current_start": 105,
+      "current_count": 3,
+      "original": [
+        "    LPSTR lpSupFaxDrvBuf;",
+        "    LPSTR *alpSupFaxDrvList;"
+      ],
+      "current": [
+        "    // MVDM-HOST-DIV-879: preserve empty/failure ownership.",
+        "    LPSTR lpSupFaxDrvBuf = NULL;",
+        "    LPSTR *alpSupFaxDrvList = NULL;"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Initialize both ownership pointers; check pointer-array allocation before RtlZeroMemory; on empty/failure return NULL/count zero and free backing buffer. Successful list retains backing MULTI_SZ."
+    },
+    {
+      "original_start": 134,
+      "original_count": 0,
+      "current_start": 135,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        if (!alpSupFaxDrvList) {",
+        "            goto GSFD_error;",
+        "        }"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Initialize both ownership pointers; check pointer-array allocation before RtlZeroMemory; on empty/failure return NULL/count zero and free backing buffer. Successful list retains backing MULTI_SZ."
+    },
+    {
+      "original_start": 135,
+      "original_count": 4,
+      "current_start": 139,
+      "current_count": 2,
+      "original": [
+        "        if (alpSupFaxDrvList) {",
+        "            // Fill the array with string starting points.",
+        "            BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);",
+        "        }"
+      ],
+      "current": [
+        "        // Fill the array with string starting points.",
+        "        BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Initialize both ownership pointers; check pointer-array allocation before RtlZeroMemory; on empty/failure return NULL/count zero and free backing buffer. Successful list retains backing MULTI_SZ."
+    },
+    {
+      "original_start": 146,
+      "original_count": 0,
+      "current_start": 148,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "    if (!alpSupFaxDrvList) {",
+        "        *uCount = 0;",
+        "        if (lpSupFaxDrvBuf) {",
+        "            free_w(lpSupFaxDrvBuf);",
+        "        }",
+        "    }"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Initialize both ownership pointers; check pointer-array allocation before RtlZeroMemory; on empty/failure return NULL/count zero and free backing buffer. Successful list retains backing MULTI_SZ."
+    },
+    {
+      "original_start": 881,
+      "original_count": 0,
+      "current_start": 888,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    // MVDM-HOST-DIV-879: successful installation owns a printer handle."
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Preserve successful AddPrinterDriver result before testing bRetVal; capture and close only newly acquired AddPrinter handle. Already-existing printer failure acquires no handle."
+    },
+    {
+      "original_start": 882,
+      "original_count": 0,
+      "current_start": 890,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    HANDLE hPrinter;"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Preserve successful AddPrinterDriver result before testing bRetVal; capture and close only newly acquired AddPrinter handle. Already-existing printer failure acquires no handle."
+    },
+    {
+      "original_start": 931,
+      "original_count": 1,
+      "current_start": 940,
+      "current_count": 2,
+      "original": [
+        "            if ((*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo) == FALSE) {"
+      ],
+      "current": [
+        "            bRetVal = (*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo);",
+        "            if (!bRetVal) {"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Preserve successful AddPrinterDriver result before testing bRetVal; capture and close only newly acquired AddPrinter handle. Already-existing printer failure acquires no handle."
+    },
+    {
+      "original_start": 957,
+      "original_count": 1,
+      "current_start": 967,
+      "current_count": 2,
+      "original": [
+        "                if ((*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo) == 0) {"
+      ],
+      "current": [
+        "                hPrinter = (HANDLE)(*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo);",
+        "                if (!hPrinter) {"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Preserve successful AddPrinterDriver result before testing bRetVal; capture and close only newly acquired AddPrinter handle. Already-existing printer failure acquires no handle."
+    },
+    {
+      "original_start": 960,
+      "original_count": 0,
+      "current_start": 971,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                else {",
+        "                    (*spoolerapis[WOW_ClosePrinter].lpfn)(hPrinter);",
+        "                }"
+      ],
+      "decision": "retain",
+      "plan": "Retain existing failure/ownership repair; no new product path.",
+      "evidence": "Original/current complete function comparison and test/integration/wow_fax_failure_test.c extracted-owner fixture.",
+      "necessity": "Preserve successful AddPrinterDriver result before testing bRetVal; capture and close only newly acquired AddPrinter handle. Already-existing printer failure acquires no handle."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 221,
+      "original_count": 5,
+      "current_start": 231,
+      "current_count": 1,
+      "original": [
+        "    int    DebugStringIndex = iFun - (WM_USER+0x100+1);",
+        "",
+        "    if ((DebugStringIndex >= WM_DDRV_FIRST) && (DebugStringIndex <= WM_DDRV_LAST) ) {",
+        "        LOGDEBUG(0,(\"WOW32FaxHandler, %s, 0x%lX\\n\", (LPSTR)szWmDdrvDebugStrings[DebugStringIndex], (LPSTR) lpIn));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 961,
+      "original_count": 3,
+      "current_start": 977,
+      "current_count": 1,
+      "original": [
+        "                if (!bRetVal) {",
+        "                    LOGDEBUG(0,(\"InstallWowFaxPrinter, AddPrinter failed: 0x%X\\n\", GetLastError()));",
+        "                }"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "current": 109,
+      "original": 108,
+      "logical": 109
+    },
+    {
+      "current": 111,
+      "original": 110,
+      "logical": 111
+    },
+    {
+      "current": 112,
+      "original": 111,
+      "logical": 112
+    },
+    {
+      "current": 113,
+      "original": 112,
+      "logical": 113
+    },
+    {
+      "current": 114,
+      "original": 113,
+      "logical": 114
+    },
+    {
+      "current": 115,
+      "original": 114,
+      "logical": 115
+    },
+    {
+      "current": 116,
+      "original": 115,
+      "logical": 116
+    },
+    {
+      "current": 118,
+      "original": 117,
+      "logical": 118
+    },
+    {
+      "current": 119,
+      "original": 118,
+      "logical": 119
+    },
+    {
+      "current": 120,
+      "original": 119,
+      "logical": 120
+    },
+    {
+      "current": 121,
+      "original": 120,
+      "logical": 121
+    },
+    {
+      "current": 122,
+      "original": 121,
+      "logical": 122
+    },
+    {
+      "current": 123,
+      "original": 122,
+      "logical": 123
+    },
+    {
+      "current": 124,
+      "original": 123,
+      "logical": 124
+    },
+    {
+      "current": 125,
+      "original": 124,
+      "logical": 125
+    },
+    {
+      "current": 127,
+      "original": 126,
+      "logical": 127
+    },
+    {
+      "current": 128,
+      "original": 127,
+      "logical": 128
+    },
+    {
+      "current": 129,
+      "original": 128,
+      "logical": 129
+    },
+    {
+      "current": 131,
+      "original": 130,
+      "logical": 131
+    },
+    {
+      "current": 132,
+      "original": 131,
+      "logical": 132
+    },
+    {
+      "current": 133,
+      "original": 132,
+      "logical": 133
+    },
+    {
+      "current": 134,
+      "original": 133,
+      "logical": 134
+    },
+    {
+      "current": 138,
+      "original": 134,
+      "logical": 138
+    },
+    {
+      "current": 141,
+      "original": 139,
+      "logical": 141
+    },
+    {
+      "current": 142,
+      "original": 140,
+      "logical": 142
+    },
+    {
+      "current": 144,
+      "original": 142,
+      "logical": 144
+    },
+    {
+      "current": 145,
+      "original": 143,
+      "logical": 145
+    },
+    {
+      "current": 147,
+      "original": 145,
+      "logical": 147
+    },
+    {
+      "current": 154,
+      "original": 146,
+      "logical": 154
+    },
+    {
+      "current": 155,
+      "original": 147,
+      "logical": 155
+    },
+    {
+      "current": 156,
+      "original": 148,
+      "logical": 156
+    },
+    {
+      "current": 157,
+      "original": 149,
+      "logical": 157
+    },
+    {
+      "current": 158,
+      "original": 150,
+      "logical": 158
+    },
+    {
+      "current": 161,
+      "original": 153,
+      "logical": 161
+    },
+    {
+      "current": 162,
+      "original": 154,
+      "logical": 162
+    },
+    {
+      "current": 163,
+      "original": 155,
+      "logical": 163
+    },
+    {
+      "current": 164,
+      "original": 156,
+      "logical": 164
+    },
+    {
+      "current": 165,
+      "original": 157,
+      "logical": 165
+    },
+    {
+      "current": 166,
+      "original": 158,
+      "logical": 166
+    },
+    {
+      "current": 167,
+      "original": 159,
+      "logical": 167
+    },
+    {
+      "current": 169,
+      "original": 161,
+      "logical": 169
+    },
+    {
+      "current": 170,
+      "original": 162,
+      "logical": 170
+    },
+    {
+      "current": 171,
+      "original": 163,
+      "logical": 171
+    },
+    {
+      "current": 172,
+      "original": 164,
+      "logical": 172
+    },
+    {
+      "current": 174,
+      "original": 166,
+      "logical": 174
+    },
+    {
+      "current": 175,
+      "original": 167,
+      "logical": 175
+    },
+    {
+      "current": 176,
+      "original": 168,
+      "logical": 176
+    },
+    {
+      "current": 177,
+      "original": 169,
+      "logical": 177
+    },
+    {
+      "current": 178,
+      "original": 170,
+      "logical": 178
+    },
+    {
+      "current": 179,
+      "original": 171,
+      "logical": 179
+    },
+    {
+      "current": 180,
+      "original": 172,
+      "logical": 180
+    },
+    {
+      "current": 182,
+      "original": 174,
+      "logical": 182
+    },
+    {
+      "current": 183,
+      "original": 175,
+      "logical": 183
+    },
+    {
+      "current": 184,
+      "original": 176,
+      "logical": 184
+    },
+    {
+      "current": 185,
+      "original": 177,
+      "logical": 185
+    },
+    {
+      "current": 186,
+      "original": 178,
+      "logical": 186
+    },
+    {
+      "current": 187,
+      "original": 179,
+      "logical": 187
+    },
+    {
+      "current": 189,
+      "original": 181,
+      "logical": 189
+    },
+    {
+      "current": 190,
+      "original": 182,
+      "logical": 190
+    },
+    {
+      "current": 191,
+      "original": 183,
+      "logical": 191
+    },
+    {
+      "current": 192,
+      "original": 184,
+      "logical": 192
+    },
+    {
+      "current": 194,
+      "original": 186,
+      "logical": 194
+    },
+    {
+      "current": 195,
+      "original": 187,
+      "logical": 195
+    },
+    {
+      "current": 196,
+      "original": 188,
+      "logical": 196
+    },
+    {
+      "current": 197,
+      "original": 189,
+      "logical": 197
+    },
+    {
+      "current": 198,
+      "original": 190,
+      "logical": 198
+    },
+    {
+      "current": 199,
+      "original": 191,
+      "logical": 199
+    },
+    {
+      "current": 200,
+      "original": 192,
+      "logical": 200
+    },
+    {
+      "current": 201,
+      "original": 193,
+      "logical": 201
+    },
+    {
+      "current": 202,
+      "original": 194,
+      "logical": 202
+    },
+    {
+      "current": 203,
+      "original": 195,
+      "logical": 203
+    },
+    {
+      "current": 204,
+      "original": 196,
+      "logical": 204
+    },
+    {
+      "current": 206,
+      "original": 198,
+      "logical": 206
+    },
+    {
+      "current": 208,
+      "original": 200,
+      "logical": 208
+    },
+    {
+      "current": 209,
+      "original": 201,
+      "logical": 209
+    },
+    {
+      "current": 210,
+      "original": 202,
+      "logical": 210
+    },
+    {
+      "current": 211,
+      "original": 203,
+      "logical": 211
+    },
+    {
+      "current": 213,
+      "original": 205,
+      "logical": 213
+    },
+    {
+      "current": 214,
+      "original": 206,
+      "logical": 214
+    },
+    {
+      "current": 215,
+      "original": 207,
+      "logical": 215
+    },
+    {
+      "current": 216,
+      "original": 208,
+      "logical": 216
+    },
+    {
+      "current": 217,
+      "original": 209,
+      "logical": 217
+    },
+    {
+      "current": 218,
+      "original": 210,
+      "logical": 218
+    },
+    {
+      "current": 220,
+      "original": 212,
+      "logical": 220
+    },
+    {
+      "current": 221,
+      "original": 213,
+      "logical": 221
+    },
+    {
+      "current": 222,
+      "original": 214,
+      "logical": 222
+    },
+    {
+      "current": 223,
+      "original": 215,
+      "logical": 223
+    },
+    {
+      "current": 224,
+      "original": 216,
+      "logical": 224
+    },
+    {
+      "current": 225,
+      "original": 217,
+      "logical": 225
+    },
+    {
+      "current": 226,
+      "original": 218,
+      "logical": 226
+    },
+    {
+      "current": 232,
+      "original": 226,
+      "logical": 222
+    },
+    {
+      "current": 889,
+      "original": 881,
+      "logical": 882
+    },
+    {
+      "current": 892,
+      "original": 883,
+      "logical": 885
+    },
+    {
+      "current": 894,
+      "original": 885,
+      "logical": 887
+    },
+    {
+      "current": 895,
+      "original": 886,
+      "logical": 888
+    },
+    {
+      "current": 896,
+      "original": 887,
+      "logical": 889
+    },
+    {
+      "current": 897,
+      "original": 888,
+      "logical": 890
+    },
+    {
+      "current": 899,
+      "original": 890,
+      "logical": 892
+    },
+    {
+      "current": 900,
+      "original": 891,
+      "logical": 893
+    },
+    {
+      "current": 901,
+      "original": 892,
+      "logical": 894
+    },
+    {
+      "current": 902,
+      "original": 893,
+      "logical": 895
+    },
+    {
+      "current": 903,
+      "original": 894,
+      "logical": 896
+    },
+    {
+      "current": 904,
+      "original": 895,
+      "logical": 897
+    },
+    {
+      "current": 905,
+      "original": 896,
+      "logical": 898
+    },
+    {
+      "current": 907,
+      "original": 898,
+      "logical": 900
+    },
+    {
+      "current": 908,
+      "original": 899,
+      "logical": 901
+    },
+    {
+      "current": 909,
+      "original": 900,
+      "logical": 902
+    },
+    {
+      "current": 910,
+      "original": 901,
+      "logical": 903
+    },
+    {
+      "current": 911,
+      "original": 902,
+      "logical": 904
+    },
+    {
+      "current": 912,
+      "original": 903,
+      "logical": 905
+    },
+    {
+      "current": 913,
+      "original": 904,
+      "logical": 906
+    },
+    {
+      "current": 915,
+      "original": 906,
+      "logical": 908
+    },
+    {
+      "current": 916,
+      "original": 907,
+      "logical": 909
+    },
+    {
+      "current": 917,
+      "original": 908,
+      "logical": 910
+    },
+    {
+      "current": 918,
+      "original": 909,
+      "logical": 911
+    },
+    {
+      "current": 919,
+      "original": 910,
+      "logical": 912
+    },
+    {
+      "current": 920,
+      "original": 911,
+      "logical": 913
+    },
+    {
+      "current": 921,
+      "original": 912,
+      "logical": 914
+    },
+    {
+      "current": 923,
+      "original": 914,
+      "logical": 916
+    },
+    {
+      "current": 924,
+      "original": 915,
+      "logical": 917
+    },
+    {
+      "current": 926,
+      "original": 917,
+      "logical": 919
+    },
+    {
+      "current": 927,
+      "original": 918,
+      "logical": 920
+    },
+    {
+      "current": 928,
+      "original": 919,
+      "logical": 921
+    },
+    {
+      "current": 929,
+      "original": 920,
+      "logical": 922
+    },
+    {
+      "current": 930,
+      "original": 921,
+      "logical": 923
+    },
+    {
+      "current": 932,
+      "original": 923,
+      "logical": 925
+    },
+    {
+      "current": 933,
+      "original": 924,
+      "logical": 926
+    },
+    {
+      "current": 934,
+      "original": 925,
+      "logical": 927
+    },
+    {
+      "current": 935,
+      "original": 926,
+      "logical": 928
+    },
+    {
+      "current": 937,
+      "original": 928,
+      "logical": 930
+    },
+    {
+      "current": 938,
+      "original": 929,
+      "logical": 931
+    },
+    {
+      "current": 939,
+      "original": 930,
+      "logical": 932
+    },
+    {
+      "current": 942,
+      "original": 932,
+      "logical": 935
+    },
+    {
+      "current": 943,
+      "original": 933,
+      "logical": 936
+    },
+    {
+      "current": 945,
+      "original": 935,
+      "logical": 938
+    },
+    {
+      "current": 946,
+      "original": 936,
+      "logical": 939
+    },
+    {
+      "current": 947,
+      "original": 937,
+      "logical": 940
+    },
+    {
+      "current": 948,
+      "original": 938,
+      "logical": 941
+    },
+    {
+      "current": 950,
+      "original": 940,
+      "logical": 943
+    },
+    {
+      "current": 952,
+      "original": 942,
+      "logical": 945
+    },
+    {
+      "current": 953,
+      "original": 943,
+      "logical": 946
+    },
+    {
+      "current": 954,
+      "original": 944,
+      "logical": 947
+    },
+    {
+      "current": 955,
+      "original": 945,
+      "logical": 948
+    },
+    {
+      "current": 956,
+      "original": 946,
+      "logical": 949
+    },
+    {
+      "current": 958,
+      "original": 948,
+      "logical": 951
+    },
+    {
+      "current": 959,
+      "original": 949,
+      "logical": 952
+    },
+    {
+      "current": 961,
+      "original": 951,
+      "logical": 954
+    },
+    {
+      "current": 963,
+      "original": 953,
+      "logical": 956
+    },
+    {
+      "current": 964,
+      "original": 954,
+      "logical": 957
+    },
+    {
+      "current": 965,
+      "original": 955,
+      "logical": 958
+    },
+    {
+      "current": 966,
+      "original": 956,
+      "logical": 959
+    },
+    {
+      "current": 969,
+      "original": 958,
+      "logical": 962
+    },
+    {
+      "current": 970,
+      "original": 959,
+      "logical": 963
+    },
+    {
+      "current": 978,
+      "original": 964,
+      "logical": 962
+    }
+  ],
+  "evidence": [
+    "GetSupportedFaxDrivers is called by WOW32FaxHandler WM_DDRV_SUBCLASS and supplies SupFaxDrv/uNumSupFaxDrv.",
+    "InstallWowFaxPrinter is called by IsFaxPrinterWriteProfileString.",
+    "verify-wow-fax-failure.ps1 extracts original-owner functions into fax_exact.h; fixture covers eight list cases, nine driver/printer result combinations, and four early failures. Fixture inspected, not run."
+  ],
+  "limits": [
+    "No full spooler/guest integration pass claimed.",
+    "Malformed REG_MULTI_SZ, concurrent registry-size changes and ClosePrinter failure are not established by this fixture; unchanged broader owner behavior is outside this diff review.",
+    "Diagnostic mapping is LF source-derived, not compiler-certified."
+  ]
+}

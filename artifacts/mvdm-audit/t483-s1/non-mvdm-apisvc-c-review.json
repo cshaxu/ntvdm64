@@ -1,0 +1,46 @@
+{
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+  "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+  "current_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+  "changes": [
+    {
+      "original_start": 24,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 1,
+      "original": [
+        "#include \"XactSrvP.h\""
+      ],
+      "current": [
+        "#include \"xactsrv_wksta_minimal.h\""
+      ],
+      "decision": "retain",
+      "necessity": "Finite shared declaration boundary replaces original aggregate requiring srvfsctl, ntmsv1_0 and XactSrv2 server internals; selected local NetAPI handlers retain original bodies.",
+      "counter_review": "Real vrnetapi calls service/use/workstation handlers. One shared header avoids duplicated declarations or replacement handlers; its autonomous macro audit remains separate.",
+      "change_plan": "Retain finite shared include; no functional repair required.",
+      "verification_required": "Selected VDMREDIR build; handler success/invalid-level/short-buffer/provider-error cases. No dedicated named handler fixture found in inspected test source; no run claimed."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 871,
+      "original_count": 1,
+      "current_start": 872,
+      "current_count": 1,
+      "original": [
+        "        nativeRcvBuffer = (LPTSTR)SmbGetUlong( &parameters->RcvBuffer );"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "O:/repos.external/OpenNT/ds/netapi/xactsrv/xactsrvp.h",
+    "src/mvdm-host/vdmredir/vrnetapi.c",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1"
+  ],
+  "limits": "Complete normalized diff/caller review only; no new build/runtime or all-context admission proof."
+}

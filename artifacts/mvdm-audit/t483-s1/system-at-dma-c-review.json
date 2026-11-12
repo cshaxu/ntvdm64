@@ -1,0 +1,114 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+  "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01",
+  "current_sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 24,
+      "original_count": 6,
+      "current_start": 25,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"AT_STUFF.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 799,
+      "original_count": 17,
+      "current_start": 802,
+      "current_count": 1,
+      "original": [
+        "#ifdef LIM",
+        "\t\t\tif( !get_lim_setup() ){",
+        "\t\t\t\tif( dma_addr >= ROM_START ){",
+        "\t\t\t\t\tif( dma_addr >= ROM_START )",
+        "\t\t\t\t\t\tbreak;",
+        "\t\t\t\t\tlength = ROM_START - dma_addr - 1;",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "#else",
+        "\t\t\t/* increment case - check for writing to ROM */",
+        "\t\t\tif ((dma_addr + length) >= ROM_START)",
+        "\t\t\t{",
+        "\t\t\t\tif (dma_addr >= ROM_START)",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tlength = ROM_START - dma_addr - 1;",
+        "\t\t\t}",
+        "#endif /* LIM */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 824,
+      "original_count": 18,
+      "current_start": 813,
+      "current_count": 1,
+      "original": [
+        "#ifdef LIM",
+        "\t\t\tif( !get_lim_setup() ){",
+        "\t\t\t\tif (dma_addr >= ROM_START) {",
+        "\t\t\t\t\tif (dma_addr-length >= ROM_START)",
+        "\t\t\t\t\t\tbreak;",
+        "\t\t\t\t\tlength = dma_addr-ROM_START+length-1;",
+        "\t\t\t\t\tdma_addr = ROM_START - 1;",
+        "\t\t\t\t}",
+        "\t\t\t}",
+        "#else",
+        "\t\t\tif (dma_addr >= ROM_START)",
+        "\t\t\t{",
+        "\t\t\t\tif (dma_addr-length >= ROM_START)",
+        "\t\t\t\t\tbreak;",
+        "\t\t\t\tlength = dma_addr - ROM_START + length - 1;",
+        "\t\t\t\tdma_addr = ROM_START - 1;",
+        "\t\t\t}",
+        "#endif /* LIM */"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 886,
+      "original_count": 6,
+      "current_start": 860,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "initial_review": "Four excluded bodies: two SEGMENTATION includes and two outer !PM write-protection branches. Remaining source exact.",
+  "counter_review": "Both LIM alternatives were inside excluded !PM bodies; no need to retain inner framework. Original PM transfer uses SAS bulk/byte operations; address/count/mask/auto-initialize and DMA register logic unchanged. No new ROM-protection bypass introduced beyond original PM selection.",
+  "limits": "Complete source-difference classification only; no fresh build/runtime or universal configuration/diagnostic-line certification."
+}

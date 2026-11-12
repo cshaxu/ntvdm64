@@ -1,0 +1,2008 @@
+{
+  "path": "src/mvdm-host/wow32/wmdisp32.c",
+  "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+  "current_sha256": "b88fb4ebc66ef487e919050cd8604b2aecead3eaab9a9a7bc1f3fedb181800c2",
+  "changes": [
+    {
+      "original_start": 19,
+      "original_count": 0,
+      "current_start": 19,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-340): diagnostics belong to the owned observer. */",
+        "#include \"wow_user_thunk_scope.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): selected original rollback finalizers. */",
+        "#include \"wow_message_lifetime.h\""
+      ],
+      "decision": "delete",
+      "classification": "optional-callback-trace",
+      "change_plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "evidence": "wow_user_trace_wndproc_enter/return only append copied scalars to an environment-selected file and preserve LastError. Functional callback and converter do not use the raw-procedure local.",
+      "verification_required": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "missing_evidence": "No deletion implemented; provider file also has live non-trace scope logic."
+    },
+    {
+      "original_start": 23,
+      "original_count": 1,
+      "current_start": 28,
+      "current_count": 2,
+      "original": [
+        "BOOL fThunkDDEmsg = TRUE;"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): temporary operation mode is thread-private. */",
+        "__declspec(thread) BOOL fThunkDDEmsg = TRUE;"
+      ],
+      "decision": "retain",
+      "classification": "operation-thread-state",
+      "change_plan": "Retain TLS definition with matching header declaration and scoped save/restore at Get/PeekMessage and hook callers; do not restore worker-global mutable mode.",
+      "evidence": "wumsg.c and wowhooks.c set fThunkDDEmsg for operation semantics and restore in finally; callback scopes also save/restore. TLS prevents unrelated native task threads sharing that temporary mode.",
+      "verification_required": "Existing hook/thunk-scope and COPYDATA queue-mode tests; simultaneous tasks and reentrant message retrieval.",
+      "missing_evidence": "No new runtime result."
+    },
+    {
+      "original_start": 39,
+      "original_count": 0,
+      "current_start": 48,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DWORD vpWndProc16Raw; /* DIVERGENCE(MVDM-HOST-DIV-340): trace scalar only. */"
+      ],
+      "decision": "delete",
+      "classification": "optional-callback-trace",
+      "change_plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "evidence": "wow_user_trace_wndproc_enter/return only append copied scalars to an environment-selected file and preserve LastError. Functional callback and converter do not use the raw-procedure local.",
+      "verification_required": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "missing_evidence": "No deletion implemented; provider file also has live non-trace scope logic."
+    },
+    {
+      "original_start": 40,
+      "original_count": 1,
+      "current_start": 51,
+      "current_count": 4,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before construction. */",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "classification": "callback-unwind-scope",
+      "change_plan": "Retain zero initialization and finite unwind scope pending complete normal/early-return/SEH proof. Verify completed marking and original callback-stack cursor restoration; remove only redundant state proved unnecessary, not original output conversion.",
+      "evidence": "wow_message_unwind32 releases captured resources or selected input-only unthunkers. stack_leave restores vpCBStack/init flag only for live matching PTD/HTASK on incomplete or abnormal paths. Return may itself count as abnormal under SEH, so completed flag and caller parameter require joint review.",
+      "verification_required": "Full W32WndProc early return, native-only notification, rejected callback, nested/reentrant stack, task retirement and SEH; existing construction fixture checks helper restoration but is not whole W32WndProc proof.",
+      "missing_evidence": "Selected full-call failure and callback-stack equivalence remains unproven."
+    },
+    {
+      "original_start": 52,
+      "original_count": 0,
+      "current_start": 73,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    vpWndProc16Raw = (DWORD)vpWndProc16; /* DIV-340: before original decoding. */"
+      ],
+      "decision": "delete",
+      "classification": "optional-callback-trace",
+      "change_plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "evidence": "wow_user_trace_wndproc_enter/return only append copied scalars to an environment-selected file and preserve LastError. Functional callback and converter do not use the raw-procedure local.",
+      "verification_required": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "missing_evidence": "No deletion implemented; provider file also has live non-trace scope logic."
+    },
+    {
+      "original_start": 130,
+      "original_count": 0,
+      "current_start": 153,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        stack.completed = TRUE; /* DIV-349: successful native-only notification. */"
+      ],
+      "decision": "pending",
+      "classification": "callback-unwind-scope",
+      "change_plan": "Retain zero initialization and finite unwind scope pending complete normal/early-return/SEH proof. Verify completed marking and original callback-stack cursor restoration; remove only redundant state proved unnecessary, not original output conversion.",
+      "evidence": "wow_message_unwind32 releases captured resources or selected input-only unthunkers. stack_leave restores vpCBStack/init flag only for live matching PTD/HTASK on incomplete or abnormal paths. Return may itself count as abnormal under SEH, so completed flag and caller parameter require joint review.",
+      "verification_required": "Full W32WndProc early return, native-only notification, rejected callback, nested/reentrant stack, task retirement and SEH; existing construction fixture checks helper restoration but is not whole W32WndProc proof.",
+      "missing_evidence": "Selected full-call failure and callback-stack equivalence remains unproven."
+    },
+    {
+      "original_start": 197,
+      "original_count": 0,
+      "current_start": 227,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-340): retain existing pre-callback witness. */",
+        "    wow_user_trace_wndproc_enter(uMsg, vpWndProc16Raw, (DWORD)vpWndProc16);",
+        ""
+      ],
+      "decision": "delete",
+      "classification": "optional-callback-trace",
+      "change_plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "evidence": "wow_user_trace_wndproc_enter/return only append copied scalars to an environment-selected file and preserve LastError. Functional callback and converter do not use the raw-procedure local.",
+      "verification_required": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "missing_evidence": "No deletion implemented; provider file also has live non-trace scope logic."
+    },
+    {
+      "original_start": 198,
+      "original_count": 0,
+      "current_start": 232,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-340): observe, never alter callback outcome. */",
+        "    wow_user_trace_wndproc_return(uMsg, (DWORD)vpWndProc16, fSuccess, wm32mpex.lReturn);"
+      ],
+      "decision": "delete",
+      "classification": "optional-callback-trace",
+      "change_plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "evidence": "wow_user_trace_wndproc_enter/return only append copied scalars to an environment-selected file and preserve LastError. Functional callback and converter do not use the raw-procedure local.",
+      "verification_required": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "missing_evidence": "No deletion implemented; provider file also has live non-trace scope logic."
+    },
+    {
+      "original_start": 243,
+      "original_count": 0,
+      "current_start": 286,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = TRUE; /* DIV-349: original unthunk completed successfully. */"
+      ],
+      "decision": "pending",
+      "classification": "callback-unwind-scope",
+      "change_plan": "Retain zero initialization and finite unwind scope pending complete normal/early-return/SEH proof. Verify completed marking and original callback-stack cursor restoration; remove only redundant state proved unnecessary, not original output conversion.",
+      "evidence": "wow_message_unwind32 releases captured resources or selected input-only unthunkers. stack_leave restores vpCBStack/init flag only for live matching PTD/HTASK on incomplete or abnormal paths. Return may itself count as abnormal under SEH, so completed flag and caller parameter require joint review.",
+      "verification_required": "Full W32WndProc early return, native-only notification, rejected callback, nested/reentrant stack, task retirement and SEH; existing construction fixture checks helper restoration but is not whole W32WndProc proof.",
+      "missing_evidence": "Selected full-call failure and callback-stack equivalence remains unproven."
+    },
+    {
+      "original_start": 249,
+      "original_count": 0,
+      "current_start": 294,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ],
+      "decision": "pending",
+      "classification": "callback-unwind-scope",
+      "change_plan": "Retain zero initialization and finite unwind scope pending complete normal/early-return/SEH proof. Verify completed marking and original callback-stack cursor restoration; remove only redundant state proved unnecessary, not original output conversion.",
+      "evidence": "wow_message_unwind32 releases captured resources or selected input-only unthunkers. stack_leave restores vpCBStack/init flag only for live matching PTD/HTASK on incomplete or abnormal paths. Return may itself count as abnormal under SEH, so completed flag and caller parameter require joint review.",
+      "verification_required": "Full W32WndProc early return, native-only notification, rejected callback, nested/reentrant stack, task retirement and SEH; existing construction fixture checks helper restoration but is not whole W32WndProc proof.",
+      "missing_evidence": "Selected full-call failure and callback-stack equivalence remains unproven."
+    },
+    {
+      "original_start": 430,
+      "original_count": 0,
+      "current_start": 451,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-345): initialize this call's nested owner. */",
+        "        lpwm32mpex->dwTmp[3] = 0;",
+        "        lpwm32mpex->lpfnM32 = WM32Create; /* DIVERGENCE(MVDM-HOST-DIV-349): also the direct CBT caller. */"
+      ],
+      "decision": "pending",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 448,
+      "original_count": 0,
+      "current_start": 473,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                    lpwm32mpex->dwTmp[0] = vpClass; /* DIV-349: before a throwing copy. */"
+      ],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 456,
+      "original_count": 0,
+      "current_start": 483,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwTmp[1] = vpName; /* DIV-349: completed acquisition. */"
+      ],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 462,
+      "original_count": 1,
+      "current_start": 491,
+      "current_count": 1,
+      "original": [
+        "                    return FALSE;   // Window is dead"
+      ],
+      "current": [
+        "                    goto Error;   // DIV-345: release strings if window is dead."
+      ],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 469,
+      "original_count": 1,
+      "current_start": 498,
+      "current_count": 1,
+      "original": [
+        "                WM32MSGPARAMEX wm32mpexT;"
+      ],
+      "current": [
+        "                WM32MSGPARAMEX wm32mpexT = {0}; /* DIV-349: nested partial construction. */"
+      ],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 478,
+      "original_count": 1,
+      "current_start": 507,
+      "current_count": 2,
+      "original": [
+        "                WM32MDICreate(&wm32mpexT);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-345): reuse original rollback. */",
+        "                if (!WM32MDICreate(&wm32mpexT)) goto Error;"
+      ],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 480,
+      "original_count": 0,
+      "current_start": 511,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwTmp[2] = wm32mpexT.dwTmp[0];"
+      ],
+      "decision": "pending",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 481,
+      "original_count": 0,
+      "current_start": 514,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwTmp[3] = vpCreateParams;"
+      ],
+      "decision": "pending",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 487,
+      "original_count": 1,
+      "current_start": 522,
+      "current_count": 1,
+      "original": [
+        "                return FALSE;"
+      ],
+      "current": [
+        "                goto Error; /* DIV-349: completed nested ownership must unwind. */"
+      ],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 494,
+      "original_count": 4,
+      "current_start": 529,
+      "current_count": 0,
+      "original": [
+        "",
+        "            lpwm32mpex->dwTmp[0] = vpClass; // store for later freeing",
+        "            lpwm32mpex->dwTmp[1] = vpName;",
+        ""
+      ],
+      "current": [],
+      "decision": "retain",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 517,
+      "original_count": 2,
+      "current_start": 549,
+      "current_count": 1,
+      "original": [
+        "            if (HIW(vpClass)) free16(vpClass);",
+        "            if (vpName)       free16(vpName);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: consume captured keys. */"
+      ],
+      "decision": "pending",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 536,
+      "original_count": 35,
+      "current_start": 568,
+      "current_count": 3,
+      "original": [
+        "            if (lpwm32mpex->pww == NULL) {",
+        "                lpwm32mpex->pww = (PWW)GetWindowLong(lpwm32mpex->hwnd, GWL_WOWWORDS);",
+        "                if (lpwm32mpex->pww == NULL)",
+        "                    return FALSE;   // Window is dead",
+        "            }",
+        "",
+        "            if (lParam->lpCreateParams && (lpwm32mpex->pww->dwExStyle & WS_EX_MDICHILD) ) {",
+        "                WM32MSGPARAMEX wm32mpexT;",
+        "                GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(CREATESTRUCT16), pcws16);",
+        "                wm32mpexT.fThunk = lpwm32mpex->fThunk;",
+        "                wm32mpexT.hwnd = lpwm32mpex->hwnd;",
+        "                wm32mpexT.uMsg = WM_MDICREATE;",
+        "                wm32mpexT.uParam = lpwm32mpex->uParam;",
+        "                wm32mpexT.lParam = (LONG)lParam->lpCreateParams;",
+        "                wm32mpexT.pww = lpwm32mpex->pww;",
+        "                wm32mpexT.fFree = lpwm32mpex->fFree;",
+        "                wm32mpexT.Parm16.WndProc.lParam = (VPVOID)FETCHDWORD(pcws16->vpCreateParams);",
+        "                wm32mpexT.lReturn = 0;",
+        "                wm32mpexT.dwParam = lpwm32mpex->dwParam;",
+        "                WM32MDICreate(&wm32mpexT);",
+        "                FREEVDMPTR(pcws16);",
+        "            }",
+        "",
+        "            vpClass = lpwm32mpex->dwTmp[0];",
+        "            vpName  = lpwm32mpex->dwTmp[1];",
+        "",
+        "            //  if HIWORD(class) is zero, class is an atom, else a pointer.",
+        "",
+        "            if (HIW16(vpClass)) {",
+        "                free16(vpClass);",
+        "            }",
+        "",
+        "            if (vpName) {",
+        "                free16(vpName);",
+        "            }"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): same original nested/outer frees,",
+        "             * consuming captured keys once even if a later release escapes. */",
+        "            wow_message_release32(lpwm32mpex);"
+      ],
+      "decision": "pending",
+      "classification": "create-resource-ownership",
+      "change_plan": "Retain immediate acquisition capture, zeroed nested owner and original Error routing. Verify WM32Create nested MDI transfer and release helper as one unit: class/title/record keys must transfer once and release in original required order; do not reread guest-mutated pointers.",
+      "evidence": "Original delayed class/name publication and direct failure returns could bypass cleanup. Current code captures before putstr16, checks nested WM32MDICreate, stores nested title/record in slots2/3, and calls shared release_mdi then outer string release. Original stackfree16 remains after normal unthunk.",
+      "verification_required": "Construction fixture allocation/copy failures; guest replacing title, dead window, nested MDI failure and release-time reentry/exception.",
+      "missing_evidence": "Full MDI transfer and release-order equivalence is not proven by source/helper tests alone."
+    },
+    {
+      "original_start": 659,
+      "original_count": 0,
+      "current_start": 660,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DWORD owned; /* DIVERGENCE(MVDM-HOST-DIV-347): existing call scratch. */"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 662,
+      "original_count": 0,
+      "current_start": 665,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        lpwm32mpex->dwParam = 0;",
+        "        lpwm32mpex->Parm16.WndProc.lParam = 0;"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 667,
+      "original_count": 0,
+      "current_start": 673,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_MAPPED;"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 676,
+      "original_count": 0,
+      "current_start": 684,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_STACK;"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 679,
+      "original_count": 0,
+      "current_start": 689,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 685,
+      "original_count": 1,
+      "current_start": 697,
+      "current_count": 4,
+      "original": [
+        "        if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL)) {"
+      ],
+      "current": [
+        "        owned = lpwm32mpex->dwParam;",
+        "        lpwm32mpex->dwParam = 0;",
+        "        if (owned & WOW_TEXT_MAPPED) {",
+        "            DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 688,
+      "original_count": 0,
+      "current_start": 704,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        if (!(owned & WOW_TEXT_ACTIVE)) return TRUE;"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 690,
+      "original_count": 1,
+      "current_start": 708,
+      "current_count": 1,
+      "original": [
+        "            if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {"
+      ],
+      "current": [
+        "            if (owned & WOW_TEXT_STACK) {"
+      ],
+      "decision": "retain",
+      "classification": "text-parameter-ownership",
+      "change_plan": "Retain per-call ACTIVE/MAPPED/STACK flags, clear before release and delete only the captured parameter-map reference. Preserve original stack versus heap allocator choice and do not infer it from ambient state after callbacks.",
+      "evidence": "WM32SetText records which allocation path succeeded; unthunk consumes flags before deleting map/freeing. wow_message_unwind32 invokes this input-only unthunker when flags remain.",
+      "verification_required": "verify-wow-parameter-map.ps1 and fixture borrowed map/reentry/failed fallback/exception cases.",
+      "missing_evidence": "No new runtime pass; tests use controlled allocator boundaries."
+    },
+    {
+      "original_start": 730,
+      "original_count": 1,
+      "current_start": 748,
+      "current_count": 3,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->Parm16.WndProc.wParam);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture only the heap variant. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex,",
+        "                malloc16(lpwm32mpex->Parm16.WndProc.wParam));"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 732,
+      "original_count": 0,
+      "current_start": 753,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "        /* DIVERGENCE(MVDM-HOST-DIV-345): allocation failure is not a buffer. */",
+        "        if (!lpwm32mpex->Parm16.WndProc.lParam) return FALSE;"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 818,
+      "original_count": 1,
+      "current_start": 843,
+      "current_count": 1,
+      "original": [
+        "                free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "                wow_message_release32(lpwm32mpex); /* DIV-349: captured heap key. */"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 925,
+      "original_count": 1,
+      "current_start": 950,
+      "current_count": 1,
+      "original": [
+        "            if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(MSG16))))"
+      ],
+      "current": [
+        "            if (!(lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(MSG16))))) /* DIV-349 */"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 937,
+      "original_count": 1,
+      "current_start": 962,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: no output replay. */"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 1455,
+      "original_count": 0,
+      "current_start": 1480,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    BOOL completed = FALSE; /* DIV-349: SEH AbnormalTermination includes return. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1456,
+      "original_count": 1,
+      "current_start": 1482,
+      "current_count": 3,
+      "original": [
+        ""
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-349): nested owner has no outer callback yet. */",
+        "    lpwm32mpex->lpfnM32 = WM32MDICreate;",
+        "    __try {"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1469,
+      "original_count": 0,
+      "current_start": 1498,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                    lpwm32mpex->dwParam = vp; /* DIV-349: before copying class. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1486,
+      "original_count": 0,
+      "current_start": 1517,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                lpwm32mpex->dwTmp[0] = vp; /* DIV-349: before copying title. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1498,
+      "original_count": 1,
+      "current_start": 1531,
+      "current_count": 3,
+      "original": [
+        "            if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(MDICREATESTRUCT16))))"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-345): retain owned title identity. */",
+        "            lpwm32mpex->dwTmp[0] = (DWORD)vp;",
+        "            if (!(lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(MDICREATESTRUCT16))))) /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1515,
+      "original_count": 0,
+      "current_start": 1551,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            completed = TRUE; /* DIV-349: transfer ownership to the caller. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1519,
+      "original_count": 2,
+      "current_start": 1557,
+      "current_count": 3,
+      "original": [
+        "            if (HIW16(lpwm32mpex->dwParam)) free16(lpwm32mpex->dwParam);",
+        "            if (vp)                         free16(vp);"
+      ],
+      "current": [
+        "            wow_message_free16(&lpwm32mpex->dwParam, TRUE); /* DIV-349: original error order. */",
+        "            wow_message_free16(&lpwm32mpex->dwTmp[0], FALSE);",
+        "            completed = TRUE; /* DIV-349: ordinary failure has released its keys. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1526,
+      "original_count": 7,
+      "current_start": 1566,
+      "current_count": 2,
+      "original": [
+        "            GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(MDICREATESTRUCT16), pmcs16);",
+        "",
+        "            if (FETCHDWORD(pmcs16->vpszTitle)) {",
+        "                free16(FETCHDWORD(pmcs16->vpszTitle));",
+        "            }",
+        "",
+        "            FREEVDMPTR(pmcs16);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-345): guest may replace vpszTitle. */",
+        "            wow_message_free16(&lpwm32mpex->dwTmp[0], FALSE); /* DIV-349: consume before release. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1536,
+      "original_count": 3,
+      "current_start": 1571,
+      "current_count": 1,
+      "original": [
+        "            if (HIW16(lpwm32mpex->dwParam)) {",
+        "                free16(lpwm32mpex->dwParam);",
+        "            }"
+      ],
+      "current": [
+        "            wow_message_free16(&lpwm32mpex->dwParam, TRUE); /* DIV-349 */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1542,
+      "original_count": 1,
+      "current_start": 1576,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_free16(&lpwm32mpex->dwTmp[1], FALSE); /* DIV-349: preserve result conversion order. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1546,
+      "original_count": 0,
+      "current_start": 1580,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    completed = TRUE; /* DIV-349: original normal result/cleanup completed. */"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1547,
+      "original_count": 0,
+      "current_start": 1583,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    } __finally { /* DIV-349: nested construction can escape before transfer. */",
+        "        if (!completed) wow_message_unwind32(lpwm32mpex);",
+        "    }"
+      ],
+      "decision": "pending",
+      "classification": "nested-mdi-transaction",
+      "change_plan": "Keep separate class/title/record ownership until transfer and consume before release. Verify completed/finally covers every construction and unthunk exit without restoring result pointers or double-freeing transferred nested ownership; simplify only against that proof.",
+      "evidence": "WM32MDICreate captures class/title before throwing copies, owns record through heap32, and exceptional-finally unwinds incomplete work. Normal title release uses captured value instead of guest vpszTitle; WM32Create later adopts keys.",
+      "verification_required": "Construction fixture plus nested creation with changed title, class atom, record allocation failure, unthunk failure and throwing cleanup.",
+      "missing_evidence": "Complete cross-function transfer/SEH proof and runtime witness still needed."
+    },
+    {
+      "original_start": 1681,
+      "original_count": 0,
+      "current_start": 1721,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        lpwm32mpex->lpfnM32 = WM32SizeClipBoard; /* DIVERGENCE(MVDM-HOST-DIV-349): temporary global owner. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 1685,
+      "original_count": 0,
+      "current_start": 1727,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        lpwm32mpex->dwParam = vp; /* DIV-349: before either lock/copy can escape. */",
+        "        lpwm32mpex->dwTmp[2] = hMem16;"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 1687,
+      "original_count": 0,
+      "current_start": 1732,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                __try { /* DIV-349: native lock has its own owner. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 1693,
+      "original_count": 1,
+      "current_start": 1740,
+      "current_count": 1,
+      "original": [
+        "                GlobalUnlock((HANDLE) lpwm32mpex->lParam);"
+      ],
+      "current": [
+        "                } __finally { GlobalUnlock((HANDLE) lpwm32mpex->lParam); }"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 1701,
+      "original_count": 0,
+      "current_start": 1748,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            lpwm32mpex->dwTmp[0] = 1; /* DIV-349: normal release must lock by stable handle. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 1712,
+      "original_count": 1,
+      "current_start": 1761,
+      "current_count": 1,
+      "original": [
+        "            GlobalUnlockFree16(GlobalLock16(LOW(lpwm32mpex->Parm16.WndProc.lParam), NULL));"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: same lock/unlock/free sequence. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 1731,
+      "original_count": 1,
+      "current_start": 1780,
+      "current_count": 2,
+      "original": [
+        "        lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->Parm16.WndProc.wParam);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-349): retain the completed heap acquisition. */",
+        "        lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->Parm16.WndProc.wParam));"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 1741,
+      "original_count": 1,
+      "current_start": 1792,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback remains above. */"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 1778,
+      "original_count": 1,
+      "current_start": 1829,
+      "current_count": 4,
+      "original": [
+        "        WI32DDEAddInitiator(lpwm32mpex->Parm16.WndProc.wParam);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-353): retain this invocation's publication. */",
+        "        lpwm32mpex->dwTmp[2] = lpwm32mpex->Parm16.WndProc.wParam;",
+        "        lpwm32mpex->dwTmp[3] = WI32DDEAddInitiator((HAND16)lpwm32mpex->dwTmp[2]) ?",
+        "                              WOW_DDE_INITIATE_ACTIVE : 0;"
+      ],
+      "decision": "retain",
+      "classification": "dde-initiation-owner",
+      "change_plan": "Retain call-specific initiator identity and successful-publication flag; consume it before deleting the initiator. Do not delete an outer publication when this call did not acquire one.",
+      "evidence": "WI32DDEAddInitiator returns success; dwTmp[2]/[3] remember this invocation instead of rereading mutable arguments. Delete executes only on recorded ownership.",
+      "verification_required": "DDE alias fixture nested initiation and rejected publication; normal initiate/ack sequence.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 1781,
+      "original_count": 1,
+      "current_start": 1836,
+      "current_count": 5,
+      "original": [
+        "        WI32DDEDeleteInitiator((HAND16)GETHWND16(lpwm32mpex->uParam));"
+      ],
+      "current": [
+        "        if (lpwm32mpex->dwTmp[3] & WOW_DDE_INITIATE_ACTIVE) {",
+        "            HAND16 initiator = (HAND16)lpwm32mpex->dwTmp[2];",
+        "            lpwm32mpex->dwTmp[3] = 0;",
+        "            WI32DDEDeleteInitiator(initiator);",
+        "        }"
+      ],
+      "decision": "retain",
+      "classification": "dde-initiation-owner",
+      "change_plan": "Retain call-specific initiator identity and successful-publication flag; consume it before deleting the initiator. Do not delete an outer publication when this call did not acquire one.",
+      "evidence": "WI32DDEAddInitiator returns success; dwTmp[2]/[3] remember this invocation instead of rereading mutable arguments. Delete executes only on recorded ownership.",
+      "verification_required": "DDE alias fixture nested initiation and rejected publication; normal initiate/ack sequence.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 1837,
+      "original_count": 0,
+      "current_start": 1897,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(MVDM-HOST-DIV-352): callbacks may retire this node. */",
+        "                    HDDE dde = *pDdeNode;",
+        "                    pDdeNode = &dde;"
+      ],
+      "decision": "retain",
+      "classification": "dde-node-snapshot",
+      "change_plan": "Retain by-value HDDE snapshot before guest-capable unmark/free callbacks; keep actual list deletion in original owner and never dereference a potentially retired node afterward.",
+      "evidence": "ACK branches call W32UnMarkDDEHandle and GlobalLock/UnlockFree16, which may reenter; later h16/hMem16/flags accesses now use local copied structure. Snapshot contains data used by existing branch, not a replacement list.",
+      "verification_required": "DDE alias fixture retirement during callback, both EXECUTE free modes, normal acknowledgement.",
+      "missing_evidence": "Snapshot does not itself prove handle-reuse races impossible; no new test result."
+    },
+    {
+      "original_start": 1956,
+      "original_count": 0,
+      "current_start": 2020,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DDECONVERSION Conversion;"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 1959,
+      "original_count": 0,
+      "current_start": 2025,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        DDEBeginConversion(&Conversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 1978,
+      "original_count": 5,
+      "current_start": 2046,
+      "current_count": 10,
+      "original": [
+        "                DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                             (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                             h16,",
+        "                             (HANDLE) lLo,",
+        "                             &DdeInfo);"
+      ],
+      "current": [
+        "                if (!DDETrackhandle(&Conversion,",
+        "                                    (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                                    (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                                    h16, (HANDLE)lLo, &DdeInfo)) {",
+        "                    DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam);",
+        "                    GlobalUnlockFree16(GlobalLock16(h16, NULL));",
+        "                    if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);",
+        "                    return (FALSE);",
+        "                }"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 1984,
+      "original_count": 0,
+      "current_start": 2058,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "            }",
+        "            else {",
+        "                if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);",
+        "                return (FALSE);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2021,
+      "original_count": 0,
+      "current_start": 2100,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DDECONVERSION Conversion;"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2024,
+      "original_count": 0,
+      "current_start": 2105,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        DDEBeginConversion(&Conversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2038,
+      "original_count": 1,
+      "current_start": 2121,
+      "current_count": 1,
+      "original": [
+        "                                 &DdeInfo);"
+      ],
+      "current": [
+        "                                 &DdeInfo, &Conversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2058,
+      "original_count": 5,
+      "current_start": 2141,
+      "current_count": 12,
+      "original": [
+        "            DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                         (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                         h16,",
+        "                         (HANDLE) lLo,",
+        "                         &DdeInfo);"
+      ],
+      "current": [
+        "            if (!DDETrackhandle(&Conversion,",
+        "                                (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                                (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                                h16, (HANDLE)lLo, &DdeInfo)) {",
+        "                DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                              (HAND16)lpwm32mpex->Parm16.WndProc.wParam);",
+        "                GlobalUnlockFree16(GlobalLock16(h16, NULL));",
+        "                if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);",
+        "                lpwm32mpex->Parm16.WndProc.wParam = (WORD)lHi;",
+        "                lpwm32mpex->Parm16.WndProc.lParam = lLo;",
+        "                return (0);",
+        "            }"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2105,
+      "original_count": 0,
+      "current_start": 2196,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DDECONVERSION Conversion;"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2108,
+      "original_count": 0,
+      "current_start": 2201,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        DDEBeginConversion(&Conversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2132,
+      "original_count": 1,
+      "current_start": 2227,
+      "current_count": 1,
+      "original": [
+        "                                 &DdeInfo);"
+      ],
+      "current": [
+        "                                 &DdeInfo, &Conversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2151,
+      "original_count": 5,
+      "current_start": 2246,
+      "current_count": 11,
+      "original": [
+        "            DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                         (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                         h16,",
+        "                         (HANDLE) lLo,",
+        "                         &DdeInfo);"
+      ],
+      "current": [
+        "            if (!DDETrackhandle(&Conversion,",
+        "                                (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                                (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                                h16, (HANDLE)lLo, &DdeInfo)) {",
+        "                DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                              (HAND16)lpwm32mpex->Parm16.WndProc.wParam);",
+        "                GlobalUnlockFree16(GlobalLock16(h16, NULL));",
+        "                if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);",
+        "                lpwm32mpex->Parm16.WndProc.lParam = lLo;",
+        "                return (0);",
+        "            }"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2196,
+      "original_count": 0,
+      "current_start": 2298,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DDECONVERSION Conversion;"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2199,
+      "original_count": 0,
+      "current_start": 2303,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        DDEBeginConversion(&Conversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2218,
+      "original_count": 5,
+      "current_start": 2324,
+      "current_count": 9,
+      "original": [
+        "                DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                             (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                             h16,",
+        "                             (HANDLE) lpwm32mpex->lParam,",
+        "                             &DdeInfo);"
+      ],
+      "current": [
+        "                if (!DDETrackhandle(&Conversion,",
+        "                                    (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                                    (HAND16)lpwm32mpex->Parm16.WndProc.wParam,",
+        "                                    h16, (HANDLE)lpwm32mpex->lParam, &DdeInfo)) {",
+        "                    DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),",
+        "                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam);",
+        "                    GlobalUnlockFree16(GlobalLock16(h16, NULL));",
+        "                    return (FALSE);",
+        "                }"
+      ],
+      "decision": "pending",
+      "classification": "dde-conversion-rollback",
+      "change_plan": "Audit all ADVISE/DATA/POKE/EXECUTE conversion additions together with wdde.c tracker/rollback. Preserve exact successfully acquired aliases and original lParam ownership; prove failure cannot double-free tracked top-level h16 or remove a reentrant replacement.",
+      "evidence": "New local DDECONVERSION flows through Convert/Trackhandle; failed tracking rolls back nested aliases then frees h16 and sometimes FreeDDElParam, restoring original message fields in selected failures. wdde.c prior audit already records publish-before-track and rollback reentry questions.",
+      "verification_required": "DDE allocation/publication failures, nested aliases, reuse/reentry during W32UnMarkDDEHandle, each FreeDDElParam mode and original success transfer.",
+      "missing_evidence": "Tracker atomicity, fixed capacity and cancellation/rollback order remain unproven; do not mark repaired."
+    },
+    {
+      "original_start": 2375,
+      "original_count": 1,
+      "current_start": 2486,
+      "current_count": 1,
+      "original": [
+        "        if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(DROPSTRUCT16))))"
+      ],
+      "current": [
+        "        if (!(lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(DROPSTRUCT16))))) /* DIVERGENCE(MVDM-HOST-DIV-349) */"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 2394,
+      "original_count": 1,
+      "current_start": 2505,
+      "current_count": 1,
+      "original": [
+        "        free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "        wow_message_release32(lpwm32mpex); /* DIV-349: before original cursor result conversion. */"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 2451,
+      "original_count": 1,
+      "current_start": 2562,
+      "current_count": 2,
+      "original": [
+        "    PCPDATA pTemp;"
+      ],
+      "current": [
+        "    COPYDATASTRUCT captured;",
+        "    DWORD owned, error;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2455,
+      "original_count": 0,
+      "current_start": 2568,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-344): retain original construction/list,",
+        "         * but publish only complete acquisitions and keep scalar release keys. */",
+        "        lpwm32mpex->dwParam = 0;",
+        "        lpwm32mpex->dwTmp[0] = lpwm32mpex->dwTmp[1] = 0;",
+        "        lpwm32mpex->Parm16.WndProc.lParam = 0;",
+        "        if (!lpwm32mpex->hwnd || !lpwm32mpex->lParam) return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2459,
+      "original_count": 0,
+      "current_start": 2579,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            lpwm32mpex->fFree = FALSE; /* An active outer call owns this pair. */"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2461,
+      "original_count": 0,
+      "current_start": 2583,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "          /* DIV-344: GlobalAllocLock16 can reenter guest through CallBack16. */",
+        "          captured = *(PCOPYDATASTRUCT)lpwm32mpex->lParam;",
+        "          lpCDS32 = &captured;",
+        "          lpwm32mpex->dwTmp[1] = (DWORD)captured.lpData;",
+        "          __try {"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2462,
+      "original_count": 0,
+      "current_start": 2590,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;",
+        "            if (!vpCDS16) goto CopyDataFailed;",
+        "            lpwm32mpex->dwParam = WOW_COPY_HEADER;",
+        "            lpwm32mpex->fFree = TRUE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2464,
+      "original_count": 1,
+      "current_start": 2598,
+      "current_count": 0,
+      "original": [
+        "                lpCDS32 = (PCOPYDATASTRUCT) lpwm32mpex->lParam;"
+      ],
+      "current": [],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2471,
+      "original_count": 0,
+      "current_start": 2604,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                    lpwm32mpex->dwTmp[0] = vpData16;",
+        "                    if (!vpData16) goto CopyDataFailed;",
+        "                    lpwm32mpex->dwParam |= WOW_COPY_DATA;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2472,
+      "original_count": 0,
+      "current_start": 2609,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                  __try {",
+        "                    if (!lpMem16 || !lpCDS32->lpData) goto CopyDataFailed;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2474,
+      "original_count": 1,
+      "current_start": 2614,
+      "current_count": 2,
+      "original": [
+        "                        CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpData16, (DWORD) lpCDS32->lpData, 0);"
+      ],
+      "current": [
+        "                        if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpData16, lpwm32mpex->dwTmp[1], 0)) goto CopyDataFailed;",
+        "                        lpwm32mpex->dwParam |= WOW_COPY_DATA_NODE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2476,
+      "original_count": 0,
+      "current_start": 2618,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                  } __finally {"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2477,
+      "original_count": 0,
+      "current_start": 2621,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                  }"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2488,
+      "original_count": 1,
+      "current_start": 2634,
+      "current_count": 5,
+      "original": [
+        "            CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpCDS16, lpwm32mpex->lParam, 0);"
+      ],
+      "current": [
+        "            if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpCDS16, lpwm32mpex->lParam, COPYDATA_HEADER)) goto CopyDataFailed;",
+        "            lpwm32mpex->dwParam |= WOW_COPY_HEADER_NODE;",
+        "          } __finally {",
+        "            if (AbnormalTermination()) wow_message_unwind32(lpwm32mpex);",
+        "          }"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2492,
+      "original_count": 11,
+      "current_start": 2643,
+      "current_count": 10,
+      "original": [
+        "        if (lpwm32mpex->fFree) {",
+        "            pTemp = CopyDataFindData32 (GETHWND16(lpwm32mpex->hwnd), GETHWND16(lpwm32mpex->uParam), lpwm32mpex->Parm16.WndProc.lParam);",
+        "            if (pTemp && (!(pTemp->Flags))) {",
+        "                GETMISCPTR(lpwm32mpex->Parm16.WndProc.lParam, lpCDS16);",
+        "                GlobalUnlockFree16 ((VPVOID)lpCDS16->lpData);",
+        "                CopyDataDeleteNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, (DWORD) ((PCOPYDATASTRUCT)lpwm32mpex->lParam)->lpData);",
+        "                GlobalUnlockFree16 ((VPVOID)lpwm32mpex->Parm16.WndProc.lParam);",
+        "                CopyDataDeleteNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, (DWORD) lpwm32mpex->lParam);",
+        "                FREEMISCPTR(lpCDS16);",
+        "            }",
+        "        }"
+      ],
+      "current": [
+        "        /* DIV-344: consume this call's progress before reentrant frees.",
+        "         * Borrowed pairs have no bits; never reread a returned input header. */",
+        "        owned = lpwm32mpex->dwParam;",
+        "        lpwm32mpex->dwParam = 0;",
+        "        if (owned & WOW_COPY_DATA_NODE)",
+        "            CopyDataDeleteNode(GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->dwTmp[1]);",
+        "        if (owned & WOW_COPY_HEADER_NODE)",
+        "            CopyDataDeleteNode(GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->lParam);",
+        "        if (owned & WOW_COPY_DATA) GlobalUnlockFree16(lpwm32mpex->dwTmp[0]);",
+        "        if (owned & WOW_COPY_HEADER) GlobalUnlockFree16(lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2506,
+      "original_count": 0,
+      "current_start": 2657,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "",
+        "CopyDataFailed:",
+        "    error = ERROR_NOT_ENOUGH_MEMORY;",
+        "    wow_message_unwind32(lpwm32mpex);",
+        "    SetLastError(error);",
+        "    return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-call-ownership",
+      "change_plan": "Retain copied input descriptor and call-owned progress bits; verify each acquired header/data/node is recorded and released once, borrowed pairs never freed, and failed/throwing releases do not strand later keys. Review forced OOM result for non-allocation failures separately.",
+      "evidence": "WM32CopyData captures header before guest allocation, records original native data key and guest tokens, checks allocations/node publication, and clears dwParam before unthunk. Shared unwind delegates to original CopyData unthunk. Failure label maps all checked failures to ERROR_NOT_ENOUGH_MEMORY; release chain lacks nested finalizers unlike release_mdi.",
+      "verification_required": "COPYDATA lifetime fixture includes nested borrow, header mutation, allocation/copy failure, repeat unwind and queue-mode restoration. Add release-throw/reentrant alias replacement and invalid pointer/error-code evidence before deciding repairs.",
+      "missing_evidence": "Full failure/error semantics and throwing-release completeness not established; fixture success is not claimed here."
+    },
+    {
+      "original_start": 2517,
+      "original_count": 0,
+      "current_start": 2675,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        lpwm32mpex->lpfnM32 = WM32WinHelp; /* DIVERGENCE(MVDM-HOST-DIV-349): locked temporary, not a transfer. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 2522,
+      "original_count": 1,
+      "current_start": 2682,
+      "current_count": 2,
+      "original": [
+        "            HAND16  hMem16;"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-345): failed allocator leaves output unset. */",
+        "            HAND16  hMem16 = 0;"
+      ],
+      "decision": "retain",
+      "classification": "captured-temporary-owner",
+      "change_plan": "Retain zero initialization/allocation rejection and captured heap token release. Keep original message output conversion before release; never free a replacement guest-returned pointer.",
+      "evidence": "wow_message_heap32 stores original malloc16 result in dwTmp[1]; wow_message_free16 clears before free and skips terminal inactive worker. Conversion/return processing outside changed cleanup remains original.",
+      "verification_required": "Construction fixture partial allocation, output-header mutation, repeat unwind and worker shutdown; verify original copyback order for each handler.",
+      "missing_evidence": "No fresh integration pass; whole worker shutdown semantics reviewed separately."
+    },
+    {
+      "original_start": 2528,
+      "original_count": 1,
+      "current_start": 2690,
+      "current_count": 1,
+      "original": [
+        "            if (vp = GlobalAllocLock16(GMEM_DDESHARE | GMEM_MOVEABLE, cb, &hMem16)) {"
+      ],
+      "current": [
+        "            if (lpwm32mpex->dwParam = vp = GlobalAllocLock16(GMEM_DDESHARE | GMEM_MOVEABLE, cb, &hMem16)) { /* DIV-349: before copy. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 2534,
+      "original_count": 1,
+      "current_start": 2697,
+      "current_count": 0,
+      "original": [
+        "            lpwm32mpex->dwParam = vp;"
+      ],
+      "current": [],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    },
+    {
+      "original_start": 2541,
+      "original_count": 1,
+      "current_start": 2703,
+      "current_count": 1,
+      "original": [
+        "            GlobalUnlockFree16((VPVOID)lpwm32mpex->dwParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: activation is normal-only. */"
+      ],
+      "decision": "pending",
+      "classification": "locked-global-temporary",
+      "change_plan": "Retain capture-before-copy and native GlobalUnlock finally. Verify SizeClipBoard lock/unlock/relock/free using stable hMem16 and WinHelp temporary release against original ordering; retain activation only on normal path.",
+      "evidence": "Shared release32 handles SizeClipBoard/WinHelp separately from heap tokens; dwTmp[2] stores handle, dwTmp[0] records unlocked state, dwParam stores pointer. Native global lock has own finally.",
+      "verification_required": "Clipboard/WinHelp construction failure, guest remap/compaction, lock failure, exception and normal activation/copyback tests.",
+      "missing_evidence": "Stable-handle relock failure and teardown/reentry equivalence needs explicit evidence."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 29,
+      "original_count": 1,
+      "current_start": 37,
+      "current_count": 1,
+      "original": [
+        "INT fWMsgProfRT = 0;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 43,
+      "original_count": 1,
+      "current_start": 60,
+      "current_count": 1,
+      "original": [
+        "    CHAR szClassName[80];"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 47,
+      "original_count": 1,
+      "current_start": 66,
+      "current_count": 1,
+      "original": [
+        "    DWORD dwTics;"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 137,
+      "original_count": 3,
+      "current_start": 164,
+      "current_count": 1,
+      "original": [
+        "    if((uMsg & WOWPRIVATEMSG) && ((uMsg & ~WOWPRIVATEMSG) < 0x400)) {",
+        "        LOGDEBUG(6,(\"     -- private WOW bit set for %s\\n\", GetWMMsgName(uMsg & ~WOWPRIVATEMSG)));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 160,
+      "original_count": 1,
+      "current_start": 188,
+      "current_count": 1,
+      "original": [
+        "        dwTics = GetWOWTicDiff(0L);"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 173,
+      "original_count": 3,
+      "current_start": 203,
+      "current_count": 1,
+      "original": [
+        "        if( !fWMsgProfRT ) {  // only if not profiling round trip",
+        "            aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 216,
+      "original_count": 3,
+      "current_start": 256,
+      "current_count": 1,
+      "original": [
+        "    if((uMsg & WOWPRIVATEMSG) && ((uMsg - WOWPRIVATEMSG) < 0x400)) {",
+        "        LOGDEBUG(6,(\"     -- private WOW bit set for %s\\n\", (LPSZ)GetWMMsgName(uMsg)));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 224,
+      "original_count": 3,
+      "current_start": 265,
+      "current_count": 1,
+      "original": [
+        "        if( !fWMsgProfRT ) {  // only if not profiling round trip",
+        "            dwTics = GetWOWTicDiff(0L);",
+        "        }"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 233,
+      "original_count": 2,
+      "current_start": 275,
+      "current_count": 1,
+      "original": [
+        "        aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);",
+        "        aw32Msg[uMsg].cCalls++;   // increment # times message passed"
+      ],
+      "current": [
+        "#error Excluded unsupported WOW profiling configuration"
+      ]
+    },
+    {
+      "original_start": 359,
+      "original_count": 22,
+      "current_start": 412,
+      "current_count": 1,
+      "original": [
+        "    //",
+        "    // this routine is never called!  It's used as a placeholder.",
+        "    // if you want to make a change here, you have to make the change",
+        "    // to the places where we compare the thunk routine to WM32NoThunking",
+        "    // and only call the thunk routine if it's not this.  also make sure",
+        "    // that this 'default' thunking happens for NoThunking messages.",
+        "    //",
+        "",
+        "    if (lpwm32mpex->fThunk) {",
+        "        LOGDEBUG(6,(\"    No Thunking was required for the 32-bit message %s(%04x)\\n\", (LPSZ)GetWMMsgName(lpwm32mpex->uMsg), lpwm32mpex->uMsg));",
+        "",
+        "        lpwm32mpex->Parm16.WndProc.wMsg = (WORD)lpwm32mpex->uMsg;",
+        "        lpwm32mpex->Parm16.WndProc.wParam = (WORD)lpwm32mpex->uParam;",
+        "        lpwm32mpex->Parm16.WndProc.lParam = (LONG)lpwm32mpex->lParam;",
+        "    }",
+        "",
+        "    //",
+        "    // this routine is never called!  It's used as a placeholder.",
+        "    // if you want to make a change here, you have to make the change",
+        "    // to the places where we compare the thunk routine to WM32NoThunking",
+        "    // and only call the thunk routine if it's not this.",
+        "    //"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 392,
+      "original_count": 18,
+      "current_start": 428,
+      "current_count": 1,
+      "original": [
+        "",
+        "// These are undocumented messages for Win 3.0 so take a look at the app",
+        "// who is using them.",
+        "",
+        "BOOL FASTCALL WM32Undocumented(LPWM32MSGPARAMEX lpwm32mpex)",
+        "{",
+        "",
+        "    if (lpwm32mpex->fThunk) {",
+        "        LOGDEBUG(3,(\" Window %08lX is receiving Undocumented Message %s\\n\", lpwm32mpex->hwnd, (LPSZ)GetWMMsgName(lpwm32mpex->uMsg), lpwm32mpex->uMsg));",
+        "",
+        "        lpwm32mpex->Parm16.WndProc.wMsg = (WORD)lpwm32mpex->uMsg;",
+        "        lpwm32mpex->Parm16.WndProc.wParam = (WORD)lpwm32mpex->uParam;",
+        "        lpwm32mpex->Parm16.WndProc.lParam = (LONG)lpwm32mpex->lParam;",
+        "    }",
+        "",
+        "    return (TRUE);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 499,
+      "current": 530,
+      "logical": 495
+    },
+    {
+      "original": 733,
+      "current": 757,
+      "logical": 736
+    },
+    {
+      "original": 734,
+      "current": 758,
+      "logical": 737
+    },
+    {
+      "original": 735,
+      "current": 759,
+      "logical": 738
+    },
+    {
+      "original": 736,
+      "current": 760,
+      "logical": 739
+    },
+    {
+      "original": 1534,
+      "current": 1569,
+      "logical": 1529
+    }
+  ],
+  "limits": [
+    "Complete opcode classification, not implementation or passing runtime claim.",
+    "Pending cross-converter ownership findings remain open; no wholesale rollback recommendation."
+  ]
+}

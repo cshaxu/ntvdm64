@@ -1,11 +1,31 @@
-/* Copyright (c) 1985-91, Microsoft Corporation.
- * Original windows/core/ntuser drawtext.c function subset.
- * DIVERGENCE(OPENNT-HOST-097): unrelated text engines excluded;
- * selected function body unchanged. See the S3 source ledger.
- */
+/****************************** Module Header ******************************\
+* Module Name: drawtext.c
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* This module contains common text drawing functions.
+*
+* History:
+* 02-12-92 mikeke   Moved Drawtext to the client side
+\***************************************************************************/
+
 #line 12
 #include "precomp.h"
-#line 170
+#line 156
+/***************************************************************************\
+* ClientTabTheTextOutForWimps
+*
+* effects: Outputs the tabbed text if fDrawTheText is TRUE and returns the
+* textextent of the tabbed text.
+*
+* nCount                    Count of bytes in string
+* nTabPositions             Count of tabstops in tabstop array
+* lpintTabStopPositions     Tab stop positions in pixels
+* iTabOrigin                Tab stops are with respect to this
+*
+* History:
+* 19-Jan-1993 mikeke   Client side
+\***************************************************************************/
 
 LONG TabTextOut(
     HDC hdc,

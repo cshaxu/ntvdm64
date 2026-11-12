@@ -127,5 +127,3 @@ Revision History:
 #define PARMNUM_16_WKSTA_OTHDOMAINS 35
 
 #endif // ndef _XSPARM16_
-
-

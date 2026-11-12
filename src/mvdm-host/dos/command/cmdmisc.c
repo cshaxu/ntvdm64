@@ -27,10 +27,7 @@
 #include "nt_uis.h"	  // For resource id
 #include "mvdm_guest_location.h"
 #include "mvdm_softpc_firmware.h"
-/* DIVERGENCE(MVDM-HOST-DIV-108): the original SCS command record stores a
- * host redirection-record pointer in a fixed DWORD.  Publish the same
- * source record through the session host-resource mapping instead; the
- * original record allocation, use and free ordering remain in cmdredir.c. */
+
 
 
 #line 22

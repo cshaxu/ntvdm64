@@ -1,0 +1,1581 @@
+{
+  "baseline": "0fef12d013b72a5a2a768fb7ab7f1b6b4a9affdb",
+  "restored_sites": 365,
+  "files": 249,
+  "source_c_h_files": 122,
+  "other_files": 127,
+  "definition": "One contiguous comment/layout restoration is one site; whole-file newline restoration is one site per file. Not lexical-diff-block reduction or completed functional repair count.",
+  "lexical_blocks_removed": 8,
+  "entries": [
+    {
+      "path": "src/mvdm-host/build.err",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/build.log",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/build.wrn",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dbg/makefile",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dbg/sources",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dirs",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/command/makefile",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/command/sources",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dirs",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/makefil0",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sites": 2
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/makefile",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/sources",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/test/test.bat",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sites": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "sites": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/makefile",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/fax/dummy.hlp",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/fax/dummy.ppd",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/fax/printer.inf",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/BOP.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/CMDSVC.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/CURDIR.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/DBGSVC.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/DOSSVC.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/DOSWOW.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/DPMI.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/ENUMAPIS.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/intmac.inc",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/MVDM.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/RDRSVC.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/SOFTPC.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/TDB16.INC",
+      "sites": 1,
+      "before_sha256": "15e70445a6e34329856f6807a8585303763f0a51e25874413e0fa9438d35c1c2",
+      "after_sha256": "f8b245f5906d05d02cb4492698fbce84aadc381829ed438aa48461cb49eb0715"
+    },
+    {
+      "path": "src/mvdm-host/inc/vdmtb.inc",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/VDMTIB.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/VDMTIB.INC.old",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/VINT.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/VRDEFLD.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/VRDLCTAB.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/WOW.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWCMDLG.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWCMPAT.INC",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWGDI.INC",
+      "sites": 1,
+      "before_sha256": "28b0779691cfd97457c85ef0ede507ed362e685194a557fbbd4d450f9f1d9414",
+      "after_sha256": "5b6c2f8a7400862fdf65f35fc9c60e0e4185ed7a306579c1af41febf258aac52"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWKBD.INC",
+      "sites": 1,
+      "before_sha256": "857e9072d1fe71b56176271db529dadbe31ab4ea4d43e888dc7617530e6c611c",
+      "after_sha256": "638e7096a7b69117e8400f3f96232a18691292b41d2ca63873d61f248a7d6f79"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWKRN.INC",
+      "sites": 1,
+      "before_sha256": "db2dffd90e0130e482ec8a5fc81045530d7678bc2ad2cfc168e10d88a6698420",
+      "after_sha256": "3e0347b0d75ef2fac49cbf6c3b29e45ec71459807554143bc3251cac53479433"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWMMCB.INC",
+      "sites": 1,
+      "before_sha256": "805fd465a056bd3d6cf48266721e0f7fe3c03db4cf30b8dd903fb4da98284b84",
+      "after_sha256": "0ba724bb298b3abfc0ac49248b02ca78887f0025c4bc6b8eff2079555c583be5"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWMMED.INC",
+      "sites": 1,
+      "before_sha256": "3beb05d7bd247039feeecbcaa84d056ba8100f04c098bc54d4ec6dd40099dde3",
+      "after_sha256": "e2f65fbb12742ba27620ece28aeb6fa2136fc7ecf86cc16a1fbea7b7ab1ebf32"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWNT32.INC",
+      "sites": 1,
+      "before_sha256": "8bfacc4aa9c9afcd3647ba31328b2b867563016e35d1d524469f9aacb13e766e",
+      "after_sha256": "3f0df9fe5bae1f2022e6e0a346e35fa67eeb16482d6a37d66336aa150e9c9d2c"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWSHELL.INC",
+      "sites": 1,
+      "before_sha256": "83fe77348499dcba67cfa741c2929611768e753e2bb3f3f0f338164556c73869",
+      "after_sha256": "151845a03d19d5e41194e37b03e38038a150313c843d32b26ee8bd70105c3deb"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWSND.INC",
+      "sites": 1,
+      "before_sha256": "1d89242697763dd81c9f3771d7935a412f21f5bdbb19f10922a4988580c99914",
+      "after_sha256": "b483aef8a93769e6efbc02d955ebb0f79017b2e879214d01ad3c6bd9296563ac"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWTH.INC",
+      "sites": 1,
+      "before_sha256": "5316ee92620a561e7b930820884c3bb7d755b68dc8d92cc4b0f6a93c83443c14",
+      "after_sha256": "ce4a1be01d6467c251510ff60b65e5000912e8198ca87fcb7ae70f834721f882"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWUSR.INC",
+      "sites": 1,
+      "before_sha256": "145346b0bc57f84d40efc6e27b1737587498db881ee053ebea4ebcdc642769ab",
+      "after_sha256": "88e6535db84c9ccac703e406a9a25c92158068abc2edd00cce0164f0ef10f3e1"
+    },
+    {
+      "path": "src/mvdm-host/inc/WOWWSOCK.INC",
+      "sites": 1,
+      "before_sha256": "6b64189e10f55563a3d0507571c344fa4fd41f77d5f160215836949dc9494186",
+      "after_sha256": "43c5359bc06ed04661fe2c61d1c3f719a12f1cec07a39535f1cdb5a03f26f7fd"
+    },
+    {
+      "path": "src/mvdm-host/inc/XMSSVC.INC",
+      "sites": 1,
+      "before_sha256": "53c87e63bb79566a5790c835d2979cc6e8fae48fb29cdea9ce2f3b6ef60e472e",
+      "after_sha256": "430de6a636d6f8b3d94ed7ae36c6bb663e14a6f3dd59df236d395564840a63db"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/makefile",
+      "sites": 1,
+      "before_sha256": "df67c1aa21e02fc5c238b1c07fc9deffa2821253ba818e2298720a48c923e5b7",
+      "after_sha256": "047a26e6fcfa2238cb3ad2c41d78c0a535727e3fb8c2624395f6fc40faf01439"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/sources",
+      "sites": 1,
+      "before_sha256": "e7e8239fd0ea04d8fd3643f494db479d7bee695d6cbb481d471eefb06735b7e2",
+      "after_sha256": "492cfebdc4cd0b6a5b26f4993f75019a0d71f7ad23776f9bb39f102aaa30a522"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/obj/_objects.mac",
+      "sites": 1,
+      "before_sha256": "b66eca772946cdb5cc387d7ae80accd19954f214f5fa6d5c6bd7847f3c8a8ed2",
+      "after_sha256": "c5e265b9b66971949e40567d55727eb923a2c53de9aacb529df24c03d563f79f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dirs",
+      "sites": 1,
+      "before_sha256": "5884b3463246d37a3cc0e1504436565ced2383c007e5c85647d94f8d89feb533",
+      "after_sha256": "4e2fd6c6df6f60da146ea3e9c71a4984e345911bbf0813e6cfec54b2306c0e4a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dirs",
+      "sites": 1,
+      "before_sha256": "17e56e42cfed28cbfd9089da558792f73b2a6c43a028c29c8d63de930fe12431",
+      "after_sha256": "4324bd4e10b617faf08b6f9da81f754daf16c3875db6f2c45246c66ac841d1d1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/makefile",
+      "sites": 1,
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Normalized equality verified before restoration in this turn; actual restoration preceded bookkeeping."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/sources",
+      "sites": 1,
+      "after_sha256": "6f125d8d4a327604ee0c46bddcb81955a1ab633d0e0ae877748218da662358bd",
+      "evidence": "Normalized equality verified before restoration in this turn; actual restoration preceded bookkeeping."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sites": 1,
+      "before_sha256": "3b7dc7625d2133ba9ac3ea53086d40033f033ce771bf979039ea18c089dfa7cd",
+      "after_sha256": "96f8b75b64c64dd68595d8e87c853770abbec97ac224bb7c9e1f6b4a5100d5a4",
+      "evidence": "Restored original declaration whitespace/comment only; original type, name, initializer unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c-files",
+      "sites": 1,
+      "before_sha256": "695fdf650af66a3d7190ae23d4f21be2900c468a3ea8eb84f40e72ece19a0e11",
+      "after_sha256": "eaa7ea6f06c5df0f7938b14d245fea15bbe89a418d6b265498269bb09122e9d2",
+      "evidence": "Original c-files list restored byte-for-byte; normalized text already identical. Outside host C/H block census."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Historical makefile restored exact original newlines; normalized bytes already identical."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "sites": 1,
+      "before_sha256": "2feb3af8dc8fdf3d4ce7aa262c121b0fb80357a69bb266f8d1e1006709bac29b",
+      "after_sha256": "a96f3121f03c3c649283ca6c40683fae6f44109a82bb053cfd66985066cb2d94",
+      "evidence": "Exact original declaration restored; no type/initializer change. Remaining #line means lexical opcode not removed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "comms makefile normalized bytes identical; restored original newline bytes."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/sources",
+      "sites": 1,
+      "before_sha256": "8ccc39d35e23ea7801c47973252b62ae6d3e8bf069a899c8f4c940692f38e290",
+      "after_sha256": "7c38248515e1a33e1040e98f042c43edd524de4e8abe0938ef11d1f28eb1b3fb",
+      "evidence": "comms sources normalized bytes identical; restored exact original newlines."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "C-VID historical makefile normalized text identical; raw original restored."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sources",
+      "sites": 1,
+      "before_sha256": "56492961083da89f34448095f5bad58783e5980addbf77111b732dc50baf93be",
+      "after_sha256": "b8eec6c3ef6a25d99d47c7987cb1ff5c07caa255cc95a4fc111462e8598495cc",
+      "evidence": "C-VID sources list normalized bytes identical; restored original newline bytes. No target/source-list change."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Historical debug build/control file: normalized bytes identical, restored exact original newlines."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/markfrom",
+      "sites": 1,
+      "before_sha256": "df1a48f2d89b2483cdc613593cb791109784b3e87ef4c9261a263aa8c14667a1",
+      "after_sha256": "d0734fc35cf6b2e8d8718217978651fdae23bf9e283f57874ffe864f8d998b83",
+      "evidence": "Historical debug build/control file: normalized bytes identical, restored exact original newlines."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/sources",
+      "sites": 1,
+      "before_sha256": "6f527e701e1e4b63b3eafe59614800781fceb40eeed484cbffcdd830107e74d4",
+      "after_sha256": "b50a94a5bdceda9245b82b6638e6b4d504de35043230eae491222e82c1573308",
+      "evidence": "Debug sources list: normalized bytes identical; restored exact original newlines."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Historical disks build file: normalized bytes identical; restored original newline bytes. Source list, platform condition and build include unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/sources",
+      "sites": 1,
+      "before_sha256": "0e1d2722ccd6613952b6f70bea6555d0c445d3d1f90e436baf10547b48b1ee41",
+      "after_sha256": "c8bd8dd9288d313fa66047e2d5fff0dd4ba6651a2c8b5d9c2c58901444793d55",
+      "evidence": "Historical disks build file: normalized bytes identical; restored original newline bytes. Source list, platform condition and build include unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Historical DOS build file: normalized bytes identical; original newlines restored. Sole emm_mngr.c source selection and original build includes unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/sources",
+      "sites": 1,
+      "before_sha256": "9d7b7a4c828f0bc2e791ae85b0ecbf43f05efae311fc77334962506e848da2cb",
+      "after_sha256": "3da14a44d03d13e4e43e50110721cb7019975aa30e988bf13e25ef51db266f17",
+      "evidence": "Historical DOS build file: normalized bytes identical; original newlines restored. Sole emm_mngr.c source selection and original build includes unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "sites": 1,
+      "before_sha256": "bb73a0e5372d743dbe11afb7c8a54a91b75c2b3a268b8831458c8340d1723d80",
+      "after_sha256": "a544eb63955017bb06606cc4f554f910a442d39a17e68b013b7f8ced7a58833d",
+      "evidence": "Restored original empty line after pf_table declaration. No executable token change; existing #line 148 retained."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "sites": 1,
+      "before_sha256": "a76d355979d37e86d883a5e70eec89703c3b79882231eeb5173f7b3511f1c94a",
+      "after_sha256": "6d9c6f3225c11e25b3c24b6330465dc7c25318c48e38151ee692a64a5d78f6bb",
+      "evidence": "Original two empty lines after KbdIntDelay opening brace restored. No executable token change."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "sites": 1,
+      "before_sha256": "bd01f4657e1a4babe02673ee2b531e0c4d6f6b70bc51835b35fa5205fc9265f4",
+      "after_sha256": "bf532d8564a218a05b527eaab8aa783b8bb2898f4476763f188436f207cf6f0d",
+      "evidence": "Restored original blank line after int10_vector assignment; no tokens changed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Exact original bytes restored; decoded splitlines identical before restoration."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/sources",
+      "sites": 1,
+      "before_sha256": "d4164d83afbd262a6c74818463704e5b320bc352a0375c814e5ddfbc0554769e",
+      "after_sha256": "7446f868cc0f5594935d148de94e1dabc4b643209611038fd09951069d1c84fb",
+      "evidence": "Historical sources carrier: identical splitlines; restored original byte identity."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "sites": 1,
+      "before_sha256": "193d9b780feb1557cd029ff2d5c265e9540d3b16339072ab92e08869d5b77fd0",
+      "after_sha256": "6d8e7a439f2ed06c28bc425d98d81774eba203155cbee85c3d2c719e476ae684",
+      "evidence": "Restore original blank-line count after cpu_init; no executable token change."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Original build carrier byte identity restored; splitlines identical."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/sources",
+      "sites": 1,
+      "before_sha256": "cf9a815ac5463ba1b8fd16f6b8a46d64c5fdadfdcc743be8e21c874b3dbaa036",
+      "after_sha256": "5824d89a2d721a3ad89160f3868d1d1edab53e05038adbfcd58f1c607e70e065",
+      "evidence": "Original build carrier byte identity restored; splitlines identical."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "sites": 1,
+      "before_sha256": "46a79ea063d4a8d89524b013c7a8d2efa168740cc0f0c93148b8e98c4141a6f3",
+      "after_sha256": "ffcdef5635a766ed7668fc3ddf35bce54e5a621b2c4304ab682bc072d1b92b34",
+      "evidence": "Remove one surplus blank line after NTVDM conditional, matching original; no executable token change."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.old",
+      "sites": 1,
+      "before_sha256": "a9d6b98e39e270103c3e21ef57df7746a4b589af6da422b9d0b71027c328d066",
+      "after_sha256": "804a0b0069cf2367f71a36369906dfb971d3eacf302113ca9c856ed2fbfa22d2",
+      "evidence": "Original byte identity restored; before/after splitlines identical. Historical carrier, not C/H census."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Original byte identity restored; before/after splitlines identical. Historical carrier, not C/H census."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "sites": 3,
+      "before_sha256": "041241876357e6eb62f9890b322ae088e9add530785663841ff6a6fc6efa5832",
+      "after_sha256": "452d8e54e122c04f5ce1b574453b20ee8c8d3cebdb31469e5f1a475a0a45dfeb",
+      "evidence": "Restore original duplicate-comment/blank-line layout and MONITOR else comment; #line 218 matches restored blank after original else at217. No executable tokens changed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/sources",
+      "sites": 1,
+      "before_sha256": "961d22231c72622316a0ceeff1ca10f8c8dec18ca81b4ecd84f17b9211a19027",
+      "after_sha256": "789b0e243e6d27167a65b23dc187a3a9e82d8c67bdc4b10712f338b6b93354c3",
+      "evidence": "Historical sources carrier original byte identity restored; splitlines equal."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/unix/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Original build carrier bytes restored; only newline representation differed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/unix/sources",
+      "sites": 1,
+      "before_sha256": "c18e2d52bfe2f2f371eb06e488fe7d32eeb94b9e7334c57593cad6beb6b4f9a7",
+      "after_sha256": "5e6646017441dbcb514764a04e641eeda80e183a6124fa9067b5504a5bae7e49",
+      "evidence": "Original build carrier bytes restored; only newline representation differed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Original build carrier bytes restored; only newline representation differed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/sources",
+      "sites": 1,
+      "before_sha256": "108368075d5eea4ea78b2a1f81714ef8a90f19c1b86540e211a28accd9175ff0",
+      "after_sha256": "6383e77b670edf3c1f6d4cef75b99d85a094bd19bc83703bef474dad86543463",
+      "evidence": "Original build carrier bytes restored; only newline representation differed."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/dirs",
+      "sites": 1,
+      "before_sha256": "60bc0a21951ebd7b428c5ff5011bc4f849b5b6c9977fd5aedefe699d9530593a",
+      "after_sha256": "a17fe24e18cdb9b445a73e2d8c9ad43fca38fef74a617b5d5e86b83add9c859c",
+      "evidence": "Historical host dirs carrier; original bytes restored after exact newline-normalized comparison."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "sites": 1,
+      "before_sha256": "e276fa74fa087403cce2a77553414531ffa95d0ad30afb81111e83ac73655ef1",
+      "after_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "evidence": "Restore original blank-line placement and omit unnecessary #line; all nonblank non-directive source lines identical in order, then raw-byte equality verified."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "evidence": "Complete host/link carrier differs only by CRLF/LF representation; original bytes restored. No link/resource content changes."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/res.cmd",
+      "sites": 1,
+      "before_sha256": "d5720195ccb33bedb59e859a6d71e1dc1e8c28aba98865c9c739d03760b7b1f5",
+      "after_sha256": "8c76221725812e8827b156e24272e932ff0312065ae871a6d60eb8cbb2ac9375",
+      "evidence": "Complete host/link carrier differs only by CRLF/LF representation; original bytes restored. No link/resource content changes."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/resource.rc",
+      "sites": 1,
+      "before_sha256": "4eb3027caff31636031d2af83b67e864f98083b4c9bbb88bceeb6b95642cf1e6",
+      "after_sha256": "fbf7f94838571ec486880de4574724fa883580c5ab2ac5eb4463d248c3205369",
+      "evidence": "Complete host/link carrier differs only by CRLF/LF representation; original bytes restored. No link/resource content changes."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/softpc.def",
+      "sites": 1,
+      "before_sha256": "23772a6105b16a039e3980108081bdcf850d640afcf7c8f2fde5364931540343",
+      "after_sha256": "2dbbe115d93d9d2a25004868450b43568be3e14565fd08314d78e18f658f8ab7",
+      "evidence": "Complete host/link carrier differs only by CRLF/LF representation; original bytes restored. No link/resource content changes."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/sources",
+      "sites": 1,
+      "before_sha256": "eedc3b3c778e13cb4138eeabc42b56cbcc86c359960c9a4e48820d639b4d9e69",
+      "after_sha256": "559d13e3e33a0dc0da9c60e209017b1f3dc5b1806d0bee4ce928aa488a05b2f5",
+      "evidence": "Complete host/link carrier differs only by CRLF/LF representation; original bytes restored. No link/resource content changes."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sites": 2,
+      "before_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+      "after_sha256": "a3f817ac690972406ad396f0ccae141500b0f25fc914196f7bf498b0d1708f5d",
+      "evidence": "Restore two original blank-line groups; all nonblank tokens unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/makefile",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/makefile.inc",
+      "sites": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "sites": 2,
+      "before_sha256": "230f41939cd9567887dfbe5764eb8f566c18850812e261f87807155881f8c881",
+      "after_sha256": "d7efc6a77b661c9e9930b47528d2a22ade0bc0ab178973513a17b039031116ea",
+      "evidence": "Restore two deleted blank lines only."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "sites": 1,
+      "before_sha256": "74d0431fc3675fe70968cc076253865717b6d2e4c2b9b7a1e86eab926ce2a1fd",
+      "after_sha256": "035b3ce8157587e58c1dc64b01e60da69e2c5b6a6f0a864fd80bfd1ea3fda351",
+      "evidence": "Remove one extra EOF blank line, restoring original ending."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "sites": 3,
+      "before_sha256": "8a914b356bece9f0f12dbd262da7b550d5893d4e6b8e29d4974967f2c8042223",
+      "after_sha256": "d91eed0392b581f653e29156d0b317a073cdcf74b70ea808e2f6b0287c9d925b",
+      "evidence": "Extra blank, duplicate callback comment, original endif comment restored."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "sites": 4,
+      "before_sha256": "748837ce7df95a272d888aeb5ed6816ddde50970f711d6ee3a61ea9e33fd88ed",
+      "after_sha256": "2939208de94608e4fdb441a585ecf14d3783e0de268d6530cfda752674b7aabd",
+      "evidence": "Restore original single-statement brace style in key-down, key-up and stream flush; remove one extra blank line. Expressions, calls and control bodies unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sites": 1,
+      "before_sha256": "06c3981b2cd467926496c6d71fa8e238d4ff689e591f68130041309f46a0466f",
+      "after_sha256": "5082e858a1615a569d626e709cf85f10b2a248390a087471ea14dcb78a281855",
+      "evidence": "Restore original indentation depth in successful-open block; all non-whitespace bytes unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "sites": 1,
+      "before_sha256": "1e445387cc8a794f325dafa1caa00ef63a789101619eef4c6f6fbcf63299ffd7",
+      "after_sha256": "e99fdb2599ed2482489db99797eb9943d3f53a8b046607016dd00791e6201aae",
+      "evidence": "Restore original getNtScreenState comment by removing six added comment lines; preserve source provenance and semantic questions in external register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "sites": 3,
+      "before_sha256": "bd46d5bc6ff98c32a30ce08632423326b855664b8b9f44090ca32111e94a6876",
+      "after_sha256": "e775e4149d1613c5caac6a2b700d3dd7639a4c6c47d47838a42b93a942bcda60",
+      "evidence": "Restore three original single-statement brace shapes; remove redundant comment in flush. No call/expression/control-body change."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "sites": 2,
+      "reason": "Restore two original blank lines; executable tokens unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "sites": 1,
+      "reason": "Remove extra blank before original X86GFX boundary."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "sites": 1,
+      "before_sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+      "after_sha256": "10a19075d285cd629b0d283f40eadabb07ca96070209bf2633d0539aa4042927",
+      "reason": "Remove added four-line declaration commentary, including unsupported monitor-only/transitive-build assertions; original surrounding comments and both required prototypes preserved.",
+      "verification": "Full normalized source comparison: only two declaration insertions and one excluded debug printf remain. Executable tokens unchanged by comment removal."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "sites": 5,
+      "before_sha256": "86965b6eecbc017d3860b52722bc8680db266260db554a58cbb63bf487e8840e",
+      "after_sha256": "fc5a3fbcfac77e4337602b94f2d5c6ad69ae95417b8b8ba4e2362510891c8069",
+      "reason": "Restore four blank-only diff ranges and original MONITOR #else trailing comment; executable tokens unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "sites": 1,
+      "before_sha256": "6937966cf58120b3c40caf0f822abf7d7703112a35dc2d337e9517f9d69c5a02",
+      "after_sha256": "0515c189d0c17a8811ef96fbb1aca0fc49fc93c5c11e08d1af881a9bad2c557b",
+      "reason": "Restore original blank before host_release_timeslice non-MONITOR condition; no executable token change."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "sites": 1,
+      "before_sha256": "20ada4729cbe0b891d3621870d826eb7dd0819fda3b4aaf8c17baf9d37f79204",
+      "after_sha256": "60faec3d636e135103ebbdf462bef29eccb888e82dc248fecb3e7b3ae19121c6",
+      "reason": "Remove blank padding inside excluded outer YODA body, retaining #error, outer boundary and #line1196; retained source exact."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+      "sites": 1,
+      "before_sha256": "8a6398152a31dae492d39f1d3ccfeab746a472669b106d1bc9fcf244226ac7e1",
+      "after_sha256": "a5cc355bfab633968217c85a4bb210f684039e08e7784578800c672f65772f14",
+      "reason": "Restore original newline bytes; all non-newline bytes identical. Historical non-C/H metadata, not host runtime input proof."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "reason": "Restore original newline bytes; all non-newline bytes identical. Historical non-C/H metadata, not host runtime input proof."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/makefile.std",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "reason": "Restore original newline bytes; all non-newline bytes identical. Historical non-C/H metadata, not host runtime input proof."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.prf",
+      "sites": 1,
+      "before_sha256": "fb8c44db7f15e7d09930c59f8ec653336b3590ed44e99096f6ff484709f2582f",
+      "after_sha256": "00d94378f996edd8703f884524398d73f7bfddb0e5abbc0ca23633471559937b",
+      "reason": "Restore original newline bytes; all other bytes identical, non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/resource.rc",
+      "sites": 1,
+      "before_sha256": "71e2e9e8f44d37ca3a36ec9714dc81b49a4523c16b148787a6d7ba5df2a1d966",
+      "after_sha256": "3e3ac9b1001127e3900c1ba5a2309c28aaa97ecf2882fa6f4e9f20e600a26d8d",
+      "reason": "Restore original newline bytes; all other bytes identical, non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/suballoc/foo.bar",
+      "sites": 1,
+      "before_sha256": "46abec639fe2d644db6ba7f6cbc915c73c8918a56a964c67511b45f74e429d91",
+      "after_sha256": "0350c8ad182e081c6106cd75a56b7f8e18b07445d0668835485a55761463a905",
+      "reason": "Restore original newline bytes; all other bytes identical, non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/suballoc/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "reason": "Restore original newline bytes; all other bytes identical, non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballoc.txt",
+      "sites": 1,
+      "before_sha256": "f79dc8b36a2b7e99af71e92f9a910c8301e05b799f5c383d5a9cc7d66fdeab01",
+      "after_sha256": "5f8ef01da1307cb393db9c2e6dbaa505d2dc14abc2625d0cafa39695c12c6cf7",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/suballoc/obj/_objects.mac",
+      "sites": 1,
+      "before_sha256": "d64376fae75796b93cb3230429258381c2e97e768a01765de4d33d114e2ca051",
+      "after_sha256": "d4bb0b4f285aa32979f67755665be35dcc17c7bdd7a0ccaa968a5ca72dc89d9d",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/dirs",
+      "sites": 1,
+      "before_sha256": "a4589ec7df1b1b8c7b8600d242bd7114cdcc78547a98ee45741dbc527acafdd9",
+      "after_sha256": "5afd3a3a4afbe0e9a35ff2759d46fab6b2201611073bea6af8656848a4f2a14b",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/vddserv.doc",
+      "sites": 1,
+      "before_sha256": "25e5f116d6dd0ea2c91c73b4253e0788329092df55ae5c23ce16b8d8428bbf4b",
+      "after_sha256": "4202f2f705a5b9cc552ad437bc76fdd4d7d389d2f9e40fd25665eb6518a699ba",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/dirs",
+      "sites": 1,
+      "before_sha256": "147c074970968e7a9759c7b64bec43c0173600827e53ce92725e536add8cc544",
+      "after_sha256": "7f2feae05f890842834ed5951e73351dc50771ea37c3e4aad5b5cbbf336bac82",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/readme",
+      "sites": 1,
+      "before_sha256": "f268b1fde588d9275f62b1a10c55e75221a59d97c3209f96785073a2523cf8cf",
+      "after_sha256": "8aa70f6151632d7c74d7f1786a9d3f9a172176ba36934b294c7016c0e388c9bc",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/dirs",
+      "sites": 1,
+      "before_sha256": "a00762f7c4fb64253d6c64e49523803b66cddf0c5ff870c55a52ce85c2386841",
+      "after_sha256": "ec53b38ff1e577c7e52643395580b18f3600469a6426cd480ae79b454364a718",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/readme.txt",
+      "sites": 1,
+      "before_sha256": "54272ae508c68e0968bbe0ca46c0fb192cfc697057864461063ee9521b13a740",
+      "after_sha256": "0a640502ca6e2bd5ac12984c67fb5b4d5b51531bec6908604a574a14debd8994",
+      "reason": "Restore original newline bytes; every other byte identical; non-C/H historical metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.rc",
+      "sites": 1,
+      "before_sha256": "1a7839e3e23c512e9fa56c5619dae8c96154a28eaec7228ccffb1c7b59c6070a",
+      "after_sha256": "1de1253bab13a6e4e09f0f5404f848be62f116e87adbfa0a8c036e32a9db438f",
+      "reason": "Restore original newline bytes; all source lines identical; resource metadata outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/dirs",
+      "sites": 1,
+      "before_sha256": "54d2351230f193c918611406659cc4efbb7a7557be75872aed87919225f80e4e",
+      "after_sha256": "593d9fe6acf01c72c4e37679047eeaeb380a6c7ff3ba79f1119a376b336377fd",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/dirs",
+      "sites": 1,
+      "before_sha256": "c40171f46ab8678f90177ee4d6f8f7b14f83d000762a246784443ffac9403da2",
+      "after_sha256": "08e9969b369d95f8ab8a52274e3b26fdafc95612ad20affa7916fee5959ed8a4",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.txt",
+      "sites": 1,
+      "before_sha256": "ced20d1a69fe8c4bdbac5f7487fe3878de8f7bddc7b779b01d973d8325c4df0f",
+      "after_sha256": "a4070771c906841890d675d6a450fe44f4f291f4be6f85ebe0481d86be768208",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/makefile",
+      "sites": 1,
+      "before_sha256": "a9ff6c2655490c44be181f1ee96023c2bfd737e7e663da366a83b26241498d09",
+      "after_sha256": "0c2eeef094591cbe480fe75fc00cb55546be67c7b51a07715f61e57b364d6328",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/sources",
+      "sites": 1,
+      "before_sha256": "993b6719d20d48736483f2c1ede029e8cc918606850bc27ad43ba596731b53a6",
+      "after_sha256": "e0d3977b7f2030c94f4d6f25dbe8f8381fae3563a99205bb1480978608517229",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vdmredir.def",
+      "sites": 1,
+      "before_sha256": "718f3ed81c6ace141a4a7c73689d8b883545050d93139735ee79708501bdcfb2",
+      "after_sha256": "745bc145be4614b9999e8388c010e35f2cbec24278d38437406a044faf51db25",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vdmredir.rc",
+      "sites": 1,
+      "before_sha256": "1f8809530293c24277274d4f8cb0e66bb66b7cd1594cbf0a11393c50e8e491e9",
+      "after_sha256": "92794973e7f1561c10c6c2c0bd60a04bdcaab742abb2438940df5a35ee5c34d4",
+      "reason": "Restore original newline bytes; complete line identity; outside C/H census."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "sites": 1,
+      "before_sha256": "f727e75b675462ff383c59c92534f6925be7648b28cb364922839cbf592d6a82",
+      "after_sha256": "6227c01ce8498598440c10b92bf07b0f1f645aaf387d4942c2b8d59b5df78b4c",
+      "reason": "Remove added blank line only."
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/dirs",
+      "sites": 1,
+      "before_sha256": "442279a8e168ea6eb2a9f007fc66f0fdb1553c38ceb264bd255513e410dc60fb",
+      "after_sha256": "d652fd66d5d1895035742edb718e4c0a51bb751da0f34ff770f8f11280e841c0",
+      "reason": "Restore original newline bytes; entire line content identical; non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "reason": "Restore original newline bytes; entire line content identical; non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/obj/_objects.mac",
+      "sites": 1,
+      "before_sha256": "081358a8c81ddea443ca5f8249a5a39467ea47ff04d48374bf388add8b251afc",
+      "after_sha256": "ce3215a0ebceb9a6bfc260559dbd91c11babb984236c36cb41fe4ea84250bdb0",
+      "reason": "Restore original newline bytes; entire line content identical; non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/makefile",
+      "sites": 1,
+      "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+      "after_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+      "reason": "Restore original newline bytes; entire line content identical; non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pif.def",
+      "sites": 1,
+      "before_sha256": "2ad828170a191ece2f77d47cef118626f91bda0eabe2b6f15197e56ce960012b",
+      "after_sha256": "79a710528daffa77faef458e590f2583a3f5954ae206b6b6f3eabed809441629",
+      "reason": "Restore original newline bytes; entire line content identical; non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.rcv",
+      "sites": 1,
+      "before_sha256": "7fc86ec685794bad0e70c6c55ba407927f7c5dd044b10767781a7ed101922fad",
+      "after_sha256": "740822d23ee2f692f3de8517393c1060d8288b36262ba2769fce33017bfeeaa5",
+      "reason": "Restore original newline bytes; entire line content identical; non-C/H metadata."
+    },
+    {
+      "path": "src/mvdm-host/wow32/makefile",
+      "sites": 1,
+      "before_sha256": "0e686afc4f155d4b8314206ea10a882e480bde95169ddc76c8aa243d2a3ad743",
+      "after_sha256": "7e0e511bd718a1d3667b643b8e73d804762fe1c638337d7931a15fa69e05ce0e",
+      "reason": "Restore original newline bytes; build-file contents otherwise identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/makefile.inc",
+      "sites": 1,
+      "before_sha256": "b4fa1e001a67eee16e46bad3cf3398a41c42f927b1257a3b71fd3adce8259ca8",
+      "after_sha256": "a8c98a39578e2e01d9eab905a87aa2e7638efe1bd1328b3e7380ad7315b6de43",
+      "reason": "Restore original newline bytes; build-file contents otherwise identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/sources",
+      "sites": 1,
+      "before_sha256": "c9992900174cc1c5fa7fb97b93cfcd08ef4124976b2d30d47118b883b79fda68",
+      "after_sha256": "d24767ff50c4c7017e6fcf5f550e120db0f580f7c07c77cbe7e99e4432f52b36",
+      "reason": "Restore original newline bytes; all text lines identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/sz.src",
+      "sites": 1,
+      "before_sha256": "96ac7b15ae050f16a16dc189e9049cd307c0ecb2c6cb930596037bab24cf7eda",
+      "after_sha256": "8f2489b4e39f39531f5ef69be267d27ea4e9868863017225c81b9f0d72b8d107",
+      "reason": "Restore original newline bytes; all text lines identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/thunkdll.txt",
+      "sites": 1,
+      "before_sha256": "21786dba0d6c2033da8c6a83af4a509bb254616759ab05f01facf079d25c8313",
+      "after_sha256": "e5323e63e53dfe15e3c4f03a18fda80086038194b661f4543c08165e37aa44e2",
+      "reason": "Restore original newline bytes; all text lines identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.prf",
+      "sites": 1,
+      "before_sha256": "ec843c477c73363fdfd6cffd2f50001da69893e8498e602bf87bc017c167040a",
+      "after_sha256": "2b9dd7ce7d14960871a9c0bb276a2768ab19b853e900f70da2631d8b703ccb2c",
+      "reason": "Restore original newline bytes; complete contents otherwise identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.rc",
+      "sites": 1,
+      "before_sha256": "c58e016f063d355ee49757eaa2e06b7810e140b3f08bf41c81b9b0aca248197c",
+      "after_sha256": "5aff44f115534b1ede691e118349b589a0eb16a6be264acaa531e12520776035",
+      "reason": "Restore original newline bytes; complete contents otherwise identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.tt",
+      "sites": 1,
+      "before_sha256": "edfd0acd29496f78512571153708410ce2abb59a2b181232f4e14a2e202614ac",
+      "after_sha256": "7f19b9840151a7c9ddab898f551b4c02156f82abf05a480fe01ab03db3030b4d",
+      "reason": "Restore original newline bytes; complete contents otherwise identical."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "sites": 1,
+      "before_sha256": "79d61d0a443d31a4465f80effe2db49bfe7ee879a649e19ec534b5aafc7c5886",
+      "after_sha256": "9b41c3d3946930541379f736fbf104386d77596395a7532d958da23a0a1ab46d",
+      "reason": "Remove extra blank before #line 1071; remaining bytes untouched, non-whitespace bytes identical."
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "sites": 1,
+      "before_sha256": "1bbed0c19ef908b0e2a3145f8b47e8936597d39e06ed9282bd0058499d75f439",
+      "after_sha256": "02a23c7a1d10e4364765635380011c37caf32fda037eff74ba80144f158bab38",
+      "reason": "Restore original trailing blank-line count; error.h restored byte-identically."
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.h",
+      "sites": 1,
+      "before_sha256": "3c2d51ea38651fa3c9c4c1c03ddfb7db9b42a22e28b9e27050d5a87946f7532a",
+      "after_sha256": "179794837a8610488218e5e48768d4d79f3d160bb952c92b172d12f6807984d2",
+      "reason": "Restore original trailing blank-line count; error.h restored byte-identically."
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "sites": 1,
+      "before_sha256": "496a59b4158f1b808dace2c316edab60e941cb9febc699c2d5e39730387e0a09",
+      "after_sha256": "24abe31f5b78589aabd8fb2391b33e160b28f5c6eb9be36e9b63b6aaf7a00a30",
+      "reason": "Restore original blank after include; selected tokens and following #line reset unchanged."
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "sites": 1,
+      "before_sha256": "035605347876f41df21917a6aa40e3f42e2fee5735a6e07dbf3cfed2dae0ba48",
+      "after_sha256": "bdd8063027620aa30f749cb8b50dc148f7466305678d619bdeb2d2946ebafbda",
+      "reason": "Restore original file header notice/author/layout; selected tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "sites": 1,
+      "before_sha256": "6e60356dc9395c548ed7487a4c16dbdc95915fee15220f60af08f996a576360a",
+      "after_sha256": "2d71a1326faf18978f0d691e779ed7ef3723b3a1fdd41cc19b721776cd168fe1",
+      "reason": "Restore original module abstract, author, environment, notes and revision comment verbatim; preserve selected function and include boundary."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "sites": 2,
+      "before_sha256": "62bf79c38fef56c60916ae36d4ea719b06a06873c88ea7cc361d41143cb0fcc0",
+      "after_sha256": "36a7fa520a0716564345cd4549ca74536a507052215dd5fd544a22e9c9dea1e2",
+      "reason": "Restore original CRLF line endings; remove two added trailing blank lines."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "sites": 1,
+      "before_sha256": "8f793e4ef97e20cd9ed0e1ef35c39a94ef2745e4cf0122af182d56a61cf2baad",
+      "after_sha256": "4c64d1e89174576f85c08c165e9b01d67f0b8b83fe955ccab54a3f41198187a4",
+      "reason": "Restore original CRLF line endings; selected tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "sites": 1,
+      "before_sha256": "3bb6a749645e12987155abf762c3e9e5a22c42732f535069de6e12dfed572ddd",
+      "after_sha256": "9ffc9d6f042f5c2d58069e2d53b4bbe8bb73c08888f79edfd532ab679ddbdf82",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+      "sites": 1,
+      "before_sha256": "818f074accc11b29894677ecb8ec14e704714d9172d9206dff9fa5243550592d",
+      "after_sha256": "df5bb7a708e9fa774ac4ff562edfba5fb0ae1671c3f25e686f69012573782247",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/ascii.c",
+      "sites": 1,
+      "before_sha256": "c43323bba2693270bd8d93b46667ae5accd1a8b7fd1179532754b161944f8b44",
+      "after_sha256": "1a5567fff519c4a161d27f02f9a86d1fedba60d0eb68d850f91e8a7c1bc33583",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+      "sites": 1,
+      "before_sha256": "ce5ee4242a63c0b07fe9d63806e367de021f14dadc2b5c1c61ab7acf3f53790d",
+      "after_sha256": "65ac082a9d1e00efea57cd6c93b8680662693389c22f0e75457f050413e60869",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/examine.c",
+      "sites": 1,
+      "before_sha256": "56c341ea262a24f805465c3ad515c4e94f60b4ee3db5e26108e438f0d5ee301f",
+      "after_sha256": "88d15c5f6c7bb222f6bce5c6eefa9ddec7ab23e6da95af297c9806200e955d56",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+      "sites": 1,
+      "before_sha256": "1eba4a6355ccdf4305ae357f854802a931940e18fe9dcbdc242d63d9501cefb1",
+      "after_sha256": "a90b7473a7126de00406a26554ca6648bd1a4ea061fda21d70e2c8319cce2db7",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/pointer.c",
+      "sites": 1,
+      "before_sha256": "23b5cb3d30828748fa40913e4f6bc3ef52da09d2d05e6ae5f26c2ee3858232eb",
+      "after_sha256": "f25a86eb907a969cd30f201fcd304ad28c92e84b6d66117e53ec5ae4d19f452d",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "sites": 4,
+      "before_sha256": "74cb6b9ce935f6624903c7472740088baada906ba1edd53a20ccf85d2c5e43c9",
+      "after_sha256": "b8a2677d4140e82eb197a1d16076603bf34ba661a7006fa8ac23fa1c0618e6e6",
+      "reason": "Restore original comments, whitespace and remove now-unnecessary #line; executable tokens identical."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "sites": 1,
+      "before_sha256": "686fd07ff9b29e16e5600f24166aeb5f4ced4e0081f1555557c52e57523e94b1",
+      "after_sha256": "8ec3e57c97586a761f4411268765eca936610056d191a08e1d552ef9b4d8a338",
+      "reason": "Restore original newline/EOF format without changing non-whitespace source."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "sites": 5,
+      "before_sha256": "254ede065d17e7f21f9dc32ecaeef12259d184f3ab3f60f7007acadce6d57081",
+      "after_sha256": "ece6f49317fa93615658c2a410215a91b33a2d765ecbb35517858cfea4f53d04",
+      "reason": "Restore original header, routine contract and three explanatory comment blocks; preserve selected tokens and existing #line anchors."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "sites": 1,
+      "before_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+      "after_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+      "reason": "Restore original CRLF and remove inserted whitespace-only differences; all non-whitespace source preserved."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "sites": 1,
+      "before_sha256": "4cf4b9f7f29f423310e2012a5f5ddafc901a683a1cb834862777c9ad105bea29",
+      "after_sha256": "b2cf945c8f00a8ef9364ed6d1e53560e231bdd8bf8d92ecdfd47ffb6f2c3c6eb",
+      "reason": "Restore original CRLF and remove inserted whitespace-only differences; all non-whitespace source preserved."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "sites": 1,
+      "before_sha256": "c298b92adae3e807e006b3fa279da957f511fd2ee24d0a0c497d1ee47cc27752",
+      "after_sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5",
+      "reason": "Restore original CRLF and remove inserted whitespace-only differences; all non-whitespace source preserved."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/wkstadef.h",
+      "sites": 1,
+      "before_sha256": "79b7d37e93d0f1d650cdc0d88becc0b960740e9e5c22f5c7e9ec9f32d1d3f97f",
+      "after_sha256": "4f3bacc8b97586e3f0a32e6738480335382a6876d552598b9b900546480eb7b4",
+      "reason": "Whole-file comparison proves only newline/EOF formatting difference; restore original bytes."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "sites": 1,
+      "before_sha256": "dd594532c0618ab4acdc637baddf131c0ff0b95bc736cfbc821408c4317e2b9d",
+      "after_sha256": "ca80cdb6c115f513166145531225e4eb6710b9d4e87e5a99655d0fb5bef779e8",
+      "reason": "Whole-file comparison proves only newline/EOF formatting difference; restore original bytes."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "sites": 1,
+      "before_sha256": "c3a93b3c394b2adb6ae7e8198f6eb5bfe93c73414a85d9dca6e44ef5e7635aff",
+      "after_sha256": "a671c7fb4d1e9c5bbdb71d6fc4afe0324081038053392d599942c95813ce6d5c",
+      "reason": "Whole-file comparison proves only newline/EOF formatting difference; restore original bytes."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "sites": 1,
+      "before_sha256": "56133720faa919da85c129aa1f3c601ee504b8005f5a523b93440cbbc1426bbf",
+      "after_sha256": "8198c378c9df3f318aff2914e95a530ef90c6fca92d1939714c851628b069743",
+      "reason": "Whole-file comparison proves only newline/EOF formatting difference; restore original bytes."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "sites": 1,
+      "before_sha256": "8daf8b94feade0b0518b66d4f477901d3b02274d657f78103ca9be6fd07eaa6b",
+      "after_sha256": "c6179ce7662c012a345aed4278b94b59c50ceaf396eceb7f768b62ce454f2b7c",
+      "reason": "Whole-file comparison proves only newline/EOF formatting difference; restore original bytes."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "sites": 1,
+      "before_sha256": "85aa47902c2ab59bd5ba00dbcee169a2c11dc9c408034a5e0333322b76172c81",
+      "after_sha256": "f9f997ec6f9fbdc8160c775718c605bcaa5aa374d94ac5c94387ccd7fb4e7465",
+      "reason": "Whole-file comparison proves only newline/EOF formatting difference; restore original bytes."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "sites": 1,
+      "before_sha256": "271c3f9eda9f43493a98cef1f113bd65d3512f13d62e232b567d6e16d695e525",
+      "after_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+      "reason": "Restore original newline/EOF format; full source differs only by required finite include."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "sites": 1,
+      "before_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "after_sha256": "9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0",
+      "reason": "Restore original newline/EOF format; full source differs only by required finite include."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "sites": 1,
+      "before_sha256": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
+      "after_sha256": "317b926ef3b1889648a136beb8ccc4ab3fd83c2df4d4f0d2a669911387d213a0",
+      "reason": "Restore original CRLF/EOF format; preserve selected declarations and #error boundaries."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "sites": 1,
+      "before_sha256": "a177edfb7bfa754e95c09d992870ccfa57e9a606a10995a30eb4206116643118",
+      "after_sha256": "692490979bcfdd0b3db5043bd76eeb835f6c3bf91d6a5602f753808fa4c922a2",
+      "reason": "Restore original final prototype indentation and original newline representation; preserve include guard adaptation."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "sites": 1,
+      "before_sha256": "92c3ad8d3b8113edd7b4e8282294f5d1269a6ce25c98a50602422cf116666424",
+      "after_sha256": "ce25c125139070ba30b2a99d670bdac09ff614c14a08ce5ef0cce2d99b43a52c",
+      "reason": "Restore exact original newline/EOF bytes; whole normalized contents identical."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowshlp.h",
+      "sites": 1,
+      "before_sha256": "a4dad22d1108694dba2faf293ceaa1298f480a170b03f1e10d7b06920fe779eb",
+      "after_sha256": "ea9d93fc5c49166cd408baf8e64755ee1ebb7d99db971a0b99fb23232e00e0b5",
+      "reason": "Restore exact original newline/EOF bytes; whole normalized contents identical."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "sites": 1,
+      "before_sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
+      "after_sha256": "141fef9bc2c676ac99dab67f861be20fbb5ef44447d676ce90bec91170c2476f",
+      "reason": "Restore original EOF/newline formatting; no declaration changes."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
+      "sites": 1,
+      "before_sha256": "67ec4dccd8245891a3ba7f4e64fdf38bd8b39a02ea00ec13a96d7ebae3210c07",
+      "after_sha256": "ee7cd9c9d24c8907540d06545b44acf92e17645c5e24b5ff87db8d70dd6835d8",
+      "reason": "Restore original EOF/newline formatting; no declaration changes."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "sites": 1,
+      "before_sha256": "edafef9f825bbcc4000195c3fcbd63d6dd65d753271770bf6e5480a83b7879b1",
+      "after_sha256": "1292581db79cae5901247ab9c00a4d6c9fad18ebb1a257e2031ebaa1ab744c5a",
+      "reason": "Remove extra trailing newline only; native-pointer ABI adjustment retained."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "sites": 1,
+      "before_sha256": "fae4c43815b02d7d637b1d771f0befa010f1062719ee4cf65989e642747d60c3",
+      "after_sha256": "f6485bceee1254acaab8d16d2f039c1a19cda1bb98c98c12bc02a905775e1f39",
+      "reason": "Restore original copyright/header before existing #line23; all following compiler logical positions unchanged."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "sites": 1,
+      "before_sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+      "after_sha256": "f6a3e397e878eccf05b5126b3c68cbfefb33cda2e058adf239da2bff6c74b7f8",
+      "reason": "Remove extra trailing newline only."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "sites": 1,
+      "before_sha256": "1963ec663153b7c3005d73c05a58194dd4d021acbcd437dd5d6c58d1356dfc90",
+      "after_sha256": "496fb34c9ba1f61e6ab5b67fd09c75b72447e6b8054e237b05328184975e1595",
+      "reason": "Restore original copyright/header in place of stale project preamble; downstream explicit logical anchors unchanged."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "sites": 1,
+      "before_sha256": "c4f7765e4bbdd596fdd89833d5a806c77efc01e9d8377e438488aace376e6a9f",
+      "after_sha256": "8031c5a98f46dbbc7cbff3911e78d25c0c0cd37992908dc154139286110b56f2",
+      "reason": "Restore original copyright/header before existing #line22; no declaration or logical-position changes."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "sites": 1,
+      "before_sha256": "4672e4cdfdd11cbdcc581e2e8e3f33740dee039e25ccb06f68cadb9e9d5805b9",
+      "after_sha256": "da0261ce3f737d328794b5a49977d3c10f5297808591f38fa4dd9c365958c9d9",
+      "reason": "Restore original copyright/header before existing #line31; selected declarations and logical anchors unchanged."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "sites": 1,
+      "before_sha256": "6502c08cf8d3c162f80be6816e8e93250d7e2993ee1884bb9a63e9c08756d9e3",
+      "after_sha256": "9971cf7edcf795e260fa6b7d6bfc0b8e9c2e59b6521ab2ab2467453ef12dd101",
+      "reason": "Restore original copyright/header before existing #line28; API declarations unchanged."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "sites": 1,
+      "before_sha256": "7f78d307471884e2eb1fa60b39670d988261f02b3c0b6f8065fd63024db5f6ee",
+      "after_sha256": "fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b",
+      "reason": "Restore exact original bytes; two identity #line directives and newline differences only, complete retained logical mapping unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "sites": 1,
+      "before_sha256": "1a2c9db520aef67ade59a6a3e0b0627e5e22b8ccf584f24cdc73b815eebb5576",
+      "after_sha256": "02ed31f896cf0cb543d35352c12e00013b126db89faeacddbd9a32abfb8c525f",
+      "reason": "Remove extra trailing newline only; algorithm and bindings unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "sites": 2,
+      "before_sha256": "0e072d983c0b8f233acb472248ed6b49c2060efbf7676f5a8e23d978eca7f931",
+      "after_sha256": "000d27dd967cd4d48ffcd36462a68817a086ceffae60e5af629171b6042d6689",
+      "reason": "Restore original directory-string inline comment and remove extra trailing newline; initializer tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "sites": 1,
+      "before_sha256": "c19d75256bc8521b87e277b32e0caff9c4e7517dbfd4e28384be28e05ed5494b",
+      "after_sha256": "52acb9321a7cdaba603b0e943101b72f913ee9421ffc110fa2cc23a6e2fd405b",
+      "reason": "Restore original DispatchMessage function comment before existing #line2383; function body/logical anchor unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "sites": 1,
+      "before_sha256": "092c8a21de74f7998a269811a66f1064f4bf8ce8eac5123a2b33dc305456f79f",
+      "after_sha256": "64b64c159b3965631f11e7823bf5b87f0d4831526c26726625edf9bb57464fe2",
+      "reason": "Restore original MenuLoadWinTemplates documentation; parser tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "sites": 1,
+      "before_sha256": "b4934bf910a7914ee9f30e043a952d0f0e8a604c3a7476c87a3134ef74cfc539",
+      "after_sha256": "e8a0639ec579b21823d536369408c12160220219d60e6aaed0fdd089d7530fc0",
+      "reason": "Restore original DefWindowProcWorker documentation546-553; no executable/preprocessor token change."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "sites": 13,
+      "before_sha256": "337cba5953c23f321bd44224f9f3e1ef67c0d09a403805344a3669d21b486ca4",
+      "after_sha256": "1a2f5087bd4ed7e44732b7fb55b7e67c311da6216c924e82772c97b5e1317841",
+      "reason": "Restore12 original function documentation blocks and remove stale not-product-selected phrase; executable/preprocessor tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "sites": 2,
+      "before_sha256": "83b39c438d16306c1f8871585211466b37a11982158e6aee5eef1347b98cf94a",
+      "after_sha256": "09b5a77268835e633f174cba5bb6715d7dc9158374bd05f3ea3ac4a77133b838",
+      "reason": "Remove stale not-product-selected statement and extra EOF blank line; token-neutral."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "sites": 3,
+      "before_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+      "after_sha256": "2f87ed304c936c0794c55c3d28289d4493c9982c162eb39629f9056d2f8058aa",
+      "reason": "Restore original EndDialog history comment, remove obsolete not-selected phrase and extra EOF blank line."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "sites": 11,
+      "before_sha256": "3d3e824d2c517eecb87dc66e7dfbabf8f20884dbb08d3020d77443bd784267e8",
+      "after_sha256": "666f70f14c30aeb6d45e7214c337aafbf4a8565ec6085cd73515dee426096bf1",
+      "reason": "Restore original function documentation, remove stale staging sentence and redundant EOF blank lines; no executable/preprocessor token change."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "sites": 5,
+      "before_sha256": "77852da033b4b60555f0fb825bb7caa17e94139019f7a3fa35a568548cbdb294",
+      "after_sha256": "5ea993fe4a0ad0cc0fbb76dd867f37e9b8d03de52e066759afa74be37eaa516b",
+      "reason": "Restore original function/ANSI comments and correct stale keyboard omission description; token-neutral."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "sites": 7,
+      "before_sha256": "ed2559bf93da5964d35de20fe2aed18e009810561f0b59d111778fc8b155de27",
+      "after_sha256": "da9e6e52ec1d74194c9f00c009367136d511bb6331fd923de2a85f6d5cda3500",
+      "reason": "Original navigation documentation restored and stale staging phrase removed; token-neutral."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "sites": 1,
+      "before_sha256": "67c9d0b3e2c68d3144db9953ef89d548808a240eaf88c21e65e5cbe6cab614f4",
+      "after_sha256": "23eb85a4c7240d9d80f73526b0ac23f9ca9c7cf7c5bae061456e5f67f2f09d6e",
+      "reason": "Restore original trailing blank-line count; no token change."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "sites": 3,
+      "before_sha256": "a4ac66f3566cbb16886e6a1202f08717828122bcf250fadf8cbb11ab1ee3b39b",
+      "after_sha256": "21dd9a99480d39a40e82f6d5c8a722a07185189855f58cdbc8541f5efaf21189",
+      "reason": "Original module/function comments and trailing newline restored; non-comment tokens excluding #line unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "sites": 2,
+      "before_sha256": "5f55f632b250d765c26b392bdadcd66ad4a93cdfa3a3a74f57fe2866856184c4",
+      "after_sha256": "d85831391e232a313068b51b88b69b62f1f3d0d6ceb2a773391d4ac0e65889c4",
+      "reason": "Original header/helper documentation; selected tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "sites": 5,
+      "before_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+      "after_sha256": "eed4db1318fa3a07b24ff2e6a6bdc5022812ef39aa30af592b6180664fc9a8cf",
+      "reason": "Original header, LHND rationale and guard comment; remove two redundant annotations. Tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "sites": 1,
+      "before_sha256": "188cf5ee53e4c32e591fac8e4aea93b09de736789328ed921423e590e8763e17",
+      "after_sha256": "652b76dc69f0d1cf4b4ad60602962b9088d71da85992af0ac57c628e0ffde062",
+      "reason": "Restore full original module comment; non-comment tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "sites": 6,
+      "before_sha256": "8814fe1cef49b3914c612703f4b136c41d8b9f73ab2e1f083018dadcd6242217",
+      "after_sha256": "17d55282c3f42fcfc50a908b0e948f6945aa1cc7344a4a35249ea662c8a5dffa",
+      "reason": "Original header/helper documentation, PATOR spacing and extra EOF blank; token identity verified."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "sites": 1,
+      "before_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+      "after_sha256": "e165f243722d982c5a19024ae3fff82747889bcfb34c63105043e08fe7d4a9f1",
+      "reason": "Restore original RtlCaptureAnsiString documentation."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "sites": 3,
+      "before_sha256": "4396ac612dd316ae7393891b93a379118f4a60b6e7051206224ae6ec0cae9b0f",
+      "after_sha256": "824db6b7c91862bf6d8bd3bf389a0b803f8256816e340fde1d8f510eceebf941",
+      "reason": "Restore original module notice and selected contiguous EDIT constant comments; remove extra EOF blank. All non-comment tokens excluding #line remain identical; constant block mapped to original lines570-606, next moved UNDO block617."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "sites": 3,
+      "before_sha256": "95d079adb6003257491878a40822c0c52a994217d5e21dce11b93f4ba838430c",
+      "after_sha256": "d448bfc238cb8f6143b4bc52bc2c3ee714f7a2f1fcbd7082bfa4ddebd4667789",
+      "reason": "Restore original module and retained geometry-function documentation; remove extra EOF blank. Removes stale unselected claim; executable/preprocessor tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "sites": 2,
+      "before_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
+      "after_sha256": "b667d09291a27bc607da80aa6765d3c0835051a5325880ba2368983804969c3a",
+      "reason": "Restore original module documentation; remove extra EOF blank. Original #line14 precedes include, retained function and preprocessing unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "sites": 2,
+      "before_sha256": "18d5fd5f09417d33e0ee3f4be294707ec1bee76c7bd3e3b63c97beaafa22cc6a",
+      "after_sha256": "c4c28b08767e4c6d7b9cee385bb9d3a377aff17abc4c62efc5fa968df8a0e109",
+      "reason": "Restore original BEGINCALL and type-neutral macro documentation before existing #line anchors; macro bodies unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "sites": 2,
+      "before_sha256": "a8ed6fea183399990c012e81ba1ce9aa3ac798f9d60edaf4f5c8766c85ed14a6",
+      "after_sha256": "f530803eb199eb4af04d4ec3330c854b710f48b8d8b9dac51167c134ad71c9cf",
+      "reason": "Restore original module header and CLS field comments/spacing; preserve existing pointer-tag and PCLS alias changes for separate semantic review. Non-comment tokens ignoring #line unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "sites": 1,
+      "before_sha256": "f233bda073e53e44e91c1eeae4c78b4afe0e238e17f476ab3f79f985b241ce40",
+      "after_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+      "reason": "Restore original EOF blank-line count; all other bytes and newline encoding preserved."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "sites": 1,
+      "before_sha256": "b42d5c29b94789df14fddcf2960a657d216a41d350908c8d496dd864ef05e284",
+      "after_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+      "reason": "Restore original registration function documentation before existing #line508; tokens and newline encoding preserved."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "sites": 1,
+      "before_sha256": "c341f93751ac817fdedb508b94ab242f81fdffd0ffca1bc21a24fe6cc89ea3c0",
+      "after_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+      "reason": "Restore original xxxSetWindowLong documentation before #line256; noncomment tokens and newline bytes preserved."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "sites": 1,
+      "before_sha256": "d4e1283fd8b5297a8957a9ed13e8622504eaf16763aace581a8c5b78e9b6891e",
+      "after_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+      "reason": "Restore original module documentation; retain rationale and original include/table line anchors. Noncomment tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "sites": 1,
+      "before_sha256": "d9a3a1fd5a8a00b0af2a3a673115c10d458730370b85f53bab6cabd516d9ac81",
+      "after_sha256": "90cbe1e5d20b4284820193b242da8af753dbc976e056ea74f3c0c45812efaf64",
+      "reason": "Restore original grouping algorithm documentation before #line5015; noncomment tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "sites": 1,
+      "before_sha256": "05cf0e041f89c44e168ef85c66ef82433967edaa0690bd2c3e8ff898634b0b91",
+      "after_sha256": "82acc421f66a2e71b1fb18494b78f69f38ebf0054d504743cdeeb1b4c20aea81",
+      "reason": "Restore original module/copyright/history header; keep local divergence rationale; executable/preprocessor text unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "sites": 2,
+      "before_sha256": "56f7e0030282e8d7c5d1ebcae4c2e8bd52572e4145653e71f813864ec46b1cb6",
+      "after_sha256": "39d741144fab4e0e53dd2ac30cdd63ed84ef93c7bd55a4ef7e5790a956d70d16",
+      "reason": "Restore original documentation for both retained readers before their existing logical-line anchors; function bodies unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "sites": 3,
+      "before_sha256": "3b51de6759d2a5ce8ccd59d0e8c07f68a1bd4de1cace151b1ec51cc346470570",
+      "after_sha256": "283f8a76c15b219f4991da8aea36bd0f2f647e977fed9eefd2f3a55420bd53ec",
+      "reason": "Restore original documentation for three retained functions before logical-line anchors; no code changes."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "sites": 2,
+      "before_sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+      "after_sha256": "278332285649e2c535998c94b467f9e0cfd3f7341a97e5fb7a8710f8d02a235d",
+      "reason": "Restore original module and retained function documentation, preserve local rationale and logical anchor; function unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "sites": 2,
+      "before_sha256": "fe20f5ad161583a82fd573e90d2f3305b63e253aba8231b8b0a1b0b6b6ed6728",
+      "after_sha256": "c037b36b1f76776d0c185a9c2c71f7613e4da8a2f794cd5599c1fd58052c336b",
+      "reason": "Restore original module copyright/header and initializer documentation before existing line anchor; no code change."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "sites": 6,
+      "before_sha256": "30e622392ea164fc3fd523c945bb3f0905d2cba39adcf6155d3350282d70d71b",
+      "after_sha256": "43017662af7ff1aa112895f9a948e878976e701d4fdbfc4567033dc3aa6c8c46",
+      "reason": "Restore six original function documentation blocks before logical anchors; code order and behavior unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "sites": 1,
+      "before_sha256": "b0de135fbac7f436aaed675dae3aaf20be944b59998aebed5622b3fa188eca73",
+      "after_sha256": "f0649cedb6a6327c699e44f964d7b171ab5938360ee7fa44d51e9ae025fd18ba",
+      "reason": "Restore original build/module/copyright header, preserve divergence explanation and logical guard anchor."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "sites": 3,
+      "before_sha256": "9f6cc2803fb6d93b867fc60c2f0f6e95eaa564550ece59f3923bb83e834f67c7",
+      "after_sha256": "c23b952a6cd68c3048048c4437026f91ba5223c89313c77cbe507abcdb0f4d8f",
+      "reason": "Restore three original function comments; token equality verified, existing logical anchors retained."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "sites": 3,
+      "before_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+      "after_sha256": "435d0563d50fcfaf5947e509cf3f76269e319cf3e98ab447ea3176029a11fca8",
+      "reason": "Restore original header and two function comments; tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "sites": 4,
+      "before_sha256": "a62ed13562045c87e524f29590eec28376eeb526fb80e407b8943df275d09204",
+      "after_sha256": "87b683c3972700d1980b68ea4fd2b46f40c12419d51624422659ef6629a29665",
+      "reason": "Original module header and three function comments; tokens and line directives unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "sites": 1,
+      "before_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+      "after_sha256": "29c7d945c05f0c0c69fd320504fefb88c82be71b600c77d2f6f06a4c839394c2",
+      "reason": "Restore original _GetWindowLong documentation before unchanged #line anchor."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "sites": 4,
+      "before_sha256": "4aec687f5be9cc634850811600e3c8c407de8d52f86d19fa41790f6f32b65a2c",
+      "after_sha256": "16fe6ac52ac0365b94a37272a8c80cd47a1edfd0042c9f076cb94c0ad1c427e4",
+      "reason": "Original module and three function comments restored; tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+      "sites": 2,
+      "before_sha256": "2761eb922e6de3cde93a7a6ff8e8543d8ede7065055af9e2e85196de5c7ec199",
+      "after_sha256": "86b92bf8f78ffc3a049dd1d0e96351f160b3f05a35dbf701bee9db2b10e42c82",
+      "reason": "Original header/function documentation; tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "sites": 3,
+      "before_sha256": "b6539c0df34096ed6a3a2935f2d905ff01acb0d02586218c97c40f764a33ef53",
+      "after_sha256": "f4b570b778fc22b1f42ab7e4327183e87aab99c9630d197f1a0bba760089857d",
+      "reason": "Original header/function/return comments; tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "sites": 5,
+      "before_sha256": "7d1f0f4331109602568c7182111482227bdb446597c906c0f69d4932b54523c4",
+      "after_sha256": "d637c432294c5f9cfdb96b6fdab6b707f5ac8cca9f7209b4df99def8397dd63a",
+      "reason": "Original header and directly preceding function comments restored; tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "sites": 7,
+      "before_sha256": "9b2c8b3e68218c69f6cd9449aa1185bbeb1e6bbae4f9a36f31e833092b0adf32",
+      "after_sha256": "5eaaa777528408dc354e978d2731473e9df64b51bb743e8360b4a8a6fd21c6d3",
+      "reason": "Original header and five function docs restored; redundant local comment removed. Preprocessor and executable tokens unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "sites": 2,
+      "before_sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+      "after_sha256": "0f4f3b63034459ac1f0eb7c3e951348776512a7167f75733cc4c64da62a28cbd",
+      "reason": "Original module and function documentation restored; executable/preprocessor tokens unchanged."
+    }
+  ]
+}

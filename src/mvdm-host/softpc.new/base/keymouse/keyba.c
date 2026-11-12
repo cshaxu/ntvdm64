@@ -2118,6 +2118,8 @@ if (scanning_discontinued && !waiting_for_next_code)
 
 LOCAL VOID KbdIntDelay(VOID)
 {
+
+
        //
        // Wait until the kbd scancode has been read,
        // before invoking the next interrupt.

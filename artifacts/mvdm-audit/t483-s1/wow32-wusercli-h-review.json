@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/wow32/wusercli.h",
+  "original_sha256": "2731955b6f6d24419575806304481b7d866c99b552ec8da756fc956b5dfa4b2e",
+  "current_sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 13,
+      "original_count": 28,
+      "current_start": 14,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define WU32CLIENTTOSCREEN             LOCALAPI",
+        "#define WU32GETCLASSNAME               LOCALAPI",
+        "#define WU32GETCLIENTRECT              LOCALAPI",
+        "#define WU32GETCURSORPOS               LOCALAPI",
+        "#define WU32GETDESKTOPWINDOW           LOCALAPI",
+        "#define WU32GETDLGITEM                 LOCALAPI",
+        "#define WU32GETMENU                    LOCALAPI",
+        "#define WU32GETMENUITEMCOUNT           LOCALAPI",
+        "#define WU32GETMENUITEMID              LOCALAPI",
+        "#define WU32GETMENUSTATE               LOCALAPI",
+        "#define WU32GETNEXTWINDOW              LOCALAPI",
+        "#define WU32GETPARENT                  LOCALAPI",
+        "#define WU32GETSUBMENU                 LOCALAPI",
+        "#define WU32GETSYSCOLOR                LOCALAPI",
+        "#define WU32GETSYSTEMMETRICS           LOCALAPI",
+        "#define WU32GETTICKCOUNT               LOCALAPI",
+        "#define WU32GETTOPWINDOW               LOCALAPI",
+        "#define WU32GETWINDOW                  LOCALAPI",
+        "#define WU32GETWINDOWRECT              LOCALAPI",
+        "#define WU32ISCHILD                    LOCALAPI",
+        "#define WU32ISICONIC                   LOCALAPI",
+        "#define WU32ISWINDOW                   LOCALAPI",
+        "#define WU32ISWINDOWENABLED            LOCALAPI",
+        "#define WU32ISWINDOWVISIBLE            LOCALAPI",
+        "#define WU32ISZOOMED                   LOCALAPI",
+        "#define WU32SCREENTOCLIENT             LOCALAPI",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported PMODE32 host thunk profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 41,
+      "current": 15,
+      "logical": 14
+    }
+  ],
+  "limits": "Exclusion-only means no other body difference, not renewed all-config reachability proof. Original HACK32 guarded keyboard call remains; host PMODE32 exclusion is not guest USER16 exclusion. Timer fixture covers wrapper only; no tests run."
+}

@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/out.c",
+  "original_sha256": "520bdebe72dcb263bf2a8312ec543b0414a0456e07959891bddb7d083b52b91b",
+  "current_sha256": "6ea2193496697fda3b7206759306dd1e333d7a9eb098a66f7fcef4507e10116e",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 83,
+      "original_count": 3,
+      "current_start": 83,
+      "current_count": 2
+    }
+  ],
+  "counter_review": "Whole-file textual comparison completed; boundaries are stated per row. Original unmodified internal defects are not silently counted as repaired.",
+  "limits": "Source/fixture inspection only; no fresh build/test or blanket branch/line proof."
+}

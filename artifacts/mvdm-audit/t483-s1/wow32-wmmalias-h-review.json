@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/wow32/wmmalias.h",
+  "original_sha256": "48bcee7abcca92bafd6dcea4bcfd9437bae10c170bb9bfee4db587e00e134cc0",
+  "current_sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac",
+  "changes": [],
+  "excluded_bodies": [
+    {
+      "original_start": 85,
+      "original_count": 3,
+      "current_start": 87,
+      "current_count": 1,
+      "original": [
+        "    PPHMAP  pphmAlias;          // address of alias table",
+        "    INT     nAliasEntries;      // size of alias table, in entries",
+        "    INT     iAliasHint;         // next (possibly) free slot in alias table"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 88,
+      "current": 88,
+      "logical": 86
+    }
+  ],
+  "evidence": "Full normalized diff consists solely of original DEBUG/NEWALIAS/DBG conditional-body replacements; selected hash/list alias and multimedia declarations remain original.",
+  "limits": [
+    "Source classification, not new build/runtime validation.",
+    "Exclusion-only does not imply compiler-context or logical-line certification."
+  ]
+}

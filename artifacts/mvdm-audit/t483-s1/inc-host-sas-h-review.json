@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+  "original_sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+  "current_sha256": "7c313552f0116e4073b25721bc4cd45eba237f33188fd897b0d6e1c90f78a4a3",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 21,
+      "original_count": 45
+    },
+    {
+      "original_start": 71,
+      "original_count": 128
+    }
+  ],
+  "initial_review": "Two HOST_SAS-dependent bodies excluded: prefix remapping and host SAS function table/macros. Retained source exact.",
+  "counter_review": "This header defines optional indirect host-SAS dispatch, not the selected CCPU memory implementation. Original BASE_SAS/HOST_SAS outer structure retained; nested SAS_PREFIX default removed inside discarded body. No claim that generic memory access is removed.",
+  "limits": "Source difference classification only; no new universal build-context, diagnostic-line or runtime certification."
+}

@@ -1,0 +1,46 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+  "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+  "current_sha256": "4ca609045412255d3e2e12d33261778ea8c0fd422615ba36a3a06bc42dfd7792",
+  "review_complete": true,
+  "register_entries": 1,
+  "excluded_groups": [
+    {
+      "original_start": 34,
+      "original_end": 34,
+      "current_error_line": 35
+    },
+    {
+      "original_start": 38,
+      "original_end": 43,
+      "current_error_line": 41
+    }
+  ],
+  "changes": [
+    {
+      "file_sequence": "207",
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "current_start": "108",
+      "current_count": "3",
+      "original_start": "109",
+      "original_count": "2",
+      "old_ids": "MVDM-HOST-DIV-883",
+      "classification": "slave-PIC-EOI-port-correction",
+      "initial_review": "D11 must acknowledge slave at command port A0h; original A1h writes interrupt mask.",
+      "counter_review": "ica.c odd-address OCW1/even-address OCW2 and original re_direct/int_287 independently corroborate correction. Existing actual-PIC test checks ISR, IMR, callbacks, repeated service and controls.",
+      "disposition": "retain",
+      "evidence": "src/mvdm-host/softpc.new/base/system/ica.c:923,951; test/mvdm-host/slave_bios_eoi_test.c; docs/etc/evidence/m0-t478-s34-bios-integration.md",
+      "limits": "Source and historical evidence review; no new execution or universal diagnostic-line verification.",
+      "decision": "retain",
+      "change_plan": "Keep single port-expression correction; no PIC state rewrite, fabricated EOI or adapter redirection.",
+      "related_callers": "BIOS unexpected slave IRQ vectors -> D11_int -> IOS outb -> ica.c; re_direct/int_287 controls.",
+      "verification_required": "Existing verify-slave-bios-eoi.py actual-PIC fixture, no-ISR/master/slave-repeat/AEOI/IRQ9/x87 controls; guest IRQ execution and lock concurrency remain separate.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "initial_review": "Whole-file boundary-aware diff comparison with explicit semantic exceptions.",
+  "counter_review": "Outside listed corrections and removed branch bodies, nonblank non-#line text equals original.",
+  "limits": "Not full diagnostic-line or all-profile reachability proof. No new test run."
+}

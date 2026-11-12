@@ -144,6 +144,26 @@ against their defect contract, not presented as performance optimizations.
 
 ## Original mirrors
 
+### Mirror difference register migration
+
+The owner directs a single successor mirror-difference register to replace
+the existing exception lists. Follow the [migration record](../etc/operations/m0-t483-mirror-register.md).
+Review files in frozen `dir /s /b /a-d /o:n` order and non-excluded code
+differences within each file in ascending current-line order, retaining the
+original ranges too. Pure `#error` exclusions and their `#line` scaffolding
+are classified separately. Initial analysis and counter-review are separate
+fields even when one agent performs both roles. Historical approvals are
+evidence, not automatic findings of necessity. During migration old entries
+remain traceability inputs; do not delete them before coverage reconciliation.
+After reconciliation the successor is the sole current registration authority;
+old lists become historical evidence, not parallel editable registers.
+Pure formatting differences (line endings, layout and non-semantic comments)
+are restored to the pinned original and do not receive diff-register entries.
+Confirm preprocessing, macro continuations, token boundaries and diagnostic
+line requirements before treating a difference as formatting-only. Record
+restoration scope in delivery evidence, not as a retained mirror exception.
+
+
 - Excluding a source file from every supported build does not by itself make
   independently useful assets disposable. Preserve executable tools, DLLs,
   fonts, and other independently useful runtime or user-facing resources;

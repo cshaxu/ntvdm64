@@ -1,0 +1,63 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+  "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+  "current_sha256": "4c54f51c544841e51b1b16781d7ab6fd156b156d98b9e947a6ab80ba7c7c2426",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 110,
+      "original_count": 30,
+      "current_start": 111,
+      "current_count": 1,
+      "original": [
+        "",
+        "//",
+        "// The descriptor strings are really ASCIIZ strings, and are not expected to",
+        "// be translated into Unicode.  So, let's define a type for them just to",
+        "// make this clearer.  (That'll also make it easier to change to Unicode later",
+        "// if I'm wrong.  --JR)",
+        "//",
+        "",
+        "#include <wchar.h>      // iswdigit(), wcslen().",
+        "",
+        "//typedef WCHAR DESC_CHAR;",
+        "",
+        "// DESCLEN(desc): return number of characters (not including null) in desc:",
+        "#define DESCLEN(desc)                   wcslen(desc)",
+        "",
+        "// DESC_CHAR_IS_DIGIT(descchar): return nonzero iff descchar is a digit.",
+        "#define DESC_CHAR_IS_DIGIT(descchar)    iswdigit(descchar)",
+        "",
+        "// DESC_DIGIT_TO_NUM(descchar): return integer value of descchar.",
+        "#define DESC_DIGIT_TO_NUM(descchar) \\",
+        "    ( (DWORD) ( ((int)(descchar)) - ((int) L'0') ) )",
+        "",
+        "//",
+        "// Format strings for NetpDbgPrint use (see NetDebug.h).  Note that",
+        "// FORMAT_LPDESC_CHAR will go away one of these days.",
+        "//",
+        "#define FORMAT_DESC_CHAR        \"%wc\"",
+        "#define FORMAT_LPDESC           \"%ws\"",
+        "#define FORMAT_LPDESC_CHAR      \"%wc\"",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 140,
+      "current": 112,
+      "logical": 111
+    }
+  ],
+  "evidence": [
+    "src/non-mvdm/ds/netapi/rap/convert.c",
+    "src/non-mvdm/ds/netapi/rap/examine.c",
+    "src/non-mvdm/ds/netapi/netlib/time.c",
+    "src/compat/include/xactsrv_wksta_minimal.h"
+  ],
+  "limits": "All retained normalized source compared with original; no new build/runtime or complete include-context admission proof. Exclusion-only category does not certify diagnostic mapping."
+}

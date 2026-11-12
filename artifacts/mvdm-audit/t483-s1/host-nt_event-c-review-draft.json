@@ -1,0 +1,888 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+  "current_sha256": "748837ce7df95a272d888aeb5ed6816ddde50970f711d6ee3a61ea9e33fd88ed",
+  "review_complete": false,
+  "status": "Superseded by host-nt_event-c-review.json; historical pre-restoration capture",
+  "changes": [
+    {
+      "original_start": 46,
+      "original_count": 0,
+      "current_start": 46,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"nt_ega.h\" /* MVDM-HOST-DIV-311: original mode-settle bound. */"
+      ]
+    },
+    {
+      "original_start": 57,
+      "original_count": 0,
+      "current_start": 59,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): copied Window-relative input joins the",
+        " * original mouse IRQ owner, never the native Console event queue. */",
+        "#include \"ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h\""
+      ]
+    },
+    {
+      "original_start": 58,
+      "original_count": 0,
+      "current_start": 64,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "#include \"mvdm_softpc_termination.h\"",
+        "#include \"worker-base/connection.h\" /* MVDM-HOST-DIV-355: Console exit intent. */",
+        "#include \"mvdm_softpc_event_thread.h\"",
+        "/* MVDM-HOST-DIV-355: authenticated teardown is not an input fault dialog. */",
+        "#include \"ntvdm-exe/win32/worker_lifecycle.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-317): pending scan data retains its raw origin. */",
+        "#include \"mvdm_keyboard_history.h\"",
+        "mvdm_keyboard_history nt_keyboard_history;",
+        "extern unsigned PendingKeyboardHistory(void);"
+      ]
+    },
+    {
+      "original_start": 78,
+      "original_count": 0,
+      "current_start": 94,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-313): acknowledge the original input handoff at",
+        " * the root-owned Console, without moving its block/resume policy here. */",
+        "extern BOOL ntvdm_console_set_active(BOOL active);",
+        "/* DIVERGENCE(MVDM-HOST-DIV-322): final software text before ownership release. */",
+        "#include \"ntvdm-exe/win32/console_text.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-326): quiesce before final ownership release. */",
+        "#include \"mvdm_softpc_text_video.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner retirement restores mouse backing. */",
+        "extern void mouse_pointer_route_changed(int);"
+      ]
+    },
+    {
+      "original_start": 111,
+      "original_count": 0,
+      "current_start": 139,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-316): join BIOS reconstruction to the first",
+        " * successfully returned hardware event without duplicating its release. */",
+        "static INPUT_RECORD first_returned_key;"
+      ]
+    },
+    {
+      "original_start": 132,
+      "original_count": 0,
+      "current_start": 164,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-211): bounded host-key normalization retains",
+        " * original batching; its modern Console boundary is worker-owned. */",
+        "#include \"ntvdm-exe/win32/console_input.h\""
+      ]
+    },
+    {
+      "original_start": 293,
+      "original_count": 0,
+      "current_start": 331,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    extern BOOL nt_init_called;"
+      ]
+    },
+    {
+      "original_start": 295,
+      "original_count": 1,
+      "current_start": 335,
+      "current_count": 6,
+      "original": [
+        "        NtAlertThread(ThreadInfo.EventMgr.Handle);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-206): the NT4 process exited after its",
+        "         * alert, so it did not need an explicit worker join.  This product",
+        "         * retains the original alert and adds only the adapter-owned join",
+        "         * needed before releasing the in-process session binding. */",
+        "        (void)mvdm_softpc_event_thread_alert_and_join(ThreadInfo.EventMgr.Handle,",
+        "                                                   nt_init_called);"
+      ]
+    },
+    {
+      "original_start": 348,
+      "original_count": 1,
+      "current_start": 394,
+      "current_count": 1,
+      "original": [
+        "    INPUT_RECORD InputRecord[5];"
+      ],
+      "current": [
+        "    INPUT_RECORD InputRecord[NTVDM_PC_INPUT_RECORDS];"
+      ]
+    },
+    {
+      "original_start": 354,
+      "original_count": 2,
+      "current_start": 400,
+      "current_count": 4,
+      "original": [
+        "    Events[0] = GetConsoleInputWaitHandle(); ////sc.InputHandle",
+        "    Events[1] = hConsoleSuspend;"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-211): service suspension before queued",
+        "     * input when both are ready, including under continuous mouse traffic. */",
+        "    Events[0] = hConsoleSuspend;",
+        "    Events[1] = GetConsoleInputWaitHandle(); ////sc.InputHandle"
+      ]
+    },
+    {
+      "original_start": 375,
+      "original_count": 2,
+      "current_start": 424,
+      "current_count": 2,
+      "original": [
+        "        if (!status) {",
+        "            if (ReadConsoleInputExW(sc.InputHandle,"
+      ],
+      "current": [
+        "        if (status == 1) {",
+        "            if (ntvdm_console_read_pc_input(sc.InputHandle,"
+      ]
+    },
+    {
+      "original_start": 390,
+      "original_count": 0,
+      "current_start": 439,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* MVDM-HOST-DIV-355: let the original event thread join. */",
+        "                if (ntvdm_worker_lifecycle_input_terminal()) return 0;"
+      ]
+    },
+    {
+      "original_start": 398,
+      "original_count": 1,
+      "current_start": 450,
+      "current_count": 1,
+      "original": [
+        "        else if (status == 1) {"
+      ],
+      "current": [
+        "        else if (!status) {"
+      ]
+    },
+    {
+      "original_start": 409,
+      "original_count": 0,
+      "current_start": 461,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* MVDM-HOST-DIV-355: let the original event thread join. */",
+        "                if (ntvdm_worker_lifecycle_input_terminal()) return 0;"
+      ]
+    },
+    {
+      "original_start": 420,
+      "original_count": 0,
+      "current_start": 475,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "              case CONSOLE_INPUT_RELATIVE_MOUSE:",
+        "                  mvdm_softpc_mouse_receive(&InputRecord[loop]);",
+        "                  break;"
+      ]
+    },
+    {
+      "original_start": 444,
+      "original_count": 0,
+      "current_start": 504,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                       /* DIV-317: internal synthetic actions share this origin. */",
+        "                       if (!mvdm_keyboard_history_begin(&nt_keyboard_history))",
+        "                           DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_INVALID_DATA,__FILE__,__LINE__);"
+      ]
+    },
+    {
+      "original_start": 445,
+      "original_count": 0,
+      "current_start": 509,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                       mvdm_keyboard_history_end(&nt_keyboard_history);"
+      ]
+    },
+    {
+      "original_start": 472,
+      "original_count": 5,
+      "current_start": 538,
+      "current_count": 3,
+      "original": [
+        "        //",
+        "        // encourage the console to pack events together",
+        "        //",
+        "",
+        "        Sleep(10);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-211): consume queued batches without",
+        "         * the original Console packing delay. The alertable wait above",
+        "         * blocks when idle and checks suspension before the next batch. */"
+      ]
+    },
+    {
+      "original_start": 495,
+      "original_count": 0,
+      "current_start": 560,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIV-317: preserve identity even when this record makes no scan data. */",
+        "        if (!mvdm_keyboard_history_record(&nt_keyboard_history))",
+        "            DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_ARITHMETIC_OVERFLOW,__FILE__,__LINE__);"
+      ]
+    },
+    {
+      "original_start": 528,
+      "original_count": 0,
+      "current_start": 597,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIV-317: pending-origin ordinal, not a raw-history suffix count. */",
+        "    KeyNumber = mvdm_keyboard_history_age(&nt_keyboard_history,KeyNumber);",
+        "    if (!KeyNumber) return FALSE;",
+        ""
+      ]
+    },
+    {
+      "original_start": 555,
+      "original_count": 0,
+      "current_start": 629,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIV-317: called initially or after the original hardware reset/return. */",
+        "    memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));"
+      ]
+    },
+    {
+      "original_start": 943,
+      "original_count": 1,
+      "current_start": 1021,
+      "current_count": 1,
+      "original": [
+        "    if(ATcode)"
+      ],
+      "current": [
+        "    if(ATcode) {"
+      ]
+    },
+    {
+      "original_start": 945,
+      "original_count": 0,
+      "current_start": 1023,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    }"
+      ]
+    },
+    {
+      "original_start": 958,
+      "original_count": 1,
+      "current_start": 1038,
+      "current_count": 1,
+      "original": [
+        "    if(ATcode)"
+      ],
+      "current": [
+        "    if(ATcode) {"
+      ]
+    },
+    {
+      "original_start": 960,
+      "original_count": 0,
+      "current_start": 1040,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    }"
+      ]
+    },
+    {
+      "original_start": 976,
+      "original_count": 0,
+      "current_start": 1058,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        ""
+      ]
+    },
+    {
+      "original_start": 1106,
+      "original_count": 1,
+      "current_start": 1192,
+      "current_count": 3,
+      "original": [
+        " return MouseEBufNxtEvtInx != MouseEBufNxtFreeInx;"
+      ],
+      "current": [
+        " /* DIVERGENCE(MVDM-HOST-DIV-318): original EOI also observes relative input. */",
+        " return MouseEBufNxtEvtInx != MouseEBufNxtFreeInx ||",
+        "        mvdm_softpc_mouse_pending(mvdm_softpc_mouse_current());"
+      ]
+    },
+    {
+      "original_start": 1143,
+      "original_count": 0,
+      "current_start": 1232,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "     /* DIVERGENCE(MVDM-HOST-DIV-318): same explicit cancellation boundary. */",
+        "     mvdm_softpc_mouse_cancel(mvdm_softpc_mouse_current());"
+      ]
+    },
+    {
+      "original_start": 1334,
+      "original_count": 0,
+      "current_start": 1399,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original",
+        "                 * cmdPushExit cleanup until the service's Console-close",
+        "                 * delivery. Preserve its cleanup/ExitVDM/process-exit order. */",
+        "                host_applClose();",
+        "                ExitVDM(FALSE,0);"
+      ]
+    },
+    {
+      "original_start": 1407,
+      "original_count": 0,
+      "current_start": 1480,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-326): drain before final synchronous paint. */",
+        "        mvdm_softpc_text_video_pause();"
+      ]
+    },
+    {
+      "original_start": 1409,
+      "original_count": 0,
+      "current_start": 1484,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-318): restore the original saved background",
+        "           before final paint; blocked input need not consume a queued LEAVE. */",
+        "        mouse_pointer_route_changed(FALSE);"
+      ]
+    },
+    {
+      "original_start": 1411,
+      "original_count": 0,
+      "current_start": 1490,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\t    {"
+      ]
+    },
+    {
+      "original_start": 1412,
+      "original_count": 0,
+      "current_start": 1493,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "\t    }"
+      ]
+    },
+    {
+      "original_start": 1413,
+      "original_count": 1,
+      "current_start": 1496,
+      "current_count": 10,
+      "original": [
+        "\t    if (sc.ScreenState != FULLSCREEN)"
+      ],
+      "current": [
+        "#ifdef X86GFX",
+        "#error Unsupported excluded original configuration",
+        "#endif",
+        "            { /* DIVERGENCE(MVDM-HOST-DIV-322): always extract software VGA. */",
+        "                /* DIVERGENCE(MVDM-HOST-DIV-311): this stopped-guest",
+        "                 * handoff must finish the original pending mode selection",
+        "                 * before its final paint. Advance only the bounded video",
+        "                 * settle path, never guest time or CPU interrupts. */",
+        "                for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)",
+        "                    host_graphics_tick();"
+      ]
+    },
+    {
+      "original_start": 1415,
+      "original_count": 0,
+      "current_start": 1510,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            }",
+        "            /* DIVERGENCE(MVDM-HOST-DIV-322): acknowledge final cells and VGA",
+        "               cursor before ResetConsoleState and ownership release. */",
+        "            if (sc.ModeType == TEXT && !NtvdmConsoleUpdateText(sc.ColPalette))",
+        "                DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+      ]
+    },
+    {
+      "original_start": 1428,
+      "original_count": 4,
+      "current_start": 1531,
+      "current_count": 3,
+      "original": [
+        "\t    if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)",
+        "\t    {",
+        "\t\tSetConsoleDisplayMode(sc.OutputHandle, CONSOLE_WINDOWED_MODE, &scrSize);",
+        "\t    }"
+      ],
+      "current": [
+        "#ifdef X86GFX",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 1493,
+      "original_count": 0,
+      "current_start": 1597,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-313): final paint, returned typeahead and",
+        "     * original mode restoration must precede native frontend activation. */",
+        "    if (!VDMForWOW && !ntvdm_console_set_active(FALSE))",
+        "        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+      ]
+    },
+    {
+      "original_start": 1514,
+      "original_count": 0,
+      "current_start": 1625,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-313): reclaim input/presentation before the",
+        "     * original Console queries, mode setup and event-thread release. */",
+        "    if (!ntvdm_console_set_active(TRUE))",
+        "        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);",
+        ""
+      ]
+    },
+    {
+      "original_start": 1557,
+      "original_count": 0,
+      "current_start": 1678,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-326): resume after native ownership ack. */",
+        "    mvdm_softpc_text_video_resume();"
+      ]
+    },
+    {
+      "original_start": 1731,
+      "original_count": 0,
+      "current_start": 1855,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "             /* DIV-316: reuse only the adjacent, same physical key release. */",
+        "             if (first_returned_key.EventType != KEY_EVENT ||",
+        "                 first_returned_key.Event.KeyEvent.bKeyDown ||",
+        "                 first_returned_key.Event.KeyEvent.wVirtualScanCode != InputRecord[i].Event.KeyEvent.wVirtualScanCode ||",
+        "                 first_returned_key.Event.KeyEvent.wVirtualKeyCode != InputRecord[i].Event.KeyEvent.wVirtualKeyCode ||",
+        "                 ((first_returned_key.Event.KeyEvent.dwControlKeyState ^ InputRecord[i].Event.KeyEvent.dwControlKeyState) & ENHANCED_KEY)) {"
+      ]
+    },
+    {
+      "original_start": 1734,
+      "original_count": 0,
+      "current_start": 1865,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "             }"
+      ]
+    },
+    {
+      "original_start": 1821,
+      "original_count": 0,
+      "current_start": 1954,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIV-316: only the newest BIOS entry adjoins the hardware suffix. */",
+        "        first_returned_key.EventType = 0;",
+        ""
+      ]
+    },
+    {
+      "original_start": 1825,
+      "original_count": 1,
+      "current_start": 1961,
+      "current_count": 2,
+      "original": [
+        "        if ((BufferHead == BufferTail && i != NUMBBIRECS - 1) || i < 0)"
+      ],
+      "current": [
+        "        /* DIV-316: an odd-sized joined batch still needs two slots per pair. */",
+        "        if ((BufferHead == BufferTail && i != NUMBBIRECS - 1) || i < 1)"
+      ]
+    },
+    {
+      "original_start": 1854,
+      "original_count": 0,
+      "current_start": 1992,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    first_returned_key.EventType = 0; /* DIV-316: no prior handoff identity. */",
+        ""
+      ]
+    },
+    {
+      "original_start": 1858,
+      "original_count": 2,
+      "current_start": 1999,
+      "current_count": 5,
+      "original": [
+        "    for(KeyToRtn = 1, KeyInx = UnusedKeyEvents-1;",
+        "        KeyToRtn <= UnusedKeyEvents &&"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-312): return only initialized history",
+        "     * records, oldest first. The original loop counter is one past the",
+        "     * copied count; a short history occupies the tail, not the prefix. */",
+        "    for(KeyToRtn = 1, KeyInx = min(UnusedKeyEvents,MAX_KEY_EVENTS)-1;",
+        "        KeyToRtn <= min(UnusedKeyEvents,MAX_KEY_EVENTS) &&"
+      ]
+    },
+    {
+      "original_start": 1863,
+      "original_count": 1,
+      "current_start": 2008,
+      "current_count": 1,
+      "original": [
+        "        InputRecords[KeyToRtn - 1].EventType = KEY_EVENT;"
+      ],
+      "current": [
+        "        InputRecords[KeyInx].EventType = KEY_EVENT;"
+      ]
+    },
+    {
+      "original_start": 1866,
+      "original_count": 1,
+      "current_start": 2011,
+      "current_count": 3,
+      "original": [
+        "    if(!WriteConsoleInputVDMW(sc.InputHandle,InputRecords,KeyToRtn,&RecsWrt))"
+      ],
+      "current": [
+        "    if(KeyToRtn > 1) {",
+        "    if(!WriteConsoleInputVDMW(sc.InputHandle,",
+        "        &InputRecords[KeyInx+1],KeyToRtn-1,&RecsWrt))"
+      ]
+    },
+    {
+      "original_start": 1868,
+      "original_count": 0,
+      "current_start": 2016,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    else if(RecsWrt) first_returned_key = InputRecords[KeyInx+1]; /* DIV-316 */",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 1886,
+      "original_count": 17,
+      "current_start": 2037,
+      "current_count": 6,
+      "original": [
+        "    /*",
+        "     *  Signal all processes in this group that they should be",
+        "     *  terminating. Do this by posting a WM_CLOSE message to",
+        "     *  the console window, which causes console to send control",
+        "     *  close event to all processes.",
+        "     *",
+        "     *  The vdm must be able to receive control events from the",
+        "     *  console after posting the WM_CLOSE msg since the vdm's",
+        "     *  CntrlHandler is still registered. To be safe we do",
+        "     *  vdm specific cleanup first, and let the CntrlHandler",
+        "     *  do the ExitProcess(). This avoids possible deadlock\\race",
+        "     *  conditions with the console.",
+        "     */",
+        "    host_applClose();",
+        "    ExitVDM(FALSE,0);",
+        "    PostMessage(hWndConsole, WM_CLOSE, 0,0);",
+        "    ExitThread(0);"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-355): NTSRV owns this Console group.",
+        "     * Report intent through the existing RPC; do not close a host window or",
+        "     * release worker resources before its instruction. The original calling",
+        "     * thread retires; the independent lifecycle receiver remains alive.",
+        "     * Submission failure is not retried or treated as teardown permission. */",
+        "    ExitThread(worker_base_request_console_exit());"
+      ]
+    },
+    {
+      "original_start": 1915,
+      "original_count": 0,
+      "current_start": 2056,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    unsigned pending = PendingKeyboardHistory(); /* DIV-317: snapshot before reset. */"
+      ]
+    },
+    {
+      "original_start": 1917,
+      "original_count": 1,
+      "current_start": 2059,
+      "current_count": 2,
+      "original": [
+        "    return (keys_in_6805_buff(&part_key_transferred) + KeyQueue.KeyCount);"
+      ],
+      "current": [
+        "    (void)keys_in_6805_buff(&part_key_transferred);",
+        "    return (pending + KeyQueue.KeyCount); /* DIV-317: original queue is empty in this profile. */"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 97,
+      "original_count": 1,
+      "current_start": 124,
+      "current_count": 1,
+      "original": [
+        "BOOL   bYoda;"
+      ],
+      "current": [
+        "#error Excluded unsupported YODA configuration"
+      ]
+    },
+    {
+      "original_start": 179,
+      "original_count": 1,
+      "current_start": 216,
+      "current_count": 1,
+      "original": [
+        "half_word saved_text_lines; /* No of lines for last SelectMouseBuffer. */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 595,
+      "original_count": 1,
+      "current_start": 673,
+      "current_count": 1,
+      "original": [
+        "    fprintf(trace_file,\"Focus lost\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 886,
+      "original_count": 5,
+      "current_start": 966,
+      "current_count": 1,
+      "original": [
+        "        case VK_F11:",
+        "            if (getenv(\"YODA\")) {",
+        "                EventStatus |= ~ES_YODA;",
+        "            }",
+        "            break;"
+      ],
+      "current": [
+        "#error Excluded unsupported YODA configuration"
+      ]
+    },
+    {
+      "original_start": 1015,
+      "original_count": 1,
+      "current_start": 1100,
+      "current_count": 1,
+      "original": [
+        "    if (sc.ScreenState == WINDOWED)"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1210,
+      "original_count": 31,
+      "current_start": 1303,
+      "current_count": 1,
+      "original": [
+        "void CheckForYodaEvents(void)",
+        "{",
+        "    static HANDLE YodaEvent = NULL;",
+        "",
+        "    /*:::::::::::::::::::::::::::::::::: check for Yoda event object signal */",
+        "",
+        "    if(YodaEvent == NULL)",
+        "    {",
+        "    if((YodaEvent = OpenEvent(EVENT_ALL_ACCESS,FALSE,\"YodaEvent\")) == NULL)",
+        "    {",
+        "        always_trace0(\"Failed to open Yoda event object\\n\");",
+        "        YodaEvent =  (HANDLE) -1;",
+        "    }",
+        "    }",
+        "",
+        "    if(YodaEvent && YodaEvent != (HANDLE) -1)",
+        "    {",
+        "    if(!WaitForSingleObject(YodaEvent,0))",
+        "    {",
+        "        ResetEvent(YodaEvent);",
+        "        Enter_yoda();",
+        "    }",
+        "    }",
+        "",
+        "     // check for yoda kbd event",
+        "    if (EventStatus & ES_YODA) {",
+        "        EventStatus &= ~ES_YODA;",
+        "        Enter_yoda();",
+        "        }",
+        "",
+        "}"
+      ],
+      "current": [
+        "#error Excluded unsupported YODA configuration"
+      ]
+    },
+    {
+      "original_start": 1328,
+      "original_count": 4,
+      "current_start": 1394,
+      "current_count": 1,
+      "original": [
+        "            if (VDMForWOW) {  // shouldn't happen",
+        "                printf(\"WOW: Received EndTask Notice, but we shouldn't\\n\");",
+        "                break;",
+        "                }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1349,
+      "original_count": 2,
+      "current_start": 1421,
+      "current_count": 1,
+      "original": [
+        "       default:   // shouldn't happen",
+        "            printf(\"NTVDM: Received unknown CtrlType=%lu\\n\",CtrlType);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1423,
+      "original_count": 1,
+      "current_start": 1525,
+      "current_count": 1,
+      "original": [
+        "\t    if(sc.ScreenState == FULLSCREEN) RegainRegenMemory();"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1494,
+      "original_count": 1,
+      "current_start": 1604,
+      "current_count": 1,
+      "original": [
+        "    fprintf(trace_file,\"Blocked event thread\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1526,
+      "original_count": 2,
+      "current_start": 1644,
+      "current_count": 1,
+      "original": [
+        "\t/* tell video bios we are back to stream io */",
+        "\tsas_store_no_check( (int10_seg<<4)+useHostInt10, STREAM_IO);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1535,
+      "original_count": 1,
+      "current_start": 1655,
+      "current_count": 1,
+      "original": [
+        "    fprintf(trace_file,\"Resume event thread\\n\");"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "verified_evidence": [
+    {
+      "area": "event-thread join",
+      "evidence": "nt_remove_event_thread ignores boolean from mvdm_softpc_event_thread_alert_and_join. Provider duplicates handle before alert, waits infinitely on duplicate, reports failure for invalid handle/duplicate/alert/wait. Not-started branch intentionally leaves suspended thread until process exit.",
+      "remaining": "Trace nt_remove_event_thread caller cleanup order and prove consequence of ignored failure; do not yet label UAF reproduced."
+    },
+    {
+      "area": "input readiness",
+      "evidence": "nt_event wait indices swapped to prioritize suspension, read buffer uses NTVDM_PC_INPUT_RECORDS=40; implementation is console_compat.c, not console_input.c.",
+      "remaining": "Verify read expansion capacity, receipt staging, lock and suspension/error paths together."
+    },
+    {
+      "area": "keyboard origins",
+      "evidence": "mvdm_keyboard_history.c supplies issued/dispatched active origin, selected pending slots and ring receipt mapping; ReturnUnusedKeyEvents writes initialized suffix with exact copied count.",
+      "remaining": "Review receipt lifecycle with controller reset and partial writes; inspect existing keyboard_history_boundary,keyboard_origin_return,keyboard_bios_join,unused_key_return tests."
+    },
+    {
+      "area": "frontend ownership",
+      "evidence": "ntvdm_console_set_active delegates console_activate; no console client returns success for detached case. text_video pause/resume belongs adapter.",
+      "remaining": "Trace pause/drain/final paint/RPC/reclaim ordering and mouse backing restoration, ordinary DOS/WOW differences."
+    }
+  ],
+  "verification_limits": "Source inspection only; no new test run, code mutation or completed-file classification."
+}

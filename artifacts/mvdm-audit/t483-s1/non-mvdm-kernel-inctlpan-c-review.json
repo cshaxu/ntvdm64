@@ -1,0 +1,41 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+  "before_sha256": "d4e1283fd8b5297a8957a9ed13e8622504eaf16763aace581a8c5b78e9b6891e",
+  "current_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+  "status": "difference classification complete; functional remediation not implemented",
+  "table_token_exact": true,
+  "evidence": [
+    "src/wow32-dll/source/wow_button_resources.c",
+    "src/wow32-dll/include/wow_button_resources.h",
+    "src/wow32-dll/include/button-resources/precomp.h",
+    "test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c:1-190",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:644-646",
+    "O:/repos.external/OpenNT/windows/core/ntuser/kernel/inctlpan.c:302-562"
+  ],
+  "decisions": [
+    "Current finite precomp intentionally omits original hdrstop and MetricGetID. Metric macro only serves omitted system-profile owner; audit actual PCH use before deciding whether pragma restoration is useful.",
+    "Keep external linkage: wow_button_resources reads original sole table from separate TU. Table tokens are exact; restoring static would require duplicated table or different composition.",
+    "Keep original LATER branch excluded; these inactive profile-structure serialization helpers are not required by selected button table.",
+    "KOREA frame detached from omitted SetNCFonts, now empty. Reconcile original containing subset and correct diagnostic anchors; do not imply font behavior is retained.",
+    "Omit unrelated caption-cache packing scratch array and MB_FindLongestString declaration with unselected whole-system bitmap factory; no button-table dependency.",
+    "GetSetProfileStructFromResID uses current user profile and resources. Map actual settings providers before claiming its omission semantically complete; not needed for read-only button data.",
+    "GetFrameControlMetrics has directly relevant DFC_BUTTON=13x13 and unchecked 3-state alias rules. Compare minimal original closure versus current adapter and document corrected alias offset; do not reintroduce stale DOBI_3STATE behavior or global metric state.",
+    "PackFrameControls reusable placement algorithm omitted in favor of one-column scoped button atlas. Compare net code/state cost of original algorithm with current fixed layout; preservation of pixel output alone does not prove minimality.",
+    "Omit DrawCaptionButtons/CreateCaptionStrip private caption-cache renderer from button-only carrier; relies on global caption/system dimensions beyond selected resources.",
+    "CreateBitmapStrip mixes relevant rendering/alias loop with private global GDI ownership, caption caches and metric updates. Evaluate finite extraction/reuse versus existing scoped GDI adapter; preserve cleanup-on-failure and no global resource state.",
+    "SetNCMetrics omission requires mapping any selected nonclient metric consumers to existing providers; whole-machine settings mutation is not admitted merely for button rendering.",
+    "CreateFontFromWinIni/UserSetFont contain font policy and private profile/DC dependencies; verify selected fonts have existing owner before classifying all policy redundant.",
+    "SetNCFonts owns menu/caption font dimensions and language-specific paths. Current detached KOREA frame is not evidence of full exclusion; map selected font consumers and original unavailable state.",
+    "SetIconFonts/GetWindowNCMetrics/SetWindowNCMetrics omitted. Separate machine-setting operations from reusable parameter/default/clamping policy against actual consumer calls.",
+    "SetMinMetrics/SetIconMetrics omitted; verify selected min/icon metrics provider and failure/default semantics before retaining omission.",
+    "MB_FindLongestString message-box text measurement omitted; trace current message-box font/text measurement before declaring reusable local helper unnecessary."
+  ],
+  "entries_added": 16,
+  "format_sites": 1,
+  "limits": [
+    "Original header restored with include #line19 and existing table #line25; no fresh compiler line check.",
+    "Functional rendering/failure fixture inspected not run.",
+    "No full font/metric policy equivalence claimed."
+  ]
+}

@@ -1,0 +1,372 @@
+{
+  "path": "src/mvdm-host/wow32/wuwind.c",
+  "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+  "current_sha256": "7937b35a43a66aad18e888b50cabf24c25ac9d2f10a88e340877e2480deaa23d",
+  "changes": [
+    {
+      "original_start": 1582,
+      "original_count": 0,
+      "current_start": 1578,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    HWND hwnd32;"
+      ],
+      "decision": "retain",
+      "necessity": "Acquire native GetWindowDC using resolved HWND; cache that same native owner in StoreDC. Reject failed nonzero guest handles instead of accidentally acquiring desktop DC.",
+      "change_plan": "Retain shared DC owner path and original cache-release order; no second handle map."
+    },
+    {
+      "original_start": 1589,
+      "original_count": 3,
+      "current_start": 1587,
+      "current_count": 4,
+      "original": [
+        "    ul = GETHDC16(GetWindowDC(",
+        "    HWND32(parg16->f1)",
+        "    ));"
+      ],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */",
+        "    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));",
+        "    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }",
+        "    ul = GETHDC16(wow_native_GetWindowDC(hwnd32));"
+      ],
+      "decision": "retain",
+      "necessity": "Acquire native GetWindowDC using resolved HWND; cache that same native owner in StoreDC. Reject failed nonzero guest handles instead of accidentally acquiring desktop DC.",
+      "change_plan": "Retain shared DC owner path and original cache-release order; no second handle map."
+    },
+    {
+      "original_start": 1594,
+      "original_count": 1,
+      "current_start": 1594,
+      "current_count": 1,
+      "original": [
+        "        StoreDC(htask16, parg16->f1, (HAND16)ul);"
+      ],
+      "current": [
+        "        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);"
+      ],
+      "decision": "retain",
+      "necessity": "Acquire native GetWindowDC using resolved HWND; cache that same native owner in StoreDC. Reject failed nonzero guest handles instead of accidentally acquiring desktop DC.",
+      "change_plan": "Retain shared DC owner path and original cache-release order; no second handle map."
+    },
+    {
+      "original_start": 1703,
+      "original_count": 0,
+      "current_start": 1705,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                BOOL procedureIsGuest;"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 1704,
+      "original_count": 1,
+      "current_start": 1708,
+      "current_count": 5,
+      "original": [
+        "                dwWndProc32Cur = GetWindowLong(HWND32(parg16->f1), GWL_WNDPROC);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-339): keep explicit decoded-entry origin. */",
+        "                dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 1706,
+      "original_count": 2,
+      "current_start": 1716,
+      "current_count": 10,
+      "original": [
+        "                if ( dwWndProc32Cur & WNDPROC_WOW ) {",
+        "                    if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE ) {"
+      ],
+      "current": [
+        "                if ( (dwWndProc32Cur & WNDPROC_WOW)",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                     && (procedureIsGuest || HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE)",
+        "#endif",
+        "                   ) {",
+        "                    if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                         && !procedureIsGuest",
+        "#endif",
+        "                       ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 2451,
+      "original_count": 0,
+      "current_start": 2474,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "            BOOL previousIsGuest;",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 2461,
+      "original_count": 1,
+      "current_start": 2488,
+      "current_count": 6,
+      "original": [
+        "                dwWndProc32Old = SetWindowLong(HWND32(parg16->f1), GWL_WNDPROC, dwWndProc32New);"
+      ],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                /* DIVERGENCE(MVDM-HOST-DIV-339): explicit native origin. */",
+        "                dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, dwWndProc32New, FALSE, &previousIsGuest);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 2493,
+      "original_count": 1,
+      "current_start": 2527,
+      "current_count": 6,
+      "original": [
+        "                dwWndProc32Old = SetWindowLong(HWND32(parg16->f1), GWL_WNDPROC, l | WNDPROC_WOW);"
+      ],
+      "current": [
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                /* DIVERGENCE(MVDM-HOST-DIV-339): explicit guest origin. */",
+        "                dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, l | WNDPROC_WOW, TRUE, &previousIsGuest);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 2503,
+      "original_count": 2,
+      "current_start": 2544,
+      "current_count": 10,
+      "original": [
+        "            if ( dwWndProc32Old & WNDPROC_WOW ) {",
+        "                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE ) {"
+      ],
+      "current": [
+        "            if ( (dwWndProc32Old & WNDPROC_WOW)",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                 && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)",
+        "#endif",
+        "               ) {",
+        "                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE",
+        "#ifdef WOW_USER_PRIVATE_REDIRECT",
+        "                     && !previousIsGuest",
+        "#endif",
+        "                   ) {"
+      ],
+      "decision": "retain",
+      "necessity": "Explicit guest/native procedure origin disambiguates encoded Win16 addresses from native CPD-shaped values. Getter and both setter directions preserve original thunk and selector reconstruction; failed setter exits before WOW metadata publication.",
+      "change_plan": "Retain typed procedure access and origin-sensitive decoding. Do not flatten WOW_USER_PRIVATE_REDIRECT until supported build contexts are proved. Validate native/guest transition failure and callback lifecycle through existing authority."
+    },
+    {
+      "original_start": 2737,
+      "original_count": 1,
+      "current_start": 2787,
+      "current_count": 1,
+      "original": [
+        "    PSZ psz2;"
+      ],
+      "current": [
+        "    PSZ psz2 = NULL;"
+      ],
+      "decision": "retain",
+      "necessity": "Capture guest text identity before SetWindowText reentry and release only the successfully added parameter-map reference by that captured key; finally restores cleanup on exceptions while preserving LastError and void return semantics.",
+      "change_plan": "Retain captured identity, successful-acquisition guard and finally cleanup. Existing actual-body fixture covers mapping failure, native exception, argument mutation and null text; separately verify real task retirement and nested same-key mapping."
+    },
+    {
+      "original_start": 2740,
+      "original_count": 0,
+      "current_start": 2790,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(MVDM-HOST-DIV-347): capture before native/guest reentry. */",
+        "    DWORD text16, error;",
+        "    BOOL mapped = FALSE;"
+      ],
+      "decision": "retain",
+      "necessity": "Capture guest text identity before SetWindowText reentry and release only the successfully added parameter-map reference by that captured key; finally restores cleanup on exceptions while preserving LastError and void return semantics.",
+      "change_plan": "Retain captured identity, successful-acquisition guard and finally cleanup. Existing actual-body fixture covers mapping failure, native exception, argument mutation and null text; separately verify real task retirement and nested same-key mapping."
+    },
+    {
+      "original_start": 2742,
+      "original_count": 0,
+      "current_start": 2796,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    text16 = FETCHDWORD(parg16->f2);",
+        "    __try {"
+      ],
+      "decision": "retain",
+      "necessity": "Capture guest text identity before SetWindowText reentry and release only the successfully added parameter-map reference by that captured key; finally restores cleanup on exceptions while preserving LastError and void return semantics.",
+      "change_plan": "Retain captured identity, successful-acquisition guard and finally cleanup. Existing actual-body fixture covers mapping failure, native exception, argument mutation and null text; separately verify real task retirement and nested same-key mapping."
+    },
+    {
+      "original_start": 2746,
+      "original_count": 1,
+      "current_start": 2803,
+      "current_count": 1,
+      "original": [
+        "        AddParamMap((DWORD)psz2, FETCHDWORD(parg16->f2));"
+      ],
+      "current": [
+        "        mapped = AddParamMap((DWORD)psz2, text16) != NULL;"
+      ],
+      "decision": "retain",
+      "necessity": "Capture guest text identity before SetWindowText reentry and release only the successfully added parameter-map reference by that captured key; finally restores cleanup on exceptions while preserving LastError and void return semantics.",
+      "change_plan": "Retain captured identity, successful-acquisition guard and finally cleanup. Existing actual-body fixture covers mapping failure, native exception, argument mutation and null text; separately verify real task retirement and nested same-key mapping."
+    },
+    {
+      "original_start": 2760,
+      "original_count": 2,
+      "current_start": 2817,
+      "current_count": 6,
+      "original": [
+        "    if (NULL != psz2) {",
+        "        DeleteParamMap((DWORD)psz2, PARAM_32, NULL);"
+      ],
+      "current": [
+        "    } __finally {",
+        "        error = GetLastError();",
+        "        if (mapped) DeleteParamMap(text16, PARAM_16, NULL);",
+        "        FREEPSZPTR(psz2);",
+        "        FREEARGPTR(parg16);",
+        "        SetLastError(error);"
+      ],
+      "decision": "retain",
+      "necessity": "Capture guest text identity before SetWindowText reentry and release only the successfully added parameter-map reference by that captured key; finally restores cleanup on exceptions while preserving LastError and void return semantics.",
+      "change_plan": "Retain captured identity, successful-acquisition guard and finally cleanup. Existing actual-body fixture covers mapping failure, native exception, argument mutation and null text; separately verify real task retirement and nested same-key mapping."
+    },
+    {
+      "original_start": 2763,
+      "original_count": 3,
+      "current_start": 2827,
+      "current_count": 0,
+      "original": [
+        "",
+        "    FREEPSZPTR(psz2);",
+        "    FREEARGPTR(parg16);"
+      ],
+      "current": [],
+      "decision": "retain",
+      "necessity": "Capture guest text identity before SetWindowText reentry and release only the successfully added parameter-map reference by that captured key; finally restores cleanup on exceptions while preserving LastError and void return semantics.",
+      "change_plan": "Retain captured identity, successful-acquisition guard and finally cleanup. Existing actual-body fixture covers mapping failure, native exception, argument mutation and null text; separately verify real task retirement and nested same-key mapping."
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 889,
+      "original_count": 8,
+      "current_start": 891,
+      "current_count": 1,
+      "original": [
+        "    if (hwnd32) {",
+        "        CHAR    szClassName[80];",
+        "",
+        "        LOGDEBUG(LOG_WARNING,(\"  Window %04x created on class = %s\\n\", GETHWND16(hwnd32),",
+        "                (GetClassName(hwnd32, szClassName, sizeof(szClassName)) ? szClassName : \"Unknown\")));",
+        "    } else {",
+        "        LOGDEBUG(LOG_WARNING,(\"  CreateWindow failed, class = %s\\n\", pszClass));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 897,
+      "current": 892,
+      "logical": 890
+    },
+    {
+      "original": 1708,
+      "current": 1726,
+      "logical": 1716
+    },
+    {
+      "original": 1709,
+      "current": 1727,
+      "logical": 1717
+    },
+    {
+      "original": 1710,
+      "current": 1728,
+      "logical": 1718
+    },
+    {
+      "original": 1711,
+      "current": 1729,
+      "logical": 1719
+    },
+    {
+      "original": 1712,
+      "current": 1730,
+      "logical": 1720
+    },
+    {
+      "original": 2452,
+      "current": 2478,
+      "logical": 2455
+    },
+    {
+      "original": 2505,
+      "current": 2554,
+      "logical": 2513
+    },
+    {
+      "original": 2506,
+      "current": 2555,
+      "logical": 2514
+    },
+    {
+      "original": 2507,
+      "current": 2556,
+      "logical": 2515
+    },
+    {
+      "original": 2508,
+      "current": 2557,
+      "logical": 2516
+    },
+    {
+      "original": 2509,
+      "current": 2558,
+      "logical": 2517
+    }
+  ],
+  "limits": "No new test execution; actual fixture coverage and remaining guest/lifecycle limits recorded per row."
+}

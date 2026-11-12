@@ -1,0 +1,875 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+  "before_sha256": "77852da033b4b60555f0fb825bb7caa17e94139019f7a3fa35a568548cbdb294",
+  "current_sha256": "5ea993fe4a0ad0cc0fbb76dd867f37e9b8d03de52e066759afa74be37eaa516b",
+  "changes": [
+    {
+      "original_start": 11,
+      "original_count": 0,
+      "current_start": 11,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-108): retain original default-button workers",
+        " * and descendant lookup; IsDialogMessage A/W has an explicit cohort.",
+        " * The standalone precomp binds existing scoped native calls and WND graph. */"
+      ]
+    },
+    {
+      "original_start": 12,
+      "original_count": 1,
+      "current_start": 16,
+      "current_count": 0,
+      "original": [
+        "#pragma hdrstop"
+      ],
+      "current": []
+    },
+    {
+      "original_start": 48,
+      "original_count": 0,
+      "current_start": 52,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): query can destroy traversal participants. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||",
+        "                TestWF(pwndRoot, WFDESTROYED) || (pwndRoot->fnid & FNID_STATUS_BITS)) {",
+        "            ThreadUnlock(&tlpwnd);",
+        "            return;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 52,
+      "original_count": 1,
+      "current_start": 63,
+      "current_count": 6,
+      "original": [
+        ""
+      ],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): a style notification may retire the graph. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||",
+        "                TestWF(pwndRoot, WFDESTROYED) || (pwndRoot->fnid & FNID_STATUS_BITS)) {",
+        "            ThreadUnlock(&tlpwnd);",
+        "            return;",
+        "        }"
+      ]
+    },
+    {
+      "original_start": 103,
+      "original_count": 0,
+      "current_start": 120,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): keep the exact new-focus identity. */",
+        "        if (TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS) ||",
+        "                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) return;"
+      ]
+    },
+    {
+      "original_start": 126,
+      "original_count": 0,
+      "current_start": 147,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "               /* DIVERGENCE(OPENNT-HOST-119): default-ID callbacks can destroy. */",
+        "               if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS) ||",
+        "                       TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS)) return;"
+      ]
+    },
+    {
+      "original_start": 136,
+      "original_count": 0,
+      "current_start": 161,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                           /* DIVERGENCE(OPENNT-HOST-119): no traversal after query death. */",
+        "                           if (TestWF(pwndOldFocus, WFDESTROYED) || (pwndOldFocus->fnid & FNID_STATUS_BITS) ||",
+        "                                   TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) return;"
+      ]
+    },
+    {
+      "original_start": 143,
+      "original_count": 1,
+      "current_start": 172,
+      "current_count": 4,
+      "original": [
+        "           SendMessage(hwndNewFocus, BM_SETSTYLE, BS_DEFPUSHBUTTON, (LONG)TRUE);"
+      ],
+      "current": [
+        "           /* DIVERGENCE(OPENNT-HOST-119): an unsuccessful old-focus query can destroy too. */",
+        "           if (!TestWF(pwndNewFocus, WFDESTROYED) && !(pwndNewFocus->fnid & FNID_STATUS_BITS) &&",
+        "                   !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+        "               SendMessage(hwndNewFocus, BM_SETSTYLE, BS_DEFPUSHBUTTON, (LONG)TRUE);"
+      ]
+    },
+    {
+      "original_start": 156,
+      "original_count": 0,
+      "current_start": 189,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): old-focus query can retire new focus/dialog. */",
+        "        if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS) ||",
+        "                (pwndNewFocus && (TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS)))) return;"
+      ]
+    },
+    {
+      "original_start": 160,
+      "original_count": 0,
+      "current_start": 197,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): nested removal/style calls may destroy. */",
+        "    if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS) ||",
+        "            (pwndNewFocus && (TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS)))) return;"
+      ]
+    },
+    {
+      "original_start": 176,
+      "original_count": 0,
+      "current_start": 217,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): never traverse a retired dialog graph. */",
+        "        if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) return;"
+      ]
+    },
+    {
+      "original_start": 179,
+      "original_count": 1,
+      "current_start": 223,
+      "current_count": 3,
+      "original": [
+        "        if (pwndT == NULL)"
+      ],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): copied lookup can retain the target",
+        "         * retired by the default-ID callback; storage is not native liveness. */",
+        "        if (pwndT == NULL || TestWF(pwndT, WFDESTROYED) || (pwndT->fnid & FNID_STATUS_BITS))"
+      ]
+    },
+    {
+      "original_start": 199,
+      "original_count": 1,
+      "current_start": 246,
+      "current_count": 4,
+      "original": [
+        "        if (!TestWF(pwndT, WFDISABLED)) {"
+      ],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): only a surviving queried button is restyled. */",
+        "        if (!TestWF(pwndT, WFDISABLED) && !TestWF(pwndT, WFDESTROYED) &&",
+        "                !(pwndT->fnid & FNID_STATUS_BITS) && !TestWF(pwndDlg, WFDESTROYED) &&",
+        "                !(pwndDlg->fnid & FNID_STATUS_BITS)) {"
+      ]
+    },
+    {
+      "original_start": 207,
+      "original_count": 0,
+      "current_start": 258,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(OPENNT-HOST-119): recover the original keyboard cohort separately. */",
+        "#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD"
+      ]
+    },
+    {
+      "original_start": 212,
+      "original_count": 0,
+      "current_start": 265,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        ""
+      ]
+    },
+    {
+      "original_start": 221,
+      "original_count": 0,
+      "current_start": 276,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */"
+      ]
+    },
+    {
+      "original_start": 222,
+      "original_count": 0,
+      "current_start": 280,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.",
+        "#else",
+        "#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD"
+      ]
+    },
+    {
+      "original_start": 224,
+      "original_count": 10,
+      "current_start": 287,
+      "current_count": 1,
+      "original": [
+        "        /*",
+        "         * Build DBCS-aware message.",
+        "         */",
+        "        BUILD_DBCS_MESSAGE_TO_CLIENTW_FROM_CLIENTA(lpmsg->message,lpmsg->wParam,TRUE);",
+        "        /*",
+        "         * Fall through.....",
+        "         */",
+        "#else",
+        "    case WM_CHAR:",
+        "    case EM_SETPASSWORDCHAR:"
+      ],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */"
+      ]
+    },
+    {
+      "original_start": 235,
+      "original_count": 0,
+      "current_start": 290,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD"
+      ]
+    },
+    {
+      "original_start": 240,
+      "original_count": 0,
+      "current_start": 297,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */"
+      ]
+    },
+    {
+      "original_start": 244,
+      "original_count": 0,
+      "current_start": 304,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD"
+      ]
+    },
+    {
+      "original_start": 248,
+      "original_count": 2,
+      "current_start": 311,
+      "current_count": 4,
+      "original": [
+        "    bRet = IsDialogMessageW(hwndDlg, lpmsg);",
+        ""
+      ],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): restore caller input on callback exception. */",
+        "    __try {",
+        "        bRet = IsDialogMessageW(hwndDlg, lpmsg);",
+        "    } __finally {"
+      ]
+    },
+    {
+      "original_start": 253,
+      "original_count": 1,
+      "current_start": 319,
+      "current_count": 2,
+      "original": [
+        "    lpmsg->wParam = wParamSaved;"
+      ],
+      "current": [
+        "        lpmsg->wParam = wParamSaved;",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 281,
+      "original_count": 0,
+      "current_start": 349,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */"
+      ]
+    },
+    {
+      "original_start": 309,
+      "original_count": 0,
+      "current_start": 356,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD"
+      ]
+    },
+    {
+      "original_start": 312,
+      "original_count": 0,
+      "current_start": 361,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(OPENNT-HOST-119): a filter may destroy the retained dialog. */",
+        "    if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+        "        return FALSE;"
+      ]
+    },
+    {
+      "original_start": 318,
+      "original_count": 0,
+      "current_start": 372,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "    /* DIVERGENCE(OPENNT-HOST-119): a filter may withdraw the message target. */",
+        "    if (!pwnd) return FALSE;"
+      ]
+    },
+    {
+      "original_start": 409,
+      "original_count": 0,
+      "current_start": 466,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): consume a message whose target died. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||",
+        "                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+        "            goto ReturnProcessed;",
+        ""
+      ]
+    },
+    {
+      "original_start": 485,
+      "original_count": 0,
+      "current_start": 548,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "        /* DIVERGENCE(OPENNT-HOST-119): query cannot authorize stale navigation. */",
+        "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||",
+        "                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+        "            goto ReturnProcessed;"
+      ]
+    },
+    {
+      "original_start": 498,
+      "original_count": 1,
+      "current_start": 566,
+      "current_count": 4,
+      "original": [
+        "                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): focus can retire either window. */",
+        "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+        "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+        "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);"
+      ]
+    },
+    {
+      "original_start": 533,
+      "original_count": 0,
+      "current_start": 605,
+      "current_count": 9,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(OPENNT-HOST-119): do not borrow cleaned Button data. */",
+        "            if (TestWF(pwnd2, WFDESTROYED) || (pwnd2->fnid & FNID_STATUS_BITS) ||",
+        "                    TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) {",
+        "                ThreadUnlock(&tlpwnd2);",
+        "                ThreadUnlock(&tlpwnd);",
+        "                if (fLockDlg) ThreadUnlock(&tlpwndDlg);",
+        "                return TRUE;",
+        "            }",
+        ""
+      ]
+    },
+    {
+      "original_start": 541,
+      "original_count": 0,
+      "current_start": 623,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): dialog focus also borrows BUTN. */",
+        "                wow_button_scope buttonScope;",
+        "                if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd2);",
+        "                __try {"
+      ]
+    },
+    {
+      "original_start": 546,
+      "original_count": 0,
+      "current_start": 633,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): restore before releasing BUTN. */",
+        "                } __finally {"
+      ]
+    },
+    {
+      "original_start": 549,
+      "original_count": 1,
+      "current_start": 639,
+      "current_count": 5,
+      "original": [
+        "                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);"
+      ],
+      "current": [
+        "                    if (fIsNTButton) wow_button_scope_leave(&buttonScope);",
+        "                }",
+        "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+        "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+        "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);"
+      ]
+    },
+    {
+      "original_start": 552,
+      "original_count": 2,
+      "current_start": 647,
+      "current_count": 7,
+      "original": [
+        "                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);",
+        "                if (TestWF(pwnd2, BFTYPEMASK) == LOBYTE(BS_AUTORADIOBUTTON)) {"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): radio focus is also a callout. */",
+        "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+        "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+        "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);",
+        "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+        "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS) &&",
+        "                        TestWF(pwnd2, BFTYPEMASK) == LOBYTE(BS_AUTORADIOBUTTON)) {"
+      ]
+    },
+    {
+      "original_start": 558,
+      "original_count": 1,
+      "current_start": 658,
+      "current_count": 4,
+      "original": [
+        "                    if (!SendMessage(hwnd2, BM_GETCHECK, 0, 0L)) {"
+      ],
+      "current": [
+        "                    /* DIVERGENCE(OPENNT-HOST-119): reject destruction in query. */",
+        "                    if (!SendMessage(hwnd2, BM_GETCHECK, 0, 0L) &&",
+        "                            !TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+        "                            !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS)) {"
+      ]
+    },
+    {
+      "original_start": 564,
+      "original_count": 1,
+      "current_start": 668,
+      "current_count": 4,
+      "original": [
+        "                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): ordinary focus has the same edge. */",
+        "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+        "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+        "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);"
+      ]
+    },
+    {
+      "original_start": 584,
+      "original_count": 0,
+      "current_start": 692,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): retain focus before its query. */",
+        "                pwnd2 = ValidateHwnd(hwndFocus);",
+        "                if (!pwnd2) goto ReturnProcessed;"
+      ]
+    },
+    {
+      "original_start": 586,
+      "original_count": 0,
+      "current_start": 698,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): do not resolve a replacement HWND. */",
+        "                if (TestWF(pwnd2, WFDESTROYED) || (pwnd2->fnid & FNID_STATUS_BITS) ||",
+        "                        TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+        "                    goto ReturnProcessed;"
+      ]
+    },
+    {
+      "original_start": 591,
+      "original_count": 1,
+      "current_start": 708,
+      "current_count": 1,
+      "original": [
+        "                pwnd2 = ValidateHwnd(hwndFocus);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): use the pre-query retained pwnd2. */"
+      ]
+    },
+    {
+      "original_start": 597,
+      "original_count": 0,
+      "current_start": 714,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(OPENNT-HOST-119): default query may retire dialog. */",
+        "                if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+        "                    goto ReturnProcessed;"
+      ]
+    },
+    {
+      "original_start": 618,
+      "original_count": 0,
+      "current_start": 739,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */"
+      ]
+    },
+    {
+      "original_start": 635,
+      "original_count": 0,
+      "current_start": 758,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#endif"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "original_start": 241,
+      "original_count": 2,
+      "current_start": 301,
+      "current_count": 1,
+      "original": [
+        "    case WM_IME_CHAR:",
+        "    case WM_IME_COMPOSITION:"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 282,
+      "original_count": 26,
+      "current_start": 353,
+      "current_count": 1,
+      "original": [
+        "    /*",
+        "     * If this is a synchronous-only message (takes a pointer in wParam or",
+        "     * lParam), then don't allow this message to go through since those",
+        "     * parameters have not been thunked, and are pointing into outer-space",
+        "     * (which would case exceptions to occur).",
+        "     *",
+        "     * (This api is only called in the context of a message loop, and you",
+        "     * don't get synchronous-only messages in a message loop).",
+        "     */",
+        "    if (TESTSYNCONLYMESSAGE(lpMsg->message)) {",
+        "        /*",
+        "         * Fail if 32 bit app is calling.",
+        "         */",
+        "        if (!(pti->flags & TIF_16BIT)) {",
+        "            RIPERR0(ERROR_INVALID_MESSAGE, RIP_VERBOSE, \"\");",
+        "            return FALSE;",
+        "        }",
+        "",
+        "        /*",
+        "         * For wow apps, allow it to go through (for compatibility). Change",
+        "         * the message id so our code doesn't understand the message - wow",
+        "         * will get the message and strip out this bit before dispatching",
+        "         * the message to the application.",
+        "         */",
+        "        lpMsg->message |= MSGFLAG_WOW_RESERVED;",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "line_mismatches": [
+    {
+      "current_line": 17,
+      "original_line": 14,
+      "logical_line": 13
+    },
+    {
+      "current_line": 18,
+      "original_line": 15,
+      "logical_line": 14
+    },
+    {
+      "current_line": 19,
+      "original_line": 16,
+      "logical_line": 15
+    },
+    {
+      "current_line": 20,
+      "original_line": 17,
+      "logical_line": 16
+    },
+    {
+      "current_line": 21,
+      "original_line": 18,
+      "logical_line": 17
+    },
+    {
+      "current_line": 22,
+      "original_line": 19,
+      "logical_line": 18
+    },
+    {
+      "current_line": 23,
+      "original_line": 20,
+      "logical_line": 19
+    },
+    {
+      "current_line": 24,
+      "original_line": 21,
+      "logical_line": 20
+    },
+    {
+      "current_line": 25,
+      "original_line": 22,
+      "logical_line": 21
+    },
+    {
+      "current_line": 200,
+      "original_line": 160,
+      "logical_line": 163
+    },
+    {
+      "current_line": 201,
+      "original_line": 161,
+      "logical_line": 164
+    },
+    {
+      "current_line": 202,
+      "original_line": 162,
+      "logical_line": 165
+    },
+    {
+      "current_line": 260,
+      "original_line": 207,
+      "logical_line": 209
+    },
+    {
+      "current_line": 261,
+      "original_line": 208,
+      "logical_line": 210
+    },
+    {
+      "current_line": 262,
+      "original_line": 209,
+      "logical_line": 211
+    },
+    {
+      "current_line": 263,
+      "original_line": 210,
+      "logical_line": 212
+    },
+    {
+      "current_line": 264,
+      "original_line": 211,
+      "logical_line": 213
+    },
+    {
+      "current_line": 285,
+      "original_line": 222,
+      "logical_line": 232
+    },
+    {
+      "current_line": 286,
+      "original_line": 223,
+      "logical_line": 233
+    },
+    {
+      "current_line": 374,
+      "original_line": 318,
+      "logical_line": 320
+    },
+    {
+      "current_line": 375,
+      "original_line": 319,
+      "logical_line": 321
+    },
+    {
+      "current_line": 376,
+      "original_line": 320,
+      "logical_line": 322
+    },
+    {
+      "current_line": 377,
+      "original_line": 321,
+      "logical_line": 323
+    },
+    {
+      "current_line": 378,
+      "original_line": 322,
+      "logical_line": 324
+    },
+    {
+      "current_line": 379,
+      "original_line": 323,
+      "logical_line": 325
+    },
+    {
+      "current_line": 380,
+      "original_line": 324,
+      "logical_line": 326
+    },
+    {
+      "current_line": 471,
+      "original_line": 409,
+      "logical_line": 414
+    },
+    {
+      "current_line": 472,
+      "original_line": 410,
+      "logical_line": 415
+    },
+    {
+      "current_line": 473,
+      "original_line": 411,
+      "logical_line": 416
+    },
+    {
+      "current_line": 474,
+      "original_line": 412,
+      "logical_line": 417
+    },
+    {
+      "current_line": 614,
+      "original_line": 533,
+      "logical_line": 542
+    },
+    {
+      "current_line": 615,
+      "original_line": 534,
+      "logical_line": 543
+    },
+    {
+      "current_line": 616,
+      "original_line": 535,
+      "logical_line": 544
+    },
+    {
+      "current_line": 617,
+      "original_line": 536,
+      "logical_line": 545
+    },
+    {
+      "current_line": 618,
+      "original_line": 537,
+      "logical_line": 546
+    },
+    {
+      "current_line": 655,
+      "original_line": 555,
+      "logical_line": 560
+    },
+    {
+      "current_line": 656,
+      "original_line": 556,
+      "logical_line": 561
+    },
+    {
+      "current_line": 657,
+      "original_line": 557,
+      "logical_line": 562
+    },
+    {
+      "current_line": 760,
+      "original_line": 636,
+      "logical_line": 637
+    },
+    {
+      "current_line": 761,
+      "original_line": 637,
+      "logical_line": 638
+    },
+    {
+      "current_line": 762,
+      "original_line": 638,
+      "logical_line": 639
+    },
+    {
+      "current_line": 763,
+      "original_line": 639,
+      "logical_line": 640
+    },
+    {
+      "current_line": 764,
+      "original_line": 640,
+      "logical_line": 641
+    },
+    {
+      "current_line": 765,
+      "original_line": 641,
+      "logical_line": 642
+    },
+    {
+      "current_line": 766,
+      "original_line": 642,
+      "logical_line": 643
+    },
+    {
+      "current_line": 767,
+      "original_line": 643,
+      "logical_line": 644
+    }
+  ],
+  "format_restorations": [
+    {
+      "reason": "Correct stale unchanged/omitted keyboard description; actual graph selects keyboard"
+    },
+    {
+      "original_start": 14,
+      "original_end": 22
+    },
+    {
+      "original_start": 207,
+      "original_end": 212
+    },
+    {
+      "original_start": 636,
+      "original_end": 643
+    },
+    {
+      "reason": "Restore original ANSI restoration comment text"
+    }
+  ],
+  "initial_review": "Original default-button/descendant and keyboard algorithms retained. Added identity checks prevent use after callbacks; ANSI finally restores caller message, button scope defers original state free until temporary BST_DONTCLICK cleared.",
+  "counter_review": "Use exact borrowed identity rather than repeated HWND lookup. Fixture includes query/focus/radio/filter failures but does not prove real handle reuse; button-focus exception combined with deferred cleanup needs direct assertion. Selector wrappers preserve FE_SB/FE_IME/LATER rejection separately; compiling once does not prove every supported context.",
+  "evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1: product dlgmgr2 with WOW_ORIGINAL_DIALOG_KEYBOARD",
+    "src/wow32-dll/source/wow_button_lifetime.c: existing scope defers physical free to oldest same-control borrower",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c: source/target/focus/defaultID/check-state/style retirement and ANSI filter exception",
+    "test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c: button lifetime scope evidence"
+  ],
+  "limits": "Source and test-source review only; no new build/runtime pass. Pending exception combination is not a confirmed production failure. Original algorithms outside diffs not independently bug-fixed."
+}

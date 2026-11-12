@@ -8,7 +8,16 @@ Module Name:
 
 Abstract:
 
-    Selected original XACTSRV local handler: NetMessageBufferSend.
+    This module contains individual API handlers for the NetMessage APIs.
+
+    SUPPORTED - NetMessageBufferSend, NetMessageNameAdd, NetMessageNameDel,
+                NetMessageNameEnum, NetMessageNameGetInfo.
+
+Author:
+
+    Shanku Niyogi (w-shanku)    8-Mar-1991
+
+Revision History:
 
 --*/
 
@@ -19,6 +28,24 @@ NTSTATUS
 XsNetMessageBufferSend (
     API_HANDLER_PARAMETERS
     )
+
+/*++
+
+Routine Description:
+
+    This routine handles a call to NetMessageBufferSend.
+
+Arguments:
+
+    API_HANDLER_PARAMETERS - information about the API call. See
+        XsTypes.h for details.
+
+Return Value:
+
+    NTSTATUS - STATUS_SUCCESS or reason for failure.
+
+--*/
+
 #line 58
 {
     NET_API_STATUS status;
@@ -30,11 +57,20 @@ XsNetMessageBufferSend (
 
     API_HANDLER_PARAMETERS_REFERENCE;       // Avoid warnings
 
+    //
+    // Translate parameters, check for errors.
+    //
+
 #line 79
     XsConvertTextParameter(
         nativeRecipient,
         (LPSTR)SmbGetUlong( &parameters->Recipient )
         );
+
+    //
+    // NetMessageBufferSend has an ASCII data buffer. Convert this to
+    // Unicode if necessary. BUGBUG - Make sure BufLen is semantically correct.
+    //
 
 #line 89
 #ifdef UNICODE
@@ -80,6 +116,10 @@ cleanup:
     NetpMemoryFree( nativeBuffer );
 #endif // def UNICODE
 #line 136
+
+    //
+    // Nothing to return.
+    //
 
 #line 141
     Header->Status = (WORD)status;

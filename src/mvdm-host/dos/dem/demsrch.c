@@ -634,8 +634,8 @@ VOID demFindNextFCB (VOID)
         FETCHDWORD(pDirEnt->pFFindEntry) != (DWORD)pFFindEntry ||
         getDL() == ATTR_VOLUME_ID )
       {
-        if (pFFindEntry && FETCHDWORD(pDirEnt->pFFindEntry) !=
-            (DWORD)pFFindEntry)
+        if (pFFindEntry &&
+            FETCHDWORD(pDirEnt->pFFindEntry) != (DWORD)pFFindEntry)
           {
             FreeFFindEntry(pFFindEntry);
             }

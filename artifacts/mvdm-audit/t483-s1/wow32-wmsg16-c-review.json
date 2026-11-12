@@ -1,0 +1,1096 @@
+{
+  "path": "src/mvdm-host/wow32/wmsg16.c",
+  "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+  "current_sha256": "fd125d80a62ad1307a9fa5f723c6bb4cf1b57cba35b1aaa80c67b62e81effda5",
+  "changes": [
+    {
+      "original_start": 18,
+      "original_count": 0,
+      "current_start": 18,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): call-owned rollback through original unthunk. */",
+        "#include \"wow_message_lifetime.h\""
+      ],
+      "decision": "retain",
+      "classification": "shared-unwind-declaration",
+      "change_plan": "Retain existing common message lifetime interface used by COPYDATA failure/finally; do not duplicate unthunk rollback locally.",
+      "evidence": "wow_message_unwind16 dispatches captured COPYDATA/text ownership to original unthunkers and restores LastError.",
+      "verification_required": "COPYDATA and parameter-map fixtures; full callback cleanup regression.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 122,
+      "original_count": 0,
+      "current_start": 88,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "",
+        "    /* DIVERGENCE(MVDM-HOST-DIV-344): distinguish failure from thread HWND0. */",
+        "    lpmpex->fThunkSucceeded = FALSE;"
+      ],
+      "decision": "retain",
+      "classification": "explicit-conversion-success",
+      "change_plan": "Retain success flag distinct from returned HWND; keep all callers checking it before native dispatch.",
+      "evidence": "ThunkMsg16 sets false before conversion and actual boolean result afterward; HWND0 remains valid for thread messages. wumsg/wudlg/wowhooks consume this flag.",
+      "verification_required": "Failed converter and successful HWND0 cases in message/hook fixtures; check direct constructors in wstruc.",
+      "missing_evidence": "No new runtime pass; constructor audit continues at later files."
+    },
+    {
+      "original_start": 156,
+      "original_count": 0,
+      "current_start": 126,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "",
+        "    lpmpex->fThunkSucceeded = f;"
+      ],
+      "decision": "retain",
+      "classification": "explicit-conversion-success",
+      "change_plan": "Retain success flag distinct from returned HWND; keep all callers checking it before native dispatch.",
+      "evidence": "ThunkMsg16 sets false before conversion and actual boolean result afterward; HWND0 remains valid for thread messages. wumsg/wudlg/wowhooks consume this flag.",
+      "verification_required": "Failed converter and successful HWND0 cases in message/hook fixtures; check direct constructors in wstruc.",
+      "missing_evidence": "No new runtime pass; constructor audit continues at later files."
+    },
+    {
+      "original_start": 218,
+      "original_count": 1,
+      "current_start": 191,
+      "current_count": 1,
+      "original": [
+        "            LONG lParamMap;"
+      ],
+      "current": [
+        "            LONG lParamMap, mapped;"
+      ],
+      "decision": "retain",
+      "classification": "captured-text-lease",
+      "change_plan": "Retain per-call native lease and ACTIVE/MAPPED flags, consume before release; on optional AddParamMap failure keep original unmapped lease path.",
+      "evidence": "Thunk records only successful map acquisition; unthunk deletes map only when owned, then releases captured native pointer according to original free decision. Null text does not acquire a map.",
+      "verification_required": "Parameter-map fixture optional-map failure, borrowed lease, nested unwind and changed returned argument.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 220,
+      "original_count": 0,
+      "current_start": 193,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-347): retain this call's acquisition. */",
+        "            lpmpex->MsgBuffer->text.flags = 0;"
+      ],
+      "decision": "retain",
+      "classification": "captured-text-lease",
+      "change_plan": "Retain per-call native lease and ACTIVE/MAPPED flags, consume before release; on optional AddParamMap failure keep original unmapped lease path.",
+      "evidence": "Thunk records only successful map acquisition; unthunk deletes map only when owned, then releases captured native pointer according to original free decision. Null text does not acquire a map.",
+      "verification_required": "Parameter-map fixture optional-map failure, borrowed lease, nested unwind and changed returned argument.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 221,
+      "original_count": 1,
+      "current_start": 197,
+      "current_count": 11,
+      "original": [
+        "            *plParamNew = (LONG)AddParamMap(lParamMap, lParam);"
+      ],
+      "current": [
+        "            *plParamNew = lParamMap;",
+        "            lpmpex->MsgBuffer->text.native = lParamMap;",
+        "            if (lParamMap) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;",
+        "            /* DIVERGENCE(MVDM-HOST-DIV-345): NULL needs no map; on optional",
+        "             * map failure retain the original unmapped lease/free path. */",
+        "            mapped = lParamMap ? (LONG)AddParamMap(lParamMap, lParam) : 0;",
+        "            if (mapped) {",
+        "                *plParamNew = mapped;",
+        "                lpmpex->MsgBuffer->text.native = mapped;",
+        "                lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;",
+        "            }"
+      ],
+      "decision": "retain",
+      "classification": "captured-text-lease",
+      "change_plan": "Retain per-call native lease and ACTIVE/MAPPED flags, consume before release; on optional AddParamMap failure keep original unmapped lease path.",
+      "evidence": "Thunk records only successful map acquisition; unthunk deletes map only when owned, then releases captured native pointer according to original free decision. Null text does not acquire a map.",
+      "verification_required": "Parameter-map fixture optional-map failure, borrowed lease, nested unwind and changed returned argument.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 321,
+      "original_count": 0,
+      "current_start": 311,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-346): preserve conversion failure. */",
+        "                if (!*plParamNew) { FREEVDMPTR(lpT); return FALSE; }"
+      ],
+      "decision": "retain",
+      "classification": "allocation-failure-propagation",
+      "change_plan": "Retain early FALSE and FREEVDMPTR on failed WinHelp buffer allocation; preserve original successful copy and return.",
+      "evidence": "Original path could finish conversion with NULL output after malloc failure. New branch reports failure through existing converter result, releasing the mapped input alias.",
+      "verification_required": "Message construction allocation-failure case and successful WinHelp conversion.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 720,
+      "original_count": 1,
+      "current_start": 713,
+      "current_count": 4,
+      "original": [
+        "        WI32DDEAddInitiator((HAND16) wParam);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-353): only retire a node this call published. */",
+        "        lpmpex->MsgBuffer->ddeinit.initiator = wParam;",
+        "        lpmpex->MsgBuffer->ddeinit.active =",
+        "            WI32DDEAddInitiator((HAND16) wParam) ? WOW_DDE_INITIATE_ACTIVE : 0;"
+      ],
+      "decision": "retain",
+      "classification": "dde-initiation-ownership",
+      "change_plan": "Retain acquired initiator token and consume active flag before delete; failed nested publication must not retire another invocation.",
+      "evidence": "WI32DDEAddInitiator result records publication success; unthunk uses captured initiator instead of mutable wParam.",
+      "verification_required": "DDE alias fixture nested initiation and failed add; matching reverse conversion audit.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 743,
+      "original_count": 0,
+      "current_start": 740,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                    if (lpmpex->ddePostConversion && *plParamNew)",
+        "                        lpmpex->ddePostPacked = TRUE; /* DIV-363 */"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 766,
+      "original_count": 0,
+      "current_start": 766,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        DDECONVERSION Conversion;",
+        "        PDDECONVERSION pConversion = lpmpex->ddePostConversion ?",
+        "            (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 772,
+      "original_count": 0,
+      "current_start": 776,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            DDEBeginConversion(pConversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 777,
+      "original_count": 1,
+      "current_start": 783,
+      "current_count": 1,
+      "original": [
+        "\t    h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo);"
+      ],
+      "current": [
+        "            h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, pConversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 779,
+      "original_count": 0,
+      "current_start": 785,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            if (!h32) return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 781,
+      "original_count": 1,
+      "current_start": 789,
+      "current_count": 6,
+      "original": [
+        "            DDEAddhandle(hwnd16, wParam, (HAND16)LOWORD(lParam), h32, &DdeInfo);"
+      ],
+      "current": [
+        "            if (!DDETrackhandle(pConversion, hwnd16, wParam,",
+        "                                (HAND16)LOWORD(lParam), h32, &DdeInfo)) {",
+        "                DDERollback32(pConversion, hwnd16, wParam);",
+        "                GlobalFree(h32);",
+        "                return FALSE;",
+        "            }"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 783,
+      "original_count": 0,
+      "current_start": 797,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            if (!*plParamNew) {",
+        "                DDERollback32(pConversion, hwnd16, wParam);",
+        "                return FALSE;",
+        "            }",
+        "            if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 804,
+      "original_count": 0,
+      "current_start": 824,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        DDECONVERSION Conversion;",
+        "        PDDECONVERSION pConversion = lpmpex->ddePostConversion ?",
+        "            (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 814,
+      "original_count": 0,
+      "current_start": 838,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            DDEBeginConversion(pConversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 833,
+      "original_count": 1,
+      "current_start": 859,
+      "current_count": 5,
+      "original": [
+        "            DDEAddhandle(hwnd16, wParam, (HAND16)LOWORD(lParam), h32, &DdeInfo);"
+      ],
+      "current": [
+        "            if (!DDETrackhandle(pConversion, hwnd16, wParam,",
+        "                                (HAND16)LOWORD(lParam), h32, &DdeInfo)) {",
+        "                GlobalFree(h32);",
+        "                return FALSE;",
+        "            }"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 835,
+      "original_count": 0,
+      "current_start": 866,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            if (!*plParamNew) {",
+        "                DDERollback32(pConversion, hwnd16, wParam);",
+        "                return FALSE;",
+        "            }",
+        "            if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 854,
+      "original_count": 0,
+      "current_start": 891,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "        DDECONVERSION Conversion;",
+        "        PDDECONVERSION pConversion = lpmpex->ddePostConversion ?",
+        "            (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 860,
+      "original_count": 0,
+      "current_start": 901,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            DDEBeginConversion(pConversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 870,
+      "original_count": 1,
+      "current_start": 913,
+      "current_count": 1,
+      "original": [
+        "                h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo);"
+      ],
+      "current": [
+        "                h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, pConversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 872,
+      "original_count": 0,
+      "current_start": 915,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                if (!h32) return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 874,
+      "original_count": 1,
+      "current_start": 919,
+      "current_count": 6,
+      "original": [
+        "                DDEAddhandle(hwnd16, wParam, (HAND16)LOWORD(lParam), h32, &DdeInfo);"
+      ],
+      "current": [
+        "                if (!DDETrackhandle(pConversion, hwnd16, wParam,",
+        "                                    (HAND16)LOWORD(lParam), h32, &DdeInfo)) {",
+        "                    DDERollback32(pConversion, hwnd16, wParam);",
+        "                    GlobalFree(h32);",
+        "                    return FALSE;",
+        "                }"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 878,
+      "original_count": 0,
+      "current_start": 929,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            if (!*plParamNew) {",
+        "                DDERollback32(pConversion, hwnd16, wParam);",
+        "                return FALSE;",
+        "            }",
+        "            if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 901,
+      "original_count": 2,
+      "current_start": 958,
+      "current_count": 5,
+      "original": [
+        "        HANDLE  h32;",
+        "        HAND16  h16;"
+      ],
+      "current": [
+        "        HANDLE  h32 = NULL;",
+        "        HAND16  h16 = 0;",
+        "        DDECONVERSION Conversion;",
+        "        PDDECONVERSION pConversion = lpmpex->ddePostConversion ?",
+        "            (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 914,
+      "original_count": 0,
+      "current_start": 975,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            DDEBeginConversion(pConversion);"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 915,
+      "original_count": 3,
+      "current_start": 978,
+      "current_count": 4,
+      "original": [
+        "",
+        "            GETMISCPTR(vp, lpMem16);",
+        "            h32 = GlobalAlloc(GMEM_DDESHARE, cb);"
+      ],
+      "current": [
+        "            if (vp) {",
+        "                GETMISCPTR(vp, lpMem16);",
+        "                h32 = GlobalAlloc(GMEM_DDESHARE, cb);",
+        "            }"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 949,
+      "original_count": 1,
+      "current_start": 1014,
+      "current_count": 5,
+      "original": [
+        "                        DDEAddhandle(hwnd16, wParam, h16, h32, &DdeInfo);"
+      ],
+      "current": [
+        "                        if (!DDETrackhandle(pConversion, hwnd16, wParam, h16, h32, &DdeInfo)) {",
+        "                            GlobalUnlockFree16(GlobalLock16(h16, NULL));",
+        "                            GlobalFree(h32);",
+        "                            h32 = NULL;",
+        "                        }"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 953,
+      "original_count": 0,
+      "current_start": 1023,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                        GlobalFree(h32);",
+        "                        h32 = NULL;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 960,
+      "original_count": 1,
+      "current_start": 1033,
+      "current_count": 5,
+      "original": [
+        "                    DDEAddhandle(hwnd16, wParam, (HAND16)HIWORD(lParam), h32, &DdeInfo);"
+      ],
+      "current": [
+        "                    if (!DDETrackhandle(pConversion, hwnd16, wParam,",
+        "                                        (HAND16)HIWORD(lParam), h32, &DdeInfo)) {",
+        "                        GlobalFree(h32);",
+        "                        h32 = NULL;",
+        "                    }"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 963,
+      "original_count": 1,
+      "current_start": 1041,
+      "current_count": 1,
+      "original": [
+        "            else {"
+      ],
+      "current": [
+        "            if (vp) {"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 966,
+      "original_count": 1,
+      "current_start": 1045,
+      "current_count": 0,
+      "original": [
+        "            GlobalUnlock16(HIWORD(lParam));"
+      ],
+      "current": [],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 975,
+      "original_count": 0,
+      "current_start": 1053,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        if (fWhoCalled == WOWDDE_POSTMESSAGE && !h32) return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "dde-post-conversion-ownership",
+      "change_plan": "Review this conversion/rollback edit with wdde.c and WU32PostMessage as one unit. Keep failed conversion distinct, track only newly acquired aliases, and transfer packed parameter ownership only after successful native post. Prove per-message cleanup and top-level handle ownership before restoring or simplifying code.",
+      "evidence": "Local DDECONVERSION may be replaced by caller-owned postConversion. W32CancelDDEPost clears packed flag, frees packed lParam then rolls back aliases; successful posting abandons rollback. Tracker publishes via DDEAddhandle before appending token; rollback32 deletes exact pair before callbacks. EXECUTE separately acquires optional guest duplicate and native copy.",
+      "verification_required": "ADVISE/DATA/POKE/EXECUTE allocation, PackDDElParam and post failures; nested shared aliases, reentry/handle reuse, normal ACK transfer. Existing DDE fixture covers rollback peers, duplicate alias and cancel idempotence, not all full call paths.",
+      "missing_evidence": "Fixed tracker capacity, publish/reentry interval and every throwing cleanup path remain unproved; preserve pending status."
+    },
+    {
+      "original_start": 988,
+      "original_count": 0,
+      "current_start": 1068,
+      "current_count": 6,
+      "original": [],
+      "current": [
+        "        DWORD data16, cbData, dwData;",
+        "",
+        "        /* DIVERGENCE(MVDM-HOST-DIV-344): this call owns only its acquisitions;",
+        "         * native-procedure forwarding can borrow an already received pair. */",
+        "        ZeroMemory(&lpmpex->MsgBuffer->copydata, sizeof(lpmpex->MsgBuffer->copydata));",
+        "        if (!hwnd16 || !lParam) return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 991,
+      "original_count": 1,
+      "current_start": 1078,
+      "current_count": 6,
+      "original": [
+        "        if (fWhoCalled == WOWDDE_POSTMESSAGE) {"
+      ],
+      "current": [
+        "        pTemp = CopyDataFindData32(hwnd16, wParam, lParam);",
+        "        if (pTemp) {",
+        "            lpCDS32 = (PCOPYDATASTRUCT)pTemp->Mem32;",
+        "        }",
+        "        else {",
+        "          __try {"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 993,
+      "original_count": 0,
+      "current_start": 1086,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "            if (!lpCDS16) goto CopyData16Failed;",
+        "            dwData = lpCDS16->dwData;",
+        "            cbData = lpCDS16->cbData;",
+        "            data16 = lpCDS16->lpData;",
+        "            FREEMISCPTR(lpCDS16);"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 994,
+      "original_count": 2,
+      "current_start": 1093,
+      "current_count": 4,
+      "original": [
+        "                lpCDS32->dwData = lpCDS16->dwData;",
+        "                if (lpCDS32->cbData = lpCDS16->cbData) {"
+      ],
+      "current": [
+        "                lpmpex->MsgBuffer->copydata.header = (DWORD)lpCDS32;",
+        "                lpmpex->MsgBuffer->copydata.flags = WOW_COPY_HEADER;",
+        "                lpCDS32->dwData = dwData;",
+        "                if (lpCDS32->cbData = cbData) {"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 997,
+      "original_count": 1,
+      "current_start": 1099,
+      "current_count": 6,
+      "original": [
+        "                        GETMISCPTR(lpCDS16->lpData, lpMem16);"
+      ],
+      "current": [
+        "                        lpmpex->MsgBuffer->copydata.data = (DWORD)lpMem32;",
+        "                        lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA;",
+        "                        if (!data16) goto CopyData16Failed;",
+        "                        GETMISCPTR(data16, lpMem16);",
+        "                      __try {",
+        "                        if (!lpMem16) goto CopyData16Failed;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1000,
+      "original_count": 1,
+      "current_start": 1108,
+      "current_count": 2,
+      "original": [
+        "                            CopyDataAddNode (hwnd16, wParam, (DWORD) lpMem16, (DWORD) lpMem32, COPYDATA_16);"
+      ],
+      "current": [
+        "                            if (!CopyDataAddNode (hwnd16, wParam, data16, (DWORD) lpMem32, COPYDATA_16)) goto CopyData16Failed;",
+        "                            lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA_NODE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1002,
+      "original_count": 0,
+      "current_start": 1112,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                      } __finally {"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1003,
+      "original_count": 0,
+      "current_start": 1115,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                      }"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1004,
+      "original_count": 0,
+      "current_start": 1118,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                    else goto CopyData16Failed;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1010,
+      "original_count": 8,
+      "current_start": 1126,
+      "current_count": 6,
+      "original": [
+        "            FREEMISCPTR(lpCDS16);",
+        "",
+        "            CopyDataAddNode (hwnd16, wParam, (DWORD) lParam, (DWORD) lpCDS32, COPYDATA_16);",
+        "        }",
+        "        else {",
+        "            pTemp = CopyDataFindData32 (hwnd16, wParam, lParam);",
+        "            lpCDS32 = (PCOPYDATASTRUCT) pTemp->Mem32;",
+        "            WOW32ASSERTMSGF(lpCDS32, (\"WOW::WM_COPYDATA:Can't locate lpCDS32\\n\"));"
+      ],
+      "current": [
+        "            else goto CopyData16Failed;",
+        "            if (!CopyDataAddNode (hwnd16, wParam, (DWORD) lParam, (DWORD) lpCDS32, COPYDATA_16 | COPYDATA_HEADER)) goto CopyData16Failed;",
+        "            lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_HEADER_NODE;",
+        "          } __finally {",
+        "            if (AbnormalTermination()) wow_message_unwind16(lpmpex);",
+        "          }"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1021,
+      "original_count": 0,
+      "current_start": 1136,
+      "current_count": 5,
+      "original": [],
+      "current": [
+        "        break;",
+        "CopyData16Failed:",
+        "        wow_message_unwind16(lpmpex);",
+        "        SetLastError(ERROR_NOT_ENOUGH_MEMORY);",
+        "        return FALSE;"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1170,
+      "original_count": 2,
+      "current_start": 1291,
+      "current_count": 7,
+      "original": [
+        "            BOOL fFreePtr;",
+        "            DeleteParamMap(lpmpex->lParam, PARAM_32, &fFreePtr);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-347): consume only our captured key. */",
+        "            DWORD owned = lpmpex->MsgBuffer->text.flags;",
+        "            BOOL fFreePtr = TRUE;",
+        "            lpmpex->MsgBuffer->text.flags = 0;",
+        "            if (!(owned & WOW_TEXT_ACTIVE)) break;",
+        "            if (owned & WOW_TEXT_MAPPED)",
+        "                DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, &fFreePtr);"
+      ],
+      "decision": "retain",
+      "classification": "captured-text-lease",
+      "change_plan": "Retain per-call native lease and ACTIVE/MAPPED flags, consume before release; on optional AddParamMap failure keep original unmapped lease path.",
+      "evidence": "Thunk records only successful map acquisition; unthunk deletes map only when owned, then releases captured native pointer according to original free decision. Null text does not acquire a map.",
+      "verification_required": "Parameter-map fixture optional-map failure, borrowed lease, nested unwind and changed returned argument.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 1173,
+      "original_count": 1,
+      "current_start": 1300,
+      "current_count": 1,
+      "original": [
+        "                FREEPSZPTR((LPSZ)lpmpex->lParam);"
+      ],
+      "current": [
+        "                FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);"
+      ],
+      "decision": "retain",
+      "classification": "captured-text-lease",
+      "change_plan": "Retain per-call native lease and ACTIVE/MAPPED flags, consume before release; on optional AddParamMap failure keep original unmapped lease path.",
+      "evidence": "Thunk records only successful map acquisition; unthunk deletes map only when owned, then releases captured native pointer according to original free decision. Null text does not acquire a map.",
+      "verification_required": "Parameter-map fixture optional-map failure, borrowed lease, nested unwind and changed returned argument.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 1301,
+      "original_count": 1,
+      "current_start": 1428,
+      "current_count": 6,
+      "original": [
+        "        WI32DDEDeleteInitiator((HAND16) lpmpex->Parm16.WndProc.wParam);"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-353): an inner failed add has no token. */",
+        "        if (lpmpex->MsgBuffer->ddeinit.active & WOW_DDE_INITIATE_ACTIVE) {",
+        "            HAND16 initiator = (HAND16)lpmpex->MsgBuffer->ddeinit.initiator;",
+        "            lpmpex->MsgBuffer->ddeinit.active = 0;",
+        "            WI32DDEDeleteInitiator(initiator);",
+        "        }"
+      ],
+      "decision": "retain",
+      "classification": "dde-initiation-ownership",
+      "change_plan": "Retain acquired initiator token and consume active flag before delete; failed nested publication must not retire another invocation.",
+      "evidence": "WI32DDEAddInitiator result records publication success; unthunk uses captured initiator instead of mutable wParam.",
+      "verification_required": "DDE alias fixture nested initiation and failed add; matching reverse conversion audit.",
+      "missing_evidence": "No new runtime pass."
+    },
+    {
+      "original_start": 1313,
+      "original_count": 1,
+      "current_start": 1446,
+      "current_count": 1,
+      "original": [
+        "        if (fWhoCalled == WOWDDE_POSTMESSAGE) {"
+      ],
+      "current": [
+        "        {"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    },
+    {
+      "original_start": 1316,
+      "original_count": 14,
+      "current_start": 1449,
+      "current_count": 10,
+      "original": [
+        "            LONG lParamNew = lpmpex->lParam;",
+        "",
+        "            if (((PCOPYDATASTRUCT)lParamNew)->lpData) {",
+        "                free_w (((PCOPYDATASTRUCT)lParamNew)->lpData);",
+        "                CopyDataDeleteNode (hwnd16, wParam, (DWORD) ((PCOPYDATASTRUCT)lParamNew)->lpData);",
+        "            }",
+        "",
+        "            if (lParamNew) {",
+        "                free_w ((PVOID)lParamNew);",
+        "                CopyDataDeleteNode (hwnd16, wParam, lParamNew);",
+        "            }",
+        "            else {",
+        "                LOGDEBUG (LOG_ALWAYS, (\"WOW::WM_COPYDATA16:Unthunking - lpCDS32 is NULL\\n\"));",
+        "            }"
+      ],
+      "current": [
+        "            /* DIV-344: captured keys survive failed posting, reply and unwind;",
+        "             * an active borrowed pair has no acquisition bits to release. */",
+        "            DWORD owned = lpmpex->MsgBuffer->copydata.flags;",
+        "            DWORD header = lpmpex->MsgBuffer->copydata.header;",
+        "            DWORD data = lpmpex->MsgBuffer->copydata.data;",
+        "            lpmpex->MsgBuffer->copydata.flags = 0;",
+        "            if (owned & WOW_COPY_DATA_NODE) CopyDataDeleteNode(hwnd16, wParam, data);",
+        "            if (owned & WOW_COPY_HEADER_NODE) CopyDataDeleteNode(hwnd16, wParam, header);",
+        "            if (owned & WOW_COPY_DATA) free_w((PVOID)data);",
+        "            if (owned & WOW_COPY_HEADER) free_w((PVOID)header);"
+      ],
+      "decision": "pending",
+      "classification": "copydata-reverse-ownership",
+      "change_plan": "Keep captured guest header scalars and original native allocation keys; verify borrowed pair and each partially acquired header/data/node through original unthunk. Review all-failures-as-OOM and exception during sequential cleanup before deciding corrections.",
+      "evidence": "Reverse conversion captures guest header before native construction, records ownership bits and checks node publication. Unthunk clears flags before deleting nodes/freeing data/header; active borrowed pair has no bits. Shared unwind calls this unthunker rather than duplicating a resource map.",
+      "verification_required": "COPYDATA fixture allocation/copy/node failure, borrowed pair, mutated header and repeat unwind; add evidence for release-time exceptions/reentrant replacement and invalid-pointer error classification.",
+      "missing_evidence": "Existing controlled-boundary fixture does not prove all native/guest callback exceptions or release ordering; no new run."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 70,
+      "original_count": 41,
+      "current_start": 75,
+      "current_count": 1,
+      "original": [
+        "",
+        "//",
+        "// This function returns a pointer to a static buffer containing a generated",
+        "// string.  If the function is called twice and generates a string in both",
+        "// cases, the second call will overwrite the buffer of the first call.  If",
+        "// this becomes a problem for us it would be easy to use an array of N",
+        "// static buffers which are cycled through.",
+        "//",
+        "",
+        "PSZ GetWMMsgName(UINT uMsg)",
+        "{",
+        "    static char szStaticBuf[128];",
+        "    PSZ pszMsgName;",
+        "",
+        "    uMsg = LOWORD(uMsg);",
+        "",
+        "    pszMsgName = (uMsg < (unsigned)iMsgMax) ? aw32Msg[uMsg].lpszW32 : NULL;",
+        "",
+        "    if (!pszMsgName) {",
+        "",
+        "        if (uMsg < WM_USER) {",
+        "            sprintf(szStaticBuf, \"(Unknown 0x%x)\", uMsg);",
+        "        } else if (uMsg < 0xc000) {",
+        "            sprintf(szStaticBuf, \"(WM_USER+0x%x)\", uMsg - WM_USER);",
+        "        } else {",
+        "            char szAtomName[100];",
+        "",
+        "            if ( ! GlobalGetAtomName((ATOM)uMsg, szAtomName, sizeof szAtomName) &&",
+        "                 !       GetAtomName((ATOM)uMsg, szAtomName, sizeof szAtomName) ) {",
+        "                szAtomName[0] = 0;",
+        "            }",
+        "",
+        "            sprintf(szStaticBuf, \"(Atom 0x%x '%s')\", uMsg, szAtomName);",
+        "        }",
+        "",
+        "        pszMsgName = szStaticBuf;",
+        "    }",
+        "",
+        "    return pszMsgName;",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 247,
+      "original_count": 1,
+      "current_start": 235,
+      "current_count": 1,
+      "original": [
+        "        GETVDMPTR(lParam, (wParam == 0x7fff) ? 0 : wParam, (LPSZ)*plParamNew);"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 359,
+      "original_count": 4,
+      "current_start": 353,
+      "current_count": 1,
+      "original": [
+        "        if ((wParam == SB_THUMBPOSITION) || (wParam == SB_THUMBTRACK)) {",
+        "            HIW(lpmpex->uParam) = LOWORD(lParam);",
+        "        }",
+        "        else if (wParam > SB_ENDSCROLL) {"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 111,
+      "current": 76,
+      "logical": 71
+    },
+    {
+      "original": 363,
+      "current": 354,
+      "logical": 360
+    }
+  ],
+  "evidence": "Complete converter diff classified by ownership and caller outcome; DDE/COPYDATA failure equivalence remains explicit.",
+  "limits": [
+    "Audit only, no functional repair or new build/runtime pass.",
+    "Excluded-body comparison is not universal preprocessing proof."
+  ]
+}

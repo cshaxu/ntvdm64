@@ -1,0 +1,345 @@
+{
+  "path": "src/mvdm-host/dos/command/cmdexec.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdexec.c",
+  "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+  "current_sha256": "a6eb69955f73173320abcf87718ca44037f82f770aa8bc1f10f714a6a3e500cc",
+  "review_complete": true,
+  "meaning": "All file differences have dispositions; not all differences justified or repaired.",
+  "reviewers": "One agent: initial analysis and subsequent counter-review.",
+  "lexical_blocks": 35,
+  "blocks": [
+    {
+      "tag": "insert",
+      "original_start": 16,
+      "original_count": 0,
+      "current_start": 16,
+      "current_count": 2,
+      "classification": "headers",
+      "disposition": "retain-adapters-remove-diagnostic"
+    },
+    {
+      "tag": "insert",
+      "original_start": 18,
+      "original_count": 0,
+      "current_start": 20,
+      "current_count": 33,
+      "classification": "headers",
+      "disposition": "retain-adapters-remove-diagnostic"
+    },
+    {
+      "tag": "insert",
+      "original_start": 146,
+      "original_count": 0,
+      "current_start": 181,
+      "current_count": 3,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 187,
+      "original_count": 0,
+      "current_start": 225,
+      "current_count": 5,
+      "classification": "diagnostic",
+      "disposition": "recommend-remove"
+    },
+    {
+      "tag": "insert",
+      "original_start": 203,
+      "original_count": 0,
+      "current_start": 246,
+      "current_count": 4,
+      "classification": "diagnostic",
+      "disposition": "recommend-remove"
+    },
+    {
+      "tag": "insert",
+      "original_start": 249,
+      "original_count": 0,
+      "current_start": 296,
+      "current_count": 9,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 251,
+      "original_count": 3,
+      "current_start": 307,
+      "current_count": 9,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 255,
+      "original_count": 2,
+      "current_start": 317,
+      "current_count": 2,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 286,
+      "original_count": 5,
+      "current_start": 348,
+      "current_count": 10,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 293,
+      "original_count": 3,
+      "current_start": 360,
+      "current_count": 9,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 297,
+      "original_count": 3,
+      "current_start": 370,
+      "current_count": 9,
+      "classification": "scs",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 312,
+      "original_count": 1,
+      "current_start": 391,
+      "current_count": 1,
+      "classification": "handles",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 318,
+      "original_count": 4,
+      "current_start": 397,
+      "current_count": 3,
+      "classification": "text",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "insert",
+      "original_start": 323,
+      "original_count": 0,
+      "current_start": 401,
+      "current_count": 2,
+      "classification": "handles",
+      "disposition": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 324,
+      "original_count": 0,
+      "current_start": 404,
+      "current_count": 3,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "tag": "replace",
+      "original_start": 342,
+      "original_count": 9,
+      "current_start": 425,
+      "current_count": 16,
+      "classification": "handles",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 361,
+      "original_count": 10,
+      "current_start": 451,
+      "current_count": 10,
+      "classification": "text",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "replace",
+      "original_start": 374,
+      "original_count": 18,
+      "current_start": 464,
+      "current_count": 12,
+      "classification": "text",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "insert",
+      "original_start": 397,
+      "original_count": 0,
+      "current_start": 481,
+      "current_count": 8,
+      "classification": "finish",
+      "disposition": "retain"
+    },
+    {
+      "tag": "insert",
+      "original_start": 410,
+      "original_count": 0,
+      "current_start": 502,
+      "current_count": 2,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "tag": "insert",
+      "original_start": 414,
+      "original_count": 0,
+      "current_start": 508,
+      "current_count": 1,
+      "classification": "text",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "replace",
+      "original_start": 434,
+      "original_count": 3,
+      "current_start": 529,
+      "current_count": 13,
+      "classification": "activation",
+      "disposition": "retain-with-boundary"
+    },
+    {
+      "tag": "insert",
+      "original_start": 440,
+      "original_count": 0,
+      "current_start": 545,
+      "current_count": 2,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "tag": "insert",
+      "original_start": 445,
+      "original_count": 0,
+      "current_start": 552,
+      "current_count": 2,
+      "classification": "line-scaffolding-only"
+    },
+    {
+      "tag": "replace",
+      "original_start": 447,
+      "original_count": 1,
+      "current_start": 556,
+      "current_count": 1,
+      "classification": "activation",
+      "disposition": "retain-with-boundary"
+    },
+    {
+      "tag": "insert",
+      "original_start": 456,
+      "original_count": 0,
+      "current_start": 565,
+      "current_count": 2,
+      "classification": "finish",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 508,
+      "original_count": 3,
+      "current_start": 619,
+      "current_count": 3,
+      "classification": "comspec",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "replace",
+      "original_start": 516,
+      "original_count": 1,
+      "current_start": 627,
+      "current_count": 15,
+      "classification": "hostcapture",
+      "disposition": "requires-correction"
+    },
+    {
+      "tag": "replace",
+      "original_start": 541,
+      "original_count": 1,
+      "current_start": 666,
+      "current_count": 1,
+      "classification": "guestcapture",
+      "disposition": "requires-correction"
+    },
+    {
+      "tag": "replace",
+      "original_start": 547,
+      "original_count": 10,
+      "current_start": 672,
+      "current_count": 13,
+      "classification": "guestcapture",
+      "disposition": "requires-correction"
+    },
+    {
+      "tag": "replace",
+      "original_start": 568,
+      "original_count": 3,
+      "current_start": 696,
+      "current_count": 6,
+      "classification": "comspec",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "replace",
+      "original_start": 572,
+      "original_count": 1,
+      "current_start": 703,
+      "current_count": 1,
+      "classification": "comspec",
+      "disposition": "retain-shared-preparation"
+    },
+    {
+      "tag": "replace",
+      "original_start": 576,
+      "original_count": 1,
+      "current_start": 707,
+      "current_count": 5,
+      "classification": "service",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 578,
+      "original_count": 1,
+      "current_start": 713,
+      "current_count": 1,
+      "classification": "service",
+      "disposition": "retain"
+    },
+    {
+      "tag": "replace",
+      "original_start": 581,
+      "original_count": 3,
+      "current_start": 716,
+      "current_count": 7,
+      "classification": "replace",
+      "disposition": "requires-correction"
+    }
+  ],
+  "dependencies": [
+    "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+    "src/ntvdm-exe/command/source/mvdm_command_launch.c",
+    "src/compat/include/thread_start_compat.h",
+    "src/compat/include/command_process_compat.h",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c"
+  ],
+  "counterexample": {
+    "comspec_characters": 20,
+    "suffix_characters": 4,
+    "guest_tail_characters": 110,
+    "composed_characters": 134,
+    "original_buffer_bytes": 260,
+    "capture_buffer_bytes": 128,
+    "kind": "Source-derived boundary example, not executed integration test"
+  },
+  "limitations": [
+    "No runtime equivalence claimed.",
+    "Singleton capture identity and out-of-order DIRECT completion remain separate known limitations.",
+    "No substantive product repair applied."
+  ]
+}

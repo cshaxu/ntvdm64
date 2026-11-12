@@ -1,0 +1,384 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+  "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+  "current_sha256": "632ca3bb954bf38a7537051f46590e73dd8479a17dfb3b8cf6be887d3f944add",
+  "review_complete": true,
+  "register_entries": 3,
+  "changes": [
+    {
+      "original_start": 413,
+      "original_count": 0,
+      "current_start": 410,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-477): CPU40 reuses the original monitor IOS entries. */"
+      ]
+    },
+    {
+      "original_start": 414,
+      "original_count": 0,
+      "current_start": 413,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#error Excluded unsupported monitor IOS carrier",
+        "#else",
+        "#if defined(NTVDM) && defined(CCPU)"
+      ]
+    },
+    {
+      "original_start": 443,
+      "original_count": 1,
+      "current_start": 446,
+      "current_count": 2,
+      "original": [
+        "#endif\t/* NTVDM & MONITOR */"
+      ],
+      "current": [
+        "#endif",
+        "#endif /* NTVDM & MONITOR */"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 19,
+      "original_count": 6,
+      "current_start": 20,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_IOS.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 69,
+      "original_count": 2,
+      "current_start": 67,
+      "current_count": 1,
+      "original": [
+        "GLOBAL char\t*Ios_in_adapter_table = NULL;",
+        "GLOBAL char\t*Ios_out_adapter_table = NULL;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 76,
+      "original_count": 2,
+      "current_start": 76,
+      "current_count": 1,
+      "original": [
+        "GLOBAL IU32\t*ios_empty_in = (IU32 *)0;",
+        "GLOBAL IU32\t*ios_empty_out = (IU32 *)0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 163,
+      "original_count": 6,
+      "current_start": 164,
+      "current_count": 1,
+      "original": [
+        "\tif (BIT_NOT_SET(ios_empty_in, (IU16)io_address))",
+        "\t{",
+        "\t\t/* First time for this port */",
+        "\t\talways_trace1 (\"INB attempted on empty port 0x%x\", io_address);",
+        "\t\tSET_THE_BIT(ios_empty_in, (IU16)io_address);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 187,
+      "original_count": 7,
+      "current_start": 185,
+      "current_count": 1,
+      "original": [
+        "",
+        "\tif (BIT_NOT_SET(ios_empty_out, (IU16)io_address))",
+        "\t{",
+        "\t\t/* First time for this port */",
+        "\t\talways_trace1 (\"OUTB attempted on empty port 0x%x\", io_address);",
+        "\t\tSET_THE_BIT(ios_empty_out, (IU16)io_address);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 221,
+      "original_count": 2,
+      "current_start": 216,
+      "current_count": 1,
+      "original": [
+        "\t*((half_word *) value + 0) = temp.byte.high;",
+        "\t*((half_word *) value + 1) = temp.byte.low;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 269,
+      "original_count": 2,
+      "current_start": 265,
+      "current_count": 1,
+      "original": [
+        "\t*((word *) value + 0) = high;",
+        "\t*((word *) value + 1) = low;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 309,
+      "original_count": 2,
+      "current_start": 306,
+      "current_count": 1,
+      "original": [
+        "#undef LOCAL",
+        "#define LOCAL"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 474,
+      "original_count": 2,
+      "current_start": 480,
+      "current_count": 1,
+      "original": [
+        "\tif (io_address >= MDA_PORT_START && io_address <= CGA_PORT_END)",
+        "\t\tdump_inb(io_address);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 481,
+      "original_count": 1,
+      "current_start": 488,
+      "current_count": 1,
+      "original": [
+        "\tvalue32 = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 515,
+      "original_count": 2,
+      "current_start": 524,
+      "current_count": 1,
+      "original": [
+        "\tif (io_address >= MDA_PORT_START && io_address <= CGA_PORT_END)",
+        "\t\tdump_outb(io_address, value);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 552,
+      "original_count": 2,
+      "current_start": 562,
+      "current_count": 1,
+      "original": [
+        "\tif (io_address >= MDA_PORT_START && io_address <= CGA_PORT_END)",
+        "\t\tdump_inw(io_address);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 559,
+      "original_count": 1,
+      "current_start": 570,
+      "current_count": 1,
+      "original": [
+        "\tvalue32 = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 592,
+      "original_count": 2,
+      "current_start": 605,
+      "current_count": 1,
+      "original": [
+        "\tif (io_address >= EGA_AC_INDEX_DATA && io_address <= EGA_IPSTAT1_REG)",
+        "\t\tdump_outw(io_address, value);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 632,
+      "original_count": 1,
+      "current_start": 646,
+      "current_count": 1,
+      "original": [
+        "\tvalue32 = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 695,
+      "original_count": 3,
+      "current_start": 711,
+      "current_count": 1,
+      "original": [
+        "io_define_inb(adapter, func)",
+        "half_word       adapter;",
+        "void            (*func) ();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 880,
+      "original_count": 10,
+      "current_start": 896,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void\tio_connect_port IFN3(io_addr, io_address, half_word, adapter,",
+        "\thalf_word, mode)",
+        "{",
+        "\tif (mode & IO_READ){",
+        "\t\tIos_in_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = adapter;",
+        "\t}",
+        "\tif (mode & IO_WRITE){",
+        "\t\tIos_out_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = adapter;",
+        "\t}",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 914,
+      "original_count": 6,
+      "current_start": 923,
+      "current_count": 1,
+      "original": [
+        "GLOBAL void\tio_disconnect_port IFN2(io_addr, io_address, half_word, adapter)",
+        "{",
+        "\tUNUSED(adapter);",
+        "\tIos_in_adapter_table[io_address] = EMPTY_ADAPTOR;",
+        "\tIos_out_adapter_table[io_address] = EMPTY_ADAPTOR;",
+        "}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 950,
+      "original_count": 6,
+      "current_start": 956,
+      "current_count": 1,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * function will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration"
+      ]
+    },
+    {
+      "original_start": 978,
+      "original_count": 4,
+      "current_start": 981,
+      "current_count": 1,
+      "original": [
+        "\tif (Ios_in_adapter_table == NULL) {\t\t\t\t/* First time around -- allocate */",
+        "\t\tIos_in_adapter_table = host_malloc(PC_IO_MEM_SIZE);",
+        "\t\tIos_out_adapter_table = host_malloc(PC_IO_MEM_SIZE);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 985,
+      "original_count": 11,
+      "current_start": 987,
+      "current_count": 1,
+      "original": [
+        "\tif (host_getenv(\"EMPTY_IO_VERBOSE\") != NULL)",
+        "\t{",
+        "\t\t/* User does want empty I/O messages,",
+        "\t\t * so we must allocate bitmaps with one bit for every",
+        "\t\t * possible port number.",
+        "\t\t */",
+        "\t\tios_empty_in = (IU32 *)host_malloc((64*1024)/8);",
+        "\t\tios_empty_out = (IU32 *)host_malloc((64*1024)/8);",
+        "\t\tmemset((char *)ios_empty_in, 0, (64*1024)/8);",
+        "\t\tmemset((char *)ios_empty_out, 0, (64*1024)/8);",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1009,
+      "original_count": 1,
+      "current_start": 1003,
+      "current_count": 1,
+      "original": [
+        "    printf(\"GetExtIoInAdapter(%x) called\\n\",ioaddr);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1017,
+      "original_count": 1,
+      "current_start": 1013,
+      "current_count": 1,
+      "original": [
+        "    printf(\"GetExtIoOutAdapter(%x) called\\n\",ioaddr);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "23 excluded bodies; original four string-I/O entrypoints admitted under NTVDM/CCPU instead of MONITOR through three structural diff blocks.",
+  "counter_review": "Function bodies unchanged. Actual direct consumer is nt_inthk.c monitor_string_io, not evidence all CCPU execution needs these wrappers. Original OUTS uses input-adapter mapping; this audit does not silently fix inherited internal routing.",
+  "limits": "Classification complete; pending-evidence is not repaired or proven necessary. No new build/runtime/context certification."
+}

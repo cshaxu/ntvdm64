@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wumsg.h",
+  "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+  "current_sha256": "950f8b060f56a1d42131d5b4cb35ae16d1cea043f50cda83c890bd015f88b52f",
+  "changes": [
+    {
+      "original_start": 16,
+      "original_count": 1,
+      "current_start": 16,
+      "current_count": 2,
+      "original": [
+        "extern BOOL fWhoCalled;"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): matches the private native-thread mode. */",
+        "extern __declspec(thread) BOOL fWhoCalled;"
+      ],
+      "decision": "retain",
+      "necessity": "fWhoCalled is read by original DDE converters as synchronous operation mode, not task identity. TLS matches native worker thread ownership; nested calls still require save/restore.",
+      "change_plan": "Retain matching TLS declaration/definition and scoped restoration; do not use it as asynchronous provenance."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "evidence": "Original comparison; actual shared lifetime and DDE rollback bodies; fixture extraction and assertions inspected.",
+  "limits": "No new runtime or compile proof; pending rows are not confirmed repairs."
+}

@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/dpmi32/debug.c",
+  "original_sha256": "88a0fb538d88f8bee711bd2aa5390602394abe1fc1a577090f15183a3bfd1fb1",
+  "current_sha256": "ef8e04f3ea91d4c9ca87fbb034d745a28739ed1656a7dfebc1290b6e195e6b5d",
+  "review_complete": true,
+  "nonexcluded_differences": 0,
+  "dbg_groups": 1,
+  "initial_review": "Only original DBG trace ring implementation excluded; outer guard retained.",
+  "counter_review": "Original ring, trace-enable flag and register capture all belonged to DBG. No selected release algorithm or DPMI state removed.",
+  "verification": "Exact source projection outside DBG/#line; not a new compiler or runtime result."
+}

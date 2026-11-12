@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+  "original_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2",
+  "current_sha256": "fc038d51d2945051b1ec35f92cb60a355c2e21bd145c9493b7b6f511d0b704b4",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 31,
+      "original_end": 31
+    },
+    {
+      "original_start": 35,
+      "original_end": 47
+    },
+    {
+      "original_start": 57,
+      "original_end": 71
+    }
+  ],
+  "initial_review": "Three excluded bodies: non-NTVDM interrupt action declaration, non-CPU40 host interfaces and non-NTVDM action structure. All retained nonblank source exact.",
+  "counter_review": "Original CPU40 conversion aliases, callback type and queue APIs unchanged. Blank spacer lines remain in excluded CPU alternative, with no substantive code or nested conditions. No scheduling or cancellation semantics changed.",
+  "limits": "Source comparison only; blank lines omitted to avoid ambiguous alignment within removed body. No universal compiler-context, line or runtime certification."
+}

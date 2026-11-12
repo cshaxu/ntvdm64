@@ -1,0 +1,121 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+  "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+  "current_sha256": "a6e615f151a01a27bdbb6af933fc9f581148ac861c7f37af913b0e3b3c5f0232",
+  "review_complete": true,
+  "register_entries": 4,
+  "changes": [
+    {
+      "file_sequence": "489",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "current_start": "44",
+      "current_count": "1",
+      "original_start": "45",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-serial-diagnostic",
+      "initial_review": "Added header and three INT14 scalar reports only support Setup tracing.",
+      "counter_review": "Shared reporter appends bounded logs and restores last-error; actual UART reads, AL/AH result, timeout and return logic remain original. With four additions removed, remaining substantive source matches original outside exclusions.",
+      "disposition": "delete",
+      "evidence": "rs232_io.c:44,73-75,226,298; mvdm_softpc_termination.c:101-135",
+      "limits": "No real serial endpoint or runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "related_callers": "rs232_io INT14 handler; shared Setup hardware reporter; UART port providers.",
+      "verification_required": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "489",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "current_start": "73",
+      "current_count": "3",
+      "original_start": "69",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-serial-diagnostic",
+      "initial_review": "Added header and three INT14 scalar reports only support Setup tracing.",
+      "counter_review": "Shared reporter appends bounded logs and restores last-error; actual UART reads, AL/AH result, timeout and return logic remain original. With four additions removed, remaining substantive source matches original outside exclusions.",
+      "disposition": "delete",
+      "evidence": "rs232_io.c:44,73-75,226,298; mvdm_softpc_termination.c:101-135",
+      "limits": "No real serial endpoint or runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "related_callers": "rs232_io INT14 handler; shared Setup hardware reporter; UART port providers.",
+      "verification_required": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "489",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "current_start": "226",
+      "current_count": "1",
+      "original_start": "223",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-serial-diagnostic",
+      "initial_review": "Added header and three INT14 scalar reports only support Setup tracing.",
+      "counter_review": "Shared reporter appends bounded logs and restores last-error; actual UART reads, AL/AH result, timeout and return logic remain original. With four additions removed, remaining substantive source matches original outside exclusions.",
+      "disposition": "delete",
+      "evidence": "rs232_io.c:44,73-75,226,298; mvdm_softpc_termination.c:101-135",
+      "limits": "No real serial endpoint or runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "related_callers": "rs232_io INT14 handler; shared Setup hardware reporter; UART port providers.",
+      "verification_required": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "489",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "current_start": "298",
+      "current_count": "1",
+      "original_start": "293",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-325",
+      "classification": "setup-serial-diagnostic",
+      "initial_review": "Added header and three INT14 scalar reports only support Setup tracing.",
+      "counter_review": "Shared reporter appends bounded logs and restores last-error; actual UART reads, AL/AH result, timeout and return logic remain original. With four additions removed, remaining substantive source matches original outside exclusions.",
+      "disposition": "delete",
+      "evidence": "rs232_io.c:44,73-75,226,298; mvdm_softpc_termination.c:101-135",
+      "limits": "No real serial endpoint or runtime acceptance claimed.",
+      "decision": "delete",
+      "change_plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "related_callers": "rs232_io INT14 handler; shared Setup hardware reporter; UART port providers.",
+      "verification_required": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "missing_evidence": "",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 15,
+      "original_count": 1,
+      "current_error_line": 16
+    },
+    {
+      "original_start": 19,
+      "original_count": 6,
+      "current_error_line": 22
+    },
+    {
+      "original_start": 50,
+      "original_count": 1,
+      "current_error_line": 52
+    },
+    {
+      "original_start": 81,
+      "original_count": 9,
+      "current_error_line": 91
+    }
+  ],
+  "counter_review": "Exact boundary-aware remaining-source comparison after removing four diagnosed additions.",
+  "limits": "No functional modification, runtime pass or blanket line/context certification."
+}

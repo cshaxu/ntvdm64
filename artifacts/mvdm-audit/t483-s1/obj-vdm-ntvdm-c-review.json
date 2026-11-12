@@ -1,0 +1,129 @@
+{
+  "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+  "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+  "current_sha256": "ff11bc91ba70eb795f68c0e501588b9860f9677683d9c7a53e3915ff00292015",
+  "review_complete": true,
+  "register_entries": 6,
+  "changes": [
+    {
+      "original_start": 13,
+      "original_count": 0,
+      "current_start": 13,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "#include \"mvdm_standalone_worker.h\"",
+        "#include \"ntvdm-exe/softpc/include/mvdm_shadow_registry.h\"",
+        "#include <setjmp.h>"
+      ]
+    },
+    {
+      "original_start": 36,
+      "original_count": 0,
+      "current_start": 43,
+      "current_count": 11,
+      "original": [],
+      "current": [
+        "   DWORD bootstrap;",
+        "",
+        "    /* NT4's process creation had already supplied this worker-local state.",
+        "     * Keep the standalone replacement explicit at the original C entry rather",
+        "     * than installing a second CRT/application entry. */",
+        "    bootstrap=mvdm_standalone_worker_begin();",
+        "    if (bootstrap!=ERROR_SUCCESS) return (int)bootstrap;",
+        "    if (setjmp(*mvdm_standalone_worker_termination_escape()) != 0) {",
+        "        ret=(int)mvdm_standalone_worker_completion_code();",
+        "        goto finish;",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 63,
+      "original_count": 1,
+      "current_start": 82,
+      "current_count": 2,
+      "original": [
+        "    return ret;"
+      ],
+      "current": [
+        "finish:",
+        "    return mvdm_standalone_worker_finish(ret);"
+      ]
+    },
+    {
+      "original_start": 76,
+      "original_count": 1,
+      "current_start": 97,
+      "current_count": 5,
+      "original": [
+        "VOID"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-144): the selected public NTDLL declaration",
+        " * supplies `DbgBreakPoint` as NTAPI.  Keep this original local override and",
+        " * all its debugger/no-debugger branches, but spell the same public calling",
+        " * convention so the x86 declaration and definition agree. */",
+        "VOID NTAPI"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 27,
+      "original_count": 1,
+      "current_start": 33,
+      "current_count": 1,
+      "original": [
+        "BOOLEAN verboseGetenv;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 116,
+      "original_count": 1,
+      "current_start": 144,
+      "current_count": 1,
+      "original": [
+        "           RaiseException(STATUS_ACCESS_VIOLATION, 0L, 0L, NULL);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 318,
+      "original_count": 5,
+      "current_start": 349,
+      "current_count": 1,
+      "original": [
+        "    {",
+        "    char *pEnvStr;",
+        "    pEnvStr = getenv(\"VERBOSE_GETENV\");",
+        "    verboseGetenv = pEnvStr && !_stricmp(pEnvStr, \"TRUE\");",
+        "    }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 348,
+      "original_count": 3,
+      "current_start": 378,
+      "current_count": 1,
+      "original": [
+        "   if (verboseGetenv) {",
+        "       DbgPrint(\"getenv %s:<%s>\\n\", Name, Value);",
+        "       }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Six decisions: four retain; one redundant include simplify; bootstrap escape ordering pending.",
+  "counter_review": "Registry header is required macro binding; worker owns setup and NTSRV-authorized cleanup. No runtime or pre-setjmp safety proof inferred.",
+  "limits": "No source mutation or runtime test; pending evidence is not a confirmed bug."
+}

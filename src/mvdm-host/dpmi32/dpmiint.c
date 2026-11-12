@@ -72,6 +72,7 @@ Routine Description:
 --*/
 
 {
+
     PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
     USHORT IntNumber;
     PCHAR StackPointer;
@@ -119,6 +120,7 @@ Routine Description:
 --*/
 
 {
+
     PVDM_FAULTHANDLER Handlers = DpmiFaultHandlers;
     USHORT IntNumber;
     PCHAR StackPointer;

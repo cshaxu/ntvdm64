@@ -1,0 +1,51 @@
+[
+  {
+    "path": "src/mvdm-host/inc/dbginfo.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dbginfo.h",
+    "before_sha256": "eb63d7148716751592d41942924876b0a8d797a934785ab21b3202bfc436cf1b",
+    "after_sha256": "eb63d7148716751592d41942924876b0a8d797a934785ab21b3202bfc436cf1b",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/dbgsvc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dbgsvc.h",
+    "before_sha256": "4bc3b1d40ea167e6a15a18a746bfcd79a4023248c0621f6c8e27b2c9ad684a43",
+    "after_sha256": "4bc3b1d40ea167e6a15a18a746bfcd79a4023248c0621f6c8e27b2c9ad684a43",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/DBGSVC.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\DBGSVC.INC",
+    "before_sha256": "c21e1396d4a1b9192cdb8ff9ff0284f6c91af70be0928ab490c2c7b3333cac04",
+    "after_sha256": "296a6387cfe02445e6c8d43f9f68e1fd4dfbd9d654de3ba6460dee54f6dfc171",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/dossvc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dossvc.h",
+    "before_sha256": "82b5135e78bd3010128bd5dd54978b0e00aec0073f0a7e6b547cbe8dff08a91c",
+    "after_sha256": "82b5135e78bd3010128bd5dd54978b0e00aec0073f0a7e6b547cbe8dff08a91c",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/DOSSVC.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\DOSSVC.INC",
+    "before_sha256": "3c6f447cb25f33f93fb6aef9d96c8d8d960455b0af5bab03303e57cdf40aa520",
+    "after_sha256": "07c4676c9a44418c5a0175acc7a09c251bde892b0a838381edeee26e49c9faf3",
+    "newline_restored": true
+  },
+  {
+    "path": "src/mvdm-host/inc/doswow.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\doswow.h",
+    "before_sha256": "10cb9dc735fd62300a003877ec2099581dadd650c95e2446f4c446dabd24c7fb",
+    "after_sha256": "10cb9dc735fd62300a003877ec2099581dadd650c95e2446f4c446dabd24c7fb",
+    "newline_restored": false
+  },
+  {
+    "path": "src/mvdm-host/inc/DOSWOW.INC",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\DOSWOW.INC",
+    "before_sha256": "b157f83a1d2358a39139ae6c451e37a8c56e5798d143f4e01c4545c88d3dada5",
+    "after_sha256": "d6bd8a52bff2980dacab518da8f2330da5bb978e6c07d1846662078da49444fb",
+    "newline_restored": true
+  }
+]

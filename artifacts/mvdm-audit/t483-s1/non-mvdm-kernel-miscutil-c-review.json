@@ -1,0 +1,30 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+  "original_sha256": "3ee6d2ec087b1c6e32de266861ff2111514da909b40ec4914105b0f4480e8ae1",
+  "current_sha256": "da1796ff7d6857acd766499dc4cdaf39bba649e989f5f386870e453f720b4e11",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_comparison": {
+    "SetDialogPointer": "exact after newline normalization"
+  },
+  "evidence": [
+    "src/wow32-dll/source/wow_dialog_state_bindings.c",
+    "src/wow32-dll/source/wow_dialog_native_bindings.c",
+    "src/wow32-dll/source/wow_default_message_bindings.c",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c:172-196",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1"
+  ],
+  "decisions": [
+    "Finite control-state precomp and source-line anchors retain the original x86 WND/DIALOG shape; original function body is byte-text identical after newline normalization. Keep the original local state owner, not modern NtUserSetDialogPointer.",
+    "ZapActiveAndFocus requires private current-thread PQ and Unlock. Current dialog native binding resolves NtUserZapActiveAndFocus, propagates resolution failure, and invokes the zero-argument no-notification operation. Retain omission of private PQ manipulation; do not substitute notifying SetFocus/SetActiveWindow calls.",
+    "SetDialogPointer is unchanged. State binding checks retained window extent and preserves LastError on success; original FNID cleanup and dialog flag transitions remain authoritative. No additional mirror repair is needed.",
+    "Omitted _SetProgmanWindow/_SetTaskmanWindow manipulate desktop-owned references. Default-window SetTaskmanWindow macro only ensures SHELLHOOK message registration, not equivalent desktop registration. Trace all reached guest shell callers before deciding whether any guest-visible registration policy is missing; do not register guest shell as host desktop shell.",
+    "Omitted xxxSetShellWindow includes validation, hotkey ownership, shell PID and bottommost state. Private desktop/ETHREAD dependencies prevent wholesale composition. Map admitted guest shell callers and native responsibilities before approving the complete omission or recovering a finite policy slice.",
+    "Omitted _InitPwSB owns lazy SBINFO allocation and default ranges of 100. No selected source occurrence found in searched WOW adapter/MVDM WOW paths. This alone does not prove full scrollbar behavior equivalent: identify original client consumers and actual native/private scrollbar storage, initialization and lifetime before disposition."
+  ],
+  "entries_added": 6,
+  "format_sites": 0,
+  "limits": [
+    "No fresh build or runtime test.",
+    "Shell and scrollbar omissions remain pending evidence."
+  ]
+}

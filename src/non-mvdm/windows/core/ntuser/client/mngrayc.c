@@ -1,12 +1,57 @@
-/* Copyright (c) 1985-91, Microsoft Corporation.
- * DIVERGENCE(OPENNT-HOST-114): original helper subset; helper bodies unchanged.
- * OPENNT-HOST-116 adds ClientDrawState with registered failure/height repairs.
- * See the T447 S3 source ledger for resource/call boundary ownership. */
+/****************************** Module Header ******************************\
+* Module Name: mngray.c
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* This module contains the DrawState API
+*
+* History:
+* 01-05-94  FritzS  Ported from Chicago
+\***************************************************************************/
+
 #include "precomp.h"
 
 #ifdef WOW_ORIGINAL_STATE_DRAWING
-#define PATOR 0x00FA0089L
+#define PATOR               0x00FA0089L
 #line 73
+/***************************************************************************\
+*
+*  DrawState()
+*
+*  Generic state drawing routine.  Does simple drawing into same DC if
+*  normal state;  uses offscreen bitmap otherwise.
+*
+*  We do drawing for these simple types ourselves:
+*      (1) Text
+*          lData is string pointer.
+*          wData is string length
+*      (2) Icon
+*          LOWORD(lData) is hIcon
+*      (3) Bitmap
+*          LOWORD(lData) is hBitmap
+*      (4) Glyph (internal)
+*          LOWORD(lData) is OBI_ value, one of
+*              OBI_CHECKMARK
+*              OBI_BULLET
+*              OBI_MENUARROW
+*          right now
+*
+*  Other types are required to draw via the callback function, and are
+*  allowed to stick whatever they want in lData and wData.
+*
+*  We apply the following effects onto the image:
+*      (1) Normal      (nothing)
+*      (2) Default     (drop shadow)
+*      (3) Union       (gray string dither)
+*      (4) Disabled    (embossed)
+*
+*  Note that we do NOT stretch anything.  We just clip.
+*
+*
+*   FritzS note -- this is client-side *only*.  Similar code is in server\mngray.c
+*
+*
+\***************************************************************************/
 BOOL ClientDrawState(
     HDC             hdcDraw,
     HBRUSH          hbrFore,
@@ -444,6 +489,12 @@ CDS_Leave:
 #endif
 
 #ifdef WOW_ORIGINAL_BUTTON_ATLAS
+/***************************************************************************\
+*
+*  BitBltSysBmp()
+*
+*  From Chicago -- client *only* for now.
+\***************************************************************************/
 BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
 {
     POEMBITMAPINFO pOem = oemInfo.bm + i;
@@ -456,6 +507,12 @@ BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
  * the existing drawing object remains the sole BltColor definition. */
 #ifndef WOW_ORIGINAL_BUTTON_BLIT_ONLY
 #line 536
+/***************************************************************************\
+* BltColor
+*
+* History:
+\***************************************************************************/
+
 void BltColor(
     HDC hdc,
     HBRUSH hbr,
@@ -510,4 +567,3 @@ void BltColor(
     }
 }
 #endif
-

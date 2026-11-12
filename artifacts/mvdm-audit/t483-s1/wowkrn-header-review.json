@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/inc/wowkrn.h",
+  "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+  "current_sha256": "e4f70c604034b6352a0ca1a4866bc72690f3dbb216554cdf038f832762dbb3b6",
+  "review_complete": true,
+  "register_entries": 0,
+  "excluded_groups": 12,
+  "initial_review": "All differences are excluded NULLSTRUCT empty-argument structs and #line scaffolding; remaining source exactly original.",
+  "counter_review": "No selected parameter structure or packing changed; restoring empty structs is not a functional repair for the selected non-NULLSTRUCT profile.",
+  "evidence": "Whole-file equality after omitting precisely #ifdef NULLSTRUCT bodies and #line directives; original/retained group counts agree.",
+  "limits": "Source comparison, not new compiler or all-context reachability verification.",
+  "runtime_validation": "None; header unchanged."
+}

@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/dos/dem/demdata.c",
+  "original_sha256": "366a350bc31579dc48764b81d28b26f4d2a5c69c66ec42d742ddaaf739e6a566",
+  "current_sha256": "37ec01d26791e6908c72dbd2d1ad82b9d499d3e438012737c2d2913b1f9d0fd5",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 9,
+      "original_count": 1,
+      "current_start": 9,
+      "current_count": 4
+    },
+    {
+      "original_start": 14,
+      "original_count": 1,
+      "current_start": 17,
+      "current_count": 4
+    },
+    {
+      "original_start": 18,
+      "original_count": 1,
+      "current_start": 24,
+      "current_count": 3
+    },
+    {
+      "original_start": 24,
+      "original_count": 1,
+      "current_start": 32,
+      "current_count": 3
+    }
+  ],
+  "initial_review": "All four data definitions checked against declarations, setters and actual consumers.",
+  "counter_review": "Static zero initialization is deliberate invalid state; setters assign segment/offset/valid. Does not create VM identity or guarantee SFT shadows.",
+  "format_restoration": "Removed stale SFT shadow/commit comment only; retained #line and definitions.",
+  "dependencies": [
+    "dem.h",
+    "demgset.c",
+    "demsrch.c",
+    "demfcb.c",
+    "demfile.c",
+    "demhndl.c",
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c"
+  ]
+}

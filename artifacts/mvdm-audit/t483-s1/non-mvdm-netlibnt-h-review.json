@@ -1,0 +1,40 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+  "original_sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+  "current_sha256": "d3b325d11e1deb0963efb3722c3add63a335452a227183b1187d9802692cc9c9",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 57,
+      "original_count": 1,
+      "current_start": 58,
+      "current_count": 1,
+      "original": [
+        "extern \"C\" {"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 113,
+      "original_count": 1,
+      "current_start": 116,
+      "current_count": 1,
+      "original": [
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+    "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1"
+  ],
+  "limits": "Complete normalized diff proves retained declarations/debug-release macros unchanged. This is not all-context macro-hit certification, nor evidence that optional debug/C++ profiles are supported. No new build or runtime test."
+}

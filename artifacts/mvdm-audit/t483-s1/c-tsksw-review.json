@@ -1,0 +1,74 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+  "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+  "current_sha256": "91fee998cf775d7aa16ff36921d0711485dc9a3a26a578b5ac59374106e5c8c7",
+  "review_complete": true,
+  "changes": [
+    {
+      "file_sequence": "277",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "current_start": "29",
+      "current_count": "3",
+      "original_start": "29",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "task-debug-event-producer",
+      "initial_review": "Original TSS T-bit sets DR6 BT; new pending-event consumer also needs notification at exactly that original producer.",
+      "counter_review": "16-bit TSS path sets T_byte=0; 32-bit task T-bit alone enters this branch. Keep architectural DR6 status and do not use sticky BT as recurring event. Later descriptor faults can intervene and c_cpu_continue cancels pending; this is not a claim of complete task-switch exception proof.",
+      "disposition": "retain",
+      "evidence": "c_tsksw.c:483,505-518; c_debug.h pending declaration; c_main.c:4341,4407,4788,4890",
+      "limits": "Source coupling verified; matcher fixture models consumption and does not exercise real TSS T-bit switching. No fresh runtime test.",
+      "decision": "retain",
+      "change_plan": "Keep c_debug.h declaration and pending write coupled with c_main consumer and c_debug producers. Do not remove T-bit delivery or clear DR6 to suppress repeated traps.",
+      "related_callers": "Original task switch via c_tsksw; c_main normal instruction boundary; fault handlers through c_cpu_continue.",
+      "verification_required": "Real 32-bit TSS T-bit switch delivers one debug event; no T-bit and16-bit TSS controls; retained DR6 no repeat; subsequent new T-bit hit; descriptor/page fault during switch and reset cancellation. Existing matcher tests are supplemental only.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "277",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "current_start": "511",
+      "current_count": "2",
+      "original_start": "506",
+      "original_count": "0",
+      "old_ids": "MVDM-HOST-DIV-282",
+      "classification": "task-debug-event-producer",
+      "initial_review": "Original TSS T-bit sets DR6 BT; new pending-event consumer also needs notification at exactly that original producer.",
+      "counter_review": "16-bit TSS path sets T_byte=0; 32-bit task T-bit alone enters this branch. Keep architectural DR6 status and do not use sticky BT as recurring event. Later descriptor faults can intervene and c_cpu_continue cancels pending; this is not a claim of complete task-switch exception proof.",
+      "disposition": "retain",
+      "evidence": "c_tsksw.c:483,505-518; c_debug.h pending declaration; c_main.c:4341,4407,4788,4890",
+      "limits": "Source coupling verified; matcher fixture models consumption and does not exercise real TSS T-bit switching. No fresh runtime test.",
+      "decision": "retain",
+      "change_plan": "Keep c_debug.h declaration and pending write coupled with c_main consumer and c_debug producers. Do not remove T-bit delivery or clear DR6 to suppress repeated traps.",
+      "related_callers": "Original task switch via c_tsksw; c_main normal instruction boundary; fault handlers through c_cpu_continue.",
+      "verification_required": "Real 32-bit TSS T-bit switch delivers one debug event; no T-bit and16-bit TSS controls; retained DR6 no repeat; subsequent new T-bit hit; descriptor/page fault during switch and reset cancellation. Existing matcher tests are supplemental only.",
+      "missing_evidence": "",
+      "implementation_status": "not-required",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "register_entries": 2,
+  "excluded_ranges": [
+    {
+      "original_start": 287,
+      "original_count": 2,
+      "current_start": 290,
+      "current_count": 2
+    },
+    {
+      "original_start": 339,
+      "original_count": 2,
+      "current_start": 343,
+      "current_count": 2
+    },
+    {
+      "original_start": 563,
+      "original_count": 5,
+      "current_start": 571,
+      "current_count": 2
+    }
+  ],
+  "limits": "Necessity classification only; no full reachability, logical-line or runtime certification."
+}

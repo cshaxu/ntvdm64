@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/dos/command/cmdpif.c",
+  "original_sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+  "current_sha256": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c",
+  "review_complete": true,
+  "blocks": [
+    {
+      "original_start": 20,
+      "original_count": 0,
+      "current_start": 20,
+      "current_count": 2
+    },
+    {
+      "original_start": 263,
+      "original_count": 1,
+      "current_start": 265,
+      "current_count": 5
+    }
+  ],
+  "conditional_groups": 0,
+  "initial_review": "Both blocks reviewed; only behavior added is leased scalar write and failure reporting.",
+  "counter_review": "No dangling else: original outer IsPIFFile still gates inner failure test. Cleanup always executes; no error overwrite after scalar failure. Caller protocol defect is registered once in cmdmisc and cross-referenced here.",
+  "call_chain": [
+    "cmdGetNextCmd",
+    "mvdm_command_check_pif",
+    "cmdCheckForPIF",
+    "mvdm_command_guest_state_write_is_dos_binary"
+  ],
+  "limits": [
+    "No runtime test claimed.",
+    "Full PIF algorithm is unchanged and not independently repaired in this mirror-diff review."
+  ]
+}

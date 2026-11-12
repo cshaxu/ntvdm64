@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/wow32/wutmr.c",
+  "original_sha256": "e42bc0c7e9dc199ae19414461d65ecf86b7acc55c6d7523792812d73f158bef5",
+  "current_sha256": "2dc58f85d74c4b8a9594d70b5447427a5839d4e878b63f67b95be1c3643bfaff",
+  "changes": [
+    {
+      "original_start": 219,
+      "original_count": 1,
+      "current_start": 219,
+      "current_count": 2,
+      "original": [
+        "VOID W32TimerFunc(UINT index, HWND hwnd, UINT idEvent, DWORD dwTime)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-333): original stubs enter the scoped host wrapper. */",
+        "VOID WowOriginalTimerFunc(UINT index, HWND hwnd, UINT idEvent, DWORD dwTime)"
+      ],
+      "decision": "retain",
+      "necessity": "Original 27 timer stubs still enter W32TimerFunc; wrapper establishes task callback and USER borrow scopes before the renamed original body. Original timer lookup, cancellation handling and CallBack16 remain unchanged.",
+      "change_plan": "Keep one wrapper and one original timer algorithm. Do not duplicate timer policy. Validate real task ownership and cancellation separately from wrapper-only fixture."
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "limits": "Exclusion-only means no other body difference, not renewed all-config reachability proof. Original HACK32 guarded keyboard call remains; host PMODE32 exclusion is not guest USER16 exclusion. Timer fixture covers wrapper only; no tests run."
+}

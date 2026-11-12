@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c-files",
+  "original_sha256": "eaa7ea6f06c5df0f7938b14d245fea15bbe89a418d6b265498269bb09122e9d2",
+  "current_sha256": "eaa7ea6f06c5df0f7938b14d245fea15bbe89a418d6b265498269bb09122e9d2",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [],
+  "limits": "No functional edit or fresh runtime pass. Not a blanket all-context branch-hit certification.",
+  "counter_review": "Normalized bytes identical before restoration; now raw bytes identical."
+}

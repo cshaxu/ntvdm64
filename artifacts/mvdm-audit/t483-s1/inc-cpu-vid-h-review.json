@@ -1,0 +1,62 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+  "current_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "file_sequence": "594",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_start": "87",
+      "current_count": "13",
+      "original_start": "87",
+      "original_count": "2",
+      "old_ids": "MVDM-HOST-DIV-089;MVDM-HOST-DIV-618",
+      "classification": "callback-type-profile",
+      "initial_review": "byte/word READ_POINTERS parameter types and added profile guard: original providers use IU32, but current host insignia.h defines IU32 as unsigned long and base_def.h defines ULONG as unsigned long.",
+      "counter_review": "Exact provider signatures agree with IU32 spelling; this alone does not prove the old ULONG contract incompatible. Equal canonical unsigned-long definitions contradict a blanket necessity claim. Need all supported header contexts before restoring original fields and deleting added guards.",
+      "disposition": "pending-evidence",
+      "evidence": "src/mvdm-host/softpc.new/host/inc/insignia.h:72;src/mvdm-host/softpc.new/base/inc/base_def.h:76;src/mvdm-host/softpc.new/base/cvidc/ev_glue.c:395,417,461;src/mvdm-host/softpc.new/base/video/ega_read.c:290-299",
+      "limits": "No fresh compiler proof across all supported includers; no product edit.",
+      "decision": "pending-evidence",
+      "change_plan": "Candidate restore original ULONG field declarations and remove only added CPU40/C_VID guards if all actual include contexts prove identical canonical callback types. Retain original NO_STRING_OPERATIONS and existing non-CPU40 exclusion boundary.",
+      "related_callers": "ega_read.c Glue_reads initialization and read_pointers assignment; cga.c read_pointers=Glue_reads; ev_glue.c read providers",
+      "verification_required": "Compile exact original callback field declarations with real selected providers under all supported includer contexts; ensure no casts and no callback incompatibility diagnostics; compare struct layout and run video read regression if behavior changes.",
+      "missing_evidence": "Complete actual include-context macro/type expansion and compile comparison for original ULONG fields.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    },
+    {
+      "file_sequence": "594",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_start": "100",
+      "current_count": "8",
+      "original_start": "91",
+      "original_count": "1",
+      "old_ids": "MVDM-HOST-DIV-089;MVDM-HOST-DIV-618",
+      "classification": "callback-type-profile",
+      "initial_review": "string READ_POINTERS offset/count and added profile guard: original providers use IU32, but current host insignia.h defines IU32 as unsigned long and base_def.h defines ULONG as unsigned long.",
+      "counter_review": "Exact provider signatures agree with IU32 spelling; this alone does not prove the old ULONG contract incompatible. Equal canonical unsigned-long definitions contradict a blanket necessity claim. Need all supported header contexts before restoring original fields and deleting added guards.",
+      "disposition": "pending-evidence",
+      "evidence": "src/mvdm-host/softpc.new/host/inc/insignia.h:72;src/mvdm-host/softpc.new/base/inc/base_def.h:76;src/mvdm-host/softpc.new/base/cvidc/ev_glue.c:395,417,461;src/mvdm-host/softpc.new/base/video/ega_read.c:290-299",
+      "limits": "No fresh compiler proof across all supported includers; no product edit.",
+      "decision": "pending-evidence",
+      "change_plan": "Candidate restore original ULONG field declarations and remove only added CPU40/C_VID guards if all actual include contexts prove identical canonical callback types. Retain original NO_STRING_OPERATIONS and existing non-CPU40 exclusion boundary.",
+      "related_callers": "ega_read.c Glue_reads initialization and read_pointers assignment; cga.c read_pointers=Glue_reads; ev_glue.c read providers",
+      "verification_required": "Compile exact original callback field declarations with real selected providers under all supported includer contexts; ensure no casts and no callback incompatibility diagnostics; compare struct layout and run video read regression if behavior changes.",
+      "missing_evidence": "Complete actual include-context macro/type expansion and compile comparison for original ULONG fields.",
+      "implementation_status": "not-implemented",
+      "execution_detail_status": "specified"
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 113,
+      "original_count": 13
+    }
+  ],
+  "initial_review": "Two callback declaration/profile changes plus original non-CPU40 declaration exclusion.",
+  "counter_review": "Current and original provider signatures use IU32; current selected host declaration makes IU32 unsigned long, also the base ULONG macro type. Type spelling cannot establish necessity. Preserve pending status until all contexts checked.",
+  "limits": "Audit classification complete; two necessity decisions pending evidence. Not repair completion."
+}

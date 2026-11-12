@@ -1,10 +1,33 @@
-/*
- * DIVERGENCE OPENNT-HOST-003: source-identified true subset of the original
- * public/sdk/inc/ntrtl.h.  The full NT4 declaration carrier reaches private
- * product APIs that are outside the selected modern user-mode closure.  This
- * file preserves only declarations reached by imported MVDM/OpenNT sources;
- * adapter-mvdm-host-out owns any modern implementation binding.
- */
+/*++ BUILD Version: 0005    // Increment this if a change has global effects
+
+Copyright (c) 1989-2000  Microsoft Corporation
+Copyright (c) 2015  OpenNT Project
+
+Module Name:
+
+    ntrtl.h
+
+Abstract:
+
+    Include file for NT runtime routines that are callable by both
+    kernel mode code in the executive and user mode code in various
+    NT subsystems.
+
+Author:
+
+    Steve Wood (stevewo) 31-Mar-1989
+
+Environment:
+
+    These routines are statically linked in the caller's executable and
+    are callable in either kernel mode or user mode.
+
+Revision History:
+
+    30-Apr-2015     stephanos   Merged the changes made in the NT 5 implementation
+
+--*/
+
 #line 31
 #ifndef _NTRTL_
 #define _NTRTL_

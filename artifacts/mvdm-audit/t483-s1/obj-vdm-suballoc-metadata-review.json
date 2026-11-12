@@ -1,0 +1,157 @@
+[
+  {
+    "sequence": 849,
+    "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.prf",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.prf",
+    "original_sha256": "00d94378f996edd8703f884524398d73f7bfddb0e5abbc0ca23633471559937b",
+    "before_sha256": "fb8c44db7f15e7d09930c59f8ec653336b3590ed44e99096f6ff484709f2582f",
+    "current_sha256": "00d94378f996edd8703f884524398d73f7bfddb0e5abbc0ca23633471559937b",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified after newline restoration.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 850,
+    "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.src",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src",
+    "original_sha256": "d47400179c1388b58fb8eaec8331c6eea16ee548bba10e7afbe588e9549bd0bc",
+    "before_sha256": "d47400179c1388b58fb8eaec8331c6eea16ee548bba10e7afbe588e9549bd0bc",
+    "current_sha256": "d47400179c1388b58fb8eaec8331c6eea16ee548bba10e7afbe588e9549bd0bc",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 851,
+    "path": "src/mvdm-host/softpc.new/obj.vdm/resource.rc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\resource.rc",
+    "original_sha256": "3e3ac9b1001127e3900c1ba5a2309c28aaa97ecf2882fa6f4e9f20e600a26d8d",
+    "before_sha256": "71e2e9e8f44d37ca3a36ec9714dc81b49a4523c16b148787a6d7ba5df2a1d966",
+    "current_sha256": "3e3ac9b1001127e3900c1ba5a2309c28aaa97ecf2882fa6f4e9f20e600a26d8d",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified after newline restoration.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 852,
+    "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\sources",
+    "original_sha256": "f80c0d8513ea68500c792674d05dee7f42f1f76aed98f4f5ca6bc409ffd61f3e",
+    "before_sha256": "a5a9a5285ab550bb113b2e7dcbe976fe484b1afe34a676d70e48b2b8c7a6f0ad",
+    "current_sha256": "a5a9a5285ab550bb113b2e7dcbe976fe484b1afe34a676d70e48b2b8c7a6f0ad",
+    "review_complete": true,
+    "changes": [
+      {
+        "original_start": 84,
+        "original_count": 1,
+        "current_start": 84,
+        "current_count": 4,
+        "original": [
+          "     $(BASEDIR)\\public\\sdk\\lib\\*\\monitor.lib        \\"
+        ],
+        "current": [
+          "# DIVERGENCE(MVDM-HOST-DIV-031): The selected i386+CCPU product profile",
+          "# never links the historical kernel-V86 monitor.  Its source package is",
+          "# available only in the read-only external OpenNT reference tree; all remaining original link order",
+          "# is unchanged."
+        ]
+      }
+    ],
+    "excluded_ranges": [],
+    "initial_review": "Remove old kernel-V86 monitor library from CCPU product manifest; retained remaining library sequence.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 853,
+    "path": "src/mvdm-host/softpc.new/obj.vdm/obj/i386/ntvdm.def",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\ntvdm.def",
+    "original_sha256": "98c00c3c4737108674061779a6c1e06f113c597d76536a49e0723aa617d58a7a",
+    "before_sha256": "98c00c3c4737108674061779a6c1e06f113c597d76536a49e0723aa617d58a7a",
+    "current_sha256": "98c00c3c4737108674061779a6c1e06f113c597d76536a49e0723aa617d58a7a",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 854,
+    "path": "src/mvdm-host/softpc.new/obj.vdm/obj/i386/resource.res",
+    "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\resource.res",
+    "original_sha256": "71afce495d5561f4dc62acb8d6341bc774b3c493eb068c814fa271ea1233bcf9",
+    "before_sha256": "71afce495d5561f4dc62acb8d6341bc774b3c493eb068c814fa271ea1233bcf9",
+    "current_sha256": "71afce495d5561f4dc62acb8d6341bc774b3c493eb068c814fa271ea1233bcf9",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 855,
+    "path": "src/mvdm-host/suballoc/foo.bar",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\foo.bar",
+    "original_sha256": "0350c8ad182e081c6106cd75a56b7f8e18b07445d0668835485a55761463a905",
+    "before_sha256": "46abec639fe2d644db6ba7f6cbc915c73c8918a56a964c67511b45f74e429d91",
+    "current_sha256": "0350c8ad182e081c6106cd75a56b7f8e18b07445d0668835485a55761463a905",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified after newline restoration.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 856,
+    "path": "src/mvdm-host/suballoc/makefile",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\makefile",
+    "original_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+    "before_sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+    "current_sha256": "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+    "review_complete": true,
+    "changes": [],
+    "excluded_ranges": [],
+    "initial_review": "Original whole-file byte identity verified after newline restoration.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  },
+  {
+    "sequence": 857,
+    "path": "src/mvdm-host/suballoc/sources",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\sources",
+    "original_sha256": "fabb2241cea80f81921560057b26186d188fa5e61a097e387b41a5a690ce4e81",
+    "before_sha256": "3e685c3bcdcb371b7cad76c212fee70cd70c39e923b9815a00f7f2197231b932",
+    "current_sha256": "3e685c3bcdcb371b7cad76c212fee70cd70c39e923b9815a00f7f2197231b932",
+    "review_complete": true,
+    "changes": [
+      {
+        "original_start": 43,
+        "original_count": 3,
+        "current_start": 43,
+        "current_count": 0,
+        "original": [
+          "UMTYPE=console",
+          "UMTEST=tsa",
+          "UMLIBS=\\nt\\public\\sdk\\lib\\*\\suballoc.lib"
+        ],
+        "current": []
+      }
+    ],
+    "excluded_ranges": [],
+    "initial_review": "Remove UMTYPE/UMTEST/UMLIBS entries for removed test-only tsa.c; original suballoc.c library remains.",
+    "counter_review": "No additional functional adaptation or whole-file deletion inferred; original notices and supported code preserved. Not a universal logical-line/build certification.",
+    "limits": "No new build/runtime result."
+  }
+]

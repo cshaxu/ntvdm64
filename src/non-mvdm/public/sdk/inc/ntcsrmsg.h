@@ -142,4 +142,3 @@ typedef struct _CSR_API_MSG {
     ((ULONG)((USHORT)(ApiNumber)))
 
 #endif // _NTCSRMSG_
-

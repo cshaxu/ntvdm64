@@ -1,0 +1,307 @@
+{
+  "path": "src/mvdm-host/wow32/wmsgem.c",
+  "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+  "current_sha256": "6c61becaecc2e0546384932cdc71685de45f027415aca37143f8da518f82fee4",
+  "changes": [
+    {
+      "original_start": 138,
+      "original_count": 0,
+      "current_start": 94,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(MVDM-HOST-DIV-346): no absent native buffer. */",
+        "                    if (!lpmpex->lParam) return FALSE;"
+      ],
+      "decision": "retain",
+      "evidence": "New FALSE return rejects failed LocalAlloc for EM_REPLACESEL or STACKORHEAPALLOC for EM_SETTABSTOPS before copy/conversion. Current wow32.h FREEPSZPTR is empty, so REPLACESEL early return does not skip an active release operation in this selected definition.",
+      "change_plan": "Retain allocation-failure propagation. If guest-pointer release becomes nonempty later, route REPLACESEL failure through that release; do not claim a current leak from the macro name alone."
+    },
+    {
+      "original_start": 158,
+      "original_count": 0,
+      "current_start": 117,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "                    /* DIVERGENCE(MVDM-HOST-DIV-346): reject failed acquisition. */",
+        "                    if (!lpmpex->lParam) return FALSE;"
+      ],
+      "decision": "retain",
+      "evidence": "New FALSE return rejects failed LocalAlloc for EM_REPLACESEL or STACKORHEAPALLOC for EM_SETTABSTOPS before copy/conversion. Current wow32.h FREEPSZPTR is empty, so REPLACESEL early return does not skip an active release operation in this selected definition.",
+      "change_plan": "Retain allocation-failure propagation. If guest-pointer release becomes nonempty later, route REPLACESEL failure through that release; do not claim a current leak from the macro name alone."
+    },
+    {
+      "original_start": 243,
+      "original_count": 1,
+      "current_start": 205,
+      "current_count": 2,
+      "original": [
+        "        if (lpmpex->Parm16.WndProc.wParam > 0) {"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-346): same signed acquisition predicate. */",
+        "        if (INT32(lpmpex->Parm16.WndProc.wParam) > 0) {"
+      ],
+      "decision": "retain",
+      "evidence": "Acquisition already uses INT32(16-bit wParam)>0; cleanup now uses the same signed predicate, avoiding freeing unallocated guest lParam for high-bit counts.",
+      "change_plan": "Retain identical signed acquire/free predicate; do not change original supported tab-stop count conversion."
+    },
+    {
+      "original_start": 246,
+      "original_count": 0,
+      "current_start": 210,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        /* DIV-875: tab-stop BOOL is not a word-break procedure. */",
+        "        break;"
+      ],
+      "decision": "retain",
+      "evidence": "Original EM_SETTABSTOPS unthunk fell through to EM_GETWORDBREAKPROC, treating BOOL return as a procedure and possibly constructing a guest callback. Added break preserves tab-stop result and avoids unrelated word-break conversion. Dedicated tabstop test and guest script check word-break state unchanged.",
+      "change_plan": "Retain missing break fix at original switch boundary; keep EM_GETWORDBREAKPROC behavior in its own case, no wrapper or message-name special path."
+    }
+  ],
+  "excluded_bodies": [
+    {
+      "original_start": 25,
+      "original_count": 48,
+      "current_start": 27,
+      "current_count": 1,
+      "original": [
+        "",
+        "MSGINFO amiEM[] = {",
+        "   {OLDEM_GETSEL,               \"EM_GETSEL\"},                       // 0x0400",
+        "   {OLDEM_SETSEL,               \"EM_SETSEL\"},                       // 0x0401",
+        "   {OLDEM_GETRECT,              \"EM_GETRECT\"},                      // 0x0402",
+        "   {OLDEM_SETRECT,              \"EM_SETRECT\"},                      // 0x0403",
+        "   {OLDEM_SETRECTNP,            \"EM_SETRECTNP\"},                    // 0x0404",
+        "   {OLDEM_SCROLL,               \"EM_SCROLL\"},                       // 0x0405",
+        "   {OLDEM_LINESCROLL,           \"EM_LINESCROLL\"},                   // 0x0406",
+        "   {OLDEM_GETMODIFY,            \"EM_GETMODIFY\"},                    // 0x0408",
+        "   {OLDEM_SETMODIFY,            \"EM_SETMODIFY\"},                    // 0x0409",
+        "   {OLDEM_GETLINECOUNT,         \"EM_GETLINECOUNT\"},                 // 0x040A",
+        "   {OLDEM_LINEINDEX,            \"EM_LINEINDEX\"},                    // 0x040B",
+        "   {OLDEM_SETHANDLE,            \"EM_SETHANDLE\"},                    // 0x040C",
+        "   {OLDEM_GETHANDLE,            \"EM_GETHANDLE\"},                    // 0x040D",
+        "   {OLDEM_GETTHUMB,             \"EM_GETTHUMB\"},                     // 0x040E",
+        "   {OLDEM_LINELENGTH,           \"EM_LINELENGTH\"},                   // 0x0411",
+        "   {OLDEM_REPLACESEL,           \"EM_REPLACESEL\"},                   // 0x0412",
+        "   {OLDEM_SETFONT,              \"EM_SETFONT\"},                      // 0x0413",
+        "   {OLDEM_GETLINE,              \"EM_GETLINE\"},                      // 0x0414",
+        "   {OLDEM_LIMITTEXT,            \"EM_LIMITTEXT\"},                    // 0x0415",
+        "   {OLDEM_CANUNDO,              \"EM_CANUNDO\"},                      // 0x0416",
+        "   {OLDEM_UNDO,                 \"EM_UNDO\"},                         // 0x0417",
+        "   {OLDEM_FMTLINES,             \"EM_FMTLINES\"},                     // 0x0418",
+        "   {OLDEM_LINEFROMCHAR,         \"EM_LINEFROMCHAR\"},                 // 0x0419",
+        "   {OLDEM_SETWORDBREAK,         \"EM_SETWORDBREAK\"},                 // 0x041A",
+        "   {OLDEM_SETTABSTOPS,          \"EM_SETTABSTOPS\"},                  // 0x041B",
+        "   {OLDEM_SETPASSWORDCHAR,      \"EM_SETPASSWORDCHAR\"},              // 0x041C",
+        "   {OLDEM_EMPTYUNDOBUFFER,      \"EM_EMPTYUNDOBUFFER\"},              // 0x041D",
+        "   {OLDEM_GETFIRSTVISIBLELINE,  \"EM_GETFIRSTVISIBLELINE\"},          // 0x041E",
+        "   {OLDEM_SETREADONLY,          \"EM_SETREADONLY\"},                  // 0x041F",
+        "   {OLDEM_SETWORDBREAKPROC,     \"EM_SETWORDBREAKPROC\"},             // 0x0420",
+        "   {OLDEM_GETWORDBREAKPROC,     \"EM_GETWORDBREAKPROC\"},             // 0x0421",
+        "   {OLDEM_GETPASSWORDCHAR,      \"EM_GETPASSWORDCHAR\"}               // 0x0422",
+        "};",
+        "",
+        "PSZ GetEMMsgName(WORD wMsg)",
+        "{",
+        "    INT i;",
+        "    register PMSGINFO pmi;",
+        "",
+        "    for (pmi=amiEM,i=NUMEL(amiEM); i>0; i--,pmi++) {",
+        "        if ((WORD)pmi->uMsg == wMsg)",
+        "            return pmi->pszMsgName;",
+        "    }",
+        "    return GetWMMsgName(wMsg);",
+        "}",
+        ""
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 73,
+      "current": 28,
+      "logical": 26
+    },
+    {
+      "original": 247,
+      "current": 213,
+      "logical": 249
+    },
+    {
+      "original": 248,
+      "current": 214,
+      "logical": 250
+    },
+    {
+      "original": 249,
+      "current": 215,
+      "logical": 251
+    },
+    {
+      "original": 251,
+      "current": 217,
+      "logical": 253
+    },
+    {
+      "original": 252,
+      "current": 218,
+      "logical": 254
+    },
+    {
+      "original": 254,
+      "current": 220,
+      "logical": 256
+    },
+    {
+      "original": 255,
+      "current": 221,
+      "logical": 257
+    },
+    {
+      "original": 256,
+      "current": 222,
+      "logical": 258
+    },
+    {
+      "original": 257,
+      "current": 223,
+      "logical": 259
+    },
+    {
+      "original": 259,
+      "current": 225,
+      "logical": 261
+    },
+    {
+      "original": 260,
+      "current": 226,
+      "logical": 262
+    },
+    {
+      "original": 261,
+      "current": 227,
+      "logical": 263
+    },
+    {
+      "original": 263,
+      "current": 229,
+      "logical": 265
+    },
+    {
+      "original": 264,
+      "current": 230,
+      "logical": 266
+    },
+    {
+      "original": 265,
+      "current": 231,
+      "logical": 267
+    },
+    {
+      "original": 266,
+      "current": 232,
+      "logical": 268
+    },
+    {
+      "original": 267,
+      "current": 233,
+      "logical": 269
+    },
+    {
+      "original": 269,
+      "current": 235,
+      "logical": 271
+    },
+    {
+      "original": 271,
+      "current": 237,
+      "logical": 273
+    },
+    {
+      "original": 273,
+      "current": 239,
+      "logical": 275
+    },
+    {
+      "original": 275,
+      "current": 241,
+      "logical": 277
+    },
+    {
+      "original": 276,
+      "current": 242,
+      "logical": 278
+    },
+    {
+      "original": 277,
+      "current": 243,
+      "logical": 279
+    },
+    {
+      "original": 278,
+      "current": 244,
+      "logical": 280
+    },
+    {
+      "original": 279,
+      "current": 245,
+      "logical": 281
+    },
+    {
+      "original": 280,
+      "current": 246,
+      "logical": 282
+    },
+    {
+      "original": 281,
+      "current": 247,
+      "logical": 283
+    },
+    {
+      "original": 282,
+      "current": 248,
+      "logical": 284
+    },
+    {
+      "original": 283,
+      "current": 249,
+      "logical": 285
+    },
+    {
+      "original": 284,
+      "current": 250,
+      "logical": 286
+    },
+    {
+      "original": 285,
+      "current": 251,
+      "logical": 287
+    },
+    {
+      "original": 286,
+      "current": 252,
+      "logical": 288
+    },
+    {
+      "original": 287,
+      "current": 253,
+      "logical": 289
+    },
+    {
+      "original": 288,
+      "current": 254,
+      "logical": 290
+    }
+  ],
+  "evidence": "Full source diff audited against original converter and concrete definitions.",
+  "limits": [
+    "Audit classification, not product repair or runtime pass."
+  ]
+}

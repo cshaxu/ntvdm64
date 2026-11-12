@@ -12,13 +12,19 @@
 /* DIVERGENCE(OPENNT-HOST-106): required Tab-navigation closure only.
  * Original algorithms unchanged; standalone client precomp and retained
  * same-address WND graph supply the private data boundary. No host navigation
- * API substitution. Not selected in production until graph closure. */
+ * API substitution. */
 #line 12
 #include "precomp.h"
 
 /* DIVERGENCE(OPENNT-HOST-109): restore the original group-navigation
  * collaborators required by IsDialogMessage/xxxGotoNextMnem. Bodies are
  * unchanged; their graph comes from the same retained observation owner. */
+/***************************************************************************\
+* UT_PrevGroupItem
+*
+* History:
+\***************************************************************************/
+
 #line 22
 PWND UT_PrevGroupItem(
     PWND pwndDlg,
@@ -40,6 +46,12 @@ PWND UT_PrevGroupItem(
         pwndPrev = pwnd;
     }
 }
+
+/***************************************************************************\
+* UT_NextGroupItem
+*
+* History:
+\***************************************************************************/
 
 #line 50
 PWND UT_NextGroupItem(
@@ -91,6 +103,12 @@ PWND _GetNextDlgGroupItem(
     return pwnd;
 }
 
+/***************************************************************************\
+* _PrevControl
+*
+* History:
+\***************************************************************************/
+
 #line 78
 PWND _PrevControl(
     PWND pwndRoot,
@@ -131,6 +149,15 @@ PWND _PrevControl(
     return pwnd;
 }
 
+/***************************************************************************\
+*
+*  GetChildControl()
+*
+*  Gets valid ancestor of given window.
+*  A valid dialog control is a direct descendant of a "form" control.
+*
+\***************************************************************************/
+
 #line 125
 PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
     PWND    pwndControl = NULL;
@@ -145,6 +172,19 @@ PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
 
     return(pwndControl);
 }
+
+/***************************************************************************\
+*
+*  _NextSibblingOrAncestor
+*
+* Called by _NextControl. It returns the next control to pwndStart. If there
+* is a next window (pwndStart->spwndNext), then that is it.
+* Otherwise, the next control is up the parent chain. However, if it's already
+* at the top of the chain (pwndRoot == pwndStart->spwndParent), then the next
+* control is the first child of pwndRoot. But if it's not at the top of the chain,
+* then the next control is pwndStart->spwndParent or an ancestor.
+*
+\***************************************************************************/
 
 #line 151
 PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
@@ -192,6 +232,21 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 #endif
 #line 192
 }
+
+/***************************************************************************\
+*
+*  _NextControl()
+*
+* It searches for the next NON WS_EX_CONTROLPARENT control following pwndStart.
+* If pwndStart is NULL, the search begins with pwndRoot's first child;
+* otherwise, it starts with the control next to pwndStart.
+* This is a depth-first search that can start anywhere in the window tree.
+* uFlags determine what WS_EX_CONTROLPARENT windows should be skipped or recursed into.
+* If skipping a window, the search moves to the next control (see _NextSibblingOrAncestor);
+* otherwise, the search walks down the child chain (recursive call).
+* If the search fails, it returns pwndRoot.
+*
+\***************************************************************************/
 
 #line 207
 PWND _NextControl(

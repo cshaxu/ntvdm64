@@ -1,0 +1,79 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+  "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+  "current_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+  "changes": [],
+  "excluded": [
+    {
+      "original_start": 48,
+      "original_count": 2,
+      "current_start": 50,
+      "current_count": 1,
+      "original": [
+        "#undef SMBDBG1",
+        "#define SMBDBG1 0"
+      ],
+      "current": [
+        "#error Unsupported SMB diagnostic or alignment profile"
+      ]
+    },
+    {
+      "original_start": 75,
+      "original_count": 1,
+      "current_start": 79,
+      "current_count": 1,
+      "original": [
+        "#define SMB_USE_UNALIGNED 0"
+      ],
+      "current": [
+        "#error Unsupported SMB diagnostic or alignment profile"
+      ]
+    },
+    {
+      "original_start": 92,
+      "original_count": 1,
+      "current_start": 100,
+      "current_count": 1,
+      "original": [
+        "#define SMB_UNALIGNED"
+      ],
+      "current": [
+        "#error Unsupported SMB diagnostic or alignment profile"
+      ]
+    },
+    {
+      "original_start": 108,
+      "original_count": 4,
+      "current_start": 119,
+      "current_count": 1,
+      "original": [
+        "",
+        "#define _USHORT( field ) USHORT field ## S",
+        "#define _ULONG( field ) ULONG field ## L",
+        ""
+      ],
+      "current": [
+        "#error Unsupported SMB diagnostic or alignment profile"
+      ]
+    }
+  ],
+  "logical_line_mismatches": [
+    {
+      "original": 50,
+      "current": 51,
+      "logical": 49
+    },
+    {
+      "original": 112,
+      "current": 120,
+      "logical": 109
+    }
+  ],
+  "evidence": [
+    "src/compat/include/xactsrv_wksta_minimal.h",
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "test/mvdm-host/vdmredir/server_enum_test.c"
+  ],
+  "limits": "Complete retained-text comparison: original selected definitions unchanged. Bytewise/debug SMB and AMD64 alignment exclusions are not certified for every build context here. Native service x64 support does not imply these selected x86 Redirector headers support x64. No new compile/runtime."
+}

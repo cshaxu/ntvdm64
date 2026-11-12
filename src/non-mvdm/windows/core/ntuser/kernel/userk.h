@@ -1,5 +1,19 @@
-/* Copyright (c) Microsoft Corporation. Original USER kernel header subset.
- * DIVERGENCE(OPENNT-HOST-049): retain pseudo-event closure and execution-owner
+/*++ BUILD Version: 0015    // Increment this if a change has global effects
+
+/****************************** Module Header ******************************\
+* Module Name: userk.h
+*
+* Copyright (c) 1985-1996, Microsoft Corporation
+*
+* Typedefs, defines, and prototypes that are used exclusively by the User
+* kernel-mode code.
+*
+* History:
+* 04-28-91 DarrinM      Created from PROTO.H, MACRO.H, and STRTABLE.H
+* 01-25-95 JimA         Prepped for kernel-mode
+\***************************************************************************/
+
+/* DIVERGENCE(OPENNT-HOST-049): retain pseudo-event closure and execution-owner
  * bookkeeping only; no private kernel object structures are imported. */
 #line 16
 #ifndef _USERK_

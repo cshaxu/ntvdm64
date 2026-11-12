@@ -1,0 +1,581 @@
+{
+  "path": "src/mvdm-host/wow32/wcntl32.c",
+  "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+  "current_sha256": "185fc06a91d733ed3854db3d0b2f4124ea65c339f4b50a0f0148923212d20c68",
+  "changes": [
+    {
+      "original_start": 17,
+      "original_count": 0,
+      "current_start": 17,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "#include \"wow_message_lifetime.h\" /* DIVERGENCE(MVDM-HOST-DIV-347) */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain direct declaration dependency on existing message-lifetime helper; no unused include or second provider.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 107,
+      "original_count": 1,
+      "current_start": 109,
+      "current_count": 2,
+      "original": [
+        "        lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "        lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 113,
+      "original_count": 1,
+      "current_start": 117,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 131,
+      "original_count": 1,
+      "current_start": 135,
+      "current_count": 2,
+      "original": [
+        "        lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "        lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 137,
+      "original_count": 1,
+      "current_start": 143,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 182,
+      "original_count": 1,
+      "current_start": 188,
+      "current_count": 2,
+      "original": [
+        "                lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "                lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "pending",
+      "change_plan": "Retain heap-key capture/release pending joint review of EM_REPLACESEL DS-based stack path and outer stack scope. Ensure abnormal unwind restores original stack allocation exactly once without replaying output conversion.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": "Control-specific stack-branch fault witness; construction heap matrix does not by itself prove DSBASEDSTRINGPOINTERS path."
+    },
+    {
+      "original_start": 194,
+      "original_count": 1,
+      "current_start": 202,
+      "current_count": 1,
+      "original": [
+        "                free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "                wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "pending",
+      "change_plan": "Retain heap-key capture/release pending joint review of EM_REPLACESEL DS-based stack path and outer stack scope. Ensure abnormal unwind restores original stack allocation exactly once without replaying output conversion.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": "Control-specific stack-branch fault witness; construction heap matrix does not by itself prove DSBASEDSTRINGPOINTERS path."
+    },
+    {
+      "original_start": 232,
+      "original_count": 1,
+      "current_start": 240,
+      "current_count": 2,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 246,
+      "original_count": 1,
+      "current_start": 256,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 320,
+      "original_count": 1,
+      "current_start": 330,
+      "current_count": 2,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->uParam * sizeof(WORD));"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 327,
+      "original_count": 1,
+      "current_start": 339,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 409,
+      "original_count": 1,
+      "current_start": 421,
+      "current_count": 2,
+      "original": [
+        "                lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "                lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 419,
+      "original_count": 1,
+      "current_start": 433,
+      "current_count": 1,
+      "original": [
+        "                free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "                wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 447,
+      "original_count": 0,
+      "current_start": 461,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    DWORD owned; /* DIVERGENCE(MVDM-HOST-DIV-347): actual acquisition mode. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain CB_DIR call-local acquisition flags and clear-before-release. Preserve existing GetParam16 mapping and malloc16 fallback; do not replace with a second allocation registry.",
+      "evidence": "CB_DIR initializes flags and lParam, marks mapped only after successful GetParam16, marks heap before putstr16. Unthunk consumes acquisition mode rather than rereading W32CheckThunkParamFlag. Shared unwind explicitly calls this input-only unthunker; parameter-map fixture covers nested borrow, normal+finalizer, NULL and heap fallback.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 448,
+      "original_count": 0,
+      "current_start": 464,
+      "current_count": 2,
+      "original": [],
+      "current": [
+        "        lpwm32mpex->dwParam = 0;",
+        "        lpwm32mpex->Parm16.WndProc.lParam = 0;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain CB_DIR call-local acquisition flags and clear-before-release. Preserve existing GetParam16 mapping and malloc16 fallback; do not replace with a second allocation registry.",
+      "evidence": "CB_DIR initializes flags and lParam, marks mapped only after successful GetParam16, marks heap before putstr16. Unthunk consumes acquisition mode rather than rereading W32CheckThunkParamFlag. Shared unwind explicitly calls this input-only unthunker; parameter-map fixture covers nested borrow, normal+finalizer, NULL and heap fallback.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 456,
+      "original_count": 0,
+      "current_start": 475,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "                    lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_MAPPED;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain CB_DIR call-local acquisition flags and clear-before-release. Preserve existing GetParam16 mapping and malloc16 fallback; do not replace with a second allocation registry.",
+      "evidence": "CB_DIR initializes flags and lParam, marks mapped only after successful GetParam16, marks heap before putstr16. Unthunk consumes acquisition mode rather than rereading W32CheckThunkParamFlag. Shared unwind explicitly calls this input-only unthunker; parameter-map fixture covers nested borrow, normal+finalizer, NULL and heap fallback.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 464,
+      "original_count": 0,
+      "current_start": 485,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "            lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain CB_DIR call-local acquisition flags and clear-before-release. Preserve existing GetParam16 mapping and malloc16 fallback; do not replace with a second allocation registry.",
+      "evidence": "CB_DIR initializes flags and lParam, marks mapped only after successful GetParam16, marks heap before putstr16. Unthunk consumes acquisition mode rather than rereading W32CheckThunkParamFlag. Shared unwind explicitly calls this input-only unthunker; parameter-map fixture covers nested borrow, normal+finalizer, NULL and heap fallback.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 467,
+      "original_count": 4,
+      "current_start": 490,
+      "current_count": 5,
+      "original": [
+        "        if (W32CheckThunkParamFlag()) {",
+        "            if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL)) {",
+        "                return TRUE;",
+        "            }"
+      ],
+      "current": [
+        "        owned = lpwm32mpex->dwParam;",
+        "        lpwm32mpex->dwParam = 0;",
+        "        if (owned & WOW_TEXT_MAPPED) {",
+        "            DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);",
+        "            return TRUE;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain CB_DIR call-local acquisition flags and clear-before-release. Preserve existing GetParam16 mapping and malloc16 fallback; do not replace with a second allocation registry.",
+      "evidence": "CB_DIR initializes flags and lParam, marks mapped only after successful GetParam16, marks heap before putstr16. Unthunk consumes acquisition mode rather than rereading W32CheckThunkParamFlag. Shared unwind explicitly calls this input-only unthunker; parameter-map fixture covers nested borrow, normal+finalizer, NULL and heap fallback.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 472,
+      "original_count": 0,
+      "current_start": 498,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "        if (!(owned & WOW_TEXT_ACTIVE)) return TRUE;"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain CB_DIR call-local acquisition flags and clear-before-release. Preserve existing GetParam16 mapping and malloc16 fallback; do not replace with a second allocation registry.",
+      "evidence": "CB_DIR initializes flags and lParam, marks mapped only after successful GetParam16, marks heap before putstr16. Unthunk consumes acquisition mode rather than rereading W32CheckThunkParamFlag. Shared unwind explicitly calls this input-only unthunker; parameter-map fixture covers nested borrow, normal+finalizer, NULL and heap fallback.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 554,
+      "original_count": 1,
+      "current_start": 582,
+      "current_count": 2,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 575,
+      "original_count": 1,
+      "current_start": 605,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 593,
+      "original_count": 1,
+      "current_start": 623,
+      "current_count": 2,
+      "original": [
+        "        lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "        lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 599,
+      "original_count": 1,
+      "current_start": 631,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 727,
+      "original_count": 1,
+      "current_start": 759,
+      "current_count": 2,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 760,
+      "original_count": 1,
+      "current_start": 794,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 815,
+      "original_count": 1,
+      "current_start": 849,
+      "current_count": 2,
+      "original": [
+        "            if (!(vp = malloc16(cb))) {"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): before putstr16 can escape. */",
+        "            if (!(vp = wow_message_heap32(lpwm32mpex, malloc16(cb)))) {"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 826,
+      "original_count": 1,
+      "current_start": 862,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 846,
+      "original_count": 1,
+      "current_start": 882,
+      "current_count": 2,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 854,
+      "original_count": 1,
+      "current_start": 892,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 871,
+      "original_count": 1,
+      "current_start": 909,
+      "current_count": 2,
+      "original": [
+        "            lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->uParam * sizeof(WORD));"
+      ],
+      "current": [
+        "            /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "            lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 878,
+      "original_count": 1,
+      "current_start": 918,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 893,
+      "original_count": 1,
+      "current_start": 933,
+      "current_count": 2,
+      "original": [
+        "        lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+      ],
+      "current": [
+        "        /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "        lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 899,
+      "original_count": 1,
+      "current_start": 941,
+      "current_count": 1,
+      "original": [
+        "            free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "            wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 953,
+      "original_count": 1,
+      "current_start": 995,
+      "current_count": 2,
+      "original": [
+        "                lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+      ],
+      "current": [
+        "                /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */",
+        "                lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    },
+    {
+      "original_start": 963,
+      "original_count": 1,
+      "current_start": 1007,
+      "current_count": 1,
+      "original": [
+        "                free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+      ],
+      "current": [
+        "                wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */"
+      ],
+      "decision": "retain",
+      "change_plan": "Retain capture into existing dwTmp[1] immediately after original malloc16, and idempotent shared release. Preserve original allocation sizes, copyback ordering, compatibility branches and return values.",
+      "evidence": "wow_message_heap32 only stores key in dwTmp[1]; release clears key before original free16. This file uses dwTmp[0] for CB_GETLBTEXT, not dwTmp[1]. Outer dispatch/hooks/dialog owners zero-initialize and unwind. Construction fixture enumerates all 14 changed control converters with acquisition/copy failures and repeat unwind.",
+      "missing_evidence": ""
+    }
+  ],
+  "excluded_bodies": [],
+  "logical_line_mismatches": [],
+  "line_basis": "LF-only source derivation",
+  "limits": "No product modifications or runtime/build claims. Header/owner/provider minimization remains separately scoped; entire file is live."
+}

@@ -1,0 +1,535 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+  "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+  "current_sha256": "0a0ccb97bd0c9f55f01ce3dc7b0aaee8a9e15c42c9bb38a9c841670bd807810d",
+  "review_complete": true,
+  "register_entries": 2,
+  "changes": [
+    {
+      "original_start": 89,
+      "original_count": 0,
+      "current_start": 91,
+      "current_count": 4,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-067): restore the original C_VID selector",
+        " * declarations rather than relying on an implicit `int` result. */",
+        "IMPORT void setWritePointers IPT0();",
+        "IMPORT void setReadPointers IPT1(IUH, readset);"
+      ]
+    },
+    {
+      "original_start": 151,
+      "original_count": 2,
+      "current_start": 162,
+      "current_count": 2,
+      "original": [
+        "GLOBAL VOID (*bios_ch2_byte_wrt_fn)();",
+        "GLOBAL VOID (*bios_ch2_word_wrt_fn)();"
+      ],
+      "current": [
+        "GLOBAL VOID (*bios_ch2_byte_wrt_fn) IPT2(ULONG, ch_attr, ULONG, ch_addr);",
+        "GLOBAL VOID (*bios_ch2_word_wrt_fn) IPT2(ULONG, ch_attr, ULONG, ch_addr);"
+      ]
+    }
+  ],
+  "excluded_ranges": [
+    {
+      "original_start": 54,
+      "original_count": 6,
+      "current_start": 55,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_CGA.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 96,
+      "original_count": 1,
+      "current_start": 104,
+      "current_count": 1,
+      "original": [
+        "#include \"avm361.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 121,
+      "original_count": 2,
+      "current_start": 132,
+      "current_count": 1,
+      "original": [
+        "half_word MC6845[MC6845_REGS];  /* The current values of the MC6845 registers */",
+        "half_word mode_reg;             /* The value of the mode control register */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 172,
+      "original_count": 1,
+      "current_start": 184,
+      "current_count": 1,
+      "original": [
+        "IMPORT WRT_POINTERS Glue_writes;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 182,
+      "original_count": 22,
+      "current_start": 197,
+      "current_count": 1,
+      "original": [
+        "LOCAL ULONG dummy_read IFN1(ULONG, offset)",
+        "{",
+        "\tUNUSED(offset);",
+        "\treturn 0;",
+        "}",
+        "",
+        "LOCAL void dummy_str_read IFN3(UTINY *, dest, ULONG, offset, ULONG, count)",
+        "{",
+        "\tUNUSED(dest);",
+        "\tUNUSED(offset);",
+        "\tUNUSED(count);",
+        "}",
+        "",
+        "LOCAL READ_POINTERS\tdummy_reads =",
+        "{",
+        "\tdummy_read,",
+        "\tdummy_read",
+        "#ifndef\tNO_STRING_OPERATIONS",
+        "\t,",
+        "\tdummy_str_read",
+        "#endif\t/* NO_STRING_OPERATIONS */",
+        "};"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 427,
+      "original_count": 1,
+      "current_start": 423,
+      "current_count": 1,
+      "original": [
+        "        MC6845[index_reg] = value;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 625,
+      "original_count": 1,
+      "current_start": 623,
+      "current_count": 1,
+      "original": [
+        "\t\t    CRTC_REG(0xa, value);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 636,
+      "original_count": 1,
+      "current_start": 636,
+      "current_count": 1,
+      "original": [
+        "\t\t    CRTC_REG(0xb, value);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 658,
+      "original_count": 1,
+      "current_start": 660,
+      "current_count": 1,
+      "original": [
+        "\t\tCRTC_REG(0xc, value);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 675,
+      "original_count": 1,
+      "current_start": 679,
+      "current_count": 1,
+      "original": [
+        "\t\tCRTC_REG(0xd, value);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 741,
+      "original_count": 1,
+      "current_start": 747,
+      "current_count": 1,
+      "original": [
+        "        mode_reg = value;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1135,
+      "original_count": 189,
+      "current_start": 1143,
+      "current_count": 1,
+      "original": [
+        "",
+        "/*",
+        "\tThe following functions are MEM_HANDLER functions for the CGA-only",
+        "\tbuild with no C_VID (no a common build). They are unused for most",
+        "\tvariants of SoftPC.",
+        "*/",
+        "",
+        "#define INTEL_SRC\t0",
+        "#define HOST_SRC\t1",
+        "",
+        "/*",
+        "======================== cga_only_simple_handler =========================",
+        "PURPOSE:\tThis function provides a stub for the unused MEM_HANDLER",
+        "\t\tfunctions. This function probably shouldn't be called hence",
+        "\t\tthe trace statement.",
+        "INPUT:\t\tNone.",
+        "OUTPUT:\t\tNone.",
+        "==========================================================================",
+        "*/",
+        "LOCAL void cga_only_simple_handler IFN0()",
+        "{",
+        "\talways_trace0(\"cga_only_simple_handler called\");",
+        "\tsetVideodirty_total(getVideodirty_total() + 1);",
+        "}",
+        "",
+        "/*",
+        "=========================== cga_only_b_write =============================",
+        "PURPOSE:\tByte write function. Puts the value at the given address",
+        "\t\tand increments dirty_flag.",
+        "INPUT:\t\tAddress (in terms of M) and value to put there.",
+        "OUTPUT:\t\tNone.",
+        "==========================================================================",
+        "*/",
+        "LOCAL void cga_only_b_write IFN2(UTINY *, addr, ULONG, val)",
+        "{",
+        "\thost_addr\tptr;",
+        "\tULONG\t\toffs;",
+        "\t",
+        "\toffs = (ULONG) (addr - gvi_pc_low_regen);",
+        "\tptr = get_screen_ptr(offs);",
+        "\t*ptr = val & 0xff;",
+        "\tsetVideodirty_total(getVideodirty_total() + 1);",
+        "}",
+        "",
+        "/*",
+        "=========================== cga_only_w_write =============================",
+        "PURPOSE:\tWord write function. Puts the value at the given address",
+        "\t\tand increments dirty_flag.",
+        "INPUT:\t\tAddress (in terms of M) and value to put there.",
+        "OUTPUT:\t\tNone.",
+        "==========================================================================",
+        "*/",
+        "LOCAL void cga_only_w_write IFN2(UTINY *, addr, ULONG, val)",
+        "{",
+        "\thost_addr\tptr;",
+        "\tULONG\t\toffs;",
+        "\t",
+        "\toffs = (ULONG) (addr - gvi_pc_low_regen);",
+        "\tptr = get_screen_ptr(offs);",
+        "\t*ptr++ = val & 0xff;",
+        "\t*ptr = (val >> 8) & 0xff;",
+        "\tsetVideodirty_total(getVideodirty_total() + 2);",
+        "}",
+        "",
+        "/*",
+        "=========================== cga_only_b_fill ==============================",
+        "PURPOSE:\tByte fill function. Fills the given address range with the",
+        "\t\tvalue and increments dirty_flag.",
+        "INPUT:\t\tAddress range (in terms of M) and value to put there.",
+        "OUTPUT:\t\tNone.",
+        "==========================================================================",
+        "*/",
+        "LOCAL void cga_only_b_fill IFN3(UTINY *, laddr, UTINY *, haddr, ULONG, val )",
+        "{",
+        "\thost_addr\tptr;",
+        "\tIS32\t\tlen;",
+        "\tULONG\t\toffs;",
+        "\t\t",
+        "\toffs = (ULONG) (laddr - gvi_pc_low_regen);",
+        "\tptr = get_screen_ptr(offs);",
+        "\tfor (len = (haddr - laddr); len > 0; len--)",
+        "\t\t*ptr++ = val;",
+        "}",
+        "",
+        "/*",
+        "=========================== cga_only_w_fill ==============================",
+        "PURPOSE:\tWord fill function. Fills the given address range with the",
+        "\t\tvalue and increments dirty_flag.",
+        "INPUT:\t\tAddress range (in terms of M) and value to put there.",
+        "OUTPUT:\t\tNone.",
+        "==========================================================================",
+        "*/",
+        "LOCAL void cga_only_w_fill IFN3(UTINY *, laddr, UTINY *, haddr, ULONG, val )",
+        "{",
+        "\thost_addr\tptr;",
+        "\tIS32\t\tlen;",
+        "\tIU8\t\tlo;",
+        "\tIU8\t\thi;",
+        "\tULONG\t\toffs;",
+        "\t",
+        "\tlo = val & 0xff;",
+        "\thi = (val >> 8) & 0xff;",
+        "\toffs = (ULONG) (laddr - gvi_pc_low_regen);",
+        "\tptr = get_screen_ptr(offs);",
+        "\tfor (len = (haddr - laddr) >> 1; len > 0; len--)",
+        "\t{",
+        "\t\t*ptr++ = lo;",
+        "\t\t*ptr++ = hi;",
+        "\t}",
+        "}",
+        "",
+        "LOCAL void cga_only_b_move IFN4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,",
+        "\tUTINY, src_type)",
+        "{",
+        "\thost_addr\tsrc_ptr;",
+        "\thost_addr\tdst_ptr;",
+        "\tIS32\t\tlen;",
+        "\tULONG\t\toffs;",
+        "\tBOOL\t\tmove_bwds = getDF();",
+        "\t",
+        "\toffs = (ULONG) (laddr - gvi_pc_low_regen);",
+        "\tdst_ptr = get_screen_ptr(offs);",
+        "\tlen = haddr - laddr;",
+        "\tif ((src_type == HOST_SRC) || (src < (UTINY *)gvi_pc_low_regen) ||",
+        "\t\t((UTINY *)gvi_pc_high_regen < src))",
+        "\t{",
+        "\t\t/* Ram source */",
+        "\t\tif (src_type == INTEL_SRC)",
+        "\t\t\tsrc_ptr = get_byte_addr(src);",
+        "\t\telse",
+        "\t\t\tsrc_ptr = src;",
+        "\t\t",
+        "\t\t/* Ram to video move - video is always forwards, ram",
+        "\t\t** depends on BACK_M.",
+        "\t\t*/",
+        "\t\tif (move_bwds)",
+        "\t\t{",
+        "\t\t\tdst_ptr += len;",
+        "#ifdef\tBACK_M",
+        "\t\t\tsrc_ptr -= len;",
+        "\t\t\tfor ( ; len > 0; len--)",
+        "\t\t\t\t*(--dst_ptr) = *(++src_ptr);",
+        "#else",
+        "\t\t\tsrc_ptr += len;",
+        "\t\t\tfor ( ; len > 0; len--)",
+        "\t\t\t\t*(--dst_ptr) = *(--src_ptr);",
+        "#endif\t/* BACK_M */",
+        "\t\t}",
+        "\t\telse",
+        "\t\t{",
+        "#ifdef\tBACK_M",
+        "\t\t\tfor ( ; len > 0; len--)",
+        "\t\t\t\t*dst_ptr++ = *src_ptr--;",
+        "#else",
+        "\t\t\tmemcpy(dst_ptr, src_ptr, len);",
+        "#endif\t/* BACK_M */",
+        "\t\t}",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\t/* Video source */",
+        "\t\toffs = (ULONG) (src - gvi_pc_low_regen);",
+        "\t\tsrc_ptr = get_screen_ptr(offs);",
+        "\t\t",
+        "\t\t/* Video to video move - both sets of memory are always",
+        "\t\t** forwards.",
+        "\t\t*/",
+        "\t\tif (move_bwds)",
+        "\t\t{",
+        "\t\t\tdst_ptr += len;",
+        "\t\t\tsrc_ptr += len;",
+        "\t\t\tfor ( ; len > 0; len--)",
+        "\t\t\t\t*(--dst_ptr) = *(--src_ptr);",
+        "\t\t}",
+        "\t\telse",
+        "\t\t\tmemcpy(dst_ptr, src_ptr, len);",
+        "\t}",
+        "}",
+        "",
+        "LOCAL MEM_HANDLERS cga_only_handlers =",
+        "{",
+        "\tcga_only_b_write,",
+        "\tcga_only_w_write,",
+        "\tcga_only_b_fill,",
+        "\tcga_only_w_fill,",
+        "\tcga_only_b_move,",
+        "\tcga_only_simple_handler\t\t/* word move - not used? */",
+        "};",
+        ""
+      ],
+      "current": [
+        "#error Unsupported excluded CGA-only configuration"
+      ]
+    },
+    {
+      "original_start": 1327,
+      "original_count": 6,
+      "current_start": 1149,
+      "current_count": 6,
+      "original": [
+        "/*",
+        " * The following #include specifies the code segment into which this",
+        " * module will by placed by the MPW C compiler on the Mac II running",
+        " * MultiFinder.",
+        " */",
+        "#include \"SOFTPC_INIT.seg\""
+      ],
+      "current": [
+        "#error Excluded unsupported SEGMENTATION configuration",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 1343,
+      "original_count": 2,
+      "current_start": 1167,
+      "current_count": 1,
+      "original": [
+        "for (i = 0; i < MC6845_REGS; i++)",
+        "    MC6845[i] = 0;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1374,
+      "original_count": 5,
+      "current_start": 1199,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* gmi_define_mem(SAS_VIDEO, &Glue_writes); */",
+        "\tGlue_set_vid_wrt_ptrs(&simple_writes);",
+        "\tGlue_set_vid_rd_ptrs(&simple_reads);",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1383,
+      "original_count": 9,
+      "current_start": 1206,
+      "current_count": 6,
+      "original": [
+        "#ifdef C_VID ",
+        "\tCpu_set_vid_wrt_ptrs( &Glue_writes ); ",
+        "\tCpu_set_vid_rd_ptrs( &Glue_reads ); ",
+        "\tGlue_set_vid_wrt_ptrs( &simple_writes ); ",
+        "\tGlue_set_vid_rd_ptrs( &simple_reads ); ",
+        "#else",
+        "\tCpu_set_vid_wrt_ptrs( &simple_writes ); ",
+        "\tCpu_set_vid_rd_ptrs( &simple_reads ); ",
+        "#endif\t/* C_VID */"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "original_start": 1394,
+      "original_count": 2,
+      "current_start": 1216,
+      "current_count": 1,
+      "original": [
+        "   \tgmi_define_mem(SAS_VIDEO, &vid_handlers);",
+        "\tread_pointers = dummy_reads;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1398,
+      "original_count": 1,
+      "current_start": 1221,
+      "current_count": 1,
+      "original": [
+        "   \tgmi_define_mem(SAS_VIDEO, &cga_only_handlers);"
+      ],
+      "current": [
+        "#error Unsupported excluded CGA-only configuration"
+      ]
+    },
+    {
+      "original_start": 1471,
+      "original_count": 18,
+      "current_start": 1302,
+      "current_count": 1,
+      "original": [
+        "",
+        "GLOBAL CGA_ONLY_GLOBS *VGLOBS = NULL;",
+        "LOCAL CGA_ONLY_GLOBS CgaOnlyGlobs;",
+        "/*(",
+        "============================ setup_vga_globals =============================",
+        "PURPOSE:\tThis function is provided for CGA-only builds to set up a",
+        "\t\tdummy VGLOBS structure which avoids the need to ifdef all",
+        "\t\treferences to VGLOBS->dirty_flag and VGLOBS->screen_ptr.",
+        "INPUT:\t\tNone.",
+        "OUTPUT:\t\tNone.",
+        "============================================================================",
+        ")*/",
+        "GLOBAL void setup_vga_globals IFN0()",
+        "{",
+        "#ifndef CPU_40_STYLE\t/* Evid interface */",
+        "\tVGLOBS = &CgaOnlyGlobs;",
+        "#endif",
+        "}"
+      ],
+      "current": [
+        "#error Unsupported excluded CGA-only configuration"
+      ]
+    }
+  ],
+  "initial_review": "Two declaration adaptations only, plus 19 excluded bodies; retained CGA runtime implementation unchanged.",
+  "counter_review": "egacpu.h remaps SetWritePointers/SetReadPointers to ev_glue.c functions with void/IUH signatures. Original video.h already declares BIOS channel-2 write pointers with two ULONG arguments; current definitions now agree. Do not revert into implicit-int or unprototyped definitions solely to reduce diff.",
+  "limits": "No runtime behavior delta introduced by these declarations; not a fresh execution proof."
+}

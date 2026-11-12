@@ -648,4 +648,3 @@ _inline BYTE Map8(
            gmap[GetGValue(rgb)] +
            bmap[GetBValue(rgb)];
 }
-

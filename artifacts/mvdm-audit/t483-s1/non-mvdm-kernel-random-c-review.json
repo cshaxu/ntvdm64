@@ -1,0 +1,35 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+  "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+  "before_sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+  "current_sha256": "278332285649e2c535998c94b467f9e0cfd3f7341a97e5fb7a8710f8d02a235d",
+  "status": "difference classification complete; functional remediation not implemented",
+  "body_comparison": {
+    "xxxGetControlBrush": "exact"
+  },
+  "evidence": [
+    "src/wow32-dll/source/wow_control_brush_bindings.c",
+    "src/wow32-dll/include/wow_control_brush_bindings.h",
+    "src/wow32-dll/source/wow_edit_call_bindings.c:138-159",
+    "src/wow32-dll/source/wow_edit_native_bindings.c:216",
+    "test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_edit_native_fixture.c:548-600",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:555"
+  ],
+  "decisions": [
+    "Finite brush facade retains original x86 PWND algorithm and uses existing borrow owner. ThreadLock pins exact recipient in outer exception-safe scope; ThreadUnlock defers release to finally. Both handles captured before native reentry; no state access after callback.",
+    "Complete original function body exact. Popup selects owner, otherwise parent, fallback self. Keep original recipient selection rather than duplicating in adapter. Fixture covers combinations, validation/retain failures and exception cleanup.",
+    "Omitted xxxGetControlColor private process/brush validation is supplied by native NtUserGetControlColor using explicit selected recipient. Existing adapter owns WOW callout release/restore and propagates failures. Native fixture tests valid/null/wrong-type brushes and retired control. Retain finite service edge; do not duplicate SendMessage/brush fallback policy.",
+    "Original Set/ClearWindowState kernel wrappers omitted; selected original client/client.c wrappers and wow_edit state binding handle actual local/native state ownership. Do not add duplicate kernel-named providers to this subset.",
+    "SaveClipRgn/RestoreClipRgn, CheckPwndFilter and AllocateUnicodeString omitted. Map actual selected clipping/filter/copy callers before confirming full omission; original region coordinate conversion, ownership release and counted-string exception cleanup are distinct contracts, not generic native API equivalence.",
+    "DEBUG fragment belongs inside omitted xxxGetControlColor brush rejection branch, but is detached after retained function. Reconcile original subset structure and diagnostic anchor; do not restore private USER/GDI validation merely to surround an orphan frame.",
+    "HardErrorControl omitted: kernel desktop references, hard-error handler, queue attachment and secure desktop policy are host-system authority outside this finite control-brush component. Original whole function is not a standalone user-mode error-dialog implementation; retain stopping boundary."
+  ],
+  "entries_added": 7,
+  "format_sites": 2,
+  "limits": [
+    "No fresh build/runtime.",
+    "Other omitted utility closure pending.",
+    "Cross-process native color behavior not newly exercised."
+  ]
+}

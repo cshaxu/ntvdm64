@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+  "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+  "current_sha256": "9de0bb6700c06fa12f84ede05f0eeb54c30995c33981340a18232cfd74d46c33",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 23,
+      "original_count": 2
+    },
+    {
+      "original_start": 28,
+      "original_count": 266
+    },
+    {
+      "original_start": 297,
+      "original_count": 2
+    }
+  ],
+  "initial_review": "Three excluded bodies: non-PROD NON_PROD/PROD_ONLY alternatives, non-PROD diagnostic macro family, HUNTER includes. Remaining production macro definitions exactly original.",
+  "counter_review": "Full original/current retained-source equality. Empty production trace/assert macros are original behavior, not project-added success stubs. This diff neither adds production logging nor alters original argument-evaluation/error behavior. Existing #line30 after PROD alternative is not original branch coordinate; it is superseded before retained macro bodies by #line300, so do not claim universal directive-coordinate correctness.",
+  "limits": "Source difference classification only; directive-position caveat recorded. No new build/runtime or complete line-certification claim."
+}

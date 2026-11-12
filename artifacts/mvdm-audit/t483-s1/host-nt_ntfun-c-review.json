@@ -1,0 +1,160 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+  "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+  "current_sha256": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
+  "review_complete": true,
+  "register_entries": 0,
+  "changes": [],
+  "excluded_ranges": [
+    {
+      "original_start": 123,
+      "original_count": 18,
+      "current_start": 124,
+      "current_count": 1,
+      "original": [
+        "        switch(remove->ioStatusBlock.Status)",
+        "\t{",
+        "\t    case STATUS_SUCCESS:",
+        "\t\tsub_note_trace0(HOST_COM_VERBOSE,\"XOFF (counter)\\n\");",
+        "\t\tbreak;",
+        "",
+        "\t    case STATUS_SERIAL_MORE_WRITES:",
+        "\t\tsub_note_trace0(HOST_COM_VERBOSE,\"XOFF (more writes)\\n\");",
+        "\t\tbreak;",
+        "",
+        "\t    case STATUS_SERIAL_COUNTER_TIMEOUT:",
+        "\t\tsub_note_trace0(HOST_COM_VERBOSE,\"XOFF (timeout)\\n\");",
+        "\t\tbreak;",
+        "",
+        "\t    default:",
+        "\t\tsub_note_trace0(HOST_COM_VERBOSE,\"XOFF (unknown)\\n\");",
+        "\t\tbreak;",
+        "        }"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 195,
+      "original_count": 2,
+      "current_start": 181,
+      "current_count": 1,
+      "original": [
+        "\tfprintf(trace_file, \"%s (%d) \",__FILE__,__LINE__);",
+        "\tfprintf(trace_file, \"NtDeviceIoControlFile failed %x\\n\",rtn);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 209,
+      "original_count": 2,
+      "current_start": 196,
+      "current_count": 1,
+      "original": [
+        "    if(ioStatusBlock.Status != STATUS_SUCCESS)",
+        "\tfprintf(trace_file, \"FastSetupComm failed (%x)\\n\",ioStatusBlock.Status);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 238,
+      "original_count": 2,
+      "current_start": 226,
+      "current_count": 1,
+      "original": [
+        "\tfprintf(trace_file, \"%s (%d) \",__FILE__,__LINE__);",
+        "\tfprintf(trace_file, \"NtDeviceIoControlFile failed %x\\n\",rtn);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 252,
+      "original_count": 2,
+      "current_start": 241,
+      "current_count": 1,
+      "original": [
+        "    if(ioStatusBlock.Status != STATUS_SUCCESS)",
+        "\tfprintf(trace_file,\"FastSetCommMask failed (%x)\\n\",ioStatusBlock.Status);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 282,
+      "original_count": 2,
+      "current_start": 272,
+      "current_count": 1,
+      "original": [
+        "\tfprintf(trace_file, \"%s (%d) \",__FILE__,__LINE__);",
+        "\tfprintf(trace_file, \"NtDeviceIoControlFile failed %x\\n\",rtn);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 296,
+      "original_count": 2,
+      "current_start": 287,
+      "current_count": 1,
+      "original": [
+        "    if(ioStatusBlock.Status != STATUS_SUCCESS)",
+        "\tfprintf(trace_file,\"GetCommModemStatus failed (%x)\\n\",ioStatusBlock.Status);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 349,
+      "original_count": 2,
+      "current_start": 341,
+      "current_count": 1,
+      "original": [
+        "\t    fprintf(trace_file, \"%s (%d) \",__FILE__,__LINE__);",
+        "\t    fprintf(trace_file, \"NtDeviceIoControlFile failed %x\\n\",rtn);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 420,
+      "original_count": 2,
+      "current_start": 413,
+      "current_count": 1,
+      "original": [
+        "\tfprintf(trace_file, \"%s (%d) \",__FILE__,__LINE__);",
+        "\tfprintf(trace_file, \"NtDeviceIoControlFile failed %x\\n\",rtn);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 435,
+      "original_count": 3,
+      "current_start": 429,
+      "current_count": 1,
+      "original": [
+        "    if(ioStatusBlock.Status != STATUS_SUCCESS)",
+        "\tfprintf(trace_file,\"IOCTL_SERIAL_LSRMST_INSERT ioctl failed (%x)\\n\",",
+        "\t\tioStatusBlock.Status);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete normalized source comparison: 10 excluded original conditional bodies only; retained source exact.",
+  "counter_review": "Only non-PROD COM diagnostic switch/printf bodies excluded; original IOCTL, status handling, waits and queue operations unchanged. Boundary checks do not certify universal build contexts or logical line numbers.",
+  "limits": "No source edits or new runtime validation."
+}

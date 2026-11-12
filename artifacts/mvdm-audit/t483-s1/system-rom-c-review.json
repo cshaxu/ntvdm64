@@ -1,0 +1,378 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+  "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+  "current_sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+  "review_complete": true,
+  "register_entries": 0,
+  "exclusion_only": true,
+  "excluded_ranges": [
+    {
+      "original_start": 20,
+      "original_count": 1,
+      "current_start": 22,
+      "current_count": 1,
+      "original": [
+        "#include <malloc.h>"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 44,
+      "original_count": 1,
+      "current_start": 48,
+      "current_count": 1,
+      "original": [
+        "#include \"Cpu_c.h\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 56,
+      "original_count": 1,
+      "current_start": 62,
+      "current_count": 1,
+      "original": [
+        "#define\tBIOS2ROM_FILENAME\t\"bios2.rom\""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 73,
+      "original_count": 3,
+      "current_start": 82,
+      "current_count": 1,
+      "original": [
+        "#define\tGISP_VGAROM_FILENAME         \"hwvga.rom\"",
+        "#define\tGISP_BIOS1ROM_FILENAME       \"hwbios1.rom\"",
+        "#define\tGISP_BIOS2ROM_FILENAME       BIOS2ROM_FILENAME"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 105,
+      "original_count": 2,
+      "current_start": 114,
+      "current_count": 2,
+      "original": [
+        "\t/* Buffer is temporarily allocted  - no bigger than needed. */",
+        "#define ROM_BUFFER_SIZE 1024*25"
+      ],
+      "current": [
+        "#error Excluded unsupported A2CPU configuration",
+        ""
+      ]
+    },
+    {
+      "original_start": 118,
+      "original_count": 1,
+      "current_start": 130,
+      "current_count": 1,
+      "original": [
+        "extern long host_read_resource ();"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 162,
+      "original_count": 15,
+      "current_start": 177,
+      "current_count": 1,
+      "original": [
+        "\tif (roundedLength != length) {",
+        "\t\talways_trace3(\"ROM at 0x%.5lx length rounded up from 0x%.8lx to 0x%.8lx\", start, length, roundedLength);",
+        "\t}",
+        "",
+        "\tif (roundedLength > (128 * 1024)) {",
+        "\t\talways_trace2(\"ROM at 0x%.5lx has a length of 0x%.8lx which is more than 128K\", start, roundedLength);",
+        "\t\tforce_yoda();",
+        "\t\treturn;",
+        "\t}",
+        "",
+        "\tif ((roundedLength <= offset) || (roundedLength < 4)) {",
+        "\t\talways_trace1(\"ROM at 0x%.5lx is too short!\", start);",
+        "\t\tforce_yoda();",
+        "\t\treturn;",
+        "\t}"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 223,
+      "original_count": 1,
+      "current_start": 226,
+      "current_count": 1,
+      "original": [
+        "\tread_rom (VGAROM_FILENAME, EGA_ROM_START);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 235,
+      "original_count": 1,
+      "current_start": 240,
+      "current_count": 1,
+      "original": [
+        "\t\tromLength = read_rom (VGAROM_FILENAME, EGA_ROM_START);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 251,
+      "original_count": 7,
+      "current_start": 258,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* GISP_SVGA - only have the gisp vga roms or, none for CGA boot */",
+        "\tcase VGA:",
+        "\t\tromLength = read_rom (GISP_VGAROM_FILENAME, EGA_ROM_START);",
+        "\tdefault:",
+        "\t\tbreak;",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 291,
+      "original_count": 1,
+      "current_start": 295,
+      "current_count": 1,
+      "original": [
+        "\tmapHostROMs( );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 294,
+      "original_count": 1,
+      "current_start": 300,
+      "current_count": 1,
+      "original": [
+        "\t/* not macintosh 2.0 cpus - they have sparse M */"
+      ],
+      "current": [
+        "#error Excluded unsupported A2CPU configuration"
+      ]
+    },
+    {
+      "original_start": 312,
+      "original_count": 11,
+      "current_start": 322,
+      "current_count": 1,
+      "original": [
+        "\tif ((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )",
+        "\t{",
+        "\t\tread_rom (BIOS1ROM_FILENAME, BIOS_START);",
+        "\t\tread_rom (BIOS2ROM_FILENAME, BIOS2_START);",
+        "\t}",
+        "\telse",
+        "\t{",
+        "\t\tread_rom (GISP_BIOS1ROM_FILENAME, BIOS_START);",
+        "\t\tread_rom (GISP_BIOS2ROM_FILENAME, BIOS2_START);",
+        "\t}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 331,
+      "original_count": 11,
+      "current_start": 334,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/*",
+        "\t * Now tell the CPU what it's not allowed to write over...",
+        "\t *",
+        "\t * These used to be done for everyone, but now they're only done for NT",
+        "\t * as everyone else should have done it inside read_rom.",
+        "\t */",
+        "\tsas_connect_memory (BIOS_START, 0xFFFFFL, SAS_ROM);",
+        "#ifdef EGG",
+        "\tsas_connect_memory (EGA_ROM_START, EGA_ROM_END-1, SAS_ROM);",
+        "#endif"
+      ],
+      "current": [
+        "#error Unsupported excluded original configuration"
+      ]
+    },
+    {
+      "original_start": 357,
+      "original_count": 1,
+      "current_start": 352,
+      "current_count": 1,
+      "original": [
+        "    tmp = (host_addr)host_malloc(ROM_BUFFER_SIZE);"
+      ],
+      "current": [
+        "#error Excluded unsupported A2CPU configuration"
+      ]
+    },
+    {
+      "original_start": 375,
+      "original_count": 1,
+      "current_start": 373,
+      "current_count": 1,
+      "original": [
+        "\thost_free((char *)tmp);"
+      ],
+      "current": [
+        "#error Excluded unsupported A2CPU configuration"
+      ]
+    },
+    {
+      "original_start": 380,
+      "original_count": 1,
+      "current_start": 380,
+      "current_count": 1,
+      "original": [
+        "    return ( 0L );"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 490,
+      "original_count": 13,
+      "current_start": 492,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/* The Mac config system wants to call this routine before the",
+        "\t * CPU exists, so we'd better invent a Mac-specific IBOOL to",
+        "\t * make the symptom non-fatal - finding and fixing the cause",
+        "\t * is too hard.",
+        "\t */",
+        "\t{",
+        "\t\textern IBOOL SafeToCallSas;",
+        "",
+        "\t\tif (!SafeToCallSas)",
+        "\t\t\treturn;\t",
+        "\t}",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 548,
+      "original_count": 37,
+      "current_start": 540,
+      "current_count": 1,
+      "original": [
+        "",
+        "\t/*",
+        "\t * 4.0 style CPUs don't export this variable, and if sas hasn't been",
+        "\t * inited, then the sas_connect will drop out to yoda.",
+        "\t */",
+        "",
+        "\tif (Length_of_M_area == 0) ",
+        "\t\treturn;",
+        " ",
+        "\told_val = sas_hw_at( addr );",
+        "",
+        "\t/* Optimisation - don't upset the world if the value is unchanged.",
+        "\t */",
+        "\tif (old_val == val)",
+        "\t\treturn;",
+        "",
+        "\tsas_connect_memory (addr, addr, SAS_RAM);",
+        "\tsas_store (addr,val);",
+        "\tsas_connect_memory (addr, addr, SAS_ROM);",
+        "/*",
+        " *\tAdjust the checksum value by new - old.",
+        " *\tval is now difference between new and old value.",
+        " *\tWe don't do this for GISP_SVGA because the checksums are already",
+        " *\tscrewed, and attempting to write to the real host system ROM would",
+        " *\tonly make things worse!",
+        " */",
+        "",
+        "#ifndef GISP_SVGA",
+        "\tval -= old_val;",
+        "\told_val = sas_hw_at( 0xFFFFFL );",
+        "",
+        "\told_val -= val;",
+        "\tsas_connect_memory (0xFFFFFL, 0xFFFFFL, SAS_RAM);",
+        "\tsas_store (0xFFFFFL, old_val);",
+        "\tsas_connect_memory (0xFFFFFL, 0xFFFFFL, SAS_ROM);",
+        "#endif /* GISP_SVGA */",
+        ""
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 618,
+      "original_count": 2,
+      "current_start": 578,
+      "current_count": 1,
+      "original": [
+        "/* For GISP svga builds, we initialise from gispROMInit() */",
+        "sys_addr  cur_loc;"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 668,
+      "original_count": 1,
+      "current_start": 629,
+      "current_count": 1,
+      "original": [
+        "\t\tfprintf(trace_file, \"*** Warning ***: patch string into ROM too long; tuncating string '%s'\", string_ptr);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+      ]
+    },
+    {
+      "original_start": 695,
+      "original_count": 9,
+      "current_start": 658,
+      "current_count": 1,
+      "original": [
+        "\tsas_connect_memory(DOS_SCRATCH_PAD, DOS_SCRATCH_PAD_END, SAS_RAM);",
+        "\tsas_stores(cur_loc, (host_addr)string_ptr, strlen(string_ptr));",
+        "\tcur_loc += strlen(string_ptr);",
+        "",
+        "\t/* Terminate the string */",
+        "\tsas_store(cur_loc, '$');",
+        "\tsas_store(cur_loc + 1, '\\0');",
+        "\tsas_disconnect_memory(DOS_SCRATCH_PAD, DOS_SCRATCH_PAD_END);",
+        "\tcur_loc -= strlen(string_ptr);"
+      ],
+      "current": [
+        "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "initial_review": "Complete comparison: only 22 excluded bodies; retained source exact.",
+  "counter_review": "Original CPU40 ROM physical-address access and checksum update preserved, including unmapped-page error and unchanged-byte early return. Platform alternatives and unused build profiles excluded; no new ROM bytes, loading algorithm or guest firmware changes.",
+  "limits": "Source comparison only; not fresh runtime evidence or universal configuration/line certification."
+}

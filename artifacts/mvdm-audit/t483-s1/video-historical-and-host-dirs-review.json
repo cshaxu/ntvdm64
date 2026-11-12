@@ -1,0 +1,32 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/obj/i386/video.lib",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\video\\obj\\i386\\video.lib",
+      "before_sha256": "5e8f781efc54eed6dcfce69d74f57aab19a45baacd5fc7cc6ce7d4f189db6a48",
+      "after_sha256": "5e8f781efc54eed6dcfce69d74f57aab19a45baacd5fc7cc6ce7d4f189db6a48",
+      "original_sha256": "5e8f781efc54eed6dcfce69d74f57aab19a45baacd5fc7cc6ce7d4f189db6a48",
+      "bytes": 725648,
+      "restored": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/obj/i386/video.obj",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\video\\obj\\i386\\video.obj",
+      "before_sha256": "c4c5b295a68d5e9de47154cf13089138c929226d9cf430df1def6596a0075951",
+      "after_sha256": "c4c5b295a68d5e9de47154cf13089138c929226d9cf430df1def6596a0075951",
+      "original_sha256": "c4c5b295a68d5e9de47154cf13089138c929226d9cf430df1def6596a0075951",
+      "bytes": 70206,
+      "restored": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/dirs",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\dirs",
+      "before_sha256": "60bc0a21951ebd7b428c5ff5011bc4f849b5b6c9977fd5aedefe699d9530593a",
+      "after_sha256": "a17fe24e18cdb9b445a73e2d8c9ad43fca38fef74a617b5d5e86b83add9c859c",
+      "original_sha256": "a17fe24e18cdb9b445a73e2d8c9ad43fca38fef74a617b5d5e86b83add9c859c",
+      "bytes": 352,
+      "restored": true
+    }
+  ],
+  "limits": "Outside host C/H census; no build or runtime proof."
+}

@@ -1,0 +1,46 @@
+{
+  "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+  "original_sha256": "f590ef866f87ce80671c4b6f4e3bbe94347342e6b723bc062ed6f044fbb3820f",
+  "current_sha256": "a848c8dda53bfe0d9c739358b6f345bd842f8dba2590db28764b3151d2ace966",
+  "changes": [
+    {
+      "original_start": 37,
+      "original_count": 0,
+      "current_start": 37,
+      "current_count": 1,
+      "original": [],
+      "current": [
+        "    BOOL    ReenterCompletionPending; // DIVERGENCE(OPENNT-HOST-064): coalesced native return, independent of command-event reset."
+      ],
+      "decision": "retain",
+      "necessity": "Completion latch belongs to the original console record; allocate/set/consume all use original DOS owner and lock. This local structure is not the fixed-width broker wire.",
+      "counter_review": "Original count/event alone cannot retain an early decrement across event reset. Header field mirrors justified srvvdm.c behavior; no second state owner. It is a coalesced notification, not per-request completion identity.",
+      "change_plan": "Retain existing finite declaration; no change required.",
+      "missing_evidence": "",
+      "verification_required": "native_service_layout_test checks CONSOLERECORD sizes x64=80/x86=48, separate fixed wire layouts; five real-service reenter-order fixture modes. Source inspected, not run.",
+      "evidence": "src/non-mvdm/base/win32/server/srvvdm.c;test/adapter-basesrv/native_service_layout_test.c;test/adapter-basesrv/base_service_reservation_test.c"
+    },
+    {
+      "original_start": 94,
+      "original_count": 0,
+      "current_start": 96,
+      "current_count": 3,
+      "original": [],
+      "current": [
+        "/* READY is a record state, not proof the worker is inside GetNextVDMCommand.",
+        " * The standalone broker asks this original owner before reusing a Console. */",
+        "BOOL  BaseSrvDOSWorkerWaitPending(HANDLE,PBOOL);"
+      ],
+      "decision": "pending-evidence",
+      "necessity": "Prototype is used by OpenNtBaseServiceCheck and service fixture; implementation and original record ownership reside in srvvdm.c.",
+      "counter_review": "Do not duplicate query in adapter. BOOL/PBOOL interface cannot expose NtQueryEvent failure; paired implementation review leaves failure and query/reservation atomicity unresolved.",
+      "change_plan": "Keep declaration paired with implementation; revise signature and all callers together only if query failure status is required.",
+      "missing_evidence": "Query failure propagation and concurrent admission contract, as registered for srvvdm.c.",
+      "verification_required": "Reservation readiness controls plus targeted failure/concurrency evidence before interface change.",
+      "evidence": "src/ntsrv-exe/opennt/source/base_service.c;artifacts/mvdm-audit/t483-s1/non-mvdm-srvvdm-c-review.json"
+    }
+  ],
+  "excluded": [],
+  "logical_line_mismatches": [],
+  "limits": "No new build/runtime; apibuff direct-call provenance remains unresolved, not confirmed necessary or removable."
+}
