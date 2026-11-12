@@ -63,6 +63,11 @@ Nine implementation files net -36 lines. Cached x86/x64, control-boundary cohort
 class-lifetime, original-line review and Full16 passed. See
 [P9 delivery](../../artifacts/mvdm-audit/t483-s4/batch9-delivery.json).
 
+The [dynamic register summary](../../artifacts/mvdm-audit/t483-s1/classification-summary.md)
+is reconciled through P2:3042 historical/current IDs,321 completed dispositions,
+956 outstanding actions/evidence items; retain is not a repair backlog.
+Current category counts differ from frozen S allocations after approved reclassification.
+
 ## Current Technical Baseline
 
 Package `36dc35b7-1e69-4617-b1ed-d2662418a07c`, complete 11 images at

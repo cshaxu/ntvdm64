@@ -199,3 +199,14 @@ Record the exact batch file list. Each batch follows cached full build,
 publication, applicable tests, commit and push under the existing release gates;
 failed tests are resolved before calling the batch delivered. Documentation and
 ledger-only edits do not manufacture a ten-source-file threshold.
+
+## Dynamic delivery reconciliation
+
+Each P delivery must update the successor CSV decisions and implementation
+statuses from the delivered per-S ledgers, then refresh the
+[current classification](../../../artifacts/mvdm-audit/t483-s1/classification-summary.md)
+and [baseline](../../../artifacts/mvdm-audit/t483-s1/current-baseline.json).
+Stable completed IDs remain for provenance but are excluded from outstanding
+counts. Frozen S allocations and historical snapshot statistics remain labelled
+historical; they do not override the current decisions or imply live diff counts.
+A delivered change with outstanding verification remains outstanding.
