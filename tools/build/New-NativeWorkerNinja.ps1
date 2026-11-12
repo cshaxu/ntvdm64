@@ -121,7 +121,7 @@ function Add-Edge([string]$target) {
   $configSource=Join-Path $root 'src/non-mvdm/base/win32/client/vdm.c'
   $configText=[IO.File]::ReadAllText($configSource)
   $helper=[regex]::Matches($configText,'(?ms)^static VOID BaseSetLastNTError\(.*?^}')
-  $function=[regex]::Matches($configText,'(?ms)^BOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
+  $function=[regex]::Matches($configText,'(?ms)^#line 2275\r?\nBOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
   if($helper.Count -ne 1 -or $function.Count -ne 1){throw 'Original VDM configuration closure is missing or ambiguous'}
   $null=New-Item -ItemType Directory -Path (Join-Path $build 'generated') -Force
   $configCarrier=Join-Path $build 'generated/base_vdm_config.c'

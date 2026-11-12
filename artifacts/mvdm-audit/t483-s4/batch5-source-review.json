@@ -1,0 +1,160 @@
+{
+  "status": "verified and published; included in P5 delivery",
+  "delivered_entries": 61,
+  "assigned_entries": 117,
+  "modified_source_files": 12,
+  "reviews": [
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "change": "Remove pure current-PDB forwarding wrapper; all six callers invoke same read_u16 provider.",
+      "counter_review": "All six address-of locals and distinct failure returns preserved. Existing line250 reset follows deleted helper; caller line counts unchanged."
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "change": "Restore original direct WAIT_FAILED comparison, remove result temporary.",
+      "counter_review": "One WaitForSingleObject, unchanged NowWaiting and failure idletime=0/Sleep(0). Original statement line217 explicitly restored; actual preprocessing still required."
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "change": "Remove only added effective-address include and protected-body CPU40 selectors and unused-local nonCPU40 rejection.",
+      "counter_review": "Compared pinned OpenNT body: removed selector frames are project additions. Original SIM32 and CPU40 include frames remain. Real-mode result and protected provider/sentinel unchanged; line232/259 retained."
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "change": "Remove duplicate setjmp include.",
+      "counter_review": "mvdm_standalone_worker.h directly includes setjmp.h and owns jmp_buf signature. Original line16 anchor retained."
+    },
+    {
+      "file": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "change": "Remove redundant getCX condition in OEM buffer capacity selection.",
+      "counter_review": "Copy requires itFits: BX nonzero already proves CX nonzero. BX0 unchecked UINT32_MAX and status/error behavior unchanged."
+    },
+    {
+      "file": "src/mvdm-host/wow32/wuclip.c",
+      "change": "Remove sole forwarding reverse-HWND helper and impossible native output-null guard.",
+      "counter_review": "All four native conversions pass addresses of locals. Three reverse calls invoke the same public guest-handle provider directly. Guest NULL remains successful NULL; invalid nonzero remains failure. Original line33 anchor follows removed helpers; call/comment line counts preserved."
+    },
+    {
+      "file": "src/mvdm-host/wow32/wuser.c",
+      "change": "Use common/wow/page_domain.h instead of private extern and duplicated rationale.",
+      "counter_review": "Existing common declaration exactly matches int __cdecl(unsigned long,unsigned long). Provider/export ordinal unchanged. NT4 sysmet SetSysColor publishes accepted colors to gpsi->argbSystem; retained adapter still publishes only after native success. Original line21/2923 anchors retained."
+    },
+    {
+      "file": "src/non-mvdm/base/ntos/rtl/time.c",
+      "change": "Remove invented MVDM_STANDALONE_TIME1970_ONLY selection together with object-specific definition.",
+      "counter_review": "Original ALLOC_PRAGMA frame and original selected conversion body untouched. Original line149/190/1222/1333 anchors retained. No remaining source/tool/test selector reference found."
+    },
+    {
+      "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "change": "Remove time.c selector definition, retain its required baseFlags-only cdecl override; config extraction includes original line2275.",
+      "counter_review": "Initial build exposed inherited default /Gz after removing entire override. Restored required cdecl override, without the selector macro. error.c stdcall settings unchanged."
+    },
+    {
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "change": "Restore original relative order of selected functions; retain original architecture conditionals inside classifier cohort; consolidate command cohorts; move original OLD_CFG_BASED frame back to its relative position.",
+      "counter_review": "Fourteen matched retained function bodies byte-identical after removing only line directives and added classifier cohort guards. No selected C statements altered. Both config extraction recipes now include original line2275 anchor. Actual compile and preprocessing pending."
+    },
+    {
+      "file": "tools/build/New-NativeWorkerNinja.ps1",
+      "change": "Include original line2275 in generated configuration function carrier, paired with x86 recipe.",
+      "counter_review": "Function body and dependency preamble unchanged; extraction count remains exactly one."
+    },
+    {
+      "file": "test/observation/verify-redirector-oem-capacity.ps1",
+      "change": "Replace retired archive dependency with archive of actual production redirector objects; include existing process-launch library.",
+      "counter_review": "Current vrnetapi/vrnmpipe fixture compilation, symbol-owner map checks and all runtime assertions retained; final result pending."
+    }
+  ],
+  "build_attempts": [
+    {
+      "attempt": 1,
+      "pid": 12128,
+      "session": 26034,
+      "exit": 1120,
+      "result": "VDMREDIR link failure: time conversion got default stdcall instead of existing cdecl. No publication.",
+      "evidence": "build/t483-s4-p5/first-cached.stdout.log"
+    },
+    {
+      "attempt": 2,
+      "pid": 28624,
+      "session": 19719,
+      "result": "cached x86/x64 complete, exit0"
+    }
+  ],
+  "line_counter_review": {
+    "false_matches": [
+      "nt_rflop original CloseHandle and decrement strings also appear in added rollback; actual original sites retain890/895",
+      "vrnetapi DWORD status expands from project error macros; not the original local at660",
+      "vdm PULONG VdmSize matches old excluded function parameter; selected config uses OUT PULONG before preprocessing"
+    ],
+    "fixed_original_statement_lines": {
+      "vrnetapi.c": [
+        231,
+        249,
+        266
+      ],
+      "wuclip.c": [
+        837
+      ]
+    }
+  },
+  "source_build_test_net_lines": -34,
+  "focused_failure_review": "Old fixture expected deleted original-mvdm-redir archive and omitted process-launch attributes library. Replacement archives actual production redirector objects for fixture linking, retains newly compiled provider override and map checks, includes existing process-launch library. No stub or unresolved-symbol suppression added.",
+  "vdm_mirror_footprint": {
+    "comparison": "Pinned OpenNT vs current, line endings ignored for this metric only",
+    "before": {
+      "added": 569,
+      "deleted": 1309
+    },
+    "after": {
+      "added": 90,
+      "deleted": 834
+    }
+  },
+  "entries_resolved": [
+    "T483-D1388",
+    "T483-D1418",
+    "T483-D1419",
+    "T483-D1424",
+    "T483-D1428",
+    "T483-D1429",
+    "T483-D1432",
+    "T483-D1440",
+    "T483-D1472",
+    "T483-D2043",
+    "T483-D2123",
+    "T483-D2180",
+    "T483-D2183",
+    "T483-D2187",
+    "T483-D2199",
+    "T483-D2200"
+  ],
+  "verification": {
+    "cached": "x86/x64 initial and final exit0",
+    "full": "16 gates pass; external DOS4GW/NESticle fixture skipped",
+    "oem": "actual original provider fixture passed; test closure updated to current production objects",
+    "rtl_time": "7 boundary cases passed",
+    "line_review": {
+      "original_matching_anchors": 1259,
+      "remaining_true_mismatches": 0,
+      "reviewed_false_matches": 16,
+      "reasons": {
+        "nt_rflop": "Added rollback repeats original close/decrement text; real original statements still mapped890/895.",
+        "vrnetapi": "Thirteen declarations originate in error macro expansion, not original unique local660.",
+        "vdm-client": "Selected config OUT PULONG parameter2281 loses OUT in preprocessing and matches unrelated excluded function parameter1091."
+      },
+      "fixed_lines": {
+        "vrnetapi": [
+          231,
+          249,
+          266
+        ],
+        "wuclip": [
+          837
+        ]
+      }
+    },
+    "package_equivalence": "All11 equal after only packageUUID/PE timestamp normalization"
+  },
+  "governance": "Documentation governance and relative links passed; build/t483-s4-p5/governance.stdout.log"
+}

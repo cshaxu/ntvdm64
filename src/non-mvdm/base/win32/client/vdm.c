@@ -46,265 +46,227 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
     SetLastError(RtlNtStatusToDosError(Status));
 }
 
-#if (!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT)
-UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
-
-#line 3022
-BOOL BaseCreateVDMEnvironment(
-    PWCHAR lpEnvironment,
-    ANSI_STRING * pAStringEnv,
-    UNICODE_STRING  *pUStringEnv
-    )
-{
-    WCHAR  *pEnv, *pDst, *EnvStrings,* pTmp, *pNewEnv;
-    DWORD   cchEnv, dw, Length, dwRemain;
-    NTSTATUS	Status;
-    UINT        NameType;
-    BOOL        bRet = FALSE;
-
-    if (!ARGUMENT_PRESENT(pAStringEnv) || !ARGUMENT_PRESENT(pUStringEnv)){
-	SetLastError(ERROR_INVALID_PARAMETER);
-	return FALSE;
-	}
-    try {
-	// the environment strings are shared by every thread of the same
-	// process. Since we have no idea of what the caller process
-	// is, we have to grab the entire environment to our local buffer in one
-	// shot then we can walk through the strings.
-	// Note that if another thread makes call to RtlSetEnvironmentVariable
-	// then we are out of sync. It is a problem of process structure and
-	// I don't want to think about it now.
-	// The funny thing is that we have to assume the environment
-	// is a block of strings(otherwise, how can we do it?)t, nothing more and
-	// nothing less. If someday and somebody dares to change it, he will be
-	// the one to blame. If the caller(CreateProcess)
-	// provides the environment, we assume it is safe to walk through it.
-	//
-
-	if (lpEnvironment == NULL) {
-	    // create a new environment and inherit the current process env
-	    Status = RtlCreateEnvironment(TRUE, (PVOID *)&EnvStrings);
-            if (!NT_SUCCESS(Status))
-                goto bveTryExit;
-	    }
-	else
-	    EnvStrings = lpEnvironment;
-
-	if (EnvStrings == NULL) {
-	    SetLastError(ERROR_BAD_ENVIRONMENT);
-            goto bveTryExit;
-	    }
-	// figure out how long the environment is
-	// why can Rtl just provides such a function for us?
-	//
-	cchEnv = 0;
-	pEnv = EnvStrings;
-	// environment is double-null terminated
-	while (!(*pEnv++ == UNICODE_NULL && *pEnv == UNICODE_NULL))
-	    cchEnv++;
-	// count the last two NULLs
-	cchEnv += 2;
-	// we don't want to change the original environment, so
-	// make a local buffer for it.
-        pNewEnv = (LPWSTR)RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG( VDM_TAG ),
-					  (cchEnv + MAX_PATH) * sizeof(WCHAR));
-	if (pNewEnv == NULL) {
-	    SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-            goto bveTryExit;
-	    }
-	// give the last two for null
-	dwRemain = MAX_PATH - 2;
-	// now walk through the environment string
-	pEnv = EnvStrings;
-	// the new environmet will be
-	pDst = pNewEnv;
-	while (*pEnv != UNICODE_NULL) {
-	    pTmp = pEnv;
-	    // current directory environment has the form as:
-	    // "=d:=d:\pathname" where d: is the drive designator.
-	    if (pEnv[0] == (WCHAR) '=' ) {
-		if (((pEnv[1] >= (WCHAR) 'A' && pEnv[1] <= (WCHAR) 'Z') ||
-		     (pEnv[1] >= (WCHAR) 'a' && pEnv[1] <= (WCHAR) 'z')) &&
-		    pEnv[2] == (WCHAR) ':' &&
-		    pEnv[3] == (WCHAR) '=') {
-		    // copy the name and the '='
-		    *pDst++ = *pEnv++;*pDst++ = *pEnv++;
-		    *pDst++ = *pEnv++;*pDst++ = *pEnv++;
-		    // current dir is single path
-		    NameType = ENV_NAME_TYPE_SINGLE_PATH;
-		    }
-		else {
-		    // a weird environment was detected.
-		    // treat it as no path
-		    NameType = ENV_NAME_TYPE_NO_PATH;
-		    }
-		}
-	    else {
-		// copy down the name and the '='
-                while (*pEnv && (*pDst++ = *pEnv++) != (WCHAR) '=')
-                    ;
-
-		// and check the type
-		NameType = BaseGetEnvNameType_U(pTmp, (DWORD)(pEnv - pTmp) - 1);
-		}
-	    if (NameType == ENV_NAME_TYPE_NO_PATH) {
-		while ((*pDst++ = *pEnv++) != UNICODE_NULL)
-		    ;
-		}
-	    else if (NameType == ENV_NAME_TYPE_SINGLE_PATH) {
-		    Length = wcslen(pEnv) + 1;
-		    dw = GetShortPathNameW(pEnv, pDst, Length + dwRemain);
-		    // if the conversion failed, we simply pass down the original
-		    // one no matter what the reason is. This is done because we
-		    // are doing the environment strings.
-		    if (dw == 0 || dw >= Length + dwRemain){
-			RtlMoveMemory(pDst, pEnv, Length * sizeof(WCHAR));
-			dw = Length - 1;
-			}
-		    pDst += dw + 1;
-		    pEnv += Length;
-		    if (dw > Length)
-			dwRemain -= dw - Length;
-		    }
-		 else {
-		    // multiple path name found.
-		    // the character ';' is used for seperator
-		     pTmp = pEnv;
-		     while(*pEnv != UNICODE_NULL) {
-			if (*pEnv == (WCHAR) ';') {
-			    // length not include the ';'
-			    Length = (DWORD)(pEnv - pTmp);
-			    if (Length > 0) {
-				*pEnv = UNICODE_NULL;
-				dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
-				// again, if the conversion failed, use the original one
-				if (dw == 0 || dw > Length + dwRemain) {
-				    RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
-				    dw = Length;
-				    }
-				pDst += dw;
-				*pDst++ = *pEnv++ = (WCHAR)';';
-				if (dw > Length)
-				    dwRemain -= dw - Length;
-				}
-			     // skip all consecutive ';'
-			     while (*pEnv == (WCHAR) ';')
-				*pDst++ = *pEnv++;
-			     pTmp = pEnv;
-			     }
-			else
-			    pEnv++;
-			}
-		    // convert the last one
-		    if ((Length = (DWORD)(pEnv - pTmp)) != 0) {
-			dw = GetShortPathNameW(pTmp, pDst, Length+1 + dwRemain);
-			if (dw == 0 || dw > Length) {
-			    RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
-			    dw = Length;
-			    }
-			pDst += dw;
-			if (dw > Length)
-			    dwRemain -= dw - Length;
-			}
-		    *pDst++ = *pEnv++;
-		    }
-	    }
-	*pDst++ = UNICODE_NULL;
-	/* DIVERGENCE(OPENNT-HOST-065): preserve native-width byte distance. */
-#line 3182
-	cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
-	pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
-	pUStringEnv->Buffer = pNewEnv;
-	Status = RtlUnicodeStringToAnsiString(pAStringEnv,
-					      pUStringEnv,
-					      TRUE
-					      );
-
-	if (!NT_SUCCESS(Status)) {
-	    BaseSetLastNTError(Status);
-	    }
-	else
-            bRet = TRUE;
-bveTryExit:;
-	}
-    finally {
-	 if (lpEnvironment == NULL && EnvStrings != NULL)
-	    RtlDestroyEnvironment(EnvStrings);
-        }
-    return bRet;
-}
-/**
-    Destroy the environment block created by BaseCreateVDMEnvironment
-    Input: ANSI_STRING * pAnsiStringVDMEnv
-		      Environment block in ANSI, should be freed via
-		      RtlFreeAnsiString
-	   UNICODE_STRING * pUnicodeStringEnv
-		      Environment block in UNICODE. The Buffer should
-		      be freed with RtlFreeHeap.
-    Output: should always be TRUE.
-
-**/
-
+/* DIVERGENCE(OPENNT-HOST-014): independent launcher classifier cohort;
+ * finite native declarations and private symbol binding, original bodies. */
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#include <base_classifier.h>
+#line 91
 BOOL
-BaseDestroyVDMEnvironment(
-    ANSI_STRING *pAStringEnv,
-    UNICODE_STRING *pUStringEnv
+WINAPI
+#line 93
+GetBinaryTypeW(
+    IN  LPCWSTR  lpApplicationName,
+    OUT LPDWORD  lpBinaryType
     )
+
+/*++
+
+Routine Description: Unicode version.
+    This API returns the binary type of lpApplicationName.
+
+Arguments:
+    lpApplicationName - Full pathname of the binary
+    lpBinaryType - pointer where binary type will be returned.
+
+Return Value:
+    TRUE - if SUCCESS; lpBinaryType has following
+                SCS_32BIT_BINARY    - Win32 Binary (NT or Chicago)
+                SCS_DOS_BINARY      - DOS Binary
+                SCS_WOW_BINARY      - Windows 3.X Binary
+                SCS_PIF_BINARY      - PIF file
+                SCS_POSIX_BINARY    - POSIX Binary
+                SCS_OS216_BINARY    - OS/2 Binary
+    FALSE - if file not found or of unknown type. More info with GetLastError
+--*/
+
 {
-    if (pAStringEnv->Buffer)
-	RtlFreeAnsiString(pAStringEnv);
-    if (pUStringEnv->Buffer)
-	RtlFreeHeap(RtlProcessHeap(), 0, pUStringEnv->Buffer);
-    return TRUE;
-
-}
-
-/**
-    This function returns the name type of the given environment variable name
-    The name type has three possibilities. Each one represents if the
-    given name can have pathnames as its value.
-     ENV_NAME_TYPE_NO_PATH:   no pathname can be its value
-     ENV_NAME_TYPE_SINGLE_PATH: single pathname
-     ENV_NAME_MULTIPLE_PATH: multiple path
+    NTSTATUS Status;
+    UNICODE_STRING PathName;
+    RTL_RELATIVE_NAME RelativeName;
+    BOOLEAN TranslationStatus;
+    OBJECT_ATTRIBUTES Obja;
+    PVOID FreeBuffer = NULL;
+    HANDLE FileHandle, SectionHandle=NULL;
+    IO_STATUS_BLOCK IoStatusBlock;
+    LONG fBinaryType = SCS_32BIT_BINARY;
+    BOOLEAN bReturn = FALSE;
+    SECTION_IMAGE_INFORMATION ImageInformation;
 
 
-    SIDE NOTE:
-	Currently, nt can not installed on a long path and it seems
-	that systemroot and windir are never be in long path.
+    try {
+        //
+        // Translate to an NT name.
+        //
 
-**/
-UINT
-BaseGetEnvNameType_U(WCHAR * Name, DWORD NameLength)
-{
+        TranslationStatus = RtlDosPathNameToNtPathName_U(
+				// DynamicCommandLine.Buffer ? DynamicCommandLine.Buffer : CommandLine->Buffer,
+				lpApplicationName,
+                                &PathName,
+                                NULL,
+                                &RelativeName
+                                );
+
+        if ( !TranslationStatus ) {
+            BaseSetLastNTError(STATUS_OBJECT_NAME_INVALID);
+            goto GBTtryexit;
+            }
+
+        FreeBuffer = PathName.Buffer;
+
+        if ( RelativeName.RelativeName.Length ) {
+            PathName = *(PUNICODE_STRING)&RelativeName.RelativeName;
+            }
+        else {
+            RelativeName.ContainingDirectory = NULL;
+            }
+
+	InitializeObjectAttributes(
+            &Obja,
+            &PathName,
+            OBJ_CASE_INSENSITIVE,
+            RelativeName.ContainingDirectory,
+            NULL
+            );
+
+        //
+        // Open the file for execute access
+        //
+
+        Status = NtOpenFile(
+                    &FileHandle,
+                    SYNCHRONIZE | FILE_EXECUTE,
+                    &Obja,
+                    &IoStatusBlock,
+                    FILE_SHARE_READ | FILE_SHARE_DELETE,
+                    FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE
+                    );
+        if (!NT_SUCCESS(Status) ) {
+#line 180
+            BaseSetLastNTError(Status);
+            goto GBTtryexit;
+            }
+
+        //
+        // Create a section object backed by the file
+        //
+
+        Status = NtCreateSection(
+                    &SectionHandle,
+                    SECTION_ALL_ACCESS,
+                    NULL,
+                    NULL,
+                    PAGE_EXECUTE,
+                    SEC_IMAGE,
+                    FileHandle
+                    );
+        NtClose(FileHandle);
+
+        if (!NT_SUCCESS(Status) ) {
+
+            SectionHandle = NULL;
+
+	    switch (Status) {
+                case STATUS_INVALID_IMAGE_NE_FORMAT:
+#line 205
+#ifdef _X86_
+#line 206
+                    fBinaryType = SCS_OS216_BINARY;
+                    break;
+#endif
+#line 209
+
+		case STATUS_INVALID_IMAGE_PROTECT:
+		    fBinaryType = SCS_DOS_BINARY;
+		    break;
+
+		case STATUS_INVALID_IMAGE_WIN_16:
+		    fBinaryType = SCS_WOW_BINARY;
+		    break;
+
+                case STATUS_INVALID_IMAGE_NOT_MZ:
+                    fBinaryType = BaseIsDosApplication(&PathName, Status);
+                    if (!fBinaryType){
+                        BaseSetLastNTError(Status);
+                        goto GBTtryexit;
+#line 223
+		    }
+		    fBinaryType = (fBinaryType	== BINARY_TYPE_DOS_PIF) ?
+				  SCS_PIF_BINARY : SCS_DOS_BINARY;
+                    break;
+
+                default:
+                    BaseSetLastNTError(Status);
+                    goto GBTtryexit;
+                }
+            }
+        else {
+            //
+            // Query the section
+            //
+
+            Status = NtQuerySection(
+                        SectionHandle,
+                        SectionImageInformation,
+                        &ImageInformation,
+                        sizeof( ImageInformation ),
+                        NULL
+                        );
+
+            if (!NT_SUCCESS( Status )) {
+                BaseSetLastNTError(Status);
+                goto GBTtryexit;
+            }
+
+            if (ImageInformation.ImageCharacteristics & IMAGE_FILE_DLL) {
+                SetLastError(ERROR_BAD_EXE_FORMAT);
+                goto GBTtryexit;
+            }
+
+            if (ImageInformation.Machine !=
+                    RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {
+
+#line 259
+#ifdef _MIPS_
+#line 260
+#error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.
+#else
+#line 269
+                SetLastError(ERROR_BAD_EXE_FORMAT);
+                goto GBTtryexit;
+#endif // _MIPS_
+#line 272
+            }
+
+            if ( ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_GUI &&
+                ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_CUI ) {
 
 
-// so far we only take care of three predefined names:
-// PATH
-// WINDIR and
-// SYSTEMROOT.
-//
-static ENV_INFO     EnvInfoTable[STD_ENV_NAME_COUNT] = {
-			{ENV_NAME_TYPE_MULTIPLE_PATH, 4, ENV_NAME_PATH},
-			{ENV_NAME_TYPE_SINGLE_PATH, 6, ENV_NAME_WINDIR},
-			{ENV_NAME_TYPE_SINGLE_PATH, 10, ENV_NAME_SYSTEMROOT}
-			};
+                if ( ImageInformation.SubSystemType == IMAGE_SUBSYSTEM_POSIX_CUI ) {
+                    fBinaryType = SCS_POSIX_BINARY;
+                }
+            }
 
 
+#line 284
+        }
 
-   UINT NameType;
-   int	i;
+	*lpBinaryType = fBinaryType;
 
+	bReturn = TRUE;
 
-    NameType = ENV_NAME_TYPE_NO_PATH;
-
-    for (i = 0; i < STD_ENV_NAME_COUNT; i++) {
-	if (EnvInfoTable[i].NameLength == NameLength &&
-	    !_wcsnicmp(EnvInfoTable[i].Name, Name, NameLength)) {
-	    NameType = EnvInfoTable[i].NameType;
-	    break;
-	    }
+GBTtryexit:;
 	}
-    return NameType;
+#line 292
+    finally {
+
+        if (SectionHandle)
+            NtClose(SectionHandle);
+
+	if (FreeBuffer)
+            RtlFreeHeap(RtlProcessHeap(), 0,FreeBuffer);
+    }
+    return bReturn;
+#line 301
 }
 
 #endif
@@ -1025,6 +987,13 @@ Return Value:
                         );
     return;
 }
+
+#line 1084
+#ifdef OLD_CFG_BASED
+#line 1085
+#error Excluded unsupported original OLD_CFG_BASED configuration
+#endif
+#line 1150
 
 #line 1274
 BOOL
@@ -1969,10 +1938,75 @@ BaseUpdateVDMEntry(
 }
 #endif
 
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#line 2212
+ULONG
+BaseIsDosApplication(
+    IN PUNICODE_STRING PathName,
+    IN NTSTATUS Status
+    )
+/*++
+
+Routine Description:
+
+    Determines if app is a ".com" or a ".pif" type of app
+    by looking at the extension, and the Status from NtCreateSection
+    for PAGE_EXECUTE.
+
+Arguments:
+
+    PathName    -- Supplies a pointer to the path string
+    Status      -- Status code from CreateSection call
+    bNewConsole -- Pif can exec only from a new console
+
+Return Value:
+
+    file is a com\pif dos application
+    SCS_DOS_BINARY - ".com", may also be a .exe extension
+    SCS_PIF_BINARY - ".pif"
+
+
+    0 -- file is not a dos application, may be a .bat or .cmd file
+
+--*/
+{
+    UNICODE_STRING String;
+
+         // check for .com extension
+    String.Length = BaseDotComSuffixName.Length;
+    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
+                    sizeof(WCHAR)]);
+
+    if (RtlEqualUnicodeString(&String, &BaseDotComSuffixName, TRUE))
+	return BINARY_TYPE_DOS_COM;
+
+
+        // check for .pif extension
+    String.Length = BaseDotPifSuffixName.Length;
+    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
+                    sizeof(WCHAR)]);
+
+    if (RtlEqualUnicodeString(&String, &BaseDotPifSuffixName, TRUE))
+	return BINARY_TYPE_DOS_PIF;
+
+
+        // check for .exe extension
+    String.Length = BaseDotExeSuffixName.Length;
+    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
+        sizeof(WCHAR)]);
+
+    if (RtlEqualUnicodeString(&String, &BaseDotExeSuffixName, TRUE))
+	return BINARY_TYPE_DOS_EXE;
+
+    return 0;
+#line 2271
+}
+#endif
+
+#if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 /* DIVERGENCE(OPENNT-HOST-014): package configuration replaces the NT4 WOW
  * registry. Image-tail lookup binds the configured side-by-side worker path;
  * the original argument construction and all remaining body text are kept. */
-#if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 #include <base_config.h>
 #line 2275
 BOOL
@@ -2187,10 +2221,8 @@ Notes:
     RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);
     return TRUE;
 }
-#endif
 
 /* DIVERGENCE(OPENNT-HOST-014): original launcher task-exit query. */
-#if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 #line 2489
 BOOL
 BaseCheckForVDM(
@@ -2233,303 +2265,267 @@ BaseCheckForVDM(
 }
 #endif
 
-/* DIVERGENCE(OPENNT-HOST-014): independent launcher classifier cohort;
- * finite native declarations and private symbol binding, original bodies. */
-#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
-#include <base_classifier.h>
-BOOL
-WINAPI
-#line 93
-GetBinaryTypeW(
-    IN  LPCWSTR  lpApplicationName,
-    OUT LPDWORD  lpBinaryType
+
+#if (!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT)
+UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
+
+#line 3022
+BOOL BaseCreateVDMEnvironment(
+    PWCHAR lpEnvironment,
+    ANSI_STRING * pAStringEnv,
+    UNICODE_STRING  *pUStringEnv
     )
-
-/*++
-
-Routine Description: Unicode version.
-    This API returns the binary type of lpApplicationName.
-
-Arguments:
-    lpApplicationName - Full pathname of the binary
-    lpBinaryType - pointer where binary type will be returned.
-
-Return Value:
-    TRUE - if SUCCESS; lpBinaryType has following
-                SCS_32BIT_BINARY    - Win32 Binary (NT or Chicago)
-                SCS_DOS_BINARY      - DOS Binary
-                SCS_WOW_BINARY      - Windows 3.X Binary
-                SCS_PIF_BINARY      - PIF file
-                SCS_POSIX_BINARY    - POSIX Binary
-                SCS_OS216_BINARY    - OS/2 Binary
-    FALSE - if file not found or of unknown type. More info with GetLastError
---*/
-
 {
-    NTSTATUS Status;
-    UNICODE_STRING PathName;
-    RTL_RELATIVE_NAME RelativeName;
-    BOOLEAN TranslationStatus;
-    OBJECT_ATTRIBUTES Obja;
-    PVOID FreeBuffer = NULL;
-    HANDLE FileHandle, SectionHandle=NULL;
-    IO_STATUS_BLOCK IoStatusBlock;
-    LONG fBinaryType = SCS_32BIT_BINARY;
-    BOOLEAN bReturn = FALSE;
-    SECTION_IMAGE_INFORMATION ImageInformation;
+    WCHAR  *pEnv, *pDst, *EnvStrings,* pTmp, *pNewEnv;
+    DWORD   cchEnv, dw, Length, dwRemain;
+    NTSTATUS	Status;
+    UINT        NameType;
+    BOOL        bRet = FALSE;
 
-
-    try {
-        //
-        // Translate to an NT name.
-        //
-
-        TranslationStatus = RtlDosPathNameToNtPathName_U(
-				// DynamicCommandLine.Buffer ? DynamicCommandLine.Buffer : CommandLine->Buffer,
-				lpApplicationName,
-                                &PathName,
-                                NULL,
-                                &RelativeName
-                                );
-
-        if ( !TranslationStatus ) {
-            BaseSetLastNTError(STATUS_OBJECT_NAME_INVALID);
-            goto GBTtryexit;
-            }
-
-        FreeBuffer = PathName.Buffer;
-
-        if ( RelativeName.RelativeName.Length ) {
-            PathName = *(PUNICODE_STRING)&RelativeName.RelativeName;
-            }
-        else {
-            RelativeName.ContainingDirectory = NULL;
-            }
-
-	InitializeObjectAttributes(
-            &Obja,
-            &PathName,
-            OBJ_CASE_INSENSITIVE,
-            RelativeName.ContainingDirectory,
-            NULL
-            );
-
-        //
-        // Open the file for execute access
-        //
-
-        Status = NtOpenFile(
-                    &FileHandle,
-                    SYNCHRONIZE | FILE_EXECUTE,
-                    &Obja,
-                    &IoStatusBlock,
-                    FILE_SHARE_READ | FILE_SHARE_DELETE,
-                    FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE
-                    );
-        if (!NT_SUCCESS(Status) ) {
-#line 180
-            BaseSetLastNTError(Status);
-            goto GBTtryexit;
-            }
-
-        //
-        // Create a section object backed by the file
-        //
-
-        Status = NtCreateSection(
-                    &SectionHandle,
-                    SECTION_ALL_ACCESS,
-                    NULL,
-                    NULL,
-                    PAGE_EXECUTE,
-                    SEC_IMAGE,
-                    FileHandle
-                    );
-        NtClose(FileHandle);
-
-        if (!NT_SUCCESS(Status) ) {
-
-            SectionHandle = NULL;
-
-	    switch (Status) {
-                case STATUS_INVALID_IMAGE_NE_FORMAT:
-#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
-#line 205
-#ifdef _X86_
-#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
-#line 206
-                    fBinaryType = SCS_OS216_BINARY;
-                    break;
-#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
-#endif
-#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
-#line 209
-
-		case STATUS_INVALID_IMAGE_PROTECT:
-		    fBinaryType = SCS_DOS_BINARY;
-		    break;
-
-		case STATUS_INVALID_IMAGE_WIN_16:
-		    fBinaryType = SCS_WOW_BINARY;
-		    break;
-
-                case STATUS_INVALID_IMAGE_NOT_MZ:
-                    fBinaryType = BaseIsDosApplication(&PathName, Status);
-                    if (!fBinaryType){
-                        BaseSetLastNTError(Status);
-                        goto GBTtryexit;
-#line 223
-		    }
-		    fBinaryType = (fBinaryType	== BINARY_TYPE_DOS_PIF) ?
-				  SCS_PIF_BINARY : SCS_DOS_BINARY;
-                    break;
-
-                default:
-                    BaseSetLastNTError(Status);
-                    goto GBTtryexit;
-                }
-            }
-        else {
-            //
-            // Query the section
-            //
-
-            Status = NtQuerySection(
-                        SectionHandle,
-                        SectionImageInformation,
-                        &ImageInformation,
-                        sizeof( ImageInformation ),
-                        NULL
-                        );
-
-            if (!NT_SUCCESS( Status )) {
-                BaseSetLastNTError(Status);
-                goto GBTtryexit;
-            }
-
-            if (ImageInformation.ImageCharacteristics & IMAGE_FILE_DLL) {
-                SetLastError(ERROR_BAD_EXE_FORMAT);
-                goto GBTtryexit;
-            }
-
-            if (ImageInformation.Machine !=
-                    RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {
-
-#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
-#line 259
-#ifdef _MIPS_
-#line 260
-#error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.
-#else
-#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
-#line 269
-                SetLastError(ERROR_BAD_EXE_FORMAT);
-                goto GBTtryexit;
-#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
-#endif // _MIPS_
-#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
-#line 272
-            }
-
-            if ( ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_GUI &&
-                ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_CUI ) {
-
-
-                if ( ImageInformation.SubSystemType == IMAGE_SUBSYSTEM_POSIX_CUI ) {
-                    fBinaryType = SCS_POSIX_BINARY;
-                }
-            }
-
-
-#line 284
-        }
-
-	*lpBinaryType = fBinaryType;
-
-	bReturn = TRUE;
-
-GBTtryexit:;
+    if (!ARGUMENT_PRESENT(pAStringEnv) || !ARGUMENT_PRESENT(pUStringEnv)){
+	SetLastError(ERROR_INVALID_PARAMETER);
+	return FALSE;
 	}
-#line 292
+    try {
+	// the environment strings are shared by every thread of the same
+	// process. Since we have no idea of what the caller process
+	// is, we have to grab the entire environment to our local buffer in one
+	// shot then we can walk through the strings.
+	// Note that if another thread makes call to RtlSetEnvironmentVariable
+	// then we are out of sync. It is a problem of process structure and
+	// I don't want to think about it now.
+	// The funny thing is that we have to assume the environment
+	// is a block of strings(otherwise, how can we do it?)t, nothing more and
+	// nothing less. If someday and somebody dares to change it, he will be
+	// the one to blame. If the caller(CreateProcess)
+	// provides the environment, we assume it is safe to walk through it.
+	//
+
+	if (lpEnvironment == NULL) {
+	    // create a new environment and inherit the current process env
+	    Status = RtlCreateEnvironment(TRUE, (PVOID *)&EnvStrings);
+            if (!NT_SUCCESS(Status))
+                goto bveTryExit;
+	    }
+	else
+	    EnvStrings = lpEnvironment;
+
+	if (EnvStrings == NULL) {
+	    SetLastError(ERROR_BAD_ENVIRONMENT);
+            goto bveTryExit;
+	    }
+	// figure out how long the environment is
+	// why can Rtl just provides such a function for us?
+	//
+	cchEnv = 0;
+	pEnv = EnvStrings;
+	// environment is double-null terminated
+	while (!(*pEnv++ == UNICODE_NULL && *pEnv == UNICODE_NULL))
+	    cchEnv++;
+	// count the last two NULLs
+	cchEnv += 2;
+	// we don't want to change the original environment, so
+	// make a local buffer for it.
+        pNewEnv = (LPWSTR)RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG( VDM_TAG ),
+					  (cchEnv + MAX_PATH) * sizeof(WCHAR));
+	if (pNewEnv == NULL) {
+	    SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            goto bveTryExit;
+	    }
+	// give the last two for null
+	dwRemain = MAX_PATH - 2;
+	// now walk through the environment string
+	pEnv = EnvStrings;
+	// the new environmet will be
+	pDst = pNewEnv;
+	while (*pEnv != UNICODE_NULL) {
+	    pTmp = pEnv;
+	    // current directory environment has the form as:
+	    // "=d:=d:\pathname" where d: is the drive designator.
+	    if (pEnv[0] == (WCHAR) '=' ) {
+		if (((pEnv[1] >= (WCHAR) 'A' && pEnv[1] <= (WCHAR) 'Z') ||
+		     (pEnv[1] >= (WCHAR) 'a' && pEnv[1] <= (WCHAR) 'z')) &&
+		    pEnv[2] == (WCHAR) ':' &&
+		    pEnv[3] == (WCHAR) '=') {
+		    // copy the name and the '='
+		    *pDst++ = *pEnv++;*pDst++ = *pEnv++;
+		    *pDst++ = *pEnv++;*pDst++ = *pEnv++;
+		    // current dir is single path
+		    NameType = ENV_NAME_TYPE_SINGLE_PATH;
+		    }
+		else {
+		    // a weird environment was detected.
+		    // treat it as no path
+		    NameType = ENV_NAME_TYPE_NO_PATH;
+		    }
+		}
+	    else {
+		// copy down the name and the '='
+                while (*pEnv && (*pDst++ = *pEnv++) != (WCHAR) '=')
+                    ;
+
+		// and check the type
+		NameType = BaseGetEnvNameType_U(pTmp, (DWORD)(pEnv - pTmp) - 1);
+		}
+	    if (NameType == ENV_NAME_TYPE_NO_PATH) {
+		while ((*pDst++ = *pEnv++) != UNICODE_NULL)
+		    ;
+		}
+	    else if (NameType == ENV_NAME_TYPE_SINGLE_PATH) {
+		    Length = wcslen(pEnv) + 1;
+		    dw = GetShortPathNameW(pEnv, pDst, Length + dwRemain);
+		    // if the conversion failed, we simply pass down the original
+		    // one no matter what the reason is. This is done because we
+		    // are doing the environment strings.
+		    if (dw == 0 || dw >= Length + dwRemain){
+			RtlMoveMemory(pDst, pEnv, Length * sizeof(WCHAR));
+			dw = Length - 1;
+			}
+		    pDst += dw + 1;
+		    pEnv += Length;
+		    if (dw > Length)
+			dwRemain -= dw - Length;
+		    }
+		 else {
+		    // multiple path name found.
+		    // the character ';' is used for seperator
+		     pTmp = pEnv;
+		     while(*pEnv != UNICODE_NULL) {
+			if (*pEnv == (WCHAR) ';') {
+			    // length not include the ';'
+			    Length = (DWORD)(pEnv - pTmp);
+			    if (Length > 0) {
+				*pEnv = UNICODE_NULL;
+				dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
+				// again, if the conversion failed, use the original one
+				if (dw == 0 || dw > Length + dwRemain) {
+				    RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
+				    dw = Length;
+				    }
+				pDst += dw;
+				*pDst++ = *pEnv++ = (WCHAR)';';
+				if (dw > Length)
+				    dwRemain -= dw - Length;
+				}
+			     // skip all consecutive ';'
+			     while (*pEnv == (WCHAR) ';')
+				*pDst++ = *pEnv++;
+			     pTmp = pEnv;
+			     }
+			else
+			    pEnv++;
+			}
+		    // convert the last one
+		    if ((Length = (DWORD)(pEnv - pTmp)) != 0) {
+			dw = GetShortPathNameW(pTmp, pDst, Length+1 + dwRemain);
+			if (dw == 0 || dw > Length) {
+			    RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
+			    dw = Length;
+			    }
+			pDst += dw;
+			if (dw > Length)
+			    dwRemain -= dw - Length;
+			}
+		    *pDst++ = *pEnv++;
+		    }
+	    }
+	*pDst++ = UNICODE_NULL;
+	/* DIVERGENCE(OPENNT-HOST-065): preserve native-width byte distance. */
+#line 3182
+	cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
+	pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
+	pUStringEnv->Buffer = pNewEnv;
+	Status = RtlUnicodeStringToAnsiString(pAStringEnv,
+					      pUStringEnv,
+					      TRUE
+					      );
+
+	if (!NT_SUCCESS(Status)) {
+	    BaseSetLastNTError(Status);
+	    }
+	else
+            bRet = TRUE;
+bveTryExit:;
+	}
     finally {
-
-        if (SectionHandle)
-            NtClose(SectionHandle);
-
-	if (FreeBuffer)
-            RtlFreeHeap(RtlProcessHeap(), 0,FreeBuffer);
-    }
-    return bReturn;
-#line 301
+	 if (lpEnvironment == NULL && EnvStrings != NULL)
+	    RtlDestroyEnvironment(EnvStrings);
+        }
+    return bRet;
 }
+/**
+    Destroy the environment block created by BaseCreateVDMEnvironment
+    Input: ANSI_STRING * pAnsiStringVDMEnv
+		      Environment block in ANSI, should be freed via
+		      RtlFreeAnsiString
+	   UNICODE_STRING * pUnicodeStringEnv
+		      Environment block in UNICODE. The Buffer should
+		      be freed with RtlFreeHeap.
+    Output: should always be TRUE.
 
-ULONG
-#line 2213
-BaseIsDosApplication(
-    IN PUNICODE_STRING PathName,
-    IN NTSTATUS Status
+**/
+
+BOOL
+BaseDestroyVDMEnvironment(
+    ANSI_STRING *pAStringEnv,
+    UNICODE_STRING *pUStringEnv
     )
-/*++
-
-Routine Description:
-
-    Determines if app is a ".com" or a ".pif" type of app
-    by looking at the extension, and the Status from NtCreateSection
-    for PAGE_EXECUTE.
-
-Arguments:
-
-    PathName    -- Supplies a pointer to the path string
-    Status      -- Status code from CreateSection call
-    bNewConsole -- Pif can exec only from a new console
-
-Return Value:
-
-    file is a com\pif dos application
-    SCS_DOS_BINARY - ".com", may also be a .exe extension
-    SCS_PIF_BINARY - ".pif"
-
-
-    0 -- file is not a dos application, may be a .bat or .cmd file
-
---*/
 {
-    UNICODE_STRING String;
+    if (pAStringEnv->Buffer)
+	RtlFreeAnsiString(pAStringEnv);
+    if (pUStringEnv->Buffer)
+	RtlFreeHeap(RtlProcessHeap(), 0, pUStringEnv->Buffer);
+    return TRUE;
 
-         // check for .com extension
-    String.Length = BaseDotComSuffixName.Length;
-    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
-                    sizeof(WCHAR)]);
-
-    if (RtlEqualUnicodeString(&String, &BaseDotComSuffixName, TRUE))
-	return BINARY_TYPE_DOS_COM;
-
-
-        // check for .pif extension
-    String.Length = BaseDotPifSuffixName.Length;
-    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
-                    sizeof(WCHAR)]);
-
-    if (RtlEqualUnicodeString(&String, &BaseDotPifSuffixName, TRUE))
-	return BINARY_TYPE_DOS_PIF;
-
-
-        // check for .exe extension
-    String.Length = BaseDotExeSuffixName.Length;
-    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
-        sizeof(WCHAR)]);
-
-    if (RtlEqualUnicodeString(&String, &BaseDotExeSuffixName, TRUE))
-	return BINARY_TYPE_DOS_EXE;
-
-    return 0;
-#line 2271
 }
+
+/**
+    This function returns the name type of the given environment variable name
+    The name type has three possibilities. Each one represents if the
+    given name can have pathnames as its value.
+     ENV_NAME_TYPE_NO_PATH:   no pathname can be its value
+     ENV_NAME_TYPE_SINGLE_PATH: single pathname
+     ENV_NAME_MULTIPLE_PATH: multiple path
+
+
+    SIDE NOTE:
+	Currently, nt can not installed on a long path and it seems
+	that systemroot and windir are never be in long path.
+
+**/
+UINT
+BaseGetEnvNameType_U(WCHAR * Name, DWORD NameLength)
+{
+
+
+// so far we only take care of three predefined names:
+// PATH
+// WINDIR and
+// SYSTEMROOT.
+//
+static ENV_INFO     EnvInfoTable[STD_ENV_NAME_COUNT] = {
+			{ENV_NAME_TYPE_MULTIPLE_PATH, 4, ENV_NAME_PATH},
+			{ENV_NAME_TYPE_SINGLE_PATH, 6, ENV_NAME_WINDIR},
+			{ENV_NAME_TYPE_SINGLE_PATH, 10, ENV_NAME_SYSTEMROOT}
+			};
+
+
+
+   UINT NameType;
+   int	i;
+
+
+    NameType = ENV_NAME_TYPE_NO_PATH;
+
+    for (i = 0; i < STD_ENV_NAME_COUNT; i++) {
+	if (EnvInfoTable[i].NameLength == NameLength &&
+	    !_wcsnicmp(EnvInfoTable[i].Name, Name, NameLength)) {
+	    NameType = EnvInfoTable[i].NameType;
+	    break;
+	    }
+	}
+    return NameType;
+}
+
 #endif
 
-#line 1084
-#ifdef OLD_CFG_BASED
-#line 1085
-#error Excluded unsupported original OLD_CFG_BASED configuration
-#endif
-#line 1150

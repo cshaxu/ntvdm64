@@ -1,0 +1,102 @@
+{
+  "part": "T483 S4 P5",
+  "baseline": "01f68e997",
+  "entries": [
+    "T483-D1388",
+    "T483-D1418",
+    "T483-D1419",
+    "T483-D1424",
+    "T483-D1428",
+    "T483-D1429",
+    "T483-D1432",
+    "T483-D1440",
+    "T483-D1472",
+    "T483-D2043",
+    "T483-D2123",
+    "T483-D2180",
+    "T483-D2183",
+    "T483-D2187",
+    "T483-D2199",
+    "T483-D2200"
+  ],
+  "delivered_total": 77,
+  "remaining": 40,
+  "modified_source_test_build_files": 12,
+  "footprint": {
+    "mirror": {
+      "added": 531,
+      "deleted": 571,
+      "net": -40
+    },
+    "build": {
+      "added": 4,
+      "deleted": 6,
+      "net": -2
+    },
+    "tests": {
+      "added": 12,
+      "deleted": 4,
+      "net": 8
+    }
+  },
+  "source_review": "batch5-source-review.json",
+  "verification": {
+    "cached": "x86/x64 initial and final exit0",
+    "full": "16 gates pass; external DOS4GW/NESticle fixture skipped",
+    "oem": "actual original provider fixture passed; test closure updated to current production objects",
+    "rtl_time": "7 boundary cases passed",
+    "line_review": {
+      "original_matching_anchors": 1259,
+      "remaining_true_mismatches": 0,
+      "reviewed_false_matches": 16,
+      "reasons": {
+        "nt_rflop": "Added rollback repeats original close/decrement text; real original statements still mapped890/895.",
+        "vrnetapi": "Thirteen declarations originate in error macro expansion, not original unique local660.",
+        "vdm-client": "Selected config OUT PULONG parameter2281 loses OUT in preprocessing and matches unrelated excluded function parameter1091."
+      },
+      "fixed_lines": {
+        "vrnetapi": [
+          231,
+          249,
+          266
+        ],
+        "wuclip": [
+          837
+        ]
+      }
+    },
+    "package_equivalence": "All11 equal after only packageUUID/PE timestamp normalization"
+  },
+  "publication": {
+    "status": "published",
+    "package": "e8335dea-7d94-4ec8-8944-cba3c30233d7",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_roots": [
+    "build/t483-s4-p5",
+    "build/t483-s4-p5-final"
+  ],
+  "scope": "No guest or winnt.zip changes. Retain original selected behaviors and restore source order; no S6 admission.",
+  "failures_resolved": [
+    "RTL cdecl override restored after initial stdcall link failure",
+    "OEM fixture now links actual redirector object closure and existing process-launch library",
+    "Temporary time compile command corrected to pass objects/libraries to linker, with ntdll dependency"
+  ],
+  "vdm_mirror_diff": {
+    "comparison": "Pinned OpenNT vs current, line endings ignored for this metric only",
+    "before": {
+      "added": 569,
+      "deleted": 1309
+    },
+    "after": {
+      "added": 90,
+      "deleted": 834
+    }
+  },
+  "governance": "Documentation governance and relative links passed; build/t483-s4-p5/governance.stdout.log"
+}

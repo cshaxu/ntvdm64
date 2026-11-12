@@ -231,11 +231,6 @@ int  DiskOpenRetry(CHAR);
  * the DOS current-PDB value.  Read that scalar through the session lease. */
 extern mvdm_guest_location current_pdb_location;
 
-static BOOL nt_rflop_current_pdb(PUSHORT currentPdb)
-{
-    return mvdm_guest_location_read_u16(&current_pdb_location, currentPdb);
-}
-
 #ifdef EJECT_FLOPPY
 #line 248
 #error Unsupported excluded original configuration
@@ -621,7 +616,7 @@ ULONG nt_floppy_read(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     LARGE_INTEGER large_integer;
     USHORT currentPdb;
 
-    if (!nt_rflop_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return 0;
     fd = get_drive_handle(drive, currentPdb, FALSE);
 
@@ -641,7 +636,7 @@ ULONG nt_floppy_write(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     ULONG   size_returned;
     USHORT currentPdb;
 
-    if (!nt_rflop_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return 0;
     fd = get_drive_handle(drive, currentPdb, TRUE);
 #line 733
@@ -668,7 +663,7 @@ BOOL nt_floppy_format(BYTE drive, WORD Cylinder, WORD Head, MEDIA_TYPE Media)
     fmt.MediaType = Media;
     fmt.StartHeadNumber = fmt.EndHeadNumber = Head;
     fmt.StartCylinderNumber = fmt.EndCylinderNumber = Cylinder;
-    if (!nt_rflop_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return FALSE;
     fd = get_drive_handle(drive, currentPdb,TRUE);
 #line 755
@@ -694,7 +689,7 @@ BOOL nt_floppy_verify(BYTE drive, DWORD Offset, DWORD Size)
     LARGE_INTEGER   large_integer;
     USHORT currentPdb;
 
-    if (!nt_rflop_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return FALSE;
     fd = get_drive_handle(drive, currentPdb, FALSE);
 #line 777
@@ -975,7 +970,7 @@ nt_rflop_command
 	    // no media in the drive so we go ahead to create a thread.
 	    if (!nt_floppy_media_check(drive)) {
 		nt_floppy_close(drive);
-		if (!nt_rflop_current_pdb(&currentPdb))
+		if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 		    return FAILURE;
 		get_drive_handle(drive, currentPdb, auto_lock);
 #line 1038
@@ -1245,7 +1240,7 @@ nt_rflop_change IFN1(UTINY, drive)
 	    fdc_reset = FALSE;
 	    nt_floppy_close(drive);
 	}
-	if (!nt_rflop_current_pdb(&currentPdb))
+	if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	    return TRUE;
 	get_drive_handle(drive, currentPdb, FALSE);
 #line 1352

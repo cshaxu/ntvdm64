@@ -1245,10 +1245,8 @@ $openntRtlObjects = foreach ($name in $openntRtlNames) {
     $object = 'obj/opennt-rtl/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc_rtl ' + (NinjaPath (Join-Path $openntRtlRoot $name)))
     if ($name -eq 'time.c') {
-        # Modern user-mode headers no longer expose NT4's complete time-of-day
-        # layout.  The selected original owner supplies only the conversion
-        # actually needed by VDMREDIR.
-        $graph.Add('  rtl_cflags = ' + $baseFlags + ' /DMVDM_STANDALONE_TIME1970_ONLY')
+        # NetLib consumes this conversion with the original cdecl ABI.
+        $graph.Add('  rtl_cflags = ' + $baseFlags)
     }
     # error.c's non-kernel branch only emits historical DbgPrint diagnostics.
     # The selected standalone closure has no kernel debug provider, while the
@@ -1325,7 +1323,7 @@ if ($Architecture -eq 'x86') {
     $vdmConfigSource = Join-Path $root 'src/non-mvdm/base/win32/client/vdm.c'
     $vdmConfigText = [IO.File]::ReadAllText($vdmConfigSource)
     $vdmConfigHelper = [regex]::Matches($vdmConfigText, '(?ms)^static VOID BaseSetLastNTError\(.*?^}')
-    $vdmConfigFunction = [regex]::Matches($vdmConfigText, '(?ms)^BOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
+    $vdmConfigFunction = [regex]::Matches($vdmConfigText, '(?ms)^#line 2275\r?\nBOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
     if ($vdmConfigHelper.Count -ne 1 -or $vdmConfigFunction.Count -ne 1) {
         throw 'Original VDM configuration closure is missing or ambiguous'
     }

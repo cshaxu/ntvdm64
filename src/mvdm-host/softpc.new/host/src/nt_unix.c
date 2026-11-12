@@ -196,7 +196,6 @@ void HostIdleNoActivity(void)
 void host_release_timeslice(void)
 {
     DWORD idletime;
-    DWORD wait_result;
 
     //
     // If there is counter idle activity no idling so return immediatly
@@ -230,9 +229,8 @@ void host_release_timeslice(void)
 	}
 
     NowWaiting = TRUE;
-    wait_result = WaitForSingleObject(IdleEvent, idletime);
-    if (wait_result == WAIT_FAILED) {
-#line 218
+#line 217
+    if (WaitForSingleObject(IdleEvent, idletime) == WAIT_FAILED) {
         idletime = 0;
 	Sleep(0);
         }

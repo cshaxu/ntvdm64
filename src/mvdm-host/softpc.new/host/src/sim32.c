@@ -35,9 +35,7 @@
 #include "gmi.h"
 #include "ckmalloc.h"
 #include CpuH
-#ifdef CPU_40_STYLE
 #include "mvdm_softpc_effective_address.h"
-#endif
 
 
 #line 38
@@ -248,10 +246,6 @@ GLOBAL BOOL Sim32SetVDMMemory IFN4(double_word, addr, word, size, UTINY *, buff,
 GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 {
     word seg, off;
-#ifndef CPU_40_STYLE
-#line 230
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
 
 #line 232
     seg = (word)(addr>>16);
@@ -261,7 +255,6 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
     {
 	return ((double_word)seg << 4) + off;
     }
-#ifdef CPU_40_STYLE
     /*
      * DIVERGENCE(MVDM-HOST-DIV-177): CPU40 CCPU keeps descriptor decoding
      * in its CPU_DESCR implementation, whereas this historical SIM32 body
@@ -276,10 +269,6 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
             return ((sys_addr)-1);
         return (sys_addr)linear;
     }
-#else
-#line 239
-#error Non-CPU40 SIM32 descriptor path is not supported
-#endif /* CPU_40_STYLE */
 #line 259
 }
 

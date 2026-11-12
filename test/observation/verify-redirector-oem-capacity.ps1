@@ -65,19 +65,27 @@ if ($OriginalProviders) {
     if (!$fixture.Success) { throw 'Missing selected fixture closure.' }
     $extraFixture = [regex]::Match($generator, "(?m)^\`$fixtureHostLibraries \+= '([^']+)'\r?$")
     if (!$extraFixture.Success) { throw 'Missing extended fixture closure.' }
+    # The product now links redirector objects directly. Package that same
+    # closure for this fixture; the two freshly compiled provider objects win.
+    $redirObjects = [regex]::Matches($graph, '(?m)^build (obj/redir/[^: ]+\.obj): cc ') |
+        ForEach-Object { Join-Path (Join-Path $root $BuildCache) $_.Groups[1].Value }
+    if (!$redirObjects.Count) { throw 'Missing production redirector object closure.' }
+    $redirArchive = Join-Path $out 'original-redir-fixture.lib'
+    & $wrapper lib /nologo "/OUT:$redirArchive" @redirObjects
+    if ($LASTEXITCODE) { throw 'Redirector fixture archive failed.' }
     $dependencies = @('obj/tests/ccpu_bounded_execution_fixture_seams.obj',
         'obj/tests/ccpu_host_fixture_seams.obj') + $fixture.Groups[1].Value.Split(' ') +
         $extraFixture.Groups[1].Value.Trim().Split(' ') +
-        @('original-mvdm-redir.lib','original-opennt-netlib.lib',
+        @('original-opennt-netlib.lib',
         'original-opennt-netapi-api.lib','original-opennt-xactsrv.lib',
         'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-pipe.lib','lib-process-observation.lib','lib-file.lib',
         'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
-        'lib-process-hook.lib','lib-process-image.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
-    $libraries = $dependencies | ForEach-Object {
+        'lib-process-launch.lib','lib-process-hook.lib','lib-process-image.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
+    $libraries = @($redirArchive) + @($dependencies | ForEach-Object {
         $path = Join-Path (Join-Path $root $BuildCache) $_
         if (!(Test-Path $path)) { throw "Missing fixture dependency: $_" }
         $path
-    }
+    })
     # Same alias as the production ntvdm export definition; fixture overrides
     # keep their existing controlled host/register seams, never unresolved forcing.
     $extraFlags = @('/force:multiple','/alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12')

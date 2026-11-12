@@ -224,6 +224,7 @@ Return Value:
     ansiString.Length = 0;
     ansiString.Buffer = computerBuf;
     if (rc1 == NERR_Success) {
+#line 231
         infoString = (LPWSTR)wkstaInfo->wki100_computername;
         len = wcslen(infoString);
         if (len <= LM20_CNLEN) {
@@ -232,6 +233,7 @@ Return Value:
             if (NT_SUCCESS(status)) _strupr(computerBuf);
         }
         ansiString.Buffer = primaryDomainBuf;
+#line 249
         infoString = (LPWSTR)wkstaInfo->wki100_langroup;
         len = wcslen(infoString);
         if (len <= LM20_CNLEN) {
@@ -243,6 +245,7 @@ Return Value:
     }
     if (rc2 == NERR_Success) {
         ansiString.Buffer = logonDomainBuf;
+#line 266
         infoString = (LPWSTR)userInfo->wkui1_logon_domain;
         len = wcslen(infoString);
         if (len <= LM20_CNLEN) {
@@ -496,7 +499,7 @@ Return Value:
              * by bytes, including NUL. Keep the original BX=0 unchecked ABI
              * while rejecting zero capacity before the copy. */
             status = mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
-                pInfo->wkui0_username, getBX() && getCX() ? getCX() : UINT32_MAX);
+                pInfo->wkui0_username, getBX() ? getCX() : UINT32_MAX);
             if (status != NERR_Success) SET_ERROR((WORD)status);
 #line 508
         }

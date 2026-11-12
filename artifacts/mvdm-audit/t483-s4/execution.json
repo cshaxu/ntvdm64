@@ -494,114 +494,130 @@
     {
       "id": "T483-D1388",
       "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove private one-line wrapper and invoke existing provider at all six current-PDB read sites, retaining each failure return.",
-      "verification": "All caller return paths and no durable guest pointer; compile."
+      "verification": "All caller return paths and no durable guest pointer; compile.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1418",
       "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove declaration with following assignment rewrite; restore original direct comparison.",
-      "verification": "Compile and compare success/timeout/failed-wait side effects."
+      "verification": "Compile and compare success/timeout/failed-wait side effects.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1419",
       "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Restore if (WaitForSingleObject(IdleEvent, idletime) == WAIT_FAILED); remove paired declaration.",
-      "verification": "Exactly one wait invocation and unchanged failure Sleep(0)/idletime=0 path."
+      "verification": "Exactly one wait invocation and unchanged failure Sleep(0)/idletime=0 path.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1424",
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Include the needed effective-address header unconditionally in this CPU40-only adapter slice; remove only added selector, preserving original outer SIM32/CPU40 structures.",
-      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code."
+      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1428",
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove newly invented non-CPU40 conditional and its #error together; unused original DESCR locals stay removed as part of registered CPU40 adaptation. Do not restore CPU30 provider.",
-      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code."
+      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1429",
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Flatten added selector while retaining protected-path block and original real-mode early return; couple with closing added else/#error removal.",
-      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code."
+      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1432",
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove added else/#error/endif with opening CPU40 selection; retain original outer condition framework and source line mapping.",
-      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code."
+      "verification": "Real-mode/protected selector, bad selector, video alias and failed native mapping; single descriptor lookup; preserve original ABI. For allocation failure test bound/unbound and partial-init cleanup, returned result and unchanged original exit code.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1440",
       "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove duplicate direct setjmp include; compile original entry to confirm declaration closure.",
-      "verification": "Actual startup success, each bootstrap failure, normal host_main return, bound escape completion and single cleanup; pending shutdown during bootstrap. x86 compile/link DbgBreakPoint calling convention; registry enumeration no values/multiple values/close."
+      "verification": "Actual startup success, each bootstrap failure, normal host_main return, bound escape completion and single cleanup; pending shutdown during bootstrap. x86 compile/link DbgBreakPoint calling convention; registry enumeration no values/multiple values/close.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1472",
       "path": "src/mvdm-host/vdmredir/vrnetapi.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Preserve OEM byte-capacity helper and propagated status; simplify capacity argument to getBX() ? getCX() : UINT32_MAX because itFits already excludes BX!=0,CX==0.",
-      "verification": "Retain alias write/read ordering, NULL destinations, zero and DBCS capacity, mapping failure and BX=0 ABI. Add original/provider conversion-failure controls for pending CD-name behavior."
+      "verification": "Retain alias write/read ordering, NULL destinations, zero and DBCS capacity, mapping failure and BX=0 ABI. Add original/provider conversion-failure controls for pending CD-name behavior.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2043",
       "path": "src/mvdm-host/wow32/wuclip.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Inline WU32GuestClipboardWindow sole forwarding call into its three consumers; remove native-output null check only after preserving all local address-of call sites. Keep NULL guest operand versus invalid nonzero distinction and shared identity authority.",
-      "verification": "Transfer rejection/delayed rendering; external HWND roundtrip; concurrent close/replacement/cache query; OLE descriptor original conversion."
+      "verification": "Transfer rejection/delayed rendering; external HWND roundtrip; concurrent close/replacement/cache query; OLE descriptor original conversion.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2123",
       "path": "src/mvdm-host/wow32/wuser.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Replace local extern block with the existing common header include, retain source rationale externally and preserve original logical line positions. No additional wrapper.",
-      "verification": "Preserve guest ABI, HWND0 and invalid-handle distinction; acquire/release same native DC owner; bitmap allocation/map/native-failure cleanup; accepted/rejected system colors and reentrant callbacks."
+      "verification": "Preserve guest ABI, HWND0 and invalid-handle distinction; acquire/release same native DC owner; bitmap allocation/map/native-failure cleanup; accepted/rejected system colors and reentrant callbacks.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2180",
       "path": "src/non-mvdm/base/ntos/rtl/time.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove local selector and corresponding time-object build define together; preserve original ALLOC_PRAGMA boundary and line mapping.",
-      "verification": "Selected object identity, seven-case conversion fixture and compiler logical lines after later correction."
+      "verification": "Selected object identity, seven-case conversion fixture and compiler logical lines after later correction.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2183",
       "path": "src/non-mvdm/base/ntos/rtl/time.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove local selector and corresponding time-object build define together; preserve original ALLOC_PRAGMA boundary and line mapping.",
-      "verification": "Selected object identity, seven-case conversion fixture and compiler logical lines after later correction."
+      "verification": "Selected object identity, seven-case conversion fixture and compiler logical lines after later correction.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2187",
       "path": "src/non-mvdm/base/win32/client/vdm.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Restore selected functions to original relative order; keep only necessary cohort boundaries enclosing complete selected functions; preserve original architecture conditionals inside their owning function. Update build regex extraction and mapping evidence together.",
-      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup."
+      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2199",
       "path": "src/non-mvdm/base/win32/client/vdm.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Keep original _X86_ structure within one enclosing classifier cohort; remove redundant close/reopen guards after verifying all supported objects.",
-      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup."
+      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2200",
       "path": "src/non-mvdm/base/win32/client/vdm.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Preserve original MIPS #error alternative inside classifier function and one cohort; do not activate MIPS.",
-      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup."
+      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D2204",

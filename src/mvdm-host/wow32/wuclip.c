@@ -43,10 +43,6 @@ MODNAME(wuclip.c);
  * contract is shared by message, DDE and dialog conversion. */
 static BOOL WU32NativeClipboardWindow(HWND hwnd16, HWND *native)
 {
-    if (!native) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
     /* NULL is an original public Clipboard operand (notably OpenClipboard's
      * current-task owner). A nonzero retired/foreign guest identity must not
      * be collapsed into that valid NULL meaning. */
@@ -56,11 +52,6 @@ static BOOL WU32NativeClipboardWindow(HWND hwnd16, HWND *native)
     }
     *native = wow_user_window_public_handle(hwnd16);
     return *native != NULL;
-}
-
-static HWND WU32GuestClipboardWindow(HWND hwnd)
-{
-    return wow_user_window_public_guest_handle(hwnd);
 }
 
 #line 33
@@ -510,8 +501,8 @@ ULONG FASTCALL WU32GetClipboardOwner(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32GuestClipboardWindow above. */
-    ul = GETHWND16(WU32GuestClipboardWindow(GetClipboardOwner()));
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see Clipboard identity contract above. */
+    ul = GETHWND16(wow_user_window_public_guest_handle(GetClipboardOwner()));
 
 #line 467
     RETURN(ul);
@@ -536,8 +527,8 @@ ULONG FASTCALL WU32GetClipboardViewer(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32GuestClipboardWindow above. */
-    ul = GETHWND16(WU32GuestClipboardWindow(GetClipboardViewer()));
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see Clipboard identity contract above. */
+    ul = GETHWND16(wow_user_window_public_guest_handle(GetClipboardViewer()));
 
 #line 491
     RETURN(ul);
@@ -894,6 +885,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 /* DIVERGENCE(MVDM-HOST-DIV-453): retain NULL delayed
                  * rendering; a rejected converted copy is still ours. */
                 if (!parg16->f2 || ul) {
+#line 837
                     WU32ICBStoreHandle(parg16->f1, parg16->f2);
                 }
                 else if (hMem32) {
@@ -1070,7 +1062,7 @@ ULONG FASTCALL WU32SetClipboardViewer(PVDMFRAME pFrame)
     if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd))
         ul = 0;
     else
-        ul = GETHWND16(WU32GuestClipboardWindow(SetClipboardViewer(hwnd)));
+        ul = GETHWND16(wow_user_window_public_guest_handle(SetClipboardViewer(hwnd)));
 
 #line 969
     FREEARGPTR(parg16);

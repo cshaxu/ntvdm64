@@ -19,6 +19,7 @@
 
 /* DIVERGENCE(MVDM-HOST-DIV-295): bounded synchronous bitmap resource alias. */
 #include "wow_callback_frame_lease.h"
+#include "common/wow/page_domain.h"
 
 
 #line 21
@@ -2926,14 +2927,6 @@ ULONG FASTCALL WU32SetScrollRange(PVDMFRAME pFrame)
 --*/
 
 #define SSC_BUF_SIZE	    256
-
-/* DIVERGENCE(MVDM-HOST-DIV-275): NT4 USER's sysmet.c::SetSysColor publishes
- * every accepted colour into gpsi->argbSystem. The standalone worker has no
- * writable NT USER shared section, so retain the original WU32SetSysColors
- * call and, only after it succeeds, mirror the same accepted slots through
- * the bounded worker page-domain carrier. */
-extern int __cdecl mvdm_softpc_wow_page_domain_publish_system_color(
-    unsigned long, unsigned long);
 
 #line 2923
 ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
