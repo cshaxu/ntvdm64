@@ -36,7 +36,9 @@ The previously suggested compat-first S2 is superseded.
 ## S4 Progress
 
 Assigned: 117 minimize/simplify entries, in frozen register file/line order.
-P1 resolves 20/117 entries (18 changes plus two verified S3 overlaps); 97 remain.
+P1 resolves 21/117 entries (19 changes plus two verified S3 overlaps); 96 remain.
+D0225 was omitted from the first ledger tally; its free-path change and test were
+already included in 73a5ecebc. The reconciliation changes no source or package.
 The batch modifies 18 source/test files. Cached x86/x64, Full 16 gates,
 observer/NIDDB/package fixtures and real guest DPMI allocation/reallocation/free
 and task-exit cleanup passed. Logical-line counter-review is complete, including

@@ -17,14 +17,15 @@
     "T483-D0126",
     "T483-D0132",
     "T483-D0224",
+    "T483-D0225",
     "T483-D0226",
     "T483-D0227",
     "T483-D0240",
     "T483-D0261",
     "T483-D0422"
   ],
-  "resolved_count": 20,
-  "remaining": 97,
+  "resolved_count": 21,
+  "remaining": 96,
   "source_test_files": 18,
   "source_test_line_changes": {
     "added": 85,
@@ -455,5 +456,6 @@
     "NIDDB controlled native boundaries do not prove guest bridge acceptance.",
     "Selected GetPhysicalDriveType native-handle checks are not a full disk-device integration test."
   ],
-  "governance": "Verify-DocumentationGovernance and Test-DocumentationRelativeLinks passed; final recheck before commit."
+  "governance": "Verify-DocumentationGovernance and Test-DocumentationRelativeLinks passed; final recheck before commit.",
+  "ledger_reconciliation": "D0225 names the free-path portion of the same dpmimemr change already built, exercised and published in 73a5ecebc. Original ledger update omitted this ID. Source is unchanged; actual DPMI allocation/reallocation/data/free and live-exit evidence also covers this entry."
 }

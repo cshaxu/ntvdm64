@@ -126,9 +126,10 @@
     {
       "id": "T483-D0225",
       "path": "src/mvdm-host/dpmi32/dpmimemr.c",
-      "status": "pending",
+      "status": "delivered P1; ledger reconciliation",
       "plan": "Keep ExtMemSA as allocation/free/reallocation owner. Simplify the unconditional CPU40 early-return plus unreachable original fallback into one selected original shared-XMS path, preserving branch exclusion policy and existing success/BOOL contract; do not globally disable VdmAllocateVirtualMemory because XMS initialization uses it.",
-      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes."
+      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0226",
@@ -845,7 +846,7 @@
   ],
   "counts": {
     "assigned": 117,
-    "delivered": 20,
-    "remaining_unprocessed": 97
+    "delivered": 21,
+    "remaining_unprocessed": 96
   }
 }
