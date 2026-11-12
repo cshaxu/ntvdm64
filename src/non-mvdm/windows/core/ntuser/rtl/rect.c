@@ -8,7 +8,7 @@
 * History:
 * 10-20-90 DarrinM      Grabbed 'C' rect routines from Portable PM.
 \***************************************************************************/
-#include "precomp.h"
+#include <windows.h>
 /************************************************************************\
 * CopyInflateRect (API)
 *

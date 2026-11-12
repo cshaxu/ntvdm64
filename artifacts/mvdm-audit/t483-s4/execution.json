@@ -878,63 +878,71 @@
     {
       "id": "T483-D2995",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Reconcile all drawing/string contexts then simplify redundant mnemonic selector and restore original function order; keep needed fixture exclusions until providers compose.",
-      "verification": "Compile all formal and fixture consumers, compare selected bodies and logical lines."
+      "verification": "Compile all formal and fixture consumers, compare selected bodies and logical lines.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3002",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Guard or eliminate unused GetWindowData declaration with selector simplification after reconciling model fixture provider; restore original parameter names when declaration retained.",
-      "verification": "Compile both production and original-model fixture contexts."
+      "verification": "Compile both production and original-model fixture contexts.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3017",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Consider using windows.h directly for this RECT-only unit instead of the shared dialog-state precomp, after verifying actual compile context; do not create another standalone component.",
-      "verification": "Compile formal and drawing fixture contexts with unchanged body/ABI."
+      "verification": "Compile formal and drawing fixture contexts with unchanged body/ABI.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3027",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Clarify that selected user-mode branch deliberately uses original same-address formulas; preserve original conditional skeleton and accurately anchor replacement lines. Reconcile redundant REBASE variants and historical definitions only after all consumers are enumerated.",
-      "verification": "Check original structure and logical provenance, all include contexts, and same-address expansion; no new macro framework."
+      "verification": "Check original structure and logical provenance, all include contexts, and same-address expansion; no new macro framework.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3031",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Reconcile separate geometry/view compilations and restore original function order where feasible; simplify selector only without duplicate symbols or new dispatch.",
-      "verification": "Compile selected contexts and run geometry/navigation fixtures after edits; verify boundary contracts before functional restoration."
+      "verification": "Compile selected contexts and run geometry/navigation fixtures after edits; verify boundary contracts before functional restoration.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3035",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Remove unused shared-info, string/layout and DESKTOPVALIDATE definitions; reconcile original branch/line scaffolding and compile retained view consumers.",
-      "verification": "Compile selected provider and isolated view fixture contexts; verify original retained-body and diagnostic-line identity after remediation."
+      "verification": "Compile selected provider and isolated view fixture contexts; verify original retained-body and diagnostic-line identity after remediation.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3038",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Restore original retained-function order and reconcile diagnostic #line without changing bodies or enabling WOW16.",
-      "verification": "Compile selected provider and isolated view fixture contexts; verify original retained-body and diagnostic-line identity after remediation."
+      "verification": "Compile selected provider and isolated view fixture contexts; verify original retained-body and diagnostic-line identity after remediation.",
+      "evidence": "batch9-delivery.json"
     },
     {
       "id": "T483-D3039",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
-      "status": "pending",
+      "status": "delivered P9",
       "plan": "Remove ineffectual detached optimize pair with the omitted carrier and reconcile excluded original condition frames under current policy.",
-      "verification": "Compile selected provider and isolated view fixture contexts; verify original retained-body and diagnostic-line identity after remediation."
+      "verification": "Compile selected provider and isolated view fixture contexts; verify original retained-body and diagnostic-line identity after remediation.",
+      "evidence": "batch9-delivery.json"
     }
   ],
   "counts": {
     "assigned": 117,
-    "delivered": 109,
-    "remaining_unprocessed": 8
+    "delivered": 117,
+    "remaining_unprocessed": 0
   }
 }

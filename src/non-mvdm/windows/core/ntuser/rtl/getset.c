@@ -18,7 +18,7 @@
 #pragma hdrstop
 
 #line 15
-DWORD GetWindowData(PWND, int, BOOL);
+
 
 /***************************************************************************\
 * _GetWindowLong (supports GetWindowLongA/W API)

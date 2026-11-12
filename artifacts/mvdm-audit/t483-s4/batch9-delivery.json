@@ -1,0 +1,74 @@
+{
+  "part": "T483 S4 P9",
+  "baseline": "8b3cb0287",
+  "entries": [
+    "T483-D2995",
+    "T483-D3002",
+    "T483-D3017",
+    "T483-D3027",
+    "T483-D3031",
+    "T483-D3035",
+    "T483-D3038",
+    "T483-D3039"
+  ],
+  "delivered_total": 117,
+  "remaining": 0,
+  "modified_source_test_build_files": 9,
+  "footprint": {
+    "mirror": {
+      "added": 280,
+      "deleted": 314,
+      "net": -34
+    },
+    "autonomous": {
+      "added": 0,
+      "deleted": 2,
+      "net": -2
+    },
+    "build": {
+      "added": 4,
+      "deleted": 4,
+      "net": 0
+    },
+    "tests": {
+      "added": 0,
+      "deleted": 0,
+      "net": 0
+    }
+  },
+  "source_review": "batch9-source-review.json",
+  "verification": {
+    "cached": "x86/x64 PASS",
+    "control_boundaries": "PASS complete maintained cohort including string, mnemonic, text measure, geometry/navigation and original model/native getters",
+    "full": "PASS 16 selected gates; DOS4GW/NESticle explicit external-fixture SKIP",
+    "hash_review": "All nine implementation files match reviewed hashes",
+    "remaining_selectors": "WOW_ORIGINAL_DEFAULT_GEOMETRY remains necessary: two translation units select disjoint six functions with different gpsi/view type contexts; source now ordered with same three conditional blocks. No new selector.",
+    "same_address_lifetime": "PASS class-lifetime actual provider/worker objects; all four REBASE formulas, retained window/class ownership and native failure retention; errors0 callbacks1 native_failure_retains_node32"
+  },
+  "line_counter_review": {
+    "matching_statement_anchors": 62,
+    "true_conflicts": 0,
+    "reviewed_text_collision": [
+      {
+        "statement": "if (pchOut != achWorkBuffer)",
+        "compiled": 1957,
+        "original": 1898
+      }
+    ],
+    "reason": "Original1898 frees within no-prefix early return. Current1957 is the pre-existing OPENNT-HOST-115 finally cleanup, not the original1898 statement. Kept adapted cleanup unchanged; selected function bodies equal prior package. Original return remains anchored1900; closing brace1956."
+  },
+  "publication": {
+    "status": "published",
+    "package": "89ae3c0c-66d1-428f-bd76-5a3227297588",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_roots": [
+    "build/t483-s4-p9"
+  ],
+  "scope": "No guest or winnt.zip changes. S6 remains held."
+}

@@ -103,7 +103,7 @@ $units += ,@('navigation_help', 'src/non-mvdm/windows/core/ntuser/rtl/help.c', '
 $textFlags = '/I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '"'
 $units += ,@('string_prefix', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', $textFlags)
 $units += ,@('string_extent', 'src/non-mvdm/windows/core/ntuser/rtl/text.c', $textFlags)
-$mnemonicFlags = '/DWOW_ORIGINAL_MNEMONIC_DRAWING /I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/mnemonic-drawing')) + '"'
+$mnemonicFlags = '/I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/mnemonic-drawing')) + '"'
 $units += ,@('mnemonic_body', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', $mnemonicFlags)
 $units += ,@('mnemonic_fixture', 'test/adapter-mvdm-host-out/wow/wow_mnemonic_drawing_fixture.c', '')
 $measureFlags = '/I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/text-measure')) + '"'
@@ -124,7 +124,7 @@ $units += ,@('state_drawing_adapter', 'src/wow32-dll/source/wow_control_draw_sta
 $units += ,@('state_drawing_brushes', 'src/wow32-dll/source/wow_edit_drawing_bindings.c', '')
 $units += ,@('state_drawing_atlas', 'src/wow32-dll/source/wow_button_resources.c', '')
 $units += ,@('state_drawing_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_draw_state_fixture.c', '')
-$units += ,@('state_drawing_text', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', ($textFlags + ' /DWOW_ORIGINAL_MNEMONIC_DRAWING'))
+$units += ,@('state_drawing_text', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', $textFlags)
 $units += ,@('button_lifetime_adapter', 'src/wow32-dll/source/wow_button_lifetime.c', '')
 $units += ,@('button_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c', '')
 $buttonLifetimeResourceFlags = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-lifetime/resource-leaves.h')) + '"'
@@ -228,7 +228,7 @@ $lines.Add('  libs = ntdll.lib')
 $lines.Add('build original-dialog-creator-lifetime: phony bin/wow_dialog_creator_lifetime_fixture.exe')
 $lines.Add('build bin/wow_control_string_fixture.exe: link obj/string_fixture.obj obj/string_owner.obj obj/string_conversion.obj obj/string_services.obj obj/string_prefix.obj obj/string_extent.obj')
 $lines.Add('  libs = ntdll.lib')
-$lines.Add('build bin/wow_text_measure_failure_fixture.exe: link obj/measure_failure_fixture.obj obj/measure_failure_body.obj obj/string_prefix.obj')
+$lines.Add('build bin/wow_text_measure_failure_fixture.exe: link obj/measure_failure_fixture.obj obj/measure_failure_body.obj obj/string_prefix.obj obj/string_services.obj')
 $lines.Add('build original-string-boundaries: phony bin/wow_control_string_fixture.exe bin/wow_text_measure_failure_fixture.exe')
 $lines.Add('build bin/wow_mnemonic_drawing_fixture.exe: link obj/mnemonic_fixture.obj obj/mnemonic_body.obj')
 $lines.Add('build original-mnemonic-drawing-boundaries: phony bin/wow_mnemonic_drawing_fixture.exe')

@@ -1,0 +1,1663 @@
+{
+  "assigned_entries": 207,
+  "assigned_files": 167,
+  "admission": "Owner-approved sequential S5 after verified S4 closure",
+  "entries": [
+    {
+      "id": "T483-D0041",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "status": "pending",
+      "plan": "In mvdm_command_native_child.c separate composed host-command storage capacity from DOS guest-tail syntax limit. capture_locations and replace_command must accept every NUL-terminated command accepted by prepare_comspec MAX_PATH contract; keep replacement before activate.",
+      "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
+      "verification": "Use COMSPEC length 20 + suffix 4 + legal tail 110 = 134 chars; both initial capture and replacement succeed. Exercise exact MAX_PATH-1 acceptance and MAX_PATH rejection, then nested launch and cleanup."
+    },
+    {
+      "id": "T483-D0042",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "status": "pending",
+      "plan": "Restore original guest-tail CR requirement at indices 0..123 in copy_guest_command; reject early NUL without CR and CR at 124..126 as BAD_FORMAT. Keep address failures distinct and retain CR-to-NUL write. Coordinate error propagation at cmdexec capture calls; do not change composed-host capacity.",
+      "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
+      "verification": "Boundary cases CR at 0/123/124/126, early NUL, missing CR, inaccessible memory; compare original syntax result/error and no launch on failure. Cached build and COMMAND external-execution regression."
+    },
+    {
+      "id": "T483-D0043",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "status": "pending",
+      "plan": "Restore original guest-tail CR requirement at indices 0..123 in copy_guest_command; reject early NUL without CR and CR at 124..126 as BAD_FORMAT. Keep address failures distinct and retain CR-to-NUL write. Coordinate error propagation at cmdexec capture calls; do not change composed-host capacity.",
+      "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
+      "verification": "Boundary cases CR at 0/123/124/126, early NUL, missing CR, inaccessible memory; compare original syntax result/error and no launch on failure. Cached build and COMMAND external-execution regression."
+    },
+    {
+      "id": "T483-D0048",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "status": "pending",
+      "plan": "In mvdm_command_native_child.c separate composed host-command storage capacity from DOS guest-tail syntax limit. capture_locations and replace_command must accept every NUL-terminated command accepted by prepare_comspec MAX_PATH contract; keep replacement before activate.",
+      "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
+      "verification": "Use COMSPEC length 20 + suffix 4 + legal tail 110 = 134 chars; both initial capture and replacement succeed. Exercise exact MAX_PATH-1 acceptance and MAX_PATH rejection, then nested launch and cleanup."
+    },
+    {
+      "id": "T483-D0054",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0057",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0059",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0060",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0061",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0062",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0063",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0064",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0065",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0066",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0070",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0071",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pending",
+      "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
+      "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+    },
+    {
+      "id": "T483-D0081",
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "status": "pending",
+      "plan": "Keep the zero binary-type scalar write and four-string cleanup. Repair its error delivery together with cmdmisc cmdGetNextCmd: never return a Win32 error in the guest environment-resize AX channel. This is one coupled issue, not an independent second repair.",
+      "related_callers": "cmdCheckForPIF wrapper -> cmdGetNextCmd -> guest tcode.asm resize loop",
+      "verification": "Inject scalar write failure; verify cleanup once, no fabricated resize/retry, no duplicate request consumption; normal PIF remains unchanged."
+    },
+    {
+      "id": "T483-D0124",
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "status": "pending",
+      "plan": "Keep four original packed extended-error fields. Establish an explicit guest-memory failure error before entering readFailureExit when helper acquire/commit fails; preserve it across cleanup. Both rows describe one coupled repair.",
+      "related_callers": "demRead named-pipe branch -> extended-error helper -> readFailureExit -> demClientError; VrReadNamedPipe",
+      "verification": "Inject extended-error acquire/commit failures and check deterministic DOS error. Verify MORE_DATA follows provider success path and retains returned data; do not classify it as failed partial read."
+    },
+    {
+      "id": "T483-D0127",
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "status": "pending",
+      "plan": "Keep four original packed extended-error fields. Establish an explicit guest-memory failure error before entering readFailureExit when helper acquire/commit fails; preserve it across cleanup. Both rows describe one coupled repair.",
+      "related_callers": "demRead named-pipe branch -> extended-error helper -> readFailureExit -> demClientError; VrReadNamedPipe",
+      "verification": "Inject extended-error acquire/commit failures and check deterministic DOS error. Verify MORE_DATA follows provider success path and retains returned data; do not classify it as failed partial read."
+    },
+    {
+      "id": "T483-D0148",
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "status": "pending",
+      "plan": "Capture demFileFindFirst failure LastError before lease release; restore it after successful release before original error conversion. Preserve INVALID_ADDRESS on failed commit. Do not add another search-list owner.",
+      "related_callers": "demFindFirst -> demFileFindFirst -> guest-location release -> GetLastError/demClientError",
+      "verification": "Inject distinct search error plus cleanup changing LastError, and separate commit failure. Verify DTA mutation visibility and search-entry retirement."
+    },
+    {
+      "id": "T483-D0158",
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "status": "pending",
+      "plan": "Distinguish current-PDB read failure from AddFFindEntry allocation failure at SearchFile. Carry an explicit failure reason through the existing call boundary instead of mapping every NULL to STATUS_NO_MEMORY; preserve original allocation result.",
+      "related_callers": "AddFFindEntry -> SearchFile; current_pdb_location read",
+      "verification": "Inject unavailable PDB versus allocation exhaustion and verify distinct appropriate errors, no inserted entry, unchanged success ownership."
+    },
+    {
+      "id": "T483-D0164",
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "pending",
+      "plan": "Remove diagnostic-only termination include with the three trace calls. Unify c_setLDT_BASE_LIMIT declarations with selected c_reg.c VOID definition, using an existing appropriate shared declaration rather than duplicating an int contract.",
+      "related_callers": "dpmi32.c; c_reg.c; cpu4gen declaration; diagnostic consumers",
+      "verification": "Compile actual setter callers and verify ABI declarations agree; do not invent ignored-return failure behavior for a VOID setter."
+    },
+    {
+      "id": "T483-D0167",
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "pending",
+      "plan": "Keep separate GDT copy/zeroed process-LDT allocation. Replace allocation-failure clear-LDTR-and-return with the established host terminal failure route: unchanged dxboot continues and clears carry after BOP, so a silent return is insufficient. Trace ownership before selecting cleanup.",
+      "related_callers": "DpmiPassTableAddress -> shared XMS allocator -> guest dxboot post-BOP path; host lifecycle/error owner",
+      "verification": "Inject allocation failure and prove guest cannot continue with invalid descriptors; validate normal initial publication and repeated entry."
+    },
+    {
+      "id": "T483-D0337",
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "status": "pending",
+      "plan": "Rewrite comment to state same-process shared host request ABI with opaque worker-owned state; preserve field layout and pointer.",
+      "related_callers": "vdmredir/vrnmpipe.c prepare/completion/interrupt cleanup -> common/redirector/async.h -> ntvdm-exe/redir/mvdm_redirector_async.c",
+      "verification": "Check common/redirector/async.h and all prepare/release consumers; no behavior change."
+    },
+    {
+      "id": "T483-D0405",
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "status": "pending",
+      "plan": "Remove the stale standalone #line 630 after the BIOS array MAC_LIKE endif. Preserve existing #line 672 and subsequent #line 682/888; verify retained logical lines against original.",
+      "related_callers": "BIOS BOP vector declaration; compiler diagnostic/source mapping only.",
+      "verification": "Whole-file original/current retained logical-line comparison; confirm selected tokens and generated code unchanged."
+    },
+    {
+      "id": "T483-D0487",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "status": "pending",
+      "plan": "Remove unconditional selector exception from generic load_data_seg after locating and restoring required bootstrap state at its original initialization owner. Preserve real FSTI startup; do not guess descriptor publication, mutate immutable guest code, add another execution path or broaden exemption. Initialization mechanism must be designed from original caller evidence before implementation.",
+      "related_callers": "c_seg.c:260-280,299-355; docs/etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md; mvdm-guest/dpmi/dxstrt.asm:805,885; dxboot.asm:1748; pmdefs.inc:345,415",
+      "verification": "Early immutable DOSX FSTI continuation positive; valid changed base/limit at0040 honored after publication; missing/not-present/wrong-type/privilege-invalid0040 fault; unrelated guest protected-mode and VM/real-mode controls. Selected DOS/WOW/Win3.x regression before publishing."
+    },
+    {
+      "id": "T483-D0796",
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "status": "pending",
+      "plan": "Correct line directives against pinned original coordinates. Exact 666 matched-line mismatches recorded in report; preserve selected tokens and exclusions.",
+      "related_callers": "Retained source across existing line directives",
+      "verification": "Compare logical coordinates against pinned source; compile preprocessor controls and verify only diagnostic metadata changes."
+    },
+    {
+      "id": "T483-D0815",
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "status": "pending",
+      "plan": "Recalculate existing line resets against pinned original for all retained spans; remove superseded inaccurate resets where safe. Preserve selected code, original conditional framework and excluded bodies. Do not change bitfield layout or activate removed profiles.",
+      "related_callers": "All consumers including vgaports.h; header diagnostic identity and __LINE__ consumers if any.",
+      "verification": "Compare retained preprocessed source coordinates to pinned original in supported contexts; compile affected targets and classify any binary diagnostic-line-only differences."
+    },
+    {
+      "id": "T483-D0931",
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "status": "pending",
+      "plan": "Correct notice: original older CCPU register representation, not a hardware-monitor-only store; CPU40 data are globally named CCPU_* (not all file-private). Keep exclusion while correcting provenance.",
+      "related_callers": "c_main.c; c_reg.h; xt.h; mvdm_softpc_effective_address.c; CsIsBig",
+      "verification": "Provider symbol uniqueness and unchanged selected preprocessed code; parity table equality; diagnostic line correspondence after notice edits."
+    },
+    {
+      "id": "T483-D0933",
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "status": "pending",
+      "plan": "Correct parity-table notice to describe duplicate provider across CPU implementations; original !MAC_LIKE&&!CPU_30_STYLE condition does not imply non-CCPU monitor.",
+      "related_callers": "c_main.c; c_reg.h; xt.h; mvdm_softpc_effective_address.c; CsIsBig",
+      "verification": "Provider symbol uniqueness and unchanged selected preprocessed code; parity table equality; diagnostic line correspondence after notice edits."
+    },
+    {
+      "id": "T483-D0981",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D0987",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D0988",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D0989",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D0990",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D1045",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D1049",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "pending",
+      "plan": "Use correctly typed one-argument and two-argument marker callbacks sharing the existing dirty-counter action, or reuse proven existing compatible providers. Update all table initializers/assignments together. Do not reintroduce casts or leave incompatible function-pointer calls; preserve one increment per call.",
+      "related_callers": "update_alg marker consumers; ega_text_find_dirty_lines; text full/partial updates; scroll up/down; cursor attribute read; ev_glue.c; nt_graph.c",
+      "verification": "Compiler exact function-pointer compatibility; dirty counter increments per one/two-argument call; CHAIN2 known-plane patterns across row parity, wrap, split, scroll and cursor; compare actual host update regions."
+    },
+    {
+      "id": "T483-D1124",
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "status": "pending",
+      "plan": "Keep removal of implicit CPU_30_STYLE definition. Rewrite notice to state selected CPU40 interface policy and incompatible legacy profile without equating all CPU30 code with hardware V86 monitor; align old DIV-044 rationale.",
+      "related_callers": "SoftPC allocator/env consumers; keyboard/mouse/BIOS/storage host_simulate callers; video.c NTIO translation unit; cpu4.h/cpu4gen.h; build profile definitions.",
+      "verification": "Check actual MONITOR/non-MONITOR CPU40 include profiles and host_simulate ABI. Verify CPU30 is not implicitly defined; correction of explanation must not alter executable tokens. Retain original CPU interface and recursive-call behavior."
+    },
+    {
+      "id": "T483-D1125",
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "status": "pending",
+      "plan": "Remove only trailing #line143; retain #line239 following original HFX endif and retain both #error exclusions. Validate logical line map against original.",
+      "related_callers": "Header inclusion diagnostics; no executable caller.",
+      "verification": "Verify preprocessed line markers and exact remaining-source identity; no functional behavior change expected."
+    },
+    {
+      "id": "T483-D1221",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "status": "pending",
+      "plan": "Retain join; propagate failure to the already-authorized teardown boundary and fail the process before resource release, using existing lifecycle failure policy. Do not continue cleanup, retry, or introduce a new timeout/state machine.",
+      "related_callers": "nt_remove_event_thread; nt_reset.c::host_applClose; mvdm_softpc_event_thread_alert_and_join; worker_lifecycle::quiesce_vm_frontends",
+      "verification": "Inject duplicate/alert/wait failure and prove downstream cleanup is not entered with a live event thread; preserve started and never-resumed cases. Existing shutdown fixture covers successful join only."
+    },
+    {
+      "id": "T483-D1268",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "status": "pending",
+      "plan": "On handle retirement decrement host open count exactly once even if guest update fails, then propagate the guest-update failure. Make get_fdisk_handle stop on failed close rather than immediately reopen; define heartbeat/termination reporting through existing failure owner. Do not add retry or a second counter state machine.",
+      "related_callers": "close_fdisk; get_fdisk_handle; fdisk_heart_beat; FdiskTerminatePDB; HostFdiskReset; mvdm_command_guest_state_add_fd_access",
+      "verification": "Inject expired registration/read/write failure on close; assert invalid handle, cleared owner and balanced host count, no accidental reopen, repeated close does not decrement twice. Scalar-state fixture alone does not cover this ordering."
+    },
+    {
+      "id": "T483-D1400",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "status": "pending",
+      "plan": "Always retire host fields/count exactly once once handle is closed, independently of guest decrement result; preserve failure report for caller. Align with registered nt_fdisk close correction; do not reopen handle or invent retry.",
+      "related_callers": "host_flpy_heart_beat; nt_floppy_close/close_all; get_drive_handle; FDC command/thread; nt_rflop_change",
+      "verification": "Inject counter failure after close; count/owner/lock consistent, repeated close no double decrement, heartbeat/close-all error disposition."
+    },
+    {
+      "id": "T483-D1450",
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "status": "pending",
+      "plan": "Correct all listed #line boundaries against pinned original; check every retained equal line, including EOF. Preserve excluded bodies and selected statements.",
+      "related_callers": "Compiler diagnostics and any __LINE__ expansion in this translation unit.",
+      "verification": "Complete logical-line mapping comparison; build and attribute any resulting binary line-number changes."
+    },
+    {
+      "id": "T483-D1452",
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "status": "pending",
+      "plan": "Rebase listed #line directives against pinned-original positions; preserve original selected code and #error branch bodies.",
+      "related_callers": "Manifest-driven VDMREDIR.dll/original-mvdm-redir.lib; compiler source diagnostics.",
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+    },
+    {
+      "id": "T483-D1454",
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "status": "pending",
+      "plan": "Rebase listed #line directives against pinned-original positions; preserve original selected code and #error branch bodies.",
+      "related_callers": "Manifest-driven VDMREDIR.dll/original-mvdm-redir.lib; compiler source diagnostics.",
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+    },
+    {
+      "id": "T483-D1455",
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "status": "pending",
+      "plan": "Rebase listed #line directives against pinned-original positions; preserve original selected code and #error branch bodies.",
+      "related_callers": "Manifest-driven VDMREDIR.dll/original-mvdm-redir.lib; compiler source diagnostics.",
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+    },
+    {
+      "id": "T483-D1456",
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "status": "pending",
+      "plan": "Correct listed conditional-boundary #line mappings against fixed original; preserve selected code and excluded bodies.",
+      "related_callers": "vrinit interrupt calls; NTVDM public interrupt bridge; compiler diagnostics.",
+      "verification": "Check full retained logical mapping for line repairs; preserve stdcall import resolution and internal cdecl call."
+    },
+    {
+      "id": "T483-D1458",
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "status": "pending",
+      "plan": "Correct listed conditional-boundary #line mappings against fixed original; preserve selected code and excluded bodies.",
+      "related_callers": "vrinit interrupt calls; NTVDM public interrupt bridge; compiler diagnostics.",
+      "verification": "Check full retained logical mapping for line repairs; preserve stdcall import resolution and internal cdecl call."
+    },
+    {
+      "id": "T483-D1459",
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "status": "pending",
+      "plan": "Correct listed conditional-boundary #line mappings against fixed original; preserve selected code and excluded bodies.",
+      "related_callers": "vrinit interrupt calls; NTVDM public interrupt bridge; compiler diagnostics.",
+      "verification": "Check full retained logical mapping for line repairs; preserve stdcall import resolution and internal cdecl call."
+    },
+    {
+      "id": "T483-D1460",
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "status": "pending",
+      "plan": "Rebase listed #line boundaries; preserve source and excluded bodies.",
+      "related_callers": "Compiler diagnostics and source-location expansion.",
+      "verification": "Verify all retained mappings against original; build and attribute line-only differences."
+    },
+    {
+      "id": "T483-D1461",
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "status": "pending",
+      "plan": "Rebase #line using retained source anchors; preserve adaptations.",
+      "related_callers": "Compiler diagnostics/source-location macros.",
+      "verification": "Compare every retained logical source line."
+    },
+    {
+      "id": "T483-D1473",
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "status": "pending",
+      "plan": "Correct listed #line values to original retained-line anchors without modifying selected code.",
+      "related_callers": "Compiler diagnostics and source-location macros.",
+      "verification": "Verify all retained line mappings; compile and attribute any location-only artifact changes."
+    },
+    {
+      "id": "T483-D1474",
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "pending",
+      "plan": "Rebase #line against retained original source anchors.",
+      "related_callers": "Compiler diagnostics.",
+      "verification": "Compare all retained mappings and attribute binary line changes."
+    },
+    {
+      "id": "T483-D1495",
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "status": "pending",
+      "plan": "Rebase #line at listed original retained anchors.",
+      "related_callers": "Compiler diagnostics.",
+      "verification": "Complete retained-line mapping comparison."
+    },
+    {
+      "id": "T483-D1496",
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "status": "pending",
+      "plan": "Rebase #line at listed original retained anchors.",
+      "related_callers": "Compiler diagnostics.",
+      "verification": "Complete retained-line mapping comparison."
+    },
+    {
+      "id": "T483-D1498",
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "status": "pending",
+      "plan": "Change new local-name conversion to CP_ACP to match existing RtlAnsiStringToUnicodeString consumer; update comment to ANSI. Preserve prefix, fixed byte bound, original RAP path; compare differing ACP/OEM non-ASCII names.",
+      "related_callers": "VrRemoteApi NetWkstaGetInfo -> WideCharToMultiByte -> RtlInitAnsiString/RtlAnsiStringToUnicodeString -> RxpTransactSmb.",
+      "verification": "Local null-server branch, ASCII and non-ASCII name with ACP/OEM disagreement; fixed-buffer overflow and allocation cleanup; nonlocal guest server unchanged."
+    },
+    {
+      "id": "T483-D1500",
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "status": "pending",
+      "plan": "Rebase listed #line boundaries to original.",
+      "related_callers": "WOW32 header consumers and diagnostics.",
+      "verification": "Verify retained source line mapping."
+    },
+    {
+      "id": "T483-D1502",
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "status": "pending",
+      "plan": "Correct listed #line anchors against fixed original without selected-code changes.",
+      "related_callers": "WOW32ResolveMemory export/extension clients; mapembed header/source diagnostics.",
+      "verification": "Preserve public calling convention; verify original retained logical mappings for line repair."
+    },
+    {
+      "id": "T483-D1507",
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "status": "pending",
+      "plan": "Rebase listed #line directives to original anchors; retain selected accelerator code.",
+      "related_callers": "WOW accelerator thunks and diagnostics.",
+      "verification": "Verify retained mappings and any source-location expansions."
+    },
+    {
+      "id": "T483-D1508",
+      "path": "src/mvdm-host/wow32/walias.c",
+      "status": "pending",
+      "plan": "Rebase listed #line against original.",
+      "related_callers": "Compiler diagnostics.",
+      "verification": "Verify retained line mappings."
+    },
+    {
+      "id": "T483-D1523",
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "status": "pending",
+      "plan": "Use report mismatch pairs to repair original logical-line restoration without executable changes; batch validate emitted line markers.",
+      "related_callers": "Selected WOW translation unit",
+      "verification": "Preprocessor diagnostic/source line comparison, no runtime claim."
+    },
+    {
+      "id": "T483-D1524",
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "status": "pending",
+      "plan": "Keep header for functional control capture/restore, replace inaccurate diagnostic-only comment with actual dependency description; remove trace declarations only with their exclusive provider/callers.",
+      "related_callers": "wow32-dll/source/wow_user_native_extension.c; test/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c",
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+    },
+    {
+      "id": "T483-D1573",
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "status": "pending",
+      "plan": "Repair #line mapping using per-file pairs without changing executable code.",
+      "related_callers": "WOW original translation unit",
+      "verification": "Preprocessed line-marker comparison"
+    },
+    {
+      "id": "T483-D1620",
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "status": "pending",
+      "plan": "Repair #line according to report pairs without changing selected code.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler source-line comparison"
+    },
+    {
+      "id": "T483-D1623",
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "status": "pending",
+      "plan": "Repair #line mappings from per-file pairs without semantic changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler source-line verification"
+    },
+    {
+      "id": "T483-D1625",
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "status": "pending",
+      "plan": "Repair #line mappings from per-file pairs without semantic changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler source-line verification"
+    },
+    {
+      "id": "T483-D1627",
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "status": "pending",
+      "plan": "Use per-file mismatch pairs to correct #line without selected-code changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Preprocessor source-line comparison"
+    },
+    {
+      "id": "T483-D1629",
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "status": "pending",
+      "plan": "Use per-file mismatch pairs to correct #line without selected-code changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Preprocessor source-line comparison"
+    },
+    {
+      "id": "T483-D1630",
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "status": "pending",
+      "plan": "Use per-file mismatch pairs to correct #line without selected-code changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Preprocessor source-line comparison"
+    },
+    {
+      "id": "T483-D1632",
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "status": "pending",
+      "plan": "Repair #line placements using report pairs without executable changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler line-marker check"
+    },
+    {
+      "id": "T483-D1636",
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "status": "pending",
+      "plan": "Repair #line placements from report pairs without selected-code changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler marker comparison"
+    },
+    {
+      "id": "T483-D1637",
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "status": "pending",
+      "plan": "Repair #line placements from report pairs without selected-code changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler marker comparison"
+    },
+    {
+      "id": "T483-D1641",
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "status": "pending",
+      "plan": "Repair #line according to report pairs without semantic edits.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler line markers"
+    },
+    {
+      "id": "T483-D1662",
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "status": "pending",
+      "plan": "Repair #line from per-file pairs without semantic edits.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler marker check"
+    },
+    {
+      "id": "T483-D1671",
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "status": "pending",
+      "plan": "Repair #line placements from per-file pairs without selected logic changes.",
+      "related_callers": "WOW translation unit",
+      "verification": "Compiler line marker witness"
+    },
+    {
+      "id": "T483-D1673",
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "status": "pending",
+      "plan": "Compare recorded equal-line pairs with compiler #line output, restore missing or incorrect resets without changing executable source.",
+      "related_callers": "wkman.c diagnostics and source mapping",
+      "verification": "Preprocessor/diagnostic line verification; unchanged executable tokens."
+    },
+    {
+      "id": "T483-D1685",
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "status": "pending",
+      "plan": "Preserve exact iTask/HTASK-to-server-ticket binding at successful W32Thread initialization and original cleanup/cancel boundaries. At bind, handle failure explicitly through the existing startup-failure/lifecycle owner instead of discarding it; do not invent a second close state machine. Audit retirement and cancel acknowledgement against ticket reuse before changing these other sites.",
+      "related_callers": "wkman.c W32Thread/W32DestroyTask/W32HungAppNotifyThread; wow_task_termination.c; wow_task_cleanup_entry.c; wow_idle_hook_binding.c; wow_user_task_lifecycle.c; worker_lifecycle.c; common/wow/registry.h",
+      "verification": "Fault-inject bind RPC/allocation failure; exact task close, explicit cancel then retry, normal exit and HTASK reuse; prove no stale cancel/retire can select a replacement task."
+    },
+    {
+      "id": "T483-D1706",
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessor and correct proven reset errors.",
+      "related_callers": "wkmem.c",
+      "verification": "Diagnostic mapping verification and unchanged executable tokens."
+    },
+    {
+      "id": "T483-D1707",
+      "path": "src/mvdm-host/wow32/wkmem.h",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessor and correct proven reset errors.",
+      "related_callers": "wkmem.h",
+      "verification": "Diagnostic mapping verification and unchanged executable tokens."
+    },
+    {
+      "id": "T483-D1708",
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "pending",
+      "plan": "Confirm recorded mismatches in preprocessed diagnostics; correct resets without altering selected code.",
+      "related_callers": "wmdisp32.c diagnostics",
+      "verification": "Compiler logical location check and executable token identity."
+    },
+    {
+      "id": "T483-D1803",
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessor and correct proven #line reset errors without selected-source changes.",
+      "related_callers": "wmdisp32.h",
+      "verification": "Compiler logical location and executable-token comparison."
+    },
+    {
+      "id": "T483-D1806",
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessor and correct proven #line reset errors without selected-source changes.",
+      "related_callers": "wmmalias.c",
+      "verification": "Compiler logical location and executable-token comparison."
+    },
+    {
+      "id": "T483-D1807",
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessor and correct proven #line reset errors without selected-source changes.",
+      "related_callers": "wmmalias.h",
+      "verification": "Compiler logical location and executable-token comparison."
+    },
+    {
+      "id": "T483-D1808",
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessor and correct proven #line reset errors without selected-source changes.",
+      "related_callers": "wmmedia.h",
+      "verification": "Compiler logical location and executable-token comparison."
+    },
+    {
+      "id": "T483-D1814",
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "status": "pending",
+      "plan": "Confirm compiler logical locations, then repair only proven #line resets.",
+      "related_callers": "wmmstruc.h",
+      "verification": "Preprocessed diagnostic mapping and executable token identity."
+    },
+    {
+      "id": "T483-D1815",
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "status": "pending",
+      "plan": "Check recorded original/current logical-line pairs with preprocessor and repair only proven #line errors.",
+      "related_callers": "wmsg16.c",
+      "verification": "Compiler location evidence and executable-token identity."
+    },
+    {
+      "id": "T483-D1866",
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "status": "pending",
+      "plan": "Check recorded original/current logical-line pairs with preprocessor and repair only proven #line errors.",
+      "related_callers": "wmsg16.h",
+      "verification": "Compiler location evidence and executable-token identity."
+    },
+    {
+      "id": "T483-D1867",
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "status": "pending",
+      "plan": "Check recorded original/current logical-line pairs with preprocessor and repair only proven #line errors.",
+      "related_callers": "wmsgbm.c",
+      "verification": "Compiler location evidence and executable-token identity."
+    },
+    {
+      "id": "T483-D1868",
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "status": "pending",
+      "plan": "Verify recorded line pairs through preprocessor then correct only proven #line resets.",
+      "related_callers": "wmsgcb.c",
+      "verification": "Compiler logical location and token identity."
+    },
+    {
+      "id": "T483-D1875",
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "status": "pending",
+      "plan": "Verify recorded line pairs through preprocessor then correct only proven #line resets.",
+      "related_callers": "wmsgem.c",
+      "verification": "Compiler logical location and token identity."
+    },
+    {
+      "id": "T483-D1880",
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessing then fix proven #line resets without changing executable source.",
+      "related_callers": "wmsglb.c",
+      "verification": "Compiler mapping and executable-token identity."
+    },
+    {
+      "id": "T483-D1884",
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessing then fix proven #line resets without changing executable source.",
+      "related_callers": "wmsgsbm.c",
+      "verification": "Compiler mapping and executable-token identity."
+    },
+    {
+      "id": "T483-D1885",
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "status": "pending",
+      "plan": "Confirm recorded line pairs with preprocessing then fix proven #line resets without changing executable source.",
+      "related_callers": "wmtbl32.c",
+      "verification": "Compiler mapping and executable-token identity."
+    },
+    {
+      "id": "T483-D1901",
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "status": "pending",
+      "plan": "Verify recorded line pairs via compiler preprocessing then correct proven resets.",
+      "related_callers": "wow32.c",
+      "verification": "Compiler mapping and unchanged selected tokens."
+    },
+    {
+      "id": "T483-D1911",
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "status": "pending",
+      "plan": "Distinguish explicitly supported absent key from other open errors; preserve original failure for non-absence rather than treating every error as empty configuration. Reuse existing reader result; no second registry path.",
+      "related_callers": "wow_user_thunk_scope.c; worker_lifecycle.c; mvdm_softpc_fast_bop.c; mvdm_softpc_wow_page_domain.c; mvdm_softpc_firmware.c; common/wow/registry.h; wkman.c",
+      "verification": "Missing key permitted baseline; access/invalid-data/provider errors propagate; startup/cleanup remains owned by existing path."
+    },
+    {
+      "id": "T483-D1926",
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "status": "pending",
+      "plan": "Confirm equal-line location pairs via preprocessing and fix proven #line resets only.",
+      "related_callers": "wow32.h consumers",
+      "verification": "Compiler mapping and selected token identity."
+    },
+    {
+      "id": "T483-D1927",
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "status": "pending",
+      "plan": "Confirm equal-line mapping via preprocessing; repair proven #line resets without executable changes.",
+      "related_callers": "wow32fax.c translation unit",
+      "verification": "Compiler line mapping and selected token identity."
+    },
+    {
+      "id": "T483-D1937",
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "status": "pending",
+      "plan": "Confirm equal-line mapping via preprocessing; repair proven #line resets only.",
+      "related_callers": "WOW hook translation units",
+      "verification": "Compiler mapping and selected token identity."
+    },
+    {
+      "id": "T483-D1982",
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "status": "pending",
+      "plan": "Confirm equal-line location via preprocessing; fix proven #line resets without altering code.",
+      "related_callers": "wowtbl.c consumers",
+      "verification": "Compiler mapping and selected token identity."
+    },
+    {
+      "id": "T483-D1983",
+      "path": "src/mvdm-host/wow32/wowtbl.h",
+      "status": "pending",
+      "plan": "Confirm equal-line location via preprocessing; fix proven #line resets without altering code.",
+      "related_callers": "wowtbl.h consumers",
+      "verification": "Compiler mapping and selected token identity."
+    },
+    {
+      "id": "T483-D1991",
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "status": "pending",
+      "plan": "Confirm equal-line mapping through preprocessing; fix proven #line resets only.",
+      "related_callers": "wres16.c consumers",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D1992",
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "status": "pending",
+      "plan": "Confirm mapping via preprocessing and fix proven #line resets only.",
+      "related_callers": "wsdata.c",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2017",
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "status": "pending",
+      "plan": "Confirm equal-line mapping through preprocessing and fix proven #line resets only.",
+      "related_callers": "wspool.c consumers",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2026",
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "status": "pending",
+      "plan": "Confirm mapping through preprocessing; fix proven #line resets only.",
+      "related_callers": "wstruc.c consumers",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2031",
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "status": "pending",
+      "plan": "Confirm equal-line mapping and fix proven #line resets only.",
+      "related_callers": "wsubcls.c consumers",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2032",
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "status": "pending",
+      "plan": "Confirm mapping and fix proven #line resets only.",
+      "related_callers": "wuclass.c",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2040",
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "status": "pending",
+      "plan": "Confirm mapping and fix proven #line resets only.",
+      "related_callers": "wuclip.c",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2061",
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "status": "pending",
+      "plan": "Confirm mapping and fix proven #line resets only.",
+      "related_callers": "wucomm.c",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2062",
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "status": "pending",
+      "plan": "Confirm mapping and fix proven #line resets only.",
+      "related_callers": "wucomm.h",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2063",
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "status": "pending",
+      "plan": "Confirm mapping and fix proven #line resets only.",
+      "related_callers": "wudlg.c",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2072",
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "status": "pending",
+      "plan": "Confirm mapping and fix proven #line resets only.",
+      "related_callers": "wuman.c",
+      "verification": "Compiler mapping and selected-token identity."
+    },
+    {
+      "id": "T483-D2078",
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "status": "pending",
+      "plan": "Correct #line placement against original LF positions without changing selected code; validate compiler diagnostics.",
+      "related_callers": "Compiler diagnostics for this translation unit",
+      "verification": "Preprocessor/diagnostic line verification after correction."
+    },
+    {
+      "id": "T483-D2114",
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "status": "pending",
+      "plan": "Correct #line placement without altering selected code; verify preprocessor diagnostics.",
+      "related_callers": "WU32GetDC/GetDCEx -> wow_native_GetDC/GetDCEx -> StoreDC/ReleaseCachedDCs; WU32LoadBitmap -> protected resource lease -> pfnWOWLoadBitmapA; WU32SetSysColors -> page-domain publisher; GetOpenClipboardWindow -> public guest handle publisher",
+      "verification": "Preserve guest ABI, HWND0 and invalid-handle distinction; acquire/release same native DC owner; bitmap allocation/map/native-failure cleanup; accepted/rejected system colors and reentrant callbacks."
+    },
+    {
+      "id": "T483-D2125",
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "status": "pending",
+      "plan": "Correct #line placement without altering selected code; verify preprocessor diagnostics.",
+      "related_callers": "WU32GetDC/GetDCEx -> wow_native_GetDC/GetDCEx -> StoreDC/ReleaseCachedDCs; WU32LoadBitmap -> protected resource lease -> pfnWOWLoadBitmapA; WU32SetSysColors -> page-domain publisher; GetOpenClipboardWindow -> public guest handle publisher",
+      "verification": "Preserve guest ABI, HWND0 and invalid-handle distinction; acquire/release same native DC owner; bitmap allocation/map/native-failure cleanup; accepted/rejected system colors and reentrant callbacks."
+    },
+    {
+      "id": "T483-D2131",
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "status": "pending",
+      "plan": "Correct only #line mapping against original LF lines and confirm preprocessing diagnostics.",
+      "related_callers": "Translation-unit diagnostics",
+      "verification": "Compiler logical-line verification"
+    },
+    {
+      "id": "T483-D2133",
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "status": "pending",
+      "plan": "Adjust #line positions only; verify compiler diagnostics against original LF positions.",
+      "related_callers": "Compiler diagnostic mapping",
+      "verification": "Preprocessor logical-line check"
+    },
+    {
+      "id": "T483-D2150",
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "status": "pending",
+      "plan": "Correct #line only and confirm compiler diagnostic mapping.",
+      "related_callers": "Compiler diagnostics",
+      "verification": "Preprocessor line verification"
+    },
+    {
+      "id": "T483-D2151",
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "status": "pending",
+      "plan": "Correct #line only and confirm compiler diagnostic mapping.",
+      "related_callers": "Compiler diagnostics",
+      "verification": "Preprocessor line verification"
+    },
+    {
+      "id": "T483-D2152",
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "status": "pending",
+      "plan": "Correct #line only and confirm compiler diagnostic mapping.",
+      "related_callers": "Compiler diagnostics",
+      "verification": "Preprocessor line verification"
+    },
+    {
+      "id": "T483-D2161",
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "status": "pending",
+      "plan": "Correct #line only and confirm compiler diagnostic mapping.",
+      "related_callers": "Compiler diagnostics",
+      "verification": "Preprocessor line verification"
+    },
+    {
+      "id": "T483-D2171",
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "status": "pending",
+      "plan": "Correct #line mapping of retained code after subset structure correction.",
+      "related_callers": "Compiler diagnostics",
+      "verification": "Compiler logical-line check"
+    },
+    {
+      "id": "T483-D2175",
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "status": "pending",
+      "plan": "Remove the orphan trailing Alpha skeleton and its #line resets as part of subset structure correction; retain admitted ProbeForRead and its original logical position. Reconcile mirror structure policy without restoring unused ProbeForWrite.",
+      "related_callers": "Original USER cleanup -> ProbeForRead",
+      "verification": "Actual selected callers and x86/x64 compile ABI; local capture allocation/free and pointer integrity; probe alignment/range/zero-size and subsequent access exception behavior."
+    },
+    {
+      "id": "T483-D2176",
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "status": "pending",
+      "plan": "Correct #line placements preserving selected original code.",
+      "related_callers": "tools/build/New-T310OriginalSoftpcNinja.ps1:287;tools/build/New-NativeWorkerNinja.ps1:178; original environment provider compile contexts",
+      "verification": "Compiler line mapping"
+    },
+    {
+      "id": "T483-D2178",
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "status": "pending",
+      "plan": "Correct #line placements preserving selected original code.",
+      "related_callers": "tools/build/New-T310OriginalSoftpcNinja.ps1:287;tools/build/New-NativeHook64Ninja.ps1:56-67;tools/build/New-NativeWorkerNinja.ps1:177",
+      "verification": "Compiler line mapping"
+    },
+    {
+      "id": "T483-D2179",
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "status": "pending",
+      "plan": "Restore #endif logical line 53 with #line placement; preserve existing subsequent reset. Verify compiler diagnostic mapping.",
+      "related_callers": "NetpSecondsSince1970ToFileTime; New-T310OriginalSoftpcNinja.ps1 time object",
+      "verification": "Selected object identity, seven-case conversion fixture and compiler logical lines after later correction."
+    },
+    {
+      "id": "T483-D2201",
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "status": "pending",
+      "plan": "Keep subset provenance externally; remove detached skeleton or restore its proper owning structure under approved subset policy, without importing registry behavior. Do not claim this tail matches original placement.",
+      "related_callers": "Run16/BaseClient -> common base RPC -> NTSRV; classifier/hook cohorts; original configuration carrier extracted by build",
+      "verification": "All actual build cohorts; original lifecycle fixture and RPC-first tests; configuration spaces/session ID/invalid inputs; line mapping after structural cleanup."
+    },
+    {
+      "id": "T483-D2202",
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "status": "pending",
+      "plan": "Correct #line position after binding-header cleanup; preserve selected declarations.",
+      "related_callers": "src/non-mvdm/base/win32/server/srvvdm.c:27; original BaseSrv translation-unit header context",
+      "verification": "Compiler line verification"
+    },
+    {
+      "id": "T483-D2206",
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "status": "pending",
+      "plan": "Correct #line placement against pinned original without changing selected tokens.",
+      "related_callers": "Original srvvdm.c diagnostics",
+      "verification": "Retained-line mapping comparison and applicable build."
+    },
+    {
+      "id": "T483-D2222",
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "status": "pending",
+      "plan": "Correct #line boundaries without changing selected tokens.",
+      "related_callers": "tools/build/New-T310OriginalSoftpcNinja.ps1:282; selected original Netlib translation unit",
+      "verification": "Retained-line mapping plus applicable build."
+    },
+    {
+      "id": "T483-D2227",
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "status": "pending",
+      "plan": "Restore exact diagnostic #line around excluded boundaries; preserve selected original conversion algorithm.",
+      "related_callers": "RAP conversion through selected XactSrv/Redirector closure",
+      "verification": "Retained-line mapping and applicable build; conversion regression only if executable tokens change."
+    },
+    {
+      "id": "T483-D2231",
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "pending",
+      "plan": "Correct #line for retained original lines alongside diagnostic restoration, without shifting selected original statement locations.",
+      "related_callers": "tools/build/New-T310OriginalSoftpcNinja.ps1:284; selected original XactSrv translation unit",
+      "verification": "Retained-line mapping and selected compilation."
+    },
+    {
+      "id": "T483-D2235",
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "status": "pending",
+      "plan": "Restore original diagnostic locations with minimal #line anchors; keep necessary initializer behavior.",
+      "related_callers": "tools/build/New-T310OriginalSoftpcNinja.ps1:284; selected original XactSrv translation unit",
+      "verification": "Retained-line comparison and selected compilation."
+    },
+    {
+      "id": "T483-D2248",
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "status": "pending",
+      "plan": "Correct #line at excluded boundaries without changing original selected declarations or packing.",
+      "related_callers": "Selected MVDM host/Redirector header consumers",
+      "verification": "Retained-line mapping; actual supported header inclusion contexts and selected builds."
+    },
+    {
+      "id": "T483-D2249",
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "status": "pending",
+      "plan": "Correct #line at excluded boundaries without changing original selected declarations or packing.",
+      "related_callers": "Selected MVDM host/Redirector header consumers",
+      "verification": "Retained-line mapping; actual supported header inclusion contexts and selected builds."
+    },
+    {
+      "id": "T483-D2250",
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "status": "pending",
+      "plan": "Correct #line at excluded boundaries without changing original selected declarations or packing.",
+      "related_callers": "Selected MVDM host/Redirector header consumers",
+      "verification": "Retained-line mapping; actual supported header inclusion contexts and selected builds."
+    },
+    {
+      "id": "T483-D2251",
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "status": "pending",
+      "plan": "Correct #line at excluded boundaries without changing original selected declarations or packing.",
+      "related_callers": "Selected MVDM host/Redirector header consumers",
+      "verification": "Retained-line mapping; actual supported header inclusion contexts and selected builds."
+    },
+    {
+      "id": "T483-D2252",
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "status": "pending",
+      "plan": "Restore original logical #line at removed bodies; preserve original selected SMB access and alignment definitions.",
+      "related_callers": "Selected x86 Redirector/RAP native structure conversion; shared header consumers",
+      "verification": "Retained-line comparison and supported include-context compile verification."
+    },
+    {
+      "id": "T483-D2253",
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "status": "pending",
+      "plan": "Restore original logical #line at removed bodies; preserve original selected SMB access and alignment definitions.",
+      "related_callers": "Selected x86 Redirector/RAP native structure conversion; shared header consumers",
+      "verification": "Retained-line comparison and supported include-context compile verification."
+    },
+    {
+      "id": "T483-D2254",
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "status": "pending",
+      "plan": "Restore original logical #line at removed bodies; preserve original selected SMB access and alignment definitions.",
+      "related_callers": "Selected x86 Redirector/RAP native structure conversion; shared header consumers",
+      "verification": "Retained-line comparison and supported include-context compile verification."
+    },
+    {
+      "id": "T483-D2255",
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "status": "pending",
+      "plan": "Restore original logical #line at removed bodies; preserve original selected SMB access and alignment definitions.",
+      "related_callers": "Selected x86 Redirector/RAP native structure conversion; shared header consumers",
+      "verification": "Retained-line comparison and supported include-context compile verification."
+    },
+    {
+      "id": "T483-D2256",
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "status": "pending",
+      "plan": "Correct original #line locations, or restore original bytes when duplicate guard is removed.",
+      "related_callers": "src/mvdm-host/softpc.new/host/src/nt_bop.c:7;nt_event.c:89;nt_reset.c:17; finite compat forwarding/include contexts",
+      "verification": "Retained-line comparison and actual compile contexts."
+    },
+    {
+      "id": "T483-D2258",
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "status": "pending",
+      "plan": "Correct original #line locations, or restore original bytes when duplicate guard is removed.",
+      "related_callers": "src/mvdm-host/softpc.new/host/src/config.c:21;nt_event.c:21;nt_reset.c:18; existing compat vdmapi forwarder and direct mirror consumers",
+      "verification": "Retained-line comparison and actual compile contexts."
+    },
+    {
+      "id": "T483-D2260",
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "status": "pending",
+      "plan": "Restore correct #line anchors around removed bodies without changing retained declarations or release diagnostics.",
+      "related_callers": "Selected NetLib/XACTSRV and Redirector include contexts",
+      "verification": "Full retained-line comparison plus supported header-context compilation."
+    },
+    {
+      "id": "T483-D2261",
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "status": "pending",
+      "plan": "Restore correct #line anchors around removed bodies without changing retained declarations or release diagnostics.",
+      "related_callers": "Selected NetLib/XACTSRV and Redirector include contexts",
+      "verification": "Full retained-line comparison plus supported header-context compilation."
+    },
+    {
+      "id": "T483-D2262",
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "status": "pending",
+      "plan": "Restore correct #line anchors around removed bodies without changing retained declarations or release diagnostics.",
+      "related_callers": "Selected NetLib/XACTSRV and Redirector include contexts",
+      "verification": "Full retained-line comparison plus supported header-context compilation."
+    },
+    {
+      "id": "T483-D2263",
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "status": "pending",
+      "plan": "Correct #line around excluded original bodies, preserving selected declarations.",
+      "related_callers": "RAP conversion/NetLib time selected consumers",
+      "verification": "Retained-line mapping and supported header-context compilation."
+    },
+    {
+      "id": "T483-D2264",
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "status": "pending",
+      "plan": "Correct #line around excluded original bodies, preserving selected declarations.",
+      "related_callers": "RAP conversion/NetLib time selected consumers",
+      "verification": "Retained-line mapping and supported header-context compilation."
+    },
+    {
+      "id": "T483-D2265",
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "status": "pending",
+      "plan": "Restore #line 2406 before #else after the excluded _X86_ body; preserve declarations.",
+      "related_callers": "src/mvdm-host/wow32/wow32fax.c",
+      "verification": "Complete line mapping and actual consumer include-context compilation."
+    },
+    {
+      "id": "T483-D2272",
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "status": "pending",
+      "plan": "Correct #line anchors at retained original conditional boundaries while keeping the admitted declaration subset.",
+      "related_callers": "src/mvdm-host/softpc.new/host/src/nt_eoi.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/host/src/nt_event.c; tools/build/New-T310OriginalSoftpcNinja.ps1; tools/build/New-T310HeartbeatSourceNinja.ps1; tools/build/New-T310IcaNinja.ps1",
+      "verification": "Complete retained-line comparison and supported consumer compilation."
+    },
+    {
+      "id": "T483-D2287",
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "status": "pending",
+      "plan": "Correct #line anchors at excluded-body boundaries, preserving selected native-sized LPC declarations.",
+      "related_callers": "ntcsrmsg.h and selected Base client/service declaration consumers",
+      "verification": "Full retained-line comparison and actual supported include-context compilation."
+    },
+    {
+      "id": "T483-D2293",
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "status": "pending",
+      "plan": "Restore #line for each retained closing directive; source-derived results require compiler-context verification.",
+      "related_callers": "src/compat/include/nt.h; src/ntvdm-exe/win32/nt_thread_alert_compat.c; src/ntvdm-exe/win32/nt_thread_alert_compat.h; src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c; test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c; tools/build/New-T310OriginalSoftpcNinja.ps1; tools/build/New-T310HeartbeatSourceNinja.ps1",
+      "verification": "Compile selected product and heartbeat fixtures, validate local/imported symbol binding and run lifecycle tests; pending-alert/native/APC semantics require separate focused evidence."
+    },
+    {
+      "id": "T483-D2317",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2318",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2319",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2339",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2340",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2341",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2342",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending",
+      "plan": "Restore the declaration in its original header carrier and remove the misplaced copy; update required include composition. Preserve any necessary local/import decoration explicitly at the compat boundary.",
+      "related_callers": "src/compat/include/nt.h; src/compat/include/environapi.h; src/compat/opennt_support_rtl.c; src/non-mvdm/base/ntos/rtl/error.c; src/mvdm-host/softpc.new/host/src/nt_timer.c; src/mvdm-host/softpc.new/base/bios/cmos_bis.c; tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "verification": "Compile all current product/fixture include contexts, check local/import symbol ownership and existing RTL/CMOS/heartbeat/environment/registry consumers. Run behavior tests for any binding change."
+    },
+    {
+      "id": "T483-D2378",
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "status": "pending",
+      "plan": "Restore original source layout with matching #line anchors as part of declaration cleanup, preserving necessary ABI adaptation.",
+      "related_callers": "src/common/base_srv/base_classifier.h; src/common/base_srv/base_classifier_path.c; src/non-mvdm/base/win32/client/vdm.c; src/mvdm-host/dos/dem/demgset.c; src/mvdm-host/dos/dem/demsrch.c; test/broker/path_name_abi.c",
+      "verification": "Compile selected BaseClient and DEM consumers; run existing path ABI/classifier tests and path-relative/full-path lifetime regressions on supported architectures."
+    },
+    {
+      "id": "T483-D2379",
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "status": "pending",
+      "plan": "Recover original type ownership without exposing old-size buffers to the native function. Keep the existing full-path-only wrapper; distinguish its original typed output from the modern native declaration in compat. Remove duplicate original type after include order is resolved; do not invent a second conversion algorithm.",
+      "related_callers": "src/common/base_srv/base_classifier.h; src/common/base_srv/base_classifier_path.c; src/non-mvdm/base/win32/client/vdm.c; src/mvdm-host/dos/dem/demgset.c; src/mvdm-host/dos/dem/demsrch.c; test/broker/path_name_abi.c",
+      "verification": "Compile selected BaseClient and DEM consumers; run existing path ABI/classifier tests and path-relative/full-path lifetime regressions on supported architectures."
+    },
+    {
+      "id": "T483-D2381",
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "status": "pending",
+      "plan": "Correct #line at removed original body boundaries; retain selected VDD/debugger declarations.",
+      "related_callers": "src/mvdm-host/wow32/wkman.c; src/mvdm-host/dbg/dbg.c",
+      "verification": "Complete logical-line comparison and supported VDD/WOW/debugger consumer compilation."
+    },
+    {
+      "id": "T483-D2383",
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "status": "pending",
+      "plan": "Restore logical anchors after lifetime additions/excluded LATER bodies without changing callback cleanup.",
+      "related_callers": "src/wow32-dll/source/wow_button_lifetime.c; src/wow32-dll/source/wow_edit_entry_bindings.c; src/wow32-dll/include/control-client/precomp.h; test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c; test/adapter-mvdm-host-out/wow/wow_button_dc_fixture.c; tools/build/New-T447S3CallBoundaryNinja.ps1",
+      "verification": "Full retained-line mapping and control-client build."
+    },
+    {
+      "id": "T483-D2417",
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "status": "pending",
+      "plan": "Restore #line before first retained original comment after include substitution.",
+      "related_callers": "src/wow32-dll/include/wow_bitmap_bindings.h; test/adapter-mvdm-host-out/wow/wow_original_bitmap_header_fixture.c; test/observation/verify-wow-bitmap-bindings.ps1",
+      "verification": "Retained logical-line comparison and supported consumer compilation."
+    },
+    {
+      "id": "T483-D2424",
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "status": "pending",
+      "plan": "Correct #line around excluded alternatives and relocated selected globals; do not alter initializer positions.",
+      "related_callers": "src/non-mvdm/windows/core/ntuser/client/editec.c; src/non-mvdm/windows/core/ntuser/client/lboxctl3.c; src/non-mvdm/windows/core/ntuser/client/btnctl.c; src/non-mvdm/windows/core/ntuser/client/comboini.c; test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c; tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "verification": "Complete retained-line comparison and supported global-unit compilation."
+    },
+    {
+      "id": "T483-D2432",
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "status": "pending",
+      "plan": "Add original line anchors around retained comment/signature groups after final subset-order decision; do not treat raw sequential alignment as reliable across relocated functions.",
+      "related_callers": "tools/build/New-T404S5Wow32ProviderNinja.ps1; src/wow32-dll/include/wow_default_message_bindings.h; src/wow32-dll/include/wow_edit_call_bindings.h; src/wow32-dll/include/wow_edit_memory_bindings.h; src/wow32-dll/include/wow_class_client_bindings.h; src/wow32-dll/include/wow_window_dispatch_bindings.h; src/wow32-dll/source/wow_window_words_binding.c; test/adapter-mvdm-host-out/wow/wow_original_window_dispatch_fixture.c; test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c; test/adapter-mvdm-host-out/wow/wow_dialog_edit_memory_fixture.c",
+      "verification": "Build all five real client.c objects and corresponding original dispatch/class/dialog/default-bits/state fixtures; verify reentry, callback allocation/free, native/guest tagging and selected table bounds."
+    },
+    {
+      "id": "T483-D2438",
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "status": "pending",
+      "plan": "Restore original #line anchors around explicit context additions, pointer advancement and excluded branches.",
+      "related_callers": "src/wow32-dll/include/wow_menu_parser_bindings.h; src/wow32-dll/include/wow_menu_resource_bindings.h; src/wow32-dll/source/wow_private_user_compat.c; test/adapter-mvdm-host-out/wow/wow_original_menu_resource_fixture.c",
+      "verification": "Complete retained logical-line comparison and actual parser compilation."
+    },
+    {
+      "id": "T483-D2459",
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "status": "pending",
+      "plan": "Reconcile retained original directives/comments individually with original line identities; reset at each restored original boundary, preserve function mapping and avoid gratuitous directives around new local code.",
+      "related_callers": "All clmsg product and fixture translation contexts",
+      "verification": "Source mapping table and preprocessor/compiler diagnostic controls; executable tokens unchanged."
+    },
+    {
+      "id": "T483-D2469",
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "status": "pending",
+      "plan": "Restore accurate original logical locations for retained constants/comments and changed pointer-order lines; reconcile mapped conditional closing lines using full original ranges. Keep code tokens unchanged.",
+      "related_callers": "All selected clres translation contexts",
+      "verification": "Source-line report plus compiler diagnostic controls; no claim of mapping closure until verified."
+    },
+    {
+      "id": "T483-D2470",
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "status": "pending",
+      "plan": "Add original logical line reset before mismatched retained closing directive; leave excluded error and active combo algorithm unchanged.",
+      "related_callers": "Original combo control provider and supported control fixtures",
+      "verification": "Recompute complete retained-line mapping and preprocess supported context; executable code unchanged."
+    },
+    {
+      "id": "T483-D2474",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "status": "pending",
+      "plan": "Restore original logical locations for every retained line listed in report, especially directive/brace boundaries; preserve adapted code and original conditional shape.",
+      "related_callers": "All dlgbegin product/fixture contexts",
+      "verification": "Full retained-source mapping plus compiler diagnostic controls; no executable-token changes."
+    },
+    {
+      "id": "T483-D2493",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "status": "pending",
+      "plan": "Reset original logical lines at retained original comment/directive boundaries listed in report, keeping active tokens and outer excluded structure unchanged.",
+      "related_callers": "Product dlgend object and supported fixtures",
+      "verification": "Full source-line reconciliation and compiler diagnostic check."
+    },
+    {
+      "id": "T483-D2502",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "status": "pending",
+      "plan": "Correct logical positions for retained original lines in report; independently reconcile moved declarations/comments and original conditional closings. Keep executable code and valid selectors unchanged.",
+      "related_callers": "Original dialog creation/finalization; native procedure bindings; modal and keyboard lifetime fixtures",
+      "verification": "Preserve modal normal/quit/retirement and keyboard callback cases plus native A/W slot/MSGRESULT/notify behavior. Re-run applicable original-body and real-dialog regression for later behavioral edits."
+    },
+    {
+      "id": "T483-D2524",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "status": "pending",
+      "plan": "Restore original logical positions around moved original comments and DialogLookaside declaration using explicit original ranges. Existing function-entry resets prove only function positions, not whole-file diagnostic fidelity.",
+      "related_callers": "Original dialog creation/finalization; native procedure bindings; modal and keyboard lifetime fixtures",
+      "verification": "Preserve modal normal/quit/retirement and keyboard callback cases plus native A/W slot/MSGRESULT/notify behavior. Re-run applicable original-body and real-dialog regression for later behavioral edits."
+    },
+    {
+      "id": "T483-D2527",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "status": "pending",
+      "plan": "Restore original logical positions for retained comments/directives/statements listed in report without changing active tokens or excluded outer boundaries.",
+      "related_callers": "IsDialogMessageW button-focus branch; wow_button_scope; original lock and release owners",
+      "verification": "Explicit production-body exception/retirement fixture then normal keyboard regression; no successful stub or alternate implementation."
+    },
+    {
+      "id": "T483-D2574",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "status": "pending",
+      "plan": "Restore original logical lines at excluded closing directives listed in per-file report; preserve active traversal and outer branch structure.",
+      "related_callers": "dlgmgr2 keyboard/default-button owners; wudlg public wrappers; wow_user_discovery and retained WND graph",
+      "verification": "Original navigation fixtures plus actual public/internal parity for nested controls, hidden/disabled nodes, no target, wrapped order and external HWNDs; source/diagnostic comparison for structural-only changes."
+    },
+    {
+      "id": "T483-D2576",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "status": "pending",
+      "plan": "Map restored original comments to original diagnostic lines; function-entry resets cover bodies only. Do not claim whole-file line identity from per-function proof.",
+      "related_callers": "dlgmgr2 keyboard/default-button owners; wudlg public wrappers; wow_user_discovery and retained WND graph",
+      "verification": "Original navigation fixtures plus actual public/internal parity for nested controls, hidden/disabled nodes, no target, wrapped order and external HWNDs; source/diagnostic comparison for structural-only changes."
+    },
+    {
+      "id": "T483-D2577",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "status": "pending",
+      "plan": "At each listed original resumption boundary restore #line to the pinned original physical line, retaining guard bodies and exclusion frames.",
+      "related_callers": "dmmnem product control body and original mnemonic fixture",
+      "verification": "Compare preprocessed logical locations against pinned original for unchanged tokens; cached compile the actual product and fixture contexts."
+    },
+    {
+      "id": "T483-D2597",
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed retained closing boundary; keep all excluded bodies and selected code unchanged.",
+      "related_callers": "Original EDIT control provider and applicable formal fixtures",
+      "verification": "Preprocess actual supported contexts and compare original diagnostic locations; cached compile affected provider."
+    },
+    {
+      "id": "T483-D2598",
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed retained closing boundary; keep all excluded bodies and selected code unchanged.",
+      "related_callers": "Original EDIT control provider and applicable formal fixtures",
+      "verification": "Preprocess actual supported contexts and compare original diagnostic locations; cached compile affected provider."
+    },
+    {
+      "id": "T483-D2600",
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed retained closing boundary; keep all excluded bodies and selected code unchanged.",
+      "related_callers": "Original EDIT control provider and applicable formal fixtures",
+      "verification": "Preprocess actual supported contexts and compare original diagnostic locations; cached compile affected provider."
+    },
+    {
+      "id": "T483-D2601",
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed retained closing boundary; keep all excluded bodies and selected code unchanged.",
+      "related_callers": "Original EDIT control provider and applicable formal fixtures",
+      "verification": "Preprocess actual supported contexts and compare original diagnostic locations; cached compile affected provider."
+    },
+    {
+      "id": "T483-D2602",
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed retained closing boundary; keep all excluded bodies and selected code unchanged.",
+      "related_callers": "Original EDIT control provider and applicable formal fixtures",
+      "verification": "Preprocess actual supported contexts and compare original diagnostic locations; cached compile affected provider."
+    },
+    {
+      "id": "T483-D2603",
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "status": "pending",
+      "plan": "Restore original #line before listed closing boundaries; retain original branches and selected code.",
+      "related_callers": "Original EDIT provider and EDIT fixtures",
+      "verification": "Preprocess supported contexts to verify original logical locations, then cached compile selected provider."
+    },
+    {
+      "id": "T483-D2604",
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "status": "pending",
+      "plan": "Restore original #line before listed closing boundaries; retain original branches and selected code.",
+      "related_callers": "Original EDIT provider and EDIT fixtures",
+      "verification": "Preprocess supported contexts to verify original logical locations, then cached compile selected provider."
+    },
+    {
+      "id": "T483-D2611",
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "status": "pending",
+      "plan": "Restore original logical positions at WX86 and include-guard closing directives; retain #error body.",
+      "related_callers": "Recovered EDIT/dialog includes via wow_edit_memory_bindings; original clglobal definitions",
+      "verification": "Compiler diagnostic map comparison against original header; no branch activation."
+    },
+    {
+      "id": "T483-D2615",
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "status": "pending",
+      "plan": "Restore original #line at retained conditional boundaries without enabling TESTING or importing its manager.",
+      "related_callers": "registered_full_handle -> wow_user_full_handle -> wow_original_full_user_handle; FULLHWND32",
+      "verification": "Compare compiler diagnostic mapping against original positions in actual include context."
+    },
+    {
+      "id": "T483-D2622",
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed closing boundary without changing excluded bodies.",
+      "related_callers": "Selected listbox provider",
+      "verification": "Compare actual preprocessed diagnostic map and cached compile provider."
+    },
+    {
+      "id": "T483-D2623",
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "status": "pending",
+      "plan": "Restore original #line before each listed closing boundary without changing excluded bodies.",
+      "related_callers": "Selected listbox provider",
+      "verification": "Compare actual preprocessed diagnostic map and cached compile provider."
+    },
+    {
+      "id": "T483-D2627",
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "status": "pending",
+      "plan": "Reestablish original logical positions at function/document/conditional resumption boundaries in both selected contexts.",
+      "related_callers": "Both mngrayc provider objects",
+      "verification": "Function-aware original mapping and real preprocessor diagnostic check."
+    },
+    {
+      "id": "T483-D2696",
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "status": "pending",
+      "plan": "Reconcile frames with original owning ranges. Restore retail macro bodies under original DEBUG else; audit empty !WOW and !_USERK_ frames as removed declaration/include slices, not false conditions. Preserve supported selected bodies.",
+      "related_callers": "Original EDIT, ComboBox, ListBox, dialog, button clients; their shared state/layout and lookaside bindings.",
+      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures."
+    },
+    {
+      "id": "T483-D2734",
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "status": "pending",
+      "plan": "Reconcile excluded function dispositions with subset policy; conditional frames must stay associated with their original owning ranges. Do not restore omitted function bodies merely to house frames or insert #error into selected native bodies.",
+      "related_callers": "dlgmgr.c; dlgmgr2.c::_FindDlgItem; native control-client graph bindings; MVDM wusercli/wuhook thunks",
+      "verification": "Affected production provider compile; wow_dialog_navigation_fixture NULL/direct-child/nested-ID and pre4/4 distinction; native callback lifecycle fixtures when validator/hook boundary changes."
+    },
+    {
+      "id": "T483-D2747",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "status": "pending",
+      "plan": "Reconcile each frame with its original containing function and supported subset policy; maintain source-position anchors, do not restore omitted API bodies or activate Unicode merely to regularize structure.",
+      "related_callers": "client.c RegisterClassWOWA; wow_class_client_bindings; original ntsend capture; native class storage/register/remove bindings",
+      "verification": "Class fixture checks style/version/brush/instance validation, menu allocation/capture failure1 and2, failed registration, refused unregister, later successful unregister, native duplicate registration and live-window rejection. Controlled backend and task-version inputs; no fresh runtime results. Rerun affected real provider and original/mirror paired fixtures for future semantic edits."
+    },
+    {
+      "id": "T483-D2785",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "status": "pending",
+      "plan": "Reconcile each frame to original declaration range with subset policy; preserve necessary selected macros and original conditions, avoid fake empty envelopes or broad original-system import.",
+      "related_callers": "wow_user_client_view_layout; opennt_user_multipass; control-client precomp; dialog-state; control-extent; button-resource and cleanup bindings",
+      "verification": "Affected real provider compile and multipass include-order cases; existing layout assertions for WND176,CLS108,MENU64,ITEM64,DESKTOPINFO100; control/dialog/button and page-domain fixtures as relevant. No fresh run claimed."
+    },
+    {
+      "id": "T483-D2800",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "status": "pending",
+      "plan": "Reconcile detached DBG fragment with its original DestroyClassBrush owner and line mapping; separate InitClassOffsets omission review.",
+      "related_callers": "wow_class_client_publish/remove;wow_class_words_unregister;class lookup/query and WOW thunks",
+      "verification": "For repair: cached WOW build, class-server/query/registration/lifetime fixtures, native refusal preserves output/list/menu, tagged WOW class lifetime regression, original logical-line checks."
+    },
+    {
+      "id": "T483-D2801",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "status": "pending",
+      "plan": "Reconcile detached FE_SB fragment with InternalRegisterClassEx owner; empty else does not reconstruct original structure. Audit InitClassOffsets callers.",
+      "related_callers": "wow_class_client_publish/remove;wow_class_words_unregister;class lookup/query and WOW thunks",
+      "verification": "For repair: cached WOW build, class-server/query/registration/lifetime fixtures, native refusal preserves output/list/menu, tagged WOW class lifetime regression, original logical-line checks."
+    },
+    {
+      "id": "T483-D2841",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "status": "pending",
+      "plan": "LATER frame detached from omitted InitiateShutdown at EOF. Reconcile owning subset/omission and diagnostic mapping; do not imply empty retained branch preserves shutdown logic.",
+      "related_callers": "registered_hung -> wow_user_task_lifecycle_register -> xxxRegisterUserHungAppHandlers; taskman event signaling; lifecycle_dispose",
+      "verification": "For repair: x86 WOW build; task-order registration negative inputs/rights/type and original-handle-close checks; process-retirement retained duplicate and refusal checks; selected WOW end-session regression if shutdown policy changes; line-mapping check."
+    },
+    {
+      "id": "T483-D2853",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "status": "pending",
+      "plan": "Four DEBUG fragments were detached from omitted GetCPD and appended after xxxSetWindowLong. Reconcile original containing subset structure and line anchors; do not preserve orphan fragments as if owner body remained.",
+      "related_callers": "wow_window_client_try_set_long -> _SetWindowLong -> xxxSetWindowLong; original controls; wow_dialog_host_set; native procedure/CPD paths",
+      "verification": "On repair: x86 WOW build; dialog-getset/native-owner, edit-state and window-procedure fixtures; private index/foreign-view/lifetime failures, dialog result callbacks and A/W tokens; source line mapping."
+    },
+    {
+      "id": "T483-D2858",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "status": "pending",
+      "plan": "Detached DEBUG_LOCKS/DEBUG/TRACE_OBJECT_ALLOCS/FE_IME/#if0 fragments no longer enclose their original declarations/functions. Reconcile each original owner and omitted-function decision; preserve only coherent subset conditional structure, with correct #line. Do not enable unsupported branches.",
+      "related_callers": "_WOWCleanup;wow_user_window_publish/retire;wow_menu_client_cleanup;wow_user_task_lifecycle_dispose",
+      "verification": "On repair: cached WOW build; original object flag identity; actual production publication/cleanup type matrix; native failure and generation-reuse/borrow retirement tests; task/process lifecycle regression; source frame/line check."
+    },
+    {
+      "id": "T483-D2881",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "status": "pending",
+      "plan": "KOREA frame detached from omitted SetNCFonts, now empty. Reconcile original containing subset and correct diagnostic anchors; do not imply font behavior is retained.",
+      "related_callers": "wow_button_resources_initialize/ready/blit; original button drawing/mngrayc; future metric/font dependency review",
+      "verification": "For repair: cached WOW build, button resources/DC/lifetime fixtures including all 14 render failure points, radio composition/3-state aliases and ownership; original dependency/state comparison; source line mapping."
+    },
+    {
+      "id": "T483-D2886",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "status": "pending",
+      "plan": "Detached MARKPATH/DBG/DEBUG/NEVER/SYSMODALWINDOWS/FE_IME/disabled frames span omitted functions; restore coherent original subset placement. Remove duplicate no-op instrumentation macros if no retained callers, without activating excluded code.",
+      "related_callers": "wow_input_group_prepare/commit/retire; wow_user_task_lifecycle reattach/init; native AttachThreadInput; input membership/lifetime fixtures",
+      "verification": "For remediation: cached WOW build; input-membership original grouping, input-lifetime allocation/native failure and external-reference/retirement checks; no scratch pointer escape; source line/frame verification; whole-tree symbol check before test-only wrapper deletion."
+    },
+    {
+      "id": "T483-D2901",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "status": "pending",
+      "plan": "Retained alignment assertion lost its defining context: src search finds only this condition/message. Remove with omitted key-state owner or restore exact original constant if owner retained; do not treat undefined-as-zero success as proof.",
+      "related_callers": "wow_input_group_prepare/commit/retire; wow_user_task_lifecycle reattach/init; native AttachThreadInput; input membership/lifetime fixtures",
+      "verification": "For remediation: cached WOW build; input-membership original grouping, input-lifetime allocation/native failure and external-reference/retirement checks; no scratch pointer escape; source line/frame verification; whole-tree symbol check before test-only wrapper deletion."
+    },
+    {
+      "id": "T483-D2910",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "status": "pending",
+      "plan": "Detached NEVER, FE_IME, DEBUG/DBG, MEMPHIS and x86 alignment frames survive outside omitted functions, often with empty selected bodies. Reconstruct source-policy-compliant retained subset structure from original owner ranges; do not activate omitted private server code. Preserve logical line 6170 for the retained function.",
+      "related_callers": "Original EDIT/Combo/ListBox FNID callers; wow_edit_set_window_fnid; borrowed retained WND; control finalization",
+      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping."
+    },
+    {
+      "id": "T483-D2922",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "status": "pending",
+      "plan": "FE_SB fragment originally belongs inside omitted map initializer; DEBUG fragments belong inside omitted value routines. Reconcile these detached frames with approved subset structure and original logical locations without reintroducing private registry subsystem. Selected readers retain their own original logical-line anchors.",
+      "related_callers": "xxxInitTask compatibility lookup; EDIT overlap preferences; wow_task_profile and wow_profile_open_key",
+      "verification": "For remediation: cached WOW build; task-profile existing/missing-key tests, truncation/default/handle balance; task initialization and EDIT preference regression; native enum/layout assertions. No registry writes solely to satisfy tests."
+    },
+    {
+      "id": "T483-D2938",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "status": "pending",
+      "plan": "Trailing DEBUG/DBG/LOCK_MOUSE_CODE/FE_IME frames are detached from omitted functions and some contain empty selected alternatives. Reconcile at original owning boundaries, retaining the real DEBUG exclusion within xxxInitTask and necessary original logical lines; do not activate omitted code.",
+      "related_callers": "wow_user_task_lifecycle initialization/rollback; init_ops; original taskman InsertTask/EnterWowCritSect; profile and input-group providers",
+      "verification": "For remediation: cached WOW build; task-order initialization eight modes, long profile value, invalid source name, shared/separate startup; native input attachment failure/rollback, task retirement and multi-window lifecycle. Preserve no extra scheduler/queue registry."
+    },
+    {
+      "id": "T483-D2944",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "status": "pending",
+      "plan": "DEBUG fragment belongs inside omitted xxxGetControlColor brush rejection branch, but is detached after retained function. Reconcile original subset structure and diagnostic anchor; do not restore private USER/GDI validation merely to surround an orphan frame.",
+      "related_callers": "GetControlBrush client; wow_control_brush; wow_edit_NtUserGetControlColor; borrow scope and native USER color service",
+      "verification": "For remediation: cached WOW build; control-brush recipient/lifetime/exception fixture, native color fallback/wrong-type/retired-control cases and real control painting; no stale PWND reads after reentry."
+    },
+    {
+      "id": "T483-D2946",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "status": "pending",
+      "plan": "Detached FE_IME/DEBUG/ANDREVA_DBG frames from omitted server globals/functions need original-owner placement. Retain real FE_IME/default-array and literal-disabled EDIT branch structures; reconcile logical lines without activating excluded startup code.",
+      "related_callers": "wow_default_messages_ready; DefWindowProcWorker and recovered control membership; original InitWindowMsgTable",
+      "verification": "For remediation: cached WOW build; default-messages membership/repeated publication fixture and actual control/default dispatch; allocation-failure cleanup and no partial publication; all test/build selector consumers and diagnostic-line reconstruction."
+    },
+    {
+      "id": "T483-D2977",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "status": "pending",
+      "plan": "Detached DEBUG/DBG/MSDWP/FE_IME/MEMPHIS and other frames retain empty selected branches from omitted declarations. Reconcile original owning boundaries, retain necessary _USERK_ and scheduler MSDWP framing, and repair logical anchors. Do not reintroduce unavailable private structures or use product-only absence to discard valid fixture declarations.",
+      "related_callers": "DestroyTask and WOW scheduler enter/exit; cleanup object flags; lifecycle client_context; task-order fixtures",
+      "verification": "For remediation: all actual header consumer compile contexts; cleanup flags metadata; task lock/ownership/event teardown; guest client-context handoff and terminal callback cleanup. No production silent missing-provider success."
+    }
+  ]
+}

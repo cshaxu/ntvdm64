@@ -10,23 +10,40 @@
 \***************************************************************************/
 #include "precomp.h"
 
-/***************************************************************************\
-*
-* IsSysFontAndDefaultMode()
-*
-* Returns TRUE if font selected into DC is the system font AND the current
-* mapping mode of the DC is MM_TEXT (Default mode); else returns FALSE. This
-* is called by interrupt time code so it needs to be in the fixed code
-* segment.
-*
-* History:
-* 07-Jul-95 BradG   Ported from Win95
-\***************************************************************************/
-#line 1971
-BOOL IsSysFontAndDefaultMode(HDC hdc)
-{
-    return((UserGetHFONT(hdc) == ghFontSys) && (UserGetMapMode(hdc) == MM_TEXT));
-}
+#line 22
+#ifdef FE_SB
+#line 23
+#error Excluded unsupported original FE_SB branch
+#line 25
+#endif
+#line 26
+
+#line 59
+#ifdef FE_SB
+#line 60
+#error Excluded unsupported original FE_SB branch
+#line 640
+#endif
+#line 641
+
+#line 677
+#ifdef FE_SB // GetNextWordbreak()
+#line 678
+#error Excluded unsupported original FE_SB branch
+#line 711
+#endif // FE_SB
+#line 712
+
+#line 719
+#ifdef FE_SB // GetNextWordbreak()
+#line 720
+#error Excluded unsupported original FE_SB branch
+#line 720
+#else
+#line 721
+#line 722
+#endif // FE_SB
+#line 723
 
 /***************************************************************************\
 * GetPrefixCount
@@ -141,7 +158,68 @@ LONG GetPrefixCount(
     return MAKELONG(chprefixloc, chcount);
 }
 
-#ifdef WOW_ORIGINAL_MNEMONIC_DRAWING
+#line 875
+#ifdef FE_SB // DT_GetExtentMinusPrefixes()
+#line 876
+#error Excluded unsupported original FE_SB branch
+#line 881
+#else
+#line 882
+#line 885
+#endif // FE_SB
+#line 886
+
+#line 1213
+#ifdef FE_SB // DT_GetLineBreak()
+#line 1214
+#error Excluded unsupported original FE_SB branch
+#endif // FE_SB
+#line 1216
+
+#line 1224
+#ifdef FE_SB // DT_GetLineBreak()
+#line 1225
+#error Excluded unsupported original FE_SB branch
+#else
+#line 1227
+#line 1228
+#endif // FE_SB
+#line 1229
+
+#line 1598
+#ifdef DEBUG
+#line 1599
+#error Unsupported DEBUG original branch
+#line 1601
+#endif
+#line 1602
+
+#line 1622
+#ifdef LATER
+#line 1623
+#error Excluded unsupported original LATER branch
+#line 1634
+#endif
+#line 1635
+
+#line 1657
+#ifdef _USERK_
+#line 1658
+#error Unsupported _USERK_ original branch
+#else
+#line 1660
+#line 1661
+#endif
+#line 1662
+
+#line 1673
+#ifdef LATER
+#line 1674
+#error Excluded unsupported original LATER branch
+#line 1685
+#endif
+#line 1686
+
 /***************************************************************************\
 * PSMTextOut
 *
@@ -261,106 +339,21 @@ void PSMTextOut(
     }
 #line 1956
 }
-#endif
 
-#line 22
-#ifdef FE_SB
-#line 23
-#error Excluded unsupported original FE_SB branch
-#line 25
-#endif
-#line 26
-
-#line 59
-#ifdef FE_SB
-#line 60
-#error Excluded unsupported original FE_SB branch
-#line 640
-#endif
-#line 641
-
-
-
-#line 677
-#ifdef FE_SB // GetNextWordbreak()
-#line 678
-#error Excluded unsupported original FE_SB branch
-#line 711
-#endif // FE_SB
-#line 712
-
-#line 1213
-#ifdef FE_SB // DT_GetLineBreak()
-#line 1214
-#error Excluded unsupported original FE_SB branch
-#endif // FE_SB
-#line 1216
-
-
-#line 719
-#ifdef FE_SB // GetNextWordbreak()
-#line 720
-#error Excluded unsupported original FE_SB branch
-#line 720
-#else
-#line 721
-#line 722
-#endif // FE_SB
-#line 723
-
-#line 875
-#ifdef FE_SB // DT_GetExtentMinusPrefixes()
-#line 876
-#error Excluded unsupported original FE_SB branch
-#line 881
-#else
-#line 882
-#line 885
-#endif // FE_SB
-#line 886
-
-#line 1224
-#ifdef FE_SB // DT_GetLineBreak()
-#line 1225
-#error Excluded unsupported original FE_SB branch
-#else
-#line 1227
-#line 1228
-#endif // FE_SB
-#line 1229
-
-
-#line 1622
-#ifdef LATER
-#line 1623
-#error Excluded unsupported original LATER branch
-#line 1634
-#endif
-#line 1635
-
-#line 1673
-#ifdef LATER
-#line 1674
-#error Excluded unsupported original LATER branch
-#line 1685
-#endif
-#line 1686
-
-
-#line 1598
-#ifdef DEBUG
-#line 1599
-#error Unsupported DEBUG original branch
-#line 1601
-#endif
-#line 1602
-
-#line 1657
-#ifdef _USERK_
-#line 1658
-#error Unsupported _USERK_ original branch
-#else
-#line 1660
-#line 1661
-#endif
-#line 1662
+/***************************************************************************\
+*
+* IsSysFontAndDefaultMode()
+*
+* Returns TRUE if font selected into DC is the system font AND the current
+* mapping mode of the DC is MM_TEXT (Default mode); else returns FALSE. This
+* is called by interrupt time code so it needs to be in the fixed code
+* segment.
+*
+* History:
+* 07-Jul-95 BradG   Ported from Win95
+\***************************************************************************/
+#line 1971
+BOOL IsSysFontAndDefaultMode(HDC hdc)
+{
+    return((UserGetHFONT(hdc) == ghFontSys) && (UserGetMapMode(hdc) == MM_TEXT));
+}

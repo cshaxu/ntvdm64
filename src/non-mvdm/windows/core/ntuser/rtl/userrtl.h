@@ -12,10 +12,9 @@
 * 04-27-91 DarrinM      Created from PROTO.H, MACRO.H and STRTABLE.H
 \***************************************************************************/
 
-/* Original windows/core/ntuser/rtl/userrtl.h subset, OPENNT-HOST-104.
- * DIVERGENCE: retain only the unchanged same-address _USERK_ REBASE
- * definitions; omit unrelated RTL declarations and cross-address forms.
- * Selection describes pointer representation, not kernel execution. */
+/* OPENNT-HOST-104: user-mode retained objects share one address space.
+ * Use original same-address formulas (lines 71-74), not NT4 client/server
+ * pointer translation. This does not select kernel execution. */
 #line 15
 #ifndef _USERRTL_
 #define _USERRTL_
@@ -72,8 +71,6 @@
 #line 71
 #define REBASEALWAYS(p, elem) ((p)->elem)
 #define REBASEPTR(obj, p) (p)
-#define REBASE(p, elem) ((p)->elem)
-#define REBASEPWND(p, elem) ((p)->elem)
 #line 88
 #endif
 #line 89
@@ -82,6 +79,9 @@
 #error T476-S1: branch not selected by product build
 #line 92
 #endif
+#line 73
+#define REBASE(p, elem) ((p)->elem)
+#define REBASEPWND(p, elem) ((p)->elem)
 #line 107
 #endif /* _USERK_ */
 #line 108

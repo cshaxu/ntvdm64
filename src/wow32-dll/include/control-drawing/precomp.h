@@ -30,7 +30,6 @@ VOID WINAPI OpenNtUserRtlFreeMem(PVOID);
 #define UserRtlFreeMem OpenNtUserRtlFreeMem
 #define UserGetTextExtentPointW GetTextExtentPointW
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
-#ifdef WOW_ORIGINAL_MNEMONIC_DRAWING
 /* OPENNT-HOST-115: original text/underline algorithm, public GDI leaves. */
 #define UserTextOutW TextOutW
 #define UserGetTextMetricsW GetTextMetricsW
@@ -38,7 +37,6 @@ BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 #define UserExtTextOutW ExtTextOutW
 #define UserSetBkColor SetBkColor
 VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
-#endif
 /* OPENNT-HOST-111: original arithmetic; native resources/scoped input only. */
 #define oemInfo (wow_edit_current->screen)
 #define SYSRGB(index) GetSysColor(COLOR_##index)

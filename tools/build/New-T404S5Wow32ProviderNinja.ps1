@@ -611,7 +611,7 @@ foreach ($textPart in @('client', 'rtl')) {
     $textObject = 'obj/opennt-user/control-text-' + $textPart + '.obj'
     $objects.Add($textObject)
     $ninja.Add('build ' + $textObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/windows/core/ntuser/' + $textPart + '/drawtext.c'))))
-    $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_MNEMONIC_DRAWING')
+    $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags')
 }
 # T447 S3 original painting dependencies, not a substitute button WndProc.
 $extentObject = 'obj/opennt-user/control-text-extent.obj'

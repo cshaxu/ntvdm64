@@ -12,32 +12,89 @@
 #include "precomp.h"
 
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
-#line 613
-BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
+#line 258
+BOOL _FChildVisible(
+    PWND pwnd)
 {
-    BOOL    fGetsWindowEdge;
-
-    fGetsWindowEdge = FALSE;
-
-    if (dwExStyle & WS_EX_DLGMODALFRAME)
-        fGetsWindowEdge = TRUE;
-    else if (dwExStyle & WS_EX_STATICEDGE)
-        fGetsWindowEdge = FALSE;
-    else if (dwStyle & WS_THICKFRAME)
-        fGetsWindowEdge = TRUE;
-    else switch (dwStyle & WS_CAPTION)
-    {
-        case WS_DLGFRAME:
-            fGetsWindowEdge = TRUE;
+    while (TestwndChild(pwnd)) {
+        pwnd = REBASEPWND(pwnd, spwndParent);
+        if (pwnd == NULL)
             break;
+        if (!TestWF(pwnd, WFVISIBLE))
+            return FALSE;
+    }
 
-        case WS_CAPTION:
-            fGetsWindowEdge = fNewApp;
+    return TRUE;
+}
+/***************************************************************************\
+* IsDescendant
+*
+* Internal version if IsChild that is a bit faster and ignores the WFCHILD
+* business.
+*
+* Returns TRUE if pwndChild == pwndParent (IsChild doesn't).
+*
+* History:
+* 07-22-91 darrinm      Translated from Win 3.1 ASM code.
+* 03-03-94 Johnl        Moved from server
+\***************************************************************************/
+#line 432
+BOOL _IsDescendant(
+    PWND pwndParent,
+    PWND pwndChild)
+{
+    while (1) {
+        if (pwndParent == pwndChild)
+            return TRUE;
+        if (GETFNID(pwndChild) == FNID_DESKTOP)
+            break;
+        pwndChild = REBASEPWND(pwndChild, spwndParent);
+    }
+
+    return FALSE;
+}
+
+/***************************************************************************\
+* IsVisible
+*
+* Return whether or not a given window can be drawn in or not.
+*
+* History:
+* 07-22-91 darrinm      Translated from Win 3.1 ASM code.
+\***************************************************************************/
+#line 456
+BOOL IsVisible(
+    PWND pwnd)
+{
+    PWND pwndT;
+
+    for (pwndT = pwnd; pwndT; pwndT = REBASEPWND(pwndT, spwndParent)) {
+
+        /*
+         * Invisible windows are always invisible
+         */
+        if (!TestWF(pwndT, WFVISIBLE))
+            return FALSE;
+
+        if (TestWF(pwndT, WFMINIMIZED)) {
+
+            /*
+             * Children of minimized windows are always invisible.
+             */
+            if (pwndT != pwnd)
+                return FALSE;
+        }
+
+        /*
+         * If we're at the desktop, then we don't want to go any further.
+         */
+        if (GETFNID(pwndT) == FNID_DESKTOP)
             break;
     }
 
-    return(fGetsWindowEdge);
+    return TRUE;
 }
+
 #endif
 
 #if defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
@@ -95,6 +152,33 @@ int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 #endif
 
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
+#line 613
+BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
+{
+    BOOL    fGetsWindowEdge;
+
+    fGetsWindowEdge = FALSE;
+
+    if (dwExStyle & WS_EX_DLGMODALFRAME)
+        fGetsWindowEdge = TRUE;
+    else if (dwExStyle & WS_EX_STATICEDGE)
+        fGetsWindowEdge = FALSE;
+    else if (dwStyle & WS_THICKFRAME)
+        fGetsWindowEdge = TRUE;
+    else switch (dwStyle & WS_CAPTION)
+    {
+        case WS_DLGFRAME:
+            fGetsWindowEdge = TRUE;
+            break;
+
+        case WS_CAPTION:
+            fGetsWindowEdge = fNewApp;
+            break;
+    }
+
+    return(fGetsWindowEdge);
+}
+
 /***************************************************************************\
 * GetTopLevelWindow
 *
@@ -113,88 +197,4 @@ PWND GetTopLevelWindow(
     return pwnd;
 }
 
-/***************************************************************************\
-* IsVisible
-*
-* Return whether or not a given window can be drawn in or not.
-*
-* History:
-* 07-22-91 darrinm      Translated from Win 3.1 ASM code.
-\***************************************************************************/
-#line 456
-BOOL IsVisible(
-    PWND pwnd)
-{
-    PWND pwndT;
-
-    for (pwndT = pwnd; pwndT; pwndT = REBASEPWND(pwndT, spwndParent)) {
-
-        /*
-         * Invisible windows are always invisible
-         */
-        if (!TestWF(pwndT, WFVISIBLE))
-            return FALSE;
-
-        if (TestWF(pwndT, WFMINIMIZED)) {
-
-            /*
-             * Children of minimized windows are always invisible.
-             */
-            if (pwndT != pwnd)
-                return FALSE;
-        }
-
-        /*
-         * If we're at the desktop, then we don't want to go any further.
-         */
-        if (GETFNID(pwndT) == FNID_DESKTOP)
-            break;
-    }
-
-    return TRUE;
-}
-
-/***************************************************************************\
-* IsDescendant
-*
-* Internal version if IsChild that is a bit faster and ignores the WFCHILD
-* business.
-*
-* Returns TRUE if pwndChild == pwndParent (IsChild doesn't).
-*
-* History:
-* 07-22-91 darrinm      Translated from Win 3.1 ASM code.
-* 03-03-94 Johnl        Moved from server
-\***************************************************************************/
-#line 432
-BOOL _IsDescendant(
-    PWND pwndParent,
-    PWND pwndChild)
-{
-    while (1) {
-        if (pwndParent == pwndChild)
-            return TRUE;
-        if (GETFNID(pwndChild) == FNID_DESKTOP)
-            break;
-        pwndChild = REBASEPWND(pwndChild, spwndParent);
-    }
-
-    return FALSE;
-}
-
-#line 258
-BOOL _FChildVisible(
-    PWND pwnd)
-{
-    while (TestwndChild(pwnd)) {
-        pwnd = REBASEPWND(pwnd, spwndParent);
-        if (pwnd == NULL)
-            break;
-        if (!TestWF(pwnd, WFVISIBLE))
-            return FALSE;
-    }
-
-    return TRUE;
-}
 #endif
-

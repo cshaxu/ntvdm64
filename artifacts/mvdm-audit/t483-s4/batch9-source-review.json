@@ -1,0 +1,162 @@
+{
+  "status": "verified and published P9",
+  "entries": [
+    "T483-D2995",
+    "T483-D3002",
+    "T483-D3017",
+    "T483-D3027",
+    "T483-D3031",
+    "T483-D3035",
+    "T483-D3038",
+    "T483-D3039"
+  ],
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before_sha256": "87b683c3972700d1980b68ea4fd2b46f40c12419d51624422659ef6629a29665",
+      "after_sha256": "727c7d0d9db37906236b54ed554c20f9f068689750501a92172929920ffa9185",
+      "change": "Restore retained functions and excluded frames in original source order; eliminate mnemonic selector after reconciling all consumers."
+    },
+    {
+      "path": "src/wow32-dll/include/control-drawing/precomp.h",
+      "before_sha256": "bc55af762b3de18659eaf75e8d0d79aa3ccc7f77b4e82e8481134750dd19b5c9",
+      "after_sha256": "7acc295f0361460dba00a46e2b2cd108242192ad836a65644bf2cc6179515ff8",
+      "change": "Expose selected text drawing leaves unconditionally, matching the complete retained implementation."
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "before_sha256": "fca0e4f6eebca70b3ddc12f90d4c73b7d04e14c5e8e37a7804300865a82fcb4c",
+      "after_sha256": "c3063c783a37fbf7e6752603f6235d126f68e21e221680ca75857ddda3c05645",
+      "change": "Remove text selector; measure fixture links existing RTL allocation services used by complete text owner."
+    },
+    {
+      "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+      "before_sha256": "b0083345a6a5fccc3932661fc77fb8457f0cd1b560a051b5674bbbfe089734ea",
+      "after_sha256": "661564de4568fc4f7ef2a5c6ce00e8035759ecfbdcc2eab9302ab4c9a0cc989b",
+      "change": "Remove text selector; measure fixture links existing RTL allocation services used by complete text owner."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "before_sha256": "29c7d945c05f0c0c69fd320504fefb88c82be71b600c77d2f6f06a4c839394c2",
+      "after_sha256": "0cbc2bcbd53a1f10841f2a66c5b51c086ddde931f8c95cd91a82d8cc30c72e16",
+      "change": "Remove unused product declaration; model consumer already declares its GetWindowData provider in its precomp header."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+      "before_sha256": "86b92bf8f78ffc3a049dd1d0e96351f160b3f05a35dbf701bee9db2b10e42c82",
+      "after_sha256": "e156cf5a19cdd03c90152b91e26235c06be7beb915d7941f4e29cff9b6e35863",
+      "change": "RECT-only retained CopyInflateRect uses native Windows declarations directly instead of unrelated control precomp; original body and APIENTRY unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before_sha256": "5eaaa777528408dc354e978d2731473e9df64b51bb743e8360b4a8a6fd21c6d3",
+      "after_sha256": "92ee276bdde1f5a48d85903d3627826a09210be0b7977773148addb5a05c77bb",
+      "change": "Remove six unused macros and unused DESKTOPVALIDATE; remove detached optimize pair for omitted owner while preserving conditional frames; restore excluded frames and all five retained functions to original order, bodies unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "before_sha256": "3e527cd8f999ffe76ed21f32980ba0b1b54fff5759dd982594414f52e52ce17f",
+      "after_sha256": "f20911c98a0b6fa2e19f5952428aa5a5fb0f5385166fa523a3da723290212a85",
+      "change": "Restore REBASE/REBASEPWND placement outside the original WOW selection, retain original same-address formula provenance71-74; clarify user-mode shared-address ownership without new macros."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "before_sha256": "d637c432294c5f9cfdb96b6fdab6b707f5ac8cca9f7209b4df99def8397dd63a",
+      "after_sha256": "efe40b062547f1b6201fd81455c1a4b32de265cc81ae55795c8ed0fd72f69e74",
+      "change": "Restore six retained functions to original line order258,432,456,501,613,703 while keeping three existing disjoint geometry/view selectors and original bodies."
+    }
+  ],
+  "counter_review": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "function": "_IsChild",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "function": "_ClientToScreen",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "function": "_ScreenToClient",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "function": "_IsWindowVisible",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "function": "_GetClientRect",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "function": "GetPrefixCount",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "function": "PSMTextOut",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "function": "IsSysFontAndDefaultMode",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "function": "_FChildVisible",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "function": "_IsDescendant",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "function": "IsVisible",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "function": "GetWindowBorders",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "function": "NeedsWindowEdge",
+      "body_byte_tokens_unchanged": true
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "function": "GetTopLevelWindow",
+      "body_byte_tokens_unchanged": true
+    }
+  ],
+  "same_address_macros": "REBASEALWAYS/REBASEPTR use original71/72; REBASE/REBASEPWND original73/74 now outside WOW alternate block, matching original structure. All selected consumers share same-address retained WND objects; no pointer conversion change.",
+  "line_counter_review": {
+    "matching_statement_anchors": 62,
+    "true_conflicts": 0,
+    "reviewed_text_collision": [
+      {
+        "statement": "if (pchOut != achWorkBuffer)",
+        "compiled": 1957,
+        "original": 1898
+      }
+    ],
+    "reason": "Original1898 frees within no-prefix early return. Current1957 is the pre-existing OPENNT-HOST-115 finally cleanup, not the original1898 statement. Kept adapted cleanup unchanged; selected function bodies equal prior package. Original return remains anchored1900; closing brace1956."
+  },
+  "verification": {
+    "cached": "x86/x64 PASS",
+    "control_boundaries": "PASS complete maintained cohort including string, mnemonic, text measure, geometry/navigation and original model/native getters",
+    "full": "PASS 16 selected gates; DOS4GW/NESticle explicit external-fixture SKIP",
+    "hash_review": "All nine implementation files match reviewed hashes",
+    "remaining_selectors": "WOW_ORIGINAL_DEFAULT_GEOMETRY remains necessary: two translation units select disjoint six functions with different gpsi/view type contexts; source now ordered with same three conditional blocks. No new selector.",
+    "same_address_lifetime": "PASS class-lifetime actual provider/worker objects; all four REBASE formulas, retained window/class ownership and native failure retention; errors0 callbacks1 native_failure_retains_node32"
+  }
+}
