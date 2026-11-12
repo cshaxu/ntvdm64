@@ -36,7 +36,7 @@ $runtime=$null;$scope=$null;$process=$null
 $saved=@{}
 foreach($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP',
         'MVDM_TERMINATE_VDM_REPORT_PATH','MVDM_WOW_WINDOW_TRACE_PATH',
-        'MVDM_WOW_CALLBACK_TRACE_PATH','MVDM_WOW_CALLBACK_FRAME_TRACE_PATH',
+        'MVDM_WOW_CALLBACK_TRACE_PATH',
         'MVDM_WOW_CALLBACK_SCOPE_TRACE_PATH',
         'MVDM_WOW_CALLBACK_CPU_TRACE_PATH',
         'MVDM_WOW_DISPATCH_TRACE_PATH',
@@ -157,7 +157,6 @@ try {
     # diagnosable after the stage is removed.
     $env:MVDM_WOW_WINDOW_TRACE_PATH="$root\window-trace.txt"
     $env:MVDM_WOW_CALLBACK_TRACE_PATH="$root\callback-trace.txt"
-    $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root\callback-frame-trace.txt"
     $env:MVDM_WOW_CALLBACK_SCOPE_TRACE_PATH="$root\callback-scope-trace.txt"
     # Existing default-off CPU40 FastBOP witness.  It is diagnostic-only and
     # lets this bounded reentrant-callback fixture attribute every redirected

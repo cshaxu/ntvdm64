@@ -948,5 +948,5 @@
     "delivered": 99,
     "remaining_unprocessed": 21
   },
-  "coupled_cleanup": "P4 retired unused reporters; P5 removed the obsolete nt_com stub. Next batch removes now-uncalled wow_callback_frame_trace and its declaration/fixture-only seams; remaining diagnostic providers follow last caller removal before S3 closure."
+  "coupled_cleanup": "P6 retires now-uncalled callback-frame provider, declaration, fixture seams and six unused runner settings; functional provider bodies/acceptance assertions unchanged. Remaining diagnostic consumers including Shell task identity and window destruction must be reconciled before S3 closure. Next mirror rows wkfileio/wmdisp32 retain their original category order."
 }

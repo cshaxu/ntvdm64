@@ -55,13 +55,6 @@ BOOL Sim32FlushVDMPointer(ULONG address,USHORT size,PBYTE bytes,BOOL mode)
     (void)address;(void)size;(void)bytes;(void)mode;return TRUE;
 }
 #endif
-void wow_callback_frame_trace(const char *phase,uint32_t ret_id,
-    uint32_t stack,uint32_t cb,uint32_t linear,uint16_t id,uint32_t proc,
-    uint16_t message,uint32_t parameter)
-{
-    (void)phase;(void)ret_id;(void)stack;(void)cb;(void)linear;
-    (void)id;(void)proc;(void)message;(void)parameter;
-}
 void __cdecl host_simulate(void)
 {
     ++simulations;

@@ -17,8 +17,7 @@ $null=New-Item -ItemType Directory -Path $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$process=$null
 $saved=@{}
-foreach($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP',
-        'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH')){
+foreach($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_WINDOW_TRACE_PATH')){
     $saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')
 }
 try {
@@ -41,7 +40,6 @@ try {
     $env:TEMP=$runtime;$env:TMP=$runtime
     $env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-    $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root\lifetime.txt"
     $env:MVDM_WOW_WINDOW_TRACE_PATH="$root\lifetime.txt"
 
     $start=[Diagnostics.ProcessStartInfo]::new($observer)

@@ -4,12 +4,10 @@
 #define main fixture_original_four
 #define host_simulate fixture_old_simulate
 #define GetPModeVDMPointerAssert fixture_old_resolver
-#define wow_callback_frame_trace fixture_unused_trace
 #include "wow_original_callback_frame_fixture.c"
 #undef main
 #undef host_simulate
 #undef GetPModeVDMPointerAssert
-#undef wow_callback_frame_trace
 
 static WORD cs_value=0x2467;
 static int32_t pe_value=1,vm_value,cpl_value=3;
@@ -136,7 +134,6 @@ int __cdecl main(int argc,char **argv)
     int result=0;unsigned i;
     const char *cases[]={"first-init","first-reserved","prep-init","prep-reserved","return-init","return-reserved",
         "live-init","live-reserved","teardown","terminal","selector"};
-    SetEnvironmentVariableA("MVDM_WOW_CALLBACK_FRAME_TRACE_PATH",NULL);
     if(argc!=2 || !strcmp(argv[1],"--verify"))
         return fixture_original_four();
     caller=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);

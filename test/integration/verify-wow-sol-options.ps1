@@ -28,7 +28,7 @@ $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $source="$PSScriptRoot/../observation/wow_sol_options_probe.c"
 $process=$null;$runtime=$null;$scope=$null
-$saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SOL_OPTIONS_PROBE','MVDM_WOW_SOL_OPTIONS_NO_DEBUG','MVDM_WOW_SOL_DIALOG_WAIT_MS','MVDM_SOL_EXTERNAL_WINDOWS','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_CALLBACK_TRACE_PATH','MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH','MVDM_WOW_DIALOG_CREATE_TRACE_PATH','MVDM_WOW_CALLPROC_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
+$saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SOL_OPTIONS_PROBE','MVDM_WOW_SOL_OPTIONS_NO_DEBUG','MVDM_WOW_SOL_DIALOG_WAIT_MS','MVDM_SOL_EXTERNAL_WINDOWS','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_CALLBACK_TRACE_PATH','MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH','MVDM_WOW_DIALOG_CREATE_TRACE_PATH','MVDM_WOW_CALLPROC_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
     Push-Location $root
     try {
@@ -46,13 +46,12 @@ try {
     else {$env:MVDM_WOW_SOL_OPTIONS_NO_DEBUG='1'}
     if (!$NoTrace) {
     $env:MVDM_WOW_WINDOW_TRACE_PATH="$root\windows.txt"
-    $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root\callbacks.txt"
     $env:MVDM_WOW_CALLBACK_TRACE_PATH="$root\callback-dispatch.txt"
     $env:MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH="$root\dialog-procedures.txt"
     $env:MVDM_WOW_DIALOG_CREATE_TRACE_PATH="$root\dialog-creates.txt"
     $env:MVDM_WOW_CALLPROC_TRACE_PATH="$root\callproc.txt"
     } else {
-        foreach ($name in @("MVDM_WOW_WINDOW_TRACE_PATH","MVDM_WOW_CALLBACK_FRAME_TRACE_PATH","MVDM_WOW_CALLBACK_TRACE_PATH","MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH","MVDM_WOW_DIALOG_CREATE_TRACE_PATH","MVDM_WOW_CALLPROC_TRACE_PATH")) { [Environment]::SetEnvironmentVariable($name,$null) }
+        foreach ($name in @("MVDM_WOW_WINDOW_TRACE_PATH","MVDM_WOW_CALLBACK_TRACE_PATH","MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH","MVDM_WOW_DIALOG_CREATE_TRACE_PATH","MVDM_WOW_CALLPROC_TRACE_PATH")) { [Environment]::SetEnvironmentVariable($name,$null) }
     }
     if($VisibleDesktop){
         Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP -ErrorAction SilentlyContinue

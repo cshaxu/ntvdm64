@@ -16,8 +16,7 @@ $null = New-Item -ItemType Directory -Path $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime = $null; $scope = $null; $process = $null
 $saved = @{}
-foreach ($name in @('TEMP', 'TMP', 'PATH', 'MVDM_OBSERVER_PRIVATE_DESKTOP',
-        'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH')) {
+foreach ($name in @('TEMP', 'TMP', 'PATH', 'MVDM_OBSERVER_PRIVATE_DESKTOP')) {
     $saved[$name] = [Environment]::GetEnvironmentVariable($name)
 }
 try {
@@ -43,7 +42,6 @@ try {
     $env:TEMP = $runtime; $env:TMP = $runtime
     $env:PATH = "$binary;" + $env:SystemRoot + '\System32'
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP = '1'
-    $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH = "$root/callbacks.txt"
     $start = [Diagnostics.ProcessStartInfo]::new((Resolve-Path -LiteralPath $Observer).Path)
     $start.UseShellExecute = $false; $start.CreateNoWindow = $true
     foreach ($arg in @((Join-Path $binary 'run16.exe'), $tests, "$root/observer.txt", '--wait',

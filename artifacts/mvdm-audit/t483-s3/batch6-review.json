@@ -1,0 +1,81 @@
+{
+  "baseline": "1a90d76c5",
+  "coupled_entries": [
+    "T483-D1533",
+    "T483-D1534",
+    "T483-D1535"
+  ],
+  "new_register_entries": 0,
+  "files": [
+    {
+      "path": "src/wow32-dll/source/wow_callback_frame_lease.c",
+      "before_sha256": "a98b5536ae068386645c0bdebb8fe48d11e9a9f33792d21f511845c8601466eb",
+      "after_sha256": "bffc0b9b7836a78f19df2e5e764a2aae8fb66a33bd2ed1e1ee6a2e7ce344908e"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_callback_frame_lease.h",
+      "before_sha256": "f6b2bdc22c71f64f25c407c319c52be37ecf1593c982240a331f6c4e9b56ad47",
+      "after_sha256": "9068eb5b7d5276a8433c1b55a057888736398708f8f31d0268d85d32ac3e1c79"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c",
+      "before_sha256": "a728c324e88f5740078d5c263ab2d5d735bbee6aefd06bfa6342fa4504b585a7",
+      "after_sha256": "10f79c6fd8710caefaa4767d77e03852c5c6e54f4678a0e43252dc45921c1e50"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c",
+      "before_sha256": "8625259c37edbdbb0be2e7cca67194a2955d587fdff49311515d763fc5d5304d",
+      "after_sha256": "60fe07cd655e1c6b560ed0915d30101f5fd43ef0b2180c81efee22d9c732a58a"
+    },
+    {
+      "path": "test/integration/verify-wow-clipboard-transfer.ps1",
+      "before_sha256": "2f1485128ad1f942edc3fb88cedbe5f90603483d58baaca1543be927ab8075f7",
+      "after_sha256": "081d7a7838c47026cb098888f53644f2f9260c33249d742d2467a0e51bfcca6c"
+    },
+    {
+      "path": "test/integration/verify-wow-sol-options.ps1",
+      "before_sha256": "1cdaa0efac7dd2a93f3e1ecc417c889ef7f674a1b57119b44a793991e17624e7",
+      "after_sha256": "4187c47e82747c5273f19b64a8c55b218bf66b611b5e5bf27bcc70650052463c"
+    },
+    {
+      "path": "test/integration/verify-wow-multi-dialog.ps1",
+      "before_sha256": "e526433db9856dbd355318f877e950af94cc57d139a1983af1a83d537eb3d653",
+      "after_sha256": "5d25ef27db177d3d33f501446dc4d775bbe26f8c40266637ef856588ad8cb6de"
+    },
+    {
+      "path": "test/integration/verify-win16-print-probe.ps1",
+      "before_sha256": "0cd7ac37d64868ae996618ff0f554cf9d4490e72246a80437f89348dae41af2f",
+      "after_sha256": "cebdc41aa48b2a80345b703bb02c66240f755cfb62dd100c7090dad83d9b64c2"
+    },
+    {
+      "path": "test/integration/verify-win16-multimedia-timer-probe.ps1",
+      "before_sha256": "9e60d0ee3ef7d16b086726c2e6b3e7aa568f84bfa8a4a38041ab8e73e640a9e3",
+      "after_sha256": "20822b14667857e2e0325b74252080dddb0fd3529d313df90636cc9d54dbf504"
+    },
+    {
+      "path": "test/integration/verify-wow-dialog-guest.ps1",
+      "before_sha256": "c57e270a358ecd5e0b3aee41f856ae1571a20a720f84304533ff8af4a4f1c6e7",
+      "after_sha256": "80f99d5d558b95f1210235df5dc553fa5a8c40885f9325aae4ce7669327e93f6"
+    }
+  ],
+  "initial_review": [
+    "Remove only unused frame diagnostic provider/declaration and seven trace-only getter declarations/stdio include.",
+    "All remaining functional provider bodies exactly identical.",
+    "Remove fixture-only inert reporter and its rename/environment seams.",
+    "Six integration runners only retire unused diagnostic environment settings; all throws, match checks and result markers remain exact."
+  ],
+  "counter_review": [
+    "No mirror file changed, so original source-line mapping unchanged.",
+    "All ten modified files remain LF.",
+    "Remaining integration diagnostic consumers audited separately; no callback-success assertion silently removed."
+  ],
+  "status": "implemented, counter-reviewed and delivered P6",
+  "verification": {
+    "cached_full": "x86/x64 passed",
+    "callback": "four original frame phases and eleven abort/control variants passed",
+    "scripts": "six PowerShell files parse; failure/match/result assertions unchanged",
+    "mirror_lines": "No mirror edits; original mappings unchanged",
+    "product_control": "10/11 normalized images equal to P5; WOW32 differs, so full suite rerun rather than reused",
+    "full": "16 selected gates passed"
+  }
+}

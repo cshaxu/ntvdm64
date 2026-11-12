@@ -59,7 +59,6 @@ try {
  $info.EnvironmentVariables['MVDM_WOW_CALLBACK_CPU_TRACE_PATH']="$root/cpu.txt"
  $info.EnvironmentVariables['MVDM_WOW_FILE_TRACE_PATH']="$root/files.txt"
  $info.EnvironmentVariables['MVDM_WOW_DISPATCH_TRACE_PATH']="$root/dispatch.txt"
- $info.EnvironmentVariables['MVDM_WOW_CALLBACK_FRAME_TRACE_PATH']="$root/callbacks.txt"
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  foreach($arg in @("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait',"$tests/$probe.EXE",'--observation-timeout-ms','45000')){$info.ArgumentList.Add($arg)}
