@@ -1,0 +1,224 @@
+{
+  "method": "Final actual selected MSVC /P anchors: both expected token content and pinned original logical position checked; known macro expansions recorded. Not a claim on unrelated pre-existing mappings.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "current_sha256": "7345b2322480c67c5be92f4cc2eb2955c3d71e49e8692827dfcea98e38a2ed8b",
+      "anchors": [
+        {
+          "original_line": 188,
+          "original_source": "    if (BinaryType == SCS_DOS_BINARY) {",
+          "actual_matching_output": [
+            "if (BinaryType == 1) {"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 203,
+          "original_source": "        IsFirstWOWCheckBinary = FALSE;",
+          "actual_matching_output": [
+            "IsFirstWOWCheckBinary = 0;"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "current_sha256": "4624978af57e6974f4e69025419563434441972089618f6f7be5af25cae3fab2",
+      "anchors": [
+        {
+          "original_line": 139,
+          "original_source": "ULONG DosxIret;",
+          "actual_matching_output": [
+            "ULONG DosxIret;"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 140,
+          "original_source": "ULONG DosxIretd;",
+          "actual_matching_output": [
+            "ULONG DosxIretd;"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "current_sha256": "1ed6b8a1cb59cacaa69e76704f4c29d4f127ff34cbf85d95ec561f22f2e81003",
+      "anchors": [
+        {
+          "original_line": 102,
+          "original_source": "    if (Index >= MAX_DPMI_BOP_FUNC) {",
+          "actual_matching_output": [
+            "if (Index >= 24 + 1) {"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "current_sha256": "836c09b0f40350b501bd8360d0b09c9e7f6dcd65ffd220c2dacdb40934f22216",
+      "anchors": [
+        {
+          "original_line": 121,
+          "original_source": "extern ULONG DosxIret;",
+          "actual_matching_output": [
+            "extern ULONG DosxIret;",
+            "extern ULONG DosxIret;",
+            "extern ULONG DosxIret;",
+            "extern ULONG DosxIret;",
+            "extern ULONG DosxIret;",
+            "extern ULONG DosxIret;"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_sha256": "aa5be967cd04266f41a20d0a85bc7cac4e4fd747cf96bce592d73afba4fb1053",
+      "anchors": [
+        {
+          "original_line": 526,
+          "original_source": "    SaveEFLAGS = getEFLAGS();",
+          "actual_matching_output": [
+            "SaveEFLAGS = getEFLAGS();"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 677,
+          "original_source": "    SegSs = getSS();",
+          "actual_matching_output": [
+            "SegSs = getSS();"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 789,
+          "original_source": "    SegSs = getSS();",
+          "actual_matching_output": [
+            "SegSs = getSS();"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 961,
+          "original_source": "    setCS(Handlers[IntNumber].CsSelector);",
+          "actual_matching_output": [
+            "setCS(Handlers[IntNumber].CsSelector);"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 998,
+          "original_source": "    SegSs = getSS();",
+          "actual_matching_output": [
+            "SegSs = getSS();"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 1006,
+          "original_source": "    EndUseLockedPMStack();",
+          "actual_matching_output": [
+            "EndUseLockedPMStack();"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "current_sha256": "dd6d71ea37c7653e6fc48d31d123dacfefdbda4badeeeec0ea76d7c7113c0186",
+      "anchors": [
+        {
+          "original_line": 53,
+          "original_source": "        setBX(0);",
+          "actual_matching_output": [
+            "setBX(0);"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 54,
+          "original_source": "        setDX(0);",
+          "actual_matching_output": [
+            "setDX(0);"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 55,
+          "original_source": "        setES(0);",
+          "actual_matching_output": [
+            "setES(0);"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "current_sha256": "a0e25bce185c58a6f2d7309072628ee5d5bb7d71ee26c72f304ff56d552808f1",
+      "anchors": [
+        {
+          "original_line": 104,
+          "original_source": "    if (registerAX % 8){",
+          "actual_matching_output": [
+            "if (registerAX % 8){"
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 170,
+          "original_source": "    setAX(0);",
+          "actual_matching_output": [
+            "setAX(0);"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "current_sha256": "71a2fa5e186962a44f69f6c564516d85c26e037033d4c7a7851dc0345103e0f9",
+      "anchors": [
+        {
+          "original_line": 28,
+          "original_source": "DpmiSwitchToRealMode(",
+          "actual_matching_output": [
+            "DpmiSwitchToRealMode("
+          ],
+          "passed": true
+        },
+        {
+          "original_line": 77,
+          "original_source": "DpmiSwitchToProtectedMode(",
+          "actual_matching_output": [
+            "DpmiSwitchToProtectedMode("
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "current_sha256": "66d60a591b70920f76dc7b0ca9b1f5282793b022622425d32082cfc532dc8ed7",
+      "anchors": [
+        {
+          "original_line": 53,
+          "original_source": "    setAX(equip_flag.all);",
+          "actual_matching_output": [
+            "c_setAX(equip_flag.all);"
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

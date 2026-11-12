@@ -23,7 +23,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 /* DIVERGENCE(MVDM-HOST-DIV-310): publish the original RM_BIT mode gate
  * through guest SAS after each CCPU PE transition, not host address 0714h. */
@@ -35,9 +34,6 @@ Revision History:
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
-extern ULONG c_getCR3(void);
-extern ULONG c_getDS_BASE(void);
-extern ULONG c_getDS_LIMIT(void);
 #define CPU40_ES_REG 0
 #define CPU40_CS_REG 1
 #define CPU40_SS_REG 2
@@ -118,9 +114,6 @@ Routine Description:
     /* DIVERGENCE(MVDM-HOST-DIV-222): restore the selected worker WOW view
      * after DOSX reentry, as the native user GDT survives a V86 excursion. */
     (void)mvdm_softpc_wow_page_domain_reenter_protected();
-    mvdm_softpc_report_dpmi_mode_state("53:01-protected", (unsigned long)getCR0(),
-        (unsigned long)c_getCR3(), getCS(), getIP(),
-        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
 VOID
@@ -176,9 +169,6 @@ Routine Description:
     setIP(Ip);
     setCS(CsSelector);
     load_pseudo_descr(CPU40_CS_REG);
-    mvdm_softpc_report_dpmi_mode_state("bop-fd-real", (unsigned long)getCR0(),
-        (unsigned long)c_getCR3(), getCS(), getIP(),
-        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
 #line 27
@@ -255,9 +245,6 @@ Return Value:
     load_pseudo_descr(CPU40_FS_REG);
     load_pseudo_descr(CPU40_GS_REG);
 #endif
-    mvdm_softpc_report_dpmi_mode_state("switch-real", (unsigned long)getCR0(),
-        (unsigned long)c_getCR3(), getCS(), getIP(),
-        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 #line 74
 }
 
@@ -325,8 +312,5 @@ Return Value:
     setSS(DosxPmDataSelector);
 #endif
     (void)mvdm_softpc_wow_page_domain_reenter_protected();
-    mvdm_softpc_report_dpmi_mode_state("switch-protected", (unsigned long)getCR0(),
-        (unsigned long)c_getCR3(), getCS(), getIP(),
-        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 #line 120
 }

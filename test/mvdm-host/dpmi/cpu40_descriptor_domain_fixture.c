@@ -3,7 +3,6 @@
 extern ULONG Cpu40GdtShadowAddress;
 extern ULONG Cpu40LdtShadowAddress;
 extern ULONG IntelBase;
-extern ULONG DpmiCpu40DescriptorShadowAddress(USHORT Selector);
 extern BOOL DpmiCpu40GetDosxIdtDescriptor(PULONG Base, PUSHORT Limit);
 extern NTSTATUS DpmiSetWowLdtEntry(ULONG Selector, ULONG EntryLow,
     ULONG EntryHigh);
@@ -53,15 +52,6 @@ int main(void)
 
     Cpu40GdtShadowAddress = 0x00100000u;
     Cpu40LdtShadowAddress = 0x00200000u;
-
-    if (DpmiCpu40DescriptorShadowAddress(0x0040u) !=
-        Cpu40GdtShadowAddress) return 1;
-    if (DpmiCpu40DescriptorShadowAddress(0x0004u) !=
-        Cpu40LdtShadowAddress) return 2;
-    if (DpmiCpu40DescriptorShadowAddress(0x000cu) !=
-        Cpu40LdtShadowAddress) return 3;
-    if (DpmiCpu40DescriptorShadowAddress(0u) != Cpu40GdtShadowAddress)
-        return 4;
 
     /* A fresh worker has no published GDT and cannot inherit an IDTR. */
     IntelBase = (ULONG)gdt - 0x1000u;

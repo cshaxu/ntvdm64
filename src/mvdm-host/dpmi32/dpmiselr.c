@@ -32,7 +32,6 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include "malloc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #line 36
@@ -192,7 +191,6 @@ Return Value:
     USHORT registerAX;
 
     registerAX = getAX();
-    mvdm_softpc_report_dpmi_set_descriptor_entry(registerAX, getBX(), getCX());
 #line 104
     if (registerAX % 8){
         return;
@@ -202,8 +200,6 @@ Return Value:
         0,
         (UCHAR) (getMSW() & MSW_PE));
 
-    mvdm_softpc_report_dpmi_set_descriptor(getES(), getBX(), registerAX,
-        getCX(), (ULONG)Descriptors, (ULONG)(getMSW() & MSW_PE));
 
 
 #line 113
@@ -266,8 +262,7 @@ Return Value:
 #line 161
 #if defined(CPU_40_STYLE)
             ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
-            ULONG GdtAddress = DpmiCpu40DescriptorShadowAddress(
-                (USHORT)(Selector & ~4u));
+            ULONG GdtAddress = Cpu40GdtShadowAddress;
 
             /* The original i386 provider publishes every 53:00 record to
              * the process LDT via NtSetLdtEntries/ProcessLdtInformation.
@@ -281,31 +276,6 @@ Return Value:
             if (!(Selector & 4u) && GdtAddress != 0)
                 ((PLDT_ENTRY)(IntelBase + GdtAddress))[Selector >> 3] =
                     Descriptors[i];
-            mvdm_softpc_report_cpu40_descriptor_publish((USHORT)Selector,
-                *(PULONG)(Descriptors + i), *((PULONG)(Descriptors + i) + 1),
-                GdtAddress != 0 ? *(PULONG)((PLDT_ENTRY)(IntelBase +
-                    GdtAddress) + (Selector >> 3)) : 0,
-                GdtAddress != 0 ? *((PULONG)((PLDT_ENTRY)(IntelBase +
-                    GdtAddress) + (Selector >> 3)) + 1) : 0,
-                Cpu40LdtShadowAddress != 0 ? *(PULONG)((PLDT_ENTRY)(IntelBase +
-                    Cpu40LdtShadowAddress) + (Selector >> 3)) : 0,
-                Cpu40LdtShadowAddress != 0 ? *((PULONG)((PLDT_ENTRY)(IntelBase +
-                    Cpu40LdtShadowAddress) + (Selector >> 3)) + 1) : 0);
-            /* WOW's original Get-LDT service returns this GDT-resident
-             * alias.  Record only its already-published descriptor triplet
-             * when explicitly requested, so the KRNL386 free-selector scan
-             * can be compared to the descriptor it actually loads. */
-            if (Selector == 0x0130u && Cpu40GdtShadowAddress != 0 &&
-                    Cpu40LdtShadowAddress != 0) {
-                PLDT_ENTRY Source = Descriptors + i;
-                PLDT_ENTRY Gdt = (PLDT_ENTRY)(IntelBase +
-                    Cpu40GdtShadowAddress) + (Selector >> 3);
-                PLDT_ENTRY Ldt = (PLDT_ENTRY)(IntelBase +
-                    Cpu40LdtShadowAddress) + (Selector >> 3);
-                mvdm_softpc_report_dpmi_descriptor((USHORT)Selector,
-                    *(PULONG)Source, *((PULONG)Source + 1), *(PULONG)Gdt,
-                    *((PULONG)Gdt + 1), *(PULONG)Ldt, *((PULONG)Ldt + 1));
-            }
 #endif
 #line 161
         }

@@ -1,0 +1,7 @@
+{
+  "reason": "Three adjacent original diagnostic anchors restored after first cached build; original and final actual MSVC preprocess token streams equal after removing line directives, preserving string/character tokens.",
+  "token_count": 140764,
+  "token_sha256": "3665f5a11ae4a331ea2782c11935ae1a30bccc8eb6134fbc55dc8461ec251604",
+  "equal": true,
+  "runtime_reuse_authority": "Owner explicitly allows skipping repeated runtime tests for verified line-only changes; final compiled publication still required."
+}

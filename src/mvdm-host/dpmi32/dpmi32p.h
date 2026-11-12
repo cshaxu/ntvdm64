@@ -117,11 +117,6 @@ extern ULONG Cpu40PmStackInfoAddress;
 extern ULONG Cpu40GdtShadowAddress;
 extern ULONG Cpu40LdtShadowAddress;
 
-ULONG
-DpmiCpu40DescriptorShadowAddress(
-    USHORT Selector
-    );
-
 BOOL
 DpmiCpu40GetDosxIdtDescriptor(
     PULONG Base,

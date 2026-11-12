@@ -40,7 +40,6 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #if defined(CPU_40_STYLE)
 /* Existing CCPU c_bsic.h entry, using its IU16/IU32 Windows ABI. Including
  * the CPU header here would redefine the DPMI layer's BOOL spelling. */
@@ -561,9 +560,6 @@ Return Value:
     ULONG NewSP;
 
     DBGTRACE(DPMI_SW_INT, IntNumber, 0, 0);
-    if (IntNumber == 0x31u || IntNumber == 0x2au)
-        mvdm_softpc_report_dpmi_swint(IntNumber, getAX(), getBX(), getCX(),
-            getCS(), getEIP());
 
     /* WOW_x86 KRNL386 uses this exact INT 2Ah signature instead of its
      * ordinary 04F2h DPMI route for a one-entry LDT update.  On NT4 x86,
@@ -589,14 +585,8 @@ Return Value:
         return FALSE;
     }
 
-    if (IntNumber == 0x31u) {
-        /* DIVERGENCE(MVDM-HOST-DIV-472): diagnostic target metadata must
-         * not map or read guest code. */
-        mvdm_softpc_report_dpmi_swint_target(IntNumber,
-            Handlers[IntNumber].CsSelector, Handlers[IntNumber].Eip,
-            Handlers[IntNumber].Flags);
-    }
 
+#line 526
     SaveEFLAGS = getEFLAGS();
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
@@ -785,7 +775,6 @@ Routine Description:
     ULONG NewSP;
     USHORT SegSs;
     BOOL bSsBig;
-    USHORT ServiceAX = getAX();
 
     SegSs = getSS();
     VdmStackPointer = Sim32GetVDMPointer(SegSs<<16, 1, TRUE);
@@ -796,10 +785,6 @@ Routine Description:
         VdmStackPointer += getSP();
     }
 
-    mvdm_softpc_report_dpmi_iret16_state(16u, getAX(), getBX(), getCX(),
-        getDX(), getSI(), getDI(), getBP(), getDS(), getES(), SegSs,
-        bSsBig ? getESP() : getSP(), *(PWORD16)(VdmStackPointer),
-        *(PWORD16)(VdmStackPointer + 2), *(PWORD16)(VdmStackPointer + 4));
 
     //
     // Fast iret (without executing final 16-bit iret)
@@ -859,8 +844,6 @@ Routine Description:
     }
 #endif // i386
 
-    mvdm_softpc_report_dpmi_iret16(16u, ServiceAX, getAX(), getBX(),
-        getCS(), getEIP(), getEFLAGS());
 
     #line 763
     DBGTRACE(DPMI_INT_IRET16, 0, 0, 0);
@@ -889,7 +872,6 @@ Routine Description:
     ULONG NewSP;
     USHORT SegSs;
     BOOL bSsBig;
-    USHORT ServiceAX = getAX();
 
     SegSs = getSS();
     VdmStackPointer = Sim32GetVDMPointer(SegSs<<16, 1, TRUE);
@@ -943,8 +925,6 @@ Routine Description:
     setEIP((ULONG)LOWORD(DosxIretd));
 #endif // i386
 
-    mvdm_softpc_report_dpmi_iret16(32u, ServiceAX, getAX(), getBX(),
-        getCS(), getEIP(), getEFLAGS());
 
     #line 856
     DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);
@@ -982,8 +962,6 @@ Return Value:
     ULONG SaveSS, SaveESP, SaveEFLAGS, SaveCS, SaveEIP;
     ULONG StackOffset;
     ULONG NewSP;
-    USHORT FaultFrameWords[8];
-    ULONG FaultFrameIndex;
 
     DBGTRACE(DPMI_FAULT, IntNumber, ErrorCode, 0);
 
@@ -1069,19 +1047,10 @@ Return Value:
         setSP((WORD)NewSP);
     }
 
-    for (FaultFrameIndex = 0; FaultFrameIndex < 8; ++FaultFrameIndex) {
-        FaultFrameWords[FaultFrameIndex] = *(PWORD16)(VdmStackPointer - 16 +
-            FaultFrameIndex * sizeof(USHORT));
-    }
-    mvdm_softpc_report_dpmi_fault_stack("dispatch", (USHORT)SaveSS, SaveESP,
-        getSS(), getESP(), FaultFrameWords, 8);
 
+#line 961
     setCS(Handlers[IntNumber].CsSelector);
 
-    mvdm_softpc_report_dpmi_fault_dispatch(IntNumber, ErrorCode,
-        Handlers[IntNumber].CsSelector, Handlers[IntNumber].Eip,
-        getCS(), getEIP(), getSS(), getESP(), Frame32, (USHORT)SaveCS,
-        SaveEIP);
 
 #if DBG
 #line 964
@@ -1113,8 +1082,6 @@ Routine Description:
 {
     PUCHAR VdmStackPointer;
     USHORT SegSs;
-    USHORT FaultFrameWords[6];
-    ULONG FaultFrameIndex;
 
     SegSs = getSS();
     VdmStackPointer = Sim32GetVDMPointer(SegSs<<16, 1, TRUE);
@@ -1124,13 +1091,8 @@ Routine Description:
         VdmStackPointer += getSP();
     }
 
-    for (FaultFrameIndex = 0; FaultFrameIndex < 6; ++FaultFrameIndex) {
-        FaultFrameWords[FaultFrameIndex] = *(PWORD16)(VdmStackPointer +
-            FaultFrameIndex * sizeof(USHORT));
-    }
-    mvdm_softpc_report_dpmi_fault_stack("iret16", SegSs, getESP(), SegSs,
-        getESP(), FaultFrameWords, 6);
 
+#line 1006
     EndUseLockedPMStack();
 
 #line 1008

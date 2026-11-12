@@ -23,7 +23,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 /* CPU40 exposes these generated CCPU accessors through cpu4gen.h, which is
  * intentionally not part of the DPMI provider's public include surface. */
 extern void setLDT_SELECTOR(USHORT val);
@@ -104,7 +103,6 @@ Return Value:
     setIP((getIP() + 1));           // take care of subfn.
 
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
-    mvdm_softpc_report_dpmi_bop(Index, getAX(), getBX(), getCX());
 
 #line 102
     if (Index >= MAX_DPMI_BOP_FUNC) {
@@ -307,11 +305,6 @@ Return Value:
     IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
 #if defined(CPU_40_STYLE)
-    /* Observation only: DOSX calls this once for its bootstrap table and
-     * again after moving descriptor storage.  Record those original handoff
-     * boundaries before deciding whether either source owns WOW selectors. */
-    mvdm_softpc_report_dpmi_table_address("before", (ULONG)Ldt - IntelBase,
-        Cpu40GdtShadowAddress, Cpu40LdtShadowAddress);
     /* The source-published DOSX GDT and the process LDT are distinct
      * descriptor domains.  Keep immutable published images for CCPU rather
      * than using the mutable DOSX source table as either live table. */
@@ -344,8 +337,6 @@ Return Value:
     setLDT_SELECTOR(4);
     setLDT_BASE_LIMIT(Cpu40LdtShadowAddress,
         (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
-    mvdm_softpc_report_dpmi_table_address("after", (ULONG)Ldt - IntelBase,
-        Cpu40GdtShadowAddress, Cpu40LdtShadowAddress);
 #endif
 #line 297
 }

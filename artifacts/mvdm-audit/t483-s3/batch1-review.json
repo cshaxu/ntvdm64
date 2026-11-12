@@ -1,0 +1,138 @@
+[
+  {
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "ids": [
+      "T483-D0021",
+      "T483-D0022"
+    ],
+    "before_sha256": "a6eb69955f73173320abcf87718ca44037f82f770aa8bc1f10f714a6a3e500cc",
+    "after_sha256": "7345b2322480c67c5be92f4cc2eb2955c3d71e49e8692827dfcea98e38a2ed8b",
+    "removed_calls": 2,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/data.c",
+    "ids": [
+      "T483-D0162"
+    ],
+    "before_sha256": "7e1161e8dcff68b40405d04301b995bd6d8b029715cac5c0ae667bbb52e327a8",
+    "after_sha256": "4624978af57e6974f4e69025419563434441972089618f6f7be5af25cae3fab2",
+    "removed_calls": 0,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32.c",
+    "ids": [
+      "T483-D0165",
+      "T483-D0166",
+      "T483-D0169"
+    ],
+    "before_sha256": "bf3be6bf101d602980439845f1898e6b2b729cc2ae2acfcf1656d8d278ea5dce",
+    "after_sha256": "1ed6b8a1cb59cacaa69e76704f4c29d4f127ff34cbf85d95ec561f22f2e81003",
+    "removed_calls": 3,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+    "ids": [
+      "T483-D0171"
+    ],
+    "before_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+    "after_sha256": "836c09b0f40350b501bd8360d0b09c9e7f6dcd65ffd220c2dacdb40934f22216",
+    "removed_calls": 0,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "ids": [
+      "T483-D0178",
+      "T483-D0185",
+      "T483-D0187",
+      "T483-D0197",
+      "T483-D0198",
+      "T483-D0199",
+      "T483-D0200",
+      "T483-D0201",
+      "T483-D0202",
+      "T483-D0205",
+      "T483-D0206",
+      "T483-D0207",
+      "T483-D0208"
+    ],
+    "before_sha256": "221d38bffcce263524289d52f52d471992536f7790b1cc0857a1d6da85acc106",
+    "after_sha256": "aa5be967cd04266f41a20d0a85bc7cac4e4fd747cf96bce592d73afba4fb1053",
+    "removed_calls": 7,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": [
+      526,
+      961,
+      1006
+    ]
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+    "ids": [
+      "T483-D0228",
+      "T483-D0231",
+      "T483-D0233"
+    ],
+    "before_sha256": "2aa7fbd0e80148afe38753c5078f0911c823120b96064416c3e89657f9314bbd",
+    "after_sha256": "dd6d71ea37c7653e6fc48d31d123dacfefdbda4badeeeec0ea76d7c7113c0186",
+    "removed_calls": 2,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "ids": [
+      "T483-D0234",
+      "T483-D0237",
+      "T483-D0238",
+      "T483-D0242"
+    ],
+    "before_sha256": "b4fd00016aa5b964901fe1dfdbbf4b360c88ff4c89f745949842ff75f458f11d",
+    "after_sha256": "a0e25bce185c58a6f2d7309072628ee5d5bb7d71ee26c72f304ff56d552808f1",
+    "removed_calls": 3,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "ids": [
+      "T483-D0260",
+      "T483-D0266",
+      "T483-D0268",
+      "T483-D0271",
+      "T483-D0275"
+    ],
+    "before_sha256": "7dd7d5fe43e2ba7ced3855e36df2bdbebd26603cf637439d7a6fc59c4ecee280",
+    "after_sha256": "71a2fa5e186962a44f69f6c564516d85c26e037033d4c7a7851dc0345103e0f9",
+    "removed_calls": 4,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+    "ids": [
+      "T483-D0406",
+      "T483-D0407"
+    ],
+    "before_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+    "after_sha256": "66d60a591b70920f76dc7b0ca9b1f5282793b022622425d32082cfc532dc8ed7",
+    "removed_calls": 1,
+    "status": "implemented and counter-reviewed; delivered P1",
+    "line_restorations": []
+  },
+  {
+    "path": "test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c",
+    "ids": [],
+    "before_sha256": "382f56d85b40a2a804e6f6358fdc107f8928e1b1e876ba763d287276a7dd01b9",
+    "after_sha256": "c23332bb5e956108629ef588858a4fa452a416ae9d252e87618f82fb3392b37c",
+    "review": "Remove four checks of deleted trivial selector helper. Retain real descriptor absent/present/republication/layout assertions.",
+    "status": "implemented and counter-reviewed; delivered P1"
+  }
+]

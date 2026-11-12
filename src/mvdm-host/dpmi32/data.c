@@ -149,14 +149,6 @@ ULONG Cpu40PmStackInfoAddress;
 ULONG Cpu40GdtShadowAddress;
 ULONG Cpu40LdtShadowAddress;
 
-ULONG
-DpmiCpu40DescriptorShadowAddress(
-    USHORT Selector
-    )
-{
-    return (Selector & 4u) ? Cpu40LdtShadowAddress : Cpu40GdtShadowAddress;
-}
-
 BOOL
 DpmiCpu40GetDosxIdtDescriptor(
     PULONG Base,

@@ -6,240 +6,274 @@
     {
       "id": "T483-D0021",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove both classification report calls and only their diagnostic include; preserve existing branch results and functional adapter includes.",
-      "verification": "No remaining references from cmdexec; cached compile/link; EXE classification and COMSPEC routing regression with same branch outcomes."
+      "verification": "No remaining references from cmdexec; cached compile/link; EXE classification and COMSPEC routing regression with same branch outcomes.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0022",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove both classification report calls and only their diagnostic include; preserve existing branch results and functional adapter includes.",
-      "verification": "No remaining references from cmdexec; cached compile/link; EXE classification and COMSPEC routing regression with same branch outcomes."
+      "verification": "No remaining references from cmdexec; cached compile/link; EXE classification and COMSPEC routing regression with same branch outcomes.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0162",
       "path": "src/mvdm-host/dpmi32/data.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Replace sole product call DpmiCpu40DescriptorShadowAddress(Selector & ~4u) with Cpu40GdtShadowAddress; remove helper definition and dpmi32p.h prototype together. Adjust fixture-only branch checks while retaining actual descriptor publication checks.",
-      "verification": "Reconfirm all product callers, then compile and compare GDT publication. Verify no LDT-selected product use is lost; test-only LDT helper branch is not a product requirement."
+      "verification": "Reconfirm all product callers, then compile and compare GDT publication. Verify no LDT-selected product use is lost; test-only LDT helper branch is not a product requirement.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0165",
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete this environment-gated file-trace call and remove now-unused include together with other two calls. Reconcile diagnostic-only consumers; retain original dispatch bounds and all table publication operations.",
-      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions."
+      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0166",
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete this environment-gated file-trace call and remove now-unused include together with other two calls. Reconcile diagnostic-only consumers; retain original dispatch bounds and all table publication operations.",
-      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions."
+      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0169",
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete this environment-gated file-trace call and remove now-unused include together with other two calls. Reconcile diagnostic-only consumers; retain original dispatch bounds and all table publication operations.",
-      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions."
+      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0171",
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete this prototype together with data.c function; replace dpmiselr.c call with Cpu40GdtShadowAddress. Remove tests of dead helper branches while retaining actual GDT/LDT publication tests.",
-      "verification": "Search proves no remaining callers; cached product build/link; descriptor-domain fixture verifies GDT/LDT writes and IDT relocation; applicable DOS/WOW regressions for actual changed publication path."
+      "verification": "Search proves no remaining callers; cached product build/link; descriptor-domain fixture verifies GDT/LDT writes and IDT relocation; applicable DOS/WOW regressions for actual changed publication path.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0178",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0185",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0187",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0197",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0198",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0199",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0200",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0201",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0202",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0205",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0206",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0207",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0208",
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
-      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0228",
       "path": "src/mvdm-host/dpmi32/dpmimscr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove termination header with both report calls; preserve fast-BOP provider include.",
-      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks."
+      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0231",
       "path": "src/mvdm-host/dpmi32/dpmimscr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete success-only trace call; preserve registers and return.",
-      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks."
+      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0233",
       "path": "src/mvdm-host/dpmi32/dpmimscr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete fallback trace call; preserve original zero BX/DX/ES result.",
-      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks."
+      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0234",
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove termination header with all descriptor trace calls and trace-only selector-0130 block; retain functional stores.",
-      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0237",
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove entry trace call; preserve AX alignment check.",
-      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0238",
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove descriptor trace call; preserve original SIM32 pointer and loop.",
-      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0242",
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove both descriptor report calls and selector-0130 diagnostic-only block; preserve stores and surrounding selected condition. Trace arguments read table words even when provider logging is disabled.",
-      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0260",
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove termination diagnostic include only with all four report calls; retain the two functional includes.",
-      "verification": "Compile all selected consumers after report removal; verify unchanged guest mode behavior."
+      "verification": "Compile all selected consumers after report removal; verify unchanged guest mode behavior.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0266",
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove 53:01-protected report and dead diagnostic declarations with the common diagnostic cleanup.",
-      "verification": "Build after removal; valid mode transition regression."
+      "verification": "Build after removal; valid mode transition regression.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0268",
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove bop-fd-real report with diagnostic cleanup.",
-      "verification": "Build and BOP FD regression."
+      "verification": "Build and BOP FD regression.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0271",
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove switch-real report with common diagnostic cleanup.",
-      "verification": "Compile and mode-roundtrip regression."
+      "verification": "Compile and mode-roundtrip regression.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0275",
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove switch-protected report and now-dead diagnostic declarations.",
-      "verification": "Compile and protected continuation regression."
+      "verification": "Compile and protected continuation regression.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0406",
       "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete equipment-only diagnostic include and report call/comment; restore original sas_loadw -> setAX sequence. Remove now-unneeded line carriers only with original logical-line verification. Remove shared provider only after all other callers are separately accounted for.",
-      "verification": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure."
+      "verification": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0407",
       "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Delete equipment-only diagnostic include and report call/comment; restore original sas_loadw -> setAX sequence. Remove now-unneeded line carriers only with original logical-line verification. Remove shared provider only after all other callers are separately accounted for.",
-      "verification": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure."
+      "verification": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0412",
@@ -843,5 +877,11 @@
       "plan": "Remove NWCH after confirming reverse converter remains unselected; preserve original excluded FE_SB boundary in its original location.",
       "verification": "Check selected tokens and compile consumers after removal."
     }
-  ]
+  ],
+  "counts": {
+    "assigned": 120,
+    "delivered": 34,
+    "remaining_unprocessed": 86
+  },
+  "coupled_cleanup": "Shared termination diagnostic providers are removed once remaining S3 callers have been resolved; required before S3 closure."
 }

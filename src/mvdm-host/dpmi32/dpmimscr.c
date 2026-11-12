@@ -22,7 +22,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
 #line 25
 
@@ -54,7 +53,6 @@ Return Value:
             setBX(Offset);
             setDX(0);
             setES(Selector);
-            mvdm_softpc_report_dpmi_fast_bop_result(getBX(), getDX(), getES());
             return;
         }
 #line 47
@@ -67,7 +65,6 @@ Return Value:
         setBX(0);
         setDX(0);
         setES(0);
-        mvdm_softpc_report_dpmi_fast_bop_result(getBX(), getDX(), getES());
 #line 56
 }
 

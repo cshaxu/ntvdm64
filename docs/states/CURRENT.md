@@ -36,8 +36,11 @@ The previously suggested compat-first S2 is superseded.
 ## S3 Progress
 
 Assigned: 120 entries across 51 mirror files, in the existing register order.
-No S3 source edits yet. Start at dos/command/cmdexec.c; coupled declarations,
-callers and focused tests move atomically. Shared providers remain until their
+P1 implements 34 entries in nine mirror files plus one coupled fixture. Focused
+checks and all 16 selected Full gates passed. Final cached build and publication
+at both destinations passed; verified line-only changes reuse that runtime run
+under owner authorization. 34 delivered, 86 remain; next file is base/bios/tape_io.c.
+See [P1 delivery](../../artifacts/mvdm-audit/t483-s3/batch1-delivery.json). Shared providers remain until their
 last required caller is removed, then are cleaned in the same S.
 See [S3 ledger](../../artifacts/mvdm-audit/t483-s3/execution.json).
 Batch delivery after ten distinct modified files or S exhaustion.
@@ -52,10 +55,10 @@ S1 register and identifiers remain immutable; S6 remains held.
 
 ## Current Technical Baseline
 
-Package `fd1f2722-a425-4881-97f6-174be44d6b6f` (S2 P3), complete 11 images at
+Package `2eb0e92b-60f9-4120-9220-2ae95c71f0a5` (S3 P1), complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. DOS4GW/NESticle was
 explicitly skipped because its external fixture was not supplied. No guest or
-winnt.zip change. This package is not claimed byte-equivalent to P2.
+winnt.zip change. This package is not claimed byte-equivalent to S2.
 
 ## Remaining Scope
 

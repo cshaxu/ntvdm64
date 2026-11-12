@@ -1,0 +1,139 @@
+{
+  "baseline": "a102cde70",
+  "entries": 34,
+  "mirror_files": 9,
+  "coupled_test_files": 1,
+  "build": "Final cached x86/x64 full build passed",
+  "focused": "Actual CPU40 descriptor domain fixture passed; removed wrapper-only assertions, retained actual publication/retirement tests",
+  "line_checks": "20 selected actual MSVC output anchors verified against pinned originals; three adjacent #line anchors restored",
+  "actual_runtime_run": "build/t483-s3-p1/full",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 371413,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7089,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1281,
+        "CleanupMs": 652,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 196,
+        "CleanupMs": 644,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68033,
+        "CleanupMs": 609,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44768,
+        "CleanupMs": 640,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46451,
+        "CleanupMs": 611,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14048,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12462,
+        "CleanupMs": 790,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 56857,
+        "CleanupMs": 619,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12051,
+        "CleanupMs": 573,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28546,
+        "CleanupMs": 735,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30577,
+        "CleanupMs": 723,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4363,
+        "CleanupMs": 718,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7748,
+        "CleanupMs": 708,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10636,
+        "CleanupMs": 681,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 6136,
+        "CleanupMs": 684,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7718,
+        "CleanupMs": 675,
+        "Passed": true
+      }
+    ]
+  },
+  "tested_package": "22197729-32fe-4d40-a6f9-77839793b09e",
+  "final_line_only_test_reuse": {
+    "actual_run": "build/t483-s3-p1/full",
+    "final_build": "build/t483-s3-p1-final",
+    "reason": "Only three verified #line restorations followed tested build; identical actual MSVC lexical stream. Owner authorizes no repeat runtime for line-only differences.",
+    "proof": "artifacts/mvdm-audit/t483-s3/batch1-line-only-control.json",
+    "not_a_new_runtime_run": true
+  },
+  "publication": {
+    "status": "published",
+    "package": "2eb0e92b-60f9-4120-9220-2ae95c71f0a5",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "limitations": [
+    "External DOS4GW/NESticle fixture unavailable; explicitly skipped, not passed",
+    "Runtime suite reused only under approved verified line-only exemption; final package separately compiled",
+    "Shared diagnostic providers retained until remaining S3 caller cleanup; required before S3 closure"
+  ],
+  "guest_and_winnt_zip_unchanged": true
+}
