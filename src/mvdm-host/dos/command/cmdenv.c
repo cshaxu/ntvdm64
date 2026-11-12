@@ -323,9 +323,9 @@ VOID cmdGetInitEnvironment(VOID)
 	return;
     }
     else {
-	if (!mvdm_guest_location_set_real_mode(&environment_location,
-		(USHORT)getES(), 0) ||
-	    !mvdm_guest_location_acquire(&environment_location,
+	mvdm_guest_location_set_real_mode(&environment_location,
+		(USHORT)getES(), 0);
+	if (!mvdm_guest_location_acquire(&environment_location,
 		cchInitEnvironment + cbComSpec, GUEST_MEMORY_ACCESS_WRITE,
 		&environment_lease)) {
 	    setCF(1);

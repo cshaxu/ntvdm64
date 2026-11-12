@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "niddb_bridge_boundary.h"
 extern void **NIDDB_Allocate_Instance_Data(int, void (*)(void **), void (*)(void));
 extern void NIDDB_Deallocate_Instance_Data(void **);
 extern void virtual_device_trap(void);
@@ -37,8 +38,6 @@ void c_setEDX(uint32_t v) { (void)v; }
 void c_setCF(uint32_t v) { if (v) ++carries; }
 uint8_t c_sas_hw_at(uint32_t a) { (void)a; return 0; }
 int c_SasRegisterVirtualSelectors(uint16_t a, uint16_t b) { (void)a; (void)b; return 1; }
-void mvdm_softpc_report_virtual_device_control(uint32_t a, uint16_t b, uint16_t c, uint16_t d)
-{ (void)a; (void)b; (void)c; (void)d; }
 void mvdm_softpc_invalid_virtual_instance(uint8_t value)
 { (void)value; abort(); }
 void mvdm_test_invalid_niddb(uint8_t value)

@@ -18,8 +18,7 @@ int main(int argc, char **argv)
     static const char *names[] = {
         "MVDM_TERMINATE_VDM_REPORT_PATH", "MVDM_WIN31_SETUP_XMS_TRACE_PATH",
         "MVDM_S41_WOW_BOP_REPORT_PATH", "MVDM_S42_WOW_RETURN_REPORT_PATH",
-        "MVDM_WOW_CALLBACK_CPU_TRACE_PATH", "MVDM_S41_DPMI_MODE_REPORT_PATH",
-        "MVDM_S42_VXD_BOP_REPORT_PATH"
+        "MVDM_WOW_CALLBACK_CPU_TRACE_PATH", "MVDM_S41_DPMI_MODE_REPORT_PATH"
     };
     char long_path[MAX_PATH + 32];
     const char *path;
@@ -39,7 +38,6 @@ int main(int argc, char **argv)
     CHECK(mvdm_softpc_report_wow_fast_callback_binding("fixture", 0));
     CHECK(mvdm_softpc_report_dpmi_mode_state("fixture", 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_cpu40_descriptor_publish(8, 0, 0, 0, 0, 0, 0));
-    CHECK(mvdm_softpc_report_virtual_device_control(0, 0, 0, 0));
     printf("OBSERVER_LAST_ERROR checks=%u result=0\n", checks);
     return 0;
 }

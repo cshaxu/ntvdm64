@@ -211,31 +211,6 @@ __declspec(noreturn) void mvdm_softpc_invalid_virtual_instance(unsigned long id)
     abort();
 }
 
-void mvdm_softpc_report_virtual_device_control(unsigned long eax,
-    unsigned short bx, unsigned short cx, unsigned short dx)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    char line[128];
-    DWORD bytes;
-    HANDLE file;
-    DWORD written;
-
-    bytes = GetEnvironmentVariableA("MVDM_S42_VXD_BOP_REPORT_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
-        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line),
-        "vxd-control eax=%08lx bx=%04x cx=%04x dx=%04x\r\n", eax,
-        (unsigned int)bx, (unsigned int)cx, (unsigned int)dx);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code)
 {

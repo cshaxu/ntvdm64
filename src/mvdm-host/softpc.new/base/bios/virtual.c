@@ -752,9 +752,6 @@ virtual_device_trap IFN0()
        return;
    }
 
-   mvdm_softpc_report_virtual_device_control((unsigned long)getEAX(),
-       getBX(), getCX(), getDX());
-
 #line 695
    switch ( getEAX() )
       {

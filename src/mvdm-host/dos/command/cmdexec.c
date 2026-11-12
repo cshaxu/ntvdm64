@@ -45,9 +45,6 @@
  * process-wide standard streams. */
 #include "compat/include/command_process_compat.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
-/* DIVERGENCE(MVDM-HOST-DIV-327): default-off attribution for the original
- * Win3.1 DOSX-to-KRNL286 compatibility branch.  The observer consumes only
- * already-classified scalars and does not affect DOS EXEC classification. */
 #line 18
 
 //*****************************************************************************
@@ -390,6 +387,7 @@ VOID cmdCreateProcess ( VOID )
     BOOL  StdHandlesValid = TRUE;
 #line 318
     ANSI_STRING Command_A = {0};
+#line 322
     PSTD_HANDLES pStdHandles;
     ULONG SnapshotStdHandles[3];
 #line 323
@@ -468,6 +466,7 @@ VOID cmdCreateProcess ( VOID )
                             &ProcessInformation);
     }
 
+#line 394
     if (Status == FALSE)
         dwExitCode32 = GetLastError ();
 
@@ -499,6 +498,7 @@ VOID cmdCreateProcess ( VOID )
     }
 
     RtlFreeAnsiString(&Command_A);
+#line 414
     if (Env_A.Buffer)
 	RtlFreeAnsiString(&Env_A);
 

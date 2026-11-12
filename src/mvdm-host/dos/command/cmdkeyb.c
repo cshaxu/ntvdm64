@@ -14,7 +14,7 @@
 #include <ctype.h>
 #include <string.H>
 #include "cmdkeyb.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "common/wow/registry.h"
 #include "mvdm_softpc_firmware.h"
 #line 17
 

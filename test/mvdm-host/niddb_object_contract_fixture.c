@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "niddb_bridge_boundary.h"
 #include <string.h>
 
 __declspec(dllimport) void __stdcall ExitProcess(unsigned long);
@@ -46,8 +47,6 @@ void c_setEDX(uint32_t value) { (void)value; }
 void c_setCF(uint32_t value) { if (value) ++errors; }
 uint8_t c_sas_hw_at(uint32_t address) { (void)address; return current_virtual_byte; }
 int c_SasRegisterVirtualSelectors(uint16_t a, uint16_t b) { (void)a; (void)b; return 1; }
-void mvdm_softpc_report_virtual_device_control(uint32_t a, uint16_t b, uint16_t c, uint16_t d)
-{ (void)a; (void)b; (void)c; (void)d; }
 void host_error(int code, int action, const char *text, ...)
 { (void)code; (void)action; (void)text; ++errors; }
 void ClearInstanceDataMarking(void) { }

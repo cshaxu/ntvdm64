@@ -6,107 +6,122 @@
     {
       "id": "T483-D0010",
       "path": "src/mvdm-host/dos/command/cmdconf.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Replace BOOL mvdm_softpc_system_copy_root plus strlen at cmdconf.c:223-224 with dw = NtvdmGetWindowsDirectoryA(achRawFile, sizeof(achRawFile)); retain subsequent GetShortPathNameA, PIF selection, expansion and failure branches.",
-      "verification": "Compare candidate and current for accepted package roots, missing root and capacity boundary using existing startup validation. Cached compile/link; CONFIG/AUTOEXEC selection and temporary-file lifetime regressions. Do not relax root validation to force equivalence."
+      "verification": "Compare candidate and current for accepted package roots, missing root and capacity boundary using existing startup validation. Cached compile/link; CONFIG/AUTOEXEC selection and temporary-file lifetime regressions. Do not relax root validation to force equivalence.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0016",
       "path": "src/mvdm-host/dos/command/cmdenv.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Call set_real_mode separately for the nonnull local location; remove only its impossible failure term. Keep exact-size acquisition and failure branch after BX capacity negotiation.",
-      "verification": "Compare sufficient/insufficient buffer outcomes and bytes; acquisition failure still reports failure and writes nothing; cached build plus environment setup regression."
+      "verification": "Compare sufficient/insufficient buffer outcomes and bytes; acquisition failure still reports failure and writes nothing; cached build plus environment setup regression.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0018",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep offsetof, thread/session, child-standard-handle and registry declarations. Delete only classification diagnostic header together with both report calls.",
-      "verification": "Compile with actual include contract, no implicit declarations; classify unchanged images and execute redirected child."
+      "verification": "Compile with actual include contract, no implicit declarations; classify unchanged images and execute redirected child.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0019",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep offsetof, thread/session, child-standard-handle and registry declarations. Delete only classification diagnostic header together with both report calls.",
-      "verification": "Compile with actual include contract, no implicit declarations; classify unchanged images and execute redirected child."
+      "verification": "Compile with actual include contract, no implicit declarations; classify unchanged images and execute redirected child.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0049",
       "path": "src/mvdm-host/dos/command/cmdkeyb.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Replace the broad mvdm_shadow_registry.h include with common/wow/registry.h; retain the same registry facade and original keyboard layout assembly. No provider duplication.",
-      "verification": "Compile the selected COMMAND translation unit; check all registry calls retain the facade binding; compare keyboard layout and fallback packet output."
+      "verification": "Compile the selected COMMAND translation unit; check all registry calls retain the facade binding; compare keyboard layout and fallback packet output.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0072",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep numeric CurDirLocation, exact copy and original directory/environment update order. Remove only the impossible failure branch around set_real_mode for this non-NULL local object (line 711); other grouped ranges remain. Preserve actual copy failures and this API's own CF/AX contract.",
-      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation."
+      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0073",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep numeric CurDirLocation, exact copy and original directory/environment update order. Remove only the impossible failure branch around set_real_mode for this non-NULL local object (line 711); other grouped ranges remain. Preserve actual copy failures and this API's own CF/AX contract.",
-      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation."
+      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0074",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep numeric CurDirLocation, exact copy and original directory/environment update order. Remove only the impossible failure branch around set_real_mode for this non-NULL local object (line 711); other grouped ranges remain. Preserve actual copy failures and this API's own CF/AX contract.",
-      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation."
+      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0075",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep numeric CurDirLocation, exact copy and original directory/environment update order. Remove only the impossible failure branch around set_real_mode for this non-NULL local object (line 711); other grouped ranges remain. Preserve actual copy failures and this API's own CF/AX contract.",
-      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation."
+      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0076",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep numeric CurDirLocation, exact copy and original directory/environment update order. Remove only the impossible failure branch around set_real_mode for this non-NULL local object (line 711); other grouped ranges remain. Preserve actual copy failures and this API's own CF/AX contract.",
-      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation."
+      "verification": "Compile and compare valid root/current-directory outputs; verify invalid drive and failed guest copy still return failure without mutating directory environment. Confirm setter non-NULL contract at implementation.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0117",
       "path": "src/mvdm-host/dos/dem/demgset.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Replace broad registry include with common/wow/registry.h. Use mvdm_command_guest_directory.h for the directory API if its declarations cover all reached calls; retain existing providers.",
-      "verification": "Compile actual translation unit; check identical facade binding and directory declarations with no implicit or duplicate declarations."
+      "verification": "Compile actual translation unit; check identical facade binding and directory declarations with no implicit or duplicate declarations.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0119",
       "path": "src/mvdm-host/dos/dem/demgset.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Separate the infallible non-NULL local set_real_mode call from the acquisition conditional. Keep DTA/PDB/error registration, directory invalidation and SFT invalidation on acquisition/release failure. Do not change ignored register_doswow failure until its downstream error propagation is proved.",
-      "verification": "Verify valid registration and acquire/release failure invalidation. Trace failed directory registration to subsequent query before selecting any additional error policy."
+      "verification": "Verify valid registration and acquire/release failure invalidation. Trace failed directory registration to subsequent query before selecting any additional error policy.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0126",
       "path": "src/mvdm-host/dos/dem/demhndl.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove only the impossible failure test of set_real_mode for the non-NULL local descriptor. Keep actual acquisition failure, INVALID_ADDRESS delivery, bounded snapshot and read active guard.",
-      "verification": "Verify zero/short/full I/O, invalid guest mapping and exact cleanup. Read lease preloads the suffix; do not replace it with uninitialized storage."
+      "verification": "Verify zero/short/full I/O, invalid guest mapping and exact cleanup. Read lease preloads the suffix; do not replace it with uninitialized storage.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0132",
       "path": "src/mvdm-host/dos/dem/demhndl.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove only the impossible failure test of set_real_mode for the non-NULL local descriptor. Keep actual acquisition failure, INVALID_ADDRESS delivery, bounded snapshot and read active guard.",
-      "verification": "Verify zero/short/full I/O, invalid guest mapping and exact cleanup. Read lease preloads the suffix; do not replace it with uninitialized storage."
+      "verification": "Verify zero/short/full I/O, invalid guest mapping and exact cleanup. Read lease preloads the suffix; do not replace it with uninitialized storage.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0224",
       "path": "src/mvdm-host/dpmi32/dpmimemr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep ExtMemSA as allocation/free/reallocation owner. Simplify the unconditional CPU40 early-return plus unreachable original fallback into one selected original shared-XMS path, preserving branch exclusion policy and existing success/BOOL contract; do not globally disable VdmAllocateVirtualMemory because XMS initialization uses it.",
-      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes."
+      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0225",
@@ -118,37 +133,42 @@
     {
       "id": "T483-D0226",
       "path": "src/mvdm-host/dpmi32/dpmimemr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep ExtMemSA as allocation/free/reallocation owner. Simplify the unconditional CPU40 early-return plus unreachable original fallback into one selected original shared-XMS path, preserving branch exclusion policy and existing success/BOOL contract; do not globally disable VdmAllocateVirtualMemory because XMS initialization uses it.",
-      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes."
+      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0227",
       "path": "src/mvdm-host/dpmi32/dpmimemr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Keep SAQueryFree as authority; remove the preceding VdmQueryFreeVirtualMemory call and unused Status local for this selected configuration. It only traverses the generic extent list and its two outputs are immediately overwritten.",
-      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes."
+      "verification": "Build selected CPU40 path; verify allocation/free, shrink/grow with content preservation, failed growth retaining original block, and query values following allocation/free. Preserve zero/-1 NTSTATUS for allocate/free and BOOL reallocate; no guest changes.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0240",
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Replace DpmiCpu40DescriptorShadowAddress(Selector & ~4u) with Cpu40GdtShadowAddress; remove helper definition/prototype with previously registered data.c and dpmi32p.h actions.",
-      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0261",
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Remove diagnostic-only c_getCR3/c_getDS_BASE/c_getDS_LIMIT declarations with reports. Audit existing bounded CCPU declaration carrier for the remaining signatures; do not import generated CPU macro selection into autonomous code.",
-      "verification": "Check prototypes against cpu4gen.h/c_seg.h and build selected DPMI unit."
+      "verification": "Check prototypes against cpu4gen.h/c_seg.h and build selected DPMI unit.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0422",
       "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Retain signature-gated bridge call and EAX/EBX/EDX/ESI/CF result mapping. Delete only report_virtual_device_control call and its now-unused provider if whole-tree callers permit. Do not merge extension operations into NIDDB lifecycle.",
-      "verification": "Existing niddb object/no-retry and VM notification fixtures; retain actual-object allocation failure/retirement/reuse controls. Verify normal System_Exit with real provider, previous versus BIOS-selected VM, callback reentry, invalid ID and non-bridge dispatch; mocks do not prove these guest boundaries."
+      "verification": "Existing niddb object/no-retry and VM notification fixtures; retain actual-object allocation failure/retirement/reuse controls. Verify normal System_Exit with real provider, previous versus BIOS-selected VM, callback reentry, invalid ID and non-bridge dispatch; mocks do not prove these guest boundaries.",
+      "evidence": "batch1-delivery.json"
     },
     {
       "id": "T483-D0435",
@@ -825,7 +845,7 @@
   ],
   "counts": {
     "assigned": 117,
-    "delivered": 0,
-    "remaining_unprocessed": 117
+    "delivered": 20,
+    "remaining_unprocessed": 97
   }
 }

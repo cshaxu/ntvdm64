@@ -36,8 +36,17 @@ The previously suggested compat-first S2 is superseded.
 ## S4 Progress
 
 Assigned: 117 minimize/simplify entries, in frozen register file/line order.
-No S4 implementation or verification is claimed yet. Initial queue is in the
+P1 resolves 20/117 entries (18 changes plus two verified S3 overlaps); 97 remain.
+The batch modifies 18 source/test files. Cached x86/x64, Full 16 gates,
+observer/NIDDB/package fixtures and real guest DPMI allocation/reallocation/free
+and task-exit cleanup passed. Logical-line counter-review is complete, including
+three restored cmdexec anchors. The repaired legacy DPMI runner uses the existing
+physical-stage/logon-environment setup and retains its original assertions.
+The complete 11-image package was published and hash-verified at both destinations.
+See [P1 delivery](../../artifacts/mvdm-audit/t483-s4/batch1-delivery.json),
+[source review](../../artifacts/mvdm-audit/t483-s4/batch1-source-review.json) and
 [S4 ledger](../../artifacts/mvdm-audit/t483-s4/execution.json).
+Next is D0435 in c_main.c, followed by the remaining register order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure
@@ -49,10 +58,11 @@ regressions passed. No user desktop unlock dependency remains in generic queue t
 
 ## Current Technical Baseline
 
-Package `f3524088-d71f-4db1-bcbc-5b26e3a3aa0d`, complete 11 images at
-assets/release and O:/winnt/system32, manifest hashes equal. DOS4GW/NESticle was
-explicitly skipped because its external fixture was not supplied. No guest or
-winnt.zip change. See [final delivery](../../artifacts/mvdm-audit/t483-s3/batch8-delivery.json).
+Package `c4ba9b5e-e981-4c47-8c5a-a6f973239c54`, complete 11 images at
+assets/release and O:/winnt/system32, manifest hashes equal. Final images equal
+the Full-tested P1 candidate after only package UUID and PE timestamp normalization;
+this is not raw hash identity. DOS4GW/NESticle remains explicitly skipped because
+its external fixture was not supplied. No guest or winnt.zip change.
 
 ## Remaining Scope
 

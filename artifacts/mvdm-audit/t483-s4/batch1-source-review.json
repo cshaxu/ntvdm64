@@ -1,0 +1,692 @@
+{
+  "baseline": "0fbbe5768",
+  "status": "verified and published; included in P1 commit",
+  "modified_files": 18,
+  "line_comparison": "Actual compiler preprocessing against pinned original statement anchors; cmdexec three original line anchors restored and all 87 unique anchors match. Remaining scanner conflicts require distinguishing repeated text/macro expansion; not a blanket whole-file proof.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "before_sha256": "2d1af88c261f04a982dd8e879a2d3c00fab5ad51788e48ef1cd99597885b94b5",
+      "after_sha256": "a4e0d3c8b5b900ae78a8a9e2e3f75ea0bfa0019febcc864066421555a2c94afc",
+      "unchanged_line_matches": 544,
+      "shifted_unchanged_lines": []
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "before_sha256": "7345b2322480c67c5be92f4cc2eb2955c3d71e49e8692827dfcea98e38a2ed8b",
+      "after_sha256": "f26c628b1b7206eacf7a596215b723a23e5b2efed8e94a04e79e3c517fe2a0ce",
+      "unchanged_line_matches": 471,
+      "shifted_unchanged_lines": []
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "before_sha256": "d32313ee4993bf12135d62241eb2261188bd0696bf15846db73f80285fa0758a",
+      "after_sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f",
+      "unchanged_line_matches": 134,
+      "shifted_unchanged_lines": []
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "before_sha256": "05a7ad498ba6c7033ddda06151f76a21d3db2fcec2b8c1f3217df049246a7475",
+      "after_sha256": "3cfe72eaa152c62084e00314c35e9b3cc87f47f24496ee3b7e77a37570b2f2e4",
+      "unchanged_line_matches": 649,
+      "shifted_unchanged_lines": []
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "before_sha256": "1f930d4789e17af0c87fc29f4e8ff2045b15d1099e7a5c099e63751e5686694b",
+      "after_sha256": "0794f9b7528535198f0feb6e12abc2cf2cbbd30eed285b7703b25184d99d420b",
+      "unchanged_line_matches": 536,
+      "shifted_unchanged_lines": []
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "before_sha256": "dcb304d187e706bd187d802c9a672f02f04b4457c4c0e1ae28cd559c9e08aba6",
+      "after_sha256": "39a6a9f155251f33a502b445323a5ba22f70507ce3ff5c10d58a479229dffad1",
+      "unchanged_line_matches": 329,
+      "shifted_unchanged_lines": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "T483-D0010",
+      "status": "resolved by mandatory production entry validation",
+      "reason": "mvdm_standalone_worker validates app_package_layout_validate_command_configuration_root before original startup. Root plus optional separator plus system32/autoexec.nt plus NUL must fit MAX_PATH+12; admitted root length is therefore below MAX_PATH. The helper capacity is sufficient for all admitted configurations; arbitrary standalone session roots are not a product admission."
+    },
+    {
+      "id": "T483-D0117",
+      "status": "actual compiler binding and selected-function native handle test passed",
+      "reason": "Original GetPhysicalDriveType closes file handle opened by opennt_NtOpenFile. Registry facade ntvdm_shadow_nt_close accepts registered keys only. Replacing broad header preserves all Reg* mappings but restores native NtClose for native file handles."
+    }
+  ],
+  "evidence": [
+    "mvdm_guest_location_set_real_mode returns failure only for NULL destination; changed calls pass addresses of nonnull local objects. Actual acquire/release failures remain unchanged.",
+    "cmdkeyb uses only RegOpenKeyEx/RegQueryValueEx/RegCloseKey from identical common/wow/registry.h facade.",
+    "demgset calls only clear_doswow/register_doswow declared by existing directory header.",
+    "cmdexec report calls/header were removed in S3; remove remaining stale diagnostic-only comment.",
+    "DPMI allocate/free/reallocate now executes original shared-XMS block once, preserving NTSTATUS 0/-1 and BOOL return; removes unreachable generic fallback and duplicate early path. SAQueryFree is the only selected free-space authority.",
+    "D0240 descriptor helper replacement and D0261 diagnostic declarations were already removed in S3; current source confirms those exact overlaps.",
+    "VxD observation removal includes call, provider, declaration, fixture stubs and matching last-error probe count/output expectation; no functional NIDDB dispatch changed.",
+    "NIDDB object fixture initially failed linking because independent VM bridge additions were not modeled by historical fixture. Added shared test-only signature rejection boundary: nonbridge requests fall through; unexpected bridge signature or bridge result writes abort. Ten rollback combinations and three-VM lifecycle now pass. No product runtime stub added."
+  ],
+  "next": "Complete actual compiler bindings/logical-line checks, focused and Full gates, dual publication and clean commit/push before next source batch.",
+  "batch_files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "after_sha256": "6862008d8ee625ebd3b1c734b9493411414382f71b5d8c9ddf341fbac5c90aab"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "after_sha256": "a4e0d3c8b5b900ae78a8a9e2e3f75ea0bfa0019febcc864066421555a2c94afc"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "after_sha256": "74675de71ed89e55b117a218f9876a34c7e41ed0024257c2692e5a14e35ffcc4"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "after_sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "after_sha256": "3cfe72eaa152c62084e00314c35e9b3cc87f47f24496ee3b7e77a37570b2f2e4"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "after_sha256": "0794f9b7528535198f0feb6e12abc2cf2cbbd30eed285b7703b25184d99d420b"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "after_sha256": "39a6a9f155251f33a502b445323a5ba22f70507ce3ff5c10d58a479229dffad1"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "after_sha256": "568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "after_sha256": "633fc2cd60b8a823beee3ef0e203dcdd62f6ee80c1db1c0e4a9f0113d9b6372e"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "after_sha256": "8a33970458128ae39b44976abf0064d5afa539174b5d93aa7e74d19866cd082c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "after_sha256": "8c7907a98901a403697df543c5f82217da79aad4254f4d040b0c35d5fe1aee30"
+    },
+    {
+      "path": "test/mvdm-host/niddb_no_retry_fixture.c",
+      "after_sha256": "c3b2d0cf18c6f4311dfdb0d086d0f9e283f56f138a4e8b9d4ec4a8a4f1b290a1"
+    },
+    {
+      "path": "test/mvdm-host/niddb_object_contract_fixture.c",
+      "after_sha256": "afc676bd24ee077470f2d871d12601cbb94ca39459ddd8740a7fab6e0d4ce293"
+    },
+    {
+      "path": "test/observation/softpc_observer_error_probe.c",
+      "after_sha256": "698b037b4de0d53305797b2b697cb1ee325984740e1b04464dfcda5d1a599f60"
+    },
+    {
+      "path": "test/observation/verify-niddb-no-retry.py",
+      "after_sha256": "95c123490022fa630ea9613f028e1978a711c8c8f929005f18400147a4cd7699"
+    },
+    {
+      "path": "test/observation/verify-softpc-observer-error.ps1",
+      "after_sha256": "9ac1dfd76aae2a9ea6e9a2157b09d7047b1d2cd00534f3ff313636a69bb3d265"
+    },
+    {
+      "path": "test/mvdm-host/niddb_bridge_boundary.h",
+      "after_sha256": "2759a2f56219fbf1d5f2ce2516a8c6b33ea9045e12b585d6d0c06f488e643fd3"
+    }
+  ],
+  "verification": {
+    "cached_x86_x64": "0",
+    "observer": "0",
+    "niddb_no_retry": {
+      "result": "pass",
+      "exit": 0,
+      "scope": "intercepted object and controlled VxD boundaries, not guest execution",
+      "baseline_control": false,
+      "inputs": [
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_no_retry_fixture.c",
+          "sha256": "c3b2d0cf18c6f4311dfdb0d086d0f9e283f56f138a4e8b9d4ec4a8a4f1b290a1"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_bridge_boundary.h",
+          "sha256": "2759a2f56219fbf1d5f2ce2516a8c6b33ea9045e12b585d6d0c06f488e643fd3"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_vm_bridge.h",
+          "sha256": "ecc3d25e9dc019dff4214d4af48016b6eaa3b3d19f5c7a1af5e60169f1650155"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+          "sha256": "25044448fbf109ee8c89a3e86423be6029c919f77c41443c81b303f2a4cf6740"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s4-p1\\niddb-r2\\virtual-intercept.obj",
+          "sha256": "01cf0043282bc0530ccf5a91c4d63c01448152d30b3ccccafa2a1dfe3de9d56d"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s4-p1\\niddb-r2\\fixture.exe",
+          "sha256": "25801942940e475f6c32e245dbab9663aaf2df021b7f02841765bcc4d70eb810"
+        }
+      ]
+    },
+    "niddb_contract": "NIDDB_OBJECT_CONTRACT checks=15 failures=0 callbacks=3\nNIDDB_THREE_VM_REUSE active=1 reused=1 callbacks=3 cleanup=1\n",
+    "compiler_binding": "actual demgset.i contains same ntvdm_shadow_reg_open_key_ex and native NtClose(Handle), not registry close",
+    "line_observations": "build/t483-s4-p1/line-observations.json: exact original anchors observed; ambiguous same-text/old positional differences need scoped review, not blanket line-correct claim",
+    "full_session": 66490
+  },
+  "latest_verification": {
+    "cached_exit": 0,
+    "full_exit": 0,
+    "full_gates": 16,
+    "final_package_comparison": {
+      "old_package": "eba69541-2a53-4847-96f3-7dcb83002759",
+      "new_package": "c4ba9b5e-e981-4c47-8c5a-a6f973239c54",
+      "method": "Byte comparison after clearing only unique package GUID and PE-described COFF/EXPORT/DEBUG TimeDateStamp fields. No executable bytes or source-line literals normalized.",
+      "images": [
+        {
+          "image": "VCDEX.DLL",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              240,
+              244,
+              "COFF TimeDateStamp"
+            ],
+            [
+              6020,
+              6024,
+              "EXPORT TimeDateStamp"
+            ],
+            [
+              5964,
+              5968,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "C285852A8748FF6892B5EB634635607BE949AD8FD4C448E7623399CAD92F4C12",
+          "new_hash": "921F8BCD44DDE1A6DA360433C12D2BEC14E7C3E7018F927D88C11A3935355994",
+          "normalized_hashes": [
+            "66720ee1a9392f8355da576180e7227c94dcb95d91c9606beb95dfd627fcbb65",
+            "66720ee1a9392f8355da576180e7227c94dcb95d91c9606beb95dfd627fcbb65"
+          ]
+        },
+        {
+          "image": "run16.exe",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              264,
+              268,
+              "COFF TimeDateStamp"
+            ],
+            [
+              211428,
+              211432,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "F5C0D5AE044BE4FCB5D47ACA52B9363647BA076D8E1AC3D3BC57AC39FA307213",
+          "new_hash": "959A1C49E0E80A9839E921F13F6ECC0A12E870EDD6676A9F1A87F5D6987D0D77",
+          "normalized_hashes": [
+            "1505ba58b6fad83ecab4112dd7926af92dbb23d93c272e7c3837972793d52e61",
+            "1505ba58b6fad83ecab4112dd7926af92dbb23d93c272e7c3837972793d52e61"
+          ]
+        },
+        {
+          "image": "ntsrv.exe",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              248,
+              252,
+              "COFF TimeDateStamp"
+            ],
+            [
+              300084,
+              300088,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "A6B56FE1E59448D0DDD39E6A97E278B93C5A1448425268C96FE21E56F826BE75",
+          "new_hash": "7B60045821BF2787FCB003EB269E31203EC117C2490EBC39B809B4A8455D253E",
+          "normalized_hashes": [
+            "9bac7e9fe40b8f1d38643941a65af056d76120eb48fc1f2afdc0a4291cfc2659",
+            "9bac7e9fe40b8f1d38643941a65af056d76120eb48fc1f2afdc0a4291cfc2659"
+          ]
+        },
+        {
+          "image": "ntcon.exe",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              264,
+              268,
+              "COFF TimeDateStamp"
+            ],
+            [
+              250580,
+              250584,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "C5402DD94647B2A8FDFA0147B1ED07D31F72E6ECA572F9C590F2F4FE88550784",
+          "new_hash": "A35D439A19D1442B204CA25F299FB6C021EF3175C5238A5EB37AA55EB48A236B",
+          "normalized_hashes": [
+            "18302731088497558a1b4da42d726973eaf6219262b9a34ba535dd9d89b8fe33",
+            "18302731088497558a1b4da42d726973eaf6219262b9a34ba535dd9d89b8fe33"
+          ]
+        },
+        {
+          "image": "ntvdm.exe",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              296,
+              300,
+              "COFF TimeDateStamp"
+            ],
+            [
+              1795476,
+              1795480,
+              "EXPORT TimeDateStamp"
+            ],
+            [
+              1723756,
+              1723760,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "AE903FB27D82B117D7A4872B0D0978D6054433CBA2843597465E4954838DCC4F",
+          "new_hash": "1796CC6284C6D467F0090C14E45C03E7D79100A3DF05A1E6A7099CD17D9A457A",
+          "normalized_hashes": [
+            "77017da26c719c821ac50b3dc9975ba6105641b579c77620346c3e8afc87d2ee",
+            "77017da26c719c821ac50b3dc9975ba6105641b579c77620346c3e8afc87d2ee"
+          ]
+        },
+        {
+          "image": "ntvwm.exe",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              248,
+              252,
+              "COFF TimeDateStamp"
+            ],
+            [
+              227252,
+              227256,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "D4805458FD884E3369C7015681B326AC05B9B3AC81D246015D173C791B2D2F18",
+          "new_hash": "FD8FB834DD8FBC7020A372A2119F57F5ECF9387CA926E7B51317F35CD3E0C5EF",
+          "normalized_hashes": [
+            "47743b3bbe6f0a30516ed5623f2e28af96c775e2f2289da9435f3a6e7f4f39e6",
+            "47743b3bbe6f0a30516ed5623f2e28af96c775e2f2289da9435f3a6e7f4f39e6"
+          ]
+        },
+        {
+          "image": "ntmon.exe",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              248,
+              252,
+              "COFF TimeDateStamp"
+            ],
+            [
+              148180,
+              148184,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "1E6D27CE873799649E668ED089F60A42E85DCF2ED9B3E4121E89E2EDA8035E33",
+          "new_hash": "CB4A1BA1465DD2344354570617CF82F2F2B130A38C115ADA781079041F266F62",
+          "normalized_hashes": [
+            "371a49e1f634fa891143555e2583d8f70b76ca3641e59cb7aaf2782b6dcbce38",
+            "371a49e1f634fa891143555e2583d8f70b76ca3641e59cb7aaf2782b6dcbce38"
+          ]
+        },
+        {
+          "image": "WOW32.DLL",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              296,
+              300,
+              "COFF TimeDateStamp"
+            ],
+            [
+              635156,
+              635160,
+              "EXPORT TimeDateStamp"
+            ],
+            [
+              623348,
+              623352,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "316ED3290D37811CF8049BEEBECACD3034BA5C3D92FB30C497206E3AD316C42F",
+          "new_hash": "CE1938C372ECC0DB21CC63ECA65E06015B9B3F5B5A61592F5C8F3FDAF944A572",
+          "normalized_hashes": [
+            "364e7b1027be24a4671c6dd633f336f8c6c4bfadf373d6fe313db122650aa4a4",
+            "364e7b1027be24a4671c6dd633f336f8c6c4bfadf373d6fe313db122650aa4a4"
+          ]
+        },
+        {
+          "image": "VDMREDIR.DLL",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              288,
+              292,
+              "COFF TimeDateStamp"
+            ],
+            [
+              193604,
+              193608,
+              "EXPORT TimeDateStamp"
+            ],
+            [
+              125028,
+              125032,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "90974A28AA12964F14D84CDA7DF2778341ECFC8D22C4EC539FFDC2684D689CA4",
+          "new_hash": "1A2C3C59B3C8AAD0A1C581AE11DD6DB69E01F5223922618BE9A3E8EFE10F482B",
+          "normalized_hashes": [
+            "3a51172f4a0289f8ab1dc35e17488f519097c5a50e1305ed112ebfbfb0da38d4",
+            "3a51172f4a0289f8ab1dc35e17488f519097c5a50e1305ed112ebfbfb0da38d4"
+          ]
+        },
+        {
+          "image": "nthook32.dll",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              272,
+              276,
+              "COFF TimeDateStamp"
+            ],
+            [
+              203332,
+              203336,
+              "EXPORT TimeDateStamp"
+            ],
+            [
+              134228,
+              134232,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "E6B8CD5A78D8BF3C9E507B28F6E1392AB08B58F21CEB7AF00363C487A4826063",
+          "new_hash": "76A4A402B227BAD433C717FE8D092BB80BC772DB29CED0A1B8BD6D9F0FA31DFC",
+          "normalized_hashes": [
+            "a8d1d9f34a088e3b02225fec1efa94ff2f12d05ed54aa92e66053d2561b51b47",
+            "a8d1d9f34a088e3b02225fec1efa94ff2f12d05ed54aa92e66053d2561b51b47"
+          ]
+        },
+        {
+          "image": "nthook64.dll",
+          "same": true,
+          "differing_bytes": 0,
+          "ignored_timestamp_fields": [
+            [
+              272,
+              276,
+              "COFF TimeDateStamp"
+            ],
+            [
+              243204,
+              243208,
+              "EXPORT TimeDateStamp"
+            ],
+            [
+              167844,
+              167848,
+              "DEBUG TimeDateStamp"
+            ]
+          ],
+          "old_hash": "66E3D5968B5DCF146AB1096FDDFEBD02BE8092437DDCD8E001210A23FDCBE753",
+          "new_hash": "13A430C4A7218F8843BB54EB19E699C90422909874288735EB1A893F7337F9B7",
+          "normalized_hashes": [
+            "d651db21b0c056ea6cf2ec6caf6b5491b2ec06f3b18aefc07ee3a5fa8ba47b1e",
+            "d651db21b0c056ea6cf2ec6caf6b5491b2ec06f3b18aefc07ee3a5fa8ba47b1e"
+          ]
+        }
+      ],
+      "all_equal": true
+    },
+    "dpmi": {
+      "case": "task-cleanup",
+      "result": "PASS",
+      "markers": [
+        "S36_DPMI_TASK_EXIT_CAPACITY_RESTORED_OK"
+      ],
+      "exit": 0,
+      "definitions": []
+    },
+    "dpmi_failure_retained": "r2 timed out using legacy SUBST/inherited-environment runner; corrected runner uses existing physical runtime stage, logon environment and explicit --wait; assertions unchanged.",
+    "native_close": "Selected current GetPhysicalDriveType function with controlled open/query boundary and native NtClose passed success and query-failure cleanup (real process handle counts). This is not a whole-object or real-disk acceptance claim.",
+    "line_evidence": "Actual compiler anchors plus original/current context review complete; three cmdexec anchors restored. Scanner is supporting evidence, not unique-text equivalence proof.",
+    "limits": "Final package equals Full-tested package only after PE timestamps and package UUID normalization, not raw identity. No runtime instruction or line literal normalization. No repeated Full needed under owner authorization."
+  },
+  "line_counter_review": {
+    "status": "completed for changed ranges",
+    "anchors": 902,
+    "observations": [
+      {
+        "path": "src/mvdm-host/dos/command/cmdconf.c",
+        "unique_exact_original_statement_anchors": 124,
+        "conflicts": [
+          {
+            "statement": "TerminateVDM();",
+            "compiled": 120,
+            "original": 82
+          },
+          {
+            "statement": "TerminateVDM();",
+            "compiled": 233,
+            "original": 82
+          },
+          {
+            "statement": "TerminateVDM();",
+            "compiled": 248,
+            "original": 82
+          },
+          {
+            "statement": "TerminateVDM();",
+            "compiled": 258,
+            "original": 82
+          },
+          {
+            "statement": "TerminateVDM();",
+            "compiled": 268,
+            "original": 82
+          },
+          {
+            "statement": "TerminateVDM();",
+            "compiled": 634,
+            "original": 82
+          }
+        ]
+      },
+      {
+        "path": "src/mvdm-host/dos/command/cmdenv.c",
+        "unique_exact_original_statement_anchors": 185,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/dos/command/cmdexec.c",
+        "unique_exact_original_statement_anchors": 87,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+        "unique_exact_original_statement_anchors": 31,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/dos/command/cmdmisc.c",
+        "unique_exact_original_statement_anchors": 156,
+        "conflicts": [
+          {
+            "statement": "cmdVDMEnvBlk.cchEnv = 0;",
+            "compiled": 427,
+            "original": 352
+          },
+          {
+            "statement": "cchVDMEnv32 = 0;",
+            "compiled": 430,
+            "original": 398
+          }
+        ]
+      },
+      {
+        "path": "src/mvdm-host/dos/dem/demgset.c",
+        "unique_exact_original_statement_anchors": 182,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/dos/dem/demhndl.c",
+        "unique_exact_original_statement_anchors": 65,
+        "conflicts": [
+          {
+            "statement": "goto writeFailureExit;",
+            "compiled": 296,
+            "original": 277
+          },
+          {
+            "statement": "goto writeFailureExit;",
+            "compiled": 305,
+            "original": 277
+          },
+          {
+            "statement": "setAX((WORD)(FileSizeLow / 0x10000));",
+            "compiled": 599,
+            "original": 576
+          }
+        ]
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+        "unique_exact_original_statement_anchors": 29,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+        "unique_exact_original_statement_anchors": 43,
+        "conflicts": [
+          {
+            "statement": "master_ptrs[i] = snapshot_ptrs[i];",
+            "compiled": 548,
+            "original": 550
+          },
+          {
+            "statement": "return (IHP)0;",
+            "compiled": 615,
+            "original": 609
+          }
+        ]
+      }
+    ],
+    "dispositions": {
+      "cmdconf": "Original TerminateVDM repetitions at 120/233/248/258/268/634 have trailing comments removed by preprocessing; compiler lines equal original positions.",
+      "cmdmisc": "Original reset occurrences retain lines 352/398; extra error-cleanup repetitions are local adaptations, not shifted original statements.",
+      "demhndl": "Original duplicate goto forms differ whitespace and size expression at 599 has trailing comment; matching statements remain at their own original lines.",
+      "virtual": "Additional rollback copy at 548 is an adaptation; original copy retains550. Original second return at615 has trailing comment; not a displaced609 return."
+    }
+  },
+  "final_inputs": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "sha256": "6862008d8ee625ebd3b1c734b9493411414382f71b5d8c9ddf341fbac5c90aab"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "sha256": "a4e0d3c8b5b900ae78a8a9e2e3f75ea0bfa0019febcc864066421555a2c94afc"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "f26c628b1b7206eacf7a596215b723a23e5b2efed8e94a04e79e3c517fe2a0ce"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "3cfe72eaa152c62084e00314c35e9b3cc87f47f24496ee3b7e77a37570b2f2e4"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "0794f9b7528535198f0feb6e12abc2cf2cbbd30eed285b7703b25184d99d420b"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sha256": "39a6a9f155251f33a502b445323a5ba22f70507ce3ff5c10d58a479229dffad1"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "sha256": "568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "sha256": "633fc2cd60b8a823beee3ef0e203dcdd62f6ee80c1db1c0e4a9f0113d9b6372e"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "sha256": "8a33970458128ae39b44976abf0064d5afa539174b5d93aa7e74d19866cd082c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "sha256": "8c7907a98901a403697df543c5f82217da79aad4254f4d040b0c35d5fe1aee30"
+    },
+    {
+      "path": "test/integration/verify-memory-transition-guest.ps1",
+      "sha256": "06a3cb23af91c6462e21e8df37512d64ab21153092af22aebb871b8838dc3bf6"
+    },
+    {
+      "path": "test/mvdm-host/niddb_no_retry_fixture.c",
+      "sha256": "c3b2d0cf18c6f4311dfdb0d086d0f9e283f56f138a4e8b9d4ec4a8a4f1b290a1"
+    },
+    {
+      "path": "test/mvdm-host/niddb_object_contract_fixture.c",
+      "sha256": "afc676bd24ee077470f2d871d12601cbb94ca39459ddd8740a7fab6e0d4ce293"
+    },
+    {
+      "path": "test/observation/softpc_observer_error_probe.c",
+      "sha256": "698b037b4de0d53305797b2b697cb1ee325984740e1b04464dfcda5d1a599f60"
+    },
+    {
+      "path": "test/observation/verify-niddb-no-retry.py",
+      "sha256": "95c123490022fa630ea9613f028e1978a711c8c8f929005f18400147a4cd7699"
+    },
+    {
+      "path": "test/observation/verify-softpc-observer-error.ps1",
+      "sha256": "9ac1dfd76aae2a9ea6e9a2157b09d7047b1d2cd00534f3ff313636a69bb3d265"
+    },
+    {
+      "path": "test/mvdm-host/niddb_bridge_boundary.h",
+      "sha256": "2759a2f56219fbf1d5f2ce2516a8c6b33ea9045e12b585d6d0c06f488e643fd3"
+    }
+  ]
+}

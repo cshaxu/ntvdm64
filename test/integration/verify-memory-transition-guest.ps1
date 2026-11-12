@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory)][string]$RuntimeRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
+    [Parameter(Mandatory)][string]$LogonHelper,
     [Parameter(Mandatory)][ValidateSet('interrupt16','interrupt32','code32','task-cleanup','ems-call','xms-failure')][string]$Case
 )
 $ErrorActionPreference='Stop'
@@ -12,11 +13,10 @@ $observerPath=(Resolve-Path $Observer).Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
     (Test-Path $out)){throw 'Require a fresh build run root'}
-if(Test-Path Z:\){throw 'Z: already in use'}
 # A fresh test-only package preserves the published inputs and sealed baseline.
 New-Item -ItemType Directory $out | Out-Null
-$runtime=Join-Path $out 'runtime'
-Copy-Item -LiteralPath $baseline -Destination $runtime -Recurse
+$runtime=New-PhysicalRuntimeStage $baseline
+@{runtime=$runtime}|ConvertTo-Json|Set-Content (Join-Path $out 'stage.json')
 $binary=Get-PackageBinaryRoot $runtime
 $names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
 $identity=@($names | ForEach-Object {
@@ -32,8 +32,9 @@ switch($Case){
     'ems-call' {$source='ems_call_return_probe.asm';$expected=@('T430_EMS_CALL_RETURN_STACK_MAP_OK');$target='E30.PIF'}
     'xms-failure' {$source='xms_capability.asm';$definitions=@('-DFORCED_RELOCATION');$expected=@('S36_XMS_FORCED_RELOCATION_DATA_RELEASE_OK')}
 }
+New-Item -ItemType Directory -Force (Join-Path $runtime 'tests') | Out-Null
 $probe=Join-Path $runtime 'tests/S6PROBE.COM'
-& nasm -f bin @definitions (Join-Path $PSScriptRoot $source) -o $probe
+& nasm -f bin @definitions (Join-Path "$PSScriptRoot/../observation" $source) -o $probe
 if($LASTEXITCODE){throw 'Guest assembly failed'}
 if($Case -eq 'task-cleanup'){
     foreach($child in @('D36N.COM','D36L.COM')){
@@ -46,10 +47,10 @@ if($Case -eq 'task-cleanup'){
 if($Case -eq 'ems-call'){
     Copy-Item $probe (Join-Path $binary 'E30.COM')
     $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\public\internal\windows\inc" /Fo"'+$out+'\pif.obj" /Fe"'+$out+'\pif-builder.exe" "'+$PSScriptRoot+'\ems_pif_builder.c"') 2>&1 | Tee-Object (Join-Path $out 'build.txt')
+    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\public\internal\windows\inc" /Fo"'+$out+'\pif.obj" /Fe"'+$out+'\pif-builder.exe" "'+$PSScriptRoot+'\..\observation\ems_pif_builder.c"') 2>&1 | Tee-Object (Join-Path $out 'build.txt')
     if($LASTEXITCODE){throw 'EMS profile builder failed'}
 }
-Get-FileHash (Join-Path $PSScriptRoot $source),$probe,$PSCommandPath,$observerPath |
+Get-FileHash (Join-Path "$PSScriptRoot/../observation" $source),$probe,$PSCommandPath,$observerPath |
     ConvertTo-Json | Set-Content (Join-Path $out 'guest-identity.json')
 if($Case -eq 'task-cleanup'){
     Get-FileHash "$PSScriptRoot/../observation/dpmi_suballoc.asm",(Join-Path $runtime 'tests/D36N.COM'),(Join-Path $runtime 'tests/D36L.COM') |
@@ -60,27 +61,31 @@ Get-FileHash (Join-Path $binary 'DOSX.EXE'),(Join-Path $binary 'HIMEM.SYS') |
 $scope=New-IsolatedPackageScope $runtime
 $environmentNames='PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_MILESTONE_INPUT','MVDM_OBSERVER_SHORT_HISTORY'
 $saved=@{}; foreach($name in $environmentNames){$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
-$mapped=$false
+$passed=$false
 try{
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST failed'}
-    $mapped=$true
-    $scope=New-IsolatedPackageScope $runtime 'Z:\'
-    $env:PATH='Z:\system32;'+$saved['PATH']
+    $env:PATH=$binary+';'+$saved['PATH']
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
     $env:MVDM_OBSERVER_SHORT_HISTORY='1'
     if($Case -eq 'ems-call'){
-        & (Join-Path $out 'pif-builder.exe') 'Z:\system32' --close-on-exit
+        & (Join-Path $out 'pif-builder.exe') $binary --close-on-exit
         if($LASTEXITCODE){throw 'EMS profile generation failed'}
     }
     $report=Join-Path $out 'guest.txt'
     $start=[Diagnostics.ProcessStartInfo]::new()
     $start.FileName=$observerPath; $start.UseShellExecute=$false; $start.CreateNoWindow=$true
-    $probeArgs=@('Z:\system32\run16.exe','Z:\',$report,$target)
+    Add-Type -Path (Resolve-Path $LogonHelper).Path
+    $identityToken=[Security.Principal.WindowsIdentity]::GetCurrent()
+    try{$entries=[WowMessageLogonEnvironment]::Read($identityToken.Token)}finally{$identityToken.Dispose()}
+    $start.EnvironmentVariables.Clear()
+    foreach($entry in $entries){$at=$entry.IndexOf('=',1);$start.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}
+    $start.EnvironmentVariables['PATH']=$binary+';'+$start.EnvironmentVariables['PATH']
+    $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+    $start.EnvironmentVariables['TEMP']=$runtime;$start.EnvironmentVariables['TMP']=$runtime
+    $probeArgs=@((Join-Path $binary 'run16.exe'),$runtime,$report,'--wait',$target)
     # /c propagates the actual probe completion instead of treating bare EXIT's
     # established outer-shell status as the guest's result.
-    if($Case -ne 'ems-call'){$probeArgs+=@('/c','Z:\tests\S6PROBE.COM')}
+    if($Case -ne 'ems-call'){$probeArgs+=@('/c',$probe)}
     $probeArgs+=@('--observation-timeout-ms','25000')
     foreach($arg in $probeArgs){$start.ArgumentList.Add($arg)}
     $start.RedirectStandardOutput=$true; $start.RedirectStandardError=$true
@@ -102,11 +107,12 @@ try{
         foreach($row in $identity){if((Get-FileHash (Join-Path $binary $row.name)).Hash -ne $row.sha256){throw 'Product changed during test'}}
         [pscustomobject]@{case=$Case;result='PASS';markers=$expected;exit=0;definitions=$definitions} |
             ConvertTo-Json | Set-Content (Join-Path $out 'result.json')
+        $passed=$true
         "PASS actual guest $Case"
     }finally{$p.Dispose()}
 }finally{
     try{Stop-IsolatedPackageScope $scope}finally{
-        if($mapped){& subst.exe Z: /d; if($LASTEXITCODE){throw 'Owned Z: cleanup failed'}}
+        if($passed){Remove-PhysicalRuntimeStage $runtime}
         foreach($name in $environmentNames){
             if($null -eq $saved[$name]){Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue}
             else{[Environment]::SetEnvironmentVariable($name,$saved[$name],'Process')}

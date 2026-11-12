@@ -48,7 +48,9 @@ markers = [f'NIDDB_NO_RETRY mode={mode} ordinal={ordinal} '
            for mode in range(2) for ordinal in range(5)]
 passed = (result.returncode == 3 and expected in result.stdout if args.expect_baseline
           else result.returncode == 0 and all(m in result.stdout for m in markers))
-paths = (fixture, original, intercepted, exe)
+paths = (fixture, root / "test/mvdm-host/niddb_bridge_boundary.h",
+         root / "src/ntvdm-exe/softpc/include/mvdm_vm_bridge.h",
+         original, intercepted, exe)
 receipt = {'result': 'pass' if passed else 'fail', 'exit': result.returncode,
            'scope': 'intercepted object and controlled VxD boundaries, not guest execution',
            'baseline_control': args.expect_baseline,

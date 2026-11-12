@@ -220,8 +220,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
     * app-selected MVDM system root through the same adapter already used by
     * original DEM.  A missing/oversize root retains the original zero-length
     * error direction. */
-   dw = mvdm_softpc_system_copy_root(achRawFile, sizeof(achRawFile))
-       ? (DWORD)strlen(achRawFile) : 0;
+   dw = NtvdmGetWindowsDirectoryA(achRawFile, sizeof(achRawFile));
 #line 210
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
    if (dwLenSysRoot >= sizeof(achSysRoot)) {

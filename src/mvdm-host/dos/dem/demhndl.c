@@ -155,8 +155,8 @@ BOOL    bufferLeaseActive;
     /* DIVERGENCE(MVDM-HOST-DIV-195): the source passes a durable guest alias
      * to synchronous host I/O.  Retain its ReadFile/named-pipe/CF/AX order,
      * but hold one bounded writable session lease only for this call. */
-    if (!mvdm_guest_location_set_real_mode(&bufferLocation, usDS, usDX) ||
-        !mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
+    mvdm_guest_location_set_real_mode(&bufferLocation, usDS, usDX);
+    if (!mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
             GUEST_MEMORY_ACCESS_WRITE, &bufferLease)) {
         SetLastError(ERROR_INVALID_ADDRESS);
         goto readFailureExit;
@@ -311,9 +311,9 @@ mvdm_guest_location_lease bufferLease;
     hFile = GETHANDLE (getAX(),getBP());
     /* DIVERGENCE(MVDM-HOST-DIV-231): preserve the original synchronous
      * WriteFile order with a bounded guest-memory lease. */
-    if (!mvdm_guest_location_set_real_mode(&bufferLocation, getDS(),
-        getDX()) || !mvdm_guest_location_acquire(&bufferLocation,
-        (DWORD)getCX(), GUEST_MEMORY_ACCESS_READ, &bufferLease)) {
+    mvdm_guest_location_set_real_mode(&bufferLocation, getDS(), getDX());
+    if (!mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
+        GUEST_MEMORY_ACCESS_READ, &bufferLease)) {
         SetLastError(ERROR_INVALID_ADDRESS);
         demClientError(hFile, (CHAR)-1);
         return;

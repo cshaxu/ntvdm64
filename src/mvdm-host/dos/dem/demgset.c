@@ -25,8 +25,8 @@
 #include <mvdm.h>
 #include <winbase.h>
 #include "demdasd.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
-#include "mvdm_command_guest_state.h"
+#include "common/wow/registry.h"
+#include "mvdm_command_guest_directory.h"
 #line 28
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
@@ -584,8 +584,8 @@ VOID demSetDTALocation (VOID)
     /* DIVERGENCE MVDM-HOST-DIV-007: `lpSftAddr` is source numeric data in
      * DOSWOWDATA.  Read it under one short lease, then retain DS:offset;
      * neither DOSWOWDATA nor the SFT chain is retained as a host pointer. */
-    if (mvdm_guest_location_set_real_mode(&dos_wow_data_location, getDS(),
-        getSI()) && mvdm_guest_location_acquire(&dos_wow_data_location,
+    mvdm_guest_location_set_real_mode(&dos_wow_data_location, getDS(), getSI());
+    if (mvdm_guest_location_acquire(&dos_wow_data_location,
         sizeof(DOSWOWDATA), GUEST_MEMORY_ACCESS_READ, &dos_wow_data_lease)) {
         sft_offset = ((PDOSWOWDATA)dos_wow_data_lease.bytes)->lpSftAddr;
         if (!mvdm_guest_location_release(&dos_wow_data_lease, FALSE)) {

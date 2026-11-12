@@ -710,12 +710,8 @@ UINT  DriveType;
 
     /* DIVERGENCE(MVDM-HOST-DIV-009): retain the far address numerically;
      * no guest pointer is materialized before the known bounded result exists. */
-    if (!mvdm_guest_location_set_real_mode(&CurDirLocation, (USHORT)getDS(),
-        (USHORT)getSI())) {
-        setCF(1);
-        setAX(0);
-        return;
-    }
+    mvdm_guest_location_set_real_mode(&CurDirLocation, (USHORT)getDS(),
+        (USHORT)getSI());
 #line 541
     chDrive = getAL();
     EnvVar[1] = chDrive + 'A';

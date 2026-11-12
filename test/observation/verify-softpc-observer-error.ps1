@@ -21,11 +21,11 @@ try {
   $null=$p.Handle
   if(!$p.WaitForExit(20000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned observer probe timeout'}
   $p.WaitForExit();$p.Refresh()
-  if($p.ExitCode -or (Get-Content "$root/$mode.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=8 result=0'){throw "Observer error transparency failed: $mode"}
+  if($p.ExitCode -or (Get-Content "$root/$mode.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=7 result=0'){throw "Observer error transparency failed: $mode"}
   if($mode -ne 'enabled' -and (Test-Path $trace)){throw "Unexpected output: $mode"}
  }
  $trace=Get-Content "$root/enabled.txt" -Raw
- foreach($marker in @('fixture return=','xms-move done','wow-bop','wow-stage stage=fixture','wow-fast-binding stage=fixture','fixture cr0=','descriptor-publish selector=0008','vxd-control')) {
+ foreach($marker in @('fixture return=','xms-move done','wow-bop','wow-stage stage=fixture','wow-fast-binding stage=fixture','fixture cr0=','descriptor-publish selector=0008')) {
   if(!$trace.Contains($marker)){throw "Missing enabled output: $marker"}
  }
  '0'|Set-Content "$root/exit.txt"
