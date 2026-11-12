@@ -1,0 +1,129 @@
+{
+  "status": "Historical candidate review: positive-growth edits withdrawn; consult execution.json and diff-growth-review.json for current state",
+  "entries": [
+    "T483-D0041",
+    "T483-D0042",
+    "T483-D0043",
+    "T483-D0048",
+    "T483-D0054",
+    "T483-D0057",
+    "T483-D0059",
+    "T483-D0060",
+    "T483-D0061",
+    "T483-D0062",
+    "T483-D0063",
+    "T483-D0064",
+    "T483-D0065",
+    "T483-D0066",
+    "T483-D0070",
+    "T483-D0071",
+    "T483-D0081",
+    "T483-D0124",
+    "T483-D0127",
+    "T483-D0148",
+    "T483-D0158",
+    "T483-D0167",
+    "T483-D0164"
+  ],
+  "reviews": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "before_sha256": "f26c628b1b7206eacf7a596215b723a23e5b2efed8e94a04e79e3c517fe2a0ce",
+      "after_sha256": "d686eb0340b470b7e9658f0cba22dab73aeab195b4e3c27750fb39704ff4e215"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "before_sha256": "9d354d8ae156e5a8062694621d25fe9b3fd081b637072da22eb49e0db75219b6",
+      "after_sha256": "be91f7f33bd0112804d6c069483289a1385b769dae59abdd2e53dfb17fa5a5a5"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_command.c",
+      "before_sha256": "3914691b11f2b2c5157e6f4e22f3f4a5de4c44da0ac5617899461da0c3a899c5",
+      "after_sha256": "a692d2ad4b324ee0717159fb8ea9cd6f6ac1fc4ea519f454f6efc97847f4ca5c"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_capture.c",
+      "before_sha256": "278280eab930b148c119fb0f60c5fb3d180e1d6ca86e78bd69331cf45f26abb9",
+      "after_sha256": "8f392dcefe2d88fa6df8462ef66dc71ef71d1842a978798de52522495a8c99c9"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "before_sha256": "3cfe72eaa152c62084e00314c35e9b3cc87f47f24496ee3b7e77a37570b2f2e4",
+      "after_sha256": "14ccbdbd1f9dce401d452a62088430a39d16cb1b60d4aeb7799b226ace4bb684",
+      "change": "DOS11 capture-failure paths share terminal cleanup; clear old redirection pointer after original completion, free owned pending environment and newly allocated redirection; retain real CF/AX environment-size retries. WOW2 capture failures use original terminal error route after prior environment cleanup. Original line31/145 and closing365/514 restored."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "before_sha256": "39a6a9f155251f33a502b445323a5ba22f70507ce3ff5c10d58a479229dffad1",
+      "after_sha256": "9aa7b7a5ada356da377f5f298059dc26fd8c53dd718f86fa21c7acb7c0fbf753",
+      "change": "Set INVALID_ADDRESS on extended-error lease failure; preserve the failure error across read-buffer discard; restore original line213 before BROKEN_PIPE conversion. MORE_DATA still follows provider ok to readSuccessExit."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "before_sha256": "626330bb01b34df705e815d3f7deb00ef85c77d2257743c43a07b160b6612f65",
+      "after_sha256": "f84a2bec3ee0ca641943987b8bc3d929465fa9cc7091d9c2a53cec8598be8908",
+      "change": "Preserve failed FindFirst error over DTA release; propagate AddFFindEntry failure reason through existing sole caller. Build/failpoint validation pending."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "before_sha256": "1ed6b8a1cb59cacaa69e76704f4c29d4f127ff34cbf85d95ec561f22f2e81003",
+      "after_sha256": "d8c3ac5f0c9c9d72502237b7074d360ff5c97432051267f4ade53520d52f92db",
+      "change": "Fail terminally on required descriptor-shadow allocation failure; existing line297 anchor preserves downstream original coordinates. D0164 accessor ABI still under review; this file is not complete."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "before_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+      "after_sha256": "109a10d99f466e10c7eeb814a228f378ee6b4e048ceab8b7d46a022ed968037c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+      "before_sha256": "e0102639b6c90695353f3568592c29876e08c984f9d4996af89acd7630522435",
+      "after_sha256": "dff838af639d0e2e73c0257759f70da54ed38868d539f9131fe82f521fbad65b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "before_sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
+      "after_sha256": "e94665b22ce89825e3fed8fc5c15a8491ec5c25e54085548b44a1482249de7ad"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h",
+      "before_sha256": "3efd20a777331338a0657a81a7ded9deac0efa9b7bcc71e55d959611d2d2ae7c",
+      "after_sha256": "52235ba49d4deecb2aa171abaca1d24a49bdac1c72b07222a069a286c84e2f42"
+    },
+    {
+      "path": "test/mvdm-host/cvidc_vector_binding_fixture.c",
+      "before_sha256": "bffadc7119a3edd7fec6b82fa06471e5669ed1c4d35c0954cbb15f64ea11ee9b",
+      "after_sha256": "c5753545e035553a921d9c84167230a2f5330daf497c17c9629d2f8749e699bf"
+    }
+  ],
+  "explanations": {
+    "T483-D0041": "Initial host capture had128-byte capacity although prepare_comspec accepts MAX_PATH. A134-character composed command was rejected after successful composition. Use MAX_PATH host storage, keep guest tail124 independent.",
+    "T483-D0048": "replace_command uses the same corrected MAX_PATH host buffer. Example259 characters plus NUL now fit;260 characters must fail without replacing old command.",
+    "T483-D0042": "Original cmdExec scans indices0..123 for CR. Previous helper accepted CR124..126 or NUL without CR. Restore124-byte scan, with BAD_FORMAT when no CR; scan past NUL if later CR exists, as original does.",
+    "T483-D0043": "Capture failure was always reported as INVALID_ADDRESS. Preserve BAD_FORMAT versus INVALID_ADDRESS through both live COMMAND and saved VM callers; retain existing carry/AL contract.",
+    "T483-D0054": "Local CMDINFO capture is retained; declaration/ownership must support terminal cleanup, not a second guest resize result.",
+    "T483-D0057": "Initial CMDINFO read/release failure currently returns CF1 AX487 before consuming a new request. Guest interprets487 as environment bytes.",
+    "T483-D0059": "PIF environment snapshot replaces an old alias; keep its lifetime and coordinate failure reporting with cmdGetNextCmd.",
+    "T483-D0060": "After GetNextVDMCommand consumed the request, failing the is-DOS-binary write returns fake resize and may re-request delivery.",
+    "T483-D0061": "PIF snapshot/scalar failure may be487 or8; both are currently sent as environment sizes despite not being size negotiation.",
+    "T483-D0062": "Exec-path acquire or commit failure happens after request delivery; cannot resume COMMAND with CF1 retry.",
+    "T483-D0063": "Command-buffer acquisition failure occurs before buffer copy but after delivery; must take terminal route.",
+    "T483-D0064": "Command-buffer commit failure leaves no live lease but task is already consumed; no guest resize retry is valid.",
+    "T483-D0065": "Environment commit failure must free its pending host allocation without passing error487 as a new required size.",
+    "T483-D0066": "Final sync/CMDINFO commit fails after redirection setup; cleanup must retire newly created redirection before terminal shutdown.",
+    "T483-D0070": "WOW initial binary-scalar write failure is not environment growth. Keep actual earlier WOW size negotiation unchanged.",
+    "T483-D0071": "WOW initial sync-byte write failure also cannot return fake environment size.",
+    "T483-D0081": "PIF clears binary type through lease and reports failure in VDMInfo; retain four-string cleanup and let cmdmisc own terminal disposition.",
+    "T483-D0124": "Extended-error acquire/commit failure did not establish LastError; buffer discard could overwrite it. A stale BROKEN_PIPE would incorrectly turn a failed guest write into successful zero-byte EOF. Set INVALID_ADDRESS at the failed write and preserve the original error across buffer release; retain original packed fields and provider MORE_DATA success.",
+    "T483-D0127": "Extended-error acquire/commit failure did not establish LastError; buffer discard could overwrite it. A stale BROKEN_PIPE would incorrectly turn a failed guest write into successful zero-byte EOF. Set INVALID_ADDRESS at the failed write and preserve the original error across buffer release; retain original packed fields and provider MORE_DATA success.",
+    "T483-D0148": "Search failure LastError could be overwritten by DTA lease release: PATH_NOT_FOUND could become an unrelated cleanup error. Save immediately after demFileFindFirst and restore after successful release; failed commit still reports INVALID_ADDRESS.",
+    "T483-D0158": "AddFFindEntry NULL conflated unreadable current PSP with allocation exhaustion. Pass the failure NTSTATUS through its sole caller, retain STATUS_NO_MEMORY for allocation failures and use STATUS_ACCESS_VIOLATION for the guest read failure. Existing SearchFile finally cleanup and NTSTATUS conversion remain the owner.",
+    "T483-D0167": "Descriptor shadow allocation failed by clearing LDTR and returning. Immutable dxboot.asm executes clc immediately after PassTableAddress, so guest cannot observe that failure and continues with invalid descriptors. Use the existing DPMI required-memory error/TerminateVDM route, as in dpmiint.c; retain successful allocation/publication and NTSRV lifecycle authority.",
+    "T483-D0164": "Production map binds DPMI host setter to accessfn.obj, through Cpu.Private to c_reg.obj. The CCPU setter returns VOID while wrapper and table declared IBOOL and read a nonexistent result. Align both generated table views/provider declarations and wrapper to void; share host facade declarations with DPMI; existing real-library vector fixture asserts selector/base/limit after wrapper calls. Diagnostic traces already absent before this batch."
+  },
+  "tests_added": "CR0/123 accept and mutate terminator;124/126 reject unchanged;NUL without CR rejects;NUL thenCR accepts;inaccessible memory rejects;host134/259 capture and replacement accept;260 rejects and preserves active command. Existing destructive-capture fixture inputs refreshed per new request. Not yet executed.",
+  "line_review": "cmdexec one-line error source substitution only; existing #line scaffolding and line counts unchanged. Actual preprocessing scheduled with batch.",
+  "delivery_failure_verification": "Source-reviewed only: actual original cmdmisc failpoint fixture still required; do not claim runtime pass. cmdpif scalar error and four-string cleanup unchanged; corrected receiving terminal route covers D0081.",
+  "counter_review": "Corrected new cmdmisc anchors to original31/145; added saved-VM BAD_FORMAT propagation assertion; replaced arithmetic test-length progression with explicit134/259/260 cases. All runtime checks remain pending.",
+  "batch_note": "Accessor ABI closure crosses the ten-file threshold atomically: 13 modified source/test/header files. No further correction group before cached batch verification."
+}

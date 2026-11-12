@@ -1,0 +1,200 @@
+{
+  "part": "T483 S5 P1 checkpoint before restart",
+  "status": "verified and published; P1 delivery identified by containing commit",
+  "owner_instruction": "Deliver current retained changes with cached full build, tests, both publication destinations, commit/push and clean worktree; then restart S5. Positive mirror-diff changes require prior approval.",
+  "baseline": "8935786e98013fc1cea5214626bf20f67ebc36e8",
+  "entries": [
+    "T483-D0041",
+    "T483-D0042",
+    "T483-D0043",
+    "T483-D0048"
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "d686eb0340b470b7e9658f0cba22dab73aeab195b4e3c27750fb39704ff4e215"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "sha256": "be91f7f33bd0112804d6c069483289a1385b769dae59abdd2e53dfb17fa5a5a5"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_command.c",
+      "sha256": "a692d2ad4b324ee0717159fb8ea9cd6f6ac1fc4ea519f454f6efc97847f4ca5c"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_capture.c",
+      "sha256": "8f392dcefe2d88fa6df8462ef66dc71ef71d1842a978798de52522495a8c99c9"
+    }
+  ],
+  "mirror_original_relative_diff": {
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "before_added": 211,
+    "before_removed": 79,
+    "after_added": 211,
+    "after_removed": 79,
+    "net_diff_line_change": 0,
+    "line_preservation": {
+      "scope": "Current retained mirror change only; this is preservation proof against HEAD, not a fresh whole-file original-line audit",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "equal_line_count": true,
+      "unchanged_line_directives": true,
+      "changes": [
+        {
+          "physical_line": 669,
+          "before": "setAL((UCHAR)ERROR_INVALID_ADDRESS);",
+          "after": "setAL((UCHAR)GetLastError());"
+        }
+      ],
+      "before_sha256": "f26c628b1b7206eacf7a596215b723a23e5b2efed8e94a04e79e3c517fe2a0ce",
+      "after_sha256": "d686eb0340b470b7e9658f0cba22dab73aeab195b4e3c27750fb39704ff4e215"
+    }
+  },
+  "withdrawn_entries": 19,
+  "verification_root": "build/t483-s5-checkpoint",
+  "limitations": [
+    "DOS4GW/NESticle explicitly skipped: external fixtures absent.",
+    "WOW frontier startup is not gameplay acceptance.",
+    "Nineteen withdrawn candidate entries are not delivered; S5 restarts with203 entries remaining.",
+    "No S6 admission; no original guest or winnt.zip edits."
+  ],
+  "publication": {
+    "status": "published",
+    "package": "d330765b-4ccc-457c-9001-5170bec2cf78",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "cached_build": "x86/x64 exit0",
+  "focused_tests": [
+    {
+      "Case": "ntvdm-command-capture-test",
+      "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-capture-test.exe",
+      "SHA256": "3174876A08C7810F13CE9610AE62691AD47FE81C4FA12DA6D3784C42870DC95C",
+      "PID": 23176,
+      "Started": "2026-11-12T20:05:15.3160068Z",
+      "Exit": 0,
+      "TimedOut": false,
+      "Passed": true
+    },
+    {
+      "Case": "ntvdm-command-launch-test",
+      "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-launch-test.exe",
+      "SHA256": "A4C3D2DE99D4BA236A41A69E0EB99B9ED3F72988A1257B2CACC9AFC69D520C7A",
+      "PID": 17976,
+      "Started": "2026-11-12T20:05:15.8014432Z",
+      "Exit": 0,
+      "TimedOut": false,
+      "Passed": true
+    }
+  ],
+  "capture_assertions": 140,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 356302,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6475,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1545,
+        "CleanupMs": 594,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 272,
+        "CleanupMs": 580,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66387,
+        "CleanupMs": 485,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 43766,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43199,
+        "CleanupMs": 755,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14386,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10385,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 56178,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12096,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28377,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30406,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3431,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7667,
+        "CleanupMs": 533,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9935,
+        "CleanupMs": 525,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4485,
+        "CleanupMs": 496,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6927,
+        "CleanupMs": 513,
+        "Passed": true
+      }
+    ]
+  }
+}

@@ -34,13 +34,21 @@ The previously suggested compat-first S2 is superseded.
 
 ## S5 Progress
 
-Assigned: 207 correct-category entries across 167 mirror files in frozen register
-file/line order. Zero entries delivered. The
-[S5 ledger](../../artifacts/mvdm-audit/t483-s5/execution.json) records each plan,
-related caller and required validation. Start with D0041/D0042 in cmdexec.c:
-separate host composed-command capacity from original DOS guest-tail syntax.
-Read current code and prior S2-S4 deliveries before applying the frozen plans;
-these 207 entries are not 207 demonstrated runtime bugs. Preserve original guest.
+S5 restarts after the owner-directed [P1 checkpoint](../../artifacts/mvdm-audit/t483-s5/checkpoint-delivery.json).
+Four of 207 entries are delivered; 203 remain in frozen file/line order.
+Nineteen net-growing candidate entries were withdrawn, not completed.
+P1 fixes command-capture capacity, original CR syntax and error propagation.
+Its sole mirror edit keeps original-relative diff at 211 added/79 removed lines;
+source line count and directives are unchanged. Cached x86/x64, 140 capture
+assertions, command launch and all 16 Full gates passed. The coherent eleven-image
+package is published and raw-hash verified at both configured destinations.
+DOS4GW/NESticle remains explicitly skipped because its external fixtures are absent.
+Every net-positive mirror diff requires approval BEFORE implementation, per repair
+without offsets from independent reductions; source net LOC is not this metric.
+The [ledger](../../artifacts/mvdm-audit/t483-s5/execution.json) and
+[growth review](../../artifacts/mvdm-audit/t483-s5/diff-growth-review.json)
+retain withdrawn evidence. Next: redesign the cmdmisc group before any net-growing
+implementation. S6 remains held; original guest and winnt.zip unchanged.
 
 ## Latest S Closure
 
@@ -52,10 +60,11 @@ class-lifetime, original-line review and Full16 passed. See
 
 ## Current Technical Baseline
 
-Package `89ae3c0c-66d1-428f-bd76-5a3227297588`, complete 11 images at
-assets/release and O:/winnt/system32, raw-hash identical to the Full-tested P9
-candidate and manifest. DOS4GW/NESticle remains explicitly skipped because its
-external fixture was not supplied. No guest or winnt.zip change.
+Package `d330765b-4ccc-457c-9001-5170bec2cf78`, complete 11 images at
+assets/release and O:/winnt/system32, raw-hash identical to the Full-tested S5 P1
+candidate and manifest. See the [checkpoint](../../artifacts/mvdm-audit/t483-s5/checkpoint-delivery.json).
+DOS4GW/NESticle remains explicitly skipped because its external fixture was not
+supplied. No guest or winnt.zip change.
 
 ## Remaining Scope
 

@@ -6,7 +6,7 @@
 #include "ntvdm-exe/session/session.h"
 
 
-#define MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES 128u
+#define MVDM_COMMAND_GUEST_TAIL_BYTES 124u
 #define MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES (32u * 1024u)
 #define MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES 12u
 
@@ -38,8 +38,8 @@ typedef struct mvdm_command_native_child_state {
     uint32_t environment_bytes;
     uint8_t default_drive;
     ULONG standard_handles[3];
-    char command[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
-    char command_service_tail[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
+    char command[MAX_PATH];
+    char command_service_tail[MVDM_COMMAND_GUEST_TAIL_BYTES];
     char environment[MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES];
     char directory[MAX_PATH];
 } mvdm_command_native_child_state;
@@ -100,39 +100,35 @@ static int state_ensure(mvdm_command_native_child_state **state_out)
     return 1;
 }
 
-static int copy_guest_command(const mvdm_guest_location *location, uint32_t base,
-    char destination[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES], uint32_t *bytes_out)
+static DWORD copy_guest_command(const mvdm_guest_location *location, uint32_t base,
+    char destination[MAX_PATH], uint32_t *bytes_out)
 {
     mvdm_guest_location probe;
     mvdm_guest_location_lease lease;
     uint32_t index;
 
     if (bytes_out != NULL) *bytes_out = 0u;
-    if (location == NULL || bytes_out == NULL) return 0;
+    if (location == NULL || bytes_out == NULL) return ERROR_INVALID_ADDRESS;
     probe = *location;
-    for (index = 0u; index + 1u < MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES; ++index) {
+    for (index = 0u; index < MVDM_COMMAND_GUEST_TAIL_BYTES; ++index) {
         if (!mvdm_guest_location_acquire_vm(&probe, base, 1u,
-                GUEST_MEMORY_ACCESS_WRITE, &lease)) return 0;
+                GUEST_MEMORY_ACCESS_WRITE, &lease)) return ERROR_INVALID_ADDRESS;
         destination[index] = (char)lease.bytes[0];
         if (lease.bytes[0] == 0x0du) {
             /* Original cmdExec changes the CR terminator in place before it
              * starts cmdExec32.  Preserve that observable guest write while
              * keeping the copied worker input self-contained. */
             lease.bytes[0] = 0u;
-            if (!mvdm_guest_location_release(&lease, 1)) return 0;
+            if (!mvdm_guest_location_release(&lease, 1)) return ERROR_INVALID_ADDRESS;
             destination[index] = '\0';
             *bytes_out = index + 1u;
-            return 1;
+            return ERROR_SUCCESS;
         }
-        if (!mvdm_guest_location_release(&lease, 0)) return 0;
-        if (destination[index] == '\0') {
-            *bytes_out = index + 1u;
-            return 1;
-        }
-        if (probe.offset == UINT16_MAX) return 0;
+        if (!mvdm_guest_location_release(&lease, 0)) return ERROR_INVALID_ADDRESS;
+        if (probe.offset == UINT16_MAX) return ERROR_INVALID_ADDRESS;
         ++probe.offset;
     }
-    return 0;
+    return ERROR_BAD_FORMAT;
 }
 
 static int copy_guest_environment(const mvdm_guest_location *location, uint32_t base,
@@ -191,6 +187,9 @@ static int capture_locations(mvdm_command_native_child_state *state,
     const mvdm_guest_location *standard_location, uint32_t base)
 {
     size_t bytes;
+    DWORD error;
+
+    SetLastError(ERROR_INVALID_ADDRESS);
 
     if (state == NULL || environment_location == NULL ||
         standard_location == NULL || state->active != 0u) return 0;
@@ -198,15 +197,22 @@ static int capture_locations(mvdm_command_native_child_state *state,
     SecureZeroMemory(state->environment, sizeof(state->environment));
     SecureZeroMemory(state->standard_handles, sizeof(state->standard_handles));
     if (host_command != NULL) {
-        for (bytes = 0u; bytes < MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES &&
+        for (bytes = 0u; bytes < sizeof(state->command) &&
                 host_command[bytes] != '\0'; ++bytes) {
         }
-        if (bytes == MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES) return 0;
+        if (bytes == sizeof(state->command)) {
+            SetLastError(ERROR_BAD_FORMAT);
+            return 0;
+        }
         memcpy(state->command, host_command, bytes + 1u);
         state->command_bytes = (uint32_t)bytes + 1u;
-    } else if (!copy_guest_command(command_location, base, state->command,
-            &state->command_bytes)) {
-        return 0;
+    } else {
+        error = copy_guest_command(command_location, base, state->command,
+            &state->command_bytes);
+        if (error) {
+            SetLastError(error);
+            return 0;
+        }
     }
     if (!copy_guest_environment(environment_location, base, state->environment,
             &state->environment_bytes) || !copy_standard_handles(standard_location, base,
@@ -215,6 +221,7 @@ static int capture_locations(mvdm_command_native_child_state *state,
         SecureZeroMemory(state->environment, sizeof(state->environment));
         SecureZeroMemory(state->standard_handles, sizeof(state->standard_handles));
         state->command_bytes = state->environment_bytes = 0u;
+        SetLastError(ERROR_INVALID_ADDRESS);
         return 0;
     }
     /* Capture on the guest thread, before cmdExec32 starts its detached
@@ -235,6 +242,7 @@ int mvdm_command_native_child_capture_guest(uint16_t command_segment,
     mvdm_guest_location environment;
     mvdm_guest_location standard;
 
+    SetLastError(ERROR_INVALID_ADDRESS);
     if (!state_ensure(&state) ||
         !mvdm_guest_location_set_real_mode(&command, command_segment, command_offset) ||
         !mvdm_guest_location_set_real_mode(&environment, environment_segment,
@@ -369,6 +377,7 @@ int mvdm_command_capture_create(const mvdm_command_capture_input *input,
 {
     mvdm_guest_location command,environment,standard;
     mvdm_command_capture *capture;
+    SetLastError(ERROR_INVALID_ADDRESS);
     if(out)*out=NULL;
     if(!input || !out || input->default_drive>=26 ||
         (input->directory && strlen(input->directory)>=MAX_PATH) ||
@@ -379,7 +388,8 @@ int mvdm_command_capture_create(const mvdm_command_capture_input *input,
     capture=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*capture));
     if(!capture)return 0;
     if(!capture_locations(capture,input->host_command,&command,&environment,&standard,input->vm_linear_base)){
-        mvdm_command_capture_destroy(capture);return 0;
+        DWORD error=GetLastError();
+        mvdm_command_capture_destroy(capture);SetLastError(error);return 0;
     }
     capture->default_drive=input->default_drive;
     capture->command_service=input->service;

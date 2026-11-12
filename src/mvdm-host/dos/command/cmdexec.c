@@ -666,7 +666,7 @@ VOID cmdExec (VOID)
             (USHORT)getSI(), (USHORT)getES(), 0u, (USHORT)getSS(),
             (USHORT)getBP())) {
         setCF(0);
-        setAL((UCHAR)ERROR_INVALID_ADDRESS);
+        setAL((UCHAR)GetLastError());
         return;
 #line 554
     }

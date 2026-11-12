@@ -1,0 +1,85 @@
+{
+  "status": "Candidate withdrawn; error-contract evidence retained; redesign and owner approval required before any net-positive mirror implementation",
+  "entries": [
+    {
+      "id": "T483-D0054",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Local CMDINFO capture is retained; declaration/ownership must support terminal cleanup, not a second guest resize result."
+    },
+    {
+      "id": "T483-D0057",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Initial CMDINFO read/release failure currently returns CF1 AX487 before consuming a new request. Guest interprets487 as environment bytes."
+    },
+    {
+      "id": "T483-D0059",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "PIF environment snapshot replaces an old alias; keep its lifetime and coordinate failure reporting with cmdGetNextCmd."
+    },
+    {
+      "id": "T483-D0060",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "After GetNextVDMCommand consumed the request, failing the is-DOS-binary write returns fake resize and may re-request delivery."
+    },
+    {
+      "id": "T483-D0061",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "PIF snapshot/scalar failure may be487 or8; both are currently sent as environment sizes despite not being size negotiation."
+    },
+    {
+      "id": "T483-D0062",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Exec-path acquire or commit failure happens after request delivery; cannot resume COMMAND with CF1 retry."
+    },
+    {
+      "id": "T483-D0063",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Command-buffer acquisition failure occurs before buffer copy but after delivery; must take terminal route."
+    },
+    {
+      "id": "T483-D0064",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Command-buffer commit failure leaves no live lease but task is already consumed; no guest resize retry is valid."
+    },
+    {
+      "id": "T483-D0065",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Environment commit failure must free its pending host allocation without passing error487 as a new required size."
+    },
+    {
+      "id": "T483-D0066",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "Final sync/CMDINFO commit fails after redirection setup; cleanup must retire newly created redirection before terminal shutdown."
+    },
+    {
+      "id": "T483-D0070",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "WOW initial binary-scalar write failure is not environment growth. Keep actual earlier WOW size negotiation unchanged."
+    },
+    {
+      "id": "T483-D0071",
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "explanation": "WOW initial sync-byte write failure also cannot return fake environment size."
+    },
+    {
+      "id": "T483-D0081",
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "explanation": "PIF clears binary type through lease and reports failure in VDMInfo; retain four-string cleanup and let cmdmisc own terminal disposition."
+    }
+  ],
+  "evidence": [
+    "src/mvdm-guest/dos/v86/cmd/command/tcode.asm:557-590: CF1 unconditionally means resize; AX converted to paragraphs",
+    "src/mvdm-host/dos/command/cmdmisc.c: genuine resize before GetNextVDMCommand; subsequent lease failures after delivery must not retry",
+    "src/mvdm-host/dos/command/cmdredir.c: cmdCheckCopyForRedirection owns pipe/thread/temp-file cleanup and frees REDIRCOMPLETE_INFO",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c: PIF snapshot released before return; ErrorCode reports acquisition/allocation failures",
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c: TerminateVDM -> terminate -> host_applClose/host_terminate -> ntvdm_worker_lifecycle_authorize_exit",
+    "src/ntvdm-exe/win32/worker_lifecycle.c: existing exit authorization requests NTSRV and waits for close; no independent new lifecycle needed"
+  ],
+  "recommended_shape": "Use existing original terminal error route; one local failure cleanup for DOS pending environment/new redirection, preserve real CF/AX size retry. Do not add a recoverable delivery state machine. WOW failure uses existing terminal route after its existing environment cleanup.",
+  "remaining_verification": "Exercise the actual current cmdmisc owner with pre/post-delivery acquisition and commit failures; retain successful delivery and real environment resize controls. Historical t231 composition is not acceptance evidence.",
+  "counter_review": {
+    "redirection": "cmdCheckCopyForRedirection frees its argument; clear the local pointer after retiring prior redirection to prevent a later failure from freeing it again. Only newly obtained redirection belongs to CaptureFailed.",
+    "line_corrections": "Pinned OpenNT cmdmisc.c: VDMINFO MyVDMInfo is line31; prior-redirection block closing brace is line145. Corrected new anchors from32/155 to31/145.",
+    "verification_limit": "Source inspection only; no runtime pass claimed."
+  }
+}

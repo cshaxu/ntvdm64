@@ -90,7 +90,7 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
         input.host_command = comspec;
         input.service = MVDM_COMMAND_SERVICE_INTERACTIVE;
     }
-    if (!mvdm_command_capture_create(&input, output)) return ERROR_INVALID_ADDRESS;
+    if (!mvdm_command_capture_create(&input, output)) return GetLastError();
     if (input.service == MVDM_COMMAND_SERVICE_EXECUTE) {
         /* cmdExec validates the host COMSPEC after copying the guest tail.
          * Preserve its rejection even though the existing launcher carries

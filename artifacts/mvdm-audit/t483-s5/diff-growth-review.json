@@ -1,0 +1,176 @@
+{
+  "metric": "git diff --no-index --numstat against fixed OpenNT path; added+removed lines, raw text including #error/#line; HEAD versus working tree; not code net LOC",
+  "rows": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdexec.c",
+      "before_added_removed": [
+        211,
+        79
+      ],
+      "after_added_removed": [
+        211,
+        79
+      ],
+      "delta_diff_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+      "before_added_removed": [
+        256,
+        92
+      ],
+      "after_added_removed": [
+        283,
+        93
+      ],
+      "delta_diff_lines": 28
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+      "before_added_removed": [
+        98,
+        41
+      ],
+      "after_added_removed": [
+        104,
+        41
+      ],
+      "delta_diff_lines": 6
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "before_added_removed": [
+        115,
+        64
+      ],
+      "after_added_removed": [
+        131,
+        68
+      ],
+      "delta_diff_lines": 20
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32.c",
+      "before_added_removed": [
+        50,
+        5
+      ],
+      "after_added_removed": [
+        51,
+        5
+      ],
+      "delta_diff_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+      "before_added_removed": [
+        667,
+        1562
+      ],
+      "after_added_removed": [
+        669,
+        1564
+      ],
+      "delta_diff_lines": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\accessfn.c",
+      "before_added_removed": [
+        0,
+        0
+      ],
+      "after_added_removed": [
+        4,
+        4
+      ],
+      "delta_diff_lines": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\cpu4gen.h",
+      "before_added_removed": [
+        836,
+        209
+      ],
+      "after_added_removed": [
+        839,
+        212
+      ],
+      "delta_diff_lines": 6
+    }
+  ],
+  "before_total": 4285,
+  "after_total": 4358,
+  "authority": "Owner requires approval before each net increase against the fixed original, not net source LOC. No offsetting independent locations. Current positive-delta edits are unapproved candidates, not deliverable.",
+  "state": "All seven positive-growth mirror files restored byte-for-byte to HEAD after cached build exited0. Coupled shared header/vector test restored too. Command capture corrections remain unverified; cmdexec has zero original-relative diff-line growth. No publication or commit.",
+  "design_review": [
+    {
+      "ids": [
+        "D0054",
+        "D0057",
+        "D0059",
+        "D0060",
+        "D0061",
+        "D0062",
+        "D0063",
+        "D0064",
+        "D0065",
+        "D0066",
+        "D0070",
+        "D0071",
+        "D0081"
+      ],
+      "decision": "Redesign failure handling before approval",
+      "reason": "Original guest CF/AX is environment-size negotiation, so error reporting must change; current common cleanup is not yet proved minimal. Keep ownership in cmdmisc, preserve normal resize, no duplicate delivery or cleanup owner."
+    },
+    {
+      "ids": [
+        "D0124",
+        "D0127"
+      ],
+      "decision": "Request approval for bounded failure preservation after counter-review",
+      "reason": "A failing guest extended-error write needs a deterministic error; buffer-release cleanup must not mask it. Do not change MORE_DATA success."
+    },
+    {
+      "ids": [
+        "D0148",
+        "D0158"
+      ],
+      "decision": "Separate two repairs; do not offset their diff growth",
+      "reason": "DTA release error preservation and PSP/allocation error discrimination are independent. Compare status output argument against existing NTSTATUS flow before selecting minimal design."
+    },
+    {
+      "ids": [
+        "D0164"
+      ],
+      "decision": "Withdraw wider generated-header/wrapper rewrite pending boundary decision",
+      "reason": "The selected original wrapper reads a return from a VOID provider, but DPMI ignores it. The broad repair modifies previously exact accessfn.c and original internal dispatch ABI; source defect alone does not prove this expansion is necessary for the local adaptation."
+    },
+    {
+      "ids": [
+        "D0167"
+      ],
+      "decision": "Request approval for original fatal-route reuse",
+      "reason": "Immutable dxboot clears carry immediately after the BOP. Silent allocation failure cannot safely resume. No new lifecycle owner or guest edit."
+    }
+  ],
+  "withdrawn_paths": [
+    "src/mvdm-host/dos/command/cmdmisc.c",
+    "src/mvdm-host/dos/dem/demhndl.c",
+    "src/mvdm-host/dos/dem/demsrch.c",
+    "src/mvdm-host/dpmi32/dpmi32.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+    "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+    "src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h",
+    "test/mvdm-host/cvidc_vector_binding_fixture.c"
+  ],
+  "candidate_build": "build/t483-s5-p1/cached.exit=0; applies only to withdrawn candidate; not proof of corrected final package"
+}

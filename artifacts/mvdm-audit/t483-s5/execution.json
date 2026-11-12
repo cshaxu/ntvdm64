@@ -6,186 +6,233 @@
     {
       "id": "T483-D0041",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "In mvdm_command_native_child.c separate composed host-command storage capacity from DOS guest-tail syntax limit. capture_locations and replace_command must accept every NUL-terminated command accepted by prepare_comspec MAX_PATH contract; keep replacement before activate.",
       "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
-      "verification": "Use COMSPEC length 20 + suffix 4 + legal tail 110 = 134 chars; both initial capture and replacement succeed. Exercise exact MAX_PATH-1 acceptance and MAX_PATH rejection, then nested launch and cleanup."
+      "verification": "Use COMSPEC length 20 + suffix 4 + legal tail 110 = 134 chars; both initial capture and replacement succeed. Exercise exact MAX_PATH-1 acceptance and MAX_PATH rejection, then nested launch and cleanup.",
+      "evidence": "checkpoint-delivery.json",
+      "explanation": "Initial host capture had128-byte capacity although prepare_comspec accepts MAX_PATH. A134-character composed command was rejected after successful composition. Use MAX_PATH host storage, keep guest tail124 independent."
     },
     {
       "id": "T483-D0042",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Restore original guest-tail CR requirement at indices 0..123 in copy_guest_command; reject early NUL without CR and CR at 124..126 as BAD_FORMAT. Keep address failures distinct and retain CR-to-NUL write. Coordinate error propagation at cmdexec capture calls; do not change composed-host capacity.",
       "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
-      "verification": "Boundary cases CR at 0/123/124/126, early NUL, missing CR, inaccessible memory; compare original syntax result/error and no launch on failure. Cached build and COMMAND external-execution regression."
+      "verification": "Boundary cases CR at 0/123/124/126, early NUL, missing CR, inaccessible memory; compare original syntax result/error and no launch on failure. Cached build and COMMAND external-execution regression.",
+      "evidence": "checkpoint-delivery.json",
+      "explanation": "Original cmdExec scans indices0..123 for CR. Previous helper accepted CR124..126 or NUL without CR. Restore124-byte scan, with BAD_FORMAT when no CR; scan past NUL if later CR exists, as original does."
     },
     {
       "id": "T483-D0043",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "Restore original guest-tail CR requirement at indices 0..123 in copy_guest_command; reject early NUL without CR and CR at 124..126 as BAD_FORMAT. Keep address failures distinct and retain CR-to-NUL write. Coordinate error propagation at cmdexec capture calls; do not change composed-host capacity.",
       "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
-      "verification": "Boundary cases CR at 0/123/124/126, early NUL, missing CR, inaccessible memory; compare original syntax result/error and no launch on failure. Cached build and COMMAND external-execution regression."
+      "verification": "Boundary cases CR at 0/123/124/126, early NUL, missing CR, inaccessible memory; compare original syntax result/error and no launch on failure. Cached build and COMMAND external-execution regression.",
+      "evidence": "checkpoint-delivery.json",
+      "explanation": "Capture failure was always reported as INVALID_ADDRESS. Preserve BAD_FORMAT versus INVALID_ADDRESS through both live COMMAND and saved VM callers; retain existing carry/AL contract."
     },
     {
       "id": "T483-D0048",
       "path": "src/mvdm-host/dos/command/cmdexec.c",
-      "status": "pending",
+      "status": "delivered P1",
       "plan": "In mvdm_command_native_child.c separate composed host-command storage capacity from DOS guest-tail syntax limit. capture_locations and replace_command must accept every NUL-terminated command accepted by prepare_comspec MAX_PATH contract; keep replacement before activate.",
       "related_callers": "cmdexec.c; command/source/mvdm_command_native_child.c; command/source/mvdm_command_launch.c",
-      "verification": "Use COMSPEC length 20 + suffix 4 + legal tail 110 = 134 chars; both initial capture and replacement succeed. Exercise exact MAX_PATH-1 acceptance and MAX_PATH rejection, then nested launch and cleanup."
+      "verification": "Use COMSPEC length 20 + suffix 4 + legal tail 110 = 134 chars; both initial capture and replacement succeed. Exercise exact MAX_PATH-1 acceptance and MAX_PATH rejection, then nested launch and cleanup.",
+      "evidence": "checkpoint-delivery.json",
+      "explanation": "replace_command uses the same corrected MAX_PATH host buffer. Example259 characters plus NUL now fit;260 characters must fail without replacing old command."
     },
     {
       "id": "T483-D0054",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Local CMDINFO capture is retained; declaration/ownership must support terminal cleanup, not a second guest resize result."
     },
     {
       "id": "T483-D0057",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Initial CMDINFO read/release failure currently returns CF1 AX487 before consuming a new request. Guest interprets487 as environment bytes."
     },
     {
       "id": "T483-D0059",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "PIF environment snapshot replaces an old alias; keep its lifetime and coordinate failure reporting with cmdGetNextCmd."
     },
     {
       "id": "T483-D0060",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "After GetNextVDMCommand consumed the request, failing the is-DOS-binary write returns fake resize and may re-request delivery."
     },
     {
       "id": "T483-D0061",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "PIF snapshot/scalar failure may be487 or8; both are currently sent as environment sizes despite not being size negotiation."
     },
     {
       "id": "T483-D0062",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Exec-path acquire or commit failure happens after request delivery; cannot resume COMMAND with CF1 retry."
     },
     {
       "id": "T483-D0063",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Command-buffer acquisition failure occurs before buffer copy but after delivery; must take terminal route."
     },
     {
       "id": "T483-D0064",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Command-buffer commit failure leaves no live lease but task is already consumed; no guest resize retry is valid."
     },
     {
       "id": "T483-D0065",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Environment commit failure must free its pending host allocation without passing error487 as a new required size."
     },
     {
       "id": "T483-D0066",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Final sync/CMDINFO commit fails after redirection setup; cleanup must retire newly created redirection before terminal shutdown."
     },
     {
       "id": "T483-D0070",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "WOW initial binary-scalar write failure is not environment growth. Keep actual earlier WOW size negotiation unchanged."
     },
     {
       "id": "T483-D0071",
       "path": "src/mvdm-host/dos/command/cmdmisc.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Preserve snapshots, scoped commits and original successful dispatch. Replace added CF=1/AX=Win32-error returns with the existing host error/lifecycle route after explicitly accounting for consumed requests, environment and redirection ownership. Reserve carry/AX for genuine environment-size retry; coordinate cmdpif and cmdenv.",
       "related_callers": "cmdGetNextCmd/GetWowKernelCmdLine; GetNextVDMCommand; cmdCheckForPIF; cmdCheckStandardHandles; guest tcode.asm environment-resize loop",
-      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup."
+      "verification": "Exercise each acquire/commit/PIF failure before and after request consumption; verify no resize from an error code, no duplicate delivery or leaked redirection; preserve genuine environment-growth retry and successful DOS/WOW startup.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "WOW initial sync-byte write failure also cannot return fake environment size."
     },
     {
       "id": "T483-D0081",
       "path": "src/mvdm-host/dos/command/cmdpif.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Keep the zero binary-type scalar write and four-string cleanup. Repair its error delivery together with cmdmisc cmdGetNextCmd: never return a Win32 error in the guest environment-resize AX channel. This is one coupled issue, not an independent second repair.",
       "related_callers": "cmdCheckForPIF wrapper -> cmdGetNextCmd -> guest tcode.asm resize loop",
-      "verification": "Inject scalar write failure; verify cleanup once, no fabricated resize/retry, no duplicate request consumption; normal PIF remains unchanged."
+      "verification": "Inject scalar write failure; verify cleanup once, no fabricated resize/retry, no duplicate request consumption; normal PIF remains unchanged.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "PIF clears binary type through lease and reports failure in VDMInfo; retain four-string cleanup and let cmdmisc own terminal disposition.",
+      "withdrawal_note": "No cmdpif edit was needed in the withdrawn draft; its receiving cmdmisc correction was withdrawn, so this coupled entry is not implemented."
     },
     {
       "id": "T483-D0124",
       "path": "src/mvdm-host/dos/dem/demhndl.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Keep four original packed extended-error fields. Establish an explicit guest-memory failure error before entering readFailureExit when helper acquire/commit fails; preserve it across cleanup. Both rows describe one coupled repair.",
       "related_callers": "demRead named-pipe branch -> extended-error helper -> readFailureExit -> demClientError; VrReadNamedPipe",
-      "verification": "Inject extended-error acquire/commit failures and check deterministic DOS error. Verify MORE_DATA follows provider success path and retains returned data; do not classify it as failed partial read."
+      "verification": "Inject extended-error acquire/commit failures and check deterministic DOS error. Verify MORE_DATA follows provider success path and retains returned data; do not classify it as failed partial read.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Extended-error acquire/commit failure did not establish LastError; buffer discard could overwrite it. A stale BROKEN_PIPE would incorrectly turn a failed guest write into successful zero-byte EOF. Set INVALID_ADDRESS at the failed write and preserve the original error across buffer release; retain original packed fields and provider MORE_DATA success."
     },
     {
       "id": "T483-D0127",
       "path": "src/mvdm-host/dos/dem/demhndl.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Keep four original packed extended-error fields. Establish an explicit guest-memory failure error before entering readFailureExit when helper acquire/commit fails; preserve it across cleanup. Both rows describe one coupled repair.",
       "related_callers": "demRead named-pipe branch -> extended-error helper -> readFailureExit -> demClientError; VrReadNamedPipe",
-      "verification": "Inject extended-error acquire/commit failures and check deterministic DOS error. Verify MORE_DATA follows provider success path and retains returned data; do not classify it as failed partial read."
+      "verification": "Inject extended-error acquire/commit failures and check deterministic DOS error. Verify MORE_DATA follows provider success path and retains returned data; do not classify it as failed partial read.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Extended-error acquire/commit failure did not establish LastError; buffer discard could overwrite it. A stale BROKEN_PIPE would incorrectly turn a failed guest write into successful zero-byte EOF. Set INVALID_ADDRESS at the failed write and preserve the original error across buffer release; retain original packed fields and provider MORE_DATA success."
     },
     {
       "id": "T483-D0148",
       "path": "src/mvdm-host/dos/dem/demsrch.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Capture demFileFindFirst failure LastError before lease release; restore it after successful release before original error conversion. Preserve INVALID_ADDRESS on failed commit. Do not add another search-list owner.",
       "related_callers": "demFindFirst -> demFileFindFirst -> guest-location release -> GetLastError/demClientError",
-      "verification": "Inject distinct search error plus cleanup changing LastError, and separate commit failure. Verify DTA mutation visibility and search-entry retirement."
+      "verification": "Inject distinct search error plus cleanup changing LastError, and separate commit failure. Verify DTA mutation visibility and search-entry retirement.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Search failure LastError could be overwritten by DTA lease release: PATH_NOT_FOUND could become an unrelated cleanup error. Save immediately after demFileFindFirst and restore after successful release; failed commit still reports INVALID_ADDRESS."
     },
     {
       "id": "T483-D0158",
       "path": "src/mvdm-host/dos/dem/demsrch.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Distinguish current-PDB read failure from AddFFindEntry allocation failure at SearchFile. Carry an explicit failure reason through the existing call boundary instead of mapping every NULL to STATUS_NO_MEMORY; preserve original allocation result.",
       "related_callers": "AddFFindEntry -> SearchFile; current_pdb_location read",
-      "verification": "Inject unavailable PDB versus allocation exhaustion and verify distinct appropriate errors, no inserted entry, unchanged success ownership."
+      "verification": "Inject unavailable PDB versus allocation exhaustion and verify distinct appropriate errors, no inserted entry, unchanged success ownership.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "AddFFindEntry NULL conflated unreadable current PSP with allocation exhaustion. Pass the failure NTSTATUS through its sole caller, retain STATUS_NO_MEMORY for allocation failures and use STATUS_ACCESS_VIOLATION for the guest read failure. Existing SearchFile finally cleanup and NTSTATUS conversion remain the owner."
     },
     {
       "id": "T483-D0164",
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Remove diagnostic-only termination include with the three trace calls. Unify c_setLDT_BASE_LIMIT declarations with selected c_reg.c VOID definition, using an existing appropriate shared declaration rather than duplicating an int contract.",
       "related_callers": "dpmi32.c; c_reg.c; cpu4gen declaration; diagnostic consumers",
-      "verification": "Compile actual setter callers and verify ABI declarations agree; do not invent ignored-return failure behavior for a VOID setter."
+      "verification": "Compile actual setter callers and verify ABI declarations agree; do not invent ignored-return failure behavior for a VOID setter.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Production map binds DPMI host setter to accessfn.obj, through Cpu.Private to c_reg.obj. The CCPU setter returns VOID while wrapper and table declared IBOOL and read a nonexistent result. Align both generated table views/provider declarations and wrapper to void; share host facade declarations with DPMI; existing real-library vector fixture asserts selector/base/limit after wrapper calls. Diagnostic traces already absent before this batch."
     },
     {
       "id": "T483-D0167",
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "status": "pending",
+      "status": "candidate withdrawn; redesign/approval pending",
       "plan": "Keep separate GDT copy/zeroed process-LDT allocation. Replace allocation-failure clear-LDTR-and-return with the established host terminal failure route: unchanged dxboot continues and clears carry after BOP, so a silent return is insufficient. Trace ownership before selecting cleanup.",
       "related_callers": "DpmiPassTableAddress -> shared XMS allocator -> guest dxboot post-BOP path; host lifecycle/error owner",
-      "verification": "Inject allocation failure and prove guest cannot continue with invalid descriptors; validate normal initial publication and repeated entry."
+      "verification": "Inject allocation failure and prove guest cannot continue with invalid descriptors; validate normal initial publication and repeated entry.",
+      "evidence": "diff-growth-review.json",
+      "explanation": "Descriptor shadow allocation failed by clearing LDTR and returning. Immutable dxboot.asm executes clc immediately after PassTableAddress, so guest cannot observe that failure and continues with invalid descriptors. Use the existing DPMI required-memory error/TerminateVDM route, as in dpmiint.c; retain successful allocation/publication and NTSRV lifecycle authority."
     },
     {
       "id": "T483-D0337",
@@ -1659,5 +1706,6 @@
       "related_callers": "DestroyTask and WOW scheduler enter/exit; cleanup object flags; lifecycle client_context; task-order fixtures",
       "verification": "For remediation: all actual header consumer compile contexts; cleanup flags metadata; task lock/ownership/event teardown; guest client-context handoff and terminal callback cleanup. No production silent missing-provider success."
     }
-  ]
+  ],
+  "restart": "Owner-directed clean checkpoint P1, then resume S5 in frozen order; prior approval required for each positive original-relative mirror diff. Four delivered;203 remaining."
 }

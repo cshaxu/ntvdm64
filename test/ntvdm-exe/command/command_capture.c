@@ -82,6 +82,7 @@ int main(void)
     input.command_offset=100;memcpy(memory+100,"x\r",2);
     input.environment_offset=65535;
     CHECK(!mvdm_command_capture_create(&input,&failed));CHECK(!failed && !leases);
+    memory[101]='\r';
     input.environment_offset=400;memcpy(memory+400,"\0",2);
     input.standard_offset=65530;
     CHECK(!mvdm_command_capture_create(&input,&failed));CHECK(!failed && !leases);
@@ -98,13 +99,21 @@ int main(void)
     memcpy(vm_memory+100,"vmcmd\r",6);memcpy(vm_memory+400,"VM=frame\0",10);
     memcpy(vm_memory+800,handles,sizeof(handles));frame[14]=25;
     memcpy(memory+1200,frame,sizeof(frame));
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(!mvdm_vm_command_capture(8,1200,0x80000000u,1400,&b));
     CHECK(mvdm_command_capture_read(b,&bv));
     CHECK(!strcmp(bv.command,"vmcmd") && !strcmp(bv.environment,"VM=frame"));
     CHECK(bv.service==MVDM_COMMAND_SERVICE_NONE && bv.default_drive==2);
     CHECK(!strcmp(bv.directory,"C:\\VM\\A"));
     mvdm_command_capture_destroy(b);
+    /* The saved-VM caller must preserve syntax failure, not relabel it as
+     * an invalid address. The live caller observes the same capture error. */
+    memset(vm_memory + 100, 'x', 128);
+    CHECK(mvdm_vm_command_capture(8,1200,0x80000000u,1400,&failed)==ERROR_BAD_FORMAT);
+    CHECK(!failed && !leases);
+    memcpy(vm_memory + 100, "vmcmd\r", 6);
     frame[7]=0x102;memcpy(memory+1200,frame,sizeof(frame));
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(!mvdm_vm_command_capture(8,1200,0x80000000u,1400,&b));
     CHECK(mvdm_command_capture_read(b,&bv));
     CHECK(bv.service==MVDM_COMMAND_SERVICE_EXECUTE && !strcmp(bv.command,"vmcmd"));
@@ -130,31 +139,40 @@ int main(void)
         CHECK(prepared.guard==0x5a);
         CHECK(SetEnvironmentVariableA("COMSPEC",comspec));
     }
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(!mvdm_vm_command_capture(10,1200,0x80000000u,1400,&b));
     CHECK(mvdm_command_capture_read(b,&bv));
     CHECK(bv.service==MVDM_COMMAND_SERVICE_INTERACTIVE && !strcmp(bv.command,comspec));
     mvdm_command_capture_destroy(b);
     CHECK(SetEnvironmentVariableA("COMSPEC",NULL));
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(mvdm_vm_command_capture(10,1200,0x80000000u,1400,&failed)==ERROR_BAD_ENVIRONMENT);
     CHECK(!failed && !leases);
     CHECK(SetEnvironmentVariableA("COMSPEC",comspec));
     CHECK(SetEnvironmentVariableA("COMSPEC",NULL));
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(mvdm_vm_command_capture(8,1200,0x80000000u,1400,&failed)==ERROR_BAD_ENVIRONMENT);
     CHECK(!failed && !leases);
     frame[7]=2;memcpy(memory+1200,frame,sizeof(frame));
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(!mvdm_vm_command_capture(8,1200,0x80000000u,1400,&b));
     mvdm_command_capture_destroy(b);
     CHECK(SetEnvironmentVariableA("COMSPEC",comspec));
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(mvdm_vm_command_capture(9,1200,0x80000000u,1400,&failed)==ERROR_INVALID_FUNCTION);
     CHECK(!failed && !leases);
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(mvdm_vm_command_capture(8,65530,0x80000000u,1400,&failed)==ERROR_INVALID_ADDRESS);
     CHECK(!failed && !leases);
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(mvdm_vm_command_capture(8,1200,0x80000000u,65530,&failed)==ERROR_INVALID_ADDRESS);
     CHECK(!failed && !leases);
     memset(memory+1400,'X',64);
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(mvdm_vm_command_capture(8,1200,0x80000000u,1400,&failed)==ERROR_BAD_PATHNAME);
     CHECK(!failed && !leases);
     memory[1400]=0;
+    vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
     CHECK(!mvdm_vm_command_capture(8,1200,0x80000000u,1400,&b));
     CHECK(mvdm_command_capture_read(b,&bv));
     CHECK(!strcmp(bv.directory,"C:\\"));
@@ -191,6 +209,7 @@ int main(void)
             CHECK(mvdm_vm_command_service(1600, 20, &service) == ERROR_INVALID_ADDRESS && !leases);
             fail_release = 0;
         }
+        vm_memory[105] = '\r';
         CHECK(!mvdm_vm_command_snapshot(8, 1600, sizeof(descriptor), &b, &text));
         CHECK(b && text && !leases);
         memset(memory + 2000, 0xff, sizeof(screen));
@@ -210,6 +229,7 @@ int main(void)
             if (scenario == 3) descriptor[0] = 65530;
             if (scenario == 4) descriptor[2] = 65530;
             memcpy(memory + 1600, descriptor, sizeof(descriptor));
+            vm_memory[105] = '\r'; /* New request: prior capture consumed the CR. */
             error = mvdm_vm_command_snapshot(8, 1600,
                 scenario == 5 ? 19 : sizeof(descriptor), &b, &text);
             CHECK(error == (DWORD)(scenario >= 2 && scenario <= 4 ?
@@ -222,6 +242,65 @@ int main(void)
         CHECK(!b && !text && !leases);
     }
     mvdm_command_capture_destroy(a);mvdm_command_native_child_finish();
+
+    {
+        static const unsigned endings[] = {0, 123, 124, 126};
+        static const unsigned lengths[] = {134, MAX_PATH - 1, MAX_PATH};
+        unsigned i, length;
+        char command[MAX_PATH + 1];
+        mvdm_command_capture_input boundary = {0};
+        boundary.command_offset = 100;
+        boundary.environment_offset = 400;
+        boundary.standard_offset = 800;
+        memset(memory + 400, 0, 2);
+        memcpy(memory + 800, handles, sizeof(handles));
+        for (i = 0; i < sizeof(endings)/sizeof(endings[0]); ++i) {
+            memset(memory + 100, 'x', 128);
+            memory[100 + endings[i]] = '\r';
+            if (endings[i] < 124) {
+                CHECK(mvdm_command_capture_create(&boundary, &b));
+                CHECK(!memory[100 + endings[i]] && !leases);
+                mvdm_command_capture_destroy(b);
+            } else {
+                CHECK(!mvdm_command_capture_create(&boundary, &failed));
+                CHECK(GetLastError() == ERROR_BAD_FORMAT && !failed && !leases);
+                CHECK(memory[100 + endings[i]] == '\r');
+            }
+        }
+        memset(memory + 100, 0, 128);
+        CHECK(!mvdm_command_capture_create(&boundary, &failed));
+        CHECK(GetLastError() == ERROR_BAD_FORMAT && !failed && !leases);
+        memory[110] = '\r'; /* Original scans past embedded NUL to find CR. */
+        CHECK(mvdm_command_capture_create(&boundary, &b));
+        CHECK(!memory[110] && !leases);
+        mvdm_command_capture_destroy(b);
+        fail_acquire = 1;
+        CHECK(!mvdm_command_capture_create(&boundary, &failed));
+        CHECK(GetLastError() == ERROR_INVALID_ADDRESS && !failed && !leases);
+        fail_acquire = 0;
+        boundary.host_command = command;
+        for (i = 0; i < sizeof(lengths)/sizeof(lengths[0]); ++i) {
+            length = lengths[i];
+            memset(command, 'x', length); command[length] = 0;
+            if (length < MAX_PATH) {
+                CHECK(mvdm_command_capture_create(&boundary, &b));
+                CHECK(mvdm_command_capture_read(b, &bv) && strlen(bv.command) == length);
+                mvdm_command_capture_destroy(b);
+                CHECK(mvdm_command_native_child_capture_host_command(command,0,400,0,800));
+                CHECK(mvdm_command_native_child_replace_command(command));
+                CHECK(strlen(mvdm_command_native_child_command()) == length);
+                mvdm_command_native_child_finish();
+            } else {
+                CHECK(!mvdm_command_capture_create(&boundary, &failed) && !failed);
+                CHECK(!mvdm_command_native_child_capture_host_command(command,0,400,0,800));
+                CHECK(mvdm_command_native_child_capture_host_command("seed",0,400,0,800));
+                CHECK(!mvdm_command_native_child_replace_command(command));
+                CHECK(!strcmp(mvdm_command_native_child_command(), "seed"));
+                mvdm_command_native_child_finish();
+            }
+        }
+    }
+
     CHECK(!mvdm_command_native_child_command());
     teardown(teardown_context);CHECK(!owner.mvdm_command_native_child);
     printf("PASS %u independent command capture assertions\n",checks);return 0;
