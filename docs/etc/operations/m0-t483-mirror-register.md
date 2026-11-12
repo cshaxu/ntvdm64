@@ -110,7 +110,8 @@ review does not mean restoring private NT host implementation indiscriminately.
 ## Current execution order and historical evidence
 
 Owner clarification after per-file classification: future remediation follows the
-new register in fixed file/line order. `audit_id` values T483-D0001 through
+new register. The subsequent owner-approved category sequence below takes
+precedence across categories; fixed file/line order remains within each category. `audit_id` values T483-D0001 through
 T483-D3042 identify its current entries. Preserve these identifiers during repair;
 do not renumber completed/removed entries. Original IDs are provenance aliases,
 not execution ordering or additional repair work. Snapshot line coordinates must
@@ -127,3 +128,57 @@ The categorized result is in the [classification summary](../../../artifacts/mvd
 The [integrity check](../../../artifacts/mvdm-audit/t483-s1/register-integrity.json)
 records unique identifiers, ordering and required-field coverage. This is a
 register check, not build/runtime acceptance or functional repair completion.
+
+## Owner-approved S2–S6 remediation sequence
+
+After S1 closure, the owner requests one S for each non-retain category in the
+reported category order. This supersedes the original proposal's S2–S5 family
+sequence and the suggested compat-first S2. It schedules work inside T483;
+it does not reopen S1 or activate several S packets. Current records admission.
+
+| S | Category | Register entries | Scope and exit condition |
+| --- | --- | ---: | --- |
+| S2 | Restore original | 76 | Apply registered coupled restorations of original code/structure; preserve proven adaptations and verify the affected ABI/call contracts. |
+| S3 | Delete redundant local code | 120 | Remove registered redundant bodies, wrappers and diagnostics with callers/declarations/build references; do not confuse entries with whole files. |
+| S4 | Minimize/consolidate | 117 | Consolidate duplicate ownership, selectors and declarations; preserve behavior without moving equal complexity into another shim. |
+| S5 | Correct | 207 | Correct registered semantic/contract and diagnostic-line deviations with the specified positive/negative validation. These are not 207 reproduced runtime bugs. |
+| S6 | Pending evidence | 755 | Obtain each named missing proof, then record retain/restore/delete/minimize/correct disposition. Implement justified resolutions within the admitted packet; unresolved evidence or subjective boundary choices must remain explicit and need owner disposition before closure. |
+
+### Exact allocation and execution
+
+The frozen S1 register is the input, with stable T483-D identifiers. Match the
+`decision` column as follows: S2 = `restore-original`, `restore`, `restore original`;
+S3 = `delete`; S4 = `minimize`, `simplify`; S5 = `correct`; S6 =
+`pending-evidence`, `pending`, `pending evidence`. This assigns every one of the
+1275 non-retain entries once; the 1767 retain entries get no separate repair S.
+Keep the S1 snapshot unchanged and record execution against its identifiers.
+
+Within each S, filter the existing file/line-ordered register without reordering
+or renumbering. Coupled entries describing one change are one implementation
+unit, with every covered ID updated. Read dependencies before editing; never
+apply half a coupled change just to satisfy category order. If a safe atomic
+change crosses categories, record all affected IDs and the dependency before
+implementation; a material scope change requires owner approval. Later S work
+must not repeat an already delivered change.
+
+The 365 completed format restorations and eight completed file deletions remain
+S1 results, not newly scheduled repairs. Retained boundaries may be read as
+constraints but are not reopened without new evidence. Missing original bodies
+are not automatically bugs: modern Win32 API ownership may be the correct
+boundary, and genuine architectural choices go to the owner.
+
+### Per-S verification and handoff
+
+Use one agent for initial implementation/review and a separate counter-review
+pass. Check current source identities against S1 before using old evidence.
+Report assigned/completed/remaining entry counts, coupled change count, affected
+files, mirror/local footprint and any reclassification with its evidence.
+Each production-changing S requires the applicable focused regressions, cached
+build, Full gates, coherent 11-image publication to assets/release and installed
+system32, manifest hash checks, governance checks, commit and push. Apply existing
+owner-authorized identical-output test exemptions only with evidence. No guest
+editing/rebuild or winnt.zip changes are authorized.
+
+Compat-wide and eleven-component minimization remain later T483 scope; they are
+not cancelled or claimed completed by S2–S6, and receive subsequent S planning.
+Do not put these S packets into the project T queue or duplicate them in TODO.

@@ -4,8 +4,12 @@
 
 **No active M/T/S packet.** M0 T483 remains open; S1 is closed.
 
-The owner authorized S1 closure after audit and verification. S2 has not been
-admitted; no functional remediation is authorized by this closure.
+The owner authorized S1 closure and has now approved the internal T483 sequence:
+S2 restore original (76), S3 delete (120), S4 minimize/consolidate (117),
+S5 correct (207), S6 resolve missing evidence (755). See the
+[category plan](../etc/operations/m0-t483-mirror-register.md#owner-approved-s2s6-remediation-sequence).
+These are scheduled packets; S2 implementation has not started or been activated.
+The previously suggested compat-first S2 is superseded.
 
 ## Latest S Closure
 

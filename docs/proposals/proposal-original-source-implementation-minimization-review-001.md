@@ -104,6 +104,13 @@ defect or authorize deletion of declarations needed by selected code.
 
 ## S decomposition
 
+The original family-based sequence below is superseded for S2–S6 by the owner-approved
+[category remediation plan](../etc/operations/m0-t483-mirror-register.md#owner-approved-s2s6-remediation-sequence).
+S1 closed as the explicitly narrowed mirror-diff audit, not the project-wide
+implementation audit originally described below. Retain the original scope and
+acceptance obligations as later coverage; do not execute the old numbering in
+parallel with the new sequence.
+
 | S | Complete scope | Exit requirement |
 | --- | --- | --- |
 | S1 | Freeze the project-wide implementation/mirror/build inventory, existing audits and prior implementation and mirror-review results; independently map each local semantic body to original owners or a proved product-only requirement. | Every owned production source is covered; each finding records prior and independent decisions, caller, original alternative, necessity evidence and disposition. Group work by original owner. |
