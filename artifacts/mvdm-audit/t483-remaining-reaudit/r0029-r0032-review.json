@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "T483-R0029",
+      "added": 10,
+      "removed": 2,
+      "status": "pending-decision",
+      "finding": "Capture activation replaces incoming pointer assignments. Current detached child consumes captured data. Full original capture/consumer chain has not been disproved; decide together with prior capture backlog."
+    },
+    {
+      "id": "T483-R0030",
+      "added": 1,
+      "removed": 1,
+      "status": "restored-pending-delivery",
+      "finding": "Original thread cast restored. Macro casts back to void cdecl bridge; source_name is diagnostic text only. Thread entry dispatch unchanged."
+    },
+    {
+      "id": "T483-R0031",
+      "added": 1,
+      "removed": 0,
+      "status": "pending-decision",
+      "finding": "Abort clears active capture after CreateThread failure. Removing only abort leaves next capture rejected. This adapter dependency is not proof against complete original restoration."
+    },
+    {
+      "id": "T483-R0032",
+      "added": 2,
+      "removed": 2,
+      "status": "restored-pending-delivery",
+      "finding": "Original COMSPEC query and length check restored. Helper with NULL tail performs same ANSI query/check; remaining captured environment path untouched."
+    }
+  ],
+  "count_basis": "Current versus pinned original logical code lines; #line excluded; R0029 includes its two capture declarations. Extra blank-only deltas outside these point bodies are not assigned here.",
+  "before_sha256": "33556281061d568788c1ccc315fafeefa0bb13f7479b10f9b6b5c9fae7121600",
+  "after_sha256": "2dea8d25f3c9ef13166ba1b71ab430ab684a179e5847f7a1912710f08b2d1e2b",
+  "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+  "mirror_diff_delta": -6,
+  "line_proof": "Original logical447 and508 verified; all existing #error/#line directives unchanged.",
+  "counter_review": "No full-original failure inferred from current adapter dependencies. Cast changes stringified diagnostic name, not dispatch. COMSPEC return length not used after restored condition.",
+  "verification": "Source-only this batch; build/runtime and delivery pending."
+}

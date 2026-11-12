@@ -1,0 +1,42 @@
+{
+  "review_ids": [
+    "T483-R0002",
+    "T483-R0003"
+  ],
+  "predecessor_ids": [
+    "T483-D0002",
+    "T483-D0003"
+  ],
+  "status": "restored original locally; focused tests passed; batch full build/publication pending",
+  "prior_rationale": "Package root must differ from actual host Windows root. That is true for media lookup but not sufficient to justify this caller. Old record classified this as necessary package-directory binding.",
+  "actual_call_chain": "CMDInit stores only RootDir[0] into cmdHomeDirectory (initially C:\\). Its only reader cmdGetNextCmd calls SetCurrentDirectory(cmdHomeDirectory) after a nonfirst/nonrepeat command to release the prior directory. It does not locate guest files here; cmdSetDirectories separately applies task current directory.",
+  "original_failure_evidence": "None found for this original safe-root use. Source closure and live directory-release probe support original behavior. No claim of proving all package directory adaptations unnecessary.",
+  "change": "Restore entire cmd.c byte-for-byte: remove firmware include and #line scaffolding, restore GetSystemDirectory. Do not alter other package-path consumers.",
+  "before_sha256": "ecd43471f699e3172f50b08a871d94256841651799e37fe1e0eb0454e5de5253",
+  "after_sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262",
+  "original_sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262",
+  "original_line_proof": "Whole-file byte identity; all original conditional/source/logical lines restored.",
+  "tests": [
+    {
+      "case": "existing command_initialization_fixture.c linked to original CMDInit/current cmddata with actual product compiler flags",
+      "exit": 0
+    },
+    {
+      "case": "real Win32 current-directory release: deletion blocked while current, succeeds after SetCurrentDirectory of original CMDInit safe root",
+      "exit": 0
+    }
+  ],
+  "test_root": "build/t483-remaining-reaudit/r0002",
+  "probe_limitation": "Native isolated unit and directory lifecycle evidence, not complete guest integration. Initial probe printf link failed under project CRT flags; use puts fixed the probe; no production failure hidden.",
+  "dual_role_counter_review": "Original helper does not retain a path or load files; it copies one drive letter. Host system drive provides a valid safe root. Changing the helper back removes its custom declaration dependency rather than hiding that declaration in another header. Other callers of NtvdmGetSystemDirectoryA remain unchanged.",
+  "batch_modified_implementation_files": 1,
+  "mirror_diff_before": [
+    4,
+    1
+  ],
+  "mirror_diff_after": [
+    0,
+    0
+  ],
+  "mirror_diff_delta": -5
+}

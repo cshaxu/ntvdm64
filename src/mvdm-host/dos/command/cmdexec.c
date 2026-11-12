@@ -439,7 +439,7 @@ VOID cmdCreateProcess ( VOID )
      *  16-Jan-1993 Jonle
      */
 
-    RtlZeroMemory(&Env_A, sizeof(Env_A));
+    Env_A.Buffer = NULL;
 
     /* DIVERGENCE(MVDM-HOST-DIV-196): share the original command/environment
      * preparation with saved-VM requests. Only owned text changes here;
@@ -546,7 +546,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 #line 445
     if((hThread = CreateThread (NULL,
                      0,
-                     cmdCreateProcess,
+                     (LPTHREAD_START_ROUTINE)cmdCreateProcess,
                      NULL,
                      0,
                      &dwThreadId)) == FALSE) {
@@ -609,9 +609,9 @@ VOID cmdExecComspec32 (VOID)
     DWORD dwRet;
     PCHAR   pEnv;
 
-    dwRet = mvdm_command_prepare_comspec(Buffer, NULL);
+    dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
 
-    if (dwRet != ERROR_SUCCESS){
+    if (dwRet == 0 || dwRet >= MAX_PATH){
         setCF(0);
 	setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
 	return;
@@ -693,7 +693,7 @@ VOID cmdExec (VOID)
             mvdm_command_native_child_abort();
 #line 571
             setCF(0);
-            setAL((UCHAR)dwRet);
+            setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
         }
 

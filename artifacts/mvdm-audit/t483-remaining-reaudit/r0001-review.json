@@ -1,0 +1,110 @@
+{
+  "review_id": "T483-R0001",
+  "predecessor_id": "T483-D0001",
+  "status": "completed: owner approved retaining omitted include",
+  "problem": "Removed unused ntdbg.h include from dbg.c after its whole body had historically been suppressed by _NTDBG_. This avoids a private debugging declaration dependency unrelated to selected RaiseException calls.",
+  "historical_evidence": "s13-r1227-ntdbg-unselected.json establishes inactive guard and removal, but by itself does not prove that enabling original header fails. This review adds actual compile controls. No original runtime bug is alleged.",
+  "baseline_current_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+  "original_header_sha256": "a5b4a6018a953d66d0e73008ceed9939e4f88917fca9250f6dbf780dcf1c332a",
+  "original_header_lines": 4189,
+  "restoration_scope": "Only replace the blank original line15 with #include <ntdbg.h>, supplying exact pinned original header in build-only shadow. No _NTDBG_ suppression. Additional variant includes already-existing ntlpcapi.h first.",
+  "tests": [
+    {
+      "context": "product",
+      "case": "baseline",
+      "exit_code": 0,
+      "command_sha256": "a3f569ff352c3a36f579a07d1d49593c7c69f5a944f77baf94360430089c856e",
+      "log_sha256": "90670773d49081e3a50415647e91ddc5efd92ad9cd8746d8d1acbcaf7af1dfa5",
+      "first_errors": []
+    },
+    {
+      "context": "product",
+      "case": "restore",
+      "exit_code": 2,
+      "command_sha256": "a3f569ff352c3a36f579a07d1d49593c7c69f5a944f77baf94360430089c856e",
+      "log_sha256": "822763d1a9d3540bc5b016082dc7e181a16528c1c706a300e3b128212de3c459",
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(200): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(212): error C2059: syntax error: '}'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(237): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(241): error C2059: syntax error: '}'"
+      ]
+    },
+    {
+      "context": "product",
+      "case": "with-lpc",
+      "exit_code": 2,
+      "command_sha256": "a3f569ff352c3a36f579a07d1d49593c7c69f5a944f77baf94360430089c856e",
+      "log_sha256": "ee6f9de67494053bb5e318c48bdabde83617d1fe873cf03fcb331147aaf38a63",
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2146: syntax error: missing ')' before identifier 'AppClientId'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2061: syntax error: identifier 'AppClientId'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2059: syntax error: ','"
+      ]
+    },
+    {
+      "context": "reference",
+      "case": "baseline",
+      "exit_code": 0,
+      "command_sha256": "a3f569ff352c3a36f579a07d1d49593c7c69f5a944f77baf94360430089c856e",
+      "log_sha256": "90670773d49081e3a50415647e91ddc5efd92ad9cd8746d8d1acbcaf7af1dfa5",
+      "first_errors": []
+    },
+    {
+      "context": "reference",
+      "case": "restore",
+      "exit_code": 2,
+      "command_sha256": "a3f569ff352c3a36f579a07d1d49593c7c69f5a944f77baf94360430089c856e",
+      "log_sha256": "822763d1a9d3540bc5b016082dc7e181a16528c1c706a300e3b128212de3c459",
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(200): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(212): error C2059: syntax error: '}'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(237): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(241): error C2059: syntax error: '}'"
+      ]
+    },
+    {
+      "context": "reference",
+      "case": "with-lpc",
+      "exit_code": 2,
+      "command_sha256": "a3f569ff352c3a36f579a07d1d49593c7c69f5a944f77baf94360430089c856e",
+      "log_sha256": "ee6f9de67494053bb5e318c48bdabde83617d1fe873cf03fcb331147aaf38a63",
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2146: syntax error: missing ')' before identifier 'AppClientId'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2061: syntax error: identifier 'AppClientId'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-remaining-reaudit\\r0001\\ntdbg.h(374): error C2059: syntax error: ','"
+      ]
+    }
+  ],
+  "actual_consumer": "dbg.c uses RaiseException at lines169 and732, not the ntdbg DbgUi/DbgSs/DbgKm, DBGKD/DBGKM/DBGUI structures or conversion helpers; current baseline compiles in both product and reference-x86 contexts.",
+  "counter_review": "Failures prove direct restoration is not compatible with current header environment, not that original NT code is faulty or that a broader original dependency closure can never compile. Existing LPC declarations remove PORT_MESSAGE errors but private declarations still fail. Restoring the full closure has not been proved necessary for this caller.",
+  "options": [
+    {
+      "option": "retain existing omitted include",
+      "recommended": true,
+      "mirror_diff_delta": 0,
+      "autonomous_code_delta": 0,
+      "requires_owner_approval": true
+    },
+    {
+      "option": "investigate and restore full original declaration closure",
+      "recommended": false,
+      "mirror_diff_delta": "not established",
+      "cost": "Original ntdbg.h has4189 lines plus prerequisite declarations; no selected use established. Requires explicit owner direction before expanding this point."
+    },
+    {
+      "option": "restore include but suppress header guard or add empty shim",
+      "recommended": false,
+      "reason": "Artificially moves the same omission into build/compat; no functional benefit or actual original restoration."
+    }
+  ],
+  "limits": [
+    "Compile-only source-boundary evidence; no runtime test or full product delivery performed because product files unchanged.",
+    "Probe removes cmake/ccache wrapper and redirects input/output to build shadow; actual cl options/forced headers and include paths retained, with shadow include added.",
+    "First preparation assumed CRLF and stopped before compilation; corrected to actual LF without modifying product source.",
+    "No later queue point audited or completed."
+  ],
+  "owner_approval": "User: 批准保留此处省略"
+}

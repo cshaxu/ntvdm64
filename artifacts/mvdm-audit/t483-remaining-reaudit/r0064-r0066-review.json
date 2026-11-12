@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "id": "T483-R0064",
+      "added": 12,
+      "removed": 0,
+      "decision": "pending",
+      "finding": "Thread bridge preserves void cdecl(LPVOID) entry and session binding; full original native-thread context equivalence not established."
+    },
+    {
+      "id": "T483-R0065",
+      "added": 1,
+      "removed": 1,
+      "decision": "restored",
+      "finding": "Original cmdPipeOutThread cast restored; macro converts back to matching cdecl type."
+    },
+    {
+      "id": "T483-R0066",
+      "added": 1,
+      "removed": 1,
+      "decision": "restored",
+      "finding": "Original cmdPipeInThread cast restored; same bridge contract."
+    }
+  ],
+  "source_sha256": "cb869071a96904889a3858e261f076de3ca9bd517672e2f5a8402110bb40d877",
+  "counter_review": "Restore casts without removing thread bridge. Stringified diagnostic labels now contain casts; they do not select dispatch. No original ABI failure reproduced this turn.",
+  "verification": "Original call lines restored; same line counts and #line/#error unchanged. Source-only, batch compile pending.",
+  "mirror_diff_delta": -4
+}

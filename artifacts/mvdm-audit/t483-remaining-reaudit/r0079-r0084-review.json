@@ -1,0 +1,57 @@
+{
+  "items": [
+    {
+      "id": "T483-R0079",
+      "added": 2,
+      "removed": 0,
+      "finding": "Adds lease and direction state coupled to acquisition.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0080",
+      "added": 12,
+      "removed": 2,
+      "finding": "Replaces direct guest pointer with allocated prefilled snapshot; original failure not established.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0081",
+      "added": 2,
+      "removed": 2,
+      "finding": "Read failure commits/releases snapshot; preservation of original ReadFile error across provider remains unproved.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0082",
+      "added": 0,
+      "removed": 2,
+      "finding": "Removes original read-success Flush/Free; current common release owns buffer.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0083",
+      "added": 2,
+      "removed": 0,
+      "finding": "Write failure releases snapshot after saving original error code.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0084",
+      "added": 6,
+      "removed": 0,
+      "finding": "Common success release writes full snapshot and adds invalid-address failure; equivalence with original SAS/video flush unproved.",
+      "decision": "pending"
+    }
+  ],
+  "chain": [
+    "demFCBIO",
+    "mvdm_guest_location_acquire_far",
+    "guest_memory_lease_acquire/release",
+    "Sim32FlushVDMPointer",
+    "Sim32FreeVDMPointer"
+  ],
+  "finding": "Lease allocates/prefills and may write entire requested range; original Flush performs IsVideoMemory/SetVideoMemory and sas_overwrite_memory, Free returns TRUE. Do not classify original Flush as no-op.",
+  "counter_review": "Current resource cleanup is necessary only while keeping current acquisition. It does not prove original implementation defective. Whole original restoration depends on DTA registration/ownership decision (R0071/R0073). No second state path proposed.",
+  "verification": "Source only; no runtime case or new compilation. Current #line unchanged.",
+  "mirror_diff_delta": 0
+}

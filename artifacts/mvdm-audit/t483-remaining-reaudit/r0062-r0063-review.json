@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "T483-R0062",
+      "added": 1,
+      "removed": 0
+    },
+    {
+      "id": "T483-R0063",
+      "added": 4,
+      "removed": 1
+    }
+  ],
+  "finding": "PIF unknown-binary scalar changes from direct pIsDosBinary=0 to registered write and pvi ErrorCode on failure. Header only supplies that call. Original producer restored alone would leave other registered users unsatisfied; resolve with R0059 owner and R0047/R0057 consumers.",
+  "decision": "pending",
+  "counter_review": "No full-original failure proved; header necessity in current code is not proof of adaptation necessity. Failure flag propagation is existing adapter behavior, not original contract.",
+  "source_sha256": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c",
+  "verification": "Read-only source comparison; #error/#line unchanged; no build/test.",
+  "mirror_diff_delta": 0
+}

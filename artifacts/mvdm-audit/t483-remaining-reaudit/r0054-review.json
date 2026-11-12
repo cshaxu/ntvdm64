@@ -1,0 +1,17 @@
+{
+  "id": "T483-R0054",
+  "added": 5,
+  "removed": 1,
+  "decision": "pending",
+  "finding": "WOW initial guest SYSTEMROOT projected to package short root after original cmdCreateVDMEnvironment; original ldboot.asm reads SYSTEMROOT. Host environment unchanged. Package location is a real boundary but placement in this mirror caller is not uniquely justified.",
+  "sources": [
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c:14",
+    "src/common/guest_environment.c",
+    "src/mvdm-guest/wow16/kernel31/ldboot.asm:3059",
+    "test/session/softpc_wow_boot_environment_fixture.c"
+  ],
+  "counter_review": "Fixture checks replacement, ownership and unchanged host environment, not original-vs-current boot failure. WIN16DIR remains unchanged. Consider existing environment-provider boundary before retaining mirror hook.",
+  "source_sha256": "92e304f7ddfe0fc456c16f5fbb66b761b0d73d6153638e7f2e6d60a1bc905922",
+  "verification": "Source-only; tests inspected not executed. #error/#line and source unchanged.",
+  "mirror_diff_delta": 0
+}

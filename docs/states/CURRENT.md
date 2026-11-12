@@ -15,7 +15,7 @@ is the sole active audit order; the old D-register is historical evidence.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T483 S5, Ordinary Mode; one agent, initial and counter-review passes. |
-| Admission And Approval | Owner authorizes remaining-diff re-audit in exact new-list order, direct original restoration, and diff reduction; unchanged or increased diff requires stopping for prior owner approval. |
+| Admission And Approval | Owner authorizes remaining-diff re-audit in exact new-list order, direct original restoration, and exact original restoration; alternatives go to the pending decision backlog while ordered audit continues. |
 | Objective | For each remaining point prove why original restoration would fail in an actual supported context; restore original where appropriate, otherwise minimize necessary differences. |
 | Non-goals | Do not reopen completed points or deleted files; no guest edits/rebuild, unrelated compat audit, or automatic retention from old classifications. |
 | Reference Baseline | Source4cf4e5a35 / published3ac24c6a7 package; new R identifiers link old D records and pinned current file bytes. |
@@ -25,41 +25,39 @@ is the sole active audit order; the old D-register is historical evidence.
 | Expected Markers | Per-point current ranges, actual call/build context, concrete original-failure evidence, minimal option, original-relative diff delta, line proof and delivery status. |
 | Asset Needs | Existing pinned sources, build cache and maintained fixtures; preserve winnt.zip. |
 | Reporting Requirements | New-list position, completed/pending/approval-needed counts, current point conclusion, source/mirror diff delta and verified delivery. |
-| Stop Conditions | If the proposed disposition preserves a diff unchanged or increases it, stop at that point and obtain owner approval before continuing. Unproved risk is not retention evidence. |
+| Stop Conditions | If the proposed disposition preserves a diff unchanged or increases it, record the decision and continue; obtain owner approval before implementation. Unproved risk is not retention evidence. |
 | Exit Criteria | Every admitted remaining point has an owner-compliant evidenced disposition and applicable implementation/delivery; list initialization alone is not audit completion. |
 | Original Owner Request | Re-audit all remaining categories with presumption of original validity; exact list order; restore directly where justified; ask before unchanged or larger diff. |
 | Similar-Issue Sweep | Read coupled callers as evidence, finish each point in list order, and do not reopen previously completed points. Retire vanished points with byte/range proof. |
 
 ## S5 Progress
 
-The new [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
-contains2720 pending entries in365 files:1765 formerly retained,200 formerly
-correct,755 formerly pending. All require fresh original-first review; none
-is claimed re-audited by creating this list. Start at T483-R0001 / D0001.
-The [scope receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/progress.json)
-excludes8 deleted-file records,313 other completed records, and D2258 because
-its vdmapi.h now exactly matches its pinned original. Deleted files do not
-belong to the current1052-file host C/H mirror population.
+The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
+contains 2720 points in 365 files. Reviewed 85: 22 restored and verified,
+2 owner-approved retain, 61 pending decisions (including partial restorations);
+2635 unreviewed. Continue at R0086. Decision-required items go to the
+[pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
+without blocking the next ordered review.
 
-S5 P2 [delivery](../../artifacts/mvdm-audit/t483-s5/p2-delivery.json) remains
-verified and published: original extended-error chain restored, mirror diff
-reduced36 lines; cached x86/x64,140 capture/65 launch assertions and Full16
-passed. DOS4GW/NESticle remains skipped for absent external fixtures.
-Thirteen delivered cmdmisc-related points with outstanding fault verification
-remain in the new pending list. P1/P2 completion is not undone. Historical
-S5 allocation was207, with6 delivered dispositions before this re-audit.
+P3 restores original code in ten implementation files, reducing normalized
+original-relative mirror differences by 126 lines. Excluded #error sequences
+are unchanged. Per-point records distinguish source analysis from executed tests.
+The [P3 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p3-checkpoint.json)
+records cached x86/x64 builds, two command fixtures, Full16, documentation
+checks, and publication of the same 11-image package to assets/release and
+O:/winnt/system32. Both destination hashes match the tested candidate.
+DOS4GW/NESticle is explicitly skipped: external fixtures were not supplied.
+Git delivery is being finalized; S5 remains active, not closed.
 
-At every point, presume original code valid. A necessary deviation requires
-concrete failure/ABI/build evidence in actual supported contexts. Generic risk
-and historical implementation alone do not justify retention. If the final
-proposal keeps diff unchanged or increases it, stop for owner approval.
-No product or release change is part of list initialization.
+Pending DTA/PDB/SFT decisions do not establish that original pointer lifetimes
+are defective. The fast-I/O decline has original guest CF fallback evidence;
+its retention remains an owner decision. No guest rebuild or winnt.zip change.
 
 ## Current Technical Baseline
 
-Package `36dc35b7-1e69-4617-b1ed-d2662418a07c`, complete 11 images at
-assets/release and O:/winnt/system32, raw-hash identical to the Full-tested S5 P2
-candidate and manifest. See the [P2 receipt](../../artifacts/mvdm-audit/t483-s5/p2-delivery.json).
+Package `0db3c11e-0a6e-4e0b-b2b0-ce921eaf5b1b`, complete 11 images at
+assets/release and O:/winnt/system32, raw-hash identical to the Full-tested S5 P3
+candidate and manifest. See the [P3 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p3-checkpoint.json).
 DOS4GW/NESticle remains explicitly skipped because its external fixture was not
 supplied. No guest or winnt.zip change.
 

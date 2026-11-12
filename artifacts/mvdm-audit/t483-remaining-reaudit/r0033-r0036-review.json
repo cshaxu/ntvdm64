@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "id": "T483-R0033",
+      "added": 5,
+      "removed": 3,
+      "finding": "Original length+4+tail > MAX_PATH permits equality then NUL overrun; helper uses >=. Arithmetic proves boundary defect, not necessity of extraction.",
+      "status": "pending-decision"
+    },
+    {
+      "id": "T483-R0034",
+      "added": 1,
+      "removed": 1,
+      "finding": "Original ERROR_BAD_ENVIRONMENT restored: exhaustive helper failure returns equal this constant. Restored statement maps to logical572; added abort also maps572 before existing line reset.",
+      "status": "restored-pending-delivery"
+    },
+    {
+      "id": "T483-R0035",
+      "added": 5,
+      "removed": 1,
+      "finding": "Current site selects EXECUTE service before capture replacement; original bound check moved into helper. Needs coherent capture/service decision.",
+      "status": "pending-decision"
+    },
+    {
+      "id": "T483-R0036",
+      "added": 1,
+      "removed": 1,
+      "finding": "Current error reports failed service selection rather than capacity failure; restoring constant alone would change error meaning.",
+      "status": "pending-decision"
+    }
+  ],
+  "source_sha256": "6b96e5213cced35e1d84bed62d298e2321242474f75aee048bb7791cecb12dfb",
+  "mirror_diff_delta": -2,
+  "verification": "Source-only. Original restored statement logical572 verified. Existing repeated logical572 in added abort is disclosed, not full-file line certification. #line/#error unchanged. No build/test invocation.",
+  "counter_review": "Whole helper/capture necessity unproved. Existing boundary test source inspected, not rerun. First replacement assertion failed before write; second wrote restoration then overbroad line assertion hit added abort; inspected both occurrences and verified restored statement."
+}

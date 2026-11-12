@@ -343,3 +343,12 @@ adaptation with correct original logical lines. A proposed unchanged or larger
 mirror diff requires stopping at that ordered point for owner approval.
 Completed points and deleted files are excluded from the new review population.
 This does not authorize guest modification/rebuild or override source provenance.
+
+Latest per-point clarification: when exact original restoration is not feasible,
+report evidence and the minimum-diff alternative and wait for owner approval
+before implementing that alternative, even if its diff would shrink.
+
+Superseding owner instruction: decision-required points go to the active
+pending decision backlog with evidence/options/diff impact; continue in list
+order without waiting. Do not implement unapproved alternatives or finalize
+unapproved retention. Direct exact-original restoration remains authorized.

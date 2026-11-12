@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "T483-R0056",
+      "added": 9,
+      "removed": 4,
+      "finding": "Missing -a guard: original strstr NULL followed by +4 and dereference is invalid. No current legitimate launch lacking -a demonstrated; caller contract and minimum guard placement pending.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0057",
+      "added": 7,
+      "removed": 1,
+      "finding": "WOW is_dos_binary write uses numeric registration; original global producer replaced. Same ownership decision as R0047, not evidence original complete chain fails.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0058",
+      "added": 5,
+      "removed": 1,
+      "finding": "WOW SCS_ToSync write uses same numeric registration as ordinary path; resolve with R0053 and cmdSetInfo producer.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "Missing-input source failure differs from actual supported launch failure. Do not infer necessity from a hypothetical invocation. Scalar adapters require joint producer decision, not separate state machines.",
+  "verification": "Source-only; no product edit/build/test; #error/#line unchanged.",
+  "mirror_diff_delta": 0
+}

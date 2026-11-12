@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": "T483-R0037",
+      "added": 1,
+      "removed": 0,
+      "problem": "Header declares package directory function used by R0038."
+    },
+    {
+      "id": "T483-R0038",
+      "added": 1,
+      "removed": 1,
+      "problem": "Select package keyboard resources instead of modern Windows system resources."
+    }
+  ],
+  "status": "pending-decision",
+  "source_sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f",
+  "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+  "files_present": {
+    "O:/winnt/system32/kb16.com": true,
+    "C:/Windows/System32/kb16.com": false,
+    "C:/Windows/SysWOW64/kb16.com": false,
+    "O:/winnt/system32/keyboard.sys": true,
+    "C:/Windows/System32/keyboard.sys": false,
+    "C:/Windows/SysWOW64/keyboard.sys": false
+  },
+  "evidence": "cmdGetKbdLayout builds KB16.COM then KEYBOARD.SYS paths and checks GetFileAttributes; missing resource goes to NoInstallkb16. Unlike cmd.c drive-only use this caller needs actual package resource directory.",
+  "recommendation": "Retain explicit package directory lookup/header as resource-location boundary, subject to owner decision. No relocation into Windows directory authorized.",
+  "counter_review": "This proves a reached-branch source/resource mismatch, not reproduced keyboard runtime failure or all layouts. US fast-paste may bypass installation. No claim that original algorithm is defective.",
+  "verification": "Read-only path/source/hash evidence. No build/test needed for unchanged source. #error/#line unchanged, no whole-file line certification.",
+  "mirror_diff_delta": 0
+}

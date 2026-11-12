@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "id": "T483-R0041",
+      "added": 11,
+      "removed": 0,
+      "finding": "CMDINFO/local guest locations and leases support snapshot plus later commit. Partial restoration without removing final copy of CmdInfo is inconsistent; full original access has not been disproved.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0042",
+      "added": 7,
+      "removed": 1,
+      "finding": "Original MAXIMUM_VDM_CURRENT_DIR is64, buffer68; request CurDirectoryLen is MAX_PATH+1=261. Copy-out uses returned length. Actual selected producer admission of >68 bytes is not proved here; size mismatch alone is not a production overflow reproduction.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0043",
+      "added": 2,
+      "removed": 0,
+      "finding": "AppName273 matches original guest EXECPATHLEN273. Original wrote guest ExecPath directly; current local AppName is committed later. Necessity of snapshot remains unproved.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0044",
+      "added": 15,
+      "removed": 1,
+      "finding": "Original GetVDMAddr CMDINFO replaced by read lease/snapshot/error termination. Final copy_to_guest uses CmdInfo; restore both ends coherently, not only pointer assignment.",
+      "decision": "pending"
+    }
+  ],
+  "source_sha256": "c1c2b25a6b3e3e0ebf36d05f7b08c37643619c6bc57abd914f42140bb5413945",
+  "count_basis": "Current vs original logical diff; includes comments, excludes #line.",
+  "sources": [
+    "src/mvdm-host/dos/command/cmdmisc.c",
+    "src/non-mvdm/public/internal/base/inc/vdmapi.h:25",
+    "src/non-mvdm/base/win32/client/vdm.c:607",
+    "src/mvdm-guest/dos/v86/cmd/command/comequ.asm:26"
+  ],
+  "counter_review": "Do not treat added-copy dependencies as proof against original semantics. Original BaseCheckVDM also restricts DOS current directory in some paths; selected producer closure/real failing input remains unresolved for R0042.",
+  "verification": "Source-only. No runtime/build; source, #error and #line unchanged.",
+  "mirror_diff_delta": 0
+}

@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "id": "T483-R0067",
+      "added": 1,
+      "removed": 0,
+      "decision": "pending",
+      "finding": "Firmware header declares package system-directory API used by R0068; removal depends on provider decision."
+    },
+    {
+      "id": "T483-R0068",
+      "added": 1,
+      "removed": 1,
+      "decision": "pending",
+      "finding": "DemInit directory flows into demLoadDos opening ntdos.sys. Package file exists; modern Windows System32 and SysWOW64 files absent."
+    }
+  ],
+  "verification": "Source chain and file presence only; no runtime baseline executed. Existing unrelated DIV154 comment not counted in the call replacement. No source edits.",
+  "chain": [
+    "dem.c::DemInit",
+    "mvdm_softpc_firmware.c::NtvdmGetSystemDirectoryA",
+    "demmisc.c::demLoadDos"
+  ],
+  "original_failure_evidence": "Original directory lookup selects modern host system directory; demLoadDos calls TerminateVDM on failed file open. This is deployment boundary evidence, not an original algorithm defect.",
+  "mirror_diff_delta": 0
+}

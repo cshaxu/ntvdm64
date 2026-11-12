@@ -1,0 +1,109 @@
+{
+  "status": "eight points reviewed; one original line restored; remaining choices pending",
+  "items": [
+    {
+      "id": "T483-R0021",
+      "line": 381,
+      "problem": "Initializes handles skipped by snapshot failure.",
+      "evidence": "std_handles returns false for missing/inactive capture; cleanup still tests all three locals. Original uninitialized declaration alone would permit uninitialized reads. Original unconditional guest fetch did not have this branch.",
+      "option": "Keep initialization with current fallible snapshot, or restore capture and consumer coherently.",
+      "decision": "pending",
+      "restored": false
+    },
+    {
+      "id": "T483-R0022",
+      "line": 389,
+      "problem": "Replaces original conversion locals with owned command result.",
+      "evidence": "prepare_text allocates Command_A; CreateProcess consumes it and cleanup frees it. The original declaration set alone cannot replace the currently used variable. This does not prove original conversion is broken.",
+      "option": "Decide original in-place conversion versus shared owned conversion with saved-VM caller; do not restore unused declarations only to reduce a count.",
+      "decision": "pending",
+      "restored": false
+    },
+    {
+      "id": "T483-R0023",
+      "line": 392,
+      "problem": "Adds local snapshot storage.",
+      "evidence": "std_handles copies three ULONGs to this storage and pStdHandles reads them before child launch. Removing just the storage breaks current caller compilation. No full-original-chain runtime failure established.",
+      "option": "Same capture decision as R0021/R0024.",
+      "decision": "pending",
+      "restored": false
+    },
+    {
+      "id": "T483-R0024",
+      "line": 416,
+      "problem": "Replaces asynchronous SS:BP guest reads with previously captured handles.",
+      "evidence": "Original cmdCreateProcess reads GetVDMAddr(getSS(),getBP()) on the detached thread. Current capture copies on guest admission before cmdExec32 starts that thread and reenters GetNextVDMCommand. Scheduling intent is concrete; no original-vs-current mismatch trace established here.",
+      "option": "Compare supported CPU/register suspension guarantee before deciding restoration; keep queued, not automatically retained.",
+      "decision": "pending",
+      "restored": false
+    },
+    {
+      "id": "T483-R0025",
+      "line": 442,
+      "problem": "Extracts original OEM/ANSI conversion and environment preparation.",
+      "evidence": "Restored original Buffer-only initialization at logical361. Both no-call failure and failed helper leave Buffer NULL; successful helper initializes whole output. Remaining conversion helper shares with saved-VM launch and allocates output rather than modifying capture.",
+      "option": "Restored safe initialization; decide remaining shared conversion ownership together with R0022/R0026/R0028.",
+      "decision": "pending",
+      "restored": true
+    },
+    {
+      "id": "T483-R0026",
+      "line": 447,
+      "problem": "Uses prepared owned command/environment and validates snapshot.",
+      "evidence": "Current helper allocates ANSI output; original converts in place into pCommand32 and passes it to CreateProcess. Current finish zeroes captured input before child resumes. Full restoration needs coherent pointer ownership and conversion behavior, not just replacing argument.",
+      "option": "Evaluate restoring original ordinary path versus retaining shared preparation; no proof of original conversion failure claimed.",
+      "decision": "pending",
+      "restored": false
+    },
+    {
+      "id": "T483-R0027",
+      "line": 478,
+      "problem": "Releases singleton capture before ResumeThread/reentry.",
+      "evidence": "capture_locations rejects active !=0; finish clears active and buffers. Simply deleting finish leaves active set when next capture arrives. This proves a current state-machine dependency, not necessity of that whole state machine.",
+      "option": "Keep release while capture exists or remove capture lifecycle coherently; restore cannot be isolated.",
+      "decision": "pending",
+      "restored": false
+    },
+    {
+      "id": "T483-R0028",
+      "line": 500,
+      "problem": "Frees command allocated by helper.",
+      "evidence": "ansi_copy invokes RtlUnicodeStringToAnsiString(..., TRUE). Removing free alone leaks this allocation; original converted into caller storage and needed no separate free.",
+      "option": "Decision follows shared conversion group; remove allocation/free together if original restored.",
+      "decision": "pending",
+      "restored": false
+    }
+  ],
+  "restoration": {
+    "before_sha256": "d686eb0340b470b7e9658f0cba22dab73aeab195b4e3c27750fb39704ff4e215",
+    "after_sha256": "33556281061d568788c1ccc315fafeefa0bb13f7479b10f9b6b5c9fae7121600",
+    "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+    "before_diff": [
+      211,
+      79
+    ],
+    "after_diff": [
+      210,
+      78
+    ],
+    "delta": -2,
+    "original_logical_line": 361,
+    "error_and_line_directives_unchanged": true
+  },
+  "review_passes": [
+    "Initial producer/consumer and failure-path tracing",
+    "Counter-review distinguished partial restoration failures from full original-chain necessity; passing current tests not used as necessity evidence."
+  ],
+  "sources": [
+    "src/mvdm-host/dos/command/cmdexec.c",
+    "src/ntvdm-exe/command/source/mvdm_command_launch.c",
+    "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+    "test/ntvdm-exe/command/command_guest_launch.c",
+    "test/ntvdm-exe/command/command_capture.c"
+  ],
+  "verification_limits": [
+    "Source proof and original logical line361 verified. No build/runtime invocation in this batch.",
+    "Existing guest_launch test asserts immutable capture and allocated conversion, but stubs environment/launch delegates; it cannot prove original ordinary path invalid.",
+    "No claim that every session/capture failure is reachable in current production scheduling; error-path reading is source-level evidence."
+  ]
+}

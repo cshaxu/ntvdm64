@@ -1,0 +1,40 @@
+{
+  "review_ids": [
+    "T483-R0014",
+    "T483-R0015",
+    "T483-R0016",
+    "T483-R0017",
+    "T483-R0018",
+    "T483-R0019",
+    "T483-R0020"
+  ],
+  "status": "pending decision; no product edit",
+  "source_sha256": "d686eb0340b470b7e9658f0cba22dab73aeab195b4e3c27750fb39704ff4e215",
+  "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+  "current_anchor_lines": {
+    "14": 177,
+    "15": 286,
+    "16": 298,
+    "17": 307,
+    "18": 339,
+    "19": 351,
+    "20": 363
+  },
+  "original_contract": "cmdSetInfo stores GetVDMAddr(DS,DX) in global pSCSInfo. cmdCheckBinary writes SCS and derives guest far addresses by subtracting GetVDMAddr(0,0).",
+  "current_contract": "cmdSetInfo only calls set_scs_scalars; session registration stores numeric guest locations. cmdCheckBinary acquires a lease, uses a local pSCSInfo, derives fields from registered guest address, then commits before clearing CF.",
+  "concrete_partial_restore_failure": "Current cmdSetInfo does not initialize the restored global pSCSInfo. Removing local lease and reverting only this consumer would dereference the zero-initialized global. This is a current adaptation dependency, not evidence against original code.",
+  "necessity_evidence": "Old review describes lease intent but does not prove that restoring the complete original producer/consumer chain fails. No such runtime failure established in this review.",
+  "decision_options": [
+    "Restore cmdSetInfo and all coupled SCS/scalar consumers coherently after checking registration lifetime and supported mapped-memory contexts.",
+    "Keep numeric registration and minimize lease/address access adaptation; requires owner approval and concrete evidence of necessity."
+  ],
+  "counter_review": "Do not mix original host-pointer subtraction with a lease pointer; do not mistake partial restoration failure for proof that the whole original chain is invalid. Whole-chain restoration remains unresolved, not rejected.",
+  "verification": "Pinned original and unchanged current source hashes checked; producer/consumer and lease-provider source inspected. No build or runtime test executed for these unchanged points.",
+  "dependencies": [
+    "src/mvdm-host/dos/command/cmdmisc.c::cmdSetInfo",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c::set_scs_scalars/acquire_scs/scs_field/release_scs",
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c::acquire_vm/release"
+  ],
+  "mirror_diff_delta": 0,
+  "line_mapping": "No source edit; existing #line/#error unchanged. This is not a claim of full-file line verification."
+}

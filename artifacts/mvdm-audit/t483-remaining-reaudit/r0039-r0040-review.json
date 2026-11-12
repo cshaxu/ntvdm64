@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "id": "T483-R0039",
+      "added": 7,
+      "removed": 0,
+      "decision": "pending",
+      "finding": "stddef and command guest-state header support offsetof and SCS access calls. Necessity of entire adaptation remains pending; no full original-chain failure proved."
+    },
+    {
+      "id": "T483-R0040",
+      "added": 3,
+      "removed": 0,
+      "decision": "partial-restoration-pending",
+      "finding": "Removed unused firmware include; header contains declarations only plus stdint already directly included by retained guest-location header. Remaining guest-location include is used by local types/functions and awaits whole access decision."
+    }
+  ],
+  "before_sha256": "f9112eb47d5dd256e311ca0daa0312b3dd4e7f078b8ad5260f4e09840e7d5bed",
+  "after_sha256": "c1c2b25a6b3e3e0ebf36d05f7b08c37643619c6bc57abd914f42140bb5413945",
+  "mirror_diff_delta": 0,
+  "line_proof": "Removal lies before existing #line22 reset. Original code after reset retains logical lines; #error and #line directives unchanged.",
+  "verification": "Source symbol/header inspection only; batch compilation pending.",
+  "counter_review": "Do not remove used guest-location declarations merely because transitively included. No old blanket lease-safety rationale accepted.",
+  "correction": "Firmware include restored: GetWowKernelCmdLine calls mvdm_softpc_project_wow_initial_environment declared there. Prior search missed this non-directory symbol; previous unused-header conclusion invalid.",
+  "superseded_conclusion": "R0040 unused-header finding withdrawn; include restored during R0053 audit."
+}

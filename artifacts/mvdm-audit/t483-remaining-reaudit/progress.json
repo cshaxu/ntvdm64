@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "123182eb55251f2c0255faabda63ab721b48fbe3744a7f75e2e8ae697c1b0105",
+  "new_register_sha256": "24866a7639b1bff75be046052f1ca162bdece314f2efeff3bd1649c3bbbc458f",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -14,13 +14,24 @@
     "deleted-file-outside-current-mirror": 8,
     "already-byte-identical-to-original": 1
   },
-  "completed": 0,
-  "pending": 2720,
-  "next": "T483-R0001",
+  "completed": 2,
+  "pending": 2635,
+  "next": "T483-R0086",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
     "Existing evidence is a lead, not accepted necessity proof. Closed items and absent files are not reopened.",
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
-  ]
+  ],
+  "awaiting_owner_approval": 0,
+  "reviewed": 85,
+  "restored_pending_delivery": 0,
+  "batch_modified_implementation_files": 0,
+  "batch_mirror_diff_delta": 0,
+  "execution_state": "active",
+  "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
+  "pending_decisions": 61,
+  "restored_verified_published": 22,
+  "last_batch_mirror_diff_delta": -126,
+  "last_delivery": "batch-p3-checkpoint.json"
 }

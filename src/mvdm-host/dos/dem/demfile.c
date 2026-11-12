@@ -20,6 +20,7 @@
 #include <vrnmpipe.h>
 #include <nt_vdd.h>
 
+extern PDOSSF pSFTHead;
 
 #line 25
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION

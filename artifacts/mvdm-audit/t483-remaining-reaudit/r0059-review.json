@@ -1,0 +1,19 @@
+{
+  "id": "T483-R0059",
+  "added": 10,
+  "removed": 6,
+  "count_basis": "Sum of current SequenceMatcher changed blocks at original594 and596; unchanged separating blank not counted. #line excluded.",
+  "finding": "cmdSetInfo replaces original SCS/to_sync/is_dos_binary/fd_access pointers with numeric session registration and failure return.",
+  "consumers": [
+    "cmdexec.c SCS access",
+    "cmdmisc.c DOS/sync writes",
+    "src/mvdm-host/dos/dem/demmisc.c:615",
+    "src/mvdm-host/softpc.new/host/src/nt_fdisk.c:510,564",
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c:416,762,824"
+  ],
+  "decision": "pending",
+  "recommendation": "Treat producer and all scalar/SCS consumers as one ownership restoration; do not leave competing original and numeric authoritative states.",
+  "counter_review": "Cross-file coupling is established, but whole-original pointer failure not established. Session epoch validation expresses current model, not proof of original invalidity. Disk consumers extend scope beyond COMMAND.",
+  "verification": "Source-only; no source/build/test change. #error/#line unchanged.",
+  "mirror_diff_delta": 0
+}

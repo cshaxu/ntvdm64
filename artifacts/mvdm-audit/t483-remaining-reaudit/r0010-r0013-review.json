@@ -1,0 +1,40 @@
+{
+  "review_ids": [
+    "T483-R0010",
+    "T483-R0011",
+    "T483-R0012",
+    "T483-R0013"
+  ],
+  "status": "original init environment function restored; remaining RTL include decision queued",
+  "initial_review": "The prior rationale assumed numeric guest-location leases were necessary for environment copy, and private RTL binding was necessary for selected original code. It did not provide a failing original initialization case.",
+  "actual_startup_chain": [
+    "rdata.asm adjust_env allocates DOS environment and sets ES; first SVC_GETINITENVIRONMENT returns required BX if capacity too small; it reallocates then calls again.",
+    "cmdGetInitEnvironment exits immediately with BX0 after IsFirstCall is false. Source assignments set it false when the first task is delivered; only initial cmddata definition sets it true.",
+    "The direct ES:0 pointer is used synchronously within this initialization call; no persistent guest alias introduced by this restoration."
+  ],
+  "restored": "Entire original cmdGetInitEnvironment body, including original ES pointer acquisition and BX capacity negotiation; remove lease declarations/acquire/release and unused guest-location include.",
+  "original_line_proof": "All155 lines at original logical177..331 match original bytes after newline normalization; all #error directives across four changed product files unchanged.",
+  "compile_results": {
+    "product-restored": 0,
+    "reference-restored": 0,
+    "product-without-rtl": 0,
+    "reference-without-rtl": 0
+  },
+  "remaining_decision": "Removing environapi.h changes object unresolved symbols from OpenNtRtlCreate/Destroy/SetEnvironment to RtlCreate/Destroy/SetEnvironment. No failing modern-NTDLL case established; choose original RTL versus modern native ownership coherently before removing binding.",
+  "mirror_diff_before": [
+    29,
+    1
+  ],
+  "mirror_diff_after": [
+    3,
+    0
+  ],
+  "mirror_diff_delta": -27,
+  "source_sha256": "701246e318fb3b5bdb7cb24b8c1411afcca638dc72105ee7e2c91ea6c5c1e1d7",
+  "test_root": "build/t483-remaining-reaudit/r0010",
+  "limits": [
+    "Compile and source-chain evidence only for this restoration; guest startup regression pending next full delivery.",
+    "No claim about arbitrary guest buffers or later VM execution paths; these are outside this initialization-only proof.",
+    "Existing original allocation/error behavior unchanged; no guest edits/rebuild."
+  ]
+}

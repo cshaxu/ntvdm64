@@ -1,0 +1,38 @@
+{
+  "review_ids": [
+    "T483-R0004",
+    "T483-R0005",
+    "T483-R0006"
+  ],
+  "status": "restored-original locally; focused verification passed; batch delivery pending",
+  "prior_rationale": "Global guest aliases were replaced by session state, so extern declarations were omitted. That establishes changed runtime ownership, not a requirement to remove unused original extern declarations.",
+  "restored_declarations": [
+    "extern PCHAR pSCS_ToSync;",
+    "extern PSCSINFO pSCSInfo;",
+    "extern BYTE * pIsDosBinary;",
+    "extern WORD * pFDAccess;"
+  ],
+  "original_lines": [
+    233,
+    238,
+    278,
+    279
+  ],
+  "evidence": "All restored bytes equal their original logical lines. Six actual compiler-context builds passed: cmdexec, cmdmisc and mvdm_command_guest_state in product and reference-x86. cmdexec object symbols contain no references to these globals.",
+  "counter_review": "An extern declaration is not a definition, allocation or guest pointer store. Existing cmdexec local pSCSInfo shadows the extern, preserving current lease behavior. No provider lifecycle change is claimed.",
+  "mirror_diff_before": [
+    42,
+    36
+  ],
+  "mirror_diff_after": [
+    39,
+    32
+  ],
+  "mirror_diff_delta": -7,
+  "current_sha256": "120e96fbde998abf320ca677e8a33846d8c35f7a43fafdaae7ae169ac13a1452",
+  "test_root": "build/t483-remaining-reaudit/r0004",
+  "limits": [
+    "Original definition/provider access points remain to be reviewed in their ordered turns; they are not declared safe by this declaration-only restoration.",
+    "Full product rebuild/publication pending batch threshold; no runtime release claim."
+  ]
+}

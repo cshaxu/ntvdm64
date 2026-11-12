@@ -1,0 +1,16 @@
+{
+  "id": "T483-R0052",
+  "added": 9,
+  "removed": 5,
+  "decision": "restored-pending-delivery",
+  "finding": "Original synchronous environment GetVDMAddr/RtlMoveMemory restored. Earlier cchEnv>EnvSize returns requested size before reaching this copy. No original failure proved requiring lease wrapper.",
+  "source_sha256": "5f2f7e52c8ef577f18b4f0b8cc1b5b709b8bcb30007c03a6fc0248a16d96cb6a",
+  "mirror_diff_delta": -16,
+  "delta_allocation": {
+    "R0052": -14,
+    "R0041_unused_declarations": -2
+  },
+  "coupled_cleanup": "Removed unused cmdline_location and environment_location declarations from pending R0041; no duplicate reviewed count.",
+  "verification": "Original five lines byte-restored; existing #line340 resets subsequent original code. #error/#line unchanged. No build/runtime yet.",
+  "counter_review": "Restore includes original VDMInfo.Enviornment assignment, not merely memcpy, preserving original observable state. No general claim about other retained guest pointers."
+}

@@ -1,0 +1,23 @@
+{
+  "ids": [
+    "T483-R0060",
+    "T483-R0061"
+  ],
+  "scales": [
+    [
+      8,
+      0
+    ],
+    [
+      10,
+      1
+    ]
+  ],
+  "decision": "restored-pending-delivery",
+  "finding": "Original cmdComSpec uses local guest pointer only for immediate strcpy on IsFirstCall. Prior durable-alias rationale contradicted by actual lifetime. Restored exact original whole function, no guest edit.",
+  "before_sha256": "92e304f7ddfe0fc456c16f5fbb66b761b0d73d6153638e7f2e6d60a1bc905922",
+  "after_sha256": "6bab8065bd60858e2f4ee84b271f9f50dccf466cc2998e1441adc541f8530dda",
+  "mirror_diff_delta": -21,
+  "verification": "Original function byte identity; #error unchanged. Removed internal #line640/644 made redundant by exact restoration; following #line656 remains. Source-only, batch build pending.",
+  "counter_review": "Original string and failure semantics retained; no general claim about other guest buffers."
+}

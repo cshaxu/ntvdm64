@@ -1,0 +1,10 @@
+{
+  "id": "T483-R0085",
+  "added": 0,
+  "removed": 1,
+  "decision": "restored",
+  "finding": "Restored original extern PDOSSF pSFTHead; same-name use is function-local shadow. Declaration allocates no object and introduces no link reference.",
+  "verification": "Original statement comparison; #line25 preserved. Build pending.",
+  "historical_range": "Historical two-line anchor includes whitespace; current normalized diff deletes one declaration.",
+  "mirror_diff_delta": -1
+}

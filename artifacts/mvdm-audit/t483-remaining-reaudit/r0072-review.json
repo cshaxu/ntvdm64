@@ -1,0 +1,23 @@
+{
+  "id": "T483-R0072",
+  "added": 4,
+  "removed": 1,
+  "decision": "restored",
+  "finding": "Original DPB pointer spelling and three original numeric far-pointer casts restored. Production worker explicitly x86 in CMakeLists line89; extant DEM COFF objects machine 0x14c. No original failure demonstrated.",
+  "affected": [
+    "dos/dem/demdasd.h",
+    "dos/dem/demgset.c"
+  ],
+  "linked_original_lines": [
+    737,
+    989,
+    1006
+  ],
+  "ordering": "Three consumer statements restored as type-coherent dependencies; later register points remain pending for ordered review.",
+  "verification": "demdasd.h byte-identical to original including original line endings; three assignment statements match original. Four-byte layout follows admitted x86 model. Build/tests pending. No guest modifications.",
+  "mirror_diff_delta": -11,
+  "sha256": {
+    "dos/dem/demdasd.h": "de5bd5e437c17a34af71999e6e6e7c0e749d9d9da61bc5cc8420c0406e1a2c35",
+    "dos/dem/demgset.c": "935863867496cfdcc48f51e1473065f13eb111571442f1b72245c383982673f4"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "T483-R0055",
+  "added": 26,
+  "removed": 0,
+  "decision": "pending",
+  "finding": "WOW environment capacity guard and cleanup return CF1/AX required bytes; original tcode.asm SVC_CMDGETNEXTCMD consumer explicitly expands on carry, rejects AX>=32768 and jumps do_again. Existing protocol confirmed.",
+  "remaining_evidence": "Actual supported initial/projected environment exceeding original allocation not reproduced here. Projection unit fixture does not exercise original guest resize/retry. Need minimality/necessity assessment with R0054.",
+  "counter_review": "Protocol existence supports compatibility of proposal, not proof of necessity or successful retry. Original unguarded copy must not be called defective solely on hypothetical size growth.",
+  "sources": [
+    "src/mvdm-host/dos/command/cmdmisc.c::GetWowKernelCmdLine",
+    "src/mvdm-guest/dos/v86/cmd/command/tcode.asm:557-618",
+    "test/session/softpc_wow_boot_environment_fixture.c"
+  ],
+  "verification": "Read-only source; no build/runtime; source and #error/#line unchanged.",
+  "mirror_diff_delta": 0
+}

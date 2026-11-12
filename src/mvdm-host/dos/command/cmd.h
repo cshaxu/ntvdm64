@@ -237,12 +237,12 @@ extern BOOL	IsRepeatCall;
 extern BOOL	IsFirstWOWCheckBinary;
 extern BOOL	IsFirstVDMInSystem;
 extern BOOL	SaveWorldCreated;
-#line 234
+extern PCHAR	pSCS_ToSync;
 extern BOOL	fBlock;
 extern PCHAR	pCommand32;
 extern PCHAR	pEnv32;
 extern DWORD	dwExitCode32;
-#line 239
+extern PSCSINFO pSCSInfo;
 extern HANDLE	hFileStdOut;
 extern HANDLE	hFileStdOutDup;
 extern HANDLE	hFileStdErr;
@@ -282,7 +282,8 @@ extern CHAR	*lpszzInitEnvironment;
 extern WORD	cchInitEnvironment;
 extern CHAR	*lpszzCurrentDirectories;
 extern DWORD	cchCurrentDirectories;
-#line 280
+extern BYTE	* pIsDosBinary;
+extern WORD	* pFDAccess;
 extern CHAR	*lpszzcmdEnv16;
 extern BOOL	DosEnvCreated;
 extern BOOL	IsFirstVDM;

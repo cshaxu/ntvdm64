@@ -44,8 +44,6 @@ PCMDINFO pCMDInfo;
  * original fields through a fresh checked lease before returning to COMMAND. */
 CMDINFO CmdInfo;
 mvdm_guest_location cmdinfo_location;
-mvdm_guest_location cmdline_location;
-mvdm_guest_location environment_location;
 mvdm_guest_location execpath_location;
 mvdm_guest_location_lease command_lease;
 mvdm_guest_location_lease execpath_lease;
@@ -372,17 +370,8 @@ char    AppName[MAX_PATH + 13];
     //
     // Prepare ccom's UCOMBUF
     //
-    if (!mvdm_guest_location_set_real_mode(&cmdline_location,
-            FETCHWORD(pCMDInfo->CmdLineSeg),
-            FETCHWORD(pCMDInfo->CmdLineOff)) ||
-        !mvdm_guest_location_acquire(&cmdline_location,
-            FETCHWORD(pCMDInfo->CmdLineSize), GUEST_MEMORY_ACCESS_WRITE,
-            &command_lease)) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
-    lpszCmd = (LPSTR)command_lease.bytes;
+    lpszCmd = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->CmdLineSeg),
+                                FETCHWORD(pCMDInfo->CmdLineOff));
 
     // Copy filepart of AppName excluding extension to ccom's buffer
 #line 294
@@ -424,25 +413,15 @@ char    AppName[MAX_PATH + 13];
     // minus 2 because the real data in lpszCmd start from lpszCmd[2]
     lpszCmd[1] = (CHAR)(cb + pDst - lpszCmd - 2);
 
-    if (!mvdm_guest_location_release(&command_lease, 1)) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
-
 
 
 #line 334
     if (DosEnvCreated) {
-	if (!mvdm_guest_location_set_real_mode(&environment_location,
-		FETCHWORD(pCMDInfo->EnvSeg), 0) ||
-	    !mvdm_guest_location_copy_to_guest(&environment_location,
-		(uint8_t const *)cmdVDMEnvBlk.lpszzEnv,
-		cmdVDMEnvBlk.cchEnv)) {
-	    VdmExitCode = ERROR_INVALID_ADDRESS;
-	    TerminateVDM();
-	    return;
-	}
+	VDMInfo.Enviornment = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->EnvSeg),0);
+	RtlMoveMemory(VDMInfo.Enviornment,
+		      cmdVDMEnvBlk.lpszzEnv,
+		      cmdVDMEnvBlk.cchEnv
+		     );
 #line 340
 	STOREWORD(pCMDInfo->EnvSize,cmdVDMEnvBlk.cchEnv);
 	free(cmdVDMEnvBlk.lpszzEnv);
@@ -832,31 +811,12 @@ static BOOL fConOutput = FALSE;
 VOID cmdComSpec (VOID)
 {
 LPSTR   lpszCS;
-/* DIVERGENCE(MVDM-HOST-DIV-192): NT4 used GetVDMAddr as a durable
- * low-address host alias for the 16:16 COMSPEC source.  Keep the original
- * COMSPEC assembly and AL result, but copy that bounded guest string through
- * the session-owned mapping lease before the original host buffer consumes
- * it. */
-mvdm_guest_location comspec_location;
-CHAR    achComSpec[MAX_PATH];
-uint32_t cbGuestComSpec;
 
 
-#line 640
     if(IsFirstCall == FALSE)
         return;
 
-    if (!mvdm_guest_location_set_real_mode(&comspec_location,
-            (USHORT)getDS(), (USHORT)getDX()) ||
-        !mvdm_guest_location_copy_c_string(&comspec_location,
-            (uint8_t *)achComSpec, sizeof(achComSpec), &cbGuestComSpec) ||
-        cbGuestComSpec == 0u) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
-        return;
-    }
-    lpszCS = achComSpec;
-#line 644
+    lpszCS =    (LPVOID) GetVDMAddr ((USHORT)getDS(),(USHORT)getDX());
     strcpy(lpszComSpec,"COMSPEC=");
     strcpy(lpszComSpec+8,lpszCS);
     cbComSpec = strlen(lpszComSpec) +1;

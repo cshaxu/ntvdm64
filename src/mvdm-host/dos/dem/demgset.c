@@ -769,7 +769,7 @@ BYTE demGetDpbI(BYTE Drive, DPB UNALIGNED *pDPB)
 			    &FreeClusters
 			    ))
     {
-	pDPB->Next = 0xFFFFFFFFUL;
+	pDPB->Next = (PDPB) 0xFFFFFFFF;
 	pDPB->SectorSize = SectorSize;
 	pDPB->FreeClusters = FreeClusters;
 	pDPB->MaxCluster = TotalClusters + 1;
@@ -1021,7 +1021,7 @@ VOID demGetDPBList (VOID)
             // Link it to the next dpb
             //
             usDpbOffset += sizeof(DPB);
-            pDpb->Next = ((DWORD)usDpbSeg << 16) | usDpbOffset;
+            pDpb->Next = (PDPB)(((ULONG)usDpbSeg) << 16 | usDpbOffset);
 
             //
             // Advance to the next dpb
@@ -1038,7 +1038,7 @@ VOID demGetDPBList (VOID)
     //
     if (usDpbOffset != getBP()) {
         pDpb -= 1;
-        pDpb->Next = 0xFFFFFFFFUL;
+        pDpb->Next = (PDPB)-1;
     }
 
     //

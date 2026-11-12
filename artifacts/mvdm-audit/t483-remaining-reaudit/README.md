@@ -25,15 +25,15 @@ execution ledgers remain history/evidence, not a second active work queue.
    the owner's authorization, preserving original line mapping and necessary
    coupled caller consistency. Do not replace an unproved adaptation with a
    different autonomous implementation. Never modify/rebuild original guest.
-4. If a difference is necessary, establish its smallest possible form. Reduce
-   mirror diff and autonomous/shim complexity together; moving equal
-   complexity elsewhere is not simplification. Proven native Win32 ownership
-   may be a valid boundary; omission alone is not evidence of a defect.
-5. If the final proposed outcome preserves the diff unchanged or increases
-   it, STOP at that item and ask the owner with concrete necessity evidence,
-   alternatives and per-item original-relative added-plus-removed delta.
-   Do not continue to later items while approval is pending. No offsets from
-   independent reductions; no same-size silent retention.
+4. If a difference is necessary, establish its smallest possible form. Do not
+   move equal complexity into shims merely to reduce mirror diff.
+5. Latest owner instruction replaces per-item stop/wait: write every required
+   owner decision to [pending-decisions.csv](pending-decisions.csv), including
+   evidence, options, recommendation and per-item mirror-diff delta, then
+   continue to the next ordered point. Do not implement any unapproved
+   non-original alternative, unchanged-diff conclusion or increased diff.
+   Exact original restorations remain directly authorized. Pending decisions
+   are not completed dispositions. Update the item when an owner decision arrives.
 6. Missing evidence is not a retain decision. Investigate the bounded actual
    call chain; record what is unknown. No blanket restoration without checking
    actual callers, compile context and source policy, and no invented original
@@ -55,3 +55,11 @@ not counts of compiler diff hunks or independently reproduced failures.
 The current host C/H mirror population is1052 files; deleted files are outside
 that population. No product changes or fresh runtime verification are claimed
 by list initialization. S6 is not separately admitted.
+
+## Per-point owner report
+
+Report each new R point separately: current added/deleted logical code lines
+against the pinned original (state treatment of #line/format), cause and problem,
+restoration feasibility and disposition, then cumulative reviewed, fully restored,
+pending-decision and unreviewed counts. Approved retain is separate; partial
+restoration remains pending until the whole point is resolved.

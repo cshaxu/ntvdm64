@@ -1,0 +1,24 @@
+{
+  "review_ids": [
+    "T483-R0008",
+    "T483-R0009"
+  ],
+  "status": "restored-original locally; focused link/run passed; batch delivery pending",
+  "prior_rationale": "Removed definitions because session state replaced raw guest aliases.",
+  "counter_review": "No current global reads/writes exist for these symbols; pSCSInfo uses in cmdexec are function-local. Restoring definitions does not restore old guest accesses or create an active second state machine.",
+  "change": "cmddata.c whole-file byte-identical original; three original zero-initialized pointer definitions restored.",
+  "memory_limit": "Up to12 bytes of x86 unreferenced pointer storage before linker decisions; no claim of binary/memory neutrality. Full package link pending.",
+  "original_sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2",
+  "current_sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2",
+  "mirror_diff_before": [
+    2,
+    3
+  ],
+  "mirror_diff_after": [
+    0,
+    0
+  ],
+  "mirror_diff_delta": -5,
+  "verification": "Existing initialization fixture and actual directory release probe relinked against restored cmddata; both exit0. Whole-file original identity proves line placement.",
+  "test_root": "build/t483-remaining-reaudit/r0002"
+}

@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "id": "T483-R0045",
+      "added": 2,
+      "removed": 2,
+      "finding": "Original executable path guest pointer replaced by local AppName. Later commit writes AppName back. Resolve with R0043 snapshot; full original failure unproved.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0046",
+      "added": 1,
+      "removed": 1,
+      "finding": "Original initial environment pointer replaced by NULL. R0048 wrapper reconstructs it temporarily; coherent original pair restoration remains undecided.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0047",
+      "added": 7,
+      "removed": 3,
+      "finding": "Original *pIsDosBinary=1 replaced by scalar write through registration. cmdSetInfo no longer initializes original global. Whole producer/consumer restoration, not isolated null dereference, is decision.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0048",
+      "added": 8,
+      "removed": 1,
+      "finding": "PIF wrapper copies bounded initial environment, sets cmdVDMEnvBlk temporarily and resets it after cmdCheckForPIF; bypasses copy if existing environment or not first VDM. Dependency on R0046 is proved, original defect is not.",
+      "decision": "pending"
+    }
+  ],
+  "source_sha256": "c1c2b25a6b3e3e0ebf36d05f7b08c37643619c6bc57abd914f42140bb5413945",
+  "count_basis": "Logical code diff including comments, excluding #line",
+  "counter_review": "Current wrappers repairing their own removed original pointers do not prove original failure. Review PIF environment ownership, call duration and registration together before restoration. No claim all original accesses are invalid.",
+  "verification": "Source/call-chain inspection only; unchanged source, #error/#line. No new build/runtime result.",
+  "sources": [
+    "src/mvdm-host/dos/command/cmdmisc.c",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c:139-174",
+    "src/mvdm-host/dos/command/cmdpif.c"
+  ],
+  "mirror_diff_delta": 0
+}

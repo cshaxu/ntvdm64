@@ -1,0 +1,62 @@
+{
+  "items": [
+    {
+      "id": "T483-R0073",
+      "added": 3,
+      "removed": 1,
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "finding": "DTA global pointer replaced by numeric location; depends on demSetDTALocation and demsrch/demfcb readers; original stale-pointer failure not established.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0074",
+      "added": 3,
+      "removed": 1,
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "finding": "Current PDB global pointer replaced by numeric location; DEM and nt_fdisk/nt_rflop consumers remain live; original lifetime failure not established.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0075",
+      "added": 2,
+      "removed": 1,
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "finding": "SFT global pointer replaced by numeric location; demfile resolves it via Sim32GetVDMPointer at VDD boundaries; original lifetime failure not established.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0076",
+      "added": 1,
+      "removed": 0,
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "finding": "Forward declaration for shared fast-I/O decline; decision follows dispatch and implementation.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0077",
+      "added": 2,
+      "removed": 2,
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "finding": "Original demNotYetImplemented clears CF; guest handle.asm skips slow read/write when CF clear. Current dispatch sets CF instead; original NT kernel NTFastDOSIO is not this standalone user-mode dispatcher.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0078",
+      "added": 10,
+      "removed": 0,
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "finding": "Minimal decline sets CF=1, allowing unchanged guest handle.asm to execute slow I/O; no second I/O algorithm. Recommend retain subject to owner decision.",
+      "decision": "pending"
+    }
+  ],
+  "verification": "Original and current declarations, producers, consumers and guest CF branches inspected; no new build/runtime probe. No source changes.",
+  "counter_review": "Global address dependency proves group coherence only, not necessity of original replacement. Fast-I/O has concrete original fallback semantics and distinct absent kernel owner; do not restore a success-returning placeholder in isolation.",
+  "evidence": [
+    "src/mvdm-host/dos/dem/demgset.c::demSetDTALocation",
+    "src/mvdm-host/dos/dem/demfile.c::demSftHeadPointer",
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c::DemDispatch call",
+    "src/mvdm-guest/dos/v86/doskrnl/dos/handle.asm do_read/dowrite",
+    "O:/repos.external/OpenNT/base/ntos/vdm/x86/rdwr.c::NTFastDOSIO"
+  ],
+  "mirror_diff_delta": 0
+}

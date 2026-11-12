@@ -18,10 +18,6 @@
 #include <oemuni.h>
 #include "compat/include/environapi.h"
 
-/* DIVERGENCE(MVDM-HOST-DIV-193): the original ES:0 environment destination
- * was a process-address alias.  Preserve the original byte order and BX
- * paragraph contract through one synchronous write lease instead. */
-#include "mvdm_guest_location.h"
 #line 19
 
 #define VDM_ENV_INC_SIZE    512
@@ -194,9 +190,6 @@ VOID cmdGetInitEnvironment(VOID)
     BOOL fFoundComSpec = FALSE;
     BOOL fFoundWindir = FALSE;
     BOOL fVarIsWindir = FALSE;
-    mvdm_guest_location environment_location;
-    mvdm_guest_location_lease environment_lease;
-#line 190
 
     // if not during the initialization return nothing
     if (!IsFirstCall) {
@@ -316,24 +309,13 @@ VOID cmdGetInitEnvironment(VOID)
 	    cchInitEnvironment = 0;
 	}
     }
-#line 310
+    lpszzEnvBuffer = (CHAR *) GetVDMAddr(getES(), 0);
     cchEnvBuffer =  (WORD)getBX() << 4;
     if (cchEnvBuffer < cchInitEnvironment + cbComSpec) {
         setBX((USHORT)((cchInitEnvironment + cbComSpec + 15) >> 4));
 	return;
     }
     else {
-	mvdm_guest_location_set_real_mode(&environment_location,
-		(USHORT)getES(), 0);
-	if (!mvdm_guest_location_acquire(&environment_location,
-		cchInitEnvironment + cbComSpec, GUEST_MEMORY_ACCESS_WRITE,
-		&environment_lease)) {
-	    setCF(1);
-	    setAX((USHORT)ERROR_INVALID_ADDRESS);
-	    return;
-	}
-	lpszzEnvBuffer = (CHAR *)environment_lease.bytes;
-#line 316
 	strncpy(lpszzEnvBuffer, lpszComSpec, cbComSpec);
 	lpszzEnvBuffer += cbComSpec;
     }
@@ -347,13 +329,6 @@ VOID cmdGetInitEnvironment(VOID)
     }
     else
 	setBX(0);
-
-    if (!mvdm_guest_location_release(&environment_lease, 1)) {
-	setCF(1);
-	setAX((USHORT)ERROR_INVALID_ADDRESS);
-	return;
-    }
-#line 329
 
     return;
 }

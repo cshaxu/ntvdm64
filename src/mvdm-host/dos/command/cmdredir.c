@@ -395,7 +395,7 @@ BOOL cmdHandleStdOutErrWithPipe(
     }
     hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
 			    (DWORD)0,
-			    cmdPipeOutThread,
+			    (LPTHREAD_START_ROUTINE)cmdPipeOutThread,
 			    (LPVOID)pPipe,
 			    0,
 			    &ThreadId
@@ -521,7 +521,7 @@ BOOL cmdHandleStdinWithPipe (
     InitializeCriticalSection(&pPipe->CriticalSection);
     pPipe->hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
 			       (DWORD)0,
-			       cmdPipeInThread,
+			       (LPTHREAD_START_ROUTINE)cmdPipeInThread,
 			       (LPVOID)pPipe,
 			       0,
 			       &ThreadId

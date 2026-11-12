@@ -1,0 +1,28 @@
+{
+  "review_id": "T483-R0007",
+  "status": "completed: owner approved retaining explicit include unchanged",
+  "problem": "cmdconf needs the declaration of the package-root query used to generate guest COMMAND/configuration paths. This differs from cmd.c temporary safe-root use.",
+  "original_failure_evidence": {
+    "include_only_removal": "Actual compile succeeds, but C4013 says NtvdmGetWindowsDirectoryA undefined; assuming extern returning int. No observed runtime crash is claimed.",
+    "restoring_root_call": "Source builds shell=%s\\System32\\command.com from this root; observed actual host Windows shell file absent, configured package shell present. Full runtime A/B not performed.",
+    "host_command_path": "C:\\WINDOWS\\System32\\command.com",
+    "host_command_exists": false,
+    "package_command_path": "O:\\winnt\\system32\\command.com",
+    "package_command_exists": true
+  },
+  "baseline_exit": 0,
+  "without_include_exit": 0,
+  "command_sha256": "f0c82007d2f4eb7165e4915ae46b7e71a31d43e60adf058b1842c3794af73e49",
+  "baseline_log_sha256": "046fa3c0f8a857ac4e5def54180c46ef94eaf1ef744cd944fd8dc82951325364",
+  "without_include_log_sha256": "a564653fb217861c022e112c657cb94b159631e997ac2e62037f98f1c41b8f4d",
+  "counter_review": "The include-only experiment disproves any claim of unavoidable current compile failure. Retention is recommended for correct explicit function declaration tied to a separately necessary package-media binding. Existing completed body simplification is not reopened. No blanket claim all root-query adaptations are necessary.",
+  "options": [
+    "Retain explicit header unchanged, subject to owner approval.",
+    "Moving the prototype to cmd.h, a forced include or macro preserves/moves the dependency instead of reducing total complexity.",
+    "Deleting include and accepting implicit function typing requires owner decision; not an original call-chain restoration."
+  ],
+  "mirror_diff_delta": 0,
+  "source_modified": false,
+  "next_item_started": false,
+  "owner_approval": "User: 批准。 Following explanation; not an authorization to resume paused goal."
+}

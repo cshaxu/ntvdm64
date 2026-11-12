@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "id": "T483-R0069",
+      "added": 1,
+      "removed": 1,
+      "finding": "Original ntdddisk.h include replaced with blank. Historical 17-context probe found predefined guard; mirrored header subsequently deleted. That proves historical redundancy, not original failure. Restoring dependency requires header ownership decision."
+    },
+    {
+      "id": "T483-R0070",
+      "added": 1,
+      "removed": 0,
+      "finding": "Guest location header supplies live DTA/PDB/SFT declarations; standalone removal breaks current dependency, not proof complete original chain is invalid."
+    },
+    {
+      "id": "T483-R0071",
+      "added": 3,
+      "removed": 1,
+      "finding": "Original pulDTALocation pointer replaced by numeric dta_location. demSetDTALocation registers DS:AX; demsrch and demfcb acquire fresh leases. No reproduced stale original pointer failure established."
+    }
+  ],
+  "decision": "pending",
+  "counter_review": "Dependency coherence is not evidence of original incorrectness. Whole producer/consumer restoration remains an alternative; do not introduce a parallel owner. Header deletion history is evidence, not a new compile result.",
+  "verification": "Current callers inspected; original lines 56/117/122 compared; no source changes or new builds.",
+  "mirror_diff_delta": 0
+}

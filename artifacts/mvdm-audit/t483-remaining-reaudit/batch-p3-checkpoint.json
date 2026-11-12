@@ -1,0 +1,257 @@
+{
+  "status": "built-tested-published-git-delivery-pending",
+  "reviewed_through": "T483-R0085",
+  "next_review": "T483-R0086",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "sha256": "120e96fbde998abf320ca677e8a33846d8c35f7a43fafdaae7ae169ac13a1452"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "sha256": "701246e318fb3b5bdb7cb24b8c1411afcca638dc72105ee7e2c91ea6c5c1e1d7"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "6b96e5213cced35e1d84bed62d298e2321242474f75aee048bb7791cecb12dfb"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "6bab8065bd60858e2f4ee84b271f9f50dccf466cc2998e1441adc541f8530dda"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "sha256": "cb869071a96904889a3858e261f076de3ca9bd517672e2f5a8402110bb40d877"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.h",
+      "sha256": "de5bd5e437c17a34af71999e6e6e7c0e749d9d9da61bc5cc8420c0406e1a2c35"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "sha256": "ae040a05cc5ba37adcb49d65b6a83339cbf0edd1e6e0f871f31b71edf67b5c1a"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "935863867496cfdcc48f51e1473065f13eb111571442f1b72245c383982673f4"
+    }
+  ],
+  "source_files": 10,
+  "build_owner": "build/t483-s5-p3/cached-owner.json",
+  "limits": "Full regression is not exhaustive mapping/lifetime proof. Pending decisions remain unresolved. No guest modifications or winnt.zip changes.",
+  "cached_build": {
+    "exit_code": 0,
+    "stdout": "build/t483-s5-p3/cached.stdout",
+    "stdout_sha256": "64c5d4aeb705468e6ade9533e9864134942b8e80068d169388e9420939239228",
+    "stderr": "build/t483-s5-p3/cached.stderr"
+  },
+  "verification_owner": "build/t483-s5-p3/verify-owner.json",
+  "excluded_branch_check": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "excluded_error_directives_unchanged": true,
+      "count": 9
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.h",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 6
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "excluded_error_directives_unchanged": true,
+      "count": 0
+    }
+  ],
+  "commands": [
+    {
+      "Case": "ntvdm-command-capture-test",
+      "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-capture-test.exe",
+      "SHA256": "3174876A08C7810F13CE9610AE62691AD47FE81C4FA12DA6D3784C42870DC95C",
+      "PID": 13356,
+      "Started": "2026-11-12T22:48:44.4266542Z",
+      "Exit": 0,
+      "TimedOut": false,
+      "Passed": true
+    },
+    {
+      "Case": "ntvdm-command-launch-test",
+      "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-launch-test.exe",
+      "SHA256": "A4C3D2DE99D4BA236A41A69E0EB99B9ED3F72988A1257B2CACC9AFC69D520C7A",
+      "PID": 31708,
+      "Started": "2026-11-12T22:48:44.6065719Z",
+      "Exit": 0,
+      "TimedOut": false,
+      "Passed": true
+    }
+  ],
+  "publication": {
+    "status": "published",
+    "package": "0db3c11e-0a6e-4e0b-b2b0-ce921eaf5b1b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 366568,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6188,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1407,
+        "CleanupMs": 611,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 247,
+        "CleanupMs": 621,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67785,
+        "CleanupMs": 633,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 52658,
+        "CleanupMs": 623,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46973,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14271,
+        "CleanupMs": 531,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10928,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 51303,
+        "CleanupMs": 555,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12470,
+        "CleanupMs": 500,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28554,
+        "CleanupMs": 463,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30523,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3703,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7654,
+        "CleanupMs": 516,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10166,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5064,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6653,
+        "CleanupMs": 469,
+        "Passed": true
+      }
+    ]
+  },
+  "governance": {
+    "exit": 0,
+    "documentation": true,
+    "relative_links": true
+  },
+  "skips": [
+    "DOS4GW/NESticle: verified external fixtures not supplied"
+  ],
+  "restored_entries": 22,
+  "pending_decision_entries": 61,
+  "mirror_diff_delta": -126
+}
