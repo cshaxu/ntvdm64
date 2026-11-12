@@ -69,13 +69,6 @@ uint32_t __cdecl NtvdmGetSystemDirectoryW(wchar_t *path_out,
  * file consumers. Returns zero if conversion cannot fit; opens no file. */
 int mvdm_softpc_config_path_to_ansi(char *path, uint32_t capacity);
 
-/* Selected-product disposition for the historical first-session compatibility
- * probe.  The original AddSystemFiles() body creates C:\\MSDOS.SYS and
- * C:\\IO.SYS only to satisfy a legacy installer.  The current product keeps
- * ordinary admitted host-drive access, but never creates these fake boot
- * markers on the real host volume. */
-void mvdm_softpc_prepare_system_file_compatibility(void);
-
 #ifdef __cplusplus
 }
 #endif

@@ -8,8 +8,6 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code);
 
 /* Existing default-off observations still used by selected product callers. */
-void mvdm_softpc_report_termination(char const *stage,
-    void const *return_address);
 void mvdm_softpc_report_xms_move(unsigned long source,
     unsigned long destination, unsigned long byte_count, int completed);
 void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,

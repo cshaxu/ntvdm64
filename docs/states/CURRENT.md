@@ -65,7 +65,15 @@ Full-tested candidate after only package UUID/PE timestamp normalization.
 Both destinations were published and hash-verified. See
 [P3 delivery](../../artifacts/mvdm-audit/t483-s4/batch3-delivery.json) and
 [source review](../../artifacts/mvdm-audit/t483-s4/batch3-source-review.json).
-Next: continue the remaining S4 ledger in original file/line order.
+P4 resolves D1366/D1375/D1380: empty host-boot-marker adapter and optional
+termination reporter removed, lifecycle authorization preserved. Eleven source/test
+files net -50 lines (mirror -7, autonomous -39, tests -4). Total delivered:
+61/117; 56 remain. Cached x86/x64, actual original-line review, six-reporters
+across four modes, nine lifecycle cases and Full16 passed. Eleven images were
+published and hash-verified at both destinations. See
+[P4 delivery](../../artifacts/mvdm-audit/t483-s4/batch4-delivery.json) and
+[source review](../../artifacts/mvdm-audit/t483-s4/batch4-source-review.json).
+Next: nt_rflop.c, nt_unix.c and sim32.c in register order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure
@@ -77,10 +85,10 @@ regressions passed. No user desktop unlock dependency remains in generic queue t
 
 ## Current Technical Baseline
 
-Package `cac1ff1f-c34d-4e32-a182-17da9e2c4e1f`, complete 11 images at
-assets/release and O:/winnt/system32, manifest hashes equal. Final images equal
-the Full-tested P3 candidate after only package UUID and PE timestamp normalization;
-this is not raw hash identity. DOS4GW/NESticle remains explicitly skipped because
+Package `f9726f9b-f69c-4c58-9f07-6821c0fefda3`, complete 11 images at
+assets/release and O:/winnt/system32, manifest hashes equal. Published images
+are raw-hash identical to the Full-tested P4 candidate. DOS4GW/NESticle remains
+explicitly skipped because
 its external fixture was not supplied. No guest or winnt.zip change.
 
 ## Remaining Scope
@@ -96,8 +104,8 @@ The DOS identity/wrong-waiter defect and Win95 exit-code boundary remain in
 [TODO](TODO.md). Win95 restart-to-DOS belongs to the
 [XP baseline-upgrade package](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md).
 
-The owner authorizes submission of the pending queue reorder and its Win203
-proposal together. This documentation-only delivery does not change S4 scope.
+The approved queue reorder and Win203 proposal were delivered in `0fbbe5768`;
+no queue changes remain pending in this batch.
 
 ## Recent M0 Closures
 
@@ -109,5 +117,5 @@ proposal together. This documentation-only delivery does not change S4 scope.
 
 ## Recent Governance
 
-See the [execution rules](../rules/EXECUTION.md). S3 preserved the parallel queue/proposal changes; their subsequent submission
-is now explicitly authorized by the owner.
+See the [execution rules](../rules/EXECUTION.md). Queue/proposal delivery is
+complete; S4 proceeds under the owner-approved S2–S5 sequence.

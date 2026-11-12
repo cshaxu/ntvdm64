@@ -12,29 +12,6 @@
  * original host_main -> host_applClose tail. */
 extern void host_applClose(void);
 
-void mvdm_softpc_report_termination(char const *stage,
-    void const *return_address)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    DWORD bytes;
-    HANDLE file;
-    char line[64];
-    DWORD written;
-
-    bytes = GetEnvironmentVariableA("MVDM_TERMINATE_VDM_REPORT_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
-        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line), "%s return=%p\r\n", stage, return_address);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
 void mvdm_softpc_report_xms_move(unsigned long source,
     unsigned long destination, unsigned long byte_count, int completed)
 {

@@ -345,7 +345,6 @@ $env:MVDM_PROMPT_READERS="$dest/PATCH/READERS.BIN"
 $env:MVDM_SCREEN_TRACE="$task/screens.txt"
 $env:MVDM_EDITORS_READY="$dest/PATCH/EDITORS.BIN"
 $env:MVDM_REAL_COMMAND='1'
-$env:MVDM_TERMINATE_VDM_REPORT_PATH="$task/termination.txt"
 $env:MVDM_CONTINUATION_TRACE="$task/trace.txt"
 
 try {

@@ -55,7 +55,6 @@ try {
  foreach($entry in $entries){$at=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}
  $info.EnvironmentVariables['TEMP']=$runtime;$info.EnvironmentVariables['TMP']=$runtime
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
- $info.EnvironmentVariables['MVDM_TERMINATE_VDM_REPORT_PATH']="$root/termination.txt"
  $info.EnvironmentVariables['MVDM_WOW_CALLBACK_CPU_TRACE_PATH']="$root/cpu.txt"
  $info.EnvironmentVariables['MVDM_WOW_DISPATCH_TRACE_PATH']="$root/dispatch.txt"
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"

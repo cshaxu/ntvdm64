@@ -1,0 +1,128 @@
+{
+  "baseline": "5a9ac0c9b",
+  "status": "verified and published; included in P4 commit",
+  "entries": [
+    "T483-D1366",
+    "T483-D1375",
+    "T483-D1380"
+  ],
+  "modified_source_test_files": 11,
+  "proof": {
+    "D1366": "Empty provider had one production caller and no result. Retain original scs_init -> AddSystemFiles first-session order and selected no-host-write body; delete exclusive adapter declaration/definition. Firmware header still needed for ntio.sys lookup. Provenance row134 updated.",
+    "D1375/D1380": "Lifecycle authorize_exit remains before both host_applClose cleanup and host_terminate retirement. Use existing owner header. Delete only _ReturnAddress report and its exclusive provider/declaration. Other reporters and actual session termination remain.",
+    "tests": "Observer error fixture now tests six remaining reporters with all four modes. Removed obsolete report env settings from three integration runners; no assertion depended on termination.txt. No other src/test references remain."
+  },
+  "required": [
+    "cached x86/x64",
+    "actual preprocessing and original line mapping",
+    "six-reporter fixture all modes",
+    "console lifecycle fixture and Full16",
+    "eleven-image dual publication and hash checks",
+    "governance, clean commit and push"
+  ],
+  "verification_progress": {
+    "cached": "x86/x64 passed; cached.exit=0",
+    "observer": "Six remaining reporters x disabled/long/missing/enabled modes all pass; observer.exit=0",
+    "lines": "Actual x86 compiler preprocessing: nt_msscs126 original statement anchors, nt_reset44, no exact-statement conflicts",
+    "initial_lifecycle_attempt": "Temporary invocation incorrectly required zero for default fixture. Existing verify-console-close-contract prescribes73; actual focused-r2 uses maintained verify-vm-frontends per-case expected codes. Initial wrapper failure retained, not reclassified as pass.",
+    "lifecycle": "Maintained verify-vm-frontends runner: all nine cases pass with expected codes0/73/74; lifecycle/results.json",
+    "package": "Eleven-image candidate staged; stage.exit=0; not yet published",
+    "full": {
+      "passed": true,
+      "gates": 16,
+      "elapsed_ms": 358119,
+      "skip": "DOS4GW/NESticle: external fixture missing"
+    },
+    "publication": {
+      "status": "published",
+      "package": "f9726f9b-f69c-4c58-9f07-6821c0fefda3",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    }
+  },
+  "counter_review": {
+    "empty_provider": "AddSystemFiles remains called only for original first session. Selected body has no host API call. ntio.sys lookup still retains firmware header. No remaining source or test references to removed provider.",
+    "exit_authority": "Both lifecycle authorization calls retain original position before resource release/ExitVDM. Owner declaration is exact void(void). Report previously restored last-error and had no control result. Removing it removes only optional file output and return-address sampling.",
+    "runner_cleanup": "Three integration runners only set the removed trace path; none consumed termination.txt or asserted its contents. Existing reporter fixture now covers all six remaining functions without substituting a success stub.",
+    "line_mapping": "nt_msscs126 and nt_reset44 exact original statement anchors, zero conflicts from actual compiler output; retained#line313 and#line328 delimit edits."
+  },
+  "footprint": {
+    "mirror_source": {
+      "added": 2,
+      "deleted": 9,
+      "net": -7
+    },
+    "autonomous_source": {
+      "added": 0,
+      "deleted": 39,
+      "net": -39
+    },
+    "tests": {
+      "added": 4,
+      "deleted": 8,
+      "net": -4
+    },
+    "excluded": "Provenance README, governance/status, evidence JSON and binary package not counted as source/test code."
+  },
+  "source_identities": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "before_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+      "after_sha256": "6c239f3acafe6539ab461412c2dd3111adcd6ee778271f13436463ae2235cc9f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "before_sha256": "1c88272cf7c3e94e77ccc266b5a11bdde349baa0dda6972a7e2fe6eb4e8ed29f",
+      "after_sha256": "5fabe2d9ac47892c16699e891a50c012e7cf2c67dd0c97d74834e1e1b2c047a7"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h",
+      "before_sha256": "1246a9d4e87a5584a728cfb31a1ecfcc08fffe22812e983a1cd3bbaf7d7e6056",
+      "after_sha256": "c3e830f274df92911f963e049edee5286d6d8844fd53b5969fdbc298ed84a855"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "before_sha256": "8a33970458128ae39b44976abf0064d5afa539174b5d93aa7e74d19866cd082c",
+      "after_sha256": "52e22546d0fa77c7f6175038aad1de0688b3e6428f568e4df6a3f21cdacc32df"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "before_sha256": "69c437e55266c75941628476b0830f08d212e0f4b158bf189deecee4a32d4a7a",
+      "after_sha256": "a198631a171849c8c0c98e1b209723533ed4681f6a472a880ba2e399a9f6adc1"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "before_sha256": "8c7907a98901a403697df543c5f82217da79aad4254f4d040b0c35d5fe1aee30",
+      "after_sha256": "aabfecd46971dee882d4e8e6a08680708d7bbee32f7b4ac66af364b97e980464"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
+      "before_sha256": "acceeafe092ba821abc27e09c16eca3990a01a9c0a8f5e217ab8965ad7639f9d",
+      "after_sha256": "e119e2a6caaa09eb89a894021b102280ff5af45e2f3144f95a236f4021746e04"
+    },
+    {
+      "path": "test/integration/verify-win16-multimedia-timer-probe.ps1",
+      "before_sha256": "040fce21a8009a157a3ba3df76276c551cc6ce1e15d9a8d9f7c9d9574e433d43",
+      "after_sha256": "60f3e04a37135240bb8329c7c5f65fa50210bdf746172b185498f9ecb42a6619"
+    },
+    {
+      "path": "test/integration/verify-wow-clipboard-transfer.ps1",
+      "before_sha256": "979f67dcbc165f0e44d7ee28bdc1d9a201ba37ec4b79a2ce7d882ef46c83bbca",
+      "after_sha256": "d36675f415a74f6bace60c9725800b60a267f34e6526790f127a6764132fa9db"
+    },
+    {
+      "path": "test/observation/softpc_observer_error_probe.c",
+      "before_sha256": "698b037b4de0d53305797b2b697cb1ee325984740e1b04464dfcda5d1a599f60",
+      "after_sha256": "cd82f41cf4046b6713deaf74403bb1ce243349c51b44a107493dd86c9ec7011f"
+    },
+    {
+      "path": "test/observation/verify-softpc-observer-error.ps1",
+      "before_sha256": "9ac1dfd76aae2a9ea6e9a2157b09d7047b1d2cd00534f3ff313636a69bb3d265",
+      "after_sha256": "cbe57d93a94c158d9eed96b2367ac81bc035b234008e7614fb2c12204f3aee68"
+    }
+  ]
+}

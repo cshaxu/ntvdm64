@@ -35,7 +35,7 @@ $null=New-Item -ItemType Directory -Path $root
 $runtime=$null;$scope=$null;$process=$null
 $saved=@{}
 foreach($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP',
-        'MVDM_TERMINATE_VDM_REPORT_PATH','MVDM_WOW_WINDOW_TRACE_PATH',
+        'MVDM_WOW_WINDOW_TRACE_PATH',
         'MVDM_WOW_CALLBACK_SCOPE_TRACE_PATH',
         'MVDM_WOW_CALLBACK_CPU_TRACE_PATH',
         'MVDM_WOW_DISPATCH_TRACE_PATH',
@@ -150,7 +150,6 @@ try {
     } else {
         $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     }
-    $env:MVDM_TERMINATE_VDM_REPORT_PATH="$root\termination.txt"
     # Preserve the production adapter's opt-in retirement trace outside the
     # disposable runtime stage, so a failed task-loss witness remains
     # diagnosable after the stage is removed.

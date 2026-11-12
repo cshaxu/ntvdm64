@@ -296,10 +296,3 @@ int mvdm_softpc_config_path_to_ansi(char *path, uint32_t capacity)
     return WideCharToMultiByte(CP_ACP, 0, unicode, chars, path,
         (int)capacity, NULL, NULL) != 0;
 }
-
-void mvdm_softpc_prepare_system_file_compatibility(void)
-{
-    /* The historical routine has no observable result other than the two
-     * installation-only host writes.  Do not fabricate their success by
-     * mutating the admitted real host drive. */
-}

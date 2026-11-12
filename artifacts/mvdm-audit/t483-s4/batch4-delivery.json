@@ -1,0 +1,54 @@
+{
+  "part": "T483 S4 P4",
+  "baseline": "5a9ac0c9b",
+  "entries": [
+    "T483-D1366",
+    "T483-D1375",
+    "T483-D1380"
+  ],
+  "delivered_total": 61,
+  "remaining": 56,
+  "modified_source_test_files": 11,
+  "footprint": {
+    "mirror_source": {
+      "added": 2,
+      "deleted": 9,
+      "net": -7
+    },
+    "autonomous_source": {
+      "added": 0,
+      "deleted": 39,
+      "net": -39
+    },
+    "tests": {
+      "added": 4,
+      "deleted": 8,
+      "net": -4
+    },
+    "excluded": "Provenance README, governance/status, evidence JSON and binary package not counted as source/test code."
+  },
+  "source_review": "batch4-source-review.json",
+  "verification": {
+    "cached": "x86/x64 passed",
+    "lines": "Actual compiler outputs:126+44 original statement anchors, no conflicts",
+    "reporters": "6 reporters x 4 modes passed",
+    "lifecycle": "9 maintained VM frontend/lifecycle cases passed with expected0/73/74",
+    "full_gates": 16,
+    "full_elapsed_ms": 358119,
+    "skip": "DOS4GW/NESticle lacks external fixtures; not a pass",
+    "initial_runner_error": "Temporary invocation treated default nonzero lifecycle receipt as failure. Maintained runner supplied exact per-case contracts; rerun passed.",
+    "governance": "Final documentation governance and relative-link checks passed; build/t483-s4-p4/governance-final.stdout.log"
+  },
+  "publication": {
+    "status": "published",
+    "package": "f9726f9b-f69c-4c58-9f07-6821c0fefda3",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_root": "build/t483-s4-p4",
+  "scope": "No guest or winnt.zip edits; retains no-host-boot-marker writes and NTSRV exit authority."
+}

@@ -299,9 +299,7 @@ void AddSystemFiles(void)
    /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session
     * call site and void completion contract, but do not create Brief's
     * installation-only C:\\MSDOS.SYS/C:\\IO.SYS placeholders on an admitted
-    * real host drive. The selected adapter records this explicit product
-    * disposition; the original source body remains below as mirror evidence. */
-   mvdm_softpc_prepare_system_file_compatibility();
+    * real host drive. This entry deliberately performs no host mutation. */
 #else
 #line 260
 #error Unsupported excluded original configuration

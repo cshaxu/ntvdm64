@@ -470,23 +470,26 @@
     {
       "id": "T483-D1366",
       "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
-      "status": "pending",
+      "status": "delivered P4",
       "plan": "Preserve no-host-mutation policy but remove empty adapter call and exclusive declaration/definition. Keep minimal documented no-op original entry if its original call site must remain; never restore host writes.",
-      "verification": "No host root writes, original first-session initialization continues, no remaining provider users."
+      "verification": "No host root writes, original first-session initialization continues, no remaining provider users.",
+      "evidence": "batch4-delivery.json"
     },
     {
       "id": "T483-D1375",
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
-      "status": "pending",
+      "status": "delivered P4",
       "plan": "Use owner header, remove trace-only includes with calls.",
-      "verification": "Compile and preserve lifecycle ABI."
+      "verification": "Compile and preserve lifecycle ABI.",
+      "evidence": "batch4-delivery.json"
     },
     {
       "id": "T483-D1380",
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
-      "status": "pending",
+      "status": "delivered P4",
       "plan": "Keep authorization; remove trace and _ReturnAddress dependency; provider removal only after all users handled.",
-      "verification": "Direct and normal exit ordering and adapted observation tests."
+      "verification": "Direct and normal exit ordering and adapted observation tests.",
+      "evidence": "batch4-delivery.json"
     },
     {
       "id": "T483-D1388",
