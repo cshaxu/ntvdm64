@@ -30,7 +30,6 @@
 #include <vdm.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mvdm_softpc_firmware.h"
 #line 31
 #include "conapi.h"
 

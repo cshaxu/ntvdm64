@@ -88,10 +88,6 @@
 
 #include "debug.h"
 #include "idetect.h"
-/* DIVERGENCE(MVDM-HOST-DIV-325): default-off Win3.1 Setup diagnosis.  This
- * observes the already-decoded idle request; it neither changes keyboard
- * ownership nor alters the original wait policy. */
-#include "mvdm_softpc_termination.h"
 
 
 /*
@@ -684,11 +680,6 @@ void NtPutInBuffer(half_word s, half_word v)
                 sas_store_no_check(BIOS_VAR_START + buffer_tail, v);
                 sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);
                 sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);
-                /* DIVERGENCE(MVDM-HOST-DIV-325): only the explicit Win3.1
-                 * Setup trace records a key after the original BIOS buffer
-                 * commit.  It cannot affect delivery, ownership or IRQs. */
-                mvdm_softpc_report_setup_hardware_probe("keyboard-buffer-put",
-                    (unsigned long)s, (unsigned long)v);
 #line 756
                 setAX(0x9102);
                 INT15();
@@ -1443,9 +1434,6 @@ void kb_idle_poll()
     */
 void keyboard_io()
 {
-   /* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */
-   mvdm_softpc_report_setup_hardware_probe("keyboard-bop-enter",
-       (unsigned long)getAH(), (unsigned long)getAL());
 #line 1496
    switch (getAH()) {
            /*
@@ -1472,12 +1460,8 @@ void keyboard_io()
              * App is starting a waitio
              */
      case 2:
-       mvdm_softpc_report_setup_hardware_probe("keyboard-waitio-enter",
-           (unsigned long)getAH(), (unsigned long)getAL());
 #line 1522
        IDLE_waitio();
-       mvdm_softpc_report_setup_hardware_probe("keyboard-waitio-leave",
-           (unsigned long)getAH(), (unsigned long)getAL());
 #line 1523
        break;
 

@@ -446,191 +446,218 @@
     {
       "id": "T483-D0564",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete unused extern and its owner comment, preserve ev_glue strong definition. Do not restore local tentative definition.",
-      "verification": "Selected link retains exactly one Gdp definition and normal C-VID setup/teardown."
+      "verification": "Selected link retains exactly one Gdp definition and normal C-VID setup/teardown.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0578",
       "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
-      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0579",
       "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
-      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0580",
       "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
-      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0581",
       "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
-      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0582",
       "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
-      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0583",
       "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
-      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0584",
       "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
-      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0585",
       "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
-      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0851",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
-      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0852",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
-      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0853",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
-      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0854",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
-      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0855",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
-      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0939",
       "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove report call and now-unused termination header from illegalp.c; remove this specific provider definition/declaration and its trace-path test expectations. Keep other termination/report functions while other callers remain. Retain needed investigation capability as separately admitted probe, not a parallel product error path.",
-      "verification": "Build both supported host architectures; source/link search for removed symbol; adapted observer tests; original illegal-opcode panel and continue/terminate behavior regression."
+      "verification": "Build both supported host architectures; source/link search for removed symbol; adapted observer tests; original illegal-opcode panel and continue/terminate behavior regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0940",
       "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove report call and now-unused termination header from illegalp.c; remove this specific provider definition/declaration and its trace-path test expectations. Keep other termination/report functions while other callers remain. Retain needed investigation capability as separately admitted probe, not a parallel product error path.",
-      "verification": "Build both supported host architectures; source/link search for removed symbol; adapted observer tests; original illegal-opcode panel and continue/terminate behavior regression."
+      "verification": "Build both supported host architectures; source/link search for removed symbol; adapted observer tests; original illegal-opcode panel and continue/terminate behavior regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1127",
       "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete nt_event.h PointerAttachedWindowed extern and its DIV-099 explanatory notice; preserve nt_event.c BOOL definition and uses. Remove obsolete declaration-adaptation rationale while recording intentional original-declaration deletion.",
-      "verification": "Compile all maintained consumers of nt_event.h and verify no undeclared-variable reference; confirm definition, symbol visibility and mouse detach behavior unchanged."
+      "verification": "Compile all maintained consumers of nt_event.h and verify no undeclared-variable reference; confirm definition, symbol visibility and mouse detach behavior unchanged.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1270",
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete mvdm_softpc_firmware.h include; do not add a shim to justify it.",
-      "verification": "Compile translation unit without header and check declaration ownership; no runtime behavior change expected."
+      "verification": "Compile translation unit without header and check declaration ownership; no runtime behavior change expected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1314",
       "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove calls and exclusive providers/declarations; move required assertions to test-owned observer.",
-      "verification": "INT2A handled/unhandled behavior and maintained observer fixture."
+      "verification": "INT2A handled/unhandled behavior and maintained observer fixture.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1332",
       "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove call/exclusive provider/declaration with maintained fixture adaptation; retain returnStatus.",
-      "verification": "Handled/unhandled returns and equivalent external observation."
+      "verification": "Handled/unhandled returns and equivalent external observation.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1336",
       "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
-      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1337",
       "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
-      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1338",
       "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
-      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1339",
       "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
-      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1344",
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Restore original direct VdmAllocateVirtualMemory comparison and single return; remove status local, report call, extra brace and termination include together. Remove exclusive report provider/declaration after migrating maintained observer test.",
-      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed."
+      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1345",
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Restore original direct VdmAllocateVirtualMemory comparison and single return; remove status local, report call, extra brace and termination include together. Remove exclusive report provider/declaration after migrating maintained observer test.",
-      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed."
+      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1346",
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Restore original direct VdmAllocateVirtualMemory comparison and single return; remove status local, report call, extra brace and termination include together. Remove exclusive report provider/declaration after migrating maintained observer test.",
-      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed."
+      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1381",
@@ -901,8 +928,8 @@
   ],
   "counts": {
     "assigned": 120,
-    "delivered": 55,
-    "remaining_unprocessed": 65
+    "delivered": 82,
+    "remaining_unprocessed": 38
   },
   "coupled_cleanup": "Shared termination diagnostic providers are removed once remaining S3 callers have been resolved; required before S3 closure."
 }

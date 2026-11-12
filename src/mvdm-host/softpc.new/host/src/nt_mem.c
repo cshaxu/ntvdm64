@@ -44,7 +44,6 @@
 
 #include "nt_mem.h"
 #include "mvdm_softpc_physical_mapping.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #line 42
 #include "debug.h"
 #include "sas.h"
@@ -962,7 +961,6 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
                                          PULONG, IntelAddress)
 {
     IU32 alignfix;
-    NTSTATUS status;
 
 #ifdef DEBUG_MEM
 #line 937
@@ -986,12 +984,9 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
 
     /* step 1 - reserve the intel address space */
 
-    status = VdmAllocateVirtualMemory(IntelAddress,Size,FALSE);
-    if (status != STATUS_SUCCESS) {
-        mvdm_softpc_report_virtual_memory_failure((unsigned long)status);
-#line 958
+#line 957
+    if (VdmAllocateVirtualMemory(IntelAddress,Size,FALSE) != STATUS_SUCCESS)
         return (STATUS_NO_MEMORY);
-    }
 
     /* step 2 - flush the caches */
 

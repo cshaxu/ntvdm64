@@ -41,7 +41,6 @@
 #include "trace.h"
 #include "rs232.h"
 #include "idetect.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 #line 46
 static word divisors[] = { 1047,768, 384, 192, 96, 48, 24, 12, 6 };
@@ -70,9 +69,6 @@ static void return_status()
 
 void rs232_io()
 {
-   /* DIVERGENCE(MVDM-HOST-DIV-325): default-off scalar-only Setup probe
-    * attribution; no serial selection or BIOS behavior changes. */
-   mvdm_softpc_report_setup_hardware_probe("int14-enter", getAH(), getDX());
 #ifdef BIT_ORDER2
 #line 70
    union {
@@ -223,7 +219,6 @@ void rs232_io()
                
 	    inb(port + (io_addr) RS232_TX_RX, &value);
 	    setAL(value);
-	    mvdm_softpc_report_setup_hardware_probe("int14-leave", getAH(), getDX());
 #line 223
 	    return;
 	    }
@@ -295,7 +290,6 @@ void rs232_io()
 	setAH( getAH()-3 );
       	break;
    }
-   mvdm_softpc_report_setup_hardware_probe("int14-leave", getAH(), getDX());
 #line 293
 }
 

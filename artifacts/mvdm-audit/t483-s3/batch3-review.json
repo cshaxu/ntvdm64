@@ -1,0 +1,119 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+    "ids": [
+      "T483-D0564"
+    ],
+    "before_sha256": "0017f737c6e2cce042aeb4f6b95c9a69201e1908d4cae6a9af5de14998a87180",
+    "after_sha256": "f7e2cac9cc2a8ca6504cdde0f3479f48794ecbeceb44c8c5ebbd2b8cf579573b",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 2
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "ids": [
+      "T483-D0578",
+      "T483-D0579",
+      "T483-D0580",
+      "T483-D0581"
+    ],
+    "before_sha256": "3ccf4236b39535ed37c16dfccddd2d0a36436d94d6585ea50ad6938356ab1b52",
+    "after_sha256": "e8fae23dadd88bb67a27594139df4aa464ed9dc136a7e98cbcd7e12d3c38bbaa",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 88
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "ids": [
+      "T483-D0582",
+      "T483-D0583",
+      "T483-D0584",
+      "T483-D0585"
+    ],
+    "before_sha256": "a6e615f151a01a27bdbb6af933fc9f581148ac861c7f37af913b0e3b3c5f0232",
+    "after_sha256": "37ad433389b2b57a7302395c9a966b2d5d3d8dd78e1646f807425bd46fbdc990",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 138
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "ids": [
+      "T483-D0851",
+      "T483-D0852",
+      "T483-D0853",
+      "T483-D0854",
+      "T483-D0855"
+    ],
+    "before_sha256": "bf532d8564a218a05b527eaab8aa783b8bb2898f4476763f188436f207cf6f0d",
+    "after_sha256": "a671c8e946e978ddc6ca0670eee7bcdd2b7b5a1a89b19537e2c122d258278ff9",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 978
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "ids": [
+      "T483-D0939",
+      "T483-D0940"
+    ],
+    "before_sha256": "704d408866fc2be8f0ba21e80d06032c18f2cf26a918b69ddb49f77eeff4a23e",
+    "after_sha256": "04d0a96b8ca057226181fae83516c316c5b8c6d40d32422e30cab7474f603869",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 42
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+    "ids": [
+      "T483-D1127"
+    ],
+    "before_sha256": "c240ca9190ba7c14ac0e5e75e1c8e0a63cfee93221a9f7f601740316aa0878e5",
+    "after_sha256": "e51b328381e985bed87991865e6a548233223e1ec4f18b0439717b3582f568b7",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 19
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+    "ids": [
+      "T483-D1270"
+    ],
+    "before_sha256": "e99fdb2599ed2482489db99797eb9943d3f53a8b046607016dd00791e6201aae",
+    "after_sha256": "ad9d34c559125ea962e37746917288ad03f002f7ce66b4eef0c840aa1d2c9c3b",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 388
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+    "ids": [
+      "T483-D1314",
+      "T483-D1332"
+    ],
+    "before_sha256": "af1f7a46666b40366ef536931ea0d03c9c89e33420b3f059fff08681ef84951a",
+    "after_sha256": "341b0bf48a4b33c3571fbaadd70958433e690062b202a927094de27a6d92dcc5",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 45
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+    "ids": [
+      "T483-D1336",
+      "T483-D1337",
+      "T483-D1338",
+      "T483-D1339"
+    ],
+    "before_sha256": "31d6e8c24e099ba16b2bc20b64e4bf3ce976f11a713177b3ba3fe3a790c2c73f",
+    "after_sha256": "d0f71dd769536e845e42b601ddd3e10e4b4a52386fb94236293afa4144cd8943",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 316
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "ids": [
+      "T483-D1344",
+      "T483-D1345",
+      "T483-D1346"
+    ],
+    "before_sha256": "8f4ccdd0447f4c9d10d9a7752ca67c3a6a977a791b296289034ff4a30e910a77",
+    "after_sha256": "f0c19da684a388d11b52ebe953817453962881319fd2a7f769d50e17d07ae801",
+    "status": "implemented, counter-reviewed and delivered P3",
+    "original_equal_code_lines_with_correct_mapping": 592
+  }
+]

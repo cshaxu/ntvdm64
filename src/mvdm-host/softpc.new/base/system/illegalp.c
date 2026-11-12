@@ -37,9 +37,6 @@
 #include "config.h"
 #include "debug.h"
 #include "yoda.h"
-#ifdef NTVDM
-#include "mvdm_softpc_termination.h"
-#endif
 
 #line 44
 #ifndef PROD
@@ -101,11 +98,6 @@ void illegal_op_int()
 	ip = sas_hw_at(stack) + (sas_hw_at(stack+1)<<8);
 	cs = sas_hw_at(stack+2) + (sas_hw_at(stack+3)<<8);
 
-#ifdef NTVDM
-	/* DIVERGENCE(MVDM-HOST-DIV-328): report only the frame values already
-	 * consumed by the original handler; never sample additional guest bytes. */
-	mvdm_softpc_report_setup_illegal_opcode(cs, ip, getSS(), getESP(), getEFLAGS());
-#endif
 
 #line 97
 	where(string, cs, ip);

@@ -1,0 +1,2910 @@
+{
+  "method": "Selected actual MSVC /P exact original statement and logical position matches, whitespace ignored; header checked in nt_fulsc inclusion context. Does not claim every macro-expanded statement or all configurations.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "original_sha256": "5dbb2bd74e82d5b87910db81f1411610c84a2d57a553e8cb78080871d19835df",
+      "current_sha256": "f7e2cac9cc2a8ca6504cdde0f3479f48794ecbeceb44c8c5ebbd2b8cf579573b",
+      "preprocessed_from": "build/t483-s3-p3/localfm.i",
+      "anchors": [
+        {
+          "original_line": 7,
+          "original": "struct CpuVector Cpu;",
+          "actual": "struct CpuVector Cpu;"
+        },
+        {
+          "original_line": 9,
+          "original": "struct VideoVector Video;",
+          "actual": "struct VideoVector Video;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "current_sha256": "e8fae23dadd88bb67a27594139df4aa464ed9dc136a7e98cbcd7e12d3c38bbaa",
+      "preprocessed_from": "build/t483-s3-p3/printer_.i",
+      "anchors": [
+        {
+          "original_line": 69,
+          "original": "void    printer_bop_openclose (int);",
+          "actual": "void    printer_bop_openclose (int);"
+        },
+        {
+          "original_line": 101,
+          "original": "void printer_io()",
+          "actual": "void printer_io()"
+        },
+        {
+          "original_line": 108,
+          "original": "unsigned long time_count;",
+          "actual": "unsigned long time_count;"
+        },
+        {
+          "original_line": 109,
+          "original": "int adapter;",
+          "actual": "int adapter;"
+        },
+        {
+          "original_line": 114,
+          "original": "switch (bopsubfunction) {",
+          "actual": "switch (bopsubfunction) {"
+        },
+        {
+          "original_line": 125,
+          "original": "printer_bop_openclose (bopsubfunction);",
+          "actual": "printer_bop_openclose (bopsubfunction);"
+        },
+        {
+          "original_line": 133,
+          "original": "printer_io_reg = printer_io_address;",
+          "actual": "printer_io_reg = printer_io_address;"
+        },
+        {
+          "original_line": 134,
+          "original": "printer_status_reg = printer_io_address + 1;",
+          "actual": "printer_status_reg = printer_io_address + 1;"
+        },
+        {
+          "original_line": 135,
+          "original": "printer_control_reg = printer_io_address + 2;",
+          "actual": "printer_control_reg = printer_io_address + 2;"
+        },
+        {
+          "original_line": 138,
+          "original": "time_count = time_out * 0xFFFF;",
+          "actual": "time_count = time_out * 0xFFFF;"
+        },
+        {
+          "original_line": 140,
+          "original": "if (printer_io_address != 0)",
+          "actual": "if (printer_io_address != 0)"
+        },
+        {
+          "original_line": 148,
+          "original": "while(printer_busy && time_count > 0)",
+          "actual": "while(printer_busy && time_count > 0)"
+        },
+        {
+          "original_line": 153,
+          "original": "inb(printer_status_reg, &status);",
+          "actual": "inb(printer_status_reg, &status);"
+        },
+        {
+          "original_line": 154,
+          "original": "if (status & 0x80)",
+          "actual": "if (status & 0x80)"
+        },
+        {
+          "original_line": 157,
+          "original": "time_count--;",
+          "actual": "time_count--;"
+        },
+        {
+          "original_line": 160,
+          "original": "if (printer_busy)",
+          "actual": "if (printer_busy)"
+        },
+        {
+          "original_line": 171,
+          "original": "inb(printer_status_reg, &status);",
+          "actual": "inb(printer_status_reg, &status);"
+        },
+        {
+          "original_line": 181,
+          "original": "inb(printer_status_reg, &status);",
+          "actual": "inb(printer_status_reg, &status);"
+        },
+        {
+          "original_line": 187,
+          "original": "case 2: inb(printer_status_reg, &status);",
+          "actual": "case 2: inb(printer_status_reg, &status);"
+        },
+        {
+          "original_line": 226,
+          "original": "void printer_bop_openclose(int func)",
+          "actual": "void printer_bop_openclose(int func)"
+        },
+        {
+          "original_line": 229,
+          "original": "int  adapter;",
+          "actual": "int  adapter;"
+        },
+        {
+          "original_line": 234,
+          "original": "if (func == 1)",
+          "actual": "if (func == 1)"
+        },
+        {
+          "original_line": 235,
+          "original": "host_lpt_dos_open(adapter);",
+          "actual": "host_lpt_dos_open(adapter);"
+        },
+        {
+          "original_line": 237,
+          "original": "host_lpt_dos_close(adapter);",
+          "actual": "host_lpt_dos_close(adapter);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+      "current_sha256": "37ad433389b2b57a7302395c9a966b2d5d3d8dd78e1646f807425bd46fbdc990",
+      "preprocessed_from": "build/t483-s3-p3/rs232_io.i",
+      "anchors": [
+        {
+          "original_line": 58,
+          "original": "static void return_status()",
+          "actual": "static void return_status()"
+        },
+        {
+          "original_line": 67,
+          "original": "void rs232_io()",
+          "actual": "void rs232_io()"
+        },
+        {
+          "original_line": 73,
+          "original": "HALF_WORD_BIT_FIELD word_length:2;",
+          "actual": "HALF_WORD_BIT_FIELD word_length:2;"
+        },
+        {
+          "original_line": 74,
+          "original": "HALF_WORD_BIT_FIELD stop_bit:1;",
+          "actual": "HALF_WORD_BIT_FIELD stop_bit:1;"
+        },
+        {
+          "original_line": 75,
+          "original": "HALF_WORD_BIT_FIELD parity:2;",
+          "actual": "HALF_WORD_BIT_FIELD parity:2;"
+        },
+        {
+          "original_line": 76,
+          "original": "HALF_WORD_BIT_FIELD baud_rate:3;",
+          "actual": "HALF_WORD_BIT_FIELD baud_rate:3;"
+        },
+        {
+          "original_line": 78,
+          "original": "} parameters;",
+          "actual": "} parameters;"
+        },
+        {
+          "original_line": 92,
+          "original": "DIVISOR_LATCH divisor_latch;",
+          "actual": "DIVISOR_LATCH divisor_latch;"
+        },
+        {
+          "original_line": 142,
+          "original": "divisor_latch.all = divisors[parameters.bit.baud_rate];",
+          "actual": "divisor_latch.all = divisors[parameters.bit.baud_rate];"
+        },
+        {
+          "original_line": 148,
+          "original": "parameters.bit.baud_rate = 0;",
+          "actual": "parameters.bit.baud_rate = 0;"
+        },
+        {
+          "original_line": 153,
+          "original": "value = 0;",
+          "actual": "value = 0;"
+        },
+        {
+          "original_line": 155,
+          "original": "return_status();",
+          "actual": "return_status();"
+        },
+        {
+          "original_line": 176,
+          "original": "for ( j = 0; j < timeout; j++)",
+          "actual": "for ( j = 0; j < timeout; j++)"
+        },
+        {
+          "original_line": 181,
+          "original": "if(j < timeout)",
+          "actual": "if(j < timeout)"
+        },
+        {
+          "original_line": 200,
+          "original": "value = 1;",
+          "actual": "value = 1;"
+        },
+        {
+          "original_line": 210,
+          "original": "for ( j = 0; j < timeout; j++)",
+          "actual": "for ( j = 0; j < timeout; j++)"
+        },
+        {
+          "original_line": 213,
+          "original": "if ( (value & 1) == 1 )",
+          "actual": "if ( (value & 1) == 1 )"
+        },
+        {
+          "original_line": 230,
+          "original": "value |= 0x80;",
+          "actual": "value |= 0x80;"
+        },
+        {
+          "original_line": 238,
+          "original": "return_status();",
+          "actual": "return_status();"
+        },
+        {
+          "original_line": 254,
+          "original": "divisor_latch.all = divisors[parameters.bit.baud_rate];",
+          "actual": "divisor_latch.all = divisors[parameters.bit.baud_rate];"
+        },
+        {
+          "original_line": 260,
+          "original": "parameters.bit.baud_rate = 0;",
+          "actual": "parameters.bit.baud_rate = 0;"
+        },
+        {
+          "original_line": 265,
+          "original": "value = 0;",
+          "actual": "value = 0;"
+        },
+        {
+          "original_line": 267,
+          "original": "return_status();",
+          "actual": "return_status();"
+        },
+        {
+          "original_line": 284,
+          "original": "return_status();",
+          "actual": "return_status();"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "current_sha256": "a671c8e946e978ddc6ca0670eee7bcdd2b7b5a1a89b19537e2c122d258278ff9",
+      "preprocessed_from": "build/t483-s3-p3/keybd_io.i",
+      "anchors": [
+        {
+          "original_line": 311,
+          "original": "buf_p += 2;",
+          "actual": "buf_p += 2;"
+        },
+        {
+          "original_line": 315,
+          "original": "return buf_p;",
+          "actual": "return buf_p;"
+        },
+        {
+          "original_line": 335,
+          "original": "IU8\tah, al;",
+          "actual": "IU8\tah, al;"
+        },
+        {
+          "original_line": 336,
+          "original": "enum {dontSetCF, setCF0, setCF1} cfSet = dontSetCF;",
+          "actual": "enum {dontSetCF, setCF0, setCF1} cfSet = dontSetCF;"
+        },
+        {
+          "original_line": 343,
+          "original": "if ( (al == 0x0D) || (al == 0x0A) )",
+          "actual": "if ( (al == 0x0D) || (al == 0x0A) )"
+        },
+        {
+          "original_line": 348,
+          "original": "cfSet = setCF0;",
+          "actual": "cfSet = setCF0;"
+        },
+        {
+          "original_line": 353,
+          "original": "cfSet = setCF1;",
+          "actual": "cfSet = setCF1;"
+        },
+        {
+          "original_line": 359,
+          "original": "cfSet = setCF0;",
+          "actual": "cfSet = setCF0;"
+        },
+        {
+          "original_line": 365,
+          "original": "if ( (al == 0xE0) && (ah != 0) )",
+          "actual": "if ( (al == 0xE0) && (ah != 0) )"
+        },
+        {
+          "original_line": 368,
+          "original": "cfSet = setCF0;",
+          "actual": "cfSet = setCF0;"
+        },
+        {
+          "original_line": 373,
+          "original": "if (cfSet != dontSetCF)",
+          "actual": "if (cfSet != dontSetCF)"
+        },
+        {
+          "original_line": 378,
+          "original": "static void translate_ext()",
+          "actual": "static void translate_ext()"
+        },
+        {
+          "original_line": 402,
+          "original": "int resend_retry;",
+          "actual": "int resend_retry;"
+        },
+        {
+          "original_line": 428,
+          "original": "IBOOL resend_command;",
+          "actual": "IBOOL resend_command;"
+        },
+        {
+          "original_line": 429,
+          "original": "int wait_retry;",
+          "actual": "int wait_retry;"
+        },
+        {
+          "original_line": 447,
+          "original": "if( resend_command )",
+          "actual": "if( resend_command )"
+        },
+        {
+          "original_line": 455,
+          "original": "&& ( --wait_retry > 0 ))",
+          "actual": "&& ( --wait_retry > 0 ))"
+        },
+        {
+          "original_line": 470,
+          "original": "host_simulate();",
+          "actual": "host_simulate();"
+        },
+        {
+          "original_line": 487,
+          "original": "while( --resend_retry > 0 );",
+          "actual": "while( --resend_retry > 0 );"
+        },
+        {
+          "original_line": 526,
+          "original": "outb(0x20, 0x20);",
+          "actual": "outb(0x20, 0x20);"
+        },
+        {
+          "original_line": 542,
+          "original": "var_kb_flag_2 = (var_kb_flag_2 & 0xf8) | indicators;",
+          "actual": "var_kb_flag_2 = (var_kb_flag_2 & 0xf8) | indicators;"
+        },
+        {
+          "original_line": 614,
+          "original": "if( buffer_tail > buffer_head )",
+          "actual": "if( buffer_tail > buffer_head )"
+        },
+        {
+          "original_line": 615,
+          "original": "return( buffer_tail - buffer_head );",
+          "actual": "return( buffer_tail - buffer_head );"
+        },
+        {
+          "original_line": 617,
+          "original": "return( buffer_head - buffer_tail );",
+          "actual": "return( buffer_head - buffer_tail );"
+        },
+        {
+          "original_line": 623,
+          "original": "outb(0x20, 0x20);",
+          "actual": "outb(0x20, 0x20);"
+        },
+        {
+          "original_line": 633,
+          "original": "outb(0x20, 0x20);",
+          "actual": "outb(0x20, 0x20);"
+        },
+        {
+          "original_line": 658,
+          "original": "void INT15(void);",
+          "actual": "void INT15(void);"
+        },
+        {
+          "original_line": 672,
+          "original": "void BEEP(char *message)",
+          "actual": "void BEEP(char *message)"
+        },
+        {
+          "original_line": 675,
+          "original": "host_alarm(250000L);",
+          "actual": "host_alarm(250000L);"
+        },
+        {
+          "original_line": 749,
+          "original": "if (buffer_ptr == buffer_head) {",
+          "actual": "if (buffer_ptr == buffer_head) {"
+        },
+        {
+          "original_line": 750,
+          "original": "BEEP(\"BIOS keyboard buffer overflow\");",
+          "actual": "BEEP(\"BIOS keyboard buffer overflow\");"
+        },
+        {
+          "original_line": 762,
+          "original": "exit_from_kbd_int();",
+          "actual": "exit_from_kbd_int();"
+        },
+        {
+          "original_line": 777,
+          "original": "if ((s == 0xff) || (v == 0xff)) {",
+          "actual": "if ((s == 0xff) || (v == 0xff)) {"
+        },
+        {
+          "original_line": 779,
+          "original": "exit_from_kbd_int();",
+          "actual": "exit_from_kbd_int();"
+        },
+        {
+          "original_line": 785,
+          "original": "NtPutInBuffer(s, v);",
+          "actual": "NtPutInBuffer(s, v);"
+        },
+        {
+          "original_line": 801,
+          "original": "outb(0x20, 0x20);",
+          "actual": "outb(0x20, 0x20);"
+        },
+        {
+          "original_line": 820,
+          "original": "host_simulate();",
+          "actual": "host_simulate();"
+        },
+        {
+          "original_line": 870,
+          "original": "if (BopFnCode) {",
+          "actual": "if (BopFnCode) {"
+        },
+        {
+          "original_line": 871,
+          "original": "Keyb16Request(BopFnCode);",
+          "actual": "Keyb16Request(BopFnCode);"
+        },
+        {
+          "original_line": 885,
+          "original": "bBiosOwnsKbdHdw = !WaitKbdHdw(5000);",
+          "actual": "bBiosOwnsKbdHdw = !WaitKbdHdw(5000);"
+        },
+        {
+          "original_line": 902,
+          "original": "host_simulate();",
+          "actual": "host_simulate();"
+        },
+        {
+          "original_line": 921,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 928,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 935,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 938,
+          "original": "check_indicators(0);",
+          "actual": "check_indicators(0);"
+        },
+        {
+          "original_line": 942,
+          "original": "BEEP(\"hardware keyboard buffer overflow\");",
+          "actual": "BEEP(\"hardware keyboard buffer overflow\");"
+        },
+        {
+          "original_line": 943,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 967,
+          "original": "check_indicators(1);",
+          "actual": "check_indicators(1);"
+        },
+        {
+          "original_line": 973,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 979,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 986,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 993,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 997,
+          "original": "code &= 0x7f;",
+          "actual": "code &= 0x7f;"
+        },
+        {
+          "original_line": 1005,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1015,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1023,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1026,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1039,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1044,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1051,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1057,
+          "original": "code = code_save;",
+          "actual": "code = code_save;"
+        },
+        {
+          "original_line": 1068,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1083,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1090,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1112,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1120,
+          "original": "goto label1;",
+          "actual": "goto label1;"
+        },
+        {
+          "original_line": 1131,
+          "original": "goto label1;",
+          "actual": "goto label1;"
+        },
+        {
+          "original_line": 1138,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1143,
+          "original": "check_indicators(1);",
+          "actual": "check_indicators(1);"
+        },
+        {
+          "original_line": 1146,
+          "original": "goto label2;",
+          "actual": "goto label2;"
+        },
+        {
+          "original_line": 1149,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1156,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1163,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1169,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1183,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1199,
+          "original": "for (i = 0; i < 10; i++ )",
+          "actual": "for (i = 0; i < 10; i++ )"
+        },
+        {
+          "original_line": 1202,
+          "original": "if( i < 10 )",
+          "actual": "if( i < 10 )"
+        },
+        {
+          "original_line": 1210,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1249,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1260,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1283,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1328,
+          "original": "outb(0x20, 0x20);",
+          "actual": "outb(0x20, 0x20);"
+        },
+        {
+          "original_line": 1335,
+          "original": "exit_from_kbd_int();return;",
+          "actual": "exit_from_kbd_int();return;"
+        },
+        {
+          "original_line": 1358,
+          "original": "if (upper)",
+          "actual": "if (upper)"
+        },
+        {
+          "original_line": 1466,
+          "original": "if ( code == 76 )",
+          "actual": "if ( code == 76 )"
+        },
+        {
+          "original_line": 1477,
+          "original": "void kb_idle_poll()",
+          "actual": "void kb_idle_poll()"
+        },
+        {
+          "original_line": 1494,
+          "original": "void keyboard_io()",
+          "actual": "void keyboard_io()"
+        },
+        {
+          "original_line": 1502,
+          "original": "WaitIfIdle();",
+          "actual": "WaitIfIdle();"
+        },
+        {
+          "original_line": 1852,
+          "original": "void keyboard_post()",
+          "actual": "void keyboard_post()"
+        },
+        {
+          "original_line": 1881,
+          "original": "void keyboard_init()",
+          "actual": "void keyboard_init()"
+        },
+        {
+          "original_line": 1911,
+          "original": "void kb_setup_vectors(void)",
+          "actual": "void kb_setup_vectors(void)"
+        },
+        {
+          "original_line": 1931,
+          "original": "shift_keys  =  phy_base + *pkio_table++;",
+          "actual": "shift_keys  =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1932,
+          "original": "shift_masks =  phy_base + *pkio_table++;",
+          "actual": "shift_masks =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1933,
+          "original": "ctl_n_table =  phy_base + *pkio_table++;",
+          "actual": "ctl_n_table =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1934,
+          "original": "ctl_f_table =  phy_base + *pkio_table++;",
+          "actual": "ctl_f_table =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1935,
+          "original": "lowercase   =  phy_base + *pkio_table++;",
+          "actual": "lowercase   =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1936,
+          "original": "uppercase   =  phy_base + *pkio_table++;",
+          "actual": "uppercase   =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1937,
+          "original": "alt_table   =  phy_base + *pkio_table++;",
+          "actual": "alt_table   =  phy_base + *pkio_table++;"
+        },
+        {
+          "original_line": 1940,
+          "original": "dummy_int_off        = *pkio_table++;",
+          "actual": "dummy_int_off        = *pkio_table++;"
+        },
+        {
+          "original_line": 1942,
+          "original": "int05_off            = *pkio_table++;",
+          "actual": "int05_off            = *pkio_table++;"
+        },
+        {
+          "original_line": 1944,
+          "original": "int15_off            = *pkio_table++;",
+          "actual": "int15_off            = *pkio_table++;"
+        },
+        {
+          "original_line": 1946,
+          "original": "rcpu_nop_offset      = *pkio_table++;",
+          "actual": "rcpu_nop_offset      = *pkio_table++;"
+        },
+        {
+          "original_line": 1948,
+          "original": "sp_int15_handler_off = *pkio_table++;",
+          "actual": "sp_int15_handler_off = *pkio_table++;"
+        },
+        {
+          "original_line": 1950,
+          "original": "rcpu_int4A_seg       = KbdSeg;",
+          "actual": "rcpu_int4A_seg       = KbdSeg;"
+        },
+        {
+          "original_line": 1954,
+          "original": "int1b_off    = *pkio_table++;",
+          "actual": "int1b_off    = *pkio_table++;"
+        },
+        {
+          "original_line": 1955,
+          "original": "int10_seg    = KbdSeg;",
+          "actual": "int10_seg    = KbdSeg;"
+        },
+        {
+          "original_line": 1956,
+          "original": "int10_caller = *pkio_table++;",
+          "actual": "int10_caller = *pkio_table++;"
+        },
+        {
+          "original_line": 1957,
+          "original": "int10_vector = *pkio_table++;",
+          "actual": "int10_vector = *pkio_table++;"
+        },
+        {
+          "original_line": 1969,
+          "original": "useHostInt10  = *pkio_table++;",
+          "actual": "useHostInt10  = *pkio_table++;"
+        },
+        {
+          "original_line": 1971,
+          "original": "babyModeTable = (int10_seg << 4) + *pkio_table++;",
+          "actual": "babyModeTable = (int10_seg << 4) + *pkio_table++;"
+        },
+        {
+          "original_line": 1976,
+          "original": "wait_int_off = *pkio_table++;",
+          "actual": "wait_int_off = *pkio_table++;"
+        },
+        {
+          "original_line": 1977,
+          "original": "wait_int_seg = KbdSeg;",
+          "actual": "wait_int_seg = KbdSeg;"
+        },
+        {
+          "original_line": 1978,
+          "original": "dr_type_seg = KbdSeg;",
+          "actual": "dr_type_seg = KbdSeg;"
+        },
+        {
+          "original_line": 1979,
+          "original": "dr_type_off = *pkio_table++;",
+          "actual": "dr_type_off = *pkio_table++;"
+        },
+        {
+          "original_line": 1981,
+          "original": "vga1b_seg = KbdSeg;",
+          "actual": "vga1b_seg = KbdSeg;"
+        },
+        {
+          "original_line": 1983,
+          "original": "conf_15_seg = KbdSeg;",
+          "actual": "conf_15_seg = KbdSeg;"
+        },
+        {
+          "original_line": 1986,
+          "original": "TimerInt08Seg = KbdSeg;",
+          "actual": "TimerInt08Seg = KbdSeg;"
+        },
+        {
+          "original_line": 1987,
+          "original": "TimerInt08Off = *pkio_table++;",
+          "actual": "TimerInt08Off = *pkio_table++;"
+        },
+        {
+          "original_line": 1988,
+          "original": "int13h_vector_seg = KbdSeg;",
+          "actual": "int13h_vector_seg = KbdSeg;"
+        },
+        {
+          "original_line": 1989,
+          "original": "int13h_caller_seg = KbdSeg;",
+          "actual": "int13h_caller_seg = KbdSeg;"
+        },
+        {
+          "original_line": 1990,
+          "original": "int13h_vector_off = *pkio_table++;",
+          "actual": "int13h_vector_off = *pkio_table++;"
+        },
+        {
+          "original_line": 1991,
+          "original": "int13h_caller_off = *pkio_table++;",
+          "actual": "int13h_caller_off = *pkio_table++;"
+        },
+        {
+          "original_line": 1992,
+          "original": "stream_io_buffer_size = *pkio_table++;",
+          "actual": "stream_io_buffer_size = *pkio_table++;"
+        },
+        {
+          "original_line": 2001,
+          "original": "TimerInt1CSeg = KbdSeg;",
+          "actual": "TimerInt1CSeg = KbdSeg;"
+        },
+        {
+          "original_line": 2002,
+          "original": "TimerInt1COff = dummy_int_off;",
+          "actual": "TimerInt1COff = dummy_int_off;"
+        },
+        {
+          "original_line": 2029,
+          "original": "ResumeTimerThread();",
+          "actual": "ResumeTimerThread();"
+        },
+        {
+          "original_line": 2048,
+          "original": "if(int15Off != sp_int15_handler_off || int15Seg != sp_int15_handler_seg)",
+          "actual": "if(int15Off != sp_int15_handler_off || int15Seg != sp_int15_handler_seg)"
+        },
+        {
+          "original_line": 2053,
+          "original": "sp_int15_handler_off = sp_int15_handler_seg = 0;",
+          "actual": "sp_int15_handler_off = sp_int15_handler_seg = 0;"
+        },
+        {
+          "original_line": 2057,
+          "original": "sp_int15_handler_off = Off;",
+          "actual": "sp_int15_handler_off = Off;"
+        },
+        {
+          "original_line": 2058,
+          "original": "sp_int15_handler_seg = Seg;",
+          "actual": "sp_int15_handler_seg = Seg;"
+        },
+        {
+          "original_line": 2065,
+          "original": "void INT15(void)",
+          "actual": "void INT15(void)"
+        },
+        {
+          "original_line": 2077,
+          "original": "if((ul == 0x4f || ul == 0x91) &&",
+          "actual": "if((ul == 0x4f || ul == 0x91) &&"
+        },
+        {
+          "original_line": 2078,
+          "original": "int15Off == sp_int15_handler_off &&",
+          "actual": "int15Off == sp_int15_handler_off &&"
+        },
+        {
+          "original_line": 2079,
+          "original": "int15Seg == sp_int15_handler_seg)",
+          "actual": "int15Seg == sp_int15_handler_seg)"
+        },
+        {
+          "original_line": 2087,
+          "original": "if (bBiosOwnsKbdHdw)  {",
+          "actual": "if (bBiosOwnsKbdHdw)  {"
+        },
+        {
+          "original_line": 2089,
+          "original": "HostReleaseKbd();",
+          "actual": "HostReleaseKbd();"
+        },
+        {
+          "original_line": 2099,
+          "original": "bBiosOwnsKbdHdw = !WaitKbdHdw(5000);",
+          "actual": "bBiosOwnsKbdHdw = !WaitKbdHdw(5000);"
+        },
+        {
+          "original_line": 2117,
+          "original": "if (BopFnCode == 1) {",
+          "actual": "if (BopFnCode == 1) {"
+        },
+        {
+          "original_line": 2118,
+          "original": "bBiosOwnsKbdHdw = !WaitKbdHdw(5000);",
+          "actual": "bBiosOwnsKbdHdw = !WaitKbdHdw(5000);"
+        },
+        {
+          "original_line": 2124,
+          "original": "else if (BopFnCode == 2) {",
+          "actual": "else if (BopFnCode == 2) {"
+        },
+        {
+          "original_line": 2126,
+          "original": "host_alarm(250000L);",
+          "actual": "host_alarm(250000L);"
+        },
+        {
+          "original_line": 2136,
+          "original": "if (bBiosOwnsKbdHdw) {",
+          "actual": "if (bBiosOwnsKbdHdw) {"
+        },
+        {
+          "original_line": 2138,
+          "original": "HostReleaseKbd();",
+          "actual": "HostReleaseKbd();"
+        },
+        {
+          "original_line": 2143,
+          "original": "else if (BopFnCode == 3) {",
+          "actual": "else if (BopFnCode == 3) {"
+        },
+        {
+          "original_line": 2144,
+          "original": "outb(0x20, 0x20);",
+          "actual": "outb(0x20, 0x20);"
+        },
+        {
+          "original_line": 2146,
+          "original": "if (bBiosOwnsKbdHdw) {",
+          "actual": "if (bBiosOwnsKbdHdw) {"
+        },
+        {
+          "original_line": 2148,
+          "original": "HostReleaseKbd();",
+          "actual": "HostReleaseKbd();"
+        },
+        {
+          "original_line": 2153,
+          "original": "else if (BopFnCode == 4) {",
+          "actual": "else if (BopFnCode == 4) {"
+        },
+        {
+          "original_line": 2155,
+          "original": "if (bBiosOwnsKbdHdw) {",
+          "actual": "if (bBiosOwnsKbdHdw) {"
+        },
+        {
+          "original_line": 2157,
+          "original": "HostReleaseKbd();",
+          "actual": "HostReleaseKbd();"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "current_sha256": "04d0a96b8ca057226181fae83516c316c5b8c6d40d32422e30cab7474f603869",
+      "preprocessed_from": "build/t483-s3-p3/illegalp.i",
+      "anchors": [
+        {
+          "original_line": 53,
+          "original": "sprintf(string,",
+          "actual": "sprintf(string,"
+        },
+        {
+          "original_line": 69,
+          "original": "void illegal_op()",
+          "actual": "void illegal_op()"
+        },
+        {
+          "original_line": 79,
+          "original": "void illegal_op_int()",
+          "actual": "void illegal_op_int()"
+        },
+        {
+          "original_line": 81,
+          "original": "CHAR string[100];",
+          "actual": "CHAR string[100];"
+        },
+        {
+          "original_line": 85,
+          "original": "UCHAR opcode;",
+          "actual": "UCHAR opcode;"
+        },
+        {
+          "original_line": 97,
+          "original": "where(string, cs, ip);",
+          "actual": "where(string, cs, ip);"
+        },
+        {
+          "original_line": 114,
+          "original": "if (opcode == 0x66 || opcode == 0x67)",
+          "actual": "if (opcode == 0x66 || opcode == 0x67)"
+        },
+        {
+          "original_line": 126,
+          "original": "if (ip == 0xffff) {",
+          "actual": "if (ip == 0xffff) {"
+        },
+        {
+          "original_line": 134,
+          "original": "unexpected_int();",
+          "actual": "unexpected_int();"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+      "current_sha256": "e51b328381e985bed87991865e6a548233223e1ec4f18b0439717b3582f568b7",
+      "preprocessed_from": "build/t483-s3-p3/nt_fulsc.i",
+      "anchors": [
+        {
+          "original_line": 22,
+          "original": "void GetScaleEvent(void);",
+          "actual": "void GetScaleEvent(void);"
+        },
+        {
+          "original_line": 38,
+          "original": "void nt_start_event_thread(void);",
+          "actual": "void nt_start_event_thread(void);"
+        },
+        {
+          "original_line": 39,
+          "original": "void nt_remove_event_thread(void);",
+          "actual": "void nt_remove_event_thread(void);"
+        },
+        {
+          "original_line": 40,
+          "original": "void EnterEventCritical(void);",
+          "actual": "void EnterEventCritical(void);"
+        },
+        {
+          "original_line": 41,
+          "original": "void LeaveEventCritical(void);",
+          "actual": "void LeaveEventCritical(void);"
+        },
+        {
+          "original_line": 42,
+          "original": "void GetNextMouseEvent(void);",
+          "actual": "void GetNextMouseEvent(void);"
+        },
+        {
+          "original_line": 45,
+          "original": "void FlushMouseEvents(void);",
+          "actual": "void FlushMouseEvents(void);"
+        },
+        {
+          "original_line": 53,
+          "original": "void SyncBiosKbdLedToKbdDevice(void);",
+          "actual": "void SyncBiosKbdLedToKbdDevice(void);"
+        },
+        {
+          "original_line": 55,
+          "original": "extern DWORD ToggleKeyState;",
+          "actual": "extern DWORD ToggleKeyState;"
+        },
+        {
+          "original_line": 57,
+          "original": "extern HANDLE hWndConsole;",
+          "actual": "extern HANDLE hWndConsole;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "current_sha256": "ad9d34c559125ea962e37746917288ad03f002f7ce66b4eef0c840aa1d2c9c3b",
+      "preprocessed_from": "build/t483-s3-p3/nt_fulsc.i",
+      "anchors": [
+        {
+          "original_line": 178,
+          "original": "if (nt_init_called)",
+          "actual": "if (nt_init_called)"
+        },
+        {
+          "original_line": 181,
+          "original": "nt_init_called++;",
+          "actual": "nt_init_called++;"
+        },
+        {
+          "original_line": 196,
+          "original": "ConsBufferInfo.dwCursorPosition.Y -= ConTopLine;",
+          "actual": "ConsBufferInfo.dwCursorPosition.Y -= ConTopLine;"
+        },
+        {
+          "original_line": 200,
+          "original": "&ConsBufferInfo.dwCursorPosition);",
+          "actual": "&ConsBufferInfo.dwCursorPosition);"
+        },
+        {
+          "original_line": 203,
+          "original": "enableUpdates();",
+          "actual": "enableUpdates();"
+        },
+        {
+          "original_line": 206,
+          "original": "enableUpdates();",
+          "actual": "enableUpdates();"
+        },
+        {
+          "original_line": 209,
+          "original": "if (!VDMForWOW) {",
+          "actual": "if (!VDMForWOW) {"
+        },
+        {
+          "original_line": 210,
+          "original": "SyncBiosKbdLedToKbdDevice();",
+          "actual": "SyncBiosKbdLedToKbdDevice();"
+        },
+        {
+          "original_line": 213,
+          "original": "ResumeThread(ThreadInfo.EventMgr.Handle);",
+          "actual": "ResumeThread(ThreadInfo.EventMgr.Handle);"
+        },
+        {
+          "original_line": 527,
+          "original": "scanLines;",
+          "actual": "scanLines;"
+        },
+        {
+          "original_line": 537,
+          "original": "consoleWidth = ConsBufferInfo.srWindow.Right -",
+          "actual": "consoleWidth = ConsBufferInfo.srWindow.Right -"
+        },
+        {
+          "original_line": 538,
+          "original": "ConsBufferInfo.srWindow.Left + 1;",
+          "actual": "ConsBufferInfo.srWindow.Left + 1;"
+        },
+        {
+          "original_line": 539,
+          "original": "consoleHeight = ConsBufferInfo.srWindow.Bottom -",
+          "actual": "consoleHeight = ConsBufferInfo.srWindow.Bottom -"
+        },
+        {
+          "original_line": 540,
+          "original": "ConsBufferInfo.srWindow.Top + 1;",
+          "actual": "ConsBufferInfo.srWindow.Top + 1;"
+        },
+        {
+          "original_line": 562,
+          "original": "scanLines = 351;",
+          "actual": "scanLines = 351;"
+        },
+        {
+          "original_line": 563,
+          "original": "charHeight = 16;",
+          "actual": "charHeight = 16;"
+        },
+        {
+          "original_line": 569,
+          "original": "scanLines = 399;",
+          "actual": "scanLines = 399;"
+        },
+        {
+          "original_line": 570,
+          "original": "charHeight = 16;",
+          "actual": "charHeight = 16;"
+        },
+        {
+          "original_line": 576,
+          "original": "scanLines = 391;",
+          "actual": "scanLines = 391;"
+        },
+        {
+          "original_line": 577,
+          "original": "charHeight = 14;",
+          "actual": "charHeight = 14;"
+        },
+        {
+          "original_line": 583,
+          "original": "scanLines = 349;",
+          "actual": "scanLines = 349;"
+        },
+        {
+          "original_line": 584,
+          "original": "charHeight = 8;",
+          "actual": "charHeight = 8;"
+        },
+        {
+          "original_line": 590,
+          "original": "scanLines = 399;",
+          "actual": "scanLines = 399;"
+        },
+        {
+          "original_line": 591,
+          "original": "charHeight = 8;",
+          "actual": "charHeight = 8;"
+        },
+        {
+          "original_line": 597,
+          "original": "if (blocked_in_gfx_mode)",
+          "actual": "if (blocked_in_gfx_mode)"
+        },
+        {
+          "original_line": 599,
+          "original": "low_set_mode(3);",
+          "actual": "low_set_mode(3);"
+        },
+        {
+          "original_line": 602,
+          "original": "(*choose_display_mode)();",
+          "actual": "(*choose_display_mode)();"
+        },
+        {
+          "original_line": 611,
+          "original": "recalc_text(charHeight);",
+          "actual": "recalc_text(charHeight);"
+        },
+        {
+          "original_line": 614,
+          "original": "if (vgaHeight == 25)",
+          "actual": "if (vgaHeight == 25)"
+        },
+        {
+          "original_line": 687,
+          "original": "initTextSection();",
+          "actual": "initTextSection();"
+        },
+        {
+          "original_line": 710,
+          "original": "disableUpdates();",
+          "actual": "disableUpdates();"
+        },
+        {
+          "original_line": 715,
+          "original": "calcScreenParams( &charHeight, &vgaHeight );",
+          "actual": "calcScreenParams( &charHeight, &vgaHeight );"
+        },
+        {
+          "original_line": 717,
+          "original": "StartupCharHeight = charHeight;",
+          "actual": "StartupCharHeight = charHeight;"
+        },
+        {
+          "original_line": 757,
+          "original": "cursorLine = ConsBufferInfo.dwCursorPosition.Y;",
+          "actual": "cursorLine = ConsBufferInfo.dwCursorPosition.Y;"
+        },
+        {
+          "original_line": 758,
+          "original": "if (cursorLine < vgaHeight)",
+          "actual": "if (cursorLine < vgaHeight)"
+        },
+        {
+          "original_line": 759,
+          "original": "topLine = 0;",
+          "actual": "topLine = 0;"
+        },
+        {
+          "original_line": 763,
+          "original": "ConVGAHeight = vgaHeight;",
+          "actual": "ConVGAHeight = vgaHeight;"
+        },
+        {
+          "original_line": 764,
+          "original": "ConTopLine = topLine;",
+          "actual": "ConTopLine = topLine;"
+        },
+        {
+          "original_line": 875,
+          "original": "SMALL_RECT\tnewWin;",
+          "actual": "SMALL_RECT\tnewWin;"
+        },
+        {
+          "original_line": 883,
+          "original": "closeGraphicsBuffer();",
+          "actual": "closeGraphicsBuffer();"
+        },
+        {
+          "original_line": 885,
+          "original": "if (StreamIoSwitchOn && !host_stream_io_enabled) {",
+          "actual": "if (StreamIoSwitchOn && !host_stream_io_enabled) {"
+        },
+        {
+          "original_line": 888,
+          "original": "newWin.Top = newWin.Left = 0;",
+          "actual": "newWin.Top = newWin.Left = 0;"
+        },
+        {
+          "original_line": 889,
+          "original": "newWin.Bottom = sc.ConsoleBuffInfo.srWindow.Bottom -",
+          "actual": "newWin.Bottom = sc.ConsoleBuffInfo.srWindow.Bottom -"
+        },
+        {
+          "original_line": 890,
+          "original": "sc.ConsoleBuffInfo.srWindow.Top;",
+          "actual": "sc.ConsoleBuffInfo.srWindow.Top;"
+        },
+        {
+          "original_line": 891,
+          "original": "newWin.Right = sc.ConsoleBuffInfo.srWindow.Right -",
+          "actual": "newWin.Right = sc.ConsoleBuffInfo.srWindow.Right -"
+        },
+        {
+          "original_line": 892,
+          "original": "sc.ConsoleBuffInfo.srWindow.Left;",
+          "actual": "sc.ConsoleBuffInfo.srWindow.Left;"
+        },
+        {
+          "original_line": 970,
+          "original": "getVDMCursorPosition();",
+          "actual": "getVDMCursorPosition();"
+        },
+        {
+          "original_line": 1210,
+          "original": "resetWindowParams();",
+          "actual": "resetWindowParams();"
+        },
+        {
+          "original_line": 1487,
+          "original": "PVOID pDummy;",
+          "actual": "PVOID pDummy;"
+        },
+        {
+          "original_line": 1556,
+          "original": "if( !RegisterConsoleVDM( VDMForWOW ?",
+          "actual": "if( !RegisterConsoleVDM( VDMForWOW ?"
+        },
+        {
+          "original_line": 1577,
+          "original": "(PVOID *) &textBuffer",
+          "actual": "(PVOID *) &textBuffer"
+        },
+        {
+          "original_line": 1592,
+          "original": "graphicsResize();",
+          "actual": "graphicsResize();"
+        },
+        {
+          "original_line": 1606,
+          "original": "height = 8;",
+          "actual": "height = 8;"
+        },
+        {
+          "original_line": 1609,
+          "original": "&ConsBufferInfo.dwCursorPosition);",
+          "actual": "&ConsBufferInfo.dwCursorPosition);"
+        },
+        {
+          "original_line": 1617,
+          "original": "calcScreenParams( &height, &vgaHeight );",
+          "actual": "calcScreenParams( &height, &vgaHeight );"
+        },
+        {
+          "original_line": 1623,
+          "original": "resizeWindow( 80, vgaHeight );",
+          "actual": "resizeWindow( 80, vgaHeight );"
+        },
+        {
+          "original_line": 1632,
+          "original": "if( ConsBufferInfo.dwCursorPosition.Y >= vgaHeight ){",
+          "actual": "if( ConsBufferInfo.dwCursorPosition.Y >= vgaHeight ){"
+        },
+        {
+          "original_line": 1633,
+          "original": "ConsBufferInfo.dwCursorPosition.Y = vgaHeight-1;",
+          "actual": "ConsBufferInfo.dwCursorPosition.Y = vgaHeight-1;"
+        },
+        {
+          "original_line": 1789,
+          "original": "enable_gfx_update_routines();",
+          "actual": "enable_gfx_update_routines();"
+        },
+        {
+          "original_line": 1810,
+          "original": "disable_gfx_update_routines();",
+          "actual": "disable_gfx_update_routines();"
+        },
+        {
+          "original_line": 1835,
+          "original": "CHAR_INFO\t*from;",
+          "actual": "CHAR_INFO\t*from;"
+        },
+        {
+          "original_line": 1837,
+          "original": "bufCoord;",
+          "actual": "bufCoord;"
+        },
+        {
+          "original_line": 1839,
+          "original": "SMALL_RECT\t readRegion;",
+          "actual": "SMALL_RECT\t readRegion;"
+        },
+        {
+          "original_line": 1849,
+          "original": "nChars = width * height;",
+          "actual": "nChars = width * height;"
+        },
+        {
+          "original_line": 1853,
+          "original": "bufSize.X = width;",
+          "actual": "bufSize.X = width;"
+        },
+        {
+          "original_line": 1854,
+          "original": "bufSize.Y = height;",
+          "actual": "bufSize.Y = height;"
+        },
+        {
+          "original_line": 1855,
+          "original": "bufCoord.X = 0;",
+          "actual": "bufCoord.X = 0;"
+        },
+        {
+          "original_line": 1856,
+          "original": "bufCoord.Y = 0;",
+          "actual": "bufCoord.Y = 0;"
+        },
+        {
+          "original_line": 1857,
+          "original": "readRegion.Left = startCol;",
+          "actual": "readRegion.Left = startCol;"
+        },
+        {
+          "original_line": 1858,
+          "original": "readRegion.Top = startLine;",
+          "actual": "readRegion.Top = startLine;"
+        },
+        {
+          "original_line": 1865,
+          "original": "&readRegion))",
+          "actual": "&readRegion))"
+        },
+        {
+          "original_line": 1869,
+          "original": "from = consoleBuffer;",
+          "actual": "from = consoleBuffer;"
+        },
+        {
+          "original_line": 1872,
+          "original": "to = EGA_planes;",
+          "actual": "to = EGA_planes;"
+        },
+        {
+          "original_line": 1873,
+          "original": "while(nChars--)",
+          "actual": "while(nChars--)"
+        },
+        {
+          "original_line": 1923,
+          "original": "COORD cursorPos;",
+          "actual": "COORD cursorPos;"
+        },
+        {
+          "original_line": 1936,
+          "original": "if ((sc.CharHeight * cursorPos.Y) > sc.PC_W_Height)",
+          "actual": "if ((sc.CharHeight * cursorPos.Y) > sc.PC_W_Height)"
+        },
+        {
+          "original_line": 1937,
+          "original": "cursorPos.Y = (sc.PC_W_Height / sc.CharHeight) - 1;",
+          "actual": "cursorPos.Y = (sc.PC_W_Height / sc.CharHeight) - 1;"
+        },
+        {
+          "original_line": 1939,
+          "original": "if( !stdoutRedirected ) {",
+          "actual": "if( !stdoutRedirected ) {"
+        },
+        {
+          "original_line": 1941,
+          "original": "if (!setok) {",
+          "actual": "if (!setok) {"
+        },
+        {
+          "original_line": 1966,
+          "original": "CONSOLE_CURSOR_INFO cursorInfo;",
+          "actual": "CONSOLE_CURSOR_INFO cursorInfo;"
+        },
+        {
+          "original_line": 1973,
+          "original": "cursorWord;",
+          "actual": "cursorWord;"
+        },
+        {
+          "original_line": 1981,
+          "original": "cursorStart = height - (height * cursorInfo.dwSize / 100);",
+          "actual": "cursorStart = height - (height * cursorInfo.dwSize / 100);"
+        },
+        {
+          "original_line": 1982,
+          "original": "if (cursorStart == height)",
+          "actual": "if (cursorStart == height)"
+        },
+        {
+          "original_line": 1983,
+          "original": "cursorStart--;",
+          "actual": "cursorStart--;"
+        },
+        {
+          "original_line": 1984,
+          "original": "cursorEnd = height - 1;",
+          "actual": "cursorEnd = height - 1;"
+        },
+        {
+          "original_line": 2007,
+          "original": "pageOffset = cursorPos->Y * colsOnScreen * 2 + (cursorPos->X << 1);",
+          "actual": "pageOffset = cursorPos->Y * colsOnScreen * 2 + (cursorPos->X << 1);"
+        },
+        {
+          "original_line": 2008,
+          "original": "cursorWord = (currentPage * videoLen + pageOffset) / 2;",
+          "actual": "cursorWord = (currentPage * videoLen + pageOffset) / 2;"
+        },
+        {
+          "original_line": 2068,
+          "original": "int modeType;",
+          "actual": "int modeType;"
+        },
+        {
+          "original_line": 2071,
+          "original": "switch(mode)",
+          "actual": "switch(mode)"
+        },
+        {
+          "original_line": 2091,
+          "original": "return(modeType);",
+          "actual": "return(modeType);"
+        },
+        {
+          "original_line": 2363,
+          "original": "void host_enable_stream_io(void)",
+          "actual": "void host_enable_stream_io(void)"
+        },
+        {
+          "original_line": 2369,
+          "original": "void host_disable_stream_io(void)",
+          "actual": "void host_disable_stream_io(void)"
+        },
+        {
+          "original_line": 2371,
+          "original": "DWORD mode;",
+          "actual": "DWORD mode;"
+        },
+        {
+          "original_line": 2383,
+          "original": "if(!stdoutRedirected)",
+          "actual": "if(!stdoutRedirected)"
+        },
+        {
+          "original_line": 2391,
+          "original": "ConsoleInit();",
+          "actual": "ConsoleInit();"
+        },
+        {
+          "original_line": 2392,
+          "original": "(void)(*choose_display_mode)();",
+          "actual": "(void)(*choose_display_mode)();"
+        },
+        {
+          "original_line": 2404,
+          "original": "ConsBufferInfo.dwCursorPosition.Y -= ConTopLine;",
+          "actual": "ConsBufferInfo.dwCursorPosition.Y -= ConTopLine;"
+        },
+        {
+          "original_line": 2408,
+          "original": "&ConsBufferInfo.dwCursorPosition);",
+          "actual": "&ConsBufferInfo.dwCursorPosition);"
+        },
+        {
+          "original_line": 2411,
+          "original": "enableUpdates();",
+          "actual": "enableUpdates();"
+        },
+        {
+          "original_line": 2413,
+          "original": "MouseAttachMenuItem(sc.ActiveOutputBufferHandle);",
+          "actual": "MouseAttachMenuItem(sc.ActiveOutputBufferHandle);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+      "current_sha256": "341b0bf48a4b33c3571fbaadd70958433e690062b202a927094de27a6d92dcc5",
+      "preprocessed_from": "build/t483-s3-p3/nt_inthk.i",
+      "anchors": [
+        {
+          "original_line": 82,
+          "original": "if(HWIntHandler)",
+          "actual": "if(HWIntHandler)"
+        },
+        {
+          "original_line": 93,
+          "original": "return( returnStatus );",
+          "actual": "return( returnStatus );"
+        },
+        {
+          "original_line": 115,
+          "original": "HWIntHandler = HardwareIntHandler;",
+          "actual": "HWIntHandler = HardwareIntHandler;"
+        },
+        {
+          "original_line": 145,
+          "original": "if(SWIntHandler)",
+          "actual": "if(SWIntHandler)"
+        },
+        {
+          "original_line": 157,
+          "original": "return( returnStatus );",
+          "actual": "return( returnStatus );"
+        },
+        {
+          "original_line": 178,
+          "original": "SWIntHandler = SoftwareIntHandler;",
+          "actual": "SWIntHandler = SoftwareIntHandler;"
+        },
+        {
+          "original_line": 209,
+          "original": "if(EXIntHandler)",
+          "actual": "if(EXIntHandler)"
+        },
+        {
+          "original_line": 221,
+          "original": "return( returnStatus );",
+          "actual": "return( returnStatus );"
+        },
+        {
+          "original_line": 242,
+          "original": "EXIntHandler = FaultHandler;",
+          "actual": "EXIntHandler = FaultHandler;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "original_sha256": "fba617ebdccda8f0cfae4541338d463352e7de3a3e97c3dcf7804fa7eed67ae8",
+      "current_sha256": "d0f71dd769536e845e42b601ddd3e10e4b4a52386fb94236293afa4144cd8943",
+      "preprocessed_from": "build/t483-s3-p3/nt_lpt.i",
+      "anchors": [
+        {
+          "original_line": 131,
+          "original": "BOOLEAN direct_access;",
+          "actual": "BOOLEAN direct_access;"
+        },
+        {
+          "original_line": 132,
+          "original": "BOOLEAN no_device_attached;",
+          "actual": "BOOLEAN no_device_attached;"
+        },
+        {
+          "original_line": 133,
+          "original": "} HOST_LPT;",
+          "actual": "} HOST_LPT;"
+        },
+        {
+          "original_line": 149,
+          "original": "MonitorInitializePrinterInfo (nPorts,",
+          "actual": "MonitorInitializePrinterInfo (nPorts,"
+        },
+        {
+          "original_line": 153,
+          "original": "(LPBYTE)(table_addr),",
+          "actual": "(LPBYTE)(table_addr),"
+        },
+        {
+          "original_line": 154,
+          "original": "(LPBYTE)(lpt_status_addr)",
+          "actual": "(LPBYTE)(lpt_status_addr)"
+        },
+        {
+          "original_line": 198,
+          "original": "DWORD BytesReturn;",
+          "actual": "DWORD BytesReturn;"
+        },
+        {
+          "original_line": 203,
+          "original": "if (!direct_access)",
+          "actual": "if (!direct_access)"
+        },
+        {
+          "original_line": 205,
+          "original": "else if (lpt->no_device_attached)",
+          "actual": "else if (lpt->no_device_attached)"
+        },
+        {
+          "original_line": 244,
+          "original": "if(lpt->handle == (HANDLE) -1)",
+          "actual": "if(lpt->handle == (HANDLE) -1)"
+        },
+        {
+          "original_line": 260,
+          "original": "lpt->FileType = GetFileType(lpt->handle);",
+          "actual": "lpt->FileType = GetFileType(lpt->handle);"
+        },
+        {
+          "original_line": 263,
+          "original": "CloseHandle(lpt->handle);",
+          "actual": "CloseHandle(lpt->handle);"
+        },
+        {
+          "original_line": 268,
+          "original": "lpt->direct_access = direct_access;",
+          "actual": "lpt->direct_access = direct_access;"
+        },
+        {
+          "original_line": 269,
+          "original": "if (lpt->direct_access) {",
+          "actual": "if (lpt->direct_access) {"
+        },
+        {
+          "original_line": 278,
+          "original": "host_set_inactivate_counter(adapter);",
+          "actual": "host_set_inactivate_counter(adapter);"
+        },
+        {
+          "original_line": 299,
+          "original": "if(lpt->active)",
+          "actual": "if(lpt->active)"
+        },
+        {
+          "original_line": 311,
+          "original": "DWORD   BytesReturn;",
+          "actual": "DWORD   BytesReturn;"
+        },
+        {
+          "original_line": 315,
+          "original": "if (lpt->direct_access)",
+          "actual": "if (lpt->direct_access)"
+        },
+        {
+          "original_line": 316,
+          "original": "printer_is_being_closed(adapter);",
+          "actual": "printer_is_being_closed(adapter);"
+        },
+        {
+          "original_line": 320,
+          "original": "host_print_buffer (adapter);",
+          "actual": "host_print_buffer (adapter);"
+        },
+        {
+          "original_line": 326,
+          "original": "if(lpt->active)",
+          "actual": "if(lpt->active)"
+        },
+        {
+          "original_line": 332,
+          "original": "(void)flushBuffer(adapter);",
+          "actual": "(void)flushBuffer(adapter);"
+        },
+        {
+          "original_line": 339,
+          "original": "if (lpt->direct_access)",
+          "actual": "if (lpt->direct_access)"
+        },
+        {
+          "original_line": 368,
+          "original": "UCHAR   PrinterStatus;",
+          "actual": "UCHAR   PrinterStatus;"
+        },
+        {
+          "original_line": 369,
+          "original": "DWORD   BytesReturn;",
+          "actual": "DWORD   BytesReturn;"
+        },
+        {
+          "original_line": 372,
+          "original": "if(!lpt->active)",
+          "actual": "if(!lpt->active)"
+        },
+        {
+          "original_line": 385,
+          "original": "if (lpt->bytesInBuffer)",
+          "actual": "if (lpt->bytesInBuffer)"
+        },
+        {
+          "original_line": 386,
+          "original": "flushBuffer(adapter);",
+          "actual": "flushBuffer(adapter);"
+        },
+        {
+          "original_line": 387,
+          "original": "if (!DeviceIoControl(lpt->handle,",
+          "actual": "if (!DeviceIoControl(lpt->handle,"
+        },
+        {
+          "original_line": 392,
+          "original": "sizeof(PrinterStatus),",
+          "actual": "sizeof(PrinterStatus),"
+        },
+        {
+          "original_line": 403,
+          "original": "PrinterStatus = 0;",
+          "actual": "PrinterStatus = 0;"
+        },
+        {
+          "original_line": 405,
+          "original": "return(PrinterStatus);",
+          "actual": "return(PrinterStatus);"
+        },
+        {
+          "original_line": 408,
+          "original": "BOOLEAN host_set_lpt_direct_access(int adapter, BOOLEAN direct_access)",
+          "actual": "BOOLEAN host_set_lpt_direct_access(int adapter, BOOLEAN direct_access)"
+        },
+        {
+          "original_line": 410,
+          "original": "DWORD   BytesReturn;",
+          "actual": "DWORD   BytesReturn;"
+        },
+        {
+          "original_line": 414,
+          "original": "host_lpt_close(adapter);",
+          "actual": "host_lpt_close(adapter);"
+        },
+        {
+          "original_line": 415,
+          "original": "host_lpt_open(adapter, direct_access);",
+          "actual": "host_lpt_open(adapter, direct_access);"
+        },
+        {
+          "original_line": 416,
+          "original": "if (!lpt->active)",
+          "actual": "if (!lpt->active)"
+        },
+        {
+          "original_line": 418,
+          "original": "return (lpt->active);",
+          "actual": "return (lpt->active);"
+        },
+        {
+          "original_line": 444,
+          "original": "DWORD BytesWritten;",
+          "actual": "DWORD BytesWritten;"
+        },
+        {
+          "original_line": 446,
+          "original": "if (lpt->direct_access) {",
+          "actual": "if (lpt->direct_access) {"
+        },
+        {
+          "original_line": 447,
+          "original": "DeviceIoControl(lpt->handle,",
+          "actual": "DeviceIoControl(lpt->handle,"
+        },
+        {
+          "original_line": 457,
+          "original": "lpt->bytesInBuffer = 0;",
+          "actual": "lpt->bytesInBuffer = 0;"
+        },
+        {
+          "original_line": 463,
+          "original": "if( !WriteFile( lpt->handle, lpt->kBuffer,",
+          "actual": "if( !WriteFile( lpt->handle, lpt->kBuffer,"
+        },
+        {
+          "original_line": 469,
+          "original": "lpt->bytesInBuffer = 0;",
+          "actual": "lpt->bytesInBuffer = 0;"
+        },
+        {
+          "original_line": 472,
+          "original": "lpt->bytesInBuffer = 0;",
+          "actual": "lpt->bytesInBuffer = 0;"
+        },
+        {
+          "original_line": 484,
+          "original": "Sleep(10);",
+          "actual": "Sleep(10);"
+        },
+        {
+          "original_line": 499,
+          "original": "HOST_LPT *lpt = &host_lpt[adapter];",
+          "actual": "HOST_LPT *lpt = &host_lpt[adapter];"
+        },
+        {
+          "original_line": 502,
+          "original": "lpt->kBuffer[lpt->bytesInBuffer++] = b;",
+          "actual": "lpt->kBuffer[lpt->bytesInBuffer++] = b;"
+        },
+        {
+          "original_line": 504,
+          "original": "if( lpt->bytesInBuffer >= lpt->flushThreshold ){",
+          "actual": "if( lpt->bytesInBuffer >= lpt->flushThreshold ){"
+        },
+        {
+          "original_line": 505,
+          "original": "status = flushBuffer( adapter );",
+          "actual": "status = flushBuffer( adapter );"
+        },
+        {
+          "original_line": 507,
+          "original": "return( status );",
+          "actual": "return( status );"
+        },
+        {
+          "original_line": 516,
+          "original": "if(!lpt->active)",
+          "actual": "if(!lpt->active)"
+        },
+        {
+          "original_line": 530,
+          "original": "if (lpt->direct_access) {",
+          "actual": "if (lpt->direct_access) {"
+        },
+        {
+          "original_line": 574,
+          "original": "if(lpt->active && lpt->inactive_trigger &&",
+          "actual": "if(lpt->active && lpt->inactive_trigger &&"
+        },
+        {
+          "original_line": 575,
+          "original": "++lpt->inactive_counter == lpt->inactive_trigger)",
+          "actual": "++lpt->inactive_counter == lpt->inactive_trigger)"
+        },
+        {
+          "original_line": 602,
+          "original": "if(host_lpt[adapter].active)",
+          "actual": "if(host_lpt[adapter].active)"
+        },
+        {
+          "original_line": 631,
+          "original": "if(!lpt->active)",
+          "actual": "if(!lpt->active)"
+        },
+        {
+          "original_line": 645,
+          "original": "if (!lpt->direct_access) {",
+          "actual": "if (!lpt->direct_access) {"
+        },
+        {
+          "original_line": 648,
+          "original": "for (i=0; i <cb; i++) {",
+          "actual": "for (i=0; i <cb; i++) {"
+        },
+        {
+          "original_line": 683,
+          "original": "if (lpt->active)",
+          "actual": "if (lpt->active)"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+      "current_sha256": "f0c19da684a388d11b52ebe953817453962881319fd2a7f769d50e17d07ae801",
+      "preprocessed_from": "build/t483-s3-p3/nt_mem.i",
+      "anchors": [
+        {
+          "original_line": 63,
+          "original": "} SECTION_HEADER;",
+          "actual": "} SECTION_HEADER;"
+        },
+        {
+          "original_line": 87,
+          "original": "} SECT_TYPE;",
+          "actual": "} SECT_TYPE;"
+        },
+        {
+          "original_line": 181,
+          "original": "char *env;",
+          "actual": "char *env;"
+        },
+        {
+          "original_line": 184,
+          "original": "ZapValue = strtol(env, 0, 16);",
+          "actual": "ZapValue = strtol(env, 0, 16);"
+        },
+        {
+          "original_line": 196,
+          "original": "GetSystemInfo(&SystemInfo);",
+          "actual": "GetSystemInfo(&SystemInfo);"
+        },
+        {
+          "original_line": 197,
+          "original": "commitGran = (IS32) SystemInfo.dwPageSize;",
+          "actual": "commitGran = (IS32) SystemInfo.dwPageSize;"
+        },
+        {
+          "original_line": 198,
+          "original": "if ((-commitGran & commitGran) != commitGran)",
+          "actual": "if ((-commitGran & commitGran) != commitGran)"
+        },
+        {
+          "original_line": 207,
+          "original": "commitShift = 0;",
+          "actual": "commitShift = 0;"
+        },
+        {
+          "original_line": 208,
+          "original": "for (temp = commitGran; temp > 1; temp >>= 1)",
+          "actual": "for (temp = commitGran; temp > 1; temp >>= 1)"
+        },
+        {
+          "original_line": 209,
+          "original": "commitShift++;",
+          "actual": "commitShift++;"
+        },
+        {
+          "original_line": 213,
+          "original": "(DWORD) MaxIntelMemorySize,",
+          "actual": "(DWORD) MaxIntelMemorySize,"
+        },
+        {
+          "original_line": 216,
+          "original": "if (!intelMem)",
+          "actual": "if (!intelMem)"
+        },
+        {
+          "original_line": 228,
+          "original": "if (VirtualAlloc((LPVOID) intelMem,",
+          "actual": "if (VirtualAlloc((LPVOID) intelMem,"
+        },
+        {
+          "original_line": 229,
+          "original": "(DWORD) initialCommitSize,",
+          "actual": "(DWORD) initialCommitSize,"
+        },
+        {
+          "original_line": 245,
+          "original": "if (!headerTable)",
+          "actual": "if (!headerTable)"
+        },
+        {
+          "original_line": 257,
+          "original": "SECT_ALLOC, intelMem, initialCommitSize);",
+          "actual": "SECT_ALLOC, intelMem, initialCommitSize);"
+        },
+        {
+          "original_line": 260,
+          "original": "totalFree = MaxIntelMemorySize - initialCommitSize;",
+          "actual": "totalFree = MaxIntelMemorySize - initialCommitSize;"
+        },
+        {
+          "original_line": 263,
+          "original": "intelMem + initialCommitSize, totalFree);",
+          "actual": "intelMem + initialCommitSize, totalFree);"
+        },
+        {
+          "original_line": 267,
+          "original": "return(intelMem);",
+          "actual": "return(intelMem);"
+        },
+        {
+          "original_line": 317,
+          "original": "if (iEnable) {",
+          "actual": "if (iEnable) {"
+        },
+        {
+          "original_line": 318,
+          "original": "WOWforceIncrAlloc = GetCurrentThreadId();",
+          "actual": "WOWforceIncrAlloc = GetCurrentThreadId();"
+        },
+        {
+          "original_line": 321,
+          "original": "WOWforceIncrAlloc = 0;",
+          "actual": "WOWforceIncrAlloc = 0;"
+        },
+        {
+          "original_line": 360,
+          "original": "commitAddr;",
+          "actual": "commitAddr;"
+        },
+        {
+          "original_line": 361,
+          "original": "IU32    commitSize;",
+          "actual": "IU32    commitSize;"
+        },
+        {
+          "original_line": 380,
+          "original": "if ((WOWforceIncrAlloc != 0) && lastAllocPtr",
+          "actual": "if ((WOWforceIncrAlloc != 0) && lastAllocPtr"
+        },
+        {
+          "original_line": 381,
+          "original": "&& (GetCurrentThreadId() == WOWforceIncrAlloc)) {",
+          "actual": "&& (GetCurrentThreadId() == WOWforceIncrAlloc)) {"
+        },
+        {
+          "original_line": 385,
+          "original": "headerPtr = lastAllocPtr;",
+          "actual": "headerPtr = lastAllocPtr;"
+        },
+        {
+          "original_line": 387,
+          "original": "headerPtr = &headerTable[0];",
+          "actual": "headerPtr = &headerTable[0];"
+        },
+        {
+          "original_line": 393,
+          "original": "headerPtr = headerPtr->next;",
+          "actual": "headerPtr = headerPtr->next;"
+        },
+        {
+          "original_line": 402,
+          "original": "lastAllocPtr = headerPtr;",
+          "actual": "lastAllocPtr = headerPtr;"
+        },
+        {
+          "original_line": 405,
+          "original": "if(Commit)",
+          "actual": "if(Commit)"
+        },
+        {
+          "original_line": 411,
+          "original": "if (headerPtr->size > Size)",
+          "actual": "if (headerPtr->size > Size)"
+        },
+        {
+          "original_line": 413,
+          "original": "newHeader = addHeaderEntry(headerPtr,",
+          "actual": "newHeader = addHeaderEntry(headerPtr,"
+        },
+        {
+          "original_line": 417,
+          "original": "headerPtr->size - Size);",
+          "actual": "headerPtr->size - Size);"
+        },
+        {
+          "original_line": 418,
+          "original": "headerPtr->size = Size;",
+          "actual": "headerPtr->size = Size;"
+        },
+        {
+          "original_line": 423,
+          "original": "if (commitSize && Commit)",
+          "actual": "if (commitSize && Commit)"
+        },
+        {
+          "original_line": 425,
+          "original": "retAddr = VirtualAlloc((LPVOID) commitAddr,",
+          "actual": "retAddr = VirtualAlloc((LPVOID) commitAddr,"
+        },
+        {
+          "original_line": 426,
+          "original": "(DWORD) commitSize,",
+          "actual": "(DWORD) commitSize,"
+        },
+        {
+          "original_line": 430,
+          "original": "if (retAddr != commitAddr)",
+          "actual": "if (retAddr != commitAddr)"
+        },
+        {
+          "original_line": 442,
+          "original": "totalFree -= Size;",
+          "actual": "totalFree -= Size;"
+        },
+        {
+          "original_line": 474,
+          "original": "IHP     retAddr;",
+          "actual": "IHP     retAddr;"
+        },
+        {
+          "original_line": 480,
+          "original": "retAddr = VirtualAlloc((LPVOID) (intelMem + INTELAddress),",
+          "actual": "retAddr = VirtualAlloc((LPVOID) (intelMem + INTELAddress),"
+        },
+        {
+          "original_line": 481,
+          "original": "(DWORD) Size,",
+          "actual": "(DWORD) Size,"
+        },
+        {
+          "original_line": 485,
+          "original": "if(retAddr != (intelMem + INTELAddress))",
+          "actual": "if(retAddr != (intelMem + INTELAddress))"
+        },
+        {
+          "original_line": 517,
+          "original": "sas_overwrite_memory(INTELAddress, Size);",
+          "actual": "sas_overwrite_memory(INTELAddress, Size);"
+        },
+        {
+          "original_line": 518,
+          "original": "if (!VirtualFree((LPVOID) (intelMem + INTELAddress),",
+          "actual": "if (!VirtualFree((LPVOID) (intelMem + INTELAddress),"
+        },
+        {
+          "original_line": 519,
+          "original": "(DWORD) Size,",
+          "actual": "(DWORD) Size,"
+        },
+        {
+          "original_line": 546,
+          "original": "SECTION_HEADER  *headerPtr;",
+          "actual": "SECTION_HEADER  *headerPtr;"
+        },
+        {
+          "original_line": 548,
+          "original": "decommitSize;",
+          "actual": "decommitSize;"
+        },
+        {
+          "original_line": 549,
+          "original": "IHP     decommitAddr;",
+          "actual": "IHP     decommitAddr;"
+        },
+        {
+          "original_line": 578,
+          "original": "if (headerPtr == &headerTable[0])",
+          "actual": "if (headerPtr == &headerTable[0])"
+        },
+        {
+          "original_line": 597,
+          "original": "size = headerPtr->size;",
+          "actual": "size = headerPtr->size;"
+        },
+        {
+          "original_line": 600,
+          "original": "sas_overwrite_memory(INTELAddress, size);",
+          "actual": "sas_overwrite_memory(INTELAddress, size);"
+        },
+        {
+          "original_line": 604,
+          "original": "if (decommitSize)",
+          "actual": "if (decommitSize)"
+        },
+        {
+          "original_line": 606,
+          "original": "if (!VirtualFree((LPVOID) decommitAddr,",
+          "actual": "if (!VirtualFree((LPVOID) decommitAddr,"
+        },
+        {
+          "original_line": 607,
+          "original": "(DWORD) decommitSize,",
+          "actual": "(DWORD) decommitSize,"
+        },
+        {
+          "original_line": 623,
+          "original": "headerPtr->size += headerPtr->next->size;",
+          "actual": "headerPtr->size += headerPtr->next->size;"
+        },
+        {
+          "original_line": 624,
+          "original": "deleteHeaderEntry(headerPtr->next);",
+          "actual": "deleteHeaderEntry(headerPtr->next);"
+        },
+        {
+          "original_line": 630,
+          "original": "headerPtr->prev->size += headerPtr->size;",
+          "actual": "headerPtr->prev->size += headerPtr->size;"
+        },
+        {
+          "original_line": 631,
+          "original": "deleteHeaderEntry(headerPtr);",
+          "actual": "deleteHeaderEntry(headerPtr);"
+        },
+        {
+          "original_line": 641,
+          "original": "totalFree += size;",
+          "actual": "totalFree += size;"
+        },
+        {
+          "original_line": 689,
+          "original": "for(headerPtr = &headerTable[0] ;",
+          "actual": "for(headerPtr = &headerTable[0] ;"
+        },
+        {
+          "original_line": 691,
+          "original": "headerPtr = headerPtr->next)",
+          "actual": "headerPtr = headerPtr->next)"
+        },
+        {
+          "original_line": 694,
+          "original": "maxFree = headerPtr->size;",
+          "actual": "maxFree = headerPtr->size;"
+        },
+        {
+          "original_line": 731,
+          "original": "SECTION_HEADER  *headerPtr;",
+          "actual": "SECTION_HEADER  *headerPtr;"
+        },
+        {
+          "original_line": 732,
+          "original": "IBOOL   nextSectIsFree;",
+          "actual": "IBOOL   nextSectIsFree;"
+        },
+        {
+          "original_line": 736,
+          "original": "NTSTATUS\tstatus;",
+          "actual": "NTSTATUS\tstatus;"
+        },
+        {
+          "original_line": 779,
+          "original": "if (NewSize == headerPtr->size)",
+          "actual": "if (NewSize == headerPtr->size)"
+        },
+        {
+          "original_line": 787,
+          "original": "if (headerPtr == &headerTable[0])",
+          "actual": "if (headerPtr == &headerTable[0])"
+        },
+        {
+          "original_line": 803,
+          "original": "oldSize = headerPtr->size;",
+          "actual": "oldSize = headerPtr->size;"
+        },
+        {
+          "original_line": 806,
+          "original": "maxSize = headerPtr->size;",
+          "actual": "maxSize = headerPtr->size;"
+        },
+        {
+          "original_line": 809,
+          "original": "maxSize += headerPtr->next->size;",
+          "actual": "maxSize += headerPtr->next->size;"
+        },
+        {
+          "original_line": 816,
+          "original": "if (NewSize > maxSize)",
+          "actual": "if (NewSize > maxSize)"
+        },
+        {
+          "original_line": 822,
+          "original": "return(status);",
+          "actual": "return(status);"
+        },
+        {
+          "original_line": 825,
+          "original": "memcpy((void *) (newAddr + intelMem), (void *) OriginalAddress,",
+          "actual": "memcpy((void *) (newAddr + intelMem), (void *) OriginalAddress,"
+        },
+        {
+          "original_line": 826,
+          "original": "(size_t) oldSize);",
+          "actual": "(size_t) oldSize);"
+        },
+        {
+          "original_line": 829,
+          "original": "sas_overwrite_memory(INTELOriginalAddress, oldSize);",
+          "actual": "sas_overwrite_memory(INTELOriginalAddress, oldSize);"
+        },
+        {
+          "original_line": 830,
+          "original": "status = VdmFreeVirtualMemory(INTELOriginalAddress);",
+          "actual": "status = VdmFreeVirtualMemory(INTELOriginalAddress);"
+        },
+        {
+          "original_line": 832,
+          "original": "return(status);",
+          "actual": "return(status);"
+        },
+        {
+          "original_line": 839,
+          "original": "IHP commitAddr;",
+          "actual": "IHP commitAddr;"
+        },
+        {
+          "original_line": 840,
+          "original": "IU32 commitSize;",
+          "actual": "IU32 commitSize;"
+        },
+        {
+          "original_line": 843,
+          "original": "headerPtr->size = NewSize;",
+          "actual": "headerPtr->size = NewSize;"
+        },
+        {
+          "original_line": 846,
+          "original": "if (nextSectIsFree)",
+          "actual": "if (nextSectIsFree)"
+        },
+        {
+          "original_line": 847,
+          "original": "deleteHeaderEntry(headerPtr->next);",
+          "actual": "deleteHeaderEntry(headerPtr->next);"
+        },
+        {
+          "original_line": 850,
+          "original": "if (NewSize < maxSize)",
+          "actual": "if (NewSize < maxSize)"
+        },
+        {
+          "original_line": 852,
+          "original": "(void) addHeaderEntry(headerPtr,",
+          "actual": "(void) addHeaderEntry(headerPtr,"
+        },
+        {
+          "original_line": 855,
+          "original": "(IU8 *) (OriginalAddress + NewSize),",
+          "actual": "(IU8 *) (OriginalAddress + NewSize),"
+        },
+        {
+          "original_line": 856,
+          "original": "maxSize - NewSize);",
+          "actual": "maxSize - NewSize);"
+        },
+        {
+          "original_line": 863,
+          "original": "if (oldSize < NewSize) {",
+          "actual": "if (oldSize < NewSize) {"
+        },
+        {
+          "original_line": 865,
+          "original": "if (commitSize)",
+          "actual": "if (commitSize)"
+        },
+        {
+          "original_line": 866,
+          "original": "(void) VirtualAlloc((LPVOID) commitAddr,",
+          "actual": "(void) VirtualAlloc((LPVOID) commitAddr,"
+        },
+        {
+          "original_line": 867,
+          "original": "(DWORD) commitSize,",
+          "actual": "(DWORD) commitSize,"
+        },
+        {
+          "original_line": 873,
+          "original": "if (commitSize)",
+          "actual": "if (commitSize)"
+        },
+        {
+          "original_line": 874,
+          "original": "(void) VirtualFree((LPVOID) commitAddr,",
+          "actual": "(void) VirtualFree((LPVOID) commitAddr,"
+        },
+        {
+          "original_line": 875,
+          "original": "(DWORD) commitSize,",
+          "actual": "(DWORD) commitSize,"
+        },
+        {
+          "original_line": 884,
+          "original": "totalFree += NewSize - oldSize;",
+          "actual": "totalFree += NewSize - oldSize;"
+        },
+        {
+          "original_line": 934,
+          "original": "IU32 alignfix;",
+          "actual": "IU32 alignfix;"
+        },
+        {
+          "original_line": 945,
+          "original": "if ((alignfix = HostAddress & 0x3) != 0) {",
+          "actual": "if ((alignfix = HostAddress & 0x3) != 0) {"
+        },
+        {
+          "original_line": 946,
+          "original": "Size += alignfix;",
+          "actual": "Size += alignfix;"
+        },
+        {
+          "original_line": 947,
+          "original": "HostAddress -= alignfix;",
+          "actual": "HostAddress -= alignfix;"
+        },
+        {
+          "original_line": 962,
+          "original": "sas_overwrite_memory(*IntelAddress, Size);",
+          "actual": "sas_overwrite_memory(*IntelAddress, Size);"
+        },
+        {
+          "original_line": 966,
+          "original": "VdmSetPhysRecStructs(HostAddress, *IntelAddress, Size);",
+          "actual": "VdmSetPhysRecStructs(HostAddress, *IntelAddress, Size);"
+        },
+        {
+          "original_line": 994,
+          "original": "SECTION_HEADER * headerPtr;",
+          "actual": "SECTION_HEADER * headerPtr;"
+        },
+        {
+          "original_line": 996,
+          "original": "NTSTATUS status;",
+          "actual": "NTSTATUS status;"
+        },
+        {
+          "original_line": 1016,
+          "original": "Size = headerPtr->size;",
+          "actual": "Size = headerPtr->size;"
+        },
+        {
+          "original_line": 1020,
+          "original": "sas_overwrite_memory(IntelAddress, Size);",
+          "actual": "sas_overwrite_memory(IntelAddress, Size);"
+        },
+        {
+          "original_line": 1029,
+          "original": "VdmSetPhysRecStructs(HostAddress, IntelAddress, Size);",
+          "actual": "VdmSetPhysRecStructs(HostAddress, IntelAddress, Size);"
+        },
+        {
+          "original_line": 1039,
+          "original": "return VdmFreeVirtualMemory(IntelAddress);",
+          "actual": "return VdmFreeVirtualMemory(IntelAddress);"
+        },
+        {
+          "original_line": 1076,
+          "original": "commitAddr;",
+          "actual": "commitAddr;"
+        },
+        {
+          "original_line": 1077,
+          "original": "IU32     commitSize;",
+          "actual": "IU32     commitSize;"
+        },
+        {
+          "original_line": 1087,
+          "original": "exclusiveHeaderPages((IHPE) newHeader, (IHPE) prevHeader,",
+          "actual": "exclusiveHeaderPages((IHPE) newHeader, (IHPE) prevHeader,"
+        },
+        {
+          "original_line": 1088,
+          "original": "(IHPE) nextHeader, &commitAddr, &commitSize);",
+          "actual": "(IHPE) nextHeader, &commitAddr, &commitSize);"
+        },
+        {
+          "original_line": 1089,
+          "original": "if (commitSize)",
+          "actual": "if (commitSize)"
+        },
+        {
+          "original_line": 1091,
+          "original": "retAddr = VirtualAlloc((LPVOID) commitAddr,",
+          "actual": "retAddr = VirtualAlloc((LPVOID) commitAddr,"
+        },
+        {
+          "original_line": 1092,
+          "original": "(DWORD) commitSize,",
+          "actual": "(DWORD) commitSize,"
+        },
+        {
+          "original_line": 1096,
+          "original": "if(retAddr != commitAddr)",
+          "actual": "if(retAddr != commitAddr)"
+        },
+        {
+          "original_line": 1098,
+          "original": "printf(\"V.Allocate failed (%xh) [%lxh :%xh]\\n\",GetLastError(),commitAddr,commitSize);",
+          "actual": "printf(\"V.Allocate failed (%xh) [%lxh :%xh]\\n\",GetLastError(),commitAddr,commitSize);"
+        },
+        {
+          "original_line": 1102,
+          "original": "if (retAddr == commitAddr)",
+          "actual": "if (retAddr == commitAddr)"
+        },
+        {
+          "original_line": 1103,
+          "original": "memset((void *) commitAddr, ZapValue, (size_t) commitSize);",
+          "actual": "memset((void *) commitAddr, ZapValue, (size_t) commitSize);"
+        },
+        {
+          "original_line": 1110,
+          "original": "if (allocFree == SECT_ALLOC)",
+          "actual": "if (allocFree == SECT_ALLOC)"
+        },
+        {
+          "original_line": 1112,
+          "original": "newHeader->address = intelAddr;",
+          "actual": "newHeader->address = intelAddr;"
+        },
+        {
+          "original_line": 1113,
+          "original": "newHeader->size = size;",
+          "actual": "newHeader->size = size;"
+        },
+        {
+          "original_line": 1116,
+          "original": "if (prevHeader)",
+          "actual": "if (prevHeader)"
+        },
+        {
+          "original_line": 1117,
+          "original": "prevHeader->next = newHeader;",
+          "actual": "prevHeader->next = newHeader;"
+        },
+        {
+          "original_line": 1118,
+          "original": "if (nextHeader)",
+          "actual": "if (nextHeader)"
+        },
+        {
+          "original_line": 1119,
+          "original": "nextHeader->prev = newHeader;",
+          "actual": "nextHeader->prev = newHeader;"
+        },
+        {
+          "original_line": 1120,
+          "original": "newHeader->prev = prevHeader;",
+          "actual": "newHeader->prev = prevHeader;"
+        },
+        {
+          "original_line": 1121,
+          "original": "newHeader->next = nextHeader;",
+          "actual": "newHeader->next = nextHeader;"
+        },
+        {
+          "original_line": 1124,
+          "original": "return(newHeader);",
+          "actual": "return(newHeader);"
+        },
+        {
+          "original_line": 1142,
+          "original": "IHP     decommitAddr;",
+          "actual": "IHP     decommitAddr;"
+        },
+        {
+          "original_line": 1143,
+          "original": "IU32    decommitSize;",
+          "actual": "IU32    decommitSize;"
+        },
+        {
+          "original_line": 1146,
+          "original": "if (header == lastAllocPtr) {",
+          "actual": "if (header == lastAllocPtr) {"
+        },
+        {
+          "original_line": 1151,
+          "original": "exclusiveHeaderPages((IHPE) header, (IHPE) header->prev,",
+          "actual": "exclusiveHeaderPages((IHPE) header, (IHPE) header->prev,"
+        },
+        {
+          "original_line": 1152,
+          "original": "(IHPE) header->next, &decommitAddr, &decommitSize);",
+          "actual": "(IHPE) header->next, &decommitAddr, &decommitSize);"
+        },
+        {
+          "original_line": 1155,
+          "original": "if (header->prev)",
+          "actual": "if (header->prev)"
+        },
+        {
+          "original_line": 1156,
+          "original": "header->prev->next = header->next;",
+          "actual": "header->prev->next = header->next;"
+        },
+        {
+          "original_line": 1157,
+          "original": "if (header->next)",
+          "actual": "if (header->next)"
+        },
+        {
+          "original_line": 1158,
+          "original": "header->next->prev = header->prev;",
+          "actual": "header->next->prev = header->prev;"
+        },
+        {
+          "original_line": 1160,
+          "original": "if (decommitSize)",
+          "actual": "if (decommitSize)"
+        },
+        {
+          "original_line": 1164,
+          "original": "if (!VirtualFree((LPVOID) decommitAddr,",
+          "actual": "if (!VirtualFree((LPVOID) decommitAddr,"
+        },
+        {
+          "original_line": 1165,
+          "original": "(DWORD) decommitSize,",
+          "actual": "(DWORD) decommitSize,"
+        },
+        {
+          "original_line": 1178,
+          "original": "header->flags = 0;",
+          "actual": "header->flags = 0;"
+        },
+        {
+          "original_line": 1179,
+          "original": "header->address = 0;",
+          "actual": "header->address = 0;"
+        },
+        {
+          "original_line": 1180,
+          "original": "header->size = 0;",
+          "actual": "header->size = 0;"
+        },
+        {
+          "original_line": 1212,
+          "original": "nextHeaderFirstAddr;",
+          "actual": "nextHeaderFirstAddr;"
+        },
+        {
+          "original_line": 1218,
+          "original": "if (prevAddress)",
+          "actual": "if (prevAddress)"
+        },
+        {
+          "original_line": 1219,
+          "original": "prevHeaderLastAddr = prevAddress + sizeof(SECTION_HEADER) - 1;",
+          "actual": "prevHeaderLastAddr = prevAddress + sizeof(SECTION_HEADER) - 1;"
+        },
+        {
+          "original_line": 1221,
+          "original": "prevHeaderLastAddr = (IHPE) 0;",
+          "actual": "prevHeaderLastAddr = (IHPE) 0;"
+        },
+        {
+          "original_line": 1222,
+          "original": "nextHeaderFirstAddr = nextAddress;",
+          "actual": "nextHeaderFirstAddr = nextAddress;"
+        },
+        {
+          "original_line": 1223,
+          "original": "exclusiveAllocPages(tableAddress,",
+          "actual": "exclusiveAllocPages(tableAddress,"
+        },
+        {
+          "original_line": 1224,
+          "original": "(IU32) sizeof(SECTION_HEADER),",
+          "actual": "(IU32) sizeof(SECTION_HEADER),"
+        },
+        {
+          "original_line": 1228,
+          "original": "allocSize);",
+          "actual": "allocSize);"
+        },
+        {
+          "original_line": 1266,
+          "original": "prevHeader = chunkHeader->prev;",
+          "actual": "prevHeader = chunkHeader->prev;"
+        },
+        {
+          "original_line": 1269,
+          "original": "prevHeader = prevHeader->prev;",
+          "actual": "prevHeader = prevHeader->prev;"
+        },
+        {
+          "original_line": 1272,
+          "original": "if (prevHeader)",
+          "actual": "if (prevHeader)"
+        },
+        {
+          "original_line": 1273,
+          "original": "prevChunkLastAddr = (IHPE) prevHeader->address + prevHeader->size - 1;",
+          "actual": "prevChunkLastAddr = (IHPE) prevHeader->address + prevHeader->size - 1;"
+        },
+        {
+          "original_line": 1275,
+          "original": "prevChunkLastAddr = (IHPE) 0;",
+          "actual": "prevChunkLastAddr = (IHPE) 0;"
+        },
+        {
+          "original_line": 1278,
+          "original": "nextHeader = chunkHeader->next;",
+          "actual": "nextHeader = chunkHeader->next;"
+        },
+        {
+          "original_line": 1281,
+          "original": "nextHeader = nextHeader->next;",
+          "actual": "nextHeader = nextHeader->next;"
+        },
+        {
+          "original_line": 1284,
+          "original": "if (nextHeader)",
+          "actual": "if (nextHeader)"
+        },
+        {
+          "original_line": 1285,
+          "original": "nextChunkFirstAddr = (IHPE) nextHeader->address;",
+          "actual": "nextChunkFirstAddr = (IHPE) nextHeader->address;"
+        },
+        {
+          "original_line": 1287,
+          "original": "nextChunkFirstAddr = (IHPE) 0;",
+          "actual": "nextChunkFirstAddr = (IHPE) 0;"
+        },
+        {
+          "original_line": 1293,
+          "original": "exclusiveAllocPages((IHPE) chunkHeader->address,",
+          "actual": "exclusiveAllocPages((IHPE) chunkHeader->address,"
+        },
+        {
+          "original_line": 1298,
+          "original": "allocSize);",
+          "actual": "allocSize);"
+        },
+        {
+          "original_line": 1363,
+          "original": "currentAllocFirstPage = address >> commitShift;",
+          "actual": "currentAllocFirstPage = address >> commitShift;"
+        },
+        {
+          "original_line": 1364,
+          "original": "currentAllocLastPage = (address + size - 1) >> commitShift;",
+          "actual": "currentAllocLastPage = (address + size - 1) >> commitShift;"
+        },
+        {
+          "original_line": 1365,
+          "original": "firstPage = currentAllocFirstPage;",
+          "actual": "firstPage = currentAllocFirstPage;"
+        },
+        {
+          "original_line": 1373,
+          "original": "lastPage = currentAllocLastPage;",
+          "actual": "lastPage = currentAllocLastPage;"
+        },
+        {
+          "original_line": 1380,
+          "original": "if (prevAllocLastAddr)",
+          "actual": "if (prevAllocLastAddr)"
+        },
+        {
+          "original_line": 1384,
+          "original": "prevAllocLastPage = prevAllocLastAddr >> commitShift;",
+          "actual": "prevAllocLastPage = prevAllocLastAddr >> commitShift;"
+        },
+        {
+          "original_line": 1385,
+          "original": "if (prevAllocLastPage == currentAllocFirstPage)",
+          "actual": "if (prevAllocLastPage == currentAllocFirstPage)"
+        },
+        {
+          "original_line": 1386,
+          "original": "firstPage++;",
+          "actual": "firstPage++;"
+        },
+        {
+          "original_line": 1388,
+          "original": "if (nextAllocFirstAddr)",
+          "actual": "if (nextAllocFirstAddr)"
+        },
+        {
+          "original_line": 1392,
+          "original": "nextAllocFirstPage = nextAllocFirstAddr >> commitShift;",
+          "actual": "nextAllocFirstPage = nextAllocFirstAddr >> commitShift;"
+        },
+        {
+          "original_line": 1393,
+          "original": "if (nextAllocFirstPage == currentAllocLastPage)",
+          "actual": "if (nextAllocFirstPage == currentAllocLastPage)"
+        },
+        {
+          "original_line": 1394,
+          "original": "lastPage--;",
+          "actual": "lastPage--;"
+        },
+        {
+          "original_line": 1402,
+          "original": "if (firstPage <= lastPage)",
+          "actual": "if (firstPage <= lastPage)"
+        }
+      ]
+    }
+  ]
+}

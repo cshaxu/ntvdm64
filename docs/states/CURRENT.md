@@ -36,13 +36,13 @@ The previously suggested compat-first S2 is superseded.
 ## S3 Progress
 
 Assigned: 120 entries across 51 mirror files, in the existing register order.
-P1 delivered 34 entries (commit c5891947e); P2 delivers another 21 entries in
-seven mirror files plus three coupled test files. Cached full builds, 686 actual
-MSVC line anchors, focused CCPU tests and all 16 selected Full gates passed.
-Both publication destinations contain the same verified complete package.
-55/120 delivered, 65 remain; next file base/ccpu386/localfm.c.
-See [P2 delivery](../../artifacts/mvdm-audit/t483-s3/batch2-delivery.json) and
-[fixture failure/control/correction](../../artifacts/mvdm-audit/t483-s3/batch2-fixture-control.json).
+P1/P2 delivered 55 entries; P3 delivers another 27 in ten mirror files.
+Cached x86/x64 full builds, original/current source controls, 565 actual MSVC
+statement/line anchors and all 16 selected Full gates passed. Both publication
+destinations have the hash-verified complete package.
+82/120 delivered, 38 remain; next file host/src/nt_reset.c.
+See [P3 delivery](../../artifacts/mvdm-audit/t483-s3/batch3-delivery.json) and
+[P3 line evidence](../../artifacts/mvdm-audit/t483-s3/batch3-compiler-lines.json).
 Shared providers remain until their
 last required caller is removed, then are cleaned in the same S.
 See [S3 ledger](../../artifacts/mvdm-audit/t483-s3/execution.json).
@@ -58,7 +58,7 @@ S1 register and identifiers remain immutable; S6 remains held.
 
 ## Current Technical Baseline
 
-Package `53cbb7fd-6fed-47b9-8756-b858f6950d03` (S3 P2), complete 11 images at
+Package `f74b6aae-0a25-494c-a5c6-d60c422cb696` (S3 P3), complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. DOS4GW/NESticle was
 explicitly skipped because its external fixture was not supplied. No guest or
 winnt.zip change. This package is not claimed byte-equivalent to S2.
