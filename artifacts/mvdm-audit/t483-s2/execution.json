@@ -448,52 +448,72 @@
     {
       "id": "T483-D2492",
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2500",
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2526",
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2571",
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2593",
       "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2594",
       "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2608",
       "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2610",
       "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2777",
       "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     },
     {
       "id": "T483-D2786",
       "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
-      "status": "pending"
+      "status": "delivered",
+      "batch": 3,
+      "delivery": "batch3-delivery.json"
     }
   ],
   "batch_modified_files": [
@@ -501,17 +521,19 @@
     "src/mvdm-host/softpc.new/host/src/nt_error.c",
     "src/mvdm-host/softpc.new/host/src/nt_rez.c"
   ],
-  "implemented_entries": 25,
-  "completed_delivered_entries": 20,
-  "batch_verification": {
-    "status": "not started; 3 modified files"
-  },
-  "verified_published_entries": 20,
-  "current_batch": 2,
+  "current_batch": 3,
   "batch2": {
     "assigned_entries": 46,
     "source_files": 10,
     "verification_test_files": 2,
     "status": "verified and published; P2 commit contains delivery receipts"
-  }
+  },
+  "counts": {
+    "assigned": 76,
+    "delivered": 75,
+    "reclassified_retain": 1,
+    "implemented_pending_delivery": 0,
+    "unprocessed": 0
+  },
+  "status": "S2 closed by P3 delivery"
 }

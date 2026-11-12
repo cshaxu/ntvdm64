@@ -1380,3 +1380,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T482 DOS restart investigation](evidence/m0-t482-dos-restart-investigation.md): original contract, private-desktop witnesses and owner-approved transfer of unresolved work.
 
 - [T483 S1 closure](evidence/m0-t483-s1-closure.md): bounded mirror audit and verified publication.
+
+- [T483 S2 closure](evidence/m0-t483-s2-closure.md): original restorations, line verification and three batch deliveries.

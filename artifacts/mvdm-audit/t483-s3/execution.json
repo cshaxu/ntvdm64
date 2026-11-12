@@ -1,0 +1,847 @@
+{
+  "admission": "Owner-approved sequence; active after S2 P3 delivery",
+  "assigned_entries": 120,
+  "assigned_files": 51,
+  "entries": [
+    {
+      "id": "T483-D0021",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "status": "pending",
+      "plan": "Remove both classification report calls and only their diagnostic include; preserve existing branch results and functional adapter includes.",
+      "verification": "No remaining references from cmdexec; cached compile/link; EXE classification and COMSPEC routing regression with same branch outcomes."
+    },
+    {
+      "id": "T483-D0022",
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "status": "pending",
+      "plan": "Remove both classification report calls and only their diagnostic include; preserve existing branch results and functional adapter includes.",
+      "verification": "No remaining references from cmdexec; cached compile/link; EXE classification and COMSPEC routing regression with same branch outcomes."
+    },
+    {
+      "id": "T483-D0162",
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "status": "pending",
+      "plan": "Replace sole product call DpmiCpu40DescriptorShadowAddress(Selector & ~4u) with Cpu40GdtShadowAddress; remove helper definition and dpmi32p.h prototype together. Adjust fixture-only branch checks while retaining actual descriptor publication checks.",
+      "verification": "Reconfirm all product callers, then compile and compare GDT publication. Verify no LDT-selected product use is lost; test-only LDT helper branch is not a product requirement."
+    },
+    {
+      "id": "T483-D0165",
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "pending",
+      "plan": "Delete this environment-gated file-trace call and remove now-unused include together with other two calls. Reconcile diagnostic-only consumers; retain original dispatch bounds and all table publication operations.",
+      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions."
+    },
+    {
+      "id": "T483-D0166",
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "pending",
+      "plan": "Delete this environment-gated file-trace call and remove now-unused include together with other two calls. Reconcile diagnostic-only consumers; retain original dispatch bounds and all table publication operations.",
+      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions."
+    },
+    {
+      "id": "T483-D0169",
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "pending",
+      "plan": "Delete this environment-gated file-trace call and remove now-unused include together with other two calls. Reconcile diagnostic-only consumers; retain original dispatch bounds and all table publication operations.",
+      "verification": "Compare executable state operations before/after; compile and retain functional dispatch/table tests. Update tests depending solely on removed diagnostics without weakening product assertions."
+    },
+    {
+      "id": "T483-D0171",
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "status": "pending",
+      "plan": "Delete this prototype together with data.c function; replace dpmiselr.c call with Cpu40GdtShadowAddress. Remove tests of dead helper branches while retaining actual GDT/LDT publication tests.",
+      "verification": "Search proves no remaining callers; cached product build/link; descriptor-domain fixture verifies GDT/LDT writes and IDT relocation; applicable DOS/WOW regressions for actual changed publication path."
+    },
+    {
+      "id": "T483-D0178",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0185",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0187",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0197",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0198",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0199",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0200",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0201",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0202",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0205",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0206",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0207",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0208",
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "pending",
+      "plan": "Remove this diagnostic-only call/state/read loop with its dependent declarations and termination include. Preserve actual frame creation/return; reconcile observation-only tests without deleting functional assertions.",
+      "verification": "Compile selected caller; compare frame/register operations. Retain positive/negative dispatch tests and remove only trace counters tied to deleted diagnostics."
+    },
+    {
+      "id": "T483-D0228",
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "status": "pending",
+      "plan": "Remove termination header with both report calls; preserve fast-BOP provider include.",
+      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks."
+    },
+    {
+      "id": "T483-D0231",
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "status": "pending",
+      "plan": "Delete success-only trace call; preserve registers and return.",
+      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks."
+    },
+    {
+      "id": "T483-D0233",
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "status": "pending",
+      "plan": "Delete fallback trace call; preserve original zero BX/DX/ES result.",
+      "verification": "Preserve zero-result fallback, repeated preparation and successful CALLF dispatch; test real mode/protected mode sync. For selector ownership, cover occupied-but-not-present entries, later descriptor overwrite and worker/session reset. Remove only diagnostic assertions, not functional checks."
+    },
+    {
+      "id": "T483-D0234",
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "status": "pending",
+      "plan": "Remove termination header with all descriptor trace calls and trace-only selector-0130 block; retain functional stores.",
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+    },
+    {
+      "id": "T483-D0237",
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "status": "pending",
+      "plan": "Remove entry trace call; preserve AX alignment check.",
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+    },
+    {
+      "id": "T483-D0238",
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "status": "pending",
+      "plan": "Remove descriptor trace call; preserve original SIM32 pointer and loop.",
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+    },
+    {
+      "id": "T483-D0242",
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "status": "pending",
+      "plan": "Remove both descriptor report calls and selector-0130 diagnostic-only block; preserve stores and surrounding selected condition. Trace arguments read table words even when provider logging is disabled.",
+      "verification": "Use actual descriptor-domain fixture and DOS/WOW publication callers: zero selector, invalid high bits/type/DPL/base/limit, alias preservation and replacement, separate GDT/LDT stores; for pending items add batch boundary, unavailable shadows and page-domain owner tests."
+    },
+    {
+      "id": "T483-D0260",
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "pending",
+      "plan": "Remove termination diagnostic include only with all four report calls; retain the two functional includes.",
+      "verification": "Compile all selected consumers after report removal; verify unchanged guest mode behavior."
+    },
+    {
+      "id": "T483-D0266",
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "pending",
+      "plan": "Remove 53:01-protected report and dead diagnostic declarations with the common diagnostic cleanup.",
+      "verification": "Build after removal; valid mode transition regression."
+    },
+    {
+      "id": "T483-D0268",
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "pending",
+      "plan": "Remove bop-fd-real report with diagnostic cleanup.",
+      "verification": "Build and BOP FD regression."
+    },
+    {
+      "id": "T483-D0271",
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "pending",
+      "plan": "Remove switch-real report with common diagnostic cleanup.",
+      "verification": "Compile and mode-roundtrip regression."
+    },
+    {
+      "id": "T483-D0275",
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "pending",
+      "plan": "Remove switch-protected report and now-dead diagnostic declarations.",
+      "verification": "Compile and protected continuation regression."
+    },
+    {
+      "id": "T483-D0406",
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "status": "pending",
+      "plan": "Delete equipment-only diagnostic include and report call/comment; restore original sas_loadw -> setAX sequence. Remove now-unneeded line carriers only with original logical-line verification. Remove shared provider only after all other callers are separately accounted for.",
+      "verification": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure."
+    },
+    {
+      "id": "T483-D0407",
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "status": "pending",
+      "plan": "Delete equipment-only diagnostic include and report call/comment; restore original sas_loadw -> setAX sequence. Remove now-unneeded line carriers only with original logical-line verification. Remove shared provider only after all other callers are separately accounted for.",
+      "verification": "Compare equipment executable body with original; confirm BOP11 returns SAS EQUIP_FLAG in AX. Rebuild selected owner and run existing equipment/Setup regression; do not count disappearance of diagnostic log as product failure."
+    },
+    {
+      "id": "T483-D0412",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "status": "pending",
+      "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+    },
+    {
+      "id": "T483-D0413",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "status": "pending",
+      "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+    },
+    {
+      "id": "T483-D0414",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "status": "pending",
+      "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+    },
+    {
+      "id": "T483-D0415",
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "status": "pending",
+      "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+    },
+    {
+      "id": "T483-D0433",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "status": "pending",
+      "plan": "Remove current 910-935 block and sole-use 245-249 diagnostic include/comment together. Reconcile selector/provider references before removing shared definitions.",
+      "verification": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions."
+    },
+    {
+      "id": "T483-D0442",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "status": "pending",
+      "plan": "Remove current 910-935 block and sole-use 245-249 diagnostic include/comment together. Reconcile selector/provider references before removing shared definitions.",
+      "verification": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions."
+    },
+    {
+      "id": "T483-D0485",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "status": "pending",
+      "plan": "Delete report hook/comment and sole-use termination include as one change; remove its provider/declaration if no other caller remains and adjust observer-only test, retaining normal segment coverage.",
+      "verification": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion."
+    },
+    {
+      "id": "T483-D0486",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "status": "pending",
+      "plan": "Delete report hook/comment and sole-use termination include as one change; remove its provider/declaration if no other caller remains and adjust observer-only test, retaining normal segment coverage.",
+      "verification": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion."
+    },
+    {
+      "id": "T483-D0506",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "status": "pending",
+      "plan": "Remove validation report and sole-use termination header together; reconcile shared provider/declaration and observation-only probe references. Preserve original switch and descriptor checks.",
+      "verification": "Product token/image comparison excluding diagnostics and original far-call validation tests."
+    },
+    {
+      "id": "T483-D0508",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "status": "pending",
+      "plan": "Remove validation report and sole-use termination header together; reconcile shared provider/declaration and observation-only probe references. Preserve original switch and descriptor checks.",
+      "verification": "Product token/image comparison excluding diagnostics and original far-call validation tests."
+    },
+    {
+      "id": "T483-D0512",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "status": "pending",
+      "plan": "Delete attempt report and sole-use termination header; reconcile observer provider/test separately and preserve original CALLF control flow.",
+      "verification": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof."
+    },
+    {
+      "id": "T483-D0516",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "status": "pending",
+      "plan": "Delete attempt report and sole-use termination header; reconcile observer provider/test separately and preserve original CALLF control flow.",
+      "verification": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof."
+    },
+    {
+      "id": "T483-D0521",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "pending",
+      "plan": "Remove header together with all five trace sites, without changing stores.",
+      "verification": "Compare executable store behavior and run affected memory fixtures."
+    },
+    {
+      "id": "T483-D0523",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "pending",
+      "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+    },
+    {
+      "id": "T483-D0524",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "pending",
+      "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+    },
+    {
+      "id": "T483-D0525",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "pending",
+      "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+    },
+    {
+      "id": "T483-D0526",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "pending",
+      "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+    },
+    {
+      "id": "T483-D0527",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "pending",
+      "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+    },
+    {
+      "id": "T483-D0560",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "status": "pending",
+      "plan": "Remove both report calls, comments and header as one change; keep original validation and CR0 transition. Remove provider only after auditing remaining callers.",
+      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear."
+    },
+    {
+      "id": "T483-D0561",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "status": "pending",
+      "plan": "Remove both report calls, comments and header as one change; keep original validation and CR0 transition. Remove provider only after auditing remaining callers.",
+      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear."
+    },
+    {
+      "id": "T483-D0562",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "status": "pending",
+      "plan": "Remove both report calls, comments and header as one change; keep original validation and CR0 transition. Remove provider only after auditing remaining callers.",
+      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear."
+    },
+    {
+      "id": "T483-D0564",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "status": "pending",
+      "plan": "Delete unused extern and its owner comment, preserve ev_glue strong definition. Do not restore local tentative definition.",
+      "verification": "Selected link retains exactly one Gdp definition and normal C-VID setup/teardown."
+    },
+    {
+      "id": "T483-D0578",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "status": "pending",
+      "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+    },
+    {
+      "id": "T483-D0579",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "status": "pending",
+      "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+    },
+    {
+      "id": "T483-D0580",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "status": "pending",
+      "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+    },
+    {
+      "id": "T483-D0581",
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "status": "pending",
+      "plan": "Remove trace include, comment and all three calls together; retain original INT17 implementation and LPT open/close return. Delete shared reporter only after its other callers are reconciled.",
+      "verification": "Build without trace dependency; preserve AH/DX/IF effects, LPT open/close, unavailable-port and normal printer status behavior; existing DOS/Setup regression."
+    },
+    {
+      "id": "T483-D0582",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "status": "pending",
+      "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+    },
+    {
+      "id": "T483-D0583",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "status": "pending",
+      "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+    },
+    {
+      "id": "T483-D0584",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "status": "pending",
+      "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+    },
+    {
+      "id": "T483-D0585",
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "status": "pending",
+      "plan": "Delete header/comment/three trace calls together; retain original BIOS polling and timeout semantics, early receive return and status result. Shared reporter retirement requires other callers audit.",
+      "verification": "Selected build; serial init/status/transmit/receive, successful early return and timeout status. Historical hardware validation gaps remain explicit."
+    },
+    {
+      "id": "T483-D0851",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "status": "pending",
+      "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+    },
+    {
+      "id": "T483-D0852",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "status": "pending",
+      "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+    },
+    {
+      "id": "T483-D0853",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "status": "pending",
+      "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+    },
+    {
+      "id": "T483-D0854",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "status": "pending",
+      "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+    },
+    {
+      "id": "T483-D0855",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "status": "pending",
+      "plan": "Remove include/comment and four report calls from this mirror while retaining all original buffer writes/register reads/IDLE control. Audit remaining probe users before deleting shared provider/header; move any still-required observation into test-only wrapper.",
+      "verification": "Compile without mirror trace dependency; BIOS key delivery and idle wake regression. Adapt trace-specific tests without replacing production acceptance."
+    },
+    {
+      "id": "T483-D0939",
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "status": "pending",
+      "plan": "Remove report call and now-unused termination header from illegalp.c; remove this specific provider definition/declaration and its trace-path test expectations. Keep other termination/report functions while other callers remain. Retain needed investigation capability as separately admitted probe, not a parallel product error path.",
+      "verification": "Build both supported host architectures; source/link search for removed symbol; adapted observer tests; original illegal-opcode panel and continue/terminate behavior regression."
+    },
+    {
+      "id": "T483-D0940",
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "status": "pending",
+      "plan": "Remove report call and now-unused termination header from illegalp.c; remove this specific provider definition/declaration and its trace-path test expectations. Keep other termination/report functions while other callers remain. Retain needed investigation capability as separately admitted probe, not a parallel product error path.",
+      "verification": "Build both supported host architectures; source/link search for removed symbol; adapted observer tests; original illegal-opcode panel and continue/terminate behavior regression."
+    },
+    {
+      "id": "T483-D1127",
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "status": "pending",
+      "plan": "Delete nt_event.h PointerAttachedWindowed extern and its DIV-099 explanatory notice; preserve nt_event.c BOOL definition and uses. Remove obsolete declaration-adaptation rationale while recording intentional original-declaration deletion.",
+      "verification": "Compile all maintained consumers of nt_event.h and verify no undeclared-variable reference; confirm definition, symbol visibility and mouse detach behavior unchanged."
+    },
+    {
+      "id": "T483-D1270",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "status": "pending",
+      "plan": "Delete mvdm_softpc_firmware.h include; do not add a shim to justify it.",
+      "verification": "Compile translation unit without header and check declaration ownership; no runtime behavior change expected."
+    },
+    {
+      "id": "T483-D1314",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "status": "pending",
+      "plan": "Remove calls and exclusive providers/declarations; move required assertions to test-owned observer.",
+      "verification": "INT2A handled/unhandled behavior and maintained observer fixture."
+    },
+    {
+      "id": "T483-D1332",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "status": "pending",
+      "plan": "Remove call/exclusive provider/declaration with maintained fixture adaptation; retain returnStatus.",
+      "verification": "Handled/unhandled returns and equivalent external observation."
+    },
+    {
+      "id": "T483-D1336",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "status": "pending",
+      "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+    },
+    {
+      "id": "T483-D1337",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "status": "pending",
+      "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+    },
+    {
+      "id": "T483-D1338",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "status": "pending",
+      "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+    },
+    {
+      "id": "T483-D1339",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "status": "pending",
+      "plan": "Remove LPT-only trace include and three calls together; preserve original IOCTL/failure/status flow. Keep shared provider until all remaining registered callsites and maintained test uses are retired or migrated.",
+      "verification": "Compile LPT provider without trace header; printer-open failure, buffered flush, IOCTL success/failure preserve status and error behavior. Audit shared provider callers before deletion; fixtures are not hardware-printer acceptance."
+    },
+    {
+      "id": "T483-D1344",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "status": "pending",
+      "plan": "Restore original direct VdmAllocateVirtualMemory comparison and single return; remove status local, report call, extra brace and termination include together. Remove exclusive report provider/declaration after migrating maintained observer test.",
+      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed."
+    },
+    {
+      "id": "T483-D1345",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "status": "pending",
+      "plan": "Restore original direct VdmAllocateVirtualMemory comparison and single return; remove status local, report call, extra brace and termination include together. Remove exclusive report provider/declaration after migrating maintained observer test.",
+      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed."
+    },
+    {
+      "id": "T483-D1346",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "status": "pending",
+      "plan": "Restore original direct VdmAllocateVirtualMemory comparison and single return; remove status local, report call, extra brace and termination include together. Remove exclusive report provider/declaration after migrating maintained observer test.",
+      "verification": "Allocation success/failure and unchanged STATUS_NO_MEMORY; existing observer test must be adapted, not claimed passed."
+    },
+    {
+      "id": "T483-D1381",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "status": "pending",
+      "plan": "Delete call and coupled unused includes; preserve terminate.",
+      "verification": "Original terminate -> close -> host_terminate ordering."
+    },
+    {
+      "id": "T483-D1409",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "status": "pending",
+      "plan": "Delete added termination include and its explanatory comment; keep shared header/providers for their other callers.",
+      "verification": "Compile actual nt_timer TU without header; unchanged exception/heartbeat call bindings."
+    },
+    {
+      "id": "T483-D1434",
+      "path": "src/mvdm-host/softpc.new/host/src/sources",
+      "status": "pending",
+      "plan": "Removed x86_emm source line; regenerate Ninja from authoritative sources manifest.",
+      "verification": "Regenerate graph; cached supported build/link and artifact identity check; applicable delivery gates before release."
+    },
+    {
+      "id": "T483-D1437",
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "status": "pending",
+      "plan": "Deleted file and audit mappings; original bytes/hash retained in review evidence. Regenerate supported build graphs and verify before delivery.",
+      "verification": "Regenerate graph; cached supported build/link and artifact identity check; applicable delivery gates before release."
+    },
+    {
+      "id": "T483-D1447",
+      "path": "src/mvdm-host/vdmredir/sources",
+      "status": "pending",
+      "plan": "Removed empty vrdlcdbg.c manifest entry; retain functional redirector inputs.",
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+    },
+    {
+      "id": "T483-D1448",
+      "path": "src/mvdm-host/vdmredir/sources",
+      "status": "pending",
+      "plan": "Remove only empty vrdebug.c entry; regenerate authoritative Ninja inputs.",
+      "verification": "Regenerate graphs; build/link and confirm no functional redirector symbol lost."
+    },
+    {
+      "id": "T483-D1449",
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "status": "pending",
+      "plan": "Delete entirely excluded debug source; preserve historical source identity in audit evidence.",
+      "verification": "Regenerate graphs; build/link and confirm no functional redirector symbol lost."
+    },
+    {
+      "id": "T483-D1453",
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "status": "pending",
+      "plan": "Deleted wholly excluded source; remove vrdlcdbg.c from sources and regenerate build graph.",
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+    },
+    {
+      "id": "T483-D1484",
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "pending",
+      "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+    },
+    {
+      "id": "T483-D1485",
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "pending",
+      "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+    },
+    {
+      "id": "T483-D1486",
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "pending",
+      "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+    },
+    {
+      "id": "T483-D1488",
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "pending",
+      "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+    },
+    {
+      "id": "T483-D1492",
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "pending",
+      "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+    },
+    {
+      "id": "T483-D1510",
+      "path": "src/mvdm-host/wow32/walias.c",
+      "status": "pending",
+      "plan": "Delete entire unused hConvert16to32 wrapper, wgdi.h declaration and obsolete wow32.prf name; keep GDI32 direct shared-provider call. Verify no exported/build/profiling consumer requires wrapper before removal.",
+      "verification": "Build/link/export check after wrapper deletion; alias zero/stale/reuse/reserved-color/table-full behavior retained; real GDI regression as applicable."
+    },
+    {
+      "id": "T483-D1533",
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "status": "pending",
+      "plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+    },
+    {
+      "id": "T483-D1534",
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "status": "pending",
+      "plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+    },
+    {
+      "id": "T483-D1535",
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "status": "pending",
+      "plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+    },
+    {
+      "id": "T483-D1663",
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "status": "pending",
+      "plan": "Remove trace call and diagnostic-only include; remove exclusive trace provider/declaration after checking observation consumers. Retain other functions in wow_user_thunk_scope and original failure return/LastError.",
+      "verification": "Selected WOW build; cache repeated flush/failure controls; invalid trailing separator and named-pipe attribute paths; failure return preserved after trace removal."
+    },
+    {
+      "id": "T483-D1668",
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "status": "pending",
+      "plan": "Remove trace call and diagnostic-only include; remove exclusive trace provider/declaration after checking observation consumers. Retain other functions in wow_user_thunk_scope and original failure return/LastError.",
+      "verification": "Selected WOW build; cache repeated flush/failure controls; invalid trailing separator and named-pipe attribute paths; failure return preserved after trace removal."
+    },
+    {
+      "id": "T483-D1709",
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "pending",
+      "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+    },
+    {
+      "id": "T483-D1711",
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "pending",
+      "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+    },
+    {
+      "id": "T483-D1713",
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "pending",
+      "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+    },
+    {
+      "id": "T483-D1715",
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "pending",
+      "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+    },
+    {
+      "id": "T483-D1716",
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "pending",
+      "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+    },
+    {
+      "id": "T483-D1809",
+      "path": "src/mvdm-host/wow32/wmmedia1.c",
+      "status": "pending",
+      "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+    },
+    {
+      "id": "T483-D1810",
+      "path": "src/mvdm-host/wow32/wmmedia2.c",
+      "status": "pending",
+      "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+    },
+    {
+      "id": "T483-D1811",
+      "path": "src/mvdm-host/wow32/wmmstru1.c",
+      "status": "pending",
+      "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+    },
+    {
+      "id": "T483-D1812",
+      "path": "src/mvdm-host/wow32/wmmstru2.c",
+      "status": "pending",
+      "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+    },
+    {
+      "id": "T483-D1813",
+      "path": "src/mvdm-host/wow32/wmmstruc.c",
+      "status": "pending",
+      "plan": "Delete whole empty carrier and remove manifest entry; reduce formal source count guards to 72.",
+      "verification": "Regenerate selected 72-source WOW32 graph; cached compile/link before release."
+    },
+    {
+      "id": "T483-D2075",
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "status": "pending",
+      "plan": "Delete only FUN_FINALUSERINIT local extern gpsi and preserve diagnostic #line mapping.",
+      "verification": "Selected translation unit build and unchanged emitted code."
+    },
+    {
+      "id": "T483-D2464",
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "status": "pending",
+      "plan": "Remove only unused BMR_BITMAP definition in later minimization; verify no macro consumer after clres inclusion in bitmap fixture.",
+      "verification": "Preprocess product and included-source fixture; build unchanged behavior; no new runtime case needed for unused macro removal."
+    },
+    {
+      "id": "T483-D2614",
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "status": "pending",
+      "plan": "Remove dead empty macro in later partial-code cleanup, retaining original conditional framework/exclusion policy. Whole file remains required.",
+      "verification": "Search complete including translation unit for macro consumers, compile and compare selected tokens."
+    },
+    {
+      "id": "T483-D2897",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "status": "pending",
+      "plan": "No production caller found; production commit explicitly uses AddAttachment/Recalc2, and queue allocator is terminal rejection. Remove test-only wrapper plus allocate_queue field/label_allocate/macro/declaration and queue_selection fixture cases after full symbol/build confirmation; keep original grouping tests and lifetime tests. Not a whole-file deletion.",
+      "verification": "For remediation: cached WOW build; input-membership original grouping, input-lifetime allocation/native failure and external-reference/retirement checks; no scratch pointer escape; source line/frame verification; whole-tree symbol check before test-only wrapper deletion."
+    },
+    {
+      "id": "T483-D2909",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "status": "pending",
+      "plan": "StubExceptionHandler has no retained call in this subset. Remove unused macro and its orphan diagnostic frame together when reconciling original subset structure; this is partial cleanup, not whole-file deletion.",
+      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping."
+    },
+    {
+      "id": "T483-D2914",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "status": "pending",
+      "plan": "DATAALIGN/CHARALIGN are defined and undefined around no retained class-registration body. Remove these unused macros and associated detached alignment frame with coherent subset reconciliation.",
+      "verification": "Cached WOW build and edit-state/control lifecycle fixtures for subsequent changes; invalid/retired HWND and existing FNID rejection, cleanup repeats, scope lifetime; reconstruct original conditional and logical-line mapping."
+    },
+    {
+      "id": "T483-D2925",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "status": "pending",
+      "plan": "TraceDdeMsg and DebugValidateMLIST macros have no retained calls in this subset. Remove unused definitions and reconcile their detached conditional scaffolding with original source-policy subset; partial cleanup only.",
+      "verification": "For remediation: cached WOW build; task-order initialization eight modes, long profile value, invalid source name, shared/separate startup; native input attachment failure/rollback, task retirement and multi-window lifecycle. Preserve no extra scheduler/queue registry."
+    },
+    {
+      "id": "T483-D2954",
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "status": "pending",
+      "plan": "PAGE_SIZE definition belongs to omitted shared-section allocator and has no retained use. Remove unused definition with subset structure reconciliation; no whole-file deletion.",
+      "verification": "For remediation: cached WOW build; default-messages membership/repeated publication fixture and actual control/default dispatch; allocation-failure cleanup and no partial publication; all test/build selector consumers and diagnostic-line reconstruction."
+    },
+    {
+      "id": "T483-D2980",
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "status": "pending",
+      "plan": "Remove NWCH after confirming reverse converter remains unselected; preserve original excluded FE_SB boundary in its original location.",
+      "verification": "Check selected tokens and compile consumers after removal."
+    }
+  ]
+}

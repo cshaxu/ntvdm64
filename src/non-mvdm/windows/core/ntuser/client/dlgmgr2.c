@@ -13,6 +13,7 @@
  * The standalone precomp binds existing scoped native calls and WND graph. */
 #line 11
 #include "precomp.h"
+#pragma hdrstop
 
 /***************************************************************************\
 * xxxRemoveDefaultButton

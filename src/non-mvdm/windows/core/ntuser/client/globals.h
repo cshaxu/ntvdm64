@@ -14,11 +14,37 @@
 #ifndef _GLOBALS_
 #define _GLOBALS_
 
+#line 18
+#if DBG
+#line 19
+#error Excluded unsupported original DBG globals
+#endif
+#line 21
+
 #line 43
 extern CONST BOOLEAN gabThunkMessage[];
 #line 47
 extern WCHAR szOneChar[];
 
+#line 79
+/*
+ * LATER: client-side user needs to use moveable memory objects for
+ * WOW compatibility (at least until/if/when we copy all the edit control
+ * code into 16-bit space);  that's also why we can't just party with
+ * handles like LMHtoP does... -JeffPar
+ */
+#line 85
+#ifndef RC_INVOKED       // RC can't handle #pragmas
+#line 86
+#undef  LHND
+#define LHND                (LMEM_MOVEABLE | LMEM_ZEROINIT)
+
+#undef  LMHtoP
+#define LMHtoP(handle)      // Don't use this macro
+#endif
+#line 92
+
+#line 93
 /*
  * WOW HACK - apps can pass a global handle as the hInstance on a call
  * to CreateWindow for an edit control and expect allocations for the
@@ -43,29 +69,7 @@ extern WCHAR szOneChar[];
 #define LOCALFREE(hMem, hInstance)                      \
                             (*pfnLocalFree)(hMem, hInstance)
 
-#line 18
-#if DBG
-#line 19
-#error Excluded unsupported original DBG globals
-#endif
-#line 21
 
-/*
- * LATER: client-side user needs to use moveable memory objects for
- * WOW compatibility (at least until/if/when we copy all the edit control
- * code into 16-bit space);  that's also why we can't just party with
- * handles like LMHtoP does... -JeffPar
- */
-#line 85
-#ifndef RC_INVOKED       // RC can't handle #pragmas
-#line 86
-#undef  LHND
-#define LHND                (LMEM_MOVEABLE | LMEM_ZEROINIT)
-
-#undef  LMHtoP
-#define LMHtoP(handle)      // Don't use this macro
-#endif
-#line 92
 
 #line 135
 #ifdef WX86

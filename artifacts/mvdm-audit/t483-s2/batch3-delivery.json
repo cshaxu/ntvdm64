@@ -1,0 +1,22 @@
+{
+  "batch": 3,
+  "baseline": "54cc12f5e",
+  "entries": 10,
+  "mirror_files": 8,
+  "verification_files": 1,
+  "build": "cached x86/x64 passed",
+  "focused": "real USER layouts and multipass pointer identity passed; exact original overflow cohort rejects; initial runner log-argument error fixed and r2 passed",
+  "lines": "9 actual selected MSVC anchors plus 10 original framework/macro logical positions passed",
+  "full": "16 selected gates passed; external DOS4GW/NESticle fixture skipped explicitly",
+  "publication": {
+    "status": "published",
+    "package": "fd1f2722-a425-4881-97f6-174be44d6b6f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "guest_and_winnt_zip_unchanged": true
+}

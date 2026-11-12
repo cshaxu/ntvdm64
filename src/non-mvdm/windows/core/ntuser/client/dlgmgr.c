@@ -14,6 +14,7 @@
  * and native leaves. Other manager families are not selected by this slice. */
 #line 12
 #include "precomp.h"
+#pragma hdrstop
 
 #line 22
 #define IsInForegroundQueue(hwnd) \

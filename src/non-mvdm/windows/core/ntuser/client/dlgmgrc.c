@@ -15,6 +15,7 @@
  * API substitution. */
 #line 12
 #include "precomp.h"
+#pragma hdrstop
 
 /* DIVERGENCE(OPENNT-HOST-109): restore the original group-navigation
  * collaborators required by IsDialogMessage/xxxGotoNextMnem. Bodies are

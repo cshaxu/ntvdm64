@@ -11,6 +11,7 @@
 
 #line 12
 #include "precomp.h"
+#pragma hdrstop
 #line 156
 /***************************************************************************\
 * ClientTabTheTextOutForWimps

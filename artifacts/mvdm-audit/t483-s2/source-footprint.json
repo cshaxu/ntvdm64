@@ -1,0 +1,21 @@
+{
+  "baseline": "d43933ad2",
+  "scope": "src production and test; excludes assets/docs/evidence/build; literal line counts include restored original declaration formatting",
+  "summary": {
+    "autonomous": {
+      "added": 1,
+      "deleted": 92,
+      "net": -91
+    },
+    "mirror": {
+      "added": 459,
+      "deleted": 200,
+      "net": 259
+    },
+    "tests": {
+      "added": 119,
+      "deleted": 11,
+      "net": 108
+    }
+  }
+}

@@ -13,6 +13,7 @@
  * private precomp is supplied by the consuming group. */
 #line 11
 #include "precomp.h"
+#pragma hdrstop
 
 /***************************************************************************\
 * EndDialog

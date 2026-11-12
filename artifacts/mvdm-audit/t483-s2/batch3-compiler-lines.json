@@ -1,0 +1,315 @@
+{
+  "method": "Actual product command MSVC /P anchors. Macro/framework locations separately checked against original source; no claim on pre-existing unrelated mappings.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "current_sha256": "1869b234acb01f6b75827f40d49a5322248e45473832e21f210fea10aac99160",
+      "checks": [
+        {
+          "token": "#pragma hdrstop",
+          "original_lines": [
+            12
+          ],
+          "actual": [
+            {
+              "line": 12,
+              "output": [
+                "#pragma hdrstop"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_sha256": "8b327ed645e66637ffd33fa91d6d41181c4552dbb50b08156d615ceba92ecd66",
+      "checks": [
+        {
+          "token": "#pragma hdrstop",
+          "original_lines": [
+            13
+          ],
+          "actual": [
+            {
+              "line": 13,
+              "output": [
+                "#pragma hdrstop"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "current_sha256": "33f0e9f5998864fc323e197f4ea0b5cf2ccd5d2ad1c59febdb1efc83f5181b06",
+      "checks": [
+        {
+          "token": "#pragma hdrstop",
+          "original_lines": [
+            12
+          ],
+          "actual": [
+            {
+              "line": 12,
+              "output": [
+                "#pragma hdrstop"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "current_sha256": "ffc8da234cfcc2c446b9e30eb1a5b0c05c485a178ed0da78bbc1596877e413ed",
+      "checks": [
+        {
+          "token": "#pragma hdrstop",
+          "original_lines": [
+            13
+          ],
+          "actual": [
+            {
+              "line": 13,
+              "output": [
+                "#pragma hdrstop"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "current_sha256": "fa3f545ee11f6da095d28c7db6e68f13d583c53cf5e97b877cfc16772ae492e1",
+      "checks": [
+        {
+          "token": "#pragma hdrstop",
+          "original_lines": [
+            14
+          ],
+          "actual": [
+            {
+              "line": 14,
+              "output": [
+                "#pragma hdrstop"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "current_sha256": "b0a803cd55d6dcd6c8a43a8e368ecf0ecd90ed42011f7b14d5933a2c55970267",
+      "checks": [
+        {
+          "token": "#pragma hdrstop",
+          "original_lines": [
+            13
+          ],
+          "actual": [
+            {
+              "line": 13,
+              "output": [
+                "#pragma hdrstop"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "current_sha256": "a71a30beeb6a3bce234b549e6a8554f95f570d8af5ac7214069a044a34b22150",
+      "checks": [
+        {
+          "token": "extern CONST BOOLEAN gabThunkMessage[];",
+          "original_lines": [
+            43
+          ],
+          "actual": [
+            {
+              "line": 43,
+              "output": [
+                "extern const BOOLEAN gabThunkMessage[];",
+                "extern const BOOLEAN gabThunkMessage[];",
+                "extern const BOOLEAN gabThunkMessage[];",
+                "extern const BOOLEAN gabThunkMessage[];",
+                "extern const BOOLEAN gabThunkMessage[];",
+                "extern const BOOLEAN gabThunkMessage[];"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "extern WCHAR szOneChar[];",
+          "original_lines": [
+            47
+          ],
+          "actual": [
+            {
+              "line": 47,
+              "output": [
+                "extern WCHAR szOneChar[];",
+                "extern WCHAR szOneChar[];",
+                "extern WCHAR szOneChar[];",
+                "extern WCHAR szOneChar[];",
+                "extern WCHAR szOneChar[];",
+                "extern WCHAR szOneChar[];"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "current_sha256": "3357f5306394450512cf95fe13151a480cd2c1452d5c70d5e7cb80a9870d06f2",
+      "checks": [
+        {
+          "token": "PCALLPROCDATA spcpdFirst;",
+          "original_lines": [
+            1345
+          ],
+          "actual": [
+            {
+              "line": 1345,
+              "output": [
+                "PCALLPROCDATA  spcpdFirst;",
+                "PCALLPROCDATA  spcpdFirst;",
+                "PCALLPROCDATA  spcpdFirst;",
+                "PCALLPROCDATA  spcpdFirst;",
+                "PCALLPROCDATA  spcpdFirst;",
+                "PCALLPROCDATA  spcpdFirst;"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "source_framework_and_macro_lines": [
+    {
+      "path": "client/globals.h",
+      "token": "#if DBG",
+      "original": [
+        18
+      ],
+      "current": [
+        18
+      ],
+      "passed": true
+    },
+    {
+      "path": "client/globals.h",
+      "token": "#ifndef RC_INVOKED",
+      "original": [
+        85
+      ],
+      "current": [
+        85
+      ],
+      "passed": true
+    },
+    {
+      "path": "client/globals.h",
+      "token": "#define LHND",
+      "original": [
+        87
+      ],
+      "current": [
+        87
+      ],
+      "passed": true
+    },
+    {
+      "path": "client/globals.h",
+      "token": "#define LMHtoP",
+      "original": [
+        90
+      ],
+      "current": [
+        90
+      ],
+      "passed": true
+    },
+    {
+      "path": "client/globals.h",
+      "token": "#define LOCALALLOC",
+      "original": [
+        104
+      ],
+      "current": [
+        104
+      ],
+      "passed": true
+    },
+    {
+      "path": "client/globals.h",
+      "token": "#define LOCALFREE",
+      "original": [
+        114
+      ],
+      "current": [
+        114
+      ],
+      "passed": true
+    },
+    {
+      "path": "inc/user.h",
+      "token": "#define FNID_END",
+      "original": [
+        694
+      ],
+      "current": [
+        694
+      ],
+      "passed": true
+    },
+    {
+      "path": "inc/user.h",
+      "token": "#define FNID_ARRAY_SIZE",
+      "original": [
+        704
+      ],
+      "current": [
+        704
+      ],
+      "passed": true
+    },
+    {
+      "path": "inc/user.h",
+      "token": "#if (FNID_END",
+      "original": [
+        705
+      ],
+      "current": [
+        705
+      ],
+      "passed": true
+    },
+    {
+      "path": "inc/user.h",
+      "token": "#error\"The size",
+      "original": [
+        706
+      ],
+      "current": [
+        706
+      ],
+      "passed": true
+    }
+  ]
+}

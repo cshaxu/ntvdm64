@@ -446,6 +446,8 @@ typedef struct tagCOMMON_WNDCLASS
     struct tagCURSOR *spicnSm;
 } COMMON_WNDCLASS;
 
+/* Forward the original pointer type without importing CallProc state. */
+typedef struct _CALLPROCDATA *PCALLPROCDATA;
 #line 1323
 typedef struct tagCLS {
     /* NOTE: The order of the following fields is assumed. */
@@ -469,7 +471,7 @@ typedef struct tagCLS {
     DWORD       adwWOW[2];
                                     /* LATER: No one uses dwExpWinVer. wow? */
     DWORD       hTaskWow;           /* LATER: is wow using this? */
-    struct tagCALLPROCDATA *spcpdFirst;      /* Pointer to first CallProcData element (or 0) */
+    PCALLPROCDATA  spcpdFirst;      /* Pointer to first CallProcData element (or 0) */
     struct tagCLS *pclsBase;        /* Pointer to base class */
     struct tagCLS *pclsClone;       /* Pointer to clone class list */
 
@@ -706,10 +708,20 @@ typedef struct tagOEMBITMAPINFO
 #line 675
 #endif
 #line 686
-#line 705
+#line 694
+#define FNID_END                    0x000002B4
+
+/*
+ * The size of the server side function table is defined as a power of two
+ * so a simple "and" operation can be used to determine if a function index
+ * is legal or not. Unused entries in the table are fill with a routine that
+ * catches invalid functions that have indices within range, but are not
+ * implemented.
+ */
+
+#define FNID_ARRAY_SIZE             32
 #if (FNID_END - FNID_START + 1) > FNID_ARRAY_SIZE
-#line 706
-#error Excluded unsupported original USER condition
+#error"The size of the function array is greater than the allocated storage"
 #endif
 #line 708
 #line 743
