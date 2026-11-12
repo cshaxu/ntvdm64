@@ -39,7 +39,7 @@
  * The standalone worker retains that one shared-data update at SoftPC's
  * existing post-transform boundary; it does not introduce another mouse
  * queue, coordinate conversion or USER input owner. */
-extern int mvdm_softpc_wow_page_domain_publish_cursor(long, long);
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 
 #line 35

@@ -75,7 +75,6 @@ DATA OBJECTS      : None
 #include "cntlbop.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_firmware.h"
 #line 71
 #include "host_bop.h"
 #include "demexp.h"
@@ -675,6 +674,7 @@ closeAndReturnError:
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: More MS BOP stubs */
 
+#line 574
 void MS_bop_5(void)
 {
     IMPORT VOID ms_bop(VOID);
@@ -940,9 +940,8 @@ void ISV_RegisterModule (BOOL fMode)
         pchInit = procbuffer;
     }
 
-    /* DIVERGENCE MVDM-HOST-DIV-008: preserve the historical export address
-       while making the intended FARPROC call shape explicit for modern x86. */
-    if ((InitEntry = (FARPROC)GetProcAddress(hDll, pchInit)) == NULL){
+#line 846
+    if ((InitEntry = GetProcAddress(hDll, pchInit)) == NULL){
 #line 847
         FreeLibrary(hDll);
         setCF(1);
@@ -962,8 +961,8 @@ void ISV_RegisterModule (BOOL fMode)
     pchDispatch = procbuffer;
     }
 
-    /* DIVERGENCE MVDM-HOST-DIV-008: see the matching InitEntry conversion. */
-    if ((DispatchEntry = (FARPROC)GetProcAddress(hDll, pchDispatch)) == NULL){
+#line 865
+    if ((DispatchEntry = GetProcAddress(hDll, pchDispatch)) == NULL){
 #line 866
     FreeLibrary(hDll);
     setCF(1);

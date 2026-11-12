@@ -16,6 +16,7 @@ extern void ica_outb(io_addr, IU8);
 extern IS32 ica_intack(IU32 *);
 extern VDMVIRTUALICA VirtualIca[2];
 extern void D11_int(void), re_direct(void), int_287(void);
+extern void SoftPcEoi(int, int *);
 static unsigned checks, failures, eois[16];
 #define CHECK(x) do { ++checks; if(!(x)) { ++failures; fprintf(stderr,"FAIL line=%u: %s\n",(unsigned)__LINE__,#x); } } while(0)
 void host_EOI_hook(int irq, int count)
@@ -87,6 +88,22 @@ int main(void)
     ica_outb(0x20,0x20);
     initialize(0); slave_request(5); int_287();
     CHECK(VirtualIca[1].ica_isr==0 && VirtualIca[0].ica_isr==0 && eois[13]==1);
+    /* Redirector ABI: nonspecific slave then master EOI reports each line.
+     * With no ISR bit, -1 stays -1 and no callback is fabricated. */
+    initialize(0); slave_request(3);
+    {
+        int selected = -1;
+        before = eois[11];
+        SoftPcEoi(ICA_SLAVE, &selected);
+        CHECK(selected == 3 && VirtualIca[1].ica_isr == 0);
+        CHECK(VirtualIca[0].ica_isr == 4 && eois[11] == before + 1);
+        selected = -1;
+        SoftPcEoi(ICA_MASTER, &selected);
+        CHECK(selected == 2 && VirtualIca[0].ica_isr == 0);
+        before = eois[11]; selected = -1;
+        SoftPcEoi(ICA_SLAVE, &selected);
+        CHECK(selected == -1 && eois[11] == before);
+    }
     initialize(0);
     sas_term(); (void)session_thread_unbind(&owner); (void)session_dispose(&owner);
     fprintf(stderr,"SLAVE_BIOS_EOI checks=%u failures=%u\n",checks,failures);

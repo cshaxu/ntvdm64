@@ -1,0 +1,160 @@
+{
+  "baseline": "8fb092a3d",
+  "status": "verified and published; included in P3 commit",
+  "modified_mirror_files": 10,
+  "entries": [
+    "T483-D0964",
+    "T483-D0965",
+    "T483-D0966",
+    "T483-D0967",
+    "T483-D1087",
+    "T483-D1089",
+    "T483-D1090",
+    "T483-D1092",
+    "T483-D1093",
+    "T483-D1095",
+    "T483-D1129",
+    "T483-D1131",
+    "T483-D1132",
+    "T483-D1137",
+    "T483-D1158",
+    "T483-D1159",
+    "T483-D1169",
+    "T483-D1170",
+    "T483-D1171",
+    "T483-D1172",
+    "T483-D1173",
+    "T483-D1174",
+    "T483-D1184",
+    "T483-D1188",
+    "T483-D1204",
+    "T483-D1261",
+    "T483-D1295",
+    "T483-D1347"
+  ],
+  "review": {
+    "config": "Common registry facade retains exact Reg* mapping. Remove redundant non-CPU40 guard only; original i386 exclusion and DPMI sizing formula retained.",
+    "nt_bop": "Firmware header has no referenced provider in TU. InitEntry/DispatchEntry are FARPROC, identical to GetProcAddress return type; retain MYFARPROC casts for unrelated WOW/redirector dispatch.",
+    "nt_com": "FastCommSetBaudRate declares int BaudRate (nt_com.h:48). Both old DWORD local and direct long arg convert to the same 32-bit int on selected Windows ABI. Store retains explicit DWORD; %ld matches long error text. Error/report/store order tested.",
+    "nt_cpu": "Consolidate generated GDP explanation only; original field mappings reanchored277/287/295/305. No descriptor layout changed.",
+    "nt_eoi": "Both vrinit callers pass address of local int line. Remove silent NULL no-op, retain IS32 boundary and slave/master ordering.",
+    "nt_fdisk": "Inline three calls to existing scalar read provider; failure returns unchanged.",
+    "nt_graph": "Use existing console_graphics.h declaration for begin_update.",
+    "nt_mouse": "Authoritative page-domain header replaces handwritten declaration; coordinates and publication caller unchanged.",
+    "video": "Selected SAS/CHAIN2 writes retained; consolidate three MONITOR/GISP profile guards, pending actual preprocessing comparison.",
+    "egwrtm12": "Remove unused declarations and redundant CPU40 inner condition; original outer framework, scalar writes and handler storage retained."
+  },
+  "remaining_checks": [
+    "Actual build and selected preprocessing/line review",
+    "Focused affected contracts and Full regression",
+    "Manifest publication hashes both destinations",
+    "Clean commit and push"
+  ],
+  "verification_progress": {
+    "cached_x86_x64": "pass; build/t483-s4-p3/cached.exit=0",
+    "preprocess": "all ten actual production x86 TUs emitted; lines.exit=0; line conflicts under counter-review, not declared correct",
+    "eoi": "79 checks, zero failures; eoi-r2/result.json; actual fixture archive nt_eoi.obj owner verified",
+    "first_eoi_attempt": "Link-owner assertion expected production archive instead of existing fixture archive; failed before execution. Corrected assertion, retained eoi/ evidence.",
+    "package": {
+      "status": "published",
+      "package": "cac1ff1f-c34d-4e32-a182-17da9e2c4e1f",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "full": "PASS16 selected gates, elapsed363965ms, build/t483-s4-p3/full/timings.json; external DOS4GW/NESticle explicitly SKIP",
+    "serial": "12 cases passed: forwarded signed int, DWORD saved value, provider success/failure and report/store ordering. Uses actual production switch arm and bounded provider; no physical serial claim.",
+    "final_equivalence": "All11 equal after only package GUID and PE timestamp normalization; no code/source-line literals masked. build/t483-s4-p3-final/image-comparison.json"
+  },
+  "line_counter_review": {
+    "actual_preprocessing": "build/t483-s4-p3/line-observations.json; actual x86 production commands for all ten TUs",
+    "repairs": "video.c: anchor selected continuation after 13 excluded-arm boundaries, because #line within an unselected arm has no effect. nt_bop.c: reanchor original MS_bop_5 at574. nt_cpu.c: retain original selected field anchors277/287/295/305.",
+    "remaining_scanner_matches": {
+      "video.c": "922,927,2505 exactly match original statements at those same lines after removing trailing comments; scanner incorrectly matched another comment-free occurrence.",
+      "nt_com.c": "667 and1480 exactly match original same-line statements with trailing comments.",
+      "nt_graph.c": "748 expands original IMPORT to extern; no line mismatch.1555 is a different declaration.",
+      "nt_fdisk.c": "539/542/543 are added failure rollback statements in get_fdisk_handle (DIV111), not original close_fdisk statements482/485/487. Original continuation resumes at#line538. No original source-line claim for added rollback."
+    },
+    "verdict": "All reported exact-statement conflicts resolved by actual anchors or documented contextual false matches; no compiler-line correctness inferred merely from build success."
+  },
+  "overlaps": {
+    "T483-D1341": "S3 P3 already removed termination header/status/report in nt_mem.c, as recorded D1344-D1346 in S3 execution ledger. Current source retains physical mapping header and direct allocation comparison. No new source mutation."
+  },
+  "resolved_entries_pending_delivery": 29,
+  "source_identities": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "before_sha256": "17a2696a6da00184e8cc7cb66ecf512688b21b7250ec36c9f4a8874447b5d807",
+      "after_sha256": "290eb8a3c523fe360e4ad9521563ccf45fc9ce64403bd84477dafb3646fcec8c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "before_sha256": "8389b9aadf00f331b1807d5e56e6c74117c66427ad0554b219919ceb2dd7c790",
+      "after_sha256": "a111cd00bfa66e7ae8c97be9c1e7a1ade42c58ad0ede06388d9dc242ff73974a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "before_sha256": "a3f817ac690972406ad396f0ccae141500b0f25fc914196f7bf498b0d1708f5d",
+      "after_sha256": "c970a8824b9a5bac411d0015a1dd38e622dc8b5f7b318fe2bfb9eac96cf206db",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "before_sha256": "00d0a4caf8b05a810017ba4c7b628c534bb113bee25bdde8a199c25f415fd7b9",
+      "after_sha256": "6590bdf6e0241cf4c47d7f4d687ae5cbeebeaa60120287875d515f5cc4cb14aa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "before_sha256": "d0605784bbda902a122cfe9cdf4ab093636356e339e259c866971a1b7fab0fe0",
+      "after_sha256": "e8f6583e07f1f79036c56c454a22574dfb5987f3e0e1dab9afcb0a6f717f6af7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "before_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+      "after_sha256": "f06ab0be9454376d92beec82a898169e0de441453c84fe6caa20be918310ea61",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "before_sha256": "d91eed0392b581f653e29156d0b317a073cdcf74b70ea808e2f6b0287c9d925b",
+      "after_sha256": "a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "before_sha256": "5082e858a1615a569d626e709cf85f10b2a248390a087471ea14dcb78a281855",
+      "after_sha256": "b9d2954109ef40f0e6b9e7cdfe62ab09caefb4b5bebd2f2a0548de92325639e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fdisk.c",
+      "original_sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "before_sha256": "e775e4149d1613c5caac6a2b700d3dd7639a4c6c47d47838a42b93a942bcda60",
+      "after_sha256": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "before_sha256": "b61aa07468f50dbe38b999adc8b7c045c9fa1dc9d63f7666f0369edcdac17345",
+      "after_sha256": "c85bec175be1daee97058b782fa63543c0586d408923b62cd76541933eee7b88",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b"
+    }
+  ],
+  "scope_limit": "Line review covers actual selected original statement mappings in this P3 file set; not an all-repository conditional audit. No guest change, physical disk mutation or physical serial device test."
+}

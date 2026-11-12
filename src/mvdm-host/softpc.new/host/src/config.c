@@ -23,7 +23,7 @@
 #include "xt.h"
 #include "error.h"
 #include "config.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "common/wow/registry.h"
 #line 26
 #include "sas.h"
 
@@ -430,10 +430,6 @@ GLOBAL VOID config( VOID )
 #line 507
 #error Unsupported i386 kernel VDM memory-size profile
 #else
-#if defined(_M_IX86) && !defined(CPU_40_STYLE)
-#line 510
-#error Excluded unsupported non-CPU40 i386 memory-size profile
-#else
 #line 510
 	 vdmMemorySize = GetVDMSize(VDMForWOW);
 
@@ -447,7 +443,6 @@ GLOBAL VOID config( VOID )
 	    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
 			    dpmiMemorySize;
 	 }
-#endif
 #endif /* i386 */
 #line 523
 

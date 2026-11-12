@@ -166,24 +166,11 @@ SIGNALS ISSUED	  :	NONE
 #else
 #line 205
 #if defined(CPU_40_STYLE)
-#line 157
-IMPORT VOID	_ch2_mode1_chn_byte_write_glue();
-IMPORT VOID	_ch2_mode1_chn_word_write_glue();
-IMPORT VOID	_ch2_mode1_chn_byte_fill_glue();
-IMPORT VOID	_ch2_mode1_chn_word_fill_glue();
-IMPORT VOID	_ch2_mode1_chn_byte_move_glue();
-IMPORT VOID	_ch2_mode1_chn_word_move_glue();
-
-#ifdef CPU_40_STYLE
 /* DIVERGENCE MVDM-HOST-DIV-143: CPU_40_STYLE selects C-video EVID tables.
  * Preserve these historical table globals for EGA selection code, but do not
  * bind their unselected ULONG-carried native-pointer string callbacks. */
 WRT_POINTERS mode1_handlers;
 WRT_POINTERS mode2_handlers;
-#else
-#line 164
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif /* CPU_40_STYLE */
 #else
 #line 205
 #error Excluded unsupported non-CPU40 writer-table profile

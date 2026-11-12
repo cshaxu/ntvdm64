@@ -238,205 +238,234 @@
     {
       "id": "T483-D0964",
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove unused copied _ch2_mode1 declarations and redundant nested CPU40 condition; preserve original outer A_VID rejection framework. Remove table globals only together with all remaining address-taking callers in ega_writ and after selected-reference verification.",
-      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes."
+      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0965",
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove unused copied _ch2_mode1 declarations and redundant nested CPU40 condition; preserve original outer A_VID rejection framework. Remove table globals only together with all remaining address-taking callers in ega_writ and after selected-reference verification.",
-      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes."
+      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0966",
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove unused copied _ch2_mode1 declarations and redundant nested CPU40 condition; preserve original outer A_VID rejection framework. Remove table globals only together with all remaining address-taking callers in ega_writ and after selected-reference verification.",
-      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes."
+      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D0967",
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove unused copied _ch2_mode1 declarations and redundant nested CPU40 condition; preserve original outer A_VID rejection framework. Remove table globals only together with all remaining address-taking callers in ega_writ and after selected-reference verification.",
-      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes."
+      "verification": "Compile both architectures after structural cleanup; byte/word parity x plane-enable x latch/logical mask controls; expected plane bytes and dirty ranges; independently exercise BIOS scalar and EVID routes.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1087",
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate the three scalar-write conditional layouts using one common standalone SAS selection contract. Preserve original MONITOR/GISP outer structure, exclude raw host alias, keep original SAS/CHAIN2 body once per operation where supported policy permits; do not disable MONITOR globally. Remove duplicated retained body where excluded build contexts prove it unnecessary; adjust #line and exception records together.",
-      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected."
+      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1089",
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate the three scalar-write conditional layouts using one common standalone SAS selection contract. Preserve original MONITOR/GISP outer structure, exclude raw host alias, keep original SAS/CHAIN2 body once per operation where supported policy permits; do not disable MONITOR globally. Remove duplicated retained body where excluded build contexts prove it unnecessary; adjust #line and exception records together.",
-      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected."
+      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1090",
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate the three scalar-write conditional layouts using one common standalone SAS selection contract. Preserve original MONITOR/GISP outer structure, exclude raw host alias, keep original SAS/CHAIN2 body once per operation where supported policy permits; do not disable MONITOR globally. Remove duplicated retained body where excluded build contexts prove it unnecessary; adjust #line and exception records together.",
-      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected."
+      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1092",
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate the three scalar-write conditional layouts using one common standalone SAS selection contract. Preserve original MONITOR/GISP outer structure, exclude raw host alias, keep original SAS/CHAIN2 body once per operation where supported policy permits; do not disable MONITOR globally. Remove duplicated retained body where excluded build contexts prove it unnecessary; adjust #line and exception records together.",
-      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected."
+      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1093",
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate the three scalar-write conditional layouts using one common standalone SAS selection contract. Preserve original MONITOR/GISP outer structure, exclude raw host alias, keep original SAS/CHAIN2 body once per operation where supported policy permits; do not disable MONITOR globally. Remove duplicated retained body where excluded build contexts prove it unnecessary; adjust #line and exception records together.",
-      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected."
+      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1095",
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate the three scalar-write conditional layouts using one common standalone SAS selection contract. Preserve original MONITOR/GISP outer structure, exclude raw host alias, keep original SAS/CHAIN2 body once per operation where supported policy permits; do not disable MONITOR globally. Remove duplicated retained body where excluded build contexts prove it unnecessary; adjust #line and exception records together.",
-      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected."
+      "verification": "Compare mono/colour VM aperture with differing global display; scroll up/down/clear and end bounds; character/attribute and teletype operations; real mode and V86 mapping; compile actual per-TU profiles and compare preprocessing of each refactored SAS write. Ensure NTIO setup remains selected.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1129",
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Replace include of ntvdm-exe/softpc/include/mvdm_shadow_registry.h with common/wow/registry.h; preserve Reg* mapping and original failure/fallback sequence.",
-      "verification": "Compile actual x86/x64 profiles and compare preprocessed targets after include change; verify overlay and fallback/default values. Verify DOS/WOW PIF sizing retains DPMI capacity and allocation failure handling; ensure CPU interface selection unchanged."
+      "verification": "Compile actual x86/x64 profiles and compare preprocessed targets after include change; verify overlay and fallback/default values. Verify DOS/WOW PIF sizing retains DPMI capacity and allocation failure handling; ensure CPU interface selection unchanged.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1131",
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove redundant added _M_IX86/non-CPU40 subconditional and its matching endif only after confirming supported CPU40 profiles; preserve original i386/#else framework with excluded i386 body and unchanged original non-i386 formula. Validate paired fragments together.",
-      "verification": "Compile actual x86/x64 profiles and compare preprocessed targets after include change; verify overlay and fallback/default values. Verify DOS/WOW PIF sizing retains DPMI capacity and allocation failure handling; ensure CPU interface selection unchanged."
+      "verification": "Compile actual x86/x64 profiles and compare preprocessed targets after include change; verify overlay and fallback/default values. Verify DOS/WOW PIF sizing retains DPMI capacity and allocation failure handling; ensure CPU interface selection unchanged.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1132",
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove redundant added _M_IX86/non-CPU40 subconditional and its matching endif only after confirming supported CPU40 profiles; preserve original i386/#else framework with excluded i386 body and unchanged original non-i386 formula. Validate paired fragments together.",
-      "verification": "Compile actual x86/x64 profiles and compare preprocessed targets after include change; verify overlay and fallback/default values. Verify DOS/WOW PIF sizing retains DPMI capacity and allocation failure handling; ensure CPU interface selection unchanged."
+      "verification": "Compile actual x86/x64 profiles and compare preprocessed targets after include change; verify overlay and fallback/default values. Verify DOS/WOW PIF sizing retains DPMI capacity and allocation failure handling; ensure CPU interface selection unchanged.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1137",
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete unused mvdm_softpc_firmware.h include. Retain page-domain declaration; remove termination-report header only when all diagnostic calls are removed.",
-      "verification": "Compile selected product profiles; retain DOS/WOW startup and BOP failure tests. No tests run in this review."
+      "verification": "Compile selected product profiles; retain DOS/WOW startup and BOP failure tests. No tests run in this review.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1158",
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Use GetProcAddress directly for FARPROC InitEntry; remove redundant FARPROC cast and associated adaptation comment. Do not restore original incompatible MYFARPROC cast.",
-      "verification": "Compile exact destination types; registration success/missing export and unload regression."
+      "verification": "Compile exact destination types; registration success/missing export and unload regression.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1159",
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Use GetProcAddress directly for FARPROC DispatchEntry; remove redundant cast/comment, retain original call and table assignment.",
-      "verification": "Compile types; register/dispatch/deregister and missing-export cases."
+      "verification": "Compile types; register/dispatch/deregister and missing-export cases.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1169",
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove added DWORD variable and braces together; restore call arg and stored (DWORD)arg; use %ld with arg in both format strings. Preserve failure ordering.",
-      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance."
+      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1170",
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove added DWORD variable and braces together; restore call arg and stored (DWORD)arg; use %ld with arg in both format strings. Preserve failure ordering.",
-      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance."
+      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1171",
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove added DWORD variable and braces together; restore call arg and stored (DWORD)arg; use %ld with arg in both format strings. Preserve failure ordering.",
-      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance."
+      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1172",
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove added DWORD variable and braces together; restore call arg and stored (DWORD)arg; use %ld with arg in both format strings. Preserve failure ordering.",
-      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance."
+      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1173",
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove added DWORD variable and braces together; restore call arg and stored (DWORD)arg; use %ld with arg in both format strings. Preserve failure ordering.",
-      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance."
+      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1174",
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove added DWORD variable and braces together; restore call arg and stored (DWORD)arg; use %ld with arg in both format strings. Preserve failure ordering.",
-      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance."
+      "verification": "Compile format checks; assert baud forwarding/saved state/provider failure in existing fixture; preserve serial-open last-error/reopen semantics. Mock pass is not physical serial acceptance.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1184",
       "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate repeated non-PROD offset-helper commentary with the surviving descriptor adaptation explanation; if descriptor carrier is removed, remove these notices together. Preserve source provenance in register.",
-      "verification": "Check selected compilation/declarations and final symbol/export/debugger use; for descriptor edits verify exact field width/alignment/access. Exercise nested CPU returns, initial startup, service-close ordering and WOW/DOS regression; do not infer correctness from casts alone."
+      "verification": "Check selected compilation/declarations and final symbol/export/debugger use; for descriptor edits verify exact field width/alignment/access. Exercise nested CPU returns, initial startup, service-close ordering and WOW/DOS regression; do not infer correctness from casts alone.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1188",
       "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Consolidate repeated non-PROD offset-helper commentary with the surviving descriptor adaptation explanation; if descriptor carrier is removed, remove these notices together. Preserve source provenance in register.",
-      "verification": "Check selected compilation/declarations and final symbol/export/debugger use; for descriptor edits verify exact field width/alignment/access. Exercise nested CPU returns, initial startup, service-close ordering and WOW/DOS regression; do not infer correctness from casts alone."
+      "verification": "Check selected compilation/declarations and final symbol/export/debugger use; for descriptor edits verify exact field width/alignment/access. Exercise nested CPU returns, initial startup, service-close ordering and WOW/DOS regression; do not infer correctness from casts alone.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1204",
       "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Keep IS32 temporary and input/output conversion; remove new silent NULL guard, preserving public int* ABI and EOI ordering.",
-      "verification": "Compile ABI; verify slave/master nonspecific EOI and returned line including no active ISR; preserve callback/lock ordering. Do not add invalid-pointer recovery policy."
+      "verification": "Compile ABI; verify slave/master nonspecific EOI and returned line including no active ISR; preserve callback/lock ordering. Do not add invalid-pointer recovery policy.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1261",
       "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Delete local nt_fdisk_current_pdb and replace its three read/write/verify calls with mvdm_guest_location_read_u16(&current_pdb_location,&currentPdb). Preserve all failure returns.",
-      "verification": "Compile all three calls and preserve scalar-failure/no-I/O assertions; no new abstraction needed."
+      "verification": "Compile all three calls and preserve scalar-failure/no-I/O assertions; no new abstraction needed.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1295",
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Remove redundant local begin_update extern, using included console_graphics.h; retain update boundary.",
-      "verification": "Dirty rectangle intersecting/not intersecting pointer, hide/show, nested updates and publisher failure; no partial snapshot."
+      "verification": "Dirty rectangle intersecting/not intersecting pointer, hide/show, nested updates and publisher failure; no partial snapshot.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1341",
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Keep mapping header, remove termination header with failure-trace call and local status capture below.",
-      "verification": "Compile after coupled trace removal; no implicit mapping declarations."
+      "verification": "Compile after coupled trace removal; no implicit mapping declarations.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1347",
       "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
-      "status": "pending",
+      "status": "delivered P3",
       "plan": "Keep mouse header and use authoritative page-domain declaration instead of handwritten extern; do not move coordinate ownership.",
-      "verification": "Selected compile and unchanged calling convention; inspect header closure before include."
+      "verification": "Selected compile and unchanged calling convention; inspect header closure before include.",
+      "evidence": "batch3-delivery.json"
     },
     {
       "id": "T483-D1366",

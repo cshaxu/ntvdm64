@@ -201,6 +201,7 @@ void (*video_func[]) () = {
 #line 184
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
+#line 186
 				vd_dummy,
 			   };
 
@@ -368,6 +369,7 @@ GLOBAL void vd_set_mode IFN0()
 #line 346
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 348
         return;
     }
     if (equip_flag.bits.video_mode == VIDEO_MODE_80X25_BW) {
@@ -613,6 +615,7 @@ GLOBAL void vd_get_light_pen IFN0()
 #line 583
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 585
     }
 }
 
@@ -789,6 +792,7 @@ GLOBAL void vd_scroll_up IFN0()
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #line 759
 #endif
+#line 760
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
      */
@@ -855,6 +859,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
 #line 821
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 823
 		if( !screen_updated )
 			sas_fillsw(dest, (attr << 8)|' ', colsdiff);
 #endif
@@ -1048,6 +1053,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 #line 1004
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 1006
 	    sas_fillsw(dest, (attr << 8)|' ', colsdiff);
 #endif
 	    dest += col_incr;
@@ -1167,6 +1173,7 @@ GLOBAL void vd_scroll_down IFN0()
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #line 1112
 #endif
+#line 1113
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
      */
@@ -1221,6 +1228,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,
 #line 1162
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 1164
 		if( !screen_updated )
 			sas_fillsw(dest, (attr << 8)|' ', colsdiff);
 #endif
@@ -1337,6 +1345,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 #line 1271
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1273
 	;
     }
 
@@ -1518,6 +1527,7 @@ GLOBAL void vd_read_attrib_char IFN0()
 #line 1437
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif
+#line 1439
 	if (cgen != 0)
 		for(i = 0; i < CHARS_IN_GEN; i++) {
 			sas_loads (cgen, tmp, sizeof(tmp));
@@ -1612,16 +1622,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 #line 1513
 #else
 #line 1514
-#ifdef	EGG
-			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
-#ifdef CPU_40_STYLE
-				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
-#endif
-				)
-				sas_storew(vd_text_mode().start_addr + cpos, (getBL() << 8) | getAL());
-			else
-#endif	/* EGG */
-				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
+#error Excluded unsupported non-monitor video profile
 #line 1524
 #endif /* NTVDM & MONITOR */
 #line 1525
@@ -1681,7 +1682,10 @@ GLOBAL void vd_write_char IFN0()
 		{
 #line 1579
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
-#if defined(MVDM_STANDALONE_SAS_VIDEO)
+#if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
+#line 1580
+#error Excluded unsupported original monitor or GISP video pointer
+#else
 #line 1582
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -1697,9 +1701,6 @@ GLOBAL void vd_write_char IFN0()
 #endif	/* EGG */
 #line 1591
 				(*bios_ch2_byte_wrt_fn)( getAL(), cpos );
-#else
-#line 1580
-#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
 #line 1581
 #else
@@ -2093,6 +2094,7 @@ GLOBAL void vd_write_teletype IFN0()
 #line 1951
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 1953
 
     vd_cursor_col = sas_hw_at_no_check(current_cursor_col);
     vd_cursor_row = sas_hw_at_no_check(current_cursor_row);
@@ -2183,7 +2185,10 @@ GLOBAL void vd_write_teletype IFN0()
 
 #line 2042
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
-#if defined(MVDM_STANDALONE_SAS_VIDEO)
+#if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
+#line 2043
+#error Excluded unsupported original monitor or GISP video pointer
+#else
 #line 2045
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -2199,9 +2204,6 @@ GLOBAL void vd_write_teletype IFN0()
 #endif	/* EGG */
 #line 2054
 				(*bios_ch2_byte_wrt_fn)( ch, ch_addr );
-#else
-#line 2043
-#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
 #line 2044
 #else
@@ -2648,6 +2650,7 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
 #line 2486
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 2488
             return;
         }
         else
@@ -2793,6 +2796,7 @@ GLOBAL void video_init IFN0()
 #line 2650
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */    
+#line 2652
 
 
     /*

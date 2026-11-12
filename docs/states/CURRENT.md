@@ -57,7 +57,15 @@ keyboard/PIC 89 assertions passed. Final preprocessed line review is complete;
 P2 was published and hash-verified at both destinations. See
 [P2 delivery](../../artifacts/mvdm-audit/t483-s4/batch2-delivery.json) and
 [source review](../../artifacts/mvdm-audit/t483-s4/batch2-source-review.json).
-Next: D0964–D0967 in egwrtm12.c, then video.c in register order.
+P3 resolves 29 more entries: 28 changes in ten mirror files and one verified
+S3 overlap (D1341). Total delivered: 58/117; 59 remain. Mirror source net -30
+lines, including necessary original-line anchors. Cached x86/x64 and Full16
+passed; EOI79 assertions and serial12 cases passed. Final11 images equal the
+Full-tested candidate after only package UUID/PE timestamp normalization.
+Both destinations were published and hash-verified. See
+[P3 delivery](../../artifacts/mvdm-audit/t483-s4/batch3-delivery.json) and
+[source review](../../artifacts/mvdm-audit/t483-s4/batch3-source-review.json).
+Next: continue the remaining S4 ledger in original file/line order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure
@@ -69,9 +77,9 @@ regressions passed. No user desktop unlock dependency remains in generic queue t
 
 ## Current Technical Baseline
 
-Package `cf09aab7-46f9-41b4-b321-f2c273ed5beb`, complete 11 images at
+Package `cac1ff1f-c34d-4e32-a182-17da9e2c4e1f`, complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. Final images equal
-the Full-tested P2 candidate after only package UUID and PE timestamp normalization;
+the Full-tested P3 candidate after only package UUID and PE timestamp normalization;
 this is not raw hash identity. DOS4GW/NESticle remains explicitly skipped because
 its external fixture was not supplied. No guest or winnt.zip change.
 

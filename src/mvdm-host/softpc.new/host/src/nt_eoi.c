@@ -402,10 +402,6 @@ void InitializeIcaLock(void)
 void SoftPcEoi(int Adapter, int* Line) {
     IS32 pic_line;
 
-    if (Line == 0) {
-        return;
-    }
-
     pic_line = (IS32)*Line;
     ica_eoi((IU32)Adapter, &pic_line, 0);
     *Line = (int)pic_line;

@@ -1,0 +1,52 @@
+{
+  "baseline": "8fb092a3d",
+  "part": "T483 S4 P3",
+  "resolved_entries": 29,
+  "implemented_entries": 28,
+  "verified_S3_overlaps": [
+    "T483-D1341"
+  ],
+  "total_delivered": 58,
+  "remaining": 59,
+  "mirror_files_modified": 10,
+  "mirror_lines": {
+    "added": 42,
+    "deleted": 72,
+    "net": -30
+  },
+  "changes": [
+    "Remove unused video declarations and redundant profile guards; preserve selected original writes",
+    "Narrow registry declaration dependency; remove unused firmware header and redundant export casts",
+    "Restore direct baud argument forwarding with correctly typed diagnostics",
+    "Consolidate GDP explanation; retain original field and diagnostic mappings",
+    "Remove silent EOI NULL no-op; retain fixed-width ABI conversion",
+    "Inline existing scalar PDB reads; remove duplicate graphics and cursor declarations"
+  ],
+  "validation": {
+    "cached": "x86/x64 pass, final verify.exit=0",
+    "full": "16 gates pass; elapsed363965ms",
+    "skipped": "DOS4GW/NESticle external fixture missing; not a pass",
+    "eoi": "79 assertions, failures0; original EOI/PIC fixture objects verified by link map",
+    "serial": "12 typed forwarding/error/store cases; bounded provider, not physical serial validation",
+    "lines": "Actual compiler preprocessing plus contextual original mapping; see batch3-source-review.json",
+    "final_package": "all11 equal to Full-tested package after only UUID and PE timestamps",
+    "governance": "Final documentation governance and relative-link checks passed; build/t483-s4-p3/governance-final.stdout.log"
+  },
+  "publication": {
+    "status": "published",
+    "package": "cac1ff1f-c34d-4e32-a182-17da9e2c4e1f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_root": "build/t483-s4-p3",
+  "final_evidence_root": "build/t483-s4-p3-final",
+  "limitations": [
+    "No guest modification or physical serial/disk validation",
+    "Failed first EOI owner assertion and initial CRT deprecation fixture build retained; corrected reruns passed"
+  ],
+  "review": "single-agent initial review plus counter-review; no scope expansion beyond S4 and coupled tests"
+}

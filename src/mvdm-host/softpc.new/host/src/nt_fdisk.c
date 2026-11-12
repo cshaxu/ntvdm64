@@ -239,10 +239,6 @@ WORD	    fdisk_open_count = 0;
 extern mvdm_guest_location current_pdb_location;
 #line 234
 
-static BOOL nt_fdisk_current_pdb(PUSHORT currentPdb)
-{
-    return mvdm_guest_location_read_u16(&current_pdb_location, currentPdb);
-}
 #line 236
 
 extern	    int     DiskOpenRetry(CHAR);
@@ -415,7 +411,7 @@ ULONG nt_fdisk_read(
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
-    if (!nt_fdisk_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return 0;
     if (get_fdisk_handle(fdisk_data, currentPdb, FALSE))
 #line 406
@@ -441,7 +437,7 @@ ULONG nt_fdisk_write(
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
 
-    if (!nt_fdisk_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return 0;
     if (get_fdisk_handle(fdisk_data, currentPdb, TRUE)) {
 #line 427
@@ -471,7 +467,7 @@ BOOL nt_fdisk_verify(
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return FALSE;
 
-    if (!nt_fdisk_current_pdb(&currentPdb))
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
 	return FALSE;
     if (get_fdisk_handle(fdisk_data, currentPdb, FALSE)) {
 #line 452

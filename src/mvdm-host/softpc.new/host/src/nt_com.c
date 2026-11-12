@@ -1058,20 +1058,18 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	/*::::::::::::::::::::::::::::::::::::::::: Process baud rate change */
 
 	case HOST_COM_BAUD:
-	    {
-	    DWORD baud_rate = (DWORD)arg;
 
-	    if (!FastCommSetBaudRate(current->handle, baud_rate))
+#line 1082
+	    if (!FastCommSetBaudRate(current->handle, arg))
 #line 1083
 	    {
-		sprintf(BaudRateStr, "(%lu)", baud_rate);
+		sprintf(BaudRateStr, "(%ld)", arg);
 		host_error(EHS_UNSUPPORTED_BAUD, ERR_CONT, BaudRateStr);
-		always_trace1("set BAUD failed - SetBaudRate:%lu", baud_rate);
+		always_trace1("set BAUD failed - SetBaudRate:%ld", arg);
 	    }
-	    current->ComStates.BaudRate = baud_rate;
+	    current->ComStates.BaudRate = (DWORD)arg;
 
 	    break;
-	    }
 
 	/*:::::::::::::::::::::::::::::::::::::::: Process DTR line requests */
 

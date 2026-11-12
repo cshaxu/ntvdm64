@@ -41,7 +41,8 @@ for step,tool in [('compile','cl.exe'),('link','link.exe')]:
 mapped=Path(str(exe)+'.map').read_text()
 for name,owner in [('D11_int','original-softpc-bios:slave_bs.obj'),
                    ('ica_intack','original-softpc-system:ica.obj'),
-                   ('ica_outb','original-softpc-system:ica.obj')]:
+                   ('ica_outb','original-softpc-system:ica.obj'),
+                   ('SoftPcEoi','original-softpc-host-fixture-roots:nt_eoi.obj')]:
     assert re.search(r'_'+name+r'\s+[^\n]*'+re.escape(owner),mapped),name
 result=subprocess.run([str(exe)],capture_output=True,text=True,timeout=15)
 (out/'result.txt').write_text(result.stdout+result.stderr,encoding='utf-8')

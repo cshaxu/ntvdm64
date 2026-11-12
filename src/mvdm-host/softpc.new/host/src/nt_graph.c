@@ -975,7 +975,6 @@ void nt_start_update(void)
 {
    /* DIVERGENCE(VIDEO7-POINTER-UPDATE): keep pointer and original body
     * painting in one source-owned update until the matching end. */
-   extern void ntvdm_console_graphics_begin_update(void);
    ntvdm_console_graphics_begin_update();
    /* DIVERGENCE(MVDM-HOST-DIV-314): original painter began an update. */
    presentation_updated = TRUE;

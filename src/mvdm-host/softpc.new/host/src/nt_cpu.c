@@ -252,8 +252,9 @@ GLOBAL void InitNtCpuInfo IFN0()
 #error Unsupported excluded original configuration
 #else /* ALPHA */
 #line 277
-    /* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the
-     * private GDP carrier; avoid a historical hard-coded native offset. */
+    /* DIVERGENCE(MVDM-HOST-DIV-048): generated GDP lvalues replace NT4
+     * packed offsets and their unavailable non-PROD GdpOffsetFromName check. */
+#line 277
     nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;
 #endif /* ALPHA */
 #line 279
@@ -262,15 +263,10 @@ GLOBAL void InitNtCpuInfo IFN0()
 #error Unsupported excluded original configuration
 #endif
 #line 286
-    /* DIVERGENCE(MVDM-HOST-DIV-048): the historical non-PROD assertion
-     * compared against GdpOffsetFromName(), an undeclared NT4 packed-GDP
-     * debug helper.  The selected GDP is now a generated native-width
-     * carrier, so that numeric packed-offset comparison has no valid target.
-     * The source-named field above is the single checked representation. */
-
     /* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are
      * fixed 32-bit Intel values.  The original IUH spelling happened to be
      * identical to IU32 on NT4; state that source contract explicitly. */
+#line 287
     nt_cpu_info.universe = (IU32 *)&GLOBAL_CurrentUniverse;
 
     /* Variables needed to get the value SP or ESP. */
@@ -282,6 +278,7 @@ GLOBAL void InitNtCpuInfo IFN0()
 #line 295
     /* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather
      * than an architecture-specific byte offset into the old packed GDP. */
+#line 295
     nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;
 #endif /* ALPHA */
 #line 297
@@ -290,7 +287,6 @@ GLOBAL void InitNtCpuInfo IFN0()
 #error Unsupported excluded original configuration
 #endif
 #line 304
-    /* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */
 
 #line 305
     nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;
