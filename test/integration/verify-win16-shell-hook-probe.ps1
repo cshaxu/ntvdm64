@@ -119,7 +119,6 @@ try {
  $info.EnvironmentVariables['S44_VDD_TRACE_PATH']="$root/vdd.txt"
  $info.EnvironmentVariables['TEMP']=$runtime;$info.EnvironmentVariables['TMP']=$runtime
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
- $info.EnvironmentVariables['MVDM_WOW_CALLBACK_FRAME_TRACE_PATH']="$root/callbacks.txt"
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/windows.txt"
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  foreach($arg in @("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait',"$tests/$probe.$extension",'--observation-timeout-ms','45000')){$info.ArgumentList.Add($arg)}
@@ -173,14 +172,14 @@ try {
   if($ExpectedOpticalFrames -and $record.volume -ne $ExpectedOpticalFrames){throw 'Optical frame count mismatch'}
   $(if($OpticalNoMedia){'PASS original empty-drive enumeration, failed TOC with zero result and unsupported-read status; original error mapping retained'}else{'PASS original MSCDEX registration, enumeration, TOC/volume and repeated query; unsupported data reads retain original failure'})|Set-Content "$root/result.txt"
  }elseif($Case -eq 'shell'){
-        if($bytes.Length -ne 36){throw 'Expected three12-byte Shell records'}
+        if($bytes.Length -ne 42){throw 'Expected three 14-byte Shell records'}
         $records=@()
         for($i=0;$i -lt 3;$i++){
-            $o=12*$i
+            $o=14*$i
             if([Text.Encoding]::ASCII.GetString($bytes,$o,4) -ne 'SHL1'){throw 'Bad Shell record'}
             $records += [pscustomobject]@{phase=[BitConverter]::ToUInt16($bytes,$o+4);
                 errors=[BitConverter]::ToUInt16($bytes,$o+6);success=[BitConverter]::ToUInt16($bytes,$o+8);
-                failure=[BitConverter]::ToUInt16($bytes,$o+10)}
+                failure=[BitConverter]::ToUInt16($bytes,$o+10);task=[BitConverter]::ToUInt16($bytes,$o+12)}
         }
         $records | ConvertTo-Json | Set-Content "$root/guest-report.json"
         if(($records.phase -join ',') -ne '0,1,2' -or @($records|Where-Object errors -ne 0).Count -or
@@ -188,13 +187,14 @@ try {
         if(!(Test-Path "$tests/SHLCHILD.BIN")){throw 'Shell child did not run'}
         Copy-Item "$tests/SHLCHILD.BIN" "$root/child-report.bin"
         $child=[IO.File]::ReadAllBytes("$root/child-report.bin")
-        if($child.Length -ne 12 -or [Text.Encoding]::ASCII.GetString($child,0,4) -ne 'SHL1' -or
+        if($child.Length -ne 14 -or [Text.Encoding]::ASCII.GetString($child,0,4) -ne 'SHL1' -or
                 [BitConverter]::ToUInt16($child,4) -ne 3){throw 'Shell child did not finish report'}
-        $callbackTrace=Get-Content "$root/callbacks.txt" -Raw
-        $entry=[regex]::Match($callbackTrace,'(?m)^(\d+) before ret=0037 .*task=([0-9A-Fa-f]+) ')
-        if(!$entry.Success){throw 'No original guest RET_WINEXEC callback'}
-        $returnPattern='(?m)^'+$entry.Groups[1].Value+' after ret=0037 .*task='+$entry.Groups[2].Value+' '
-        if($callbackTrace -notmatch $returnPattern){throw 'Shell callback did not return on its original task/thread'}
+        $parentTask=$records[0].task
+        $childTask=[BitConverter]::ToUInt16($child,12)
+        if(!$parentTask -or @($records|Where-Object task -ne $parentTask).Count -or
+                !$childTask -or $childTask -eq $parentTask){
+            throw 'Shell parent task changed across success/failure or child identity is not distinct'
+        }
         'PASS actual guest ShellExecute success/failure, child execution and parent continuation'|Set-Content "$root/result.txt"
  }elseif($Case -eq 'media'){
   if($bytes.Length -ne 124 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'MED1'){throw 'Bad media report'}

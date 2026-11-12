@@ -255,7 +255,6 @@ HANDLE WOWFindResourceExWCover(
 
 
 #define BMR_ICON    1
-#define BMR_BITMAP  2
 #define BMR_CURSOR  3
 
 typedef struct _OLDCURSOR {

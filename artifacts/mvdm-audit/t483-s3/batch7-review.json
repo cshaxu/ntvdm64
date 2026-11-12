@@ -1,0 +1,59 @@
+{
+  "baseline": "c158c342d",
+  "entries": [
+    "T483-D1663",
+    "T483-D1668",
+    "T483-D1709",
+    "T483-D1711",
+    "T483-D1713",
+    "T483-D1715",
+    "T483-D1716",
+    "T483-D1809",
+    "T483-D1810",
+    "T483-D1811",
+    "T483-D1812",
+    "T483-D1813",
+    "T483-D2075",
+    "T483-D2464"
+  ],
+  "files": [
+    "src/mvdm-host/wow32/wkfileio.c",
+    "src/mvdm-host/wow32/wmdisp32.c",
+    "src/wow32-dll/source/wow_user_thunk_scope.c",
+    "src/wow32-dll/include/wow_user_thunk_scope.h",
+    "test/adapter-mvdm-host-out/wow/wow_thunk_trace_fixture.c",
+    {
+      "renamed_from": "test/observation/verify-wow-thunk-trace.ps1",
+      "path": "test/observation/verify-wow-public-memory-abi.ps1"
+    },
+    "src/mvdm-host/wow32/wuman.c",
+    "src/non-mvdm/windows/core/ntuser/client/clres.c",
+    "test/observation/win16_shell_probe.asm",
+    "test/integration/verify-win16-shell-hook-probe.ps1",
+    "test/integration/verify-wow-mine-gameplay.ps1"
+  ],
+  "implementation": [
+    "Remove file-open and wndproc observation calls, sole declarations, providers and diagnostic-only raw-procedure local; preserve actual error result and callback path.",
+    "Remove unused gpsi local extern and BMR_BITMAP; retain real shared state and other bitmap constants.",
+    "Retire diagnostic-only fixture; preserve useful public memory ABI check as dedicated runner.",
+    "Shell independent probe now reports original GetCurrentTask (KERNEL ordinal36, AX=curTDB) before/after success/failure. Parent must stay same, child distinct; original guest untouched."
+  ],
+  "counter_review": [
+    "Retained provider bytes exactly equal baseline after deleting only three diagnostic functions/comments.",
+    "Five empty WOW source files already deleted by S1: verify absent and selected graph contains no inputs; do not count as new file deletions.",
+    "Original logical line resets preserved. Reject unscoped text-match line suggestions that map duplicate fragments to other original functions.",
+    "Atomic probe ABI change requires its second consumer (mine Shell exception sibling) to change report stride/length and final failure offset: 11 logical files, one necessary coupled file beyond threshold. Original exception assertions preserved."
+  ],
+  "focused": {
+    "abi": "Initial inherited check required retired CCPU macros; corrected to current actual compile contract and explicit x86 ABI fixture; final passed.",
+    "thunk_scope": "errors=0 calls=4 exception=1",
+    "shell": "passed; parent task6079 stable through all3 checkpoints; distinct child, normal return",
+    "full": "16 selected gates passed",
+    "file_cache": "577 checks; 0 failures",
+    "sibling_parser": "actual report shapes and four negative controls passed; injected-exception runtime not rerun"
+  },
+  "remaining_dependencies": [
+    "Old network/destruction diagnostics and remaining dead env flags still need reconciliation before S3 closure."
+  ],
+  "status": "delivered"
+}

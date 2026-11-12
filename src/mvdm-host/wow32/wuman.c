@@ -93,8 +93,7 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 
         case FUN_FINALUSERINIT:
             {
-#line 95
-                extern DWORD   gpsi;
+#line 96
                 PUSERCLIENTGLOBALS pfinit16;
                 WORD UNALIGNED *pwMaxDWPMsg;
                 PBYTE pDWPBits;

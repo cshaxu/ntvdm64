@@ -35,23 +35,25 @@ The previously suggested compat-first S2 is superseded.
 
 ## S3 Progress
 
-Assigned: 120 entries across 51 mirror files, in the existing register order.
-P1–P5 delivered 99/120 entries; 21 remain. P6 completes coupled callback-frame
-provider/declaration cleanup and six unused integration runner settings (ten
-modified source/test files, no new register IDs or mirror edits). Functional
-provider bodies and runner failure/acceptance assertions remain unchanged.
-Cached x86/x64 builds, original callback/abort checks, script parsing and all
-16 selected Full gates passed. WOW32 changed beyond timestamps, so Full was
-rerun rather than reused. Complete package is published and hash-verified at
-both destinations. See [P6 delivery](../../artifacts/mvdm-audit/t483-s3/batch6-delivery.json)
-and [review](../../artifacts/mvdm-audit/t483-s3/batch6-review.json).
-Remaining old diagnostic consumers, including Shell task-identity and window
-destruction witnesses, must be reconciled before S3 closure. Next mirror file:
-wow32/wkfileio.c. No claim that those old diagnostic runners currently pass.
-Shared providers remain until their
-last required caller is removed, then are cleaned in the same S.
-See [S3 ledger](../../artifacts/mvdm-audit/t483-s3/execution.json).
-Batch delivery after ten distinct modified files or S exhaustion.
+Assigned: 120 entries across 51 mirror files, in existing register order.
+P1–P7 delivered 113/120 entries; seven remain. P7 removes uncalled file/wndproc
+reporters, unused declarations/constants, and the diagnostic-only fixture;
+retains the public ABI check and replaces Shell trace assertions with guest
+GetCurrentTask reports. Both report consumers were updated atomically: eleven
+logical source/test files, the extra file is a necessary probe ABI dependency.
+Cached x86/x64 builds, 2050 original logical-line anchors in actual selected
+preprocessing, ABI/thunk checks, actual Shell success/failure/child identity,
+577 file-cache checks and all 16 selected Full gates passed. The sibling report
+parser passed positive/negative controls; its injected-exception runtime was
+not rerun. Complete package is published and hash-verified at both destinations.
+See [P7 delivery](../../artifacts/mvdm-audit/t483-s3/batch7-delivery.json),
+[review](../../artifacts/mvdm-audit/t483-s3/batch7-review.json) and
+[S3 ledger](../../artifacts/mvdm-audit/t483-s3/execution.json).
+Old network/destruction diagnostic consumers and remaining unused trace settings
+must be reconciled before S3 closure. Next mirror file: ntuser/client/handles.c.
+No claim that these remaining old diagnostic runners pass.
+Batch delivery after ten distinct modified files or S exhaustion, completing
+necessary atomic dependencies first. S6 remains held.
 
 ## Latest S Closure
 
@@ -63,7 +65,7 @@ S1 register and identifiers remain immutable; S6 remains held.
 
 ## Current Technical Baseline
 
-Package `9e1219c1-885a-4402-ba36-edead29282f8` (S3 P6), complete 11 images at
+Package `79291f24-caaa-47a8-8c00-fe4d5dbe0a7a` (S3 P7), complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. DOS4GW/NESticle was
 explicitly skipped because its external fixture was not supplied. No guest or
 winnt.zip change. This package is not claimed byte-equivalent to S2.

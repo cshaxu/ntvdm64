@@ -798,100 +798,114 @@
     {
       "id": "T483-D1663",
       "path": "src/mvdm-host/wow32/wkfileio.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove trace call and diagnostic-only include; remove exclusive trace provider/declaration after checking observation consumers. Retain other functions in wow_user_thunk_scope and original failure return/LastError.",
-      "verification": "Selected WOW build; cache repeated flush/failure controls; invalid trailing separator and named-pipe attribute paths; failure return preserved after trace removal."
+      "verification": "Selected WOW build; cache repeated flush/failure controls; invalid trailing separator and named-pipe attribute paths; failure return preserved after trace removal.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1668",
       "path": "src/mvdm-host/wow32/wkfileio.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove trace call and diagnostic-only include; remove exclusive trace provider/declaration after checking observation consumers. Retain other functions in wow_user_thunk_scope and original failure return/LastError.",
-      "verification": "Selected WOW build; cache repeated flush/failure controls; invalid trailing separator and named-pipe attribute paths; failure return preserved after trace removal."
+      "verification": "Selected WOW build; cache repeated flush/failure controls; invalid trailing separator and named-pipe attribute paths; failure return preserved after trace removal.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1709",
       "path": "src/mvdm-host/wow32/wmdisp32.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
-      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1711",
       "path": "src/mvdm-host/wow32/wmdisp32.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
-      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1713",
       "path": "src/mvdm-host/wow32/wmdisp32.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
-      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1715",
       "path": "src/mvdm-host/wow32/wmdisp32.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
-      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1716",
       "path": "src/mvdm-host/wow32/wmdisp32.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove the two trace calls, raw-procedure local/copy and diagnostic-only wow_user_thunk_scope include from this TU. Keep wow_message_lifetime.h. Remove only exclusive trace declarations/providers and reconcile trace-only fixtures, not functional scope APIs.",
-      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture."
+      "verification": "Check remaining provider callers; retain callback/result/LastError regression while retiring dedicated trace fixture.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1809",
       "path": "src/mvdm-host/wow32/wmmedia1.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
-      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1810",
       "path": "src/mvdm-host/wow32/wmmedia2.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
-      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1811",
       "path": "src/mvdm-host/wow32/wmmstru1.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
-      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1812",
       "path": "src/mvdm-host/wow32/wmmstru2.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Delete entire empty translation unit and remove selected manifest, count guards and test file-list references; keep original baseline identity as evidence.",
-      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files."
+      "verification": "Regenerate 73-source WOW32 graph and link; verify dynamic export expectations separately from deleted empty files.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D1813",
       "path": "src/mvdm-host/wow32/wmmstruc.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Delete whole empty carrier and remove manifest entry; reduce formal source count guards to 72.",
-      "verification": "Regenerate selected 72-source WOW32 graph; cached compile/link before release."
+      "verification": "Regenerate selected 72-source WOW32 graph; cached compile/link before release.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2075",
       "path": "src/mvdm-host/wow32/wuman.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Delete only FUN_FINALUSERINIT local extern gpsi and preserve diagnostic #line mapping.",
-      "verification": "Selected translation unit build and unchanged emitted code."
+      "verification": "Selected translation unit build and unchanged emitted code.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2464",
       "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove only unused BMR_BITMAP definition in later minimization; verify no macro consumer after clres inclusion in bitmap fixture.",
-      "verification": "Preprocess product and included-source fixture; build unchanged behavior; no new runtime case needed for unused macro removal."
+      "verification": "Preprocess product and included-source fixture; build unchanged behavior; no new runtime case needed for unused macro removal.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2614",
@@ -945,8 +959,8 @@
   ],
   "counts": {
     "assigned": 120,
-    "delivered": 99,
-    "remaining_unprocessed": 21
+    "delivered": 113,
+    "remaining_unprocessed": 7
   },
-  "coupled_cleanup": "P6 retires now-uncalled callback-frame provider, declaration, fixture seams and six unused runner settings; functional provider bodies/acceptance assertions unchanged. Remaining diagnostic consumers including Shell task identity and window destruction must be reconciled before S3 closure. Next mirror rows wkfileio/wmdisp32 retain their original category order."
+  "coupled_cleanup": "P7 removes file-open/wndproc diagnostic providers, retains public ABI check, replaces Shell trace witness with independent guest task reports. Both report consumers updated atomically (11 logical files). Network/destruction and remaining dead trace settings still pending."
 }

@@ -107,6 +107,8 @@ fatal:
 mov ax,0x4c01
 int 0x21
 checkpoint:
+api 10                        ; GetCurrentTask: report actual guest task
+mov [task-data],ax
 push word [file-data]
 push ds
 push word report-data
@@ -137,12 +139,12 @@ ret
 %endif
 code_end:
 %ifdef CHILD
-dw 5
-%else
-%ifdef CALLBACK_ABORT
 dw 6
 %else
-dw 9
+%ifdef CALLBACK_ABORT
+dw 7
+%else
+dw 10
 %endif
 %endif
 %macro fixup 3
@@ -154,6 +156,7 @@ fixup 2,2,5
 fixup 3,1,83
 fixup 4,1,81
 fixup 5,1,86
+fixup 10,1,36
 %ifndef CHILD
 fixup 6,3,20
 %ifndef CALLBACK_ABORT
@@ -170,6 +173,7 @@ phase: dw 0
 errors: dw 0
 success: dw 0
 failure: dw 0xffff
+task: dw 0
 report_end:
 file: dw 0
 remaining: dw 0

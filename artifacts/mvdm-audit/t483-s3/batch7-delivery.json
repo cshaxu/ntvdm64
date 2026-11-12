@@ -1,0 +1,222 @@
+{
+  "baseline": "c158c342d",
+  "entries": [
+    "T483-D1663",
+    "T483-D1668",
+    "T483-D1709",
+    "T483-D1711",
+    "T483-D1713",
+    "T483-D1715",
+    "T483-D1716",
+    "T483-D1809",
+    "T483-D1810",
+    "T483-D1811",
+    "T483-D1812",
+    "T483-D1813",
+    "T483-D2075",
+    "T483-D2464"
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "previous_path": "src/mvdm-host/wow32/wkfileio.c",
+      "before_sha256": "2cfa2632a5af55df41c059509bc52011ac5eb29179ce6ac3a7a31b9ac536df50",
+      "after_sha256": "78a2b21beaba778578aadce3a557ebcdb0cbb9ae10f51d8539f382fe7db02637"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "previous_path": "src/mvdm-host/wow32/wmdisp32.c",
+      "before_sha256": "b88fb4ebc66ef487e919050cd8604b2aecead3eaab9a9a7bc1f3fedb181800c2",
+      "after_sha256": "bf9d4cdcab46d5686e81fce7b85c038cb8a22e27f91c2eea06bd3e4cd9919f45"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_thunk_scope.c",
+      "previous_path": "src/wow32-dll/source/wow_user_thunk_scope.c",
+      "before_sha256": "1d821f2953c4aabe9caa6a4efa3b3ffbc5a03347bc858e3a64da23739ecdb6e4",
+      "after_sha256": "650318802ad3d08a2a6b3f0428bba1ef51551bf5ad3976f4e204a67a50cbe6d3"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_thunk_scope.h",
+      "previous_path": "src/wow32-dll/include/wow_user_thunk_scope.h",
+      "before_sha256": "ec099405fb6f662bf1ea720ea7cf7d8032febfeab8658aa4f1e2b2ce236562ab",
+      "after_sha256": "7e3a9a1e6e563219b3ebfdfd0d488fdf6f8df3675aaf8730effc6eb4acc673e5"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_thunk_trace_fixture.c",
+      "previous_path": "test/adapter-mvdm-host-out/wow/wow_thunk_trace_fixture.c",
+      "before_sha256": "d0f8a774586cd0245b21eb05cdddee6dcc9b735b2b2abbe67f0111a056ce0a71",
+      "after_sha256": null
+    },
+    {
+      "path": "test/observation/verify-wow-public-memory-abi.ps1",
+      "previous_path": "test/observation/verify-wow-thunk-trace.ps1",
+      "before_sha256": "71b636dabf85ea691ec206bd812f8f4ecf7db772004168695d477088608088ab",
+      "after_sha256": "81614bf6556658266670cd7a3bd7378be69a02c0338bfbd18a7c3cc46cb3c06c"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "previous_path": "src/mvdm-host/wow32/wuman.c",
+      "before_sha256": "326a90ca1cb9b02c5843d4df2da113a939a0fc978fccb97c4757dacd81c682a4",
+      "after_sha256": "e1d22d650aca23a30a45bde78e746dbd1cfa601bcae63a117cdd060cd917b009"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "previous_path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_sha256": "1a2f5087bd4ed7e44732b7fb55b7e67c311da6216c924e82772c97b5e1317841",
+      "after_sha256": "e60cfe1ab3d8bd8b8486e2012c617c0f066a7ab387a61f82b575d2407dd37a73"
+    },
+    {
+      "path": "test/observation/win16_shell_probe.asm",
+      "previous_path": "test/observation/win16_shell_probe.asm",
+      "before_sha256": "56ac5380eb18b86a7844f0c42378e593a91fb0bbd2592ecbe1ccc9fc379b8a19",
+      "after_sha256": "7704054ab65e6272c131f5bf2c9c7caa40e8dd414bd9abb89dd2b8f46d14cf2c"
+    },
+    {
+      "path": "test/integration/verify-win16-shell-hook-probe.ps1",
+      "previous_path": "test/integration/verify-win16-shell-hook-probe.ps1",
+      "before_sha256": "3238e319d4aa947103d72379590f9a678ee0cbebb54f44efb301fbde37ccb65c",
+      "after_sha256": "783302e6a845cf5ab838848e21f9e82370b96e9c4a0d60e81e1df9b834921824"
+    },
+    {
+      "path": "test/integration/verify-wow-mine-gameplay.ps1",
+      "previous_path": "test/integration/verify-wow-mine-gameplay.ps1",
+      "before_sha256": "ccf4d310831f7084f15c3e5e2a2f4449f80ecb765839e4fa8713b435c4c98f92",
+      "after_sha256": "8f4f20063ef86b57bf4cdfab6263c9758c21194e0c69615e96fa583ad4881db8"
+    }
+  ],
+  "footprint": {
+    "added": 35,
+    "deleted": 253,
+    "net": -218
+  },
+  "verification": {
+    "abi": "Initial inherited check required retired CCPU macros; corrected to current actual compile contract and explicit x86 ABI fixture; final passed.",
+    "thunk_scope": "errors=0 calls=4 exception=1",
+    "shell": "passed; parent task6079 stable through all3 checkpoints; distinct child, normal return",
+    "full": "16 selected gates passed",
+    "file_cache": "577 checks; 0 failures",
+    "sibling_parser": "actual report shapes and four negative controls passed; injected-exception runtime not rerun"
+  },
+  "line_evidence": "batch7-compiler-lines.json",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 370256,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3822,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1216,
+        "CleanupMs": 561,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 264,
+        "CleanupMs": 557,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67175,
+        "CleanupMs": 525,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46669,
+        "CleanupMs": 660,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 42299,
+        "CleanupMs": 545,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13992,
+        "CleanupMs": 556,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10490,
+        "CleanupMs": 553,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 65305,
+        "CleanupMs": 690,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12187,
+        "CleanupMs": 605,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29026,
+        "CleanupMs": 551,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30378,
+        "CleanupMs": 620,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4652,
+        "CleanupMs": 635,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7859,
+        "CleanupMs": 609,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10511,
+        "CleanupMs": 603,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5567,
+        "CleanupMs": 630,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7504,
+        "CleanupMs": 613,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "79291f24-caaa-47a8-8c00-fe4d5dbe0a7a",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "limitations": [
+    "External DOS4GW/NESticle fixture absent; skipped, not passed.",
+    "Shell exception sibling parser validated, not a fresh injected-exception runtime claim.",
+    "Remaining network/destruction diagnostic consumers require reconciliation before S3 closure."
+  ],
+  "guest_and_winnt_zip_unchanged": true
+}

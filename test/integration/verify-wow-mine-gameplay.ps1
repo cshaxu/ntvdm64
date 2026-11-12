@@ -60,7 +60,7 @@ if($stressValue){
 }
 $observerTimeout=[Math]::Max(30000,10000+50*$stressRounds)
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP',
-    'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH',
+    'MVDM_WOW_WINDOW_TRACE_PATH',
     'MVDM_WOW_REGISTRATION_TRACE_PATH','MVDM_TEST_STARTUP_IDENTITY',
     'MVDM_TEST_SHELL_EXCEPTION','MVDM_TEST_CALLBACK_ABORT')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
@@ -111,7 +111,6 @@ try {
         Get-FileHash -LiteralPath @($siblingSource,"$root\$siblingName.EXE","$runtime\system\COMMDLG.DLL",
             "$runtime\system32\KRNL386.EXE","$runtime\system32\USER.EXE") |
             Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root\sibling-inputs.json"
-        $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root\lifetime.txt"
         $env:MVDM_WOW_WINDOW_TRACE_PATH="$root\lifetime.txt"
         if($StartupFailureSibling){
             $env:MVDM_WOW_REGISTRATION_TRACE_PATH="$root\registration.txt"
@@ -190,24 +189,24 @@ try {
         Copy-Item "$runtime/tests/SHLPROBE.BIN" "$root/sibling-report.bin"
         $bytes=[IO.File]::ReadAllBytes("$root/sibling-report.bin")
         if($ShellExceptionResponse -eq 'Close'){
-            if($bytes.Length -ne 12 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'SHL1' -or
+            if($bytes.Length -ne 14 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'SHL1' -or
                 [BitConverter]::ToUInt16($bytes,4) -ne 0){throw 'Shell guest continued after injected callback exception'}
         }else{
-            if($bytes.Length -ne 36){throw 'Ignore did not reach all three guest checkpoints'}
+            if($bytes.Length -ne 42){throw 'Ignore did not reach all three guest checkpoints'}
             for($record=0;$record -lt 3;$record++){
-                $offset=12*$record
+                $offset=14*$record
                 if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'SHL1' -or
                     [BitConverter]::ToUInt16($bytes,$offset+4) -ne $record -or
                     [BitConverter]::ToUInt16($bytes,$offset+6) -ne 0){throw 'Ignore guest stack/continuation/child failure'}
             }
-            if([BitConverter]::ToUInt16($bytes,34) -gt 32){throw 'Post-Ignore missing target did not fail normally'}
+            if([BitConverter]::ToUInt16($bytes,38) -gt 32){throw 'Post-Ignore missing target did not fail normally'}
             # Original handled-exception policy does not promise a successful
             # ShellExecute return. Verify continuation and the next API, not
             # an invented success return for the interrupted call.
             if(!$CallbackAbortPhase){
                 Copy-Item "$runtime/tests/SHLCHILD.BIN" "$root/child-report.bin"
                 $child=[IO.File]::ReadAllBytes("$root/child-report.bin")
-                if($child.Length -ne 12 -or [BitConverter]::ToUInt16($child,4) -ne 3){throw 'Original Shell child did not complete'}
+                if($child.Length -ne 14 -or [BitConverter]::ToUInt16($child,4) -ne 3){throw 'Original Shell child did not complete'}
             }
         }
         if($CallbackAbortPhase){

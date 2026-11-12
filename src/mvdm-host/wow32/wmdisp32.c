@@ -16,8 +16,6 @@
 
 
 #include "precomp.h"
-/* DIVERGENCE(MVDM-HOST-DIV-340): diagnostics belong to the owned observer. */
-#include "wow_user_thunk_scope.h"
 /* DIVERGENCE(MVDM-HOST-DIV-344): selected original rollback finalizers. */
 #include "wow_message_lifetime.h"
 #line 19
@@ -45,7 +43,6 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     BOOL fSuccess;
     PWC  pwc;
     LONG ulReturn;
-    DWORD vpWndProc16Raw; /* DIVERGENCE(MVDM-HOST-DIV-340): trace scalar only. */
 #line 39
     register PTD ptd;
     WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
@@ -70,7 +67,6 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #line 50
     ptd = CURRENTPTD();
 
-    vpWndProc16Raw = (DWORD)vpWndProc16; /* DIV-340: before original decoding. */
 #line 52
     vpWndProc16 &= WNDPROC_MASK;
 
@@ -224,14 +220,10 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     BlockWOWIdle(FALSE);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-340): retain existing pre-callback witness. */
-    wow_user_trace_wndproc_enter(uMsg, vpWndProc16Raw, (DWORD)vpWndProc16);
 
 #line 197
     fSuccess = CallBack16(RET_WNDPROC, &wm32mpex.Parm16, vpWndProc16, (PVPVOID)&wm32mpex.lReturn);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-340): observe, never alter callback outcome. */
-    wow_user_trace_wndproc_return(uMsg, (DWORD)vpWndProc16, fSuccess, wm32mpex.lReturn);
 
 #line 199
     BlockWOWIdle(TRUE);
