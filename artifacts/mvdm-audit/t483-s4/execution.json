@@ -822,51 +822,58 @@
     {
       "id": "T483-D2759",
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Restore original relative ordering and source anchors as one header composition change; keep macro expansion-time semantics and all actual include cohorts.",
-      "verification": "Compile affected class and dialog provider contexts; class capture-failure1/2 and failed/successful unregister fixture; class-query string capture/atom cases; do not replace existing forced-heap assertion."
+      "verification": "Compile affected class and dialog provider contexts; class capture-failure1/2 and failed/successful unregister fixture; class-query string capture/atom cases; do not replace existing forced-heap assertion.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2760",
       "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Consolidate declaration ordering while preserving type-only, counted-string-only and full-view actual include contexts. Do not erase guards based on one translation unit.",
-      "verification": "Affected real provider compile and multipass include-order cases; existing layout assertions for WND176,CLS108,MENU64,ITEM64,DESKTOPINFO100; control/dialog/button and page-domain fixtures as relevant. No fresh run claimed."
+      "verification": "Affected real provider compile and multipass include-order cases; existing layout assertions for WND176,CLS108,MENU64,ITEM64,DESKTOPINFO100; control/dialog/button and page-domain fixtures as relevant. No fresh run claimed.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2947",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Dedicated production TU always defines WOW_ORIGINAL_DEFAULT_MESSAGES. Audit all test graph consumers, then remove unnecessary split selector wrappers around array fragments and matching build define as one group; retain actual original literal-disabled and FE_IME conditions. Do not leave arrays split by autonomous build policy.",
-      "verification": "For remediation: cached WOW build; default-messages membership/repeated publication fixture and actual control/default dispatch; allocation-failure cleanup and no partial publication; all test/build selector consumers and diagnostic-line reconstruction."
+      "verification": "For remediation: cached WOW build; default-messages membership/repeated publication fixture and actual control/default dispatch; allocation-failure cleanup and no partial publication; all test/build selector consumers and diagnostic-line reconstruction.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2956",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Function moved before DestroyTask, CurrentTaskLock moved before it, and InsertTask moved to EOF to accommodate ambient gpsi macro bindings. Restore original function order with minimal explicit per-function shared-owner expression or facade binding, preserving all bodies and original logical lines. Verify source-order/macros rather than treating moved text as duplicated algorithms.",
-      "verification": "For remediation: cached WOW build; priority/reinsert, lock token, send/reply, directed yield, task destruction, native suspended stack/readiness and hardware wake cases; lifecycle nested callbacks/native return/terminal cleanup; no altered event counts or second task state machine."
+      "verification": "For remediation: cached WOW build; priority/reinsert, lock token, send/reply, directed yield, task destruction, native suspended stack/readiness and hardware wake cases; lifecycle nested callbacks/native return/terminal cleanup; no altered event counts or second task state machine.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2958",
       "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "gpsi/gpwtiFirst rebound by preprocessor position for DestroyTask and subsequent SleepTask, then gpsi rebound to ptiOld for DirectedYield. Prefer smallest source-local owner expression in affected functions if it removes ordering coupling without new runtime state. Coordinate facade declarations, preserve single shared event counter.",
-      "verification": "For remediation: cached WOW build; priority/reinsert, lock token, send/reply, directed yield, task destruction, native suspended stack/readiness and hardware wake cases; lifecycle nested callbacks/native return/terminal cleanup; no altered event counts or second task state machine."
+      "verification": "For remediation: cached WOW build; priority/reinsert, lock token, send/reply, directed yield, task destruction, native suspended stack/readiness and hardware wake cases; lifecycle nested callbacks/native return/terminal cleanup; no altered event counts or second task state machine.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2985",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Restore original retained function order and place excluded conditional frames at original owning boundaries; remove detached empty debris only under mirror policy and repair logical anchors.",
-      "verification": "Compare selected tokens, original branch structure and diagnostic logical lines; compile formal and fixture consumers."
+      "verification": "Compare selected tokens, original branch structure and diagnostic logical lines; compile formal and fixture consumers.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2987",
       "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
-      "status": "pending",
+      "status": "delivered P8",
       "plan": "Reconcile drawing consumers and remove redundant WOW_ORIGINAL_BUTTON_DRAWING selector if both bodies can be unconditional in all admitted contexts.",
-      "verification": "Compile all admitted drawing contexts after consolidation."
+      "verification": "Compile all admitted drawing contexts after consolidation.",
+      "evidence": "batch8-delivery.json"
     },
     {
       "id": "T483-D2995",
@@ -927,7 +934,7 @@
   ],
   "counts": {
     "assigned": 117,
-    "delivered": 29,
-    "remaining_unprocessed": 88
+    "delivered": 109,
+    "remaining_unprocessed": 8
   }
 }

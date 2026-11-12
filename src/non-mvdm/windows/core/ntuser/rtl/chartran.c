@@ -26,156 +26,6 @@
 #line 22
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))
 
-/**************************************************************************\
-* RtlMBMessageCharToWCS
-*
-* Converts a Multibyte character to a Wide character; in place
-* Returns the number of characters converted or zero if failure
-*
-* 11-Feb-1992  JohnC    Created
-* 13-Jan-1993  IanJa    Translate 2 characters (Publisher posts these!)
-\**************************************************************************/
-#line 441
-BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
-{
-    DWORD dwUni;
-    NTSTATUS Status;
-#line 446
-#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-#line 447
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 449
-#endif // FE_SB
-#line 450
-    WORD CodePage = THREAD_CODEPAGE();
-
-    /*
-     * Only these messages have CHARs: others are passed through
-     */
-
-    switch(msg) {
-#line 457
-#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-#line 458
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 496
-#else
-#line 497
-    case WM_CHAR:
-#endif // FE_SB
-#line 499
-    case WM_CHARTOITEM:
-    case EM_SETPASSWORDCHAR:
-    case WM_DEADCHAR:
-    case WM_SYSCHAR:
-    case WM_SYSDEADCHAR:
-    case WM_MENUCHAR:
-
-        dwUni = 0;
-
-        if (IS_ACP(CodePage)) {
-            Status = RtlMultiByteToUnicodeN((LPWSTR)&dwUni, sizeof(dwUni),
-                    NULL, (LPSTR)pWParam, 2 * sizeof(CHAR));
-            if (!NT_SUCCESS(Status))
-                return FALSE;
-        } else {
-            int cwch;
-#line 515
-#ifdef _USERK_
-#line 516
-#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
-#line 519
-#else
-#line 520
-            cwch = MultiByteToWideChar(CodePage, 0,
-                    (LPSTR)pWParam, 2,
-                    (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR));
-#endif // _USERK_
-#line 524
-            // KdPrint(("0x%02x -> 0x%04x (%d)\n", *pWParam, dwUni, CodePage));
-            if (cwch == 0) {
-                return FALSE;
-            }
-        }
-
-#line 530
-#ifdef FE_SB // RtlMBMessageWParamCharToWCS
-#line 531
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 536
-#else
-#line 537
-#ifdef DEBUG
-#line 538
-#error Excluded unsupported original DEBUG branch
-#line 541
-#endif
-#line 542
-#endif // FE_SB
-#line 543
-        *pWParam = dwUni;
-        break;
-    }
-
-    return TRUE;
-}
-
-/**************************************************************************\
-* RtlInitLargeAnsiString
-*
-* Captures a large ANSI string in the same manner as
-* RtlInitAnsiString.
-*
-* 03-22-95 JimA         Created.
-\**************************************************************************/
-#line 559
-VOID RtlInitLargeAnsiString(
-    PLARGE_ANSI_STRING plstr,
-    LPCSTR psz,
-    UINT cchLimit)
-{
-    ULONG Length;
-
-    plstr->Buffer = (PSTR)psz;
-    plstr->bAnsi = TRUE;
-    if (ARGUMENT_PRESENT( psz )) {
-        Length = strlen( psz );
-        plstr->Length = min(Length, cchLimit);
-        plstr->MaximumLength = min((Length + 1), cchLimit);
-    } else {
-        plstr->MaximumLength = 0;
-        plstr->Length = 0;
-    }
-}
-
-/**************************************************************************\
-* RtlInitLargeUnicodeString
-*
-* Captures a large unicode string in the same manner as
-* RtlInitUnicodeString.
-*
-* 03-22-95 JimA         Created.
-\**************************************************************************/
-#line 587
-VOID RtlInitLargeUnicodeString(
-    PLARGE_UNICODE_STRING plstr,
-    LPCWSTR psz,
-    UINT cchLimit)
-{
-    ULONG Length;
-
-    plstr->Buffer = (PWSTR)psz;
-    plstr->bAnsi = FALSE;
-    if (ARGUMENT_PRESENT( psz )) {
-        Length = wcslen( psz ) * sizeof( WCHAR );
-        plstr->Length = min(Length, cchLimit);
-        plstr->MaximumLength = min((Length + sizeof(UNICODE_NULL)), cchLimit);
-    } else {
-        plstr->MaximumLength = 0;
-        plstr->Length = 0;
-    }
-}
-
 /***************************************************************************\
 * WCSToMBEx (API)
 *
@@ -455,6 +305,13 @@ int MBToWCSEx(
 #line 329
 
 
+#line 337
+#ifdef FE_IME // RtlWCSMessageWParamCharToMB()
+#line 338
+#error Unsupported FE_IME original branch
+#line 340
+#endif // FE_IME
+#line 341
 #line 351
 #ifdef FE_SB // RtlWCSMessageWParamCharToMB()
 #line 352
@@ -495,10 +352,153 @@ int MBToWCSEx(
 #line 425
 
 
-#line 337
-#ifdef FE_IME // RtlWCSMessageWParamCharToMB()
-#line 338
-#error Unsupported FE_IME original branch
-#line 340
-#endif // FE_IME
-#line 341
+/**************************************************************************\
+* RtlMBMessageCharToWCS
+*
+* Converts a Multibyte character to a Wide character; in place
+* Returns the number of characters converted or zero if failure
+*
+* 11-Feb-1992  JohnC    Created
+* 13-Jan-1993  IanJa    Translate 2 characters (Publisher posts these!)
+\**************************************************************************/
+#line 442
+BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
+{
+    DWORD dwUni;
+    NTSTATUS Status;
+#line 446
+#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
+#line 447
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 449
+#endif // FE_SB
+#line 450
+    WORD CodePage = THREAD_CODEPAGE();
+
+    /*
+     * Only these messages have CHARs: others are passed through
+     */
+
+    switch(msg) {
+#line 457
+#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
+#line 458
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 496
+#else
+#line 497
+    case WM_CHAR:
+#endif // FE_SB
+#line 499
+    case WM_CHARTOITEM:
+    case EM_SETPASSWORDCHAR:
+    case WM_DEADCHAR:
+    case WM_SYSCHAR:
+    case WM_SYSDEADCHAR:
+    case WM_MENUCHAR:
+
+        dwUni = 0;
+
+        if (IS_ACP(CodePage)) {
+            Status = RtlMultiByteToUnicodeN((LPWSTR)&dwUni, sizeof(dwUni),
+                    NULL, (LPSTR)pWParam, 2 * sizeof(CHAR));
+            if (!NT_SUCCESS(Status))
+                return FALSE;
+        } else {
+            int cwch;
+#line 515
+#ifdef _USERK_
+#line 516
+#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
+#line 519
+#else
+#line 520
+            cwch = MultiByteToWideChar(CodePage, 0,
+                    (LPSTR)pWParam, 2,
+                    (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR));
+#endif // _USERK_
+#line 524
+            // KdPrint(("0x%02x -> 0x%04x (%d)\n", *pWParam, dwUni, CodePage));
+            if (cwch == 0) {
+                return FALSE;
+            }
+        }
+
+#line 530
+#ifdef FE_SB // RtlMBMessageWParamCharToWCS
+#line 531
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 536
+#else
+#line 537
+#ifdef DEBUG
+#line 538
+#error Excluded unsupported original DEBUG branch
+#line 541
+#endif
+#line 542
+#endif // FE_SB
+#line 543
+        *pWParam = dwUni;
+        break;
+    }
+
+    return TRUE;
+}
+
+/**************************************************************************\
+* RtlInitLargeAnsiString
+*
+* Captures a large ANSI string in the same manner as
+* RtlInitAnsiString.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
+#line 559
+VOID RtlInitLargeAnsiString(
+    PLARGE_ANSI_STRING plstr,
+    LPCSTR psz,
+    UINT cchLimit)
+{
+    ULONG Length;
+
+    plstr->Buffer = (PSTR)psz;
+    plstr->bAnsi = TRUE;
+    if (ARGUMENT_PRESENT( psz )) {
+        Length = strlen( psz );
+        plstr->Length = min(Length, cchLimit);
+        plstr->MaximumLength = min((Length + 1), cchLimit);
+    } else {
+        plstr->MaximumLength = 0;
+        plstr->Length = 0;
+    }
+}
+
+/**************************************************************************\
+* RtlInitLargeUnicodeString
+*
+* Captures a large unicode string in the same manner as
+* RtlInitUnicodeString.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
+#line 587
+VOID RtlInitLargeUnicodeString(
+    PLARGE_UNICODE_STRING plstr,
+    LPCWSTR psz,
+    UINT cchLimit)
+{
+    ULONG Length;
+
+    plstr->Buffer = (PWSTR)psz;
+    plstr->bAnsi = FALSE;
+    if (ARGUMENT_PRESENT( psz )) {
+        Length = wcslen( psz ) * sizeof( WCHAR );
+        plstr->Length = min(Length, cchLimit);
+        plstr->MaximumLength = min((Length + sizeof(UNICODE_NULL)), cchLimit);
+    } else {
+        plstr->MaximumLength = 0;
+        plstr->Length = 0;
+    }
+}
+

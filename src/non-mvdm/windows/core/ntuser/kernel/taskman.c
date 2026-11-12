@@ -37,145 +37,83 @@ WakeWowTask(
 
 
 /***************************************************************************\
-* DirectedScheduleTask
+* InsertTask
+*
+* This function removes a task from its old location and inserts
+* in the proper prioritized location
+*
+* Find a place for this task such that it must be inserted
+* after any task with greater or equal priority and must be
+* before any task with higher priorty.  The higher the priority
+* the less urgent the task.
 *
 * History:
-* 25-Jun-1992 mikeke    Created.
+* 19-Nov-1993 mikeke    Created
 \***************************************************************************/
 
-#line 574
-
-VOID DirectedScheduleTask(
-     PTHREADINFO ptiOld,
-     PTHREADINFO ptiNew,
-     BOOL bSendMsg,
-     PSMS psms
-     )
+#line 60
+void InsertTask(
+    PPROCESSINFO ppi,
+    PTDB ptdbNew)
 {
-    PWOWPROCESSINFO pwpiOld;
-    PWOWPROCESSINFO pwpiNew;
+    PTDB *pptdb;
+    PTDB ptdb;
+    int nPriority;
+    PWOWPROCESSINFO pwpi = ppi->pwpi;
 
     CheckCritIn();
 
-    pwpiOld  = ptiOld->ppi->pwpi;
-    pwpiNew  = ptiNew->ppi->pwpi;
+    UserAssert(pwpi != NULL);
 
+    pptdb = &pwpi->ptdbHead;
+    nPriority = ptdbNew->nPriority;
 
-    /*
-     * If old task is 16 bit, reinsert the task in its wow scheduler list
-     * so that it is lowest in priority. Note that ptiOld is always the
-     * same as pwpiOld->ptiScheduled except when called from ReceiverDied.
-     */
-    if (ptiOld->TIF_flags & TIF_16BIT) {
+    while ((ptdb = *pptdb) != NULL) {
+        /*
+         * Remove it from it's old location
+         */
+        if (ptdb == ptdbNew) {
+            *pptdb = ptdbNew->ptdbNext;
 
-        if (pwpiOld->ptiScheduled == ptiOld) {
-            ptiOld->ptdb->nEvents++;
-            gpsi->nEvents++;
-            InsertTask(ptiOld->ppi, ptiOld->ptdb);
-            }
-
-
-        // Update the Send\Recv counts for interprocess scheduling in SleepTask
-
-        if (pwpiOld != pwpiNew || !(ptiNew->TIF_flags & TIF_16BIT)) {
-            if (bSendMsg) {
-                pwpiOld->nSendLock++;
-                psms->flags |= SMF_WOWSEND;
+            /*
+             * continue to search for the place to insert it
+             */
+            while ((ptdb = *pptdb) != NULL) {
+                if (nPriority < ptdb->nPriority) {
+                    break;
                 }
-            else if (pwpiOld->nRecvLock && psms->flags & SMF_WOWRECEIVE) {
-                pwpiOld->nRecvLock--;
-                psms->flags &= ~SMF_WOWRECEIVE;
-                }
-            }
 
+                pptdb = &(ptdb->ptdbNext);
+            }
+            break;
         }
 
-
-    /*
-     *  If the new task is 16 bit, reinsert into the wow scheduler list
-     *  so that it will run, if its a sendmsg raise priority of the receiver.
-     *  If its a reply and the sender is waiting for this psms or the sender
-     *  has a message to reply to raise priority of the sender.
-     */
-    if (ptiNew->TIF_flags & TIF_16BIT) {
-        BOOL bRaisePriority;
-
-        ptiNew->ptdb->nEvents++;
-        gpsi->nEvents++;
-        bRaisePriority = bSendMsg || psms == ptiNew->psmsSent;
-
-        if (bRaisePriority) {
-            ptiNew->ptdb->nPriority--;
-            }
-
-        InsertTask(ptiNew->ppi, ptiNew->ptdb);
-
-        if (bRaisePriority) {
-            ptiNew->ptdb->nPriority++;
-            WakeWowTask(ptiNew);
-            }
-
-
-        // Update the Send\Recv counts for interprocess scheduling in SleepTask
-
-        if (pwpiOld != pwpiNew || !(ptiOld->TIF_flags & TIF_16BIT)) {
-            if (bSendMsg) {
-                pwpiNew->nRecvLock++;
-                psms->flags |= SMF_WOWRECEIVE;
+        /*
+         * if this is the place to insert continue to search for the
+         * place to delete it from
+         */
+        if (nPriority < ptdb->nPriority) {
+            do {
+                if (ptdb->ptdbNext == ptdbNew) {
+                    ptdb->ptdbNext = ptdbNew->ptdbNext;
+                    break;
                 }
-            else if (pwpiNew->nSendLock && psms->flags & SMF_WOWSEND) {
-                pwpiNew->nSendLock--;
-                psms->flags &= ~SMF_WOWSEND;
-                }
-            }
-
+                ptdb = ptdb->ptdbNext;
+            } while (ptdb != NULL);
+            break;
         }
-}
 
-
-
-
-/* DIVERGENCE(OPENNT-HOST-048): caller supplies original current process
- * explicitly; no fake PpiCurrent thread environment is constructed. */
-/***************************************************************************\
-* CurrentTaskLock
-*
-* Lock the current 16 bit task into the 16 bit scheduler
-*
-* Parameter:
-*   hlck    if NULL, lock the current 16 bit task and return a lock handle
-*           if valid lock handle, unlock the current task
-*
-* History:
-* 13-Apr-1992 jonpa      Created.
-\***************************************************************************/
-#line 728
-DWORD CurrentTaskLock(
-    DWORD hlck,
-    PPROCESSINFO ppi)
-#line 730
-{
-    PWOWPROCESSINFO pwpi = ppi->pwpi;
-
-    if (!pwpi)
-        return 0;
-
-    if (hlck == 0) {
-        pwpi->nTaskLock++;
-        return ~(DWORD)pwpi->ptiScheduled->ptdb;
-    } else if ((~hlck) == (DWORD)pwpi->ptiScheduled->ptdb) {
-        pwpi->nTaskLock--;
+        pptdb = &(ptdb->ptdbNext);
     }
 
-    return 0;
+    /*
+     * insert the new task
+     */
+    ptdbNew->ptdbNext = *pptdb;
+    *pptdb = ptdbNew;
 }
-
-
 /* DIVERGENCE(OPENNT-HOST-049): bind this original function's shared USER
  * domain through its explicit process view rather than a global server. */
-#undef gpsi
-#define gpsi (ppi->shared)
-#define gpwtiFirst (ppi->shared->pwtiFirst)
 /***************************************************************************\
 * DestroyTask()
 *
@@ -201,7 +139,7 @@ void DestroyTask(
          * Remove the WOW per thread info
          */
         if (ptdbToRemove->pwti) {
-            PWOWTHREADINFO *ppwti = &gpwtiFirst;
+            PWOWTHREADINFO *ppwti = &(ppi->shared->pwtiFirst);
             while (*ppwti != ptdbToRemove->pwti && (*ppwti)->pwtiNext != NULL) {
                 ppwti = &((*ppwti)->pwtiNext);
             }
@@ -212,7 +150,7 @@ void DestroyTask(
             UserFreePool(ptdbToRemove->pwti);
         }
 
-        gpsi->nEvents -= ptdbToRemove->nEvents;
+        (ppi->shared)->nEvents -= ptdbToRemove->nEvents;
 
         /*
          * remove it from any lists
@@ -367,7 +305,7 @@ BOOL xxxSleepTask(
         pti->pcti->fsWakeMask = QS_ALLINPUT | QS_EVENT;
         if (pti->pcti->fsChangeBits & pti->pcti->fsWakeMask) {
             pti->ptdb->nEvents++;
-            gpsi->nEvents++;
+            (ppi->shared)->nEvents++;
         }
     }
 
@@ -562,8 +500,8 @@ rescan:
      */
 #line 491
     pti->ptdb->nEvents--;
-    gpsi->nEvents--;
-    UserAssert(gpsi->nEvents >= 0);
+    (ppi->shared)->nEvents--;
+    UserAssert((ppi->shared)->nEvents >= 0);
 
     InsertTask(ppi, pti->ptdb);
 
@@ -618,7 +556,7 @@ BOOL xxxUserYield(
     if ((pti->TIF_flags & TIF_16BIT) && (pti->ptdb != NULL)) {
        if (pti->ptdb->nEvents == 0) {
             pti->ptdb->nEvents++;
-            gpsi->nEvents++;
+            (ppi->shared)->nEvents++;
         }
         InsertTask(ppi, pti->ptdb);
 
@@ -638,10 +576,107 @@ BOOL xxxUserYield(
     return TRUE;
 }
 
+/***************************************************************************\
+* DirectedScheduleTask
+*
+* History:
+* 25-Jun-1992 mikeke    Created.
+\***************************************************************************/
+
+#line 574
+
+VOID DirectedScheduleTask(
+     PTHREADINFO ptiOld,
+     PTHREADINFO ptiNew,
+     BOOL bSendMsg,
+     PSMS psms
+     )
+{
+    PWOWPROCESSINFO pwpiOld;
+    PWOWPROCESSINFO pwpiNew;
+
+    CheckCritIn();
+
+    pwpiOld  = ptiOld->ppi->pwpi;
+    pwpiNew  = ptiNew->ppi->pwpi;
+
+
+    /*
+     * If old task is 16 bit, reinsert the task in its wow scheduler list
+     * so that it is lowest in priority. Note that ptiOld is always the
+     * same as pwpiOld->ptiScheduled except when called from ReceiverDied.
+     */
+    if (ptiOld->TIF_flags & TIF_16BIT) {
+
+        if (pwpiOld->ptiScheduled == ptiOld) {
+            ptiOld->ptdb->nEvents++;
+            (ptiOld->ppi->shared)->nEvents++;
+            InsertTask(ptiOld->ppi, ptiOld->ptdb);
+            }
+
+
+        // Update the Send\Recv counts for interprocess scheduling in SleepTask
+
+        if (pwpiOld != pwpiNew || !(ptiNew->TIF_flags & TIF_16BIT)) {
+            if (bSendMsg) {
+                pwpiOld->nSendLock++;
+                psms->flags |= SMF_WOWSEND;
+                }
+            else if (pwpiOld->nRecvLock && psms->flags & SMF_WOWRECEIVE) {
+                pwpiOld->nRecvLock--;
+                psms->flags &= ~SMF_WOWRECEIVE;
+                }
+            }
+
+        }
+
+
+    /*
+     *  If the new task is 16 bit, reinsert into the wow scheduler list
+     *  so that it will run, if its a sendmsg raise priority of the receiver.
+     *  If its a reply and the sender is waiting for this psms or the sender
+     *  has a message to reply to raise priority of the sender.
+     */
+    if (ptiNew->TIF_flags & TIF_16BIT) {
+        BOOL bRaisePriority;
+
+        ptiNew->ptdb->nEvents++;
+        (ptiOld->ppi->shared)->nEvents++;
+        bRaisePriority = bSendMsg || psms == ptiNew->psmsSent;
+
+        if (bRaisePriority) {
+            ptiNew->ptdb->nPriority--;
+            }
+
+        InsertTask(ptiNew->ppi, ptiNew->ptdb);
+
+        if (bRaisePriority) {
+            ptiNew->ptdb->nPriority++;
+            WakeWowTask(ptiNew);
+            }
+
+
+        // Update the Send\Recv counts for interprocess scheduling in SleepTask
+
+        if (pwpiOld != pwpiNew || !(ptiOld->TIF_flags & TIF_16BIT)) {
+            if (bSendMsg) {
+                pwpiNew->nRecvLock++;
+                psms->flags |= SMF_WOWRECEIVE;
+                }
+            else if (pwpiNew->nSendLock && psms->flags & SMF_WOWSEND) {
+                pwpiNew->nSendLock--;
+                psms->flags &= ~SMF_WOWSEND;
+                }
+            }
+
+        }
+}
+
+
+
+
 /* DIVERGENCE(OPENNT-HOST-051): explicit current thread, including SleepTask;
  * thread lookup remains a required host operation under the USER lock. */
-#undef gpsi
-#define gpsi (ptiOld->ppi->shared)
 /***************************************************************************\
 * xxxDirectedYield
 *
@@ -671,7 +706,7 @@ void xxxDirectedYield(
      *  scheduler list so that it is lowest in priority.
      */
     ptiOld->ptdb->nEvents++;
-    gpsi->nEvents++;
+    (ptiOld->ppi->shared)->nEvents++;
     InsertTask(ptiOld->ppi, ptiOld->ptdb);
 
     /*
@@ -685,7 +720,7 @@ void xxxDirectedYield(
 
         if (ptiNew->TIF_flags & TIF_16BIT) {
             ptiNew->ptdb->nEvents++;
-            gpsi->nEvents++;
+            (ptiOld->ppi->shared)->nEvents++;
             ptiNew->ptdb->nPriority--;
             InsertTask(ptiNew->ppi, ptiNew->ptdb);
             ptiNew->ptdb->nPriority++;
@@ -695,79 +730,39 @@ void xxxDirectedYield(
     xxxSleepTask(TRUE, NULL, ptiOld);
 }
 
+/* DIVERGENCE(OPENNT-HOST-048): caller supplies original current process
+ * explicitly; no fake PpiCurrent thread environment is constructed. */
 /***************************************************************************\
-* InsertTask
+* CurrentTaskLock
 *
-* This function removes a task from its old location and inserts
-* in the proper prioritized location
+* Lock the current 16 bit task into the 16 bit scheduler
 *
-* Find a place for this task such that it must be inserted
-* after any task with greater or equal priority and must be
-* before any task with higher priorty.  The higher the priority
-* the less urgent the task.
+* Parameter:
+*   hlck    if NULL, lock the current 16 bit task and return a lock handle
+*           if valid lock handle, unlock the current task
 *
 * History:
-* 19-Nov-1993 mikeke    Created
+* 13-Apr-1992 jonpa      Created.
 \***************************************************************************/
-
-#line 60
-void InsertTask(
-    PPROCESSINFO ppi,
-    PTDB ptdbNew)
+#line 728
+DWORD CurrentTaskLock(
+    DWORD hlck,
+    PPROCESSINFO ppi)
+#line 730
 {
-    PTDB *pptdb;
-    PTDB ptdb;
-    int nPriority;
     PWOWPROCESSINFO pwpi = ppi->pwpi;
 
-    CheckCritIn();
+    if (!pwpi)
+        return 0;
 
-    UserAssert(pwpi != NULL);
-
-    pptdb = &pwpi->ptdbHead;
-    nPriority = ptdbNew->nPriority;
-
-    while ((ptdb = *pptdb) != NULL) {
-        /*
-         * Remove it from it's old location
-         */
-        if (ptdb == ptdbNew) {
-            *pptdb = ptdbNew->ptdbNext;
-
-            /*
-             * continue to search for the place to insert it
-             */
-            while ((ptdb = *pptdb) != NULL) {
-                if (nPriority < ptdb->nPriority) {
-                    break;
-                }
-
-                pptdb = &(ptdb->ptdbNext);
-            }
-            break;
-        }
-
-        /*
-         * if this is the place to insert continue to search for the
-         * place to delete it from
-         */
-        if (nPriority < ptdb->nPriority) {
-            do {
-                if (ptdb->ptdbNext == ptdbNew) {
-                    ptdb->ptdbNext = ptdbNew->ptdbNext;
-                    break;
-                }
-                ptdb = ptdb->ptdbNext;
-            } while (ptdb != NULL);
-            break;
-        }
-
-        pptdb = &(ptdb->ptdbNext);
+    if (hlck == 0) {
+        pwpi->nTaskLock++;
+        return ~(DWORD)pwpi->ptiScheduled->ptdb;
+    } else if ((~hlck) == (DWORD)pwpi->ptiScheduled->ptdb) {
+        pwpi->nTaskLock--;
     }
 
-    /*
-     * insert the new task
-     */
-    ptdbNew->ptdbNext = *pptdb;
-    *pptdb = ptdbNew;
+    return 0;
 }
+
+

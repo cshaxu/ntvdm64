@@ -57,6 +57,16 @@ cleanup:
         (pinstr)->strCapture.Buffer = (LPWSTR)(psz);        \
     }
 
+#line 136
+#define FIRSTCOPYLPSTRW(pinstr, psz) \
+    if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), FALSE))    \
+        MSGERROR();
+
+#line 184
+#define CLEANUPLPSTRW(instr) \
+    if (instr.fAllocated)                     \
+        RtlFreeHeap(RtlProcessHeap(), 0, instr.strCapture.Buffer);
+
 /* DIVERGENCE(OPENNT-HOST-140): retain the original text-width selection and
  * only the capture aliases used by the admitted client closures. */
 #line 196
@@ -96,12 +106,3 @@ cleanup:
 #endif
 #line 287
 
-#line 136
-#define FIRSTCOPYLPSTRW(pinstr, psz) \
-    if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), FALSE))    \
-        MSGERROR();
-
-#line 184
-#define CLEANUPLPSTRW(instr) \
-    if (instr.fAllocated)                     \
-        RtlFreeHeap(RtlProcessHeap(), 0, instr.strCapture.Buffer);

@@ -1,0 +1,68 @@
+{
+  "part": "T483 S4 P8",
+  "baseline": "da814e717",
+  "entries": [
+    "T483-D2759",
+    "T483-D2760",
+    "T483-D2947",
+    "T483-D2956",
+    "T483-D2958",
+    "T483-D2985",
+    "T483-D2987"
+  ],
+  "delivered_total": 109,
+  "remaining": 8,
+  "modified_source_test_build_files": 13,
+  "footprint": {
+    "mirror": {
+      "added": 463,
+      "deleted": 475,
+      "net": -12
+    },
+    "autonomous": {
+      "added": 0,
+      "deleted": 5,
+      "net": -5
+    },
+    "build": {
+      "added": 3,
+      "deleted": 3,
+      "net": 0
+    },
+    "tests": {
+      "added": 2,
+      "deleted": 6,
+      "net": -4
+    }
+  },
+  "source_review": "batch8-source-review.json",
+  "verification": {
+    "cached": "PASS x86/x64",
+    "full": "PASS selected Full gates, identical 11-file package; DOS4GW/NESticle explicit external-fixture SKIP",
+    "control_boundaries": "PASS",
+    "line_review": "PASS 247 matching statement anchors, zero conflicts",
+    "lifecycle": "PASS task-order, task-lifecycle, native-nested, class-client; actual production objects; bounded fixture formatting uses inline UCRT"
+  },
+  "line_counter_review": {
+    "matching_statement_anchors": 247,
+    "observed_conflicts": 0,
+    "ntsend": "Header contributes macros rather than emitted declarations; both moved macro definitions byte-match pinned original, with original #line136/184. Actual class-client preprocess passed."
+  },
+  "publication": {
+    "status": "published",
+    "package": "201e7c14-e643-4240-ba77-c96d7ff46324",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_roots": [
+    "build/t483-s4-p8"
+  ],
+  "scope": "No guest or winnt.zip changes. S6 remains held.",
+  "runner_corrections": [
+    "Legacy non-inline vsnprintf link failed; adding legacy stdio archive conflicts with SoftPC printf. Rejected both approaches. Fixture alone now uses UCRT inline formatting; production owners unchanged."
+  ]
+}

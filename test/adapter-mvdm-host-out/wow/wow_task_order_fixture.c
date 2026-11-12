@@ -1,3 +1,5 @@
+/* Use UCRT inline formatting without importing a second printf owner. */
+#undef _NO_CRT_STDIO_INLINE
 #include "wow_task_order_bindings.h"
 #include "wow_task_init_bindings.h"
 #include "wow_task_profile_bindings.h"

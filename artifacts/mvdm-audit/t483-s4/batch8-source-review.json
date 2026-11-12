@@ -1,0 +1,123 @@
+{
+  "status": "verified and published P8",
+  "entries": [
+    "T483-D2759",
+    "T483-D2760",
+    "T483-D2947",
+    "T483-D2956",
+    "T483-D2958",
+    "T483-D2985",
+    "T483-D2987"
+  ],
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "before_sha256": "c4c28b08767e4c6d7b9cee385bb9d3a377aff17abc4c62efc5fa968df8a0e109",
+      "after_sha256": "0c6402b1444df4cad026ade4751202af7e7ddc81ab9bf607fb8260864939ea13",
+      "change": "Restore FIRSTCOPYLPSTRW136 and CLEANUPLPSTRW184 before Unicode196 and type-neutral254 cohorts; macro replacement text and line anchors unchanged."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_sha256": "3357f5306394450512cf95fe13151a480cd2c1452d5c70d5e7cb80a9870d06f2",
+      "after_sha256": "e3c22ccfc76affb9911b67437a2e9dc09692dc5c70143ebd386a0c9de4701fb1",
+      "change": "Restore selected layout order HEAD1127, COMMON_WNDCLASS1289/CLS1323, WND1388, DESKTOPINFO1599, ITEM1958/MENU1992 within existing client-view cohort."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "before_sha256": "098f82dd1d23128af6b39196399e6b8d053195277b321482425f6ccce59b460f",
+      "after_sha256": "2a914a39bd4364cefd9b41f92cc35e56c10a172d643ae69af715ed9311bfa915"
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "before_sha256": "0fc612472228db62a6bc9c72f27ddd48a838718cbefa569c445e1cfa29772a34",
+      "after_sha256": "fca0e4f6eebca70b3ddc12f90d4c73b7d04e14c5e8e37a7804300865a82fcb4c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "before_sha256": "43017662af7ff1aa112895f9a948e878976e701d4fdbfc4567033dc3aa6c8c46",
+      "after_sha256": "3af6d27e2baafd39ad745a92a5345a4797e73626875b7ce1d72cc2e8d6ea0af3"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_order_bindings.h",
+      "before_sha256": "a5337f6b2b8647356f28fc71ca3cd1edffb8dae9dbf4f89b37e1f25036587493",
+      "after_sha256": "dbac3bc207e97bb0f63fae99d62e541432d043d744c068bf00900128b8a80568"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "before_sha256": "714bdbbbde2d2f8244c5d7ab1a05fbe13518f2066dcf68d4d723fdc9f3fafa29",
+      "after_sha256": "f78aa669511b05c82c04f8b44bf04d2359465a803b418a456a1d264df95aba92",
+      "change": "Restore conversion49/190, excluded WCS-message owner326..425, MB-message442, large-string559/587 order. Move excluded FE_IME337 frame into original position between326 and351. Correct MB-message declaration anchor441 to pinned original442."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "before_sha256": "435d0563d50fcfaf5947e509cf3f76269e319cf3e98ab447ea3176029a11fca8",
+      "after_sha256": "db7291ed0d0c88752195e45e4bb7d00262cbcf21c8326924bd617ebc7872535f"
+    },
+    {
+      "path": "src/wow32-dll/include/control-drawing/precomp.h",
+      "before_sha256": "849b4d3a0cbe9b9be719c16713a24e1f0d1f0d5a47c7ec4251e54549686a9324",
+      "after_sha256": "bc55af762b3de18659eaf75e8d0d79aa3ccc7f77b4e82e8481134750dd19b5c9"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/edit-drawing/precomp.h",
+      "before_sha256": "9110c6a618cd0f7028fe42347c91ec66acb7d90e9223dc57e3c8c5ed1012f7c9",
+      "after_sha256": "8a9ff47c3a562d50377e1852df45e011463a13407148083955259cfe2ba9954a"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_edit_drawing_fixture.c",
+      "before_sha256": "3164f2c45b067bbb26d68c1a8bc294b025185238ca37aad192e9847b46badea3",
+      "after_sha256": "2e6cdc7d4f016b10f97155f74eccfe2187e0db685c1a08dc495ad24c83993cbb"
+    },
+    {
+      "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+      "before_sha256": "e74fb9518365734433b135f5d7ef357a4433a1509794cfb1226fda300e9c15e0",
+      "after_sha256": "b0083345a6a5fccc3932661fc77fb8457f0cd1b560a051b5674bbbfe089734ea"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+      "before_sha256": "11fe0dba2d5be5cfc7729f347426ba84c27e4e8ac4139095ead39623b29a225c",
+      "after_sha256": "31773a3b37610e95c6647f65164352ca8040a0898c8e975b79b296e223856dcb",
+      "change": "Fixture-only: enable UCRT inline formatting before includes. The inherited production _NO_CRT_STDIO_INLINE caused vsnprintf to select legacy CRT imports; adding legacy_stdio_definitions conflicts with real SoftPC printf. Both failed link attempts retained under build/t483-s4-p8; all four lifecycle fixtures passed after correction."
+    }
+  ],
+  "counter_review": {
+    "ntsend": "No intervening expansion or conditional uses of moved macro names; aliases expand at invocation, after header inclusion. Original class query consumes FIRSTCOPYLPSTRW/CLEANUPLPSTRW after full header. Forced capture TRUE in COPYLPSTRIDW untouched.",
+    "user": "Retain type-only, large-string and full-view guards. WND uses existing PCLS forward type and struct tagMENU pointers, not a by-value MENU; ITEM/MENU do not require earlier complete WND. CLS requires COMMON_WNDCLASS and PCALLPROCDATA, both kept immediately before it. All structure bytes and original anchors moved intact.",
+    "server": "Dedicated product default-messages TU selects retained tables and InitWindowMsgTable. Repository reference sweep finds only matching generator define; original literal-disabled and FE_IME frames retained. Selected source statements unchanged, pending actual build/fixture evidence.",
+    "taskman": "Restore Wake, Insert, Destroy, Sleep, UserYield, DirectedSchedule, DirectedYield, CurrentLock original order. Replace ambient gpsi uses with exactly their previous preprocessor expansion: ppi->shared for Destroy/Sleep/UserYield; ptiOld->ppi->shared for DirectedSchedule/DirectedYield. gpwtiFirst remains ppi->shared->pwtiFirst. Remove source rebindings and header macro; retain one existing shared event counter, no new lookup/state. Original #line anchors move with functions.",
+    "taskman_body_comparison": "Eight function bodies compare equal after expanding previous gpsi/gpwtiFirst bindings and removing comments, whitespace and #line directives. Runtime lifecycle and compiler checks remain pending.",
+    "chartran": "No function body or retained original condition is removed; detached frames retain their excluded #error and original logical anchors. Conversion routines have declarations in compat ABI header; no initializer or runtime dependency on source function order.",
+    "draw": "Only maintained product control-draw and supplemental push_owner compile this file; both previously defined selector. Remove matching source, facade/test guards and builder defines as one group. Original WINDOWS_ME frame untouched. Drawing fixture now always verifies both existing Frame and PushButton bodies."
+  },
+  "verification_pending": "Batch threshold reached: 12 distinct source/build/test files, including atomic drawing consumers. Cached build, drawing and scheduler fixtures, line review, Full and delivery pending.",
+  "modified_source_test_build_files": 12,
+  "net_source_test_build_lines": -23,
+  "line_review": {
+    "matching_statement_anchors": 247,
+    "observed_conflicts": 0,
+    "ntsend": "Header contributes macros rather than emitted declarations; both moved macro definitions byte-match pinned original, with original #line136/184. Actual class-client preprocess passed."
+  },
+  "verification_runs": {
+    "cached": "x86/x64 completed exit0",
+    "full": {
+      "session": 2186,
+      "status": "running"
+    },
+    "lifecycle": {
+      "session": 1761,
+      "status": "running"
+    },
+    "control_boundaries": {
+      "session": 72688,
+      "status": "running"
+    },
+    "preprocess": "completed exit0; six actual contexts"
+  },
+  "verification_update": {
+    "cached": "PASS x86/x64",
+    "full": "PASS selected Full gates, identical 11-file package; DOS4GW/NESticle explicit external-fixture SKIP",
+    "control_boundaries": "PASS",
+    "line_review": "PASS 247 matching statement anchors, zero conflicts",
+    "lifecycle": "PASS task-order, task-lifecycle, native-nested, class-client; actual production objects; bounded fixture formatting uses inline UCRT"
+  }
+}

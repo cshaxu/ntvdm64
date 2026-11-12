@@ -39,7 +39,6 @@ BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 #define UserSetBkColor SetBkColor
 VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
 #endif
-#ifdef WOW_ORIGINAL_BUTTON_DRAWING
 /* OPENNT-HOST-111: original arithmetic; native resources/scoped input only. */
 #define oemInfo (wow_edit_current->screen)
 #define SYSRGB(index) GetSysColor(COLOR_##index)
@@ -47,5 +46,4 @@ VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
 #define UserSetBkColor SetBkColor
 #define UserSetTextColor SetTextColor
 VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
-#endif
 #endif

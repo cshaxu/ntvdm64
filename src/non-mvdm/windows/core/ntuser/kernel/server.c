@@ -16,7 +16,6 @@
 #error Excluded unsupported FE_IME server global
 #endif
 
-#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
 #include "wow_default_message_bindings.h"
 #define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (bytes))
 
@@ -292,13 +291,11 @@ CONST WORD gawEditWndProc[] = {
     WM_RBUTTONDOWN,
     WM_RBUTTONUP,
     WM_FINALDESTROY,
-#endif /* WOW_ORIGINAL_DEFAULT_MESSAGES */
 #line 461
 #if 0
 #line 462
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
 #line 464
     WM_PAINT,
     WM_PASTE,
@@ -397,14 +394,12 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_DEVICECHANGE,
     WM_POWERBROADCAST,
     WM_MOUSEWHEEL,
-#endif /* WOW_ORIGINAL_DEFAULT_MESSAGES */
 #line 583
 #ifdef FE_IME
 #line 584
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #line 596
 #endif
-#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
 #line 597
     0
 };
@@ -449,7 +444,6 @@ VOID InitWindowMsgTable(
         (*ppbyte)[msg / 8] |= (BYTE)(1 << (msg & 7));
 }
 
-#endif
 #line 1257
 #ifndef PAGE_SIZE
 #line 1259

@@ -26,7 +26,6 @@ static void rectangle(unsigned index, int x, int y, int cx, int cy, HBRUSH brush
     CHECK(captured[index].BrClr.hbr == brush);
 }
 
-#ifdef WOW_ORIGINAL_BUTTON_DRAWING
 struct drawing_display drawing_display = {32};
 COLORREF drawing_colors[COLOR_MAX];
 static HBRUSH filled;
@@ -78,7 +77,6 @@ static void push_button_contract(void)
     DrawPushButton(NULL, &rect, DFCS_PUSHED, 0);
     CHECK(edge_kind == EDGE_SUNKEN && filled == ahbrSystem[COLOR_3DFACE]);
 }
-#endif
 int __cdecl main(void)
 {
     RECT input = {10, 20, 110, 90}, output = {0};
@@ -102,9 +100,7 @@ int __cdecl main(void)
     rectangle(2, 10, 87, 98, 3, ghbrGray);
     rectangle(3, 108, 23, 2, 67, ghbrGray);
     CHECK(EqualRect(&input, &output));
-#ifdef WOW_ORIGINAL_BUTTON_DRAWING
     push_button_contract();
-#endif
     printf("original_edit_drawing_failures=%u\n", failures);
     return failures != 0;
 }

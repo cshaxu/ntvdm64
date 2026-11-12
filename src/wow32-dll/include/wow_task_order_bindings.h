@@ -223,9 +223,6 @@ typedef HANDLE PKEVENT;
 #define RIPMSG0(level, text) ((void)0)
 #define DY_OLDYIELD ((DWORD)-1)
 #define PtiFromThreadId(id) ptiOld->host->find_thread(ptiOld, id)
-/* Original single gpsi domain, supplied by the sender's process view.
- * This does not create separate per-process counters or message queues. */
-#define gpsi (ptiOld->ppi->shared)
 /* The reached KeSetEvent return value is unused; native event ownership
  * and lifetime remain the complete scheduler binding's responsibility. */
 #define KeSetEvent(event, increment, wait) SetEvent(event)

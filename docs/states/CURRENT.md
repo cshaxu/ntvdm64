@@ -96,7 +96,16 @@ formal WOW graph and original-line review passed. The Full-tested eleven
 images were published and raw-hash verified at both destinations. See
 [P7 delivery](../../artifacts/mvdm-audit/t483-s4/batch7-delivery.json) and
 [source review](../../artifacts/mvdm-audit/t483-s4/batch7-source-review.json).
-Next: non-mvdm/windows/core/ntuser/inc/ntsend.h in register order.
+P8 resolves seven entries: total109/117; eight remain. Original macro, layout,
+function and exclusion-block positions restored; redundant selectors removed.
+Thirteen source/build/test files net -21 lines. Cached x86/x64, Full16,
+control-boundary cohort, four lifecycle fixtures and 247 line anchors passed.
+A test-only CRT formatting link conflict was corrected without changing production
+owners. DOS4GW/NESticle remains an explicit external-fixture skip. Eleven images
+were published and raw-hash verified at both destinations. See
+[P8 delivery](../../artifacts/mvdm-audit/t483-s4/batch8-delivery.json) and
+[source review](../../artifacts/mvdm-audit/t483-s4/batch8-source-review.json).
+Next: non-mvdm/windows/core/ntuser/rtl/drawtext.c in register order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure

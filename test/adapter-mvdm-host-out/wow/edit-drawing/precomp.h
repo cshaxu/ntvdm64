@@ -15,7 +15,6 @@ BOOL WINAPI drawing_fixture_poly(HDC, DWORD, PPOLYPATBLT, DWORD, DWORD);
 #define UserPolyPatBlt drawing_fixture_poly
 BOOL WINAPI DrawFrame(HDC, PRECT, int, int);
 BOOL APIENTRY CopyInflateRect(LPRECT, CONST RECT *, int, int);
-#ifdef WOW_ORIGINAL_BUTTON_DRAWING
 extern struct drawing_display { UINT BitCount; } drawing_display;
 extern COLORREF drawing_colors[COLOR_MAX];
 #define oemInfo drawing_display
@@ -30,5 +29,4 @@ COLORREF WINAPI drawing_fore(HDC, COLORREF);
 #define UserSetBkColor drawing_back
 #define UserSetTextColor drawing_fore
 VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
-#endif
 #endif

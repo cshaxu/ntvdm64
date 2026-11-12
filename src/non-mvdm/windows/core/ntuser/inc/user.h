@@ -290,69 +290,63 @@ typedef struct _PROCOBJHEAD {
     DWORD hTaskWow;
 } PROCOBJHEAD, *PPROCOBJHEAD;
 
-/* Original MENU/ITEM declarations, selected for the immutable USER16 client
- * view under OPENNT-HOST-063. No menu-server implementation is imported. */
-#line 1958
-typedef struct tagITEM {
-    UINT    fType;          // Item Type  Flags
-    UINT    fState;         // Item State Flags
-    UINT    wID;
-    struct tagMENU *spSubMenu;  /* Handle to a popup */
-    HANDLE  hbmpChecked;    /* Bitmap for an on  check */
-    HANDLE  hbmpUnchecked;   /* Bitmap for an off check */
-#line 1965
-#ifdef MEMPHIS_MENUS
-#line 1966
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
-#endif // MEMPHIS_MENUS
-#line 1968
-    HANDLE  hTypeData;     // if ownerdraw, MAKELONG(width, height)
-                            // if bitmap,    hBitmap
-                            // if separator, 0L
-                            // if string,    LPWSTR
-    DWORD   cch;                /* String: WCHAR count */
-    DWORD   dwItemData;
-    DWORD   xItem;
-    DWORD   yItem;
-    DWORD   cxItem;
+/* Original server-form CLS body selected by WOW client consumers.  The
+ * surrounding build supplies its historical forward declarations; this is
+ * deliberately opt-in so the type-only cleanup imports keep their existing
+ * narrow declaration surface. */
+#line 1289
+typedef struct tagCOMMON_WNDCLASS
+{
+    UINT        style;
+    WNDPROC_PWND lpfnWndProc;
+    int         cbclsExtra;
+    int         cbwndExtra;
+    HANDLE      hModule;
+    struct tagCURSOR *spicn;
+    struct tagCURSOR *spcur;
+    HBRUSH      hbrBackground;
+    LPWSTR      lpszMenuName;
+    LPSTR       lpszAnsiClassName;
+    struct tagCURSOR *spicnSm;
+} COMMON_WNDCLASS;
 
-    DWORD   cyItem;
-    DWORD   dxTab;
-    DWORD   ulX;                /* String: Underline start */
-    DWORD   ulWidth;            /* String: underline width */
-#line 1982
-#ifdef MEMPHIS_MENUS
-#line 1983
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
-#endif // MEMPHIS_MENUS
-#line 1987
-} ITEM, *PITEM, *LPITEM;
+/* Forward the original pointer type without importing CallProc state. */
+typedef struct _CALLPROCDATA *PCALLPROCDATA;
+#line 1323
+typedef struct tagCLS {
+    /* NOTE: The order of the following fields is assumed. */
+    struct tagCLS *pclsNext;
+    ATOM        atomClassName;
+    WORD        fnid;               // record window proc used by this hwnd
+                                    // access through GETFNID
+    PVOID       hheapDesktop;       /* Allocation source */
+    struct tagDESKTOP *rpdeskParent;/* Parent desktop */
+    struct tagDCE *pdce;            /* PDCE to DC associated with class */
+    int         cWndReferenceCount; /* The number of windows registered
+                                       with this class */
+    DWORD       flags;              /* internal class flags */
+    LPSTR       lpszClientAnsiMenuName;     /* string or resource ID */
+    LPWSTR      lpszClientUnicodeMenuName;  /* string or resource ID */
 
-#line 1992
-typedef struct tagMENU {
-    PROCOBJHEAD     head;
-    DWORD           fFlags;         /* Menu Flags */
-    int             iItem;          /* Contains the position of the selected
-                                       item in the menu. -1 if no selection */
-    int             iPopupMenuItem; /* Contains the position of the hierarchical
-                                       item menu popup */
-    UINT            cAlloced;       // Number of items that can fit in rgItems
-    UINT            cItems;         /* Number of items in rgItems */
+    /*
+     * These DWORDs are used by WOW only.  See wow32\walias.c for the WC
+     * structure definition.
+     */
+    DWORD       adwWOW[2];
+                                    /* LATER: No one uses dwExpWinVer. wow? */
+    DWORD       hTaskWow;           /* LATER: is wow using this? */
+    PCALLPROCDATA  spcpdFirst;      /* Pointer to first CallProcData element (or 0) */
+    struct tagCLS *pclsBase;        /* Pointer to base class */
+    struct tagCLS *pclsClone;       /* Pointer to clone class list */
 
-    DWORD           cxMenu;
-    DWORD           cyMenu;
-    struct tagWND *spwndNotify;     /* The owner hwnd of this menu */
-    PITEM           rgItems;        /* The list of items in this menu */
-    DWORD           dwContextHelpId;// Context help Id for the whole menu
-#line 2007
-#ifdef MEMPHIS_MENU_WATERMARKS
-#line 2008
-#error DIVERGENCE OPENNT-HOST-133: MEMPHIS_MENU_WATERMARKS branch is not selected; see mirror register.
-#endif // MEMPHIS_MENU_WATERMARKS
-#line 2010
+    PROC        lpfnWorker;         /* Client side worker proc */
 
-} MENU, *PMENU;
-
+    COMMON_WNDCLASS;
+    /*
+     * WARNING:
+     * CFOFFSET expects COMMON_WNDCLASS to be last fields in CLS
+     */
+} CLS, *LPCLS, **PPCLS;
 #line 1388
 typedef struct tagWND {          // wnd
     THROBJHEAD    head;
@@ -426,63 +420,69 @@ typedef struct tagDESKTOPINFO {
 
 } DESKTOPINFO, *PDESKTOPINFO;
 
-/* Original server-form CLS body selected by WOW client consumers.  The
- * surrounding build supplies its historical forward declarations; this is
- * deliberately opt-in so the type-only cleanup imports keep their existing
- * narrow declaration surface. */
-#line 1289
-typedef struct tagCOMMON_WNDCLASS
-{
-    UINT        style;
-    WNDPROC_PWND lpfnWndProc;
-    int         cbclsExtra;
-    int         cbwndExtra;
-    HANDLE      hModule;
-    struct tagCURSOR *spicn;
-    struct tagCURSOR *spcur;
-    HBRUSH      hbrBackground;
-    LPWSTR      lpszMenuName;
-    LPSTR       lpszAnsiClassName;
-    struct tagCURSOR *spicnSm;
-} COMMON_WNDCLASS;
+/* Original MENU/ITEM declarations, selected for the immutable USER16 client
+ * view under OPENNT-HOST-063. No menu-server implementation is imported. */
+#line 1958
+typedef struct tagITEM {
+    UINT    fType;          // Item Type  Flags
+    UINT    fState;         // Item State Flags
+    UINT    wID;
+    struct tagMENU *spSubMenu;  /* Handle to a popup */
+    HANDLE  hbmpChecked;    /* Bitmap for an on  check */
+    HANDLE  hbmpUnchecked;   /* Bitmap for an off check */
+#line 1965
+#ifdef MEMPHIS_MENUS
+#line 1966
+#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#endif // MEMPHIS_MENUS
+#line 1968
+    HANDLE  hTypeData;     // if ownerdraw, MAKELONG(width, height)
+                            // if bitmap,    hBitmap
+                            // if separator, 0L
+                            // if string,    LPWSTR
+    DWORD   cch;                /* String: WCHAR count */
+    DWORD   dwItemData;
+    DWORD   xItem;
+    DWORD   yItem;
+    DWORD   cxItem;
 
-/* Forward the original pointer type without importing CallProc state. */
-typedef struct _CALLPROCDATA *PCALLPROCDATA;
-#line 1323
-typedef struct tagCLS {
-    /* NOTE: The order of the following fields is assumed. */
-    struct tagCLS *pclsNext;
-    ATOM        atomClassName;
-    WORD        fnid;               // record window proc used by this hwnd
-                                    // access through GETFNID
-    PVOID       hheapDesktop;       /* Allocation source */
-    struct tagDESKTOP *rpdeskParent;/* Parent desktop */
-    struct tagDCE *pdce;            /* PDCE to DC associated with class */
-    int         cWndReferenceCount; /* The number of windows registered
-                                       with this class */
-    DWORD       flags;              /* internal class flags */
-    LPSTR       lpszClientAnsiMenuName;     /* string or resource ID */
-    LPWSTR      lpszClientUnicodeMenuName;  /* string or resource ID */
+    DWORD   cyItem;
+    DWORD   dxTab;
+    DWORD   ulX;                /* String: Underline start */
+    DWORD   ulWidth;            /* String: underline width */
+#line 1982
+#ifdef MEMPHIS_MENUS
+#line 1983
+#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#endif // MEMPHIS_MENUS
+#line 1987
+} ITEM, *PITEM, *LPITEM;
 
-    /*
-     * These DWORDs are used by WOW only.  See wow32\walias.c for the WC
-     * structure definition.
-     */
-    DWORD       adwWOW[2];
-                                    /* LATER: No one uses dwExpWinVer. wow? */
-    DWORD       hTaskWow;           /* LATER: is wow using this? */
-    PCALLPROCDATA  spcpdFirst;      /* Pointer to first CallProcData element (or 0) */
-    struct tagCLS *pclsBase;        /* Pointer to base class */
-    struct tagCLS *pclsClone;       /* Pointer to clone class list */
+#line 1992
+typedef struct tagMENU {
+    PROCOBJHEAD     head;
+    DWORD           fFlags;         /* Menu Flags */
+    int             iItem;          /* Contains the position of the selected
+                                       item in the menu. -1 if no selection */
+    int             iPopupMenuItem; /* Contains the position of the hierarchical
+                                       item menu popup */
+    UINT            cAlloced;       // Number of items that can fit in rgItems
+    UINT            cItems;         /* Number of items in rgItems */
 
-    PROC        lpfnWorker;         /* Client side worker proc */
+    DWORD           cxMenu;
+    DWORD           cyMenu;
+    struct tagWND *spwndNotify;     /* The owner hwnd of this menu */
+    PITEM           rgItems;        /* The list of items in this menu */
+    DWORD           dwContextHelpId;// Context help Id for the whole menu
+#line 2007
+#ifdef MEMPHIS_MENU_WATERMARKS
+#line 2008
+#error DIVERGENCE OPENNT-HOST-133: MEMPHIS_MENU_WATERMARKS branch is not selected; see mirror register.
+#endif // MEMPHIS_MENU_WATERMARKS
+#line 2010
 
-    COMMON_WNDCLASS;
-    /*
-     * WARNING:
-     * CFOFFSET expects COMMON_WNDCLASS to be last fields in CLS
-     */
-} CLS, *LPCLS, **PPCLS;
+} MENU, *PMENU;
+
 #endif
 
 /* DIVERGENCE(OPENNT-HOST-080): original dialog state declarations only.

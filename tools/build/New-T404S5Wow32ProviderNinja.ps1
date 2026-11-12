@@ -603,10 +603,10 @@ $ninja.Add('build ' + $defaultBordersObject + ': cc ' + (ConvertTo-NinjaPath (Jo
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-geometry')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_GEOMETRY')
 $objects.Add($defaultMessagesObject)
 $ninja.Add('build ' + $defaultMessagesObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/server.c')))
-$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_MESSAGES')
+$ninja.Add('  cflags = $cflags $control_user_flags')
 $objects.Add($controlDrawObject)
 $ninja.Add('build ' + $controlDrawObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/draw.c')))
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_DRAWING')
+$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags')
 foreach ($textPart in @('client', 'rtl')) {
     $textObject = 'obj/opennt-user/control-text-' + $textPart + '.obj'
     $objects.Add($textObject)
