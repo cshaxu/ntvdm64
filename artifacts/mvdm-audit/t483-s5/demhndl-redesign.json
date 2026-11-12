@@ -1,0 +1,127 @@
+{
+  "status": "Historical proposals superseded by owner-directed original restoration; no growth proposal implemented. See extended-error-restoration.json and p2-delivery.json.",
+  "path": "src\\mvdm-host\\dos\\dem\\demhndl.c",
+  "before": [
+    98,
+    41
+  ],
+  "candidate": [
+    103,
+    41
+  ],
+  "changes": [
+    "Set ERROR_INVALID_ADDRESS when extended-error record cannot be written (+3 mirror diff lines).",
+    "Preserve provider LastError across failed-read buffer release; reuse existing dwReadError, remove dead active-flag reset, restore original #line 213 (+2 mirror diff lines)."
+  ],
+  "example": "Stale ERROR_BROKEN_PIPE must not turn a guest metadata write failure into successful EOF. Read provider errors must survive lease disposal.",
+  "tests_required": [
+    "extended-error acquire/commit failures with stale BROKEN_PIPE",
+    "cleanup overwrites LastError after read failure",
+    "true BROKEN_PIPE retains successful EOF",
+    "provider MORE_DATA success keeps bytes and extended error"
+  ],
+  "net_diff_lines": 5,
+  "approval": "Not approved. Owner requested original direct-write reuse analysis before considering extra error handling.",
+  "source_review": "VrReadNamedPipe can report MORE_DATA as success; do not change ok or its success branch. demStoreExtendedError returns a Boolean without establishing LastError. readFailureExit classifies LastError after disposing the guest lease. Existing dwReadError is not consumed after failure classification and can carry the saved value.",
+  "counter_review": "Keep original BROKEN_PIPE -> AX0/CF0 behavior only when that is the genuine read failure. Reusing dwReadError avoids a new local; removing bufferLeaseActive=FALSE in the terminal return block is safe because neither successor returns to lease disposal. Do not move error policy into generic guest-memory helpers.",
+  "reuse_review": {
+    "original_registration": "msinit.asm passes DS:CX = EXTERR_LOCUS to SVC_DEMSETDTALOCATION; original demgset.c stores GetVDMAddr(DS,CX) in pExtendedError. Original demRead writes locus, WORD error, action, class; pointer field is not modified.",
+    "current_registration": "demgset.c stores numeric DS:CX in extended_error_location; demStoreExtendedError reads and commits sizeof(DEMEXTERR), including the untouched pointer field.",
+    "raw_pointer_boundary": "Current selected sas.h maps NtGetPtrToLinAddrByte to c_GetLinAdd. sim32.c resolves one linear address, c_GetLinAdd resolves only its first byte and on failed paging translation returns c_GetPhyAdd(0). Reacquiring that pointer alone proves neither complete-span mapping nor write access; retaining it across guest mappings is not equivalent to current-VM access.",
+    "original_reuse_candidate": "sas_store and sas_storew resolve current linear addresses through bios_write_byte/word. They retain physical RAM/device dispatch and may enter biosDoInst -> host_simulate on failed external translation. Investigate those original semantics instead of adding a second write implementation.",
+    "pending": "Prove DEM call-context compatibility with BIOS fault/reentry, cross-page word handling, unchanged unrelated pointer bytes, and mapping changes. No SAS implementation or retained pointer restoration has been made.",
+    "error_preservation_correction": "Release with commit=0 short-circuits the provider write; inspected chain reaches validation, free and memset, not a guest write callback. Actual LastError overwrite by this production path is not yet proved. Do not justify the two-line defensive addition using an artificial clobbering stub alone.",
+    "sources": [
+      "src/mvdm-guest/dos/v86/doskrnl/dos/msinit.asm:328",
+      "O:/repos.external/OpenNT/base/mvdm/dos/dem/demgset.c:565",
+      "src/mvdm-host/softpc.new/host/src/sim32.c:156",
+      "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:1262",
+      "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:1756",
+      "src/ntvdm-exe/session/guest_memory_lease.c:86"
+    ],
+    "focused_test": {
+      "path": "test/mvdm-host/ccpu_bios_access_test.c",
+      "status": "withdrawn before build: generic arbitrary cross-page/remap cases do not prove the actual registered DOSDATA mapping contract",
+      "cases": [
+        "WORD at linear 0x4fff maps to nonadjacent physical pages, leaving physically adjacent bytes untouched",
+        "after PTE replacement and architectural CR3 reload, next WORD writes new physical page and preserves old page"
+      ],
+      "scope": "Actual original SAS and page translation; no replacement provider. Does not prove DEM failure reentry or absence of observable partial writes."
+    },
+    "sas_contract_difference": "c_sas_storew splits page-crossing writes into high-byte then low-byte operations. Missing mappings invoke biosDoInst/host_simulate in VM mode; protected mode without registered selectors returns without writing. A void SAS call is not equivalent to a checked all-span commit. No direct restoration has been authorized by test existence.",
+    "registered_object_review": {
+      "registration": "DOS initialization, msinit.asm:328-333 passes DS:CX for DOSDATA EXTERR_LOCUS; project-wide source search found this registration and original demRead as sole pExtendedError writer. Not an arbitrary application buffer.",
+      "layout": "const2.asm places locus, WORD error, action, class consecutively inside SWAP_START..Swap_Always, followed by untouched EXTERRPT. srvcall.asm GET_DOS_DATA exports this swap interval to clients.",
+      "map_evidence": "Retained NTDOS.MAP gives DOSDATA 0794, EXTERR_LOCUS offset0325 and EXTERRPT032A. This is historical link-layout evidence, not proof of a particular installed image relocation/mapping.",
+      "correction": "Generic first-byte/cross-page/translation-failure observations are not proof of a defect in this fixed registered object. Original stable-pointer contract must be traced through the actual DOS-data mapping/swap lifecycle.",
+      "remaining_decisive_question": "Does the registered DOSDATA backing stay at the same host address while supported guests execute DEM named-pipe reads, or does the current CCPU map it to a different backing? Need an actual supported-path mapping witness or source-proven remapping; do not presume remapping from PSP behavior or arbitrary page-table tests."
+    },
+    "four_file_restore": {
+      "status": "design-only; not a build input or product edit",
+      "rows": [
+        {
+          "path": "src\\mvdm-host\\dos\\dem\\dem.h",
+          "current": [
+            43,
+            20
+          ],
+          "restoration_candidate": [
+            41,
+            19
+          ]
+        },
+        {
+          "path": "src\\mvdm-host\\dos\\dem\\demdata.c",
+          "current": [
+            14,
+            4
+          ],
+          "restoration_candidate": [
+            12,
+            3
+          ]
+        },
+        {
+          "path": "src\\mvdm-host\\dos\\dem\\demgset.c",
+          "current": [
+            51,
+            14
+          ],
+          "restoration_candidate": [
+            48,
+            13
+          ]
+        },
+        {
+          "path": "src\\mvdm-host\\dos\\dem\\demhndl.c",
+          "current": [
+            96,
+            41
+          ],
+          "restoration_candidate": [
+            77,
+            37
+          ]
+        }
+      ]
+    },
+    "historical_justification_review": "T280 S20 plan mandated numeric descriptors and verified syntax/layout and generic lease behavior; examined recovery record does not report an observed pExtendedError mapping failure. Historical policy/fixtures therefore do not prove this specific adaptation necessary."
+  },
+  "replacement": {
+    "before": [
+      98,
+      41
+    ],
+    "after": [
+      96,
+      41
+    ],
+    "net_diff_lines": -2,
+    "before_sha256": "39a6a9f155251f33a502b445323a5ba22f70507ce3ff5c10d58a479229dffad1",
+    "after_sha256": "a38897ed8f4bb5fdf115d94285ffdd21fe814d876f0d2bf2c7b32222c8103abc",
+    "scope": "D0124 only: replace duplicate lease choreography with existing copy_to_guest; preserve original four field assignments and exclude untouched pointer bytes. Set INVALID_ADDRESS in existing helper on copy failure. Restore original line28 after helper. No LastError save/restore change.",
+    "not_claimed": "Not original raw-pointer restoration; shared helper still uses bounded bounce allocation. No SAS fault/reentry policy change. Not built/tested/published.",
+    "counter_review": "Packed DEMEXTERR field prefix is5 bytes; FIELD_OFFSET excludes ExtendedErrorPointer. Every transmitted byte is initialized. Existing copy helper checks real-mode location, acquires and releases once; invalid access still fails. Original metadata write order is preserved within the local record; guest write remains one bounded commit as before.",
+    "status": "local unverified simplification retained as candidate only; it does not prove original pointer adaptation necessary"
+  }
+}

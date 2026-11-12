@@ -82,14 +82,14 @@ char    AppName[MAX_PATH + 13];
             (USHORT)getDS(), (USHORT)getDX()) ||
         !mvdm_guest_location_acquire(&cmdinfo_location, sizeof(CmdInfo),
             GUEST_MEMORY_ACCESS_READ, &command_lease)) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
     RtlMoveMemory(&CmdInfo, command_lease.bytes, sizeof(CmdInfo));
     if (!mvdm_guest_location_release(&command_lease, 0)) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
     pCMDInfo = &CmdInfo;
@@ -284,8 +284,8 @@ char    AppName[MAX_PATH + 13];
     /* DIVERGENCE MVDM-HOST-DIV-111: the original durable guest alias is
      * represented by a fresh session-scoped scalar lease. */
     if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
 
@@ -301,8 +301,8 @@ char    AppName[MAX_PATH + 13];
      * input for PIF expansion through a call-local copied lease. */
     mvdm_command_check_pif(&VDMInfo, FETCHWORD(pCMDInfo->EnvSeg), FETCHWORD(pCMDInfo->EnvSize));
     if (VDMInfo.ErrorCode == ERROR_INVALID_ADDRESS || VDMInfo.ErrorCode == ERROR_NOT_ENOUGH_MEMORY) {
-        setCF(1);
-        setAX((USHORT)VDMInfo.ErrorCode);
+        VdmExitCode = VDMInfo.ErrorCode;
+        TerminateVDM();
         return;
     }
 
@@ -353,14 +353,14 @@ char    AppName[MAX_PATH + 13];
                 FETCHWORD(pCMDInfo->ExecPathOff)) ||
             !mvdm_guest_location_acquire(&execpath_location, VDMInfo.AppLen,
                 GUEST_MEMORY_ACCESS_WRITE, &execpath_lease)) {
-            setCF(1);
-            setAX((USHORT)ERROR_INVALID_ADDRESS);
+            VdmExitCode = ERROR_INVALID_ADDRESS;
+            TerminateVDM();
             return;
         }
         RtlMoveMemory(execpath_lease.bytes, VDMInfo.AppName, VDMInfo.AppLen);
         if (!mvdm_guest_location_release(&execpath_lease, 1)) {
-            setCF(1);
-            setAX((USHORT)ERROR_INVALID_ADDRESS);
+            VdmExitCode = ERROR_INVALID_ADDRESS;
+            TerminateVDM();
             return;
         }
     }
@@ -378,8 +378,8 @@ char    AppName[MAX_PATH + 13];
         !mvdm_guest_location_acquire(&cmdline_location,
             FETCHWORD(pCMDInfo->CmdLineSize), GUEST_MEMORY_ACCESS_WRITE,
             &command_lease)) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
     lpszCmd = (LPSTR)command_lease.bytes;
@@ -425,8 +425,8 @@ char    AppName[MAX_PATH + 13];
     lpszCmd[1] = (CHAR)(cb + pDst - lpszCmd - 2);
 
     if (!mvdm_guest_location_release(&command_lease, 1)) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
 
@@ -439,8 +439,8 @@ char    AppName[MAX_PATH + 13];
 	    !mvdm_guest_location_copy_to_guest(&environment_location,
 		(uint8_t const *)cmdVDMEnvBlk.lpszzEnv,
 		cmdVDMEnvBlk.cchEnv)) {
-	    setCF(1);
-	    setAX((USHORT)ERROR_INVALID_ADDRESS);
+	    VdmExitCode = ERROR_INVALID_ADDRESS;
+	    TerminateVDM();
 	    return;
 	}
 #line 340
@@ -466,14 +466,14 @@ char    AppName[MAX_PATH + 13];
 
     // Tell DOS that it has to invalidate the CDSs
     if (!mvdm_command_guest_state_set_to_sync(UINT8_C(0xff))) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
     if (!mvdm_guest_location_copy_to_guest(&cmdinfo_location,
             (uint8_t const *)&CmdInfo, sizeof(CmdInfo))) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
 #line 362
@@ -662,8 +662,8 @@ LPSTR    pszCmdLine;
     /* DIVERGENCE MVDM-HOST-DIV-111: do not retain the SCS binary byte as a
      * process pointer between this command BOP and its guest consumer. */
     if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
 #line 506
@@ -672,8 +672,8 @@ LPSTR    pszCmdLine;
 
     // Tell DOS that it has to invalidate the CDSs
     if (!mvdm_command_guest_state_set_to_sync(UINT8_C(0xff))) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        VdmExitCode = ERROR_INVALID_ADDRESS;
+        TerminateVDM();
         return;
     }
 #line 511

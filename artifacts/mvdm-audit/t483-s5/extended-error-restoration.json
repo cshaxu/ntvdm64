@@ -1,0 +1,50 @@
+{
+  "status": "Original chain restored; cached x86/x64, focused command and Full16 verified; published both destinations. See p2-delivery.json for limits.",
+  "scope": "Four-file pExtendedError chain only; no guest edits, no DTA/PDB/SFT changes. Remove copied-record helper and its introduced failure path. Prior five-line growth proposal not implemented.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "before_sha256": "4d4644c0ec8155197f8bac143a7b2569487dcc4a644db5a3496149647a878089",
+      "after_sha256": "0456b0596fb4f98317c0f250af91f37cd9a69551f47b559153be9f36a61fc89d",
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "after_added_removed": [
+        41,
+        19
+      ],
+      "restored_lines_match_original": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "before_sha256": "37ec01d26791e6908c72dbd2d1ad82b9d499d3e438012737c2d2913b1f9d0fd5",
+      "after_sha256": "5b2fd3c7b176bc1454024f8df734145be547fa63d843e1b7d79d5b401daf2398",
+      "original_sha256": "366a350bc31579dc48764b81d28b26f4d2a5c69c66ec42d742ddaaf739e6a566",
+      "after_added_removed": [
+        12,
+        3
+      ],
+      "restored_lines_match_original": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "before_sha256": "0794f9b7528535198f0feb6e12abc2cf2cbbd30eed285b7703b25184d99d420b",
+      "after_sha256": "3b1f3a6d915ba02dfc1d0d19c7e92121ad756c1c9830aff806f6626951c9c06a",
+      "original_sha256": "19c5999308a479cc9c0fcb30d23e8301d9a835408417aa965b85523dfb8a1653",
+      "after_added_removed": [
+        48,
+        13
+      ],
+      "restored_lines_match_original": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "before_sha256": "a38897ed8f4bb5fdf115d94285ffdd21fe814d876f0d2bf2c7b32222c8103abc",
+      "after_sha256": "896d7c3539a9c52cb984d394dc20f88a30fbe90e96f15bfd1546312639c6a02e",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "after_added_removed": [
+        76,
+        37
+      ],
+      "restored_lines_match_original": true
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "status": "P2 built, regression verified and published; dedicated injected-failure verification pending, not counted complete",
+  "before_added_removed": [
+    256,
+    92
+  ],
+  "after_added_removed": [
+    256,
+    92
+  ],
+  "net_diff_lines": 0,
+  "changes": [
+    {
+      "line": 85,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 91,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 287,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 304,
+      "error": "VDMInfo.ErrorCode",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 356,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 362,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 381,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 428,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 442,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 469,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 475,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 665,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    },
+    {
+      "line": 675,
+      "error": "ERROR_INVALID_ADDRESS",
+      "individual_net_diff_lines": 0
+    }
+  ],
+  "line_count_preserved": true,
+  "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+  "individual_changes_checked": true,
+  "path": "src/mvdm-host/dos/command/cmdmisc.c",
+  "baseline_commit": "50dfbb7291eaac727771b8c896e4a5c3c8be86f3",
+  "before_sha256": "3cfe72eaa152c62084e00314c35e9b3cc87f47f24496ee3b7e77a37570b2f2e4",
+  "after_sha256": "f9112eb47d5dd256e311ca0daa0312b3dd4e7f078b8ad5260f4e09840e7d5bed",
+  "initial_review": {
+    "defect": "COMMAND SVC_CMDGETNEXTCMD treats CF=1/AX as required environment bytes, never a Win32 error. Returning 487 or 8 makes COMMAND resize and retry after a possible consumed request.",
+    "repair": "Use existing VdmExitCode / TerminateVDM terminal route at the 13 invalid mapping/PIF failure returns in cmdGetNextCmd and GetWowKernelCmdLine. Preserve genuine environment-size negotiations and other SVC contracts.",
+    "sources": [
+      "src/mvdm-guest/dos/v86/cmd/command/tcode.asm:557",
+      "src/mvdm-host/dos/command/cmdmisc.c",
+      "src/mvdm-host/softpc.new/host/src/nt_reset.c:313",
+      "src/ntvdm-exe/win32/worker_lifecycle.c:110"
+    ]
+  },
+  "counter_review": {
+    "lifecycle": "TerminateVDM calls terminate; host_applClose and host_terminate authorize through NTSRV before host resources are destroyed. No private shutdown protocol or timeout added.",
+    "new_redirection": "cmdCheckStandardHandles allocates a zeroed record and copies handles; pipe threads/tempfiles are not created until later cmdGetStdHandle after returning to guest. No new cleanup state/helper is necessary for this unreturned request.",
+    "early_failure_boundary": "The two initial CMDINFO failures can precede previous-request redirection retirement. Ordinary process exit closes handles but does NOT prove deletion of old pipe temporary files or output draining. Do not claim leak-free graceful cleanup of corrupted/unreadable previous CMDINFO. Verify this terminal boundary rather than inventing a guest pointer recovery.",
+    "wow": "Both changed WOW failures occur after guest environment copy and matching environment frees. Size retry and its >=32KiB terminal guard remain unchanged.",
+    "line_mapping": "Same physical line count, identical #line directives; each repaired three-line return retains three lines.",
+    "no_growth": "Each of 13 changes independently has zero original-relative added-plus-removed diff delta; no cross-location offsets."
+  },
+  "verification_pending": [
+    "Actual cmdmisc fault tests for pre-delivery and post-delivery failures, PIF errors 487/8, both WOW state-write failures; ensure terminal route rather than guest resize/retry.",
+    "Previous-request redirection cleanup at the two initial CMDINFO capture failures."
+  ]
+}

@@ -147,9 +147,8 @@ extern USHORT nDrives;
 extern mvdm_guest_location current_pdb_location;
 
 extern mvdm_guest_location sft_head_location;
-/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer is retained as a
- * numeric guest descriptor; every use must acquire a fresh bounded lease. */
-extern mvdm_guest_location extended_error_location;
+#line 131
+extern PDEMEXTERR pExtendedError;
 
 
 #line 134

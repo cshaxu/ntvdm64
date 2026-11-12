@@ -34,23 +34,28 @@ The previously suggested compat-first S2 is superseded.
 
 ## S5 Progress
 
-S5 restarts after the owner-directed [P1 checkpoint](../../artifacts/mvdm-audit/t483-s5/checkpoint-delivery.json).
-Four of 207 entries are delivered; 203 remain in frozen file/line order.
-Nineteen net-growing candidate entries were withdrawn, not completed.
-P1 fixes command-capture capacity, original CR syntax and error propagation.
-Its sole mirror edit keeps original-relative diff at 211 added/79 removed lines;
-source line count and directives are unchanged. Cached x86/x64, 140 capture
-assertions, command launch and all 16 Full gates passed. The coherent eleven-image
-package is published and raw-hash verified at both configured destinations.
-DOS4GW/NESticle remains explicitly skipped because its external fixtures are absent.
-Every net-positive mirror diff requires approval BEFORE implementation, per repair
-without offsets from independent reductions; source net LOC is not this metric.
-The [ledger](../../artifacts/mvdm-audit/t483-s5/execution.json) and
-[growth review](../../artifacts/mvdm-audit/t483-s5/diff-growth-review.json)
-retain withdrawn evidence. Next: redesign the cmdmisc group before any net-growing
-implementation. S6 remains held; original guest and winnt.zip unchanged.
+S5 P2 is built, regression-verified and published. See the
+[P2 receipt](../../artifacts/mvdm-audit/t483-s5/p2-delivery.json).
+Six of207 assigned entries are complete;201 remain in frozen file/line order.
+P1 completed D0041/D0042/D0043/D0048. P2 completes D0124/D0127 by
+restoring the original pExtendedError declaration, definition, DS:CX
+registration and four field writes across four mirror files. This removes
+36 original-relative diff lines; DTA/PDB/SFT adaptations remain unchanged.
+Restored statements exactly match original source and logical line numbers.
 
-## Latest S Closure
+The thirteen cmdmisc terminal-error repairs are also delivered, with zero
+original-relative diff growth and unchanged physical lines/#line directives.
+They are not counted complete: dedicated fault injection and previous-request
+redirection cleanup verification remain pending in the
+[review](../../artifacts/mvdm-audit/t483-s5/cmdmisc-redesign.json).
+Cached x86/x64 build,140 command-capture assertions,65 launch assertions and
+all16 Full gates passed. Full is not exhaustive DOSDATA remapping proof.
+DOS4GW/NESticle remains skipped because external fixtures are absent.
+Nineteen earlier growing candidates remain withdrawn. The rejected five-line
+extended-error proposal was not implemented; its historical
+[review](../../artifacts/mvdm-audit/t483-s5/demhndl-redesign.json) is superseded.
+Every positive original-relative mirror diff needs prior approval per repair.
+S6 remains held; original guest and winnt.zip are unchanged.
 
 [S4 closure](../etc/evidence/m0-t483-s4-closure.md): 117/117 delivered in P1-P9.
 The final eight restore source positions and simplify selectors/declarations.
@@ -60,9 +65,9 @@ class-lifetime, original-line review and Full16 passed. See
 
 ## Current Technical Baseline
 
-Package `d330765b-4ccc-457c-9001-5170bec2cf78`, complete 11 images at
-assets/release and O:/winnt/system32, raw-hash identical to the Full-tested S5 P1
-candidate and manifest. See the [checkpoint](../../artifacts/mvdm-audit/t483-s5/checkpoint-delivery.json).
+Package `36dc35b7-1e69-4617-b1ed-d2662418a07c`, complete 11 images at
+assets/release and O:/winnt/system32, raw-hash identical to the Full-tested S5 P2
+candidate and manifest. See the [P2 receipt](../../artifacts/mvdm-audit/t483-s5/p2-delivery.json).
 DOS4GW/NESticle remains explicitly skipped because its external fixture was not
 supplied. No guest or winnt.zip change.
 

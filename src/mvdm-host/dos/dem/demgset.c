@@ -572,10 +572,8 @@ VOID demSetDTALocation (VOID)
      * location and is read afresh by every DEM/SoftPC consumer. */
     mvdm_guest_location_set_real_mode(&current_pdb_location, getDS(),
         getDX());
-    /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:CX numerically instead of a
-     * native pointer returned by GetVDMAddr. */
-    mvdm_guest_location_set_real_mode(&extended_error_location, getDS(),
-        getCX());
+#line 565
+    pExtendedError = (PDEMEXTERR) GetVDMAddr(getDS(),getCX());
 #line 566
 
     /* DIVERGENCE MVDM-HOST-DIV-892: failed registration invalidates the prior location. */

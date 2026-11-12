@@ -1,0 +1,195 @@
+{
+  "part": "T483 S5 P2",
+  "status": "verified and published; commit identified by containing P2 commit",
+  "baseline": "50dfbb7291eaac727771b8c896e4a5c3c8be86f3",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "0456b0596fb4f98317c0f250af91f37cd9a69551f47b559153be9f36a61fc89d"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "sha256": "5b2fd3c7b176bc1454024f8df734145be547fa63d843e1b7d79d5b401daf2398"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "3b1f3a6d915ba02dfc1d0d19c7e92121ad756c1c9830aff806f6626951c9c06a"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sha256": "896d7c3539a9c52cb984d394dc20f88a30fbe90e96f15bfd1546312639c6a02e"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "f9112eb47d5dd256e311ca0daa0312b3dd4e7f078b8ad5260f4e09840e7d5bed"
+    }
+  ],
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "original_logical_lines": [
+        131
+      ],
+      "exact_original_lines": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "original_logical_lines": [
+        24
+      ],
+      "exact_original_lines": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "original_logical_lines": [
+        565
+      ],
+      "exact_original_lines": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "original_logical_lines": [
+        171,
+        172,
+        173,
+        174
+      ],
+      "exact_original_lines": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "equal_physical_line_count": true,
+      "unchanged_line_directives": true
+    }
+  ],
+  "mirror_diff_delta": -36,
+  "verification_root": "build/t483-s5-p2",
+  "limitations": [
+    "Full does not prove fixed DOSDATA mapping stability under every remapping scenario.",
+    "cmdmisc invalid-address fault injection and prior-request redirection cleanup remain unverified; these entries are not counted complete.",
+    "DOS4GW/NESticle external fixtures absent; WOW startup does not claim gameplay.",
+    "No guest or winnt.zip modifications; S6 remains HOLD."
+  ],
+  "publication": {
+    "status": "published",
+    "package": "36dc35b7-1e69-4617-b1ed-d2662418a07c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1334,
+      "CleanupMs": 567,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 239,
+      "CleanupMs": 517,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 67329,
+      "CleanupMs": 518,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 46242,
+      "CleanupMs": 543,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 42496,
+      "CleanupMs": 523,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14378,
+      "CleanupMs": 558,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10275,
+      "CleanupMs": 562,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 66629,
+      "CleanupMs": 529,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12306,
+      "CleanupMs": 491,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28406,
+      "CleanupMs": 436,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30383,
+      "CleanupMs": 481,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4091,
+      "CleanupMs": 504,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7734,
+      "CleanupMs": 507,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9824,
+      "CleanupMs": 453,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4361,
+      "CleanupMs": 473,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6330,
+      "CleanupMs": 476,
+      "Passed": true
+    }
+  ],
+  "focused_assertions": {
+    "capture": 140,
+    "launch": 65
+  },
+  "completed_assigned_entries": [
+    "T483-D0124",
+    "T483-D0127"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed",
+    "note": "Three CURRENT punctuation encoding defects corrected before final governance pass; no product change."
+  }
+}

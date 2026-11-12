@@ -29,6 +29,5 @@ mvdm_guest_location sft_head_location;
 // address of extended error information in DOS data segment
 //
 
-/* DIVERGENCE MVDM-HOST-DIV-005: do not retain a native GetVDMAddr result
- * beyond the source callback.  This remains the original DS:CX location. */
-mvdm_guest_location extended_error_location;
+#line 24
+PDEMEXTERR pExtendedError;
