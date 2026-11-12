@@ -242,11 +242,6 @@ typedef union
 
 #line 225
 LOCAL IU16 cpu_hw_interrupt_number;
-#ifdef NTVDM
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
-/* DIVERGENCE: MVDM-HOST-DIV-325. Coarse worker diagnostics remain available;
- * per-instruction attribution is selected only by the diagnostic build. */
-#endif
 #line 226
 #if defined(SFELLOW)
 #line 227
@@ -906,31 +901,6 @@ DO_INST:
       Decode and Action instruction.
     */
 DECODE:
-
-/* DIVERGENCE: MVDM-HOST-DIV-325. Do not charge normal guest execution for
- * project trace observers, even when their runtime trace paths are unset. */
-#if defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)
-   mvdm_softpc_report_nt_transition(getCS(), getEIP(), getEFLAGS(),
-      getSS(), getESP());
-   if (getCS() == 0x00c7u && getEIP() >= 0x4f6au &&
-       getEIP() < 0x4f88u)
-      mvdm_softpc_report_wow_allocsel_instruction(getCS(), getEIP(),
-         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());
-   if ((getCS() == 0x00c7u && getEIP() >= 0x4f88u &&
-       getEIP() < 0x4fa4u) ||
-       (getCS() == 0x01c7u && getEIP() >= 0x3947u &&
-       getEIP() < 0x3a60u))
-      mvdm_softpc_report_wow_setdescriptor_instruction(getCS(), getEIP(),
-         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());
-   if (getCS() == 0x021fu && (getEIP() == 0x2c26u ||
-       getEIP() == 0x2d3du))
-      mvdm_softpc_report_wow_getsel_instruction(getCS(), getEIP(), getAX(),
-         getCX(), getSI(), getDS(), getEFLAGS());
-   if (getCS() == 0x021fu && getEIP() >= 0x3482u &&
-       getEIP() < 0x3492u)
-      mvdm_softpc_report_wow_longptradd_instruction(getCS(), getEIP(),
-         getAX(), getBX(), getCX(), getDX(), getSS(), getESP());
-#endif
 
 #line 827
    opcode = GET_INST_BYTE(p);	/* get next byte */

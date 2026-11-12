@@ -30,7 +30,6 @@ CALL CPU Functions.
 #include <c_page.h>
 #include <ccpusas4.h>
 #include <sas.h>
-#include "mvdm_softpc_termination.h"
 #include "mvdm_softpc_fast_bop.h"
 
 IMPORT ISM32 in_C;
@@ -121,17 +120,6 @@ CALLF
       in_C = 0;
       return;
       }
-
-   /* DIVERGENCE(MVDM-HOST-DIV-305): default-off frontier witness for the
-    * original indirect WndProc call.  The adapter sees only the decoded
-    * target and cannot affect validation, stack handling or execution. */
-   mvdm_softpc_report_wow_far_call_attempt((unsigned short)new_cs,
-                                           (unsigned long)new_ip,
-                                           (unsigned short)GET_CS_SELECTOR(),
-                                           (unsigned long)GET_EIP(),
-                                           (unsigned short)GET_LDT_SELECTOR(),
-                                           (unsigned long)GET_LDT_BASE(),
-                                           (unsigned long)GET_LDT_LIMIT());
 
 #line 81
    if ( GET_PE() == 0 || GET_VM() == 1 )

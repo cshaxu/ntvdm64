@@ -278,149 +278,170 @@
     {
       "id": "T483-D0412",
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
-      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0413",
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
-      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0414",
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
-      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0415",
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete termination-report header, setup_int15_function/setup_int15_argument locals and both report calls/comments together. Reconcile added line directives against original after removal. Keep shared reporter until other callsites independently reviewed.",
-      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions."
+      "verification": "Compare selected cassette_io token/control-flow projection to original after diagnostic deletion; existing INT15/XMS/event-wait regressions. Diagnostic-only trace expectations must be adjusted without weakening product assertions.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0433",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove current 910-935 block and sole-use 245-249 diagnostic include/comment together. Reconcile selector/provider references before removing shared definitions.",
-      "verification": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions."
+      "verification": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0442",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove current 910-935 block and sole-use 245-249 diagnostic include/comment together. Reconcile selector/provider references before removing shared definitions.",
-      "verification": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions."
+      "verification": "Product preprocessed-token/image comparison; preserve actual CPU tests; update diagnostic-only harness assumptions.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0485",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete report hook/comment and sole-use termination include as one change; remove its provider/declaration if no other caller remains and adjust observer-only test, retaining normal segment coverage.",
-      "verification": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion."
+      "verification": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0486",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete report hook/comment and sole-use termination include as one change; remove its provider/declaration if no other caller remains and adjust observer-only test, retaining normal segment coverage.",
-      "verification": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion."
+      "verification": "Selected build/preprocessed behavior excluding observer; existing segment/load tests and removal of observer-only assertion.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0506",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove validation report and sole-use termination header together; reconcile shared provider/declaration and observation-only probe references. Preserve original switch and descriptor checks.",
-      "verification": "Product token/image comparison excluding diagnostics and original far-call validation tests."
+      "verification": "Product token/image comparison excluding diagnostics and original far-call validation tests.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0508",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove validation report and sole-use termination header together; reconcile shared provider/declaration and observation-only probe references. Preserve original switch and descriptor checks.",
-      "verification": "Product token/image comparison excluding diagnostics and original far-call validation tests."
+      "verification": "Product token/image comparison excluding diagnostics and original far-call validation tests.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0512",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete attempt report and sole-use termination header; reconcile observer provider/test separately and preserve original CALLF control flow.",
-      "verification": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof."
+      "verification": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0516",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete attempt report and sole-use termination header; reconcile observer provider/test separately and preserve original CALLF control flow.",
-      "verification": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof."
+      "verification": "Existing CALLF trace-equivalence case plus selected product build; diagnostics disabled/enabled comparison is not full far-call proof.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0521",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove header together with all five trace sites, without changing stores.",
-      "verification": "Compare executable store behavior and run affected memory fixtures."
+      "verification": "Compare executable store behavior and run affected memory fixtures.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0523",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
-      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0524",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
-      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0525",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
-      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0526",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
-      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0527",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Delete conditional reporting and resulting unused include; preserve write order and selected error branches.",
-      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores."
+      "verification": "Affected memory-write fixtures, compare removed calls versus unchanged stores.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0560",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove both report calls, comments and header as one change; keep original validation and CR0 transition. Remove provider only after auditing remaining callers.",
-      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear."
+      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0561",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove both report calls, comments and header as one change; keep original validation and CR0 transition. Remove provider only after auditing remaining callers.",
-      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear."
+      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0562",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove both report calls, comments and header as one change; keep original validation and CR0 transition. Remove provider only after auditing remaining callers.",
-      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear."
+      "verification": "Mode transition regression with unchanged CR0 and faults; ensure diagnostics-only dependencies disappear.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0564",
@@ -880,8 +901,8 @@
   ],
   "counts": {
     "assigned": 120,
-    "delivered": 34,
-    "remaining_unprocessed": 86
+    "delivered": 55,
+    "remaining_unprocessed": 65
   },
   "coupled_cleanup": "Shared termination diagnostic providers are removed once remaining S3 callers have been resolved; required before S3 closure."
 }

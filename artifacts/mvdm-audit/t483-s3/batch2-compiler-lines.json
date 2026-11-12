@@ -1,0 +1,3498 @@
+{
+  "method": "Actual selected MSVC /P output: identical original statement spelling (whitespace ignored) at exact original logical positions. Macro-expanded statements not counted; not an all-config equivalence claim.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "current_sha256": "f1be73cd49cfed2100d716815068467d98b68515687147c4de2eddf65c6c0f46",
+      "actual_preprocess_sha256": "c5d188bda70a0788bbbb38e5840b7cd5fe45ac935fe2ff43b7824af6bc9c98a7",
+      "verified_original_statement_anchors": 7,
+      "anchors": [
+        {
+          "original_line": 66,
+          "original": "wait_event_handle = (q_ev_handle)0;",
+          "actual": "wait_event_handle = (q_ev_handle)0;"
+        },
+        {
+          "original_line": 69,
+          "original": "void cassette_io()",
+          "actual": "void cassette_io()"
+        },
+        {
+          "original_line": 141,
+          "original": "target = gdt + 0x18;",
+          "actual": "target = gdt + 0x18;"
+        },
+        {
+          "original_line": 158,
+          "original": "retrieve_descr_fields(&source_AR, &source_base, &source_limit, source);",
+          "actual": "retrieve_descr_fields(&source_AR, &source_base, &source_limit, source);"
+        },
+        {
+          "original_line": 161,
+          "original": "retrieve_descr_fields(&target_AR, &target_base, &target_limit, target);",
+          "actual": "retrieve_descr_fields(&target_AR, &target_base, &target_limit, target);"
+        },
+        {
+          "original_line": 184,
+          "original": "xmsDisableA20Wrapping();",
+          "actual": "xmsDisableA20Wrapping();"
+        },
+        {
+          "original_line": 186,
+          "original": "xmsEnableA20Wrapping();",
+          "actual": "xmsEnableA20Wrapping();"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "current_sha256": "179ada9a42d69e49c45056922e0c7ce8fda3fe8929df4511d6baa600e47b0e8e",
+      "actual_preprocess_sha256": "79479f0322a97d25dfecbb0b12228acfe76b2c7736130d50046eddd33244bf74",
+      "verified_original_statement_anchors": 396,
+      "anchors": [
+        {
+          "original_line": 178,
+          "original": "IU8 npxbuff[108];",
+          "actual": "IU8 npxbuff[108];"
+        },
+        {
+          "original_line": 179,
+          "original": "} OPERAND;",
+          "actual": "} OPERAND;"
+        },
+        {
+          "original_line": 234,
+          "original": "extern IBOOL NpxIntrNeeded;",
+          "actual": "extern IBOOL NpxIntrNeeded;"
+        },
+        {
+          "original_line": 271,
+          "original": "ISM32 in_C;",
+          "actual": "ISM32 in_C;"
+        },
+        {
+          "original_line": 658,
+          "original": "force_yoda();",
+          "actual": "force_yoda();"
+        },
+        {
+          "original_line": 674,
+          "original": "if (first)",
+          "actual": "if (first)"
+        },
+        {
+          "original_line": 676,
+          "original": "char *env = getenv(\"NOTE_486_INSTRUCTION\");",
+          "actual": "char *env = getenv(\"NOTE_486_INSTRUCTION\");"
+        },
+        {
+          "original_line": 682,
+          "original": "if (strcmp(env, \"YODA\") == 0)",
+          "actual": "if (strcmp(env, \"YODA\") == 0)"
+        },
+        {
+          "original_line": 687,
+          "original": "if (strcmp(env, \"FALSE\") == 0)",
+          "actual": "if (strcmp(env, \"FALSE\") == 0)"
+        },
+        {
+          "original_line": 689,
+          "original": "if (strcmp(env, \"TRUE\") == 0)",
+          "actual": "if (strcmp(env, \"TRUE\") == 0)"
+        },
+        {
+          "original_line": 694,
+          "original": "if (want_trace)",
+          "actual": "if (want_trace)"
+        },
+        {
+          "original_line": 696,
+          "original": "if (want_yoda)",
+          "actual": "if (want_yoda)"
+        },
+        {
+          "original_line": 697,
+          "original": "force_yoda();",
+          "actual": "force_yoda();"
+        },
+        {
+          "original_line": 787,
+          "original": "goto NEXT_INST;",
+          "actual": "goto NEXT_INST;"
+        },
+        {
+          "original_line": 796,
+          "original": "if ( do_condition_checks )",
+          "actual": "if ( do_condition_checks )"
+        },
+        {
+          "original_line": 798,
+          "original": "check_I();",
+          "actual": "check_I();"
+        },
+        {
+          "original_line": 812,
+          "original": "p_start = p;",
+          "actual": "p_start = p;"
+        },
+        {
+          "original_line": 833,
+          "original": "switch ( opcode )",
+          "actual": "switch ( opcode )"
+        },
+        {
+          "original_line": 836,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 844,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 849,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 859,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 868,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 874,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 882,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 887,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 897,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 906,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 912,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 917,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 922,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 929,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 936,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 947,
+          "original": "PUSH_SR(ops[0].sng);",
+          "actual": "PUSH_SR(ops[0].sng);"
+        },
+        {
+          "original_line": 954,
+          "original": "POP_SR(ops[0].sng);",
+          "actual": "POP_SR(ops[0].sng);"
+        },
+        {
+          "original_line": 960,
+          "original": "goto NEXT_INST;",
+          "actual": "goto NEXT_INST;"
+        },
+        {
+          "original_line": 975,
+          "original": "if ( opcode >= 0xd0 )",
+          "actual": "if ( opcode >= 0xd0 )"
+        },
+        {
+          "original_line": 978,
+          "original": "switch ( opcode )",
+          "actual": "switch ( opcode )"
+        },
+        {
+          "original_line": 987,
+          "original": "instp32 = SLDT;",
+          "actual": "instp32 = SLDT;"
+        },
+        {
+          "original_line": 991,
+          "original": "(*instp32)(&ops[0].sng);",
+          "actual": "(*instp32)(&ops[0].sng);"
+        },
+        {
+          "original_line": 1000,
+          "original": "inst32 = LLDT;",
+          "actual": "inst32 = LLDT;"
+        },
+        {
+          "original_line": 1005,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 1011,
+          "original": "inst32 = LTR;",
+          "actual": "inst32 = LTR;"
+        },
+        {
+          "original_line": 1012,
+          "original": "goto TYPE0F00_2;",
+          "actual": "goto TYPE0F00_2;"
+        },
+        {
+          "original_line": 1029,
+          "original": "instp32  = SGDT16;",
+          "actual": "instp32  = SGDT16;"
+        },
+        {
+          "original_line": 1030,
+          "original": "inst2p32 = SGDT32;",
+          "actual": "inst2p32 = SGDT32;"
+        },
+        {
+          "original_line": 1039,
+          "original": "(*instp32)(ops[0].mlt);",
+          "actual": "(*instp32)(ops[0].mlt);"
+        },
+        {
+          "original_line": 1043,
+          "original": "(*inst2p32)(ops[0].mlt);",
+          "actual": "(*inst2p32)(ops[0].mlt);"
+        },
+        {
+          "original_line": 1049,
+          "original": "instp32  = SIDT16;",
+          "actual": "instp32  = SIDT16;"
+        },
+        {
+          "original_line": 1050,
+          "original": "inst2p32 = SIDT32;",
+          "actual": "inst2p32 = SIDT32;"
+        },
+        {
+          "original_line": 1051,
+          "original": "goto TYPE0F01_0;",
+          "actual": "goto TYPE0F01_0;"
+        },
+        {
+          "original_line": 1054,
+          "original": "instp32  = LGDT16;",
+          "actual": "instp32  = LGDT16;"
+        },
+        {
+          "original_line": 1055,
+          "original": "inst2p32 = LGDT32;",
+          "actual": "inst2p32 = LGDT32;"
+        },
+        {
+          "original_line": 1068,
+          "original": "(*instp32)(ops[0].mlt);",
+          "actual": "(*instp32)(ops[0].mlt);"
+        },
+        {
+          "original_line": 1072,
+          "original": "(*inst2p32)(ops[0].mlt);",
+          "actual": "(*inst2p32)(ops[0].mlt);"
+        },
+        {
+          "original_line": 1077,
+          "original": "instp32  = LIDT16;",
+          "actual": "instp32  = LIDT16;"
+        },
+        {
+          "original_line": 1078,
+          "original": "inst2p32 = LIDT32;",
+          "actual": "inst2p32 = LIDT32;"
+        },
+        {
+          "original_line": 1079,
+          "original": "goto TYPE0F01_2;",
+          "actual": "goto TYPE0F01_2;"
+        },
+        {
+          "original_line": 1082,
+          "original": "instp32 = SMSW;",
+          "actual": "instp32 = SMSW;"
+        },
+        {
+          "original_line": 1083,
+          "original": "goto TYPE0F00_0;",
+          "actual": "goto TYPE0F00_0;"
+        },
+        {
+          "original_line": 1092,
+          "original": "inst32 = LMSW;",
+          "actual": "inst32 = LMSW;"
+        },
+        {
+          "original_line": 1093,
+          "original": "goto TYPE0F00_2;",
+          "actual": "goto TYPE0F00_2;"
+        },
+        {
+          "original_line": 1114,
+          "original": "instp3232 = LAR;",
+          "actual": "instp3232 = LAR;"
+        },
+        {
+          "original_line": 1127,
+          "original": "(*instp3232)(&ops[0].sng, ops[1].sng);",
+          "actual": "(*instp3232)(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1136,
+          "original": "(*instp3232)(&ops[0].sng, ops[1].sng);",
+          "actual": "(*instp3232)(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1142,
+          "original": "instp3232 = LSL;",
+          "actual": "instp3232 = LSL;"
+        },
+        {
+          "original_line": 1143,
+          "original": "goto TYPE0F02;",
+          "actual": "goto TYPE0F02;"
+        },
+        {
+          "original_line": 1190,
+          "original": "note_486_instruction(\"CPUID\");",
+          "actual": "note_486_instruction(\"CPUID\");"
+        },
+        {
+          "original_line": 1196,
+          "original": "note_486_instruction(\"A-step CMPXCHG\");",
+          "actual": "note_486_instruction(\"A-step CMPXCHG\");"
+        },
+        {
+          "original_line": 1202,
+          "original": "note_486_instruction(\"RSM\");",
+          "actual": "note_486_instruction(\"RSM\");"
+        },
+        {
+          "original_line": 1287,
+          "original": "MOV_CR(ops[0].sng, ops[1].sng);",
+          "actual": "MOV_CR(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1297,
+          "original": "MOV_DR(ops[0].sng, ops[1].sng);",
+          "actual": "MOV_DR(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1319,
+          "original": "MOV_TR(ops[0].sng, ops[1].sng);",
+          "actual": "MOV_TR(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1323,
+          "original": "inst32 = JO;",
+          "actual": "inst32 = JO;"
+        },
+        {
+          "original_line": 1335,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 1340,
+          "original": "if (took_relative_jump)",
+          "actual": "if (took_relative_jump)"
+        },
+        {
+          "original_line": 1363,
+          "original": "instp32 = SETO;",
+          "actual": "instp32 = SETO;"
+        },
+        {
+          "original_line": 1368,
+          "original": "(*instp32)(&ops[0].sng);",
+          "actual": "(*instp32)(&ops[0].sng);"
+        },
+        {
+          "original_line": 1392,
+          "original": "PUSH_SR(ops[0].sng);",
+          "actual": "PUSH_SR(ops[0].sng);"
+        },
+        {
+          "original_line": 1398,
+          "original": "POP_SR(ops[0].sng);",
+          "actual": "POP_SR(ops[0].sng);"
+        },
+        {
+          "original_line": 1402,
+          "original": "inst32328 = BT;",
+          "actual": "inst32328 = BT;"
+        },
+        {
+          "original_line": 1410,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1415,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 1420,
+          "original": "instp3232328 = SHLD;",
+          "actual": "instp3232328 = SHLD;"
+        },
+        {
+          "original_line": 1431,
+          "original": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 16);",
+          "actual": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 16);"
+        },
+        {
+          "original_line": 1441,
+          "original": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 32);",
+          "actual": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 32);"
+        },
+        {
+          "original_line": 1447,
+          "original": "instp3232328 = SHLD;",
+          "actual": "instp3232328 = SHLD;"
+        },
+        {
+          "original_line": 1458,
+          "original": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 16);",
+          "actual": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 16);"
+        },
+        {
+          "original_line": 1468,
+          "original": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 32);",
+          "actual": "(*instp3232328)(&ops[0].sng, ops[1].sng, ops[2].sng, 32);"
+        },
+        {
+          "original_line": 1474,
+          "original": "instp32328 = BTS;",
+          "actual": "instp32328 = BTS;"
+        },
+        {
+          "original_line": 1483,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1489,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 1495,
+          "original": "instp3232328 = SHRD;",
+          "actual": "instp3232328 = SHRD;"
+        },
+        {
+          "original_line": 1496,
+          "original": "goto TYPE0FA4;",
+          "actual": "goto TYPE0FA4;"
+        },
+        {
+          "original_line": 1499,
+          "original": "instp3232328 = SHRD;",
+          "actual": "instp3232328 = SHRD;"
+        },
+        {
+          "original_line": 1500,
+          "original": "goto TYPE0FA5;",
+          "actual": "goto TYPE0FA5;"
+        },
+        {
+          "original_line": 1510,
+          "original": "IMUL16T(&ops[0].sng, ops[0].sng, ops[1].sng);",
+          "actual": "IMUL16T(&ops[0].sng, ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1519,
+          "original": "IMUL32T(&ops[0].sng, ops[0].sng, ops[1].sng);",
+          "actual": "IMUL32T(&ops[0].sng, ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1624,
+          "original": "BT(ops[0].sng, ops[1].sng, 16);",
+          "actual": "BT(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1631,
+          "original": "BT(ops[0].sng, ops[1].sng, 32);",
+          "actual": "BT(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 1642,
+          "original": "instp32328 = BTC;",
+          "actual": "instp32328 = BTC;"
+        },
+        {
+          "original_line": 1646,
+          "original": "goto TYPE0FAB;",
+          "actual": "goto TYPE0FAB;"
+        },
+        {
+          "original_line": 1656,
+          "original": "BSF(&ops[0].sng, ops[1].sng);",
+          "actual": "BSF(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1665,
+          "original": "BSF(&ops[0].sng, ops[1].sng);",
+          "actual": "BSF(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 1671,
+          "original": "instp32328 = BSR;",
+          "actual": "instp32328 = BSR;"
+        },
+        {
+          "original_line": 1672,
+          "original": "goto TYPE03;",
+          "actual": "goto TYPE03;"
+        },
+        {
+          "original_line": 1681,
+          "original": "MOVSX(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "MOVSX(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 1689,
+          "original": "MOVSX(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "MOVSX(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 1699,
+          "original": "MOVSX(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "MOVSX(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1812,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 1828,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 1844,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 1851,
+          "original": "inst32328 = CMP;",
+          "actual": "inst32328 = CMP;"
+        },
+        {
+          "original_line": 1859,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 1863,
+          "original": "inst32328 = CMP;",
+          "actual": "inst32328 = CMP;"
+        },
+        {
+          "original_line": 1873,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1881,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 1891,
+          "original": "CMP(ops[0].sng, ops[1].sng, 8);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 1902,
+          "original": "CMP(ops[0].sng, ops[1].sng, 16);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1910,
+          "original": "CMP(ops[0].sng, ops[1].sng, 32);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 1915,
+          "original": "inst32328 = CMP;",
+          "actual": "inst32328 = CMP;"
+        },
+        {
+          "original_line": 1920,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 1924,
+          "original": "inst32328 = CMP;",
+          "actual": "inst32328 = CMP;"
+        },
+        {
+          "original_line": 1931,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 1937,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 1944,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 1958,
+          "original": "instp328 = INC;",
+          "actual": "instp328 = INC;"
+        },
+        {
+          "original_line": 1965,
+          "original": "(*instp328)(&ops[0].sng, 16);",
+          "actual": "(*instp328)(&ops[0].sng, 16);"
+        },
+        {
+          "original_line": 1972,
+          "original": "(*instp328)(&ops[0].sng, 32);",
+          "actual": "(*instp328)(&ops[0].sng, 32);"
+        },
+        {
+          "original_line": 1985,
+          "original": "instp328 = DEC;",
+          "actual": "instp328 = DEC;"
+        },
+        {
+          "original_line": 1986,
+          "original": "goto TYPE40;",
+          "actual": "goto TYPE40;"
+        },
+        {
+          "original_line": 2006,
+          "original": "PUSH(ops[0].sng);",
+          "actual": "PUSH(ops[0].sng);"
+        },
+        {
+          "original_line": 2020,
+          "original": "POP(&ops[0].sng);",
+          "actual": "POP(&ops[0].sng);"
+        },
+        {
+          "original_line": 2026,
+          "original": "POP(&ops[0].sng);",
+          "actual": "POP(&ops[0].sng);"
+        },
+        {
+          "original_line": 2054,
+          "original": "BOUND(ops[0].sng, ops[1].mlt, 16);",
+          "actual": "BOUND(ops[0].sng, ops[1].mlt, 16);"
+        },
+        {
+          "original_line": 2062,
+          "original": "BOUND(ops[0].sng, ops[1].mlt, 32);",
+          "actual": "BOUND(ops[0].sng, ops[1].mlt, 32);"
+        },
+        {
+          "original_line": 2074,
+          "original": "ARPL(&ops[0].sng, ops[1].sng);",
+          "actual": "ARPL(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2081,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 2086,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 2095,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 2104,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 2115,
+          "original": "PUSH(ops[0].sng);",
+          "actual": "PUSH(ops[0].sng);"
+        },
+        {
+          "original_line": 2127,
+          "original": "IMUL16T(&ops[0].sng, ops[1].sng, ops[2].sng);",
+          "actual": "IMUL16T(&ops[0].sng, ops[1].sng, ops[2].sng);"
+        },
+        {
+          "original_line": 2137,
+          "original": "IMUL32T(&ops[0].sng, ops[1].sng, ops[2].sng);",
+          "actual": "IMUL32T(&ops[0].sng, ops[1].sng, ops[2].sng);"
+        },
+        {
+          "original_line": 2151,
+          "original": "PUSH(ops[0].sng);",
+          "actual": "PUSH(ops[0].sng);"
+        },
+        {
+          "original_line": 2163,
+          "original": "IMUL16T(&ops[0].sng, ops[1].sng, ops[2].sng);",
+          "actual": "IMUL16T(&ops[0].sng, ops[1].sng, ops[2].sng);"
+        },
+        {
+          "original_line": 2173,
+          "original": "IMUL32T(&ops[0].sng, ops[1].sng, ops[2].sng);",
+          "actual": "IMUL32T(&ops[0].sng, ops[1].sng, ops[2].sng);"
+        },
+        {
+          "original_line": 2185,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2188,
+          "original": "IN8(&ops[0].sng, ops[1].sng);",
+          "actual": "IN8(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2189,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2215,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2218,
+          "original": "IN16(&ops[0].sng, ops[1].sng);",
+          "actual": "IN16(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2219,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2230,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2233,
+          "original": "IN32(&ops[0].sng, ops[1].sng);",
+          "actual": "IN32(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2234,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2254,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2258,
+          "original": "OUT8(ops[0].sng, ops[1].sng);",
+          "actual": "OUT8(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2259,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2279,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2283,
+          "original": "OUT16(ops[0].sng, ops[1].sng);",
+          "actual": "OUT16(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2284,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2294,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2298,
+          "original": "OUT32(ops[0].sng, ops[1].sng);",
+          "actual": "OUT32(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2299,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2312,
+          "original": "inst32 = JO;",
+          "actual": "inst32 = JO;"
+        },
+        {
+          "original_line": 2362,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 2411,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 2417,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 2429,
+          "original": "inst32328 = CMP;",
+          "actual": "inst32328 = CMP;"
+        },
+        {
+          "original_line": 2435,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 2445,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 2453,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 2461,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 2474,
+          "original": "inst32328 = CMP;",
+          "actual": "inst32328 = CMP;"
+        },
+        {
+          "original_line": 2482,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 2489,
+          "original": "(*inst32328)(ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*inst32328)(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 2500,
+          "original": "instp32328 = ADD;",
+          "actual": "instp32328 = ADD;"
+        },
+        {
+          "original_line": 2508,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 2516,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 2534,
+          "original": "CMP(ops[0].sng, ops[1].sng, 16);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 2541,
+          "original": "CMP(ops[0].sng, ops[1].sng, 32);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 2556,
+          "original": "XCHG(&ops[0].sng, &ops[1].sng);",
+          "actual": "XCHG(&ops[0].sng, &ops[1].sng);"
+        },
+        {
+          "original_line": 2569,
+          "original": "XCHG(&ops[0].sng, &ops[1].sng);",
+          "actual": "XCHG(&ops[0].sng, &ops[1].sng);"
+        },
+        {
+          "original_line": 2579,
+          "original": "XCHG(&ops[0].sng, &ops[1].sng);",
+          "actual": "XCHG(&ops[0].sng, &ops[1].sng);"
+        },
+        {
+          "original_line": 2673,
+          "original": "LEA(&ops[0].sng, ops[1].sng);",
+          "actual": "LEA(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2681,
+          "original": "LEA(&ops[0].sng, ops[1].sng);",
+          "actual": "LEA(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2693,
+          "original": "MOV_SR(ops[0].sng, ops[1].sng);",
+          "actual": "MOV_SR(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 2699,
+          "original": "goto NEXT_INST;",
+          "actual": "goto NEXT_INST;"
+        },
+        {
+          "original_line": 2712,
+          "original": "POP(&ops[0].sng);",
+          "actual": "POP(&ops[0].sng);"
+        },
+        {
+          "original_line": 2719,
+          "original": "POP(&ops[0].sng);",
+          "actual": "POP(&ops[0].sng);"
+        },
+        {
+          "original_line": 2746,
+          "original": "XCHG(&ops[0].sng, &ops[1].sng);",
+          "actual": "XCHG(&ops[0].sng, &ops[1].sng);"
+        },
+        {
+          "original_line": 2755,
+          "original": "XCHG(&ops[0].sng, &ops[1].sng);",
+          "actual": "XCHG(&ops[0].sng, &ops[1].sng);"
+        },
+        {
+          "original_line": 2784,
+          "original": "instp32 = CALLF;",
+          "actual": "instp32 = CALLF;"
+        },
+        {
+          "original_line": 2797,
+          "original": "(*instp32)(ops[0].mlt);",
+          "actual": "(*instp32)(ops[0].mlt);"
+        },
+        {
+          "original_line": 2816,
+          "original": "int oldIF;",
+          "actual": "int oldIF;"
+        },
+        {
+          "original_line": 2911,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2917,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2930,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2936,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2945,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2951,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2963,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2969,
+          "original": "CMP(ops[0].sng, ops[1].sng, 8);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 2970,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2973,
+          "original": "if ( rep_count &&",
+          "actual": "if ( rep_count &&"
+        },
+        {
+          "original_line": 2987,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 2993,
+          "original": "CMP(ops[0].sng, ops[1].sng, 16);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 2994,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 2997,
+          "original": "if ( rep_count &&",
+          "actual": "if ( rep_count &&"
+        },
+        {
+          "original_line": 3007,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3013,
+          "original": "CMP(ops[0].sng, ops[1].sng, 32);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 3014,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3017,
+          "original": "if ( rep_count &&",
+          "actual": "if ( rep_count &&"
+        },
+        {
+          "original_line": 3034,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3038,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3051,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3055,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3064,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3068,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3079,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3084,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3096,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3101,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3109,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3114,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3126,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3130,
+          "original": "CMP(ops[0].sng, ops[1].sng, 8);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 3131,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3133,
+          "original": "if ( rep_count &&",
+          "actual": "if ( rep_count &&"
+        },
+        {
+          "original_line": 3148,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3152,
+          "original": "CMP(ops[0].sng, ops[1].sng, 16);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 3153,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3155,
+          "original": "if ( rep_count &&",
+          "actual": "if ( rep_count &&"
+        },
+        {
+          "original_line": 3166,
+          "original": "while ( rep_count )",
+          "actual": "while ( rep_count )"
+        },
+        {
+          "original_line": 3170,
+          "original": "CMP(ops[0].sng, ops[1].sng, 32);",
+          "actual": "CMP(ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 3171,
+          "original": "rep_count--;",
+          "actual": "rep_count--;"
+        },
+        {
+          "original_line": 3173,
+          "original": "if ( rep_count &&",
+          "actual": "if ( rep_count &&"
+        },
+        {
+          "original_line": 3257,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 3265,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 3271,
+          "original": "inst32 = RETN;",
+          "actual": "inst32 = RETN;"
+        },
+        {
+          "original_line": 3277,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 3283,
+          "original": "inst32 = RETN;",
+          "actual": "inst32 = RETN;"
+        },
+        {
+          "original_line": 3289,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 3295,
+          "original": "instp32p32 = LES;",
+          "actual": "instp32p32 = LES;"
+        },
+        {
+          "original_line": 3299,
+          "original": "if (((modRM & 0xfc) == 0xc4) && (instp32p32 == LES)) {",
+          "actual": "if (((modRM & 0xfc) == 0xc4) && (instp32p32 == LES)) {"
+        },
+        {
+          "original_line": 3305,
+          "original": "int nField, i;",
+          "actual": "int nField, i;"
+        },
+        {
+          "original_line": 3308,
+          "original": "nField = modRM & 3;",
+          "actual": "nField = modRM & 3;"
+        },
+        {
+          "original_line": 3309,
+          "original": "immed = 0;",
+          "actual": "immed = 0;"
+        },
+        {
+          "original_line": 3310,
+          "original": "for (i = 0; i < nField; i++)",
+          "actual": "for (i = 0; i < nField; i++)"
+        },
+        {
+          "original_line": 3313,
+          "original": "immed <<= 8;",
+          "actual": "immed <<= 8;"
+        },
+        {
+          "original_line": 3315,
+          "original": "immed |= ops[0].sng;",
+          "actual": "immed |= ops[0].sng;"
+        },
+        {
+          "original_line": 3325,
+          "original": "if ((immed & 0xff) == 0xfe)",
+          "actual": "if ((immed & 0xff) == 0xfe)"
+        },
+        {
+          "original_line": 3327,
+          "original": "switch(immed)",
+          "actual": "switch(immed)"
+        },
+        {
+          "original_line": 3341,
+          "original": "c_cpu_unsimulate();",
+          "actual": "c_cpu_unsimulate();"
+        },
+        {
+          "original_line": 3344,
+          "original": "EDL_fast_bop(immed);",
+          "actual": "EDL_fast_bop(immed);"
+        },
+        {
+          "original_line": 3350,
+          "original": "in_C = 1;",
+          "actual": "in_C = 1;"
+        },
+        {
+          "original_line": 3352,
+          "original": "in_C = 0;",
+          "actual": "in_C = 0;"
+        },
+        {
+          "original_line": 3364,
+          "original": "(*instp32p32)(&ops[0].sng, ops[1].mlt);",
+          "actual": "(*instp32p32)(&ops[0].sng, ops[1].mlt);"
+        },
+        {
+          "original_line": 3372,
+          "original": "(*instp32p32)(&ops[0].sng, ops[1].mlt);",
+          "actual": "(*instp32p32)(&ops[0].sng, ops[1].mlt);"
+        },
+        {
+          "original_line": 3378,
+          "original": "instp32p32 = LDS;",
+          "actual": "instp32p32 = LDS;"
+        },
+        {
+          "original_line": 3379,
+          "original": "goto TYPEC4;",
+          "actual": "goto TYPEC4;"
+        },
+        {
+          "original_line": 3430,
+          "original": "ENTER16(ops[0].sng, ops[1].sng);",
+          "actual": "ENTER16(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3434,
+          "original": "ENTER32(ops[0].sng, ops[1].sng);",
+          "actual": "ENTER32(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3441,
+          "original": "LEAVE16();",
+          "actual": "LEAVE16();"
+        },
+        {
+          "original_line": 3445,
+          "original": "LEAVE32();",
+          "actual": "LEAVE32();"
+        },
+        {
+          "original_line": 3450,
+          "original": "inst32 = RETF;",
+          "actual": "inst32 = RETF;"
+        },
+        {
+          "original_line": 3452,
+          "original": "goto TYPEC2;",
+          "actual": "goto TYPEC2;"
+        },
+        {
+          "original_line": 3454,
+          "original": "inst32 = RETF;",
+          "actual": "inst32 = RETF;"
+        },
+        {
+          "original_line": 3456,
+          "original": "goto TYPEC3;",
+          "actual": "goto TYPEC3;"
+        },
+        {
+          "original_line": 3463,
+          "original": "INTx(ops[0].sng);",
+          "actual": "INTx(ops[0].sng);"
+        },
+        {
+          "original_line": 3475,
+          "original": "INTx(ops[0].sng);",
+          "actual": "INTx(ops[0].sng);"
+        },
+        {
+          "original_line": 3513,
+          "original": "goto NEXT_INST;",
+          "actual": "goto NEXT_INST;"
+        },
+        {
+          "original_line": 3532,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 3556,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 3564,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 3585,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 8);"
+        },
+        {
+          "original_line": 3609,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 16);"
+        },
+        {
+          "original_line": 3617,
+          "original": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);",
+          "actual": "(*instp32328)(&ops[0].sng, ops[1].sng, 32);"
+        },
+        {
+          "original_line": 3623,
+          "original": "inst32 = AAM;",
+          "actual": "inst32 = AAM;"
+        },
+        {
+          "original_line": 3627,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 3639,
+          "original": "if (ops[0].sng == 0xfe)",
+          "actual": "if (ops[0].sng == 0xfe)"
+        },
+        {
+          "original_line": 3641,
+          "original": "c_cpu_unsimulate();",
+          "actual": "c_cpu_unsimulate();"
+        },
+        {
+          "original_line": 3643,
+          "original": "in_C = 1;",
+          "actual": "in_C = 1;"
+        },
+        {
+          "original_line": 3645,
+          "original": "in_C = 0;",
+          "actual": "in_C = 0;"
+        },
+        {
+          "original_line": 3654,
+          "original": "XLAT(ops[0].sng);",
+          "actual": "XLAT(ops[0].sng);"
+        },
+        {
+          "original_line": 3668,
+          "original": "if (NpxIntrNeeded)",
+          "actual": "if (NpxIntrNeeded)"
+        },
+        {
+          "original_line": 3682,
+          "original": "ZFRSRVD(((opcode-0xd8)*0x100) + modRM);",
+          "actual": "ZFRSRVD(((opcode-0xd8)*0x100) + modRM);"
+        },
+        {
+          "original_line": 3686,
+          "original": "inst32 = LOOPNE16;",
+          "actual": "inst32 = LOOPNE16;"
+        },
+        {
+          "original_line": 3687,
+          "original": "inst232 = LOOPNE32;",
+          "actual": "inst232 = LOOPNE32;"
+        },
+        {
+          "original_line": 3694,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 3698,
+          "original": "(*inst232)(ops[0].sng);",
+          "actual": "(*inst232)(ops[0].sng);"
+        },
+        {
+          "original_line": 3727,
+          "original": "inst32 = LOOPE16;",
+          "actual": "inst32 = LOOPE16;"
+        },
+        {
+          "original_line": 3728,
+          "original": "inst232 = LOOPE32;",
+          "actual": "inst232 = LOOPE32;"
+        },
+        {
+          "original_line": 3729,
+          "original": "goto TYPEE0;",
+          "actual": "goto TYPEE0;"
+        },
+        {
+          "original_line": 3732,
+          "original": "inst32 = LOOP16;",
+          "actual": "inst32 = LOOP16;"
+        },
+        {
+          "original_line": 3733,
+          "original": "inst232 = LOOP32;",
+          "actual": "inst232 = LOOP32;"
+        },
+        {
+          "original_line": 3734,
+          "original": "goto TYPEE0;",
+          "actual": "goto TYPEE0;"
+        },
+        {
+          "original_line": 3737,
+          "original": "inst32 = JCXZ;",
+          "actual": "inst32 = JCXZ;"
+        },
+        {
+          "original_line": 3738,
+          "original": "inst232 = JECXZ;",
+          "actual": "inst232 = JECXZ;"
+        },
+        {
+          "original_line": 3739,
+          "original": "goto TYPEE0;",
+          "actual": "goto TYPEE0;"
+        },
+        {
+          "original_line": 3747,
+          "original": "IN8(&ops[0].sng, ops[1].sng);",
+          "actual": "IN8(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3764,
+          "original": "IN16(&ops[0].sng, ops[1].sng);",
+          "actual": "IN16(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3776,
+          "original": "IN32(&ops[0].sng, ops[1].sng);",
+          "actual": "IN32(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3793,
+          "original": "OUT8(ops[0].sng, ops[1].sng);",
+          "actual": "OUT8(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3819,
+          "original": "OUT16(ops[0].sng, ops[1].sng);",
+          "actual": "OUT16(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3827,
+          "original": "OUT32(ops[0].sng, ops[1].sng);",
+          "actual": "OUT32(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3837,
+          "original": "inst32 = CALLR;",
+          "actual": "inst32 = CALLR;"
+        },
+        {
+          "original_line": 3851,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 3857,
+          "original": "inst32 = JMPR;",
+          "actual": "inst32 = JMPR;"
+        },
+        {
+          "original_line": 3859,
+          "original": "goto TYPEE8;",
+          "actual": "goto TYPEE8;"
+        },
+        {
+          "original_line": 3861,
+          "original": "instp32 = JMPF;",
+          "actual": "instp32 = JMPF;"
+        },
+        {
+          "original_line": 3863,
+          "original": "goto TYPE9A;",
+          "actual": "goto TYPE9A;"
+        },
+        {
+          "original_line": 3865,
+          "original": "inst32 = JMPR;",
+          "actual": "inst32 = JMPR;"
+        },
+        {
+          "original_line": 3867,
+          "original": "goto TYPE70;",
+          "actual": "goto TYPE70;"
+        },
+        {
+          "original_line": 3875,
+          "original": "IN8(&ops[0].sng, ops[1].sng);",
+          "actual": "IN8(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3892,
+          "original": "IN16(&ops[0].sng, ops[1].sng);",
+          "actual": "IN16(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3904,
+          "original": "IN32(&ops[0].sng, ops[1].sng);",
+          "actual": "IN32(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3921,
+          "original": "OUT8(ops[0].sng, ops[1].sng);",
+          "actual": "OUT8(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3938,
+          "original": "OUT16(ops[0].sng, ops[1].sng);",
+          "actual": "OUT16(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3946,
+          "original": "OUT32(ops[0].sng, ops[1].sng);",
+          "actual": "OUT32(ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 3961,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 3966,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 3971,
+          "original": "goto DECODE;",
+          "actual": "goto DECODE;"
+        },
+        {
+          "original_line": 3998,
+          "original": "host_timer_event();",
+          "actual": "host_timer_event();"
+        },
+        {
+          "original_line": 4028,
+          "original": "inst32328 = TEST;",
+          "actual": "inst32328 = TEST;"
+        },
+        {
+          "original_line": 4029,
+          "original": "goto TYPE80_7;",
+          "actual": "goto TYPE80_7;"
+        },
+        {
+          "original_line": 4034,
+          "original": "NOT(&ops[0].sng);",
+          "actual": "NOT(&ops[0].sng);"
+        },
+        {
+          "original_line": 4039,
+          "original": "instp328 = NEG;",
+          "actual": "instp328 = NEG;"
+        },
+        {
+          "original_line": 4044,
+          "original": "(*instp328)(&ops[0].sng, 8);",
+          "actual": "(*instp328)(&ops[0].sng, 8);"
+        },
+        {
+          "original_line": 4049,
+          "original": "instp3232 = MUL8;",
+          "actual": "instp3232 = MUL8;"
+        },
+        {
+          "original_line": 4055,
+          "original": "(*instp3232)(&ops[0].sng, ops[1].sng);;",
+          "actual": "(*instp3232)(&ops[0].sng, ops[1].sng);;"
+        },
+        {
+          "original_line": 4062,
+          "original": "inst32 = DIV8;",
+          "actual": "inst32 = DIV8;"
+        },
+        {
+          "original_line": 4067,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 4080,
+          "original": "inst32328 = TEST;",
+          "actual": "inst32328 = TEST;"
+        },
+        {
+          "original_line": 4081,
+          "original": "goto TYPE81_7;",
+          "actual": "goto TYPE81_7;"
+        },
+        {
+          "original_line": 4088,
+          "original": "NOT(&ops[0].sng);",
+          "actual": "NOT(&ops[0].sng);"
+        },
+        {
+          "original_line": 4095,
+          "original": "NOT(&ops[0].sng);",
+          "actual": "NOT(&ops[0].sng);"
+        },
+        {
+          "original_line": 4101,
+          "original": "instp328 = NEG;",
+          "actual": "instp328 = NEG;"
+        },
+        {
+          "original_line": 4108,
+          "original": "(*instp328)(&ops[0].sng, 16);",
+          "actual": "(*instp328)(&ops[0].sng, 16);"
+        },
+        {
+          "original_line": 4115,
+          "original": "(*instp328)(&ops[0].sng, 32);",
+          "actual": "(*instp328)(&ops[0].sng, 32);"
+        },
+        {
+          "original_line": 4121,
+          "original": "instp3232 = MUL16;",
+          "actual": "instp3232 = MUL16;"
+        },
+        {
+          "original_line": 4122,
+          "original": "inst2p3232 = MUL32;",
+          "actual": "inst2p3232 = MUL32;"
+        },
+        {
+          "original_line": 4130,
+          "original": "(*instp3232)(&ops[0].sng, ops[1].sng);;",
+          "actual": "(*instp3232)(&ops[0].sng, ops[1].sng);;"
+        },
+        {
+          "original_line": 4138,
+          "original": "(*inst2p3232)(&ops[0].sng, ops[1].sng);",
+          "actual": "(*inst2p3232)(&ops[0].sng, ops[1].sng);"
+        },
+        {
+          "original_line": 4144,
+          "original": "instp3232 = IMUL16;",
+          "actual": "instp3232 = IMUL16;"
+        },
+        {
+          "original_line": 4145,
+          "original": "inst2p3232 = IMUL32;",
+          "actual": "inst2p3232 = IMUL32;"
+        },
+        {
+          "original_line": 4146,
+          "original": "goto TYPEF7_4;",
+          "actual": "goto TYPEF7_4;"
+        },
+        {
+          "original_line": 4149,
+          "original": "inst32 = DIV16;",
+          "actual": "inst32 = DIV16;"
+        },
+        {
+          "original_line": 4150,
+          "original": "inst232 = DIV32;",
+          "actual": "inst232 = DIV32;"
+        },
+        {
+          "original_line": 4157,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 4163,
+          "original": "(*inst232)(ops[0].sng);",
+          "actual": "(*inst232)(ops[0].sng);"
+        },
+        {
+          "original_line": 4168,
+          "original": "inst32 = IDIV16;",
+          "actual": "inst32 = IDIV16;"
+        },
+        {
+          "original_line": 4169,
+          "original": "inst232 = IDIV32;",
+          "actual": "inst232 = IDIV32;"
+        },
+        {
+          "original_line": 4170,
+          "original": "goto TYPEF7_6;",
+          "actual": "goto TYPEF7_6;"
+        },
+        {
+          "original_line": 4203,
+          "original": "goto NEXT_INST;",
+          "actual": "goto NEXT_INST;"
+        },
+        {
+          "original_line": 4234,
+          "original": "inst32 = CALLN;",
+          "actual": "inst32 = CALLN;"
+        },
+        {
+          "original_line": 4250,
+          "original": "(*inst32)(ops[0].sng);",
+          "actual": "(*inst32)(ops[0].sng);"
+        },
+        {
+          "original_line": 4256,
+          "original": "instp32 = CALLF;",
+          "actual": "instp32 = CALLF;"
+        },
+        {
+          "original_line": 4272,
+          "original": "(*instp32)(ops[0].mlt);",
+          "actual": "(*instp32)(ops[0].mlt);"
+        },
+        {
+          "original_line": 4278,
+          "original": "inst32 = JMPN;",
+          "actual": "inst32 = JMPN;"
+        },
+        {
+          "original_line": 4280,
+          "original": "goto TYPEFF_2;",
+          "actual": "goto TYPEFF_2;"
+        },
+        {
+          "original_line": 4282,
+          "original": "instp32 = JMPF;",
+          "actual": "instp32 = JMPF;"
+        },
+        {
+          "original_line": 4284,
+          "original": "goto TYPEFF_3;",
+          "actual": "goto TYPEFF_3;"
+        },
+        {
+          "original_line": 4286,
+          "original": "inst32 = PUSH;",
+          "actual": "inst32 = PUSH;"
+        },
+        {
+          "original_line": 4287,
+          "original": "inst232 = PUSH;",
+          "actual": "inst232 = PUSH;"
+        },
+        {
+          "original_line": 4288,
+          "original": "goto TYPEF7_6;",
+          "actual": "goto TYPEF7_6;"
+        },
+        {
+          "original_line": 4312,
+          "original": "if ( p != p_start )",
+          "actual": "if ( p != p_start )"
+        },
+        {
+          "original_line": 4327,
+          "original": "goto DO_INST;",
+          "actual": "goto DO_INST;"
+        },
+        {
+          "original_line": 4341,
+          "original": "c_cpu_reset();",
+          "actual": "c_cpu_reset();"
+        },
+        {
+          "original_line": 4348,
+          "original": "goto NEXT_INST;",
+          "actual": "goto NEXT_INST;"
+        },
+        {
+          "original_line": 4359,
+          "original": "host_timer_event();",
+          "actual": "host_timer_event();"
+        },
+        {
+          "original_line": 4365,
+          "original": "force_yoda();",
+          "actual": "force_yoda();"
+        },
+        {
+          "original_line": 4375,
+          "original": "if ( start_trap )",
+          "actual": "if ( start_trap )"
+        },
+        {
+          "original_line": 4411,
+          "original": "IU32 hook_address;",
+          "actual": "IU32 hook_address;"
+        },
+        {
+          "original_line": 4525,
+          "original": "start_trap == 0 &&",
+          "actual": "start_trap == 0 &&"
+        },
+        {
+          "original_line": 4526,
+          "original": "nr_inst_break == 0",
+          "actual": "nr_inst_break == 0"
+        },
+        {
+          "original_line": 4535,
+          "original": "goto DO_INST;",
+          "actual": "goto DO_INST;"
+        },
+        {
+          "original_line": 4552,
+          "original": "IU16 map_start_offset;",
+          "actual": "IU16 map_start_offset;"
+        },
+        {
+          "original_line": 4553,
+          "original": "IU16 map_word_offset;",
+          "actual": "IU16 map_word_offset;"
+        },
+        {
+          "original_line": 4554,
+          "original": "IU16 map_word;",
+          "actual": "IU16 map_word;"
+        },
+        {
+          "original_line": 4567,
+          "original": "map_word_offset = map_start_offset + port/8;",
+          "actual": "map_word_offset = map_start_offset + port/8;"
+        },
+        {
+          "original_line": 4574,
+          "original": "if ( map_word & width_mask[width-1] )",
+          "actual": "if ( map_word & width_mask[width-1] )"
+        },
+        {
+          "original_line": 4594,
+          "original": "cpu_heartbeat = countval;",
+          "actual": "cpu_heartbeat = countval;"
+        },
+        {
+          "original_line": 4603,
+          "original": "return ( time );",
+          "actual": "return ( time );"
+        },
+        {
+          "original_line": 4612,
+          "original": "return cpu_heartbeat;",
+          "actual": "return cpu_heartbeat;"
+        },
+        {
+          "original_line": 4636,
+          "original": "p_start = *q;",
+          "actual": "p_start = *q;"
+        },
+        {
+          "original_line": 4644,
+          "original": "return *(*q)++;",
+          "actual": "return *(*q)++;"
+        },
+        {
+          "original_line": 4685,
+          "original": "ccpu386InitThreadStuff();",
+          "actual": "ccpu386InitThreadStuff();"
+        },
+        {
+          "original_line": 4688,
+          "original": "c_cpu_reset();",
+          "actual": "c_cpu_reset();"
+        },
+        {
+          "original_line": 4707,
+          "original": "switch ( type )",
+          "actual": "switch ( type )"
+        },
+        {
+          "original_line": 4817,
+          "original": "if ( disableNpx )",
+          "actual": "if ( disableNpx )"
+        },
+        {
+          "original_line": 4822,
+          "original": "InitNpx(disableNpx);",
+          "actual": "InitNpx(disableNpx);"
+        },
+        {
+          "original_line": 4844,
+          "original": "in_C = 0;",
+          "actual": "in_C = 0;"
+        },
+        {
+          "original_line": 4856,
+          "original": "ccpu386GotoThrdExptnPt();",
+          "actual": "ccpu386GotoThrdExptnPt();"
+        },
+        {
+          "original_line": 4871,
+          "original": "ccpu386Unsimulate();",
+          "actual": "ccpu386Unsimulate();"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+      "current_sha256": "ce5218761b42456b5a5eda100f48ca7318509e882111d436cfc51be3fc688e99",
+      "actual_preprocess_sha256": "67cb82dffa1115c00b98ce9b2c25df7ab14fe94989771479e0ac1a569dd824b8",
+      "verified_original_statement_anchors": 17,
+      "anchors": [
+        {
+          "original_line": 167,
+          "original": "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+          "actual": "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);"
+        },
+        {
+          "original_line": 173,
+          "original": "if ( selector_outside_GDT_LDT(new_cs, &cs_descr_addr) )",
+          "actual": "if ( selector_outside_GDT_LDT(new_cs, &cs_descr_addr) )"
+        },
+        {
+          "original_line": 177,
+          "original": "read_descriptor_linear(cs_descr_addr, &cs_entry);",
+          "actual": "read_descriptor_linear(cs_descr_addr, &cs_entry);"
+        },
+        {
+          "original_line": 180,
+          "original": "switch ( descriptor_super_type(cs_entry.AR) )",
+          "actual": "switch ( descriptor_super_type(cs_entry.AR) )"
+        },
+        {
+          "original_line": 212,
+          "original": "load_CS_cache(new_cs, cs_descr_addr, &cs_entry);",
+          "actual": "load_CS_cache(new_cs, cs_descr_addr, &cs_entry);"
+        },
+        {
+          "original_line": 231,
+          "original": "IU32 descr_addr;",
+          "actual": "IU32 descr_addr;"
+        },
+        {
+          "original_line": 232,
+          "original": "CPU_DESCR entry;",
+          "actual": "CPU_DESCR entry;"
+        },
+        {
+          "original_line": 233,
+          "original": "ISM32 super;",
+          "actual": "ISM32 super;"
+        },
+        {
+          "original_line": 234,
+          "original": "ISM32 dpl;",
+          "actual": "ISM32 dpl;"
+        },
+        {
+          "original_line": 246,
+          "original": "if ( selector_is_null(selector) )",
+          "actual": "if ( selector_is_null(selector) )"
+        },
+        {
+          "original_line": 267,
+          "original": "if ( selector_outside_GDT_LDT(selector, &descr_addr) )",
+          "actual": "if ( selector_outside_GDT_LDT(selector, &descr_addr) )"
+        },
+        {
+          "original_line": 270,
+          "original": "read_descriptor_linear(descr_addr, &entry);",
+          "actual": "read_descriptor_linear(descr_addr, &entry);"
+        },
+        {
+          "original_line": 273,
+          "original": "switch ( super = descriptor_super_type(entry.AR) )",
+          "actual": "switch ( super = descriptor_super_type(entry.AR) )"
+        },
+        {
+          "original_line": 322,
+          "original": "if ( is_data )",
+          "actual": "if ( is_data )"
+        },
+        {
+          "original_line": 381,
+          "original": "IU32 descr_addr;",
+          "actual": "IU32 descr_addr;"
+        },
+        {
+          "original_line": 382,
+          "original": "CPU_DESCR entry;",
+          "actual": "CPU_DESCR entry;"
+        },
+        {
+          "original_line": 394,
+          "original": "load_SS_cache(selector, descr_addr, &entry);",
+          "actual": "load_SS_cache(selector, descr_addr, &entry);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+      "current_sha256": "e360ea4003450cd6ae834c573dd4af77eddab569530696b6cb8457ed1c5827b3",
+      "actual_preprocess_sha256": "08fa1dc1fdd0046108857168cb361dde65766565cb8989e046add36375a9d24f",
+      "verified_original_statement_anchors": 25,
+      "anchors": [
+        {
+          "original_line": 85,
+          "original": "IU32 first_dword;",
+          "actual": "IU32 first_dword;"
+        },
+        {
+          "original_line": 86,
+          "original": "IU32 second_dword;",
+          "actual": "IU32 second_dword;"
+        },
+        {
+          "original_line": 89,
+          "original": "first_dword  = spr_read_dword(descr_addr);",
+          "actual": "first_dword  = spr_read_dword(descr_addr);"
+        },
+        {
+          "original_line": 90,
+          "original": "second_dword = spr_read_dword(descr_addr+4);",
+          "actual": "second_dword = spr_read_dword(descr_addr+4);"
+        },
+        {
+          "original_line": 136,
+          "original": "IU32 new_dest;",
+          "actual": "IU32 new_dest;"
+        },
+        {
+          "original_line": 200,
+          "original": "IU16 new_cs;",
+          "actual": "IU16 new_cs;"
+        },
+        {
+          "original_line": 201,
+          "original": "IU32 new_ip;",
+          "actual": "IU32 new_ip;"
+        },
+        {
+          "original_line": 202,
+          "original": "IU32 cs_descr_addr;",
+          "actual": "IU32 cs_descr_addr;"
+        },
+        {
+          "original_line": 204,
+          "original": "ISM32 super;",
+          "actual": "ISM32 super;"
+        },
+        {
+          "original_line": 207,
+          "original": "new_ip = *ip;",
+          "actual": "new_ip = *ip;"
+        },
+        {
+          "original_line": 211,
+          "original": "if ( selector_outside_GDT_LDT(new_cs, &cs_descr_addr) )",
+          "actual": "if ( selector_outside_GDT_LDT(new_cs, &cs_descr_addr) )"
+        },
+        {
+          "original_line": 215,
+          "original": "AR = spr_read_byte(cs_descr_addr+5);",
+          "actual": "AR = spr_read_byte(cs_descr_addr+5);"
+        },
+        {
+          "original_line": 218,
+          "original": "switch ( super = descriptor_super_type((IU16)AR) )",
+          "actual": "switch ( super = descriptor_super_type((IU16)AR) )"
+        },
+        {
+          "original_line": 256,
+          "original": "read_call_gate(cs_descr_addr, super, &new_cs, &new_ip, count);",
+          "actual": "read_call_gate(cs_descr_addr, super, &new_cs, &new_ip, count);"
+        },
+        {
+          "original_line": 258,
+          "original": "validate_gate_dest(caller_id, new_cs, &cs_descr_addr, dest_type);",
+          "actual": "validate_gate_dest(caller_id, new_cs, &cs_descr_addr, dest_type);"
+        },
+        {
+          "original_line": 273,
+          "original": "new_cs = spr_read_word(cs_descr_addr+2);",
+          "actual": "new_cs = spr_read_word(cs_descr_addr+2);"
+        },
+        {
+          "original_line": 276,
+          "original": "(void)validate_task_dest(new_cs, &cs_descr_addr);",
+          "actual": "(void)validate_task_dest(new_cs, &cs_descr_addr);"
+        },
+        {
+          "original_line": 330,
+          "original": "if ( selector_outside_GDT_LDT(new_cs, descr_addr) )",
+          "actual": "if ( selector_outside_GDT_LDT(new_cs, descr_addr) )"
+        },
+        {
+          "original_line": 334,
+          "original": "AR = spr_read_byte((*descr_addr)+5);",
+          "actual": "AR = spr_read_byte((*descr_addr)+5);"
+        },
+        {
+          "original_line": 337,
+          "original": "switch ( descriptor_super_type((IU16)AR) )",
+          "actual": "switch ( descriptor_super_type((IU16)AR) )"
+        },
+        {
+          "original_line": 396,
+          "original": "ISM32 super;",
+          "actual": "ISM32 super;"
+        },
+        {
+          "original_line": 399,
+          "original": "if ( selector_outside_GDT(selector, descr_addr) )",
+          "actual": "if ( selector_outside_GDT(selector, descr_addr) )"
+        },
+        {
+          "original_line": 403,
+          "original": "AR = spr_read_byte((*descr_addr)+5);",
+          "actual": "AR = spr_read_byte((*descr_addr)+5);"
+        },
+        {
+          "original_line": 406,
+          "original": "super = descriptor_super_type((IU16)AR);",
+          "actual": "super = descriptor_super_type((IU16)AR);"
+        },
+        {
+          "original_line": 415,
+          "original": "return super;",
+          "actual": "return super;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "current_sha256": "9f2b5a8538a0f097135345dbd4ed248b4c6ffb3a3bb65a35aece3f300892d678",
+      "actual_preprocess_sha256": "2270860cc817a44cfd15ebb011bb06af71ebf4fcadf51d5166934992bf4586a1",
+      "verified_original_statement_anchors": 33,
+      "anchors": [
+        {
+          "original_line": 52,
+          "original": "IU32 new_ip;",
+          "actual": "IU32 new_ip;"
+        },
+        {
+          "original_line": 63,
+          "original": "IU32 new_sp;",
+          "actual": "IU32 new_sp;"
+        },
+        {
+          "original_line": 70,
+          "original": "IU32 old_cs;",
+          "actual": "IU32 old_cs;"
+        },
+        {
+          "original_line": 71,
+          "original": "IU32 old_ip;",
+          "actual": "IU32 old_ip;"
+        },
+        {
+          "original_line": 72,
+          "original": "IU32 old_ss;",
+          "actual": "IU32 old_ss;"
+        },
+        {
+          "original_line": 73,
+          "original": "IU32 old_sp;",
+          "actual": "IU32 old_sp;"
+        },
+        {
+          "original_line": 74,
+          "original": "IU32 params[31];",
+          "actual": "IU32 params[31];"
+        },
+        {
+          "original_line": 78,
+          "original": "new_cs = op1[1];",
+          "actual": "new_cs = op1[1];"
+        },
+        {
+          "original_line": 79,
+          "original": "new_ip = op1[0];",
+          "actual": "new_ip = op1[0];"
+        },
+        {
+          "original_line": 111,
+          "original": "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+          "actual": "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);"
+        },
+        {
+          "original_line": 119,
+          "original": "validate_far_dest(&new_cs, &new_ip, &cs_descr_addr, &count,",
+          "actual": "validate_far_dest(&new_cs, &new_ip, &cs_descr_addr, &count,"
+        },
+        {
+          "original_line": 123,
+          "original": "switch ( dest_type )",
+          "actual": "switch ( dest_type )"
+        },
+        {
+          "original_line": 134,
+          "original": "read_descriptor_linear(cs_descr_addr, &cs_entry);",
+          "actual": "read_descriptor_linear(cs_descr_addr, &cs_entry);"
+        },
+        {
+          "original_line": 143,
+          "original": "if ( new_ip > cs_entry.limit )",
+          "actual": "if ( new_ip > cs_entry.limit )"
+        },
+        {
+          "original_line": 152,
+          "original": "load_CS_cache(new_cs, cs_descr_addr, &cs_entry);",
+          "actual": "load_CS_cache(new_cs, cs_descr_addr, &cs_entry);"
+        },
+        {
+          "original_line": 157,
+          "original": "read_descriptor_linear(cs_descr_addr, &cs_entry);",
+          "actual": "read_descriptor_linear(cs_descr_addr, &cs_entry);"
+        },
+        {
+          "original_line": 159,
+          "original": "dpl = dest_type;",
+          "actual": "dpl = dest_type;"
+        },
+        {
+          "original_line": 165,
+          "original": "get_stack_selector_from_TSS(dpl, &new_ss, &new_sp);",
+          "actual": "get_stack_selector_from_TSS(dpl, &new_ss, &new_sp);"
+        },
+        {
+          "original_line": 168,
+          "original": "validate_SS_on_stack_change(dpl, new_ss,",
+          "actual": "validate_SS_on_stack_change(dpl, new_ss,"
+        },
+        {
+          "original_line": 169,
+          "original": "&ss_descr_addr, &ss_entry);",
+          "actual": "&ss_descr_addr, &ss_entry);"
+        },
+        {
+          "original_line": 175,
+          "original": "validate_new_stack_space(new_stk_sz, new_sp, &ss_entry, new_ss);",
+          "actual": "validate_new_stack_space(new_stk_sz, new_sp, &ss_entry, new_ss);"
+        },
+        {
+          "original_line": 178,
+          "original": "if ( new_ip > cs_entry.limit )",
+          "actual": "if ( new_ip > cs_entry.limit )"
+        },
+        {
+          "original_line": 188,
+          "original": "load_CS_cache(new_cs, cs_descr_addr, &cs_entry);",
+          "actual": "load_CS_cache(new_cs, cs_descr_addr, &cs_entry);"
+        },
+        {
+          "original_line": 195,
+          "original": "for ( i = 0; i < count; i++ )",
+          "actual": "for ( i = 0; i < count; i++ )"
+        },
+        {
+          "original_line": 196,
+          "original": "params[i] = spop();",
+          "actual": "params[i] = spop();"
+        },
+        {
+          "original_line": 199,
+          "original": "load_SS_cache(new_ss, ss_descr_addr, &ss_entry);",
+          "actual": "load_SS_cache(new_ss, ss_descr_addr, &ss_entry);"
+        },
+        {
+          "original_line": 220,
+          "original": "spush16(old_ss);",
+          "actual": "spush16(old_ss);"
+        },
+        {
+          "original_line": 221,
+          "original": "spush(old_sp);",
+          "actual": "spush(old_sp);"
+        },
+        {
+          "original_line": 224,
+          "original": "for ( i = count-1; i >= 0; i-- )",
+          "actual": "for ( i = count-1; i >= 0; i-- )"
+        },
+        {
+          "original_line": 225,
+          "original": "spush(params[i]);",
+          "actual": "spush(params[i]);"
+        },
+        {
+          "original_line": 228,
+          "original": "spush16(old_cs);",
+          "actual": "spush16(old_cs);"
+        },
+        {
+          "original_line": 229,
+          "original": "spush(old_ip);",
+          "actual": "spush(old_ip);"
+        },
+        {
+          "original_line": 308,
+          "original": "IU32 new_dest;",
+          "actual": "IU32 new_dest;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "current_sha256": "1803b505e65ffccaf5af90d1dadb5a8de23518c28b52bf77de852b5683385b96",
+      "actual_preprocess_sha256": "f35608b7c4b118bb01cb50bad9ff916c80f093fe665c064a88f201e58de822e7",
+      "verified_original_statement_anchors": 206,
+      "anchors": [
+        {
+          "original_line": 121,
+          "original": "extern struct SasVector cSasPtrs;",
+          "actual": "extern struct SasVector cSasPtrs;"
+        },
+        {
+          "original_line": 140,
+          "original": "void\t    (*temp_func) ();",
+          "actual": "void\t    (*temp_func) ();"
+        },
+        {
+          "original_line": 203,
+          "original": "IU32\taddr;",
+          "actual": "IU32\taddr;"
+        },
+        {
+          "original_line": 207,
+          "original": "addr = c_getLDT_BASE() + ((data_sel = sel1) & ~7);",
+          "actual": "addr = c_getLDT_BASE() + ((data_sel = sel1) & ~7);"
+        },
+        {
+          "original_line": 214,
+          "original": "addr = c_getLDT_BASE() + ((code_sel = sel2) & ~7);",
+          "actual": "addr = c_getLDT_BASE() + ((code_sel = sel2) & ~7);"
+        },
+        {
+          "original_line": 310,
+          "original": "SAS_MEM_TYPE startType;",
+          "actual": "SAS_MEM_TYPE startType;"
+        },
+        {
+          "original_line": 315,
+          "original": "return(startType);",
+          "actual": "return(startType);"
+        },
+        {
+          "original_line": 317,
+          "original": "return(SAS_DANGEROUS);",
+          "actual": "return(SAS_DANGEROUS);"
+        },
+        {
+          "original_line": 340,
+          "original": "memcpy(&Sas, newPointers, sizeof(struct SasVector));",
+          "actual": "memcpy(&Sas, newPointers, sizeof(struct SasVector));"
+        },
+        {
+          "original_line": 352,
+          "original": "IU32\trequired_mem;",
+          "actual": "IU32\trequired_mem;"
+        },
+        {
+          "original_line": 353,
+          "original": "IUM16\tipatch;",
+          "actual": "IUM16\tipatch;"
+        },
+        {
+          "original_line": 354,
+          "original": "IU8\t*ptr;",
+          "actual": "IU8\t*ptr;"
+        },
+        {
+          "original_line": 355,
+          "original": "char\t*env;",
+          "actual": "char\t*env;"
+        },
+        {
+          "original_line": 362,
+          "original": "SasSetPointers(&cSasPtrs);",
+          "actual": "SasSetPointers(&cSasPtrs);"
+        },
+        {
+          "original_line": 368,
+          "original": "Start_of_M_area = (IU8 *) host_sas_init(size);",
+          "actual": "Start_of_M_area = (IU8 *) host_sas_init(size);"
+        },
+        {
+          "original_line": 372,
+          "original": "env = getenv(\"CPU_INITIALISE_MEMORY\");",
+          "actual": "env = getenv(\"CPU_INITIALISE_MEMORY\");"
+        },
+        {
+          "original_line": 375,
+          "original": "int zap = strtol(env, (char **)0, 16);",
+          "actual": "int zap = strtol(env, (char **)0, 16);"
+        },
+        {
+          "original_line": 378,
+          "original": "if (!memory_type)",
+          "actual": "if (!memory_type)"
+        },
+        {
+          "original_line": 387,
+          "original": "CCPU_M = Start_of_M_area;",
+          "actual": "CCPU_M = Start_of_M_area;"
+        },
+        {
+          "original_line": 396,
+          "original": "c_sas_connect_memory(0, size - 1, SAS_RAM);",
+          "actual": "c_sas_connect_memory(0, size - 1, SAS_RAM);"
+        },
+        {
+          "original_line": 398,
+          "original": "Length_of_M_area = size;",
+          "actual": "Length_of_M_area = size;"
+        },
+        {
+          "original_line": 406,
+          "original": "rom_init();",
+          "actual": "rom_init();"
+        },
+        {
+          "original_line": 409,
+          "original": "copyROM();",
+          "actual": "copyROM();"
+        },
+        {
+          "original_line": 417,
+          "original": "if (Start_of_M_area)",
+          "actual": "if (Start_of_M_area)"
+        },
+        {
+          "original_line": 418,
+          "original": "free(Start_of_M_area);",
+          "actual": "free(Start_of_M_area);"
+        },
+        {
+          "original_line": 419,
+          "original": "if (memory_type)",
+          "actual": "if (memory_type)"
+        },
+        {
+          "original_line": 420,
+          "original": "free(memory_type);",
+          "actual": "free(memory_type);"
+        },
+        {
+          "original_line": 431,
+          "original": "return (Length_of_M_area);",
+          "actual": "return (Length_of_M_area);"
+        },
+        {
+          "original_line": 447,
+          "original": "if ((high & 0xfff) == 0) {",
+          "actual": "if ((high & 0xfff) == 0) {"
+        },
+        {
+          "original_line": 448,
+          "original": "if (high)",
+          "actual": "if (high)"
+        },
+        {
+          "original_line": 453,
+          "original": "memset(&memory_type[low >> 12], type, (high >> 12) - (low >> 12) + 1);",
+          "actual": "memset(&memory_type[low >> 12], type, (high >> 12) - (low >> 12) + 1);"
+        },
+        {
+          "original_line": 460,
+          "original": "return(memory_type[ addr >> 12 ]);",
+          "actual": "return(memory_type[ addr >> 12 ]);"
+        },
+        {
+          "original_line": 477,
+          "original": "SasWrapMask = 0xfffff;",
+          "actual": "SasWrapMask = 0xfffff;"
+        },
+        {
+          "original_line": 484,
+          "original": "SasWrapMask = 0xffffffff;",
+          "actual": "SasWrapMask = 0xffffffff;"
+        },
+        {
+          "original_line": 490,
+          "original": "return (SasWrapMask == 0xfffff);",
+          "actual": "return (SasWrapMask == 0xfffff);"
+        },
+        {
+          "original_line": 520,
+          "original": "IUM32\tretVal;",
+          "actual": "IUM32\tretVal;"
+        },
+        {
+          "original_line": 522,
+          "original": "addr &= SasWrapMask;",
+          "actual": "addr &= SasWrapMask;"
+        },
+        {
+          "original_line": 524,
+          "original": "if ((addr + typeSize + 1) >= Length_of_M_area) {",
+          "actual": "if ((addr + typeSize + 1) >= Length_of_M_area) {"
+        },
+        {
+          "original_line": 527,
+          "original": "if (first)",
+          "actual": "if (first)"
+        },
+        {
+          "original_line": 529,
+          "original": "char *env = getenv(\"BEYOND_MEMORY_VALUE\");",
+          "actual": "char *env = getenv(\"BEYOND_MEMORY_VALUE\");"
+        },
+        {
+          "original_line": 532,
+          "original": "junk_value = strtol(env, (char **)0, 16);",
+          "actual": "junk_value = strtol(env, (char **)0, 16);"
+        },
+        {
+          "original_line": 538,
+          "original": "return(junk_value);",
+          "actual": "return(junk_value);"
+        },
+        {
+          "original_line": 541,
+          "original": "switch (readSelfMod(addr, typeSize)) {",
+          "actual": "switch (readSelfMod(addr, typeSize)) {"
+        },
+        {
+          "original_line": 543,
+          "original": "retVal = 0;",
+          "actual": "retVal = 0;"
+        },
+        {
+          "original_line": 545,
+          "original": "retVal = retVal",
+          "actual": "retVal = retVal"
+        },
+        {
+          "original_line": 546,
+          "original": "+((IUM32)phyR(addr, 1, read_pointers.b_read,",
+          "actual": "+((IUM32)phyR(addr, 1, read_pointers.b_read,"
+        },
+        {
+          "original_line": 550,
+          "original": "return(retVal);",
+          "actual": "return(retVal);"
+        },
+        {
+          "original_line": 553,
+          "original": "return ((*vidFP)(addr));",
+          "actual": "return ((*vidFP)(addr));"
+        },
+        {
+          "original_line": 558,
+          "original": "return (0xffffffff);",
+          "actual": "return (0xffffffff);"
+        },
+        {
+          "original_line": 571,
+          "original": "retVal = 0;",
+          "actual": "retVal = 0;"
+        },
+        {
+          "original_line": 573,
+          "original": "while (typeSize > 0) {",
+          "actual": "while (typeSize > 0) {"
+        },
+        {
+          "original_line": 574,
+          "original": "retVal = retVal << 8;",
+          "actual": "retVal = retVal << 8;"
+        },
+        {
+          "original_line": 575,
+          "original": "retVal += *(c_GetPhyAdd(addr));",
+          "actual": "retVal += *(c_GetPhyAdd(addr));"
+        },
+        {
+          "original_line": 576,
+          "original": "addr -= 1;",
+          "actual": "addr -= 1;"
+        },
+        {
+          "original_line": 577,
+          "original": "typeSize -= 1;",
+          "actual": "typeSize -= 1;"
+        },
+        {
+          "original_line": 579,
+          "original": "return(retVal);",
+          "actual": "return(retVal);"
+        },
+        {
+          "original_line": 602,
+          "original": "IU8 retVal;",
+          "actual": "IU8 retVal;"
+        },
+        {
+          "original_line": 604,
+          "original": "retVal = (IU8)phyR(addr, sizeof(IU8), read_pointers.b_read, \"byte\");",
+          "actual": "retVal = (IU8)phyR(addr, sizeof(IU8), read_pointers.b_read, \"byte\");"
+        },
+        {
+          "original_line": 606,
+          "original": "return(retVal);",
+          "actual": "return(retVal);"
+        },
+        {
+          "original_line": 613,
+          "original": "IU16 retVal;",
+          "actual": "IU16 retVal;"
+        },
+        {
+          "original_line": 615,
+          "original": "retVal = (IU16)phyR(addr, sizeof(IU16), read_pointers.w_read, \"word\");",
+          "actual": "retVal = (IU16)phyR(addr, sizeof(IU16), read_pointers.w_read, \"word\");"
+        },
+        {
+          "original_line": 617,
+          "original": "return(retVal);",
+          "actual": "return(retVal);"
+        },
+        {
+          "original_line": 629,
+          "original": "IU16 low, high;",
+          "actual": "IU16 low, high;"
+        },
+        {
+          "original_line": 630,
+          "original": "low = (IU16)phyR(addr, sizeof(IU16), read_pointers.w_read, \"word\");",
+          "actual": "low = (IU16)phyR(addr, sizeof(IU16), read_pointers.w_read, \"word\");"
+        },
+        {
+          "original_line": 631,
+          "original": "high = (IU16)phyR(addr + 2, sizeof(IU16), read_pointers.w_read, \"word\");",
+          "actual": "high = (IU16)phyR(addr + 2, sizeof(IU16), read_pointers.w_read, \"word\");"
+        },
+        {
+          "original_line": 633,
+          "original": "return(((IU32)high << 16) + low);",
+          "actual": "return(((IU32)high << 16) + low);"
+        },
+        {
+          "original_line": 660,
+          "original": "while (length--) {",
+          "actual": "while (length--) {"
+        },
+        {
+          "original_line": 661,
+          "original": "phy_w8(dest, *src);",
+          "actual": "phy_w8(dest, *src);"
+        },
+        {
+          "original_line": 690,
+          "original": "c_sas_PWS(dest, src, length);",
+          "actual": "c_sas_PWS(dest, src, length);"
+        },
+        {
+          "original_line": 718,
+          "original": "while (length--) {",
+          "actual": "while (length--) {"
+        },
+        {
+          "original_line": 750,
+          "original": "c_sas_PRS(src, dest, length);",
+          "actual": "c_sas_PRS(src, dest, length);"
+        },
+        {
+          "original_line": 757,
+          "original": "return (bios_read_byte(addr));",
+          "actual": "return (bios_read_byte(addr));"
+        },
+        {
+          "original_line": 765,
+          "original": "if ((addr & 0xFFF) <= 0xFFE)",
+          "actual": "if ((addr & 0xFFF) <= 0xFFE)"
+        },
+        {
+          "original_line": 766,
+          "original": "return (bios_read_word(addr));",
+          "actual": "return (bios_read_word(addr));"
+        },
+        {
+          "original_line": 769,
+          "original": "return (bios_read_byte(addr) | ((IU16)bios_read_byte(addr+1) << 8));",
+          "actual": "return (bios_read_byte(addr) | ((IU16)bios_read_byte(addr+1) << 8));"
+        },
+        {
+          "original_line": 777,
+          "original": "if ((addr & 0xFFF) <= 0xFFC)",
+          "actual": "if ((addr & 0xFFF) <= 0xFFC)"
+        },
+        {
+          "original_line": 778,
+          "original": "return (bios_read_double(addr));",
+          "actual": "return (bios_read_double(addr));"
+        },
+        {
+          "original_line": 781,
+          "original": "return (bios_read_word(addr) | ((IU32)bios_read_word(addr+2) << 16));",
+          "actual": "return (bios_read_word(addr) | ((IU32)bios_read_word(addr+2) << 16));"
+        },
+        {
+          "original_line": 794,
+          "original": "addr &= SasWrapMask;",
+          "actual": "addr &= SasWrapMask;"
+        },
+        {
+          "original_line": 797,
+          "original": "if (addr < Length_of_M_area) {",
+          "actual": "if (addr < Length_of_M_area) {"
+        },
+        {
+          "original_line": 798,
+          "original": "temp_val = readSelfMod(addr, sizeof(IU8));",
+          "actual": "temp_val = readSelfMod(addr, sizeof(IU8));"
+        },
+        {
+          "original_line": 800,
+          "original": "switch (temp_val) {",
+          "actual": "switch (temp_val) {"
+        },
+        {
+          "original_line": 802,
+          "original": "(*(IU8 *) c_GetPhyAdd(addr)) = val;",
+          "actual": "(*(IU8 *) c_GetPhyAdd(addr)) = val;"
+        },
+        {
+          "original_line": 807,
+          "original": "(*(IU8 *) c_GetPhyAdd(addr)) = val;",
+          "actual": "(*(IU8 *) c_GetPhyAdd(addr)) = val;"
+        },
+        {
+          "original_line": 808,
+          "original": "LIM_b_write(addr);",
+          "actual": "LIM_b_write(addr);"
+        },
+        {
+          "original_line": 818,
+          "original": "printf(\"Unknown SAS type\\n\");",
+          "actual": "printf(\"Unknown SAS type\\n\");"
+        },
+        {
+          "original_line": 823,
+          "original": "(*temp_func) (addr, val);",
+          "actual": "(*temp_func) (addr, val);"
+        },
+        {
+          "original_line": 828,
+          "original": "printf(\"Byte written outside M %x\\n\", addr);",
+          "actual": "printf(\"Byte written outside M %x\\n\", addr);"
+        },
+        {
+          "original_line": 834,
+          "original": "phy_w8( addr, val );",
+          "actual": "phy_w8( addr, val );"
+        },
+        {
+          "original_line": 841,
+          "original": "bios_write_byte(addr, val);",
+          "actual": "bios_write_byte(addr, val);"
+        },
+        {
+          "original_line": 852,
+          "original": "addr &= SasWrapMask;",
+          "actual": "addr &= SasWrapMask;"
+        },
+        {
+          "original_line": 855,
+          "original": "if ((addr + 1) < Length_of_M_area) {",
+          "actual": "if ((addr + 1) < Length_of_M_area) {"
+        },
+        {
+          "original_line": 856,
+          "original": "temp_val = readSelfMod(addr, sizeof(IU16));",
+          "actual": "temp_val = readSelfMod(addr, sizeof(IU16));"
+        },
+        {
+          "original_line": 858,
+          "original": "switch (temp_val) {",
+          "actual": "switch (temp_val) {"
+        },
+        {
+          "original_line": 860,
+          "original": "write_word(addr, val);",
+          "actual": "write_word(addr, val);"
+        },
+        {
+          "original_line": 865,
+          "original": "write_word(addr, val);",
+          "actual": "write_word(addr, val);"
+        },
+        {
+          "original_line": 866,
+          "original": "LIM_w_write(addr);",
+          "actual": "LIM_w_write(addr);"
+        },
+        {
+          "original_line": 876,
+          "original": "printf(\"Unknown Sas type\\n\");",
+          "actual": "printf(\"Unknown Sas type\\n\");"
+        },
+        {
+          "original_line": 881,
+          "original": "(*temp_func) (addr, val);",
+          "actual": "(*temp_func) (addr, val);"
+        },
+        {
+          "original_line": 886,
+          "original": "printf(\"Word written outside M %x\\n\", addr);",
+          "actual": "printf(\"Word written outside M %x\\n\", addr);"
+        },
+        {
+          "original_line": 892,
+          "original": "phy_w16( addr, val );",
+          "actual": "phy_w16( addr, val );"
+        },
+        {
+          "original_line": 898,
+          "original": "phy_w16(addr, (IU16)val);",
+          "actual": "phy_w16(addr, (IU16)val);"
+        },
+        {
+          "original_line": 899,
+          "original": "phy_w16(addr + 2, (IU16)(val >> 16));",
+          "actual": "phy_w16(addr + 2, (IU16)(val >> 16));"
+        },
+        {
+          "original_line": 906,
+          "original": "phy_w32( addr, val );",
+          "actual": "phy_w32( addr, val );"
+        },
+        {
+          "original_line": 915,
+          "original": "if ((addr & 0xFFF) <= 0xFFE)",
+          "actual": "if ((addr & 0xFFF) <= 0xFFE)"
+        },
+        {
+          "original_line": 916,
+          "original": "bios_write_word(addr, val);",
+          "actual": "bios_write_word(addr, val);"
+        },
+        {
+          "original_line": 919,
+          "original": "bios_write_byte(addr+1, val >> 8);",
+          "actual": "bios_write_byte(addr+1, val >> 8);"
+        },
+        {
+          "original_line": 920,
+          "original": "bios_write_byte(addr, val & 0xFF);",
+          "actual": "bios_write_byte(addr, val & 0xFF);"
+        },
+        {
+          "original_line": 930,
+          "original": "if ((addr & 0xFFF) <= 0xFFC)",
+          "actual": "if ((addr & 0xFFF) <= 0xFFC)"
+        },
+        {
+          "original_line": 931,
+          "original": "bios_write_double(addr, val);",
+          "actual": "bios_write_double(addr, val);"
+        },
+        {
+          "original_line": 934,
+          "original": "bios_write_word(addr+2, val >> 16);",
+          "actual": "bios_write_word(addr+2, val >> 16);"
+        },
+        {
+          "original_line": 935,
+          "original": "bios_write_word(addr, val & 0xFFFF);",
+          "actual": "bios_write_word(addr, val & 0xFFFF);"
+        },
+        {
+          "original_line": 949,
+          "original": "IU8 *destP;",
+          "actual": "IU8 *destP;"
+        },
+        {
+          "original_line": 951,
+          "original": "for (destP = dest; destP < (dest + len); destP++) {",
+          "actual": "for (destP = dest; destP < (dest + len); destP++) {"
+        },
+        {
+          "original_line": 960,
+          "original": "c_sas_loads(src, dest, len);",
+          "actual": "c_sas_loads(src, dest, len);"
+        },
+        {
+          "original_line": 972,
+          "original": "IU8 *srcP;",
+          "actual": "IU8 *srcP;"
+        },
+        {
+          "original_line": 977,
+          "original": "savedDest = dest;",
+          "actual": "savedDest = dest;"
+        },
+        {
+          "original_line": 978,
+          "original": "for (srcP = src; srcP < (src + len); srcP++) {",
+          "actual": "for (srcP = src; srcP < (src + len); srcP++) {"
+        },
+        {
+          "original_line": 979,
+          "original": "c_sas_store(dest, *srcP);",
+          "actual": "c_sas_store(dest, *srcP);"
+        },
+        {
+          "original_line": 987,
+          "original": "c_sas_stores(dest, src, len);",
+          "actual": "c_sas_stores(dest, src, len);"
+        },
+        {
+          "original_line": 1005,
+          "original": "for (offset = 0; offset < len; offset++) {",
+          "actual": "for (offset = 0; offset < len; offset++) {"
+        },
+        {
+          "original_line": 1006,
+          "original": "c_sas_store(dest + offset, c_sas_hw_at(src + offset));",
+          "actual": "c_sas_store(dest + offset, c_sas_hw_at(src + offset));"
+        },
+        {
+          "original_line": 1018,
+          "original": "for (offset = 0; offset < len; offset += 2) {",
+          "actual": "for (offset = 0; offset < len; offset += 2) {"
+        },
+        {
+          "original_line": 1019,
+          "original": "c_sas_storew(dest + offset, c_sas_w_at(src + offset));",
+          "actual": "c_sas_storew(dest + offset, c_sas_w_at(src + offset));"
+        },
+        {
+          "original_line": 1031,
+          "original": "for (offset = 0; offset < len; offset += 4) {",
+          "actual": "for (offset = 0; offset < len; offset += 4) {"
+        },
+        {
+          "original_line": 1032,
+          "original": "c_sas_storedw(dest + offset, c_sas_dw_at(src + offset));",
+          "actual": "c_sas_storedw(dest + offset, c_sas_dw_at(src + offset));"
+        },
+        {
+          "original_line": 1042,
+          "original": "c_sas_not_used();",
+          "actual": "c_sas_not_used();"
+        },
+        {
+          "original_line": 1050,
+          "original": "c_sas_not_used();",
+          "actual": "c_sas_not_used();"
+        },
+        {
+          "original_line": 1058,
+          "original": "c_sas_not_used();",
+          "actual": "c_sas_not_used();"
+        },
+        {
+          "original_line": 1078,
+          "original": "for (i = 0; i < len; i++)",
+          "actual": "for (i = 0; i < len; i++)"
+        },
+        {
+          "original_line": 1080,
+          "original": "c_sas_store(dest, val);",
+          "actual": "c_sas_store(dest, val);"
+        },
+        {
+          "original_line": 1099,
+          "original": "for (i = 0; i < len; i++)",
+          "actual": "for (i = 0; i < len; i++)"
+        },
+        {
+          "original_line": 1101,
+          "original": "c_sas_storew(dest, val);",
+          "actual": "c_sas_storew(dest, val);"
+        },
+        {
+          "original_line": 1102,
+          "original": "dest += 2;",
+          "actual": "dest += 2;"
+        },
+        {
+          "original_line": 1120,
+          "original": "for (i = 0; i < len; i++)",
+          "actual": "for (i = 0; i < len; i++)"
+        },
+        {
+          "original_line": 1122,
+          "original": "c_sas_storedw(dest, val);",
+          "actual": "c_sas_storedw(dest, val);"
+        },
+        {
+          "original_line": 1123,
+          "original": "dest += 4;",
+          "actual": "dest += 4;"
+        },
+        {
+          "original_line": 1153,
+          "original": "if (length > currentLength) {",
+          "actual": "if (length > currentLength) {"
+        },
+        {
+          "original_line": 1154,
+          "original": "if (scratch) {",
+          "actual": "if (scratch) {"
+        },
+        {
+          "original_line": 1156,
+          "original": "printf(\"Freeing old scratch buffer - VGA will be broken!\\n\");",
+          "actual": "printf(\"Freeing old scratch buffer - VGA will be broken!\\n\");"
+        },
+        {
+          "original_line": 1161,
+          "original": "currentLength = length;",
+          "actual": "currentLength = length;"
+        },
+        {
+          "original_line": 1163,
+          "original": "return (scratch);",
+          "actual": "return (scratch);"
+        },
+        {
+          "original_line": 1195,
+          "original": "return (c_sas_scratch_address(length));",
+          "actual": "return (c_sas_scratch_address(length));"
+        },
+        {
+          "original_line": 1207,
+          "original": "IU8       hi, lo;",
+          "actual": "IU8       hi, lo;"
+        },
+        {
+          "original_line": 1210,
+          "original": "hi = (IU8) ((wrd >> 8) & 0xff);",
+          "actual": "hi = (IU8) ((wrd >> 8) & 0xff);"
+        },
+        {
+          "original_line": 1211,
+          "original": "lo = (IU8) (wrd & 0xff);",
+          "actual": "lo = (IU8) (wrd & 0xff);"
+        },
+        {
+          "original_line": 1223,
+          "original": "IU8       hi, lo;",
+          "actual": "IU8       hi, lo;"
+        },
+        {
+          "original_line": 1226,
+          "original": "hi = *(c_GetPhyAdd(addr + 1));",
+          "actual": "hi = *(c_GetPhyAdd(addr + 1));"
+        },
+        {
+          "original_line": 1227,
+          "original": "lo = *(c_GetPhyAdd(addr));",
+          "actual": "lo = *(c_GetPhyAdd(addr));"
+        },
+        {
+          "original_line": 1231,
+          "original": "return (((IU16)hi << 8) + (IU16) lo);",
+          "actual": "return (((IU16)hi << 8) + (IU16) lo);"
+        },
+        {
+          "original_line": 1238,
+          "original": "int\t     int_type = (int) (type);",
+          "actual": "int\t     int_type = (int) (type);"
+        },
+        {
+          "original_line": 1242,
+          "original": "b_move_ptrs[int_type] = (void (*) ()) (handlers->b_move);",
+          "actual": "b_move_ptrs[int_type] = (void (*) ()) (handlers->b_move);"
+        },
+        {
+          "original_line": 1243,
+          "original": "w_move_ptrs[int_type] = (void (*) ()) (handlers->w_move);",
+          "actual": "w_move_ptrs[int_type] = (void (*) ()) (handlers->w_move);"
+        },
+        {
+          "original_line": 1244,
+          "original": "b_fill_ptrs[int_type] = (void (*) ()) (handlers->b_fill);",
+          "actual": "b_fill_ptrs[int_type] = (void (*) ()) (handlers->b_fill);"
+        },
+        {
+          "original_line": 1245,
+          "original": "w_fill_ptrs[int_type] = (void (*) ()) (handlers->w_fill);",
+          "actual": "w_fill_ptrs[int_type] = (void (*) ()) (handlers->w_fill);"
+        },
+        {
+          "original_line": 1274,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1276,
+          "original": "else if (xtrn2phy(linAddr, (IUM8)0, &phyAddr))",
+          "actual": "else if (xtrn2phy(linAddr, (IUM8)0, &phyAddr))"
+        },
+        {
+          "original_line": 1277,
+          "original": "return(c_GetPhyAdd(phyAddr));",
+          "actual": "return(c_GetPhyAdd(phyAddr));"
+        },
+        {
+          "original_line": 1311,
+          "original": "IU8 *retVal;",
+          "actual": "IU8 *retVal;"
+        },
+        {
+          "original_line": 1317,
+          "original": "return((IU8 *)((IHPE)Start_of_M_area + (IHPE)addr));",
+          "actual": "return((IU8 *)((IHPE)Start_of_M_area + (IHPE)addr));"
+        },
+        {
+          "original_line": 1379,
+          "original": "IU16 savedCS;",
+          "actual": "IU16 savedCS;"
+        },
+        {
+          "original_line": 1380,
+          "original": "IU32 savedEIP;",
+          "actual": "IU32 savedEIP;"
+        },
+        {
+          "original_line": 1381,
+          "original": "IU32 savedEAX;",
+          "actual": "IU32 savedEAX;"
+        },
+        {
+          "original_line": 1382,
+          "original": "IU16 savedDS;",
+          "actual": "IU16 savedDS;"
+        },
+        {
+          "original_line": 1383,
+          "original": "IU32 savedEDX;",
+          "actual": "IU32 savedEDX;"
+        },
+        {
+          "original_line": 1384,
+          "original": "IU32 savedEBP;",
+          "actual": "IU32 savedEBP;"
+        },
+        {
+          "original_line": 1385,
+          "original": "IU32 result;",
+          "actual": "IU32 result;"
+        },
+        {
+          "original_line": 1387,
+          "original": "if (first)",
+          "actual": "if (first)"
+        },
+        {
+          "original_line": 1389,
+          "original": "if (Sas.Sas_w_at(0xF3030) == 0x9066)",
+          "actual": "if (Sas.Sas_w_at(0xF3030) == 0x9066)"
+        },
+        {
+          "original_line": 1394,
+          "original": "bodgeAdjustment = 2;",
+          "actual": "bodgeAdjustment = 2;"
+        },
+        {
+          "original_line": 1420,
+          "original": "if (trace_bios_inst)",
+          "actual": "if (trace_bios_inst)"
+        },
+        {
+          "original_line": 1425,
+          "original": "host_simulate();",
+          "actual": "host_simulate();"
+        },
+        {
+          "original_line": 1448,
+          "original": "return (result);",
+          "actual": "return (result);"
+        },
+        {
+          "original_line": 1532,
+          "original": "switch (port)",
+          "actual": "switch (port)"
+        },
+        {
+          "original_line": 1544,
+          "original": "if (!selectors_set) {",
+          "actual": "if (!selectors_set) {"
+        },
+        {
+          "original_line": 1566,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1589,
+          "original": "access_request = access_request | 0x4;",
+          "actual": "access_request = access_request | 0x4;"
+        },
+        {
+          "original_line": 1594,
+          "original": "if (xtrn2phy(linAddr, access_request, &phyAddr))",
+          "actual": "if (xtrn2phy(linAddr, access_request, &phyAddr))"
+        },
+        {
+          "original_line": 1596,
+          "original": "return(phy_r8(phyAddr));",
+          "actual": "return(phy_r8(phyAddr));"
+        },
+        {
+          "original_line": 1605,
+          "original": "if (!selectors_set)",
+          "actual": "if (!selectors_set)"
+        },
+        {
+          "original_line": 1631,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1654,
+          "original": "access_request = access_request | 0x4;",
+          "actual": "access_request = access_request | 0x4;"
+        },
+        {
+          "original_line": 1659,
+          "original": "if (xtrn2phy(linAddr, access_request, &phyAddr))",
+          "actual": "if (xtrn2phy(linAddr, access_request, &phyAddr))"
+        },
+        {
+          "original_line": 1661,
+          "original": "return(phy_r16(phyAddr));",
+          "actual": "return(phy_r16(phyAddr));"
+        },
+        {
+          "original_line": 1670,
+          "original": "if (!selectors_set)",
+          "actual": "if (!selectors_set)"
+        },
+        {
+          "original_line": 1695,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1718,
+          "original": "access_request = access_request | 0x4;",
+          "actual": "access_request = access_request | 0x4;"
+        },
+        {
+          "original_line": 1723,
+          "original": "if (xtrn2phy(linAddr, access_request, &phyAddr))",
+          "actual": "if (xtrn2phy(linAddr, access_request, &phyAddr))"
+        },
+        {
+          "original_line": 1725,
+          "original": "return(phy_r32(phyAddr));",
+          "actual": "return(phy_r32(phyAddr));"
+        },
+        {
+          "original_line": 1734,
+          "original": "if (!selectors_set)",
+          "actual": "if (!selectors_set)"
+        },
+        {
+          "original_line": 1759,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1782,
+          "original": "access_request = access_request | 0x4;",
+          "actual": "access_request = access_request | 0x4;"
+        },
+        {
+          "original_line": 1786,
+          "original": "if (xtrn2phy(linAddr, access_request, &addr))",
+          "actual": "if (xtrn2phy(linAddr, access_request, &addr))"
+        },
+        {
+          "original_line": 1788,
+          "original": "phy_w8(addr, value);",
+          "actual": "phy_w8(addr, value);"
+        },
+        {
+          "original_line": 1798,
+          "original": "if (!selectors_set)",
+          "actual": "if (!selectors_set)"
+        },
+        {
+          "original_line": 1823,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1846,
+          "original": "access_request = access_request | 0x4;",
+          "actual": "access_request = access_request | 0x4;"
+        },
+        {
+          "original_line": 1850,
+          "original": "if (xtrn2phy(linAddr, access_request, &addr))",
+          "actual": "if (xtrn2phy(linAddr, access_request, &addr))"
+        },
+        {
+          "original_line": 1852,
+          "original": "phy_w16(addr, value);",
+          "actual": "phy_w16(addr, value);"
+        },
+        {
+          "original_line": 1862,
+          "original": "if (!selectors_set)",
+          "actual": "if (!selectors_set)"
+        },
+        {
+          "original_line": 1887,
+          "original": "if (!c_getPG())",
+          "actual": "if (!c_getPG())"
+        },
+        {
+          "original_line": 1910,
+          "original": "access_request = access_request | 0x4;",
+          "actual": "access_request = access_request | 0x4;"
+        },
+        {
+          "original_line": 1914,
+          "original": "if (xtrn2phy(linAddr, access_request, &addr))",
+          "actual": "if (xtrn2phy(linAddr, access_request, &addr))"
+        },
+        {
+          "original_line": 1916,
+          "original": "phy_w32(addr, value);",
+          "actual": "phy_w32(addr, value);"
+        },
+        {
+          "original_line": 1926,
+          "original": "if (!selectors_set)",
+          "actual": "if (!selectors_set)"
+        },
+        {
+          "original_line": 1952,
+          "original": "return (c_GetPhyAdd(addr));",
+          "actual": "return (c_GetPhyAdd(addr));"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "original_sha256": "8bc5bad26249b91c1cc9b3be756575c081b2da322bb8dcc7e9f554d4f68a4e96",
+      "current_sha256": "0c67fd365d4688de553239e82faf1524a83307e75135b3e9822fdbb9f6f8c0eb",
+      "actual_preprocess_sha256": "16a0f0bff7d747a78f2cc105367b107d62a03f6c8381b2d29112e3a1cd226045",
+      "verified_original_statement_anchors": 2,
+      "anchors": [
+        {
+          "original_line": 44,
+          "original": "IU32 temp;",
+          "actual": "IU32 temp;"
+        },
+        {
+          "original_line": 49,
+          "original": "op1 = op1 & ~no_set;",
+          "actual": "op1 = op1 & ~no_set;"
+        }
+      ]
+    }
+  ]
+}

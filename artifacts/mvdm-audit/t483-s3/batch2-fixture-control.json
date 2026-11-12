@@ -1,0 +1,17 @@
+{
+  "failure": "Existing high-linear fixture expected every high-address lease to reject, contrary to current page-checked adapter",
+  "control": "Unmodified HEAD fixture rebuilt against same selected libraries: same shared clock low-address lease publication failure without CALLF test enabled",
+  "control_source_sha256": "d4c6b5d60501e3172389a104c040afeac326ba7c9e9d6ad177f8c6468703b3d3",
+  "adapter": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c range_valid validates actual paging; guest_memory_lease_acquire snapshots reads, writes validate on commit",
+  "correction": "Require mapped read success and exact bytes; reject read-only write on commit without altering bytes; reject unmapped read; retain physical alias publication, mode transition, remap, unmap, native backing and original USER checks",
+  "initial_correction_error": "r2 incorrectly expected WRITE acquisition to check write permissions; corrected to actual copy/commit boundary in r3",
+  "final": "build/t483-s3-p2/callf-r3/result.txt PASS; original CCPU CALLF/RETF registers and stack also pass",
+  "product_changes_for_fixture": "None",
+  "test_hash": "f8d9b73995b36851c55b112ccf3c63a9285d5fedf506fe2a4d97aedc5a67af62",
+  "logs": {
+    "before.err": "ccpu386ThrdExptnPtr id:0x7c7c called with Bad Id\r\nsas-init\r\ncpu-init\r\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\r\nseed\r\nstart\r\nreturned-start\r\nreenter\r\nreturned-recursive\r\nshared clock low-address lease publication failed\r\n",
+    "callf-r3/stderr.txt": "ccpu386ThrdExptnPtr id:0x9118 called with Bad Id\r\nsas-init\r\ncpu-init\r\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\r\nseed\r\nstart\r\nreturned-start\r\nreenter\r\nreturned-recursive\r\nCCPU_CALLF_RETF_OK\r\n",
+    "callf-r3/stdout.txt": "CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\nCCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\r\n",
+    "callf-r3/result.txt": "PASS original CCPU CALLF/RETF register and stack behavior\r\n"
+  }
+}

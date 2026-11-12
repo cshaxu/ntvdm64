@@ -23,7 +23,6 @@ LMSW CPU functions.
 #include <c_xcptn.h>
 #include	<c_reg.h>
 #include <lmsw.h>
-#include "mvdm_softpc_termination.h"
 #line 26
 
 
@@ -50,11 +49,6 @@ IFN1(
    /* kill off bits which can not be set */
    op1 = op1 & ~no_set;
 
-   /* DIVERGENCE(MVDM-HOST-DIV-327): S4's default-off Windows 3.1 Setup
-    * witness records the operand at the original mode-switch boundary.  It
-    * does not select the transition or alter CCPU state. */
-   mvdm_softpc_report_setup_mode_switch("lmsw-before", op1,
-       GET_CR(CR_STAT));
 
 #line 51
    /* retain bits which can not be cleared */
@@ -63,7 +57,5 @@ IFN1(
    /* thus update only the bits allowed */
    SET_CR(CR_STAT, temp | op1);
 
-   mvdm_softpc_report_setup_mode_switch("lmsw-after", op1,
-       GET_CR(CR_STAT));
 #line 56
    }

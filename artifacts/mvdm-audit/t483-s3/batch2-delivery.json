@@ -1,0 +1,141 @@
+{
+  "baseline": "c5891947e",
+  "entries": 21,
+  "mirror_files": 7,
+  "coupled_test_files": 3,
+  "build": "cached x86/x64 full build passed",
+  "focused": "Original CALLF/RETF and complete high-linear fixture passed r3; stale lease assumption corrected with unmodified-fixture failure control; product unchanged for fixture repair",
+  "line_checks": "686 actual original statement/position matches in selected MSVC preprocess output; source comparison preserves original code line mappings",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 373956,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6859,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1097,
+        "CleanupMs": 535,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 156,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67212,
+        "CleanupMs": 552,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 43536,
+        "CleanupMs": 562,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44369,
+        "CleanupMs": 617,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15329,
+        "CleanupMs": 648,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12607,
+        "CleanupMs": 639,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 64274,
+        "CleanupMs": 702,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12545,
+        "CleanupMs": 644,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28870,
+        "CleanupMs": 619,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30482,
+        "CleanupMs": 654,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4541,
+        "CleanupMs": 661,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7683,
+        "CleanupMs": 624,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10538,
+        "CleanupMs": 588,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5324,
+        "CleanupMs": 619,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6920,
+        "CleanupMs": 563,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "53cbb7fd-6fed-47b9-8756-b858f6950d03",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "footprint": {
+    "mirror": {
+      "added": 1,
+      "deleted": 87,
+      "net": -86
+    },
+    "tests": {
+      "added": 34,
+      "deleted": 103,
+      "net": -69
+    }
+  },
+  "limitations": [
+    "External DOS4GW/NESticle fixture missing and explicitly skipped",
+    "Shared diagnostic providers remain pending final S3 caller cleanup"
+  ],
+  "guest_and_winnt_zip_unchanged": true
+}

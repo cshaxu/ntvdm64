@@ -394,10 +394,21 @@ static int fixture_high_linear_page(void)
         goto done;
     }
     puts("CCPU_HIGH_LINEAR_CLOCK_INSTRUCTIONS_OK");
-    /* A host publisher can use the allocated low canonical address with the
-     * existing bounded lease. There is no reason to broaden that API to
-     * arbitrary high guest addresses just to maintain this shared clock. */
-    if (mvdm_softpc_guest_memory_acquire(linear, 4u,
+    /* The current lease adapter accepts mapped high linear addresses and
+     * enforces CPU page permissions. Keep the physical alias for publishing. */
+    if (!mvdm_softpc_guest_memory_acquire(linear, 4u,
+            GUEST_MEMORY_ACCESS_READ, &lease, &lease_bytes) ||
+        lease == NULL || lease_bytes == NULL ||
+        memcmp(lease_bytes, "\x67\x45\x23\x01", 4u) != 0 ||
+        !mvdm_softpc_guest_memory_release(lease, 0)) {
+        fputs("shared clock mapped read lease failed\n", stderr);
+        goto done;
+    }
+    lease = NULL;
+    lease_bytes = NULL;
+    if (mvdm_softpc_guest_memory_copy_to(linear, updated_tick, 4u) ||
+        c_sas_dw_at(linear) != 0x01234567u ||
+        mvdm_softpc_guest_memory_acquire(linear + 8192u, 4u,
             GUEST_MEMORY_ACCESS_READ, &lease, &lease_bytes) ||
         lease != NULL || lease_bytes != NULL ||
         !mvdm_softpc_guest_memory_copy_to(first, updated_tick, 4u) ||
@@ -870,42 +881,25 @@ int main(void)
         return 1;
     }
 
-    /* Execute an actual real-mode CALLF/RETF with the production CCPU and
-     * trace reporter. The code below is a fixture input, not guest media. */
-    if (getenv("CCPU_CALLF_TRACE_PATH")) {
-        const char *trace = getenv("CCPU_CALLF_TRACE_PATH");
-        const char *old_path = getenv("MVDM_WOW_CALLBACK_CPU_TRACE_PATH");
-        const char *old_filter = getenv("MVDM_WOW_CALLBACK_CPU_SELECTOR");
-        char path_copy[MAX_PATH], filter_copy[32];
-        BOOL had_path = old_path && strlen(old_path) < sizeof(path_copy);
-        BOOL had_filter = old_filter && strlen(old_filter) < sizeof(filter_copy);
-        unsigned mode, i;
+    /* Execute actual CALLF/RETF through the production CCPU. */
+    if (getenv("CCPU_CALLF_CHECK")) {
+        unsigned i;
         const IU8 call[] = {0x9a,0x20,0x00,0x00,0x01,0xd6,0xfe};
         const IU8 target[] = {0xb0,0x33,0xcb};
         IU16 old_cs = c_getCS(), old_ss = c_getSS(), old_sp = c_getSP();
-        if ((old_path && !had_path) || (old_filter && !had_filter)) return 1;
-        if (had_path) strcpy(path_copy, old_path);
-        if (had_filter) strcpy(filter_copy, old_filter);
-        if (!trace || !*trace) { fputs("CALLF trace path required\n",stderr); return 1; }
         for (i=0; i<sizeof(call); ++i) c_sas_store(0xffff0u+i, call[i]);
         for (i=0; i<sizeof(target); ++i) c_sas_store(0x1020u+i, target[i]);
-        for (mode=0; mode<3; ++mode) {
-            SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", mode ? trace : NULL);
-            SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", mode == 1 ? "0200" : "0100");
-            (void)c_setCS(0xf000); c_setIP(0xfff0);
-            (void)c_setSS(0); c_setSP(0x7000); c_setAX(0);
-            host_simulate();
-            if (c_getIP()!=0xfff7 || c_getCS()!=0xf000 || c_getSP()!=0x7000 ||
-                    (c_getAX() & 0xffu)!=0x33u) {
-                fprintf(stderr,"CCPU CALLF/RETF failed mode=%u cs=%04x ip=%04x sp=%04x ax=%04x\n",
-                    mode,c_getCS(),c_getIP(),c_getSP(),c_getAX());
-                return 1;
-            }
+        (void)c_setCS(0xf000); c_setIP(0xfff0);
+        (void)c_setSS(0); c_setSP(0x7000); c_setAX(0);
+        host_simulate();
+        if (c_getIP()!=0xfff7 || c_getCS()!=0xf000 || c_getSP()!=0x7000 ||
+                (c_getAX() & 0xffu)!=0x33u) {
+            fprintf(stderr,"CCPU CALLF/RETF failed cs=%04x ip=%04x sp=%04x ax=%04x\n",
+                c_getCS(),c_getIP(),c_getSP(),c_getAX());
+            return 1;
         }
-        SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", had_path ? path_copy : NULL);
-        SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", had_filter ? filter_copy : NULL);
         (void)c_setCS(old_cs); (void)c_setSS(old_ss); c_setSP(old_sp);
-        fputs("CCPU_CALLF_TRACE_EQUIVALENT_OK modes=3\n",stderr);
+        fputs("CCPU_CALLF_RETF_OK\n",stderr);
     }
 
 #ifdef CCPU_BIT_MATRIX

@@ -23,7 +23,6 @@ Transfer of Control Support.
 #include <c_xcptn.h>
 #include <c_reg.h>
 #include <c_xfer.h>
-#include "mvdm_softpc_termination.h"
 #line 26
 #include <c_page.h>
 #include <c_tlb.h>
@@ -206,12 +205,6 @@ IFN6(
    /* load access rights */
    AR = spr_read_byte(cs_descr_addr+5);
 
-   /* DIVERGENCE(MVDM-HOST-DIV-306): default-off observation after the
-    * original table-bound check and descriptor read.  No access decision,
-    * control transfer, register or descriptor value is altered. */
-   mvdm_softpc_report_wow_far_call_validation((unsigned short)new_cs,
-       (unsigned long)cs_descr_addr, (unsigned long)AR,
-       (unsigned long)GET_CPL());
    /* validate possible types of target */
 #line 218
    switch ( super = descriptor_super_type((IU16)AR) )

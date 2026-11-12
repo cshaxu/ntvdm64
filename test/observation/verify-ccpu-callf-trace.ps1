@@ -11,20 +11,16 @@ if($LASTEXITCODE){throw 'Selected CCPU fixture build failed'}
 $image="$worker/ccpu-high-linear-page-test.exe"
 $map="$image.map"
 $mapText=Get-Content $map -Raw
-if($mapText -notmatch '(?m)_CALLF\s+[^\r\n]*original-ccpu386:call\.obj' -or
-   $mapText -notmatch '(?m)_mvdm_softpc_report_wow_far_call_attempt\s+[^\r\n]*mvdm_softpc_termination\.obj'){
- throw 'Selected CALLF and diagnostic owners not found'
+if($mapText -notmatch '(?m)_CALLF\s+[^\r\n]*original-ccpu386:call\.obj'){
+ throw 'Selected original CALLF owner not found'
 }
-$saved=[Environment]::GetEnvironmentVariable('CCPU_CALLF_TRACE_PATH')
+$saved=[Environment]::GetEnvironmentVariable('CCPU_CALLF_CHECK')
 try {
- $env:CCPU_CALLF_TRACE_PATH="$root/trace.txt"
+ $env:CCPU_CALLF_CHECK='1'
  $p=Start-Process $image -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/stdout.txt" -RedirectStandardError "$root/stderr.txt"
  $p.WaitForExit(); $p.Refresh()
- if($p.ExitCode -or !(Select-String -LiteralPath "$root/stderr.txt" -SimpleMatch 'CCPU_CALLF_TRACE_EQUIVALENT_OK modes=3')){throw 'CCPU CALLF fixture failed'}
- $lines=@(Get-Content "$root/trace.txt")
- if($lines.Count -ne 1 -or $lines[0] -notmatch '^far-call selector=0100 offset=00000020 caller=f000:0000fff5 '){throw 'Trace filtering did not match the actual CALLF'}
- if($lines[0] -match 'code=|source=|shadow='){throw 'Trace sampled guest memory'}
+ if($p.ExitCode -or !(Select-String -LiteralPath "$root/stderr.txt" -SimpleMatch 'CCPU_CALLF_RETF_OK')){throw 'CCPU CALLF fixture failed'}
  @("$repo/test/mvdm-host/ccpu_bounded_execution_fixture.c", "$worker/obj/ccpu/call.obj", $image, $map) |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$root/inputs.csv"
- 'PASS CCPU CALLF/RETF disabled, unmatched and matching trace' | Set-Content "$root/result.txt"
-}finally{[Environment]::SetEnvironmentVariable('CCPU_CALLF_TRACE_PATH',$saved)}
+ 'PASS original CCPU CALLF/RETF register and stack behavior' | Set-Content "$root/result.txt"
+}finally{[Environment]::SetEnvironmentVariable('CCPU_CALLF_CHECK',$saved)}

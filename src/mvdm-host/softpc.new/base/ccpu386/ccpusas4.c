@@ -61,7 +61,6 @@
 #include <emm.h>
 #include <host.h>
 #include "mvdm_softpc_physical_mapping.h"
-#include "mvdm_softpc_termination.h"
 
 extern UTINY *host_sas_init IPT1(sys_addr, size);
 extern UTINY *host_sas_term IPT0();
@@ -778,9 +777,6 @@ IFN2(PHY_ADDR, addr, IU8, val)
 	sys_addr	temp_val;
 
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
-	if (mvdm_softpc_wow_source_descriptor_trace_active)
-		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
 #line 794
 	addr &= SasWrapMask;
@@ -830,9 +826,6 @@ GLOBAL void c_sas_store
 IFN2(LIN_ADDR, addr, IU8, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
-	if (mvdm_softpc_wow_source_descriptor_trace_active)
-		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 #line 841
 	bios_write_byte(addr, val);
 }
@@ -844,9 +837,6 @@ phy_w16 IFN2(PHY_ADDR, addr, IU16, val)
 	sys_addr	temp_val;
 
 	sub_note_trace2(SAS_VERBOSE, "c_sas_storew addr=%x, val=%x\n", addr, val);
-	if (mvdm_softpc_wow_source_descriptor_trace_active)
-		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
 #line 852
 	addr &= SasWrapMask;
@@ -912,9 +902,6 @@ GLOBAL void
 c_sas_storew IFN2(LIN_ADDR, addr, IU16, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_storew addr=%x, val=%x\n", addr, val);
-	if (mvdm_softpc_wow_source_descriptor_trace_active)
-		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 #line 915
 	if ((addr & 0xFFF) <= 0xFFE)
 		bios_write_word(addr, val);
@@ -930,9 +917,6 @@ GLOBAL void c_sas_storedw
 IFN2(LIN_ADDR, addr, IU32, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_storedw addr=%x, val=%x\n", addr, val);
-	if (mvdm_softpc_wow_source_descriptor_trace_active)
-		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
 #line 930
 	if ((addr & 0xFFF) <= 0xFFC)
