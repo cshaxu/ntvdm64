@@ -36,13 +36,14 @@ The previously suggested compat-first S2 is superseded.
 ## S3 Progress
 
 Assigned: 120 entries across 51 mirror files, in the existing register order.
-P1/P2 delivered 55 entries; P3 delivers another 27 in ten mirror files.
-Cached x86/x64 full builds, original/current source controls, 565 actual MSVC
-statement/line anchors and all 16 selected Full gates passed. Both publication
-destinations have the hash-verified complete package.
-82/120 delivered, 38 remain; next file host/src/nt_reset.c.
-See [P3 delivery](../../artifacts/mvdm-audit/t483-s3/batch3-delivery.json) and
-[P3 line evidence](../../artifacts/mvdm-audit/t483-s3/batch3-compiler-lines.json).
+P1–P3 delivered 82 entries; P4 delivers D1381 plus the coupled retirement of
+30 uncalled reporters and their initializer. Ten retained function bodies remain
+byte-identical. Final cached builds, 32 reporter checks, isolated actual-CCPU
+window-borrow lifecycle, 50 compiler line anchors and all 16 selected Full gates
+passed. Complete package published and hash-verified at both destinations.
+83/120 delivered, 37 remain; next file host/src/nt_timer.c.
+See [P4 delivery](../../artifacts/mvdm-audit/t483-s3/batch4-delivery.json) and
+[review including initial corrected build failure](../../artifacts/mvdm-audit/t483-s3/batch4-review.json).
 Shared providers remain until their
 last required caller is removed, then are cleaned in the same S.
 See [S3 ledger](../../artifacts/mvdm-audit/t483-s3/execution.json).
@@ -58,7 +59,7 @@ S1 register and identifiers remain immutable; S6 remains held.
 
 ## Current Technical Baseline
 
-Package `f74b6aae-0a25-494c-a5c6-d60c422cb696` (S3 P3), complete 11 images at
+Package `bd64959d-b841-471e-8b33-4fe6d7196eec` (S3 P4), complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. DOS4GW/NESticle was
 explicitly skipped because its external fixture was not supplied. No guest or
 winnt.zip change. This package is not claimed byte-equivalent to S2.

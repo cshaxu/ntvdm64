@@ -7,7 +7,6 @@
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
-#include "mvdm_softpc_termination.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_vm_ingress.h"
 #include "ntvdm_dos_observer.h"
@@ -143,7 +142,6 @@ DWORD mvdm_standalone_worker_begin(void)
     if (worker_started) return ERROR_ALREADY_EXISTS;
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
-    mvdm_softpc_initialize_default_off_traces();
     mvdm_softpc_v7_pointer_attach();
     if (!mvdm_softpc_ccpu_wait_begin()) {
         error=GetLastError(); goto fail;

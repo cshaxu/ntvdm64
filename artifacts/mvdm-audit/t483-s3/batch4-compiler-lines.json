@@ -1,0 +1,258 @@
+{
+  "method": "Actual selected MSVC original statement spelling and logical line matches; unchanged mirror remainder not reclassified.",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+  "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+  "current_sha256": "1c88272cf7c3e94e77ccc266b5a11bdde349baa0dda6972a7e2fe6eb4e8ed29f",
+  "anchors": [
+    {
+      "original_line": 61,
+      "original": "extern VIDEOFUNCS nt_video_funcs;",
+      "actual": "extern VIDEOFUNCS nt_video_funcs;"
+    },
+    {
+      "original_line": 62,
+      "original": "extern KEYBDFUNCS nt_keybd_funcs;",
+      "actual": "extern KEYBDFUNCS nt_keybd_funcs;"
+    },
+    {
+      "original_line": 63,
+      "original": "extern HOSTMOUSEFUNCS the_mouse_funcs;",
+      "actual": "extern HOSTMOUSEFUNCS the_mouse_funcs;"
+    },
+    {
+      "original_line": 67,
+      "original": "extern char achES[];",
+      "actual": "extern char achES[];"
+    },
+    {
+      "original_line": 74,
+      "original": "extern IU8 lcifo[];",
+      "actual": "extern IU8 lcifo[];"
+    },
+    {
+      "original_line": 95,
+      "original": "host_reset()",
+      "actual": "host_reset()"
+    },
+    {
+      "original_line": 102,
+      "original": "if (host_stream_io_enabled) {",
+      "actual": "if (host_stream_io_enabled) {"
+    },
+    {
+      "original_line": 108,
+      "original": "ConsoleInit();",
+      "actual": "ConsoleInit();"
+    },
+    {
+      "original_line": 109,
+      "original": "MouseAttachMenuItem(sc.ActiveOutputBufferHandle);",
+      "actual": "MouseAttachMenuItem(sc.ActiveOutputBufferHandle);"
+    },
+    {
+      "original_line": 130,
+      "original": "ResumeThread(ThreadInfo.HeartBeat.Handle);",
+      "actual": "ResumeThread(ThreadInfo.HeartBeat.Handle);"
+    },
+    {
+      "original_line": 136,
+      "original": "host_ica_unlock();",
+      "actual": "host_ica_unlock();"
+    },
+    {
+      "original_line": 171,
+      "original": "void  host_applInit(int argc,char *argv[])",
+      "actual": "void  host_applInit(int argc,char *argv[])"
+    },
+    {
+      "original_line": 173,
+      "original": "char\t*psz;",
+      "actual": "char\t*psz;"
+    },
+    {
+      "original_line": 174,
+      "original": "int  temp_argc = argc;",
+      "actual": "int  temp_argc = argc;"
+    },
+    {
+      "original_line": 175,
+      "original": "char         **temp_argv = argv;",
+      "actual": "char         **temp_argv = argv;"
+    },
+    {
+      "original_line": 178,
+      "original": "working_video_funcs = &nt_video_funcs;",
+      "actual": "working_video_funcs = &nt_video_funcs;"
+    },
+    {
+      "original_line": 179,
+      "original": "working_keybd_funcs = &nt_keybd_funcs;",
+      "actual": "working_keybd_funcs = &nt_keybd_funcs;"
+    },
+    {
+      "original_line": 180,
+      "original": "working_mouse_funcs = &the_mouse_funcs;",
+      "actual": "working_mouse_funcs = &the_mouse_funcs;"
+    },
+    {
+      "original_line": 192,
+      "original": "while (--temp_argc > 0) {",
+      "actual": "while (--temp_argc > 0) {"
+    },
+    {
+      "original_line": 193,
+      "original": "psz = *++temp_argv;",
+      "actual": "psz = *++temp_argv;"
+    },
+    {
+      "original_line": 194,
+      "original": "if (*psz == '-' || *psz == '/') {",
+      "actual": "if (*psz == '-' || *psz == '/') {"
+    },
+    {
+      "original_line": 197,
+      "original": "if (*psz == 'f') {",
+      "actual": "if (*psz == 'f') {"
+    },
+    {
+      "original_line": 199,
+      "original": "continue;",
+      "actual": "continue;"
+    },
+    {
+      "original_line": 205,
+      "original": "if (*psz == 'E') {",
+      "actual": "if (*psz == 'E') {"
+    },
+    {
+      "original_line": 208,
+      "original": "i = strlen(achES);",
+      "actual": "i = strlen(achES);"
+    },
+    {
+      "original_line": 209,
+      "original": "if (!strncmp(psz, achES, i) && strlen(psz) == (size_t)i+2) {",
+      "actual": "if (!strncmp(psz, achES, i) && strlen(psz) == (size_t)i+2) {"
+    },
+    {
+      "original_line": 210,
+      "original": "psz += i;",
+      "actual": "psz += i;"
+    },
+    {
+      "original_line": 212,
+      "original": "if (BWVKey > 0xFE)",
+      "actual": "if (BWVKey > 0xFE)"
+    },
+    {
+      "original_line": 213,
+      "original": "BWVKey = 0;",
+      "actual": "BWVKey = 0;"
+    },
+    {
+      "original_line": 218,
+      "original": "if(tolower(*psz) == 'w'){",
+      "actual": "if(tolower(*psz) == 'w'){"
+    },
+    {
+      "original_line": 220,
+      "original": "if (bSwitchF)",
+      "actual": "if (bSwitchF)"
+    },
+    {
+      "original_line": 223,
+      "original": "else if (*psz == 'o'){",
+      "actual": "else if (*psz == 'o'){"
+    },
+    {
+      "original_line": 226,
+      "original": "else if (*psz++ == 'i' && *psz) {",
+      "actual": "else if (*psz++ == 'i' && *psz) {"
+    },
+    {
+      "original_line": 235,
+      "original": "ExitProcess (0);",
+      "actual": "ExitProcess (0);"
+    },
+    {
+      "original_line": 238,
+      "original": "if (VDMForWOW) {",
+      "actual": "if (VDMForWOW) {"
+    },
+    {
+      "original_line": 239,
+      "original": "if (DosSessionId) {",
+      "actual": "if (DosSessionId) {"
+    },
+    {
+      "original_line": 246,
+      "original": "else if (StreamIoSwitchOn)",
+      "actual": "else if (StreamIoSwitchOn)"
+    },
+    {
+      "original_line": 247,
+      "original": "enable_stream_io();",
+      "actual": "enable_stream_io();"
+    },
+    {
+      "original_line": 253,
+      "original": "DuplicateHandle(GetCurrentProcess(),",
+      "actual": "DuplicateHandle(GetCurrentProcess(),"
+    },
+    {
+      "original_line": 254,
+      "original": "GetCurrentThread(),",
+      "actual": "GetCurrentThread(),"
+    },
+    {
+      "original_line": 255,
+      "original": "GetCurrentProcess(),",
+      "actual": "GetCurrentProcess(),"
+    },
+    {
+      "original_line": 257,
+      "original": "(DWORD) 0,",
+      "actual": "(DWORD) 0,"
+    },
+    {
+      "original_line": 261,
+      "original": "InitializeIcaLock();",
+      "actual": "InitializeIcaLock();"
+    },
+    {
+      "original_line": 262,
+      "original": "host_ica_lock();",
+      "actual": "host_ica_lock();"
+    },
+    {
+      "original_line": 285,
+      "original": "host_applClose(void)",
+      "actual": "host_applClose(void)"
+    },
+    {
+      "original_line": 287,
+      "original": "nt_remove_event_thread();",
+      "actual": "nt_remove_event_thread();"
+    },
+    {
+      "original_line": 289,
+      "original": "TerminateHeartBeat();",
+      "actual": "TerminateHeartBeat();"
+    },
+    {
+      "original_line": 321,
+      "original": "void host_terminate(void)",
+      "actual": "void host_terminate(void)"
+    },
+    {
+      "original_line": 329,
+      "original": "if(VDMForWOW)",
+      "actual": "if(VDMForWOW)"
+    },
+    {
+      "original_line": 334,
+      "original": "ExitProcess(VdmExitCode);",
+      "actual": "ExitProcess(VdmExitCode);"
+    }
+  ]
+}

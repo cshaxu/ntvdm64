@@ -662,9 +662,10 @@
     {
       "id": "T483-D1381",
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
-      "status": "pending",
+      "status": "delivered P4",
       "plan": "Delete call and coupled unused includes; preserve terminate.",
-      "verification": "Original terminate -> close -> host_terminate ordering."
+      "verification": "Original terminate -> close -> host_terminate ordering.",
+      "evidence": "batch4-delivery.json"
     },
     {
       "id": "T483-D1409",
@@ -928,8 +929,8 @@
   ],
   "counts": {
     "assigned": 120,
-    "delivered": 82,
-    "remaining_unprocessed": 38
+    "delivered": 83,
+    "remaining_unprocessed": 37
   },
-  "coupled_cleanup": "Shared termination diagnostic providers are removed once remaining S3 callers have been resolved; required before S3 closure."
+  "coupled_cleanup": "P4 removes 30 uncalled reporters and their initializer with product/test consumers. Retained reporter bodies have existing product callers, including S4 host-terminate. Later remove the obsolete nt_com fixture-only setup report stub; S3 cannot close before remaining coupled caller/provider cleanup."
 }

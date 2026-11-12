@@ -14,20 +14,19 @@ try {
   if($LASTEXITCODE){throw 'Observer error probe compile failed'}
  }finally{Pop-Location}
  @($source,$probe,"$root/probe.exe")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
- $line='"'+$root+'/trace.txt" "'+$root+'/absent/trace.txt"'
- $p=Start-Process "$root/probe.exe" -ArgumentList $line -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/probe.out" -RedirectStandardError "$root/probe.err"
- $null=$p.Handle
- @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;deadline=$p.StartTime.AddSeconds(20).ToUniversalTime().ToString('o')}|ConvertTo-Json|Set-Content "$root/process.json"
- if(!$p.WaitForExit(20000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned observer probe timeout'}
- $p.WaitForExit();$p.Refresh()
- if($p.ExitCode -or (Get-Content "$root/probe.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=48 result=0'){throw 'Observer error transparency failed'}
- $trace=Get-Content "$root/trace.txt" -Raw
- foreach($marker in @('wow-bop','wow-stage stage=fixture','dpmi-swint-target int=31 handler=1234:00005678 flags=9abc')){if(!$trace.Contains($marker)){throw "Missing enabled output: $marker"}}
- $enabled='"'+$root+'/illegal-enabled.txt" "'+$root+'/absent/trace.txt" enabled'
- $p=Start-Process "$root/probe.exe" -ArgumentList $enabled -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/enabled.out" -RedirectStandardError "$root/enabled.err"
- $p.WaitForExit(); $p.Refresh()
- if($p.ExitCode -or (Get-Content "$root/enabled.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=48 result=0'){throw 'Enabled illegal-op observer failed'}
- $illegal=Get-Content "$root/illegal-enabled.txt" -Raw
- if(!$illegal.Contains('#ud frame=0000:0000 stack=0000:00000000 flags=00000000') -or $illegal.Contains('words=')){throw 'Unexpected enabled illegal-op output'}
+ foreach($mode in @('disabled','long','missing','enabled')) {
+  $trace=if($mode -eq 'missing'){"$root/absent/trace.txt"}else{"$root/$mode.txt"}
+  $line='"'+$trace+'" '+$mode
+  $p=Start-Process "$root/probe.exe" -ArgumentList $line -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$mode.out" -RedirectStandardError "$root/$mode.err"
+  $null=$p.Handle
+  if(!$p.WaitForExit(20000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned observer probe timeout'}
+  $p.WaitForExit();$p.Refresh()
+  if($p.ExitCode -or (Get-Content "$root/$mode.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=8 result=0'){throw "Observer error transparency failed: $mode"}
+  if($mode -ne 'enabled' -and (Test-Path $trace)){throw "Unexpected output: $mode"}
+ }
+ $trace=Get-Content "$root/enabled.txt" -Raw
+ foreach($marker in @('fixture return=','xms-move done','wow-bop','wow-stage stage=fixture','wow-fast-binding stage=fixture','fixture cr0=','descriptor-publish selector=0008','vxd-control')) {
+  if(!$trace.Contains($marker)){throw "Missing enabled output: $marker"}
+ }
  '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

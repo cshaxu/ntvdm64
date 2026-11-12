@@ -66,7 +66,6 @@ extern int32_t c_getCPL(void);
 extern int xtrn2phy(uint32_t linear, uint32_t access, uint32_t *physical);
 extern uint32_t c_sas_dw_at(uint32_t address);
 extern void c_sas_storedw(uint32_t address, uint32_t value);
-extern volatile LONG mvdm_softpc_wow_source_descriptor_trace_active;
 extern void c_sas_fills(uint32_t address, uint8_t value, uint32_t byte_count);
 extern void c_sas_loads(uint32_t source, uint8_t *destination, uint32_t byte_count);
 extern void c_sas_stores(uint32_t destination, uint8_t *source, uint32_t byte_count);
@@ -2458,18 +2457,16 @@ static void verify_observed_window_promotion(ULONG teb)
         }
         {
             /* Publish exactly the original public fields, not an entire WND
-             * overwrite. Exercise immediate RAM stores and trace fallback
-             * using the actual original CCPU domain in this fixture. */
+             * overwrite. Exercise two successive publications using the
+             * actual original CCPU domain in this fixture. */
             const ULONG offsets[4] = {36u, 72u, 160u, 172u};
             ULONG saved_fields[4], pass, k;
-            LONG trace = mvdm_softpc_wow_source_descriptor_trace_active;
             mvdm_softpc_wow_window_observation row;
             for (k = 0; k < 4u; ++k) {
                 saved_fields[k] = c_sas_dw_at(backing + offsets[k]);
                 c_sas_storedw(backing + offsets[k], 0x74478100u + k);
             }
             for (pass = 0; pass < 2u; ++pass) {
-                InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, pass);
                 BORROW_CHECK(SetWindowPos(window, NULL, 11 + pass, 21 + pass,
                     31 + pass, 41 + pass, SWP_NOZORDER | SWP_NOACTIVATE));
                 BORROW_CHECK(GetWindowInfo(window, &info));
@@ -2482,7 +2479,6 @@ static void verify_observed_window_promotion(ULONG teb)
                 for (k = 0; k < 4u; ++k)
                     BORROW_CHECK(c_sas_dw_at(backing + offsets[k]) == 0x74478100u + k);
             }
-            InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, trace);
             for (k = 0; k < 4u; ++k)
                 c_sas_storedw(backing + offsets[k], saved_fields[k]);
         }

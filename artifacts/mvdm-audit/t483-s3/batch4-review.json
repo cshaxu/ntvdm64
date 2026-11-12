@@ -1,0 +1,71 @@
+{
+  "baseline": "287241b37",
+  "id": "T483-D1381",
+  "removed_functions": [
+    "mvdm_softpc_initialize_default_off_traces",
+    "mvdm_softpc_report_dpmi_bop",
+    "mvdm_softpc_report_dpmi_descriptor",
+    "mvdm_softpc_report_dpmi_fast_bop_result",
+    "mvdm_softpc_report_dpmi_fault_dispatch",
+    "mvdm_softpc_report_dpmi_fault_stack",
+    "mvdm_softpc_report_dpmi_iret16",
+    "mvdm_softpc_report_dpmi_iret16_state",
+    "mvdm_softpc_report_dpmi_set_descriptor",
+    "mvdm_softpc_report_dpmi_set_descriptor_entry",
+    "mvdm_softpc_report_dpmi_swint",
+    "mvdm_softpc_report_dpmi_swint_target",
+    "mvdm_softpc_report_dpmi_table_address",
+    "mvdm_softpc_report_nt_transition",
+    "mvdm_softpc_report_setup_command_classification",
+    "mvdm_softpc_report_setup_hardware_probe",
+    "mvdm_softpc_report_setup_illegal_opcode",
+    "mvdm_softpc_report_setup_mode_switch",
+    "mvdm_softpc_report_setup_real_instruction",
+    "mvdm_softpc_report_virtual_memory_failure",
+    "mvdm_softpc_report_wow_allocsel_instruction",
+    "mvdm_softpc_report_wow_code_segment_load",
+    "mvdm_softpc_report_wow_exception_hook",
+    "mvdm_softpc_report_wow_far_call_attempt",
+    "mvdm_softpc_report_wow_far_call_validation",
+    "mvdm_softpc_report_wow_getsel_instruction",
+    "mvdm_softpc_report_wow_int2a",
+    "mvdm_softpc_report_wow_int2a_ldt",
+    "mvdm_softpc_report_wow_longptradd_instruction",
+    "mvdm_softpc_report_wow_setdescriptor_instruction",
+    "mvdm_softpc_report_wow_source_descriptor_store"
+  ],
+  "retained_functions": {
+    "mvdm_softpc_report_termination": "b7423c4110f7cc73fb7a2c4fc7d8e686f24915d2fc0921107482699a157d7cb8",
+    "mvdm_softpc_report_xms_move": "210c4c4f8e5f0302434cb0d1f0a024fd1a6d1fcb73f8ac44733ff383827108b7",
+    "mvdm_softpc_report_wow_bop_state": "e6fb7497aa5d9f4de712993c790c5bad3987cfdee68b1a3153faf0ca1183de6e",
+    "mvdm_softpc_report_wow_stage": "0d5cc129288ddc2954916b7d9172bcb33fa3f13ef88dfc4a3b0a69d335f4f779",
+    "mvdm_softpc_report_wow_fast_callback_binding": "b86ef2e9c25debb230f611a6e761bc8730bc1edb11250c50b14b8050e568640e",
+    "mvdm_softpc_report_dpmi_mode_state": "22f0aa7a074005660408141b3840194e2705c493ed02a18933cf25093ad0c7ea",
+    "mvdm_softpc_report_cpu40_descriptor_publish": "1259da5e9d33bd745f6dc8b7ab0dbc230b2ee69d69586fcd19c68db9b31556d5",
+    "mvdm_softpc_report_virtual_device_control": "afe4917e07c5928bad51230ab80a1bdcec028eeb41558d25169c81f6d5d7ae98",
+    "mvdm_softpc_terminate_current_session": "0594250cdf2dcf7d69126cabcb4617db0a2bb91492efa55e139e637809bfce46",
+    "mvdm_softpc_invalid_virtual_instance": "48e7eacdaf77d022ca7c51b4dfda82b1fa0774b7fabc3fbc426323027e945bc3"
+  },
+  "outside_source_refs_before": [
+    "src\\ntvdm-exe\\softpc\\mvdm_standalone_worker.c:146:    mvdm_softpc_initialize_default_off_traces();"
+  ],
+  "remaining_termination_call": "host_terminate is S4 D1380; preserve its header/intrinsic until that call is removed",
+  "owned_ram_store": "Remove only obsolete trace opt-in; preserve same-page extent/access/translation checks and scalar fallback. Existing two-publication test remains.",
+  "retained_body_identity": "all ten retained bodies equal baseline, including noreturn failure owner",
+  "removed_production_references": "none across src, rg exit 1",
+  "initial_build_failure": "Initial extraction omitted __declspec(noreturn) failure function and its declaration; link rejected missing symbol. Restored exact original body/declaration before staging or publication.",
+  "complete_definition_census": {
+    "baseline": 41,
+    "retained_byte_identical": 10,
+    "removed_diagnostics_and_initializer": 31
+  },
+  "product_link_map": {
+    "removed_symbols_present": [],
+    "functional_invalid_instance_owner": true,
+    "functional_session_termination_owner": true
+  },
+  "focused": {
+    "reporters": "Four processes, each eight retained reporters, disabled/overlong/open-failure/enabled. All preserve LastError and enabled emits all eight outputs.",
+    "window_borrow": "Actual CCPU isolated desktop fixture exits 0; public fields updated twice and unowned fields retained; entire existing lifecycle fixture passed. Not real-Win16 acceptance."
+  }
+}

@@ -890,15 +890,14 @@ static ULONG page_domain_read_owned_word(ULONG address);
 /* ADAPTER-WOW-081: only the serialized page-domain's allocated WND/CLS
  * fields, never arbitrary guest/device RAM. Match bios_write_double's
  * original access request, including its CPL and VM rules. Failed mapping
- * and descriptor diagnostics retain its scalar virtualisation/trace path. */
+ * retains the original scalar virtualisation path. */
 static void page_domain_store_owned_words(ULONG address, const ULONG *words,
     ULONG count)
 {
     uint32_t physical;
     uint8_t access = 1u; /* PG_W */
     ULONG i, bytes = count * sizeof(*words);
-    if (!mvdm_softpc_wow_source_descriptor_trace_active &&
-            bytes <= MVDM_SOFTPC_PAGE_BYTES &&
+    if (bytes <= MVDM_SOFTPC_PAGE_BYTES &&
             (address & (MVDM_SOFTPC_PAGE_BYTES - 1u)) <=
                 MVDM_SOFTPC_PAGE_BYTES - bytes) {
         if (c_getCPL() == 3u) access |= 2u; /* PG_U for user access */

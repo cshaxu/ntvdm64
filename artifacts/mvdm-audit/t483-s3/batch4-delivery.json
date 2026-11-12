@@ -1,0 +1,152 @@
+{
+  "baseline": "287241b37",
+  "entries": [
+    "T483-D1381"
+  ],
+  "coupled_cleanup": "30 unused reporters plus initializer removed; remaining ten function bodies identical including functional session/fail-fast owners",
+  "files": {
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": "1c88272cf7c3e94e77ccc266b5a11bdde349baa0dda6972a7e2fe6eb4e8ed29f",
+    "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h": "74453974e2a7e939fb75a02a6468f5fb519fa88cb1e5ed13152958c2a9474b70",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c": "0434fe4f0ff1be8b20e6203970b772a5e41a74bda76437eae6a4380733c3420f",
+    "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c": "483b2b6bd7f6f9aa3309e1b9d0a696c0c7d0df86adefeaf11600c20ca5629fb3",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "4e42dc1e6d8950d8f73d95df5dcef4b1f916b5b61c4d4e01b25be8090a061780",
+    "test/mvdm-host/wow_page_domain_fixture.c": "b264746da1d6b0f9a75d896344f21b3cdda75b3cd779507f25f688226978d051",
+    "test/observation/softpc_observer_error_probe.c": "227965fcbd9d4febd308033c3923b3c5655b524984c6c3fc80b6c359acd1d482",
+    "test/observation/softpc_trace_no_guest_reads.c": "deleted",
+    "test/observation/verify-softpc-observer-error.ps1": "7310ce589c79d9cd10be8d566e5c95fd7472265ad0897650f171283d435f26be",
+    "test/observation/verify-softpc-trace-no-guest-reads.ps1": "deleted"
+  },
+  "build": "Final cached x86/x64 full build passed after restoring accidentally omitted noreturn owner; initial failed package never staged or published",
+  "focused": {
+    "reporters": "32 checks across 4 fresh processes passed; enabled output from all eight retained reporters",
+    "window_borrow": "Existing isolated actual CCPU window-borrow fixture passed, exit 0; preserves two publications and unowned fields"
+  },
+  "line_checks": "50 selected MSVC original statement/logical position anchors",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 351096,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 8160,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1348,
+        "CleanupMs": 627,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 225,
+        "CleanupMs": 652,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67376,
+        "CleanupMs": 548,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44122,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41970,
+        "CleanupMs": 566,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13983,
+        "CleanupMs": 555,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10195,
+        "CleanupMs": 464,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 50370,
+        "CleanupMs": 506,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12051,
+        "CleanupMs": 612,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28187,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30322,
+        "CleanupMs": 516,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3419,
+        "CleanupMs": 538,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7458,
+        "CleanupMs": 589,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10005,
+        "CleanupMs": 498,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4806,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6626,
+        "CleanupMs": 552,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "bd64959d-b841-471e-8b33-4fe6d7196eec",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "footprint": {
+    "mirror_net": -1,
+    "autonomous_net": -1155,
+    "tests_net": -119,
+    "total_net": -1275
+  },
+  "limitations": [
+    "External DOS4GW/NESticle fixture not supplied and explicitly skipped",
+    "Remaining reporters have product callers; host-terminate trace belongs to S4",
+    "Unused nt_com fixture-only setup reporter stub remains in next coupled cleanup"
+  ],
+  "guest_and_winnt_zip_unchanged": true
+}

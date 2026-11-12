@@ -387,7 +387,6 @@ void host_terminate(void)
 VOID TerminateVDM(void)
 {
 
-    mvdm_softpc_report_termination("terminate-vdm", _ReturnAddress());
 
     /*
      *  Do base sepcific cleanup thru terminate().
