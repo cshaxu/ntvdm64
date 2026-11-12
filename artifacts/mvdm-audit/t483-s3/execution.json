@@ -670,114 +670,130 @@
     {
       "id": "T483-D1409",
       "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Delete added termination include and its explanatory comment; keep shared header/providers for their other callers.",
-      "verification": "Compile actual nt_timer TU without header; unchanged exception/heartbeat call bindings."
+      "verification": "Compile actual nt_timer TU without header; unchanged exception/heartbeat call bindings.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1434",
       "path": "src/mvdm-host/softpc.new/host/src/sources",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Removed x86_emm source line; regenerate Ninja from authoritative sources manifest.",
-      "verification": "Regenerate graph; cached supported build/link and artifact identity check; applicable delivery gates before release."
+      "verification": "Regenerate graph; cached supported build/link and artifact identity check; applicable delivery gates before release.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1437",
       "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Deleted file and audit mappings; original bytes/hash retained in review evidence. Regenerate supported build graphs and verify before delivery.",
-      "verification": "Regenerate graph; cached supported build/link and artifact identity check; applicable delivery gates before release."
+      "verification": "Regenerate graph; cached supported build/link and artifact identity check; applicable delivery gates before release.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1447",
       "path": "src/mvdm-host/vdmredir/sources",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Removed empty vrdlcdbg.c manifest entry; retain functional redirector inputs.",
-      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1448",
       "path": "src/mvdm-host/vdmredir/sources",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove only empty vrdebug.c entry; regenerate authoritative Ninja inputs.",
-      "verification": "Regenerate graphs; build/link and confirm no functional redirector symbol lost."
+      "verification": "Regenerate graphs; build/link and confirm no functional redirector symbol lost.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1449",
       "path": "src/mvdm-host/vdmredir/vrdebug.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Delete entirely excluded debug source; preserve historical source identity in audit evidence.",
-      "verification": "Regenerate graphs; build/link and confirm no functional redirector symbol lost."
+      "verification": "Regenerate graphs; build/link and confirm no functional redirector symbol lost.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1453",
       "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Deleted wholly excluded source; remove vrdlcdbg.c from sources and regenerate build graph.",
-      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes."
+      "verification": "Regenerate and build after deletion; for #line repairs compare all retained source mappings and attribute binary changes.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1484",
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
-      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1485",
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
-      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1486",
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
-      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1488",
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
-      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1492",
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove diagnostic-only trace call; remove common API/export/provider together after checking all diagnostic consumers. Preserve queue, registers, IRQ and release ordering.",
-      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving."
+      "verification": "Immediate/pending/MORE_DATA/failure paths; legacy/type2 packets, null callback, payload/status write failures, cancellation/session end and forced callback-before-completion_end interleaving.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1510",
       "path": "src/mvdm-host/wow32/walias.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Delete entire unused hConvert16to32 wrapper, wgdi.h declaration and obsolete wow32.prf name; keep GDI32 direct shared-provider call. Verify no exported/build/profiling consumer requires wrapper before removal.",
-      "verification": "Build/link/export check after wrapper deletion; alias zero/stale/reuse/reserved-color/table-full behavior retained; real GDI regression as applicable."
+      "verification": "Build/link/export check after wrapper deletion; alias zero/stale/reuse/reserved-color/table-full behavior retained; real GDI regression as applicable.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1533",
       "path": "src/mvdm-host/wow32/wcall16.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
-      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1534",
       "path": "src/mvdm-host/wow32/wcall16.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
-      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1535",
       "path": "src/mvdm-host/wow32/wcall16.c",
-      "status": "pending",
+      "status": "delivered P5",
       "plan": "Remove this default-off trace call and trace-only comment; reconcile observation fixtures and exclusive trace provider/declaration together. Preserve functional control APIs and include.",
-      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior."
+      "verification": "Selected WOW build; callback admission, original frame, abort/control and real WOW nested-callback regression appropriate to changed behavior.",
+      "evidence": "batch5-delivery.json"
     },
     {
       "id": "T483-D1663",
@@ -929,8 +945,8 @@
   ],
   "counts": {
     "assigned": 120,
-    "delivered": 83,
-    "remaining_unprocessed": 37
+    "delivered": 99,
+    "remaining_unprocessed": 21
   },
-  "coupled_cleanup": "P4 removes 30 uncalled reporters and their initializer with product/test consumers. Retained reporter bodies have existing product callers, including S4 host-terminate. Later remove the obsolete nt_com fixture-only setup report stub; S3 cannot close before remaining coupled caller/provider cleanup."
+  "coupled_cleanup": "P4 retired unused reporters; P5 removed the obsolete nt_com stub. Next batch removes now-uncalled wow_callback_frame_trace and its declaration/fixture-only seams; remaining diagnostic providers follow last caller removal before S3 closure."
 }

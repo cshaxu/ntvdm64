@@ -24,8 +24,5 @@ MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_completion_begin(
 MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_completion_end(
     PDOS_ASYNC_NAMED_PIPE_INFO request);
 MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_release(PDOS_ASYNC_NAMED_PIPE_INFO request);
-/* Default-off, metadata-only evidence for the standalone async ownership
- * seam.  The mirror uses it only around original completion disposition. */
-MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_trace(char const *stage);
 
 #endif

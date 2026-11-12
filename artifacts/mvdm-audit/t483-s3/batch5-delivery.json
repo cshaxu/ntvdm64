@@ -1,0 +1,224 @@
+{
+  "baseline": "923c842a6",
+  "entries": [
+    "T483-D1409",
+    "T483-D1434",
+    "T483-D1437",
+    "T483-D1447",
+    "T483-D1448",
+    "T483-D1449",
+    "T483-D1453",
+    "T483-D1484",
+    "T483-D1485",
+    "T483-D1486",
+    "T483-D1488",
+    "T483-D1492",
+    "T483-D1510",
+    "T483-D1533",
+    "T483-D1534",
+    "T483-D1535"
+  ],
+  "modified_files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "before_sha256": "fc5a3fbcfac77e4337602b94f2d5c6ad69ae95417b8b8ba4e2362510891c8069",
+      "after_sha256": "2644149302fe702f19854af93df996954e56d49dc4f505467f3a58382ea810e4"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "before_sha256": "6227c01ce8498598440c10b92bf07b0f1f645aaf387d4942c2b8d59b5df78b4c",
+      "after_sha256": "4def006444b777d4d22b52ae1d9cab1d37c0b8525e7fa8e2d109e4f39df08131"
+    },
+    {
+      "path": "src/common/redirector/async.h",
+      "before_sha256": "0781bd31076285a460d8d9156b0c63033eb118ed72d4783de02c96d7459fa4fc",
+      "after_sha256": "b0be32d6fd08a3057cf56b1783cd9b89d89200b977219b8aac450d2a7a13dc2e"
+    },
+    {
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+      "before_sha256": "6c8e7f441e4bd7c1bdb53554b1a6dc213dd1cf75b6339d5eee63e4455c73bc53",
+      "after_sha256": "b347dd60101b553ace936bead39115e78eed8e387c0d54a950f206e2c30204da"
+    },
+    {
+      "path": "src/ntvdm-exe/ntvdm-export-ordinals.csv",
+      "before_sha256": "33e7d46c114e8108eead0f549fc98d835448ed2fdffd8ecb0900d82b9f425500",
+      "after_sha256": "d53e4c564fb3b9e8a89bd4b68f4fe82ecabd7b7f00f26260c817062b905537f6"
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "before_sha256": "13297f6adb9a720d9600e124e014b0102b352ddabbc063d7e6de28b9efd8f2c6",
+      "after_sha256": "7f210628798755a9de6bf091504ade77e1d185f1b32c65faefd3bec7d7989047"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.h",
+      "before_sha256": "14bed9c13085e4165a1912c69f0942da5637489fc536cc415f3883366ad034d6",
+      "after_sha256": "1b01ccc21662839fb49f5b2408a0883365fd9a54ef9c00428cc7e812aece89f6"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.prf",
+      "before_sha256": "2b9dd7ce7d14960871a9c0bb276a2768ab19b853e900f70da2631d8b703ccb2c",
+      "after_sha256": "121a3a21d7bc1d5cbcec37ca490fb497e6771978135309c6118d03e3da89e620"
+    },
+    {
+      "path": "test/mvdm-host/nt_com_mock_fixture.c",
+      "before_sha256": "707e19fc14e7be562a8881aeacb2d98006c82f8bac172352e7eaf716a93798b1",
+      "after_sha256": "095282782cc0426a9f7741ad48ffc4b0ddbf16bf13b48961506868084a034171"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "before_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+      "after_sha256": "fe3330eebda90de5848e90d9e10d8b05e29c9d274b04c878ba811992baec2cb0"
+    }
+  ],
+  "prior_deletion_entries": {
+    "commit": "6e68962b8",
+    "ids": [
+      "T483-D1434",
+      "T483-D1437",
+      "T483-D1447",
+      "T483-D1448",
+      "T483-D1449",
+      "T483-D1453"
+    ],
+    "paths": [
+      "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "src/mvdm-host/vdmredir/vrdebug.c",
+      "src/mvdm-host/vdmredir/vrdlcdbg.c"
+    ],
+    "verification": "All absent; no matching source names in authoritative sources manifests or regenerated x86 worker Ninja graph; final cached full build passed."
+  },
+  "code_footprint": {
+    "added": 6,
+    "deleted": 82,
+    "net": -76
+  },
+  "build": "cached x86/x64 full passed; final comment-only rebuild passed",
+  "focused": {
+    "async": "24 assertions, zero failures",
+    "com": "original open/write/read/close passed",
+    "gdi": "WOW_GDI_ALIAS errors=0",
+    "callback": "four normal/resolve/exception phases plus abort; fixture exit 0"
+  },
+  "compiler_line_anchors": 1355,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 356100,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7139,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1173,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 182,
+        "CleanupMs": 554,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67147,
+        "CleanupMs": 485,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 43724,
+        "CleanupMs": 532,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41744,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13610,
+        "CleanupMs": 525,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10048,
+        "CleanupMs": 547,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 50974,
+        "CleanupMs": 585,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12086,
+        "CleanupMs": 552,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28168,
+        "CleanupMs": 531,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30335,
+        "CleanupMs": 887,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 6422,
+        "CleanupMs": 876,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7792,
+        "CleanupMs": 662,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11682,
+        "CleanupMs": 711,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5838,
+        "CleanupMs": 622,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6661,
+        "CleanupMs": 540,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "2921950d-914c-4626-901e-76037f72ba57",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "test_reuse": "Final package differs only in identity and exact PE link timestamp fields; batch5-comment-only-control.json proves equality of all remaining bytes. No duplicate runtime test claimed.",
+  "limitations": [
+    "External DOS4GW/NESticle fixture not supplied and explicitly skipped, not passed.",
+    "Unused callback reporter and fixture seams queued for coupled cleanup before S3 closure."
+  ],
+  "guest_and_winnt_zip_unchanged": true
+}

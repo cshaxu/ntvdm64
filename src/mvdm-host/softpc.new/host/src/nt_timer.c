@@ -181,9 +181,6 @@ ERROR RECOVERY    :     errors are ignored
 #include "nt_eoi.h"
 #include "nt_event.h"
 
-/* DIVERGENCE(MVDM-HOST-DIV-159): declaration-only adapter seam for the
- * fixed-container exception identity report below. */
-#include "mvdm_softpc_termination.h"
 
 
 #line 182
@@ -615,6 +612,7 @@ DWORD HeartBeatThread(PVOID pv)
        // boosted priority starving the heartbeat thread. Winbench 311
        // shows this problem when doing polylines test.
        //
+#line 590
       SetThreadPriority(ThreadInfo.HeartBeat.Handle,
                         !(dwWNTPifFlags & COMPAT_TIMERTIC)
                            ? THREAD_PRIORITY_TIME_CRITICAL
@@ -635,6 +633,7 @@ DWORD HeartBeatThread(PVOID pv)
 #endif
 #line 612
 
+#line 612
       dwRet = Win32_host_timer();
 
       }

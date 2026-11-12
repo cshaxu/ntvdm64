@@ -140,7 +140,6 @@ mvdm_redirector_async_completion_begin,138
 mvdm_redirector_async_completion_end,139
 mvdm_redirector_async_prepare,140
 mvdm_redirector_async_release,141
-mvdm_redirector_async_trace,142
 mvdm_redirector_worker_copy_from,143
 mvdm_redirector_worker_copy_to,144
 mvdm_softpc_effective_address,145

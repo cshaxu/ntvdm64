@@ -158,5 +158,5 @@ BOOL  IsFaxPrinterSupportedDevice(PSZ pszDevice);
 BOOL  IsFaxPrinterWriteProfileString(PSZ szSection, PSZ szKey, PSZ szString);
 DWORD GetFaxPrinterProfileString(PSZ szSection, PSZ szKey, PSZ szDefault, PSZ szRetBuf, DWORD cbBufSize);
 
-HANDLE hConvert16to32 (int h16);
+#line 162
 HAND16 hConvert32to16 (DWORD h32);

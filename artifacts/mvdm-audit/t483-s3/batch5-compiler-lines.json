@@ -1,0 +1,6815 @@
+{
+  "method": "Actual selected MSVC /P original statement spelling and logical line matches; header through actual walias inclusion; not an all-config proof.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "current_sha256": "2644149302fe702f19854af93df996954e56d49dc4f505467f3a58382ea810e4",
+      "anchors": [
+        {
+          "original_line": 185,
+          "original": "THREAD_DATA ThreadInfo;",
+          "actual": "THREAD_DATA ThreadInfo;"
+        },
+        {
+          "original_line": 186,
+          "original": "CRITICAL_SECTION TimerTickCS;",
+          "actual": "CRITICAL_SECTION TimerTickCS;"
+        },
+        {
+          "original_line": 187,
+          "original": "CRITICAL_SECTION HBSuspendCS;",
+          "actual": "CRITICAL_SECTION HBSuspendCS;"
+        },
+        {
+          "original_line": 194,
+          "original": "DWORD Win32_host_timer(void);",
+          "actual": "DWORD Win32_host_timer(void);"
+        },
+        {
+          "original_line": 199,
+          "original": "DWORD HeartBeatThread(PVOID pv);",
+          "actual": "DWORD HeartBeatThread(PVOID pv);"
+        },
+        {
+          "original_line": 200,
+          "original": "void CreepAdjust(LARGE_INTEGER DiffTime);",
+          "actual": "void CreepAdjust(LARGE_INTEGER DiffTime);"
+        },
+        {
+          "original_line": 201,
+          "original": "void DemHeartBeat(void);",
+          "actual": "void DemHeartBeat(void);"
+        },
+        {
+          "original_line": 204,
+          "original": "void quick_tick_recalibrate(void);",
+          "actual": "void quick_tick_recalibrate(void);"
+        },
+        {
+          "original_line": 207,
+          "original": "void rtc_init(void);",
+          "actual": "void rtc_init(void);"
+        },
+        {
+          "original_line": 208,
+          "original": "void RtcTick(struct host_timeval *time);",
+          "actual": "void RtcTick(struct host_timeval *time);"
+        },
+        {
+          "original_line": 222,
+          "original": "HANDLE hHBResumeEvent;",
+          "actual": "HANDLE hHBResumeEvent;"
+        },
+        {
+          "original_line": 223,
+          "original": "HANDLE hHBSuspendEvent;",
+          "actual": "HANDLE hHBSuspendEvent;"
+        },
+        {
+          "original_line": 228,
+          "original": "LARGE_INTEGER CurrHeartBeat;",
+          "actual": "LARGE_INTEGER CurrHeartBeat;"
+        },
+        {
+          "original_line": 229,
+          "original": "LARGE_INTEGER TimerEventUSec;",
+          "actual": "LARGE_INTEGER TimerEventUSec;"
+        },
+        {
+          "original_line": 230,
+          "original": "LARGE_INTEGER CumUSec;",
+          "actual": "LARGE_INTEGER CumUSec;"
+        },
+        {
+          "original_line": 231,
+          "original": "LARGE_INTEGER CreepUSec;",
+          "actual": "LARGE_INTEGER CreepUSec;"
+        },
+        {
+          "original_line": 232,
+          "original": "LARGE_INTEGER CreepTicCount;",
+          "actual": "LARGE_INTEGER CreepTicCount;"
+        },
+        {
+          "original_line": 234,
+          "original": "int    HeartBeatResumes=0;",
+          "actual": "int    HeartBeatResumes=0;"
+        },
+        {
+          "original_line": 251,
+          "original": "void host_timer_init(void)",
+          "actual": "void host_timer_init(void)"
+        },
+        {
+          "original_line": 252,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 263,
+          "original": "if(!ThreadInfo.HeartBeat.Handle)  {",
+          "actual": "if(!ThreadInfo.HeartBeat.Handle)  {"
+        },
+        {
+          "original_line": 265,
+          "original": "TerminateVDM();",
+          "actual": "TerminateVDM();"
+        },
+        {
+          "original_line": 266,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 270,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 271,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 282,
+          "original": "void TimerInit(void)",
+          "actual": "void TimerInit(void)"
+        },
+        {
+          "original_line": 283,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 287,
+          "original": "TerminateVDM();",
+          "actual": "TerminateVDM();"
+        },
+        {
+          "original_line": 288,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 292,
+          "original": "TerminateVDM();",
+          "actual": "TerminateVDM();"
+        },
+        {
+          "original_line": 293,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 295,
+          "original": "InitializeCriticalSection(&TimerTickCS);",
+          "actual": "InitializeCriticalSection(&TimerTickCS);"
+        },
+        {
+          "original_line": 296,
+          "original": "InitializeCriticalSection(&HBSuspendCS);",
+          "actual": "InitializeCriticalSection(&HBSuspendCS);"
+        },
+        {
+          "original_line": 298,
+          "original": "InitPerfCounter();",
+          "actual": "InitPerfCounter();"
+        },
+        {
+          "original_line": 300,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 307,
+          "original": "void TerminateHeartBeat(void)",
+          "actual": "void TerminateHeartBeat(void)"
+        },
+        {
+          "original_line": 308,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 309,
+          "original": "NtAlertThread(ThreadInfo.HeartBeat.Handle);",
+          "actual": "NtAlertThread(ThreadInfo.HeartBeat.Handle);"
+        },
+        {
+          "original_line": 310,
+          "original": "if (ThreadInfo.HeartBeat.ID != GetCurrentThreadId())",
+          "actual": "if (ThreadInfo.HeartBeat.ID != GetCurrentThreadId())"
+        },
+        {
+          "original_line": 313,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 314,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 321,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 322,
+          "original": "LARGE_INTEGER li, liFreq;",
+          "actual": "LARGE_INTEGER li, liFreq;"
+        },
+        {
+          "original_line": 325,
+          "original": "NtQueryPerformanceCounter(&li, &liFreq);",
+          "actual": "NtQueryPerformanceCounter(&li, &liFreq);"
+        },
+        {
+          "original_line": 331,
+          "original": "ulFreqSec = liFreq.LowPart;",
+          "actual": "ulFreqSec = liFreq.LowPart;"
+        },
+        {
+          "original_line": 332,
+          "original": "ulFreqHusec = liFreq.LowPart / 10000;",
+          "actual": "ulFreqHusec = liFreq.LowPart / 10000;"
+        },
+        {
+          "original_line": 334,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 341,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 342,
+          "original": "LARGE_INTEGER li;",
+          "actual": "LARGE_INTEGER li;"
+        },
+        {
+          "original_line": 346,
+          "original": "return(li.LowPart);",
+          "actual": "return(li.LowPart);"
+        },
+        {
+          "original_line": 347,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 355,
+          "original": "void GetPerfCounterUsecs(struct host_timeval *time, PLARGE_INTEGER pliTime)",
+          "actual": "void GetPerfCounterUsecs(struct host_timeval *time, PLARGE_INTEGER pliTime)"
+        },
+        {
+          "original_line": 356,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 357,
+          "original": "LARGE_INTEGER liSecs;",
+          "actual": "LARGE_INTEGER liSecs;"
+        },
+        {
+          "original_line": 358,
+          "original": "LARGE_INTEGER liUsecs;",
+          "actual": "LARGE_INTEGER liUsecs;"
+        },
+        {
+          "original_line": 362,
+          "original": "liSecs = RtlExtendedLargeIntegerDivide(liSecs, ulFreqSec, &liUsecs.LowPart);",
+          "actual": "liSecs = RtlExtendedLargeIntegerDivide(liSecs, ulFreqSec, &liUsecs.LowPart);"
+        },
+        {
+          "original_line": 367,
+          "original": "if (time) {",
+          "actual": "if (time) {"
+        },
+        {
+          "original_line": 368,
+          "original": "time->tv_usec = liUsecs.LowPart;",
+          "actual": "time->tv_usec = liUsecs.LowPart;"
+        },
+        {
+          "original_line": 369,
+          "original": "time->tv_sec  = liSecs.LowPart;",
+          "actual": "time->tv_sec  = liSecs.LowPart;"
+        },
+        {
+          "original_line": 370,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 373,
+          "original": "if (pliTime) {",
+          "actual": "if (pliTime) {"
+        },
+        {
+          "original_line": 374,
+          "original": "pliTime->QuadPart = liUsecs.QuadPart + liSecs.QuadPart * 1000000;",
+          "actual": "pliTime->QuadPart = liUsecs.QuadPart + liSecs.QuadPart * 1000000;"
+        },
+        {
+          "original_line": 375,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 376,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 377,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 384,
+          "original": "void host_timer_event()",
+          "actual": "void host_timer_event()"
+        },
+        {
+          "original_line": 385,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 387,
+          "original": "if (!VDMForWOW)  {",
+          "actual": "if (!VDMForWOW)  {"
+        },
+        {
+          "original_line": 388,
+          "original": "unsigned char FgBgPriority;",
+          "actual": "unsigned char FgBgPriority;"
+        },
+        {
+          "original_line": 405,
+          "original": "GetScaleEvent();",
+          "actual": "GetScaleEvent();"
+        },
+        {
+          "original_line": 416,
+          "original": "FgBgPriority  = sc.Focus ? WNTPifFgPr : WNTPifBgPr;",
+          "actual": "FgBgPriority  = sc.Focus ? WNTPifFgPr : WNTPifBgPr;"
+        },
+        {
+          "original_line": 417,
+          "original": "if (FgBgPriority < 100)",
+          "actual": "if (FgBgPriority < 100)"
+        },
+        {
+          "original_line": 418,
+          "original": "PrioWaitIfIdle(FgBgPriority);",
+          "actual": "PrioWaitIfIdle(FgBgPriority);"
+        },
+        {
+          "original_line": 419,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 422,
+          "original": "quick_tick_recalibrate();",
+          "actual": "quick_tick_recalibrate();"
+        },
+        {
+          "original_line": 437,
+          "original": "DemHeartBeat();",
+          "actual": "DemHeartBeat();"
+        },
+        {
+          "original_line": 443,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 451,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 452,
+          "original": "SYSTEMTIME TimeDate;",
+          "actual": "SYSTEMTIME TimeDate;"
+        },
+        {
+          "original_line": 454,
+          "original": "struct host_timeval time;",
+          "actual": "struct host_timeval time;"
+        },
+        {
+          "original_line": 457,
+          "original": "CreepTicCount.QuadPart = NtGetTickCount();",
+          "actual": "CreepTicCount.QuadPart = NtGetTickCount();"
+        },
+        {
+          "original_line": 458,
+          "original": "GetPerfCounterUsecs(&time, &CumUSec);",
+          "actual": "GetPerfCounterUsecs(&time, &CumUSec);"
+        },
+        {
+          "original_line": 459,
+          "original": "GetLocalTime(&TimeDate);",
+          "actual": "GetLocalTime(&TimeDate);"
+        },
+        {
+          "original_line": 465,
+          "original": "if (TimeDate.wHour)",
+          "actual": "if (TimeDate.wHour)"
+        },
+        {
+          "original_line": 467,
+          "original": "if (TimeDate.wMinute)",
+          "actual": "if (TimeDate.wMinute)"
+        },
+        {
+          "original_line": 469,
+          "original": "if (TimeDate.wSecond)",
+          "actual": "if (TimeDate.wSecond)"
+        },
+        {
+          "original_line": 471,
+          "original": "if (TimeDate.wMilliseconds)",
+          "actual": "if (TimeDate.wMilliseconds)"
+        },
+        {
+          "original_line": 476,
+          "original": "CreepUSec = CumUSec;",
+          "actual": "CreepUSec = CumUSec;"
+        },
+        {
+          "original_line": 478,
+          "original": "ReinitIdealTime(&time);",
+          "actual": "ReinitIdealTime(&time);"
+        },
+        {
+          "original_line": 494,
+          "original": "rtc_init();",
+          "actual": "rtc_init();"
+        },
+        {
+          "original_line": 497,
+          "original": "q_event_init();",
+          "actual": "q_event_init();"
+        },
+        {
+          "original_line": 500,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 514,
+          "original": "void host_GetSysTime(struct host_timeval *time)",
+          "actual": "void host_GetSysTime(struct host_timeval *time)"
+        },
+        {
+          "original_line": 515,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 516,
+          "original": "LARGE_INTEGER liTime;",
+          "actual": "LARGE_INTEGER liTime;"
+        },
+        {
+          "original_line": 519,
+          "original": "if (bDoingTicInterrupt) {",
+          "actual": "if (bDoingTicInterrupt) {"
+        },
+        {
+          "original_line": 520,
+          "original": "liTime = RtlExtendedLargeIntegerDivide(",
+          "actual": "liTime = RtlExtendedLargeIntegerDivide("
+        },
+        {
+          "original_line": 521,
+          "original": "CurrHeartBeat,",
+          "actual": "CurrHeartBeat,"
+        },
+        {
+          "original_line": 522,
+          "original": "1000000,",
+          "actual": "1000000,"
+        },
+        {
+          "original_line": 524,
+          "original": "time->tv_sec = liTime.LowPart;",
+          "actual": "time->tv_sec = liTime.LowPart;"
+        },
+        {
+          "original_line": 525,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 526,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 528,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 529,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 540,
+          "original": "void host_TimeStamp(PLARGE_INTEGER pliTime)",
+          "actual": "void host_TimeStamp(PLARGE_INTEGER pliTime)"
+        },
+        {
+          "original_line": 541,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 542,
+          "original": "host_ica_lock();",
+          "actual": "host_ica_lock();"
+        },
+        {
+          "original_line": 544,
+          "original": "if (bDoingTicInterrupt) {",
+          "actual": "if (bDoingTicInterrupt) {"
+        },
+        {
+          "original_line": 546,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 547,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 549,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 551,
+          "original": "host_ica_unlock();",
+          "actual": "host_ica_unlock();"
+        },
+        {
+          "original_line": 552,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 565,
+          "original": "DWORD HeartBeatThread(PVOID pv)",
+          "actual": "DWORD HeartBeatThread(PVOID pv)"
+        },
+        {
+          "original_line": 566,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 567,
+          "original": "DWORD dwRet = (DWORD)-1;",
+          "actual": "DWORD dwRet = (DWORD)-1;"
+        },
+        {
+          "original_line": 590,
+          "original": "SetThreadPriority(ThreadInfo.HeartBeat.Handle,",
+          "actual": "SetThreadPriority(ThreadInfo.HeartBeat.Handle,"
+        },
+        {
+          "original_line": 594,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 612,
+          "original": "dwRet = Win32_host_timer();",
+          "actual": "dwRet = Win32_host_timer();"
+        },
+        {
+          "original_line": 614,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 617,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 619,
+          "original": "return dwRet;",
+          "actual": "return dwRet;"
+        },
+        {
+          "original_line": 620,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 627,
+          "original": "DWORD Win32_host_timer(void)",
+          "actual": "DWORD Win32_host_timer(void)"
+        },
+        {
+          "original_line": 628,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 629,
+          "original": "NTSTATUS      status;",
+          "actual": "NTSTATUS      status;"
+        },
+        {
+          "original_line": 634,
+          "original": "LARGE_INTEGER DiffTime;",
+          "actual": "LARGE_INTEGER DiffTime;"
+        },
+        {
+          "original_line": 635,
+          "original": "LARGE_INTEGER SystemTickIntv;",
+          "actual": "LARGE_INTEGER SystemTickIntv;"
+        },
+        {
+          "original_line": 636,
+          "original": "LARGE_INTEGER SecIntv;",
+          "actual": "LARGE_INTEGER SecIntv;"
+        },
+        {
+          "original_line": 637,
+          "original": "LARGE_INTEGER HalfSysIntv;",
+          "actual": "LARGE_INTEGER HalfSysIntv;"
+        },
+        {
+          "original_line": 638,
+          "original": "LARGE_INTEGER CreepIntv;",
+          "actual": "LARGE_INTEGER CreepIntv;"
+        },
+        {
+          "original_line": 641,
+          "original": "struct host_timeval time;",
+          "actual": "struct host_timeval time;"
+        },
+        {
+          "original_line": 643,
+          "original": "DelayPeriod = 50000;",
+          "actual": "DelayPeriod = 50000;"
+        },
+        {
+          "original_line": 651,
+          "original": "while(1)  {",
+          "actual": "while(1)  {"
+        },
+        {
+          "original_line": 652,
+          "original": "status = DelayHeartBeat(DelayPeriod);",
+          "actual": "status = DelayHeartBeat(DelayPeriod);"
+        },
+        {
+          "original_line": 654,
+          "original": "HBresume:",
+          "actual": "HBresume:"
+        },
+        {
+          "original_line": 655,
+          "original": "host_ica_lock();",
+          "actual": "host_ica_lock();"
+        },
+        {
+          "original_line": 656,
+          "original": "host_init_bda_timer();",
+          "actual": "host_init_bda_timer();"
+        },
+        {
+          "original_line": 658,
+          "original": "host_ica_unlock();",
+          "actual": "host_ica_unlock();"
+        },
+        {
+          "original_line": 659,
+          "original": "continue;",
+          "actual": "continue;"
+        },
+        {
+          "original_line": 660,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 662,
+          "original": "host_ica_lock();",
+          "actual": "host_ica_lock();"
+        },
+        {
+          "original_line": 668,
+          "original": "GetPerfCounterUsecs(&time, &CurrHeartBeat);",
+          "actual": "GetPerfCounterUsecs(&time, &CurrHeartBeat);"
+        },
+        {
+          "original_line": 679,
+          "original": "DiffTime.QuadPart = CurrHeartBeat.QuadPart - CreepUSec.QuadPart;",
+          "actual": "DiffTime.QuadPart = CurrHeartBeat.QuadPart - CreepUSec.QuadPart;"
+        },
+        {
+          "original_line": 680,
+          "original": "if (DiffTime.QuadPart > CreepIntv.QuadPart) {",
+          "actual": "if (DiffTime.QuadPart > CreepIntv.QuadPart) {"
+        },
+        {
+          "original_line": 681,
+          "original": "CreepAdjust(DiffTime);",
+          "actual": "CreepAdjust(DiffTime);"
+        },
+        {
+          "original_line": 682,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 688,
+          "original": "DiffTime.QuadPart = CurrHeartBeat.QuadPart - CumUSec.QuadPart;",
+          "actual": "DiffTime.QuadPart = CurrHeartBeat.QuadPart - CumUSec.QuadPart;"
+        },
+        {
+          "original_line": 690,
+          "original": "if (DiffTime.QuadPart > SecIntv.QuadPart)",
+          "actual": "if (DiffTime.QuadPart > SecIntv.QuadPart)"
+        },
+        {
+          "original_line": 691,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 692,
+          "original": "DelayPeriod = 13000;",
+          "actual": "DelayPeriod = 13000;"
+        },
+        {
+          "original_line": 693,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 695,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 697,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 698,
+          "original": "else if (DiffTime.QuadPart >= HalfSysIntv.QuadPart)",
+          "actual": "else if (DiffTime.QuadPart >= HalfSysIntv.QuadPart)"
+        },
+        {
+          "original_line": 699,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 701,
+          "original": "DelayPeriod = DiffTime.LowPart - 6000;",
+          "actual": "DelayPeriod = DiffTime.LowPart - 6000;"
+        },
+        {
+          "original_line": 702,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 703,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 705,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 726,
+          "original": "RtcTick(&time);",
+          "actual": "RtcTick(&time);"
+        },
+        {
+          "original_line": 729,
+          "original": "host_ica_unlock();",
+          "actual": "host_ica_unlock();"
+        },
+        {
+          "original_line": 737,
+          "original": "if (TimerEventUSec.QuadPart <= CurrHeartBeat.QuadPart) {",
+          "actual": "if (TimerEventUSec.QuadPart <= CurrHeartBeat.QuadPart) {"
+        },
+        {
+          "original_line": 741,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 742,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 744,
+          "original": "return(1);",
+          "actual": "return(1);"
+        },
+        {
+          "original_line": 745,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 761,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 762,
+          "original": "NTSTATUS status;",
+          "actual": "NTSTATUS status;"
+        },
+        {
+          "original_line": 763,
+          "original": "LARGE_INTEGER liDelay;",
+          "actual": "LARGE_INTEGER liDelay;"
+        },
+        {
+          "original_line": 825,
+          "original": "status = NtWaitForSingleObject(hHBSuspendEvent,",
+          "actual": "status = NtWaitForSingleObject(hHBSuspendEvent,"
+        },
+        {
+          "original_line": 827,
+          "original": "&liDelay);",
+          "actual": "&liDelay);"
+        },
+        {
+          "original_line": 830,
+          "original": "return status;",
+          "actual": "return status;"
+        },
+        {
+          "original_line": 831,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 836,
+          "original": "return status;",
+          "actual": "return status;"
+        },
+        {
+          "original_line": 837,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 838,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 846,
+          "original": "ThreadInfo.HeartBeat.ID = 0;",
+          "actual": "ThreadInfo.HeartBeat.ID = 0;"
+        },
+        {
+          "original_line": 848,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 853,
+          "original": "TerminateVDM();",
+          "actual": "TerminateVDM();"
+        },
+        {
+          "original_line": 854,
+          "original": "return status;",
+          "actual": "return status;"
+        },
+        {
+          "original_line": 855,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 863,
+          "original": "void CreepAdjust(LARGE_INTEGER DiffTime)",
+          "actual": "void CreepAdjust(LARGE_INTEGER DiffTime)"
+        },
+        {
+          "original_line": 864,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 865,
+          "original": "LARGE_INTEGER DiffTicCount;",
+          "actual": "LARGE_INTEGER DiffTicCount;"
+        },
+        {
+          "original_line": 869,
+          "original": "ulTicCount = NtGetTickCount();",
+          "actual": "ulTicCount = NtGetTickCount();"
+        },
+        {
+          "original_line": 870,
+          "original": "DiffTicCount.LowPart  = ulTicCount;",
+          "actual": "DiffTicCount.LowPart  = ulTicCount;"
+        },
+        {
+          "original_line": 871,
+          "original": "DiffTicCount.HighPart = CreepTicCount.HighPart;",
+          "actual": "DiffTicCount.HighPart = CreepTicCount.HighPart;"
+        },
+        {
+          "original_line": 872,
+          "original": "if (DiffTicCount.LowPart < CreepTicCount.LowPart) {",
+          "actual": "if (DiffTicCount.LowPart < CreepTicCount.LowPart) {"
+        },
+        {
+          "original_line": 873,
+          "original": "DiffTicCount.HighPart++;",
+          "actual": "DiffTicCount.HighPart++;"
+        },
+        {
+          "original_line": 874,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 875,
+          "original": "DiffTicCount.QuadPart = DiffTicCount.QuadPart - CreepTicCount.QuadPart;",
+          "actual": "DiffTicCount.QuadPart = DiffTicCount.QuadPart - CreepTicCount.QuadPart;"
+        },
+        {
+          "original_line": 876,
+          "original": "DiffTicCount = RtlExtendedIntegerMultiply(DiffTicCount, 1000);",
+          "actual": "DiffTicCount = RtlExtendedIntegerMultiply(DiffTicCount, 1000);"
+        },
+        {
+          "original_line": 880,
+          "original": "DiffTicCount.QuadPart = DiffTicCount.QuadPart - DiffTime.QuadPart;",
+          "actual": "DiffTicCount.QuadPart = DiffTicCount.QuadPart - DiffTime.QuadPart;"
+        },
+        {
+          "original_line": 881,
+          "original": "CumUSec.QuadPart = CumUSec.QuadPart - DiffTicCount.QuadPart;",
+          "actual": "CumUSec.QuadPart = CumUSec.QuadPart - DiffTicCount.QuadPart;"
+        },
+        {
+          "original_line": 884,
+          "original": "CreepTicCount.QuadPart = ulTicCount;",
+          "actual": "CreepTicCount.QuadPart = ulTicCount;"
+        },
+        {
+          "original_line": 885,
+          "original": "CreepUSec     = CurrHeartBeat;",
+          "actual": "CreepUSec     = CurrHeartBeat;"
+        },
+        {
+          "original_line": 886,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 917,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 918,
+          "original": "RtlEnterCriticalSection(&HBSuspendCS);",
+          "actual": "RtlEnterCriticalSection(&HBSuspendCS);"
+        },
+        {
+          "original_line": 920,
+          "original": "if (!--HeartBeatResumes)  {",
+          "actual": "if (!--HeartBeatResumes)  {"
+        },
+        {
+          "original_line": 921,
+          "original": "SetEvent(hHBSuspendEvent);",
+          "actual": "SetEvent(hHBSuspendEvent);"
+        },
+        {
+          "original_line": 922,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 924,
+          "original": "RtlLeaveCriticalSection(&HBSuspendCS);",
+          "actual": "RtlLeaveCriticalSection(&HBSuspendCS);"
+        },
+        {
+          "original_line": 925,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 939,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 940,
+          "original": "RtlEnterCriticalSection(&HBSuspendCS);",
+          "actual": "RtlEnterCriticalSection(&HBSuspendCS);"
+        },
+        {
+          "original_line": 942,
+          "original": "if (!HeartBeatResumes++) {",
+          "actual": "if (!HeartBeatResumes++) {"
+        },
+        {
+          "original_line": 943,
+          "original": "SetEvent(hHBResumeEvent);",
+          "actual": "SetEvent(hHBResumeEvent);"
+        },
+        {
+          "original_line": 944,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 946,
+          "original": "RtlLeaveCriticalSection(&HBSuspendCS);",
+          "actual": "RtlLeaveCriticalSection(&HBSuspendCS);"
+        },
+        {
+          "original_line": 947,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 964,
+          "original": "VdmUnhandledExceptionFilter(",
+          "actual": "VdmUnhandledExceptionFilter("
+        },
+        {
+          "original_line": 965,
+          "original": "struct _EXCEPTION_POINTERS *ExceptionInfo",
+          "actual": "struct _EXCEPTION_POINTERS *ExceptionInfo"
+        },
+        {
+          "original_line": 966,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 967,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 970,
+          "original": "SuspendTimerThread();",
+          "actual": "SuspendTimerThread();"
+        },
+        {
+          "original_line": 972,
+          "original": "lRet = UnhandledExceptionFilter(ExceptionInfo);",
+          "actual": "lRet = UnhandledExceptionFilter(ExceptionInfo);"
+        },
+        {
+          "original_line": 976,
+          "original": "ExceptionInfo->ExceptionRecord->ExceptionCode",
+          "actual": "ExceptionInfo->ExceptionRecord->ExceptionCode"
+        },
+        {
+          "original_line": 977,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 978,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 980,
+          "original": "ResumeTimerThread();",
+          "actual": "ResumeTimerThread();"
+        },
+        {
+          "original_line": 981,
+          "original": "return lRet;",
+          "actual": "return lRet;"
+        },
+        {
+          "original_line": 982,
+          "original": "}",
+          "actual": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "current_sha256": "4def006444b777d4d22b52ae1d9cab1d37c0b8525e7fa8e2d109e4f39df08131",
+      "anchors": [
+        {
+          "original_line": 157,
+          "original": "typedef struct _OVERLAPPED_PIPE_IO {",
+          "actual": "typedef struct _OVERLAPPED_PIPE_IO {"
+        },
+        {
+          "original_line": 158,
+          "original": "struct _OVERLAPPED_PIPE_IO* Next;",
+          "actual": "struct _OVERLAPPED_PIPE_IO* Next;"
+        },
+        {
+          "original_line": 159,
+          "original": "DWORD Thread;",
+          "actual": "DWORD Thread;"
+        },
+        {
+          "original_line": 161,
+          "original": "OVERLAPPED Overlapped;",
+          "actual": "OVERLAPPED Overlapped;"
+        },
+        {
+          "original_line": 162,
+          "original": "} OVERLAPPED_PIPE_IO, *POVERLAPPED_PIPE_IO;",
+          "actual": "} OVERLAPPED_PIPE_IO, *POVERLAPPED_PIPE_IO;"
+        },
+        {
+          "original_line": 173,
+          "original": "DWORD",
+          "actual": "DWORD"
+        },
+        {
+          "original_line": 174,
+          "original": "VrpAsyncNmPipeThread(",
+          "actual": "VrpAsyncNmPipeThread("
+        },
+        {
+          "original_line": 176,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 179,
+          "original": "DWORD",
+          "actual": "DWORD"
+        },
+        {
+          "original_line": 180,
+          "original": "VrpSnapshotEventList(",
+          "actual": "VrpSnapshotEventList("
+        },
+        {
+          "original_line": 182,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 185,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 186,
+          "original": "VrpSearchForRequestByEventHandle(",
+          "actual": "VrpSearchForRequestByEventHandle("
+        },
+        {
+          "original_line": 188,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 192,
+          "original": "VrpCompleteAsyncRequest(",
+          "actual": "VrpCompleteAsyncRequest("
+        },
+        {
+          "original_line": 194,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 198,
+          "original": "VrpQueueAsyncRequest(",
+          "actual": "VrpQueueAsyncRequest("
+        },
+        {
+          "original_line": 200,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 203,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 204,
+          "original": "VrpDequeueAsyncRequest(",
+          "actual": "VrpDequeueAsyncRequest("
+        },
+        {
+          "original_line": 206,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 209,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 210,
+          "original": "VrpFindCompletedRequest(",
+          "actual": "VrpFindCompletedRequest("
+        },
+        {
+          "original_line": 212,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 216,
+          "original": "VrpAddOpenNamedPipeInfo(",
+          "actual": "VrpAddOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 219,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 222,
+          "original": "POPEN_NAMED_PIPE_INFO",
+          "actual": "POPEN_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 223,
+          "original": "VrpGetOpenNamedPipeInfo(",
+          "actual": "VrpGetOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 225,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 229,
+          "original": "VrpRemoveOpenNamedPipeInfo(",
+          "actual": "VrpRemoveOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 231,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 235,
+          "original": "RememberPipeIo(",
+          "actual": "RememberPipeIo("
+        },
+        {
+          "original_line": 237,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 241,
+          "original": "ForgetPipeIo(",
+          "actual": "ForgetPipeIo("
+        },
+        {
+          "original_line": 243,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 254,
+          "original": "DWORD VrPeekNamedPipeTickCount;",
+          "actual": "DWORD VrPeekNamedPipeTickCount;"
+        },
+        {
+          "original_line": 260,
+          "original": "CRITICAL_SECTION VrNamedPipeCancelCritSec;",
+          "actual": "CRITICAL_SECTION VrNamedPipeCancelCritSec;"
+        },
+        {
+          "original_line": 269,
+          "original": "VrGetNamedPipeInfo(",
+          "actual": "VrGetNamedPipeInfo("
+        },
+        {
+          "original_line": 271,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 301,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 302,
+          "original": "HANDLE Handle;",
+          "actual": "HANDLE Handle;"
+        },
+        {
+          "original_line": 303,
+          "original": "DWORD Flags, OutBufferSize, InBufferSize, MaxInstances, CurInstances, bufLen;",
+          "actual": "DWORD Flags, OutBufferSize, InBufferSize, MaxInstances, CurInstances, bufLen;"
+        },
+        {
+          "original_line": 304,
+          "original": "PIPEINFO* PipeInfo;",
+          "actual": "PIPEINFO* PipeInfo;"
+        },
+        {
+          "original_line": 306,
+          "original": "POPEN_NAMED_PIPE_INFO OpenNamedPipeInfo;",
+          "actual": "POPEN_NAMED_PIPE_INFO OpenNamedPipeInfo;"
+        },
+        {
+          "original_line": 333,
+          "original": "OpenNamedPipeInfo = VrpGetOpenNamedPipeInfo(Handle);",
+          "actual": "OpenNamedPipeInfo = VrpGetOpenNamedPipeInfo(Handle);"
+        },
+        {
+          "original_line": 334,
+          "original": "if (OpenNamedPipeInfo) {",
+          "actual": "if (OpenNamedPipeInfo) {"
+        },
+        {
+          "original_line": 335,
+          "original": "bufLen = getCX();",
+          "actual": "bufLen = getCX();"
+        },
+        {
+          "original_line": 336,
+          "original": "if (bufLen >= sizeof(PIPEINFO)) {",
+          "actual": "if (bufLen >= sizeof(PIPEINFO)) {"
+        },
+        {
+          "original_line": 337,
+          "original": "Ok =  GetNamedPipeInfo(Handle,",
+          "actual": "Ok =  GetNamedPipeInfo(Handle,"
+        },
+        {
+          "original_line": 338,
+          "original": "&Flags,",
+          "actual": "&Flags,"
+        },
+        {
+          "original_line": 339,
+          "original": "&OutBufferSize,",
+          "actual": "&OutBufferSize,"
+        },
+        {
+          "original_line": 340,
+          "original": "&InBufferSize,",
+          "actual": "&InBufferSize,"
+        },
+        {
+          "original_line": 341,
+          "original": "&MaxInstances",
+          "actual": "&MaxInstances"
+        },
+        {
+          "original_line": 342,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 343,
+          "original": "if (Ok) {",
+          "actual": "if (Ok) {"
+        },
+        {
+          "original_line": 352,
+          "original": "&CurInstances,",
+          "actual": "&CurInstances,"
+        },
+        {
+          "original_line": 356,
+          "original": "0",
+          "actual": "0"
+        },
+        {
+          "original_line": 357,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 358,
+          "original": "if (Ok) {",
+          "actual": "if (Ok) {"
+        },
+        {
+          "original_line": 370,
+          "original": "if (bufLen - sizeof(PIPEINFO) >= OpenNamedPipeInfo->NameLength) {",
+          "actual": "if (bufLen - sizeof(PIPEINFO) >= OpenNamedPipeInfo->NameLength) {"
+        },
+        {
+          "original_line": 371,
+          "original": "strcpy(PipeInfo->szName, OpenNamedPipeInfo->Name);",
+          "actual": "strcpy(PipeInfo->szName, OpenNamedPipeInfo->Name);"
+        },
+        {
+          "original_line": 372,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 373,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 374,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 376,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 377,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 379,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 380,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 382,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 383,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 394,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 419,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 423,
+          "original": "VrGetNamedPipeHandleState(",
+          "actual": "VrGetNamedPipeHandleState("
+        },
+        {
+          "original_line": 425,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 459,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 460,
+          "original": "HANDLE  Handle;",
+          "actual": "HANDLE  Handle;"
+        },
+        {
+          "original_line": 461,
+          "original": "DWORD   State, CurInstances, Flags, MaxInstances;",
+          "actual": "DWORD   State, CurInstances, Flags, MaxInstances;"
+        },
+        {
+          "original_line": 473,
+          "original": "&State,",
+          "actual": "&State,"
+        },
+        {
+          "original_line": 474,
+          "original": "&CurInstances,",
+          "actual": "&CurInstances,"
+        },
+        {
+          "original_line": 478,
+          "original": "0",
+          "actual": "0"
+        },
+        {
+          "original_line": 479,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 480,
+          "original": "if (Ok) {",
+          "actual": "if (Ok) {"
+        },
+        {
+          "original_line": 482,
+          "original": "if (Ok) {",
+          "actual": "if (Ok) {"
+        },
+        {
+          "original_line": 498,
+          "original": ";",
+          "actual": ";"
+        },
+        {
+          "original_line": 501,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 502,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 504,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 505,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 507,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 508,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 512,
+          "original": "VrSetNamedPipeHandleState(",
+          "actual": "VrSetNamedPipeHandleState("
+        },
+        {
+          "original_line": 514,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 541,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 545,
+          "original": "DWORD   WinPipeMode;",
+          "actual": "DWORD   WinPipeMode;"
+        },
+        {
+          "original_line": 561,
+          "original": "DosPipeMode = getCX();",
+          "actual": "DosPipeMode = getCX();"
+        },
+        {
+          "original_line": 569,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 570,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 589,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 590,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 591,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 592,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 596,
+          "original": "VrPeekNamedPipe(",
+          "actual": "VrPeekNamedPipe("
+        },
+        {
+          "original_line": 598,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 631,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 632,
+          "original": "HANDLE Handle;",
+          "actual": "HANDLE Handle;"
+        },
+        {
+          "original_line": 633,
+          "original": "LPBYTE lpBuffer;",
+          "actual": "LPBYTE lpBuffer;"
+        },
+        {
+          "original_line": 634,
+          "original": "DWORD nBufferSize, BytesRead, BytesAvailable, BytesLeftInMessage;",
+          "actual": "DWORD nBufferSize, BytesRead, BytesAvailable, BytesLeftInMessage;"
+        },
+        {
+          "original_line": 650,
+          "original": "nBufferSize = (DWORD)getCX();",
+          "actual": "nBufferSize = (DWORD)getCX();"
+        },
+        {
+          "original_line": 651,
+          "original": "Ok = PeekNamedPipe(Handle,",
+          "actual": "Ok = PeekNamedPipe(Handle,"
+        },
+        {
+          "original_line": 652,
+          "original": "lpBuffer,",
+          "actual": "lpBuffer,"
+        },
+        {
+          "original_line": 653,
+          "original": "nBufferSize,",
+          "actual": "nBufferSize,"
+        },
+        {
+          "original_line": 654,
+          "original": "&BytesRead,",
+          "actual": "&BytesRead,"
+        },
+        {
+          "original_line": 655,
+          "original": "&BytesAvailable,",
+          "actual": "&BytesAvailable,"
+        },
+        {
+          "original_line": 656,
+          "original": "&BytesLeftInMessage",
+          "actual": "&BytesLeftInMessage"
+        },
+        {
+          "original_line": 657,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 658,
+          "original": "if (Ok) {",
+          "actual": "if (Ok) {"
+        },
+        {
+          "original_line": 690,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 702,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 711,
+          "original": "BytesRead = 0;",
+          "actual": "BytesRead = 0;"
+        },
+        {
+          "original_line": 712,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 721,
+          "original": "if (!BytesRead) {",
+          "actual": "if (!BytesRead) {"
+        },
+        {
+          "original_line": 722,
+          "original": "if (GetTickCount() - VrPeekNamedPipeTickCount < 100) {",
+          "actual": "if (GetTickCount() - VrPeekNamedPipeTickCount < 100) {"
+        },
+        {
+          "original_line": 723,
+          "original": "WaitIfIdle();",
+          "actual": "WaitIfIdle();"
+        },
+        {
+          "original_line": 724,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 725,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 726,
+          "original": "VrPeekNamedPipeTickCount = GetTickCount();",
+          "actual": "VrPeekNamedPipeTickCount = GetTickCount();"
+        },
+        {
+          "original_line": 727,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 731,
+          "original": "VrTransactNamedPipe(",
+          "actual": "VrTransactNamedPipe("
+        },
+        {
+          "original_line": 733,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 764,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 765,
+          "original": "DWORD BytesRead;",
+          "actual": "DWORD BytesRead;"
+        },
+        {
+          "original_line": 767,
+          "original": "OVERLAPPED_PIPE_IO pipeio;",
+          "actual": "OVERLAPPED_PIPE_IO pipeio;"
+        },
+        {
+          "original_line": 768,
+          "original": "DWORD Error;",
+          "actual": "DWORD Error;"
+        },
+        {
+          "original_line": 769,
+          "original": "HANDLE Handle;",
+          "actual": "HANDLE Handle;"
+        },
+        {
+          "original_line": 805,
+          "original": "RememberPipeIo(&pipeio);",
+          "actual": "RememberPipeIo(&pipeio);"
+        },
+        {
+          "original_line": 806,
+          "original": "Ok = TransactNamedPipe(Handle,",
+          "actual": "Ok = TransactNamedPipe(Handle,"
+        },
+        {
+          "original_line": 808,
+          "original": "(DWORD)getCX(),",
+          "actual": "(DWORD)getCX(),"
+        },
+        {
+          "original_line": 810,
+          "original": "(DWORD)getDX(),",
+          "actual": "(DWORD)getDX(),"
+        },
+        {
+          "original_line": 812,
+          "original": "&pipeio.Overlapped",
+          "actual": "&pipeio.Overlapped"
+        },
+        {
+          "original_line": 813,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 824,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 825,
+          "original": "ForgetPipeIo(&pipeio);",
+          "actual": "ForgetPipeIo(&pipeio);"
+        },
+        {
+          "original_line": 826,
+          "original": "if (pipeio.Cancelled) {",
+          "actual": "if (pipeio.Cancelled) {"
+        },
+        {
+          "original_line": 828,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 847,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 860,
+          "original": "CloseHandle(Handle);",
+          "actual": "CloseHandle(Handle);"
+        },
+        {
+          "original_line": 861,
+          "original": "VrpRemoveOpenNamedPipeInfo(Handle);",
+          "actual": "VrpRemoveOpenNamedPipeInfo(Handle);"
+        },
+        {
+          "original_line": 862,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 863,
+          "original": "Error = VrpMapLastError();",
+          "actual": "Error = VrpMapLastError();"
+        },
+        {
+          "original_line": 864,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 872,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 878,
+          "original": "CloseHandle(pipeio.Overlapped.hEvent);",
+          "actual": "CloseHandle(pipeio.Overlapped.hEvent);"
+        },
+        {
+          "original_line": 879,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 886,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 887,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 891,
+          "original": "VrCallNamedPipe(",
+          "actual": "VrCallNamedPipe("
+        },
+        {
+          "original_line": 893,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 927,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 929,
+          "original": "DWORD BytesRead;",
+          "actual": "DWORD BytesRead;"
+        },
+        {
+          "original_line": 930,
+          "original": "PDOS_CALL_NAMED_PIPE_STRUCT StructurePointer;",
+          "actual": "PDOS_CALL_NAMED_PIPE_STRUCT StructurePointer;"
+        },
+        {
+          "original_line": 946,
+          "original": "&BytesRead,",
+          "actual": "&BytesRead,"
+        },
+        {
+          "original_line": 948,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 949,
+          "original": "if (!Ok) {",
+          "actual": "if (!Ok) {"
+        },
+        {
+          "original_line": 957,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 960,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 967,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 968,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 972,
+          "original": "VrWaitNamedPipe(",
+          "actual": "VrWaitNamedPipe("
+        },
+        {
+          "original_line": 974,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1002,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1022,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 1023,
+          "original": "if (!Ok) {",
+          "actual": "if (!Ok) {"
+        },
+        {
+          "original_line": 1025,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1032,
+          "original": "setAX(0);",
+          "actual": "setAX(0);"
+        },
+        {
+          "original_line": 1033,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 1034,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1035,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1039,
+          "original": "VrNetHandleGetInfo(",
+          "actual": "VrNetHandleGetInfo("
+        },
+        {
+          "original_line": 1041,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1072,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1073,
+          "original": "HANDLE  Handle;",
+          "actual": "HANDLE  Handle;"
+        },
+        {
+          "original_line": 1074,
+          "original": "DWORD   Level;",
+          "actual": "DWORD   Level;"
+        },
+        {
+          "original_line": 1075,
+          "original": "DWORD   BufLen;",
+          "actual": "DWORD   BufLen;"
+        },
+        {
+          "original_line": 1077,
+          "original": "DWORD   CollectCount;",
+          "actual": "DWORD   CollectCount;"
+        },
+        {
+          "original_line": 1078,
+          "original": "DWORD   CollectTime;",
+          "actual": "DWORD   CollectTime;"
+        },
+        {
+          "original_line": 1079,
+          "original": "LPVDM_HANDLE_INFO_1 StructurePointer;",
+          "actual": "LPVDM_HANDLE_INFO_1 StructurePointer;"
+        },
+        {
+          "original_line": 1088,
+          "original": "Level = (DWORD)getSI();",
+          "actual": "Level = (DWORD)getSI();"
+        },
+        {
+          "original_line": 1089,
+          "original": "if (Level == 1) {",
+          "actual": "if (Level == 1) {"
+        },
+        {
+          "original_line": 1090,
+          "original": "BufLen = (DWORD)getCX();",
+          "actual": "BufLen = (DWORD)getCX();"
+        },
+        {
+          "original_line": 1091,
+          "original": "if (BufLen >= sizeof(VDM_HANDLE_INFO_1)) {",
+          "actual": "if (BufLen >= sizeof(VDM_HANDLE_INFO_1)) {"
+        },
+        {
+          "original_line": 1102,
+          "original": "&CollectCount,",
+          "actual": "&CollectCount,"
+        },
+        {
+          "original_line": 1103,
+          "original": "&CollectTime,",
+          "actual": "&CollectTime,"
+        },
+        {
+          "original_line": 1105,
+          "original": "0",
+          "actual": "0"
+        },
+        {
+          "original_line": 1106,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 1107,
+          "original": "if (!Ok) {",
+          "actual": "if (!Ok) {"
+        },
+        {
+          "original_line": 1109,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1111,
+          "original": "StructurePointer->CharTime = CollectTime;",
+          "actual": "StructurePointer->CharTime = CollectTime;"
+        },
+        {
+          "original_line": 1113,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 1114,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1115,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1117,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1118,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1120,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1121,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1125,
+          "original": "VrNetHandleSetInfo(",
+          "actual": "VrNetHandleSetInfo("
+        },
+        {
+          "original_line": 1127,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1158,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1159,
+          "original": "HANDLE  Handle;",
+          "actual": "HANDLE  Handle;"
+        },
+        {
+          "original_line": 1160,
+          "original": "DWORD   Level;",
+          "actual": "DWORD   Level;"
+        },
+        {
+          "original_line": 1161,
+          "original": "DWORD   BufLen;",
+          "actual": "DWORD   BufLen;"
+        },
+        {
+          "original_line": 1163,
+          "original": "DWORD   Data;",
+          "actual": "DWORD   Data;"
+        },
+        {
+          "original_line": 1164,
+          "original": "DWORD   ParmNum;",
+          "actual": "DWORD   ParmNum;"
+        },
+        {
+          "original_line": 1165,
+          "original": "LPBYTE  Buffer;",
+          "actual": "LPBYTE  Buffer;"
+        },
+        {
+          "original_line": 1175,
+          "original": "Level = (DWORD)getSI();",
+          "actual": "Level = (DWORD)getSI();"
+        },
+        {
+          "original_line": 1177,
+          "original": "if (Level == 1) {",
+          "actual": "if (Level == 1) {"
+        },
+        {
+          "original_line": 1178,
+          "original": "BufLen = (DWORD)getCX();",
+          "actual": "BufLen = (DWORD)getCX();"
+        },
+        {
+          "original_line": 1185,
+          "original": "ParmNum = (DWORD)getDI();",
+          "actual": "ParmNum = (DWORD)getDI();"
+        },
+        {
+          "original_line": 1186,
+          "original": "if (!--ParmNum) {",
+          "actual": "if (!--ParmNum) {"
+        },
+        {
+          "original_line": 1187,
+          "original": "if (BufLen < sizeof(((LPVDM_HANDLE_INFO_1)0)->CharTime)) {",
+          "actual": "if (BufLen < sizeof(((LPVDM_HANDLE_INFO_1)0)->CharTime)) {"
+        },
+        {
+          "original_line": 1189,
+          "original": "return ;",
+          "actual": "return ;"
+        },
+        {
+          "original_line": 1190,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1191,
+          "original": "Data = (DWORD)*(LPDWORD)Buffer;",
+          "actual": "Data = (DWORD)*(LPDWORD)Buffer;"
+        },
+        {
+          "original_line": 1192,
+          "original": "} else if (!--ParmNum) {",
+          "actual": "} else if (!--ParmNum) {"
+        },
+        {
+          "original_line": 1193,
+          "original": "if (BufLen < sizeof(((LPVDM_HANDLE_INFO_1)0)->CharCount)) {",
+          "actual": "if (BufLen < sizeof(((LPVDM_HANDLE_INFO_1)0)->CharCount)) {"
+        },
+        {
+          "original_line": 1195,
+          "original": "return ;",
+          "actual": "return ;"
+        },
+        {
+          "original_line": 1196,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1197,
+          "original": "Data = (DWORD)*(LPWORD)Buffer;",
+          "actual": "Data = (DWORD)*(LPWORD)Buffer;"
+        },
+        {
+          "original_line": 1198,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1200,
+          "original": "return ;",
+          "actual": "return ;"
+        },
+        {
+          "original_line": 1201,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1209,
+          "original": "Ok = SetNamedPipeHandleState(Handle,",
+          "actual": "Ok = SetNamedPipeHandleState(Handle,"
+        },
+        {
+          "original_line": 1213,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 1214,
+          "original": "if (!Ok) {",
+          "actual": "if (!Ok) {"
+        },
+        {
+          "original_line": 1216,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1217,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 1218,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1219,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1221,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1222,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1234,
+          "original": "CRITICAL_SECTION VrNmpRequestQueueCritSec;",
+          "actual": "CRITICAL_SECTION VrNmpRequestQueueCritSec;"
+        },
+        {
+          "original_line": 1237,
+          "original": "HANDLE VrpNmpSomethingToDo;",
+          "actual": "HANDLE VrpNmpSomethingToDo;"
+        },
+        {
+          "original_line": 1241,
+          "original": "VrReadWriteAsyncNmPipe(",
+          "actual": "VrReadWriteAsyncNmPipe("
+        },
+        {
+          "original_line": 1243,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1280,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1281,
+          "original": "HANDLE  Handle;",
+          "actual": "HANDLE  Handle;"
+        },
+        {
+          "original_line": 1288,
+          "original": "DWORD   Type;",
+          "actual": "DWORD   Type;"
+        },
+        {
+          "original_line": 1302,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO pAsyncInfo;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO pAsyncInfo;"
+        },
+        {
+          "original_line": 1309,
+          "original": "POPEN_NAMED_PIPE_INFO pipeInfo;",
+          "actual": "POPEN_NAMED_PIPE_INFO pipeInfo;"
+        },
+        {
+          "original_line": 1312,
+          "original": "LPBYTE  buffer;",
+          "actual": "LPBYTE  buffer;"
+        },
+        {
+          "original_line": 1313,
+          "original": "DWORD   error;",
+          "actual": "DWORD   error;"
+        },
+        {
+          "original_line": 1315,
+          "original": "HANDLE  hEvent;",
+          "actual": "HANDLE  hEvent;"
+        },
+        {
+          "original_line": 1316,
+          "original": "DWORD   bytesTransferred;",
+          "actual": "DWORD   bytesTransferred;"
+        },
+        {
+          "original_line": 1325,
+          "original": "static DWORD tid;",
+          "actual": "static DWORD tid;"
+        },
+        {
+          "original_line": 1332,
+          "original": "pipeInfo = VrpGetOpenNamedPipeInfo(Handle);",
+          "actual": "pipeInfo = VrpGetOpenNamedPipeInfo(Handle);"
+        },
+        {
+          "original_line": 1385,
+          "original": "if (!pipeInfo) {",
+          "actual": "if (!pipeInfo) {"
+        },
+        {
+          "original_line": 1394,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 1395,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1421,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 1422,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1445,
+          "original": "CloseHandle(VrpNmpSomethingToDo);",
+          "actual": "CloseHandle(VrpNmpSomethingToDo);"
+        },
+        {
+          "original_line": 1447,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 1448,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1449,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1466,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 1467,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1489,
+          "original": "LocalFree((HLOCAL)pAsyncInfo);",
+          "actual": "LocalFree((HLOCAL)pAsyncInfo);"
+        },
+        {
+          "original_line": 1496,
+          "original": "return;",
+          "actual": "return;"
+        },
+        {
+          "original_line": 1497,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1498,
+          "original": "pAsyncInfo->Overlapped.hEvent = hEvent;",
+          "actual": "pAsyncInfo->Overlapped.hEvent = hEvent;"
+        },
+        {
+          "original_line": 1499,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1506,
+          "original": "pAsyncInfo->Handle = Handle;",
+          "actual": "pAsyncInfo->Handle = Handle;"
+        },
+        {
+          "original_line": 1523,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1533,
+          "original": "VrpQueueAsyncRequest(pAsyncInfo);",
+          "actual": "VrpQueueAsyncRequest(pAsyncInfo);"
+        },
+        {
+          "original_line": 1541,
+          "original": "ok = ReadFile(Handle,",
+          "actual": "ok = ReadFile(Handle,"
+        },
+        {
+          "original_line": 1542,
+          "original": "buffer,",
+          "actual": "buffer,"
+        },
+        {
+          "original_line": 1543,
+          "original": "length,",
+          "actual": "length,"
+        },
+        {
+          "original_line": 1544,
+          "original": "&bytesTransferred,",
+          "actual": "&bytesTransferred,"
+        },
+        {
+          "original_line": 1545,
+          "original": "&pAsyncInfo->Overlapped",
+          "actual": "&pAsyncInfo->Overlapped"
+        },
+        {
+          "original_line": 1546,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 1559,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1560,
+          "original": "ok = WriteFile(Handle,",
+          "actual": "ok = WriteFile(Handle,"
+        },
+        {
+          "original_line": 1561,
+          "original": "buffer,",
+          "actual": "buffer,"
+        },
+        {
+          "original_line": 1562,
+          "original": "length,",
+          "actual": "length,"
+        },
+        {
+          "original_line": 1563,
+          "original": "&bytesTransferred,",
+          "actual": "&bytesTransferred,"
+        },
+        {
+          "original_line": 1564,
+          "original": "&pAsyncInfo->Overlapped",
+          "actual": "&pAsyncInfo->Overlapped"
+        },
+        {
+          "original_line": 1565,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 1578,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1600,
+          "original": "VrpDequeueAsyncRequest(pAsyncInfo);",
+          "actual": "VrpDequeueAsyncRequest(pAsyncInfo);"
+        },
+        {
+          "original_line": 1601,
+          "original": "CloseHandle(hEvent);",
+          "actual": "CloseHandle(hEvent);"
+        },
+        {
+          "original_line": 1602,
+          "original": "LocalFree(pAsyncInfo);",
+          "actual": "LocalFree(pAsyncInfo);"
+        },
+        {
+          "original_line": 1604,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1614,
+          "original": "setCF(0);",
+          "actual": "setCF(0);"
+        },
+        {
+          "original_line": 1615,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1622,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1625,
+          "original": "BOOLEAN",
+          "actual": "BOOLEAN"
+        },
+        {
+          "original_line": 1626,
+          "original": "VrNmPipeInterrupt(",
+          "actual": "VrNmPipeInterrupt("
+        },
+        {
+          "original_line": 1628,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1653,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1654,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO pAsyncInfo;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO pAsyncInfo;"
+        },
+        {
+          "original_line": 1668,
+          "original": "pAsyncInfo = VrpFindCompletedRequest();",
+          "actual": "pAsyncInfo = VrpFindCompletedRequest();"
+        },
+        {
+          "original_line": 1669,
+          "original": "if (!pAsyncInfo) {",
+          "actual": "if (!pAsyncInfo) {"
+        },
+        {
+          "original_line": 1685,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 1697,
+          "original": "setAL((BYTE)pAsyncInfo->Type2);",
+          "actual": "setAL((BYTE)pAsyncInfo->Type2);"
+        },
+        {
+          "original_line": 1704,
+          "original": "VrpDequeueAsyncRequest(pAsyncInfo);",
+          "actual": "VrpDequeueAsyncRequest(pAsyncInfo);"
+        },
+        {
+          "original_line": 1705,
+          "original": "CloseHandle(pAsyncInfo->Overlapped.hEvent);",
+          "actual": "CloseHandle(pAsyncInfo->Overlapped.hEvent);"
+        },
+        {
+          "original_line": 1706,
+          "original": "LocalFree(pAsyncInfo);",
+          "actual": "LocalFree(pAsyncInfo);"
+        },
+        {
+          "original_line": 1727,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1728,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1732,
+          "original": "VrTerminateNamedPipes(",
+          "actual": "VrTerminateNamedPipes("
+        },
+        {
+          "original_line": 1734,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1753,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1759,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1763,
+          "original": "VrCancelPipeIo(",
+          "actual": "VrCancelPipeIo("
+        },
+        {
+          "original_line": 1765,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1787,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1788,
+          "original": "POVERLAPPED_PIPE_IO ptr;",
+          "actual": "POVERLAPPED_PIPE_IO ptr;"
+        },
+        {
+          "original_line": 1790,
+          "original": "EnterCriticalSection(&VrNamedPipeCancelCritSec);",
+          "actual": "EnterCriticalSection(&VrNamedPipeCancelCritSec);"
+        },
+        {
+          "original_line": 1791,
+          "original": "for (ptr = PipeIoQueue; ptr; ptr = ptr->Next) {",
+          "actual": "for (ptr = PipeIoQueue; ptr; ptr = ptr->Next) {"
+        },
+        {
+          "original_line": 1792,
+          "original": "if (ptr->Thread == Thread) {",
+          "actual": "if (ptr->Thread == Thread) {"
+        },
+        {
+          "original_line": 1794,
+          "original": "SetEvent(ptr->Overlapped.hEvent);",
+          "actual": "SetEvent(ptr->Overlapped.hEvent);"
+        },
+        {
+          "original_line": 1795,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1796,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1797,
+          "original": "LeaveCriticalSection(&VrNamedPipeCancelCritSec);",
+          "actual": "LeaveCriticalSection(&VrNamedPipeCancelCritSec);"
+        },
+        {
+          "original_line": 1798,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1802,
+          "original": "DWORD",
+          "actual": "DWORD"
+        },
+        {
+          "original_line": 1803,
+          "original": "VrpAsyncNmPipeThread(",
+          "actual": "VrpAsyncNmPipeThread("
+        },
+        {
+          "original_line": 1805,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1828,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1829,
+          "original": "DWORD numberOfHandles;",
+          "actual": "DWORD numberOfHandles;"
+        },
+        {
+          "original_line": 1830,
+          "original": "DWORD index;",
+          "actual": "DWORD index;"
+        },
+        {
+          "original_line": 1832,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO pRequest;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO pRequest;"
+        },
+        {
+          "original_line": 1850,
+          "original": "numberOfHandles = VrpSnapshotEventList(eventList);",
+          "actual": "numberOfHandles = VrpSnapshotEventList(eventList);"
+        },
+        {
+          "original_line": 1858,
+          "original": "if (index > 0 && index < numberOfHandles) {",
+          "actual": "if (index > 0 && index < numberOfHandles) {"
+        },
+        {
+          "original_line": 1866,
+          "original": "pRequest = VrpSearchForRequestByEventHandle(eventList[index]);",
+          "actual": "pRequest = VrpSearchForRequestByEventHandle(eventList[index]);"
+        },
+        {
+          "original_line": 1868,
+          "original": "VrpCompleteAsyncRequest(pRequest);",
+          "actual": "VrpCompleteAsyncRequest(pRequest);"
+        },
+        {
+          "original_line": 1869,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1881,
+          "original": "} else if (index) {",
+          "actual": "} else if (index) {"
+        },
+        {
+          "original_line": 1896,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1906,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1915,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1919,
+          "original": "DWORD",
+          "actual": "DWORD"
+        },
+        {
+          "original_line": 1920,
+          "original": "VrpSnapshotEventList(",
+          "actual": "VrpSnapshotEventList("
+        },
+        {
+          "original_line": 1922,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1942,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1943,
+          "original": "DWORD count = 1;",
+          "actual": "DWORD count = 1;"
+        },
+        {
+          "original_line": 1944,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;"
+        },
+        {
+          "original_line": 1952,
+          "original": "pList[0] = VrpNmpSomethingToDo;",
+          "actual": "pList[0] = VrpNmpSomethingToDo;"
+        },
+        {
+          "original_line": 1953,
+          "original": "EnterCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "EnterCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 1954,
+          "original": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {",
+          "actual": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {"
+        },
+        {
+          "original_line": 1956,
+          "original": "pList[count++] = ptr->Overlapped.hEvent;",
+          "actual": "pList[count++] = ptr->Overlapped.hEvent;"
+        },
+        {
+          "original_line": 1957,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1958,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1959,
+          "original": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 1967,
+          "original": "return count;",
+          "actual": "return count;"
+        },
+        {
+          "original_line": 1968,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 1972,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 1973,
+          "original": "VrpSearchForRequestByEventHandle(",
+          "actual": "VrpSearchForRequestByEventHandle("
+        },
+        {
+          "original_line": 1975,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 1998,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 1999,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;"
+        },
+        {
+          "original_line": 2007,
+          "original": "EnterCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "EnterCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2008,
+          "original": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {",
+          "actual": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {"
+        },
+        {
+          "original_line": 2009,
+          "original": "if (ptr->Overlapped.hEvent == EventHandle) {",
+          "actual": "if (ptr->Overlapped.hEvent == EventHandle) {"
+        },
+        {
+          "original_line": 2011,
+          "original": "break;",
+          "actual": "break;"
+        },
+        {
+          "original_line": 2012,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2013,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2014,
+          "original": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2035,
+          "original": "return ptr;",
+          "actual": "return ptr;"
+        },
+        {
+          "original_line": 2036,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2041,
+          "original": "VrpCompleteAsyncRequest(",
+          "actual": "VrpCompleteAsyncRequest("
+        },
+        {
+          "original_line": 2043,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2068,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2070,
+          "original": "DWORD bytesTransferred;",
+          "actual": "DWORD bytesTransferred;"
+        },
+        {
+          "original_line": 2071,
+          "original": "DWORD error;",
+          "actual": "DWORD error;"
+        },
+        {
+          "original_line": 2077,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2081,
+          "original": "ok = GetOverlappedResult(pAsyncInfo->Handle,",
+          "actual": "ok = GetOverlappedResult(pAsyncInfo->Handle,"
+        },
+        {
+          "original_line": 2082,
+          "original": "&pAsyncInfo->Overlapped,",
+          "actual": "&pAsyncInfo->Overlapped,"
+        },
+        {
+          "original_line": 2083,
+          "original": "&bytesTransferred,",
+          "actual": "&bytesTransferred,"
+        },
+        {
+          "original_line": 2085,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 2102,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2112,
+          "original": "if (!pAsyncInfo->ANR) {",
+          "actual": "if (!pAsyncInfo->ANR) {"
+        },
+        {
+          "original_line": 2125,
+          "original": "VrpDequeueAsyncRequest(pAsyncInfo);",
+          "actual": "VrpDequeueAsyncRequest(pAsyncInfo);"
+        },
+        {
+          "original_line": 2129,
+          "original": "CloseHandle(pAsyncInfo->Overlapped.hEvent);",
+          "actual": "CloseHandle(pAsyncInfo->Overlapped.hEvent);"
+        },
+        {
+          "original_line": 2130,
+          "original": "LocalFree(pAsyncInfo);",
+          "actual": "LocalFree(pAsyncInfo);"
+        },
+        {
+          "original_line": 2131,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2144,
+          "original": "VrQueueCompletionHandler(VrNmPipeInterrupt);",
+          "actual": "VrQueueCompletionHandler(VrNmPipeInterrupt);"
+        },
+        {
+          "original_line": 2145,
+          "original": "VrRaiseInterrupt();",
+          "actual": "VrRaiseInterrupt();"
+        },
+        {
+          "original_line": 2146,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2147,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2152,
+          "original": "VrpQueueAsyncRequest(",
+          "actual": "VrpQueueAsyncRequest("
+        },
+        {
+          "original_line": 2154,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2173,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2180,
+          "original": "EnterCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "EnterCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2181,
+          "original": "if (!RequestQueueHead) {",
+          "actual": "if (!RequestQueueHead) {"
+        },
+        {
+          "original_line": 2182,
+          "original": "RequestQueueHead = pAsyncInfo;",
+          "actual": "RequestQueueHead = pAsyncInfo;"
+        },
+        {
+          "original_line": 2193,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2194,
+          "original": "RequestQueueTail->Next = pAsyncInfo;",
+          "actual": "RequestQueueTail->Next = pAsyncInfo;"
+        },
+        {
+          "original_line": 2195,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2197,
+          "original": "RequestQueueTail = pAsyncInfo;",
+          "actual": "RequestQueueTail = pAsyncInfo;"
+        },
+        {
+          "original_line": 2198,
+          "original": "SetEvent(VrpNmpSomethingToDo);",
+          "actual": "SetEvent(VrpNmpSomethingToDo);"
+        },
+        {
+          "original_line": 2199,
+          "original": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2200,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2204,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 2205,
+          "original": "VrpDequeueAsyncRequest(",
+          "actual": "VrpDequeueAsyncRequest("
+        },
+        {
+          "original_line": 2207,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2228,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2229,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;"
+        },
+        {
+          "original_line": 2230,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO prev = (PDOS_ASYNC_NAMED_PIPE_INFO)&RequestQueueHead;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO prev = (PDOS_ASYNC_NAMED_PIPE_INFO)&RequestQueueHead;"
+        },
+        {
+          "original_line": 2238,
+          "original": "EnterCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "EnterCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2239,
+          "original": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {",
+          "actual": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {"
+        },
+        {
+          "original_line": 2240,
+          "original": "if (ptr == pAsyncInfo) {",
+          "actual": "if (ptr == pAsyncInfo) {"
+        },
+        {
+          "original_line": 2241,
+          "original": "break;",
+          "actual": "break;"
+        },
+        {
+          "original_line": 2242,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2243,
+          "original": "prev = ptr;",
+          "actual": "prev = ptr;"
+        },
+        {
+          "original_line": 2244,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2245,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2246,
+          "original": "if (ptr) {",
+          "actual": "if (ptr) {"
+        },
+        {
+          "original_line": 2247,
+          "original": "prev->Next = ptr->Next;",
+          "actual": "prev->Next = ptr->Next;"
+        },
+        {
+          "original_line": 2248,
+          "original": "if (RequestQueueTail == ptr) {",
+          "actual": "if (RequestQueueTail == ptr) {"
+        },
+        {
+          "original_line": 2249,
+          "original": "RequestQueueTail = prev;",
+          "actual": "RequestQueueTail = prev;"
+        },
+        {
+          "original_line": 2250,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2251,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2261,
+          "original": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2269,
+          "original": "return ptr;",
+          "actual": "return ptr;"
+        },
+        {
+          "original_line": 2270,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2274,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 2275,
+          "original": "VrpFindCompletedRequest(",
+          "actual": "VrpFindCompletedRequest("
+        },
+        {
+          "original_line": 2277,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2299,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2300,
+          "original": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;",
+          "actual": "PDOS_ASYNC_NAMED_PIPE_INFO ptr;"
+        },
+        {
+          "original_line": 2308,
+          "original": "EnterCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "EnterCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2309,
+          "original": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {",
+          "actual": "for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {"
+        },
+        {
+          "original_line": 2310,
+          "original": "if (ptr->Completed) {",
+          "actual": "if (ptr->Completed) {"
+        },
+        {
+          "original_line": 2311,
+          "original": "break;",
+          "actual": "break;"
+        },
+        {
+          "original_line": 2312,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2313,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2314,
+          "original": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);",
+          "actual": "LeaveCriticalSection(&VrNmpRequestQueueCritSec);"
+        },
+        {
+          "original_line": 2335,
+          "original": "return ptr;",
+          "actual": "return ptr;"
+        },
+        {
+          "original_line": 2336,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2344,
+          "original": "VrAddOpenNamedPipeInfo(",
+          "actual": "VrAddOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 2347,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2370,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2379,
+          "original": "if (VrIsNamedPipeName(lpFileName)) {",
+          "actual": "if (VrIsNamedPipeName(lpFileName)) {"
+        },
+        {
+          "original_line": 2393,
+          "original": "ok = VrpAddOpenNamedPipeInfo(Handle, lpFileName);",
+          "actual": "ok = VrpAddOpenNamedPipeInfo(Handle, lpFileName);"
+        },
+        {
+          "original_line": 2394,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2404,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2406,
+          "original": "return ok;",
+          "actual": "return ok;"
+        },
+        {
+          "original_line": 2407,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2411,
+          "original": "VrRemoveOpenNamedPipeInfo(",
+          "actual": "VrRemoveOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 2413,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2436,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2454,
+          "original": "VrpRemoveOpenNamedPipeInfo(Handle);",
+          "actual": "VrpRemoveOpenNamedPipeInfo(Handle);"
+        },
+        {
+          "original_line": 2458,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2462,
+          "original": "VrReadNamedPipe(",
+          "actual": "VrReadNamedPipe("
+        },
+        {
+          "original_line": 2468,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2493,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2494,
+          "original": "OVERLAPPED_PIPE_IO pipeio;",
+          "actual": "OVERLAPPED_PIPE_IO pipeio;"
+        },
+        {
+          "original_line": 2496,
+          "original": "DWORD error;",
+          "actual": "DWORD error;"
+        },
+        {
+          "original_line": 2497,
+          "original": "DWORD dwBytesRead;",
+          "actual": "DWORD dwBytesRead;"
+        },
+        {
+          "original_line": 2519,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2525,
+          "original": "RememberPipeIo(&pipeio);",
+          "actual": "RememberPipeIo(&pipeio);"
+        },
+        {
+          "original_line": 2527,
+          "original": "if (!success) {",
+          "actual": "if (!success) {"
+        },
+        {
+          "original_line": 2528,
+          "original": "error = GetLastError();",
+          "actual": "error = GetLastError();"
+        },
+        {
+          "original_line": 2531,
+          "original": "if (error == 0xffffffff) {",
+          "actual": "if (error == 0xffffffff) {"
+        },
+        {
+          "original_line": 2532,
+          "original": "error = GetLastError();",
+          "actual": "error = GetLastError();"
+        },
+        {
+          "original_line": 2533,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2535,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2537,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2553,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2554,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2555,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2557,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2559,
+          "original": "ForgetPipeIo(&pipeio);",
+          "actual": "ForgetPipeIo(&pipeio);"
+        },
+        {
+          "original_line": 2560,
+          "original": "if (pipeio.Cancelled) {",
+          "actual": "if (pipeio.Cancelled) {"
+        },
+        {
+          "original_line": 2563,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2565,
+          "original": "if (success) {",
+          "actual": "if (success) {"
+        },
+        {
+          "original_line": 2583,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2585,
+          "original": "CloseHandle(Handle);",
+          "actual": "CloseHandle(Handle);"
+        },
+        {
+          "original_line": 2586,
+          "original": "VrpRemoveOpenNamedPipeInfo(Handle);",
+          "actual": "VrpRemoveOpenNamedPipeInfo(Handle);"
+        },
+        {
+          "original_line": 2587,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2589,
+          "original": "CloseHandle(pipeio.Overlapped.hEvent);",
+          "actual": "CloseHandle(pipeio.Overlapped.hEvent);"
+        },
+        {
+          "original_line": 2599,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2601,
+          "original": "if (!success) {",
+          "actual": "if (!success) {"
+        },
+        {
+          "original_line": 2609,
+          "original": "SetLastError(error);",
+          "actual": "SetLastError(error);"
+        },
+        {
+          "original_line": 2610,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2619,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2627,
+          "original": "return success;",
+          "actual": "return success;"
+        },
+        {
+          "original_line": 2628,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2632,
+          "original": "VrWriteNamedPipe(",
+          "actual": "VrWriteNamedPipe("
+        },
+        {
+          "original_line": 2637,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2661,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2662,
+          "original": "OVERLAPPED_PIPE_IO pipeio;",
+          "actual": "OVERLAPPED_PIPE_IO pipeio;"
+        },
+        {
+          "original_line": 2664,
+          "original": "DWORD error;",
+          "actual": "DWORD error;"
+        },
+        {
+          "original_line": 2686,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2687,
+          "original": "RememberPipeIo(&pipeio);",
+          "actual": "RememberPipeIo(&pipeio);"
+        },
+        {
+          "original_line": 2688,
+          "original": "success = WriteFile(Handle, Buffer, Buflen, BytesWritten, &pipeio.Overlapped);",
+          "actual": "success = WriteFile(Handle, Buffer, Buflen, BytesWritten, &pipeio.Overlapped);"
+        },
+        {
+          "original_line": 2692,
+          "original": "if (error == 0xffffffff) {",
+          "actual": "if (error == 0xffffffff) {"
+        },
+        {
+          "original_line": 2693,
+          "original": "error = GetLastError();",
+          "actual": "error = GetLastError();"
+        },
+        {
+          "original_line": 2694,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2696,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2697,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2698,
+          "original": "ForgetPipeIo(&pipeio);",
+          "actual": "ForgetPipeIo(&pipeio);"
+        },
+        {
+          "original_line": 2699,
+          "original": "if (pipeio.Cancelled) {",
+          "actual": "if (pipeio.Cancelled) {"
+        },
+        {
+          "original_line": 2702,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2703,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2704,
+          "original": "if (success) {",
+          "actual": "if (success) {"
+        },
+        {
+          "original_line": 2711,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2712,
+          "original": "CloseHandle(pipeio.Overlapped.hEvent);",
+          "actual": "CloseHandle(pipeio.Overlapped.hEvent);"
+        },
+        {
+          "original_line": 2713,
+          "original": "if (!success) {",
+          "actual": "if (!success) {"
+        },
+        {
+          "original_line": 2721,
+          "original": "SetLastError(error);",
+          "actual": "SetLastError(error);"
+        },
+        {
+          "original_line": 2723,
+          "original": "CloseHandle(Handle);",
+          "actual": "CloseHandle(Handle);"
+        },
+        {
+          "original_line": 2724,
+          "original": "VrpRemoveOpenNamedPipeInfo(Handle);",
+          "actual": "VrpRemoveOpenNamedPipeInfo(Handle);"
+        },
+        {
+          "original_line": 2725,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2726,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2738,
+          "original": "return success;",
+          "actual": "return success;"
+        },
+        {
+          "original_line": 2739,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2747,
+          "original": "VrIsNamedPipeName(",
+          "actual": "VrIsNamedPipeName("
+        },
+        {
+          "original_line": 2749,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2786,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2787,
+          "original": "int     CharCount;",
+          "actual": "int     CharCount;"
+        },
+        {
+          "original_line": 2794,
+          "original": "++Name;",
+          "actual": "++Name;"
+        },
+        {
+          "original_line": 2796,
+          "original": "++Name;",
+          "actual": "++Name;"
+        },
+        {
+          "original_line": 2797,
+          "original": "CharCount = 0;",
+          "actual": "CharCount = 0;"
+        },
+        {
+          "original_line": 2799,
+          "original": "++Name;",
+          "actual": "++Name;"
+        },
+        {
+          "original_line": 2800,
+          "original": "++CharCount;",
+          "actual": "++CharCount;"
+        },
+        {
+          "original_line": 2801,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2802,
+          "original": "if (!CharCount || !*Name) {",
+          "actual": "if (!CharCount || !*Name) {"
+        },
+        {
+          "original_line": 2815,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2825,
+          "original": "++Name;",
+          "actual": "++Name;"
+        },
+        {
+          "original_line": 2826,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 2836,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2843,
+          "original": "if (!_strnicmp(Name, \"PIPE\", 4)) {",
+          "actual": "if (!_strnicmp(Name, \"PIPE\", 4)) {"
+        },
+        {
+          "original_line": 2844,
+          "original": "Name += 4;",
+          "actual": "Name += 4;"
+        },
+        {
+          "original_line": 2854,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2855,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2856,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2865,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2869,
+          "original": "VrIsNamedPipeHandle(",
+          "actual": "VrIsNamedPipeHandle("
+        },
+        {
+          "original_line": 2871,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2892,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2894,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2897,
+          "original": "LPSTR",
+          "actual": "LPSTR"
+        },
+        {
+          "original_line": 2898,
+          "original": "VrConvertLocalNtPipeName(",
+          "actual": "VrConvertLocalNtPipeName("
+        },
+        {
+          "original_line": 2901,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 2935,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 2940,
+          "original": "static DWORD ThisComputerNameLength = 0xffffffff;",
+          "actual": "static DWORD ThisComputerNameLength = 0xffffffff;"
+        },
+        {
+          "original_line": 2951,
+          "original": "if (ThisComputerNameLength == 0xffffffff) {",
+          "actual": "if (ThisComputerNameLength == 0xffffffff) {"
+        },
+        {
+          "original_line": 2952,
+          "original": "ThisComputerNameLength = sizeof(ThisComputerName);",
+          "actual": "ThisComputerNameLength = sizeof(ThisComputerName);"
+        },
+        {
+          "original_line": 2954,
+          "original": "ThisComputerNameLength = 0;",
+          "actual": "ThisComputerNameLength = 0;"
+        },
+        {
+          "original_line": 2955,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2956,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2960,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2962,
+          "original": "if (Buffer) {",
+          "actual": "if (Buffer) {"
+        },
+        {
+          "original_line": 2964,
+          "original": "if (!pipeName) {",
+          "actual": "if (!pipeName) {"
+        },
+        {
+          "original_line": 2965,
+          "original": "pipeName = strchr(Name+2, '/');",
+          "actual": "pipeName = strchr(Name+2, '/');"
+        },
+        {
+          "original_line": 2966,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2968,
+          "original": "pipeLength = strlen(pipeName);",
+          "actual": "pipeLength = strlen(pipeName);"
+        },
+        {
+          "original_line": 2969,
+          "original": "prefixLength = (DWORD)pipeName - (DWORD)Name;",
+          "actual": "prefixLength = (DWORD)pipeName - (DWORD)Name;"
+        },
+        {
+          "original_line": 2970,
+          "original": "if (ThisComputerNameLength && (prefixLength - 2 == ThisComputerNameLength)) {",
+          "actual": "if (ThisComputerNameLength && (prefixLength - 2 == ThisComputerNameLength)) {"
+        },
+        {
+          "original_line": 2971,
+          "original": "if (!_strnicmp(ThisComputerName, &Name[2], ThisComputerNameLength)) {",
+          "actual": "if (!_strnicmp(ThisComputerName, &Name[2], ThisComputerNameLength)) {"
+        },
+        {
+          "original_line": 2974,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2975,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2976,
+          "original": "if (!mapped) {",
+          "actual": "if (!mapped) {"
+        },
+        {
+          "original_line": 2977,
+          "original": "strncpy(Buffer, Name, prefixLength);",
+          "actual": "strncpy(Buffer, Name, prefixLength);"
+        },
+        {
+          "original_line": 2978,
+          "original": "Buffer[prefixLength] = 0;",
+          "actual": "Buffer[prefixLength] = 0;"
+        },
+        {
+          "original_line": 2980,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2981,
+          "original": "strcat(Buffer, pipeName);",
+          "actual": "strcat(Buffer, pipeName);"
+        },
+        {
+          "original_line": 2988,
+          "original": "do {",
+          "actual": "do {"
+        },
+        {
+          "original_line": 2989,
+          "original": "if (pipeName = strchr(Buffer, '/')) {",
+          "actual": "if (pipeName = strchr(Buffer, '/')) {"
+        },
+        {
+          "original_line": 2991,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 2992,
+          "original": "} while (pipeName);",
+          "actual": "} while (pipeName);"
+        },
+        {
+          "original_line": 3000,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3002,
+          "original": "return Buffer;",
+          "actual": "return Buffer;"
+        },
+        {
+          "original_line": 3003,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3023,
+          "original": "VrpAddOpenNamedPipeInfo(",
+          "actual": "VrpAddOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 3026,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 3050,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 3051,
+          "original": "POPEN_NAMED_PIPE_INFO PipeInfo;",
+          "actual": "POPEN_NAMED_PIPE_INFO PipeInfo;"
+        },
+        {
+          "original_line": 3052,
+          "original": "DWORD NameLength;",
+          "actual": "DWORD NameLength;"
+        },
+        {
+          "original_line": 3058,
+          "original": "NameLength = strlen(PipeName) + 1;",
+          "actual": "NameLength = strlen(PipeName) + 1;"
+        },
+        {
+          "original_line": 3059,
+          "original": "PipeInfo = (POPEN_NAMED_PIPE_INFO)",
+          "actual": "PipeInfo = (POPEN_NAMED_PIPE_INFO)"
+        },
+        {
+          "original_line": 3064,
+          "original": ");",
+          "actual": ");"
+        },
+        {
+          "original_line": 3081,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3088,
+          "original": "PipeInfo->Handle = Handle;",
+          "actual": "PipeInfo->Handle = Handle;"
+        },
+        {
+          "original_line": 3089,
+          "original": "PipeInfo->NameLength = NameLength;",
+          "actual": "PipeInfo->NameLength = NameLength;"
+        },
+        {
+          "original_line": 3097,
+          "original": "OpenNamedPipeInfoList = PipeInfo;",
+          "actual": "OpenNamedPipeInfoList = PipeInfo;"
+        },
+        {
+          "original_line": 3098,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 3099,
+          "original": "LastOpenNamedPipeInfo->Next = PipeInfo;",
+          "actual": "LastOpenNamedPipeInfo->Next = PipeInfo;"
+        },
+        {
+          "original_line": 3100,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3101,
+          "original": "LastOpenNamedPipeInfo = PipeInfo;",
+          "actual": "LastOpenNamedPipeInfo = PipeInfo;"
+        },
+        {
+          "original_line": 3114,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3118,
+          "original": "POPEN_NAMED_PIPE_INFO",
+          "actual": "POPEN_NAMED_PIPE_INFO"
+        },
+        {
+          "original_line": 3119,
+          "original": "VrpGetOpenNamedPipeInfo(",
+          "actual": "VrpGetOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 3121,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 3142,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 3143,
+          "original": "POPEN_NAMED_PIPE_INFO ptr;",
+          "actual": "POPEN_NAMED_PIPE_INFO ptr;"
+        },
+        {
+          "original_line": 3145,
+          "original": "for (ptr = OpenNamedPipeInfoList; ptr; ptr = ptr->Next) {",
+          "actual": "for (ptr = OpenNamedPipeInfoList; ptr; ptr = ptr->Next) {"
+        },
+        {
+          "original_line": 3146,
+          "original": "if (ptr->Handle == Handle) {",
+          "actual": "if (ptr->Handle == Handle) {"
+        },
+        {
+          "original_line": 3147,
+          "original": "break;",
+          "actual": "break;"
+        },
+        {
+          "original_line": 3148,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3149,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3150,
+          "original": "return ptr;",
+          "actual": "return ptr;"
+        },
+        {
+          "original_line": 3151,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3156,
+          "original": "VrpRemoveOpenNamedPipeInfo(",
+          "actual": "VrpRemoveOpenNamedPipeInfo("
+        },
+        {
+          "original_line": 3158,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 3184,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 3195,
+          "original": "for (ptr = OpenNamedPipeInfoList; ptr; ) {",
+          "actual": "for (ptr = OpenNamedPipeInfoList; ptr; ) {"
+        },
+        {
+          "original_line": 3196,
+          "original": "if (ptr->Handle == Handle) {",
+          "actual": "if (ptr->Handle == Handle) {"
+        },
+        {
+          "original_line": 3197,
+          "original": "if (!prev) {",
+          "actual": "if (!prev) {"
+        },
+        {
+          "original_line": 3198,
+          "original": "OpenNamedPipeInfoList = ptr->Next;",
+          "actual": "OpenNamedPipeInfoList = ptr->Next;"
+        },
+        {
+          "original_line": 3199,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 3200,
+          "original": "prev->Next = ptr->Next;",
+          "actual": "prev->Next = ptr->Next;"
+        },
+        {
+          "original_line": 3201,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3202,
+          "original": "if (LastOpenNamedPipeInfo == ptr) {",
+          "actual": "if (LastOpenNamedPipeInfo == ptr) {"
+        },
+        {
+          "original_line": 3203,
+          "original": "LastOpenNamedPipeInfo = prev;",
+          "actual": "LastOpenNamedPipeInfo = prev;"
+        },
+        {
+          "original_line": 3204,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3216,
+          "original": "LocalFree(ptr);",
+          "actual": "LocalFree(ptr);"
+        },
+        {
+          "original_line": 3218,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 3219,
+          "original": "prev = ptr;",
+          "actual": "prev = ptr;"
+        },
+        {
+          "original_line": 3220,
+          "original": "ptr = ptr->Next;",
+          "actual": "ptr = ptr->Next;"
+        },
+        {
+          "original_line": 3221,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3222,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3231,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3236,
+          "original": "RememberPipeIo(",
+          "actual": "RememberPipeIo("
+        },
+        {
+          "original_line": 3238,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 3257,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 3263,
+          "original": "PipeIo->Thread = GetCurrentThreadId();",
+          "actual": "PipeIo->Thread = GetCurrentThreadId();"
+        },
+        {
+          "original_line": 3264,
+          "original": "EnterCriticalSection(&VrNamedPipeCancelCritSec);",
+          "actual": "EnterCriticalSection(&VrNamedPipeCancelCritSec);"
+        },
+        {
+          "original_line": 3265,
+          "original": "PipeIo->Next = PipeIoQueue;",
+          "actual": "PipeIo->Next = PipeIoQueue;"
+        },
+        {
+          "original_line": 3266,
+          "original": "PipeIoQueue = PipeIo;",
+          "actual": "PipeIoQueue = PipeIo;"
+        },
+        {
+          "original_line": 3267,
+          "original": "LeaveCriticalSection(&VrNamedPipeCancelCritSec);",
+          "actual": "LeaveCriticalSection(&VrNamedPipeCancelCritSec);"
+        },
+        {
+          "original_line": 3268,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3273,
+          "original": "ForgetPipeIo(",
+          "actual": "ForgetPipeIo("
+        },
+        {
+          "original_line": 3275,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 3294,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 3295,
+          "original": "POVERLAPPED_PIPE_IO prev, ptr;",
+          "actual": "POVERLAPPED_PIPE_IO prev, ptr;"
+        },
+        {
+          "original_line": 3297,
+          "original": "EnterCriticalSection(&VrNamedPipeCancelCritSec);",
+          "actual": "EnterCriticalSection(&VrNamedPipeCancelCritSec);"
+        },
+        {
+          "original_line": 3298,
+          "original": "for (ptr = PipeIoQueue, prev = (POVERLAPPED_PIPE_IO)&PipeIoQueue; ptr && ptr != PipeIo; ) {",
+          "actual": "for (ptr = PipeIoQueue, prev = (POVERLAPPED_PIPE_IO)&PipeIoQueue; ptr && ptr != PipeIo; ) {"
+        },
+        {
+          "original_line": 3299,
+          "original": "prev = ptr;",
+          "actual": "prev = ptr;"
+        },
+        {
+          "original_line": 3300,
+          "original": "ptr = ptr->Next;",
+          "actual": "ptr = ptr->Next;"
+        },
+        {
+          "original_line": 3301,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3302,
+          "original": "if (ptr == PipeIo) {",
+          "actual": "if (ptr == PipeIo) {"
+        },
+        {
+          "original_line": 3303,
+          "original": "prev->Next = ptr->Next;",
+          "actual": "prev->Next = ptr->Next;"
+        },
+        {
+          "original_line": 3304,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 3305,
+          "original": "LeaveCriticalSection(&VrNamedPipeCancelCritSec);",
+          "actual": "LeaveCriticalSection(&VrNamedPipeCancelCritSec);"
+        },
+        {
+          "original_line": 3306,
+          "original": "}",
+          "actual": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+      "current_sha256": "7f210628798755a9de6bf091504ade77e1d185f1b32c65faefd3bec7d7989047",
+      "anchors": [
+        {
+          "original_line": 29,
+          "original": "typedef struct _stdclass {",
+          "actual": "typedef struct _stdclass {"
+        },
+        {
+          "original_line": 30,
+          "original": "LPSTR   lpszClassName;",
+          "actual": "LPSTR   lpszClassName;"
+        },
+        {
+          "original_line": 31,
+          "original": "ATOM    aClassAtom;",
+          "actual": "ATOM    aClassAtom;"
+        },
+        {
+          "original_line": 32,
+          "original": "WNDPROC lpfnWndProc;",
+          "actual": "WNDPROC lpfnWndProc;"
+        },
+        {
+          "original_line": 33,
+          "original": "INT     iOrdinal;",
+          "actual": "INT     iOrdinal;"
+        },
+        {
+          "original_line": 34,
+          "original": "DWORD   vpfnWndProc;",
+          "actual": "DWORD   vpfnWndProc;"
+        },
+        {
+          "original_line": 35,
+          "original": "} STDCLASS;",
+          "actual": "} STDCLASS;"
+        },
+        {
+          "original_line": 45,
+          "original": "STDCLASS stdClasses[] = {",
+          "actual": "STDCLASS stdClasses[] = {"
+        },
+        {
+          "original_line": 61,
+          "original": "};",
+          "actual": "};"
+        },
+        {
+          "original_line": 70,
+          "original": "INT GetStdClassNumber(",
+          "actual": "INT GetStdClassNumber("
+        },
+        {
+          "original_line": 71,
+          "original": "PSZ pszClass",
+          "actual": "PSZ pszClass"
+        },
+        {
+          "original_line": 72,
+          "original": ") {",
+          "actual": ") {"
+        },
+        {
+          "original_line": 73,
+          "original": "INT     i;",
+          "actual": "INT     i;"
+        },
+        {
+          "original_line": 80,
+          "original": "if ( _stricmp(pszClass, stdClasses[i].lpszClassName) == 0 ) {",
+          "actual": "if ( _stricmp(pszClass, stdClasses[i].lpszClassName) == 0 ) {"
+        },
+        {
+          "original_line": 81,
+          "original": "return( i );",
+          "actual": "return( i );"
+        },
+        {
+          "original_line": 82,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 83,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 84,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 89,
+          "original": "if ( stdClasses[i].aClassAtom == 0 ) {",
+          "actual": "if ( stdClasses[i].aClassAtom == 0 ) {"
+        },
+        {
+          "original_line": 93,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 95,
+          "original": "return( i );",
+          "actual": "return( i );"
+        },
+        {
+          "original_line": 96,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 97,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 98,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 100,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 104,
+          "original": "WNDPROC GetStdClassWndProc(",
+          "actual": "WNDPROC GetStdClassWndProc("
+        },
+        {
+          "original_line": 105,
+          "original": "DWORD   iClass",
+          "actual": "DWORD   iClass"
+        },
+        {
+          "original_line": 106,
+          "original": ") {",
+          "actual": ") {"
+        },
+        {
+          "original_line": 107,
+          "original": "WNDPROC lpfn32;",
+          "actual": "WNDPROC lpfn32;"
+        },
+        {
+          "original_line": 112,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 114,
+          "original": "lpfn32 = stdClasses[iClass].lpfnWndProc;",
+          "actual": "lpfn32 = stdClasses[iClass].lpfnWndProc;"
+        },
+        {
+          "original_line": 117,
+          "original": "WNDCLASS    wc;",
+          "actual": "WNDCLASS    wc;"
+        },
+        {
+          "original_line": 118,
+          "original": "BOOL        f;",
+          "actual": "BOOL        f;"
+        },
+        {
+          "original_line": 122,
+          "original": "if ( f ) {",
+          "actual": "if ( f ) {"
+        },
+        {
+          "original_line": 123,
+          "original": "VPVOID  vp;",
+          "actual": "VPVOID  vp;"
+        },
+        {
+          "original_line": 126,
+          "original": "lpfn32 = wc.lpfnWndProc;",
+          "actual": "lpfn32 = wc.lpfnWndProc;"
+        },
+        {
+          "original_line": 127,
+          "original": "stdClasses[iClass].lpfnWndProc = lpfn32;",
+          "actual": "stdClasses[iClass].lpfnWndProc = lpfn32;"
+        },
+        {
+          "original_line": 129,
+          "original": "vp = GetStdClassThunkProc(iClass);",
+          "actual": "vp = GetStdClassThunkProc(iClass);"
+        },
+        {
+          "original_line": 130,
+          "original": "vp = (VPVOID)((DWORD)vp - sizeof(DWORD)*3);",
+          "actual": "vp = (VPVOID)((DWORD)vp - sizeof(DWORD)*3);"
+        },
+        {
+          "original_line": 136,
+          "original": "if (!lpdw)",
+          "actual": "if (!lpdw)"
+        },
+        {
+          "original_line": 142,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 143,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 144,
+          "original": "return( lpfn32 );",
+          "actual": "return( lpfn32 );"
+        },
+        {
+          "original_line": 145,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 149,
+          "original": "DWORD GetStdClassThunkProc(",
+          "actual": "DWORD GetStdClassThunkProc("
+        },
+        {
+          "original_line": 150,
+          "original": "INT     iClass",
+          "actual": "INT     iClass"
+        },
+        {
+          "original_line": 151,
+          "original": ") {",
+          "actual": ") {"
+        },
+        {
+          "original_line": 152,
+          "original": "DWORD   dwResult;",
+          "actual": "DWORD   dwResult;"
+        },
+        {
+          "original_line": 153,
+          "original": "INT     iOrdinal;",
+          "actual": "INT     iOrdinal;"
+        },
+        {
+          "original_line": 154,
+          "original": "PARM16  Parm16;",
+          "actual": "PARM16  Parm16;"
+        },
+        {
+          "original_line": 158,
+          "original": "return( 0 );",
+          "actual": "return( 0 );"
+        },
+        {
+          "original_line": 159,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 161,
+          "original": "iOrdinal = stdClasses[iClass].iOrdinal;",
+          "actual": "iOrdinal = stdClasses[iClass].iOrdinal;"
+        },
+        {
+          "original_line": 163,
+          "original": "if ( iOrdinal == 0 ) {",
+          "actual": "if ( iOrdinal == 0 ) {"
+        },
+        {
+          "original_line": 165,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 168,
+          "original": "dwResult = stdClasses[iClass].vpfnWndProc;",
+          "actual": "dwResult = stdClasses[iClass].vpfnWndProc;"
+        },
+        {
+          "original_line": 174,
+          "original": "Parm16.SubClassProc.iOrdinal = iOrdinal;",
+          "actual": "Parm16.SubClassProc.iOrdinal = iOrdinal;"
+        },
+        {
+          "original_line": 177,
+          "original": "(PVPVOID)&dwResult)) {",
+          "actual": "(PVPVOID)&dwResult)) {"
+        },
+        {
+          "original_line": 179,
+          "original": "return( 0 );",
+          "actual": "return( 0 );"
+        },
+        {
+          "original_line": 180,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 182,
+          "original": "stdClasses[iClass].vpfnWndProc = dwResult;",
+          "actual": "stdClasses[iClass].vpfnWndProc = dwResult;"
+        },
+        {
+          "original_line": 183,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 184,
+          "original": "return( dwResult );",
+          "actual": "return( dwResult );"
+        },
+        {
+          "original_line": 185,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 187,
+          "original": "PWW FindPWW(HANDLE h32, INT iClass)",
+          "actual": "PWW FindPWW(HANDLE h32, INT iClass)"
+        },
+        {
+          "original_line": 188,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 190,
+          "original": "PWW pww;",
+          "actual": "PWW pww;"
+        },
+        {
+          "original_line": 191,
+          "original": "CHAR szClassName[16];",
+          "actual": "CHAR szClassName[16];"
+        },
+        {
+          "original_line": 193,
+          "original": "if (!h32) {",
+          "actual": "if (!h32) {"
+        },
+        {
+          "original_line": 195,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 196,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 199,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 202,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 204,
+          "original": "if (pww) {",
+          "actual": "if (pww) {"
+        },
+        {
+          "original_line": 211,
+          "original": "iClass = GetStdClassNumber(szClassName);",
+          "actual": "iClass = GetStdClassNumber(szClassName);"
+        },
+        {
+          "original_line": 213,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 218,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 221,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 222,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 223,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 224,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 226,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 227,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 229,
+          "original": "return (pww);",
+          "actual": "return (pww);"
+        },
+        {
+          "original_line": 230,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 232,
+          "original": "PWC FindPWC(HANDLE h32)",
+          "actual": "PWC FindPWC(HANDLE h32)"
+        },
+        {
+          "original_line": 233,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 234,
+          "original": "PWC pwc;",
+          "actual": "PWC pwc;"
+        },
+        {
+          "original_line": 239,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 244,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 246,
+          "original": "return (pwc);",
+          "actual": "return (pwc);"
+        },
+        {
+          "original_line": 247,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 258,
+          "original": "PWC FindClass16(LPCSTR pszClass, HAND16 hInst)",
+          "actual": "PWC FindClass16(LPCSTR pszClass, HAND16 hInst)"
+        },
+        {
+          "original_line": 259,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 260,
+          "original": "register PWC pwc;",
+          "actual": "register PWC pwc;"
+        },
+        {
+          "original_line": 268,
+          "original": "return (pwc);",
+          "actual": "return (pwc);"
+        },
+        {
+          "original_line": 269,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 409,
+          "original": "extern PTD gptdTaskHead;",
+          "actual": "extern PTD gptdTaskHead;"
+        },
+        {
+          "original_line": 411,
+          "original": "PTD ThreadProcID32toPTD(DWORD dwThreadID, DWORD dwProcessID)",
+          "actual": "PTD ThreadProcID32toPTD(DWORD dwThreadID, DWORD dwProcessID)"
+        },
+        {
+          "original_line": 412,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 413,
+          "original": "PTD ptd;",
+          "actual": "PTD ptd;"
+        },
+        {
+          "original_line": 414,
+          "original": "PWOAINST pWOA;",
+          "actual": "PWOAINST pWOA;"
+        },
+        {
+          "original_line": 424,
+          "original": "pWOA = ptd->pWOAList;",
+          "actual": "pWOA = ptd->pWOAList;"
+        },
+        {
+          "original_line": 426,
+          "original": "while (pWOA && pWOA->dwChildProcessID != dwProcessID) {",
+          "actual": "while (pWOA && pWOA->dwChildProcessID != dwProcessID) {"
+        },
+        {
+          "original_line": 427,
+          "original": "pWOA = pWOA->pNext;",
+          "actual": "pWOA = pWOA->pNext;"
+        },
+        {
+          "original_line": 428,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 430,
+          "original": "if (pWOA) {",
+          "actual": "if (pWOA) {"
+        },
+        {
+          "original_line": 432,
+          "original": "ptd = pWOA->ptdWOA;",
+          "actual": "ptd = pWOA->ptdWOA;"
+        },
+        {
+          "original_line": 434,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 441,
+          "original": "ptd = gptdTaskHead;",
+          "actual": "ptd = gptdTaskHead;"
+        },
+        {
+          "original_line": 443,
+          "original": "while (ptd && ptd->dwThreadID != dwThreadID) {",
+          "actual": "while (ptd && ptd->dwThreadID != dwThreadID) {"
+        },
+        {
+          "original_line": 444,
+          "original": "ptd = ptd->ptdNext;",
+          "actual": "ptd = ptd->ptdNext;"
+        },
+        {
+          "original_line": 445,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 447,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 449,
+          "original": "return ptd;",
+          "actual": "return ptd;"
+        },
+        {
+          "original_line": 451,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 453,
+          "original": "PTD Htask16toPTD(",
+          "actual": "PTD Htask16toPTD("
+        },
+        {
+          "original_line": 454,
+          "original": "HTASK16 htask16",
+          "actual": "HTASK16 htask16"
+        },
+        {
+          "original_line": 455,
+          "original": ") {",
+          "actual": ") {"
+        },
+        {
+          "original_line": 456,
+          "original": "PTD  ptd;",
+          "actual": "PTD  ptd;"
+        },
+        {
+          "original_line": 458,
+          "original": "ptd = gptdTaskHead;",
+          "actual": "ptd = gptdTaskHead;"
+        },
+        {
+          "original_line": 460,
+          "original": "while(ptd) {",
+          "actual": "while(ptd) {"
+        },
+        {
+          "original_line": 462,
+          "original": "if ( ptd->htask16 == htask16 ) {",
+          "actual": "if ( ptd->htask16 == htask16 ) {"
+        },
+        {
+          "original_line": 463,
+          "original": "return( ptd );",
+          "actual": "return( ptd );"
+        },
+        {
+          "original_line": 464,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 465,
+          "original": "ptd = ptd->ptdNext;",
+          "actual": "ptd = ptd->ptdNext;"
+        },
+        {
+          "original_line": 466,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 469,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 472,
+          "original": "HTASK16 ThreadID32toHtask16(",
+          "actual": "HTASK16 ThreadID32toHtask16("
+        },
+        {
+          "original_line": 473,
+          "original": "DWORD   ThreadID32",
+          "actual": "DWORD   ThreadID32"
+        },
+        {
+          "original_line": 474,
+          "original": ") {",
+          "actual": ") {"
+        },
+        {
+          "original_line": 475,
+          "original": "PTD ptd;",
+          "actual": "PTD ptd;"
+        },
+        {
+          "original_line": 476,
+          "original": "HTASK16 htask16;",
+          "actual": "HTASK16 htask16;"
+        },
+        {
+          "original_line": 479,
+          "original": "if ( ThreadID32 == 0 ) {",
+          "actual": "if ( ThreadID32 == 0 ) {"
+        },
+        {
+          "original_line": 481,
+          "original": "htask16 = 0;",
+          "actual": "htask16 = 0;"
+        },
+        {
+          "original_line": 482,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 484,
+          "original": "ptd = ThreadProcID32toPTD( ThreadID32, (DWORD)-1 );",
+          "actual": "ptd = ThreadProcID32toPTD( ThreadID32, (DWORD)-1 );"
+        },
+        {
+          "original_line": 485,
+          "original": "if ( ptd ) {",
+          "actual": "if ( ptd ) {"
+        },
+        {
+          "original_line": 487,
+          "original": "htask16 = ptd->htask16;",
+          "actual": "htask16 = ptd->htask16;"
+        },
+        {
+          "original_line": 488,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 490,
+          "original": "htask16 = FindHtaskAlias( ThreadID32 );",
+          "actual": "htask16 = FindHtaskAlias( ThreadID32 );"
+        },
+        {
+          "original_line": 491,
+          "original": "if ( htask16 == 0 ) {",
+          "actual": "if ( htask16 == 0 ) {"
+        },
+        {
+          "original_line": 495,
+          "original": "htask16 = AddHtaskAlias( ThreadID32 );",
+          "actual": "htask16 = AddHtaskAlias( ThreadID32 );"
+        },
+        {
+          "original_line": 496,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 497,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 498,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 500,
+          "original": "return htask16;",
+          "actual": "return htask16;"
+        },
+        {
+          "original_line": 501,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 503,
+          "original": "DWORD Htask16toThreadID32(",
+          "actual": "DWORD Htask16toThreadID32("
+        },
+        {
+          "original_line": 504,
+          "original": "HTASK16 htask16",
+          "actual": "HTASK16 htask16"
+        },
+        {
+          "original_line": 505,
+          "original": ") {",
+          "actual": ") {"
+        },
+        {
+          "original_line": 506,
+          "original": "if ( htask16 == 0 ) {",
+          "actual": "if ( htask16 == 0 ) {"
+        },
+        {
+          "original_line": 507,
+          "original": "return( 0 );",
+          "actual": "return( 0 );"
+        },
+        {
+          "original_line": 508,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 512,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 514,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 515,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 526,
+          "original": "WORD gUser16hInstance = 0;",
+          "actual": "WORD gUser16hInstance = 0;"
+        },
+        {
+          "original_line": 528,
+          "original": "ULONG GetGCL_HMODULE(HWND hwnd)",
+          "actual": "ULONG GetGCL_HMODULE(HWND hwnd)"
+        },
+        {
+          "original_line": 529,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 530,
+          "original": "ULONG    ul;",
+          "actual": "ULONG    ul;"
+        },
+        {
+          "original_line": 531,
+          "original": "PTD      ptd;",
+          "actual": "PTD      ptd;"
+        },
+        {
+          "original_line": 532,
+          "original": "PWOAINST pWOA;",
+          "actual": "PWOAINST pWOA;"
+        },
+        {
+          "original_line": 533,
+          "original": "DWORD    dwProcessID;",
+          "actual": "DWORD    dwProcessID;"
+        },
+        {
+          "original_line": 551,
+          "original": "dwProcessID = (DWORD)-1;",
+          "actual": "dwProcessID = (DWORD)-1;"
+        },
+        {
+          "original_line": 556,
+          "original": "pWOA = ptd->pWOAList;",
+          "actual": "pWOA = ptd->pWOAList;"
+        },
+        {
+          "original_line": 557,
+          "original": "while (pWOA && pWOA->dwChildProcessID != dwProcessID) {",
+          "actual": "while (pWOA && pWOA->dwChildProcessID != dwProcessID) {"
+        },
+        {
+          "original_line": 558,
+          "original": "pWOA = pWOA->pNext;",
+          "actual": "pWOA = pWOA->pNext;"
+        },
+        {
+          "original_line": 559,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 561,
+          "original": "if (pWOA) {",
+          "actual": "if (pWOA) {"
+        },
+        {
+          "original_line": 562,
+          "original": "ul = pWOA->ptdWOA->hMod16;",
+          "actual": "ul = pWOA->ptdWOA->hMod16;"
+        },
+        {
+          "original_line": 565,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 566,
+          "original": "ul = (ULONG) gUser16hInstance;",
+          "actual": "ul = (ULONG) gUser16hInstance;"
+        },
+        {
+          "original_line": 568,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 569,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 570,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 572,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 574,
+          "original": "return ul;",
+          "actual": "return ul;"
+        },
+        {
+          "original_line": 575,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 584,
+          "original": "HANDLE WOWHandle32 (WORD h16, WOW_HANDLE_TYPE htype)",
+          "actual": "HANDLE WOWHandle32 (WORD h16, WOW_HANDLE_TYPE htype)"
+        },
+        {
+          "original_line": 585,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 586,
+          "original": "switch (htype) {",
+          "actual": "switch (htype) {"
+        },
+        {
+          "original_line": 587,
+          "original": "case WOW_TYPE_HWND:",
+          "actual": "case WOW_TYPE_HWND:"
+        },
+        {
+          "original_line": 589,
+          "original": "case WOW_TYPE_HMENU:",
+          "actual": "case WOW_TYPE_HMENU:"
+        },
+        {
+          "original_line": 591,
+          "original": "case WOW_TYPE_HDWP:",
+          "actual": "case WOW_TYPE_HDWP:"
+        },
+        {
+          "original_line": 593,
+          "original": "case WOW_TYPE_HDROP:",
+          "actual": "case WOW_TYPE_HDROP:"
+        },
+        {
+          "original_line": 595,
+          "original": "case WOW_TYPE_HDC:",
+          "actual": "case WOW_TYPE_HDC:"
+        },
+        {
+          "original_line": 597,
+          "original": "case WOW_TYPE_HFONT:",
+          "actual": "case WOW_TYPE_HFONT:"
+        },
+        {
+          "original_line": 599,
+          "original": "case WOW_TYPE_HMETAFILE:",
+          "actual": "case WOW_TYPE_HMETAFILE:"
+        },
+        {
+          "original_line": 601,
+          "original": "case WOW_TYPE_HRGN:",
+          "actual": "case WOW_TYPE_HRGN:"
+        },
+        {
+          "original_line": 603,
+          "original": "case WOW_TYPE_HBITMAP:",
+          "actual": "case WOW_TYPE_HBITMAP:"
+        },
+        {
+          "original_line": 605,
+          "original": "case WOW_TYPE_HBRUSH:",
+          "actual": "case WOW_TYPE_HBRUSH:"
+        },
+        {
+          "original_line": 607,
+          "original": "case WOW_TYPE_HPALETTE:",
+          "actual": "case WOW_TYPE_HPALETTE:"
+        },
+        {
+          "original_line": 609,
+          "original": "case WOW_TYPE_HPEN:",
+          "actual": "case WOW_TYPE_HPEN:"
+        },
+        {
+          "original_line": 611,
+          "original": "case WOW_TYPE_HACCEL:",
+          "actual": "case WOW_TYPE_HACCEL:"
+        },
+        {
+          "original_line": 613,
+          "original": "case WOW_TYPE_HTASK:",
+          "actual": "case WOW_TYPE_HTASK:"
+        },
+        {
+          "original_line": 615,
+          "original": "case WOW_TYPE_FULLHWND:",
+          "actual": "case WOW_TYPE_FULLHWND:"
+        },
+        {
+          "original_line": 617,
+          "original": "default:",
+          "actual": "default:"
+        },
+        {
+          "original_line": 619,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 620,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 622,
+          "original": "WORD WOWHandle16 (HANDLE h32, WOW_HANDLE_TYPE htype)",
+          "actual": "WORD WOWHandle16 (HANDLE h32, WOW_HANDLE_TYPE htype)"
+        },
+        {
+          "original_line": 623,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 624,
+          "original": "switch (htype) {",
+          "actual": "switch (htype) {"
+        },
+        {
+          "original_line": 625,
+          "original": "case WOW_TYPE_HWND:",
+          "actual": "case WOW_TYPE_HWND:"
+        },
+        {
+          "original_line": 627,
+          "original": "case WOW_TYPE_HMENU:",
+          "actual": "case WOW_TYPE_HMENU:"
+        },
+        {
+          "original_line": 629,
+          "original": "case WOW_TYPE_HDWP:",
+          "actual": "case WOW_TYPE_HDWP:"
+        },
+        {
+          "original_line": 631,
+          "original": "case WOW_TYPE_HDROP:",
+          "actual": "case WOW_TYPE_HDROP:"
+        },
+        {
+          "original_line": 633,
+          "original": "case WOW_TYPE_HDC:",
+          "actual": "case WOW_TYPE_HDC:"
+        },
+        {
+          "original_line": 635,
+          "original": "case WOW_TYPE_HFONT:",
+          "actual": "case WOW_TYPE_HFONT:"
+        },
+        {
+          "original_line": 637,
+          "original": "case WOW_TYPE_HMETAFILE:",
+          "actual": "case WOW_TYPE_HMETAFILE:"
+        },
+        {
+          "original_line": 639,
+          "original": "case WOW_TYPE_HRGN:",
+          "actual": "case WOW_TYPE_HRGN:"
+        },
+        {
+          "original_line": 641,
+          "original": "case WOW_TYPE_HBITMAP:",
+          "actual": "case WOW_TYPE_HBITMAP:"
+        },
+        {
+          "original_line": 643,
+          "original": "case WOW_TYPE_HBRUSH:",
+          "actual": "case WOW_TYPE_HBRUSH:"
+        },
+        {
+          "original_line": 645,
+          "original": "case WOW_TYPE_HPALETTE:",
+          "actual": "case WOW_TYPE_HPALETTE:"
+        },
+        {
+          "original_line": 647,
+          "original": "case WOW_TYPE_HPEN:",
+          "actual": "case WOW_TYPE_HPEN:"
+        },
+        {
+          "original_line": 649,
+          "original": "case WOW_TYPE_HACCEL:",
+          "actual": "case WOW_TYPE_HACCEL:"
+        },
+        {
+          "original_line": 651,
+          "original": "case WOW_TYPE_HTASK:",
+          "actual": "case WOW_TYPE_HTASK:"
+        },
+        {
+          "original_line": 653,
+          "original": "default:",
+          "actual": "default:"
+        },
+        {
+          "original_line": 654,
+          "original": "return(0xffff);",
+          "actual": "return(0xffff);"
+        },
+        {
+          "original_line": 655,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 656,
+          "original": "}",
+          "actual": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.h",
+      "original_sha256": "14bed9c13085e4165a1912c69f0942da5637489fc536cc415f3883366ad034d6",
+      "current_sha256": "1b01ccc21662839fb49f5b2408a0883365fd9a54ef9c00428cc7e812aece89f6",
+      "anchors": [
+        {
+          "original_line": 17,
+          "original": "} LINEDDADATA, *PLINEDDADATA;",
+          "actual": "} LINEDDADATA, *PLINEDDADATA;"
+        },
+        {
+          "original_line": 20,
+          "original": "INT     ObjType;",
+          "actual": "INT     ObjType;"
+        },
+        {
+          "original_line": 22,
+          "original": "VPVOID  vpObjData;",
+          "actual": "VPVOID  vpObjData;"
+        },
+        {
+          "original_line": 24,
+          "original": "} ENUMOBJDATA, *PENUMOBJDATA;",
+          "actual": "} ENUMOBJDATA, *PENUMOBJDATA;"
+        },
+        {
+          "original_line": 127,
+          "original": "LONG     W32AbortProc(HDC hPr, int code);",
+          "actual": "LONG     W32AbortProc(HDC hPr, int code);"
+        },
+        {
+          "original_line": 157,
+          "original": "BOOL  IsFaxPrinterSupportedDevice(PSZ pszDevice);",
+          "actual": "BOOL  IsFaxPrinterSupportedDevice(PSZ pszDevice);"
+        },
+        {
+          "original_line": 158,
+          "original": "BOOL  IsFaxPrinterWriteProfileString(PSZ szSection, PSZ szKey, PSZ szString);",
+          "actual": "BOOL  IsFaxPrinterWriteProfileString(PSZ szSection, PSZ szKey, PSZ szString);"
+        },
+        {
+          "original_line": 159,
+          "original": "DWORD GetFaxPrinterProfileString(PSZ szSection, PSZ szKey, PSZ szDefault, PSZ szRetBuf, DWORD cbBufSize);",
+          "actual": "DWORD GetFaxPrinterProfileString(PSZ szSection, PSZ szKey, PSZ szDefault, PSZ szRetBuf, DWORD cbBufSize);"
+        },
+        {
+          "original_line": 162,
+          "original": "HAND16 hConvert32to16 (DWORD h32);",
+          "actual": "HAND16 hConvert32to16 (DWORD h32);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "current_sha256": "fe3330eebda90de5848e90d9e10d8b05e29c9d274b04c878ba811992baec2cb0",
+      "anchors": [
+        {
+          "original_line": 26,
+          "original": "typedef struct _LOCALHANDLEENTRY {",
+          "actual": "typedef struct _LOCALHANDLEENTRY {"
+        },
+        {
+          "original_line": 30,
+          "original": "} LOCALHANDLEENTRY, *PLOCALHANDLEENTRY;",
+          "actual": "} LOCALHANDLEENTRY, *PLOCALHANDLEENTRY;"
+        },
+        {
+          "original_line": 40,
+          "original": "HANDLE LocalAlloc16(WORD wFlags, INT cb, HANDLE hInstance)",
+          "actual": "HANDLE LocalAlloc16(WORD wFlags, INT cb, HANDLE hInstance)"
+        },
+        {
+          "original_line": 41,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 42,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 43,
+          "original": "VPVOID vp = 0;",
+          "actual": "VPVOID vp = 0;"
+        },
+        {
+          "original_line": 48,
+          "original": "return (HANDLE)0;",
+          "actual": "return (HANDLE)0;"
+        },
+        {
+          "original_line": 49,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 51,
+          "original": "if (cb < 0 || cb > 0xFFFF) {",
+          "actual": "if (cb < 0 || cb > 0xFFFF) {"
+        },
+        {
+          "original_line": 53,
+          "original": "return (HANDLE)0;",
+          "actual": "return (HANDLE)0;"
+        },
+        {
+          "original_line": 54,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 58,
+          "original": "Parm16.WndProc.wParam = wFlags;",
+          "actual": "Parm16.WndProc.wParam = wFlags;"
+        },
+        {
+          "original_line": 59,
+          "original": "Parm16.WndProc.lParam = cb;",
+          "actual": "Parm16.WndProc.lParam = cb;"
+        },
+        {
+          "original_line": 63,
+          "original": "vp = 0;",
+          "actual": "vp = 0;"
+        },
+        {
+          "original_line": 65,
+          "original": "return (HANDLE)vp;",
+          "actual": "return (HANDLE)vp;"
+        },
+        {
+          "original_line": 66,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 69,
+          "original": "HANDLE LocalReAlloc16(HANDLE hMem, INT cb, WORD wFlags)",
+          "actual": "HANDLE LocalReAlloc16(HANDLE hMem, INT cb, WORD wFlags)"
+        },
+        {
+          "original_line": 70,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 71,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 72,
+          "original": "VPVOID vp = 0;",
+          "actual": "VPVOID vp = 0;"
+        },
+        {
+          "original_line": 76,
+          "original": "return (HANDLE)0;",
+          "actual": "return (HANDLE)0;"
+        },
+        {
+          "original_line": 77,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 80,
+          "original": "Parm16.WndProc.lParam = (LONG)hMem;",
+          "actual": "Parm16.WndProc.lParam = (LONG)hMem;"
+        },
+        {
+          "original_line": 81,
+          "original": "Parm16.WndProc.wParam = wFlags;",
+          "actual": "Parm16.WndProc.wParam = wFlags;"
+        },
+        {
+          "original_line": 82,
+          "original": "Parm16.WndProc.wMsg = (WORD)cb;",
+          "actual": "Parm16.WndProc.wMsg = (WORD)cb;"
+        },
+        {
+          "original_line": 86,
+          "original": "vp = 0;",
+          "actual": "vp = 0;"
+        },
+        {
+          "original_line": 88,
+          "original": "return (HANDLE)vp;",
+          "actual": "return (HANDLE)vp;"
+        },
+        {
+          "original_line": 89,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 127,
+          "original": "VPVOID LocalLock16(HANDLE hMem)",
+          "actual": "VPVOID LocalLock16(HANDLE hMem)"
+        },
+        {
+          "original_line": 128,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 129,
+          "original": "WORD    h16;",
+          "actual": "WORD    h16;"
+        },
+        {
+          "original_line": 130,
+          "original": "LONG    retval;",
+          "actual": "LONG    retval;"
+        },
+        {
+          "original_line": 134,
+          "original": "return (VPVOID)0;",
+          "actual": "return (VPVOID)0;"
+        },
+        {
+          "original_line": 135,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 138,
+          "original": "retval = (VPVOID)hMem;",
+          "actual": "retval = (VPVOID)hMem;"
+        },
+        {
+          "original_line": 141,
+          "original": "PLOCALHANDLEENTRY plhe;",
+          "actual": "PLOCALHANDLEENTRY plhe;"
+        },
+        {
+          "original_line": 146,
+          "original": "goto LOCK1;",
+          "actual": "goto LOCK1;"
+        },
+        {
+          "original_line": 147,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 149,
+          "original": "plhe->lhe_count++;",
+          "actual": "plhe->lhe_count++;"
+        },
+        {
+          "original_line": 150,
+          "original": "if (!plhe->lhe_count)",
+          "actual": "if (!plhe->lhe_count)"
+        },
+        {
+          "original_line": 151,
+          "original": "plhe->lhe_count--;",
+          "actual": "plhe->lhe_count--;"
+        },
+        {
+          "original_line": 153,
+          "original": "LOCK1:",
+          "actual": "LOCK1:"
+        },
+        {
+          "original_line": 157,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 160,
+          "original": "retval = 0;",
+          "actual": "retval = 0;"
+        },
+        {
+          "original_line": 162,
+          "original": "return retval;",
+          "actual": "return retval;"
+        },
+        {
+          "original_line": 163,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 165,
+          "original": "BOOL LocalUnlock16(HANDLE hMem)",
+          "actual": "BOOL LocalUnlock16(HANDLE hMem)"
+        },
+        {
+          "original_line": 166,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 167,
+          "original": "WORD    h16;",
+          "actual": "WORD    h16;"
+        },
+        {
+          "original_line": 168,
+          "original": "BOOL    rc;",
+          "actual": "BOOL    rc;"
+        },
+        {
+          "original_line": 169,
+          "original": "PLOCALHANDLEENTRY plhe;",
+          "actual": "PLOCALHANDLEENTRY plhe;"
+        },
+        {
+          "original_line": 170,
+          "original": "BYTE    count;",
+          "actual": "BYTE    count;"
+        },
+        {
+          "original_line": 175,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 181,
+          "original": "goto UNLOCK2;",
+          "actual": "goto UNLOCK2;"
+        },
+        {
+          "original_line": 182,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 187,
+          "original": "goto UNLOCK1;",
+          "actual": "goto UNLOCK1;"
+        },
+        {
+          "original_line": 189,
+          "original": "count = plhe->lhe_count;",
+          "actual": "count = plhe->lhe_count;"
+        },
+        {
+          "original_line": 190,
+          "original": "count--;",
+          "actual": "count--;"
+        },
+        {
+          "original_line": 192,
+          "original": "if (count >= (BYTE)(0xff-1))",
+          "actual": "if (count >= (BYTE)(0xff-1))"
+        },
+        {
+          "original_line": 193,
+          "original": "goto UNLOCK1;",
+          "actual": "goto UNLOCK1;"
+        },
+        {
+          "original_line": 195,
+          "original": "plhe->lhe_count = count;",
+          "actual": "plhe->lhe_count = count;"
+        },
+        {
+          "original_line": 196,
+          "original": "rc = (BOOL)((SHORT)count);",
+          "actual": "rc = (BOOL)((SHORT)count);"
+        },
+        {
+          "original_line": 200,
+          "original": "UNLOCK1:",
+          "actual": "UNLOCK1:"
+        },
+        {
+          "original_line": 203,
+          "original": "UNLOCK2:",
+          "actual": "UNLOCK2:"
+        },
+        {
+          "original_line": 204,
+          "original": "return rc;",
+          "actual": "return rc;"
+        },
+        {
+          "original_line": 205,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 210,
+          "original": "WORD LocalSize16(HANDLE hMem)",
+          "actual": "WORD LocalSize16(HANDLE hMem)"
+        },
+        {
+          "original_line": 211,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 212,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 213,
+          "original": "VPVOID vp = 0;",
+          "actual": "VPVOID vp = 0;"
+        },
+        {
+          "original_line": 218,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 220,
+          "original": "Parm16.WndProc.lParam = (LONG)hMem;",
+          "actual": "Parm16.WndProc.lParam = (LONG)hMem;"
+        },
+        {
+          "original_line": 223,
+          "original": "return (WORD)vp;",
+          "actual": "return (WORD)vp;"
+        },
+        {
+          "original_line": 224,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 227,
+          "original": "HANDLE LocalFree16(HANDLE hMem)",
+          "actual": "HANDLE LocalFree16(HANDLE hMem)"
+        },
+        {
+          "original_line": 228,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 229,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 234,
+          "original": "return (HANDLE)0;",
+          "actual": "return (HANDLE)0;"
+        },
+        {
+          "original_line": 235,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 237,
+          "original": "Parm16.WndProc.lParam = (LONG)hMem;",
+          "actual": "Parm16.WndProc.lParam = (LONG)hMem;"
+        },
+        {
+          "original_line": 241,
+          "original": "vp = 0;",
+          "actual": "vp = 0;"
+        },
+        {
+          "original_line": 242,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 244,
+          "original": "vp = (VPVOID)hMem;",
+          "actual": "vp = (VPVOID)hMem;"
+        },
+        {
+          "original_line": 245,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 247,
+          "original": "return (HANDLE)vp;",
+          "actual": "return (HANDLE)vp;"
+        },
+        {
+          "original_line": 248,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 251,
+          "original": "BOOL LockSegment16(WORD wSeg)",
+          "actual": "BOOL LockSegment16(WORD wSeg)"
+        },
+        {
+          "original_line": 252,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 253,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 256,
+          "original": "Parm16.WndProc.wParam = wSeg;",
+          "actual": "Parm16.WndProc.wParam = wSeg;"
+        },
+        {
+          "original_line": 259,
+          "original": "return (BOOL)vp;",
+          "actual": "return (BOOL)vp;"
+        },
+        {
+          "original_line": 260,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 263,
+          "original": "BOOL UnlockSegment16(WORD wSeg)",
+          "actual": "BOOL UnlockSegment16(WORD wSeg)"
+        },
+        {
+          "original_line": 264,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 265,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 268,
+          "original": "Parm16.WndProc.wParam = wSeg;",
+          "actual": "Parm16.WndProc.wParam = wSeg;"
+        },
+        {
+          "original_line": 271,
+          "original": "return (BOOL)vp;",
+          "actual": "return (BOOL)vp;"
+        },
+        {
+          "original_line": 272,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 275,
+          "original": "VPVOID  WOWGlobalAllocLock16(WORD wFlags, DWORD cb, HMEM16 *phMem)",
+          "actual": "VPVOID  WOWGlobalAllocLock16(WORD wFlags, DWORD cb, HMEM16 *phMem)"
+        },
+        {
+          "original_line": 276,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 277,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 278,
+          "original": "VPVOID vp = 0;",
+          "actual": "VPVOID vp = 0;"
+        },
+        {
+          "original_line": 280,
+          "original": "Parm16.WndProc.wParam = wFlags;",
+          "actual": "Parm16.WndProc.wParam = wFlags;"
+        },
+        {
+          "original_line": 281,
+          "original": "Parm16.WndProc.lParam = cb;",
+          "actual": "Parm16.WndProc.lParam = cb;"
+        },
+        {
+          "original_line": 284,
+          "original": "if (vp) {",
+          "actual": "if (vp) {"
+        },
+        {
+          "original_line": 287,
+          "original": "if (phMem) {",
+          "actual": "if (phMem) {"
+        },
+        {
+          "original_line": 288,
+          "original": "PCBVDMFRAME pCBFrame;",
+          "actual": "PCBVDMFRAME pCBFrame;"
+        },
+        {
+          "original_line": 293,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 294,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 295,
+          "original": "return vp;",
+          "actual": "return vp;"
+        },
+        {
+          "original_line": 296,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 299,
+          "original": "HMEM16 WOWGlobalAlloc16(WORD wFlags, DWORD cb)",
+          "actual": "HMEM16 WOWGlobalAlloc16(WORD wFlags, DWORD cb)"
+        },
+        {
+          "original_line": 300,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 301,
+          "original": "HMEM16 hMem;",
+          "actual": "HMEM16 hMem;"
+        },
+        {
+          "original_line": 302,
+          "original": "VPVOID vp;",
+          "actual": "VPVOID vp;"
+        },
+        {
+          "original_line": 304,
+          "original": "if (vp = WOWGlobalAllocLock16(wFlags, cb, &hMem)) {",
+          "actual": "if (vp = WOWGlobalAllocLock16(wFlags, cb, &hMem)) {"
+        },
+        {
+          "original_line": 305,
+          "original": "WOWGlobalUnlock16(hMem);",
+          "actual": "WOWGlobalUnlock16(hMem);"
+        },
+        {
+          "original_line": 306,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 307,
+          "original": "hMem = 0;",
+          "actual": "hMem = 0;"
+        },
+        {
+          "original_line": 308,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 310,
+          "original": "return hMem;",
+          "actual": "return hMem;"
+        },
+        {
+          "original_line": 311,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 314,
+          "original": "VPVOID  WOWGlobalLockSize16(HMEM16 hMem, PDWORD pcb)",
+          "actual": "VPVOID  WOWGlobalLockSize16(HMEM16 hMem, PDWORD pcb)"
+        },
+        {
+          "original_line": 315,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 316,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 317,
+          "original": "VPVOID vp = 0;",
+          "actual": "VPVOID vp = 0;"
+        },
+        {
+          "original_line": 318,
+          "original": "PCBVDMFRAME pCBFrame;",
+          "actual": "PCBVDMFRAME pCBFrame;"
+        },
+        {
+          "original_line": 320,
+          "original": "Parm16.WndProc.wParam = hMem;",
+          "actual": "Parm16.WndProc.wParam = hMem;"
+        },
+        {
+          "original_line": 324,
+          "original": "if (pcb) {",
+          "actual": "if (pcb) {"
+        },
+        {
+          "original_line": 328,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 330,
+          "original": "return vp;",
+          "actual": "return vp;"
+        },
+        {
+          "original_line": 331,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 334,
+          "original": "VPVOID WOWGlobalLock16(HMEM16 hMem)",
+          "actual": "VPVOID WOWGlobalLock16(HMEM16 hMem)"
+        },
+        {
+          "original_line": 335,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 337,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 340,
+          "original": "BOOL WOWGlobalUnlock16(HMEM16 hMem)",
+          "actual": "BOOL WOWGlobalUnlock16(HMEM16 hMem)"
+        },
+        {
+          "original_line": 341,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 342,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 345,
+          "original": "Parm16.WndProc.wParam = hMem;",
+          "actual": "Parm16.WndProc.wParam = hMem;"
+        },
+        {
+          "original_line": 348,
+          "original": "return (BOOL)vp;",
+          "actual": "return (BOOL)vp;"
+        },
+        {
+          "original_line": 349,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 352,
+          "original": "HMEM16 WOWGlobalUnlockFree16(VPVOID vpMem)",
+          "actual": "HMEM16 WOWGlobalUnlockFree16(VPVOID vpMem)"
+        },
+        {
+          "original_line": 353,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 354,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 357,
+          "original": "Parm16.WndProc.lParam = vpMem;",
+          "actual": "Parm16.WndProc.lParam = vpMem;"
+        },
+        {
+          "original_line": 360,
+          "original": "return (HMEM16)vp;",
+          "actual": "return (HMEM16)vp;"
+        },
+        {
+          "original_line": 361,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 364,
+          "original": "HMEM16 WOWGlobalFree16(HMEM16 hMem)",
+          "actual": "HMEM16 WOWGlobalFree16(HMEM16 hMem)"
+        },
+        {
+          "original_line": 365,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 366,
+          "original": "VPVOID vp;",
+          "actual": "VPVOID vp;"
+        },
+        {
+          "original_line": 368,
+          "original": "if (vp = WOWGlobalLock16(hMem)) {",
+          "actual": "if (vp = WOWGlobalLock16(hMem)) {"
+        },
+        {
+          "original_line": 369,
+          "original": "hMem = WOWGlobalUnlockFree16(vp);",
+          "actual": "hMem = WOWGlobalUnlockFree16(vp);"
+        },
+        {
+          "original_line": 370,
+          "original": "} else {",
+          "actual": "} else {"
+        },
+        {
+          "original_line": 373,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 375,
+          "original": "return hMem;",
+          "actual": "return hMem;"
+        },
+        {
+          "original_line": 376,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 379,
+          "original": "HAND16 GetExePtr16( HAND16 hInst )",
+          "actual": "HAND16 GetExePtr16( HAND16 hInst )"
+        },
+        {
+          "original_line": 380,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 381,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 382,
+          "original": "ULONG ul;",
+          "actual": "ULONG ul;"
+        },
+        {
+          "original_line": 383,
+          "original": "PTD ptd;",
+          "actual": "PTD ptd;"
+        },
+        {
+          "original_line": 384,
+          "original": "INT i;",
+          "actual": "INT i;"
+        },
+        {
+          "original_line": 386,
+          "original": "if (hInst == 0) return (HAND16)0;",
+          "actual": "if (hInst == 0) return (HAND16)0;"
+        },
+        {
+          "original_line": 394,
+          "original": "if (hInst == ptd->hInst16) {",
+          "actual": "if (hInst == ptd->hInst16) {"
+        },
+        {
+          "original_line": 395,
+          "original": "return ptd->hMod16;",
+          "actual": "return ptd->hMod16;"
+        },
+        {
+          "original_line": 396,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 403,
+          "original": "if (ghModCache[i].hInst16 == hInst)",
+          "actual": "if (ghModCache[i].hInst16 == hInst)"
+        },
+        {
+          "original_line": 404,
+          "original": "return ghModCache[i].hMod16;",
+          "actual": "return ghModCache[i].hMod16;"
+        },
+        {
+          "original_line": 405,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 410,
+          "original": "Parm16.WndProc.wParam = hInst;",
+          "actual": "Parm16.WndProc.wParam = hInst;"
+        },
+        {
+          "original_line": 420,
+          "original": "ghModCache[0].hInst16 = hInst;",
+          "actual": "ghModCache[0].hInst16 = hInst;"
+        },
+        {
+          "original_line": 424,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 427,
+          "original": "WORD GetModuleFileName16( HAND16 hInst, VPVOID lpszModuleName, WORD cchModuleName )",
+          "actual": "WORD GetModuleFileName16( HAND16 hInst, VPVOID lpszModuleName, WORD cchModuleName )"
+        },
+        {
+          "original_line": 428,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 429,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 430,
+          "original": "ULONG ul;",
+          "actual": "ULONG ul;"
+        },
+        {
+          "original_line": 433,
+          "original": "if (hInst == 0) return 0;",
+          "actual": "if (hInst == 0) return 0;"
+        },
+        {
+          "original_line": 435,
+          "original": "Parm16.WndProc.wParam = hInst;",
+          "actual": "Parm16.WndProc.wParam = hInst;"
+        },
+        {
+          "original_line": 436,
+          "original": "Parm16.WndProc.lParam = lpszModuleName;",
+          "actual": "Parm16.WndProc.lParam = lpszModuleName;"
+        },
+        {
+          "original_line": 437,
+          "original": "Parm16.WndProc.wMsg   = cchModuleName;",
+          "actual": "Parm16.WndProc.wMsg   = cchModuleName;"
+        },
+        {
+          "original_line": 441,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 445,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 446,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 447,
+          "original": "DWORD dwReturn = 0;",
+          "actual": "DWORD dwReturn = 0;"
+        },
+        {
+          "original_line": 451,
+          "original": "return (ULONG)dwReturn;",
+          "actual": "return (ULONG)dwReturn;"
+        },
+        {
+          "original_line": 452,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 456,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 457,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 458,
+          "original": "DWORD dwReturn = 0;",
+          "actual": "DWORD dwReturn = 0;"
+        },
+        {
+          "original_line": 462,
+          "original": "return (ULONG)dwReturn;",
+          "actual": "return (ULONG)dwReturn;"
+        },
+        {
+          "original_line": 463,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 467,
+          "original": "WORD ChangeSelector16(WORD wSeg)",
+          "actual": "WORD ChangeSelector16(WORD wSeg)"
+        },
+        {
+          "original_line": 468,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 469,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 472,
+          "original": "Parm16.WndProc.wParam = wSeg;",
+          "actual": "Parm16.WndProc.wParam = wSeg;"
+        },
+        {
+          "original_line": 476,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 478,
+          "original": "VPVOID RealLockResource16(HMEM16 hMem, PINT pcb)",
+          "actual": "VPVOID RealLockResource16(HMEM16 hMem, PINT pcb)"
+        },
+        {
+          "original_line": 479,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 480,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 481,
+          "original": "VPVOID vp = 0;",
+          "actual": "VPVOID vp = 0;"
+        },
+        {
+          "original_line": 482,
+          "original": "PCBVDMFRAME pCBFrame;",
+          "actual": "PCBVDMFRAME pCBFrame;"
+        },
+        {
+          "original_line": 484,
+          "original": "Parm16.WndProc.wParam = hMem;",
+          "actual": "Parm16.WndProc.wParam = hMem;"
+        },
+        {
+          "original_line": 488,
+          "original": "if (pcb) {",
+          "actual": "if (pcb) {"
+        },
+        {
+          "original_line": 492,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 494,
+          "original": "return vp;",
+          "actual": "return vp;"
+        },
+        {
+          "original_line": 495,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 498,
+          "original": "DWORD WOWCallback16(DWORD vpFn, DWORD dwParam)",
+          "actual": "DWORD WOWCallback16(DWORD vpFn, DWORD dwParam)"
+        },
+        {
+          "original_line": 499,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 500,
+          "original": "PARM16 Parm16;",
+          "actual": "PARM16 Parm16;"
+        },
+        {
+          "original_line": 501,
+          "original": "VPVOID vp;",
+          "actual": "VPVOID vp;"
+        },
+        {
+          "original_line": 513,
+          "original": "vp = (VPVOID) sizeof(dwParam);",
+          "actual": "vp = (VPVOID) sizeof(dwParam);"
+        },
+        {
+          "original_line": 517,
+          "original": "return (DWORD)vp;",
+          "actual": "return (DWORD)vp;"
+        },
+        {
+          "original_line": 518,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 521,
+          "original": "BOOL WOWCallback16Ex(",
+          "actual": "BOOL WOWCallback16Ex("
+        },
+        {
+          "original_line": 522,
+          "original": "DWORD vpFn,",
+          "actual": "DWORD vpFn,"
+        },
+        {
+          "original_line": 523,
+          "original": "DWORD dwFlags,",
+          "actual": "DWORD dwFlags,"
+        },
+        {
+          "original_line": 524,
+          "original": "DWORD cbArgs,",
+          "actual": "DWORD cbArgs,"
+        },
+        {
+          "original_line": 525,
+          "original": "PVOID pArgs,",
+          "actual": "PVOID pArgs,"
+        },
+        {
+          "original_line": 526,
+          "original": "PDWORD pdwRetCode",
+          "actual": "PDWORD pdwRetCode"
+        },
+        {
+          "original_line": 527,
+          "original": ")",
+          "actual": ")"
+        },
+        {
+          "original_line": 528,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 553,
+          "original": "if (cbArgs > sizeof(PARM16)) {",
+          "actual": "if (cbArgs > sizeof(PARM16)) {"
+        },
+        {
+          "original_line": 558,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 566,
+          "original": "cbArgs = 0;",
+          "actual": "cbArgs = 0;"
+        },
+        {
+          "original_line": 567,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 578,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 582,
+          "original": "{",
+          "actual": "{"
+        },
+        {
+          "original_line": 648,
+          "original": "register PTD ptd;",
+          "actual": "register PTD ptd;"
+        },
+        {
+          "original_line": 649,
+          "original": "register PVDMFRAME pFrame;",
+          "actual": "register PVDMFRAME pFrame;"
+        },
+        {
+          "original_line": 650,
+          "original": "register PCBVDMFRAME pCBFrame;",
+          "actual": "register PCBVDMFRAME pCBFrame;"
+        },
+        {
+          "original_line": 651,
+          "original": "WORD wAX;",
+          "actual": "WORD wAX;"
+        },
+        {
+          "original_line": 654,
+          "original": "USHORT SaveIp;",
+          "actual": "USHORT SaveIp;"
+        },
+        {
+          "original_line": 677,
+          "original": "ptd->vpCBStack = (ptd->vpStack - sizeof(CBVDMFRAME)) & (~0x1);",
+          "actual": "ptd->vpCBStack = (ptd->vpStack - sizeof(CBVDMFRAME)) & (~0x1);"
+        },
+        {
+          "original_line": 678,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 679,
+          "original": "else {",
+          "actual": "else {"
+        },
+        {
+          "original_line": 681,
+          "original": "ptd->vpCBStack = (ptd->vpCBStack - sizeof(CBVDMFRAME)) & (~0x1);",
+          "actual": "ptd->vpCBStack = (ptd->vpCBStack - sizeof(CBVDMFRAME)) & (~0x1);"
+        },
+        {
+          "original_line": 682,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 684,
+          "original": "pCBFrame->vpStack = ptd->vpStack;",
+          "actual": "pCBFrame->vpStack = ptd->vpStack;"
+        },
+        {
+          "original_line": 685,
+          "original": "pCBFrame->wRetID = (WORD)iRetID;",
+          "actual": "pCBFrame->wRetID = (WORD)iRetID;"
+        },
+        {
+          "original_line": 686,
+          "original": "pCBFrame->wTDB       = pFrame->wTDB;",
+          "actual": "pCBFrame->wTDB       = pFrame->wTDB;"
+        },
+        {
+          "original_line": 687,
+          "original": "pCBFrame->wLocalBP   = pFrame->wLocalBP;",
+          "actual": "pCBFrame->wLocalBP   = pFrame->wLocalBP;"
+        },
+        {
+          "original_line": 696,
+          "original": "if (pParm16)",
+          "actual": "if (pParm16)"
+        },
+        {
+          "original_line": 705,
+          "original": "if ( pParm16->WndProc.hInst )",
+          "actual": "if ( pParm16->WndProc.hInst )"
+        },
+        {
+          "original_line": 706,
+          "original": "wAX = pParm16->WndProc.hInst | 1;",
+          "actual": "wAX = pParm16->WndProc.hInst | 1;"
+        },
+        {
+          "original_line": 707,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 717,
+          "original": "pCBFrame->wGenUse1 = (WORD)(DWORD)*pvpReturn;",
+          "actual": "pCBFrame->wGenUse1 = (WORD)(DWORD)*pvpReturn;"
+        },
+        {
+          "original_line": 718,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 779,
+          "original": "SaveIp = getIP();",
+          "actual": "SaveIp = getIP();"
+        },
+        {
+          "original_line": 780,
+          "original": "host_simulate();",
+          "actual": "host_simulate();"
+        },
+        {
+          "original_line": 781,
+          "original": "setIP(SaveIp);",
+          "actual": "setIP(SaveIp);"
+        },
+        {
+          "original_line": 790,
+          "original": "ptd->vpCBStack = ptd->vpStack;",
+          "actual": "ptd->vpCBStack = ptd->vpStack;"
+        },
+        {
+          "original_line": 798,
+          "original": "if (pvpReturn) {",
+          "actual": "if (pvpReturn) {"
+        },
+        {
+          "original_line": 801,
+          "original": "}",
+          "actual": "}"
+        },
+        {
+          "original_line": 814,
+          "original": "ptd->vpStack = pCBFrame->vpStack;",
+          "actual": "ptd->vpStack = pCBFrame->vpStack;"
+        },
+        {
+          "original_line": 819,
+          "original": "}",
+          "actual": "}"
+        }
+      ]
+    }
+  ]
+}

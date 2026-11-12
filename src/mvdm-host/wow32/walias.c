@@ -530,11 +530,3 @@ WORD WOWHandle16 (HANDLE h32, WOW_HANDLE_TYPE htype)
     }
 }
 
-/* DIVERGENCE(MVDM-HOST-DIV-341): omit obsolete ENTRYWOW/shared-table lookup;
- * the existing worker alias owner supplies only this unavailable boundary. */
-#line 678
-HANDLE hConvert16to32(int h16)
-{
-    return mvdm_wow_gdi_handle_to_native((HAND16)h16);
-#line 686
-}

@@ -12,7 +12,6 @@ WowFaxWndProc@16
 @WM32SetFocus@4
 @W32PatchCodeWithLpfnw32@8
 W32DllInitialize@12
-hConvert16to32@4
 @ThunkMsg16@4
 @WU32DefWindowProc@4
 @WU32GetKeyState@4

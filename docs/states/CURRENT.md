@@ -36,14 +36,17 @@ The previously suggested compat-first S2 is superseded.
 ## S3 Progress
 
 Assigned: 120 entries across 51 mirror files, in the existing register order.
-P1–P3 delivered 82 entries; P4 delivers D1381 plus the coupled retirement of
-30 uncalled reporters and their initializer. Ten retained function bodies remain
-byte-identical. Final cached builds, 32 reporter checks, isolated actual-CCPU
-window-borrow lifecycle, 50 compiler line anchors and all 16 selected Full gates
-passed. Complete package published and hash-verified at both destinations.
-83/120 delivered, 37 remain; next file host/src/nt_timer.c.
-See [P4 delivery](../../artifacts/mvdm-audit/t483-s3/batch4-delivery.json) and
-[review including initial corrected build failure](../../artifacts/mvdm-audit/t483-s3/batch4-review.json).
+P1–P5 delivered 99/120 entries; 21 remain. P5 modified ten source/test files,
+removed unused timer declaration, async trace API/export/provider, GDI wrapper
+and callback observations, and reconciled six already-delivered S1 deletions.
+Cached x86/x64 build, four focused checks, 1,355 actual compiler line anchors and
+all 16 selected Full gates passed. Final obsolete-comment cleanup rebuilt;
+all eleven images match the tested package outside package GUID and exact PE
+link timestamps. Both publication destinations are hash-verified.
+See [P5 delivery](../../artifacts/mvdm-audit/t483-s3/batch5-delivery.json),
+[review](../../artifacts/mvdm-audit/t483-s3/batch5-review.json), and
+[final artifact comparison](../../artifacts/mvdm-audit/t483-s3/batch5-comment-only-control.json).
+Next mirror file: wow32/wkfileio.c, with queued coupled callback-provider cleanup.
 Shared providers remain until their
 last required caller is removed, then are cleaned in the same S.
 See [S3 ledger](../../artifacts/mvdm-audit/t483-s3/execution.json).
@@ -59,7 +62,7 @@ S1 register and identifiers remain immutable; S6 remains held.
 
 ## Current Technical Baseline
 
-Package `bd64959d-b841-471e-8b33-4fe6d7196eec` (S3 P4), complete 11 images at
+Package `2921950d-914c-4626-901e-76037f72ba57` (S3 P5), complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. DOS4GW/NESticle was
 explicitly skipped because its external fixture was not supplied. No guest or
 winnt.zip change. This package is not claimed byte-equivalent to S2.

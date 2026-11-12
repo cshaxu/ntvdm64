@@ -1562,7 +1562,6 @@ Return Value:
 {
     PDOS_ASYNC_NAMED_PIPE_INFO pAsyncInfo;
 
-    mvdm_redirector_async_trace("interrupt-enter");
 
 #if DBG
 #line 1657
@@ -1578,7 +1577,6 @@ Return Value:
 
     pAsyncInfo = VrpFindCompletedRequest();
     if (!pAsyncInfo) {
-        mvdm_redirector_async_trace("interrupt-empty");
 
 #if DBG
 #line 1672
@@ -1594,7 +1592,6 @@ Return Value:
 #line 1684
         return FALSE;
     } else {
-        mvdm_redirector_async_trace("interrupt-dispose");
 
         //
         // set the VDM registers to indicate a named pipe callback
@@ -1619,7 +1616,6 @@ Return Value:
         mvdm_redirector_async_release(pAsyncInfo);
 #line 1706
         LocalFree(pAsyncInfo);
-        mvdm_redirector_async_trace("interrupt-callback-ready");
 
 #if DBG
 #line 1709
@@ -1665,7 +1661,7 @@ Return Value:
 #line 1755
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 1758
+#line 1759
 }
 
 
@@ -1964,6 +1960,7 @@ Return Value:
         mvdm_redirector_async_release(pAsyncInfo);
         LocalFree(pAsyncInfo);
         return;
+#line 2077
     }
 
 #if DBG
@@ -2039,10 +2036,8 @@ Return Value:
 #line 2143
 
         VrQueueCompletionHandler(VrNmPipeInterrupt);
-        mvdm_redirector_async_trace("completion-queued");
 #line 2145
         VrRaiseInterrupt();
-        mvdm_redirector_async_trace("completion-raised");
         mvdm_redirector_async_completion_end(pAsyncInfo);
 #line 2146
     }

@@ -657,10 +657,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #endif
 #line 756
 
-    wow_callback_frame_trace("before", (DWORD)iRetID, ptd->vpStack,
-        ptd->vpCBStack, 0, pFrame->wTDB,
-        (DWORD)vpfnProc, pParm16 ? pParm16->WndProc.wMsg : 0,
-        pParm16 ? pParm16->WndProc.lParam : 0);
 #line 757
     FREEVDMPTR(pFrame);
     FLUSHVDMPTR(ptd->vpCBStack, sizeof(CBVDMFRAME), pCBFrame);
@@ -689,13 +685,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     // Time to get the IEU running task-time code again
 #line 779
     SaveIp = getIP();
-    /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original
-     * stack selection and before the original CCPU reentry.  It copies no
-     * guest state and does not alter the callback protocol. */
-    wow_callback_frame_trace("simulate", (DWORD)iRetID, ptd->vpStack,
-        ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,
-        pParm16 ? pParm16->WndProc.wMsg : 0,
-        pParm16 ? pParm16->WndProc.lParam : 0);
 #line 780
     host_simulate();
     setIP(SaveIp);
@@ -705,12 +694,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
 
-    wow_callback_frame_trace("after", (DWORD)iRetID, ptd->vpStack,
-        ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,
-        pParm16 ? pParm16->WndProc.wMsg : 0,
-        pParm16 ? pParm16->WndProc.lParam : 0);
 
     // consistency check
+#line 788
     WOW32ASSERT(ptd->vpStack == vpCBStackT);
 
     ptd->vpCBStack = ptd->vpStack;
