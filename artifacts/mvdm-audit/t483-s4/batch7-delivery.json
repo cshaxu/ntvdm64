@@ -1,0 +1,88 @@
+{
+  "part": "T483 S4 P7",
+  "baseline": "a00fb9577",
+  "entries": [
+    "T483-D2425",
+    "T483-D2452",
+    "T483-D2650",
+    "T483-D2651",
+    "T483-D2652",
+    "T483-D2653",
+    "T483-D2671",
+    "T483-D2674",
+    "T483-D2679",
+    "T483-D2682",
+    "T483-D2685",
+    "T483-D2690",
+    "T483-D2722",
+    "T483-D2736"
+  ],
+  "delivered_total": 102,
+  "remaining": 15,
+  "modified_source_test_build_files": 11,
+  "footprint": {
+    "mirror": {
+      "added": 196,
+      "deleted": 205,
+      "net": -9
+    },
+    "autonomous": {
+      "added": 0,
+      "deleted": 3,
+      "net": -3
+    },
+    "build": {
+      "added": 0,
+      "deleted": 4,
+      "net": -4
+    },
+    "tests": {
+      "added": 4,
+      "deleted": 1,
+      "net": 3
+    }
+  },
+  "source_review": "batch7-source-review.json",
+  "verification": {
+    "cached": "x86/x64 exit0",
+    "full": "16 gates passed; DOS4GW/NESticle external fixture explicitly skipped",
+    "control_boundaries": "Whole maintained cohort exit0",
+    "conversion": "Actual product object linked; errors0",
+    "lookaside": "Actual product objects linked; errors0, pool4, overflow1, reuse1",
+    "formal_graph": "Actual WOW32 graph passed; removed redundant product callproc expectation",
+    "line_review": {
+      "matching_anchors": 294,
+      "remaining_true_mismatches": 0,
+      "reviewed_false_matches": 2,
+      "reason": "ntcftxt original lines123 and1061 set fAllocated=FALSE; preprocessing expands FALSE to0, colliding with original literal0 at713. Source context verified.",
+      "cohorts": [
+        "clglobal",
+        "privatewords",
+        "rtlinit",
+        "lookaside",
+        "control",
+        "visibility",
+        "classclient"
+      ]
+    },
+    "reviewed_hashes": "All eleven source/build/test hashes match final tested edits"
+  },
+  "publication": {
+    "status": "published",
+    "package": "d65b71f8-c9e3-4632-b93c-c0604e0f16ef",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_roots": [
+    "build/t483-s4-p7"
+  ],
+  "scope": "No guest or winnt.zip changes. S6 remains held.",
+  "runner_corrections": [
+    "Supplemental fixture command initially used slash path under cmd; corrected command path.",
+    "Lookaside fixture initially omitted product /Gz calling convention, causing link failure only; corrected driver contract; both fixtures passed."
+  ]
+}

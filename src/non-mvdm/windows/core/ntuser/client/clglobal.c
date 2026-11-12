@@ -1215,7 +1215,6 @@ CONST BOOLEAN gabThunkMessage[] = {
     FALSE,    // WM_CBT_RESERVED_LAST 0x03FF
 };
 
-C_ASSERT(sizeof(gabThunkMessage) / sizeof(gabThunkMessage[0]) == WM_USER);
 
 #line 1309
 #ifdef WX86

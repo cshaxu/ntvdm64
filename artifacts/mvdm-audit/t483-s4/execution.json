@@ -710,100 +710,114 @@
     {
       "id": "T483-D2425",
       "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Move this exact WM_USER extent assertion into the existing fixture that links production table, with an explicit sized extern or shared compile-only check; retain complete production table and avoid copying it.",
-      "verification": "Compile Unicode global unit with actual controls; existing conversion fixture and linked table cardinality check; preserve directory-list and wheel-state behavior."
+      "verification": "Compile Unicode global unit with actual controls; existing conversion fixture and linked table cardinality check; preserve directory-list and wheel-state behavior.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2452",
       "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Remove redundant client-callproc product object and update formal-graph expectation; preserve needed fixture selection and original function. Confirm link map has no additional GetCPD consumer before removal.",
-      "verification": "Compare selected preprocessed call sites/link map; build WOW provider; run dialog getter/setter and A/W conversion fixtures."
+      "verification": "Compare selected preprocessed call sites/link map; build WOW provider; run dialog getter/setter and A/W conversion fixtures.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2650",
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Coalesce _SetWindowLong selection as a complete function, retain original DEBUG frames at original positions inside its owner where supported-context policy permits. Do not change selected statements.",
-      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations."
+      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2651",
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Coalesce _SetWindowLong selection as a complete function, retain original DEBUG frames at original positions inside its owner where supported-context policy permits. Do not change selected statements.",
-      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations."
+      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2652",
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Coalesce _SetWindowLong selection as a complete function, retain original DEBUG frames at original positions inside its owner where supported-context policy permits. Do not change selected statements.",
-      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations."
+      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2653",
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Coalesce _SetWindowLong selection as a complete function, retain original DEBUG frames at original positions inside its owner where supported-context policy permits. Do not change selected statements.",
-      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations."
+      "verification": "Compile every real object and supported fixture; compare symbols, retained tokens and original diagnostic locations.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2671",
       "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Restore original function order and coherent per-owner selection; retain separate actual capture/lookaside object contexts and bounded includes.",
-      "verification": "Build both real objects and inspect symbol identity; compare selected original tokens and diagnostic positions."
+      "verification": "Build both real objects and inspect symbol identity; compare selected original tokens and diagnostic positions.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2674",
       "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Coalesce whole original functions under their owner selector, preserve original DBG frames with #error, and restore diagnostic boundaries.",
-      "verification": "Actual product and fixture contexts; verify unchanged non-debug allocation/free tokens and original logical lines."
+      "verification": "Actual product and fixture contexts; verify unchanged non-debug allocation/free tokens and original logical lines.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2679",
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Keep the early definition required by partial includes and remove the later duplicate; verify lookaside-only and full edit-state inclusion.",
-      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures."
+      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2682",
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Consolidate selected declaration cohorts while preserving lookaside-first/type dependencies; keep original USEREXTS frame and remove only redundant selector fragmentation proven by include-order checks.",
-      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures."
+      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2685",
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Restore coherent original relative order where dependency-safe; consolidate guard selection with listbox cohort rather than duplicate layouts.",
-      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures."
+      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2690",
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Reduce declaration interleaving and selectors; preserve dependent typedef order and original calling-convention expansion. Reconcile duplicate RtlInitLargeUnicodeString in control-client/precomp.h.",
-      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures."
+      "verification": "Affected production control-client provider compilation; lookaside-only then full-state multipass; layout/offset assertions; existing control construction, drawing, callback/lifetime fixtures.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2722",
       "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Restore original FChildVisible-before-geometry function order and consolidate selector only if both real product and view-only fixture dependencies remain satisfied. No geometry replacement.",
-      "verification": "Existing fixture source inspected, not rerun: child visibility ignores own visibility, parent visibility, invalid HWND; geometry covers pre4/4 expected version, menu, caption, thick frame, client edge, toolwindow. No claim complete fixture/lifetime coverage. Future changes require affected provider compilation and fixture rerun."
+      "verification": "Existing fixture source inspected, not rerun: child visibility ignores own visibility, parent visibility, invalid HWND; geometry covers pre4/4 expected version, menu, caption, thick frame, client edge, toolwindow. No claim complete fixture/lifetime coverage. Future changes require affected provider compilation and fixture rerun.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2736",
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
-      "status": "pending",
+      "status": "delivered P7",
       "plan": "Prefer restoring original includes at this source owner if native declaration order and fixture shim composition permit; remove only proven redundant facade include responsibility.",
-      "verification": "Class fixture checks style/version/brush/instance validation, menu allocation/capture failure1 and2, failed registration, refused unregister, later successful unregister, native duplicate registration and live-window rejection. Controlled backend and task-version inputs; no fresh runtime results. Rerun affected real provider and original/mirror paired fixtures for future semantic edits."
+      "verification": "Class fixture checks style/version/brush/instance validation, menu allocation/capture failure1 and2, failed registration, refused unregister, later successful unregister, native duplicate registration and live-window rejection. Controlled backend and task-version inputs; no fresh runtime results. Rerun affected real provider and original/mirror paired fixtures for future semantic edits.",
+      "evidence": "batch7-delivery.json"
     },
     {
       "id": "T483-D2759",

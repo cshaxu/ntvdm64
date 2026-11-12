@@ -1,0 +1,137 @@
+{
+  "status": "verified and published; commit pending",
+  "entries": [
+    "T483-D2425",
+    "T483-D2452",
+    "T483-D2650",
+    "T483-D2651",
+    "T483-D2652",
+    "T483-D2653",
+    "T483-D2671",
+    "T483-D2674",
+    "T483-D2679",
+    "T483-D2682",
+    "T483-D2685",
+    "T483-D2690",
+    "T483-D2722",
+    "T483-D2736"
+  ],
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_sha256": "000d27dd967cd4d48ffcd36462a68817a086ceffae60e5af629171b6042d6689",
+      "after_sha256": "422bda00d59863f9a899b6a13a2da3fa8ae1255d0cc1cacda0432ff2c1e20f2c"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c",
+      "before_sha256": "b7a978d956762544245578922756266f8f96280ea165cfde9daa29457cff25dd",
+      "after_sha256": "200b59d0efa61d8a35b2536e94a6d6131d2d247dbabb2f11b9db3ef984e04eeb"
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "before_sha256": "fd90abe8f15f16473273a205010cdd24fd8b36dc1e99c659462c41a38dd43d7b",
+      "after_sha256": "0fc612472228db62a6bc9c72f27ddd48a838718cbefa569c445e1cfa29772a34"
+    },
+    {
+      "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+      "before_sha256": "03f61490d11146ddd5379c66bbecb7624483013a5f76559e29c8f2a3f76d0273",
+      "after_sha256": "8550880504f2b976205cdeedd3ed3fff2aad36397f2d07a4f5274755ab144a83"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "before_sha256": "a546c5469edf64976220c1a2b7d7202de8c2d49093f6670b8610a3a759f91b1e",
+      "after_sha256": "f8c4a2936f7a0d61e73f02121fc33f92985c12ab51849c81c39f2b9b4a0eb3ea"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "before_sha256": "e165f243722d982c5a19024ae3fff82747889bcfb34c63105043e08fe7d4a9f1",
+      "after_sha256": "6cad16a9876d8a7ab5a926b63848b4106b0b70564fb1f998762e5969ff5c82d4",
+      "change": "Original capture-before-lookaside order restored; four fragmented owner selections removed; DBG frames stay inside lookaside owner."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_sha256": "824db6b7c91862bf6d8bd3bf389a0b803f8256816e340fde1d8f510eceebf941",
+      "after_sha256": "cd1bc65bb851b9b6ccb3f708ee1b79d0af63f9d757b478fad48c8068a34acb98"
+    },
+    {
+      "path": "src/wow32-dll/include/control-client/precomp.h",
+      "before_sha256": "c444b818d2628ce0aca44b166c2aa0d017beada166e41b89bec369498d67fce6",
+      "after_sha256": "b86071aae6aafc06bc6e07894001cb17379c40c487274aabb778cab1546ce965"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "before_sha256": "d448bfc238cb8f6143b4bc52bc2c3ee714f7a2f1fcbd7082bfa4ddebd4667789",
+      "after_sha256": "7fc717f15fce6db0ac10e7728b7321ac5cecfd14a5c72611cb5b33f01ed682a9",
+      "change": "Restore FChildVisible52 before AdjustWindowRectEx550; retain geometry-only selector since view-only fixture omits its dependencies."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "before_sha256": "1a6887b53aa44994bf6f8a1d2d877cf54427617a7d5948053f438c076ffe24a7",
+      "after_sha256": "bb3570387c93050ab73b346fb304e599eaf05d3b11fec82efb6da920f0c34244",
+      "change": "Restore original includes23/24 at source owner after ANSI selection."
+    },
+    {
+      "path": "src/wow32-dll/include/wow_class_client_bindings.h",
+      "before_sha256": "8e8c9bd657d648d19cbeb3396b6bad5fba186e7015c7f7c509a4c3a454ca616f",
+      "after_sha256": "e143cdcf5e0903f17e8578aa5a887aa84375f2e57af30a2f581dbbd8b07206e3",
+      "change": "Remove include responsibility now restored to ntcftxt; capture types and native boundary remain."
+    }
+  ],
+  "changes": [
+    "Move table extent assertion to existing fixture using sized extern and actual production table.",
+    "Remove unused client-callproc product object and graph expectation, preserve original source and fixture selection.",
+    "Coalesce complete _SetWindowLong under one owner selector, retain original DEBUG frames and line anchors."
+  ],
+  "counter_review": {
+    "GetCPD": "Both mirror calls excluded in product by WOW_NATIVE_DIALOG_PROCEDURE_OWNER; current wow32 map contains native wrapper but no _GetCPD.",
+    "extent": "Sized extern states expected extent; table bytes unchanged. It is not an independent COFF size measurement.",
+    "selection": "Earlier elif priority preserved and final else retains the default class query; all original DEBUG branches stay inside _SetWindowLong.",
+    "rtlinit": "Pinned original Capture starts30, AllocateFromZone172, InitLookaside222, AllocLookasideEntry300, FreeLookasideEntry345. Existing #line anchors and selected function bytes preserved; includes stay confined to their original distinct build cohorts.",
+    "rtlinit_body_comparison": "All four bodies byte-identical before/after after removing preprocessor directive lines only; cached compilation and line validation still pending.",
+    "usercli": "Keep early GetAppVer; remove duplicate. Keep independently necessary ComboBox/ListBox selectors: production wow_edit_state_bindings.c selects combo alone, dialog-getset fixture selects list alone. Move CBOX before EDIT layout, with dependency-safe validation/type prelude retained ahead of CBOX; full EDIT guard is set only on completion. Retain original USEREXTS frame. Move state prototypes after EDIT declarations; RepositionRect precedes ValidateDialogPwnd at original2167/2168. Remove repeated RtlInitLargeUnicodeString from precomp after wow_edit_call_bindings already supplies full declaration cohort."
+  },
+  "verification_pending": "Governance, commit and push",
+  "verification_runs": {
+    "cached": {
+      "status": "completed exit0",
+      "root": "build/t483-s4-p7"
+    },
+    "full": {
+      "session": 58258,
+      "status": "completed exit0; Full16 passed"
+    },
+    "control_boundaries": {
+      "session": 46743,
+      "status": "completed exit0"
+    },
+    "preprocess": {
+      "session": 73239,
+      "status": "completed exit0; corrected actual visibility object"
+    },
+    "fixtures": {
+      "status": "conversion errors0, lookaside errors0; actual production objects linked"
+    },
+    "formal_graph": {
+      "status": "passed actual WOW graph"
+    }
+  },
+  "line_review": {
+    "matching_anchors": 294,
+    "remaining_true_mismatches": 0,
+    "reviewed_false_matches": 2,
+    "reason": "ntcftxt original lines123 and1061 set fAllocated=FALSE; preprocessing expands FALSE to0, colliding with original literal0 at713. Source context verified.",
+    "cohorts": [
+      "clglobal",
+      "privatewords",
+      "rtlinit",
+      "lookaside",
+      "control",
+      "visibility",
+      "classclient"
+    ]
+  },
+  "runner_corrections": [
+    "Supplemental fixture command initially used slash path under cmd; corrected command path.",
+    "Lookaside fixture initially omitted product /Gz calling convention, causing link failure only; corrected driver contract; both fixtures passed."
+  ]
+}

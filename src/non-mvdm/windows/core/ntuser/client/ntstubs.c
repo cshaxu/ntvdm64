@@ -217,13 +217,11 @@ LONG _SetWindowLong(
         ((PLBWND)pwnd)->pLBIV != NULL &&
         (!TestWindowProcess(pwnd) || ((PLBWND)pwnd)->pLBIV->fInitialized)) {
 
-#endif /* original client-owner selection */
 #line 953
 #ifdef DEBUG
 #line 954
 #error Excluded unsupported original DEBUG window-style tracing
 #endif
-#if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
 #line 956
 
         dwNewLong &= ~(LBS_OWNERDRAWFIXED |
@@ -234,14 +232,12 @@ LONG _SetWindowLong(
                                     LBS_OWNERDRAWVARIABLE |
                                     LBS_HASSTRINGS);
 
-#endif /* WOW_ORIGINAL_DIALOG_GETSET */
 #line 965
 #ifdef DEBUG
 #line 966
 #error Excluded unsupported original DEBUG window-style tracing
 #line 969
 #endif
-#if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
 #line 970
     }
 
@@ -255,7 +251,7 @@ LONG _SetWindowLong(
     ERRORTRAP(0);
     ENDCALL(LONG);
 }
-#elif !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
+#else
 /**************************************************************************\
 * Module Name: ntstubs.c
 *

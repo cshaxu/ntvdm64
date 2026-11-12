@@ -578,7 +578,6 @@ $objects.Add($defaultClientObject)
 $ninja.Add('build ' + $defaultClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clmsg.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_WINDOW')
 $defaultBitsObject = 'obj/opennt-user/default-window-bits.obj'
-$clientCpdObject = 'obj/opennt-user/client-callproc.obj'
 $privateWordSetterObject = 'obj/opennt-user/private-word-setter.obj'
 # The public private-word access facade calls these original client owners.
 # Keep reader/client/server as distinct objects: selecting only the server
@@ -595,9 +594,6 @@ foreach ($accessOwner in @(
 $objects.Add($privateWordSetterObject)
 $ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/getset.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER')
-$objects.Add($clientCpdObject)
-$ninja.Add('build ' + $clientCpdObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clmsg.c')))
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_CLIENT_CPD')
 $objects.Add($defaultBitsObject)
 $ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/client.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DEF_WINDOW_BITS')

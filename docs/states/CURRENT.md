@@ -88,7 +88,15 @@ layout contexts, four original packstr cases and line counter-review passed.
 Eleven images were published and raw-hash verified at both destinations. See
 [P6 delivery](../../artifacts/mvdm-audit/t483-s4/batch6-delivery.json) and
 [source review](../../artifacts/mvdm-audit/t483-s4/batch6-source-review.json).
-Next: non-mvdm/windows/core/ntuser/client/clglobal.c in register order.
+P7 resolves fourteen entries: total102/117; 15 remain. Restored function and
+declaration order, coalesced owner selectors and removed the unused product
+callproc object. Eleven source/build/test files net -13 lines. Cached x86/x64,
+Full16, maintained control-boundary cohort, conversion/lookaside fixtures,
+formal WOW graph and original-line review passed. The Full-tested eleven
+images were published and raw-hash verified at both destinations. See
+[P7 delivery](../../artifacts/mvdm-audit/t483-s4/batch7-delivery.json) and
+[source review](../../artifacts/mvdm-audit/t483-s4/batch7-source-review.json).
+Next: non-mvdm/windows/core/ntuser/inc/ntsend.h in register order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure
@@ -100,10 +108,10 @@ regressions passed. No user desktop unlock dependency remains in generic queue t
 
 ## Current Technical Baseline
 
-Package `b0b33c0d-084f-4b4b-9485-6856a09f3ec4`, complete 11 images at
+Package `d65b71f8-c9e3-4632-b93c-c0604e0f16ef`, complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. Published images
-raw-hash match the Full-tested P6 candidate;
-both destinations are raw-hash identical to the P6 manifest. DOS4GW/NESticle remains
+raw-hash match the Full-tested P7 candidate;
+both destinations are raw-hash identical to the P7 manifest. DOS4GW/NESticle remains
 explicitly skipped because
 its external fixture was not supplied. No guest or winnt.zip change.
 

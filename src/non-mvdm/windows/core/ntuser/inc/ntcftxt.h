@@ -20,6 +20,8 @@
 #line 22
 #endif
 #line 23
+#include <tchar.h>
+#include "ntsend.h"
 /* DIVERGENCE(OPENNT-HOST-036): retain the complete ANSI class client
  * closure: duplication, menu capture, registration and unregistration.
  * Other text APIs and the private USER precompiled environment are cropped.

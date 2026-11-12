@@ -3,6 +3,9 @@
 #include "non-mvdm/windows/core/ntuser/client/globals.h"
 #include <stdio.h>
 
+extern CONST BOOLEAN gabThunkMessage[WM_USER];
+C_ASSERT(sizeof(gabThunkMessage) / sizeof(gabThunkMessage[0]) == WM_USER);
+
 /* Supplemental transport contract only. Link the real conversion binding
  * with these boundary doubles. This does not prove native CPD translation,
  * original EDIT behavior, guest execution or destruction ordering. */

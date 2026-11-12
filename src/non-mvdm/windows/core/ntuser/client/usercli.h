@@ -105,9 +105,7 @@ PVOID AllocLookasideEntry(PLOOKASIDE pla);
 void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
 #endif
 
-#ifndef WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
-#ifndef OPENNT_USERCLI_EDIT_STATE_SUBSET_H
-#define OPENNT_USERCLI_EDIT_STATE_SUBSET_H
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
 
 /*
  * Window Proc Window Validation macro. This macro assumes
@@ -187,6 +185,104 @@ void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
 
 typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
 
+#endif
+
+/* DIVERGENCE(OPENNT-HOST-095): unchanged original ComboBox state and its
+ * private constants, selected only for the recovered collaboration group.
+ * These declarations never describe a native USER allocation. */
+#if defined(WOW_ORIGINAL_COMBO_STATE_LAYOUT) && !defined(OPENNT_COMBO_STATE_LAYOUT_H)
+#define OPENNT_COMBO_STATE_LAYOUT_H
+/*
+ * ID numbers (hMenu) for the child controls in the combo box
+ */
+#define CBLISTBOXID 1000
+#define CBEDITID    1001
+#define CBBUTTONID  1002
+
+/*
+ * For CBOX.c. BoxType field, we define the following combo box styles. These
+ * numbers are the same as the CBS_ style codes as defined in windows.h.
+ */
+#define SDROPPABLE      2
+#define SEDITABLE       1
+
+#define SSIMPLE         SEDITABLE
+#define SDROPDOWNLIST   SDROPPABLE
+#define SDROPDOWN       (SDROPPABLE | SEDITABLE)
+
+
+/*
+ * CBOX.OwnerDraw & LBIV.OwnerDraw types
+ */
+#define OWNERDRAWFIXED 1
+#define OWNERDRAWVAR   2
+
+#define UPPERCASE   1
+#define LOWERCASE   2
+
+#define CaretCreate(plb)    ((plb)->fCaret = TRUE)
+
+/*
+ * Special styles for static controls, edit controls & listboxes so that we
+ * can do combo box specific stuff in their wnd procs.
+ */
+#define LBS_COMBOBOX    0x8000L
+
+#line 449
+typedef struct tagCBox {
+    struct tagWND *spwnd;      /* Window for the combo box */
+    struct tagWND *spwndParent;/* Parent of the combo box */
+    RECT    editrc;            /* Rectangle for the edit control/static text
+                                  area */
+    RECT    buttonrc;          /* Rectangle where the dropdown button is */
+
+    int     cxCombo;            // Width of sunken area
+    int     cyCombo;            // Height of sunken area
+    int     cxDrop;             // 0x24 Width of dropdown
+    int     cyDrop;             // Height of dropdown or shebang if simple
+
+    struct tagWND *spwndEdit;  /* Edit control window handle */
+    struct tagWND *spwndList;  /* List box control window handle */
+
+    UINT    CBoxStyle:2;         /* Combo box style */
+    UINT    fFocus:1;          /* Combo box has focus? */
+    UINT    fNoRedraw:1;       /* Stop drawing? */
+    UINT    fMouseDown:1;      /* Was the popdown button just clicked and
+                                   mouse still down? */
+    UINT    fButtonPressed:1; /* Is the dropdown button in an inverted state?
+                                */
+    UINT    fLBoxVisible:1;    /* Is list box visible? (dropped down?) */
+    UINT    OwnerDraw:2;       /* Owner draw combo box if nonzero. value
+                                * specifies either fixed or varheight
+                                */
+    UINT    fKeyboardSelInListBox:1; /* Is the user keyboarding through the
+                                      * listbox. So that we don't hide the
+                                      * listbox on selchanges caused by the
+                                      * user keyboard through it but we do
+                                      * hide it if the mouse causes the
+                                      * selchange.
+                                      */
+    UINT    fExtendedUI:1;     /* Are we doing TandyT's UI changes on this
+                                * combo box?
+                                */
+    UINT    fCase:2;
+
+    UINT    f3DCombo:1;         // 3D or flat border?
+    UINT    fNoEdit:1;         /* True if editing is not allowed in the edit
+                                * window.
+                                */
+    HANDLE  hFont;             /* Font for the combo box */
+    LONG    styleSave;         /* Temp to save the style bits when creating
+                                * window.  Needed because we strip off some
+                                * bits and pass them on to the listbox or
+                                * edit box.
+                                */
+} CBOX, *PCBOX;
+
+#endif
+
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#define OPENNT_USERCLI_EDIT_STATE_SUBSET_H
 #line 570
 /* Window extra bytes */
 #define CBEDITEXTRA 6
@@ -445,10 +541,6 @@ typedef  STRIPINFO FAR *LPSTRIPINFO;
 
 #line 1177
 PSTR ECLock(PED ped);
-/* OPENNT-HOST-088: original client state-operation declarations. */
-#line 1465
-void SetWindowState(PWND pwnd, UINT flags);
-void ClearWindowState(PWND pwnd, UINT flags);
 #line 1178
 void ECUnlock(PED ped);
 BOOL ECNcCreate(PED, PWND, LPCREATESTRUCT);
@@ -552,109 +644,17 @@ void SLKillFocus(PED, HWND);
 LONG SLEditWndProc(HWND, PED, UINT, DWORD, LONG);
 LONG EditWndProc(PWND, UINT, DWORD, LONG);
 
-#define GetAppVer(pti) GetClientInfo()->dwExpWinVer
 
 #define ISDELIMETERA(ch) ((ch == ' ') || (ch == '\t'))
 #define ISDELIMETERW(ch) ((ch == L' ') || (ch == L'\t'))
 
 #define AWCOMPARECHAR(ped,pbyte,awchar) (ped->fAnsi ? (*(PUCHAR)(pbyte) == (UCHAR)(awchar)) : (*(LPWSTR)(pbyte) == (WCHAR)(awchar)))
 
-#endif
-#endif /* WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY */
-
-/* DIVERGENCE(OPENNT-HOST-095): unchanged original ComboBox state and its
- * private constants, selected only for the recovered collaboration group.
- * These declarations never describe a native USER allocation. */
-#if defined(WOW_ORIGINAL_COMBO_STATE_LAYOUT) && !defined(OPENNT_COMBO_STATE_LAYOUT_H)
-#define OPENNT_COMBO_STATE_LAYOUT_H
-/*
- * ID numbers (hMenu) for the child controls in the combo box
- */
-#define CBLISTBOXID 1000
-#define CBEDITID    1001
-#define CBBUTTONID  1002
-
-/*
- * For CBOX.c. BoxType field, we define the following combo box styles. These
- * numbers are the same as the CBS_ style codes as defined in windows.h.
- */
-#define SDROPPABLE      2
-#define SEDITABLE       1
-
-#define SSIMPLE         SEDITABLE
-#define SDROPDOWNLIST   SDROPPABLE
-#define SDROPDOWN       (SDROPPABLE | SEDITABLE)
-
-
-/*
- * CBOX.OwnerDraw & LBIV.OwnerDraw types
- */
-#define OWNERDRAWFIXED 1
-#define OWNERDRAWVAR   2
-
-#define UPPERCASE   1
-#define LOWERCASE   2
-
-#define CaretCreate(plb)    ((plb)->fCaret = TRUE)
-
-/*
- * Special styles for static controls, edit controls & listboxes so that we
- * can do combo box specific stuff in their wnd procs.
- */
-#define LBS_COMBOBOX    0x8000L
-
-#line 449
-typedef struct tagCBox {
-    struct tagWND *spwnd;      /* Window for the combo box */
-    struct tagWND *spwndParent;/* Parent of the combo box */
-    RECT    editrc;            /* Rectangle for the edit control/static text
-                                  area */
-    RECT    buttonrc;          /* Rectangle where the dropdown button is */
-
-    int     cxCombo;            // Width of sunken area
-    int     cyCombo;            // Height of sunken area
-    int     cxDrop;             // 0x24 Width of dropdown
-    int     cyDrop;             // Height of dropdown or shebang if simple
-
-    struct tagWND *spwndEdit;  /* Edit control window handle */
-    struct tagWND *spwndList;  /* List box control window handle */
-
-    UINT    CBoxStyle:2;         /* Combo box style */
-    UINT    fFocus:1;          /* Combo box has focus? */
-    UINT    fNoRedraw:1;       /* Stop drawing? */
-    UINT    fMouseDown:1;      /* Was the popdown button just clicked and
-                                   mouse still down? */
-    UINT    fButtonPressed:1; /* Is the dropdown button in an inverted state?
-                                */
-    UINT    fLBoxVisible:1;    /* Is list box visible? (dropped down?) */
-    UINT    OwnerDraw:2;       /* Owner draw combo box if nonzero. value
-                                * specifies either fixed or varheight
-                                */
-    UINT    fKeyboardSelInListBox:1; /* Is the user keyboarding through the
-                                      * listbox. So that we don't hide the
-                                      * listbox on selchanges caused by the
-                                      * user keyboard through it but we do
-                                      * hide it if the mouse causes the
-                                      * selchange.
-                                      */
-    UINT    fExtendedUI:1;     /* Are we doing TandyT's UI changes on this
-                                * combo box?
-                                */
-    UINT    fCase:2;
-
-    UINT    f3DCombo:1;         // 3D or flat border?
-    UINT    fNoEdit:1;         /* True if editing is not allowed in the edit
-                                * window.
-                                */
-    HANDLE  hFont;             /* Font for the combo box */
-    LONG    styleSave;         /* Temp to save the style bits when creating
-                                * window.  Needed because we strip off some
-                                * bits and pass them on to the listbox or
-                                * edit box.
-                                */
-} CBOX, *PCBOX;
-
-#endif
+/* OPENNT-HOST-088: original client state-operation declarations. */
+#line 1465
+void SetWindowState(PWND pwnd, UINT flags);
+void ClearWindowState(PWND pwnd, UINT flags);
+#endif /* full EDIT declarations */
 
 /* OPENNT-HOST-086: exact listbox declarations required to preserve the
  * original _SetWindowLong initialized-style guard. Not native USER memory. */
@@ -849,6 +849,8 @@ VOID xxxRemoveDefaultButton(PWND pwndDlg, PWND pwndStart);
 VOID xxxCheckDefPushButton(PWND pwndDlg, HWND hwndOldFocus, HWND hwndNewFocus);
 #line 2166
 VOID DlgSetFocus(HWND hwnd);
+#line 2167
+void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
 #line 2168
 BOOL ValidateDialogPwnd(PWND pwnd);
 PWND GetTopLevelWindow(PWND pwnd);
@@ -871,8 +873,6 @@ VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,
 #define NextWordBoundary(p)     ((PBYTE)(p) + ((DWORD)(p) & 1))
 #endif
 #define NextDWordBoundary(p)    ((PBYTE)(p) + ((DWORD)(-(LONG)(p)) & 3))
-#line 2167
-void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
 #define CCHFILEMAX      MAX_PATH
 #define MSGFLAG_SPECIAL_THUNK       0x10000000
 extern WCHAR awchSlashStar[];

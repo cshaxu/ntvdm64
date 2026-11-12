@@ -76,7 +76,7 @@ $expectedUser = @(
     'control-text', 'control-color', 'control-brush-client', 'control-brush',
     'control-state', 'control-fnid', 'dialog-pointer', 'control-rect',
     'default-client', 'private-word-reader', 'private-word-client',
-    'private-word-setter', 'client-callproc', 'default-window-bits',
+    'private-word-setter', 'default-window-bits',
     'default-borders', 'default-messages', 'control-draw',
     'control-text-client', 'control-text-rtl', 'control-text-extent',
     'control-client-draw', 'control-client-mngrayc', 'button-client',

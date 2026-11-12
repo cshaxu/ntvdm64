@@ -50,7 +50,6 @@ C_ASSERT(sizeof(DLGITEMTEMPLATE2) == 24);
 #include "wow_edit_call_bindings.h"
 /* OPENNT-HOST-118: original construction, bounded native storage service. */
 VOID RtlInitLargeAnsiString(PLARGE_ANSI_STRING, LPCSTR, UINT);
-VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING, LPCWSTR, UINT);
 BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 #define NtUserDefSetText wow_edit_NtUserDefSetText
 #include "wow_edit_memory_bindings.h"

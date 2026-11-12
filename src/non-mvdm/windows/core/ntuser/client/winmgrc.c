@@ -11,6 +11,20 @@
 
 #include "precomp.h"
 
+#line 52
+BOOL FChildVisible(
+    HWND hwnd)
+{
+    PWND pwnd;
+
+    pwnd = ValidateHwnd(hwnd);
+
+    if (pwnd == NULL)
+        return 0;
+
+    return (_FChildVisible(pwnd));
+}
+
 #ifdef WOW_ORIGINAL_EDIT_CLIENT
 /***************************************************************************\
 * _AdjustWindowRectEx (API)
@@ -76,15 +90,3 @@ BOOL _AdjustWindowRectEx(
 }
 #endif
 
-BOOL FChildVisible(
-    HWND hwnd)
-{
-    PWND pwnd;
-
-    pwnd = ValidateHwnd(hwnd);
-
-    if (pwnd == NULL)
-        return 0;
-
-    return (_FChildVisible(pwnd));
-}

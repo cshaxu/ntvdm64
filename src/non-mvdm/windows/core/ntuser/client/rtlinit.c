@@ -11,7 +11,79 @@
 * 14-Jan-1991 mikeke
 \***************************************************************************/
 
-#if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
+#if !defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
+/* DIVERGENCE(OPENNT-HOST-040): retain original RtlCaptureAnsiString.
+ * Other USER initialization/capture routines and private precompiled headers
+ * are excluded. The existing worker TLS/heap boundary supplies resources. */
+#include "wow_user_capture_bindings.h"
+
+#line 21
+/**************************************************************************\
+* RtlCaptureAnsiString
+*
+* Converts a NULL-terminated ANSI string into a counted
+* unicode string.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
+
+BOOL RtlCaptureAnsiString(
+    PIN_STRING pstr,
+    LPCSTR psz,
+    BOOL fForceAlloc)
+{
+    int cbSrc;
+    int cbDst;
+
+    pstr->fAllocated = FALSE;
+    if (psz) {
+        cbSrc = strlen(psz) + 1;
+        if (cbSrc > MAXUSHORT) {
+            RIPMSG0(RIP_WARNING, "String too long for standard string");
+            return FALSE;
+        }
+
+        /*
+         * If the allocation is forced or if the string is
+         * too long to fit in the TEB, allocate a buffer.
+         * Otherwise, store the result in the TEB.
+         */
+        if (fForceAlloc ||
+                cbSrc > (STATIC_UNICODE_BUFFER_LENGTH / sizeof(WCHAR))) {
+            pstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),
+                    0, cbSrc * sizeof(WCHAR));
+            if (pstr->strCapture.Buffer == NULL)
+                return FALSE;
+            pstr->fAllocated = TRUE;
+            pstr->pstr = &pstr->strCapture;
+            pstr->strCapture.MaximumLength = (USHORT)(cbSrc * sizeof(WCHAR));
+        } else {
+            pstr->pstr = &NtCurrentTeb()->StaticUnicodeString;
+        }
+
+        /*
+         * Convert the string to Unicode
+         */
+        if (RtlMultiByteToUnicodeN(pstr->pstr->Buffer,
+                (ULONG)pstr->pstr->MaximumLength, &cbDst,
+                (LPSTR)psz, cbSrc)) {
+            RIPMSG0(RIP_WARNING, "Unicode conversion failed");
+            if (pstr->fAllocated) {
+                RtlFreeHeap(RtlProcessHeap(), 0, pstr->strCapture.Buffer);
+                pstr->fAllocated = FALSE;
+            }
+            return FALSE;
+        }
+        pstr->pstr->Length = (USHORT)cbDst - sizeof(WCHAR);
+    } else {
+        pstr->pstr = &pstr->strCapture;
+        pstr->strCapture.Length = pstr->strCapture.MaximumLength = 0;
+        pstr->strCapture.Buffer = NULL;
+    }
+    return TRUE;
+}
+
+#else
 /* DIVERGENCE(OPENNT-HOST-074): unchanged original control lookaside bodies;
  * only their private USER environment is supplied by the finite binding. */
 #include "wow_edit_lookaside_bindings.h"
@@ -187,27 +259,23 @@ PVOID AllocLookasideEntry(
         /*
          * Allocate a local structure.
          */
-#endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 319
 #if DBG
 #line 320
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 #line 322
-#if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 322
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
             return NULL;
         }
     RtlZeroMemory(pEntry, pla->EntrySize);
-#endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 326
 #if DBG
 #line 327
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 #line 333
-#if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 333
 
     return pEntry;
@@ -225,14 +293,12 @@ void FreeLookasideEntry(
     PLOOKASIDE pla,
     PVOID pEntry)
 {
-#endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 349
 #if DBG
 #line 350
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 #line 352
-#if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 352
 
     //
@@ -243,89 +309,15 @@ void FreeLookasideEntry(
         FreeToZone(&pla->LookasideZone,pEntry);
         RtlLeaveCriticalSection(&gcsLookaside);
     } else {
-#endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 361
 #if DBG
 #line 362
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 #line 364
-#if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 364
         UserLocalFree(pEntry);
     }
-}
-
-#else
-/* DIVERGENCE(OPENNT-HOST-040): retain original RtlCaptureAnsiString.
- * Other USER initialization/capture routines and private precompiled headers
- * are excluded. The existing worker TLS/heap boundary supplies resources. */
-#include "wow_user_capture_bindings.h"
-
-#line 21
-/**************************************************************************\
-* RtlCaptureAnsiString
-*
-* Converts a NULL-terminated ANSI string into a counted
-* unicode string.
-*
-* 03-22-95 JimA         Created.
-\**************************************************************************/
-
-BOOL RtlCaptureAnsiString(
-    PIN_STRING pstr,
-    LPCSTR psz,
-    BOOL fForceAlloc)
-{
-    int cbSrc;
-    int cbDst;
-
-    pstr->fAllocated = FALSE;
-    if (psz) {
-        cbSrc = strlen(psz) + 1;
-        if (cbSrc > MAXUSHORT) {
-            RIPMSG0(RIP_WARNING, "String too long for standard string");
-            return FALSE;
-        }
-
-        /*
-         * If the allocation is forced or if the string is
-         * too long to fit in the TEB, allocate a buffer.
-         * Otherwise, store the result in the TEB.
-         */
-        if (fForceAlloc ||
-                cbSrc > (STATIC_UNICODE_BUFFER_LENGTH / sizeof(WCHAR))) {
-            pstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),
-                    0, cbSrc * sizeof(WCHAR));
-            if (pstr->strCapture.Buffer == NULL)
-                return FALSE;
-            pstr->fAllocated = TRUE;
-            pstr->pstr = &pstr->strCapture;
-            pstr->strCapture.MaximumLength = (USHORT)(cbSrc * sizeof(WCHAR));
-        } else {
-            pstr->pstr = &NtCurrentTeb()->StaticUnicodeString;
-        }
-
-        /*
-         * Convert the string to Unicode
-         */
-        if (RtlMultiByteToUnicodeN(pstr->pstr->Buffer,
-                (ULONG)pstr->pstr->MaximumLength, &cbDst,
-                (LPSTR)psz, cbSrc)) {
-            RIPMSG0(RIP_WARNING, "Unicode conversion failed");
-            if (pstr->fAllocated) {
-                RtlFreeHeap(RtlProcessHeap(), 0, pstr->strCapture.Buffer);
-                pstr->fAllocated = FALSE;
-            }
-            return FALSE;
-        }
-        pstr->pstr->Length = (USHORT)cbDst - sizeof(WCHAR);
-    } else {
-        pstr->pstr = &pstr->strCapture;
-        pstr->strCapture.Length = pstr->strCapture.MaximumLength = 0;
-        pstr->strCapture.Buffer = NULL;
-    }
-    return TRUE;
 }
 
 #endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
