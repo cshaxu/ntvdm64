@@ -67,8 +67,8 @@ The DOS identity/wrong-waiter defect and Win95 exit-code boundary remain in
 [TODO](TODO.md). Win95 restart-to-DOS belongs to the
 [XP baseline-upgrade package](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md).
 
-Parallel-session QUEUE.md edits and the win203 setup proposal are preserved and
-excluded from this delivery.
+The owner authorizes submission of the pending queue reorder and its Win203
+proposal together. This documentation-only delivery does not change S4 scope.
 
 ## Recent M0 Closures
 
@@ -80,5 +80,5 @@ excluded from this delivery.
 
 ## Recent Governance
 
-See the [execution rules](../rules/EXECUTION.md). S3 closure preserves the
-parallel-session queue and proposal changes.
+See the [execution rules](../rules/EXECUTION.md). S3 preserved the parallel queue/proposal changes; their subsequent submission
+is now explicitly authorized by the owner.
