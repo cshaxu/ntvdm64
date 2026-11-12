@@ -1,0 +1,2557 @@
+[
+  {
+    "path": "src/mvdm-host/dbg/dbg.c",
+    "current_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dbg\\dbg.c",
+    "original_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmd.c",
+    "current_sha256": "ecd43471f699e3172f50b08a871d94256841651799e37fe1e0eb0454e5de5253",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmd.c",
+    "original_sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmd.h",
+    "current_sha256": "efa15ef22941b085e23db4b3be28178f8466f4f9a88c6022483be048a1c937a8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmd.h",
+    "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdconf.c",
+    "current_sha256": "6862008d8ee625ebd3b1c734b9493411414382f71b5d8c9ddf341fbac5c90aab",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+    "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmddata.c",
+    "current_sha256": "68dae0c1d1197b299cbb54a882df828af3a50ab9f4b60f7a0748dfe93aee06b8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmddata.c",
+    "original_sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdenv.c",
+    "current_sha256": "a4e0d3c8b5b900ae78a8a9e2e3f75ea0bfa0019febcc864066421555a2c94afc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdenv.c",
+    "original_sha256": "afc71d306491fe6a7f8cd7356b8682176a33a05f3652bae735be079b3cd0a32b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "current_sha256": "d686eb0340b470b7e9658f0cba22dab73aeab195b4e3c27750fb39704ff4e215",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdexec.c",
+    "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+    "current_sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdkeyb.c",
+    "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "current_sha256": "f9112eb47d5dd256e311ca0daa0312b3dd4e7f078b8ad5260f4e09840e7d5bed",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+    "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdpif.c",
+    "current_sha256": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdpif.c",
+    "original_sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdredir.c",
+    "current_sha256": "7c3a22d851015e69897fa55bd6e5b56add6b9d90c9598e7b7bd5e265243648e1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdredir.c",
+    "original_sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/dem.c",
+    "current_sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+    "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/dem.h",
+    "current_sha256": "0456b0596fb4f98317c0f250af91f37cd9a69551f47b559153be9f36a61fc89d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.h",
+    "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demdasd.h",
+    "current_sha256": "0c4bf7f6944b778b0ea1b1126a16f81b8d71edcd078098b857dae6ba41b6035c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.h",
+    "original_sha256": "de5bd5e437c17a34af71999e6e6e7c0e749d9d9da61bc5cc8420c0406e1a2c35",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demdata.c",
+    "current_sha256": "5b2fd3c7b176bc1454024f8df734145be547fa63d843e1b7d79d5b401daf2398",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdata.c",
+    "original_sha256": "366a350bc31579dc48764b81d28b26f4d2a5c69c66ec42d742ddaaf739e6a566",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demdisp.c",
+    "current_sha256": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+    "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demfcb.c",
+    "current_sha256": "c2c6aad56b3d96860dbc74430757240b4dcb10192f8ef5e54a1ebcbdd6ebccdb",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfcb.c",
+    "original_sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demfile.c",
+    "current_sha256": "d13771510c93234bf4a08b8b889d2df542775a6205c846264f281c259ed03c38",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+    "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demgset.c",
+    "current_sha256": "3b1f3a6d915ba02dfc1d0d19c7e92121ad756c1c9830aff806f6626951c9c06a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demgset.c",
+    "original_sha256": "19c5999308a479cc9c0fcb30d23e8301d9a835408417aa965b85523dfb8a1653",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demhndl.c",
+    "current_sha256": "896d7c3539a9c52cb984d394dc20f88a30fbe90e96f15bfd1546312639c6a02e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+    "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demmisc.c",
+    "current_sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demmisc.c",
+    "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demsrch.c",
+    "current_sha256": "626330bb01b34df705e815d3f7deb00ef85c77d2257743c43a07b160b6612f65",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+    "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/data.c",
+    "current_sha256": "4624978af57e6974f4e69025419563434441972089618f6f7be5af25cae3fab2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\data.c",
+    "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32.c",
+    "current_sha256": "1ed6b8a1cb59cacaa69e76704f4c29d4f127ff34cbf85d95ec561f22f2e81003",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32.c",
+    "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+    "current_sha256": "836c09b0f40350b501bd8360d0b09c9e7f6dcd65ffd220c2dacdb40934f22216",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32p.h",
+    "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmidata.h",
+    "current_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmidata.h",
+    "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "current_sha256": "aa5be967cd04266f41a20d0a85bc7cac4e4fd747cf96bce592d73afba4fb1053",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+    "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+    "current_sha256": "dd6d71ea37c7653e6fc48d31d123dacfefdbda4badeeeec0ea76d7c7113c0186",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmimscr.c",
+    "original_sha256": "41494b9f44e53863d31527ca082dfc286f34e2b4cace556baf501274d3eba061",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "current_sha256": "a0e25bce185c58a6f2d7309072628ee5d5bb7d71ee26c72f304ff56d552808f1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiselr.c",
+    "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/int21map.c",
+    "current_sha256": "0aaef2ba8f555513a69f4627483281a96312d026a9680f4232c7f0b1952feb88",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+    "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "current_sha256": "71a2fa5e186962a44f69f6c564516d85c26e037033d4c7a7851dc0345103e0f9",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+    "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/sources",
+    "current_sha256": "324f5c85446dce1a16b211c6e0f29310b43900181c471bd685fdacc23f2f5907",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/xmem.c",
+    "current_sha256": "14d221508789b51e026bd93e2b75669424d4eef0866fd8cea76b4c68d88d2220",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+    "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+    "current_sha256": "61dd2c2b28e2095cec941b91f4ddd0434f3872d92e8e7260dfa89580990c5a3f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmi386.c",
+    "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/dbgexp.h",
+    "current_sha256": "b523619de8441c1f51361e848c4bbf5a76e0bec6464b28a11c8241788f328a47",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dbgexp.h",
+    "original_sha256": "a915256a7a3796424ba8eb7ea2a257864a3986633752c870fe34762f3737ce95",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/demexp.h",
+    "current_sha256": "24662e12d46253915b351a80c37749fc48da212f6b219a782c84271a0145bf9b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\demexp.h",
+    "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/makefile",
+    "current_sha256": "47d85cddbd856fc6e677c0920f062e2c034a694f049b6c36a97b4d11473158bb",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/inc/memapi.h",
+    "current_sha256": "ac1802fea4b33b75d8276b387244abd1ada7b045f3f4ae51cd6fd23a54726a2d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\memapi.h",
+    "original_sha256": "0e72109252dbec2a9c79b54d28d0c2bda0967644dd9d1d1d2d789e8fd8aa8c99",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/mvdm.h",
+    "current_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
+    "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/softpc.h",
+    "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\softpc.h",
+    "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/suballoc.h",
+    "current_sha256": "0911bd4472bcab75ba1e7d501fffb276a71226ac0cb5de5bd837f23b2c06bd8c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+    "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/vrnmpipe.h",
+    "current_sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrnmpipe.h",
+    "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/inc/wow.h",
+    "current_sha256": "a6aa5375704bd870fb85ecc0be7c03d975f5efad1ba51bb3d39d5174682ea3e8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
+    "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/oemuni/file.c",
+    "current_sha256": "6d71d60d50f446bf6952277d6f198a3d65e7214460558d5a8db7c0229d56b9b5",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\file.c",
+    "original_sha256": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/oemuni/process.c",
+    "current_sha256": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\process.c",
+    "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+    "current_sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+    "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+    "current_sha256": "408dfbee8fb31878424df9a20a24e6a69847d006eedb6e948d93872c387c9ac8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+    "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+    "current_sha256": "4ca609045412255d3e2e12d33261778ea8c0fd422615ba36a3a06bc42dfd7792",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+    "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "current_sha256": "f1be73cd49cfed2100d716815068467d98b68515687147c4de2eddf65c6c0f46",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+    "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+    "current_sha256": "633fc2cd60b8a823beee3ef0e203dcdd62f6ee80c1db1c0e4a9f0113d9b6372e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+    "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+    "current_sha256": "a645bafef7279059c8657d6650d421073d0dede1e07415cdc8b5800bfb0b6c29",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_bsic.h",
+    "original_sha256": "5a7e4cefa28c674ad3047741cf8f78c9882f3c2362af09ae3a3dc0df336eed17",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+    "current_sha256": "fcfb7f8aec931a9e2d93dded7bb0357de58e2a1e433266ad711ce118551f1d6f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_debug.c",
+    "original_sha256": "56cf805a5a78fe257f4337f94b55aec634f6d7d6139296993623fa08a0655e91",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+    "current_sha256": "e364c078c6bd4ecc16780795bcd8eedfa02ff479ed977b5d39089687a2d71871",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_debug.h",
+    "original_sha256": "aa692f4f8680b717ab51489055c0c7578d0498f8af0702d17c4a0c56b165a88e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "current_sha256": "99e2e407b9b3cfaceb3da672d049e87a6a83d887be2108580a004236d8d59a40",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+    "current_sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+    "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+    "current_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+    "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+    "current_sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
+    "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+    "current_sha256": "ce5218761b42456b5a5eda100f48ca7318509e882111d436cfc51be3fc688e99",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_seg.c",
+    "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+    "current_sha256": "3fb8e1146b4bb74be98a60120e51d7929a77c8fd066699274258208c893f5808",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+    "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+    "current_sha256": "91fee998cf775d7aa16ff36921d0711485dc9a3a26a578b5ac59374106e5c8c7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.c",
+    "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+    "current_sha256": "bd2899fb2c68a293ad2e951d4042d3ac2c397c786161e755d83430d11674bf8c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+    "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+    "current_sha256": "e360ea4003450cd6ae834c573dd4af77eddab569530696b6cb8457ed1c5827b3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
+    "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+    "current_sha256": "643b6f1f66588c8560815906507424e68de59178f82ca164e4546a9f228ac889",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xtrn.c",
+    "original_sha256": "e114d6d858f5eafe2d7a4e8af560831d95f190ecf07209d91255f1140680943e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "current_sha256": "9f2b5a8538a0f097135345dbd4ed248b4c6ffb3a3bb65a35aece3f300892d678",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+    "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+    "current_sha256": "320031658eadcc273379f96e881757166f0ae7a1062348f8228ce4b005474b97",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "current_sha256": "1803b505e65ffccaf5af90d1dadb5a8de23518c28b52bf77de852b5683385b96",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+    "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "current_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+    "current_sha256": "b84d00ca2df86d247ad912fa6de17a91cd438b9fd84809fdd7be3967c2361dde",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
+    "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+    "current_sha256": "49bf538b29c800c726798b056f0e0fdfe7a87a023f638430299e6e3b68b89917",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\iret.c",
+    "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+    "current_sha256": "f7e2cac9cc2a8ca6504cdde0f3479f48794ecbeceb44c8c5ebbd2b8cf579573b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\localfm.c",
+    "original_sha256": "5dbb2bd74e82d5b87910db81f1411610c84a2d57a553e8cb78080871d19835df",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+    "current_sha256": "af9d3c1f0a0e617dafdac75a1075e49e4dacd88c0a64f64a10f8800c8a6b62ab",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.c",
+    "original_sha256": "3fd33dc3055ac59e0958a8335c9f3d3155d36d76ac1e178c7dd1e4232deb5528",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+    "current_sha256": "47bcf3e007623dd2445f5f433a4b2d261b29fea090422a2df05312914f8dc74b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.h",
+    "original_sha256": "a30d41e57c90bc0b27366debdaa1e6a23c214cc07d757e9f46c7b43fa636328e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+    "current_sha256": "5968ca934ab21697961e7ccf0ea06c57ca8a7307b89e55de8677c0e135795470",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\popf.c",
+    "original_sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+    "current_sha256": "e1e43eba1db580fd62d1e5b979559a93349691153c90659dfcc4144dc2c82ae4",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ret.c",
+    "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+    "current_sha256": "65d4463dee377d22a2f4aad5db849e27a60e88a2fe5ae0e597dea92f0c89ce9d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c",
+    "original_sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/sources",
+    "current_sha256": "7f87b0cff6f41a59084e736b906e6f2457f7580dfc2cdf98682d8855a13f4432",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+    "current_sha256": "a96f3121f03c3c649283ca6c40683fae6f44109a82bb053cfd66985066cb2d94",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\zfrsrvd.c",
+    "original_sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+    "current_sha256": "77f41a44151efd8569e0a362ff26da66d20e6f164f05101d67e13f28fd211c55",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+    "current_sha256": "1a105b734025635cde1d09fff1fa7accd4391055a9c24a9a4caa7afe70af218a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
+    "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+    "current_sha256": "c701f04ba695104c18d969e34474d38b61221db12e45a4f84e3efe104104dc13",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evidfunc.h",
+    "original_sha256": "887703f1d48d16ed578ffc33789cf126697b206a62219f5ca41aef795c414ecb",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+    "current_sha256": "6b50b143d551840f9faadda9d1717e1eec1ca38cb80c8e4b108d3bed5c17c10d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evidgen.h",
+    "original_sha256": "867a2c65cbc1b0980ac6a07002072fcfb638e4c24ebe8e513f4c93f3d1c6fe6c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+    "current_sha256": "edc62d53627bd206341910d43b7345c5c72a44018002e97a9aae79cd44dc7096",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\j_c_lang.c",
+    "original_sha256": "a6e112c6cf3250e2b7f5e75551cec34e2b0e9f1c9f268f05ce1a8f41b60e5923",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+    "current_sha256": "f1fc8c6dbf5df7731ea2e28756dbfb16e504d58b81d8df4de4124d842f67eb3c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\j_c_lang.h",
+    "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+    "current_sha256": "269ba5341434669f391c4bcf7e111e879d0bba6e6f7aa1fce4fd1a5d02cc5da6",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid000.c",
+    "original_sha256": "251bdd0925969a79d3ff98f5e19a249e99849d0db0c3c908ae5005040e8e7758",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+    "current_sha256": "7493b3508476dedc231d180ec2805aedf64ff525db449c239fe500bd4a796068",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid001.c",
+    "original_sha256": "963affcefa6e16b2754365787ada8c2a7944b8890d96807d1a98df44ccae2c84",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+    "current_sha256": "b239bbed52f17d86e5a21a86f1cdac71c98363f4495a8c699efa46d421d17da2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid004.c",
+    "original_sha256": "92f4f394a1325293279cdaf520dc493b25be739a5c91c35078735fabdea9fbfa",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+    "current_sha256": "636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid016.c",
+    "original_sha256": "e13a03dc8accb3746873c1482d19a168eaeb48641e5a509c0c20bba8ed5e9b3f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+    "current_sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid017.c",
+    "original_sha256": "110e8fd11ce828d7a3dfc7c51adcefb07faca83219a6a3d742d7f63bdc810706",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+    "current_sha256": "646eeb973481be2ae7a04d344e83ff62a564d870950df1bb36312702ebcabc49",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid018.c",
+    "original_sha256": "df9f565cbac31789e833c9fb6a26c5b8a9ee12ce3cb2f366f61037deca6415da",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+    "current_sha256": "3d5e4507ce015a031a7691e32995e5bfc26481f4f5c53e4d20fb93c35275e203",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid019.c",
+    "original_sha256": "4c3a5cd67165db676418868a2895d266ef61bfa9fed7e4389d0fbbf6b10b1c9c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid020.c",
+    "current_sha256": "db9b9da6a9e768a039c5244bcea2060a004ca7db6e91c906ad7771e58e46b1d1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid020.c",
+    "original_sha256": "6b57139c8273fa06bffd397cd4787ba0f4aab55bd63ef220aeb62b32238148fa",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+    "current_sha256": "3eea2f7d7cc8840dbb56e80dd5740a943ae052db6dad138d7a7b399c22fa7c95",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+    "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+    "current_sha256": "c1bd3ef5697fe2c07433170407a2141b287168f5b7c4e7bd22fcd5bf0623f9d1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ckmalloc.h",
+    "original_sha256": "49d55eba11bc663e678544a40536d1a799261c1cf67eb25b779a8c23465c81e3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+    "current_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+    "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+    "current_sha256": "ff732fd6c05bf24832a7099bb74e2fd96f7b3acb8032377726925b5dc080d25b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+    "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+    "current_sha256": "29a32c1af04baf69723844b01fdbbdb8902db3837fdb701a4f641685fd779d05",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\error.h",
+    "original_sha256": "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+    "current_sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfx_upd.h",
+    "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+    "current_sha256": "630653599afa008bc62d877b7eadb346b5e47b2ffdf80148dd4b0f5a24ee3e45",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gmi.h",
+    "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+    "current_sha256": "82c9e8daa81bb393466e4123c33371a61cdc8cdecbb52c51d0115d91a91d2dcd",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gvi.h",
+    "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+    "current_sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host.h",
+    "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+    "current_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+    "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+    "current_sha256": "0d85676fed97056a3d3d942976e130345bbcc27019db7894491c0440e04a0020",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mouse_io.h",
+    "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+    "current_sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+    "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+    "current_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timeval.h",
+    "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+    "current_sha256": "aa41c19b16d4d94a34acdbaaec5e6ba1583bf782ac7b3ee2e4a4ff2096b26d66",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+    "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "current_sha256": "97c765c94ad5e6471607063c01ba1df5ba1168fc0cabb084b43c8fce20948aaa",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+    "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "current_sha256": "a671c8e946e978ddc6ca0670eee7bcdd2b7b5a1a89b19537e2c122d258278ff9",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+    "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+    "current_sha256": "22fb57843f0dc34d940797b016b3da7f1a635cdfe4249fa015df49b39a7d86d3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+    "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+    "current_sha256": "632ca3bb954bf38a7537051f46590e73dd8479a17dfb3b8cf6be887d3f944add",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+    "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/main.c",
+    "current_sha256": "6d8e7a439f2ed06c28bc425d98d81774eba203155cbee85c3d2c719e476ae684",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+    "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+    "current_sha256": "0b55f0aec8c42f623f329b985533a71c615cf6a493eddb32fa941b7ed679c869",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+    "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+    "current_sha256": "8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+    "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "current_sha256": "ffcdef5635a766ed7668fc3ddf35bce54e5a621b2c4304ab682bc072d1b92b34",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+    "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+    "current_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+    "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+    "current_sha256": "0a0ccb97bd0c9f55f01ce3dc7b0aaee8a9e15c42c9bb38a9c841670bd807810d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\cga.c",
+    "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "current_sha256": "0f4e3a5e2d008ed1c4f5c85697bed569064845819d5fab62703cd266416196eb",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+    "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "current_sha256": "14b1be5d756ff06c3578f5f12a111595afff50a5ea3aa9fa39df6c4e983011f8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+    "current_sha256": "e18573faa00606dd8926ac310232e2b20fb090b7160b90f669d76893ed97dad6",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_vide.c",
+    "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "current_sha256": "49b235efd0b6ccb1c226f63e17b5838c5ed441487bc68340f4d3b03179117474",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+    "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "current_sha256": "34d62ae23a9cce365b3285fc42bc8941ea34c1c56d0e3e07be40fb1f817b0087",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "current_sha256": "290eb8a3c523fe360e4ad9521563ccf45fc9ce64403bd84477dafb3646fcec8c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "current_sha256": "c2d1f583e2f56f2ba4675acb0cd98d336ec635a68c8d00cebd2f2596816994c9",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+    "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+    "current_sha256": "9eec47fab4481684b32dbdb34ed9c10766ff64c292078e52f704f5189d50c1a2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\v7_ports.c",
+    "original_sha256": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+    "current_sha256": "a06d4ce01a61573a3e7ca53ab2cc8dce09c8b06c54bab46d5a679c9d56a4a849",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\v7_video.c",
+    "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+    "current_sha256": "dd014193d8f213dffa82a328b72a3a560af874693180b3e198366770c24f1e70",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_mode.c",
+    "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "current_sha256": "829d8f2a61a0688d6820f889a4bf0079c6097e4a0b54ba245243a9aeed4549ff",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+    "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "current_sha256": "a111cd00bfa66e7ae8c97be9c1e7a1ade42c58ad0ede06388d9dc242ff73974a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+    "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+    "current_sha256": "bf45e4fd68d706510fe773b2b9a319f7a745e268df61b62ed2e44b23d77a203f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+    "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+    "current_sha256": "2b8c6b2270c90eba7b92e3cf19ba693c54ed41f61c6a83044c3ed1129e338a2d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
+    "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+    "current_sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+    "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+    "current_sha256": "34e8910a1605eb0acc5e9e2a598146b5aa825be46bdaea44c849734d5746de08",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_hfx.h",
+    "original_sha256": "48a9b2bf6c4439301182aa118fe42afb8aafaa20146b2597021af162f2465f85",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+    "current_sha256": "3bc140cb9a26bfc6aba200b33c50e576f28fdca9811f8336fd6963a5e7bb0181",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_eoi.h",
+    "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+    "current_sha256": "fe830c74945f250bc59bca2804fa094a74121ce544edd3bd523041bef5ac2d10",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fdisk.h",
+    "original_sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "current_sha256": "c970a8824b9a5bac411d0015a1dd38e622dc8b5f7b318fe2bfb9eac96cf206db",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+    "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "current_sha256": "9d659d4faec311c4a7d794a65a1667dd4cc479d67f4dc680c284cf3bbefe7378",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+    "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "current_sha256": "6590bdf6e0241cf4c47d7f4d687ae5cbeebeaa60120287875d515f5cc4cb14aa",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+    "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+    "current_sha256": "2dd8f0c1231b3ff8a3f6141fbdf9733eb31f92c6811c7882129c43f89509aee1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+    "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "current_sha256": "f06ab0be9454376d92beec82a898169e0de441453c84fe6caa20be918310ea61",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+    "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+    "current_sha256": "035b3ce8157587e58c1dc64b01e60da69e2c5b6a6f0a864fd80bfd1ea3fda351",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_emm.c",
+    "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "current_sha256": "a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+    "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+    "current_sha256": "254a4fbd1632efd0c6a53295f6d7ec990a430d4c1fc4753ba6480a1406da163e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+    "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "current_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+    "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "current_sha256": "b9d2954109ef40f0e6b9e7cdfe62ab09caefb4b5bebd2f2a0548de92325639e4",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fdisk.c",
+    "original_sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+    "current_sha256": "ad9d34c559125ea962e37746917288ad03f002f7ce66b4eef0c840aa1d2c9c3b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+    "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "current_sha256": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+    "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+    "current_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+    "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+    "current_sha256": "341b0bf48a4b33c3571fbaadd70958433e690062b202a927094de27a6d92dcc5",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
+    "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+    "current_sha256": "466d69a12cfd774f5ea373d0a3065dcc12022ac18ae9bddd372217e9349071b7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_keycd.c",
+    "original_sha256": "4de067c013b25120a09ec7d7a0bb5f0fe16eaba59b665aadbcf891cdfba0caef",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "current_sha256": "f0c19da684a388d11b52ebe953817453962881319fd2a7f769d50e17d07ae801",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mem.c",
+    "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+    "current_sha256": "c85bec175be1daee97058b782fa63543c0586d408923b62cd76541933eee7b88",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+    "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+    "current_sha256": "6c239f3acafe6539ab461412c2dd3111adcd6ee778271f13436463ae2235cc9f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+    "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+    "current_sha256": "94ccb215daf9dbf46f802d64d4bd5e21e9cf02452077da93df143a08c3bf6fe8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_pif.c",
+    "original_sha256": "4ae2c1d2c4a66dc63c9b2ddd673fcae067f2fbdab953dc8d96aecfcf03c262bc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+    "current_sha256": "5fabe2d9ac47892c16699e891a50c012e7cf2c67dd0c97d74834e1e1b2c047a7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+    "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+    "current_sha256": "00cf1438457ad015c20d924d54dbd96b0cd4838933874d5adb9358a3a6410fc5",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rez.c",
+    "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "current_sha256": "cbb02adb2f1a1c93faeffb988c153c5f8dc7af5c2c062fbf120a8da96647529b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+    "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+    "current_sha256": "10a19075d285cd629b0d283f40eadabb07ca96070209bf2633d0539aa4042927",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sound.c",
+    "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+    "current_sha256": "4bc1a569804cff7202e33a699cca49b55dea43c46eb10477929c6056fc1cbf58",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_thred.c",
+    "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "current_sha256": "2644149302fe702f19854af93df996954e56d49dc4f505467f3a58382ea810e4",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+    "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+    "current_sha256": "d0563ef645068dcdc7040d7c60a022bf71c7c54792c9e3786d7fef3a3b2aa1cd",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_unix.c",
+    "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+    "current_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+    "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+    "current_sha256": "b9cebb194bb17cfea513011a2ed6f576bba3702f7d38478676528c46c22d2572",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
+    "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/sources",
+    "current_sha256": "fee26476cf137113c8f24eb9afac591fa246c956581f4f5c59e7447ec66547b1",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "current_sha256": "036a3d66d5f0965e3e9e5f6fc8cf9fd2b1c7daa3c2cfc9002a6a6b75e3cff6dc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+    "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+    "current_sha256": "561730fa4ed3d22c681d64d4e11ba21164a09e3b86e9c00fb259cef55f16c3b8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+    "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+    "current_sha256": "a5a9a5285ab550bb113b2e7dcbe976fe484b1afe34a676d70e48b2b8c7a6f0ad",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/suballoc/sources",
+    "current_sha256": "3e685c3bcdcb371b7cad76c212fee70cd70c39e923b9815a00f7f2197231b932",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+    "current_sha256": "b2323aa56f0f15d8bcc5c8374a2889f062c0c0760fcd2a874dfaca40f345f693",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.c",
+    "original_sha256": "1e04779ee75de6b1cb294e4b036e68745f84815d73c6037ee577258e97c629ca",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+    "current_sha256": "e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+    "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+    "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+    "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+    "current_sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcdbg.h",
+    "original_sha256": "2adbd4b0705a98bbb399c9b333551afa8999af1b27a008029b9fb871f787ff8c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+    "current_sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+    "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdll.c",
+    "current_sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+    "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrica.h",
+    "current_sha256": "1b2129e68bdaf9d3cad5f7568740b451d7e64efd943a06a43a88c15a0ba45621",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrica.h",
+    "original_sha256": "b93042ce17ae454d6bff085b15d93221bc86adb1fde50620675bf41ee34d8d75",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrinit.c",
+    "current_sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+    "original_sha256": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrmisc.c",
+    "current_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+    "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrmslot.c",
+    "current_sha256": "9fe36a96396cdc776db8b58e0b5c189104f030f733163052566ec09c0015c726",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+    "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+    "current_sha256": "e0dcb485747237461e39e33032e192ede81463955a16ea8b78bb3b9a7412053d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+    "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrnetb.c",
+    "current_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+    "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "current_sha256": "4def006444b777d4d22b52ae1d9cab1d37c0b8525e7fa8e2d109e4f39df08131",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+    "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrputil.c",
+    "current_sha256": "ca92d822cc6626218ae76b957dac963711e9895c36072781a4c691e53c0b91a8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrputil.c",
+    "original_sha256": "1440cd1379dee1bbe65b0a1e6f6a637a3de48765da85cfd94153e8876a66fe16",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrremote.c",
+    "current_sha256": "f59963b1f71a67b65896d7d9af38c507e2bbca8da2d059defd76a6d6cb7ff3a2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+    "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/fastwow.h",
+    "current_sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\fastwow.h",
+    "original_sha256": "0a59ccbb6b0bf66982352bfefda5c08867ec44dd9ff55731d2b701035d684520",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/isvwow.h",
+    "current_sha256": "ff7e6abefe7899bd250a9e03fea75d203dcdc41232c5fd4324675111365263c2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\isvwow.h",
+    "original_sha256": "3b8357d8fa20cfbebcf5307d0abf0471ad93d1c74cd2c9bbe2ea42e9d2f4e132",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/mapembed.c",
+    "current_sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\mapembed.c",
+    "original_sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/precomp.h",
+    "current_sha256": "b4390bf63c220581e96155e46271d28b8ad0222f7a83129b7b04313d105be072",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\precomp.h",
+    "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/waccel.c",
+    "current_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+    "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/walias.c",
+    "current_sha256": "7f210628798755a9de6bf091504ade77e1d185f1b32c65faefd3bec7d7989047",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walias.c",
+    "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/walias.h",
+    "current_sha256": "a70043dc23477361031e427f555a11abff2218a74878258981110b70e35d4fdd",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walias.h",
+    "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "current_sha256": "fe3330eebda90de5848e90d9e10d8b05e29c9d274b04c878ba811992baec2cb0",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+    "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wcntl32.c",
+    "current_sha256": "185fc06a91d733ed3854db3d0b2f4124ea65c339f4b50a0f0148923212d20c68",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcntl32.c",
+    "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wcommdlg.c",
+    "current_sha256": "2ee34b92c91450d654f867e68ba792cc8ad3f9981850579b5e305381eaf533b0",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcommdlg.c",
+    "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wdde.c",
+    "current_sha256": "d46ec86968c0892dab8f2afdb910b7bfa08764d33b0852d903650b3be424b742",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdde.c",
+    "original_sha256": "859efd3356f46b646af8373112297212de2016de9a2587af580d6d99b64df6aa",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wdde.h",
+    "current_sha256": "0374c7ed6dd981d13c551f5fda8356b33d9f632eef8b3be90b754f42f308b902",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdde.h",
+    "original_sha256": "05839ffe54047bacc09dbc2d9ad76e8e6dfc4adfa9d0de324c7d9f25001609d4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wdib.c",
+    "current_sha256": "5adbf670425782914a2fdf15dbb9b3519409bc43a105e4f7f73e671b19b76606",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c",
+    "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wdos.c",
+    "current_sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdos.c",
+    "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wgdi.c",
+    "current_sha256": "da0ada479ca88dcd5f2d53781dc4f66197c805447ccdcd0a3ca49463d68d1a6b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi.c",
+    "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wgdi31.c",
+    "current_sha256": "a8506e1732948134d112501c2fc7910b7aa3c00bc8ca506adfebe6935af87fc3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi31.c",
+    "original_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wgmeta.c",
+    "current_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgmeta.c",
+    "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wgpal.c",
+    "current_sha256": "cc47d423d9b8f21f490abda9c3f1f1c321a4ab4aa847602ea447d3b70b70510a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgpal.c",
+    "original_sha256": "942bd3c12615416a532638df4b53a08e963bd1e60dd0d081fd34765ace0872c8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wgprnset.c",
+    "current_sha256": "f891a6315cdc234c85b17aa7b784b9dfce0703e85c7e924f7e78b3ee5d0c86fd",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgprnset.c",
+    "original_sha256": "7e53074328ace93ae8ce39fb218fa780ff868999b40f7904fdbbff45fbd7b990",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wheap.c",
+    "current_sha256": "087f929d0cbaa781849d4021ca6d9ed5afa5c0711b85b1c162102252108806cd",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wheap.c",
+    "original_sha256": "be3af89da01d5a6f296a47b7e505e2d6598b4c4e1a5cb35e76dab3ac839848de",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/winsockp.h",
+    "current_sha256": "f5cdf5ec898dd41c4c9657543b4d1c295be1dc6fa88ec5d5d525a7770510ba4e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\winsockp.h",
+    "original_sha256": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkernel.c",
+    "current_sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+    "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkfileio.c",
+    "current_sha256": "78a2b21beaba778578aadce3a557ebcdb0cbb9ae10f51d8539f382fe7db02637",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
+    "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkgthunk.c",
+    "current_sha256": "61dbe7c31ffebeefaa8667432e6ca7c846914aedbe08fe4968dafe042e537588",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkgthunk.c",
+    "original_sha256": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkman.c",
+    "current_sha256": "915e49c909fc9160ad03b11bc02aa62948b88efaec57e441c2b15c4db3c73762",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+    "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkman.h",
+    "current_sha256": "a345740677c25158c65fd520c54ba87c6c3176c9594407e683442cb91313fea2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.h",
+    "original_sha256": "730ec4dee5b07377c8533a82596ba9a9934ce74af355603aa6bad2637ad3bc8c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkmem.c",
+    "current_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkmem.c",
+    "original_sha256": "9d0fae5e7719398d5d9776602664d5f9a0dd4bdd81e79616ad848035007d4722",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkmem.h",
+    "current_sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkmem.h",
+    "original_sha256": "313bd585b854ddfa21d8029814d78a5560aef3564179cef82e5819fbf64da524",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "current_sha256": "bf9d4cdcab46d5686e81fce7b85c038cb8a22e27f91c2eea06bd3e4cd9919f45",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+    "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmdisp32.h",
+    "current_sha256": "6652508bea431d3a115a5e68ad7e7d749089df58ba631f3a0e4482980cfbe187",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.h",
+    "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmalias.c",
+    "current_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+    "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmalias.h",
+    "current_sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.h",
+    "original_sha256": "48bcee7abcca92bafd6dcea4bcfd9437bae10c170bb9bfee4db587e00e134cc0",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmedia.h",
+    "current_sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmedia.h",
+    "original_sha256": "7b2e07ac7da3864922a65586539c19945344ed04df1d53d26e38119102a69801",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmstruc.h",
+    "current_sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstruc.h",
+    "original_sha256": "8c8c764f500c47689f5d97c485e8d81c6361130c6ce744a3dbe8d2d26c1eaf5b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsg16.c",
+    "current_sha256": "fd125d80a62ad1307a9fa5f723c6bb4cf1b57cba35b1aaa80c67b62e81effda5",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.c",
+    "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsg16.h",
+    "current_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.h",
+    "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsgbm.c",
+    "current_sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgbm.c",
+    "original_sha256": "d7ef837d592221481c988ccb2e164faff9d7a0b6349b59e1bbc3841323a98692",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsgcb.c",
+    "current_sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgcb.c",
+    "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsgem.c",
+    "current_sha256": "6c61becaecc2e0546384932cdc71685de45f027415aca37143f8da518f82fee4",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgem.c",
+    "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsglb.c",
+    "current_sha256": "410569f80665c3eea87bba3cde6a8265647f9fc123ace234596f6e396c3c64e2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsglb.c",
+    "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsgsbm.c",
+    "current_sha256": "7932d60818f79517f1de608ba021dd4d6d2aa2c9d1ef748ca30a7cf972b402af",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgsbm.c",
+    "original_sha256": "cf1ea646693339e8c2b03875dad6c7b4a92576fc80f330407e60231e2689b18e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmtbl32.c",
+    "current_sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.c",
+    "original_sha256": "8fb4f02963ceb0772e69749d703868273f942978fa6baf162e039065dd957bd6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wole2.c",
+    "current_sha256": "78d49c329057a5869be53c7e0c153668927f60607b30a11c07b93ad5465b093e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wole2.c",
+    "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "current_sha256": "18af789dfeb1e4c3085231c3b123bce821641c2d7d0d2364ba3926ea873cc9ad",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+    "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.def",
+    "current_sha256": "2b0dca9f3f81a10c66429e4a13ecb55ee7b91a5e4ed9b76c384aedbdbabe7a56",
+    "original": "",
+    "original_sha256": "",
+    "pin_status": "non-C/H origin to verify from predecessor evidence before review"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.h",
+    "current_sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.h",
+    "original_sha256": "06148a93a63faf7fc5480e4c9f80c98ddfe6e2a0a782eafe6a6fd1ccdd46de27",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32fax.c",
+    "current_sha256": "22b1487d1377ef4d2f51bc30c0b871320641f9436d903672e3a6c919619d9722",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32fax.c",
+    "original_sha256": "855ac6c5d6d6ca97cc78802994784e8612e5eb6197533790466664bf0e892700",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wowhooks.c",
+    "current_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+    "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wowhooks.h",
+    "current_sha256": "24163a7b3a5ee861b1ed3c79724eabcfa694ea8945f8b74ee153be4c617afa6d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.h",
+    "original_sha256": "82e539d3278858b018a742c1890862471bca2f2e7166c663fbebba0c02e20dc3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wowtbl.c",
+    "current_sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.c",
+    "original_sha256": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wowtbl.h",
+    "current_sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.h",
+    "original_sha256": "343409d8adc9c2f013fbc3c44c2c1f611556321832c95037ef7f90f7e439fe01",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wparam.c",
+    "current_sha256": "0131ce3113859ab30c69ce29d9977252c9f856ac04f7a70d7a5d45cab06230ff",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+    "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wreldc.c",
+    "current_sha256": "3c6a944e5052c2d65950f7512a7c2796277ec1ee5c6b14c3dfe25a81c07c55f2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wreldc.c",
+    "original_sha256": "f4ede08ef2d6bc949cd2500c75af546ec68c0e017abecc1a6c624f7c1b5a0d20",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wreldc.h",
+    "current_sha256": "7c9d170156bcb06f240b2268d369f7b7f75998411fe35fe88ad1de8049ea9fe7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wreldc.h",
+    "original_sha256": "63fb72740460f367cb75fb014562f7c278b515b73689ee0c981481f96d5961c1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wres16.c",
+    "current_sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wres16.c",
+    "original_sha256": "24324d4b95b7c5ac102e9751872af1db779efc0cff223b32aa066034cb874ae9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wsdata.c",
+    "current_sha256": "01441093111cbc6d9af499e16b05d8367a869ea1cb19e238b975bc781b94f8de",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsdata.c",
+    "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wsext.c",
+    "current_sha256": "d42930eb6d473d54a129ea496ab1694a305dda76b4d2a513cc72283abb593ec7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsext.c",
+    "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wspool.c",
+    "current_sha256": "5e7055d8927343c2f9c7009cbefbf05e37087085023efc910edc7d4eddfb0935",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wspool.c",
+    "original_sha256": "c76bec31ae9020ea0173c20d42986f36e6888a315a5d27e91e5cbf2579cb2ad8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wstruc.c",
+    "current_sha256": "de82d10775e90274f9fd2fa0aec330f564c65b730abb892ab97a23b947091ffc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstruc.c",
+    "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wsubcls.c",
+    "current_sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsubcls.c",
+    "original_sha256": "b37021cb2a0480f3aca685efb8006b32d31b0fe073b6b3fc9b99f05764679e4b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuclass.c",
+    "current_sha256": "25165d4311060229d4792ff598b1bc66971b9f369777df28df0131117f4736ce",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+    "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuclip.c",
+    "current_sha256": "de38d11cdb17f65d73de3926512c7fda5e9b22e089b7cad9ca868b26ca6695c3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+    "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wucomm.c",
+    "current_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.c",
+    "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wucomm.h",
+    "current_sha256": "a35cc588a1844c80f5818cc8ddcdde8f6dba64815d13393cb5cb6d6ad66512c2",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.h",
+    "original_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wudlg.c",
+    "current_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wudlg.c",
+    "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuman.c",
+    "current_sha256": "e1d22d650aca23a30a45bde78e746dbd1cfa601bcae63a117cdd060cd917b009",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
+    "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wumsg.c",
+    "current_sha256": "efd09d864475678d3b81d22bf029cbc4b95a69247c420cf783d5a7b0974ef81e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+    "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wumsg.h",
+    "current_sha256": "950f8b060f56a1d42131d5b4cb35ae16d1cea043f50cda83c890bd015f88b52f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.h",
+    "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuser.c",
+    "current_sha256": "5afffde7ca5b9f9cb47b1ca6b4076ae42deadd1e636632d68d16572bf50fffed",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+    "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuser31.c",
+    "current_sha256": "7f709e732b386efe708a28fcf705f429a137ccff2968d786a0efe9d72748a6dc",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+    "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wusercli.h",
+    "current_sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.h",
+    "original_sha256": "2731955b6f6d24419575806304481b7d866c99b552ec8da756fc956b5dfa4b2e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wutmr.c",
+    "current_sha256": "2dc58f85d74c4b8a9594d70b5447427a5839d4e878b63f67b95be1c3643bfaff",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wutmr.c",
+    "original_sha256": "e42bc0c7e9dc199ae19414461d65ecf86b7acc55c6d7523792812d73f158bef5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuwind.c",
+    "current_sha256": "7937b35a43a66aad18e888b50cabf24c25ac9d2f10a88e340877e2480deaa23d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+    "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xms.h",
+    "current_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.h",
+    "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsa20.c",
+    "current_sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsa20.c",
+    "original_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsblock.c",
+    "current_sha256": "37f752a43f5991315ce9eea8d706117b060736fe68dc69098215b81e71e5a1a3",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsblock.c",
+    "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsdisp.c",
+    "current_sha256": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsdisp.c",
+    "original_sha256": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsmemr.c",
+    "current_sha256": "aa83a34124d03d20a7979a79f7729a4d3c452ab9f4fb423b0e76ba3e56d37a44",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsmemr.c",
+    "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/ntdll/csrutil.c",
+    "current_sha256": "d0e4dc5e4b9b33ab7f9b838565b9a8bd629fff79e2cde00e3bcf0b7c199dac6f",
+    "original": "O:\\repos.external\\OpenNT\\base\\ntdll\\csrutil.c",
+    "original_sha256": "7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/ntos/ex/probe.c",
+    "current_sha256": "82829e6f0b8602c300a7d9f1f8941122cb826c74d4cf52d03b4371a1e88ee5fd",
+    "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+    "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+    "current_sha256": "ea3a19b4cda1177297e2ec5d60d03bdc737aa38773698e81ed8755f6d5c67cf1",
+    "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\environ.c",
+    "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/ntos/rtl/error.c",
+    "current_sha256": "02a23c7a1d10e4364765635380011c37caf32fda037eff74ba80144f158bab38",
+    "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\error.c",
+    "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/ntos/rtl/time.c",
+    "current_sha256": "988060c1b47b183dcfc13917b1db3c86a08289ce6b3e63f9aba442695dc299d8",
+    "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
+    "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "current_sha256": "8f68cb059e78e7a43a4ab87eb455f6a16ae1dd4f14a24a7db7ae5c115464226f",
+    "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+    "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/win32/server/basesrv.h",
+    "current_sha256": "0974a5d72fd68252346356748e0bf8d16b7ec4f8e92b9c8d34033a204479e589",
+    "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\basesrv.h",
+    "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+    "current_sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+    "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+    "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+    "current_sha256": "a848c8dda53bfe0d9c739358b6f345bd842f8dba2590db28764b3151d2ace966",
+    "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.h",
+    "original_sha256": "f590ef866f87ce80671c4b6f4e3bbe94347342e6b723bc062ed6f044fbb3820f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+    "current_sha256": "2d71a1326faf18978f0d691e779ed7ef3723b3a1fdd41cc19b721776cd168fe1",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\api\\apibuff.c",
+    "original_sha256": "420a2973fd10924de9d6f709a88a79ef05bad74c61eaea1ea5b678b181c31161",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+    "current_sha256": "36a7fa520a0716564345cd4549ca74536a507052215dd5fd544a22e9c9dea1e2",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\memalloc.c",
+    "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+    "current_sha256": "8ec3e57c97586a761f4411268765eca936610056d191a08e1d552ef9b4d8a338",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+    "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "current_sha256": "ad17110e801f15585c8b8a7ec76b6ffd43973a57227fa5c0685006b087c0ccd2",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apimsg.c",
+    "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "current_sha256": "30543997ed936c2e9b1000e1927755850edd24a2b244b726f4fd3359770d6968",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apisrv.c",
+    "original_sha256": "070437121d8a1ee57ea07672ea9aba3e85a8f4b80b802034cc208383dca4e5cd",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "current_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apisvc.c",
+    "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+    "current_sha256": "b2cf945c8f00a8ef9364ed6d1e53560e231bdd8bf8d92ecdfd47ffb6f2c3c6eb",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apiuse.c",
+    "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+    "current_sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apiwksta.c",
+    "original_sha256": "8e0dbc5c1759aef57765c63ca8942550370bb260bfcd67d97f8b2e67281cd664",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+    "current_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\xssubs.c",
+    "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+    "current_sha256": "9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\xsunicod.c",
+    "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+    "current_sha256": "317b926ef3b1889648a136beb8ccc4ab3fd83c2df4d4f0d2a669911387d213a0",
+    "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\xsunicod.h",
+    "original_sha256": "9c9f23b07297d1292cbc1e3da1ed05956f767f684977a825fc4eb08bcba5295f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/private/inc/dlcio.h",
+    "current_sha256": "b14a97c6c265598a24f96eb5fbde47853e3da7ad6ab22585cd1d657418347e00",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\inc\\dlcio.h",
+    "original_sha256": "5059d127630e19906e973266e34ffe8b648181b0962900551964147e527602de",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+    "current_sha256": "d993fbfce54cfc3cf05fff55e59ce9331499491fe04035e7d6317a4be3f67735",
+    "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddser.h",
+    "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+    "current_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+    "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddvdeo.h",
+    "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/align.h",
+    "current_sha256": "8422ea06d6d753127248f16b74fc6913d34ab1e77060171c67ca34389c713ffe",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\align.h",
+    "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+    "current_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbgtpt.h",
+    "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+    "current_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbmacro.h",
+    "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "current_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbtypes.h",
+    "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+    "current_sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdm.h",
+    "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+    "current_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\debuglib.h",
+    "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+    "current_sha256": "fa8fbaa548b0bc86126ac8b612bb0239f5d9be1f7ddf0cef0b853dd8cb149725",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netdebug.h",
+    "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "current_sha256": "81e29a78112c13ea9fe9d285a9c03025cf876e076e98160c074dc01025f5dd71",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlib.h",
+    "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+    "current_sha256": "4c54f51c544841e51b1b16781d7ab6fd156b156d98b9e947a6ab80ba7c7c2426",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rap.h",
+    "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+    "current_sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rapdebug.h",
+    "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+    "current_sha256": "9572d77cf8c9b94cd999b18d20e0a77597e1b3dd13285864bb05328f0a0fab9f",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winddi.h",
+    "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "current_sha256": "1292581db79cae5901247ab9c00a4d6c9fad18ebb1a257e2031ebaa1ab744c5a",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntcsrmsg.h",
+    "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+    "current_sha256": "4ce1e512b522bdf9abb83bc0472d18965f8f806ddefb9bc2528e2f0962540cfa",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
+    "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+    "current_sha256": "f6a3e397e878eccf05b5126b3c68cbfefb33cda2e058adf239da2bff6c74b7f8",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntlpcapi.h",
+    "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+    "current_sha256": "534aad7024d6429f5dc5c8aa8a133596781429e76d94c1a04a97d9055d56a611",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntpsapi.h",
+    "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+    "current_sha256": "5ae1450035008742e0503a0573199d6901eee168321c2d7d489f04b92dfbe24d",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntregapi.h",
+    "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "current_sha256": "f990266666c8a3cbcfbae4f231c6573a9d11f895608cab01e9008c78b05fd39a",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntrtl.h",
+    "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "current_sha256": "f48eabadd27d8ecdd97ae5d222e9d221f508416d83d821ab53c07760fed97a71",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\nturtl.h",
+    "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+    "current_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vdmdbg.h",
+    "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "current_sha256": "896f3a004fc74d626e4010479ecc710db1847ee86a2955f7c4c822070d687494",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\btnctl.c",
+    "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+    "current_sha256": "02ed31f896cf0cb543d35352c12e00013b126db89faeacddbd9a32abfb8c525f",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\cldib.c",
+    "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+    "current_sha256": "422bda00d59863f9a899b6a13a2da3fa8ae1255d0cc1cacda0432ff2c1e20f2c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+    "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+    "current_sha256": "52acb9321a7cdaba603b0e943101b72f913ee9421ffc110fa2cc23a6e2fd405b",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+    "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+    "current_sha256": "64b64c159b3965631f11e7823bf5b87f0d4831526c26726625edf9bb57464fe2",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+    "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+    "current_sha256": "e8a0639ec579b21823d536369408c12160220219d60e6aaed0fdd089d7530fc0",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+    "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+    "current_sha256": "e60cfe1ab3d8bd8b8486e2012c617c0f066a7ab387a61f82b575d2407dd37a73",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+    "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+    "current_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\combo.c",
+    "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+    "current_sha256": "09b5a77268835e633f174cba5bb6715d7dc9158374bd05f3ea3ac4a77133b838",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+    "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+    "current_sha256": "1869b234acb01f6b75827f40d49a5322248e45473832e21f210fea10aac99160",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgend.c",
+    "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+    "current_sha256": "8b327ed645e66637ffd33fa91d6d41181c4552dbb50b08156d615ceba92ecd66",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
+    "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+    "current_sha256": "33f0e9f5998864fc323e197f4ea0b5cf2ccd5d2ad1c59febdb1efc83f5181b06",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
+    "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+    "current_sha256": "ffc8da234cfcc2c446b9e30eb1a5b0c05c485a178ed0da78bbc1596877e413ed",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+    "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+    "current_sha256": "23eb85a4c7240d9d80f73526b0ac23f9ca9c7cf7c5bae061456e5f67f2f09d6e",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dmmnem.c",
+    "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+    "current_sha256": "b0a803cd55d6dcd6c8a43a8e368ecf0ecd90ed42011f7b14d5933a2c55970267",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\drawtext.c",
+    "original_sha256": "014e568b4f4ae57d54b8afc4502c890cd19ef1a698273561d9627b1b9c9ec10a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+    "current_sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+    "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+    "current_sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+    "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+    "current_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+    "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+    "current_sha256": "39b651554ffcc5a763fe7870a7a81cba99ae3f6b6066f3812df419a76372330f",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+    "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+    "current_sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlonce.c",
+    "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+    "current_sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlrare.c",
+    "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+    "current_sha256": "ad4c7aeb3dd736b89ae9d673057ab9169a41159e3ed4c223d81a96ee950eb2a8",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edslrare.c",
+    "original_sha256": "b33dea4aa66b7713b651b259a37d7f993802f40c042514122b73580baec4f0df",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+    "current_sha256": "a71a30beeb6a3bce234b549e6a8554f95f570d8af5ac7214069a044a34b22150",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\globals.h",
+    "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+    "current_sha256": "bf6e3410b3040c2b4075a9602138225101520eaa836ee7ba37cb6beb5cee09cc",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c",
+    "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+    "current_sha256": "00a301aee092b9e191de116445c9b3fd21a059893b2ee0e99a963dd7ea24c008",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\hdata.c",
+    "original_sha256": "3bec21c4bb3caef0798208693a89012df6005c6a330f0f670f974a1ce821fca2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+    "current_sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl2.c",
+    "original_sha256": "a99c9ef3b6a7a07b219ddda18ff2fb6a8a11c42f5378e5f77e10e336ad7d1744",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+    "current_sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+    "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+    "current_sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxrare.c",
+    "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+    "current_sha256": "17d55282c3f42fcfc50a908b0e948f6945aa1cc7344a4a35249ea662c8a5dffa",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
+    "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "current_sha256": "f8c4a2936f7a0d61e73f02121fc33f92985c12ab51849c81c39f2b9b4a0eb3ea",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+    "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+    "current_sha256": "6cad16a9876d8a7ab5a926b63848b4106b0b70564fb1f998762e5969ff5c82d4",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
+    "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "current_sha256": "cd1bc65bb851b9b6ccb3f708ee1b79d0af63f9d757b478fad48c8068a34acb98",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+    "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+    "current_sha256": "7fc717f15fce6db0ac10e7728b7321ac5cecfd14a5c72611cb5b33f01ed682a9",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\winmgrc.c",
+    "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+    "current_sha256": "b667d09291a27bc607da80aa6765d3c0835051a5325880ba2368983804969c3a",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+    "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+    "current_sha256": "bb3570387c93050ab73b346fb304e599eaf05d3b11fec82efb6da920f0c34244",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+    "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+    "current_sha256": "0c6402b1444df4cad026ade4751202af7e7ddc81ab9bf607fb8260864939ea13",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntsend.h",
+    "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "current_sha256": "e3c22ccfc76affb9911b67437a2e9dc09692dc5c70143ebd386a0c9de4701fb1",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+    "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+    "current_sha256": "eeddb9850d34aa19b3fdeb5054e463f2e196f72c5acd0a3dfa0feca244cba61e",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+    "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "current_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\cleanup.c",
+    "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+    "current_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+    "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+    "current_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+    "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "current_sha256": "e4a6190ec6c46a3b5b52c8b1d04db74c9bb772cbbded15cd7debc88685ae9eaf",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+    "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+    "current_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+    "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+    "current_sha256": "60d175ef3364c1627999b79fef4450088fefd3a5a738df607b488bd568af72cc",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+    "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+    "current_sha256": "da1796ff7d6857acd766499dc4cdaf39bba649e989f5f386870e453f720b4e11",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\miscutil.c",
+    "original_sha256": "3ee6d2ec087b1c6e32de266861ff2111514da909b40ec4914105b0f4480e8ae1",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "current_sha256": "7bbb5a6b3837a733526297314a6bf97e09f7c6581ce2f3b67bda89ead497213c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+    "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+    "current_sha256": "39d741144fab4e0e53dd2ac30cdd63ed84ef93c7bd55a4ef7e5790a956d70d16",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+    "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+    "current_sha256": "ed806802a7dfceefa0b7ca16891dcec93d8697f07cafd8adb7a99c35f381cf21",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+    "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+    "current_sha256": "278332285649e2c535998c94b467f9e0cfd3f7341a97e5fb7a8710f8d02a235d",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\random.c",
+    "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "current_sha256": "2a914a39bd4364cefd9b41f92cc35e56c10a172d643ae69af715ed9311bfa915",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+    "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+    "current_sha256": "3af6d27e2baafd39ad745a92a5345a4797e73626875b7ce1d72cc2e8d6ea0af3",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\taskman.c",
+    "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+    "current_sha256": "f0649cedb6a6327c699e44f964d7b171ab5938360ee7fa44d51e9ae025fd18ba",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+    "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "current_sha256": "f78aa669511b05c82c04f8b44bf04d2359465a803b418a456a1d264df95aba92",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+    "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+    "current_sha256": "db7291ed0d0c88752195e45e4bb7d00262cbcf21c8326924bd617ebc7872535f",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+    "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+    "current_sha256": "727c7d0d9db37906236b54ed554c20f9f068689750501a92172929920ffa9185",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+    "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+    "current_sha256": "0cbc2bcbd53a1f10841f2a66c5b51c086ddde931f8c95cd91a82d8cc30c72e16",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\getset.c",
+    "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+    "current_sha256": "d56c1550a4e1969665434b9acf8e8c339c0771a0c26e5887fc0b33ec24bfaf2b",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\help.c",
+    "original_sha256": "7ffe7d97c36f1aa6ab119eb7f0c9ca70fd8eb57cbefe322e40d0c5df041be16f",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+    "current_sha256": "16fe6ac52ac0365b94a37272a8c80cd47a1edfd0042c9f076cb94c0ad1c427e4",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\random.c",
+    "original_sha256": "5147fce6825d1f7e8d69298e4da617f0fe414150963cff391ee53c856a0f5b2a",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+    "current_sha256": "e156cf5a19cdd03c90152b91e26235c06be7beb915d7941f4e29cff9b6e35863",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\rect.c",
+    "original_sha256": "7eb718ce4671ba8f1f50f891f61d4bb1ef2a1ebef5f55c09dd145310ed496354",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+    "current_sha256": "f4b570b778fc22b1f42ab7e4327183e87aab99c9630d197f1a0bba760089857d",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\text.c",
+    "original_sha256": "d2dae26e4766c2567225cb6bfc8147b4e80955b4ca49dcaf97b6193e7067a8e2",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+    "current_sha256": "f20911c98a0b6fa2e19f5952428aa5a5fb0f5385166fa523a3da723290212a85",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\userrtl.h",
+    "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+    "current_sha256": "efe40b062547f1b6201fd81455c1a4b32de265cc81ae55795c8ed0fd72f69e74",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\winmgr.c",
+    "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "current_sha256": "92ee276bdde1f5a48d85903d3627826a09210be0b7977773148addb5a05c77bb",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+    "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+    "pin_status": "verified-existing-census"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+    "current_sha256": "0f4f3b63034459ac1f0eb7c3e951348776512a7167f75733cc4c64da62a28cbd",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\server\\exports.c",
+    "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+    "pin_status": "verified-existing-census"
+  }
+]

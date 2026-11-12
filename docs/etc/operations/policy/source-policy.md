@@ -331,3 +331,15 @@ admission.  It must never overwrite an existing selected/mirrored file; every
 row carries source path, SHA-256, size, target path and its no-build/no-runtime
 disposition in the import manifest.  The OpenNT/OpenNT-4.5 union remains the
 only T301 BFS source-definition input unless separately re-admitted.
+
+### T483 remaining-diff original-first review
+
+Owner direction after S5 P2: presume original mirror code valid. Retaining a
+local deviation requires concrete evidence that original restoration fails in
+an actual supported build/ABI/runtime context. Hypothetical risk, generic
+hardening, historical retention or tests only of modified code are not proof.
+Restore original where appropriate; otherwise seek the smallest necessary
+adaptation with correct original logical lines. A proposed unchanged or larger
+mirror diff requires stopping at that ordered point for owner approval.
+Completed points and deleted files are excluded from the new review population.
+This does not authorize guest modification/rebuild or override source provenance.

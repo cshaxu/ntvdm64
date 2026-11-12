@@ -2,71 +2,58 @@
 
 ## Current Work
 
-**Active: M0 T483 S5 — correct registered mirror deviations.**
+**Active: M0 T483 S5 — remaining mirror differences, original-first re-audit.**
 
-The owner authorized S1 closure and has now approved the internal T483 sequence:
-S2 restore original (76), S3 delete (120), S4 minimize/consolidate (117),
-S5 correct (207), S6 resolve missing evidence (755). See the
-[category plan](../etc/operations/m0-t483-mirror-register.md#owner-approved-s2s6-remediation-sequence).
-Owner now authorizes sequential execution and closure through S5. S2, S3 and S4 are closed; S5 is active. S6 must not be admitted without a new
-owner instruction.
-The previously suggested compat-first S2 is superseded.
+Owner supersedes the category-only continuation with one ordered re-audit of
+all remaining differences, including formerly retained items. S2–S4 and the
+completed P1/P2 items remain closed. No separate S6 admission is made.
+The [new worklist](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md)
+is the sole active audit order; the old D-register is historical evidence.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T483 S5, Ordinary Mode; one agent, initial and counter-review passes. |
-| Admission And Approval | Owner authorizes S2–S5 implementation in category order, with ten-modified-file batch deliveries; S6 explicitly held. |
-| Objective | Resolve all 207 correct entries in the frozen S1 register, checking current code and prior deliveries before each correction; preserve original logical lines and necessary product contracts. |
-| Non-goals | No S6 admission, guest edits/rebuild, unrelated compat audit, or speculative original-owner expansion. |
-| Reference Baseline | S4 closure and P9 Full-tested package; stable T483-D IDs and pinned originals. |
-| Files And ABI Surface | The 207 S5 entries across 167 mirror files and their coupled declarations/callers/tests; no unrelated source changes. |
+| Admission And Approval | Owner authorizes remaining-diff re-audit in exact new-list order, direct original restoration, and diff reduction; unchanged or increased diff requires stopping for prior owner approval. |
+| Objective | For each remaining point prove why original restoration would fail in an actual supported context; restore original where appropriate, otherwise minimize necessary differences. |
+| Non-goals | Do not reopen completed points or deleted files; no guest edits/rebuild, unrelated compat audit, or automatic retention from old classifications. |
+| Reference Baseline | Source4cf4e5a35 / published3ac24c6a7 package; new R identifiers link old D records and pinned current file bytes. |
+| Files And ABI Surface | 2720 pending points across365 existing files;1052 live host C/H mirrors. Dependencies may be read without advancing later points. |
 | Applicable Rules | Source policy, mirror subset/line rules, original contracts, native boundary judgments and category plan. |
 | Verification | Original/current range and logical-line checks per changed file; applicable focused tests, cached full build, Full regression, publication hashes, governance and Git checks per batch. |
-| Expected Markers | Every assigned ID resolved with implementation and counter-review evidence, or explicit owner-approved changed disposition; no unreported omissions. |
+| Expected Markers | Per-point current ranges, actual call/build context, concrete original-failure evidence, minimal option, original-relative diff delta, line proof and delivery status. |
 | Asset Needs | Existing pinned sources, build cache and maintained fixtures; preserve winnt.zip. |
-| Reporting Requirements | Assigned/completed/remaining entries and files, batch distinct modified files, line evidence, source footprint, tests and publication/commit identities. |
-| Stop Conditions | Do not force uncertain restoration over proven native ownership; report architectural tradeoffs or material expansion; no silent evidence-based reclassification. |
-| Exit Criteria | All 207 entries disposed with specified positive/negative proof, necessary changes delivered and worktree clean; S6 remains held. |
-| Original Owner Request | Process S2 through S5 by their category checklist order; verify line mappings; deliver after ten modified files or exhaustion of each S; hold S6. |
-| Similar-Issue Sweep | Complete all assigned ranges within each file once; inspect coupled callers and declarations without reopening unrelated retain/pending entries. |
+| Reporting Requirements | New-list position, completed/pending/approval-needed counts, current point conclusion, source/mirror diff delta and verified delivery. |
+| Stop Conditions | If the proposed disposition preserves a diff unchanged or increases it, stop at that point and obtain owner approval before continuing. Unproved risk is not retention evidence. |
+| Exit Criteria | Every admitted remaining point has an owner-compliant evidenced disposition and applicable implementation/delivery; list initialization alone is not audit completion. |
+| Original Owner Request | Re-audit all remaining categories with presumption of original validity; exact list order; restore directly where justified; ask before unchanged or larger diff. |
+| Similar-Issue Sweep | Read coupled callers as evidence, finish each point in list order, and do not reopen previously completed points. Retire vanished points with byte/range proof. |
 
 ## S5 Progress
 
-S5 P2 is built, regression-verified and published. See the
-[P2 receipt](../../artifacts/mvdm-audit/t483-s5/p2-delivery.json).
-Six of207 assigned entries are complete;201 remain in frozen file/line order.
-P1 completed D0041/D0042/D0043/D0048. P2 completes D0124/D0127 by
-restoring the original pExtendedError declaration, definition, DS:CX
-registration and four field writes across four mirror files. This removes
-36 original-relative diff lines; DTA/PDB/SFT adaptations remain unchanged.
-Restored statements exactly match original source and logical line numbers.
+The new [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
+contains2720 pending entries in365 files:1765 formerly retained,200 formerly
+correct,755 formerly pending. All require fresh original-first review; none
+is claimed re-audited by creating this list. Start at T483-R0001 / D0001.
+The [scope receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/progress.json)
+excludes8 deleted-file records,313 other completed records, and D2258 because
+its vdmapi.h now exactly matches its pinned original. Deleted files do not
+belong to the current1052-file host C/H mirror population.
 
-The thirteen cmdmisc terminal-error repairs are also delivered, with zero
-original-relative diff growth and unchanged physical lines/#line directives.
-They are not counted complete: dedicated fault injection and previous-request
-redirection cleanup verification remain pending in the
-[review](../../artifacts/mvdm-audit/t483-s5/cmdmisc-redesign.json).
-Cached x86/x64 build,140 command-capture assertions,65 launch assertions and
-all16 Full gates passed. Full is not exhaustive DOSDATA remapping proof.
-DOS4GW/NESticle remains skipped because external fixtures are absent.
-Nineteen earlier growing candidates remain withdrawn. The rejected five-line
-extended-error proposal was not implemented; its historical
-[review](../../artifacts/mvdm-audit/t483-s5/demhndl-redesign.json) is superseded.
-Every positive original-relative mirror diff needs prior approval per repair.
-S6 remains held; original guest and winnt.zip are unchanged.
+S5 P2 [delivery](../../artifacts/mvdm-audit/t483-s5/p2-delivery.json) remains
+verified and published: original extended-error chain restored, mirror diff
+reduced36 lines; cached x86/x64,140 capture/65 launch assertions and Full16
+passed. DOS4GW/NESticle remains skipped for absent external fixtures.
+Thirteen delivered cmdmisc-related points with outstanding fault verification
+remain in the new pending list. P1/P2 completion is not undone. Historical
+S5 allocation was207, with6 delivered dispositions before this re-audit.
 
-[S4 closure](../etc/evidence/m0-t483-s4-closure.md): 117/117 delivered in P1-P9.
-The final eight restore source positions and simplify selectors/declarations.
-Nine implementation files net -36 lines. Cached x86/x64, control-boundary cohort,
-class-lifetime, original-line review and Full16 passed. See
-[P9 delivery](../../artifacts/mvdm-audit/t483-s4/batch9-delivery.json).
-
-The [dynamic register summary](../../artifacts/mvdm-audit/t483-s1/classification-summary.md)
-is reconciled through P2:3042 historical/current IDs,321 completed dispositions,
-956 outstanding actions/evidence items; retain is not a repair backlog.
-Current category counts differ from frozen S allocations after approved reclassification.
+At every point, presume original code valid. A necessary deviation requires
+concrete failure/ABI/build evidence in actual supported contexts. Generic risk
+and historical implementation alone do not justify retention. If the final
+proposal keeps diff unchanged or increases it, stop for owner approval.
+No product or release change is part of list initialization.
 
 ## Current Technical Baseline
 

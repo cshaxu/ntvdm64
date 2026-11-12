@@ -1,0 +1,1615 @@
+[
+  {
+    "predecessor_id": "T483-D0004",
+    "path": "src/mvdm-host/dos/command/cmd.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0005",
+    "path": "src/mvdm-host/dos/command/cmd.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0010",
+    "path": "src/mvdm-host/dos/command/cmdconf.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0016",
+    "path": "src/mvdm-host/dos/command/cmdenv.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0018",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0019",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0021",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0022",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0041",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0042",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0043",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0048",
+    "path": "src/mvdm-host/dos/command/cmdexec.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0049",
+    "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0072",
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0073",
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0074",
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0075",
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0076",
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0090",
+    "path": "src/mvdm-host/dos/dem/dem.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0095",
+    "path": "src/mvdm-host/dos/dem/demdata.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0117",
+    "path": "src/mvdm-host/dos/dem/demgset.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0119",
+    "path": "src/mvdm-host/dos/dem/demgset.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0124",
+    "path": "src/mvdm-host/dos/dem/demhndl.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0126",
+    "path": "src/mvdm-host/dos/dem/demhndl.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0127",
+    "path": "src/mvdm-host/dos/dem/demhndl.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0132",
+    "path": "src/mvdm-host/dos/dem/demhndl.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0162",
+    "path": "src/mvdm-host/dpmi32/data.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0165",
+    "path": "src/mvdm-host/dpmi32/dpmi32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0166",
+    "path": "src/mvdm-host/dpmi32/dpmi32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0169",
+    "path": "src/mvdm-host/dpmi32/dpmi32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0171",
+    "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0178",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0185",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0187",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0197",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0198",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0199",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0200",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0201",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0202",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0205",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0206",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0207",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0208",
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0224",
+    "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0225",
+    "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0226",
+    "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0227",
+    "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0228",
+    "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0231",
+    "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0233",
+    "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0234",
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0237",
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0238",
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0240",
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0242",
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0260",
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0261",
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0266",
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0268",
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0271",
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0275",
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0346",
+    "path": "src/mvdm-host/oemuni/file.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0404",
+    "path": "src/mvdm-host/oemuni/sources",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0406",
+    "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0407",
+    "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0412",
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0413",
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0414",
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0415",
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0422",
+    "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0433",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0435",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0442",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0485",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0486",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0506",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0508",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0512",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0516",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0521",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0523",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0524",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0525",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0526",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0527",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0560",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0561",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0562",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0564",
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0578",
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0579",
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0580",
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0581",
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0582",
+    "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0583",
+    "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0584",
+    "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0585",
+    "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0823",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0824",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0825",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0851",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0852",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0853",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0854",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0855",
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0939",
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0940",
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0954",
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0955",
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0956",
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0957",
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0964",
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0965",
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0966",
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D0967",
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1067",
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1068",
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1069",
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1070",
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1071",
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1087",
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1089",
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1090",
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1092",
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1093",
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1095",
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1127",
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1129",
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1131",
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1132",
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1137",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1140",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1141",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1142",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1144",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1145",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1146",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1148",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1149",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1150",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1156",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1157",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1158",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1159",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1166",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1167",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1168",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1169",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1170",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1171",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1172",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1173",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1174",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1184",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1188",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1204",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1211",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1261",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1270",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1295",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1314",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1332",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1336",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1337",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1338",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1339",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1341",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1344",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1345",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1346",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1347",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1366",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1375",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1380",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1381",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1384",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1388",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1409",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1418",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1419",
+    "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1424",
+    "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1428",
+    "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1429",
+    "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1432",
+    "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1434",
+    "path": "src/mvdm-host/softpc.new/host/src/sources",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1437",
+    "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1440",
+    "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1447",
+    "path": "src/mvdm-host/vdmredir/sources",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1448",
+    "path": "src/mvdm-host/vdmredir/sources",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1449",
+    "path": "src/mvdm-host/vdmredir/vrdebug.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1453",
+    "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1472",
+    "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1484",
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1485",
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1486",
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1488",
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1492",
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1510",
+    "path": "src/mvdm-host/wow32/walias.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1533",
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1534",
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1535",
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1663",
+    "path": "src/mvdm-host/wow32/wkfileio.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1668",
+    "path": "src/mvdm-host/wow32/wkfileio.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1709",
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1711",
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1713",
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1715",
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1716",
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1809",
+    "path": "src/mvdm-host/wow32/wmmedia1.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1810",
+    "path": "src/mvdm-host/wow32/wmmedia2.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1811",
+    "path": "src/mvdm-host/wow32/wmmstru1.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1812",
+    "path": "src/mvdm-host/wow32/wmmstru2.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1813",
+    "path": "src/mvdm-host/wow32/wmmstruc.c",
+    "reason": "deleted-file-outside-current-mirror"
+  },
+  {
+    "predecessor_id": "T483-D1908",
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D1912",
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2043",
+    "path": "src/mvdm-host/wow32/wuclip.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2075",
+    "path": "src/mvdm-host/wow32/wuman.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2123",
+    "path": "src/mvdm-host/wow32/wuser.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2180",
+    "path": "src/non-mvdm/base/ntos/rtl/time.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2183",
+    "path": "src/non-mvdm/base/ntos/rtl/time.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2187",
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2199",
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2200",
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2204",
+    "path": "src/non-mvdm/base/win32/server/basesrv.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2223",
+    "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2224",
+    "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2225",
+    "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2226",
+    "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2230",
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2232",
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2233",
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2257",
+    "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2258",
+    "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+    "reason": "already-byte-identical-to-original",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdmapi.h",
+    "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+    "current_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de"
+  },
+  {
+    "predecessor_id": "T483-D2259",
+    "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2267",
+    "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2268",
+    "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2292",
+    "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2297",
+    "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2300",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2301",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2302",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2303",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2304",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2305",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2306",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2307",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2308",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2310",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2311",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2312",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2313",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2314",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2315",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2321",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2322",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2323",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2324",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2325",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2326",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2327",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2328",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2329",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2330",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2331",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2332",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2333",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2334",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2335",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2336",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2337",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2338",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2343",
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2376",
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2377",
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2425",
+    "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2452",
+    "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2464",
+    "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2492",
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2500",
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2526",
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2571",
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2593",
+    "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2594",
+    "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2608",
+    "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2610",
+    "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2614",
+    "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2650",
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2651",
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2652",
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2653",
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2671",
+    "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2674",
+    "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2679",
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2682",
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2685",
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2690",
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2722",
+    "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2736",
+    "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2759",
+    "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2760",
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2777",
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2786",
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2897",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2909",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2914",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2925",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2947",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2954",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2956",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2958",
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2980",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2985",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2987",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D2995",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3002",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3017",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3027",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3031",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3035",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3038",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "reason": "completed-disposition-not-reopened"
+  },
+  {
+    "predecessor_id": "T483-D3039",
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "reason": "completed-disposition-not-reopened"
+  }
+]

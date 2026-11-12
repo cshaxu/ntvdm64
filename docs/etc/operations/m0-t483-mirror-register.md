@@ -1,5 +1,11 @@
 # Mirror difference register migration
 
+Current execution follows the owner-approved
+[remaining-diff re-audit](../../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md).
+The category execution below is historical after S5 P2. The old D-register
+remains predecessor evidence; it is not a second active audit queue.
+
+
 ## Owner direction and scope
 
 This round audits mirror differences only. Later rounds address compat and
@@ -210,3 +216,20 @@ Stable completed IDs remain for provenance but are excluded from outstanding
 counts. Frozen S allocations and historical snapshot statistics remain labelled
 historical; they do not override the current decisions or imply live diff counts.
 A delivered change with outstanding verification remains outstanding.
+
+## Superseding original-first remaining-diff audit
+
+The owner requires a new ordered worklist for all remaining categories,
+including retain, excluding completed points and deleted files. The active
+R-register links each historical D-ID; old decisions are leads, not accepted
+necessity evidence. Current and original ranges must be verified at each turn.
+
+Presume the original implementation valid. A difference requires concrete
+proof that restoration fails an actual supported context. Restore original
+code directly where justified; minimize necessary differences without moving
+complexity into shims. If the proposed result retains unchanged or increases
+mirror diff, STOP at that point, report necessity and alternatives, and obtain
+owner approval before continuing. Audit sequentially in the R-list order;
+read dependencies only as needed without crediting later items as complete.
+The new progress record is updated with every review/delivery; historical
+counts and stable IDs must never be reported as remaining live defects.
