@@ -46,7 +46,7 @@ Revision History:
 #include <windef.h>     // IN, OUT, etc.
 #include <lmcons.h>     // Needed by <netlib.h>.
 #include <lmerr.h>      // NERR_*
-#include <rpc.h>        // MIDL_user_allocate & MIDL_user_free
+#line 50
 
 // These may be included in any order:
 
@@ -57,10 +57,6 @@ Revision History:
 #include <tstring.h>    // STRCPY(), STRLEN(), STRNCPY().
 
 
-#if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
-#line 60
-#error Unsupported excluded original configuration
-#endif
 #line 156
 
 
@@ -192,15 +188,7 @@ Return Value:
 } // NetpCopyStringToBuffer
 
 
-#if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
-#line 286
-#error Unsupported excluded original configuration
-#endif
 #line 408
 
 
-#if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
-#line 409
-#error Unsupported excluded original configuration
-#endif
 #line 670

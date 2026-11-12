@@ -622,79 +622,90 @@
     {
       "id": "T483-D2204",
       "path": "src/non-mvdm/base/win32/server/basesrv.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Remove unused ntdddfs.h dependency and its invented negative-profile wrapper together; preserve original trailing position with #line if required. Do not add a stub DFS header or restore an unsupported server shell.",
-      "verification": "Actual x86/x64 header consumers and local/wire layout fixture; include-order and original API signature checks."
+      "verification": "Actual x86/x64 header consumers and local/wire layout fixture; include-order and original API signature checks.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2223",
       "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Remove residual RPC include after declaration-closure check.",
-      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2224",
       "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Remove invented conditional/error wrapper and synchronized build macro definition, keeping selected original function and accurate #line.",
-      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2225",
       "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Remove invented conditional/error wrapper and synchronized build macro definition, keeping selected original function and accurate #line.",
-      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2226",
       "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Remove invented conditional/error wrapper and synchronized build macro definition, keeping selected original function and accurate #line.",
-      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed."
+      "verification": "Selected NetLib/VDMREDIR build; service name packing exact-fit, insufficient buffer and NULL-string controls. No new execution claimed.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2257",
       "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Consolidate all product include routes through existing guarded compat/include/vdmapi.h, remove mirror-added guard/comment/end marker and restore original file bytes if complete include-context verification permits.",
-      "verification": "Actual supported native/worker build contexts, repeated/transitive include compile checks, ABI declaration equality; preserve original command length and flags. No new tests run."
+      "verification": "Actual supported native/worker build contexts, repeated/transitive include compile checks, ABI declaration equality; preserve original command length and flags. No new tests run.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2259",
       "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Consolidate all product include routes through existing guarded compat/include/vdmapi.h, remove mirror-added guard/comment/end marker and restore original file bytes if complete include-context verification permits.",
-      "verification": "Actual supported native/worker build contexts, repeated/transitive include compile checks, ABI declaration equality; preserve original command length and flags. No new tests run."
+      "verification": "Actual supported native/worker build contexts, repeated/transitive include compile checks, ABI declaration equality; preserve original command length and flags. No new tests run.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2267",
       "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Replace local explanatory comments with original performance-counter section comment at original615..617; keep only necessary #line anchors and external provenance. Do not restore removed declarations.",
-      "verification": "Compile actual SoftPC consumers and focused heartbeat/ICA fixture contexts; verify declaration and logical-line identity."
+      "verification": "Compile actual SoftPC consumers and focused heartbeat/ICA fixture contexts; verify declaration and logical-line identity.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2268",
       "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Replace local explanatory comments with original performance-counter section comment at original615..617; keep only necessary #line anchors and external provenance. Do not restore removed declarations.",
-      "verification": "Compile actual SoftPC consumers and focused heartbeat/ICA fixture contexts; verify declaration and logical-line identity."
+      "verification": "Compile actual SoftPC consumers and focused heartbeat/ICA fixture contexts; verify declaration and logical-line identity.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2292",
       "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Restore original relative group order within the retained subset with correct #line; preserve current declarations and supported macro behavior.",
-      "verification": "Compile selected product and heartbeat fixtures, validate local/imported symbol binding and run lifecycle tests; pending-alert/native/APC semantics require separate focused evidence."
+      "verification": "Compile selected product and heartbeat fixtures, validate local/imported symbol binding and run lifecycle tests; pending-alert/native/APC semantics require separate focused evidence.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2376",
       "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
-      "status": "pending",
+      "status": "delivered P6",
       "plan": "Coordinate with ntrtl.h ownership corrections: restore reached declarations in original header locations and keep SDK type/import policy in compat; then remove unnecessary cross-header dependency if all contexts permit.",
-      "verification": "Compile selected BaseClient and DEM consumers; run existing path ABI/classifier tests and path-relative/full-path lifetime regressions on supported architectures."
+      "verification": "Compile selected BaseClient and DEM consumers; run existing path ABI/classifier tests and path-relative/full-path lifetime regressions on supported architectures.",
+      "evidence": "batch6-delivery.json"
     },
     {
       "id": "T483-D2425",

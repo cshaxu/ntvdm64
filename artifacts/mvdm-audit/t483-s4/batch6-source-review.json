@@ -1,0 +1,105 @@
+{
+  "status": "verified and published; commit pending",
+  "reviews": [
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "change": "Remove added DFS rejection wrapper; original include already excluded, no selected declaration lost.",
+      "before_sha256": "2f45f0da601a5fef3f73c8f7808b3c1bdb147501b205545dd1cc272306675625",
+      "after_sha256": "0974a5d72fd68252346356748e0bf8d16b7ec4f8e92b9c8d34033a204479e589"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "change": "Remove unused RPC include and three project-only exclusion selectors; retained packer unchanged.",
+      "before_sha256": "4c64d1e89174576f85c08c165e9b01d67f0b8b83fe955ccab54a3f41198187a4",
+      "after_sha256": "839f565f6a2b4dfa945fd12557ff30e87a17a3c9d9c63b35654f83520b5a2a22"
+    },
+    {
+      "path": "src\\non-mvdm\\public\\internal\\base\\inc\\vdmapi.h",
+      "change": "Restore exact pinned original bytes; existing compat guard owns repeated inclusion.",
+      "before_sha256": "692490979bcfdd0b3db5043bd76eeb835f6c3bf91d6a5602f753808fa4c922a2",
+      "after_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "change": "Restore original performance counter section comment, retain declaration and original line615..619.",
+      "before_sha256": "f6485bceee1254acaab8d16d2f039c1a19cda1bb98c98c12bc02a905775e1f39",
+      "after_sha256": "4ce1e512b522bdf9abb83bc0472d18965f8f806ddefb9bc2528e2f0962540cfa"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "change": "Move retained alert declaration after original earlier groups; keep adapter import policy and original header guard.",
+      "before_sha256": "496fb34c9ba1f61e6ab5b67fd09c75b72447e6b8054e237b05328184975e1595",
+      "after_sha256": "534aad7024d6429f5dc5c8aa8a133596781429e76d94c1a04a97d9055d56a611"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "change": "Restore three reached path declarations to original header and line262/272/280; remove ntrtl include.",
+      "counter_review": "Existing local provider retained, no dllimport added. RtlSetCurrentDirectory_U parameter follows original non-const PUNICODE_STRING, paired definition type changed without changing body. Existing two other declarations unchanged."
+    }
+  ],
+  "coupled_files": [
+    "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "src/ntsrv-exe/main.c",
+    "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "src/compat/include/nt.h",
+    "src/compat/opennt_support_rtl.c"
+  ],
+  "modified_source_build_files": 11,
+  "implemented_entries_pending_verification": 0,
+  "delivered_total": 88,
+  "total_assigned": 117,
+  "counter_review": {
+    "basesrv": "Only added negative profile frame removed; end anchor retained. Original final ntdddfs include not restored.",
+    "packstr": "Retained function unchanged; removed header has no uses in selected body. Correct continuation after removed original include49 is line50. Default cc cflags equal removed per-file baseFlags plus selector, no ABI flag lost.",
+    "vdmapi": "Exact pinned original bytes verified; guarded compat wrapper used at direct inclusion; repeated/transitive x86/x64 layout tests passed.",
+    "ntexapi": "Original comment615..617 and blank618 precede declaration619. No unavailable API restored.",
+    "ntpsapi": "Existing alert declaration/import selection moved after earlier selected groups; original closing guard line1293 restored."
+  },
+  "next": "clglobal.c in frozen register order",
+  "net_source_build_lines": -18,
+  "additional_tests": [
+    {
+      "path": "test/opennt-host/netlib/packstr.c",
+      "contract": "Four packing boundaries against actual production object; no copied provider."
+    },
+    {
+      "path": "test/opennt-host/netlib/verify.ps1",
+      "contract": "Reproducible caller/link runner using current BuildRoot, fresh repository evidence."
+    },
+    {
+      "path": "test/adapter-basesrv/native_service_layout_test.c",
+      "contract": "Explicit repeated/transitive vdmapi include plus existing local/wire layout assertions."
+    }
+  ],
+  "running_build": {
+    "pid": 28528,
+    "session": 64885,
+    "status": "completed cached x86/x64 exit0"
+  },
+  "verification_runs": {
+    "full": {
+      "pid": 31928,
+      "session": 99549,
+      "status": "completed exit0"
+    },
+    "preprocess": {
+      "pid": 38500,
+      "session": 88050,
+      "status": "completed exit0"
+    },
+    "focused": {
+      "pid": 28232,
+      "session": 56641,
+      "status": "completed exit0"
+    },
+    "first_focused": "x86 layout passed; x64 test executable was not a default built target. Added explicit architecture-correct target build; no product failure assertion."
+  },
+  "line_review": {
+    "matching_anchors": 143,
+    "true_mismatches": 0,
+    "false_matches": 5,
+    "reason": "Preprocessing removes IN annotation. Verified original declaration context: basesrv BaseClientConnectRoutine line58; ntrtl RtlCreateUnicodeString1640, RtlEqualUnicodeString1867/1868, RtlAppendUnicodeToString1925.",
+    "local_provider": "NTVDM map resolves all three restored path declarations to softpc-win32-bindings:opennt_support_rtl.obj",
+    "vdmapi_exact_original": true
+  }
+}

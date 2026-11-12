@@ -28,13 +28,37 @@ Revision History:
 #line 28
 #ifndef _NTURTL_
 #define _NTURTL_
-#include <ntrtl.h>
 #line 255
 ULONG
 NTAPI
 RtlIsDosDeviceName_U(
     PWSTR DosFileName
     );
+#line 262
+ULONG
+NTAPI
+RtlGetFullPathName_U(
+    PCWSTR lpFileName,
+    ULONG nBufferLength,
+    PWSTR lpBuffer,
+    PWSTR *lpFilePart
+    );
+
+#line 272
+ULONG
+NTAPI
+RtlGetCurrentDirectory_U(
+    ULONG nBufferLength,
+    PWSTR lpBuffer
+    );
+
+#line 280
+NTSTATUS
+NTAPI
+RtlSetCurrentDirectory_U(
+    PUNICODE_STRING PathName
+    );
+
 #line 292
 BOOLEAN
 NTAPI

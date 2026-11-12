@@ -1,0 +1,74 @@
+{
+  "part": "T483 S4 P6",
+  "baseline": "da9761865",
+  "entries": [
+    "T483-D2204",
+    "T483-D2223",
+    "T483-D2224",
+    "T483-D2225",
+    "T483-D2226",
+    "T483-D2257",
+    "T483-D2259",
+    "T483-D2267",
+    "T483-D2268",
+    "T483-D2292",
+    "T483-D2376"
+  ],
+  "delivered_total": 88,
+  "remaining": 29,
+  "modified_source_test_build_files": 14,
+  "footprint": {
+    "mirror": {
+      "added": 56,
+      "deleted": 70,
+      "net": -14
+    },
+    "autonomous": {
+      "added": 3,
+      "deleted": 2,
+      "net": 1
+    },
+    "build": {
+      "added": 0,
+      "deleted": 5,
+      "net": -5
+    },
+    "tests": {
+      "added": 45,
+      "deleted": 0,
+      "net": 45
+    }
+  },
+  "source_review": "batch6-source-review.json",
+  "verification": {
+    "cached": "x86/x64 exit0",
+    "full": "16 gates pass; external DOS4GW/NESticle fixture skipped",
+    "focused": "x86/x64 native and fixed wire layouts, repeated guarded inclusion; four actual original packstr boundary cases passed",
+    "line_review": {
+      "matching_anchors": 143,
+      "true_mismatches": 0,
+      "false_matches": 5,
+      "reason": "Preprocessing removes IN annotation. Verified original declaration context: basesrv BaseClientConnectRoutine line58; ntrtl RtlCreateUnicodeString1640, RtlEqualUnicodeString1867/1868, RtlAppendUnicodeToString1925.",
+      "local_provider": "NTVDM map resolves all three restored path declarations to softpc-win32-bindings:opennt_support_rtl.obj",
+      "vdmapi_exact_original": true
+    },
+    "package": "Published files raw-hash match the Full-tested candidate manifest"
+  },
+  "publication": {
+    "status": "published",
+    "package": "b0b33c0d-084f-4b4b-9485-6856a09f3ec4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "evidence_roots": [
+    "build/t483-s4-p6"
+  ],
+  "scope": "No guest or winnt.zip changes. S6 remains held.",
+  "failures_resolved": [
+    "Focused runner initially lacked x64 test executable; explicitly built that existing target and reran both architecture tests successfully."
+  ]
+}

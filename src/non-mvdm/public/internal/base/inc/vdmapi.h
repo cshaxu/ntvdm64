@@ -1,10 +1,3 @@
-/* DIVERGENCE(OPENNT-ABI-001): the original header is retained byte-for-byte
- * below this guard.  The modern broker and Base VDM adapter can both include
- * this declaration carrier in one translation unit, while upstream provides
- * no multiple-inclusion protection. */
-#ifndef MVDM_OPENNT_VDMAPI_H
-#define MVDM_OPENNT_VDMAPI_H
-
 /*++ BUILD Version: 0001    // Increment this if a change has global effects
 
 Copyright (c) 1990  Microsoft Corporation
@@ -27,7 +20,6 @@ Revision History:
 
 --*/
 
-#line 23
 #define MAXIMUM_VDM_COMMAND_LENGTH	128
 #define MAXIMUM_VDM_ENVIORNMENT 	32*1024
 #define MAXIMUM_VDM_CURRENT_DIR 	64
@@ -147,5 +139,3 @@ APIENTRY
 RegisterWowExec(
     IN HANDLE   hwndWowExec
 );
-
-#endif /* MVDM_OPENNT_VDMAPI_H */

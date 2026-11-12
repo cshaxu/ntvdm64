@@ -1276,11 +1276,6 @@ $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
         # historical RPC/MIDL NetAPI product shell solely for that dead edge.
         $graph.Add('  cflags = ' + $baseFlags + ' /Gy')
     }
-    if ($name -eq 'packstr.c') {
-        # ServiceControl reaches only the original fixed/variable string
-        # packer.  Its unrelated RPC enum-buffer allocator is not admitted.
-        $graph.Add('  cflags = ' + $baseFlags + ' /DMVDM_XACTSRV_PACKSTR_COPY_ONLY')
-    }
     $object
 }
 $openntNetapiObjects = foreach ($name in $openntNetapiNames) {

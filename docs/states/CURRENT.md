@@ -81,7 +81,14 @@ RTL time seven cases and Full16 passed. Final11 images match the Full candidate
 after only package UUID/PE timestamp normalization. Both destinations were
 published and hash-verified. See [P5 delivery](../../artifacts/mvdm-audit/t483-s4/batch5-delivery.json)
 and [source review](../../artifacts/mvdm-audit/t483-s4/batch5-source-review.json).
-Next: non-mvdm/base/win32/server/basesrv.h, then packstr.c in register order.
+P6 resolves eleven entries: total88/117; 29 remain. Original declaration ownership
+and order restored, vdmapi.h is byte-identical to the pinned original, and
+redundant include/selection wrappers removed. Cached x86/x64, Full16, both
+layout contexts, four original packstr cases and line counter-review passed.
+Eleven images were published and raw-hash verified at both destinations. See
+[P6 delivery](../../artifacts/mvdm-audit/t483-s4/batch6-delivery.json) and
+[source review](../../artifacts/mvdm-audit/t483-s4/batch6-source-review.json).
+Next: non-mvdm/windows/core/ntuser/client/clglobal.c in register order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure
@@ -93,10 +100,10 @@ regressions passed. No user desktop unlock dependency remains in generic queue t
 
 ## Current Technical Baseline
 
-Package `e8335dea-7d94-4ec8-8944-cba3c30233d7`, complete 11 images at
+Package `b0b33c0d-084f-4b4b-9485-6856a09f3ec4`, complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. Published images
-match the Full-tested P5 candidate after package UUID/PE timestamp normalization;
-both destinations are raw-hash identical to the final P5 manifest. DOS4GW/NESticle remains
+raw-hash match the Full-tested P6 candidate;
+both destinations are raw-hash identical to the P6 manifest. DOS4GW/NESticle remains
 explicitly skipped because
 its external fixture was not supplied. No guest or winnt.zip change.
 

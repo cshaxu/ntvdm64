@@ -33,6 +33,7 @@
  * the historical RTL helpers implemented by this adapter. */
 typedef short CSHORT;
 #include <ntrtl.h>
+#include <nturtl.h>
 
 /* DIVERGENCE(ADAPTER-WIN32-035): original `obj.vdm/ntvdm.c` enumerates the
  * NT4 CpuEnv registry key through KEY_VALUE_FULL_INFORMATION.  Modern public

@@ -1,5 +1,7 @@
 #include <base_server.h>
 #include "basesrv.h"
+#include <vdmapi.h>
+#include <vdmapi.h>
 #include <base_values.h>
 #include <stdio.h>
 #include <stdint.h>

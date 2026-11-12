@@ -45,9 +45,6 @@ PVOID NTAPI RtlProcessHeap(VOID);
 ULONG NTAPI RtlUnicodeStringToOemSize(PCUNICODE_STRING UnicodeString);
 
 ULONG NTAPI RtlOemStringToUnicodeSize(PCOEM_STRING String);
-ULONG NTAPI RtlGetFullPathName_U(PCWSTR FileName, ULONG Size, PWSTR Buffer, PWSTR *ShortName);
-ULONG NTAPI RtlGetCurrentDirectory_U(ULONG MaximumLength, PWSTR Buffer);
-NTSTATUS NTAPI RtlSetCurrentDirectory_U(PCUNICODE_STRING PathName);
 #define RtlNtStatusToDosError OpenNtRtlNtStatusToDosError
 #define RtlNtStatusToDosErrorNoTeb OpenNtRtlNtStatusToDosErrorNoTeb
 
