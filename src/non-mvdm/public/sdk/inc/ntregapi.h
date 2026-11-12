@@ -48,6 +48,18 @@ typedef enum _KEY_VALUE_INFORMATION_CLASS {
     KeyValueFullInformationAlign64,
     KeyValuePartialInformationAlign64
 } KEY_VALUE_INFORMATION_CLASS;
+#line 424
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtQueryValueKey(
+    IN HANDLE KeyHandle,
+    IN PUNICODE_STRING ValueName,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
 #line 520
 #ifdef __cplusplus
 #line 521

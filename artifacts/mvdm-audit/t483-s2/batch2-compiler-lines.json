@@ -1,0 +1,1012 @@
+{
+  "method": "Actual selected MSVC /P output from product Ninja commands, restored original logical source anchors. Not a proof of excluded or unrelated pre-existing mappings.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "current_sha256": "d0605784bbda902a122cfe9cdf4ab093636356e339e259c866971a1b7fab0fe0",
+      "anchors": [
+        {
+          "token": "current->handle = CreateFile",
+          "original_candidates": [
+            346
+          ],
+          "actual_selected": [
+            {
+              "line": 346,
+              "output": [
+                "current->handle = CreateFileA(ComConfigValues.string,"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "if(current->handle == (HANDLE) -1)",
+          "original_candidates": [
+            354
+          ],
+          "actual_selected": [
+            {
+              "line": 354,
+              "output": [
+                "if(current->handle == (HANDLE) -1)"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "current_sha256": "254a4fbd1632efd0c6a53295f6d7ec990a430d4c1fc4753ba6480a1406da163e",
+      "anchors": [
+        {
+          "token": "pedgi->dwReply = i;",
+          "original_candidates": [
+            698
+          ],
+          "actual_selected": [
+            {
+              "line": 698,
+              "output": [
+                "pedgi->dwReply = i;"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+      "current_sha256": "00cf1438457ad015c20d924d54dbd96b0cd4838933874d5adb9358a3a6410fc5",
+      "anchors": [
+        {
+          "token": "type = 0;",
+          "original_candidates": [
+            69,
+            110
+          ],
+          "actual_selected": [
+            {
+              "line": 69,
+              "output": [
+                "if (type == 1)",
+                "type = 0;"
+              ]
+            },
+            {
+              "line": 110,
+              "output": [
+                "type = 0;"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "host_block_timer ();",
+          "original_candidates": [
+            112
+          ],
+          "actual_selected": [
+            {
+              "line": 112,
+              "output": [
+                "host_block_timer ();"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "current_sha256": "18af789dfeb1e4c3085231c3b123bce821641c2d7d0d2364ba3926ea873cc9ad",
+      "anchors": [
+        {
+          "token": "DWORD cb;",
+          "original_candidates": [
+            468
+          ],
+          "actual_selected": [
+            {
+              "line": 468,
+              "output": [
+                "DWORD cb;"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "DWORD dwType;",
+          "original_candidates": [
+            469
+          ],
+          "actual_selected": [
+            {
+              "line": 469,
+              "output": [
+                "DWORD dwType;"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "cb = sizeof(fThunkStrRtns);",
+          "original_candidates": [
+            590
+          ],
+          "actual_selected": [
+            {
+              "line": 590,
+              "output": [
+                "cb = sizeof(fThunkStrRtns);"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "if (RegQueryValueEx(WowKey,",
+          "original_candidates": [
+            591,
+            613
+          ],
+          "actual_selected": [
+            {
+              "line": 591,
+              "output": [
+                "if (ntvdm_shadow_reg_query_value_ex(WowKey,"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "fThunkStrRtns = GetSystemDefaultLCID() !=",
+          "original_candidates": [
+            604
+          ],
+          "actual_selected": [
+            {
+              "line": 604,
+              "output": [
+                "fThunkStrRtns = GetSystemDefaultLCID() !="
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "current_sha256": "ad17110e801f15585c8b8a7ec76b6ffd43973a57227fa5c0685006b087c0ccd2",
+      "anchors": [
+        {
+          "token": "IF_DEBUG(MESSAGE) {",
+          "original_candidates": [
+            68,
+            178,
+            259,
+            346,
+            386,
+            430,
+            512,
+            608
+          ],
+          "actual_selected": [
+            {
+              "line": 68,
+              "output": [
+                "if (0) {"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "if ( !XsApiSuccess( status )) {",
+          "original_candidates": [
+            122,
+            207,
+            288,
+            377,
+            544
+          ],
+          "actual_selected": [
+            {
+              "line": 122,
+              "output": [
+                "if ( !(( (status) == 0 ) || ( (status) == 234L ) || ( (status) == (2100+23) ))) {"
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "cleanup:",
+          "original_candidates": [
+            129,
+            214,
+            295,
+            456,
+            639
+          ],
+          "actual_selected": [
+            {
+              "line": 129,
+              "output": [
+                "cleanup:"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "current_sha256": "5ae1450035008742e0503a0573199d6901eee168321c2d7d489f04b92dfbe24d",
+      "anchors": [
+        {
+          "token": "NtQueryValueKey(",
+          "original_candidates": [
+            427
+          ],
+          "actual_selected": [
+            {
+              "line": 427,
+              "output": [
+                "NtQueryValueKey("
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "current_sha256": "1132bf03fd760dfc051cf4ac4478241ee40cc59463562cbdcbbe21f88ed8d1a5",
+      "anchors": [
+        {
+          "token": "RtlAllocateHeap(",
+          "original_candidates": [
+            939
+          ],
+          "actual_selected": [
+            {
+              "line": 939,
+              "output": [
+                "RtlAllocateHeap(",
+                "RtlAllocateHeap(",
+                "RtlAllocateHeap(",
+                "RtlAllocateHeap(",
+                "RtlAllocateHeap(",
+                "RtlAllocateHeap("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlFreeHeap(",
+          "original_candidates": [
+            948
+          ],
+          "actual_selected": [
+            {
+              "line": 948,
+              "output": [
+                "RtlFreeHeap(",
+                "RtlFreeHeap(",
+                "RtlFreeHeap(",
+                "RtlFreeHeap(",
+                "RtlFreeHeap(",
+                "RtlFreeHeap("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlInitString(",
+          "original_candidates": [
+            1612
+          ],
+          "actual_selected": [
+            {
+              "line": 1612,
+              "output": [
+                "RtlInitString(",
+                "RtlInitString(",
+                "RtlInitString(",
+                "RtlInitString(",
+                "RtlInitString(",
+                "RtlInitString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlInitAnsiString(",
+          "original_candidates": [
+            1620
+          ],
+          "actual_selected": [
+            {
+              "line": 1620,
+              "output": [
+                "RtlInitAnsiString(",
+                "RtlInitAnsiString(",
+                "RtlInitAnsiString(",
+                "RtlInitAnsiString(",
+                "RtlInitAnsiString(",
+                "RtlInitAnsiString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlInitUnicodeString(",
+          "original_candidates": [
+            1628
+          ],
+          "actual_selected": [
+            {
+              "line": 1628,
+              "output": [
+                "RtlInitUnicodeString(",
+                "RtlInitUnicodeString(",
+                "RtlInitUnicodeString(",
+                "RtlInitUnicodeString(",
+                "RtlInitUnicodeString(",
+                "RtlInitUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlCreateUnicodeString(",
+          "original_candidates": [
+            1638
+          ],
+          "actual_selected": [
+            {
+              "line": 1638,
+              "output": [
+                "RtlCreateUnicodeString(",
+                "RtlCreateUnicodeString(",
+                "RtlCreateUnicodeString(",
+                "RtlCreateUnicodeString(",
+                "RtlCreateUnicodeString(",
+                "RtlCreateUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlAnsiStringToUnicodeString(",
+          "original_candidates": [
+            1759
+          ],
+          "actual_selected": [
+            {
+              "line": 1759,
+              "output": [
+                "RtlAnsiStringToUnicodeString(",
+                "RtlAnsiStringToUnicodeString(",
+                "RtlAnsiStringToUnicodeString(",
+                "RtlAnsiStringToUnicodeString(",
+                "RtlAnsiStringToUnicodeString(",
+                "RtlAnsiStringToUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlUnicodeStringToAnsiString(",
+          "original_candidates": [
+            1779
+          ],
+          "actual_selected": [
+            {
+              "line": 1779,
+              "output": [
+                "RtlUnicodeStringToAnsiString(",
+                "RtlUnicodeStringToAnsiString(",
+                "RtlUnicodeStringToAnsiString(",
+                "RtlUnicodeStringToAnsiString(",
+                "RtlUnicodeStringToAnsiString(",
+                "RtlUnicodeStringToAnsiString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlOemStringToUnicodeString(",
+          "original_candidates": [
+            1801
+          ],
+          "actual_selected": [
+            {
+              "line": 1801,
+              "output": [
+                "RtlOemStringToUnicodeString(",
+                "RtlOemStringToUnicodeString(",
+                "RtlOemStringToUnicodeString(",
+                "RtlOemStringToUnicodeString(",
+                "RtlOemStringToUnicodeString(",
+                "RtlOemStringToUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlUnicodeStringToOemString(",
+          "original_candidates": [
+            1810
+          ],
+          "actual_selected": [
+            {
+              "line": 1810,
+              "output": [
+                "RtlUnicodeStringToOemString(",
+                "RtlUnicodeStringToOemString(",
+                "RtlUnicodeStringToOemString(",
+                "RtlUnicodeStringToOemString(",
+                "RtlUnicodeStringToOemString(",
+                "RtlUnicodeStringToOemString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlUpcaseUnicodeStringToCountedOemString(",
+          "original_candidates": [
+            1846
+          ],
+          "actual_selected": [
+            {
+              "line": 1846,
+              "output": [
+                "RtlUpcaseUnicodeStringToCountedOemString(",
+                "RtlUpcaseUnicodeStringToCountedOemString(",
+                "RtlUpcaseUnicodeStringToCountedOemString(",
+                "RtlUpcaseUnicodeStringToCountedOemString(",
+                "RtlUpcaseUnicodeStringToCountedOemString(",
+                "RtlUpcaseUnicodeStringToCountedOemString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlCompareUnicodeString(",
+          "original_candidates": [
+            1857
+          ],
+          "actual_selected": [
+            {
+              "line": 1857,
+              "output": [
+                "RtlCompareUnicodeString(",
+                "RtlCompareUnicodeString(",
+                "RtlCompareUnicodeString(",
+                "RtlCompareUnicodeString(",
+                "RtlCompareUnicodeString(",
+                "RtlCompareUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlEqualUnicodeString(",
+          "original_candidates": [
+            1866
+          ],
+          "actual_selected": [
+            {
+              "line": 1866,
+              "output": [
+                "RtlEqualUnicodeString(",
+                "RtlEqualUnicodeString(",
+                "RtlEqualUnicodeString(",
+                "RtlEqualUnicodeString(",
+                "RtlEqualUnicodeString(",
+                "RtlEqualUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlAppendUnicodeToString(",
+          "original_candidates": [
+            1924
+          ],
+          "actual_selected": [
+            {
+              "line": 1924,
+              "output": [
+                "RtlAppendUnicodeToString (",
+                "RtlAppendUnicodeToString (",
+                "RtlAppendUnicodeToString (",
+                "RtlAppendUnicodeToString (",
+                "RtlAppendUnicodeToString (",
+                "RtlAppendUnicodeToString ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlFreeUnicodeString(",
+          "original_candidates": [
+            1943
+          ],
+          "actual_selected": [
+            {
+              "line": 1943,
+              "output": [
+                "RtlFreeUnicodeString(",
+                "RtlFreeUnicodeString(",
+                "RtlFreeUnicodeString(",
+                "RtlFreeUnicodeString(",
+                "RtlFreeUnicodeString(",
+                "RtlFreeUnicodeString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlFreeAnsiString(",
+          "original_candidates": [
+            1950
+          ],
+          "actual_selected": [
+            {
+              "line": 1950,
+              "output": [
+                "RtlFreeAnsiString(",
+                "RtlFreeAnsiString(",
+                "RtlFreeAnsiString(",
+                "RtlFreeAnsiString(",
+                "RtlFreeAnsiString(",
+                "RtlFreeAnsiString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlFreeOemString(",
+          "original_candidates": [
+            1959
+          ],
+          "actual_selected": [
+            {
+              "line": 1959,
+              "output": [
+                "RtlFreeOemString(",
+                "RtlFreeOemString(",
+                "RtlFreeOemString(",
+                "RtlFreeOemString(",
+                "RtlFreeOemString(",
+                "RtlFreeOemString("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlOemToUnicodeN(",
+          "original_candidates": [
+            2133
+          ],
+          "actual_selected": [
+            {
+              "line": 2133,
+              "output": [
+                "RtlOemToUnicodeN(",
+                "RtlOemToUnicodeN(",
+                "RtlOemToUnicodeN(",
+                "RtlOemToUnicodeN(",
+                "RtlOemToUnicodeN(",
+                "RtlOemToUnicodeN("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlUnicodeToOemN(",
+          "original_candidates": [
+            2144
+          ],
+          "actual_selected": [
+            {
+              "line": 2144,
+              "output": [
+                "RtlUnicodeToOemN(",
+                "RtlUnicodeToOemN(",
+                "RtlUnicodeToOemN(",
+                "RtlUnicodeToOemN(",
+                "RtlUnicodeToOemN(",
+                "RtlUnicodeToOemN("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlAcquirePebLock(",
+          "original_candidates": [
+            2368
+          ],
+          "actual_selected": [
+            {
+              "line": 2368,
+              "output": [
+                "RtlAcquirePebLock(",
+                "RtlAcquirePebLock(",
+                "RtlAcquirePebLock(",
+                "RtlAcquirePebLock(",
+                "RtlAcquirePebLock(",
+                "RtlAcquirePebLock("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlReleasePebLock(",
+          "original_candidates": [
+            2375
+          ],
+          "actual_selected": [
+            {
+              "line": 2375,
+              "output": [
+                "RtlReleasePebLock(",
+                "RtlReleasePebLock(",
+                "RtlReleasePebLock(",
+                "RtlReleasePebLock(",
+                "RtlReleasePebLock(",
+                "RtlReleasePebLock("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlCreateEnvironment(",
+          "original_candidates": [
+            2402
+          ],
+          "actual_selected": [
+            {
+              "line": 2402,
+              "output": [
+                "RtlCreateEnvironment(",
+                "RtlCreateEnvironment(",
+                "RtlCreateEnvironment(",
+                "RtlCreateEnvironment(",
+                "RtlCreateEnvironment(",
+                "RtlCreateEnvironment("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlDestroyEnvironment(",
+          "original_candidates": [
+            2410
+          ],
+          "actual_selected": [
+            {
+              "line": 2410,
+              "output": [
+                "RtlDestroyEnvironment(",
+                "RtlDestroyEnvironment(",
+                "RtlDestroyEnvironment(",
+                "RtlDestroyEnvironment(",
+                "RtlDestroyEnvironment(",
+                "RtlDestroyEnvironment("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlSetEnvironmentVariable(",
+          "original_candidates": [
+            2425
+          ],
+          "actual_selected": [
+            {
+              "line": 2425,
+              "output": [
+                "RtlSetEnvironmentVariable(",
+                "RtlSetEnvironmentVariable(",
+                "RtlSetEnvironmentVariable(",
+                "RtlSetEnvironmentVariable(",
+                "RtlSetEnvironmentVariable(",
+                "RtlSetEnvironmentVariable("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlFillMemoryUlong(",
+          "original_candidates": [
+            3313
+          ],
+          "actual_selected": [
+            {
+              "line": 3313,
+              "output": [
+                "RtlFillMemoryUlong (",
+                "RtlFillMemoryUlong (",
+                "RtlFillMemoryUlong (",
+                "RtlFillMemoryUlong (",
+                "RtlFillMemoryUlong (",
+                "RtlFillMemoryUlong ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "DbgBreakPoint(",
+          "original_candidates": [
+            3403,
+            3425
+          ],
+          "actual_selected": [
+            {
+              "line": 3403,
+              "output": [
+                "DbgBreakPoint(",
+                "DbgBreakPoint(",
+                "DbgBreakPoint(",
+                "DbgBreakPoint(",
+                "DbgBreakPoint(",
+                "DbgBreakPoint("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlExtendedLargeIntegerDivide(",
+          "original_candidates": [
+            3706
+          ],
+          "actual_selected": [
+            {
+              "line": 3706,
+              "output": [
+                "RtlExtendedLargeIntegerDivide (",
+                "RtlExtendedLargeIntegerDivide (",
+                "RtlExtendedLargeIntegerDivide (",
+                "RtlExtendedLargeIntegerDivide (",
+                "RtlExtendedLargeIntegerDivide (",
+                "RtlExtendedLargeIntegerDivide ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlExtendedIntegerMultiply(",
+          "original_candidates": [
+            3732
+          ],
+          "actual_selected": [
+            {
+              "line": 3732,
+              "output": [
+                "RtlExtendedIntegerMultiply (",
+                "RtlExtendedIntegerMultiply (",
+                "RtlExtendedIntegerMultiply (",
+                "RtlExtendedIntegerMultiply (",
+                "RtlExtendedIntegerMultiply (",
+                "RtlExtendedIntegerMultiply ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlTimeToTimeFields(",
+          "original_candidates": [
+            4118
+          ],
+          "actual_selected": [
+            {
+              "line": 4118,
+              "output": [
+                "RtlTimeToTimeFields (",
+                "RtlTimeToTimeFields (",
+                "RtlTimeToTimeFields (",
+                "RtlTimeToTimeFields (",
+                "RtlTimeToTimeFields (",
+                "RtlTimeToTimeFields ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlTimeFieldsToTime(",
+          "original_candidates": [
+            4130
+          ],
+          "actual_selected": [
+            {
+              "line": 4130,
+              "output": [
+                "RtlTimeFieldsToTime (",
+                "RtlTimeFieldsToTime (",
+                "RtlTimeFieldsToTime (",
+                "RtlTimeFieldsToTime (",
+                "RtlTimeFieldsToTime (",
+                "RtlTimeFieldsToTime ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlConvertLongToLuid(",
+          "original_candidates": [
+            4942
+          ],
+          "actual_selected": [
+            {
+              "line": 4942,
+              "output": [
+                "RtlConvertLongToLuid(",
+                "RtlConvertLongToLuid(",
+                "RtlConvertLongToLuid(",
+                "RtlConvertLongToLuid(",
+                "RtlConvertLongToLuid(",
+                "RtlConvertLongToLuid("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlNtStatusToDosError(",
+          "original_candidates": [
+            5775
+          ],
+          "actual_selected": [
+            {
+              "line": 5775,
+              "output": [
+                "OpenNtRtlNtStatusToDosError (",
+                "OpenNtRtlNtStatusToDosError (",
+                "OpenNtRtlNtStatusToDosError (",
+                "OpenNtRtlNtStatusToDosError (",
+                "OpenNtRtlNtStatusToDosError (",
+                "OpenNtRtlNtStatusToDosError ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlNtStatusToDosErrorNoTeb(",
+          "original_candidates": [
+            5782
+          ],
+          "actual_selected": [
+            {
+              "line": 5782,
+              "output": [
+                "OpenNtRtlNtStatusToDosErrorNoTeb (",
+                "OpenNtRtlNtStatusToDosErrorNoTeb (",
+                "OpenNtRtlNtStatusToDosErrorNoTeb (",
+                "OpenNtRtlNtStatusToDosErrorNoTeb (",
+                "OpenNtRtlNtStatusToDosErrorNoTeb (",
+                "OpenNtRtlNtStatusToDosErrorNoTeb ("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "typedef struct _TIME_FIELDS {",
+          "original_candidates": [
+            4061
+          ],
+          "actual_selected": [
+            {
+              "line": 4061,
+              "output": [
+                "typedef struct _TIME_FIELDS {",
+                "typedef struct _TIME_FIELDS {",
+                "typedef struct _TIME_FIELDS {",
+                "typedef struct _TIME_FIELDS {",
+                "typedef struct _TIME_FIELDS {",
+                "typedef struct _TIME_FIELDS {"
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "current_sha256": "5d455e334faebb730de12e4d9b5eb13ad7e02e1e7632d64b8a6370a246e96bca",
+      "anchors": [
+        {
+          "token": "RtlIsDosDeviceName_U(",
+          "original_candidates": [
+            257
+          ],
+          "actual_selected": [
+            {
+              "line": 257,
+              "output": [
+                "RtlIsDosDeviceName_U(",
+                "RtlIsDosDeviceName_U(",
+                "RtlIsDosDeviceName_U(",
+                "RtlIsDosDeviceName_U("
+              ]
+            }
+          ],
+          "passed": true
+        },
+        {
+          "token": "RtlDosPathNameToNtPathName_U(",
+          "original_candidates": [
+            294
+          ],
+          "actual_selected": [
+            {
+              "line": 294,
+              "output": [
+                "RtlDosPathNameToNtPathName_U(",
+                "RtlDosPathNameToNtPathName_U(",
+                "RtlDosPathNameToNtPathName_U(",
+                "RtlDosPathNameToNtPathName_U("
+              ]
+            }
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

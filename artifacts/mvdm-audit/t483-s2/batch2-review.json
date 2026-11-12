@@ -1,0 +1,387 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "ids": [
+      "T483-D1166",
+      "T483-D1167",
+      "T483-D1168"
+    ],
+    "before_sha256": "d7efc6a77b661c9e9930b47528d2a22ade0bc0ab178973513a17b039031116ea",
+    "after_sha256": "d0605784bbda902a122cfe9cdf4ab093636356e339e259c866971a1b7fab0fe0",
+    "initial_review": "Remove two serial-open diagnostics and sole termination header include; shared provider retained for live BIOS/parallel users. CreateFile, error snapshot branch and reopen behavior unchanged.",
+    "counter_review": "Retained surrounding control flow and all failure checks; original restored anchors verified below.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+    "ids": [
+      "T483-D1211"
+    ],
+    "before_sha256": "2ec6ec34a48bc5772cd7c6b8a0dd1c594cc2e979934cca6e63aeb96cca96e521",
+    "after_sha256": "254a4fbd1632efd0c6a53295f6d7ec990a430d4c1fc4753ba6480a1406da163e",
+    "initial_review": "Original implicit int-to-DWORD assignment equals explicit cast after unchanged abort/-1 branch; original type and UI logic retained.",
+    "counter_review": "Retained surrounding control flow and all failure checks; original restored anchors verified below.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+    "ids": [
+      "T483-D1384"
+    ],
+    "before_sha256": "c94e1b9631e79306d4570470870de71b76df8f4e22646fc9e0ea16619ae32d15",
+    "after_sha256": "00cf1438457ad015c20d924d54dbd96b0cd4838933874d5adb9358a3a6410fc5",
+    "initial_review": "Restore original unused by-value parameter assignment at original line 110; no caller-visible state or function signature change.",
+    "counter_review": "Retained surrounding control flow and all failure checks; original restored anchors verified below.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "ids": [
+      "T483-D1908",
+      "T483-D1912"
+    ],
+    "before_sha256": "2eee8be1de79beb1349feef69903e926ea8504f9606ad89b2a8df4902620fc0d",
+    "after_sha256": "18af789dfeb1e4c3085231c3b123bce821641c2d7d0d2364ba3926ea873cc9ad",
+    "initial_review": "Restore original release-build ThunkNLS read and cb/dwType declarations. common/wow/registry.h routes original reads into existing worker projection. Invalid/missing key returns failure before reading dwType, so original fallback remains defined.",
+    "counter_review": "No native registry write or alternate fallback introduced. Query failure short-circuits type check; REG_DWORD uses supplied value, wrong type/failure follows original LCID default. Original DEBUG declarations/error branches retained; only invented DEBUG wrapper around release query removed.",
+    "verification_required": "Selected compile/line anchors; query valid0/valid1, missing, wrong-type and failure controls; WOW startup regression.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "ids": [
+      "T483-D2230",
+      "T483-D2232"
+    ],
+    "before_sha256": "ece6f49317fa93615658c2a410215a91b33a2d765ecbb35517858cfea4f53d04",
+    "after_sha256": "ad17110e801f15585c8b8a7ec76b6ffd43973a57227fa5c0685006b087c0ccd2",
+    "initial_review": "Restore original entry/failure diagnostics through existing IF_DEBUG/NetpKdPrint; preserve Unicode allocation/cleanup and no-op selected nondebug diagnostics.",
+    "counter_review": "Original ranges and current finite boundary checked; preserve original line-ending form.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "ids": [
+      "T483-D2233"
+    ],
+    "status": "reclassified-retain; no source restoration",
+    "initial_review": "S1 generic diagnostic restoration wrongly covers original lines147\u2013660: four unselected message-name handlers.",
+    "counter_review": "Only declarations found for XsNetMessageNameAdd/Del/Enum/GetInfo; vrnetapi.c:607 calls XsNetMessageBufferSend only. No server/name-handler closure admitted.",
+    "disposition": "Keep omitted unconnected bodies; preserve S1 as historical snapshot and record this explicit execution correction.",
+    "evidence": [
+      "src/mvdm-host/vdmredir/vrnetapi.c",
+      "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+      "O:/repos.external/OpenNT/ds/netapi/xactsrv/apimsg.c"
+    ]
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+    "ids": [
+      "T483-D2297"
+    ],
+    "before_sha256": "8031c5a98f46dbbc7cbff3911e78d25c0c0cd37992908dc154139286110b56f2",
+    "after_sha256": "5ae1450035008742e0503a0573199d6901eee168321c2d7d489f04b92dfbe24d",
+    "initial_review": "Restore original NtQueryValueKey declaration and line; check actual import macro composition in batch x86/x64 builds.",
+    "counter_review": "Original ranges and current finite boundary checked; preserve original line-ending form.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/wow32-dll/include/wow_task_profile_bindings.h",
+    "ids": [],
+    "before_sha256": "2f396ccdc224b20d4f11b4891dd247a61c36962a0e9ac0f6bfab62060f3f1bef",
+    "after_sha256": "206e23e2445afc4cbb9b89386d71e88fa7342a8394f5c25b407aa874e4e391e4",
+    "initial_review": "Remove duplicate NtQueryValueKey prototype; existing original header include becomes declaration authority.",
+    "counter_review": "Original ranges and current finite boundary checked; preserve original line-ending form.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "ids": [
+      "T483-D2300",
+      "T483-D2301",
+      "T483-D2302",
+      "T483-D2303",
+      "T483-D2304",
+      "T483-D2305",
+      "T483-D2306",
+      "T483-D2307",
+      "T483-D2308",
+      "T483-D2310",
+      "T483-D2311",
+      "T483-D2312",
+      "T483-D2313",
+      "T483-D2314",
+      "T483-D2315",
+      "T483-D2321",
+      "T483-D2322",
+      "T483-D2323",
+      "T483-D2324",
+      "T483-D2325",
+      "T483-D2326",
+      "T483-D2327",
+      "T483-D2328",
+      "T483-D2329",
+      "T483-D2330",
+      "T483-D2331",
+      "T483-D2332",
+      "T483-D2333",
+      "T483-D2334",
+      "T483-D2335",
+      "T483-D2336",
+      "T483-D2337",
+      "T483-D2338",
+      "T483-D2343"
+    ],
+    "before_sha256": "da0261ce3f737d328794b5a49977d3c10f5297808591f38fa4dd9c365958c9d9",
+    "after_sha256": "1132bf03fd760dfc051cf4ac4478241ee40cc59463562cbdcbbe21f88ed8d1a5",
+    "initial_review": "Restore original selected prototype bodies/order and logical lines; restore original TIME_FIELDS and six used list macro bodies; retain existing nonimport declaration binding and deferred callable declarations/condition tail.",
+    "counter_review": "All restored function parameter tokens match current signatures after removing original IN/OUT/OPTIONAL annotations. SDK 10.0.22621 winternl.h has no _NTRTL_ or these list macros; original provider is reached in inspected product preprocessing. Guard macro names separately for partial SDK availability. No original macro/function substitution for pending cases.",
+    "prototype_evidence": [
+      {
+        "id": "T483-D2300",
+        "name": "RtlAllocateHeap",
+        "original_line": 937,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2301",
+        "name": "RtlFreeHeap",
+        "original_line": 946,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2302",
+        "name": "RtlInitString",
+        "original_line": 1610,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2303",
+        "name": "RtlInitAnsiString",
+        "original_line": 1618,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2304",
+        "name": "RtlInitUnicodeString",
+        "original_line": 1626,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2305",
+        "name": "RtlOemStringToUnicodeString",
+        "original_line": 1799,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2306",
+        "name": "RtlOemToUnicodeN",
+        "original_line": 2131,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2307",
+        "name": "RtlUnicodeStringToOemString",
+        "original_line": 1808,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2308",
+        "name": "RtlUnicodeToOemN",
+        "original_line": 2142,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2310",
+        "name": "RtlAnsiStringToUnicodeString",
+        "original_line": 1757,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2311",
+        "name": "RtlUnicodeStringToAnsiString",
+        "original_line": 1777,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2312",
+        "name": "RtlFreeUnicodeString",
+        "original_line": 1941,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2313",
+        "name": "RtlFreeOemString",
+        "original_line": 1957,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2314",
+        "name": "RtlFreeAnsiString",
+        "original_line": 1948,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2315",
+        "name": "RtlEqualUnicodeString",
+        "original_line": 1864,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2321",
+        "name": "RtlNtStatusToDosError",
+        "original_line": 5773,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2322",
+        "name": "RtlNtStatusToDosErrorNoTeb",
+        "original_line": 5780,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2323",
+        "name": "RtlAcquirePebLock",
+        "original_line": 2366,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2324",
+        "name": "RtlReleasePebLock",
+        "original_line": 2373,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2325",
+        "name": "RtlCreateEnvironment",
+        "original_line": 2400,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2326",
+        "name": "RtlDestroyEnvironment",
+        "original_line": 2408,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2327",
+        "name": "RtlSetEnvironmentVariable",
+        "original_line": 2423,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2328",
+        "name": "DbgBreakPoint",
+        "original_line": 3401,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2329",
+        "name": "RtlCreateUnicodeString",
+        "original_line": 1636,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2330",
+        "name": "RtlCompareUnicodeString",
+        "original_line": 1855,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2331",
+        "name": "RtlAppendUnicodeToString",
+        "original_line": 1922,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2332",
+        "name": "RtlUpcaseUnicodeStringToCountedOemString",
+        "original_line": 1844,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2334",
+        "name": "RtlTimeToTimeFields",
+        "original_line": 4116,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2335",
+        "name": "RtlTimeFieldsToTime",
+        "original_line": 4128,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2336",
+        "name": "RtlExtendedLargeIntegerDivide",
+        "original_line": 3704,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2337",
+        "name": "RtlExtendedIntegerMultiply",
+        "original_line": 3730,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      },
+      {
+        "id": "T483-D2338",
+        "name": "RtlFillMemoryUlong",
+        "original_line": 3311,
+        "parameter_tokens_equal_ignoring_IN_OUT_OPTIONAL": true,
+        "import_decoration": "Existing nonimport binding retained; local definitions remain valid."
+      }
+    ],
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/compat/include/nt.h",
+    "ids": [],
+    "before_sha256": "e09ccf29fd86317dad2c861bbf4ebf693179e6657664131ab62aa384f980551c",
+    "after_sha256": "2a1da791051d2f2847f783048af3f9c4170e3f8c869cca1b8ab7533fdff3a045",
+    "initial_review": "Remove duplicate list fallback bodies; original ntrtl selected cohort owns all six macros. Supply SDK-omitted CSHORT scalar before original TIME_FIELDS composition.",
+    "counter_review": "No runtime implementation added; supported modern SDK does not define the original ntrtl guard. Validate all supported x86/x64 consumers and partial macro controls in batch.",
+    "status": "verified and published; P2 commit pending"
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "ids": [
+      "T483-D2377"
+    ],
+    "before_sha256": "9971cf7edcf795e260fa6b7d6bfc0b8e9c2e59b6521ab2ab2467453ef12dd101",
+    "after_sha256": "5d455e334faebb730de12e4d9b5eb13ad7e02e1e7632d64b8a6370a246e96bca",
+    "initial_review": "Restore original multiline declarations and exact logical lines. Retain existing nonimport binding and PVOID native relative-output boundary.",
+    "counter_review": "Modern native relative output is 16 bytes versus original 12; base_classifier_path requests NULL and owns the old-layout wrapper. Restoring old typed native output would be unsafe and is not this layout item. Argument ABI unchanged; OPTIONAL annotations empty.",
+    "status": "verified and published; P2 commit pending"
+  }
+]

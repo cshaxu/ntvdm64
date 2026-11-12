@@ -35,15 +35,18 @@ The previously suggested compat-first S2 is superseded.
 
 ## S2 Progress
 
-Assigned: 76 entries in 21 mirror files. First batch: 10 modified files (5 mirror, 5 coupled implementation/test), 20 entries
-implemented and verified with source/counter-review evidence; published to both
-destinations. P1 commit/push is the delivery containing these records. 56 entries
-remain in S2.
-Batch build starts at ten modified files or S2 exhaustion. See
+Assigned: 76 entries in 21 mirror files. P1 delivered 20 entries at
+`042d67f89`. P2 resolves 46 further entries: 45 restorations and one documented
+S1 classification correction (D2233 retains four unconnected message-name
+handlers). 66/76 entries resolved; ten remain across eight mirror files.
+
+P2 changed ten production source/header files, plus two focused verification
+files. Cached x86/x64 builds, 50 selected compiler-line anchors, RTL/list controls,
+six original ThunkNLS controls and all 16 selected Full gates passed. Eleven
+images published and hash-verified at both destinations. See
+[P2 delivery](../../artifacts/mvdm-audit/t483-s2/batch2-delivery.json) and the
 [execution ledger](../../artifacts/mvdm-audit/t483-s2/execution.json).
-Next mirror file after this batch: softpc.new/host/src/nt_com.c. The first batch
-retains exact WOW failure exit/provider-marker assertions while removing product
-diagnostic-log dependencies.
+Next file: non-mvdm/windows/core/ntuser/client/dlgend.c. S6 remains held.
 
 ## Latest S Closure
 
@@ -65,16 +68,12 @@ auxiliary provenance, not a second work queue.
 
 ## Current Technical Baseline
 
-Package `c15e55b0-7de8-4567-889f-b7e154da6782` (S2 P1): cached x86/x64 build passed;
-S2 focused layout, observer-error and real WOW failure tests passed; all 16 selected Full gates
-passed. The external DOS4GW/NESticle fixture was not supplied and was explicitly
-skipped, not passed. All 11 images are published to assets/release and
-O:/winnt/system32 with matching manifest SHA-256 hashes.
-
-[Delivery evidence](../../artifacts/mvdm-audit/t483-s2/batch1-delivery.json)
-and [Full receipt](../../artifacts/mvdm-audit/t483-s2/batch1-full-timings.json)
-distinguish raw compiler identity, package stamping and runtime acceptance.
-No claim of binary equivalence to the old package is made.
+Package `21d104eb-b607-4a3f-99e6-00828b215b07` (S2 P2): cached x86/x64 build and all 16
+selected Full gates passed. The external DOS4GW/NESticle fixture was not supplied
+and is explicitly skipped, not passed. All 11 images match the manifest in
+assets/release and O:/winnt/system32. See the
+[delivery evidence](../../artifacts/mvdm-audit/t483-s2/batch2-delivery.json).
+No binary-equivalence claim to P1 is made.
 
 ## Remaining Scope
 

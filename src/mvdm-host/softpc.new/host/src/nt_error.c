@@ -709,7 +709,7 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
            }
        }
    else {
-       pedgi->dwReply = (DWORD)i;
+       pedgi->dwReply = i;
        }
 
 

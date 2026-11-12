@@ -464,7 +464,9 @@ BOOL W32Init(VOID)
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #line 467
 #endif
-#line 470
+#line 468
+    DWORD cb;
+    DWORD dwType;
     PTD ptd;
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;
@@ -608,13 +610,14 @@ BOOL W32Init(VOID)
     // If present (it usually isn't) read ThunkNLS value entry.
     //
 
-#ifdef DEBUG
 #line 590
-#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
-#else
-#line 619
-    {
-#endif
+    cb = sizeof(fThunkStrRtns);
+    if (RegQueryValueEx(WowKey,
+            "ThunkNLS",
+            NULL,
+            &dwType,
+            (LPBYTE) &fThunkStrRtns,
+            &cb) || dwType != REG_DWORD) {
 #line 597
 
         //

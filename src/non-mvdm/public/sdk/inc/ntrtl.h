@@ -40,105 +40,17 @@ Revision History:
 #error Unsupported C++ inclusion of the NT4 RTL subset
 #endif
 #line 59
-
 PVOID NTAPI RtlProcessHeap(VOID);
-PVOID NTAPI RtlAllocateHeap(PVOID HeapHandle, ULONG Flags, SIZE_T Size);
-BOOLEAN NTAPI RtlFreeHeap(PVOID HeapHandle, ULONG Flags, PVOID BaseAddress);
-VOID NTAPI RtlInitString(PSTRING DestinationString, PCSZ SourceString);
-VOID NTAPI RtlInitAnsiString(PANSI_STRING DestinationString, PCSZ SourceString);
-VOID NTAPI RtlInitUnicodeString(PUNICODE_STRING DestinationString, PCWSTR SourceString);
-NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING DestinationString, PCOEM_STRING SourceString, BOOLEAN AllocateDestinationString);
-/* DIVERGENCE(OPENNT-HOST-011): selected SoftPC keyboard conversion reaches
- * the original fixed-buffer RTL declaration.  Keep its original public
- * source shape in this true subset; the modern API binding is adapter-owned. */
-NTSTATUS NTAPI RtlOemToUnicodeN(PWSTR UnicodeString, ULONG MaxBytesInUnicodeString, PULONG BytesInUnicodeString, PCHAR OemString, ULONG BytesInOemString);
-NTSTATUS NTAPI RtlUnicodeStringToOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
-/* DIVERGENCE(OPENNT-HOST-012): the selected byte-identical NetLib CopyStr
- * unit reaches these two original OEM conversion declarations.  The full
- * NT4 NTRTL header is outside the accepted host closure; retain the reached
- * signatures only.  The selected x86 NTDLL/import-library binding is verified
- * by the Redirector network package. */
-NTSTATUS NTAPI RtlUnicodeToOemN(PCHAR OemString, ULONG MaxBytesInOemString, PULONG BytesInOemString, PWSTR UnicodeString, ULONG BytesInUnicodeString);
+
 ULONG NTAPI RtlUnicodeStringToOemSize(PCUNICODE_STRING UnicodeString);
-NTSTATUS NTAPI RtlAnsiStringToUnicodeString(PUNICODE_STRING DestinationString, PCANSI_STRING SourceString, BOOLEAN AllocateDestinationString);
-NTSTATUS NTAPI RtlUnicodeStringToAnsiString(PANSI_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
-VOID NTAPI RtlFreeUnicodeString(PUNICODE_STRING UnicodeString);
-VOID NTAPI RtlFreeOemString(POEM_STRING OemString);
-VOID NTAPI RtlFreeAnsiString(PANSI_STRING AnsiString);
-BOOLEAN NTAPI RtlEqualUnicodeString(PCUNICODE_STRING String1, PCUNICODE_STRING String2, BOOLEAN CaseInSensitive);
+
 ULONG NTAPI RtlOemStringToUnicodeSize(PCOEM_STRING String);
 ULONG NTAPI RtlGetFullPathName_U(PCWSTR FileName, ULONG Size, PWSTR Buffer, PWSTR *ShortName);
 ULONG NTAPI RtlGetCurrentDirectory_U(ULONG MaximumLength, PWSTR Buffer);
 NTSTATUS NTAPI RtlSetCurrentDirectory_U(PCUNICODE_STRING PathName);
-/* DIVERGENCE(OPENNT-HOST-027): modern NTDLL exports these historical names.
- * The selected original error.c implementation therefore lives in an
- * explicit private symbol domain.  All selected callers use that original
- * table; this header supplies no project-defined mapping policy. */
 #define RtlNtStatusToDosError OpenNtRtlNtStatusToDosError
 #define RtlNtStatusToDosErrorNoTeb OpenNtRtlNtStatusToDosErrorNoTeb
-ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status);
-ULONG NTAPI RtlNtStatusToDosErrorNoTeb(NTSTATUS Status);
-VOID NTAPI RtlAcquirePebLock(VOID);
-VOID NTAPI RtlReleasePebLock(VOID);
-/* DIVERGENCE(OPENNT-HOST-010): original COMMAND environment code reaches
- * these NT4 RTL declarations, while the selected subset previously stopped
- * short of them.  Preserve only the original public function shapes; the
- * modern mutable-block implementation is adapter-owned. */
-NTSTATUS NTAPI RtlCreateEnvironment(BOOLEAN CloneCurrentEnvironment, PVOID *Environment);
-NTSTATUS NTAPI RtlDestroyEnvironment(PVOID Environment);
-NTSTATUS NTAPI RtlSetEnvironmentVariable(PVOID *Environment, PCUNICODE_STRING Name, PCUNICODE_STRING Value);
 
-/* DIVERGENCE OPENNT-HOST-004: `nt_bop.c` reaches the exact historical
- * ntrtl.h declaration for this diagnostic-only breakpoint.  Modern SDK
- * selection through nt.h does not expose it consistently, so retain only its
- * original declaration shape here; debugger behavior remains owned by the
- * debugger adapter family. */
-VOID NTAPI DbgBreakPoint(VOID);
-
-BOOLEAN NTAPI RtlCreateUnicodeString(PUNICODE_STRING DestinationString, PCWSTR SourceString);
-LONG NTAPI RtlCompareUnicodeString(PCUNICODE_STRING String1, PCUNICODE_STRING String2, BOOLEAN CaseInSensitive);
-NTSTATUS NTAPI RtlAppendUnicodeToString(PUNICODE_STRING Destination, PCWSTR Source);
-NTSTATUS NTAPI RtlUpcaseUnicodeStringToCountedOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
-
-/* DIVERGENCE OPENNT-HOST-005: Original SoftPC CMOS code includes ntrtl.h
- * for this NT4 time-conversion declaration shape.  The selected modern SDK
- * route intentionally supplies only a small historical subset, so retain the
- * unchanged data layout and public-NTDLL declarations here rather than alter
- * the original CMOS source. */
-#ifndef OPENNT_SUPPORT_TIME_FIELDS_DECLARED
-#define OPENNT_SUPPORT_TIME_FIELDS_DECLARED
-typedef SHORT CSHORT;
-typedef struct _TIME_FIELDS {
-    CSHORT Year;
-    CSHORT Month;
-    CSHORT Day;
-    CSHORT Hour;
-    CSHORT Minute;
-    CSHORT Second;
-    CSHORT Milliseconds;
-    CSHORT Weekday;
-} TIME_FIELDS, *PTIME_FIELDS;
-
-VOID NTAPI RtlTimeToTimeFields(PLARGE_INTEGER Time, PTIME_FIELDS TimeFields);
-BOOLEAN NTAPI RtlTimeFieldsToTime(PTIME_FIELDS TimeFields, PLARGE_INTEGER Time);
-#endif
-
-/* DIVERGENCE OPENNT-HOST-006: Original SoftPC timer and heartbeat code
- * reaches these NT4 RTL arithmetic, critical-section, and process-control
- * declaration forms.  The modern public SDK does not expose a coherent
- * source-compatible subset through the selected headers.  Retain their
- * original signatures only; NTDLL remains the implementation owner. */
-LARGE_INTEGER NTAPI RtlExtendedLargeIntegerDivide(
-    LARGE_INTEGER Dividend,
-    ULONG Divisor,
-    PULONG Remainder);
-LARGE_INTEGER NTAPI RtlExtendedIntegerMultiply(
-    LARGE_INTEGER Multiplicand,
-    LONG Multiplier);
-VOID NTAPI RtlFillMemoryUlong(
-    PVOID Destination,
-    SIZE_T Length,
-    ULONG Pattern);
 NTSTATUS NTAPI RtlEnterCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
 NTSTATUS NTAPI RtlLeaveCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
 NTSTATUS NTAPI RtlInitializeCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
@@ -148,11 +60,327 @@ NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 #endif
 
 #ifndef InitializeListHead
-#define InitializeListHead(ListHead) ((ListHead)->Flink = (ListHead)->Blink = (ListHead))
-#define IsListEmpty(ListHead) ((ListHead)->Flink == (ListHead))
-#define RemoveEntryList(Entry) { PLIST_ENTRY _blink = (Entry)->Blink; PLIST_ENTRY _flink = (Entry)->Flink; _blink->Flink = _flink; _flink->Blink = _blink; }
-#define InsertHeadList(ListHead,Entry) { PLIST_ENTRY _flink = (ListHead)->Flink; (Entry)->Flink = _flink; (Entry)->Blink = (ListHead); _flink->Blink = (Entry); (ListHead)->Flink = (Entry); }
+#line 106
+#define InitializeListHead(ListHead) (\
+    (ListHead)->Flink = (ListHead)->Blink = (ListHead))
 #endif
+
+#ifndef IsListEmpty
+#line 116
+#define IsListEmpty(ListHead) \
+    ((ListHead)->Flink == (ListHead))
+#endif
+
+#ifndef RemoveHeadList
+#line 126
+#define RemoveHeadList(ListHead) \
+    (ListHead)->Flink;\
+    {RemoveEntryList((ListHead)->Flink)}
+#endif
+
+#ifndef RemoveEntryList
+#line 148
+#define RemoveEntryList(Entry) {\
+    PLIST_ENTRY _EX_Blink;\
+    PLIST_ENTRY _EX_Flink;\
+    _EX_Flink = (Entry)->Flink;\
+    _EX_Blink = (Entry)->Blink;\
+    _EX_Blink->Flink = _EX_Flink;\
+    _EX_Flink->Blink = _EX_Blink;\
+    }
+#endif
+
+#ifndef InsertTailList
+#line 165
+#define InsertTailList(ListHead,Entry) {\
+    PLIST_ENTRY _EX_Blink;\
+    PLIST_ENTRY _EX_ListHead;\
+    _EX_ListHead = (ListHead);\
+    _EX_Blink = _EX_ListHead->Blink;\
+    (Entry)->Flink = _EX_ListHead;\
+    (Entry)->Blink = _EX_Blink;\
+    _EX_Blink->Flink = (Entry);\
+    _EX_ListHead->Blink = (Entry);\
+    }
+#endif
+
+#ifndef InsertHeadList
+#line 184
+#define InsertHeadList(ListHead,Entry) {\
+    PLIST_ENTRY _EX_Flink;\
+    PLIST_ENTRY _EX_ListHead;\
+    _EX_ListHead = (ListHead);\
+    _EX_Flink = _EX_ListHead->Flink;\
+    (Entry)->Flink = _EX_Flink;\
+    (Entry)->Blink = _EX_ListHead;\
+    _EX_Flink->Blink = (Entry);\
+    _EX_ListHead->Flink = (Entry);\
+    }
+#endif
+
+#line 937
+PVOID
+NTAPI
+RtlAllocateHeap(
+    IN PVOID HeapHandle,
+    IN ULONG Flags,
+    IN SIZE_T Size
+    );
+
+#line 946
+BOOLEAN
+NTAPI
+RtlFreeHeap(
+    IN PVOID HeapHandle,
+    IN ULONG Flags,
+    IN PVOID BaseAddress
+    );
+
+#line 1610
+VOID
+NTAPI
+RtlInitString(
+    PSTRING DestinationString,
+    PCSZ SourceString
+    );
+
+#line 1618
+VOID
+NTAPI
+RtlInitAnsiString(
+    PANSI_STRING DestinationString,
+    PCSZ SourceString
+    );
+
+#line 1626
+VOID
+NTAPI
+RtlInitUnicodeString(
+    PUNICODE_STRING DestinationString,
+    PCWSTR SourceString
+    );
+
+#line 1636
+BOOLEAN
+NTAPI
+RtlCreateUnicodeString(
+    OUT PUNICODE_STRING DestinationString,
+    IN PCWSTR SourceString
+    );
+
+#line 1757
+NTSTATUS
+NTAPI
+RtlAnsiStringToUnicodeString(
+    PUNICODE_STRING DestinationString,
+    PCANSI_STRING SourceString,
+    BOOLEAN AllocateDestinationString
+    );
+
+#line 1777
+NTSTATUS
+NTAPI
+RtlUnicodeStringToAnsiString(
+    PANSI_STRING DestinationString,
+    PCUNICODE_STRING SourceString,
+    BOOLEAN AllocateDestinationString
+    );
+
+#line 1799
+NTSTATUS
+NTAPI
+RtlOemStringToUnicodeString(
+    PUNICODE_STRING DestinationString,
+    PCOEM_STRING SourceString,
+    BOOLEAN AllocateDestinationString
+    );
+
+#line 1808
+NTSTATUS
+NTAPI
+RtlUnicodeStringToOemString(
+    POEM_STRING DestinationString,
+    PCUNICODE_STRING SourceString,
+    BOOLEAN AllocateDestinationString
+    );
+
+#line 1844
+NTSTATUS
+NTAPI
+RtlUpcaseUnicodeStringToCountedOemString(
+    POEM_STRING DestinationString,
+    PCUNICODE_STRING SourceString,
+    BOOLEAN AllocateDestinationString
+    );
+
+#line 1855
+LONG
+NTAPI
+RtlCompareUnicodeString(
+    PCUNICODE_STRING String1,
+    PCUNICODE_STRING String2,
+    BOOLEAN CaseInSensitive
+    );
+
+#line 1864
+BOOLEAN
+NTAPI
+RtlEqualUnicodeString(
+    IN PCUNICODE_STRING String1,
+    IN PCUNICODE_STRING String2,
+    IN BOOLEAN CaseInSensitive
+    );
+
+#line 1922
+NTSTATUS
+NTAPI
+RtlAppendUnicodeToString (
+    IN PUNICODE_STRING Destination,
+    IN PCWSTR Source
+    );
+
+#line 1941
+VOID
+NTAPI
+RtlFreeUnicodeString(
+    PUNICODE_STRING UnicodeString
+    );
+
+#line 1948
+VOID
+NTAPI
+RtlFreeAnsiString(
+    PANSI_STRING AnsiString
+    );
+
+#line 1957
+VOID
+NTAPI
+RtlFreeOemString(
+    POEM_STRING OemString
+    );
+
+#line 2131
+NTSTATUS
+NTAPI
+RtlOemToUnicodeN(
+    PWSTR UnicodeString,
+    ULONG MaxBytesInUnicodeString,
+    PULONG BytesInUnicodeString,
+    PCHAR OemString,
+    ULONG BytesInOemString
+    );
+
+#line 2142
+NTSTATUS
+NTAPI
+RtlUnicodeToOemN(
+    PCHAR OemString,
+    ULONG MaxBytesInOemString,
+    PULONG BytesInOemString,
+    PWSTR UnicodeString,
+    ULONG BytesInUnicodeString
+    );
+
+#line 2366
+VOID
+NTAPI
+RtlAcquirePebLock(
+    VOID
+    );
+
+#line 2373
+VOID
+NTAPI
+RtlReleasePebLock(
+    VOID
+    );
+
+#line 2400
+NTSTATUS
+NTAPI
+RtlCreateEnvironment(
+    BOOLEAN CloneCurrentEnvironment,
+    PVOID *Environment
+    );
+
+#line 2408
+NTSTATUS
+NTAPI
+RtlDestroyEnvironment(
+    PVOID Environment
+    );
+
+#line 2423
+NTSTATUS
+NTAPI
+RtlSetEnvironmentVariable(
+    PVOID *Environment,
+    PCUNICODE_STRING Name,
+    PCUNICODE_STRING Value
+    );
+
+#line 3311
+VOID
+NTAPI
+RtlFillMemoryUlong (
+   PVOID Destination,
+   SIZE_T Length,
+   ULONG Pattern
+   );
+
+#line 3401
+VOID
+NTAPI
+DbgBreakPoint(
+    VOID
+    );
+
+#line 3704
+LARGE_INTEGER
+NTAPI
+RtlExtendedLargeIntegerDivide (
+    LARGE_INTEGER Dividend,
+    ULONG Divisor,
+    PULONG Remainder
+    );
+
+#line 3730
+LARGE_INTEGER
+NTAPI
+RtlExtendedIntegerMultiply (
+    LARGE_INTEGER Multiplicand,
+    LONG Multiplier
+    );
+
+#line 4061
+typedef struct _TIME_FIELDS {
+    CSHORT Year;        // range [1601...]
+    CSHORT Month;       // range [1..12]
+    CSHORT Day;         // range [1..31]
+    CSHORT Hour;        // range [0..23]
+    CSHORT Minute;      // range [0..59]
+    CSHORT Second;      // range [0..59]
+    CSHORT Milliseconds;// range [0..999]
+    CSHORT Weekday;     // range [0..6] == [Sunday..Saturday]
+} TIME_FIELDS;
+typedef TIME_FIELDS *PTIME_FIELDS;
+
+#line 4116
+VOID
+NTAPI
+RtlTimeToTimeFields (
+    PLARGE_INTEGER Time,
+    PTIME_FIELDS TimeFields
+    );
+
+#line 4128
+BOOLEAN
+NTAPI
+RtlTimeFieldsToTime (
+    PTIME_FIELDS TimeFields,
+    PLARGE_INTEGER Time
+    );
 
 /* DIVERGENCE(OPENNT-HOST-029): original header inline required by BaseSrv's
  * IsClientSystem; retain its body rather than generating a test-only copy. */
@@ -178,6 +406,21 @@ RtlConvertLongToLuid(
 #line 4969
 #endif
 #line 4970
+
+#line 5773
+ULONG
+NTAPI
+RtlNtStatusToDosError (
+   NTSTATUS Status
+   );
+
+#line 5780
+ULONG
+NTAPI
+RtlNtStatusToDosErrorNoTeb (
+   NTSTATUS Status
+   );
+
 
 #line 34
 #if defined (_MSC_VER)

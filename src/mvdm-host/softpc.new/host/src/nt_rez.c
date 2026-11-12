@@ -115,7 +115,9 @@ long size;              /* Quantity of data to write */
         char *hff_ret;
         extern char *host_find_file(char *name, char *path, int disp_err);
 
-#line 112
+#line 110
+        type = 0; // To stop unreferenced formal parameter errors
+
         host_block_timer ();
 
 #ifdef DELTA            //STF - make change to 8.3 compatible name

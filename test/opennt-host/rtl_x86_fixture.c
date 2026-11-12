@@ -51,6 +51,24 @@ int main(void)
     NTSTATUS status;
     int result;
 
+    /* Original list macros must preserve both directions and the removed node,
+     * including singleton-to-empty and head/tail insertion. */
+    {
+        LIST_ENTRY head, first, second;
+        PLIST_ENTRY removed;
+        InitializeListHead(&head);
+        if (!IsListEmpty(&head)) return 60;
+        InsertTailList(&head, &first);
+        InsertHeadList(&head, &second);
+        if (head.Flink != &second || head.Blink != &first ||
+            second.Flink != &first || first.Blink != &second) return 61;
+        removed = RemoveHeadList(&head);
+        if (removed != &second || head.Flink != &first ||
+            first.Blink != &head) return 62;
+        RemoveEntryList(&first);
+        if (!IsListEmpty(&head) || head.Blink != &head) return 63;
+    }
+
 
 #ifndef OPENNT_ENVIRONMENT_ONLY
     dividend.HighPart = 1;

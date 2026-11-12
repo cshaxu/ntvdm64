@@ -1,0 +1,52 @@
+{
+  "batch": 2,
+  "source_baseline": "042d67f89",
+  "entries": 46,
+  "implemented": 45,
+  "reclassified_retain": [
+    "T483-D2233"
+  ],
+  "source_files": 10,
+  "verification_test_files": 2,
+  "build": "cached x86 and x64 full passed",
+  "line_proof": "50 actual selected MSVC anchors against pinned originals",
+  "focused": [
+    "rtl-x86-fixture including list insertion/removal/singleton controls passed",
+    "six selected-original ThunkNLS controls passed (test registry/locale boundaries)"
+  ],
+  "full": "16 selected gates passed; external DOS4GW/NESticle fixture explicitly skipped",
+  "publication": {
+    "status": "published",
+    "package": "21d104eb-b607-4a3f-99e6-00828b215b07",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "footprint": {
+    "autonomous": {
+      "added": 1,
+      "deleted": 27,
+      "net": -26
+    },
+    "mirror": {
+      "added": 395,
+      "deleted": 112,
+      "net": 283
+    },
+    "tests": {
+      "added": 81,
+      "deleted": 0,
+      "net": 81
+    }
+  },
+  "limitations": [
+    "ThunkNLS boundary controls are not a real registry integration test; Full exercises real WOW startup.",
+    "Original import omissions and native path-output ABI binding retained.",
+    "Line evidence covers changed selected declarations and adjacent anchors, not all pre-existing excluded mappings."
+  ],
+  "unchanged_guest": true,
+  "winnt_zip_unchanged": true
+}

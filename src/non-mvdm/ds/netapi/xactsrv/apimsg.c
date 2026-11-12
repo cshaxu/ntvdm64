@@ -57,6 +57,13 @@ Return Value:
 
     API_HANDLER_PARAMETERS_REFERENCE;       // Avoid warnings
 
+    IF_DEBUG(MESSAGE) {
+        NetpKdPrint(( "XsNetMessageBufferSend: header at %lx, params at %lx, "
+                      "recipient %s\n",
+                      Header, parameters,
+                      SmbGetUlong( &parameters->Recipient )));
+    }
+
     //
     // Translate parameters, check for errors.
     //
@@ -105,6 +112,15 @@ Return Value:
                  nativeBuffer,
                  nativeBufLen
                  );
+
+#line 121
+
+    if ( !XsApiSuccess( status )) {
+        IF_DEBUG(ERRORS) {
+            NetpKdPrint(( "XsNetMessageBufferSend: NetMessageBufferSend "
+                          "failed: %X\n", status ));
+        }
+    }
 
 #line 129
 cleanup:
