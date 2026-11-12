@@ -1608,17 +1608,9 @@ Both original return algorithms remain in their original owner. This bounded
 host correction is under verification, not delivered; see the
 [S6 ledger](../../docs/etc/evidence/m0-t423-s6-window-display.md).
 
-MVDM-HOST-DIV-315: `softpc.new/base/keymouse/keyba.c::keys_in_6805_buff`
-restores the `else` accidentally embedded in the original single-byte comment.
-Complete single-byte scan sequences must not leave a pending multi-byte marker:
-otherwise four unread events count as one and history return drops records.
-It also counts complete single-byte events after a partially consumed
-multi-byte sequence while preserving the partial-transfer flag; an unmatched
-earlier marker must not swallow those independent complete events.
-The original ring, history, reset and guest keyboard semantics remain owners;
-no new keyboard provider or CPU change is introduced. The extracted-original
-x86 test and real integration status are in the
-[S6 ledger](../../docs/etc/evidence/m0-t423-s6-window-display.md).
+MVDM-HOST-DIV-315 retired in T483 S4: the original counter is restored.
+Production history return snapshots PendingKeyboardHistory and calls
+Reset6805and8042 directly; it does not use legacy scalar counting.
 
 MVDM-HOST-DIV-314: `softpc.new/host/src/nt_graph.c` copies resolved text
 colours and completed original refreshes to the independent frontend's

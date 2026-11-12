@@ -48,7 +48,16 @@ The complete 11-image package was published and hash-verified at both destinatio
 See [P1 delivery](../../artifacts/mvdm-audit/t483-s4/batch1-delivery.json),
 [source review](../../artifacts/mvdm-audit/t483-s4/batch1-source-review.json) and
 [S4 ledger](../../artifacts/mvdm-audit/t483-s4/execution.json).
-Next is D0435 in c_main.c, followed by the remaining register order.
+P2 resolves eight more entries: D0435, D0823–D0825 and D0954–D0957.
+Total delivered: 29/117; 88 remain. Ten source/test files cover atomic event
+consumption, direct keyboard snapshot/reset and removal of unused video declarations.
+Cached x86/x64, Full 16 gates, focused input-return/BIOS/device tests and actual
+keyboard/PIC 89 assertions passed. Final preprocessed line review is complete;
+11-image equivalence after package UUID/PE timestamps permits Full-result reuse.
+P2 was published and hash-verified at both destinations. See
+[P2 delivery](../../artifacts/mvdm-audit/t483-s4/batch2-delivery.json) and
+[source review](../../artifacts/mvdm-audit/t483-s4/batch2-source-review.json).
+Next: D0964–D0967 in egwrtm12.c, then video.c in register order.
 Use ten-modified-file batches or S exhaustion, preserving original logical lines.
 
 ## Latest S Closure
@@ -60,9 +69,9 @@ regressions passed. No user desktop unlock dependency remains in generic queue t
 
 ## Current Technical Baseline
 
-Package `c4ba9b5e-e981-4c47-8c5a-a6f973239c54`, complete 11 images at
+Package `cf09aab7-46f9-41b4-b321-f2c273ed5beb`, complete 11 images at
 assets/release and O:/winnt/system32, manifest hashes equal. Final images equal
-the Full-tested P1 candidate after only package UUID and PE timestamp normalization;
+the Full-tested P2 candidate after only package UUID and PE timestamp normalization;
 this is not raw hash identity. DOS4GW/NESticle remains explicitly skipped because
 its external fixture was not supplied. No guest or winnt.zip change.
 

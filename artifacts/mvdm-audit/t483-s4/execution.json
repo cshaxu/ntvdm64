@@ -174,58 +174,66 @@
     {
       "id": "T483-D0435",
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Replace only c_cpu_take_event loop with InterlockedAnd(&map,~mask) old-value mask test; retain snapshot/raise/clear helpers.",
-      "verification": "Extend extracted-helper fixture to concurrent consumption and same-bit before/after controls; selected build and relevant HALT/IRQ tests."
+      "verification": "Extend extracted-helper fixture to concurrent consumption and same-bit before/after controls; selected build and relevant HALT/IRQ tests.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0823",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Change CalcNumberOfUnusedKeyEvents to invoke Reset6805and8042 directly after snapshot; restore original keys_in_6805_buff algorithm and remove DIV-315. Reconcile diagnostic wrappers and counter tests with production boundary; verify exports/indirect linkage before final removal decisions.",
-      "verification": "Pending origin snapshot and returned receipt order unchanged; controller/PIC cancellation and input handoff tests; compare no lost/duplicate key."
+      "verification": "Pending origin snapshot and returned receipt order unchanged; controller/PIC cancellation and input handoff tests; compare no lost/duplicate key.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0824",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Change CalcNumberOfUnusedKeyEvents to invoke Reset6805and8042 directly after snapshot; restore original keys_in_6805_buff algorithm and remove DIV-315. Reconcile diagnostic wrappers and counter tests with production boundary; verify exports/indirect linkage before final removal decisions.",
-      "verification": "Pending origin snapshot and returned receipt order unchanged; controller/PIC cancellation and input handoff tests; compare no lost/duplicate key."
+      "verification": "Pending origin snapshot and returned receipt order unchanged; controller/PIC cancellation and input handoff tests; compare no lost/duplicate key.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0825",
       "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Change CalcNumberOfUnusedKeyEvents to invoke Reset6805and8042 directly after snapshot; restore original keys_in_6805_buff algorithm and remove DIV-315. Reconcile diagnostic wrappers and counter tests with production boundary; verify exports/indirect linkage before final removal decisions.",
-      "verification": "Pending origin snapshot and returned receipt order unchanged; controller/PIC cancellation and input handoff tests; compare no lost/duplicate key."
+      "verification": "Pending origin snapshot and returned receipt order unchanged; controller/PIC cancellation and input handoff tests; compare no lost/duplicate key.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0954",
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove unreferenced _ch2_* declarations and redundant nested CPU40 selection, preserving original outer A_VID framework and rejection of unsupported profiles. Keep required mode0 table storage until eliminating all selected address-taking references in ega_writ together; avoid new wrappers.",
-      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile."
+      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0955",
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove unreferenced _ch2_* declarations and redundant nested CPU40 selection, preserving original outer A_VID framework and rejection of unsupported profiles. Keep required mode0 table storage until eliminating all selected address-taking references in ega_writ together; avoid new wrappers.",
-      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile."
+      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0956",
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove unreferenced _ch2_* declarations and redundant nested CPU40 selection, preserving original outer A_VID framework and rejection of unsupported profiles. Keep required mode0 table storage until eliminating all selected address-taking references in ega_writ together; avoid new wrappers.",
-      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile."
+      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0957",
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
-      "status": "pending",
+      "status": "delivered P2",
       "plan": "Remove unreferenced _ch2_* declarations and redundant nested CPU40 selection, preserving original outer A_VID framework and rejection of unsupported profiles. Keep required mode0 table storage until eliminating all selected address-taking references in ega_writ together; avoid new wrappers.",
-      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile."
+      "verification": "Exact selected symbol references and preprocessed diff; BIOS scalar byte/word writes across address parity, plane-enable, rotate/logical masks and nonzero high bytes; compare memory and dirty marks against selected EVID rules; x86/x64 compile.",
+      "evidence": "batch2-delivery.json"
     },
     {
       "id": "T483-D0964",
@@ -846,7 +854,7 @@
   ],
   "counts": {
     "assigned": 117,
-    "delivered": 21,
-    "remaining_unprocessed": 96
+    "delivered": 29,
+    "remaining_unprocessed": 88
   }
 }

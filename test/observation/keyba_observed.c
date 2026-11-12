@@ -1,9 +1,9 @@
 /* Test-only link substitution, never a product input. Record the original
  * keyboard's input/count/port boundaries without file I/O at handoff. */
-#define keys_in_6805_buff observed_original_keys_in_6805_buff
+#define PendingKeyboardHistory observed_original_PendingKeyboardHistory
 #define AT_kbd_init observed_original_AT_kbd_init
 #include "../../src/mvdm-host/softpc.new/base/keymouse/keyba.c"
-#undef keys_in_6805_buff
+#undef PendingKeyboardHistory
 #undef AT_kbd_init
 #include <stdlib.h>
 
@@ -83,7 +83,7 @@ void AT_kbd_init(void)
 }
 
 extern int GetHistoryKeyEvent(PKEY_EVENT_RECORD event,int number);
-int keys_in_6805_buff(int *part_key_transferred)
+unsigned PendingKeyboardHistory(void)
 {
     LONG data[12]={held_event_count,output_full,pending_8042,KbdData,
         output_contents,buff_6805_out_ptr,buff_6805_in_ptr,
@@ -105,7 +105,7 @@ int keys_in_6805_buff(int *part_key_transferred)
         LONG marker[2]={index,key_marker_buffer[index]};
         record_event(3,marker,2);
     }
-    result=observed_original_keys_in_6805_buff(part_key_transferred);
-    data[0]=result;data[1]=*part_key_transferred;record_event(4,data,2);
+    result=observed_original_PendingKeyboardHistory();
+    data[0]=result;record_event(11,data,1); /* origin receipt count, not legacy count/partial */
     return result;
 }

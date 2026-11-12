@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$BuildRoot,[switch]$HistoryBoundary,[switch]$BiosJoin,[switch]$OriginReturn)
+param([Parameter(Mandatory)][string]$BuildRoot,[switch]$BiosJoin,[switch]$OriginReturn)
 $ErrorActionPreference='Stop'
 $root=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $build=[IO.Path]::GetFullPath($BuildRoot)
@@ -7,11 +7,8 @@ if(!$build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalI
 }
 New-Item -ItemType Directory -Path $build -ErrorAction Stop | Out-Null
 $source=Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse/keyba.c'
-$body=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^GLOBAL int keys_in_6805_buff\(int \*part_key_transferred\)\r?\n\{.*?^\}')
-if(!$body.Success){throw 'Original function extraction failed'}
-[IO.File]::WriteAllText((Join-Path $build 'keyboard_buffer_count.inc'),$body.Value)
-$fixture='test/app/keyboard_buffer_count_test.c'
-if(@($HistoryBoundary,$BiosJoin,$OriginReturn).Where({$_}).Count -gt 1){throw 'Choose one keyboard fixture'}
+if($BiosJoin -and $OriginReturn){throw 'Choose one keyboard fixture'}
+if(!$BiosJoin){$OriginReturn=$true}
 $extraObjects=@()
 if($OriginReturn){
     $eventText=[IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'))
@@ -42,19 +39,6 @@ if($BiosJoin){
     [IO.File]::WriteAllText((Join-Path $build 'keyboard_bios_return.inc'),$bios.Value)
     $fixture='test/app/keyboard_bios_join_test.c'
 }
-if($HistoryBoundary){
-    $up=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^GLOBAL VOID host_key_up IFN1\(int,key\).*?(?=^#ifdef NTVDM\r?\nGLOBAL VOID RaiseAllDownKeys)')
-    $down=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^GLOBAL VOID host_key_down IFN1\(int,key\).*?(?=^GLOBAL VOID host_key_up IFN1)')
-    $eventSource=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'
-    $returned=[regex]::Match([IO.File]::ReadAllText($eventSource),'(?ms)^void ReturnUnusedKeyEvents\(int UnusedKeyEvents\)\r?\n\{.*?^\}')
-    $process=[regex]::Match([IO.File]::ReadAllText($eventSource),'(?ms)^VOID nt_process_keys\(PKEY_EVENT_RECORD KeyEvent\)\r?\n\{.*?^\}')
-    if(!$up.Success -or !$down.Success -or !$process.Success -or !$returned.Success){throw 'Original history boundary extraction failed'}
-    [IO.File]::WriteAllText((Join-Path $build 'keyboard_host_up.inc'),$up.Value)
-    [IO.File]::WriteAllText((Join-Path $build 'keyboard_host_down.inc'),$down.Value)
-    [IO.File]::WriteAllText((Join-Path $build 'keyboard_process.inc'),$process.Value)
-    [IO.File]::WriteAllText((Join-Path $build 'unused_key_return.inc'),$returned.Value)
-    $fixture='test/app/keyboard_history_boundary_test.c'
-}
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $lines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
 foreach($line in $lines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -LiteralPath ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
@@ -65,11 +49,10 @@ if($OriginReturn){
 }
 & cl.exe /nologo /MT /W4 /I $build /I (Join-Path $root 'src') (Join-Path $root $fixture) @extraObjects "/Fo:$build/test.obj" "/Fe:$build/test.exe" user32.lib
 if($LASTEXITCODE){throw 'Fixture compilation failed'}
-Get-FileHash -LiteralPath $source,(Join-Path $build 'keyboard_buffer_count.inc') | Format-List
+Get-FileHash -LiteralPath $source,$PSCommandPath,(Join-Path $root $fixture) | Format-List
 & (Join-Path $build 'test.exe')
 if($LASTEXITCODE){
     if($OriginReturn){throw 'Original origin-aware history return contract failed'}
     if($BiosJoin){throw 'Original BIOS/hardware return join contract failed'}
-    if($HistoryBoundary){throw 'Original keyboard/history preservation contract failed'}
     throw 'Original keyboard-buffer count contract failed'
 }

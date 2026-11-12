@@ -958,6 +958,7 @@ LOCAL VOID mark_key_codes_6805_buff IFN1(int, start)
  * and also clears down these buffers 
  */
 
+#line 1066
 GLOBAL int keys_in_6805_buff(int *part_key_transferred)
 {
     int keys_in_buffer = held_event_count;  /* key to yet processed by adapter */
@@ -972,19 +973,11 @@ GLOBAL int keys_in_6805_buff(int *part_key_transferred)
     {
 	if(key_marker_buffer[tmp_6805_out_ptr] != 0)
 	{
-	    /* DIVERGENCE: MVDM-HOST-DIV-315: a complete single-byte key
-	     * counts independently of any preceding partial multibyte key. */
-	    if(last_marker == 0 || (key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK))
-#line 1081
+	    if(last_marker == 0)
 	    {
-		if(last_marker) *part_key_transferred = TRUE;
-		last_marker = 0;
 		/* start of key seq found */
-#line 1083
 		if(key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK)
-		    keys_in_buffer++; /* one byte seq */
-		else
-#line 1085
+		    keys_in_buffer++; /* one byte seq	    else */
 		    last_marker = key_marker_buffer[tmp_6805_out_ptr];
 	    }
 	    else
@@ -1019,7 +1012,7 @@ GLOBAL int keys_in_6805_buff(int *part_key_transferred)
     return(keys_in_buffer);
 }
 
-/* DIV-317: snapshot original live slots before keys_in_6805_buff resets them. */
+/* DIV-317: snapshot original live slots before Reset6805and8042 clears them. */
 GLOBAL unsigned PendingKeyboardHistory(void)
 {
     return mvdm_keyboard_history_pending(&nt_keyboard_history,buff_6805_out_ptr,

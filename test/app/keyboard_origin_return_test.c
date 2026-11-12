@@ -22,6 +22,7 @@ static struct { HANDLE InputHandle; } sc;
 static struct { int KeyCount; } KeyQueue;
 static unsigned char key_marker_buffer[BUFF_6805_PMAX];
 static int buff_6805_out_ptr,buff_6805_in_ptr,held_event_count,scanning_discontinued;
+static int kbd_output_data_read;
 static int output_full,pending_8042,waiting_for_upcode,resets,queue_resets;
 static DWORD sent;static BOOL fail_write;
 static void DisplayErrorTerm(int kind,DWORD error,const char *file,int line)
@@ -37,12 +38,12 @@ static BOOL WriteConsoleInputVDMW(HANDLE handle,PINPUT_RECORD records,DWORD coun
 #define always_trace0(message) ((void)0)
 static void Reset6805and8042(void)
 {
+    kbd_output_data_read=0;
     ++resets;mvdm_keyboard_history_clear_device(&nt_keyboard_history);
     buff_6805_out_ptr=buff_6805_in_ptr=held_event_count=0;
     output_full=pending_8042=waiting_for_upcode=scanning_discontinued=0;
     memset(key_marker_buffer,0,sizeof(key_marker_buffer));
 }
-#include "keyboard_buffer_count.inc"
 #include "keyboard_origin_pending.inc"
 #include "keyboard_origin_init.inc"
 #include "keyboard_origin_update.inc"
@@ -96,6 +97,11 @@ int main(void)
     fresh();raw('M',TRUE);slot(0);returned(0,0,FALSE);
     fresh();raw('M',TRUE);output_full=1;returned(0,0,FALSE);
     puts("PASS synthetic data and unattributed output do not replay consumed M");
+    fresh();make=raw('M',TRUE);nt_keyboard_history.output=make;output_full=1;
+    returned(1,'M',TRUE);
+    fresh();make=raw('M',TRUE);nt_keyboard_history.output=make;output_full=1;
+    kbd_output_data_read=1;returned(0,0,FALSE);
+    puts("PASS unread output returns once; consumed output awaiting EOI is not replayed");
     fresh();
     /* Recorded 29-entry history shape: M down is origin 11; duplicate
      * release 13 produced no device data. Select the 18 pending origins. */

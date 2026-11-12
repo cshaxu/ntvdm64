@@ -294,19 +294,8 @@ LOCAL VOID c_cpu_raise_event IFN1(IUM32, mask)
 
 LOCAL IBOOL c_cpu_take_event IFN1(IUM32, mask)
 {
-   IUM32 observed;
-   IUM32 desired;
-
-   do {
-      observed = c_cpu_event_snapshot();
-      if (!(observed & mask))
-         return FALSE;
-      desired = observed & ~mask;
-   } while ((IUM32)InterlockedCompareExchange(
-      (volatile LONG *)&cpu_interrupt_map, (LONG)desired,
-      (LONG)observed) != observed);
-
-   return TRUE;
+   return ((IUM32)InterlockedAnd((volatile LONG *)&cpu_interrupt_map,
+      (LONG)~mask) & mask) != 0;
 #line 252
 }
 

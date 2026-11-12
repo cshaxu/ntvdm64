@@ -2043,15 +2043,13 @@ void cmdPushExitInConsoleBuffer (void)
 /*:::::: Calculate no. of keys to return to console input buffer :::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-extern int keys_in_6805_buff(int *part_key_transferred);
+extern void Reset6805and8042(void);
 
 int CalcNumberOfUnusedKeyEvents()
 {
-    int part_key_transferred;
     unsigned pending = PendingKeyboardHistory(); /* DIV-317: snapshot before reset. */
 
-    //Get the number of keys in the 6805 buffer
-    (void)keys_in_6805_buff(&part_key_transferred);
+    Reset6805and8042();
     return (pending + KeyQueue.KeyCount); /* DIV-317: original queue is empty in this profile. */
 #line 1918
 }

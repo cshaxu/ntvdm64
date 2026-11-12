@@ -17,6 +17,7 @@ typedef struct lane {
     IUM32 mask;
     HANDLE start, raised, consumed;
     unsigned rounds;
+    int consume, taken;
 } lane;
 
 static DWORD WINAPI producer(void *opaque)
@@ -25,7 +26,8 @@ static DWORD WINAPI producer(void *opaque)
     unsigned i;
     for (i = 0; i < p->rounds; ++i) {
         if (WaitForSingleObject(p->start, 5000) != WAIT_OBJECT_0) return 1;
-        c_cpu_raise_event(p->mask);
+        if (p->consume) p->taken = c_cpu_take_event(p->mask);
+        else c_cpu_raise_event(p->mask);
         SetEvent(p->raised);
         if (WaitForSingleObject(p->consumed, 5000) != WAIT_OBJECT_0) return 2;
     }
@@ -71,6 +73,30 @@ int main(void)
     if (WaitForMultipleObjects(2, threads, TRUE, 5000) != WAIT_OBJECT_0) goto done;
     for (i = 0; i < 2; ++i)
         if (!GetExitCodeThread(threads[i], &exit_code) || exit_code) goto done;
+    /* One raised bit has exactly one winner even with two consumers.
+     * A later raise must remain available; unrelated bits must survive. */
+    for (i = 0; i < 2; ++i) {
+        CloseHandle(threads[i]); threads[i] = NULL;
+        lanes[i].mask = CPU_HW_INT_MASK;
+        lanes[i].consume = 1;
+        threads[i] = CreateThread(NULL, 0, producer, &lanes[i], 0, NULL);
+        if (!threads[i]) goto done;
+    }
+    for (round = 0; round < 4096; ++round) {
+        c_cpu_raise_event(CPU_HW_INT_MASK | CPU_SIGIO_EXCEPTION_MASK);
+        SetEvent(lanes[0].start); SetEvent(lanes[1].start);
+        if (WaitForMultipleObjects(2, raised, TRUE, 5000) != WAIT_OBJECT_0) goto done;
+        if (lanes[0].taken + lanes[1].taken != 1) goto done;
+        if (c_cpu_event_snapshot() != CPU_SIGIO_EXCEPTION_MASK) goto done;
+        c_cpu_raise_event(CPU_HW_INT_MASK);
+        if (!c_cpu_take_event(CPU_HW_INT_MASK) || c_cpu_take_event(CPU_HW_INT_MASK)) goto done;
+        if (!c_cpu_take_event(CPU_SIGIO_EXCEPTION_MASK) || c_cpu_event_snapshot()) goto done;
+        SetEvent(lanes[0].consumed); SetEvent(lanes[1].consumed);
+    }
+    if (WaitForMultipleObjects(2, threads, TRUE, 5000) != WAIT_OBJECT_0) goto done;
+    for (i = 0; i < 2; ++i)
+        if (!GetExitCodeThread(threads[i], &exit_code) || exit_code) goto done;
+    printf("CCPU_CONSUMPTION_PASS rounds=4096 one_winner=4096 later_raise=4096\n");
     printf("CCPU_NOTIFICATION_PASS rounds=4096 raises=8192 (adapter, not guest IRQ rate)\n");
     result = 0;
 done:

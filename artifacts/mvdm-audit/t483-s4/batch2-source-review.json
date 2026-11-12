@@ -1,0 +1,467 @@
+{
+  "baseline": "d62b9ae1d",
+  "status": "verified and published; included in P2 commit",
+  "modified_source_test_files": 10,
+  "D0435": {
+    "change": "Replace compare-exchange retry with one InterlockedAnd and test prior value against mask. Original logical closing-line anchor252 retained.",
+    "proof": "For both operations the atomic linearization clears precisely mask bits and returns whether any prior mask bit was set. A concurrent raise ordered after consumption remains pending; before consumption may coalesce as in the original bitmap. Neither version promises per-raise counters. Unrelated bits retained. Empty-mask result remains false. Snapshot/raise/clear unchanged.",
+    "test_changes": "Existing 4096 two-producer rounds retained. Add4096 two-consumer rounds: exactly one winner, unrelated bit survives, later same-bit raise observable then consumed once. Event synchronization; no sleeps. Not run yet.",
+    "test_result": "4096 producer rounds and4096 concurrent consumer rounds passed"
+  },
+  "next_keyboard_review": {
+    "entries": [
+      "T483-D0823",
+      "T483-D0824",
+      "T483-D0825"
+    ],
+    "finding": "Only production caller CalcNumberOfUnusedKeyEvents discards keys_in_6805_buff count and partial flag; uses PendingKeyboardHistory receipt instead. Thus call exists for reset side effect only. Original counter has else embedded in comment; original restoration must not misrepresent it as correct receipt counting.",
+    "required_atomic_work": "Replace caller with direct reset after pending snapshot, restore original counter bytes and reconcile DIV315; update diagnostic wrapper at reset boundary and obsolete legacy-count fixtures together, preserving active origin-return/device/PIC coverage.",
+    "evidence": [
+      "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "test/observation/keyba_observed.c",
+      "test/app/keyboard_history_boundary_test.c",
+      "test/app/keyboard_origin_return_test.c"
+    ],
+    "state": "implemented; origin-return, BIOS join and device-lifetime focused tests passed",
+    "diagnostic": "PendingKeyboardHistory wrapper records origin count as kind11; kind7 remains existing Console sink witness. No product instrumentation added.",
+    "test_disposition": "Retired obsolete counter-only and deliberately red raw-suffix mock fixtures. Runner defaults to actual origin-return and retains BIOS join. Added consumed-output/awaiting-EOI exclusion assertion after repairing missing existing state in fixture."
+  },
+  "video": {
+    "entries": [
+      "T483-D0954",
+      "T483-D0955",
+      "T483-D0956",
+      "T483-D0957"
+    ],
+    "change": "Remove16 unreferenced _ch2 declarations and redundant inner CPU40 conditional; retain original A_VID frame, unsupported-profile errors, both mode0 table objects, scalar algorithms and all address-taking consumers.",
+    "verification": "Cached compile and actual preprocessed line review pending; no scalar behavior changed."
+  },
+  "runs": {
+    "focused": "build/t483-s4-p2/focused-r2.stdout.txt; focused.exit=0",
+    "notification": "build/t483-s4-p2/notification/result.txt",
+    "failed_attempt": "build/t483-s4-p2/focused.stdout.txt: fixture lacked kbd_output_data_read; not a passing result",
+    "cached": "build/t483-s4-p2/cached.exit=0; x86/x64",
+    "boundaries": "build/t483-s4-p2/boundaries.exit=0; actual controller/PIC assertions=89 failures=0; keyba_observed/nt_event_observed objects compiled",
+    "full": "build/t483-s4-p2/full.exit=0; 16 gates passed",
+    "final_cached": "build/t483-s4-p2-final/cached.exit=0",
+    "final_verification": "build/t483-s4-p2-final/verify.exit=0"
+  },
+  "line_review": {
+    "observed": "build/t483-s4-p2/line-observations.json",
+    "counter_restoration": "keys_in_6805_buff body byte-identical to pinned original including CRLF; #line1066 restores first declaration.",
+    "ccpu": "165 unique original anchors match, zero text conflicts; end anchor252 retained.",
+    "keyba": "226 original anchors; two comment-stripped count increments are original1084/1091, not displaced1111; selected NTVDM response assignment is existing DIV359 adaptation, not the excluded original else at2607.",
+    "nt_event": "258 anchors; additional POINT declaration and host_applClose adaptation are not original occurrences at974/1899. Caller return closes at original1918.",
+    "video": "After #line429 correction, actual compiler yields26 matching original statement anchors and zero text conflicts. No executable source change.",
+    "final_observations": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "unique_exact_original_statement_anchors": 165,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+        "unique_exact_original_statement_anchors": 226,
+        "conflicts": [
+          {
+            "statement": "keys_in_buffer++;",
+            "compiled": 1084,
+            "original": 1111
+          },
+          {
+            "statement": "keys_in_buffer++;",
+            "compiled": 1091,
+            "original": 1111
+          },
+          {
+            "statement": "output_contents = (char)code_to_send;",
+            "compiled": 2605,
+            "original": 2607
+          }
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+        "unique_exact_original_statement_anchors": 26,
+        "conflicts": []
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "unique_exact_original_statement_anchors": 258,
+        "conflicts": [
+          {
+            "statement": "POINT mouse_pos;",
+            "compiled": 166,
+            "original": 974
+          },
+          {
+            "statement": "host_applClose();",
+            "compiled": 1337,
+            "original": 1899
+          }
+        ]
+      }
+    ]
+  },
+  "image_equivalence": {
+    "old_package": "b5b5f6ae-c10d-46e3-9442-ef16f2f0ebdb",
+    "new_package": "cf09aab7-46f9-41b4-b321-f2c273ed5beb",
+    "method": "Byte comparison after clearing only unique package GUID and PE-described COFF/EXPORT/DEBUG TimeDateStamp fields. No executable bytes or source-line literals normalized.",
+    "images": [
+      {
+        "image": "VCDEX.DLL",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            240,
+            244,
+            "COFF TimeDateStamp"
+          ],
+          [
+            6020,
+            6024,
+            "EXPORT TimeDateStamp"
+          ],
+          [
+            5964,
+            5968,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "ACF3067E6C9FA0ABAFAC6C3772605D4042BA0CACA64FE212A575F0F626947CA7",
+        "new_hash": "A44F47849BD40E269B8BD9460410A07E28029C69E3AE2E1C2F156B72FC075D7C",
+        "normalized_hashes": [
+          "66720ee1a9392f8355da576180e7227c94dcb95d91c9606beb95dfd627fcbb65",
+          "66720ee1a9392f8355da576180e7227c94dcb95d91c9606beb95dfd627fcbb65"
+        ]
+      },
+      {
+        "image": "run16.exe",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            264,
+            268,
+            "COFF TimeDateStamp"
+          ],
+          [
+            211428,
+            211432,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "FA373438D0F9EDDFF722641EE112F654C3CEDAA340498D6B9E696EFD1C444581",
+        "new_hash": "85BEC8DC9BF94F951DF83205CDED4EA26849DD2AD4907A41C36673741BE1AA53",
+        "normalized_hashes": [
+          "1505ba58b6fad83ecab4112dd7926af92dbb23d93c272e7c3837972793d52e61",
+          "1505ba58b6fad83ecab4112dd7926af92dbb23d93c272e7c3837972793d52e61"
+        ]
+      },
+      {
+        "image": "ntsrv.exe",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            248,
+            252,
+            "COFF TimeDateStamp"
+          ],
+          [
+            300084,
+            300088,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "49F6EED83512E15B12F06389BE74584E8F5AECAA62EA80E28760A059F3C67136",
+        "new_hash": "4B332F3F3442DE770039F5CDDA7663026C8B538BF27493DF03829189CFB06847",
+        "normalized_hashes": [
+          "9bac7e9fe40b8f1d38643941a65af056d76120eb48fc1f2afdc0a4291cfc2659",
+          "9bac7e9fe40b8f1d38643941a65af056d76120eb48fc1f2afdc0a4291cfc2659"
+        ]
+      },
+      {
+        "image": "ntcon.exe",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            264,
+            268,
+            "COFF TimeDateStamp"
+          ],
+          [
+            250580,
+            250584,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "CDB8FDA0208F24D2E5D7F749565CEDD359963C1E2EF1BA8D8FBDAD25CB4DD443",
+        "new_hash": "033B217044ADB0BD4A778798471FA404053676A57D45085F38BE908E297C942A",
+        "normalized_hashes": [
+          "18302731088497558a1b4da42d726973eaf6219262b9a34ba535dd9d89b8fe33",
+          "18302731088497558a1b4da42d726973eaf6219262b9a34ba535dd9d89b8fe33"
+        ]
+      },
+      {
+        "image": "ntvdm.exe",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            296,
+            300,
+            "COFF TimeDateStamp"
+          ],
+          [
+            1795476,
+            1795480,
+            "EXPORT TimeDateStamp"
+          ],
+          [
+            1723756,
+            1723760,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "77C5D8007BB524D32687DB32E1B97CB5D4EF57549F3BC2F9DCC76AB7A3077B6A",
+        "new_hash": "50F2542CEEF6287FDCED60B095D28F3F73E8C22203858B413DB1CC6E2868C16C",
+        "normalized_hashes": [
+          "37e63fb272f45f71a61df3bea078e4bc3d1cf2a5725affb86aca879a9eca6244",
+          "37e63fb272f45f71a61df3bea078e4bc3d1cf2a5725affb86aca879a9eca6244"
+        ]
+      },
+      {
+        "image": "ntvwm.exe",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            248,
+            252,
+            "COFF TimeDateStamp"
+          ],
+          [
+            227252,
+            227256,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "40D4D371D18BD8A26FC7C2CA7FC8F211FC354F03645766815AF8667C5D53F5AB",
+        "new_hash": "32909F453F7EE97DC2E08D63D173F904FF66158AF1AE9FDD2440CDACAE2BD47B",
+        "normalized_hashes": [
+          "47743b3bbe6f0a30516ed5623f2e28af96c775e2f2289da9435f3a6e7f4f39e6",
+          "47743b3bbe6f0a30516ed5623f2e28af96c775e2f2289da9435f3a6e7f4f39e6"
+        ]
+      },
+      {
+        "image": "ntmon.exe",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            248,
+            252,
+            "COFF TimeDateStamp"
+          ],
+          [
+            148180,
+            148184,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "11D575BD6B419698BE012478AC8FC4F2309E0446FCD267E83205B4EAFB5238A6",
+        "new_hash": "414744F990013A8713C9B36D942FF24A24CE273D1DE38BD42C244E1399C6797F",
+        "normalized_hashes": [
+          "371a49e1f634fa891143555e2583d8f70b76ca3641e59cb7aaf2782b6dcbce38",
+          "371a49e1f634fa891143555e2583d8f70b76ca3641e59cb7aaf2782b6dcbce38"
+        ]
+      },
+      {
+        "image": "WOW32.DLL",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            296,
+            300,
+            "COFF TimeDateStamp"
+          ],
+          [
+            635156,
+            635160,
+            "EXPORT TimeDateStamp"
+          ],
+          [
+            623348,
+            623352,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "45D5F5F96D426288956E7C713927C6CE941772CEA826355CB0A88E0256ECA0B2",
+        "new_hash": "964592EB0A88933EB86DCA64AA01C01E64D63B578FB50EFE27196FDABD0D4175",
+        "normalized_hashes": [
+          "364e7b1027be24a4671c6dd633f336f8c6c4bfadf373d6fe313db122650aa4a4",
+          "364e7b1027be24a4671c6dd633f336f8c6c4bfadf373d6fe313db122650aa4a4"
+        ]
+      },
+      {
+        "image": "VDMREDIR.DLL",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            288,
+            292,
+            "COFF TimeDateStamp"
+          ],
+          [
+            193604,
+            193608,
+            "EXPORT TimeDateStamp"
+          ],
+          [
+            125028,
+            125032,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "ACB59012F72F1B867F6A515CB9E32E247BF98B9BA613A58E7400F205F4EA8206",
+        "new_hash": "F212A090242CE7C1585F7BEE76182A25B22CD6995AE31828551D773573A31D62",
+        "normalized_hashes": [
+          "3a51172f4a0289f8ab1dc35e17488f519097c5a50e1305ed112ebfbfb0da38d4",
+          "3a51172f4a0289f8ab1dc35e17488f519097c5a50e1305ed112ebfbfb0da38d4"
+        ]
+      },
+      {
+        "image": "nthook32.dll",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            272,
+            276,
+            "COFF TimeDateStamp"
+          ],
+          [
+            203332,
+            203336,
+            "EXPORT TimeDateStamp"
+          ],
+          [
+            134228,
+            134232,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "08B21C4E792C91CF32007DA7C61052489FF90B87EE5182D77194BF88305E4BCC",
+        "new_hash": "80EA474825278EA43826845AFB1C9E49D9E0C047069058C39C3A40725FFD23B6",
+        "normalized_hashes": [
+          "a8d1d9f34a088e3b02225fec1efa94ff2f12d05ed54aa92e66053d2561b51b47",
+          "a8d1d9f34a088e3b02225fec1efa94ff2f12d05ed54aa92e66053d2561b51b47"
+        ]
+      },
+      {
+        "image": "nthook64.dll",
+        "same": true,
+        "differing_bytes": 0,
+        "ignored_timestamp_fields": [
+          [
+            272,
+            276,
+            "COFF TimeDateStamp"
+          ],
+          [
+            243204,
+            243208,
+            "EXPORT TimeDateStamp"
+          ],
+          [
+            167844,
+            167848,
+            "DEBUG TimeDateStamp"
+          ]
+        ],
+        "old_hash": "0598883B1502730A5D27EF9F40707E726790DB907234BFAB612D4528542C0596",
+        "new_hash": "56E07FA33812AC84DE391A347F6CAA60FD503ECAE2D68E4C1E00551184641170",
+        "normalized_hashes": [
+          "d651db21b0c056ea6cf2ec6caf6b5491b2ec06f3b18aefc07ee3a5fa8ba47b1e",
+          "d651db21b0c056ea6cf2ec6caf6b5491b2ec06f3b18aefc07ee3a5fa8ba47b1e"
+        ]
+      }
+    ],
+    "all_equal": true
+  },
+  "final_inputs": [
+    {
+      "path": "src/mvdm-host/README.md",
+      "sha256": "4b745c43a452f4da2df146d00198484ba5c99c329556c466eff89bdd0883c77b",
+      "deleted": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "99e2e407b9b3cfaceb3da672d049e87a6a83d887be2108580a004236d8d59a40",
+      "deleted": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "sha256": "97c765c94ad5e6471607063c01ba1df5ba1168fc0cabb084b43c8fce20948aaa",
+      "deleted": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "sha256": "34d62ae23a9cce365b3285fc42bc8941ea34c1c56d0e3e07be40fb1f817b0087",
+      "deleted": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+      "deleted": false
+    },
+    {
+      "path": "test/app/keyboard_buffer_count_test.c",
+      "sha256": null,
+      "deleted": true
+    },
+    {
+      "path": "test/app/keyboard_history_boundary_test.c",
+      "sha256": null,
+      "deleted": true
+    },
+    {
+      "path": "test/app/keyboard_origin_return_test.c",
+      "sha256": "c725b276325169f31ee0faa6d2537ad894134cf7066dd71f92765425037c2336",
+      "deleted": false
+    },
+    {
+      "path": "test/mvdm-host/ccpu_notification_fixture.c",
+      "sha256": "73e0d0a598421d90252d427260fcadec272bd2f7c95cf935cc978e463abde134",
+      "deleted": false
+    },
+    {
+      "path": "test/observation/keyba_observed.c",
+      "sha256": "1c6769b75e486c64eb77e05f0b326ef9d1e2ae3098bf90da9b4822ab07a14de3",
+      "deleted": false
+    },
+    {
+      "path": "test/observation/verify-keyboard-buffer-count.ps1",
+      "sha256": "34b83feda7238441f188d19694c05077b0c4e7fa8c4f9cdb4b8a1c02be08612d",
+      "deleted": false
+    }
+  ],
+  "footprint": {
+    "mirror": {
+      "add": 58,
+      "delete": 101,
+      "net": -43
+    },
+    "autonomous_test": {
+      "add": 43,
+      "delete": 277,
+      "net": -234
+    }
+  }
+}

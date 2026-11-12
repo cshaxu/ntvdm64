@@ -219,36 +219,12 @@ typedef	union {
 #else
 #line 264
 #if defined(CPU_40_STYLE)
-#line 210
-IMPORT VOID	_ch2_copy_byte_write();
-IMPORT VOID	_ch2_copy_word_write();
-IMPORT VOID	_ch2_copy_byte_fill_glue();
-IMPORT VOID	_ch2_copy_word_fill_glue();
-IMPORT VOID	_ch2_copy_byte_move_glue();
-IMPORT VOID	_ch2_copy_word_move_glue();
-IMPORT VOID	_ch2_copy_byte_move_glue_fwd();
-IMPORT VOID	_ch2_copy_word_move_glue_fwd();
-IMPORT VOID	_ch2_copy_byte_move_glue_bwd();
-IMPORT VOID	_ch2_copy_word_move_glue_bwd();
-
-IMPORT VOID	_ch2_mode0_chn_byte_write_glue();
-IMPORT VOID	_ch2_mode0_chn_word_write_glue();
-IMPORT VOID	_ch2_mode0_chn_byte_fill_glue();
-IMPORT VOID	_ch2_mode0_chn_word_fill_glue();
-IMPORT VOID	_ch2_mode0_chn_byte_move_glue();
-IMPORT VOID	_ch2_mode0_chn_word_move_glue();
-
-#ifdef CPU_40_STYLE
 /* DIVERGENCE MVDM-HOST-DIV-079: CPU_40_STYLE selects the original C-video
  * EVID tables through SetWritePointers(). The older WRT_POINTERS string
  * movers pass native pointers through ULONG and are not installed by this
  * profile. Preserve table storage for EGA source selection only. */
 WRT_POINTERS mode0_copy_handlers;
 WRT_POINTERS mode0_gen_handlers;
-#else
-#line 228
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif /* CPU_40_STYLE */
 #else
 #line 264
 #error Excluded unsupported non-CPU40 writer-table profile
@@ -372,6 +348,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 #line 427
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 429
 
     count >>= 1;
 
