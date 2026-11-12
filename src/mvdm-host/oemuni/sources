@@ -39,3 +39,7 @@ INCLUDES=.;..\inc;..\..\windows\inc
 SOURCES=file.c \
         process.c
 
+UMTYPE=console
+UMTEST=toemuni
+UMAPPL=
+UMLIBS=$(_NTDRIVE)\nt\public\sdk\lib\*\oemuni.lib

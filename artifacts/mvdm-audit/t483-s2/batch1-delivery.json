@@ -1,0 +1,63 @@
+{
+  "package": "c15e55b0-7de8-4567-889f-b7e154da6782",
+  "entries": 20,
+  "mirror_files": 5,
+  "coupled_files": 5,
+  "source_footprint_vs_parent": {
+    "mirror": {
+      "added": 16,
+      "removed": 62,
+      "net": -46
+    },
+    "autonomous": {
+      "added": 0,
+      "removed": 65,
+      "net": -65
+    },
+    "tests": {
+      "added": 4,
+      "removed": 11,
+      "net": -7
+    }
+  },
+  "counter_review": [
+    "All S2 rows for the five mirror files handled; retained and pending page-domain code untouched.",
+    "Retired diagnostic APIs have no src/test references. Shared diagnostic APIs still used are retained.",
+    "Changed failure fixture requires provider SHA identity, attach/unload markers, exited result and exact ERROR_DLL_INIT_FAILED.",
+    "48 is the exact remaining check count: 53 minus one XMS and four post-dispatch checks.",
+    "Restored cursor arguments are ignored by selected host provider; final visibility bit override retained.",
+    "Packing size/offset assertions pass in selected x86 context; selected original line anchors verified via actual MSVC preprocess."
+  ],
+  "tests": {
+    "cached_build": "passed",
+    "full": "16 selected gates passed; external DOS4GW/NESticle fixture skipped",
+    "focused": "10 x86 layout assertions; 48 observer-error checks; AttachFailure and MissingInit in default and --wait passed",
+    "compiler_lines": "24 restored/adjacent original anchors passed",
+    "publication": {
+      "status": "published",
+      "package": "c15e55b0-7de8-4567-889f-b7e154da6782",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "commit": "this P1 commit; push follows"
+  },
+  "limits": [
+    "S2 remaining 56 entries not completed.",
+    "External DOS4GW/NESticle fixture not provided.",
+    "Compiler anchor checks cover changed ranges and adjacent contracts; not global proof of pre-existing excluded directive line mapping.",
+    "No guest changes or rebuild; winnt.zip untouched."
+  ],
+  "logs": {
+    "cached": "build/t483-s2-p1/cached.out",
+    "focused": "build/t483-s2-p1/focus.out",
+    "full": "build/t483-s2-p1/full.out",
+    "failure_tests": [
+      "build/t483-s2-p1/attach-provider-runtime/result.txt",
+      "build/t483-s2-p1/missing-provider-runtime/result.txt"
+    ]
+  }
+}

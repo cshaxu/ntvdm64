@@ -182,3 +182,20 @@ editing/rebuild or winnt.zip changes are authorized.
 Compat-wide and eleven-component minimization remain later T483 scope; they are
 not cancelled or claimed completed by S2–S6, and receive subsequent S planning.
 Do not put these S packets into the project T queue or duplicate them in TODO.
+
+## Execution authorization through S5
+
+Owner authorizes S2–S5 sequential implementation and closure. S6 remains held
+until a new instruction, regardless of S5 completion. Every changed source file
+must have its conditional structure and original logical diagnostic lines checked
+with the change; do not defer line correctness to another pass.
+
+Count distinct modified implementation files per batch, including coupled
+non-mirror sources when changed; repeated edits to one file do not advance that
+count. Deliver a batch when ten files have been modified, or when that S has no
+remaining files to process (the final batch may be smaller). Finish the current
+file's assigned changes and any necessary atomic dependency before delivery.
+Record the exact batch file list. Each batch follows cached full build,
+publication, applicable tests, commit and push under the existing release gates;
+failed tests are resolved before calling the batch delivered. Documentation and
+ledger-only edits do not manufacture a ten-source-file threshold.

@@ -1,0 +1,419 @@
+{
+  "baseline": "d43933ad2",
+  "assigned_entries": 76,
+  "assigned_files": 21,
+  "entries": [
+    {
+      "id": "T483-D0004",
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D0005",
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D0346",
+      "path": "src/mvdm-host/oemuni/file.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D0404",
+      "path": "src/mvdm-host/oemuni/sources",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1067",
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1068",
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1069",
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1070",
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1071",
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1140",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1141",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1142",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1144",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1145",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1146",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1148",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1149",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1150",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1156",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1157",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "verified and published in S2 P1; commit delivery follows"
+    },
+    {
+      "id": "T483-D1166",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D1167",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D1168",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D1211",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D1384",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D1908",
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D1912",
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2230",
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2232",
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2233",
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2297",
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2300",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2301",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2302",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2303",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2304",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2305",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2306",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2307",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2308",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2310",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2311",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2312",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2313",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2314",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2315",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2321",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2322",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2323",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2324",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2325",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2326",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2327",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2328",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2329",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2330",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2331",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2332",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2333",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2334",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2335",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2336",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2337",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2338",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2343",
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2377",
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2492",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2500",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2526",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2571",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2593",
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2594",
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2608",
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2610",
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2777",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "status": "pending"
+    },
+    {
+      "id": "T483-D2786",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "status": "pending"
+    }
+  ],
+  "batch_modified_files": [
+    "src/mvdm-host/dos/command/cmd.h",
+    "src/mvdm-host/oemuni/file.c",
+    "src/mvdm-host/oemuni/sources",
+    "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+    "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+    "test/observation/softpc_observer_error_probe.c",
+    "test/observation/verify-softpc-observer-error.ps1",
+    "test/integration/verify-wow-host-attach-failure.ps1"
+  ],
+  "implemented_entries": 20,
+  "completed_delivered_entries": 0,
+  "batch_verification": {
+    "cached_build": "passed",
+    "full": "16 selected gates passed; external DOS4GW/NESticle fixture skipped",
+    "focused": "10 x86 layout assertions; 48 observer-error checks; AttachFailure and MissingInit in default and --wait passed",
+    "compiler_lines": "24 restored/adjacent original anchors passed",
+    "publication": {
+      "status": "published",
+      "package": "c15e55b0-7de8-4567-889f-b7e154da6782",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "commit": "this P1 commit; push follows"
+  },
+  "verified_published_entries": 20
+}

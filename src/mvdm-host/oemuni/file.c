@@ -890,10 +890,7 @@ Routine Description:
     UNICODE_STRING UnicodeFileSystemName;
     OEM_STRING OemVolumeName;
     OEM_STRING OemFileSystemName;
-    /* DIVERGENCE MVDM-HOST-DIV-269: retain the original false failure
-       contract when an allocation/SEH cleanup path reaches the final return. */
-    BOOL ReturnValue = FALSE;
-#line 875
+    BOOL ReturnValue;
 
     Unicode = &NtCurrentTeb()->StaticUnicodeString;
     InitOemString(

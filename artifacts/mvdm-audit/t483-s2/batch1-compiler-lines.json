@@ -1,0 +1,210 @@
+{
+  "method": "Actual selected MSVC preprocessing using product command lines; restored/adjacent anchor lines checked against pinned original. Not a claim that all pre-existing excluded directive mappings are correct.",
+  "files": [
+    {
+      "source": "src/mvdm-host/dos/command/cmd.h",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "current_sha256": "efa15ef22941b085e23db4b3be28178f8466f4f9a88c6022483be048a1c937a8",
+      "preprocessed_sha256": "dc81d41cab584dc764827abad3f1870c189be978aa54b75b81caa9087779a5f4",
+      "anchors": [
+        {
+          "original_line": 109,
+          "original": "typedef struct _SCSINFO {",
+          "compiler_output": [
+            "typedef struct _SCSINFO {"
+          ]
+        },
+        {
+          "original_line": 116,
+          "original": "typedef struct _STD_HANDLES {",
+          "compiler_output": [
+            "typedef struct _STD_HANDLES {"
+          ]
+        },
+        {
+          "original_line": 127,
+          "original": "typedef struct\t_PIPE_INPUT{",
+          "compiler_output": [
+            "typedef struct\t_PIPE_INPUT{"
+          ]
+        },
+        {
+          "original_line": 142,
+          "original": "typedef struct\t_PIPE_OUTPUT {",
+          "compiler_output": [
+            "typedef struct\t_PIPE_OUTPUT {"
+          ]
+        },
+        {
+          "original_line": 151,
+          "original": "typedef struct _RedirComplete_Info {",
+          "compiler_output": [
+            "typedef struct _RedirComplete_Info {"
+          ]
+        },
+        {
+          "original_line": 166,
+          "original": "typedef struct\t_VDMENVBLK {",
+          "compiler_output": [
+            "typedef struct\t_VDMENVBLK {"
+          ]
+        },
+        {
+          "original_line": 172,
+          "original": "#pragma pack()",
+          "compiler_output": [
+            "#pragma pack()"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mvdm-host/oemuni/file.c",
+      "original_sha256": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+      "current_sha256": "6d71d60d50f446bf6952277d6f198a3d65e7214460558d5a8db7c0229d56b9b5",
+      "preprocessed_sha256": "3b988250cd2ba9f0421d67b8961dc770d25731eb75baaa2967869b988569396f",
+      "anchors": [
+        {
+          "original_line": 874,
+          "original": "BOOL ReturnValue;",
+          "compiler_output": [
+            "BOOL ReturnValue;"
+          ]
+        },
+        {
+          "original_line": 929,
+          "original": "ReturnValue = GetVolumeInformationW(",
+          "compiler_output": [
+            "ReturnValue = GetVolumeInformationW("
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "current_sha256": "00d0a4caf8b05a810017ba4c7b628c534bb113bee25bdde8a199c25f415fd7b9",
+      "preprocessed_sha256": "698f8bb0e891926f4b17c4ec8e979cce585453ed89ccca550363974a39cd4519",
+      "anchors": [
+        {
+          "original_line": 176,
+          "original": "if ((hWOWDll = SafeLoadLibrary(\"WOW32\")) == NULL)",
+          "compiler_output": [
+            "terminate_ticket_fn terminate_ticket;",
+            "(unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());",
+            "if ((hWOWDll = LoadLibraryA(\"WOW32\")) == ((void *)0))"
+          ]
+        },
+        {
+          "original_line": 181,
+          "original": "TerminateVDM();",
+          "compiler_output": [
+            "}",
+            "if (!mvdm_softpc_wow_page_domain_enter()) {",
+            "TerminateVDM();"
+          ]
+        },
+        {
+          "original_line": 191,
+          "original": "FreeLibrary(hWOWDll);",
+          "compiler_output": [
+            "(unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());",
+            "FreeLibrary(hWOWDll);"
+          ]
+        },
+        {
+          "original_line": 201,
+          "original": "FreeLibrary(hWOWDll);",
+          "compiler_output": [
+            "FreeLibrary(hWOWDll);"
+          ]
+        },
+        {
+          "original_line": 242,
+          "original": "if ((*WOWInitEntry)() == FALSE)",
+          "compiler_output": [
+            "if ((*WOWInitEntry)() == 0)"
+          ]
+        },
+        {
+          "original_line": 247,
+          "original": "TerminateVDM();",
+          "compiler_output": [
+            "TerminateVDM();"
+          ]
+        },
+        {
+          "original_line": 255,
+          "original": "(*WOWDispatchEntry)();",
+          "compiler_output": [
+            "(*WOWDispatchEntry)();"
+          ]
+        },
+        {
+          "original_line": 283,
+          "original": "XMSDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),",
+          "compiler_output": [
+            "XMSDispatch((unsigned long)(*Sim32pGetVDMPointer((((unsigned long)(c_getCS()) << 16) + ((c_getIP()))),0)));"
+          ]
+        },
+        {
+          "original_line": 288,
+          "original": "setIP((USHORT)(getIP() + 1));",
+          "compiler_output": [
+            "c_setIP((IU16)(c_getIP() + 1));"
+          ]
+        },
+        {
+          "original_line": 625,
+          "original": "host_direct_access_error((ULONG)getAX());",
+          "compiler_output": [
+            "host_direct_access_error((unsigned long)c_getAX());"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+      "current_sha256": "829d8f2a61a0688d6820f889a4bf0079c6097e4a0b54ba245243a9aeed4549ff",
+      "preprocessed_sha256": "a08efebc6956506b1878d82d0e9911aecbab007c6d2951548c528df5c08ba9a4",
+      "anchors": [
+        {
+          "original_line": 583,
+          "original": "host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+          "compiler_output": [
+            "(working_video_funcs->cursor_size_changed)(crt_controller.cursor_start.as_bfld.cursor_start, crt_controller.cursor_end.as_bfld.cursor_end);"
+          ]
+        },
+        {
+          "original_line": 593,
+          "original": "host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+          "compiler_output": [
+            "(working_video_funcs->cursor_size_changed)(crt_controller.cursor_start.as_bfld.cursor_start, crt_controller.cursor_end.as_bfld.cursor_end);"
+          ]
+        },
+        {
+          "original_line": 603,
+          "original": "host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+          "compiler_output": [
+            "(working_video_funcs->cursor_size_changed)(crt_controller.cursor_start.as_bfld.cursor_start, crt_controller.cursor_end.as_bfld.cursor_end);"
+          ]
+        },
+        {
+          "original_line": 613,
+          "original": "host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+          "compiler_output": [
+            "(working_video_funcs->cursor_size_changed)(crt_controller.cursor_start.as_bfld.cursor_start, crt_controller.cursor_end.as_bfld.cursor_end);"
+          ]
+        },
+        {
+          "original_line": 627,
+          "original": "host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+          "compiler_output": [
+            "(working_video_funcs->cursor_size_changed)(crt_controller.cursor_start.as_bfld.cursor_start, crt_controller.cursor_end.as_bfld.cursor_end);"
+          ]
+        }
+      ]
+    }
+  ]
+}

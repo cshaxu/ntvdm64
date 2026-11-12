@@ -1,0 +1,38 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "before_sha256": "38a144a701aff20dddd464c2024df3840925bbc3dcef82d925c4945bd8003484",
+    "after_sha256": "00d0a4caf8b05a810017ba4c7b628c534bb113bee25bdde8a199c25f415fd7b9",
+    "reason": "Remove S2 diagnostic ranges; restore original XMS dispatch and direct-access body, preserve page-domain pending ranges and failure semantics."
+  },
+  {
+    "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+    "before_sha256": "ca48182ce7cf321aba1892f3f99c09fa5e3acbd2f339fcaa637be86ef23a3a86",
+    "after_sha256": "2fd62acd3aea8f924497985ec37c03585d04a3e3b589a0d088079113e71dde4e",
+    "reason": "Remove two diagnostic providers with no remaining production callers; keep live shared providers."
+  },
+  {
+    "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+    "before_sha256": "8e373c958ce29dc9bd5b3056884ee8ca9d7aa9e17f210689f8a2ff116d85b44e",
+    "after_sha256": "2bb0c62b2a36b11d70042ed50bfe8e42cfc247d88c5e5c601fefaace191a7e55",
+    "reason": "Remove two diagnostic providers with no remaining production callers; keep live shared providers."
+  },
+  {
+    "path": "test/observation/softpc_observer_error_probe.c",
+    "before_sha256": "e5c10751b4bb77f84d06a47fe36459d45cab2f2ed7e47290d1a9dc7f1607f216",
+    "after_sha256": "af962e6e6ad8b730fc34411f2c959e7dfb5c076cd5b7ff4ac81281afa77d66e7",
+    "reason": "Remove checks for deleted diagnostic APIs only; remaining error-preservation checks retained."
+  },
+  {
+    "path": "test/observation/verify-softpc-observer-error.ps1",
+    "before_sha256": "da78c0acc2df8f810379d11c036c06e52abe474166d7f17302b7dbc92952ed53",
+    "after_sha256": "1c960a273faef6081d4d5e405e77f7e50fcd52ce954f748446204fc0018563aa",
+    "reason": "Remove marker expectation for deleted diagnostic provider. Exact executed checks 53 -> 48: one XMS plus four post-dispatch checks removed."
+  },
+  {
+    "path": "test/integration/verify-wow-host-attach-failure.ps1",
+    "before_sha256": "676fa705791f6f8abb6343a0c9883877d5ddf2889aa5b1952278fb9a85b2827a",
+    "after_sha256": "6e5b9fe4cf7f5760d3cebf0b4aed5e8d08c245c59b21dd3a1b558eb5552e7d12",
+    "reason": "Retain provider SHA identity, attach failure / attach-detach marker, observer completion and exact ERROR_DLL_INIT_FAILED for both launch modes; remove product debug-log dependency."
+  }
+]

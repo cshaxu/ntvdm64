@@ -23,12 +23,6 @@ void mvdm_softpc_report_setup_hardware_probe(char const *stage,
  * existing instruction body; it never selects a mode or changes its result. */
 void mvdm_softpc_report_setup_mode_switch(char const *stage,
     unsigned long operand, unsigned long cr0);
-/* Default-off XMS service witness for the Windows 3.1 Setup investigation.
- * It observes the service byte and already-live register inputs at the BOP
- * boundary; it neither dispatches nor changes XMS state. */
-void mvdm_softpc_report_xms_service(unsigned long service,
-    unsigned long ax, unsigned long bx, unsigned long cx,
-    unsigned long dx, unsigned long ss, unsigned long bp);
 void mvdm_softpc_report_xms_move(unsigned long source,
     unsigned long destination, unsigned long byte_count, int completed);
 /* Default-off witness for the original real-mode #UD path.  The caller
@@ -53,10 +47,6 @@ void mvdm_softpc_report_setup_command_classification(char const *stage,
 void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,
     unsigned short cs, unsigned short ip, unsigned long ds_base,
     unsigned long ds_limit);
-/* Default-off post-dispatch observation.  It is emitted only after the
- * original W32Dispatch returns to its BOP owner. */
-void mvdm_softpc_report_wow_dispatch_return_state(unsigned long cr0,
-    unsigned long cr3, unsigned short cs, unsigned short ip);
 void mvdm_softpc_report_wow_stage(char const *stage, unsigned long cr0,
     unsigned long cr3, unsigned short cs, unsigned short ip);
 /* Default-off witness for the original WOW_x86 fast-selector precondition.

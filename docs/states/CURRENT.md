@@ -2,14 +2,48 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T483 remains open; S1 is closed.
+**Active: M0 T483 S2 — restore original mirror code and structure.**
 
 The owner authorized S1 closure and has now approved the internal T483 sequence:
 S2 restore original (76), S3 delete (120), S4 minimize/consolidate (117),
 S5 correct (207), S6 resolve missing evidence (755). See the
 [category plan](../etc/operations/m0-t483-mirror-register.md#owner-approved-s2s6-remediation-sequence).
-These are scheduled packets; S2 implementation has not started or been activated.
+Owner now authorizes sequential execution and closure through S5. S2 is active;
+S3–S5 follow only after preceding closure. S6 must not be admitted without a new
+owner instruction.
 The previously suggested compat-first S2 is superseded.
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T483 S2, Ordinary Mode; one agent, initial and counter-review passes. |
+| Admission And Approval | Owner authorizes S2–S5 implementation in category order, with ten-modified-file batch deliveries; S6 explicitly held. |
+| Objective | Resolve all 76 restore-original entries in the frozen S1 register, preserving original diagnostic line mapping and necessary product contracts. |
+| Non-goals | No S6 admission, guest edits/rebuild, unrelated compat audit, or speculative original-owner expansion. |
+| Reference Baseline | d43933ad2; S1 package 6ace4e9a-48ea-48ac-abd9-94e966b67c78; stable T483-D IDs and pinned originals. |
+| Files And ABI Surface | The 76 S2 entries and their coupled declarations/callers/tests; no unrelated source changes. |
+| Applicable Rules | Source policy, mirror subset/line rules, original contracts, native boundary judgments and category plan. |
+| Verification | Original/current range and logical-line checks per changed file; applicable focused tests, cached full build, Full regression, publication hashes, governance and Git checks per batch. |
+| Expected Markers | Every assigned ID resolved with implementation and counter-review evidence, or explicit owner-approved changed disposition; no unreported omissions. |
+| Asset Needs | Existing pinned sources, build cache and maintained fixtures; preserve winnt.zip. |
+| Reporting Requirements | Assigned/completed/remaining entries and files, batch distinct modified files, line evidence, source footprint, tests and publication/commit identities. |
+| Stop Conditions | Do not force uncertain restoration over proven native ownership; report architectural tradeoffs or material expansion; no silent evidence-based reclassification. |
+| Exit Criteria | All 76 entries disposed, necessary changes verified and delivered; scoped worktree clean; then admit S3. |
+| Original Owner Request | Process S2 through S5 by their category checklist order; verify line mappings; deliver after ten modified files or exhaustion of each S; hold S6. |
+| Similar-Issue Sweep | Complete all assigned ranges within each file once; inspect coupled callers and declarations without reopening unrelated retain/pending entries. |
+
+## S2 Progress
+
+Assigned: 76 entries in 21 mirror files. First batch: 10 modified files (5 mirror, 5 coupled implementation/test), 20 entries
+implemented and verified with source/counter-review evidence; published to both
+destinations. P1 commit/push is the delivery containing these records. 56 entries
+remain in S2.
+Batch build starts at ten modified files or S2 exhaustion. See
+[execution ledger](../../artifacts/mvdm-audit/t483-s2/execution.json).
+Next mirror file after this batch: softpc.new/host/src/nt_com.c. The first batch
+retains exact WOW failure exit/provider-marker assertions while removing product
+diagnostic-log dependencies.
 
 ## Latest S Closure
 
@@ -31,14 +65,14 @@ auxiliary provenance, not a second work queue.
 
 ## Current Technical Baseline
 
-Package `6ace4e9a-48ea-48ac-abd9-94e966b67c78`: cached x86/x64 build passed;
-formal WOW graph and dynamic host API checks passed; all 16 selected Full gates
+Package `c15e55b0-7de8-4567-889f-b7e154da6782` (S2 P1): cached x86/x64 build passed;
+S2 focused layout, observer-error and real WOW failure tests passed; all 16 selected Full gates
 passed. The external DOS4GW/NESticle fixture was not supplied and was explicitly
 skipped, not passed. All 11 images are published to assets/release and
 O:/winnt/system32 with matching manifest SHA-256 hashes.
 
-[Delivery evidence](../../artifacts/mvdm-audit/t483-s1/delivery-verification.json)
-and [Full receipt](../../artifacts/mvdm-audit/t483-s1/full-timings.json)
+[Delivery evidence](../../artifacts/mvdm-audit/t483-s2/batch1-delivery.json)
+and [Full receipt](../../artifacts/mvdm-audit/t483-s2/batch1-full-timings.json)
 distinguish raw compiler identity, package stamping and runtime acceptance.
 No claim of binary equivalence to the old package is made.
 

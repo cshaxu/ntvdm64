@@ -588,7 +588,7 @@ GLOBAL VOID	do_new_cursor IFN0()
 		set_cursor_start(crt_controller.cursor_start.as_bfld.cursor_start);
 		set_cursor_height(get_char_height() - get_cursor_start());
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
+		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else if (crt_controller.cursor_end.as_bfld.cursor_end < crt_controller.cursor_start.as_bfld.cursor_start) {
@@ -598,7 +598,7 @@ GLOBAL VOID	do_new_cursor IFN0()
 		set_cursor_start(crt_controller.cursor_start.as_bfld.cursor_start);
 		set_cursor_height(get_char_height() - get_cursor_start());
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
+		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else if (crt_controller.cursor_end.as_bfld.cursor_end == crt_controller.cursor_start.as_bfld.cursor_start) {
@@ -608,7 +608,7 @@ GLOBAL VOID	do_new_cursor IFN0()
 		set_cursor_start1(0);
 		set_cursor_height1(0);
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
+		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else if (crt_controller.cursor_end.as_bfld.cursor_end - 1 >= get_char_height()) {
@@ -618,7 +618,7 @@ GLOBAL VOID	do_new_cursor IFN0()
 		set_cursor_start1(0);
 		set_cursor_height1(0);
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
+		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else {
@@ -632,7 +632,7 @@ GLOBAL VOID	do_new_cursor IFN0()
 		set_cursor_start1(0);
 		set_cursor_height1(0);
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
+		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 

@@ -216,8 +216,6 @@ void MS_bop_1(void) {
 #line 174
     if (!WowModeInitialized) {
     //Load the WOW DLL
-    mvdm_softpc_report_wow_stage("load-begin",
-        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 176
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
@@ -226,8 +224,6 @@ void MS_bop_1(void) {
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 181
-        mvdm_softpc_report_wow_stage("load-failed",
-            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 181
         TerminateVDM();
         return;
@@ -241,8 +237,6 @@ void MS_bop_1(void) {
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 191
-        mvdm_softpc_report_wow_stage("init-export-missing",
-            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 191
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -260,8 +254,6 @@ void MS_bop_1(void) {
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 201
-        mvdm_softpc_report_wow_stage("dispatch-export-missing",
-            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 201
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -310,8 +302,6 @@ void MS_bop_1(void) {
 
 
     // Call the init routine
-    mvdm_softpc_report_wow_stage("init-begin",
-        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 242
     if ((*WOWInitEntry)() == FALSE)
     {
@@ -320,8 +310,6 @@ void MS_bop_1(void) {
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 247
-        mvdm_softpc_report_wow_stage("init-failed",
-            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 247
         TerminateVDM();
         return;
@@ -347,8 +335,6 @@ void MS_bop_1(void) {
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)
-    mvdm_softpc_report_wow_stage("dispatch-begin",
-        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 #line 255
     (*WOWDispatchEntry)();
 #else
@@ -356,23 +342,16 @@ void MS_bop_1(void) {
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* CPU_40_STYLE */
 #line 278
-    /* S42 observation only: the original dispatcher has returned and CPU
-     * state remains entirely owned by the original BOP/CCPU sequence. */
-    mvdm_softpc_report_wow_dispatch_return_state((unsigned long)getCR0(),
-        (unsigned long)getCR3(), getCS(), getIP());
 #line 278
 }
 
 
 // XMS BOP
 void MS_bop_2(void) {
-    ULONG service = (ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
-                                                 1,
-                                                 FALSE));
-
-    mvdm_softpc_report_xms_service(service, getAX(), getBX(), getCX(),
-        getDX(), getSS(), getBP());
-    XMSDispatch(service);
+    XMSDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
+                                            1,
+                                            FALSE
+                                            )));
 
 #line 288
     setIP((USHORT)(getIP() + 1));
@@ -749,31 +728,8 @@ void MS_bop_8 (void)
 //
 void MS_bop_9(void)
 {
-    unsigned long direct_access_cpu =
-        ((unsigned long)getCS() << 16) | (unsigned long)getIP();
-    unsigned long direct_access_stack_pointer =
-        ((unsigned long)getSS() << 16) | (unsigned long)getSP();
-
-    /* DIVERGENCE(MVDM-HOST-DIV-258): default-off scalar attribution. The
-     * second value in direct-access-error-bop is CS:IP, not a stack word.
-     * The original BOP hands the
-     * unsupported-direct-access type to the host error UI; record that
-     * already-decoded value so a hidden dialog cannot be mistaken for a
-     * guest keyboard or hardware-probe hang. */
-    mvdm_softpc_report_setup_hardware_probe("direct-access-error-bop",
-        (unsigned long)getAX(), direct_access_cpu);
-    mvdm_softpc_report_setup_hardware_probe("direct-access-bop-enter",
-        direct_access_cpu,
-        direct_access_stack_pointer);
 #line 625
     host_direct_access_error((ULONG)getAX());
-    direct_access_cpu =
-        ((unsigned long)getCS() << 16) | (unsigned long)getIP();
-    direct_access_stack_pointer =
-        ((unsigned long)getSS() << 16) | (unsigned long)getSP();
-    mvdm_softpc_report_setup_hardware_probe("direct-access-bop-leave",
-        direct_access_cpu,
-        direct_access_stack_pointer);
 #line 626
 }
 

@@ -1,0 +1,120 @@
+[
+  {
+    "path": "src/mvdm-host/dos/command/cmd.h",
+    "ids": [
+      "T483-D0004",
+      "T483-D0005"
+    ],
+    "before_sha256": "94c1dced55b52c582322558cce2d72cae2a069fd437c72e48beb90caa5893cde",
+    "after_sha256": "efa15ef22941b085e23db4b3be28178f8466f4f9a88c6022483be048a1c937a8",
+    "initial_review": "Original packing placement restored as one pair; existing x86 size/member-offset comparison retained, type alignment returns to original; runtime validation pending.",
+    "counter_review": "Complete coupled edit; surrounding adapters unchanged.",
+    "status": "implemented; batch build pending",
+    "line_check": {
+      "method": "LF source/#line simulation and exact-line matching; not compiler preprocessing",
+      "matched_correct": 214,
+      "mismatches": [
+        {
+          "current": 29,
+          "logical": 26,
+          "original": 27,
+          "text": "#endif"
+        },
+        {
+          "current": 35,
+          "logical": 31,
+          "original": 32,
+          "text": "#endif"
+        },
+        {
+          "current": 49,
+          "logical": 43,
+          "original": 44,
+          "text": "#endif"
+        },
+        {
+          "current": 55,
+          "logical": 48,
+          "original": 53,
+          "text": "#else"
+        },
+        {
+          "current": 64,
+          "logical": 59,
+          "original": 62,
+          "text": "#endif"
+        },
+        {
+          "current": 70,
+          "logical": 67,
+          "original": 68,
+          "text": "#endif"
+        },
+        {
+          "current": 76,
+          "logical": 72,
+          "original": 73,
+          "text": "#endif"
+        },
+        {
+          "current": 82,
+          "logical": 77,
+          "original": 78,
+          "text": "#endif"
+        }
+      ],
+      "interpretation": "Eight differences are pre-existing excluded conditional delimiters, not restored declarations. All matched non-directive anchors align; source simulation is not compiler preprocessing. Compiler selected-output check remains a batch obligation."
+    }
+  },
+  {
+    "path": "src/mvdm-host/oemuni/file.c",
+    "ids": [
+      "T483-D0346"
+    ],
+    "before_sha256": "b2b4904eb00d0a641c5d858c57dde41477243172b1ad71893dc92fd63856b091",
+    "after_sha256": "6d71d60d50f446bf6952277d6f198a3d65e7214460558d5a8db7c0229d56b9b5",
+    "initial_review": "Normal fallthrough reaches API assignment; allocation/conversion failures return FALSE, finally cleans resources; no exception handler resumes without assignment.",
+    "counter_review": "Complete coupled edit; surrounding adapters unchanged.",
+    "status": "implemented; batch build pending",
+    "line_check": {
+      "method": "LF source/#line simulation and exact-line matching; not compiler preprocessing",
+      "matched_correct": 883,
+      "mismatches": []
+    }
+  },
+  {
+    "path": "src/mvdm-host/oemuni/sources",
+    "ids": [
+      "T483-D0404"
+    ],
+    "before_sha256": "492cfebdc4cd0b6a5b26f4993f75019a0d71f7ad23776f9bb39f102aaa30a522",
+    "after_sha256": "d13b166c78ee7dc593d46b20b0cfcccfb862f28135d253a5327aaf55ef2a26ed",
+    "initial_review": "Restored four original trailing metadata records; no production Ninja source selection change. Original byte identity restored.",
+    "counter_review": "Complete coupled edit; surrounding adapters unchanged.",
+    "status": "implemented; batch build pending",
+    "line_check": {
+      "method": "LF source/#line simulation and exact-line matching; not compiler preprocessing",
+      "matched_correct": 28,
+      "mismatches": []
+    }
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "ids": [
+      "T483-D1067",
+      "T483-D1068",
+      "T483-D1069",
+      "T483-D1070",
+      "T483-D1071"
+    ],
+    "before_sha256": "1cdb3c5b166953b8e75c9169e9ab8230c7576a4c17065c70da8851282f801b6c",
+    "after_sha256": "829d8f2a61a0688d6820f889a4bf0079c6097e4a0b54ba245243a9aeed4549ff",
+    "initial_review": "Five callback arguments restored. Selected host callback nt_cursor_size_changed explicitly ignores both arguments and sets notification flags; software geometry and cursor_off override stay unchanged.",
+    "counter_review": "gfx_upd.h routes through working_video_funcs; selected nt_graph provider ignores arguments. Out-of-range cursor hide call remains unchanged. Five same-line replacements preserve line count and existing mappings.",
+    "status": "implemented; batch build pending",
+    "line_check": {
+      "method": "Five one-line replacements at original source anchors; no added/deleted newlines",
+      "newline_count_unchanged": true
+    }
+  }
+]

@@ -163,36 +163,6 @@ void mvdm_softpc_report_setup_mode_switch(char const *stage,
     SetLastError(saved);
 }
 
-void mvdm_softpc_report_xms_service(unsigned long service,
-    unsigned long ax, unsigned long bx, unsigned long cx,
-    unsigned long dx, unsigned long ss, unsigned long bp)
-{
-    static __declspec(thread) char path[MAX_PATH];
-    static __declspec(thread) unsigned initialized, count;
-    DWORD saved = GetLastError(), bytes, written;
-    HANDLE file;
-    char line[192];
-
-    if (!initialized) {
-        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_XMS_TRACE_PATH",
-            path, (DWORD)sizeof(path));
-        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
-        initialized = 1u;
-    }
-    if (path[0] && count++ < 256u) {
-        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
-            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-        if (file != INVALID_HANDLE_VALUE) {
-            bytes = (DWORD)snprintf(line, sizeof(line),
-                "tid=%lu xms service=%02lx ax=%04lx bx=%04lx cx=%04lx dx=%04lx ss=%04lx bp=%04lx\r\n",
-                GetCurrentThreadId(), service, ax, bx, cx, dx, ss, bp);
-            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
-            CloseHandle(file);
-        }
-    }
-    SetLastError(saved);
-}
-
 void mvdm_softpc_report_xms_move(unsigned long source,
     unsigned long destination, unsigned long byte_count, int completed)
 {
@@ -380,31 +350,6 @@ void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,
     snprintf(line, sizeof(line),
         "wow-bop cr0=%08lx cr3=%08lx csip=%04x:%04x dsbase=%08lx dslimit=%08lx\r\n",
         cr0, cr3, (unsigned int)cs, (unsigned int)ip, ds_base, ds_limit);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
-void mvdm_softpc_report_wow_dispatch_return_state(unsigned long cr0,
-    unsigned long cr3, unsigned short cs, unsigned short ip)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    char line[112];
-    DWORD bytes;
-    HANDLE file;
-    DWORD written;
-
-    bytes = GetEnvironmentVariableA("MVDM_S42_WOW_RETURN_REPORT_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
-        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line),
-        "wow-dispatch-return cr0=%08lx cr3=%08lx csip=%04x:%04x\r\n",
-        cr0, cr3, (unsigned int)cs, (unsigned int)ip);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
 restore_error:
