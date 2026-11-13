@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:108 restored/verified/published,
-0 local restorations pending verification,2 approved retain,44 qualified pending
-decisions and23 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is25/365;340 remain.
+177 points have a prior or current review record:110 restored/verified/published,
+0 local restorations pending verification,2 approved retain,46 qualified pending
+decisions and19 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is26/365;339 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,11 +69,11 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P15 package `a929e308-dc13-4dbf-a2ef-079b9f6f3893` is published to
+P16 package `1e0b4d88-e7e4-49af-b716-7a28cb5abab6` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
 Final-source cached full build, descriptor2097152 and Full16 passed.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
-or winnt.zip changes. See [P15 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p15-checkpoint.json).
+or winnt.zip changes. See [P16 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p16-checkpoint.json).
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
 point. See [file check](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0114-r0116-whole-file-check.json).
@@ -94,7 +94,13 @@ dpmi32p.h R0140-R0142 is requalified against original guest/kernel and CCPU
 address domains; mirror bytes unchanged. Removed one identical redundant
 autonomous function declaration without behavior/binding change.
 [Header review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0140-r0142-requalification.json).
-Next ordered point is R0143.
+dpmidata.h R0143-R0146 source review is complete; mirror diff60 to50, net-10.
+Duplicate conditional and explicit prototype removed; original macro-expanded
+prototype remains. Two points are restored/verified/published, two residual
+boundaries remain pending owner decision.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0143-r0146-requalification.json).
+P16 cached build, publication11x2, descriptor2097152, Full16 and governance
+passed; this receipt accompanies Git delivery. Next point R0147.
 
 ## Remaining Scope
 

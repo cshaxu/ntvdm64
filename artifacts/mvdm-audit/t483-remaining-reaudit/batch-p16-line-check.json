@@ -1,0 +1,8 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/dpmidata.h",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "scope": "Source matching of nonblank non-directive original code runs >=4 lines; not compiler trace."
+  }
+]

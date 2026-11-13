@@ -35,18 +35,13 @@ Revision History:
 #line 45
 
 #if defined(CPU_40_STYLE)
-/* CPU40 owns the same DPMI BOP frame transition in `modesw.c`.  The
- * i386 implementation also changes kernel-VDM state bits, which do not
- * exist in this software-emulation profile. */
 #define switch_to_protected_mode        DpmiCpu40SwitchToProtectedMode
 #else
 #line 46
 #define switch_to_protected_mode        DpmiIllegalFunction
-#endif
-#if !defined(CPU_40_STYLE)
-#line 47
 #define DpmiSetDebugRegisters           DpmiIllegalFunction
-#endif /* MVDM-HOST-DIV-281: CPU40 binds the original debug-register BOP. */
+#endif
+#line 48
 
 //
 // Ldt entry definition
@@ -224,11 +219,6 @@ DpmiXlatInt21Call(
     );
 VOID
 DpmiSwitchToProtectedMode(
-    VOID
-    );
-
-VOID
-DpmiCpu40SwitchToProtectedMode(
     VOID
     );
 

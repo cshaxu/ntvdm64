@@ -1,0 +1,61 @@
+{
+  "file": "src/mvdm-host/dpmi32/dpmidata.h",
+  "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+  "before_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+  "after_sha256": "8fe20c3a4f9acb6cdbcfcf9470d151d269af6cd3c16dd691659f2e09530d0a5c",
+  "mirror_diff": {
+    "before": {
+      "added": 22,
+      "removed": 38,
+      "total": 60
+    },
+    "after": {
+      "added": 12,
+      "removed": 38,
+      "total": 50
+    },
+    "delta": -10,
+    "scope": "Normalize newlines; exclude #line; include unchanged excluded bodies."
+  },
+  "points": {
+    "143": {
+      "before": 7,
+      "after": 4,
+      "delta": -3,
+      "conclusion": "Retain one binding group pending owner; remove redundant comment.",
+      "evidence": "Unchanged guest dxutil.asm builds six-field protected-entry stack and issues DPMIBOP DPMISwitchToProtectedMode. dpmi32.c slot1 dispatches switch_to_protected_mode. Original non-i386 alias reaches DpmiIllegalFunction, which logs only and never restores frame/PE. Existing DpmiSwitchToProtectedMode explicitly assumes caller sets segment registers; not a drop-in 53:01 frame consumer. Current modesw function consumes that frame; header binding necessary, whole provider reviewed later."
+    },
+    "144": {
+      "before": 2,
+      "after": 0,
+      "delta": -2,
+      "conclusion": "Remove redundant separate conditional; original debug alias remains in the shared R0143 else branch.",
+      "evidence": "Truth table unchanged: CPU40 selects actual DpmiSetDebugRegisters, non-CPU40 aliases illegal function. Original dxint31.asm Load_DBG_Regs issues BOP and checks CF; original DpmiIllegalFunction does not set registers/CF. Actual provider reuses original dpmi386.c routine and finite ThreadSetDebugContext CCPU setter. Removing duplicate guard does not remove service adaptation; residual ownership is explicit in R0143."
+    },
+    "145": {
+      "before_added": 5,
+      "before_removed": 24,
+      "delta": 0,
+      "conclusion": "SDK single type provider and exclusion retained pending owner.",
+      "evidence": "Original precomp.h includes windows.h before dpmidata.h; actual compat nt.h also includes windows.h. SDK22621 winnt.h _LDT_ENTRY definition is text-identical to original struct body. Restoring its second tagged struct definition into same translation unit is a C redefinition; removing public Windows declarations is not a type-local restoration. No invented layout or copied shim."
+    },
+    "146": {
+      "before": 5,
+      "after": 0,
+      "delta": -5,
+      "conclusion": "Restore original header content: delete duplicated explicit prototype.",
+      "evidence": "Original dpmi32p.h declares VOID switch_to_protected_mode(VOID). Original precomp.h includes dpmidata.h first then dpmi32p.h, so CPU40 macro supplies exact DpmiCpu40SwitchToProtectedMode prototype before dispatch/definition. Only autonomous include pair is fast_bop.c, also same order. pm_entry fixture extracts full definition before calling; no missing declaration introduced."
+    }
+  },
+  "initial_review": "Compare original guest BOP inputs and CCPU dispatch; do not infer necessity from caller existence alone.",
+  "counter_review": "Original generic DpmiSwitchToProtectedMode is a different caller-owned contract. Duplicate explicit prototype is unnecessary because original declaration is macro-bound. No compression into one-line declarations, second path, or shim transfer.",
+  "verification": {
+    "error_unchanged": true,
+    "matched_original_code_lines": 385,
+    "matched_original_line_mismatches": [],
+    "sdk_struct_identical": true,
+    "scope": "Source proof, not preprocessing/runtime result. Final build/publication/tests pending.",
+    "delivery": "Final P16 cached build, publication11x2, descriptor2097152 and Full16 passed; see batch-p16-checkpoint.json"
+  },
+  "next": "T483-R0147"
+}

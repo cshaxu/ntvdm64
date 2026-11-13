@@ -1,0 +1,228 @@
+{
+  "status": "Final-source cached build, two-location publication, descriptor fixture, Full16 and governance passed; Git delivery follows",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "sha256": "8fe20c3a4f9acb6cdbcfcf9470d151d269af6cd3c16dd691659f2e09530d0a5c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+      "sha256": "e285b3c79059973440e80ae0bfc68c21678d70b3740079dcfe93862a0fa29c61"
+    }
+  ],
+  "mirror_diff_delta": -10,
+  "review": "r0143-r0146-requalification.json",
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pipeline": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "1e0b4d88-e7e4-49af-b716-7a28cb5abab6",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 368153,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5428,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1403,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 283,
+        "CleanupMs": 535,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67429,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46243,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43161,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14269,
+        "CleanupMs": 550,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10450,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 63136,
+        "CleanupMs": 508,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12555,
+        "CleanupMs": 508,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27823,
+        "CleanupMs": 480,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30038,
+        "CleanupMs": 574,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5564,
+        "CleanupMs": 550,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7994,
+        "CleanupMs": 558,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10534,
+        "CleanupMs": 515,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4636,
+        "CleanupMs": 536,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7246,
+        "CleanupMs": 525,
+        "Passed": true
+      }
+    ]
+  },
+  "identity_comparison": {
+    "scope": "Only the 4-byte PE COFF TimeDateStamp is normalized; all other bytes must match.",
+    "reuse_runtime": false,
+    "images": [
+      {
+        "name": "ntvdm.exe",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "6cf854fd1c92e370d434b4097ae2829bfa2b4c18d7dff5ea3b111c015c6e601b",
+        "published_sha256": "43a063c4223cddf6ff4686a19c4e5c058a8d8c226f1b427eee5974d4b95e1ffb"
+      },
+      {
+        "name": "VCDEX.DLL",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "9515269113bda2bcf1ee4cf24586af5e5819a2c45c59a5b569042d738830a3c8",
+        "published_sha256": "4196e4bf7d0eb5b7f3f14a770d7a00955b2bf233f52cbe4c078c53f4c1627528"
+      },
+      {
+        "name": "VDMREDIR.dll",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "5078a29f43852bfbc3c6697a2d3b77b41e88dd083fcd694d893ebdf0df80ab5a",
+        "published_sha256": "9b53b54e192fae687f601806347dfc2dab85c193f73d8ae5646c4d23c5ffeb1f"
+      },
+      {
+        "name": "nthook32.dll",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "61191b707511761a4bd7a867b03c5959b57a7e6ba14aad48a7bf1f8ab8803963",
+        "published_sha256": "55b4b07d76ca2254b332a5f47adb1b3ca93b3a4f429db8915b8a633257922de2"
+      },
+      {
+        "name": "wow32.dll",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "e0cc82945f020caa11f6614c08477beef04d62198d2b765fb6efc377e04cdd40",
+        "published_sha256": "351e871eb018ea860ae7dab9aa47f23123f851b41e77839b9b124483367cb268"
+      },
+      {
+        "name": "ntvwm.exe",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "a803fa481cee531b88d7743dea46f008e74c59b18df5fc54bb7e1c53642f755b",
+        "published_sha256": "4c35e2f1fe392d3d77c69e866c0f65d2e68e14f3dcb4c86b71865ecfe4e6b614"
+      },
+      {
+        "name": "ntcon.exe",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "4ca126d317bd1a0eed3fafe615c7d3ad35c71484060f6cd53a8615bb74e5855b",
+        "published_sha256": "4aaaad8abbaff16177dee9d5c5635142bee981c17fd80096eca5cc0ec372cd57"
+      },
+      {
+        "name": "ntmon.exe",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "c5df6f4e5ae410fcd156eb9b114613cb5f6befb3608523b4887434ea01d1c48f",
+        "published_sha256": "ca5fb37dd0ac8324f7bf955463d7d8c43ce8f2b7646fffe7a27dda7c7f7661cf"
+      },
+      {
+        "name": "run16.exe",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "c25da534b808b4fe3214b1e56a5f5dae4047ae2652d997c489cfaedeb0331071",
+        "published_sha256": "5ac2145327a36a586a24fbd5afe2e1e0976acce9627981b692db41d98aef9775"
+      },
+      {
+        "name": "ntsrv.exe",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "08de4867d375078e201ef75dce1d546fb10c7419aa3a5940a3f1b91b17f35ad8",
+        "published_sha256": "04de93b71122e61ab6b5fb6d6872359db5a1dbdcf8946be6f2c6f8aac8064e68"
+      },
+      {
+        "name": "nthook64.dll",
+        "raw_equal": false,
+        "coff_timestamp_only_equal": false,
+        "candidate_sha256": "5d9f28af3399ab01be2c772cee48100b5fa52c350fb6f4c36f4aa13aaa6966f5",
+        "published_sha256": "8ac52e44bbd72f8bee28b8e436648eeeae26174a90e95df255c26bb983792b57"
+      }
+    ]
+  },
+  "limits": [
+    "Identity comparison did not establish timestamp-only equality; fresh Full executed. No assertion that every unequal byte is executable behavior.",
+    "Descriptor fixture links production providers with host seams and /FORCE duplicate bindings; not a guest interaction test.",
+    "DOS4GW/NESticle missing-fixture skip is not a pass; no original guest or winnt.zip changes."
+  ],
+  "next": "T483-R0147"
+}
