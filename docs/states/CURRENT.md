@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-495 points have a prior or current review record:190 restored/verified/published,
-0 local restorations pending verification,2 approved retain,303 qualified pending
-decisions and0 prior classifications requiring requalification. Another2225
-points are unreviewed. Sequential file disposition is78/365;287 remain.
+501 points have a prior or current review record:192 restored/verified/published,
+0 local restorations pending verification,2 approved retain,307 qualified pending
+decisions and0 prior classifications requiring requalification. Another2219
+points are unreviewed. Sequential file disposition is79/365;286 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,16 +54,12 @@ source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
 
-P6 cmdexec.c delivery reduced mirror diff245->123. Final build, publication11x2,
-command fixtures and Full16 passed; evidence is in the
-[P6 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p6-checkpoint.json).
-
 ## Current Technical Baseline
 
-P52 package `d1e06c36-630d-49ae-8ab2-9388fa097bc9` is published to
+P54 package `723f1bba-205b-48d2-a211-49db921c9255` is published to
 assets/release and O:/winnt/system32;all11 hashes match.Cached full build,
 focused and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p52-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p54-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -241,3 +237,7 @@ P52:R0484-R0487 restored;mirror diff net-8;full delivery verified.
 P53:R0488 original metadata restored;graphs unchanged,P52 runtime reused.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p53-checkpoint.json).
 Next R0489;S5 remains active.
+
+P54:ev_glue.c R0489-R0494 complete;mirror diff54->25(net-29).
+Two restorations delivered;four residuals await owner.Next R0495.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0489-r0494-ev-glue-review.json).

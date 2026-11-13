@@ -312,3 +312,11 @@ P52 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
 P53: [original C-VID metadata](r0488-original-cvidc-metadata.json) restored,mirror diff net-2.
 Both generated architecture graphs identical;P52 package/runtime reused,no new runtime claim.
 [Receipt](batch-p53-checkpoint.json).495/2720 reviewed;78/365 files;190 restored,2 approved,303 pending,2225 unreviewed.
+
+P54 local:ev_glue.c six points audited;mirror diff54->25(net-29).
+501 reviewed;190 delivered restorations,2 local,2 approved,307 pending,2219 unreviewed.
+79/365 files disposed;286 remain.Final-source delivery pending.
+
+P54 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
+501/2720 reviewed;192 restored delivered,0 local,2 approved,307 pending,2219 unreviewed.
+79/365 files complete;286 remain.Next R0495.
