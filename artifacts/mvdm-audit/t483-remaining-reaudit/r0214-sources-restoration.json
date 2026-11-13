@@ -1,0 +1,62 @@
+{
+  "point": "T483-R0214",
+  "path": "src/mvdm-host/dpmi32/sources",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_blob": "c1f2e26be8647b3e45429ae0a830109ad80f75b3",
+  "original_sha256": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506",
+  "before_sha256": "324f5c85446dce1a16b211c6e0f29310b43900181c471bd685fdacc23f2f5907",
+  "after_sha256": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506",
+  "source_clean": true,
+  "initial_rationale": "Exclude native kernel-VDM providers; old evidence cited need for portable dpmimemr. That establishes provider selection, not editing i386_SOURCES.",
+  "actual_consumers": "New-T310OriginalSoftpcNinja.ps1 extracts unprefixed SOURCES and stops at i386_SOURCES, then explicitly adds dpmimemr.c/dpmimscr.c/i386/dpmi386.c. New-T313 parser is similar but consumes only CCPU sources, not this manifest.",
+  "counter_review": "Restoring names does not reconnect kernel providers. No unsupported NT build configuration is admitted. Modern build owns explicit selection, historical manifest can remain original.",
+  "selected_before_and_after": [
+    "debug.c",
+    "dpmi32.c",
+    "dpmiint.c",
+    "dpmiselr.c",
+    "buffer.c",
+    "data.c",
+    "int21map.c",
+    "modesw.c",
+    "register.c",
+    "savestat.c",
+    "stack.c",
+    "vxd.c",
+    "xmem.c"
+  ],
+  "verification": "Actual cached build regenerated production Ninja graph; selected portable providers and i386/dpmi386 subset confirmed; native i386 memory/misc providers excluded. Build and normalized eleven-image comparison passed; see batch-p22-checkpoint.json.",
+  "diff_before": {
+    "added": 1,
+    "deleted": 1,
+    "total": 2
+  },
+  "diff_after": {
+    "added": 0,
+    "deleted": 0,
+    "total": 0
+  },
+  "line_error": "Non-C manifest; whole original byte identity restores line positions; no #error directives existed or were removed.",
+  "status": "restored-verified-published",
+  "actual_graph": {
+    "sha256": "ad89168a921980f1e5f435e6dd8dc2a6c7e9a8bf186acce4bda05422b3b00c5a",
+    "dpmi_compile_edges": [
+      "build obj/dpmi/debug.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/debug.c",
+      "build obj/dpmi/dpmi32.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmi32.c",
+      "build obj/dpmi/dpmiint.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "build obj/dpmi/dpmiselr.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiselr.c",
+      "build obj/dpmi/buffer.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/buffer.c",
+      "build obj/dpmi/data.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/data.c",
+      "build obj/dpmi/int21map.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/int21map.c",
+      "build obj/dpmi/modesw.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/modesw.c",
+      "build obj/dpmi/register.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/register.c",
+      "build obj/dpmi/savestat.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/savestat.c",
+      "build obj/dpmi/stack.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/stack.c",
+      "build obj/dpmi/vxd.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/vxd.c",
+      "build obj/dpmi/xmem.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/xmem.c",
+      "build obj/dpmi/dpmimemr.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "build obj/dpmi/dpmimscr.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimscr.c",
+      "build obj/dpmi/i386_dpmi386.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/i386/dpmi386.c"
+    ]
+  }
+}

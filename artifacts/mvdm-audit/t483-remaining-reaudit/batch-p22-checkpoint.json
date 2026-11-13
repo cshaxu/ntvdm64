@@ -1,0 +1,37 @@
+{
+  "batch": "P22",
+  "status": "Cached full build, publication11x2/hash and governance passed; P22 Git delivery receipt",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/sources",
+      "sha256": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "sha256": "ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "d60ff174dd797d9571282c95ac453dd9db262bfc6070b445597d6f4273846ec9"
+    }
+  ],
+  "mirror_diff": {
+    "before": 17,
+    "after": 12,
+    "delta": -5
+  },
+  "cached_exit": 0,
+  "package": "9b87427f-e6c9-41d4-a297-2f082070595e",
+  "final_check_exit": 0,
+  "runtime_verification": {
+    "action": "Reuse P21 passed focused and Full16 evidence under user metadata-only identity exemption; no fresh runtime run claimed",
+    "evidence": "batch-p22-binary-identity.json",
+    "raw_hashes_equal": false,
+    "all11_equal_after_explicit_metadata_normalization": true
+  },
+  "limits": [
+    "No original guest or winnt.zip changes.",
+    "P21 coverage limits remain: external DOS4GW/NESticle fixtures skipped; WOW frontier is not exhaustive interactive Win3.x acceptance."
+  ]
+}

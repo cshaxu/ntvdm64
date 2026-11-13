@@ -200,7 +200,7 @@ Return Value:
 {
     PXMEM_BLOCK OldBlock;
     ULONG BlockAddress, NewSize;
-    BOOL Status;
+    NTSTATUS Status;
 
     OldBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
     NewSize = (((ULONG)getBX() << 16) | getCX());
@@ -213,7 +213,7 @@ Return Value:
         &NewSize
         );
 
-    /* DIVERGENCE MVDM-HOST-DIV-272: this provider returns BOOL, not NTSTATUS. */
+#line 210
     if (!Status) {
 #line 211
         setCF(1);

@@ -1,0 +1,36 @@
+{
+  "scope": "Entire xmem.c R0215-R0216, original-first and counter-review complete",
+  "source_chain": [
+    "Original xmem.c DpmiReallocateXmem -> original portable dpmimemr.c DpmiReallocateVirtualMemory -> original suballoc.c SAReallocate.",
+    "SAReallocate final failed SAAllocate returns FALSE without writing NewAddress; caller initialized BlockAddress to0.",
+    "Portable provider returns NT_SUCCESS(Status), therefore BOOL0 on failure. Original caller NT_SUCCESS(0) is true; it would overwrite OldBlock Address/Length and clearCF instead of retaining old allocation.",
+    "Original i386 provider has the same BOOL declaration but actually returns NTSTATUS values; this explains original caller expectation, not permission to reconnect native NT memory allocation into CCPU SAS."
+  ],
+  "R0215": {
+    "before": "+1/-1",
+    "after": "0",
+    "decision": "Restore NTSTATUS local; BOOL int and NTSTATUS LONG both signed32 on selected Windows ABI; the stored0/1 and boolean condition are unchanged.",
+    "status": "restored-verified-published"
+  },
+  "R0216": {
+    "before": "+2/-1",
+    "after": "+1/-1",
+    "decision": "Retain only if (!Status) as qualified owner decision; remove local explanation, preserve original logical line210.",
+    "proof": "Failure0 is nonnegative under NT_SUCCESS, so exact original predicate accepts failure. This follows original portable provider and allocator, independent of local adapter policy."
+  },
+  "file_metric": {
+    "before": 15,
+    "after": 12,
+    "delta": -3,
+    "scope": "Normalized newlines; exclude #line; includes five retained #error replacements (10diff lines). Remaining semantic diff is one replaced predicate (2lines)."
+  },
+  "line_check": {
+    "checked_exact_original_nonblank_nondirective_lines": 232,
+    "mismatches": [],
+    "error_directives_unchanged": true
+  },
+  "counter_review": "Do not change original portable producer to NTSTATUS merely to move the diff; do not restore native i386 allocator outside CCPU memory ownership. Restore caller variable without introducing casts or a second return conversion.",
+  "verification": "Final-source cached full build and publication passed. All eleven images equal P21 after explicit timestamps/package-ID normalization; reused P21 runtime evidence under user authorization, no fresh runtime test claimed. See batch-p22-checkpoint.json.",
+  "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+  "current_sha256": "ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b"
+}

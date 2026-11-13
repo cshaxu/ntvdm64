@@ -216,13 +216,9 @@ foreach ($name in $redirNames) {
 $adapterRedirNames = @(Get-OriginalSources $redirDllBindingManifest)
 $xmsNames = @(Get-OriginalSources $xmsManifest)
 $xmsNames += 'xmsmemr.c' # Original SAS callbacks for the selected CCPU40 backing.
-# `i386_SOURCES` is an NT4 kernel-VDM host variant: it writes the host LDT,
-# queries VDM kernel feature bits and mutates the fixed NTVDM V86-state page.
-# It is retained in the complete mirror but is not a CCPU40 source member.
-# The product has no kernel VDM/V86 route; selecting the manifest's portable
-# `SOURCES` block preserves the original CCPU-compatible DPMI owner package.
-# The portable original fallback bodies supply the dispatch members that the
-# CCPU40 profile reaches without taking the NT4 i386 kernel-VDM branch.
+# Select the original portable SOURCES and finite CCPU providers explicitly.
+# i386_SOURCES also lists kernel-VDM memory/LDT providers, not selected here.
+# The dpmi386.c subset supplies the selected mode-switch and debug services.
 $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c' + 'i386/dpmi386.c' | Select-Object -Unique)
 # XMS uses the complete original SubAlloc package.  Keeping it out of the
 # machine graph made its allocator algorithms look like a collection of

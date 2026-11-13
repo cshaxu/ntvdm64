@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-220 points have a prior or current review record:125 restored/verified/published,
-0 local restorations pending verification,2 approved retain,93 qualified pending
-decisions and0 prior classifications requiring requalification. Another2500
-points are unreviewed. Sequential file disposition is31/365;334 remain.
+223 points have a prior or current review record:125 restored/verified/published,
+2 local restorations pending verification,2 approved retain,94 qualified pending
+decisions and0 prior classifications requiring requalification. Another2497
+points are unreviewed. Sequential file disposition is33/365;332 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -236,12 +236,11 @@ P19 removed obsolete fast-BOP adaptation; six mirrors net-195 diff lines.
 Cached build, publication11x2, focused, Full16 and supplemental gates passed.
 Commit41569ec4a is pushed; [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p19-checkpoint.json).
 
-## P21 Verified Batch
+## P22 Verified Batch
 
-P20 delivered in4636c52c0; P21 is published11x2/hash-verified.
-modesw.c R0204-R0213 source review complete. Two mode functions restored to
-original i386/dpmi386.c owner; redundant frame snapshots and CS refresh removed.
-R0211 was already restored/delivered by P19;9 residuals await owner decision.
-Line/#error, cached build, publication11x2, focused and Full16 pass.
-Mirror diff529->312 (-217); P21 delivery carries this receipt.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0204-r0213-call-chain-review.json).
+P21 delivered/pushed5d87857c1. P22 sources/xmem.c complete; mirror diff17->12(-5).
+R0214/R0215 restored; R0216 minimized, pending owner decision. Lines/#error pass.
+Cached full build/publication11x2 pass. All11 match P21 excluding explicit PE
+metadata/package ID; reuse P21 runtime tests per authorization, no fresh run claimed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p22-checkpoint.json).
+Next R0217. This receipt accompanies P22 commit/push.

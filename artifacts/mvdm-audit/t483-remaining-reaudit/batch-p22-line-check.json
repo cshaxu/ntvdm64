@@ -1,0 +1,13 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/sources",
+    "method": "Exact original bytes; see R0214 evidence",
+    "matched_original_line_mismatches": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/xmem.c",
+    "matched_original_line_mismatches": [],
+    "checked_lines": 232,
+    "error_directives_unchanged": true
+  }
+]
