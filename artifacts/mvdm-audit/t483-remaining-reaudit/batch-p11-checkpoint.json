@@ -1,0 +1,170 @@
+{
+  "status": "Verified and published; included in P11 Git delivery",
+  "source_head": "8a0a55ff3f24cf4aae31c4c9f00a8ed1ac8ca3b7",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "sha256": "dea773aec3be59a16ed8d9e3cc0febb07b4ddcb0ff174431bbc3fe6def85e3fd"
+    }
+  ],
+  "mirror_diff_before": [
+    17,
+    98
+  ],
+  "mirror_diff_after": [
+    4,
+    96
+  ],
+  "mirror_diff_delta": -15,
+  "scope": "Restore original fast-I/O slots; remove unreachable extra fallback, original software-CPU guest gate selects slow I/O.",
+  "attempts": [
+    {
+      "root": "build/t483-s5-p11",
+      "cached": 0,
+      "stage": 0,
+      "published": false,
+      "reason": "Initial retention conclusion omitted upstream FastOrSlow MIPS_BIT gate; candidate explicitly withheld before publication."
+    }
+  ],
+  "built_source_sha256": "7da3a1ed0088a3b3e580bbb2b108d3218d965ce3b2075623821e736b49ae1b0e",
+  "format_only_after_build": {
+    "change": "Restore original blank line before #line14",
+    "proof": "All nonblank source lines and their logical line numbers identical; same #error and condition structure.",
+    "runtime_reuse_authority": "Owner permits format/line-only changes without repeated runtime tests; no behavior or binding change."
+  },
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pipeline": 0,
+    "governance": 0
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 388338,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5415,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1231,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 212,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66342,
+        "CleanupMs": 498,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47662,
+        "CleanupMs": 616,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 50352,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15928,
+        "CleanupMs": 622,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13116,
+        "CleanupMs": 610,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 68635,
+        "CleanupMs": 747,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12612,
+        "CleanupMs": 587,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28859,
+        "CleanupMs": 573,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30590,
+        "CleanupMs": 591,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4770,
+        "CleanupMs": 612,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7863,
+        "CleanupMs": 610,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11140,
+        "CleanupMs": 562,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5212,
+        "CleanupMs": 566,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7324,
+        "CleanupMs": 604,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "4b68202f-b3f2-40ca-97c5-25ae6ce22205",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "contract_final": {
+    "result": "PASS source assertion marker; empty stderr",
+    "runner": "test/mvdm-host/dos/Verify-T409FastIoFallback.ps1",
+    "sha256": "9f5b19a28f0af82ad1e5cf57613fec1e9d23a1a29627d7543d672188982f0883"
+  },
+  "limits": [
+    "DOS4GW/NESticle explicitly skipped: verified external fixtures not supplied.",
+    "Source predicate proof and runtime Full are distinct; no claim of arbitrary guest writes preserving software-CPU bit.",
+    "Built source precedes one blank-line restoration; nonblank text and logical line pairs verified identical under owner format-only reuse authorization."
+  ]
+}

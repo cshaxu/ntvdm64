@@ -13,14 +13,19 @@ $header = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/dem.h
 $guestRead = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-guest/dos/v86/doskrnl/dos/handle.asm') -Raw
 $graph = Get-Content -LiteralPath (Join-Path $root 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
 
-if ($dispatch -notmatch 'demFastIoUnavailable,\s*//SVC_DEMFASTREAD' -or
-    $dispatch -notmatch 'demFastIoUnavailable,\s*//SVC_DEMFASTWRITE' -or
-    $dispatch -notmatch '(?s)static VOID demFastIoUnavailable \(VOID\).*?setCF\(1\)') {
-    throw 'Fast-I/O slots do not decline through the one CF fallback seam.'
+$startup = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_msscs.c') -Raw
+if ($dispatch -notmatch 'demNotYetImplemented,\s*//SVC_DEMFASTREAD' -or
+    $dispatch -notmatch 'demNotYetImplemented,\s*//SVC_DEMFASTWRITE' -or
+    $dispatch -match 'demFastIoUnavailable') {
+    throw 'Original unused fast-I/O table slots were replaced.'
+}
+if ($startup -notmatch 'fVirtualInt\s*\|=\s*MIPS_BIT_MASK' -or
+    $guestRead -notmatch '(?s)Procedure FastOrSlow,near.*?test\s+word ptr ds:FIXED_NTVDMSTATE_REL40, MIPS_BIT_MASK.*?jz\s+fos_fast.*?fos_slow:.*?stc.*?fos_fast:.*?ret') {
+    throw 'Original software-CPU slow-I/O gate is absent.'
 }
 if ($dispatch -match '\bdemFast(Read|Write)\s*(?:\(|,)' -or
     $header -match 'demFastRead|demFastWrite' -or
-    $graph -match "\$demOverlayNames = @\('demfastio\.c'\)") {
+    $graph -match '\bdemfastio\.c\b') {
     throw 'A selected autonomous fast-I/O implementation remains.'
 }
 if ($guestRead -notmatch '(?s)SVC\s+SVC_DEMFASTREAD\s*\r?\n\s*jnc.*?HRDSVC\s+SVC_DEMREAD' -or
@@ -28,4 +33,4 @@ if ($guestRead -notmatch '(?s)SVC\s+SVC_DEMFASTREAD\s*\r?\n\s*jnc.*?HRDSVC\s+SVC
     throw 'The original DOS CF fallback sequence is not present.'
 }
 
-Write-Output 'T409 fast-I/O original fallback boundary passed.'
+Write-Output 'PASS source contract: original CPU40 slow-I/O selection and original dispatch slots; runtime coverage belongs to integration tests.'

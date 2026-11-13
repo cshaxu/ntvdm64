@@ -10,12 +10,12 @@
 #include <stdio.h>
 #include <softpc.h>
 
-static VOID demFastIoUnavailable(VOID);
 
 #line 14
 #if DBG
 #line 15
 #error Excluded unsupported DBG profile
+#line 92
 #endif   // DBG
 #line 93
 
@@ -90,8 +90,8 @@ PFNSVC  apfnSVC [] = {
      demLockOper,               //SVC_DEMLOCKOPER
      demNotYetImplemented,      //SVC_DEMNOTYETIMPLEMENTED
      demGetComputerName,        //SVC_DEMGETCOMPUTERNAME
-     demFastIoUnavailable,      //SVC_DEMFASTREAD
-     demFastIoUnavailable,      //SVC_DEMFASTWRITE
+     demNotYetImplemented,      //SVC_DEMFASTREAD
+     demNotYetImplemented,	//SVC_DEMFASTWRITE
      demCheckPath,		//SVC_DEMCHECKPATH
      demSystemSymbolOp,		//SVC_DEMSYSTEMSYMBOLOP
      demGetDPBList,		//SVC_DEMBUILDDPBLIST
@@ -126,6 +126,7 @@ BOOL DemDispatch (ULONG iSvc)
 #if DBG
 #line 203
 #error Excluded unsupported DBG profile
+#line 205
 #endif
 #line 206
 	setCF(1);
@@ -143,6 +144,7 @@ BOOL DemDispatch (ULONG iSvc)
 #if DBG
 #line 218
 #error Excluded unsupported DBG profile
+#line 226
 #endif
 #line 227
     return TRUE;
@@ -157,16 +159,6 @@ VOID demNotYetImplemented (VOID)
 
     setCF(0);
     return;
-}
-
-/* DIVERGENCE(MVDM-HOST-DIV-188): the original `NTFastDOSIO` owner is a
- * kernel trap-frame handler and cannot compose in the standalone CCPU40
- * worker.  The unchanged NTDOS `$READ`/`$WRITE` callers treat CF as the
- * source-defined request to retry SVC_DEMREAD/SVC_DEMWRITE; do exactly that
- * rather than substitute an autonomous user-mode fast-I/O algorithm. */
-static VOID demFastIoUnavailable (VOID)
-{
-    setCF(1);
 }
 
 #line 241

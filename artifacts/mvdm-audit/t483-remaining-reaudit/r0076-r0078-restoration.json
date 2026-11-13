@@ -1,0 +1,19 @@
+{
+  "points": [
+    "T483-R0076",
+    "T483-R0077",
+    "T483-R0078"
+  ],
+  "decision": "Restore original table slots and remove added fast-I/O fallback",
+  "supersedes": "r0073-r0078-review.json fast-I/O necessity claim and initial P11 retention candidate",
+  "proof": [
+    "nt_msscs.c sets fVirtualInt MIPS_BIT_MASK before guest start and restores that value after loading NTIO.",
+    "handle.asm FastOrSlow tests this software-CPU bit and sets CF; do_read/dowrite take do_slowr/do_sloww before SVC_DEMFASTREAD/WRITE.",
+    "mvdm_softpc_fast_bop_sync_mode only changes RM_BIT_MASK; inspected EXEC/WOWBLOCKED updates preserve software-CPU bit.",
+    "Original NT kernel fast-I/O absence alone is insufficient to justify an extra handler when original software-CPU guest gate already selects slow I/O."
+  ],
+  "counter_review": "The initial review checked only post-SVC carry handling. Upstream gate invalidated its necessity conclusion. Initial candidate built but was explicitly withheld before publication; final original restoration uses separate r2 build.",
+  "runtime_limits": "Final P11 Full16 passed; source proof covers selected original guest/startup, not arbitrary guest memory corruption or deliberate undocumented SVC callers. External DOS4GW/NESticle fixtures absent and skipped.",
+  "mirror_diff_delta": -15,
+  "format_limit": "Original blank line restored after build; exact nonblank content and logical line equivalence checked; no remaining non-excluded diff."
+}

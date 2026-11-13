@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:103 restored/verified/published,
+177 points have a prior or current review record:106 restored/verified/published,
 0 local restorations pending verification,2 approved retain,19 qualified pending
-decisions and53 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is15/365;350 remain.
+decisions and50 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is16/365;349 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,13 +69,15 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P10 package `27754767-b670-45f2-b8b7-bb626760161f` is published to
+P11 package `4b68202f-b3f2-40ca-97c5-25ae6ce22205` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
-Cached full build, command fixtures, FCB enumeration, Full16 and governance
-passed. DOS4GW/NESticle skipped: verified external fixtures not supplied.
-No original guest or winnt.zip changes. This record accompanies P10 Git delivery.
-See [P10 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json).
-S5 remains active; next ordered point is R0076.
+Cached full build, command fixtures, source-contract assertions, Full16 and
+governance passed. DOS4GW/NESticle skipped: external fixtures not supplied.
+No original guest or winnt.zip changes. One final original blank line was restored
+under format-only reuse authorization; nonblank content/logical lines match the
+built source exactly. This record accompanies P11 Git delivery.
+See [P11 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json).
+S5 remains active; next ordered point is R0079.
 
 ## Remaining Scope
 
@@ -195,3 +197,22 @@ See [P10 restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0074-r0
 [checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json),
 [metrics](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-mirror-diff.json),
 and [line checks](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-line-check.json).
+
+## Current P11 Batch
+
+R0076-R0078 demdisp.c: restore original FASTREAD/FASTWRITE table slots and remove
+added CF fallback. Initial retention omitted the upstream FastOrSlow software-CPU
+gate and is withdrawn. CPU40 startup sets MIPS_BIT_MASK; the original guest chooses
+ordinary I/O before reaching fast slots. The first candidate was built but withheld
+before publication. Corrected r2 built and published package
+4b68202f-b3f2-40ca-97c5-25ae6ce22205 to both targets; final Full16 passed under pipeline37360.
+
+Final original blank-line cleanup after build preserves every nonblank line and
+logical line pair; owner format-only reuse authorization applies. Exactly4 original
+DBG bodies are replaced by #error; no other normalized difference remains. Source
+subset/line proof is independent of compilation evidence. Original-relative diff
+net-15 excluding #line. Three restored points are verified and published, included in P11 Git delivery.
+The source-contract test now checks the upstream gate, not a redundant added helper.
+See [corrected evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0076-r0078-restoration.json),
+[checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json),
+and [line checks](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-line-check.json).

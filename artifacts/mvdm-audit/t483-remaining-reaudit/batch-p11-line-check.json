@@ -1,0 +1,10 @@
+[
+  {
+    "file": "src/mvdm-host/dos/dem/demdisp.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent exact original subset comparison; exactly4 DBG bodies replaced; selected DBG=0 nonblank text and logical line pairs match original. No compiler-preprocessor-trace claim.",
+    "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+    "final_sha256": "dea773aec3be59a16ed8d9e3cc0febb07b4ddcb0ff174431bbc3fe6def85e3fd"
+  }
+]
