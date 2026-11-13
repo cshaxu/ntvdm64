@@ -1,0 +1,32 @@
+{
+  "path": "src\\mvdm-host\\dpmi32\\dpmimscr.c",
+  "status": "Exact original restoration verified by P18 cached full build and Full16; publication11x2 verified",
+  "before_sha256": "dd6d71ea37c7653e6fc48d31d123dacfefdbda4badeeeec0ea76d7c7113c0186",
+  "original_and_current_sha256": "41494b9f44e53863d31527ca082dfc286f34e2b4cace556baf501274d3eba061",
+  "evidence": [
+    "wow16cal.asm WOWFastBopInit zero endpoint selects NoFastWow; WOW16SlowVector BOP_WOW and WOW16SlowCBReturn BOP_UNSIMULATE exist",
+    "BOP.INC FBOP tests selector zero and executes ordinary BOP",
+    "3protect.asm WowSetSelector zero FlatAddressArray returns CF; caller explicitly falls back CallServer, not a null write",
+    "486/dxint31.asm 04f2 dispatch i31_WOW_SetDescriptor calls NWOWSetDescriptor",
+    "dpmiselr.c DpmiSetDescriptorEntry already publishes guest and native flat addresses and CCPU GDT/LDT"
+  ],
+  "counter_review": "Existing fast carrier dependency is not proof original slow route fails. Historical E38 observation did not isolate zero-entry restoration. No guest modifications. Complete original bytes restore original logical lines; this file contains no excluded #error.",
+  "ids": [
+    "T483-R0180",
+    "T483-R0181",
+    "T483-R0182"
+  ],
+  "mirror_diff": {
+    "before": {
+      "added": 10,
+      "deleted": 0
+    },
+    "after": {
+      "added": 0,
+      "deleted": 0
+    },
+    "delta": -10,
+    "scope": "Normalized newlines, excluding #line; final bytes exactly original"
+  },
+  "verification": "batch-p18-checkpoint.json"
+}

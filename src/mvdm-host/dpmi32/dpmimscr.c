@@ -22,8 +22,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
-#line 25
 
 VOID
 DpmiGetFastBopEntry(
@@ -46,16 +44,6 @@ Return Value:
 
 --*/
 {
-        USHORT Offset;
-        USHORT Selector;
-
-        if (mvdm_softpc_fast_bop_prepare(&Offset, &Selector)) {
-            setBX(Offset);
-            setDX(0);
-            setES(Selector);
-            return;
-        }
-#line 47
         //
         // krnl286 does a DPMIBOP GetFastBopAddress even on
         // risc, so just fail the call since fast-bopping
@@ -65,7 +53,6 @@ Return Value:
         setBX(0);
         setDX(0);
         setES(0);
-#line 56
 }
 
 VOID

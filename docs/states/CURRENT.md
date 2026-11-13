@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-186 points have a prior or current review record:115 restored/verified/published,
+189 points have a prior or current review record:118 restored/verified/published,
 0 local restorations pending verification,2 approved retain,69 qualified pending
-decisions and0 prior classifications requiring requalification. Another2534
-points are unreviewed. Sequential file disposition is27/365;338 remain.
+decisions and0 prior classifications requiring requalification. Another2531
+points are unreviewed. Sequential file disposition is28/365;337 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -54,22 +54,13 @@ source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
 
-Final minimized P6 source passed cached full build in build/t483-s5-p6-r2.
-Original-relative cmdexec.c difference falls from245 to123 lines (net -122), normalizing newlines and excluding #line.
-This includes SCS restoration, conversion restoration, activation-wrapper removal
-and COMSPEC minimization. These are mirror diff counts, not total source lines.
-Matched original-code runs have zero logical-line mismatches; #error is unchanged.
-Final command fixtures and Full16 passed; DOS4GW/NESticle was explicitly skipped
-for absent external fixtures. Both publication destinations match all11 hashes.
-This receipt accompanies P6; Git commit/push verification follows its creation.
-See [P6 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p6-checkpoint.json),
-[scheduling proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0021-scheduling-requalification.json),
-[conversion restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0022-r0028-conversion-restoration.json),
-and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0029-r0036-requalification.json).
+P6 cmdexec.c delivery reduced mirror diff245->123. Final build, publication11x2,
+command fixtures and Full16 passed; evidence is in the
+[P6 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p6-checkpoint.json).
 
 ## Current Technical Baseline
 
-P17 package `6b318f5f-3c92-4572-a9e7-f850066b3ec4` is published to
+P18 package `c5a41150-8a47-4271-9a46-3f303e056b20` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
 Final-source cached full build, descriptor2097152 and Full16 passed.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
@@ -228,3 +219,13 @@ Git delivery. Package `6b318f5f-3c92-4572-a9e7-f850066b3ec4` is installed.
 No original guest or winnt.zip changes; unavailable DOS4GW/NESticle fixtures
 are skips, not passes. No fresh Win3.x interactive acceptance is claimed.
 Next sequential file: dpmimscr.c, starting R0180.
+
+## P18 Original-Restoration Delivery
+
+dpmimscr.c R0180-R0182 is byte-identical to original; mirror diff net-10.
+NoFastWow, slow BOP and 04F2 descriptor fallback are the original providers.
+Cached full build, publication11x2 and Full16 passed; this record accompanies
+Git delivery. WOW frontier coverage is not gameplay acceptance; absent
+DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
+Next sequential file is dpmiselr.c, R0183.

@@ -1,0 +1,131 @@
+{
+  "status": "Final original bytes: cached full build, publication11x2 and Full16 passed; governance/Git pending",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "sha256": "41494b9f44e53863d31527ca082dfc286f34e2b4cace556baf501274d3eba061"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 387130,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5736,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1224,
+        "CleanupMs": 547,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 229,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66378,
+        "CleanupMs": 532,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 49257,
+        "CleanupMs": 595,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 48756,
+        "CleanupMs": 508,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16369,
+        "CleanupMs": 536,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12794,
+        "CleanupMs": 532,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 70069,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12239,
+        "CleanupMs": 568,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28546,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30310,
+        "CleanupMs": 610,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5026,
+        "CleanupMs": 590,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7842,
+        "CleanupMs": 581,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10233,
+        "CleanupMs": 540,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4829,
+        "CleanupMs": 541,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7020,
+        "CleanupMs": 516,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "c5a41150-8a47-4271-9a46-3f303e056b20",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "mirror_diff_delta": -10,
+  "limits": [
+    "Full WOW frontier observations are not gameplay or callback-depth coverage.",
+    "DOS4GW/NESticle unavailable external fixtures skipped, not passed.",
+    "No original guest or winnt.zip change."
+  ]
+}
