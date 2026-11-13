@@ -1,0 +1,144 @@
+{
+  "status": "P36 verified delivery receipt; accompanies Git delivery",
+  "base_commit": "3dfa43f16daa3468aeb409c4f60052eac78fb52c",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "sha256": "75fdba51e67f65f2d4eb46ab38682856000635d6e5a15d83bb1cfb32cbfe360c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "sha256": "b2c2942dac794ba3a83866962fcc99b636c9700c685bf97cc41ac491f633a909"
+    },
+    {
+      "path": "test/mvdm-host/ccpu_monitor_boundary_fixture.c",
+      "sha256": "c5fb590360dc3b23c5e9a1bc70afa871505ba16e6f09bbd0924e2b9c7f490ba2"
+    }
+  ],
+  "mirror_diff_delta": -31,
+  "build_pid": 3484,
+  "verification": "Final-source build, two-location publication, focused and Full16 passed",
+  "package": "1321b0b1-240b-4e69-844c-b1d0c10728ed",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1293,
+      "CleanupMs": 380,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 305,
+      "CleanupMs": 419,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66712,
+      "CleanupMs": 398,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 45693,
+      "CleanupMs": 443,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 43677,
+      "CleanupMs": 412,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14847,
+      "CleanupMs": 431,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10738,
+      "CleanupMs": 496,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 68385,
+      "CleanupMs": 443,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12577,
+      "CleanupMs": 444,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28325,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30783,
+      "CleanupMs": 491,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 5033,
+      "CleanupMs": 552,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 8739,
+      "CleanupMs": 525,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 11300,
+      "CleanupMs": 454,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 6329,
+      "CleanupMs": 496,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 7805,
+      "CleanupMs": 473,
+      "Passed": true
+    }
+  ],
+  "full_elapsed_ms": 377446,
+  "focused": {
+    "x87_cases": 64,
+    "cpu_boundary": 143
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Absent external DOS4GW/NESticle fixtures remain skips.",
+    "Other nt_inthk.c adaptations remain subject to their later ordered whole-file audit."
+  ],
+  "final_checks": {
+    "wow_boundary_objects": 143,
+    "negative_controls": 9,
+    "documentation_governance": "passed",
+    "relative_links": "passed",
+    "git_diff_check": "passed"
+  }
+}

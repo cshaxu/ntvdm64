@@ -74,7 +74,7 @@ extern void do_intrupt(unsigned short, BOOL, BOOL, unsigned short);
 static volatile uint32_t test_fault, test_irq, test_irq_eip, test_irq_isr;
 static volatile uint32_t frame_fault_vector, frame_fault_eip, test_fault_vector, test_fault_error;
 extern uint32_t lin2phy(uint32_t,int);
-extern int ccpu_monitor_cached_access(uint32_t,unsigned char,uint32_t *);
+extern int xtrn2phy(uint32_t,unsigned char,uint32_t *);
 static int duplicate_tlb_mapping(void) {
     uint32_t *pte=(uint32_t *)c_GetPhyAdd(0x5000),first,second,actual,monitor=0;
     int hit;
@@ -83,29 +83,30 @@ static int duplicate_tlb_mapping(void) {
     c_setCR3(0x4000);c_setPG(1);
     first=lin2phy(0x2000,2); pte[2]=0x9007;
     second=lin2phy(0x2000,3);actual=lin2phy(0x2000,2);
-    hit=ccpu_monitor_cached_access(0x2000,2,&monitor);
+    hit=xtrn2phy(0x2000,2,&monitor);
     {char line[160];wsprintfA(line,"TLB_DUPLICATE first=%lx write=%lx cpu=%lx monitor=%lx hit=%d\n",first,second,actual,monitor,hit);report(line);}
     c_setPG(0);
     return first==0x8000 && second==0x9000 && actual==0x9000 && hit==1 && monitor==actual;
 }
 static int monitor_cache_contract(void) {
-    uint32_t *pte=(uint32_t *)c_GetPhyAdd(0x5000),phys=0;int miss,hit,deny,write_miss,ext_read,ext_deny,ext_write;
-    extern int xtrn2phy(uint32_t,unsigned char,uint32_t *);
+    uint32_t *pte=(uint32_t *)c_GetPhyAdd(0x5000),phys=0;
+    int read,hit,deny,write,absent;
     c_cpu_init();ZeroMemory(c_GetPhyAdd(0x4000),0x2000);
     *(uint32_t *)c_GetPhyAdd(0x4000)=0x5003;pte[2]=0x8003;
     c_setCR3(0x4000);c_setPG(1);
-    miss=ccpu_monitor_cached_access(0x2000,0,&phys);
-    ext_read=xtrn2phy(0x2000,0,&phys) && phys==0x8000;
+    read=xtrn2phy(0x2000,0,&phys) && phys==0x8000;
     if(lin2phy(0x2000,0)!=0x8000){c_setPG(0);return 0;}
-    hit=ccpu_monitor_cached_access(0x2000,0,&phys);
-    deny=ccpu_monitor_cached_access(0x2000,2,&phys);
-    ext_deny=xtrn2phy(0x2000,2,&phys);
-    write_miss=ccpu_monitor_cached_access(0x2000,1,&phys);
-    ext_write=xtrn2phy(0x2000,1,&phys) && phys==0x8000;
+    pte[2]=0x9007;*(uint32_t *)c_GetPhyAdd(0x4000)=0;
+    hit=xtrn2phy(0x2000,0,&phys) && phys==0x8000;
+    deny=!xtrn2phy(0x2000,2,&phys);
+    *(uint32_t *)c_GetPhyAdd(0x4000)=0x5003;
+    write=xtrn2phy(0x2000,1,&phys) && phys==0x9000;
+    absent=!xtrn2phy(0x3000,0,&phys);
     c_setPG(0);
-    {char line[128];wsprintfA(line,"CACHE_CONTRACT miss=%d hit=%d deny=%d write_miss=%d ext=%d,%d,%d\n",miss,hit,deny,write_miss,ext_read,ext_deny,ext_write);report(line);}
-    return miss==0 && hit==1 && deny==-1 && write_miss==0 && ext_read && !ext_deny && ext_write;
+    {char line[128];wsprintfA(line,"CACHE_CONTRACT read=%d stale_hit=%d cached_deny=%d write_miss=%d absent=%d\n",read,hit,deny,write,absent);report(line);}
+    return read && hit && deny && write && absent;
 }
+
 static unsigned io_reads, io_writes, string_reads, string_writes, first_output, string_visible_during_callback, string_output_uses_guest, string_word_direct, wrong_string_write;
 static void probe_read(io_addr port, half_word *value) { (void)port; ++io_reads; *value=0xa5; }
 static void probe_write(io_addr port, half_word value) { (void)port; if(!io_writes)first_output=value; ++io_writes; }

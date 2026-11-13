@@ -1,0 +1,75 @@
+{
+  "points": [
+    "T483-R0412",
+    "T483-R0413",
+    "T483-R0414",
+    "T483-R0415"
+  ],
+  "status": "original-restored-verified-published",
+  "responsibility": "Resolve protected-mode fault opcode/data against the same CCPU paging view without issuing a guest page fault during host inspection. TLB permissions and cached physical mappings remain authoritative.",
+  "original_ability": "Original xtrn2phy already checks fast and ordinary TLB, returns FALSE on cached permission denial, and walks PDE/PTE only on cache miss. Its access bit2 updates accessed/dirty without changing the TLB. A stale cache mapping does not require a new three-state interface.",
+  "full_call_chain": [
+    "host_exint_hook -> monitor_fetch_byte / monitor_lmsw_operand / monitor_string_io -> monitor_translate -> original xtrn2phy",
+    "xtrn2phy -> phy_read_dword macro -> phy_r32 -> phyR: SasWrapMask, bounds, RAM/ROM/inaccessible/video dispatch",
+    "monitor_fetch_byte then monitor_read_ram bounds-checks actual target and monitor_mark_access calls xtrn2phy with bit2"
+  ],
+  "original_inability": "No demonstrated inability of original xtrn2phy to own this translation. Existing tri-state interface was required only by the added page-table preflight, not by original caller semantics.",
+  "specific_diff_necessity": "No evidence justifies these four deviations as a group. Delete duplicate preflight and restore original translation body; do not add a second provider.",
+  "semantic_boundary": "Restored page walks use original physical-memory device dispatch, including video memory reads, instead of the added RAM/ROM-only page-table restriction. Actual target memory still passes unchanged monitor_read_ram. This is not a claim that all monitor decoding/exception handling is original or fully audited.",
+  "source_refs": [
+    "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c:xtrn2phy",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h:phy_read_dword",
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:phyR and phy_r32",
+    "src/mvdm-host/softpc.new/host/src/nt_inthk.c:monitor_translate and consumers"
+  ],
+  "tests": "Final original-interface cache assertions passed; all143 CPU boundary and64 x87 cases passed; Full16 passed. See checkpoint for limitations.",
+  "delta": [
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "matched_original_lines": 546,
+      "matched_original_line_mismatches": [],
+      "error_unchanged": true,
+      "before": {
+        "added": 29,
+        "deleted": 167,
+        "total": 196
+      },
+      "after": {
+        "added": 11,
+        "deleted": 166,
+        "total": 177
+      }
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "matched_original_lines": 148,
+      "matched_original_line_mismatches": [],
+      "error_unchanged": true,
+      "before": {
+        "added": 323,
+        "deleted": 15,
+        "total": 338
+      },
+      "after": {
+        "added": 311,
+        "deleted": 15,
+        "total": 326
+      }
+    }
+  ],
+  "scope": "Complete c_tlb.c four-point audit; only directly coupled translation change in nt_inthk.c, not completion of its later whole-file audit.",
+  "original_baseline": {
+    "repository": "O:/repos.external/OpenNT",
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/base/ccpu386/c_tlb.c",
+    "sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8"
+  },
+  "counter_review": "No ccpu_monitor_cached_access or xtrn2phy_core references remain in src/test. Original mapping routine retains both fast/ordinary TLB paths and original A/D behavior. Test case76 now verifies cached supervisor denial even after PDE invalidation, rather than merely asserting a project-specific tri-state return. Other monitor policies are not approved by this audit.",
+  "verification": "Final-source cached full build, publication11x2/hash,64 x87/143 CPU boundary and Full16 passed. See batch-p36-checkpoint.json.",
+  "whole_file_subset_check": {
+    "non_line_added_lines": 11,
+    "all_added_lines_are_error_directives": true,
+    "selected_original_matched_lines": 546,
+    "remaining_functional_local_differences": 0
+  }
+}

@@ -611,16 +611,6 @@ test_tlb()
       }
    }
 
-/* DIVERGENCE(MVDM-HOST-DIV-474): share the original translation's cache
- * decision with the host monitor, including distinct denial and miss. */
-static IS32 xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only);
-
-GLOBAL IS32
-ccpu_monitor_cached_access IFN3(LIN_ADDR, lin, IUM8, access, PHY_ADDR *, phy)
-   {
-   return xtrn2phy_core(lin, access, phy, TRUE);
-   }
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Map external linear address to physical address.                   */
 /* Used only by functions external to the C CPU.                      */
@@ -641,13 +631,6 @@ xtrn2phy IFN3
 				   */
    PHY_ADDR *, phy		/* pntr to Physical Address */
    )
-   {
-   return xtrn2phy_core(lin, access_request, phy, FALSE) > 0;
-   }
-
-static IS32
-xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
-#line 671
    {
    IU32 pde_addr;	/* Address of PDE */
    IU32 pte_addr;	/* Address of PTE */
@@ -709,7 +692,7 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
 #endif /* SPC486 */
 #line 727
 	    {
-	    return cache_only ? -1 : FALSE;
+	    return FALSE;
 	    }
 
 	 *phy = e->pa | lin & OFFSET_MASK;
@@ -718,7 +701,6 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
       }
    
    /* Cache Miss */
-   if (cache_only) return 0;
 
    /* check that pde is present */
 #line 739

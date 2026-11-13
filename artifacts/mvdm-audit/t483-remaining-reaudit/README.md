@@ -196,3 +196,7 @@ P35: [Register diagnostic original restoration](r0410-register-diagnostic.json),
 [line checks](batch-p35-line-check.json), [checkpoint](batch-p35-checkpoint.json).
 P35 focused witness: [segment cache state probe](r0411-segment-state-probe.c);
 compiled only in the task build directory, not a new production/test target.
+
+## P36 original TLB restoration delivered
+
+[R0412-R0415 evidence](r0412-r0415-original-tlb-restoration.json) restores original xtrn2phy and removes coupled duplicate page-table preflight; mirror diff net-31. [Line checks](batch-p36-line-check.json) preserve excluded branches and694 original logical lines. [Checkpoint](batch-p36-checkpoint.json) records final-source cached build,11-image publication/hash at both locations,64 x87/143 CPU cases and Full16 passing. Progress:422/2720 reviewed;59/365 files;151 restored verified published,0 local,2 approved,269 pending decisions,2298 unreviewed. This receipt accompanies Git delivery.

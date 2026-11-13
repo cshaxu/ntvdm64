@@ -43,6 +43,7 @@
 #include <c_reg.h>
 #endif
 
+#line 38
 /* Make local symbols visible if debugging. */
 #ifndef PROD
 #line 40
@@ -238,23 +239,11 @@ static BOOL monitor_read_ram(ULONG physical, void *value, ULONG size)
 
 static BOOL monitor_translate(ULONG linear, BOOL write, ULONG *physical)
 {
-    extern unsigned long c_getCR0(void), c_getCR3(void);
+    extern unsigned long c_getCR0(void);
     extern int xtrn2phy(unsigned long, unsigned char, unsigned long *);
-    extern int ccpu_monitor_cached_access(unsigned long, unsigned char, unsigned long *);
     UCHAR access=(getCPL()==3 ? 2 : 0) | (write ? 1 : 0);
     *physical=linear;
-    if (c_getCR0() & 0x80000000UL) {
-        ULONG pde,pte,dir=(c_getCR3() & 0xfffff000UL)+((linear>>22)<<2);
-        ULONG table;
-        int cached=ccpu_monitor_cached_access(linear,access,physical);
-        if(cached<0) return FALSE;
-        if(cached>0) return TRUE;
-        if (!monitor_read_ram(dir,&pde,sizeof(pde)) || !(pde&1)) return FALSE;
-        table=(pde&0xfffff000UL)+(((linear>>12)&0x3ffUL)<<2);
-        if (!monitor_read_ram(table,&pte,sizeof(pte)) || !(pte&1)) return FALSE;
-        if (!xtrn2phy(linear,access,physical)) return FALSE;
-    }
-    return TRUE;
+    return !(c_getCR0() & 0x80000000UL) || xtrn2phy(linear,access,physical);
 }
 
 static BOOL monitor_mark_access(ULONG linear, BOOL write, ULONG expected)
@@ -528,6 +517,7 @@ candidate_unhandled:
 
 
 
+#line 208
     /* exception interrupt handler defined ? */
 #line 209
     if(EXIntHandler)
