@@ -122,7 +122,7 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     RenameFile                     , // 56h - Rename File
     NoTranslation                  , // 57h - Get/Set Date/Time File
     NoTranslation                  , // 58h - Get/Set Alloc Strategy
-    ReturnESBX                     , // 59h - Get Extended Error Info (ES:DI)
+    ReturnESBX                     , // 59h - Get Extended Error Info
     CreateTempFile                 , // 5Ah - Create Temporary File
     MapASCIIZDSDX                  , // 5Bh - Create New File
     NoTranslation                  , // 5Ch - Lock/Unlock File Region
@@ -196,12 +196,11 @@ Return Value:
         return; //bugbug find out what win31 does.
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-283): the non-DBCS DOS guest also returns
-     * DS:SI for 6300h. Use its original pointer translator, not the
-     * non-DBCS table's segment-restoring NoTranslation fallback. */
+#line 199
     if (getAX() == 0x6300) ReturnDSSI();
     else (*ApiXlatTable[DosMajorCode])();
 
+#line 198
     // put this back in after beta 2.5
 #line 199
     DpmiFreeAllBuffers();
@@ -239,8 +238,7 @@ Return Value:
 --*/
 {
     VSAVEDSTATE State;
-    /* DIVERGENCE(MVDM-HOST-DIV-284): DOS raw input returns ZF as well as
-     * CF. The common IRET helper otherwise restores the caller's old ZF. */
+#line 237
     BOOL ReturnZero = (getAH() == 6 || getAX() == 0x0c06) && getDL() == 0xff;
     BOOL ZeroFlag;
 
@@ -1085,8 +1083,7 @@ Return Value:
 {
     USHORT Selector;
     VSAVEDSTATE State;
-    /* DIVERGENCE(MVDM-HOST-DIV-290): extended error returns ES:DI;
-     * reuse the original segment conversion without losing error BX. */
+#line 1082
     BOOL ReturnDI = getAH() == 0x59;
 
 #line 1081
@@ -1556,8 +1553,7 @@ Return Value:
     PUCHAR CommandTail, BufferedString, Environment;
     USHORT ClientDX, ClientBX, Seg, Off, Length, i, EnvironmentSel;
     VSAVEDSTATE State;
-    /* DIVERGENCE(MVDM-HOST-DIV-289): retain the original EXEC1 output
-     * destination for DOSX's eight-byte load-only return contract. */
+#line 1592
     PUCHAR LoadResult = NULL;
 
 #line 1591
@@ -1612,7 +1608,7 @@ Return Value:
 
         CommandTail += (*GetBXRegister)();
 
-        /* DIVERGENCE(MVDM-HOST-DIV-289): xsssp/xcsip follow EXEC0. */
+#line 1643
         if (getAL() == 1) LoadResult = CommandTail + 14;
 
 #line 1642
@@ -1695,10 +1691,10 @@ Return Value:
 
         *(PWORD16)Environment = EnvironmentSel;
 
-        /* DIVERGENCE(MVDM-HOST-DIV-289): mirror DOSX dosex4's four
-         * movsw operations; failed loads must not publish entry state. */
+#line 1723
         if (LoadResult && !getCF()) CopyMemory(LoadResult, LargeXlatBuffer + 14, 8);
 
+#line 1721
         //
         // Free translation buffer
         //
@@ -2607,7 +2603,7 @@ Return Value:
         TRUE
         );
 
-    /* DIVERGENCE(MVDM-HOST-DIV-285): map the client's DS:DX, not DS:0. */
+#line 2616
     Data += (*GetDXRegister)();
 #line 2615
     BufferedData = DpmiMapAndCopyBuffer(Data, 2);
@@ -2653,8 +2649,7 @@ Return Value:
 
     IoctlSubFunction = getCL();
 
-    /* DIVERGENCE(MVDM-HOST-DIV-288): original DEM also consumes media-ID
-     * and access-flag packets; protected pointers require this mapping. */
+#line 2660
 #line 2658
     if (((IoctlSubFunction < 0x40) || (IoctlSubFunction > 0x42) &&
         (IoctlSubFunction < 0x60) || (IoctlSubFunction > 0x62) &&
@@ -2691,7 +2686,7 @@ Return Value:
     Data += (*GetDXRegister)();
 
     switch (IoctlSubFunction) {
-    /* DIVERGENCE(MVDM-HOST-DIV-288): original packed MID / ACCESSCTRL. */
+#line 2691
     case 0x46:
     case 0x66:
     case 0x47:
@@ -2709,8 +2704,7 @@ Return Value:
         break;
 
     case 0x42:
-        /* DIVERGENCE(MVDM-HOST-DIV-287): original A_FORMATPACKET adds
-         * FP_TRACKCOUNT only when special-functions bit 1 is set. */
+#line 2702
         Length = (Data[0] & 2) ? 7 : 5;
 #line 2697
         break;
@@ -2846,8 +2840,7 @@ Return Value:
 
     if (CurrentAppFlags & DPMI_32BIT) {
 
-            /* DIVERGENCE(MVDM-HOST-DIV-286): the 32-bit selector lies
-             * beyond the 13-byte DOS packet copy; read the client owner. */
+#line 2832
 #line 2830
         Data = Sim32GetVDMPointer(
             (*((PWORD16)(ParameterBlock + 0xd)) << 16),

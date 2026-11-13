@@ -1,0 +1,9 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/int21map.c",
+    "matched_original_line_mismatches": [],
+    "checked_lines": 2180,
+    "scope": "Every nonblank, nondirective line in every exact original matching run, including runs shorter than4, has matching original logical line. Textual source proof, not runtime/preprocessor coverage.",
+    "all_exact_matching_run_line_mismatches": []
+  }
+]

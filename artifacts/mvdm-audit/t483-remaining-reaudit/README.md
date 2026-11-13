@@ -102,3 +102,12 @@ not validate these newer edits. [Evidence](r0029-minimization.json).
 
 The complete current reporting and delivery standard is the authoritative
 [17-rule execution policy](../../../docs/rules/EXECUTION.md#original-first-mirror-diff-audit).
+
+Current int21map.c call-chain evidence: [R0187-R0203](r0187-r0203-call-chain-review.json);
+[local minimization](int21map-local-minimization.json),
+[line check](batch-p20-line-check.json),
+[register consistency](batch-p20-register-consistency.json), and
+[P20 checkpoint](batch-p20-checkpoint.json). Source conclusions do not imply delivery.
+
+[P20 binary comparison](batch-p20-binary-identity.json) identifies exact metadata-only
+differences; it is separate from runtime verification.

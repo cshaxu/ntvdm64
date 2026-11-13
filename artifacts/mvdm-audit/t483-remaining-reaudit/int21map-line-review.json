@@ -1,0 +1,15 @@
+{
+  "repairs": [
+    [
+      202,
+      198
+    ],
+    [
+      1695,
+      1721
+    ]
+  ],
+  "non_comment_non_line_tokens_identical_to_HEAD": true,
+  "error_directives_identical_to_HEAD": true,
+  "scope": "Static lexical check, not a compiler or runtime test; equal original runs >=4 lines checked."
+}

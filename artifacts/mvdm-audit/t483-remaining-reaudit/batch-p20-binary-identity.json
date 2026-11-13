@@ -1,0 +1,91 @@
+{
+  "old_package": "e5e1d37d-9fc1-4958-9527-12fc532a75ca",
+  "new_package": "79ae5698-34e1-49b2-811e-f414e0905f87",
+  "normalization": "COFF timestamp, PE export/debug directory timestamps, exactly one matching package GUID; no other bytes normalized.",
+  "images": [
+    {
+      "image": "ntcon.exe",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        250580
+      ]
+    },
+    {
+      "image": "nthook32.dll",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        203332,
+        134228
+      ]
+    },
+    {
+      "image": "nthook64.dll",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        243204,
+        167844
+      ]
+    },
+    {
+      "image": "ntmon.exe",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        148180
+      ]
+    },
+    {
+      "image": "ntsrv.exe",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        300084
+      ]
+    },
+    {
+      "image": "ntvdm.exe",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        1785812,
+        1714180
+      ]
+    },
+    {
+      "image": "ntvwm.exe",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        227252
+      ]
+    },
+    {
+      "image": "run16.exe",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        211428
+      ]
+    },
+    {
+      "image": "VCDEX.DLL",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        6020,
+        5964
+      ]
+    },
+    {
+      "image": "VDMREDIR.DLL",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        193604,
+        125028
+      ]
+    },
+    {
+      "image": "WOW32.DLL",
+      "equal": true,
+      "pe_directory_timestamp_offsets": [
+        635092,
+        623332
+      ]
+    }
+  ],
+  "all_equal": true
+}

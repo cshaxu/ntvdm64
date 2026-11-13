@@ -1,0 +1,72 @@
+{
+  "path": "src\\mvdm-host\\dpmi32\\int21map.c",
+  "before": {
+    "added": 63,
+    "deleted": 96,
+    "total": 159
+  },
+  "after": {
+    "added": 43,
+    "deleted": 96,
+    "total": 139
+  },
+  "removed_comments": [
+    {
+      "physical_line": 199,
+      "logical_line": 196,
+      "lines": 3
+    },
+    {
+      "physical_line": 242,
+      "logical_line": 235,
+      "lines": 2
+    },
+    {
+      "physical_line": 1088,
+      "logical_line": 1080,
+      "lines": 2
+    },
+    {
+      "physical_line": 1559,
+      "logical_line": 1590,
+      "lines": 2
+    },
+    {
+      "physical_line": 1615,
+      "logical_line": 1642,
+      "lines": 1
+    },
+    {
+      "physical_line": 1698,
+      "logical_line": 1721,
+      "lines": 2
+    },
+    {
+      "physical_line": 2610,
+      "logical_line": 2615,
+      "lines": 1
+    },
+    {
+      "physical_line": 2656,
+      "logical_line": 2658,
+      "lines": 2
+    },
+    {
+      "physical_line": 2694,
+      "logical_line": 2690,
+      "lines": 1
+    },
+    {
+      "physical_line": 2712,
+      "logical_line": 2700,
+      "lines": 2
+    },
+    {
+      "physical_line": 2849,
+      "logical_line": 2830,
+      "lines": 2
+    }
+  ],
+  "scope": "Comment-only minimization; retained every executable statement and every #error; preserve pre-edit logical position of remaining lines. Full original-line check still required.",
+  "delta": -20
+}

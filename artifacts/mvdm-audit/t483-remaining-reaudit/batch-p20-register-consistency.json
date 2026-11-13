@@ -1,0 +1,12 @@
+{
+  "statuses": {
+    "completed-owner-approved-retain": 2,
+    "restored-verified-published": 124,
+    "pending-decision": 84,
+    "pending": 2510
+  },
+  "pending_rows": 70,
+  "pending_ids": 84,
+  "pending_exact_match": true,
+  "current_bytes": 16350
+}

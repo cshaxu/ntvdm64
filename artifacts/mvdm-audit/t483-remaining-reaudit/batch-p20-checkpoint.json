@@ -1,0 +1,263 @@
+{
+  "status": "Final-source cached build, publication11x2, current-source observer Full16 and three handoff repetitions passed; final governance/Git pending",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "sha256": "cab0302a375381a69124e9c5e108622e69e5226071e11f625cbf8e7dfa8dca9b"
+    }
+  ],
+  "mirror_diff_delta": -20,
+  "executable_tokens_unchanged": true,
+  "original_line_check": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "matched_original_line_mismatches": [],
+      "checked_lines": 2180,
+      "scope": "Every nonblank, nondirective line in every exact original matching run, including runs shorter than4, has matching original logical line. Textual source proof, not runtime/preprocessor coverage.",
+      "all_exact_matching_run_line_mismatches": []
+    }
+  ],
+  "publication": {
+    "status": "published",
+    "package": "79ae5698-34e1-49b2-811e-f414e0905f87",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "binary_identity": {
+    "old_package": "e5e1d37d-9fc1-4958-9527-12fc532a75ca",
+    "new_package": "79ae5698-34e1-49b2-811e-f414e0905f87",
+    "normalization": "COFF timestamp, PE export/debug directory timestamps, exactly one matching package GUID; no other bytes normalized.",
+    "images": [
+      {
+        "image": "ntcon.exe",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          250580
+        ]
+      },
+      {
+        "image": "nthook32.dll",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          203332,
+          134228
+        ]
+      },
+      {
+        "image": "nthook64.dll",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          243204,
+          167844
+        ]
+      },
+      {
+        "image": "ntmon.exe",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          148180
+        ]
+      },
+      {
+        "image": "ntsrv.exe",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          300084
+        ]
+      },
+      {
+        "image": "ntvdm.exe",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          1785812,
+          1714180
+        ]
+      },
+      {
+        "image": "ntvwm.exe",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          227252
+        ]
+      },
+      {
+        "image": "run16.exe",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          211428
+        ]
+      },
+      {
+        "image": "VCDEX.DLL",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          6020,
+          5964
+        ]
+      },
+      {
+        "image": "VDMREDIR.DLL",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          193604,
+          125028
+        ]
+      },
+      {
+        "image": "WOW32.DLL",
+        "equal": true,
+        "pe_directory_timestamp_offsets": [
+          635092,
+          623332
+        ]
+      }
+    ],
+    "all_equal": true
+  },
+  "audit": {
+    "reviewed_points": 210,
+    "unreviewed_points": 2510,
+    "files_reviewed": 30,
+    "files_total": 365,
+    "restored_published": 124,
+    "restored_local": 0,
+    "approved_retained": 2,
+    "qualified_pending_decision": 84
+  },
+  "governance": "Documentation governance, relative links,143 WOW objects and9 forbidden-header controls passed; final document state recheck before commit",
+  "full_failure": {
+    "report": "build/t483-s5-p20/full/handoff.observer",
+    "observed_exit": "0x00000017",
+    "scripted_input": "failed",
+    "remaining_input_records": 1,
+    "last_key_failure": "none",
+    "conclusion": "Product completed with requested code but observer delivery criterion failed. Last keyup marked successful; do not claim failed keyup is proven cause. Current-source observer rebuild/recheck running; assertions unchanged."
+  },
+  "handoff_investigation": {
+    "initial_full": "Correct exit23 but input-delivery failure; last keyup success, exact failing observation step not yet established",
+    "incorrect_hypothesis_retracted": "Do not implement missing-keyup exception without proof",
+    "first_recheck": "Existing BuildConsoleRegression targetI386 rejected by same-machine prerequisite before runtime",
+    "second_recheck": "AMD64 probe but missing Full GuestPath; COMMAND startup stalled; not equivalent reproduction",
+    "active_recheck": "Three exact-parameter repetitions passed; first Full failure remains preserved and not claimed repaired",
+    "product_changes": "None after comment/#line minimization",
+    "test_source_changes": "None"
+  },
+  "current_observer_sha256": "624d72e0403ff1e05e988d9dd9bb33961d8ae86c7077e7fda2f12cdfc93b14d2",
+  "current_observer_source_sha256": "33958f719d3b45e01465eb2885e5c4416f74227655a3741bec423ce2376219f2",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 376954,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 2970,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1377,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 350,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66345,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 51545,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 49181,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15054,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11105,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 66159,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12537,
+        "CleanupMs": 521,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28325,
+        "CleanupMs": 512,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30668,
+        "CleanupMs": 446,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4465,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7837,
+        "CleanupMs": 464,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10176,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3895,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6590,
+        "CleanupMs": 388,
+        "Passed": true
+      }
+    ]
+  },
+  "limits": [
+    "First Full using historical observer failed final input-delivery assertion despite exit23; retained, not presented as repaired product defect.",
+    "Initial standalone I386 probe failed architecture prerequisite; AMD64 standalone without Full GuestPath was not equivalent. Exact-parameter AMD64 runs passed.",
+    "Full frontiers do not prove exhaustive interactive guest behavior; unavailable external media remain skips.",
+    "No executable product token, guest or winnt.zip changes."
+  ]
+}
