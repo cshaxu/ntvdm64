@@ -1,0 +1,173 @@
+{
+  "status": "Final-source cached build, publication, directory115, Full16, governance and link checks passed; included in P14 Git delivery.",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "sha256": "314f9ccb35e63eecf06451bfb84964b08d9094f16234bc5f9fe98eccd779f6e1"
+    }
+  ],
+  "mirror_diff_delta": -7,
+  "line_format_delta": "One extra blank removed to restore original line2336; excluded from semantic diff delta.",
+  "original_expression_points": [
+    "T483-R0130",
+    "T483-R0132",
+    "T483-R0133"
+  ],
+  "prior_claim_correction": "P10 restored access behavior but not exact original FETCHWORD spelling. Three prior delivered counts temporarily withdrawn pending final-source P14 verification.",
+  "original_relative_metric": {
+    "scope": "Normalize newlines and exclude #line directives; unchanged excluded bodies remain in totals. Extra blank restoration separately counts one deleted difference line.",
+    "before": {
+      "added": 43,
+      "removed": 60,
+      "total": 103
+    },
+    "after": {
+      "added": 39,
+      "removed": 57,
+      "total": 96
+    }
+  },
+  "mirror_diff_delta_breakdown": {
+    "exact_expression_restoration": -6,
+    "original_blank_line_restoration": -1
+  },
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pipeline": 0,
+    "governance": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "b89bca1d-ad88-487e-bf26-fc71523da39f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 376249,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 4784,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1114,
+        "CleanupMs": 473,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 219,
+        "CleanupMs": 532,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66574,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46669,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 50822,
+        "CleanupMs": 461,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14880,
+        "CleanupMs": 493,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11958,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 57195,
+        "CleanupMs": 472,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12696,
+        "CleanupMs": 549,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29333,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30933,
+        "CleanupMs": 530,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5247,
+        "CleanupMs": 549,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8615,
+        "CleanupMs": 538,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11425,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 6050,
+        "CleanupMs": 530,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8119,
+        "CleanupMs": 482,
+        "Passed": true
+      }
+    ]
+  },
+  "limits": [
+    "Directory negative control is a build-only provider comparison, not a guest reproduction.",
+    "DOS4GW/NESticle absent-fixture skip remains non-pass. No original guest or winnt.zip modification."
+  ],
+  "next": "T483-R0134",
+  "attempts": [
+    "Documentation precheck detected encoding corruption in CURRENT.md after a locale-default text read; rebuilt this task update from committed UTF-8 baseline and reran governance. Product source and binary unaffected."
+  ],
+  "backlog": {
+    "points": 67,
+    "qualified": 35,
+    "historical_requiring_requalification": 32
+  },
+  "sequential_files_complete": 22
+}

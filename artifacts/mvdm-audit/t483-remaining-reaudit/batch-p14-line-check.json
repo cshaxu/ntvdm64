@@ -1,0 +1,8 @@
+[
+  {
+    "file": "src/mvdm-host/dos/dem/demsrch.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Matched original runs >=4 lines, nonblank retained lines; #line reset outside excluded DBG branches. Source proof, not compiler trace."
+  }
+]

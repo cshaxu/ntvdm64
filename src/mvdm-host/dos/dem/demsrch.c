@@ -2232,7 +2232,7 @@ DemHeartBeat(void)
        return;
        }
 
-   pPspFFindEntry = GetPspFFindList(*pusCurrentPDB);
+   pPspFFindEntry = GetPspFFindList(FETCHWORD(pusCurrentPDB[0]));
 #line 2206
    if (!pPspFFindEntry) {
        return;
@@ -2364,8 +2364,7 @@ AddFFindEntry(
     PFFINDLIST     pFFindEntry;
     ULONG          Len;
 
-
-    pPspFFindEntry = GetPspFFindList(*pusCurrentPDB);
+    pPspFFindEntry = GetPspFFindList(FETCHWORD(pusCurrentPDB[0]));
 #line 2337
 
 #line 2338
@@ -2382,7 +2381,7 @@ AddFFindEntry(
         if (!pPspFFindEntry)
             return NULL;
 
-        pPspFFindEntry->usPsp = *pusCurrentPDB;
+        pPspFFindEntry->usPsp = FETCHWORD(pusCurrentPDB[0]);
         InitializeListHead(&pPspFFindEntry->FFindHeadList);
         InsertHeadList(&PspFFindHeadList, &pPspFFindEntry->PspFFindEntry);
         }

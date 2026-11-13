@@ -1,0 +1,82 @@
+{
+  "question": "Does original directory restart suffice without the added successor hint and reclamation status correction?",
+  "original_path": "O:/repos.external/OpenNT/base/mvdm/dos/dem/demsrch.c",
+  "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+  "current_case": "existing verify-dem-directory-reset.ps1, actual selected DEM translation unit, real native filesystem calls; 115 assertions, zero failures",
+  "counterfactual": "build-only copy removes only the DIV-362 failure fallback in FileFindReset, retaining capture/state so fixture prerequisites remain identical. This restores the original failure-return branch without creating unrelated missing-member failures.",
+  "counterfactual_result": "115 assertions, three failures, all mutation2 (deleted anchor and surviving successor); original reset status80000006 versus current00000000. Normal reset and explicit negative cases unchanged.",
+  "source_chain": [
+    "FindFile calls FileFindLast and records end status while buffered entries may remain. Later reclamation drops the buffer. FindFile tests LastQueryStatus before reopening; original terminal status prevents continuation.",
+    "Original FileFindReset tries NtVdmControl(VdmQueryDir), then compares the previous file name. The current monitor has no production indexed-query binding. The original source explicitly documents failure when the remembered file has been deleted.",
+    "FileFindClose captures first unconsumed successor before freeing buffer; repeated close without a buffer leaves hint untouched. New FFindEntry is memset zero and AddFFindEntry copies the complete structure.",
+    "DemFindRestartHint compares length/name/index, leaves matching entry unconsumed. This is bounded successor recovery, not complete NT4 indexed restart."
+  ],
+  "counter_review": "Old comments and mere header dependency are not proof. Real failure comparison establishes surviving-successor behavior. Status-clearing necessity separately follows original producer/consumer ordering; current fixture uses deliberate terminal-status inputs and is not a fresh guest-pressure run. Existing T478 guest-pressure receipt remains historical only.",
+  "minimization": "Five remaining points form one existing mechanism; no new shim, scan, callback or duplicate state added. Unchanged residual is pending owner choice, not approved retention. Broader kernel-index restoration is an explicitly recorded unsupported boundary.",
+  "restoration": "R0130/R0132/R0133 restore exact FETCHWORD(pusCurrentPDB[0]) spelling. _M_IX86 FETCHWORD is a WORD cast and pusCurrentPDB is PUSHORT. Net original-relative difference reduction6, separate from extra blank removal at original2336. Corrects earlier exact-restoration overclaim.",
+  "limits": [
+    "Host provider test with existing host seams, not guest INT21 or Win3.1 reproduction.",
+    "No guarantee for arbitrary rename/index reuse or original kernel indexed performance.",
+    "P14 final source cached full build, directory115, Full16 and both publication hashes verified; see batch-p14-checkpoint.json."
+  ],
+  "artifacts": {
+    "current/result.txt": {
+      "sha256": "52c36790ac21e0b954e4aa29ecf0fcef2f0ec6bd82d5aa27d2658b6b3a3aee5a"
+    },
+    "current/result.json": {
+      "sha256": "501ecdc19d85aa6bd4de6b36aebec3b730759ead172b7b45809c6c8f1f4b6273"
+    },
+    "original-reset/result.txt": {
+      "sha256": "e86f1d3c50065a26d03bfcb19023852db54cec53b1e426025a420aa7dcde410c"
+    },
+    "original-reset/result.json": {
+      "sha256": "6ea58d07eb4972c8d635667007716934dce9a5f0795b1e3917d4778bdadb4811"
+    },
+    "original-reset.c": {
+      "sha256": "5a256d34d58b359a544ef679053f96bde49367424e2b605ca541f849c81bcc0a"
+    },
+    "original-reset-test.c": {
+      "sha256": "8fa0f285d192d5e7263e1ebe0338a02eb0eb00fde3bc385234beef1eb980b7a1"
+    },
+    "negative-runner.ps1": {
+      "sha256": "651bd7060d7e36565d84460a79dc3f5aeabb1b0eec9777fa8dcbd364158e625c"
+    }
+  },
+  "current_result": "PASS unbound real monitor fast path unavailable\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS real reopen\nRESET mutation=0 status=00000000 index=0\nPASS reset finds anchor or surviving hint\nPASS continuation returns different file\nPASS enumeration ends with original status\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS rename unrelated file\nPASS create later file\nPASS real reopen\nRESET mutation=1 status=00000000 index=0\nPASS reset finds anchor or surviving hint\nPASS continuation returns different file\nPASS enumeration ends with original status\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS real reopen\nRESET mutation=2 status=00000000 index=0\nPASS reset finds anchor or surviving hint\nPASS continuation returns different file\nPASS deleted anchor returns saved hint unconsumed\nPASS enumeration ends with original status\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS delete successor hint\nPASS real reopen\nRESET mutation=3 status=80000006 index=0\nPASS missing or mismatched hint ends without guessed successor\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS real reopen\nRESET mutation=4 status=80000006 index=0\nPASS missing or mismatched hint ends without guessed successor\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS real reopen\nRESET mutation=5 status=80000006 index=0\nPASS missing or mismatched hint ends without guessed successor\nPASS no original handle/buffer leak\nPASS undersized buffer original failure\nPASS open failure releases resources\nPASS empty buffer preserves final status\nPASS owned directory cleanup\nassertions=115 failures=0\n\n",
+  "counterfactual_result_text": "PASS unbound real monitor fast path unavailable\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS real reopen\nRESET mutation=0 status=00000000 index=0\nPASS reset finds anchor or surviving hint\nPASS continuation returns different file\nPASS enumeration ends with original status\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS rename unrelated file\nPASS create later file\nPASS real reopen\nRESET mutation=1 status=00000000 index=0\nPASS reset finds anchor or surviving hint\nPASS continuation returns different file\nPASS enumeration ends with original status\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS real reopen\nRESET mutation=2 status=80000006 index=0\nFAIL reset finds anchor or surviving hint\nFAIL continuation returns different file\nFAIL deleted anchor returns saved hint unconsumed\nPASS enumeration ends with original status\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS delete successor hint\nPASS real reopen\nRESET mutation=3 status=80000006 index=0\nPASS missing or mismatched hint ends without guessed successor\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS real reopen\nRESET mutation=4 status=80000006 index=0\nPASS missing or mismatched hint ends without guessed successor\nPASS no original handle/buffer leak\nPASS create AAA\nPASS create BBB\nPASS create CCC\nPASS real directory open\nPASS real first matching file\nPASS first is owned 8.3 TST file\nPASS original FCB formatter\nPASS remaining buffered entries before reclamation\nPASS reclamation saves bounded successor\nPASS repeated reclamation preserves successor hint\nPASS reclamation preserves errors and reopens normal end\nPASS close releases actual handle\nPASS close releases original buffer ownership\nPASS delete remembered file\nPASS real reopen\nRESET mutation=5 status=80000006 index=0\nPASS missing or mismatched hint ends without guessed successor\nPASS no original handle/buffer leak\nPASS undersized buffer original failure\nPASS open failure releases resources\nPASS empty buffer preserves final status\nPASS owned directory cleanup\nassertions=115 failures=3\n\n",
+  "counterfactual_patch": [
+    "--- published-current",
+    "+++ build-only-original-reset",
+    "@@ -19,7 +19,7 @@",
+    " #include <mvdm.h>",
+    " #include <memory.h>",
+    " #include <nt_vdd.h>",
+    "-#include \"../../../ntvdm-exe/session/dem_restart_hint.h\"",
+    "+#include \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/dem_restart_hint.h\"",
+    " #line 22",
+    " ",
+    " #line 23",
+    "@@ -1343,15 +1343,6 @@",
+    "                             );",
+    " ",
+    "            if (!NT_SUCCESS(Status)) {",
+    "-               /* DIVERGENCE(MVDM-HOST-DIV-362): retry only a missing",
+    "-                * anchor at end of enumeration, leaving a matching hint",
+    "-                * unconsumed for the original FileFindNext. */",
+    "-               if (pFFindEntry->RestartHint.Length &&",
+    "-                   (Status == STATUS_NO_MORE_FILES || Status == STATUS_NO_SUCH_FILE)) {",
+    "-                   return DemFindRestartHint(&pFFindEntry->RestartHint,",
+    "-                       pFFindEntry->DirectoryHandle, pFFindEntry->FindBufferBase,",
+    "-                       pFFindEntry->FindBufferLength, &pFFindEntry->FindBufferNext);",
+    "-               }",
+    " #if DBG",
+    " #line 1328",
+    " #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+  ],
+  "commands": [
+    "pwsh -NoProfile -File test/observation/verify-dem-directory-reset.ps1 -OutputRoot build/t483-s5-directory-review/current",
+    "pwsh -NoProfile -File build/t483-s5-directory-review/negative-runner.ps1 -OutputRoot build/t483-s5-directory-review/original-reset"
+  ],
+  "runner_adjustment": "Negative runner is the existing runner with repo pinned to the same root and source changed to the test copy. Test copy includes the comparison source by absolute path; map assertions and all 115 behavioral assertions unchanged.",
+  "final_verification": "Final restored source provider115/115 and Full16 pass; negative control failures are expected evidence, not failures of final product."
+}
