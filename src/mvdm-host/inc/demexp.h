@@ -1,6 +1,3 @@
-/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40
- * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,
- * implementation and ownership are unchanged; no stack-incompatible aliases. */
 /*++ BUILD Version: 0001
  *
  *  MVDM v1.0
@@ -15,7 +12,6 @@
  *  Created.
 --*/
 
-#line 15
 BOOL DemInit (int argc, char *argv[]);
 BOOL DemDispatch(ULONG iSvc);
 VOID demCloseAllPSPRecords (VOID);

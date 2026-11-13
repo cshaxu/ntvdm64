@@ -1,7 +1,3 @@
-/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40
- * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,
- * implementation and ownership are unchanged; no stack-incompatible aliases. */
-#line 1
 /*++
 
 Copyright (c) 1992  Microsoft Corporation
@@ -29,7 +25,6 @@ Revision History:
 
 NTSTATUS
 __cdecl VdmAllocateVirtualMemory(
-#line 28
     PULONG Address,
     ULONG Size,
     BOOLEAN Commit
@@ -37,7 +32,6 @@ __cdecl VdmAllocateVirtualMemory(
 
 NTSTATUS 
 __cdecl VdmFreeVirtualMemory(
-#line 35
     ULONG Address
     );
 
@@ -68,7 +62,6 @@ VdmReallocateVirtualMemory(
 
 NTSTATUS
 __cdecl VdmAddVirtualMemory(
-#line 65
     ULONG HostAddress,
     ULONG Size,
     PULONG IntelAddress
@@ -76,14 +69,12 @@ __cdecl VdmAddVirtualMemory(
 
 NTSTATUS
 __cdecl VdmRemoveVirtualMemory(
-#line 72
     ULONG IntelAddress
     );
 
 
 BOOL
 __cdecl VdmAddDescriptorMapping(
-#line 78
     USHORT SelectorStart,
     USHORT SelectorCount,
     ULONG LdtBase,

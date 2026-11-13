@@ -1,0 +1,30 @@
+{
+  "points": [
+    "T483-R0228",
+    "T483-R0229"
+  ],
+  "path": "src/mvdm-host/inc/makefile",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "cause": "6dc53b663 removed unused enumapis.h and also removed the legacy H2INC target and list entry.",
+  "call_chain": "Modern CMake invokes explicit source-owner Ninja generators; tools/build and generated build.ninja files contain no invocation/reference of this legacy makefile, h2inc or enumapis generation.",
+  "conclusion": "Restore byte-exact historical makefile. Deletion of an unused header does not require editing an inactive original makefile. This does not restore the deleted header or execute/re-admit the historical guest build.",
+  "limits": "Historical nmake path still lacks deleted enumapis.h and is not claimed buildable or supported. No original guest build performed.",
+  "points_detail": {
+    "R0228": {
+      "before_added": 1,
+      "before_deleted": 1,
+      "after": 0
+    },
+    "R0229": {
+      "before_added": 0,
+      "before_deleted": 2,
+      "after": 0
+    }
+  },
+  "mirror_diff_before": 4,
+  "mirror_diff_after": 0,
+  "byte_identical": true,
+  "sha256": "22619f4bdd9be2f377ab919997527aa9797dfdb0e10d5082ebf424cddf7280d9",
+  "line_check": "Byte exact original makefile; all conditionals and line positions identical. No C #error/#line modification.",
+  "delivery": "P24 final-source build, publication11x2/hash and Full16 verified; receipt accompanies delivery."
+}

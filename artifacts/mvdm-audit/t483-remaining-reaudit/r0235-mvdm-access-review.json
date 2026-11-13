@@ -1,0 +1,16 @@
+{
+  "point": "T483-R0235",
+  "path": "src/mvdm-host/inc/mvdm.h",
+  "action": "Restore original non-i386 UNALIGNED FETCH/STORE macro bodies in selected _M_IX86 branch; preserve every existing excluded #error.",
+  "before": 27,
+  "after": 24,
+  "delta": -3,
+  "status": "Original selected macro bodies restored; cached build/publication11x2/Full16/boundary/line checks passed",
+  "before_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+  "after_sha256": "24db8a244bbbd4880e7c18fff338c33659d28864f04ce3efd2b4810925a05f0f",
+  "rationale": "No original failure evidence for UNALIGNED access bodies. Restored original non-i386 branch, as selected by CCPU profile. MSVC x86 compiles original bodies across real WOW/DEM consumers. Remaining _M_IX86 conditional only guards an existing excluded #error; no alternative accessor implementation remains.",
+  "scope": "Functional restoration, not whole-header byte identity. All original excluded errors retained by owner requirement; their guards remain outside the non-exclusion diff audit.",
+  "verification": "Final-source five-file hash and line/error checks; cached full build0; published11x2/hash; Full16/16, WOW143 and9 negative controls passed.",
+  "package": "26ae763b-e15a-4ef3-a923-d62dd04f8de7",
+  "delivery": "P24 final-source build, publication11x2/hash and Full16 verified; receipt accompanies delivery."
+}

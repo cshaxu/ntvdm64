@@ -1,0 +1,13 @@
+{
+  "statuses": {
+    "completed-owner-approved-retain": 2,
+    "restored-verified-published": 131,
+    "pending-decision": 109,
+    "pending": 2478
+  },
+  "pending_exact_membership": true,
+  "pending_ids": 109,
+  "current_bytes": 16065,
+  "mirror_diff_reduction": 16,
+  "delivery": "Final-source package and Full16 verified; P24 receipt"
+}

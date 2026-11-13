@@ -1,0 +1,29 @@
+{
+  "file": "src/mvdm-host/inc/demexp.h",
+  "points": [
+    "T483-R0225",
+    "T483-R0226",
+    "T483-R0227"
+  ],
+  "original_source": "OpenNT/base/mvdm/inc/demexp.h @ 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "responsibility": "Original WOW file enumeration in wkfileio.c and drive-error reporting in wdos.c call the original DEM functions; their algorithms remain original owners.",
+  "original_inability": "No algorithm inability established. The difference is compilation ABI: unchanged original declarations inherit /Gz in WOW32, while the selected DEM provider is cdecl.",
+  "actual_evidence": "Both real WOW translation units compiled successfully with an isolated byte-exact original demexp.h. Objects reference _demFileFindFirst@12, _demFileFindNext@4 and _demClientErrorEx@12. Actual DEM provider objects define undecorated cdecl forms _demFileFindFirst, _demFileFindNext and _demClientErrorEx. This is a concrete linker/stack contract mismatch, not a runtime failure claim.",
+  "alternatives": "Marking three provider functions stdcall moves the same three declaration differences to the provider boundary. Compiling both whole provider units /Gz also changes the original DEM dispatch handlers demFindFirst, demFindFirstFCB, demFindNext, demFindNextFCB, demSetHardErrorInfo and demRetry, referenced by demdisp.c PFNSVC table, plus other DEM cross-unit calls. That is a broader ABI migration, not deletion of these three differences. No shim or alias introduced.",
+  "counter_review": "Current adapter need alone is not evidence. Explicit original-header compile and current provider symbols establish the mismatch; unit-wide alternative assessed through original DEM dispatch and internal consumers. Do not claim original algorithms defective or /Gz provider alternative actually compiled here.",
+  "disposition": "Keep three cdecl declarations pending owner decision; delete comment-only preamble.",
+  "mirror_diff_before": 9,
+  "mirror_diff_after": 6,
+  "line_proof": "After removing preamble and redundant #line15, each original line is at its original physical/logical number; only __cdecl tokens differ. DEVL condition and body unchanged; no #error in this file.",
+  "validation": {
+    "isolated_compile_exit": 0,
+    "evidence": [
+      "build/t483-s5-p24/dem-notification.ps1",
+      "build/t483-s5-p24/wdos-original-symbols.txt",
+      "build/t483-s5-p24/wkfileio-original-symbols.txt",
+      "build/t483-s5-p24/demsrch-symbols.txt",
+      "build/t483-s5-p24/demerror-symbols.txt"
+    ]
+  },
+  "delivery": "P24 final-source build, publication11x2/hash and Full16 verified; receipt accompanies delivery."
+}

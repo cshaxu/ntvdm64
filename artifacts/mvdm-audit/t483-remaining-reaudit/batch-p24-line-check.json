@@ -1,0 +1,27 @@
+[
+  {
+    "path": "src/mvdm-host/inc/dbgexp.h",
+    "matched_original_line_mismatches": [],
+    "error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/inc/demexp.h",
+    "matched_original_line_mismatches": [],
+    "error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/inc/makefile",
+    "matched_original_line_mismatches": [],
+    "error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/inc/memapi.h",
+    "matched_original_line_mismatches": [],
+    "error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/inc/mvdm.h",
+    "matched_original_line_mismatches": [],
+    "error_directives_unchanged": true
+  }
+]

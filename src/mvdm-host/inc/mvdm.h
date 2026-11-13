@@ -65,19 +65,17 @@ typedef DWORD UNALIGNED *PDWORD16;
 #line 71
 #define MAKEDWORD(l0,h0,l1,h1)	((DWORD)MAKEWORD(l0,h0)|((DWORD)MAKEWORD(l1,h1)<<16))
 #define GETBYTE(p)	*((PBYTE)p)++
-/* DIVERGENCE(MVDM-SUPPORT-DIV-006): recognize MSVC's x86 target macro. */
-#ifdef i386
+#ifdef	i386
 #line 74
 #error Excluded unsupported historical i386 SDK profile
 #else
 #if defined(_M_IX86)
-#line 74
-#define FETCHWORD(s)	((WORD)(s))
-#define FETCHDWORD(s)	((DWORD)(s))
-#define STOREWORD(d,s)	(WORD)d=(WORD)s
-#define STOREDWORD(d,s) (DWORD)d=(DWORD)s
-#else
 #line 79
+#define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))
+#define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))
+#define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s
+#define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s
+#else
 #error Unsupported non-x86 MVDM host access profile
 #endif
 #endif

@@ -1,0 +1,158 @@
+{
+  "batch": "P24",
+  "status": "Final-source build, publication11x2/hash, Full16 and governance passed; P24 receipt",
+  "source_files": 5,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/dbgexp.h",
+      "sha256": "dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2"
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "sha256": "e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788"
+    },
+    {
+      "path": "src/mvdm-host/inc/makefile",
+      "sha256": "22619f4bdd9be2f377ab919997527aa9797dfdb0e10d5082ebf424cddf7280d9"
+    },
+    {
+      "path": "src/mvdm-host/inc/memapi.h",
+      "sha256": "26515fc97789f77e6e1632d3d3c19e810ade63539650de1b7dcbf6056688d546"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "sha256": "24db8a244bbbd4880e7c18fff338c33659d28864f04ce3efd2b4810925a05f0f"
+    }
+  ],
+  "mirror_diff_delta": -16,
+  "runtime_verified": true,
+  "cached_exit": 0,
+  "package": "26ae763b-e15a-4ef3-a923-d62dd04f8de7",
+  "publication": {
+    "status": "published",
+    "package": "26ae763b-e15a-4ef3-a923-d62dd04f8de7",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 387164,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7443,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1396,
+        "CleanupMs": 450,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 205,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66622,
+        "CleanupMs": 465,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 55119,
+        "CleanupMs": 485,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44358,
+        "CleanupMs": 496,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14806,
+        "CleanupMs": 432,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10376,
+        "CleanupMs": 403,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 72594,
+        "CleanupMs": 476,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13281,
+        "CleanupMs": 480,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28583,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30673,
+        "CleanupMs": 530,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4615,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7939,
+        "CleanupMs": 524,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10084,
+        "CleanupMs": 427,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3706,
+        "CleanupMs": 441,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6444,
+        "CleanupMs": 439,
+        "Passed": true
+      }
+    ]
+  },
+  "final_check_exit": 0,
+  "limits": [
+    "ABI compilation is binding evidence, not runtime reproduction.",
+    "WOW frontier is not exhaustive Win3.x/game acceptance; external fixture skips are not passes.",
+    "No original guest or winnt.zip changes."
+  ],
+  "documentation_repair": {
+    "initial_gate": "CURRENT encoding corruption after progress edit; initial deliver exit1",
+    "repair": "Recovered CURRENT from HEAD UTF-8 bytes and reapplied verified current counts; product source unchanged",
+    "recheck": "final-check-repaired.log: WOW143,9 negative controls, governance and links pass",
+    "preserved_failure": "build/t483-s5-p24/initial-final-check.log"
+  }
+}

@@ -116,3 +116,14 @@ Current modesw.c review: [R0204-R0213](r0204-r0213-call-chain-review.json).
 Two BOP functions restored to their original i386/dpmi386.c owner.
 [P21 checkpoint](batch-p21-checkpoint.json) records cached build, publication11x2,
 focused and Full16 verification; this receipt accompanies the P21 delivery.
+
+Current dbgexp.h ABI review: [R0222-R0224](r0222-r0224-debug-abi-review.json).
+Three declarations remain pending; comment-only reduction awaits batch delivery.
+
+Current demexp.h ABI review: [R0225-R0227](r0225-r0227-dem-abi-review.json).
+
+Legacy inc/makefile restoration: [R0228-R0229](r0228-r0229-legacy-makefile-review.json).
+
+Memory ABI review: [R0230-R0234](r0230-r0234-memory-abi-review.json); original-header Gz/Gd comparisons.
+
+P24: [checkpoint](batch-p24-checkpoint.json), [line check](batch-p24-line-check.json), [R0235](r0235-mvdm-access-review.json).

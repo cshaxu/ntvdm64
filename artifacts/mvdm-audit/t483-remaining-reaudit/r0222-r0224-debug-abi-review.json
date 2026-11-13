@@ -1,0 +1,26 @@
+{
+  "file": "src/mvdm-host/inc/dbgexp.h",
+  "points": [
+    "T483-R0222",
+    "T483-R0223",
+    "T483-R0224"
+  ],
+  "conclusion": "Three explicit cdecl notification declarations remain pending owner decision; remove only explanatory comment and now unnecessary leading #line 1.",
+  "responsibility": "Original WOW32 debug notifications call the original dbg.c provider.",
+  "original_restoration_failure": "WOW32 /Gz callers with original declarations require stdcall; current provider defines cdecl symbols.",
+  "provider_alternative": "Actual dbg.c compiled successfully with /Gz and original dbgexp.h. It changes four additional external entrypoints DBGInit, DBGDispatch, ModuleLoad, ModuleFree to stdcall. Existing worker callers require cdecl; DEM object explicitly references _ModuleLoad and _ModuleFree. Preserving this alternative requires at least four explicit declarations rather than three.",
+  "evidence": [
+    "build/t483-s5-p24/dbg-symbols.txt",
+    "build/t483-s5-p24/wkman-symbols.txt",
+    "build/t483-s5-p24/provider-stdcall-symbols.txt",
+    "build/t483-s5-p24/demmisc-symbols.txt",
+    "build/t483-s5-p24/demmisc-command.txt"
+  ],
+  "compile_exit": 0,
+  "dem_abi_exit": 0,
+  "mirror_diff_before": 9,
+  "mirror_diff_after": 6,
+  "semantic_change": false,
+  "line_proof": "Original declarations retain original physical/logical lines15 through19 after removal of preamble and #line1; no excluded branches exist in this header.",
+  "delivery": "P24 final-source build, publication11x2/hash and Full16 verified; receipt accompanies delivery."
+}

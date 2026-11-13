@@ -41,7 +41,7 @@ INC_FILES = mvdm.inc softpc.inc bop.inc vint.inc \
      wow.inc wownt32.inc wowkrn.inc wowusr.inc wowgdi.inc wowshell.inc \
      wowkbd.inc wowsnd.inc tdb16.inc dpmi.inc dossvc.inc \
      xmssvc.inc cmdsvc.inc rdrsvc.inc dbgsvc.inc \
-     apistruc.inc wowmmed.inc wowmmcb.inc vrdlctab.inc \
+     apistruc.inc enumapis.inc wowmmed.inc wowmmcb.inc vrdlctab.inc \
      wowwsock.inc wowth.inc vrdefld.inc wowcmdlg.inc wowcmpat.inc  \
      doswow.inc curdir.inc vdmtib.inc
 
@@ -109,6 +109,8 @@ dpmi.inc: dpmi.h bop.inc
 rdrsvc.inc: rdrsvc.h bop.h
 
 apistruc.inc: apistruc.h
+
+enumapis.inc: enumapis.h
 
 vrdlctab.inc: vrdlctab.h
 

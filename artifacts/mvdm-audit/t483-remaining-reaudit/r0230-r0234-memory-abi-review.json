@@ -1,0 +1,104 @@
+{
+  "points": [
+    "T483-R0230",
+    "T483-R0231",
+    "T483-R0232",
+    "T483-R0233",
+    "T483-R0234"
+  ],
+  "path": "src/mvdm-host/inc/memapi.h",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "responsibility": "Original WOW32 wkmem.c calls original nt_mem.c allocation/free; wdib.c calls nt_mem.c host/Intel mapping and dpmiselr.c descriptor mapping.",
+  "original_inability": "No original algorithm defect established. Original declarations inherit WOW32 /Gz; real SoftPC/DPMI providers are cdecl.",
+  "specific_evidence": "Four real consumer compilations with original memapi.h: Gz references @12/@4/@16 memory symbols absent from providers. Gd restores memory symbols but changes four other wkmem and21 wdib ABI symbols, including original WOW thunk entries, CallBack16 and W32HandleDibDrv called by wgdi.c.",
+  "alternatives": "Whole caller Gd breaks demonstrated WOW boundaries. Marking five providers stdcall retains at least five declaration differences and requires reconciling original nt_mem.h callers. Whole provider Gz also changes other original SoftPC/DPMI entrypoints. No new shim or alias.",
+  "counter_review": "Actual original-header Gz and Gd comparisons disprove simple build-only restoration. No original algorithm defect or runtime failure claimed. Whole provider Gz was source-reviewed, not compiled in this experiment.",
+  "comparison": {
+    "wkmem": {
+      "original_Gz_added": [
+        "_VdmAllocateVirtualMemory@12",
+        "_VdmFreeVirtualMemory@4"
+      ],
+      "original_Gz_removed": [
+        "_VdmAllocateVirtualMemory",
+        "_VdmFreeVirtualMemory"
+      ],
+      "Gd_added": [
+        "_GetPModeVDMPointerAssert",
+        "_WK32GlobalMemoryStatus",
+        "_WK32VirtualAlloc",
+        "_WK32VirtualFree"
+      ],
+      "Gd_removed": [
+        "_GetPModeVDMPointerAssert@4",
+        "_WK32GlobalMemoryStatus@4",
+        "_WK32VirtualAlloc@4",
+        "_WK32VirtualFree@4"
+      ]
+    },
+    "wdib": {
+      "original_Gz_added": [
+        "_VdmAddDescriptorMapping@16",
+        "_VdmAddVirtualMemory@12",
+        "_VdmRemoveVirtualMemory@4"
+      ],
+      "original_Gz_removed": [
+        "_VdmAddDescriptorMapping",
+        "_VdmAddVirtualMemory",
+        "_VdmRemoveVirtualMemory"
+      ],
+      "Gd_added": [
+        "_CallBack16",
+        "_CopyBMI16ToBMI32",
+        "_GetBMI16Size",
+        "_GetPModeVDMPointerAssert",
+        "_Sim32FlushVDMPointer",
+        "_W32AddDibInfo",
+        "_W32CheckAndFreeDibInfo",
+        "_W32CheckAndFreeDibSectionInfo",
+        "_W32CheckDibColorIndices",
+        "_W32FindAndLockDibInfo",
+        "_W32FreeDibInfo",
+        "_W32FreeDibInfoHandle",
+        "_W32HandleDibDrv",
+        "_W32RestoreOldDib",
+        "_WG32CreateDIBSection",
+        "_WG32GetDIBColorTable",
+        "_WG32SetDIBColorTable",
+        "_WK32FindAndReleaseDib",
+        "_cjBitmapBitsSize",
+        "_free_w",
+        "_malloc_w"
+      ],
+      "Gd_removed": [
+        "_CallBack16@16",
+        "_CopyBMI16ToBMI32@12",
+        "_GetBMI16Size@12",
+        "_GetPModeVDMPointerAssert@4",
+        "_Sim32FlushVDMPointer@16",
+        "_W32AddDibInfo@40",
+        "_W32CheckAndFreeDibInfo@4",
+        "_W32CheckAndFreeDibSectionInfo@4",
+        "_W32CheckDibColorIndices@4",
+        "_W32FindAndLockDibInfo@4",
+        "_W32FreeDibInfo@8",
+        "_W32FreeDibInfoHandle@8",
+        "_W32HandleDibDrv@4",
+        "_W32RestoreOldDib@4",
+        "_WG32CreateDIBSection@4",
+        "_WG32GetDIBColorTable@4",
+        "_WG32SetDIBColorTable@4",
+        "_WK32FindAndReleaseDib@4",
+        "_cjBitmapBitsSize@4",
+        "_free_w@4",
+        "_malloc_w@4"
+      ]
+    }
+  },
+  "mirror_diff_before": 13,
+  "mirror_diff_after": 10,
+  "line_proof": "Removed comment and redundant #line directives; removing only __cdecl tokens now yields original text with identical line positions. No #error or excluded branches in this header.",
+  "verification": "Four actual consumer compilations exit0; provider nt_mem/dpmiselr COFF symbols; mem-abi.ps1 exit0.",
+  "disposition": "Five cdecl declarations remain pending owner decision; comment-only reduction implemented.",
+  "delivery": "P24 final-source build, publication11x2/hash and Full16 verified; receipt accompanies delivery."
+}
