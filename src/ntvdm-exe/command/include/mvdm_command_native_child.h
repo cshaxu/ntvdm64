@@ -18,9 +18,6 @@ int mvdm_command_native_child_capture_guest(uint16_t command_segment,
 int mvdm_command_native_child_capture_host_command(const char *command,
     uint16_t environment_segment, uint16_t environment_offset,
     uint16_t standard_segment, uint16_t standard_offset);
-int mvdm_command_native_child_activate(const char *source_command,
-    const char *source_environment, const char **command_out,
-    const char **environment_out);
 int mvdm_command_native_child_std_handles(ULONG handles_out[3]);
 const char *mvdm_command_native_child_command(void);
 const char *mvdm_command_native_child_environment(void);

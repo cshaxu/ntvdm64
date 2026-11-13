@@ -1,0 +1,41 @@
+{
+  "status": "R0021 source-level necessity decision qualified; no runtime reproduction claimed",
+  "scope": "R0021 evidence dependencies R0022-R0036; later points not completed by reading dependencies",
+  "original_source": "O:/repos.external/OpenNT/base/mvdm/dos/command/cmdexec.c",
+  "facts": [
+    "Original cmdCreateProcess increments reentry count before reading SS:BP and converting command/environment.",
+    "Original CreateProcess uses CREATE_SUSPENDED; ResumeThread follows standard-handle reads and conversion. The newly created child alone cannot explain a pre-capture race.",
+    "Current BaseSrv command delivery can select VDM_TO_TAKE_A_COMMAND; new busy-session request signals the waiter when nReEntrancy is nonzero. Whether another eligible producer reaches this before original reads is not established by this source sequence alone.",
+    "Current capture carries command-service identity as well as copied data. opennt_command_create_process_a reads it, routing EXECUTE with the saved tail and INTERACTIVE with a quoted captured executable.",
+    "Original conversion writes into pCommand32; the extracted helper allocates separate ANSI storage and has a saved-VM caller. Sharing alone does not prove original ordinary conversion invalid.",
+    "Original c_getSS reads current CPU selector, not a per-native-thread register snapshot. This is a dependency fact, not an observed corrupt read."
+  ],
+  "rejected_arguments": [
+    "Restoring only an uninitialized handle declaration while keeping a newly introduced failure branch does not test coherent original restoration.",
+    "A missing snapshot breaks current consumers, but does not prove the entire snapshot design necessary.",
+    "A possible thread interleaving is not an observed failure; no race reproduction is claimed.",
+    "The current capture unit fixture tests capture behavior and cannot establish necessity against the original producer/consumer chain."
+  ],
+  "next_required_evidence": "Runtime regression should exercise concurrent inherited-context delivery; not claimed covered by the current capture fixture. Remaining coupled points still require their own dispositions.",
+  "verification": "Source tracing only. No compile, runtime test, publication or new product edit in this investigation step.",
+  "sources": {
+    "src/mvdm-host/dos/command/cmdexec.c": "f775c4961546bb8f8aaaf8a13c629db9d356f9486f4e5fa5055923c2d40b9d05",
+    "src/non-mvdm/base/win32/server/srvvdm.c": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+    "src/ntvdm-exe/command/source/mvdm_command_native_child.c": "be91f7f33bd0112804d6c069483289a1385b769dae59abdd2e53dfb17fa5a5a5",
+    "src/ntvdm-exe/command/source/mvdm_command_launch.c": "46b9433d6e734a1b469681bacbcd694975c1efe80bf99720da320314a48133b6",
+    "src/ntvdm-exe/win32/command_process_compat.c": "f3125933ac1a0e2f98f14b3edce9f29faffc611bb8cbb886659cbc4f1561a92a",
+    "src/non-mvdm/base/win32/client/vdm.c": "8f68cb059e78e7a43a4ab87eb455f6a16ae1dd4f14a24a7db7ae5c115464226f",
+    "src/ntsrv-exe/opennt/source/base_service.c": "72f268424fba27d2b99d55dd4f22e5381095e87e94da93ceb0078a118bf15821",
+    "src/common/base_srv/base_rpc_client_launch.c": "a37e13534704c26169aa7ef76aa1261ab92c2f2b53b898e3bd2e857e930a1a0c"
+  },
+  "supported_counterexample": [
+    "Existing native ancestor retains the same execution-console capability and can submit another Run16 DOS request while a descendant command is waiting.",
+    "CPU thread enters cmdExec32 -> GetNextVDMCommand; BaseSrvGetNextVDMCommand resets its wait event and releases the critical section.",
+    "Original cmdCreateProcess thread increments nReEntrancy via Client_Reenter and returns from that RPC before reading getSS/getBP. It may be scheduled out at this ordinary instruction boundary.",
+    "Another inherited-context Run16 request reaches OpenNtBaseServiceCheck; BaseSrvDOSWorkerWaitPending sees the reset event and admits reuse. Busy CheckDOS creates VDM_TO_TAKE_A_COMMAND and signals the event because nReEntrancy is nonzero.",
+    "Waiting CPU thread retries GetNextVDMCommand, consumes the other command and returns CF=1 from cmdExec32; guest execution may change registers before original cmdCreateProcess resumes its getSS/getBP reads.",
+    "No lock spans increment -> input consumption, and child CREATE_SUSPENDED does not constrain this independent ancestor request."
+  ],
+  "decision_scope": "Source proof justifies preserving pre-reentry input ownership; it does not prove all snapshot functions, shared conversion, service tags or their current size necessary. R0021 initialization is retained for owner decision while its fallible snapshot consumer remains. Full original asynchronous access is not proposed as safe.",
+  "minimum_option": "Keep the existing one-line initialization with the fallible consumer; do not introduce another mechanism. Review the coupled consumer and conversion separately for reductions."
+}

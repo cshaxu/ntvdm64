@@ -344,21 +344,12 @@ mirror diff requires stopping at that ordered point for owner approval.
 Completed points and deleted files are excluded from the new review population.
 This does not authorize guest modification/rebuild or override source provenance.
 
-Latest per-point clarification: when exact original restoration is not feasible,
-report evidence and the minimum-diff alternative and wait for owner approval
-before implementing that alternative, even if its diff would shrink.
-
-Superseding owner instruction: decision-required points go to the active
-pending decision backlog with evidence/options/diff impact; continue in list
-order without waiting. Do not implement unapproved alternatives or finalize
-unapproved retention. Direct exact-original restoration remains authorized.
-
-
-Strict backlog admission clarification: a pending owner decision must identify
-concrete evidence that coherent original restoration fails in a supported
-context, the affected contract and the smallest necessary deviation. Missing
-evidence, speculative races and uncertainty are unfinished agent investigation,
-not grounds for an owner decision or completed audit. Where original restoration
-is feasible and verification finds no issue, restore it directly. Requalify all
-existing pending entries by this standard; historical classification is not
-proof of necessity.
+The owner's consolidated [execution rules](../../../rules/EXECUTION.md#original-first-mirror-diff-audit)
+supersede earlier per-point approval and batch instructions. Evidence-backed
+reductions of necessary deviations are directly authorized substantive work,
+without requiring another restoration in the same file. Residual deviations
+remain pending owner decisions; only complete original restoration removes a
+point. Net increases require approval before implementation. Missing evidence
+remains unfinished investigation, never a pending owner choice. Complete the
+whole file and coupled batch changes before final-identity verification and
+delivery. Do not transfer equal complexity into autonomous code or shims.

@@ -61,7 +61,9 @@ int main(void)
     CHECK(av.standard_handles[1]==20 && bv.standard_handles[1]==99);
     CHECK(av.default_drive==2 && bv.default_drive==3);
     CHECK(av.service==MVDM_COMMAND_SERVICE_EXECUTE && bv.service==MVDM_COMMAND_SERVICE_INTERACTIVE);
-    CHECK(mvdm_command_native_child_activate("unused","unused",&ordinary_command,&ordinary_environment));
+    ordinary_command=mvdm_command_native_child_command();
+    ordinary_environment=mvdm_command_native_child_environment();
+    CHECK(ordinary_command && ordinary_environment);
     CHECK(!strcmp(ordinary_command,"ordinary") && !strcmp(ordinary_environment,"A=ordinary"));
     mvdm_command_capture_destroy(b);
     CHECK(!strcmp(av.command,"first"));

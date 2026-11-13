@@ -1,0 +1,48 @@
+{
+  "points": [
+    "T483-R0037",
+    "T483-R0038"
+  ],
+  "status": "Evidence-qualified residuals pending owner decision; no code changes",
+  "evidence": "Original GetSystemDirectory uses modern Windows system directory. Reached original GetFileAttributes checks of KB16.COM and KEYBOARD.SYS then choose NoInstallkb16 when absent. NtvdmGetSystemDirectoryA delegates to existing product system-directory provider.",
+  "affected_context": "Non-US layout or disabled fast-paste requires keyboard support; not a claim of failure on the early US/fast-paste skip path.",
+  "files": [
+    {
+      "path": "O:/winnt/system32/kb16.com",
+      "exists": true,
+      "size": 14710
+    },
+    {
+      "path": "O:/winnt/system32/keyboard.sys",
+      "exists": true,
+      "size": 40665
+    },
+    {
+      "path": "C:/Windows/System32/kb16.com",
+      "exists": false,
+      "size": null
+    },
+    {
+      "path": "C:/Windows/System32/keyboard.sys",
+      "exists": false,
+      "size": null
+    },
+    {
+      "path": "C:/Windows/SysWOW64/kb16.com",
+      "exists": false,
+      "size": null
+    },
+    {
+      "path": "C:/Windows/SysWOW64/keyboard.sys",
+      "exists": false,
+      "size": null
+    }
+  ],
+  "source_pins": {
+    "src/mvdm-host/dos/command/cmdkeyb.c": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "a198631a171849c8c0c98e1b209723533ed4681f6a472a880ba2e399a9f6adc1",
+    "src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h": "c3e830f274df92911f963e049edee5286d6d8844fd53b5969fdbc298ed84a855"
+  },
+  "minimum": "One explicit provider declaration include (+1/-0) and one function substitution (+1/-1); no new shim or path-fallback mechanism. Moving it to a macro would hide the same boundary, not remove it.",
+  "verification": "Source checks and read-only deployed file presence. No keyboard-layout runtime test or header-removal compile performed. No build needed for unchanged audit-only file."
+}

@@ -1,0 +1,29 @@
+{
+  "point": "T483-R0029",
+  "status": "Minimized locally; remaining captured-pointer callsite differences stay pending owner decision",
+  "before": {
+    "add": 109,
+    "delete": 29,
+    "total": 138
+  },
+  "after": {
+    "add": 101,
+    "delete": 29,
+    "total": 130
+  },
+  "before_sha256": "31acd339448d652e03386f1678bcd2d69d6ab9aafe3ed7159b534ecf76e07e80",
+  "after_sha256": "936b1a9e97fa784816547e2c94d7e32e6771bd4437cb143dc00c5a1efde1c64f",
+  "autonomous_removals": [
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "semantic_lines_removed": 16
+    },
+    {
+      "path": "src/ntvdm-exe/command/include/mvdm_command_native_child.h",
+      "semantic_lines_removed": 3
+    }
+  ],
+  "test": "Existing capture-isolation assertions now use remaining getters after guest bytes are overwritten; not executed yet.",
+  "contract": "Both stack-Buffer callsites pass owned captured command. Direct tail caller already passes captured storage. cmdExec32 original assignments restored. No borrowed stack pointer crosses the detached thread.",
+  "verification": "Source caller inventory and #error identity only; prior P6 package results do not cover this source."
+}

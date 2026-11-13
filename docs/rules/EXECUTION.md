@@ -711,3 +711,67 @@ its original source T/S/P and commits when imported. Keep one consolidated
 Current packet and separate scope, evidence, progress and closure per topic.
 A bare S number cannot identify a delivery or prove another topic complete.
 This exception does not waive build, regression, publication or review gates.
+
+## Original-first mirror diff audit
+
+The owner's consolidated rules supersede older approval and batch-cadence
+instructions for this audit:
+
+1. Follow the latest main diff register in file order, then point order.
+2. Presume original code valid. Guesses, old comments and dependencies created
+   by the current adapter do not prove a deviation necessary.
+3. Restore original code directly where feasible. Remove purely formatting,
+   newline and comment differences without retaining exception registrations.
+4. A necessary deviation requires specific source, ABI, build or runtime
+   evidence. Insufficient evidence is unfinished investigation, not a decision
+   for the owner.
+5. When restoration is disproved but a smaller mirror deviation is supported,
+   implement the reduction directly as a substantive change. It does not need
+   another original restoration in the same file as a prerequisite.
+6. Complete restoration and necessary-adaptation minimization together within
+   each file. Do not move equal complexity to autonomous code or a shim merely
+   to lower the mirror count.
+7. Minimization is not approval to retain the remainder. Keep residual
+   differences in the pending decision backlog with their current size,
+   necessity evidence and proposed disposition.
+8. Obtain approval before increasing the original-relative mirror difference.
+   This measures differences from original, not total source line count.
+9. Formatting, newline and reference-only changes without behavior or binding
+   effects may accumulate without immediate build or test.
+10. After the whole file containing substantive restoration or minimization
+    is complete, deliver the entire accumulated batch through cached full
+    compilation, publication, tests, commit and push.
+11. Verification must identify final source/artifact identity. A passing prior
+    candidate does not validate later edits. Record source review, compilation,
+    runtime results and publication separately.
+12. Preserve excluded-branch #error directives and correct original #line
+    mapping. Do not modify or rebuild original guest components.
+13. Synchronize the main register and pending backlog. Only fully restored
+    points leave the backlog; partial restoration is not whole-point recovery.
+14. Before each point report ID, file/location, added/deleted size, problem,
+    whether the original rationale is evidenced, and restoration impact.
+15. After each point report disposition, actual edits, diff delta, #error/#line
+    checks, verification state and cumulative progress.
+16. Separate total, audited, restored-and-delivered, locally-restored-awaiting-
+    verification, approved-retain, pending-decision, unfinished-investigation
+    and unreviewed counts. Audit completion is not repair or delivery completion.
+17. Finish every current-file point and coupled edit before triggering a batch
+    build. Do not build while another reducible difference in that file remains
+    unhandled. There is no numerical file-count threshold.
+
+Owner delivery-order clarification: the required order is build, publish,
+test, commit, push. After a successful coherent build, publish and hash-verify
+both destinations immediately so owner testing can run in parallel. Do not
+wait for Full runtime tests before publication. Clearly label tests as pending;
+commit/push and completion still require the applicable final-code test results.
+
+Owner file-level reporting clarification: report before starting and after
+finishing every diff-bearing file, in addition to the per-point reports.
+The start report states register position, path, point IDs, original-relative
+added/deleted scope and audit objective. The end report states restored,
+minimized, pending-decision and unfinished points; original-relative diff
+before/after; #error/#line checks; build/publication/test/commit/push status;
+and cumulative file and point progress. A file is not reported complete while
+its investigation or known reducible differences remain unfinished. Never
+substitute source-line reduction for mirror-diff reduction, or point counts
+for completed-file counts. Report the file end before starting the next file.

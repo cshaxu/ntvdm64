@@ -269,22 +269,6 @@ int mvdm_command_native_child_capture_host_command(const char *command,
         capture_locations(state, command, NULL, &environment, &standard, 0);
 }
 
-int mvdm_command_native_child_activate(const char *source_command,
-    const char *source_environment, const char **command_out,
-    const char **environment_out)
-{
-    mvdm_command_native_child_state *state;
-
-    if (command_out != NULL) *command_out = NULL;
-    if (environment_out != NULL) *environment_out = NULL;
-    if (source_command == NULL || source_environment == NULL ||
-        command_out == NULL || environment_out == NULL || !state_current(&state) ||
-        state->active != 1u) return 0;
-    *command_out = state->command;
-    *environment_out = state->environment;
-    return 1;
-}
-
 int mvdm_command_native_child_std_handles(ULONG handles_out[3])
 {
     mvdm_command_native_child_state *state;

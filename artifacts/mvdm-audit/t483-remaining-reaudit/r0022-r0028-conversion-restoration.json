@@ -1,0 +1,48 @@
+{
+  "status": "Local original-conversion restoration; not built or tested",
+  "restored_points": [
+    "T483-R0022",
+    "T483-R0026",
+    "T483-R0028"
+  ],
+  "partial_point": "T483-R0025 retains existing snapshot-validity failure guard; original conversion recovered",
+  "before_sha256": "f775c4961546bb8f8aaaf8a13c629db9d356f9486f4e5fa5055923c2d40b9d05",
+  "after_sha256": "31acd339448d652e03386f1678bcd2d69d6ab9aafe3ed7159b534ecf76e07e80",
+  "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+  "before_diff": {
+    "added": 124,
+    "deleted": 59,
+    "total": 183
+  },
+  "after_diff": {
+    "added": 109,
+    "deleted": 29,
+    "total": 138
+  },
+  "original_conversion_range": [
+    363,
+    393
+  ],
+  "original_conversion_bytes_recovered": true,
+  "line_evidence": [
+    {
+      "physical": 350,
+      "logical": 318,
+      "text": "    NTSTATUS NtStatus;"
+    },
+    {
+      "physical": 414,
+      "logical": 363,
+      "text": "    RtlInitString((PSTRING)&OemString, pCommand32);"
+    },
+    {
+      "physical": 447,
+      "logical": 394,
+      "text": "    if (Status == FALSE)"
+    }
+  ],
+  "error_directives_unchanged": true,
+  "retained": "Preexisting captured-input failure guard, standard-handle snapshot and capture lifetime; no approval implied. Shared helper remains for saved-VM caller.",
+  "verification": "Exact original conversion range verified after LF normalization; no compilation/runtime/publication yet.",
+  "mirror_diff_delta": -45
+}

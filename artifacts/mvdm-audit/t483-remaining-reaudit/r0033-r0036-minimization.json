@@ -1,0 +1,23 @@
+{
+  "points": [
+    "T483-R0033",
+    "T483-R0035",
+    "T483-R0036"
+  ],
+  "status": "Minimized; all residual capture/capacity/service differences remain pending owner decision",
+  "before": {
+    "add": 101,
+    "delete": 29,
+    "total": 130
+  },
+  "after": {
+    "add": 102,
+    "delete": 22,
+    "total": 124
+  },
+  "before_sha256": "936b1a9e97fa784816547e2c94d7e32e6771bd4437cb143dc00c5a1efde1c64f",
+  "after_sha256": "695146d1dcdf52abc41f85e50be8698604db8d4a7888a9cce0a4f82a393ad243",
+  "restored": "Original COMSPEC query, both error branches and concatenation; logical lines restored after cleanup additions.",
+  "residual": "Capacity > changed to >=; two capture-abort calls on failure; existing service selection and captured-command replacement retained. No service-routing change.",
+  "verification": "Source/line/#error check only; revised cached build and tests pending."
+}

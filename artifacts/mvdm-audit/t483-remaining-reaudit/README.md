@@ -27,13 +27,10 @@ execution ledgers remain history/evidence, not a second active work queue.
    different autonomous implementation. Never modify/rebuild original guest.
 4. If a difference is necessary, establish its smallest possible form. Do not
    move equal complexity into shims merely to reduce mirror diff.
-5. Latest owner instruction replaces per-item stop/wait: write every required
-   owner decision to [pending-decisions.csv](pending-decisions.csv), including
-   evidence, options, recommendation and per-item mirror-diff delta, then
-   continue to the next ordered point. Do not implement any unapproved
-   non-original alternative, unchanged-diff conclusion or increased diff.
-   Exact original restorations remain directly authorized. Pending decisions
-   are not completed dispositions. Update the item when an owner decision arrives.
+5. Implement evidence-backed reductions of necessary deviations directly.
+   Keep residual differences in the pending decision backlog; minimization is
+   not retention approval. Only net increases require prior implementation
+   approval. Exact original restoration remains directly authorized.
 6. Missing evidence is not a retain decision. Investigate the bounded actual
    call chain; record what is unknown. No blanket restoration without checking
    actual callers, compile context and source policy, and no invented original
@@ -41,8 +38,8 @@ execution ledgers remain history/evidence, not a second active work queue.
 7. Update the item, progress and current snapshot at every delivery. A completed
    audit is not a completed repair; keep implementation/verification/delivery
    explicit. Complete a point before moving on; do not repeatedly count it.
-   Apply existing ten-modified-file/final-batch cached build, regression,
-   coherent publication, commit/push and net-diff approval rules.
+   Apply the impact-based, complete-file batch cadence below, with cached full
+   build, regression, coherent publication, commit/push and approval rules.
 
 ## Initial scope
 
@@ -76,25 +73,32 @@ Only evidenced necessary deviations and their minimal design tradeoffs enter the
 owner decision backlog. Existing backlog entries must be requalified against this
 standard; their historical reviewed count is not a count of qualified conclusions.
 
-## Superseding per-file verification cadence
+## Current verification cadence
 
-After completing the related edits in a file, run cached full compilation and
-tests before modifying the next file. This replaces the ten-file build threshold.
-The pre-existing five-file batch is verified before any further source changes.
+There is no numeric file threshold. The owner's examples of three or five
+files are illustrative, not batch sizes. Pure newline, formatting and
+reference-only changes without binding or behavior changes may accumulate.
+A substantive original restoration or necessary-diff reduction triggers delivery of the whole accumulated
+batch only after every outstanding difference in the current file and its
+coupled batch edits has been fully handled. Do not build a partially handled
+file. An unresolved investigation is not a completed file or owner decision.
 
-## Superseding impact-based batch cadence
+Then run cached full compilation, coherent publication, applicable tests,
+commit and push under the existing delivery rules. P5 was already built and
+published when the complete-file refinement arrived; its prerequisite change
+does not establish completion of cmdmisc.c or cmdexec.c.
 
-Pure newline, formatting and reference-only adjustments with no binding or
-behavior change may accumulate. Any substantive, functional or semantic
-original restoration triggers cached full build, tests, commit and push for
-the entire current batch before further functional changes. Reference changes
-that alter linkage or behavior are semantic changes. Existing publication
-requirements remain in force. This supersedes the unconditional per-file cadence.
+## Owner refinement: same-file minimization
 
-File-completeness refinement: finish every outstanding difference in the
-current file before triggering the batch build. Restore all eligible points
-together, record only evidence-qualified retention decisions, and leave no
-unresolved investigation counted as a completed file. Do not build repeatedly
-for individual points in the same file. P5 had already built/tested/published
-a partial cmdmisc.c prerequisite when this refinement arrived; finish its Git
-delivery without treating that file or R0014-R0020 as complete.
+Implement supported reductions of necessary differences directly, whether or
+not the file already contains an original restoration.
+Net increases still need prior approval. Minimization does not approve residual
+differences: keep them in the pending backlog with current evidence and size.
+Only fully restored points leave that list.
+
+R0029 removes activate and restores original cmdExec32 assignments; two captured
+pointer callsites remain pending. The prior P6 candidate passed Full, but does
+not validate these newer edits. [Evidence](r0029-minimization.json).
+
+The complete current reporting and delivery standard is the authoritative
+[17-rule execution policy](../../../docs/rules/EXECUTION.md#original-first-mirror-diff-audit).

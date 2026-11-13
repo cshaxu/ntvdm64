@@ -1,0 +1,30 @@
+{
+  "status": "Source-level bounds proof and capture ownership decisions; no runtime claim",
+  "points": {
+    "T483-R0029": {
+      "evidence": "The source-order counterexample in r0021-scheduling-requalification.json also applies to stack Buffer passed by cmdExecComspec32 and cmdExec AH!=0. Returning to guest can end that call lifetime before the detached reader consumes it.",
+      "minimum_proposal": "Pass the already captured command pointer at both Buffer callsites, restore original pCommand32=pCmd32/pEnv32=pEnv assignments, and delete activate plus redundant source parameters. This is a smaller adapter design, not exact whole-chain original restoration; awaiting approval.",
+      "implemented": false
+    },
+    "T483-R0031": {
+      "evidence": "With justified pre-thread capture retained, CreateThread failure has no consumer to clear active; capture_locations rejects active!=0 on the next request. Original had no allocated capture state.",
+      "minimum_proposal": "Keep the existing failure-path abort; no new state or extra fallback.",
+      "implemented": false
+    },
+    "T483-R0033/R0035/R0036": {
+      "evidence": "Original accepted lengths 137+4+119==MAX_PATH require261 bytes including NUL; both GetEnvironmentVariable length137 and original tail scan length119 are accepted. This is a source bounds proof, not a reproduced process crash.",
+      "minimum_proposal": "Recover original COMSPEC query/concatenation and change only > to >= at its capacity check. Preserve required captured command ownership. Remove the ordinary EXECUTE service override so Run16 receives the original full COMSPEC /c command, rather than discarding COMSPEC and launching the tail alone. This restores original command-processor ownership; the capacity correction and adapter reduction require owner approval. Saved-VM service handling is not changed by this proposal.",
+      "implemented": false
+    }
+  },
+  "bounds_witness": {
+    "comspec_bytes": 137,
+    "separator_bytes": 4,
+    "tail_bytes": 119,
+    "buffer_bytes": 260,
+    "required_bytes_with_nul": 261,
+    "original_rejects": false,
+    "corrected_rejects": true
+  },
+  "verification": "Read original source and executable arithmetic assertions only. No product build or runtime execution."
+}

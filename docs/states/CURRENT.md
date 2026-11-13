@@ -24,7 +24,7 @@ is the sole active audit order; the old D-register is historical evidence.
 | Verification | Original/current range and logical-line checks per changed file; applicable focused tests, cached full build, Full regression, publication hashes, governance and Git checks per batch. |
 | Expected Markers | Per-point current ranges, actual call/build context, concrete original-failure evidence, minimal option, original-relative diff delta, line proof and delivery status. |
 | Asset Needs | Existing pinned sources, build cache and maintained fixtures; preserve winnt.zip. |
-| Reporting Requirements | New-list position, completed/pending/approval-needed counts, current point conclusion, source/mirror diff delta and verified delivery. |
+| Reporting Requirements | File start/end and point start/end reports: list position, path/IDs, original-relative diff scope/delta, dispositions, separate file/point counts and build/publication/test/commit/push state. |
 | Stop Conditions | If the proposed disposition preserves a diff unchanged or increases it, record the decision and continue; obtain owner approval before implementation. Unproved risk is not retention evidence. |
 | Exit Criteria | Every admitted remaining point has an owner-compliant evidenced disposition and applicable implementation/delivery; list initialization alone is not audit completion. |
 | Original Owner Request | Re-audit all remaining categories with presumption of original validity; exact list order; restore directly where justified; ask before unchanged or larger diff. |
@@ -33,42 +33,48 @@ is the sole active audit order; the old D-register is historical evidence.
 ## S5 Progress
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
-contains 2720 points in 365 files. Reviewed 170: 37 restored, verified and published,
-0 local restorations awaiting verification, 2 owner-approved retain,
-131 historically classified pending decisions (including partial restorations); 2550 unreviewed.
-Owner-directed execution restarts from the first pending backlog item.
-R0010 is restored and verified; next is R0014-R0020. R0171 remains unexamined. Only evidence-qualified decisions enter the
-[pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
-without blocking the next ordered review.
+contains2720 points in365 files, with1052 live host C/H mirror files.
+Historical reviewed count170 comprises47 restored/verified/published,
+0 local original restorations awaiting verification,2 owner-approved retain,
+12 source-qualified pending decisions and109 historical classifications still
+requiring requalification. Another2550 points have not been reviewed.
+These are point counts, not completed-file counts or reproduced defect counts.
 
-P3 restores original code in ten implementation files, reducing normalized
-original-relative mirror differences by 126 lines. Excluded #error sequences
-are unchanged. Per-point records distinguish source analysis from executed tests.
-The [P3 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p3-checkpoint.json)
-records cached x86/x64 builds, two command fixtures, Full16, documentation
-checks, and publication of the same 11-image package to assets/release and
-O:/winnt/system32. Both destination hashes match the tested candidate.
-DOS4GW/NESticle is explicitly skipped: external fixtures were not supplied.
-P3 commit 4724a0bf6 is pushed and remote-verified; its worktree was clean.
-P4 changed five implementation files. Final whole-file normalized comparison
-against original sources shows a reduction of 69 mirror-diff lines, correcting
-the earlier per-point sum of 70. The difference metric excludes #line directives,
-normalizes newline encoding, and includes comments and blanks. Cached x86/x64,
-command fixtures, selected-object DPMI tests and Full16 passed; DOS4GW/NESticle
-remains skipped for absent external fixtures. The same 11-image package was
-published and hash-verified at both destinations. The P4 delivery commit carries this receipt; origin identity is checked after push.
-See [P4 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p4-checkpoint.json).
-S5 remains active, not closed.
+Owner-directed backlog requalification started at R0010 (restored and delivered).
+Current file cmdexec.c has had its remaining register points handled: R0014-R0020
+restore original SCS construction; R0022/R0026/R0028 restore original ordinary
+text conversion and ownership. Capture/capacity alternatives remain owner choices;
+no unapproved alternative has been implemented. R0171 remains unexamined.
 
-Pending DTA/PDB/SFT decisions do not establish that original pointer lifetimes
-are defective. The fast-I/O decline has original guest CF fallback evidence;
-its retention remains an owner decision. No guest rebuild or winnt.zip change.
+The [pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
+contains only unresolved portions of these points. Older entries are explicitly
+unqualified historical investigations, not established necessity. A concrete
+source/ABI failure or observed failure is required for decision admission.
+The current concurrency evidence is a source-level eligible ordering counterexample,
+not a reproduced runtime race; it does not prove every capture helper necessary.
+
+Final minimized P6 source passed cached full build in build/t483-s5-p6-r2.
+Original-relative cmdexec.c difference falls from245 to123 lines (net -122), normalizing newlines and excluding #line.
+This includes SCS restoration, conversion restoration, activation-wrapper removal
+and COMSPEC minimization. These are mirror diff counts, not total source lines.
+Matched original-code runs have zero logical-line mismatches; #error is unchanged.
+Final command fixtures and Full16 passed; DOS4GW/NESticle was explicitly skipped
+for absent external fixtures. Both publication destinations match all11 hashes.
+This receipt accompanies P6; Git commit/push verification follows its creation.
+See [P6 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p6-checkpoint.json),
+[scheduling proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0021-scheduling-requalification.json),
+[conversion restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0022-r0028-conversion-restoration.json),
+and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0029-r0036-requalification.json).
 
 ## Current Technical Baseline
 
-Package `95a66d4d-35a7-4399-abe3-c297b4e183d4`: complete 11-image P5 candidate,
-Full-tested and raw-hash verified at assets/release and O:/winnt/system32.
-No guest or winnt.zip change. See the P4 receipt above.
+Published package `b02b2179-9a7f-4a7e-8011-ef0c3c5559b1` is P6's complete11-image
+package, built before publication and tested after publication. All raw hashes
+match assets/release and O:/winnt/system32. Final source/test hashes match the
+[P6 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p6-checkpoint.json).
+P5 commit690f31c39 remains the preceding pushed baseline; this update accompanies
+P6 Git delivery. No guest or winnt.zip changes. DOS4GW/NESticle is explicitly
+skipped because external fixtures were not supplied. This does not complete S5.
 
 ## Remaining Scope
 
@@ -101,31 +107,40 @@ no queue changes remain pending in this batch.
 See the [execution rules](../rules/EXECUTION.md). Queue/proposal delivery is
 complete; S5 proceeds under the owner-approved S2–S5 sequence.
 
-## Owner Correction: Decision Admission
+## Current Owner Execution Rules
 
-Existing backlog entries require evidence requalification and are not yet
-qualified owner decisions. A demonstrated failure of coherent original
-restoration is required; missing investigation is agent work, not an owner
-tradeoff. Restore original directly when feasible and verified. Historical
-review counts measure inspected/classified points, not completed valid audits.
+Review in list order, beginning with historical pending items. Restore original
+where supported; speculative races and current-adapter dependencies alone do not
+prove necessity. Necessary non-original alternatives remain pending owner choice.
+Synchronize the register and backlog, removing restored portions promptly.
+Report each point's ID, added/deleted scope, original rationale, evidence,
+disposition and cumulative counts; distinguish source proof from runtime results.
 
-The 131 historical pending classifications span 108 backlog rows requiring
-admission review; zero are currently counted as evidence-qualified pending
-owner decisions. They remain unfinished investigations until requalified or
-restored and verified. Existing owner approvals remain valid.
+There is no numeric file threshold. Pure formatting/newline/reference changes
+without behavioral or binding effects may accumulate. A semantic restoration
+triggers cached full build, publication, tests, commit and push of the accumulated
+batch only after all outstanding points in the current file and coupled edits
+have been handled. Never build repeatedly for partially handled points in a file.
+Unresolved investigation is not file completion. Source-qualified owner decisions
+are not approved retention or implemented repairs. S5 remains active.
 
-Owner superseding cadence: pure formatting/newline/reference-only changes may
-accumulate when they do not alter binding or behavior. A functional or semantic
-original restoration triggers cached full build, tests and commit/push of the
-whole current batch; existing publication requirements remain in force. Finish
-all outstanding diffs in the current file before triggering that batch; do not
-build repeatedly for partial edits. Unresolved research is not file completion.
+## Owner refinement: same-file minimization
 
-P5 candidate: restore only original cmdSetInfo SCS pointer registration at
-logical line594 as the prerequisite for R0014-R0020; consumers remain unchanged.
-Cached x86/x64, command fixtures and Full16 passed; 11 images published/hash-verified at both targets. Git delivery follows. DOS4GW/NESticle remains skipped for absent external fixtures.
-See [producer evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0014-r0020-producer-restoration.json).
+Implement supported necessary-diff reductions directly; another original
+restoration in that file is not a prerequisite.
+Net increases still need prior approval. Minimization does not approve residual
+differences: keep them in the pending backlog with current evidence and size.
+Only fully restored points leave that list.
 
-P5 was already verified/published before the file-completeness refinement.
-It is only a prerequisite restoration, not completion of cmdmisc.c or the SCS
-group. [P5 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p5-checkpoint.json).
+R0029 removes activate and restores original cmdExec32 assignments; two captured
+pointer callsites remain pending. The prior P6 candidate passed Full, but does
+not validate these newer edits. [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0029-minimization.json).
+
+The owner's consolidated [17 execution rules](../rules/EXECUTION.md#original-first-mirror-diff-audit)
+now govern this packet, superseding earlier minimization-approval restrictions.
+Residual minimized differences remain pending; final-code verification is required.
+
+Read-only follow-on review R0037/R0038 confirmed product keyboard-resource
+location differs from both Windows system directories. The unchanged include
+and directory call remain pending owner decisions; no new build is triggered.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0037-r0038-requalification.json).

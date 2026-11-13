@@ -1,0 +1,167 @@
+{
+  "status": "Final source built, published and tested; receipt included in P6 delivery",
+  "source_head": "690f31c39c303157e76230ccfcc79cf6fd2401ea",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "159e827469d1c5fe06eba380e8fdd51d12f11fb35ec98fb1565e67d585b95854"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "sha256": "c330fbf9f0fa6d22df07cff9fa1dfe8c1875f481db200f39410a1d7d3601add5"
+    },
+    {
+      "path": "src/ntvdm-exe/command/include/mvdm_command_native_child.h",
+      "sha256": "4e37a33b6db0a553e0f226921b7309592443c0b83d5a6f36c29a554153530e0c"
+    }
+  ],
+  "test_files": [
+    {
+      "path": "test/ntvdm-exe/command/command_capture.c",
+      "sha256": "4e4211e87cf95f2b74a0e6f3f3eaa554935bfe2119f2561cbb5c1cf0df4d31cf"
+    }
+  ],
+  "mirror_diff_before": 245,
+  "mirror_diff_after": 123,
+  "mirror_diff_delta": -122,
+  "metric": "Added plus deleted original-relative lines; normalized newlines, excluding #line. Not total source lines.",
+  "line_check": "No wrong logical line in identical original runs of at least4 lines; #error unchanged. Source check, not preprocessor execution.",
+  "prior_candidate": "batch-p6-prior-candidate.json; Full passed but does not validate final minimized source.",
+  "review": "All admitted cmdexec.c points and coupled minimizations reviewed; residual capture/capacity/service differences still pending owner approval. No remaining identified reduction deferred for this batch.",
+  "build": {
+    "root": "build\\t483-s5-p6-r2",
+    "cached_exit": 0,
+    "architectures": [
+      "x86",
+      "x64"
+    ]
+  },
+  "tests": {
+    "focused_exit": 0,
+    "full_exit": 0,
+    "gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1425,
+        "CleanupMs": 621,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 279,
+        "CleanupMs": 573,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66728,
+        "CleanupMs": 582,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44454,
+        "CleanupMs": 465,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43851,
+        "CleanupMs": 487,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14102,
+        "CleanupMs": 432,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10877,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 52783,
+        "CleanupMs": 536,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12431,
+        "CleanupMs": 604,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28205,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30287,
+        "CleanupMs": 584,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3727,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7553,
+        "CleanupMs": 513,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10225,
+        "CleanupMs": 502,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4563,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6399,
+        "CleanupMs": 469,
+        "Passed": true
+      }
+    ],
+    "explicit_skip": "DOS4GW/NESticle: external fixtures absent; not a pass"
+  },
+  "publication": {
+    "status": "published",
+    "package": "b02b2179-9a7f-4a7e-8011-ef0c3c5559b1",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification_failures": [
+    {
+      "gate": "Documentation governance r1",
+      "cause": "CURRENT unchanged original sections had been decoded using the Windows default code page before UTF-8 writing.",
+      "repair": "Restored unchanged sections from git HEAD bytes decoded explicitly as UTF-8; retained P6 progress; rerun r2.",
+      "production_effect": "None"
+    }
+  ],
+  "compiler_warning_review": {
+    "warning": "C4701/C4703 lpCommandTail original logical266",
+    "source_reason": "CommandTailLen starts at0; its only nonzero assignment/increment is inside if(lpCommandTail) after pointer assignment. The later memcpy reads lpCommandTail only when CommandTailLen!=0. No new initialization added merely to silence the warning.",
+    "kind": "Control-flow source review, not a runtime test."
+  },
+  "final_identity_recheck": "Source/test hashes match this receipt; all 11 images in both destinations match release-manifest.json."
+}

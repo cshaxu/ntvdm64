@@ -1,0 +1,18 @@
+{
+  "items": [
+    "T483-R0014",
+    "T483-R0015",
+    "T483-R0016",
+    "T483-R0017",
+    "T483-R0018",
+    "T483-R0019",
+    "T483-R0020"
+  ],
+  "status": "restored-local-unverified-file-audit-continuing",
+  "change": "Original SCS construction lines249..302 restored together, lease locals and now-unused header removed. Original producer registration delivered in690f31c39.",
+  "original_failure_evidence": "None established for complete producer/consumer restoration; do not infer failure solely from paging capability.",
+  "counter_review": "Original pSCSInfo definition and initialization present; current scalar registration still exists for separately unresolved consumers. No mixed lease-pointer subtraction. Excluded #error unchanged.",
+  "verification": "No build until all remaining cmdexec.c points have a complete disposition; runtime and mapping behavior remain unverified.",
+  "next": "R0021-R0028 native child capture/prepare lifecycle, then remaining cmdexec.c points in order",
+  "source_sha256": "f775c4961546bb8f8aaaf8a13c629db9d356f9486f4e5fa5055923c2d40b9d05"
+}

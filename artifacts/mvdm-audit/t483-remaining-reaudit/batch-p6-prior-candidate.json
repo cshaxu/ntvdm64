@@ -1,0 +1,40 @@
+{
+  "status": "Superseded frozen candidate; build and Full passed for recorded source only. DO NOT PUBLISH against current source.",
+  "source_head": "690f31c39c303157e76230ccfcc79cf6fd2401ea",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "31acd339448d652e03386f1678bcd2d69d6ab9aafe3ed7159b534ecf76e07e80",
+      "before_original_relative_diff": {
+        "added": 171,
+        "deleted": 74,
+        "total": 245
+      },
+      "after_original_relative_diff": {
+        "added": 109,
+        "deleted": 29,
+        "total": 138
+      }
+    }
+  ],
+  "line_check": "Zero mismatches in equal original-code runs of at least four lines; restored boundaries318/363/394 checked explicitly. Not a preprocessor execution claim.",
+  "retention": "Ten source-qualified capture/capacity decisions remain unapproved; no proposed alternative implemented.",
+  "build": "Cached x86/x64 complete, cached.exit=0",
+  "tests": "Prior frozen candidate passed Full selected16 gates and command fixtures; DOS4GW skipped absent external fixtures.",
+  "publication": "Not published; current minimization source requires new freeze/build/test.",
+  "mirror_diff_delta": -107,
+  "compiler_warning_review": {
+    "warning": "C4701/C4703 lpCommandTail original logical266",
+    "source_reason": "CommandTailLen starts at0; its only nonzero assignment/increment is inside if(lpCommandTail) after pointer assignment. The later memcpy reads lpCommandTail only when CommandTailLen!=0. No new initialization added merely to silence the warning.",
+    "kind": "Control-flow source review, not a runtime test."
+  },
+  "verification_failures": [
+    {
+      "gate": "Documentation governance r1",
+      "cause": "CURRENT unchanged original sections had been decoded using the Windows default code page before UTF-8 writing.",
+      "repair": "Restored unchanged sections from git HEAD bytes decoded explicitly as UTF-8; retained P6 progress; rerun r2.",
+      "production_effect": "None"
+    }
+  ]
+}
