@@ -82,10 +82,6 @@
 #define CPU_AT_DISK_INT		6
 
 #ifndef CPU_30_STYLE
-/* DIVERGENCE(MVDM-HOST-DIV-146): the historical combined CCPU build defined
- * CPU_30_STYLE even when it selected CPU_40_STYLE, solely to keep this ICA
- * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired
- * in this product; the unselected non-CCPU body is now marked by DIV-506. */
 #if !defined(CCPU)
 #line 79
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.

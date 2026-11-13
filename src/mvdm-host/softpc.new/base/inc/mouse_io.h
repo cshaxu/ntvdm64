@@ -935,7 +935,6 @@ typedef struct
 			windowed Enhanced Mode DOS box. This overrides
 			the cursor_flag variable.
  */
-/* DIVERGENCE(MVDM-HOST-DIV-900): provenance of the existing saved background. */
 typedef enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA } MOUSE_SAVED_KIND;
 #line 949
 typedef struct
@@ -1007,7 +1006,6 @@ typedef struct
 #endif /* HERC */
 #line 1013
    boolean           MM_IN_cursor_EM_disabled;
-   /* DIVERGENCE(MVDM-HOST-DIV-900): append metadata; retain existing instance-field offsets. */
    MOUSE_BYTE_ADDRESS MM_IN_saved_text_address;
    MOUSE_SAVED_KIND   MM_IN_saved_cursor_kind;
 #line 1014

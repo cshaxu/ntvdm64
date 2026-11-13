@@ -1,0 +1,64 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+  "points": [
+    "T483-R0711",
+    "T483-R0712",
+    "T483-R0713"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/mouse_io.h",
+  "original_sha256": "bd398b6b37123919be5aa7f9807b45c715d4f0caac8aa04ec2ea5602ca5a112f",
+  "before_sha256": "0d85676fed97056a3d3d942976e130345bbcc27019db7894491c0440e04a0020",
+  "after_sha256": "626208b777a1b33c072a76d4f9026244b0d5f11b38b51909283586f2bb02887b",
+  "diff": {
+    "before": {
+      "added": 35,
+      "deleted": 28
+    },
+    "after": {
+      "added": 33,
+      "deleted": 28
+    },
+    "delta": -2
+  },
+  "responsibility": "Restore software cursor background belonging to the original drawing instance and representation after display/page transitions.",
+  "original_capability": "Original NTVDM cursor_undisplay body is excluded by #ifndef NTVDM. Original software branch also selects by current mode and current VID_ADDR. Neither provides save-time provenance needed by currently accepted software cursor presentation. This is a missing selected boundary,not a claim original NT4 universally failed.",
+  "independent_evidence": "T481 S16 records actual owner repeated-window/fullscreen residual acceptance,pre-repair extracted-body failure at restore-dispatch41,graphics-state transition dispatch counterexample and separate page-change wrong-cell witness. Historical guest capture is not fresh reproduction.",
+  "source_chain": [
+    "mouse_driver_initialisation allocates and zeros sizeof(MM_INSTANCE_DATA) using original NIDDB",
+    "save_area_in_use remains sole validity;reset/invalidate setsFALSE",
+    "text draw captures background,address,type;EGA/VGA/CGA draw sets own type",
+    "cursor_undisplay consumes validity once then calls matching original restorer",
+    "text restorer uses saved VM-linear address through sas_storew,not physical framebuffer pointer",
+    "INT33 context save/restore copies MOUSE_CONTEXT;appended metadata is outside guest serialization"
+  ],
+  "existing_fields": "save_position has coordinates only;cursor_status has position/buttons only;cursor_page/current_video_mode describe current state,not necessarily state when background was saved.",
+  "minimum_options": {
+    "R0711": "One enum line names four original painter representations. Replacing with separate constants adds lines without eliminating required distinctions. Removed comment only.",
+    "R0712": "Two appended fields hold linear address and painter kind without moving original field offsets. Repacking kind into original boolean would change validity semantics and restoration/reentry ordering,not simply restore original. Removed comment only.",
+    "R0713": "Two macros use existing original mutable per-VM handle pattern. Direct field access is possible but repeats the two-level handle expression at all seven write/read sites;it is not a removal of the state or simpler complete implementation. Residual remains an owner decision,not asserted approved."
+  },
+  "rejected_alternatives": "Erasing before every VDD mode/page transition requires a newly guaranteed ordering across deferred VMD/VDD callbacks. Existing NIDDB switch only selects instance and is not a pre-video erase barrier;moving state to global host cache loses VM ownership. No new ordering/state machinery added.",
+  "current_control": {
+    "scope": "production cursor dispatch; VGA/memory/graphics mocked, no integrated guest assertion",
+    "exitCode": 0,
+    "stdout": "PASS original software text cursor: masks, saved-position restore, page offset, conditional exclusion, off-screen exclusion; memory/geometry mocked\r\nPASS saved text owner: graphics transition, page transition, single consumption; graphics dispatch retained\r\n",
+    "stderr": ""
+  },
+  "prior_negative_control": {
+    "scope": "production cursor dispatch; VGA/memory/graphics mocked, no integrated guest assertion",
+    "exitCode": 3221226505,
+    "stdout": "",
+    "stderr": "Assertion failed: cells[slot]==0x0741 && !save_area_in_use && ega_restores==0, file O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\softpc.new\\base\\keymouse\\original_mouse_restore_dispatch_test.c, line 41\r\n"
+  },
+  "runner_pid": 37604,
+  "evidence": "docs/etc/evidence/m0-t481-s16-win31-mouse-transitions.md;test/mvdm-host/softpc.new/base/keymouse/verify-mouse-restore-dispatch.cjs",
+  "line_mapping": "Only two comment lines removed,each followed by existing #line949 or#line1014. Selected code and all #error/#line directives unchanged.",
+  "limits": [
+    "Current fixture uses bounded mocked video/memory and graphics restorers;not a fresh integrated guest test.",
+    "No atomic erasure or universal VM remapping coverage claimed.",
+    "This header review does not approve every later mouse_io.c diff."
+  ],
+  "status": "all three qualified pending owner;two comment reductions accumulating",
+  "validation": "P64 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record."
+}

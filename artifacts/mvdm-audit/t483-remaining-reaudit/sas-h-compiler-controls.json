@@ -1,0 +1,49 @@
+{
+  "status": "Initial controls superseded by sas-h-file-review.json;raw relocation index difference resolved to identical symbol targets.",
+  "source_sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+  "runner": {
+    "start": "2026-11-13T15:15:26.7788231-08:00",
+    "pid": 13172,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p64\\sas-controls\\run.cmd"
+  },
+  "results": [
+    {
+      "point": "r0714",
+      "consumer": "nt_mem",
+      "exit": 0,
+      "nonmetadata_sections_and_relocations_equal": false,
+      "new_warnings": [
+        "warning C4013: 'sas_overwrite_memory' undefined; assuming extern returning int"
+      ]
+    },
+    {
+      "point": "r0714",
+      "consumer": "ccpusas4",
+      "exit": 0,
+      "nonmetadata_sections_and_relocations_equal": true,
+      "new_warnings": []
+    },
+    {
+      "point": "r0715",
+      "consumer": "nt_mem",
+      "exit": 0,
+      "nonmetadata_sections_and_relocations_equal": true,
+      "new_warnings": []
+    },
+    {
+      "point": "r0715",
+      "consumer": "ccpusas4",
+      "exit": 0,
+      "nonmetadata_sections_and_relocations_equal": true,
+      "new_warnings": [
+        "warning C4142: 'Length_of_M_area': benign redefinition of type"
+      ]
+    }
+  ],
+  "limits": [
+    "No product source changed for these two points.",
+    "These controls cover two actual product translation units, not every consumer or runtime.",
+    "COFF equality excludes .debug$S and .chks64 only; not raw object byte identity."
+  ],
+  "final_evidence": "sas-h-file-review.json"
+}

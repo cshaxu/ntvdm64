@@ -1,0 +1,120 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+  "points": [
+    "T483-R0714",
+    "T483-R0715"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/sas.h",
+  "original_sha256": "04f5383b230f23522df68603eaaee1b8d5caf2af0e967bcb8529177ec6bc3f23",
+  "before_sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+  "after_sha256": "c82e004edf4be6f26a7c5bf5ce78af88172540c9c5c40f688c59055dd945ef26",
+  "diff": {
+    "before": {
+      "added": 44,
+      "deleted": 472
+    },
+    "after": {
+      "added": 37,
+      "deleted": 471
+    },
+    "delta": -8
+  },
+  "R0714": {
+    "problem": "Explicit declaration of existing SAS overwrite external wrapper in CCPU profile.",
+    "chain": "Host virtual-memory/EMS/sim32 callers -> original accessfn.c wrapper -> Sas.Sas_overwrite_memory -> original c_sas_overwrite_memory; generated header CCPU branch omits external prototype.",
+    "old_evidence": "Missing prototype and fixed-width intent; no demonstrated wrong parameter transfer or used return value.",
+    "decision": "Restore original omission. Current x86 callers pass 32-bit arguments and discard return. Six actual product translation units compile,all875 nonmetadata sections and symbol-normalized relocations identical.",
+    "warning": "Original omission produces C4013. This is disclosed,not a failure of the selected ABI. No portable C equivalence claim.",
+    "previous_difference_explanation": "Raw relocation symbol-table indices differ after implicit declaration changes symbol insertion order; resolved names/offsets/types identical."
+  },
+  "R0715": {
+    "problem": "Change original IHPE declaration to PHY_ADDR to match provider spelling.",
+    "original": "Pinned original ccpusas4.c already defines PHY_ADDR; original sas.h declares IHPE. Current host types unsigned int/unsigned long are both32bit.",
+    "decision": "Restore original IHPE; definition control emits C4142 benign type redeclaration,no product code/relocation change."
+  },
+  "compiler_controls": {
+    "normalization": "Exclude .debug$S/.chks64; compare all other section names,size,flags,initialized bytes; relocation indices resolved to symbol names. No BSS data read at raw offset zero.",
+    "results": [
+      {
+        "consumer": "nt_mem",
+        "before_exit": 0,
+        "after_exit": 0,
+        "normalized_code_data_relocations_equal": true,
+        "sections": 36,
+        "differing_sections": []
+      },
+      {
+        "consumer": "nt_emm",
+        "before_exit": 0,
+        "after_exit": 0,
+        "normalized_code_data_relocations_equal": true,
+        "sections": 42,
+        "differing_sections": []
+      },
+      {
+        "consumer": "sim32",
+        "before_exit": 0,
+        "after_exit": 0,
+        "normalized_code_data_relocations_equal": true,
+        "sections": 31,
+        "differing_sections": []
+      },
+      {
+        "consumer": "emm_mngr",
+        "before_exit": 0,
+        "after_exit": 0,
+        "normalized_code_data_relocations_equal": true,
+        "sections": 93,
+        "differing_sections": []
+      },
+      {
+        "consumer": "accessfn",
+        "before_exit": 0,
+        "after_exit": 0,
+        "normalized_code_data_relocations_equal": true,
+        "sections": 529,
+        "differing_sections": []
+      },
+      {
+        "consumer": "ccpusas4",
+        "before_exit": 0,
+        "after_exit": 0,
+        "normalized_code_data_relocations_equal": true,
+        "sections": 144,
+        "differing_sections": []
+      }
+    ],
+    "runner": {
+      "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p64\\sas-controls\\all.cmd",
+      "start": "2026-11-13T15:17:32.6003734-08:00",
+      "pid": 16348
+    }
+  },
+  "logical_lines": {
+    "emitted_current": 24,
+    "emitted_original": 24,
+    "emitted_equal": true,
+    "emitted_diff": [],
+    "matched_original_line_mismatches": []
+  },
+  "line_correction": "Existing #line289 after BACK_M else corrected to305: original blank305,ifndef306,macro307. Emitted declaration coordinates unaffected; original #line307 and all #error retained.",
+  "error_branches_preserved": 10,
+  "validation": "P64 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record.",
+  "limits": [
+    "Only selected x86 product ABI established by controls.",
+    "Does not validate every later SAS implementation diff.",
+    "No original guest change or rebuild."
+  ],
+  "final_preprocess": {
+    "source_sha256": "c82e004edf4be6f26a7c5bf5ce78af88172540c9c5c40f688c59055dd945ef26",
+    "runner_pid": 38500,
+    "proof": {
+      "emitted_current": 24,
+      "emitted_original": 24,
+      "emitted_equal": true,
+      "emitted_diff": [],
+      "matched_original_line_mismatches": []
+    }
+  }
+}

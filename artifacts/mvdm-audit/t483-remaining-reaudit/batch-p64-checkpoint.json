@@ -1,0 +1,173 @@
+{
+  "status": "P64 delivery gates verified; external fixture skips retained; accompanies Git commit",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "sha256": "31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "sha256": "626208b777a1b33c072a76d4f9026244b0d5f11b38b51909283586f2bb02887b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "sha256": "c82e004edf4be6f26a7c5bf5ce78af88172540c9c5c40f688c59055dd945ef26"
+    }
+  ],
+  "mirror_diff_delta": -14,
+  "source_review": [
+    "ica-h-file-review.json",
+    "mouse-io-h-file-review.json",
+    "sas-h-file-review.json"
+  ],
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "limits": [
+    "ICA and mouse residual points remain pending owner.",
+    "Original SAS declarations retain C4013/C4142 warnings;selected x86 ABI controls equal."
+  ],
+  "runner": {
+    "pid": 26636,
+    "created": "2026-11-13T23:20:38.6296486Z",
+    "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File build/t483-s5-p64/deliver.ps1",
+    "root": "build/t483-s5-p64",
+    "stdout": "build/t483-s5-p64/deliver.log",
+    "stderr": "build/t483-s5-p64/deliver.err",
+    "state": "completed",
+    "exit": 0
+  },
+  "ems": {
+    "Mapping": "PASS independent COM -> original INT67 Mapping; marker=EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS; normal launcher exit; no original guest or profile edit\n",
+    "CallReturn": "PASS independent COM -> original INT67 CallReturn; marker=T430_EMS_CALL_RETURN_STACK_MAP_OK; normal launcher exit; no original guest or profile edit\n"
+  },
+  "package": "c6d1e7a2-4e0c-430b-bf67-1b4334740bd4",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1332,
+      "CleanupMs": 431,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 235,
+      "CleanupMs": 500,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66020,
+      "CleanupMs": 472,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 44116,
+      "CleanupMs": 402,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 41332,
+      "CleanupMs": 465,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14011,
+      "CleanupMs": 510,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 9806,
+      "CleanupMs": 457,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 51754,
+      "CleanupMs": 488,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12669,
+      "CleanupMs": 429,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 27625,
+      "CleanupMs": 442,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30097,
+      "CleanupMs": 473,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4062,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7755,
+      "CleanupMs": 477,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9767,
+      "CleanupMs": 441,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3705,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6289,
+      "CleanupMs": 500,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=27136 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=8372 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=24476 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ],
+  "final_checks": {
+    "runner": {
+      "start": "2026-11-13T15:30:38.6447667-08:00",
+      "pid": 30404,
+      "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p64\\final-check.ps1"
+    },
+    "exit": 0,
+    "output": "PASS 143 selected WOW objects; 9 private-header negative controls; no NTVDM private dependency\nDocumentation governance verification passed.\nDocumentation relative-link verification passed.\n",
+    "log_sha256": "e29f61ad3566f14b89dc6ce4212d8ee0a959807872fa6b688f285ac1722e0aca"
+  },
+  "git_delivery": "Reviewed files staged in accompanying P64 commit;push verified after commit."
+}

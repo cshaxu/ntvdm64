@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+    "matched_original_line_mismatches": [],
+    "proof": "Comment-only deletions before unchanged explicit #line resets;see file review.",
+    "error_branches_preserved": 7
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+    "matched_original_line_mismatches": [],
+    "proof": "Comment-only deletions before unchanged explicit #line resets;see file review.",
+    "error_branches_preserved": 8
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+    "matched_original_line_mismatches": [],
+    "proof": {
+      "emitted_current": 24,
+      "emitted_original": 24,
+      "emitted_equal": true,
+      "emitted_diff": [],
+      "matched_original_line_mismatches": []
+    },
+    "error_branches_preserved": 10
+  }
+]

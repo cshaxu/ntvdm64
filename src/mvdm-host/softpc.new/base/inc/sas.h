@@ -84,12 +84,6 @@ extern void sas_term IPT0();
 
 #include	<sas4gen.h>
 
-/* DIVERGENCE(MVDM-HOST-DIV-092): publish the external physical-range
- * wrapper's fixed-width address/length contract for its original callers.
- * In the selected C-VID profile the wrapper dispatches through the SAS
- * vector to the CCPU provider; see MVDM-HOST-DIV-189. */
-extern void sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, len);
-
 #ifdef NTVDM
 #ifdef CCPU
 #line 97
@@ -107,7 +101,7 @@ extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
 
 #line 108
 extern host_addr Start_of_M_area;       /* host addr (char *) of start of M */
-extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
+extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #else /* CPU_40_STYLE */
 #line 111
 #error DIVERGENCE MVDM-HOST-DIV-616: unsupported non-CPU40 SAS interface
@@ -141,7 +135,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #line 297
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
-#line 289
+#line 305
 
 #ifndef HERC_REGEN_BUFF
 #line 307

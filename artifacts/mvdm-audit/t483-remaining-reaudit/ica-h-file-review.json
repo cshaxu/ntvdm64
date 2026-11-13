@@ -1,0 +1,36 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+  "points": [
+    "T483-R0710"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/ica.h",
+  "original_sha256": "e5e65eb19d2c761a3ffc65a0df0febd005427a817d1cd673c162e60cbf0993e8",
+  "before_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+  "after_sha256": "31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab",
+  "diff": {
+    "before": {
+      "added": 32,
+      "deleted": 124
+    },
+    "after": {
+      "added": 28,
+      "deleted": 124
+    },
+    "delta": -4
+  },
+  "responsibility": "Keep original CCPU interrupt enum separate from original legacy ICA interrupt bitmap bit numbers.",
+  "original_can_fulfill": "ICA macro CPU_HW_INT=0 is a bit index. CCPU enum CPU_HW_RESET=0 and CPU_HW_INT=2 is a different API. Current selected profile retires CPU_30_STYLE;original unguarded ICA branch becomes selected.",
+  "exact_diff_necessity": "Actual c_main.c includes CPU enum then ICA;restoring original ICA branch changes case CPU_HW_INT to0,duplicating case CPU_HW_RESET. Actual MSVC original-control exit2 C2196 at original c_main.c4718. Current exit0.",
+  "controls": {
+    "current_c_main_exit": 0,
+    "original_c_main_exit": 2,
+    "failure": "error C2196: case value '0' already used",
+    "runner_pid": 14512
+  },
+  "counter_review": "Initial nt_cpu.c control compiled both ways because it never includes ICA;it is not direct conflict evidence. It supplies CPU_HW_INT=2 to c_cpu_interrupt; actual receiving switch in c_main is the conflicting owner. CPU30 revival or extra undef at consumers is not a smaller correct adaptation.",
+  "minimum_option": "Keep nested CCPU exclusion within original outer CPU_30_STYLE framework;preserve existing #error;remove four-line historical comment.",
+  "line_mapping": "No selected code changed;#line90/92 still reset closing original boundary and first following definition. All #error and #line directives unchanged.",
+  "validation": "P64 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record.",
+  "status": "qualified pending owner"
+}

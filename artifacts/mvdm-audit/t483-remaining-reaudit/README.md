@@ -423,3 +423,16 @@ Cached full,11x2 publication/hash,focused,EMS2 and Full16 passed.716 reviewed;
 282 delivered,2 approved,432 pending,2004 unreviewed;100/365 files.
 See [receipt](batch-p63-checkpoint.json),[gvi](gvi-h-file-review.json),
 [host](host-h-file-review.json).
+
+P64 audit in progress: [ICA](ica-h-file-review.json) and [mouse header](mouse-io-h-file-review.json) complete.
+Four residual points await owner;two files have comment-only diff reductions(net-6),
+accumulating under format-only cadence. No new build/publication claim;next R0714.
+
+SAS header investigation: [actual product compiler controls](sas-h-compiler-controls.json). R0714/R0715 remain outside completed counts pending whole-file disposition; these are not full-build or runtime results.
+
+P64 [SAS whole-file review](sas-h-file-review.json):two original declarations restored,mirror diff-8;batch total-14. Six actual product translation units compile with identical875 code/data sections and resolved relocations.722 points reviewed;2 local restorations await delivery;next R0716.
+
+P64 delivered:two SAS original restorations;ICA/mouse residuals remain owner decisions.
+Mirror diff net-14;cached full,11x2 publication/hash,focused,EMS2 and Full16 passed.
+722 reviewed;284 delivered,2 approved,436 pending,1998 unreviewed;103/365 files.
+See [delivery receipt](batch-p64-checkpoint.json) and [logical lines](batch-p64-line-check.json).
