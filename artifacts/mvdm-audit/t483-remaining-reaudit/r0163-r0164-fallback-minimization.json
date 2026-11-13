@@ -1,0 +1,23 @@
+{
+  "ids": [
+    "T483-R0163",
+    "T483-R0164"
+  ],
+  "necessity": "FALSE hook return resumes original CCPU exception delivery using current flags/stack. Original dpmiint.c mutated both before rejecting; EndUseLockedPMStack restores outer stack only at depth zero.",
+  "call_chain": "c_xcptn.c contributory_exception -> host_exint_hook -> EXIntHandler -> DpmiFaultHandler; FALSE resumes check_exception_env/do_intrupt without CPU-state restore. Neither hook nor caller excludes VM=1.",
+  "minimization": "Remove unsupported VM-bit exceptions. Restore saved flags on absent handler; saved ESP and flags on failed frame. Keep existing original locked-stack ownership and no second rollback state.",
+  "test": "Existing absent/first/nested fixture now exercises VM=0 andVM=1. Not yet compiled/run.",
+  "before": {
+    "added": 222,
+    "removed": 104,
+    "total": 326
+  },
+  "after": {
+    "added": 218,
+    "removed": 104,
+    "total": 322
+  },
+  "verification": "Local candidate only; #error list unchanged. Whole-file logical-line/build/runtime proof pending.",
+  "scope": "Source-proved rejection contract, not a claim that an observed Win3.x failure was reproduced or fixed.",
+  "delta": -4
+}

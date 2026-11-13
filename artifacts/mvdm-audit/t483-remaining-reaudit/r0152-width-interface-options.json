@@ -1,0 +1,42 @@
+{
+  "id": "T483-R0152",
+  "responsibility_evidence": [
+    "src/mvdm-guest/dpmi/486/dxutil.asm PutIntrVector saves DpmiFlags-derived VDM_INT_16/32 with each handler through SetProtectedModeInterrupt.",
+    "src/mvdm-guest/dpmi/486/dxboot.asm initializes fixed16-bit handlers; current application Frame32 is a separate variable.",
+    "src/mvdm-host/dpmi32/dpmiint.c DpmiSetProtectedmodeInterrupt stores supplied Flags; original native PushInt selects width from these flags."
+  ],
+  "original_limit": "Original BuildStackFrame uses only CurrentAppFlags, has no handler-width argument; restoring it alone loses independent registered width.",
+  "specific_interface": "Width selection necessary does not prove a separate wrapper necessary. All production calls are in dpmiint.c; header is sole declaration.",
+  "option": "Single BuildStackFrame with BOOL WideFrame; remove private forward declaration and wrapper; four other callers pass Frame32. No new state or shim.",
+  "metric": [
+    {
+      "file": "dpmiint.c",
+      "before": {
+        "added": 225,
+        "removed": 107,
+        "total": 332
+      },
+      "candidate": {
+        "added": 214,
+        "removed": 109,
+        "total": 323
+      }
+    },
+    {
+      "file": "dpmiint.h",
+      "before": {
+        "added": 1,
+        "removed": 5,
+        "total": 6
+      },
+      "candidate": {
+        "added": 2,
+        "removed": 5,
+        "total": 7
+      }
+    }
+  ],
+  "aggregate_delta": -8,
+  "approval": "Not implemented: header and four original call sites acquire additional differences, requiring owner approval per-point despite aggregate reduction.",
+  "verification": "Read-only source and in-memory transformation count, not compilation/runtime evidence."
+}

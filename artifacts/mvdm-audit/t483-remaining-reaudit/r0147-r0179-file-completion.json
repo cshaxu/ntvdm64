@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "points": "R0147-R0179",
+  "file_disposition": "Complete original-first source review and counter-review; residual owner decisions remain unapproved.",
+  "mirror_diff_before": 379,
+  "mirror_diff_after": 293,
+  "mirror_diff_delta": -86,
+  "coupled_batch_delta": -93,
+  "source_identity": "batch-p17-checkpoint.json",
+  "line_evidence": "batch-p17-line-check.json",
+  "verification": {
+    "cached_full": 0,
+    "published": "6b318f5f-3c92-4572-a9e7-f850066b3ec4,11 images,2 destinations,hash-verified",
+    "focused": "DPMI selected object includingVM0/1; CCPU143; descriptor domain",
+    "full": "Full16 passed",
+    "git": "Included in P17 Git delivery"
+  },
+  "remaining_choices": [
+    "Single width-aware function removes wrapper; aggregate diff -8 with new header/call-site differences requires owner approval.",
+    "SP/ESP restoration cannot ignore SS.B; original CCPU set_current_SP is a candidate direct provider; current commit policy left unchanged pending owner-approved binding.",
+    "Per-address mapped decoding retained after reduction; native trap register artifacts not assumed necessary."
+  ],
+  "sequential_files_complete": 27
+}

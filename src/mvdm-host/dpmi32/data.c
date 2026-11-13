@@ -137,12 +137,6 @@ ULONG DosxFaultHandlerIretd;
 ULONG DosxIntHandlerIret;
 ULONG DosxIntHandlerIretd;
 #if defined(CPU_40_STYLE)
-//
-// Linear address of the guest-resident VDM_DPMIINFO projection used by
-// DOSX's SEL_VDMTIB descriptor.  It is deliberately a guest address, not a
-// host pointer.
-//
-ULONG Cpu40PmStackInfoAddress;
 /* Guest-linear descriptor images consumed separately by CCPU.  The DOSX
  * 53:00 table is a GDT source; original process-LDT publication is a
  * distinct owner. */

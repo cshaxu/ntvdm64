@@ -1,0 +1,28 @@
+{
+  "ids": [
+    "T483-R0173",
+    "T483-R0174",
+    "T483-R0175",
+    "T483-R0176"
+  ],
+  "evidence": [
+    "dpmi32.c initializes Ldt from DOSX-supplied pointer; Cpu40LdtShadowAddress is separate allocated table.",
+    "dpmiselr.c DpmiSetWowLdtEntry writes selected descriptor to Cpu40LdtShadowAddress, not DOSX table; original global Ldt read is not equivalent for this selected WOW route.",
+    "sim32_effective_addr returns -1 for failed checked selector mapping; convert_addr returnsNULL; decoder must not dereference failed mapping.",
+    "Mapped CodeBase comes from same descriptor resolution as SIM32 alias; per-byte page translation cannot derive linear address from arbitrary host alias."
+  ],
+  "implemented": "Remove CodeSegmentIsBig and DescriptorTable temporaries; branch directly on shadow descriptor bit, record CodeOffset inside original EIP/IP branches. Compress two explanatory comments. Retain current pointer and shadow availability checks.",
+  "before": {
+    "added": 211,
+    "removed": 104,
+    "total": 315
+  },
+  "after": {
+    "added": 201,
+    "removed": 104,
+    "total": 305
+  },
+  "verification": "Local unverified source; #error unchanged; #line1271/1273 aligned original pointer increments. No new compiler/runtime proof.",
+  "classification": "R0173 original declaration area restored; R0174-R0176 only partial minimization, residual bindings pending.",
+  "delta": -10
+}

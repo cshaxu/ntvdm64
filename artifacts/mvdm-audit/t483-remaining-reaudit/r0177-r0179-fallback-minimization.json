@@ -1,0 +1,23 @@
+{
+  "ids": [
+    "T483-R0177",
+    "T483-R0178",
+    "T483-R0179"
+  ],
+  "necessity": "Per-byte translation avoids stale contiguous alias on remapped pages; on any required operand lookup failure restart the entire decode from original alias, never combine sources.",
+  "proof": "Original DpmiOp0f switches on first operand; only20/22 read ModRM. Unsupported opcode returnsFALSE with no architectural write. Short-circuit read preserves first-then-conditional-second order. Failed first lookup never examines uninitialized Operands[0].",
+  "implemented": "R0177 use lookup result as MappedCode and single alias fallback read; R0178 combine identical failure blocks while reading third byte only for20/22. R0179 unchanged: required operand source consistency.",
+  "before": {
+    "added": 201,
+    "removed": 104,
+    "total": 305
+  },
+  "after": {
+    "added": 191,
+    "removed": 104,
+    "total": 295
+  },
+  "verification": "Local source/control-flow proof only; existing mapped positive/negative/cross-page/fallback tests required on final code. #error/#line sequence unchanged.",
+  "residual": "All residual mapped decoding remains pending owner decision; minimized does not mean approved.",
+  "delta": -10
+}

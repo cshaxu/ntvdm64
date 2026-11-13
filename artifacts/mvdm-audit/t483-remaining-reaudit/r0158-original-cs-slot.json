@@ -1,0 +1,23 @@
+{
+  "id": "T483-R0158",
+  "conclusion": "Restore original DPMI CS-slot value; native PushInt EIP-high-word artifact has no demonstrated CCPU requirement.",
+  "evidence": [
+    "Original dpmiint.c:547 writes getCS only.",
+    "CCPU c_intr.c uses spush16(GET_CS_SELECTOR()); c_stack.c spush16 writes only low word even for32-bit slot, not EIP high word. This is not byte-identical to zero-extension, but disproves required EIP-copy claim.",
+    "CCPU iret.c new_cs is IU16 and receives tpop slot2; upperword does not choose selector."
+  ],
+  "implementation": "Restore exact original assignment; remove native-register-artifact comment; retain excluded #error framework. Fixture expects original DPMI frame image, not native register reuse.",
+  "before": {
+    "added": 225,
+    "removed": 107,
+    "total": 332
+  },
+  "after": {
+    "added": 223,
+    "removed": 106,
+    "total": 329
+  },
+  "verification": "Local unverified source candidate. #error list unchanged; #line547 before restored store and#line548 before next original store. Final whole-file verification pending.",
+  "remaining": "Conditional/exclusion framework remains; partial point restoration only, not whole-point approval.",
+  "delta": -3
+}

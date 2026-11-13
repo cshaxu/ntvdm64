@@ -1,0 +1,21 @@
+{
+  "id": "T483-R0172",
+  "responsibility": "Translate each requested code byte rather than adding offset to a host pointer for a different physical page.",
+  "original_limitation": "SIM32 selector-base alias plus EIP does not translate later pages; original c_GetLinAdd translates only supplied linear address. Existing fixture has conflicting mapped and contiguous bytes.",
+  "reuse_analysis": "c_sas_hw_at -> bios_read_byte -> biosDoInst -> host_simulate on mapping failure; restores CS/EIP/EAX/DS/EDX/EBP and checks simulate_level. It returns a byte, not a no-execution failed-lookup result. c_GetLinAdd returns physical0 pointer on lookup failure. Neither is a drop-in Boolean lookup. No claim all possible reuse exhausted.",
+  "implemented": "Remove added physical-size/type filter and its declarations. Reuse c_GetPhyAdd contract after successful original xtrn2phy translation; preserve video alias exclusion and translation-failure fallback.",
+  "filter_evidence": "sim32.c nonvideo returns NtGetPtrToLinAddrByte; sas.h maps that to c_GetLinAdd; c_GetLinAdd calls c_GetPhyAdd without RAM/type filter. Current c_GetPhyAdd supports checked external mappings before ordinary M-area pointer.",
+  "before": {
+    "added": 218,
+    "removed": 104,
+    "total": 322
+  },
+  "after": {
+    "added": 211,
+    "removed": 104,
+    "total": 315
+  },
+  "verification": "Local source candidate only; final whole-file tests must cover mapped pages, external mappings, video fallback and failed translation. #error/#line directives untouched.",
+  "remaining": "Necessary per-address translation remains pending owner decision; this is partial minimization only.",
+  "delta": -7
+}

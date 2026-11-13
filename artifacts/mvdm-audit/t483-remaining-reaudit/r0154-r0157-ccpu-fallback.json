@@ -1,0 +1,19 @@
+{
+  "ids": [
+    "T483-R0154",
+    "T483-R0155",
+    "T483-R0156",
+    "T483-R0157"
+  ],
+  "responsibility": "Preserve caller CPU state when hook declines; use registered interrupt frame width on successful dispatch.",
+  "original_limitation": "Original dpmiint.c clears TF before BuildStackFrame can return FALSE.",
+  "actual_chain": [
+    "CCPU intx.c and into.c call host_swint_hook when PE; if FALSE they call do_intrupt.",
+    "nt_inthk.c returns SWIntHandler BOOL without restoring flags.",
+    "c_intr.c SAME_LEVEL reads c_getEFLAGS only after target and stack checks, then pushes flags; an earlier hook mutation is observable in saved TF."
+  ],
+  "necessity": "Delayed TF commit in protected path is justified by actual fallback, independently of native monitor policy. Real-mode branch retains original successful flag effect.",
+  "width": "r0152-width-interface-options.json proves separate registration width and records interface minimization choice.",
+  "limits": "No new runtime execution; no claim complete target-fault equivalence with native PushInt. Per-point pending classifications retain explicit requalification status until complete file analysis.",
+  "changes": "No edits in these four points this turn."
+}

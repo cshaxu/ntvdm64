@@ -1,0 +1,13 @@
+{
+  "id": "T483-R0153",
+  "responsibility": "Original WOW_x86 3protect.asm wss40 issues INT2A signature and descriptor words.",
+  "original_provider": "OpenNT base/ntos/ke/x86/trap.asm NtSetLdtEntries interception sets CF iff status != 0. That kernel trap is not executed by CCPU INTx; INTx calls host_swint_hook then do_intrupt if unhandled.",
+  "specific_diff": "Existing DpmiSetWowLdtEntry publishes CCPU LDT; whole-provider minimization still belongs to coupled source review, not proven by this consumer alone.",
+  "implemented": "Replace NT_SUCCESS with exact-zero original CF predicate; shorten six-line explanatory comment to one line.",
+  "current_provider_returns": "dpmiselr.c returns only STATUS_SUCCESS and STATUS_INVALID_LDT_DESCRIPTOR. No positive-status runtime bug claimed; predicate restores original contract.",
+  "mirror_diff_delta": -5,
+  "partial_only": true,
+  "verification": "Source inspection, byte-preserving edit, #error/#line directive sequence unchanged. Final whole-file build/tests pending.",
+  "before_sha256": "5f3da76fec72afed5aa64a98b579c2000889dd7ee0f2cc0d77ce86a7f2bd92f5",
+  "after_sha256": "bf805e21b83b5dcf7637b2c517087679409a8c8a526bf8e292f1a723781f5162"
+}

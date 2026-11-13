@@ -1,0 +1,13 @@
+{
+  "id": "T483-R0172",
+  "added": 33,
+  "removed": 0,
+  "observations": [
+    "sim32.c returns NtGetPtrToLinAddrByte for a single converted address; pointer arithmetic across independently mapped pages is not established by that return.",
+    "ccpusas4.c c_GetLinAdd translates one address withxtrn2phy; on failure returns physical0 pointer. Not a success/failure-equivalent replacement for current helper.",
+    "ccpusas4.c bios_read_byte uses phy_r8 when mapped; on failure invokes biosDoInst, or returns without a value when selectors_set isfalse inPM. This is a reentry boundary requiring call-chain investigation, not automatic rejection of original SAS.",
+    "Existing ccpu_monitor_boundary_fixture.c dpmi_remapped_code_page uses true CCPU paging and conflicting aliases, with positive/negative and cross-page cases. Source inspected, not run in this batch."
+  ],
+  "next": "Trace SAS byte public entry and biosDoInst return/fault ownership before choosing original reuse or residual implementation. Do not retain just because existing code needs nonfaulting lookup.",
+  "classification": "Active investigation; not admitted to owner pending decisions."
+}

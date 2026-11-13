@@ -1,0 +1,218 @@
+{
+  "status": "Final-source cached full build, publication11x2, focused tests, Full16 and governance passed; included in current Git delivery",
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sha256": "11a57a1a50514aa23610e57dc71fc6e70ed52ff38fae1877a61d7b8914e123dd"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "sha256": "55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "sha256": "8b7d6dc48ee76aad70ea0e40d0c432e1561ddeb29bdeccb3ce17573ec89dc4f2"
+    },
+    {
+      "path": "test/mvdm-host/dpmi_swint_selected_fixture.c",
+      "sha256": "3fab60ddcb7e6997027f7e16a888d4b43cd0253042c74081630a2020fac18e6d"
+    },
+    {
+      "path": "test/observation/dpmi_dispatch_trace.c",
+      "sha256": "e66c46e9644891c1d85c33217e447a1a216529058a0daad8263c8ad14c5325bc"
+    }
+  ],
+  "mirror_diff_delta": -93,
+  "mirror_metrics": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before": {
+        "added": 272,
+        "removed": 107,
+        "total": 379
+      },
+      "after": {
+        "added": 189,
+        "removed": 104,
+        "total": 293
+      },
+      "sha256": "11a57a1a50514aa23610e57dc71fc6e70ed52ff38fae1877a61d7b8914e123dd"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "before": {
+        "added": 54,
+        "removed": 2,
+        "total": 56
+      },
+      "after": {
+        "added": 48,
+        "removed": 2,
+        "total": 50
+      },
+      "sha256": "55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "before": {
+        "added": 22,
+        "removed": 15,
+        "total": 37
+      },
+      "after": {
+        "added": 21,
+        "removed": 15,
+        "total": 36
+      },
+      "sha256": "8b7d6dc48ee76aad70ea0e40d0c432e1561ddeb29bdeccb3ce17573ec89dc4f2"
+    }
+  ],
+  "scope": "dpmiint whole-file original-first restoration and minimization; residual owner decisions not approved",
+  "source_files": 5,
+  "build_exit": 0,
+  "build_owner": {
+    "start": "2026-11-12T21:51:53.0172367-08:00",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p17/cached.stderr.log",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p17/cached.stdout.log",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1110-778-0_26.1110.778.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "pid": 2364,
+    "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1110-778-0_26.1110.778.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p17/cached.ps1"
+  },
+  "pipeline_owner": {
+    "start": "2026-11-12T21:54:08.1632606-08:00",
+    "pid": 14864,
+    "stdout": "O:/repos.hobby/ntvdm64/build/t483-s5-p17/finish.stdout.log",
+    "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1110-778-0_26.1110.778.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:/repos.hobby/ntvdm64/build/t483-s5-p17/finish.ps1",
+    "stderr": "O:/repos.hobby/ntvdm64/build/t483-s5-p17/finish.stderr.log"
+  },
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pipeline": 0
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 391558,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5313,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1216,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 234,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66333,
+        "CleanupMs": 483,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48606,
+        "CleanupMs": 439,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43875,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14907,
+        "CleanupMs": 473,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10677,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 83040,
+        "CleanupMs": 708,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12479,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28420,
+        "CleanupMs": 480,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30360,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4748,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7908,
+        "CleanupMs": 614,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11567,
+        "CleanupMs": 525,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4873,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7444,
+        "CleanupMs": 497,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "6b318f5f-3c92-4572-a9e7-f850066b3ec4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "limits": [
+    "CCPU143 and descriptor fixtures use existing host seams; not proof of full guest lifecycle coverage.",
+    "DOS4GW/NESticle unavailable external fixtures remain explicit skips, not passes.",
+    "No new Win3.x interactive acceptance claimed; Full retains its checked-in coverage.",
+    "Original guest and winnt.zip unchanged."
+  ],
+  "next": "T483-R0180"
+}

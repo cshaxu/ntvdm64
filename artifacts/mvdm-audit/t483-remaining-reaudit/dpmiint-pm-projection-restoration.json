@@ -1,0 +1,84 @@
+{
+  "status": "Local restoration candidate only; entire dpmiint.c review and final build/publication/tests pending.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before": "e5ac4851282cafcd61b7105d116fed0445495d4f4453300a9d6ac900a39ec172",
+      "after": "5f3da76fec72afed5aa64a98b579c2000889dd7ee0f2cc0d77ce86a7f2bd92f5",
+      "mirror_before": {
+        "added": 272,
+        "removed": 107,
+        "total": 379
+      },
+      "mirror_after": {
+        "added": 230,
+        "removed": 107,
+        "total": 337
+      },
+      "delta": -42
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "before": "03a634db0761632eacd5b956e3314a9ccedbdc079603f243f7a38adc686815ac",
+      "after": "55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35",
+      "mirror_before": {
+        "added": 54,
+        "removed": 2,
+        "total": 56
+      },
+      "mirror_after": {
+        "added": 48,
+        "removed": 2,
+        "total": 50
+      },
+      "delta": -6
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "before": "836c09b0f40350b501bd8360d0b09c9e7f6dcd65ffd220c2dacdb40934f22216",
+      "after": "8b7d6dc48ee76aad70ea0e40d0c432e1561ddeb29bdeccb3ce17573ec89dc4f2",
+      "mirror_before": {
+        "added": 22,
+        "removed": 15,
+        "total": 37
+      },
+      "mirror_after": {
+        "added": 21,
+        "removed": 15,
+        "total": 36
+      },
+      "delta": -1
+    },
+    {
+      "path": "test/mvdm-host/dpmi_swint_selected_fixture.c",
+      "before": "a8027159a82cc6b0290ff6ab6b219cb23af8bb8843dfdde141164399d29bbda3",
+      "after": "557c444bd87126bb44be9f64a1533e37cdf8cbcbb1b574cf63254d2c74ff9a5e"
+    },
+    {
+      "path": "test/observation/dpmi_dispatch_trace.c",
+      "before": "4167d7c52b1848b78bb4f2648f429e04c2dc9ba2dcbd7d688cbefe231bed31b3",
+      "after": "e66c46e9644891c1d85c33217e447a1a216529058a0daad8263c8ad14c5325bc"
+    }
+  ],
+  "input_guest_sha256": "c5af29a29abf167b243daabf877459e8278b8c9a339bf8e1e2576ead5f6ceeff",
+  "decoded_sha256": "a415bc293ee25ee09ed41d25f4c8b45f85acc709c2ad96af5edef4b5b87bbe84",
+  "decoded_size": 67680,
+  "decode_basis": "Read-only EXEPACK stream decoding follows bytes at original entry stub: reverse B0/B1 fill, B2/B3 literal runs. 104 runs consume all packed input and fill67680 bytes. No relocation or execution, no original guest mutation/rebuild.",
+  "observations": {
+    "startup_bop": "image+a496 C4 C4 53 11 followed by AX=20h; pushD8h,CX,DX,0,AX,F2h; NSetSegmentDscr.",
+    "app_init_bop": "image+ad52 C4 C4 53 11 followed by POP ES,CLC,RET; return CX:DX not consumed here.",
+    "iret": "image+c040/c044/c048/c04c contains C4 C4 53 16/17/14/15, matching original map PMFaultHandlerIRET/IRETD and PMIntHandlerIRET/IRETD.",
+    "reader_source": "Build selects486/dxintr.asm, without top-level dxintr guest lock writes. Common dxbug reader is inside NTDEBUG; gendefs defaults0 and build OPTIONS486 do not enable it. Public map contains no DEBUGTRACE symbol.",
+    "limits": "No assertion that a linear byte search proves absence of every possible indirect read. Candidate restoration follows original-first rule after withdrawing wrong reader evidence; final supported-runtime validation remains required."
+  },
+  "restoration": {
+    "R0134": "Remove isolated projection global and comment; local unverified restoration.",
+    "R0140": "Remove only PM projection extern; two GDT/LDT declarations remain, not whole-point restoration.",
+    "R0149": "Remove selected projection guard.",
+    "R0150": "Remove locals used only by projection.",
+    "R0151": "Restore original non-i386 initialization; preserve original i386 #error. No replacement shim or second state mechanism."
+  },
+  "mirror_diff_delta": -49,
+  "verification": "Source candidate only; do not build until all dpmiint.c points and coupled changes are handled. No new publication or runtime claim.",
+  "next": "T483-R0152"
+}

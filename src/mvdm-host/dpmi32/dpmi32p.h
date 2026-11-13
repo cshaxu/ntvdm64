@@ -113,7 +113,6 @@ extern ULONG DosxFaultHandlerIretd;
 extern ULONG DosxIntHandlerIret;
 extern ULONG DosxIntHandlerIretd;
 #if defined(CPU_40_STYLE)
-extern ULONG Cpu40PmStackInfoAddress;
 extern ULONG Cpu40GdtShadowAddress;
 extern ULONG Cpu40LdtShadowAddress;
 

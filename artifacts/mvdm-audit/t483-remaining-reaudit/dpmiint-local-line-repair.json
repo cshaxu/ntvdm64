@@ -1,0 +1,30 @@
+{
+  "changes": [
+    {
+      "original": 233,
+      "statement": "FrameFlags &= ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK);"
+    },
+    {
+      "original": 522,
+      "statement": "if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) {"
+    },
+    {
+      "original": 533,
+      "statement": "ReflectV86Int(IntNumber, SaveEFLAGS);"
+    },
+    {
+      "original": 912,
+      "statement": "return FALSE;"
+    },
+    {
+      "original": 935,
+      "statement": "return FALSE;"
+    },
+    {
+      "original": 973,
+      "statement": "DBGTRACE(DPMI_DISPATCH_FAULT, IntNumber, 0, 0);"
+    }
+  ],
+  "matched_run_mismatches": [],
+  "scope": "Matching original nonblank non-directive code runs>=4 lines. Source identity check, not compiler/preprocessor proof. Whole-file check still requires selected-context verification."
+}

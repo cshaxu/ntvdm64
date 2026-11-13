@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:110 restored/verified/published,
-0 local restorations pending verification,2 approved retain,45 qualified pending
-decisions and20 prior classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is26/365;339 remain.
+186 points have a prior or current review record:115 restored/verified/published,
+0 local restorations pending verification,2 approved retain,69 qualified pending
+decisions and0 prior classifications requiring requalification. Another2534
+points are unreviewed. Sequential file disposition is27/365;338 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -45,11 +45,11 @@ Owner-directed backlog requalification started at R0010 (restored and delivered)
 Earlier cmdexec.c delivery handled its remaining register points: R0014-R0020
 restore original SCS construction; R0022/R0026/R0028 restore original ordinary
 text conversion and ownership. Capture/capacity alternatives remain owner choices;
-no unapproved alternative has been implemented. R0171 remains unexamined.
+no unapproved alternative has been implemented. R0171 has source-qualified residual evidence recorded in P17.
 
 The [pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
-contains only unresolved portions of these points. Older entries are explicitly
-unqualified historical investigations, not established necessity. A concrete
+contains only unresolved portions of these points. All current entries have been requalified; historical speculation is not
+established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
@@ -69,7 +69,7 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P16 package `1e0b4d88-e7e4-49af-b716-7a28cb5abab6` is published to
+P17 package `6b318f5f-3c92-4572-a9e7-f850066b3ec4` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
 Final-source cached full build, descriptor2097152 and Full16 passed.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
@@ -100,12 +100,13 @@ prototype remains. Two points are restored/verified/published, two residual
 boundaries remain pending owner decision.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0143-r0146-requalification.json).
 P16 cached build, publication11x2, descriptor2097152, Full16 and governance
-passed; this receipt accompanies Git delivery. dpmiint.c is in progress, not a completed file. R0147 remains restored; R0148
+passed; this receipt accompanies Git delivery. dpmiint.c whole-file disposition is complete in P17. R0147 remains restored; R0148
 is source-qualified. Actual DOSX binary identity/build rules select486/dxintr.asm,
 so earlier top-level guest lock-state citations require correction. R0149-R0151
-and coupled PM-address necessity are under investigation, not owner decisions.
+and coupled PM-address necessity were re-examined; the restoration candidate below
+supersedes that investigation checkpoint.
 [Source attribution](../../artifacts/mvdm-audit/t483-remaining-reaudit/dpmiint-guest-source-attribution.json).
-Next point R0149; no product edit or new runtime claim in this audit checkpoint.
+That read-only checkpoint is followed by the active local restoration below.
 
 ## Remaining Scope
 
@@ -192,27 +193,11 @@ Final build/publication/Full16 passed. Format-only final blank-line restoration
 preserves nonblank content and logical lines. See
 [P11 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json).
 
-## Current P12 Audit And Format Batch
+## Delivered P12 Audit And Format Batch
 
-R0079-R0084 demfcb.c is byte-identical to original after newline-only restoration.
-R0085-R0096 demfile.c is an exact original subset with6 excluded DBG bodies; its
-original CRLF form and selected logical lines are verified. Prior P9/P10 runtime
-receipts remain applicable; no restored point is counted twice.
-R0097/R0099-R0101 demgset.c are already restored. R0098 now has fresh original/current
-owner-fixture evidence: original overwrites volume-label characters when padding
-NTFS; current passes normal/edge/query-failure cases. Inline annotation reduces its
-remaining diff to+1/-1, net-1 comment-only; owner retention remains pending.
-
-P12 has no production behavior or binding change: reuse P11's published11-image
-package and Full16 under format-only authorization. The added runner reuses the
-existing media fixture with extracted original/current owner code; its query mock
-is explicitly not a fresh DOS integration test. Sequential files19/365; points106
-restored,0 local pending,2 approved,20 qualified pending,49 historical backlog,
-2543 unreviewed. Next R0102 demhndl.c after clean Git delivery.
-See [file review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0079-r0101-file-review.json)
-and [R0098 proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0098-requalification.json).
-
-P12 delivery receipt: [audit/format checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p12-checkpoint.json).
+Original-byte/line checks and the R0098 label proof are retained in the
+[P12 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p12-checkpoint.json).
+Its nonbehavioral changes reused P11 runtime evidence; no new guest pass claimed.
 
 ## Current P13 Batch
 
@@ -228,3 +213,18 @@ and [checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-che
 Final-source cached build, both-location publication, focused tests, Full16
 and governance passed; this receipt accompanies P13 Git delivery. Residual
 buffer differences remain owner decisions, not approved retention.
+
+## P17 Completed File Batch
+
+Whole-file dpmiint.c review R0147-R0179 and coupled PM projection cleanup
+reduce mirror diff by93 lines: dpmiint.c379->293, data.c56->50,
+dpmi32p.h37->36. Excluded#error bodies remain; original line evidence is
+[recorded](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-line-check.json).
+Five points are restored; partial reductions remain owner decisions.
+Cached full build, both-location publication11x2, DPMI selected-object tests,
+CCPU143, descriptor tests, Full16 and governance passed. This record accompanies
+Git delivery. Package `6b318f5f-3c92-4572-a9e7-f850066b3ec4` is installed.
+[Final receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-checkpoint.json).
+No original guest or winnt.zip changes; unavailable DOS4GW/NESticle fixtures
+are skips, not passes. No fresh Win3.x interactive acceptance is claimed.
+Next sequential file: dpmimscr.c, starting R0180.

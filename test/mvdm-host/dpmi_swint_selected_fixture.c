@@ -31,7 +31,7 @@ static BOOL mapping_unavailable,selector_resolves;
 USHORT CurrentAppFlags, DosxRmCodeSelector, LockedPMStackSel;
 ULONG LockedPMStackCount;
 ULONG PMLockOrigEIP,PMLockOrigSS,PMLockOrigESP,DosxFaultHandlerIret,DosxFaultHandlerIretd;
-ULONG DosxIntHandlerIret,DosxIntHandlerIretd,Cpu40PmStackInfoAddress,Cpu40LdtShadowAddress,DosxIret,DosxIretd;
+ULONG DosxIntHandlerIret,DosxIntHandlerIretd,Cpu40LdtShadowAddress,DosxIret,DosxIretd;
 /* Explicitly unreachable non-test object dependencies terminate rather than
  * pretending to implement unrelated DPMI services. */
 #define UNREACHED(n) void n(void) { fprintf(stderr,"unexpected %s\n",#n); abort(); }
@@ -109,23 +109,26 @@ int main(int argc, char **argv){
                  !strcmp(argv[1],"--pm-fault-first") ||
                  !strcmp(argv[1],"--pm-fault-nested"))) {
     BOOL all=!strcmp(argv[1],"--pm-fault-failure");
-    msw=1; flags=0x3302; sp=0x200; ss=0x27; cs=0x37; ip=0x1234;
-    DpmiFaultHandlers[14].CsSelector=0;
-    if(all || !strcmp(argv[1],"--pm-fault-absent")) {
-      CHECK(!DpmiFaultHandler(14,2));
-      CHECK(flags==0x3302 && sp==0x200 && ss==0x27 && cs==0x37 && ip==0x1234);
-    }
-    descriptors[1].HighWord.Bits.Pres=1; DpmiFaultHandlers[14].CsSelector=0x0f;
-    for(depth=0;depth<2;++depth) {
-      if(!all && strcmp(argv[1],depth ? "--pm-fault-nested" : "--pm-fault-first")) continue;
-      flags=0x3302; sp=depth ? 0x21 : 0x200; ss=depth ? 0x17 : 0x27;
-      cs=0x37; ip=0x1234; LockedPMStackSel=0x17; LockedPMStackCount=depth;
-      descriptors[2].LimitLow=depth ? 0xffff : 1;
-      CHECK(!DpmiFaultHandler(14,2));
-      printf("DPMI_PM_FAULT_REJECT depth=%u flags=%lx ss=%x sp=%lx count=%lu\n",
-             depth,flags,ss,sp,LockedPMStackCount);
-      CHECK(flags==0x3302 && sp==(depth ? 0x21u : 0x200u) &&
-            ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth);
+    for (mode=0;mode<2;++mode) {
+      ULONG entry_flags=0x3302u | (mode ? 0x20000u : 0u);
+      msw=1; flags=entry_flags; sp=0x200; ss=0x27; cs=0x37; ip=0x1234;
+      DpmiFaultHandlers[14].CsSelector=0;
+      if(all || !strcmp(argv[1],"--pm-fault-absent")) {
+        CHECK(!DpmiFaultHandler(14,2));
+        CHECK(flags==entry_flags && sp==0x200 && ss==0x27 && cs==0x37 && ip==0x1234);
+      }
+      descriptors[1].HighWord.Bits.Pres=1; DpmiFaultHandlers[14].CsSelector=0x0f;
+      for(depth=0;depth<2;++depth) {
+        if(!all && strcmp(argv[1],depth ? "--pm-fault-nested" : "--pm-fault-first")) continue;
+        flags=entry_flags; sp=depth ? 0x21 : 0x200; ss=depth ? 0x17 : 0x27;
+        cs=0x37; ip=0x1234; LockedPMStackSel=0x17; LockedPMStackCount=depth;
+        descriptors[2].LimitLow=depth ? 0xffff : 1;
+        CHECK(!DpmiFaultHandler(14,2));
+        printf("DPMI_PM_FAULT_REJECT depth=%u flags=%lx ss=%x sp=%lx count=%lu\n",
+               depth,flags,ss,sp,LockedPMStackCount);
+        CHECK(flags==entry_flags && sp==(depth ? 0x21u : 0x200u) &&
+              ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth);
+      }
     }
     if(all) puts("DPMI_PM_FAULT_FAILURE_ROLLBACK_OK absent=1 first=1 nested=1");
     else printf("DPMI_PM_FAULT_CASE_OK %s\n",argv[1]);
@@ -181,13 +184,13 @@ int main(int argc, char **argv){
     if (wide) {
       CHECK(sp==top-12);
       CHECK(*(ULONG *)(memory+top-12)==0x12345678 &&
-            *(ULONG *)(memory+top-8)==0x12340027 && *(ULONG *)(memory+top-4)==0x202 &&
+            *(ULONG *)(memory+top-8)==0x27 && *(ULONG *)(memory+top-4)==0x202 &&
             ip==0x14321);
     } else {
       CHECK(sp==top-6);
       CHECK(*(USHORT *)(memory+top-6)==0x5678 &&
             *(USHORT *)(memory+top-4)==0x27 && *(USHORT *)(memory+top-2)==0x202 &&
-            ip==0x14321);
+            ip==0x4321);
     }
     CHECK(cs==15);
   }

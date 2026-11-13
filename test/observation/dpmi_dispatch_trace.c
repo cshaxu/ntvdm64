@@ -85,21 +85,6 @@ VOID DpmiDispatch(VOID)
     log = fopen(DPMI_TRACE_LOG, "a");
     if (log) {
         snapshot(log, "after", dispatch_index);
-        if ((dispatch_index == 0x11 || dispatch_index == 5 ||
-             dispatch_index == 0x0d || dispatch_index == 0x13) &&
-            Cpu40PmStackInfoAddress) {
-            PVDM_DPMIINFO info = (PVDM_DPMIINFO)(IntelBase + Cpu40PmStackInfoAddress);
-            fprintf(log, "pm-stack address=%08lX size=%lu lock=%u flags=%04X ss=%04X "
-                "saved-ss=%04X saved-esp=%08lX saved-eip=%08lX "
-                "int16=%08lX int32=%08lX fault16=%08lX fault32=%08lX reflector=%08lX\n",
-                Cpu40PmStackInfoAddress, (ULONG)sizeof(*info), info->LockCount,
-                info->Flags, info->SsSelector, info->SaveSsSelector,
-                info->SaveEsp, info->SaveEip, info->DosxIntIret,
-                info->DosxIntIretD, info->DosxFaultIret, info->DosxFaultIretD,
-                info->DosxRmReflector);
-            fprintf(log, "pm-stack-owner index=%02lX app-flags=%04X\n",
-                dispatch_index, CurrentAppFlags);
-        }
         fclose(log);
     }
     SetLastError(saved_error);

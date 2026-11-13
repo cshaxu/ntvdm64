@@ -220,9 +220,9 @@ Arguments:
         *(PDWORD16) (VdmNewStackPointer+4) = FrameCS;
 
         FrameFlags = *(PDWORD16) (VdmStackPointer+20);
-        /* DIVERGENCE(MVDM-HOST-DIV-280): DWORD IRET frame is EIP, CS,
-         * EFLAGS. Offset 4 overwrites CS; flags belong at offset 8. */
+#line 232
         *(PDWORD16) (VdmNewStackPointer+8) = FrameFlags;
+#line 233
         FrameFlags &= ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK);
         *(PDWORD16) (VdmStackPointer+20) = FrameFlags;
 
@@ -378,48 +378,6 @@ Notes:
     LockedPMStackSel = getES();
     LockedPMStackCount = 0;
 
-#if defined(CPU_40_STYLE)
-    {
-        ULONG Size = sizeof(VDM_DPMIINFO);
-        NTSTATUS Status;
-        PVDM_DPMIINFO PmStackInfo;
-
-
-        /* DIVERGENCE(MVDM-HOST-DIV-226): x86 published the kernel-owned
-         * VDM_TIB pointer here.  CCPU executes DOSX itself, which immediately
-         * installs CX:DX as SEL_VDMTIB and accesses its fields in guest mode.
-         * Project the same ABI layout into shared XMS guest memory instead of
-         * leaking a host address or publishing an opaque identity. */
-        if (!Cpu40PmStackInfoAddress) {
-            ULONG Address = 0;
-
-            Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
-            if (!NT_SUCCESS(Status)) {
-                /* DIV-226: follow cmdmisc.c's required-memory failure path;
-                 * DOSX cannot accept a failed/zero-base TIB publication. */
-                RcErrorDialogBox(EG_MALLOC_FAILURE, NULL, NULL);
-                TerminateVDM();
-                return;
-            }
-
-            Cpu40PmStackInfoAddress = Address;
-        }
-
-        PmStackInfo = (PVDM_DPMIINFO)(IntelBase + Cpu40PmStackInfoAddress);
-        RtlZeroMemory(PmStackInfo, sizeof(*PmStackInfo));
-        PmStackInfo->Flags = CurrentAppFlags;
-        PmStackInfo->SsSelector = LockedPMStackSel;
-        PmStackInfo->DosxFaultIret = DosxFaultHandlerIret;
-        PmStackInfo->DosxFaultIretD = DosxFaultHandlerIretd;
-        PmStackInfo->DosxIntIret = DosxIntHandlerIret;
-        PmStackInfo->DosxIntIretD = DosxIntHandlerIretd;
-
-        setCX(HIWORD(Cpu40PmStackInfoAddress));
-        setDX(LOWORD(Cpu40PmStackInfoAddress));
-        return;
-    }
-#endif
-
 #line 387
 #ifdef i386
 #error Excluded unsupported i386 kernel VDM stack publication
@@ -556,12 +514,7 @@ Return Value:
 
     DBGTRACE(DPMI_SW_INT, IntNumber, 0, 0);
 
-    /* WOW_x86 KRNL386 uses this exact INT 2Ah signature instead of its
-     * ordinary 04F2h DPMI route for a one-entry LDT update.  On NT4 x86,
-     * KiGetTickCount recognizes it and calls NtSetLdtEntries(EBX, ECX, EDX,
-     * 0, 0, 0), returning the NTSTATUS in EAX and its failure in CF.  CCPU
-     * has no NT kernel process LDT, so reproduce only that finite current-
-     * worker publication through the existing CCPU LDT carrier. */
+    /* WOW_x86 INT 2Ah binds trap.asm NtSetLdtEntries to the CCPU LDT. */
     if (IntNumber == 0x2au &&
 #if defined(CPU_40_STYLE) && defined(CCPU)
             /* DIVERGENCE(MVDM-HOST-DIV-487): this signature belongs to
@@ -572,10 +525,11 @@ Return Value:
             getEBP() == 0xf0f0f0f1UL) {
         NTSTATUS Status = DpmiSetWowLdtEntry(getEBX(), getECX(), getEDX());
         setEAX((ULONG)Status);
-        setCF(!NT_SUCCESS(Status));
+        setCF(Status != 0);
         return TRUE;
     }
 
+#line 522
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
         return FALSE;
     }
@@ -595,6 +549,7 @@ Return Value:
 #if defined(CPU_40_STYLE)
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
 #endif
+#line 533
         ReflectV86Int(IntNumber, SaveEFLAGS);
 
     } else {
@@ -628,22 +583,28 @@ Return Value:
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
 #if defined(CPU_40_STYLE)
-            /* PushInt changes DX after loading the return EIP into EDX. */
-            *(PDWORD16)(VdmStackPointer-8) = (getEIP() & 0xffff0000UL) | getCS();
+#line 547
+            *(PDWORD16)(VdmStackPointer-8) =  getCS();
 #else
 #line 547
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 548
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
+#line 549
+            setEIP(Handlers[IntNumber].Eip);
+#line 552
         } else {
 
             *(PWORD16)(VdmStackPointer-2) = (WORD) SaveEFLAGS;
             *(PWORD16)(VdmStackPointer-4) = (WORD) getCS();
             *(PWORD16)(VdmStackPointer-6) = (WORD) getEIP();
+#line 557
+            setEIP((DWORD)LOWORD(Handlers[IntNumber].Eip));
+#line 560
         }
 
 #if defined(CPU_40_STYLE)
-        setEIP(Handlers[IntNumber].Eip);
         setESP(NewSP);
 #else
 #line 549
@@ -974,10 +935,9 @@ Return Value:
 
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
 #if defined(CPU_40_STYLE) && defined(CCPU)
-        /* DIVERGENCE(MVDM-HOST-DIV-486): NT4 commits the exception frame
-         * only after successful reflection; keep the fallback's input flags. */
-        if (!(SaveEFLAGS & EFLAGS_VM_MASK)) setEFLAGS(SaveEFLAGS);
+        setEFLAGS(SaveEFLAGS);
 #endif
+#line 912
         return FALSE;
     }
 
@@ -1003,12 +963,11 @@ Return Value:
         //BUGBUG Check for double fault
         EndUseLockedPMStack();
 #if defined(CPU_40_STYLE) && defined(CCPU)
-        if (!(SaveEFLAGS & EFLAGS_VM_MASK)) {
-            /* EndUseLockedPMStack restores the outer stack only at depth 0. */
-            setESP(SaveESP);
-            setEFLAGS(SaveEFLAGS);
-        }
+        /* EndUseLockedPMStack restores the outer stack only at depth 0. */
+        setESP(SaveESP);
+        setEFLAGS(SaveEFLAGS);
 #endif
+#line 935
         return FALSE;
     }
                                               
@@ -1045,6 +1004,7 @@ Return Value:
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
+#line 973
     DBGTRACE(DPMI_DISPATCH_FAULT, IntNumber, 0, 0);
     return TRUE;
 }
@@ -1359,12 +1319,10 @@ Return Value:
 static BOOL
 DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
 {
-    extern unsigned long c_getCR0(void), c_sas_memory_size(void);
-    extern int c_sas_memory_type(unsigned long);
+    extern unsigned long c_getCR0(void);
     extern int xtrn2phy(unsigned long, unsigned char, unsigned long *);
     extern unsigned char *c_GetPhyAdd(unsigned long);
     ULONG physical = Base + Offset;
-    int type;
 
     /* SIM32 owns a separate scratch alias for linear video memory. */
     if ((Base >= 0xa0000UL && Base <= 0xbffffUL) ||
@@ -1373,11 +1331,6 @@ DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
 
     if ((c_getCR0() & 0x80000000UL) &&
         !xtrn2phy(physical, 0, &physical))
-        return FALSE;
-    if (physical >= c_sas_memory_size())
-        return FALSE;
-    type = c_sas_memory_type(physical);
-    if (type != 0 && type != 2) /* SAS_RAM or SAS_ROM */
         return FALSE;
     *Value = *c_GetPhyAdd(physical);
     return TRUE;
@@ -1412,10 +1365,8 @@ Return Value:
     UCHAR Opcode;
     ULONG SegCS;
     BOOL bReturn = FALSE;
-    unsigned int CodeSegmentIsBig;
 
 #if defined(CPU_40_STYLE)
-    PLDT_ENTRY DescriptorTable;
 #if defined(CCPU)
     ULONG CodeBase, CodeOffset;
     BOOL MappedCode;
@@ -1433,50 +1384,38 @@ Return Value:
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif
 
-    /* The original x86 monitor always exposed an alias for an active
-     * protected-mode selector.  CPU40's checked SIM32 bridge can reject a
-     * transient selector instead.  This helper's documented result is
-     * whether it emulated the instruction, so retain the existing fault
-     * dispatch route rather than dereferencing an absent alias. */
+    /* A rejected SIM32 selector leaves dispatch to the original fault path. */
     if (pCode == NULL) {
         return FALSE;
     }
 
 #if defined(CPU_40_STYLE)
-    /* The native x86 path reads the kernel-published VDM_TIB LDT.  CCPU
-     * runs DOSX in this process and has no kernel VDM_TIB at that address;
-     * 53:00 has already projected the same source descriptor image into the
-     * session-owned shadow used by CCPU's GDT.  Keep the original selector
-     * interpretation, but select its actual CPU40 carrier. */
+    /* INT 2Ah updates the CCPU LDT independently of DOSX's source table. */
     if (Cpu40LdtShadowAddress == 0u)
         return FALSE;
-    DescriptorTable = (PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress);
-    CodeSegmentIsBig = DescriptorTable[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big ? 1u : 0u;
 #if defined(CCPU)
-    CodeOffset = CodeSegmentIsBig ? getEIP() : getIP();
     MappedCode = TRUE;
 #endif
-    if (CodeSegmentIsBig) {
+    if (((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))
+            [(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {
 #else
 #line 1270
 #error Unsupported non-CPU40 DPMI selector carrier
 #endif
+        CodeOffset = getEIP();
 #line 1271
         pCode += getEIP();
     } else {
+        CodeOffset = getIP();
+#line 1273
         pCode += getIP();
     }
 
 #if defined(CPU_40_STYLE) && defined(CCPU)
 DecodeInstruction:
-    if (MappedCode) {
-        if (DpmiMappedCodeByte(CodeBase, CodeOffset, &MappedOpcode))
-            Opcode = MappedOpcode;
-        else {
-            MappedCode = FALSE;
-            Opcode = *pCode;
-        }
-    } else
+    if (MappedCode)
+        MappedCode = DpmiMappedCodeByte(CodeBase, CodeOffset, &Opcode);
+    if (!MappedCode)
 #endif
         Opcode = *pCode;
     pCode++;
@@ -1488,14 +1427,9 @@ DecodeInstruction:
             }
 #if defined(CPU_40_STYLE) && defined(CCPU)
             if (MappedCode) {
-                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 1, &Operands[0])) {
-                    MappedCode = FALSE;
-                    --pCode;
-                    goto DecodeInstruction;
-                }
-                if (Operands[0] != 0x20 && Operands[0] != 0x22)
-                    break;
-                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 2, &Operands[1])) {
+                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 1, &Operands[0]) ||
+                    ((Operands[0] == 0x20 || Operands[0] == 0x22) &&
+                     !DpmiMappedCodeByte(CodeBase, CodeOffset + 2, &Operands[1]))) {
                     MappedCode = FALSE;
                     --pCode;
                     goto DecodeInstruction;

@@ -1,0 +1,20 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "scope": "Source matching runs>=4 lines; not compiler/preprocessor trace."
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/data.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "scope": "Source matching runs>=4 lines; not compiler/preprocessor trace."
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "scope": "Source matching runs>=4 lines; not compiler/preprocessor trace."
+  }
+]

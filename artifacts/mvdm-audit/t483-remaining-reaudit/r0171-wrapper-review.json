@@ -1,0 +1,10 @@
+{
+  "id": "T483-R0171",
+  "added": 8,
+  "removed": 0,
+  "conclusion": "Original-interface wrapper is not independently necessary. It exists because registered handler width and application width currently share a separate explicit-width helper.",
+  "evidence": "All five production call sites are dpmiint.c; dpmiint.h declares original interface. Original DOSX registration supplies per-handler width independently.",
+  "minimum_option": "Single explicit-width BuildStackFrame, remove wrapper and forward declaration; measured aggregate mirror delta -8, with header and existing call-site local increases requiring approval.",
+  "reference": "r0152-width-interface-options.json",
+  "verification": "Source review and in-memory diff count; no code edit/runtime claim."
+}

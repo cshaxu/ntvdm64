@@ -1,0 +1,26 @@
+{
+  "ids": [
+    "T483-R0159",
+    "T483-R0160",
+    "T483-R0161"
+  ],
+  "conclusion": "Restore original EIP statements to their wide/narrow branches. SP commit remains separately reviewed.",
+  "evidence": [
+    "DOSX486 dxutil.asm PutIntrVector piv10 zero-extendsDX for VDM_INT_16; original dpmiint.c549/557 use full/truncated handler Eip.",
+    "Original CCPU c_stack.c byte_change_SP/set_current_SP choose ESP/SP from SS.B independently of operand/frame size. Original narrow-frame setSP cannot be presumed equivalent for32-bit stacks crossing64KiB. Current unconditional setESP discards highword for16-bit stacks."
+  ],
+  "implemented": "Only original EIP statements restored. Fixture deliberately supplying high EIP with16-bit frame now expects original truncation; no runtime pass claimed.",
+  "before": {
+    "added": 223,
+    "removed": 106,
+    "total": 329
+  },
+  "after": {
+    "added": 222,
+    "removed": 104,
+    "total": 326
+  },
+  "verification": "Local source candidate; excluded#error sequence unchanged; original logical lines549/557 and branch boundaries552/560 explicitly restored. Whole-file final verification pending.",
+  "limits": "No complete point restoration: stack commit still differs; no current observed guest fault attributed to this discrepancy.",
+  "delta": -3
+}
